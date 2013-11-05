@@ -83,62 +83,175 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CalendarViewerPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CalendarViewerPresenter extends
     Presenter<CalendarViewerPresenter.CalendarViewerView, CalendarViewerPresenter.CalendarViewerProxy>
     implements CalendarViewer {
 
+  /**
+   * The Interface CalendarViewerProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface CalendarViewerProxy extends Proxy<CalendarViewerPresenter> {
   }
 
+  /**
+   * The Interface CalendarViewerView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface CalendarViewerView extends HasSelectionHandlers<Appointment>,
       HasDeleteHandlers<Appointment>, HasOpenHandlers<Appointment>, HasTimeBlockClickHandlers<Date>,
       HasUpdateHandlers<Appointment>, HasDateRequestHandlers<Date>, HasMouseOverHandlers<Appointment>,
       HasLayout, HasAppointments, AbstractFolderViewerView {
 
+    /* (non-Javadoc)
+     * @see com.bradrydzewski.gwt.calendar.client.HasAppointments#addAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
+     */
     @Override
     void addAppointment(Appointment app);
 
+    /**
+     * Adds the click handler.
+     *
+     * @param clickHandler the click handler
+     * @return the handler registration
+     */
     HandlerRegistration addClickHandler(ClickHandler clickHandler);
 
+    /**
+     * Adds the create handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addCreateHandler(CreateHandler<Appointment> handler);
 
+    /**
+     * Gets the client x.
+     *
+     * @return the client x
+     */
     int getClientX();
 
+    /**
+     * Gets the client y.
+     *
+     * @return the client y
+     */
     int getClientY();
 
+    /**
+     * Gets the current date.
+     *
+     * @return the current date
+     */
     Date getCurrentDate();
 
+    /**
+     * Gets the date.
+     *
+     * @return the date
+     */
     Date getDate();
 
+    /**
+     * Go today.
+     */
     void goToday();
 
+    /* (non-Javadoc)
+     * @see com.bradrydzewski.gwt.calendar.client.HasAppointments#removeAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
+     */
     @Override
     void removeAppointment(Appointment app);
 
+    /**
+     * Sets the date.
+     *
+     * @param date the new date
+     */
     void setDate(Date date);
 
+    /**
+     * Sets the view.
+     *
+     * @param view the new view
+     */
     void setView(CalendarViews view);
 
+    /**
+     * Sets the view.
+     *
+     * @param view the view
+     * @param days the days
+     */
     void setView(CalendarViews view, int days);
 
+    /**
+     * Update title.
+     *
+     * @param currentCalView the current cal view
+     */
     void updateTitle(CalendarViews currentCalView);
 
+    /**
+     * Sets the on mouse over tooltip text.
+     *
+     * @param text the new on mouse over tooltip text
+     */
     void setOnMouseOverTooltipText(String text);
   }
 
+  /** The Constant DEF_VIEW. */
   private static final CalendarViews DEF_VIEW = CalendarViews.DAY;
+  
+  /** The app to edit. */
   public Appointment appToEdit = NO_APPOINT;
 
+  /** The content service. */
   private final Provider<ContentServiceAsync> contentService;
+  
+  /** The current cal view. */
   private CalendarViews currentCalView;
+  
+  /** The current days view. */
   private int currentDaysView = 7;
+  
+  /** The folder viewer utils. */
   private final FolderViewerUtils folderViewerUtils;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The on over date. */
   private Date onOverDate;
+  
+  /** The on over menu. */
   private final CalendarOnOverMenu onOverMenu;
+  
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new calendar viewer presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param folderViewerUtils the folder viewer utils
+   * @param onOverMenu the on over menu
+   * @param session the session
+   * @param i18n the i18n
+   * @param contentService the content service
+   */
   @Inject
   public CalendarViewerPresenter(final EventBus eventBus, final CalendarViewerView view,
       final CalendarViewerProxy proxy, final FolderViewerUtils folderViewerUtils,
@@ -154,11 +267,17 @@ public class CalendarViewerPresenter extends
     setViewImpl(DEF_VIEW, currentDaysView);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#addAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
+   */
   @Override
   public void addAppointment(final Appointment app) {
     getView().addAppointment(app);
   }
 
+  /**
+   * Adds the listeners.
+   */
   private void addListeners() {
     getView().setOnMouseOverTooltipText(
         i18n.t("Double click to open. Also you can resize or drag&drop this event"));
@@ -233,52 +352,84 @@ public class CalendarViewerPresenter extends
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#attach()
+   */
   @Override
   public void attach() {
     getView().attach();
     updateTitle();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#decrement()
+   */
   @Override
   public void decrement() {
     incrementDate(false);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#detach()
+   */
   @Override
   public void detach() {
     getView().detach();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#getAppToEdit()
+   */
   @Override
   public Appointment getAppToEdit() {
     return appToEdit;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#getDate()
+   */
   @Override
   public Date getDate() {
     return getView().getDate();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#getOnOverDate()
+   */
   @Override
   public Date getOnOverDate() {
     return onOverDate;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#goToday()
+   */
   @Override
   public void goToday() {
     getView().goToday();
     updateTitle();
   }
 
+  /**
+   * Hide menu.
+   */
   private void hideMenu() {
     onOverMenu.get().hide();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#increment()
+   */
   @Override
   public void increment() {
     incrementDate(true);
   }
 
+  /**
+   * Increment date.
+   *
+   * @param positive the positive
+   */
   private void incrementDate(final boolean positive) {
     final Date date = getDate();
     switch (currentCalView) {
@@ -294,20 +445,35 @@ public class CalendarViewerPresenter extends
     updateTitle();
   }
 
+  /**
+   * Checks if is valid.
+   *
+   * @param app the app
+   * @return true, if is valid
+   */
   private boolean isValid(final Appointment app) {
     return app.getStart() != null && app.getEnd() != null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#removeAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
+   */
   @Override
   public void removeAppointment(final Appointment app) {
     getView().removeAppointment(app);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#setContent(cc.kune.core.shared.dto.HasContent)
+   */
   @Override
   public void setContent(@Nonnull final HasContent state) {
     folderViewerUtils.setContent(getView(), state);
@@ -334,25 +500,45 @@ public class CalendarViewerPresenter extends
     getView().resumeLayout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#setDate(java.util.Date)
+   */
   @Override
   public void setDate(final Date date) {
     getView().setDate(date);
   }
 
+  /**
+   * Sets the menu position.
+   *
+   * @param x the x
+   * @param y the y
+   */
   private void setMenuPosition(final int x, final int y) {
     onOverMenu.get().setMenuPosition(new Position(x, y));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#setView(com.bradrydzewski.gwt.calendar.client.CalendarViews)
+   */
   @Override
   public void setView(final CalendarViews calView) {
     setViewImpl(calView);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.events.client.viewer.CalendarViewer#setView(com.bradrydzewski.gwt.calendar.client.CalendarViews, int)
+   */
   @Override
   public void setView(final CalendarViews calView, final int days) {
     setViewImpl(calView, days);
   }
 
+  /**
+   * Sets the view impl.
+   *
+   * @param calView the new view impl
+   */
   private void setViewImpl(final CalendarViews calView) {
     this.currentCalView = calView;
     this.currentDaysView = 1;
@@ -360,6 +546,12 @@ public class CalendarViewerPresenter extends
     updateTitle();
   }
 
+  /**
+   * Sets the view impl.
+   *
+   * @param calView the cal view
+   * @param days the days
+   */
   private void setViewImpl(final CalendarViews calView, final int days) {
     this.currentCalView = calView;
     this.currentDaysView = days;
@@ -367,15 +559,24 @@ public class CalendarViewerPresenter extends
     updateTitle();
   }
 
+  /**
+   * Show menu.
+   */
   private void showMenu() {
     setMenuPosition(getView().getClientX(), getView().getClientY());
     onOverMenu.get().show();
   }
 
+  /**
+   * Update menu items.
+   */
   private void updateMenuItems() {
     CalendarStateChangeEvent.fire(getEventBus());
   }
 
+  /**
+   * Update title.
+   */
   private void updateTitle() {
     getView().updateTitle(currentCalView);
   }

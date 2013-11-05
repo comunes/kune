@@ -37,15 +37,54 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SignInAbstractPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class SignInAbstractPanel extends ViewImpl {
+  
+  /** The Constant DEF_SIGN_IN_FORM_SIZE. */
   public static final int DEF_SIGN_IN_FORM_SIZE = 340;
+  
+  /** The dialog. */
   private final BasicTopDialog dialog;
+  
+  /** The error label id. */
   protected final String errorLabelId;
+  
+  /** The i18n. */
   protected final I18nTranslationService i18n;
+  
+  /** The images. */
   protected final NotifyLevelImages images;
+  
+  /** The mask. */
   private final MaskWidgetView mask;
+  
+  /** The message error bar. */
   protected MessageToolbar messageErrorBar;
 
+  /**
+   * Instantiates a new sign in abstract panel.
+   *
+   * @param dialogId the dialog id
+   * @param mask the mask
+   * @param i18n the i18n
+   * @param title the title
+   * @param autohide the autohide
+   * @param modal the modal
+   * @param autoscroll the autoscroll
+   * @param icon the icon
+   * @param firstButtonTitle the first button title
+   * @param firstButtonId the first button id
+   * @param cancelButtonTitle the cancel button title
+   * @param cancelButtonId the cancel button id
+   * @param images the images
+   * @param errorLabelId the error label id
+   * @param tabIndexStart the tab index start
+   */
   public SignInAbstractPanel(final String dialogId, final MaskWidgetView mask,
       final I18nTranslationService i18n, final String title, final boolean autohide,
       final boolean modal, final boolean autoscroll, final String icon, final String firstButtonTitle,
@@ -65,53 +104,102 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     this.mask = mask;
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return dialog;
   }
 
+  /**
+   * Gets the close.
+   *
+   * @return the close
+   */
   public HasCloseHandlers<PopupPanel> getClose() {
     return dialog.getClose();
   }
 
+  /**
+   * Gets the first btn.
+   *
+   * @return the first btn
+   */
   public HasClickHandlers getFirstBtn() {
     return dialog.getFirstBtn();
   }
 
+  /**
+   * Gets the inner panel.
+   *
+   * @return the inner panel
+   */
   public ForIsWidget getInnerPanel() {
     return dialog.getInnerPanel();
   }
 
+  /**
+   * Gets the second btn.
+   *
+   * @return the second btn
+   */
   public HasClickHandlers getSecondBtn() {
     return dialog.getSecondBtn();
   }
 
+  /**
+   * Hide.
+   */
   public void hide() {
     if (dialog.isVisible()) {
       dialog.hide();
     }
   }
 
+  /**
+   * Hide messages.
+   */
   public void hideMessages() {
     messageErrorBar.hideErrorMessage();
   }
 
+  /**
+   * Mask.
+   *
+   * @param message the message
+   */
   public void mask(final String message) {
     mask.mask(dialog);
   }
 
+  /**
+   * Mask processing.
+   */
   public void maskProcessing() {
     mask.mask(dialog, i18n.t("Processing"));
   }
 
+  /**
+   * Sets the error message.
+   *
+   * @param message the message
+   * @param level the level
+   */
   public void setErrorMessage(final String message, final NotifyLevel level) {
     messageErrorBar.setErrorMessage(message, level);
   }
 
+  /**
+   * Show.
+   */
   public void show() {
     dialog.showCentered();
   }
 
+  /**
+   * Un mask.
+   */
   public void unMask() {
     mask.unMask();
   }

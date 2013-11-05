@@ -32,37 +32,65 @@ import java.util.ResourceBundle;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ConstantsTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ConstantsTest {
+  
+  /** The english. */
   private ResourceBundle english;
+  
+  /** The spanish. */
   private ResourceBundle spanish;
 
+  /**
+   * Basic english found.
+   */
   @Test
   public void basicEnglishFound() {
     assertEquals("Are you Sure?", english.getString(I18nUtils.convertMethodName("Are you Sure?")));
   }
 
+  /**
+   * Starting with numbers should add underscore.
+   */
   @Test
   public void startingWithNumbersShouldAddUnderscore() {
     assertEquals("_1day", I18nUtils.convertMethodName("1day"));
   }
 
 
+  /**
+   * Basic english found with note for translators.
+   */
   @Test
   public void basicEnglishFoundWithNoteForTranslators() {
     assertEquals("Next", english.getString(I18nUtils.convertMethodName("Next", "used in button")));
   }
 
+  /**
+   * Basic english not found.
+   */
   @Test(expected = MissingResourceException.class)
   public void basicEnglishNotFound() {
     english.getString(I18nUtils.convertMethodName("Other thing"));
   }
 
+  /**
+   * Basic found.
+   */
   @Test
   public void basicFound() {
     assertEquals("¡Por favor confirma!",
         spanish.getString(I18nUtils.convertMethodName("Please confirm!")));
   }
 
+  /**
+   * Basic not found.
+   */
   @Test(expected = MissingResourceException.class)
   public void basicNotFound() {
     assertTrue(english.containsKey(I18nUtils.convertMethodName("Something not translated")));
@@ -71,6 +99,9 @@ public class ConstantsTest {
         spanish.getString(I18nUtils.convertMethodName("Something not translated")));
   }
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     english = ResourceBundle.getBundle("TestConstants", Locale.ENGLISH);
@@ -78,12 +109,18 @@ public class ConstantsTest {
     Locale.setDefault(Locale.ENGLISH);
   }
 
+  /**
+   * Multiple lines.
+   */
   @Test
   public void multipleLines() {
     assertEquals("some multiple lines",
         english.getString(I18nUtils.convertMethodName("some multiple lines")));
   }
 
+  /**
+   * Multiple lines with carriage return.
+   */
   @Test
   public void multipleLinesWithCarriageReturn() {
     assertEquals("some\nmultiple\nlines\nwith\ncarriage",

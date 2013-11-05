@@ -31,10 +31,24 @@ import cc.kune.core.client.state.StateManager;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GotoGroupAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GotoGroupAction extends AbstractExtendedAction {
 
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new goto group action.
+   *
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param res the res
+   */
   @Inject
   public GotoGroupAction(final StateManager stateManager, final I18nTranslationService i18n,
       final IconicResources res) {
@@ -43,6 +57,9 @@ public class GotoGroupAction extends AbstractExtendedAction {
     putValue(Action.SMALL_ICON, res.home());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     stateManager.gotoStateToken(EventTargetUtils.getTargetToken(event));

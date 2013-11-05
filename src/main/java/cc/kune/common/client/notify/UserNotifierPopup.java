@@ -33,10 +33,27 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.DOM;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserNotifierPopup.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserNotifierPopup {
+  
+  /** The msgs. */
   private final UserMessagesPresenter msgs;
+  
+  /** The popup. */
   private final PopupBottomPanel popup;
 
+  /**
+   * Instantiates a new user notifier popup.
+   *
+   * @param eventBus the event bus
+   * @param msgs the msgs
+   * @param panel the panel
+   */
   @Inject
   public UserNotifierPopup(final EventBus eventBus, final UserMessagesPresenter msgs,
       final UserMessagesPanel panel) {
@@ -57,6 +74,11 @@ public class UserNotifierPopup {
     });
   }
 
+  /**
+   * Notify.
+   *
+   * @param event the event
+   */
   private void notify(final UserNotifyEvent event) {
     final UserMessage msg = msgs.add(event.getLevel(), event.getTitle(), event.getMessage(),
         event.getId(), event.getCloseable(), new CloseCallback() {

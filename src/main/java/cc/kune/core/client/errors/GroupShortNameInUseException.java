@@ -22,6 +22,14 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupShortNameInUseException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupShortNameInUseException extends DefaultException {
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -4746775725822225687L;
 }

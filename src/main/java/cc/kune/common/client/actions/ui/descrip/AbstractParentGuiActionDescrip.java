@@ -24,24 +24,49 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractParentGuiActionDescrip.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractParentGuiActionDescrip extends AbstractGuiActionDescrip implements
     HasChilds {
 
+  /** The childs. */
   private final GuiActionDescCollection childs;
 
+  /**
+   * Instantiates a new abstract parent gui action descrip.
+   *
+   * @param action the action
+   */
   public AbstractParentGuiActionDescrip(final AbstractAction action) {
     super(action);
     childs = new GuiActionDescCollection();
   }
 
+  /**
+   * Adds the.
+   *
+   * @param descriptors the descriptors
+   */
   public void add(final GuiActionDescrip... descriptors) {
     childs.add(descriptors);
   }
 
+  /**
+   * Clear.
+   */
   public void clear() {
     childs.clear();
   }
 
+  /**
+   * Gets the childs.
+   *
+   * @return the childs
+   */
   public GuiActionDescCollection getChilds() {
     return childs;
   }

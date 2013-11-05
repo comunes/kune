@@ -35,49 +35,138 @@ import com.google.inject.persist.finder.Finder;
 import com.google.inject.persist.finder.FirstResult;
 import com.google.inject.persist.finder.MaxResults;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface GroupFinder.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GroupFinder {
+  
+  /** The admin in groups. */
   String ADMIN_IN_GROUPS = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.admins.list adm WHERE adm.id = :groupid) ";
+  
+  /** The editor in groups. */
   String EDITOR_IN_GROUPS = "FROM Group g WHERE g.id IN (SELECT g.id FROM g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid) ";
 
+  /**
+   * Count.
+   *
+   * @return the long
+   */
   @Finder(query = "SELECT count(*) FROM Group g")
   public Long count();
 
+  /**
+   * Count by long name.
+   *
+   * @param longName the long name
+   * @return the long
+   */
   @Finder(query = "SELECT count(*) FROM Group g WHERE g.longName = :longName")
   public Long countByLongName(@Named("longName") final String longName);
 
+  /**
+   * Count by short name.
+   *
+   * @param shortName the short name
+   * @return the long
+   */
   @Finder(query = "SELECT count(*) FROM Group g WHERE g.shortName = :shortName")
   public Long countByShortName(@Named("shortName") final String shortName);
 
+  /**
+   * Count except type.
+   *
+   * @param excludedGroupType the excluded group type
+   * @return the long
+   */
   @Finder(query = "SELECT count(*) FROM Group g WHERE(g.groupType != :notgrouptype)")
   public Long countExceptType(@Named("notgrouptype") final GroupType excludedGroupType);
 
+  /**
+   * Count groups.
+   *
+   * @param excludedGroupType the excluded group type
+   * @return the long
+   */
   @Finder(query = "SELECT count(*) FROM Group g " + " WHERE (g.groupType != :notgrouptype)")
   public Long countGroups(@Named("notgrouptype") final GroupType excludedGroupType);
 
+  /**
+   * Find admin in groups.
+   *
+   * @param groupId the group id
+   * @return the sets the
+   */
   @Finder(query = ADMIN_IN_GROUPS + "ORDER BY g.shortName ASC", returnAs = HashSet.class)
   public Set<Group> findAdminInGroups(@Named("groupid") final Long groupId);
 
+  /**
+   * Find admin in groups.
+   *
+   * @param groupId the group id
+   * @param excludedGroupType the excluded group type
+   * @return the sets the
+   */
   @Finder(query = ADMIN_IN_GROUPS + " AND (g.groupType != :notgrouptype)" + " ORDER BY g.shortName ASC", returnAs = HashSet.class)
   public Set<Group> findAdminInGroups(@Named("groupid") final Long groupId,
       @Named("notgrouptype") final GroupType excludedGroupType);
 
+  /**
+   * Find by long name.
+   *
+   * @param longName the long name
+   * @return the group
+   */
   @Finder(query = "FROM Group g WHERE g.longName = :longName")
   public Group findByLongName(@Named("longName") final String longName);
 
+  /**
+   * Find by short name.
+   *
+   * @param shortName the short name
+   * @return the group
+   */
   @Finder(query = "FROM Group g WHERE g.shortName = :shortName")
   public Group findByShortName(@Named("shortName") final String shortName);
 
+  /**
+   * Find collab in groups.
+   *
+   * @param groupId the group id
+   * @return the sets the
+   */
   @Finder(query = EDITOR_IN_GROUPS + "ORDER BY g.shortName ASC", returnAs = HashSet.class)
   public Set<Group> findCollabInGroups(@Named("groupid") final Long groupId);
 
+  /**
+   * Find collab in groups.
+   *
+   * @param groupId the group id
+   * @param excludedGroupType the excluded group type
+   * @return the sets the
+   */
   @Finder(query = EDITOR_IN_GROUPS + " AND (g.groupType != :notgrouptype)" + "ORDER BY g.shortName ASC", returnAs = HashSet.class)
   public Set<Group> findCollabInGroups(@Named("groupid") final Long groupId,
       @Named("notgrouptype") final GroupType excludedGroupType);
 
+  /**
+   * Find enabled tools.
+   *
+   * @param groupId the group id
+   * @return the list
+   */
   @Finder(query = "SELECT t.root.toolName FROM ToolConfiguration t "
       + "WHERE t.enabled=true AND t.root.owner.id = :groupid", returnAs = ArrayList.class)
   public List<String> findEnabledTools(@Named("groupid") final Long groupId);
 
+  /**
+   * Find participating in groups.
+   *
+   * @param groupId the group id
+   * @return the list
+   */
   @Finder(query = "FROM Group g WHERE g.id IN (SELECT g.id FROM "
       + "g.socialNetwork.accessLists.editors.list AS ed WHERE ed.id = :groupid ORDER BY g.longName ASC)"
       + "OR g.id IN (SELECT g.id "
@@ -85,13 +174,34 @@ public interface GroupFinder {
       + "ORDER BY g.longName ASC", returnAs = ArrayList.class)
   public List<Group> findParticipatingInGroups(@Named("groupid") final Long groupId);
 
+  /**
+   * Gets the all.
+   *
+   * @return the all
+   */
   @Finder(query = "FROM Group g ORDER BY g.shortName ASC", returnAs = ArrayList.class)
   public List<Group> getAll();
 
+  /**
+   * Gets the all except.
+   *
+   * @param limit the limit
+   * @param init the init
+   * @param excludedGroupType the excluded group type
+   * @return the all except
+   */
   @Finder(query = "FROM Group g WHERE (g.groupType != :notgrouptype)" + " ORDER BY createdOn DESC", returnAs = ArrayList.class)
   public List<Group> getAllExcept(@MaxResults final int limit, @FirstResult final int init,
       @Named("notgrouptype") final GroupType excludedGroupType);
 
+  /**
+   * Last groups.
+   *
+   * @param limit the limit
+   * @param excludedGroupType1 the excluded group type1
+   * @param excludedGroupType2 the excluded group type2
+   * @return the list
+   */
   @Finder(query = "FROM Group g "
       + " WHERE (g.groupType != :notgrouptype1 AND g.groupType != :notgrouptype2)"
       + " ORDER BY createdOn DESC", returnAs = ArrayList.class)

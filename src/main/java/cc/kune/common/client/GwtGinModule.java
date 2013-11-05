@@ -34,8 +34,17 @@ import cc.kune.common.client.actions.gwtui.GwtToolbarSeparatorGui;
 
 import com.google.gwt.inject.client.AbstractGinModule;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GwtGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtGinModule extends AbstractGinModule {
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     bind(GwtSubMenuGui.class);

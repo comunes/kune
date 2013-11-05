@@ -28,8 +28,17 @@ import org.junit.Test;
 
 import cc.kune.common.shared.utils.I18nBasicUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nBasicUtilsTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nBasicUtilsTest {
 
+    /**
+     * Some basic tests.
+     */
     @Test
     public void someBasicTests() {
         assertEquals("en", I18nBasicUtils.getLanguage("en_US"));
@@ -37,6 +46,9 @@ public class I18nBasicUtilsTest {
         assertEquals("es", I18nBasicUtils.getLanguage("es_AR"));
     }
 
+    /**
+     * Test java locale normalize.
+     */
     @Test
     public void testJavaLocaleNormalize() {
         assertEquals("en_US", I18nBasicUtils.javaLocaleNormalize("en-US"));
@@ -44,12 +56,18 @@ public class I18nBasicUtilsTest {
         assertEquals("pt_BR", I18nBasicUtils.javaLocaleNormalize("pt-BR"));
     }
 
+    /**
+     * Should return default.
+     */
     @Test
     public void shouldReturnDefault() {
         assertEquals("en", I18nBasicUtils.getLanguage("default"));
         assertEquals("en", I18nBasicUtils.getLanguage("someOtherThing"));
     }
 
+    /**
+     * Should work with null.
+     */
     @Test
     public void shouldWorkWithNull() {
         assertEquals("en", I18nBasicUtils.getLanguage(null));

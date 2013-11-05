@@ -30,11 +30,21 @@ import cc.kune.core.server.PersistencePreLoadedDataTest;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TagUserContentFinderTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TagUserContentFinderTest extends PersistencePreLoadedDataTest {
 
+  /** The tag. */
   @Inject
   TagUserContentFinder tag;
 
+  /**
+   * Test no tags.
+   */
   @Test(expected = NoResultException.class)
   public void testNoTags() {
     tag.getTagsGroups(groupManager.getSiteDefaultGroup());

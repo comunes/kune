@@ -27,8 +27,17 @@ import cc.kune.wiki.client.actions.WikiClientActions;
 import cc.kune.wiki.client.actions.WikiFolderNewMenu;
 import cc.kune.wiki.client.actions.WikiPageNewMenu;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WikiGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WikiGinModule extends ExtendedGinModule {
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     s(WikiClientTool.class);

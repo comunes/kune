@@ -1,3 +1,25 @@
+/*
+ *
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under 
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public 
+ * License version 3, (the "License"); you may not use this file except in 
+ * compliance with the License. This file is part of kune.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 package net.auroris.ColorPicker.client;
 
 /**
@@ -191,29 +213,56 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 
+// TODO: Auto-generated Javadoc
 /**
  * Implements the SliderMap control.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SliderMap extends HTML
 {
+    
+    /** The Constant Blue. */
     public static final int Blue = 6;
+    
+    /** The Constant Brightness. */
     public static final int Brightness = 2;
+    
+    /** The Constant Green. */
     public static final int Green = 5;
+    
+    /** The Constant Hue. */
     public static final int Hue = 3;
+    
+    /** The Constant Red. */
     public static final int Red = 4;
+    
+    /** The Constant Saturation. */
     public static final int Saturation = 1;
 
+    /** The color overlay. */
     private Image colorOverlay;
+    
+    /** The color underlay. */
     private Image colorUnderlay;
+    
+    /** The slider. */
     private Image slider;
 
+    /** The cp image bundle. */
     private ColorPickerImageResource cpImageBundle;
+    
+    /** The parent. */
     private ColorPicker parent = null;
 
+    /** The captured mouse. */
     private boolean capturedMouse = false;
 
-    /***
+    /**
+     * *
      * Initialize the SliderMap -- default mode is Saturation.
+     *
+     * @param parent the parent
      */
     public SliderMap(ColorPicker parent)
     {
@@ -318,8 +367,10 @@ public final class SliderMap extends HTML
         this.unsinkEvents(Event.MOUSEEVENTS);
     }
 
-    /***
-     * Sets the color selection mode
+    /**
+     * *
+     * Sets the color selection mode.
+     *
      * @param mode Saturation
      */
     public void setColorSelectMode(int mode)

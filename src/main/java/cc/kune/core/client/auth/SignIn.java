@@ -26,16 +26,47 @@ import cc.kune.common.client.notify.NotifyLevel;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface SignIn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface SignIn {
 
+  /**
+   * Do sign in.
+   *
+   * @param nickOrEmail the nick or email
+   * @param passwd the passwd
+   * @param gotoHomePage the goto home page
+   * @param callback the callback
+   */
   void doSignIn(String nickOrEmail, String passwd, boolean gotoHomePage, AsyncCallback<Void> callback);
 
+  /**
+   * Hide.
+   */
   void hide();
 
+  /**
+   * Sets the error message.
+   *
+   * @param message the message
+   * @param level the level
+   */
   void setErrorMessage(String message, NotifyLevel level);
 
+  /**
+   * Sets the goto token on cancel.
+   *
+   * @param gotoToken the new goto token on cancel
+   */
   void setGotoTokenOnCancel(String gotoToken);
 
+  /**
+   * Show sign in dialog.
+   */
   void showSignInDialog();
 
 }

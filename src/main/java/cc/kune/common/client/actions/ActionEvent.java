@@ -39,6 +39,7 @@ package cc.kune.common.client.actions;
 
 import com.google.gwt.user.client.Event;
 
+// TODO: Auto-generated Javadoc
 /**
  * This event is generated when an action on a component (such as a button
  * press) occurs.
@@ -51,29 +52,64 @@ import com.google.gwt.user.client.Event;
  */
 public class ActionEvent {
 
+  /** The Constant NO_TARGET. */
   public static final Object NO_TARGET = String.valueOf("No target");
+  
+  /** The event. */
   private final Event event;
+  
+  /** The source. */
   private final Object source;
+  
+  /** The target. */
   private final Object target;
 
+  /**
+   * Instantiates a new action event.
+   *
+   * @param source the source
+   * @param event the event
+   */
   public ActionEvent(final Object source, final Event event) {
     this(source, NO_TARGET, event);
   }
 
+  /**
+   * Instantiates a new action event.
+   *
+   * @param source the source
+   * @param target the target
+   * @param event the event
+   */
   public ActionEvent(final Object source, final Object target, final Event event) {
     this.source = source;
     this.event = event;
     this.target = target;
   }
 
+  /**
+   * Gets the event.
+   *
+   * @return the event
+   */
   public Event getEvent() {
     return event;
   }
 
+  /**
+   * Gets the source.
+   *
+   * @return the source
+   */
   public Object getSource() {
     return source;
   }
 
+  /**
+   * Gets the target.
+   *
+   * @return the target
+   */
   public Object getTarget() {
     return target;
   }

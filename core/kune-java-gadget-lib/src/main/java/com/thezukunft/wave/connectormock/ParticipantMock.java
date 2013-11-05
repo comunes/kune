@@ -28,29 +28,30 @@ import com.thezukunft.wave.connector.Participant;
 
 public class ParticipantMock extends Participant {
 
-	protected ParticipantMock(){};
+  protected ParticipantMock() {
+  };
 
-	public final native void setupMock() /*-{
-//		
-//		this.displayName = "somebody";
-//		this.id = "-1";
-//		this.thumbnailUrl = "http://";
-		
-		this.getId = function() { return this.id; };
-		this.getDisplayName = function() { return this.displayName; };
-		this.getThumbnailUrl = function() { return this.thumbnailUrl; };
-	}-*/;
-	
-	public final native void setId(String id) /*-{
-    this.id = id;
-  }-*/;
-	
-	public final native void setDisplayName(String displayName) /*-{
-    this.displayName = displayName;
-  }-*/;
+  public final native void setupMock() /*-{
+                                       //		
+                                       //		this.displayName = "somebody";
+                                       //		this.id = "-1";
+                                       //		this.thumbnailUrl = "http://";
+                                       
+                                       this.getId = function() { return this.id; };
+                                       this.getDisplayName = function() { return this.displayName; };
+                                       this.getThumbnailUrl = function() { return this.thumbnailUrl; };
+                                       }-*/;
 
-	public final native void setThumbnailUrl(String thumbnailUrl) /*-{
-    this.thumbnailUrl = thumbnailUrl;
-  }-*/;
+  public final native void setId(String id) /*-{
+                                            this.id = id;
+                                            }-*/;
+
+  public final native void setDisplayName(String displayName) /*-{
+                                                              this.displayName = displayName;
+                                                              }-*/;
+
+  public final native void setThumbnailUrl(String thumbnailUrl) /*-{
+                                                                this.thumbnailUrl = thumbnailUrl;
+                                                                }-*/;
 
 }

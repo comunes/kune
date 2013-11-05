@@ -31,31 +31,93 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
 import com.gwtplatform.mvp.client.View;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface AbstractFolderViewerView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface AbstractFolderViewerView extends View {
+  
+  /**
+   * Adds the item.
+   *
+   * @param item the item
+   * @param clickHandler the click handler
+   * @param doubleClickHandler the double click handler
+   */
   void addItem(FolderItemDescriptor item, ClickHandler clickHandler,
       DoubleClickHandler doubleClickHandler);
 
+  /**
+   * Attach.
+   */
   void attach();
 
+  /**
+   * Clear.
+   */
   void clear();
 
+  /**
+   * Detach.
+   */
   void detach();
 
+  /**
+   * Edits the title.
+   */
   void editTitle();
 
+  /**
+   * Gets the edits the title.
+   *
+   * @return the edits the title
+   */
   HasEditHandler getEditTitle();
 
+  /**
+   * Highlight title.
+   */
   void highlightTitle();
 
+  /**
+   * Sets the container.
+   *
+   * @param state the new container
+   */
   void setContainer(StateContainerDTO state);
 
+  /**
+   * Sets the editable title.
+   *
+   * @param title the new editable title
+   */
   void setEditableTitle(String title);
 
+  /**
+   * Sets the footer actions.
+   *
+   * @param actions the new footer actions
+   */
   void setFooterActions(GuiActionDescCollection actions);
 
+  /**
+   * Sets the subheader actions.
+   *
+   * @param actions the new subheader actions
+   */
   void setSubheaderActions(GuiActionDescCollection actions);
 
+  /**
+   * Show empty msg.
+   *
+   * @param message the message
+   */
   void showEmptyMsg(String message);
 
+  /**
+   * Show folder.
+   */
   void showFolder();
 }

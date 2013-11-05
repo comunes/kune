@@ -42,23 +42,48 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EditableLabel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EditableLabel extends Composite implements HasEditHandler {
 
+  /**
+   * The Interface EditableLabelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface EditableLabelUiBinder extends UiBinder<Widget, EditableLabel> {
   }
 
+  /** The Constant BLINK_TIME. */
   private static final int BLINK_TIME = 400;
 
+  /** The ui binder. */
   private static EditableLabelUiBinder uiBinder = GWT.create(EditableLabelUiBinder.class);
 
+  /** The editable. */
   private boolean editable;
+  
+  /** The label. */
   @UiField
   InlineLabel label;
+  
+  /** The textbox. */
   @UiField
   TextBox textbox;
+  
+  /** The tooltip. */
   private Tooltip tooltip;
+  
+  /** The tooltip text. */
   private String tooltipText;
 
+  /**
+   * Instantiates a new editable label.
+   */
   public EditableLabel() {
     initWidget(uiBinder.createAndBindUi(this));
     label.setStylePrimaryName("k-editableLabel");
@@ -66,11 +91,20 @@ public class EditableLabel extends Composite implements HasEditHandler {
     tooltipText = "";
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.HasEditHandler#addEditHandler(cc.kune.common.client.ui.EditEvent.EditHandler)
+   */
   @Override
   public HandlerRegistration addEditHandler(final EditHandler handler) {
     return addHandler(handler, EditEvent.getType());
   }
 
+  /**
+   * Blink timer.
+   *
+   * @param add the add
+   * @param callback the callback
+   */
   private void blinkTimer(final boolean add, final SimpleCallback callback) {
     new Timer() {
       @Override
@@ -85,6 +119,9 @@ public class EditableLabel extends Composite implements HasEditHandler {
     }.schedule(BLINK_TIME);
   }
 
+  /**
+   * Edits the.
+   */
   public void edit() {
     if (editable) {
       label.setVisible(false);
@@ -94,6 +131,9 @@ public class EditableLabel extends Composite implements HasEditHandler {
     }
   }
 
+  /**
+   * Finish edit.
+   */
   private void finishEdit() {
     label.setText(textbox.getText());
     label.setVisible(true);
@@ -101,10 +141,20 @@ public class EditableLabel extends Composite implements HasEditHandler {
     fireEvent(new EditEvent(textbox.getValue()));
   }
 
+  /**
+   * Gets the tooltip value.
+   *
+   * @return the tooltip value
+   */
   private String getTooltipValue() {
     return editable ? tooltipText : "";
   }
 
+  /**
+   * Handle keys.
+   *
+   * @param event the event
+   */
   @UiHandler("textbox")
   void handleKeys(final KeyDownEvent event) {
     if (event.getNativeKeyCode() == 13) {
@@ -112,6 +162,9 @@ public class EditableLabel extends Composite implements HasEditHandler {
     }
   }
 
+  /**
+   * Highlight title.
+   */
   public void highlightTitle() {
     if (editable) {
       blinkTimer(true, new SimpleCallback() {
@@ -128,16 +181,31 @@ public class EditableLabel extends Composite implements HasEditHandler {
     }
   }
 
+  /**
+   * On blur.
+   *
+   * @param event the event
+   */
   @UiHandler("textbox")
   void onBlur(final BlurEvent event) {
     finishEdit();
   }
 
+  /**
+   * On click.
+   *
+   * @param e the e
+   */
   @UiHandler("label")
   void onClick(final ClickEvent e) {
     edit();
   }
 
+  /**
+   * On mouse out.
+   *
+   * @param event the event
+   */
   @UiHandler("label")
   void onMouseOut(final MouseOutEvent event) {
     if (editable) {
@@ -145,6 +213,11 @@ public class EditableLabel extends Composite implements HasEditHandler {
     }
   }
 
+  /**
+   * On mouse over.
+   *
+   * @param event the event
+   */
   @UiHandler("label")
   void onMouseOver(final MouseOverEvent event) {
     if (editable) {
@@ -152,6 +225,11 @@ public class EditableLabel extends Composite implements HasEditHandler {
     }
   }
 
+  /**
+   * Sets the editable.
+   *
+   * @param editable the new editable
+   */
   public void setEditable(final boolean editable) {
     this.editable = editable;
     if (tooltip == null) {
@@ -162,11 +240,21 @@ public class EditableLabel extends Composite implements HasEditHandler {
     }
   }
 
+  /**
+   * Sets the text.
+   *
+   * @param text the new text
+   */
   public void setText(final String text) {
     label.setText(text);
     textbox.setText(text);
   }
 
+  /**
+   * Sets the tooltip.
+   *
+   * @param tooltip the new tooltip
+   */
   public void setTooltip(final String tooltip) {
     this.tooltipText = tooltip;
   }

@@ -27,28 +27,89 @@ import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface UserOptGeneralView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface UserOptGeneralView extends EntityOptGeneralView {
 
+  /**
+   * Gets the email.
+   *
+   * @return the email
+   */
   String getEmail();
 
+  /**
+   * Gets the email notif.
+   *
+   * @return the email notif
+   */
   EmailNotificationFrequency getEmailNotif();
 
+  /**
+   * Gets the language.
+   *
+   * @return the language
+   */
   I18nLanguageSimpleDTO getLanguage();
 
+  /**
+   * Gets the long name.
+   *
+   * @return the long name
+   */
   String getLongName();
 
+  /**
+   * Gets the resend email verif.
+   *
+   * @return the resend email verif
+   */
   HasClickHandlers getResendEmailVerif();
 
+  /**
+   * Sets the email.
+   *
+   * @param email the new email
+   */
   void setEmail(String email);
 
+  /**
+   * Sets the email notif checked.
+   *
+   * @param freq the new email notif checked
+   */
   void setEmailNotifChecked(EmailNotificationFrequency freq);
 
+  /**
+   * Sets the email verified.
+   *
+   * @param verified the new email verified
+   */
   void setEmailVerified(boolean verified);
 
+  /**
+   * Sets the language.
+   *
+   * @param language the new language
+   */
   void setLanguage(I18nLanguageSimpleDTO language);
 
+  /**
+   * Sets the long name.
+   *
+   * @param longName the new long name
+   */
   void setLongName(String longName);
 
+  /**
+   * Sets the resend email verif enabled.
+   *
+   * @param enabled the new resend email verif enabled
+   */
   void setResendEmailVerifEnabled(boolean enabled);
 
 }

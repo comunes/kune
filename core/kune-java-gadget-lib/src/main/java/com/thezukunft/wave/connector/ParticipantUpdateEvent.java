@@ -38,7 +38,6 @@ public class ParticipantUpdateEvent extends GwtEvent<ParticipantUpdateEventHandl
 
   private final Wave wave;
 
-
   public static ParticipantUpdateEvent fire(EventBus source, Wave wave) {
     // If no handlers exist, then type can be null.
     if (TYPE != null) {

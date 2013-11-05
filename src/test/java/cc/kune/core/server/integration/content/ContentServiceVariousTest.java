@@ -46,11 +46,25 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.trash.shared.TrashToolConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentServiceVariousTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
+  /** The default content. */
   private StateContentDTO defaultContent;
+  
+  /** The group short name. */
   private String groupShortName;
 
+  /**
+   * Adds the remove author.
+   *
+   * @throws Exception the exception
+   */
   @Ignore
   @Test
   public void addRemoveAuthor() throws Exception {
@@ -69,6 +83,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(1, authors4.size());
   }
 
+  /**
+   * Check result.
+   *
+   * @param cloudResult the cloud result
+   */
   private void checkResult(final TagCloudResult cloudResult) {
     assertNotNull(cloudResult.getTagCountList());
     final List<TagCount> summaryTags = cloudResult.getTagCountList();
@@ -87,6 +106,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(1, (long) tagResult.getCount());
   }
 
+  /**
+   * Content rate and retrieve.
+   *
+   * @throws Exception the exception
+   */
   @Ignore
   @Test
   public void contentRateAndRetrieve() throws Exception {
@@ -98,6 +122,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(Integer.valueOf(1), again.getRateByUsers());
   }
 
+  /**
+   * Content set language.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void contentSetLanguage() throws Exception {
     contentService.setLanguage(getHash(), defaultContent.getStateToken(), "es");
@@ -106,6 +135,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals("es", contentRetrieved.getLanguage().getCode());
   }
 
+  /**
+   * Creates the new content.
+   *
+   * @return the state container dto
+   */
   private StateContainerDTO createNewContent() {
     final StateContainerDTO added = contentService.addContent(session.getHash(),
         defaultContent.getStateToken(), "New Content Title", TYPE_DOCUMENT);
@@ -113,6 +147,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     return added;
   }
 
+  /**
+   * Def admin dont show as participation.
+   *
+   * @throws Exception the exception
+   */
   @Ignore
   // FIXME: when State refactor do this test (with noLogin and without)
   public void defAdminDontShowAsParticipation() throws Exception {
@@ -123,6 +162,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(1, content.getParticipation().getGroupsIsAdmin().size());
   }
 
+  /**
+   * Def content remove.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = CannotDeleteDefaultContentException.class)
   public void defContentRemove() throws Exception {
     doLogin();
@@ -130,6 +174,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     contentService.delContent(session.getHash(), defaultContent.getStateToken());
   }
 
+  /**
+   * Del and purge content.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void delAndPurgeContent() throws Exception {
     doLogin();
@@ -153,6 +202,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(0, trashAfterPurge.getContainer().getContents().size());
   }
 
+  /**
+   * Del andy purge container.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void delAndyPurgeContainer() throws Exception {
     doLogin();
@@ -178,6 +232,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(0, trashAfterPurge.getContainer().getChilds().size());
   }
 
+  /**
+   * Folder rename.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void folderRename() throws Exception {
     doLogin();
@@ -214,6 +273,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(newTitle, folderAgain.getContainer().getName());
   }
 
+  /**
+   * Folder rename other group fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = AccessViolationException.class)
   public void folderRenameOtherGroupFails() throws Exception {
     doLogin();
@@ -226,6 +290,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     contentService.renameContainer(getHash(), folderToken, newTitle);
   }
 
+  /**
+   * Folder root rename must fail.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = RuntimeException.class)
   public void folderRootRenameMustFail() throws Exception {
     doLogin();
@@ -244,6 +313,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals(newTitle, folderAgain.getName());
   }
 
+  /**
+   * Gets the trash.
+   *
+   * @return the trash
+   */
   private StateContainerDTO getTrash() {
     final StateAbstractDTO trash = contentService.getContent(
         session.getHash(),
@@ -252,6 +326,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     return (StateContainerDTO) trash;
   }
 
+  /**
+   * Inits the.
+   *
+   * @throws Exception the exception
+   */
   @Before
   public void init() throws Exception {
     new IntegrationTestHelper(true, this);
@@ -260,6 +339,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     groupShortName = defaultContent.getStateToken().getGroup();
   }
 
+  /**
+   * Sets the tags and results.
+   *
+   * @throws Exception the exception
+   */
   @Ignore
   @Test
   public void setTagsAndResults() throws Exception {
@@ -270,6 +354,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     checkResult(((StateContentDTO) contentService.getContent(getHash(), defaultContent.getStateToken())).getTagCloudResult());
   }
 
+  /**
+   * Sets the tags and retrieve.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void setTagsAndRetrieve() throws Exception {
     contentService.setTags(getHash(), defaultContent.getStateToken(), "foo foa foo");
@@ -277,6 +366,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertEquals("foo foa", tagsRetrieved);
   }
 
+  /**
+   * Test set as def content.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testSetAsDefContent() throws Exception {
     doLogin();
@@ -291,6 +385,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
     assertTrue(added.getStateToken().equals(newDefContent.getStateToken()));
   }
 
+  /**
+   * Token rename.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void tokenRename() throws Exception {
     doLogin();

@@ -24,22 +24,48 @@ package cc.kune.core.server.manager.impl;
 
 import cc.kune.core.server.error.ServerException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ServerManagerException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ServerManagerException extends ServerException {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -8407996943857184946L;
 
+  /**
+   * Instantiates a new server manager exception.
+   */
   public ServerManagerException() {
     super();
   }
 
+  /**
+   * Instantiates a new server manager exception.
+   *
+   * @param text the text
+   */
   public ServerManagerException(final String text) {
     super(text);
   }
 
+  /**
+   * Instantiates a new server manager exception.
+   *
+   * @param text the text
+   * @param cause the cause
+   */
   public ServerManagerException(final String text, final Throwable cause) {
     super(text, cause);
   }
 
+  /**
+   * Instantiates a new server manager exception.
+   *
+   * @param cause the cause
+   */
   public ServerManagerException(final Throwable cause) {
     super(cause);
   }

@@ -22,8 +22,15 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WrongCurrentPasswordException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WrongCurrentPasswordException extends DefaultException {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1019305526843055648L;
 
 }

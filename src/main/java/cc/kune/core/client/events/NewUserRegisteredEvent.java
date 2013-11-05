@@ -27,49 +27,107 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewUserRegisteredEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewUserRegisteredEvent extends GwtEvent<NewUserRegisteredEvent.NewUserRegisteredHandler> {
 
+  /**
+   * The Interface HasNewUserRegisteredHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasNewUserRegisteredHandlers extends HasHandlers {
+    
+    /**
+     * Adds the new user registered handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addNewUserRegisteredHandler(NewUserRegisteredHandler handler);
   }
 
+  /**
+   * The Interface NewUserRegisteredHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface NewUserRegisteredHandler extends EventHandler {
+    
+    /**
+     * On new user registered.
+     *
+     * @param event the event
+     */
     public void onNewUserRegistered(NewUserRegisteredEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<NewUserRegisteredHandler> TYPE = new Type<NewUserRegisteredHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new NewUserRegisteredEvent());
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<NewUserRegisteredHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * Instantiates a new new user registered event.
+   */
   public NewUserRegisteredEvent() {
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final NewUserRegisteredHandler handler) {
     handler.onNewUserRegistered(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     return super.equals(obj);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<NewUserRegisteredHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return super.hashCode();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "NewUserRegisteredEvent[" + "]";

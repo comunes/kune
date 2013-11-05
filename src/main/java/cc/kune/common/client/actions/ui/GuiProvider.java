@@ -24,10 +24,31 @@ package cc.kune.common.client.actions.ui;
 
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface GuiProvider.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GuiProvider {
 
+  /**
+   * Gets the.
+   *
+   * @param <T> the generic type
+   * @param classType the class type
+   * @return the gui binding
+   */
   <T> GuiBinding get(final Class<T> classType);
 
+  /**
+   * Register.
+   *
+   * @param <T> the generic type
+   * @param <Z> the generic type
+   * @param classType the class type
+   * @param provider the provider
+   */
   <T, Z> void register(final Class<T> classType, final Provider<Z> provider);
 
 }

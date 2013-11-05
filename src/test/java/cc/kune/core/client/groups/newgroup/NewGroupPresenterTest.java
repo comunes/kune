@@ -36,11 +36,23 @@ import cc.kune.gspace.client.options.GroupOptions;
 
 import com.google.gwt.event.shared.EventBus;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewGroupPresenterTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewGroupPresenterTest {
 
+  /** The gr presenter. */
   private NewGroupPresenter grPresenter;
+  
+  /** The mock gr panel. */
   private NewGroupPanel mockGrPanel;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     mockGrPanel = Mockito.mock(NewGroupPanel.class);
@@ -50,30 +62,45 @@ public class NewGroupPresenterTest {
         Mockito.mock(GroupOptions.class));
   }
 
+  /**
+   * Test generate short name accents.
+   */
   @Test
   public void testGenerateShortNameAccents() {
     Mockito.when(mockGrPanel.getLongName()).thenReturn("áéíóúàèìòùâêîôûäëïöü");
     assertEquals(grPresenter.generateShortName(), "aeiouaeiouaeiouaeiou");
   }
 
+  /**
+   * Test generate short name capital accents.
+   */
   @Test
   public void testGenerateShortNameCapitalAccents() {
     Mockito.when(mockGrPanel.getLongName()).thenReturn("ÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÄËÏÖÜñÑçÇ");
     assertEquals(grPresenter.generateShortName(), "aeiouaeiouaeiouaeiounncc");
   }
 
+  /**
+   * Test generate short name sentence.
+   */
   @Test
   public void testGenerateShortNameSentence() {
     Mockito.when(mockGrPanel.getLongName()).thenReturn("Los Desposeidos: una utopía ambigua!!");
     assertEquals(grPresenter.generateShortName(), "losdesposeidosunautopiaambigua");
   }
 
+  /**
+   * Test generate short name symbols.
+   */
   @Test
   public void testGenerateShortNameSymbols() {
     Mockito.when(mockGrPanel.getLongName()).thenReturn("a!·$%&/()=?¿¡'|@#'12");
     assertEquals(grPresenter.generateShortName(), "a12");
   }
 
+  /**
+   * Test generate short name very long sentence.
+   */
   @Test
   public void testGenerateShortNameVeryLongSentence() {
     Mockito.when(mockGrPanel.getLongName()).thenReturn(

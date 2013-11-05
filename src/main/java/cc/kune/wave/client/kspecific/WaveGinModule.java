@@ -29,6 +29,12 @@ import cc.kune.wave.client.kspecific.inboxcount.InboxCountPanel;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveGinModule extends ExtendedGinModule {
   /*
    * (non-Javadoc)

@@ -40,25 +40,69 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LicenseWizardTrdForm.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTrdFormView {
+  
+  /** The Constant RADIO_COMMERCIAL_FIELD_NAME. */
   public static final String RADIO_COMMERCIAL_FIELD_NAME = "k-lwtf-comm-radio";
+  
+  /** The Constant RADIO_MODIF_FIELD_NAME. */
   public static final String RADIO_MODIF_FIELD_NAME = "k-lwtf-mod-radio";
+  
+  /** The Constant RADIO_NOT_COMM_ID. */
   public static final String RADIO_NOT_COMM_ID = "k-lwtf-not-perm-comm";
+  
+  /** The Constant RADIO_NOT_PERMIT_MOD_ID. */
   public static final String RADIO_NOT_PERMIT_MOD_ID = "k-lwtf-not-mod";
+  
+  /** The Constant RADIO_PERMIT_COMMERCIAL_ID. */
   public static final String RADIO_PERMIT_COMMERCIAL_ID = "k-lwtf-perm-comm";
+  
+  /** The Constant RADIO_PERMIT_MOD_ID. */
   public static final String RADIO_PERMIT_MOD_ID = "k-lwtf-mod-perm";
+  
+  /** The Constant RADIO_PERMIT_MOD_SA_ID. */
   public static final String RADIO_PERMIT_MOD_SA_ID = "k-lwtf-mod-perm-sa";
+  
+  /** The commertial group. */
   private RadioGroup commertialGroup;
+  
+  /** The info. */
   private final LicenseWizardFlags info;
 
+  /** The modifications group. */
   private RadioGroup modificationsGroup;
+  
+  /** The not permit comercial license radio. */
   private Radio notPermitComercialLicenseRadio;
+  
+  /** The not permit mod radio. */
   private Radio notPermitModRadio;
+  
+  /** The on change. */
   private SimpleCallback onChange;
+  
+  /** The permit comercial radio. */
   private Radio permitComercialRadio;
+  
+  /** The permit mod radio. */
   private Radio permitModRadio;
+  
+  /** The permit mod sa radio. */
   private Radio permitModSaRadio;
 
+  /**
+   * Instantiates a new license wizard trd form.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param commonRes the common res
+   */
   @Inject
   public LicenseWizardTrdForm(final I18nTranslationService i18n, final IconicResources res,
       final CommonResources commonRes) {
@@ -90,11 +134,24 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
     add(info);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.IsWidget#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return super.getFormPanel();
   }
 
+  /**
+   * Creates the radio.
+   *
+   * @param radioGroup the radio group
+   * @param radioLabel the radio label
+   * @param radioFieldName the radio field name
+   * @param radioTip the radio tip
+   * @param id the id
+   * @return the radio
+   */
   private Radio createRadio(final RadioGroup radioGroup, final String radioLabel,
       final String radioFieldName, final String radioTip, final String id) {
     final Radio radio = new Radio();
@@ -110,6 +167,9 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
     return radio;
   }
 
+  /**
+   * Creates the radio listeners.
+   */
   private void createRadioListeners() {
     final Listener<BaseEvent> listener = new Listener<BaseEvent>() {
       @Override
@@ -121,6 +181,13 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
     modificationsGroup.addListener(Events.Change, listener);
   }
 
+  /**
+   * Creates the radios.
+   *
+   * @param i18n the i18n
+   * @param commercialfieldSet the commercialfield set
+   * @param modificationsfieldSet the modificationsfield set
+   */
   private void createRadios(final I18nTranslationService i18n, final FieldSet commercialfieldSet,
       final FieldSet modificationsfieldSet) {
     commertialGroup = new RadioGroup();
@@ -166,26 +233,41 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
     modificationsfieldSet.add(modificationsGroup);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView#isAllowComercial()
+   */
   @Override
   public boolean isAllowComercial() {
     return permitComercialRadio.getValue();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView#isAllowModif()
+   */
   @Override
   public boolean isAllowModif() {
     return permitModRadio.getValue();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView#isAllowModifShareAlike()
+   */
   @Override
   public boolean isAllowModifShareAlike() {
     return permitModSaRadio.getValue();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView#onChange(cc.kune.common.shared.utils.SimpleCallback)
+   */
   @Override
   public void onChange(final SimpleCallback onChange) {
     this.onChange = onChange;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.DefaultForm#reset()
+   */
   @Override
   public void reset() {
     super.reset();
@@ -193,6 +275,9 @@ public class LicenseWizardTrdForm extends DefaultForm implements LicenseWizardTr
     permitModSaRadio.setValue(true);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView#setFlags(boolean, boolean, boolean)
+   */
   @Override
   public void setFlags(final boolean isCopyleft, final boolean isAppropiateForCulturalWorks,
       final boolean isNonComercial) {

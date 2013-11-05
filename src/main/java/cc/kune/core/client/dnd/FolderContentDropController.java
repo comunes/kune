@@ -34,6 +34,7 @@ import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class FolderContentDropController is responsible of the drop process to
  * contents (for instance of user, to add then as participants). Must not be a
@@ -42,10 +43,23 @@ import com.google.inject.Inject;
  */
 public class FolderContentDropController extends AbstractDropController {
 
+  /** The content service. */
   private final ContentServiceAsync contentService;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new folder content drop controller.
+   *
+   * @param dragController the drag controller
+   * @param contentService the content service
+   * @param session the session
+   * @param i18n the i18n
+   */
   @Inject
   public FolderContentDropController(final KuneDragController dragController,
       final ContentServiceAsync contentService, final Session session, final I18nTranslationService i18n) {
@@ -56,6 +70,9 @@ public class FolderContentDropController extends AbstractDropController {
     this.session = session;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.dnd.AbstractDropController#onDropAllowed(com.google.gwt.user.client.ui.Widget, com.allen_sauer.gwt.dnd.client.drop.SimpleDropController)
+   */
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
     dropController.getDropTarget().removeStyleName("k-drop-allowed-hover");

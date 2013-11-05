@@ -29,8 +29,20 @@ import cc.kune.common.shared.i18n.HasRTL;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Toolbar.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class Toolbar extends ActionFlowPanel {
 
+  /**
+   * Instantiates a new toolbar.
+   *
+   * @param guiProvider the gui provider
+   * @param i18n the i18n
+   */
   @Inject
   public Toolbar(GuiProvider guiProvider, HasRTL i18n) {
     super(guiProvider, i18n);

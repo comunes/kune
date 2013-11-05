@@ -27,11 +27,23 @@ import cc.kune.common.client.errors.UIException;
 
 import com.google.gwt.user.client.ui.UIObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GuiChildBinding.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class GuiChildBinding extends AbstractGuiBinding {
 
+  /** The child. */
   protected UIObject child;
+  
+  /** The parent. */
   protected ParentWidget parent;
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiBinding#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     final int position = descriptor.getPosition();

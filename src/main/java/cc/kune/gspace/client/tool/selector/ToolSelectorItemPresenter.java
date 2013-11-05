@@ -32,31 +32,98 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolSelectorItemPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToolSelectorItemPresenter implements ToolSelectorItem {
+  
+  /**
+   * The Interface ToolSelectorItemView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ToolSelectorItemView extends IsWidget {
 
+    /**
+     * Gets the focus.
+     *
+     * @return the focus
+     */
     HasClickHandlers getFocus();
 
+    /**
+     * Gets the label.
+     *
+     * @return the label
+     */
     HasText getLabel();
 
+    /**
+     * Gets the target.
+     *
+     * @return the target
+     */
     Object getTarget();
 
+    /**
+     * Sets the selected.
+     *
+     * @param selected the new selected
+     */
     void setSelected(boolean selected);
 
+    /**
+     * Sets the tooltip.
+     *
+     * @param tooltip the new tooltip
+     */
     void setTooltip(String tooltip);
 
+    /**
+     * Sets the visible.
+     *
+     * @param visible the new visible
+     */
     void setVisible(boolean visible);
   }
 
+  /** The long name. */
   private final String longName;
+  
+  /** The short name. */
   private final String shortName;
+  
+  /** The token. */
   private StateToken token;
+  
+  /** The tool selector. */
   private final ToolSelector toolSelector;
+  
+  /** The tooltip. */
   private final String tooltip;
+  
+  /** The view. */
   private ToolSelectorItemView view;
+  
+  /** The visible fo rol. */
   private final AccessRolDTO visibleFoRol;
+  
+  /** The history. */
   private final HistoryWrapper history;
 
+  /**
+   * Instantiates a new tool selector item presenter.
+   *
+   * @param shortName the short name
+   * @param longName the long name
+   * @param tooltip the tooltip
+   * @param visibleForRol the visible for rol
+   * @param toolSelector the tool selector
+   * @param history the history
+   */
   public ToolSelectorItemPresenter(final String shortName, final String longName, final String tooltip,
       final AccessRolDTO visibleForRol, final ToolSelector toolSelector, HistoryWrapper history) {
     this.shortName = shortName;
@@ -67,21 +134,35 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
     this.history = history;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItem#getToolShortName()
+   */
   @Override
   public String getToolShortName() {
     return shortName;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItem#getView()
+   */
   @Override
   public ToolSelectorItemView getView() {
     return view;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItem#getVisibleForRol()
+   */
   @Override
   public AccessRolDTO getVisibleForRol() {
     return visibleFoRol;
   }
 
+  /**
+   * Inits the.
+   *
+   * @param view the view
+   */
   public void init(final ToolSelectorItemView view) {
     this.view = view;
     toolSelector.addTool(this);
@@ -95,21 +176,33 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
     view.setTooltip(tooltip);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItem#setGroupShortName(java.lang.String)
+   */
   @Override
   public void setGroupShortName(final String groupShortName) {
     token = new StateToken(groupShortName, getToolShortName(), null, null);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItem#setSelected(boolean)
+   */
   @Override
   public void setSelected(final boolean selected) {
     view.setSelected(selected);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItem#setToken(cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   public void setToken(final StateToken token) {
     this.token = token;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItem#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     view.setVisible(visible);

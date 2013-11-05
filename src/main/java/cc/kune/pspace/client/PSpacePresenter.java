@@ -47,24 +47,72 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PSpacePresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpacePresenter.PSpaceProxy> {
 
+  /**
+   * The Interface PSpaceProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface PSpaceProxy extends Proxy<PSpacePresenter> {
   }
+  
+  /**
+   * The Interface PSpaceView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface PSpaceView extends View {
 
+    /**
+     * Gets the action panel.
+     *
+     * @return the action panel
+     */
     IsActionExtensible getActionPanel();
 
+    /**
+     * Gets the description.
+     *
+     * @return the description
+     */
     HasText getDescription();
 
+    /**
+     * Gets the title.
+     *
+     * @return the title
+     */
     HasText getTitle();
 
+    /**
+     * Sets the content goto public url.
+     *
+     * @param publicUrl the new content goto public url
+     */
     void setContentGotoPublicUrl(String publicUrl);
   }
 
+  /** The i18n. */
   private final I18nTranslationService i18n;
 
+  /**
+   * Instantiates a new p space presenter.
+   *
+   * @param session the session
+   * @param stateManager the state manager
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param i18n the i18n
+   */
   @Inject
   public PSpacePresenter(final Session session, final StateManager stateManager,
       final EventBus eventBus, final PSpaceView view, final PSpaceProxy proxy,
@@ -84,16 +132,25 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
     });
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.PresenterWidget#onReveal()
+   */
   @Override
   protected void onReveal() {
     super.onReveal();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /**
+   * Sets the content not public.
+   */
   private void setContentNotPublic() {
     getView().getTitle().setText(
         i18n.t("Not Published yet") + i18n.tWithNT(TextUtils.IN_DEVELOPMENT_P, "with Brackets"));
@@ -101,6 +158,9 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
         i18n.t("This is only a preview of how this webpage would look like to the general public on the internet."));
   }
 
+  /**
+   * Sets the content not publicable.
+   */
   private void setContentNotPublicable() {
     getView().getTitle().setText(
         i18n.t("Not Publishable") + i18n.tWithNT(TextUtils.IN_DEVELOPMENT_P, "with Brackets"));
@@ -108,6 +168,9 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
     getView().setContentGotoPublicUrl("about:blank");
   }
 
+  /**
+   * Sets the content public.
+   */
   private void setContentPublic() {
     getView().getTitle().setText(
         i18n.t("Preview") + i18n.tWithNT(TextUtils.IN_DEVELOPMENT_P, "with Brackets"));
@@ -115,6 +178,11 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
         i18n.t("This is only a preview of how this page would look like to the general public on the internet."));
   }
 
+  /**
+   * Sets the state.
+   *
+   * @param state the new state
+   */
   public void setState(final StateAbstractDTO state) {
     if (state instanceof StateContainerDTO) {
       final StateToken token = state.getStateToken();

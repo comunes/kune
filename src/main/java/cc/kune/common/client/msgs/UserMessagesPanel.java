@@ -35,22 +35,43 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserMessagesPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserMessagesPanel extends Composite implements UserMessagesView {
 
+  /**
+   * The Interface MessagesPanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface MessagesPanelUiBinder extends UiBinder<Widget, UserMessagesPanel> {
   }
+  
+  /** The ui binder. */
   private static MessagesPanelUiBinder uiBinder = GWT.create(MessagesPanelUiBinder.class);
 
+  /** The bottom. */
   @UiField
   FlowPanel bottom;
 
+  /** The panel. */
   @UiField
   VerticalPanel panel;
 
+  /**
+   * Instantiates a new user messages panel.
+   */
   public UserMessagesPanel() {
     initWidget(uiBinder.createAndBindUi(this));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.msgs.UserMessagesPresenter.UserMessagesView#add(cc.kune.common.client.notify.NotifyLevel, java.lang.String, java.lang.String, java.lang.String, java.lang.Boolean, cc.kune.common.client.msgs.CloseCallback)
+   */
   @Override
   public UserMessage add(final NotifyLevel level, final String title, final String message,
       final String id, final Boolean closeable, final CloseCallback closeCallback) {
@@ -75,6 +96,11 @@ public class UserMessagesPanel extends Composite implements UserMessagesView {
     return msg;
   }
 
+  /**
+   * Gets the current msg count.
+   *
+   * @return the current msg count
+   */
   public int getCurrentMsgCount() {
     return panel.getWidgetCount();
   }

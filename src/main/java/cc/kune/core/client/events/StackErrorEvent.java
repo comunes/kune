@@ -27,50 +27,114 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StackErrorEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler> {
 
+  /**
+   * The Interface HasStackErrorHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasStackErrorHandlers extends HasHandlers {
+    
+    /**
+     * Adds the stack error handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addStackErrorHandler(StackErrorHandler handler);
   }
 
+  /**
+   * The Interface StackErrorHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface StackErrorHandler extends EventHandler {
+    
+    /**
+     * On stack error.
+     *
+     * @param event the event
+     */
     public void onStackError(StackErrorEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<StackErrorHandler> TYPE = new Type<StackErrorHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   * @param exception the exception
+   */
   public static void fire(HasHandlers source, java.lang.Throwable exception) {
     source.fireEvent(new StackErrorEvent(exception));
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<StackErrorHandler> getType() {
     return TYPE;
   }
 
+  /** The exception. */
   java.lang.Throwable exception;
 
+  /**
+   * Instantiates a new stack error event.
+   *
+   * @param exception the exception
+   */
   public StackErrorEvent(java.lang.Throwable exception) {
     this.exception = exception;
   }
 
+  /**
+   * Instantiates a new stack error event.
+   */
   protected StackErrorEvent() {
     // Possibly for serialization.
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<StackErrorHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /**
+   * Gets the exception.
+   *
+   * @return the exception
+   */
   public java.lang.Throwable getException() {
     return exception;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(StackErrorHandler handler) {
     handler.onStackError(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -88,6 +152,9 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
     return true;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     int hashCode = 23;
@@ -95,6 +162,9 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
     return hashCode;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "StackErrorEvent[" + exception + "]";

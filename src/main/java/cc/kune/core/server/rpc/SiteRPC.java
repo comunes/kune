@@ -50,21 +50,69 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SiteRPC.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SiteRPC implements RPC, SiteService, SiteRPCMBean {
+  
+  /** The chat properties. */
   private final ChatProperties chatProperties;
+  
+  /** The country manager. */
   private final I18nCountryManager countryManager;
+  
+  /** The data. */
   private InitData data;
+  
+  /** The kune properties. */
   private final KuneProperties kuneProperties;
+  
+  /** The language manager. */
   private final I18nLanguageManager languageManager;
+  
+  /** The license manager. */
   private final LicenseManager licenseManager;
+  
+  /** The mapper. */
   private final KuneMapper mapper;
+  
+  /** The reserved words. */
   private ReservedWordsRegistryDTO reservedWords;
+  
+  /** The server tool registry. */
   private final ServerToolRegistry serverToolRegistry;
+  
+  /** The site themes. */
   private HashMap<String, GSpaceTheme> siteThemes;
+  
+  /** The store untranslated string. */
   private boolean storeUntranslatedString;
+  
+  /** The user info service. */
   private final UserInfoService userInfoService;
+  
+  /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
+  /**
+   * Instantiates a new site rpc.
+   *
+   * @param userSessionManager the user session manager
+   * @param userManager the user manager
+   * @param userInfoService the user info service
+   * @param licenseManager the license manager
+   * @param mapper the mapper
+   * @param kuneProperties the kune properties
+   * @param chatProperties the chat properties
+   * @param languageManager the language manager
+   * @param countryManager the country manager
+   * @param serverToolRegistry the server tool registry
+   * @param mbeanRegistry the mbean registry
+   */
   @Inject
   public SiteRPC(final UserSessionManager userSessionManager, final UserManager userManager,
       final UserInfoService userInfoService, final LicenseManager licenseManager,
@@ -86,10 +134,19 @@ public class SiteRPC implements RPC, SiteService, SiteRPCMBean {
     mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
   }
 
+  /**
+   * Gets the colors.
+   *
+   * @param key the key
+   * @return the colors
+   */
   private String[] getColors(final String key) {
     return this.kuneProperties.getList(key).toArray(new String[0]);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SiteService#getInitData(java.lang.String)
+   */
   @Override
   @KuneTransactional
   public InitDataDTO getInitData(final String userHash) throws DefaultException {
@@ -107,6 +164,12 @@ public class SiteRPC implements RPC, SiteService, SiteRPCMBean {
     return dataMapped;
   }
 
+  /**
+   * Gets the site themes.
+   *
+   * @param themes the themes
+   * @return the site themes
+   */
   private HashMap<String, GSpaceTheme> getSiteThemes(final List<String> themes) {
     final HashMap<String, GSpaceTheme> map = new HashMap<String, GSpaceTheme>();
     for (final String theme : themes) {
@@ -115,11 +178,20 @@ public class SiteRPC implements RPC, SiteService, SiteRPCMBean {
     return map;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.rpc.SiteRPCMBean#getStoreUntranslatedString()
+   */
   @Override
   public boolean getStoreUntranslatedString() {
     return storeUntranslatedString;
   }
 
+  /**
+   * Gets the theme from properties.
+   *
+   * @param themeName the theme name
+   * @return the theme from properties
+   */
   private GSpaceTheme getThemeFromProperties(final String themeName) {
     final GSpaceTheme theme = new GSpaceTheme(themeName);
     theme.setBackColors(getColors(KuneProperties.WS_THEMES + "." + theme.getName() + ".backgrounds"));
@@ -127,6 +199,11 @@ public class SiteRPC implements RPC, SiteService, SiteRPCMBean {
     return theme;
   }
 
+  /**
+   * Load init data.
+   *
+   * @return the inits the data
+   */
   private InitData loadInitData() {
     data = new InitData();
     data.setSiteUrl(kuneProperties.get(KuneProperties.SITE_URL));
@@ -166,12 +243,20 @@ public class SiteRPC implements RPC, SiteService, SiteRPCMBean {
     return data;
   }
 
+  /**
+   * Load properties.
+   *
+   * @param kuneProperties the kune properties
+   */
   private void loadProperties(final KuneProperties kuneProperties) {
     data = loadInitData();
     siteThemes = getSiteThemes(this.kuneProperties.getList(KuneProperties.WS_THEMES));
     reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.rpc.SiteRPCMBean#setStoreUntranslatedString(boolean)
+   */
   @Override
   public void setStoreUntranslatedString(final boolean storeUntranslatedString) {
     this.storeUntranslatedString = storeUntranslatedString;

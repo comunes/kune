@@ -32,10 +32,20 @@ import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GwtToolbarSeparatorGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtToolbarSeparatorGui extends AbstractGuiItem {
 
+  /** The widget. */
   private Widget widget;
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
@@ -63,35 +73,59 @@ public class GwtToolbarSeparatorGui extends AbstractGuiItem {
     return toolbar;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
+   */
   @Override
   protected void setEnabled(final boolean enabled) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+   */
   @Override
   public void setIcon(final KuneIcon icon) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+   */
   @Override
   public void setIconBackground(final String backgroundColor) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+   */
   @Override
   protected void setIconStyle(final String style) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+   */
   @Override
   public void setIconUrl(final String url) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+   */
   @Override
   protected void setText(final String text) {
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     widget.setVisible(visible);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
+   */
   @Override
   public boolean shouldBeAdded() {
     return false;

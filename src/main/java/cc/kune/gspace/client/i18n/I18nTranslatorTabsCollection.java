@@ -26,6 +26,11 @@ import cc.kune.common.client.ProvidersCollection;
 
 import com.google.inject.Singleton;
 
+/**
+ * The Class I18nTranslatorTabsCollection.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SuppressWarnings("serial")
 @Singleton
 public class I18nTranslatorTabsCollection extends ProvidersCollection {

@@ -27,49 +27,107 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SessionExpiredEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExpiredHandler> {
 
+  /**
+   * The Interface HasSessionExpiredHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasSessionExpiredHandlers extends HasHandlers {
+    
+    /**
+     * Adds the session expired handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addSessionExpiredHandler(SessionExpiredHandler handler);
   }
 
+  /**
+   * The Interface SessionExpiredHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface SessionExpiredHandler extends EventHandler {
+    
+    /**
+     * On session expired.
+     *
+     * @param event the event
+     */
     public void onSessionExpired(SessionExpiredEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<SessionExpiredHandler> TYPE = new Type<SessionExpiredHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   */
   public static void fire(HasHandlers source) {
     source.fireEvent(new SessionExpiredEvent());
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<SessionExpiredHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * Instantiates a new session expired event.
+   */
   public SessionExpiredEvent() {
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<SessionExpiredHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(SessionExpiredHandler handler) {
     handler.onSessionExpired(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(Object obj) {
     return super.equals(obj);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return super.hashCode();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "SessionExpiredEvent[" + "]";

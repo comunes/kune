@@ -38,17 +38,34 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityLogoUploadManagerTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
+  /** The Constant TEST_FILE. */
   private static final String TEST_FILE = "src/test/java/cc/kune/core/server/manager/file/orig.png";
+  
+  /** The manager. */
   @Inject
   EntityLogoUploadManager manager;
 
+  /**
+   * Creates the.
+   */
   @Before
   public void create() {
     new IntegrationTestHelper(true, this);
   }
 
+  /**
+   * Test create logo.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testCreateLogo() throws Exception {
     manager.createUploadedFile(super.getSiteDefaultContent().getStateToken(), "image/png", new File(
@@ -57,6 +74,9 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
     assertTrue(defaultContent.getGroup().hasLogo());
   }
 
+  /**
+   * Test error response.
+   */
   @Ignore
   public void testErrorResponse() {
     // JSONObject expected =
@@ -66,11 +86,19 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
     // "Some message"));
   }
 
+  /**
+   * Test session exp.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = SessionExpiredException.class)
   public void testSessionExp() throws Exception {
     manager.createUploadedFile("otherhash", null, null, null, null);
   }
 
+  /**
+   * Test success response.
+   */
   @Ignore
   public void testSuccessResponse() {
     // JSONObject expected =
@@ -78,6 +106,11 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
     // assertEquals(expected, manager.createJsonResponse(true, null));
   }
 
+  /**
+   * Test user must be auth.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = UserMustBeLoggedException.class)
   public void testUserMustBeAuth() throws Exception {
     manager.createUploadedFile(null, null, null, null, null);

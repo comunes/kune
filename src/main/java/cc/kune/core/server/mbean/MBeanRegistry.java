@@ -35,22 +35,34 @@ import org.apache.commons.logging.LogFactory;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class MBeanRegistry is responsible of mbean objects registration into the
  * JVM MBean Server.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class MBeanRegistry {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(MBeanRegistry.class);
+  
+  /** The mbean server. */
   private final MBeanServer mbeanServer;
 
+  /**
+   * Instantiates a new m bean registry.
+   */
   public MBeanRegistry() {
     mbeanServer = ManagementFactory.getPlatformMBeanServer();
   }
 
   /**
    * Register this object itself in the JVM MBean Server.
+   *
+   * @param object the object
+   * @param objectName the object name
    */
   public void registerAsMBean(final Object object, final String objectName) {
     ObjectName mbeanName = null;

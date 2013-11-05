@@ -34,10 +34,26 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserOptionsCollection.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SuppressWarnings("serial")
 @Singleton
 public class UserOptionsCollection extends ProvidersCollection {
 
+  /**
+   * Instantiates a new user options collection.
+   *
+   * @param ug the ug
+   * @param up the up
+   * @param utc the utc
+   * @param ul the ul
+   * @param ups the ups
+   * @param udl the udl
+   */
   @Inject
   public UserOptionsCollection(final Provider<UserOptGeneral> ug, final Provider<UserOptPass> up,
       final Provider<UserOptTools> utc, final Provider<UserOptLogo> ul,

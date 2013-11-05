@@ -32,8 +32,21 @@ import org.junit.Test;
 import org.naturalcli.ExecutionException;
 import org.naturalcli.InvalidSyntaxException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneCliMainTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneCliMainTest {
 
+  /**
+   * Test basic auth.
+   *
+   * @throws InvalidSyntaxException the invalid syntax exception
+   * @throws ExecutionException the execution exception
+   * @throws MalformedURLException the malformed url exception
+   */
   @Test
   public void testBasicAuth() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
     final KuneCliMain cli = new KuneCliMain();
@@ -41,6 +54,13 @@ public class KuneCliMainTest {
     KuneCliMain.main(args);
   }
 
+  /**
+   * Test basic hello.
+   *
+   * @throws InvalidSyntaxException the invalid syntax exception
+   * @throws ExecutionException the execution exception
+   * @throws MalformedURLException the malformed url exception
+   */
   @Test
   public void testBasicHello() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
     final KuneCliMain cli = new KuneCliMain();
@@ -48,6 +68,13 @@ public class KuneCliMainTest {
     KuneCliMain.main(args);
   }
 
+  /**
+   * Test basic init.
+   *
+   * @throws InvalidSyntaxException the invalid syntax exception
+   * @throws ExecutionException the execution exception
+   * @throws MalformedURLException the malformed url exception
+   */
   @Test
   public void testBasicInit() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
     final KuneCliMain cli = new KuneCliMain();
@@ -55,6 +82,13 @@ public class KuneCliMainTest {
     KuneCliMain.main(args);
   }
 
+  /**
+   * Test basic init lang.
+   *
+   * @throws InvalidSyntaxException the invalid syntax exception
+   * @throws ExecutionException the execution exception
+   * @throws MalformedURLException the malformed url exception
+   */
   @Test
   public void testBasicInitLang() throws InvalidSyntaxException, ExecutionException,
       MalformedURLException {

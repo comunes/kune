@@ -26,48 +26,123 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18n.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class I18n {
 
+  /** The i18n. */
   @Inject
   private static I18nTranslationService i18n;
 
+  /**
+   * Gets the direction.
+   *
+   * @return the direction
+   */
   public static Direction getDirection() {
     return i18n.getDirection();
   }
 
+  /**
+   * Checks if is rtl.
+   *
+   * @return true, if is rtl
+   */
   public static boolean isRTL() {
     return i18n.isRTL();
   }
 
+  /**
+   * T.
+   *
+   * @param text the text
+   * @return the string
+   */
   public static String t(final String text) {
     return i18n.t(text);
   }
 
+  /**
+   * T.
+   *
+   * @param text the text
+   * @param args the args
+   * @return the string
+   */
   public static String t(final String text, final Integer... args) {
     return i18n.t(text, args);
   }
 
+  /**
+   * T.
+   *
+   * @param text the text
+   * @param args the args
+   * @return the string
+   */
   public static String t(final String text, final Long... args) {
     return i18n.t(text, args);
   }
 
+  /**
+   * T.
+   *
+   * @param text the text
+   * @param args the args
+   * @return the string
+   */
   public static String t(final String text, final String... args) {
     return i18n.t(text, args);
   }
 
+  /**
+   * T with nt.
+   *
+   * @param text the text
+   * @param noteForTranslators the note for translators
+   * @return the string
+   */
   public static String tWithNT(final String text, final String noteForTranslators) {
     return i18n.tWithNT(text, noteForTranslators);
   }
 
+  /**
+   * T with nt.
+   *
+   * @param text the text
+   * @param noteForTranslators the note for translators
+   * @param args the args
+   * @return the string
+   */
   public static String tWithNT(final String text, final String noteForTranslators, final Integer... args) {
     return i18n.tWithNT(text, noteForTranslators, args);
   }
 
+  /**
+   * T with nt.
+   *
+   * @param text the text
+   * @param noteForTranslators the note for translators
+   * @param args the args
+   * @return the string
+   */
   public static String tWithNT(final String text, final String noteForTranslators, final Long... args) {
     return i18n.tWithNT(text, noteForTranslators, args);
   }
 
+  /**
+   * T with nt.
+   *
+   * @param text the text
+   * @param noteForTranslators the note for translators
+   * @param args the args
+   * @return the string
+   */
   public static String tWithNT(final String text, final String noteForTranslators, final String... args) {
     return i18n.tWithNT(text, noteForTranslators, args);
   }

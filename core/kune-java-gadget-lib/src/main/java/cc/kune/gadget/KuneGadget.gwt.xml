@@ -3,7 +3,7 @@
   <!-- Inherit the core Web Toolkit stuff. -->
   <inherits name='com.google.gwt.user.User'/>
   <inherits name="com.google.gwt.autobean.AutoBean"/>
-g
+  g
   <!-- Other module inherits -->
   <inherits name="com.google.gwt.inject.Inject"/>
 

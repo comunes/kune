@@ -31,30 +31,110 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface GroupServiceAsync.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GroupServiceAsync {
 
+  /**
+   * Change def license.
+   *
+   * @param userHash the user hash
+   * @param groupToken the group token
+   * @param license the license
+   * @param asyncCallback the async callback
+   */
   void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license,
       AsyncCallback<Void> asyncCallback);
 
+  /**
+   * Change group ws theme.
+   *
+   * @param userHash the user hash
+   * @param groupToken the group token
+   * @param theme the theme
+   * @param callback the callback
+   */
   void changeGroupWsTheme(String userHash, StateToken groupToken, String theme,
       AsyncCallback<Void> callback);
 
+  /**
+   * Clear group back image.
+   *
+   * @param userHash the user hash
+   * @param token the token
+   * @param asyncCallback the async callback
+   */
   void clearGroupBackImage(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
+  /**
+   * Creates the new group.
+   *
+   * @param userHash the user hash
+   * @param group the group
+   * @param publicDesc the public desc
+   * @param tags the tags
+   * @param enabledTools the enabled tools
+   * @param callback the callback
+   */
   void createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags,
       String[] enabledTools, AsyncCallback<StateAbstractDTO> callback);
 
+  /**
+   * Gets the group.
+   *
+   * @param userHash the user hash
+   * @param token the token
+   * @param asyncCallback the async callback
+   * @return the group
+   */
   void getGroup(String userHash, StateToken token, AsyncCallback<GroupDTO> asyncCallback);
 
+  /**
+   * Sets the group new members joining policy.
+   *
+   * @param userHash the user hash
+   * @param groupToken the group token
+   * @param admissionPolicy the admission policy
+   * @param asyncCallback the async callback
+   */
   void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken,
       AdmissionType admissionPolicy, AsyncCallback<Void> asyncCallback);
 
+  /**
+   * Sets the social network visibility.
+   *
+   * @param userHash the user hash
+   * @param token the token
+   * @param visibility the visibility
+   * @param asyncCallback the async callback
+   */
   void setSocialNetworkVisibility(String userHash, StateToken token, SocialNetworkVisibility visibility,
       AsyncCallback<Void> asyncCallback);
 
+  /**
+   * Sets the tool enabled.
+   *
+   * @param userHash the user hash
+   * @param groupToken the group token
+   * @param toolName the tool name
+   * @param enabled the enabled
+   * @param asyncCallback the async callback
+   */
   void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled,
       AsyncCallback<Void> asyncCallback);
 
+  /**
+   * Update group.
+   *
+   * @param userHash the user hash
+   * @param token the token
+   * @param groupDTO the group dto
+   * @param callback the callback
+   */
   void updateGroup(String userHash, StateToken token, GroupDTO groupDTO,
       AsyncCallback<StateAbstractDTO> callback);
 

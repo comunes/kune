@@ -22,8 +22,27 @@
  */
 package cc.kune.core.server.xmpp;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving room events.
+ * The class that is interested in processing a room
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addRoomListener<code> method. When
+ * the room event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see RoomEvent
+ */
 public interface RoomListener {
 
+  /**
+   * On message.
+   *
+   * @param from the from
+   * @param to the to
+   * @param body the body
+   */
   void onMessage(String from, String to, String body);
 
 }

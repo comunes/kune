@@ -32,8 +32,22 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListsClientTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListsClientTool extends FoldableAbstractClientTool {
 
+  /**
+   * Instantiates a new lists client tool.
+   *
+   * @param i18n the i18n
+   * @param toolSelector the tool selector
+   * @param cntCapRegistry the cnt cap registry
+   * @param history the history
+   */
   @Inject
   public ListsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
@@ -55,11 +69,17 @@ public class ListsClientTool extends FoldableAbstractClientTool {
     registerIcons();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.AbstractClientTool#getName()
+   */
   @Override
   public String getName() {
     return TOOL_NAME;
   }
 
+  /**
+   * Register icons.
+   */
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_LIST);

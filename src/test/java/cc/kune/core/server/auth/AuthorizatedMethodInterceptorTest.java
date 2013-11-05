@@ -38,12 +38,26 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.inject.persist.Transactional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AuthorizatedMethodInterceptorTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AuthorizatedMethodInterceptorTest extends IntegrationTest {
 
+  /** The auth. */
   private AuthorizatedMethodInterceptor auth;
+  
+  /** The auth annotation. */
   private Authorizated authAnnotation;
+  
+  /** The invocation. */
   private MethodInvocation invocation;
 
+  /**
+   * Before.
+   */
   @Transactional
   @Before
   public void before() {
@@ -58,6 +72,11 @@ public class AuthorizatedMethodInterceptorTest extends IntegrationTest {
 
   }
 
+  /**
+   * Tes hash null container.
+   *
+   * @throws Throwable the throwable
+   */
   @Test(expected = ContentNotFoundException.class)
   public void tesHashNullContainer() throws Throwable {
     // Mockito.when(authAnnotation.accessRolRequired()).thenReturn(AccessRol.Administrator);
@@ -67,6 +86,11 @@ public class AuthorizatedMethodInterceptorTest extends IntegrationTest {
     auth.invoke(invocation);
   }
 
+  /**
+   * Test hash null content.
+   *
+   * @throws Throwable the throwable
+   */
   @Test(expected = ContentNotFoundException.class)
   public void testHashNullContent() throws Throwable {
     Mockito.when(authAnnotation.actionLevel()).thenReturn(ActionLevel.content);
@@ -75,6 +99,11 @@ public class AuthorizatedMethodInterceptorTest extends IntegrationTest {
     auth.invoke(invocation);
   }
 
+  /**
+   * Wrong group name throws excep.
+   *
+   * @throws Throwable the throwable
+   */
   @Test(expected = AccessViolationException.class)
   public void wrongGroupNameThrowsExcep() throws Throwable {
     doLogin();

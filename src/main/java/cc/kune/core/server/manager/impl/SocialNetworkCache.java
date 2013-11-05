@@ -42,13 +42,18 @@ import cc.kune.domain.User;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkCache create a cache for maker faster the retrieve of
- * the SN of a user
+ * the SN of a user.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @LogThis
 @Singleton
 public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, SocialNetworkData> {
+  
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(SocialNetworkCache.class);
 
   /** The expired groups. */
@@ -87,12 +92,10 @@ public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, Soci
   }
 
   /**
-   * Gets the SN of some user/group from the cache if available
-   * 
-   * @param user
-   *          the user
-   * @param group
-   *          the group
+   * Gets the SN of some user/group from the cache if available.
+   *
+   * @param user the user
+   * @param group the group
    * @return the social network data
    */
   public SocialNetworkData get(final User user, final Group group) {
@@ -112,6 +115,14 @@ public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, Soci
     return super.get(pair);
   }
 
+  /**
+   * Put.
+   *
+   * @param user the user
+   * @param group the group
+   * @param data the data
+   * @return the object
+   */
   public Object put(final User user, final Group group, final SocialNetworkData data) {
     return super.put(Pair.create(user, group), data);
   }

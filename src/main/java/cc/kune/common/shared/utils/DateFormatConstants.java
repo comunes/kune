@@ -22,16 +22,32 @@
  */
 package cc.kune.common.shared.utils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DateFormatConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DateFormatConstants {
 
+  /** The Constant DATE_EXPORT_FORMAT. */
   public static final String DATE_EXPORT_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSSZZZ";
+  
+  /** The Constant OLD1_DATE_EXPORT_FORMAT. */
   @Deprecated
   public static final String OLD1_DATE_EXPORT_FORMAT = "'DTSTART':yyyyMMdd'T'Hmmss";
+  
+  /** The Constant OLD2_DATE_EXPORT_FORMAT. */
   @Deprecated
   public static final String OLD2_DATE_EXPORT_FORMAT = "'DTSTART':yyyyMMdd'T'hhmmss";
+  
+  /** The Constant OLD3_DATE_EXPORT_FORMAT. */
   @Deprecated
   public static final String OLD3_DATE_EXPORT_FORMAT = "'DTSTART':yyyyMMdd'T'hhmm";
 
+  /**
+   * Instantiates a new date format constants.
+   */
   public DateFormatConstants() {
     super();
   }

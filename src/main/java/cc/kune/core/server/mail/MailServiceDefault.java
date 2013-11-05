@@ -42,15 +42,33 @@ import cc.kune.core.server.properties.KuneProperties;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MailServiceDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 @LogThis
 public class MailServiceDefault implements MailService {
 
+  /** The log. */
   Log log = LogFactory.getLog(MailServiceDefault.class);
+  
+  /** The props. */
   private final Properties props;
+  
+  /** The smtp default from. */
   private final String smtpDefaultFrom;
+  
+  /** The smtp skip. */
   private final boolean smtpSkip;
 
+  /**
+   * Instantiates a new mail service default.
+   *
+   * @param kuneProperties the kune properties
+   */
   @Inject
   public MailServiceDefault(final KuneProperties kuneProperties) {
     final String smtpServer = kuneProperties.get(KuneProperties.SITE_SMTP_HOST);
@@ -60,12 +78,18 @@ public class MailServiceDefault implements MailService {
     props.put("mail.smtp.host", smtpServer);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.mail.MailService#send(cc.kune.common.shared.utils.AbstractFormattedString, cc.kune.common.shared.utils.AbstractFormattedString, boolean, java.lang.String[])
+   */
   @Override
   public void send(final AbstractFormattedString subject, final AbstractFormattedString body, final boolean isHtml,
       final String... tos) {
     send(smtpDefaultFrom, subject, body, isHtml, tos);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.mail.MailService#send(java.lang.String, cc.kune.common.shared.utils.AbstractFormattedString, cc.kune.common.shared.utils.AbstractFormattedString, boolean, java.lang.String[])
+   */
   @Override
   public void send(final String from, final AbstractFormattedString subject, final AbstractFormattedString body,
       final boolean isHtml, final String... tos) {
@@ -108,22 +132,34 @@ public class MailServiceDefault implements MailService {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.mail.MailService#sendHtml(cc.kune.common.shared.utils.AbstractFormattedString, cc.kune.common.shared.utils.AbstractFormattedString, java.lang.String[])
+   */
   @Override
   public void sendHtml(final AbstractFormattedString subject, final AbstractFormattedString body, final String... tos) {
     send(smtpDefaultFrom, subject, body, true, tos);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.mail.MailService#sendHtml(java.lang.String, cc.kune.common.shared.utils.AbstractFormattedString, cc.kune.common.shared.utils.AbstractFormattedString, java.lang.String[])
+   */
   @Override
   public void sendHtml(final String from, final AbstractFormattedString subject, final AbstractFormattedString body,
       final String... tos) {
     send(from, subject, body, true, tos);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.mail.MailService#sendPlain(cc.kune.common.shared.utils.AbstractFormattedString, cc.kune.common.shared.utils.AbstractFormattedString, java.lang.String[])
+   */
   @Override
   public void sendPlain(final AbstractFormattedString subject, final AbstractFormattedString body, final String... tos) {
     send(smtpDefaultFrom, subject, body, false, tos);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.mail.MailService#sendPlain(java.lang.String, cc.kune.common.shared.utils.AbstractFormattedString, cc.kune.common.shared.utils.AbstractFormattedString, java.lang.String[])
+   */
   @Override
   public void sendPlain(final String from, final AbstractFormattedString subject, final AbstractFormattedString body,
       final String... tos) {

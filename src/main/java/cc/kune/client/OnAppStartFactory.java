@@ -32,8 +32,20 @@ import cc.kune.core.client.state.SiteTokenListeners;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating OnAppStart objects.
+ */
 public class OnAppStartFactory {
 
+  /**
+   * Instantiates a new on app start factory.
+   *
+   * @param session the session
+   * @param newGroup the new group
+   * @param signIn the sign in
+   * @param tokenListener the token listener
+   */
   @Inject
   public OnAppStartFactory(final Session session, final Provider<NewGroup> newGroup,
       final Provider<SignIn> signIn, final SiteTokenListeners tokenListener) {

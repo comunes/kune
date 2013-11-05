@@ -27,34 +27,74 @@ import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XmppRoom.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class XmppRoom implements Room, PacketListener {
+  
+  /** The alias. */
   private final String alias;
+  
+  /** The listener. */
   private RoomListener listener;
+  
+  /** The muc. */
   private final MultiUserChat muc;
 
+  /**
+   * Instantiates a new xmpp room.
+   *
+   * @param muc the muc
+   * @param alias the alias
+   */
   public XmppRoom(final MultiUserChat muc, final String alias) {
     this.muc = muc;
     this.alias = alias;
   }
 
+  /**
+   * Gets the alias.
+   *
+   * @return the alias
+   */
   public String getAlias() {
     return alias;
   }
 
+  /* (non-Javadoc)
+   * @see org.jivesoftware.smack.PacketListener#processPacket(org.jivesoftware.smack.packet.Packet)
+   */
   public void processPacket(final Packet packet) {
     if (packet instanceof Message) {
       processMessage((Message) packet);
     }
   }
 
+  /**
+   * Process message.
+   *
+   * @param message the message
+   */
   private void processMessage(final Message message) {
     listener.onMessage(message.getFrom(), message.getTo(), message.getBody());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.xmpp.Room#setListener(cc.kune.core.server.xmpp.RoomListener)
+   */
   public void setListener(final RoomListener listener) {
     this.listener = listener;
   }
 
+  /**
+   * Gets the muc.
+   *
+   * @return the muc
+   */
   public MultiUserChat getMuc() {
     return muc;
   }

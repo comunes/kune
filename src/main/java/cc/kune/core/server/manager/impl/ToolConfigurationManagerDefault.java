@@ -32,10 +32,22 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolConfigurationManagerDefault.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ToolConfigurationManagerDefault extends DefaultManager<ToolConfiguration, Long> implements
     ToolConfigurationManager {
 
+  /**
+   * Instantiates a new tool configuration manager default.
+   *
+   * @param provider the provider
+   */
   @Inject
   public ToolConfigurationManagerDefault(@DataSourceKune final Provider<EntityManager> provider) {
     super(provider, ToolConfiguration.class);

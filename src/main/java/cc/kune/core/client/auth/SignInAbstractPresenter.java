@@ -37,16 +37,47 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SignInAbstractPresenter.
+ *
+ * @param <V> the value type
+ * @param <Proxy_> the generic type
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Proxy<?>> extends
     Presenter<View, Proxy<?>> {
 
+  /** The cookies manager. */
   protected final CookiesManager cookiesManager;
+  
+  /** The goto token on cancel. */
   private String gotoTokenOnCancel;
+  
+  /** The i18n. */
   protected final I18nUITranslationService i18n;
+  
+  /** The login remember. */
   protected final LoginRememberManager loginRemember;
+  
+  /** The session. */
   protected final Session session;
+  
+  /** The state manager. */
   protected final StateManager stateManager;
 
+  /**
+   * Instantiates a new sign in abstract presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param session the session
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param cookiesManager the cookies manager
+   * @param loginRemember the login remember
+   */
   public SignInAbstractPresenter(final EventBus eventBus, final View view, final Proxy<?> proxy,
       final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
       final CookiesManager cookiesManager, final LoginRememberManager loginRemember) {
@@ -58,25 +89,42 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     this.loginRemember = loginRemember;
   }
 
+  /**
+   * Gets the goto token on cancel.
+   *
+   * @return the goto token on cancel
+   */
   public String getGotoTokenOnCancel() {
     return gotoTokenOnCancel;
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
+   */
   @Override
   public SignInAbstractView getView() {
     return (SignInAbstractView) super.getView();
   }
 
+  /**
+   * Hide.
+   */
   public void hide() {
     getView().hide();
     getView().reset();
     getView().hideMessages();
   }
 
+  /**
+   * On cancel.
+   */
   public void onCancel() {
     hide();
   }
 
+  /**
+   * On close.
+   */
   public void onClose() {
     getView().reset();
     getView().hideMessages();
@@ -92,6 +140,13 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     }
   }
 
+  /**
+   * On sign in.
+   *
+   * @param userInfoDTO the user info dto
+   * @param gotoHomePage the goto home page
+   * @param passwd the passwd
+   */
   protected void onSignIn(final UserInfoDTO userInfoDTO, final boolean gotoHomePage, final String passwd) {
     final String userHash = userInfoDTO.getUserHash();
     cookiesManager.setAuthCookie(userHash);
@@ -117,12 +172,23 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
         });
   }
 
+  /**
+   * Save autocomplete login data.
+   *
+   * @param nickOrEmail the nick or email
+   * @param password the password
+   */
   protected void saveAutocompleteLoginData(final String nickOrEmail, final String password) {
     loginRemember.setNickOrEmail(nickOrEmail);
     loginRemember.setPassword(password);
     loginRemember.clickFormLogin();
   }
 
+  /**
+   * Sets the goto token on cancel.
+   *
+   * @param gotoTokenOnCancel the new goto token on cancel
+   */
   public void setGotoTokenOnCancel(final String gotoTokenOnCancel) {
     this.gotoTokenOnCancel = gotoTokenOnCancel;
   }

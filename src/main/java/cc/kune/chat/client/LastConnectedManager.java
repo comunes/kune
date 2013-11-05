@@ -42,13 +42,28 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LastConnectedManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class LastConnectedManager {
 
+  /** The Constant RECENT_MS. */
   private static final int RECENT_MS = 60 * 1000; /* 1 minute */
 
+  /** The data. */
   private UserBuddiesPresenceDataDTO data;
 
+  /**
+   * Instantiates a new last connected manager.
+   *
+   * @param session the session
+   * @param roster the roster
+   * @param userService the user service
+   */
   @Inject
   public LastConnectedManager(final Session session, final XmppRoster roster,
       final Provider<UserServiceAsync> userService) {
@@ -81,17 +96,18 @@ public class LastConnectedManager {
     });
   }
 
+  /**
+   * Clear.
+   */
   private void clear() {
     data = UserBuddiesPresenceDataDTO.NO_BUDDIES;
   }
 
   /**
-   * Gets the last connected info
-   * 
-   * @param username
-   *          the username to get the last connected info
-   * @param standalone
-   *          if we should show a message alone, or if this is part of a phrase
+   * Gets the last connected info.
+   *
+   * @param username the username to get the last connected info
+   * @param standalone if we should show a message alone, or if this is part of a phrase
    * @return the last connected info
    */
   public String get(final String username, final boolean standalone) {
@@ -109,12 +125,21 @@ public class LastConnectedManager {
   }
 
   /**
+   * Checks if is recent.
+   *
+   * @param time the time
    * @return true if a duration is less than 1 min.
    */
   private boolean isRecent(final Long time) {
     return (new Date().getTime() - time) < RECENT_MS;
   }
 
+  /**
+   * Update.
+   *
+   * @param username the username
+   * @param lastConnected the last connected
+   */
   public void update(final String username, final Long lastConnected) {
     data.put(username, lastConnected);
   }

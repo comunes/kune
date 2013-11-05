@@ -25,8 +25,10 @@ package cc.kune.common.client.utils;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Class {@link #SchedulerManager} is a wrapper of the GWT
+ * The Class {@link #SchedulerManager} is a wrapper of the GWT.
+ *
  * {@link #Scheduler} (used for testing classes without GWT dependencies).
  */
 public class SchedulerManager {

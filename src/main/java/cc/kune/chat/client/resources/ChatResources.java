@@ -26,37 +26,99 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ChatResources.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ChatResources extends ClientBundle {
+  
+  /**
+   * The Interface ChatIconCssResource.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ChatIconCssResource extends CssResource {
   }
 
+  /**
+   * Away.
+   *
+   * @return the image resource
+   */
   @Source("away.png")
   ImageResource away();
 
+  /**
+   * Busy.
+   *
+   * @return the image resource
+   */
   @Source("busy.png")
   ImageResource busy();
 
+  /**
+   * Chat.
+   *
+   * @return the image resource
+   */
   @Source("chat.png")
   ImageResource chat();
 
+  /**
+   * Chat blink.
+   *
+   * @return the image resource
+   */
   @Source("chat-blink.gif")
   ImageResource chatBlink();
 
+  /**
+   * Chat no blink.
+   *
+   * @return the image resource
+   */
   @Source("chat-no-blink.png")
   ImageResource chatNoBlink();
 
+  /**
+   * Group chat.
+   *
+   * @return the image resource
+   */
   @Source("group-chat.png")
   ImageResource groupChat();
 
+  /**
+   * New chat.
+   *
+   * @return the image resource
+   */
   @Source("new-chat.png")
   ImageResource newChat();
 
+  /**
+   * Offline.
+   *
+   * @return the image resource
+   */
   @Source("offline.png")
   ImageResource offline();
 
+  /**
+   * Online.
+   *
+   * @return the image resource
+   */
   @Source("online.png")
   ImageResource online();
 
+  /**
+   * Xa.
+   *
+   * @return the image resource
+   */
   @Source("xa.png")
   ImageResource xa();
 }

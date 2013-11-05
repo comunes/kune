@@ -45,17 +45,31 @@ import cc.kune.domain.finders.GroupFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupServiceTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupServiceTest extends IntegrationTest {
 
+  /** The group finder. */
   @Inject
   GroupFinder groupFinder;
 
+  /** The service. */
   @Inject
   GroupService service;
 
+  /** The session. */
   @Inject
   UserSession session;
 
+  /**
+   * Creates the closed.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void createClosed() throws Exception {
     doLogin();
@@ -77,6 +91,11 @@ public class GroupServiceTest extends IntegrationTest {
         groupCreated.getSocialNetwork().getAccessLists().getViewers().getMode());
   }
 
+  /**
+   * Creates the community.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void createCommunity() throws Exception {
     doLogin();
@@ -97,6 +116,13 @@ public class GroupServiceTest extends IntegrationTest {
     assertEquals(groupCreated.getGroupType(), GroupType.COMMUNITY);
   }
 
+  /**
+   * Creates the group.
+   *
+   * @param shortName the short name
+   * @param longName the long name
+   * @return the group dto
+   */
   private GroupDTO createGroup(final String shortName, final String longName) {
     final GroupDTO group = new GroupDTO(shortName, longName, GroupType.ORGANIZATION);
 
@@ -109,6 +135,11 @@ public class GroupServiceTest extends IntegrationTest {
     return group;
   }
 
+  /**
+   * Creates the group not logged.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = Exception.class)
   public void createGroupNotLogged() throws Exception {
     final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
@@ -116,6 +147,11 @@ public class GroupServiceTest extends IntegrationTest {
     service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
   }
 
+  /**
+   * Creates the group null user hash.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = UserMustBeLoggedException.class)
   public void createGroupNullUserHash() throws Exception {
     doLogin();
@@ -124,6 +160,11 @@ public class GroupServiceTest extends IntegrationTest {
     service.createNewGroup(null, group, "Public desc", "tag1 tag2", null);
   }
 
+  /**
+   * Creates the group user logged.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void createGroupUserLogged() throws Exception {
     doLogin();
@@ -144,6 +185,11 @@ public class GroupServiceTest extends IntegrationTest {
     assertEquals(groupCreated.getGroupType(), GroupType.PROJECT);
   }
 
+  /**
+   * Creates the organization.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void createOrganization() throws Exception {
     doLogin();
@@ -163,6 +209,11 @@ public class GroupServiceTest extends IntegrationTest {
     assertEquals(groupCreated.getGroupType(), GroupType.ORGANIZATION);
   }
 
+  /**
+   * Creates the orphaned project.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void createOrphanedProject() throws Exception {
     doLogin();
@@ -184,6 +235,11 @@ public class GroupServiceTest extends IntegrationTest {
     assertEquals(0, groupCreated.getSocialNetwork().getAccessLists().getEditors().getList().size());
   }
 
+  /**
+   * Creates the same long name.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = GroupLongNameInUseException.class)
   public void createSameLongName() throws Exception {
     doLogin();
@@ -192,6 +248,11 @@ public class GroupServiceTest extends IntegrationTest {
     service.updateGroup(getHash(), group.getStateToken(), group);
   }
 
+  /**
+   * Creates the same short name.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = GroupShortNameInUseException.class)
   public void createSameShortName() throws Exception {
     doLogin();
@@ -200,6 +261,9 @@ public class GroupServiceTest extends IntegrationTest {
     service.updateGroup(getHash(), new StateToken("ysei"), group);
   }
 
+  /**
+   * Inits the.
+   */
   @Before
   public void init() {
     new IntegrationTestHelper(true, this);

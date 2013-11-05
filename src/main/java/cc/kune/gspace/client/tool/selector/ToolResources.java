@@ -25,17 +25,43 @@ package cc.kune.gspace.client.tool.selector;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ToolResources.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ToolResources extends ClientBundle {
 
+  /**
+   * Arrow down def.
+   *
+   * @return the image resource
+   */
   @Source("tool-arrowdown-def.png")
   ImageResource arrowDownDef();
 
+  /**
+   * Arrow left def.
+   *
+   * @return the image resource
+   */
   @Source("tool-arrowleft-def.png")
   ImageResource arrowLeftDef();
 
+  /**
+   * Arrow right def.
+   *
+   * @return the image resource
+   */
   @Source("tool-arrowright-def.png")
   ImageResource arrowRightDef();
 
+  /**
+   * Arrow up def.
+   *
+   * @return the image resource
+   */
   @Source("tool-arrowup-def.png")
   ImageResource arrowUpDef();
 

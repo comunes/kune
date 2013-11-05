@@ -1,3 +1,25 @@
+/*
+ *
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under 
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public 
+ * License version 3, (the "License"); you may not use this file except in 
+ * compliance with the License. This file is part of kune.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 package net.auroris.ColorPicker.client;
 
 /**
@@ -199,6 +221,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
 /**
  * This is the implementation of the Colorpicker. It defines the user interface,
  * the glue and calculations necessary for colorpicker functionality.
@@ -230,38 +253,81 @@ import com.google.gwt.user.client.ui.Widget;
  * @copyright (C) 2007 AurorisNET. All Rights Reserved.
  */
 public class ColorPicker extends Composite implements KeyPressHandler, ClickHandler, ChangeHandler {
+  
+  /** The blue. */
   private int blue;
+  
+  /** The brightness. */
   private int brightness;
+  
+  /** The color mode. */
   private int colorMode; // Which color picking mode we are in
 
   // Elements
+  /** The colorpreview. */
   private final HTML colorpreview;
+  
+  /** The green. */
   private int green;
+  
+  /** The hue. */
   private int hue;
+  
+  /** The rb blue. */
   private final RadioButton rbBlue;
+  
+  /** The rb brightness. */
   private final RadioButton rbBrightness;
+  
+  /** The rb green. */
   private final RadioButton rbGreen;
   // Radiobuttons
+  /** The rb hue. */
   private final RadioButton rbHue;
 
+  /** The rb red. */
   private final RadioButton rbRed;
+  
+  /** The rb saturation. */
   private final RadioButton rbSaturation;
+  
+  /** The red. */
   private int red;
+  
+  /** The saturation. */
   private int saturation;
+  
+  /** The sliderbar. */
   private final SliderBar sliderbar; // auxilliary color picking slider. Center
                                      // UI component.
-  private final SliderMap slidermap; // main color picking slider. Leftmost UI
+  /** The slidermap. */
+                                     private final SliderMap slidermap; // main color picking slider. Leftmost UI
                                      // component.
 
-  private final TextBox tbBlue;
+  /** The tb blue. */
+                                     private final TextBox tbBlue;
+  
+  /** The tb brightness. */
   private final TextBox tbBrightness;
+  
+  /** The tb green. */
   private final TextBox tbGreen;
+  
+  /** The tb hex color. */
   private final TextBox tbHexColor;
   // Textboxes
+  /** The tb hue. */
   private final TextBox tbHue;
+  
+  /** The tb red. */
   private final TextBox tbRed;
+  
+  /** The tb saturation. */
   private final TextBox tbSaturation;
 
+  /**
+   * Instantiates a new color picker.
+   */
   public ColorPicker() {
     // UI Drawing
     // ------------------
@@ -758,9 +824,8 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
    * Subclasses that override this method must call
    * <tt>super.onKeyPress(sender, keyCode, modifiers)</tt> to ensure that the
    * Widget recieves its events.
-   * 
-   * @param sender
-   *          the widget that was focused when the event occurred.
+   *
+   * @param event the event
    * @see com.google.gwt.user.client.ui.KeyboardListener
    */
   @Override
@@ -874,12 +939,10 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
   /**
    * Sets the hexadecimal notation for Red, Green, and Blue. This will
    * automatically populate all the other fields, too.
-   * 
-   * @param hex
-   *          Hexadecimal notation of Red, Green and Blue in the range of
-   *          000000-FFFFFF
-   * @throws java.lang.Exception
-   *           A generic exception if the hexadecimal notation is bad.
+   *
+   * @param hex Hexadecimal notation of Red, Green and Blue in the range of
+   * 000000-FFFFFF
+   * @throws Exception the exception
    */
   public void setHex(final String hex) throws Exception {
     final Color color = new Color();
@@ -915,16 +978,11 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
    * around the axis corresponds to �hue�, distance from the axis corresponds to
    * �saturation�, and distance along the axis corresponds to �lightness�,
    * �value�, or �brightness�.
-   * 
-   * @param hue
-   *          angle - valid range is 0-359
-   * @param saturation
-   *          percent - valid range is 0-100
-   * @param value
-   *          percent (Brightness) - valid range is 0-100
-   * @throws java.lang.Exception
-   *           A general exception if the Hue, Saturation, or Value variables
-   *           are out of range.
+   *
+   * @param hue angle - valid range is 0-359
+   * @param saturation percent - valid range is 0-100
+   * @param value percent (Brightness) - valid range is 0-100
+   * @throws Exception the exception
    */
   public void setHSV(final int hue, final int saturation, final int value) throws Exception {
     final Color color = new Color();
@@ -968,15 +1026,11 @@ public class ColorPicker extends Composite implements KeyPressHandler, ClickHand
    * blue light are added together in various ways to reproduce a broad array of
    * colors. The name of the model comes from the initials of the three additive
    * primary colors, red, green, and blue.
-   * 
-   * @param red
-   *          strength - valid range is 0-255
-   * @param green
-   *          strength - valid range is 0-255
-   * @param blue
-   *          strength - valid range is 0-255
-   * @throws java.lang.Exception
-   *           Exception if the Red, Green or Blue variables are out of range.
+   *
+   * @param red strength - valid range is 0-255
+   * @param green strength - valid range is 0-255
+   * @param blue strength - valid range is 0-255
+   * @throws Exception the exception
    */
   public void setRGB(final int red, final int green, final int blue) throws Exception {
     final Color color = new Color();

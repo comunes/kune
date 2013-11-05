@@ -26,20 +26,32 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class StandAloneMenuProvider is a way to create a kind of singletons for
  * menu entries. This can be register in a list of Providers<GuiDescriptor> but
  * in fact only references one item and can be used to select the parent of some
  * menu items
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class StandaloneMenuProvider implements Provider<MenuDescriptor> {
 
+  /** The menu. */
   private final AbstractStandaloneMenu menu;
 
+  /**
+   * Instantiates a new standalone menu provider.
+   *
+   * @param menu the menu
+   */
   public StandaloneMenuProvider(final AbstractStandaloneMenu menu) {
     this.menu = menu;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.inject.Provider#get()
+   */
   @Override
   public MenuDescriptor get() {
     return menu;

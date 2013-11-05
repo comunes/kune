@@ -28,30 +28,59 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.UIObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractAtBorderPopupPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractAtBorderPopupPanel extends PopupPanel {
 
+  /** The show centered. */
   private boolean showCentered = true;
+  
+  /** The show near object. */
   protected UIObject showNearObject;
 
+  /**
+   * Instantiates a new abstract at border popup panel.
+   */
   public AbstractAtBorderPopupPanel() {
     this(false, false);
   }
 
+  /**
+   * Instantiates a new abstract at border popup panel.
+   *
+   * @param autohide the autohide
+   */
   public AbstractAtBorderPopupPanel(final boolean autohide) {
     this(autohide, false);
   }
 
+  /**
+   * Instantiates a new abstract at border popup panel.
+   *
+   * @param autohide the autohide
+   * @param modal the modal
+   */
   public AbstractAtBorderPopupPanel(final boolean autohide, final boolean modal) {
     super(autohide, modal);
     setGlassEnabled(modal);
     init();
   }
 
+  /**
+   * Default style.
+   */
   public void defaultStyle() {
     addStyleName("k-opacity90");
     addStyleName("k-box-10shadow");
   }
 
+  /**
+   * Inits the.
+   */
   private void init() {
     Window.addResizeHandler(new ResizeHandler() {
       @Override
@@ -67,23 +96,40 @@ public abstract class AbstractAtBorderPopupPanel extends PopupPanel {
     });
   }
 
+  /**
+   * Sets the center position.
+   */
   public void setCenterPosition() {
     setCenterPositionImpl();
   }
 
+  /**
+   * Sets the center position impl.
+   */
   protected abstract void setCenterPositionImpl();
 
+  /**
+   * Show centered.
+   */
   public void showCentered() {
     showCentered = true;
     setCenterPositionImpl();
   }
 
+  /**
+   * Show near.
+   *
+   * @param object the object
+   */
   public void showNear(final UIObject object) {
     this.showNearObject = object;
     showCentered = false;
     showRelativeImpl();
   }
 
+  /**
+   * Show relative impl.
+   */
   private void showRelativeImpl() {
     showRelativeTo(showNearObject);
   }

@@ -33,23 +33,49 @@ import cc.kune.common.shared.i18n.HasRTL;
 
 import com.google.gwt.user.client.ui.Composite;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractComposedGuiItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractComposedGuiItem extends Composite implements IsActionExtensible {
+  
+  /** The bindings. */
   private final GuiProvider bindings;
+  
+  /** The gui items. */
   private GuiActionDescCollection guiItems;
+  
+  /** The i18n. */
   private final HasRTL i18n;
 
+  /**
+   * Instantiates a new abstract composed gui item.
+   *
+   * @param bindings the bindings
+   * @param i18n the i18n
+   */
   public AbstractComposedGuiItem(final GuiProvider bindings, final HasRTL i18n) {
     super();
     this.bindings = bindings;
     this.i18n = i18n;
   }
 
+  /**
+   * Adds the.
+   *
+   * @param descriptors the descriptors
+   */
   public void add(final GuiActionDescCollection descriptors) {
     for (final GuiActionDescrip descriptor : descriptors) {
       add(descriptor);
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip[])
+   */
   @Override
   public void add(final GuiActionDescrip... descriptors) {
     for (final GuiActionDescrip descriptor : descriptors) {
@@ -57,18 +83,29 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public void add(final GuiActionDescrip descriptor) {
     getGuiItems().add(descriptor);
     beforeAddWidget(descriptor);
   }
 
+  /**
+   * Adds the actions.
+   *
+   * @param descriptors the descriptors
+   */
   public void addActions(final List<GuiActionDescrip> descriptors) {
     for (final GuiActionDescrip descriptor : descriptors) {
       add(descriptor);
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.IsActionExtensible#addAll(cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+   */
   @Override
   public void addAll(final GuiActionDescCollection descriptors) {
     for (final GuiActionDescrip descriptor : descriptors) {
@@ -76,8 +113,18 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
     }
   }
 
+  /**
+   * Adds the widget.
+   *
+   * @param item the item
+   */
   protected abstract void addWidget(AbstractGuiItem item);
 
+  /**
+   * Before add widget.
+   *
+   * @param descrip the descrip
+   */
   protected void beforeAddWidget(final GuiActionDescrip descrip) {
     if (descrip.mustBeAdded()) {
       final GuiBinding binding = bindings.get(descrip.getType());
@@ -105,11 +152,19 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.IsActionExtensible#clear()
+   */
   @Override
   public void clear() {
     getGuiItems().clear();
   }
 
+  /**
+   * Gets the gui items.
+   *
+   * @return the gui items
+   */
   public GuiActionDescCollection getGuiItems() {
     if (guiItems == null) {
       guiItems = new GuiActionDescCollection();
@@ -117,5 +172,11 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
     return guiItems;
   }
 
+  /**
+   * Insert widget.
+   *
+   * @param item the item
+   * @param position the position
+   */
   protected abstract void insertWidget(AbstractGuiItem item, int position);
 }

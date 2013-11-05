@@ -24,19 +24,46 @@ package cc.kune.core.server.xmpp;
 
 import org.jivesoftware.smack.XMPPConnection;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XmppConnection.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class XmppConnection implements ChatConnection {
+  
+  /** The conn. */
   private final XMPPConnection conn;
+  
+  /** The user name. */
   private final String userName;
 
+  /**
+   * Instantiates a new xmpp connection.
+   *
+   * @param userName the user name
+   * @param conn the conn
+   */
   public XmppConnection(final String userName, final XMPPConnection conn) {
     this.userName = userName;
     this.conn = conn;
   }
 
+  /**
+   * Gets the conn.
+   *
+   * @return the conn
+   */
   public XMPPConnection getConn() {
     return conn;
   }
 
+  /**
+   * Gets the user name.
+   *
+   * @return the user name
+   */
   public String getUserName() {
     return userName;
   }

@@ -43,27 +43,55 @@ import com.google.gwt.user.client.ui.PopupPanel.PositionCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.UIObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractGwtMenuGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements ParentWidget {
 
+  /** The menu. */
   protected MenuBar menu;
+  
+  /** The popup. */
   private PopupPanel popup;
 
+  /**
+   * Instantiates a new abstract gwt menu gui.
+   */
   public AbstractGwtMenuGui() {
   }
 
+  /**
+   * Instantiates a new abstract gwt menu gui.
+   *
+   * @param descriptor the descriptor
+   */
   public AbstractGwtMenuGui(final GuiActionDescrip descriptor) {
     super(descriptor);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.ParentWidget#add(com.google.gwt.user.client.ui.UIObject)
+   */
   @Override
   public void add(final UIObject item) {
     menu.addItem((MenuItem) item);
   }
 
+  /**
+   * Adds the separator.
+   *
+   * @return the menu item separator
+   */
   public MenuItemSeparator addSeparator() {
     return menu.addSeparator();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#configureItemFromProperties()
+   */
   @Override
   public void configureItemFromProperties() {
     super.configureItemFromProperties();
@@ -77,6 +105,9 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.create(descriptor);
@@ -106,6 +137,11 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     return this;
   }
 
+  /**
+   * Creates the popup.
+   *
+   * @return the popup panel
+   */
   private PopupPanel createPopup() {
     popup = new PopupPanel(true);
     popup.setStyleName("oc-menu");
@@ -119,6 +155,9 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     return popup;
   }
 
+  /**
+   * Hide.
+   */
   public void hide() {
     if (popup != null) {
       // if menu (not submenu)
@@ -126,18 +165,32 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int, com.google.gwt.user.client.ui.UIObject)
+   */
   @Override
   public void insert(final int position, final UIObject item) {
     menu.insertItem((MenuItem) item, position);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
+   */
   @Override
   public boolean shouldBeAdded() {
     return !descriptor.isChild();
   }
 
+  /**
+   * Show.
+   */
   protected abstract void show();
 
+  /**
+   * Show relative to.
+   *
+   * @param relative the relative
+   */
   public void showRelativeTo(final Object relative) {
     if (popup == null) {
       createPopup();

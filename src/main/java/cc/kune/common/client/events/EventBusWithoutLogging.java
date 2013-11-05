@@ -25,7 +25,17 @@ package cc.kune.common.client.events;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.SimpleEventBus;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventBusWithoutLogging.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EventBusWithoutLogging extends SimpleEventBus {
+  
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.SimpleEventBus#fireEvent(com.google.gwt.event.shared.GwtEvent)
+   */
   @Override
   public void fireEvent(final GwtEvent<?> event) {
     super.fireEvent(event);

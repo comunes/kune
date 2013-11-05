@@ -31,32 +31,59 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RosterItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Entity
 @Table(name = "ofRoster")
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class RosterItem {
 
+  /** The id. */
   @Id
   @GeneratedValue
   @Column(name = "rosterID")
   private Long id;
+  
+  /** The jid. */
   private String jid;
 
+  /** The nick. */
   private String nick;
 
+  /** The sub status. */
   @Column(name = "sub")
   private byte subStatus;
 
+  /** The username. */
   private String username;
 
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
   public Long getId() {
     return id;
   }
 
+  /**
+   * Gets the jid.
+   *
+   * @return the jid
+   */
   public String getJid() {
     return jid;
   }
 
+  /**
+   * Gets the nick.
+   *
+   * @return the nick
+   */
   public String getNick() {
     return nick;
   }
@@ -74,31 +101,63 @@ public class RosterItem {
    * <p>
    * 3 - The roster item and owner have a mutual subscription.
    * </p>
+   *
+   * @return the sub status
    */
   public byte getSubStatus() {
     return subStatus;
   }
 
+  /**
+   * Gets the username.
+   *
+   * @return the username
+   */
   public String getUsername() {
     return username;
   }
 
+  /**
+   * Sets the id.
+   *
+   * @param id the new id
+   */
   public void setId(final Long id) {
     this.id = id;
   }
 
+  /**
+   * Sets the jid.
+   *
+   * @param jid the new jid
+   */
   public void setJid(final String jid) {
     this.jid = jid;
   }
 
+  /**
+   * Sets the nick.
+   *
+   * @param nick the new nick
+   */
   public void setNick(final String nick) {
     this.nick = nick;
   }
 
+  /**
+   * Sets the sub status.
+   *
+   * @param subStatus the new sub status
+   */
   public void setSubStatus(final byte subStatus) {
     this.subStatus = subStatus;
   }
 
+  /**
+   * Sets the username.
+   *
+   * @param username the new username
+   */
   public void setUsername(final String username) {
     this.username = username;
   }

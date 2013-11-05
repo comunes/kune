@@ -31,7 +31,22 @@ import cc.kune.wave.client.CustomStagesProvider;
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveClientUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveClientUtils {
+  
+  /**
+   * Adds the listener.
+   *
+   * @param stateManager the state manager
+   * @param wave the wave
+   * @param waveHolder the wave holder
+   * @param parent the parent
+   */
   public static void addListener(final StateManager stateManager, final CustomStagesProvider wave,
       final ImplPanel waveHolder, final HasWidgets parent) {
     stateManager.addBeforeStateChangeListener(new BeforeActionListener() {
@@ -46,6 +61,13 @@ public class WaveClientUtils {
     });
   }
 
+  /**
+   * Clear.
+   *
+   * @param wave the wave
+   * @param waveHolder the wave holder
+   * @param parent the parent
+   */
   public static void clear(CustomStagesProvider wave, final ImplPanel waveHolder, final HasWidgets parent) {
     if (wave != null) {
       try {

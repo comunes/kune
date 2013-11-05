@@ -22,5 +22,10 @@
  */
 package cc.kune.core.client.registry;
 
+/**
+ * The Class RateableRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class RateableRegistry extends AbstractContentRegistry {
 }

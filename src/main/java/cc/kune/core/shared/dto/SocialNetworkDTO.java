@@ -24,33 +24,67 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SocialNetworkDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SocialNetworkDTO implements IsSerializable {
 
+  /** The access lists. */
   AccessListsDTO accessLists;
 
+  /** The pending collaborators. */
   GroupListDTO pendingCollaborators;
 
+  /**
+   * Instantiates a new social network dto.
+   */
   public SocialNetworkDTO() {
     accessLists = new AccessListsDTO();
     pendingCollaborators = new GroupListDTO();
   }
 
+  /**
+   * Gets the access lists.
+   *
+   * @return the access lists
+   */
   public AccessListsDTO getAccessLists() {
     return accessLists;
   }
 
+  /**
+   * Gets the pending collaborators.
+   *
+   * @return the pending collaborators
+   */
   public GroupListDTO getPendingCollaborators() {
     return pendingCollaborators;
   }
 
+  /**
+   * Sets the access lists.
+   *
+   * @param accessLists the new access lists
+   */
   public void setAccessLists(final AccessListsDTO accessLists) {
     this.accessLists = accessLists;
   }
 
+  /**
+   * Sets the pending collaborators.
+   *
+   * @param pendingCollaborators the new pending collaborators
+   */
   public void setPendingCollaborators(final GroupListDTO pendingCollaborators) {
     this.pendingCollaborators = pendingCollaborators;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   public String toString() {
     return "SocialNetworkDTO[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators
         + "]";

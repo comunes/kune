@@ -26,12 +26,32 @@ import cc.kune.common.client.notify.NotifyLevel;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface MessagePanelView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface MessagePanelView {
 
+  /**
+   * Gets the panel.
+   *
+   * @return the panel
+   */
   IsWidget getPanel();
 
+  /**
+   * Hide error message.
+   */
   void hideErrorMessage();
 
+  /**
+   * Sets the error message.
+   *
+   * @param message the message
+   * @param level the level
+   */
   void setErrorMessage(String message, NotifyLevel level);
 
 }

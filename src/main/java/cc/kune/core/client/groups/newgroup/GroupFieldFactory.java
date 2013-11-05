@@ -35,16 +35,34 @@ import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating GroupField objects.
+ */
 @Singleton
 public class GroupFieldFactory {
 
+  /** The i18n. */
   private final I18nTranslationService i18n;
 
+  /**
+   * Instantiates a new group field factory.
+   *
+   * @param i18n the i18n
+   */
   @Inject
   public GroupFieldFactory(final I18nTranslationService i18n) {
     this.i18n = i18n;
   }
 
+  /**
+   * Creates a new GroupField object.
+   *
+   * @param fieldSet the field set
+   * @param fieldSetId the field set id
+   * @param radioId the radio id
+   * @return the radio
+   */
   public Radio createClosedRadio(final FieldSet fieldSet, final String fieldSetId, final String radioId) {
     final Radio radio = DefaultFormUtils.createRadio(
         fieldSet,
@@ -55,6 +73,14 @@ public class GroupFieldFactory {
     return radio;
   }
 
+  /**
+   * Creates a new GroupField object.
+   *
+   * @param fieldSet the field set
+   * @param fieldSetId the field set id
+   * @param radioId the radio id
+   * @return the radio
+   */
   public Radio createCommunityRadio(final FieldSet fieldSet, final String fieldSetId,
       final String radioId) {
     final Radio radio = DefaultFormUtils.createRadio(
@@ -66,6 +92,12 @@ public class GroupFieldFactory {
     return radio;
   }
 
+  /**
+   * Creates a new GroupField object.
+   *
+   * @param fieldId the field id
+   * @return the text field< string>
+   */
   public TextField<String> createGroupShortName(final String fieldId) {
     final String minMaxText = i18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_30);
     final TextField<String> field = new TextField<String>();
@@ -89,6 +121,12 @@ public class GroupFieldFactory {
     return field;
   }
 
+  /**
+   * Creates a new GroupField object.
+   *
+   * @param fieldId the field id
+   * @return the text field< string>
+   */
   public TextField<String> createLongName(final String fieldId) {
     final TextField<String> field = new TextField<String>();
     field.setFieldLabel(i18n.t("Long name"));
@@ -105,6 +143,14 @@ public class GroupFieldFactory {
     return field;
   }
 
+  /**
+   * Creates a new GroupField object.
+   *
+   * @param fieldSet the field set
+   * @param fieldSetId the field set id
+   * @param radioId the radio id
+   * @return the radio
+   */
   public Radio createOrgRadio(final FieldSet fieldSet, final String fieldSetId, final String radioId) {
     final Radio radio = DefaultFormUtils.createRadio(fieldSet, i18n.t("Organization"), fieldSetId,
         i18n.t("An organization works the same way as a project, "
@@ -112,6 +158,14 @@ public class GroupFieldFactory {
     return radio;
   }
 
+  /**
+   * Creates a new GroupField object.
+   *
+   * @param fieldSet the field set
+   * @param fieldSetId the field set id
+   * @param radioId the radio id
+   * @return the radio
+   */
   public Radio createProjectRadio(final FieldSet fieldSet, final String fieldSetId, final String radioId) {
     final Radio radio = DefaultFormUtils.createRadio(
         fieldSet,

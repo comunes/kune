@@ -36,19 +36,50 @@ import org.apache.commons.logging.LogFactory;
 
 import cc.kune.core.client.services.ImageSize;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ImageUtilsDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ImageUtilsDefault {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(ImageUtilsDefault.class);
 
+  /**
+   * Calculate centered coordinate.
+   *
+   * @param size the size
+   * @param crop the crop
+   * @return the int
+   */
   static int calculateCenteredCoordinate(final int size, final int crop) {
     final int i = (size - crop) / 2;
     return i < 0 ? 0 : i;
   }
 
+  /**
+   * Calculate prop dim.
+   *
+   * @param origWidth the orig width
+   * @param origHeight the orig height
+   * @param maxSize the max size
+   * @return the dimension
+   */
   static Dimension calculatePropDim(final int origWidth, final int origHeight, final int maxSize) {
     return calculatePropDim(origWidth, origHeight, maxSize, true);
   }
 
+  /**
+   * Calculate prop dim.
+   *
+   * @param origWidth the orig width
+   * @param origHeight the orig height
+   * @param maxSize the max size
+   * @param toShortest the to shortest
+   * @return the dimension
+   */
   static Dimension calculatePropDim(final int origWidth, final int origHeight, final int maxSize,
       final boolean toShortest) {
     final boolean higher = origHeight > origWidth;
@@ -62,6 +93,12 @@ public class ImageUtilsDefault {
     return new Dimension((int) width, (int) height);
   }
 
+  /**
+   * Check exist.
+   *
+   * @param fileOrig the file orig
+   * @throws FileNotFoundException the file not found exception
+   */
   private static void checkExist(final String fileOrig) throws FileNotFoundException {
     final File file = new File(fileOrig);
     if (!file.exists()) {
@@ -69,11 +106,23 @@ public class ImageUtilsDefault {
     }
   }
 
+  /**
+   * Creates the empty image info.
+   *
+   * @return the image info
+   * @throws MagickException the magick exception
+   */
   private static ImageInfo createEmptyImageInfo() throws MagickException {
     final ImageInfo imageInfo = new ImageInfo();
     return imageInfo;
   }
 
+  /**
+   * Creates the empty image info with no page.
+   *
+   * @return the image info
+   * @throws MagickException the magick exception
+   */
   private static ImageInfo createEmptyImageInfoWithNoPage() throws MagickException {
     final ImageInfo imageInfo = createEmptyImageInfo();
     imageInfo.setPage("0x0+0+0");
@@ -82,15 +131,28 @@ public class ImageUtilsDefault {
 
   /**
    * http://en.wikipedia.org/wiki/Thumbnail
-   * 
-   * @throws FileNotFoundException
-   * 
+   *
+   * @param fileOrig the file orig
+   * @param fileDest the file dest
+   * @param cropDimension the crop dimension
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
    */
   public static void createThumb(final String fileOrig, final String fileDest, final int cropDimension)
       throws MagickException, FileNotFoundException {
     createThumb(fileOrig, fileDest, cropDimension, cropDimension);
   }
 
+  /**
+   * Creates the thumb.
+   *
+   * @param fileOrig the file orig
+   * @param fileDest the file dest
+   * @param thumbDimension the thumb dimension
+   * @param cropDimension the crop dimension
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   public static void createThumb(final String fileOrig, final String fileDest, final int thumbDimension,
       final int cropDimension) throws MagickException, FileNotFoundException {
     checkExist(fileOrig);
@@ -110,11 +172,11 @@ public class ImageUtilsDefault {
 
   /**
    * convert -density 300 -quality 100 -resize 720x file.pdf result.png
-   * 
-   * @param pdfFile
-   * @param newPngFile
-   * @return
-   * @throws MagickException
+   *
+   * @param pdfFile the pdf file
+   * @param newPngFile the new png file
+   * @return true, if successful
+   * @throws MagickException the magick exception
    */
   static public boolean createThumbFromPdf(final String pdfFile, final String newPngFile)
       throws MagickException {
@@ -123,12 +185,33 @@ public class ImageUtilsDefault {
     return writeImage(pdf1, newPngFile);
   }
 
+  /**
+   * Crop image.
+   *
+   * @param fileOrig the file orig
+   * @param fileDest the file dest
+   * @param x the x
+   * @param y the y
+   * @param width the width
+   * @param height the height
+   * @return true, if successful
+   * @throws MagickException the magick exception
+   */
   private static boolean cropImage(final MagickImage fileOrig, final String fileDest, final int x,
       final int y, final int width, final int height) throws MagickException {
     final Rectangle rectangle = new Rectangle(x, y, width, height);
     return cropImage(fileOrig, fileDest, rectangle);
   }
 
+  /**
+   * Crop image.
+   *
+   * @param fileOrig the file orig
+   * @param fileDest the file dest
+   * @param rectangle the rectangle
+   * @return true, if successful
+   * @throws MagickException the magick exception
+   */
   private static boolean cropImage(final MagickImage fileOrig, final String fileDest,
       final Rectangle rectangle) throws MagickException {
     final MagickImage cropped = fileOrig.cropImage(rectangle);
@@ -137,18 +220,53 @@ public class ImageUtilsDefault {
     return cropped.writeImage(imageInfo);
   }
 
+  /**
+   * Crop image.
+   *
+   * @param fileOrig the file orig
+   * @param fileDest the file dest
+   * @param x the x
+   * @param y the y
+   * @param width the width
+   * @param height the height
+   * @return true, if successful
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   public static boolean cropImage(final String fileOrig, final String fileDest, final int x,
       final int y, final int width, final int height) throws MagickException, FileNotFoundException {
     final Rectangle rectangle = new Rectangle(x, y, width, height);
     return cropImage(fileOrig, fileDest, rectangle);
   }
 
+  /**
+   * Crop image.
+   *
+   * @param fileOrig the file orig
+   * @param fileDest the file dest
+   * @param rectangle the rectangle
+   * @return true, if successful
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   public static boolean cropImage(final String fileOrig, final String fileDest, final Rectangle rectangle)
       throws MagickException, FileNotFoundException {
     checkExist(fileOrig);
     return cropImage(readImage(fileOrig), fileDest, rectangle);
   }
 
+  /**
+   * Generate thumbs.
+   *
+   * @param absDir the abs dir
+   * @param filename the filename
+   * @param extension the extension
+   * @param isPdf the is pdf
+   * @param resizeWidth the resize width
+   * @param thumbSize the thumb size
+   * @param cropSize the crop size
+   * @param iconSize the icon size
+   */
   public static void generateThumbs(final String absDir, final String filename, final String extension,
       final boolean isPdf, final int resizeWidth, final int thumbSize, final int cropSize,
       final int iconSize) {
@@ -176,14 +294,24 @@ public class ImageUtilsDefault {
     }
   }
 
+  /**
+   * Gets the dimension.
+   *
+   * @param file the file
+   * @return the dimension
+   * @throws MagickException the magick exception
+   */
   public static Dimension getDimension(final String file) throws MagickException {
     final MagickImage imageOrig = readImage(file);
     return imageOrig.getDimension();
   }
 
   /**
-   * FIXME: Not working, returns null always (bug)
-   * 
+   * FIXME: Not working, returns null always (bug).
+   *
+   * @param file the file
+   * @return the page
+   * @throws MagickException the magick exception
    */
   public static String getPage(final String file) throws MagickException {
     final ImageInfo imageInfo = new ImageInfo(file);
@@ -191,22 +319,58 @@ public class ImageUtilsDefault {
     return imageInfo.getPage();
   }
 
+  /**
+   * Read image.
+   *
+   * @param file the file
+   * @return the magick image
+   * @throws MagickException the magick exception
+   */
   private static MagickImage readImage(final String file) throws MagickException {
     final ImageInfo imageInfo = new ImageInfo(file);
     return new MagickImage(imageInfo);
   }
 
+  /**
+   * Scale image.
+   *
+   * @param imageOrig the image orig
+   * @param width the width
+   * @param height the height
+   * @return the magick image
+   * @throws MagickException the magick exception
+   */
   private static MagickImage scaleImage(final MagickImage imageOrig, final int width, final int height)
       throws MagickException {
     return imageOrig.scaleImage(width, height);
   }
 
+  /**
+   * Scale image.
+   *
+   * @param imageOrig the image orig
+   * @param fileDest the file dest
+   * @param width the width
+   * @param height the height
+   * @return true, if successful
+   * @throws MagickException the magick exception
+   */
   private static boolean scaleImage(final MagickImage imageOrig, final String fileDest, final int width,
       final int height) throws MagickException {
     final MagickImage imageDest = scaleImage(imageOrig, width, height);
     return writeImage(imageDest, fileDest);
   }
 
+  /**
+   * Scale image.
+   *
+   * @param fileOrig the file orig
+   * @param fileDest the file dest
+   * @param dimension the dimension
+   * @return true, if successful
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   public static boolean scaleImage(final String fileOrig, final String fileDest,
       final Dimension dimension) throws MagickException, FileNotFoundException {
     checkExist(fileOrig);
@@ -214,6 +378,17 @@ public class ImageUtilsDefault {
     return scaleImage(imageOrig, fileDest, (int) dimension.getWidth(), (int) dimension.getHeight());
   }
 
+  /**
+   * Scale image.
+   *
+   * @param fileOrig the file orig
+   * @param fileDest the file dest
+   * @param width the width
+   * @param height the height
+   * @return true, if successful
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   public static boolean scaleImage(final String fileOrig, final String fileDest, final int width,
       final int height) throws MagickException, FileNotFoundException {
     checkExist(fileOrig);
@@ -221,6 +396,16 @@ public class ImageUtilsDefault {
     return scaleImage(imageOrig, fileDest, width, height);
   }
 
+  /**
+   * Scale image to max.
+   *
+   * @param fileOrig the file orig
+   * @param fileDest the file dest
+   * @param maxSize the max size
+   * @return true, if successful
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   public static boolean scaleImageToMax(final String fileOrig, final String fileDest, final int maxSize)
       throws MagickException, FileNotFoundException {
     checkExist(fileOrig);
@@ -234,6 +419,14 @@ public class ImageUtilsDefault {
     return writeImage(scaled, fileDest);
   }
 
+  /**
+   * Write image.
+   *
+   * @param imageDest the image dest
+   * @param fileDest the file dest
+   * @return true, if successful
+   * @throws MagickException the magick exception
+   */
   private static boolean writeImage(final MagickImage imageDest, final String fileDest)
       throws MagickException {
     imageDest.setFileName(fileDest);

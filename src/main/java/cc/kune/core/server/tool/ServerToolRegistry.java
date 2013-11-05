@@ -36,22 +36,54 @@ import cc.kune.trash.shared.TrashToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ServerToolRegistry.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ServerToolRegistry {
+  
+  /** The Constant emptyToolList. */
   public static final List<String> emptyToolList = new ArrayList<String>();
 
+  /** The log. */
   static Log log = LogFactory.getLog(ServerToolRegistry.class);
 
+  /** The groups available tools in prop. */
   private final List<String> groupsAvailableToolsInProp;
+  
+  /** The groups regis enabled tools. */
   private final List<String> groupsRegisEnabledTools;
+  
+  /** The groups regis enabled tools in prop. */
   private final List<String> groupsRegisEnabledToolsInProp;
+  
+  /** The tools. */
   private final HashMap<String, ServerTool> tools;
+  
+  /** The tools available for groups. */
   private final List<ToolSimple> toolsAvailableForGroups;
+  
+  /** The tools available for users. */
   private final List<ToolSimple> toolsAvailableForUsers;
+  
+  /** The users available tools in prop. */
   private final List<String> usersAvailableToolsInProp;
+  
+  /** The users regis enabled tools. */
   private final List<String> usersRegisEnabledTools;
+  
+  /** The users regis enabled tools in prop. */
   private final List<String> usersRegisEnabledToolsInProp;
 
+  /**
+   * Instantiates a new server tool registry.
+   *
+   * @param kuneProperties the kune properties
+   */
   @Inject
   public ServerToolRegistry(final KuneProperties kuneProperties) {
     tools = new HashMap<String, ServerTool>();
@@ -65,30 +97,66 @@ public class ServerToolRegistry {
     groupsRegisEnabledToolsInProp = kuneProperties.getList(KuneProperties.SITE_GROUP_REGIST_ENABLED_TOOLS);
   }
 
+  /**
+   * All.
+   *
+   * @return the collection
+   */
   public Collection<ServerTool> all() {
     return tools.values();
   }
 
+  /**
+   * Gets the.
+   *
+   * @param toolName the tool name
+   * @return the server tool
+   */
   public ServerTool get(final String toolName) {
     return tools.get(toolName);
   }
 
+  /**
+   * Gets the tools available for groups.
+   *
+   * @return the tools available for groups
+   */
   public List<ToolSimple> getToolsAvailableForGroups() {
     return toolsAvailableForGroups;
   }
 
+  /**
+   * Gets the tools available for users.
+   *
+   * @return the tools available for users
+   */
   public List<ToolSimple> getToolsAvailableForUsers() {
     return toolsAvailableForUsers;
   }
 
+  /**
+   * Gets the tools regis enabled for groups.
+   *
+   * @return the tools regis enabled for groups
+   */
   public List<String> getToolsRegisEnabledForGroups() {
     return groupsRegisEnabledTools;
   }
 
+  /**
+   * Gets the tools regis enabled for users.
+   *
+   * @return the tools regis enabled for users
+   */
   public List<String> getToolsRegisEnabledForUsers() {
     return usersRegisEnabledTools;
   }
 
+  /**
+   * Register.
+   *
+   * @param tool the tool
+   */
   public void register(final ServerTool tool) {
     final String name = tool.getName();
     final String rootName = tool.getRootName();

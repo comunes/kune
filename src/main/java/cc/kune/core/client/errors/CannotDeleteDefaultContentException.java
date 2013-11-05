@@ -22,12 +22,16 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ContainerNotEmptyException throwed when people try to remove
- * folders that not are empty
+ * folders that not are empty.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CannotDeleteDefaultContentException extends DefaultException {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -8266435530937045998L;
 
 }

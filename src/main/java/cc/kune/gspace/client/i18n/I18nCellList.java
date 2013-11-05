@@ -43,31 +43,54 @@ import com.google.gwt.view.client.SelectionChangeEvent;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nCellList.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nCellList extends Composite {
 
   /**
    * The UiBinder interface used by this example.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface Binder extends UiBinder<Widget, I18nCellList> {
   }
 
   /**
    * The Cell used to render a {@link I18nTranslationDTO}.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   static class TranslationCell extends AbstractCell<I18nTranslationDTO> {
+    
+    /** The dirty style. */
     private static String DIRTY_STYLE = "font-style: italic;";
+    
+    /** The odd style. */
     private static String ODD_STYLE = "";
 
     // private static String ODD_STYLE = "background-color: #F3F7FB;";
 
+    /**
+     * Instantiates a new translation cell.
+     */
     public TranslationCell() {
     }
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.cell.client.AbstractCell#dependsOnSelection()
+     */
     @Override
     public boolean dependsOnSelection() {
       return super.dependsOnSelection();
     }
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.cell.client.AbstractCell#onBrowserEvent(com.google.gwt.cell.client.Cell.Context, com.google.gwt.dom.client.Element, java.lang.Object, com.google.gwt.dom.client.NativeEvent, com.google.gwt.cell.client.ValueUpdater)
+     */
     @Override
     public void onBrowserEvent(final com.google.gwt.cell.client.Cell.Context context,
         final Element parent, final I18nTranslationDTO value, final NativeEvent event,
@@ -75,6 +98,9 @@ public class I18nCellList extends Composite {
       super.onBrowserEvent(context, parent, value, event, valueUpdater);
     }
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.cell.client.AbstractCell#onEnterKeyDown(com.google.gwt.cell.client.Cell.Context, com.google.gwt.dom.client.Element, java.lang.Object, com.google.gwt.dom.client.NativeEvent, com.google.gwt.cell.client.ValueUpdater)
+     */
     @Override
     protected void onEnterKeyDown(final com.google.gwt.cell.client.Cell.Context context,
         final Element parent, final I18nTranslationDTO value, final NativeEvent event,
@@ -82,6 +108,9 @@ public class I18nCellList extends Composite {
 
     }
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.cell.client.AbstractCell#render(com.google.gwt.cell.client.Cell.Context, java.lang.Object, com.google.gwt.safehtml.shared.SafeHtmlBuilder)
+     */
     @Override
     public void render(final Context context, final I18nTranslationDTO value, final SafeHtmlBuilder sb) {
       // Value can be null, so do a null check..
@@ -105,6 +134,7 @@ public class I18nCellList extends Composite {
    */
   private final CellList<I18nTranslationDTO> cellList;
 
+  /** The data. */
   private final I18nTranslationDataProvider data;
 
   /**
@@ -119,12 +149,17 @@ public class I18nCellList extends Composite {
   @UiField
   RangeLabelPager rangeLabelPager;
 
-  /**
-   * The form used to update translations
-   */
+  /** The form used to update translations. */
   @UiField
   I18nTranslatorForm translatorForm;
 
+  /**
+   * Instantiates a new i18n cell list.
+   *
+   * @param data the data
+   * @param i18n the i18n
+   * @param saver the saver
+   */
   @Inject
   public I18nCellList(final I18nTranslationDataProvider data, final I18nUITranslationService i18n,
       final I18nTranslatorSaver saver) {
@@ -188,6 +223,13 @@ public class I18nCellList extends Composite {
     rangeLabelPager.setDisplay(cellList);
   }
 
+  /**
+   * Sets the language.
+   *
+   * @param fromLanguage the from language
+   * @param toLanguage the to language
+   * @param toTranslate the to translate
+   */
   public void setLanguage(final I18nLanguageSimpleDTO fromLanguage,
       final I18nLanguageSimpleDTO toLanguage, final boolean toTranslate) {
     data.setLanguage(fromLanguage, toLanguage, toTranslate);

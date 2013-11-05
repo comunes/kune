@@ -37,15 +37,34 @@ import cc.kune.domain.finders.LicenseFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LicenseFinderTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LicenseFinderTest extends PersistenceTest {
+  
+  /** The finder. */
   @Inject
   LicenseFinder finder;
+  
+  /** The license1. */
   private License license1;
+  
+  /** The license2. */
   private License license2;
+  
+  /** The license def. */
   private License licenseDef;
+  
+  /** The properties. */
   @Inject
   KuneBasicProperties properties;
 
+  /**
+   * Adds the data.
+   */
   @Before
   public void addData() {
     openTransaction();
@@ -60,6 +79,9 @@ public class LicenseFinderTest extends PersistenceTest {
     persist(license2);
   }
 
+  /**
+   * Close.
+   */
   @After
   public void close() {
     if (getTransaction().isActive()) {
@@ -67,12 +89,18 @@ public class LicenseFinderTest extends PersistenceTest {
     }
   }
 
+  /**
+   * Find all.
+   */
   @Test
   public void findAll() {
     final List<License> all = finder.getAll();
     assertEquals(3, all.size());
   }
 
+  /**
+   * Find by id.
+   */
   @Test
   public void findById() {
     final License lic = finder.findByShortName(license1.getShortName());
@@ -81,12 +109,18 @@ public class LicenseFinderTest extends PersistenceTest {
     assertEquals(license1.getLongName(), lic.getLongName());
   }
 
+  /**
+   * Find cc.
+   */
   @Test
   public void findCC() {
     final List<License> cc = finder.getCC();
     assertEquals(2, cc.size());
   }
 
+  /**
+   * Find default license.
+   */
   @Test
   public void findDefaultLicense() {
     final String licenseDefId = properties.getDefaultLicense();
@@ -96,6 +130,9 @@ public class LicenseFinderTest extends PersistenceTest {
     assertEquals(licenseDef.getLongName(), lic.getLongName());
   }
 
+  /**
+   * Find not cc.
+   */
   @Test
   public void findNotCC() {
     final List<License> notCc = finder.getNotCC();

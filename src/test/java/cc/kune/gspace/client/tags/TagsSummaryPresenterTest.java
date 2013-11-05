@@ -37,11 +37,23 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryProxy;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TagsSummaryPresenterTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TagsSummaryPresenterTest {
 
+  /** The tags summary presenter. */
   private TagsSummaryPresenter tagsSummaryPresenter;
+  
+  /** The view. */
   private TagsSummaryView view;
 
+  /**
+   * Before.
+   */
   @SuppressWarnings("unchecked")
   @Before
   public void before() {
@@ -55,6 +67,9 @@ public class TagsSummaryPresenterTest {
     tagsSummaryPresenter = new TagsSummaryPresenter(eventBus, view, proxy, session, stateManager);
   }
 
+  /**
+   * No tags view not visible.
+   */
   @Test
   public void noTagsViewNotVisible() {
     final StateContainerDTO state = new StateContainerDTO();
@@ -62,6 +77,9 @@ public class TagsSummaryPresenterTest {
     Mockito.verify(view).setVisible(false);
   }
 
+  /**
+   * With tags view false.
+   */
   @Test
   public void withTagsViewFalse() {
     final StateContainerDTO state = new StateContainerDTO();
@@ -71,6 +89,9 @@ public class TagsSummaryPresenterTest {
     Mockito.verify(view).setVisible(false);
   }
 
+  /**
+   * With tags view visible.
+   */
   @Test
   public void withTagsViewVisible() {
     final StateContainerDTO state = new StateContainerDTO();

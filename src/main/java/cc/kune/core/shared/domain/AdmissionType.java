@@ -24,6 +24,19 @@ package cc.kune.core.shared.domain;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum AdmissionType.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum AdmissionType implements IsSerializable {
-  Moderated, Open, Closed
+  
+  /** The Moderated. */
+  Moderated, 
+ /** The Open. */
+ Open, 
+ /** The Closed. */
+ Closed
 }

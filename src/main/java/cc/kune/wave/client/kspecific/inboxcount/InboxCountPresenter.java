@@ -40,28 +40,70 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InboxCountPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class InboxCountPresenter {
 
+  /**
+   * The Interface InboxCountView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface InboxCountView {
 
+    /**
+     * Blink.
+     */
     void blink();
 
+    /**
+     * Sets the total.
+     *
+     * @param total the new total
+     */
     void setTotal(int total);
 
+    /**
+     * Show count.
+     *
+     * @param show the show
+     */
     void showCount(boolean show);
 
   }
 
+  /** The current total. */
   private int currentTotal;
+  
+  /** The diggests. */
   private final Map<Integer, Integer> diggests;
+  
+  /** The event bus. */
   private final EventBus eventBus;
   // protected SimpleSearch search;
+  /** The search listener. */
   private final Listener searchListener;
+  
+  /** The session. */
   private final Session session;
   // private final Session session;
+  /** The update timer. */
   private final Timer updateTimer;
+  
+  /** The view. */
   private final InboxCountView view;
 
+  /**
+   * Instantiates a new inbox count presenter.
+   *
+   * @param view the view
+   * @param session the session
+   * @param eventBus the event bus
+   */
   @Inject
   public InboxCountPresenter(final InboxCountView view, final Session session, final EventBus eventBus) {
     this.view = view;
@@ -142,15 +184,28 @@ public class InboxCountPresenter {
 
   }
 
+  /**
+   * Gets the search listener.
+   *
+   * @return the search listener
+   */
   public Listener getSearchListener() {
     return searchListener;
   }
 
+  /**
+   * Send notice to user.
+   */
   private void sendNoticeToUser() {
     view.blink();
     SndClickEvent.fire(eventBus);
   }
 
+  /**
+   * Sets the total.
+   *
+   * @param total the new total
+   */
   private void setTotal(final int total) {
     view.setTotal(total);
     final boolean show = session.isLogged() && total != Search.UNKNOWN_SIZE && total > 0;
@@ -163,6 +218,9 @@ public class InboxCountPresenter {
     currentTotal = total;
   }
 
+  /**
+   * Update.
+   */
   private void update() {
     int total = 0;
     for (final Integer unread : diggests.values()) {

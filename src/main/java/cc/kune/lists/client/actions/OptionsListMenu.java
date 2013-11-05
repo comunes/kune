@@ -28,9 +28,20 @@ import cc.kune.core.client.resources.CoreResources;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OptionsListMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class OptionsListMenu extends MenuDescriptor {
 
+  /**
+   * Instantiates a new options list menu.
+   *
+   * @param res the res
+   */
   @Inject
   public OptionsListMenu(final CoreResources res) {
     super();

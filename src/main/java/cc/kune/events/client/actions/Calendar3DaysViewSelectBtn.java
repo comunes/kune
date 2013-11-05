@@ -27,8 +27,20 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Calendar3DaysViewSelectBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class Calendar3DaysViewSelectBtn extends AbstractCalendarViewSelectBtn {
 
+  /**
+   * Instantiates a new calendar3 days view select btn.
+   *
+   * @param action the action
+   * @param i18n the i18n
+   */
   @Inject
   public Calendar3DaysViewSelectBtn(final CalendarViewSelectAction action,
       final I18nTranslationService i18n) {

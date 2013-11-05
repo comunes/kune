@@ -34,9 +34,19 @@ import cc.kune.core.shared.CoreConstants;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating UserField objects.
+ */
 @Singleton
 public class UserFieldFactory {
 
+  /**
+   * Creates a new UserField object.
+   *
+   * @param fieldId the field id
+   * @return the text field< string>
+   */
   public static TextField<String> createUserEmail(final String fieldId) {
     // http://www.sencha.com/forum/showthread.php?49702-GXT-Form-Validation
     final TextField<String> emailRegField = new TextField<String>();
@@ -51,6 +61,12 @@ public class UserFieldFactory {
     return emailRegField;
   }
 
+  /**
+   * Creates a new UserField object.
+   *
+   * @param fieldId the field id
+   * @return the text field< string>
+   */
   public static TextField<String> createUserLongName(final String fieldId) {
     final TextField<String> longNameRegField = new TextField<String>();
     longNameRegField.setFieldLabel(I18n.t("Name"));
@@ -69,6 +85,13 @@ public class UserFieldFactory {
     return longNameRegField;
   }
 
+  /**
+   * Creates a new UserField object.
+   *
+   * @param fieldId the field id
+   * @param fieldText the field text
+   * @return the text field< string>
+   */
   public static TextField<String> createUserPasswd(final String fieldId, final String fieldText) {
     final TextField<String> passwdRegField = new TextField<String>();
     passwdRegField.setFieldLabel(fieldText);
@@ -85,6 +108,12 @@ public class UserFieldFactory {
     return passwdRegField;
   }
 
+  /**
+   * Creates a new UserField object.
+   *
+   * @param fieldId the field id
+   * @return the text field< string>
+   */
   public static TextField<String> createUserShortName(final String fieldId) {
     final String minMaxText = I18n.t(CoreMessages.FIELD_MUST_BE_BETWEEN_3_AND_30);
     final TextField<String> field = new TextField<String>();
@@ -107,10 +136,22 @@ public class UserFieldFactory {
     return field;
   }
 
+  /**
+   * Gets the register link.
+   *
+   * @return the register link
+   */
   public static String getRegisterLink() {
     return getRegisterLink(I18n.t("register"), null);
   }
 
+  /**
+   * Gets the register link.
+   *
+   * @param withText the with text
+   * @param redirect the redirect
+   * @return the register link
+   */
   public static String getRegisterLink(final String withText, final String redirect) {
     final String href = "#"
         + HistoryUtils.PREFIX
@@ -119,10 +160,21 @@ public class UserFieldFactory {
     return TextUtils.generateHtmlLink(href, withText, false);
   }
 
+  /**
+   * Gets the sign in link.
+   *
+   * @return the sign in link
+   */
   public static String getSignInLink() {
     return getSignInLink(null);
   }
 
+  /**
+   * Gets the sign in link.
+   *
+   * @param redirect the redirect
+   * @return the sign in link
+   */
   public static String getSignInLink(final String redirect) {
     final String href = "#"
         + HistoryUtils.PREFIX

@@ -23,14 +23,20 @@ package cc.kune.core.server.searcheable;
 
 import cc.kune.core.server.mbean.MBeanConstants;
 
+// TODO: Auto-generated Javadoc
 /**
- * MBean interface for JMX management of the {@link SitemapGenerator}
- * 
+ * MBean interface for JMX management of the {@link SitemapGenerator}.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SiteMapGeneratorMBean {
 
+  /** The Constant MBEAN_OBJECT_NAME. */
   public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SiteMapGenerator";
 
+  /**
+   * Generate.
+   */
   void generate();
 
 }

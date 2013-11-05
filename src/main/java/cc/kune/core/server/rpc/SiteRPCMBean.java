@@ -23,12 +23,15 @@ package cc.kune.core.server.rpc;
 
 import cc.kune.core.server.mbean.MBeanConstants;
 
+// TODO: Auto-generated Javadoc
 /**
- * MBean interface for JMX management of the {@link SiteRPC}
- * 
+ * MBean interface for JMX management of the {@link SiteRPC}.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SiteRPCMBean {
 
+  /** The Constant MBEAN_OBJECT_NAME. */
   public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SiteRPC";
 
   /**
@@ -38,6 +41,11 @@ public interface SiteRPCMBean {
    */
   boolean getStoreUntranslatedString();
 
+  /**
+   * Sets the store untranslated string.
+   *
+   * @param storeUntranslatedString the new store untranslated string
+   */
   void setStoreUntranslatedString(boolean storeUntranslatedString);
 
 }

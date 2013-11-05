@@ -25,17 +25,20 @@ package cc.kune.core.server.properties;
 import cc.kune.core.server.mbean.MBeanConstants;
 
 /**
- * MBean interface for JMX management of server properties
+ * MBean interface for JMX management of server properties.
  * 
+ * @author pablojan <pablojan@gmail.com>
  */
 public interface KunePropertiesDefaultMBean {
 
+  /** The Constant MBEAN_OBJECT_NAME. */
   public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "KuneProperties";
 
   /**
-   * Return a property value for the provided key
+   * Return a property value for the provided key.
    * 
    * @param key
+   *          the key
    * @return To string value
    */
   String getProperty(String key);
@@ -46,10 +49,12 @@ public interface KunePropertiesDefaultMBean {
   void reload();
 
   /**
-   * Set a property value for the provided key
+   * Set a property value for the provided key.
    * 
    * @param key
+   *          the key
    * @param value
+   *          the value
    */
   void setProperty(String key, String value);
 

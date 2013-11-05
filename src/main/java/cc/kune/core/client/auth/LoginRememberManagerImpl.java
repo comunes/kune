@@ -24,20 +24,33 @@ package cc.kune.core.client.auth;
 
 import com.google.gwt.user.client.DOM;
 
+// TODO: Auto-generated Javadoc
 /**
  * Remember user/pass implementation <a href=
  * "http://stackoverflow.com/questions/1245174/is-it-possible-to-implement-cross-browser-username-password-autocomplete-in-gxt"
  * >based in this</a> and <a href=
  * "http://www.sencha.com/forum/showthread.php?72027-Auto-complete-login-form"
  * >this</a>.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LoginRememberManagerImpl implements LoginRememberManager {
 
   /** The login forms are in ws.html **/
   private static final String PASSWORD = "password";
+  
+  /** The Constant USERNAME. */
   private static final String USERNAME = "username";
+  
+  /** The Constant VALUE. */
   private static final String VALUE = "value";
 
+  /**
+   * Gets the element value.
+   *
+   * @param domId the dom id
+   * @return the element value
+   */
   public static native String getElementValue(String domId) /*-{
                                                             return $doc.getElementById(domId).value;
                                                             }-*/;
@@ -55,21 +68,33 @@ public class LoginRememberManagerImpl implements LoginRememberManager {
 
   // $doc.getElementById("loginsubmit").click();
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.LoginRememberManager#getNickOrEmail()
+   */
   @Override
   public String getNickOrEmail() {
     return getElementValue(USERNAME);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.LoginRememberManager#getPassword()
+   */
   @Override
   public String getPassword() {
     return getElementValue(PASSWORD);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.LoginRememberManager#setNickOrEmail(java.lang.String)
+   */
   @Override
   public void setNickOrEmail(final String username) {
     DOM.getElementById(USERNAME).setAttribute(VALUE, username);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.LoginRememberManager#setPassword(java.lang.String)
+   */
   @Override
   public void setPassword(final String password) {
     DOM.getElementById(PASSWORD).setAttribute(VALUE, password);

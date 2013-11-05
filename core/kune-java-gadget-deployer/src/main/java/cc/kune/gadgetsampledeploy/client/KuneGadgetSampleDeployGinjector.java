@@ -27,7 +27,19 @@ import cc.kune.gadgetsample.client.KuneGadgetSampleMainPanel;
 
 import com.google.gwt.inject.client.GinModules;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface KuneGadgetSampleDeployGinjector.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @GinModules(KuneGadgetSampleDeployModule.class)
 public interface KuneGadgetSampleDeployGinjector extends KuneGadgetGinInjector {
+
+  /**
+   * Gets the main panel.
+   * 
+   * @return the main panel
+   */
   KuneGadgetSampleMainPanel getMainPanel();
 }

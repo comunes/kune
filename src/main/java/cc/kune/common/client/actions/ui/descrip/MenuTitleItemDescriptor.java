@@ -25,6 +25,12 @@ package cc.kune.common.client.actions.ui.descrip;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuTitleItemDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MenuTitleItemDescriptor extends MenuItemDescriptor {
 
   /**
@@ -56,6 +62,9 @@ public class MenuTitleItemDescriptor extends MenuItemDescriptor {
     putValue(Action.NAME, title);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor#getType()
+   */
   @Override
   public Class<?> getType() {
     return MenuTitleItemDescriptor.class;

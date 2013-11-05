@@ -34,17 +34,45 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RegisterPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
 
+  /** The Constant CANCEL_BUTTON_ID. */
   public static final String CANCEL_BUTTON_ID = "k-regp-cb";
+  
+  /** The Constant ERRMSG. */
   public static final String ERRMSG = "k-regp-errmsg";
+  
+  /** The Constant REGISTER_BUTTON_ID. */
   public static final String REGISTER_BUTTON_ID = "k-regp-rb";
+  
+  /** The Constant REGISTER_DIALOG. */
   public static final String REGISTER_DIALOG = "k-regp-dialog";
+  
+  /** The Constant REGISTER_FORM. */
   public static final String REGISTER_FORM = "k-regp-p";
+  
+  /** The Constant WELCOME_DIALOG. */
   public static final String WELCOME_DIALOG = "k-regp-wdiag";
+  
+  /** The Constant WELCOME_OK_BUTTON. */
   public static final String WELCOME_OK_BUTTON = "k-regp-okbt";
+  
+  /** The register form. */
   private final RegisterForm registerForm;
 
+  /**
+   * Instantiates a new register panel.
+   *
+   * @param i18n the i18n
+   * @param mask the mask
+   * @param images the images
+   */
   @Inject
   public RegisterPanel(final I18nTranslationService i18n, final MaskWidgetView mask,
       final NotifyLevelImages images) {
@@ -59,36 +87,57 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     super.getInnerPanel().add(registerForm.getFormPanel());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#getEmail()
+   */
   @Override
   public String getEmail() {
     return registerForm.getEmail();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#getLongName()
+   */
   @Override
   public String getLongName() {
     return registerForm.getLongName();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#getRegisterPassword()
+   */
   @Override
   public String getRegisterPassword() {
     return registerForm.getRegisterPassword();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#getShortName()
+   */
   @Override
   public String getShortName() {
     return registerForm.getShortName();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#isRegisterFormValid()
+   */
   @Override
   public boolean isRegisterFormValid() {
     return registerForm.isValid();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#isValid()
+   */
   @Override
   public boolean isValid() {
     return registerForm.isValid();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInAbstractView#reset()
+   */
   @Override
   public void reset() {
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
@@ -99,27 +148,42 @@ public class RegisterPanel extends SignInAbstractPanel implements RegisterView {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#setEmailFailed(java.lang.String)
+   */
   @Override
   public void setEmailFailed(final String msg) {
     registerForm.setEmailFailed(msg);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#setLongNameFailed(java.lang.String)
+   */
   @Override
   public void setLongNameFailed(final String msg) {
     registerForm.setLongNameFailed(msg);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#setShortNameFailed(java.lang.String)
+   */
   @Override
   public void setShortNameFailed(final String msg) {
     registerForm.setShortNameFailed(msg);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInAbstractPanel#show()
+   */
   @Override
   public void show() {
     super.show();
     KuneUiUtils.focusOnField(registerForm.getLongNameField());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.RegisterPresenter.RegisterView#validate()
+   */
   @Override
   public void validate() {
     registerForm.validate();

@@ -39,14 +39,22 @@ import com.thezukunft.wave.connector.StateUpdateEvent;
 import com.thezukunft.wave.connector.StateUpdateEventHandler;
 import com.thezukunft.wave.connector.Wave;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class KuneGadgetSampleMainPanel is a simple panel with a button that
- * update its text when you click in the button
+ * update its text when you click in the button.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneGadgetSampleMainPanel extends Composite {
 
+  /** The Constant AVATAR_SIZE. */
   private static final String AVATAR_SIZE = "50px";
+
+  /** The Constant LOCK. */
   private static final String LOCK = "LOCK_KEY";
+
+  /** The messages. */
   private final KuneGadgetSampleMessages messages;
 
   /**
@@ -57,6 +65,8 @@ public class KuneGadgetSampleMainPanel extends Composite {
    *          the event bus
    * @param wave
    *          the wave
+   * @param gadgetMessages
+   *          the gadget messages
    */
   @Inject
   public KuneGadgetSampleMainPanel(final EventBus eventBus, final Wave wave,

@@ -44,30 +44,69 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PSpacePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PSpacePanel extends ViewImpl implements PSpaceView {
 
+  /**
+   * The Interface PSpacePanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface PSpacePanelUiBinder extends UiBinder<Widget, PSpacePanel> {
   }
+  
+  /** The ui binder. */
   private static PSpacePanelUiBinder uiBinder = GWT.create(PSpacePanelUiBinder.class);
 
+  /** The action panel. */
   private final ActionFlowPanel actionPanel;
+  
+  /** The action panel container. */
   @UiField
   SimplePanel actionPanelContainer;
+  
+  /** The description. */
   @UiField
   InlineLabel description;
+  
+  /** The frame. */
   @UiField
   // Frame frame;
   SimplePanel frame;
+  
+  /** The icon. */
   @UiField
   Image icon;
+  
+  /** The main panel. */
   @UiField
   LayoutPanel mainPanel;
+  
+  /** The message panel. */
   @UiField
   FlowPanel messagePanel;
+  
+  /** The title. */
   @UiField
   InlineLabel title;
+  
+  /** The widget. */
   private final Widget widget;
 
+  /**
+   * Instantiates a new p space panel.
+   *
+   * @param guiProvider the gui provider
+   * @param res the res
+   * @param wsArmor the ws armor
+   * @param inDevelopment the in development
+   * @param i18n the i18n
+   */
   @Inject
   public PSpacePanel(final GuiProvider guiProvider, final CoreResources res, final GSpaceArmor wsArmor,
       final PSpaceInDevelopment inDevelopment, final I18nTranslationService i18n) {
@@ -84,26 +123,41 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
     frame.add(inDevelopment);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return widget;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.pspace.client.PSpacePresenter.PSpaceView#getActionPanel()
+   */
   @Override
   public IsActionExtensible getActionPanel() {
     return actionPanel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.pspace.client.PSpacePresenter.PSpaceView#getDescription()
+   */
   @Override
   public HasText getDescription() {
     return description;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.pspace.client.PSpacePresenter.PSpaceView#getTitle()
+   */
   @Override
   public HasText getTitle() {
     return title;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.pspace.client.PSpacePresenter.PSpaceView#setContentGotoPublicUrl(java.lang.String)
+   */
   @Override
   public void setContentGotoPublicUrl(final String publicUrl) {
     // frame.setUrl(publicUrl);

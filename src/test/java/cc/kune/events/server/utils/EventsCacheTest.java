@@ -35,11 +35,26 @@ import org.mockito.Mockito;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Container;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventsCacheTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EventsCacheTest {
+  
+  /** The cache. */
   private EventsCache cache;
+  
+  /** The container. */
   private Container container;
+  
+  /** The list. */
   private ArrayList<Map<String, String>> list;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     cache = new EventsCache();
@@ -48,6 +63,9 @@ public class EventsCacheTest {
     list = new ArrayList<Map<String, String>>();
   }
 
+  /**
+   * Test basic add.
+   */
   @Test
   public void testBasicAdd() {
     assertNull(cache.get(container));

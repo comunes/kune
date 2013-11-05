@@ -37,16 +37,21 @@ import cc.kune.core.client.ui.dialogs.PromptTopDialog.OnEnter;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class WindowKuneWrapper.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WindowKuneWrapper implements WindowWrapper {
 
   /** The Constant WINDOW_PROMPT_ID. */
   public static final String WINDOW_PROMPT_ID = "k-window-prompt-id";
 
+  /** The callback. */
   private WindowPromptCallback callback;
 
+  /** The diag. */
   private PromptTopDialog diag;
 
   /*
@@ -84,9 +89,7 @@ public class WindowKuneWrapper implements WindowWrapper {
 
   /**
    * Do action.
-   * 
-   * @param callback
-   *          the callback
+   *
    */
   protected void doPromptAction() {
     callback.onReturn(diag.getTextFieldValue());

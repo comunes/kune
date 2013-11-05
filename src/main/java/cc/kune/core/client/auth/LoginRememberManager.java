@@ -22,16 +22,45 @@
  */
 package cc.kune.core.client.auth;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface LoginRememberManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface LoginRememberManager {
 
+  /**
+   * Click form login.
+   */
   void clickFormLogin();
 
+  /**
+   * Gets the nick or email.
+   *
+   * @return the nick or email
+   */
   String getNickOrEmail();
 
+  /**
+   * Gets the password.
+   *
+   * @return the password
+   */
   String getPassword();
 
+  /**
+   * Sets the nick or email.
+   *
+   * @param username the new nick or email
+   */
   void setNickOrEmail(String username);
 
+  /**
+   * Sets the password.
+   *
+   * @param password the new password
+   */
   void setPassword(String password);
 
 }

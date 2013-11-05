@@ -29,15 +29,28 @@ import cc.kune.common.client.errors.UIException;
 
 import com.google.gwt.safehtml.shared.UriUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TextUtils {
 
   // Original regexp from http://www.regular-expressions.info/email.html
+  /** The Constant EMAIL_REGEXP. */
   public static final String EMAIL_REGEXP = "[-!#$%&\'*+/=?_`{|}~a-z0-9^]+(\\.[-!#$%&\'*+/=?_`{|}~a-z0-9^]+)*@(localhost|([a-z0-9]([-a-z0-9]*[a-z0-9])?\\.)+[a-z0-9]([-a-z0-9]*[a-z0-9]))?";
+  
+  /** The Constant EMAIL_REGEXP_LIST. */
   public static final String EMAIL_REGEXP_LIST = "(" + EMAIL_REGEXP + "|,| |\\s)+";
+  
+  /** The Constant IN_DEVELOPMENT. */
   public static final String IN_DEVELOPMENT = "In development";
 
+  /** The Constant IN_DEVELOPMENT_P. */
   public static final String IN_DEVELOPMENT_P = " (in development)";
 
+  /** The Constant NUM_REGEXP. */
   public static final String NUM_REGEXP = "^[0-9]+$";
 
   /**
@@ -53,11 +66,13 @@ public class TextUtils {
       + "Nn" // n tilde (spanish)
   ;
 
+  /** The Constant SHORTNAME_REGEXP. */
   public static final String SHORTNAME_REGEXP = "^[a-z0-9]+$";
+  
+  /** The Constant SHORTNAME_UPPER_REGEXP. */
   public static final String SHORTNAME_UPPER_REGEXP = "^[a-zA-Z0-9]+$";
-  /**
-   * Actual accented values, corresponds one to one with ASCII
-   */
+  
+  /** Actual accented values, corresponds one to one with ASCII. */
   private static final String UNICODE = "\u00C0\u00E0\u00C8\u00E8\u00CC\u00EC\u00D2\u00F2\u00D9\u00F9"
       + "\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DD\u00FD"
       + "\u00C2\u00E2\u00CA\u00EA\u00CE\u00EE\u00D4\u00F4\u00DB\u00FB\u0176\u0177"
@@ -65,13 +80,21 @@ public class TextUtils {
       + "\u00C4\u00E4\u00CB\u00EB\u00CF\u00EF\u00D6\u00F6\u00DC\u00FC\u0178\u00FF" + "\u00C5\u00E5"
       + "\u00C7\u00E7" + "\u00D1\u00F1";
 
+  /** The Constant UNIX_NAME. */
   public static final String UNIX_NAME = "^[a-z0-9_\\-]+$";
 
   // Original regexp from http://snippets.dzone.com/posts/show/452
+  /** The Constant URL_REGEXP. */
   public static final String URL_REGEXP = "((ftp|http|https|mailto):\\/\\/(\\w+:{0,1}\\w*@)?(\\S+)(:[0-9]+)?(\\/|\\/([\\w#!:.?+=&%@!\\-\\/]))?)";
 
   /**
-   * see WordUtils#abbreviate
+   * see WordUtils#abbreviate.
+   *
+   * @param str the str
+   * @param lower the lower
+   * @param upper the upper
+   * @param appendToEnd the append to end
+   * @return the string
    */
   public static String abbreviate(final String str, int lower, int upper, final String appendToEnd) {
     // initial parameter checks
@@ -115,18 +138,30 @@ public class TextUtils {
     return result.toString();
   }
 
+  /**
+   * Br.
+   *
+   * @return the string
+   */
   public static String br() {
     return "<br/>";
   }
 
+  /**
+   * Brbr.
+   *
+   * @return the string
+   */
   public static String brbr() {
     return "<br/><br/>";
   }
 
   /**
-   * see WordUtils#capitalize(String, char[])
-   * 
-   * @return
+   * see WordUtils#capitalize(String, char[]).
+   *
+   * @param str the str
+   * @param delimiters the delimiters
+   * @return the string
    */
   public static String capitalize(final String str, final char[] delimiters) {
     final int delimLen = (delimiters == null ? -1 : delimiters.length);
@@ -154,7 +189,11 @@ public class TextUtils {
   }
 
   /**
-   * see WordUtils#capitalizeFully(String)
+   * see WordUtils#capitalizeFully(String).
+   *
+   * @param str the str
+   * @param delimiters the delimiters
+   * @return the string
    */
   public static String capitalizeFully(String str, final char[] delimiters) {
     final int delimLen = (delimiters == null ? -1 : delimiters.length);
@@ -166,10 +205,9 @@ public class TextUtils {
   }
 
   /**
-   * Removes accents from a string and replace it with ASCII equivalent (á => a)
-   * 
-   * @param s
-   *          The string to englishify
+   * Removes accents from a string and replace it with ASCII equivalent (á => a).
+   *
+   * @param s The string to englishify
    * @return The string without the accents.
    */
   public static String deAccent(final String s) {
@@ -187,15 +225,34 @@ public class TextUtils {
     return b.toString();
   }
 
+  /**
+   * Default string.
+   *
+   * @param str the str
+   * @return the string
+   */
   private static String defaultString(final String str) {
     return str == null ? "" : str;
   }
 
+  /**
+   * Ellipsis.
+   *
+   * @param text the text
+   * @param length the length
+   * @return the string
+   */
   public static String ellipsis(final String text, final int length) {
     return text == null ? "" : length <= 0 ? text : text.length() > length ? text.substring(0,
         length - 3) + "..." : text;
   }
 
+  /**
+   * Empty.
+   *
+   * @param string the string
+   * @return true, if successful
+   */
   public static boolean empty(final String string) {
     return !notEmpty(string);
   }
@@ -203,8 +260,10 @@ public class TextUtils {
   /**
    * This method escape only some dangerous html chars
    * 
-   * Try to use SimpleHtmlSanitizer better
-   * 
+   * Try to use SimpleHtmlSanitizer better.
+   *
+   * @param source the source
+   * @return the string
    */
   public static String escapeHtmlLight(final String source) {
     String result = source;
@@ -221,16 +280,23 @@ public class TextUtils {
   }
 
   /**
-   * Generates a href link (with target="_blank")
-   * 
+   * Generates a href link (with target="_blank").
+   *
+   * @param href the href
+   * @param text the text
+   * @return the string
    */
   public static String generateHtmlLink(final String href, final String text) {
     return generateHtmlLink(href, text, true);
   }
 
   /**
-   * Generates a href link
-   * 
+   * Generates a href link.
+   *
+   * @param href the href
+   * @param text the text
+   * @param targetBlank the target blank
+   * @return the string
    */
   public static String generateHtmlLink(final String href, final String text, final boolean targetBlank) {
     if (!UriUtils.isSafeUri(href)) {
@@ -240,6 +306,13 @@ public class TextUtils {
         + ">" + text + "</a>";
   }
 
+  /**
+   * Checks if is delimiter.
+   *
+   * @param ch the ch
+   * @param delimiters the delimiters
+   * @return true, if is delimiter
+   */
   private static boolean isDelimiter(final char ch, final char[] delimiters) {
     if (delimiters == null) {
       throw new NotImplementedException();
@@ -253,18 +326,42 @@ public class TextUtils {
     return false;
   }
 
+  /**
+   * Not empty.
+   *
+   * @param string the string
+   * @return true, if successful
+   */
   public static boolean notEmpty(final String string) {
     return string != null && string.length() > 0;
   }
 
+  /**
+   * Removes the http.
+   *
+   * @param text the text
+   * @return the string
+   */
   public static String removeHttp(final String text) {
     return removeLastSlash(text.replaceFirst("(http|https):\\/\\/", ""));
   }
 
+  /**
+   * Removes the last slash.
+   *
+   * @param text the text
+   * @return the string
+   */
   public static String removeLastSlash(final String text) {
     return text.replaceFirst("/$", "");
   }
 
+  /**
+   * Split tags.
+   *
+   * @param tagsString the tags string
+   * @return the array list
+   */
   public static ArrayList<String> splitTags(final String tagsString) {
     final ArrayList<String> tagsList = new ArrayList<String>();
     String tagsCopy = tagsString;
@@ -289,6 +386,12 @@ public class TextUtils {
    * This method unescape only some dangerous html chars for use in GWT Html
    * widget for instance
    */
+  /**
+   * Unescape.
+   *
+   * @param source the source
+   * @return the string
+   */
   public static String unescape(final String source) {
     if (source == null) {
       return null;
@@ -303,6 +406,9 @@ public class TextUtils {
     return result;
   }
 
+  /**
+   * Instantiates a new text utils.
+   */
   public TextUtils() {
   }
 }

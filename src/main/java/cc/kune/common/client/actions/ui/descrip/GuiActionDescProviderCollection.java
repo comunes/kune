@@ -26,10 +26,22 @@ import java.util.ArrayList;
 
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GuiActionDescProviderCollection.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GuiActionDescProviderCollection extends ArrayList<Provider<? extends GuiActionDescrip>> {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -7933642706229301169L;
 
+  /**
+   * Adds the.
+   *
+   * @param descriptors the descriptors
+   */
   public void add(final Provider<? extends GuiActionDescrip>... descriptors) {
     for (final Provider<? extends GuiActionDescrip> descriptor : descriptors) {
       super.add(descriptor);

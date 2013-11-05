@@ -42,13 +42,48 @@ import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatClientActions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatClientActions extends AbstractFoldableToolActions {
 
+  /** The all. */
   final String[] all = { TYPE_ROOT, TYPE_ROOM };
+  
+  /** The containers. */
   final String[] containers = { TYPE_ROOT, TYPE_ROOM };
+  
+  /** The containers no root. */
   final String[] containersNoRoot = { TYPE_ROOM };
+  
+  /** The contents. */
   final String[] contents = {};
 
+  /**
+   * Instantiates a new chat client actions.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param stateManager the state manager
+   * @param registry the registry
+   * @param res the res
+   * @param refresh the refresh
+   * @param newRoomBtn the new room btn
+   * @param openRoomMenuItem the open room menu item
+   * @param folderGoUp the folder go up
+   * @param openRoomArchiveMenuItem the open room archive menu item
+   * @param openRoomBtn the open room btn
+   * @param tutorialBtn the tutorial btn
+   * @param optionsMenuContent the options menu content
+   * @param shareMenuContent the share menu content
+   * @param shareInTwitter the share in twitter
+   * @param shareInGPlus the share in g plus
+   * @param shareInIdentica the share in identica
+   * @param shareInFacebook the share in facebook
+   */
   @Inject
   public ChatClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
@@ -81,6 +116,9 @@ public class ChatClientActions extends AbstractFoldableToolActions {
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
+   */
   @Override
   protected void createPostSessionInitActions() {
   }

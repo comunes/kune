@@ -25,32 +25,38 @@ package cc.kune.common.client.actions.ui;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface IsActionExtensible.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface IsActionExtensible {
 
   /**
-   * Adds a action description
-   * 
-   * @param action
-   *          the action
+   * Adds a action description.
+   *
+   * @param action the action
    */
   void add(GuiActionDescrip action);
 
   /**
-   * Adds some action descriptions
-   * 
-   * @param action
-   *          the action
+   * Adds some action descriptions.
+   *
+   * @param actions the actions
    */
   void add(GuiActionDescrip... actions);
 
   /**
-   * Adds some action descriptions
-   * 
-   * @param actions
-   *          the actions
+   * Adds some action descriptions.
+   *
+   * @param actions the actions
    */
   void addAll(GuiActionDescCollection actions);
 
+  /**
+   * Clear.
+   */
   void clear();
 
 }

@@ -24,32 +24,73 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nCountryDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nCountryDTO implements IsSerializable {
 
+  /** The code. */
   private String code;
+  
+  /** The english name. */
   private String englishName;
+  
+  /** The date format. */
   private String dateFormat;
 
+  /**
+   * Gets the code.
+   *
+   * @return the code
+   */
   public String getCode() {
     return code;
   }
 
+  /**
+   * Gets the date format.
+   *
+   * @return the date format
+   */
   public String getDateFormat() {
     return dateFormat;
   }
 
+  /**
+   * Gets the english name.
+   *
+   * @return the english name
+   */
   public String getEnglishName() {
     return englishName;
   }
 
+  /**
+   * Sets the code.
+   *
+   * @param code the new code
+   */
   public void setCode(final String code) {
     this.code = code;
   }
 
+  /**
+   * Sets the date format.
+   *
+   * @param dateFormat the new date format
+   */
   public void setDateFormat(final String dateFormat) {
     this.dateFormat = dateFormat;
   }
 
+  /**
+   * Sets the english name.
+   *
+   * @param englishName the new english name
+   */
   public void setEnglishName(final String englishName) {
     this.englishName = englishName;
   }

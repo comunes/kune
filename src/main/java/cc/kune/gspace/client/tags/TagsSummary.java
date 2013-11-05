@@ -24,8 +24,19 @@ package cc.kune.gspace.client.tags;
 
 import cc.kune.core.shared.domain.TagCloudResult;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface TagsSummary.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface TagsSummary {
 
+  /**
+   * Sets the group tags.
+   *
+   * @param tagCloud the new group tags
+   */
   void setGroupTags(TagCloudResult tagCloud);
 
 }

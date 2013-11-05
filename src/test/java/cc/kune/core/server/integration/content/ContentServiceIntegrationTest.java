@@ -30,13 +30,29 @@ import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentServiceIntegrationTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class ContentServiceIntegrationTest extends IntegrationTest {
+  
+  /** The content service. */
   @Inject
   protected ContentService contentService;
 
+  /** The user service. */
   @Inject
   protected UserService userService;
 
+  /**
+   * Gets the site default content.
+   *
+   * @return the site default content
+   * @throws Exception the exception
+   */
   protected StateContentDTO getSiteDefaultContent() throws Exception {
     final StateToken stateToken = new StateToken(getDefSiteShortName());
     final StateContentDTO content = (StateContentDTO) contentService.getContent(session.getHash(),

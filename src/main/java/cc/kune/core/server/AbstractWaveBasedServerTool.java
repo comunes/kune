@@ -36,9 +36,32 @@ import cc.kune.core.server.tool.ServerToolTarget;
 import cc.kune.core.server.tool.ServerToolWithWave;
 import cc.kune.domain.Container;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractWaveBasedServerTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractWaveBasedServerTool extends AbstractServerTool implements
     ServerToolWithWave {
 
+  /**
+   * Instantiates a new abstract wave based server tool.
+   *
+   * @param name the name
+   * @param rootName the root name
+   * @param typeRoot the type root
+   * @param validContents the valid contents
+   * @param validContentParents the valid content parents
+   * @param validContainers the valid containers
+   * @param validContainerParents the valid container parents
+   * @param contentManager the content manager
+   * @param containerManager the container manager
+   * @param creationService the creation service
+   * @param configurationManager the configuration manager
+   * @param i18n the i18n
+   * @param target the target
+   */
   public AbstractWaveBasedServerTool(final String name, final String rootName, final String typeRoot,
       final List<String> validContents, final List<String> validContentParents,
       final List<String> validContainers, final List<String> validContainerParents,

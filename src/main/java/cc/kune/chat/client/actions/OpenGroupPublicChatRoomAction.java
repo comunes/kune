@@ -45,14 +45,39 @@ import com.calclab.emite.xep.muc.client.Room;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OpenGroupPublicChatRoomAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
 
+  /** The chat client. */
   private final ChatClient chatClient;
+  
+  /** The hadler reg. */
   private HandlerRegistration hadlerReg;
+  
+  /** The i18n. */
   protected final I18nTranslationService i18n;
+  
+  /** The invite members. */
   private boolean inviteMembers;
+  
+  /** The session. */
   protected final Session session;
 
+  /**
+   * Instantiates a new open group public chat room action.
+   *
+   * @param session the session
+   * @param accessRightsClientManager the access rights client manager
+   * @param chatClient the chat client
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param res the res
+   */
   @Inject
   public OpenGroupPublicChatRoomAction(final Session session,
       final AccessRightsClientManager accessRightsClientManager, final ChatClient chatClient,
@@ -67,6 +92,9 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
     setInviteMembersImpl(false);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     final String currentGroupName = session.getCurrentGroupShortName();
@@ -75,10 +103,21 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
     chatClient.show();
   }
 
+  /**
+   * Adds the group.
+   *
+   * @param membersUris the members uris
+   * @param member the member
+   */
   private void addGroup(final List<XmppURI> membersUris, final GroupDTO member) {
     membersUris.add(chatClient.uriFrom(member.getShortName()));
   }
 
+  /**
+   * Invite members.
+   *
+   * @param room the room
+   */
   private void inviteMembers(final Room room) {
     if (inviteMembers) {
       hadlerReg = room.addChatStateChangedHandler(true,
@@ -110,10 +149,20 @@ public class OpenGroupPublicChatRoomAction extends RolActionAutoUpdated {
     }
   }
 
+  /**
+   * Sets the invite members.
+   *
+   * @param inviteMembers the new invite members
+   */
   public void setInviteMembers(final boolean inviteMembers) {
     setInviteMembersImpl(inviteMembers);
   }
 
+  /**
+   * Sets the invite members impl.
+   *
+   * @param inviteMembers the new invite members impl
+   */
   private void setInviteMembersImpl(final boolean inviteMembers) {
     this.inviteMembers = inviteMembers;
   }

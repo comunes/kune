@@ -28,19 +28,50 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContainerDTO.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContainerDTO implements IsSerializable {
+  
+  /** The absolute path. */
   private ContainerSimpleDTO[] absolutePath;
+  
+  /** The childs. */
   private List<ContainerSimpleDTO> childs;
+  
+  /** The contents. */
   private List<ContentSimpleDTO> contents;
+  
+  /** The id. */
   private Long id;
+  
+  /** The name. */
   private String name;
+  
+  /** The parent token. */
   private StateToken parentToken;
+  
+  /** The state token. */
   private StateToken stateToken;
+  
+  /** The type id. */
   private String typeId;
 
+  /**
+   * Instantiates a new container dto.
+   */
   public ContainerDTO() {
   }
 
+  /**
+   * Gets the absolute path.
+   *
+   * @return the absolute path
+   */
   public ContainerSimpleDTO[] getAbsolutePath() {
     return absolutePath;
   }
@@ -63,58 +94,128 @@ public class ContainerDTO implements IsSerializable {
     return contents;
   }
 
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
   public Long getId() {
     return id;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the parent token.
+   *
+   * @return the parent token
+   */
   public StateToken getParentToken() {
     return parentToken;
   }
 
+  /**
+   * Gets the state token.
+   *
+   * @return the state token
+   */
   public StateToken getStateToken() {
     return stateToken;
   }
 
+  /**
+   * Gets the type id.
+   *
+   * @return the type id
+   */
   public String getTypeId() {
     return typeId;
   }
 
+  /**
+   * Checks if is root.
+   *
+   * @return true, if is root
+   */
   public boolean isRoot() {
     return parentToken == null;
   }
 
+  /**
+   * Sets the absolute path.
+   *
+   * @param absolutePath the new absolute path
+   */
   public void setAbsolutePath(final ContainerSimpleDTO[] absolutePath) {
     this.absolutePath = absolutePath;
   }
 
+  /**
+   * Sets the childs.
+   *
+   * @param childs the new childs
+   */
   public void setChilds(final List<ContainerSimpleDTO> childs) {
     this.childs = childs;
   }
 
+  /**
+   * Sets the contents.
+   *
+   * @param contents the new contents
+   */
   public void setContents(final List<ContentSimpleDTO> contents) {
     this.contents = contents;
   }
 
+  /**
+   * Sets the id.
+   *
+   * @param id the new id
+   */
   public void setId(final Long id) {
     this.id = id;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(final String name) {
     this.name = name;
   }
 
+  /**
+   * Sets the parent token.
+   *
+   * @param parentToken the new parent token
+   */
   public void setParentToken(final StateToken parentToken) {
     this.parentToken = parentToken;
   }
 
+  /**
+   * Sets the state token.
+   *
+   * @param stateToken the new state token
+   */
   public void setStateToken(final StateToken stateToken) {
     this.stateToken = stateToken;
   }
 
+  /**
+   * Sets the type id.
+   *
+   * @param typeId the new type id
+   */
   public void setTypeId(final String typeId) {
     this.typeId = typeId;
   }

@@ -34,8 +34,19 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.thezukunft.wave.connector.ModeChangeEvent;
 import com.thezukunft.wave.connectormock.WaveMock;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneGadgetSampleTesterEntryPoint.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneGadgetSampleTesterEntryPoint implements EntryPoint {
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+   */
   @Override
   public void onModuleLoad() {
     final KuneGadgetSampleGinInjector gin = GWT.create(KuneGadgetSampleGinInjector.class);
@@ -46,7 +57,8 @@ public class KuneGadgetSampleTesterEntryPoint implements EntryPoint {
     // We initialize some participants
     waveMock.initRandomParticipants();
 
-    // We have to create the gadget using gin so it can use injection of its dependencies (evenBus, etc)
+    // We have to create the gadget using gin so it can use injection of its
+    // dependencies (evenBus, etc)
 
     final KuneGadgetSampleMainPanel gadget = gin.getMainPanel();
     final KuneGadgetSampleMainPanel gadget2 = gin.getMainPanel();

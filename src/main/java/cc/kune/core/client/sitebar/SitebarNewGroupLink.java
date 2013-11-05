@@ -40,11 +40,30 @@ import cc.kune.core.client.state.StateManager;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SitebarNewGroupLink.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SitebarNewGroupLink extends ButtonDescriptor {
+  
+  /**
+   * The Class SitebarNewGroupAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class SitebarNewGroupAction extends AbstractExtendedAction {
 
+    /** The state manager. */
     private final StateManager stateManager;
 
+    /**
+     * Instantiates a new sitebar new group action.
+     *
+     * @param stateManager the state manager
+     * @param i18n the i18n
+     */
     @Inject
     public SitebarNewGroupAction(final StateManager stateManager, final I18nTranslationService i18n) {
       super();
@@ -54,15 +73,31 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
           + "(NGO, collective, academic group...)"));
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       stateManager.gotoHistoryToken(SiteTokens.NEW_GROUP);
     }
   }
 
+  /** The Constant NEW_GROUP_BTN_ID. */
   public static final String NEW_GROUP_BTN_ID = "k-site-newgroup-btn";
+  
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new sitebar new group link.
+   *
+   * @param newGroupAction the new group action
+   * @param sitebarActions the sitebar actions
+   * @param i18n the i18n
+   * @param eventBus the event bus
+   * @param coreResources the core resources
+   * @param session the session
+   */
   @Inject
   public SitebarNewGroupLink(final SitebarNewGroupAction newGroupAction,
       final SitebarActions sitebarActions, final I18nTranslationService i18n, final EventBus eventBus,
@@ -84,6 +119,11 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
   }
 
+  /**
+   * Recalculate.
+   *
+   * @param notLogged the not logged
+   */
   public void recalculate(final boolean notLogged) {
     if (notLogged) {
       setVisible(true);

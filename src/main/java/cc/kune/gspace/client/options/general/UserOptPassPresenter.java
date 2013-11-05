@@ -36,14 +36,39 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserOptPassPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserOptPassPresenter implements UserOptPass {
 
+  /** The entity options. */
   private final UserOptions entityOptions;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The user service. */
   private final Provider<UserServiceAsync> userService;
+  
+  /** The view. */
   private UserOptPassView view;
 
+  /**
+   * Instantiates a new user opt pass presenter.
+   *
+   * @param session the session
+   * @param eventBus the event bus
+   * @param i18n the i18n
+   * @param entityOptions the entity options
+   * @param userService the user service
+   * @param view the view
+   */
   @Inject
   public UserOptPassPresenter(final Session session, final EventBus eventBus,
       final I18nTranslationService i18n, final UserOptions entityOptions,
@@ -55,6 +80,11 @@ public class UserOptPassPresenter implements UserOptPass {
     init(view);
   }
 
+  /**
+   * Inits the.
+   *
+   * @param view the view
+   */
   public void init(final UserOptPassView view) {
     this.view = view;
     entityOptions.addTab(view, view.getTabTitle());
@@ -67,6 +97,9 @@ public class UserOptPassPresenter implements UserOptPass {
     });
   }
 
+  /**
+   * Update in server.
+   */
   protected void updateInServer() {
     if (view.isValid()) {
       final String currentPasswd = view.getCurrentPasswd();

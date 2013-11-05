@@ -43,23 +43,60 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserOptionsPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserOptionsPresenter extends
     AbstractTabbedDialogPresenter<UserOptionsView, UserOptionsPresenter.UserOptionsProxy> implements
     UserOptions {
 
+  /**
+   * The Interface UserOptionsProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface UserOptionsProxy extends Proxy<UserOptionsPresenter> {
   }
 
+  /**
+   * The Interface UserOptionsView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface UserOptionsView extends EntityOptionsView {
   }
 
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The res. */
   private final IconicResources res;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The state manager. */
   private final StateManager stateManager;
+  
+  /** The user options. */
   private final SiteUserOptions userOptions;
 
+  /**
+   * Instantiates a new user options presenter.
+   *
+   * @param eventBus the event bus
+   * @param proxy the proxy
+   * @param session the session
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param res the res
+   * @param userOptions the user options
+   * @param view the view
+   */
   @Inject
   public UserOptionsPresenter(final EventBus eventBus, final UserOptionsProxy proxy,
       final Session session, final StateManager stateManager, final I18nTranslationService i18n,
@@ -78,11 +115,17 @@ public class UserOptionsPresenter extends
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView()
+   */
   @Override
   public UserOptionsView getView() {
     return (UserOptionsView) super.getView();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
+   */
   @Override
   protected void onBind() {
     final AbstractExtendedAction userPrefsAction = new AbstractExtendedAction() {
@@ -105,6 +148,9 @@ public class UserOptionsPresenter extends
     userOptions.addAction(prefsItem);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#show()
+   */
   @Override
   public void show() {
     if (!session.isInCurrentUserSpace()) {

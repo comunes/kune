@@ -29,16 +29,31 @@ import cc.kune.core.client.state.Session;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IsCurrentStateAGroupCondition.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class IsCurrentStateAGroupCondition implements GuiAddCondition {
 
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new checks if is current state a group condition.
+   *
+   * @param session the session
+   */
   @Inject
   public IsCurrentStateAGroupCondition(final Session session) {
     this.session = session;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {
     return session.isCurrentStateAGroup();

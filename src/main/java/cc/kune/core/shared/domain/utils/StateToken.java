@@ -24,6 +24,7 @@ package cc.kune.core.shared.domain.utils;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
 /**
  * <pre>
  * http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/DevGuideHistory
@@ -34,12 +35,27 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * <pre>
  * When an agent (such as a Web browser) requests a resource from a Web server, the agent sends the URI to the server, but does not send the fragment.
  * </pre>
- * 
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StateToken implements IsSerializable {
+  
+  /** The Constant EMPTYA. */
   private static final String[] EMPTYA = new String[0];
+  
+  /** The Constant SEPARATOR. */
   public static final String SEPARATOR = ".";
 
+  /**
+   * Encode.
+   *
+   * @param group the group
+   * @param tool the tool
+   * @param folder the folder
+   * @param document the document
+   * @return the string
+   */
   private static String encode(final String group, final String tool, final String folder,
       final String document) {
     String encoded = "";
@@ -58,29 +74,66 @@ public class StateToken implements IsSerializable {
     return encoded;
   }
 
+  /** The document. */
   private String document;
+  
+  /** The encoded. */
   private String encoded;
+  
+  /** The folder. */
   private String folder;
+  
+  /** The group. */
   private String group;
 
+  /** The tool. */
   private String tool;
 
+  /**
+   * Instantiates a new state token.
+   */
   public StateToken() {
     this(null, null, null, null);
   }
 
+  /**
+   * Instantiates a new state token.
+   *
+   * @param encoded the encoded
+   */
   public StateToken(final String encoded) {
     parse(encoded);
   }
 
+  /**
+   * Instantiates a new state token.
+   *
+   * @param group the group
+   * @param tool the tool
+   */
   public StateToken(final String group, final String tool) { // NO_UCD
     this(group, tool, null, null);
   }
 
+  /**
+   * Instantiates a new state token.
+   *
+   * @param group the group
+   * @param tool the tool
+   * @param folder the folder
+   */
   public StateToken(final String group, final String tool, final Long folder) {
     this(group, tool, folder == null ? null : folder.toString(), null);
   }
 
+  /**
+   * Instantiates a new state token.
+   *
+   * @param group the group
+   * @param tool the tool
+   * @param folder the folder
+   * @param document the document
+   */
   public StateToken(final String group, final String tool, final String folder, final String document) {
     this.group = group;
     this.tool = tool;
@@ -89,18 +142,35 @@ public class StateToken implements IsSerializable {
     resetEncoded();
   }
 
+  /**
+   * Clear document.
+   *
+   * @return the state token
+   */
   public StateToken clearDocument() {
     this.document = null;
     resetEncoded();
     return this;
   }
 
+  /**
+   * Clear folder.
+   *
+   * @return the state token
+   */
   public StateToken clearFolder() { // NO_UCD
     this.folder = null;
     resetEncoded();
     return this;
   }
 
+  /**
+   * Conditional assign.
+   *
+   * @param index the index
+   * @param splitted the splitted
+   * @return the string
+   */
   private String conditionalAssign(final int index, final String[] splitted) {
     if (splitted.length > index) {
       return splitted[index];
@@ -109,10 +179,18 @@ public class StateToken implements IsSerializable {
     }
   }
 
+  /**
+   * Copy.
+   *
+   * @return the state token
+   */
   public StateToken copy() {
     return new StateToken(this.getEncoded());
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
@@ -135,10 +213,20 @@ public class StateToken implements IsSerializable {
     return true;
   }
 
+  /**
+   * Gets the document.
+   *
+   * @return the document
+   */
   public String getDocument() {
     return document;
   }
 
+  /**
+   * Gets the encoded.
+   *
+   * @return the encoded
+   */
   public String getEncoded() {
     if (encoded == null) {
       encoded = StateToken.encode(getGroup(), getTool(), getFolder(), getDocument());
@@ -146,43 +234,92 @@ public class StateToken implements IsSerializable {
     return encoded;
   }
 
+  /**
+   * Gets the folder.
+   *
+   * @return the folder
+   */
   public String getFolder() {
     return folder;
   }
 
+  /**
+   * Gets the group.
+   *
+   * @return the group
+   */
   public String getGroup() {
     return group;
   }
 
+  /**
+   * Gets the tool.
+   *
+   * @return the tool
+   */
   public String getTool() {
     return tool;
   }
 
+  /**
+   * Checks for all.
+   *
+   * @return true, if successful
+   */
   public boolean hasAll() {
     return getGroup() != null && getTool() != null && getFolder() != null && getDocument() != null;
   }
 
+  /**
+   * Checks for group.
+   *
+   * @return true, if successful
+   */
   public boolean hasGroup() {
     return getGroup() != null;
   }
 
+  /**
+   * Checks for group and tool.
+   *
+   * @return true, if successful
+   */
   public boolean hasGroupAndTool() {
     return getGroup() != null && getTool() != null;
   }
 
+  /**
+   * Checks for group tool and folder.
+   *
+   * @return true, if successful
+   */
   public boolean hasGroupToolAndFolder() {
     return getGroup() != null && getTool() != null && getFolder() != null;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return getEncoded().hashCode();
   }
 
+  /**
+   * Checks for nothing.
+   *
+   * @return true, if successful
+   */
   public boolean hasNothing() {
     return getGroup() == null && getTool() == null && getFolder() == null && getDocument() == null;
   }
 
+  /**
+   * Checks for same container.
+   *
+   * @param currentStateToken the current state token
+   * @return true, if successful
+   */
   public boolean hasSameContainer(final StateToken currentStateToken) {
     boolean same = false;
     if (copy().clearDocument().getEncoded().equals(currentStateToken.copy().clearDocument().getEncoded())) {
@@ -191,10 +328,20 @@ public class StateToken implements IsSerializable {
     return same;
   }
 
+  /**
+   * Checks if is complete.
+   *
+   * @return true, if is complete
+   */
   public boolean isComplete() {
     return getDocument() != null;
   }
 
+  /**
+   * Parses the.
+   *
+   * @param encoded the encoded
+   */
   private void parse(final String encoded) {
     String[] splitted;
     if (encoded != null && encoded.length() > 0) {
@@ -209,50 +356,97 @@ public class StateToken implements IsSerializable {
     resetEncoded();
   }
 
+  /**
+   * Reset encoded.
+   */
   private void resetEncoded() {
     encoded = null;
   }
 
+  /**
+   * Sets the document.
+   *
+   * @param document the document
+   * @return the state token
+   */
   public StateToken setDocument(final String document) {
     this.document = document;
     resetEncoded();
     return this;
   }
 
+  /**
+   * Sets the document l.
+   *
+   * @param document the document
+   * @return the state token
+   */
   public StateToken setDocumentL(final Long document) {
     this.document = document == null ? null : document.toString();
     resetEncoded();
     return this;
   }
 
+  /**
+   * Sets the encoded.
+   *
+   * @param encoded the new encoded
+   */
   public void setEncoded(final String encoded) {
     parse(encoded);
   }
 
+  /**
+   * Sets the folder.
+   *
+   * @param folder the folder
+   * @return the state token
+   */
   public StateToken setFolder(final String folder) { // NO_UCD
     this.folder = folder;
     resetEncoded();
     return this;
   }
 
+  /**
+   * Sets the folder l.
+   *
+   * @param folder the folder
+   * @return the state token
+   */
   public StateToken setFolderL(final Long folder) {
     this.folder = folder == null ? null : folder.toString();
     resetEncoded();
     return this;
   }
 
+  /**
+   * Sets the group.
+   *
+   * @param group the group
+   * @return the state token
+   */
   public StateToken setGroup(final String group) { // NO_UCD
     this.group = group;
     resetEncoded();
     return this;
   }
 
+  /**
+   * Sets the tool.
+   *
+   * @param tool the tool
+   * @return the state token
+   */
   public StateToken setTool(final String tool) { // NO_UCD
     this.tool = tool;
     resetEncoded();
     return this;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return getEncoded();

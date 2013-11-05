@@ -34,74 +34,76 @@ import com.thezukunft.wave.connector.State;
 
 public class StateMock implements State {
 
-	protected HashMap<String, String> map;
-	private WaveMock wave;
-	
-	public StateMock() {
-		map = new HashMap<String, String>();
-	}
-	
-	@Override
-	public String get(String key) {
-		return map.get(key);
-	}
+  protected HashMap<String, String> map;
+  private WaveMock wave;
 
-	@Override
-	public String get(String key, String optDefault) {
-		if(map.containsKey(key)) return map.get(key);
-		else return optDefault;
-	}
+  public StateMock() {
+    map = new HashMap<String, String>();
+  }
 
-	@Override
-	public Integer getInt(String key) {
-		if(!map.containsKey(key)) return null;
-		Integer value;
-		try {
-			value = Integer.parseInt(map.get(key));
-		} catch(NumberFormatException e) {
-			return null;
-		}
-		return value;
-	}
+  @Override
+  public String get(String key) {
+    return map.get(key);
+  }
 
-	@Override
-	public JsArrayString getKeys() {
-		// this seems pretty inefficient but oh well ...
-		JsArrayString array = JsArray.createArray().cast();
-		for(String k : map.keySet()) {
-			array.push(k);
-		}
-		return array;
-	}
+  @Override
+  public String get(String key, String optDefault) {
+    if (map.containsKey(key))
+      return map.get(key);
+    else
+      return optDefault;
+  }
 
-	@Override
-	public void reset() {
-		map.clear();
-	}
+  @Override
+  public Integer getInt(String key) {
+    if (!map.containsKey(key))
+      return null;
+    Integer value;
+    try {
+      value = Integer.parseInt(map.get(key));
+    } catch (NumberFormatException e) {
+      return null;
+    }
+    return value;
+  }
 
-	@Override
-	public void submitDelta(HashMap<String, String> delta) {
-		for(String k : delta.keySet()) {
-			map.put(k, delta.get(k));
-		}
-		wave.manualStateChange();
-	}
+  @Override
+  public JsArrayString getKeys() {
+    // this seems pretty inefficient but oh well ...
+    JsArrayString array = JsArray.createArray().cast();
+    for (String k : map.keySet()) {
+      array.push(k);
+    }
+    return array;
+  }
 
-	@Override
-	public void submitDelta(JavaScriptObject delta) {
-		Window.alert("try to submit deltas as a hash-map ...  this doesnt work in mock mode");
-	}
+  @Override
+  public void reset() {
+    map.clear();
+  }
 
-	@Override
-	public void submitValue(String key, String value) {
-		HashMap<String, String> delta = new HashMap<String, String>();
-		delta.put(key, value);
-		submitDelta(delta);
-	}
+  @Override
+  public void submitDelta(HashMap<String, String> delta) {
+    for (String k : delta.keySet()) {
+      map.put(k, delta.get(k));
+    }
+    wave.manualStateChange();
+  }
 
-	
-	public void setWave(WaveMock wave) {
-		this.wave = wave;
-	}
-	
+  @Override
+  public void submitDelta(JavaScriptObject delta) {
+    Window.alert("try to submit deltas as a hash-map ...  this doesnt work in mock mode");
+  }
+
+  @Override
+  public void submitValue(String key, String value) {
+    HashMap<String, String> delta = new HashMap<String, String>();
+    delta.put(key, value);
+    submitDelta(delta);
+  }
+
+  public void setWave(WaveMock wave) {
+    this.wave = wave;
+  }
+
 }

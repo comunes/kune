@@ -28,8 +28,22 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewListMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewListMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new new list menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   * @param newMenu the new menu
+   */
   @Inject
   public NewListMenuItem(final I18nTranslationService i18n, final NewListAction action,
       final IconicResources res, final ListsNewMenu newMenu) {

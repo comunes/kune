@@ -47,20 +47,36 @@ import com.calclab.emite.im.client.roster.events.RosterRetrievedHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class KuneWaveProfileManager is a workaround to show avatars in kune
  * while the Wave part is more mature (see in the future
- * RemoteProfileManagerImpl)
- * 
+ * RemoteProfileManagerImpl).
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> implements
     ProfileManager {
   // TODO implement remote part of RemoteProfileManagerImpl
 
+  /** The download utils. */
   private final ClientFileDownloadUtils downloadUtils;
+  
+  /** The last connected manager. */
   private final LastConnectedManager lastConnectedManager;
+  
+  /** The local domain. */
   private String localDomain;
 
+  /**
+   * Instantiates a new kune wave profile manager.
+   *
+   * @param eventBus the event bus
+   * @param downloadUtils the download utils
+   * @param lastConnectedManager the last connected manager
+   * @param roster the roster
+   * @param chatOptions the chat options
+   */
   @Inject
   public KuneWaveProfileManager(final EventBus eventBus, final ClientFileDownloadUtils downloadUtils,
       final LastConnectedManager lastConnectedManager, final XmppRoster roster,
@@ -89,6 +105,12 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     });
   }
 
+  /**
+   * Check avatar.
+   *
+   * @param profile the profile
+   * @param noCache the no cache
+   */
   private void checkAvatar(final ProfileImpl profile, final boolean noCache) {
     if (localDomain == null) {
       localDomain = "@" + Session.get().getDomain();
@@ -102,19 +124,40 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     }
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.account.ProfileManager#getProfile(org.waveprotocol.wave.model.wave.ParticipantId)
+   */
   @Override
   public ProfileImpl getProfile(final ParticipantId participantId) {
     return refreshProfile(participantId, true, false);
   }
 
+  /**
+   * Gets the username.
+   *
+   * @param address the address
+   * @return the username
+   */
   private String getUsername(final String address) {
     return address.split("@")[0];
   }
 
+  /**
+   * Checks if is local.
+   *
+   * @param address the address
+   * @return true, if is local
+   */
   private boolean isLocal(final String address) {
     return Session.get().getDomain() != null && address.contains(Session.get().getDomain());
   }
 
+  /**
+   * Refresh address.
+   *
+   * @param address the address
+   * @param noCache the no cache
+   */
   private void refreshAddress(final String address, final boolean noCache) {
     try {
       refreshProfile(ParticipantId.of(address), true, noCache);
@@ -123,6 +166,14 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     }
   }
 
+  /**
+   * Refresh profile.
+   *
+   * @param participantId the participant id
+   * @param refresh the refresh
+   * @param noCache the no cache
+   * @return the profile impl
+   */
   private ProfileImpl refreshProfile(final ParticipantId participantId, final boolean refresh,
       final boolean noCache) {
     final String address = participantId.getAddress();
@@ -141,14 +192,31 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     return profile;
   }
 
+  /**
+   * Refresh roster item.
+   *
+   * @param uri the uri
+   * @param noCache the no cache
+   */
   private void refreshRosterItem(final XmppURI uri, final boolean noCache) {
     refreshAddress(uri.toString(), noCache);
   }
 
+  /**
+   * Update profile avatar.
+   *
+   * @param profile the profile
+   * @param avatar the avatar
+   */
   private void updateProfileAvatar(final ProfileImpl profile, final String avatar) {
     profile.update(profile.getFirstName(), profile.getFullName(), avatar);
   }
 
+  /**
+   * Update status.
+   *
+   * @param profile the profile
+   */
   private void updateStatus(final ProfileImpl profile) {
     final String full = profile.getFullName();
     final String address = profile.getAddress();

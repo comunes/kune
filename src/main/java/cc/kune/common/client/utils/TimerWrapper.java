@@ -24,7 +24,19 @@ package cc.kune.common.client.utils;
 
 import com.google.gwt.user.client.Timer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TimerWrapper.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TimerWrapper {
+  
+  /**
+   * The Interface Executer.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface Executer {
     /**
      * Invokes the execute.
@@ -32,18 +44,32 @@ public class TimerWrapper {
     void execute();
   }
 
+  /** The is scheduled. */
   private boolean isScheduled;
+  
+  /** The timer. */
   private Timer timer;
 
+  /**
+   * Instantiates a new timer wrapper.
+   */
   public TimerWrapper() {
     isScheduled = false;
   }
 
+  /**
+   * Cancel.
+   */
   public void cancel() {
     isScheduled = false;
     timer.cancel();
   }
 
+  /**
+   * Configure.
+   *
+   * @param onTime the on time
+   */
   public void configure(final Executer onTime) {
     timer = new Timer() {
       @Override
@@ -54,19 +80,37 @@ public class TimerWrapper {
     };
   }
 
+  /**
+   * Checks if is scheduled.
+   *
+   * @return true, if is scheduled
+   */
   public boolean isScheduled() {
     return isScheduled;
   }
 
+  /**
+   * Run.
+   */
   public void run() {
     timer.run();
   }
 
+  /**
+   * Schedule.
+   *
+   * @param delayMillis the delay millis
+   */
   public void schedule(final int delayMillis) {
     isScheduled = true;
     timer.schedule(delayMillis);
   }
 
+  /**
+   * Schedule repeating.
+   *
+   * @param delayMillis the delay millis
+   */
   public void scheduleRepeating(final int delayMillis) {
     isScheduled = true;
     timer.scheduleRepeating(delayMillis);

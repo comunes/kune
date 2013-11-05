@@ -32,16 +32,42 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.Button;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserOptPassPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserOptPassPanel extends EntityOptGeneralPanel implements UserOptPassView {
 
+  /** The Constant CURRENT_PASSWD_FIELD. */
   public static final String CURRENT_PASSWD_FIELD = "k-uopp-currentPass";
+  
+  /** The Constant NEW_PASSWD_FIELD. */
   public static final String NEW_PASSWD_FIELD = "k-uopp-newPass";
+  
+  /** The Constant NEW_PASSWD_REPEATED_FIELD. */
   public static final String NEW_PASSWD_REPEATED_FIELD = "k-uopp-newPassRepeated";
+  
+  /** The change btn. */
   private final Button changeBtn;
+  
+  /** The current passwd. */
   private final TextField<String> currentPasswd;
+  
+  /** The new passwd. */
   private final TextField<String> newPasswd;
+  
+  /** The new passwd repeated. */
   private final TextField<String> newPasswdRepeated;
 
+  /**
+   * Instantiates a new user opt pass panel.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param maskWidget the mask widget
+   */
   @Inject
   public UserOptPassPanel(final I18nTranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget) {
@@ -57,21 +83,33 @@ public class UserOptPassPanel extends EntityOptGeneralPanel implements UserOptPa
     add(changeBtn);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.UserOptPassView#getChangeBtn()
+   */
   @Override
   public HasClickHandlers getChangeBtn() {
     return changeBtn;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.UserOptPassView#getCurrentPasswd()
+   */
   @Override
   public String getCurrentPasswd() {
     return currentPasswd.getValue();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.UserOptPassView#getNewPasswd()
+   */
   @Override
   public String getNewPasswd() {
     return newPasswd.getValue();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.UserOptPassView#getNewPasswdRepeated()
+   */
   @Override
   public String getNewPasswdRepeated() {
     return newPasswdRepeated.getValue();

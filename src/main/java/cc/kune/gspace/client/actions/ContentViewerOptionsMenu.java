@@ -30,11 +30,24 @@ import cc.kune.core.client.state.Session;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentViewerOptionsMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ContentViewerOptionsMenu extends MenuDescriptor {
 
+  /** The Constant ID. */
   private static final String ID = "k-cnt-viewer-opt-menu";
 
+  /**
+   * Instantiates a new content viewer options menu.
+   *
+   * @param res the res
+   * @param session the session
+   */
   @Inject
   public ContentViewerOptionsMenu(final CoreResources res, final Session session) {
     super();

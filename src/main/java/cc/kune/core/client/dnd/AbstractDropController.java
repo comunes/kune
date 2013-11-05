@@ -34,16 +34,21 @@ import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.AttachEvent.Handler;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AbstractDropController.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractDropController implements DropTarget {
 
   /** The accepted types (which one we allow to drop here). */
   private final List<Class<?>> acceptedTypes;
 
+  /** The drag controller. */
   private final KuneDragController dragController;
 
+  /** The drop controller. */
   private SimpleDropController dropController;
 
   /** The target. */
@@ -168,10 +173,9 @@ public abstract class AbstractDropController implements DropTarget {
 
   /**
    * On group drop finished, is fired when all the widgets are dropped (at the
-   * end)
-   * 
-   * @param dropController
-   *          the drop controller
+   * end).
+   *
+   * @param dropController the drop controller
    */
   public void onGroupDropFinished(final SimpleDropController dropController) {
 
@@ -189,12 +193,10 @@ public abstract class AbstractDropController implements DropTarget {
 
   /**
    * On preview allowed.
-   * 
-   * @param widget
-   * 
-   * @param dropController
-   *          the drop controller
-   * @throws VetoDragException
+   *
+   * @param widget the widget
+   * @param dropController the drop controller
+   * @throws VetoDragException the veto drag exception
    */
   public void onPreviewAllowed(final Widget widget, final SimpleDropController dropController)
       throws VetoDragException {
@@ -202,10 +204,9 @@ public abstract class AbstractDropController implements DropTarget {
   }
 
   /**
-   * Register type to accept this kind of widgets to be dropped here
-   * 
-   * @param classType
-   *          the class type
+   * Register type to accept this kind of widgets to be dropped here.
+   *
+   * @param classType the class type
    */
   public void registerType(final Class<?> classType) {
     acceptedTypes.add(classType);
@@ -213,10 +214,9 @@ public abstract class AbstractDropController implements DropTarget {
 
   /**
    * Sets the target (for instance a StateToken id, to perform operations),
-   * because with the widget we don't have all the info
-   * 
-   * @param target
-   *          the new target
+   * because with the widget we don't have all the info.
+   *
+   * @param target the new target
    */
   public void setTarget(final Object target) {
     this.target = target;

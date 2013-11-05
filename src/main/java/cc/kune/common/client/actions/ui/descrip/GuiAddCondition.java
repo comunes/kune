@@ -22,8 +22,20 @@
  */
 package cc.kune.common.client.actions.ui.descrip;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface GuiAddCondition.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GuiAddCondition {
 
+  /**
+   * Must be added.
+   *
+   * @param descript the descript
+   * @return true, if successful
+   */
   boolean mustBeAdded(GuiActionDescrip descript);
 
 }

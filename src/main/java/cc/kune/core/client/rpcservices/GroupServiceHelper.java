@@ -25,11 +25,23 @@ package cc.kune.core.client.rpcservices;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupServiceHelper.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupServiceHelper {
 
+  /** The group service. */
   @SuppressWarnings("unused")
   private final Provider<GroupServiceAsync> groupService;
 
+  /**
+   * Instantiates a new group service helper.
+   *
+   * @param groupService the group service
+   */
   @Inject
   public GroupServiceHelper(final Provider<GroupServiceAsync> groupService) {
     this.groupService = groupService;

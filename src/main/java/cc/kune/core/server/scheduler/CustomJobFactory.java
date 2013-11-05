@@ -31,6 +31,7 @@ import org.quartz.spi.TriggerFiredBundle;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
 /**
  * A factory for creating CustomJob objects. See:
  * http://javaeenotes.blogspot.com
@@ -39,14 +40,23 @@ import com.google.inject.Singleton;
 @Singleton
 public class CustomJobFactory implements JobFactory {
 
+  /** The injector. */
   private Injector injector;
 
+  /* (non-Javadoc)
+   * @see org.quartz.spi.JobFactory#newJob(org.quartz.spi.TriggerFiredBundle, org.quartz.Scheduler)
+   */
   @Override
   public Job newJob(final TriggerFiredBundle bundle, final Scheduler scheduler)
       throws SchedulerException {
     return injector.getInstance(bundle.getJobDetail().getJobClass());
   }
 
+  /**
+   * Sets the injector.
+   *
+   * @param injector the new injector
+   */
   public void setInjector(final Injector injector) {
     this.injector = injector;
   }

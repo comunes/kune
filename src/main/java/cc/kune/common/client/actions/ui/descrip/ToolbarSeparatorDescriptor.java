@@ -22,28 +22,67 @@
  */
 package cc.kune.common.client.actions.ui.descrip;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolbarSeparatorDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToolbarSeparatorDescriptor extends AbstractSeparatorDescriptor {
 
+  /**
+   * The Enum Type.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public enum Type {
-    fill, separator, spacer
+    
+    /** The fill. */
+    fill, 
+ /** The separator. */
+ separator, 
+ /** The spacer. */
+ spacer
   }
 
+  /**
+   * Builds the.
+   *
+   * @param type the type
+   * @param parent the parent
+   * @return the toolbar separator descriptor
+   */
   public static ToolbarSeparatorDescriptor build(final Type type, final ToolbarDescriptor parent) {
     return new ToolbarSeparatorDescriptor(type, parent);
   }
 
+  /** The type. */
   private final Type type;
 
+  /**
+   * Instantiates a new toolbar separator descriptor.
+   *
+   * @param type the type
+   * @param parent the parent
+   */
   public ToolbarSeparatorDescriptor(final Type type, final ToolbarDescriptor parent) {
     super();
     this.type = type;
     setParent(parent);
   }
 
+  /**
+   * Gets the separator type.
+   *
+   * @return the separator type
+   */
   public Type getSeparatorType() {
     return type;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
+   */
   @Override
   public Class<?> getType() {
     return ToolbarSeparatorDescriptor.class;

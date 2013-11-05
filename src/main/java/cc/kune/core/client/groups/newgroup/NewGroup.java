@@ -22,8 +22,17 @@
  */
 package cc.kune.core.client.groups.newgroup;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface NewGroup.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface NewGroup {
 
+  /**
+   * Do new group.
+   */
   void doNewGroup();
 
 }

@@ -22,6 +22,12 @@
  */
 package cc.kune.common.shared.utils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface SimpleResponseCallback.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface SimpleResponseCallback {
   /**
    * Notifies this callback of an accept response.

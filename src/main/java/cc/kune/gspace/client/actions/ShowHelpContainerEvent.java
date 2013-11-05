@@ -30,60 +30,132 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShowHelpContainerEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.ShowHelpContainerHandler> {
 
+  /**
+   * The Interface HasShowHelpContainerHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasShowHelpContainerHandlers extends HasHandlers {
+    
+    /**
+     * Adds the show help container handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addShowHelpContainerHandler(ShowHelpContainerHandler handler);
   }
 
+  /**
+   * The Interface ShowHelpContainerHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ShowHelpContainerHandler extends EventHandler {
+    
+    /**
+     * On show help container.
+     *
+     * @param event the event
+     */
     public void onShowHelpContainer(ShowHelpContainerEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<ShowHelpContainerHandler> TYPE = new Type<ShowHelpContainerHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new ShowHelpContainerEvent(null));
   }
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   * @param onTutorialClose the on tutorial close
+   */
   public static void fire(final HasHandlers source, final TutorialViewer.OnTutorialClose onTutorialClose) {
     source.fireEvent(new ShowHelpContainerEvent(onTutorialClose));
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<ShowHelpContainerHandler> getType() {
     return TYPE;
   }
 
+  /** The on tutorial close. */
   private final OnTutorialClose onTutorialClose;
 
+  /**
+   * Instantiates a new show help container event.
+   *
+   * @param onTutorialClose the on tutorial close
+   */
   public ShowHelpContainerEvent(final TutorialViewer.OnTutorialClose onTutorialClose) {
     this.onTutorialClose = onTutorialClose;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final ShowHelpContainerHandler handler) {
     handler.onShowHelpContainer(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     return super.equals(obj);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<ShowHelpContainerHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /**
+   * Gets the on tutorial close.
+   *
+   * @return the on tutorial close
+   */
   public OnTutorialClose getOnTutorialClose() {
     return onTutorialClose;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return super.hashCode();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "ShowHelpContainerEvent[" + "]";

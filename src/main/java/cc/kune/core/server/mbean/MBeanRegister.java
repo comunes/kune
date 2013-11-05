@@ -38,83 +38,89 @@ import cc.kune.core.server.searcheable.SiteMapGeneratorMBean;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MBeanRegister.
+ * 
+ * @author pablojan <pablojan@gmail.com>
+ */
 @Singleton
 public class MBeanRegister {
 
-	public static final Log LOG = LogFactory.getLog(MBeanRegister.class);
+  /** The Constant LOG. */
+  public static final Log LOG = LogFactory.getLog(MBeanRegister.class);
 
-	/**
-	 * Register mbeans objects in the {@link MBeanRegistry} for other objects
-	 * that cannot inject and use {@link MBeanRegistry.registerAsMBean} directly
-	 *
-	 * @param registry
-	 *            the registry
-	 * @param kuneProperties
-	 *            the kune properties
-	 */
-	@Inject
-	public MBeanRegister(final MBeanRegistry registry,
-	        final KuneProperties kuneProperties,
-	        final SiteMapGenerator siteMapGenerator,
-	        SearchEngineServletFilter searchEngineServletFilter) {
-		// Since KuneProperties is not created via Guice, we need to do a manual
-		// injection
-		registry.registerAsMBean(kuneProperties,
-		        KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME);
-		// As SiteMapGenerator is instantiated by cron, we register the mbean
-		// here
-		// so it's there since the server start
-		registry.registerAsMBean(siteMapGenerator,
-		        SiteMapGeneratorMBean.MBEAN_OBJECT_NAME);
+  /**
+   * Register mbeans objects in the {@link MBeanRegistry} for other objects that
+   * cannot inject and use {@link MBeanRegistry.registerAsMBean} directly
+   * 
+   * @param registry
+   *          the registry
+   * @param kuneProperties
+   *          the kune properties
+   * @param siteMapGenerator
+   *          the site map generator
+   * @param searchEngineServletFilter
+   *          the search engine servlet filter
+   */
+  @Inject
+  public MBeanRegister(final MBeanRegistry registry, final KuneProperties kuneProperties,
+      final SiteMapGenerator siteMapGenerator, final SearchEngineServletFilter searchEngineServletFilter) {
+    // Since KuneProperties is not created via Guice, we need to do a manual
+    // injection
+    registry.registerAsMBean(kuneProperties, KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME);
+    // As SiteMapGenerator is instantiated by cron, we register the mbean
+    // here
+    // so it's there since the server start
+    registry.registerAsMBean(siteMapGenerator, SiteMapGeneratorMBean.MBEAN_OBJECT_NAME);
 
-		registry.registerAsMBean(searchEngineServletFilter,
-		        SearchEngineServletFilterMBean.MBEAN_OBJECT_NAME);
+    registry.registerAsMBean(searchEngineServletFilter, SearchEngineServletFilterMBean.MBEAN_OBJECT_NAME);
 
-		// At this point log4j must be up, and configured, so let's register
-		// as MBeans
-		registerLog4jMBeans(registry);
+    // At this point log4j must be up, and configured, so let's register
+    // as MBeans
+    registerLog4jMBeans(registry);
 
-	}
+  }
 
-	/**
-	 * Add MBean support for Log4j Resolves #536
-	 *
-	 * @param registry
-	 *            MBeanRegistry instance
-	 */
-	private void registerLog4jMBeans(final MBeanRegistry registry) {
+  /**
+   * Add MBean support for Log4j Resolves #536.
+   * 
+   * @param registry
+   *          MBeanRegistry instance
+   */
+  private void registerLog4jMBeans(final MBeanRegistry registry) {
 
-		try {
+    try {
 
-			// http://www.jroller.com/ray/entry/managing_log4j_logging_levels_for
-			HierarchyDynamicMBean hdm = new HierarchyDynamicMBean();
+      // http://www.jroller.com/ray/entry/managing_log4j_logging_levels_for
+      final HierarchyDynamicMBean hdm = new HierarchyDynamicMBean();
 
-			registry.registerAsMBean(hdm, MBeanConstants.LOG4J_PREFIX_DEFAULT);
+      registry.registerAsMBean(hdm, MBeanConstants.LOG4J_PREFIX_DEFAULT);
 
-			// Add the root logger to the Hierarchy MBean
-			hdm.addLoggerMBean(Logger.getRootLogger().getName());
+      // Add the root logger to the Hierarchy MBean
+      hdm.addLoggerMBean(Logger.getRootLogger().getName());
 
-			// Get each logger from the Log4J Repository and add it to
-			// the Hierarchy MBean created above.
-			LoggerRepository r = LogManager.getLoggerRepository();
+      // Get each logger from the Log4J Repository and add it to
+      // the Hierarchy MBean created above.
+      final LoggerRepository r = LogManager.getLoggerRepository();
 
-			@SuppressWarnings("rawtypes")
-			java.util.Enumeration loggers = r.getCurrentLoggers();
+      @SuppressWarnings("rawtypes")
+      final java.util.Enumeration loggers = r.getCurrentLoggers();
 
-			while (loggers.hasMoreElements()) {
+      while (loggers.hasMoreElements()) {
 
-				String name = ((Logger) loggers.nextElement()).getName();
+        final String name = ((Logger) loggers.nextElement()).getName();
 
-				if (LOG.isDebugEnabled()) {
-					LOG.debug("Registering Log4j logger  in JMX" + name);
-				}
+        if (LOG.isDebugEnabled()) {
+          LOG.debug("Registering Log4j logger  in JMX" + name);
+        }
 
-				hdm.addLoggerMBean(name);
-			}
+        hdm.addLoggerMBean(name);
+      }
 
-		} catch (Exception e) {
-			LOG.error("Error registering log4j Mbeans", e);
-		}
-	}
+    } catch (final Exception e) {
+      LOG.error("Error registering log4j Mbeans", e);
+    }
+  }
 
 }

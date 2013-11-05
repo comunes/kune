@@ -30,36 +30,61 @@ import org.junit.Test;
 import cc.kune.core.client.errors.ContainerNotPermittedException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BlogServerToolTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BlogServerToolTest {
 
+  /** The server tool. */
   private BlogServerTool serverTool;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     serverTool = new BlogServerTool(null, null, null, null, null);
   }
 
+  /**
+   * Test create container in correct container.
+   */
   @Test
   public void testCreateContainerInCorrectContainer() {
     serverTool.checkTypesBeforeContainerCreation(TYPE_ROOT, TYPE_BLOG);
   }
 
+  /**
+   * Test create container in incorrect container7.
+   */
   @Test(expected = ContainerNotPermittedException.class)
   public void testCreateContainerInIncorrectContainer7() {
     serverTool.checkTypesBeforeContainerCreation(TYPE_BLOG, TYPE_BLOG);
   }
 
+  /**
+   * Test create content in correct container.
+   */
   @Test
   public void testCreateContentInCorrectContainer() {
     serverTool.checkTypesBeforeContentCreation(TYPE_BLOG, TYPE_POST);
     serverTool.checkTypesBeforeContentCreation(TYPE_BLOG, TYPE_UPLOADEDFILE);
   }
 
+  /**
+   * Test create content in incorrect container1.
+   */
   @Test(expected = ContentNotPermittedException.class)
   public void testCreateContentInIncorrectContainer1() {
     serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_POST);
   }
 
+  /**
+   * Test create content in incorrect container8.
+   */
   @Test(expected = ContentNotPermittedException.class)
   public void testCreateContentInIncorrectContainer8() {
     serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_UPLOADEDFILE);

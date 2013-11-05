@@ -22,23 +22,61 @@
  */
 package cc.kune.common.client.notify;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum NotifyLevel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum NotifyLevel {
-  avatar, error, important, info, log, veryImportant;
+  
+  /** The avatar. */
+  avatar, 
+ /** The error. */
+ error, 
+ /** The important. */
+ important, 
+ /** The info. */
+ info, 
+ /** The log. */
+ log, 
+ /** The very important. */
+ veryImportant;
 
+  /** The url. */
   private String url;
 
+  /**
+   * Instantiates a new notify level.
+   */
   NotifyLevel() {
     this(null);
   }
 
+  /**
+   * Instantiates a new notify level.
+   *
+   * @param url the url
+   */
   NotifyLevel(final String url) {
     this.url = url;
   }
 
+  /**
+   * Gets the url.
+   *
+   * @return the url
+   */
   public String getUrl() {
     return url;
   }
 
+  /**
+   * Url.
+   *
+   * @param url the url
+   * @return the notify level
+   */
   public NotifyLevel url(final String url) {
     this.url = url;
     return this;

@@ -26,8 +26,18 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KunePropertiesTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KunePropertiesTest {
 
+  /**
+   * Test loading.
+   */
   @Test
   public void testLoading() {
     KunePropertiesDefault properties = new KunePropertiesDefault("test.file.properties");

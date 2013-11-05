@@ -22,6 +22,19 @@
  */
 package cc.kune.core.shared.domain;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum AccessRol.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum AccessRol {
-  Administrator, Editor, Viewer
+  
+  /** The Administrator. */
+  Administrator, 
+ /** The Editor. */
+ Editor, 
+ /** The Viewer. */
+ Viewer
 }

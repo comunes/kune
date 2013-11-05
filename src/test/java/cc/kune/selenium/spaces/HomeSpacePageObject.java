@@ -27,26 +27,55 @@ import org.openqa.selenium.support.FindBy;
 
 import cc.kune.selenium.PageObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HomeSpacePageObject.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class HomeSpacePageObject extends PageObject {
 
+  /** The fst stats. */
   @FindBy(xpath = "//div[@id='k-home-group-stats']/div/div[2]/div/div/div/img")
   private WebElement fstStats;
+  
+  /** The snd stats. */
   @FindBy(xpath = "//div[@id='k-home-group-stats']/div/div[2]/div/div[2]/div/img")
   private WebElement sndStats;
+  
+  /** The trd stats. */
   @FindBy(xpath = "//div[@id='k-home-group-stats']/div/div[2]/div/div[3]/div/img")
   private WebElement trdStats;
 
+  /**
+   * Instantiates a new home space page object.
+   */
   public HomeSpacePageObject() {
   }
 
+  /**
+   * Gets the fst stats.
+   *
+   * @return the fst stats
+   */
   public WebElement getFstStats() {
     return fstStats;
   }
 
+  /**
+   * Gets the snd stats.
+   *
+   * @return the snd stats
+   */
   public WebElement getSndStats() {
     return sndStats;
   }
 
+  /**
+   * Gets the trd stats.
+   *
+   * @return the trd stats
+   */
   public WebElement getTrdStats() {
     return trdStats;
   }

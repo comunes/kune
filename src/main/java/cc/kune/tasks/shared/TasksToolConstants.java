@@ -24,17 +24,41 @@ package cc.kune.tasks.shared;
 
 import cc.kune.common.shared.res.KuneIcon;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TasksToolConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class TasksToolConstants {
 
+  /** The Constant ICON_TYPE_FOLDER. */
   public static final KuneIcon ICON_TYPE_FOLDER = new KuneIcon('m');
+  
+  /** The Constant ICON_TYPE_ROOT. */
   public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('l');
+  
+  /** The Constant ICON_TYPE_TASK. */
   public static final KuneIcon ICON_TYPE_TASK = new KuneIcon('l');
+  
+  /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "tasks";
+  
+  /** The Constant TOOL_NAME. */
   public static final String TOOL_NAME = "tasks";
+  
+  /** The Constant TYPE_FOLDER. */
   public static final String TYPE_FOLDER = TOOL_NAME + "." + "folder";
+  
+  /** The Constant TYPE_ROOT. */
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
+  
+  /** The Constant TYPE_TASK. */
   public static final String TYPE_TASK = TOOL_NAME + "." + "task";
 
+  /**
+   * Instantiates a new tasks tool constants.
+   */
   private TasksToolConstants() {
   }
 }

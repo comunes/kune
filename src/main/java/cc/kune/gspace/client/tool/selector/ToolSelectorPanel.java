@@ -36,18 +36,38 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolSelectorPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
 
+  /**
+   * The Interface ToolSelectorPanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface ToolSelectorPanelUiBinder extends UiBinder<Widget, ToolSelectorPanel> {
   }
 
+  /** The ui binder. */
   private static ToolSelectorPanelUiBinder uiBinder = GWT.create(ToolSelectorPanelUiBinder.class);
 
+  /** The drop controller prov. */
   private final Provider<FolderContainerDropController> dropControllerProv;
 
+  /** The flow. */
   @UiField
   FlowPanel flow;
 
+  /**
+   * Instantiates a new tool selector panel.
+   *
+   * @param wsArmor the ws armor
+   * @param dropControllerProv the drop controller prov
+   */
   @Inject
   public ToolSelectorPanel(final GSpaceArmor wsArmor,
       final Provider<FolderContainerDropController> dropControllerProv) {
@@ -55,6 +75,9 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
     wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView#addItem(cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView)
+   */
   @Override
   public void addItem(final ToolSelectorItemView item) {
     final Widget widget = item.asWidget();
@@ -64,6 +87,9 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
     dropController.setTarget(item.getTarget());
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return flow;

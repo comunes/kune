@@ -50,25 +50,48 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 import com.google.inject.servlet.RequestScoped;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileUploadManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @RequestScoped
 public class FileUploadManager extends FileJsonUploadManagerAbstract {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -7209922761735338754L;
+  
+  /** The access service. */
   @Inject
   AccessService accessService;
+  
+  /** The creation service. */
   @Inject
   CreationService creationService;
+  
+  /** The file manager. */
   @Inject
   FileManager fileManager;
+  
+  /** The i18n. */
   @Inject
   I18nTranslationService i18n;
+  
+  /** The user session. */
   @Inject
   UserSessionManager userSession;
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.file.FileUploadManagerAbstract#beforePostStart()
+   */
   @Override
   protected void beforePostStart() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.file.FileJsonUploadManagerAbstract#createJsonResponse(boolean, java.lang.String)
+   */
   @Override
   protected JSONObject createJsonResponse(final boolean success, final String message) {
     /**
@@ -95,12 +118,26 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
     return response;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.file.FileUploadManagerAbstract#createUploadedFile(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, org.apache.commons.fileupload.FileItem, java.lang.String)
+   */
   @Override
   protected void createUploadedFile(final String userHash, final StateToken stateToken,
       final String fileName, final FileItem file, final String typeId) throws Exception {
     createUploadedFileWrapped(userHash, stateToken, fileName, file, typeId);
   }
 
+  /**
+   * Creates the uploaded file wrapped.
+   *
+   * @param userHash the user hash
+   * @param stateToken the state token
+   * @param fileName the file name
+   * @param fileUploadItem the file upload item
+   * @param typeId the type id
+   * @return the content
+   * @throws Exception the exception
+   */
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, actionLevel = ActionLevel.container, mustCheckMembership = false)
   @KuneTransactional
@@ -150,6 +187,14 @@ public class FileUploadManager extends FileJsonUploadManagerAbstract {
     }
   }
 
+  /**
+   * Generate thumbs.
+   *
+   * @param absDir the abs dir
+   * @param filename the filename
+   * @param extension the extension
+   * @param isPdf the is pdf
+   */
   private void generateThumbs(final String absDir, final String filename, final String extension,
       final boolean isPdf) {
     ImageUtilsDefault.generateThumbs(absDir, filename, extension, isPdf,

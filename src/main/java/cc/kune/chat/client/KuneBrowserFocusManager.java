@@ -37,19 +37,29 @@ import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 import com.google.gwt.event.shared.EventBus;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class is a workaround to clear the focus on the active chat page FIXME:
  * workaround to clear the focus <br/>
  * 
  * <br/>
  * TODO: change the page/header visibility system... quite a big job
- * 
- * 
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneBrowserFocusManager {
 
+  /** The current focused. */
   protected ChatPresenter currentFocused;
 
+  /**
+   * Instantiates a new kune browser focus manager.
+   *
+   * @param kuneEventBus the kune event bus
+   * @param eventBus the event bus
+   * @param unattendedManager the unattended manager
+   * @param handler the handler
+   */
   public KuneBrowserFocusManager(final EventBus kuneEventBus, final HablarEventBus eventBus,
       final UnattendedPagesManager unattendedManager, final BrowserFocusHandler handler) {
 

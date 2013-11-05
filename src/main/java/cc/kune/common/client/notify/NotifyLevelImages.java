@@ -27,15 +27,33 @@ import cc.kune.common.client.resources.CommonResources;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NotifyLevelImages.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NotifyLevelImages {
 
+  /** The res. */
   private final CommonResources res;
 
+  /**
+   * Instantiates a new notify level images.
+   *
+   * @param res the res
+   */
   @Inject
   public NotifyLevelImages(final CommonResources res) {
     this.res = res;
   }
 
+  /**
+   * Gets the image.
+   *
+   * @param level the level
+   * @return the image
+   */
   public ImageResource getImage(final NotifyLevel level) {
     switch (level) {
     case info:

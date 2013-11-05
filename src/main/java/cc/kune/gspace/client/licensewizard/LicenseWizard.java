@@ -22,8 +22,19 @@
  */
 package cc.kune.gspace.client.licensewizard;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface LicenseWizard.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface LicenseWizard {
 
+  /**
+   * Start.
+   *
+   * @param callback the callback
+   */
   void start(LicenseChooseCallback callback);
 
 }

@@ -45,11 +45,32 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BuddyLastConnectedHeaderLabel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BuddyLastConnectedHeaderLabel {
 
+  /** The button. */
   private final ButtonDescriptor button;
+  
+  /** The last connected manager. */
   private final LastConnectedManager lastConnectedManager;
 
+  /**
+   * Instantiates a new buddy last connected header label.
+   *
+   * @param chatAction the chat action
+   * @param entityHeader the entity header
+   * @param stateManager the state manager
+   * @param session the session
+   * @param simpleContactManager the simple contact manager
+   * @param lastConnectedManager the last connected manager
+   * @param roster the roster
+   * @param chatOptions the chat options
+   */
   @Inject
   public BuddyLastConnectedHeaderLabel(final StartChatWithMemberAction chatAction,
       final EntityHeader entityHeader, final StateManager stateManager, final Session session,
@@ -107,6 +128,11 @@ public class BuddyLastConnectedHeaderLabel {
     });
   }
 
+  /**
+   * Sets the label text.
+   *
+   * @param username the new label text
+   */
   private void setLabelText(final String username) {
     button.withText(lastConnectedManager.get(username, true));
   }

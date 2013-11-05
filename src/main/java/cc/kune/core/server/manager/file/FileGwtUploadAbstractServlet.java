@@ -39,23 +39,54 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.inject.servlet.RequestScoped;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileGwtUploadAbstractServlet.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @RequestScoped
 public abstract class FileGwtUploadAbstractServlet extends UploadAction {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(FileGwtUploadAbstractServlet.class);
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
+  
+  /** The Constant UTF8. */
   protected static final String UTF8 = "UTF-8";
+  
+  /** The kune properties. */
   protected final KuneProperties kuneProperties;
 
+  /**
+   * Instantiates a new file gwt upload abstract servlet.
+   *
+   * @param kuneProperties the kune properties
+   */
   public FileGwtUploadAbstractServlet(final KuneProperties kuneProperties) {
     this.kuneProperties = kuneProperties;
     this.maxSize = kuneProperties.getInteger(KuneProperties.UPLOAD_MAX_FILE_SIZE_IN_KS);
     this.uploadDelay = kuneProperties.getInteger(KuneProperties.UPLOAD_DELAY_FOR_TEST);
   }
 
+  /**
+   * Creates the uploaded file.
+   *
+   * @param userHash the user hash
+   * @param stateToken the state token
+   * @param fileName the file name
+   * @param file the file
+   * @param typeId the type id
+   * @return the string
+   */
   protected abstract String createUploadedFile(final String userHash, final StateToken stateToken,
       final String fileName, final FileItem file, final String typeId);
 
+  /* (non-Javadoc)
+   * @see gwtupload.server.UploadAction#executeAction(javax.servlet.http.HttpServletRequest, java.util.List)
+   */
   @Override
   public String executeAction(final HttpServletRequest request, final List<FileItem> fileItems)
       throws UploadActionException {
@@ -99,6 +130,11 @@ public abstract class FileGwtUploadAbstractServlet extends UploadAction {
 
   }
 
+  /**
+   * Log file del.
+   *
+   * @param delResult the del result
+   */
   protected void logFileDel(final boolean delResult) {
     if (!delResult) {
       LOG.error("Cannot delete file");

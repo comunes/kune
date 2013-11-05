@@ -48,24 +48,73 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AvatarDecoratorImpl.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDecorator {
 
+  /** The attach handler. */
   private HandlerRegistration attachHandler;
+  
+  /** The chat client. */
   private final ChatClient chatClient;
+  
+  /** The chat dot available. */
   private final ImageResource chatDotAvailable;
+  
+  /** The chat dot away. */
   private final ImageResource chatDotAway;
+  
+  /** The chat dot busy. */
   private final ImageResource chatDotBusy;
+  
+  /** The chat dot extended away. */
   private final ImageResource chatDotExtendedAway;
+  
+  /** The chat dot xa. */
   private final ImageResource chatDotXA;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The presence handler. */
   private final HandlerRegistration presenceHandler;
+  
+  /** The presence manager. */
   private final PresenceManager presenceManager;
+  
+  /** The roster. */
   private final XmppRoster roster;
+  
+  /** The roster handler. */
   private final HandlerRegistration rosterHandler;
+  
+  /** The session. */
   private final XmppSession session;
+  
+  /** The session state changed handler. */
   private final HandlerRegistration sessionStateChangedHandler;
+  
+  /** The uri. */
   private XmppURI uri;
 
+  /**
+   * Instantiates a new avatar decorator impl.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param presenceManager the presence manager
+   * @param roster the roster
+   * @param chatClient the chat client
+   * @param chatDotBusy the chat dot busy
+   * @param chatDotXA the chat dot xa
+   * @param chatDotAway the chat dot away
+   * @param chatDotExtendedAway the chat dot extended away
+   * @param chatDotAvailable the chat dot available
+   */
   public AvatarDecoratorImpl(final I18nTranslationService i18n, final XmppSession session,
       final PresenceManager presenceManager, final XmppRoster roster, final ChatClient chatClient,
       final ImageResource chatDotBusy, final ImageResource chatDotXA, final ImageResource chatDotAway,
@@ -103,15 +152,26 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
     });
   }
 
+  /**
+   * Clear decorator.
+   */
   private void clearDecorator() {
     AvatarDecoratorImpl.this.clearImage();
   }
 
+  /**
+   * Checks if is me.
+   *
+   * @return true, if is me
+   */
   protected boolean isMe() {
     final XmppURI currentUserURI = session.getCurrentUserURI();
     return currentUserURI != null && currentUserURI.getJID().equals(uri);
   }
 
+  /**
+   * Refresh.
+   */
   private void refresh() {
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       @Override
@@ -135,6 +195,13 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
     });
   }
 
+  /**
+   * Sets the icon.
+   *
+   * @param available the available
+   * @param show the show
+   * @param status the status
+   */
   private void setIcon(final boolean available, final Show show, final String status) {
     String finalStatus = "";
     if (show == Show.dnd) {
@@ -159,12 +226,18 @@ public class AvatarDecoratorImpl extends AbstractDecorator implements AvatarDeco
         + (TextUtils.empty(status) ? "" : ": " + status));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.avatar.AvatarDecorator#setItem(java.lang.String)
+   */
   @Override
   public void setItem(final String name) {
     this.uri = (name != null ? chatClient.uriFrom(name) : null);
     refresh();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractDecorator#setWidget(com.google.gwt.user.client.ui.IsWidget)
+   */
   @Override
   public void setWidget(final IsWidget widget) {
     super.setWidget(widget);

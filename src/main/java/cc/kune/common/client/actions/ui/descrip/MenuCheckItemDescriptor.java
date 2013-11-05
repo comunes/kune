@@ -24,28 +24,59 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuCheckItemDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MenuCheckItemDescriptor extends MenuItemDescriptor {
 
+  /** The Constant CHECKED. */
   public static final String CHECKED = "checked";
 
+  /**
+   * Instantiates a new menu check item descriptor.
+   *
+   * @param parent the parent
+   * @param action the action
+   */
   public MenuCheckItemDescriptor(final MenuDescriptor parent, final AbstractAction action) {
     super(parent, action);
     setCheckedImpl(false);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor#getType()
+   */
   @Override
   public Class<?> getType() {
     return MenuCheckItemDescriptor.class;
   }
 
+  /**
+   * Checks if is checked.
+   *
+   * @return true, if is checked
+   */
   public boolean isChecked() {
     return (Boolean) getValue(CHECKED);
   }
 
+  /**
+   * Sets the checked.
+   *
+   * @param checked the new checked
+   */
   public void setChecked(final boolean checked) {
     setCheckedImpl(checked);
   }
 
+  /**
+   * Sets the checked impl.
+   *
+   * @param checked the new checked impl
+   */
   private void setCheckedImpl(final boolean checked) {
     putValue(CHECKED, checked);
   }

@@ -25,31 +25,61 @@ package cc.kune.common.client.ui;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PopupTopPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PopupTopPanel extends AbstractAtBorderPopupPanel {
+  
+  /**
+   * Instantiates a new popup top panel.
+   */
   public PopupTopPanel() {
     this(false, false);
   }
 
+  /**
+   * Instantiates a new popup top panel.
+   *
+   * @param autohide the autohide
+   */
   public PopupTopPanel(final boolean autohide) {
     this(autohide, false);
   }
 
+  /**
+   * Instantiates a new popup top panel.
+   *
+   * @param autohide the autohide
+   * @param modal the modal
+   */
   public PopupTopPanel(final boolean autohide, final boolean modal) {
     super(autohide, modal);
     defaultStyleImpl();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractAtBorderPopupPanel#defaultStyle()
+   */
   @Override
   public void defaultStyle() {
     defaultStyleImpl();
   }
 
+  /**
+   * Default style impl.
+   */
   private void defaultStyleImpl() {
     setStyleName("k-popup-top-centered");
     super.defaultStyle();
     addStyleName("k-bottom-10corners");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractAtBorderPopupPanel#setCenterPositionImpl()
+   */
   @Override
   protected void setCenterPositionImpl() {
     setPopupPositionAndShow(new PopupPanel.PositionCallback() {

@@ -27,8 +27,19 @@ import cc.kune.gspace.client.actions.NewMenuProvider;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WikiPageNewMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WikiPageNewMenu extends NewMenuProvider {
 
+  /**
+   * Instantiates a new wiki page new menu.
+   *
+   * @param menu the menu
+   */
   @Inject
   public WikiPageNewMenu(final AbstractNewMenu menu) {
     super(menu);

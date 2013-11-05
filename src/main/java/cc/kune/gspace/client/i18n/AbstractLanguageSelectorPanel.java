@@ -40,19 +40,42 @@ import com.extjs.gxt.ui.client.widget.form.ComboBox;
 import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
 import com.extjs.gxt.ui.client.widget.form.FormPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractLanguageSelectorPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractLanguageSelectorPanel extends FormPanel {
 
+  /**
+   * The Class LanguageData.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @SuppressWarnings("serial")
   public class LanguageData extends BaseModel {
 
+    /** The Constant CODE. */
     private static final String CODE = "code";
+    
+    /** The Constant ENGLISH_NAME. */
     private static final String ENGLISH_NAME = "englishName";
 
+    /**
+     * Instantiates a new language data.
+     *
+     * @param code the code
+     * @param englishName the english name
+     */
     public LanguageData(final String code, final String englishName) {
       set(CODE, code);
       set(ENGLISH_NAME, englishName);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(final Object obj) {
       if (this == obj) {
@@ -67,14 +90,27 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
       return getCode().equals(((LanguageData) obj).getCode());
     }
 
+    /**
+     * Gets the code.
+     *
+     * @return the code
+     */
     public String getCode() {
       return get(CODE);
     }
 
+    /**
+     * Gets the english name.
+     *
+     * @return the english name
+     */
     public String getEnglishName() {
       return get(ENGLISH_NAME);
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
       final int prime = 31;
@@ -84,12 +120,25 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     }
   }
 
+  /** The Constant LANG_FIELD. */
   public static final String LANG_FIELD = "k-langsp-lf";
 
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The lang combo. */
   private ComboBox<LanguageData> langCombo;
+  
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new abstract language selector panel.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param type the type
+   */
   public AbstractLanguageSelectorPanel(final I18nTranslationService i18n, final Session session,
       final LanguageSelectorType type) {
     super();
@@ -107,6 +156,11 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     super.add(langCombo);
   }
 
+  /**
+   * Adds the change listener.
+   *
+   * @param onChange the on change
+   */
   public void addChangeListener(final SimpleCallback onChange) {
     langCombo.addListener(Events.Select, new Listener<BaseEvent>() {
       @Override
@@ -116,6 +170,11 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     });
   }
 
+  /**
+   * Creates the lang combo.
+   *
+   * @param type the type
+   */
   private void createLangCombo(final LanguageSelectorType type) {
     // Field.setMsgTarget("side");
     // NOTE: The Combo box in modal popups fails!
@@ -139,6 +198,12 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     langCombo.setAllowBlank(false);
   }
 
+  /**
+   * Creates the store.
+   *
+   * @param type the type
+   * @return the list store
+   */
   private ListStore<LanguageData> createStore(final LanguageSelectorType type) {
     final ListStore<LanguageData> list = new ListStore<LanguageData>();
     final List<I18nLanguageSimpleDTO> langs = type == LanguageSelectorType.ONLY_FULL_TRANSLATED ? session.getFullTranslatedLanguages()
@@ -160,10 +225,21 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     return list;
   }
 
+  /**
+   * Gets the lang data.
+   *
+   * @param lang the lang
+   * @return the lang data
+   */
   private LanguageData getLangData(final I18nLanguageSimpleDTO lang) {
     return new LanguageData(lang.getCode(), lang.getEnglishName());
   }
 
+  /**
+   * Gets the language.
+   *
+   * @return the language
+   */
   public I18nLanguageSimpleDTO getLanguage() {
     final LanguageData value = langCombo.getValue();
     if (value == null) {
@@ -178,23 +254,46 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     throw new UIException("Language not found");
   }
 
+  /**
+   * Gets the language code.
+   *
+   * @return the language code
+   */
   public String getLanguageCode() {
     return langCombo.getValue().getCode();
   }
 
+  /**
+   * Gets the language english name.
+   *
+   * @return the language english name
+   */
   public String getLanguageEnglishName() {
     return langCombo.getValue().getEnglishName();
   }
 
+  /* (non-Javadoc)
+   * @see com.extjs.gxt.ui.client.widget.form.FormPanel#reset()
+   */
   @Override
   public void reset() {
     langCombo.reset();
   }
 
+  /**
+   * Sets the lang separator.
+   *
+   * @param separator the new lang separator
+   */
   public void setLangSeparator(final String separator) {
     langCombo.setLabelSeparator(separator);
   }
 
+  /**
+   * Sets the lang title.
+   *
+   * @param langFieldTitle the new lang title
+   */
   public void setLangTitle(final String langFieldTitle) {
     if (langFieldTitle == null) {
       setHideLabels(true);
@@ -205,6 +304,11 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     }
   }
 
+  /**
+   * Sets the language.
+   *
+   * @param language the new language
+   */
   public void setLanguage(final I18nLanguageSimpleDTO language) {
     if (language == null) {
       langCombo.clear();

@@ -24,40 +24,92 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveClientParams.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveClientParams implements IsSerializable {
+  
+  /** The client flags. */
   private String clientFlags;
+  
+  /** The session json. */
   private String sessionJSON;
+  
+  /** The websocket address. */
   private String websocketAddress;
 
+  /**
+   * Instantiates a new wave client params.
+   */
   public WaveClientParams() {
   }
 
+  /**
+   * Instantiates a new wave client params.
+   *
+   * @param sessionJSON the session json
+   * @param clientFlags the client flags
+   * @param websocketAddress the websocket address
+   */
   public WaveClientParams(final String sessionJSON, final String clientFlags, String websocketAddress) {
     this.sessionJSON = sessionJSON;
     this.clientFlags = clientFlags;
     this.websocketAddress = websocketAddress;
   }
 
+  /**
+   * Gets the client flags.
+   *
+   * @return the client flags
+   */
   public String getClientFlags() {
     return clientFlags;
   }
 
+  /**
+   * Gets the session json.
+   *
+   * @return the session json
+   */
   public String getSessionJSON() {
     return sessionJSON;
   }
 
+  /**
+   * Sets the client flags.
+   *
+   * @param clientFlags the new client flags
+   */
   public void setClientFlags(final String clientFlags) {
     this.clientFlags = clientFlags;
   }
 
+  /**
+   * Sets the session json.
+   *
+   * @param sessionJSON the new session json
+   */
   public void setSessionJSON(final String sessionJSON) {
     this.sessionJSON = sessionJSON;
   }
 
+  /**
+   * Gets the websocket address.
+   *
+   * @return the websocket address
+   */
   public String getWebsocketAddress() {
     return websocketAddress;
   }
 
+  /**
+   * Sets the websocket address.
+   *
+   * @param websocketAddress the new websocket address
+   */
   public void setWebsocketAddress(String websocketAddress) {
     this.websocketAddress = websocketAddress;
   }

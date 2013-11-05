@@ -32,7 +32,15 @@ import cc.kune.core.client.contacts.SimpleContactManager;
 
 import com.calclab.hablar.client.HablarGinjector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatGinModule extends ExtendedGinModule {
+  
+  /** The hablar injector. */
   private HablarGinjector hablarInjector;
 
   /*

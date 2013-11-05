@@ -28,33 +28,34 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class Participant extends JavaScriptObject {
 
-	protected Participant(){};
+  protected Participant() {
+  };
 
-	/**
-	 * Gets the unique identifier of this participant.
-	 *
-	 * @return The participant's id
-	 */
-	public final native String getId() /*-{
-	    return this.getId();
-	  }-*/;
+  /**
+   * Gets the unique identifier of this participant.
+   * 
+   * @return The participant's id
+   */
+  public final native String getId() /*-{
+                                     return this.getId();
+                                     }-*/;
 
-	/**
-	 * Gets the unique identifier of this participant.
-	 *
-	 * @return The participant's display name
-	 */
-	public final native String getDisplayName() /*-{
-	    return this.getDisplayName();
-	  }-*/;
+  /**
+   * Gets the unique identifier of this participant.
+   * 
+   * @return The participant's display name
+   */
+  public final native String getDisplayName() /*-{
+                                              return this.getDisplayName();
+                                              }-*/;
 
-	/**
-	 * Gets the url of the thumbnail image for this participant.
-	 *
-	 * @return The participant's thumbnail image url.
-	 */
-	public final native String getThumbnailUrl() /*-{
-	    return this.getThumbnailUrl();
-	  }-*/;
-	
+  /**
+   * Gets the url of the thumbnail image for this participant.
+   * 
+   * @return The participant's thumbnail image url.
+   */
+  public final native String getThumbnailUrl() /*-{
+                                               return this.getThumbnailUrl();
+                                               }-*/;
+
 }

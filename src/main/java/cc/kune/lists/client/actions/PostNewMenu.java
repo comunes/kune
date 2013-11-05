@@ -27,8 +27,19 @@ import cc.kune.gspace.client.actions.NewMenuProvider;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PostNewMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PostNewMenu extends NewMenuProvider {
 
+  /**
+   * Instantiates a new post new menu.
+   *
+   * @param menu the menu
+   */
   @Inject
   public PostNewMenu(final AbstractNewMenu menu) {
     super(menu);

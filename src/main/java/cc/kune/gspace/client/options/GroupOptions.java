@@ -22,6 +22,12 @@
  */
 package cc.kune.gspace.client.options;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface GroupOptions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GroupOptions extends EntityOptions {
 
   /**
@@ -33,5 +39,8 @@ public interface GroupOptions extends EntityOptions {
    */
   void show(String token);
 
+  /**
+   * Show tooltip.
+   */
   void showTooltip();
 }

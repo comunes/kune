@@ -27,16 +27,37 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import com.calclab.emite.core.client.packet.DelegatedPacket;
 import com.calclab.emite.core.client.packet.IPacket;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XMLRol.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class XMLRol extends DelegatedPacket {
 
+  /**
+   * Instantiates a new xML rol.
+   *
+   * @param delegate the delegate
+   */
   public XMLRol(final IPacket delegate) {
     super(delegate);
   }
 
+  /**
+   * Gets the rol required.
+   *
+   * @return the rol required
+   */
   public AccessRolDTO getRolRequired() {
     return AccessRolDTO.valueOf(getFirstChild("rolRequired").getText());
   }
 
+  /**
+   * Checks if is auth need.
+   *
+   * @return true, if is auth need
+   */
   public boolean isAuthNeed() {
     return Boolean.valueOf(getFirstChild("authNeed").getText());
   }

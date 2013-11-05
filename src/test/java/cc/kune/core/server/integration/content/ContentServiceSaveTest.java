@@ -28,10 +28,22 @@ import org.junit.Test;
 
 import cc.kune.core.server.integration.IntegrationTestHelper;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentServiceSaveTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
   // private StateContentDTO defaultContent;
 
+  /**
+   * Inits the.
+   *
+   * @throws Exception the exception
+   */
   @Before
   public void init() throws Exception {
     new IntegrationTestHelper(true, this);
@@ -39,6 +51,11 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
     doLogin();
   }
 
+  /**
+   * Test save and retrieve.
+   *
+   * @throws Exception the exception
+   */
   @Ignore
   @Test
   public void testSaveAndRetrieve() throws Exception {
@@ -56,6 +73,11 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
     // assertEquals(new Double(0), again.getRate());
   }
 
+  /**
+   * Test save and retrieve big.
+   *
+   * @throws Exception the exception
+   */
   @Ignore
   @Test
   public void testSaveAndRetrieveBig() throws Exception {

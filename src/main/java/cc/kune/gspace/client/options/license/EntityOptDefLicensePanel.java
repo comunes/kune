@@ -40,14 +40,35 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityOptDefLicensePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityOptDefLicensePanel extends Composite implements EntityOptDefLicenseView {
 
+  /** The Constant TAB_ID. */
   public static final String TAB_ID = "k-eodlp-lic-id";
+  
+  /** The change. */
   private final Button change;
+  
+  /** The intro. */
   private final Label intro;
+  
+  /** The license image. */
   private final Image licenseImage;
+  
+  /** The tab title. */
   private final IconLabel tabTitle;
 
+  /**
+   * Instantiates a new entity opt def license panel.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   */
   public EntityOptDefLicensePanel(final I18nTranslationService i18n, final IconicResources res) {
     tabTitle = TabTitleGenerator.generate(res.copyleftWhite(), i18n.t("License"), MAX_TABTITLE_LENGTH,
         TAB_ID);
@@ -71,30 +92,50 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
     flow.addStyleName("k-tab-panel");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.license.EntityOptDefLicenseView#getChange()
+   */
   @Override
   public HasClickHandlers getChange() {
     return change;
   }
 
+  /**
+   * Gets the intro.
+   *
+   * @return the intro
+   */
   public Label getIntro() {
     return intro;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.license.EntityOptDefLicenseView#getLicenseImage()
+   */
   @Override
   public HasClickHandlers getLicenseImage() {
     return licenseImage;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.EntityOptionsTabView#getTabTitle()
+   */
   @Override
   public IsWidget getTabTitle() {
     return tabTitle;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.license.EntityOptDefLicenseView#openWindow(java.lang.String)
+   */
   @Override
   public void openWindow(final String url) {
     KuneWindowUtils.open(url);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.license.EntityOptDefLicenseView#setLicense(cc.kune.core.shared.dto.LicenseDTO)
+   */
   @Override
   public void setLicense(final LicenseDTO defaultLicense) {
     licenseImage.setUrl(GWT.getModuleBaseURL() + defaultLicense.getImageUrl());

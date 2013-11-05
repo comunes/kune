@@ -25,13 +25,18 @@ package cc.kune.core.server.xmpp;
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface OpenfireXmppRosterPresenceFinder.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface OpenfireXmppRosterPresenceFinder {
 
   /**
-   * Gets the last connected time of a username
-   * 
-   * @param username
-   *          the shortname of the user but without the @domain
+   * Gets the last connected time of a username.
+   *
+   * @param username the shortname of the user but without the @domain
    * @return the list
    */
   @Finder(query = "from RosterPresence WHERE username = :username")

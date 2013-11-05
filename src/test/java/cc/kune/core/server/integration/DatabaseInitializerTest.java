@@ -45,23 +45,49 @@ import cc.kune.domain.ToolConfiguration;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DatabaseInitializerTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DatabaseInitializerTest {
+  
+  /** The container manager. */
   @Inject
   ContainerManager containerManager;
+  
+  /** The content manager. */
   @Inject
   ContentManager contentManager;
+  
+  /** The country manager. */
   @Inject
   I18nCountryManager countryManager;
+  
+  /** The default group. */
   private Group defaultGroup;
+  
+  /** The group manager. */
   @Inject
   GroupManager groupManager;
+  
+  /** The language manager. */
   @Inject
   I18nLanguageManager languageManager;
+  
+  /** The license manager. */
   @Inject
   LicenseManager licenseManager;
+  
+  /** The trans manager. */
   @Inject
   I18nTranslationManager transManager;
 
+  /**
+   * Inits the.
+   */
   @KuneTransactional
   @Before
   public void init() {
@@ -69,6 +95,9 @@ public class DatabaseInitializerTest {
     defaultGroup = groupManager.getSiteDefaultGroup();
   }
 
+  /**
+   * Test default content and licenses.
+   */
   @Test
   public void testDefaultContentAndLicenses() {
     assertNotNull(defaultGroup.getDefaultContent());
@@ -76,6 +105,9 @@ public class DatabaseInitializerTest {
     assertNotNull(defaultGroup.getDefaultLicense());
   }
 
+  /**
+   * Test default document content.
+   */
   @Test
   public void testDefaultDocumentContent() {
     final Content content = defaultGroup.getDefaultContent();
@@ -84,6 +116,9 @@ public class DatabaseInitializerTest {
     assertEquals(true, rootDocFolder.isRoot());
   }
 
+  /**
+   * Test i18n.
+   */
   @Test
   public void testI18n() {
     assertNotNull(countryManager.find(Long.valueOf(75)));
@@ -91,6 +126,9 @@ public class DatabaseInitializerTest {
     assertNotNull(languageManager.find(Long.valueOf(1819)));
   }
 
+  /**
+   * Test tool configuration.
+   */
   @Test
   public void testToolConfiguration() {
     assertNotNull(defaultGroup);

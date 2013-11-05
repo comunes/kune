@@ -28,15 +28,30 @@ import cc.kune.core.client.state.StateManager;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RefreshCurrentStateAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class RefreshCurrentStateAction extends AbstractExtendedAction {
 
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new refresh current state action.
+   *
+   * @param stateManager the state manager
+   */
   @Inject
   public RefreshCurrentStateAction(final StateManager stateManager) {
     this.stateManager = stateManager;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     stateManager.refreshCurrentStateWithoutCache();

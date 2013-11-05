@@ -37,12 +37,39 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventOpenMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class EventOpenMenuItem extends MenuItemDescriptor {
+  
+  /**
+   * The Class EventEditAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class EventEditAction extends CalendarRolAction {
+    
+    /** The calendar. */
     private final Provider<CalendarViewer> calendar;
+    
+    /** The state manager. */
     private final StateManager stateManager;
 
+    /**
+     * Instantiates a new event edit action.
+     *
+     * @param res the res
+     * @param i18n the i18n
+     * @param calendar the calendar
+     * @param eventBus the event bus
+     * @param stateManager the state manager
+     * @param session the session
+     * @param rightsMan the rights man
+     */
     @Inject
     public EventEditAction(final IconicResources res, final I18nTranslationService i18n,
         final Provider<CalendarViewer> calendar, final EventBus eventBus,
@@ -53,12 +80,21 @@ public class EventOpenMenuItem extends MenuItemDescriptor {
       withText(i18n.t("Open the appointment")).withIcon(res.rightArrow());
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       stateManager.gotoHistoryToken(calendar.get().getAppToEdit().getId());
     }
   }
 
+  /**
+   * Instantiates a new event open menu item.
+   *
+   * @param action the action
+   * @param cal the cal
+   */
   @Inject
   public EventOpenMenuItem(final EventEditAction action, final CalendarOnOverMenu cal) {
     super(action);

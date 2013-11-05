@@ -27,8 +27,20 @@ import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LanguageSelectorOnlyFullTranslatedPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LanguageSelectorOnlyFullTranslatedPanel extends AbstractLanguageSelectorPanel {
 
+  /**
+   * Instantiates a new language selector only full translated panel.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   */
   @Inject
   public LanguageSelectorOnlyFullTranslatedPanel(final I18nTranslationService i18n, final Session session) {
     super(i18n, session, LanguageSelectorType.ONLY_FULL_TRANSLATED);

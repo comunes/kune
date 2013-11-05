@@ -25,10 +25,13 @@ package cc.kune.common.client.ui;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.UIObject;
 
+// TODO: Auto-generated Javadoc
 /**
  * Source:
  * http://stackoverflow.com/questions/2316590/blink-flash-effect-or-animation
  * -in-gwt
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 /**
  * @author vjrj
@@ -40,25 +43,35 @@ import com.google.gwt.user.client.ui.UIObject;
  */
 public class BlinkAnimation {
 
+  /** The blink. */
   private boolean blink;
 
+  /** The interval. */
   private final int interval;
 
+  /** The iteration. */
   private int iteration;
 
+  /** The stop iter. */
   private int stopIter;
 
+  /** The timer. */
   private final Timer timer;
 
+  /**
+   * Instantiates a new blink animation.
+   *
+   * @param obj the obj
+   */
   public BlinkAnimation(final UIObject obj) {
     this(obj, 200);
   }
 
   /**
-   * @param obj
-   *          the object to animate
-   * @param interval
-   *          between blinks
+   * Instantiates a new blink animation.
+   *
+   * @param obj the object to animate
+   * @param interval between blinks
    */
   public BlinkAnimation(final UIObject obj, final int interval) {
     this.interval = interval;
@@ -81,15 +94,16 @@ public class BlinkAnimation {
   }
 
   /**
-   * Animate till {@link BlinkAnimation#stop() }
+   * Animate till {@link BlinkAnimation#stop() }.
    */
   public void animate() {
     animate(-1);
   }
 
   /**
-   * @param numTimes
-   *          to blink (3, 4, ... etc)
+   * Animate.
+   *
+   * @param numTimes to blink (3, 4, ... etc)
    */
   public void animate(final int numTimes) {
     iteration = 0;
@@ -99,7 +113,7 @@ public class BlinkAnimation {
   }
 
   /**
-   * Stop the animation now
+   * Stop the animation now.
    */
   public void stop() {
     timer.cancel();

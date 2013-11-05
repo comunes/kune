@@ -32,9 +32,22 @@ import cc.kune.core.server.persist.ClearCacheDailyJob;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SocialNetworkCacheClearDailyJob.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class SocialNetworkCacheClearDailyJob extends ClearCacheDailyJob {
 
+  /**
+   * Instantiates a new social network cache clear daily job.
+   *
+   * @param cache the cache
+   * @throws ParseException the parse exception
+   * @throws SchedulerException the scheduler exception
+   */
   @Inject
   public SocialNetworkCacheClearDailyJob(final SocialNetworkCache cache) throws ParseException,
       SchedulerException {

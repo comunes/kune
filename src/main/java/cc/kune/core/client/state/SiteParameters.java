@@ -24,26 +24,29 @@ package cc.kune.core.client.state;
 
 import cc.kune.common.client.utils.WindowUtils;
 
+// TODO: Auto-generated Javadoc
 /**
- * Some common url params like {@link ?locale}
- * 
+ * Some common url params like {@link ?locale}.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SiteParameters {
 
-  /** The Constant ESCAPED_FRAGMENT_PARAMETER is used to make kune searcheable */
+  /** The Constant ESCAPED_FRAGMENT_PARAMETER is used to make kune searcheable. */
   public static final String ESCAPED_FRAGMENT_PARAMETER = "_escaped_fragment_";
 
   /** The Constant LOCALE force the use of some language. */
   public static final String LOCALE = "locale";
 
-  /** The Constant NO_UA_CHECK, if present, disable the User Agent check */
+  /** The Constant NO_UA_CHECK, if present, disable the User Agent check. */
   public static final String NO_UA_CHECK = "noua";
   /**
    * The Constant ONLY_WEBCLIENT indicates if we should only open waves in Wave
    * webclient (not in the group space). Useful for debugging.
    */
   public static final String ONLY_WEBCLIENT = "onlywebclient";
-  /** The Constant UA_CHECK, if present, enable the User Agent check */
+  
+  /** The Constant UA_CHECK, if present, enable the User Agent check. */
   public static final String UA_CHECK = "ua";
 
   /**
@@ -52,14 +55,27 @@ public final class SiteParameters {
    */
   public static final String WAVE_AVATARS_DISABLED = "waveavatarsdisabled";
 
+  /**
+   * Check ua.
+   *
+   * @return true, if successful
+   */
   public static boolean checkUA() {
     return WindowUtils.getParameter(SiteParameters.NO_UA_CHECK) == null;
   }
 
+  /**
+   * Checks if is search robot.
+   *
+   * @return true, if is search robot
+   */
   public static boolean isSearchRobot() {
     return WindowUtils.getParameter(SiteParameters.ESCAPED_FRAGMENT_PARAMETER) != null;
   }
 
+  /**
+   * Instantiates a new site parameters.
+   */
   public SiteParameters() {
   }
 }

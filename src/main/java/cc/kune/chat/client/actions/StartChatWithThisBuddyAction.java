@@ -29,7 +29,21 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StartChatWithThisBuddyAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StartChatWithThisBuddyAction extends StartChatWithMemberAction {
+  
+  /**
+   * Instantiates a new start chat with this buddy action.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param chatClient the chat client
+   */
   @Inject
   public StartChatWithThisBuddyAction(final I18nTranslationService i18n, final ChatResources res,
       final Provider<ChatClient> chatClient) {

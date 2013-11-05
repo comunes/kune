@@ -31,10 +31,26 @@ import cc.kune.core.client.state.Session;
 import com.google.gwt.http.client.URL;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShareInIdenticaMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ShareInIdenticaMenuItem extends AbstractShareInSocialNetMenuItem {
 
+  /** The Constant URL_TEMPLATE. */
   private static final String URL_TEMPLATE = "http://identi.ca//index.php?action=newnotice&status_textarea=%s";
 
+  /**
+   * Instantiates a new share in identica menu item.
+   *
+   * @param action the action
+   * @param iconic the iconic
+   * @param session the session
+   * @param menu the menu
+   * @param i18n the i18n
+   */
   @Inject
   public ShareInIdenticaMenuItem(final AbstractShareInSocialNetAction action,
       final IconicResources iconic, final Session session, final ContentViewerShareMenu menu,

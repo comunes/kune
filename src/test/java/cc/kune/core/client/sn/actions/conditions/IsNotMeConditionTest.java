@@ -38,21 +38,47 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IsNotMeConditionTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @RunWith(JukitoRunner.class)
 public class IsNotMeConditionTest {
 
+  /** The descr. */
   @Inject
   GuiActionDescrip descr;
+  
+  /** The group. */
   GroupDTO group;
+  
+  /** The is me condition. */
   private IsMeCondition isMeCondition;
+  
+  /** The is not me condition. */
   private IsNotMeCondition isNotMeCondition;
+  
+  /** The me. */
   UserSimpleDTO me;
+  
+  /** The my group. */
   GroupDTO myGroup;
+  
+  /** The other group. */
   GroupDTO otherGroup;
+  
+  /** The other user. */
   UserSimpleDTO otherUser;
+  
+  /** The session. */
   @Inject
   Session session;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     this.me = Mockito.mock(UserSimpleDTO.class);
@@ -69,26 +95,45 @@ public class IsNotMeConditionTest {
     when(session.getCurrentUser()).thenReturn(me);
   }
 
+  /**
+   * Login.
+   */
   private void login() {
     when(session.getCurrentUser()).thenReturn(me);
     when(session.isLogged()).thenReturn(true);
     when(session.isNotLogged()).thenReturn(false);
   }
 
+  /**
+   * Logout.
+   */
   private void logout() {
     when(session.getCurrentUser()).thenReturn(null);
     when(session.isLogged()).thenReturn(false);
     when(session.isNotLogged()).thenReturn(true);
   }
 
+  /**
+   * Should be added.
+   *
+   * @param mustBeAdded the must be added
+   */
   private void shouldBeAdded(final boolean mustBeAdded) {
     assertTrue(mustBeAdded);
   }
 
+  /**
+   * Should not be added.
+   *
+   * @param mustNotBeAdded the must not be added
+   */
   private void shouldNotBeAdded(final boolean mustNotBeAdded) {
     assertFalse(mustNotBeAdded);
   }
 
+  /**
+   * Test is me my group.
+   */
   @Test
   public void testIsMeMyGroup() {
     login();
@@ -96,6 +141,9 @@ public class IsNotMeConditionTest {
     shouldBeAdded(isMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is me my group not logged.
+   */
   @Test
   public void testIsMeMyGroupNotLogged() {
     logout();
@@ -103,6 +151,9 @@ public class IsNotMeConditionTest {
     shouldNotBeAdded(isMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is me other group.
+   */
   @Test
   public void testIsMeOtherGroup() {
     login();
@@ -110,6 +161,9 @@ public class IsNotMeConditionTest {
     shouldNotBeAdded(isMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is me other group not logged.
+   */
   @Test
   public void testIsMeOtherGroupNotLogged() {
     logout();
@@ -117,6 +171,9 @@ public class IsNotMeConditionTest {
     shouldNotBeAdded(isMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is me other user.
+   */
   @Test
   public void testIsMeOtherUser() {
     login();
@@ -124,6 +181,9 @@ public class IsNotMeConditionTest {
     shouldNotBeAdded(isMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is me other user not logged.
+   */
   @Test
   public void testIsMeOtherUserNotLogged() {
     logout();
@@ -131,6 +191,9 @@ public class IsNotMeConditionTest {
     shouldNotBeAdded(isMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is me user.
+   */
   @Test
   public void testIsMeUser() {
     login();
@@ -138,6 +201,9 @@ public class IsNotMeConditionTest {
     shouldBeAdded(isMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is me user not logged.
+   */
   @Test
   public void testIsMeUserNotLogged() {
     logout();
@@ -145,6 +211,9 @@ public class IsNotMeConditionTest {
     shouldNotBeAdded(isMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is not me me user.
+   */
   @Test
   public void testIsNotMeMeUser() {
     login();
@@ -152,6 +221,9 @@ public class IsNotMeConditionTest {
     shouldNotBeAdded(isNotMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is not me my group.
+   */
   @Test
   public void testIsNotMeMyGroup() {
     login();
@@ -159,6 +231,9 @@ public class IsNotMeConditionTest {
     shouldNotBeAdded(isNotMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is not me my group not logged.
+   */
   @Test
   public void testIsNotMeMyGroupNotLogged() {
     logout();
@@ -166,6 +241,9 @@ public class IsNotMeConditionTest {
     shouldBeAdded(isNotMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is not me other group.
+   */
   @Test
   public void testIsNotMeOtherGroup() {
     login();
@@ -173,6 +251,9 @@ public class IsNotMeConditionTest {
     shouldBeAdded(isNotMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is not me other group not logged.
+   */
   @Test
   public void testIsNotMeOtherGroupNotLogged() {
     logout();
@@ -180,6 +261,9 @@ public class IsNotMeConditionTest {
     shouldBeAdded(isNotMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is not me other user.
+   */
   @Test
   public void testIsNotMeOtherUser() {
     login();
@@ -187,6 +271,9 @@ public class IsNotMeConditionTest {
     shouldBeAdded(isNotMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test is not me other user not logged.
+   */
   @Test
   public void testIsNotMeOtherUserNotLogged() {
     logout();
@@ -194,6 +281,9 @@ public class IsNotMeConditionTest {
     shouldBeAdded(isNotMeCondition.mustBeAdded(descr));
   }
 
+  /**
+   * Test me user not logged.
+   */
   @Test
   public void testMeUserNotLogged() {
     logout();

@@ -24,11 +24,14 @@ package cc.kune.common.shared.utils;
 
 import java.util.Arrays;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class FormattedString is used to separate, String templates (usually
  * html) from args (indicated with %s) and also to allow the translation of this
  * templates. More info
  * http://docs.oracle.com/javase/1.5.0/docs/api/java/util/Formatter.html#syntax
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractFormattedString {
 
@@ -43,13 +46,10 @@ public abstract class AbstractFormattedString {
 
   /**
    * Instantiates a new formated string.
-   * 
-   * @param template
-   *          the template
-   * @param shouldBeTranslated
-   *          the should be translated
-   * @param args
-   *          the args that will be formatted inside the template (%s, etc)
+   *
+   * @param shouldBeTranslated the should be translated
+   * @param template the template
+   * @param args the args that will be formatted inside the template (%s, etc)
    */
   public AbstractFormattedString(final boolean shouldBeTranslated, final String template,
       final Object... args) {
@@ -80,6 +80,9 @@ public abstract class AbstractFormattedString {
     this(true, template, args);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
@@ -108,8 +111,20 @@ public abstract class AbstractFormattedString {
     return true;
   }
 
+  /**
+   * Format.
+   *
+   * @param template the template
+   * @param args the args
+   * @return the string
+   */
   public abstract String format(final String template, final Object... args);
 
+  /**
+   * Gets the args.
+   *
+   * @return the args
+   */
   public Object[] getArgs() {
     return args;
   }
@@ -135,6 +150,9 @@ public abstract class AbstractFormattedString {
     return template;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -168,14 +186,17 @@ public abstract class AbstractFormattedString {
 
   /**
    * If should be translated (sometimes the template is only html and should not
-   * be translated)
-   * 
+   * be translated).
+   *
    * @return true, if should be
    */
   public boolean shouldBeTranslated() {
     return shouldBeTranslated;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return "FormatedString ['" + TextUtils.ellipsis(template, 40) + "', args=" + Arrays.toString(args)

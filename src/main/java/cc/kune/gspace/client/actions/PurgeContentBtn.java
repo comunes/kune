@@ -32,12 +32,30 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PurgeContentBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PurgeContentBtn extends ButtonDescriptor {
 
+  /**
+   * The Class PurgeContentAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class PurgeContentAction extends RolAction {
 
+    /** The content service. */
     private final ContentServiceHelper contentService;
 
+    /**
+     * Instantiates a new purge content action.
+     *
+     * @param contentService the content service
+     * @param res the res
+     */
     @Inject
     public PurgeContentAction(final ContentServiceHelper contentService, final IconicResources res) {
       super(AccessRolDTO.Administrator, true);
@@ -45,6 +63,9 @@ public class PurgeContentBtn extends ButtonDescriptor {
       this.withText(I18n.t("Delete permanently")).withIcon(res.trashGrey());
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       contentService.purgeContent(ActionUtils.getActionToken(event));
@@ -52,6 +73,11 @@ public class PurgeContentBtn extends ButtonDescriptor {
 
   }
 
+  /**
+   * Instantiates a new purge content btn.
+   *
+   * @param action the action
+   */
   @Inject
   public PurgeContentBtn(final PurgeContentAction action) {
     super(action);

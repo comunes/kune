@@ -37,29 +37,61 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ErrorHandler.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ErrorHandler {
 
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The i18n. */
   private final I18nUITranslationService i18n;
 
+  /**
+   * Instantiates a new error handler.
+   *
+   * @param i18n the i18n
+   * @param eventBus the event bus
+   */
   @Inject
   public ErrorHandler(final I18nUITranslationService i18n, final EventBus eventBus) {
     this.i18n = i18n;
     this.eventBus = eventBus;
   }
 
+  /**
+   * Do session expired.
+   */
   public void doSessionExpired() {
     eventBus.fireEvent(new SessionExpiredEvent());
   }
 
+  /**
+   * Go home.
+   */
   private void goHome() {
     GoHomeEvent.fire(eventBus);
   }
 
+  /**
+   * Log exception.
+   *
+   * @param caught the caught
+   */
   private void logException(final Throwable caught) {
     logException(caught, false);
   }
 
+  /**
+   * Log exception.
+   *
+   * @param caught the caught
+   * @param showException the show exception
+   */
   private void logException(final Throwable caught, final boolean showException) {
     if (showException) {
       Log.debug("Exception in KuneErrorHandler", caught);
@@ -68,6 +100,11 @@ public class ErrorHandler {
     }
   }
 
+  /**
+   * Process.
+   *
+   * @param caught the caught
+   */
   public void process(final Throwable caught) {
     eventBus.fireEvent(new ProgressHideEvent());
     if (caught instanceof AccessViolationException) {

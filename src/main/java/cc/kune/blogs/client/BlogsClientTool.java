@@ -33,8 +33,22 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BlogsClientTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BlogsClientTool extends FoldableAbstractClientTool {
 
+  /**
+   * Instantiates a new blogs client tool.
+   *
+   * @param i18n the i18n
+   * @param toolSelector the tool selector
+   * @param cntCapRegistry the cnt cap registry
+   * @param history the history
+   */
   @Inject
   public BlogsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
@@ -56,11 +70,17 @@ public class BlogsClientTool extends FoldableAbstractClientTool {
     registerIcons();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.AbstractClientTool#getName()
+   */
   @Override
   public String getName() {
     return TOOL_NAME;
   }
 
+  /**
+   * Register icons.
+   */
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_BLOG);

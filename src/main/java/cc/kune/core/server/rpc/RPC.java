@@ -34,8 +34,10 @@ import com.google.inject.Singleton;
  * <li>has userHash protected methods</li>
  * <li>contains little (or nothing) bussines logic (should delegate to other
  * services/managers)</li>
- * </ul>
- * 
+ * </ul>.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public interface RPC {

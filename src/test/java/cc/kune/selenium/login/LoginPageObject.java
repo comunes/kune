@@ -31,22 +31,43 @@ import cc.kune.core.client.auth.SignInForm;
 import cc.kune.core.client.auth.SignInPanel;
 import cc.kune.selenium.SeleniumConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoginPageObject.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LoginPageObject extends AbstractLoginObject {
 
+  /** The anon welcome. */
   @FindBy(id = SeleniumConstants.GWTDEV + AnonUsersManager.ANON_MESSAGE_CLOSE_ICON)
   private WebElement anonWelcome;
+  
+  /** The create one link. */
   @FindBy(id = SeleniumConstants.GWTDEV + SignInPanel.CREATE_ONE)
   protected WebElement createOneLink;
+  
+  /** The passwd. */
   @FindBy(id = SignInForm.PASSWORD_FIELD_ID)
   private WebElement passwd;
+  
+  /** The sign in button. */
   @FindBy(id = SeleniumConstants.GWTDEV + SignInPanel.SIGN_IN_BUTTON_ID)
   private WebElement signInButton;
+  
+  /** The user. */
   @FindBy(id = SignInForm.USER_FIELD_ID)
   private WebElement user;
 
+  /**
+   * Instantiates a new login page object.
+   */
   public LoginPageObject() {
   }
 
+  /**
+   * Creates the one.
+   */
   public void createOne() {
     assertIsDisconnected();
     // hightlight(signInLink);
@@ -55,6 +76,13 @@ public class LoginPageObject extends AbstractLoginObject {
     createOneLink.click();
   }
 
+  /**
+   * Fill sig in in form.
+   *
+   * @param username the username
+   * @param password the password
+   * @param withReturn the with return
+   */
   public void fillSigInInForm(final String username, final String password, final boolean withReturn) {
     clearField(user);
     hightlight(user);
@@ -70,26 +98,57 @@ public class LoginPageObject extends AbstractLoginObject {
     }
   }
 
+  /**
+   * Gets the anon msg.
+   *
+   * @return the anon msg
+   */
   public WebElement getAnonMsg() {
     return anonWelcome;
   }
 
+  /**
+   * Gets the header.
+   *
+   * @return the header
+   */
   public WebElement getHeader() {
     return signInLink;
   }
 
+  /**
+   * Header.
+   *
+   * @return the web element
+   */
   public WebElement header() {
     return getHeader();
   }
 
+  /**
+   * High.
+   */
   public void high() {
     hightlight(signInLink);
   }
 
+  /**
+   * Sign in.
+   *
+   * @param username the username
+   * @param password the password
+   */
   public void signIn(final String username, final String password) {
     signIn(username, password, false);
   }
 
+  /**
+   * Sign in.
+   *
+   * @param username the username
+   * @param password the password
+   * @param withReturn the with return
+   */
   public void signIn(final String username, final String password, final boolean withReturn) {
     assertIsDisconnected();
     showTooltip(signInLink);
@@ -97,6 +156,9 @@ public class LoginPageObject extends AbstractLoginObject {
     fillSigInInForm(username, password, withReturn);
   }
 
+  /**
+   * Sign in def user.
+   */
   public void signInDefUser() {
     signIn(SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_PASSWD, true);
   }

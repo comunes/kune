@@ -25,28 +25,64 @@ package cc.kune.core.client.actions.xml;
 import com.calclab.emite.core.client.packet.DelegatedPacket;
 import com.calclab.emite.core.client.packet.IPacket;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XMLWaveExtension.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class XMLWaveExtension extends DelegatedPacket {
 
+  /**
+   * Instantiates a new xML wave extension.
+   *
+   * @param xml the xml
+   */
   public XMLWaveExtension(final IPacket xml) {
     super(xml);
   }
 
+  /**
+   * Gets the ext name.
+   *
+   * @return the ext name
+   */
   public String getExtName() {
     return getFirstChild("name").getText();
   }
 
+  /**
+   * Gets the gadget url.
+   *
+   * @return the gadget url
+   */
   public String getGadgetUrl() {
     return getFirstChild("gadgetUrl").getText().trim();
   }
 
+  /**
+   * Gets the icon css.
+   *
+   * @return the icon css
+   */
   public String getIconCss() {
     return getFirstChild("iconCss").getText().trim();
   }
 
+  /**
+   * Gets the icon url.
+   *
+   * @return the icon url
+   */
   public String getIconUrl() {
     return getFirstChild("iconUrl").getText().trim();
   }
 
+  /**
+   * Gets the installer url.
+   *
+   * @return the installer url
+   */
   public String getInstallerUrl() {
     return getFirstChild("installerUrl").getText().trim();
   }

@@ -24,12 +24,30 @@ package cc.kune.common.client.tooltip;
 
 import cc.kune.common.client.utils.TimerWrapper;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TooltipTimers.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TooltipTimers {
 
+  /** The hide timer. */
   private final TimerWrapper hideTimer;
+  
+  /** The security timer. */
   private final TimerWrapper securityTimer;
+  
+  /** The show timer. */
   private final TimerWrapper showTimer;
 
+  /**
+   * Instantiates a new tooltip timers.
+   *
+   * @param showTimer the show timer
+   * @param hideTimer the hide timer
+   * @param securityTimer the security timer
+   */
   public TooltipTimers(final TimerWrapper showTimer, final TimerWrapper hideTimer,
       final TimerWrapper securityTimer) {
     this.showTimer = showTimer;
@@ -37,12 +55,18 @@ public class TooltipTimers {
     this.securityTimer = securityTimer;
   }
 
+  /**
+   * Cancel.
+   */
   public void cancel() {
     showTimer.cancel();
     hideTimer.cancel();
     securityTimer.cancel();
   }
 
+  /**
+   * On out.
+   */
   public void onOut() {
     if (showTimer.isScheduled()) {
       showTimer.cancel();
@@ -55,6 +79,9 @@ public class TooltipTimers {
     }
   }
 
+  /**
+   * On over.
+   */
   public void onOver() {
     if (!showTimer.isScheduled()) {
       showTimer.schedule(700);
@@ -67,10 +94,18 @@ public class TooltipTimers {
     }
   }
 
+  /**
+   * Show is scheduled.
+   *
+   * @return true, if successful
+   */
   public boolean showIsScheduled() {
     return showTimer.isScheduled();
   }
 
+  /**
+   * Show temporally.
+   */
   public void showTemporally() {
     if (showTimer.isScheduled()) {
       showTimer.cancel();

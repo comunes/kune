@@ -36,22 +36,39 @@ import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserFinderTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserFinderTest extends PersistencePreLoadedDataTest {
+  
+  /** The finder. */
   @Inject
   UserFinder finder;
 
+  /**
+   * Find all.
+   */
   @Test
   public void findAll() {
     final List<User> all = finder.getAll();
     assertEquals(3, all.size());
   }
 
+  /**
+   * Find by email.
+   */
   @Test
   public void findByEmail() {
     final User user = finder.findByEmail("one@here.com");
     assertNotNull(user);
   }
 
+  /**
+   * Inits the data.
+   */
   @Before
   public void initData() {
     persist(new User("shortname1", "the name1", "one@here.com", "diggest".getBytes(), "salt".getBytes(),

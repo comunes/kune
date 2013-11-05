@@ -53,64 +53,131 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HSpacePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class HSpacePanel extends ViewImpl implements HSpaceView {
 
+  /**
+   * The Interface HSpacePanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface HSpacePanelUiBinder extends UiBinder<Widget, HSpacePanel> {
   }
 
+  /** The Constant K_HOME_GLOBAL_STATS. */
   public static final String K_HOME_GLOBAL_STATS = "k-home-global-stats";
+  
+  /** The Constant K_HOME_GROUP_STATS. */
   public static final String K_HOME_GROUP_STATS = "k-home-group-stats";
 
+  /** The Constant K_HOME_TOOLBAR. */
   public static final String K_HOME_TOOLBAR = "k-home-toolbar";
 
+  /** The ui binder. */
   private static HSpacePanelUiBinder uiBinder = GWT.create(HSpacePanelUiBinder.class);
 
+  /** The down utils. */
   private final SharedFileDownloadUtils downUtils;
+  
+  /** The global stats. */
   @UiField
   FlowPanel globalStats;
+  
+  /** The global stats parent. */
   private final RootPanel globalStatsParent;
+  
+  /** The global stats title. */
   @UiField
   public Label globalStatsTitle;
+  
+  /** The global stats total groups count. */
   @UiField
   public InlineLabel globalStatsTotalGroupsCount;
+  
+  /** The global stats total groups title. */
   @UiField
   public InlineLabel globalStatsTotalGroupsTitle;
+  
+  /** The global stats total users count. */
   @UiField
   public InlineLabel globalStatsTotalUsersCount;
+  
+  /** The global stats total users title. */
   @UiField
   public InlineLabel globalStatsTotalUsersTitle;
+  
+  /** The group stats parent. */
   private final RootPanel groupStatsParent;
 
+  /** The home toolbar. */
   private final ActionSimplePanel homeToolbar;
+  
+  /** The last activity in your group. */
   @UiField
   public FlowPanel lastActivityInYourGroup;
+  
+  /** The last activity in your groups text. */
   private final String lastActivityInYourGroupsText;
+  
+  /** The last activity in your group title. */
   @UiField
   public Label lastActivityInYourGroupTitle;
+  
+  /** The last activity panel. */
   @UiField
   FlowPanel lastActivityPanel;
+  
+  /** The last groups. */
   @UiField
   public FlowPanel lastGroups;
+  
+  /** The last groups panel. */
   @UiField
   FlowPanel lastGroupsPanel;
+  
+  /** The last groups title. */
   @UiField
   public Label lastGroupsTitle;
+  
+  /** The last published contents. */
   @UiField
   public FlowPanel lastPublishedContents;
 
+  /** The last published contents title. */
   @UiField
   public Label lastPublishedContentsTitle;
 
+  /** The last published panel. */
   @UiField
   FlowPanel lastPublishedPanel;
 
+  /** The link prov. */
   private final Provider<GroupContentHomeLink> linkProv;
 
+  /** The tab panel. */
   private final DottedTabPanel tabPanel;
+  
+  /** The unread in your inbox. */
   @UiField
   public Hyperlink unreadInYourInbox;
+  
+  /** The widget. */
   private final Widget widget;
 
+  /**
+   * Instantiates a new h space panel.
+   *
+   * @param i18n the i18n
+   * @param armor the armor
+   * @param linkProv the link prov
+   * @param downUtils the down utils
+   * @param homeToolbar the home toolbar
+   */
   @Inject
   public HSpacePanel(final I18nTranslationService i18n, final GSpaceArmor armor,
       final Provider<GroupContentHomeLink> linkProv, final SharedFileDownloadUtils downUtils,
@@ -148,46 +215,77 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     armor.getHomeSpace().add(RootPanel.get("k-home-wrapper"));
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return widget;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#blinkCurrentTab()
+   */
   @Override
   public void blinkCurrentTab() {
     tabPanel.blinkCurrentTab();
   }
 
+  /**
+   * Format.
+   *
+   * @param modifiedOn the modified on
+   * @param name the name
+   * @return the string
+   */
   private String format(final Long modifiedOn, final String name) {
     final String modOn = DateUtils.getInstance().formatPastDate(modifiedOn);
     return TextUtils.ellipsis(modOn + " ~ " + name, 50);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalGroupsCount()
+   */
   @Override
   public HasText getGlobalStatsTotalGroupsCount() {
     return globalStatsTotalGroupsCount;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalUsersCount()
+   */
   @Override
   public HasText getGlobalStatsTotalUsersCount() {
     return globalStatsTotalUsersCount;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getToolbar()
+   */
   @Override
   public IsActionExtensible getToolbar() {
     return homeToolbar;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getUnreadInYourInbox()
+   */
   @Override
   public HasText getUnreadInYourInbox() {
     return unreadInYourInbox;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setInboxUnreadVisible(boolean)
+   */
   @Override
   public void setInboxUnreadVisible(final boolean visible) {
     unreadInYourInbox.setVisible(visible);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastContentsOfMyGroup(java.util.List)
+   */
   @Override
   public void setLastContentsOfMyGroup(final List<ContentSimpleDTO> lastContentsOfMyGroupsList) {
     lastActivityInYourGroup.clear();
@@ -200,6 +298,9 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastGroups(java.util.List)
+   */
   @Override
   public void setLastGroups(final List<GroupDTO> lastGroupsList) {
     lastGroups.clear();
@@ -211,6 +312,9 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastPublishedContents(java.util.List)
+   */
   @Override
   public void setLastPublishedContents(final List<ContentSimpleDTO> lastPublishedContentsList) {
     lastPublishedContents.clear();
@@ -225,6 +329,9 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setStatsVisible(boolean)
+   */
   @Override
   public void setStatsVisible(final boolean visible) {
     if (globalStatsParent != null) {
@@ -235,6 +342,9 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setUserGroupsActivityVisible(boolean)
+   */
   @Override
   public void setUserGroupsActivityVisible(final boolean visible) {
     final boolean isAttached = tabPanel.getWidgetIndex(lastActivityPanel) != -1;

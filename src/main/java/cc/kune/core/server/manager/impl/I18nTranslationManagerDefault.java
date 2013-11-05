@@ -43,14 +43,32 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nTranslationManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslation, Long> implements
     I18nTranslationManager {
 
+  /** The finder. */
   private final I18nTranslationFinder finder;
+  
+  /** The lang cache. */
   private final ConcurrentHashMap<String, HashMap<String, String>> langCache;
+  
+  /** The language manager. */
   private final I18nLanguageManager languageManager;
 
+  /**
+   * Instantiates a new i18n translation manager default.
+   *
+   * @param provider the provider
+   * @param finder the finder
+   * @param languageManager the language manager
+   */
   @Inject
   public I18nTranslationManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final I18nTranslationFinder finder, final I18nLanguageManager languageManager) {
@@ -60,14 +78,28 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     langCache = new ConcurrentHashMap<String, HashMap<String, String>>();
   }
 
+  /**
+   * Def lang.
+   *
+   * @return the i18n language
+   */
   private I18nLanguage defLang() {
     return languageManager.getDefaultLanguage();
   }
 
+  /**
+   * Gets the language.
+   *
+   * @param languageId the language id
+   * @return the language
+   */
   private I18nLanguage getLanguage(final String languageId) {
     return languageManager.findByCode(languageId);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.I18nTranslationManager#getLexicon(java.lang.String)
+   */
   @Override
   public HashMap<String, String> getLexicon(final String languageId) {
     getLanguage(languageId);
@@ -78,6 +110,12 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     return map;
   }
 
+  /**
+   * Gets the lexicon from db.
+   *
+   * @param language the language
+   * @return the lexicon from db
+   */
   @SuppressWarnings("unchecked")
   private HashMap<String, String> getLexiconFromDb(final String language) {
     // FIXME
@@ -96,6 +134,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     return map;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.I18nTranslationManager#getTranslatedLexicon(java.lang.String, java.lang.String)
+   */
   @Override
   public List<I18nTranslationDTO> getTranslatedLexicon(final String languageCode,
       final String languageFrom) {
@@ -106,6 +147,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.I18nTranslationManager#getTranslatedLexicon(java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer)
+   */
   @Override
   public SearchResultDTO<I18nTranslationDTO> getTranslatedLexicon(final String languageCode,
       final String languageCodeFrom, final Integer firstResult, final Integer maxResults) {
@@ -120,6 +164,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     return new SearchResultDTO<I18nTranslationDTO>(list.size(), list);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.I18nTranslationManager#getTranslation(java.lang.String, java.lang.String, java.lang.String)
+   */
   @Override
   public String getTranslation(final String language, final String text, final String noteForTranslators) {
     if (TextUtils.empty(text)) {
@@ -149,6 +196,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.I18nTranslationManager#getUntranslatedLexicon(java.lang.String, java.lang.String)
+   */
   @Override
   public List<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode,
       final String languageFrom) {
@@ -160,6 +210,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.I18nTranslationManager#getUntranslatedLexicon(java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer)
+   */
   @Override
   public SearchResultDTO<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode,
       final String languageCodeFrom, final Integer firstResult, final Integer maxResults) {
@@ -174,6 +227,12 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     return new SearchResultDTO<I18nTranslationDTO>(list.size(), list);
   }
 
+  /**
+   * Inits the unstranlated.
+   *
+   * @param languageCode the language code
+   * @return the i18n language
+   */
   private I18nLanguage initUnstranlated(final String languageCode) {
     final I18nLanguage defLanguage = defLang();
     I18nLanguage language;
@@ -191,6 +250,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     return language;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.I18nTranslationManager#setTranslation(java.lang.Long, java.lang.String)
+   */
   @Override
   public String setTranslation(final Long id, final String translation) throws DefaultException {
     final I18nTranslation trans = super.find(id);

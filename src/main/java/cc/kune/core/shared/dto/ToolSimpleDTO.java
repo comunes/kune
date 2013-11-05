@@ -24,31 +24,70 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolSimpleDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToolSimpleDTO implements IsSerializable {
+  
+  /** The name. */
   private String name;
+  
+  /** The root name. */
   private String rootName;
 
+  /**
+   * Instantiates a new tool simple dto.
+   */
   public ToolSimpleDTO() {
     this(null, null);
   }
 
+  /**
+   * Instantiates a new tool simple dto.
+   *
+   * @param name the name
+   * @param rootName the root name
+   */
   public ToolSimpleDTO(String name, String rootName) {
     this.name = name;
     this.rootName = rootName;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the root name.
+   *
+   * @return the root name
+   */
   public String getRootName() {
     return rootName;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(String name) {
     this.name = name;
   }
 
+  /**
+   * Sets the root name.
+   *
+   * @param rootName the new root name
+   */
   public void setRootName(String rootName) {
     this.rootName = rootName;
   }

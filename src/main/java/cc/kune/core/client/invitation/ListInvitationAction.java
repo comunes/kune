@@ -34,13 +34,34 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListInvitationAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListInvitationAction extends AbstractInvitateAction {
 
+  /** The Constant CANCEL_ID. */
   public static final String CANCEL_ID = "k-list-inv-cancel-id";
+  
+  /** The Constant DIALOG_ID. */
   public static final String DIALOG_ID = "k-list-inv-diag-id";
+  
+  /** The Constant INVITE_ID. */
   public static final String INVITE_ID = "k-list-inv-invite-id";
+  
+  /** The Constant TEXTBOX_ID. */
   public static final String TEXTBOX_ID = "k-list-inv-textbox-id";
 
+  /**
+   * Instantiates a new list invitation action.
+   *
+   * @param stateManager the state manager
+   * @param session the session
+   * @param rightsManager the rights manager
+   * @param invitationService the invitation service
+   */
   @Inject
   public ListInvitationAction(final StateManager stateManager, final Session session,
       final AccessRightsClientManager rightsManager,

@@ -42,13 +42,34 @@ import cc.kune.gspace.client.themes.GSpaceThemeChangeEvent.GSpaceThemeChangeHand
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GSpaceThemeSelectorPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GSpaceThemeSelectorPresenter {
 
+  /**
+   * The Class ThemeAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   class ThemeAction extends AbstractExtendedAction {
 
+    /** The manager. */
     private final GSpaceThemeManager manager;
+    
+    /** The theme. */
     private final GSpaceTheme theme;
 
+    /**
+     * Instantiates a new theme action.
+     *
+     * @param theme the theme
+     * @param eventBus the event bus
+     * @param manager the manager
+     */
     public ThemeAction(final GSpaceTheme theme, final EventBus eventBus, final GSpaceThemeManager manager) {
       super();
       this.theme = theme;
@@ -57,6 +78,9 @@ public class GSpaceThemeSelectorPresenter {
       putValue(SMALL_ICON, theme.getBackColors()[0]);
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       manager.changeTheme(session.getCurrentStateToken(), theme);
@@ -64,17 +88,43 @@ public class GSpaceThemeSelectorPresenter {
     }
   }
 
+  /** The Constant GROUP_THEME. */
   private static final String GROUP_THEME = "k-theme-group";
 
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The item map. */
   private final HashMap<String, MenuRadioItemDescriptor> itemMap;
+  
+  /** The manager. */
   private final GSpaceThemeManager manager;
+  
+  /** The menu. */
   private MenuDescriptor menu;
+  
+  /** The res. */
   private final IconicResources res;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The view. */
   private ActionExtensibleView view;
 
+  /**
+   * Instantiates a new g space theme selector presenter.
+   *
+   * @param session the session
+   * @param i18n the i18n
+   * @param res the res
+   * @param eventBus the event bus
+   * @param manager the manager
+   * @param view the view
+   */
   @Inject
   public GSpaceThemeSelectorPresenter(final Session session, final I18nTranslationService i18n,
       final IconicResources res, final EventBus eventBus, final GSpaceThemeManager manager,
@@ -98,6 +148,9 @@ public class GSpaceThemeSelectorPresenter {
     });
   }
 
+  /**
+   * Creates the actions.
+   */
   private void createActions() {
     createMenu();
     final InitDataDTO initData = session.getInitData();
@@ -113,12 +166,20 @@ public class GSpaceThemeSelectorPresenter {
     }
   }
 
+  /**
+   * Creates the menu.
+   */
   private void createMenu() {
     menu = new MenuDescriptor("");
     menu.putValue(Action.STYLES, "k-button");
     menu.putValue(Action.SMALL_ICON, res.styleGrey());
   }
 
+  /**
+   * Creates the theme.
+   *
+   * @param theme the theme
+   */
   private void createTheme(final GSpaceTheme theme) {
     final ThemeAction action = new ThemeAction(theme, eventBus, manager);
     final MenuRadioItemDescriptor item = new MenuRadioItemDescriptor(menu, action, GROUP_THEME);
@@ -126,6 +187,12 @@ public class GSpaceThemeSelectorPresenter {
     view.add(item);
   }
 
+  /**
+   * Select.
+   *
+   * @param oldTheme the old theme
+   * @param newTheme the new theme
+   */
   public void select(final GSpaceTheme oldTheme, final GSpaceTheme newTheme) {
     final String oldThemeName = oldTheme.getName();
     final String newThemeName = newTheme.getName();
@@ -139,6 +206,11 @@ public class GSpaceThemeSelectorPresenter {
     menu.setText(i18n.t(newThemeName));
   }
 
+  /**
+   * Sets the themes.
+   *
+   * @param initData the new themes
+   */
   private void setThemes(final InitDataDTO initData) {
     view.add(menu);
     for (final GSpaceTheme theme : initData.getgSpaceThemes().values()) {

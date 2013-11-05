@@ -36,10 +36,25 @@ import cc.kune.domain.User;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AccessRightsServiceDefault.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class AccessRightsServiceDefault implements AccessRightsService {
   // TODO: check performance
 
+  /**
+   * Can access.
+   *
+   * @param searchedGroup the searched group
+   * @param lists the lists
+   * @param rol the rol
+   * @return true, if successful
+   */
   private boolean canAccess(final Group searchedGroup, final AccessLists lists, final AccessRol rol) {
     final GroupList list = lists.getList(rol);
     return depthFirstSearch(new HashSet<Group>(), searchedGroup, list, rol);
@@ -47,6 +62,15 @@ public class AccessRightsServiceDefault implements AccessRightsService {
 
   /*
    * http://en.wikipedia.org/wiki/Depth-first_search
+   */
+  /**
+   * Depth first search.
+   *
+   * @param visited the visited
+   * @param searchedGroup the searched group
+   * @param list the list
+   * @param rol the rol
+   * @return true, if successful
    */
   private boolean depthFirstSearch(final HashSet<Group> visited, final Group searchedGroup,
       final GroupList list, final AccessRol rol) {
@@ -64,6 +88,13 @@ public class AccessRightsServiceDefault implements AccessRightsService {
     return false;
   }
 
+  /**
+   * Gets the.
+   *
+   * @param userGroup the user group
+   * @param accessList the access list
+   * @return the access rights
+   */
   public AccessRights get(final Group userGroup, final AccessLists accessList) {
     boolean isAdministrable = false;
     boolean isEditable = false;
@@ -83,6 +114,9 @@ public class AccessRightsServiceDefault implements AccessRightsService {
     return new AccessRights(isAdministrable, isEditable, isVisible);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.AccessRightsService#get(cc.kune.domain.User, cc.kune.domain.AccessLists)
+   */
   @Override
   public AccessRights get(final User user, final AccessLists lists) {
     return get(user.getUserGroup(), lists);

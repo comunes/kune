@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -30,22 +30,53 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HelloWorldPresenter.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class HelloWorldPresenter extends
     Presenter<HelloWorldPresenter.HelloWorldView, HelloWorldPresenter.HelloWorldProxy> {
 
+  /**
+   * The Interface HelloWorldProxy.
+   * 
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface HelloWorldProxy extends Proxy<HelloWorldPresenter> {
   }
 
+  /**
+   * The Interface HelloWorldView.
+   * 
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HelloWorldView extends View {
   }
 
+  /**
+   * Instantiates a new hello world presenter.
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   */
   @Inject
   public HelloWorldPresenter(final EventBus eventBus, final HelloWorldView view,
       final HelloWorldProxy proxy) {
     super(eventBus, view, proxy);
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);

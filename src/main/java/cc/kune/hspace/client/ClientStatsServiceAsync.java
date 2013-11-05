@@ -26,9 +26,28 @@ import cc.kune.core.shared.dto.HomeStatsDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ClientStatsServiceAsync.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ClientStatsServiceAsync {
 
+  /**
+   * Gets the home stats.
+   *
+   * @param callback the callback
+   * @return the home stats
+   */
   void getHomeStats(AsyncCallback<HomeStatsDTO> callback);
 
+  /**
+   * Gets the home stats.
+   *
+   * @param userHash the user hash
+   * @param callback the callback
+   * @return the home stats
+   */
   void getHomeStats(String userHash, AsyncCallback<HomeStatsDTO> callback);
 }

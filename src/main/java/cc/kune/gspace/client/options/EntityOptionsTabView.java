@@ -24,9 +24,21 @@ package cc.kune.gspace.client.options;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface EntityOptionsTabView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface EntityOptionsTabView extends IsWidget {
 
+  /** The max tabtitle length. */
   int MAX_TABTITLE_LENGTH = 9;
 
+  /**
+   * Gets the tab title.
+   *
+   * @return the tab title
+   */
   IsWidget getTabTitle();
 }

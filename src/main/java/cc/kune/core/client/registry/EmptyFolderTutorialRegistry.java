@@ -25,17 +25,39 @@ package cc.kune.core.client.registry;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmptyFolderTutorialRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EmptyFolderTutorialRegistry {
+  
+  /** The registry. */
   private final List<String> registry;
 
+  /**
+   * Instantiates a new empty folder tutorial registry.
+   */
   public EmptyFolderTutorialRegistry() {
     registry = new ArrayList<String>();
   }
 
+  /**
+   * Checks for tutorial.
+   *
+   * @param typeId the type id
+   * @return true, if successful
+   */
   public boolean hasTutorial(final String typeId) {
     return registry.contains(typeId);
   }
 
+  /**
+   * Register.
+   *
+   * @param contentTypeId the content type id
+   */
   public void register(final String contentTypeId) {
     registry.add(contentTypeId);
   }

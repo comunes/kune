@@ -25,69 +25,153 @@ package cc.kune.core.shared.dto;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.domain.utils.AccessRights;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentSimpleDTO.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
+  /** The mime type. */
   private BasicMimeTypeDTO mimeType;
+  
+  /** The modified on. */
   private Long modifiedOn;
+  
+  /** The rights. */
   private AccessRights rights;
+  
+  /** The status. */
   private ContentStatus status;
+  
+  /** The title. */
   private String title;
+  
+  /** The wave id. */
   private String waveId;
 
+  /**
+   * Gets the mime type.
+   *
+   * @return the mime type
+   */
   public BasicMimeTypeDTO getMimeType() {
     return mimeType;
   }
 
+  /**
+   * Gets the modified on.
+   *
+   * @return the modified on
+   */
   public Long getModifiedOn() {
     return modifiedOn;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.shared.dto.AbstractContentSimpleDTO#getName()
+   */
   @Override
   public String getName() {
     return title;
   }
 
+  /**
+   * Gets the rights.
+   *
+   * @return the rights
+   */
   public AccessRights getRights() {
     return rights;
   }
 
+  /**
+   * Gets the status.
+   *
+   * @return the status
+   */
   public ContentStatus getStatus() {
     return status;
   }
 
+  /**
+   * Gets the title.
+   *
+   * @return the title
+   */
   public String getTitle() {
     return title;
   }
 
+  /**
+   * Gets the wave id.
+   *
+   * @return the wave id
+   */
   public String getWaveId() {
     return waveId;
   }
 
+  /**
+   * Sets the mime type.
+   *
+   * @param mimeType the new mime type
+   */
   public void setMimeType(final BasicMimeTypeDTO mimeType) {
     this.mimeType = mimeType;
   }
 
+  /**
+   * Sets the modified on.
+   *
+   * @param modifiedOn the new modified on
+   */
   public void setModifiedOn(final Long modifiedOn) {
     this.modifiedOn = modifiedOn;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.shared.dto.AbstractContentSimpleDTO#setName(java.lang.String)
+   */
   @Override
   public void setName(final String name) {
     this.title = name;
   }
 
+  /**
+   * Sets the rights.
+   *
+   * @param rights the new rights
+   */
   public void setRights(final AccessRights rights) {
     this.rights = rights;
   }
 
+  /**
+   * Sets the status.
+   *
+   * @param status the new status
+   */
   public void setStatus(final ContentStatus status) {
     this.status = status;
   }
 
+  /**
+   * Sets the title.
+   *
+   * @param title the new title
+   */
   public void setTitle(final String title) {
     this.title = title;
   }
 
+  /**
+   * Sets the wave id.
+   *
+   * @param waveId the new wave id
+   */
   public void setWaveId(final String waveId) {
     this.waveId = waveId;
   }

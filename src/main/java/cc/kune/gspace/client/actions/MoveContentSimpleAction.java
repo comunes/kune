@@ -29,12 +29,24 @@ import cc.kune.common.shared.i18n.I18n;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MoveContentSimpleAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MoveContentSimpleAction extends AbstractExtendedAction {
 
+  /**
+   * Instantiates a new move content simple action.
+   */
   @Inject
   public MoveContentSimpleAction() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     NotifyUser.info(I18n.t("If you want to move something, just drag and drop it to its destination"));

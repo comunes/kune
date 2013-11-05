@@ -51,13 +51,39 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AppStarterDefault.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AppStarterDefault implements AppStarter {
+  
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The prefetch utilities. */
   private final PrefetchUtilities prefetchUtilities;
+  
+  /** The res. */
   private final CommonResources res;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The site service. */
   private final SiteServiceAsync siteService;
 
+  /**
+   * Instantiates a new app starter default.
+   *
+   * @param session the session
+   * @param siteService the site service
+   * @param eventBus the event bus
+   * @param prefetchUtilities the prefetch utilities
+   * @param res the res
+   */
   @Inject
   public AppStarterDefault(final Session session, final SiteServiceAsync siteService,
       final EventBus eventBus, final PrefetchUtilities prefetchUtilities, final CommonResources res) {
@@ -74,6 +100,11 @@ public class AppStarterDefault implements AppStarter {
     });
   }
 
+  /**
+   * Check navigator compatibility.
+   *
+   * @param navSupport the nav support
+   */
   private void checkNavigatorCompatibility(final NavigatorSupport navSupport) {
     if (!SiteParameters.checkUA()) {
       // htmlunit server parsing
@@ -91,6 +122,11 @@ public class AppStarterDefault implements AppStarter {
     }
   }
 
+  /**
+   * Gets the inits the data.
+   *
+   * @return the inits the data
+   */
   private void getInitData() {
     siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
       private void continueStart(final InitDataDTO initData) {
@@ -148,6 +184,9 @@ public class AppStarterDefault implements AppStarter {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.init.AppStarter#start()
+   */
   @Override
   public void start() {
     prefetchUtilities.preFetchImpImages();

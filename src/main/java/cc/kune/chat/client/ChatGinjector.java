@@ -24,10 +24,26 @@ package cc.kune.chat.client;
 
 import com.google.gwt.inject.client.Ginjector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ChatGinjector.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ChatGinjector extends Ginjector {
 
+  /**
+   * Gets the chat client.
+   *
+   * @return the chat client
+   */
   ChatClient getChatClient();
 
+  /**
+   * Gets the chat parts.
+   *
+   * @return the chat parts
+   */
   ChatParts getChatParts();
 
 }

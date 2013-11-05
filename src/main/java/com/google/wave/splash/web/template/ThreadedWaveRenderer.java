@@ -46,6 +46,7 @@ import com.google.wave.splash.rpc.ClientAction;
 import com.google.wave.splash.text.ContentRenderer;
 import com.google.wave.splash.text.Markup;
 
+// TODO: Auto-generated Javadoc
 /**
  * Does the actual conversion of a wavelet/blipdata tree into html, using the
  * conversation-thread model, optionally falling back to the blip-hierarchy
@@ -55,10 +56,21 @@ import com.google.wave.splash.text.Markup;
  */
 @Singleton
 class ThreadedWaveRenderer implements WaveRenderer {
+  
+  /**
+   * The Class PageTracker.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   private class PageTracker {
+    
+    /** The counter. */
     private int counter;
     // Whether or not we're trying to deliver the first page.
+    /** The first page. */
     private final boolean firstPage;
+    
+    /** The markers. */
     private final List<Integer> markers = Lists.newArrayList();
 
     /**
@@ -69,8 +81,15 @@ class ThreadedWaveRenderer implements WaveRenderer {
     private final StringBuilder purgatory = new StringBuilder();
 
     // The wavelet we're trying to render in this page.
+    /** The wavelet. */
     private final Wavelet wavelet;
 
+    /**
+     * Instantiates a new page tracker.
+     *
+     * @param page the page
+     * @param wavelet the wavelet
+     */
     public PageTracker(final int page, final Wavelet wavelet) {
       this.wavelet = wavelet;
       firstPage = (page == 0);
@@ -79,20 +98,39 @@ class ThreadedWaveRenderer implements WaveRenderer {
       purgatory.append("<div id=\"purgatory\">");
     }
 
+    /**
+     * Checks for pages.
+     *
+     * @return true, if successful
+     */
     public boolean hasPages() {
       return !markers.isEmpty();
     }
 
+    /**
+     * Marker.
+     *
+     * @param page the page
+     * @return the int
+     */
     public int marker(final int page) {
       return markers.get(page);
     }
 
+    /**
+     * Purgatory element.
+     *
+     * @return the string
+     */
     public String purgatoryElement() {
       return purgatory.append("</div>").toString();
     }
 
     /**
      * Returns true if a page boundary was crossed.
+     *
+     * @param builder the builder
+     * @return true, if successful
      */
     public boolean track(final StringBuilder builder) {
       final int length = builder.length();
@@ -110,10 +148,17 @@ class ThreadedWaveRenderer implements WaveRenderer {
     }
   }
 
+  /** The Constant HIDDEN_PARTICIPANTS. */
   private static final Set<String> HIDDEN_PARTICIPANTS = ImmutableSet.of("public");
 
   // TODO(dhanji): This is expensive, see if we can precompute branch size
   // when constructing the thread tree.
+  /**
+   * Size of thread tree.
+   *
+   * @param inlineReplyThread the inline reply thread
+   * @return the int
+   */
   private static int sizeOfThreadTree(final BlipThread inlineReplyThread) {
     final List<Blip> blips = inlineReplyThread.getBlips();
     int size = blips.size();
@@ -126,16 +171,32 @@ class ThreadedWaveRenderer implements WaveRenderer {
 
     return size;
   }
+  
+  /** The chars per page. */
   private final int charsPerPage;
   // Ugly, but we do this to avoid polluting all the rendering methods. =(
+  /** The current page. */
   private final ThreadLocal<PageTracker> currentPage = new ThreadLocal<PageTracker>();
+  
+  /** The domain. */
   private final String domain;
 
+  /** The is read only. */
   private final boolean isReadOnly;
 
+  /** The renderer. */
   private final ContentRenderer renderer;
+  
+  /** The templates. */
   private final Templates templates;
 
+  /**
+   * Instantiates a new threaded wave renderer.
+   *
+   * @param templates the templates
+   * @param renderer the renderer
+   * @param domain the domain
+   */
   @Inject
   public ThreadedWaveRenderer(final Templates templates, final ContentRenderer renderer,
       @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
@@ -147,6 +208,12 @@ class ThreadedWaveRenderer implements WaveRenderer {
     this.renderer = renderer;
   }
 
+  /**
+   * Gets the avatar url.
+   *
+   * @param address the address
+   * @return the avatar url
+   */
   private String getAvatarUrl(final String address) {
     String avatar = "";
     if (address.contains(domain)) {
@@ -158,6 +225,12 @@ class ThreadedWaveRenderer implements WaveRenderer {
     return avatar;
   }
 
+  /**
+   * Gets the profiles.
+   *
+   * @param participants the participants
+   * @return the profiles
+   */
   private Map<String, ParticipantProfile> getProfiles(final Collection<String> participants) {
     final HashMap<String, ParticipantProfile> profiles = new HashMap<String, ParticipantProfile>();
     for (final String address : participants) {
@@ -169,6 +242,12 @@ class ThreadedWaveRenderer implements WaveRenderer {
     return profiles;
   }
 
+  /**
+   * Load profiles.
+   *
+   * @param participants the participants
+   * @return the list
+   */
   List<ParticipantProfile> loadProfiles(final Collection<String> participants) {
     final ImmutableList.Builder<ParticipantProfile> result = ImmutableList.builder();
     final Map<String, ParticipantProfile> profiles = getProfiles(participants);
@@ -179,13 +258,12 @@ class ThreadedWaveRenderer implements WaveRenderer {
   }
 
   /**
-   * 
-   * @param wavelet
-   *          A wavelet to render as a single html blob.
-   * @param page
-   *          The page number to send back. Use this to implement paging, if you
-   *          specify page 1, the client action will only contain the second
-   *          page as computed during the current render.
+   * Render.
+   *
+   * @param wavelet A wavelet to render as a single html blob.
+   * @param page The page number to send back. Use this to implement paging, if you
+   * specify page 1, the client action will only contain the second
+   * page as computed during the current render.
    * @return the client action.
    */
   @Override
@@ -205,6 +283,15 @@ class ThreadedWaveRenderer implements WaveRenderer {
     }
   }
 
+  /**
+   * Render blip.
+   *
+   * @param blip the blip
+   * @param builder the builder
+   * @param title the title
+   * @param pageTracker the page tracker
+   * @return true, if successful
+   */
   private boolean renderBlip(final Blip blip, final StringBuilder builder, final String title,
       final PageTracker pageTracker) {
     builder.append("<div class='blip' id='");
@@ -217,10 +304,22 @@ class ThreadedWaveRenderer implements WaveRenderer {
     return pageTracker.track(builder);
   }
 
+  /**
+   * Render blip template.
+   *
+   * @param blip the blip
+   * @return the string
+   */
   String renderBlipTemplate(final Map<String, Object> blip) {
     return templates.process(Templates.BLIP_TEMPLATE, blip);
   }
 
+  /**
+   * Render content.
+   *
+   * @param blip the blip
+   * @return the string
+   */
   private String renderContent(final Blip blip) {
     return renderer.renderHtml(blip.getContent(), blip.getAnnotations(), blip.getElements(),
         blip.getContributors());
@@ -260,12 +359,10 @@ class ThreadedWaveRenderer implements WaveRenderer {
   /**
    * Renders an inline reply thread at the correct offset location inside a
    * blip.
-   * 
-   * @param element
-   *          The element representing the position of the offset inline reply
-   * @param index
-   * @param builder
-   *          The current HTML content StringBuilder of the wave so far
+   *
+   * @param element The element representing the position of the offset inline reply
+   * @param index the index
+   * @param builder The current HTML content StringBuilder of the wave so far
    */
   @Override
   public void renderInlineReply(final Element element, final int index, final StringBuilder builder) {
@@ -297,6 +394,16 @@ class ThreadedWaveRenderer implements WaveRenderer {
     }
   }
 
+  /**
+   * Render internal.
+   *
+   * @param wavelet the wavelet
+   * @param page the page
+   * @param builder the builder
+   * @param rootBlip the root blip
+   * @param pageTracker the page tracker
+   * @return the client action
+   */
   private ClientAction renderInternal(final Wavelet wavelet, final int page,
       final StringBuilder builder, final Blip rootBlip, final PageTracker pageTracker) {
     final boolean stopRender = renderThreads(wavelet.getRootThread(), builder, pageTracker);
@@ -326,6 +433,9 @@ class ThreadedWaveRenderer implements WaveRenderer {
     return new ClientAction("update-wave").version(wavelet.getLastModifiedTime()).html(html);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.wave.splash.web.template.WaveRenderer#renderNotFound()
+   */
   @Override
   public ClientAction renderNotFound() {
     // TODO: This should be an alert message once that system is
@@ -337,9 +447,12 @@ class ThreadedWaveRenderer implements WaveRenderer {
   /**
    * This method renders the blip thread hierarchy using the new conversation
    * structure.
-   * 
+   *
+   * @param thread the thread
+   * @param builder the builder
+   * @param pageTracker the page tracker
    * @return true if we should stop rendering because a page boundary was
-   *         reached.
+   * reached.
    */
   boolean renderThreads(final BlipThread thread, final StringBuilder builder,
       final PageTracker pageTracker) {

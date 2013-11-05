@@ -27,49 +27,107 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GoHomeEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> {
 
+  /**
+   * The Interface HasGoHomeHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasGoHomeHandlers extends HasHandlers {
+    
+    /**
+     * Adds the go home handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addGoHomeHandler(GoHomeHandler handler);
   }
 
+  /**
+   * The Interface GoHomeHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface GoHomeHandler extends EventHandler {
+    
+    /**
+     * On go home.
+     *
+     * @param event the event
+     */
     public void onGoHome(GoHomeEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<GoHomeHandler> TYPE = new Type<GoHomeHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   */
   public static void fire(HasHandlers source) {
     source.fireEvent(new GoHomeEvent());
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<GoHomeHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * Instantiates a new go home event.
+   */
   public GoHomeEvent() {
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<GoHomeHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(GoHomeHandler handler) {
     handler.onGoHome(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(Object obj) {
     return super.equals(obj);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return super.hashCode();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "GoHomeEvent[" + "]";

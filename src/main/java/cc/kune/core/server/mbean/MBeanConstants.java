@@ -21,12 +21,24 @@
 
 package cc.kune.core.server.mbean;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MBeanConstants.
+ * 
+ * @author pablojan <pablojan@gmail.com>
+ */
 public class MBeanConstants {
 
-	public static final String PREFIX = "cc.kune.mbeans:type=";
-	public static final String LOG4J_PREFIX_DEFAULT = "log4j:hiearchy=default";
+  /** The Constant LOG4J_PREFIX_DEFAULT. */
+  public static final String LOG4J_PREFIX_DEFAULT = "log4j:hiearchy=default";
 
-	private MBeanConstants() {
-	}
+  /** The Constant PREFIX. */
+  public static final String PREFIX = "cc.kune.mbeans:type=";
+
+  /**
+   * Instantiates a new m bean constants.
+   */
+  private MBeanConstants() {
+  }
 
 }

@@ -45,10 +45,39 @@ import cc.kune.core.shared.SessionConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupSNAdminsMenuItemsRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupSNAdminsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
 
+  /**
+   * Instantiates a new group sn admins menu items registry.
+   *
+   * @param session the session
+   * @param i18n the i18n
+   * @param isLogged the is logged
+   * @param isAdministrable the is administrable
+   * @param isPerson the is person
+   * @param isGroup the is group
+   * @param isBuddie the is buddie
+   * @param isMe the is me
+   * @param isNotMe the is not me
+   * @param changeToCollabAction the change to collab action
+   * @param changeToAdminAction the change to admin action
+   * @param removeMemberAction the remove member action
+   * @param acceptJoinGroupAction the accept join group action
+   * @param denyJoinGroupAction the deny join group action
+   * @param gotoGroupAction the goto group action
+   * @param gotoMemberAction the goto member action
+   * @param gotoYourHomePageAction the goto your home page action
+   * @param writeToAction the write to action
+   */
   @Inject
   public GroupSNAdminsMenuItemsRegistry(final SessionConstants session,
       final I18nTranslationService i18n, final IsLoggedCondition isLogged,

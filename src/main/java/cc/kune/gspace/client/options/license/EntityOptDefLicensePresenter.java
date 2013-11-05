@@ -36,14 +36,37 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityOptDefLicensePresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class EntityOptDefLicensePresenter {
 
+  /** The entity options. */
   private final EntityOptions entityOptions;
+  
+  /** The lic change action. */
   private final Provider<LicenseChangeAction> licChangeAction;
+  
+  /** The license wizard. */
   private final Provider<LicenseWizard> licenseWizard;
+  
+  /** The session. */
   protected final Session session;
+  
+  /** The view. */
   private EntityOptDefLicenseView view;
 
+  /**
+   * Instantiates a new entity opt def license presenter.
+   *
+   * @param entityOptions the entity options
+   * @param session the session
+   * @param licenseWizard the license wizard
+   * @param licChangeAction the lic change action
+   */
   public EntityOptDefLicensePresenter(final EntityOptions entityOptions, final Session session,
       final Provider<LicenseWizard> licenseWizard, final Provider<LicenseChangeAction> licChangeAction) {
     this.entityOptions = entityOptions;
@@ -52,16 +75,41 @@ public abstract class EntityOptDefLicensePresenter {
     this.licChangeAction = licChangeAction;
   }
 
+  /**
+   * Applicable.
+   *
+   * @return true, if successful
+   */
   protected abstract boolean applicable();
 
+  /**
+   * Gets the current def license.
+   *
+   * @return the current def license
+   */
   protected abstract LicenseDTO getCurrentDefLicense();
 
+  /**
+   * Gets the operation token.
+   *
+   * @return the operation token
+   */
   protected abstract StateToken getOperationToken();
 
+  /**
+   * Gets the view.
+   *
+   * @return the view
+   */
   public IsWidget getView() {
     return view;
   }
 
+  /**
+   * Inits the.
+   *
+   * @param view the view
+   */
   protected void init(final EntityOptDefLicenseView view) {
     this.view = view;
     entityOptions.addTab(view, view.getTabTitle());
@@ -80,6 +128,9 @@ public abstract class EntityOptDefLicensePresenter {
     });
   }
 
+  /**
+   * On change.
+   */
   public void onChange() {
     licenseWizard.get().start(new LicenseChooseCallback() {
 
@@ -100,14 +151,25 @@ public abstract class EntityOptDefLicensePresenter {
     });
   }
 
+  /**
+   * On license click.
+   */
   public void onLicenseClick() {
     view.openWindow(getCurrentDefLicense().getUrl());
   }
 
+  /**
+   * Sets the license.
+   *
+   * @param license the new license
+   */
   private void setLicense(final LicenseDTO license) {
     view.setLicense(license);
   }
 
+  /**
+   * Sets the state.
+   */
   protected void setState() {
     if (applicable()) {
       // Is a user and app is not starting up

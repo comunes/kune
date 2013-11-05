@@ -24,12 +24,35 @@ package cc.kune.gadgetsample.client;
 
 import com.google.gwt.i18n.client.Messages;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface KuneGadgetSampleMessages.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface KuneGadgetSampleMessages extends Messages {
 
+  /**
+   * Gadget of participant.
+   * 
+   * @param username
+   *          the username
+   * @return the string
+   */
   @DefaultMessage("Gadget of participant {0}")
   String gadgetOfParticipant(String username);
 
+  /**
+   * Lock.
+   * 
+   * @return the string
+   */
   String lock();
 
+  /**
+   * Unlock.
+   * 
+   * @return the string
+   */
   String unlock();
 }

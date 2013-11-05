@@ -28,14 +28,32 @@ import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog.Builder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FieldValidationUtil.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FieldValidationUtil {
 
+  /**
+   * Restrict to email list.
+   *
+   * @param builder the builder
+   * @param id the id
+   */
   public static void restrictToEmailList(final Builder builder, final String id) {
     builder.regex(TextUtils.EMAIL_REGEXP_LIST).regexText(
         I18n.t("Please provide here a comma-separated list of emails")).textboxId(id);
     builder.allowBlank(false);
   }
 
+  /**
+   * Restrict to unix name.
+   *
+   * @param builder the builder
+   * @param id the id
+   */
   public static void restrictToUnixName(final Builder builder, final String id) {
     // For the future: In Google Groups, the max group shorta name is 63 chars
     // (with dashes)

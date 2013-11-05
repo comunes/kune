@@ -26,19 +26,34 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FolderViewerPresenterTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FolderViewerPresenterTest {
 
+  /**
+   * With1.
+   */
   @Test
   public void with1() {
     assertEquals(ToolbarStyles.CSS_BTN_ALONE, ToolbarStyles.calculateStyle(0, 1));
   }
 
+  /**
+   * With2.
+   */
   @Test
   public void with2() {
     assertEquals(ToolbarStyles.CSS_BTN_LEFT, ToolbarStyles.calculateStyle(0, 2));
     assertEquals(ToolbarStyles.CSS_BTN_RIGTH, ToolbarStyles.calculateStyle(1, 2));
   }
 
+  /**
+   * With3.
+   */
   @Test
   public void with3() {
     assertEquals(ToolbarStyles.CSS_BTN_LEFT, ToolbarStyles.calculateStyle(0, 3));
@@ -46,6 +61,9 @@ public class FolderViewerPresenterTest {
     assertEquals(ToolbarStyles.CSS_BTN_RIGTH, ToolbarStyles.calculateStyle(2, 3));
   }
 
+  /**
+   * With4.
+   */
   @Test
   public void with4() {
     assertEquals(ToolbarStyles.CSS_BTN_LEFT, ToolbarStyles.calculateStyle(0, 4));

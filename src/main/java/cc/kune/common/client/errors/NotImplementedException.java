@@ -24,25 +24,51 @@ package cc.kune.common.client.errors;
 
 import cc.kune.common.client.log.Log;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NotImplementedException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NotImplementedException extends RuntimeException {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -1327164226202923181L;
 
+  /**
+   * Instantiates a new not implemented exception.
+   */
   public NotImplementedException() {
     super();
     Log.error("NotImplementedException");
   }
 
+  /**
+   * Instantiates a new not implemented exception.
+   *
+   * @param text the text
+   */
   public NotImplementedException(final String text) {
     super(text);
     Log.error(text);
   }
 
+  /**
+   * Instantiates a new not implemented exception.
+   *
+   * @param text the text
+   * @param cause the cause
+   */
   public NotImplementedException(final String text, final Throwable cause) {
     super(text, cause);
     Log.error(text, cause);
   }
 
+  /**
+   * Instantiates a new not implemented exception.
+   *
+   * @param cause the cause
+   */
   public NotImplementedException(final Throwable cause) {
     super(cause);
     Log.error("NotImplementedException", cause);

@@ -36,11 +36,24 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RateManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class RateManagerDefault extends DefaultManager<Rate, Long> implements RateManager {
 
+  /** The finder. */
   private final RateFinder finder;
 
+  /**
+   * Instantiates a new rate manager default.
+   *
+   * @param provider the provider
+   * @param finder the finder
+   */
   @Inject
   public RateManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final RateFinder finder) {
@@ -48,6 +61,9 @@ public class RateManagerDefault extends DefaultManager<Rate, Long> implements Ra
     this.finder = finder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.RateManager#find(cc.kune.domain.User, cc.kune.domain.Content)
+   */
   @Override
   public Rate find(final User user, final Content content) {
     try {
@@ -57,11 +73,17 @@ public class RateManagerDefault extends DefaultManager<Rate, Long> implements Ra
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.RateManager#getRateAvg(cc.kune.domain.Content)
+   */
   @Override
   public Double getRateAvg(final Content content) {
     return finder.calculateRate(content);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.RateManager#getRateByUsers(cc.kune.domain.Content)
+   */
   @Override
   public Long getRateByUsers(final Content content) {
     return finder.calculateRateNumberOfUsers(content);

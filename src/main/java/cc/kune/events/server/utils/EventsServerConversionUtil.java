@@ -57,23 +57,36 @@ import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.wave.api.Gadget;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EventsConversionUtil is used to convert Appointments to Gadgets
- * properties and viceversa
+ * properties and viceversa.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EventsServerConversionUtil {
 
+  /** The events cache. */
   @Inject
   static EventsCache eventsCache;
 
+  /** The event tool. */
   @Inject
   private static EventsServerTool eventTool;
 
+  /** The kune wave service. */
   @Inject
   private static KuneWaveService kuneWaveService;
 
+  /** The Constant LOG. */
   private static final Logger LOG = Logger.getLogger(EventsServerConversionUtil.class.getName());
 
+  /**
+   * Gets the appointments.
+   *
+   * @param container the container
+   * @return the appointments
+   */
   public static List<Map<String, String>> getAppointments(final Container container) {
     final List<Map<String, String>> list = new ArrayList<Map<String, String>>();
     assert eventTool != null;
@@ -108,6 +121,12 @@ public class EventsServerConversionUtil {
     return list;
   }
 
+  /**
+   * Gets the appointments using cache.
+   *
+   * @param container the container
+   * @return the appointments using cache
+   */
   public static List<Map<String, String>> getAppointmentsUsingCache(final Container container) {
     final List<Map<String, String>> cached = eventsCache.get(container);
     if (cached != null) {
@@ -116,6 +135,14 @@ public class EventsServerConversionUtil {
     return getAppointments(container);
   }
 
+  /**
+   * To v event.
+   *
+   * @param properties the properties
+   * @return the v event
+   * @throws URISyntaxException the uRI syntax exception
+   * @throws ParseException the parse exception
+   */
   public static VEvent toVEvent(final Map<String, String> properties) throws URISyntaxException,
       ParseException {
 

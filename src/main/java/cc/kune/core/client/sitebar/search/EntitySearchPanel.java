@@ -33,25 +33,54 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBoxBase;
 
+// TODO: Auto-generated Javadoc
 /**
  * This panel is used to search for users to add as a buddies or to add to
- * groups as collaborators
- * 
+ * groups as collaborators.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntitySearchPanel {
 
+  /** The Constant DIALOG_ID. */
   public static final String DIALOG_ID = "entity-search-panel-diag";
+  
+  /** The Constant OK_ID. */
   public static final String OK_ID = "entity-search-panel-ok-id";
+  
+  /** The Constant SEARCH_TEXT_HEIGHT. */
   private static final int SEARCH_TEXT_HEIGHT = 13;
+  
+  /** The Constant SEARCH_TEXT_WIDTH_BIG. */
   private static final int SEARCH_TEXT_WIDTH_BIG = 160;
+  
+  /** The Constant SEARCH_TEXT_WIDTH_SMALL. */
   private static final int SEARCH_TEXT_WIDTH_SMALL = 120;
+  
+  /** The callback. */
   private OnEntitySelectedInSearch callback;
+  
+  /** The dialog. */
   private final BasicTopDialog dialog;
+  
+  /** The i18n. */
   private final I18nUITranslationService i18n;
+  
+  /** The search only users. */
   private boolean searchOnlyUsers;
+  
+  /** The search text box. */
   private TextBoxBase searchTextBox;
+  
+  /** The suggest box. */
   private SuggestBox suggestBox;
 
+  /**
+   * Instantiates a new entity search panel.
+   *
+   * @param img the img
+   * @param i18n the i18n
+   */
   public EntitySearchPanel(final CoreResources img, final I18nUITranslationService i18n) {
     this.i18n = i18n;
     dialog = new BasicTopDialog.Builder(DIALOG_ID, false, true, i18n.getDirection()).autoscroll(false).firstButtonId(
@@ -66,10 +95,18 @@ public abstract class EntitySearchPanel {
     });
   }
 
+  /**
+   * Clear search text.
+   */
   public void clearSearchText() {
     searchTextBox.setValue("");
   }
 
+  /**
+   * Creates the.
+   *
+   * @param id the id
+   */
   private void create(final String id) {
     dialog.getTitleText().setText(
         i18n.t(searchOnlyUsers ? "Type the name of the user and select him/her:"
@@ -82,18 +119,38 @@ public abstract class EntitySearchPanel {
     setTextSearchSmallImpl();
   }
 
+  /**
+   * Focus.
+   */
   public void focus() {
     searchTextBox.setFocus(true);
   }
 
+  /**
+   * Gets the focus.
+   *
+   * @return the focus
+   */
   public HasAllFocusHandlers getFocus() {
     return searchTextBox;
   }
 
+  /**
+   * Gets the text box.
+   *
+   * @return the text box
+   */
   public HasText getTextBox() {
     return searchTextBox;
   }
 
+  /**
+   * Inits the.
+   *
+   * @param searchOnlyUsers the search only users
+   * @param id the id
+   * @param callback the callback
+   */
   public void init(final boolean searchOnlyUsers, final String id,
       final OnEntitySelectedInSearch callback) {
     this.callback = callback;
@@ -101,22 +158,39 @@ public abstract class EntitySearchPanel {
     create(id);
   }
 
+  /**
+   * Select search text.
+   */
   public void selectSearchText() {
     searchTextBox.selectAll();
   }
 
+  /**
+   * Sets the text search.
+   *
+   * @param text the new text search
+   */
   public void setTextSearch(final String text) {
     suggestBox.setValue(text, false);
   }
 
+  /**
+   * Sets the text search big.
+   */
   public void setTextSearchBig() {
     searchTextBox.setPixelSize(SEARCH_TEXT_WIDTH_BIG, SEARCH_TEXT_HEIGHT);
   }
 
+  /**
+   * Sets the text search small impl.
+   */
   private void setTextSearchSmallImpl() {
     searchTextBox.setPixelSize(SEARCH_TEXT_WIDTH_SMALL, SEARCH_TEXT_HEIGHT);
   }
 
+  /**
+   * Show.
+   */
   public void show() {
     dialog.showCentered();
   }

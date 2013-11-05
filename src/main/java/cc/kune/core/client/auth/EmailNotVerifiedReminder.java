@@ -39,14 +39,21 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmailNotVerifiedReminder.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EmailNotVerifiedReminder {
 
   /**
    * This class checks if the user has verified the email if it's not, give some
    * advice.
-   * 
-   * @param session
-   *          the session
+   *
+   * @param session the session
+   * @param eventBus the event bus
+   * @param i18n the i18n
    */
   @Inject
   public EmailNotVerifiedReminder(final Session session, final EventBus eventBus,

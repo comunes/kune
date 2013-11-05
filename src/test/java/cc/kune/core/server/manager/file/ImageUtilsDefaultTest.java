@@ -35,6 +35,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
 /**
  * If you get a UnsatisfiedLinkError this is a problem with jmagick installation
  * (in debian, apt-get install libjmagick6-jni, and add
@@ -44,31 +45,57 @@ import org.junit.Test;
  * See the output of:
  * System.out.println(System.getProperty("java.library.path")); to see when is
  * expecting the .so/.dll
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ImageUtilsDefaultTest {
 
+  /** The image dest. */
   private static String imageDest;
+  
+  /** The images. */
   private static String[] images = { "orig.png", "orig.gif", "orig.jpg", "orig.tiff", "orig.pdf" };
+  
+  /** The Constant IMG_PATH. */
   private static final String IMG_PATH = "src/test/java/cc/kune/core/server/manager/file/";
+  
+  /** The pdf. */
   private static String pdf = "orig.pdf";
 
+  /**
+   * After.
+   */
   @AfterClass
   public static void after() {
     final File file = new File(imageDest);
     file.delete();
   }
 
+  /**
+   * Before.
+   */
   @BeforeClass
   public static void before() {
     imageDest = IMG_PATH + "output.png";
   }
 
+  /**
+   * Convert pdf to png.
+   *
+   * @throws MagickException the magick exception
+   */
   @Ignore
   @Test
   public void convertPdfToPng() throws MagickException {
     ImageUtilsDefault.createThumbFromPdf(IMG_PATH + pdf, imageDest);
   }
 
+  /**
+   * Generate icon.
+   *
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   @Ignore
   @Test
   public void generateIcon() throws MagickException, FileNotFoundException {
@@ -80,6 +107,12 @@ public class ImageUtilsDefaultTest {
     }
   }
 
+  /**
+   * Generate thumb.
+   *
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   @Ignore
   @Test
   public void generateThumb() throws MagickException, FileNotFoundException {
@@ -91,6 +124,9 @@ public class ImageUtilsDefaultTest {
     }
   }
 
+  /**
+   * Test proportional higher.
+   */
   @Test
   public void testProportionalHigher() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(500, 1000, 100);
@@ -100,6 +136,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(50, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.height, 100));
   }
 
+  /**
+   * Test proportional higher like samples.
+   */
   @Test
   public void testProportionalHigherLikeSamples() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(1200, 1600, 100);
@@ -109,6 +148,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(16, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.height, 100));
   }
 
+  /**
+   * Test proportional higher same.
+   */
   @Test
   public void testProportionalHigherSame() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(20, 100, 100);
@@ -118,6 +160,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.height, 100));
   }
 
+  /**
+   * Test proportional higher smaller.
+   */
   @Test
   public void testProportionalHigherSmaller() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(20, 10, 100);
@@ -127,6 +172,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.height, 100));
   }
 
+  /**
+   * Test proportional to bigger normal.
+   */
   @Test
   public void testProportionalToBiggerNormal() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 300, false);
@@ -134,6 +182,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(150, proportionalDim.height);
   }
 
+  /**
+   * Test proportional to bigger same.
+   */
   @Test
   public void testProportionalToBiggerSame() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 600, false);
@@ -141,6 +192,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(300, proportionalDim.height);
   }
 
+  /**
+   * Test proportional to bigger smaller.
+   */
   @Test
   public void testProportionalToBiggerSmaller() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(600, 300, 700, false);
@@ -148,6 +202,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(300, proportionalDim.height);
   }
 
+  /**
+   * Test proportional to bigger wider.
+   */
   @Test
   public void testProportionalToBiggerWider() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(300, 600, 200, false);
@@ -155,6 +212,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(200, proportionalDim.height);
   }
 
+  /**
+   * Test proportional wider.
+   */
   @Test
   public void testProportionalWider() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(1000, 500, 100);
@@ -164,6 +224,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.height, 100));
   }
 
+  /**
+   * Test proportional wider same.
+   */
   @Test
   public void testProportionalWiderSame() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(100, 20, 100);
@@ -173,6 +236,9 @@ public class ImageUtilsDefaultTest {
     assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.height, 100));
   }
 
+  /**
+   * Test proportional wider smaller.
+   */
   @Test
   public void testProportionalWiderSmaller() {
     final Dimension proportionalDim = ImageUtilsDefault.calculatePropDim(5, 10, 100);
@@ -182,6 +248,12 @@ public class ImageUtilsDefaultTest {
     assertEquals(0, ImageUtilsDefault.calculateCenteredCoordinate(proportionalDim.height, 100));
   }
 
+  /**
+   * Test resize.
+   *
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   @Ignore
   @Test
   public void testResize() throws MagickException, FileNotFoundException {
@@ -193,6 +265,11 @@ public class ImageUtilsDefaultTest {
     }
   }
 
+  /**
+   * Test size.
+   *
+   * @throws MagickException the magick exception
+   */
   @Test
   public void testSize() throws MagickException {
     for (final String image : images) {
@@ -204,6 +281,12 @@ public class ImageUtilsDefaultTest {
     }
   }
 
+  /**
+   * Thumb smaller than crop must fail.
+   *
+   * @throws MagickException the magick exception
+   * @throws FileNotFoundException the file not found exception
+   */
   @Test(expected = IndexOutOfBoundsException.class)
   public void thumbSmallerThanCropMustFail() throws MagickException, FileNotFoundException {
     ImageUtilsDefault.createThumb(IMG_PATH + images[0], imageDest, 100, 200);

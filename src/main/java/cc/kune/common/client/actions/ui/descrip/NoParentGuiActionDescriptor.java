@@ -24,15 +24,24 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class NoParentGuiActionDescriptor used to describe items with no parents.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NoParentGuiActionDescriptor extends AbstractGuiActionDescrip {
 
+  /**
+   * Instantiates a new no parent gui action descriptor.
+   */
   public NoParentGuiActionDescriptor() {
     super(AbstractAction.NO_ACTION);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
+   */
   @Override
   public Class<?> getType() {
     return NoParentGuiActionDescriptor.class;

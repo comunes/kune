@@ -43,22 +43,57 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LicenseWizardPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LicenseWizardPresenter extends
     Presenter<LicenseWizardView, LicenseWizardPresenter.LicenseWizardProxy> implements LicenseWizard {
 
+  /**
+   * The Interface LicenseWizardProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface LicenseWizardProxy extends Proxy<LicenseWizardPresenter> {
   }
 
+  /** The cc vers. */
   private final String ccVers;
+  
+  /** The frd form. */
   private final LicenseWizardFrdFormView frdForm;
+  
+  /** The fst form. */
   private final LicenseWizardFirstFormView fstForm;
+  
+  /** The select license listener. */
   private LicenseChooseCallback selectLicenseListener;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The snd form. */
   private final LicenseWizardSndFormView sndForm;
 
+  /** The trd form. */
   private final LicenseWizardTrdFormView trdForm;
 
+  /**
+   * Instantiates a new license wizard presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param firstForm the first form
+   * @param sndForm the snd form
+   * @param trdForm the trd form
+   * @param frdForm the frd form
+   * @param session the session
+   */
   @Inject
   public LicenseWizardPresenter(final EventBus eventBus, final LicenseWizardView view,
       final LicenseWizardProxy proxy, final LicenseWizardFirstFormView firstForm,
@@ -73,6 +108,12 @@ public class LicenseWizardPresenter extends
     ccVers = "-" + session.getCurrentCCversion();
   }
 
+  /**
+   * Gets the license from short name.
+   *
+   * @param shortName the short name
+   * @return the license from short name
+   */
   private LicenseDTO getLicenseFromShortName(final String shortName) {
     final List<LicenseDTO> licenses = session.getLicenses();
     for (int i = 0; i < licenses.size(); i++) {
@@ -85,14 +126,26 @@ public class LicenseWizardPresenter extends
     throw new IndexOutOfBoundsException("License not found");
   }
 
+  /**
+   * In.
+   *
+   * @param page the page
+   * @return true, if successful
+   */
   private boolean in(final IsWidget page) {
     return getView().isCurrentPage(page);
   }
 
+  /**
+   * On another license selecterd.
+   */
   void onAnotherLicenseSelecterd() {
     getView().setEnabled(false, true, true, false);
   }
 
+  /**
+   * On back.
+   */
   public void onBack() {
     if (getView().isCurrentPage(sndForm)) {
       showFst();
@@ -105,6 +158,9 @@ public class LicenseWizardPresenter extends
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
+   */
   @Override
   protected void onBind() {
     super.onBind();
@@ -169,10 +225,16 @@ public class LicenseWizardPresenter extends
     reset();
   }
 
+  /**
+   * On cancel.
+   */
   public void onCancel() {
     getView().hide();
   }
 
+  /**
+   * On change.
+   */
   public void onChange() {
     String licenseShortName;
     if (in(fstForm)) {
@@ -195,15 +257,24 @@ public class LicenseWizardPresenter extends
     selectLicenseListener.onSelected(getLicenseFromShortName(licenseShortName));
   }
 
+  /**
+   * On close.
+   */
   public void onClose() {
     getView().hide();
     reset();
   }
 
+  /**
+   * On copy left license selected.
+   */
   void onCopyLeftLicenseSelected() {
     getView().setEnabled(false, false, true, true);
   }
 
+  /**
+   * On creative commons changed.
+   */
   private void onCreativeCommonsChanged() {
     final boolean isCopyleft = trdForm.isAllowComercial() && trdForm.isAllowModifShareAlike();
     final boolean isAppropiateForCulturalWorks = trdForm.isAllowComercial()
@@ -211,6 +282,9 @@ public class LicenseWizardPresenter extends
     trdForm.setFlags(isCopyleft, isAppropiateForCulturalWorks, !trdForm.isAllowComercial());
   }
 
+  /**
+   * On next.
+   */
   public void onNext() {
     if (in(fstForm)) {
       getView().clear();
@@ -226,6 +300,9 @@ public class LicenseWizardPresenter extends
     }
   }
 
+  /**
+   * Reset.
+   */
   private void reset() {
     getView().clear();
     getView().setEnabled(false, false, true, true);
@@ -236,32 +313,50 @@ public class LicenseWizardPresenter extends
     frdForm.reset();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /**
+   * Show frd.
+   */
   private void showFrd() {
     getView().show(frdForm);
     getView().setEnabled(true, false, true, false);
   }
 
+  /**
+   * Show fst.
+   */
   private void showFst() {
     getView().clear();
     getView().show(fstForm);
     getView().setEnabled(false, true, true, true);
   }
 
+  /**
+   * Show snd.
+   */
   private void showSnd() {
     getView().show(sndForm);
     getView().setEnabled(true, true, true, false);
   }
 
+  /**
+   * Show trd.
+   */
   private void showTrd() {
     getView().show(trdForm);
     getView().setEnabled(true, false, true, true);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.licensewizard.LicenseWizard#start(cc.kune.gspace.client.licensewizard.LicenseChooseCallback)
+   */
   @Override
   public void start(final LicenseChooseCallback selectLicenseListener) {
     this.selectLicenseListener = selectLicenseListener;

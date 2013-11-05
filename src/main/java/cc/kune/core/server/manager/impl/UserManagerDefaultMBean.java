@@ -24,12 +24,15 @@ package cc.kune.core.server.manager.impl;
 
 import cc.kune.core.server.mbean.MBeanConstants;
 
+// TODO: Auto-generated Javadoc
 /**
- * MBean interface for JMX management of {@link UserManagerDefault}
+ * MBean interface for JMX management of {@link UserManagerDefault}.
  *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface UserManagerDefaultMBean {
 
+  /** The Constant MBEAN_OBJECT_NAME. */
   public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "UserManagerDefault";
 
   /**

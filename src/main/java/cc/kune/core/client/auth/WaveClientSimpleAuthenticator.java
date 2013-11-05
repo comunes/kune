@@ -35,15 +35,34 @@ import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveClientSimpleAuthenticator.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveClientSimpleAuthenticator {
 
+  /** The event bus. */
   private final EventBus eventBus;
 
+  /**
+   * Instantiates a new wave client simple authenticator.
+   *
+   * @param eventBus the event bus
+   */
   @Inject
   public WaveClientSimpleAuthenticator(final EventBus eventBus) {
     this.eventBus = eventBus;
   }
 
+  /**
+   * Do login.
+   *
+   * @param userWithoutDomain the user without domain
+   * @param passwd the passwd
+   * @param callback the callback
+   */
   public void doLogin(final String userWithoutDomain, final String passwd,
       final AsyncCallback<Void> callback) {
     final RequestBuilder request = new RequestBuilder(RequestBuilder.POST, "/auth/signin");
@@ -73,6 +92,11 @@ public class WaveClientSimpleAuthenticator {
     }
   }
 
+  /**
+   * Do logout.
+   *
+   * @param callback the callback
+   */
   public void doLogout(final AsyncCallback<Void> callback) {
     // Original: <a href=\"/auth/signout?r=/\">"
     final RequestBuilder request = new RequestBuilder(RequestBuilder.GET, "/auth/signout");
@@ -96,6 +120,11 @@ public class WaveClientSimpleAuthenticator {
     }
   }
 
+  /**
+   * Gets the cookie token value.
+   *
+   * @return the cookie token value
+   */
   public String getCookieTokenValue() {
     return Cookies.getCookie("JSESSIONID");
   }

@@ -21,6 +21,7 @@ package cc.kune.core.server.utils;
 
 import org.apache.commons.lang.StringUtils;
 
+// TODO: Auto-generated Javadoc
 /**
  * A set of String library static methods. While extending String or
  * StringBuffer would have been the nicest solution, that is not possible, so a
@@ -37,6 +38,9 @@ final public class StringW {
    * Quote a string so that it may be used in a regular expression without any
    * parts of the string being considered as a part of the regular expression's
    * control characters.
+   *
+   * @param str the str
+   * @return the string
    */
   static public String quoteRegularExpression(String str) {
     // replace ? + * / . ^ $ as long as they're not in character
@@ -70,20 +74,16 @@ final public class StringW {
    * specified to forcibily truncate a string (in the case of an extremely long
    * word or such). All HTML/XML markup will be stripped from the string prior
    * to processing for truncation.
-   * 
-   * @param str
-   *          String the string to be truncated.
-   * @param lower
-   *          int value of the lower limit.
-   * @param upper
-   *          int value of the upper limit, -1 if no limit is desired. If the
-   *          uppper limit is lower than the lower limit, it will be adjusted to
-   *          be same as the lower limit.
-   * @param appendToEnd
-   *          String to be appended to the end of the truncated string. This is
-   *          appended ONLY if the string was indeed truncated. The append is
-   *          does not count towards any lower/upper limits.
-   * 
+   *
+   * @param str String the string to be truncated.
+   * @param lower int value of the lower limit.
+   * @param upper int value of the upper limit, -1 if no limit is desired. If the
+   * uppper limit is lower than the lower limit, it will be adjusted to
+   * be same as the lower limit.
+   * @param appendToEnd String to be appended to the end of the truncated string. This is
+   * appended ONLY if the string was indeed truncated. The append is
+   * does not count towards any lower/upper limits.
+   * @return the string
    * @author timster@mac.com
    */
   // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
@@ -131,6 +131,9 @@ final public class StringW {
    * Create a word-wrapped version of a String. Wrap at 80 characters and use
    * newlines as the delimiter. If a word is over 80 characters long use a -
    * sign to split it.
+   *
+   * @param str the str
+   * @return the string
    */
   static public String wordWrap(String str) {
     return wordWrap(str, 80, "\n", "-", true);
@@ -140,6 +143,10 @@ final public class StringW {
    * Create a word-wrapped version of a String. Wrap at a specified width and
    * use newlines as the delimiter. If a word is over the width in lenght use a
    * - sign to split it.
+   *
+   * @param str the str
+   * @param width the width
+   * @return the string
    */
   static public String wordWrap(String str, int width) {
     return wordWrap(str, width, "\n", "-", true);

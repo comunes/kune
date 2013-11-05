@@ -37,23 +37,44 @@ import cc.kune.domain.finders.TagUserContentFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TagUserContentTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TagUserContentTest extends PersistencePreLoadedDataTest {
+  
+  /** The Constant DUMMY_TAG. */
   private static final String DUMMY_TAG = "dummy";
+  
+  /** The finder. */
   @Inject
   TagUserContentFinder finder;
+  
+  /** The manager. */
   @Inject
   TagUserContentManagerDefault manager;
 
+  /** The tag. */
   private Tag tag;
+  
+  /** The tag manager. */
   @Inject
   TagManager tagManager;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     tag = new Tag(DUMMY_TAG);
     tagManager.persist(tag);
   }
 
+  /**
+   * Creates the some tag user content.
+   */
   private void createSomeTagUserContent() {
     List<Tag> tags = manager.find(user, content);
     assertEquals(0, tags.size());
@@ -62,12 +83,22 @@ public class TagUserContentTest extends PersistencePreLoadedDataTest {
     assertEquals(1, tags.size());
   }
 
+  /**
+   * Creates the tag user content.
+   *
+   * @return the tag user content
+   */
   private TagUserContent createTagUserContent() {
     final TagUserContent tagUC = new TagUserContent(tag, user, content);
     manager.persist(tagUC);
     return tagUC;
   }
 
+  /**
+   * Gets the tags as string.
+   *
+   * @return the tags as string
+   */
   @Test
   public void getTagsAsString() {
     manager.setTags(user, content, DUMMY_TAG);
@@ -75,16 +106,27 @@ public class TagUserContentTest extends PersistencePreLoadedDataTest {
     assertEquals(DUMMY_TAG, tagS);
   }
 
+  /**
+   * Gets the tags grouped.
+   *
+   * @return the tags grouped
+   */
   @Test
   public void getTagsGrouped() {
     finder.getTagsGroups(user.getUserGroup());
   }
 
+  /**
+   * Insert some user content.
+   */
   @Test
   public void insertSomeUserContent() {
     createSomeTagUserContent();
   }
 
+  /**
+   * Removes the some user content.
+   */
   @Test
   public void removeSomeUserContent() {
     createSomeTagUserContent();
@@ -93,6 +135,9 @@ public class TagUserContentTest extends PersistencePreLoadedDataTest {
     assertEquals(0, tags.size());
   }
 
+  /**
+   * Sets the tags.
+   */
   @Test
   public void setTags() {
     List<Tag> tags = manager.find(user, content);
@@ -102,6 +147,9 @@ public class TagUserContentTest extends PersistencePreLoadedDataTest {
     assertEquals(1, tags.size());
   }
 
+  /**
+   * Sets the tags remove before.
+   */
   @Test
   public void setTagsRemoveBefore() {
     manager.setTags(user, content, "foo");
@@ -111,6 +159,9 @@ public class TagUserContentTest extends PersistencePreLoadedDataTest {
     assertEquals(DUMMY_TAG, tags.get(0).getName());
   }
 
+  /**
+   * Test insert data.
+   */
   @Test
   public void testInsertData() {
     final TagUserContent tagUC = createTagUserContent();

@@ -62,18 +62,49 @@ import cc.kune.domain.finders.UserFinder;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveEmailNotifier.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class WaveEmailNotifier implements ContainerListener {
+  
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(WaveEmailNotifier.class);
 
+  /** The basic properties. */
   private final KuneBasicProperties basicProperties;
+  
+  /** The notificator. */
   private final PendingNotificationSender notificator;
+  
+  /** The part utils. */
   private final ParticipantUtils partUtils;
+  
+  /** The updated waves in last hour. */
   private final HashSet<WaveId> updatedWavesInLastHour;
+  
+  /** The user finder. */
   private final UserFinder userFinder;
+  
+  /** The wave bus. */
   private final WaveBus waveBus;
+  
+  /** The wave service. */
   private final KuneWaveService waveService;
 
+  /**
+   * Instantiates a new wave email notifier.
+   *
+   * @param waveBus the wave bus
+   * @param notificator the notificator
+   * @param basicProperties the basic properties
+   * @param partUtils the part utils
+   * @param waveService the wave service
+   * @param userFinder the user finder
+   */
   @Inject
   public WaveEmailNotifier(final WaveBus waveBus, final PendingNotificationSender notificator,
       final KuneBasicProperties basicProperties, final ParticipantUtils partUtils,
@@ -88,10 +119,16 @@ public class WaveEmailNotifier implements ContainerListener {
     LOG.info("WaveEmailNotifier created");
   }
 
+  /**
+   * Clear updated waves.
+   */
   public void clearUpdatedWaves() {
     updatedWavesInLastHour.clear();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.rack.ContainerListener#start()
+   */
   @Override
   public void start() {
     final String siteCommonName = basicProperties.getSiteCommonName();
@@ -214,6 +251,9 @@ public class WaveEmailNotifier implements ContainerListener {
     LOG.info("WaveEmailNotifier started");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.rack.ContainerListener#stop()
+   */
   @Override
   public void stop() {
   }

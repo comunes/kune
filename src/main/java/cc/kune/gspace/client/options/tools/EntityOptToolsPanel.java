@@ -44,13 +44,36 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityOptToolsPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsView {
+  
+  /** The Constant TAB_ID. */
   public static final String TAB_ID = "k-eodlp-tools-id";
+  
+  /** The fields. */
   private final HashMap<String, CheckBox> fields;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The mask widget. */
   private final MaskWidget maskWidget;
+  
+  /** The tab title. */
   private final IconLabel tabTitle;
 
+  /**
+   * Instantiates a new entity opt tools panel.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param maskWidget the mask widget
+   */
   public EntityOptToolsPanel(final I18nTranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget) {
     this.maskWidget = maskWidget;
@@ -66,6 +89,9 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
     // super.addStyleName("k-tab-panel");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsView#add(cc.kune.core.shared.dto.ToolSimpleDTO, boolean, boolean, com.google.gwt.event.dom.client.ClickHandler)
+   */
   @Override
   public void add(final ToolSimpleDTO tool, final boolean enabled, final boolean checked,
       final ClickHandler handler) {
@@ -85,11 +111,17 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
     doLayoutIfNeeded();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.IsWidget#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return super.getFormPanel();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsView#clear()
+   */
   @Override
   public void clear() {
     super.getFormPanel().removeAll();
@@ -100,17 +132,29 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
     super.add(label);
   }
 
+  /**
+   * Do layout if needed.
+   */
   private void doLayoutIfNeeded() {
     if (super.getFormPanel().isRendered()) {
       super.getFormPanel().layout();
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.EntityOptionsTabView#getTabTitle()
+   */
   @Override
   public IsWidget getTabTitle() {
     return tabTitle;
   }
 
+  /**
+   * Gets the tool.
+   *
+   * @param tool the tool
+   * @return the tool
+   */
   private CheckBox getTool(final String tool) {
     final CheckBox field = fields.get(tool);
     if (field == null) {
@@ -119,23 +163,38 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
     return field;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsView#isChecked(java.lang.String)
+   */
   @Override
   public boolean isChecked(final String tool) {
     final CheckBox field = getTool(tool);
     return field.getValue();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsView#mask()
+   */
   @Override
   public void mask() {
     maskWidget.mask(this);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsView#setChecked(java.lang.String, boolean)
+   */
   @Override
   public void setChecked(final String tool, final boolean checked) {
     final CheckBox field = getTool(tool);
     field.setValue(checked);
   }
 
+  /**
+   * Sets the enabled.
+   *
+   * @param checkbox the checkbox
+   * @param enabled the enabled
+   */
   private void setEnabled(final CheckBox checkbox, final boolean enabled) {
     if (enabled) {
       checkbox.enable();
@@ -144,18 +203,27 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsView#setEnabled(java.lang.String, boolean)
+   */
   @Override
   public void setEnabled(final String tool, final boolean enabled) {
     final CheckBox field = getTool(tool);
     setEnabled(field, enabled);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsView#setTooltip(java.lang.String, java.lang.String)
+   */
   @Override
   public void setTooltip(final String tool, final String tip) {
     final CheckBox field = getTool(tool);
     Tooltip.to(field, tip);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsView#unmask()
+   */
   @Override
   public void unmask() {
     maskWidget.unMask();

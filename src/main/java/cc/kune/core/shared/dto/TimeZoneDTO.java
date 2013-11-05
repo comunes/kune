@@ -24,23 +24,52 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TimeZoneDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TimeZoneDTO implements IsSerializable {
 
+  /** The id. */
   private String id;
+  
+  /** The display name. */
   private String displayName;
 
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
   public String getId() {
     return id;
   }
 
+  /**
+   * Sets the id.
+   *
+   * @param id the new id
+   */
   public void setId(final String id) {
     this.id = id;
   }
 
+  /**
+   * Gets the display name.
+   *
+   * @return the display name
+   */
   public String getDisplayName() {
     return displayName;
   }
 
+  /**
+   * Sets the display name.
+   *
+   * @param displayName the new display name
+   */
   public void setDisplayName(final String displayName) {
     this.displayName = displayName;
   }

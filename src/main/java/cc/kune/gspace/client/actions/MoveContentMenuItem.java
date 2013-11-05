@@ -28,8 +28,22 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MoveContentMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MoveContentMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new move content menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param optionsMenu the options menu
+   * @param res the res
+   */
   @Inject
   public MoveContentMenuItem(final I18nTranslationService i18n, final MoveContentSimpleAction action,
       final ContentViewerOptionsMenu optionsMenu, final IconicResources res) {

@@ -27,20 +27,45 @@ import cc.kune.common.client.actions.BaseAction;
 
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SubMenuDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SubMenuDescriptor extends MenuDescriptor {
 
+  /**
+   * Builds the.
+   *
+   * @return the sub menu descriptor
+   */
   public static SubMenuDescriptor build() {
     return new SubMenuDescriptor();
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   */
   public SubMenuDescriptor() {
     this(new BaseAction(null, null));
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   *
+   * @param action the action
+   */
   public SubMenuDescriptor(final AbstractAction action) {
     this(NO_PARENT, action);
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   *
+   * @param parent the parent
+   * @param action the action
+   */
   public SubMenuDescriptor(final GuiActionDescrip parent, final AbstractAction action) {
     super(action);
     setParent(parent);
@@ -50,36 +75,83 @@ public class SubMenuDescriptor extends MenuDescriptor {
     putValue(MENU_STANDALONE, false);
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   *
+   * @param parent the parent
+   * @param addToParent the add to parent
+   * @param text the text
+   */
   public SubMenuDescriptor(final GuiActionDescrip parent, final boolean addToParent, final String text) {
     this(text);
     setParent(parent, addToParent);
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   *
+   * @param parent the parent
+   * @param text the text
+   */
   public SubMenuDescriptor(final GuiActionDescrip parent, final String text) {
     this(text);
     setParent(parent);
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   *
+   * @param text the text
+   */
   public SubMenuDescriptor(final String text) {
     this(new BaseAction(text, null));
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   *
+   * @param text the text
+   * @param icon the icon
+   */
   public SubMenuDescriptor(final String text, final ImageResource icon) {
     this(new BaseAction(text, null, icon));
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   */
   public SubMenuDescriptor(final String text, final String tooltip) {
     this(new BaseAction(text, tooltip));
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   * @param icon the icon
+   */
   public SubMenuDescriptor(final String text, final String tooltip, final ImageResource icon) {
     this(new BaseAction(text, tooltip, icon));
   }
 
+  /**
+   * Instantiates a new sub menu descriptor.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   * @param icon the icon
+   */
   public SubMenuDescriptor(final String text, final String tooltip, final String icon) {
     this(new BaseAction(text, tooltip, icon));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.MenuDescriptor#getType()
+   */
   @Override
   public Class<?> getType() {
     return SubMenuDescriptor.class;

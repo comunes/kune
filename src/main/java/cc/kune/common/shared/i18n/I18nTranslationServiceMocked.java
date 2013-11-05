@@ -24,12 +24,25 @@ package cc.kune.common.shared.i18n;
 
 import cc.kune.common.shared.utils.TextUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nTranslationServiceMocked.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nTranslationServiceMocked extends I18nTranslationService {
+  
+  /* (non-Javadoc)
+   * @see cc.kune.common.shared.i18n.I18nTranslationService#isRTL()
+   */
   @Override
   public boolean isRTL() {
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.shared.i18n.I18nTranslationService#tWithNT(java.lang.String, java.lang.String)
+   */
   @Override
   public String tWithNT(final String text, final String noteForTranslators) {
     final String encodeText = TextUtils.escapeHtmlLight(text);

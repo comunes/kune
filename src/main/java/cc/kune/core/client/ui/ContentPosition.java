@@ -31,16 +31,38 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentPosition.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentPosition {
 
+  /** The Constant CENTER. */
   public static final String CENTER = "center";
+  
+  /** The Constant LEFT. */
   public static final String LEFT = "left";
+  
+  /** The Constant RIGHT. */
   public static final String RIGHT = "right";
+  
+  /** The i18n. */
   private static I18nTranslationService i18n;
+  
+  /** The position objs. */
   private static Object[][] positionObjs;
+  
+  /** The Constant POSITIONS. */
   protected static final String[][] POSITIONS = { new String[] { LEFT }, new String[] { CENTER },
       new String[] { RIGHT } };
 
+  /**
+   * Gets the positions.
+   *
+   * @return the positions
+   */
   public synchronized static Object[][] getPositions() {
     if (positionObjs == null) {
       final String[][] values = POSITIONS;
@@ -54,10 +76,24 @@ public class ContentPosition {
     return positionObjs;
   }
 
+  /**
+   * Sets the center position.
+   *
+   * @param elementCode the element code
+   * @return the string
+   */
   public static String setCenterPosition(final String elementCode) {
     return setPosition(elementCode, false, CENTER);
   }
 
+  /**
+   * Sets the position.
+   *
+   * @param element the element
+   * @param wraptext the wraptext
+   * @param position the position
+   * @return the element
+   */
   public static Element setPosition(final Element element, final boolean wraptext, final String position) {
     if (!wraptext || position.equals(ContentPosition.CENTER)) {
       final com.google.gwt.user.client.Element divEl = DOM.createDiv();
@@ -70,6 +106,14 @@ public class ContentPosition {
     }
   }
 
+  /**
+   * Sets the position.
+   *
+   * @param elementCode the element code
+   * @param wraptext the wraptext
+   * @param position the position
+   * @return the string
+   */
   public static String setPosition(final String elementCode, final boolean wraptext,
       final String position) {
     final HTML html = new HTML(elementCode);
@@ -77,6 +121,11 @@ public class ContentPosition {
     return setPosition(html.getElement(), wraptext, position).getString();
   }
 
+  /**
+   * Instantiates a new content position.
+   *
+   * @param i18n the i18n
+   */
   @Inject
   public ContentPosition(final I18nTranslationService i18n) {
     ContentPosition.i18n = i18n;

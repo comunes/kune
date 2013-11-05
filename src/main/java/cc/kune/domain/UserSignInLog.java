@@ -43,8 +43,11 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 
 import cc.kune.domain.utils.HasId;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Class UserSignInLog records the user signins for stats purposes
+ * The Class UserSignInLog records the user signins for stats purposes.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
 @Indexed

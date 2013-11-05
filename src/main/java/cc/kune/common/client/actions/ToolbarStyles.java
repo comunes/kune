@@ -22,12 +22,33 @@
  */
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolbarStyles.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToolbarStyles {
+  
+  /** The Constant CSS_BTN_ALONE. */
   public static final String CSS_BTN_ALONE = "k-button,  k-button-alone, k-fl";
+  
+  /** The Constant CSS_BTN_CENTER. */
   public static final String CSS_BTN_CENTER = "k-button, k-button-center, k-fl";
+  
+  /** The Constant CSS_BTN_LEFT. */
   public static final String CSS_BTN_LEFT = "k-button, k-button-left, k-fl";
+  
+  /** The Constant CSS_BTN_RIGTH. */
   public static final String CSS_BTN_RIGTH = "k-button, k-button-right, k-fl";
 
+  /**
+   * Calculate style.
+   *
+   * @param pos the pos
+   * @param length the length
+   * @return the string
+   */
   public static String calculateStyle(final int pos, final int length) {
     // GWT.log("PATH pos: " + pos + " length: " + length);
     if (length == 1) {

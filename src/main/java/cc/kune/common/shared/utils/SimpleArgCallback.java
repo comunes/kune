@@ -22,10 +22,19 @@
  */
 package cc.kune.common.shared.utils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface SimpleArgCallback.
+ *
+ * @param <T> the generic type
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface SimpleArgCallback<T> {
 
   /**
-   * Notifies this callback
+   * Notifies this callback.
+   *
+   * @param arg the arg
    */
   void onCallback(T arg);
 }

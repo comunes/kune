@@ -32,11 +32,47 @@ import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface KuneSampleGinjector.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @GinModules(KuneSampleGinModule.class)
 public interface KuneSampleGinjector extends Ginjector {
+  
+  /**
+   * Gets the gui provider.
+   *
+   * @return the gui provider
+   */
   GuiProvider getGuiProvider();
+  
+  /**
+   * Gets the toolbar.
+   *
+   * @return the toolbar
+   */
   Toolbar getToolbar();
+  
+  /**
+   * Gets the user notifier popup.
+   *
+   * @return the user notifier popup
+   */
   UserNotifierPopup getUserNotifierPopup();
+  
+  /**
+   * Gets the global shortcut register.
+   *
+   * @return the global shortcut register
+   */
   GlobalShortcutRegister getGlobalShortcutRegister();
+  
+  /**
+   * Gets the checks for rtl.
+   *
+   * @return the checks for rtl
+   */
   HasRTL getHasRTL();
 }

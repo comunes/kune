@@ -29,8 +29,19 @@ import cc.kune.domain.ExtMediaDescrip;
 
 import com.google.inject.persist.finder.Finder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ExtMediaDescripFinder.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ExtMediaDescripFinder {
 
+  /**
+   * Gets the all.
+   *
+   * @return the all
+   */
   @Finder(query = "from ExtMediaDescrip", returnAs = ArrayList.class)
   public List<ExtMediaDescrip> getAll();
 }

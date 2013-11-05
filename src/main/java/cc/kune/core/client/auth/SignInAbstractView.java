@@ -29,28 +29,78 @@ import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.gwtplatform.mvp.client.View;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface SignInAbstractView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface SignInAbstractView extends View {
 
+  /**
+   * Gets the close.
+   *
+   * @return the close
+   */
   HasCloseHandlers<PopupPanel> getClose();
 
+  /**
+   * Gets the first btn.
+   *
+   * @return the first btn
+   */
   HasClickHandlers getFirstBtn();
 
+  /**
+   * Gets the second btn.
+   *
+   * @return the second btn
+   */
   HasClickHandlers getSecondBtn();
 
+  /**
+   * Hide.
+   */
   void hide();
 
+  /**
+   * Hide messages.
+   */
   void hideMessages();
 
+  /**
+   * Mask.
+   *
+   * @param message the message
+   */
   void mask(final String message);
 
+  /**
+   * Mask processing.
+   */
   void maskProcessing();
 
+  /**
+   * Reset.
+   */
   void reset();
 
+  /**
+   * Sets the error message.
+   *
+   * @param message the message
+   * @param level the level
+   */
   void setErrorMessage(final String message, final NotifyLevel level);
 
+  /**
+   * Show.
+   */
   void show();
 
+  /**
+   * Un mask.
+   */
   void unMask();
 
 }

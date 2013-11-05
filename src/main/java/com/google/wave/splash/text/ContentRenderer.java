@@ -38,6 +38,7 @@ import com.google.wave.api.ElementType;
 import com.google.wave.api.Line;
 import com.google.wave.splash.web.template.WaveRenderer;
 
+// TODO: Auto-generated Javadoc
 /**
  * A utility class that converts blip content into html.
  * 
@@ -45,24 +46,57 @@ import com.google.wave.splash.web.template.WaveRenderer;
  * @author dhanji@gmail.com (Dhanji R. Prasanna)
  */
 public class ContentRenderer {
+  
   /**
    * Represents a marker in content that is either the start or end of an
    * annotation or a single element.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   static class Marker implements Comparable<Marker> {
+    
+    /**
+     * From annotation.
+     *
+     * @param annotation the annotation
+     * @param index the index
+     * @param isEnd the is end
+     * @return the marker
+     */
     static Marker fromAnnotation(final Annotation annotation, final int index, final boolean isEnd) {
       return new Marker(annotation, index, isEnd);
     }
 
+    /**
+     * From element.
+     *
+     * @param element the element
+     * @param index the index
+     * @return the marker
+     */
     static Marker fromElement(final Element element, final int index) {
       return new Marker(element, index);
     }
 
+    /** The annotation. */
     private final Annotation annotation;
+    
+    /** The element. */
     private final Element element;
+    
+    /** The index. */
     private final int index;
+    
+    /** The is end. */
     private boolean isEnd;
 
+    /**
+     * Instantiates a new marker.
+     *
+     * @param annotation the annotation
+     * @param index the index
+     * @param isEnd the is end
+     */
     private Marker(final Annotation annotation, final int index, final boolean isEnd) {
       this.annotation = annotation;
       this.element = null;
@@ -70,12 +104,21 @@ public class ContentRenderer {
       this.isEnd = isEnd;
     }
 
+    /**
+     * Instantiates a new marker.
+     *
+     * @param element the element
+     * @param index the index
+     */
     private Marker(final Element element, final int index) {
       this.element = element;
       this.annotation = null;
       this.index = index;
     }
 
+    /* (non-Javadoc)
+     * @see java.lang.Comparable#compareTo(java.lang.Object)
+     */
     @Override
     public int compareTo(final Marker that) {
       final int value = Integer.signum(this.index - that.index);
@@ -89,28 +132,58 @@ public class ContentRenderer {
       return value;
     }
 
+    /**
+     * Checks if is annotation.
+     *
+     * @return true, if is annotation
+     */
     boolean isAnnotation() {
       return this.annotation != null;
     }
 
+    /**
+     * Checks if is element.
+     *
+     * @return true, if is element
+     */
     boolean isElement() {
       return this.element != null;
     }
   }
+  
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(ContentRenderer.class);
 
   // private final GadgetRenderer gadgetRenderer;
+  /** The identing. */
   private boolean identing;
+  
+  /** The in align. */
   private boolean inAlign = false;
+  
+  /** The inheader. */
   private boolean inheader = false;
+  
+  /** The wave renderer. */
   private final WaveRenderer waveRenderer;
 
+  /**
+   * Instantiates a new content renderer.
+   *
+   * @param gadgetRenderer the gadget renderer
+   * @param waveRenderer the wave renderer
+   */
   @Inject
   public ContentRenderer(final GadgetRenderer gadgetRenderer, final WaveRenderer waveRenderer) {
     // this.gadgetRenderer = gadgetRenderer;
     this.waveRenderer = waveRenderer;
   }
 
+  /**
+   * Close indent if necessary.
+   *
+   * @param builder the builder
+   */
   private void closeIndentIfNecessary(final StringBuilder builder) {
     if (identing) {
       // Close identations
@@ -119,6 +192,12 @@ public class ContentRenderer {
     }
   }
 
+  /**
+   * Emit annotation.
+   *
+   * @param marker the marker
+   * @param builder the builder
+   */
   private void emitAnnotation(final Marker marker, final StringBuilder builder) {
     if (marker.annotation.getName().startsWith("link")) {
       if (marker.isEnd) {
@@ -147,6 +226,14 @@ public class ContentRenderer {
     }
   }
 
+  /**
+   * Render element.
+   *
+   * @param element the element
+   * @param index the index
+   * @param contributors the contributors
+   * @param builder the builder
+   */
   private void renderElement(final Element element, final int index, final List<String> contributors,
       final StringBuilder builder) {
     final ElementType type = element.getType();
@@ -256,7 +343,12 @@ public class ContentRenderer {
   /**
    * Takes content and applies style and formatting to it based on its
    * annotations and elements.
-   * 
+   *
+   * @param content the content
+   * @param annotations the annotations
+   * @param elements the elements
+   * @param contributors the contributors
+   * @return the string
    */
   public String renderHtml(final String content, final Annotations annotations,
       final SortedMap<Integer, Element> elements, final List<String> contributors) {

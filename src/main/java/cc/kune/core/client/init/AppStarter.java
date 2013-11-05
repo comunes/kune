@@ -22,8 +22,18 @@
  */
 package cc.kune.core.client.init;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface AppStarter.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface AppStarter {
 
+  /**
+   * Start.
+   */
   void start();
 
 }

@@ -49,13 +49,38 @@ import cc.kune.domain.I18nTranslation;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nRPC.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nRPC implements RPC, I18nService {
+  
+  /** The i18n translation manager. */
   private final I18nTranslationManager i18nTranslationManager;
+  
+  /** The language manager. */
   private final I18nLanguageManager languageManager;
+  
+  /** The mapper. */
   private final KuneMapper mapper;
+  
+  /** The request provider. */
   private final Provider<HttpServletRequest> requestProvider;
+  
+  /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
+  /**
+   * Instantiates a new i18n rpc.
+   *
+   * @param requestProvider the request provider
+   * @param userSessionManager the user session manager
+   * @param i18nTranslationManager the i18n translation manager
+   * @param languageManager the language manager
+   * @param mapper the mapper
+   */
   @Inject
   public I18nRPC(final Provider<HttpServletRequest> requestProvider,
       final UserSessionManager userSessionManager, final I18nTranslationManager i18nTranslationManager,
@@ -67,6 +92,9 @@ public class I18nRPC implements RPC, I18nService {
     this.mapper = mapper;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.I18nService#getInitialLanguage(java.lang.String)
+   */
   @Override
   @KuneTransactional
   public I18nLanguageDTO getInitialLanguage(final String localeParam) {
@@ -96,12 +124,18 @@ public class I18nRPC implements RPC, I18nService {
     return mapper.map(lang, I18nLanguageDTO.class);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.I18nService#getLexicon(java.lang.String)
+   */
   @Override
   @KuneTransactional
   public HashMap<String, String> getLexicon(final String language) {
     return i18nTranslationManager.getLexicon(language);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.I18nService#getTranslatedLexicon(java.lang.String, java.lang.String, java.lang.String, boolean)
+   */
   @Override
   @Authenticated
   @KuneTransactional
@@ -114,6 +148,9 @@ public class I18nRPC implements RPC, I18nService {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.I18nService#getTranslation(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+   */
   @Override
   @KuneTransactional
   public String getTranslation(final String userHash, final String language, final String text,
@@ -126,12 +163,23 @@ public class I18nRPC implements RPC, I18nService {
     return translation;
   }
 
+  /**
+   * Gets the translation wrapper.
+   *
+   * @param language the language
+   * @param text the text
+   * @param noteForTranslators the note for translators
+   * @return the translation wrapper
+   */
   @Authenticated(mandatory = false)
   private String getTranslationWrapper(final String language, final String text,
       final String noteForTranslators) {
     return i18nTranslationManager.getTranslation(language, text, noteForTranslators);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.I18nService#setTranslation(java.lang.String, java.lang.Long, java.lang.String)
+   */
   @Override
   @Authenticated
   @KuneTransactional

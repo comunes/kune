@@ -22,11 +22,18 @@
  */
 package cc.kune.core.server.manager.impl;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Enum EmailConfirmationType is used internally to differentiate several
- * types of email confirmation/verification
+ * types of email confirmation/verification.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum EmailConfirmationType {
-  emailVerification, passwordReset
+  
+  /** The email verification. */
+  emailVerification, 
+ /** The password reset. */
+ passwordReset
 
 }

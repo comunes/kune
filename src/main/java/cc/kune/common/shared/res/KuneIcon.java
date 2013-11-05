@@ -22,10 +22,13 @@
  */
 package cc.kune.common.shared.res;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class KuneIcon is used with a kune SVG font (see the layer names in
  * kune-artwork/iconic/iconsfonts.svg) to show kune icons from the kune icons
  * generated ttf.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneIcon {
 

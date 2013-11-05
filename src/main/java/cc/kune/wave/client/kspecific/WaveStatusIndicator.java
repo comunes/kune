@@ -39,10 +39,27 @@ import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveStatusIndicator.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveStatusIndicator {
 
+  /**
+   * The Class WaveStatusAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class WaveStatusAction extends SessionAction {
 
+    /**
+     * Instantiates a new wave status action.
+     *
+     * @param session the session
+     * @param i18n the i18n
+     */
     @Inject
     public WaveStatusAction(final Session session, final I18nTranslationService i18n) {
       super(session, true);
@@ -87,6 +104,9 @@ public class WaveStatusIndicator {
       });
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       // Do nothing
@@ -94,6 +114,11 @@ public class WaveStatusIndicator {
 
   }
 
+  /**
+   * Instantiates a new wave status indicator.
+   *
+   * @param action the action
+   */
   @Inject
   public WaveStatusIndicator(final WaveStatusAction action) {
     final IconLabelDescriptor status = new IconLabelDescriptor(action);

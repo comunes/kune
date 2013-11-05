@@ -28,8 +28,19 @@ import com.calclab.hablar.signals.client.sound.SoundBundle;
 import com.calclab.hablar.signals.client.sound.SoundManager;
 import com.google.gwt.event.shared.EventBus;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneSoundManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneSoundManager {
 
+  /**
+   * Instantiates a new kune sound manager.
+   *
+   * @param eventBus the event bus
+   */
   public KuneSoundManager(final EventBus eventBus) {
     eventBus.addHandler(SndClickEvent.getType(), new SndClickEvent.SndClickHandler() {
       @Override

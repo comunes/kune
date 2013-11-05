@@ -37,6 +37,7 @@ exception statement from your version. */
 
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
 /**
  * Provides a convenient central point of control for some task that can be
  * triggered by more than one control in a Swing user interface (for example, a
@@ -127,17 +128,15 @@ public interface Action extends ActionListener {
   boolean isEnabled();
 
   /**
-   * Sets the value associated with the specified key and sends a
+   * Sets the value associated with the specified key and sends a.
+   *
+   * @param key the key (not <code>null</code>).
+   * @param value the value (<code>null</code> permitted).
    * {@link PropertyChangeEvent} to all registered listeners. The standard keys
    * are defined in this interface: {@link #NAME}, {@link #TOOLTIP},
    * {@link #LONG_DESCRIPTION}, {@link #SMALL_ICON}, {@link #ACTION_COMMAND_KEY}
    * , {@link #ACCELERATOR_KEY} and {@link #MNEMONIC_KEY}. Any existing value
    * associated with the key will be overwritten.
-   * 
-   * @param key
-   *          the key (not <code>null</code>).
-   * @param value
-   *          the value (<code>null</code> permitted).
    */
   void putValue(String key, Object value);
 

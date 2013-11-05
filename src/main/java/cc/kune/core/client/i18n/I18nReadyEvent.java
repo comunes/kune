@@ -27,34 +27,83 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nReadyEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nReadyEvent extends GwtEvent<I18nReadyEvent.I18nReadyHandler> {
 
+  /**
+   * The Interface HasI18nReadyHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasI18nReadyHandlers extends HasHandlers {
+    
+    /**
+     * Adds the i18n ready handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addI18nReadyHandler(I18nReadyHandler handler);
   }
 
+  /**
+   * The Interface I18nReadyHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface I18nReadyHandler extends EventHandler {
+    
+    /**
+     * On i18n ready.
+     *
+     * @param event the event
+     */
     public void onI18nReady(I18nReadyEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<I18nReadyHandler> TYPE = new Type<I18nReadyHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new I18nReadyEvent());
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<I18nReadyHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * Instantiates a new i18n ready event.
+   */
   public I18nReadyEvent() {
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final I18nReadyHandler handler) {
     handler.onI18nReady(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object other) {
     if (other != null && other.getClass().equals(this.getClass())) {
@@ -63,11 +112,17 @@ public class I18nReadyEvent extends GwtEvent<I18nReadyEvent.I18nReadyHandler> {
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<I18nReadyHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     int hashCode = 23;
@@ -75,6 +130,9 @@ public class I18nReadyEvent extends GwtEvent<I18nReadyEvent.I18nReadyHandler> {
     return hashCode;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "I18nReadyEvent[" + "]";

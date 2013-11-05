@@ -57,45 +57,139 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SignInPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInPresenter.SignInProxy>
     implements SignIn {
 
+  /**
+   * The Interface SignInProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface SignInProxy extends Proxy<SignInPresenter> {
   }
 
+  /**
+   * The Interface SignInView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface SignInView extends SignInAbstractView {
 
+    /**
+     * Focus on nickname.
+     */
     void focusOnNickname();
 
+    /**
+     * Focus on password.
+     */
     void focusOnPassword();
 
+    /**
+     * Gets the account register.
+     *
+     * @return the account register
+     */
     HasClickHandlers getAccountRegister();
 
+    /**
+     * Gets the forgot passwd.
+     *
+     * @return the forgot passwd
+     */
     HasClickHandlers getForgotPasswd();
 
+    /**
+     * Gets the login password.
+     *
+     * @return the login password
+     */
     String getLoginPassword();
 
+    /**
+     * Gets the nick or email.
+     *
+     * @return the nick or email
+     */
     String getNickOrEmail();
 
+    /**
+     * Checks if is sign in form valid.
+     *
+     * @return true, if is sign in form valid
+     */
     boolean isSignInFormValid();
 
+    /**
+     * Sets the login password.
+     *
+     * @param password the new login password
+     */
     void setLoginPassword(String password);
 
+    /**
+     * Sets the nick or email.
+     *
+     * @param nickOrEmail the new nick or email
+     */
     void setNickOrEmail(String nickOrEmail);
 
+    /**
+     * Sets the on password return.
+     *
+     * @param onAcceptCallback the new on password return
+     */
     void setOnPasswordReturn(OnAcceptCallback onAcceptCallback);
 
+    /**
+     * Validate.
+     */
     void validate();
 
   }
+  
+  /** The ask passwd reset. */
   private final Provider<AskForPasswordResetPanel> askPasswdReset;
+  
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The register provider. */
   private final Provider<Register> registerProvider;
+  
+  /** The timer. */
   private final TimerWrapper timer;
+  
+  /** The user service. */
   private final UserServiceAsync userService;
+  
+  /** The wave client authenticator. */
   private final WaveClientSimpleAuthenticator waveClientAuthenticator;
 
+  /**
+   * Instantiates a new sign in presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param session the session
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param userService the user service
+   * @param registerProvider the register provider
+   * @param cookiesManager the cookies manager
+   * @param loginRemember the login remember
+   * @param timeWrapper the time wrapper
+   * @param waveClientAuthenticator the wave client authenticator
+   * @param askPasswdReset the ask passwd reset
+   */
   @Inject
   public SignInPresenter(final EventBus eventBus, final SignInView view, final SignInProxy proxy,
       final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
@@ -112,6 +206,9 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     this.askPasswdReset = askPasswdReset;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignIn#doSignIn(java.lang.String, java.lang.String, boolean, com.google.gwt.user.client.rpc.AsyncCallback)
+   */
   @Override
   public void doSignIn(final String nickOrEmail, final String passwd, final boolean gotoHomePage,
       final AsyncCallback<Void> extCallback) {
@@ -146,11 +243,17 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInAbstractPresenter#getView()
+   */
   @Override
   public SignInView getView() {
     return (SignInView) super.getView();
   }
 
+  /**
+   * On account register.
+   */
   public void onAccountRegister() {
     getView().reset();
     getView().hideMessages();
@@ -158,6 +261,9 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     stateManager.gotoHistoryToken(SiteTokens.REGISTER);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
+   */
   @Override
   protected void onBind() {
     super.onBind();
@@ -201,6 +307,9 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     });
   }
 
+  /**
+   * On form sign in.
+   */
   public void onFormSignIn() {
     getView().validate();
     if (getView().isSignInFormValid()) {
@@ -224,6 +333,11 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     }
   }
 
+  /**
+   * On sing in failed.
+   *
+   * @param caught the caught
+   */
   private void onSingInFailed(final Throwable caught) {
     getView().unMask();
     eventBus.fireEvent(new ProgressHideEvent());
@@ -236,16 +350,25 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignIn#setErrorMessage(java.lang.String, cc.kune.common.client.notify.NotifyLevel)
+   */
   @Override
   public void setErrorMessage(final String message, final NotifyLevel level) {
     getView().setErrorMessage(message, level);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignIn#showSignInDialog()
+   */
   @Override
   public void showSignInDialog() {
     registerProvider.get().hide();

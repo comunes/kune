@@ -44,18 +44,55 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractFolderViewerPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractFolderViewerPanel extends ViewImpl implements FolderViewerView {
+  
+  /** The capabilities registry. */
   protected final ContentCapabilitiesRegistry capabilitiesRegistry;
+  
+  /** The container drop controller prov. */
   protected final Provider<FolderContainerDropController> containerDropControllerProv;
+  
+  /** The content drop controller prov. */
   protected final Provider<FolderContentDropController> contentDropControllerProv;
+  
+  /** The content title. */
   private final ContentTitleWidget contentTitle;
+  
+  /** The drag controller. */
   protected final KuneDragController dragController;
+  
+  /** The empty label. */
   private final InlineLabel emptyLabel;
+  
+  /** The empty panel. */
   private final FlowPanel emptyPanel;
+  
+  /** The gs armor. */
   protected final GSpaceArmor gsArmor;
+  
+  /** The i18n. */
   protected final I18nTranslationService i18n;
+  
+  /** The widget. */
   protected Widget widget;
 
+  /**
+   * Instantiates a new abstract folder viewer panel.
+   *
+   * @param gsArmor the gs armor
+   * @param eventBus the event bus
+   * @param i18n the i18n
+   * @param capabilitiesRegistry the capabilities registry
+   * @param dragController the drag controller
+   * @param contentDropControllerProv the content drop controller prov
+   * @param containerDropControllerProv the container drop controller prov
+   */
   public AbstractFolderViewerPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
       final I18nTranslationService i18n, final ContentCapabilitiesRegistry capabilitiesRegistry,
       final KuneDragController dragController,
@@ -75,15 +112,24 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return widget;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#attach()
+   */
   @Override
   public void attach() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#clear()
+   */
   @Override
   public void clear() {
     gsArmor.getSubheaderToolbar().clear();
@@ -92,30 +138,50 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     UiUtils.clear(gsArmor.getDocHeader());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#detach()
+   */
   @Override
   public void detach() {
     clear();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#editTitle()
+   */
   @Override
   public void editTitle() {
     contentTitle.edit();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#getEditTitle()
+   */
   @Override
   public HasEditHandler getEditTitle() {
     return contentTitle.getEditableTitle();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#highlightTitle()
+   */
   @Override
   public void highlightTitle() {
     contentTitle.highlightTitle();
   }
 
+  /**
+   * Resize height.
+   *
+   * @param w the w
+   */
   protected void resizeHeight(final Widget w) {
     w.setHeight(String.valueOf(gsArmor.getDocContainerHeight()));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#setContainer(cc.kune.core.shared.dto.StateContainerDTO)
+   */
   @Override
   public void setContainer(final StateContainerDTO state) {
     final String title = state.getContainer().isRoot() ? i18n.t(state.getTitle()) : state.getTitle();
@@ -124,26 +190,44 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     Window.setTitle(state.getGroup().getLongName() + ": " + state.getTitle());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#setEditableTitle(java.lang.String)
+   */
   @Override
   public void setEditableTitle(final String title) {
     contentTitle.setText(title);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#setFooterActions(cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+   */
   @Override
   public void setFooterActions(final GuiActionDescCollection actions) {
     setToolbarActions(actions, gsArmor.getDocFooterToolbar());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#setSubheaderActions(cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+   */
   @Override
   public void setSubheaderActions(final GuiActionDescCollection actions) {
     setToolbarActions(actions, gsArmor.getSubheaderToolbar());
   }
 
+  /**
+   * Sets the toolbar actions.
+   *
+   * @param actions the actions
+   * @param toolbar the toolbar
+   */
   private void setToolbarActions(final GuiActionDescCollection actions, final IsActionExtensible toolbar) {
     toolbar.clear();
     toolbar.addAll(actions);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#showEmptyMsg(java.lang.String)
+   */
   @Override
   public void showEmptyMsg(final String emptyMessage) {
     gsArmor.enableCenterScroll(false);
@@ -152,6 +236,9 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     gsArmor.getDocContainer().showWidget(emptyPanel);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#showFolder()
+   */
   @Override
   public void showFolder() {
     gsArmor.enableCenterScroll(true);

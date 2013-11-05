@@ -30,30 +30,52 @@ import org.junit.Test;
 import cc.kune.core.client.errors.ContainerNotPermittedException;
 import cc.kune.core.client.errors.ContentNotPermittedException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListsServerToolTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListsServerToolTest { // extends PersistenceTest {
 
-  private ListsServerTool serverTool;
+  /** The server tool. */
+ private ListsServerTool serverTool;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     serverTool = new ListsServerTool(null, null, null, null, null, null);
   }
 
+  /**
+   * Test create container in correct container.
+   */
   @Test
   public void testCreateContainerInCorrectContainer() {
     serverTool.checkTypesBeforeContainerCreation(TYPE_ROOT, TYPE_LIST);
   }
 
+  /**
+   * Test create container in incorrect container7.
+   */
   @Test(expected = ContainerNotPermittedException.class)
   public void testCreateContainerInIncorrectContainer7() {
     serverTool.checkTypesBeforeContainerCreation(TYPE_LIST, TYPE_LIST);
   }
 
+  /**
+   * Test create content in correct container.
+   */
   @Test
   public void testCreateContentInCorrectContainer() {
     serverTool.checkTypesBeforeContentCreation(TYPE_LIST, TYPE_POST);
   }
 
+  /**
+   * Test create content in incorrect container1.
+   */
   @Test(expected = ContentNotPermittedException.class)
   public void testCreateContentInIncorrectContainer1() {
     serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_POST);

@@ -27,8 +27,19 @@ import cc.kune.core.client.events.AccessRightsChangedEvent;
 import cc.kune.core.client.events.AccessRightsChangedEvent.AccessRightsChangedHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractEditorsMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AbstractEditorsMenu extends MenuDescriptor {
 
+  /**
+   * Instantiates a new abstract editors menu.
+   *
+   * @param rightsManager the rights manager
+   */
   public AbstractEditorsMenu(final AccessRightsClientManager rightsManager) {
     this.withStyles(SNActionStyles.MENU_BTN_STYLE_LEFT);
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {

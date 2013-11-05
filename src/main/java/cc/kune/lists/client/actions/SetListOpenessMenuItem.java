@@ -30,8 +30,23 @@ import cc.kune.core.shared.dto.GroupListDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SetListOpenessMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SetListOpenessMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new sets the list openess menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param session the session
+   * @param res the res
+   * @param menu the menu
+   */
   @Inject
   public SetListOpenessMenuItem(final I18nTranslationService i18n, final SetListOpenessAction action,
       final Session session, final CoreResources res, final OptionsListMenu menu) {

@@ -40,12 +40,31 @@ import cc.kune.core.shared.SessionConstants;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SitebarSignInLink.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SitebarSignInLink extends ButtonDescriptor {
 
+  /**
+   * The Class SitebarSignInAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class SitebarSignInAction extends AbstractExtendedAction {
 
+    /** The state manager. */
     private final StateManager stateManager;
 
+    /**
+     * Instantiates a new sitebar sign in action.
+     *
+     * @param stateManager the state manager
+     * @param i18n the i18n
+     * @param session the session
+     */
     @Inject
     public SitebarSignInAction(final StateManager stateManager, final I18nUITranslationService i18n,
         final SessionConstants session) {
@@ -58,6 +77,9 @@ public class SitebarSignInLink extends ButtonDescriptor {
       // i18n.getSiteCommonName()));
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.SIGN_IN);
@@ -65,8 +87,16 @@ public class SitebarSignInLink extends ButtonDescriptor {
 
   }
 
+  /** The Constant SITE_SIGN_IN. */
   public static final String SITE_SIGN_IN = "kune-ssilp-hy";
 
+  /**
+   * Instantiates a new sitebar sign in link.
+   *
+   * @param action the action
+   * @param eventBus the event bus
+   * @param session the session
+   */
   @Inject
   public SitebarSignInLink(final SitebarSignInAction action, final EventBus eventBus,
       final Session session) {

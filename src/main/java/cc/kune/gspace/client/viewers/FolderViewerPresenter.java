@@ -42,23 +42,58 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FolderViewerPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FolderViewerPresenter extends
     Presenter<FolderViewerPresenter.FolderViewerView, FolderViewerPresenter.FolderViewerProxy> implements
     ContentViewer {
 
+  /**
+   * The Interface FolderViewerProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface FolderViewerProxy extends Proxy<FolderViewerPresenter> {
   }
 
+  /**
+   * The Interface FolderViewerView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface FolderViewerView extends AbstractFolderViewerView {
+    
+    /** The no date. */
     long NO_DATE = 0;
   }
 
+  /** The edit handler. */
   private HandlerRegistration editHandler;
+  
+  /** The folder viewer utils. */
   private final FolderViewerUtils folderViewerUtils;
+  
+  /** The rename action. */
   private final Provider<RenameAction> renameAction;
+  
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new folder viewer presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param session the session
+   * @param renameAction the rename action
+   * @param folderViewerUtils the folder viewer utils
+   */
   @Inject
   public FolderViewerPresenter(final EventBus eventBus, final FolderViewerView view,
       final FolderViewerProxy proxy, final Session session, final Provider<RenameAction> renameAction,
@@ -69,6 +104,9 @@ public class FolderViewerPresenter extends
     this.renameAction = renameAction;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#attach()
+   */
   @Override
   public void attach() {
     getView().attach();
@@ -77,6 +115,9 @@ public class FolderViewerPresenter extends
     }
   }
 
+  /**
+   * Creates the edit handler.
+   */
   private void createEditHandler() {
     // Duplicate in DocViewerPresenter
     editHandler = getView().getEditTitle().addEditHandler(new EditHandler() {
@@ -98,28 +139,46 @@ public class FolderViewerPresenter extends
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#detach()
+   */
   @Override
   public void detach() {
     getView().detach();
   }
 
+  /**
+   * Edits the title.
+   */
   public void editTitle() {
     getView().editTitle();
   }
 
+  /**
+   * Highlight title.
+   */
   public void highlightTitle() {
     getView().highlightTitle();
   }
 
+  /**
+   * Refresh state.
+   */
   public void refreshState() {
     setContent((HasContent) session.getCurrentState());
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#setContent(cc.kune.core.shared.dto.HasContent)
+   */
   @Override
   public void setContent(@Nonnull final HasContent state) {
     folderViewerUtils.setContent(getView(), state);

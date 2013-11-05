@@ -27,13 +27,28 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DottedTab.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DottedTab extends Composite {
 
+  /**
+   * The Interface DottedTabUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface DottedTabUiBinder extends UiBinder<Widget, DottedTab> {
   }
 
+  /** The ui binder. */
   private static DottedTabUiBinder uiBinder = GWT.create(DottedTabUiBinder.class);
 
+  /**
+   * Instantiates a new dotted tab.
+   */
   public DottedTab() {
     initWidget(uiBinder.createAndBindUi(this));
   }

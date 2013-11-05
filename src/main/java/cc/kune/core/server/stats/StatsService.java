@@ -24,10 +24,27 @@ package cc.kune.core.server.stats;
 
 import cc.kune.domain.Group;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface StatsService.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface StatsService {
 
+  /**
+   * Gets the home stats.
+   *
+   * @return the home stats
+   */
   HomeStats getHomeStats();
 
+  /**
+   * Gets the home stats.
+   *
+   * @param userGroup the user group
+   * @return the home stats
+   */
   HomeStats getHomeStats(Group userGroup);
 
 }

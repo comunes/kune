@@ -47,9 +47,40 @@ import cc.kune.core.shared.SessionConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserSNMenuItemsRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SuppressWarnings("serial")
 public class UserSNMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
 
+  /**
+   * Instantiates a new user sn menu items registry.
+   *
+   * @param session the session
+   * @param i18n the i18n
+   * @param isAdministrableCondition the is administrable condition
+   * @param isPerson the is person
+   * @param isGroup the is group
+   * @param imPartOfGroup the im part of group
+   * @param isLogged the is logged
+   * @param isBuddie the is buddie
+   * @param isMe the is me
+   * @param isNotMe the is not me
+   * @param changeToCollabAction the change to collab action
+   * @param changeToAdminAction the change to admin action
+   * @param removeMemberAction the remove member action
+   * @param acceptJoinGroupAction the accept join group action
+   * @param denyJoinGroupAction the deny join group action
+   * @param gotoGroupAction the goto group action
+   * @param gotoPersonAction the goto person action
+   * @param unjoinAction the unjoin action
+   * @param writeToAction the write to action
+   * @param writeToActionOnlyAdmins the write to action only admins
+   * @param gotoYourHomePageAction the goto your home page action
+   */
   @Inject
   public UserSNMenuItemsRegistry(final SessionConstants session, final I18nTranslationService i18n,
       final IsCurrentStateAdministrableCondition isAdministrableCondition,

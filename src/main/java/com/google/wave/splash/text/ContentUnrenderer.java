@@ -29,16 +29,37 @@ import com.google.common.collect.Maps;
 import com.google.wave.api.Annotations;
 import com.google.wave.api.Line;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentUnrenderer.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentUnrenderer {
 
   /**
    * Container for the output of the unrender method.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class UnrenderedBlip {
+    
+    /** The annotations. */
     Annotations annotations = new Annotations();
+    
+    /** The contents. */
     public String contents;
+    
+    /** The elements. */
     Map<Integer, com.google.wave.api.Element> elements;
 
+    /**
+     * Instantiates a new unrendered blip.
+     *
+     * @param contents the contents
+     * @param elements the elements
+     * @param annotations the annotations
+     */
     UnrenderedBlip(final String contents, final Map<Integer, com.google.wave.api.Element> elements,
         final Annotations annotations) {
       this.contents = contents;
@@ -53,6 +74,11 @@ public class ContentUnrenderer {
   /**
    * Helper method to recursively parse a HTML element and construct a wave
    * document.
+   *
+   * @param parent the parent
+   * @param output the output
+   * @param elements the elements
+   * @param annotations the annotations
    */
   private static void unrender(final Node parent, final StringBuilder output,
       final Map<Integer, com.google.wave.api.Element> elements, final Annotations annotations) {
@@ -76,6 +102,9 @@ public class ContentUnrenderer {
 
   /**
    * Turns a HTML document back into a set of text, elements, annotations.
+   *
+   * @param content the content
+   * @return the unrendered blip
    */
   public static UnrenderedBlip unrender(final String content) {
     final StringBuilder sb = new StringBuilder();

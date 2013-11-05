@@ -32,10 +32,25 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TrashClientTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TrashClientTool extends FoldableAbstractClientTool {
 
+  /** The Constant EMPTY. */
   private static final String EMPTY = "The trash is empty";
 
+  /**
+   * Instantiates a new trash client tool.
+   *
+   * @param i18n the i18n
+   * @param toolSelector the tool selector
+   * @param cntCapRegistry the cnt cap registry
+   * @param history the history
+   */
   @Inject
   public TrashClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
@@ -54,11 +69,17 @@ public class TrashClientTool extends FoldableAbstractClientTool {
     registerIcons();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.AbstractClientTool#getName()
+   */
   @Override
   public String getName() {
     return TOOL_NAME;
   }
 
+  /**
+   * Register icons.
+   */
   private void registerIcons() {
     registerContentTypeIcon(TYPE_ROOT, ICON_TYPE_ROOT);
     final String trashEmpty = i18n.t(EMPTY);

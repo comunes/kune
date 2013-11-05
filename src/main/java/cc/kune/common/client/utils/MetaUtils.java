@@ -27,6 +27,12 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.MetaElement;
 import com.google.gwt.dom.client.NodeList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MetaUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MetaUtils {
 
   /**
@@ -35,9 +41,8 @@ public class MetaUtils {
    * head section with two attributes: id and content. For example:
    * 
    * <code>&lt;meta name="name" value="userName" /&gt;</code>
-   * 
-   * @param id
-   *          the 'id' value of the desired meta tag
+   *
+   * @param name the name
    * @return the value of the attribute 'content' or null if not found
    */
   public static String get(final String name) {

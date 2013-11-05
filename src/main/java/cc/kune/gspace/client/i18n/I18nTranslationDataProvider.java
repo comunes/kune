@@ -30,24 +30,55 @@ import com.google.gwt.view.client.ListDataProvider;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nTranslationDataProvider.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nTranslationDataProvider {
 
+  /** The data provider. */
   private final ListDataProvider<I18nTranslationDTO> dataProvider = new ListDataProvider<I18nTranslationDTO>();
+  
+  /** The i18n. */
   private final I18nServiceAsync i18n;
+  
+  /** The load callback. */
   private SimpleCallback loadCallback;
+  
+  /** The selection model. */
   private SingleSelectionModel<I18nTranslationDTO> selectionModel;
+  
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new i18n translation data provider.
+   *
+   * @param session the session
+   * @param i18n the i18n
+   */
   @Inject
   private I18nTranslationDataProvider(final Session session, final I18nServiceAsync i18n) {
     this.session = session;
     this.i18n = i18n;
   }
 
+  /**
+   * Adds the data display.
+   *
+   * @param displayList the display list
+   */
   public void addDataDisplay(final CellList<I18nTranslationDTO> displayList) {
     dataProvider.addDataDisplay(displayList);
   }
 
+  /**
+   * Avance.
+   *
+   * @param increment the increment
+   */
   private void avance(final int increment) {
     final I18nTranslationDTO selected = selectionModel.getSelectedObject();
     final List<I18nTranslationDTO> list = dataProvider.getList();
@@ -58,18 +89,34 @@ public class I18nTranslationDataProvider {
     }
   }
 
+  /**
+   * Refresh displays.
+   */
   public void refreshDisplays() {
     dataProvider.refresh();
   }
 
+  /**
+   * Select next.
+   */
   public void selectNext() {
     avance(1);
   }
 
+  /**
+   * Select previous.
+   */
   public void selectPrevious() {
     avance(-1);
   }
 
+  /**
+   * Sets the language.
+   *
+   * @param fromLanguage the from language
+   * @param toLanguage the to language
+   * @param toTranslate the to translate
+   */
   public void setLanguage(final I18nLanguageSimpleDTO fromLanguage,
       final I18nLanguageSimpleDTO toLanguage, final boolean toTranslate) {
     NotifyUser.showProgressLoading();
@@ -89,10 +136,20 @@ public class I18nTranslationDataProvider {
     });
   }
 
+  /**
+   * Sets the load callback.
+   *
+   * @param loadCallback the new load callback
+   */
   public void setLoadCallback(final SimpleCallback loadCallback) {
     this.loadCallback = loadCallback;
   }
 
+  /**
+   * Sets the selection mode.
+   *
+   * @param selectionModel the new selection mode
+   */
   public void setSelectionMode(final SingleSelectionModel<I18nTranslationDTO> selectionModel) {
     this.selectionModel = selectionModel;
   }

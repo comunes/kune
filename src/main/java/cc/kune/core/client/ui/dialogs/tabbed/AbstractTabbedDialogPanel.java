@@ -51,28 +51,90 @@ import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractTabbedDialogPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractTabbedDialogPanel extends ViewImpl implements AbstractTabbedDialogView {
+  
+  /** The Constant NO_SIZE. */
   private static final int NO_SIZE = -1;
+  
+  /** The autohide. */
   private final boolean autohide;
+  
+  /** The dialog. */
   private BasicTopDialog dialog;
+  
+  /** The dialog id. */
   private final String dialogId;
+  
+  /** The direction. */
   private final Direction direction;
+  
+  /** The error label id. */
   private final String errorLabelId;
+  
+  /** The first btn id. */
   private final String firstBtnId;
+  
+  /** The first btn title. */
   private final String firstBtnTitle;
+  
+  /** The height. */
   private int height = NO_SIZE;
+  
+  /** The icon. */
   private ImageResource icon;
+  
+  /** The icon cls. */
   private String iconCls;
+  
+  /** The images. */
   private final NotifyLevelImages images;
+  
+  /** The message error bar. */
   private MessageToolbar messageErrorBar;
+  
+  /** The modal. */
   private final boolean modal;
+  
+  /** The prov collection. */
   private final ProvidersCollection provCollection;
+  
+  /** The snd btn id. */
   private final String sndBtnId;
+  
+  /** The snd btn title. */
   private final String sndBtnTitle;
+  
+  /** The tab panel. */
   private TabLayoutPanel tabPanel;
+  
+  /** The title. */
   private String title;
+  
+  /** The width. */
   private int width = NO_SIZE;
 
+  /**
+   * Instantiates a new abstract tabbed dialog panel.
+   *
+   * @param dialogId the dialog id
+   * @param title the title
+   * @param modal the modal
+   * @param autoHide the auto hide
+   * @param images the images
+   * @param errorLabelId the error label id
+   * @param firstBtnTitle the first btn title
+   * @param firstBtnId the first btn id
+   * @param sndBtnTitle the snd btn title
+   * @param sndBtnId the snd btn id
+   * @param provCollection the prov collection
+   * @param direction the direction
+   */
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
       final boolean autoHide, final NotifyLevelImages images, final String errorLabelId,
       final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
@@ -91,6 +153,21 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     this.direction = direction;
   }
 
+  /**
+   * Instantiates a new abstract tabbed dialog panel.
+   *
+   * @param dialogId the dialog id
+   * @param title the title
+   * @param modal the modal
+   * @param images the images
+   * @param errorLabelId the error label id
+   * @param firstBtnTitle the first btn title
+   * @param firstBtnId the first btn id
+   * @param sndBtnTitle the snd btn title
+   * @param sndBtnId the snd btn id
+   * @param provCollection the prov collection
+   * @param direction the direction
+   */
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final boolean modal,
       final NotifyLevelImages images, final String errorLabelId, final String firstBtnTitle,
       final String firstBtnId, final String sndBtnTitle, final String sndBtnId,
@@ -99,6 +176,24 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
         firstBtnId, sndBtnTitle, sndBtnId, provCollection, direction);
   }
 
+  /**
+   * Instantiates a new abstract tabbed dialog panel.
+   *
+   * @param dialogId the dialog id
+   * @param title the title
+   * @param width the width
+   * @param height the height
+   * @param modal the modal
+   * @param autoHide the auto hide
+   * @param images the images
+   * @param errorLabelId the error label id
+   * @param firstBtnTitle the first btn title
+   * @param firstBtnId the first btn id
+   * @param sndBtnTitle the snd btn title
+   * @param sndBtnId the snd btn id
+   * @param provCollection the prov collection
+   * @param direction the direction
+   */
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
       final int height, final boolean modal, final boolean autoHide, final NotifyLevelImages images,
       final String errorLabelId, final String firstBtnTitle, final String firstBtnId,
@@ -110,6 +205,23 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     this.height = height;
   }
 
+  /**
+   * Instantiates a new abstract tabbed dialog panel.
+   *
+   * @param dialogId the dialog id
+   * @param title the title
+   * @param width the width
+   * @param height the height
+   * @param modal the modal
+   * @param images the images
+   * @param errorLabelId the error label id
+   * @param firstBtnTitle the first btn title
+   * @param firstBtnId the first btn id
+   * @param sndBtnTitle the snd btn title
+   * @param sndBtnId the snd btn id
+   * @param provCollection the prov collection
+   * @param direction the direction
+   */
   public AbstractTabbedDialogPanel(final String dialogId, final String title, final int width,
       final int height, final boolean modal, final NotifyLevelImages images, final String errorLabelId,
       final String firstBtnTitle, final String firstBtnId, final String sndBtnTitle,
@@ -118,12 +230,18 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
         sndBtnTitle, sndBtnId, provCollection, direction);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView#activateTab(int)
+   */
   @Override
   public void activateTab(final int index) {
     createDialogIfNecessary();
     tabPanel.selectTab(index);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView#addTab(com.google.gwt.user.client.ui.IsWidget, com.google.gwt.user.client.ui.IsWidget)
+   */
   @Override
   public void addTab(final IsWidget view, final IsWidget tabTitle) {
     createDialogIfNecessary();
@@ -131,12 +249,18 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     setPositions();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     createDialogIfNecessary();
     return dialog;
   }
 
+  /**
+   * Creates the dialog.
+   */
   private void createDialog() {
     final Builder builder = new BasicTopDialog.Builder(dialogId, autohide, modal, direction).autoscroll(
         true).icon(iconCls).firstButtonId(firstBtnId).firstButtonTitle(firstBtnTitle).sndButtonTitle(
@@ -183,12 +307,18 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     });
   }
 
+  /**
+   * Creates the dialog if necessary.
+   */
   private void createDialogIfNecessary() {
     if (dialog == null) {
       createDialog();
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView#destroy()
+   */
   @Override
   public void destroy() {
     if (dialog != null) {
@@ -197,26 +327,49 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     }
   }
 
+  /**
+   * Gets the close.
+   *
+   * @return the close
+   */
   public HasCloseHandlers<?> getClose() {
     createDialogIfNecessary();
     return dialog.getClose();
   }
 
+  /**
+   * Gets the first btn.
+   *
+   * @return the first btn
+   */
   public HasClickHandlers getFirstBtn() {
     createDialogIfNecessary();
     return dialog.getFirstBtn();
   }
 
+  /**
+   * Gets the inner panel.
+   *
+   * @return the inner panel
+   */
   public ForIsWidget getInnerPanel() {
     createDialogIfNecessary();
     return dialog.getInnerPanel();
   }
 
+  /**
+   * Gets the second btn.
+   *
+   * @return the second btn
+   */
   public HasClickHandlers getSecondBtn() {
     createDialogIfNecessary();
     return dialog.getSecondBtn();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView#hide()
+   */
   @Override
   public void hide() {
     if (dialog != null) {
@@ -226,6 +379,9 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView#hideMessages()
+   */
   @Override
   public void hideMessages() {
     if (dialog != null) {
@@ -233,6 +389,9 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView#insertTab(com.google.gwt.user.client.ui.IsWidget, com.google.gwt.user.client.ui.IsWidget, int)
+   */
   @Override
   public void insertTab(final IsWidget tab, final IsWidget tabTitle, final int index) {
     createDialogIfNecessary();
@@ -240,24 +399,45 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     setPositions();
   }
 
+  /**
+   * Checks if is visible.
+   *
+   * @return true, if is visible
+   */
   public boolean isVisible() {
     createDialogIfNecessary();
     return dialog.isVisible();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView#setErrorMessage(java.lang.String, cc.kune.common.client.notify.NotifyLevel)
+   */
   @Override
   public void setErrorMessage(final String message, final NotifyLevel level) {
     messageErrorBar.setErrorMessage(message, level);
   }
 
+  /**
+   * Sets the first tab active.
+   */
   public void setFirstTabActive() {
     tabPanel.selectTab(0);
   }
 
+  /**
+   * Sets the icon.
+   *
+   * @param icon the new icon
+   */
   public void setIcon(final ImageResource icon) {
     this.icon = icon;
   }
 
+  /**
+   * Sets the icon cls.
+   *
+   * @param iconCls the new icon cls
+   */
   public void setIconCls(final String iconCls) {
     this.iconCls = iconCls;
     if (dialog != null) {
@@ -267,6 +447,9 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   // Workaround from:
   // http://stackoverflow.com/questions/5170324/tablayoutpanel-dynamic-resizing
+  /**
+   * Sets the positions.
+   */
   private void setPositions() {
     for (int i = 0; i < tabPanel.getWidgetCount(); i++) {
       final Element element = tabPanel.getWidget(i).getElement();
@@ -287,6 +470,11 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     }
   }
 
+  /**
+   * Sets the title.
+   *
+   * @param title the new title
+   */
   public void setTitle(final String title) {
     this.title = title;
     if (dialog != null) {
@@ -294,12 +482,18 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView#show()
+   */
   @Override
   public void show() {
     showImpl();
     setFirstTabActive();
   }
 
+  /**
+   * Show impl.
+   */
   private void showImpl() {
     createDialogIfNecessary();
     hideMessages();

@@ -41,10 +41,28 @@ import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StartAssemblyWithMembersAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StartAssemblyWithMembersAction extends OpenGroupPublicChatRoomAction {
 
+  /** The content service. */
   private final Provider<ContentServiceAsync> contentService;
 
+  /**
+   * Instantiates a new start assembly with members action.
+   *
+   * @param session the session
+   * @param accessRightsClientManager the access rights client manager
+   * @param chatClient the chat client
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param res the res
+   * @param contentService the content service
+   */
   @Inject
   public StartAssemblyWithMembersAction(final Session session,
       final AccessRightsClientManager accessRightsClientManager, final ChatClient chatClient,
@@ -54,6 +72,9 @@ public class StartAssemblyWithMembersAction extends OpenGroupPublicChatRoomActio
     this.contentService = contentService;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.actions.OpenGroupPublicChatRoomAction#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     NotifyUser.askConfirmation(i18n.t("Please confirm"),

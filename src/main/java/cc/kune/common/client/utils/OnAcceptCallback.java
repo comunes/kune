@@ -25,8 +25,17 @@ package cc.kune.common.client.utils;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OnAcceptCallback.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class OnAcceptCallback implements SimpleResponseCallback {
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.shared.utils.SimpleResponseCallback#onCancel()
+   */
   @Override
   public void onCancel() {
     // Do nothing

@@ -32,19 +32,37 @@ import cc.kune.common.shared.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.widget.menu.HeaderMenuItem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GxtMenuTitleItemGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
 
+  /** The item. */
   private HeaderMenuItem item;
 
+  /**
+   * Instantiates a new gxt menu title item gui.
+   */
   public GxtMenuTitleItemGui() {
     super();
   }
 
+  /**
+   * Instantiates a new gxt menu title item gui.
+   *
+   * @param descriptor the descriptor
+   */
   public GxtMenuTitleItemGui(final MenuItemDescriptor descriptor) {
     super(descriptor);
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
@@ -60,33 +78,56 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
     return this;
   }
 
+  /**
+   * Gets the item.
+   *
+   * @return the item
+   */
   public HeaderMenuItem getItem() {
     return item;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
+   */
   @Override
   protected void setEnabled(final boolean enabled) {
     item.setVisible(enabled);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+   */
   @Override
   public void setIcon(final KuneIcon icon) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+   */
   @Override
   public void setIconBackground(final String back) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+   */
   @Override
   protected void setIconStyle(final String style) {
     item.addStyleName(style);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+   */
   @Override
   public void setIconUrl(final String url) {
     throw new NotImplementedException();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+   */
   @Override
   protected void setText(final String text) {
     if (text != null) {
@@ -94,6 +135,9 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang.String)
+   */
   @Override
   public void setToolTipText(final String tooltip) {
     if (TextUtils.notEmpty(tooltip)) {
@@ -101,11 +145,17 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     item.setVisible(visible);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
+   */
   @Override
   public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
     return false;

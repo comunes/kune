@@ -32,21 +32,41 @@ import cc.kune.core.server.integration.content.ContentServiceIntegrationTest;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileUploadManagerTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FileUploadManagerTest extends ContentServiceIntegrationTest {
 
+  /** The file upload manager. */
   @Inject
   FileUploadManager fileUploadManager;
 
+  /**
+   * Creates the.
+   */
   @Before
   public void create() {
     new IntegrationTestHelper(false, this);
   }
 
+  /**
+   * Test session exp.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = SessionExpiredException.class)
   public void testSessionExp() throws Exception {
     fileUploadManager.createUploadedFile("otherhash", null, null, null, null);
   }
 
+  /**
+   * Test user must be auth.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = UserMustBeLoggedException.class)
   public void testUserMustBeAuth() throws Exception {
     fileUploadManager.createUploadedFile(null, null, null, null, null);

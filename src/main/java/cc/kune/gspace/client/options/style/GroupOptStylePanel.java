@@ -28,8 +28,21 @@ import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupOptStylePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupOptStylePanel extends EntityOptStylePanel implements GroupOptStyleView {
 
+  /**
+   * Instantiates a new group opt style panel.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param styleSelector the style selector
+   */
   @Inject
   public GroupOptStylePanel(final I18nTranslationService i18n, final IconicResources res,
       final GSpaceThemeSelectorPanel styleSelector) {

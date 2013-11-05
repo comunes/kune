@@ -32,46 +32,97 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DottedTabPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DottedTabPanel extends Composite {
 
+  /**
+   * The Interface DottedTabPanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface DottedTabPanelUiBinder extends UiBinder<Widget, DottedTabPanel> {
   }
 
+  /** The ui binder. */
   private static DottedTabPanelUiBinder uiBinder = GWT.create(DottedTabPanelUiBinder.class);
 
+  /** The tab panel. */
   @UiField
   TabLayoutPanel tabPanel;
 
+  /**
+   * Instantiates a new dotted tab panel.
+   *
+   * @param width the width
+   * @param height the height
+   */
   public DottedTabPanel(final String width, final String height) {
     initWidget(uiBinder.createAndBindUi(this));
     tabPanel.setSize(width, height);
   }
 
+  /**
+   * Adds the tab.
+   *
+   * @param view the view
+   * @param tooltip the tooltip
+   */
   public void addTab(final IsWidget view, final String tooltip) {
     final DottedTab tab = new DottedTab();
     Tooltip.to(tab, tooltip);
     tabPanel.add(view, tab);
   }
 
+  /**
+   * Blink current tab.
+   */
   public void blinkCurrentTab() {
     final Widget tab = tabPanel.getTabWidget(tabPanel.getSelectedIndex());
     new BlinkAnimation(tab.getParent(), 350).animate(5);
   }
 
+  /**
+   * Gets the widget index.
+   *
+   * @param view the view
+   * @return the widget index
+   */
   public int getWidgetIndex(final IsWidget view) {
     return tabPanel.getWidgetIndex(view.asWidget());
   }
 
+  /**
+   * Insert tab.
+   *
+   * @param view the view
+   * @param tooltip the tooltip
+   * @param beforeIndex the before index
+   */
   public void insertTab(final IsWidget view, final String tooltip, final int beforeIndex) {
     final DottedTab tab = new DottedTab();
     Tooltip.to(tab, tooltip);
     tabPanel.insert(view.asWidget(), tab, beforeIndex);
   }
 
+  /**
+   * Removes the tab.
+   *
+   * @param view the view
+   */
   public void removeTab(final IsWidget view) {
     tabPanel.remove(view.asWidget());
   }
 
+  /**
+   * Select tab.
+   *
+   * @param index the index
+   */
   public void selectTab(final int index) {
     tabPanel.selectTab(index);
   }

@@ -37,19 +37,57 @@ import com.extjs.gxt.ui.client.widget.form.CheckBox;
 import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nTranslatorPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I18nTranslatorView {
 
+  /** The Constant HEIGHT. */
   private static final int HEIGHT = 280;
+  
+  /** The Constant TRANSLATOR_ERROR_ID. */
   private static final String TRANSLATOR_ERROR_ID = "i18n-trans-panel-error";
+  
+  /** The Constant TRANSLATOR_PANEL_ID. */
   private static final String TRANSLATOR_PANEL_ID = "i18n-trans-panel";
+  
+  /** The Constant WIDTH. */
   private static final int WIDTH = 570;
+  
+  /** The checkbox. */
   private final CheckBox checkbox;
+  
+  /** The lan selector full translated panel. */
   private final LanguageSelectorOnlyFullTranslatedPanel lanSelectorFullTranslatedPanel;
+  
+  /** The lan selector panel. */
   private final AbstractLanguageSelectorPanel lanSelectorPanel;
+  
+  /** The to translate grid. */
   private final I18nToTranslateGridPanel toTranslateGrid;
+  
+  /** The translated grid. */
   private final I18nTranslatedGridPanel translatedGrid;
+  
+  /** The trans recommend. */
   private final I18nTranslateRecomendPanel transRecommend;
 
+  /**
+   * Instantiates a new i18n translator panel.
+   *
+   * @param i18n the i18n
+   * @param images the images
+   * @param transGroup the trans group
+   * @param lanSelectorFullTranslatedPanel the lan selector full translated panel
+   * @param lanSelectorPanel the lan selector panel
+   * @param toTranslateGrid the to translate grid
+   * @param translatedGrid the translated grid
+   * @param transRecommend the trans recommend
+   * @param res the res
+   */
   @Inject
   public I18nTranslatorPanel(final I18nTranslationService i18n, final NotifyLevelImages images,
       final I18nTranslatorTabsCollection transGroup,
@@ -104,6 +142,9 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
     lanSelectorPanel.addChangeListener(onLangChange);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView#init()
+   */
   @Override
   public void init() {
     addTab(toTranslateGrid, toTranslateGrid.getTabTitle());
@@ -111,17 +152,32 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
     addTab(transRecommend, transRecommend.getTabTitle());
   }
 
+  /**
+   * Refresh langs.
+   *
+   * @param lanSelectorFullTranslatedPanel the lan selector full translated panel
+   * @param lanSelectorPanel the lan selector panel
+   */
   private void refreshLangs(
       final LanguageSelectorOnlyFullTranslatedPanel lanSelectorFullTranslatedPanel,
       final LanguageSelectorWithoutEnglishPanel lanSelectorPanel) {
     setLanguage(lanSelectorFullTranslatedPanel.getLanguage(), lanSelectorPanel.getLanguage());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView#setLanguage(cc.kune.core.shared.dto.I18nLanguageSimpleDTO)
+   */
   @Override
   public void setLanguage(final I18nLanguageSimpleDTO currentLanguage) {
     setLanguage(null, currentLanguage);
   }
 
+  /**
+   * Sets the language.
+   *
+   * @param fromLanguage the from language
+   * @param toLanguage the to language
+   */
   public void setLanguage(final I18nLanguageSimpleDTO fromLanguage,
       final I18nLanguageSimpleDTO toLanguage) {
     if (checkbox.getValue() && fromLanguage != null) {
@@ -136,6 +192,9 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel#show()
+   */
   @Override
   public void show() {
     super.show();

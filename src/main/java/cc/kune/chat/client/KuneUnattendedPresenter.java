@@ -33,12 +33,26 @@ import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedHandle
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 import com.google.gwt.event.shared.EventBus;
 
+// TODO: Auto-generated Javadoc
 /**
- * Handles the presentation of unattended chats
+ * Handles the presentation of unattended chats.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneUnattendedPresenter {
+  
+  /** The active. */
   private boolean active;
 
+  /**
+   * Instantiates a new kune unattended presenter.
+   *
+   * @param eventBus the event bus
+   * @param hablarEventBus the hablar event bus
+   * @param preferences the preferences
+   * @param unattendedManager the unattended manager
+   * @param action the action
+   */
   public KuneUnattendedPresenter(final EventBus eventBus, final HablarEventBus hablarEventBus,
       final SignalPreferences preferences, final UnattendedPagesManager unattendedManager,
       final ChatClientAction action) {

@@ -22,6 +22,11 @@
  */
 package cc.kune.core.server.notifier;
 
+/**
+ * The Class UserOnlineSimpleManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserOnlineSimpleManager {
 
 }

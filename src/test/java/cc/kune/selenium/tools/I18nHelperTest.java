@@ -29,19 +29,34 @@ import org.junit.Test;
 import com.calclab.hablar.login.client.LoginMessages;
 import com.calclab.hablar.search.client.SearchMessages;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nHelperTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nHelperTest {
 
+  /**
+   * Test one plural.
+   */
   @Test
   public void testOnePlural() {
     assertEquals("Results for «test1»: One user found.",
         I18nHelper.get(SearchMessages.class, "searchResultsFor", "test1", 1));
   }
 
+  /**
+   * Test simple arg.
+   */
   @Test
   public void testSimpleArg() {
     assertEquals("Connected as test1", I18nHelper.get(LoginMessages.class, "connectedAs", "test1"));
   }
 
+  /**
+   * Test simple several args.
+   */
   @Test
   public void testSimpleSeveralArgs() {
     assertEquals("Results for «test1»: 2 users found.",

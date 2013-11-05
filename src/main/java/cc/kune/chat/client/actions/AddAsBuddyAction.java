@@ -39,11 +39,33 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddAsBuddyAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AddAsBuddyAction extends AbstractExtendedAction {
+  
+  /** The chat engine. */
   private final ChatClient chatEngine;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The sn service. */
   private final Provider<SocialNetServiceAsync> snService;
 
+  /**
+   * Instantiates a new adds the as buddy action.
+   *
+   * @param chatEngine the chat engine
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param img the img
+   * @param snService the sn service
+   * @param session the session
+   */
   @Inject
   public AddAsBuddyAction(final ChatClient chatEngine, final StateManager stateManager,
       final I18nTranslationService i18n, final IconicResources img,
@@ -56,6 +78,9 @@ public class AddAsBuddyAction extends AbstractExtendedAction {
     putValue(Action.SMALL_ICON, img.add());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     String username = null;

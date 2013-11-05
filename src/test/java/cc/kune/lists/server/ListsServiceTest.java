@@ -46,15 +46,37 @@ import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListsServiceTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListsServiceTest extends IntegrationTest {
+  
+  /** The close list. */
   private StateContainerDTO closeList;
+  
+  /** The content service. */
   @Inject
   ContentService contentService;
+  
+  /** The lists service. */
   @Inject
   ListsService listsService;
+  
+  /** The open list. */
   private StateContainerDTO openList;
+  
+  /** The user group. */
   private GroupDTO userGroup;
 
+  /**
+   * Inits the.
+   *
+   * @throws DefaultException the default exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Before
   public void init() throws DefaultException, IOException {
     new IntegrationTestHelper(true, this);
@@ -66,6 +88,12 @@ public class ListsServiceTest extends IntegrationTest {
     closeList = listsService.createList(getHash(), rootList.getStateToken(), "test list", "", false);
   }
 
+  /**
+   * Post to close should fail test.
+   *
+   * @throws DefaultException the default exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test(expected = AccessViolationException.class)
   public void postToCloseShouldFailTest() throws DefaultException, IOException {
     doLogout();
@@ -73,6 +101,12 @@ public class ListsServiceTest extends IntegrationTest {
     listsService.newPost(getHash(), closeList.getStateToken(), "lalala");
   }
 
+  /**
+   * Post to open by others test.
+   *
+   * @throws DefaultException the default exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void postToOpenByOthersTest() throws DefaultException, IOException {
     doLogout();
@@ -82,6 +116,12 @@ public class ListsServiceTest extends IntegrationTest {
     assertNotNull(newPost);
   }
 
+  /**
+   * Post to open close and later open by others test.
+   *
+   * @throws DefaultException the default exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void postToOpenCloseAndLaterOpenByOthersTest() throws DefaultException, IOException {
     listsService.setPublic(token, openList.getStateToken(), false);
@@ -92,16 +132,31 @@ public class ListsServiceTest extends IntegrationTest {
     assertNotNull(newPost);
   }
 
+  /**
+   * Subscribe several to close test.
+   *
+   * @throws DefaultException the default exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void subscribeSeveralToCloseTest() throws DefaultException, IOException {
     subscribeUnsubsSeveral(closeList);
   }
 
+  /**
+   * Subscribe several to public test.
+   */
   @Test
   public void subscribeSeveralToPublicTest() {
     subscribeUnsubsSeveral(openList);
   }
 
+  /**
+   * Subscribe to close should fail test.
+   *
+   * @throws DefaultException the default exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test(expected = AccessViolationException.class)
   public void subscribeToCloseShouldFailTest() throws DefaultException, IOException {
     doLogout();
@@ -109,6 +164,12 @@ public class ListsServiceTest extends IntegrationTest {
     listsService.subscribeToList(getHash(), closeList.getStateToken(), true);
   }
 
+  /**
+   * Subscribe to open and later close list should fail test.
+   *
+   * @throws DefaultException the default exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test(expected = AccessViolationException.class)
   public void subscribeToOpenAndLaterCloseListShouldFailTest() throws DefaultException, IOException {
     listsService.setPublic(token, openList.getStateToken(), false);
@@ -117,6 +178,11 @@ public class ListsServiceTest extends IntegrationTest {
     listsService.subscribeToList(getHash(), openList.getStateToken(), true);
   }
 
+  /**
+   * Subscribe unsubs several.
+   *
+   * @param list the list
+   */
   private void subscribeUnsubsSeveral(final StateContainerDTO list) {
     final AccessListsDTO initialAcl = list.getAccessLists();
     assertTrue(initialAcl.getAdmins().includes(userGroup));

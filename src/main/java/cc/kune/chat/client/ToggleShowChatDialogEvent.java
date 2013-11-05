@@ -27,41 +27,94 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToggleShowChatDialogEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToggleShowChatDialogEvent extends
     GwtEvent<ToggleShowChatDialogEvent.ToggleShowChatDialogHandler> {
 
+  /**
+   * The Interface HasToggleShowChatDialogHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasToggleShowChatDialogHandlers extends HasHandlers {
+    
+    /**
+     * Adds the toggle show chat dialog handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addToggleShowChatDialogHandler(ToggleShowChatDialogHandler handler);
   }
 
+  /**
+   * The Interface ToggleShowChatDialogHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ToggleShowChatDialogHandler extends EventHandler {
+    
+    /**
+     * On toggle show chat dialog.
+     *
+     * @param event the event
+     */
     public void onToggleShowChatDialog(ToggleShowChatDialogEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<ToggleShowChatDialogHandler> TYPE = new Type<ToggleShowChatDialogHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   * @param show the show
+   */
   public static void fire(final HasHandlers source, final boolean show) {
     source.fireEvent(new ToggleShowChatDialogEvent());
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<ToggleShowChatDialogHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * Instantiates a new toggle show chat dialog event.
+   */
   protected ToggleShowChatDialogEvent() {
     // Possibly for serialization.
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final ToggleShowChatDialogHandler handler) {
     handler.onToggleShowChatDialog(this);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<ToggleShowChatDialogHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "ToggleShowChatDialogEvent";

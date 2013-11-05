@@ -74,51 +74,109 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentViewerPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
+  
+  /**
+   * The Interface ContentViewerPanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface ContentViewerPanelUiBinder extends UiBinder<Widget, ContentViewerPanel> {
   }
 
+  /** The Constant NO_CHANNEL. */
   private static final RemoteViewServiceMultiplexer NO_CHANNEL = null;
 
+  /** The ui binder. */
   private static ContentViewerPanelUiBinder uiBinder = GWT.create(ContentViewerPanelUiBinder.class);
 
+  /** The capabilities registry. */
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
+  
+  /** The channel. */
   private RemoteViewServiceMultiplexer channel;
+  
+  /** The color picker. */
   private final Provider<AurorisColorPicker> colorPicker;
+  
+  /** The content title. */
   private final ContentTitleWidget contentTitle;
+  
+  /** The deck. */
   @UiField
   DeckPanel deck;
+  
+  /** The drop controller. */
   private final ContentDropController dropController;
+  
+  /** The dummy wave frame. */
   private FramedPanel dummyWaveFrame;
+  
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The gs armor. */
   private final GSpaceArmor gsArmor;
+  
+  /** The id generator. */
   private IdGenerator idGenerator;
 
+  /** The loading. */
   private Element loading;
 
+  /** The only view panel. */
   @UiField
   InlineHTML onlyViewPanel;
 
+  /** The only web client. */
   private final boolean onlyWebClient;
 
+  /** The profiles. */
   private ProfileManager profiles;
+  
+  /** The state manager. */
   private final StateManager stateManager;
   /** The wave panel, if a wave is open. */
   private CustomStagesProvider wave;
 
+  /** The wave client prov. */
   private final WaveClientProvider waveClientProv;
 
+  /** The wave holder. */
   private ImplPanel waveHolder;
 
+  /** The wave holder parent. */
   @UiField
   ImplPanel waveHolderParent;
 
+  /** The wave store. */
   private final WaveStore waveStore = new SimpleWaveStore();
 
+  /** The wave unsaved indicator. */
   private final CustomSavedStateIndicator waveUnsavedIndicator;
 
+  /** The widget. */
   private final Widget widget;
 
+  /**
+   * Instantiates a new content viewer panel.
+   *
+   * @param wsArmor the ws armor
+   * @param waveClient the wave client
+   * @param capabilitiesRegistry the capabilities registry
+   * @param i18n the i18n
+   * @param eventBus the event bus
+   * @param stateManager the state manager
+   * @param dropController the drop controller
+   * @param waveUnsavedIndicator the wave unsaved indicator
+   * @param colorPicker the color picker
+   */
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final I18nTranslationService i18n,
@@ -145,11 +203,17 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     onlyWebClient = WindowUtils.getParameter(SiteParameters.ONLY_WEBCLIENT) != null;
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return widget;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#attach()
+   */
   @Override
   public void attach() {
     final GSpaceCenter docContainer = gsArmor.getDocContainer();
@@ -157,11 +221,17 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     docContainer.showWidget(widget);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#blinkTitle()
+   */
   @Override
   public void blinkTitle() {
     contentTitle.highlightTitle();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#clear()
+   */
   @Override
   public void clear() {
     onlyViewPanel.setHTML("");
@@ -172,16 +242,28 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     waveClear();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#detach()
+   */
   @Override
   public void detach() {
     clear();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#getEditTitle()
+   */
   @Override
   public HasEditHandler getEditTitle() {
     return contentTitle.getEditableTitle();
   }
 
+  /**
+   * Gets the wave ref.
+   *
+   * @param waveRefS the wave ref s
+   * @return the wave ref
+   */
   private WaveRef getWaveRef(final String waveRefS) {
     try {
       return GwtWaverefEncoder.decodeWaveRefFromPath(waveRefS);
@@ -190,6 +272,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     }
   }
 
+  /**
+   * Inits the wave client if needed.
+   */
   private void initWaveClientIfNeeded() {
     if (channel == null) {
       Log.info("Channel is null so, will create wave in ContentViewerPanel");
@@ -205,6 +290,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setContent(cc.kune.core.shared.dto.StateContentDTO)
+   */
   @Override
   public void setContent(final StateContentDTO state) {
     final boolean editable = state.getContentRights().isEditable();
@@ -217,6 +305,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     deck.showWidget(1);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setEditableContent(cc.kune.core.shared.dto.StateContentDTO)
+   */
   @Override
   public void setEditableContent(final StateContentDTO state) {
     gsArmor.enableCenterScroll(false);
@@ -226,11 +317,20 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     deck.showWidget(0);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setEditableTitle(java.lang.String)
+   */
   @Override
   public void setEditableTitle(final String title) {
     contentTitle.setText(title);
   }
 
+  /**
+   * Sets the editable wave content.
+   *
+   * @param waveRefS the wave ref s
+   * @param isNewWave the is new wave
+   */
   private void setEditableWaveContent(final String waveRefS, final boolean isNewWave) {
     if (onlyWebClient) {
       return;
@@ -265,38 +365,65 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setFooterActions(cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+   */
   @Override
   public void setFooterActions(final GuiActionDescCollection actions) {
     setToolbarActions(actions, gsArmor.getDocFooterToolbar());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setSubheaderActions(cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+   */
   @Override
   public void setSubheaderActions(final GuiActionDescCollection actions) {
     setToolbarActions(actions, gsArmor.getSubheaderToolbar());
   }
 
+  /**
+   * Sets the title.
+   *
+   * @param state the state
+   * @param editable the editable
+   */
   private void setTitle(final StateContentDTO state, final boolean editable) {
     contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable
         && capabilitiesRegistry.isRenamable(state.getTypeId()));
     Window.setTitle(state.getGroup().getLongName() + ": " + state.getTitle());
   }
 
+  /**
+   * Sets the toolbar actions.
+   *
+   * @param actions the actions
+   * @param toolbar the toolbar
+   */
   private void setToolbarActions(final GuiActionDescCollection actions, final IsActionExtensible toolbar) {
     toolbar.clear();
     toolbar.addAll(actions);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#signIn()
+   */
   @Override
   public void signIn() {
     // Do nothing (now)
     // initWaveClientIfNeeded();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#signOut()
+   */
   @Override
   public void signOut() {
     channel = NO_CHANNEL;
   }
 
+  /**
+   * Wave clear.
+   */
   private void waveClear() {
     if (!onlyWebClient) {
       WaveClientUtils.clear(wave, waveHolder, waveHolderParent);

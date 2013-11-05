@@ -31,10 +31,20 @@ import cc.kune.core.server.manager.impl.ContentConstants;
 
 import com.google.wave.api.Markup;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneWaveMarkupTests.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneWaveMarkupTests {
 
+  /** The Constant FOO_MARKUP. */
   private static final String FOO_MARKUP = "<b>Foo</b><br/>";
 
+  /**
+   * Test markup.
+   */
   @Test
   public void testMarkup() {
     final Markup markup = Markup.of(FOO_MARKUP);
@@ -43,6 +53,9 @@ public class KuneWaveMarkupTests {
     assertNotNull(markup.getText().contains("\n"));
   }
 
+  /**
+   * Test xml string builder of markup.
+   */
   @Test
   public void testXmlStringBuilderOfMarkup() {
     XmlStringBuilder builder = XmlStringBuilder.createFromXmlString(FOO_MARKUP);

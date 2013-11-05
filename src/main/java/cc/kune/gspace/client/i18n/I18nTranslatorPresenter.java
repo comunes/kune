@@ -35,25 +35,59 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nTranslatorPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nTranslatorPresenter extends
     AbstractTabbedDialogPresenter<I18nTranslatorView, I18nTranslatorPresenter.I18nTranslatorProxy>
     implements AbstractTabbedDialog, I18nTranslator {
 
+  /**
+   * The Interface I18nTranslatorProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface I18nTranslatorProxy extends Proxy<I18nTranslatorPresenter> {
   }
 
+  /**
+   * The Interface I18nTranslatorView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface I18nTranslatorView extends
       cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView {
 
+    /**
+     * Inits the.
+     */
     void init();
 
+    /**
+     * Sets the language.
+     *
+     * @param currentLanguage the new language
+     */
     void setLanguage(I18nLanguageSimpleDTO currentLanguage);
 
   }
 
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new i18n translator presenter.
+   *
+   * @param eventBus the event bus
+   * @param proxy the proxy
+   * @param session the session
+   * @param i18n the i18n
+   * @param view the view
+   */
   @Inject
   public I18nTranslatorPresenter(final EventBus eventBus, final I18nTranslatorProxy proxy,
       final Session session, final I18nUITranslationService i18n, final I18nTranslatorView view) {
@@ -61,26 +95,41 @@ public class I18nTranslatorPresenter extends
     this.session = session;
   }
 
+  /**
+   * Do close.
+   */
   public void doClose() {
     getView().hide();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView()
+   */
   @Override
   public I18nTranslatorView getView() {
     return (I18nTranslatorView) super.getView();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#hide()
+   */
   @Override
   public void hide() {
     getView().hide();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
+   */
   @Override
   protected void onBind() {
     super.onBind();
     getView().init();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#show()
+   */
   @Override
   public void show() {
     final I18nLanguageDTO userLang = session.getCurrentLanguage();

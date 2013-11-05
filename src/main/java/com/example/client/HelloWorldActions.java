@@ -34,10 +34,24 @@ import cc.kune.core.client.sitebar.SitebarActions;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HelloWorldActions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class HelloWorldActions {
 
+  /**
+   * The Class HelloWorldAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public class HelloWorldAction extends AbstractExtendedAction {
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       NotifyUser.info("Hello world!");
@@ -45,6 +59,12 @@ public class HelloWorldActions {
 
   }
 
+  /**
+   * Instantiates a new hello world actions.
+   *
+   * @param res the res
+   * @param siteUserOptions the site user options
+   */
   @Inject
   public HelloWorldActions(final CommonResources res, final SiteUserOptions siteUserOptions) {
 

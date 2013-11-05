@@ -22,11 +22,15 @@
  */
 package cc.kune.core.client.state.impl;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Class HistoryUtils
+ * The Class HistoryUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HistoryUtils {
 
+  /** The Constant PREFIX. */
   public static final String PREFIX = "!";
 
   /**

@@ -29,9 +29,18 @@ import cc.kune.core.server.manager.FileManager;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class FileManagerDefault implements FileManager {
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.FileManager#createFileWithSequentialName(java.lang.String, java.lang.String)
+   */
   @Override
   public File createFileWithSequentialName(final String dir, final String fileName) throws IOException {
     String fileNameProposal = String.valueOf(fileName);
@@ -49,28 +58,43 @@ public class FileManagerDefault implements FileManager {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.FileManager#exists(java.lang.String)
+   */
   @Override
   public boolean exists(final String file) {
     return new File(file).exists();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.FileManager#mkdir(java.lang.String)
+   */
   @Override
   public boolean mkdir(final String dir) {
     return new File(dir).mkdirs();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.FileManager#mv(java.lang.String, java.lang.String)
+   */
   @Override
   public boolean mv(final String oldPath, final String newPath) {
     final File oldFile = new File(oldPath);
     return oldFile.renameTo(new File(newPath));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.FileManager#rm(java.lang.String, java.lang.String)
+   */
   @Override
   public boolean rm(final String dir, final String fileName) {
     final File file = new File(dir, fileName);
     return file.delete();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.FileManager#rmdir(java.lang.String)
+   */
   @Override
   public boolean rmdir(final String dir) throws IOException {
     final File file = new File(dir);

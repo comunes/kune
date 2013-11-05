@@ -32,8 +32,24 @@ import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BlogsParts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BlogsParts {
 
+  /**
+   * Instantiates a new blogs parts.
+   *
+   * @param session the session
+   * @param clientTool the client tool
+   * @param viewerSelector the viewer selector
+   * @param blogsActions the blogs actions
+   * @param contentViewer the content viewer
+   * @param folderViewer the folder viewer
+   */
   @Inject
   public BlogsParts(final SessionConstants session, final Provider<BlogsClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final BlogsClientActions blogsActions,

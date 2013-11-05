@@ -60,8 +60,46 @@ import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatParts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatParts {
 
+  /**
+   * Instantiates a new chat parts.
+   *
+   * @param session the session
+   * @param i18n the i18n
+   * @param clientTool the client tool
+   * @param chatActionsProvider the chat actions provider
+   * @param buddieButton the buddie button
+   * @param snAdminsRegistry the sn admins registry
+   * @param snCollabsItemsRegistry the sn collabs items registry
+   * @param snPendingItemsRegistry the sn pending items registry
+   * @param groupConfActions the group conf actions
+   * @param groupSN the group sn
+   * @param userItemsRegistry the user items registry
+   * @param isNotMe the is not me
+   * @param isAdministrableCondition the is administrable condition
+   * @param isEditableCondition the is editable condition
+   * @param isBuddieCondition the is buddie condition
+   * @param isNotBuddieCondition the is not buddie condition
+   * @param isGroupCondition the is group condition
+   * @param isPersonCondition the is person condition
+   * @param addAsBuddie the add as buddie
+   * @param startChatWithMemberAction the start chat with member action
+   * @param isLogged the is logged
+   * @param startChatWithPersonAction the start chat with person action
+   * @param startChatWithBuddieAction the start chat with buddie action
+   * @param chatActions the chat actions
+   * @param startAssembly the start assembly
+   * @param openGroupRoomAction the open group room action
+   * @param viewerSelector the viewer selector
+   * @param folderViewer the folder viewer
+   */
   @Inject
   public ChatParts(final Session session, final I18nTranslationService i18n,
       final Provider<ChatClientTool> clientTool, final Provider<ChatSitebarActions> chatActionsProvider,

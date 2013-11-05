@@ -33,38 +33,68 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WebClientMock.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WebClientMock extends Composite implements WaveClientView {
 
+  /** The Constant MOCK_MSG. */
   private static final String MOCK_MSG = "This is only a mock of the wave client, only to make development testing not so heavy";
+  
+  /** The impl panel. */
   private ImplPanel implPanel;
 
+  /**
+   * Instantiates a new web client mock.
+   */
   public WebClientMock() {
     initWidget(new Label(MOCK_MSG));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#clear()
+   */
   @Override
   public void clear() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getChannel()
+   */
   @Override
   public RemoteViewServiceMultiplexer getChannel() {
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getLoading()
+   */
   @Override
   public Element getLoading() {
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getProfiles()
+   */
   @Override
   public ProfileManager getProfiles() {
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getStackTraceAsync(java.lang.Throwable, org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor)
+   */
   @Override
   public void getStackTraceAsync(final Throwable caught, final Accessor<SafeHtml> accessor) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getWaveHolder()
+   */
   @Override
   public ImplPanel getWaveHolder() {
     if (implPanel == null) {
@@ -73,19 +103,31 @@ public class WebClientMock extends Composite implements WaveClientView {
     return implPanel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getWebSocket()
+   */
   @Override
   public WaveWebSocketClient getWebSocket() {
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#login()
+   */
   @Override
   public void login() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#logout()
+   */
   @Override
   public void logout() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.maxmin.IsMaximizable#setMaximized(boolean)
+   */
   @Override
   public void setMaximized(final boolean maximized) {
   }

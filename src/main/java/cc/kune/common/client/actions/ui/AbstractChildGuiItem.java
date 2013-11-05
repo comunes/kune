@@ -27,19 +27,39 @@ import cc.kune.common.client.errors.UIException;
 
 import com.google.gwt.user.client.ui.UIObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractChildGuiItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractChildGuiItem extends AbstractGuiItem {
 
+  /** The child. */
   protected UIObject child;
+  
+  /** The parent. */
   protected ParentWidget parent;
 
+  /**
+   * Instantiates a new abstract child gui item.
+   */
   public AbstractChildGuiItem() {
     super();
   }
 
+  /**
+   * Instantiates a new abstract child gui item.
+   *
+   * @param descriptor the descriptor
+   */
   public AbstractChildGuiItem(final GuiActionDescrip descriptor) {
     super(descriptor);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#addStyle(java.lang.String)
+   */
   @Override
   protected void addStyle(final String style) {
     if (child != null) {
@@ -47,6 +67,9 @@ public abstract class AbstractChildGuiItem extends AbstractGuiItem {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     final int position = descriptor.getPosition();

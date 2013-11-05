@@ -34,18 +34,22 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CoreView is where the general armor of Kune it created/attached.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CoreViewImpl extends ViewImpl implements CorePresenter.CoreView {
 
+  /** The armor. */
   private final GSpaceArmorDefault armor;
 
   /**
    * Instantiates a new core view.
-   * 
-   * @param armor
-   *          the body
+   *
+   * @param armor the body
+   * @param stateManager the state manager
    */
   @Inject
   public CoreViewImpl(final GSpaceArmorDefault armor, final StateManagerDefault stateManager) {
@@ -56,6 +60,9 @@ public class CoreViewImpl extends ViewImpl implements CorePresenter.CoreView {
     History.addValueChangeHandler(stateManager);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return armor;

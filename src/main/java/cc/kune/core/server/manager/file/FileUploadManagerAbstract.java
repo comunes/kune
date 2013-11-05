@@ -47,25 +47,58 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileUploadManagerAbstract.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class FileUploadManagerAbstract extends HttpServlet {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(FileUploadManager.class);
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -4227762495128652369L;
 
+  /** The Constant UTF8. */
   protected static final String UTF8 = "UTF-8";
 
+  /** The kune properties. */
   @Inject
   KuneProperties kuneProperties;
 
+  /**
+   * Before post start.
+   */
   protected abstract void beforePostStart();
 
+  /**
+   * Before respond.
+   *
+   * @param response the response
+   * @param w the w
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected abstract void beforeRespond(final HttpServletResponse response, final Writer w)
       throws IOException;
 
+  /**
+   * Creates the uploaded file.
+   *
+   * @param userHash the user hash
+   * @param stateToken the state token
+   * @param fileName the file name
+   * @param file the file
+   * @param typeId the type id
+   * @throws Exception the exception
+   */
   abstract void createUploadedFile(final String userHash, final StateToken stateToken,
       final String fileName, final FileItem file, final String typeId) throws Exception;
 
+  /* (non-Javadoc)
+   * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+   */
   @Override
   @SuppressWarnings({ "rawtypes" })
   protected void doPost(final HttpServletRequest req, final HttpServletResponse response)
@@ -125,11 +158,26 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
     }
   }
 
+  /**
+   * Do response.
+   *
+   * @param response the response
+   * @param additionalResponse the additional response
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected void doResponse(final HttpServletResponse response, final String additionalResponse)
       throws IOException {
     doResponse(response, additionalResponse, HttpServletResponse.SC_OK);
   }
 
+  /**
+   * Do response.
+   *
+   * @param response the response
+   * @param additionalResponse the additional response
+   * @param responseCode the response code
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected void doResponse(final HttpServletResponse response, final String additionalResponse,
       final int responseCode) throws IOException {
     final Writer w = new OutputStreamWriter(response.getOutputStream());
@@ -140,16 +188,34 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
     response.setStatus(responseCode);
   }
 
+  /**
+   * Log file del.
+   *
+   * @param delResult the del result
+   */
   protected void logFileDel(final boolean delResult) {
     if (!delResult) {
       LOG.error("Cannot delete file");
     }
   }
 
+  /**
+   * On file upload exception.
+   *
+   * @param response the response
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected void onFileUploadException(final HttpServletResponse response) throws IOException {
     doResponse(response, null);
   }
 
+  /**
+   * On other exception.
+   *
+   * @param response the response
+   * @param e the e
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected void onOtherException(final HttpServletResponse response, final Exception e)
       throws IOException {
     LOG.info("Exception: " + e.getCause());
@@ -157,6 +223,12 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
     doResponse(response, null);
   }
 
+  /**
+   * On success.
+   *
+   * @param response the response
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected void onSuccess(final HttpServletResponse response) throws IOException {
     doResponse(response, null);
   }

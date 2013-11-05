@@ -26,11 +26,23 @@ package cc.kune.common.client.events;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventBusInstance.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EventBusInstance {
 
+  /** The event bus. */
   @Inject
   private static EventBus eventBus;
 
+  /**
+   * Gets the.
+   *
+   * @return the event bus
+   */
   public static EventBus get() {
     return eventBus;
   }

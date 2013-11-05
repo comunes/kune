@@ -27,9 +27,11 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
+// TODO: Auto-generated Javadoc
 /**
- * Sample of GinModule (but with GWTPlatform)
- * 
+ * Sample of GinModule (but with GWTPlatform).
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HelloWordGinModule extends AbstractPresenterModule {
 
@@ -37,10 +39,24 @@ public class HelloWordGinModule extends AbstractPresenterModule {
    * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
    * in the injector. See the GWTPlatform doc
    */
+  /**
+   * The Interface HelloWordGinjector.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HelloWordGinjector extends Ginjector {
+    
+    /**
+     * Gets the hello world presenter.
+     *
+     * @return the hello world presenter
+     */
     AsyncProvider<HelloWorldPresenter> getHelloWorldPresenter();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     bindPresenter(HelloWorldPresenter.class, HelloWorldPresenter.HelloWorldView.class,

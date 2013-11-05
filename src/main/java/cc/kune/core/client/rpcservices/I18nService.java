@@ -32,18 +32,63 @@ import cc.kune.core.shared.dto.I18nTranslationDTO;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface I18nService.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @RemoteServiceRelativePath("I18nService")
 public interface I18nService extends RemoteService {
 
+  /**
+   * Gets the initial language.
+   *
+   * @param localeParam the locale param
+   * @return the initial language
+   */
   I18nLanguageDTO getInitialLanguage(String localeParam);
 
+  /**
+   * Gets the lexicon.
+   *
+   * @param language the language
+   * @return the lexicon
+   */
   HashMap<String, String> getLexicon(String language);
 
+  /**
+   * Gets the translated lexicon.
+   *
+   * @param userHash the user hash
+   * @param language the language
+   * @param languageFrom the language from
+   * @param toTranslate the to translate
+   * @return the translated lexicon
+   */
   List<I18nTranslationDTO> getTranslatedLexicon(String userHash, String language, String languageFrom,
       boolean toTranslate);
 
+  /**
+   * Gets the translation.
+   *
+   * @param userHash the user hash
+   * @param language the language
+   * @param text the text
+   * @param noteForTranslators the note for translators
+   * @return the translation
+   */
   String getTranslation(String userHash, String language, String text, String noteForTranslators);
 
+  /**
+   * Sets the translation.
+   *
+   * @param userHash the user hash
+   * @param id the id
+   * @param translation the translation
+   * @return the string
+   * @throws DefaultException the default exception
+   */
   String setTranslation(String userHash, Long id, String translation) throws DefaultException;
 
 }

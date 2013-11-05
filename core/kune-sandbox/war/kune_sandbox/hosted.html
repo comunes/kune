@@ -1,5 +1,6 @@
 <html>
-<head><script>
+<head>
+<script>
 var $wnd = parent;
 var $doc = $wnd.document;
 var $moduleName, $moduleBase, $entry
@@ -306,10 +307,12 @@ window.fireOnModuleLoadStart = function(className) {
 };
 
 window.__gwt_module_id = 0;
-</script></head>
+</script>
+</head>
 <body>
-<font face='arial' size='-1'>This html file is for hosted mode support.</font>
-<script><!--
+		<font face='arial' size='-1'>This html file is for hosted mode
+				support.</font>
+		<script><!--
 // Lightweight metrics
 $stats && $stats({moduleName:$moduleName, sessionId:$sessionId, subSystem:'startup', evtGroup:'moduleStartup', millis:(new Date()).getTime(), type:'moduleEvalEnd'});
 
@@ -347,4 +350,6 @@ if (idx >= 0) {
 
 query = window.location.search.substring(1);
 if (query && $wnd[query]) setTimeout($wnd[query].onScriptLoad, 1);
---></script></body></html>
+--></script>
+</body>
+</html>

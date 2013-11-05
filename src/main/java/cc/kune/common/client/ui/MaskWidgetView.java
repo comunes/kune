@@ -24,14 +24,39 @@ package cc.kune.common.client.ui;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface MaskWidgetView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface MaskWidgetView {
 
+  /**
+   * Checks if is showing.
+   *
+   * @return true, if is showing
+   */
   boolean isShowing();
 
+  /**
+   * Mask.
+   *
+   * @param widget the widget
+   */
   void mask(IsWidget widget);
 
+  /**
+   * Mask.
+   *
+   * @param widget the widget
+   * @param message the message
+   */
   void mask(IsWidget widget, String message);
 
+  /**
+   * Un mask.
+   */
   void unMask();
 
 }

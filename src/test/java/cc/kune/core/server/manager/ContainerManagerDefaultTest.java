@@ -35,24 +35,50 @@ import cc.kune.core.server.PersistencePreLoadedDataTest;
 import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.domain.Container;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContainerManagerDefaultTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
 
+  /** The root folder. */
   private Container rootFolder;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     rootFolder = containerManager.createRootFolder(user.getUserGroup(), DocsToolConstants.TOOL_NAME,
         DocsToolConstants.ROOT_NAME, TYPE_FOLDER);
   }
 
+  /**
+   * Creates the container.
+   *
+   * @param parent the parent
+   * @return the container
+   */
   private Container createContainer(final Container parent) {
     return createContainer(parent, "Some title");
   }
 
+  /**
+   * Creates the container.
+   *
+   * @param parent the parent
+   * @param title the title
+   * @return the container
+   */
   private Container createContainer(final Container parent, final String title) {
     return containerManager.createFolder(user.getUserGroup(), parent, title, english, TYPE_FOLDER);
   }
 
+  /**
+   * Test create folder.
+   */
   @Test
   public void testCreateFolder() {
     final Container newFolder = createContainer(rootFolder);
@@ -63,6 +89,9 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(2, newFolder.getAbsolutePath().size());
   }
 
+  /**
+   * Test move folder.
+   */
   @Test
   public void testMoveFolder() {
     final Container folderToMove = createContainer(rootFolder);
@@ -78,6 +107,9 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(folderToMove, folderToMove.getAbsolutePath().get(2));
   }
 
+  /**
+   * Test move folder name exists.
+   */
   @Test(expected = NameInUseException.class)
   public void testMoveFolderNameExists() {
     final Container folderToMove = createContainer(rootFolder);
@@ -87,12 +119,18 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
     containerManager.moveContainer(folderToMove, newParentFolder);
   }
 
+  /**
+   * Test move folder to same.
+   */
   @Test(expected = MoveOnSameContainerException.class)
   public void testMoveFolderToSame() {
     final Container folderToMove = createContainer(rootFolder);
     containerManager.moveContainer(folderToMove, rootFolder);
   }
 
+  /**
+   * Test move folder up.
+   */
   @Test
   public void testMoveFolderUp() {
     final Container parentFolder = createContainer(rootFolder);
@@ -108,6 +146,9 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(folderToMove, folderToMove.getAbsolutePath().get(1));
   }
 
+  /**
+   * Test move middle folder.
+   */
   @Test
   public void testMoveMiddleFolder() {
     final Container parentFolder = createContainer(rootFolder);
@@ -136,6 +177,9 @@ public class ContainerManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(parentFolder, parentFolder.getAbsolutePath().get(1));
   }
 
+  /**
+   * Test move root folder fails.
+   */
   @Test(expected = AccessViolationException.class)
   public void testMoveRootFolderFails() {
     containerManager.moveContainer(rootFolder, rootFolder);

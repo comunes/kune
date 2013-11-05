@@ -30,10 +30,23 @@ import org.dozer.MappingException;
 
 import cc.kune.core.shared.domain.GroupListMode;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupListModeConverter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupListModeConverter implements CustomConverter {
+  
+  /** The enum to string. */
   private final HashMap<GroupListMode, String> enumToString;
+  
+  /** The string to enum. */
   private final HashMap<String, GroupListMode> stringToEnum;
 
+  /**
+   * Instantiates a new group list mode converter.
+   */
   public GroupListModeConverter() {
     this.stringToEnum = new HashMap<String, GroupListMode>();
     this.enumToString = new HashMap<GroupListMode, String>();
@@ -42,11 +55,19 @@ public class GroupListModeConverter implements CustomConverter {
     add(GroupListMode.NOBODY);
   }
 
+  /**
+   * Adds the.
+   *
+   * @param mode the mode
+   */
   private void add(final GroupListMode mode) {
     enumToString.put(mode, mode.toString());
     stringToEnum.put(mode.toString(), mode);
   }
 
+  /* (non-Javadoc)
+   * @see org.dozer.CustomConverter#convert(java.lang.Object, java.lang.Object, java.lang.Class, java.lang.Class)
+   */
   @Override
   @SuppressWarnings("rawtypes")
   public Object convert(final Object destination, final Object source, final Class destinationClass,

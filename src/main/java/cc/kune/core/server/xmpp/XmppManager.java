@@ -26,24 +26,92 @@ import java.util.Collection;
 
 import org.jivesoftware.smack.RosterEntry;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface XmppManager.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface XmppManager {
 
+  /**
+   * Creates the room.
+   *
+   * @param connection the connection
+   * @param roomName the room name
+   * @param ownerAlias the owner alias
+   * @param subject the subject
+   * @return the room
+   */
   Room createRoom(ChatConnection connection, String roomName, String ownerAlias, String subject);
 
+  /**
+   * Destroy room.
+   *
+   * @param conn the conn
+   * @param roomName the room name
+   */
   void destroyRoom(ChatConnection conn, String roomName);
 
+  /**
+   * Disconnect.
+   *
+   * @param connection the connection
+   */
   void disconnect(ChatConnection connection);
 
+  /**
+   * Exist room.
+   *
+   * @param conn the conn
+   * @param roomName the room name
+   * @return true, if successful
+   */
   boolean existRoom(ChatConnection conn, String roomName);
 
+  /**
+   * Gets the roster.
+   *
+   * @param connection the connection
+   * @return the roster
+   */
   Collection<RosterEntry> getRoster(ChatConnection connection);
 
+  /**
+   * Join room.
+   *
+   * @param connection the connection
+   * @param roomName the room name
+   * @param alias the alias
+   * @return the room
+   */
   Room joinRoom(ChatConnection connection, String roomName, String alias);
 
+  /**
+   * Login.
+   *
+   * @param userName the user name
+   * @param password the password
+   * @param resource the resource
+   * @return the chat connection
+   */
   ChatConnection login(String userName, String password, String resource);
 
+  /**
+   * Send message.
+   *
+   * @param room the room
+   * @param message the message
+   */
   void sendMessage(Room room, String message);
 
+  /**
+   * Send message.
+   *
+   * @param userName the user name
+   * @param message the message
+   */
   void sendMessage(String userName, String message);
 
 }

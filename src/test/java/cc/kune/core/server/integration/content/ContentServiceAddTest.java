@@ -43,15 +43,34 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.docs.shared.DocsToolConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentServiceAddTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
+  /** The default content. */
   private StateContentDTO defaultContent;
 
+  /**
+   * Inits the.
+   *
+   * @throws Exception the exception
+   */
   @Before
   public void init() throws Exception {
     new IntegrationTestHelper(true, this);
   }
 
+  /**
+   * No logged in should throw illegal access.
+   *
+   * @throws ContentNotFoundException the content not found exception
+   * @throws Exception the exception
+   */
   @Test(expected = UserMustBeLoggedException.class)
   public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, Exception {
     defaultContent = getSiteDefaultContent();
@@ -59,6 +78,11 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
         "a name", TYPE_DOCUMENT);
   }
 
+  /**
+   * Test add content.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testAddContent() throws Exception {
     doLogin();
@@ -89,6 +113,11 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     assertEquals(2, sameAgain.getContainer().getContents().size());
   }
 
+  /**
+   * Test add folder.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testAddFolder() throws Exception {
     doLogin();
@@ -114,6 +143,11 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
   }
 
   // @Test
+  /**
+   * Test add room.
+   *
+   * @throws Exception the exception
+   */
   public void testAddRoom() throws Exception {
     doLogin();
     defaultContent = getSiteDefaultContent();
@@ -124,6 +158,11 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     assertNotNull(newState);
   }
 
+  /**
+   * Test add two folders.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testAddTwoFolders() throws Exception {
     doLogin();
@@ -144,6 +183,11 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     assertEquals(2, parentAgain.getChilds().size());
   }
 
+  /**
+   * Test add wiki content.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testAddWikiContent() throws Exception {
     doLogin();

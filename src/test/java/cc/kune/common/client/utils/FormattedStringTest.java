@@ -29,14 +29,29 @@ import org.junit.Test;
 import cc.kune.common.shared.utils.AbstractFormattedString;
 import cc.kune.core.server.utils.FormattedString;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FormattedStringTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FormattedStringTest {
 
+  /**
+   * Check copy.
+   *
+   * @param orig the orig
+   * @param copy the copy
+   */
   private void checkCopy(final AbstractFormattedString orig, final AbstractFormattedString copy) {
     copy.setTemplate("Other");
     assertNotSame(orig, copy);
     assertNotSame(orig.getTemplate(), copy.getTemplate());
   }
 
+  /**
+   * Test copy.
+   */
   @Test
   public void testCopy() {
     final FormattedString orig = new FormattedString(true, "Template", "arg1", "arg2", "arg3");
@@ -48,6 +63,9 @@ public class FormattedStringTest {
     checkCopy(origC, copyC);
   }
 
+  /**
+   * Test quotes.
+   */
   @Test
   public void testQuotes() {
     assertEquals("test 100%", FormattedString.build("%s 100%%", "test").getString());

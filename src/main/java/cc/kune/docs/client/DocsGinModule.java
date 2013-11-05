@@ -27,8 +27,17 @@ import cc.kune.docs.client.actions.DocsClientActions;
 import cc.kune.docs.client.actions.DocsFolderNewMenu;
 import cc.kune.docs.client.actions.DocsNewMenu;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DocsGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DocsGinModule extends ExtendedGinModule {
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     s(DocsClientTool.class);

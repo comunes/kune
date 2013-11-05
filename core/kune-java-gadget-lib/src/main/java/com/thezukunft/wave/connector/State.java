@@ -31,20 +31,26 @@ import com.google.gwt.core.client.JsArrayString;
 
 public interface State {
 
-	/**
-	 * Returns the value corresponding to the key or null if it doesn't exist
-	 * @param key
-	 * @return
-	 */
-	String get(String key);
+  /**
+   * Returns the value corresponding to the key or null if it doesn't exist
+   * 
+   * @param key
+   * @return
+   */
+  String get(String key);
 
-	Integer getInt(String key);
-	String get(String key, String opt_default);
-	JsArrayString getKeys();
+  Integer getInt(String key);
 
-	void reset();
-	void submitDelta(HashMap<String, String> delta);
-	void submitDelta(JavaScriptObject delta);
-	void submitValue(String key, String value);
+  String get(String key, String opt_default);
+
+  JsArrayString getKeys();
+
+  void reset();
+
+  void submitDelta(HashMap<String, String> delta);
+
+  void submitDelta(JavaScriptObject delta);
+
+  void submitValue(String key, String value);
 
 }

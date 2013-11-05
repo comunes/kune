@@ -38,8 +38,23 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WriteToBuddyHeaderButton.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WriteToBuddyHeaderButton {
 
+  /**
+   * Instantiates a new write to buddy header button.
+   *
+   * @param writeToAction the write to action
+   * @param entityHeader the entity header
+   * @param stateManager the state manager
+   * @param session the session
+   * @param simpleContactManager the simple contact manager
+   */
   @Inject
   public WriteToBuddyHeaderButton(final WriteToAction writeToAction, final EntityHeader entityHeader,
       final StateManager stateManager, final Session session,

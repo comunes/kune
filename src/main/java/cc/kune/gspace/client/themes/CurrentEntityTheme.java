@@ -22,27 +22,64 @@
  */
 package cc.kune.gspace.client.themes;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CurrentEntityTheme.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CurrentEntityTheme {
+  
+  /** The back colors. */
   private static String[] backColors = new String[8];
+  
+  /** The colors. */
   private static String[] colors = new String[8];
 
+  /**
+   * Filter.
+   *
+   * @param color the color
+   * @return the string
+   */
   private static String filter(final String color) {
     return color == null ? "#FFF" : color;
   }
 
+  /**
+   * Gets the back color.
+   *
+   * @param number the number
+   * @return the back color
+   */
   public static String getBackColor(final int number) {
     return filter(backColors[number]);
   }
 
+  /**
+   * Gets the color.
+   *
+   * @param number the number
+   * @return the color
+   */
   public static String getColor(final int number) {
     return filter(colors[number]);
   }
 
+  /**
+   * Sets the colors.
+   *
+   * @param colors the colors
+   * @param backColors the back colors
+   */
   public static void setColors(final String[] colors, final String[] backColors) {
     CurrentEntityTheme.colors = colors;
     CurrentEntityTheme.backColors = backColors;
   }
 
+  /**
+   * Instantiates a new current entity theme.
+   */
   public CurrentEntityTheme() {
   }
 }

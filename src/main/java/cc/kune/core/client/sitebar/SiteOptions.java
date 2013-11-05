@@ -24,6 +24,18 @@ package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface SiteOptions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface SiteOptions {
+  
+  /**
+   * Adds the action.
+   *
+   * @param descriptor the descriptor
+   */
   void addAction(GuiActionDescrip descriptor);
 }

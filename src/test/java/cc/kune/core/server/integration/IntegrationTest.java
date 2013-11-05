@@ -36,30 +36,71 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IntegrationTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class IntegrationTest {
 
+  /** The properties. */
   @Inject
   KuneBasicProperties properties;
+  
+  /** The session. */
   @Inject
   protected UserSessionManager session;
+  
+  /** The token. */
   protected String token;
+  
+  /** The user service. */
   @Inject
   UserService userService;
 
+  /**
+   * Do login.
+   *
+   * @return the user info dto
+   * @throws DefaultException the default exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected UserInfoDTO doLogin() throws DefaultException, IOException {
     return doLogin(getSiteAdminShortName(), properties.getAdminPassword());
   }
 
+  /**
+   * Do login.
+   *
+   * @param nick the nick
+   * @param pass the pass
+   * @return the user info dto
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected UserInfoDTO doLogin(final String nick, final String pass) throws IOException {
     waveLogin();
     return userService.login(nick, pass, token);
   }
 
+  /**
+   * Do login with dummy user.
+   *
+   * @return the string
+   * @throws DefaultException the default exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected String doLoginWithDummyUser() throws DefaultException, IOException {
     waveLogin();
     return userService.login("dummy", properties.getAdminPassword(), token).getUserHash();
   }
 
+  /**
+   * Do logout.
+   *
+   * @throws DefaultException the default exception
+   */
   @After
   public void doLogout() throws DefaultException {
     if (session != null && session.isUserLoggedIn()) {
@@ -67,26 +108,56 @@ public abstract class IntegrationTest {
     }
   }
 
+  /**
+   * Gets the def license.
+   *
+   * @return the def license
+   */
   protected String getDefLicense() {
     return properties.getDefaultLicense();
   }
 
+  /**
+   * Gets the def site long name.
+   *
+   * @return the def site long name
+   */
   protected String getDefSiteLongName() {
     return properties.getDefaultSiteName();
   }
 
+  /**
+   * Gets the def site short name.
+   *
+   * @return the def site short name
+   */
   protected String getDefSiteShortName() {
     return properties.getDefaultSiteShortName();
   }
 
+  /**
+   * Gets the hash.
+   *
+   * @return the hash
+   */
   public String getHash() {
     return session.getHash();
   }
 
+  /**
+   * Gets the site admin short name.
+   *
+   * @return the site admin short name
+   */
   protected String getSiteAdminShortName() {
     return properties.getAdminShortName();
   }
 
+  /**
+   * Wave login.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   protected void waveLogin() throws IOException {
     token = "somesampletoken";
     // final ClientAuthenticator authenticator = new

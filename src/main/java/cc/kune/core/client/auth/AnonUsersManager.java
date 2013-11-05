@@ -36,11 +36,28 @@ import cc.kune.core.client.state.SiteParameters;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AnonUsersManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AnonUsersManager {
 
+  /** The Constant ANON_MESSAGE_CLOSE_ICON. */
   public static final String ANON_MESSAGE_CLOSE_ICON = "k-anon-um-close-btn";
+  
+  /** The notify msg. */
   protected UserNotifyEvent notifyMsg;
 
+  /**
+   * Instantiates a new anon users manager.
+   *
+   * @param session the session
+   * @param cookiesManager the cookies manager
+   * @param i18n the i18n
+   * @param eventBus the event bus
+   */
   @Inject
   public AnonUsersManager(final Session session, final CookiesManager cookiesManager,
       final I18nUITranslationService i18n, final EventBus eventBus) {

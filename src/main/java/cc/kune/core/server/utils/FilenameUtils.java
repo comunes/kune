@@ -27,12 +27,18 @@ import org.apache.commons.lang.StringUtils;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.NameNotPermittedException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FilenameUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FilenameUtils {
 
   /**
    * Check filename is not empty, or '.', or '..'
-   * 
-   * @param filename
+   *
+   * @param filename the filename
    */
   public static void checkBasicFilename(final String filename) {
     if (TextUtils.empty(StringUtils.trimToEmpty(filename)) || filename.equals(".")

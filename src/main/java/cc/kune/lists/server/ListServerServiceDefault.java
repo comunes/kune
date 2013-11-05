@@ -40,12 +40,31 @@ import cc.kune.lists.shared.ListsToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListServerServiceDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ListServerServiceDefault implements ListServerService {
+  
+  /** The content manager. */
   private final ContainerManager contentManager;
+  
+  /** The content rpc. */
   private final ContentRPC contentRPC;
+  
+  /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
+  /**
+   * Instantiates a new list server service default.
+   *
+   * @param contentRPC the content rpc
+   * @param userSessionManager the user session manager
+   * @param contentManager the content manager
+   */
   @Inject
   public ListServerServiceDefault(final ContentRPC contentRPC,
       final UserSessionManager userSessionManager, final ContainerManager contentManager) {
@@ -55,11 +74,21 @@ public class ListServerServiceDefault implements ListServerService {
 
   }
 
+  /**
+   * Compose list name.
+   *
+   * @param parentToken the parent token
+   * @param listname the listname
+   * @return the string
+   */
   private String composeListName(final StateToken parentToken, final String listname) {
     // FIXME In the future use tags here
     return parentToken.getGroup() + "-" + listname;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.lists.server.ListServerService#createList(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, java.lang.String, boolean)
+   */
   @Override
   public StateContainerDTO createList(final String userHash, final StateToken parentToken,
       final String listName, final String description, final boolean isPublic) {
@@ -70,6 +99,12 @@ public class ListServerServiceDefault implements ListServerService {
     return subscribeCurrentUserToList(newList.getStateToken(), true);
   }
 
+  /**
+   * Gets the container.
+   *
+   * @param token the token
+   * @return the container
+   */
   private Container getContainer(final StateToken token) {
     final Container container = contentManager.find(ContentUtils.parseId(token.getFolder()));
     if (!container.getTypeId().equals(ListsToolConstants.TYPE_LIST)) {
@@ -78,10 +113,18 @@ public class ListServerServiceDefault implements ListServerService {
     return container;
   }
 
+  /**
+   * Gets the user group.
+   *
+   * @return the user group
+   */
   private Group getUserGroup() {
     return userSessionManager.getUser().getUserGroup();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.lists.server.ListServerService#newPost(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   public StateContentDTO newPost(final String userHash, final StateToken parentToken,
       final String postTitle) {
@@ -92,6 +135,13 @@ public class ListServerServiceDefault implements ListServerService {
     return content;
   }
 
+  /**
+   * Sets the container acl.
+   *
+   * @param token the token
+   * @param isPublic the is public
+   * @return the container
+   */
   private Container setContainerAcl(final StateToken token, final boolean isPublic) {
     final Container container = getContainer(token);
     final AccessLists acl = new AccessLists();
@@ -103,12 +153,22 @@ public class ListServerServiceDefault implements ListServerService {
     return container;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.lists.server.ListServerService#setPublic(cc.kune.core.shared.domain.utils.StateToken, java.lang.Boolean)
+   */
   @Override
   public StateContainerDTO setPublic(final StateToken token, final Boolean isPublic) {
     final Container container = setPublicAcl(token, isPublic);
     return contentRPC.getState(container);
   }
 
+  /**
+   * Sets the public acl.
+   *
+   * @param token the token
+   * @param isPublic the is public
+   * @return the container
+   */
   private Container setPublicAcl(final StateToken token, final boolean isPublic) {
     final Container container = getContainer(token);
     final AccessLists acl = container.getAccessLists();
@@ -117,17 +177,34 @@ public class ListServerServiceDefault implements ListServerService {
     return container;
   }
 
+  /**
+   * Sets the viewers acl.
+   *
+   * @param isPublic the is public
+   * @param acl the acl
+   */
   private void setViewersAcl(final boolean isPublic, final AccessLists acl) {
     acl.getViewers().clear();
     acl.getViewers().setMode(isPublic ? GroupListMode.EVERYONE : GroupListMode.NOBODY);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.lists.server.ListServerService#subscribeCurrentUserToList(cc.kune.core.shared.domain.utils.StateToken, java.lang.Boolean)
+   */
   @Override
   public StateContainerDTO subscribeCurrentUserToList(final StateToken token, final Boolean subscribe) {
     final Group userGroup = getUserGroup();
     return subscribeToList(token, subscribe, userGroup);
   }
 
+  /**
+   * Subscribe to list.
+   *
+   * @param token the token
+   * @param subscribe the subscribe
+   * @param userGroup the user group
+   * @return the state container dto
+   */
   private StateContainerDTO subscribeToList(final StateToken token, final Boolean subscribe,
       final Group userGroup) {
     final Container container = getContainer(token);
@@ -147,6 +224,9 @@ public class ListServerServiceDefault implements ListServerService {
     return contentRPC.getState(container);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.lists.server.ListServerService#subscribeToListWithoutPermCheck(cc.kune.core.shared.domain.utils.StateToken, cc.kune.domain.Group)
+   */
   @Override
   public StateContainerDTO subscribeToListWithoutPermCheck(final StateToken token, final Group userGroup) {
     final Container container = getContainer(token);

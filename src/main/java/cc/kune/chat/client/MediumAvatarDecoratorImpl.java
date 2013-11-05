@@ -31,8 +31,24 @@ import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MediumAvatarDecoratorImpl.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MediumAvatarDecoratorImpl extends AvatarDecoratorImpl implements MediumAvatarDecorator {
 
+  /**
+   * Instantiates a new medium avatar decorator impl.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param session the session
+   * @param presenceManager the presence manager
+   * @param roster the roster
+   * @param chatClient the chat client
+   */
   @Inject
   public MediumAvatarDecoratorImpl(final I18nTranslationService i18n, final CoreResources res,
       final XmppSession session, final PresenceManager presenceManager, final XmppRoster roster,

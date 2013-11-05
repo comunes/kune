@@ -46,13 +46,29 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.MenuItem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractGwtMenuItemGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements HasMenuItem {
 
+  /** The icon label. */
   private IconLabel iconLabel;
 
+  /** The item. */
   private GwtBaseMenuItem item;
+  
+  /** The res. */
   private final CommonResources res = CommonResources.INSTANCE;
 
+  /**
+   * Conf check listener.
+   *
+   * @param descriptor the descriptor
+   * @param checkItem the check item
+   */
   private void confCheckListener(final MenuCheckItemDescriptor descriptor, final GwtCheckItem checkItem) {
     descriptor.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
@@ -68,6 +84,12 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
     iconLabel.setWidth("100%");
   }
 
+  /**
+   * Conf radio check listener.
+   *
+   * @param descriptor the descriptor
+   * @param checkItem the check item
+   */
   private void confRadioCheckListener(final MenuRadioItemDescriptor descriptor,
       final GwtCheckItem checkItem) {
     descriptor.addPropertyChangeListener(new PropertyChangeListener() {
@@ -85,6 +107,9 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
     iconLabel.setWidth("100%");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
@@ -151,51 +176,91 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
     return this;
   }
 
+  /**
+   * Creates the check item.
+   *
+   * @param descriptor the descriptor
+   * @return the gwt check item
+   */
   private GwtCheckItem createCheckItem(final MenuItemDescriptor descriptor) {
     final GwtCheckItem checkItem = new GwtCheckItem();
     checkItem.setChecked(((MenuCheckItemDescriptor) descriptor).isChecked());
     return checkItem;
   }
 
+  /**
+   * Gets the item.
+   *
+   * @return the item
+   */
   public GwtBaseMenuItem getItem() {
     return item;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.gwtui.HasMenuItem#getMenuItem()
+   */
   @Override
   public MenuItem getMenuItem() {
     return item;
   }
 
+  /**
+   * Gets the parent menu.
+   *
+   * @param descriptor the descriptor
+   * @return the parent menu
+   */
   private AbstractGwtMenuGui getParentMenu(final GuiActionDescrip descriptor) {
     return ((AbstractGwtMenuGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
   }
 
+  /**
+   * Layout.
+   */
   private void layout() {
     item.setHTML(iconLabel.toString());
   }
 
+  /**
+   * Sets the checked icon.
+   *
+   * @param checked the new checked icon
+   */
   private void setCheckedIcon(final Boolean checked) {
     iconLabel.setLeftIconResource(checked ? res.checked() : res.unChecked());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
+   */
   @Override
   protected void setEnabled(final boolean enabled) {
     item.setEnabled(enabled);
     // setVisible(enabled);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+   */
   @Override
   public void setIcon(final KuneIcon icon) {
     iconLabel.setLeftIconFont(icon);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+   */
   @Override
   public void setIconBackground(final String backgroundColor) {
     iconLabel.setLeftIconBackground(backgroundColor);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google.gwt.resources.client.ImageResource)
+   */
   @Override
   public void setIconResource(final ImageResource icon) {
     iconLabel.setRightIconResource(icon);
@@ -203,22 +268,36 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+   */
   @Override
   protected void setIconStyle(final String style) {
     iconLabel.setRightIcon(style);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+   */
   @Override
   public void setIconUrl(final String url) {
     iconLabel.setRightIconUrl(url);
     layout();
   }
 
+  /**
+   * Sets the radio checked.
+   *
+   * @param checked the new radio checked
+   */
   private void setRadioChecked(final Boolean checked) {
     iconLabel.setLeftIconResource(checked ? res.radioChecked() : res.radioUnChecked());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+   */
   @Override
   protected void setText(final String text) {
     if (text != null) {
@@ -232,6 +311,9 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     item.setVisible(visible);
@@ -239,6 +321,9 @@ public abstract class AbstractGwtMenuItemGui extends AbstractGuiItem implements 
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
+   */
   @Override
   public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
     return false;

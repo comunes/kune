@@ -29,8 +29,20 @@ import cc.kune.core.client.state.Session;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HSpaceParts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class HSpaceParts {
 
+  /**
+   * Instantiates a new h space parts.
+   *
+   * @param session the session
+   * @param hSpacePresenter the h space presenter
+   */
   @Inject
   public HSpaceParts(final Session session, final Provider<HSpacePresenter> hSpacePresenter) {
     session.onAppStart(true, new AppStartHandler() {

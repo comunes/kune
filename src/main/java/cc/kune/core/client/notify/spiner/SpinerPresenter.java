@@ -36,20 +36,54 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SpinerPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, SpinerPresenter.SpinerProxy> {
 
+  /**
+   * The Interface SpinerProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface SpinerProxy extends Proxy<SpinerPresenter> {
   }
 
+  /**
+   * The Interface SpinerView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface SpinerView extends PopupView {
+    
+    /**
+     * Fade.
+     */
     void fade();
 
+    /**
+     * Show.
+     *
+     * @param message the message
+     */
     void show(String message);
   }
 
+  /** The i18n. */
   private final I18nTranslationService i18n;
 
+  /**
+   * Instantiates a new spiner presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param i18n the i18n
+   */
   @Inject
   public SpinerPresenter(final EventBus eventBus, final SpinerView view, final SpinerProxy proxy,
       final I18nTranslationService i18n) {
@@ -58,21 +92,39 @@ public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, Spine
     getView().show("");
   }
 
+  /**
+   * On i18n ready.
+   *
+   * @param event the event
+   */
   @ProxyEvent
   public void onI18nReady(final I18nReadyEvent event) {
     getView().show(i18n.t("Loading"));
   }
 
+  /**
+   * On progress hide.
+   *
+   * @param event the event
+   */
   @ProxyEvent
   public void onProgressHide(final ProgressHideEvent event) {
     getView().fade();
   }
 
+  /**
+   * On progress show.
+   *
+   * @param event the event
+   */
   @ProxyEvent
   public void onProgressShow(final ProgressShowEvent event) {
     getView().show(event.getMessage());
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootPopupContentEvent.fire(this, this);

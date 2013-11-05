@@ -28,15 +28,28 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CachedCollectionTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CachedCollectionTest {
 
+  /** The cache. */
   private CachedCollection<String, String> cache;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     cache = new CachedCollection<String, String>(2);
   }
 
+  /**
+   * Test basic size.
+   */
   @Test
   public void testBasicSize() {
     assertTrue(cache.size() == 0);

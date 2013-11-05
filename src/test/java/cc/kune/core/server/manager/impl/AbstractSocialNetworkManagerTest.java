@@ -35,22 +35,48 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractSocialNetworkManagerTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractSocialNetworkManagerTest extends PersistenceTest {
+  
+  /** The admin. */
   @Inject
   protected User admin;
+  
+  /** The ctx. */
   protected DomainContext ctx;
+  
+  /** The group. */
   protected Group group;
+  
+  /** The orphaned group. */
   protected Group orphanedGroup;
+  
+  /** The other user. */
   protected User otherUser;
+  
+  /** The user. */
   protected User user;
+  
+  /** The user group. */
   protected Group userGroup;
 
+  /**
+   * Assert social network is empty.
+   */
   private void assertSocialNetworkIsEmpty() {
     assertEquals(group.getSocialNetwork().getAccessLists().getAdmins().getList().size(), 0);
     assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getList().size(), 0);
     assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
   }
 
+  /**
+   * Inits the.
+   */
   @Transactional
   @Before
   public void init() {
@@ -70,6 +96,9 @@ public abstract class AbstractSocialNetworkManagerTest extends PersistenceTest {
     assertSocialNetworkIsEmpty();
   }
 
+  /**
+   * Rollback.
+   */
   @After
   public void rollback() {
     rollbackTransaction();

@@ -36,11 +36,28 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LicenseManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class LicenseManagerDefault extends DefaultManager<License, Long> implements LicenseManager {
+  
+  /** The license finder. */
   private LicenseFinder licenseFinder;
+  
+  /** The properties. */
   private final KuneBasicProperties properties;
 
+  /**
+   * Instantiates a new license manager default.
+   *
+   * @param provider the provider
+   * @param properties the properties
+   * @param licenseFinder the license finder
+   */
   @Inject
   public LicenseManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final KuneBasicProperties properties, final LicenseFinder licenseFinder) {
@@ -49,37 +66,58 @@ public class LicenseManagerDefault extends DefaultManager<License, Long> impleme
     this.licenseFinder = licenseFinder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.LicenseManager#findByShortName(java.lang.String)
+   */
   @Override
   public License findByShortName(final String shortName) {
     return licenseFinder.findByShortName(shortName);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.LicenseManager#getAll()
+   */
   @Override
   public List<License> getAll() {
     return licenseFinder.getAll();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.LicenseManager#getCC()
+   */
   @Override
   public List<License> getCC() {
     return licenseFinder.getCC();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.LicenseManager#getDefLicense()
+   */
   @Override
   public License getDefLicense() {
     final String licenseDefId = properties.getDefaultLicense();
     return licenseFinder.findByShortName(licenseDefId);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.LicenseManager#getNotCC()
+   */
   @Override
   public List<License> getNotCC() {
     return licenseFinder.getNotCC();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.impl.DefaultManager#persist(java.lang.Object)
+   */
   @Override
   public License persist(final License license) {
     return super.persist(license);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.LicenseManager#setLicenseFinder(cc.kune.domain.finders.LicenseFinder)
+   */
   @Override
   @Inject
   public void setLicenseFinder(final LicenseFinder licenseFinder) {

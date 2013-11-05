@@ -34,45 +34,89 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolConfiguration.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Entity
 @Table(name = "tool_configurations")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ToolConfiguration {
 
+  /** The enabled. */
   @Basic
   @Column(columnDefinition = "BIT", length = 1)
   private boolean enabled;
+  
+  /** The id. */
   @Id
   @GeneratedValue
   private Long id;
 
+  /** The root. */
   @OneToOne(cascade = { CascadeType.MERGE, CascadeType.PERSIST })
   private Container root;
 
+  /**
+   * Instantiates a new tool configuration.
+   */
   public ToolConfiguration() {
     enabled = true;
   }
 
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
   public Long getId() {
     return id;
   }
 
+  /**
+   * Gets the root.
+   *
+   * @return the root
+   */
   public Container getRoot() {
     return root;
   }
 
+  /**
+   * Checks if is enabled.
+   *
+   * @return true, if is enabled
+   */
   public boolean isEnabled() {
     return enabled;
   }
 
+  /**
+   * Sets the enabled.
+   *
+   * @param enabled the new enabled
+   */
   public void setEnabled(final boolean enabled) {
     this.enabled = enabled;
   }
 
+  /**
+   * Sets the id.
+   *
+   * @param id the new id
+   */
   public void setId(final Long id) {
     this.id = id;
   }
 
+  /**
+   * Sets the root.
+   *
+   * @param root the root
+   * @return the container
+   */
   public Container setRoot(final Container root) {
     this.root = root;
     return root;

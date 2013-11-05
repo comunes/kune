@@ -39,42 +39,91 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractDecorator.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AbstractDecorator extends Composite {
 
+  /**
+   * The Interface Binder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface Binder extends UiBinder<Widget, AbstractDecorator> {
   }
+  
+  /** The Constant BINDER. */
   private static final Binder BINDER = GWT.create(Binder.class);
+  
+  /** The decoration image. */
   @UiField
   Image decorationImage;
+  
+  /** The left. */
   private int left = 0;
 
+  /** The main panel. */
   @UiField
   FlowPanel mainPanel;
+  
+  /** The offset. */
   private int offset = 0;
+  
+  /** The tooltip. */
   private Tooltip tooltip;
+  
+  /** The top. */
   private int top = 0;
+  
+  /** The widget container. */
   @UiField
   SimplePanel widgetContainer;
 
+  /**
+   * Instantiates a new abstract decorator.
+   */
   public AbstractDecorator() {
     initWidget(BINDER.createAndBindUi(this));
     decorationImage.setVisible(false);
   }
 
+  /**
+   * Clear image.
+   */
   public void clearImage() {
     decorationImage.setVisible(false);
   }
 
+  /**
+   * Sets the decorator visible.
+   *
+   * @param visible the new decorator visible
+   */
   public void setDecoratorVisible(final boolean visible) {
     decorationImage.setVisible(visible);
   }
 
+  /**
+   * Sets the image.
+   *
+   * @param img the new image
+   */
   public void setImage(final ImageResource img) {
     decorationImage.setResource(img);
     decorationImage.setVisible(true);
     setPosition();
   }
 
+  /**
+   * Sets the image position.
+   *
+   * @param top the top
+   * @param left the left
+   * @param offset the offset
+   */
   public void setImagePosition(final int top, final int left, final int offset) {
     this.top = top;
     this.left = left;
@@ -82,6 +131,11 @@ public class AbstractDecorator extends Composite {
     setPosition();
   }
 
+  /**
+   * Sets the image tooltip.
+   *
+   * @param text the new image tooltip
+   */
   public void setImageTooltip(final String text) {
     if (tooltip == null) {
       tooltip = Tooltip.to(decorationImage, text);
@@ -91,6 +145,9 @@ public class AbstractDecorator extends Composite {
     }
   }
 
+  /**
+   * Sets the position.
+   */
   private void setPosition() {
     final Element elem = decorationImage.getElement();
     elem.getStyle().setPropertyPx("left", left);
@@ -100,6 +157,11 @@ public class AbstractDecorator extends Composite {
     elem.getStyle().setMarginRight(offset, Unit.PX);
   }
 
+  /**
+   * Sets the widget.
+   *
+   * @param widget the new widget
+   */
   public void setWidget(final IsWidget widget) {
     widgetContainer.clear();
     widgetContainer.add(widget);

@@ -28,10 +28,21 @@ import java.util.List;
 
 import com.google.inject.matcher.AbstractMatcher;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NotInObject.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NotInObject extends AbstractMatcher<Method> {
 
+  /** The excluded. */
   private final List<String> excluded;
 
+  /**
+   * Instantiates a new not in object.
+   */
   public NotInObject() {
     super();
     // FIXME exclude password
@@ -39,6 +50,9 @@ public class NotInObject extends AbstractMatcher<Method> {
         "equals" });
   }
 
+  /* (non-Javadoc)
+   * @see com.google.inject.matcher.Matcher#matches(java.lang.Object)
+   */
   @Override
   public boolean matches(final Method method) {
     final String name = method.getName();

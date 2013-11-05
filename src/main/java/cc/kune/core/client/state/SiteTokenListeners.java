@@ -24,6 +24,11 @@ package cc.kune.core.client.state;
 
 import java.util.HashMap;
 
+/**
+ * The Class SiteTokenListeners.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SuppressWarnings("serial")
 public class SiteTokenListeners extends HashMap<String, HistoryTokenCallback> {
 }

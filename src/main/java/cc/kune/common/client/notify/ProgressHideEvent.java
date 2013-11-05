@@ -27,34 +27,83 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProgressHideEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ProgressHideEvent extends GwtEvent<ProgressHideEvent.ProgressHideHandler> {
 
+  /**
+   * The Interface HasProgressHideHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasProgressHideHandlers extends HasHandlers {
+    
+    /**
+     * Adds the progress hide handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addProgressHideHandler(ProgressHideHandler handler);
   }
 
+  /**
+   * The Interface ProgressHideHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ProgressHideHandler extends EventHandler {
+    
+    /**
+     * On progress hide.
+     *
+     * @param event the event
+     */
     public void onProgressHide(ProgressHideEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<ProgressHideHandler> TYPE = new Type<ProgressHideHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new ProgressHideEvent());
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<ProgressHideHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * Instantiates a new progress hide event.
+   */
   public ProgressHideEvent() {
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final ProgressHideHandler handler) {
     handler.onProgressHide(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object other) {
     if (other != null && other.getClass().equals(this.getClass())) {
@@ -63,11 +112,17 @@ public class ProgressHideEvent extends GwtEvent<ProgressHideEvent.ProgressHideHa
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<ProgressHideHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     int hashCode = 23;
@@ -75,6 +130,9 @@ public class ProgressHideEvent extends GwtEvent<ProgressHideEvent.ProgressHideHa
     return hashCode;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "ProgressHideEvent[" + "]";

@@ -26,6 +26,11 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 
 import com.google.inject.Singleton;
 
+/**
+ * The Class GroupSNOptionsMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class GroupSNOptionsMenu extends MenuDescriptor {
 }

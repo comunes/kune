@@ -30,6 +30,11 @@ import java.lang.annotation.Target;
 
 import com.google.inject.BindingAnnotation;
 
+/**
+ * The Interface DataSourceOpenfire.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ FIELD, PARAMETER, METHOD })
 @BindingAnnotation

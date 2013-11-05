@@ -51,30 +51,48 @@ import cc.kune.domain.Content;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
 /**
  * Some snippets from:
  * http://www.onjava.com/pub/a/onjava/excerpt/jebp_3/index1.html?page=1
- * 
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FileDownloadManager extends HttpServlet {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -1160659289588014049L;
 
+  /** The Constant RESP_HEADER_ATTACHMENT_FILENAME. */
   static final String RESP_HEADER_ATTACHMENT_FILENAME = "attachment; filename=\"";
+  
+  /** The Constant RESP_HEADER_CONTEND_DISP. */
   static final String RESP_HEADER_CONTEND_DISP = "Content-Disposition";
+  
+  /** The Constant RESP_HEADER_END. */
   static final String RESP_HEADER_END = "\"";
 
+  /** The Constant APPLICATION_X_DOWNLOAD. */
   static final String APPLICATION_X_DOWNLOAD = "application/x-download";
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(FileDownloadManager.class);
 
+  /** The content manager. */
   @Inject
   ContentManager contentManager;
+  
+  /** The kune properties. */
   @Inject
   KuneProperties kuneProperties;
+  
+  /** The file utils. */
   @Inject
   FileUtils fileUtils;
 
+  /* (non-Javadoc)
+   * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+   */
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
       throws ServletException, IOException {
@@ -95,6 +113,19 @@ public class FileDownloadManager extends HttpServlet {
     }
   }
 
+  /**
+   * Builds the response.
+   *
+   * @param cnt the cnt
+   * @param stateToken the state token
+   * @param downloadS the download s
+   * @param imageSizeS the image size s
+   * @param resp the resp
+   * @param fileUtils the file utils
+   * @return the string
+   * @throws FileNotFoundException the file not found exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   String buildResponse(final Content cnt, final StateToken stateToken, final String downloadS,
       final String imageSizeS, final HttpServletResponse resp, final FileUtils fileUtils)
       throws FileNotFoundException, IOException {
@@ -144,6 +175,14 @@ public class FileDownloadManager extends HttpServlet {
     return absFilename;
   }
 
+  /**
+   * Gets the content for download.
+   *
+   * @param userHash the user hash
+   * @param stateToken the state token
+   * @return the content for download
+   * @throws ContentNotFoundException the content not found exception
+   */
   @Authenticated(mandatory = false)
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.content)
   private Content getContentForDownload(final String userHash, final StateToken stateToken)

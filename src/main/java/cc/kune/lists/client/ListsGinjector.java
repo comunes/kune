@@ -24,8 +24,19 @@ package cc.kune.lists.client;
 
 import com.google.gwt.inject.client.Ginjector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ListsGinjector.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ListsGinjector extends Ginjector {
 
+  /**
+   * Gets the lists parts.
+   *
+   * @return the lists parts
+   */
   ListsParts getListsParts();
 
 }

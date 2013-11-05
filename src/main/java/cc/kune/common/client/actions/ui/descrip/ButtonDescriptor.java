@@ -25,17 +25,37 @@ package cc.kune.common.client.actions.ui.descrip;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ButtonDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ButtonDescriptor extends AbstractGuiActionDescrip {
 
+  /**
+   * Instantiates a new button descriptor.
+   *
+   * @param action the action
+   */
   public ButtonDescriptor(final AbstractAction action) {
     super(action);
   }
 
+  /**
+   * Instantiates a new button descriptor.
+   *
+   * @param text the text
+   * @param action the action
+   */
   public ButtonDescriptor(final String text, final AbstractAction action) {
     this(action);
     putValue(Action.NAME, text);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
+   */
   @Override
   public Class<?> getType() {
     return ButtonDescriptor.class;

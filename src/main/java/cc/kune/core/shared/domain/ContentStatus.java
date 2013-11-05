@@ -24,6 +24,22 @@ package cc.kune.core.shared.domain;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum ContentStatus.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum ContentStatus implements IsSerializable {
-  editingInProgress, submittedForEvaluation, publishedOnline, rejected, inTheDustbin
+  
+  /** The editing in progress. */
+  editingInProgress, 
+ /** The submitted for evaluation. */
+ submittedForEvaluation, 
+ /** The published online. */
+ publishedOnline, 
+ /** The rejected. */
+ rejected, 
+ /** The in the dustbin. */
+ inTheDustbin
 }

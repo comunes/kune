@@ -29,8 +29,22 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.gwt.regexp.shared.SplitResult;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClientFormattedString.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ClientFormattedString extends AbstractFormattedString {
 
+  /**
+   * Builds the.
+   *
+   * @param shouldBeTranslated the should be translated
+   * @param template the template
+   * @param args the args
+   * @return the client formatted string
+   */
   public static ClientFormattedString build(final boolean shouldBeTranslated, final String template,
       final Object... args) {
     return new ClientFormattedString(shouldBeTranslated, template, args);
@@ -60,6 +74,13 @@ public class ClientFormattedString extends AbstractFormattedString {
     return new ClientFormattedString(template, args);
   }
 
+  /**
+   * Instantiates a new client formatted string.
+   *
+   * @param shouldBeTranslated the should be translated
+   * @param template the template
+   * @param args the args
+   */
   public ClientFormattedString(final boolean shouldBeTranslated, final String template,
       final Object... args) {
     super(shouldBeTranslated, template, args);
@@ -87,6 +108,11 @@ public class ClientFormattedString extends AbstractFormattedString {
     this(true, template, args);
   }
 
+  /**
+   * Copy.
+   *
+   * @return the client formatted string
+   */
   public ClientFormattedString copy() {
     return new ClientFormattedString(shouldBeTranslated(), getTemplate(), getArgs());
   }

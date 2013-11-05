@@ -31,8 +31,22 @@ import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.google.gwt.user.client.ui.TextBoxBase;
 
+// TODO: Auto-generated Javadoc
+/**
+ * A factory for creating SearchBox objects.
+ */
 public class SearchBoxFactory {
 
+  /**
+   * Creates the.
+   *
+   * @param i18n the i18n
+   * @param searchOnlyUsers the search only users
+   * @param showNoResult the show no result
+   * @param id the id
+   * @param callback the callback
+   * @return the multivalue suggest box
+   */
   public static MultivalueSuggestBox create(final I18nUITranslationService i18n,
       final boolean searchOnlyUsers, final boolean showNoResult, final String id,
       final OnEntitySelectedInSearch callback) {

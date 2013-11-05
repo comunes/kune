@@ -24,23 +24,37 @@ package cc.kune.core.server.notifier;
 
 import java.util.Collection;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface DestinationProvider is used to provide a way to get a list of
- * Users (for instance to send notifications to them)
+ * Users (for instance to send notifications to them).
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface DestinationProvider {
 
   // This fails with some compilers @Override
+  /**
+   * Equals.
+   *
+   * @param obj the obj
+   * @return true, if successful
+   */
   boolean equals(final Object obj);
 
   /**
-   * Gets the destination list
-   * 
+   * Gets the destination list.
+   *
    * @return the destination
    */
   Collection<Addressee> getDest();
 
   // This fails with some compilers @Override
+  /**
+   * Hash code.
+   *
+   * @return the int
+   */
   int hashCode();
 
 }

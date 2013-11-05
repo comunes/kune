@@ -46,23 +46,61 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityOptStylePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView {
 
+  /** The Constant ICON_UPLD_SERVLET. */
   public static final String ICON_UPLD_SERVLET = GWT.getModuleBaseURL()
       + "servlets/EntityBackgroundUploadManager";
+  
+  /** The Constant TAB_ID. */
   public static final String TAB_ID = "k-eodlp-style-id";
+  
+  /** The background label. */
   private final IconLabel backgroundLabel;
+  
+  /** The back image. */
   private final Image backImage;
+  
+  /** The change image. */
   private final String changeImage;
+  
+  /** The choose image. */
   private final String chooseImage;
+  
+  /** The clear btn. */
   private final Button clearBtn;
+  
+  /** The has back label. */
   private final String hasBackLabel;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The no has backlabel. */
   private final String noHasBacklabel;
+  
+  /** The tab title. */
   private final IconLabel tabTitle;
+  
+  /** The uploader. */
   private final EntityUploaderForm uploader;
+  
+  /** The ws theme info. */
   private final Label wsThemeInfo;
 
+  /**
+   * Instantiates a new entity opt style panel.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param styleSelector the style selector
+   */
   public EntityOptStylePanel(final I18nTranslationService i18n, final IconicResources res,
       final GSpaceThemeSelectorPanel styleSelector) {
     this.i18n = i18n;
@@ -126,56 +164,93 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     super.addStyleName("k-tab-panel");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnCancelUploadHandler(gwtupload.client.IUploader.OnCancelUploaderHandler)
+   */
   @Override
   public HandlerRegistration addOnCancelUploadHandler(final OnCancelUploaderHandler handler) {
     return uploader.addOnCancelUploadHandler(handler);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnChangeUploadHandler(gwtupload.client.IUploader.OnChangeUploaderHandler)
+   */
   @Override
   public HandlerRegistration addOnChangeUploadHandler(final OnChangeUploaderHandler handler) {
     return uploader.addOnChangeUploadHandler(handler);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnFinishUploadHandler(gwtupload.client.IUploader.OnFinishUploaderHandler)
+   */
   @Override
   public HandlerRegistration addOnFinishUploadHandler(final OnFinishUploaderHandler handler) {
     return uploader.addOnFinishUploadHandler(handler);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnStartUploadHandler(gwtupload.client.IUploader.OnStartUploaderHandler)
+   */
   @Override
   public HandlerRegistration addOnStartUploadHandler(final OnStartUploaderHandler handler) {
     return uploader.addOnStartUploadHandler(handler);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.style.EntityOptStyleView#clearBackImage()
+   */
   @Override
   public void clearBackImage() {
     setBackImageVisibleImpl(false);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.style.EntityOptStyleView#getClearBtn()
+   */
   @Override
   public HasClickHandlers getClearBtn() {
     return clearBtn;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.EntityOptionsTabView#getTabTitle()
+   */
   @Override
   public IsWidget getTabTitle() {
     return tabTitle;
   }
 
+  /**
+   * Gets the ws theme info.
+   *
+   * @return the ws theme info
+   */
   public Label getWsThemeInfo() {
     return wsThemeInfo;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.style.EntityOptStyleView#reset()
+   */
   @Override
   public void reset() {
     uploader.reset();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.style.EntityOptStyleView#setBackImage(java.lang.String)
+   */
   @Override
   public void setBackImage(final String url) {
     backImage.setUrl(url);
     setBackImageVisibleImpl(true);
   }
 
+  /**
+   * Sets the back image visible impl.
+   *
+   * @param visible the new back image visible impl
+   */
   private void setBackImageVisibleImpl(final boolean visible) {
     backImage.setVisible(visible);
     clearBtn.setVisible(visible);
@@ -183,6 +258,9 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     uploader.getBtn().setText(visible ? changeImage : chooseImage);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.style.EntityOptStyleView#setUploadParams(java.lang.String, java.lang.String)
+   */
   @Override
   public void setUploadParams(final String userHash, final String token) {
     uploader.setUploadParams(userHash, token);

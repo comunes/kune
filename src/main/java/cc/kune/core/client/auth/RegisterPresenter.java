@@ -58,39 +58,121 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RegisterPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class RegisterPresenter extends
     SignInAbstractPresenter<RegisterView, RegisterPresenter.RegisterProxy> implements Register {
 
+  /**
+   * The Interface RegisterProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface RegisterProxy extends Proxy<RegisterPresenter> {
   }
 
+  /**
+   * The Interface RegisterView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface RegisterView extends SignInAbstractView {
 
+    /**
+     * Gets the email.
+     *
+     * @return the email
+     */
     String getEmail();
 
+    /**
+     * Gets the long name.
+     *
+     * @return the long name
+     */
     String getLongName();
 
+    /**
+     * Gets the register password.
+     *
+     * @return the register password
+     */
     String getRegisterPassword();
 
+    /**
+     * Gets the short name.
+     *
+     * @return the short name
+     */
     String getShortName();
 
+    /**
+     * Checks if is register form valid.
+     *
+     * @return true, if is register form valid
+     */
     boolean isRegisterFormValid();
 
+    /**
+     * Checks if is valid.
+     *
+     * @return true, if is valid
+     */
     boolean isValid();
 
+    /**
+     * Sets the email failed.
+     *
+     * @param msg the new email failed
+     */
     void setEmailFailed(final String msg);
 
+    /**
+     * Sets the long name failed.
+     *
+     * @param msg the new long name failed
+     */
     void setLongNameFailed(final String msg);
 
+    /**
+     * Sets the short name failed.
+     *
+     * @param msg the new short name failed
+     */
     void setShortNameFailed(final String msg);
 
+    /**
+     * Validate.
+     */
     void validate();
 
   }
+  
+  /** The sign in provider. */
   private final Provider<SignIn> signInProvider;
+  
+  /** The user service provider. */
   private final Provider<UserServiceAsync> userServiceProvider;
 
+  /**
+   * Instantiates a new register presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param session the session
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param userServiceProvider the user service provider
+   * @param signInProvider the sign in provider
+   * @param cookiesManager the cookies manager
+   * @param loginRemember the login remember
+   */
   @Inject
   public RegisterPresenter(final EventBus eventBus, final RegisterView view, final RegisterProxy proxy,
       final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
@@ -101,6 +183,9 @@ public class RegisterPresenter extends
     this.signInProvider = signInProvider;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.Register#doRegister()
+   */
   @Override
   public void doRegister() {
     signInProvider.get().hide();
@@ -113,11 +198,17 @@ public class RegisterPresenter extends
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInAbstractPresenter#getView()
+   */
   @Override
   public RegisterView getView() {
     return (RegisterView) super.getView();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
+   */
   @Override
   protected void onBind() {
     super.onBind();
@@ -147,6 +238,9 @@ public class RegisterPresenter extends
     });
   }
 
+  /**
+   * On form register.
+   */
   private void onFormRegister() {
     getView().hideMessages();
     final ReservedWordsRegistryDTO reservedWords = session.getInitData().getReservedWords();
@@ -227,6 +321,11 @@ public class RegisterPresenter extends
     }
   }
 
+  /**
+   * On registration failure.
+   *
+   * @param caught the caught
+   */
   private void onRegistrationFailure(final Throwable caught) {
     getView().unMask();
     if (caught instanceof EmailAddressInUseException) {
@@ -247,6 +346,9 @@ public class RegisterPresenter extends
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);

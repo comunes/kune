@@ -27,7 +27,19 @@ import cc.kune.gadget.client.AbstractKuneGadgetGinModule;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneGadgetSampleGinModule.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneGadgetSampleGinModule extends AbstractKuneGadgetGinModule {
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     bind(KuneGadgetSampleMainPanel.class).in(Singleton.class);

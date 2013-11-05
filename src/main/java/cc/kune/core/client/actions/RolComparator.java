@@ -25,8 +25,21 @@ package cc.kune.core.client.actions;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.AccessRolDTO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RolComparator.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class RolComparator {
 
+  /**
+   * Checks if is enabled.
+   *
+   * @param rolRequired the rol required
+   * @param rights the rights
+   * @return true, if is enabled
+   */
   public static boolean isEnabled(final AccessRolDTO rolRequired, final AccessRights rights) {
     switch (rolRequired) {
     case Administrator:
@@ -39,10 +52,19 @@ public final class RolComparator {
     return false;
   }
 
+  /**
+   * Checks if is member.
+   *
+   * @param newRights the new rights
+   * @return true, if is member
+   */
   public static boolean isMember(final AccessRights newRights) {
     return newRights.isAdministrable() || newRights.isEditable();
   }
 
+  /**
+   * Instantiates a new rol comparator.
+   */
   private RolComparator() {
   }
 }

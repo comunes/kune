@@ -27,11 +27,28 @@ import cc.kune.core.shared.dto.HomeStatsDTO;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ClientStatsService.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @RemoteServiceRelativePath("ClientStatsService")
 public interface ClientStatsService extends RemoteService {
 
+  /**
+   * Gets the home stats.
+   *
+   * @return the home stats
+   */
   HomeStatsDTO getHomeStats();
 
+  /**
+   * Gets the home stats.
+   *
+   * @param userHash the user hash
+   * @return the home stats
+   */
   HomeStatsDTO getHomeStats(String userHash);
 
 }

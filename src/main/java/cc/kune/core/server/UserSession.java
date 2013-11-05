@@ -26,29 +26,63 @@ import java.io.Serializable;
 
 import com.google.inject.servlet.SessionScoped;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserSession.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SessionScoped
 public class UserSession implements Serializable {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 4665523798343705868L;
 
+  /** The user hash. */
   private String userHash;
+  
+  /** The user id. */
   private Long userId;
 
+  /**
+   * Instantiates a new user session.
+   */
   public UserSession() {
   }
 
+  /**
+   * Gets the hash.
+   *
+   * @return the hash
+   */
   public String getHash() {
     return userHash;
   }
 
+  /**
+   * Gets the user id.
+   *
+   * @return the user id
+   */
   public Long getUserId() {
     return userId;
   }
 
+  /**
+   * Sets the hash.
+   *
+   * @param hash the new hash
+   */
   public void setHash(final String hash) {
     this.userHash = hash;
   }
 
+  /**
+   * Sets the user id.
+   *
+   * @param userId the new user id
+   */
   public void setUserId(final Long userId) {
     this.userId = userId;
   }

@@ -27,18 +27,37 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserBuddiesDataDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserBuddiesDataDTO implements IsSerializable {
 
+  /** The Constant NO_BUDDIES. */
   public static final UserBuddiesDataDTO NO_BUDDIES = new UserBuddiesDataDTO();
 
+  /** The buddies. */
   private List<UserSimpleDTO> buddies;
+  
+  /** The other ext buddies. */
   private int otherExtBuddies;
 
+  /**
+   * Instantiates a new user buddies data dto.
+   */
   public UserBuddiesDataDTO() {
     buddies = new ArrayList<UserSimpleDTO>();
     otherExtBuddies = 0;
   }
 
+  /**
+   * Contains.
+   *
+   * @param shortName the short name
+   * @return true, if successful
+   */
   public boolean contains(final String shortName) {
     for (UserSimpleDTO buddie : buddies) {
       if (buddie.getShortName().equals(shortName)) {
@@ -48,22 +67,45 @@ public class UserBuddiesDataDTO implements IsSerializable {
     return false;
   }
 
+  /**
+   * Gets the buddies.
+   *
+   * @return the buddies
+   */
   public List<UserSimpleDTO> getBuddies() {
     return buddies;
   }
 
+  /**
+   * Gets the other ext buddies.
+   *
+   * @return the other ext buddies
+   */
   public int getOtherExtBuddies() {
     return otherExtBuddies;
   }
 
+  /**
+   * Sets the buddies.
+   *
+   * @param buddies the new buddies
+   */
   public void setBuddies(final List<UserSimpleDTO> buddies) {
     this.buddies = buddies;
   }
 
+  /**
+   * Sets the other ext buddies.
+   *
+   * @param otherExternalBuddies the new other ext buddies
+   */
   public void setOtherExtBuddies(final int otherExternalBuddies) {
     this.otherExtBuddies = otherExternalBuddies;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return "UserBuddiesDataDTO[ext: " + otherExtBuddies + " / int: " + buddies + "]";

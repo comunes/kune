@@ -29,24 +29,53 @@ import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoggerMethodInterceptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LoggerMethodInterceptor implements MethodInterceptor {
 
+  /** The Constant LOG. */
   private static final Log LOG = LogFactory.getLog(LoggerMethodInterceptor.class);
+  
+  /** The simplify names. */
   private final boolean simplifyNames;
 
+  /**
+   * Instantiates a new logger method interceptor.
+   */
   public LoggerMethodInterceptor() {
     this(true);
   }
 
+  /**
+   * Instantiates a new logger method interceptor.
+   *
+   * @param simplifyNames the simplify names
+   */
   public LoggerMethodInterceptor(final boolean simplifyNames) {
     this.simplifyNames = simplifyNames;
   }
 
+  /**
+   * Adds the method name.
+   *
+   * @param invocation the invocation
+   * @param buffer the buffer
+   */
   private void addMethodName(final MethodInvocation invocation, final StringBuffer buffer) {
     buffer.append(".");
     buffer.append(invocation.getMethod().getName());
   }
 
+  /**
+   * Adds the method parameters.
+   *
+   * @param invocation the invocation
+   * @param buffer the buffer
+   */
   private void addMethodParameters(final MethodInvocation invocation, final StringBuffer buffer) {
     buffer.append("(");
     final Object[] arguments = invocation.getArguments();
@@ -56,16 +85,34 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
     buffer.append(")");
   }
 
+  /**
+   * Adds the target class name.
+   *
+   * @param invocation the invocation
+   * @param buffer the buffer
+   */
   private void addTargetClassName(final MethodInvocation invocation, final StringBuffer buffer) {
     buffer.append(getSimpleName(invocation.getThis().getClass()));
   }
 
+  /**
+   * Creates the buffer.
+   *
+   * @param invocation the invocation
+   * @return the string buffer
+   */
   private StringBuffer createBuffer(final MethodInvocation invocation) {
     final StringBuffer buffer = new StringBuffer();
     addTargetClassName(invocation, buffer);
     return buffer;
   }
 
+  /**
+   * Gets the simple name.
+   *
+   * @param type the type
+   * @return the simple name
+   */
   private String getSimpleName(final Class<? extends Object> type) {
     String simpleName = type.getSimpleName();
     if (simplifyNames == true) {
@@ -77,6 +124,12 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
     return simpleName;
   }
 
+  /**
+   * Gets the value.
+   *
+   * @param result the result
+   * @return the value
+   */
   private String getValue(final Object result) {
     if (result == null) {
       return "null";
@@ -85,6 +138,9 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
     }
   }
 
+  /* (non-Javadoc)
+   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+   */
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
     final Date start = new Date();
@@ -99,10 +155,21 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
     }
   }
 
+  /**
+   * Log.
+   *
+   * @param output the output
+   */
   protected void log(final String output) {
     LOG.debug(output);
   }
 
+  /**
+   * Log exception.
+   *
+   * @param invocation the invocation
+   * @param e the e
+   */
   protected void logException(final MethodInvocation invocation, final Throwable e) {
     final StringBuffer buffer = createBuffer(invocation);
     addMethodName(invocation, buffer);
@@ -111,6 +178,11 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
     log(buffer.toString());
   }
 
+  /**
+   * Log invocation.
+   *
+   * @param invocation the invocation
+   */
   protected void logInvocation(final MethodInvocation invocation) {
     final StringBuffer buffer = createBuffer(invocation);
     addMethodName(invocation, buffer);
@@ -118,6 +190,13 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
     log(buffer.toString());
   }
 
+  /**
+   * Log result.
+   *
+   * @param invocation the invocation
+   * @param result the result
+   * @param mill the mill
+   */
   protected void logResult(final MethodInvocation invocation, final Object result, final long mill) {
     final StringBuffer buffer = createBuffer(invocation);
     addMethodName(invocation, buffer);

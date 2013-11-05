@@ -31,8 +31,23 @@ import cc.kune.gspace.client.actions.NewContentMenuItem;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewPostMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewPostMenuItem extends NewContentMenuItem {
 
+  /**
+   * Instantiates a new new post menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   * @param shorcutReg the shorcut reg
+   * @param blogsNewMenu the blogs new menu
+   */
   @Inject
   public NewPostMenuItem(final I18nTranslationService i18n, final NewContentAction action,
       final IconicResources res, final GlobalShortcutRegister shorcutReg, final BlogsNewMenu blogsNewMenu) {

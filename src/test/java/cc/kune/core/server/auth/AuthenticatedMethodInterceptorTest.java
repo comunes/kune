@@ -34,12 +34,26 @@ import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AuthenticatedMethodInterceptorTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 
+  /** The auth. */
   private AuthenticatedMethodInterceptor auth;
+  
+  /** The auth annotation. */
   private Authenticated authAnnotation;
+  
+  /** The invocation. */
   private MethodInvocation invocation;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     auth = new AuthenticatedMethodInterceptor();
@@ -52,6 +66,11 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
     Mockito.when(accessibleObject.getAnnotation(Authenticated.class)).thenReturn(authAnnotation);
   }
 
+  /**
+   * Hash null and mandatory must do nothing.
+   *
+   * @throws Throwable the throwable
+   */
   @Test(expected = UserMustBeLoggedException.class)
   public void hashNullAndMandatoryMustDoNothing() throws Throwable {
     Mockito.when(authAnnotation.mandatory()).thenReturn(true);
@@ -60,6 +79,11 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
     auth.invoke(invocation);
   }
 
+  /**
+   * Hash null and not mandatory must do nothing.
+   *
+   * @throws Throwable the throwable
+   */
   @Test
   public void hashNullAndNotMandatoryMustDoNothing() throws Throwable {
     Mockito.when(authAnnotation.mandatory()).thenReturn(false);
@@ -68,6 +92,11 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
     auth.invoke(invocation);
   }
 
+  /**
+   * Hash null as string and not mandatory must do nothing.
+   *
+   * @throws Throwable the throwable
+   */
   @Test
   public void hashNullAsStringAndNotMandatoryMustDoNothing() throws Throwable {
     Mockito.when(authAnnotation.mandatory()).thenReturn(false);
@@ -76,6 +105,11 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
     auth.invoke(invocation);
   }
 
+  /**
+   * Other hash and mandatory and logged must session exp.
+   *
+   * @throws Throwable the throwable
+   */
   @Test(expected = SessionExpiredException.class)
   public void otherHashAndMandatoryAndLoggedMustSessionExp() throws Throwable {
     doLogin();
@@ -85,6 +119,11 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
     auth.invoke(invocation);
   }
 
+  /**
+   * Same hash and mandatory and logged must session exp.
+   *
+   * @throws Throwable the throwable
+   */
   @Test
   public void sameHashAndMandatoryAndLoggedMustSessionExp() throws Throwable {
     doLogin();
@@ -94,6 +133,11 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
     auth.invoke(invocation);
   }
 
+  /**
+   * Some hash and mandatory and not logged must session exp.
+   *
+   * @throws Throwable the throwable
+   */
   @Test(expected = SessionExpiredException.class)
   public void someHashAndMandatoryAndNotLoggedMustSessionExp() throws Throwable {
     Mockito.when(authAnnotation.mandatory()).thenReturn(true);

@@ -30,8 +30,23 @@ import cc.kune.gspace.client.actions.AddMembersToContentAction;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddAllMembersToContentMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AddAllMembersToContentMenuItem extends AddMembersToContentMenuItem {
 
+  /**
+   * Instantiates a new adds the all members to content menu item.
+   *
+   * @param i18n the i18n
+   * @param isAGroupCondition the is a group condition
+   * @param action the action
+   * @param menu the menu
+   * @param res the res
+   */
   @Inject
   public AddAllMembersToContentMenuItem(final I18nTranslationService i18n,
       final IsCurrentStateAGroupCondition isAGroupCondition, final AddMembersToContentAction action,

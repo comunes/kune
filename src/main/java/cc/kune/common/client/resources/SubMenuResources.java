@@ -27,9 +27,20 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.user.client.ui.MenuBar.Resources;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface SubMenuResources.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface SubMenuResources extends Resources {
+  
+  /** The Constant INSTANCE. */
   public static final SubMenuResources INSTANCE = GWT.create(SubMenuResources.class);
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.MenuBar.Resources#menuBarSubMenuIcon()
+   */
   @Override
   @Source("arrow-right.png")
   @ImageOptions(flipRtl = true)

@@ -22,6 +22,14 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmailNotFoundException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EmailNotFoundException extends DefaultException {
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 576604826176441925L;
 }

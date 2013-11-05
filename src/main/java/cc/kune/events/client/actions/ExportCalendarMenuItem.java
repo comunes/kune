@@ -39,12 +39,33 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ExportCalendarMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ExportCalendarMenuItem extends MenuItemDescriptor {
 
+  /**
+   * The Class ExportCalendarAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class ExportCalendarAction extends RolAction {
+    
+    /** The i18n. */
     private final I18nTranslationService i18n;
+    
+    /** The session. */
     private final Session session;
 
+    /**
+     * Instantiates a new export calendar action.
+     *
+     * @param session the session
+     * @param i18n the i18n
+     */
     @Inject
     public ExportCalendarAction(final Session session, final I18nTranslationService i18n) {
       super(AccessRolDTO.Editor, false);
@@ -52,6 +73,9 @@ public class ExportCalendarMenuItem extends MenuItemDescriptor {
       this.i18n = i18n;
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       final StateToken token = session.getCurrentStateToken().copy().clearDocument();
@@ -66,8 +90,17 @@ public class ExportCalendarMenuItem extends MenuItemDescriptor {
 
   }
 
+  /** The Constant ID. */
   public static final String ID = "k-export-cal-menuid";
 
+  /**
+   * Instantiates a new export calendar menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param optionsMenu the options menu
+   * @param res the res
+   */
   @Inject
   public ExportCalendarMenuItem(final I18nTranslationService i18n, final ExportCalendarAction action,
       final ContentViewerOptionsMenu optionsMenu, final IconicResources res) {

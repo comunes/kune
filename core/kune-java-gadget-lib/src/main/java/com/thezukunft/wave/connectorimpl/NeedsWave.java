@@ -35,7 +35,7 @@ import com.google.gwt.gadgets.client.GadgetFeature.FeatureName;
 public interface NeedsWave {
   /**
    * Entry point that gets called back to handle wave feature initialization.
-   *
+   * 
    * @param feature
    *          an instance of the feature to use to invoke feature specific
    *          methods.

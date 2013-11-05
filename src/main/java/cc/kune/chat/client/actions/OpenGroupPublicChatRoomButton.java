@@ -31,8 +31,20 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OpenGroupPublicChatRoomButton.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class OpenGroupPublicChatRoomButton {
 
+  /**
+   * Instantiates a new open group public chat room button.
+   *
+   * @param openRoomAction the open room action
+   * @param entityHeader the entity header
+   */
   @Inject
   public OpenGroupPublicChatRoomButton(final OpenGroupPublicChatRoomAction openRoomAction,
       final EntityHeader entityHeader) {

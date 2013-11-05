@@ -22,6 +22,16 @@
  */
 package cc.kune.common.client.msgs;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface CloseCallback.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface CloseCallback {
+  
+  /**
+   * On close.
+   */
   void onClose();
 }

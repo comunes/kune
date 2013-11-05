@@ -26,6 +26,18 @@ import java.util.List;
 
 import cc.kune.domain.ExtMediaDescrip;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ExtMediaDescripManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ExtMediaDescripManager extends Manager<ExtMediaDescrip, Long> {
+  
+  /**
+   * Gets the all.
+   *
+   * @return the all
+   */
   List<ExtMediaDescrip> getAll();
 }

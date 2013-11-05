@@ -26,8 +26,20 @@ import cc.kune.common.client.ui.EditEvent.EditHandler;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface HasEditHandler.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface HasEditHandler {
 
+  /**
+   * Adds the edit handler.
+   *
+   * @param handler the handler
+   * @return the handler registration
+   */
   HandlerRegistration addEditHandler(EditHandler handler);
 
 }

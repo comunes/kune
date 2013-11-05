@@ -22,6 +22,11 @@
  */
 package cc.kune.gspace.client.options.tools;
 
+/**
+ * The Interface UserOptToolsView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface UserOptToolsView extends EntityOptToolsView {
 
 }

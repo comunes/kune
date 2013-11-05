@@ -31,12 +31,31 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.HTMLPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractInvitationConfirmDialog.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AbstractInvitationConfirmDialog extends BasicTopDialog {
 
+  /**
+   * The Class Builder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class Builder extends BasicTopDialog.Builder {
 
+    /** The message. */
     private final String message;
 
+    /**
+     * Instantiates a new builder.
+     *
+     * @param dialogId the dialog id
+     * @param title the title
+     * @param message the message
+     */
     public Builder(final String dialogId, final String title, final String message) {
       super(dialogId, false, false, I18n.getDirection());
       super.title(title);
@@ -56,6 +75,11 @@ public class AbstractInvitationConfirmDialog extends BasicTopDialog {
       return dialog;
     }
 
+    /**
+     * Gets the message.
+     *
+     * @return the message
+     */
     public String getMessage() {
       return message;
     }
@@ -64,11 +88,8 @@ public class AbstractInvitationConfirmDialog extends BasicTopDialog {
 
   /**
    * Instantiates a new generic invitation confirm dialog.
-   * 
-   * @param builder
-   *          the builder
-   * @param workaround
-   *          the workaround is used to force to use this constructor
+   *
+   * @param builder the builder
    */
   protected AbstractInvitationConfirmDialog(final AbstractInvitationConfirmDialog.Builder builder) {
     super(builder);

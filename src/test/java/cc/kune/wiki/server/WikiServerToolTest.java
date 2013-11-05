@@ -32,10 +32,22 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.wave.server.kspecific.ParticipantUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WikiServerToolTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WikiServerToolTest { // extends PersistenceTest {
 
-  private WikiServerTool serverTool;
+  /** The server tool. */
+ private WikiServerTool serverTool;
 
+  /**
+   * Before.
+   *
+   * @throws InvalidParticipantAddress the invalid participant address
+   */
   @Before
   public void before() throws InvalidParticipantAddress {
     final ParticipantUtils partUtils = Mockito.mock(ParticipantUtils.class);
@@ -43,12 +55,18 @@ public class WikiServerToolTest { // extends PersistenceTest {
     serverTool = new WikiServerTool(null, null, null, null, null, partUtils);
   }
 
+  /**
+   * Test create container in correct container.
+   */
   @Test
   public void testCreateContainerInCorrectContainer() {
     serverTool.checkTypesBeforeContainerCreation(TYPE_ROOT, TYPE_FOLDER);
     serverTool.checkTypesBeforeContainerCreation(TYPE_FOLDER, TYPE_FOLDER);
   }
 
+  /**
+   * Test create content in correct container.
+   */
   @Test
   public void testCreateContentInCorrectContainer() {
     serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_WIKIPAGE);

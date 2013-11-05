@@ -38,13 +38,31 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ChatManagerDefault implements ChatManager {
 
+  /** The creation service. */
   private final CreationService creationService;
+  
+  /** The group manager. */
   private final GroupManager groupManager;
+  
+  /** The xmpp manager. */
   private final XmppManager xmppManager;
 
+  /**
+   * Instantiates a new chat manager default.
+   *
+   * @param xmppManager the xmpp manager
+   * @param groupManager the group manager
+   * @param creationService the creation service
+   */
   @Inject
   public ChatManagerDefault(final XmppManager xmppManager, final GroupManager groupManager,
       final CreationService creationService) {
@@ -53,6 +71,9 @@ public class ChatManagerDefault implements ChatManager {
     this.creationService = creationService;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.server.ChatManager#addRoom(java.lang.String, cc.kune.domain.User, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, java.lang.String)
+   */
   @Override
   public Container addRoom(final String userHash, final User user, final StateToken parentToken,
       final String roomName, final String subject) {

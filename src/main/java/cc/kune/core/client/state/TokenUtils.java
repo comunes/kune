@@ -24,12 +24,31 @@ package cc.kune.core.client.state;
 
 import cc.kune.common.client.utils.Base64Utils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TokenUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TokenUtils {
 
+  /**
+   * Adds the redirect.
+   *
+   * @param token the token
+   * @param redirect the redirect
+   * @return the string
+   */
   public static String addRedirect(final String token, final String redirect) {
     return new StringBuffer().append(token).append("(").append(redirect).append(")").toString();
   }
 
+  /**
+   * Compose.
+   *
+   * @param params the params
+   * @return the string
+   */
   private static String compose(final String... params) {
     final StringBuffer sb = new StringBuffer();
     for (final String param : params) {
@@ -38,10 +57,24 @@ public class TokenUtils {
     return sb.toString().replaceAll("\\|$", "");
   }
 
+  /**
+   * Preview.
+   *
+   * @param token the token
+   * @return the string
+   */
   public static String preview(final String token) {
     return addRedirect(SiteTokens.PREVIEW, token);
   }
 
+  /**
+   * Subtitle.
+   *
+   * @param title the title
+   * @param description the description
+   * @param redirect the redirect
+   * @return the string
+   */
   public static String subtitle(final String title, final String description, final String redirect) {
     return addRedirect(
         SiteTokens.SUBTITLES,
@@ -49,6 +82,12 @@ public class TokenUtils {
             redirect));
   }
 
+  /**
+   * Tutorial.
+   *
+   * @param token the token
+   * @return the string
+   */
   public static String tutorial(final String token) {
     return addRedirect(SiteTokens.TUTORIAL, token);
   }

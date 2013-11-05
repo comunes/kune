@@ -25,16 +25,41 @@ package cc.kune.gallery.shared;
 import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.shared.ToolConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GalleryToolConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class GalleryToolConstants {
+  
+  /** The Constant ICON_TYPE_ALBUM. */
   public static final KuneIcon ICON_TYPE_ALBUM = new KuneIcon('j');
+  
+  /** The Constant ICON_TYPE_ROOT. */
   public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('j');
+  
+  /** The Constant ICON_TYPE_UPLOADEDFILE. */
   public static final KuneIcon ICON_TYPE_UPLOADEDFILE = new KuneIcon('j');
+  
+  /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "gallery";
+  
+  /** The Constant TOOL_NAME. */
   public static final String TOOL_NAME = "gallery";
+  
+  /** The Constant TYPE_ALBUM. */
   public static final String TYPE_ALBUM = TOOL_NAME + "." + "album";
+  
+  /** The Constant TYPE_ROOT. */
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
+  
+  /** The Constant TYPE_UPLOADEDFILE. */
   public static final String TYPE_UPLOADEDFILE = TOOL_NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 
+  /**
+   * Instantiates a new gallery tool constants.
+   */
   private GalleryToolConstants() {
   }
 }

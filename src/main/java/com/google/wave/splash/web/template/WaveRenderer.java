@@ -25,6 +25,7 @@ import com.google.wave.api.ParticipantProfile;
 import com.google.wave.api.Wavelet;
 import com.google.wave.splash.rpc.ClientAction;
 
+// TODO: Auto-generated Javadoc
 /**
  * Does the actual conversion of a wavelet/blipdata tree into html. This
  * interface is mainly to satisfy a circular dependency with ContentRenderer.
@@ -47,11 +48,12 @@ public interface WaveRenderer {
   void renderInlineReply(Element element, int index, StringBuilder builder);
 
   /**
+   * Render.
    *
    * @param wavelet A wavelet to render as a single html blob.
    * @param page The page number to send back. Use this to implement paging,
-   *     if you specify page 1, the client action will only contain the second
-   *     page as computed during the current render.
+   * if you specify page 1, the client action will only contain the second
+   * page as computed during the current render.
    * @return the client action.
    */
   ClientAction render(Wavelet wavelet, int page);
@@ -74,5 +76,10 @@ public interface WaveRenderer {
    */
   String toHtml(Blip blipData, String title);
 
+  /**
+   * Render not found.
+   *
+   * @return the client action
+   */
   ClientAction renderNotFound();
 }

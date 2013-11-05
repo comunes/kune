@@ -24,8 +24,17 @@ package cc.kune.common.client.actions.ui;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractGuiBinding.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractGuiBinding implements GuiBinding {
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.GuiBinding#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) { // NOPMD
                                                                      // by
@@ -36,6 +45,9 @@ public abstract class AbstractGuiBinding implements GuiBinding {
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.GuiBinding#shouldBeAdded()
+   */
   @Override
   public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:47
     return true;

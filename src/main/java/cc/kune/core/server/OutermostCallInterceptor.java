@@ -28,23 +28,35 @@ import org.aopalliance.intercept.MethodInvocation;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
+// TODO: Auto-generated Javadoc
 /*
  * See:
  * http://tembrel.blogspot.com/2007/09/matcher-and-methodinterceptor-for-dwr.html
  *
  */
 
+/**
+ * The Class OutermostCallInterceptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class OutermostCallInterceptor implements MethodInterceptor {
+  
   /**
    * Decorates a MethodInterceptor so that only the outermost invocation using
    * that interceptor will be intercepted and nested invocations willbe ignored.
+   *
+   * @param interceptor the interceptor
+   * @return the method interceptor
    */
   public static MethodInterceptor outermostCall(final MethodInterceptor interceptor) {
     return new OutermostCallInterceptor(interceptor);
   }
 
+  /** The interceptor. */
   private final MethodInterceptor interceptor;
 
+  /** The count. */
   @SuppressWarnings("rawtypes")
   private final ThreadLocal count = new ThreadLocal() {
     @Override
@@ -53,10 +65,18 @@ public final class OutermostCallInterceptor implements MethodInterceptor {
     }
   };
 
+  /**
+   * Instantiates a new outermost call interceptor.
+   *
+   * @param interceptor the interceptor
+   */
   private OutermostCallInterceptor(final MethodInterceptor interceptor) {
     this.interceptor = interceptor;
   }
 
+  /* (non-Javadoc)
+   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+   */
   @SuppressWarnings("unchecked")
   public Object invoke(final MethodInvocation invocation) throws Throwable {
     final int savedCount = (Integer) count.get();
@@ -72,7 +92,11 @@ public final class OutermostCallInterceptor implements MethodInterceptor {
     }
   }
 
-  /** Ensure underlying interceptor is injected. */
+  /**
+   * Ensure underlying interceptor is injected.
+   *
+   * @param injector the injector
+   */
   @Inject
   void injectInterceptor(final Injector injector) {
     injector.injectMembers(interceptor);

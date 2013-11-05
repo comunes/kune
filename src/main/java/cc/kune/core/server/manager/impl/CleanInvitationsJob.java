@@ -36,17 +36,36 @@ import cc.kune.core.server.persist.KuneTransactional;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CleanInvitationsJob.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CleanInvitationsJob implements Job {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(CleanInvitationsJob.class);
+  
+  /** The invitation manager. */
   private final InvitationManager invitationManager;
 
+  /**
+   * Instantiates a new clean invitations job.
+   *
+   * @param invitationManager the invitation manager
+   * @throws ParseException the parse exception
+   * @throws SchedulerException the scheduler exception
+   */
   @Inject
   public CleanInvitationsJob(final InvitationManager invitationManager) throws ParseException,
       SchedulerException {
     this.invitationManager = invitationManager;
   }
 
+  /* (non-Javadoc)
+   * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
+   */
   @Override
   @KuneTransactional
   public void execute(final JobExecutionContext context) throws JobExecutionException {

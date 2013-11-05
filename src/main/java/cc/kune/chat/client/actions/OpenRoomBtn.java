@@ -28,10 +28,24 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OpenRoomBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class OpenRoomBtn extends ButtonDescriptor {
 
+  /** The Constant ID. */
   public static final String ID = "k-open-room";
 
+  /**
+   * Instantiates a new open room btn.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public OpenRoomBtn(final I18nTranslationService i18n, final OpenChatAction action,
       final IconicResources res) {

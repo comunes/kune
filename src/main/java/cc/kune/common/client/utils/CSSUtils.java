@@ -28,8 +28,20 @@ import com.google.gwt.dom.client.LinkElement;
 import com.google.gwt.dom.client.StyleElement;
 import com.google.gwt.dom.client.StyleInjector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CSSUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CSSUtils {
 
+  /**
+   * Adds the css.
+   *
+   * @param cssContents the css contents
+   * @return the style element
+   */
   @SuppressWarnings("deprecation")
   public static StyleElement addCss(final String cssContents) {
     // final StyleElement style = Document.get().createStyleElement();
@@ -39,6 +51,12 @@ public class CSSUtils {
     return StyleInjector.injectStylesheetAtEnd(cssContents);
   }
 
+  /**
+   * Sets the css.
+   *
+   * @param cssUrl the css url
+   * @return the link element
+   */
   public static LinkElement setCss(final String cssUrl) {
     final Element head = Document.get().getElementsByTagName("head").getItem(0);
     final LinkElement link = Document.get().createLinkElement();

@@ -28,8 +28,18 @@ import org.junit.Test;
 
 import cc.kune.core.shared.domain.utils.StateToken;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StateTokenTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StateTokenTest {
 
+  /**
+   * Check all empty.
+   */
   @Test
   public void checkAllEmpty() {
     final StateToken token = new StateToken("");
@@ -39,6 +49,9 @@ public class StateTokenTest {
     assertNull(token.getDocument());
   }
 
+  /**
+   * Check equals.
+   */
   @Test
   public void checkEquals() {
     final StateToken token1 = new StateToken("abc", "da", "1", "1");
@@ -46,6 +59,9 @@ public class StateTokenTest {
     assertEquals(token1, token2);
   }
 
+  /**
+   * Check equals encoded.
+   */
   @Test
   public void checkEqualsEncoded() {
     final StateToken token1 = new StateToken("abc.da.1.1");
@@ -53,6 +69,9 @@ public class StateTokenTest {
     assertEquals(token1, token2);
   }
 
+  /**
+   * Check no equals.
+   */
   @Test
   public void checkNoEquals() {
     final StateToken token1 = new StateToken("abc", "da", "1", "1");
@@ -60,6 +79,9 @@ public class StateTokenTest {
     assertFalse(token1.equals(token2));
   }
 
+  /**
+   * Parses the encoded not catched.
+   */
   @Test
   public void parseEncodedNotCatched() {
     final StateToken token1 = new StateToken();

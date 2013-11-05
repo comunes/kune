@@ -29,8 +29,18 @@ import org.junit.Test;
 
 import cc.kune.docs.shared.DocsToolConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DocumentToolTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DocumentToolTest {
 
+  /**
+   * Client and server sync.
+   */
   @Test
   public void clientAndServerSync() {
     assertEquals(TOOL_NAME, DocsToolConstants.TOOL_NAME);

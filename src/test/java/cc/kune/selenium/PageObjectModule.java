@@ -27,7 +27,22 @@ import org.openqa.selenium.support.pagefactory.ElementLocatorFactory;
 
 import com.google.inject.AbstractModule;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PageObjectModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class PageObjectModule extends AbstractModule {
+  
+  /**
+   * Register page object.
+   *
+   * @param <T> the generic type
+   * @param componentType the component type
+   * @param object the object
+   * @param locator the locator
+   */
   protected <T> void registerPageObject(final Class<T> componentType, final T object,
       final ElementLocatorFactory locator) {
     bind(componentType).toInstance(object);

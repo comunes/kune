@@ -28,8 +28,19 @@ import com.google.inject.Singleton;
 import com.thezukunft.wave.connector.Wave;
 import com.thezukunft.wave.connectorimpl.WaveGINWrapper;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneGadgetSampleDeployModule.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneGadgetSampleDeployModule extends KuneGadgetSampleGinModule {
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gadgetsample.client.KuneGadgetSampleGinModule#configure()
+   */
   @Override
   protected void configure() {
     super.configure();

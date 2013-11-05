@@ -30,26 +30,45 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FlowToolbar.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidget {
 
+  /** The child panel. */
   private final FlowPanel childPanel;
 
+  /**
+   * Instantiates a new flow toolbar.
+   */
   public FlowToolbar() {
     super();
     childPanel = new FlowPanel();
     initWidget(childPanel);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#add(com.google.gwt.user.client.ui.Widget)
+   */
   @Override
   public void add(final Widget widget) {
     childPanel.add(widget);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#add(com.google.gwt.user.client.ui.Widget, com.google.gwt.user.client.ui.HasVerticalAlignment.VerticalAlignmentConstant)
+   */
   @Override
   public void add(final Widget widget, final VerticalAlignmentConstant valign) {
     childPanel.add(widget);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#addFill()
+   */
   @Override
   public Widget addFill() {
     final Label emptyLabel = new Label("");
@@ -59,6 +78,9 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
     return emptyLabel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#addSeparator()
+   */
   @Override
   public Widget addSeparator() {
     final Label emptyLabel = new Label("");
@@ -69,6 +91,9 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
     return emptyLabel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#addSpacer()
+   */
   @Override
   public Widget addSpacer() {
     final Label emptyLabel = new Label("");
@@ -78,57 +103,87 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
     return emptyLabel;
   }
 
+  /**
+   * Clear.
+   */
   public void clear() {
     childPanel.clear();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.IndexedPanel#getWidget(int)
+   */
   @Override
   public Widget getWidget(final int index) {
     return childPanel.getWidget(index);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.IndexedPanel#getWidgetCount()
+   */
   @Override
   public int getWidgetCount() {
     return childPanel.getWidgetCount();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.IndexedPanel.ForIsWidget#getWidgetIndex(com.google.gwt.user.client.ui.IsWidget)
+   */
   @Override
   public int getWidgetIndex(final IsWidget child) {
     return childPanel.getWidgetIndex(child);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.IndexedPanel#getWidgetIndex(com.google.gwt.user.client.ui.Widget)
+   */
   @Override
   public int getWidgetIndex(final Widget child) {
     return childPanel.getWidgetIndex(child);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#insert(com.google.gwt.user.client.ui.Widget, int)
+   */
   @Override
   public void insert(final Widget widget, final int position) {
     childPanel.insert(widget, position);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.IndexedPanel#remove(int)
+   */
   @Override
   public boolean remove(final int index) {
     return childPanel.remove(index);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#remove(com.google.gwt.user.client.ui.Widget)
+   */
   @Override
   public boolean remove(final Widget widget) {
     return childPanel.remove(widget);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#removeAll()
+   */
   @Override
   public void removeAll() {
     childPanel.clear();
   }
 
+  /**
+   * Sets the basic style.
+   */
   private void setBasicStyle() {
     setStyleName("x-toolbar-FIXME");
     addStyleName("x-panel-FIXME");
   }
 
   /**
-   * Set the blank style
+   * Set the blank style.
    */
   @Override
   public void setBlankStyle() {
@@ -136,13 +191,16 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
     addStyleName("oc-blank-toolbar");
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
+   */
   @Override
   public void setHeight(final String height) {
     childPanel.setHeight(height);
   }
 
   /**
-   * Set the normal grey style
+   * Set the normal grey style.
    */
   @Override
   public void setNormalStyle() {
@@ -151,7 +209,7 @@ public class FlowToolbar extends Composite implements AbstractToolbar, ForIsWidg
   }
 
   /**
-   * Set the transparent style
+   * Set the transparent style.
    */
   public void setTranspStyle() {
     setBasicStyle();

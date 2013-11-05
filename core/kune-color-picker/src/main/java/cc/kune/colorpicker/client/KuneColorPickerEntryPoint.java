@@ -25,11 +25,17 @@ package cc.kune.colorpicker.client;
 
 import com.google.gwt.core.client.EntryPoint;
 
+// TODO: Auto-generated Javadoc
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneColorPickerEntryPoint implements EntryPoint {
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+     */
     public void onModuleLoad() {
         ColorWebSafePalettePresenter presenter = new ColorWebSafePalettePresenter();
         ColorWebSafePalettePanel panel = new ColorWebSafePalettePanel(presenter);

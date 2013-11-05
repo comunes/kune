@@ -33,10 +33,11 @@ import com.thezukunft.wave.connector.State;
 import com.thezukunft.wave.connector.Wave;
 
 /**
- * We need this wrapper class, because we want to be able to use Wave with gin, which is impossible using JSO
- *
+ * We need this wrapper class, because we want to be able to use Wave with gin,
+ * which is impossible using JSO
+ * 
  * @author Jonas Huckestein
- *
+ * 
  */
 @Singleton
 public class WaveGINWrapper implements Wave {

@@ -26,12 +26,24 @@ import java.util.ArrayList;
 
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ProvidersCollection.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SuppressWarnings("serial")
 public class ProvidersCollection extends ArrayList<Provider<?>> {
 
+  /**
+   * Instantiates a new providers collection.
+   */
   public ProvidersCollection() {
   }
 
+  /**
+   * Creates the all.
+   */
   public void createAll() {
     for (final Provider<?> p : this) {
       p.get();

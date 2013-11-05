@@ -22,6 +22,11 @@
  */
 package cc.kune.gspace.client.options.general;
 
+/**
+ * The Interface GroupOptGeneral.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GroupOptGeneral extends EntityOptGeneral {
 
 }

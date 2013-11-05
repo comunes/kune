@@ -39,8 +39,24 @@ import cc.kune.gspace.client.options.GroupOptions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupOptToolsPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupOptToolsPresenter extends EntityOptToolsPresenter implements GroupOptTools {
 
+  /**
+   * Instantiates a new group opt tools presenter.
+   *
+   * @param stateManager the state manager
+   * @param session the session
+   * @param i18n the i18n
+   * @param entityOptions the entity options
+   * @param groupService the group service
+   * @param view the view
+   */
   @Inject
   public GroupOptToolsPresenter(final StateManager stateManager, final Session session,
       final I18nTranslationService i18n, final GroupOptions entityOptions,
@@ -55,38 +71,59 @@ public class GroupOptToolsPresenter extends EntityOptToolsPresenter implements G
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#applicable()
+   */
   @Override
   protected boolean applicable() {
     return session.isCurrentStateAGroup();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getAllTools()
+   */
   @Override
   protected Collection<ToolSimpleDTO> getAllTools() {
     return session.getGroupTools();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getDefContentToken()
+   */
   @Override
   protected StateToken getDefContentToken() {
     final ContentSimpleDTO defaultContent = session.getCurrentState().getGroup().getDefaultContent();
     return defaultContent == null ? null : defaultContent.getStateToken();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getDefContentTooltip()
+   */
   @Override
   protected String getDefContentTooltip() {
     // FIXME
     return i18n.t("This tool cannot be disabled as long as it’s where the group’s home page is located. Change the default home page to another tool then try again.");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getEnabledTools()
+   */
   @Override
   protected List<String> getEnabledTools() {
     return session.getCurrentState().getEnabledTools();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getOperationToken()
+   */
   @Override
   protected StateToken getOperationToken() {
     return session.getCurrentStateToken();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#gotoDifLocationIfNecessary(java.lang.String)
+   */
   @Override
   protected void gotoDifLocationIfNecessary(final String toolName) {
     if (session.getCurrentStateToken().getTool().equals(toolName)) {

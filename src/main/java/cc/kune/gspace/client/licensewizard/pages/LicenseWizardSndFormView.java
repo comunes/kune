@@ -24,9 +24,23 @@ package cc.kune.gspace.client.licensewizard.pages;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface LicenseWizardSndFormView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface LicenseWizardSndFormView extends IsWidget {
 
+  /**
+   * Checks if is common licenses selected.
+   *
+   * @return true, if is common licenses selected
+   */
   boolean isCommonLicensesSelected();
 
+  /**
+   * Reset.
+   */
   void reset();
 }

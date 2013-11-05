@@ -36,15 +36,30 @@ import cc.kune.lists.server.ListServerService;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListsRPC.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListsRPC implements ListsService, RPC {
 
+  /** The list service. */
   private final ListServerService listService;
 
+  /**
+   * Instantiates a new lists rpc.
+   *
+   * @param listService the list service
+   */
   @Inject
   public ListsRPC(final ListServerService listService) {
     this.listService = listService;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.lists.client.rpc.ListsService#createList(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, java.lang.String, boolean)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.container)
@@ -54,6 +69,9 @@ public class ListsRPC implements ListsService, RPC {
     return listService.createList(userHash, parentToken, listName, description, isPublic);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.lists.client.rpc.ListsService#newPost(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.container)
@@ -63,6 +81,9 @@ public class ListsRPC implements ListsService, RPC {
     return listService.newPost(userHash, parentToken, postTitle);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.lists.client.rpc.ListsService#setPublic(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.Boolean)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.container)
@@ -71,6 +92,9 @@ public class ListsRPC implements ListsService, RPC {
     return listService.setPublic(token, isPublic);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.lists.client.rpc.ListsService#subscribeToList(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.Boolean)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.container)

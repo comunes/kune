@@ -27,8 +27,23 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.gspace.client.actions.AddMembersToContentAction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddMembersToContentMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AddMembersToContentMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new adds the members to content menu item.
+   *
+   * @param text the text
+   * @param subGroup the sub group
+   * @param action the action
+   * @param menu the menu
+   * @param res the res
+   */
   public AddMembersToContentMenuItem(final String text, final SocialNetworkSubGroup subGroup,
       final AddMembersToContentAction action, final ContentViewerShareMenu menu,
       final IconicResources res) {

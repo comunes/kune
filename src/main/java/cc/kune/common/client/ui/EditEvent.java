@@ -25,34 +25,73 @@ package cc.kune.common.client.ui;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EditEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EditEvent extends GwtEvent<EditEvent.EditHandler> {
 
+  /**
+   * The Interface EditHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface EditHandler extends EventHandler {
 
+    /**
+     * Fire.
+     *
+     * @param event the event
+     */
     void fire(EditEvent event);
   }
 
+  /** The Constant TYPE. */
   public static final GwtEvent.Type<EditHandler> TYPE = new GwtEvent.Type<EditHandler>();
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<EditHandler> getType() {
     return TYPE;
   }
 
+  /** The text. */
   private final String text;
 
+  /**
+   * Instantiates a new edits the event.
+   *
+   * @param text the text
+   */
   public EditEvent(final String text) {
     this.text = text;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public com.google.gwt.event.shared.GwtEvent.Type<EditHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /**
+   * Gets the text.
+   *
+   * @return the text
+   */
   public String getText() {
     return text;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final EditHandler handler) {
     handler.fire(this);

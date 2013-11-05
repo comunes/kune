@@ -39,14 +39,37 @@ import cc.kune.core.shared.dto.ContentSimpleDTO;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SetAsHomePageMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SetAsHomePageMenuItem extends MenuItemDescriptor {
 
+  /**
+   * The Class SetAsHomePageAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class SetAsHomePageAction extends RolAction {
 
+    /** The content service. */
     private final Provider<ContentServiceAsync> contentService;
+    
+    /** The i18n. */
     private final I18nTranslationService i18n;
+    
+    /** The session. */
     private final Session session;
 
+    /**
+     * Instantiates a new sets the as home page action.
+     *
+     * @param session the session
+     * @param contentService the content service
+     * @param i18n the i18n
+     */
     @Inject
     public SetAsHomePageAction(final Session session,
         final Provider<ContentServiceAsync> contentService, final I18nTranslationService i18n) {
@@ -56,6 +79,9 @@ public class SetAsHomePageMenuItem extends MenuItemDescriptor {
       this.i18n = i18n;
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       final StateToken token = ((AbstractContentSimpleDTO) event.getTarget()).getStateToken();
@@ -73,6 +99,13 @@ public class SetAsHomePageMenuItem extends MenuItemDescriptor {
 
   }
 
+  /**
+   * Instantiates a new sets the as home page menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public SetAsHomePageMenuItem(final I18nTranslationService i18n, final SetAsHomePageAction action,
       final IconicResources res) {

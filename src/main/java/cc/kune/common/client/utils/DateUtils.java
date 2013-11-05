@@ -28,14 +28,24 @@ import cc.kune.common.shared.utils.DateFormatConstants;
 
 import com.google.gwt.i18n.client.DateTimeFormat;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class DateUtils try to follow ISO_8601 (previously RFC 2445 date-time
  * formats).
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DateUtils extends DateFormatConstants {
 
+  /** The Constant iso_8601. */
   private static final DateTimeFormat iso_8601 = DateTimeFormat.getFormat(DATE_EXPORT_FORMAT);
 
+  /**
+   * To date.
+   *
+   * @param date the date
+   * @return the date
+   */
   public static Date toDate(final String date) {
     try {
       return iso_8601.parse(date);
@@ -56,6 +66,12 @@ public class DateUtils extends DateFormatConstants {
     }
   }
 
+  /**
+   * To string.
+   *
+   * @param date the date
+   * @return the string
+   */
   public static String toString(final Date date) {
     return iso_8601.format(date);
   }

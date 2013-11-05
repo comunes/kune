@@ -27,15 +27,29 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestRESTServiceDefinition.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TestRESTServiceDefinition {
 
+  /** The definition. */
   private RESTServiceDefinition definition;
 
+  /**
+   * Creates the definition.
+   */
   @Before
   public void createDefinition() {
     this.definition = new RESTServiceDefinition(SimpleRESTService.class);
   }
 
+  /**
+   * Test method order.
+   */
   @Test
   public void testMethodOrder() {
     assertEquals("three", definition.getMethods()[0].getName());
@@ -43,20 +57,48 @@ public class TestRESTServiceDefinition {
     assertEquals("one", definition.getMethods()[2].getName());
   }
 
+  /**
+   * Test method count.
+   */
   @Test
   public void testMethodCount() {
     assertEquals(3, definition.getMethods().length);
   }
 
+  /**
+   * The Class SimpleRESTService.
+   *
+   * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class SimpleRESTService {
+    
+    /**
+     * Two.
+     *
+     * @param one the one
+     * @param two the two
+     */
     @REST(params = { "one", "two" })
     public void two(final String one, final String two) {
     }
 
+    /**
+     * Three.
+     *
+     * @param one the one
+     * @param two the two
+     * @param three the three
+     */
     @REST(params = { "one", "two", "three" })
     public void three(final String one, final String two, final String three) {
     }
 
+    /**
+     * One.
+     *
+     * @param one the one
+     */
     @REST(params = { "one" })
     public void one(final String one) {
     }

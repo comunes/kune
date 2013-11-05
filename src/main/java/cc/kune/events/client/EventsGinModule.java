@@ -38,8 +38,17 @@ import cc.kune.events.client.viewer.CalendarViewerPresenter;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventsGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EventsGinModule extends ExtendedGinModule {
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     s(EventsClientTool.class);

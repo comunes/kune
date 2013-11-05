@@ -38,37 +38,71 @@ import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SocialNetworkServiceTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SocialNetworkServiceTest extends IntegrationTest {
+  
+  /** The group token. */
   private StateToken groupToken;
+  
+  /** The session. */
   @Inject
   UserSession session;
 
+  /** The social network service. */
   @Inject
   SocialNetService socialNetworkService;
 
+  /**
+   * Inits the.
+   */
   @Before
   public void init() {
     new IntegrationTestHelper(true, this);
     groupToken = new StateToken(getDefSiteShortName());
   }
 
+  /**
+   * Test get group members not logged.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testGetGroupMembersNotLogged() throws Exception {
     final SocialNetworkDataDTO sn = socialNetworkService.getSocialNetwork(null, groupToken);
     assertNotNull(sn.getGroupMembers());
   }
 
+  /**
+   * Test get participation not logged.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testGetParticipationNotLogged() throws Exception {
     final SocialNetworkDataDTO sn = socialNetworkService.getSocialNetwork(null, groupToken);
     assertNotNull(sn.getUserParticipation());
   }
 
+  /**
+   * Test request join no logged.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = UserMustBeLoggedException.class)
   public void testRequestJoinNoLogged() throws Exception {
     socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
   }
 
+  /**
+   * Test request join personal group.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = AlreadyUserMemberException.class)
   public void testRequestJoinPersonalGroup() throws Exception {
     doLogin();

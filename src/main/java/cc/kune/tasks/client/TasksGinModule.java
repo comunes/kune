@@ -27,8 +27,17 @@ import cc.kune.tasks.client.actions.TasksClientActions;
 import cc.kune.tasks.client.actions.TasksFolderNewMenu;
 import cc.kune.tasks.client.actions.TasksNewMenu;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TasksGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TasksGinModule extends ExtendedGinModule {
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     s(TasksFolderNewMenu.class);

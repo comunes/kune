@@ -27,53 +27,124 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SpaceSelectEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandler> {
 
+  /**
+   * The Interface HasSpaceSelectHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasSpaceSelectHandlers extends HasHandlers {
+    
+    /**
+     * Adds the space select handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addSpaceSelectHandler(SpaceSelectHandler handler);
   }
 
+  /**
+   * The Interface SpaceSelectHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface SpaceSelectHandler extends EventHandler {
+    
+    /**
+     * On space select.
+     *
+     * @param event the event
+     */
     public void onSpaceSelect(SpaceSelectEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<SpaceSelectHandler> TYPE = new Type<SpaceSelectHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   * @param space the space
+   */
   public static void fire(final HasHandlers source, final cc.kune.core.client.sitebar.spaces.Space space) {
     source.fireEvent(new SpaceSelectEvent(space));
   }
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   * @param space the space
+   * @param restoreToken the restore token
+   */
   public static void fire(final HasHandlers source,
       final cc.kune.core.client.sitebar.spaces.Space space, final boolean restoreToken) {
     source.fireEvent(new SpaceSelectEvent(space, restoreToken));
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<SpaceSelectHandler> getType() {
     return TYPE;
   }
+  
+  /** The restore token. */
   private boolean restoreToken;
 
+  /** The space. */
   private cc.kune.core.client.sitebar.spaces.Space space;
 
+  /**
+   * Instantiates a new space select event.
+   */
   protected SpaceSelectEvent() {
     // Possibly for serialization.
   }
 
+  /**
+   * Instantiates a new space select event.
+   *
+   * @param space the space
+   */
   public SpaceSelectEvent(final cc.kune.core.client.sitebar.spaces.Space space) {
     this(space, false);
   }
 
+  /**
+   * Instantiates a new space select event.
+   *
+   * @param space the space
+   * @param restoreToken the restore token
+   */
   public SpaceSelectEvent(final cc.kune.core.client.sitebar.spaces.Space space,
       final boolean restoreToken) {
     this.space = space;
     this.setRestoreToken(restoreToken);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final SpaceSelectHandler handler) {
     handler.onSpaceSelect(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
@@ -96,15 +167,26 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
     return true;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<SpaceSelectHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /**
+   * Gets the space.
+   *
+   * @return the space
+   */
   public cc.kune.core.client.sitebar.spaces.Space getSpace() {
     return space;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     int hashCode = 23;
@@ -112,14 +194,27 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
     return hashCode;
   }
 
+  /**
+   * Sets the restore token.
+   *
+   * @param restoreToken the new restore token
+   */
   public void setRestoreToken(final boolean restoreToken) {
     this.restoreToken = restoreToken;
   }
 
+  /**
+   * Should restore token.
+   *
+   * @return true, if successful
+   */
   public boolean shouldRestoreToken() {
     return restoreToken;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "SpaceSelectEvent[" + space + "]";

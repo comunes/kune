@@ -27,50 +27,108 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClearBackgroundImageEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ClearBackgroundImageEvent extends
     GwtEvent<ClearBackgroundImageEvent.ClearBackgroundImageHandler> {
 
+  /**
+   * The Interface HasClearBackgroundImageHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasClearBackgroundImageHandlers extends HasHandlers {
+    
+    /**
+     * Adds the clear back image handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addClearBackImageHandler(ClearBackgroundImageHandler handler);
   }
 
+  /**
+   * The Interface ClearBackgroundImageHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ClearBackgroundImageHandler extends EventHandler {
+    
+    /**
+     * On clear back image.
+     *
+     * @param event the event
+     */
     public void onClearBackImage(ClearBackgroundImageEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<ClearBackgroundImageHandler> TYPE = new Type<ClearBackgroundImageHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   */
   public static void fire(HasHandlers source) {
     source.fireEvent(new ClearBackgroundImageEvent());
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<ClearBackgroundImageHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * Instantiates a new clear background image event.
+   */
   public ClearBackgroundImageEvent() {
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<ClearBackgroundImageHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(ClearBackgroundImageHandler handler) {
     handler.onClearBackImage(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(Object obj) {
     return super.equals(obj);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return super.hashCode();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "ClearBackgroundImageEvent[]";

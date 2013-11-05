@@ -22,6 +22,14 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NameInUseException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NameInUseException extends DefaultException {
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 4890594846432830537L;
 }

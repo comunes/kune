@@ -22,6 +22,18 @@
  \*/
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum ActionToolbarButtonSeparator.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum ActionToolbarButtonSeparator {
-  spacer, separator, fill
+  
+  /** The spacer. */
+  spacer, 
+ /** The separator. */
+ separator, 
+ /** The fill. */
+ fill
 }

@@ -24,10 +24,34 @@ package cc.kune.gspace.client.actions;
 
 import cc.kune.core.shared.domain.utils.StateToken;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving rename events.
+ * The class that is interested in processing a rename
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addRenameListener<code> method. When
+ * the rename event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see RenameEvent
+ */
 public interface RenameListener {
 
+  /**
+   * On fail.
+   *
+   * @param token the token
+   * @param oldTitle the old title
+   */
   void onFail(StateToken token, String oldTitle);
 
+  /**
+   * On success.
+   *
+   * @param token the token
+   * @param title the title
+   */
   void onSuccess(StateToken token, String title);
 
 }

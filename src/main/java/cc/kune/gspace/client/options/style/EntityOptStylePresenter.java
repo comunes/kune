@@ -52,17 +52,54 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityOptStylePresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class EntityOptStylePresenter implements EntityOptStyle {
+  
+  /** The back manager. */
   private final GSpaceBackgroundManager backManager;
+  
+  /** The entity options. */
   private final EntityOptions entityOptions;
+  
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The file download utils. */
   private final ClientFileDownloadUtils fileDownloadUtils;
+  
+  /** The group service. */
   private final Provider<GroupServiceAsync> groupService;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The state manager. */
   private final StateManager stateManager;
+  
+  /** The view. */
   private EntityOptStyleView view;
 
+  /**
+   * Instantiates a new entity opt style presenter.
+   *
+   * @param eventBus the event bus
+   * @param session the session
+   * @param stateManager the state manager
+   * @param entityOptions the entity options
+   * @param groupService the group service
+   * @param backManager the back manager
+   * @param styleSelector the style selector
+   * @param i18n the i18n
+   * @param fileDownloadUtils the file download utils
+   */
   protected EntityOptStylePresenter(final EventBus eventBus, final Session session,
       final StateManager stateManager, final EntityOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GSpaceBackgroundManager backManager,
@@ -78,6 +115,9 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
     this.fileDownloadUtils = fileDownloadUtils;
   }
 
+  /**
+   * Clear back image.
+   */
   private void clearBackImage() {
     groupService.get().clearGroupBackImage(session.getUserHash(), session.getCurrentStateToken(),
         new AsyncCallbackSimple<GroupDTO>() {
@@ -90,10 +130,20 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
         });
   }
 
+  /**
+   * Gets the view.
+   *
+   * @return the view
+   */
   public IsWidget getView() {
     return view;
   }
 
+  /**
+   * Inits the.
+   *
+   * @param view the view
+   */
   public void init(final EntityOptStyleView view) {
     this.view = view;
     entityOptions.addTab(view, view.getTabTitle());
@@ -141,6 +191,11 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
     });
   }
 
+  /**
+   * On submit complete.
+   *
+   * @param uploader the uploader
+   */
   private void onSubmitComplete(final IUploader uploader) {
     final String response = uploader.getServerInfo().message;
     if (uploader.getStatus() == Status.SUCCESS) {
@@ -153,14 +208,27 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
     }
   }
 
+  /**
+   * On submit failed.
+   *
+   * @param responseText the response text
+   */
   private void onSubmitFailed(final String responseText) {
     NotifyUser.error(i18n.t("Error setting the background"), responseText);
   }
 
+  /**
+   * Sets the back image.
+   *
+   * @param token the new back image
+   */
   private void setBackImage(final StateToken token) {
     view.setBackImage(fileDownloadUtils.getBackgroundResizedUrl(token, ImageSize.thumb));
   }
 
+  /**
+   * Sets the state.
+   */
   private void setState() {
     final StateAbstractDTO state = session.getCurrentState();
     final GroupDTO group = state.getGroup();

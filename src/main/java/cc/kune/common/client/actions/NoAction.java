@@ -22,11 +22,17 @@
  */
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class NoAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NoAction extends AbstractExtendedAction {
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     // Do nothing

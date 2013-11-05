@@ -24,9 +24,18 @@ package cc.kune.core.client.sn.actions.registry;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractSNActionsRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SuppressWarnings("serial")
 public abstract class AbstractSNActionsRegistry extends GuiActionDescCollection {
 
+  /**
+   * Instantiates a new abstract sn actions registry.
+   */
   public AbstractSNActionsRegistry() {
     super();
   }

@@ -32,15 +32,35 @@ import cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView;
 import cc.kune.gspace.client.licensewizard.pages.LicenseWizardSndFormView;
 import cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LicenseWizardPresenterTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LicenseWizardPresenterTest {
 
+  /** The first form. */
   private LicenseWizardFirstFormView firstForm;
+  
+  /** The frd form. */
   private LicenseWizardFrdFormView frdForm;
+  
+  /** The license wizard. */
   private LicenseWizardPresenter licenseWizard;
+  
+  /** The snd form. */
   private LicenseWizardSndFormView sndForm;
+  
+  /** The trd form. */
   private LicenseWizardTrdFormView trdForm;
+  
+  /** The view. */
   private LicenseWizardView view;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     view = Mockito.mock(LicenseWizardView.class);
@@ -53,6 +73,9 @@ public class LicenseWizardPresenterTest {
         session);
   }
 
+  /**
+   * On another selected.
+   */
   @Test
   public void onAnotherSelected() {
     licenseWizard.onAnotherLicenseSelecterd();
@@ -67,12 +90,18 @@ public class LicenseWizardPresenterTest {
     Mockito.verify(view).setEnabled(false, true, true, true);
   }
 
+  /**
+   * On copyleft selected.
+   */
   @Test
   public void onCopyleftSelected() {
     licenseWizard.onCopyLeftLicenseSelected();
     Mockito.verify(view).setEnabled(false, false, true, true);
   }
 
+  /**
+   * On show reset widget.
+   */
   @Test
   public void onShowResetWidget() {
     licenseWizard.start(null);

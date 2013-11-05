@@ -24,9 +24,20 @@ package cc.kune.gspace.client.options;
 
 import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.AbstractTabbedDialogView;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface EntityOptionsView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface EntityOptionsView extends AbstractTabbedDialogView {
 
+  /** The height. */
   int HEIGHT = 270;
+  
+  /** The width. */
   int WIDTH = 500;
+  
+  /** The width wout margin. */
   int WIDTH_WOUT_MARGIN = 480;
 }

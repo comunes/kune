@@ -29,21 +29,40 @@ import com.google.inject.Provider;
 import com.google.wave.api.Gadget;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * Render gadget iframes from Elements.
  *
  * @author David Byttow
  */
 public class GadgetRenderer {
+  
+  /** The Constant NON_STATE_PROPERTIES. */
   private static final Set<String> NON_STATE_PROPERTIES = ImmutableSet.of("author", "url");
+  
+  /** The request provider. */
   private final Provider<HttpServletRequest> requestProvider;
+  
+  /** The next id. */
   private final AtomicInteger nextId = new AtomicInteger(0);
 
+  /**
+   * Instantiates a new gadget renderer.
+   *
+   * @param requestProvider the request provider
+   */
   @Inject
   public GadgetRenderer(Provider<HttpServletRequest> requestProvider) {
     this.requestProvider = requestProvider;
   }
 
+  /**
+   * Render.
+   *
+   * @param gadget the gadget
+   * @param contributors the contributors
+   * @param builder the builder
+   */
   void render(Gadget gadget, List<String> contributors, StringBuilder builder) {
     String id = "g" + nextId.incrementAndGet();
     String parentUrl = requestProvider.get().getRequestURL().toString();
@@ -62,6 +81,14 @@ public class GadgetRenderer {
         .append("\"/>");
   }
 
+  /**
+   * Append state.
+   *
+   * @param gadget the gadget
+   * @param id the id
+   * @param contributors the contributors
+   * @param builder the builder
+   */
   private void appendState(Gadget gadget, String id, List<String> contributors,
       StringBuilder builder) {
     String output = "";
@@ -82,6 +109,14 @@ public class GadgetRenderer {
     builder.append("</div>");
   }
 
+  /**
+   * Render state value.
+   *
+   * @param className the class name
+   * @param key the key
+   * @param value the value
+   * @param builder the builder
+   */
   private void renderStateValue(String className, String key, String value,
       StringBuilder builder) {
     // TODO: Is this kosher? Should we encode this data in

@@ -45,22 +45,70 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractServerTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractServerTool implements ServerTool {
 
+  /** The configuration manager. */
   protected final ToolConfigurationManager configurationManager;
+  
+  /** The container manager. */
   private final ContainerManager containerManager;
+  
+  /** The content manager. */
   private final ContentManager contentManager;
+  
+  /** The creation service. */
   protected final CreationService creationService;
+  
+  /** The i18n. */
   protected final I18nTranslationService i18n;
+  
+  /** The name. */
   private final String name;
+  
+  /** The root name. */
   private final String rootName;
+  
+  /** The target. */
   private final ServerToolTarget target;
+  
+  /** The type root. */
   private final String typeRoot;
+  
+  /** The valid container parents. */
   private final List<String> validContainerParents;
+  
+  /** The valid containers. */
   private final List<String> validContainers;
+  
+  /** The valid content parents. */
   private final List<String> validContentParents;
+  
+  /** The valid contents. */
   private final List<String> validContents;
 
+  /**
+   * Instantiates a new abstract server tool.
+   *
+   * @param name the name
+   * @param rootName the root name
+   * @param typeRoot the type root
+   * @param validContents the valid contents
+   * @param validContentParents the valid content parents
+   * @param validContainers the valid containers
+   * @param validContainerParents the valid container parents
+   * @param contentManager the content manager
+   * @param containerManager the container manager
+   * @param creationService the creation service
+   * @param configurationManager the configuration manager
+   * @param i18n the i18n
+   * @param target the target
+   */
   public AbstractServerTool(final String name, final String rootName, final String typeRoot,
       final List<String> validContents, final List<String> validContentParents,
       final List<String> validContainers, final List<String> validContainerParents,
@@ -82,6 +130,9 @@ public abstract class AbstractServerTool implements ServerTool {
     this.target = target;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#checkTypesBeforeContainerCreation(java.lang.String, java.lang.String)
+   */
   @Override
   public void checkTypesBeforeContainerCreation(final String parentTypeId, final String typeId) {
     if (validContainers.contains(typeId) && validContainerParents.contains(parentTypeId)) {
@@ -91,6 +142,9 @@ public abstract class AbstractServerTool implements ServerTool {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#checkTypesBeforeContentCreation(java.lang.String, java.lang.String)
+   */
   @Override
   public void checkTypesBeforeContentCreation(final String parentTypeId, final String typeId) {
     if (validContents.contains(typeId) && validContentParents.contains(parentTypeId)) {
@@ -100,6 +154,17 @@ public abstract class AbstractServerTool implements ServerTool {
     }
   }
 
+  /**
+   * Creates the initial content.
+   *
+   * @param user the user
+   * @param group the group
+   * @param rootFolder the root folder
+   * @param title the title
+   * @param body the body
+   * @param contentType the content type
+   * @return the content
+   */
   protected Content createInitialContent(final User user, final Group group, final Container rootFolder,
       final String title, final String body, final String contentType) {
     final Content content = creationService.createContent(title, body, user, rootFolder, contentType);
@@ -108,6 +173,12 @@ public abstract class AbstractServerTool implements ServerTool {
     return content;
   }
 
+  /**
+   * Creates the root.
+   *
+   * @param group the group
+   * @return the container
+   */
   protected Container createRoot(final Group group) {
     final ToolConfiguration config = new ToolConfiguration();
 
@@ -119,42 +190,78 @@ public abstract class AbstractServerTool implements ServerTool {
     return rootFolder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#getName()
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#getRootName()
+   */
   @Override
   public String getRootName() {
     return rootName;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#getTarget()
+   */
   @Override
   public ServerToolTarget getTarget() {
     return target;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#onCreateContainer(cc.kune.domain.Container, cc.kune.domain.Container)
+   */
   @Override
   public void onCreateContainer(final Container container, final Container parent) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#onCreateContent(cc.kune.domain.Content, cc.kune.domain.Container)
+   */
   @Override
   public void onCreateContent(final Content content, final Container parent) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#register(cc.kune.core.server.tool.ServerToolRegistry)
+   */
   @Override
   @Inject
   public void register(final ServerToolRegistry registry) {
     registry.register(this);
   }
 
+  /**
+   * Sets the access list.
+   *
+   * @param container the container
+   * @param acl the acl
+   */
   protected void setAccessList(final Container container, final AccessLists acl) {
     containerManager.setAccessList(container, acl);
   }
 
+  /**
+   * Sets the container acl.
+   *
+   * @param container the new container acl
+   */
   protected void setContainerAcl(final Container container) {
   }
 
+  /**
+   * Sets the content values.
+   *
+   * @param content the content
+   * @param contentType the content type
+   * @param author the author
+   */
   private void setContentValues(final Content content, final String contentType, final User author) {
     content.addAuthor(author);
     content.setLanguage(author.getLanguage());

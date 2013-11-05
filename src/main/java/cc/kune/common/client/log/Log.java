@@ -27,49 +27,113 @@ import java.util.logging.Logger;
 
 import cc.kune.common.client.notify.NotifyUser;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Log.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class Log {
 
+  /** The logger. */
   private static Logger logger = Logger.getLogger("KuneLog");
 
+  /**
+   * Debug.
+   *
+   * @param message the message
+   */
   public static void debug(final String message) {
     log(Level.FINEST, message);
   }
 
+  /**
+   * Log.
+   *
+   * @param level the level
+   * @param message the message
+   */
   private static void log(Level level, final String message) {
     logger.log(level, message);
   }
 
+  /**
+   * Log.
+   *
+   * @param level the level
+   * @param message the message
+   * @param caught the caught
+   */
   private static void log(Level level, final String message, final Throwable caught) {
     logger.log(level, message, caught);
   }
 
+  /**
+   * Debug.
+   *
+   * @param message the message
+   * @param caught the caught
+   */
   public static void debug(final String message, final Throwable caught) {
     log(Level.FINEST, message, caught);
   }
 
+  /**
+   * Error.
+   *
+   * @param message the message
+   */
   public static void error(final String message) {
     log(Level.SEVERE, message);
     NotifyUser.logError(message);
   }
 
+  /**
+   * Error.
+   *
+   * @param message the message
+   * @param caught the caught
+   */
   public static void error(final String message, final Throwable caught) {
     log(Level.SEVERE, message, caught);
     NotifyUser.logError(message);
   }
 
+  /**
+   * Info.
+   *
+   * @param message the message
+   */
   public static void info(final String message) {
     log(Level.INFO, message);
   }
 
+  /**
+   * Info.
+   *
+   * @param message the message
+   * @param caught the caught
+   */
   public static void info(final String message, final Throwable caught) {
     log(Level.INFO, message, caught);
   }
 
+  /**
+   * Warn.
+   *
+   * @param message the message
+   * @param caught the caught
+   */
   public static void warn(final String message, final Throwable caught) {
     log(Level.WARNING, message, caught);
     NotifyUser.logError(message);
   }
 
+  /**
+   * Warn.
+   *
+   * @param message the message
+   */
   public static void warn(final String message) {
     log(Level.WARNING, message);
     NotifyUser.logError(message);

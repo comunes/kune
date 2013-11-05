@@ -24,19 +24,44 @@ package cc.kune.core.server.manager;
 
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SearchResult.
+ *
+ * @param <T> the generic type
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SearchResult<T> {
+  
+  /** The list. */
   List<T> list;
+  
+  /** The size. */
   int size;
 
+  /**
+   * Instantiates a new search result.
+   */
   public SearchResult() {
     this(0, null);
   }
 
+  /**
+   * Instantiates a new search result.
+   *
+   * @param count the count
+   * @param list the list
+   */
   public SearchResult(final int count, final List<T> list) {
     this.list = list;
     this.size = count;
   }
 
+  /**
+   * Gets the list.
+   *
+   * @return the list
+   */
   public List<T> getList() {
     return list;
   }
@@ -50,14 +75,27 @@ public class SearchResult<T> {
     return size;
   }
 
+  /**
+   * Sets the list.
+   *
+   * @param list the new list
+   */
   public void setList(final List<T> list) {
     this.list = list;
   }
 
+  /**
+   * Sets the size.
+   *
+   * @param size the new size
+   */
   public void setSize(final int size) {
     this.size = size;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return "SearchResult[(" + getSize() + "): " + list + "]";

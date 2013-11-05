@@ -24,8 +24,19 @@ package cc.kune.core.server.tool;
 
 import java.net.URL;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ServerToolWithWaveGadget.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ServerToolWithWaveGadget extends ServerToolWithWave {
 
+  /**
+   * Gets the gadget url.
+   *
+   * @return the gadget url
+   */
   URL getGadgetUrl();
 
 }

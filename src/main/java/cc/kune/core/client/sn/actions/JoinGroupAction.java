@@ -45,11 +45,32 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class JoinGroupAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class JoinGroupAction extends SNRolAction {
 
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The sign in. */
   private final Provider<SignIn> signIn;
 
+  /**
+   * Instantiates a new join group action.
+   *
+   * @param stateManager the state manager
+   * @param session the session
+   * @param i18n the i18n
+   * @param res the res
+   * @param eventBus the event bus
+   * @param snServiceProvider the sn service provider
+   * @param signIn the sign in
+   * @param rightsClientManager the rights client manager
+   */
   @Inject
   public JoinGroupAction(final StateManager stateManager, final Session session,
       final I18nTranslationService i18n, final IconicResources res, final EventBus eventBus,
@@ -65,6 +86,9 @@ public class JoinGroupAction extends SNRolAction {
     putValue(Action.STYLES, "k-sn-join");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     if (session.isLogged()) {

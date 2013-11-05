@@ -22,6 +22,12 @@
  */
 package cc.kune.core.server.xmpp;
 
+/**
+ * The Interface ChatConnection.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ChatConnection {
 
 }

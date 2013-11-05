@@ -32,32 +32,64 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IsNotMeCondition.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class IsNotMeCondition implements GuiAddCondition {
 
+  /** The session. */
   protected final Session session;
 
+  /**
+   * Instantiates a new checks if is not me condition.
+   *
+   * @param session the session
+   */
   @Inject
   public IsNotMeCondition(final Session session) {
     this.session = session;
   }
 
+  /**
+   * Current name.
+   *
+   * @return the string
+   */
   private String currentName() {
     return session.getCurrentUser().getShortName();
   }
 
+  /**
+   * Checks if is not this group.
+   *
+   * @param descr the descr
+   * @return true, if is not this group
+   */
   private boolean isNotThisGroup(final GuiActionDescrip descr) {
     final String targetName = ((GroupDTO) descr.getTarget()).getShortName();
     final String currentName = currentName();
     return !currentName.equals(targetName);
   }
 
+  /**
+   * Checks if is not this person.
+   *
+   * @param descr the descr
+   * @return true, if is not this person
+   */
   private boolean isNotThisPerson(final GuiActionDescrip descr) {
     final String targetName = ((UserSimpleDTO) descr.getTarget()).getShortName();
     final String currentName = currentName();
     return !currentName.equals(targetName);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {
     if (session.isNotLogged()) {

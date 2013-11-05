@@ -26,18 +26,41 @@ import java.util.Arrays;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GSpaceTheme.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GSpaceTheme implements IsSerializable {
+  
+  /** The back colors. */
   private String[] backColors;
+  
+  /** The colors. */
   private String[] colors;
+  
+  /** The name. */
   private String name;
 
+  /**
+   * Instantiates a new g space theme.
+   */
   public GSpaceTheme() {
   }
 
+  /**
+   * Instantiates a new g space theme.
+   *
+   * @param name the name
+   */
   public GSpaceTheme(final String name) {
     this.name = name;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
@@ -60,18 +83,36 @@ public class GSpaceTheme implements IsSerializable {
     return true;
   }
 
+  /**
+   * Gets the back colors.
+   *
+   * @return the back colors
+   */
   public String[] getBackColors() {
     return backColors;
   }
 
+  /**
+   * Gets the colors.
+   *
+   * @return the colors
+   */
   public String[] getColors() {
     return colors;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -80,18 +121,36 @@ public class GSpaceTheme implements IsSerializable {
     return result;
   }
 
+  /**
+   * Sets the back colors.
+   *
+   * @param backColors the new back colors
+   */
   public void setBackColors(final String[] backColors) {
     this.backColors = backColors;
   }
 
+  /**
+   * Sets the colors.
+   *
+   * @param colors the new colors
+   */
   public void setColors(final String[] colors) {
     this.colors = colors;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(final String name) {
     this.name = name;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return "GSpaceTheme [backColors=" + Arrays.toString(backColors) + ", colors="

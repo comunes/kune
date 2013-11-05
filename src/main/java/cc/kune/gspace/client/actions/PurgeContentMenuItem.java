@@ -29,8 +29,21 @@ import cc.kune.gspace.client.actions.PurgeContentBtn.PurgeContentAction;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PurgeContentMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PurgeContentMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new purge content menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public PurgeContentMenuItem(final I18nTranslationService i18n, final PurgeContentAction action,
       final CoreResources res) {

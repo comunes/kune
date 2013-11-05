@@ -26,36 +26,87 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractContentSimpleDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractContentSimpleDTO implements IsSerializable {
 
+  /** The id. */
   protected Long id;
+  
+  /** The state token. */
   private StateToken stateToken;
+  
+  /** The type id. */
   private String typeId;
 
+  /**
+   * Gets the id.
+   *
+   * @return the id
+   */
   public Long getId() {
     return id;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public abstract String getName();
 
+  /**
+   * Gets the state token.
+   *
+   * @return the state token
+   */
   public StateToken getStateToken() {
     return stateToken;
   }
 
+  /**
+   * Gets the type id.
+   *
+   * @return the type id
+   */
   public String getTypeId() {
     return typeId;
   }
 
+  /**
+   * Sets the id.
+   *
+   * @param id the new id
+   */
   public void setId(final Long id) {
     this.id = id;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public abstract void setName(final String name);
 
+  /**
+   * Sets the state token.
+   *
+   * @param stateToken the new state token
+   */
   public void setStateToken(final StateToken stateToken) {
     this.stateToken = stateToken;
   }
 
+  /**
+   * Sets the type id.
+   *
+   * @param typeId the new type id
+   */
   public void setTypeId(final String typeId) {
     this.typeId = typeId;
   }

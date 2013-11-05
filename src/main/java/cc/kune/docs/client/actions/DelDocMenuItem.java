@@ -28,8 +28,21 @@ import cc.kune.gspace.client.actions.DelContentForEditorsMenuItem;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DelDocMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DelDocMenuItem extends DelContentForEditorsMenuItem {
 
+  /**
+   * Instantiates a new del doc menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public DelDocMenuItem(final I18nTranslationService i18n, final DelContentForEditorsAction action,
       final IconicResources res) {

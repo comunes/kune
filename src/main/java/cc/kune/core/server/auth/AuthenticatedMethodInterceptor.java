@@ -36,16 +36,28 @@ import cc.kune.core.server.UserSessionManager;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AuthenticatedMethodInterceptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AuthenticatedMethodInterceptor implements MethodInterceptor {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(AuthenticatedMethodInterceptor.class);
 
+  /** The request provider. */
   @Inject
   Provider<HttpServletRequest> requestProvider;
 
+  /** The user session manager. */
   @Inject
   UserSessionManager userSessionManager;
 
+  /* (non-Javadoc)
+   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+   */
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
     try {
@@ -91,6 +103,13 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
     }
   }
 
+  /**
+   * Log line.
+   *
+   * @param method the method
+   * @param userHash the user hash
+   * @param start the start
+   */
   private void logLine(final String method, final String userHash, final boolean start) {
     LOG.info(new StringBuffer().append("----- ").append(start ? "Starting" : "Ending").append(
         " method: ").append(method).append("- userhash: ").append(userHash).append(" -----"));

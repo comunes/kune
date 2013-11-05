@@ -53,36 +53,67 @@ import com.redfin.sitemapgenerator.ChangeFreq;
 import com.redfin.sitemapgenerator.WebSitemapGenerator;
 import com.redfin.sitemapgenerator.WebSitemapUrl;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class SiteMapServlet generate a sitemap.xml for the kune site
  * http://en.wikipedia.org/wiki/Sitemaps
  * 
  * Inspired in: http://betweengo.com/category/java/servlet/ and for large sites:
  * http://dynamical.biz/blog/seo-technical/sitemap-strategy-large-sites-17.html
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 @LogThis
 public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
+  /** The Constant CONTENTS_PRIORITY. */
   private static final Double CONTENTS_PRIORITY = 0.8;
 
+  /** The Constant GROUPS_PRIORITY. */
   private static final Double GROUPS_PRIORITY = 0.9;
 
+  /** The Constant LIMIT_OF_QUERY. */
   private static final int LIMIT_OF_QUERY = 100;
+  
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(SiteMapGenerator.class);
+  
+  /** The Constant SITE_PRIORITY. */
   private static final double SITE_PRIORITY = 1.0;
+  
+  /** The Constant siteUrls. */
   public static final String[] siteUrls = new String[] { SiteTokens.HOME, SiteTokens.GROUP_HOME,
       SiteTokens.ABOUT_KUNE, SiteTokens.ASK_RESET_PASSWD, SiteTokens.NEW_GROUP, SiteTokens.REGISTER,
       SiteTokens.RESET_PASSWD, SiteTokens.SIGN_IN };
 
+  /** The container finder. */
   private final ContainerFinder containerFinder;
+  
+  /** The content finder. */
   private final ContentFinder contentFinder;
+  
+  /** The dir. */
   private File dir;
+  
+  /** The file download utils. */
   private final AbsoluteFileDownloadUtils fileDownloadUtils;
+  
+  /** The group finder. */
   private final GroupFinder groupFinder;
 
+  /** The site url. */
   private final String siteUrl;
 
+  /**
+   * Instantiates a new site map generator.
+   *
+   * @param props the props
+   * @param groupFinder the group finder
+   * @param contentFinder the content finder
+   * @param containerFinder the container finder
+   * @param fileDownloadUtils the file download utils
+   */
   @Inject
   public SiteMapGenerator(final KuneProperties props, final GroupFinder groupFinder,
       final ContentFinder contentFinder, final ContainerFinder containerFinder,
@@ -100,11 +131,19 @@ public class SiteMapGenerator implements SiteMapGeneratorMBean {
     }
   }
 
+  /**
+   * Count not closed groups.
+   *
+   * @return the long
+   */
   @KuneTransactional
   private Long countNotClosedGroups() {
     return groupFinder.countExceptType(GroupType.CLOSED);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.searcheable.SiteMapGeneratorMBean#generate()
+   */
   @Override
   public void generate() {
     LOG.info("Starting to generate sitemap");
@@ -168,16 +207,34 @@ public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
   }
 
+  /**
+   * Gets the containers.
+   *
+   * @param group the group
+   * @return the containers
+   */
   @KuneTransactional
   private List<Container> getContainers(final Group group) {
     return containerFinder.allContainersInUserGroup(group.getId());
   }
 
+  /**
+   * Gets the contents.
+   *
+   * @param group the group
+   * @return the contents
+   */
   @KuneTransactional
   private List<Content> getContents(final Group group) {
     return contentFinder.allContentsInUserGroup(group.getId());
   }
 
+  /**
+   * Gets the groups.
+   *
+   * @param i the i
+   * @return the groups
+   */
   @KuneTransactional
   private List<Group> getGroups(final int i) {
     return groupFinder.getAllExcept(LIMIT_OF_QUERY, i, GroupType.CLOSED);

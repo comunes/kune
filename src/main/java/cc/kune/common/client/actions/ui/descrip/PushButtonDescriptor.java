@@ -25,37 +25,78 @@ package cc.kune.common.client.actions.ui.descrip;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PushButtonDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PushButtonDescriptor extends ButtonDescriptor {
 
+  /** The Constant PUSHED. */
   public static final String PUSHED = "pushed";
 
+  /**
+   * Instantiates a new push button descriptor.
+   *
+   * @param action the action
+   */
   public PushButtonDescriptor(final AbstractAction action) {
     super(action);
     setPushedImpl(false);
   }
 
+  /**
+   * Instantiates a new push button descriptor.
+   *
+   * @param button the button
+   */
   public PushButtonDescriptor(final PushButtonDescriptor button) {
     this(button.getAction());
   }
 
+  /**
+   * Instantiates a new push button descriptor.
+   *
+   * @param text the text
+   * @param action the action
+   */
   public PushButtonDescriptor(final String text, final AbstractAction action) {
     this(action);
     putValue(Action.NAME, text);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.ButtonDescriptor#getType()
+   */
   @Override
   public Class<?> getType() {
     return PushButtonDescriptor.class;
   }
 
+  /**
+   * Checks if is pushed.
+   *
+   * @return true, if is pushed
+   */
   public boolean isPushed() {
     return (Boolean) getValue(PUSHED);
   }
 
+  /**
+   * Sets the pushed.
+   *
+   * @param pushed the new pushed
+   */
   public void setPushed(final boolean pushed) {
     setPushedImpl(pushed);
   }
 
+  /**
+   * Sets the pushed impl.
+   *
+   * @param pushed the new pushed impl
+   */
   private void setPushedImpl(final boolean pushed) {
     putValue(PUSHED, pushed);
   }

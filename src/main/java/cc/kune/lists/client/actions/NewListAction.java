@@ -46,21 +46,58 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewListAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class NewListAction extends RolAction {
+  
+  /** The Constant CANCEL_ID. */
   public static final String CANCEL_ID = "k-nla-cancel";
+  
+  /** The Constant CREATE_ID. */
   public static final String CREATE_ID = "k-nla-create";
+  
+  /** The Constant ID. */
   public static final String ID = "k-nla-dialog";
+  
+  /** The Constant TEXTBOX_ID. */
   public static final String TEXTBOX_ID = "k-nla-textbox";
 
+  /** The cache. */
   private final ContentCache cache;
+  
+  /** The diag. */
   private PromptTopDialog diag;
+  
+  /** The folder viewer. */
   private final FolderViewerPresenter folderViewer;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The lists service. */
   private final Provider<ListsServiceAsync> listsService;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new new list action.
+   *
+   * @param session the session
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param listsService the lists service
+   * @param cache the cache
+   * @param folderViewer the folder viewer
+   */
   @Inject
   public NewListAction(final Session session, final StateManager stateManager,
       final I18nTranslationService i18n, final Provider<ListsServiceAsync> listsService,
@@ -74,6 +111,9 @@ public class NewListAction extends RolAction {
     this.folderViewer = folderViewer;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     final Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Name of the new list?"), false,
@@ -105,6 +145,9 @@ public class NewListAction extends RolAction {
 
   }
 
+  /**
+   * Do action.
+   */
   private void doAction() {
     if (diag.isValid()) {
       NotifyUser.showProgress();

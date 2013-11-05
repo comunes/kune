@@ -26,17 +26,37 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StateTokenUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StateTokenUtils {
 
+  /** The Constant SEPARATOR. */
   private static final String SEPARATOR = ".";
 
+  /** The session. */
   @Inject
   private static Session session;
 
+  /**
+   * Gets the group space url.
+   *
+   * @param token the token
+   * @return the group space url
+   */
   public static String getGroupSpaceUrl(final StateToken token) {
     return session.getSiteUrl() + "/#" + token.getEncoded();
   }
 
+  /**
+   * Gets the public space url.
+   *
+   * @param token the token
+   * @return the public space url
+   */
   public static String getPublicSpaceUrl(final StateToken token) {
     String publicUrl = "";
 
@@ -63,6 +83,9 @@ public class StateTokenUtils {
     return publicUrl;
   }
 
+  /**
+   * Instantiates a new state token utils.
+   */
   public StateTokenUtils() {
   }
 }

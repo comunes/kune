@@ -64,8 +64,20 @@ import com.google.inject.Scopes;
 import com.google.inject.servlet.RequestScoped;
 import com.google.inject.servlet.SessionScoped;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IntegrationTestHelper.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class IntegrationTestHelper {
 
+  /**
+   * Creates the injector.
+   *
+   * @return the injector
+   */
   public static Injector createInjector() {
     Injector injector;
     try {
@@ -114,6 +126,12 @@ public class IntegrationTestHelper {
     return null;
   }
 
+  /**
+   * Instantiates a new integration test helper.
+   *
+   * @param startPersistence the start persistence
+   * @param tests the tests
+   */
   public IntegrationTestHelper(final boolean startPersistence, final Object... tests) {
     final Injector injector = createInjector();
     if (startPersistence) {

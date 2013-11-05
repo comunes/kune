@@ -40,8 +40,25 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatServerTool.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatServerTool extends AbstractServerTool {
 
+  /**
+   * Instantiates a new chat server tool.
+   *
+   * @param configurationManager the configuration manager
+   * @param contentManager the content manager
+   * @param containerManager the container manager
+   * @param chatManager the chat manager
+   * @param i18n the i18n
+   * @param creationService the creation service
+   */
   @Inject
   public ChatServerTool(final ToolConfigurationManager configurationManager,
       final ContentManager contentManager, final ContainerManager containerManager,
@@ -53,6 +70,9 @@ public class ChatServerTool extends AbstractServerTool {
         ServerToolTarget.forGroups);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#initGroup(cc.kune.domain.User, cc.kune.domain.Group, java.lang.Object[])
+   */
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     @SuppressWarnings("unused")

@@ -22,8 +22,15 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmailHashInvalidException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EmailHashInvalidException extends DefaultException {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 7285974904505390494L;
 
 }

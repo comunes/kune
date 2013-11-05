@@ -30,12 +30,16 @@ import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class SessionAction is used to create actions that depends of current
- * session auth status
+ * session auth status.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class SessionAction extends AbstractExtendedAction {
 
+  /** The session. */
   protected final Session session;
 
   /**

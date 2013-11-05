@@ -27,6 +27,7 @@ import cc.kune.core.client.errors.DefaultException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
 /**
  * A utility class that converts raw wave documents into html.
  * 
@@ -34,11 +35,25 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class Markup {
+  
+  /** The Constant MONTH_DAY_FORMATTER. */
   private static final DateFormat MONTH_DAY_FORMATTER = new SimpleDateFormat("MMM dd");
+  
+  /** The Constant MONTH_DAY_YEAR_FORMATTER. */
   private static final DateFormat MONTH_DAY_YEAR_FORMATTER = new SimpleDateFormat("MMM dd, yyyy");
+  
+  /** The Constant TIME_FORMATTER. */
   private static final DateFormat TIME_FORMATTER = new SimpleDateFormat("h:mm a");
+  
+  /** The Constant TIME_MILLIS_FORMATTER. */
   private static final DateFormat TIME_MILLIS_FORMATTER = new SimpleDateFormat("s.SSS");
 
+  /**
+   * Embed snippet.
+   *
+   * @param waveId the wave id
+   * @return the string
+   */
   public static String embedSnippet(final String waveId) {
     // TODO(dhanji): Move to template
     return "&lt;script type=\"text/javascript\"&gt;" + "    function load() {"
@@ -49,6 +64,12 @@ public class Markup {
         + "  &lt;/script&gt;";
   }
 
+  /**
+   * Extract scheme.
+   *
+   * @param uri the uri
+   * @return the string
+   */
   private static String extractScheme(final String uri) {
     if (null == uri) {
       return null;
@@ -72,8 +93,8 @@ public class Markup {
    * day as "now", then it will only display the time (12:30 PM). If it's in the
    * same year, then it will display the month and day (Jun 01) otherwise it
    * will return the month, day and year (Jun 01, 2009).
-   * 
-   * @param timestamp
+   *
+   * @param timestamp the timestamp
    * @return the formatted date time string.
    */
   public static String formatDateTime(final long timestamp) {
@@ -88,11 +109,23 @@ public class Markup {
     }
   }
 
+  /**
+   * Format millis.
+   *
+   * @param millis the millis
+   * @return the string
+   */
   public static String formatMillis(final long millis) {
     return TIME_MILLIS_FORMATTER.format(new Date(millis)) + "s";
   }
 
   // TODO(dhanji): Should we allow more schemes? Like im:
+  /**
+   * Checks if is safe uri.
+   *
+   * @param uri the uri
+   * @return true, if is safe uri
+   */
   private static boolean isSafeUri(final String uri) {
     final String scheme = extractScheme(uri);
     return (scheme == null || "http".equalsIgnoreCase(scheme) || "https".equalsIgnoreCase(scheme)
@@ -174,16 +207,21 @@ public class Markup {
 
   /**
    * Checks if the scheme is one of four simple types (see #isSafeUri), if not
-   * disallows the URI by reducing it to '#'
-   * 
-   * @param uri
-   *          An untrusted URI string to sanitize
+   * disallows the URI by reducing it to '#'.
+   *
+   * @param uri An untrusted URI string to sanitize
    * @return Returns a safe URI.
    */
   private static String sanitizeUri(final String uri) {
     return isSafeUri(uri) ? uri : "#";
   }
 
+  /**
+   * To blip id.
+   *
+   * @param id the id
+   * @return the string
+   */
   public static String toBlipId(final String id) {
     // HACK to make blip ids work as DOM ids
     return id.replace('-', '+');
@@ -199,11 +237,14 @@ public class Markup {
    * Simply converts a lowerCamelCased symbol into a dashed one:
    * 
    * <pre>
-   *   fontWeight -> font-weight
+   * fontWeight -> font-weight
    * </pre>
    * 
    * TODO: perhaps we should intern all these strings to save memory and remove
    * the overhead of string allocation, they could also be perfectly hashed.
+   *
+   * @param name the name
+   * @return the string
    */
   static String toDashedStyle(final String name) {
     final char[] nameChars = name.toCharArray();
@@ -223,16 +264,28 @@ public class Markup {
     return builder.toString();
   }
 
+  /**
+   * To dom id.
+   *
+   * @param id the id
+   * @return the string
+   */
   public static String toDomId(final String id) {
     // HACK to make blip ids work as DOM ids
     return id.replace('+', '-');
   }
 
+  /**
+   * Instantiates a new markup.
+   */
   @Inject
   Markup() {
   }
 
   /**
+   * Gets the display name.
+   *
+   * @param participantId the participant id
    * @return the participant's display name.
    */
   // TODO: This doesn't belong here.
@@ -240,11 +293,19 @@ public class Markup {
     return "FIXME";
   }
 
+  /**
+   * Gets the image size.
+   *
+   * @return the image size
+   */
   public String getImageSize() {
     return "33px";
   }
 
   /**
+   * Gets the image url.
+   *
+   * @param participantId the participant id
    * @return the participant's image url.
    */
   // TODO: This doesn't belong here.
@@ -255,6 +316,9 @@ public class Markup {
 
   /**
    * Helpful utility for templates.
+   *
+   * @param text the text
+   * @return the string
    */
   public String sanitizeHtml(final String text) {
     return Markup.sanitize(text);

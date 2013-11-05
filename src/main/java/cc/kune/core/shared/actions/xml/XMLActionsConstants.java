@@ -22,7 +22,17 @@
  */
 package cc.kune.core.shared.actions.xml;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XMLActionsConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class XMLActionsConstants {
+  
+  /** The Constant ACTIONS_XML_LOCATION_FILE. */
   private static final String ACTIONS_XML_LOCATION_FILE = "kune-client-actions.xml";
+  
+  /** The Constant ACTIONS_XML_LOCATION_PATH_ABS. */
   public static final String ACTIONS_XML_LOCATION_PATH_ABS = "/others/" + ACTIONS_XML_LOCATION_FILE;
 }

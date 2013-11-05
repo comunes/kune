@@ -46,14 +46,40 @@ import cc.kune.domain.finders.ContentFinder;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FinderServiceDefault.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class FinderServiceDefault implements FinderService {
+  
+  /** The container manager. */
   private final ContainerManager containerManager;
+  
+  /** The content finder. */
   private final ContentFinder contentFinder;
+  
+  /** The content manager. */
   private final ContentManager contentManager;
+  
+  /** The group manager. */
   private final GroupManager groupManager;
+  
+  /** The rate manager. */
   private final RateManager rateManager;
 
+  /**
+   * Instantiates a new finder service default.
+   *
+   * @param groupManager the group manager
+   * @param containerManager the container manager
+   * @param contentManager the content manager
+   * @param rateManager the rate manager
+   * @param contentFinder the content finder
+   */
   @Inject
   public FinderServiceDefault(final GroupManager groupManager, final ContainerManager containerManager,
       final ContentManager contentManager, final RateManager rateManager,
@@ -65,6 +91,13 @@ public class FinderServiceDefault implements FinderService {
     this.contentFinder = contentFinder;
   }
 
+  /**
+   * Check and parse.
+   *
+   * @param s the s
+   * @return the long
+   * @throws ContentNotFoundException the content not found exception
+   */
   public Long checkAndParse(final String s) throws ContentNotFoundException {
     if (s != null) {
       try {
@@ -76,24 +109,52 @@ public class FinderServiceDefault implements FinderService {
     return null;
   }
 
+  /**
+   * Check folder id.
+   *
+   * @param folderId the folder id
+   * @param container the container
+   */
   private void checkFolderId(final Long folderId, final Container container) {
     if (!container.getId().equals(folderId)) {
       throw new ContentNotFoundException();
     }
   }
 
+  /**
+   * Check group.
+   *
+   * @param groupName the group name
+   * @param container the container
+   */
   private void checkGroup(final String groupName, final Container container) {
     if (!container.getOwner().getShortName().equals(groupName)) {
       throw new ContentNotFoundException();
     }
   }
 
+  /**
+   * Check tool.
+   *
+   * @param toolName the tool name
+   * @param container the container
+   */
   private void checkTool(final String toolName, final Container container) {
     if (!container.getToolName().equals(toolName)) {
       throw new ContentNotFoundException();
     }
   }
 
+  /**
+   * Find by content reference.
+   *
+   * @param groupName the group name
+   * @param toolName the tool name
+   * @param folderId the folder id
+   * @param contentId the content id
+   * @return the content
+   * @throws ContentNotFoundException the content not found exception
+   */
   private Content findByContentReference(final String groupName, final String toolName,
       final Long folderId, final Long contentId) throws ContentNotFoundException {
     final Content content = contentManager.find(contentId);
@@ -109,6 +170,14 @@ public class FinderServiceDefault implements FinderService {
     return content;
   }
 
+  /**
+   * Find by folder reference.
+   *
+   * @param groupName the group name
+   * @param toolName the tool name
+   * @param folderId the folder id
+   * @return the content
+   */
   private Content findByFolderReference(final String groupName, final String toolName,
       final Long folderId) {
     final Container container = containerManager.find(folderId);
@@ -123,6 +192,9 @@ public class FinderServiceDefault implements FinderService {
     return generateFolderFakeContent(container);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#findByRootOnGroup(java.lang.String, java.lang.String)
+   */
   @Override
   public Content findByRootOnGroup(final String groupName, final String toolName)
       throws DefaultException {
@@ -138,6 +210,12 @@ public class FinderServiceDefault implements FinderService {
     }
   }
 
+  /**
+   * Find default content of group.
+   *
+   * @param group the group
+   * @return the content
+   */
   private Content findDefaultContentOfGroup(final Group group) {
     final Content defaultContent = group.getDefaultContent();
     if (defaultContent == null) {
@@ -147,32 +225,57 @@ public class FinderServiceDefault implements FinderService {
     }
   }
 
+  /**
+   * Find default content of group.
+   *
+   * @param groupName the group name
+   * @return the content
+   * @throws GroupNotFoundException the group not found exception
+   */
   private Content findDefaultContentOfGroup(final String groupName) throws GroupNotFoundException {
     final Group group = groupManager.findByShortName(groupName);
     return findDefaultContentOfGroup(group);
   }
 
+  /**
+   * Generate folder fake content.
+   *
+   * @param container the container
+   * @return the content
+   */
   private Content generateFolderFakeContent(final Container container) {
     final Content content = new Content();
     content.setContainer(container);
     return content;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getContainer(java.lang.Long)
+   */
   @Override
   public Container getContainer(final Long folderId) throws DefaultException {
     return getFolder(folderId);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getContainer(java.lang.String)
+   */
   @Override
   public Container getContainer(final String folderId) throws DefaultException {
     return getContainer(ContentUtils.parseId(folderId));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getContainerByWaveRef(java.lang.String)
+   */
   @Override
   public Content getContainerByWaveRef(final String waveRef) {
     return contentFinder.findByWaveId(waveRef);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getContent(java.lang.Long)
+   */
   @Override
   public Content getContent(final Long contentId) throws ContentNotFoundException {
     try {
@@ -182,11 +285,17 @@ public class FinderServiceDefault implements FinderService {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getContent(java.lang.String)
+   */
   @Override
   public Content getContent(final String contentId) throws ContentNotFoundException {
     return getContent(ContentUtils.parseId(contentId));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getContentOrDefContent(cc.kune.core.shared.domain.utils.StateToken, cc.kune.domain.Group)
+   */
   @Override
   public Content getContentOrDefContent(final StateToken token, final Group defaultGroup)
       throws DefaultException {
@@ -210,6 +319,9 @@ public class FinderServiceDefault implements FinderService {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getFolder(java.lang.Long)
+   */
   @Override
   public Container getFolder(final Long folderId) throws ContentNotFoundException {
     try {
@@ -219,17 +331,26 @@ public class FinderServiceDefault implements FinderService {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getRate(cc.kune.domain.User, cc.kune.domain.Content)
+   */
   @Override
   public Rate getRate(final User user, final Content content) {
     return rateManager.find(user, content);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getRateAvg(cc.kune.domain.Content)
+   */
   @Override
   public Double getRateAvg(final Content content) {
 
     return rateManager.getRateAvg(content);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.access.FinderService#getRateByUsers(cc.kune.domain.Content)
+   */
   @Override
   public Long getRateByUsers(final Content content) {
     return rateManager.getRateByUsers(content);

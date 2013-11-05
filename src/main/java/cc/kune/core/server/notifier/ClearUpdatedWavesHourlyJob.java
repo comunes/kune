@@ -35,18 +35,36 @@ import cc.kune.wave.server.kspecific.WaveEmailNotifier;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClearUpdatedWavesHourlyJob.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ClearUpdatedWavesHourlyJob implements Job {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(ClearUpdatedWavesHourlyJob.class);
 
+  /** The wave notifier. */
   private final WaveEmailNotifier waveNotifier;
 
+  /**
+   * Instantiates a new clear updated waves hourly job.
+   *
+   * @param waveNotifier the wave notifier
+   * @throws ParseException the parse exception
+   * @throws SchedulerException the scheduler exception
+   */
   @Inject
   public ClearUpdatedWavesHourlyJob(final WaveEmailNotifier waveNotifier) throws ParseException,
       SchedulerException {
     this.waveNotifier = waveNotifier;
   }
 
+  /* (non-Javadoc)
+   * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
+   */
   @Override
   public void execute(final JobExecutionContext context) throws JobExecutionException {
     waveNotifier.clearUpdatedWaves();

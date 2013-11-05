@@ -35,10 +35,27 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StartChatWithMemberAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StartChatWithMemberAction extends AbstractExtendedAction {
+  
+  /** The chat client. */
   private final Provider<ChatClient> chatClient;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
 
+  /**
+   * Instantiates a new start chat with member action.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param chatClient the chat client
+   */
   @Inject
   public StartChatWithMemberAction(final I18nTranslationService i18n, final ChatResources res,
       final Provider<ChatClient> chatClient) {
@@ -48,6 +65,9 @@ public class StartChatWithMemberAction extends AbstractExtendedAction {
     putValue(Action.SMALL_ICON, res.chat());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     chatClient.get().show();

@@ -28,8 +28,21 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupOptToolsPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupOptToolsPanel extends EntityOptToolsPanel implements GroupOptToolsView {
 
+  /**
+   * Instantiates a new group opt tools panel.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param maskWidget the mask widget
+   */
   @Inject
   public GroupOptToolsPanel(final I18nTranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget) {

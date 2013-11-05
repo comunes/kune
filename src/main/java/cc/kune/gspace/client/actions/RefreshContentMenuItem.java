@@ -28,8 +28,22 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RefreshContentMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class RefreshContentMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new refresh content menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param optionsMenu the options menu
+   * @param res the res
+   */
   @Inject
   public RefreshContentMenuItem(final I18nTranslationService i18n,
       final RefreshCurrentStateAction action, final ContentViewerOptionsMenu optionsMenu,

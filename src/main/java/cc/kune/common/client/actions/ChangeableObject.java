@@ -1,7 +1,30 @@
+/*
+ *
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under 
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public 
+ * License version 3, (the "License"); you may not use this file except in 
+ * compliance with the License. This file is part of kune.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 package cc.kune.common.client.actions;
 
 import java.util.HashMap;
 
+// TODO: Auto-generated Javadoc
 /**
  * A base class for implementing the {@link Action} interface.
  * 
@@ -14,9 +37,8 @@ public class ChangeableObject {
    * Provides support for property change event notification.
    */
   protected PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
-  /**
-   * store
-   */
+  
+  /** store. */
   protected HashMap<String, Object> store = new HashMap<String, Object>();
 
   /**
@@ -70,15 +92,13 @@ public class ChangeableObject {
   }
 
   /**
-   * Sets the value associated with the specified key and sends a
+   * Sets the value associated with the specified key and sends a.
+   *
+   * @param key the key (not <code>null</code>).
+   * @param value the value (<code>null</code> permitted).
    * {@link java.beans.PropertyChangeEvent} to all registered listeners.
    * 
    * Any existing value associated with the key will be overwritten.
-   * 
-   * @param key
-   *          the key (not <code>null</code>).
-   * @param value
-   *          the value (<code>null</code> permitted).
    */
   public void putValue(final String key, final Object value) {
     final Object old = getValue(key);
@@ -89,12 +109,10 @@ public class ChangeableObject {
   }
 
   /**
-   * Deregisters a listener so that it no longer receives
+   * Deregisters a listener so that it no longer receives.
+   *
+   * @param listener the listener.
    * {@link PropertyChangeEvent} notifications from this action.
-   * 
-   * @param listener
-   *          the listener.
-   * 
    * @see #addPropertyChangeListener(PropertyChangeListener)
    */
   public void removePropertyChangeListener(final PropertyChangeListener listener) {
@@ -104,14 +122,11 @@ public class ChangeableObject {
   /**
    * Sends a {@link PropertyChangeEvent} for the named property to all
    * registered listeners. This private method is called by the
+   *
+   * @param propertyName the property name.
+   * @param oldValue the old value of the property.
+   * @param newValue the new value of the property.
    * {@link #setEnabled(boolean)} method.
-   * 
-   * @param propertyName
-   *          the property name.
-   * @param oldValue
-   *          the old value of the property.
-   * @param newValue
-   *          the new value of the property.
    */
   protected void firePropertyChange(final String propertyName, final boolean oldValue,
       final boolean newValue) {

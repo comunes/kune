@@ -28,12 +28,28 @@ import java.util.Date;
 
 import cc.kune.common.shared.utils.DateFormatConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DateUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DateUtils {
 
+  /** The Constant FORMATTER. */
   private static final SimpleDateFormat FORMATTER = new SimpleDateFormat(
       DateFormatConstants.DATE_EXPORT_FORMAT);
+  
+  /** The Constant TIMEZONE_REGEXP. */
   public static final String TIMEZONE_REGEXP = "(.*)\\:([0-9][0-9])$";
 
+  /**
+   * To date.
+   *
+   * @param date the date
+   * @return the date
+   * @throws ParseException the parse exception
+   */
   public static Date toDate(final String date) throws ParseException {
     try {
       return FORMATTER.parse(date);
@@ -42,6 +58,12 @@ public class DateUtils {
     }
   }
 
+  /**
+   * To string.
+   *
+   * @param date the date
+   * @return the string
+   */
   public static String toString(final Date date) {
     return FORMATTER.format(date);
   }

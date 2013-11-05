@@ -37,17 +37,22 @@ import com.google.gwt.user.client.ui.Label;
 /**
  * The Class PromptTopDialog shows a top dialog with some textfield and two
  * buttons.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * The Class Builder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class Builder extends BasicTopDialog.Builder {
 
     /** The allow blank. */
     private boolean allowBlank = false;
 
+    /** The empty text. */
     private String emptyText;
 
     /** The field width. */
@@ -68,6 +73,7 @@ public class PromptTopDialog extends BasicTopDialog {
     /** The on enter. */
     private final OnEnter onEnter;
 
+    /** The prompt lines. */
     private int promptLines = 1;
     /** The prompt text. */
     private String promptText;
@@ -277,6 +283,8 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * The Interface OnEnter.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface OnEnter {
 

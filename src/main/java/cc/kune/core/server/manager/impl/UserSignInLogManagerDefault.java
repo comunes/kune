@@ -34,9 +34,12 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UserSignInLogManagerDefault manages the table of user signin
- * records
+ * records.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class UserSignInLogManagerDefault extends DefaultManager<UserSignInLog, Long> implements

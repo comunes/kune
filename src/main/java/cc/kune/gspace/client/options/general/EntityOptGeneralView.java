@@ -26,19 +26,52 @@ import cc.kune.gspace.client.options.EntityOptionsTabView;
 
 import com.google.gwt.event.dom.client.ChangeHandler;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface EntityOptGeneralView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface EntityOptGeneralView extends EntityOptionsTabView {
 
+  /**
+   * Clear.
+   */
   void clear();
 
+  /**
+   * Checks if is rendered.
+   *
+   * @return true, if is rendered
+   */
   boolean isRendered();
 
+  /**
+   * Checks if is valid.
+   *
+   * @return true, if is valid
+   */
   boolean isValid();
 
+  /**
+   * Mask.
+   */
   void mask();
 
+  /**
+   * Sets the change handler.
+   *
+   * @param changeHandler the new change handler
+   */
   void setChangeHandler(ChangeHandler changeHandler);
 
+  /**
+   * Unmask.
+   */
   void unmask();
 
+  /**
+   * Reset.
+   */
   void reset();
 }

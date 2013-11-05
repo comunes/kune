@@ -30,8 +30,22 @@ import cc.kune.events.client.actions.EventAddMenuItem.EventAddAction;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewEventBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewEventBtn extends ButtonDescriptor {
 
+  /**
+   * Instantiates a new new event btn.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   * @param shorcutReg the shorcut reg
+   */
   @Inject
   public NewEventBtn(final I18nTranslationService i18n, final EventAddAction action,
       final IconicResources res, final GlobalShortcutRegister shorcutReg) {

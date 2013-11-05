@@ -37,6 +37,7 @@ exception statement from your version. */
 
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
 /**
  * This interface is for classes that listen for action events.
  * 

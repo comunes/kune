@@ -34,7 +34,6 @@ public class StateUpdateEvent extends GwtEvent<StateUpdateEventHandler> {
 
   public static final GwtEvent.Type<StateUpdateEventHandler> TYPE = new GwtEvent.Type<StateUpdateEventHandler>();
 
-
   private final Wave wave;
 
   public static StateUpdateEvent fire(EventBus source, Wave wave) {

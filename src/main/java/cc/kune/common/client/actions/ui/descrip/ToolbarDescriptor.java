@@ -25,30 +25,56 @@ package cc.kune.common.client.actions.ui.descrip;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.BaseAction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolbarDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToolbarDescriptor extends AbstractParentGuiActionDescrip {
 
+  /** The Constant TOOLBAR_CLEAR. */
   public static final String TOOLBAR_CLEAR = "menuclear";
 
+  /**
+   * Builds the.
+   *
+   * @return the toolbar descriptor
+   */
   public static ToolbarDescriptor build() {
     return new ToolbarDescriptor();
   }
 
+  /**
+   * Instantiates a new toolbar descriptor.
+   */
   public ToolbarDescriptor() {
     super(new BaseAction(null, null));
     super.getAction().putValue(TOOLBAR_CLEAR, false);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.AbstractParentGuiActionDescrip#clear()
+   */
   public void clear() {
     // Action detects changes in values, then we fire a change (whatever) to
     // fire this method in the UI
     putValue(TOOLBAR_CLEAR, !((Boolean) getValue(TOOLBAR_CLEAR)));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
+   */
   @Override
   public Class<?> getType() {
     return ToolbarDescriptor.class;
   }
 
+  /**
+   * Sets the text.
+   *
+   * @param text the new text
+   */
   public void setText(final String text) {
     putValue(Action.NAME, text);
   }

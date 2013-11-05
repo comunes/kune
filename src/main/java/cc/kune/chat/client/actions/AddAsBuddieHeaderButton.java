@@ -51,13 +51,41 @@ import com.calclab.emite.im.client.roster.events.RosterRetrievedHandler;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddAsBuddieHeaderButton.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AddAsBuddieHeaderButton {
 
+  /**
+   * The Class AddAsBuddieHeaderAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class AddAsBuddieHeaderAction extends AbstractExtendedAction {
+    
+    /** The chat engine. */
     private final ChatClient chatEngine;
+    
+    /** The session. */
     private final Session session;
+    
+    /** The sn service. */
     private final Provider<SocialNetServiceAsync> snService;
 
+    /**
+     * Instantiates a new adds the as buddie header action.
+     *
+     * @param chatEngine the chat engine
+     * @param session the session
+     * @param roster the roster
+     * @param stateManager the state manager
+     * @param i18n the i18n
+     * @param img the img
+     * @param snService the sn service
+     */
     @Inject
     public AddAsBuddieHeaderAction(final ChatClient chatEngine, final Session session,
         final XmppRoster roster, final StateManager stateManager, final I18nTranslationService i18n,
@@ -88,6 +116,9 @@ public class AddAsBuddieHeaderButton {
       putValue(Action.SMALL_ICON, img.add());
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       final String username = session.getCurrentState().getGroup().getShortName();
@@ -100,14 +131,29 @@ public class AddAsBuddieHeaderButton {
       });
     }
 
+    /**
+     * Current groups is as person.
+     *
+     * @param state the state
+     * @return true, if successful
+     */
     private boolean currentGroupsIsAsPerson(final StateAbstractDTO state) {
       return state.getGroup().isPersonal();
     }
 
+    /**
+     * Checks if is not me.
+     *
+     * @param groupName the group name
+     * @return true, if is not me
+     */
     private boolean isNotMe(final String groupName) {
       return !session.getCurrentUser().getShortName().equals(groupName);
     }
 
+    /**
+     * Sets the state.
+     */
     private void setState() {
       final StateAbstractDTO currentState = session.getCurrentState();
       if (currentState != null) {
@@ -115,6 +161,11 @@ public class AddAsBuddieHeaderButton {
       }
     }
 
+    /**
+     * Sets the state.
+     *
+     * @param state the new state
+     */
     private void setState(final StateAbstractDTO state) {
       final String groupName = state.getGroup().getShortName();
       final boolean imLogged = session.isLogged();
@@ -127,6 +178,12 @@ public class AddAsBuddieHeaderButton {
     }
   }
 
+  /**
+   * Instantiates a new adds the as buddie header button.
+   *
+   * @param buddieAction the buddie action
+   * @param entityHeader the entity header
+   */
   @Inject
   public AddAsBuddieHeaderButton(final AddAsBuddieHeaderAction buddieAction,
       final EntityHeader entityHeader) {

@@ -31,9 +31,22 @@ import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListInvitationShareMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ListInvitationShareMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new list invitation share menu item.
+   *
+   * @param action the action
+   * @param icons the icons
+   * @param menu the menu
+   */
   @Inject
   ListInvitationShareMenuItem(final ListInvitationAction action, final IconicResources icons,
       final ContentViewerShareMenu menu) {

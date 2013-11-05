@@ -24,36 +24,79 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nLanguageSimpleDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nLanguageSimpleDTO implements IsSerializable {
 
+  /**
+   * Creates the.
+   *
+   * @param language the language
+   * @return the i18n language simple dto
+   */
   public static I18nLanguageSimpleDTO create(final I18nLanguageDTO language) {
     return new I18nLanguageSimpleDTO(language.getCode(), language.getEnglishName());
   }
 
+  /** The code. */
   private String code;
 
+  /** The english name. */
   private String englishName;
 
+  /**
+   * Instantiates a new i18n language simple dto.
+   */
   public I18nLanguageSimpleDTO() {
   }
 
+  /**
+   * Instantiates a new i18n language simple dto.
+   *
+   * @param code the code
+   * @param englishName the english name
+   */
   public I18nLanguageSimpleDTO(final String code, final String englishName) {
     this.code = code;
     this.englishName = englishName;
   }
 
+  /**
+   * Gets the code.
+   *
+   * @return the code
+   */
   public String getCode() {
     return code;
   }
 
+  /**
+   * Gets the english name.
+   *
+   * @return the english name
+   */
   public String getEnglishName() {
     return englishName;
   }
 
+  /**
+   * Sets the code.
+   *
+   * @param code the new code
+   */
   public void setCode(final String code) {
     this.code = code;
   }
 
+  /**
+   * Sets the english name.
+   *
+   * @param englishName the new english name
+   */
   public void setEnglishName(final String englishName) {
     this.englishName = englishName;
   }

@@ -24,11 +24,30 @@ package cc.kune.common.client.msgs;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface UserMessage.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface UserMessage extends HasClickHandlers {
 
+  /**
+   * Append msg.
+   *
+   * @param message the message
+   */
   void appendMsg(String message);
 
+  /**
+   * Close.
+   */
   void close();
 
+  /**
+   * Checks if is attached.
+   *
+   * @return true, if is attached
+   */
   boolean isAttached();
 }

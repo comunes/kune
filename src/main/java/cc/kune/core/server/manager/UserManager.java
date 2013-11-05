@@ -36,8 +36,12 @@ import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.domain.User;
 import cc.kune.domain.UserBuddiesData;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface UserManager.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface UserManager {
 
@@ -70,10 +74,9 @@ public interface UserManager {
   User changePasswd(Long userId, String oldPassword, String newPassword, boolean checkOldPasswd);
 
   /**
-   * Clear password hash (after been used)
-   * 
-   * @param user
-   *          the user
+   * Clear password hash (after been used).
+   *
+   * @param user the user
    */
   void clearPasswordHash(User user);
 

@@ -137,6 +137,12 @@ import cc.kune.gspace.client.viewers.TutorialViewer;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GSpaceGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GSpaceGinModule extends ExtendedGinModule {
 
   /*

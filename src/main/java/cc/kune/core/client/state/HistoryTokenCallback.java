@@ -22,9 +22,12 @@
  */
 package cc.kune.core.client.state;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface HistoryTokenCallback is used make relations between browser
- * hashs like #inbox #signin etc, with its actions
+ * hashs like #inbox #signin etc, with its actions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface HistoryTokenCallback {
 
@@ -37,17 +40,16 @@ public interface HistoryTokenCallback {
 
   /**
    * Info message used to show some message to the user (like
-   * "sign-in to create a new group");
-   * 
+   * "sign-in to create a new group");.
+   *
    * @return the string
    */
   String getInfoMessage();
 
   /**
-   * On history token do some action (Example #inbox, #newgroup)
-   * 
-   * @param token
-   *          the token
+   * On history token do some action (Example #inbox, #newgroup).
+   *
+   * @param token the token
    */
   void onHistoryToken(String token);
 

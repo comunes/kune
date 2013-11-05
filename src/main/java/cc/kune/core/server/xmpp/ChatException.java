@@ -24,14 +24,30 @@ package cc.kune.core.server.xmpp;
 
 import org.jivesoftware.smack.XMPPException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatException.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatException extends RuntimeException {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 3777046831841032482L;
 
+  /**
+   * Instantiates a new chat exception.
+   */
   public ChatException() {
     super("");
   }
 
+  /**
+   * Instantiates a new chat exception.
+   *
+   * @param cause the cause
+   */
   public ChatException(final XMPPException cause) {
     super(cause);
   }

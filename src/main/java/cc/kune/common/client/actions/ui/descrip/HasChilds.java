@@ -22,5 +22,10 @@
  */
 package cc.kune.common.client.actions.ui.descrip;
 
+/**
+ * The Interface HasChilds.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface HasChilds {
 }

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='kuneGadgetSampleTester'>
-  <inherits name='cc.kune.gadget.KuneGadget' />
-  <inherits name='cc.kune.gadgetsample.KuneGadgetSample' />
+  <inherits name='cc.kune.gadget.KuneGadget'/>
+  <inherits name='cc.kune.gadgetsample.KuneGadgetSample'/>
 
   <!-- Other module inherits -->
-  <inherits name='com.thezukunft.wave.WaveConnectorMock' />
+  <inherits name='com.thezukunft.wave.WaveConnectorMock'/>
 
-  <!-- Specify the gadget tester entry point class. Run this as a GWT Web
+  <!-- Specify the gadget tester entry point class. Run this as a GWT Web 
     app to test it in development mode -->
   <entry-point
-    class='cc.kune.gadgetsampletester.client.KuneGadgetSampleTesterEntryPoint' />
+    class='cc.kune.gadgetsampletester.client.KuneGadgetSampleTesterEntryPoint'/>
 
   <!-- Specify the paths for translatable code -->
-  <source path='client' />
+  <source path='client'/>
 
 </module>

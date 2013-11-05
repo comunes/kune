@@ -24,13 +24,33 @@ package cc.kune.common.client.actions;
 
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BaseAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BaseAction extends AbstractAction {
+  
+  /**
+   * Instantiates a new base action.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   */
   public BaseAction(final String text, final String tooltip) {
     super();
     super.putValue(Action.NAME, text);
     super.putValue(Action.TOOLTIP, tooltip);
   }
 
+  /**
+   * Instantiates a new base action.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   * @param icon the icon
+   */
   public BaseAction(final String text, final String tooltip, final ImageResource icon) {
     super();
     super.putValue(Action.NAME, text);
@@ -38,6 +58,13 @@ public class BaseAction extends AbstractAction {
     super.putValue(Action.SMALL_ICON, icon);
   }
 
+  /**
+   * Instantiates a new base action.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   * @param icon the icon
+   */
   public BaseAction(final String text, final String tooltip, final String icon) {
     super();
     super.putValue(Action.NAME, text);
@@ -45,6 +72,9 @@ public class BaseAction extends AbstractAction {
     super.putValue(Action.SMALL_ICON, icon);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   public void actionPerformed(final ActionEvent actionEvent) {
     // Nothing to do
   }

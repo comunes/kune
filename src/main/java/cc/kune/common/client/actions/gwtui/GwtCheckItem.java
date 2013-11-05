@@ -22,14 +22,30 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GwtCheckItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtCheckItem extends GwtBaseMenuItem {
 
+  /**
+   * Sets the checked.
+   *
+   * @param newValue the new checked
+   */
   public void setChecked(final boolean newValue) {
     // throw new NotImplementedException();
   }
 
   /*
    * Checkbox group
+   */
+  /**
+   * Sets the group.
+   *
+   * @param group the new group
    */
   public void setGroup(final String group) {
     // throw new NotImplementedException();

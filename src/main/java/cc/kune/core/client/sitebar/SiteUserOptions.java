@@ -22,6 +22,11 @@
  */
 package cc.kune.core.client.sitebar;
 
+/**
+ * The Interface SiteUserOptions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface SiteUserOptions extends SiteOptions {
 
 }

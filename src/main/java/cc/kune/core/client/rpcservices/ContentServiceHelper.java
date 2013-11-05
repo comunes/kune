@@ -39,17 +39,49 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentServiceHelper.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentServiceHelper {
 
+  /** The cache. */
   private final ContentCache cache;
+  
+  /** The content service. */
   private final Provider<ContentServiceAsync> contentService;
+  
+  /** The def callback. */
   private final AsyncCallbackSimple<StateContainerDTO> defCallback;
+  
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The folder viewer. */
   private final FolderViewerPresenter folderViewer;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new content service helper.
+   *
+   * @param session the session
+   * @param i18n the i18n
+   * @param eventBus the event bus
+   * @param contentService the content service
+   * @param cache the cache
+   * @param folderViewer the folder viewer
+   * @param stateManager the state manager
+   */
   @Inject
   public ContentServiceHelper(final Session session, final I18nTranslationService i18n,
       final EventBus eventBus, final Provider<ContentServiceAsync> contentService,
@@ -84,6 +116,12 @@ public class ContentServiceHelper {
 
   }
 
+  /**
+   * Adds the container.
+   *
+   * @param id the id
+   * @param newName the new name
+   */
   public void addContainer(final String id, final String newName) {
     NotifyUser.showProgress();
     // stateManager.gotoStateToken(((HasContent)
@@ -104,6 +142,12 @@ public class ContentServiceHelper {
     cache.remove(parentToken);
   }
 
+  /**
+   * Adds the participants.
+   *
+   * @param token the token
+   * @param subGroup the sub group
+   */
   public void addParticipants(final StateToken token, final SocialNetworkSubGroup subGroup) {
     contentService.get().addParticipants(session.getUserHash(), token,
         session.getCurrentGroupShortName(), subGroup, new AsyncCallback<Boolean>() {
@@ -121,6 +165,11 @@ public class ContentServiceHelper {
         });
   }
 
+  /**
+   * Del content.
+   *
+   * @param token the token
+   */
   public void delContent(final StateToken token) {
     ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
         i18n.t("No"), null, null, new OnAcceptCallback() {
@@ -132,6 +181,11 @@ public class ContentServiceHelper {
         });
   }
 
+  /**
+   * Purge all.
+   *
+   * @param token the token
+   */
   public void purgeAll(final StateToken token) {
     ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
         i18n.t("No"), null, null, new OnAcceptCallback() {
@@ -143,6 +197,11 @@ public class ContentServiceHelper {
         });
   }
 
+  /**
+   * Purge content.
+   *
+   * @param token the token
+   */
   public void purgeContent(final StateToken token) {
     ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
         i18n.t("No"), null, null, new OnAcceptCallback() {

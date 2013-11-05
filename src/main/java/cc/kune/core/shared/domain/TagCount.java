@@ -24,36 +24,79 @@ package cc.kune.core.shared.domain;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TagCount.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TagCount implements IsSerializable {
+  
+  /** The name. */
   private String name;
   // FIXME: try to use Integer
+  /** The count. */
   private Long count;
 
+  /**
+   * Instantiates a new tag count.
+   */
   public TagCount() {
     this(null, null);
   }
 
+  /**
+   * Instantiates a new tag count.
+   *
+   * @param name the name
+   */
   public TagCount(final String name) {
     this(name, null);
   }
 
+  /**
+   * Instantiates a new tag count.
+   *
+   * @param name the name
+   * @param count the count
+   */
   public TagCount(final String name, final Long count) {
     this.name = name;
     this.count = count;
   }
 
+  /**
+   * Gets the count.
+   *
+   * @return the count
+   */
   public Long getCount() {
     return count;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Sets the count.
+   *
+   * @param count the new count
+   */
   public void setCount(final Long count) {
     this.count = count;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(final String name) {
     this.name = name;
   }

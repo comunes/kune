@@ -24,5 +24,10 @@ package cc.kune.core.client.resources.icons;
 
 import com.google.gwt.resources.client.CssResource;
 
+/**
+ * The Interface IconCssResource.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface IconCssResource extends CssResource {
 }

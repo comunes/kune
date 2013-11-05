@@ -31,8 +31,31 @@ import cc.kune.core.client.ui.DefaultForm;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WizardFormDialog.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WizardFormDialog extends WizardDialog {
 
+  /**
+   * Instantiates a new wizard form dialog.
+   *
+   * @param dialogId the dialog id
+   * @param header the header
+   * @param modal the modal
+   * @param minimizable the minimizable
+   * @param width the width
+   * @param height the height
+   * @param backId the back id
+   * @param nextId the next id
+   * @param finishId the finish id
+   * @param cancelId the cancel id
+   * @param closeId the close id
+   * @param i18n the i18n
+   * @param maskWidget the mask widget
+   */
   public WizardFormDialog(final String dialogId, final String header, final boolean modal,
       final boolean minimizable, final String width, final String height, final String backId,
       final String nextId, final String finishId, final String cancelId, final String closeId,
@@ -41,6 +64,9 @@ public class WizardFormDialog extends WizardDialog {
         closeId, i18n, maskWidget);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.dialogs.wizard.WizardDialog#getWidgetCount(com.google.gwt.user.client.ui.IsWidget)
+   */
   @Override
   protected int getWidgetCount(final IsWidget view) {
     if (view instanceof Widget) {
@@ -51,6 +77,9 @@ public class WizardFormDialog extends WizardDialog {
     return -1;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.dialogs.wizard.WizardDialog#toWidget(com.google.gwt.user.client.ui.IsWidget)
+   */
   @Override
   protected Widget toWidget(final IsWidget view) {
     if (view instanceof Widget) {

@@ -131,8 +131,18 @@ import cc.kune.wave.server.kspecific.WaveEmailNotifier;
 import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PlatformServerModule.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PlatformServerModule extends AbstractExtendedModule {
 
+  /**
+   * Bind managers.
+   */
   private void bindManagers() {
     bind(UserManager.class).to(UserManagerDefault.class);
     bind(GroupManager.class).to(GroupManagerDefault.class);
@@ -156,6 +166,9 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(InvitationManager.class).to(InvitationManagerDefault.class);
   }
 
+  /**
+   * Bind rpc.
+   */
   private void bindRPC() {
     bind(SiteService.class).to(SiteRPC.class);
     bind(GroupService.class).to(GroupRPC.class);
@@ -168,6 +181,9 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(InvitationService.class).to(InvitationRPC.class);
   }
 
+  /**
+   * Bind services.
+   */
   private void bindServices() {
     bind(UserInfoService.class).to(UserInfoServiceDefault.class);
     bind(CreationService.class).to(CreationServiceDefault.class);
@@ -183,6 +199,9 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(ListServerService.class).to(ListServerServiceDefault.class);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.inject.AbstractModule#configure()
+   */
   @Override
   protected void configure() {
     // install(PersistService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());

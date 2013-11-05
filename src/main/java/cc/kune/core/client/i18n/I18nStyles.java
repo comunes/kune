@@ -26,10 +26,11 @@ import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.HeadElement;
 import com.google.gwt.dom.client.LinkElement;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
  * Some code from the StyleSheetLoader.java GWT's showcase
  * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nStyles {
 
@@ -40,7 +41,7 @@ public class I18nStyles {
    */
   private static native HeadElement getHeadElement()
   /*-{
-    return $doc.getElementsByTagName("head")[0];
+		return $doc.getElementsByTagName("head")[0];
   }-*/;
 
   /**
@@ -57,6 +58,12 @@ public class I18nStyles {
     getHeadElement().appendChild(linkElem);
   }
 
+  /**
+   * Sets the rtl.
+   * 
+   * @param isRTL
+   *          the new rtl
+   */
   public static void setRTL(final boolean isRTL) {
     // FIXME: This is added at the beginning (by getHeadElement) so ws.css
     // overwrite this

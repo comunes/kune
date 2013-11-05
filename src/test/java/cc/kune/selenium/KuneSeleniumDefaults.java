@@ -59,27 +59,68 @@ import cc.kune.selenium.spaces.UserSpacePageObject;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneSeleniumDefaults.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneSeleniumDefaults {
 
+  /** The Constant INJECTOR. */
   public static final Injector INJECTOR = Guice.createInjector(new SeleniumModule());
 
+  /** The Constant LOG. */
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
+  
+  /** The must close finally. */
   public static boolean mustCloseFinally = false;
+  
+  /** The base url. */
   private final String baseUrl;
+  
+  /** The chat. */
   protected final ChatPageObject chat;
+  
+  /** The entity header. */
   protected final EntityHeaderPageObject entityHeader;
+  
+  /** The group space. */
   protected GroupSpacePageObject groupSpace;
+  
+  /** The home space. */
   protected final HomeSpacePageObject homeSpace;
+  
+  /** The injector. */
   private final Injector injector;
+  
+  /** The login. */
   protected LoginPageObject login;
+  
+  /** The messages. */
   private final ResourceBundle messages;
+  
+  /** The new group. */
   protected NewGroupPageObject newGroup;
+  
+  /** The register. */
   protected RegisterPageObject register;
+  
+  /** The site. */
   protected final SitePageObject site;
+  
+  /** The subtitle popup. */
   private WebElement subtitlePopup;
+  
+  /** The user space. */
   protected UserSpacePageObject userSpace;
+  
+  /** The webdriver. */
   private final WebDriver webdriver;
 
+  /**
+   * Instantiates a new kune selenium defaults.
+   */
   public KuneSeleniumDefaults() {
     baseUrl = "http://" + SeleniumConf.SITE.getDomain() + "/" + SeleniumConf.SITE.getParams() + "#";
     injector = INJECTOR;
@@ -109,6 +150,11 @@ public class KuneSeleniumDefaults {
     messages = injector.getInstance(ResourceBundle.class);
   }
 
+  /**
+   * Answer on next prompt.
+   *
+   * @param answer the answer
+   */
   public void answerOnNextPrompt(final String answer) {
     final Alert alert = webdriver.switchTo().alert();
     alert.sendKeys(answer);
@@ -116,10 +162,18 @@ public class KuneSeleniumDefaults {
     alert.accept();
   }
 
+  /**
+   * Before methods.
+   *
+   * @param context the context
+   */
   @BeforeMethod
   public void beforeMethods(final ITestContext context) {
   }
 
+  /**
+   * Before suite.
+   */
   @BeforeSuite
   public void beforeSuite() {
     resize();
@@ -132,18 +186,30 @@ public class KuneSeleniumDefaults {
     login.getAnonMsg().click();
   }
 
+  /**
+   * Browser back.
+   */
   public void browserBack() {
     webdriver.navigate().back();
   }
 
+  /**
+   * Browser forward.
+   */
   public void browserForward() {
     webdriver.navigate().forward();
   }
 
+  /**
+   * Close.
+   */
   public void close() {
     webdriver.close();
   }
 
+  /**
+   * Close browser.
+   */
   @AfterSuite
   public void closeBrowser() {
     // We try to only open one window for all our selenium tests
@@ -152,18 +218,33 @@ public class KuneSeleniumDefaults {
     }
   }
 
+  /**
+   * Creates the correct login.
+   *
+   * @return the object[][]
+   */
   @DataProvider(name = "correctlogin")
   public Object[][] createCorrectLogin() {
     // The default correct user/password used in tests
     return new Object[][] { { SeleniumConstants.USER_SHORNAME, SeleniumConstants.USER_PASSWD } };
   }
 
+  /**
+   * Creates the correct register.
+   *
+   * @return the object[][]
+   */
   @DataProvider(name = "correctregister")
   public Object[][] createCorrectRegister() {
     // The default correct user/password used in tests
     return new Object[][] { { "jane", "Jane Doe", SeleniumConstants.USER_PASSWD, "jane@example.org" } };
   }
 
+  /**
+   * Creates the incorrect login.
+   *
+   * @return the object[][]
+   */
   @DataProvider(name = "incorrectlogin")
   public Object[][] createIncorrectLogin() {
     // Some pairs of user/passwd that must fail when try to login
@@ -171,14 +252,29 @@ public class KuneSeleniumDefaults {
         { "test1@localhost", "test" }, { "", "" } };
   }
 
+  /**
+   * Do screenshot.
+   *
+   * @param filename the filename
+   */
   public void doScreenshot(final String filename) {
     SeleniumUtils.doScreenshot(webdriver, filename);
   }
 
+  /**
+   * Gets the.
+   *
+   * @param url the url
+   */
   public void get(final String url) {
     webdriver.get(url);
   }
 
+  /**
+   * Gets the current history token.
+   *
+   * @return the current history token
+   */
   public String getCurrentHistoryToken() {
     final String currentUrl = webdriver.getCurrentUrl();
     LOG.info(String.format("Current url: %s", currentUrl));
@@ -186,23 +282,46 @@ public class KuneSeleniumDefaults {
     return splitted.length > 1 ? splitted[1] : "";
   }
 
+  /**
+   * Gets the page source.
+   *
+   * @return the page source
+   */
   public String getPageSource() {
     return webdriver.getPageSource();
   }
 
+  /**
+   * Goto token.
+   *
+   * @param token the token
+   */
   public void gotoToken(final StateToken token) {
     get(baseUrl + token);
   }
 
+  /**
+   * Goto token.
+   *
+   * @param token the token
+   */
   public void gotoToken(final String token) {
     get(baseUrl + token);
   }
 
+  /**
+   * Home.
+   */
   public void home() {
     assert baseUrl != null;
     webdriver.get(baseUrl);
   }
 
+  /**
+   * New groups.
+   *
+   * @return the object[][]
+   */
   @DataProvider(name = "newGroups")
   public Object[][] newGroups() {
     return new Object[][] { { "grp1", "吗台湾", "吗台湾 吗台湾 吗台湾 吗台湾", "吗 台湾", GroupType.CLOSED },
@@ -211,10 +330,18 @@ public class KuneSeleniumDefaults {
         { "grp0", "Ecologist Group", "Melbourne eco feminist group", "eco feminism", GroupType.PROJECT } };
   }
 
+  /**
+   * Open.
+   *
+   * @param url the url
+   */
   public void open(final String url) {
     webdriver.get(url);
   }
 
+  /**
+   * Resize.
+   */
   public void resize() {
     // Some others tested values:
     // 1024,769
@@ -228,12 +355,10 @@ public class KuneSeleniumDefaults {
   }
 
   /**
-   * Send keys but in a slow way (word by word)
-   * 
-   * @param element
-   *          the element
-   * @param strings
-   *          the strings
+   * Send keys but in a slow way (word by word).
+   *
+   * @param element the element
+   * @param strings the strings
    */
   public void sendKeys(final WebElement element, final String... strings) {
     for (final String s : strings) {
@@ -247,30 +372,71 @@ public class KuneSeleniumDefaults {
     }
   }
 
+  /**
+   * Sets the position.
+   *
+   * @param x the x
+   * @param y the y
+   */
   public void setPosition(final int x, final int y) {
     webdriver.manage().window().setPosition(new Point(x, y));
   }
 
+  /**
+   * Show cursor.
+   *
+   * @param x the x
+   * @param y the y
+   */
   public void showCursor(final int x, final int y) {
     SeleniumUtils.showCursor(webdriver, x, y);
   }
 
+  /**
+   * Show msg.
+   *
+   * @param msg the msg
+   */
   public void showMsg(final String msg) {
     SeleniumUtils.showMsg(webdriver, "", msg);
   }
 
+  /**
+   * Show msg.
+   *
+   * @param title the title
+   * @param msg the msg
+   */
   public void showMsg(final String title, final String msg) {
     SeleniumUtils.showMsg(webdriver, title, msg);
   }
 
+  /**
+   * Show title slide.
+   *
+   * @param title the title
+   */
   public void showTitleSlide(final String title) {
     showTitleSlide(title, "", getCurrentHistoryToken());
   }
 
+  /**
+   * Show title slide.
+   *
+   * @param title the title
+   * @param description the description
+   */
   public void showTitleSlide(final String title, final String description) {
     showTitleSlide(title, description, getCurrentHistoryToken());
   }
 
+  /**
+   * Show title slide.
+   *
+   * @param title the title
+   * @param description the description
+   * @param token the token
+   */
   public void showTitleSlide(final String title, final String description, final String token) {
     gotoToken(TokenUtils.subtitle(title, description, token));
     sleep(4000);
@@ -282,14 +448,30 @@ public class KuneSeleniumDefaults {
     // SeleniumUtils.moveMouseToAndClick(webdriver, subtitlePopup, 100, 100);
   }
 
+  /**
+   * Show tooltip.
+   *
+   * @param element the element
+   */
   public void showTooltip(final WebElement element) {
     SeleniumUtils.showTooltip(webdriver, element);
   }
 
+  /**
+   * Sleep.
+   *
+   * @param milliseconds the milliseconds
+   */
   public void sleep(final int milliseconds) {
     SeleniumUtils.sleep(milliseconds);
   }
 
+  /**
+   * T.
+   *
+   * @param message the message
+   * @return the string
+   */
   public String t(final String message) {
     final String methodName = I18nUtils.convertMethodName(message);
     try {

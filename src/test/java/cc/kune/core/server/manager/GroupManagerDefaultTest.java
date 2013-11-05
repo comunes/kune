@@ -42,10 +42,22 @@ import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
 import cc.kune.domain.SocialNetwork;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupManagerDefaultTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
+  /** The Constant PUBLIC_DESCRIP. */
   private static final String PUBLIC_DESCRIP = "Some public descrip";
 
+  /**
+   * Created group shoud have valid social network.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void createdGroupShoudHaveValidSocialNetwork() throws Exception {
     final Group group = new Group("short", "longName", defLicense, GroupType.PROJECT);
@@ -58,6 +70,11 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     closeTransaction();
   }
 
+  /**
+   * Creates the group.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void createGroup() throws Exception {
     final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
@@ -70,6 +87,12 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     closeTransaction();
   }
 
+  /**
+   * Creates the group and search.
+   *
+   * @throws Exception the exception
+   * @throws ParseException the parse exception
+   */
   @Test
   public void createGroupAndSearch() throws Exception, ParseException {
     final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
@@ -83,6 +106,11 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * Creates the group with existing long name.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = GroupLongNameInUseException.class)
   public void createGroupWithExistingLongName() throws Exception {
     final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
@@ -97,6 +125,11 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * Creates the group with existing short name.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = GroupShortNameInUseException.class)
   public void createGroupWithExistingShortName() throws Exception {
     final Group group = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,
@@ -110,12 +143,25 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * Creates the test group.
+   *
+   * @param number the number
+   * @throws Exception the exception
+   */
   private void createTestGroup(final int number) throws Exception {
     final Group g = new Group("ysei" + number, "Yellow Submarine Environmental Initiative " + number,
         defLicense, GroupType.PROJECT);
     groupManager.createGroup(g, user, PUBLIC_DESCRIP);
   }
 
+  /**
+   * Creates the user existing email.
+   *
+   * @throws I18nNotFoundException the i18n not found exception
+   * @throws GroupShortNameInUseException the group short name in use exception
+   * @throws EmailAddressInUseException the email address in use exception
+   */
   @Test(expected = EmailAddressInUseException.class)
   public void createUserExistingEmail() throws I18nNotFoundException, GroupShortNameInUseException,
       EmailAddressInUseException {
@@ -125,6 +171,13 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
         "GMT", true);
   }
 
+  /**
+   * Creates the user existing long name.
+   *
+   * @throws I18nNotFoundException the i18n not found exception
+   * @throws GroupShortNameInUseException the group short name in use exception
+   * @throws EmailAddressInUseException the email address in use exception
+   */
   @Test(expected = GroupLongNameInUseException.class)
   public void createUserExistingLongName() throws I18nNotFoundException, GroupShortNameInUseException,
       EmailAddressInUseException {
@@ -134,6 +187,13 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
         "GMT", true);
   }
 
+  /**
+   * Creates the user existing short name.
+   *
+   * @throws I18nNotFoundException the i18n not found exception
+   * @throws GroupShortNameInUseException the group short name in use exception
+   * @throws EmailAddressInUseException the email address in use exception
+   */
   @Test(expected = GroupShortNameInUseException.class)
   public void createUserExistingShortName() throws I18nNotFoundException, GroupShortNameInUseException,
       EmailAddressInUseException {
@@ -143,6 +203,11 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
         "GMT", true);
   }
 
+  /**
+   * Creates the user with existing email.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = EmailAddressInUseException.class)
   public void createUserWithExistingEmail() throws Exception {
     userManager.createUser("username2", "the user name 2", USER_EMAIL, "userPassword", "en", "GB",
@@ -150,6 +215,11 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * Creates the user with existing long name.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = GroupLongNameInUseException.class)
   public void createUserWithExistingLongName() throws Exception {
     userManager.createUser("username2", USER_LONG_NAME, "email2@example.com", "userPassword", "en",
@@ -157,6 +227,11 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * Creates the user with existing short name.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = GroupShortNameInUseException.class)
   public void createUserWithExistingShortName() throws Exception {
     userManager.createUser(USER_SHORT_NAME, "the user name 2", "email2@example.com", "userPassword",
@@ -164,6 +239,11 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * Creates the user with incorrect short name.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = UserRegistrationException.class)
   public void createUserWithIncorrectShortName() throws Exception {
     userManager.createUser("u s", "the user name 2", "email2@example.com", "userPassword", "en", "GB",
@@ -171,6 +251,11 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * Creates the user with very short name.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ConstraintViolationException.class)
   public void createUserWithVeryShortName() throws Exception {
     userManager.createUser("us", "the user name 2", "email2@example.com", "userPassword", "en", "GB",
@@ -178,6 +263,12 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * Group search pagination.
+   *
+   * @throws Exception the exception
+   * @throws ParseException the parse exception
+   */
   @Test
   public void groupSearchPagination() throws Exception, ParseException {
     for (int i = 1; i < 10; i++) {
@@ -194,6 +285,11 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * Same group has same hash.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void sameGroupHasSameHash() throws Exception {
     final Group group1 = new Group("ysei", "Yellow Submarine Environmental Initiative", defLicense,

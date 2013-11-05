@@ -22,10 +22,20 @@
  */
 package cc.kune.core.shared;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class ToolConstants {
 
+  /** The Constant UPLOADEDFILE_SUFFIX. */
   public static final String UPLOADEDFILE_SUFFIX = "uploaded";
 
+  /**
+   * Instantiates a new tool constants.
+   */
   private ToolConstants() {
 
   }

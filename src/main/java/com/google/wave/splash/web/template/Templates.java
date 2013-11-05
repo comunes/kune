@@ -43,6 +43,7 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import com.google.wave.splash.text.Markup;
 
+// TODO: Auto-generated Javadoc
 /**
  * Handles all our html templates, loading, parsing and processing them.
  * 
@@ -51,19 +52,40 @@ import com.google.wave.splash.text.Markup;
 @Singleton
 public class Templates {
   // Template file names go here.
+  /** The Constant BLIP_TEMPLATE. */
   public static final String BLIP_TEMPLATE = "blip.html.fragment";
+  
+  /** The Constant CLIENT_TEMPLATE. */
   public static final String CLIENT_TEMPLATE = "full_client.html";
+  
+  /** The Constant FEED_TEMPLATE. */
   public static final String FEED_TEMPLATE = "feed.html.fragment";
+  
+  /** The Constant HEADER_TEMPLATE. */
   public static final String HEADER_TEMPLATE = "header.html.fragment";
+  
+  /** The Constant LOG. */
   private static final Logger LOG = Logger.getLogger(Templates.class.getName());
+  
+  /** The Constant MOBILE_TEMPLATE. */
   public static final String MOBILE_TEMPLATE = "mobile_client.html";
+  
+  /** The Constant PERMALINK_WAVE_TEMPLATE. */
   public static final String PERMALINK_WAVE_TEMPLATE = "permalink_client.html";
+  
+  /** The Constant TEMPLATES_LOCATION. */
   private static final String TEMPLATES_LOCATION = "others/splash/";
+  
+  /** The Constant WAVE_NOT_FOUND_TEMPLATE. */
   public static final String WAVE_NOT_FOUND_TEMPLATE = "wave_not_found.html.fragment";
 
+  /** The markup. */
   private final Markup markup;
+  
+  /** The prefix. */
   private String prefix;
 
+  /** The production mode. */
   private final boolean productionMode = true;
   /**
    * file name of template -> compiled template lazy cache.
@@ -75,6 +97,12 @@ public class Templates {
     }
   });
 
+  /**
+   * Instantiates a new templates.
+   *
+   * @param markup the markup
+   * @param resourceBases the resource bases
+   */
   @Inject
   public Templates(final Markup markup,
       @Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
@@ -91,6 +119,12 @@ public class Templates {
     Preconditions.checkArgument(prefix != null, "Could not find templates");
   }
 
+  /**
+   * Load template.
+   *
+   * @param template the template
+   * @return the compiled template
+   */
   private CompiledTemplate loadTemplate(final String template) {
     // Load from jar if in production mode, otherwise servlet root.
     final InputStream input = openResource(template);

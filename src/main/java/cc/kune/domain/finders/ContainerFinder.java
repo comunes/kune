@@ -31,19 +31,53 @@ import cc.kune.domain.Group;
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ContainerFinder.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ContainerFinder {
+  
+  /**
+   * All containers in user group.
+   *
+   * @param groupId the group id
+   * @return the list
+   */
   @Finder(query = "FROM Container c WHERE " + "((:groupid IN (SELECT ed.id FROM "
       + "c.owner.socialNetwork.accessLists.editors.list AS ed)) OR" + "(:groupid IN (SELECT ad.id FROM "
       + "c.owner.socialNetwork.accessLists.admins.list AS ad)))", returnAs = ArrayList.class)
   public List<Container> allContainersInUserGroup(@Named("groupid") Long groupId);
 
+  /**
+   * Find if exists title.
+   *
+   * @param container the container
+   * @param title the title
+   * @return the long
+   */
   @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.parent = :container AND c.name LIKE :title")
   public Long findIfExistsTitle(@Named("container") final Container container,
       @Named("title") final String title);
 
+  /**
+   * Find if exists type id.
+   *
+   * @param group the group
+   * @param typeId the type id
+   * @return the long
+   */
   @Finder(query = "SELECT COUNT(*) FROM Container c WHERE c.typeId = :typeId AND c.owner = :owner")
   public Long findIfExistsTypeId(@Named("owner") final Group group, @Named("typeId") final String typeId);
 
+  /**
+   * Find type id.
+   *
+   * @param group the group
+   * @param typeId the type id
+   * @return the container
+   */
   @Finder(query = "FROM Container c WHERE c.typeId = :typeId AND c.owner = :owner")
   public Container findTypeId(@Named("owner") final Group group, @Named("typeId") final String typeId);
 

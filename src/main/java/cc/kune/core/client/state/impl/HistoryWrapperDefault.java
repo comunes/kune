@@ -27,8 +27,11 @@ import cc.kune.core.shared.domain.utils.StateToken;
 
 import com.google.gwt.user.client.History;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class HistoryWrapperDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HistoryWrapperDefault implements HistoryWrapper {
 

@@ -1,3 +1,25 @@
+/*
+ *
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under 
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public 
+ * License version 3, (the "License"); you may not use this file except in 
+ * compliance with the License. This file is part of kune.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 package net.auroris.ColorPicker.client;
 
 /**
@@ -187,16 +209,25 @@ import java.util.Map;
 
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
+// TODO: Auto-generated Javadoc
+
 /**
- * A helpful class to set transparencies in browsers GWT supports
+ * A helpful class to set transparencies in browsers GWT supports.
+ *
  * @author AurorisNET
  */
 public class TransparencyImpl
 {
     // Caches the original DXImageTransform.Microsoft.AlphaImageLoader settings for IE6
+    /** The map. */
     private static Map<Element, String> map = new HashMap<Element, String>();
 
     // Get IE version (provided by Microsoft)
+    /**
+     * Gets the iE version.
+     *
+     * @return the iE version
+     */
     public static native float getIEVersion()
     /*-{
         var rv = -1; // Return value assumes failure.
@@ -210,6 +241,12 @@ public class TransparencyImpl
         return rv;
     }-*/;
 
+    /**
+     * Sets the background color.
+     *
+     * @param elem the elem
+     * @param color the color
+     */
     public static void setBackgroundColor(Element elem, String color)
     {
         try
@@ -226,6 +263,12 @@ public class TransparencyImpl
      * 0 being fully transparent
      * @param elem A com.google.gwt.user.client.Element object
      * @param alpha An alpha value
+     */
+    /**
+     * Sets the transparency.
+     *
+     * @param elem the elem
+     * @param alpha the alpha
      */
     public static void setTransparency(Element elem, int alpha)
     {
@@ -278,6 +321,12 @@ public class TransparencyImpl
     }
     
     //workaround for to strict debugger....
+    /**
+     * Sets the moz opacity.
+     *
+     * @param elem the elem
+     * @param opacity the opacity
+     */
     private static native void setMozOpacity(Element elem, String opacity) /*-{
     	elem.style["-moz-opacity"] = opacity;
   	}-*/;

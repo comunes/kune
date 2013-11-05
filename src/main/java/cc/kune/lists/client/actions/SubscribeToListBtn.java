@@ -29,10 +29,25 @@ import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SubscribeToListBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SubscribeToListBtn extends ButtonDescriptor {
 
+  /** The Constant ID. */
   public static final String ID = "k-list-subs";
 
+  /**
+   * Instantiates a new subscribe to list btn.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param session the session
+   * @param res the res
+   */
   @Inject
   public SubscribeToListBtn(final I18nTranslationService i18n, final SubscriteToListAction action,
       final Session session, final IconicResources res) {

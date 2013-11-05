@@ -36,14 +36,39 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Label;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentTitleWidget.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentTitleWidget extends Composite {
+  
+  /** The Constant ID. */
   public static final String ID = "k-cnt-title-id";
+  
+  /** The editable title. */
   private final EditableLabel editableTitle;
+  
+  /** The gs armor. */
   private final GSpaceArmor gsArmor;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The icon registry. */
   private final IconsRegistry iconRegistry;
+  
+  /** The title icon. */
   private final Label titleIcon;
 
+  /**
+   * Instantiates a new content title widget.
+   *
+   * @param i18n the i18n
+   * @param gsArmor the gs armor
+   * @param iconRegistry the icon registry
+   */
   public ContentTitleWidget(final I18nTranslationService i18n, final GSpaceArmor gsArmor,
       final IconsRegistry iconRegistry) {
     this.i18n = i18n;
@@ -59,22 +84,46 @@ public class ContentTitleWidget extends Composite {
     ensureDebugId(ID);
   }
 
+  /**
+   * Edits the.
+   */
   public void edit() {
     editableTitle.edit();
   }
 
+  /**
+   * Gets the editable title.
+   *
+   * @return the editable title
+   */
   public HasEditHandler getEditableTitle() {
     return editableTitle;
   }
 
+  /**
+   * Highlight title.
+   */
   public void highlightTitle() {
     editableTitle.highlightTitle();
   }
 
+  /**
+   * Sets the text.
+   *
+   * @param text the new text
+   */
   public void setText(final String text) {
     editableTitle.setText(text);
   }
 
+  /**
+   * Sets the title.
+   *
+   * @param title the title
+   * @param typeId the type id
+   * @param mime the mime
+   * @param editable the editable
+   */
   public void setTitle(final String title, final String typeId, final BasicMimeTypeDTO mime,
       final boolean editable) {
     final ForIsWidget docHeader = gsArmor.getDocHeader();
@@ -97,6 +146,13 @@ public class ContentTitleWidget extends Composite {
     docHeader.add(this);
   }
 
+  /**
+   * Sets the title.
+   *
+   * @param title the title
+   * @param typeId the type id
+   * @param editable the editable
+   */
   public void setTitle(final String title, final String typeId, final boolean editable) {
     setTitle(title, typeId, null, editable);
   }

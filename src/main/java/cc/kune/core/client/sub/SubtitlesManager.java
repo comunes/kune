@@ -35,24 +35,65 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SubtitlesManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SubtitlesManager extends
     Presenter<SubtitlesManager.SubtitlesView, SubtitlesManager.SubtitlesProxy> {
 
+  /**
+   * The Interface SubtitlesProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface SubtitlesProxy extends Proxy<SubtitlesManager> {
   }
 
+  /**
+   * The Interface SubtitlesView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface SubtitlesView extends View {
 
+    /**
+     * Sets the description.
+     *
+     * @param descr the new description
+     */
     void setDescription(String descr);
 
+    /**
+     * Sets the title text.
+     *
+     * @param text the new title text
+     */
     void setTitleText(String text);
 
+    /**
+     * Show.
+     *
+     * @param atShowEnd the at show end
+     */
     void show(final SimpleCallback atShowEnd);
 
   }
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new subtitles manager.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param stateManager the state manager
+   */
   @Inject
   public SubtitlesManager(final EventBus eventBus, final SubtitlesView view, final SubtitlesProxy proxy,
       final StateManager stateManager) {
@@ -60,11 +101,19 @@ public class SubtitlesManager extends
     this.stateManager = stateManager;
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /**
+   * Show.
+   *
+   * @param token the token
+   */
   public void show(final String token) {
     final String[] params = token.split("\\|");
     final int len = params.length;

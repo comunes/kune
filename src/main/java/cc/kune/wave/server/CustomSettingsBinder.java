@@ -39,12 +39,14 @@ import com.google.inject.Module;
 import com.google.inject.TypeLiteral;
 import com.google.inject.name.Names;
 
+// TODO: Auto-generated Javadoc
 /**
  * A property file parsing system that converts a given
- * settings class into a Guice module with injectable
+ * settings class into a Guice module with injectable.
+ *
  * @Named parameters.
  * 
- *        Originally based on some CLI work by arb@google.com (Anthony Baxter).
+ * Originally based on some CLI work by arb@google.com (Anthony Baxter).
  * Refactored by tad.glines@gmail.com (Tad Glines) to use Commons Configuration and add support for
  * List<String>.
  */
@@ -53,11 +55,21 @@ public class CustomSettingsBinder {
   /**
    * Used to validate that a type is supported. Some types may have generic parameters that need
    * to be checked.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   private interface SettingTypeValidator {
+    
+    /**
+     * Check.
+     *
+     * @param type the type
+     * @return true, if successful
+     */
     boolean check(Type type);
   }
 
+  /** The Constant supportedSettingTypes. */
   private static final Map<Type, SettingTypeValidator> supportedSettingTypes;
 
   /**
@@ -100,7 +112,9 @@ public class CustomSettingsBinder {
 
   /**
    * Bind configuration parameters into Guice Module.
-   * 
+   *
+   * @param propertyFile the property file
+   * @param settingsArg the settings arg
    * @return a Guice module configured with setting support.
    * @throws ConfigurationException on configuration error
    */

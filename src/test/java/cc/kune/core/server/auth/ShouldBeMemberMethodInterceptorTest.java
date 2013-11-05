@@ -37,12 +37,26 @@ import cc.kune.core.shared.domain.AccessRol;
 
 import com.google.inject.persist.Transactional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShouldBeMemberMethodInterceptorTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ShouldBeMemberMethodInterceptorTest extends IntegrationTest {
 
+  /** The invocation. */
   private MethodInvocation invocation;
+  
+  /** The annotation. */
   private ShouldBeMember annotation;
+  
+  /** The translator interceptor. */
   private ShouldBeMemberMethodInterceptor translatorInterceptor;
 
+  /**
+   * Before.
+   */
   @Transactional
   @Before
   public void before() {
@@ -56,6 +70,11 @@ public class ShouldBeMemberMethodInterceptorTest extends IntegrationTest {
     Mockito.when(accessibleObject.getAnnotation(ShouldBeMember.class)).thenReturn(annotation);
   }
 
+  /**
+   * Invoke.
+   *
+   * @throws Throwable the throwable
+   */
   private void invoke() throws Throwable {
       Mockito.when(annotation.rol()).thenReturn(AccessRol.Administrator);
       Mockito.when(annotation.groupKuneProperty()).thenReturn(KuneProperties.UI_TRANSLATOR_GROUP);
@@ -64,12 +83,22 @@ public class ShouldBeMemberMethodInterceptorTest extends IntegrationTest {
     translatorInterceptor.invoke(invocation);
   }
 
+  /**
+   * Not member throws excep.
+   *
+   * @throws Throwable the throwable
+   */
   @Test(expected = AccessViolationException.class)
   public void notMemberThrowsExcep() throws Throwable {
     doLoginWithDummyUser();
     invoke();
   }
 
+  /**
+   * Super admin do the job.
+   *
+   * @throws Throwable the throwable
+   */
   @Test
   public void superAdminDoTheJob() throws Throwable {
     doLogin();

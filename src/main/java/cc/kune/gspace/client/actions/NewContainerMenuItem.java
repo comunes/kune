@@ -35,18 +35,38 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewContainerMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewContainerMenuItem extends MenuItemDescriptor {
 
+  /**
+   * The Class NewContainerAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class NewContainerAction extends RolAction {
 
+    /** The content service. */
     private final ContentServiceHelper contentService;
 
+    /**
+     * Instantiates a new new container action.
+     *
+     * @param contentService the content service
+     */
     @Inject
     public NewContainerAction(final ContentServiceHelper contentService) {
       super(AccessRolDTO.Editor, true);
       this.contentService = contentService;
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       contentService.addContainer((String) getValue(ID), (String) getValue(NEW_NAME));
@@ -54,9 +74,24 @@ public class NewContainerMenuItem extends MenuItemDescriptor {
 
   }
 
+  /** The Constant ID. */
   private static final String ID = "ctnernewid";
+  
+  /** The Constant NEW_NAME. */
   private static final String NEW_NAME = "ctnernewname";
 
+  /**
+   * Instantiates a new new container menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param icon the icon
+   * @param title the title
+   * @param tooltip the tooltip
+   * @param newName the new name
+   * @param id the id
+   * @param parent the parent
+   */
   public NewContainerMenuItem(final I18nTranslationService i18n, final NewContainerAction action,
       final ImageResource icon, final String title, final String tooltip, final String newName,
       final String id, final @Nonnull MenuDescriptor parent) {

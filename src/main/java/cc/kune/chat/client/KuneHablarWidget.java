@@ -32,9 +32,24 @@ import com.google.gwt.uibinder.client.UiConstructor;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneHablarWidget.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneHablarWidget extends LayoutPanel implements HablarDisplay {
+  
+  /**
+   * The Class HablarNoLoggerEventBus.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public class HablarNoLoggerEventBus extends DefaultEventBus {
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.event.shared.HandlerManager#fireEvent(com.google.gwt.event.shared.GwtEvent)
+     */
     @Override
     public void fireEvent(final GwtEvent<?> event) {
       // GWT.log("EVENT: " + event.toDebugString(), null);
@@ -42,8 +57,15 @@ public class KuneHablarWidget extends LayoutPanel implements HablarDisplay {
     }
   }
 
+  /** The hablar. */
   private final Hablar hablar;
 
+  /**
+   * Instantiates a new kune hablar widget.
+   *
+   * @param layout the layout
+   * @param tabHeaderSize the tab header size
+   */
   @UiConstructor
   public KuneHablarWidget(final Layout layout, final TabHeaderSize tabHeaderSize) {
     addStyleName("hablar-HablarWidget");
@@ -56,17 +78,28 @@ public class KuneHablarWidget extends LayoutPanel implements HablarDisplay {
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.Widget#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return this;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.LayoutPanel#forceLayout()
+   */
   @Override
   public void forceLayout() {
     // GWT.log("FORCE LAYOUT");
     super.forceLayout();
   }
 
+  /**
+   * Gets the hablar.
+   *
+   * @return the hablar
+   */
   public Hablar getHablar() {
     return hablar;
   }

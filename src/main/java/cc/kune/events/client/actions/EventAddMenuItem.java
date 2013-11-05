@@ -51,17 +51,54 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventAddMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class EventAddMenuItem extends MenuItemDescriptor {
+  
+  /**
+   * The Class EventAddAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class EventAddAction extends CalendarRolAction {
+    
+    /** The calendar. */
     private final Provider<CalendarViewer> calendar;
+    
+    /** The cont service. */
     private final Provider<ContentServiceAsync> contService;
+    
+    /** The dialog. */
     private PromptTopDialog dialog;
+    
+    /** The i18n. */
     private final I18nTranslationService i18n;
+    
+    /** The open after creation. */
     private boolean openAfterCreation;
+    
+    /** The session. */
     private final Session session;
+    
+    /** The state manager. */
     private final StateManager stateManager;
 
+    /**
+     * Instantiates a new event add action.
+     *
+     * @param res the res
+     * @param i18n the i18n
+     * @param calendar the calendar
+     * @param contService the cont service
+     * @param session the session
+     * @param stateManager the state manager
+     * @param eventBus the event bus
+     */
     @Inject
     public EventAddAction(final IconicResources res, final I18nTranslationService i18n,
         final Provider<CalendarViewer> calendar, final Provider<ContentServiceAsync> contService,
@@ -75,6 +112,9 @@ public class EventAddMenuItem extends MenuItemDescriptor {
       withText(i18n.t("Add an appointment")).withIcon(res.eventAdd());
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       if (dialog == null) {
@@ -106,6 +146,9 @@ public class EventAddMenuItem extends MenuItemDescriptor {
       dialog.focusOnTextBox();
     }
 
+    /**
+     * Do action.
+     */
     private void doAction() {
       if (dialog.isValid()) {
 
@@ -147,15 +190,31 @@ public class EventAddMenuItem extends MenuItemDescriptor {
       }
     }
 
+    /**
+     * Sets the open after creation.
+     *
+     * @param openAfterCreation the new open after creation
+     */
     public void setOpenAfterCreation(final boolean openAfterCreation) {
       this.openAfterCreation = openAfterCreation;
     }
   }
 
+  /** The Constant CREATE_APP_ADD_ID. */
   public static final String CREATE_APP_ADD_ID = "event-add-menu-item-add-btn";
+  
+  /** The Constant CREATE_APP_CANCEL_ID. */
   public static final String CREATE_APP_CANCEL_ID = "event-add-menu-item-add-btn";
+  
+  /** The Constant CREATE_APP_ID. */
   public static final String CREATE_APP_ID = "event-add-menu-item-form";
 
+  /**
+   * Instantiates a new event add menu item.
+   *
+   * @param action the action
+   * @param cal the cal
+   */
   @Inject
   public EventAddMenuItem(final EventAddAction action, final CalendarOnOverMenu cal) {
     super(action);

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
   <name>kune-java-gadget-lib</name>
-  <comment>A java gadget library for kune to help the creation of kune gadgets. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <comment>A java gadget library for kune to help the creation of kune
+    gadgets. NO_M2ECLIPSE_SUPPORT: Project files created with the
+    maven-eclipse-plugin are not supported in M2Eclipse.</comment>
   <projects/>
   <buildSpec>
     <buildCommand>

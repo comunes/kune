@@ -1,3 +1,25 @@
+/*
+ *
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under 
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public 
+ * License version 3, (the "License"); you may not use this file except in 
+ * compliance with the License. This file is part of kune.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
 package net.auroris.ColorPicker.client;
 
 /**
@@ -192,35 +214,74 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 
+// TODO: Auto-generated Javadoc
 /**
  * Implements the SliderBar control.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SliderBar extends HTML
 {
+    
+    /** The Constant BarA. */
     public static final int BarA = 1;
+    
+    /** The Constant BarB. */
     public static final int BarB = 2;
+    
+    /** The Constant BarC. */
     public static final int BarC = 3;
+    
+    /** The Constant BarD. */
     public static final int BarD = 4;
+    
+    /** The Constant Blue. */
     public static final int Blue = 6;
+    
+    /** The Constant Brightness. */
     public static final int Brightness = 2;
+    
+    /** The Constant Green. */
     public static final int Green = 5;
+    
+    /** The Constant Saturation. */
     public static final int Saturation = 1;
+    
+    /** The Constant Hue. */
     public static final int Hue = 3;
+    
+    /** The Constant Red. */
     public static final int Red = 4;
 
+    /** The color a. */
     private Image colorA;
+    
+    /** The color b. */
     private Image colorB;
+    
+    /** The color c. */
     private Image colorC;
+    
+    /** The color d. */
     private Image colorD;
+    
+    /** The slider. */
     private Image slider;
 
+    /** The cp image bundle. */
     private ColorPickerImageResource cpImageBundle;
+    
+    /** The parent. */
     private ColorPicker parent = null;
 
+    /** The captured mouse. */
     private boolean capturedMouse = false;
 
-    /***
+    /**
+     * *
      * Initialize the SliderMap -- default mode is Saturation.
+     *
+     * @param parent the parent
      */
     public SliderBar(ColorPicker parent)
     {
@@ -331,7 +392,8 @@ public final class SliderBar extends HTML
     }
 
     /**
-     * Sets the color selection mode
+     * Sets the color selection mode.
+     *
      * @param mode Can be one of: ColorBar.Saturation, ColorBar.Hue, ColorBar.Brightness, ColorBar.Red, ColorBar.Green, ColorBar.Blue, ColorBar.Red.
      */
     public void setColorSelectMode(int mode)
@@ -385,7 +447,8 @@ public final class SliderBar extends HTML
     }
 
     /**
-     * Sets the color of a particular layer
+     * Sets the color of a particular layer.
+     *
      * @param color Hexadecimal notation of RGB to change the layer's color
      * @param layer Which layer to affect
      */

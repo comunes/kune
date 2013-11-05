@@ -34,10 +34,22 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneDragController.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneDragController extends PickupDragController {
 
+  /** The main panel. */
   private final Widget mainPanel;
 
+  /**
+   * Instantiates a new kune drag controller.
+   *
+   * @param armor the armor
+   */
   @Inject
   public KuneDragController(final GSpaceArmor armor) {
     super(RootPanel.get(), false);
@@ -57,12 +69,18 @@ public class KuneDragController extends PickupDragController {
     setRootPanelSize();
   }
 
+  /* (non-Javadoc)
+   * @see com.allen_sauer.gwt.dnd.client.PickupDragController#dragEnd()
+   */
   @Override
   public void dragEnd() {
     super.dragEnd();
     clearSelection();
   }
 
+  /**
+   * Sets the root panel size.
+   */
   private void setRootPanelSize() {
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       @Override

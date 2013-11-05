@@ -29,29 +29,51 @@ import cc.kune.core.shared.SessionConstants;
 
 import com.google.gwt.user.client.Cookies;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CookiesManagerImpl.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CookiesManagerImpl implements CookiesManager {
 
+  /** The Constant ANON. */
   private static final String ANON = "annon";
 
+  /**
+   * Instantiates a new cookies manager impl.
+   */
   public CookiesManagerImpl() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.cookies.CookiesManager#getAnonCookie()
+   */
   @Override
   public String getAnonCookie() {
     return Cookies.getCookie(ANON);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.cookies.CookiesManager#getAuthCookie()
+   */
   @Override
   public String getAuthCookie() {
     return Cookies.getCookie(SessionConstants.USERHASH);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.cookies.CookiesManager#removeAnonCookie()
+   */
   @Override
   public void removeAnonCookie() {
     Cookies.removeCookie(ANON);
     Cookies.setCookie(ANON, null, new Date(0), null, "/", false);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.cookies.CookiesManager#removeAuthCookie()
+   */
   @Override
   public void removeAuthCookie() {
     // FIXME: Remove cookie doesn't works in all browsers, know
@@ -65,6 +87,9 @@ public class CookiesManagerImpl implements CookiesManager {
     Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), null, "/", false);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.cookies.CookiesManager#setAnonCookie(java.lang.Boolean)
+   */
   @Override
   public void setAnonCookie(final Boolean userRegister) {
     final Date expires = new Date(System.currentTimeMillis()
@@ -73,6 +98,9 @@ public class CookiesManagerImpl implements CookiesManager {
     Cookies.setCookie(ANON, userRegister.toString(), expires, null, "/", false);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.cookies.CookiesManager#setAuthCookie(java.lang.String)
+   */
   @Override
   public void setAuthCookie(final String userHash) {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ

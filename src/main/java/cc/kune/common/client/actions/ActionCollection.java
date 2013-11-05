@@ -24,8 +24,15 @@ package cc.kune.common.client.actions;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ActionCollection.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ActionCollection extends ArrayList<AbstractAction> {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -3308296009308246636L;
 
 }

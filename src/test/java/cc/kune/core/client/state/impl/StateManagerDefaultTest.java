@@ -57,27 +57,71 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StateManagerDefaultTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StateManagerDefaultTest {
 
+  /** The Constant EMPTY_TOKEN. */
   private static final StateToken EMPTY_TOKEN = null;
+  
+  /** The Constant GROUP1_TOOL1. */
   private static final StateToken GROUP1_TOOL1 = new StateToken("group1.tool1");
+  
+  /** The Constant GROUP1_TOOL2. */
   private static final StateToken GROUP1_TOOL2 = new StateToken("group1.tool2");
+  
+  /** The Constant GROUP2_TOOL1. */
   private static final StateToken GROUP2_TOOL1 = new StateToken("group2.tool1");
+  
+  /** The Constant HASH. */
   private static final String HASH = "someUserHash";
+  
+  /** The before change listener1. */
   private BeforeActionListener beforeChangeListener1;
+  
+  /** The before change listener2. */
   private BeforeActionListener beforeChangeListener2;
+  
+  /** The content provider. */
   private ContentCache contentProvider;
+  
+  /** The event bus. */
   private EventBusTester eventBus;
+  
+  /** The group change handler. */
   private GroupChangedHandler groupChangeHandler;
+  
+  /** The history. */
   private HistoryWrapper history;
+  
+  /** The session. */
   private Session session;
+  
+  /** The site tokens. */
   private SiteTokenListeners siteTokens;
+  
+  /** The state. */
   private StateAbstractDTO state;
+  
+  /** The state change handler. */
   private StateChangedHandler stateChangeHandler;
+  
+  /** The state manager. */
   private StateManagerDefault stateManager;
+  
+  /** The token matcher. */
   private TokenMatcher tokenMatcher;
+  
+  /** The tool change handler. */
   private ToolChangedHandler toolChangeHandler;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     contentProvider = Mockito.mock(ContentCache.class);
@@ -123,6 +167,9 @@ public class StateManagerDefaultTest {
     // new NotifyUser(null, null);
   }
 
+  /**
+   * Change group with no tool.
+   */
   @Test
   public void changeGroupWithNoTool() {
     changeState("group1", "group2");
@@ -134,6 +181,11 @@ public class StateManagerDefaultTest {
         (GroupChangedEvent) Mockito.anyObject());
   }
 
+  /**
+   * Change state.
+   *
+   * @param tokens the tokens
+   */
   private void changeState(final String... tokens) {
     for (final String token : tokens) {
       Mockito.when(state.getStateToken()).thenReturn(new StateToken(token));
@@ -141,6 +193,9 @@ public class StateManagerDefaultTest {
     }
   }
 
+  /**
+   * Change state with different and groups tools must fire listener.
+   */
   @Test
   public void changeStateWithDifferentAndGroupsToolsMustFireListener() {
     changeState("group2.tool1", "group1.tool2");
@@ -160,6 +215,9 @@ public class StateManagerDefaultTest {
         new ToolChangedEvent(GROUP2_TOOL1, GROUP1_TOOL2));
   }
 
+  /**
+   * Change state with different groups must fire listener.
+   */
   @Test
   public void changeStateWithDifferentGroupsMustFireListener() {
     changeState("group1.tool1", "group2.tool1");
@@ -182,6 +240,9 @@ public class StateManagerDefaultTest {
 
   }
 
+  /**
+   * Change state with different tools must fire listener.
+   */
   @Test
   public void changeStateWithDifferentToolsMustFireListener() {
     changeState("group1.tool1", "group1.tool2");
@@ -199,6 +260,9 @@ public class StateManagerDefaultTest {
         new ToolChangedEvent(GROUP1_TOOL1, GROUP1_TOOL2));
   }
 
+  /**
+   * Change to no tool.
+   */
   @Test
   public void changeToNoTool() {
     changeState("group1.tool1", "group1");
@@ -216,6 +280,9 @@ public class StateManagerDefaultTest {
         new ToolChangedEvent(GROUP1_TOOL1, new StateToken("group1")));
   }
 
+  /**
+   * Change to same token.
+   */
   @Test
   public void changeToSameToken() {
     changeState("group1.tool1", "group1.tool1");
@@ -231,6 +298,13 @@ public class StateManagerDefaultTest {
         new ToolChangedEvent(EMPTY_TOKEN, GROUP1_TOOL1));
   }
 
+  /**
+   * Conf before state change listeners.
+   *
+   * @param value the value
+   * @param value2 the value2
+   * @return the string
+   */
   private String confBeforeStateChangeListeners(final boolean value, final boolean value2) {
     stateManager.addBeforeStateChangeListener(beforeChangeListener1);
     stateManager.addBeforeStateChangeListener(beforeChangeListener2);
@@ -240,16 +314,29 @@ public class StateManagerDefaultTest {
     return newToken;
   }
 
+  /**
+   * Gets the def group.
+   *
+   * @return the def group
+   */
   @Test
   public void getDefGroup() {
     stateManager.processHistoryToken("site.docs");
     verifyGetServerContent();
   }
 
+  /**
+   * Gets the wave token.
+   *
+   * @return the wave token
+   */
   public void getWaveToken() {
     stateManager.processHistoryToken("example.com/w+abcd/~/conv+root/b+45kg");
   }
 
+  /**
+   * Normal start logged user.
+   */
   @Test
   public void normalStartLoggedUser() {
     // When a user enter reload state, also if the application is starting
@@ -259,6 +346,9 @@ public class StateManagerDefaultTest {
     verifyGetServerContent();
   }
 
+  /**
+   * One before state change listener add and remove.
+   */
   @Test
   public void oneBeforeStateChangeListenerAddAndRemove() {
     final String newToken = confBeforeStateChangeListeners(false, false);
@@ -268,6 +358,9 @@ public class StateManagerDefaultTest {
     verifyGetServerContent();
   }
 
+  /**
+   * One before state change listener false and resume.
+   */
   @Test
   public void oneBeforeStateChangeListenerFalseAndResume() {
     final String token = confBeforeStateChangeListeners(false, true);
@@ -278,6 +371,9 @@ public class StateManagerDefaultTest {
     Mockito.verify(history, Mockito.times(1)).newItem(token);
   }
 
+  /**
+   * One before state change listener return false.
+   */
   @SuppressWarnings("unchecked")
   @Test
   public void oneBeforeStateChangeListenerReturnFalse() {
@@ -286,6 +382,9 @@ public class StateManagerDefaultTest {
         (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
   }
 
+  /**
+   * One before state change listener return false with two.
+   */
   @SuppressWarnings("unchecked")
   @Test
   public void oneBeforeStateChangeListenerReturnFalseWithTwo() {
@@ -294,17 +393,26 @@ public class StateManagerDefaultTest {
         (StateToken) Mockito.anyObject(), (AsyncCallback<StateAbstractDTO>) Mockito.anyObject());
   }
 
+  /**
+   * One before state change listener return true.
+   */
   @Test
   public void oneBeforeStateChangeListenerReturnTrue() {
     stateManager.processHistoryToken(confBeforeStateChangeListeners(true, true));
     verifyGetServerContent();
   }
 
+  /**
+   * Removes the before state change listener.
+   */
   private void removeBeforeStateChangeListener() {
     stateManager.removeBeforeStateChangeListener(beforeChangeListener1);
     stateManager.removeBeforeStateChangeListener(beforeChangeListener2);
   }
 
+  /**
+   * Site token first load def content and fire listener.
+   */
   @Test
   public void siteTokenFirstLoadDefContentAndFireListener() {
     final HistoryTokenCallback listener = Mockito.mock(HistoryTokenCallback.class);
@@ -315,6 +423,9 @@ public class StateManagerDefaultTest {
     verifyGetServerContent();
   }
 
+  /**
+   * Start must load content.
+   */
   @Test
   public void startMustLoadContent() {
     final InitDataDTO initData = Mockito.mock(InitDataDTO.class);
@@ -323,6 +434,9 @@ public class StateManagerDefaultTest {
     verifyGetServerContent();
   }
 
+  /**
+   * Verify get server content.
+   */
   @SuppressWarnings("unchecked")
   private void verifyGetServerContent() {
     Mockito.verify(contentProvider, Mockito.times(1)).getContent(Mockito.anyString(),

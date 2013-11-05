@@ -28,12 +28,16 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class WaveDestinationProvider. A WaveRef is used to get the participants
  * and to send notifications to them
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveDestinationProvider implements DestinationProvider {
 
+  /** The author. */
   private final String author;
 
   /** The list. */
@@ -44,9 +48,9 @@ public class WaveDestinationProvider implements DestinationProvider {
 
   /**
    * Instantiates a new wave destination provider.
-   * 
-   * @param ref
-   *          the ref
+   *
+   * @param ref the ref
+   * @param author the author
    */
   public WaveDestinationProvider(final WaveRef ref, final String author) {
     this.ref = ref;

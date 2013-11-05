@@ -37,12 +37,27 @@ import cc.kune.domain.finders.GroupFinder;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StatsServiceTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StatsServiceTest extends IntegrationTest {
+  
+  /** The group finder. */
   @Inject
   GroupFinder groupFinder;
+  
+  /** The stats service. */
   @Inject
   StatsService statsService;
 
+  /**
+   * Check stats.
+   *
+   * @param homeStats the home stats
+   */
   private void checkStats(final HomeStats homeStats) {
     assertTrue(homeStats.getTotalGroups() > 0);
     assertTrue(homeStats.getTotalUsers() > 0);
@@ -52,18 +67,27 @@ public class StatsServiceTest extends IntegrationTest {
     assertTrue(lastContentsOfMyGroups == null || lastContentsOfMyGroups.size() > 0);
   }
 
+  /**
+   * Inits the.
+   */
   @Transactional
   @Before
   public void init() {
     new IntegrationTestHelper(true, this);
   }
 
+  /**
+   * Test basic stats.
+   */
   @Test
   public void testBasicStats() {
     final HomeStats homeStats = statsService.getHomeStats();
     checkStats(homeStats);
   }
 
+  /**
+   * Test logged stats.
+   */
   @Test
   public void testLoggedStats() {
     final HomeStats homeStats = statsService.getHomeStats(groupFinder.findByShortName(getSiteAdminShortName()));

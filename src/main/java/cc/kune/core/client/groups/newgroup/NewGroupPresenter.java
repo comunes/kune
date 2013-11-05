@@ -65,21 +65,58 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewGroupPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter.NewGroupProxy>
     implements NewGroup {
 
+  /**
+   * The Interface NewGroupProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface NewGroupProxy extends Proxy<NewGroupPresenter> {
   }
 
+  /** The group options. */
   private final GroupOptions groupOptions;
+  
+  /** The group service. */
   private final Provider<GroupServiceAsync> groupService;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The just created a group. */
   private boolean justCreatedAGroup;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The sign in. */
   private final Provider<SignIn> signIn;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new new group presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param i18n the i18n
+   * @param session the session
+   * @param stateManager the state manager
+   * @param groupService the group service
+   * @param signIn the sign in
+   * @param groupOptions the group options
+   */
   @Inject
   public NewGroupPresenter(final EventBus eventBus, final NewGroupView view, final NewGroupProxy proxy,
       final I18nTranslationService i18n, final Session session, final StateManager stateManager,
@@ -94,6 +131,9 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     this.groupOptions = groupOptions;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.groups.newgroup.NewGroup#doNewGroup()
+   */
   @Override
   public void doNewGroup() {
     justCreatedAGroup = false;
@@ -117,7 +157,9 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /**
    * Automatically generate a "short name" for a group, after typing the
-   * "long name":
+   * "long name":.
+   *
+   * @return the string
    */
   protected String generateShortName() {
     String autoGenShort = getView().getLongName();
@@ -141,6 +183,11 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     return null;
   }
 
+  /**
+   * Gets the type of group.
+   *
+   * @return the type of group
+   */
   private GroupType getTypeOfGroup() {
     // Duplicate in GroupOptGeneralPanel
     if (getView().isProject()) {
@@ -154,6 +201,9 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
+   */
   @Override
   protected void onBind() {
     super.onBind();
@@ -184,11 +234,17 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     }, BlurEvent.getType());
   }
 
+  /**
+   * On cancel.
+   */
   public void onCancel() {
     getView().hide();
     getView().unMask();
   }
 
+  /**
+   * On close.
+   */
   public void onClose() {
     reset();
     if (!justCreatedAGroup) {
@@ -196,6 +252,9 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     }
   }
 
+  /**
+   * On register.
+   */
   private void onRegister() {
     getView().hideMessage();
     final ReservedWordsRegistryDTO reservedWords = session.getInitData().getReservedWords();
@@ -260,15 +319,27 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     }
   }
 
+  /**
+   * Reset.
+   */
   private void reset() {
     getView().clearData();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /**
+   * Sets the message.
+   *
+   * @param message the message
+   * @param level the level
+   */
   public void setMessage(final String message, final NotifyLevel level) {
     getView().setMessage(message, level);
   }

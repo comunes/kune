@@ -41,23 +41,44 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractGxtButtonGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
 
+  /** The button. */
   private Button button;
 
+  /**
+   * Instantiates a new abstract gxt button gui.
+   */
   public AbstractGxtButtonGui() {
     super();
   }
 
+  /**
+   * Instantiates a new abstract gxt button gui.
+   *
+   * @param buttonDescriptor the button descriptor
+   */
   public AbstractGxtButtonGui(final ButtonDescriptor buttonDescriptor) {
     super(buttonDescriptor);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang.String)
+   */
   @Override
   protected void addStyle(final String style) {
     button.addStyleName(style);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
@@ -94,39 +115,62 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
     return this;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
+   */
   @Override
   protected void setEnabled(final boolean enabled) {
     button.setEnabled(enabled);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+   */
   @Override
   public void setIcon(final KuneIcon icon) {
     // TODO Auto-generated method stub
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+   */
   @Override
   public void setIconBackground(final String backgroundColor) {
     throw new NotImplementedException();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google.gwt.resources.client.ImageResource)
+   */
   @Override
   public void setIconResource(final ImageResource icon) {
     button.setIcon(AbstractImagePrototype.create(icon));
     button.setScale(ButtonScale.SMALL);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+   */
   @Override
   protected void setIconStyle(final String style) {
     button.setIconStyle(style);
     button.setScale(ButtonScale.SMALL);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+   */
   @Override
   public void setIconUrl(final String url) {
     throw new NotImplementedException();
   }
 
+  /**
+   * Sets the pressed.
+   *
+   * @param pressed the new pressed
+   */
   public void setPressed(final boolean pressed) {
     final ToggleButton toggleButton = (ToggleButton) button;
 
@@ -135,11 +179,17 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+   */
   @Override
   protected void setText(final String text) {
     button.setText(text);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     if (button.isRendered()) {
@@ -148,6 +198,9 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
     button.setVisible(visible);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
+   */
   @Override
   public boolean shouldBeAdded() {
     return !descriptor.isChild();

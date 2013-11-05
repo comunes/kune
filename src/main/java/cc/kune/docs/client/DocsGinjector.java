@@ -24,8 +24,19 @@ package cc.kune.docs.client;
 
 import com.google.gwt.inject.client.Ginjector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface DocsGinjector.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface DocsGinjector extends Ginjector {
 
+  /**
+   * Gets the docs parts.
+   *
+   * @return the docs parts
+   */
   DocsParts getDocsParts();
 
 }

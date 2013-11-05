@@ -25,51 +25,132 @@ package cc.kune.core.client.resources.icons;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface IconResources.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Deprecated
 public interface IconResources extends ClientBundle {
 
+  /**
+   * Adds the green.
+   *
+   * @return the image resource
+   */
   @Source("add-green.png")
   ImageResource addGreen();
 
+  /**
+   * Bug.
+   *
+   * @return the image resource
+   */
   @Source("bug.png")
   ImageResource bug();
 
+  /**
+   * Checked.
+   *
+   * @return the image resource
+   */
   @Source("checked.png")
   ImageResource checked();
 
+  /**
+   * Css.
+   *
+   * @return the icon css resource
+   */
   @Source("kicon.css")
   IconCssResource css();
 
+  /**
+   * Del green.
+   *
+   * @return the image resource
+   */
   @Source("del-green.png")
   ImageResource delGreen();
 
+  /**
+   * Group home.
+   *
+   * @return the image resource
+   */
   @Source("group-home.png")
   ImageResource groupHome();
 
+  /**
+   * Info.
+   *
+   * @return the image resource
+   */
   @Source("info.png")
   ImageResource info();
 
+  /**
+   * Kune icon16.
+   *
+   * @return the image resource
+   */
   @Source("kune-icon16.png")
   ImageResource kuneIcon16();
 
+  /**
+   * Language.
+   *
+   * @return the image resource
+   */
   @Source("language.png")
   ImageResource language();
 
+  /**
+   * Maximize.
+   *
+   * @return the image resource
+   */
   @Source("arrow_out.png")
   ImageResource maximize();
 
+  /**
+   * Minimize.
+   *
+   * @return the image resource
+   */
   @Source("arrow_in.png")
   ImageResource minimize();
 
+  /**
+   * Prefs.
+   *
+   * @return the image resource
+   */
   @Source("prefs.png")
   ImageResource prefs();
 
+  /**
+   * Radiochecked.
+   *
+   * @return the image resource
+   */
   @Source("radiochecked.png")
   ImageResource radiochecked();
 
+  /**
+   * Radio un checked.
+   *
+   * @return the image resource
+   */
   @Source("radiounchecked.png")
   ImageResource radioUnChecked();
 
+  /**
+   * Un checked.
+   *
+   * @return the image resource
+   */
   @Source("unchecked.png")
   ImageResource unChecked();
 }

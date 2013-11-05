@@ -39,16 +39,33 @@ import cc.kune.domain.I18nTranslation;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nManagerDefaultTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nManagerDefaultTest extends PersistenceTest {
+  
+  /** The country manager. */
   @Inject
   I18nCountryManager countryManager;
+  
+  /** The language manager. */
   @Inject
   I18nLanguageManager languageManager;
+  
+  /** The translation manager. */
   @Inject
   I18nTranslationManager translationManager;
+  
+  /** The translation service. */
   @Inject
   I18nTranslationService translationService;
 
+  /**
+   * By default use english.
+   */
   @Test
   public void byDefaultUseEnglish() {
     final HashMap<String, String> map = translationManager.getLexicon("en");
@@ -56,6 +73,9 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     assertEquals(map.size(), map2.size());
   }
 
+  /**
+   * Close.
+   */
   @After
   public void close() {
     if (getTransaction().isActive()) {
@@ -63,6 +83,11 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     }
   }
 
+  /**
+   * Gets the lexicon list.
+   *
+   * @return the lexicon list
+   */
   @Test
   public void getLexiconList() {
     assertTrue(translationManager.getTranslatedLexicon("en", null).size() > 0);
@@ -79,6 +104,11 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     // 0);
   }
 
+  /**
+   * Gets the non existent translation in any lang returns key.
+   *
+   * @return the non existent translation in any lang returns key
+   */
   @Test
   public void getNonExistentTranslationInAnyLangReturnsKey() {
     HashMap<String, String> map = translationManager.getLexicon("en");
@@ -103,6 +133,11 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     assertEquals(initialSize2 + 1, newSize2);
   }
 
+  /**
+   * Gets the non existent translation returns default language.
+   *
+   * @return the non existent translation returns default language
+   */
   @Test
   public void getNonExistentTranslationReturnsDefaultLanguage() {
     final String translation = translationManager.getTranslation("af", "January [month]",
@@ -110,6 +145,11 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     assertEquals("January", translation);
   }
 
+  /**
+   * Gets the translation.
+   *
+   * @return the translation
+   */
   @Test
   public void getTranslation() {
     final String translation = translationManager.getTranslation("af", "Sunday [weekday]",
@@ -117,6 +157,11 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     assertEquals("Sondag", translation);
   }
 
+  /**
+   * Gets the translation ut f8.
+   *
+   * @return the translation ut f8
+   */
   @Test
   public void getTranslationUTF8() {
     final String translation = translationManager.getTranslation("el", "January [month]",
@@ -124,24 +169,42 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     assertEquals("Ιανουάριος", translation);
   }
 
+  /**
+   * Gets the translation with int arg from service.
+   *
+   * @return the translation with int arg from service
+   */
   @Test
   public void getTranslationWithIntArgFromService() {
     final String translation = translationService.t("[%d] users", 20);
     assertEquals("20 users", translation);
   }
 
+  /**
+   * Gets the translation with string arg from service.
+   *
+   * @return the translation with string arg from service
+   */
   @Test
   public void getTranslationWithStringArgFromService() {
     final String translation = translationService.t("[%s] users", "Twenty");
     assertEquals("Twenty users", translation);
   }
 
+  /**
+   * Gets the translation with string arg with nt from service.
+   *
+   * @return the translation with string arg with nt from service
+   */
   @Test
   public void getTranslationWithStringArgWithNtFromService() {
     final String translation = translationService.tWithNT("[%s] users", "foo foo", "Twenty");
     assertEquals("Twenty users", translation);
   }
 
+  /**
+   * Insert data.
+   */
   @Before
   public void insertData() {
     openTransaction();
@@ -172,6 +235,9 @@ public class I18nManagerDefaultTest extends PersistenceTest {
     countryManager.persist(gb);
   }
 
+  /**
+   * Test get lexicon.
+   */
   @Test
   public void testGetLexicon() {
     final HashMap<String, String> map = translationManager.getLexicon("af");

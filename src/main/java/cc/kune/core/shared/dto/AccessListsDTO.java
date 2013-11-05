@@ -24,6 +24,7 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
 /*
  * AccessList samples (using GroupListMode)
  *  
@@ -47,45 +48,99 @@ import com.google.gwt.user.client.rpc.IsSerializable;
  * 
  */
 
+/**
+ * The Class AccessListsDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AccessListsDTO implements IsSerializable {
+  
+  /** The admins. */
   private GroupListDTO admins;
+  
+  /** The editors. */
   private GroupListDTO editors;
+  
+  /** The viewers. */
   private GroupListDTO viewers;
 
+  /**
+   * Instantiates a new access lists dto.
+   */
   public AccessListsDTO() {
     this(null, null, null);
   }
 
+  /**
+   * Instantiates a new access lists dto.
+   *
+   * @param admins the admins
+   * @param editors the editors
+   * @param viewers the viewers
+   */
   public AccessListsDTO(final GroupListDTO admins, final GroupListDTO editors, final GroupListDTO viewers) {
     this.admins = admins;
     this.editors = editors;
     this.viewers = viewers;
   }
 
+  /**
+   * Gets the admins.
+   *
+   * @return the admins
+   */
   public GroupListDTO getAdmins() {
     return admins;
   }
 
+  /**
+   * Gets the editors.
+   *
+   * @return the editors
+   */
   public GroupListDTO getEditors() {
     return editors;
   }
 
+  /**
+   * Gets the viewers.
+   *
+   * @return the viewers
+   */
   public GroupListDTO getViewers() {
     return viewers;
   }
 
+  /**
+   * Sets the admins.
+   *
+   * @param admins the new admins
+   */
   public void setAdmins(final GroupListDTO admins) {
     this.admins = admins;
   }
 
+  /**
+   * Sets the editors.
+   *
+   * @param editors the new editors
+   */
   public void setEditors(final GroupListDTO editors) {
     this.editors = editors;
   }
 
+  /**
+   * Sets the viewers.
+   *
+   * @param viewers the new viewers
+   */
   public void setViewers(final GroupListDTO viewers) {
     this.viewers = viewers;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return "AccessListDTO[admins :" + admins + "; editors: " + editors + "; viewers: " + viewers + "]";

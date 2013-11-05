@@ -24,10 +24,27 @@ package cc.kune.common.client.actions.ui;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface GuiBinding.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GuiBinding {
 
+  /**
+   * Creates the.
+   *
+   * @param descriptor the descriptor
+   * @return the abstract gui item
+   */
   AbstractGuiItem create(GuiActionDescrip descriptor);
 
+  /**
+   * Should be added.
+   *
+   * @return true, if successful
+   */
   boolean shouldBeAdded();
 
 }

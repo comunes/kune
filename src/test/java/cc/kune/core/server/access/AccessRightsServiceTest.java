@@ -35,12 +35,29 @@ import cc.kune.domain.AccessLists;
 import cc.kune.domain.Group;
 import cc.kune.domain.SocialNetwork;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AccessRightsServiceTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AccessRightsServiceTest {
+  
+  /** The access rights manager. */
   private AccessRightsServiceDefault accessRightsManager;
+  
+  /** The group1. */
   private Group group1;
+  
+  /** The group2. */
   private Group group2;
+  
+  /** The group3. */
   private Group group3;
 
+  /**
+   * Access rights should be transitive.
+   */
   @Test
   public void accessRightsShouldBeTransitive() {
     final DomainContext ctx = new DomainContext();
@@ -52,6 +69,9 @@ public class AccessRightsServiceTest {
     assertTrue(rights.isEditable());
   }
 
+  /**
+   * Admin rights gives edit and view rights.
+   */
   @Test
   public void adminRightsGivesEditAndViewRights() {
     final DomainContext ctx = new DomainContext();
@@ -64,6 +84,9 @@ public class AccessRightsServiceTest {
     assertTrue(rights.isVisible());
   }
 
+  /**
+   * Check user access rights admins and edit and view false.
+   */
   @Test
   public void checkUserAccessRightsAdminsAndEditAndViewFalse() {
     final SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2,
@@ -80,6 +103,9 @@ public class AccessRightsServiceTest {
     assertFalse(response.isVisible());
   }
 
+  /**
+   * Check user access rights admins and edit false.
+   */
   @Test
   public void checkUserAccessRightsAdminsAndEditFalse() {
     final SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2,
@@ -96,6 +122,9 @@ public class AccessRightsServiceTest {
     assertTrue(response.isVisible());
   }
 
+  /**
+   * Check user access rights admins false.
+   */
   @Test
   public void checkUserAccessRightsAdminsFalse() {
     final SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2,
@@ -112,6 +141,9 @@ public class AccessRightsServiceTest {
     assertTrue(response.isVisible());
   }
 
+  /**
+   * Check user access rights in sn.
+   */
   @Test
   public void checkUserAccessRightsInSN() {
     final SocialNetwork socialNetwork = TestDomainHelper.createSocialNetwork(group2, group2, group2,
@@ -152,6 +184,9 @@ public class AccessRightsServiceTest {
     assertTrue(responseGroup2.isVisible());
   }
 
+  /**
+   * Check user access rights view null equal to false.
+   */
   @Test
   public void checkUserAccessRightsViewNullEqualToFalse() {
     final AccessLists accessLists = TestDomainHelper.createAccessLists(group1, group1, null);
@@ -159,6 +194,9 @@ public class AccessRightsServiceTest {
     assertFalse(response.isVisible());
   }
 
+  /**
+   * Check user access rights view null equal to true.
+   */
   @Test
   public void checkUserAccessRightsViewNullEqualToTrue() {
     final AccessLists accessLists = TestDomainHelper.createAccessLists(group1, group1, null);
@@ -167,6 +205,9 @@ public class AccessRightsServiceTest {
     assertTrue(response.isVisible());
   }
 
+  /**
+   * Inits the.
+   */
   @Before
   public void init() {
     accessRightsManager = new AccessRightsServiceDefault();

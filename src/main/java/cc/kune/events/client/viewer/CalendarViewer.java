@@ -29,11 +29,27 @@ import cc.kune.gspace.client.tool.ContentViewer;
 import com.bradrydzewski.gwt.calendar.client.Appointment;
 import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface CalendarViewer.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface CalendarViewer extends ContentViewer {
+  
+  /** The Constant NO_APPOINT. */
   public static final Appointment NO_APPOINT = new Appointment();
 
+  /**
+   * Adds the appointment.
+   *
+   * @param appt the appt
+   */
   void addAppointment(Appointment appt);
 
+  /**
+   * Decrement.
+   */
   void decrement();
 
   /**
@@ -43,22 +59,56 @@ public interface CalendarViewer extends ContentViewer {
    */
   Appointment getAppToEdit();
 
+  /**
+   * Gets the date.
+   *
+   * @return the date
+   */
   Date getDate();
 
   /**
+   * Gets the on over date.
+   *
    * @return if you click on the calendar, this get the date you clicked
    */
   Date getOnOverDate();
 
+  /**
+   * Go today.
+   */
   void goToday();
 
+  /**
+   * Increment.
+   */
   void increment();
 
+  /**
+   * Removes the appointment.
+   *
+   * @param app the app
+   */
   void removeAppointment(Appointment app);
 
+  /**
+   * Sets the date.
+   *
+   * @param date the new date
+   */
   void setDate(Date date);
 
+  /**
+   * Sets the view.
+   *
+   * @param view the new view
+   */
   void setView(CalendarViews view);
 
+  /**
+   * Sets the view.
+   *
+   * @param view the view
+   * @param days the days
+   */
   void setView(CalendarViews view, int days);
 }

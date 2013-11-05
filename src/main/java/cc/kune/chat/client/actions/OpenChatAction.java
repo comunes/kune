@@ -39,14 +39,38 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OpenChatAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class OpenChatAction extends RolAction {
 
+  /** The chat client. */
   private final Provider<ChatClient> chatClient;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The sign in. */
   private final Provider<SignIn> signIn;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new open chat action.
+   *
+   * @param chatClient the chat client
+   * @param session the session
+   * @param stateManager the state manager
+   * @param signIn the sign in
+   * @param i18n the i18n
+   */
   @Inject
   public OpenChatAction(final Provider<ChatClient> chatClient, final Session session,
       final StateManager stateManager, final Provider<SignIn> signIn, final I18nTranslationService i18n) {
@@ -58,6 +82,9 @@ public class OpenChatAction extends RolAction {
     this.i18n = i18n;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     if (session.isLogged()) {

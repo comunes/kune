@@ -31,8 +31,7 @@ import com.google.gwt.gadgets.client.UserPreferences;
 /**
  * A base class for writing a Google Wave Gadget.
  */
-public abstract class WaveGadget<T extends UserPreferences> extends Gadget<T> 
-  implements NeedsWave {
+public abstract class WaveGadget<T extends UserPreferences> extends Gadget<T> implements NeedsWave {
 
   private WaveFeatureImpl wave;
 
@@ -45,7 +44,7 @@ public abstract class WaveGadget<T extends UserPreferences> extends Gadget<T>
   public final void initializeFeature(WaveFeatureImpl feature) {
     wave = feature;
   }
-  
+
   /**
    * Returns the wave object.
    * 

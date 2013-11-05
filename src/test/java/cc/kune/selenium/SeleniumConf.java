@@ -22,47 +22,117 @@
  */
 package cc.kune.selenium;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SeleniumConf.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class SeleniumConf {
 
+  /**
+   * The Enum Driver.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public enum Driver {
-    chrome, firefox
+    
+    /** The chrome. */
+    chrome, 
+ /** The firefox. */
+ firefox
   }
 
+  /**
+   * The Enum Lang.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public enum Lang {
-    en, es
+    
+    /** The en. */
+    en, 
+ /** The es. */
+ es
   }
 
+  /**
+   * The Enum Site.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public enum Site {
-    demo("kune.beta.iepala.es"), kunecc("kune.cc"), localhost("localhost:8888",
-        "&log_level=INFO&gwt.codesvr=127.0.0.1:9997"), socialglobal("social.gloobal.net");
+    
+    /** The demo. */
+    demo("kune.beta.iepala.es"), 
+ /** The kunecc. */
+ kunecc("kune.cc"), 
+ /** The localhost. */
+ localhost("localhost:8888",
+        "&log_level=INFO&gwt.codesvr=127.0.0.1:9997"), 
+ /** The socialglobal. */
+ socialglobal("social.gloobal.net");
 
+    /** The domain. */
     private String domain;
+    
+    /** The params. */
     private String params;
 
+    /**
+     * Instantiates a new site.
+     *
+     * @param domain the domain
+     */
     Site(final String domain) {
       this(domain, "");
     }
 
+    /**
+     * Instantiates a new site.
+     *
+     * @param domain the domain
+     * @param params the params
+     */
     Site(final String domain, final String params) {
       this.domain = domain;
       this.params = "?locale=" + SeleniumConf.LANG + params;
     }
 
+    /**
+     * Gets the domain.
+     *
+     * @return the domain
+     */
     public String getDomain() {
       return domain;
     }
 
+    /**
+     * Gets the params.
+     *
+     * @return the params
+     */
     public String getParams() {
       return params;
     }
   }
 
+  /** The Constant DRIVER. */
   public static final Driver DRIVER = Driver.firefox;
   /* Configure this for use other lang, site, or driver */
+  /** The Constant LANG. */
   public static final Lang LANG = Lang.es;
+  
+  /** The Constant SITE. */
   public static final Site SITE = Site.socialglobal;
+  
+  /** The Constant TIMEOUT. */
   public static final int TIMEOUT = 25;
 
+  /**
+   * Instantiates a new selenium conf.
+   */
   SeleniumConf() {
     // Final class
   }

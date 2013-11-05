@@ -22,8 +22,15 @@
  */
 package cc.kune.core.server.manager.impl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class ContentConstants {
 
+  /** The Constant INITIAL_CONTENT. */
   public static final String INITIAL_CONTENT = "<span style=\"font-weight: bold;\">Welcome to [%s]</span><br/>"
       + "    <br/>"
       + "    This site is powered by <a target=\"_blank\""
@@ -49,6 +56,7 @@ public final class ContentConstants {
       + "      --<br/>"
       + "      <span style=\"font-style: italic;\">The Kune development team</span>";
 
+  /** The Constant WELCOME_WAVE_CONTENT. */
   public static final String WELCOME_WAVE_CONTENT = "<span style=\"font-weight: bold;\">Welcome to [%s]. Some tips to getting started</span><br/>"
       + "    <br/>"
       + "    Check out some tips to get you started in this site.<br/>"
@@ -197,8 +205,12 @@ public final class ContentConstants {
       + "    the ones others shared with you. You can use the search box to"
       + "    search through all your waves, using specific keywords.<br/>";
 
+  /** The Constant WELCOME_WAVE_CONTENT_TITLE. */
   public static final String WELCOME_WAVE_CONTENT_TITLE = "Welcome to [%s]";
 
+  /**
+   * Instantiates a new content constants.
+   */
   private ContentConstants() {
   }
 }

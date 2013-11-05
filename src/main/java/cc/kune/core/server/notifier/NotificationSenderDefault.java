@@ -42,18 +42,51 @@ import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NotificationSenderDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class NotificationSenderDefault implements NotificationSender {
+  
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(NotificationSenderDefault.class);
+  
+  /** The email template. */
   private final String emailTemplate;
+  
+  /** The i18n. */
   @SuppressWarnings("unused")
   private final I18nTranslationServiceMultiLang i18n;
+  
+  /** The mail service. */
   private final MailService mailService;
+  
+  /** The site name. */
   private final String siteName;
+  
+  /** The users online. */
   private final UsersOnline usersOnline;
+  
+  /** The wave service. */
   private final KuneWaveService waveService;
+  
+  /** The xmpp manager. */
   private final XmppManager xmppManager;
 
+  /**
+   * Instantiates a new notification sender default.
+   *
+   * @param mailService the mail service
+   * @param waveService the wave service
+   * @param xmppManager the xmpp manager
+   * @param i18n the i18n
+   * @param usersOnline the users online
+   * @param kuneProperties the kune properties
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Inject
   public NotificationSenderDefault(final MailService mailService, final KuneWaveService waveService,
       final XmppManager xmppManager, final I18nTranslationServiceMultiLang i18n,
@@ -70,16 +103,31 @@ public class NotificationSenderDefault implements NotificationSender {
     siteName = kuneProperties.get(KuneProperties.SITE_NAME);
   }
 
+  /**
+   * Adds the braquet.
+   *
+   * @param subjectPrefix the subject prefix
+   * @return the string
+   */
   private String addBraquet(final String subjectPrefix) {
     return new StringBuffer("[").append(subjectPrefix).append("] ").toString();
   }
 
+  /**
+   * No online.
+   *
+   * @param username the username
+   * @return true, if successful
+   */
   private boolean noOnline(final String username) {
     final boolean isOnline = usersOnline.isOnline(username);
     LOG.debug(String.format("User '%s' is online for notifications? %s", username, isOnline));
     return !isOnline;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.notifier.NotificationSender#send(cc.kune.core.server.notifier.PendingNotification, cc.kune.core.shared.dto.EmailNotificationFrequency)
+   */
   @Override
   public void send(final PendingNotification notification, final EmailNotificationFrequency withFrequency) {
     final FormattedString subject = notification.getSubject().copy();

@@ -31,18 +31,35 @@ import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.core.server.utils.AbsoluteFileDownloadUtils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NotificationHtmlHelperTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NotificationHtmlHelperTest {
+  
+  /** The Constant GROUP_NAME. */
   private static final String GROUP_NAME = "groupShortName";
+  
+  /** The Constant MESSAGE. */
   private static final String MESSAGE = "some message";
 
+  /** The helper. */
   NotificationHtmlHelper helper;
 
+  /**
+   * Basic test.
+   */
   @Test
   public void basicTest() {
     assertNotNull(helper.groupNotification(GROUP_NAME, false, MESSAGE).getString());
     assertNotNull(helper.groupNotification(GROUP_NAME, true, MESSAGE).getString());
   }
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     helper = new NotificationHtmlHelper(new AbsoluteFileDownloadUtils(new KuneBasicProperties(

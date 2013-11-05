@@ -53,14 +53,34 @@ import com.google.inject.Injector;
 import com.googlecode.gwtrpccommlayer.client.GwtRpcService;
 import com.googlecode.gwtrpccommlayer.client.Module;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneCliMain.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneCliMain {
 
+  /** The i18n service. */
   private static I18nServiceAsync i18nService;
+  
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(KuneCliMain.class);
+  
+  /** The Constant SERVICE_PREFFIX. */
   private static final String SERVICE_PREFFIX = "http://127.0.0.1:8888/ws/";
+  
+  /** The site service. */
   private static SiteServiceAsync siteService;
+  
+  /** The user service. */
   private static UserServiceAsync userService;
 
+  /**
+   * Inits the services.
+   *
+   * @throws MalformedURLException the malformed url exception
+   */
   private static void initServices() throws MalformedURLException {
     // http://code.google.com/p/gwtrpccommlayer/wiki/GettingStarted
     // http://googlewebtoolkit.blogspot.com.es/2010/07/gwtrpccommlayer-extending-gwt-rpc-to-do.html
@@ -74,6 +94,14 @@ public class KuneCliMain {
     i18nService = service.create(new URL(SERVICE_PREFFIX + "I18nService"), I18nServiceAsync.class);
   }
 
+  /**
+   * The main method.
+   *
+   * @param args the arguments
+   * @throws InvalidSyntaxException the invalid syntax exception
+   * @throws ExecutionException the execution exception
+   * @throws MalformedURLException the malformed url exception
+   */
   public static void main(final String[] args) throws InvalidSyntaxException, ExecutionException,
       MalformedURLException {
 

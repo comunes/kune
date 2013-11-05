@@ -24,8 +24,19 @@ package cc.kune.tasks.client;
 
 import com.google.gwt.inject.client.Ginjector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface TasksGinjector.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface TasksGinjector extends Ginjector {
 
+  /**
+   * Gets the tasks parts.
+   *
+   * @return the tasks parts
+   */
   TasksParts getTasksParts();
 
 }

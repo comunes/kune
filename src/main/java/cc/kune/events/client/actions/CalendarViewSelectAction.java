@@ -30,18 +30,37 @@ import cc.kune.events.client.viewer.CalendarViewer;
 import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CalendarViewSelectAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CalendarViewSelectAction extends RolAction {
 
+  /** The cal viewer. */
   private final CalendarViewer calViewer;
+  
+  /** The days. */
   private int days;
+  
+  /** The view. */
   private CalendarViews view;
 
+  /**
+   * Instantiates a new calendar view select action.
+   *
+   * @param calViewer the cal viewer
+   */
   @Inject
   public CalendarViewSelectAction(final CalendarViewer calViewer) {
     super(AccessRolDTO.Viewer, false);
     this.calViewer = calViewer;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     if (days != 0) {
@@ -51,10 +70,20 @@ public class CalendarViewSelectAction extends RolAction {
     }
   }
 
+  /**
+   * Sets the days.
+   *
+   * @param days the new days
+   */
   public void setDays(final int days) {
     this.days = days;
   }
 
+  /**
+   * Sets the view.
+   *
+   * @param view the new view
+   */
   public void setView(final CalendarViews view) {
     this.view = view;
   }

@@ -28,8 +28,21 @@ import cc.kune.gspace.client.actions.OpenContentMenuItem;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OpenBartersMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class OpenBartersMenuItem extends OpenContentMenuItem {
 
+  /**
+   * Instantiates a new open barters menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public OpenBartersMenuItem(final I18nTranslationService i18n, final OpenContentAction action,
       final IconicResources res) {

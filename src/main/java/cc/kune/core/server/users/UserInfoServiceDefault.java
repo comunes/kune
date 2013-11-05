@@ -34,13 +34,32 @@ import cc.kune.domain.finders.UserSignInLogFinder;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserInfoServiceDefault.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class UserInfoServiceDefault implements UserInfoService {
 
+  /** The group manager. */
   private final GroupManager groupManager;
+  
+  /** The social network manager. */
   private final SocialNetworkManager socialNetworkManager;
+  
+  /** The user sign in log finder. */
   private final UserSignInLogFinder userSignInLogFinder;
 
+  /**
+   * Instantiates a new user info service default.
+   *
+   * @param socialNetwork the social network
+   * @param groupManager the group manager
+   * @param userSignInLogFinder the user sign in log finder
+   */
   @Inject
   public UserInfoServiceDefault(final SocialNetworkManager socialNetwork,
       final GroupManager groupManager, UserSignInLogFinder userSignInLogFinder) {
@@ -49,6 +68,9 @@ public class UserInfoServiceDefault implements UserInfoService {
     this.userSignInLogFinder = userSignInLogFinder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.users.UserInfoService#buildInfo(cc.kune.domain.User, java.lang.String)
+   */
   @Override
   public UserInfo buildInfo(final User user, final String userHash) throws DefaultException {
     UserInfo userInfo = null;

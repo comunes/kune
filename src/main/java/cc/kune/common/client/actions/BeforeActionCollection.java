@@ -24,11 +24,15 @@ package cc.kune.common.client.actions;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class BeforeActionCollection.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BeforeActionCollection extends ArrayList<BeforeActionListener> {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -1508664709628420137L;
 
   /**

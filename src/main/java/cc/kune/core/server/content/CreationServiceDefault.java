@@ -42,15 +42,38 @@ import cc.kune.wave.server.kspecific.KuneWaveService;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CreationServiceDefault.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class CreationServiceDefault implements CreationService {
 
+  /** The Constant NO_MORE_PARTICIPANTS. */
   private static final String[] NO_MORE_PARTICIPANTS = ArrayUtils.EMPTY_STRING_ARRAY;
+  
+  /** The Constant NO_PROPERTIES. */
   private static final Map<String, String> NO_PROPERTIES = Collections.<String, String> emptyMap();
+  
+  /** The container manager. */
   private final ContainerManager containerManager;
+  
+  /** The content manager. */
   private final ContentManagerDefault contentManager;
+  
+  /** The tools. */
   private final ServerToolRegistry tools;
 
+  /**
+   * Instantiates a new creation service default.
+   *
+   * @param containerManager the container manager
+   * @param contentManager the content manager
+   * @param toolRegistry the tool registry
+   */
   @Inject
   public CreationServiceDefault(final ContainerManager containerManager,
       final ContentManager contentManager, final ServerToolRegistry toolRegistry) {
@@ -59,6 +82,9 @@ public class CreationServiceDefault implements CreationService {
     this.tools = toolRegistry;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.content.CreationService#copyContent(cc.kune.domain.User, cc.kune.domain.Container, cc.kune.domain.Content)
+   */
   @Override
   public Content copyContent(final User user, final Container container, final Content contentToCopy) {
     final ServerTool tool = tools.get(container.getToolName());
@@ -67,6 +93,9 @@ public class CreationServiceDefault implements CreationService {
     return content;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.content.CreationService#createContent(java.lang.String, java.lang.String, cc.kune.domain.User, cc.kune.domain.Container, java.lang.String)
+   */
   @Override
   public Content createContent(final String title, final String body, final User user,
       final Container container, final String typeId) {
@@ -82,6 +111,9 @@ public class CreationServiceDefault implements CreationService {
     return content;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.content.CreationService#createFolder(cc.kune.domain.Group, java.lang.Long, java.lang.String, cc.kune.domain.I18nLanguage, java.lang.String)
+   */
   @Override
   public Container createFolder(final Group group, final Long parentFolderId, final String name,
       final I18nLanguage language, final String typeId) {
@@ -93,6 +125,9 @@ public class CreationServiceDefault implements CreationService {
     return child;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.content.CreationService#createRootFolder(cc.kune.domain.Group, java.lang.String, java.lang.String, java.lang.String)
+   */
   @Override
   public Container createRootFolder(final Group group, final String name, final String rootName,
       final String typeRoot) {

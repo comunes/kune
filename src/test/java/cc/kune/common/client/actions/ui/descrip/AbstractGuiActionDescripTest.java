@@ -28,14 +28,32 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractGuiActionDescripTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AbstractGuiActionDescripTest {
 
+  /** The add false cond. */
   private GuiAddCondition addFalseCond;
+  
+  /** The add true cond1. */
   private GuiAddCondition addTrueCond1;
+  
+  /** The add true cond2. */
   private GuiAddCondition addTrueCond2;
+  
+  /** The add true cond3. */
   private GuiAddCondition addTrueCond3;
+  
+  /** The descriptor. */
   private MenuDescriptor descriptor;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     descriptor = new MenuDescriptor();
@@ -49,6 +67,9 @@ public class AbstractGuiActionDescripTest {
     Mockito.stub(addFalseCond.mustBeAdded((GuiActionDescrip) Mockito.any())).toReturn(false);
   }
 
+  /**
+   * Onffalse add conditions should dont be added.
+   */
   @Test
   public void onffalseAddConditionsShouldDontBeAdded() {
     descriptor.add(addTrueCond1);
@@ -57,6 +78,9 @@ public class AbstractGuiActionDescripTest {
     assertFalse(descriptor.mustBeAdded());
   }
 
+  /**
+   * Two true add conditions must be added.
+   */
   @Test
   public void twoTrueAddConditionsMustBeAdded() {
     descriptor.add(addTrueCond1);
@@ -65,6 +89,9 @@ public class AbstractGuiActionDescripTest {
     assertTrue(descriptor.mustBeAdded());
   }
 
+  /**
+   * Without add conditions must be added.
+   */
   @Test
   public void withoutAddConditionsMustBeAdded() {
     assertTrue(descriptor.mustBeAdded());

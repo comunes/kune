@@ -45,24 +45,25 @@
       <artifactId>gin</artifactId>
       <version>1.0-r137</version>
     </dependency>
-<!--     <dependency> -->
-<!--       <groupId>cc.kune</groupId> -->
-<!--       <artifactId>common</artifactId> -->
-<!--       <version>0.2.0-SNAPSHOT</version> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>org.cobogw.gwt</groupId> -->
-<!--       <artifactId>cobogw</artifactId> -->
-<!--       <version>1.3.1</version> -->
-<!--       <scope>provided</scope> -->
-<!--     </dependency> -->
-<!--     <dependency> -->
-<!--       <groupId>com.googlecode.gwtquery</groupId> -->
-<!--       <artifactId>gwtquery</artifactId> -->
-<!--       <version>1.1.0</version> -->
-      <!-- If you are using old versions of gwt, uncomment the appropriate line -->
-<!--       <classifier>2.1.0</classifier> -->
-<!--       <scope>provided</scope> -->
-<!--     </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>cc.kune</groupId> -->
+    <!-- <artifactId>common</artifactId> -->
+    <!-- <version>0.2.0-SNAPSHOT</version> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>org.cobogw.gwt</groupId> -->
+    <!-- <artifactId>cobogw</artifactId> -->
+    <!-- <version>1.3.1</version> -->
+    <!-- <scope>provided</scope> -->
+    <!-- </dependency> -->
+    <!-- <dependency> -->
+    <!-- <groupId>com.googlecode.gwtquery</groupId> -->
+    <!-- <artifactId>gwtquery</artifactId> -->
+    <!-- <version>1.1.0</version> -->
+    <!-- If you are using old versions of gwt, uncomment the appropriate 
+      line -->
+    <!-- <classifier>2.1.0</classifier> -->
+    <!-- <scope>provided</scope> -->
+    <!-- </dependency> -->
   </dependencies>
 </project>

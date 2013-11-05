@@ -32,8 +32,24 @@ import cc.kune.lists.shared.ListsToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListsParts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListsParts {
 
+  /**
+   * Instantiates a new lists parts.
+   *
+   * @param session the session
+   * @param clientTool the client tool
+   * @param viewerSelector the viewer selector
+   * @param listsActions the lists actions
+   * @param contentViewer the content viewer
+   * @param folderViewer the folder viewer
+   */
   @Inject
   public ListsParts(final SessionConstants session, final Provider<ListsClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final ListsClientActions listsActions,

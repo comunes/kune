@@ -27,17 +27,32 @@ import cc.kune.common.client.actions.ActionEvent;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuShowAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class MenuShowAction extends AbstractExtendedAction {
 
+  /** The menu. */
   private MenuDescriptor menu;
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     menu.show();
     menu.moveSelectionDown();
   }
 
+  /**
+   * Sets the menu.
+   *
+   * @param menu the new menu
+   */
   public void setMenu(final MenuDescriptor menu) {
     this.menu = menu;
   }

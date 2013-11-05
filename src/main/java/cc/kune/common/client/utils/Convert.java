@@ -22,11 +22,27 @@
  */
 package cc.kune.common.client.utils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Convert.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class Convert {
+  
+  /**
+   * To int.
+   *
+   * @param value the value
+   * @return the int
+   */
   public static int toInt(final String value) {
     return Integer.valueOf(value);
   }
 
+  /**
+   * Instantiates a new convert.
+   */
   private Convert() {
   };
 }

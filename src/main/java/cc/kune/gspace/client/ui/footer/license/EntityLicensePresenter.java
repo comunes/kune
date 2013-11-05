@@ -42,27 +42,77 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityLicensePresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityLicensePresenter extends
     Presenter<EntityLicensePresenter.EntityLicenseView, EntityLicensePresenter.EntityLicenseProxy> {
 
+  /**
+   * The Interface EntityLicenseProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface EntityLicenseProxy extends Proxy<EntityLicensePresenter> {
   }
+  
+  /**
+   * The Interface EntityLicenseView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface EntityLicenseView extends View {
+    
+    /**
+     * Attach.
+     */
     void attach();
 
+    /**
+     * Detach.
+     */
     void detach();
 
+    /**
+     * Gets the image.
+     *
+     * @return the image
+     */
     HasClickHandlers getImage();
 
+    /**
+     * Open window.
+     *
+     * @param url the url
+     */
     void openWindow(String url);
 
+    /**
+     * Show license.
+     *
+     * @param groupName the group name
+     * @param licenseDTO the license dto
+     */
     void showLicense(String groupName, LicenseDTO licenseDTO);
 
   }
 
+  /** The license. */
   private LicenseDTO license;
 
+  /**
+   * Instantiates a new entity license presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param session the session
+   * @param proxy the proxy
+   * @param stateManager the state manager
+   */
   @Inject
   public EntityLicensePresenter(final EventBus eventBus, final EntityLicenseView view,
       final Session session, final EntityLicenseProxy proxy, final StateManager stateManager) {
@@ -91,17 +141,30 @@ public class EntityLicensePresenter extends
     });
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /**
+   * Sets the license.
+   *
+   * @param state the new license
+   */
   private void setLicense(final StateContainerDTO state) {
     this.license = state.getLicense();
     getView().showLicense(state.getGroup().getShortName(), license);
     getView().attach();
   }
 
+  /**
+   * Sets the state.
+   *
+   * @param state the new state
+   */
   private void setState(final StateAbstractDTO state) {
     if (state instanceof HasContent) {
       setLicense((StateContainerDTO) state);

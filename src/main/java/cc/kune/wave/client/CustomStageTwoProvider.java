@@ -43,20 +43,28 @@ import cc.kune.common.client.log.Log;
 import com.google.common.base.Preconditions;
 import com.google.gwt.user.client.Command;
 
+// TODO: Auto-generated Javadoc
 /**
- * Provides stage 2 of the staged loading of the wave panel
+ * Provides stage 2 of the staged loading of the wave panel.
  *
  * @author zdwang@google.com (David Wang)
  */
 public class CustomStageTwoProvider extends StageTwo.DefaultProvider {
 
+  /** The wave ref. */
   private final WaveRef waveRef;
+  
+  /** The channel. */
   private final RemoteViewServiceMultiplexer channel;
+  
+  /** The is new wave. */
   private final boolean isNewWave;
   // TODO: Remove this after WebClientBackend is deleted.
+  /** The id generator. */
   private final IdGenerator idGenerator;
 
   // shared across other client components
+  /** The profiles. */
   private final ProfileManager profiles;
 
   /**
@@ -64,13 +72,21 @@ public class CustomStageTwoProvider extends StageTwo.DefaultProvider {
    * new protocol.
    */
   private AsyncHolder.Accessor<StageTwo> whenReady;
+  
+  /** The other participants. */
   private final Set<ParticipantId> otherParticipants;
 
   /**
-   * @param waveId the id of the wave to open, or null to create a new wave
+   * Instantiates a new custom stage two provider.
+   *
+   * @param stageOne the stage one
+   * @param waveRef the wave ref
    * @param channel communication channel
-   * @param idGenerator
-   * @param unsavedIndicatorElement
+   * @param isNewWave the is new wave
+   * @param idGenerator the id generator
+   * @param profiles the profiles
+   * @param unsavedDataListener the unsaved data listener
+   * @param otherParticipants the other participants
    */
   public CustomStageTwoProvider(StageOne stageOne, WaveRef waveRef, RemoteViewServiceMultiplexer channel,
       boolean isNewWave, IdGenerator idGenerator, ProfileManager profiles,
@@ -88,30 +104,45 @@ public class CustomStageTwoProvider extends StageTwo.DefaultProvider {
     Log.info("StageTwo: created");
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.StageTwo.DefaultProvider#createSchemas()
+   */
   @Override
   protected SchemaProvider createSchemas() {
     Log.info("StageTwo: create schemas");
     return new ConversationSchemas();
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.StageTwo.DefaultProvider#createSessionId()
+   */
   @Override
   public String createSessionId() {
     Log.info("StageTwo: create session id");
     return Session.get().getIdSeed();
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.StageTwo.DefaultProvider#createIdGenerator()
+   */
   @Override
   protected IdGenerator createIdGenerator() {
     Log.info("StageTwo: create id generator");
     return idGenerator;
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.StageTwo.DefaultProvider#createSignedInUser()
+   */
   @Override
   protected ParticipantId createSignedInUser() {
     Log.info("StageTwo: create signed in user " + Session.get().getAddress());
     return ParticipantId.ofUnsafe(Session.get().getAddress());
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.StageTwo.DefaultProvider#createWaveViewService()
+   */
   @Override
   protected WaveViewService createWaveViewService() {
     Log.info("StageTwo: create wave view service");
@@ -163,11 +194,17 @@ public class CustomStageTwoProvider extends StageTwo.DefaultProvider {
     }
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.StageTwo.DefaultProvider#createProfileManager()
+   */
   @Override
   protected ProfileManager createProfileManager() {
     return profiles;
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.StageTwo.DefaultProvider#create(org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor)
+   */
   @Override
   protected void create(final AsyncHolder.Accessor<StageTwo> whenReady) {
     this.whenReady = whenReady;
@@ -180,6 +217,9 @@ public class CustomStageTwoProvider extends StageTwo.DefaultProvider {
     });
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.StageTwo.DefaultProvider#fetchWave(org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor)
+   */
   @Override
   protected void fetchWave(final AsyncHolder.Accessor<WaveViewData> whenReady) {
     Log.info("StageTwo: fetch wave");

@@ -32,8 +32,24 @@ import cc.kune.trash.shared.TrashToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TrashParts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TrashParts {
 
+  /**
+   * Instantiates a new trash parts.
+   *
+   * @param session the session
+   * @param clientTool the client tool
+   * @param viewerSelector the viewer selector
+   * @param trashActions the trash actions
+   * @param contentViewer the content viewer
+   * @param folderViewer the folder viewer
+   */
   @Inject
   public TrashParts(final SessionConstants session, final Provider<TrashClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final TrashClientActions trashActions,

@@ -38,8 +38,23 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BlogServerTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BlogServerTool extends AbstractWaveBasedServerTool {
 
+  /**
+   * Instantiates a new blog server tool.
+   *
+   * @param contentManager the content manager
+   * @param containerManager the container manager
+   * @param configurationManager the configuration manager
+   * @param i18n the i18n
+   * @param creationService the creation service
+   */
   @Inject
   public BlogServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
@@ -49,6 +64,9 @@ public class BlogServerTool extends AbstractWaveBasedServerTool {
         containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#initGroup(cc.kune.domain.User, cc.kune.domain.Group, java.lang.Object[])
+   */
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     createRoot(group);

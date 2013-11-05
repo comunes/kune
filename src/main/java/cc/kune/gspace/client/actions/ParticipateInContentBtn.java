@@ -40,14 +40,38 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ParticipateInContentBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ParticipateInContentBtn extends ButtonDescriptor {
 
+  /**
+   * The Class ParticipateInContentAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class ParticipateInContentAction extends RolAction {
 
+    /** The content service. */
     private final Provider<ContentServiceAsync> contentService;
+    
+    /** The session. */
     private final Session session;
+    
+    /** The state manager. */
     private final StateManager stateManager;
 
+    /**
+     * Instantiates a new participate in content action.
+     *
+     * @param session the session
+     * @param stateManager the state manager
+     * @param i18n the i18n
+     * @param contentService the content service
+     */
     @Inject
     public ParticipateInContentAction(final Session session, final StateManager stateManager,
         final I18nTranslationService i18n, final Provider<ContentServiceAsync> contentService) {
@@ -57,6 +81,9 @@ public class ParticipateInContentBtn extends ButtonDescriptor {
       this.contentService = contentService;
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       NotifyUser.showProgress();
@@ -73,6 +100,16 @@ public class ParticipateInContentBtn extends ButtonDescriptor {
     }
   }
 
+  /**
+   * Instantiates a new participate in content btn.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param isLogged the is logged
+   * @param isEditable the is editable
+   * @param isNotParticipant the is not participant
+   * @param res the res
+   */
   @Inject
   public ParticipateInContentBtn(final I18nTranslationService i18n,
       final ParticipateInContentAction action, final IsLoggedCondition isLogged,

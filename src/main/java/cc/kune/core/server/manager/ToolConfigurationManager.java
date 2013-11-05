@@ -24,6 +24,17 @@ package cc.kune.core.server.manager;
 
 import cc.kune.domain.ToolConfiguration;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ToolConfigurationManager.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ToolConfigurationManager extends Manager<ToolConfiguration, Long> {
+  
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.Manager#persist(java.lang.Object)
+   */
   ToolConfiguration persist(ToolConfiguration config);
 }

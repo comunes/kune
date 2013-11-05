@@ -26,8 +26,19 @@ import cc.kune.core.client.state.AccessRightsClientManager;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractStandaloneMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AbstractStandaloneMenu extends AbstractEditorsMenu {
 
+  /**
+   * Instantiates a new abstract standalone menu.
+   *
+   * @param rightsManager the rights manager
+   */
   @Inject
   public AbstractStandaloneMenu(final AccessRightsClientManager rightsManager) {
     super(rightsManager);

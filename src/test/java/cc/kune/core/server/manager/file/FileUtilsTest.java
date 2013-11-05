@@ -26,106 +26,184 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileUtilsTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FileUtilsTest {
 
+  /** The Constant SIMPLE_FILE_NAME. */
   private static final String SIMPLE_FILE_NAME = "simple file name";
+  
+  /** The Constant EXT. */
   private static final String EXT = ".someext";
 
+  /**
+   * Dot file ret seq1.
+   */
   @Test
   public void dotFileRetSeq1() {
     assertEquals("." + SIMPLE_FILE_NAME + " 1",
         FileUtils.getNextSequentialFileName("." + SIMPLE_FILE_NAME, true));
   }
 
+  /**
+   * Dot file ret seq1 ignore ext.
+   */
   @Test
   public void dotFileRetSeq1IgnoreExt() {
     assertEquals("." + SIMPLE_FILE_NAME + " 1",
         FileUtils.getNextSequentialFileName("." + SIMPLE_FILE_NAME, false));
   }
 
+  /**
+   * Gets the extension basic.
+   *
+   * @return the extension basic
+   */
   @Test
   public void getExtensionBasic() {
     assertEquals("someext", FileUtils.getFileNameExtension("file.name.with.someext", false));
   }
 
+  /**
+   * Gets the extension with dot.
+   *
+   * @return the extension with dot
+   */
   @Test
   public void getExtensionWithDot() {
     assertEquals("", FileUtils.getFileNameExtension("file name with no ext.", false));
   }
 
+  /**
+   * Gets the extension with dot basic.
+   *
+   * @return the extension with dot basic
+   */
   @Test
   public void getExtensionWithDotBasic() {
     assertEquals(".someext", FileUtils.getFileNameExtension("file.name.with.someext", true));
   }
 
+  /**
+   * Gets the extension with dot with final dot.
+   *
+   * @return the extension with dot with final dot
+   */
   @Test
   public void getExtensionWithDotWithFinalDot() {
     assertEquals("", FileUtils.getFileNameExtension("file name with no ext.", true));
   }
 
+  /**
+   * Gets the extension with dot with initial dot.
+   *
+   * @return the extension with dot with initial dot
+   */
   @Test
   public void getExtensionWithDotWithInitialDot() {
     assertEquals("", FileUtils.getFileNameExtension(".file name with no ext", true));
   }
 
+  /**
+   * Gets the extension with initial dot.
+   *
+   * @return the extension with initial dot
+   */
   @Test
   public void getExtensionWithInitialDot() {
     assertEquals("", FileUtils.getFileNameExtension(".file name with no ext", false));
   }
 
+  /**
+   * Test file name w extension simple.
+   */
   @Test
   public void testFileNameWExtensionSimple() {
     assertEquals("test", FileUtils.getFileNameWithoutExtension("test.txt", "txt"));
   }
 
+  /**
+   * Test file name w extension simple with dot.
+   */
   @Test
   public void testFileNameWExtensionSimpleWithDot() {
     assertEquals("test", FileUtils.getFileNameWithoutExtension("test.txt", ".txt"));
   }
 
+  /**
+   * Test file name without extension.
+   */
   @Test
   public void testFileNameWithoutExtension() {
     assertEquals("test", FileUtils.getFileNameWithoutExtension("test", ""));
   }
 
+  /**
+   * Test file name w no extension with dot.
+   */
   @Test
   public void testFileNameWNoExtensionWithDot() {
     assertEquals("test.", FileUtils.getFileNameWithoutExtension("test.", ""));
   }
 
+  /**
+   * Test get filename ext null.
+   */
   @Test
   public void testGetFilenameExtNull() {
     assertEquals("", FileUtils.getFileNameExtension(null, true));
   }
 
+  /**
+   * Test if seq101return102.
+   */
   @Test
   public void testIfSeq101return102() {
     assertEquals(SIMPLE_FILE_NAME + " 102",
         FileUtils.getNextSequentialFileName(SIMPLE_FILE_NAME + " 101"));
   }
 
+  /**
+   * Test if seq1return2.
+   */
   @Test
   public void testIfSeq1return2() {
     assertEquals(SIMPLE_FILE_NAME + " 2", FileUtils.getNextSequentialFileName(SIMPLE_FILE_NAME + " 1"));
   }
 
+  /**
+   * Test if seq1 with extreturn2 with ext.
+   */
   @Test
   public void testIfSeq1WithExtreturn2WithExt() {
     assertEquals(SIMPLE_FILE_NAME + " 2" + EXT,
         FileUtils.getNextSequentialFileName(SIMPLE_FILE_NAME + " 1" + EXT, true));
   }
 
+  /**
+   * Test no seq return1.
+   */
   @Test
   public void testNoSeqReturn1() {
     assertEquals(SIMPLE_FILE_NAME + " 1", FileUtils.getNextSequentialFileName(SIMPLE_FILE_NAME));
   }
 
+  /**
+   * Test no seq with ext not taked into account return1.
+   */
   @Test
   public void testNoSeqWithExtNotTakedIntoAccountReturn1() {
     assertEquals(SIMPLE_FILE_NAME + EXT + " 1",
         FileUtils.getNextSequentialFileName(SIMPLE_FILE_NAME + EXT, false));
   }
 
+  /**
+   * Test no seq with ext return1 with ext.
+   */
   @Test
   public void testNoSeqWithExtReturn1WithExt() {
     assertEquals(SIMPLE_FILE_NAME + " 1" + EXT,

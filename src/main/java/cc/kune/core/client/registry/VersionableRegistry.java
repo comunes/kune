@@ -22,5 +22,10 @@
  */
 package cc.kune.core.client.registry;
 
+/**
+ * The Class VersionableRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class VersionableRegistry extends AbstractContentRegistry {
 }

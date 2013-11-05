@@ -27,12 +27,26 @@ import com.allen_sauer.gwt.dnd.client.VetoDragException;
 import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NotAllowedDropController.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NotAllowedDropController extends SimpleDropController {
 
+  /**
+   * Instantiates a new not allowed drop controller.
+   *
+   * @param dropTarget the drop target
+   */
   public NotAllowedDropController(final Widget dropTarget) {
     super(dropTarget);
   }
 
+  /* (non-Javadoc)
+   * @see com.allen_sauer.gwt.dnd.client.drop.AbstractDropController#onPreviewDrop(com.allen_sauer.gwt.dnd.client.DragContext)
+   */
   @Override
   public void onPreviewDrop(final DragContext context) throws VetoDragException {
     // This cancel the drop

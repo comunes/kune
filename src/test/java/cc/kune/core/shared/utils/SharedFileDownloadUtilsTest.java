@@ -29,14 +29,32 @@ import org.junit.Test;
 
 import cc.kune.core.shared.FileConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SharedFileDownloadUtilsTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SharedFileDownloadUtilsTest {
 
+  /** The Constant GROUP. */
   private static final String GROUP = "groupname";
+  
+  /** The prefix utils. */
   private SharedFileDownloadUtils[] prefixUtils;
+  
+  /** The util no prefix. */
   private SharedFileDownloadUtils utilNoPrefix;
+  
+  /** The util prefix. */
   private SharedFileDownloadUtils utilPrefix;
+  
+  /** The util prefix with slash. */
   private SharedFileDownloadUtils utilPrefixWithSlash;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     utilPrefix = new SharedFileDownloadUtils("http://example.org");
@@ -45,6 +63,9 @@ public class SharedFileDownloadUtilsTest {
     prefixUtils = new SharedFileDownloadUtils[] { utilPrefix, utilPrefixWithSlash };
   }
 
+  /**
+   * Test get logo html.
+   */
   @Test
   public void testGetLogoHtml() {
     for (final SharedFileDownloadUtils util : prefixUtils) {
@@ -73,6 +94,9 @@ public class SharedFileDownloadUtilsTest {
     assertTrue(!utilNoPrefix.getLogoAvatarHtml(GROUP, true, true, 50, 5).contains("http"));
   }
 
+  /**
+   * Test user avatar.
+   */
   @Test
   public void testUserAvatar() {
     assertEquals("http://example.org" + FileConstants.LOGODOWNLOADSERVLET

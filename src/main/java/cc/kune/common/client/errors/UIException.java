@@ -24,20 +24,43 @@ package cc.kune.common.client.errors;
 
 import cc.kune.common.client.log.Log;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UIException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UIException extends RuntimeException {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -1327164226202923181L;
 
+  /**
+   * Instantiates a new uI exception.
+   *
+   * @param text the text
+   */
   public UIException(final String text) {
     super(text);
     Log.error(text);
   }
 
+  /**
+   * Instantiates a new uI exception.
+   *
+   * @param text the text
+   * @param cause the cause
+   */
   public UIException(final String text, final Throwable cause) {
     super(text, cause);
     Log.error(text, cause);
   }
 
+  /**
+   * Instantiates a new uI exception.
+   *
+   * @param cause the cause
+   */
   public UIException(final Throwable cause) {
     super(cause);
     Log.error("UIException", cause);

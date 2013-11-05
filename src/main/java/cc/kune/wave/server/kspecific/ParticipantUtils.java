@@ -40,13 +40,31 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import com.google.wave.api.Participants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ParticipantUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ParticipantUtils {
 
+  /** The at domain. */
   private String atDomain;
+  
+  /** The domain. */
   private final String domain;
+  
+  /** The super admin. */
   private final ParticipantId superAdmin;
 
+  /**
+   * Instantiates a new participant utils.
+   *
+   * @param domain the domain
+   * @param databaseProperties the database properties
+   * @throws InvalidParticipantAddress the invalid participant address
+   */
   @Inject
   public ParticipantUtils(@Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain,
       final KuneBasicProperties databaseProperties) throws InvalidParticipantAddress {
@@ -54,17 +72,21 @@ public class ParticipantUtils {
     superAdmin = ofImpl(databaseProperties.getAdminShortName());
   }
 
+  /**
+   * Array from.
+   *
+   * @param parts the parts
+   * @return the string[]
+   */
   public String[] arrayFrom(final Participants parts) {
     return parts.toArray(new String[parts.size()]);
   }
 
   /**
-   * Array of participants but with lastParticipant at the end
-   * 
-   * @param parts
-   *          the parts
-   * @param lastParticipant
-   *          the last participant
+   * Array of participants but with lastParticipant at the end.
+   *
+   * @param parts the parts
+   * @param lastParticipant the last participant
    * @return the string[]
    */
   public String[] arrayFromOrdered(final Participants parts, final String lastParticipant) {
@@ -79,11 +101,22 @@ public class ParticipantUtils {
     return list.toArray(new String[list.size()]);
   }
 
+  /**
+   * Gets the address name.
+   *
+   * @param address the address
+   * @return the address name
+   */
   public String getAddressName(final String address) {
     return address.contains(ParticipantId.DOMAIN_PREFIX) ? address.split(ParticipantId.DOMAIN_PREFIX)[0]
         : address;
   }
 
+  /**
+   * Gets the at domain.
+   *
+   * @return the at domain
+   */
   private String getAtDomain() {
     if (atDomain == null) {
       atDomain = ParticipantId.DOMAIN_PREFIX + domain;
@@ -91,22 +124,49 @@ public class ParticipantUtils {
     return atDomain;
   }
 
+  /**
+   * Gets the domain.
+   *
+   * @return the domain
+   */
   public String getDomain() {
     return domain;
   }
 
+  /**
+   * Gets the public participant id.
+   *
+   * @return the public participant id
+   */
   public ParticipantId getPublicParticipantId() {
     return of(getAtDomain());
   }
 
+  /**
+   * Gets the super admin.
+   *
+   * @return the super admin
+   */
   public ParticipantId getSuperAdmin() {
     return superAdmin;
   }
 
+  /**
+   * Checks if is local.
+   *
+   * @param address the address
+   * @return true, if is local
+   */
   public boolean isLocal(final String address) {
     return address.contains(getAtDomain());
   }
 
+  /**
+   * List from.
+   *
+   * @param list the list
+   * @return the participant id[]
+   */
   public ParticipantId[] listFrom(final List<String> list) {
     final ParticipantId[] array = new ParticipantId[list.size()];
     for (int i = 0; i < list.size(); i++) {
@@ -115,6 +175,12 @@ public class ParticipantUtils {
     return array;
   }
 
+  /**
+   * List from.
+   *
+   * @param list the list
+   * @return the participant id[]
+   */
   public ParticipantId[] listFrom(final Set<User> list) {
     final ParticipantId[] array = new ParticipantId[list.size()];
     final Iterator<User> iterator = list.iterator();
@@ -124,6 +190,12 @@ public class ParticipantUtils {
     return array;
   }
 
+  /**
+   * List from.
+   *
+   * @param list the list
+   * @return the participant id[]
+   */
   public ParticipantId[] listFrom(final String... list) {
     final ParticipantId[] array = new ParticipantId[list.length];
     for (int i = 0; i < list.length; i++) {
@@ -132,14 +204,33 @@ public class ParticipantUtils {
     return array;
   }
 
+  /**
+   * Of.
+   *
+   * @param list the list
+   * @return the participant id[]
+   */
   public ParticipantId[] of(final String... list) {
     return listFrom(list);
   }
 
+  /**
+   * Of.
+   *
+   * @param username the username
+   * @return the participant id
+   */
   public ParticipantId of(final String username) {
     return ofImpl(username);
   }
 
+  /**
+   * Of.
+   *
+   * @param author the author
+   * @param list the list
+   * @return the participant id[]
+   */
   public ParticipantId[] of(final String author, final String[] list) {
     if (list == null) {
       return listFrom(author);
@@ -152,6 +243,12 @@ public class ParticipantUtils {
     return array;
   }
 
+  /**
+   * Of impl.
+   *
+   * @param username the username
+   * @return the participant id
+   */
   private ParticipantId ofImpl(final String username) {
     try {
       if (username.contains(ParticipantId.DOMAIN_PREFIX)) {

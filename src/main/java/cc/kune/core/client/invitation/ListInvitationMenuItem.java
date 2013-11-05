@@ -31,9 +31,22 @@ import cc.kune.core.client.sn.actions.conditions.IsLoggedCondition;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListInvitationMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ListInvitationMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new list invitation menu item.
+   *
+   * @param action the action
+   * @param icons the icons
+   * @param isLogged the is logged
+   */
   @Inject
   ListInvitationMenuItem(final ListInvitationAction action, final IconicResources icons,
       final IsLoggedCondition isLogged) {

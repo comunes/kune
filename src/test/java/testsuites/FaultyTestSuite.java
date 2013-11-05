@@ -27,8 +27,9 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * A Test Suite to test (only) some tests that fails
- * 
+ * A Test Suite to test (only) some tests that fails.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @RunWith(Suite.class)
 @SuiteClasses({

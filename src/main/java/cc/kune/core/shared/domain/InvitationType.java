@@ -25,16 +25,19 @@ package cc.kune.core.shared.domain;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Enum InvitationType describes types of invitations (usually email
- * invitations)
+ * invitations).
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum InvitationType implements IsSerializable {
 
-  /** Invitation to a group */
+  /** Invitation to a group. */
   TO_GROUP,
 
-  /** Invitation to a group list */
+  /** Invitation to a group list. */
   TO_LISTS,
 
   /** Invitation to this site. */

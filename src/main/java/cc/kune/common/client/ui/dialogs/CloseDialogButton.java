@@ -32,25 +32,47 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CloseDialogButton.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CloseDialogButton extends Composite implements HasClickHandlers {
 
+  /**
+   * The Interface CloseDialogButtonUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface CloseDialogButtonUiBinder extends UiBinder<Widget, CloseDialogButton> {
   }
 
+  /** The ui binder. */
   private static CloseDialogButtonUiBinder uiBinder = GWT.create(CloseDialogButtonUiBinder.class);
 
+  /** The close btn. */
   @UiField
   PushButton closeBtn;
 
+  /**
+   * Instantiates a new close dialog button.
+   */
   public CloseDialogButton() {
     initWidget(uiBinder.createAndBindUi(this));
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.dom.client.HasClickHandlers#addClickHandler(com.google.gwt.event.dom.client.ClickHandler)
+   */
   @Override
   public HandlerRegistration addClickHandler(final ClickHandler handler) {
     return closeBtn.addClickHandler(handler);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     closeBtn.setVisible(visible);

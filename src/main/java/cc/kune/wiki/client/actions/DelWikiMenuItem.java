@@ -28,8 +28,21 @@ import cc.kune.gspace.client.actions.DelContentForEditorsMenuItem;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DelWikiMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DelWikiMenuItem extends DelContentForEditorsMenuItem {
 
+  /**
+   * Instantiates a new del wiki menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public DelWikiMenuItem(final I18nTranslationService i18n, final DelContentForEditorsAction action,
       final IconicResources res) {

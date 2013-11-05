@@ -37,12 +37,36 @@ import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TrashClientActions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TrashClientActions extends AbstractFoldableToolActions {
 
+  /** The all. */
   final String[] all = { TYPE_ROOT };
+  
+  /** The containers. */
   final String[] containers = { TYPE_ROOT };
+  
+  /** The containers no root. */
   final String[] containersNoRoot = {};
 
+  /**
+   * Instantiates a new trash client actions.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param stateManager the state manager
+   * @param registry the registry
+   * @param res the res
+   * @param refresh the refresh
+   * @param folderGoUp the folder go up
+   * @param emptyTrashBin the empty trash bin
+   * @param optionsMenuContent the options menu content
+   */
   @Inject
   public TrashClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
@@ -55,6 +79,9 @@ public class TrashClientActions extends AbstractFoldableToolActions {
     actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, emptyTrashBin, TYPE_ROOT);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
+   */
   @Override
   protected void createPostSessionInitActions() {
   }

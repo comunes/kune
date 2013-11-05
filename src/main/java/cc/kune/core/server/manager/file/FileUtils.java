@@ -29,13 +29,24 @@ import java.io.InputStream;
 
 import cc.kune.core.shared.domain.utils.StateToken;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FileUtils {
 
+  /** The Constant SLASH. */
   public static final String SLASH = File.separator;
 
   /**
    * Snippet from: http://www.java-tips.org/java-se-tips/java.io/reading-a-file
    * -into-a-byte-array.html
+   *
+   * @param file the file
+   * @return the bytes from file
+   * @throws IOException Signals that an I/O exception has occurred.
    */
   public static byte[] getBytesFromFile(final File file) throws IOException {
     final InputStream iStream = new FileInputStream(file);
@@ -70,9 +81,10 @@ public class FileUtils {
   /**
    * For filename extension info see:
    * http://en.wikipedia.org/wiki/File_name_extension
-   * 
-   * @param filename
-   * @return
+   *
+   * @param filename the filename
+   * @param withDot the with dot
+   * @return the file name extension
    */
   public static String getFileNameExtension(final String filename, final boolean withDot) {
     // also we can use FilenameUtils
@@ -92,6 +104,13 @@ public class FileUtils {
     }
   }
 
+  /**
+   * Gets the file name without extension.
+   *
+   * @param fileName the file name
+   * @param extension the extension
+   * @return the file name without extension
+   */
   public static String getFileNameWithoutExtension(final String fileName, final String extension) {
     final int extlength = extension.length();
     if (extlength > 0) {
@@ -102,6 +121,12 @@ public class FileUtils {
     }
   }
 
+  /**
+   * Gets the next sequential file name.
+   *
+   * @param fileName the file name
+   * @return the next sequential file name
+   */
   public static String getNextSequentialFileName(final String fileName) {
     final int lastSpace = fileName.lastIndexOf(" ");
     if (lastSpace != -1) {
@@ -115,6 +140,13 @@ public class FileUtils {
     return fileName + " 1";
   }
 
+  /**
+   * Gets the next sequential file name.
+   *
+   * @param fileName the file name
+   * @param preserveExtension the preserve extension
+   * @return the next sequential file name
+   */
   public static String getNextSequentialFileName(final String fileName, final boolean preserveExtension) {
     if (!preserveExtension) {
       return getNextSequentialFileName(fileName);
@@ -128,15 +160,33 @@ public class FileUtils {
     }
   }
 
+  /**
+   * Group to dir.
+   *
+   * @param groupName the group name
+   * @return the string
+   */
   public static String groupToDir(final String groupName) {
     return SLASH + groupName + SLASH;
   }
 
+  /**
+   * To dir.
+   *
+   * @param stateToken the state token
+   * @return the string
+   */
   public static String toDir(final StateToken stateToken) {
     return SLASH + stateToken.getGroup() + SLASH + stateToken.getTool() + SLASH + stateToken.getFolder()
         + SLASH;
   }
 
+  /**
+   * Exist.
+   *
+   * @param file the file
+   * @return true, if successful
+   */
   public boolean exist(final String file) {
     return new File(file).exists();
   }

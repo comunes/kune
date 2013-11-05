@@ -28,26 +28,64 @@ import cc.kune.core.client.ui.DefaultForm;
 import com.extjs.gxt.ui.client.widget.form.Field;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RegisterForm.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class RegisterForm extends DefaultForm {
 
+  /** The Constant COUNTRY_FIELD. */
   public static final String COUNTRY_FIELD = "k-urf-country-f";
+  
+  /** The Constant EMAIL_FIELD. */
   public static final String EMAIL_FIELD = "k-urf-email-f";
+  
+  /** The Constant LANG_FIELD. */
   public static final String LANG_FIELD = "k-urf-lang-f";
+  
+  /** The Constant LONGNAME_FIELD. */
   public static final String LONGNAME_FIELD = "k-urf-long_name-f";
+  
+  /** The Constant NICK_FIELD. */
   public static final String NICK_FIELD = "k-urf-nick-f";
+  
+  /** The Constant NOPERSONALHOMEPAGE_ID. */
   public static final String NOPERSONALHOMEPAGE_ID = "k-urf-nphp-id";
+  
+  /** The Constant PASSWORD_FIELD. */
   public static final String PASSWORD_FIELD = "k-urf-password-f";
+  
+  /** The Constant PASSWORD_FIELD_DUP. */
   public static final String PASSWORD_FIELD_DUP = "k-urf-passwordDup-f";
+  
+  /** The Constant TIMEZONE_FIELD. */
   public static final String TIMEZONE_FIELD = "k-urf-timezone-f";
+  
+  /** The Constant WANNAPERSONALHOMEPAGE_ID. */
   public static final String WANNAPERSONALHOMEPAGE_ID = "k-urf-wphp-id";
+  
+  /** The Constant WANTHOMEPAGE_FIELD. */
   public static final String WANTHOMEPAGE_FIELD = "k-urf-wphp-f";
 
+  /** The email reg field. */
   private final TextField<String> emailRegField;
+  
+  /** The long name reg field. */
   private final TextField<String> longNameRegField;
+  
+  /** The passwd reg field. */
   private final TextField<String> passwdRegField;
 
+  /** The short name reg field. */
   private final TextField<String> shortNameRegField;
 
+  /**
+   * Instantiates a new register form.
+   *
+   * @param i18n the i18n
+   */
   public RegisterForm(final I18nTranslationService i18n) {
     super.addStyleName("kune-Margin-Large-l");
 
@@ -68,38 +106,83 @@ public class RegisterForm extends DefaultForm {
     add(emailRegField);
   }
 
+  /**
+   * Gets the email.
+   *
+   * @return the email
+   */
   public String getEmail() {
     return emailRegField.getValue();
   }
 
+  /**
+   * Gets the long name.
+   *
+   * @return the long name
+   */
   public String getLongName() {
     return longNameRegField.getValue();
   }
 
+  /**
+   * Gets the long name field.
+   *
+   * @return the long name field
+   */
   public Field<String> getLongNameField() {
     return longNameRegField;
   }
 
+  /**
+   * Gets the register password.
+   *
+   * @return the register password
+   */
   public String getRegisterPassword() {
     return passwdRegField.getValue();
   }
 
+  /**
+   * Gets the short name.
+   *
+   * @return the short name
+   */
   public String getShortName() {
     return shortNameRegField.getValue();
   }
 
+  /**
+   * Gets the short name field.
+   *
+   * @return the short name field
+   */
   public Field<String> getShortNameField() {
     return shortNameRegField;
   }
 
+  /**
+   * Sets the email failed.
+   *
+   * @param msg the new email failed
+   */
   public void setEmailFailed(final String msg) {
     emailRegField.markInvalid(msg);
   }
 
+  /**
+   * Sets the long name failed.
+   *
+   * @param msg the new long name failed
+   */
   public void setLongNameFailed(final String msg) {
     longNameRegField.markInvalid(msg);
   }
 
+  /**
+   * Sets the short name failed.
+   *
+   * @param msg the new short name failed
+   */
   public void setShortNameFailed(final String msg) {
     shortNameRegField.markInvalid(msg);
   }

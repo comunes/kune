@@ -35,12 +35,25 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nCountryManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class I18nCountryManagerDefault extends DefaultManager<I18nCountry, Long> implements
     I18nCountryManager {
 
+  /** The finder. */
   private final I18nCountryFinder finder;
 
+  /**
+   * Instantiates a new i18n country manager default.
+   *
+   * @param provider the provider
+   * @param finder the finder
+   */
   @Inject
   public I18nCountryManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final I18nCountryFinder finder) {
@@ -48,11 +61,17 @@ public class I18nCountryManagerDefault extends DefaultManager<I18nCountry, Long>
     this.finder = finder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.I18nCountryManager#findByCode(java.lang.String)
+   */
   @Override
   public I18nCountry findByCode(final String country) {
     return finder.findByCode(country);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.I18nCountryManager#getAll()
+   */
   @Override
   public List<I18nCountry> getAll() {
     return finder.getAll();

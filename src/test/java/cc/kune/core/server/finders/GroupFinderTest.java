@@ -34,21 +34,48 @@ import cc.kune.domain.finders.GroupFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupFinderTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupFinderTest extends PersistenceTest {
+  
+  /** The Constant LONG_NAME_A. */
   private static final String LONG_NAME_A = "long name a";
+  
+  /** The Constant LONG_NAME_B. */
   private static final String LONG_NAME_B = "long name b";
+  
+  /** The Constant LONG_NAME_C. */
   private static final String LONG_NAME_C = "long name c";
+  
+  /** The Constant SHORT_NAME_A. */
   private static final String SHORT_NAME_A = "shortnamea";
+  
+  /** The Constant SHORT_NAME_B. */
   private static final String SHORT_NAME_B = "shortnameb";
+  
+  /** The Constant SHORT_NAME_C. */
   private static final String SHORT_NAME_C = "shortnamec";
+  
+  /** The group finder. */
   @Inject
   GroupFinder groupFinder;
 
+  /**
+   * Close.
+   */
   @After
   public void close() {
     closeTransaction();
   }
 
+  /**
+   * Insert data.
+   */
   @Before
   public void insertData() {
     openTransaction();
@@ -58,18 +85,27 @@ public class GroupFinderTest extends PersistenceTest {
     persist(groupC);
   }
 
+  /**
+   * Test count.
+   */
   @Test
   public void testCount() {
     assertEquals(1, (long) groupFinder.countByLongName(LONG_NAME_B));
     assertEquals(1, (long) groupFinder.countByShortName(SHORT_NAME_A));
   }
 
+  /**
+   * Test get all.
+   */
   @Test
   public void testGetAll() {
     assertEquals(3, groupFinder.getAll().size());
 
   }
 
+  /**
+   * Test sort.
+   */
   @Test
   public void testSort() {
     assertEquals(SHORT_NAME_A, groupFinder.getAll().get(0).getShortName());

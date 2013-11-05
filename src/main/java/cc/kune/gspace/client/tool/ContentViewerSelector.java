@@ -46,16 +46,40 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentViewerSelector.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ContentViewerSelector {
 
+  /** The current view. */
   private ContentViewer currentView;
+  
+  /** The def views register. */
   private final HashMap<String, ContentViewer> defViewsRegister;
+  
+  /** The no home. */
   private final Provider<NoHomePageViewer> noHome;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The state manager. */
   private final StateManager stateManager;
+  
+  /** The views register. */
   private final HashMap<String, List<ContentViewer>> viewsRegister;
 
+  /**
+   * Instantiates a new content viewer selector.
+   *
+   * @param stateManager the state manager
+   * @param session the session
+   * @param noHome the no home
+   */
   @Inject
   public ContentViewerSelector(final StateManager stateManager, final Session session,
       final Provider<NoHomePageViewer> noHome) {
@@ -66,12 +90,18 @@ public class ContentViewerSelector {
     defViewsRegister = new HashMap<String, ContentViewer>();
   }
 
+  /**
+   * Detach current.
+   */
   private void detachCurrent() {
     if (currentView != null) {
       currentView.detach();
     }
   }
 
+  /**
+   * Inits the.
+   */
   public void init() {
     session.onAppStart(true, new AppStartHandler() {
       @Override
@@ -91,6 +121,13 @@ public class ContentViewerSelector {
     });
   }
 
+  /**
+   * Register.
+   *
+   * @param view the view
+   * @param isDefault the is default
+   * @param typeIds the type ids
+   */
   public void register(@Nonnull final ContentViewer view, final boolean isDefault,
       @Nonnull final String... typeIds) {
     for (final String typeId : typeIds) {
@@ -107,11 +144,23 @@ public class ContentViewerSelector {
     }
   }
 
+  /**
+   * Register.
+   *
+   * @param typeId the type id
+   * @param view the view
+   */
   public void register(final String typeId, final ContentViewer view) {
     Log.info("Registered " + typeId + " with class " + ContentViewer.class);
     register(view, false, typeId);
   }
 
+  /**
+   * Sets the content.
+   *
+   * @param view the view
+   * @param state the state
+   */
   private void setContent(final ContentViewer view, final HasContent state) {
     detachCurrent();
     view.setContent(state);
@@ -119,6 +168,11 @@ public class ContentViewerSelector {
     currentView = view;
   }
 
+  /**
+   * Sets the content.
+   *
+   * @param state the new content
+   */
   public void setContent(@Nonnull final HasContent state) {
     final String typeId = state.getTypeId();
     assert typeId != null;

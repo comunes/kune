@@ -35,48 +35,97 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import cc.kune.domain.utils.HasId;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CustomProperties.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Entity
 @Table(name = "customproperties")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CustomProperties implements HasId {
 
+  /** The id. */
   @Id
   @GeneratedValue
   private Long id;
 
+  /** The data. */
   @Lob
   private HashMap<Class<?>, Object> data;
 
+  /**
+   * Instantiates a new custom properties.
+   */
   public CustomProperties() {
     data = new HashMap<Class<?>, Object>();
   }
 
+  /**
+   * Gets the data.
+   *
+   * @return the data
+   */
   public HashMap<Class<?>, Object> getData() {
     return data;
   }
 
+  /**
+   * Gets the data.
+   *
+   * @param <T> the generic type
+   * @param type the type
+   * @return the data
+   */
   @SuppressWarnings("unchecked")
   public <T> T getData(final Class<T> type) {
     return (T) data.get(type);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.domain.utils.HasId#getId()
+   */
   public Long getId() {
     return id;
   }
 
+  /**
+   * Checks for propertie.
+   *
+   * @param <T> the generic type
+   * @param type the type
+   * @return true, if successful
+   */
   public <T> boolean hasPropertie(final Class<T> type) {
     return data.containsKey(type);
   }
 
+  /**
+   * Sets the data.
+   *
+   * @param <T> the generic type
+   * @param type the type
+   * @param value the value
+   * @return the t
+   */
   @SuppressWarnings("unchecked")
   public <T> T setData(final Class<T> type, final T value) {
     return (T) data.put(type, value);
   }
 
+  /**
+   * Sets the data.
+   *
+   * @param data the data
+   */
   public void setData(final HashMap<Class<?>, Object> data) {
     this.data = data;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
+   */
   public void setId(final Long id) {
     this.id = id;
   }

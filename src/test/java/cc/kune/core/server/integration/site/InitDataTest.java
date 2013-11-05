@@ -40,17 +40,36 @@ import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InitDataTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class InitDataTest extends IntegrationTest {
 
+  /** The group finder. */
   @Inject
   Group groupFinder;
+  
+  /** The i18n lang manager. */
   @Inject
   I18nLanguageManager i18nLangManager;
+  
+  /** The service. */
   @Inject
   SiteService service;
+  
+  /** The session. */
   @Inject
   UserSession session;
 
+  /**
+   * Assert valid license dto list.
+   *
+   * @param licenseList the license list
+   */
   private void assertValidLicenseDTOList(final List<LicenseDTO> licenseList) {
     assertTrue(licenseList.size() > 0);
     for (final Object o : licenseList) {
@@ -59,11 +78,19 @@ public class InitDataTest extends IntegrationTest {
     }
   }
 
+  /**
+   * Inits the.
+   */
   @Before
   public void init() {
     new IntegrationTestHelper(true, this);
   }
 
+  /**
+   * Test get init data.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testGetInitData() throws Exception {
     final InitDataDTO initData = service.getInitData(null);

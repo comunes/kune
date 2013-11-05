@@ -22,6 +22,11 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
+/**
+ * The Class GwtButtonGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtButtonGui extends AbstractGwtButtonGui {
 
 }

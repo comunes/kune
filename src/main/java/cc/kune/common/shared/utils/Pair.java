@@ -15,23 +15,49 @@
  */
 package cc.kune.common.shared.utils;
 
+// TODO: Auto-generated Javadoc
 /**
- * @param <L>
- * @param <R>
+ * The Class Pair.
+ *
+ * @param <L> the generic type
+ * @param <R> the generic type
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class Pair<L, R> {
+  
+  /**
+   * Creates the.
+   *
+   * @param <L> the generic type
+   * @param <R> the generic type
+   * @param l the l
+   * @param r the r
+   * @return the pair
+   */
   public static <L, R> Pair<L, R> create(final L l, final R r) {
     return new Pair<L, R>(l, r);
   }
 
+  /** The left. */
   public final L left;
+  
+  /** The right. */
   public final R right;
 
+  /**
+   * Instantiates a new pair.
+   *
+   * @param left the left
+   * @param right the right
+   */
   private Pair(final L left, final R right) {
     this.left = left;
     this.right = right;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @SuppressWarnings("unchecked")
   @Override
   public boolean equals(final Object obj) {
@@ -62,14 +88,27 @@ public final class Pair<L, R> {
     return true;
   }
 
+  /**
+   * Gets the left.
+   *
+   * @return the left
+   */
   public L getLeft() {
     return left;
   }
 
+  /**
+   * Gets the right.
+   *
+   * @return the right
+   */
   public R getRight() {
     return right;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -79,6 +118,9 @@ public final class Pair<L, R> {
     return result;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return "(" + left + "," + right + ")";

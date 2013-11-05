@@ -28,7 +28,15 @@ import java.util.List;
 
 import cc.kune.domain.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LocalUserDestinationProvider.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LocalUserDestinationProvider implements DestinationProvider {
+  
+  /** The list. */
   private final List<Addressee> list;
 
   /**
@@ -42,6 +50,9 @@ public class LocalUserDestinationProvider implements DestinationProvider {
     list = Arrays.asList(Addressee.build(user));
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
@@ -64,11 +75,17 @@ public class LocalUserDestinationProvider implements DestinationProvider {
     return true;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.notifier.DestinationProvider#getDest()
+   */
   @Override
   public Collection<Addressee> getDest() {
     return list;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     final int prime = 31;

@@ -39,11 +39,31 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityOptGeneralPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGeneralView {
+  
+  /** The Constant TAB_ID. */
   public static final String TAB_ID = "k-eodlp-gen-id";
+  
+  /** The mask widget. */
   private final MaskWidget maskWidget;
+  
+  /** The tab title. */
   private final IconLabel tabTitle;
 
+  /**
+   * Instantiates a new entity opt general panel.
+   *
+   * @param maskWidget the mask widget
+   * @param img the img
+   * @param title the title
+   * @param introMessage the intro message
+   */
   public EntityOptGeneralPanel(final MaskWidget maskWidget, final ImageResource img, final String title,
       final String introMessage) {
     this.maskWidget = maskWidget;
@@ -59,32 +79,50 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
     super.add(label);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.IsWidget#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return super.getFormPanel();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralView#clear()
+   */
   @Override
   public void clear() {
     super.getFormPanel().removeAll();
     super.reset();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.EntityOptionsTabView#getTabTitle()
+   */
   @Override
   public IsWidget getTabTitle() {
     return tabTitle;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralView#isRendered()
+   */
   @Override
   public boolean isRendered() {
     return super.getFormPanel().isRendered();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralView#mask()
+   */
   @Override
   public void mask() {
     maskWidget.mask(this);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralView#setChangeHandler(com.google.gwt.event.dom.client.ChangeHandler)
+   */
   @Override
   public void setChangeHandler(final ChangeHandler changeHandler) {
     final Listener<BaseEvent> listener = new Listener<BaseEvent>() {
@@ -108,6 +146,9 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralView#unmask()
+   */
   @Override
   public void unmask() {
     maskWidget.unMask();

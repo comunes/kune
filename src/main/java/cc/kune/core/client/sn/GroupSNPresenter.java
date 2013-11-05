@@ -53,54 +53,176 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupSNPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupSNPresenter extends
     AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy> {
 
+  /**
+   * The Interface GroupSNProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface GroupSNProxy extends Proxy<GroupSNPresenter> {
   }
 
+  /**
+   * The Interface GroupSNView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface GroupSNView extends View {
 
+    /**
+     * Adds the admin.
+     *
+     * @param group the group
+     * @param avatarUrl the avatar url
+     * @param tooltip the tooltip
+     * @param tooltipTitle the tooltip title
+     * @param menu the menu
+     * @param dragable the dragable
+     */
     void addAdmin(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
         GuiActionDescCollection menu, boolean dragable);
 
+    /**
+     * Adds the collab.
+     *
+     * @param group the group
+     * @param avatarUrl the avatar url
+     * @param tooltip the tooltip
+     * @param tooltipTitle the tooltip title
+     * @param menu the menu
+     * @param dragable the dragable
+     */
     void addCollab(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
         GuiActionDescCollection menu, boolean dragable);
 
+    /**
+     * Adds the pending.
+     *
+     * @param group the group
+     * @param avatarUrl the avatar url
+     * @param tooltip the tooltip
+     * @param tooltipTitle the tooltip title
+     * @param menu the menu
+     * @param dragable the dragable
+     */
     void addPending(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
         GuiActionDescCollection menu, boolean dragable);
 
+    /**
+     * Clear.
+     */
     void clear();
 
+    /**
+     * Gets the bottom toolbar.
+     *
+     * @return the bottom toolbar
+     */
     IsActionExtensible getBottomToolbar();
 
+    /**
+     * Sets the admins count.
+     *
+     * @param count the new admins count
+     */
     void setAdminsCount(int count);
 
+    /**
+     * Sets the admins visible.
+     *
+     * @param visible the visible
+     * @param big the big
+     */
     void setAdminsVisible(boolean visible, boolean big);
 
+    /**
+     * Sets the collabs count.
+     *
+     * @param count the new collabs count
+     */
     void setCollabsCount(int count);
 
+    /**
+     * Sets the collabs visible.
+     *
+     * @param visible the visible
+     * @param big the big
+     */
     void setCollabsVisible(boolean visible, boolean big);
 
+    /**
+     * Sets the pendings count.
+     *
+     * @param count the new pendings count
+     */
     void setPendingsCount(int count);
 
+    /**
+     * Sets the pending visible.
+     *
+     * @param visible the visible
+     * @param big the big
+     */
     void setPendingVisible(boolean visible, boolean big);
 
+    /**
+     * Sets the visible.
+     *
+     * @param visible the new visible
+     */
     void setVisible(boolean visible);
 
+    /**
+     * Show member not public.
+     */
     void showMemberNotPublic();
 
+    /**
+     * Show members.
+     */
     void showMembers();
 
+    /**
+     * Show orphan.
+     */
     void showOrphan();
   }
 
+  /** The actions registry. */
   private final GroupSNConfActions actionsRegistry;
+  
+  /** The admins menu items registry. */
   private final GroupSNAdminsMenuItemsRegistry adminsMenuItemsRegistry;
+  
+  /** The collabs menu items registry. */
   private final GroupSNCollabsMenuItemsRegistry collabsMenuItemsRegistry;
+  
+  /** The pendings menu items registry. */
   private final GroupSNPendingsMenuItemsRegistry pendingsMenuItemsRegistry;
 
+  /**
+   * Instantiates a new group sn presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param stateManager the state manager
+   * @param session the session
+   * @param downloadProvider the download provider
+   * @param adminsMenuItemsRegistry the admins menu items registry
+   * @param collabsMenuItemsRegistry the collabs menu items registry
+   * @param pendingsMenuItemsRegistry the pendings menu items registry
+   * @param actionsRegistry the actions registry
+   */
   @Inject
   public GroupSNPresenter(final EventBus eventBus, final GroupSNView view, final GroupSNProxy proxy,
       final StateManager stateManager, final Session session,
@@ -142,11 +264,19 @@ public class GroupSNPresenter extends
     refreshActionsImpl();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
+   */
   @Override
   public GroupSNView getView() {
     return (GroupSNView) super.getView();
   }
 
+  /**
+   * On state changed.
+   *
+   * @param state the state
+   */
   private void onStateChanged(final StateAbstractDTO state) {
     if (state.getGroup().isPersonal()) {
       getView().setVisible(false);
@@ -162,15 +292,26 @@ public class GroupSNPresenter extends
     }
   }
 
+  /**
+   * Refresh actions.
+   */
   public void refreshActions() {
     refreshActionsImpl();
   }
 
+  /**
+   * Refresh actions impl.
+   */
   private void refreshActionsImpl() {
     getView().getBottomToolbar().clear();
     getView().getBottomToolbar().addAll(actionsRegistry);
   }
 
+  /**
+   * Refresh on sign in sign out.
+   *
+   * @param session the session
+   */
   private void refreshOnSignInSignOut(final Session session) {
     final StateAbstractDTO currentState = session.getCurrentState();
     if (currentState != null) {
@@ -178,11 +319,20 @@ public class GroupSNPresenter extends
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /**
+   * Sets the group members.
+   *
+   * @param socialNetwork the social network
+   * @param rights the rights
+   */
   private void setGroupMembers(final SocialNetworkDTO socialNetwork, final AccessRights rights) {
     final AccessListsDTO accessLists = socialNetwork.getAccessLists();
 

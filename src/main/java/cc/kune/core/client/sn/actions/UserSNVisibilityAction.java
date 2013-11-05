@@ -35,13 +35,37 @@ import cc.kune.core.shared.domain.UserSNetVisibility;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserSNVisibilityAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserSNVisibilityAction extends AbstractExtendedAction {
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The state manager. */
   private final StateManager stateManager;
+  
+  /** The user service async. */
   private final Provider<UserServiceAsync> userServiceAsync;
+  
+  /** The visibility. */
   private UserSNetVisibility visibility;
 
+  /**
+   * Instantiates a new user sn visibility action.
+   *
+   * @param session the session
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param userServiceProvider the user service provider
+   */
   @Inject
   public UserSNVisibilityAction(final Session session, final StateManager stateManager,
       final I18nTranslationService i18n, final Provider<UserServiceAsync> userServiceProvider) {
@@ -51,6 +75,9 @@ public class UserSNVisibilityAction extends AbstractExtendedAction {
     this.userServiceAsync = userServiceProvider;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     userServiceAsync.get().setBuddiesVisibility(session.getUserHash(),
@@ -67,6 +94,11 @@ public class UserSNVisibilityAction extends AbstractExtendedAction {
 
   }
 
+  /**
+   * Sets the visibility.
+   *
+   * @param visibility the new visibility
+   */
   public void setVisibility(final UserSNetVisibility visibility) {
     this.visibility = visibility;
   }

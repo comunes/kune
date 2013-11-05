@@ -27,13 +27,28 @@ import java.util.List;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReservedWordsRegistryDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ReservedWordsRegistryDTO extends ArrayList<String> implements IsSerializable {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 4560973224792765637L;
 
+  /**
+   * Instantiates a new reserved words registry dto.
+   */
   public ReservedWordsRegistryDTO() {
   }
 
+  /**
+   * Instantiates a new reserved words registry dto.
+   *
+   * @param list the list
+   */
   public ReservedWordsRegistryDTO(final List<String> list) {
     super(list);
   }

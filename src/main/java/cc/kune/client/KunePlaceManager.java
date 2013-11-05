@@ -26,13 +26,28 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.proxy.PlaceManagerImpl;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KunePlaceManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KunePlaceManager extends PlaceManagerImpl {
 
+  /**
+   * Instantiates a new kune place manager.
+   *
+   * @param eventBus the event bus
+   * @param tokenFormatter the token formatter
+   */
   @Inject
   public KunePlaceManager(final EventBus eventBus, final TokenFormatter tokenFormatter) {
     super(eventBus, tokenFormatter);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.proxy.PlaceManager#revealDefaultPlace()
+   */
   @Override
   public void revealDefaultPlace() {
   }

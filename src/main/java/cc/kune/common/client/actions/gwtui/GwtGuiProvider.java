@@ -40,8 +40,30 @@ import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GwtGuiProvider.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtGuiProvider {
 
+  /**
+   * Instantiates a new gwt gui provider.
+   *
+   * @param guiProvider the gui provider
+   * @param gwtSubMenuGui the gwt sub menu gui
+   * @param gwtMenuGui the gwt menu gui
+   * @param gwtMenuItemGui the gwt menu item gui
+   * @param gwtMenuSeparatorGui the gwt menu separator gui
+   * @param gwtPushButtonGui the gwt push button gui
+   * @param gwtButtonGui the gwt button gui
+   * @param gwtLabelGui the gwt label gui
+   * @param gwtIconLabelGui the gwt icon label gui
+   * @param gwtToolbarGui the gwt toolbar gui
+   * @param gwtToolbarSeparatorGui the gwt toolbar separator gui
+   * @param gwtMenuTitleItemGui the gwt menu title item gui
+   */
   @Inject
   public GwtGuiProvider(final GuiProvider guiProvider, final Provider<GwtSubMenuGui> gwtSubMenuGui,
       final Provider<GwtMenuGui> gwtMenuGui, final Provider<GwtMenuItemGui> gwtMenuItemGui,

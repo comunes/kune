@@ -27,8 +27,17 @@ import cc.kune.blogs.client.actions.BlogsNewMenu;
 import cc.kune.blogs.client.actions.PostNewMenu;
 import cc.kune.core.client.ExtendedGinModule;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BlogsGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BlogsGinModule extends ExtendedGinModule {
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     s(BlogsNewMenu.class);

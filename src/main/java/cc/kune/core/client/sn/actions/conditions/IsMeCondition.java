@@ -28,14 +28,28 @@ import cc.kune.core.client.state.Session;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IsMeCondition.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class IsMeCondition extends IsNotMeCondition {
 
+  /**
+   * Instantiates a new checks if is me condition.
+   *
+   * @param session the session
+   */
   @Inject
   public IsMeCondition(final Session session) {
     super(session);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.sn.actions.conditions.IsNotMeCondition#mustBeAdded(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {
     if (session.isNotLogged()) {

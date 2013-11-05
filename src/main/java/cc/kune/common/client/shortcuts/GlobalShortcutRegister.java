@@ -25,12 +25,30 @@ package cc.kune.common.client.shortcuts;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.KeyStroke;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface GlobalShortcutRegister.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GlobalShortcutRegister {
 
+  /**
+   * Disable.
+   */
   public abstract void disable();
 
+  /**
+   * Enable.
+   */
   public abstract void enable();
 
+  /**
+   * Put.
+   *
+   * @param keystroke the keystroke
+   * @param action the action
+   */
   public abstract void put(final KeyStroke keystroke, final AbstractAction action);
 
 }

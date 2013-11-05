@@ -38,15 +38,41 @@ import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CopyContentMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CopyContentMenuItem extends MenuItemDescriptor {
 
+  /**
+   * The Class CopyContentAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class CopyContentAction extends RolAction {
 
+    /** The content service. */
     private final ContentServiceAsync contentService;
+    
+    /** The i18n. */
     private final I18nTranslationService i18n;
+    
+    /** The session. */
     private final Session session;
+    
+    /** The state manager. */
     private final StateManager stateManager;
 
+    /**
+     * Instantiates a new copy content action.
+     *
+     * @param session the session
+     * @param stateManager the state manager
+     * @param contentService the content service
+     * @param i18n the i18n
+     */
     @Inject
     public CopyContentAction(final Session session, final StateManager stateManager,
         final ContentServiceAsync contentService, final I18nTranslationService i18n) {
@@ -57,6 +83,9 @@ public class CopyContentMenuItem extends MenuItemDescriptor {
       this.i18n = i18n;
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       NotifyUser.showProgress(i18n.t("Copying"));
@@ -76,6 +105,14 @@ public class CopyContentMenuItem extends MenuItemDescriptor {
 
   }
 
+  /**
+   * Instantiates a new copy content menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param optionsMenu the options menu
+   * @param res the res
+   */
   @Inject
   public CopyContentMenuItem(final I18nTranslationService i18n, final CopyContentAction action,
       final ContentViewerOptionsMenu optionsMenu, final CommonResources res) {

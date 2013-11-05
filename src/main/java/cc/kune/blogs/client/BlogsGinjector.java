@@ -24,8 +24,19 @@ package cc.kune.blogs.client;
 
 import com.google.gwt.inject.client.Ginjector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface BlogsGinjector.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface BlogsGinjector extends Ginjector {
 
+  /**
+   * Gets the blogs parts.
+   *
+   * @return the blogs parts
+   */
   BlogsParts getBlogsParts();
 
 }

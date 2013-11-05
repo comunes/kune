@@ -22,6 +22,11 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
+/**
+ * The Class GwtMenuItemGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtMenuItemGui extends AbstractGwtMenuItemGui {
 
 }

@@ -25,7 +25,19 @@ package cc.kune.core.server.persist;
 import com.google.inject.Inject;
 import com.google.inject.persist.PersistService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GenericPersistenceInitializer.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GenericPersistenceInitializer {
+  
+  /**
+   * Instantiates a new generic persistence initializer.
+   *
+   * @param service the service
+   */
   @Inject
   GenericPersistenceInitializer(final PersistService service) {
     service.start();

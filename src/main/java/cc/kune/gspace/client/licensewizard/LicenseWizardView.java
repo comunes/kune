@@ -26,9 +26,18 @@ import cc.kune.common.client.ui.dialogs.wizard.WizardDialogView;
 
 import com.gwtplatform.mvp.client.View;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface LicenseWizardView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface LicenseWizardView extends WizardDialogView, View {
 
+  /** The height. */
   String HEIGHT = "350px";
+  
+  /** The width. */
   String WIDTH = "400px";
 
 }

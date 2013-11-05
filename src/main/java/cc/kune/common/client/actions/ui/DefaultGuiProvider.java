@@ -27,20 +27,36 @@ import java.util.Map;
 
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DefaultGuiProvider.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DefaultGuiProvider implements GuiProvider {
 
+  /** The map. */
   private final Map<Class<?>, Provider<?>> map;
 
+  /**
+   * Instantiates a new default gui provider.
+   */
   public DefaultGuiProvider() {
     map = new HashMap<Class<?>, Provider<?>>();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.GuiProvider#get(java.lang.Class)
+   */
   @Override
   public <T> GuiBinding get(final Class<T> classType) {
     // If this return a NPE is because any GuiProvider has register bindings
     return (GuiBinding) map.get(classType).get();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.GuiProvider#register(java.lang.Class, com.google.inject.Provider)
+   */
   @Override
   public <T, Z> void register(final Class<T> classType, final Provider<Z> binding) {
     map.put(classType, binding);

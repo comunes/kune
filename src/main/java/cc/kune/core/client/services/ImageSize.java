@@ -22,6 +22,18 @@
  \*/
 package cc.kune.core.client.services;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum ImageSize.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum ImageSize {
-  sized, thumb, ico
+  
+  /** The sized. */
+  sized, 
+ /** The thumb. */
+ thumb, 
+ /** The ico. */
+ ico
 }

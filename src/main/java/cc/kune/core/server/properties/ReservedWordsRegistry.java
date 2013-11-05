@@ -30,20 +30,43 @@ import cc.kune.core.client.errors.DefaultException;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ReservedWordsRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ReservedWordsRegistry extends ArrayList<String> {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 7455756500618858360L;
 
+  /**
+   * From list.
+   *
+   * @param kuneProperties the kune properties
+   * @return the list
+   */
   public static List<String> fromList(final KuneProperties kuneProperties) {
     return kuneProperties.getList(KuneProperties.RESERVED_WORDS);
   }
 
+  /**
+   * Instantiates a new reserved words registry.
+   *
+   * @param kuneProperties the kune properties
+   */
   @Inject
   public ReservedWordsRegistry(final KuneProperties kuneProperties) {
     super(fromList(kuneProperties));
   }
 
+  /**
+   * Check.
+   *
+   * @param names the names
+   */
   public void check(final String... names) {
     for (final String name : names) {
       if (this.contains(name) || this.contains(name.toLowerCase())) {

@@ -22,12 +22,24 @@
  */
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving beforeAction events.
+ * The class that is interested in processing a beforeAction
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addBeforeActionListener<code> method. When
+ * the beforeAction event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see BeforeActionEvent
+ */
 public interface BeforeActionListener {
 
   /**
-   * Return false to cancel the action
-   * 
-   * @return
+   * Return false to cancel the action.
+   *
+   * @return true, if successful
    */
   boolean beforeAction();
 

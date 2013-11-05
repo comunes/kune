@@ -32,9 +32,21 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GlobalShortcuts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class GlobalShortcuts {
 
+  /**
+   * Instantiates a new global shortcuts.
+   *
+   * @param register the register
+   * @param eventBus the event bus
+   */
   @Inject
   public GlobalShortcuts(final GlobalShortcutRegister register, final EventBus eventBus) {
     register.put(KeyStroke.getKeyStroke(KeyCodes.KEY_ESCAPE, 0), new AbstractExtendedAction() {

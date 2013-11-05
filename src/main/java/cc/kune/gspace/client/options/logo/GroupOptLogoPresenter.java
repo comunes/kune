@@ -34,8 +34,25 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupOptLogoPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupOptLogoPresenter extends EntityOptLogoPresenter {
 
+  /**
+   * Instantiates a new group opt logo presenter.
+   *
+   * @param eventBus the event bus
+   * @param session the session
+   * @param entityOptions the entity options
+   * @param stateManager the state manager
+   * @param userService the user service
+   * @param view the view
+   * @param i18n the i18n
+   */
   @Inject
   public GroupOptLogoPresenter(final EventBus eventBus, final Session session,
       final GroupOptions entityOptions, final StateManager stateManager,
@@ -51,11 +68,19 @@ public class GroupOptLogoPresenter extends EntityOptLogoPresenter {
     });
   }
 
+  /**
+   * Inits the.
+   *
+   * @param view the view
+   */
   private void init(final GroupOptLogoView view) {
     super.init(view);
     view.setNormalGroupsLabels();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#setState()
+   */
   @Override
   protected void setState() {
     view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());

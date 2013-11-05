@@ -35,20 +35,37 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GwtIconLabelGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtIconLabelGui extends AbstractGuiItem {
+  
+  /** The icon label. */
   private IconLabel iconLabel;
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#addStyle(java.lang.String)
+   */
   @Override
   protected void addStyle(final String style) {
     iconLabel.addStyleName(style);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#clearStyles()
+   */
   @Override
   protected void clearStyles() {
     iconLabel.setStyleName("k-none");
     iconLabel.setStyleName("k-table");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
@@ -73,42 +90,66 @@ public class GwtIconLabelGui extends AbstractGuiItem {
     return this;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
+   */
   @Override
   public void setEnabled(final boolean enabled) {
     super.setVisible(enabled);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+   */
   @Override
   public void setIcon(final KuneIcon icon) {
     iconLabel.setLeftIconFont(icon);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+   */
   @Override
   public void setIconBackground(final String color) {
     iconLabel.setLeftIconBackground(color);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google.gwt.resources.client.ImageResource)
+   */
   @Override
   public void setIconResource(final ImageResource icon) {
     iconLabel.setLeftIconResource(icon);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+   */
   @Override
   protected void setIconStyle(final String style) {
     iconLabel.setRightIcon(style);
     iconLabel.addRightIconStyle("k-fl");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+   */
   @Override
   public void setIconUrl(final String url) {
     iconLabel.setLeftIconUrl(url);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+   */
   @Override
   public void setText(final String text) {
     iconLabel.setText(text, descriptor.getDirection());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
+   */
   @Override
   public boolean shouldBeAdded() {
     return true;

@@ -29,22 +29,38 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TextUtilsTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TextUtilsTest {
 
+  /** The Constant DOMAIN_REGEXP. */
   private static final String DOMAIN_REGEXP = "^http([s]|)://localhost/.*";
 
+  /**
+   * Test de accent.
+   */
   @Test
   public void testDeAccent() {
     assertTrue(TextUtils.deAccent("áéíóúàèìòùâêîôûäëïöüÁÉÍÓÚÀÈÌÒÙÂÊÎÔÛÄËÏÖÜñÑçÇ").equals(
         "aeiouaeiouaeiouaeiouAEIOUAEIOUAEIOUAEIOUnNcC"));
   }
 
+  /**
+   * Test email.
+   */
   @Test
   public void testEmail() {
     assertTrue("kk@ex.com".matches(TextUtils.EMAIL_REGEXP));
     assertTrue("kk@local.net".matches(TextUtils.EMAIL_REGEXP));
   }
 
+  /**
+   * Test email list.
+   */
   @Test
   public void testEmailList() {
     assertTrue("kk@ex.com,kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
@@ -58,6 +74,9 @@ public class TextUtilsTest {
     assertTrue("kk@ex.com, \t  \n  \f  \r kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
   }
 
+  /**
+   * Test remove http.
+   */
   @Test
   public void testRemoveHttp() {
     assertEquals("localhost", TextUtils.removeHttp("http://localhost/"));
@@ -68,6 +87,9 @@ public class TextUtilsTest {
     assertEquals("localhost:8080", TextUtils.removeHttp("https://localhost:8080/"));
   }
 
+  /**
+   * Test url domain.
+   */
   @Test
   public void testUrlDomain() {
     assertTrue("http://localhost/kk".matches(DOMAIN_REGEXP));

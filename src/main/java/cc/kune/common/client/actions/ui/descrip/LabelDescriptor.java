@@ -24,20 +24,43 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.BaseAction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LabelDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LabelDescriptor extends AbstractGuiActionDescrip {
 
+  /**
+   * Instantiates a new label descriptor.
+   */
   public LabelDescriptor() {
     super(new BaseAction("", null));
   }
 
+  /**
+   * Instantiates a new label descriptor.
+   *
+   * @param text the text
+   */
   public LabelDescriptor(final String text) {
     super(new BaseAction(text, null));
   }
 
+  /**
+   * Instantiates a new label descriptor.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   */
   public LabelDescriptor(final String text, final String tooltip) {
     super(new BaseAction(text, tooltip));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
+   */
   @Override
   public Class<?> getType() {
     return LabelDescriptor.class;

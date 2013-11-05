@@ -30,14 +30,34 @@ import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DefaultFormUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DefaultFormUtils {
 
+  /** The Constant BIG_FIELD_SIZE. */
   public static final String BIG_FIELD_SIZE = "310px";
 
+  /**
+   * Creates the field set.
+   *
+   * @param heading the heading
+   * @return the field set
+   */
   public static FieldSet createFieldSet(final String heading) {
     return createFieldSet(heading, BIG_FIELD_SIZE);
   }
 
+  /**
+   * Creates the field set.
+   *
+   * @param heading the heading
+   * @param width the width
+   * @return the field set
+   */
   public static FieldSet createFieldSet(final String heading, final String width) {
     final FieldSet fieldSet = new FieldSet();
     fieldSet.setHeadingHtml(heading);
@@ -48,6 +68,16 @@ public class DefaultFormUtils {
     return fieldSet;
   }
 
+  /**
+   * Creates the radio.
+   *
+   * @param fieldSet the field set
+   * @param radioLabel the radio label
+   * @param radioFieldName the radio field name
+   * @param radioTip the radio tip
+   * @param id the id
+   * @return the radio
+   */
   public static Radio createRadio(final FieldSet fieldSet, final String radioLabel,
       final String radioFieldName, final String radioTip, final String id) {
     final Radio radio = new Radio();

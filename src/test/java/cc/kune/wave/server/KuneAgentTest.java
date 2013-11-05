@@ -39,6 +39,12 @@ import cc.kune.wave.server.kspecific.KuneAgent;
 
 import com.google.common.collect.Lists;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneAgentTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneAgentTest {
   // private static final String MESSAGE = "testing";
   // private static final String NEW_PARTICIPANT = "newparti";
@@ -48,8 +54,15 @@ public class KuneAgentTest {
   // private static final String TITLE = "title";
   // private static final String TITLENEW = "titleNew";
 
+  /** The manager. */
   KuneAgent manager;
 
+  /**
+   * Before.
+   *
+   * @throws PersistenceException the persistence exception
+   * @throws InvalidParticipantAddress the invalid participant address
+   */
   @Before
   public void before() throws PersistenceException, InvalidParticipantAddress {
     final ServerFrontendAddressHolder frontendAddressHolder = Mockito.mock(ServerFrontendAddressHolder.class);
@@ -70,6 +83,11 @@ public class KuneAgentTest {
     // frontendAddressHolder);
   }
 
+  /**
+   * Test basic creation.
+   *
+   * @throws InvalidParticipantAddress the invalid participant address
+   */
   @Ignore
   @Test
   public void testBasicCreation() throws InvalidParticipantAddress {

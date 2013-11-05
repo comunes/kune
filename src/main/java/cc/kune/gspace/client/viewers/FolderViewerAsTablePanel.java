@@ -60,21 +60,51 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FolderViewerAsTablePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
+  /**
+   * The Interface FolderViewerAsTablePanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface FolderViewerAsTablePanelUiBinder extends UiBinder<Widget, FolderViewerAsTablePanel> {
   }
 
+  /** The Constant ITEM_ID. */
   public static final String ITEM_ID = "k-fvat-item-";
 
+  /** The ui binder. */
   private static FolderViewerAsTablePanelUiBinder uiBinder = GWT.create(FolderViewerAsTablePanelUiBinder.class);
 
+  /** The flex. */
   @UiField
   FlexTable flex;
 
+  /** The gui provider. */
   private final GuiProvider guiProvider;
+  
+  /** The res. */
   private final CoreResources res;
 
+  /**
+   * Instantiates a new folder viewer as table panel.
+   *
+   * @param gsArmor the gs armor
+   * @param i18n the i18n
+   * @param eventBus the event bus
+   * @param guiProvider the gui provider
+   * @param res the res
+   * @param capabilitiesRegistry the capabilities registry
+   * @param dragController the drag controller
+   * @param contentDropControllerProv the content drop controller prov
+   * @param containerDropControllerProv the container drop controller prov
+   */
   @Inject
   public FolderViewerAsTablePanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
       final EventBus eventBus, final GuiProvider guiProvider, final CoreResources res,
@@ -89,6 +119,9 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     widget.addStyleName("k-folder-viewer");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.gspace.client.viewers.items.FolderItemDescriptor, com.google.gwt.event.dom.client.ClickHandler, com.google.gwt.event.dom.client.DoubleClickHandler)
+   */
   @Override
   public void addItem(final FolderItemDescriptor item, final ClickHandler clickHandler,
       final DoubleClickHandler doubleClickHandler) {
@@ -161,12 +194,18 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#clear()
+   */
   @Override
   public void clear() {
     flex.removeAllRows();
     super.clear();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#setContainer(cc.kune.core.shared.dto.StateContainerDTO)
+   */
   @Override
   public void setContainer(final StateContainerDTO state) {
     super.setContainer(state);

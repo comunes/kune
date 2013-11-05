@@ -37,16 +37,40 @@ import cc.kune.gspace.client.viewers.ContentViewerPresenter;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewContentAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewContentAction extends RolAction {
 
+  /** The Constant ID. */
   public static final String ID = "ctnnewid";
+  
+  /** The Constant NEW_NAME. */
   public static final String NEW_NAME = "ctnnewname";
 
+  /** The content service. */
   private final Provider<ContentServiceAsync> contentService;
+  
+  /** The content viewer. */
   private final ContentViewerPresenter contentViewer;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new new content action.
+   *
+   * @param session the session
+   * @param stateManager the state manager
+   * @param contentService the content service
+   * @param contentViewerPresenter the content viewer presenter
+   */
   @Inject
   public NewContentAction(final Session session, final StateManager stateManager,
       final Provider<ContentServiceAsync> contentService,
@@ -58,6 +82,9 @@ public class NewContentAction extends RolAction {
     this.contentViewer = contentViewerPresenter;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     NotifyUser.showProgress();

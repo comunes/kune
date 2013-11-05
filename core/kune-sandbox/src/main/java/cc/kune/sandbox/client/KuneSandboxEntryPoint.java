@@ -68,33 +68,66 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+// TODO: Auto-generated Javadoc
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneSandboxEntryPoint implements EntryPoint {
 
+  /**
+   * The Class TestAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public class TestAction extends AbstractExtendedAction {
+    
+    /**
+     * Instantiates a new test action.
+     *
+     * @param text the text
+     */
     public TestAction(final String text) {
       super(text);
     }
 
+    /**
+     * Instantiates a new test action.
+     *
+     * @param text the text
+     * @param tooltip the tooltip
+     * @param icon the icon
+     */
     public TestAction(final String text, final String tooltip, final String icon) {
       super(text, tooltip, icon);
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       testDialogs();
     }
   }
+  
+  /** The user msg. */
   SimpleUserMessage userMsg = new SimpleUserMessage();
 
+  /** The absolute panel. */
   private AbsolutePanel absolutePanel;
+  
+  /** The toolbar. */
   private Toolbar toolbar;
+  
+  /** The res. */
   private CommonResources res;
 
+  /** The shortcut register. */
   private GlobalShortcutRegister shortcutRegister;
 
+  /** The ginjector. */
   private KuneSampleGinjector ginjector;
 
   /**
@@ -155,6 +188,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     RootPanel.get().add(absolutePanel);
   }
 
+  /**
+   * Test thumbs.
+   *
+   * @return the basic thumb
+   */
   private BasicThumb testThumbs() {
     final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
         false, new ClickHandler() {
@@ -169,6 +207,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     return thumb;
   }
 
+  /**
+   * Make flow toolbar.
+   *
+   * @return the action flow panel
+   */
   private ActionFlowPanel makeFlowToolbar() {
     final GuiActionDescCollection actions = new GuiActionDescCollection();
 
@@ -239,6 +282,9 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     return view;
   }
 
+  /**
+   * Test action toolbar.
+   */
   public void testActionToolbar() {
 
     AbstractExtendedAction action1 = new AbstractExtendedAction() {
@@ -320,6 +366,9 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   // });
   // }
   //
+  /**
+   * Test bar buttons.
+   */
   private void testBarButtons() {
     Button btn1 = new Button("Btn 1");
     Button btn2 = new Button("Btn 2");
@@ -344,6 +393,9 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   }
 
   //
+  /**
+   * Test tooltips.
+   */
   private void testTooltips() {
 
     final Button button = new Button("Btn 1 biiggggggg");
@@ -395,6 +447,9 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   // }
   //
 
+  /**
+   * Test dialogs.
+   */
   private void testDialogs() {
     final PopupTopPanel pop2 = new PopupTopPanel(false, true);
     pop2.setGlassEnabled(true);
@@ -437,6 +492,9 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // mask.mask(pop2, "JAarrrrr!");
   }
 
+  /**
+   * Test sub widget.
+   */
   private void testSubWidget() {
     // String title = new String("Some big title áéíóú!");
     // String bTitle = Base64Utils.toBase64(title.getBytes());

@@ -23,11 +23,26 @@
 
 package cc.kune.core.shared;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CoreConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CoreConstants {
+  
+  /** The Constant MAX_LONG_NAME_SIZE. */
   public static final int MAX_LONG_NAME_SIZE = 60;
+  
+  /** The Constant MAX_SHORT_NAME_SIZE. */
   public static final int MAX_SHORT_NAME_SIZE = 30;
+  
+  /** The Constant MOZILLA_FF_LINK. */
   public static final String MOZILLA_FF_LINK = "https://www.mozilla.com/en-US/firefox/fx/";
 
+  /**
+   * Instantiates a new core constants.
+   */
   private CoreConstants() {
   }
 

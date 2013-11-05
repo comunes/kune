@@ -26,8 +26,19 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ActionExtensibleView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ActionExtensibleView extends IsWidget {
 
+  /**
+   * Adds the.
+   *
+   * @param descriptor the descriptor
+   */
   void add(GuiActionDescrip descriptor);
 
 }

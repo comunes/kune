@@ -22,14 +22,29 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InvalidSNOperationException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class InvalidSNOperationException extends DefaultException {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -3027252154297955075L;
 
+  /**
+   * Instantiates a new invalid sn operation exception.
+   */
   public InvalidSNOperationException() {
     super();
   }
 
+  /**
+   * Instantiates a new invalid sn operation exception.
+   *
+   * @param message the message
+   */
   public InvalidSNOperationException(final String message) {
     super(message);
   }

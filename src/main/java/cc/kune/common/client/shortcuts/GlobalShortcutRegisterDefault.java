@@ -37,11 +37,23 @@ import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GlobalShortcutRegisterDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GlobalShortcutRegisterDefault extends InputMap implements GlobalShortcutRegister {
 
+  /** The event handler. */
   private final NativePreviewHandler eventHandler;
+  
+  /** The handler reg. */
   private HandlerRegistration handlerReg;
 
+  /**
+   * Instantiates a new global shortcut register default.
+   */
   public GlobalShortcutRegisterDefault() {
     super();
     eventHandler = new NativePreviewHandler() {
@@ -66,6 +78,9 @@ public class GlobalShortcutRegisterDefault extends InputMap implements GlobalSho
     };
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.shortcuts.GlobalShortcutRegister#disable()
+   */
   @Override
   public void disable() {
     if (handlerReg != null) {
@@ -73,15 +88,24 @@ public class GlobalShortcutRegisterDefault extends InputMap implements GlobalSho
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.shortcuts.GlobalShortcutRegister#enable()
+   */
   @Override
   public void enable() {
     enableImpl();
   }
 
+  /**
+   * Enable impl.
+   */
   private void enableImpl() {
     handlerReg = Event.addNativePreviewHandler(eventHandler);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.InputMap#put(cc.kune.common.client.actions.KeyStroke, cc.kune.common.client.actions.AbstractAction)
+   */
   @Override
   public void put(final KeyStroke keystroke, final AbstractAction action) {
     final ChangeableObject previous = super.get(keystroke);

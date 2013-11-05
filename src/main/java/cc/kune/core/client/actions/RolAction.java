@@ -27,16 +27,25 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RolAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class RolAction extends AbstractExtendedAction {
 
+  /** The auth need. */
   private final boolean authNeed;
+  
+  /** The rol required. */
   private final AccessRolDTO rolRequired;
 
   /**
-   * @param rolRequired
-   *          the Rol required to allow this action
-   * @param authNeed
-   *          if we need to be authenticated to execute this action
+   * Instantiates a new rol action.
+   *
+   * @param rolRequired the Rol required to allow this action
+   * @param authNeed if we need to be authenticated to execute this action
    */
   @Inject
   public RolAction(final AccessRolDTO rolRequired, final boolean authNeed) {
@@ -44,10 +53,20 @@ public abstract class RolAction extends AbstractExtendedAction {
     this.authNeed = authNeed;
   }
 
+  /**
+   * Gets the rol required.
+   *
+   * @return the rol required
+   */
   public AccessRolDTO getRolRequired() {
     return rolRequired;
   }
 
+  /**
+   * Checks if is auth need.
+   *
+   * @return true, if is auth need
+   */
   public boolean isAuthNeed() {
     return authNeed;
   }

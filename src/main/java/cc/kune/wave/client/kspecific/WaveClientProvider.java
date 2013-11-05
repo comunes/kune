@@ -27,10 +27,23 @@ import cc.kune.wave.client.WebClient;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveClientProvider.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveClientProvider implements Provider<WaveClientView> {
 
+  /** The web client prov. */
   private final Provider<? extends WaveClientView> webClientProv;
 
+  /**
+   * Instantiates a new wave client provider.
+   *
+   * @param webClient the web client
+   * @param webClientMock the web client mock
+   */
   @Inject
   public WaveClientProvider(final Provider<WebClient> webClient,
       final Provider<WebClientMock> webClientMock) {
@@ -39,6 +52,9 @@ public class WaveClientProvider implements Provider<WaveClientView> {
     // webClientProv = webClientMock;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.inject.Provider#get()
+   */
   @Override
   public WaveClientView get() {
     return webClientProv.get();

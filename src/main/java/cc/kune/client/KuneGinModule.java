@@ -24,8 +24,17 @@ package cc.kune.client;
 
 import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneGinModule extends AbstractPresenterModule {
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     bind(OnAppStartFactory.class).asEagerSingleton();

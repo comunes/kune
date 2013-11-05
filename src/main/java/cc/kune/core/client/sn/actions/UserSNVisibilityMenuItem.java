@@ -28,15 +28,34 @@ import cc.kune.core.shared.domain.UserSNetVisibility;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserSNVisibilityMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserSNVisibilityMenuItem extends MenuRadioItemDescriptor {
 
+  /** The Constant USER_BUDDIES_VISIBILITY_GROUP. */
   private static final String USER_BUDDIES_VISIBILITY_GROUP = "k-sn-userbuddies-vis";
 
+  /**
+   * Instantiates a new user sn visibility menu item.
+   *
+   * @param parent the parent
+   * @param action the action
+   */
   @Inject
   public UserSNVisibilityMenuItem(final MenuDescriptor parent, final UserSNVisibilityAction action) {
     super(parent, action, USER_BUDDIES_VISIBILITY_GROUP);
   }
 
+  /**
+   * With visibility.
+   *
+   * @param visibility the visibility
+   * @return the menu radio item descriptor
+   */
   public MenuRadioItemDescriptor withVisibility(final UserSNetVisibility visibility) {
     ((UserSNVisibilityAction) getAction()).setVisibility(visibility);
     return this;

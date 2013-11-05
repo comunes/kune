@@ -32,9 +32,24 @@ import cc.kune.core.shared.dto.GroupDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChangeToAdminAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChangeToAdminAction extends AbstractExtendedAction {
+  
+  /** The sn client utils. */
   private final SocialNetServiceHelper snClientUtils;
 
+  /**
+   * Instantiates a new change to admin action.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param snClientUtils the sn client utils
+   */
   @Inject
   public ChangeToAdminAction(final I18nTranslationService i18n, final IconicResources res,
       final SocialNetServiceHelper snClientUtils) {
@@ -43,6 +58,9 @@ public class ChangeToAdminAction extends AbstractExtendedAction {
     putValue(Action.SMALL_ICON, res.upArrow());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     snClientUtils.changeToAdmin(((GroupDTO) event.getTarget()).getShortName());

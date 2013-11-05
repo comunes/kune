@@ -38,18 +38,48 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SignInPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
+  /** The Constant CANCEL_BUTTON_ID. */
   public static final String CANCEL_BUTTON_ID = "k-signinp-cb";
+  
+  /** The Constant CREATE_ONE. */
   public static final String CREATE_ONE = "k-signinp-create";
+  
+  /** The Constant ERROR_MSG. */
   public static final String ERROR_MSG = "k-sigp-errmsg";
+  
+  /** The Constant FORGOT_PASSWD. */
   public static final String FORGOT_PASSWD = "k-signinp-forgot";
+  
+  /** The Constant SIGN_IN_BUTTON_ID. */
   public static final String SIGN_IN_BUTTON_ID = "k-signinp-sib";
+  
+  /** The Constant SIGNIN_DIALOG. */
   public static final String SIGNIN_DIALOG = "k-signinp-dialog";
+  
+  /** The forgot password label. */
   private Label forgotPasswordLabel;
+  
+  /** The register label. */
   private Label registerLabel;
+  
+  /** The sign in form. */
   private final SignInForm signInForm;
 
+  /**
+   * Instantiates a new sign in panel.
+   *
+   * @param i18n the i18n
+   * @param mask the mask
+   * @param images the images
+   */
   @Inject
   public SignInPanel(final I18nTranslationService i18n, final MaskWidgetView mask,
       final NotifyLevelImages images) {
@@ -65,12 +95,23 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     super.getInnerPanel().add(signInForm.getFormPanel());
   }
 
+  /**
+   * Creates the link.
+   *
+   * @param label the label
+   * @param id the id
+   */
   private void createLink(final Label label, final String id) {
     label.ensureDebugId(id);
     label.addStyleName("k-link");
     label.addStyleName("k-cursor");
   }
 
+  /**
+   * Creates the register and forgot passwd.
+   *
+   * @return the vertical panel
+   */
   private VerticalPanel createRegisterAndForgotPasswd() {
     final VerticalPanel noAccRegisterPanel = new VerticalPanel();
     final HorizontalPanel hpanel = new HorizontalPanel();
@@ -87,71 +128,115 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
     return noAccRegisterPanel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#focusOnNickname()
+   */
   @Override
   public void focusOnNickname() {
     signInForm.focusLogin();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#focusOnPassword()
+   */
   @Override
   public void focusOnPassword() {
     signInForm.focusOnPassword();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#getAccountRegister()
+   */
   @Override
   public HasClickHandlers getAccountRegister() {
     return registerLabel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#getForgotPasswd()
+   */
   @Override
   public HasClickHandlers getForgotPasswd() {
     return forgotPasswordLabel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#getLoginPassword()
+   */
   @Override
   public String getLoginPassword() {
     return signInForm.getLoginPassword();
   }
 
+  /**
+   * Gets the nickname.
+   *
+   * @return the nickname
+   */
   private Field<String> getNickname() {
     return signInForm.getNickOrEmailField();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#getNickOrEmail()
+   */
   @Override
   public String getNickOrEmail() {
     return signInForm.getNickOrEmail();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#isSignInFormValid()
+   */
   @Override
   public boolean isSignInFormValid() {
     return signInForm.isValid();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInAbstractView#reset()
+   */
   @Override
   public void reset() {
     signInForm.reset();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#setLoginPassword(java.lang.String)
+   */
   @Override
   public void setLoginPassword(final String password) {
     signInForm.setLoginPassword(password);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#setNickOrEmail(java.lang.String)
+   */
   @Override
   public void setNickOrEmail(final String nickOrEmail) {
     signInForm.setNickOrEmail(nickOrEmail);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#setOnPasswordReturn(cc.kune.common.client.utils.OnAcceptCallback)
+   */
   @Override
   public void setOnPasswordReturn(final OnAcceptCallback onAcceptCallback) {
     signInForm.setOnPasswordReturn(onAcceptCallback);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInAbstractPanel#show()
+   */
   @Override
   public void show() {
     super.show();
     KuneUiUtils.focusOnField(getNickname());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInPresenter.SignInView#validate()
+   */
   @Override
   public void validate() {
     signInForm.validate();

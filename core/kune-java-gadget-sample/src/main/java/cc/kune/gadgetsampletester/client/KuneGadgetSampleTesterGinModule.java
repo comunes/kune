@@ -30,8 +30,19 @@ import com.google.inject.Singleton;
 import com.thezukunft.wave.connector.Wave;
 import com.thezukunft.wave.connectormock.WaveMock;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneGadgetSampleTesterGinModule.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneGadgetSampleTesterGinModule extends KuneGadgetSampleGinModule {
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gadgetsample.client.KuneGadgetSampleGinModule#configure()
+   */
   @Override
   protected void configure() {
     // We use two gadgets for testing so is not a Singleton.class

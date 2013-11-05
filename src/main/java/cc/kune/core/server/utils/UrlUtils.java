@@ -29,15 +29,33 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UrlUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UrlUtils {
 
+  /** The Constant LOG. */
   private static final Log LOG = LogFactory.getLog(UrlUtils.class);
 
+  /**
+   * No cache string suffix.
+   *
+   * @return the string
+   */
   public static String noCacheStringSuffix() {
     final String noCache = "&nocache=" + new Date().getTime();
     return noCache;
   }
 
+  /**
+   * Of.
+   *
+   * @param urlString the url string
+   * @return the url
+   */
   public static URL of(final String urlString) {
     URL url = null;
     try {

@@ -32,8 +32,24 @@ import cc.kune.tasks.shared.TasksToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TasksParts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TasksParts {
 
+  /**
+   * Instantiates a new tasks parts.
+   *
+   * @param session the session
+   * @param clientTool the client tool
+   * @param viewerSelector the viewer selector
+   * @param tasksActions the tasks actions
+   * @param contentViewer the content viewer
+   * @param folderViewer the folder viewer
+   */
   @Inject
   public TasksParts(final SessionConstants session, final Provider<TasksClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final TasksClientActions tasksActions,

@@ -27,19 +27,53 @@ import cc.kune.core.shared.domain.InvitationType;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InvitationDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class InvitationDTO implements IsSerializable {
+  
+  /** The date. */
   private Long date;
+  
+  /** The description. */
   private String description;
+  
+  /** The from user. */
   private UserSimpleDTO fromUser;
+  
+  /** The hash. */
   private String hash;
+  
+  /** The invited to token. */
   private String invitedToToken;
+  
+  /** The name. */
   private String name;
+  
+  /** The type. */
   private InvitationType type;
 
+  /**
+   * Instantiates a new invitation dto.
+   */
   public InvitationDTO() {
     this(null, null, null, null, null, null, null);
   }
 
+  /**
+   * Instantiates a new invitation dto.
+   *
+   * @param date the date
+   * @param fromUser the from user
+   * @param hash the hash
+   * @param invitedToToken the invited to token
+   * @param type the type
+   * @param name the name
+   * @param description the description
+   */
   public InvitationDTO(final Long date, final UserSimpleDTO fromUser, final String hash,
       final String invitedToToken, final InvitationType type, final String name, final String description) {
     this.date = date;
@@ -51,58 +85,128 @@ public class InvitationDTO implements IsSerializable {
     this.description = description;
   }
 
+  /**
+   * Gets the date.
+   *
+   * @return the date
+   */
   public Long getDate() {
     return date;
   }
 
+  /**
+   * Gets the description.
+   *
+   * @return the description
+   */
   public String getDescription() {
     return description;
   }
 
+  /**
+   * Gets the from user.
+   *
+   * @return the from user
+   */
   public UserSimpleDTO getFromUser() {
     return fromUser;
   }
 
+  /**
+   * Gets the hash.
+   *
+   * @return the hash
+   */
   public String getHash() {
     return hash;
   }
 
+  /**
+   * Gets the invited to token.
+   *
+   * @return the invited to token
+   */
   public String getInvitedToToken() {
     return invitedToToken;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public InvitationType getType() {
     return type;
   }
 
+  /**
+   * Sets the date.
+   *
+   * @param date the new date
+   */
   public void setDate(final Long date) {
     this.date = date;
   }
 
+  /**
+   * Sets the description.
+   *
+   * @param description the new description
+   */
   public void setDescription(final String description) {
     this.description = description;
   }
 
+  /**
+   * Sets the from user.
+   *
+   * @param fromUser the new from user
+   */
   public void setFromUser(final UserSimpleDTO fromUser) {
     this.fromUser = fromUser;
   }
 
+  /**
+   * Sets the hash.
+   *
+   * @param hash the new hash
+   */
   public void setHash(final String hash) {
     this.hash = hash;
   }
 
+  /**
+   * Sets the invited to token.
+   *
+   * @param invitedToToken the new invited to token
+   */
   public void setInvitedToToken(final String invitedToToken) {
     this.invitedToToken = invitedToToken;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(final String name) {
     this.name = name;
   }
 
+  /**
+   * Sets the type.
+   *
+   * @param type the new type
+   */
   public void setType(final InvitationType type) {
     this.type = type;
   }

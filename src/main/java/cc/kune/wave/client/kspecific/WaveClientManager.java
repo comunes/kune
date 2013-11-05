@@ -45,9 +45,30 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveClientManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveClientManager {
+  
+  /** The web client. */
   private WaveClientView webClient;
 
+  /**
+   * Instantiates a new wave client manager.
+   *
+   * @param session the session
+   * @param stateManager the state manager
+   * @param eventBus the event bus
+   * @param userService the user service
+   * @param wsArmor the ws armor
+   * @param profiles the profiles
+   * @param inboxCount the inbox count
+   * @param tokenMatcher the token matcher
+   * @param webclientView the webclient view
+   */
   @Inject
   public WaveClientManager(final Session session, final StateManager stateManager,
       final EventBus eventBus, final UserServiceAsync userService, final GSpaceArmor wsArmor,
@@ -98,18 +119,38 @@ public class WaveClientManager {
     });
   }
 
+  /**
+   * Gets the web client.
+   *
+   * @return the web client
+   */
   public WaveClientView getWebClient() {
     return webClient;
   }
 
+  /**
+   * Sets the client flags.
+   *
+   * @param object the new client flags
+   */
   private native void setClientFlags(JavaScriptObject object) /*-{
     $wnd.__client_flags = object;
   }-*/;
 
+  /**
+   * Sets the session json.
+   *
+   * @param object the new session json
+   */
   private native void setSessionJSON(JavaScriptObject object) /*-{
     $wnd.__session = object;
   }-*/;
 
+  /**
+   * Sets the websocket address.
+   *
+   * @param object the new websocket address
+   */
   private native void setWebsocketAddress(String object) /*-{
     $wnd.__websocket_address = object;
   }-*/;

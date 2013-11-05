@@ -35,27 +35,56 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 import com.google.inject.persist.Transactional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PersistenceTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class PersistenceTest {
+  
+  /** The provider. */
   @Inject
   @DataSourceKune
   Provider<EntityManager> provider;
 
+  /**
+   * Instantiates a new persistence test.
+   */
   public PersistenceTest() {
   }
 
 
+  /**
+   * Close transaction.
+   */
   public void closeTransaction() {
     getManager().getTransaction().commit();
   }
 
+  /**
+   * Gets the manager.
+   *
+   * @return the manager
+   */
   protected EntityManager getManager() {
     return provider.get();
   }
 
+  /**
+   * Gets the transaction.
+   *
+   * @return the transaction
+   */
   public EntityTransaction getTransaction() {
     return getManager().getTransaction();
   }
 
+  /**
+   * Open transaction.
+   *
+   * @return the entity manager
+   */
   public EntityManager openTransaction() {
     final EntityManager manager = getManager();
     final EntityTransaction transaction = manager.getTransaction();
@@ -63,12 +92,20 @@ public abstract class PersistenceTest {
     return manager;
   }
 
+  /**
+   * Persist.
+   *
+   * @param entities the entities
+   */
   public void persist(final Object... entities) {
     for (final Object entity : entities) {
       getManager().persist(entity);
     }
   }
 
+  /**
+   * Prepare.
+   */
   @Transactional
   @Before
   public void prepare() {
@@ -76,6 +113,9 @@ public abstract class PersistenceTest {
     injector.injectMembers(this);
   }
 
+  /**
+   * Rollback transaction.
+   */
   public void rollbackTransaction() {
     final EntityTransaction transaction = getManager().getTransaction();
     if (transaction.isActive()) {

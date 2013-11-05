@@ -26,6 +26,11 @@ import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 
 import com.google.inject.Singleton;
 
+/**
+ * The Class GroupSNModerationSubMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class GroupSNModerationSubMenu extends SubMenuDescriptor {
 }

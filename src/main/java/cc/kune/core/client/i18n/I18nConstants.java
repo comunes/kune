@@ -24,6 +24,11 @@ package cc.kune.core.client.i18n;
 
 import com.google.gwt.i18n.client.ConstantsWithLookup;
 
+/**
+ * The Interface I18nConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface I18nConstants extends ConstantsWithLookup {
 
 }

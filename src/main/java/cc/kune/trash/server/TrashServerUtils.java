@@ -28,16 +28,40 @@ import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.trash.shared.TrashToolConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TrashServerUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TrashServerUtils {
 
+  /**
+   * In trash.
+   *
+   * @param container the container
+   * @return true, if successful
+   */
   public static boolean inTrash(final Container container) {
     return isTrash(container.getStateToken());
   }
 
+  /**
+   * In trash.
+   *
+   * @param content the content
+   * @return true, if successful
+   */
   public static boolean inTrash(final Content content) {
     return inTrash(content.getContainer());
   }
 
+  /**
+   * Checks if is trash.
+   *
+   * @param token the token
+   * @return true, if is trash
+   */
   public static boolean isTrash(final StateToken token) {
     return token.getTool().equals(TrashToolConstants.TOOL_NAME);
   }

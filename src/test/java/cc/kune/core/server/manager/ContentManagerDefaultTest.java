@@ -34,12 +34,28 @@ import cc.kune.core.server.PersistencePreLoadedDataTest;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Content;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentManagerDefaultTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
 
+  /** The Constant BODY. */
   private static final String BODY = "body";
+  
+  /** The Constant MIMETYPE. */
   private static final String MIMETYPE = "image";
+  
+  /** The Constant TITLE. */
   private static final String TITLE = "title";
 
+  /**
+   * Creates the content.
+   *
+   * @return the content
+   */
   private Content createContent() {
     assertNotNull(container);
     final Content cnt = creationService.createContent(TITLE, BODY, user, container, TYPE_UPLOADEDFILE);
@@ -48,6 +64,11 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
     return cnt;
   }
 
+  /**
+   * Creates the content with mime and check.
+   *
+   * @param mimetype the mimetype
+   */
   private void createContentWithMimeAndCheck(final String mimetype) {
     final Content cnt = creationService.createContent(TITLE, BODY, user, container, TYPE_UPLOADEDFILE);
     cnt.setMimeType(new BasicMimeType(mimetype));
@@ -56,6 +77,9 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(mimetype, newCnt.getMimeType().toString());
   }
 
+  /**
+   * Test basic body search.
+   */
   @Ignore
   @Test
   public void testBasicBodySearch() {
@@ -65,18 +89,27 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(1, search.getSize());
   }
 
+  /**
+   * Test basic mime persist.
+   */
   @Test
   public void testBasicMimePersist() {
     final String mimetype = "application/pdf";
     createContentWithMimeAndCheck(mimetype);
   }
 
+  /**
+   * Test basic mime persist without subtype.
+   */
   @Test
   public void testBasicMimePersistWithoutSubtype() {
     final String mimetype = "application";
     createContentWithMimeAndCheck(mimetype);
   }
 
+  /**
+   * Test basic mime search with queries and fields.
+   */
   @Test
   public void testBasicMimeSearchWithQueriesAndFields() {
     createContentWithMimeAndCheck(MIMETYPE + "/png");
@@ -87,6 +120,9 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(1, search.getSize());
   }
 
+  /**
+   * Test basic move.
+   */
   @Test
   public void testBasicMove() {
     final Content content = createContent();
@@ -94,6 +130,9 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(newContent.getContainer(), otherContainer);
   }
 
+  /**
+   * Test basic move with existing name should fail.
+   */
   @Test(expected = NameInUseException.class)
   public void testBasicMoveWithExistingNameShouldFail() {
     final Content content = createContent();
@@ -103,6 +142,9 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
     contentManager.moveContent(content, otherContainer);
   }
 
+  /**
+   * Test basic search with queries and fields.
+   */
   @Ignore
   @Test
   public void testBasicSearchWithQueriesAndFields() {
@@ -114,6 +156,9 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(1, search.getSize());
   }
 
+  /**
+   * Test basic title search.
+   */
   @Test
   public void testBasicTitleSearch() {
     createContent();
@@ -123,12 +168,18 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
     assertEquals(1, search.getSize());
   }
 
+  /**
+   * Test move folder to same.
+   */
   @Test(expected = MoveOnSameContainerException.class)
   public void testMoveFolderToSame() {
     final Content content = createContent();
     contentManager.moveContent(content, content.getContainer());
   }
 
+  /**
+   * Testt mime search.
+   */
   @Ignore
   @Test
   public void testtMimeSearch() {
@@ -140,7 +191,7 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * This normally fails with mysql (not configured for utf-8), see the INSTALL
-   * mysql section
+   * mysql section.
    */
   @Test
   public void testUTF8Persist() {

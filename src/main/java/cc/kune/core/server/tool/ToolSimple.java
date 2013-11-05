@@ -22,20 +22,41 @@
  \*/
 package cc.kune.core.server.tool;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolSimple.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToolSimple {
 
+  /** The name. */
   private final String name;
+  
+  /** The root name. */
   private final String rootName;
 
+  /**
+   * Instantiates a new tool simple.
+   */
   public ToolSimple() {
     this(null, null);
   }
 
+  /**
+   * Instantiates a new tool simple.
+   *
+   * @param name the name
+   * @param rootName the root name
+   */
   public ToolSimple(final String name, final String rootName) {
     this.name = name;
     this.rootName = rootName;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
@@ -65,14 +86,27 @@ public class ToolSimple {
     return true;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the root name.
+   *
+   * @return the root name
+   */
   public String getRootName() {
     return rootName;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     final int prime = 31;

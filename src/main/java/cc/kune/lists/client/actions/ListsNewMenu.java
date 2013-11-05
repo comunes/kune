@@ -27,8 +27,19 @@ import cc.kune.gspace.client.actions.NewMenuProvider;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListsNewMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListsNewMenu extends NewMenuProvider {
 
+  /**
+   * Instantiates a new lists new menu.
+   *
+   * @param menu the menu
+   */
   @Inject
   public ListsNewMenu(final AbstractNewMenu menu) {
     super(menu);

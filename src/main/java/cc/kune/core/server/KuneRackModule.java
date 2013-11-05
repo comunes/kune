@@ -89,16 +89,38 @@ import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.ServletModule;
 import com.google.inject.servlet.SessionScoped;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneRackModule.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneRackModule implements RackModule {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(KuneRackModule.class);
+  
+  /** The config module. */
   private final Module configModule;
+  
+  /** The suffix. */
   private final String suffix;
 
+  /**
+   * Instantiates a new kune rack module.
+   */
   public KuneRackModule() {
     this(null, "/ws", null);
   }
 
+  /**
+   * Instantiates a new kune rack module.
+   *
+   * @param settedJpaUnit the setted jpa unit
+   * @param suffix the suffix
+   * @param sessionScope the session scope
+   */
   private KuneRackModule(final String settedJpaUnit, final String suffix, final Scope sessionScope) {
     this.suffix = suffix;
 
@@ -119,6 +141,9 @@ public class KuneRackModule implements RackModule {
     };
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.rack.RackModule#configure(cc.kune.core.server.rack.RackBuilder)
+   */
   @Override
   @SuppressWarnings("unchecked")
   public void configure(final RackBuilder builder) {
@@ -193,6 +218,11 @@ public class KuneRackModule implements RackModule {
         new ForwardFilter("^" + suffix + "/(.*)$", suffix + "/{0}"));
   }
 
+  /**
+   * Install guice modules.
+   *
+   * @param builder the builder
+   */
   private void installGuiceModules(final RackBuilder builder) {
     // https://code.google.com/p/google-guice/wiki/ServletModule
     builder.use(new ServletModule() {

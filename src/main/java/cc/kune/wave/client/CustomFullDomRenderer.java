@@ -58,16 +58,32 @@ import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.state.SiteParameters;
 
 
+// TODO: Auto-generated Javadoc
 /**
  * Renders conversational objects with UiBuilders.
  *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
 
+  /**
+   * The Interface DocRefRenderer.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface DocRefRenderer {
+    
+    /**
+     * Render.
+     *
+     * @param blip the blip
+     * @param replies the replies
+     * @return the ui builder
+     */
     UiBuilder render(ConversationBlip blip,
         IdentityMap<ConversationThread, UiBuilder> replies);
 
+    /** The empty. */
     DocRefRenderer EMPTY = new DocRefRenderer() {
       @Override
       public UiBuilder render(ConversationBlip blip,
@@ -77,9 +93,22 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     };
   }
 
+  /**
+   * The Interface ParticipantsRenderer.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ParticipantsRenderer {
+    
+    /**
+     * Render.
+     *
+     * @param c the c
+     * @return the ui builder
+     */
     UiBuilder render(Conversation c);
 
+    /** The empty. */
     ParticipantsRenderer EMPTY = new ParticipantsRenderer() {
       @Override
       public UiBuilder render(Conversation c) {
@@ -88,14 +117,38 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     };
   }
 
+  /** The blip populator. */
   private final ShallowBlipRenderer blipPopulator;
+  
+  /** The doc renderer. */
   private final DocRefRenderer docRenderer;
+  
+  /** The view id mapper. */
   private final ViewIdMapper viewIdMapper;
+  
+  /** The view factory. */
   private final ViewFactory viewFactory;
+  
+  /** The profile manager. */
   private final ProfileManager profileManager;
+  
+  /** The read monitor. */
   private final ThreadReadStateMonitor readMonitor;
+  
+  /** The show participants panel. */
   private final boolean showParticipantsPanel;
 
+  /**
+   * Instantiates a new custom full dom renderer.
+   *
+   * @param blipPopulator the blip populator
+   * @param docRenderer the doc renderer
+   * @param profileManager the profile manager
+   * @param viewIdMapper the view id mapper
+   * @param viewFactory the view factory
+   * @param readMonitor the read monitor
+   * @param showParticipantsPanel the show participants panel
+   */
   public CustomFullDomRenderer(ShallowBlipRenderer blipPopulator, DocRefRenderer docRenderer,
       ProfileManager profileManager, ViewIdMapper viewIdMapper, ViewFactory viewFactory,
       ThreadReadStateMonitor readMonitor, boolean showParticipantsPanel) {
@@ -108,6 +161,9 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     this.showParticipantsPanel = showParticipantsPanel;
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.render.RenderingRules#render(org.waveprotocol.wave.model.conversation.ConversationView, org.waveprotocol.wave.model.util.IdentityMap)
+   */
   @Override
   public UiBuilder render(ConversationView wave,
       IdentityMap<Conversation, UiBuilder> conversations) {
@@ -116,6 +172,12 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     return conversations.isEmpty() ? null : getFirstConversation(conversations);
   }
 
+  /**
+   * Gets the first conversation.
+   *
+   * @param conversations the conversations
+   * @return the first conversation
+   */
   public UiBuilder getFirstConversation(IdentityMap<Conversation, UiBuilder> conversations) {
     return conversations.reduce(null, new Reduce<Conversation, UiBuilder, UiBuilder>() {
       @Override
@@ -126,6 +188,9 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     });
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.render.RenderingRules#render(org.waveprotocol.wave.model.conversation.Conversation, java.lang.Object, java.lang.Object)
+   */
   @Override
   public UiBuilder render(Conversation conversation, UiBuilder participantsUi, UiBuilder threadUi) {
     String id = viewIdMapper.conversationOf(conversation);
@@ -134,6 +199,9 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
         : viewFactory.createInlineConversationView(id, threadUi, participantsUi);
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.render.RenderingRules#render(org.waveprotocol.wave.model.conversation.Conversation, org.waveprotocol.wave.model.util.StringMap)
+   */
   @Override
   public UiBuilder render(Conversation conversation, StringMap<UiBuilder> participantUis) {
     HtmlClosureCollection participantsUi = new HtmlClosureCollection();
@@ -149,6 +217,9 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
       }};
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.render.RenderingRules#render(org.waveprotocol.wave.model.conversation.Conversation, org.waveprotocol.wave.model.wave.ParticipantId)
+   */
   @Override
   public UiBuilder render(Conversation conversation, ParticipantId participant) {
     Profile profile = profileManager.getProfile(participant);
@@ -168,6 +239,9 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     }
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.render.RenderingRules#render(org.waveprotocol.wave.model.conversation.ConversationThread, org.waveprotocol.wave.model.util.IdentityMap)
+   */
   @Override
   public UiBuilder render(final ConversationThread thread,
       final IdentityMap<ConversationBlip, UiBuilder> blipUis) {
@@ -204,6 +278,9 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     return builder;
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.render.RenderingRules#render(org.waveprotocol.wave.model.conversation.ConversationBlip, java.lang.Object, org.waveprotocol.wave.model.util.IdentityMap, org.waveprotocol.wave.model.util.IdentityMap)
+   */
   @Override
   public UiBuilder render(final ConversationBlip blip, UiBuilder document,
       final IdentityMap<ConversationThread, UiBuilder> anchorUis,
@@ -250,7 +327,8 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     return BlipViewBuilder.create(viewIdMapper.blipOf(blip), metaUi, threadsUi, convsUi, blip.isRoot());
   }
 
-  /**
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.render.RenderingRules#render(org.waveprotocol.wave.model.conversation.ConversationBlip, org.waveprotocol.wave.model.util.IdentityMap)
    */
   @Override
   public UiBuilder render(
@@ -258,6 +336,9 @@ public final class CustomFullDomRenderer implements RenderingRules<UiBuilder> {
     return docRenderer.render(blip, replies);
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.client.render.RenderingRules#render(org.waveprotocol.wave.model.conversation.ConversationThread, java.lang.Object)
+   */
   @Override
   public UiBuilder render(ConversationThread thread, UiBuilder threadR) {
     String id = EscapeUtils.htmlEscape(viewIdMapper.defaultAnchorOf(thread));

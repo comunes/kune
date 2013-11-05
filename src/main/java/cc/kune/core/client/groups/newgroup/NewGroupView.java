@@ -30,58 +30,179 @@ import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.gwtplatform.mvp.client.View;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface NewGroupView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface NewGroupView extends View {
 
+  /**
+   * Clear data.
+   */
   void clearData();
 
+  /**
+   * Focus on long name.
+   */
   void focusOnLongName();
 
+  /**
+   * Focus on short name.
+   */
   void focusOnShortName();
 
+  /**
+   * Gets the close.
+   *
+   * @return the close
+   */
   HasCloseHandlers<PopupPanel> getClose();
 
+  /**
+   * Gets the first btn.
+   *
+   * @return the first btn
+   */
   HasClickHandlers getFirstBtn();
 
+  /**
+   * Gets the long name.
+   *
+   * @return the long name
+   */
   String getLongName();
 
+  /**
+   * Gets the long name field.
+   *
+   * @return the long name field
+   */
   TextField<String> getLongNameField();
 
+  /**
+   * Gets the public desc.
+   *
+   * @return the public desc
+   */
   String getPublicDesc();
 
+  /**
+   * Gets the second btn.
+   *
+   * @return the second btn
+   */
   HasClickHandlers getSecondBtn();
 
+  /**
+   * Gets the short name.
+   *
+   * @return the short name
+   */
   String getShortName();
 
+  /**
+   * Gets the tags.
+   *
+   * @return the tags
+   */
   String getTags();
 
+  /**
+   * Hide.
+   */
   void hide();
 
+  /**
+   * Hide message.
+   */
   void hideMessage();
 
+  /**
+   * Checks if is closed.
+   *
+   * @return true, if is closed
+   */
   boolean isClosed();
 
+  /**
+   * Checks if is community.
+   *
+   * @return true, if is community
+   */
   boolean isCommunity();
 
+  /**
+   * Checks if is form valid.
+   *
+   * @return true, if is form valid
+   */
   boolean isFormValid();
 
+  /**
+   * Checks if is organization.
+   *
+   * @return true, if is organization
+   */
   boolean isOrganization();
 
+  /**
+   * Checks if is project.
+   *
+   * @return true, if is project
+   */
   boolean isProject();
 
+  /**
+   * Mask processing.
+   */
   void maskProcessing();
 
+  /**
+   * Sets the long name.
+   *
+   * @param longName the new long name
+   */
   void setLongName(final String longName);
 
+  /**
+   * Sets the long name failed.
+   *
+   * @param msg the new long name failed
+   */
   void setLongNameFailed(final String msg);
 
+  /**
+   * Sets the message.
+   *
+   * @param message the message
+   * @param level the level
+   */
   void setMessage(String message, NotifyLevel level);
 
+  /**
+   * Sets the short name.
+   *
+   * @param shortName the new short name
+   */
   void setShortName(final String shortName);
 
+  /**
+   * Sets the short name failed.
+   *
+   * @param msg the new short name failed
+   */
   void setShortNameFailed(final String msg);
 
+  /**
+   * Show.
+   */
   void show();
 
+  /**
+   * Un mask.
+   */
   void unMask();
 
 }

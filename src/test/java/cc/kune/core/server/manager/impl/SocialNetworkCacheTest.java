@@ -32,15 +32,35 @@ import cc.kune.domain.Group;
 import cc.kune.domain.SocialNetworkData;
 import cc.kune.domain.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SocialNetworkCacheTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SocialNetworkCacheTest {
 
+  /** The cache. */
   private SocialNetworkCache cache;
+  
+  /** The data. */
   private SocialNetworkData data;
+  
+  /** The group1. */
   private Group group1;
+  
+  /** The group2. */
   private Group group2;
+  
+  /** The user1. */
   private User user1;
+  
+  /** The user2. */
   private User user2;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     cache = new SocialNetworkCache();
@@ -53,6 +73,9 @@ public class SocialNetworkCacheTest {
     data = new SocialNetworkData();
   }
 
+  /**
+   * Test basic add.
+   */
   @Test
   public void testBasicAdd() {
     assertNull(cache.get(user1, group1));
@@ -62,6 +85,9 @@ public class SocialNetworkCacheTest {
     assertEquals(1, cache.size());
   }
 
+  /**
+   * Test basic add dirty.
+   */
   @Test
   public void testBasicAddDirty() {
     assertNull(cache.get(user1, group1));

@@ -45,8 +45,17 @@ import cc.kune.selenium.spaces.SitePageObject;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SeleniumModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SeleniumModule extends PageObjectModule {
 
+  /* (non-Javadoc)
+   * @see com.google.inject.AbstractModule#configure()
+   */
   @Override
   protected void configure() {
     WebDriver driver;
@@ -89,6 +98,11 @@ public class SeleniumModule extends PageObjectModule {
 
   }
 
+  /**
+   * Creates the chrome driver.
+   *
+   * @return the remote web driver
+   */
   private RemoteWebDriver createChromeDriver() {
     // http://code.google.com/p/selenium/wiki/ChromeDriver
     System.setProperty("webdriver.chrome.driver", "/usr/bin/chromedriver");
@@ -104,6 +118,11 @@ public class SeleniumModule extends PageObjectModule {
     return driver;
   }
 
+  /**
+   * Creat firefox driver.
+   *
+   * @return the firefox driver
+   */
   private FirefoxDriver creatFirefoxDriver() {
     // http://code.google.com/p/selenium/wiki/FirefoxDriver
     System.setProperty("webdriver.firefox.useExisting", "true");

@@ -35,18 +35,36 @@ import cc.kune.core.server.persist.KuneTransactional;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PendingNotificationImmediateJob.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PendingNotificationImmediateJob implements Job {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(PendingNotificationImmediateJob.class);
 
+  /** The pending manager. */
   private final PendingNotificationSender pendingManager;
 
+  /**
+   * Instantiates a new pending notification immediate job.
+   *
+   * @param pendingManager the pending manager
+   * @throws ParseException the parse exception
+   * @throws SchedulerException the scheduler exception
+   */
   @Inject
   public PendingNotificationImmediateJob(final PendingNotificationSender pendingManager)
       throws ParseException, SchedulerException {
     this.pendingManager = pendingManager;
   }
 
+  /* (non-Javadoc)
+   * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
+   */
   @Override
   @KuneTransactional
   public void execute(final JobExecutionContext context) throws JobExecutionException {

@@ -26,17 +26,23 @@ import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gxp.com.google.common.base.Nullable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IdGenerator.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class IdGenerator {
+  
+  /** The Constant SEPARATOR. */
   protected static final String SEPARATOR = "|";
 
   /**
-   * Generates a id concatenating two strings
-   * 
-   * @param one
-   *          String
-   * @param two
-   *          String
-   * @return
+   * Generates a id concatenating two strings.
+   *
+   * @param one String
+   * @param two String
+   * @return the string
    */
   public static String generate(@Nullable final String one, @Nullable final String two) {
     if (TextUtils.empty(one)) {

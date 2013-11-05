@@ -23,6 +23,18 @@
 
 package cc.kune.gspace.client.maxmin;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface IsMaximizable.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface IsMaximizable {
+  
+  /**
+   * Sets the maximized.
+   *
+   * @param maximized the new maximized
+   */
   void setMaximized(boolean maximized);
 }

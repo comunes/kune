@@ -42,12 +42,35 @@ import cc.kune.core.server.manager.SearchResult;
 
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DefaultManager.
+ *
+ * @param <T> the generic type
+ * @param <K> the key type
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class DefaultManager<T, K> {
+  
+  /** The Constant LUCENE_VERSION. */
   protected final static Version LUCENE_VERSION = Version.LUCENE_35;
+  
+  /** The entity class. */
   private final Class<T> entityClass;
+  
+  /** The log. */
   protected final Log log;
+  
+  /** The provider. */
   private final Provider<EntityManager> provider;
 
+  /**
+   * Instantiates a new default manager.
+   *
+   * @param provider the provider
+   * @param entityClass the entity class
+   */
   public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
     this.provider = provider;
     this.entityClass = entityClass;
@@ -55,46 +78,102 @@ public abstract class DefaultManager<T, K> {
   }
 
   /**
-   * use carefully!!!
+   * use carefully!!!.
+   *
+   * @param <X> the generic type
+   * @param entityClass the entity class
+   * @param primaryKey the primary key
+   * @return the x
    */
   protected <X> X find(final Class<X> entityClass, final K primaryKey) {
     return getEntityManager().find(entityClass, primaryKey);
   }
 
+  /**
+   * Find.
+   *
+   * @param primaryKey the primary key
+   * @return the t
+   */
   public T find(final K primaryKey) {
     return getEntityManager().find(entityClass, primaryKey);
   }
 
+  /**
+   * Flush.
+   */
   public void flush() {
     getEntityManager().flush();
   }
 
+  /**
+   * Gets the entity manager.
+   *
+   * @return the entity manager
+   */
   private EntityManager getEntityManager() {
     return provider.get();
   }
 
+  /**
+   * Gets the query.
+   *
+   * @param qlString the ql string
+   * @return the query
+   */
   protected javax.persistence.Query getQuery(final String qlString) {
     return getEntityManager().createQuery(qlString);
   }
 
+  /**
+   * Merge.
+   *
+   * @param <E> the element type
+   * @param entity the entity
+   * @param entityClass the entity class
+   * @return the e
+   */
   public <E> E merge(final E entity, final Class<E> entityClass) {
     getEntityManager().merge(entity);
     return entity;
   }
 
+  /**
+   * Merge.
+   *
+   * @param entity the entity
+   * @return the t
+   */
   public T merge(final T entity) {
     return getEntityManager().merge(entity);
   }
 
+  /**
+   * Persist.
+   *
+   * @param <E> the element type
+   * @param entity the entity
+   * @param entityClass the entity class
+   * @return the e
+   */
   public <E> E persist(final E entity, final Class<E> entityClass) {
     getEntityManager().persist(entity);
     return entity;
   }
 
+  /**
+   * Persist.
+   *
+   * @param entity the entity
+   * @return the t
+   */
   public T persist(final T entity) {
     return persist(entity, entityClass);
   }
 
+  /**
+   * Re index.
+   */
   public void reIndex() {
     // http://docs.jboss.org/hibernate/search/4.1/reference/en-US/html_single/#search-batchindex
     final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager().getEntityManagerFactory().createEntityManager());
@@ -129,14 +208,33 @@ public abstract class DefaultManager<T, K> {
     fullTextEm.close();
   }
 
+  /**
+   * Removes the.
+   *
+   * @param entity the entity
+   */
   public void remove(final T entity) {
     getEntityManager().remove(entity);
   }
 
+  /**
+   * Search.
+   *
+   * @param query the query
+   * @return the search result
+   */
   public SearchResult<T> search(final Query query) {
     return search(query, null, null);
   }
 
+  /**
+   * Search.
+   *
+   * @param query the query
+   * @param firstResult the first result
+   * @param maxResults the max results
+   * @return the search result
+   */
   @SuppressWarnings("unchecked")
   public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
     final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager().getEntityManagerFactory().createEntityManager());
@@ -150,6 +248,16 @@ public abstract class DefaultManager<T, K> {
     return searchResult;
   }
 
+  /**
+   * Search.
+   *
+   * @param query the query
+   * @param fields the fields
+   * @param flags the flags
+   * @param firstResult the first result
+   * @param maxResults the max results
+   * @return the search result
+   */
   public SearchResult<T> search(final String query, final String[] fields,
       final BooleanClause.Occur[] flags, final Integer firstResult, final Integer maxResults) {
     Query queryQ;
@@ -162,6 +270,16 @@ public abstract class DefaultManager<T, K> {
     return search(queryQ, firstResult, maxResults);
   }
 
+  /**
+   * Search.
+   *
+   * @param queries the queries
+   * @param fields the fields
+   * @param flags the flags
+   * @param firstResult the first result
+   * @param maxResults the max results
+   * @return the search result
+   */
   public SearchResult<T> search(final String[] queries, final String[] fields,
       final BooleanClause.Occur[] flags, final Integer firstResult, final Integer maxResults) {
     Query query;
@@ -174,6 +292,15 @@ public abstract class DefaultManager<T, K> {
     return search(query, firstResult, maxResults);
   }
 
+  /**
+   * Search.
+   *
+   * @param queries the queries
+   * @param fields the fields
+   * @param firstResult the first result
+   * @param maxResults the max results
+   * @return the search result
+   */
   public SearchResult<T> search(final String[] queries, final String[] fields,
       final Integer firstResult, final Integer maxResults) {
     Query query;
@@ -186,6 +313,11 @@ public abstract class DefaultManager<T, K> {
     return search(query, firstResult, maxResults);
   }
 
+  /**
+   * Size deprecated.
+   *
+   * @return the int
+   */
   @SuppressWarnings("unchecked")
   @Deprecated
   public int sizeDeprecated() {

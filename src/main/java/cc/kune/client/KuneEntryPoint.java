@@ -42,13 +42,21 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class KuneEntryPoint.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneEntryPoint implements EntryPoint {
 
+  /** The Constant HOME_IDS_DEF_SUFFIX. */
   private static final String HOME_IDS_DEF_SUFFIX = "-def";
+  
+  /** The Constant HOME_IDS_PREFIX. */
   private static final String HOME_IDS_PREFIX = "k-home-";
+  
+  /** The ginjector. */
   public final KuneGinjector ginjector = GWT.create(KuneGinjector.class);
 
   /*

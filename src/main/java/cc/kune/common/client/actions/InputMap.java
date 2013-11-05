@@ -43,6 +43,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+// TODO: Auto-generated Javadoc
 /**
  * Maps {@link KeyStroke}s to arbitrary objects, usually Strings. This is used
  * in combination with ActionMaps.
@@ -149,14 +150,14 @@ public class InputMap {
   /**
    * Returns all keys of entries in this <code>InputMap</code>. This does not
    * include keys defined in the parent, if there is one (use the
+   *
+   * @return An array of keys (may be <code>null</code> or have zero length).
    * {@link #allKeys()} method for that case). <br>
    * <br>
    * Following the behaviour of the reference implementation, this method will
    * return <code>null</code> when no entries have been added to the map, and a
    * zero length array if entries have been added but subsequently removed (or
    * cleared) from the map.
-   * 
-   * @return An array of keys (may be <code>null</code> or have zero length).
    */
   // @PMD:REVIEWED:ReturnEmptyArrayRatherThanNull: by vjrj on 21/05/09 15:33
   public KeyStroke[] keys() {
@@ -206,12 +207,10 @@ public class InputMap {
 
   /**
    * Sets a parent for this <code>InputMap</code>. If a parent is specified, the
+   *
+   * @param parentMap the new parent (<code>null</code> permitted).
    * {@link #get(KeyStroke)} method will look in the parent if it cannot find an
    * entry in this map.
-   * 
-   * @param parentMap
-   *          the new parent (<code>null</code> permitted).
-   * 
    * @see #getParent()
    */
   public void setParent(final InputMap parentMap) {

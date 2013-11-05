@@ -29,13 +29,24 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Class ContentViewerOptionsShareSubMenu (not used yet)
+ * The Class ContentViewerOptionsShareSubMenu (not used yet).
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentViewerOptionsShareSubMenu extends SubMenuDescriptor {
 
+  /** The Constant ID. */
   public static final String ID = "k-cnt-viewer-share-opt-submenu";
 
+  /**
+   * Instantiates a new content viewer options share sub menu.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param parent the parent
+   */
   @Inject
   public ContentViewerOptionsShareSubMenu(final I18nTranslationService i18n, final IconicResources res,
       final ContentViewerOptionsMenu parent) {

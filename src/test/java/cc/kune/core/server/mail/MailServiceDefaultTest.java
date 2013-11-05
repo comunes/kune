@@ -30,21 +30,37 @@ import org.junit.Test;
 import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.core.server.utils.FormattedString;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MailServiceDefaultTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MailServiceDefaultTest {
 
+  /** The service. */
   private MailServiceDefault service;
 
+  /**
+   * Basic exception.
+   */
   @Test(expected = NullPointerException.class)
   public void basicException() {
     assertEquals(null, FormattedString.build(null).getString());
   }
 
+  /**
+   * Basic exception with args.
+   */
   @Test(expected = NullPointerException.class)
   public void basicExceptionWithArgs() {
     assertEquals(null, FormattedString.build(null).getString());
     assertEquals(null, FormattedString.build(null, "arg").getString());
   }
 
+  /**
+   * Basic format.
+   */
   @Test
   public void basicFormat() {
     assertEquals("basic", FormattedString.build("basic").getString());
@@ -52,17 +68,26 @@ public class MailServiceDefaultTest {
     assertEquals("basic %s", FormattedString.build("basic %s", (Object[]) null).getString());
   }
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     service = new MailServiceDefault(new KunePropertiesDefault("kune.properties"));
   }
 
+  /**
+   * Simple test.
+   */
   @Test
   public void simpleTest() {
     service.sendPlain(FormattedString.build("Some test subject"), FormattedString.build("Some body"),
         "vjrj@localhost");
   }
 
+  /**
+   * Utf8 test.
+   */
   @Test
   public void utf8Test() {
     service.sendPlain(FormattedString.build("áéíóú"), FormattedString.build("Some body áéíóú"),

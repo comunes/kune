@@ -25,17 +25,37 @@ package cc.kune.core.server.state;
 import java.util.List;
 import java.util.Map;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StateEventContainer.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StateEventContainer extends StateContainer {
 
+  /** The appointments. */
   private List<Map<String, String>> appointments;
 
+  /**
+   * Instantiates a new state event container.
+   */
   public StateEventContainer() {
   }
 
+  /**
+   * Gets the appointments.
+   *
+   * @return the appointments
+   */
   public List<Map<String, String>> getAppointments() {
     return appointments;
   }
 
+  /**
+   * Sets the appointments.
+   *
+   * @param appointments the appointments
+   */
   public void setAppointments(final List<Map<String, String>> appointments) {
     this.appointments = appointments;
   }

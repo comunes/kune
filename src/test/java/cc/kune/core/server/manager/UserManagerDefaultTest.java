@@ -41,10 +41,22 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserManagerDefaultTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
+  
+  /** The group finder. */
   @Inject
   Group groupFinder;
 
+  /**
+   * Email correct.
+   */
   @Test
   public void emailCorrect() {
     user = new User("test1", "test1 name", "test@example.com", "somediggest".getBytes(),
@@ -52,6 +64,9 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     persist(user);
   }
 
+  /**
+   * Email empty.
+   */
   @Test(expected = PersistenceException.class)
   public void emailEmpty() {
     user = new User("test1", "test1 name", null, "somediggest".getBytes(), "some salt".getBytes(),
@@ -59,6 +74,9 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     persist(user);
   }
 
+  /**
+   * Email incorrect.
+   */
   @Test(expected = ConstraintViolationException.class)
   public void emailIncorrect() {
     user = new User("test1", "test1 name", "falseEmail@", "somediggest".getBytes(),
@@ -66,22 +84,36 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     persist(user);
   }
 
+  /**
+   * Gets the time zone.
+   *
+   * @return the time zone
+   */
   private TimeZone getTimeZone() {
     return TimeZone.getDefault();
   }
 
+  /**
+   * Login incorrect.
+   */
   @Test
   public void loginIncorrect() {
     final User result = userManager.login("test", "test");
     assertNull(result);
   }
 
+  /**
+   * Login with email correct.
+   */
   @Test
   public void loginWithEmailCorrect() {
     final User result = userManager.login(USER_EMAIL, USER_PASSWORD);
     assertNotNull(result.getId());
   }
 
+  /**
+   * Login with nick correct.
+   */
   @Test
   public void loginWithNickCorrect() {
     final User result = userManager.login(USER_SHORT_NAME, USER_PASSWORD);
@@ -91,6 +123,8 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
   /**
    * This was not working:
    * http://opensource.atlassian.com/projects/hibernate/browse/EJB-382
+   *
+   * @throws I18nNotFoundException the i18n not found exception
    */
   @Test(expected = GroupShortNameInUseException.class)
   public void testUserExist() throws I18nNotFoundException {
@@ -102,6 +136,9 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     persist(user2);
   }
 
+  /**
+   * User name length incorrect.
+   */
   @Test(expected = ConstraintViolationException.class)
   public void userNameLengthIncorrect() {
     user = new User("test1", "te", "test@example.com", "diggest".getBytes(), "salt".getBytes(), english,
@@ -109,6 +146,12 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     persist(user);
   }
 
+  /**
+   * User search.
+   *
+   * @throws Exception the exception
+   * @throws ParseException the parse exception
+   */
   @Test
   public void userSearch() throws Exception, ParseException {
     closeTransaction();
@@ -119,6 +162,9 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     rollbackTransaction();
   }
 
+  /**
+   * User short name incorrect.
+   */
   @Test(expected = ConstraintViolationException.class)
   public void userShortNameIncorrect() {
     user = new User("test1A", "test1 name", "test@example.com", "diggest".getBytes(), "salt".getBytes(),
@@ -126,6 +172,9 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
     persist(user);
   }
 
+  /**
+   * Visibility persist.
+   */
   @Test
   public void visibilityPersist() {
     user = new User("test1", "test1 name", "test@example.com", "somediggest".getBytes(),

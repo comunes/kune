@@ -32,12 +32,30 @@ import cc.kune.gspace.client.tool.ContentViewer;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NoHomePageViewer.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NoHomePageViewer implements ContentViewer {
 
+  /** The content title. */
   private final ContentTitleWidget contentTitle;
+  
+  /** The gs armor. */
   private final GSpaceArmor gsArmor;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
 
+  /**
+   * Instantiates a new no home page viewer.
+   *
+   * @param gsArmor the gs armor
+   * @param i18n the i18n
+   * @param capabilitiesRegistry the capabilities registry
+   */
   @Inject
   public NoHomePageViewer(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
       final ContentCapabilitiesRegistry capabilitiesRegistry) {
@@ -46,15 +64,24 @@ public class NoHomePageViewer implements ContentViewer {
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#attach()
+   */
   @Override
   public void attach() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#detach()
+   */
   @Override
   public void detach() {
     UiUtils.clear(gsArmor.getDocHeader());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#setContent(cc.kune.core.shared.dto.HasContent)
+   */
   @Override
   public void setContent(final HasContent state) {
     contentTitle.setTitle(i18n.t(CoreMessages.USER_DOESN_T_HAVE_A_HOMEPAGE), null, null, false);

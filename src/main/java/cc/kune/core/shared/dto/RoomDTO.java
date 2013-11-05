@@ -22,32 +22,68 @@
  */
 package cc.kune.core.shared.dto;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RoomDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class RoomDTO {
 
+  /** The name. */
   private String name;
 
+  /** The subject. */
   private String subject;
 
+  /**
+   * Instantiates a new room dto.
+   */
   public RoomDTO() {
   }
 
+  /**
+   * Instantiates a new room dto.
+   *
+   * @param name the name
+   */
   public RoomDTO(final String name) {
     this();
     this.name = name;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(final String name) {
     this.name = name;
   }
 
+  /**
+   * Gets the subject.
+   *
+   * @return the subject
+   */
   public String getSubject() {
     return subject;
   }
 
+  /**
+   * Sets the subject.
+   *
+   * @param subject the new subject
+   */
   public void setSubject(final String subject) {
     this.subject = subject;
   }

@@ -26,14 +26,42 @@ import java.util.List;
 
 import cc.kune.domain.I18nLanguage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface I18nLanguageManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface I18nLanguageManager extends Manager<I18nLanguage, Long> {
 
+  /**
+   * Gets the default language.
+   *
+   * @return the default language
+   */
   I18nLanguage getDefaultLanguage();
 
+  /**
+   * Find by code.
+   *
+   * @param language the language
+   * @return the i18n language
+   */
   I18nLanguage findByCode(String language);
 
+  /**
+   * Find by codes.
+   *
+   * @param langs the langs
+   * @return the list
+   */
   List<I18nLanguage> findByCodes(List<String> langs);
 
+  /**
+   * Gets the all.
+   *
+   * @return the all
+   */
   List<I18nLanguage> getAll();
 
 }

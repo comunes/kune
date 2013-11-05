@@ -25,8 +25,19 @@ package cc.kune.common.client.ui;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Panel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UiUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UiUtils {
 
+  /**
+   * Clear.
+   *
+   * @param widget the widget
+   */
   public static void clear(final ForIsWidget widget) {
     final Panel panel = (Panel) widget;
     panel.clear();

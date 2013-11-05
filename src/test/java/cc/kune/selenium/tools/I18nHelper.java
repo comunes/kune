@@ -31,13 +31,35 @@ import com.google.gwt.i18n.client.Messages;
 import com.google.gwt.i18n.client.Messages.AlternateMessage;
 import com.google.gwt.i18n.client.Messages.DefaultMessage;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nHelper.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nHelper {
 
+  /**
+   * Gets the.
+   *
+   * @param classToMock the class to mock
+   * @param method the method
+   * @param arguments the arguments
+   * @return the string
+   */
   public static String get(final Class<? extends Messages> classToMock, final Method method,
       final Object[] arguments) {
     return get(classToMock, method.getName(), arguments);
   }
 
+  /**
+   * Gets the.
+   *
+   * @param messageType the message type
+   * @param methodName the method name
+   * @param params the params
+   * @return the string
+   */
   public static String get(final Class<? extends Messages> messageType, final String methodName,
       final Object... params) {
     try {
@@ -56,6 +78,12 @@ public class I18nHelper {
     }
   }
 
+  /**
+   * Gets the first int.
+   *
+   * @param params the params
+   * @return the first int
+   */
   private static int getFirstInt(final Object[] params) {
     for (final Object param : params) {
       final Class<? extends Object> class1 = param.getClass();
@@ -66,6 +94,14 @@ public class I18nHelper {
     return 0;
   }
 
+  /**
+   * Gets the plural.
+   *
+   * @param method the method
+   * @param value the value
+   * @param def the def
+   * @return the plural
+   */
   private static String getPlural(final Method method, final int value, final String def) {
     final AlternateMessage pluralText = method.getAnnotation(AlternateMessage.class);
     if (pluralText != null) {
@@ -89,16 +125,36 @@ public class I18nHelper {
     return def;
   }
 
+  /**
+   * I18n default value.
+   *
+   * @param method the method
+   * @param params the params
+   * @return the string
+   */
   private static String i18nDefaultValue(final Method method, final Class<?>... params) {
     return method.getAnnotation(DefaultMessage.class).value();
   }
 
+  /** The messages class. */
   private final Class<? extends Messages> messagesClass;
 
+  /**
+   * Instantiates a new i18n helper.
+   *
+   * @param messagesClass the messages class
+   */
   public I18nHelper(final Class<? extends Messages> messagesClass) {
     this.messagesClass = messagesClass;
   }
 
+  /**
+   * Gets the.
+   *
+   * @param methodName the method name
+   * @param params the params
+   * @return the string
+   */
   public String get(final String methodName, final Object... params) {
     return get(messagesClass, methodName, params);
   }

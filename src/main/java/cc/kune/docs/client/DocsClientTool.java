@@ -33,10 +33,25 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DocsClientTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DocsClientTool extends FoldableAbstractClientTool {
 
+  /** The Constant EMPTY_CREATE_SOME. */
   private static final String EMPTY_CREATE_SOME = "This folder is empty. You can create a document or folder here.";
 
+  /**
+   * Instantiates a new docs client tool.
+   *
+   * @param i18n the i18n
+   * @param toolSelector the tool selector
+   * @param cntCapRegistry the cnt cap registry
+   * @param history the history
+   */
   @Inject
   public DocsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
@@ -58,11 +73,17 @@ public class DocsClientTool extends FoldableAbstractClientTool {
     registerIcons();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.AbstractClientTool#getName()
+   */
   @Override
   public String getName() {
     return TOOL_NAME;
   }
 
+  /**
+   * Register icons.
+   */
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);

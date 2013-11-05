@@ -15,9 +15,12 @@
  */
 package cc.kune.common.client.utils;
 
+// TODO: Auto-generated Javadoc
 /**
  * A utility to decode and encode byte arrays as Strings, using only "safe"
  * characters.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class Base64Utils {
 
@@ -107,6 +110,9 @@ public class Base64Utils {
 
   /**
    * Decode a base64 string into a long value.
+   *
+   * @param value the value
+   * @return the long
    */
   public static long longFromBase64(String value) {
     int pos = 0;
@@ -172,6 +178,9 @@ public class Base64Utils {
   /**
    * Return a string containing a base-64 encoded version of the given long
    * value. Leading groups of all zero bits are omitted.
+   *
+   * @param value the value
+   * @return the string
    */
   public static String toBase64(long value) {
     // Convert to ints early to avoid need for long ops
@@ -195,6 +204,14 @@ public class Base64Utils {
     return sb.toString();
   }
 
+  /**
+   * Base64 append.
+   *
+   * @param sb the sb
+   * @param digit the digit
+   * @param haveNonZero the have non zero
+   * @return true, if successful
+   */
   private static boolean base64Append(StringBuilder sb, int digit, boolean haveNonZero) {
     if (digit > 0) {
       haveNonZero = true;

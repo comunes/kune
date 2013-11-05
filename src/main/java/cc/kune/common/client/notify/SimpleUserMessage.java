@@ -30,13 +30,32 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SimpleUserMessage.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SimpleUserMessage extends Composite {
+  
+  /** The Constant SHOWTIME. */
   private static final int SHOWTIME = 3500;
+  
+  /** The rp. */
   private final RoundedPanel rp;
+  
+  /** The msg. */
   private final Label msg;
+  
+  /** The popup palette. */
   private PopupPanel popupPalette;
+  
+  /** The timer. */
   private final Timer timer;
 
+  /**
+   * Instantiates a new simple user message.
+   */
   public SimpleUserMessage() {
     msg = new Label();
     msg.addStyleName("oc-user-msg");
@@ -51,12 +70,20 @@ public class SimpleUserMessage extends Composite {
 
   }
 
+  /**
+   * Hide.
+   */
   public void hide() {
     if (popupPalette != null) {
       popupPalette.hide();
     }
   }
 
+  /**
+   * Show.
+   *
+   * @param message the message
+   */
   public void show(final String message) {
     msg.setText(message);
     popupPalette = new PopupPanel(true, false);

@@ -24,45 +24,100 @@ package cc.kune.core.shared.domain.utils;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AccessRights.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AccessRights implements IsSerializable {
+  
+  /** The administrable. */
   boolean administrable;
+  
+  /** The editable. */
   boolean editable;
+  
+  /** The visible. */
   boolean visible;
 
+  /**
+   * Instantiates a new access rights.
+   */
   public AccessRights() {
     this(false, false, false);
   }
 
+  /**
+   * Instantiates a new access rights.
+   *
+   * @param administrable the administrable
+   * @param editable the editable
+   * @param visible the visible
+   */
   public AccessRights(final boolean administrable, final boolean editable, final boolean visible) {
     this.administrable = administrable;
     this.editable = editable;
     this.visible = visible;
   }
 
+  /**
+   * Checks if is administrable.
+   *
+   * @return true, if is administrable
+   */
   public boolean isAdministrable() {
     return administrable;
   }
 
+  /**
+   * Checks if is editable.
+   *
+   * @return true, if is editable
+   */
   public boolean isEditable() {
     return editable;
   }
 
+  /**
+   * Checks if is visible.
+   *
+   * @return true, if is visible
+   */
   public boolean isVisible() {
     return visible;
   }
 
+  /**
+   * Sets the administrable.
+   *
+   * @param isAdministrable the new administrable
+   */
   public void setAdministrable(final boolean isAdministrable) {
     this.administrable = isAdministrable;
   }
 
+  /**
+   * Sets the editable.
+   *
+   * @param isEditable the new editable
+   */
   public void setEditable(final boolean isEditable) {
     this.editable = isEditable;
   }
 
+  /**
+   * Sets the visible.
+   *
+   * @param isVisible the new visible
+   */
   public void setVisible(final boolean isVisible) {
     this.visible = isVisible;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
@@ -87,6 +142,9 @@ public class AccessRights implements IsSerializable {
     return true;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -97,6 +155,9 @@ public class AccessRights implements IsSerializable {
     return result;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return "AccessRights[a: " + administrable + ", e: " + editable + ", v: " + visible + "]";

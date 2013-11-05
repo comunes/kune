@@ -43,32 +43,60 @@ import cc.kune.domain.Content;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileDownloadManagerTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FileDownloadManagerTest {
 
+  /** The Constant SOMETITLE. */
   private static final String SOMETITLE = "Sometitle";
 
+  /** The content. */
   private Content content;
 
+  /** The file download manager. */
   @Inject
   FileDownloadManager fileDownloadManager;
 
+  /** The filename. */
   private String filename;
+  
+  /** The file utils. */
   private FileUtils fileUtils;
 
+  /** The kune properties. */
   @Inject
   KuneProperties kuneProperties;
 
+  /** The resp. */
   private HttpServletResponse resp;
 
+  /** The state token. */
   private StateToken stateToken;
 
+  /** The upload location. */
   private String uploadLocation;
 
+  /**
+   * Contentwhen.
+   *
+   * @param mimeType the mime type
+   * @param filename the filename
+   * @param extension the extension
+   */
   private void contentwhen(final BasicMimeType mimeType, final String filename, final String extension) {
     Mockito.when(content.getMimeType()).thenReturn(mimeType);
     Mockito.when(content.getFilename()).thenReturn(filename + extension);
   }
 
+  /**
+   * Creates the.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Before
   public void create() throws IOException {
     new IntegrationTestHelper(true, this);
@@ -87,11 +115,21 @@ public class FileDownloadManagerTest {
     Mockito.when(content.getTitle()).thenReturn(SOMETITLE);
   }
 
+  /**
+   * File with no extension download test.
+   *
+   * @throws Exception the exception
+   */
   @Ignore
   public void fileWithNoExtensionDownloadTest() throws Exception {
     throw new Exception("TODO");
   }
 
+  /**
+   * Test jpg thumb download.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testJpgThumbDownload() throws IOException {
     final String extension = ".jpg";
@@ -108,6 +146,11 @@ public class FileDownloadManagerTest {
             + FileDownloadManager.RESP_HEADER_END);
   }
 
+  /**
+   * Test pdf download1.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testPdfDownload1() throws IOException {
     final String extension = ".pdf";
@@ -122,6 +165,11 @@ public class FileDownloadManagerTest {
             + FileDownloadManager.RESP_HEADER_END);
   }
 
+  /**
+   * Test pdf download2.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testPdfDownload2() throws IOException {
     final String pngExtension = ".png";
@@ -138,6 +186,11 @@ public class FileDownloadManagerTest {
             + FileDownloadManager.RESP_HEADER_END);
   }
 
+  /**
+   * Test pdf download3.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testPdfDownload3() throws IOException {
     final String pngExtension = ".png";
@@ -154,6 +207,11 @@ public class FileDownloadManagerTest {
             + FileDownloadManager.RESP_HEADER_END);
   }
 
+  /**
+   * Test pdf download4.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testPdfDownload4() throws IOException {
     final String pngExtension = ".png";
@@ -170,6 +228,11 @@ public class FileDownloadManagerTest {
             + FileDownloadManager.RESP_HEADER_END);
   }
 
+  /**
+   * Test pdf download null mime.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testPdfDownloadNullMime() throws IOException {
     final String extension = ".pdf";
@@ -184,6 +247,11 @@ public class FileDownloadManagerTest {
             + FileDownloadManager.RESP_HEADER_END);
   }
 
+  /**
+   * Test png download1.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testPngDownload1() throws IOException {
     final String extension = ".png";
@@ -198,6 +266,11 @@ public class FileDownloadManagerTest {
             + FileDownloadManager.RESP_HEADER_END);
   }
 
+  /**
+   * Test png download2.
+   *
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   @Test
   public void testPngDownload2() throws IOException {
     final String extension = ".png";

@@ -30,8 +30,22 @@ import cc.kune.wiki.shared.WikiToolConstants;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GoParentFolderBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GoParentFolderBtn extends GoParentContainerBtn {
 
+  /**
+   * Instantiates a new go parent folder btn.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   * @param session the session
+   */
   @Inject
   public GoParentFolderBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
       final IconicResources res, final Session session) {

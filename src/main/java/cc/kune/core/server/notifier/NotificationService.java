@@ -38,23 +38,54 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NotificationService.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class NotificationService {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(NotificationService.class);
+  
+  /** The helper. */
   private final NotificationHtmlHelper helper;
+  
+  /** The sender. */
   private final PendingNotificationSender sender;
 
+  /**
+   * Instantiates a new notification service.
+   *
+   * @param sender the sender
+   * @param helper the helper
+   */
   @Inject
   NotificationService(final PendingNotificationSender sender, final NotificationHtmlHelper helper) {
     this.sender = sender;
     this.helper = helper;
   }
 
+  /**
+   * Creates the plain subject.
+   *
+   * @param subject the subject
+   * @return the formatted string
+   */
   private FormattedString createPlainSubject(final String subject) {
     return FormattedString.build(subject);
   }
 
+  /**
+   * Notify group admins.
+   *
+   * @param groupToNotify the group to notify
+   * @param groupSender the group sender
+   * @param subject the subject
+   * @param message the message
+   */
   public void notifyGroupAdmins(final Group groupToNotify, final Group groupSender,
       final String subject, final String message) {
     final Set<User> adminMembers = new HashSet<User>();
@@ -62,6 +93,14 @@ public class NotificationService {
     notifyToAll(groupSender, subject, message, adminMembers);
   }
 
+  /**
+   * Notify group members.
+   *
+   * @param groupToNotify the group to notify
+   * @param groupSender the group sender
+   * @param subject the subject
+   * @param message the message
+   */
   public void notifyGroupMembers(final Group groupToNotify, final Group groupSender,
       final String subject, final String message) {
     final Set<User> members = new HashSet<User>();
@@ -69,6 +108,14 @@ public class NotificationService {
     notifyToAll(groupSender, subject, message, members);
   }
 
+  /**
+   * Notify group to user.
+   *
+   * @param group the group
+   * @param to the to
+   * @param subject the subject
+   * @param message the message
+   */
   public void notifyGroupToUser(final Group group, final User to, final String subject,
       final String message) {
     sender.add(NotificationType.email, group.getShortName(), createPlainSubject(subject),
@@ -76,6 +123,14 @@ public class NotificationService {
         Addressee.build(to));
   }
 
+  /**
+   * Notify to all.
+   *
+   * @param groupSender the group sender
+   * @param subject the subject
+   * @param message the message
+   * @param users the users
+   */
   private void notifyToAll(final Group groupSender, final String subject, final String message,
       final Collection<User> users) {
     for (final User to : users) {
@@ -85,6 +140,14 @@ public class NotificationService {
     }
   }
 
+  /**
+   * Notify user to user by email.
+   *
+   * @param from the from
+   * @param to the to
+   * @param subject the subject
+   * @param message the message
+   */
   public void notifyUserToUserByEmail(final User from, final User to, final String subject, final String message) {
     sender.add(NotificationType.email, PendingNotification.SITE_DEFAULT_SUBJECT_PREFIX,
         createPlainSubject(subject),
@@ -93,16 +156,12 @@ public class NotificationService {
   }
 
   /**
-   * Send an email
-   * 
-   * @param to
-   *          the address (destination)
-   * @param subjectPrefix
-   *          the subject prefix for instance [somegroup]
-   * @param subject
-   *          the subject of the email
-   * @param body
-   *          the body of the email
+   * Send an email.
+   *
+   * @param to the address (destination)
+   * @param subjectPrefix the subject prefix for instance [somegroup]
+   * @param subject the subject of the email
+   * @param body the body of the email
    */
   public void sendEmail(final Addressee to, final String subjectPrefix, final FormattedString subject,
       final FormattedString body) {
@@ -111,16 +170,12 @@ public class NotificationService {
   }
 
   /**
-   * Send an email
-   * 
-   * @param dest
-   *          the list of address (destinations)
-   * @param subjectPrefix
-   *          the subject prefix for instance [somegroup]
-   * @param subject
-   *          the subject of the email
-   * @param body
-   *          the body of the email
+   * Send an email.
+   *
+   * @param dest the list of address (destinations)
+   * @param subjectPrefix the subject prefix for instance [somegroup]
+   * @param subject the subject of the email
+   * @param body the body of the email
    */
   public void sendEmail(final DestinationProvider dest, final String subjectPrefix,
       final FormattedString subject, final FormattedString body) {

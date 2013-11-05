@@ -32,27 +32,52 @@ import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.ClosingHandler;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CustomSavedStateIndicator.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class CustomSavedStateIndicator implements UnsavedDataListener {
 
+  /**
+   * The Enum SavedState.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   private enum SavedState {
-    SAVED, UNSAVED;
+    
+    /** The saved. */
+    SAVED, 
+ /** The unsaved. */
+ UNSAVED;
   }
 
+  /** The Constant UPDATE_DELAY_MS. */
   private static final int UPDATE_DELAY_MS = 300;
+  
+  /** The Constant UPDATE_UNSAVED_DELAY_MS. */
   private static final int UPDATE_UNSAVED_DELAY_MS = 10;
 
+  /** The current saved state. */
   private SavedState currentSavedState = null;
 
+  /** The notifier. */
   private final WaveUnsaveNotificator notifier;
 
+  /** The scheduler. */
   private final TimerService scheduler;
+  
+  /** The update task. */
   private final Scheduler.Task updateTask = new Scheduler.Task() {
     @Override
     public void execute() {
       updateDisplay();
     }
   };
+  
+  /** The visible saved state. */
   private SavedState visibleSavedState = SavedState.SAVED;
 
   /**
@@ -78,6 +103,9 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
     // When history.newItem can be canceled add a similar code to onWindowClosing
   }
 
+  /**
+   * Maybe update display.
+   */
   private void maybeUpdateDisplay() {
     if (needsUpdating()) {
       switch (currentSavedState) {
@@ -96,10 +124,18 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
     }
   }
 
+  /**
+   * Needs updating.
+   *
+   * @return true, if successful
+   */
   private boolean needsUpdating() {
     return visibleSavedState != currentSavedState;
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.concurrencycontrol.common.UnsavedDataListener#onClose(boolean)
+   */
   @Override
   public void onClose(final boolean everythingCommitted) {
     if (everythingCommitted) {
@@ -109,6 +145,12 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
     }
   }
 
+  /**
+   * On new history.
+   *
+   * @param nextHistory the next history
+   * @param callback the callback
+   */
   public void onNewHistory(final String nextHistory, final SimpleResponseCallback callback) {
     if (currentSavedState != null && currentSavedState.equals(SavedState.UNSAVED)) {
       NotifyUser.askConfirmation(I18n.t("Please confirm"),I18n.t("This document is not saved. " +
@@ -119,6 +161,9 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
     }
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.concurrencycontrol.common.UnsavedDataListener#onUpdate(org.waveprotocol.wave.concurrencycontrol.common.UnsavedDataListener.UnsavedDataInfo)
+   */
   @Override
   public void onUpdate(final UnsavedDataInfo unsavedDataInfo) {
     if (unsavedDataInfo.estimateUnacknowledgedSize() != 0) {
@@ -130,14 +175,23 @@ public class CustomSavedStateIndicator implements UnsavedDataListener {
     }
   }
 
+  /**
+   * Saved.
+   */
   public void saved() {
     maybeUpdateDisplay();
   }
 
+  /**
+   * Unsaved.
+   */
   public void unsaved() {
     maybeUpdateDisplay();
   }
 
+  /**
+   * Update display.
+   */
   private void updateDisplay() {
     visibleSavedState = currentSavedState;
     switch (visibleSavedState) {

@@ -33,15 +33,34 @@ import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.SocialNetwork;
 import cc.kune.domain.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DomainContext.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DomainContext {
+  
+  /** The groups. */
   private final HashMap<String, Group> groups;
+  
+  /** The users. */
   private final HashMap<String, User> users;
 
+  /**
+   * Instantiates a new domain context.
+   */
   public DomainContext() {
     this.users = new HashMap<String, User>();
     this.groups = new HashMap<String, Group>();
   }
 
+  /**
+   * Creates the groups.
+   *
+   * @param groupNames the group names
+   */
   public void createGroups(final String... groupNames) {
     Group group;
     for (final String name : groupNames) {
@@ -50,6 +69,11 @@ public class DomainContext {
     }
   }
 
+  /**
+   * Creates the orphan group.
+   *
+   * @param groupNames the group names
+   */
   public void createOrphanGroup(final String... groupNames) {
     Group group;
     for (final String name : groupNames) {
@@ -59,6 +83,11 @@ public class DomainContext {
     }
   }
 
+  /**
+   * Creates the users.
+   *
+   * @param userNames the user names
+   */
   public void createUsers(final String... userNames) {
     User user;
     for (final String name : userNames) {
@@ -69,30 +98,66 @@ public class DomainContext {
     }
   }
 
+  /**
+   * Gets the default access list of.
+   *
+   * @param userName the user name
+   * @return the default access list of
+   */
   public AccessLists getDefaultAccessListOf(final String userName) {
     return getSocialNetworkOf(userName).getAccessLists();
   }
 
+  /**
+   * Gets the group.
+   *
+   * @param groupName the group name
+   * @return the group
+   */
   public Group getGroup(final String groupName) {
     return groups.get(groupName);
   }
 
+  /**
+   * Gets the group of.
+   *
+   * @param userName the user name
+   * @return the group of
+   */
   public Group getGroupOf(final String userName) {
     final User user = getUser(userName);
     final Group userGroup = user.getUserGroup();
     return userGroup;
   }
 
+  /**
+   * Gets the social network of.
+   *
+   * @param userName the user name
+   * @return the social network of
+   */
   private SocialNetwork getSocialNetworkOf(final String userName) {
     final Group userGroup = getGroupOf(userName);
     final SocialNetwork socialNetwork = userGroup.getSocialNetwork();
     return socialNetwork;
   }
 
+  /**
+   * Gets the user.
+   *
+   * @param userName the user name
+   * @return the user
+   */
   public User getUser(final String userName) {
     return users.get(userName);
   }
 
+  /**
+   * In social network of.
+   *
+   * @param userName the user name
+   * @return the social network operator
+   */
   public SocialNetworkOperator inSocialNetworkOf(final String userName) {
     return new SocialNetworkOperator(this, getSocialNetworkOf(userName));
   }

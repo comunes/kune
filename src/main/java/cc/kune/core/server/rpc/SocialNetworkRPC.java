@@ -41,14 +41,34 @@ import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SocialNetworkRPC.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SocialNetworkRPC implements SocialNetService, RPC {
 
+  /** The group manager. */
   private final GroupManager groupManager;
 
+  /** The sn manager. */
   private final SocialNetworkManager snManager;
+  
+  /** The user finder. */
   private final UserFinder userFinder;
+  
+  /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
+  /**
+   * Instantiates a new social network rpc.
+   *
+   * @param userSessionManager the user session manager
+   * @param groupManager the group manager
+   * @param socialNetworkManager the social network manager
+   * @param userFinder the user finder
+   */
   @Inject
   public SocialNetworkRPC(final UserSessionManager userSessionManager, final GroupManager groupManager,
       final SocialNetworkManager socialNetworkManager, final UserFinder userFinder) {
@@ -58,6 +78,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     this.userFinder = userFinder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#acceptJoinGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
@@ -78,6 +101,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#addAdminMember(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
@@ -92,6 +118,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#addAsBuddie(java.lang.String, java.lang.String)
+   */
   @Override
   @Authenticated
   @KuneTransactional
@@ -99,6 +128,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     snManager.addAsBuddie(userSessionManager.getUser(), userFinder.findByShortName(userName));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#addCollabMember(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
@@ -113,6 +145,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#addViewerMember(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
@@ -127,6 +162,11 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
+  /**
+   * Check is not personal group.
+   *
+   * @param group the group
+   */
   private void checkIsNotPersonalGroup(final Group group) {
     if (group.isPersonal()) {
       throw new DefaultException();
@@ -134,6 +174,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     ;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#deleteMember(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
@@ -148,6 +191,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#denyJoinGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
@@ -162,10 +208,20 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
+  /**
+   * Generate response.
+   *
+   * @param userLogged the user logged
+   * @param group the group
+   * @return the social network data dto
+   */
   private SocialNetworkDataDTO generateResponse(final User userLogged, final Group group) {
     return snManager.generateResponse(userLogged, group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#getSocialNetwork(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated(mandatory = false)
   // At least you can access as Viewer to the Group
@@ -178,6 +234,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(user, group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#requestJoinGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated
   @KuneTransactional
@@ -190,6 +249,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return snManager.requestToJoin(user, group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#setAdminAsCollab(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
@@ -204,6 +266,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#setCollabAsAdmin(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.group, accessRolRequired = AccessRol.Administrator)
@@ -218,6 +283,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.SocialNetService#unJoinGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated
   @KuneTransactional

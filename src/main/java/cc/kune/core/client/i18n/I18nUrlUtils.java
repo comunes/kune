@@ -26,12 +26,35 @@ import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nUrlUtils.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nUrlUtils {
 
+  /**
+   * Adds the lang param to a url.
+   * 
+   * @param lang
+   *          the lang
+   * @param changedUrl
+   *          the changed url
+   */
   private static void addLangParam(final String lang, final Url changedUrl) {
     changedUrl.add(new UrlParam("locale", lang));
   }
 
+  /**
+   * Change lang.
+   * 
+   * @param url
+   *          the url
+   * @param lang
+   *          the new lang
+   * @return the new url
+   */
   public static String changeLang(final String url, final String lang) {
     final String[] hashSplitted = url.split("#");
     final String hash = hashSplitted.length > 1 ? hashSplitted[1] : "";

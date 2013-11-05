@@ -38,14 +38,37 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatAboutContentBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatAboutContentBtn extends MenuItemDescriptor {
 
+  /**
+   * The Class ChatAboutContentAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class ChatAboutContentAction extends RolAction {
 
+    /** The chat client. */
     private final Provider<ChatClient> chatClient;
+    
+    /** The i18n. */
     private final I18nTranslationService i18n;
+    
+    /** The session. */
     private final Session session;
 
+    /**
+     * Instantiates a new chat about content action.
+     *
+     * @param session the session
+     * @param i18n the i18n
+     * @param chatClient the chat client
+     */
     @Inject
     public ChatAboutContentAction(final Session session, final I18nTranslationService i18n,
         final Provider<ChatClient> chatClient) {
@@ -55,6 +78,9 @@ public class ChatAboutContentBtn extends MenuItemDescriptor {
       this.chatClient = chatClient;
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       NotifyUser.askConfirmation(
@@ -78,8 +104,17 @@ public class ChatAboutContentBtn extends MenuItemDescriptor {
 
   }
 
+  /** The Constant ID. */
   public static final String ID = "k-chatabout-btn";
 
+  /**
+   * Instantiates a new chat about content btn.
+   *
+   * @param action the action
+   * @param res the res
+   * @param optionsMenu the options menu
+   * @param i18n the i18n
+   */
   @Inject
   public ChatAboutContentBtn(final ChatAboutContentAction action, final ChatResources res,
       final ContentViewerOptionsMenu optionsMenu, final I18nTranslationService i18n) {

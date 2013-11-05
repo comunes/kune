@@ -28,17 +28,35 @@ import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.hablar.icons.client.AvatarConfig;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneChatAvatarConfig.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneChatAvatarConfig implements AvatarConfig {
 
+  /** The chat options. */
   private final ChatOptions chatOptions;
+  
+  /** The down utils. */
   private final ClientFileDownloadUtils downUtils;
 
+  /**
+   * Instantiates a new kune chat avatar config.
+   *
+   * @param chatOptions the chat options
+   * @param downUtils the down utils
+   */
   @Inject
   public KuneChatAvatarConfig(final ChatOptions chatOptions, final ClientFileDownloadUtils downUtils) {
     this.chatOptions = chatOptions;
     this.downUtils = downUtils;
   }
 
+  /* (non-Javadoc)
+   * @see com.calclab.hablar.icons.client.AvatarConfig#getUrl(com.calclab.emite.core.client.xmpp.stanzas.XmppURI, java.lang.String)
+   */
   @Override
   public String getUrl(final XmppURI uri, final String size) {
 

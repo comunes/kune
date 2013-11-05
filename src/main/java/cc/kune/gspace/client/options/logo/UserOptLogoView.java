@@ -22,6 +22,11 @@
  */
 package cc.kune.gspace.client.options.logo;
 
+/**
+ * The Interface UserOptLogoView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface UserOptLogoView extends EntityOptLogoView {
 
 }

@@ -28,8 +28,17 @@ import cc.kune.selenium.KuneSeleniumTest;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatSeleniumTests.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatSeleniumTests extends KuneSeleniumTest {
 
+  /**
+   * Basic chat.
+   */
   @Test
   public void basicChat() {
     // 15 chars, the limit, so we don't use shortName

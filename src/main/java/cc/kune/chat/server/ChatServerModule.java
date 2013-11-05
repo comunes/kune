@@ -24,8 +24,18 @@ package cc.kune.chat.server;
 
 import com.google.inject.AbstractModule;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatServerModule.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatServerModule extends AbstractModule {
 
+  /* (non-Javadoc)
+   * @see com.google.inject.AbstractModule#configure()
+   */
   @Override
   public void configure() {
     // To debug Smack, descomment this

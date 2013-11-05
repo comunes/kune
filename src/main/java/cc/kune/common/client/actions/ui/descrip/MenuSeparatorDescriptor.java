@@ -22,17 +22,37 @@
  */
 package cc.kune.common.client.actions.ui.descrip;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuSeparatorDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MenuSeparatorDescriptor extends AbstractSeparatorDescriptor {
 
+  /**
+   * Builds the.
+   *
+   * @param parent the parent
+   * @return the menu separator descriptor
+   */
   public static MenuSeparatorDescriptor build(final MenuDescriptor parent) {
     return new MenuSeparatorDescriptor(parent);
   }
 
+  /**
+   * Instantiates a new menu separator descriptor.
+   *
+   * @param parent the parent
+   */
   public MenuSeparatorDescriptor(final MenuDescriptor parent) {
     super();
     setParent(parent);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
+   */
   @Override
   public Class<?> getType() {
     return MenuSeparatorDescriptor.class;

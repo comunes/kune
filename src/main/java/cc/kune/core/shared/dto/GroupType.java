@@ -24,6 +24,24 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum GroupType.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum GroupType implements IsSerializable {
-  CLOSED, COMMUNITY, ORGANIZATION, ORPHANED_PROJECT, PERSONAL, PROJECT
+  
+  /** The closed. */
+  CLOSED, 
+ /** The community. */
+ COMMUNITY, 
+ /** The organization. */
+ ORGANIZATION, 
+ /** The orphaned project. */
+ ORPHANED_PROJECT, 
+ /** The personal. */
+ PERSONAL, 
+ /** The project. */
+ PROJECT
 }

@@ -33,26 +33,51 @@ import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorVi
 import cc.kune.selenium.PageObject;
 import cc.kune.selenium.SeleniumConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SitePageObject.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SitePageObject extends PageObject {
 
+  /** The confirmation cancel. */
   @FindBy(id = SeleniumConstants.GWTDEV + UserConfirmPanel.CANCEL_ID)
   public WebElement confirmationCancel;
+  
+  /** The confirmation ok. */
   @FindBy(id = SeleniumConstants.GWTDEV + UserConfirmPanel.OK_ID)
   public WebElement confirmationOk;
+  
+  /** The group space btn. */
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.GROUP_SPACE_ID)
   public WebElement groupSpaceBtn;
+  
+  /** The home space btn. */
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.HOME_SPACE_ID)
   public WebElement homeSpaceBtn;
+  
+  /** The my group menu. */
   @FindBy(id = SeleniumConstants.GWTDEV + MyGroupsMenu.MENU_ID)
   public WebElement myGroupMenu;
+  
+  /** The my group menu new group item. */
   @FindBy(id = SeleniumConstants.GWTDEV + MyGroupsMenu.NEW_GROUP_MENUITEM_ID)
   public WebElement myGroupMenuNewGroupItem;
+  
+  /** The new group btn. */
   @FindBy(id = SeleniumConstants.GWTDEV + SitebarNewGroupLink.NEW_GROUP_BTN_ID)
   public WebElement newGroupBtn;
+  
+  /** The public space btn. */
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.PUBLIC_SPACE_ID)
   public WebElement publicSpaceBtn;
+  
+  /** The search text box. */
   @FindBy(id = SeleniumConstants.GWTDEV + SitebarSearchPanel.SITE_SEARCH_TEXTBOX)
   public WebElement searchTextBox;
+  
+  /** The user space btn. */
   @FindBy(id = SeleniumConstants.GWTDEV + SpaceSelectorView.USER_SPACE_ID)
   public WebElement userSpaceBtn;
 }

@@ -27,8 +27,20 @@ import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LanguageSelectorPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LanguageSelectorPanel extends AbstractLanguageSelectorPanel {
 
+  /**
+   * Instantiates a new language selector panel.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   */
   @Inject
   public LanguageSelectorPanel(final I18nTranslationService i18n, final Session session) {
     super(i18n, session, LanguageSelectorType.ALL);

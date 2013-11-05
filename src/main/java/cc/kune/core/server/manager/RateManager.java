@@ -26,12 +26,37 @@ import cc.kune.domain.Content;
 import cc.kune.domain.Rate;
 import cc.kune.domain.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface RateManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface RateManager extends Manager<Rate, Long> {
 
+  /**
+   * Find.
+   *
+   * @param user the user
+   * @param content the content
+   * @return the rate
+   */
   Rate find(User user, Content content);
 
+  /**
+   * Gets the rate avg.
+   *
+   * @param content the content
+   * @return the rate avg
+   */
   Double getRateAvg(Content content);
 
+  /**
+   * Gets the rate by users.
+   *
+   * @param content the content
+   * @return the rate by users
+   */
   Long getRateByUsers(Content content);
 
 }

@@ -22,14 +22,32 @@
  */
 package cc.kune.core.client.auth;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface Register.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface Register {
 
+  /** The welcome id. */
   String WELCOME_ID = "k-user-reg-welcome-msg-id";
 
+  /**
+   * Do register.
+   */
   void doRegister();
 
+  /**
+   * Hide.
+   */
   void hide();
 
+  /**
+   * Sets the goto token on cancel.
+   *
+   * @param gotoTokenOnCancel the new goto token on cancel
+   */
   void setGotoTokenOnCancel(String gotoTokenOnCancel);
 
 }

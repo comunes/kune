@@ -27,12 +27,24 @@ import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractFlowToolbar.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractFlowToolbar extends FlowPanel implements AbstractToolbar, HasWidgets {
 
+  /**
+   * Instantiates a new abstract flow toolbar.
+   */
   public AbstractFlowToolbar() {
     super();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#addFill()
+   */
   @Override
   public Widget addFill() {
     final Label emptyLabel = new Label("");
@@ -42,6 +54,9 @@ public abstract class AbstractFlowToolbar extends FlowPanel implements AbstractT
     return emptyLabel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#addSeparator()
+   */
   @Override
   public Widget addSeparator() {
     final Label emptyLabel = new Label("");
@@ -52,6 +67,9 @@ public abstract class AbstractFlowToolbar extends FlowPanel implements AbstractT
     return emptyLabel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#addSpacer()
+   */
   @Override
   public Widget addSpacer() {
     final Label emptyLabel = new Label("");
@@ -61,18 +79,24 @@ public abstract class AbstractFlowToolbar extends FlowPanel implements AbstractT
     return emptyLabel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractToolbar#removeAll()
+   */
   @Override
   public void removeAll() {
     clear();
   }
 
+  /**
+   * Sets the basic style.
+   */
   private void setBasicStyle() {
     setStyleName("x-toolbar-FIXME");
     addStyleName("x-panel-FIXME");
   }
 
   /**
-   * Set the blank style
+   * Set the blank style.
    */
   @Override
   public void setBlankStyle() {
@@ -81,7 +105,7 @@ public abstract class AbstractFlowToolbar extends FlowPanel implements AbstractT
   }
 
   /**
-   * Set the normal grey style
+   * Set the normal grey style.
    */
   @Override
   public void setNormalStyle() {
@@ -90,7 +114,7 @@ public abstract class AbstractFlowToolbar extends FlowPanel implements AbstractT
   }
 
   /**
-   * Set the transparent style
+   * Set the transparent style.
    */
   public void setTranspStyle() {
     setBasicStyle();

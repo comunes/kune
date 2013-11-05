@@ -34,13 +34,28 @@ import cc.kune.domain.finders.LicenseFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LicenseManagerDefaultTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LicenseManagerDefaultTest extends PersistenceTest {
+  
+  /** The license. */
   private License license;
+  
+  /** The license finder. */
   @Inject
   LicenseFinder licenseFinder;
+  
+  /** The license manager. */
   @Inject
   LicenseManager licenseManager;
 
+  /**
+   * Close.
+   */
   @After
   public void close() {
     if (getTransaction().isActive()) {
@@ -48,6 +63,9 @@ public class LicenseManagerDefaultTest extends PersistenceTest {
     }
   }
 
+  /**
+   * Insert data.
+   */
   @Before
   public void insertData() {
     openTransaction();
@@ -57,6 +75,9 @@ public class LicenseManagerDefaultTest extends PersistenceTest {
     licenseManager.persist(license);
   }
 
+  /**
+   * Test license creation.
+   */
   @Test
   public void testLicenseCreation() {
     assertNotNull(license.getId());

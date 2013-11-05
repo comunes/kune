@@ -111,11 +111,20 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class WebClient extends Composite implements WaveClientView {
+  
+  /**
+   * The Interface Binder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface Binder extends UiBinder<DockLayoutPanel, WebClient> {
   }
 
@@ -123,8 +132,18 @@ public class WebClient extends Composite implements WaveClientView {
    * An exception handler that reports exceptions using a <em>shiny banner</em>
    * (an alert placed on the top of the screen). Once the stack trace is
    * prepared, it is revealed in the banner via a link.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class ErrorHandler implements UncaughtExceptionHandler {
+    
+    /**
+     * Gets the stack trace async.
+     *
+     * @param t the t
+     * @param whenReady the when ready
+     * @return the stack trace async
+     */
     public static void getStackTraceAsync(final Throwable t, final Accessor<SafeHtml> whenReady) {
       // TODO: Request stack-trace de-obfuscation. For now, just use the
       // javascript stack trace.
@@ -163,14 +182,31 @@ public class WebClient extends Composite implements WaveClientView {
       }.schedule(1);
     }
 
+    /**
+     * Install.
+     */
     public static void install() {
     GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
     }
 
+    /**
+     * Maybe.
+     *
+     * @param value the value
+     * @param otherwise the otherwise
+     * @return the string
+     */
     private static String maybe(final int value, final String otherwise) {
       return value != -1 ? String.valueOf(value) : otherwise;
     }
 
+    /**
+     * Maybe.
+     *
+     * @param value the value
+     * @param otherwise the otherwise
+     * @return the string
+     */
     private static String maybe(final String value, final String otherwise) {
       return value != null ? value : otherwise;
     }
@@ -184,10 +220,18 @@ public class WebClient extends Composite implements WaveClientView {
     /** Next handler in the handler chain. */
     private final UncaughtExceptionHandler next;
 
+    /**
+     * Instantiates a new error handler.
+     *
+     * @param next the next
+     */
     private ErrorHandler(final UncaughtExceptionHandler next) {
       this.next = next;
     }
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.core.client.GWT.UncaughtExceptionHandler#onUncaughtException(java.lang.Throwable)
+     */
     @Override
     public void onUncaughtException(final Throwable e) {
       if (!hasFired) {
@@ -217,18 +261,31 @@ public class WebClient extends Composite implements WaveClientView {
     }
   }
 
+  /**
+   * The Interface Style.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface Style extends CssResource {
   }
 
+  /** The Constant BINDER. */
   private static final Binder BINDER = GWT.create(Binder.class);
+  
+  /** The log. */
   static Log LOG = Log.get(WebClient.class);
 
   // Use of GWT logging is only intended for sending exception reports to the
   // server, nothing else in the client should use java.util.logging.
   // Please also see WebClientDemo.gwt.xml.
+  /** The Constant REMOTE_LOG. */
   private static final Logger REMOTE_LOG = Logger.getLogger("REMOTE_LOG");
 
-  /** Creates a popup that warns about network disconnects. */
+  /**
+   * Creates a popup that warns about network disconnects.
+   *
+   * @return the universal popup
+   */
   private static UniversalPopup createTurbulencePopup() {
     final PopupChrome chrome = PopupChromeFactory.createPopupChrome();
     final UniversalPopup popup =
@@ -238,64 +295,91 @@ public class WebClient extends Composite implements WaveClientView {
         + " Please save your last changes to somewhere and reload the wave.</b></div>"));
     return popup;
   }
+  
+  /** The bottom bar. */
   @UiField
   SimplePanel bottomBar;
 
+  /** The bottom toolbar. */
   private final ActionFlowPanel bottomToolbar;
 
+  /** The channel. */
   private RemoteViewServiceMultiplexer channel;
 
+  /** The color picker. */
   private Provider<AurorisColorPicker> colorPicker;
 
+  /** The content service. */
   private final ContentServiceAsync contentService;
 
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
 
+  /** The id generator. */
   private IdGenerator idGenerator;
 
+  /** The inbox count. */
   private final InboxCountPresenter inboxCount;
 
+  /** The kune session. */
   private final cc.kune.core.client.state.Session kuneSession;
 
+  /** The loading. */
   private final Element loading = new LoadingIndicator().getElement();
 
+  /** The logged in user. */
   private ParticipantId loggedInUser;
 
+  /** The log panel. */
   @UiField
   DebugMessagePanel logPanel;
 
+  /** The path toolba utils. */
   private final PathToolbarUtils pathToolbaUtils;
 
+  /** The profiles. */
   private final ProfileManager profiles;
 
+  /** The right panel. */
   @UiField
   DockLayoutPanel rightPanel;
 
+  /** The search panel. */
   @UiField(provided = true)
   final SearchPanelWidget searchPanel;
 
+  /** The split panel. */
   @UiField(provided=true)
   SplitLayoutPanel splitPanel;
 
+  /** The style. */
   @UiField
   Style style;
 
+  /** The token matcher. */
   private final TokenMatcher tokenMatcher;
 
+  /** The turbulence popup. */
   private final UniversalPopup turbulencePopup = createTurbulencePopup();
 
   /** The wave panel, if a wave is open. */
   private CustomStagesProvider wave;
 
+  /** The wave frame. */
   @UiField
   FramedPanel waveFrame;
 
   //FIXME UiField???
+  /** The wave holder. */
   ImplPanel waveHolder;
 
+  /** The wave store. */
   private final WaveStore waveStore = new SimpleWaveStore();
 
+  /** The wave unsaved indicator. */
   private final CustomSavedStateIndicator waveUnsavedIndicator;
 
 
@@ -306,6 +390,18 @@ public class WebClient extends Composite implements WaveClientView {
 
   /**
    * This is the entry point method.
+   *
+   * @param eventBus the event bus
+   * @param profiles the profiles
+   * @param inboxCount the inbox count
+   * @param tokenMatcher the token matcher
+   * @param kuneSession the kune session
+   * @param i18n the i18n
+   * @param waveUnsavedIndicator the wave unsaved indicator
+   * @param contentService the content service
+   * @param pathToolbaUtils the path toolba utils
+   * @param bottomToolbar the bottom toolbar
+   * @param colorPicker the color picker
    */
   @Inject
   public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session kuneSession, final I18nTranslationService i18n, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final PathToolbarUtils pathToolbaUtils, final ActionFlowPanel bottomToolbar, final Provider<AurorisColorPicker> colorPicker) {
@@ -378,46 +474,74 @@ public class WebClient extends Composite implements WaveClientView {
     LOG.info("SimpleWebClient.onModuleLoad() done");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#clear()
+   */
   @Override
   public void clear() {
   WaveClientUtils.clear(wave, waveHolder, waveFrame);
   waveFrame.clear();
 }
 
+  /**
+   * Clear bottom toolbar actions.
+   */
   private void clearBottomToolbarActions() {
     bottomToolbar.clear();
   }
 
+  /**
+   * Creates the web socket.
+   */
   private void createWebSocket() {
     websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl());
     websocket.connect();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getChannel()
+   */
   @Override
   public RemoteViewServiceMultiplexer getChannel() {
     return channel;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getLoading()
+   */
   @Override
   public Element getLoading() {
     return loading;
   }
+  
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getProfiles()
+   */
   @Override
   public ProfileManager getProfiles() {
     return profiles;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getStackTraceAsync(java.lang.Throwable, org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor)
+   */
   @Override
   public void getStackTraceAsync(final Throwable caught, final Accessor<SafeHtml> accessor) {
     ErrorHandler.getStackTraceAsync(caught, accessor);
   }
 
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getWaveHolder()
+   */
   @Override
   public ImplPanel getWaveHolder() {
     return waveHolder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#getWebSocket()
+   */
   @Override
   public WaveWebSocketClient getWebSocket() {
     return websocket;
@@ -425,6 +549,8 @@ public class WebClient extends Composite implements WaveClientView {
 
   /**
    * Returns <code>ws(s)://yourhost[:port]/</code>.
+   *
+   * @return the web socket base url
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl() /*-{
@@ -432,16 +558,25 @@ public class WebClient extends Composite implements WaveClientView {
 				+ $wnd.__websocket_address + "/";
   }-*/;
 
+  /**
+   * Hide bottom toolbar.
+   */
   private void hideBottomToolbar() {
     rightPanel.setWidgetSize(bottomBar, 0);
     bottomBar.getParent().getElement().getStyle().setBottom(0d, Unit.PX);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#login()
+   */
   @Override
   public void login() {
     loginImpl();
   }
 
+  /**
+   * Login impl.
+   */
   private void loginImpl() {
     createWebSocket();
     if (Session.get().isLoggedIn()) {
@@ -452,12 +587,16 @@ public class WebClient extends Composite implements WaveClientView {
   }
 
   /**
+   * Login to server.
    */
   private void loginToServer() {
     assert loggedInUser != null;
     channel = new RemoteViewServiceMultiplexer(websocket, loggedInUser.getAddress());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.WaveClientView#logout()
+   */
   @Override
   public void logout() {
     loggedInUser = null;
@@ -467,6 +606,13 @@ public class WebClient extends Composite implements WaveClientView {
     clear();
   }
 
+  /**
+   * Open wave.
+   *
+   * @param waveRef the wave ref
+   * @param isNewWave the is new wave
+   * @param participants the participants
+   */
   private void openWave(final WaveRef waveRef, final boolean isNewWave, final Set<ParticipantId> participants) {
     waveUnsavedIndicator.onNewHistory(History.getToken(), new SimpleResponseCallback () {
       @Override
@@ -536,6 +682,11 @@ public class WebClient extends Composite implements WaveClientView {
     History.newItem(tokenFromWaveref, false);
   }
 
+  /**
+   * Sets the bottom toolbar.
+   *
+   * @param waveUri the new bottom toolbar
+   */
   private void setBottomToolbar(final String waveUri) {
     contentService.getContentByWaveRef(kuneSession.getUserHash(), waveUri, new AsyncCallbackSimple<StateAbstractDTO>() {
       @Override
@@ -555,11 +706,17 @@ public class WebClient extends Composite implements WaveClientView {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.maxmin.IsMaximizable#setMaximized(boolean)
+   */
   @Override
   public void setMaximized(final boolean maximized) {
     splitPanel.setWidgetSize(searchPanel, maximized ? 0 : 400);
   }
 
+  /**
+   * Setup connection indicator.
+   */
   private void setupConnectionIndicator() {
     ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
 
@@ -595,6 +752,9 @@ public class WebClient extends Composite implements WaveClientView {
     });
   }
 
+  /**
+   * Setup search panel.
+   */
   private void setupSearchPanel() {
     // On wave action fire an event.
     final SearchPresenter.WaveActionHandler actionHandler =
@@ -614,6 +774,9 @@ public class WebClient extends Composite implements WaveClientView {
     SearchPresenter.create(search, searchPanel, actionHandler, profiles);
   }
 
+  /**
+   * Setup ui.
+   */
   private void setupUi() {
     // Set up UI
     splitPanel = new SplitLayoutPanel(2);
@@ -640,6 +803,10 @@ public class WebClient extends Composite implements WaveClientView {
     setupWavePanel();
     bottomBar.add(bottomToolbar);
   }
+  
+  /**
+   * Setup wave panel.
+   */
   private void setupWavePanel() {
     // Hide the frame until waves start getting opened.
     UIObject.setVisible(waveFrame.getElement(), false);
@@ -653,6 +820,11 @@ public class WebClient extends Composite implements WaveClientView {
     });
   }
 
+  /**
+   * Use socket io.
+   *
+   * @return true, if successful
+   */
   private native boolean useSocketIO() /*-{
 		return !window.WebSocket
   }-*/;

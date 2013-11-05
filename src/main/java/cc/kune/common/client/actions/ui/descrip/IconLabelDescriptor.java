@@ -27,32 +27,77 @@ import cc.kune.common.client.actions.BaseAction;
 
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IconLabelDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class IconLabelDescriptor extends AbstractGuiActionDescrip {
 
+  /**
+   * Instantiates a new icon label descriptor.
+   *
+   * @param action the action
+   */
   public IconLabelDescriptor(final AbstractAction action) {
     super(action);
   }
 
+  /**
+   * Instantiates a new icon label descriptor.
+   *
+   * @param text the text
+   */
   public IconLabelDescriptor(final String text) {
     this(new BaseAction(text, null));
   }
 
+  /**
+   * Instantiates a new icon label descriptor.
+   *
+   * @param text the text
+   * @param icon the icon
+   */
   public IconLabelDescriptor(final String text, final ImageResource icon) {
     this(new BaseAction(text, null, icon));
   }
 
+  /**
+   * Instantiates a new icon label descriptor.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   */
   public IconLabelDescriptor(final String text, final String tooltip) {
     this(new BaseAction(text, tooltip));
   }
 
+  /**
+   * Instantiates a new icon label descriptor.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   * @param icon the icon
+   */
   public IconLabelDescriptor(final String text, final String tooltip, final ImageResource icon) {
     this(new BaseAction(text, tooltip, icon));
   }
 
+  /**
+   * Instantiates a new icon label descriptor.
+   *
+   * @param text the text
+   * @param tooltip the tooltip
+   * @param icon the icon
+   */
   public IconLabelDescriptor(final String text, final String tooltip, final String icon) {
     this(new BaseAction(text, tooltip, icon));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
+   */
   @Override
   public Class<?> getType() {
     return IconLabelDescriptor.class;

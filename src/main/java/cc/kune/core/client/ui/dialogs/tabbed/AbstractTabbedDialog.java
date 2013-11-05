@@ -26,20 +26,59 @@ import cc.kune.common.client.notify.NotifyLevel;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface AbstractTabbedDialog.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface AbstractTabbedDialog {
 
+  /**
+   * Activate tab.
+   *
+   * @param index the index
+   */
   void activateTab(int index);
 
+  /**
+   * Adds the tab.
+   *
+   * @param tab the tab
+   * @param tabTitle the tab title
+   */
   void addTab(IsWidget tab, IsWidget tabTitle);
 
+  /**
+   * Hide.
+   */
   void hide();
 
+  /**
+   * Hide messages.
+   */
   public void hideMessages();
 
+  /**
+   * Insert tab.
+   *
+   * @param tab the tab
+   * @param tabTitle the tab title
+   * @param position the position
+   */
   void insertTab(IsWidget tab, IsWidget tabTitle, int position);
 
+  /**
+   * Sets the error message.
+   *
+   * @param message the message
+   * @param level the level
+   */
   public void setErrorMessage(String message, NotifyLevel level);
 
+  /**
+   * Show.
+   */
   void show();
 
 }

@@ -90,8 +90,11 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 import com.google.inject.name.Names;
 
+// TODO: Auto-generated Javadoc
 /**
  * Wave Server entrypoint.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CustomServerMain {
 
@@ -100,14 +103,27 @@ public class CustomServerMain {
    */
   private static final String PROPERTIES_FILE_KEY = "wave.server.config";
 
+  /** The Constant LOG. */
   private static final Log LOG = Log.get(CustomServerMain.class);
 
+  /**
+   * The Class GadgetProxyServlet.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @SuppressWarnings("serial")
   @Singleton
   public static class GadgetProxyServlet extends HttpServlet {
 
+    /** The proxy servlet. */
     ProxyServlet.Transparent proxyServlet;
 
+    /**
+     * Instantiates a new gadget proxy servlet.
+     *
+     * @param gadgetServerHostname the gadget server hostname
+     * @param gadgetServerPort the gadget server port
+     */
     @Inject
     public GadgetProxyServlet(@Named(CoreSettings.GADGET_SERVER_HOSTNAME) String gadgetServerHostname,
         @Named(CoreSettings.GADGET_SERVER_PORT) int gadgetServerPort){
@@ -117,17 +133,28 @@ public class CustomServerMain {
           gadgetServerPort,"/gadgets");
     }
 
+    /* (non-Javadoc)
+     * @see javax.servlet.GenericServlet#init(javax.servlet.ServletConfig)
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
       proxyServlet.init(config);
     }
 
+    /* (non-Javadoc)
+     * @see javax.servlet.http.HttpServlet#service(javax.servlet.ServletRequest, javax.servlet.ServletResponse)
+     */
     @Override
     public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
       proxyServlet.service(req, res);
     }
   }
 
+  /**
+   * The main method.
+   *
+   * @param args the arguments
+   */
   public static void main(String... args) {
     try {
       Module coreSettings = SettingsBinder.bindSettings(PROPERTIES_FILE_KEY, CoreSettings.class);
@@ -142,6 +169,14 @@ public class CustomServerMain {
     }
   }
 
+  /**
+   * Run.
+   *
+   * @param coreSettings the core settings
+   * @throws PersistenceException the persistence exception
+   * @throws ConfigurationException the configuration exception
+   * @throws WaveServerException the wave server exception
+   */
   public static void run(Module coreSettings) throws PersistenceException,
       ConfigurationException, WaveServerException {
     Injector settingsInjector = Guice.createInjector(coreSettings);
@@ -195,6 +230,14 @@ public class CustomServerMain {
     server.startWebSocketServer(injector);
   }
 
+  /**
+   * Builds the federation module.
+   *
+   * @param settingsInjector the settings injector
+   * @param enableFederation the enable federation
+   * @return the module
+   * @throws ConfigurationException the configuration exception
+   */
   private static Module buildFederationModule(Injector settingsInjector, boolean enableFederation)
       throws ConfigurationException {
     Module federationModule;
@@ -206,6 +249,14 @@ public class CustomServerMain {
     return federationModule;
   }
 
+  /**
+   * Initialize server.
+   *
+   * @param injector the injector
+   * @param waveDomain the wave domain
+   * @throws PersistenceException the persistence exception
+   * @throws WaveServerException the wave server exception
+   */
   private static void initializeServer(Injector injector, String waveDomain)
       throws PersistenceException, WaveServerException {
     AccountStore accountStore = injector.getInstance(AccountStore.class);
@@ -223,6 +274,12 @@ public class CustomServerMain {
     waveServer.initialize();
   }
 
+  /**
+   * Initialize servlets.
+   *
+   * @param injector the injector
+   * @param server the server
+   */
   private static void initializeServlets(Injector injector, ServerRpcProvider server) {
     // See exclude list in {@link KuneRackModule}
     server.addServlet("/gadget/gadgetlist", injector.getInstance(CustomGadgetProviderServlet.class));
@@ -265,11 +322,23 @@ public class CustomServerMain {
     //server.addServlet("/", injector.getInstance(WaveClientServlet.class));
   }
 
+  /**
+   * Initialize robots.
+   *
+   * @param injector the injector
+   * @param waveBus the wave bus
+   */
   private static void initializeRobots(Injector injector, WaveBus waveBus) {
     RobotsGateway robotsGateway = injector.getInstance(RobotsGateway.class);
     waveBus.subscribe(robotsGateway);
   }
 
+  /**
+   * Initialize robot agents.
+   *
+   * @param injector the injector
+   * @param server the server
+   */
   private static void initializeRobotAgents(Injector injector, ServerRpcProvider server) {
     //server.addServlet(PasswordRobot.ROBOT_URI + "/*", injector.getInstance(PasswordRobot.class));
     //server.addServlet(PasswordAdminRobot.ROBOT_URI + "/*", injector.getInstance(PasswordAdminRobot.class));
@@ -277,6 +346,14 @@ public class CustomServerMain {
     //server.addServlet(RegistrationRobot.ROBOT_URI + "/*", injector.getInstance(RegistrationRobot.class));
   }
 
+  /**
+   * Initialize frontend.
+   *
+   * @param injector the injector
+   * @param server the server
+   * @param waveBus the wave bus
+   * @throws WaveServerException the wave server exception
+   */
   private static void initializeFrontend(Injector injector, ServerRpcProvider server,
       WaveBus waveBus) throws WaveServerException {
     HashedVersionFactory hashFactory = injector.getInstance(HashedVersionFactory.class);
@@ -290,11 +367,24 @@ public class CustomServerMain {
     server.registerService(ProtocolWaveClientRpc.newReflectiveService(rpcImpl));
   }
 
+  /**
+   * Initialize federation.
+   *
+   * @param injector the injector
+   */
   private static void initializeFederation(Injector injector) {
     FederationTransport federationManager = injector.getInstance(FederationTransport.class);
     federationManager.startFederation();
   }
 
+  /**
+   * Initialize search.
+   *
+   * @param injector the injector
+   * @param waveBus the wave bus
+   * @throws WaveletStateException the wavelet state exception
+   * @throws WaveServerException the wave server exception
+   */
   private static void initializeSearch(Injector injector, WaveBus waveBus)
       throws WaveletStateException, WaveServerException {
     PerUserWaveViewDistpatcher waveViewDistpatcher =

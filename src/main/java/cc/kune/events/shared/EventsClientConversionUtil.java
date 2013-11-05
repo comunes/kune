@@ -30,12 +30,22 @@ import cc.kune.common.shared.res.ICalConstants;
 
 import com.bradrydzewski.gwt.calendar.client.Appointment;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EventsConversionUtil is used to convert Appointments to Gadgets
- * properties and viceversa
+ * properties and viceversa.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EventsClientConversionUtil {
 
+  /**
+   * To app.
+   *
+   * @param properties the properties
+   * @return the appointment
+   * @throws Exception the exception
+   */
   public static Appointment toApp(final Map<String, String> properties) throws Exception {
     final Appointment app = new Appointment();
     app.setDescription(properties.get(ICalConstants.DESCRIPTION));
@@ -58,6 +68,12 @@ public class EventsClientConversionUtil {
     return app;
   }
 
+  /**
+   * To map.
+   *
+   * @param app the app
+   * @return the map
+   */
   public static Map<String, String> toMap(final Appointment app) {
     final Map<String, String> properties = new HashMap<String, String>();
     properties.put(ICalConstants.SUMMARY, app.getTitle());

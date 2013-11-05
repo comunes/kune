@@ -32,10 +32,26 @@ import cc.kune.core.client.state.StateTokenUtils;
 import com.google.gwt.http.client.URL;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShareInGPlusMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
 
+  /** The Constant URL_TEMPLATE. */
   private static final String URL_TEMPLATE = "https://plus.google.com/share?url=%s";
 
+  /**
+   * Instantiates a new share in g plus menu item.
+   *
+   * @param action the action
+   * @param iconic the iconic
+   * @param session the session
+   * @param menu the menu
+   * @param i18n the i18n
+   */
   @Inject
   public ShareInGPlusMenuItem(final AbstractShareInSocialNetAction action, final IconicResources iconic,
       final Session session, final ContentViewerShareMenu menu, final I18nUITranslationService i18n) {

@@ -28,15 +28,34 @@ import cc.kune.core.shared.domain.AdmissionType;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MembersModerationMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MembersModerationMenuItem extends MenuRadioItemDescriptor {
 
+  /** The Constant GROUP_MEMBERS_MODERATION. */
   private static final String GROUP_MEMBERS_MODERATION = "k-sn-gmembers-vis";
 
+  /**
+   * Instantiates a new members moderation menu item.
+   *
+   * @param parent the parent
+   * @param action the action
+   */
   @Inject
   public MembersModerationMenuItem(final MenuDescriptor parent, final MembersModerationAction action) {
     super(parent, action, GROUP_MEMBERS_MODERATION);
   }
 
+  /**
+   * With moderation.
+   *
+   * @param admissionType the admission type
+   * @return the menu radio item descriptor
+   */
   public MenuRadioItemDescriptor withModeration(final AdmissionType admissionType) {
     ((MembersModerationAction) getAction()).setAdmissionType(admissionType);
     return this;

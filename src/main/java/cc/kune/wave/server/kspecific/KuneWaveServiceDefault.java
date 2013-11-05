@@ -88,23 +88,33 @@ import com.google.wave.api.impl.WaveletData;
 import com.google.wave.splash.rpc.ClientAction;
 import com.google.wave.splash.web.template.WaveRenderer;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneWaveServiceDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneWaveServiceDefault implements KuneWaveService {
+  
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(KuneWaveServiceDefault.class);
 
   // See: DocumentModifyServiceTest
+  /** The Constant NO_ANNOTATION_KEY. */
   private static final String NO_ANNOTATION_KEY = null;
+  
+  /** The Constant NO_BUNDLED_ANNOTATIONS. */
   private static final List<BundledAnnotation> NO_BUNDLED_ANNOTATIONS = Collections.emptyList();
+  
+  /** The Constant NO_VALUES. */
   private static final List<String> NO_VALUES = Collections.<String> emptyList();
 
   /**
-   * 
-   * Copy blips
-   * 
-   * @param fromBlip
-   * @param toBlip
-   * 
+   * Copy blips.
+   *
+   * @param fromBlip the from blip
+   * @param toBlip the to blip
    * @author yurize@apache.org (Yuri Zelikov)
-   * 
    */
   public static void copyWavelet(final Blip fromBlip, final Blip toBlip) {
     for (final BlipContent blipContent : fromBlip.all().values()) {
@@ -122,6 +132,12 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     }
   }
 
+  /**
+   * Copy wavelet elements.
+   *
+   * @param fromBlip the from blip
+   * @param toBlip the to blip
+   */
   public static void copyWaveletElements(final Blip fromBlip, final Blip toBlip) {
     // Deep copy form elements.
     // DocumentModifyService don't permit this:
@@ -148,14 +164,38 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     }
   }
 
+  /** The conversation util. */
   private final ConversationUtil conversationUtil;
+  
+  /** The converter manager. */
   private final EventDataConverterManager converterManager;
+  
+  /** The domain. */
   private final String domain;
+  
+  /** The operation registry. */
   private final OperationServiceRegistry operationRegistry;
+  
+  /** The participant utils. */
   private final ParticipantUtils participantUtils;
+  
+  /** The wavelet provider. */
   private final WaveletProvider waveletProvider;
+  
+  /** The wave renderer. */
   private final WaveRenderer waveRenderer;
 
+  /**
+   * Instantiates a new kune wave service default.
+   *
+   * @param converterManager the converter manager
+   * @param operationRegistry the operation registry
+   * @param waveletProvider the wavelet provider
+   * @param conversationUtil the conversation util
+   * @param participantUtils the participant utils
+   * @param waveRenderer the wave renderer
+   * @param domain the domain
+   */
   @Inject
   public KuneWaveServiceDefault(final EventDataConverterManager converterManager,
       @Named("DataApiRegistry") final OperationServiceRegistry operationRegistry,
@@ -171,6 +211,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     this.domain = domain;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#addGadget(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.net.URL)
+   */
   @Override
   public void addGadget(final WaveRef waveName, final String author, final URL gadgetUrl) {
     // See DocumentModifyServiceTest
@@ -192,6 +235,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     doOperations(author, opQueue, "add gadget");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#addParticipants(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.lang.String, java.lang.String[])
+   */
   @Override
   public boolean addParticipants(final WaveRef waveName, final String author, final String userWhoAdds,
       final String... newLocalParticipants) {
@@ -218,24 +264,36 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     return added;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(final String message, final SimpleArgCallback<WaveRef> onCreate,
       final ParticipantId... participants) {
     return createWave(NO_TITLE, message, onCreate, participants);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
       final SimpleArgCallback<WaveRef> onCreate, @Nonnull final ParticipantId... participantsArray) {
     return createWave(title, message, onCreate, WITHOUT_GADGET, participantsArray);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, java.lang.String[])
+   */
   @Override
   public WaveRef createWave(final String title, final String message,
       final SimpleArgCallback<WaveRef> onCreate, final String... participantsArray) {
     return createWave(title, message, onCreate, participantUtils.listFrom(participantsArray));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, java.net.URL, java.util.Map, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(final String title, final String message,
       final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
@@ -244,6 +302,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
         participantsArray);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, java.net.URL, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
       final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
@@ -251,6 +312,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     return createWave(title, message, NO_WAVE_TO_COPY, onCreate, gadgetUrl, participantsArray);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, org.waveprotocol.wave.model.waveref.WaveRef, cc.kune.common.shared.utils.SimpleArgCallback, java.net.URL, java.util.Map, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
       final WaveRef waveIdToCopy, final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
@@ -330,6 +394,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     return wavename;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, org.waveprotocol.wave.model.waveref.WaveRef, cc.kune.common.shared.utils.SimpleArgCallback, java.net.URL, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
       final WaveRef waveIdToCopy, final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
@@ -338,6 +405,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
         Collections.<String, String> emptyMap(), participantsArray);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#delParticipants(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.lang.String[])
+   */
   @Override
   public void delParticipants(final WaveRef waveName, final String whoDel,
       final String... participantsToDel) {
@@ -359,6 +429,13 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   }
 
   // final SubmitRequestListener listener
+  /**
+   * Do operations.
+   *
+   * @param author the author
+   * @param opQueue the op queue
+   * @param logComment the log comment
+   */
   private void doOperations(final String author, final OperationQueue opQueue, final String logComment) {
     final OperationContextImpl context = new OperationContextImpl(waveletProvider,
         converterManager.getEventDataConverter(ProtocolVersion.DEFAULT), conversationUtil);
@@ -369,6 +446,13 @@ public class KuneWaveServiceDefault implements KuneWaveService {
         org.waveprotocol.wave.util.logging.Log.get(KuneWaveServiceDefault.class)));
   }
 
+  /**
+   * Do submit.
+   *
+   * @param onCreate the on create
+   * @param context the context
+   * @param wavename the wavename
+   */
   private void doSubmit(final SimpleArgCallback<WaveRef> onCreate, final OperationContextImpl context,
       final WaveRef wavename) {
     OperationUtil.submitDeltas(context, waveletProvider, new SubmitRequestListener() {
@@ -385,6 +469,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#fetchWave(org.waveprotocol.wave.model.id.WaveId, org.waveprotocol.wave.model.id.WaveletId, java.lang.String)
+   */
   @Override
   public Wavelet fetchWave(final WaveId waveId, final WaveletId waveletId, final String author) {
     final OperationQueue opQueue = new OperationQueue();
@@ -429,6 +516,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     return wavelet;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#fetchWave(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String)
+   */
   @Override
   public Wavelet fetchWave(final WaveRef waveName, final String author) {
     final WaveId waveId = waveName.getWaveId();
@@ -436,6 +526,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     return fetchWave(waveId, waveletId, author);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#getGadget(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.net.URL)
+   */
   @Override
   public Gadget getGadget(final WaveRef waveletName, final String author, final URL gadgetUrl) {
     final Wavelet wavelet = fetchWave(waveletName, author);
@@ -451,31 +544,54 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#getParticipants(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String)
+   */
   @Override
   public Participants getParticipants(final WaveRef waveref, final String author) {
     return fetchWave(waveref, author).getParticipants();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#getTitle(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String)
+   */
   @Override
   public String getTitle(final WaveRef waveName, final String author) {
     final Wavelet wavelet = fetchWave(waveName, author);
     return wavelet.getTitle();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#isParticipant(com.google.wave.api.Wavelet, java.lang.String)
+   */
   @Override
   public boolean isParticipant(final Wavelet wavelet, final String user) {
     return wavelet.getParticipants().contains(participantUtils.of(user).toString());
   }
 
+  /**
+   * On failure.
+   *
+   * @param message the message
+   */
   private void onFailure(final String message) {
     LOG.error(message);
   }
 
+  /**
+   * Process error message.
+   *
+   * @param message the message
+   * @return the string
+   */
   private String processErrorMessage(final String message) {
     final String errorMsg = TextUtils.notEmpty(message) ? message : "Wave operation failed";
     return errorMsg;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#render(com.google.wave.api.Wavelet)
+   */
   @Override
   public String render(final Wavelet wavelet) {
     final ClientAction clientPage = waveRenderer.render(wavelet, 0);
@@ -483,11 +599,17 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     return html;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#render(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String)
+   */
   @Override
   public String render(final WaveRef waveRef, final String author) {
     return render(fetchWave(waveRef, author));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#setGadgetProperty(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.net.URL, java.util.Map)
+   */
   @Override
   public void setGadgetProperty(final WaveRef waveletName, final String author, final URL gadgetUrl,
       final Map<String, String> newProperties) {
@@ -525,6 +647,9 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#setTitle(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.lang.String)
+   */
   @Override
   public void setTitle(final WaveRef waveName, final String title, final String author) {
     final Wavelet wavelet = fetchWave(waveName, author);
@@ -533,6 +658,12 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     doOperations(author, opQueue, "set title");
   }
 
+  /**
+   * To set.
+   *
+   * @param array the array
+   * @return the sets the
+   */
   private Set<String> toSet(final String[] array) {
     final Set<String> set = new TreeSet<String>(Collections.reverseOrder());
     set.addAll(Arrays.asList(array));

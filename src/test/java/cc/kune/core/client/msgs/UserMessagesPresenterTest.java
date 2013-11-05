@@ -32,19 +32,47 @@ import cc.kune.common.client.msgs.UserMessagesPresenter;
 import cc.kune.common.client.msgs.UserMessagesPresenter.UserMessagesView;
 import cc.kune.common.client.notify.NotifyLevel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserMessagesPresenterTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserMessagesPresenterTest {
 
+  /** The Constant ID_1. */
   private static final String ID_1 = "id1";
+  
+  /** The Constant ID_2. */
   private static final String ID_2 = "id2";
+  
+  /** The Constant MESSAGE_1. */
   private static final String MESSAGE_1 = "message 1";
+  
+  /** The Constant MESSAGE_2. */
   private static final String MESSAGE_2 = "message 2";
+  
+  /** The Constant TITLE_1. */
   private static final String TITLE_1 = "title 1";
+  
+  /** The Constant TITLE_2. */
   private static final String TITLE_2 = "title 2";
+  
+  /** The close callback. */
   private CloseCallback closeCallback;
+  
+  /** The msg. */
   private UserMessage msg;
+  
+  /** The presenter. */
   private UserMessagesPresenter presenter;
+  
+  /** The view. */
   private UserMessagesView view;
 
+  /**
+   * Basic msg.
+   */
   @Test
   public void basicMsg() {
     presenter.add(NotifyLevel.info, TITLE_1, MESSAGE_1, null, false, closeCallback);
@@ -52,6 +80,9 @@ public class UserMessagesPresenterTest {
         closeCallback);
   }
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     presenter = new UserMessagesPresenter();
@@ -66,6 +97,9 @@ public class UserMessagesPresenterTest {
         msg);
   }
 
+  /**
+   * Two basic avatar msg.
+   */
   @Test
   public void twoBasicAvatarMsg() {
     final NotifyLevel avatar = NotifyLevel.avatar.url("image1.png");
@@ -76,6 +110,9 @@ public class UserMessagesPresenterTest {
     Mockito.verify(msg, Mockito.times(1)).appendMsg(MESSAGE_2);
   }
 
+  /**
+   * Two basic diff avatar msg.
+   */
   @Test
   public void twoBasicDiffAvatarMsg() {
     final NotifyLevel avatar1 = NotifyLevel.avatar.url("image1.png");
@@ -87,6 +124,9 @@ public class UserMessagesPresenterTest {
     Mockito.verify(msg, Mockito.never()).appendMsg(MESSAGE_1);
   }
 
+  /**
+   * Two basic diff closeable msg.
+   */
   @Test
   public void twoBasicDiffCloseableMsg() {
     presenter.add(NotifyLevel.info, TITLE_1, MESSAGE_1, ID_1, false, closeCallback);
@@ -98,6 +138,9 @@ public class UserMessagesPresenterTest {
     Mockito.verify(msg, Mockito.never()).appendMsg(MESSAGE_1);
   }
 
+  /**
+   * Two basic diff id msg.
+   */
   @Test
   public void twoBasicDiffIdMsg() {
     presenter.add(NotifyLevel.info, TITLE_1, MESSAGE_1, ID_1, false, closeCallback);
@@ -109,6 +152,9 @@ public class UserMessagesPresenterTest {
     Mockito.verify(msg, Mockito.never()).appendMsg(MESSAGE_1);
   }
 
+  /**
+   * Two basic diff level msg.
+   */
   @Test
   public void twoBasicDiffLevelMsg() {
     presenter.add(NotifyLevel.info, TITLE_1, MESSAGE_1, null, false, closeCallback);
@@ -120,6 +166,9 @@ public class UserMessagesPresenterTest {
     Mockito.verify(msg, Mockito.never()).appendMsg(MESSAGE_2);
   }
 
+  /**
+   * Two basic diff title msg.
+   */
   @Test
   public void twoBasicDiffTitleMsg() {
     presenter.add(NotifyLevel.info, TITLE_1, MESSAGE_1, null, false, closeCallback);
@@ -131,6 +180,9 @@ public class UserMessagesPresenterTest {
     Mockito.verify(msg, Mockito.never()).appendMsg(MESSAGE_1);
   }
 
+  /**
+   * Two basic msg.
+   */
   @Test
   public void twoBasicMsg() {
     presenter.add(NotifyLevel.info, TITLE_1, MESSAGE_1, null, false, closeCallback);
@@ -141,6 +193,9 @@ public class UserMessagesPresenterTest {
     Mockito.verify(msg, Mockito.times(1)).appendMsg(MESSAGE_2);
   }
 
+  /**
+   * Two basic msg but after first closed.
+   */
   @Test
   public void twoBasicMsgButAfterFirstClosed() {
     presenter.add(NotifyLevel.info, TITLE_1, MESSAGE_1, null, false, closeCallback);

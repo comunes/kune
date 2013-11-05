@@ -38,27 +38,52 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
 /**
  * A registry of actions by content type (doc, post, etc) and grouped (some
- * actions for some toolbar, etc)
- * 
+ * actions for some toolbar, etc).
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ActionRegistryByType {
+  
+  /** The Constant GENERIC_TYPE_ID. */
   private static final String GENERIC_TYPE_ID = "kgentype";
+  
+  /** The Constant KEY_SEPARATOR. */
   private static final String KEY_SEPARATOR = "-";
 
+  /** The actions. */
   private final Map<String, GuiActionDescProviderCollection> actions;
 
+  /**
+   * Instantiates a new action registry by type.
+   */
   public ActionRegistryByType() {
     actions = new HashMap<String, GuiActionDescProviderCollection>();
   }
 
+  /**
+   * Adds the.
+   *
+   * @param collection the collection
+   * @param descrip the descrip
+   * @param targetItem the target item
+   */
   private void add(final GuiActionDescCollection collection, final GuiActionDescrip descrip,
       final Object targetItem) {
     descrip.setTarget(targetItem);
     collection.add(descrip);
   }
 
+  /**
+   * Adds the action.
+   *
+   * @param tool the tool
+   * @param actionsGroupId the actions group id
+   * @param descrip the descrip
+   * @param typeId the type id
+   */
   public void addAction(@Nonnull final String tool, final String actionsGroupId,
       final GuiActionDescrip descrip, final String typeId) {
     addAction(tool, actionsGroupId, new Provider<GuiActionDescrip>() {
@@ -69,11 +94,27 @@ public class ActionRegistryByType {
     }, typeId);
   }
 
+  /**
+   * Adds the action.
+   *
+   * @param tool the tool
+   * @param actionsGroupId the actions group id
+   * @param action the action
+   */
   public void addAction(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       final Provider<? extends GuiActionDescrip> action) {
     addAction(tool, actionsGroupId, action, GENERIC_TYPE_ID);
   }
 
+  /**
+   * Adds the action.
+   *
+   * @param tool the tool
+   * @param actionsGroupId the actions group id
+   * @param action the action
+   * @param status the status
+   * @param typeIds the type ids
+   */
   public void addAction(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       final @Nonnull Provider<? extends GuiActionDescrip> action, final ContentStatus status,
       @Nonnull final String... typeIds) {
@@ -82,6 +123,14 @@ public class ActionRegistryByType {
     }
   }
 
+  /**
+   * Adds the action.
+   *
+   * @param tool the tool
+   * @param actionsGroupId the actions group id
+   * @param action the action
+   * @param typeIds the type ids
+   */
   public void addAction(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       final @Nonnull Provider<? extends GuiActionDescrip> action, @Nonnull final String... typeIds) {
     for (final String typeId : typeIds) {
@@ -91,10 +140,26 @@ public class ActionRegistryByType {
     }
   }
 
+  /**
+   * Gen key.
+   *
+   * @param tool the tool
+   * @param actionsGroupId the actions group id
+   * @param typeId the type id
+   * @return the string
+   */
   private String genKey(final String tool, final String actionsGroupId, final String typeId) {
     return tool + KEY_SEPARATOR + actionsGroupId + KEY_SEPARATOR + typeId;
   }
 
+  /**
+   * Gets the actions.
+   *
+   * @param tool the tool
+   * @param actionsGroupId the actions group id
+   * @param typeId the type id
+   * @return the actions
+   */
   private GuiActionDescProviderCollection getActions(final String tool, final String actionsGroupId,
       final String typeId) {
     final String key = genKey(tool, actionsGroupId, typeId);
@@ -106,16 +171,48 @@ public class ActionRegistryByType {
     return actionColl;
   }
 
+  /**
+   * Gets the current actions.
+   *
+   * @param tool the tool
+   * @param targetItem the target item
+   * @param isLogged the is logged
+   * @param rights the rights
+   * @param actionsGroup the actions group
+   * @return the current actions
+   */
   public GuiActionDescCollection getCurrentActions(final String tool, final Object targetItem,
       final boolean isLogged, final AccessRights rights, @Nullable final String actionsGroup) {
     return getCurrentActions(tool, targetItem, GENERIC_TYPE_ID, isLogged, rights, actionsGroup);
   }
 
+  /**
+   * Gets the current actions.
+   *
+   * @param tool the tool
+   * @param targetItem the target item
+   * @param typeId the type id
+   * @param isLogged the is logged
+   * @param rights the rights
+   * @return the current actions
+   */
   public GuiActionDescCollection getCurrentActions(@Nonnull final String tool, final Object targetItem,
       final String typeId, final boolean isLogged, final AccessRights rights) {
     return getCurrentActions(tool, targetItem, typeId, isLogged, rights, null);
   }
 
+  /**
+   * Gets the current actions.
+   *
+   * @param <T> the generic type
+   * @param tool the tool
+   * @param targetItem the target item
+   * @param typeId the type id
+   * @param isLogged the is logged
+   * @param rights the rights
+   * @param actionsGroupId the actions group id
+   * @return the current actions
+   */
   public <T> GuiActionDescCollection getCurrentActions(final String tool, final Object targetItem,
       final String typeId, final boolean isLogged, final AccessRights rights,
       @Nullable final String actionsGroupId) {
@@ -137,6 +234,19 @@ public class ActionRegistryByType {
     return collection;
   }
 
+  /**
+   * Gets the current actions.
+   *
+   * @param <T> the generic type
+   * @param tool the tool
+   * @param targetItem the target item
+   * @param typeId the type id
+   * @param status the status
+   * @param isLogged the is logged
+   * @param rights the rights
+   * @param actionsGroupId the actions group id
+   * @return the current actions
+   */
   public <T> GuiActionDescCollection getCurrentActions(@Nonnull final String tool,
       final Object targetItem, final String typeId, final ContentStatus status, final boolean isLogged,
       final AccessRights rights, @Nullable final String actionsGroupId) {
@@ -147,6 +257,14 @@ public class ActionRegistryByType {
     return collection;
   }
 
+  /**
+   * Must add.
+   *
+   * @param action the action
+   * @param isLogged the is logged
+   * @param rights the rights
+   * @return true, if successful
+   */
   private boolean mustAdd(final RolAction action, final boolean isLogged, final AccessRights rights) {
     if (action.isAuthNeed()) {
       if (!isLogged) {

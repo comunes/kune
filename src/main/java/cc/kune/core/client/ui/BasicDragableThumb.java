@@ -28,21 +28,46 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import com.allen_sauer.gwt.dnd.client.HasDragHandle;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BasicDragableThumb.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
 
+  /** The token. */
   private final StateToken token;
 
+  /**
+   * Instantiates a new basic dragable thumb.
+   *
+   * @param imageRef the image ref
+   * @param imgSize the img size
+   * @param text the text
+   * @param textMaxLenght the text max lenght
+   * @param crop the crop
+   * @param token the token
+   */
   public BasicDragableThumb(final Object imageRef, final int imgSize, final String text,
       final int textMaxLenght, final boolean crop, final StateToken token) {
     super(imageRef, imgSize, text, textMaxLenght, crop);
     this.token = token;
   }
 
+  /* (non-Javadoc)
+   * @see com.allen_sauer.gwt.dnd.client.HasDragHandle#getDragHandle()
+   */
   @Override
   public Widget getDragHandle() {
     return getImage();
   }
 
+  /**
+   * Gets the token.
+   *
+   * @return the token
+   */
   public StateToken getToken() {
     return token;
   }

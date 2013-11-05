@@ -52,20 +52,59 @@ import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SampleEntryPoint.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SampleEntryPoint implements EntryPoint {
+  
+  /**
+   * The Interface ISampleView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ISampleView {
+    
+    /**
+     * Adds the all.
+     *
+     * @param actions the actions
+     */
     void addAll(GuiActionDescCollection actions);
   }
 
+  /**
+   * The Class TestAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public class TestAction extends AbstractExtendedAction {
+    
+    /**
+     * Instantiates a new test action.
+     *
+     * @param text the text
+     */
     public TestAction(final String text) {
       super(text);
     }
 
+    /**
+     * Instantiates a new test action.
+     *
+     * @param text the text
+     * @param tooltip the tooltip
+     * @param icon the icon
+     */
     public TestAction(final String text, final String tooltip, final String icon) {
       super(text, tooltip, icon);
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       final String message = "Testing: " + super.getValue(Action.NAME);
@@ -73,8 +112,13 @@ public class SampleEntryPoint implements EntryPoint {
       userMsg.show(message);
     }
   }
+  
+  /** The user msg. */
   SimpleUserMessage userMsg = new SimpleUserMessage();
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+   */
   @Override
   public void onModuleLoad() {
 

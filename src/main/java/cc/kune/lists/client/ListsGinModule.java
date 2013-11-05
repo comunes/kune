@@ -28,8 +28,17 @@ import cc.kune.lists.client.actions.ListsNewMenu;
 import cc.kune.lists.client.actions.OptionsListMenu;
 import cc.kune.lists.client.actions.PostNewMenu;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListsGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListsGinModule extends ExtendedGinModule {
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     s(OptionsListMenu.class);

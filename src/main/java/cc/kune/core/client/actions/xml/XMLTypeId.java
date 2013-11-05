@@ -25,16 +25,37 @@ package cc.kune.core.client.actions.xml;
 import com.calclab.emite.core.client.packet.DelegatedPacket;
 import com.calclab.emite.core.client.packet.IPacket;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XMLTypeId.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class XMLTypeId extends DelegatedPacket {
 
+  /**
+   * Instantiates a new xML type id.
+   *
+   * @param delegate the delegate
+   */
   public XMLTypeId(final IPacket delegate) {
     super(delegate);
   }
 
+  /**
+   * Gets the dest type id.
+   *
+   * @return the dest type id
+   */
   public String getDestTypeId() {
     return getAttribute("destTypeId");
   }
 
+  /**
+   * Gets the orig type id.
+   *
+   * @return the orig type id
+   */
   public String getOrigTypeId() {
     return getAttribute("origTypeId");
   }

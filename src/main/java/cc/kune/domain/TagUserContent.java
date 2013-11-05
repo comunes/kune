@@ -39,40 +39,61 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 
 import cc.kune.domain.utils.HasId;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TagUserContent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Entity
 @Indexed
 @Table(name = "tag_user_content")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class TagUserContent implements HasId {
 
+  /** The content. */
   @IndexedEmbedded
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   private Content content;
 
+  /** The created on. */
   @org.hibernate.annotations.Index(name="createdOn")
   @Basic(optional = false)
   private final Long createdOn;
 
+  /** The id. */
   @Id
   @GeneratedValue
   @DocumentId
   private Long id;
 
+  /** The tag. */
   @IndexedEmbedded
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   private Tag tag;
 
+  /** The user. */
   @IndexedEmbedded
   @NotNull
   @ManyToOne(fetch = FetchType.LAZY)
   private User user;
 
+  /**
+   * Instantiates a new tag user content.
+   */
   public TagUserContent() {
     this(null, null, null);
   }
 
+  /**
+   * Instantiates a new tag user content.
+   *
+   * @param tag the tag
+   * @param user the user
+   * @param content the content
+   */
   public TagUserContent(final Tag tag, final User user, final Content content) {
     this.tag = tag;
     this.user = user;
@@ -80,40 +101,81 @@ public class TagUserContent implements HasId {
     this.createdOn = System.currentTimeMillis();
   }
 
+  /**
+   * Gets the content.
+   *
+   * @return the content
+   */
   public Content getContent() {
     return content;
   }
 
+  /**
+   * Gets the created on.
+   *
+   * @return the created on
+   */
   public Long getCreatedOn() {
     return createdOn;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.domain.utils.HasId#getId()
+   */
   @Override
   public Long getId() {
     return id;
   }
 
+  /**
+   * Gets the tag.
+   *
+   * @return the tag
+   */
   public Tag getTag() {
     return tag;
   }
 
+  /**
+   * Gets the user.
+   *
+   * @return the user
+   */
   public User getUser() {
     return user;
   }
 
+  /**
+   * Sets the content.
+   *
+   * @param content the new content
+   */
   public void setContent(final Content content) {
     this.content = content;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
+   */
   @Override
   public void setId(final Long id) {
     this.id = id;
   }
 
+  /**
+   * Sets the tag.
+   *
+   * @param tag the new tag
+   */
   public void setTag(final Tag tag) {
     this.tag = tag;
   }
 
+  /**
+   * Sets the user.
+   *
+   * @param user the new user
+   */
   public void setUser(final User user) {
     this.user = user;
   }

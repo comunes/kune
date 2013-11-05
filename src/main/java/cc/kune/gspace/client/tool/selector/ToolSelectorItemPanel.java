@@ -43,29 +43,61 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolSelectorItemPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToolSelectorItemPanel extends Composite implements ToolSelectorItemView {
 
+  /**
+   * The Interface ToolSelectorItemPanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface ToolSelectorItemPanelUiBinder extends UiBinder<Widget, ToolSelectorItemPanel> {
   }
 
+  /** The Constant TOOL_ID_PREFIX. */
   public static final String TOOL_ID_PREFIX = "k-tool-item-";
 
+  /** The ui binder. */
   private static ToolSelectorItemPanelUiBinder uiBinder = GWT.create(ToolSelectorItemPanelUiBinder.class);
 
+  /** The arrow. */
   @UiField
   HTMLPanel arrow;
+  
+  /** The flow. */
   @UiField
   FlowPanel flow;
+  
+  /** The icon left. */
   @UiField
   Label iconLeft;
+  
+  /** The icon right. */
   @UiField
   Image iconRight;
+  
+  /** The label. */
   @UiField
   InlineLabel label;
+  
+  /** The self. */
   @UiField
   FocusPanel self;
+  
+  /** The short name. */
   private final String shortName;
 
+  /**
+   * Instantiates a new tool selector item panel.
+   *
+   * @param shortName the short name
+   * @param icon the icon
+   */
   public ToolSelectorItemPanel(final String shortName, final KuneIcon icon) {
     this.shortName = shortName;
     initWidget(uiBinder.createAndBindUi(this));
@@ -74,49 +106,87 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
     iconLeft.setText(icon.getCharacter().toString());
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.Widget#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return this;
   }
 
+  /**
+   * Focus.
+   */
   private void focus() {
     self.addStyleDependentName("focus");
     self.removeStyleDependentName("nofocus");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#getFocus()
+   */
   @Override
   public HasClickHandlers getFocus() {
     return self;
   }
 
+  /**
+   * Gets the focus panel.
+   *
+   * @return the focus panel
+   */
   public Widget getFocusPanel() {
     return flow;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#getLabel()
+   */
   @Override
   public HasText getLabel() {
     return label;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return shortName;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#getTarget()
+   */
   @Override
   public Object getTarget() {
     return this;
   }
 
+  /**
+   * On self mouse out.
+   *
+   * @param event the event
+   */
   @UiHandler("self")
   void onSelfMouseOut(final MouseOutEvent event) {
     unfocus();
   }
 
+  /**
+   * On self mouse over.
+   *
+   * @param event the event
+   */
   @UiHandler("self")
   void onSelfMouseOver(final MouseOverEvent event) {
     focus();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#setSelected(boolean)
+   */
   @Override
   public void setSelected(final boolean selected) {
     if (selected) {
@@ -132,20 +202,34 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#setTooltip(java.lang.String)
+   */
   @Override
   public void setTooltip(final String tooltip) {
     Tooltip.to(this, tooltip);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     setVisibleImpl(visible);
   }
 
+  /**
+   * Sets the visible impl.
+   *
+   * @param visible the new visible impl
+   */
   private void setVisibleImpl(final boolean visible) {
     self.setVisible(visible);
   }
 
+  /**
+   * Unfocus.
+   */
   private void unfocus() {
     self.addStyleDependentName("nofocus");
     self.removeStyleDependentName("focus");

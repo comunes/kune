@@ -33,12 +33,26 @@ import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.user.client.ui.MenuItem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GwtSubMenuGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtSubMenuGui extends AbstractGwtMenuGui implements HasMenuItem {
 
+  /** The icon label. */
   private IconLabel iconLabel;
+  
+  /** The item. */
   private MenuItem item;
+  
+  /** The parent menu. */
   private AbstractGwtMenuGui parentMenu;
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
@@ -58,50 +72,77 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui implements HasMenuItem {
     return this;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.gwtui.HasMenuItem#getMenuItem()
+   */
   @Override
   public MenuItem getMenuItem() {
     return item;
   }
 
+  /**
+   * Layout.
+   */
   private void layout() {
     item.setHTML(iconLabel.toString());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
+   */
   @Override
   public void setEnabled(final boolean enabled) {
     item.setEnabled(enabled);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+   */
   @Override
   public void setIcon(final KuneIcon icon) {
     iconLabel.setLeftIconFont(icon);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+   */
   @Override
   public void setIconBackground(final String backgroundColor) {
     iconLabel.setLeftIconBackground(backgroundColor);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+   */
   @Override
   public void setIconStyle(final String style) {
     iconLabel.setRightIcon(style);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+   */
   @Override
   public void setIconUrl(final String url) {
     iconLabel.setRightIconUrl(url);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+   */
   @Override
   public void setText(final String text) {
     iconLabel.setText(text, descriptor.getDirection());
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang.String)
+   */
   @Override
   public void setToolTipText(final String tooltip) {
     if (TextUtils.notEmpty(tooltip)) {
@@ -109,6 +150,9 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui implements HasMenuItem {
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     item.setVisible(visible);
@@ -116,6 +160,9 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui implements HasMenuItem {
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#show()
+   */
   @Override
   protected void show() {
     parentMenu.show();

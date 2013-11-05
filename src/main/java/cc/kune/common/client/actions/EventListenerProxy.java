@@ -37,6 +37,7 @@ exception statement from your version. */
 
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
 /**
  * An abstract wrapper for event listeners. This allows subclasses to attach
  * additional parameters to an existing event listener to create a new one.

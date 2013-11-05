@@ -24,8 +24,17 @@ package cc.kune.wave.server;
 
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveServiceTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveServiceTest {
 
+  /**
+   * Creates the wave.
+   */
   @Test
   public void createWave() {
     // WaveService.

@@ -29,8 +29,21 @@ import cc.kune.gspace.client.actions.SetContentStatusAsAdminMenuItem;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MarkAsNotDoneTaskMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MarkAsNotDoneTaskMenuItem extends SetContentStatusAsAdminMenuItem {
 
+  /**
+   * Instantiates a new mark as not done task menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public MarkAsNotDoneTaskMenuItem(final I18nTranslationService i18n,
       final SetContentStatusAsAdminAction action, final IconicResources res) {

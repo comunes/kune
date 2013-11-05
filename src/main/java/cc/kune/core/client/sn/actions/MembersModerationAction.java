@@ -34,13 +34,33 @@ import cc.kune.core.shared.domain.AdmissionType;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MembersModerationAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MembersModerationAction extends AbstractExtendedAction {
 
+  /** The admission type. */
   private AdmissionType admissionType;
+  
+  /** The group service provider. */
   private final Provider<GroupServiceAsync> groupServiceProvider;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new members moderation action.
+   *
+   * @param session the session
+   * @param i18n the i18n
+   * @param groupServiceProvider the group service provider
+   */
   @Inject
   public MembersModerationAction(final Session session, final I18nTranslationService i18n,
       final Provider<GroupServiceAsync> groupServiceProvider) {
@@ -49,6 +69,9 @@ public class MembersModerationAction extends AbstractExtendedAction {
     this.groupServiceProvider = groupServiceProvider;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     groupServiceProvider.get().setGroupNewMembersJoiningPolicy(session.getUserHash(),
@@ -61,6 +84,11 @@ public class MembersModerationAction extends AbstractExtendedAction {
         });
   }
 
+  /**
+   * Sets the admission type.
+   *
+   * @param admissionType the new admission type
+   */
   public void setAdmissionType(final AdmissionType admissionType) {
     this.admissionType = admissionType;
   }

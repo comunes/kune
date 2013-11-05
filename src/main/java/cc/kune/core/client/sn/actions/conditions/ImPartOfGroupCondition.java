@@ -31,16 +31,31 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ImPartOfGroupCondition.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ImPartOfGroupCondition implements GuiAddCondition {
 
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new im part of group condition.
+   *
+   * @param session the session
+   */
   @Inject
   public ImPartOfGroupCondition(final Session session) {
     this.session = session;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {
     final Object target = descr.getTarget();

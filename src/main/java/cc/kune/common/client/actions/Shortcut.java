@@ -24,8 +24,24 @@ package cc.kune.common.client.actions;
 
 import cc.kune.common.client.shortcuts.Keyboard;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Shortcut.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class Shortcut {
 
+  /**
+   * Gets the shortcut.
+   *
+   * @param ctrl the ctrl
+   * @param alt the alt
+   * @param shift the shift
+   * @param meta the meta
+   * @param character the character
+   * @return the shortcut
+   */
   public static KeyStroke getShortcut(final boolean ctrl, final boolean alt, final boolean shift,
       final boolean meta, final Character character) {
     return KeyStroke.getKeyStroke(character, (ctrl ? Keyboard.MODIFIER_CTRL : 0)
@@ -33,20 +49,34 @@ public final class Shortcut {
         + (meta ? Keyboard.MODIFIER_META : 0));
   }
 
+  /**
+   * Gets the shortcut.
+   *
+   * @param ctrl the ctrl
+   * @param shift the shift
+   * @param character the character
+   * @return the shortcut
+   */
   public static KeyStroke getShortcut(final boolean ctrl, final boolean shift, final Character character) {
     return getShortcut(ctrl, false, shift, false, character);
   }
 
+  /**
+   * Gets the shortcut.
+   *
+   * @param ctrl the ctrl
+   * @param character the character
+   * @return the shortcut
+   */
   public static KeyStroke getShortcut(final boolean ctrl, final Character character) {
     return getShortcut(ctrl, false, false, false, character);
   }
 
   /**
    * Gets the shortcut using as parameter something like "Alt+A" "Ctrl+M" or
-   * "Meta+Shift+R"
-   * 
-   * @param keys
-   *          the keys
+   * "Meta+Shift+R".
+   *
+   * @param keys the keys
    * @return the shortcut
    */
   public static KeyStroke getShortcut(final String keys) {
@@ -58,6 +88,9 @@ public final class Shortcut {
     return Shortcut.getShortcut(hasCtrl, hasAlt, hasShift, hasMeta, key);
   }
 
+  /**
+   * Instantiates a new shortcut.
+   */
   private Shortcut() {
   }
 

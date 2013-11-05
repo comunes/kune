@@ -24,6 +24,18 @@ package cc.kune.common.client.actions.gwtui;
 
 import com.google.gwt.user.client.ui.MenuItem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface HasMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface HasMenuItem {
+  
+  /**
+   * Gets the menu item.
+   *
+   * @return the menu item
+   */
   MenuItem getMenuItem();
 }

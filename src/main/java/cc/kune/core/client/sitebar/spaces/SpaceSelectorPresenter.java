@@ -56,71 +56,206 @@ import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SpaceSelectorPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SpaceSelectorPresenter extends
     Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> {
 
+  /**
+   * The Interface SpaceSelectorProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface SpaceSelectorProxy extends Proxy<SpaceSelectorPresenter> {
   }
 
+  /**
+   * The Interface SpaceSelectorView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface SpaceSelectorView extends View {
 
+    /** The group space id. */
     public static String GROUP_SPACE_ID = "k-space-group-id";
+    
+    /** The home space id. */
     public static String HOME_SPACE_ID = "k-space-home-id";
+    
+    /** The public space id. */
     public static String PUBLIC_SPACE_ID = "k-space-public-id";
+    
+    /** The user space id. */
     public static String USER_SPACE_ID = "k-space-user-id";
 
+    /**
+     * Blink group btn.
+     */
     void blinkGroupBtn();
 
+    /**
+     * Blink home btn.
+     */
     void blinkHomeBtn();
 
+    /**
+     * Blink public btn.
+     */
     void blinkPublicBtn();
 
+    /**
+     * Blink user btn.
+     */
     void blinkUserBtn();
 
+    /**
+     * Gets the group btn.
+     *
+     * @return the group btn
+     */
     HasClickHandlers getGroupBtn();
 
+    /**
+     * Gets the home btn.
+     *
+     * @return the home btn
+     */
     HasClickHandlers getHomeBtn();
 
+    /**
+     * Gets the public btn.
+     *
+     * @return the public btn
+     */
     HasClickHandlers getPublicBtn();
 
+    /**
+     * Gets the user btn.
+     *
+     * @return the user btn
+     */
     HasClickHandlers getUserBtn();
 
+    /**
+     * Sets the group btn down.
+     *
+     * @param down the new group btn down
+     */
     void setGroupBtnDown(boolean down);
 
+    /**
+     * Sets the home btn down.
+     *
+     * @param down the new home btn down
+     */
     void setHomeBtnDown(boolean down);
 
+    /**
+     * Sets the public btn down.
+     *
+     * @param down the new public btn down
+     */
     void setPublicBtnDown(boolean down);
 
+    /**
+     * Sets the public visible.
+     *
+     * @param visible the new public visible
+     */
     void setPublicVisible(boolean visible);
 
+    /**
+     * Sets the user btn down.
+     *
+     * @param down the new user btn down
+     */
     void setUserBtnDown(boolean down);
 
+    /**
+     * Sets the window title.
+     *
+     * @param title the new window title
+     */
     void setWindowTitle(String title);
 
+    /**
+     * Show group space tooltip.
+     */
     void showGroupSpaceTooltip();
 
+    /**
+     * Show home space tooltip.
+     */
     void showHomeSpaceTooltip();
 
+    /**
+     * Show public space tooltip.
+     */
     void showPublicSpaceTooltip();
 
+    /**
+     * Show user space tooltip.
+     */
     void showUserSpaceTooltip();
 
   }
 
+  /** The armor. */
   private final GSpaceArmor armor;
+  
+  /** The back manager. */
   private final GSpaceBackgroundManager backManager;
+  
+  /** The current space. */
   private Space currentSpace;
+  
+  /** The group token. */
   private String groupToken;
+  
+  /** The home token. */
   private String homeToken;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The inbox token. */
   private String inboxToken;
+  
+  /** The public token. */
   private String publicToken;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The shortcut register. */
   private final GlobalShortcutRegister shortcutRegister;
+  
+  /** The sign in. */
   private final Provider<SignIn> signIn;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new space selector presenter.
+   *
+   * @param eventBus the event bus
+   * @param stateManager the state manager
+   * @param view the view
+   * @param proxy the proxy
+   * @param armor the armor
+   * @param session the session
+   * @param signIn the sign in
+   * @param backManager the back manager
+   * @param i18n the i18n
+   * @param mask the mask
+   * @param shortcutRegister the shortcut register
+   */
   @Inject
   public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
       final SpaceSelectorView view, final SpaceSelectorProxy proxy, final GSpaceArmor armor,
@@ -159,6 +294,9 @@ public class SpaceSelectorPresenter extends
     });
   }
 
+  /**
+   * Configure click listeners.
+   */
   private void configureClickListeners() {
     getView().getHomeBtn().addClickHandler(new ClickHandler() {
       @Override
@@ -188,6 +326,9 @@ public class SpaceSelectorPresenter extends
     });
   }
 
+  /**
+   * Configure shortcuts.
+   */
   private void configureShortcuts() {
     shortcutRegister.put(Shortcut.getShortcut("Alt+H"), new AbstractExtendedAction() {
       @Override
@@ -216,11 +357,19 @@ public class SpaceSelectorPresenter extends
 
   }
 
+  /**
+   * On app start.
+   *
+   * @param event the event
+   */
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
     showTooltipWithDelay();
   }
 
+  /**
+   * On group btn click.
+   */
   private void onGroupBtnClick() {
     if (groupToken.equals(SiteTokens.GROUP_HOME)) {
       // as current home is equal to "no content" token, we shall go to
@@ -232,6 +381,11 @@ public class SpaceSelectorPresenter extends
     setDown(Space.groupSpace);
   }
 
+  /**
+   * On group space select.
+   *
+   * @param shouldRestoreToken the should restore token
+   */
   private void onGroupSpaceSelect(final boolean shouldRestoreToken) {
     restoreToken(shouldRestoreToken, groupToken);
     armor.selectGroupSpace();
@@ -240,11 +394,19 @@ public class SpaceSelectorPresenter extends
     currentSpace = Space.groupSpace;
   }
 
+  /**
+   * On home btn click.
+   */
   private void onHomeBtnClick() {
     restoreToken(homeToken);
     setDown(Space.homeSpace);
   }
 
+  /**
+   * On home space select.
+   *
+   * @param shouldRestoreToken the should restore token
+   */
   private void onHomeSpaceSelect(final boolean shouldRestoreToken) {
     restoreToken(shouldRestoreToken, homeToken);
     armor.selectHomeSpace();
@@ -254,11 +416,19 @@ public class SpaceSelectorPresenter extends
     getView().setWindowTitle(i18n.t("Home"));
   }
 
+  /**
+   * On public btn click.
+   */
   private void onPublicBtnClick() {
     restoreToken(publicToken);
     setDown(Space.publicSpace);
   }
 
+  /**
+   * On public space select.
+   *
+   * @param shouldRestoreToken the should restore token
+   */
   private void onPublicSpaceSelect(final boolean shouldRestoreToken) {
     restoreToken(shouldRestoreToken, inboxToken);
     armor.selectPublicSpace();
@@ -267,6 +437,11 @@ public class SpaceSelectorPresenter extends
     currentSpace = Space.publicSpace;
   }
 
+  /**
+   * On space conf.
+   *
+   * @param event the event
+   */
   @ProxyEvent
   public void onSpaceConf(final SpaceConfEvent event) {
     final Space space = event.getSpace();
@@ -287,6 +462,11 @@ public class SpaceSelectorPresenter extends
     }
   }
 
+  /**
+   * On space select.
+   *
+   * @param event the event
+   */
   @ProxyEvent
   public void onSpaceSelect(final SpaceSelectEvent event) {
     final Space space = event.getSpace();
@@ -311,6 +491,9 @@ public class SpaceSelectorPresenter extends
     }
   }
 
+  /**
+   * On user btn click.
+   */
   private void onUserBtnClick() {
     signIn.get().setGotoTokenOnCancel(stateManager.getCurrentToken());
     restoreToken(inboxToken);
@@ -319,6 +502,11 @@ public class SpaceSelectorPresenter extends
     }
   }
 
+  /**
+   * On user sign out.
+   *
+   * @param event the event
+   */
   @ProxyEvent
   public void onUserSignOut(final UserSignOutEvent event) {
     if (currentSpace == Space.userSpace) {
@@ -327,6 +515,11 @@ public class SpaceSelectorPresenter extends
     inboxToken = SiteTokens.WAVE_INBOX;
   }
 
+  /**
+   * On user space select.
+   *
+   * @param shouldRestoreToken the should restore token
+   */
   private void onUserSpaceSelect(final boolean shouldRestoreToken) {
     if (session.isLogged()) {
       restoreToken(shouldRestoreToken, inboxToken);
@@ -342,22 +535,41 @@ public class SpaceSelectorPresenter extends
     }
   }
 
+  /**
+   * Restore token.
+   *
+   * @param shouldRestoreToken the should restore token
+   * @param token the token
+   */
   private void restoreToken(final boolean shouldRestoreToken, final String token) {
     if (shouldRestoreToken) {
       restoreToken(token);
     }
   }
 
+  /**
+   * Restore token.
+   *
+   * @param token the token
+   */
   private void restoreToken(final String token) {
     Log.info("Restoring token from SpaceSelector: " + token);
     stateManager.gotoHistoryToken(token);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /**
+   * Sets the down.
+   *
+   * @param space the new down
+   */
   private void setDown(final Space space) {
     getView().setHomeBtnDown(space.equals(Space.homeSpace));
     getView().setUserBtnDown(space.equals(Space.userSpace));
@@ -365,6 +577,9 @@ public class SpaceSelectorPresenter extends
     getView().setPublicBtnDown(space.equals(Space.publicSpace));
   }
 
+  /**
+   * Show tooltip now.
+   */
   private void showTooltipNow() {
     if (currentSpace != null) {
       switch (currentSpace) {
@@ -388,6 +603,9 @@ public class SpaceSelectorPresenter extends
     }
   }
 
+  /**
+   * Show tooltip with delay.
+   */
   protected void showTooltipWithDelay() {
     new Timer() {
       @Override

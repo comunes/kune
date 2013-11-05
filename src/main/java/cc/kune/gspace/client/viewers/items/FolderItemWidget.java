@@ -47,30 +47,63 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FolderItemWidget.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FolderItemWidget extends Composite implements HasText {
 
+  /**
+   * The Interface FolderItemWidgetUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface FolderItemWidgetUiBinder extends UiBinder<Widget, FolderItemWidget> {
   }
 
+  /** The Constant MENU_ID. */
   public static final String MENU_ID = "-menu";
 
+  /** The ui binder. */
   private static FolderItemWidgetUiBinder uiBinder = GWT.create(FolderItemWidgetUiBinder.class);
 
+  /** The flow. */
   @UiField
   FlowPanel flow;
+  
+  /** The focus panel. */
   @UiField
   FocusPanel focusPanel;
+  
+  /** The icon. */
   @UiField
   Label icon;
+  
+  /** The menu. */
   @UiField
   SimplePanel menu;
+  
+  /** The modified. */
   @UiField
   InlineLabel modified;
+  
+  /** The title. */
   @UiField
   InlineLabel title;
 
+  /** The token. */
   private final StateToken token;
 
+  /**
+   * Instantiates a new folder item widget.
+   *
+   * @param icon the icon
+   * @param title the title
+   * @param token the token
+   * @param id the id
+   */
   public FolderItemWidget(final KuneIcon icon, final String title, final StateToken token,
       final String id) {
     this.token = token;
@@ -81,90 +114,179 @@ public class FolderItemWidget extends Composite implements HasText {
     menu.ensureDebugId(id + MENU_ID);
   }
 
+  /**
+   * Clear focus styles.
+   */
   private void clearFocusStyles() {
     focusPanel.removeStyleDependentName("nofocused");
     focusPanel.removeStyleDependentName("focused");
   }
 
+  /**
+   * Gets the flow.
+   *
+   * @return the flow
+   */
   public FlowPanel getFlow() {
     return flow;
   }
 
+  /**
+   * Gets the icon.
+   *
+   * @return the icon
+   */
   public Widget getIcon() {
     return icon;
   }
 
+  /**
+   * Gets the row click.
+   *
+   * @return the row click
+   */
   public HasClickHandlers getRowClick() {
     return focusPanel;
   }
 
+  /**
+   * Gets the row double click.
+   *
+   * @return the row double click
+   */
   public HasDoubleClickHandlers getRowDoubleClick() {
     return focusPanel;
   }
 
+  /**
+   * Gets the row focus.
+   *
+   * @return the row focus
+   */
   public HasAllFocusHandlers getRowFocus() {
     return focusPanel;
   }
 
+  /**
+   * Gets the row mouse.
+   *
+   * @return the row mouse
+   */
   public HasAllMouseHandlers getRowMouse() {
     return focusPanel;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.HasText#getText()
+   */
   @Override
   public String getText() {
     return title.getText();
   }
 
+  /**
+   * Gets the title widget.
+   *
+   * @return the title widget
+   */
   public Widget getTitleWidget() {
     return title;
   }
 
+  /**
+   * Gets the token.
+   *
+   * @return the token
+   */
   public StateToken getToken() {
     return token;
   }
 
+  /**
+   * On blur.
+   *
+   * @param event the event
+   */
   @UiHandler("focusPanel")
   public void onBlur(final BlurEvent event) {
     clearFocusStyles();
     focusPanel.addStyleDependentName("nofocused");
   }
 
+  /**
+   * On focus.
+   *
+   * @param event the event
+   */
   @UiHandler("focusPanel")
   public void onFocus(final FocusEvent event) {
     clearFocusStyles();
     focusPanel.addStyleDependentName("focused");
   }
 
+  /**
+   * On out.
+   *
+   * @param event the event
+   */
   @UiHandler("focusPanel")
   public void onOut(final MouseOutEvent event) {
     clearFocusStyles();
     focusPanel.addStyleDependentName("nofocused");
   }
 
+  /**
+   * On over.
+   *
+   * @param event the event
+   */
   @UiHandler("focusPanel")
   public void onOver(final MouseOverEvent event) {
     clearFocusStyles();
     focusPanel.addStyleDependentName("focused");
   }
 
+  /**
+   * Sets the menu.
+   *
+   * @param toolbar the new menu
+   */
   public void setMenu(final ActionSimplePanel toolbar) {
     menu.add(toolbar);
   }
 
+  /**
+   * Sets the menu visible.
+   *
+   * @param visible the new menu visible
+   */
   public void setMenuVisible(final boolean visible) {
     menu.getElement().getStyle().setOpacity(visible ? 1d : 0.2d);
   }
 
+  /**
+   * Sets the modified text.
+   *
+   * @param text the new modified text
+   */
   public void setModifiedText(final String text) {
     modified.setText(text);
   }
 
+  /**
+   * Sets the select.
+   *
+   * @param selected the new select
+   */
   public void setSelect(final boolean selected) {
     clearFocusStyles();
     focusPanel.removeStyleDependentName(selected ? "noselected" : "selected");
     focusPanel.addStyleDependentName(selected ? "selected" : "noselected");
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.HasText#setText(java.lang.String)
+   */
   @Override
   public void setText(final String text) {
     title.setText(text);

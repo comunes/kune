@@ -26,11 +26,33 @@ package cc.kune.core.client.invitation;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListInvitationConfirmDialog.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListInvitationConfirmDialog extends AbstractInvitationConfirmDialog {
+  
+  /**
+   * The Class Builder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class Builder extends AbstractInvitationConfirmDialog.Builder {
 
+    /** The Constant DIALOG_ID. */
     public static final String DIALOG_ID = "k-list-inv-confirm-diag-id";
 
+    /**
+     * Instantiates a new builder.
+     *
+     * @param redirect the redirect
+     * @param i18n the i18n
+     * @param userWhoInvites the user who invites
+     * @param listShortName the list short name
+     * @param groupLongName the group long name
+     */
     public Builder(final String redirect, final I18nUITranslationService i18n,
         final String userWhoInvites, final String listShortName, final String groupLongName) {
       super(
@@ -45,6 +67,11 @@ public class ListInvitationConfirmDialog extends AbstractInvitationConfirmDialog
     }
   }
 
+  /**
+   * Instantiates a new list invitation confirm dialog.
+   *
+   * @param builder the builder
+   */
   protected ListInvitationConfirmDialog(final ListInvitationConfirmDialog.Builder builder) {
     super(builder);
   }

@@ -28,12 +28,24 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GwtPushButtonGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtPushButtonGui extends AbstractGwtButtonGui {
 
+  /**
+   * Instantiates a new gwt push button gui.
+   */
   public GwtPushButtonGui() {
     super(true);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.gwtui.AbstractGwtButtonGui#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.create(descriptor);

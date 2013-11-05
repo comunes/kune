@@ -27,34 +27,83 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserSignOutEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandler> {
 
+  /**
+   * The Interface HasUserSignOutHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasUserSignOutHandlers extends HasHandlers {
+    
+    /**
+     * Adds the user sign out handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addUserSignOutHandler(UserSignOutHandler handler);
   }
 
+  /**
+   * The Interface UserSignOutHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface UserSignOutHandler extends EventHandler {
+    
+    /**
+     * On user sign out.
+     *
+     * @param event the event
+     */
     public void onUserSignOut(UserSignOutEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<UserSignOutHandler> TYPE = new Type<UserSignOutHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new UserSignOutEvent());
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<UserSignOutHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * Instantiates a new user sign out event.
+   */
   public UserSignOutEvent() {
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final UserSignOutHandler handler) {
     handler.onUserSignOut(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object other) {
     if (other != null && other.getClass().equals(this.getClass())) {
@@ -63,11 +112,17 @@ public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandl
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<UserSignOutHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     int hashCode = 23;
@@ -75,6 +130,9 @@ public class UserSignOutEvent extends GwtEvent<UserSignOutEvent.UserSignOutHandl
     return hashCode;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "UserSignOutEvent[" + "]";

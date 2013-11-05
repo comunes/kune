@@ -38,8 +38,25 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserOptLogoPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserOptLogoPresenter extends EntityOptLogoPresenter {
 
+  /**
+   * Instantiates a new user opt logo presenter.
+   *
+   * @param eventBus the event bus
+   * @param session the session
+   * @param entityOptions the entity options
+   * @param stateManager the state manager
+   * @param userService the user service
+   * @param view the view
+   * @param i18n the i18n
+   */
   @Inject
   public UserOptLogoPresenter(final EventBus eventBus, final Session session,
       final UserOptions entityOptions, final StateManager stateManager,
@@ -55,11 +72,19 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
     });
   }
 
+  /**
+   * Inits the.
+   *
+   * @param view the view
+   */
   private void init(final UserOptLogoView view) {
     super.init(view);
     view.setPersonalGroupsLabels();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#onSubmitComplete(gwtupload.client.IUploader)
+   */
   @Override
   public void onSubmitComplete(final IUploader uploader) {
     super.onSubmitComplete(uploader);
@@ -75,6 +100,9 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#setState()
+   */
   @Override
   protected void setState() {
     view.setUploadParams(session.getUserHash(), session.getCurrentUser().getStateToken().toString());

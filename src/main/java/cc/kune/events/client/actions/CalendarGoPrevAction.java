@@ -29,16 +29,31 @@ import cc.kune.events.client.viewer.CalendarViewer;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CalendarGoPrevAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CalendarGoPrevAction extends RolAction {
 
+  /** The cal viewer. */
   private final CalendarViewer calViewer;
 
+  /**
+   * Instantiates a new calendar go prev action.
+   *
+   * @param calViewer the cal viewer
+   */
   @Inject
   public CalendarGoPrevAction(final CalendarViewer calViewer) {
     super(AccessRolDTO.Viewer, false);
     this.calViewer = calViewer;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     calViewer.decrement();

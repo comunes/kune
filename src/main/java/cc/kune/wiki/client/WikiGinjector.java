@@ -24,8 +24,19 @@ package cc.kune.wiki.client;
 
 import com.google.gwt.inject.client.Ginjector;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface WikiGinjector.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface WikiGinjector extends Ginjector {
 
+  /**
+   * Gets the wiki parts.
+   *
+   * @return the wiki parts
+   */
   WikiParts getWikiParts();
 
 }

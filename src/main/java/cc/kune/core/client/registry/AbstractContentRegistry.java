@@ -24,32 +24,67 @@ package cc.kune.core.client.registry;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractContentRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractContentRegistry {
+  
+  /** The registry. */
   private final ArrayList<String> registry;
 
+  /**
+   * Instantiates a new abstract content registry.
+   */
   public AbstractContentRegistry() {
     registry = new ArrayList<String>();
   }
 
+  /**
+   * As array.
+   *
+   * @return the string[]
+   */
   public String[] asArray() {
     return registry.toArray(new String[registry.size()]);
   }
 
+  /**
+   * Contains.
+   *
+   * @param typeId the type id
+   * @return true, if successful
+   */
   public boolean contains(final String typeId) {
     return registry.contains(typeId);
   }
 
+  /**
+   * Register.
+   *
+   * @param typeIds the type ids
+   */
   public void register(final String... typeIds) {
     for (final String typeId : typeIds) {
       registry.add(typeId);
     }
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return "registry: " + registry;
   }
 
+  /**
+   * Unregister.
+   *
+   * @param typeIds the type ids
+   */
   public void unregister(final String... typeIds) {
     for (final String typeId : typeIds) {
       registry.remove(typeId);

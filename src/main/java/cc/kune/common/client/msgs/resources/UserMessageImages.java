@@ -26,25 +26,72 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface UserMessageImages.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface UserMessageImages extends ClientBundle {
 
+  /** The Constant INST. */
   public static final UserMessageImages INST = GWT.create(UserMessageImages.class);
 
+  /**
+   * Error.
+   *
+   * @return the image resource
+   */
   ImageResource error();
 
+  /**
+   * Info.
+   *
+   * @return the image resource
+   */
   ImageResource info();
 
+  /**
+   * Warning.
+   *
+   * @return the image resource
+   */
   ImageResource warning();
 
+  /**
+   * Important.
+   *
+   * @return the image resource
+   */
   ImageResource important();
 
+  /**
+   * Severe.
+   *
+   * @return the image resource
+   */
   ImageResource severe();
 
+  /**
+   * Removes the.
+   *
+   * @return the image resource
+   */
   ImageResource remove();
 
+  /**
+   * Removes the grey.
+   *
+   * @return the image resource
+   */
   @Source("remove-grey.png")
   ImageResource removeGrey();
 
+  /**
+   * Removes the over.
+   *
+   * @return the image resource
+   */
   @Source("remove-over.png")
   ImageResource removeOver();
 }

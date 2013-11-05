@@ -31,12 +31,25 @@ import cc.kune.core.server.persist.OpenfireTransactional;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OpenfireXmppRosterPresenceProvider.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class OpenfireXmppRosterPresenceProvider extends DefaultManager<RosterPresence, Long> implements
     XmppRosterPresenceProvider {
   // private static final Log LOG =
   // LogFactory.getLog(OpenfireXmppRosterProvider.class);
+  /** The finder. */
   private final OpenfireXmppRosterPresenceFinder finder;
 
+  /**
+   * Instantiates a new openfire xmpp roster presence provider.
+   *
+   * @param em the em
+   * @param finder the finder
+   */
   @Inject
   public OpenfireXmppRosterPresenceProvider(@DataSourceOpenfire final Provider<EntityManager> em,
       final OpenfireXmppRosterPresenceFinder finder) {
@@ -44,6 +57,9 @@ public class OpenfireXmppRosterPresenceProvider extends DefaultManager<RosterPre
     this.finder = finder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.xmpp.XmppRosterPresenceProvider#getLastConnected(java.lang.String)
+   */
   @Override
   @OpenfireTransactional
   public Long getLastConnected(final String user) {

@@ -29,8 +29,22 @@ import cc.kune.gspace.client.actions.NewContainerMenuItem;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewFolderMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewFolderMenuItem extends NewContainerMenuItem {
 
+  /**
+   * Instantiates a new new folder menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   * @param docsFolderNewMenu the docs folder new menu
+   */
   @Inject
   public NewFolderMenuItem(final I18nTranslationService i18n, final NewContainerAction action,
       final IconicResources res, final DocsFolderNewMenu docsFolderNewMenu) {

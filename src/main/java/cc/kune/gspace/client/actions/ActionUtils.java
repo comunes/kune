@@ -31,11 +31,25 @@ import cc.kune.core.shared.dto.AbstractContentSimpleDTO;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ActionUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class ActionUtils {
+  
+  /** The session. */
   @Inject
   private static Session session;
 
+  /**
+   * Gets the action token.
+   *
+   * @param event the event
+   * @return the action token
+   */
   public static StateToken getActionToken(final ActionEvent event) {
     final boolean inContent = session.getCurrentStateToken().hasAll();
     final StateToken token = inContent ? session.getCurrentStateToken()

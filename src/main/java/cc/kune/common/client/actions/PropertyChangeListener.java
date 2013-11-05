@@ -37,6 +37,7 @@ exception statement from your version. */
 
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
 /**
  * PropertyChangeListener allows a class to monitor properties of a Bean for
  * changes. A propertyChange() event will only be fired <em>after</em> the

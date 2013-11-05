@@ -48,17 +48,47 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AskForPasswordResetPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class AskForPasswordResetPanel extends SignInAbstractPanel {
 
+  /** The Constant ASK_PASSWD_RESET_DIALOG. */
   public static final String ASK_PASSWD_RESET_DIALOG = "k-ask-for-pwd-diag";
+  
+  /** The Constant CANCEL_BUTTON_ID. */
   public static final String CANCEL_BUTTON_ID = "k-ask-for-pwd-cancel";
+  
+  /** The Constant EMAIL_RESET_ID. */
   public static final String EMAIL_RESET_ID = "k-ask-for-pwd-email";
+  
+  /** The Constant ERRMSG. */
   public static final String ERRMSG = "k-ask-for-pwd-error";
+  
+  /** The Constant RESET_BUTTON_ID. */
   public static final String RESET_BUTTON_ID = "k-ask-for-pwd-reset";
+  
+  /** The reset email. */
   private final TextField<String> resetEmail;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new ask for password reset panel.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param mask the mask
+   * @param images the images
+   * @param eventbus the eventbus
+   * @param userService the user service
+   * @param stateManager the state manager
+   */
   @Inject
   public AskForPasswordResetPanel(final I18nTranslationService i18n, final Session session,
       final MaskWidgetView mask, final NotifyLevelImages images, final EventBus eventbus,
@@ -116,6 +146,9 @@ public class AskForPasswordResetPanel extends SignInAbstractPanel {
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInAbstractPanel#hide()
+   */
   @Override
   public void hide() {
     super.hide();
@@ -124,6 +157,9 @@ public class AskForPasswordResetPanel extends SignInAbstractPanel {
     stateManager.gotoHistoryToken(SiteTokens.HOME);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.auth.SignInAbstractPanel#show()
+   */
   @Override
   public void show() {
     super.show();

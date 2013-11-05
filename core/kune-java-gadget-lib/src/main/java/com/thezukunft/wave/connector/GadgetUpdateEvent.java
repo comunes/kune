@@ -29,11 +29,11 @@ import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * Event fired whenever the height of the gadget's contents changes
- *  
+ * 
  */
 public class GadgetUpdateEvent extends GwtEvent<GadgetUpdateEventHandler> {
 
-	public static final GwtEvent.Type<GadgetUpdateEventHandler> TYPE = new GwtEvent.Type<GadgetUpdateEventHandler>();
+  public static final GwtEvent.Type<GadgetUpdateEventHandler> TYPE = new GwtEvent.Type<GadgetUpdateEventHandler>();
 
   public GadgetUpdateEvent() {
   }

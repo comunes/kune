@@ -44,6 +44,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Vector;
 
+// TODO: Auto-generated Javadoc
 /**
  * PropertyChangeSupport makes it easy to fire property change events and handle
  * listeners. It allows chaining of listeners, as well as filtering by property
@@ -87,11 +88,8 @@ public class PropertyChangeSupport {
 
   /**
    * Create a PropertyChangeSupport to work with a specific source bean.
-   * 
-   * @param source
-   *          the source bean to use
-   * @throws NullPointerException
-   *           if source is null
+   *
+   * @param source the source bean to use
    */
   public PropertyChangeSupport(final Object source) {
     this.source = source;
@@ -142,13 +140,9 @@ public class PropertyChangeSupport {
    * silently ignored. This method will unwrap a PropertyChangeListenerProxy,
    * registering the underlying delegate to the named property list if the names
    * match, and discarding it otherwise.
-   * 
-   * @param propertyName
-   *          the name of the property to listen on
-   * @param l
-   *          the listener to add
-   * @throws NullPointerException
-   *           if propertyName is null
+   *
+   * @param propertyName the name of the property to listen on
+   * @param l the listener to add
    */
   // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:12
   public void addPropertyChangeListener(final String propertyName, PropertyChangeListener l) {
@@ -223,11 +217,8 @@ public class PropertyChangeSupport {
    * Fire a PropertyChangeEvent to all the global listeners, and to all the
    * listeners for the specified property name. This does nothing if old and new
    * values of the event are equal.
-   * 
-   * @param event
-   *          the event to fire
-   * @throws NullPointerException
-   *           if event is null
+   *
+   * @param event the event to fire
    */
   public void firePropertyChange(final PropertyChangeEvent event) {
     if (event.oldValue != null && event.oldValue.equals(event.newValue)) {
@@ -346,7 +337,8 @@ public class PropertyChangeSupport {
    * Returns an array of all property change listeners registered under the
    * given property name. If there are no registered listeners, or propertyName
    * is null, this returns an empty array.
-   * 
+   *
+   * @param propertyName the property name
    * @return the array of registered listeners
    * @since 1.4
    */
@@ -406,13 +398,9 @@ public class PropertyChangeSupport {
    * of times to deregister it. This method will unwrap a
    * PropertyChangeListenerProxy, removing the underlying delegate from the
    * named property list if the names match.
-   * 
-   * @param propertyName
-   *          the property to stop listening on
-   * @param l
-   *          the listener to remove
-   * @throws NullPointerException
-   *           if propertyName is null
+   *
+   * @param propertyName the property to stop listening on
+   * @param l the listener to remove
    */
   // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:12
   public void removePropertyChangeListener(final String propertyName, PropertyChangeListener l) {

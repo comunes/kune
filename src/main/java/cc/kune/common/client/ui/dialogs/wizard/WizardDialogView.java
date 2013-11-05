@@ -24,50 +24,163 @@ package cc.kune.common.client.ui.dialogs.wizard;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface WizardDialogView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface WizardDialogView {
 
+  /**
+   * Adds the.
+   *
+   * @param view the view
+   */
   void add(IsWidget view);
 
+  /**
+   * Clear.
+   */
   void clear();
 
+  /**
+   * Hide.
+   */
   void hide();
 
+  /**
+   * Checks if is current page.
+   *
+   * @param view the view
+   * @return true, if is current page
+   */
   boolean isCurrentPage(IsWidget view);
 
+  /**
+   * Mask.
+   *
+   * @param message the message
+   */
   void mask(final String message);
 
+  /**
+   * Mask processing.
+   */
   void maskProcessing();
 
+  /**
+   * Removes the.
+   *
+   * @param view the view
+   */
   void remove(IsWidget view);
 
+  /**
+   * Sets the enabled.
+   *
+   * @param back the back
+   * @param next the next
+   * @param cancel the cancel
+   * @param finish the finish
+   */
   void setEnabled(boolean back, boolean next, boolean cancel, boolean finish);
 
+  /**
+   * Sets the enabled back button.
+   *
+   * @param enabled the new enabled back button
+   */
   void setEnabledBackButton(final boolean enabled);
 
+  /**
+   * Sets the enabled cancel button.
+   *
+   * @param enabled the new enabled cancel button
+   */
   void setEnabledCancelButton(final boolean enabled);
 
+  /**
+   * Sets the enabled finish button.
+   *
+   * @param enabled the new enabled finish button
+   */
   void setEnabledFinishButton(final boolean enabled);
 
+  /**
+   * Sets the enabled next button.
+   *
+   * @param enabled the new enabled next button
+   */
   void setEnabledNextButton(final boolean enabled);
 
+  /**
+   * Sets the finish text.
+   *
+   * @param text the new finish text
+   */
   void setFinishText(final String text);
 
+  /**
+   * Sets the listener.
+   *
+   * @param listener the new listener
+   */
   void setListener(WizardListener listener);
 
+  /**
+   * Sets the visible.
+   *
+   * @param back the back
+   * @param next the next
+   * @param cancel the cancel
+   * @param finish the finish
+   */
   void setVisible(boolean back, boolean next, boolean cancel, boolean finish);
 
+  /**
+   * Sets the visible back button.
+   *
+   * @param visible the new visible back button
+   */
   void setVisibleBackButton(final boolean visible);
 
+  /**
+   * Sets the visible cancel button.
+   *
+   * @param visible the new visible cancel button
+   */
   void setVisibleCancelButton(final boolean visible);
 
+  /**
+   * Sets the visible finish button.
+   *
+   * @param visible the new visible finish button
+   */
   void setVisibleFinishButton(final boolean visible);
 
+  /**
+   * Sets the visible next button.
+   *
+   * @param visible the new visible next button
+   */
   void setVisibleNextButton(final boolean visible);
 
+  /**
+   * Show.
+   */
   void show();
 
+  /**
+   * Show.
+   *
+   * @param view the view
+   */
   void show(IsWidget view);
 
+  /**
+   * Un mask.
+   */
   void unMask();
 
 }

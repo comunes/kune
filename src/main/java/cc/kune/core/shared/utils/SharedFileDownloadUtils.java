@@ -29,14 +29,29 @@ import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SharedFileDownloadUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SharedFileDownloadUtils {
 
+  /** The prefix. */
   private final String prefix;
 
+  /**
+   * Instantiates a new shared file download utils.
+   */
   public SharedFileDownloadUtils() {
     this.prefix = "";
   }
 
+  /**
+   * Instantiates a new shared file download utils.
+   *
+   * @param prefix the prefix
+   */
   public SharedFileDownloadUtils(final String prefix) {
     if (prefix.endsWith("/")) {
       final int lastSlash = prefix.lastIndexOf("/");
@@ -46,16 +61,38 @@ public class SharedFileDownloadUtils {
     }
   }
 
+  /**
+   * Gets the cache suffix.
+   *
+   * @param noCache the no cache
+   * @return the cache suffix
+   */
   public String getCacheSuffix(final boolean noCache) {
     return noCache ? UrlParam.noCacheStringSuffix() : "";
   }
 
+  /**
+   * Gets the group logo.
+   *
+   * @param group the group
+   * @return the group logo
+   */
   public String getGroupLogo(final GroupDTO group) {
     return prefix
         + (group.hasLogo() ? getLogoImageUrl(group.getShortName()) : group.isPersonal() ? "/"
             + FileConstants.PERSON_NO_AVATAR_IMAGE : "/" + FileConstants.GROUP_NO_AVATAR_IMAGE);
   }
 
+  /**
+   * Gets the logo avatar html.
+   *
+   * @param groupName the group name
+   * @param groupHasLogo the group has logo
+   * @param isPersonal the is personal
+   * @param size the size
+   * @param hvspace the hvspace
+   * @return the logo avatar html
+   */
   public String getLogoAvatarHtml(final String groupName, final boolean groupHasLogo,
       final boolean isPersonal, final int size, final int hvspace) {
     final String imgUrl = groupHasLogo ? getLogoImageUrl(groupName) : isPersonal ? prefix + "/"
@@ -64,34 +101,77 @@ public class SharedFileDownloadUtils {
         + "px; height: " + size + "px;' src='" + imgUrl + "'>";
   }
 
+  /**
+   * Gets the logo image url.
+   *
+   * @param groupName the group name
+   * @return the logo image url
+   */
   public String getLogoImageUrl(final String groupName) {
     return getLogoImageUrl(groupName, false);
   }
 
+  /**
+   * Gets the logo image url.
+   *
+   * @param groupName the group name
+   * @param noCache the no cache
+   * @return the logo image url
+   */
   public String getLogoImageUrl(final String groupName, final boolean noCache) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName),
             new UrlParam(FileConstants.ONLY_USERS, false)).toString() + getCacheSuffix(noCache);
   }
 
+  /**
+   * Gets the prefix.
+   *
+   * @return the prefix
+   */
   public String getPrefix() {
     return prefix;
   }
 
+  /**
+   * Gets the url.
+   *
+   * @param hash the hash
+   * @return the url
+   */
   public String getUrl(final String hash) {
     return getPrefix() + "/#" + HistoryUtils.hashbang(hash);
   }
 
+  /**
+   * Gets the user avatar.
+   *
+   * @param username the username
+   * @return the user avatar
+   */
   public String getUserAvatar(final String username) {
     return getUserAvatar(username, false);
   }
 
+  /**
+   * Gets the user avatar.
+   *
+   * @param username the username
+   * @param noCache the no cache
+   * @return the user avatar
+   */
   public String getUserAvatar(final String username, final boolean noCache) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, username),
             new UrlParam(FileConstants.ONLY_USERS, true)).toString() + getCacheSuffix(noCache);
   }
 
+  /**
+   * Gets the user avatar.
+   *
+   * @param user the user
+   * @return the user avatar
+   */
   public String getUserAvatar(final UserSimpleDTO user) {
     return prefix
         + (user.hasLogo() ? getLogoImageUrl(user.getShortName()) : FileConstants.PERSON_NO_AVATAR_IMAGE);

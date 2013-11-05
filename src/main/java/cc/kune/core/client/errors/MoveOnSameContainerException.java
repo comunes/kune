@@ -22,6 +22,14 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MoveOnSameContainerException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MoveOnSameContainerException extends DefaultException {
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -4785135366930710863L;
 }

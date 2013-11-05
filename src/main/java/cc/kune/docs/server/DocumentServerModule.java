@@ -25,7 +25,18 @@ package cc.kune.docs.server;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DocumentServerModule.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DocumentServerModule implements Module {
+  
+  /* (non-Javadoc)
+   * @see com.google.inject.Module#configure(com.google.inject.Binder)
+   */
   @Override
   public void configure(final Binder binder) {
     binder.bind(DocumentServerTool.class).asEagerSingleton();

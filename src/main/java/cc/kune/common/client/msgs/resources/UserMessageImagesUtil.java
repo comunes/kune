@@ -26,8 +26,20 @@ import cc.kune.common.client.notify.NotifyLevel;
 
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserMessageImagesUtil.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserMessageImagesUtil {
 
+  /**
+   * Gets the icon.
+   *
+   * @param level the level
+   * @return the icon
+   */
   public static ImageResource getIcon(final NotifyLevel level) {
 
     switch (level) {

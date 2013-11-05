@@ -24,6 +24,18 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum SubscriptionMode.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum SubscriptionMode implements IsSerializable {
-  manual, autoAcceptAll, autoRejectAll
+  
+  /** The manual. */
+  manual, 
+ /** The auto accept all. */
+ autoAcceptAll, 
+ /** The auto reject all. */
+ autoRejectAll
 }

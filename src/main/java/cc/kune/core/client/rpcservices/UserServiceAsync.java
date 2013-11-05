@@ -33,40 +33,158 @@ import cc.kune.core.shared.dto.WaveClientParams;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface UserServiceAsync.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface UserServiceAsync {
 
+  /**
+   * Ask for email confirmation.
+   *
+   * @param userHash the user hash
+   * @param callback the callback
+   */
   void askForEmailConfirmation(String userHash, AsyncCallback<Void> callback);
 
+  /**
+   * Ask for password reset.
+   *
+   * @param email the email
+   * @param callback the callback
+   */
   void askForPasswordReset(String email, AsyncCallback<Void> callback);
 
+  /**
+   * Change passwd.
+   *
+   * @param userHash the user hash
+   * @param oldPassword the old password
+   * @param newPassword the new password
+   * @param callback the callback
+   */
   void changePasswd(String userHash, String oldPassword, String newPassword, AsyncCallback<Void> callback);
 
+  /**
+   * Check user and hash.
+   *
+   * @param username the username
+   * @param userHash the user hash
+   * @param callback the callback
+   */
   void checkUserAndHash(String username, String userHash, AsyncCallback<Void> callback);
 
+  /**
+   * Creates the user.
+   *
+   * @param user the user
+   * @param wantPersonalHomepage the want personal homepage
+   * @param asyncCallback the async callback
+   */
   void createUser(UserDTO user, boolean wantPersonalHomepage, AsyncCallback<Void> asyncCallback);
 
+  /**
+   * Gets the buddies presence.
+   *
+   * @param userHash the user hash
+   * @param asyncCallback the async callback
+   * @return the buddies presence
+   */
   void getBuddiesPresence(String userHash, AsyncCallback<UserBuddiesPresenceDataDTO> asyncCallback);
 
+  /**
+   * Gets the user avatar baser64.
+   *
+   * @param userHash the user hash
+   * @param userToken the user token
+   * @param asyncCallback the async callback
+   * @return the user avatar baser64
+   */
   void getUserAvatarBaser64(String userHash, StateToken userToken, AsyncCallback<String> asyncCallback);
 
+  /**
+   * Gets the wave client parameters.
+   *
+   * @param userHash the user hash
+   * @param asyncCallback the async callback
+   * @return the wave client parameters
+   */
   void getWaveClientParameters(String userHash, AsyncCallback<WaveClientParams> asyncCallback);
 
+  /**
+   * Login.
+   *
+   * @param nickOrEmail the nick or email
+   * @param passwd the passwd
+   * @param waveCookieValue the wave cookie value
+   * @param asyncCallback the async callback
+   */
   void login(String nickOrEmail, String passwd, String waveCookieValue,
       AsyncCallback<UserInfoDTO> asyncCallback);
 
+  /**
+   * Logout.
+   *
+   * @param userHash the user hash
+   * @param asyncCallback the async callback
+   */
   void logout(String userHash, AsyncCallback<Void> asyncCallback);
 
+  /**
+   * Only check session.
+   *
+   * @param userHash the user hash
+   * @param asyncCallback the async callback
+   */
   void onlyCheckSession(String userHash, AsyncCallback<Void> asyncCallback);
 
+  /**
+   * Reload user info.
+   *
+   * @param userHash the user hash
+   * @param asyncCallback the async callback
+   */
   void reloadUserInfo(String userHash, AsyncCallback<UserInfoDTO> asyncCallback);
 
+  /**
+   * Reset password.
+   *
+   * @param passwdHash the passwd hash
+   * @param newpasswd the newpasswd
+   * @param callback the callback
+   */
   void resetPassword(String passwdHash, String newpasswd, AsyncCallback<Void> callback);
 
+  /**
+   * Sets the buddies visibility.
+   *
+   * @param userHash the user hash
+   * @param groupToken the group token
+   * @param visibility the visibility
+   * @param asyncCallback the async callback
+   */
   void setBuddiesVisibility(String userHash, StateToken groupToken, UserSNetVisibility visibility,
       AsyncCallback<Void> asyncCallback);
 
+  /**
+   * Update user.
+   *
+   * @param userHash the user hash
+   * @param user the user
+   * @param lang the lang
+   * @param callback the callback
+   */
   void updateUser(String userHash, UserDTO user, I18nLanguageSimpleDTO lang,
       AsyncCallback<StateAbstractDTO> callback);
 
+  /**
+   * Verify password hash.
+   *
+   * @param userHash the user hash
+   * @param emailReceivedHash the email received hash
+   * @param asyncCallback the async callback
+   */
   void verifyPasswordHash(String userHash, String emailReceivedHash, AsyncCallback<Void> asyncCallback);
 }

@@ -22,6 +22,11 @@
  */
 package cc.kune.gspace.client.options.tools;
 
+/**
+ * The Interface GroupOptTools.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GroupOptTools extends EntityOptTools {
 
 }

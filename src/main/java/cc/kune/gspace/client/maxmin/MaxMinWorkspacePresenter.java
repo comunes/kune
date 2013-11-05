@@ -45,13 +45,32 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MaxMinWorkspacePresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MaxMinWorkspacePresenter
     extends
     Presenter<MaxMinWorkspacePresenter.MaxMinWorkspaceView, MaxMinWorkspacePresenter.MaxMinWorkspaceProxy>
 
 implements MaxMinWorkspace {
 
+  /**
+   * The Class MaximizeAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public class MaximizeAction extends AbstractExtendedAction {
+    
+    /**
+     * Instantiates a new maximize action.
+     *
+     * @param name the name
+     * @param img the img
+     * @param tooltip the tooltip
+     */
     public MaximizeAction(final String name, final ImageResource img, final String tooltip) {
       super();
       putValue(Action.NAME, name);
@@ -59,19 +78,47 @@ implements MaxMinWorkspace {
       putValue(Action.TOOLTIP, tooltip);
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       showMaximized(true);
     }
   }
+  
+  /**
+   * The Interface MaxMinWorkspaceProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface MaxMinWorkspaceProxy extends Proxy<MaxMinWorkspacePresenter> {
   }
 
+  /**
+   * The Interface MaxMinWorkspaceView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface MaxMinWorkspaceView extends View, IsMaximizable {
 
   }
+  
+  /**
+   * The Class MinimizeAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public class MinimizeAction extends AbstractExtendedAction {
+    
+    /**
+     * Instantiates a new minimize action.
+     *
+     * @param name the name
+     * @param img the img
+     * @param tooltip the tooltip
+     */
     public MinimizeAction(final String name, final ImageResource img, final String tooltip) {
       super();
       putValue(Action.NAME, name);
@@ -79,33 +126,57 @@ implements MaxMinWorkspace {
       putValue(Action.TOOLTIP, tooltip);
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       showMaximized(false);
     }
   }
+  
+  /** The Constant MAX_ICON. */
   public static final String MAX_ICON = "mmwp-max_bt";
 
+  /** The Constant MIN_ICON. */
   public static final String MIN_ICON = "mmwp-min_bt";
 
+  /** The Constant SMALL_SCREEN_HEIGHT_LIMIT. */
   private static final int SMALL_SCREEN_HEIGHT_LIMIT = 550;
 
+  /** The images. */
   private final IconicResources images;
 
+  /** The maximize button bar. */
   private IconLabelDescriptor maximizeButtonBar;
 
+  /** The maximize button menu. */
   private MenuItemDescriptor maximizeButtonMenu;
 
+  /** The maximized. */
   private boolean maximized;
 
+  /** The minimize button bar. */
   private IconLabelDescriptor minimizeButtonBar;
 
+  /** The minimize button menu. */
   private MenuItemDescriptor minimizeButtonMenu;
 
+  /** The shortcut reg. */
   private final GlobalShortcutRegister shortcutReg;
 
+  /** The Small screen. */
   private boolean SmallScreen;
 
+  /**
+   * Instantiates a new max min workspace presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param shortcutReg the shortcut reg
+   * @param images the images
+   */
   @Inject
   public MaxMinWorkspacePresenter(final EventBus eventBus, final MaxMinWorkspaceView view,
       final MaxMinWorkspaceProxy proxy, final GlobalShortcutRegister shortcutReg,
@@ -120,13 +191,15 @@ implements MaxMinWorkspace {
 
   /**
    * Checks if the client's screen size is small, that is, its browser height
-   * under a fixed threshold
-   * 
+   * under a fixed threshold.
    */
   private void checkSmallScreen() {
     SmallScreen = Window.getClientHeight() < SMALL_SCREEN_HEIGHT_LIMIT;
   }
 
+  /**
+   * Creates the actions.
+   */
   private void createActions() {
     final KeyStroke shortcut = Shortcut.getShortcut(true, true, false, false, Character.valueOf('F'));
 
@@ -169,27 +242,44 @@ implements MaxMinWorkspace {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.maxmin.MaxMinWorkspace#maximize()
+   */
   @Override
   public void maximize() {
     showMaximized(true);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.maxmin.MaxMinWorkspace#minimize()
+   */
   @Override
   public void minimize() {
     showMaximized(false);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
+   */
   @Override
   protected void onBind() {
     super.onBind();
     createActions();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /**
+   * Show maximized.
+   *
+   * @param maximized the maximized
+   */
   private void showMaximized(final boolean maximized) {
     if (SmallScreen) {
       maximizeButtonBar.setVisible(!maximized);

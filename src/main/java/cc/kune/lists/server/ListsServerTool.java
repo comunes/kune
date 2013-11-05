@@ -46,10 +46,27 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListsServerTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListsServerTool extends AbstractWaveBasedServerTool {
 
+  /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
+  /**
+   * Instantiates a new lists server tool.
+   *
+   * @param contentManager the content manager
+   * @param containerManager the container manager
+   * @param configurationManager the configuration manager
+   * @param i18n the i18n
+   * @param userSessionManager the user session manager
+   * @param creationService the creation service
+   */
   @Inject
   public ListsServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
@@ -60,6 +77,9 @@ public class ListsServerTool extends AbstractWaveBasedServerTool {
     this.userSessionManager = userSessionManager;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.AbstractWaveBasedServerTool#getNewContentAdditionalParts(cc.kune.domain.Container)
+   */
   @Override
   public String[] getNewContentAdditionalParts(final Container parent) {
     final Set<Group> admins = parent.getAccessLists().getAdmins().getList();
@@ -76,16 +96,27 @@ public class ListsServerTool extends AbstractWaveBasedServerTool {
     return members.toArray(new String[members.size()]);
   }
 
+  /**
+   * Gets the user group.
+   *
+   * @return the user group
+   */
   private Group getUserGroup() {
     return userSessionManager.getUser().getUserGroup();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#initGroup(cc.kune.domain.User, cc.kune.domain.Group, java.lang.Object[])
+   */
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     createRoot(group);
     return group;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.AbstractServerTool#onCreateContent(cc.kune.domain.Content, cc.kune.domain.Container)
+   */
   @Override
   public void onCreateContent(final Content content, final Container parent) {
     // TODO Fix closed list??

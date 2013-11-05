@@ -30,14 +30,35 @@ import org.mockito.stubbing.Answer;
 
 import cc.kune.common.client.utils.TimerWrapper;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TooltipTimersTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TooltipTimersTest {
+  
+  /** The hide timer. */
   private TimerWrapper hideTimer;
+  
+  /** The hide timer scheduled. */
   protected boolean hideTimerScheduled = false;
+  
+  /** The security timer. */
   private TimerWrapper securityTimer;
+  
+  /** The show timer. */
   private TimerWrapper showTimer;
+  
+  /** The show timer scheduled. */
   protected boolean showTimerScheduled = false;
+  
+  /** The timers. */
   private TooltipTimers timers;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     showTimer = Mockito.mock(TimerWrapper.class);
@@ -90,6 +111,9 @@ public class TooltipTimersTest {
     }).when(hideTimer).cancel();
   }
 
+  /**
+   * Test several over and outs only one timer each.
+   */
   @Test
   public void testSeveralOverAndOutsOnlyOneTimerEach() {
     timers.onOver();
@@ -102,6 +126,9 @@ public class TooltipTimersTest {
     Mockito.verify(hideTimer, Mockito.times(1)).schedule(Mockito.anyInt());
   }
 
+  /**
+   * Test several over only one timer.
+   */
   @Test
   public void testSeveralOverOnlyOneTimer() {
     timers.onOver();
@@ -110,6 +137,9 @@ public class TooltipTimersTest {
     Mockito.verify(hideTimer, Mockito.times(0)).cancel();
   }
 
+  /**
+   * Test several over outs and over only one timer each.
+   */
   @Test
   public void testSeveralOverOutsAndOverOnlyOneTimerEach() {
     timers.onOver();

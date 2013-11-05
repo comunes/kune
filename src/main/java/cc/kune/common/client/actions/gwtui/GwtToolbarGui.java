@@ -30,27 +30,55 @@ import cc.kune.common.shared.res.KuneIcon;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GwtToolbarGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtToolbarGui extends AbstractGuiItem implements ParentWidget {
 
+  /** The toolbar. */
   private GwtComplexToolbar toolbar;
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.ParentWidget#add(com.google.gwt.user.client.ui.UIObject)
+   */
   @Override
   public void add(final UIObject uiObject) {
     toolbar.add(uiObject);
   }
 
+  /**
+   * Adds the fill.
+   *
+   * @return the widget
+   */
   public Widget addFill() {
     return toolbar.addFill();
   }
 
+  /**
+   * Adds the separator.
+   *
+   * @return the widget
+   */
   public Widget addSeparator() {
     return toolbar.addSeparator();
   }
 
+  /**
+   * Adds the spacer.
+   *
+   * @return the widget
+   */
   public Widget addSpacer() {
     return toolbar.addSpacer();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
@@ -61,35 +89,59 @@ public class GwtToolbarGui extends AbstractGuiItem implements ParentWidget {
     return this;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int, com.google.gwt.user.client.ui.UIObject)
+   */
   @Override
   public void insert(final int position, final UIObject widget) {
     toolbar.insert(widget, position);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
+   */
   @Override
   protected void setEnabled(final boolean enabled) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+   */
   @Override
   public void setIcon(final KuneIcon icon) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+   */
   @Override
   protected void setIconBackground(final String backgroundColor) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+   */
   @Override
   protected void setIconStyle(final String style) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+   */
   @Override
   public void setIconUrl(final String url) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+   */
   @Override
   protected void setText(final String text) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
+   */
   @Override
   public boolean shouldBeAdded() {
     return true;

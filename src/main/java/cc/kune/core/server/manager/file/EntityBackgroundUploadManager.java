@@ -43,14 +43,37 @@ import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityBackgroundUploadManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(FileGwtUploadServlet.class);
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
+  
+  /** The file manager. */
   private final FileManager fileManager;
+  
+  /** The group manager. */
   private final GroupManager groupManager;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
 
+  /**
+   * Instantiates a new entity background upload manager.
+   *
+   * @param kuneProperties the kune properties
+   * @param groupManager the group manager
+   * @param i18n the i18n
+   * @param fileManager the file manager
+   */
   @Inject
   public EntityBackgroundUploadManager(final KuneProperties kuneProperties,
       final GroupManager groupManager, final I18nTranslationService i18n, final FileManager fileManager) {
@@ -60,6 +83,9 @@ public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet 
     this.fileManager = fileManager;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.file.FileGwtUploadAbstractServlet#createUploadedFile(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, org.apache.commons.fileupload.FileItem, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator, actionLevel = ActionLevel.group)

@@ -26,8 +26,17 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IdGeneratorTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class IdGeneratorTest {
 
+  /**
+   * Test basic.
+   */
   @Test
   public void testBasic() {
     assertEquals("", IdGenerator.generate("", ""));

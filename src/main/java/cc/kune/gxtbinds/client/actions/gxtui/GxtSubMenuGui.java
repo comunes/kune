@@ -30,18 +30,36 @@ import cc.kune.common.shared.utils.TextUtils;
 
 import com.extjs.gxt.ui.client.widget.menu.MenuItem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GxtSubMenuGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GxtSubMenuGui extends AbstractGxtMenuGui {
 
+  /** The item. */
   private MenuItem item;
 
+  /**
+   * Instantiates a new gxt sub menu gui.
+   */
   public GxtSubMenuGui() {
     super();
   }
 
+  /**
+   * Instantiates a new gxt sub menu gui.
+   *
+   * @param descriptor the descriptor
+   */
   public GxtSubMenuGui(final GuiActionDescrip descriptor) {
     super(descriptor);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gxtbinds.client.actions.gxtui.AbstractGxtMenuGui#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.create(descriptor);
@@ -60,25 +78,40 @@ public class GxtSubMenuGui extends AbstractGxtMenuGui {
     return this;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
+   */
   @Override
   public void setEnabled(final boolean enabled) {
     item.setVisible(enabled);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+   */
   @Override
   public void setIcon(final KuneIcon icon) {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+   */
   @Override
   public void setIconStyle(final String style) {
     item.setIconStyle(style);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+   */
   @Override
   public void setText(final String text) {
     item.setText(text);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang.String)
+   */
   @Override
   public void setToolTipText(final String tooltip) {
     if (TextUtils.notEmpty(tooltip)) {
@@ -86,6 +119,9 @@ public class GxtSubMenuGui extends AbstractGxtMenuGui {
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     item.setVisible(visible);

@@ -32,13 +32,36 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.FlowPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LicenseWizardFlags.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LicenseWizardFlags extends FlowPanel {
+  
+  /** The copyleft. */
   private final IconLabel copyleft;
+  
+  /** The cultural works. */
   private final IconLabel culturalWorks;
+  
+  /** The non commercial reasons. */
   private final IconLabel nonCommercialReasons;
+  
+  /** The non copyleft. */
   private final IconLabel nonCopyleft;
+  
+  /** The non cultural works. */
   private final IconLabel nonCulturalWorks;
 
+  /**
+   * Instantiates a new license wizard flags.
+   *
+   * @param images the images
+   * @param commonRes the common res
+   * @param i18n the i18n
+   */
   public LicenseWizardFlags(final IconicResources images, final CommonResources commonRes,
       final I18nTranslationService i18n) {
     copyleft = new IconLabel(images.copyleftGrey(), i18n.t("This is a copyleft license."));
@@ -60,6 +83,12 @@ public class LicenseWizardFlags extends FlowPanel {
     add(nonCommercialReasons);
   }
 
+  /**
+   * Adds the link.
+   *
+   * @param label the label
+   * @param url the url
+   */
   private void addLink(final IconLabel label, final String url) {
     label.addDomHandler(new ClickHandler() {
 
@@ -76,20 +105,42 @@ public class LicenseWizardFlags extends FlowPanel {
     label.addStyleName("k-info-links");
   }
 
+  /**
+   * Sets the copyleft.
+   *
+   * @param isCopyleft the new copyleft
+   */
   public void setCopyleft(final boolean isCopyleft) {
     copyleft.setVisible(isCopyleft);
     nonCopyleft.setVisible(!isCopyleft);
   }
 
+  /**
+   * Sets the cultural works.
+   *
+   * @param isAppropiateForCulturalWorks the new cultural works
+   */
   public void setCulturalWorks(final boolean isAppropiateForCulturalWorks) {
     culturalWorks.setVisible(isAppropiateForCulturalWorks);
     nonCulturalWorks.setVisible(!isAppropiateForCulturalWorks);
   }
 
+  /**
+   * Sets the non comercial.
+   *
+   * @param isNonComercial the new non comercial
+   */
   public void setNonComercial(final boolean isNonComercial) {
     nonCommercialReasons.setVisible(isNonComercial);
   }
 
+  /**
+   * Sets the visible.
+   *
+   * @param isCopyleft the is copyleft
+   * @param isAppropiateForCulturalWorks the is appropiate for cultural works
+   * @param isNonComercial the is non comercial
+   */
   public void setVisible(final boolean isCopyleft, final boolean isAppropiateForCulturalWorks,
       final boolean isNonComercial) {
     setCopyleft(isCopyleft);

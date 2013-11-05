@@ -22,6 +22,11 @@
  */
 package cc.kune.gspace.client.options.style;
 
+/**
+ * The Interface UserOptStyleView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface UserOptStyleView extends EntityOptStyleView {
 
 }

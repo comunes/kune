@@ -53,21 +53,59 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DatabaseInitializer.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class DatabaseInitializer {
+  
+  /** The Constant LOG. */
   private static final Log LOG = LogFactory.getLog(DatabaseInitializer.class);
+  
+  /** The content manager. */
   private final ContentManager contentManager;
+  
+  /** The country manager. */
   private final I18nCountryManager countryManager;
 
+  /** The group manager. */
   private final GroupManager groupManager;
+  
+  /** The language manager. */
   private final I18nLanguageManager languageManager;
+  
+  /** The license manager. */
   private final LicenseManager licenseManager;
+  
+  /** The properties. */
   private final KuneBasicProperties properties;
+  
+  /** The translation manager. */
   private final I18nTranslationManager translationManager;
+  
+  /** The translation service. */
   private final I18nTranslationServiceDefault translationService;
 
+  /** The user manager. */
   private final UserManager userManager;
 
+  /**
+   * Instantiates a new database initializer.
+   *
+   * @param properties the properties
+   * @param userManager the user manager
+   * @param groupManager the group manager
+   * @param licenseManager the license manager
+   * @param languageManager the language manager
+   * @param countryManager the country manager
+   * @param translationManager the translation manager
+   * @param contentManager the content manager
+   * @param translationService the translation service
+   */
   @Inject
   public DatabaseInitializer(final KuneBasicProperties properties, final UserManager userManager,
       final GroupManager groupManager, final LicenseManager licenseManager,
@@ -85,6 +123,12 @@ public class DatabaseInitializer {
     this.contentManager = contentManager;
   }
 
+  /**
+   * Creates the def users group.
+   *
+   * @throws Exception the exception
+   * @throws UserMustBeLoggedException the user must be logged exception
+   */
   private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
     final String adminName = properties.getAdminUserName();
     final String adminShortName = properties.getAdminShortName();
@@ -121,6 +165,9 @@ public class DatabaseInitializer {
     // groupManager.reIndex();
   }
 
+  /**
+   * Creates the licenses.
+   */
   private void createLicenses() {
     // FIXME: Add CC RDF info (seems CC is working on new forms to add
     // license metadata)
@@ -167,6 +214,9 @@ public class DatabaseInitializer {
     licenseManager.persist(license);
   }
 
+  /**
+   * Creates the others.
+   */
   public void createOthers() {
     final I18nLanguage english = new I18nLanguage(Long.valueOf(1819), "en", "ltr", "English", "", "",
         "en", "eng", "eng", false, "", "", "", "c == 1 ? 1 : 2", null, "L", "MMM d\\, yyyy");
@@ -181,6 +231,11 @@ public class DatabaseInitializer {
     translationManager.persist(test);
   }
 
+  /**
+   * Inits the conditional.
+   *
+   * @throws Exception the exception
+   */
   public void initConditional() throws Exception {
     if (groupManager.count() == 0) {
       initialize();
@@ -188,6 +243,11 @@ public class DatabaseInitializer {
     translationService.init();
   }
 
+  /**
+   * Inits the database.
+   *
+   * @throws Exception the exception
+   */
   @KuneTransactional
   public void initDatabase() throws Exception {
     createLicenses();
@@ -195,6 +255,11 @@ public class DatabaseInitializer {
     createDefUsersGroup();
   }
 
+  /**
+   * Initialize.
+   *
+   * @throws Exception the exception
+   */
   private void initialize() throws Exception {
     LOG.warn("The default group '" + properties.getDefaultSiteName() + "' does not exist in Database, "
         + "creating it (see kune.default.site.shortName in kune.properties for more details)");

@@ -36,15 +36,35 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nTranslationServiceDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class I18nTranslationServiceDefault extends I18nTranslationService implements
     I18nTranslationServiceMultiLang {
 
+  /** The initiliazied. */
   private boolean initiliazied = false;
+  
+  /** The language manager. */
   private final I18nLanguageManager languageManager;
+  
+  /** The translation manager. */
   private final I18nTranslationManager translationManager;
+  
+  /** The user session manager. */
   private final Provider<UserSessionManager> userSessionManager;
 
+  /**
+   * Instantiates a new i18n translation service default.
+   *
+   * @param translationManager the translation manager
+   * @param userSessionManager the user session manager
+   * @param languageManager the language manager
+   */
   @Inject
   public I18nTranslationServiceDefault(final I18nTranslationManager translationManager,
       final Provider<UserSessionManager> userSessionManager, final I18nLanguageManager languageManager) {
@@ -53,14 +73,25 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
     this.languageManager = languageManager;
   }
 
+  /**
+   * Def lang.
+   *
+   * @return the i18n language
+   */
   private I18nLanguage defLang() {
     return languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
   }
 
+  /**
+   * Inits the.
+   */
   public void init() {
     initiliazied = true;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.shared.i18n.I18nTranslationService#isRTL()
+   */
   @Override
   public boolean isRTL() {
     return userSessionManager.get().isUserLoggedIn() ? userSessionManager.get().getUser().getLanguage().getDirection().equals(
@@ -69,8 +100,12 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
   }
 
   /**
-   * Use [%s] to reference the string parameter
-   * 
+   * Use [%s] to reference the string parameter.
+   *
+   * @param lang the lang
+   * @param pair the pair
+   * @param args the args
+   * @return the string
    */
   // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
   private String t(final I18nLanguage lang, final Pair<String, String> pair, final String... args) {
@@ -86,8 +121,8 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
    * 
    * Warning: text is escaped as html before insert in the db. Don't use html
    * here (o user this method with params).
-   * 
-   * @param text
+   *
+   * @param text the text
    * @return text translated in the current language
    */
   @Override
@@ -95,6 +130,9 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
     return tWithNT(text, "");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.i18n.I18nTranslationServiceMultiLang#tWithNT(cc.kune.domain.I18nLanguage, java.lang.String, java.lang.String)
+   */
   @Override
   public String tWithNT(final I18nLanguage language, final String text, final String noteForTranslators) {
     final String encodeText = TextUtils.escapeHtmlLight(text);
@@ -106,6 +144,9 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
     return decodeHtml(translation);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.i18n.I18nTranslationServiceMultiLang#tWithNT(cc.kune.domain.I18nLanguage, java.lang.String, java.lang.String, java.lang.String[])
+   */
   @Override
   public String tWithNT(final I18nLanguage lang, final String text, final String noteForTranslators,
       final String... args) {
@@ -117,11 +158,9 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
    * 
    * Warning: text is escaped as html before insert in the db. Don't use html
    * here (o user this method with params).
-   * 
-   * @param text
-   * @param noteForTranslators
-   *          some note for facilitate the translation
-   * 
+   *
+   * @param text the text
+   * @param noteForTranslators some note for facilitate the translation
    * @return text translated in the current language
    */
   @Override

@@ -35,17 +35,41 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CorePresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresenter.CoreProxy> {
+  
+  /**
+   * The Interface CoreProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyStandard
   public interface CoreProxy extends Proxy<CorePresenter> {
   }
+  
+  /**
+   * The Interface CoreView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface CoreView extends View {
   }
 
+  /**
+   * Instantiates a new core presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param appStarter the app starter
+   * @param i18n the i18n
+   */
   @Inject
   public CorePresenter(final EventBus eventBus, final CoreView view, final CoreProxy proxy,
       final AppStarter appStarter, final I18nUITranslationService i18n) {
@@ -62,6 +86,9 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
     });
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootLayoutContentEvent.fire(this, this);

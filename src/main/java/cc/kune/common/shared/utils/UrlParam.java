@@ -24,33 +24,73 @@ package cc.kune.common.shared.utils;
 
 import java.util.Date;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UrlParam.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UrlParam {
+  
+  /**
+   * No cache string suffix.
+   *
+   * @return the string
+   */
   public static String noCacheStringSuffix() {
     final String noCache = "&nocache=" + new Date().getTime();
     return noCache;
   }
+  
+  /** The name. */
   private final String name;
 
+  /** The value. */
   private final String value;
 
+  /**
+   * Instantiates a new url param.
+   *
+   * @param name the name
+   * @param value the value
+   */
   public UrlParam(final String name, final boolean value) {
     this.name = name;
     this.value = value ? "true" : "false";
   }
 
+  /**
+   * Instantiates a new url param.
+   *
+   * @param name the name
+   * @param value the value
+   */
   public UrlParam(final String name, final String value) {
     this.name = name;
     this.value = value;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the value.
+   *
+   * @return the value
+   */
   public String getValue() {
     return value;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return name + "=" + value;

@@ -59,7 +59,9 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.protobuf.ByteString;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class CustomImportServlet.
  *
  * @author (akaplanov@gmail.com) (Andrew Kaplanov)
  */
@@ -67,18 +69,43 @@ import com.google.protobuf.ByteString;
 @Singleton
 public class CustomImportServlet extends HttpServlet {
 
+  /** The Constant LOG. */
   private static final Log LOG = Log.get(CustomImportServlet.class);
+  
+  /** The Constant GWAVE_PUBLIC_DOMAIN. */
   public static final String GWAVE_PUBLIC_DOMAIN = "a.gwave.com";
+  
+  /** The Constant GWAVE_PUBLIC_USER_NAME. */
   public static final String GWAVE_PUBLIC_USER_NAME = "public";
+  
+  /** The Constant WIAB_SHARED_USER_NAME. */
   public static final String WIAB_SHARED_USER_NAME = "";
+  
+  /** The Constant URI_CODEC. */
   private static final IdURIEncoderDecoder URI_CODEC = new IdURIEncoderDecoder(new JavaUrlCodec());
+  
+  /** The Constant HASH_FACTORY. */
   private static final HashedVersionFactory HASH_FACTORY = new HashedVersionFactoryImpl(URI_CODEC);
+  
+  /** The wavelet provider. */
   private final WaveletProvider waveletProvider;
   // private final AttachmentStore attachmentStore;
+  /** The wave map. */
   private final WaveMap waveMap;
+  
+  /** The kune properties. */
   private KuneProperties kuneProperties;
+  
+  /** The user map. */
   private static HashMap<String, String> userMap;
 
+  /**
+   * Instantiates a new custom import servlet.
+   *
+   * @param waveletProvider the wavelet provider
+   * @param attachmentStore the attachment store
+   * @param waveMap the wave map
+   */
   @Inject
   private CustomImportServlet(WaveletProvider waveletProvider, AttachmentStore attachmentStore,
       WaveMap waveMap) {
@@ -87,6 +114,11 @@ public class CustomImportServlet extends HttpServlet {
     this.waveMap = waveMap;
   }
 
+  /**
+   * Inits the.
+   *
+   * @param kuneProperties the kune properties
+   */
   public void init(KuneProperties kuneProperties ) {
     this.kuneProperties = kuneProperties;
     if (userMap == null) {
@@ -94,6 +126,9 @@ public class CustomImportServlet extends HttpServlet {
     }
   }
 
+  /* (non-Javadoc)
+   * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+   */
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
@@ -169,6 +204,9 @@ public class CustomImportServlet extends HttpServlet {
     }
   }
 
+  /**
+   * Inits the user map.
+   */
   private void initUserMap() {
     userMap = new HashMap<String,String>();
     List<String> list = kuneProperties.getList(KuneProperties.SITE_WAVE_IMPORT_USERNAME_PAIRS);
@@ -182,13 +220,13 @@ public class CustomImportServlet extends HttpServlet {
   }
 
   /**
-   * Convert delta from GWave to Wiab
+   * Convert delta from GWave to Wiab.
    *
    * @param delta from GWave
    * @param domain target domain
    * @param wavelet to append delta
    * @param waveletName name of wavelet
-   * @param set participants of wavelet at this moment
+   * @param participants the participants
    * @return delta to import
    * @throws InvalidParticipantAddress deserialize of participant error
    */
@@ -242,6 +280,12 @@ public class CustomImportServlet extends HttpServlet {
   /**
    * Convert adding participant operation.
    * Skip operation if participant already exists.
+   *
+   * @param newOperation the new operation
+   * @param operation the operation
+   * @param domain the domain
+   * @param participants the participants
+   * @throws InvalidParticipantAddress the invalid participant address
    */
   private static void initAddParticipantOperation(ProtocolWaveletOperation.Builder newOperation,
       ProtocolWaveletOperation operation, String domain,
@@ -258,6 +302,12 @@ public class CustomImportServlet extends HttpServlet {
   /**
    * Convert removal participant operation.
    * Skip operation if nothing to remove.
+   *
+   * @param newOperation the new operation
+   * @param operation the operation
+   * @param domain the domain
+   * @param participants the participants
+   * @throws InvalidParticipantAddress the invalid participant address
    */
   private static void initRemoveParticipantOperation(ProtocolWaveletOperation.Builder newOperation,
       ProtocolWaveletOperation operation, String domain,
@@ -272,10 +322,12 @@ public class CustomImportServlet extends HttpServlet {
   }
 
   /**
-   * Make WIAB participant Id
+   * Make WIAB participant Id.
    *
    * @param participant in GWave
    * @param domain of WIAB server
+   * @return the participant id
+   * @throws InvalidParticipantAddress the invalid participant address
    */
   private static ParticipantId makeParticipantId(String participant, String domain)
       throws InvalidParticipantAddress {
@@ -293,11 +345,25 @@ public class CustomImportServlet extends HttpServlet {
     return ParticipantId.of(participant);
   }
 
+  /**
+   * Map.
+   *
+   * @param participant the participant
+   * @return the string
+   */
   private static String map(String participant) {
     String newUser = userMap.get(participant);
     return newUser == null? participant: newUser;
   }
 
+  /**
+   * Read to string.
+   *
+   * @param reader the reader
+   * @return the string
+   * @throws FileNotFoundException the file not found exception
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   private static String readToString(Reader reader) throws FileNotFoundException, IOException {
     StringBuilder sb = new StringBuilder();
     char buf[] = new char[1000];

@@ -32,10 +32,25 @@ import cc.kune.gspace.client.tool.selector.ToolSelector;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WikiClientTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WikiClientTool extends FoldableAbstractClientTool {
 
+  /** The Constant EMPTY_FOLDER. */
   private static final String EMPTY_FOLDER = "This folder is empty, you can create a wikipage or folder here";
 
+  /**
+   * Instantiates a new wiki client tool.
+   *
+   * @param i18n the i18n
+   * @param toolSelector the tool selector
+   * @param cntCapRegistry the cnt cap registry
+   * @param history the history
+   */
   @Inject
   public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
@@ -58,11 +73,17 @@ public class WikiClientTool extends FoldableAbstractClientTool {
     registerIcons();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.AbstractClientTool#getName()
+   */
   @Override
   public String getName() {
     return TOOL_NAME;
   }
 
+  /**
+   * Register icons.
+   */
   private void registerIcons() {
     registerEmptyFolderTutorial(TYPE_ROOT);
     // registerTutorial(TYPE_FOLDER);

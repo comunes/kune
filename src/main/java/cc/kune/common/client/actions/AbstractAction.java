@@ -39,6 +39,7 @@ package cc.kune.common.client.actions;
 
 import java.util.HashMap;
 
+// TODO: Auto-generated Javadoc
 /**
  * A base class for implementing the {@link Action} interface.
  * 
@@ -47,6 +48,7 @@ import java.util.HashMap;
  */
 public abstract class AbstractAction extends ChangeableObject implements Action {
 
+  /** The Constant NO_ACTION. */
   public final static AbstractAction NO_ACTION = new NoAction();
 
   /**
@@ -57,7 +59,9 @@ public abstract class AbstractAction extends ChangeableObject implements Action 
   }
 
   /**
-   * Copy constructor used as a substitute of clone
+   * Copy constructor used as a substitute of clone.
+   *
+   * @param action the action
    */
   @SuppressWarnings("unchecked")
   public AbstractAction(final AbstractAction action) {
@@ -110,12 +114,21 @@ public abstract class AbstractAction extends ChangeableObject implements Action 
     return (Boolean) super.getValue(ENABLED);
   }
 
+  /**
+   * On attach.
+   */
   public void onAttach() {
   }
 
+  /**
+   * On dettach.
+   */
   public void onDettach() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ChangeableObject#putValue(java.lang.String, java.lang.Object)
+   */
   @Override
   /**
    * Sets the value associated with the specified key and sends a
@@ -143,13 +156,11 @@ public abstract class AbstractAction extends ChangeableObject implements Action 
 
   /**
    * Sets the flag that indicates whether or not the action is enabled and, if
-   * the value of the flag changed from the previous setting, sends a
+   * the value of the flag changed from the previous setting, sends a.
+   *
+   * @param enabled the new flag value.
    * {@link java.beans.PropertyChangeEvent} to all registered listeners (using
    * the property name 'enabled').
-   * 
-   * @param enabled
-   *          the new flag value.
-   * 
    * @see #isEnabled()
    */
   @Override
@@ -157,6 +168,11 @@ public abstract class AbstractAction extends ChangeableObject implements Action 
     putValue(ENABLED, enabled);
   }
 
+  /**
+   * Sets the shortcut.
+   *
+   * @param key the new shortcut
+   */
   public void setShortcut(final KeyStroke key) {
     putValue(Action.ACCELERATOR_KEY, key);
   }

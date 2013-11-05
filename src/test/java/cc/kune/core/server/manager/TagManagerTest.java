@@ -35,15 +35,32 @@ import cc.kune.domain.finders.TagFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TagManagerTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TagManagerTest extends PersistenceTest {
+  
+  /** The content manager. */
   @Inject
   ContentManager contentManager;
+  
+  /** The tag. */
   private Tag tag;
+  
+  /** The tag finder. */
   @Inject
   TagFinder tagFinder;
+  
+  /** The tag manager. */
   @Inject
   TagManager tagManager;
 
+  /**
+   * Close.
+   */
   @After
   public void close() {
     if (getTransaction().isActive()) {
@@ -51,6 +68,9 @@ public class TagManagerTest extends PersistenceTest {
     }
   }
 
+  /**
+   * Insert data.
+   */
   @Before
   public void insertData() {
     openTransaction();
@@ -58,6 +78,9 @@ public class TagManagerTest extends PersistenceTest {
     tagManager.persist(tag);
   }
 
+  /**
+   * Test tag creation.
+   */
   @Test
   public void testTagCreation() {
     assertNotNull(tag.getId());

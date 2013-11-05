@@ -41,17 +41,32 @@ import cc.kune.domain.finders.RateFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RateFinderTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class RateFinderTest extends PersistencePreLoadedDataTest {
 
+  /** The entity manager. */
   private EntityManager entityManager;
+  
+  /** The rate finder. */
   @Inject
   RateFinder rateFinder;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     entityManager = getManager();
   }
 
+  /**
+   * Test content not rated.
+   */
   @Test
   public void testContentNotRated() {
     final Content cd = new Content();
@@ -68,6 +83,9 @@ public class RateFinderTest extends PersistencePreLoadedDataTest {
     assertEquals(null, rate);
   }
 
+  /**
+   * Test content rate average.
+   */
   @Test
   @Ignore
   public void testContentRateAverage() {

@@ -27,58 +27,118 @@ import cc.kune.common.shared.utils.TextUtils;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneBasicProperties.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class KuneBasicProperties {
+  
+  /** The properties. */
   private final KuneProperties properties;
+  
+  /** The site url without http. */
   private String siteUrlWithoutHttp;
 
+  /**
+   * Instantiates a new kune basic properties.
+   *
+   * @param properties the properties
+   */
   @Inject
   public KuneBasicProperties(final KuneProperties properties) {
     this.properties = properties;
   }
 
+  /**
+   * Gets the admin email.
+   *
+   * @return the admin email
+   */
   public String getAdminEmail() {
     return properties.get(KuneProperties.SITE_ADMIN_EMAIL);
   }
 
+  /**
+   * Gets the admin password.
+   *
+   * @return the admin password
+   */
   public String getAdminPassword() {
     return properties.get(KuneProperties.SITE_ADMIN_PASSWD);
   }
 
+  /**
+   * Gets the admin short name.
+   *
+   * @return the admin short name
+   */
   public String getAdminShortName() {
     return properties.get(KuneProperties.SITE_ADMIN_SHORTNAME);
   }
 
+  /**
+   * Gets the admin user name.
+   *
+   * @return the admin user name
+   */
   public String getAdminUserName() {
     return properties.get(KuneProperties.SITE_ADMIN_NAME);
   }
 
+  /**
+   * Gets the default license.
+   *
+   * @return the default license
+   */
   public String getDefaultLicense() {
     return properties.get(KuneProperties.SITE_DEF_LICENSE);
   }
 
+  /**
+   * Gets the default site name.
+   *
+   * @return the default site name
+   */
   public String getDefaultSiteName() {
     return properties.get(KuneProperties.SITE_NAME);
   }
 
+  /**
+   * Gets the default site short name.
+   *
+   * @return the default site short name
+   */
   public String getDefaultSiteShortName() {
     return properties.get(KuneProperties.SITE_SHORTNAME);
   }
 
   /**
    * Gets the site common name (can be something like "this foo site" not
-   * necessary a domain)
-   * 
+   * necessary a domain).
+   *
    * @return the site common name
    */
   public String getSiteCommonName() {
     return properties.get(KuneProperties.SITE_COMMON_NAME);
   }
 
+  /**
+   * Gets the site url.
+   *
+   * @return the site url
+   */
   public String getSiteUrl() {
     return properties.get(KuneProperties.SITE_URL);
   }
 
+  /**
+   * Gets the site url without http.
+   *
+   * @return the site url without http
+   */
   public String getSiteUrlWithoutHttp() {
     if (siteUrlWithoutHttp == null) {
       siteUrlWithoutHttp = TextUtils.removeHttp(properties.get(KuneProperties.SITE_URL));
@@ -86,6 +146,11 @@ public class KuneBasicProperties {
     return siteUrlWithoutHttp;
   }
 
+  /**
+   * Gets the welcomewave.
+   *
+   * @return the welcomewave
+   */
   public String getWelcomewave() {
     return properties.get(KuneProperties.WELCOME_WAVE);
   }

@@ -106,12 +106,29 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatClientDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatClientDefault implements ChatClient {
 
+  /**
+   * The Class ChatClientAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public class ChatClientAction extends AbstractExtendedAction {
 
+    /** The res. */
     private final ChatResources res;
 
+    /**
+     * Instantiates a new chat client action.
+     *
+     * @param res the res
+     */
     public ChatClientAction(final ChatResources res) {
       super();
       this.res = res;
@@ -131,11 +148,19 @@ public class ChatClientDefault implements ChatClient {
           });
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       kuneEventBus.fireEvent(new ToggleShowChatDialogEvent());
     }
 
+    /**
+     * Sets the blink.
+     *
+     * @param blink the new blink
+     */
     public void setBlink(final boolean blink) {
       final ImageResource icon = blink ? res.chatBlink() : res.chatNoBlink();
       putValue(Action.SMALL_ICON, icon);
@@ -144,33 +169,111 @@ public class ChatClientDefault implements ChatClient {
 
   }
 
+  /** The Constant CHAT_TITLE. */
   private static final String CHAT_TITLE = "Chat ;)";
+  
+  /** The action. */
   private final ChatClientAction action;
+  
+  /** The avatar config. */
   private final Provider<KuneChatAvatarConfig> avatarConfig;
+  
+  /** The avatar manager. */
   private final Provider<AvatarManager> avatarManager;
+  
+  /** The avatar provider registry. */
   private final Provider<AvatarProviderRegistry> avatarProviderRegistry;
+  
+  /** The chat icon. */
   protected IconLabelDescriptor chatIcon;
+  
+  /** The chat manager. */
   private final Provider<ChatManager> chatManager;
+  
+  /** The chat options. */
   private final ChatOptions chatOptions;
+  
+  /** The chat resources. */
   private final ChatResources chatResources;
+  
+  /** The dialog. */
   private Dialog dialog;
+  
+  /** The down utils. */
   private final ClientFileDownloadUtils downUtils;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The kune event bus. */
   private final EventBus kuneEventBus;
+  
+  /** The muc chat state manager. */
   private final Provider<MUCChatStateManager> mucChatStateManager;
+  
+  /** The presence manager. */
   private final Provider<PresenceManager> presenceManager;
+  
+  /** The private storage manager. */
   private final Provider<PrivateStorageManager> privateStorageManager;
+  
+  /** The res. */
   private final CoreResources res;
+  
+  /** The room discovery manager. */
   private final Provider<RoomDiscoveryManager> roomDiscoveryManager;
+  
+  /** The room manager. */
   private final Provider<RoomManager> roomManager;
+  
+  /** The roster. */
   private final Provider<XmppRoster> roster;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The shorcut register. */
   private final GlobalShortcutRegister shorcutRegister;
+  
+  /** The subscription handler. */
   private final Provider<SubscriptionHandler> subscriptionHandler;
+  
+  /** The subscription manager. */
   private final Provider<SubscriptionManager> subscriptionManager;
+  
+  /** The xmpp session. */
   private final Provider<XmppSession> xmppSession;
+  
+  /** The xmpp state manager. */
   private final Provider<StateManager> xmppStateManager;
 
+  /**
+   * Instantiates a new chat client default.
+   *
+   * @param kuneEventBus the kune event bus
+   * @param i18n the i18n
+   * @param siteActions the site actions
+   * @param session the session
+   * @param res the res
+   * @param downUtils the down utils
+   * @param shorcutRegister the shorcut register
+   * @param chatOptions the chat options
+   * @param chatResources the chat resources
+   * @param xmppSession the xmpp session
+   * @param roster the roster
+   * @param chatManager the chat manager
+   * @param roomManager the room manager
+   * @param avatarManager the avatar manager
+   * @param subscriptionManager the subscription manager
+   * @param presenceManager the presence manager
+   * @param xmppStateManager the xmpp state manager
+   * @param roomDiscoveryManager the room discovery manager
+   * @param mucChatStateManager the muc chat state manager
+   * @param avatarProviderRegistry the avatar provider registry
+   * @param privateStorageManager the private storage manager
+   * @param subscriptionHandler the subscription handler
+   * @param avatarConfig the avatar config
+   */
   @Inject
   public ChatClientDefault(final EventBus kuneEventBus, final I18nTranslationService i18n,
       final SitebarActions siteActions, final Session session, final CoreResources res,
@@ -262,22 +365,36 @@ public class ChatClientDefault implements ChatClient {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.contacts.SimpleContactManager#addNewBuddy(java.lang.String)
+   */
   @Override
   public void addNewBuddy(final String shortName) {
     roster.get().requestAddItem(uriFrom(shortName), shortName);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.contacts.SimpleContactManager#chat(java.lang.String)
+   */
   @Override
   public void chat(final String shortName) {
     chat(uriFrom(shortName));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#chat(com.calclab.emite.core.client.xmpp.stanzas.XmppURI)
+   */
   @Override
   public void chat(final XmppURI jid) {
     chatManager.get().open(jid);
   }
 
   // Put this in Panel object
+  /**
+   * Check chat domain.
+   *
+   * @param chatDomain the chat domain
+   */
   private void checkChatDomain(final String chatDomain) {
     final String httpDomain = WindowUtils.getLocation().getHostName();
     if (!chatDomain.equals(httpDomain)) {
@@ -287,6 +404,9 @@ public class ChatClientDefault implements ChatClient {
     }
   }
 
+  /**
+   * Creates the action if needed.
+   */
   private void createActionIfNeeded() {
     if (chatIcon == null) {
       chatIcon = new IconLabelDescriptor(action);
@@ -306,12 +426,21 @@ public class ChatClientDefault implements ChatClient {
     }
   }
 
+  /**
+   * Creates the dialog.
+   *
+   * @param widget the widget
+   * @param htmlConfig the html config
+   */
   private void createDialog(final KuneHablarWidget widget, final CustomHtmlConfig htmlConfig) {
     widget.addStyleName("k-chat-panel");
     setSize(widget, htmlConfig);
     dialog.add(widget);
   }
 
+  /**
+   * Creates the dialog if needed.
+   */
   private void createDialogIfNeeded() {
     if (dialog == null) {
       dialog = new Dialog();
@@ -330,20 +459,39 @@ public class ChatClientDefault implements ChatClient {
     }
   }
 
+  /**
+   * Dialog visible.
+   *
+   * @return true, if successful
+   */
   private boolean dialogVisible() {
     return dialog != null && dialog.isVisible();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#doLogin()
+   */
   @Override
   public void doLogin() {
     doLogin(null);
   }
 
+  /**
+   * Do login.
+   *
+   * @param password the password
+   */
   private void doLogin(final String password) {
     assert session.getCurrentUserInfo() != null;
     doLogin(session.getCurrentUserInfo(), password == null ? session.getUserHash() : password);
   }
 
+  /**
+   * Do login.
+   *
+   * @param user the user
+   * @param tokenOrPassword the token or password
+   */
   private void doLogin(final UserInfoDTO user, final String tokenOrPassword) {
     createActionIfNeeded();
     createDialogIfNeeded();
@@ -357,6 +505,9 @@ public class ChatClientDefault implements ChatClient {
     login(chatOptions.useruri, chatOptions.passwd);
   }
 
+  /**
+   * Inits the emite.
+   */
   private void initEmite() {
     // Adapted from HablarHtml.java
     BrowserFocusHandler.getInstance();
@@ -428,11 +579,17 @@ public class ChatClientDefault implements ChatClient {
         });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.contacts.SimpleContactManager#isBuddy(java.lang.String)
+   */
   @Override
   public boolean isBuddy(final String shortName) {
     return isBuddy(uriFrom(shortName));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#isBuddy(com.calclab.emite.core.client.xmpp.stanzas.XmppURI)
+   */
   @Override
   public boolean isBuddy(final XmppURI jid) {
     if (roster.get().isRosterReady()) {
@@ -444,16 +601,25 @@ public class ChatClientDefault implements ChatClient {
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#isXmppLoggedIn()
+   */
   @Override
   public boolean isXmppLoggedIn() {
     return xmppSession.get().isReady();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#joinRoom(java.lang.String, java.lang.String)
+   */
   @Override
   public Room joinRoom(final String roomName, final String userAlias) {
     return joinRoom(roomName, null, userAlias);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#joinRoom(java.lang.String, java.lang.String, java.lang.String)
+   */
   @Override
   public Room joinRoom(final String roomName, final String subject, final String userAlias) {
     Room room = null;
@@ -471,11 +637,17 @@ public class ChatClientDefault implements ChatClient {
     return room;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#login(com.calclab.emite.core.client.xmpp.stanzas.XmppURI, java.lang.String)
+   */
   @Override
   public void login(final XmppURI uri, final String passwd) {
     xmppSession.get().login(uri, passwd);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#loginIfNecessary()
+   */
   @Override
   public boolean loginIfNecessary() {
     if (!isXmppLoggedIn() && session.isLogged()) {
@@ -485,6 +657,9 @@ public class ChatClientDefault implements ChatClient {
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#logout()
+   */
   @Override
   public void logout() {
     if (dialogVisible()) {
@@ -495,16 +670,28 @@ public class ChatClientDefault implements ChatClient {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#roomUriFrom(java.lang.String)
+   */
   @Override
   public XmppURI roomUriFrom(final String shortName) {
     return XmppURI.jid(shortName + "@" + chatOptions.roomHost);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#setAvatar(java.lang.String)
+   */
   @Override
   public void setAvatar(final String photoBinary) {
     avatarManager.get().setVCardAvatar(photoBinary);
   }
 
+  /**
+   * Sets the size.
+   *
+   * @param widget the widget
+   * @param htmlConfig the html config
+   */
   private void setSize(final Widget widget, final CustomHtmlConfig htmlConfig) {
     if (htmlConfig.width != null) {
       widget.setWidth("98%");
@@ -516,11 +703,19 @@ public class ChatClientDefault implements ChatClient {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#show()
+   */
   @Override
   public void show() {
     showDialog(true);
   }
 
+  /**
+   * Show dialog.
+   *
+   * @param show the show
+   */
   private void showDialog(final boolean show) {
     Log.info("Show dialog: " + show);
     if (session.isLogged()) {
@@ -539,11 +734,17 @@ public class ChatClientDefault implements ChatClient {
     }
   }
 
+  /**
+   * Toggle show dialog.
+   */
   private void toggleShowDialog() {
     Log.info("Toggle!");
     showDialog(dialog == null ? true : !dialogVisible());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.chat.client.ChatClient#uriFrom(java.lang.String)
+   */
   @Override
   public XmppURI uriFrom(final String shortName) {
     return chatOptions.uriFrom(shortName);

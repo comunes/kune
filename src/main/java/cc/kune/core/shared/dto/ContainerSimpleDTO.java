@@ -24,17 +24,34 @@ package cc.kune.core.shared.dto;
 
 import cc.kune.core.shared.domain.utils.StateToken;
 
+// TODO: Auto-generated Javadoc
 /**
- * A item can be both a container or a content
- * 
+ * A item can be both a container or a content.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContainerSimpleDTO extends AbstractContentSimpleDTO {
+  
+  /** The name. */
   private String name;
+  
+  /** The parent token. */
   private StateToken parentToken;
 
+  /**
+   * Instantiates a new container simple dto.
+   */
   public ContainerSimpleDTO() {
   }
 
+  /**
+   * Instantiates a new container simple dto.
+   *
+   * @param name the name
+   * @param parentToken the parent token
+   * @param token the token
+   * @param typeId the type id
+   */
   public ContainerSimpleDTO(String name, StateToken parentToken, StateToken token, String typeId) {
     this.name = name;
     this.parentToken = parentToken;
@@ -42,20 +59,36 @@ public class ContainerSimpleDTO extends AbstractContentSimpleDTO {
     setTypeId(typeId);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.shared.dto.AbstractContentSimpleDTO#getName()
+   */
   @Override
   public String getName() {
     return name;
   }
 
+  /**
+   * Gets the parent token.
+   *
+   * @return the parent token
+   */
   public StateToken getParentToken() {
     return parentToken;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.shared.dto.AbstractContentSimpleDTO#setName(java.lang.String)
+   */
   @Override
   public void setName(final String name) {
     this.name = name;
   }
 
+  /**
+   * Sets the parent token.
+   *
+   * @param parentToken the new parent token
+   */
   public void setParentToken(final StateToken parentToken) {
     this.parentToken = parentToken;
   }

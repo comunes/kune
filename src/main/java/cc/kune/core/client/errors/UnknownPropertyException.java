@@ -22,9 +22,22 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UnknownPropertyException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UnknownPropertyException extends DefaultException {
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -5921396887476497824L;
 
+  /**
+   * Instantiates a new unknown property exception.
+   *
+   * @param message the message
+   */
   public UnknownPropertyException(final String message) {
     super(message);
   }

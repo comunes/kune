@@ -31,15 +31,39 @@ import cc.kune.core.client.ui.dialogs.WizardFormDialog;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LicenseWizardPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LicenseWizardPanel extends WizardFormDialog implements LicenseWizardView {
 
+  /** The Constant BACK_BTN_ID. */
   public static final String BACK_BTN_ID = "k-lwp-back-btn";
+  
+  /** The Constant CANCEL_BTN_ID. */
   public static final String CANCEL_BTN_ID = "k-lwp-cancel-btn";
+  
+  /** The Constant CLOSE_BTN_ID. */
   public static final String CLOSE_BTN_ID = "k-lwp-close-btn";
+  
+  /** The Constant FINISH_BTN_ID. */
   public static final String FINISH_BTN_ID = "k-lwp-finish-btn";
+  
+  /** The Constant LIC_WIZ_DIALOG. */
   public static final String LIC_WIZ_DIALOG = "k-lwp-diag";
+  
+  /** The Constant NEXT_BTN_ID. */
   public static final String NEXT_BTN_ID = "k-lwp-next-btn";
 
+  /**
+   * Instantiates a new license wizard panel.
+   *
+   * @param maskWidget the mask widget
+   * @param i18n the i18n
+   * @param res the res
+   */
   @Inject
   public LicenseWizardPanel(final MaskWidget maskWidget, final I18nTranslationService i18n,
       final IconicResources res) {
@@ -49,23 +73,40 @@ public class LicenseWizardPanel extends WizardFormDialog implements LicenseWizar
     super.setIcon(res.copyleftGrey());
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#addToSlot(java.lang.Object, com.google.gwt.user.client.ui.Widget)
+   */
   @Override
   public void addToSlot(final Object slot, final Widget content) {
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#removeFromSlot(java.lang.Object, com.google.gwt.user.client.ui.Widget)
+   */
   @Override
   public void removeFromSlot(final Object slot, final Widget content) {
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#setInSlot(java.lang.Object, com.google.gwt.user.client.ui.Widget)
+   */
   @Override
   public void setInSlot(final Object slot, final Widget content) {
   }
 
+  /**
+   * Sets the wizard listener.
+   *
+   * @param listener the new wizard listener
+   */
   public void setWizardListener(final WizardListener listener) {
     super.setListener(listener);
   }

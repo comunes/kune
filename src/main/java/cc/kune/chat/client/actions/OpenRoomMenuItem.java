@@ -28,8 +28,21 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class OpenRoomMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class OpenRoomMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new open room menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public OpenRoomMenuItem(final I18nTranslationService i18n, final OpenChatAction action,
       final ChatResources res) {

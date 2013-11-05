@@ -31,13 +31,33 @@ import cc.kune.domain.finders.UserFinder;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class StatsServiceDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class StatsServiceDefault implements StatsService {
 
+  /** The Constant LIMIT. */
   private static final int LIMIT = 20; // Before 6
+  
+  /** The content finder. */
   private final ContentFinder contentFinder;
+  
+  /** The group finder. */
   private final GroupFinder groupFinder;
+  
+  /** The user finder. */
   private final UserFinder userFinder;
 
+  /**
+   * Instantiates a new stats service default.
+   *
+   * @param userFinder the user finder
+   * @param groupFinder the group finder
+   * @param contentFinder the content finder
+   */
   @Inject
   public StatsServiceDefault(final UserFinder userFinder, final GroupFinder groupFinder,
       final ContentFinder contentFinder) {
@@ -46,11 +66,17 @@ public class StatsServiceDefault implements StatsService {
     this.contentFinder = contentFinder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.stats.StatsService#getHomeStats()
+   */
   @Override
   public HomeStats getHomeStats() {
     return getHomeStats(Group.NO_GROUP);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.stats.StatsService#getHomeStats(cc.kune.domain.Group)
+   */
   @Override
   public HomeStats getHomeStats(final Group userGroup) {
     final HomeStats stats = new HomeStats();

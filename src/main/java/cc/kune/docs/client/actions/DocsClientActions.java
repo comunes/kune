@@ -59,15 +59,75 @@ import cc.kune.trash.shared.TrashToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DocsClientActions.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DocsClientActions extends AbstractFoldableToolActions {
 
+  /** The all. */
   final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+  
+  /** The containers. */
   final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
+  
+  /** The containers no root. */
   final String[] containersNoRoot = { TYPE_FOLDER };
+  
+  /** The contents. */
   final String[] contents = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+  
+  /** The contents moderated. */
   final String[] contentsModerated = { TYPE_DOCUMENT, TYPE_UPLOADEDFILE };
+  
+  /** The root. */
   final String[] root = { TYPE_ROOT };
 
+  /**
+   * Instantiates a new docs client actions.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param stateManager the state manager
+   * @param registry the registry
+   * @param res the res
+   * @param folderGoUp the folder go up
+   * @param newDocMenuItem the new doc menu item
+   * @param newDocIconBtn the new doc icon btn
+   * @param newFolderMenuItem the new folder menu item
+   * @param openContentMenuItem the open content menu item
+   * @param newFolderBtn the new folder btn
+   * @param delContentMenuItem the del content menu item
+   * @param optionsMenuContent the options menu content
+   * @param shareMenuContent the share menu content
+   * @param addAllMenuItem the add all menu item
+   * @param addAdminMembersMenuItem the add admin members menu item
+   * @param addCollabMembersMenuItem the add collab members menu item
+   * @param addPublicMenuItem the add public menu item
+   * @param participateBtn the participate btn
+   * @param delFolderMenuItem the del folder menu item
+   * @param tutorialBtn the tutorial btn
+   * @param chatAbout the chat about
+   * @param refresh the refresh
+   * @param setAsHomePage the set as home page
+   * @param copyContent the copy content
+   * @param writeToParticipants the write to participants
+   * @param purgeMenuItem the purge menu item
+   * @param purgeBtn the purge btn
+   * @param purgeFolderMenuItem the purge folder menu item
+   * @param purgeFolderBtn the purge folder btn
+   * @param moveContentMenuItem the move content menu item
+   * @param newMenusRegistry the new menus registry
+   * @param foldersNewMenu the folders new menu
+   * @param docsNewMenu the docs new menu
+   * @param shareInTwitter the share in twitter
+   * @param shareInGPlus the share in g plus
+   * @param shareInIdentica the share in identica
+   * @param shareInFacebook the share in facebook
+   */
   @Inject
   public DocsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
@@ -154,6 +214,9 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     newMenusRegistry.register(TYPE_UPLOADEDFILE, docsNewMenu.get());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
+   */
   @Override
   protected void createPostSessionInitActions() {
   }

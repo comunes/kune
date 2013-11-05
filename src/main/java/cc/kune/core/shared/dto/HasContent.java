@@ -22,12 +22,33 @@
  */
 package cc.kune.core.shared.dto;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface HasContent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface HasContent {
 
+  /**
+   * Gets the container.
+   *
+   * @return the container
+   */
   ContainerDTO getContainer();
 
+  /**
+   * Gets the type id.
+   *
+   * @return the type id
+   */
   String getTypeId();
 
+  /**
+   * Sets the type id.
+   *
+   * @param typeId the new type id
+   */
   void setTypeId(String typeId);
 
 }

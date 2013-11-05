@@ -26,33 +26,57 @@ import org.junit.Test;
 
 import cc.kune.core.client.errors.NameNotPermittedException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FilenameUtilsTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FilenameUtilsTest {
 
+  /**
+   * Test no dot.
+   */
   @Test(expected = NameNotPermittedException.class)
   public void testNoDot() {
     FilenameUtils.checkBasicFilename(".");
   }
 
+  /**
+   * Test no double dot.
+   */
   @Test(expected = NameNotPermittedException.class)
   public void testNoDoubleDot() {
     FilenameUtils.checkBasicFilename("..");
   }
 
+  /**
+   * Test no empty.
+   */
   @Test(expected = NameNotPermittedException.class)
   public void testNoEmpty() {
     FilenameUtils.checkBasicFilename("");
   }
 
+  /**
+   * Test no null.
+   */
   @Test(expected = NameNotPermittedException.class)
   public void testNoNull() {
     FilenameUtils.checkBasicFilename(null);
   }
 
+  /**
+   * Test no return.
+   */
   @Test(expected = NameNotPermittedException.class)
   public void testNoReturn() {
     FilenameUtils.checkBasicFilename("\n");
   }
 
+  /**
+   * Test no space.
+   */
   @Test(expected = NameNotPermittedException.class)
   public void testNoSpace() {
     FilenameUtils.checkBasicFilename(" ");

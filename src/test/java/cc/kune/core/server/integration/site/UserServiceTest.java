@@ -65,26 +65,61 @@ import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserServiceTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserServiceTest extends IntegrationTest {
+  
+  /** The content service. */
   @Inject
   ContentService contentService;
+  
+  /** The country. */
   private I18nCountryDTO country;
+  
+  /** The i18n lang manager. */
   @Inject
   I18nLanguageManager i18nLangManager;
+  
+  /** The lang. */
   private I18nLanguageDTO lang;
+  
+  /** The mapper. */
   @Inject
   KuneMapper mapper;
+  
+  /** The properties. */
   @Inject
   KuneBasicProperties properties;
+  
+  /** The simple lang. */
   private I18nLanguageSimpleDTO simpleLang;
+  
+  /** The sn. */
   @Inject
   SocialNetworkRPC sn;
+  
+  /** The timezone. */
   private TimeZoneDTO timezone;
+  
+  /** The user info service. */
   @Inject
   UserInfoService userInfoService;
+  
+  /** The user service. */
   @Inject
   UserService userService;
 
+  /**
+   * Assert equal group lists.
+   *
+   * @param listDTO the list dto
+   * @param list the list
+   */
   private void assertEqualGroupLists(final Set<GroupDTO> listDTO, final Set<Group> list) {
     assertEquals(listDTO.size(), list.size());
     final Iterator<Group> ite = list.iterator();
@@ -98,6 +133,11 @@ public class UserServiceTest extends IntegrationTest {
     }
   }
 
+  /**
+   * Creates the user existing email fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = EmailAddressInUseException.class)
   public void createUserExistingEmailFails() throws Exception {
     assertNull(session.getUser().getId());
@@ -106,6 +146,11 @@ public class UserServiceTest extends IntegrationTest {
     userService.createUser(user, false);
   }
 
+  /**
+   * Creates the user existing long name fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = GroupLongNameInUseException.class)
   public void createUserExistingLongNameFails() throws Exception {
     assertNull(session.getUser().getId());
@@ -114,6 +159,11 @@ public class UserServiceTest extends IntegrationTest {
     userService.createUser(user, false);
   }
 
+  /**
+   * Creates the user existing short name fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = GroupShortNameInUseException.class)
   public void createUserExistingShortNameFails() throws Exception {
     assertNull(session.getUser().getId());
@@ -122,6 +172,11 @@ public class UserServiceTest extends IntegrationTest {
     userService.createUser(user, false);
   }
 
+  /**
+   * Creates the user should permit edit of self homepage.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void createUserShouldPermitEditOfSelfHomepage() throws Exception {
     assertNull(session.getUser().getId());
@@ -138,6 +193,9 @@ public class UserServiceTest extends IntegrationTest {
     assertTrue(((StateContentDTO) homepage).getContainerRights().isEditable());
   }
 
+  /**
+   * Inits the.
+   */
   @Before
   public void init() {
     new IntegrationTestHelper(true, this);
@@ -151,12 +209,22 @@ public class UserServiceTest extends IntegrationTest {
     timezone.setId("GMT");
   }
 
+  /**
+   * Test reload user info not logged.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = SessionExpiredException.class)
   public void testReloadUserInfoNotLogged() throws Exception {
     assertNull(session.getUser().getId());
     userService.reloadUserInfo("AndOldUserHash");
   }
 
+  /**
+   * Test set visibility.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testSetVisibility() throws Exception {
     assertNull(session.getUser().getId());
@@ -171,6 +239,11 @@ public class UserServiceTest extends IntegrationTest {
     }
   }
 
+  /**
+   * Test site change incorrect passwd must fail.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = WrongCurrentPasswordException.class)
   public void testSiteChangeIncorrectPasswdMustFail() throws Exception {
     assertNull(session.getUser().getId());
@@ -179,6 +252,11 @@ public class UserServiceTest extends IntegrationTest {
     userService.changePasswd(session.getHash(), "otherpasswd", "kkkkkk");
   }
 
+  /**
+   * Test site change passwd.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testSiteChangePasswd() throws Exception {
     assertNull(session.getUser().getId());
@@ -191,6 +269,11 @@ public class UserServiceTest extends IntegrationTest {
     doLogout();
   }
 
+  /**
+   * Test site email login.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testSiteEmailLogin() throws Exception {
     assertNull(session.getUser().getId());
@@ -198,6 +281,11 @@ public class UserServiceTest extends IntegrationTest {
     assertNotNull(session.getUser().getId());
   }
 
+  /**
+   * Test site name login.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testSiteNameLogin() throws Exception {
     assertNull(session.getUser().getId());
@@ -205,6 +293,11 @@ public class UserServiceTest extends IntegrationTest {
     assertNotNull(session.getUser().getId());
   }
 
+  /**
+   * Test user info.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testUserInfo() throws Exception {
     doLogin();
@@ -218,6 +311,11 @@ public class UserServiceTest extends IntegrationTest {
     assertEqualGroupLists(adminsGroupDTO, adminsGroup);
   }
 
+  /**
+   * Update another user fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = AccessViolationException.class)
   public void updateAnotherUserFails() throws Exception {
     assertNull(session.getUser().getId());
@@ -229,16 +327,31 @@ public class UserServiceTest extends IntegrationTest {
     userService.updateUser(getHash(), user, simpleLang);
   }
 
+  /**
+   * Updated user.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void updatedUser() throws Exception {
     updateUser("test2", "test2", "example1234-2@example.com");
   }
 
+  /**
+   * Updated user existing email fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = EmailAddressInUseException.class)
   public void updatedUserExistingEmailFails() throws Exception {
     updateUser("test", "test", properties.getAdminEmail());
   }
 
+  /**
+   * Updated user existing short name fails.
+   *
+   * @throws Exception the exception
+   */
   @Ignore
   @Test(expected = GroupShortNameInUseException.class)
   public void updatedUserExistingShortNameFails() throws Exception {
@@ -247,6 +360,14 @@ public class UserServiceTest extends IntegrationTest {
     updateUser(properties.getAdminShortName(), "test", "example1234@example.com");
   }
 
+  /**
+   * Update user.
+   *
+   * @param shortName the short name
+   * @param longName the long name
+   * @param email the email
+   * @throws IOException Signals that an I/O exception has occurred.
+   */
   private void updateUser(final String shortName, final String longName, final String email)
       throws IOException {
     assertNull(session.getUser().getId());
@@ -260,6 +381,11 @@ public class UserServiceTest extends IntegrationTest {
     userService.updateUser(getHash(), userChanged, simpleLang);
   }
 
+  /**
+   * Update user existing long name fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = GroupLongNameInUseException.class)
   public void updateUserExistingLongNameFails() throws Exception {
     updateUser("test", properties.getAdminUserName(), "example1234@example.com");

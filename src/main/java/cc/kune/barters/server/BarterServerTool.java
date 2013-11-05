@@ -47,11 +47,29 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BarterServerTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BarterServerTool extends AbstractWaveBasedServerTool implements ServerToolWithWaveGadget {
 
+  /** The Constant BARTER_GADGET. */
   private static final String BARTER_GADGET = "http://troco.ourproject.org/gadget/org.ourproject.troco.client.TrocoWaveGadget.gadget.xml";
+  
+  /** The gadget url. */
   private final URL gadgetUrl;
 
+  /**
+   * Instantiates a new barter server tool.
+   *
+   * @param contentManager the content manager
+   * @param containerManager the container manager
+   * @param configurationManager the configuration manager
+   * @param i18n the i18n
+   * @param creationService the creation service
+   */
   @Inject
   public BarterServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
@@ -62,11 +80,17 @@ public class BarterServerTool extends AbstractWaveBasedServerTool implements Ser
     gadgetUrl = UrlUtils.of(BARTER_GADGET);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerToolWithWaveGadget#getGadgetUrl()
+   */
   @Override
   public URL getGadgetUrl() {
     return gadgetUrl;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#initGroup(cc.kune.domain.User, cc.kune.domain.Group, java.lang.Object[])
+   */
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     final Container rootFolder = createRoot(group);
@@ -74,17 +98,26 @@ public class BarterServerTool extends AbstractWaveBasedServerTool implements Ser
     return group;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.AbstractServerTool#onCreateContainer(cc.kune.domain.Container, cc.kune.domain.Container)
+   */
   @Override
   public void onCreateContainer(final Container container, final Container parent) {
     setContainerAcl(container);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.AbstractServerTool#onCreateContent(cc.kune.domain.Content, cc.kune.domain.Container)
+   */
   @Override
   public void onCreateContent(final Content content, final Container parent) {
     content.setStatus(ContentStatus.publishedOnline);
     content.setPublishedOn(new Date());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.AbstractServerTool#setContainerAcl(cc.kune.domain.Container)
+   */
   @Override
   protected void setContainerAcl(final Container container) {
     final AccessLists bartersAcl = new AccessLists();

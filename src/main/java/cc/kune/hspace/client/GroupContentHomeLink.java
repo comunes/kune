@@ -34,23 +34,47 @@ import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupContentHomeLink.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupContentHomeLink extends Composite {
 
+  /**
+   * The Interface GroupContentHomeLinkUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface GroupContentHomeLinkUiBinder extends UiBinder<Widget, GroupContentHomeLink> {
   }
 
+  /** The ui binder. */
   private static GroupContentHomeLinkUiBinder uiBinder = GWT.create(GroupContentHomeLinkUiBinder.class);
 
+  /** The icon. */
   @UiField
   Image icon;
 
+  /** The link. */
   @UiField
   Hyperlink link;
 
+  /**
+   * Instantiates a new group content home link.
+   */
   public GroupContentHomeLink() {
     initWidget(uiBinder.createAndBindUi(this));
   }
 
+  /**
+   * Sets the values.
+   *
+   * @param logoImageUrl the logo image url
+   * @param text the text
+   * @param historyToken the history token
+   */
   public void setValues(final String logoImageUrl, final String text, final String historyToken) {
     Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       @Override

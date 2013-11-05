@@ -30,13 +30,25 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IsGroupCondition.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class IsGroupCondition implements GuiAddCondition {
 
+  /**
+   * Instantiates a new checks if is group condition.
+   */
   @Inject
   public IsGroupCondition() {
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {
     final Object target = descr.getTarget();

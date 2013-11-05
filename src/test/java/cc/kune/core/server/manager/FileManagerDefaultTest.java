@@ -28,11 +28,21 @@ import cc.kune.core.server.PersistenceTest;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FileManagerDefaultTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FileManagerDefaultTest extends PersistenceTest {
 
+  /** The file manager. */
   @Inject
   FileManager fileManager;
 
+  /**
+   * Start.
+   */
   @Before
   public void start() {
 

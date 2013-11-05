@@ -24,11 +24,28 @@ package cc.kune.gspace.client.tool;
 
 import cc.kune.core.shared.dto.HasContent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ContentViewer.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ContentViewer {
 
+  /**
+   * Attach.
+   */
   void attach();
 
+  /**
+   * Detach.
+   */
   void detach();
 
+  /**
+   * Sets the content.
+   *
+   * @param state the new content
+   */
   void setContent(HasContent state);
 }

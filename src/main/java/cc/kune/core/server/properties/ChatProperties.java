@@ -25,34 +25,70 @@ package cc.kune.core.server.properties;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
 /**
- * Syntactic sugar!
+ * Syntactic sugar!.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class ChatProperties {
+  
+  /** The properties. */
   private final KuneProperties properties;
 
+  /**
+   * Instantiates a new chat properties.
+   *
+   * @param properties the properties
+   */
   @Inject
   public ChatProperties(final KuneProperties properties) {
     this.properties = properties;
   }
 
+  /**
+   * Gets the admin jid.
+   *
+   * @return the admin jid
+   */
   public String getAdminJID() {
     return properties.get(KuneProperties.SITE_ADMIN_SHORTNAME);
   }
 
+  /**
+   * Gets the admin passwd.
+   *
+   * @return the admin passwd
+   */
   public String getAdminPasswd() {
     return properties.get(KuneProperties.SITE_ADMIN_PASSWD);
   }
 
+  /**
+   * Gets the domain.
+   *
+   * @return the domain
+   */
   public String getDomain() {
     return properties.get(KuneProperties.CHAT_DOMAIN);
   }
 
+  /**
+   * Gets the http base.
+   *
+   * @return the http base
+   */
   public String getHttpBase() {
     return properties.get(KuneProperties.CHAT_HTTP_BASE);
   }
 
+  /**
+   * Gets the room host.
+   *
+   * @return the room host
+   */
   public String getRoomHost() {
     return properties.get(KuneProperties.CHAT_ROOM_HOST);
   }

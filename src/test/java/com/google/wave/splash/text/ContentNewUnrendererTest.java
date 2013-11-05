@@ -25,6 +25,12 @@ package com.google.wave.splash.text;
 import org.junit.Ignore;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentNewUnrendererTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentNewUnrendererTest {
   // private static final IdURIEncoderDecoder CODEC_URI = new
   // IdURIEncoderDecoder(new JavaUrlCodec());
@@ -34,6 +40,9 @@ public class ContentNewUnrendererTest {
   // private static final HashedVersionFactory HASH_FACTORY = new
   // HashedVersionZeroFactoryImpl(CODEC_URI);
 
+  /**
+   * Test basic unrender.
+   */
   @Ignore
   @Test
   public void testBasicUnrender() {

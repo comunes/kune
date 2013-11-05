@@ -21,6 +21,7 @@ package cc.kune.core.server.utils;
 
 import org.apache.commons.lang.StringUtils;
 
+// TODO: Auto-generated Javadoc
 /**
  * XML helping static methods.
  * 
@@ -30,6 +31,12 @@ import org.apache.commons.lang.StringUtils;
 final public class XmlW {
 
   // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
+  /**
+   * Escape xml.
+   *
+   * @param str the str
+   * @return the string
+   */
   static public String escapeXml(String str) {
     str = StringUtils.replace(str, "&", "&amp;");
     str = StringUtils.replace(str, "<", "&lt;");
@@ -39,10 +46,25 @@ final public class XmlW {
     return str;
   }
 
+  /**
+   * Gets the attribute.
+   *
+   * @param attribute the attribute
+   * @param text the text
+   * @return the attribute
+   */
   static public String getAttribute(String attribute, String text) {
     return getAttribute(attribute, text, 0);
   }
 
+  /**
+   * Gets the attribute.
+   *
+   * @param attribute the attribute
+   * @param text the text
+   * @param idx the idx
+   * @return the attribute
+   */
   static public String getAttribute(String attribute, String text, int idx) {
     int close = text.indexOf(">", idx);
     int attrIdx = text.indexOf(attribute + "=\"", idx);
@@ -61,6 +83,13 @@ final public class XmlW {
   }
 
   // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
+  /**
+   * Gets the content.
+   *
+   * @param tag the tag
+   * @param text the text
+   * @return the content
+   */
   static public String getContent(String tag, String text) {
     int idx = XmlW.getIndexOpeningTag(tag, text);
     if (idx == -1) {
@@ -78,10 +107,25 @@ final public class XmlW {
   // Pass in "para" and a string that starts with
   // <para> and it will return the index of the matching </para>
   // It assumes well-formed xml. Or well enough.
+  /**
+   * Gets the index closing tag.
+   *
+   * @param tag the tag
+   * @param text the text
+   * @return the index closing tag
+   */
   static public int getIndexClosingTag(String tag, String text) {
     return getIndexClosingTag(tag, text, 0);
   }
 
+  /**
+   * Gets the index closing tag.
+   *
+   * @param tag the tag
+   * @param text the text
+   * @param start the start
+   * @return the index closing tag
+   */
   static public int getIndexClosingTag(String tag, String text, int start) {
     String open = "<" + tag;
     String close = "</" + tag + ">";
@@ -110,12 +154,22 @@ final public class XmlW {
     return nextCloseIdx;
   }
 
+  /**
+   * Gets the index opening tag.
+   *
+   * @param tag the tag
+   * @param text the text
+   * @return the index opening tag
+   */
   static public int getIndexOpeningTag(String tag, String text) {
     return getIndexOpeningTag(tag, text, 0);
   }
 
   /**
    * Remove any xml tags from a String. Same as HtmlW's method.
+   *
+   * @param str the str
+   * @return the string
    */
   static public String removeXml(String str) {
     int sz = str.length();
@@ -138,6 +192,12 @@ final public class XmlW {
   }
 
   // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
+  /**
+   * Unescape xml.
+   *
+   * @param str the str
+   * @return the string
+   */
   static public String unescapeXml(String str) {
     str = StringUtils.replace(str, "&amp;", "&");
     str = StringUtils.replace(str, "&lt;", "<");
@@ -147,6 +207,14 @@ final public class XmlW {
     return str;
   }
 
+  /**
+   * Gets the index opening tag.
+   *
+   * @param tag the tag
+   * @param text the text
+   * @param start the start
+   * @return the index opening tag
+   */
   static private int getIndexOpeningTag(String tag, String text, int start) {
     // consider whitespace?
     int idx = text.indexOf("<" + tag, start);

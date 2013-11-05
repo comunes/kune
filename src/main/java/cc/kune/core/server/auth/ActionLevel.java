@@ -22,6 +22,20 @@
  \*/
 package cc.kune.core.server.auth;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum ActionLevel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum ActionLevel {
-  group, tool, container, content
+  
+  /** The group. */
+  group, 
+ /** The tool. */
+ tool, 
+ /** The container. */
+ container, 
+ /** The content. */
+ content
 }

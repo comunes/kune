@@ -64,19 +64,48 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SocialNetworkManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, Long> implements
     SocialNetworkManager {
+  
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(SocialNetworkManagerDefault.class);
 
+  /** The access rights service. */
   private final AccessRightsService accessRightsService;
+  
+  /** The finder. */
   private final GroupFinder finder;
+  
+  /** The mapper. */
   private final KuneMapper mapper;
+  
+  /** The notify service. */
   private final NotificationService notifyService;
+  
+  /** The sn cache. */
   private final SocialNetworkCache snCache;
 
+  /** The user manager. */
   private final UserManager userManager;
 
+  /**
+   * Instantiates a new social network manager default.
+   *
+   * @param provider the provider
+   * @param finder the finder
+   * @param accessRightsService the access rights service
+   * @param mapper the mapper
+   * @param userManager the user manager
+   * @param snCache the sn cache
+   * @param notifyService the notify service
+   */
   @Inject
   public SocialNetworkManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final GroupFinder finder, final AccessRightsService accessRightsService, final KuneMapper mapper,
@@ -91,6 +120,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     this.notifyService = notifyService;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#acceptJoinGroup(cc.kune.domain.User, cc.kune.domain.Group, cc.kune.domain.Group)
+   */
   @Override
   public void acceptJoinGroup(final User userLogged, final Group group, final Group inGroup)
       throws DefaultException, AccessViolationException {
@@ -106,12 +138,21 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     }
   }
 
+  /**
+   * Adds the admin.
+   *
+   * @param newAdmin the new admin
+   * @param group the group
+   */
   void addAdmin(final User newAdmin, final Group group) {
     final SocialNetwork sn = group.getSocialNetwork();
     sn.addAdmin(newAdmin.getUserGroup());
     snCache.expire(group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#addAsBuddie(cc.kune.domain.User, cc.kune.domain.User)
+   */
   @Override
   public void addAsBuddie(final User userLogged, final User toUser) {
     notifyService.notifyUserToUserByEmail(userLogged, toUser, "Added as buddie",
@@ -120,6 +161,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     snCache.expire(toUser.getUserGroup());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#addGroupToAdmins(cc.kune.domain.User, cc.kune.domain.Group, cc.kune.domain.Group)
+   */
   @Override
   public void addGroupToAdmins(final User userLogged, final Group group, final Group inGroup)
       throws DefaultException {
@@ -137,6 +181,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     snCache.expire(inGroup);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#addGroupToCollabs(cc.kune.domain.User, cc.kune.domain.Group, cc.kune.domain.Group)
+   */
   @Override
   public void addGroupToCollabs(final User userLogged, final Group group, final Group inGroup)
       throws DefaultException {
@@ -154,6 +201,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     snCache.expire(inGroup);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#addGroupToViewers(cc.kune.domain.User, cc.kune.domain.Group, cc.kune.domain.Group)
+   */
   @Override
   public void addGroupToViewers(final User userLogged, final Group group, final Group inGroup)
       throws DefaultException {
@@ -169,12 +219,26 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     snCache.expire(inGroup);
   }
 
+  /**
+   * Check group adding to self.
+   *
+   * @param group the group
+   * @param inGroup the in group
+   * @throws DefaultException the default exception
+   */
   private void checkGroupAddingToSelf(final Group group, final Group inGroup) throws DefaultException {
     if (group.equals(inGroup)) {
       throwGroupMemberException(group);
     }
   }
 
+  /**
+   * Check group is not already a member.
+   *
+   * @param group the group
+   * @param sn the sn
+   * @throws DefaultException the default exception
+   */
   private void checkGroupIsNotAlreadyAMember(final Group group, final SocialNetwork sn)
       throws DefaultException {
     if (sn.isAdmin(group) || sn.isCollab(group) || sn.isViewer(group) && notEveryOneCanView(sn)) {
@@ -182,6 +246,13 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     }
   }
 
+  /**
+   * Check user logged is admin.
+   *
+   * @param userLogged the user logged
+   * @param sn the sn
+   * @throws AccessViolationException the access violation exception
+   */
   private void checkUserLoggedIsAdmin(final User userLogged, final SocialNetwork sn)
       throws AccessViolationException {
     if (!accessRightsService.get(userLogged, sn.getAccessLists()).isAdministrable()) {
@@ -189,6 +260,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#deleteMember(cc.kune.domain.User, cc.kune.domain.Group, cc.kune.domain.Group)
+   */
   @Override
   public void deleteMember(final User userLogged, final Group group, final Group inGroup)
       throws DefaultException, AccessViolationException {
@@ -202,6 +276,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     snCache.expire(inGroup);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#denyJoinGroup(cc.kune.domain.User, cc.kune.domain.Group, cc.kune.domain.Group)
+   */
   @Override
   public void denyJoinGroup(final User userLogged, final Group group, final Group inGroup)
       throws DefaultException {
@@ -219,6 +296,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     snCache.expire(inGroup);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#findParticipation(cc.kune.domain.User, cc.kune.domain.Group)
+   */
   @Override
   public ParticipationData findParticipation(final User userLogged, final Group group)
       throws AccessViolationException {
@@ -240,6 +320,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     return new ParticipationData(adminInGroups, collabInGroups);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#findParticipationAggregated(cc.kune.domain.User, cc.kune.domain.Group)
+   */
   @Override
   public List<Group> findParticipationAggregated(final User userLogged, final Group group)
       throws AccessViolationException {
@@ -253,11 +336,17 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     return groups;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#generateResponse(cc.kune.domain.User, cc.kune.domain.Group)
+   */
   @Override
   public SocialNetworkDataDTO generateResponse(final User userLogged, final Group group) {
     return mapper.map(getSocialNetworkData(userLogged, group), SocialNetworkDataDTO.class);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#get(cc.kune.domain.User, cc.kune.domain.Group)
+   */
   @Override
   public SocialNetwork get(final User petitioner, final Group group) throws AccessViolationException {
     final SocialNetwork sn = group.getSocialNetwork();
@@ -269,6 +358,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     return sn;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#getSocialNetworkData(cc.kune.domain.User, cc.kune.domain.Group)
+   */
   @Override
   public SocialNetworkData getSocialNetworkData(final User userLogged, final Group group) {
     final SocialNetworkData socialNetData = new SocialNetworkData();
@@ -334,22 +426,49 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     return socialNetData;
   }
 
+  /**
+   * Checks if is closed.
+   *
+   * @param admissionType the admission type
+   * @return true, if is closed
+   */
   private boolean isClosed(final AdmissionType admissionType) {
     return admissionType.equals(AdmissionType.Closed);
   }
 
+  /**
+   * Checks if is moderated.
+   *
+   * @param admissionType the admission type
+   * @return true, if is moderated
+   */
   private boolean isModerated(final AdmissionType admissionType) {
     return admissionType.equals(AdmissionType.Moderated);
   }
 
+  /**
+   * Checks if is open.
+   *
+   * @param admissionType the admission type
+   * @return true, if is open
+   */
   private boolean isOpen(final AdmissionType admissionType) {
     return admissionType.equals(AdmissionType.Open);
   }
 
+  /**
+   * Not every one can view.
+   *
+   * @param sn the sn
+   * @return true, if successful
+   */
   private boolean notEveryOneCanView(final SocialNetwork sn) {
     return !sn.getAccessLists().getViewers().getMode().equals(GroupListMode.EVERYONE);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#requestToJoin(cc.kune.domain.User, cc.kune.domain.Group)
+   */
   @Override
   public SocialNetworkRequestResult requestToJoin(final User userLogged, final Group inGroup)
       throws DefaultException, UserMustBeLoggedException {
@@ -389,6 +508,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#setAdminAsCollab(cc.kune.domain.User, cc.kune.domain.Group, cc.kune.domain.Group)
+   */
   @Override
   public void setAdminAsCollab(final User userLogged, final Group group, final Group inGroup)
       throws DefaultException {
@@ -409,6 +531,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#setCollabAsAdmin(cc.kune.domain.User, cc.kune.domain.Group, cc.kune.domain.Group)
+   */
   @Override
   public void setCollabAsAdmin(final User userLogged, final Group group, final Group inGroup)
       throws DefaultException {
@@ -426,6 +551,12 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     }
   }
 
+  /**
+   * Throw group member exception.
+   *
+   * @param group the group
+   * @throws DefaultException the default exception
+   */
   private void throwGroupMemberException(final Group group) throws DefaultException {
     if (group.isPersonal()) {
       throw new AlreadyUserMemberException();
@@ -434,6 +565,9 @@ public class SocialNetworkManagerDefault extends DefaultManager<SocialNetwork, L
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.SocialNetworkManager#unJoinGroup(cc.kune.domain.Group, cc.kune.domain.Group)
+   */
   @Override
   public void unJoinGroup(final Group groupToUnJoin, final Group inGroup) throws DefaultException {
     final SocialNetwork sn = inGroup.getSocialNetwork();

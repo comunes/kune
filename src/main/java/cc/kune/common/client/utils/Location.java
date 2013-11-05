@@ -18,37 +18,63 @@ package cc.kune.common.client.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Location.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class Location {
+  
+  /** The hash. */
   private String hash;
+  
+  /** The host. */
   private String host;
+  
+  /** The host name. */
   private String hostName;
+  
+  /** The href. */
   private String href;
+  
+  /** The path. */
   private String path;
+  
+  /** The port. */
   private String port;
+  
+  /** The protocol. */
   private String protocol;
+  
+  /** The query string. */
   private String queryString;
+  
+  /** The param map. */
   private HashMap<String, String> paramMap;
 
   /**
    * sample: #site.docs.3.1
-   **/
+   *
+   * @return the hash
+   */
   public String getHash() {
     return hash;
   }
 
   /**
-   * sample: locahost:8080
-   * 
-   * @return
+   * sample: locahost:8080.
+   *
+   * @return the host
    */
   public String getHost() {
     return host;
   }
 
   /**
-   * sample: locahost
-   * 
-   * @return
+   * sample: locahost.
+   *
+   * @return the host name
    */
   public String getHostName() {
     return hostName;
@@ -56,73 +82,136 @@ public class Location {
 
   /**
    * sample: http://localhost:8080/ws/#site.docs.3.1?locale=en&log_level=INFO
-   **/
+   *
+   * @return the href
+   */
   public String getHref() {
     return href;
   }
 
+  /**
+   * Gets the parameter.
+   *
+   * @param name the name
+   * @return the parameter
+   */
   public String getParameter(final String name) {
     return paramMap.get(name);
   }
 
+  /**
+   * Gets the parameter map.
+   *
+   * @return the parameter map
+   */
   public Map<String, String> getParameterMap() {
     return paramMap;
   }
 
   /**
-   * sample: /ws/
-   * 
-   * @return
+   * sample: /ws/.
+   *
+   * @return the path
    */
   public String getPath() {
     return path;
   }
 
+  /**
+   * Gets the port.
+   *
+   * @return the port
+   */
   public String getPort() {
     return port;
   }
 
+  /**
+   * Gets the protocol.
+   *
+   * @return the protocol
+   */
   public String getProtocol() {
     return protocol;
   }
 
   /**
-   * sample: ?locale=en&log_level=INFO
-   * 
-   * @return
+   * sample: ?locale=en&log_level=INFO.
+   *
+   * @return the query string
    */
   public String getQueryString() {
     return queryString;
   }
 
+  /**
+   * Sets the hash.
+   *
+   * @param hash the new hash
+   */
   protected void setHash(final String hash) {
     this.hash = hash;
   }
 
+  /**
+   * Sets the host.
+   *
+   * @param host the new host
+   */
   protected void setHost(final String host) {
     this.host = host;
   }
 
+  /**
+   * Sets the host name.
+   *
+   * @param hostName the new host name
+   */
   protected void setHostName(final String hostName) {
     this.hostName = hostName;
   }
 
+  /**
+   * Sets the href.
+   *
+   * @param href the new href
+   */
   protected void setHref(final String href) {
     this.href = href;
   }
 
+  /**
+   * Sets the path.
+   *
+   * @param path the new path
+   */
   protected void setPath(final String path) {
     this.path = path;
   }
 
+  /**
+   * Sets the port.
+   *
+   * @param port the new port
+   */
   protected void setPort(final String port) {
     this.port = port;
   }
 
+  /**
+   * Sets the protocol.
+   *
+   * @param protocol the new protocol
+   */
   protected void setProtocol(final String protocol) {
     this.protocol = protocol;
   }
 
+  /**
+   * Sets the query string.
+   *
+   * @param queryString the new query string
+   */
   protected void setQueryString(final String queryString) {
     this.queryString = queryString;
     paramMap = new HashMap<String, String>();
@@ -141,6 +230,12 @@ public class Location {
     }
   }
 
+  /**
+   * Unescape.
+   *
+   * @param val the val
+   * @return the string
+   */
   private native String unescape(String val) /*-{
                                                 return unescape(val);
                                              }-*/;

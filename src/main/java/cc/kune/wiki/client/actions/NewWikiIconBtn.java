@@ -31,8 +31,22 @@ import cc.kune.wiki.shared.WikiToolConstants;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewWikiIconBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewWikiIconBtn extends NewContentBtn {
 
+  /**
+   * Instantiates a new new wiki icon btn.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   * @param shorcutReg the shorcut reg
+   */
   @Inject
   public NewWikiIconBtn(final I18nTranslationService i18n, final NewContentAction action,
       final IconicResources res, final GlobalShortcutRegister shorcutReg) {

@@ -44,16 +44,30 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AuthorizatedMethodInterceptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class AuthorizatedMethodInterceptor implements MethodInterceptor {
 
+  /** The access service provider. */
   @Inject
   private Provider<AccessService> accessServiceProvider;
+  
+  /** The group manager provider. */
   @Inject
   private Provider<GroupManager> groupManagerProvider;
+  
+  /** The user session provider. */
   @Inject
   private Provider<UserSessionManager> userSessionProvider;
 
+  /* (non-Javadoc)
+   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+   */
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
     final Object[] arguments = invocation.getArguments();

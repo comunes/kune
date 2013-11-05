@@ -45,22 +45,39 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
 /**
- * 
  * You must call {@link UserSNPresenter#refreshActions()} when adding some
- * action externally with
+ * action externally with.
+ *
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
- * 
  */
 
 public class UserSNConfActions extends AbstractSNActionsRegistry {
 
+  /** The Constant ADD_BUDDIE_BTN. */
   public static final String ADD_BUDDIE_BTN = "user-sn-add-buddie-btn";
 
+  /** The Constant OPTIONS_MENU. */
   public static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
+  
+  /** The Constant VISIBILITY_SUBMENU. */
   public static final SubMenuDescriptor VISIBILITY_SUBMENU = new SubMenuDescriptor();
 
+  /**
+   * Instantiates a new user sn conf actions.
+   *
+   * @param session the session
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param userBuddiesVisibility the user buddies visibility
+   * @param res the res
+   * @param isGroupCondition the is group condition
+   * @param addNewBuddiesAction the add new buddies action
+   */
   @Inject
   public UserSNConfActions(final Session session, final StateManager stateManager,
       final I18nTranslationService i18n, final Provider<UserSNVisibilityMenuItem> userBuddiesVisibility,
@@ -121,17 +138,24 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
   }
 
   /**
-   * 
    * You must call {@link UserSNPresenter#refreshActions()} when adding some
-   * action externally with
+   * action externally with.
+   *
+   * @param action the action
+   * @return true, if successful
    * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
-   * 
    */
   @Override
   public boolean add(final GuiActionDescrip action) {
     return addImpl(action);
   }
 
+  /**
+   * Adds the impl.
+   *
+   * @param action the action
+   * @return true, if successful
+   */
   private boolean addImpl(final GuiActionDescrip action) {
     return super.add(action);
   }

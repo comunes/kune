@@ -30,8 +30,10 @@ import com.google.inject.BindingAnnotation;
 // TODO: Auto-generated Javadoc
 /**
  * Use in *RPC methods to check if user is a translator of the site
- *
+ * 
  * The first param in the method must be the userHash.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)

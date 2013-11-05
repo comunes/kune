@@ -48,20 +48,51 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ToolSelectorPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ToolSelectorPresenter extends
     Presenter<ToolSelectorPresenter.ToolSelectorView, ToolSelectorPresenter.ToolSelectorProxy> implements
     ToolSelector {
 
+  /**
+   * The Interface ToolSelectorProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface ToolSelectorProxy extends Proxy<ToolSelectorPresenter> {
   }
 
+  /**
+   * The Interface ToolSelectorView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ToolSelectorView extends View {
+    
+    /**
+     * Adds the item.
+     *
+     * @param item the item
+     */
     void addItem(ToolSelectorItemView item);
   }
 
+  /** The tools. */
   private final HashMap<String, ToolSelectorItem> tools;
 
+  /**
+   * Instantiates a new tool selector presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param stateManager the state manager
+   */
   @Inject
   public ToolSelectorPresenter(final EventBus eventBus, final ToolSelectorView view,
       final ToolSelectorProxy proxy, final StateManager stateManager) {
@@ -98,6 +129,9 @@ public class ToolSelectorPresenter extends
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.selector.ToolSelector#addTool(cc.kune.gspace.client.tool.selector.ToolSelectorItem)
+   */
   @Override
   public void addTool(final ToolSelectorItem item) {
     final String name = item.getToolShortName();
@@ -114,6 +148,11 @@ public class ToolSelectorPresenter extends
     // }
   }
 
+  /**
+   * Check tool.
+   *
+   * @param tool the tool
+   */
   private void checkTool(final ToolSelectorItem tool) {
     if (tool == null) {
       throw new UIException("Trying to activate an unregistered tool in client");
@@ -121,12 +160,25 @@ public class ToolSelectorPresenter extends
 
   }
 
+  /**
+   * On group changed.
+   *
+   * @param newGroupName the new group name
+   */
   void onGroupChanged(final String newGroupName) {
     for (final String name : tools.keySet()) {
       tools.get(name).setGroupShortName(newGroupName);
     }
   }
 
+  /**
+   * On tool changed.
+   *
+   * @param oldTool the old tool
+   * @param newTool the new tool
+   * @param oldToken the old token
+   * @param newToken the new token
+   */
   void onToolChanged(final String oldTool, final String newTool, final StateToken oldToken,
       final StateToken newToken) {
     Log.debug("Registered tools: " + tools.keySet().toString());
@@ -147,6 +199,9 @@ public class ToolSelectorPresenter extends
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);

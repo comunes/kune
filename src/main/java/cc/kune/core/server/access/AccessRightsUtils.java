@@ -30,12 +30,27 @@ import cc.kune.domain.User;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AccessRightsUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class AccessRightsUtils {
 
+  /** The rights service. */
   @Inject
   private static AccessRightsService rightsService;
 
+  /**
+   * Correct member.
+   *
+   * @param user the user
+   * @param group the group
+   * @param memberType the member type
+   * @return true, if successful
+   */
   public static boolean correctMember(final User user, final Group group, final AccessRol memberType) {
 
     final AccessRights accessRights = rightsService.get(user, group.getSocialNetwork().getAccessLists());

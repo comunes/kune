@@ -22,8 +22,19 @@
  */
 package cc.kune.core.client.i18n;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nConvertMethodName.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nConvertMethodName {
 
+  /**
+   * The main method.
+   *
+   * @param args the arguments
+   */
   public static void main(final String... args) {
     if (args.length == 0) {
       System.err.print("Syntax: I18nConvertMethodName 'A string message to convert'\n");

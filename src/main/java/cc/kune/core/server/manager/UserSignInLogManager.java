@@ -25,19 +25,21 @@ package cc.kune.core.server.manager;
 
 import cc.kune.domain.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface UserSignInLogManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface UserSignInLogManager {
 
   /**
-   * Log a new user session signin
-   * 
-   * @param user
-   *          the user
-   * @param ipAddress
-   *          the ip address of the client
-   * @param userAgent
-   *          the user agent of the client
-   * @param hash
-   *          the session hash
+   * Log a new user session signin.
+   *
+   * @param user the user
+   * @param ipAddress the ip address of the client
+   * @param userAgent the user agent of the client
+   * @param hash the session hash
    */
   void log(User user, String ipAddress, String userAgent, String hash);
 

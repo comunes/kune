@@ -35,15 +35,35 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TutorialBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class TutorialBtn extends ButtonDescriptor {
 
+  /**
+   * The Class ShowTutorialAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @Singleton
   public static class ShowTutorialAction extends RolAction {
 
+    /** The bus. */
     private final EventBus bus;
+    
+    /** The state manager. */
     private final StateManager stateManager;
 
+    /**
+     * Instantiates a new show tutorial action.
+     *
+     * @param eventBus the event bus
+     * @param stateManager the state manager
+     */
     @Inject
     public ShowTutorialAction(final EventBus eventBus, final StateManager stateManager) {
       super(AccessRolDTO.Editor, true);
@@ -51,6 +71,9 @@ public class TutorialBtn extends ButtonDescriptor {
       this.stateManager = stateManager;
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       ShowHelpContainerEvent.fire(bus, new OnTutorialClose() {
@@ -63,8 +86,16 @@ public class TutorialBtn extends ButtonDescriptor {
 
   }
 
+  /** The Constant INFO_CONTAINER_ID. */
   public static final String INFO_CONTAINER_ID = "k-container-info-id";
 
+  /**
+   * Instantiates a new tutorial btn.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public TutorialBtn(final I18nTranslationService i18n, final ShowTutorialAction action,
       final IconicResources res) {

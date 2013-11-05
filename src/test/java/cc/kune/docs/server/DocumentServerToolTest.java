@@ -27,21 +27,37 @@ import static cc.kune.docs.shared.DocsToolConstants.*;
 import org.junit.Before;
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DocumentServerToolTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DocumentServerToolTest { // extends PersistenceTest {
 
-  private DocumentServerTool serverTool;
+  /** The server tool. */
+ private DocumentServerTool serverTool;
 
+  /**
+   * Before.
+   */
   @Before
   public void before() {
     serverTool = new DocumentServerTool(null, null, null, null, null);
   }
 
+  /**
+   * Test create container in correct container.
+   */
   @Test
   public void testCreateContainerInCorrectContainer() {
     serverTool.checkTypesBeforeContainerCreation(TYPE_ROOT, TYPE_FOLDER);
     serverTool.checkTypesBeforeContainerCreation(TYPE_FOLDER, TYPE_FOLDER);
   }
 
+  /**
+   * Test create content in correct container.
+   */
   @Test
   public void testCreateContentInCorrectContainer() {
     serverTool.checkTypesBeforeContentCreation(TYPE_ROOT, TYPE_DOCUMENT);

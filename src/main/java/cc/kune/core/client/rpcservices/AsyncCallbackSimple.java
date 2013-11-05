@@ -28,11 +28,22 @@ import cc.kune.core.client.errors.ErrorHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AsyncCallbackSimple.
+ *
+ * @param <T> the generic type
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AsyncCallbackSimple<T> implements AsyncCallback<T> {
 
+  /** The error handler. */
   @Inject
   private static ErrorHandler errorHandler;
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.rpc.AsyncCallback#onFailure(java.lang.Throwable)
+   */
   @Override
   public void onFailure(final Throwable caught) {
     NotifyUser.hideProgress();

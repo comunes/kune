@@ -24,9 +24,22 @@ package cc.kune.core.server.content;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class ContentUtils {
 
   // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 14:05
+  /**
+   * Parses the id.
+   *
+   * @param id the id
+   * @return the long
+   * @throws ContentNotFoundException the content not found exception
+   */
   public static Long parseId(final String id) throws ContentNotFoundException {
     try {
       return Long.valueOf(id);
@@ -36,6 +49,9 @@ public final class ContentUtils {
     }
   }
 
+  /**
+   * Instantiates a new content utils.
+   */
   private ContentUtils() {
   }
 }

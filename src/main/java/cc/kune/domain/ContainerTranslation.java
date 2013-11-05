@@ -34,39 +34,76 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import cc.kune.domain.utils.HasId;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContainerTranslation.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Entity
 @Table(name = "container_translation")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class ContainerTranslation implements HasId {
+  
+  /** The id. */
   @Id
   @GeneratedValue
   private Long id;
 
+  /** The language. */
   @ManyToOne(fetch = FetchType.LAZY)
   private I18nLanguage language;
 
+  /** The name. */
   private String name;
 
+  /* (non-Javadoc)
+   * @see cc.kune.domain.utils.HasId#getId()
+   */
   public Long getId() {
     return id;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
+   */
   public void setId(final Long id) {
     this.id = id;
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return name;
   }
 
+  /**
+   * Sets the name.
+   *
+   * @param name the new name
+   */
   public void setName(final String name) {
     this.name = name;
   }
 
+  /**
+   * Gets the language.
+   *
+   * @return the language
+   */
   public I18nLanguage getLanguage() {
     return language;
   }
 
+  /**
+   * Sets the language.
+   *
+   * @param language the new language
+   */
   public void setLanguage(final I18nLanguage language) {
     this.language = language;
   }

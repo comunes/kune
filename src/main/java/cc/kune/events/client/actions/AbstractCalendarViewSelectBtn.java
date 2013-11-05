@@ -27,8 +27,22 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 
 import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractCalendarViewSelectBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AbstractCalendarViewSelectBtn extends ButtonDescriptor {
 
+  /**
+   * Instantiates a new abstract calendar view select btn.
+   *
+   * @param action the action
+   * @param text the text
+   * @param days the days
+   * @param view the view
+   */
   public AbstractCalendarViewSelectBtn(final CalendarViewSelectAction action, final String text,
       final int days, final CalendarViews view) {
     super(text, action);

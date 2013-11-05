@@ -36,17 +36,18 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class AurorisColorPicker enables the auroris color picker in wave editor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class AurorisColorPicker extends AbstractColorPicker {
 
   /**
    * Instantiates a new sample custom color picker.
-   * 
-   * @param colorPicker
-   *          the color picker
+   *
    */
   public AurorisColorPicker() {
     super(ComplexColorPicker.getInstance());

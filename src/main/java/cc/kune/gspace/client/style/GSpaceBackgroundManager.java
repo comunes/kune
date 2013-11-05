@@ -22,13 +22,33 @@
  */
 package cc.kune.gspace.client.style;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface GSpaceBackgroundManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface GSpaceBackgroundManager {
 
+  /**
+   * Clear background image.
+   */
   void clearBackgroundImage();
 
+  /**
+   * Restore background image.
+   */
   void restoreBackgroundImage();
 
+  /**
+   * Sets the background image.
+   */
   void setBackgroundImage();
 
+  /**
+   * Sets the no cache.
+   *
+   * @param noCache the new no cache
+   */
   void setNoCache(boolean noCache);
 }

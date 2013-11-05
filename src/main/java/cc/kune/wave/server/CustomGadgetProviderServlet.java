@@ -39,16 +39,27 @@ import com.google.common.collect.MapMaker;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
+// TODO: Auto-generated Javadoc
 /**
  * The servlet for fetching available gadgets from a json file on the server.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @SuppressWarnings("serial")
 @Singleton
 public class CustomGadgetProviderServlet extends HttpServlet {
 
+  /** The Constant LOG. */
   private static final Logger LOG = Logger.getLogger(FileAccountStore.class.getName());
+  
+  /** The json cache. */
   private final ConcurrentMap<String, String> jsonCache;
 
+  /**
+   * Instantiates a new custom gadget provider servlet.
+   *
+   * @param resourceBases the resource bases
+   */
   @Inject
   public CustomGadgetProviderServlet(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
     jsonCache = new MapMaker().expireAfterWrite(5, TimeUnit.MINUTES).makeComputingMap(
@@ -67,6 +78,9 @@ public class CustomGadgetProviderServlet extends HttpServlet {
         });
   }
 
+  /* (non-Javadoc)
+   * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+   */
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws IOException {

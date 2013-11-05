@@ -28,44 +28,97 @@ import java.util.List;
 import com.calclab.emite.core.client.packet.DelegatedPacket;
 import com.calclab.emite.core.client.packet.IPacket;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XMLGuiActionDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class XMLGuiActionDescriptor extends DelegatedPacket {
 
+  /** The rol. */
   private XMLRol rol;
 
+  /** The type ids. */
   private List<XMLTypeId> typeIds;
 
+  /**
+   * Instantiates a new xML gui action descriptor.
+   *
+   * @param xml the xml
+   */
   public XMLGuiActionDescriptor(final IPacket xml) {
     super(xml);
   }
 
+  /**
+   * Gets the desc name.
+   *
+   * @return the desc name
+   */
   public String getDescName() {
     return getFirstChild("name").getText();
   }
 
+  /**
+   * Gets the description.
+   *
+   * @return the description
+   */
   public String getDescription() {
     return getFirstChild("description").getText();
   }
 
+  /**
+   * Gets the extension name.
+   *
+   * @return the extension name
+   */
   public String getExtensionName() {
     return getFirstChild("extensionName").getText();
   }
 
+  /**
+   * Gets the new content text intro.
+   *
+   * @return the new content text intro
+   */
   public String getNewContentTextIntro() {
     return getFirstChild("new-content-textintro").getText();
   }
 
+  /**
+   * Gets the new content title.
+   *
+   * @return the new content title
+   */
   public String getNewContentTitle() {
     return getFirstChild("new-content-title").getText();
   }
 
+  /**
+   * Gets the participants.
+   *
+   * @return the participants
+   */
   public String getParticipants() {
     return getFirstChild("participants").getText();
   }
 
+  /**
+   * Gets the path.
+   *
+   * @return the path
+   */
   public String getPath() {
     return getFirstChild("path").getText();
   }
 
+  /**
+   * Gets the rol.
+   *
+   * @return the rol
+   */
   public XMLRol getRol() {
     if (rol == null) {
       rol = new XMLRol(getFirstChild("rol"));
@@ -73,10 +126,20 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
     return rol;
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public String getType() {
     return getFirstChild("type").getText();
   }
 
+  /**
+   * Gets the type ids.
+   *
+   * @return the type ids
+   */
   public List<XMLTypeId> getTypeIds() {
     if (typeIds == null) {
       typeIds = new ArrayList<XMLTypeId>();
@@ -87,6 +150,11 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
     return typeIds;
   }
 
+  /**
+   * Checks if is enabled.
+   *
+   * @return true, if is enabled
+   */
   public boolean isEnabled() {
     return Boolean.valueOf(getFirstChild("enabled").getText());
   }

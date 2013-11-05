@@ -28,68 +28,135 @@ import org.openqa.selenium.support.FindBy;
 
 import cc.kune.selenium.PageObject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserSpacePageObject.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserSpacePageObject extends PageObject {
 
+  /** The add participant. */
   @FindBy(xpath = "//span[2]/span")
   private WebElement addParticipant;
 
+  /** The cursive. */
   @FindBy(xpath = "//div[2]/div/div[2]/div[3]/div[4]")
   private WebElement cursive;
 
+  /** The first reply titlebar. */
   @FindBy(xpath = "//div[3]/div/div/div[2]/div/div/div[3]")
   private WebElement firstReplyTitlebar;
 
+  /** The reply root blip. */
   @FindBy(xpath = "//div[10]/div/div/div/div[3]/div/div[2]")
   private WebElement replyRootBlip;
 
+  /** The root blip. */
   @FindBy(xpath = "//div[10]/div/div/div/div[3]/div/div/div/div/div/div[3]")
   private WebElement rootBlip;
 
+  /** The root blip text. */
   @FindBy(xpath = "//ul/div")
   private WebElement rootBlipText;
+  
+  /** The root edit. */
   @FindBy(xpath = "//div[3]/div/div/div/div/div/div/span")
   // this works but with click coords 5,5
   private WebElement rootEdit;
 
+  /**
+   * Instantiates a new user space page object.
+   */
   public UserSpacePageObject() {
   }
 
+  /**
+   * Gets the adds the parcipant.
+   *
+   * @return the adds the parcipant
+   */
   public WebElement getAddParcipant() {
     return addParticipant;
   }
 
+  /**
+   * Gets the cursive.
+   *
+   * @return the cursive
+   */
   public WebElement getCursive() {
     return cursive;
   }
 
+  /**
+   * Gets the first reply titlebar.
+   *
+   * @return the first reply titlebar
+   */
   public WebElement getFirstReplyTitlebar() {
     return firstReplyTitlebar;
   }
 
+  /**
+   * Gets the first wave.
+   *
+   * @return the first wave
+   */
   public WebElement getFirstWave() {
     return findElement(By.xpath("//div[3]/div/div/span"));
   }
 
+  /**
+   * Gets the new wave.
+   *
+   * @return the new wave
+   */
   public WebElement getNewWave() {
     return findElement(By.xpath("//div[2]/div[2]/div[4]"));
   }
 
+  /**
+   * Gets the reply root blip.
+   *
+   * @return the reply root blip
+   */
   public WebElement getReplyRootBlip() {
     return replyRootBlip;
   }
 
+  /**
+   * Gets the root blip.
+   *
+   * @return the root blip
+   */
   public WebElement getRootBlip() {
     return rootBlip;
   }
 
+  /**
+   * Gets the root blip text.
+   *
+   * @return the root blip text
+   */
   public WebElement getRootBlipText() {
     return rootBlipText;
   }
 
+  /**
+   * Gets the root edit.
+   *
+   * @return the root edit
+   */
   public WebElement getRootEdit() {
     return rootEdit;
   }
 
+  /**
+   * Root blip text.
+   *
+   * @return the web element
+   */
   public WebElement rootBlipText() {
     return rootBlipText;
   }

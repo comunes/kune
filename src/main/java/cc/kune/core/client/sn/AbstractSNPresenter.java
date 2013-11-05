@@ -35,23 +35,55 @@ import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractSNPresenter.
+ *
+ * @param <V> the value type
+ * @param <Proxy_> the generic type
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractSNPresenter<V extends View, Proxy_ extends Proxy<?>> extends
     Presenter<View, Proxy<?>> {
 
+  /** The Constant MAX_NUM_AVATAR_IN_A_ROW. */
   private static final int MAX_NUM_AVATAR_IN_A_ROW = 6;
 
+  /** The download provider. */
   protected final Provider<ClientFileDownloadUtils> downloadProvider;
 
+  /**
+   * Instantiates a new abstract sn presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param downloadProvider the download provider
+   */
   public AbstractSNPresenter(final EventBus eventBus, final View view, final Proxy<?> proxy,
       final Provider<ClientFileDownloadUtils> downloadProvider) {
     super(eventBus, view, proxy);
     this.downloadProvider = downloadProvider;
   }
 
+  /**
+   * Are many.
+   *
+   * @param numAvatars the num avatars
+   * @return true, if successful
+   */
   protected boolean areMany(final int numAvatars) {
     return numAvatars > MAX_NUM_AVATAR_IN_A_ROW;
   }
 
+  /**
+   * Creates the menu items.
+   *
+   * @param target the target
+   * @param registry the registry
+   * @param title the title
+   * @return the gui action desc collection
+   */
   protected GuiActionDescCollection createMenuItems(final Object target,
       final AbstractSNMembersActionsRegistry registry, final String title) {
     final GuiActionDescCollection items = new GuiActionDescCollection();
@@ -64,6 +96,12 @@ public abstract class AbstractSNPresenter<V extends View, Proxy_ extends Proxy<?
     return items;
   }
 
+  /**
+   * Gets the avatar.
+   *
+   * @param group the group
+   * @return the avatar
+   */
   protected String getAvatar(final GroupDTO group) {
     return downloadProvider.get().getGroupLogo(group);
   }

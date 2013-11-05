@@ -25,6 +25,7 @@ import org.waveprotocol.wave.model.document.raw.impl.Text;
 import org.waveprotocol.wave.model.document.util.ElementStyleView;
 import org.waveprotocol.wave.model.document.util.Point;
 
+// TODO: Auto-generated Javadoc
 /**
  * Presents a simple view of a HTML document where you can walk through every
  * node. It is rooted at a specific element (i.e. it can be a subtree of a full
@@ -44,11 +45,13 @@ public class HtmlRawViewImpl implements ElementStyleView<Node, Element, Text> { 
    */
   public static final HtmlRawViewImpl INSTANCE = new HtmlRawViewImpl(null);
 
+  /** The document element. */
   Element documentElement;
 
   /**
-   * @param documentElement
-   *          Root element for this "document"
+   * Instantiates a new html raw view impl.
+   *
+   * @param documentElement Root element for this "document"
    */
   public HtmlRawViewImpl(final Element documentElement) {
     this.documentElement = documentElement;
@@ -141,6 +144,13 @@ public class HtmlRawViewImpl implements ElementStyleView<Node, Element, Text> { 
     return getStylePropertyValue(element.getAttribute("style"), name);
   }
 
+  /**
+   * Gets the style property value.
+   *
+   * @param styles the styles
+   * @param name the name
+   * @return the style property value
+   */
   private String getStylePropertyValue(final String styles, final String name) {
     if (styles != null && styles.contains(name)) {
       for (final String stylePair : styles.split(";")) {
@@ -201,6 +211,9 @@ public class HtmlRawViewImpl implements ElementStyleView<Node, Element, Text> { 
     return node == other || (node != null && node.equals(other));
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.wave.model.document.util.ReadableDocumentView#onBeforeFilter(org.waveprotocol.wave.model.document.util.Point)
+   */
   @Override
   public void onBeforeFilter(final Point<Node> at) {
   }

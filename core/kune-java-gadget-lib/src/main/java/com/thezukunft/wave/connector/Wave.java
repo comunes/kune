@@ -27,84 +27,81 @@ package com.thezukunft.wave.connector;
 import com.google.gwt.core.client.JsArray;
 
 /**
- * This is the main interface to communicate with the wave API. IIRC it is exactly the same as the  JS API + some convenience functions.
+ * This is the main interface to communicate with the wave API. IIRC it is
+ * exactly the same as the JS API + some convenience functions.
  * 
  * @author ”Jonas Huckestein”
- *
+ * 
  */
 public interface Wave {
-	
-	/**
-	 * Get host, participant who added this gadget to the blip. Note that the host
-	 * may no longer be in the participant list.
-	 *
-	 * @return host (null if not known)
-	 */
-	Participant getHost();
 
-	/**
-	 * Returns the mode the wave is in. Match with states in {@link Mode} class.
-	 *
-	 * @return
-	 */
-	int getMode();
+  /**
+   * Get host, participant who added this gadget to the blip. Note that the host
+   * may no longer be in the participant list.
+   * 
+   * @return host (null if not known)
+   */
+  Participant getHost();
 
-	/**
-	 * Returns a Participant with the given id.
-	 *
-	 * @param The
-	 *          id of the participant to retrieve
-	 * @return The participant with the given id
-	 */
-	Participant getParticipantById(String id);
-	
-	/**
-	 * Returns a list of participants on the Wave.
-	 *
-	 * @return Participant list.
-	 */
-	JsArray<Participant> getParticipants();
+  /**
+   * Returns the mode the wave is in. Match with states in {@link Mode} class.
+   * 
+   * @return
+   */
+  int getMode();
 
-	
+  /**
+   * Returns a Participant with the given id.
+   * 
+   * @param The
+   *          id of the participant to retrieve
+   * @return The participant with the given id
+   */
+  Participant getParticipantById(String id);
 
-	State getState();
+  /**
+   * Returns a list of participants on the Wave.
+   * 
+   * @return Participant list.
+   */
+  JsArray<Participant> getParticipants();
 
-	/**
-	 * Retrieves "gadget time" which is either the playback frame time in the
-	 * playback mode or the current time otherwise.
-	 *
-	 * @return The gadget time
-	 */
-	long getTime();
+  State getState();
 
-	/**
-	 * Get the participant whose client renders this gadget.
-	 *
-	 * @return the viewer (null if not known)
-	 */
-	Participant getViewer();
+  /**
+   * Retrieves "gadget time" which is either the playback frame time in the
+   * playback mode or the current time otherwise.
+   * 
+   * @return The gadget time
+   */
+  long getTime();
 
-	/**
-	 * Indicates whether the gadget runs inside a wave container.
-	 *
-	 * @return whether the gadget runs inside a wave container
-	 */
-	boolean isInWaveContainer();
-	
+  /**
+   * Get the participant whose client renders this gadget.
+   * 
+   * @return the viewer (null if not known)
+   */
+  Participant getViewer();
 
-	/**
-	 * Returns the playback state of the wave/wavelet/gadget.
-	 *
-	 * @return whether the gadget should be in the playback state
-	 */
-	boolean isPlayback();
+  /**
+   * Indicates whether the gadget runs inside a wave container.
+   * 
+   * @return whether the gadget runs inside a wave container
+   */
+  boolean isInWaveContainer();
 
-	/**
-	 * Logs a message in the wave log
-	 * @param log
-	 */
-	void log(String log);
+  /**
+   * Returns the playback state of the wave/wavelet/gadget.
+   * 
+   * @return whether the gadget should be in the playback state
+   */
+  boolean isPlayback();
 
-
+  /**
+   * Logs a message in the wave log
+   * 
+   * @param log
+   */
+  void log(String log);
 
 }

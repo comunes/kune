@@ -31,8 +31,22 @@ import cc.kune.gspace.client.actions.NewContentBtn;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewPostIconBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewPostIconBtn extends NewContentBtn {
 
+  /**
+   * Instantiates a new new post icon btn.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   * @param shorcutReg the shorcut reg
+   */
   @Inject
   public NewPostIconBtn(final I18nTranslationService i18n, final NewContentAction action,
       final IconicResources res, final GlobalShortcutRegister shorcutReg) {

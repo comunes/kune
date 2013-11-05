@@ -61,15 +61,81 @@ import cc.kune.trash.shared.TrashToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ListsClientActions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ListsClientActions extends AbstractFoldableToolActions {
 
+  /** The all. */
   final String[] all = { TYPE_ROOT, TYPE_LIST, TYPE_POST };
+  
+  /** The all except root. */
   final String[] allExceptRoot = { TYPE_LIST, TYPE_POST };
+  
+  /** The containers. */
   final String[] containers = { TYPE_ROOT, TYPE_LIST };
+  
+  /** The containers no root. */
   final String[] containersNoRoot = { TYPE_LIST };
+  
+  /** The contents. */
   final String[] contents = { TYPE_POST };
+  
+  /** The no root. */
   final String[] noRoot = { TYPE_LIST, TYPE_POST };
 
+  /**
+   * Instantiates a new lists client actions.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param stateManager the state manager
+   * @param registry the registry
+   * @param res the res
+   * @param folderGoUp the folder go up
+   * @param newPostItem the new post item
+   * @param newPostIconBtn the new post icon btn
+   * @param newListMenuItem the new list menu item
+   * @param newListBtn the new list btn
+   * @param openContentMenuItem the open content menu item
+   * @param refreshList the refresh list
+   * @param subscribeBtn the subscribe btn
+   * @param optionsMenuContainer the options menu container
+   * @param optionsMenuContent the options menu content
+   * @param shareMenuContent the share menu content
+   * @param subscribersCount the subscribers count
+   * @param tutorialBtn the tutorial btn
+   * @param addAllMenuItem the add all menu item
+   * @param addAdminMembersMenuItem the add admin members menu item
+   * @param addCollabMembersMenuItem the add collab members menu item
+   * @param addPublicMenuItem the add public menu item
+   * @param listOpenessMenuItem the list openess menu item
+   * @param participateBtn the participate btn
+   * @param copyContent the copy content
+   * @param refreshPost the refresh post
+   * @param purgeMenuItem the purge menu item
+   * @param purgeBtn the purge btn
+   * @param purgeFolderMenuItem the purge folder menu item
+   * @param purgeFolderBtn the purge folder btn
+   * @param writeToParticipants the write to participants
+   * @param listNewMenu the list new menu
+   * @param postNewMenu the post new menu
+   * @param newMenusRegistry the new menus registry
+   * @param chatAbout the chat about
+   * @param delFolderMenuItem the del folder menu item
+   * @param delPostMenuItem the del post menu item
+   * @param moveContentMenuItem the move content menu item
+   * @param setAsHomePage the set as home page
+   * @param shareInTwitter the share in twitter
+   * @param shareInGPlus the share in g plus
+   * @param shareInIdentica the share in identica
+   * @param shareInFacebook the share in facebook
+   * @param shareInvitation the share invitation
+   * @param inviteMenuItem the invite menu item
+   */
   @Inject
   public ListsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
@@ -167,6 +233,9 @@ public class ListsClientActions extends AbstractFoldableToolActions {
         (MenuDescriptor) postNewMenu.get().withText(i18n.t("Add Gadget")));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
+   */
   @Override
   protected void createPostSessionInitActions() {
   }

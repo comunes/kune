@@ -33,6 +33,8 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface GuiActionDescrip.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface GuiActionDescrip {
 
@@ -205,12 +207,12 @@ public interface GuiActionDescrip {
   boolean mustBeAdded();
 
   /**
-   * Fired when the widget is attached
+   * Fired when the widget is attached.
    */
   void onAttach();
 
   /**
-   * Fired when the widget is detached
+   * Fired when the widget is detached.
    */
   void onDetach();
 
@@ -413,18 +415,18 @@ public interface GuiActionDescrip {
 
   /**
    * With shortcut.
-   * 
-   * @param keystroke
-   *          the keystroke
+   *
+   * @param keystroke the keystroke
+   * @param register the register
    * @return the gui action descrip
    */
   GuiActionDescrip withShortcut(KeyStroke keystroke, GlobalShortcutRegister register);
 
   /**
    * With shortcut.
-   * 
-   * @param keys
-   *          the keys (for instance "Ctrl+A")
+   *
+   * @param keys the keys (for instance "Ctrl+A")
+   * @param register the register
    * @return the gui action descrip
    */
   GuiActionDescrip withShortcut(String keys, GlobalShortcutRegister register);

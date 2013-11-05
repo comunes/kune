@@ -24,19 +24,41 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BasicMimeTypeDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BasicMimeTypeDTO implements IsSerializable {
 
+  /** The Constant IMAGE. */
   public static final String IMAGE = "image";
+  
+  /** The Constant VIDEO. */
   public static final String VIDEO = "video";
+  
+  /** The Constant AUDIO. */
   public static final String AUDIO = "audio";
 
+  /** The type. */
   private String type;
+  
+  /** The subtype. */
   private String subtype;
 
+  /**
+   * Instantiates a new basic mime type dto.
+   */
   public BasicMimeTypeDTO() {
     this(null, null);
   }
 
+  /**
+   * Instantiates a new basic mime type dto.
+   *
+   * @param mimetype the mimetype
+   */
   public BasicMimeTypeDTO(final String mimetype) {
     if (mimetype != null) {
       final String[] split = mimetype.split("/", 2);
@@ -47,74 +69,123 @@ public class BasicMimeTypeDTO implements IsSerializable {
     }
   }
 
+  /**
+   * Instantiates a new basic mime type dto.
+   *
+   * @param type the type
+   * @param subtype the subtype
+   */
   public BasicMimeTypeDTO(final String type, final String subtype) {
     this.type = type;
     this.subtype = subtype;
   }
 
+  /**
+   * Gets the subtype.
+   *
+   * @return the subtype
+   */
   public String getSubtype() {
     return subtype;
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public String getType() {
     return type;
   }
 
+  /**
+   * Checks if is avi.
+   *
+   * @return true, if is avi
+   */
   public boolean isAvi() {
     return type != null && subtype != null && type.equals("video")
         && (subtype.equals("x-msvideo") || subtype.equals("msvideo"));
   }
 
+  /**
+   * Checks if is flv.
+   *
+   * @return true, if is flv
+   */
   public boolean isFlv() {
     return type != null && subtype != null && type.equals("video")
         && (subtype.equals("flv") || subtype.equals("x-flv"));
   }
 
   /**
-   * Duplicate code in BMT
-   * 
-   * @return
+   * Duplicate code in BMT.
+   *
+   * @return true, if is image
    */
   public boolean isImage() {
     return type != null && type.equals(IMAGE);
   }
 
+  /**
+   * Checks if is mp3.
+   *
+   * @return true, if is mp3
+   */
   public boolean isMp3() {
     return type != null && subtype != null && type.equals("audio")
         && (subtype.equals("mp3") || subtype.equals("x-mp3") || (subtype.equals("mpeg")));
   }
 
+  /**
+   * Checks if is ogg.
+   *
+   * @return true, if is ogg
+   */
   public boolean isOgg() {
     // http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
     return type != null && subtype != null && subtype.equals("ogg");
   }
 
   /**
-   * Duplicate code in BMT
-   * 
-   * @return
+   * Duplicate code in BMT.
+   *
+   * @return true, if is pdf
    */
   public boolean isPdf() {
     return type != null && subtype != null && type.equals("application") && subtype.equals("pdf");
   }
 
   /**
-   * Duplicate code in BMTDTO
-   * 
-   * @return
+   * Duplicate code in BMTDTO.
+   *
+   * @return true, if is text
    */
   public boolean isText() {
     return type != null && subtype != null && type.equals("text") && subtype.equals("plain");
   }
 
+  /**
+   * Sets the subtype.
+   *
+   * @param subtype the new subtype
+   */
   public void setSubtype(final String subtype) {
     this.subtype = subtype;
   }
 
+  /**
+   * Sets the type.
+   *
+   * @param type the new type
+   */
   public void setType(final String type) {
     this.type = type;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     return subtype == null ? type : type + "/" + subtype;

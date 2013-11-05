@@ -22,6 +22,19 @@
  */
 package cc.kune.core.server.xmpp;
 
+/**
+ * The Interface Room.
+ * 
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface Room {
+
+  /**
+   * Sets the listener.
+   * 
+   * @param listener
+   *          the new listener
+   */
   void setListener(RoomListener listener);
 }

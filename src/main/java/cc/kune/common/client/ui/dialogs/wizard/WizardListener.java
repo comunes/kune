@@ -22,16 +22,43 @@
  */
 package cc.kune.common.client.ui.dialogs.wizard;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving wizard events.
+ * The class that is interested in processing a wizard
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addWizardListener<code> method. When
+ * the wizard event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see WizardEvent
+ */
 public interface WizardListener {
 
+  /**
+   * On back.
+   */
   void onBack();
 
+  /**
+   * On next.
+   */
   void onNext();
 
+  /**
+   * On finish.
+   */
   void onFinish();
 
+  /**
+   * On cancel.
+   */
   void onCancel();
 
+  /**
+   * On close.
+   */
   void onClose();
 
 }

@@ -28,25 +28,41 @@ import java.util.Map;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class IconsRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class IconsRegistry {
+  
+  /** The content types icons. */
   private final Map<String, Object> contentTypesIcons;
 
+  /**
+   * Instantiates a new icons registry.
+   */
   public IconsRegistry() {
     contentTypesIcons = new HashMap<String, Object>();
   }
 
+  /**
+   * Gets the content type icon.
+   *
+   * @param typeId the type id
+   * @return the content type icon
+   */
   public Object getContentTypeIcon(final String typeId) {
     return contentTypesIcons.get(typeId);
   }
 
   /**
    * If there is a specific icon for a type/subtype pair or a generic type icon
-   * in defect
-   * 
-   * @param typeId
-   *          the kune typeId (see *ClientTool)
-   * @param mimeType
-   * @return
+   * in defect.
+   *
+   * @param typeId the kune typeId (see *ClientTool)
+   * @param mimeType the mime type
+   * @return the content type icon
    */
   public Object getContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType) {
     Object icon = getContentTypeIcon(IdGenerator.generate(typeId,
@@ -65,21 +81,48 @@ public class IconsRegistry {
     return icon == null ? getContentTypeIcon(typeId) : icon;
   }
 
+  /**
+   * Gets the content type icon.
+   *
+   * @param typeId the type id
+   * @param contentStatus the content status
+   * @return the content type icon
+   */
   public Object getContentTypeIcon(final String typeId, final ContentStatus contentStatus) {
     final Object icon = getContentTypeIcon(IdGenerator.generate(typeId, contentStatus.toString()));
     return (icon == null ? getContentTypeIcon(typeId) : icon);
   }
 
+  /**
+   * Register content type icon.
+   *
+   * @param typeId the type id
+   * @param mimeType the mime type
+   * @param icon the icon
+   */
   public void registerContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType,
       final Object icon) {
     registerContentTypeIcon(IdGenerator.generate(typeId, mimeType.toString()), icon);
   }
 
+  /**
+   * Register content type icon.
+   *
+   * @param typeId the type id
+   * @param contentStatus the content status
+   * @param icon the icon
+   */
   public void registerContentTypeIcon(final String typeId, final ContentStatus contentStatus,
       final Object icon) {
     registerContentTypeIcon(IdGenerator.generate(typeId, contentStatus.toString()), icon);
   }
 
+  /**
+   * Register content type icon.
+   *
+   * @param contentTypeId the content type id
+   * @param icon the icon
+   */
   public void registerContentTypeIcon(final String contentTypeId, final Object icon) {
     contentTypesIcons.put(contentTypeId, icon);
   }

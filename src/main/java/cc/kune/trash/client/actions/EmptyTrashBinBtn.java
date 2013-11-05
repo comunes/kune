@@ -41,13 +41,34 @@ import cc.kune.trash.shared.TrashToolConstants;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EmptyTrashBinBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EmptyTrashBinBtn extends ButtonDescriptor {
 
+  /**
+   * The Class EmptyTrashBinAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class EmptyTrashBinAction extends RolAction {
 
+    /** The content service. */
     private final ContentServiceHelper contentService;
+    
+    /** The session. */
     private final Session session;
 
+    /**
+     * Instantiates a new empty trash bin action.
+     *
+     * @param contentService the content service
+     * @param res the res
+     * @param session the session
+     */
     @Inject
     public EmptyTrashBinAction(final ContentServiceHelper contentService, final CoreResources res,
         final Session session) {
@@ -56,14 +77,25 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
       this.session = session;
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       contentService.purgeAll(session.getCurrentStateToken());
     }
 
   }
+  
+  /** The reg. */
   private final HandlerRegistration reg;
 
+  /**
+   * Instantiates a new empty trash bin btn.
+   *
+   * @param action the action
+   * @param stateManager the state manager
+   */
   @Inject
   public EmptyTrashBinBtn(final EmptyTrashBinAction action, final StateManager stateManager) {
     super(action);
@@ -82,17 +114,28 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#onDetach()
+   */
   @Override
   public void onDetach() {
     super.onDetach();
     unregister();
   }
 
+  /**
+   * Sets the visibility.
+   *
+   * @param ctn the new visibility
+   */
   private void setVisibility(final ContainerDTO ctn) {
     final boolean visible = ctn.getChilds().size() > 0 || ctn.getContents().size() > 0;
     setVisible(visible);
   }
 
+  /**
+   * Unregister.
+   */
   public void unregister() {
     reg.removeHandler();
   }

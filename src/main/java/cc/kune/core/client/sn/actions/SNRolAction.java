@@ -34,10 +34,34 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SNRolAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class SNRolAction extends RolActionAutoUpdated {
+  
+  /** The i18n. */
   protected final I18nTranslationService i18n;
+  
+  /** The sn service provider. */
   protected final Provider<SocialNetServiceAsync> snServiceProvider;
 
+  /**
+   * Instantiates a new sN rol action.
+   *
+   * @param stateManager the state manager
+   * @param session the session
+   * @param i18n the i18n
+   * @param res the res
+   * @param snServiceProvider the sn service provider
+   * @param rightsManager the rights manager
+   * @param rolRequired the rol required
+   * @param authNeed the auth need
+   * @param visibleForNonMemb the visible for non memb
+   * @param visibleForMembers the visible for members
+   */
   @Inject
   public SNRolAction(final StateManager stateManager, final Session session,
       final I18nTranslationService i18n, final IconicResources res,

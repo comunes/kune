@@ -29,9 +29,22 @@ import cc.kune.gspace.client.actions.NewContainerBtn;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewListBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewListBtn extends ButtonDescriptor {
   // Why not to use NewContainerBtn?
 
+  /**
+   * Instantiates a new new list btn.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param res the res
+   */
   @Inject
   public NewListBtn(final I18nTranslationService i18n, final NewListAction action,
       final IconicResources res) {

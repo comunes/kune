@@ -31,8 +31,27 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class NewContentMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class NewContentMenuItem extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new new content menu item.
+   *
+   * @param i18n the i18n
+   * @param action the action
+   * @param icon the icon
+   * @param shorcutReg the shorcut reg
+   * @param title the title
+   * @param tooltip the tooltip
+   * @param newName the new name
+   * @param id the id
+   * @param parent the parent
+   */
   public NewContentMenuItem(final I18nTranslationService i18n, final NewContentAction action,
       final ImageResource icon, final GlobalShortcutRegister shorcutReg, final String title,
       final String tooltip, final String newName, final String id, @Nonnull final MenuDescriptor parent) {

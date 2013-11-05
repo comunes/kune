@@ -28,8 +28,21 @@ import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserOptStylePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserOptStylePanel extends EntityOptStylePanel implements UserOptStyleView {
 
+  /**
+   * Instantiates a new user opt style panel.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   * @param styleSelector the style selector
+   */
   @Inject
   public UserOptStylePanel(final I18nTranslationService i18n, final IconicResources res,
       final GSpaceThemeSelectorPanel styleSelector) {

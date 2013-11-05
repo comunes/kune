@@ -29,13 +29,34 @@ import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractFoldableToolActions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractFoldableToolActions {
 
+  /** The actions registry. */
   protected final ActionRegistryByType actionsRegistry;
+  
+  /** The i18n. */
   protected final I18nUITranslationService i18n;
+  
+  /** The session. */
   protected final Session session;
+  
+  /** The state manager. */
   protected final StateManager stateManager;
 
+  /**
+   * Instantiates a new abstract foldable tool actions.
+   *
+   * @param session the session
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   * @param actionsRegistry the actions registry
+   */
   public AbstractFoldableToolActions(final Session session, final StateManager stateManager,
       final I18nUITranslationService i18n, final ActionRegistryByType actionsRegistry) {
     this.session = session;
@@ -50,6 +71,9 @@ public abstract class AbstractFoldableToolActions {
     });
   }
 
+  /**
+   * Creates the post session init actions.
+   */
   protected abstract void createPostSessionInitActions();
 
 }

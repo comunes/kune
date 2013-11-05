@@ -28,9 +28,18 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractSNMembersActionsRegistry.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SuppressWarnings("serial")
 public abstract class AbstractSNMembersActionsRegistry extends ArrayList<Provider<MenuItemDescriptor>> {
 
+  /**
+   * Instantiates a new abstract sn members actions registry.
+   */
   public AbstractSNMembersActionsRegistry() {
     super();
   }

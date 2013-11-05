@@ -24,15 +24,41 @@ package cc.kune.chat.client;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ChatOptions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ChatOptions {
+  
+  /** The domain. */
   public String domain;
+  
+  /** The http base. */
   public String httpBase;
+  
+  /** The passwd. */
   public String passwd;
+  
+  /** The resource. */
   public String resource;
+  
+  /** The room host. */
   public String roomHost;
+  
+  /** The username. */
   public String username;
+  
+  /** The useruri. */
   public XmppURI useruri;
 
+  /**
+   * Uri from.
+   *
+   * @param shortName the short name
+   * @return the xmpp uri
+   */
   public XmppURI uriFrom(final String shortName) {
     return XmppURI.jid(shortName + "@" + domain);
   }

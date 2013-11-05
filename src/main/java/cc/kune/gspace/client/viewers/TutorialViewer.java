@@ -53,30 +53,83 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TutorialViewer.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class TutorialViewer extends Composite {
 
+  /**
+   * The Interface OnTutorialClose.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface OnTutorialClose {
+    
+    /**
+     * On close.
+     */
     void onClose();
   }
+  
+  /**
+   * The Interface TutorialViewerUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface TutorialViewerUiBinder extends UiBinder<Widget, TutorialViewer> {
   }
 
+  /** The Constant CLOSE_BTN_ID. */
   public static final String CLOSE_BTN_ID = "k-tuto-view-close-btn";
+  
+  /** The Constant FOOTBAR. */
   private static final int FOOTBAR = 12;
+  
+  /** The Constant IFRAME_ID. */
   public static final String IFRAME_ID = "k-tuto-iframe";
+  
+  /** The ui binder. */
   private static TutorialViewerUiBinder uiBinder = GWT.create(TutorialViewerUiBinder.class);
+  
+  /** The close btn. */
   @UiField
   CloseDialogButton closeBtn;
+  
+  /** The def lang. */
   private String defLang;
+  
+  /** The frame. */
   @UiField
   public Frame frame;
+  
+  /** The gs armor. */
   private final GSpaceArmor gsArmor;
+  
+  /** The i18n. */
   private final I18nUITranslationService i18n;
+  
+  /** The langs. */
   private List<String> langs;
+  
+  /** The on tutorial close. */
   private OnTutorialClose onTutorialClose;
+  
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new tutorial viewer.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param eventBus the event bus
+   * @param stateManager the state manager
+   * @param gsArmor the gs armor
+   */
   @Inject
   public TutorialViewer(final I18nUITranslationService i18n, final Session session,
       final EventBus eventBus, final StateManager stateManager, final GSpaceArmor gsArmor) {
@@ -133,6 +186,11 @@ public class TutorialViewer extends Composite {
         });
   }
 
+  /**
+   * Gets the tutorial lang.
+   *
+   * @return the tutorial lang
+   */
   private String getTutorialLang() {
     if (langs == null) {
       langs = session.getInitData().getTutorialLanguages();
@@ -144,10 +202,18 @@ public class TutorialViewer extends Composite {
     return langs.contains(currentLang) ? currentLang : defLang;
   }
 
+  /**
+   * Resize tutorial frame.
+   */
   private void resizeTutorialFrame() {
     setHeigth(gsArmor.getDocContainerHeight());
   }
 
+  /**
+   * Sets the heigth.
+   *
+   * @param height the new heigth
+   */
   private void setHeigth(final Integer height) {
     if (height > FOOTBAR) {
       final String he = (height - FOOTBAR) + "px";
@@ -157,11 +223,19 @@ public class TutorialViewer extends Composite {
     }
   }
 
+  /**
+   * Sets the tool.
+   *
+   * @param tool the new tool
+   */
   private void setTool(final String tool) {
     final String currentLang = getTutorialLang();
     frame.setUrl(FileConstants.TUTORIALS_PREFIX + tool + ".svg" + "#" + currentLang);
   }
 
+  /**
+   * Show tutorial.
+   */
   private void showTutorial() {
     gsArmor.enableCenterScroll(false);
     final GSpaceCenter docContainer = gsArmor.getDocContainer();

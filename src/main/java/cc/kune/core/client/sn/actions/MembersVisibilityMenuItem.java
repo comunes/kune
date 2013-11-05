@@ -28,15 +28,34 @@ import cc.kune.core.shared.domain.SocialNetworkVisibility;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MembersVisibilityMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MembersVisibilityMenuItem extends MenuRadioItemDescriptor {
 
+  /** The Constant GROUP_MEMBERS_VISIBILITY. */
   private static final String GROUP_MEMBERS_VISIBILITY = "k-sn-gmembers-vis";
 
+  /**
+   * Instantiates a new members visibility menu item.
+   *
+   * @param parent the parent
+   * @param action the action
+   */
   @Inject
   public MembersVisibilityMenuItem(final MenuDescriptor parent, final MembersVisibilityAction action) {
     super(parent, action, GROUP_MEMBERS_VISIBILITY);
   }
 
+  /**
+   * With visibility.
+   *
+   * @param visibility the visibility
+   * @return the menu radio item descriptor
+   */
   public MenuRadioItemDescriptor withVisibility(final SocialNetworkVisibility visibility) {
     ((MembersVisibilityAction) getAction()).setVisibility(visibility);
     return this;

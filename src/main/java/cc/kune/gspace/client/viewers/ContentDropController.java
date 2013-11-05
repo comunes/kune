@@ -35,21 +35,28 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class ContentDropController is used to allow the drop of users as
- * participants to waves
+ * participants to waves.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class ContentDropController extends AbstractDropController {
 
+  /** The content service. */
   private final ContentServiceAsync contentService;
+  
+  /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new content drop controller.
-   * 
-   * @param dragController
-   *          the drag controller
+   *
+   * @param dragController the drag controller
+   * @param contentService the content service
+   * @param session the session
    */
   @Inject
   public ContentDropController(final KuneDragController dragController,
@@ -79,6 +86,9 @@ public class ContentDropController extends AbstractDropController {
         });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.dnd.AbstractDropController#onGroupDropFinished(com.allen_sauer.gwt.dnd.client.drop.SimpleDropController)
+   */
   @Override
   public void onGroupDropFinished(final SimpleDropController dropController) {
   }

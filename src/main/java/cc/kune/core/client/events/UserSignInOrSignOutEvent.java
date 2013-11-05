@@ -27,34 +27,81 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserSignInOrSignOutEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserSignInOrSignOutEvent extends
     GwtEvent<UserSignInOrSignOutEvent.UserSignInOrSignOutHandler> {
 
+  /**
+   * The Interface HasUserSignInOrSignOutHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasUserSignInOrSignOutHandlers extends HasHandlers {
+    
+    /**
+     * Adds the user sign in or sign out handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addUserSignInOrSignOutHandler(UserSignInOrSignOutHandler handler);
   }
 
+  /**
+   * The Interface UserSignInOrSignOutHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface UserSignInOrSignOutHandler extends EventHandler {
+    
+    /**
+     * On user sign in or sign out.
+     *
+     * @param event the event
+     */
     public void onUserSignInOrSignOut(UserSignInOrSignOutEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<UserSignInOrSignOutHandler> TYPE = new Type<UserSignInOrSignOutHandler>();
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<UserSignInOrSignOutHandler> getType() {
     return TYPE;
   }
 
+  /** The loggedin. */
   private final boolean loggedin;
 
+  /**
+   * Instantiates a new user sign in or sign out event.
+   *
+   * @param loggedin the loggedin
+   */
   public UserSignInOrSignOutEvent(final boolean loggedin) {
     this.loggedin = loggedin;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final UserSignInOrSignOutHandler handler) {
     handler.onUserSignInOrSignOut(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
@@ -73,11 +120,17 @@ public class UserSignInOrSignOutEvent extends
     return true;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<UserSignInOrSignOutHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -86,10 +139,18 @@ public class UserSignInOrSignOutEvent extends
     return result;
   }
 
+  /**
+   * Checks if is logged.
+   *
+   * @return true, if is logged
+   */
   public boolean isLogged() {
     return loggedin;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "UserSignInOrSignOutEvent[" + loggedin + "]";

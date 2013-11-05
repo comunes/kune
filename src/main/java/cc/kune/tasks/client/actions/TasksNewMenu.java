@@ -27,8 +27,19 @@ import cc.kune.gspace.client.actions.NewMenuProvider;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TasksNewMenu.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TasksNewMenu extends NewMenuProvider {
 
+  /**
+   * Instantiates a new tasks new menu.
+   *
+   * @param menu the menu
+   */
   @Inject
   public TasksNewMenu(final AbstractNewMenu menu) {
     super(menu);

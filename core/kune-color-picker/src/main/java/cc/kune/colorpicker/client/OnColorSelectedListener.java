@@ -21,8 +21,25 @@
 
 package cc.kune.colorpicker.client;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving onColorSelected events.
+ * The class that is interested in processing a onColorSelected
+ * event implements this interface, and the object created
+ * with that class is registered with a component using the
+ * component's <code>addOnColorSelectedListener<code> method. When
+ * the onColorSelected event occurs, that object's appropriate
+ * method is invoked.
+ *
+ * @see OnColorSelectedEvent
+ */
 public interface OnColorSelectedListener {
 
+  /**
+   * On color choose.
+   *
+   * @param color the color
+   */
   void onColorChoose(String color);
 
 }

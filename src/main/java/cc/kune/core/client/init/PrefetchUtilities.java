@@ -28,10 +28,23 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
 import com.google.gwt.user.client.ui.Image;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PrefetchUtilities.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PrefetchUtilities {
+  
+  /**
+   * Instantiates a new prefetch utilities.
+   */
   public PrefetchUtilities() {
   }
 
+  /**
+   * Do tasks deferred.
+   */
   public void doTasksDeferred() {
 
     Scheduler.get().scheduleIncremental(new RepeatingCommand() {
@@ -73,6 +86,9 @@ public class PrefetchUtilities {
     });
   }
 
+  /**
+   * Pre fetch imp images.
+   */
   public void preFetchImpImages() {
     final String[] imgs = { "images/corner.png", "images/hborder.png" };
 

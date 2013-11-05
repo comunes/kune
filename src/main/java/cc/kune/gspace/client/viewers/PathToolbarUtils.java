@@ -44,15 +44,42 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PathToolbarUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PathToolbarUtils {
 
+  /** The download provider. */
   private final Provider<ClientFileDownloadUtils> downloadProvider;
+  
+  /** The drop controller. */
   private final Provider<FolderContainerDropController> dropController;
+  
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The icons registry. */
   private final IconsRegistry iconsRegistry;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new path toolbar utils.
+   *
+   * @param dropController the drop controller
+   * @param stateManager the state manager
+   * @param capabilitiesRegistry the capabilities registry
+   * @param eventBus the event bus
+   * @param i18n the i18n
+   * @param downloadProvider the download provider
+   */
   @Inject
   public PathToolbarUtils(final Provider<FolderContainerDropController> dropController,
       final StateManager stateManager, final ContentCapabilitiesRegistry capabilitiesRegistry,
@@ -66,6 +93,14 @@ public class PathToolbarUtils {
     iconsRegistry = capabilitiesRegistry.getIconsRegistry();
   }
 
+  /**
+   * Creates the group button.
+   *
+   * @param group the group
+   * @param showGroupName the show group name
+   * @param minimal the minimal
+   * @return the button descriptor
+   */
   private ButtonDescriptor createGroupButton(final GroupDTO group, final boolean showGroupName,
       final boolean minimal) {
     final String style = ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " + SNActionStyles.BTN_SMALL : "");
@@ -82,11 +117,30 @@ public class PathToolbarUtils {
     return btn;
   }
 
+  /**
+   * Creates the path.
+   *
+   * @param group the group
+   * @param container the container
+   * @param withDrop the with drop
+   * @param showGroupName the show group name
+   * @return the gui action desc collection
+   */
   public GuiActionDescCollection createPath(final GroupDTO group, final ContainerDTO container,
       final boolean withDrop, final boolean showGroupName) {
     return createPath(group, container, withDrop, showGroupName, null);
   }
 
+  /**
+   * Creates the path.
+   *
+   * @param group the group
+   * @param container the container
+   * @param withDrop the with drop
+   * @param showGroupName the show group name
+   * @param extra the extra
+   * @return the gui action desc collection
+   */
   public GuiActionDescCollection createPath(final GroupDTO group, final ContainerDTO container,
       final boolean withDrop, final boolean showGroupName, final ContainerSimpleDTO extra) {
     final GuiActionDescCollection actions = new GuiActionDescCollection();
@@ -131,6 +185,17 @@ public class PathToolbarUtils {
     return actions;
   }
 
+  /**
+   * Creates the path button.
+   *
+   * @param container the container
+   * @param length the length
+   * @param pos the pos
+   * @param isTheLastExtra the is the last extra
+   * @param withDrop the with drop
+   * @param hasExtra the has extra
+   * @return the button descriptor
+   */
   private ButtonDescriptor createPathButton(final ContainerSimpleDTO container, final int length,
       final int pos, final boolean isTheLastExtra, final boolean withDrop, final boolean hasExtra) {
     // +1 because of the first group button

@@ -58,48 +58,134 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentViewerPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentViewerPresenter extends
     Presenter<ContentViewerPresenter.ContentViewerView, ContentViewerPresenter.ContentViewerProxy>
     implements ContentViewer {
 
+  /**
+   * The Interface ContentViewerProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface ContentViewerProxy extends Proxy<ContentViewerPresenter> {
   }
 
+  /**
+   * The Interface ContentViewerView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface ContentViewerView extends View {
 
+    /**
+     * Attach.
+     */
     void attach();
 
+    /**
+     * Blink title.
+     */
     void blinkTitle();
 
+    /**
+     * Clear.
+     */
     void clear();
 
+    /**
+     * Detach.
+     */
     void detach();
 
+    /**
+     * Gets the edits the title.
+     *
+     * @return the edits the title
+     */
     HasEditHandler getEditTitle();
 
+    /**
+     * Sets the content.
+     *
+     * @param state the new content
+     */
     void setContent(StateContentDTO state);
 
+    /**
+     * Sets the editable content.
+     *
+     * @param state the new editable content
+     */
     void setEditableContent(StateContentDTO state);
 
+    /**
+     * Sets the editable title.
+     *
+     * @param title the new editable title
+     */
     void setEditableTitle(String title);
 
+    /**
+     * Sets the footer actions.
+     *
+     * @param actions the new footer actions
+     */
     void setFooterActions(GuiActionDescCollection actions);
 
+    /**
+     * Sets the subheader actions.
+     *
+     * @param actions the new subheader actions
+     */
     void setSubheaderActions(GuiActionDescCollection actions);
 
+    /**
+     * Sign in.
+     */
     void signIn();
 
+    /**
+     * Sign out.
+     */
     void signOut();
 
   }
 
+  /** The actions registry. */
   private final ActionRegistryByType actionsRegistry;
+  
+  /** The edit handler. */
   private HandlerRegistration editHandler;
+  
+  /** The path toolbar utils. */
   private final PathToolbarUtils pathToolbarUtils;
+  
+  /** The rename action. */
   private final Provider<RenameAction> renameAction;
+  
+  /** The session. */
   private final Session session;
 
+  /**
+   * Instantiates a new content viewer presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param stateManager the state manager
+   * @param proxy the proxy
+   * @param session the session
+   * @param actionsRegistry the actions registry
+   * @param renameAction the rename action
+   * @param pathToolbarUtils the path toolbar utils
+   * @param wavClientManager the wav client manager
+   */
   @Inject
   public ContentViewerPresenter(final EventBus eventBus, final ContentViewerView view,
       final StateManager stateManager, final ContentViewerProxy proxy, final Session session,
@@ -131,6 +217,9 @@ public class ContentViewerPresenter extends
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#attach()
+   */
   @Override
   public void attach() {
     getView().attach();
@@ -139,10 +228,16 @@ public class ContentViewerPresenter extends
     }
   }
 
+  /**
+   * Blink title.
+   */
   public void blinkTitle() {
     getView().blinkTitle();
   }
 
+  /**
+   * Creates the edit handler.
+   */
   private void createEditHandler() {
     editHandler = getView().getEditTitle().addEditHandler(new EditHandler() {
       @Override
@@ -163,16 +258,25 @@ public class ContentViewerPresenter extends
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#detach()
+   */
   @Override
   public void detach() {
     getView().detach();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.tool.ContentViewer#setContent(cc.kune.core.shared.dto.HasContent)
+   */
   @Override
   public void setContent(@Nonnull final HasContent state) {
     getView().clear();

@@ -27,22 +27,43 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveUnsaveNotificator.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveUnsaveNotificator extends Composite {
+    
+    /** The msg. */
     private final Label msg;
+    
+    /** The popup palette. */
     private PopupPanel popupPalette;
 
+    /**
+     * Instantiates a new wave unsave notificator.
+     */
     public WaveUnsaveNotificator() {
         msg = new Label();
         msg.addStyleName("k-unsave-popup");
         msg.setHeight("14px");
     }
 
+    /**
+     * Hide.
+     */
     public void hide() {
         if (popupPalette != null) {
             popupPalette.hide();
         }
     }
 
+    /**
+     * Show.
+     *
+     * @param message the message
+     */
     public void show(final String message) {
         msg.setText(message);
         popupPalette = new PopupPanel(true, false);

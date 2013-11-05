@@ -28,8 +28,20 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CalendarGoPrevBtn.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CalendarGoPrevBtn extends ButtonDescriptor {
 
+  /**
+   * Instantiates a new calendar go prev btn.
+   *
+   * @param action the action
+   * @param i18n the i18n
+   */
   @Inject
   public CalendarGoPrevBtn(final CalendarGoPrevAction action, final I18nTranslationService i18n) {
     super("«", action);

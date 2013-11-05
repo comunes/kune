@@ -59,15 +59,73 @@ import cc.kune.trash.shared.TrashToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BlogsClientActions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BlogsClientActions extends AbstractFoldableToolActions {
 
+  /** The all. */
   final String[] all = { TYPE_ROOT, TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
+  
+  /** The containers. */
   final String[] containers = { TYPE_ROOT, TYPE_BLOG };
+  
+  /** The containers no root. */
   final String[] containersNoRoot = { TYPE_BLOG };
+  
+  /** The contents. */
   final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
+  
+  /** The contents moderated. */
   final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
+  
+  /** The no root. */
   final String[] noRoot = { TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
 
+  /**
+   * Instantiates a new blogs client actions.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param stateManager the state manager
+   * @param registry the registry
+   * @param res the res
+   * @param folderGoUp the folder go up
+   * @param newPostItem the new post item
+   * @param newPostIconBtn the new post icon btn
+   * @param newBlogBtn the new blog btn
+   * @param openContentMenuItem the open content menu item
+   * @param delContentMenuItem the del content menu item
+   * @param refresh the refresh
+   * @param tutorialBtn the tutorial btn
+   * @param optionsMenuContent the options menu content
+   * @param shareMenuContent the share menu content
+   * @param addAllMenuItem the add all menu item
+   * @param addAdminMembersMenuItem the add admin members menu item
+   * @param addCollabMembersMenuItem the add collab members menu item
+   * @param addPublicMenuItem the add public menu item
+   * @param participateBtn the participate btn
+   * @param blogNewMenu the blog new menu
+   * @param postNewMenu the post new menu
+   * @param newMenusRegistry the new menus registry
+   * @param chatAbout the chat about
+   * @param delFolderMenuItem the del folder menu item
+   * @param copyContent the copy content
+   * @param purgeMenuItem the purge menu item
+   * @param purgeBtn the purge btn
+   * @param purgeFolderMenuItem the purge folder menu item
+   * @param purgeFolderBtn the purge folder btn
+   * @param writeToParticipants the write to participants
+   * @param moveContentMenuItem the move content menu item
+   * @param setAsHomePage the set as home page
+   * @param shareInTwitter the share in twitter
+   * @param shareInGPlus the share in g plus
+   * @param shareInIdentica the share in identica
+   * @param shareInFacebook the share in facebook
+   */
   @Inject
   public BlogsClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
@@ -150,6 +208,9 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
     newMenusRegistry.register(TYPE_UPLOADEDFILE, postNewMenu.get());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
+   */
   @Override
   protected void createPostSessionInitActions() {
   }

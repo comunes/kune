@@ -75,14 +75,35 @@ import cc.kune.domain.UserBuddiesData;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MapperTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MapperTest {
+  
+  /** The Constant TESTGROUPSHORTNAME. */
   private static final String TESTGROUPSHORTNAME = "grouptest";
+  
+  /** The Constant TESTTOOL. */
   private static final String TESTTOOL = "docs";
+  
+  /** The group manager. */
   @Inject
   GroupManager groupManager;
+  
+  /** The mapper. */
   @Inject
   KuneMapper mapper;
 
+  /**
+   * Assert mapping.
+   *
+   * @param mode the mode
+   * @param modeName the mode name
+   */
   private void assertMapping(final GroupListMode mode, final String modeName) {
     final GroupList list = new GroupList();
     list.setMode(mode);
@@ -92,6 +113,12 @@ public class MapperTest {
     assertEquals(mode, listBack.getMode());
   }
 
+  /**
+   * Assert valid access lists mapping.
+   *
+   * @param groupList the group list
+   * @param groupListDTO the group list dto
+   */
   private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {
     final Set<Group> listOrig = groupList.getList();
     final Set<GroupDTO> listDto = groupListDTO.getList();
@@ -107,14 +134,32 @@ public class MapperTest {
     }
   }
 
+  /**
+   * Creates the def container.
+   *
+   * @return the container
+   */
   private Container createDefContainer() {
     return createDefContainer(createDeGroup());
   }
 
+  /**
+   * Creates the def container.
+   *
+   * @param group the group
+   * @return the container
+   */
   private Container createDefContainer(final Group group) {
     return createDefContainer(group, 0);
   }
 
+  /**
+   * Creates the def container.
+   *
+   * @param group the group
+   * @param increment the increment
+   * @return the container
+   */
   private Container createDefContainer(final Group group, final int increment) {
     final Container container = new Container();
     container.setId(1L + increment);
@@ -124,10 +169,21 @@ public class MapperTest {
     return container;
   }
 
+  /**
+   * Creates the def container.
+   *
+   * @param increment the increment
+   * @return the container
+   */
   private Container createDefContainer(final int increment) {
     return createDefContainer(createDeGroup(), increment);
   }
 
+  /**
+   * Creates the def content.
+   *
+   * @return the content
+   */
   private Content createDefContent() {
     final Container container = createDefContainer(createDeGroup());
     final Content d = new Content();
@@ -139,11 +195,19 @@ public class MapperTest {
     return d;
   }
 
+  /**
+   * Creates the de group.
+   *
+   * @return the group
+   */
   private Group createDeGroup() {
     final Group group = new Group(TESTGROUPSHORTNAME, "This is a group Test");
     return group;
   }
 
+  /**
+   * Group has logo.
+   */
   @Test
   public void groupHasLogo() {
     final Group group = new Group("test", "this is a test");
@@ -157,6 +221,9 @@ public class MapperTest {
     assertTrue(groupDTO.hasLogo());
   }
 
+  /**
+   * Inits the data mappging.
+   */
   @Ignore
   @Test
   public void initDataMappging() {
@@ -179,11 +246,17 @@ public class MapperTest {
     assertTrue(themeDto.getBackColors().length > 0);
   }
 
+  /**
+   * Inject.
+   */
   @Before
   public void inject() {
     new IntegrationTestHelper(false, this);
   }
 
+  /**
+   * Map event container.
+   */
   @Test
   public void mapEventContainer() {
     final StateEventContainer c = new StateEventContainer();
@@ -198,6 +271,9 @@ public class MapperTest {
     assertEquals(dto.getAppointments().get(0).get("prop2"), "value2");
   }
 
+  /**
+   * Test content descriptor mapping.
+   */
   @Test
   public void testContentDescriptorMapping() {
     final Content d = createDefContent();
@@ -210,6 +286,9 @@ public class MapperTest {
     assertEquals(expectedToken, dto.getStateToken());
   }
 
+  /**
+   * Test content descriptor to link mapping.
+   */
   @Test
   public void testContentDescriptorToLinkMapping() {
     final Content d = createDefContent();
@@ -220,6 +299,9 @@ public class MapperTest {
     assertEquals("grouptest.docs.1.1", dto.getLink());
   }
 
+  /**
+   * Test content mapping.
+   */
   @Test
   public void testContentMapping() {
     final StateContent c = new StateContent();
@@ -247,6 +329,9 @@ public class MapperTest {
     assertEquals(dto.getIsParticipant(), true);
   }
 
+  /**
+   * Test folder mapping.
+   */
   @Test
   public void testFolderMapping() {
     final Container container = createDefContainer();
@@ -277,6 +362,9 @@ public class MapperTest {
     assertNotNull(dtoChild.getAbsolutePath()[0]);
   }
 
+  /**
+   * Test group list mapping.
+   */
   @Test
   public void testGroupListMapping() {
     assertMapping(GroupListMode.EVERYONE, GroupListDTO.EVERYONE);
@@ -284,6 +372,9 @@ public class MapperTest {
     assertMapping(GroupListMode.NORMAL, GroupListDTO.NORMAL);
   }
 
+  /**
+   * Test group mapping.
+   */
   @Test
   public void testGroupMapping() {
     final Group group = new Group("shortName", "name");
@@ -292,6 +383,9 @@ public class MapperTest {
     assertEquals(group.getShortName(), dto.getShortName());
   }
 
+  /**
+   * Test license mapping.
+   */
   @Test
   public void testLicenseMapping() {
     final License licenseCC = new License("by-nc-nd",
@@ -324,6 +418,9 @@ public class MapperTest {
     assertEquals("nocc3", dtoNotCC.getImageUrl());
   }
 
+  /**
+   * Test mime mapping.
+   */
   @Test
   public void testMimeMapping() {
     final Content d = createDefContent();
@@ -332,6 +429,9 @@ public class MapperTest {
     assertEquals("application/pdf", contentSimpleDTO.getMimeType().toString());
   }
 
+  /**
+   * Test sn result map.
+   */
   @Test
   public void testSnResultMap() {
     final Group group = new Group("test", "this is a test");
@@ -364,6 +464,9 @@ public class MapperTest {
     assertTrue(map.isBuddiesVisible());
   }
 
+  /**
+   * Test state token in state map.
+   */
   @Test
   public void testStateTokenInStateMap() {
     final StateToken stateToken = new StateToken(TESTGROUPSHORTNAME, TESTTOOL, "1", "2");
@@ -375,6 +478,9 @@ public class MapperTest {
     assertEquals(stateToken, stateDTO.getStateToken());
   }
 
+  /**
+   * Test user to link mappping.
+   */
   @Test
   public void testUserToLinkMappping() {
     final User user = new User("shortName", "longName", "", "".getBytes(), "".getBytes(), null, null,
@@ -384,6 +490,9 @@ public class MapperTest {
     assertEquals("longName", dto.getLongName());
   }
 
+  /**
+   * Test user to user simple.
+   */
   @Test
   public void testUserToUserSimple() {
     final User user = new User("shortName", "longName", "", "".getBytes(), "".getBytes(), null, null,

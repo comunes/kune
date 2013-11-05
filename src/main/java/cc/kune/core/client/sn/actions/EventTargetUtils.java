@@ -27,8 +27,20 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventTargetUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EventTargetUtils {
 
+  /**
+   * Gets the target token.
+   *
+   * @param event the event
+   * @return the target token
+   */
   public static StateToken getTargetToken(final ActionEvent event) {
     StateToken token;
     final Object target = event.getTarget();
@@ -40,6 +52,12 @@ public class EventTargetUtils {
     return token;
   }
 
+  /**
+   * Checks if is person.
+   *
+   * @param event the event
+   * @return true, if is person
+   */
   public static boolean isPerson(final ActionEvent event) {
     final Object target = event.getTarget();
     final boolean isUserDTO = target instanceof UserSimpleDTO;

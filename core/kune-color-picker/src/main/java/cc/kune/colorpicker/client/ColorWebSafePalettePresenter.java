@@ -23,14 +23,33 @@
 package cc.kune.colorpicker.client;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ColorWebSafePalettePresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ColorWebSafePalettePresenter implements ColorWebSafePalette {
 
+  /** The on color selected. */
   private OnColorSelectedListener onColorSelected;
+  
+  /** The view. */
   private ColorWebSafePaletteView view;
 
+  /**
+   * Instantiates a new color web safe palette presenter.
+   */
   public ColorWebSafePalettePresenter() {
   }
 
+  /**
+   * Gets the color.
+   *
+   * @param row the row
+   * @param col the col
+   * @return the color
+   */
   private String getColor(final int row, final int col) {
     String color = null;
     final int pd = row * ColorWebSafePaletteView.COLS + col;
@@ -44,20 +63,37 @@ public class ColorWebSafePalettePresenter implements ColorWebSafePalette {
     return color;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.colorpicker.client.ColorWebSafePalette#hide()
+   */
   @Override
   public void hide() {
     this.view.hide();
   }
 
+  /**
+   * Inits the.
+   *
+   * @param view the view
+   */
   public void init(final ColorWebSafePaletteView view) {
     this.view = view;
   }
 
+  /**
+   * On color selected.
+   *
+   * @param row the row
+   * @param col the col
+   */
   protected void onColorSelected(final int row, final int col) {
     final String color = getColor(row, col);
    // FIXME onColorSelected.onColorChoose(color);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.colorpicker.client.ColorWebSafePalette#show(int, int, cc.kune.colorpicker.client.OnColorSelectedListener)
+   */
   @Override
   public void show(final int left, final int top, final OnColorSelectedListener onColorSelected) {
     view.show(left, top);

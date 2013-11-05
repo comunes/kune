@@ -23,7 +23,9 @@
 package cc.kune.core.server.state;
 
 /**
- * Used for contents not found or users without homepage
+ * Used for contents not found or users without homepage.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StateNoContent extends StateAbstract {
 }

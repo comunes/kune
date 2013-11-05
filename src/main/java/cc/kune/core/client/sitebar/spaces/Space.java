@@ -22,6 +22,20 @@
  */
 package cc.kune.core.client.sitebar.spaces;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum Space.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum Space {
-  homeSpace, userSpace, groupSpace, publicSpace
+  
+  /** The home space. */
+  homeSpace, 
+ /** The user space. */
+ userSpace, 
+ /** The group space. */
+ groupSpace, 
+ /** The public space. */
+ publicSpace
 }

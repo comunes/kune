@@ -33,8 +33,23 @@ import cc.kune.domain.Revision;
 import cc.kune.domain.SocialNetwork;
 import cc.kune.domain.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TestDomainHelper.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class TestDomainHelper {
 
+  /**
+   * Creates the access lists.
+   *
+   * @param groupAdmin the group admin
+   * @param groupEditor the group editor
+   * @param groupViewer the group viewer
+   * @return the access lists
+   */
   public static AccessLists createAccessLists(final Group groupAdmin, final Group groupEditor,
       final Group groupViewer) {
 
@@ -51,6 +66,11 @@ public abstract class TestDomainHelper {
     return lists;
   }
 
+  /**
+   * Creates the big text.
+   *
+   * @return the string
+   */
   public static String createBigText() {
     final String text = "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce leo felis, cursus eget, scelerisque adipiscing, fringilla vel, sem. Vestibulum semper tristique sem. Etiam quam neque, consectetuer at, fermentum id, vulputate non, leo. Ut condimentum, mauris et sollicitudin faucibus, lectus arcu facilisis mi, eu pretium arcu tortor quis sem. Pellentesque sit amet nulla ut tellus dapibus blandit. Donec eu dolor vitae mi scelerisque pretium. Donec sit amet nunc ut risus laoreet porta. Integer dictum mi at mauris. Vivamus vulputate, dolor quis pharetra interdum, augue nisi congue eros, a consectetuer libero mi ut quam. Fusce commodo sem blandit massa. Phasellus vehicula varius felis.\n"
         + "\n"
@@ -200,6 +220,14 @@ public abstract class TestDomainHelper {
     return text;
   }
 
+  /**
+   * Creates the descriptor.
+   *
+   * @param id the id
+   * @param title the title
+   * @param content the content
+   * @return the content
+   */
   public static Content createDescriptor(final long id, final String title, final String content) {
     final Content descriptor = new Content();
     descriptor.setId(id);
@@ -210,12 +238,26 @@ public abstract class TestDomainHelper {
     return descriptor;
   }
 
+  /**
+   * Creates the folder with id.
+   *
+   * @param id the id
+   * @return the container
+   */
   public static Container createFolderWithId(final long id) {
     final Container container = new Container();
     container.setId(id);
     return container;
   }
 
+  /**
+   * Creates the folder with id and group and tool.
+   *
+   * @param id the id
+   * @param groupShortName the group short name
+   * @param toolName the tool name
+   * @return the container
+   */
   public static Container createFolderWithIdAndGroupAndTool(final int id, final String groupShortName,
       final String toolName) {
     final Container container = createFolderWithIdAndToolName(id, toolName);
@@ -226,18 +268,40 @@ public abstract class TestDomainHelper {
 
   }
 
+  /**
+   * Creates the folder with id and tool name.
+   *
+   * @param id the id
+   * @param toolName the tool name
+   * @return the container
+   */
   public static Container createFolderWithIdAndToolName(final int id, final String toolName) {
     final Container container = createFolderWithId(id);
     container.setToolName(toolName);
     return container;
   }
 
+  /**
+   * Creates the group.
+   *
+   * @param number the number
+   * @return the group
+   */
   public static Group createGroup(final int number) {
     final Group group = new Group("ysei" + number, "Yellow Submarine Environmental Initiative" + number);
     group.setId(Long.valueOf(number));
     return group;
   }
 
+  /**
+   * Creates the social network.
+   *
+   * @param groupInAdmins the group in admins
+   * @param groupInCollab the group in collab
+   * @param groupInViewer the group in viewer
+   * @param groupInPendings the group in pendings
+   * @return the social network
+   */
   public static SocialNetwork createSocialNetwork(final Group groupInAdmins, final Group groupInCollab,
       final Group groupInViewer, final Group groupInPendings) {
 
@@ -249,6 +313,12 @@ public abstract class TestDomainHelper {
     return socialNetwork;
   }
 
+  /**
+   * Creates the user.
+   *
+   * @param number the number
+   * @return the user
+   */
   public static User createUser(final int number) {
     final String shortName = "shortname" + number;
     final String longName = "name" + number;

@@ -82,22 +82,72 @@ import cc.kune.trash.server.TrashServerUtils;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentRPC.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @LogThis
 public class ContentRPC implements ContentService, RPC {
+  
+  /** The access service. */
   private final AccessService accessService;
+  
+  /** The chat manager. */
   private final ChatManager chatManager;
+  
+  /** The container manager. */
   private final ContainerManager containerManager;
+  
+  /** The content manager. */
   private final ContentManager contentManager;
+  
+  /** The creation service. */
   private final CreationService creationService;
+  
+  /** The finder service. */
   private final FinderService finderService;
+  
+  /** The group manager. */
   private final GroupManager groupManager;
+  
+  /** The mapper. */
   private final KuneMapper mapper;
+  
+  /** The rights service. */
   private final AccessRightsService rightsService;
+  
+  /** The state service. */
   private final StateService stateService;
+  
+  /** The tag manager. */
   private final TagUserContentManager tagManager;
+  
+  /** The user session. */
   private final UserSessionManager userSession;
+  
+  /** The wave manager. */
   private final KuneWaveManager waveManager;
 
+  /**
+   * Instantiates a new content rpc.
+   *
+   * @param finderService the finder service
+   * @param userSession the user session
+   * @param accessService the access service
+   * @param rightsService the rights service
+   * @param stateService the state service
+   * @param creationService the creation service
+   * @param groupManager the group manager
+   * @param contentManager the content manager
+   * @param containerManager the container manager
+   * @param tagManager the tag manager
+   * @param mapper the mapper
+   * @param chatManager the chat manager
+   * @param waveManager the wave manager
+   */
   @Inject
   public ContentRPC(final FinderService finderService, final UserSessionManager userSession,
       final AccessService accessService, final AccessRightsService rightsService,
@@ -120,6 +170,9 @@ public class ContentRPC implements ContentService, RPC {
     this.waveManager = waveManager;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#addAuthor(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -131,6 +184,9 @@ public class ContentRPC implements ContentService, RPC {
     contentManager.addAuthor(user, contentId, authorShortName);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#addContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -140,6 +196,9 @@ public class ContentRPC implements ContentService, RPC {
     return createContent(parentToken, title, typeId);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#addFolder(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -152,6 +211,9 @@ public class ContentRPC implements ContentService, RPC {
     return getState(user, container);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#addGadgetToContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.content, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -164,6 +226,9 @@ public class ContentRPC implements ContentService, RPC {
     contentManager.addGadgetToContent(user, content, gadgetName);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#addNewContentWithGadget(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, java.lang.String, java.lang.String, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -175,6 +240,9 @@ public class ContentRPC implements ContentService, RPC {
         Collections.<String, String> emptyMap());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#addNewContentWithGadgetAndState(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -190,6 +258,9 @@ public class ContentRPC implements ContentService, RPC {
     return getState(user, addedContent);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#addParticipant(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -201,6 +272,9 @@ public class ContentRPC implements ContentService, RPC {
     return contentManager.addParticipant(user, contentId, participant);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#addParticipants(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, cc.kune.core.shared.dto.SocialNetworkSubGroup)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = true)
@@ -213,6 +287,9 @@ public class ContentRPC implements ContentService, RPC {
     return contentManager.addParticipants(user, contentId, group, subGroup);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#addRoom(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator)
@@ -223,6 +300,9 @@ public class ContentRPC implements ContentService, RPC {
     return getState(user, chatManager.addRoom(userHash, user, parentToken, roomName, ""));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#copyContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = true)
@@ -240,6 +320,14 @@ public class ContentRPC implements ContentService, RPC {
     }
   }
 
+  /**
+   * Creates the content.
+   *
+   * @param parentToken the parent token
+   * @param title the title
+   * @param typeId the type id
+   * @return the state content dto
+   */
   private StateContentDTO createContent(final StateToken parentToken, final String title,
       final String typeId) {
     final User user = getCurrentUser();
@@ -250,6 +338,16 @@ public class ContentRPC implements ContentService, RPC {
     return getState(user, addedContent);
   }
 
+  /**
+   * Creates the folder.
+   *
+   * @param groupShortName the group short name
+   * @param parentFolderId the parent folder id
+   * @param title the title
+   * @param typeId the type id
+   * @return the container
+   * @throws DefaultException the default exception
+   */
   private Container createFolder(final String groupShortName, final Long parentFolderId,
       final String title, final String typeId) throws DefaultException {
     final User user = getCurrentUser();
@@ -259,6 +357,9 @@ public class ContentRPC implements ContentService, RPC {
     return container;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#delContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
@@ -281,6 +382,9 @@ public class ContentRPC implements ContentService, RPC {
     return moveContent(userHash, token, trash.getStateToken());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#getContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated(mandatory = false)
   @KuneTransactional
@@ -315,6 +419,9 @@ public class ContentRPC implements ContentService, RPC {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#getContentByWaveRef(java.lang.String, java.lang.String)
+   */
   @Override
   @Authenticated
   @KuneTransactional
@@ -333,6 +440,15 @@ public class ContentRPC implements ContentService, RPC {
 
   }
 
+  /**
+   * Gets the content or def content.
+   *
+   * @param userHash the user hash
+   * @param stateToken the state token
+   * @param user the user
+   * @param content the content
+   * @return the content or def content
+   */
   private StateAbstractDTO getContentOrDefContent(final String userHash, final StateToken stateToken,
       final User user, final Content content) {
     final Long id = content.getId();
@@ -350,33 +466,73 @@ public class ContentRPC implements ContentService, RPC {
     }
   }
 
+  /**
+   * Gets the current user.
+   *
+   * @return the current user
+   */
   private User getCurrentUser() {
     return userSession.getUser();
   }
 
+  /**
+   * Gets the state.
+   *
+   * @param container the container
+   * @return the state
+   */
   public StateContainerDTO getState(final Container container) {
     return getState(getCurrentUser(), container);
   }
 
+  /**
+   * Gets the state.
+   *
+   * @param content the content
+   * @return the state
+   */
   public StateContentDTO getState(final Content content) {
     return getState(getCurrentUser(), content);
   }
 
+  /**
+   * Gets the state.
+   *
+   * @param user the user
+   * @param container the container
+   * @return the state
+   */
   public StateContainerDTO getState(final User user, final Container container) {
     final StateContainer state = stateService.create(user, container);
     return mapState(state, user);
   }
 
+  /**
+   * Gets the state.
+   *
+   * @param user the user
+   * @param content the content
+   * @return the state
+   */
   public StateContentDTO getState(final User user, final Content content) {
     final StateContent state = stateService.create(user, content);
     return mapState(state, user);
   }
 
+  /**
+   * Gets the summary tags.
+   *
+   * @param group the group
+   * @return the summary tags
+   */
   private TagCloudResult getSummaryTags(final Group group) {
     final TagCloudResult result = tagManager.getTagCloudResultByGroup(group);
     return result;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#getSummaryTags(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated(mandatory = false)
   @Authorizated(accessRolRequired = AccessRol.Viewer)
@@ -386,10 +542,22 @@ public class ContentRPC implements ContentService, RPC {
     return getSummaryTags(group);
   }
 
+  /**
+   * Checks if is user logged in.
+   *
+   * @return true, if is user logged in
+   */
   private boolean isUserLoggedIn() {
     return userSession.isUserLoggedIn();
   }
 
+  /**
+   * Map content rights instate.
+   *
+   * @param user the user
+   * @param groupAccessList the group access list
+   * @param siblingDTO the sibling dto
+   */
   private void mapContentRightsInstate(final User user, final AccessLists groupAccessList,
       final ContentSimpleDTO siblingDTO) {
     final Content sibling = contentManager.find(siblingDTO.getId());
@@ -397,6 +565,13 @@ public class ContentRPC implements ContentService, RPC {
     siblingDTO.setRights(mapper.map(rightsService.get(user, lists), AccessRights.class));
   }
 
+  /**
+   * Map state.
+   *
+   * @param state the state
+   * @param user the user
+   * @return the state container dto
+   */
   private StateContainerDTO mapState(final StateContainer state, final User user) {
     final StateContainerDTO stateDTO = state instanceof StateEventContainer ? mapper.map(state,
         StateEventContainerDTO.class) : mapper.map(state, StateContainerDTO.class);
@@ -411,6 +586,13 @@ public class ContentRPC implements ContentService, RPC {
     return stateDTO;
   }
 
+  /**
+   * Map state.
+   *
+   * @param state the state
+   * @param user the user
+   * @return the state content dto
+   */
   private StateContentDTO mapState(final StateContent state, final User user) {
     final StateContentDTO stateDTO = mapper.map(state, StateContentDTO.class);
     final AccessLists groupAccessList = state.getGroup().getSocialNetwork().getAccessLists();
@@ -423,6 +605,9 @@ public class ContentRPC implements ContentService, RPC {
     return stateDTO;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#moveContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -477,6 +662,9 @@ public class ContentRPC implements ContentService, RPC {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#purgeAll(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator)
@@ -490,6 +678,9 @@ public class ContentRPC implements ContentService, RPC {
     return mapState(stateService.create(user, container), user);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#purgeContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Administrator)
@@ -507,6 +698,9 @@ public class ContentRPC implements ContentService, RPC {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#rateContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.Double)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer)
@@ -523,6 +717,9 @@ public class ContentRPC implements ContentService, RPC {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#removeAuthor(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -534,6 +731,9 @@ public class ContentRPC implements ContentService, RPC {
     contentManager.removeAuthor(user, contentId, authorShortName);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#renameContainer(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -544,6 +744,9 @@ public class ContentRPC implements ContentService, RPC {
     return getContent(userHash, token);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#renameContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -560,6 +763,15 @@ public class ContentRPC implements ContentService, RPC {
     return getContent(userHash, token);
   }
 
+  /**
+   * Rename content.
+   *
+   * @param documentId the document id
+   * @param newName the new name
+   * @return the content
+   * @throws ContentNotFoundException the content not found exception
+   * @throws DefaultException the default exception
+   */
   private Content renameContent(final String documentId, final String newName)
       throws ContentNotFoundException, DefaultException {
     final Long contentId = ContentUtils.parseId(documentId);
@@ -567,6 +779,15 @@ public class ContentRPC implements ContentService, RPC {
     return contentManager.renameContent(user, contentId, newName);
   }
 
+  /**
+   * Rename folder.
+   *
+   * @param groupShortName the group short name
+   * @param folderId the folder id
+   * @param newName the new name
+   * @return the container
+   * @throws DefaultException the default exception
+   */
   private Container renameFolder(final String groupShortName, final Long folderId, final String newName)
       throws DefaultException {
     final Group group = groupManager.findByShortName(groupShortName);
@@ -575,6 +796,14 @@ public class ContentRPC implements ContentService, RPC {
     return containerManager.renameFolder(group, container, newName);
   }
 
+  /**
+   * Save.
+   *
+   * @param userHash the user hash
+   * @param token the token
+   * @param textContent the text content
+   * @throws DefaultException the default exception
+   */
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
   @KuneTransactional
@@ -589,6 +818,9 @@ public class ContentRPC implements ContentService, RPC {
     // contentManager.save(user, content, textContent);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#sendFeedback(java.lang.String, java.lang.String, java.lang.String)
+   */
   @Override
   @Authenticated
   @KuneTransactional
@@ -598,6 +830,9 @@ public class ContentRPC implements ContentService, RPC {
     return waveManager.sendFeedback(user, title, body);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#setAsDefaultContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator)
@@ -608,6 +843,9 @@ public class ContentRPC implements ContentService, RPC {
     return mapper.map(content, ContentSimpleDTO.class);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#setGadgetProperties(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, java.util.Map)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor)
@@ -620,6 +858,9 @@ public class ContentRPC implements ContentService, RPC {
     contentManager.setGadgetProperties(user, content, gadgetName, properties);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#setLanguage(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -631,6 +872,9 @@ public class ContentRPC implements ContentService, RPC {
     return mapper.map(contentManager.setLanguage(user, contentId, languageCode), I18nLanguageDTO.class);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#setPublishedOn(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.util.Date)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -642,6 +886,9 @@ public class ContentRPC implements ContentService, RPC {
     contentManager.setPublishedOn(user, contentId, publishedOn);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#setStatus(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.domain.ContentStatus)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor)
@@ -657,6 +904,9 @@ public class ContentRPC implements ContentService, RPC {
     return getState(getCurrentUser(), content);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#setStatusAsAdmin(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.domain.ContentStatus)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator)
@@ -668,6 +918,12 @@ public class ContentRPC implements ContentService, RPC {
     return getState(getCurrentUser(), content);
   }
 
+  /**
+   * Sets the status in the dustbin.
+   *
+   * @param token the token
+   * @return the content
+   */
   private Content setStatusInTheDustbin(final StateToken token) {
     final Long contentId = ContentUtils.parseId(token.getDocument());
     final Content content = finderService.getContent(contentId);
@@ -675,6 +931,9 @@ public class ContentRPC implements ContentService, RPC {
     return content;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#setTags(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+   */
   @Override
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
@@ -688,6 +947,9 @@ public class ContentRPC implements ContentService, RPC {
     return getSummaryTags(group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#writeTo(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, boolean)
+   */
   @Override
   @Authenticated
   @KuneTransactional
@@ -697,6 +959,9 @@ public class ContentRPC implements ContentService, RPC {
     return waveManager.writeTo(user, token.getGroup(), onlyToAdmins);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#writeTo(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, boolean, java.lang.String, java.lang.String)
+   */
   @Override
   @Authenticated
   @KuneTransactional
@@ -706,6 +971,9 @@ public class ContentRPC implements ContentService, RPC {
     return waveManager.writeTo(user, token.getGroup(), onlyToAdmins, title, message);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.rpcservices.ContentService#writeToParticipants(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   @Authenticated
   @Authorizated(actionLevel = ActionLevel.content, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)

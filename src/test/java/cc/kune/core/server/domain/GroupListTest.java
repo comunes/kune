@@ -31,10 +31,23 @@ import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.domain.Group;
 import cc.kune.domain.GroupList;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupListTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupListTest {
+  
+  /** The included group. */
   private Group includedGroup;
+  
+  /** The list. */
   private GroupList list;
 
+  /**
+   * Creates the list.
+   */
   @Before
   public void createList() {
     list = new GroupList();
@@ -42,6 +55,9 @@ public class GroupListTest {
     list.add(includedGroup);
   }
 
+  /**
+   * Test mode everybody.
+   */
   @Test
   public void testModeEverybody() {
     list.setMode(GroupListMode.EVERYONE);
@@ -50,6 +66,9 @@ public class GroupListTest {
     assertTrue(list.includes(Group.NO_GROUP));
   }
 
+  /**
+   * Test mode nobody.
+   */
   @Test
   public void testModeNobody() {
     list.setMode(GroupListMode.NOBODY);
@@ -58,6 +77,9 @@ public class GroupListTest {
     assertFalse(list.includes(Group.NO_GROUP));
   }
 
+  /**
+   * Test mode normal.
+   */
   @Test
   public void testModeNormal() {
     list.setMode(GroupListMode.NORMAL);

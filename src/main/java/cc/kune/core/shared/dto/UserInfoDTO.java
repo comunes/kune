@@ -27,119 +27,278 @@ import java.util.Set;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserInfoDTO.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserInfoDTO implements IsSerializable {
+  
+  /** The chat name. */
   private String chatName;
+  
+  /** The enabled tools. */
   private List<String> enabledTools;
+  
+  /** The groups is admin. */
   private Set<GroupDTO> groupsIsAdmin;
+  
+  /** The groups is collab. */
   private Set<GroupDTO> groupsIsCollab;
+  
+  /** The groups is participating. */
   private List<GroupDTO> groupsIsParticipating;
+  
+  /** The home page. */
   private String homePage;
+  
+  /** The show deleted content. */
   private boolean showDeletedContent;
+  
+  /** The sign in count. */
   private Long signInCount;
+  
+  /** The user. */
   private UserSimpleDTO user;
+  
+  /** The user group. */
   private GroupDTO userGroup;
+  
+  /** The user hash. */
   private String userHash;
 
+  /**
+   * Gets the chat name.
+   *
+   * @return the chat name
+   */
   public String getChatName() {
     return chatName;
   }
 
+  /**
+   * Gets the country.
+   *
+   * @return the country
+   */
   public I18nCountryDTO getCountry() {
     return user.getCountry();
   }
 
+  /**
+   * Gets the enabled tools.
+   *
+   * @return the enabled tools
+   */
   public List<String> getEnabledTools() {
     return enabledTools;
   }
 
+  /**
+   * Gets the groups is admin.
+   *
+   * @return the groups is admin
+   */
   public Set<GroupDTO> getGroupsIsAdmin() {
     return groupsIsAdmin;
   }
 
+  /**
+   * Gets the groups is collab.
+   *
+   * @return the groups is collab
+   */
   public Set<GroupDTO> getGroupsIsCollab() {
     return groupsIsCollab;
   }
 
+  /**
+   * Gets the groups is participating.
+   *
+   * @return the groups is participating
+   */
   public List<GroupDTO> getGroupsIsParticipating() {
     return groupsIsParticipating;
   }
 
+  /**
+   * Gets the home page.
+   *
+   * @return the home page
+   */
   public String getHomePage() {
     return homePage;
   }
 
+  /**
+   * Gets the language.
+   *
+   * @return the language
+   */
   public I18nLanguageDTO getLanguage() {
     return user.getLanguage();
   }
 
+  /**
+   * Gets the name.
+   *
+   * @return the name
+   */
   public String getName() {
     return user.getName();
   }
 
+  /**
+   * Gets the short name.
+   *
+   * @return the short name
+   */
   public String getShortName() {
     return user.getShortName();
   }
 
+  /**
+   * Gets the show deleted content.
+   *
+   * @return the show deleted content
+   */
   public boolean getShowDeletedContent() {
     return showDeletedContent;
   }
 
+  /**
+   * Gets the sign in count.
+   *
+   * @return the sign in count
+   */
   public Long getSignInCount() {
     return signInCount;
   }
 
+  /**
+   * Gets the user.
+   *
+   * @return the user
+   */
   public UserSimpleDTO getUser() {
     return user;
   }
 
+  /**
+   * Gets the user group.
+   *
+   * @return the user group
+   */
   public GroupDTO getUserGroup() {
     return userGroup;
   }
 
+  /**
+   * Gets the user hash.
+   *
+   * @return the user hash
+   */
   public String getUserHash() {
     return userHash;
   }
 
+  /**
+   * Sets the chat name.
+   *
+   * @param chatName the new chat name
+   */
   public void setChatName(final String chatName) {
     this.chatName = chatName;
   }
 
+  /**
+   * Sets the enabled tools.
+   *
+   * @param enabledTools the new enabled tools
+   */
   public void setEnabledTools(final List<String> enabledTools) {
     this.enabledTools = enabledTools;
   }
 
+  /**
+   * Sets the groups is admin.
+   *
+   * @param groupsIsAdmin the new groups is admin
+   */
   public void setGroupsIsAdmin(final Set<GroupDTO> groupsIsAdmin) {
     this.groupsIsAdmin = groupsIsAdmin;
   }
 
+  /**
+   * Sets the groups is collab.
+   *
+   * @param groupsIsCollab the new groups is collab
+   */
   public void setGroupsIsCollab(final Set<GroupDTO> groupsIsCollab) {
     this.groupsIsCollab = groupsIsCollab;
   }
 
+  /**
+   * Sets the groups is participating.
+   *
+   * @param groupsIsParticipating the new groups is participating
+   */
   public void setGroupsIsParticipating(final List<GroupDTO> groupsIsParticipating) {
     this.groupsIsParticipating = groupsIsParticipating;
   }
 
+  /**
+   * Sets the home page.
+   *
+   * @param homePage the new home page
+   */
   public void setHomePage(final String homePage) {
     this.homePage = homePage;
   }
 
+  /**
+   * Sets the show deleted content.
+   *
+   * @param showDeletedContent the new show deleted content
+   */
   public void setShowDeletedContent(final boolean showDeletedContent) {
     this.showDeletedContent = showDeletedContent;
   }
 
+  /**
+   * Sets the sign in count.
+   *
+   * @param signInCount the new sign in count
+   */
   public void setSignInCount(final Long signInCount) {
     this.signInCount = signInCount;
   }
 
+  /**
+   * Sets the user.
+   *
+   * @param user the new user
+   */
   public void setUser(final UserSimpleDTO user) {
     this.user = user;
   }
 
+  /**
+   * Sets the user group.
+   *
+   * @param userGroup the new user group
+   */
   public void setUserGroup(final GroupDTO userGroup) {
     this.userGroup = userGroup;
   }
 
+  /**
+   * Sets the user hash.
+   *
+   * @param userHash the new user hash
+   */
   public void setUserHash(final String userHash) {
     this.userHash = userHash;
   }

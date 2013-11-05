@@ -26,8 +26,17 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nUtilsTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nUtilsTest {
 
+  /**
+   * Basic long message.
+   */
   @Test
   public void basicLongMessage() {
     assertEquals(
@@ -35,6 +44,9 @@ public class I18nUtilsTest {
         I18nUtils.convertMethodName("0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 0123456789 012345678 "));
   }
 
+  /**
+   * Basic multiple reserved chars.
+   */
   @Test
   public void basicMultipleReservedChars() {
     assertEquals("yesOrNoMaybe", I18nUtils.convertMethodName("Yes, or; & no? maybe"));
@@ -43,6 +55,9 @@ public class I18nUtilsTest {
         I18nUtils.convertMethodName("Yes, or; & no?! (maybe): 'give' \"some/any\" % per-cent"));
   }
 
+  /**
+   * Basic tests.
+   */
   @Test
   public void basicTests() {
     assertEquals("yesOrNo", I18nUtils.convertMethodName("yes, or & no?"));
@@ -51,22 +66,34 @@ public class I18nUtilsTest {
     assertEquals("newYesNoMaybeVoting", I18nUtils.convertMethodName("New Yes/No/Maybe/+ Voting"));
   }
 
+  /**
+   * Carriage return.
+   */
   @Test
   public void carriageReturn() {
     assertEquals("yesNo", I18nUtils.convertMethodName("yes\nno"));
   }
 
+  /**
+   * Test numbers.
+   */
   @Test
   public void testNumbers() {
     assertEquals("_2day3", I18nUtils.convertMethodName("2day3"));
   }
 
+  /**
+   * Test params.
+   */
   @Test
   public void testParams() {
     assertEquals("nOfParamItems", I18nUtils.convertMethodName("[%d] of [%s] items"));
     assertEquals("nOfNItems", I18nUtils.convertMethodName("[%d] of [%d] items"));
   }
 
+  /**
+   * Test parent.
+   */
   @Test
   public void testParent() {
     assertEquals("ofItems", I18nUtils.convertMethodName("() of [] {} items"));

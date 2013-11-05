@@ -38,7 +38,7 @@ public class StateImpl extends JavaScriptObject implements State {
 
   /**
    * JavaScript version of map.
-   *
+   * 
    * @param <V>
    *          value type
    */
@@ -49,64 +49,76 @@ public class StateImpl extends JavaScriptObject implements State {
     }
 
     @SuppressWarnings("unused")
-	protected JsMap() {
+    protected JsMap() {
     }
 
     @SuppressWarnings("unused")
-	public final native V unsafeGet(String key) /*-{
-      return this[key];
-    }-*/;
+    public final native V unsafeGet(String key) /*-{
+                                                return this[key];
+                                                }-*/;
 
     public final native V unsafePut(String key, V value) /*-{
-      var oldValue = this[key] || null;
-      this[key] = value;
-      return oldValue || value;
-    }-*/;
+                                                         var oldValue = this[key] || null;
+                                                         this[key] = value;
+                                                         return oldValue || value;
+                                                         }-*/;
   }
 
   protected StateImpl() {
   }
 
-  /* (non-Javadoc)
- * @see com.onetwopoll.wave.State#get(java.lang.String)
- */
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.onetwopoll.wave.State#get(java.lang.String)
+   */
   public final native String get(String key) /*-{
-    return this.get(key);
-  }-*/;
+                                             return this.get(key);
+                                             }-*/;
 
-  /* (non-Javadoc)
- * @see com.onetwopoll.wave.State#getInt(java.lang.String)
- */
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.onetwopoll.wave.State#getInt(java.lang.String)
+   */
   public final Integer getInt(String key) {
     final String value = get(key);
 
     return value != null ? Integer.decode(value) : null;
   }
 
-  /* (non-Javadoc)
- * @see com.onetwopoll.wave.State#get(java.lang.String, java.lang.String)
- */
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.onetwopoll.wave.State#get(java.lang.String, java.lang.String)
+   */
   public final native String get(String key, String opt_default) /*-{
-    return this.get(key, opt_default);
-  }-*/;
+                                                                 return this.get(key, opt_default);
+                                                                 }-*/;
 
-  /* (non-Javadoc)
- * @see com.onetwopoll.wave.State#getKeys()
- */
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.onetwopoll.wave.State#getKeys()
+   */
   public final native JsArrayString getKeys() /*-{
-    return this.getKeys();
-  }-*/;
+                                              return this.getKeys();
+                                              }-*/;
 
-  /* (non-Javadoc)
- * @see com.onetwopoll.wave.State#reset()
- */
-public final native void reset() /*-{
-    this.reset();
-  }-*/;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.onetwopoll.wave.State#reset()
+   */
+  public final native void reset() /*-{
+                                   this.reset();
+                                   }-*/;
 
-  /* (non-Javadoc)
- * @see com.onetwopoll.wave.State#submitDelta(java.util.HashMap)
- */
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.onetwopoll.wave.State#submitDelta(java.util.HashMap)
+   */
   public final void submitDelta(HashMap<String, String> delta) {
     final JsMap<String> jsDelta = JsMap.create().cast();
 
@@ -116,17 +128,23 @@ public final native void reset() /*-{
     submitDelta(jsDelta);
   }
 
-  /* (non-Javadoc)
- * @see com.onetwopoll.wave.State#submitDelta(com.google.gwt.core.client.JavaScriptObject)
- */
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.onetwopoll.wave.State#submitDelta(com.google.gwt.core.client.
+   * JavaScriptObject)
+   */
   public final native void submitDelta(JavaScriptObject delta) /*-{
-    this.submitDelta(delta);
-  }-*/;
+                                                               this.submitDelta(delta);
+                                                               }-*/;
 
-  /* (non-Javadoc)
- * @see com.onetwopoll.wave.State#submitValue(java.lang.String, java.lang.String)
- */
-public final native void submitValue(String key, String value) /*-{
-    this.submitValue(key, value);
-  }-*/;
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.onetwopoll.wave.State#submitValue(java.lang.String,
+   * java.lang.String)
+   */
+  public final native void submitValue(String key, String value) /*-{
+                                                                 this.submitValue(key, value);
+                                                                 }-*/;
 }

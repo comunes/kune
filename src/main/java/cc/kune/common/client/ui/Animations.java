@@ -25,7 +25,15 @@ package cc.kune.common.client.ui;
 
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Animations.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class Animations {
+  
+  /** The enabled. */
   public static boolean enabled = true;
 }

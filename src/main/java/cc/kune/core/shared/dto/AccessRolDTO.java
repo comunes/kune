@@ -22,6 +22,18 @@
  \*/
 package cc.kune.core.shared.dto;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum AccessRolDTO.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum AccessRolDTO {
-  Administrator, Editor, Viewer
+  
+  /** The Administrator. */
+  Administrator, 
+ /** The Editor. */
+ Editor, 
+ /** The Viewer. */
+ Viewer
 }

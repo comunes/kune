@@ -24,23 +24,71 @@ package cc.kune.common.client.msgs;
 
 import cc.kune.common.client.notify.NotifyLevel;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserMessagesPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserMessagesPresenter {
 
+  /**
+   * The Interface UserMessagesView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface UserMessagesView {
+    
+    /**
+     * Adds the.
+     *
+     * @param level the level
+     * @param title the title
+     * @param message the message
+     * @param id the id
+     * @param closable the closable
+     * @param callback the callback
+     * @return the user message
+     */
     UserMessage add(NotifyLevel level, String title, String message, String id, Boolean closable,
         CloseCallback callback);
   }
 
+  /** The current closable. */
   private boolean currentClosable;
+  
+  /** The current id. */
   private String currentId;
+  
+  /** The current level. */
   private NotifyLevel currentLevel;
+  
+  /** The current msg. */
   private UserMessage currentMsg;
+  
+  /** The current title. */
   private String currentTitle;
+  
+  /** The view. */
   private UserMessagesView view;
 
+  /**
+   * Instantiates a new user messages presenter.
+   */
   public UserMessagesPresenter() {
   }
 
+  /**
+   * Adds the.
+   *
+   * @param level the level
+   * @param title the title
+   * @param message the message
+   * @param id the id
+   * @param closable the closable
+   * @param closeCallback the close callback
+   * @return the user message
+   */
   public UserMessage add(final NotifyLevel level, final String title, final String message,
       final String id, final boolean closable, final CloseCallback closeCallback) {
     if ((currentMsg != null && !currentMsg.isAttached()) || !level.equals(currentLevel)
@@ -58,10 +106,22 @@ public class UserMessagesPresenter {
     return currentMsg;
   }
 
+  /**
+   * Inits the.
+   *
+   * @param view the view
+   */
   public void init(final UserMessagesView view) {
     this.view = view;
   }
 
+  /**
+   * Same.
+   *
+   * @param object the object
+   * @param otherObj the other obj
+   * @return true, if successful
+   */
   private boolean same(final Object object, final Object otherObj) {
     if (object == otherObj) {
       return true;

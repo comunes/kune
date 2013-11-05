@@ -35,42 +35,78 @@ import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class HelloWorldPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class HelloWorldPanel extends ViewImpl implements HasText, HelloWorldView {
 
+  /**
+   * The Interface HelloWorldPanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface HelloWorldPanelUiBinder extends UiBinder<Widget, HelloWorldPanel> {
   }
 
+  /** The ui binder. */
   private static HelloWorldPanelUiBinder uiBinder = GWT.create(HelloWorldPanelUiBinder.class);
 
+  /** The button. */
   @UiField
   Button button;
 
+  /** The widget. */
   private final Widget widget;
 
+  /**
+   * Instantiates a new hello world panel.
+   */
   public HelloWorldPanel() {
     widget = uiBinder.createAndBindUi(this);
   }
 
+  /**
+   * Instantiates a new hello world panel.
+   *
+   * @param firstName the first name
+   */
   public HelloWorldPanel(final String firstName) {
     widget = uiBinder.createAndBindUi(this);
     button.setText(firstName);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return widget;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.HasText#getText()
+   */
   @Override
   public String getText() {
     return button.getText();
   }
 
+  /**
+   * On click.
+   *
+   * @param e the e
+   */
   @UiHandler("button")
   void onClick(final ClickEvent e) {
     NotifyUser.info("Hello world!");
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.HasText#setText(java.lang.String)
+   */
   @Override
   public void setText(final String text) {
     button.setText(text);

@@ -29,14 +29,35 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.resources.client.ImageResource.ImageOptions;
 import com.google.gwt.resources.client.ImageResource.RepeatStyle;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneWaveResources.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneWaveResources {
   // Not used now
+  /**
+   * The Interface Conversation.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface Conversation extends ClientBundle {
     // Note: the CSS file contains a gwt-image reference, so must be defined
     // after the referenced images in this interface.
+    /**
+     * Css.
+     *
+     * @return the top conversation view builder. css
+     */
     @Source("KuneConversation.css")
     TopConversationViewBuilder.Css css();
 
+    /**
+     * Empty toolbar.
+     *
+     * @return the image resource
+     */
     @ImageOptions(repeatStyle = RepeatStyle.Horizontal)
     @Source("toolbar_empty.png")
     ImageResource emptyToolbar();

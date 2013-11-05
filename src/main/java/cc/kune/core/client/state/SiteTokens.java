@@ -26,29 +26,70 @@ import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
 /**
- * Some common history tokens like {@link #SIGN_IN} and {@link #NEW_GROUP}
- * 
+ * Some common history tokens like {@link #SIGN_IN} and {@link #NEW_GROUP}.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SiteTokens {
+  
+  /** The Constant ABOUT_KUNE. */
   public static final String ABOUT_KUNE = "about";
+  
+  /** The Constant ASK_RESET_PASSWD. */
   public final static String ASK_RESET_PASSWD = "askresetpasswd";
+  
+  /** The Constant GROUP_HOME. */
   public final static String GROUP_HOME = "";
+  
+  /** The Constant GROUP_PREFS. */
   public final static String GROUP_PREFS = "gprefs";
+  
+  /** The Constant HOME. */
   public final static String HOME = "";
+  
+  /** The Constant INVITATION. */
   public final static String INVITATION = "invitation";
+  
+  /** The Constant NEW_GROUP. */
   public final static String NEW_GROUP = "newgroup";
+  
+  /** The Constant PREFS. */
   public final static String PREFS = "prefs";
+  
+  /** The Constant PREVIEW. */
   public static final String PREVIEW = "preview";
+  
+  /** The Constant REGISTER. */
   public final static String REGISTER = "register";
+  
+  /** The Constant RESET_PASSWD. */
   public final static String RESET_PASSWD = "resetpasswd";
+  
+  /** The Constant SIGN_IN. */
   public final static String SIGN_IN = "signin";
+  
+  /** The Constant SUBTITLES. */
   public final static String SUBTITLES = "sub";
+  
+  /** The Constant TRANSLATE. */
   public final static String TRANSLATE = "translate";
+  
+  /** The Constant TUTORIAL. */
   public static final String TUTORIAL = "tutorial";
+  
+  /** The Constant VERIFY_EMAIL. */
   public final static String VERIFY_EMAIL = "verifyemail";
+  
+  /** The Constant WAVE_INBOX. */
   public final static String WAVE_INBOX = "inbox";
 
+  /**
+   * Instantiates a new site tokens.
+   *
+   * @param reserverdWords the reserverd words
+   */
   @Inject
   public SiteTokens(final ReservedWordsRegistryDTO reserverdWords) {
     reserverdWords.add(ABOUT_KUNE);

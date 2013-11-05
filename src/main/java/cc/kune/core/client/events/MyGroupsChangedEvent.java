@@ -27,49 +27,107 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MyGroupsChangedEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MyGroupsChangedEvent extends GwtEvent<MyGroupsChangedEvent.MyGroupsChangedHandler> {
 
+  /**
+   * The Interface HasMyGroupsChangedHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasMyGroupsChangedHandlers extends HasHandlers {
+    
+    /**
+     * Adds the my groups changed handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addMyGroupsChangedHandler(MyGroupsChangedHandler handler);
   }
 
+  /**
+   * The Interface MyGroupsChangedHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface MyGroupsChangedHandler extends EventHandler {
+    
+    /**
+     * On my groups changed.
+     *
+     * @param event the event
+     */
     public void onMyGroupsChanged(MyGroupsChangedEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<MyGroupsChangedHandler> TYPE = new Type<MyGroupsChangedHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new MyGroupsChangedEvent());
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<MyGroupsChangedHandler> getType() {
     return TYPE;
   }
 
+  /**
+   * Instantiates a new my groups changed event.
+   */
   public MyGroupsChangedEvent() {
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(final MyGroupsChangedHandler handler) {
     handler.onMyGroupsChanged(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     return super.equals(obj);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<MyGroupsChangedHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     return super.hashCode();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "MyGroupsChangedEvent[" + "]";

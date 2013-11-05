@@ -44,19 +44,36 @@ import cc.kune.domain.finders.GroupFinder;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShouldBeMemberMethodInterceptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ShouldBeMemberMethodInterceptor implements MethodInterceptor {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(ShouldBeMemberMethodInterceptor.class);
 
+  /** The group finder. */
   @Inject
   Provider<GroupFinder> groupFinder;
+  
+  /** The kune properties. */
   @Inject
   Provider<KuneProperties> kuneProperties;
+  
+  /** The request provider. */
   @Inject
   Provider<HttpServletRequest> requestProvider;
+  
+  /** The user session manager. */
   @Inject
   UserSessionManager userSessionManager;
 
+  /* (non-Javadoc)
+   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+   */
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
     final Object[] arguments = invocation.getArguments();

@@ -43,6 +43,12 @@ import com.google.wave.api.Gadget;
 import com.google.wave.api.Participants;
 import com.google.wave.api.Wavelet;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneAgent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SuppressWarnings("serial")
 @Singleton
 public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService {
@@ -50,9 +56,17 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
   // private static final Logger LOG =
   // Logger.getLogger(KuneAgent.class.getName());
 
+  /** The Constant NO_TITLE. */
   private static final String NO_TITLE = "";
+  
+  /** The Constant ROBOT_URI. */
   public static final String ROBOT_URI = AGENT_PREFIX_URI + "/kune-agent";
 
+  /**
+   * Instantiates a new kune agent.
+   *
+   * @param injector the injector
+   */
   @Inject
   public KuneAgent(final Injector injector) {
     super(injector);
@@ -64,12 +78,18 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
   // super(waveDomain, accountStore, tokenGenerator, frontendAddressHolder);
   // }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#addGadget(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.net.URL)
+   */
   @Override
   public void addGadget(final WaveRef waveName, final String author, final URL gadgetUrl) {
     // TODO Auto-generated method stub
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#addParticipants(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.lang.String, java.lang.String[])
+   */
   @Override
   public boolean addParticipants(final WaveRef waveName, final String author, final String userWhoAdd,
       final String... newParticipants) {
@@ -77,18 +97,27 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(final String message, final SimpleArgCallback<WaveRef> onCreate,
       final ParticipantId... participants) {
     return createWave(NO_TITLE, message, onCreate, participants);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(@Nonnull final String title, final String message,
       final SimpleArgCallback<WaveRef> onCreate, @Nonnull final ParticipantId... participantsArray) {
     return createWave(title, message, onCreate, WITHOUT_GADGET, participantsArray);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, java.lang.String[])
+   */
   @Override
   public WaveRef createWave(final String title, final String message,
       final SimpleArgCallback<WaveRef> onCreate, final String... participantsArray) {
@@ -96,6 +125,9 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, java.net.URL, java.util.Map, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(final String newtitle, final String body,
       final SimpleArgCallback<WaveRef> simpleArgCallback, final URL gadgetUrl,
@@ -104,6 +136,9 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, cc.kune.common.shared.utils.SimpleArgCallback, java.net.URL, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(final String title, final String message,
       final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
@@ -117,6 +152,9 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, org.waveprotocol.wave.model.waveref.WaveRef, cc.kune.common.shared.utils.SimpleArgCallback, java.net.URL, java.util.Map, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(final String title, final String message, final WaveRef waveIdToCopy,
       final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
@@ -125,6 +163,9 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#createWave(java.lang.String, java.lang.String, org.waveprotocol.wave.model.waveref.WaveRef, cc.kune.common.shared.utils.SimpleArgCallback, java.net.URL, org.waveprotocol.wave.model.wave.ParticipantId[])
+   */
   @Override
   public WaveRef createWave(final String title, final String message, final WaveRef waveIdToCopy,
       final SimpleArgCallback<WaveRef> onCreate, final URL gadgetUrl,
@@ -132,18 +173,27 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#delParticipants(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.lang.String[])
+   */
   @Override
   public void delParticipants(final WaveRef waveName, final String whoDel, final String... participants) {
     // TODO Auto-generated method stub
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#fetchWave(org.waveprotocol.wave.model.id.WaveId, org.waveprotocol.wave.model.id.WaveletId, java.lang.String)
+   */
   @Override
   public Wavelet fetchWave(final WaveId waveId, final WaveletId waveletId, final String author) {
     // TODO Auto-generated method stub
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#fetchWave(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String)
+   */
   @Override
   public Wavelet fetchWave(final WaveRef waveRef, final String author) {
     // // Preconditions.checkNotNull(author);
@@ -171,57 +221,87 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#getGadget(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.net.URL)
+   */
   @Override
   public Gadget getGadget(final WaveRef waveletName, final String author, final URL gadgetUrl) {
     // TODO Auto-generated method stub
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#getParticipants(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String)
+   */
   @Override
   public Participants getParticipants(final WaveRef waveref, final String author) {
     // TODO Auto-generated method stub
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.box.server.robots.agent.AbstractBaseRobotAgent#getRobotId()
+   */
   @Override
   public String getRobotId() {
     return "kune-agent";
   }
 
+  /* (non-Javadoc)
+   * @see com.google.wave.api.AbstractRobot#getRobotName()
+   */
   @Override
   protected String getRobotName() {
     return "Kune Agent";
   }
 
+  /* (non-Javadoc)
+   * @see org.waveprotocol.box.server.robots.agent.AbstractBaseRobotAgent#getRobotUri()
+   */
   @Override
   public String getRobotUri() {
     return ROBOT_URI;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#getTitle(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String)
+   */
   @Override
   public String getTitle(final WaveRef waveName, final String author) {
     // TODO Auto-generated method stub
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#isParticipant(com.google.wave.api.Wavelet, java.lang.String)
+   */
   @Override
   public boolean isParticipant(final Wavelet wavelet, final String user) {
     // TODO Auto-generated method stub
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#render(com.google.wave.api.Wavelet)
+   */
   @Override
   public String render(final Wavelet wavelet) {
     // TODO Auto-generated method stub
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#render(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String)
+   */
   @Override
   public String render(final WaveRef waveRef, final String author) {
     // TODO Auto-generated method stub
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#setGadgetProperty(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.net.URL, java.util.Map)
+   */
   @Override
   public void setGadgetProperty(final WaveRef waveletName, final String author, final URL gadgetUrl,
       final Map<String, String> newProperties) {
@@ -229,6 +309,9 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.server.kspecific.KuneWaveService#setTitle(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.lang.String)
+   */
   @Override
   public void setTitle(final WaveRef waveName, final String title, final String author) {
     // TODO Auto-generated method stub

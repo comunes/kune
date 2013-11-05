@@ -2,7 +2,7 @@
 <module rename-to='kune_color_picker'>
   <!-- Inherit the core Web Toolkit stuff. -->
   <inherits name='com.google.gwt.user.User'/>
-<!--   <inherits name='net.auroris.ColorPicker.client'/> -->
+  <!-- <inherits name='net.auroris.ColorPicker.client'/> -->
   <!-- Other module inherits -->
 
   <!-- Specify the app entry point class. -->

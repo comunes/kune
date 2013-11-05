@@ -29,16 +29,33 @@ import cc.kune.core.client.ws.entheader.EntityTextLogo;
 import cc.kune.selenium.PageObject;
 import cc.kune.selenium.SeleniumConstants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityHeaderPageObject.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityHeaderPageObject extends PageObject {
 
+  /** The logo image. */
   @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_IMAGE)
   protected WebElement logoImage;
+  
+  /** The logo name. */
   @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_NAME)
   protected WebElement logoName;
 
+  /**
+   * Instantiates a new entity header page object.
+   */
   public EntityHeaderPageObject() {
   }
 
+  /**
+   * Wait for entity title.
+   *
+   * @param text the text
+   */
   public void waitForEntityTitle(final String text) {
     waitFor(logoName, text);
   }

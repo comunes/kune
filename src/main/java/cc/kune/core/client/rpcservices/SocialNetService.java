@@ -30,39 +30,147 @@ import cc.kune.core.shared.dto.SocialNetworkRequestResult;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface SocialNetService.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @RemoteServiceRelativePath("SocialNetService")
 public interface SocialNetService extends RemoteService {
 
+  /**
+   * Accept join group.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @param groupToAcceptShortName the group to accept short name
+   * @return the social network data dto
+   * @throws DefaultException the default exception
+   */
   SocialNetworkDataDTO acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName)
       throws DefaultException;
 
+  /**
+   * Adds the admin member.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @param groupToAddShortName the group to add short name
+   * @return the social network data dto
+   * @throws DefaultException the default exception
+   */
   SocialNetworkDataDTO addAdminMember(String hash, StateToken groupToken, String groupToAddShortName)
       throws DefaultException;
 
+  /**
+   * Adds the as buddie.
+   *
+   * @param hash the hash
+   * @param userName the user name
+   * @throws DefaultException the default exception
+   */
   void addAsBuddie(String hash, String userName) throws DefaultException;
 
+  /**
+   * Adds the collab member.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @param groupToAddShortName the group to add short name
+   * @return the social network data dto
+   * @throws DefaultException the default exception
+   */
   SocialNetworkDataDTO addCollabMember(String hash, StateToken groupToken, String groupToAddShortName)
       throws DefaultException;
 
+  /**
+   * Adds the viewer member.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @param groupToAddShortName the group to add short name
+   * @return the social network data dto
+   * @throws DefaultException the default exception
+   */
   SocialNetworkDataDTO addViewerMember(String hash, StateToken groupToken, String groupToAddShortName)
       throws DefaultException;
 
+  /**
+   * Delete member.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @param groupToDeleteShortName the group to delete short name
+   * @return the social network data dto
+   * @throws DefaultException the default exception
+   */
   SocialNetworkDataDTO deleteMember(String hash, StateToken groupToken, String groupToDeleteShortName)
       throws DefaultException;
 
+  /**
+   * Deny join group.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @param groupToDenyShortName the group to deny short name
+   * @return the social network data dto
+   * @throws DefaultException the default exception
+   */
   SocialNetworkDataDTO denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName)
       throws DefaultException;
 
+  /**
+   * Gets the social network.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @return the social network
+   * @throws DefaultException the default exception
+   */
   SocialNetworkDataDTO getSocialNetwork(String hash, StateToken groupToken) throws DefaultException;
 
+  /**
+   * Request join group.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @return the social network request result
+   * @throws DefaultException the default exception
+   */
   SocialNetworkRequestResult requestJoinGroup(String hash, StateToken groupToken)
       throws DefaultException;
 
+  /**
+   * Sets the admin as collab.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @param groupToSetCollabShortName the group to set collab short name
+   * @return the social network data dto
+   * @throws DefaultException the default exception
+   */
   SocialNetworkDataDTO setAdminAsCollab(String hash, StateToken groupToken,
       String groupToSetCollabShortName) throws DefaultException;
 
+  /**
+   * Sets the collab as admin.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @param groupToSetAdminShortName the group to set admin short name
+   * @return the social network data dto
+   * @throws DefaultException the default exception
+   */
   SocialNetworkDataDTO setCollabAsAdmin(String hash, StateToken groupToken,
       String groupToSetAdminShortName) throws DefaultException;
 
+  /**
+   * Un join group.
+   *
+   * @param hash the hash
+   * @param groupToken the group token
+   * @throws DefaultException the default exception
+   */
   void unJoinGroup(String hash, StateToken groupToken) throws DefaultException;
 }

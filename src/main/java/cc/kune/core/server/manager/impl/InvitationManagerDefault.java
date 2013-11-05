@@ -68,22 +68,63 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InvitationManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class InvitationManagerDefault extends DefaultManager<Invitation, Long> implements
     InvitationManager {
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(InvitationManagerDefault.class);
+  
+  /** The basic properties. */
   private final KuneBasicProperties basicProperties;
+  
+  /** The container manager. */
   private final ContainerManager containerManager;
+  
+  /** The em. */
   private final Provider<EntityManager> em;
+  
+  /** The finder. */
   private final InvitationFinder finder;
+  
+  /** The group finder. */
   private final GroupFinder groupFinder;
+  
+  /** The i18n language manager. */
   private final I18nLanguageManager i18nLanguageManager;
+  
+  /** The list service. */
   private final ListServerService listService;
+  
+  /** The notification html helper. */
   private final NotificationHtmlHelper notificationHtmlHelper;
+  
+  /** The notify service. */
   private final NotificationService notifyService;
+  
+  /** The sn manager. */
   private final SocialNetworkManager snManager;
 
+  /**
+   * Instantiates a new invitation manager default.
+   *
+   * @param provider the provider
+   * @param finder the finder
+   * @param notifyService the notify service
+   * @param i18nLanguageManager the i18n language manager
+   * @param basicProperties the basic properties
+   * @param notificationHtmlHelper the notification html helper
+   * @param groupFinder the group finder
+   * @param containerManager the container manager
+   * @param snManager the sn manager
+   * @param listService the list service
+   */
   @Inject
   public InvitationManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final InvitationFinder finder, final NotificationService notifyService,
@@ -104,6 +145,9 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     this.listService = listService;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.InvitationManager#confirmInvitationToGroup(cc.kune.domain.User, java.lang.String)
+   */
   @Override
   public SocialNetworkDataDTO confirmInvitationToGroup(final User user, final String invitationHash) {
     try {
@@ -120,6 +164,9 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.InvitationManager#confirmInvitationToList(cc.kune.domain.User, java.lang.String)
+   */
   @Override
   public StateContainerDTO confirmInvitationToList(final User user, final String invitationHash) {
     try {
@@ -133,6 +180,9 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.InvitationManager#confirmInvitationToSite(cc.kune.domain.User, java.lang.String)
+   */
   @Override
   public void confirmInvitationToSite(final User user, final String invitationHash) {
     try {
@@ -153,6 +203,9 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.InvitationManager#deleteOlderInvitations()
+   */
   @Override
   @KuneTransactional
   public void deleteOlderInvitations() {
@@ -160,6 +213,9 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     em.get().createQuery("DELETE FROM Invitation i WHERE i.used = true AND i.date <= " + aWeekAgo).executeUpdate();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.InvitationManager#get(java.lang.String)
+   */
   @Override
   public Invitation get(final String invitationHash) {
     try {
@@ -172,6 +228,9 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.InvitationManager#invite(cc.kune.domain.User, cc.kune.core.shared.domain.InvitationType, cc.kune.core.server.notifier.NotificationType, cc.kune.core.shared.domain.utils.StateToken, java.lang.String[])
+   */
   @Override
   public void invite(final User from, final InvitationType type, final NotificationType notifType,
       final StateToken token, final String... emails) {

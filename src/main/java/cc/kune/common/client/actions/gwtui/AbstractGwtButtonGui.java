@@ -40,36 +40,74 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.ToggleButton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractGwtButtonGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
 
+  /** The button. */
   private ButtonBase button;
+  
+  /** The enable tongle. */
   protected boolean enableTongle;
+  
+  /** The icon label. */
   private IconLabel iconLabel;
+  
+  /** The is child. */
   private boolean isChild;
 
+  /**
+   * Instantiates a new abstract gwt button gui.
+   */
   public AbstractGwtButtonGui() {
     this(null, false);
   }
 
+  /**
+   * Instantiates a new abstract gwt button gui.
+   *
+   * @param enableTongle the enable tongle
+   */
   public AbstractGwtButtonGui(final boolean enableTongle) {
     this(null, enableTongle);
   }
 
+  /**
+   * Instantiates a new abstract gwt button gui.
+   *
+   * @param buttonDescriptor the button descriptor
+   */
   public AbstractGwtButtonGui(final ButtonDescriptor buttonDescriptor) {
     this(buttonDescriptor, false);
   }
 
+  /**
+   * Instantiates a new abstract gwt button gui.
+   *
+   * @param buttonDescriptor the button descriptor
+   * @param enableTongle the enable tongle
+   */
   public AbstractGwtButtonGui(final ButtonDescriptor buttonDescriptor, final boolean enableTongle) {
     super(buttonDescriptor);
     this.enableTongle = enableTongle;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang.String)
+   */
   @Override
   protected void addStyle(final String style) {
     button.addStyleName(style);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
@@ -115,10 +153,16 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     return this;
   }
 
+  /**
+   * Layout.
+   */
   private void layout() {
     button.setHTML(iconLabel.getElement().getInnerHTML());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
+   */
   @Override
   public void setEnabled(final boolean enabled) {
     // Log.info("Set button" + descriptor.getValue(Action.NAME) + " enabled " +
@@ -128,35 +172,55 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     button.getElement().getStyle().setOpacity(enabled ? 1d : 0.6d);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+   */
   @Override
   public void setIcon(final KuneIcon icon) {
     iconLabel.setLeftIconFont(icon);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+   */
   @Override
   public void setIconBackground(final String backgroundColor) {
     iconLabel.setLeftIconBackground(backgroundColor);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google.gwt.resources.client.ImageResource)
+   */
   @Override
   public void setIconResource(final ImageResource icon) {
     iconLabel.setLeftIconResource(icon);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+   */
   @Override
   protected void setIconStyle(final String style) {
     iconLabel.setRightIcon(style);
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+   */
   @Override
   public void setIconUrl(final String url) {
     iconLabel.setLeftIconUrl(url);
     layout();
   }
 
+  /**
+   * Sets the pressed.
+   *
+   * @param pressed the new pressed
+   */
   public void setPressed(final boolean pressed) {
     final ToggleButton toggleButton = (ToggleButton) button;
 
@@ -165,22 +229,34 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+   */
   @Override
   public void setText(final String text) {
     iconLabel.setText(text, descriptor.getDirection());
     layout();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang.String)
+   */
   @Override
   public void setToolTipText(final String tooltipText) {
     Tooltip.to(button, tooltipText);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
+   */
   @Override
   public void setVisible(final boolean visible) {
     button.setVisible(visible);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
+   */
   @Override
   public boolean shouldBeAdded() {
     return !descriptor.isChild();

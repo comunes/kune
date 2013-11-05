@@ -34,20 +34,41 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.wave.api.Wavelet;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RenderedWavesCache.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class RenderedWavesCache extends CachedCollection<String, Pair<Long, String>> {
+  
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(RenderedWavesCache.class);
 
+  /** The Constant SEP. */
   private static final String SEP = "---";
 
+  /** The kune wave service. */
   private final KuneWaveService kuneWaveService;
 
+  /**
+   * Instantiates a new rendered waves cache.
+   *
+   * @param kuneWaveService the kune wave service
+   */
   @Inject
   public RenderedWavesCache(final KuneWaveService kuneWaveService) {
     super(50);
     this.kuneWaveService = kuneWaveService;
   }
 
+  /**
+   * Gets the or render.
+   *
+   * @param wavelet the wavelet
+   * @return the or render
+   */
   public String getOrRender(final Wavelet wavelet) {
     final Pair<Long, String> pair = get(ref(wavelet));
     final long lastModifiedTime = wavelet.getLastModifiedTime();
@@ -63,6 +84,12 @@ public class RenderedWavesCache extends CachedCollection<String, Pair<Long, Stri
     return pair.getRight();
   }
 
+  /**
+   * Ref.
+   *
+   * @param wavelet the wavelet
+   * @return the string
+   */
   private String ref(final Wavelet wavelet) {
     return wavelet.getWaveId() + SEP + wavelet.getWaveletId();
   }

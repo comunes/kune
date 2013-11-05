@@ -33,8 +33,22 @@ import cc.kune.selenium.SeleniumUtils;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ScreenCastsViaSeleniumTests.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ScreenCastsViaSeleniumTests extends KuneSeleniumTest {
 
+  /**
+   * Global screencast.
+   *
+   * @param shortNameUntrans the short name untrans
+   * @param longNameUntrans the long name untrans
+   * @param passwd the passwd
+   * @param emailUntrans the email untrans
+   */
   @Test(dataProvider = "correctregister")
   public void globalScreencast(final String shortNameUntrans, final String longNameUntrans,
       final String passwd, final String emailUntrans) {

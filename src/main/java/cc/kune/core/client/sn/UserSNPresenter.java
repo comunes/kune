@@ -54,47 +54,150 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserSNPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy> {
 
+  /**
+   * The Interface UserSNProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface UserSNProxy extends Proxy<UserSNPresenter> {
   }
 
+  /**
+   * The Interface UserSNView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface UserSNView extends View {
 
+    /**
+     * Adds the buddie.
+     *
+     * @param user the user
+     * @param avatarUrl the avatar url
+     * @param tooltip the tooltip
+     * @param tooltipTitle the tooltip title
+     * @param menu the menu
+     * @param dragable the dragable
+     */
     void addBuddie(UserSimpleDTO user, String avatarUrl, String tooltip, String tooltipTitle,
         GuiActionDescCollection menu, boolean dragable);
 
+    /**
+     * Adds the participation.
+     *
+     * @param group the group
+     * @param avatarUrl the avatar url
+     * @param tooltip the tooltip
+     * @param tooltipTitle the tooltip title
+     * @param menu the menu
+     * @param dragable the dragable
+     */
     void addParticipation(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
         GuiActionDescCollection menu, boolean dragable);
 
+    /**
+     * Adds the text to buddie list.
+     *
+     * @param text the text
+     */
     void addTextToBuddieList(String text);
 
+    /**
+     * Clear.
+     */
     void clear();
 
+    /**
+     * Gets the bottom toolbar.
+     *
+     * @return the bottom toolbar
+     */
     IsActionExtensible getBottomToolbar();
 
+    /**
+     * Sets the buddies count.
+     *
+     * @param count the new buddies count
+     */
     void setBuddiesCount(int count);
 
+    /**
+     * Sets the buddies visible.
+     *
+     * @param visible the visible
+     * @param areMany the are many
+     */
     void setBuddiesVisible(boolean visible, boolean areMany);
 
+    /**
+     * Sets the no buddies.
+     */
     void setNoBuddies();
 
+    /**
+     * Sets the participation count.
+     *
+     * @param count the new participation count
+     */
     void setParticipationCount(int count);
 
+    /**
+     * Sets the participation visible.
+     *
+     * @param visible the visible
+     * @param areMany the are many
+     */
     void setParticipationVisible(boolean visible, boolean areMany);
 
+    /**
+     * Sets the visible.
+     *
+     * @param visible the new visible
+     */
     void setVisible(boolean visible);
 
+    /**
+     * Show buddies.
+     */
     void showBuddies();
 
+    /**
+     * Show buddies not public.
+     */
     void showBuddiesNotPublic();
   }
 
+  /** The conf actions registry. */
   private final UserSNConfActions confActionsRegistry;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The user menu items registry. */
   private final UserSNMenuItemsRegistry userMenuItemsRegistry;
 
+  /**
+   * Instantiates a new user sn presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   * @param i18n the i18n
+   * @param stateManager the state manager
+   * @param session the session
+   * @param downloadProvider the download provider
+   * @param userMenuItemsRegistry the user menu items registry
+   * @param confActionsRegistry the conf actions registry
+   */
   @Inject
   public UserSNPresenter(final EventBus eventBus, final UserSNView view, final UserSNProxy proxy,
       final I18nTranslationService i18n, final StateManager stateManager, final Session session,
@@ -132,11 +235,19 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     refreshActionsImpl();
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
+   */
   @Override
   public UserSNView getView() {
     return (UserSNView) super.getView();
   }
 
+  /**
+   * On state changed.
+   *
+   * @param state the state
+   */
   private void onStateChanged(final StateAbstractDTO state) {
     if (state.getGroup().isNotPersonal()) {
       getView().setVisible(false);
@@ -156,15 +267,26 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     }
   }
 
+  /**
+   * Refresh actions.
+   */
   public void refreshActions() {
     refreshActionsImpl();
   }
 
+  /**
+   * Refresh actions impl.
+   */
   private void refreshActionsImpl() {
     getView().getBottomToolbar().clear();
     getView().getBottomToolbar().addAll(confActionsRegistry);
   }
 
+  /**
+   * Refresh on sign in sign out.
+   *
+   * @param session the session
+   */
   private void refreshOnSignInSignOut(final Session session) {
     final StateAbstractDTO currentState = session.getCurrentState();
     if (currentState != null) {
@@ -172,11 +294,20 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     }
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
   }
 
+  /**
+   * Sets the buddies state.
+   *
+   * @param state the state
+   * @return the int
+   */
   private int setBuddiesState(final StateAbstractDTO state) {
     final UserBuddiesDataDTO userBuddiesData = state.getUserBuddies();
     final List<UserSimpleDTO> buddies = userBuddiesData.getBuddies();
@@ -211,6 +342,12 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     return buddieNumber;
   }
 
+  /**
+   * Sets the participation state.
+   *
+   * @param state the state
+   * @return the int
+   */
   private int setParticipationState(final StateAbstractDTO state) {
     final ParticipationDataDTO participation = state.getParticipation();
     final List<GroupDTO> groupsIsAdmin = participation.getGroupsIsAdmin();

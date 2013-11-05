@@ -29,7 +29,8 @@ import cc.kune.core.shared.domain.utils.StateToken;
  * The Interface HistoryWrapper controls the url #hash of the browser.
  * 
  * More info: http://en.wikipedia.org/wiki/Fragment_identifier
- * 
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface HistoryWrapper {
 
@@ -65,9 +66,8 @@ public interface HistoryWrapper {
 
   /**
    * Goes to this new #group.tool.id.id token
-   * 
-   * @param historyToken
-   *          the new history token fragment
+   *
+   * @param token the token
    */
   void newItem(StateToken token);
 

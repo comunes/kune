@@ -35,8 +35,20 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateNoContentDTO;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentServiceGetTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
+  /**
+   * Content of user with no home page.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void contentOfUserWithNoHomePage() throws Exception {
     final String userHash = doLogin().getUserHash();
@@ -45,6 +57,11 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     assertTrue(response instanceof StateNoContentDTO);
   }
 
+  /**
+   * Content with logged user is editable.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void contentWithLoggedUserIsEditable() throws Exception {
     final String userHash = doLogin().getUserHash();
@@ -55,11 +72,19 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     assertEquals(1, response.getAccessLists().getAdmins().getList().size());
   }
 
+  /**
+   * Creates the.
+   */
   @Before
   public void create() {
     new IntegrationTestHelper(true, this);
   }
 
+  /**
+   * Default countent should exist.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void defaultCountentShouldExist() throws Exception {
     final StateContentDTO content = (StateContentDTO) contentService.getContent(null, new StateToken());
@@ -71,6 +96,11 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     assertNotNull(content.getDocumentId());
   }
 
+  /**
+   * Def content of user with no home page.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void defContentOfUserWithNoHomePage() throws Exception {
     doLogin();
@@ -78,38 +108,73 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     assertEquals(response.getStateToken(), getSiteDefaultContent().getStateToken());
   }
 
+  /**
+   * No content not logged.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void noContentNotLogged() throws Exception {
     final StateContentDTO response = (StateContentDTO) contentService.getContent(null, new StateToken());
     assertNotNull(response);
   }
 
+  /**
+   * Non existent content.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent() throws Exception {
     contentService.getContent(null, new StateToken("foo foo foo"));
   }
 
+  /**
+   * Non existent content2.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent2() throws Exception {
     contentService.getContent(null, new StateToken("site.foofoo"));
   }
 
+  /**
+   * Non existent content3.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent3() throws Exception {
     contentService.getContent(null, new StateToken("site.docs.foofoo"));
   }
 
+  /**
+   * Non existent content4.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent4() throws Exception {
     final StateContainerDTO stateDTO = getSiteDefaultContent();
     contentService.getContent(null, stateDTO.getStateToken().copy().setDocument("dadaas"));
   }
 
+  /**
+   * Non existent content5.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent5() throws Exception {
     contentService.getContent(null, new StateToken("comm3.docs.19"));
   }
 
+  /**
+   * Not logged user should not edit default doc.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void notLoggedUserShouldNotEditDefaultDoc() throws Exception {
     final StateContentDTO content = (StateContentDTO) contentService.getContent(null, new StateToken());
@@ -121,6 +186,11 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
     assertTrue(content.getContainerRights().isVisible());
   }
 
+  /**
+   * Unknown content.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void unknownContent() throws Exception {
     final StateContainerDTO content = (StateContainerDTO) contentService.getContent(null,

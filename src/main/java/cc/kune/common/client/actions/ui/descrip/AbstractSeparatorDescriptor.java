@@ -24,8 +24,17 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractSeparatorDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractSeparatorDescriptor extends AbstractGuiActionDescrip {
 
+  /**
+   * Instantiates a new abstract separator descriptor.
+   */
   public AbstractSeparatorDescriptor() {
     super(AbstractAction.NO_ACTION);
   }

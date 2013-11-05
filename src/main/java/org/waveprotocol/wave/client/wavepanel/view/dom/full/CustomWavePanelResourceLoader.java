@@ -23,26 +23,40 @@ import cc.kune.wave.client.resources.KuneWaveResources;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.StyleInjector;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class is responsible for loading all the Css resources needed by the
  * wave panel.
  *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class CustomWavePanelResourceLoader {
 
+  /** The Constant blip. */
   private final static BlipViewBuilder.Resources blip = 
        GWT.create(BlipViewBuilder.Resources.class);
+  
+  /** The Constant collapsible. */
   private final static CollapsibleBuilder.Resources collapsible =
       GWT.create(CollapsibleBuilder.Resources.class);
+  
+  /** The Constant rootThread. */
   private final static RootThreadViewBuilder.Resources rootThread =
       GWT.create(RootThreadViewBuilder.Resources.class);
+  
+  /** The Constant replyBox. */
   private final static ReplyBoxViewBuilder.Resources replyBox =
       GWT.create(ReplyBoxViewBuilder.Resources.class);
+  
+  /** The Constant inlineContinuation. */
   private final static ContinuationIndicatorViewBuilder.Resources inlineContinuation =
     GWT.create(ContinuationIndicatorViewBuilder.Resources.class);
   // Kune patch (but not used yet)
+  /** The Constant conversation. */
   private final static KuneWaveResources.Conversation conversation =
       GWT.create(KuneWaveResources.Conversation.class);
+  
+  /** The Constant participants. */
   private final static ParticipantsViewBuilder.Resources participants =
     GWT.create(ParticipantsViewBuilder.Resources.class);
 
@@ -63,33 +77,71 @@ public final class CustomWavePanelResourceLoader {
     StyleInjector.inject(participants.css().getText(), isSynchronous);
   }
 
+  /**
+   * Instantiates a new custom wave panel resource loader.
+   */
   private CustomWavePanelResourceLoader() {
   }
 
+  /**
+   * Gets the blip.
+   *
+   * @return the blip
+   */
   public static BlipViewBuilder.Resources getBlip() {
     return blip;
   }
 
+  /**
+   * Gets the collapsible.
+   *
+   * @return the collapsible
+   */
   public static CollapsibleBuilder.Resources getCollapsible() {
     return collapsible;
   }
 
+  /**
+   * Gets the root thread.
+   *
+   * @return the root thread
+   */
   public static RootThreadViewBuilder.Resources getRootThread() {
     return rootThread;
   }
 
+  /**
+   * Gets the reply box.
+   *
+   * @return the reply box
+   */
   public static ReplyBoxViewBuilder.Resources getReplyBox() {
     return replyBox;
   }
 
+  /**
+   * Gets the continuation indicator.
+   *
+   * @return the continuation indicator
+   */
   public static ContinuationIndicatorViewBuilder.Resources getContinuationIndicator() {
     return inlineContinuation;
   }
 
+  /**
+   * Gets the conversation.
+   *
+   * @return the conversation
+   */
   public static KuneWaveResources.Conversation getConversation() {
     return conversation;
   }
 
+  /**
+   * Gets the participants.
+   *
+   * @return the participants
+   */
   public static ParticipantsViewBuilder.Resources getParticipants() {
     return participants;
   }

@@ -28,12 +28,24 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GxtPushButtonGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GxtPushButtonGui extends GxtButtonGui {
 
+  /**
+   * Instantiates a new gxt push button gui.
+   */
   public GxtPushButtonGui() {
     super();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gxtbinds.client.actions.gxtui.AbstractGxtButtonGui#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     final AbstractGuiItem item = super.create(descriptor);

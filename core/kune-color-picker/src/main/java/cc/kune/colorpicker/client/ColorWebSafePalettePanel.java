@@ -28,22 +28,36 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SourcesTableEvents;
 import com.google.gwt.user.client.ui.TableListener;
 
+// TODO: Auto-generated Javadoc
 /**
- *
  * A Web safe colors palette. See:
  * http://en.wikipedia.org/wiki/Web_colors#Web-safe_colors
  *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ColorWebSafePalettePanel implements ColorWebSafePaletteView {
 
+  /** The palette grid. */
   Grid paletteGrid;
+  
+  /** The popup palette. */
   private PopupPanel popupPalette;
+  
+  /** The presenter. */
   private final ColorWebSafePalettePresenter presenter;
 
+  /**
+   * Instantiates a new color web safe palette panel.
+   *
+   * @param initPresenter the init presenter
+   */
   public ColorWebSafePalettePanel(final ColorWebSafePalettePresenter initPresenter) {
     this.presenter = initPresenter;
   }
 
+  /**
+   * Creates the palette.
+   */
   private void createPalette() {
     paletteGrid = new Grid(ROWS, COLS);
 
@@ -75,6 +89,9 @@ public class ColorWebSafePalettePanel implements ColorWebSafePaletteView {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.colorpicker.client.ColorWebSafePaletteView#hide()
+   */
   @Override
   public void hide() {
     if (popupPalette != null) {
@@ -82,6 +99,9 @@ public class ColorWebSafePalettePanel implements ColorWebSafePaletteView {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.colorpicker.client.ColorWebSafePaletteView#show(int, int)
+   */
   @Override
   public void show(final int left, final int top) {
     if (paletteGrid == null) {

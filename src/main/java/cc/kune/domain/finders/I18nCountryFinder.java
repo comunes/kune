@@ -30,11 +30,28 @@ import cc.kune.domain.I18nCountry;
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface I18nCountryFinder.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface I18nCountryFinder {
 
+  /**
+   * Find by code.
+   *
+   * @param country the country
+   * @return the i18n country
+   */
   @Finder(query = "FROM I18nCountry WHERE code = :country")
   public I18nCountry findByCode(@Named("country") final String country);
 
+  /**
+   * Gets the all.
+   *
+   * @return the all
+   */
   @Finder(query = "FROM I18nCountry ORDER BY english_name", returnAs = ArrayList.class)
   public List<I18nCountry> getAll();
 

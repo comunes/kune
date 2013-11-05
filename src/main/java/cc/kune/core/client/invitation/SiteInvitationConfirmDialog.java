@@ -26,11 +26,31 @@ package cc.kune.core.client.invitation;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SiteInvitationConfirmDialog.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SiteInvitationConfirmDialog extends AbstractInvitationConfirmDialog {
+  
+  /**
+   * The Class Builder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class Builder extends AbstractInvitationConfirmDialog.Builder {
 
+    /** The Constant DIALOG_ID. */
     public static final String DIALOG_ID = "k-site-inv-confirm-diag-id";
 
+    /**
+     * Instantiates a new builder.
+     *
+     * @param redirect the redirect
+     * @param i18n the i18n
+     * @param userWhoInvites the user who invites
+     */
     public Builder(final String redirect, final I18nUITranslationService i18n,
         final String userWhoInvites) {
       super(
@@ -45,6 +65,11 @@ public class SiteInvitationConfirmDialog extends AbstractInvitationConfirmDialog
 
   }
 
+  /**
+   * Instantiates a new site invitation confirm dialog.
+   *
+   * @param builder the builder
+   */
   protected SiteInvitationConfirmDialog(final SiteInvitationConfirmDialog.Builder builder) {
     super(builder);
   }

@@ -25,17 +25,34 @@ package cc.kune.common.client.actions.ui;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractActionExtensiblePresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public abstract class AbstractActionExtensiblePresenter implements IsActionExtensible {
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public abstract void add(final GuiActionDescrip descriptor);
 
+  /**
+   * Adds the action collection.
+   *
+   * @param descriptors the descriptors
+   */
   public void addActionCollection(final GuiActionDescCollection descriptors) {
     for (final GuiActionDescrip descriptor : descriptors) {
       add(descriptor);
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip[])
+   */
   @Override
   public void add(final GuiActionDescrip... descriptors) {
     for (final GuiActionDescrip descriptor : descriptors) {

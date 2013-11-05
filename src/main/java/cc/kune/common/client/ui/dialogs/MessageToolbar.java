@@ -31,12 +31,32 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MessageToolbar.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MessageToolbar extends Composite {
+  
+  /** The error icon. */
   private final Image errorIcon;
+  
+  /** The error label. */
   private final Label errorLabel;
+  
+  /** The images. */
   private final NotifyLevelImages images;
+  
+  /** The toolbar. */
   private final FlowPanel toolbar;
 
+  /**
+   * Instantiates a new message toolbar.
+   *
+   * @param images the images
+   * @param errorLabelId the error label id
+   */
   public MessageToolbar(final NotifyLevelImages images, final String errorLabelId) {
     this.images = images;
     toolbar = new FlowPanel();
@@ -55,16 +75,30 @@ public class MessageToolbar extends Composite {
     initWidget(toolbar);
   }
 
+  /**
+   * Gets the toolbar.
+   *
+   * @return the toolbar
+   */
   public FlowPanel getToolbar() {
     return toolbar;
   }
 
+  /**
+   * Hide error message.
+   */
   public void hideErrorMessage() {
     errorIcon.setVisible(false);
     errorLabel.setText("");
     toolbar.setVisible(false);
   }
 
+  /**
+   * Sets the error message.
+   *
+   * @param message the message
+   * @param level the level
+   */
   public void setErrorMessage(final String message, final NotifyLevel level) {
     errorLabel.setText(message);
     final ImageResource icon = images.getImage(level);

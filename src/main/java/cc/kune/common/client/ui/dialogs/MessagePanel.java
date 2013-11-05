@@ -38,23 +38,54 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MessagePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MessagePanel extends Composite implements MessagePanelView {
 
+  /**
+   * The Interface MessagePanelUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface MessagePanelUiBinder extends UiBinder<Widget, MessagePanel> {
   }
+  
+  /** The ui binder. */
   private static MessagePanelUiBinder uiBinder = GWT.create(MessagePanelUiBinder.class);
+  
+  /** The description. */
   @UiField
   Label description;
+  
+  /** The flow panel. */
   @UiField
   FlowPanel flowPanel;
+  
+  /** The icon. */
   @UiField
   Image icon;
+  
+  /** The images. */
   private final NotifyLevelImages images;
+  
+  /** The main panel. */
   @UiField
   DockLayoutPanel mainPanel;
+  
+  /** The title. */
   @UiField
   Label title;
 
+  /**
+   * Instantiates a new message panel.
+   *
+   * @param images the images
+   * @param errorLabelId the error label id
+   */
   @Inject
   public MessagePanel(final NotifyLevelImages images, final String errorLabelId) {
     this.images = images;
@@ -62,11 +93,17 @@ public class MessagePanel extends Composite implements MessagePanelView {
     description.ensureDebugId(errorLabelId);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.dialogs.MessagePanelView#getPanel()
+   */
   @Override
   public IsWidget getPanel() {
     return this;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.dialogs.MessagePanelView#hideErrorMessage()
+   */
   @Override
   public void hideErrorMessage() {
     icon.setVisible(false);
@@ -75,6 +112,9 @@ public class MessagePanel extends Composite implements MessagePanelView {
     this.setVisible(false);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.dialogs.MessagePanelView#setErrorMessage(java.lang.String, cc.kune.common.client.notify.NotifyLevel)
+   */
   @Override
   public void setErrorMessage(final String message, final NotifyLevel level) {
     description.setText(message);

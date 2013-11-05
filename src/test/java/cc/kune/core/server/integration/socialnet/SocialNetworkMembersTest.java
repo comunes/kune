@@ -40,16 +40,32 @@ import cc.kune.domain.Group;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SocialNetworkMembersTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SocialNetworkMembersTest extends IntegrationTest {
+  
+  /** The group. */
   private Group group;
+  
+  /** The group finder. */
   @Inject
   GroupManager groupFinder;
+  
+  /** The session. */
   @Inject
   UserSession session;
 
+  /** The social net manager. */
   @Inject
   SocialNetworkManager socialNetManager;
 
+  /**
+   * Inits the.
+   */
   @Transactional
   @Before
   public void init() {
@@ -57,6 +73,11 @@ public class SocialNetworkMembersTest extends IntegrationTest {
     group = groupFinder.findByShortName(getSiteAdminShortName());
   }
 
+  /**
+   * Test admin add twice.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testAdminAddTwice() throws Exception {
     doLogin();
@@ -70,6 +91,11 @@ public class SocialNetworkMembersTest extends IntegrationTest {
     assertEquals(2, result.size());
   }
 
+  /**
+   * Test admin members of group finder.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testAdminMembersOfGroupFinder() throws Exception {
     doLogin();
@@ -77,6 +103,11 @@ public class SocialNetworkMembersTest extends IntegrationTest {
     assertEquals(2, result.size());
   }
 
+  /**
+   * Test collab members of group finder.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testCollabMembersOfGroupFinder() throws Exception {
     doLogin();

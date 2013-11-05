@@ -43,8 +43,23 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TaskServerTool.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TaskServerTool extends AbstractWaveBasedServerTool {
 
+  /**
+   * Instantiates a new task server tool.
+   *
+   * @param contentManager the content manager
+   * @param containerManager the container manager
+   * @param configurationManager the configuration manager
+   * @param i18n the i18n
+   * @param creationService the creation service
+   */
   @Inject
   public TaskServerTool(final ContentManager contentManager, final ContainerManager containerManager,
       final ToolConfigurationManager configurationManager, final I18nTranslationService i18n,
@@ -54,6 +69,15 @@ public class TaskServerTool extends AbstractWaveBasedServerTool {
         containerManager, creationService, configurationManager, i18n, ServerToolTarget.forBoth);
   }
 
+  /**
+   * Creates the folder.
+   *
+   * @param group the group
+   * @param rootFolder the root folder
+   * @param language the language
+   * @param title the title
+   * @return the container
+   */
   @SuppressWarnings("unused")
   private Container createFolder(final Group group, final Container rootFolder,
       final I18nLanguage language, final String title) {
@@ -62,6 +86,14 @@ public class TaskServerTool extends AbstractWaveBasedServerTool {
     return shortTerm;
   }
 
+  /**
+   * Creates the task.
+   *
+   * @param user the user
+   * @param group the group
+   * @param shortTerm the short term
+   * @param text the text
+   */
   @SuppressWarnings("unused")
   private void createTask(final User user, final Group group, final Container shortTerm,
       final String text) {
@@ -69,12 +101,18 @@ public class TaskServerTool extends AbstractWaveBasedServerTool {
         i18n.t("This is only a task sample. You can edit it, rename it"), TYPE_TASK);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.tool.ServerTool#initGroup(cc.kune.domain.User, cc.kune.domain.Group, java.lang.Object[])
+   */
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {
     createRoot(group);
     return group;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.AbstractServerTool#onCreateContent(cc.kune.domain.Content, cc.kune.domain.Container)
+   */
   @Override
   public void onCreateContent(final Content content, final Container parent) {
     content.setStatus(ContentStatus.publishedOnline);

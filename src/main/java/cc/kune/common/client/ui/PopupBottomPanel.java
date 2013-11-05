@@ -26,31 +26,61 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PopupBottomPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class PopupBottomPanel extends AbstractAtBorderPopupPanel {
+  
+  /**
+   * Instantiates a new popup bottom panel.
+   */
   public PopupBottomPanel() {
     this(false, false);
   }
 
+  /**
+   * Instantiates a new popup bottom panel.
+   *
+   * @param autohide the autohide
+   */
   public PopupBottomPanel(final boolean autohide) {
     this(autohide, false);
   }
 
+  /**
+   * Instantiates a new popup bottom panel.
+   *
+   * @param autohide the autohide
+   * @param modal the modal
+   */
   public PopupBottomPanel(final boolean autohide, final boolean modal) {
     super(autohide, modal);
     defaultStyleImpl();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractAtBorderPopupPanel#defaultStyle()
+   */
   @Override
   public void defaultStyle() {
     defaultStyleImpl();
   }
 
+  /**
+   * Default style impl.
+   */
   private void defaultStyleImpl() {
     setStyleName("k-popup-bottom-centered");
     super.defaultStyle();
     addStyleName("k-top-10corners");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.AbstractAtBorderPopupPanel#setCenterPositionImpl()
+   */
   @Override
   protected void setCenterPositionImpl() {
     setPopupPositionAndShow(new PopupPanel.PositionCallback() {

@@ -29,8 +29,19 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WaveCommandLineUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WaveCommandLineUtils {
 
+  /**
+   * The main method.
+   *
+   * @param args the arguments
+   */
   public static void main(String[] args) {
     try {
       WaveRef waveRef = JavaWaverefEncoder.decodeWaveRefFromPath(args[1]);

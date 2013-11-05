@@ -37,6 +37,7 @@ exception statement from your version. */
 
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class provides an extension to <code>PropertyChangeListener</code> -
  * associating a name with the listener. This can be used to filter the changes
@@ -81,11 +82,8 @@ public class PropertyChangeListenerProxy extends EventListenerProxy implements P
 
   /**
    * Forwards the event on to the delegate if the property name matches.
-   * 
-   * @param event
-   *          the event to pass on, if it meets the filter
-   * @throws NullPointerException
-   *           if the delegate this was created with is null
+   *
+   * @param event the event to pass on, if it meets the filter
    */
   public void propertyChange(final PropertyChangeEvent event) {
     // Note: Sun does not filter, under the assumption that since

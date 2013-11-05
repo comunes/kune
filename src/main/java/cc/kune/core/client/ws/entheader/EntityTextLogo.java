@@ -33,19 +33,46 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityTextLogo.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityTextLogo extends VerticalPanel {
 
+  /** The Constant _100. */
   private static final String _100 = "100%";
+  
+  /** The Constant LOGO_IMAGE. */
   public static final String LOGO_IMAGE = "k-elogop-image";
 
+  /** The Constant LOGO_LARGE_FONT_STYLE. */
   private static final String LOGO_LARGE_FONT_STYLE = "k-elogo-l-l";
+  
+  /** The Constant LOGO_MEDIUM_FONT_STYLE. */
   private static final String LOGO_MEDIUM_FONT_STYLE = "k-elogo-l-m";
+  
+  /** The Constant LOGO_NAME. */
   public static final String LOGO_NAME = "k-elogop-ln";
+  
+  /** The Constant LOGO_SMALL_FONT_STYLE. */
   private static final String LOGO_SMALL_FONT_STYLE = "k-elogo-l-s";
+  
+  /** The avatar decorator. */
   private final MediumAvatarDecorator avatarDecorator;
+  
+  /** The logo image. */
   private final Image logoImage;
+  
+  /** The logo label. */
   private final Label logoLabel;
 
+  /**
+   * Instantiates a new entity text logo.
+   *
+   * @param avatarDecorator the avatar decorator
+   */
   @Inject
   public EntityTextLogo(final MediumAvatarDecorator avatarDecorator) {
     // Initialize
@@ -86,21 +113,37 @@ public class EntityTextLogo extends VerticalPanel {
     setLogoTextImpl("");
   }
 
+  /**
+   * Reset font size.
+   */
   private void resetFontSize() {
     logoLabel.removeStyleName(LOGO_LARGE_FONT_STYLE);
     logoLabel.removeStyleName(LOGO_SMALL_FONT_STYLE);
     logoLabel.removeStyleName(LOGO_MEDIUM_FONT_STYLE);
   }
 
+  /**
+   * Sets the large font.
+   */
   public void setLargeFont() {
     resetFontSize();
     logoLabel.addStyleName(LOGO_LARGE_FONT_STYLE);
   }
 
+  /**
+   * Sets the logo image.
+   *
+   * @param imageProto the new logo image
+   */
   public void setLogoImage(final AbstractImagePrototype imageProto) {
     imageProto.applyTo(logoImage);
   }
 
+  /**
+   * Sets the logo image.
+   *
+   * @param url the new logo image
+   */
   public void setLogoImage(final String url) {
     logoImage.setUrl(FileConstants.ASITE_PREFIX + "images/clear.gif");
     Image.prefetch(url);
@@ -108,35 +151,69 @@ public class EntityTextLogo extends VerticalPanel {
     setSize();
   }
 
+  /**
+   * Sets the logo text.
+   *
+   * @param text the new logo text
+   */
   public void setLogoText(final String text) {
     setLogoTextImpl(text);
   }
 
+  /**
+   * Sets the logo text impl.
+   *
+   * @param text the new logo text impl
+   */
   private void setLogoTextImpl(final String text) {
     logoLabel.setText(text);
   }
 
+  /**
+   * Sets the logo visible.
+   *
+   * @param visible the new logo visible
+   */
   public void setLogoVisible(final boolean visible) {
     logoImage.setVisible(visible);
   }
 
+  /**
+   * Sets the medium font.
+   */
   public void setMediumFont() {
     resetFontSize();
     logoLabel.addStyleName(LOGO_MEDIUM_FONT_STYLE);
   }
 
+  /**
+   * Sets the online status group.
+   *
+   * @param group the new online status group
+   */
   public void setOnlineStatusGroup(final String group) {
     avatarDecorator.setItem(group);
   }
 
+  /**
+   * Sets the online status visible.
+   *
+   * @param visible the new online status visible
+   */
   public void setOnlineStatusVisible(final boolean visible) {
     avatarDecorator.setDecoratorVisible(visible);
   }
 
+  /**
+   * Sets the size.
+   */
   private void setSize() {
     logoImage.setSize(FileConstants.LOGO_DEF_SIZE + "px", FileConstants.LOGO_DEF_SIZE + "px");
   }
 
+  /**
+   * Sets the small font.
+   */
   public void setSmallFont() {
     resetFontSize();
     logoLabel.addStyleName(LOGO_SMALL_FONT_STYLE);

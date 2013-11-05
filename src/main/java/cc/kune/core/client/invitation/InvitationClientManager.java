@@ -46,15 +46,43 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InvitationClientManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class InvitationClientManager {
+  
+  /** The chat engine. */
   private final ChatClient chatEngine;
+  
+  /** The i18n. */
   private final I18nUITranslationService i18n;
+  
+  /** The invitation service. */
   private final Provider<InvitationServiceAsync> invitationService;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The sn service. */
   private final Provider<SocialNetServiceAsync> snService;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new invitation client manager.
+   *
+   * @param invitationService the invitation service
+   * @param chatEngine the chat engine
+   * @param snService the sn service
+   * @param session the session
+   * @param i18n the i18n
+   * @param stateManager the state manager
+   */
   @Inject
   public InvitationClientManager(final Provider<InvitationServiceAsync> invitationService,
       final ChatClient chatEngine, final Provider<SocialNetServiceAsync> snService,
@@ -67,6 +95,11 @@ public class InvitationClientManager {
     this.stateManager = stateManager;
   }
 
+  /**
+   * Process.
+   *
+   * @param hash the hash
+   */
   public void process(final String hash) {
     invitationService.get().getInvitation(hash, new AsyncCallbackSimple<InvitationDTO>() {
       @Override

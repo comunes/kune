@@ -24,12 +24,26 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 // @PMD:REVIEWED:AtLeastOneConstructor: by vjrj on 26/05/09 12:31
+/**
+ * The Class GuiActionDescCollection.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GuiActionDescCollection extends ArrayList<GuiActionDescrip> {
 
+  /** The Constant EMPTY. */
   public static final GuiActionDescCollection EMPTY = new GuiActionDescCollection();
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 6759723760404227737L;
 
+  /**
+   * Adds the.
+   *
+   * @param descriptors the descriptors
+   */
   public void add(final GuiActionDescrip... descriptors) {
     for (final GuiActionDescrip descriptor : descriptors) {
       if (!super.contains(descriptor)) {

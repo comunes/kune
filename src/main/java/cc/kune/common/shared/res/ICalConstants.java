@@ -22,19 +22,43 @@
  */
 package cc.kune.common.shared.res;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ICalConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ICalConstants {
 
   /* Note that all day events is not supported by ICalendar */
+  /** The Constant _ALL_DAY. */
   public static final String _ALL_DAY = "ALLDAY";
+  
+  /** The Constant _INTERNAL_ID. */
   public static final String _INTERNAL_ID = "INTERNALID";
   // VTIMEZONE ?? See: TimeZoneConstants in GWT for names and values
+  /** The Constant DATE_TIME_END. */
   public static final String DATE_TIME_END = "DTEND";
+  
+  /** The Constant DATE_TIME_START. */
   public static final String DATE_TIME_START = "DTSTART";
+  
+  /** The Constant DESCRIPTION. */
   public static final String DESCRIPTION = "DESCRIPTION";
+  
+  /** The Constant LOCATION. */
   public static final String LOCATION = "LOCATION";
+  
+  /** The Constant ORGANIZER. */
   public static final String ORGANIZER = "ORGANIZER";
+  
+  /** The Constant SUMMARY. */
   public static final String SUMMARY = "SUMMARY";
+  
+  /** The Constant UID. */
   public static final String UID = "UID";
+  
+  /** The Constant ZTOTAL_LIST. */
   public static final String[] ZTOTAL_LIST = new String[] { DATE_TIME_START, DATE_TIME_END, DESCRIPTION,
       LOCATION, ORGANIZER, SUMMARY, _ALL_DAY, _INTERNAL_ID, UID };
 }

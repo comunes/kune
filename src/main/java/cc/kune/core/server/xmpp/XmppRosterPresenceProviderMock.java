@@ -23,8 +23,17 @@
 package cc.kune.core.server.xmpp;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XmppRosterPresenceProviderMock.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class XmppRosterPresenceProviderMock implements XmppRosterPresenceProvider {
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.xmpp.XmppRosterPresenceProvider#getLastConnected(java.lang.String)
+   */
   @Override
   public Long getLastConnected(final String user) {
     return 0l;

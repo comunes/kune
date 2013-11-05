@@ -29,12 +29,34 @@ import cc.kune.common.shared.utils.TextUtils;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TabTitleGenerator.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TabTitleGenerator {
 
+  /**
+   * Format.
+   *
+   * @param title the title
+   * @param maxLength the max length
+   * @return the string
+   */
   private static String format(final String title, final int maxLength) {
     return TextUtils.ellipsis(title, maxLength);
   }
 
+  /**
+   * Generate.
+   *
+   * @param res the res
+   * @param title the title
+   * @param maxLength the max length
+   * @param id the id
+   * @return the icon label
+   */
   public static IconLabel generate(final ImageResource res, final String title, final int maxLength,
       final String id) {
     final IconLabel tabTitle = new IconLabel(res, format(title, maxLength));
@@ -43,18 +65,41 @@ public class TabTitleGenerator {
     return tabTitle;
   }
 
+  /**
+   * Generate.
+   *
+   * @param res the res
+   * @param title the title
+   * @param id the id
+   * @return the icon label
+   */
   public static IconLabel generate(final ImageResource res, final String title, final String id) {
     final IconLabel tabTitle = new IconLabel(res, title);
     tabTitle.ensureDebugId(id);
     return tabTitle;
   }
 
+  /**
+   * Sets the text.
+   *
+   * @param tabTitle the tab title
+   * @param title the title
+   * @param maxLength the max length
+   * @param direction the direction
+   */
   public static void setText(final IconLabel tabTitle, final String title, final int maxLength,
       final Direction direction) {
     tabTitle.setText(format(title, maxLength), direction);
     setTooltip(title, maxLength, tabTitle);
   }
 
+  /**
+   * Sets the tooltip.
+   *
+   * @param title the title
+   * @param maxLength the max length
+   * @param tabTitle the tab title
+   */
   private static void setTooltip(final String title, final int maxLength, final IconLabel tabTitle) {
     if (title.length() > maxLength) {
       Tooltip.to(tabTitle, title);

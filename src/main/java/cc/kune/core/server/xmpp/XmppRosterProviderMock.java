@@ -25,13 +25,25 @@ package cc.kune.core.server.xmpp;
 import java.util.Collection;
 import java.util.Collections;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class XmppRosterProviderMock.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class XmppRosterProviderMock implements XmppRosterProvider {
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.xmpp.XmppRosterProvider#count()
+   */
   @Override
   public Long count() {
     return 0l;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.xmpp.XmppRosterProvider#getRoster(java.lang.String)
+   */
   @Override
   public Collection<RosterItem> getRoster(final String user) {
     return Collections.emptyList();

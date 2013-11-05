@@ -32,8 +32,24 @@ import cc.kune.wiki.shared.WikiToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WikiParts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WikiParts {
 
+  /**
+   * Instantiates a new wiki parts.
+   *
+   * @param session the session
+   * @param clientTool the client tool
+   * @param viewerSelector the viewer selector
+   * @param wikiActions the wiki actions
+   * @param contentViewer the content viewer
+   * @param folderViewer the folder viewer
+   */
   @Inject
   public WikiParts(final SessionConstants session, final Provider<WikiClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final WikiClientActions wikiActions,

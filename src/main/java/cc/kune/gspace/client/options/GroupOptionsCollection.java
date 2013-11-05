@@ -33,9 +33,25 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupOptionsCollection.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @SuppressWarnings("serial")
 @Singleton
 public class GroupOptionsCollection extends ProvidersCollection {
+  
+  /**
+   * Instantiates a new group options collection.
+   *
+   * @param gg the gg
+   * @param gtc the gtc
+   * @param gl the gl
+   * @param gps the gps
+   * @param gdl the gdl
+   */
   @Inject
   public GroupOptionsCollection(final Provider<GroupOptGeneral> gg, final Provider<GroupOptTools> gtc,
       final Provider<GroupOptLogo> gl, final Provider<GroupOptStyle> gps,

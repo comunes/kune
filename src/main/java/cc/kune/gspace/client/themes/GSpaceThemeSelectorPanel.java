@@ -29,8 +29,20 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GSpaceThemeSelectorPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GSpaceThemeSelectorPanel extends ActionFlowPanel implements ActionExtensibleView {
 
+  /**
+   * Instantiates a new g space theme selector panel.
+   *
+   * @param guiProvider the gui provider
+   * @param i18n the i18n
+   */
   @Inject
   public GSpaceThemeSelectorPanel(final GuiProvider guiProvider, final I18nTranslationService i18n) {
     super(guiProvider, i18n);

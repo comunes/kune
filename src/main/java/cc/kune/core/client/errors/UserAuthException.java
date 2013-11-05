@@ -22,6 +22,14 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserAuthException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserAuthException extends DefaultException {
+  
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -8383513776573054971L;
 }

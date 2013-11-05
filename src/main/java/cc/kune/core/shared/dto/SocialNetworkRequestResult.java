@@ -24,6 +24,18 @@ package cc.kune.core.shared.dto;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Enum SocialNetworkRequestResult.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public enum SocialNetworkRequestResult implements IsSerializable {
-  accepted, denied, moderated
+  
+  /** The accepted. */
+  accepted, 
+ /** The denied. */
+ denied, 
+ /** The moderated. */
+ moderated
 }

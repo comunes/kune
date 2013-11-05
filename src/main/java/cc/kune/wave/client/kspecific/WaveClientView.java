@@ -34,24 +34,71 @@ import cc.kune.gspace.client.maxmin.IsMaximizable;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.IsWidget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface WaveClientView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface WaveClientView extends IsWidget, IsMaximizable {
 
+  /**
+   * Clear.
+   */
   void clear();
 
+  /**
+   * Gets the channel.
+   *
+   * @return the channel
+   */
   RemoteViewServiceMultiplexer getChannel();
 
+  /**
+   * Gets the loading.
+   *
+   * @return the loading
+   */
   Element getLoading();
 
+  /**
+   * Gets the profiles.
+   *
+   * @return the profiles
+   */
   ProfileManager getProfiles();
 
+  /**
+   * Gets the stack trace async.
+   *
+   * @param caught the caught
+   * @param accessor the accessor
+   * @return the stack trace async
+   */
   void getStackTraceAsync(Throwable caught, Accessor<SafeHtml> accessor);
 
+  /**
+   * Gets the wave holder.
+   *
+   * @return the wave holder
+   */
   ImplPanel getWaveHolder();
 
+  /**
+   * Gets the web socket.
+   *
+   * @return the web socket
+   */
   WaveWebSocketClient getWebSocket();
 
+  /**
+   * Login.
+   */
   void login();
 
+  /**
+   * Logout.
+   */
   void logout();
 
 }

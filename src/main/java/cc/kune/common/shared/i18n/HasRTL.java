@@ -22,11 +22,17 @@
  */
 package cc.kune.common.shared.i18n;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface HasRTL.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface HasRTL {
 
   /**
-   * Describe if the current language is Right to Left (RTL)
-   * 
+   * Describe if the current language is Right to Left (RTL).
+   *
    * @return true, if is the current language is RTL
    */
   boolean isRTL();

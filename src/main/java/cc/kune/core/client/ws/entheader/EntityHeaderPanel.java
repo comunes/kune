@@ -44,15 +44,42 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EntityHeaderPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
+  /** The download provider. */
   private final Provider<ClientFileDownloadUtils> downloadProvider;
+  
+  /** The entity text logo. */
   private final EntityTextLogo entityTextLogo;
+  
+  /** The images. */
   private final CoreResources images;
+  
+  /** The main panel. */
   private final HorizontalPanel mainPanel;
+  
+  /** The toolbar. */
   private final ActionFlowPanel toolbar;
+  
+  /** The vpanel. */
   private final VerticalPanel vpanel;
 
+  /**
+   * Instantiates a new entity header panel.
+   *
+   * @param downloadProvider the download provider
+   * @param images the images
+   * @param bindings the bindings
+   * @param armor the armor
+   * @param entityTextLogo the entity text logo
+   * @param i18n the i18n
+   */
   @Inject
   public EntityHeaderPanel(final Provider<ClientFileDownloadUtils> downloadProvider,
       final CoreResources images, final GuiProvider bindings, final GSpaceArmor armor,
@@ -72,22 +99,37 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     armor.getEntityHeader().add(mainPanel);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#addAction(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+   */
   @Override
   public void addAction(final GuiActionDescrip descriptor) {
     toolbar.add(descriptor);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#addWidget(com.google.gwt.user.client.ui.IsWidget)
+   */
   @Override
   public void addWidget(final IsWidget view) {
     final Widget widget = (Widget) view;
     vpanel.add(widget);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return mainPanel;
   }
 
+  /**
+   * Sets the full logo.
+   *
+   * @param stateToken the state token
+   * @param clipped the clipped
+   */
   @Deprecated
   public void setFullLogo(final StateToken stateToken, final boolean clipped) {
     mainPanel.clear();
@@ -103,47 +145,74 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     mainPanel.add(logo);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#setLargeFont()
+   */
   @Override
   public void setLargeFont() {
     entityTextLogo.setLargeFont();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#setLogoImage(cc.kune.core.shared.dto.GroupDTO, boolean)
+   */
   @Override
   public void setLogoImage(final GroupDTO group, final boolean noCache) {
     final String url = downloadProvider.get().getLogoImageUrl(group.getShortName(), noCache);
     entityTextLogo.setLogoImage(url);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#setLogoImageVisible(boolean)
+   */
   @Override
   public void setLogoImageVisible(final boolean visible) {
     entityTextLogo.setLogoVisible(visible);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#setLogoText(java.lang.String)
+   */
   @Override
   public void setLogoText(final String groupName) {
     entityTextLogo.setLogoText(groupName);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#setMediumFont()
+   */
   @Override
   public void setMediumFont() {
     entityTextLogo.setMediumFont();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#setOnlineStatusGroup(java.lang.String)
+   */
   @Override
   public void setOnlineStatusGroup(final String group) {
     entityTextLogo.setOnlineStatusGroup(group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#setOnlineStatusVisible(boolean)
+   */
   @Override
   public void setOnlineStatusVisible(final boolean visible) {
     entityTextLogo.setOnlineStatusVisible(visible);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#setSmallFont()
+   */
   @Override
   public void setSmallFont() {
     entityTextLogo.setSmallFont();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView#showDefUserLogo()
+   */
   @Override
   public void showDefUserLogo() {
     entityTextLogo.setLogoImage(AbstractImagePrototype.create(images.unknown60()));

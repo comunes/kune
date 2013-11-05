@@ -22,16 +22,36 @@
  */
 package cc.kune.colorpicker.client;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ColorWebSafePaletteView.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ColorWebSafePaletteView {
 
+  /** The colors. */
   String COLORS[] = { "0", "3", "6", "9", "C", "F" };
 
+  /** The cols. */
   int COLS = 12;
 
+  /** The rows. */
   int ROWS = 18;
 
+  /**
+   * Hide.
+   */
   void hide();
 
+  /**
+   * Show.
+   * 
+   * @param left
+   *          the left
+   * @param top
+   *          the top
+   */
   void show(int left, int top);
 
 }

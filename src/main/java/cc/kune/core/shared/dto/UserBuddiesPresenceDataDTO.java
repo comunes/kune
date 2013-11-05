@@ -27,16 +27,19 @@ import java.util.Map;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class UserBuddiesPresenceDataDTO is used to get presence info of our
- * buddies
+ * buddies.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserBuddiesPresenceDataDTO implements IsSerializable {
 
   /** The Constant NO_BUDDIES. */
   public static final UserBuddiesPresenceDataDTO NO_BUDDIES = new UserBuddiesPresenceDataDTO();
 
-  /** The map where is stored the info */
+  /** The map where is stored the info. */
   private Map<String, Long> map;
 
   /**
@@ -47,10 +50,9 @@ public class UserBuddiesPresenceDataDTO implements IsSerializable {
   }
 
   /**
-   * Gets the last connected time of a username
-   * 
-   * @param username
-   *          the username
+   * Gets the last connected time of a username.
+   *
+   * @param username the username
    * @return the last connnected date
    */
   public Long get(final String username) {
@@ -69,10 +71,20 @@ public class UserBuddiesPresenceDataDTO implements IsSerializable {
     map.put(username, lastConnected);
   }
 
+  /**
+   * Sets the map.
+   *
+   * @param map the map
+   */
   public void setMap(final Map<String, Long> map) {
     this.map = map;
   }
 
+  /**
+   * Size.
+   *
+   * @return the int
+   */
   public int size() {
     return map.size();
   }

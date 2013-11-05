@@ -36,13 +36,32 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InboxCountPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class InboxCountPanel extends PopupPanel implements InboxCountView {
 
+  /** The blink animation. */
   private final BlinkAnimation blinkAnimation;
+  
+  /** The count. */
   private final InlineLabel count;
+  
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The tooltip. */
   private final Tooltip tooltip;
 
+  /**
+   * Instantiates a new inbox count panel.
+   *
+   * @param i18n the i18n
+   * @param eventBus the event bus
+   */
   @Inject
   public InboxCountPanel(final I18nTranslationService i18n, final EventBus eventBus) {
     this.i18n = i18n;
@@ -60,11 +79,17 @@ public class InboxCountPanel extends PopupPanel implements InboxCountView {
 
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView#blink()
+   */
   @Override
   public void blink() {
     blinkAnimation.animate(4);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView#setTotal(int)
+   */
   @Override
   public void setTotal(final int total) {
     count.setText(String.valueOf(total));
@@ -72,6 +97,9 @@ public class InboxCountPanel extends PopupPanel implements InboxCountView {
         "[%d] recent conversations unread", total));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView#showCount(boolean)
+   */
   @Override
   public void showCount(final boolean show) {
     if (show) {

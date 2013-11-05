@@ -48,6 +48,7 @@ import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 
+// TODO: Auto-generated Javadoc
 /**
  * This class mirrors KeyEvents, representing both low-level key presses and key
  * releases, and high level key typed inputs. However, this class forms
@@ -76,11 +77,13 @@ public class KeyStroke {
    */
   private static final Map<KeyStroke, KeyStroke> CACHE = new HashMap<KeyStroke, KeyStroke>();
 
+  /** The Constant CHAR_UNDEFINED. */
   private static final char CHAR_UNDEFINED = '\uffff';
 
   /** The most recently generated keystroke, or null. */
   private static KeyStroke recent;
 
+  /** The Constant VK_UNDEFINED. */
   private static final int VK_UNDEFINED = 0;
   /**
    * A table of keyCode names to values. This is package-private to avoid an
@@ -90,6 +93,12 @@ public class KeyStroke {
    */
   static final Map<String, Object> VKTABLE = new HashMap<String, Object>();
 
+  /**
+   * Gets the keyboard modifiers.
+   *
+   * @param event the event
+   * @return the keyboard modifiers
+   */
   public static int getKeyboardModifiers(final NativeEvent event) {
     return (event.getShiftKey() ? Keyboard.MODIFIER_SHIFT : 0)
         | (event.getMetaKey() ? Keyboard.MODIFIER_META : 0)
@@ -147,14 +156,10 @@ public class KeyStroke {
    * <code>getKeyStroke(int, int)</code>. The modifiers are the bitwise or of
    * the masks found in InputEvent; the new style (*_DOWN_MASK) is preferred,
    * but the old style will work.
-   * 
-   * @param keyChar
-   *          the typed character
-   * @param modifiers
-   *          the modifiers, or 0
+   *
+   * @param keyChar the typed character
+   * @param modifiers the modifiers, or 0
    * @return the specified keystroke
-   * @throws IllegalArgumentException
-   *           if keyChar is null
    */
   public static KeyStroke getKeyStroke(final Character keyChar, final int modifiers) {
     if (keyChar == null) {
@@ -166,15 +171,13 @@ public class KeyStroke {
   /**
    * Returns a keystroke representing a pressed key event, with the given
    * modifiers. The "virtual key" should be one of the VK_* constants in
+   *
+   * @param keyCode the virtual key
+   * @param modifiers the modifiers, or 0
+   * @return the specified keystroke
    * {@link KeyEvent}. The modifiers are the bitwise or of the masks found in
    * InputEvent; the new style (*_DOWN_MASK) is preferred, but the old style
    * will work.
-   * 
-   * @param keyCode
-   *          the virtual key
-   * @param modifiers
-   *          the modifiers, or 0
-   * @return the specified keystroke
    */
   public static KeyStroke getKeyStroke(final int keyCode, final int modifiers) {
     return getKeyStroke(CHAR_UNDEFINED, keyCode, modifiers, false);
@@ -183,17 +186,14 @@ public class KeyStroke {
   /**
    * Returns a keystroke representing a pressed or released key event, with the
    * given modifiers. The "virtual key" should be one of the VK_* constants in
+   *
+   * @param keyCode the virtual key
+   * @param modifiers the modifiers, or 0
+   * @param release true if this is a key release instead of a key press
+   * @return the specified keystroke
    * {@link KeyEvent}. The modifiers are the bitwise or of the masks found in
    * InputEvent; the new style (*_DOWN_MASK) is preferred, but the old style
    * will work.
-   * 
-   * @param keyCode
-   *          the virtual key
-   * @param modifiers
-   *          the modifiers, or 0
-   * @param release
-   *          true if this is a key release instead of a key press
-   * @return the specified keystroke
    */
   public static KeyStroke getKeyStroke(final int keyCode, final int modifiers, final boolean release) {
     return getKeyStroke(CHAR_UNDEFINED, keyCode, modifiers, release);
@@ -201,12 +201,9 @@ public class KeyStroke {
 
   /**
    * Returns a keystroke representing what caused the key event.
-   * 
-   * @param event
-   *          the key event to convert
+   *
+   * @param event the key event to convert
    * @return the specified keystroke, or null if the event is invalid
-   * @throws NullPointerException
-   *           if event is null
    */
   public static KeyStroke getKeyStrokeForEvent(final Event event) {
     final int eventModif = getKeyboardModifiers(event);
@@ -343,15 +340,20 @@ public class KeyStroke {
 
   /**
    * Returns the AWT event type of this keystroke. This is one of
+   *
+   * @return the key event type
    * {@link KeyEvent#KEY_TYPED}, {@link KeyEvent#KEY_PRESSED}, or
    * {@link KeyEvent#KEY_RELEASED}.
-   * 
-   * @return the key event type
    */
   public final int getKeyEventType() {
     return keyCode == VK_UNDEFINED ? Event.ONKEYDOWN : onKeyRelease ? Event.ONKEYUP : Event.ONKEYPRESS;
   }
 
+  /**
+   * Gets the key text.
+   *
+   * @return the key text
+   */
   @SuppressWarnings("deprecation")
   public String getKeyText() {
     switch (keyCode) {
@@ -505,6 +507,9 @@ public class KeyStroke {
     return this;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     String s = " (";
@@ -530,6 +535,12 @@ public class KeyStroke {
     return s;
   }
 
+  /**
+   * Translate key.
+   *
+   * @param keyNameToTranslate the key name to translate
+   * @return the string
+   */
   protected String translateKey(final String keyNameToTranslate) {
     return I18n.tWithNT(keyNameToTranslate, "The '" + keyNameToTranslate + "' keyboard key");
     // return keyNameToTranslate;

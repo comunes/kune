@@ -25,8 +25,19 @@ package cc.kune.common.client.actions.gwtui;
 import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.MenuItem;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GwtBaseMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GwtBaseMenuItem extends MenuItem {
 
+  /**
+   * Dummy command.
+   *
+   * @return the command
+   */
   private static Command dummyCommand() {
     return new Command() {
       @Override
@@ -35,14 +46,28 @@ public class GwtBaseMenuItem extends MenuItem {
     };
   }
 
+  /**
+   * Instantiates a new gwt base menu item.
+   */
   public GwtBaseMenuItem() {
     super("", dummyCommand());
   }
 
+  /**
+   * Instantiates a new gwt base menu item.
+   *
+   * @param text the text
+   */
   public GwtBaseMenuItem(final String text) {
     super(text, dummyCommand());
   }
 
+  /**
+   * Instantiates a new gwt base menu item.
+   *
+   * @param text the text
+   * @param asHtml the as html
+   */
   public GwtBaseMenuItem(final String text, final boolean asHtml) {
     super(text, asHtml, dummyCommand());
   }

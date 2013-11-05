@@ -22,14 +22,29 @@
  */
 package cc.kune.core.client.errors;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InvalidKuneTokenException.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class InvalidKuneTokenException extends DefaultException {
 
+  /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -4511846108911183386L;
 
+  /**
+   * Instantiates a new invalid kune token exception.
+   *
+   * @param message the message
+   */
   public InvalidKuneTokenException(String message) {
     super(message);
   }
 
+  /**
+   * Instantiates a new invalid kune token exception.
+   */
   public InvalidKuneTokenException() {
     super();
   }

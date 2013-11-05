@@ -45,13 +45,32 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TagUserContentManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class TagUserContentManagerDefault extends DefaultManager<TagUserContent, Long> implements
     TagUserContentManager {
+  
+  /** The finder. */
   private final TagUserContentFinder finder;
+  
+  /** The provider. */
   private final Provider<EntityManager> provider;
+  
+  /** The tag manager. */
   private final TagManager tagManager;
 
+  /**
+   * Instantiates a new tag user content manager default.
+   *
+   * @param provider the provider
+   * @param tagManager the tag manager
+   * @param finder the finder
+   */
   @Inject
   public TagUserContentManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final TagManager tagManager, final TagUserContentFinder finder) {
@@ -61,22 +80,50 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     this.finder = finder;
   }
 
+  /**
+   * Find.
+   *
+   * @param user the user
+   * @param content the content
+   * @return the list
+   */
   public List<Tag> find(final User user, final Content content) {
     return finder.findTags(user, content);
   }
 
+  /**
+   * Gets the max count.
+   *
+   * @param group the group
+   * @return the max count
+   */
   private int getMaxCount(final Group group) {
     return finder.getMaxGrouped(group).intValue();
   }
 
+  /**
+   * Gets the min count.
+   *
+   * @param group the group
+   * @return the min count
+   */
   private int getMinCount(final Group group) {
     return finder.getMinGrouped(group).intValue();
   }
 
+  /**
+   * Gets the summary by group.
+   *
+   * @param group the group
+   * @return the summary by group
+   */
   private List<TagCount> getSummaryByGroup(final Group group) {
     return finder.getTagsGroups(group);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.TagUserContentManager#getTagCloudResultByGroup(cc.kune.domain.Group)
+   */
   @Override
   public TagCloudResult getTagCloudResultByGroup(final Group group) {
     try {
@@ -86,6 +133,9 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.TagUserContentManager#getTagsAsString(cc.kune.domain.User, cc.kune.domain.Content)
+   */
   @Override
   public String getTagsAsString(final User user, final Content content) {
     final StringBuffer tagConcatenated = new StringBuffer();
@@ -99,6 +149,9 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     return tagConcatenated.toString().replaceFirst(" ", "");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.TagUserContentManager#remove(cc.kune.domain.User, cc.kune.domain.Content)
+   */
   @Override
   public void remove(final User user, final Content content) {
     for (final TagUserContent item : finder.find(user, content)) {
@@ -106,6 +159,9 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.TagUserContentManager#setTags(cc.kune.domain.User, cc.kune.domain.Content, java.lang.String)
+   */
   @Override
   public void setTags(final User user, final Content content, final String tags) {
     final ArrayList<String> tagsStripped = TextUtils.splitTags(tags);

@@ -22,12 +22,29 @@
  */
 package cc.kune.colorpicker.client;
 
-
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ColorWebSafePalette.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ColorWebSafePalette {
 
+  /**
+   * Hide.
+   */
   void hide();
 
+  /**
+   * Show.
+   * 
+   * @param left
+   *          the left
+   * @param top
+   *          the top
+   * @param onColorSelected
+   *          the on color selected
+   */
   void show(int left, int top, OnColorSelectedListener onColorSelected);
 
 }

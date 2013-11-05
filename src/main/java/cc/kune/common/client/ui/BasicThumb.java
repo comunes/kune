@@ -40,32 +40,58 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
 
+// TODO: Auto-generated Javadoc
 /**
  * BasicThumb.java
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BasicThumb extends Composite {
+  
+  /** The Constant NOSIZE. */
   private static final int NOSIZE = -1;
+  
+  /** The image. */
   private final Image image;
+  
+  /** The image tooltip. */
   private Tooltip imageTooltip;
+  
+  /** The label. */
   private final Label label;
+  
+  /** The label tooltip. */
   private Tooltip labelTooltip;
+  
+  /** The on over label. */
   private boolean onOverLabel;
+  
+  /** The panel. */
   private final VerticalPanel panel;
 
+  /**
+   * Instantiates a new basic thumb.
+   *
+   * @param imageRef the image ref
+   * @param imgSize the img size
+   * @param text the text
+   * @param textMaxLenght the text max lenght
+   * @param crop the crop
+   */
   public BasicThumb(final Object imageRef, final int imgSize, final String text,
       final int textMaxLenght, final boolean crop) {
     this(imageRef, imgSize, text, textMaxLenght, crop, null);
   }
 
   /**
-   * 
-   * @param imageRef
-   *          This can be a ImageResource or a String Url
-   * @param imgSize
-   * @param text
-   * @param textMaxLenght
-   * @param crop
-   * @param clickHandler
+   * Instantiates a new basic thumb.
+   *
+   * @param imageRef This can be a ImageResource or a String Url
+   * @param imgSize the img size
+   * @param text the text
+   * @param textMaxLenght the text max lenght
+   * @param crop the crop
+   * @param clickHandler the click handler
    */
   public BasicThumb(final Object imageRef, final int imgSize, final String text,
       final int textMaxLenght, final boolean crop, final ClickHandler clickHandler) {
@@ -126,35 +152,78 @@ public class BasicThumb extends Composite {
     initWidget(panel);
   }
 
+  /**
+   * Instantiates a new basic thumb.
+   *
+   * @param imageRef the image ref
+   * @param thumText the thum text
+   * @param clickHandler the click handler
+   */
   public BasicThumb(final Object imageRef, final String thumText, final ClickHandler clickHandler) {
     this(imageRef, NOSIZE, thumText, NOSIZE, false, clickHandler);
   }
 
+  /**
+   * Instantiates a new basic thumb.
+   *
+   * @param imageRef the image ref
+   * @param text the text
+   * @param textMaxLenght the text max lenght
+   * @param clickHandler the click handler
+   */
   public BasicThumb(final Object imageRef, final String text, final int textMaxLenght,
       final ClickHandler clickHandler) {
     this(imageRef, NOSIZE, text, textMaxLenght, false, clickHandler);
   }
 
+  /**
+   * Adds the click handler.
+   *
+   * @param clickHandler the click handler
+   */
   public void addClickHandler(final ClickHandler clickHandler) {
     addClickHandlerImpl(clickHandler);
   }
 
+  /**
+   * Adds the click handler impl.
+   *
+   * @param clickHandler the click handler
+   */
   private void addClickHandlerImpl(final ClickHandler clickHandler) {
     panel.addDomHandler(clickHandler, ClickEvent.getType());
   }
 
+  /**
+   * Adds the double click handler.
+   *
+   * @param clickHandler the click handler
+   */
   public void addDoubleClickHandler(final DoubleClickHandler clickHandler) {
     addDoubleClickHandlerImpl(clickHandler);
   }
 
+  /**
+   * Adds the double click handler impl.
+   *
+   * @param clickHandler the click handler
+   */
   private void addDoubleClickHandlerImpl(final DoubleClickHandler clickHandler) {
     panel.addDomHandler(clickHandler, DoubleClickEvent.getType());
   }
 
+  /**
+   * Gets the image.
+   *
+   * @return the image
+   */
   public Image getImage() {
     return image;
   }
 
+  /**
+   * Hide tooltip.
+   */
   public void hideTooltip() {
     if (imageTooltip != null) {
       imageTooltip.hide();
@@ -162,27 +231,58 @@ public class BasicThumb extends Composite {
     }
   }
 
+  /**
+   * Sets the label visible.
+   *
+   * @param visible the new label visible
+   */
   public void setLabelVisible(final boolean visible) {
     label.setVisible(visible);
   }
 
+  /**
+   * Sets the on over label.
+   *
+   * @param onOverLabel the new on over label
+   */
   public void setOnOverLabel(final boolean onOverLabel) {
     this.onOverLabel = onOverLabel;
   }
 
+  /**
+   * Sets the text.
+   *
+   * @param text the new text
+   */
   public void setText(final String text) {
     label.setText(text);
   }
 
+  /**
+   * Sets the thumb url.
+   *
+   * @param url the new thumb url
+   */
   public void setThumbUrl(final String url) {
     image.setUrl(url);
   }
 
+  /**
+   * Sets the tooltip.
+   *
+   * @param tip the new tooltip
+   */
   public void setTooltip(final String tip) {
     imageTooltip = Tooltip.to(image, tip);
     labelTooltip = Tooltip.to(label, tip);
   }
 
+  /**
+   * Sets the tooltip.
+   *
+   * @param tipTitle the tip title
+   * @param tip the tip
+   */
   public void setTooltip(final String tipTitle, final String tip) {
     imageTooltip = Tooltip.to(image, tip);
     labelTooltip = Tooltip.to(label, tip);

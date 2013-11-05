@@ -41,15 +41,38 @@ import cc.kune.domain.Group;
 import cc.kune.domain.ToolConfiguration;
 import cc.kune.domain.finders.ContentFinder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class FinderTest.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class FinderTest {
 
+  /** The container manager. */
   private ContainerManager containerManager;
+  
+  /** The content finder. */
   private ContentFinder contentFinder;
+  
+  /** The content manager. */
   private ContentManager contentManager;
+  
+  /** The finder. */
   private FinderServiceDefault finder;
+  
+  /** The group manager. */
   private GroupManager groupManager;
+  
+  /** The rate manager. */
   private RateManager rateManager;
 
+  /**
+   * Content and folder match.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void contentAndFolderMatch() throws Exception {
     final Content descriptor = new Content();
@@ -60,6 +83,11 @@ public class FinderTest {
     finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
   }
 
+  /**
+   * Content and groupl match.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void contentAndGrouplMatch() throws Exception {
     final Content descriptor = new Content();
@@ -71,6 +99,11 @@ public class FinderTest {
     finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
   }
 
+  /**
+   * Content and tool match.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void contentAndToolMatch() throws Exception {
     final Content descriptor = new Content();
@@ -81,6 +114,9 @@ public class FinderTest {
     finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "5", "1"), null);
   }
 
+  /**
+   * Creates the session.
+   */
   @Before
   public void createSession() {
     this.groupManager = Mockito.mock(GroupManager.class);
@@ -92,6 +128,12 @@ public class FinderTest {
         contentFinder);
   }
 
+  /**
+   * Gets the group default content.
+   *
+   * @return the group default content
+   * @throws Exception the exception
+   */
   @Test
   public void getGroupDefaultContent() throws Exception {
     final Group group = new Group();
@@ -104,6 +146,11 @@ public class FinderTest {
     assertSame(descriptor, content);
   }
 
+  /**
+   * Test complete token.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testCompleteToken() throws Exception {
     final Container container = TestDomainHelper.createFolderWithIdAndGroupAndTool(1, "groupShortName",
@@ -119,11 +166,21 @@ public class FinderTest {
     assertSame(descriptor, content);
   }
 
+  /**
+   * Test container exists but content not found.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void testContainerExistsButContentNotFound() throws Exception {
     finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "1", "999"), null);
   }
 
+  /**
+   * Test default group content.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testDefaultGroupContent() throws Exception {
     final Group userGroup = new Group();
@@ -134,6 +191,11 @@ public class FinderTest {
     assertSame(descriptor, content);
   }
 
+  /**
+   * Test default group content has def license.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testDefaultGroupContentHasDefLicense() throws Exception {
     final Group userGroup = new Group();
@@ -144,6 +206,11 @@ public class FinderTest {
     assertSame(userGroup.getDefaultLicense(), content.getLicense());
   }
 
+  /**
+   * Test default user content.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testDefaultUserContent() throws Exception {
     final Content content = new Content();
@@ -153,6 +220,11 @@ public class FinderTest {
     assertSame(content, response);
   }
 
+  /**
+   * Test doc missing.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testDocMissing() throws Exception {
     final String groupname = "groupShortName";
@@ -172,6 +244,11 @@ public class FinderTest {
     assertSame(container, content.getContainer());
   }
 
+  /**
+   * Test folder missing.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void testFolderMissing() throws Exception {
     final Group group = new Group();
@@ -184,6 +261,11 @@ public class FinderTest {
     assertSame(container, content.getContainer());
   }
 
+  /**
+   * Test ids.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void testIds() throws Exception {
     final Content descriptor = new Content();
@@ -194,6 +276,11 @@ public class FinderTest {
     finder.getContentOrDefContent(new StateToken("groupShortName", "toolName", "5", "1a"), null);
   }
 
+  /**
+   * Voy a joder.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = ContentNotFoundException.class)
   public void voyAJoder() throws Exception {
     finder.getContentOrDefContent(new StateToken(null, "toolName", "1", "2"), null);

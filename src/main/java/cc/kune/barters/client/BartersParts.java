@@ -32,8 +32,24 @@ import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BartersParts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BartersParts {
 
+  /**
+   * Instantiates a new barters parts.
+   *
+   * @param session the session
+   * @param clientTool the client tool
+   * @param viewerSelector the viewer selector
+   * @param bartersActions the barters actions
+   * @param contentViewer the content viewer
+   * @param folderViewer the folder viewer
+   */
   @Inject
   public BartersParts(final SessionConstants session, final Provider<BartersClientTool> clientTool,
       final ContentViewerSelector viewerSelector, final BartersClientActions bartersActions,

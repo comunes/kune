@@ -45,87 +45,107 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   public static EventBus eventBus;
 
-  private WaveFeatureImpl(){
+  private WaveFeatureImpl() {
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.onetwopoll.wave.connector.Wave#getHost()
    */
   public native Participant getHost() /*-{
-    return $wnd.wave.getHost();
-  }-*/;
+                                      return $wnd.wave.getHost();
+                                      }-*/;
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.onetwopoll.wave.connector.Wave#getMode()
    */
   public native int getMode() /*-{
-    return $wnd.wave.getMode();
-  }-*/;
+                              return $wnd.wave.getMode();
+                              }-*/;
 
-  /* (non-Javadoc)
-   * @see com.onetwopoll.wave.connector.Wave#getParticipantById(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.onetwopoll.wave.connector.Wave#getParticipantById(java.lang.String)
    */
   public native Participant getParticipantById(String id) /*-{
-    return $wnd.wave.getParticipantById(id);
-  }-*/;
+                                                          return $wnd.wave.getParticipantById(id);
+                                                          }-*/;
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.onetwopoll.wave.connector.Wave#getParticipants()
    */
   public native JsArray<Participant> getParticipants() /*-{
-    return $wnd.wave.getParticipants();
-  }-*/;
+                                                       return $wnd.wave.getParticipants();
+                                                       }-*/;
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.onetwopoll.wave.connector.Wave#getState()
    */
   public native StateImpl getState() /*-{
-    return $wnd.wave.getState();
-  }-*/;
+                                     return $wnd.wave.getState();
+                                     }-*/;
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.onetwopoll.wave.connector.Wave#getTime()
    */
   public long getTime() {
     return (long) getTime0();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.onetwopoll.wave.connector.Wave#getViewer()
    */
   public native Participant getViewer() /*-{
-    return $wnd.wave.getViewer();
-  }-*/;
+                                        return $wnd.wave.getViewer();
+                                        }-*/;
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.onetwopoll.wave.connector.Wave#isInWaveContainer()
    */
   public native boolean isInWaveContainer() /*-{
-    return $wnd.wave && $wnd.wave.isInWaveContainer();
-  }-*/;
+                                            return $wnd.wave && $wnd.wave.isInWaveContainer();
+                                            }-*/;
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.onetwopoll.wave.connector.Wave#isPlayback()
    */
   public native boolean isPlayback() /*-{
-    return $wnd.wave.isPlayback();
-  }-*/;
+                                     return $wnd.wave.isPlayback();
+                                     }-*/;
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.onetwopoll.wave.connector.Wave#log(java.lang.String)
    */
   public native void log(String log) /*-{
-    return $wnd.wave.log(log);
-  }-*/;
+                                     return $wnd.wave.log(log);
+                                     }-*/;
 
   /**
    * Sets the mode change callback.
    */
   @SuppressWarnings("unused")
-  private native void setModeCallback(String callback,
-      JavaScriptObject opt_context) /*-{
-    $wnd.wave.setModeCallback(callback, opt_context);
-  }-*/;
+  private native void setModeCallback(String callback, JavaScriptObject opt_context) /*-{
+                                                                                     $wnd.wave.setModeCallback(callback, opt_context);
+                                                                                     }-*/;
 
   /**
    * Sets the participant update callback. If the participant information is
@@ -134,10 +154,9 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
    * calls would remove old callback and set the new one.
    */
   @SuppressWarnings("unused")
-  private native void setParticipantCallback(String callback,
-      JavaScriptObject opt_context) /*-{
-    $wnd.wave.setParticipantCallback(callback, opt_context);
-  }-*/;
+  private native void setParticipantCallback(String callback, JavaScriptObject opt_context) /*-{
+                                                                                            $wnd.wave.setParticipantCallback(callback, opt_context);
+                                                                                            }-*/;
 
   /**
    * Sets the gadget state update callback. If the state is already received
@@ -146,32 +165,31 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
    * would remove the old callback and set the new one.
    */
   @SuppressWarnings("unused")
-  private native void setStateCallback(String callback,
-      JavaScriptObject opt_context) /*-{
-    $wnd.wave.setStateCallback(callback, opt_context);
-  }-*/;
+  private native void setStateCallback(String callback, JavaScriptObject opt_context) /*-{
+                                                                                      $wnd.wave.setStateCallback(callback, opt_context);
+                                                                                      }-*/;
 
   /**
    * Register the mode change method to be called when the mode changes.
    */
   private native void registerModeChangeCallback() /*-{
-    $wnd.wave.setModeCallback(@com.thezukunft.wave.connectorimpl.WaveFeatureImpl::modeChangeEvent(I));
-  }-*/;
+                                                   $wnd.wave.setModeCallback(@com.thezukunft.wave.connectorimpl.WaveFeatureImpl::modeChangeEvent(I));
+                                                   }-*/;
 
   /**
    * Register the participantUpdated method to be called when the participants
    * are updated.
    */
   private native void registerParticipantUpdateCallback() /*-{
-    $wnd.wave.setParticipantCallback(@com.thezukunft.wave.connectorimpl.WaveFeatureImpl::participantUpdateEvent());
-  }-*/;
+                                                          $wnd.wave.setParticipantCallback(@com.thezukunft.wave.connectorimpl.WaveFeatureImpl::participantUpdateEvent());
+                                                          }-*/;
 
   /**
    * Register the stateUpdated method to be called when the state is updated.
    */
   private native void registerStateUpdateCallback() /*-{
-    $wnd.wave.setStateCallback(@com.thezukunft.wave.connectorimpl.WaveFeatureImpl::stateUpdateEvent());
-  }-*/;
+                                                    $wnd.wave.setStateCallback(@com.thezukunft.wave.connectorimpl.WaveFeatureImpl::stateUpdateEvent());
+                                                    }-*/;
 
   /**
    * This method is called from the wave JavaScript library on Mode changes.
@@ -216,6 +234,6 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
   }
 
   private native double getTime0() /*-{
-    return $wnd.wave.getTime();
-  }-*/;
+                                   return $wnd.wave.getTime();
+                                   }-*/;
 }

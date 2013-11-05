@@ -22,17 +22,50 @@
  */
 package cc.kune.core.client.cookies;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface CookiesManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface CookiesManager {
+  
+  /**
+   * Gets the anon cookie.
+   *
+   * @return the anon cookie
+   */
   String getAnonCookie();
 
+  /**
+   * Gets the auth cookie.
+   *
+   * @return the auth cookie
+   */
   String getAuthCookie();
 
+  /**
+   * Removes the anon cookie.
+   */
   void removeAnonCookie();
 
+  /**
+   * Removes the auth cookie.
+   */
   void removeAuthCookie();
 
+  /**
+   * Sets the anon cookie.
+   *
+   * @param userRegister the new anon cookie
+   */
   void setAnonCookie(Boolean userRegister);
 
+  /**
+   * Sets the auth cookie.
+   *
+   * @param userHash the new auth cookie
+   */
   void setAuthCookie(String userHash);
 
 }

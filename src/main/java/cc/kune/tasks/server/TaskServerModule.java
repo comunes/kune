@@ -25,7 +25,17 @@ package cc.kune.tasks.server;
 import com.google.inject.Binder;
 import com.google.inject.Module;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TaskServerModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TaskServerModule implements Module {
+  
+  /* (non-Javadoc)
+   * @see com.google.inject.Module#configure(com.google.inject.Binder)
+   */
   public void configure(final Binder binder) {
     binder.bind(TaskServerTool.class).asEagerSingleton();
   }

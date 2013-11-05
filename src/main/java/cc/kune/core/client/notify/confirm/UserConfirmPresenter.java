@@ -35,26 +35,64 @@ import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.annotations.ProxyEvent;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserConfirmPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserConfirmPresenter extends Presenter<UserConfirmView, UserConfirmProxy> {
+  
+  /**
+   * The Interface UserConfirmProxy.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   @ProxyCodeSplit
   public interface UserConfirmProxy extends Proxy<UserConfirmPresenter> {
   }
 
+  /**
+   * The Interface UserConfirmView.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface UserConfirmView extends View {
+    
+    /**
+     * Confirm ask.
+     *
+     * @param ask the ask
+     */
     public void confirmAsk(ConfirmAskEvent ask);
   }
 
+  /**
+   * Instantiates a new user confirm presenter.
+   *
+   * @param eventBus the event bus
+   * @param view the view
+   * @param proxy the proxy
+   */
   @Inject
   public UserConfirmPresenter(final EventBus eventBus, final UserConfirmView view,
       final UserConfirmProxy proxy) {
     super(eventBus, view, proxy);
   }
 
+  /**
+   * On confirm ask.
+   *
+   * @param event the event
+   */
   @ProxyEvent
   public void onConfirmAsk(final ConfirmAskEvent event) {
     getView().confirmAsk(event);
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RootPanel.get().add(getWidget());

@@ -44,13 +44,34 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UserOptGeneralPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implements UserOptGeneral {
 
+  /** The ask change language. */
   private boolean askChangeLanguage = true;
+  
+  /** The user service. */
   private final Provider<UserServiceAsync> userService;
 
+  /** The user view. */
   private final UserOptGeneralView userView;
 
+  /**
+   * Instantiates a new user opt general presenter.
+   *
+   * @param session the session
+   * @param stateManager the state manager
+   * @param eventBus the event bus
+   * @param i18n the i18n
+   * @param entityOptions the entity options
+   * @param userService the user service
+   * @param view the view
+   */
   @Inject
   public UserOptGeneralPresenter(final Session session, final StateManager stateManager,
       final EventBus eventBus, final I18nUITranslationService i18n, final UserOptions entityOptions,
@@ -67,11 +88,17 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#applicable()
+   */
   @Override
   protected boolean applicable() {
     return session.isLogged();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#init(cc.kune.gspace.client.options.general.EntityOptGeneralView)
+   */
   @Override
   public void init(final EntityOptGeneralView view) {
     super.init(view);
@@ -93,11 +120,17 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.UserOptGeneral#isVisible()
+   */
   @Override
   public boolean isVisible() {
     return view.isRendered();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#setState()
+   */
   @Override
   protected void setState() {
     final UserSimpleDTO currentUser = session.getCurrentUser();
@@ -109,11 +142,17 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     userView.setEmail(currentUser.getEmail());
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.UserOptGeneral#update()
+   */
   @Override
   public void update() {
     setState();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#updateInServer()
+   */
   @Override
   protected void updateInServer() {
     if (view.isValid()) {

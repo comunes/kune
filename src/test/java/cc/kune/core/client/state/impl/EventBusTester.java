@@ -27,14 +27,30 @@ import java.util.ArrayList;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.SimpleEventBus;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class EventBusTester.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class EventBusTester extends SimpleEventBus {
+  
+  /** The all. */
   private final ArrayList<GwtEvent<?>> all;
+  
+  /** The last event. */
   private GwtEvent<?> lastEvent;
 
+  /**
+   * Instantiates a new event bus tester.
+   */
   public EventBusTester() {
     all = new ArrayList<GwtEvent<?>>();
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.SimpleEventBus#fireEvent(com.google.gwt.event.shared.GwtEvent)
+   */
   @Override
   public void fireEvent(final GwtEvent<?> event) {
     all.add(event);
@@ -42,15 +58,32 @@ public class EventBusTester extends SimpleEventBus {
     super.fireEvent(event);
   }
 
+  /**
+   * Gets the last event.
+   *
+   * @return the last event
+   */
   public GwtEvent<?> getLastEvent() {
     return lastEvent;
   }
 
+  /**
+   * Gets the last event class.
+   *
+   * @param <T> the generic type
+   * @return the last event class
+   */
   @SuppressWarnings("unchecked")
   public <T extends GwtEvent<?>> Class<T> getLastEventClass() {
     return (Class<T>) lastEvent.getClass();
   }
 
+  /**
+   * Received event of class.
+   *
+   * @param eventClass the event class
+   * @return true, if successful
+   */
   public boolean receivedEventOfClass(final Class<? extends GwtEvent<?>> eventClass) {
     for (final GwtEvent<?> event : all) {
       if (eventClass.equals(event.getClass())) {

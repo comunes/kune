@@ -29,10 +29,21 @@ import net.fortuna.ical4j.model.property.ProdId;
 import net.fortuna.ical4j.model.property.Version;
 import net.fortuna.ical4j.util.Dates;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class BasicCalendarTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class BasicCalendarTest {
 
+  /** The Constant DESCRIPTION. */
   protected static final String DESCRIPTION = "some description";
+  
+  /** The Constant ID. */
   protected static final String ID = "some id";
+  
+  /** The Constant TITLE. */
   protected static final String TITLE = "some title";
 
   // protected Appointment createAppointment(final boolean allDay) {
@@ -46,6 +57,11 @@ public class BasicCalendarTest {
   // return initialApp;
   // }
 
+  /**
+   * Creates the cal.
+   *
+   * @return the calendar
+   */
   protected Calendar createCal() {
     final Calendar calendar = new Calendar();
     calendar.getProperties().add(new ProdId("-//Ben Fortuna//iCal4j 1.0//EN"));
@@ -54,6 +70,11 @@ public class BasicCalendarTest {
     return calendar;
   }
 
+  /**
+   * Gets the now.
+   *
+   * @return the now
+   */
   protected Date getNow() {
     final Date date = new Date(Dates.getCurrentTimeRounded());
     return date;

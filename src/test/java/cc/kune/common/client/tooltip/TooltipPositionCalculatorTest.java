@@ -22,6 +22,11 @@
  */
 package cc.kune.common.client.tooltip;
 
+/**
+ * The Class TooltipPositionCalculatorTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TooltipPositionCalculatorTest {
 
   // private static final int TOOLTIP_HEIGHT = 100;

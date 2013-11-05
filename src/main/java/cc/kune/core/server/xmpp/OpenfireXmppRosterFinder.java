@@ -28,8 +28,19 @@ import java.util.List;
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface OpenfireXmppRosterFinder.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface OpenfireXmppRosterFinder {
 
+  /**
+   * Count.
+   *
+   * @return the long
+   */
   @Finder(query = "SELECT count(*) FROM RosterItem r")
   Long count();
 

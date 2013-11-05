@@ -37,12 +37,30 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SiteLogo.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SiteLogo extends Composite {
 
+  /** The btn. */
   private final PushButton btn;
+  
+  /** The logo. */
   private final Image logo;
+  
+  /** The logo on over. */
   private final Image logoOnOver;
 
+  /**
+   * Instantiates a new site logo.
+   *
+   * @param session the session
+   * @param stateManager the state manager
+   * @param i18n the i18n
+   */
   @Inject
   public SiteLogo(final Session session, final StateManager stateManager,
       final I18nUITranslationService i18n) {

@@ -26,12 +26,21 @@ import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.shared.utils.TextUtils;
 
+// TODO: Auto-generated Javadoc
 /**
  * Copied some methods from org.apache.commons.lang.WordUtils
- *
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nUtils {
 
+  /**
+   * Convert method name.
+   * 
+   * @param name
+   *          the name
+   * @return the string
+   */
   public static String convertMethodName(final String name) {
     String result = name;
     result = result.replaceAll("\\\n", " ");
@@ -59,8 +68,17 @@ public class I18nUtils {
 
   }
 
-public static String convertMethodName(String name, String nameTwo) {
+  /**
+   * Convert method name.
+   * 
+   * @param name
+   *          the name
+   * @param nameTwo
+   *          the name two
+   * @return the string
+   */
+  public static String convertMethodName(final String name, final String nameTwo) {
     return convertMethodName(name + " " + nameTwo);
-}
+  }
 
 }

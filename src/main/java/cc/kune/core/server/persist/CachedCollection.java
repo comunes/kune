@@ -30,14 +30,14 @@ import java.util.Set;
 
 import org.apache.commons.collections.map.LRUMap;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CachedCollection implements some custom cache for often accessed
- * (and costly) objects
- * 
- * @param <K>
- *          the key type
- * @param <V>
- *          the value type
+ * (and costly) objects.
+ *
+ * @param <K> the key type
+ * @param <V> the value type
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class CachedCollection<K, V> {
@@ -56,50 +56,114 @@ public class CachedCollection<K, V> {
     cache = Collections.synchronizedMap(new LRUMap(size));
   }
 
+  /**
+   * Clear.
+   */
   public void clear() {
     cache.clear();
   }
 
+  /**
+   * Contains key.
+   *
+   * @param key the key
+   * @return true, if successful
+   */
   public boolean containsKey(final Object key) {
     return cache.containsKey(key);
   }
 
+  /**
+   * Contains value.
+   *
+   * @param value the value
+   * @return true, if successful
+   */
   public boolean containsValue(final Object value) {
     return cache.containsKey(value);
   }
 
+  /**
+   * Entry set.
+   *
+   * @return the sets the
+   */
   public Set<java.util.Map.Entry<K, V>> entrySet() {
     return cache.entrySet();
   }
 
+  /**
+   * Gets the.
+   *
+   * @param key the key
+   * @return the v
+   */
   public V get(final Object key) {
     return (V) cache.get(key);
   }
 
+  /**
+   * Checks if is empty.
+   *
+   * @return true, if is empty
+   */
   public boolean isEmpty() {
     return cache.isEmpty();
   }
 
+  /**
+   * Key set.
+   *
+   * @return the sets the
+   */
   public Set<K> keySet() {
     return cache.keySet();
   }
 
+  /**
+   * Put.
+   *
+   * @param key the key
+   * @param value the value
+   * @return the v
+   */
   public V put(final K key, final V value) {
     return (V) cache.put(key, value);
   }
 
+  /**
+   * Put all.
+   *
+   * @param m the m
+   */
   public void putAll(final Map<? extends K, ? extends V> m) {
     cache.putAll(m);
   }
 
+  /**
+   * Removes the.
+   *
+   * @param key the key
+   * @return the v
+   */
   public V remove(final Object key) {
     return (V) cache.remove(key);
   }
 
+  /**
+   * Size.
+   *
+   * @return the int
+   */
   public int size() {
     return cache.size();
   }
 
+  /**
+   * Values.
+   *
+   * @return the collection
+   */
   public Collection<V> values() {
     return cache.values();
   }

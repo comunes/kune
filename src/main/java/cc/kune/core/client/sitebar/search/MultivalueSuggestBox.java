@@ -77,29 +77,38 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.TextBoxBase;
 
+// TODO: Auto-generated Javadoc
 /**
  * A SuggestBox that uses REST and allows for multiple values, autocomplete and
- * browsing
- * 
+ * browsing.
+ *
  * @author Bess Siegal <bsiegal@novell.com>
  */
 public class MultivalueSuggestBox extends Composite implements SelectionHandler<Suggestion>, Focusable,
     KeyUpHandler {
+  
   /**
-   * Bean for name-value pairs
+   * Bean for name-value pairs.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   private class Option {
 
+    /** The mname. */
     private String mname;
+    
+    /** The mvalue. */
     private String mvalue;
 
     /**
-     * No argument constructor
+     * No argument constructor.
      */
     public Option() {
     }
 
     /**
+     * Gets the name.
+     *
      * @return Returns the name.
      */
     public String getName() {
@@ -107,6 +116,8 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     }
 
     /**
+     * Gets the value.
+     *
      * @return Returns the value.
      */
     public String getValue() {
@@ -114,46 +125,71 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     }
 
     /**
-     * @param name
-     *          The name to set.
+     * Sets the name.
+     *
+     * @param name The name to set.
      */
     public void setName(final String name) {
       mname = name;
     }
 
     /**
-     * @param value
-     *          The value to set.
+     * Sets the value.
+     *
+     * @param value The value to set.
      */
     public void setValue(final String value) {
       mvalue = value;
     }
 
   }
+  
   /**
    * An abstract class that handles success and error conditions from the REST
-   * call
+   * call.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   private abstract class OptionQueryCallback {
+    
+    /**
+     * Error.
+     *
+     * @param exception the exception
+     */
     abstract void error(Throwable exception);
 
+    /**
+     * Success.
+     *
+     * @param optResults the opt results
+     */
     abstract void success(OptionResultSet optResults);
   }
+  
   /**
-   * Bean for total size and options
+   * Bean for total size and options.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   protected class OptionResultSet {
-    /** JSON key for DisplayName */
+    
+    /** JSON key for DisplayName. */
     public static final String DISPLAY_NAME = "longName";
-    /** JSON key for Options */
+    
+    /** JSON key for Options. */
     public static final String OPTIONS = "list";
-    /** JSON key for the size of the Results */
+    
+    /** JSON key for the size of the Results. */
     public static final String TOTAL_SIZE = "size";
 
-    /** JSON key for Value */
+    /** JSON key for Value. */
     public static final String VALUE = "shortName";
 
+    /** The m_options. */
     private final List<Option> m_options = new ArrayList<Option>();
+    
+    /** The mtotal size. */
     private int mtotalSize;
 
     /**
@@ -167,16 +203,17 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     }
 
     /**
-     * Add an option
-     * 
-     * @param option
-     *          - the Option to add
+     * Add an option.
+     *
+     * @param option - the Option to add
      */
     public void addOption(final Option option) {
       m_options.add(option);
     }
 
     /**
+     * Gets the options.
+     *
      * @return an array of Options
      */
     public Option[] getOptions() {
@@ -184,6 +221,8 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     }
 
     /**
+     * Gets the total size.
+     *
      * @return Returns the totalSize.
      */
     public int getTotalSize() {
@@ -191,32 +230,46 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     }
 
     /**
-     * @param totalSize
-     *          The totalSize to set.
+     * Sets the total size.
+     *
+     * @param totalSize The totalSize to set.
      */
     public void setTotalSize(final int totalSize) {
       mtotalSize = totalSize;
     }
   }
+  
   /**
    * A bean to serve as a custom suggestion so that the value is available and
-   * the replace will look like it is supporting multivalues
+   * the replace will look like it is supporting multivalues.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   class OptionSuggestion implements SuggestOracle.Suggestion {
+    
+    /** The Constant NEXT_VALUE. */
     static final String NEXT_VALUE = "NEXT";
+    
+    /** The Constant PREVIOUS_VALUE. */
     static final String PREVIOUS_VALUE = "PREVIOUS";
+    
+    /** The mdisplay. */
     private String mdisplay;
+    
+    /** The mname. */
     private String mname;
+    
+    /** The mreplace. */
     private final String mreplace;
+    
+    /** The mvalue. */
     private final String mvalue;
 
     /**
-     * Constructor for navigation options
-     * 
-     * @param nav
-     *          - next or previous value
-     * @param currentTextValue
-     *          - the current contents of the text box
+     * Constructor for navigation options.
+     *
+     * @param nav - next or previous value
+     * @param currentTextValue - the current contents of the text box
      */
     OptionSuggestion(final String nav, final String currentTextValue) {
       if (NEXT_VALUE.equals(nav)) {
@@ -229,16 +282,12 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     }
 
     /**
-     * Constructor for regular options
-     * 
-     * @param displ
-     *          - the name of the option
-     * @param val
-     *          - the value of the option
-     * @param replacePre
-     *          - the current contents of the text box
-     * @param query
-     *          - the query
+     * Constructor for regular options.
+     *
+     * @param displ - the name of the option
+     * @param val - the value of the option
+     * @param replacePre - the current contents of the text box
+     * @param query - the query
      */
     OptionSuggestion(final String displ, final String val, final String replacePre, final String query) {
       mname = displ;
@@ -256,6 +305,9 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       mvalue = val;
     }
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.user.client.ui.SuggestOracle.Suggestion#getDisplayString()
+     */
     @Override
     public String getDisplayString() {
       return mdisplay;
@@ -271,42 +323,66 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       return mname;
     }
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.user.client.ui.SuggestOracle.Suggestion#getReplacementString()
+     */
     @Override
     public String getReplacementString() {
       return mreplace;
     }
 
     /**
-     * Get the value of the option
-     * 
+     * Get the value of the option.
+     *
      * @return value
      */
     public String getValue() {
       return mvalue;
     }
   }
+  
   /**
    * A custom callback that has the original SuggestOracle.Request and
    * SuggestOracle.Callback
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   private class RestSuggestCallback extends OptionQueryCallback {
+    
+    /** The m_callback. */
     private final SuggestOracle.Callback m_callback;
+    
+    /** The m_query. */
     private final String m_query; // this may be different from
                                   // m_request.getQuery when multivalued it's
                                   // only the substring after the last delimiter
-    private final SuggestOracle.Request m_request;
+    /** The m_request. */
+                                  private final SuggestOracle.Request m_request;
 
+    /**
+     * Instantiates a new rest suggest callback.
+     *
+     * @param request the request
+     * @param callback the callback
+     * @param query the query
+     */
     RestSuggestCallback(final Request request, final Callback callback, final String query) {
       m_request = request;
       m_callback = callback;
       m_query = query;
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.core.client.sitebar.search.MultivalueSuggestBox.OptionQueryCallback#error(java.lang.Throwable)
+     */
     @Override
     public void error(final Throwable exception) {
       updateFormFeedback(FormFeedback.ERROR, "Invalid: " + m_query);
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.core.client.sitebar.search.MultivalueSuggestBox.OptionQueryCallback#success(cc.kune.core.client.sitebar.search.MultivalueSuggestBox.OptionResultSet)
+     */
     @Override
     public void success(final OptionResultSet optResults) {
       final SuggestOracle.Response resp = new SuggestOracle.Response();
@@ -379,13 +455,24 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
    * Some custom inner classes for our SuggestOracle
    */
   /**
-   * A custom Suggest Oracle
+   * A custom Suggest Oracle.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   private class RestSuggestOracle extends SuggestOracle {
+    
+    /** The mcallback. */
     private SuggestOracle.Callback mcallback;
+    
+    /** The mrequest. */
     private SuggestOracle.Request mrequest;
+    
+    /** The mtimer. */
     private final Timer mtimer;
 
+    /**
+     * Instantiates a new rest suggest oracle.
+     */
     RestSuggestOracle() {
       mtimer = new Timer() {
 
@@ -412,6 +499,11 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       };
     }
 
+    /**
+     * Gets the suggestions.
+     *
+     * @return the suggestions
+     */
     private void getSuggestions() {
       String query = mrequest.getQuery();
 
@@ -435,11 +527,17 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       }
     }
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.user.client.ui.SuggestOracle#isDisplayStringHTML()
+     */
     @Override
     public boolean isDisplayStringHTML() {
       return true;
     }
 
+    /* (non-Javadoc)
+     * @see com.google.gwt.user.client.ui.SuggestOracle#requestSuggestions(com.google.gwt.user.client.ui.SuggestOracle.Request, com.google.gwt.user.client.ui.SuggestOracle.Callback)
+     */
     @Override
     public void requestSuggestions(final SuggestOracle.Request request,
         final SuggestOracle.Callback callback) {
@@ -457,20 +555,27 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       mtimer.schedule(DELAY);
     }
   }
+  
+  /** The Constant DELAY. */
   private static final int DELAY = 500;
 
+  /** The Constant DISPLAY_SEPARATOR. */
   private static final String DISPLAY_SEPARATOR = ", ";
+  
+  /** The Constant FIND_EXACT_MATCH_QUERY_LIMIT. */
   private static final int FIND_EXACT_MATCH_QUERY_LIMIT = 20;
+  
+  /** The Constant PAGE_SIZE. */
   private static final int PAGE_SIZE = 15;
+  
+  /** The Constant VALUE_DELIM. */
   private static final String VALUE_DELIM = ";";
 
   /**
-   * Returns a String without the last delimiter
-   * 
-   * @param str
-   *          - String to trim
-   * @param delim
-   *          - the delimiter
+   * Returns a String without the last delimiter.
+   *
+   * @param str - String to trim
+   * @param delim - the delimiter
    * @return the String without the last delimter
    */
   private static String trimLastDelimiter(String str, final String delim) { // NOPMD
@@ -485,45 +590,56 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     return str;
   }
 
+  /** The i18n. */
   private final I18nUITranslationService i18n;
+  
+  /** The last query. */
   private com.google.gwt.http.client.Request lastQuery;
+  
+  /** The mfeedback. */
   private final FormFeedback mfeedback;
 
+  /** The mfield. */
   private final SuggestBox mfield;
 
+  /** The mfind exact matches found. */
   private int mfindExactMatchesFound = 0;
 
+  /** The mfind exact matches not. */
   private final ArrayList<String> mfindExactMatchesNot = new ArrayList<String>();
 
+  /** The mfind exact matches total. */
   private int mfindExactMatchesTotal = 0;
 
+  /** The mindex from. */
   private int mindexFrom = 0;
 
+  /** The mindex to. */
   private int mindexTo = 0;
+  
+  /** The mis multivalued. */
   private boolean misMultivalued = false;
 
+  /** The mrest endpoint url. */
   private final String mrestEndpointUrl;
 
+  /** The mvalue map. */
   private final Map<String, String> mvalueMap;
 
+  /** The show no result. */
   private final boolean showNoResult;
 
   // private final OnExactMatch onExactMatch;
 
   /**
    * Constructor.
-   * 
-   * @param i18n
-   * 
-   * @param the
-   *          URL for the REST endpoint. This URL should accept the parameters q
-   *          (for query), indexFrom and indexTo
-   * @param isMultivalued
-   *          - true for allowing multiple values
-   * @param onExactMatch
-   * @param showNoResult
-   *          if we have to show noResult message when the search is empty or
-   *          not
+   *
+   * @param i18n the i18n
+   * @param showNoResult if we have to show noResult message when the search is empty or
+   * not
+   * @param restEndpointUrl the rest endpoint url
+   * @param isMultivalued - true for allowing multiple values
+   * @param onExactMatch the on exact match
    */
   public MultivalueSuggestBox(final I18nUITranslationService i18n, final boolean showNoResult,
       final String restEndpointUrl, final boolean isMultivalued, final OnExactMatch onExactMatch) {
@@ -572,6 +688,12 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     resetPageIndices();
   }
 
+  /**
+   * Find exact match.
+   *
+   * @param displayValue the display value
+   * @param position the position
+   */
   private void findExactMatch(final String displayValue, final int position) {
     updateFormFeedback(FormFeedback.LOADING, null);
 
@@ -700,6 +822,13 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     }
   }
 
+  /**
+   * Gets the full replace text.
+   *
+   * @param displ the displ
+   * @param replacePre the replace pre
+   * @return the full replace text
+   */
   private String getFullReplaceText(final String displ, String replacePre) { // NOPMD
                                                                              // by
                                                                              // vjrj
@@ -721,10 +850,18 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     }
   }
 
+  /**
+   * Gets the suggest box.
+   *
+   * @return the suggest box
+   */
   public SuggestBox getSuggestBox() {
     return mfield;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.Focusable#getTabIndex()
+   */
   @Override
   public int getTabIndex() {
     return mfield.getTabIndex();
@@ -777,14 +914,17 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   }
 
   /**
-   * Get the value map
-   * 
+   * Get the value map.
+   *
    * @return value map
    */
   public Map<String, String> getValueMap() {
     return mvalueMap;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.dom.client.KeyUpHandler#onKeyUp(com.google.gwt.event.dom.client.KeyUpEvent)
+   */
   @Override
   public void onKeyUp(final KeyUpEvent event) {
     /*
@@ -796,6 +936,9 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     updateFormFeedback(FormFeedback.NONE, null);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.logical.shared.SelectionHandler#onSelection(com.google.gwt.event.logical.shared.SelectionEvent)
+   */
   @Override
   public void onSelection(final SelectionEvent<Suggestion> event) {
     final Suggestion suggestion = event.getSelectedItem();
@@ -831,6 +974,12 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     }
   }
 
+  /**
+   * Put value.
+   *
+   * @param key the key
+   * @param value the value
+   */
   private void putValue(final String key, final String value) {
     Log.info("putting key = " + key + "; value = " + value);
     mvalueMap.put(key, value);
@@ -838,16 +987,12 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   /**
    * Retrieve Options (name-value pairs) that are suggested from the REST
-   * endpoint
-   * 
-   * @param query
-   *          - the String search term
-   * @param from
-   *          - the 0-based begin index int
-   * @param to
-   *          - the end index inclusive int
-   * @param callback
-   *          - the OptionQueryCallback to handle the response
+   * endpoint.
+   *
+   * @param query - the String search term
+   * @param from - the 0-based begin index int
+   * @param to - the end index inclusive int
+   * @param callback - the OptionQueryCallback to handle the response
    */
   private void queryOptions(final String query, final int from, final int to,
       final OptionQueryCallback callback) {
@@ -916,33 +1061,43 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   }
 
+  /**
+   * Reset page indices.
+   */
   private void resetPageIndices() {
     mindexFrom = 0;
     mindexTo = mindexFrom + PAGE_SIZE - 1;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.Focusable#setAccessKey(char)
+   */
   @Override
   public void setAccessKey(final char key) {
     mfield.setAccessKey(key);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.Focusable#setFocus(boolean)
+   */
   @Override
   public void setFocus(final boolean focused) {
     mfield.setFocus(focused);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.Focusable#setTabIndex(int)
+   */
   @Override
   public void setTabIndex(final int index) {
     mfield.setTabIndex(index);
   }
 
   /**
-   * Convenience method to set the status and tooltip of the FormFeedback
-   * 
-   * @param status
-   *          - a FormFeedback status
-   * @param tooltip
-   *          - a String tooltip
+   * Convenience method to set the status and tooltip of the FormFeedback.
+   *
+   * @param status - a FormFeedback status
+   * @param tooltip - a String tooltip
    */
   public void updateFormFeedback(final int status, final String tooltip) {
     mfeedback.setStatus(status);

@@ -27,50 +27,114 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SetBackgroundImageEvent.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SetBackgroundImageEvent extends GwtEvent<SetBackgroundImageEvent.SetBackgroundImageHandler> {
 
+  /**
+   * The Interface HasSetBackgroundImageHandlers.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface HasSetBackgroundImageHandlers extends HasHandlers {
+    
+    /**
+     * Adds the set back image handler.
+     *
+     * @param handler the handler
+     * @return the handler registration
+     */
     HandlerRegistration addSetBackImageHandler(SetBackgroundImageHandler handler);
   }
 
+  /**
+   * The Interface SetBackgroundImageHandler.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public interface SetBackgroundImageHandler extends EventHandler {
+    
+    /**
+     * On set back image.
+     *
+     * @param event the event
+     */
     public void onSetBackImage(SetBackgroundImageEvent event);
   }
 
+  /** The Constant TYPE. */
   private static final Type<SetBackgroundImageHandler> TYPE = new Type<SetBackgroundImageHandler>();
 
+  /**
+   * Fire.
+   *
+   * @param source the source
+   * @param token the token
+   */
   public static void fire(HasHandlers source, cc.kune.core.shared.domain.utils.StateToken token) {
     source.fireEvent(new SetBackgroundImageEvent(token));
   }
 
+  /**
+   * Gets the type.
+   *
+   * @return the type
+   */
   public static Type<SetBackgroundImageHandler> getType() {
     return TYPE;
   }
 
+  /** The token. */
   cc.kune.core.shared.domain.utils.StateToken token;
 
+  /**
+   * Instantiates a new sets the background image event.
+   *
+   * @param token the token
+   */
   public SetBackgroundImageEvent(cc.kune.core.shared.domain.utils.StateToken token) {
     this.token = token;
   }
 
+  /**
+   * Instantiates a new sets the background image event.
+   */
   protected SetBackgroundImageEvent() {
     // Possibly for serialization.
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
+   */
   @Override
   public Type<SetBackgroundImageHandler> getAssociatedType() {
     return TYPE;
   }
 
+  /**
+   * Gets the token.
+   *
+   * @return the token
+   */
   public cc.kune.core.shared.domain.utils.StateToken getToken() {
     return token;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+   */
   @Override
   protected void dispatch(SetBackgroundImageHandler handler) {
     handler.onSetBackImage(this);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(Object obj) {
     if (this == obj)
@@ -88,6 +152,9 @@ public class SetBackgroundImageEvent extends GwtEvent<SetBackgroundImageEvent.Se
     return true;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     int hashCode = 23;
@@ -95,6 +162,9 @@ public class SetBackgroundImageEvent extends GwtEvent<SetBackgroundImageEvent.Se
     return hashCode;
   }
 
+  /* (non-Javadoc)
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
   @Override
   public String toString() {
     return "SetBackImageEvent[" + token + "]";

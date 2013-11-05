@@ -60,14 +60,72 @@ import cc.kune.trash.shared.TrashToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TasksClientActions.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class TasksClientActions extends AbstractFoldableToolActions {
 
+  /** The all. */
   final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_TASK };
+  
+  /** The containers. */
   final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
+  
+  /** The containers no root. */
   final String[] containersNoRoot = { TYPE_FOLDER };
+  
+  /** The contents. */
   final String[] contents = { TYPE_TASK };
+  
+  /** The no root. */
   final String[] noRoot = { TYPE_FOLDER, TYPE_TASK };
 
+  /**
+   * Instantiates a new tasks client actions.
+   *
+   * @param i18n the i18n
+   * @param session the session
+   * @param stateManager the state manager
+   * @param registry the registry
+   * @param res the res
+   * @param folderGoUp the folder go up
+   * @param newTaskItem the new task item
+   * @param newTaskIconBtn the new task icon btn
+   * @param newFolderBtn the new folder btn
+   * @param openContentMenuItem the open content menu item
+   * @param marksAsDoneMenuItem the marks as done menu item
+   * @param marksAsNotDoneMenuItem the marks as not done menu item
+   * @param refresh the refresh
+   * @param optionsMenuContent the options menu content
+   * @param shareMenuContent the share menu content
+   * @param participateBtn the participate btn
+   * @param tutorialBtn the tutorial btn
+   * @param delContentMenuItem the del content menu item
+   * @param addAllMenuItem the add all menu item
+   * @param addAdminMembersMenuItem the add admin members menu item
+   * @param addCollabMembersMenuItem the add collab members menu item
+   * @param addPublicMenuItem the add public menu item
+   * @param purgeMenuItem the purge menu item
+   * @param purgeBtn the purge btn
+   * @param purgeFolderMenuItem the purge folder menu item
+   * @param purgeFolderBtn the purge folder btn
+   * @param chatAbout the chat about
+   * @param copyContent the copy content
+   * @param writeToParticipants the write to participants
+   * @param taskFolderNewMenu the task folder new menu
+   * @param taskNewMenu the task new menu
+   * @param newMenusRegistry the new menus registry
+   * @param delFolderMenuItem the del folder menu item
+   * @param moveContentMenuItem the move content menu item
+   * @param setAsHomePage the set as home page
+   * @param shareInTwitter the share in twitter
+   * @param shareInGPlus the share in g plus
+   * @param shareInIdentica the share in identica
+   * @param shareInFacebook the share in facebook
+   */
   @Inject
   public TasksClientActions(final I18nUITranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
@@ -163,6 +221,9 @@ public class TasksClientActions extends AbstractFoldableToolActions {
         (MenuDescriptor) taskNewMenu.get().withText(i18n.t("Add Gadget")));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
+   */
   @Override
   protected void createPostSessionInitActions() {
   }

@@ -22,8 +22,11 @@
  */
 package cc.kune.common.shared.utils;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class I18nBasicUtils. Some code from Apache Wave SessionLocale.java. FIXME use SessionLocale in the future
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nBasicUtils {
     /**
@@ -31,6 +34,7 @@ public class I18nBasicUtils {
      */
     private static final String LANG_PATTERN = "[a-zA-Z]{1,8}";
 
+    /** The Constant DEFAULT_LANG. */
     private static final String DEFAULT_LANG = "en";
 
     /**

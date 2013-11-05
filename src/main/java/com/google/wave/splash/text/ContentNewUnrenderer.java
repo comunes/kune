@@ -35,11 +35,23 @@ import org.waveprotocol.wave.model.util.ReadableStringSet;
 
 import cc.kune.core.client.errors.DefaultException;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentNewUnrenderer.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentNewUnrenderer {
 
   // private static final Logger LOG =
   // Logger.getLogger(ContentNewUnrenderer.class.getName());
 
+  /**
+   * Apply tokens to empty doc.
+   *
+   * @param tokens the tokens
+   * @return the pair
+   */
   private static Pair<Nindo, IndexedDocument<Node, Element, Text>> applyTokensToEmptyDoc(
       final RichTextTokenizer tokens) {
     // final IndexedDocument<Node, Element, Text> doc =
@@ -65,6 +77,12 @@ public class ContentNewUnrenderer {
     return new Pair<Nindo, IndexedDocument<Node, Element, Text>>(nindo, doc);
   }
 
+  /**
+   * Unrender.
+   *
+   * @param content the content
+   * @return the indexed document
+   */
   public static IndexedDocument<Node, Element, Text> unrender(final String content) {
     final RawElementStyleView rawEl = new RawElementStyleView(RawDocumentProviderImpl.create(
         RawDocumentImpl.BUILDER).parse("<div>" + content + "</div>"));

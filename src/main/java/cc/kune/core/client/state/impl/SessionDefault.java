@@ -58,19 +58,55 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SessionDefault.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SessionDefault implements Session {
+  
+  /** The cookie manager. */
   private final CookiesManager cookieManager;
+  
+  /** The countries array. */
   private Object[][] countriesArray;
+  
+  /** The current language. */
   private I18nLanguageDTO currentLanguage;
+  
+  /** The current state. */
   private StateAbstractDTO currentState;
+  
+  /** The current user info. */
   private UserInfoDTO currentUserInfo;
+  
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The init data. */
   private InitDataDTO initData;
+  
+  /** The languages array. */
   private Object[][] languagesArray;
+  
+  /** The timezones array. */
   private Object[][] timezonesArray;
+  
+  /** The user hash. */
   private String userHash;
+  
+  /** The user service provider. */
   private final Provider<UserServiceAsync> userServiceProvider;
 
+  /**
+   * Instantiates a new session default.
+   *
+   * @param cookieManager the cookie manager
+   * @param userServiceProvider the user service provider
+   * @param eventBus the event bus
+   */
   @Inject
   public SessionDefault(final CookiesManager cookieManager,
       final Provider<UserServiceAsync> userServiceProvider, final EventBus eventBus) {
@@ -87,27 +123,42 @@ public class SessionDefault implements Session {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#check(cc.kune.core.client.rpcservices.AsyncCallbackSimple)
+   */
   @Override
   public void check(final AsyncCallbackSimple<Void> callback) {
     Log.debug("Checking session (userhash: " + getUserHash() + ")");
     userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getContainerState()
+   */
   @Override
   public StateContainerDTO getContainerState() {
     return (StateContainerDTO) currentState;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getContentState()
+   */
   @Override
   public StateContentDTO getContentState() {
     return (StateContentDTO) currentState;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getCountries()
+   */
   @Override
   public List<I18nCountryDTO> getCountries() {
     return initData.getCountries();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getCountriesArray()
+   */
   @Override
   public Object[][] getCountriesArray() {
     if (countriesArray == null) {
@@ -116,91 +167,145 @@ public class SessionDefault implements Session {
     return countriesArray;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getCurrentCCversion()
+   */
   @Override
   public String getCurrentCCversion() {
     return initData.getCurrentCCversion();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getCurrentGroupShortName()
+   */
   @Override
   public String getCurrentGroupShortName() {
     return currentState == null ? null : currentState.getStateToken().getGroup();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getCurrentLanguage()
+   */
   @Override
   public I18nLanguageDTO getCurrentLanguage() {
     return currentLanguage;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getCurrentState()
+   */
   @Override
   public StateAbstractDTO getCurrentState() {
     return currentState;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getCurrentStateToken()
+   */
   @Override
   public StateToken getCurrentStateToken() {
     return currentState == null ? null : currentState.getStateToken();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getCurrentUser()
+   */
   @Override
   public UserSimpleDTO getCurrentUser() {
     return currentUserInfo == null ? null : currentUserInfo.getUser();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getCurrentUserInfo()
+   */
   @Override
   public UserInfoDTO getCurrentUserInfo() {
     return currentUserInfo;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getDefLicense()
+   */
   @Override
   public LicenseDTO getDefLicense() {
     return initData.getDefaultLicense();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getFullTranslatedLanguages()
+   */
   @Override
   public List<I18nLanguageSimpleDTO> getFullTranslatedLanguages() {
     return initData.getFullTranslatedLanguages();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getGalleryPermittedExtensions()
+   */
   @Override
   public String getGalleryPermittedExtensions() {
     return initData.getGalleryPermittedExtensions();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getGroupTools()
+   */
   @Override
   public Collection<ToolSimpleDTO> getGroupTools() {
     return initData.getGroupTools();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getImgCropsize()
+   */
   @Override
   public int getImgCropsize() {
     return initData.getImgCropsize();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getImgIconsize()
+   */
   @Override
   public int getImgIconsize() {
     return initData.getImgIconsize();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getImgResizewidth()
+   */
   @Override
   public int getImgResizewidth() {
     return initData.getImgResizewidth();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getImgThumbsize()
+   */
   @Override
   public int getImgThumbsize() {
     return initData.getImgThumbsize();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getInitData()
+   */
   @Override
   public InitDataDTO getInitData() {
     return initData;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getLanguages()
+   */
   @Override
   public List<I18nLanguageSimpleDTO> getLanguages() {
     return initData.getLanguages();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getLanguagesArray()
+   */
   @Override
   public Object[][] getLanguagesArray() {
     if (languagesArray == null) {
@@ -209,22 +314,34 @@ public class SessionDefault implements Session {
     return languagesArray;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getLicenses()
+   */
   @Override
   public List<LicenseDTO> getLicenses() {
     return initData.getLicenses();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getShowDeletedContent()
+   */
   @Override
   public boolean getShowDeletedContent() {
     return currentUserInfo == null ? false : currentUserInfo.getShowDeletedContent();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getSiteUrl()
+   */
   @Override
   public String getSiteUrl() {
     final String baseURL = GWT.getModuleBaseURL();
     return baseURL.substring(0, baseURL.lastIndexOf("/" + GWT.getModuleName()));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getTimezones()
+   */
   @Override
   public Object[][] getTimezones() {
     if (timezonesArray == null) {
@@ -233,36 +350,57 @@ public class SessionDefault implements Session {
     return timezonesArray;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getUserHash()
+   */
   @Override
   public String getUserHash() {
     return userHash;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#getUserTools()
+   */
   @Override
   public Collection<ToolSimpleDTO> getUserTools() {
     return initData.getUserTools();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#inSameToken(cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   public boolean inSameToken(final StateToken token) {
     return getCurrentStateToken().equals(token);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#isCurrentStateAContent()
+   */
   @Override
   public boolean isCurrentStateAContent() {
     return currentState instanceof StateContentDTO;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#isCurrentStateAGroup()
+   */
   @Override
   public boolean isCurrentStateAGroup() {
     return currentState == null ? false : !currentState.getGroup().isPersonal();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#isCurrentStateAPerson()
+   */
   @Override
   public boolean isCurrentStateAPerson() {
     return currentState == null ? false : currentState.getGroup().isPersonal();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#isInCurrentUserSpace()
+   */
   @Override
   public boolean isInCurrentUserSpace() {
     if (!isLogged()) {
@@ -276,22 +414,36 @@ public class SessionDefault implements Session {
     return false;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#isLogged()
+   */
   @Override
   public boolean isLogged() {
     return userHash != null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#isNewbie()
+   */
   @Override
   public boolean isNewbie() {
     return currentUserInfo != null ? currentUserInfo.getSignInCount() <= SessionConstants.MIN_SIGN_IN_FOR_NEWBIES
         : true;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#isNotLogged()
+   */
   @Override
   public boolean isNotLogged() {
     return !isLogged();
   }
 
+  /**
+   * Map countries.
+   *
+   * @return the object[][]
+   */
   private Object[][] mapCountries() {
     assert initData != null;
     final Object[][] objs = new Object[initData.getCountries().size()][1];
@@ -303,6 +455,11 @@ public class SessionDefault implements Session {
     return objs;
   }
 
+  /**
+   * Map langs.
+   *
+   * @return the object[][]
+   */
   private Object[][] mapLangs() {
     assert initData != null;
     final Object[][] objs = new Object[initData.getLanguages().size()][1];
@@ -314,6 +471,9 @@ public class SessionDefault implements Session {
     return objs;
   }
 
+  /**
+   * Map timezones.
+   */
   private void mapTimezones() {
     assert initData != null;
     timezonesArray = new Object[initData.getTimezones().length][1];
@@ -323,6 +483,9 @@ public class SessionDefault implements Session {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#onAppStart(boolean, cc.kune.core.client.events.AppStartEvent.AppStartHandler)
+   */
   @Override
   public HandlerRegistration onAppStart(final boolean fireNow, final AppStartHandler handler) {
     final HandlerRegistration handlerReg = eventBus.addHandler(AppStartEvent.getType(), handler);
@@ -332,6 +495,9 @@ public class SessionDefault implements Session {
     return handlerReg;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#onUserSignIn(boolean, cc.kune.core.client.events.UserSignInEvent.UserSignInHandler)
+   */
   @Override
   public HandlerRegistration onUserSignIn(final boolean fireNow, final UserSignInHandler handler) {
     final HandlerRegistration handlerReg = eventBus.addHandler(UserSignInEvent.getType(), handler);
@@ -341,6 +507,9 @@ public class SessionDefault implements Session {
     return handlerReg;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#onUserSignInOrSignOut(boolean, cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler)
+   */
   @Override
   public HandlerRegistration onUserSignInOrSignOut(final boolean fireNow,
       final UserSignInOrSignOutHandler handler) {
@@ -352,6 +521,9 @@ public class SessionDefault implements Session {
     return handlerReg;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#onUserSignOut(boolean, cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler)
+   */
   @Override
   public HandlerRegistration onUserSignOut(final boolean fireNow, final UserSignOutHandler handler) {
     final HandlerRegistration handlerReg = eventBus.addHandler(UserSignOutEvent.getType(), handler);
@@ -361,21 +533,33 @@ public class SessionDefault implements Session {
     return handlerReg;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#refreshCurrentUserInfo(cc.kune.core.shared.dto.UserInfoDTO)
+   */
   @Override
   public void refreshCurrentUserInfo(final UserInfoDTO currentUserInfo) {
     this.currentUserInfo = currentUserInfo;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#setCurrentLanguage(cc.kune.core.shared.dto.I18nLanguageDTO)
+   */
   @Override
   public void setCurrentLanguage(final I18nLanguageDTO currentLanguage) {
     this.currentLanguage = currentLanguage;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#setCurrentState(cc.kune.core.shared.dto.StateAbstractDTO)
+   */
   @Override
   public void setCurrentState(final StateAbstractDTO currentState) {
     this.currentState = currentState;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#setCurrentUserInfo(cc.kune.core.shared.dto.UserInfoDTO, java.lang.String)
+   */
   @Override
   public void setCurrentUserInfo(final UserInfoDTO currentUserInfo, final String password) {
     this.currentUserInfo = currentUserInfo;
@@ -387,16 +571,25 @@ public class SessionDefault implements Session {
     eventBus.fireEvent(new UserSignInOrSignOutEvent(isLogged()));
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#setInitData(cc.kune.core.shared.dto.InitDataDTO)
+   */
   @Override
   public void setInitData(final InitDataDTO initData) {
     this.initData = initData;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#setUserHash(java.lang.String)
+   */
   @Override
   public void setUserHash(final String userHash) {
     this.userHash = userHash;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#signOut()
+   */
   @Override
   public void signOut() {
     cookieManager.removeAuthCookie();
@@ -404,6 +597,9 @@ public class SessionDefault implements Session {
     setCurrentUserInfo(null, null);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.Session#userIsJoiningGroups()
+   */
   @Override
   public boolean userIsJoiningGroups() {
     return currentUserInfo.getGroupsIsAdmin().size() + currentUserInfo.getGroupsIsCollab().size() > 0;

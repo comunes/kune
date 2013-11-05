@@ -26,8 +26,17 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nUrlUtilsTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nUrlUtilsTest {
 
+  /**
+   * Simple lang change.
+   */
   @Test
   public void simpleLangChange() {
     assertEquals("?locale=eu", I18nUrlUtils.changeLang("?locale=es", "eu"));

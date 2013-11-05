@@ -37,31 +37,66 @@ import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.google.gwt.resources.client.ImageResource;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AbstractShareInSocialNetMenuItem.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class AbstractShareInSocialNetMenuItem extends MenuItemDescriptor {
 
+  /**
+   * The Class AbstractShareInSocialNetAction.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   public static class AbstractShareInSocialNetAction extends AbstractExtendedAction {
 
+    /** The url. */
     private ClientFormattedString url;
 
+    /**
+     * Instantiates a new abstract share in social net action.
+     */
     public AbstractShareInSocialNetAction() {
 
     }
 
+    /* (non-Javadoc)
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       KuneWindowUtils.open(url.getString());
     }
 
+    /**
+     * Sets the url.
+     *
+     * @param url the new url
+     */
     public void setUrl(final ClientFormattedString url) {
       this.url = url;
     }
 
   }
 
+  /**
+   * Gets the current url.
+   *
+   * @param session the session
+   * @return the current url
+   */
   protected static String getCurrentUrl(final Session session) {
     return StateTokenUtils.getGroupSpaceUrl(session.getCurrentState().getStateToken());
   }
 
+  /**
+   * Gets the title.
+   *
+   * @param session the session
+   * @return the title
+   */
   protected static String getTitle(final Session session) {
     final StateAbstractDTO state = session.getCurrentState();
     final String prefix = session.getCurrentGroupShortName() + ", ";
@@ -74,8 +109,19 @@ public class AbstractShareInSocialNetMenuItem extends MenuItemDescriptor {
     }
   }
 
+  /** The session. */
   protected final Session session;
 
+  /**
+   * Instantiates a new abstract share in social net menu item.
+   *
+   * @param action the action
+   * @param session the session
+   * @param menu the menu
+   * @param text the text
+   * @param icon the icon
+   * @param url the url
+   */
   public AbstractShareInSocialNetMenuItem(final AbstractShareInSocialNetAction action,
       final Session session, final ContentViewerShareMenu menu, final String text,
       final ImageResource icon, final ClientFormattedString url) {

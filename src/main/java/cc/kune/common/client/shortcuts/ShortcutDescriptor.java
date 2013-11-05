@@ -22,24 +22,64 @@
  */
 package cc.kune.common.client.shortcuts;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ShortcutDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ShortcutDescriptor {
 
+  /** The Constant NO_KEYNAME. */
   private static final String NO_KEYNAME = "nokeyname";
 
+  /**
+   * Checks for.
+   *
+   * @param modifiers the modifiers
+   * @param modifier the modifier
+   * @return true, if successful
+   */
   private static boolean has(final int modifiers, final int modifier) {
     return ((modifiers & modifier) == modifier);
   }
 
+  /** The alt. */
   private final boolean alt;
+  
+  /** The ctrl. */
   private final boolean ctrl;
+  
+  /** The shift. */
   private final boolean shift;
+  
+  /** The keycode. */
   private final int keycode;
+  
+  /** The key name. */
   private final String keyName;
 
+  /**
+   * Instantiates a new shortcut descriptor.
+   *
+   * @param ctrl the ctrl
+   * @param alt the alt
+   * @param shift the shift
+   * @param key the key
+   */
   public ShortcutDescriptor(final boolean ctrl, final boolean alt, final boolean shift, final int key) {
     this(ctrl, alt, shift, key, NO_KEYNAME);
   }
 
+  /**
+   * Instantiates a new shortcut descriptor.
+   *
+   * @param ctrl the ctrl
+   * @param alt the alt
+   * @param shift the shift
+   * @param key the key
+   * @param keyName the key name
+   */
   public ShortcutDescriptor(final boolean ctrl, final boolean alt, final boolean shift, final int key,
       final String keyName) {
     this.alt = alt;
@@ -53,32 +93,76 @@ public class ShortcutDescriptor {
     }
   }
 
+  /**
+   * Instantiates a new shortcut descriptor.
+   *
+   * @param ctrl the ctrl
+   * @param shift the shift
+   * @param key the key
+   */
   public ShortcutDescriptor(final boolean ctrl, final boolean shift, final int key) {
     this(ctrl, false, shift, key, NO_KEYNAME);
   }
 
+  /**
+   * Instantiates a new shortcut descriptor.
+   *
+   * @param ctrl the ctrl
+   * @param shift the shift
+   * @param key the key
+   * @param keyName the key name
+   */
   public ShortcutDescriptor(final boolean ctrl, final boolean shift, final int key, final String keyName) {
     this(ctrl, false, shift, key, keyName);
   }
 
+  /**
+   * Instantiates a new shortcut descriptor.
+   *
+   * @param ctrl the ctrl
+   * @param key the key
+   */
   public ShortcutDescriptor(final boolean ctrl, final int key) {
     this(ctrl, false, false, key, NO_KEYNAME);
   }
 
+  /**
+   * Instantiates a new shortcut descriptor.
+   *
+   * @param ctrl the ctrl
+   * @param keycode the keycode
+   * @param keyName the key name
+   */
   public ShortcutDescriptor(final boolean ctrl, final int keycode, final String keyName) {
     this(ctrl, false, false, keycode, keyName);
   }
 
+  /**
+   * Instantiates a new shortcut descriptor.
+   *
+   * @param keycode the keycode
+   * @param modifiers the modifiers
+   */
   public ShortcutDescriptor(final int keycode, final int modifiers) {
     this(has(modifiers, Keyboard.MODIFIER_CTRL), has(modifiers, Keyboard.MODIFIER_ALT), has(modifiers,
         Keyboard.MODIFIER_SHIFT), keycode, NO_KEYNAME);
   }
 
+  /**
+   * Instantiates a new shortcut descriptor.
+   *
+   * @param keycode the keycode
+   * @param modifiers the modifiers
+   * @param keyName the key name
+   */
   public ShortcutDescriptor(final int keycode, final int modifiers, final String keyName) {
     this(has(modifiers, Keyboard.MODIFIER_CTRL), has(modifiers, Keyboard.MODIFIER_ALT), has(modifiers,
         Keyboard.MODIFIER_SHIFT), keycode, keyName);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
   @Override
   public boolean equals(final Object obj) {
     if (this == obj) {
@@ -106,6 +190,9 @@ public class ShortcutDescriptor {
     return true;
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#hashCode()
+   */
   @Override
   public int hashCode() {
     final int prime = 31;
@@ -117,16 +204,34 @@ public class ShortcutDescriptor {
     return result;
   }
 
+  /**
+   * Checks if is.
+   *
+   * @param keyCode the key code
+   * @param modifiers the modifiers
+   * @return true, if successful
+   */
   public boolean is(final char keyCode, final int modifiers) {
     return (this.keycode == keyCode && same(modifiers, Keyboard.MODIFIER_ALT, alt)
         && same(modifiers, Keyboard.MODIFIER_CTRL, ctrl) && same(modifiers, Keyboard.MODIFIER_SHIFT,
           shift));
   }
 
+  /**
+   * Same.
+   *
+   * @param modifiers the modifiers
+   * @param modifier the modifier
+   * @param keyValue the key value
+   * @return true, if successful
+   */
   public boolean same(final int modifiers, final int modifier, final boolean keyValue) {
     return (has(modifiers, modifier) == keyValue);
   }
 
+  /* (non-Javadoc)
+   * @see java.lang.Object#toString()
+   */
   @Override
   public String toString() {
     String s = " (";
@@ -138,12 +243,25 @@ public class ShortcutDescriptor {
     return s;
   }
 
+  /**
+   * Translate key.
+   *
+   * @param keyNameToTranslate the key name to translate
+   * @return the string
+   */
   protected String translateKey(final String keyNameToTranslate) {
     // return Resources.i18n.tWithNT(keyNameToTranslate, "The '" +
     // keyNameToTranslate + "' keyboard key");
     return keyNameToTranslate;
   }
 
+  /**
+   * S key.
+   *
+   * @param key the key
+   * @param specialKeyName the special key name
+   * @return the string
+   */
   private String sKey(final boolean key, final String specialKeyName) {
     return key ? translateKey(specialKeyName) + "+" : "";
   }

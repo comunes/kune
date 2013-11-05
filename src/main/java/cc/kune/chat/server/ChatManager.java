@@ -26,8 +26,24 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Container;
 import cc.kune.domain.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface ChatManager.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface ChatManager {
 
+  /**
+   * Adds the room.
+   *
+   * @param userHash the user hash
+   * @param user the user
+   * @param parentToken the parent token
+   * @param roomName the room name
+   * @param subject the subject
+   * @return the container
+   */
   Container addRoom(String userHash, User user, StateToken parentToken, String roomName, String subject);
 
 }

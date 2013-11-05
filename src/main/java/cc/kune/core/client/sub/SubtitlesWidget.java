@@ -44,25 +44,51 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SubtitlesWidget.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SubtitlesWidget extends ViewImpl implements SubtitlesView {
 
+  /**
+   * The Interface SubtitlesWidgetUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface SubtitlesWidgetUiBinder extends UiBinder<Widget, SubtitlesWidget> {
   }
 
+  /** The Constant SUBTITLE_MANAGER_ID. */
   public static final String SUBTITLE_MANAGER_ID = "k-subt-widget";
 
+  /** The ui binder. */
   private static SubtitlesWidgetUiBinder uiBinder = GWT.create(SubtitlesWidgetUiBinder.class);
 
+  /** The callback. */
   private SimpleCallback callback;
+  
+  /** The description. */
   @UiField
   InlineLabel description;
+  
+  /** The popup. */
   private final PopupPanel popup;
+  
+  /** The showing. */
   private boolean showing;
+  
+  /** The title. */
   @UiField
   InlineLabel title;
 
+  /** The widget. */
   private final Widget widget;
 
+  /**
+   * Instantiates a new subtitles widget.
+   */
   public SubtitlesWidget() {
     popup = new PopupPanel(false, false);
     popup.ensureDebugId(SUBTITLE_MANAGER_ID);
@@ -97,25 +123,43 @@ public class SubtitlesWidget extends ViewImpl implements SubtitlesView {
     });
   }
 
+  /* (non-Javadoc)
+   * @see com.gwtplatform.mvp.client.View#asWidget()
+   */
   @Override
   public Widget asWidget() {
     return popup;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.sub.SubtitlesManager.SubtitlesView#setDescription(java.lang.String)
+   */
   @Override
   public void setDescription(final String descr) {
     description.setText(descr);
   }
 
+  /**
+   * Sets the size.
+   *
+   * @param width the width
+   * @param height the height
+   */
   private void setSize(final int width, final int height) {
     popup.setSize(width + "px", height + "px");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.sub.SubtitlesManager.SubtitlesView#setTitleText(java.lang.String)
+   */
   @Override
   public void setTitleText(final String text) {
     title.setText(text);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.sub.SubtitlesManager.SubtitlesView#show(cc.kune.common.shared.utils.SimpleCallback)
+   */
   @Override
   public void show(final SimpleCallback callback) {
     this.callback = callback;

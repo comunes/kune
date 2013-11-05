@@ -30,29 +30,57 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RosterPresence.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Entity
 @Table(name = "ofPresence")
 @Cache(usage = CacheConcurrencyStrategy.READ_ONLY)
 public class RosterPresence {
 
+  /** The offline date. */
   @Column(name = "offlineDate", columnDefinition = "char")
   private String offlineDate;
 
+  /** The username. */
   @Id
   private String username;
 
+  /**
+   * Gets the offline date.
+   *
+   * @return the offline date
+   */
   public Long getOfflineDate() {
     return Long.parseLong(offlineDate.trim());
   }
 
+  /**
+   * Gets the username.
+   *
+   * @return the username
+   */
   public String getUsername() {
     return username;
   }
 
+  /**
+   * Sets the offline date.
+   *
+   * @param offlineDate the new offline date
+   */
   public void setOfflineDate(final Long offlineDate) {
     this.offlineDate = offlineDate.toString();
   }
 
+  /**
+   * Sets the username.
+   *
+   * @param username the new username
+   */
   public void setUsername(final String username) {
     this.username = username;
   }

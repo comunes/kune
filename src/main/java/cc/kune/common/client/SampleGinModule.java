@@ -31,8 +31,17 @@ import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SampleGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SampleGinModule extends AbstractGinModule {
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+   */
   @Override
   protected void configure() {
     // FIXME move this to sandbox!!!

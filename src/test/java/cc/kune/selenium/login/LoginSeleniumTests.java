@@ -26,8 +26,20 @@ import org.testng.annotations.Test;
 
 import cc.kune.selenium.KuneSeleniumTest;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class LoginSeleniumTests.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class LoginSeleniumTests extends KuneSeleniumTest {
 
+  /**
+   * Basic sign in.
+   *
+   * @param user the user
+   * @param passwd the passwd
+   */
   @Test(dataProvider = "correctlogin")
   public void basicSignIn(final String user, final String passwd) {
     login.assertIsDisconnected();
@@ -39,11 +51,20 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
     login.assertIsDisconnected();
   }
 
+  /**
+   * High.
+   */
   @Test
   public void high() {
     login.high();
   }
 
+  /**
+   * Severals sign in sing out.
+   *
+   * @param user the user
+   * @param passwd the passwd
+   */
   @Test(dataProvider = "correctlogin")
   public void severalsSignInSingOut(final String user, final String passwd) {
     login.assertIsDisconnected();
@@ -58,6 +79,9 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
     login.assertIsDisconnected();
   }
 
+  /**
+   * Sign in incorrect passwd.
+   */
   @Test
   public void signInIncorrectPasswd() {
     login.assertIsDisconnected();
@@ -65,6 +89,12 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
     login.assertIsDisconnected();
   }
 
+  /**
+   * Sign in with token.
+   *
+   * @param user the user
+   * @param passwd the passwd
+   */
   @Test(dataProvider = "correctlogin")
   public void signInWithToken(final String user, final String passwd) {
     login.assertIsDisconnected();

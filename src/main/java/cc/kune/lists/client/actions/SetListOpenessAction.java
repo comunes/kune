@@ -36,15 +36,37 @@ import cc.kune.lists.client.rpc.ListsServiceAsync;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SetListOpenessAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SetListOpenessAction extends RolAction {
 
+  /** The Constant ISPUBLIC. */
   public static final String ISPUBLIC = "stla-ispublic";
 
+  /** The i18n. */
   private final I18nTranslationService i18n;
+  
+  /** The list service. */
   private final Provider<ListsServiceAsync> listService;
+  
+  /** The session. */
   private final Session session;
+  
+  /** The state manager. */
   private final StateManager stateManager;
 
+  /**
+   * Instantiates a new sets the list openess action.
+   *
+   * @param i18n the i18n
+   * @param stateManager the state manager
+   * @param session the session
+   * @param listService the list service
+   */
   @Inject
   public SetListOpenessAction(final I18nTranslationService i18n, final StateManager stateManager,
       final Session session, final Provider<ListsServiceAsync> listService) {
@@ -55,6 +77,9 @@ public class SetListOpenessAction extends RolAction {
     this.listService = listService;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     NotifyUser.showProgress();
@@ -72,6 +97,11 @@ public class SetListOpenessAction extends RolAction {
         });
   }
 
+  /**
+   * Checks if is public.
+   *
+   * @return the boolean
+   */
   private Boolean isPublic() {
     return (Boolean) getValue(ISPUBLIC);
   }

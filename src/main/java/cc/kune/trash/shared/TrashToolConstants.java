@@ -24,13 +24,29 @@ package cc.kune.trash.shared;
 
 import cc.kune.common.shared.res.KuneIcon;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TrashToolConstants.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public final class TrashToolConstants {
 
+  /** The Constant ICON_TYPE_ROOT. */
   public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('i');
+  
+  /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "trash";
+  
+  /** The Constant TOOL_NAME. */
   public static final String TOOL_NAME = "trash";
+  
+  /** The Constant TYPE_ROOT. */
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
 
+  /**
+   * Instantiates a new trash tool constants.
+   */
   private TrashToolConstants() {
   }
 }

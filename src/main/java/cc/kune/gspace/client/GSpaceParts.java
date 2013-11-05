@@ -52,8 +52,39 @@ import cc.kune.gspace.client.viewers.NoHomePageViewer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GSpaceParts.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GSpaceParts {
 
+  /**
+   * Instantiates a new g space parts.
+   *
+   * @param session the session
+   * @param themeManager the theme manager
+   * @param armor the armor
+   * @param licenseFooter the license footer
+   * @param tagsPresenter the tags presenter
+   * @param toolSelector the tool selector
+   * @param noHome the no home
+   * @param docsViewer the docs viewer
+   * @param folderViewer the folder viewer
+   * @param go the go
+   * @param uo the uo
+   * @param siteSearch the site search
+   * @param transAction the trans action
+   * @param maxMinWorkspace the max min workspace
+   * @param feedbackPanel the feedback panel
+   * @param toTrans the to trans
+   * @param gtranslator the gtranslator
+   * @param translator the translator
+   * @param writeToBuddie the write to buddie
+   * @param lastConnectedBuddie the last connected buddie
+   * @param tokenListener the token listener
+   */
   @Inject
   public GSpaceParts(final Session session, final GSpaceThemeManager themeManager,
       final GSpaceArmor armor, final Provider<EntityLicensePresenter> licenseFooter,

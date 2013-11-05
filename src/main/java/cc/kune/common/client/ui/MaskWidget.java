@@ -34,37 +34,69 @@ import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MaskWidget.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MaskWidget extends PopupPanel implements MaskWidgetView {
 
+  /**
+   * The Interface MaskWidgetUiBinder.
+   *
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
   interface MaskWidgetUiBinder extends UiBinder<Widget, MaskWidget> {
   }
+  
+  /** The ui binder. */
   private static MaskWidgetUiBinder uiBinder = GWT.create(MaskWidgetUiBinder.class);
+  
+  /** The flow. */
   @UiField
   FlowPanel flow;
+  
+  /** The icon. */
   @UiField
   Image icon;
+  
+  /** The label. */
   @UiField
   Label label;
 
+  /** The main panel. */
   @UiField
   SimplePanel mainPanel;
 
+  /**
+   * Instantiates a new mask widget.
+   */
   public MaskWidget() {
     super(false, false);
     add(uiBinder.createAndBindUi(this));
     setStyleName("k-mask");
   }
 
+  /* (non-Javadoc)
+   * @see com.google.gwt.user.client.ui.PopupPanel#isShowing()
+   */
   @Override
   public boolean isShowing() {
     return super.isShowing();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.MaskWidgetView#mask(com.google.gwt.user.client.ui.IsWidget)
+   */
   @Override
   public void mask(final IsWidget widget) {
     mask(widget, "");
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.MaskWidgetView#mask(com.google.gwt.user.client.ui.IsWidget, java.lang.String)
+   */
   @Override
   public void mask(final IsWidget widget, final String message) {
     label.setText(message);
@@ -83,6 +115,9 @@ public class MaskWidget extends PopupPanel implements MaskWidgetView {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.ui.MaskWidgetView#unMask()
+   */
   @Override
   public void unMask() {
     hide();

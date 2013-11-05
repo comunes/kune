@@ -22,8 +22,15 @@
  */
 package cc.kune.common.shared.utils;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface SimpleCallback.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface SimpleCallback {
 
+  /** The Constant DO_NOTHING. */
   public static final SimpleCallback DO_NOTHING = new SimpleCallback() {
     @Override
     public void onCallback() {
@@ -31,7 +38,7 @@ public interface SimpleCallback {
   };
 
   /**
-   * Notifies this callback
+   * Notifies this callback.
    */
   void onCallback();
 }

@@ -24,30 +24,62 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MenuRadioItemDescriptor.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class MenuRadioItemDescriptor extends MenuCheckItemDescriptor {
 
+  /** The Constant CHECKED_ITEM. */
   public static final String CHECKED_ITEM = "-checkeditem";
+  
+  /** The group. */
   private final String group;
 
+  /**
+   * Instantiates a new menu radio item descriptor.
+   *
+   * @param parent the parent
+   * @param action the action
+   * @param group the group
+   */
   public MenuRadioItemDescriptor(final MenuDescriptor parent, final AbstractAction action,
       final String group) {
     super(parent, action);
     this.group = group;
   }
 
+  /**
+   * Gets the group.
+   *
+   * @return the group
+   */
   public String getGroup() {
     return group;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor#getType()
+   */
   @Override
   public Class<?> getType() {
     return MenuRadioItemDescriptor.class;
   }
 
+  /**
+   * Previous checked item id.
+   *
+   * @return the string
+   */
   private String previousCheckedItemId() {
     return group + CHECKED_ITEM;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor#setChecked(boolean)
+   */
   @Override
   public void setChecked(final boolean checked) {
     if (checked) {

@@ -27,16 +27,44 @@ import cc.kune.gspace.client.options.EntityOptionsUploaderView;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface EntityOptStyleView.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface EntityOptStyleView extends EntityOptionsTabView, EntityOptionsUploaderView {
 
+  /**
+   * Clear back image.
+   */
   public void clearBackImage();
 
+  /**
+   * Gets the clear btn.
+   *
+   * @return the clear btn
+   */
   HasClickHandlers getClearBtn();
 
+  /**
+   * Reset.
+   */
   void reset();
 
+  /**
+   * Sets the back image.
+   *
+   * @param url the new back image
+   */
   public void setBackImage(final String url);
 
+  /**
+   * Sets the upload params.
+   *
+   * @param userHash the user hash
+   * @param token the token
+   */
   void setUploadParams(String userHash, String token);
 
 }

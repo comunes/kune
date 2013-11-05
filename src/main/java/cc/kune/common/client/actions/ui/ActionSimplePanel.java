@@ -27,10 +27,23 @@ import cc.kune.common.shared.i18n.HasRTL;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ActionSimplePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ActionSimplePanel extends AbstractComposedGuiItem implements ActionExtensibleView {
 
+  /** The bar. */
   private final HorizontalPanel bar;
 
+  /**
+   * Instantiates a new action simple panel.
+   *
+   * @param guiProvider the gui provider
+   * @param i18n the i18n
+   */
   @Inject
   public ActionSimplePanel(final GuiProvider guiProvider, final HasRTL i18n) {
     super(guiProvider, i18n);
@@ -38,17 +51,26 @@ public class ActionSimplePanel extends AbstractComposedGuiItem implements Action
     initWidget(bar);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractComposedGuiItem#addWidget(cc.kune.common.client.actions.ui.AbstractGuiItem)
+   */
   @Override
   protected void addWidget(final AbstractGuiItem item) {
     bar.add(item);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractComposedGuiItem#clear()
+   */
   @Override
   public void clear() {
     super.clear();
     bar.clear();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ui.AbstractComposedGuiItem#insertWidget(cc.kune.common.client.actions.ui.AbstractGuiItem, int)
+   */
   @Override
   protected void insertWidget(final AbstractGuiItem item, final int position) {
     final int count = bar.getWidgetCount();

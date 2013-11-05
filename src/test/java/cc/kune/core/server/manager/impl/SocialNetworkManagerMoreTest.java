@@ -38,11 +38,23 @@ import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SocialNetworkManagerMoreTest.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTest {
 
+  /** The social network manager. */
   @Inject
   protected SocialNetworkManagerDefault socialNetworkManager;
 
+  /**
+   * Last admin unjoin group with collabs fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = LastAdminInGroupException.class)
   public void lastAdminUnjoinGroupWithCollabsFails() throws Exception {
     socialNetworkManager.addAdmin(admin, group);
@@ -51,6 +63,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     socialNetworkManager.unJoinGroup(admin.getUserGroup(), group);
   }
 
+  /**
+   * Last admin unjoin group without collabs orphaned.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void lastAdminUnjoinGroupWithoutCollabsOrphaned() throws Exception {
     socialNetworkManager.addAdmin(admin, group);
@@ -60,6 +77,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     assertEquals(0, group.getSocialNetwork().getAccessLists().getEditors().getList().size());
   }
 
+  /**
+   * Not admin try delete member.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = AccessViolationException.class)
   public void notAdminTryDeleteMember() throws Exception {
     socialNetworkManager.requestToJoin(user, group);
@@ -68,6 +90,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     socialNetworkManager.deleteMember(otherUser, userGroup, group);
   }
 
+  /**
+   * Participation dont show self group.
+   */
   @Test
   public void participationDontShowSelfGroup() {
     group.getSocialNetwork().getAccessLists().getViewers().setMode(GroupListMode.EVERYONE);
@@ -89,6 +114,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     assertFalse(part.getGroupsIsCollab().contains(user.getUserGroup()));
   }
 
+  /**
+   * Request join a closed group deny.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void requestJoinAClosedGroupDeny() throws Exception {
     group.setAdmissionType(AdmissionType.Closed);
@@ -97,6 +127,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     assertEquals(result, SocialNetworkRequestResult.denied);
   }
 
+  /**
+   * Request join a moderated group add user group to pending.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void requestJoinAModeratedGroupAddUserGroupToPending() throws Exception {
     group.setAdmissionType(AdmissionType.Moderated);
@@ -106,6 +141,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     assertTrue(group.getSocialNetwork().getPendingCollaborators().getList().contains(userGroup));
   }
 
+  /**
+   * Request join a open group add user group to editors.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void requestJoinAOpenGroupAddUserGroupToEditors() throws Exception {
     group.setAdmissionType(AdmissionType.Open);
@@ -116,6 +156,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     assertEquals(group.getSocialNetwork().getAccessLists().getEditors().getMode(), GroupListMode.NORMAL);
   }
 
+  /**
+   * Request join a orphaned group add user group to admins.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void requestJoinAOrphanedGroupAddUserGroupToAdmins() throws Exception {
     orphanedGroup.setAdmissionType(AdmissionType.Open);
@@ -130,6 +175,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     // FIXME Check change group type to PROJECT
   }
 
+  /**
+   * Request join twice a orphaned group add user group to admins.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = AlreadyGroupMemberException.class)
   public void requestJoinTwiceAOrphanedGroupAddUserGroupToAdmins() throws Exception {
     orphanedGroup.setAdmissionType(AdmissionType.Open);
@@ -139,6 +189,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     socialNetworkManager.requestToJoin(user, orphanedGroup);
   }
 
+  /**
+   * Request to join twice dont duplicate pending.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void requestToJoinTwiceDontDuplicatePending() throws Exception {
     group.setAdmissionType(AdmissionType.Moderated);
@@ -148,6 +203,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 1);
   }
 
+  /**
+   * Sets the admin anon member fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = Exception.class)
   public void setAdminAnonMemberFails() throws Exception {
     socialNetworkManager.addAdmin(admin, group);
@@ -155,6 +215,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     socialNetworkManager.setAdminAsCollab(admin, userGroup, group);
   }
 
+  /**
+   * Sets the admin as collab.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void setAdminAsCollab() throws Exception {
     socialNetworkManager.requestToJoin(user, group);
@@ -173,6 +238,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
   }
 
+  /**
+   * Sets the admin as collab not admin fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = AccessViolationException.class)
   public void setAdminAsCollabNotAdminFails() throws Exception {
     socialNetworkManager.requestToJoin(user, group);
@@ -181,6 +251,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     socialNetworkManager.setCollabAsAdmin(otherUser, userGroup, group);
   }
 
+  /**
+   * Sets the admin not collab fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = Exception.class)
   public void setAdminNotCollabFails() throws Exception {
     socialNetworkManager.addAdmin(admin, group);
@@ -188,6 +263,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     socialNetworkManager.setCollabAsAdmin(admin, userGroup, group);
   }
 
+  /**
+   * Sets the collab as admin.
+   *
+   * @throws Exception the exception
+   */
   @Test
   public void setCollabAsAdmin() throws Exception {
     socialNetworkManager.requestToJoin(user, group);
@@ -205,6 +285,11 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
     assertEquals(group.getSocialNetwork().getPendingCollaborators().getList().size(), 0);
   }
 
+  /**
+   * Sets the collab as admin not admin fails.
+   *
+   * @throws Exception the exception
+   */
   @Test(expected = AccessViolationException.class)
   public void setCollabAsAdminNotAdminFails() throws Exception {
     socialNetworkManager.requestToJoin(user, group);

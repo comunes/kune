@@ -33,11 +33,24 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class TagManagerDefault.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class TagManagerDefault extends DefaultManager<Tag, Long> implements TagManager {
 
+  /** The tag finder. */
   private final TagFinder tagFinder;
 
+  /**
+   * Instantiates a new tag manager default.
+   *
+   * @param provider the provider
+   * @param tagFinder the tag finder
+   */
   @Inject
   public TagManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final TagFinder tagFinder) {
@@ -45,6 +58,9 @@ public class TagManagerDefault extends DefaultManager<Tag, Long> implements TagM
     this.tagFinder = tagFinder;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.manager.TagManager#findByTagName(java.lang.String)
+   */
   @Override
   public Tag findByTagName(final String tag) {
     return tagFinder.findByTagName(tag);

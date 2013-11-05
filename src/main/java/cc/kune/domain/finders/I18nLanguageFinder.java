@@ -30,14 +30,37 @@ import cc.kune.domain.I18nLanguage;
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Interface I18nLanguageFinder.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public interface I18nLanguageFinder {
 
+  /**
+   * Find by code.
+   *
+   * @param language the language
+   * @return the i18n language
+   */
   @Finder(query = "FROM I18nLanguage l WHERE code = :language")
   public I18nLanguage findByCode(@Named("language") final String language);
 
+  /**
+   * Find by codes.
+   *
+   * @param languages the languages
+   * @return the list
+   */
   @Finder(query = "FROM I18nLanguage l WHERE code in (:languages)", returnAs = ArrayList.class)
   public List<I18nLanguage> findByCodes(@Named("languages") final List<String> languages);
 
+  /**
+   * Gets the all.
+   *
+   * @return the all
+   */
   @Finder(query = "FROM I18nLanguage ORDER BY englishName", returnAs = ArrayList.class)
   public List<I18nLanguage> getAll();
 

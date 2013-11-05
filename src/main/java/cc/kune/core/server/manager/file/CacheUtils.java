@@ -27,10 +27,12 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletResponse;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class CacheUtils is used to set the cache headers in some servlets
- * (avatars, etc)
- * 
+ * (avatars, etc).
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CacheUtils {
 
@@ -51,8 +53,8 @@ public class CacheUtils {
 
   /**
    * Sets the cache to 1 day.
-   * 
-   * @param resp
+   *
+   * @param resp the new cache1 day
    */
   public static void setCache1Day(final HttpServletResponse resp) {
     setCache(resp, 86400L);

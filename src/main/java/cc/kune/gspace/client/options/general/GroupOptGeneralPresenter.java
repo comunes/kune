@@ -39,11 +39,31 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupOptGeneralPresenter.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implements GroupOptGeneral {
 
+  /** The group service. */
   private final Provider<GroupServiceAsync> groupService;
+  
+  /** The group view. */
   private final GroupOptGeneralView groupView;
 
+  /**
+   * Instantiates a new group opt general presenter.
+   *
+   * @param stateManager the state manager
+   * @param session the session
+   * @param eventBus the event bus
+   * @param i18n the i18n
+   * @param entityOptions the entity options
+   * @param groupService the group service
+   * @param view the view
+   */
   @Inject
   public GroupOptGeneralPresenter(final StateManager stateManager, final Session session,
       final EventBus eventBus, final I18nUITranslationService i18n, final GroupOptions entityOptions,
@@ -60,16 +80,25 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#applicable()
+   */
   @Override
   protected boolean applicable() {
     return session.isCurrentStateAGroup();
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#init(cc.kune.gspace.client.options.general.EntityOptGeneralView)
+   */
   @Override
   public void init(final EntityOptGeneralView view) {
     super.init(view);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#setState()
+   */
   @Override
   protected void setState() {
     final GroupDTO group = session.getCurrentState().getGroup();
@@ -82,6 +111,9 @@ public class GroupOptGeneralPresenter extends EntityOptGeneralPresenter implemen
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#updateInServer()
+   */
   @Override
   protected void updateInServer() {
     if (view.isValid()) {

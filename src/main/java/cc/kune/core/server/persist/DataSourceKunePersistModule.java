@@ -57,38 +57,58 @@ import com.google.inject.Provider;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.persist.jpa.KuneJpaLocalTxnInterceptor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DataSourceKunePersistModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class DataSourceKunePersistModule extends PrivateModule {
   // http://code.google.com/p/google-guice/wiki/GuicePersistMultiModules
 
+  /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(DataSourceKunePersistModule.class);
+  
+  /** The Constant MY_DATA_SOURCE_ONE_FILTER_KEY. */
   public static final Key<CustomPersistFilter> MY_DATA_SOURCE_ONE_FILTER_KEY = Key.get(
       CustomPersistFilter.class, DataSourceKune.class);
+  
+  /** The kune config. */
   private String kuneConfig;
+  
+  /** The kune properties. */
   private KunePropertiesDefault kuneProperties;
+  
+  /** The log4 conf. */
   private String log4Conf = null;
+  
+  /** The setted jpa unit. */
   private String settedJpaUnit = null;
+  
+  /** The transaction interceptor. */
   private KuneJpaLocalTxnInterceptor transactionInterceptor;
 
   /**
-   * Instantiates this module (main constructor)
+   * Instantiates this module (main constructor).
    */
   public DataSourceKunePersistModule() {
     init(null);
   }
 
   /**
-   * Instantiates this module only during tests
-   * 
-   * @param settedProperties
-   *          the setted properties
-   * @param settedJpaUnit
-   *          the setted jpa unit
+   * Instantiates this module only during tests.
+   *
+   * @param settedProperties the setted properties
+   * @param settedJpaUnit the setted jpa unit
    */
   public DataSourceKunePersistModule(final String settedProperties, final String settedJpaUnit) {
     this.settedJpaUnit = settedJpaUnit;
     init(settedProperties);
   }
 
+  /* (non-Javadoc)
+   * @see com.google.inject.PrivateModule#configure()
+   */
   @Override
   public void configure() {
 
@@ -198,6 +218,9 @@ public class DataSourceKunePersistModule extends PrivateModule {
     bind(GenericPersistenceInitializer.class).asEagerSingleton();
   }
 
+  /**
+   * Configure log4j.
+   */
   private void configureLog4j() {
     try {
       final Properties properties = new Properties();
@@ -211,14 +234,29 @@ public class DataSourceKunePersistModule extends PrivateModule {
     }
   }
 
+  /**
+   * Gets the kune properties.
+   *
+   * @return the kune properties
+   */
   public KuneProperties getKuneProperties() {
     return kuneProperties;
   }
 
+  /**
+   * Gets the transaction interceptor.
+   *
+   * @return the transaction interceptor
+   */
   public KuneJpaLocalTxnInterceptor getTransactionInterceptor() {
     return transactionInterceptor;
   }
 
+  /**
+   * Inits the.
+   *
+   * @param settedProperties the setted properties
+   */
   private void init(final String settedProperties) {
     final SystemConfiguration sysConf = new SystemConfiguration();
     kuneConfig = settedProperties != null ? settedProperties : sysConf.getString("kune.server.config");
@@ -226,6 +264,13 @@ public class DataSourceKunePersistModule extends PrivateModule {
     log4Conf = sysConf.getString("log4j.configuration");
   }
 
+  /**
+   * Sets the property if exists.
+   *
+   * @param dbProperties the db properties
+   * @param kuneProperty the kune property
+   * @param persistenceProperty the persistence property
+   */
   private void setPropertyIfExists(final Properties dbProperties, final String kuneProperty,
       final String persistenceProperty) {
     if (kuneProperties.has(kuneProperty)) {

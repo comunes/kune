@@ -24,8 +24,19 @@ package cc.kune.chat.client;
 
 import com.calclab.emite.browser.client.PageAssist;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CustomHtmlConfig.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CustomHtmlConfig {
 
+    /**
+     * Gets the from meta.
+     *
+     * @return the from meta
+     */
     public static CustomHtmlConfig getFromMeta() {
 	final CustomHtmlConfig config = new CustomHtmlConfig();
 	config.hasLogin = PageAssist.isMetaTrue("hablar.login");
@@ -41,28 +52,18 @@ public class CustomHtmlConfig {
 	return config;
     }
 
-    /**
-     * Width
-     */
+    /** Width. */
     public String width = "100%";
 
-    /**
-     * Height
-     */
+    /** Height. */
     public String height = "100%";
 
-    /**
-     * Install Logger module
-     */
+    /** Install Logger module. */
     public boolean hasLogger = false;
 
-    /**
-     * Show or not login panel
-     */
+    /** Show or not login panel. */
     public boolean hasLogin = false;
 
-    /**
-     * If not null, show 'hablar' inside the div with the id given
-     */
+    /** If not null, show 'hablar' inside the div with the id given. */
     public String inline = null;
 }

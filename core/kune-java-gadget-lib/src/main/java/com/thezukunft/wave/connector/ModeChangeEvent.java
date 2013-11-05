@@ -29,7 +29,7 @@ import com.google.gwt.event.shared.GwtEvent;
 
 /**
  * Event fired whenever the height of the gadget's contents changes
- *
+ * 
  */
 public class ModeChangeEvent extends GwtEvent<ModeChangeEventHandler> {
 

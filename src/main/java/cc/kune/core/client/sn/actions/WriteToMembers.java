@@ -27,8 +27,21 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class WriteToMembers.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class WriteToMembers extends MenuItemDescriptor {
 
+  /**
+   * Instantiates a new write to members.
+   *
+   * @param action the action
+   * @param i18n the i18n
+   * @param optionsMenu the options menu
+   */
   @Inject
   public WriteToMembers(final WriteToAction action, final I18nTranslationService i18n,
       final GroupSNOptionsMenu optionsMenu) {

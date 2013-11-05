@@ -40,12 +40,34 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ContentCacheDefault.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class ContentCacheDefault implements ContentCache {
+  
+  /** The cache map. */
   private final Map<StateToken, StateAbstractDTO> cacheMap;
+  
+  /** The event bus. */
   private final EventBus eventBus;
+  
+  /** The server. */
   private final ContentServiceAsync server;
+  
+  /** The use cache. */
   private boolean useCache = false;
 
+  /**
+   * Instantiates a new content cache default.
+   *
+   * @param server the server
+   * @param eventBus the event bus
+   * @param session the session
+   */
   @Inject
   public ContentCacheDefault(final ContentServiceAsync server, final EventBus eventBus,
       final Session session) {
@@ -69,6 +91,9 @@ public class ContentCacheDefault implements ContentCache {
     });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.ContentCache#cache(cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.dto.StateAbstractDTO)
+   */
   @Override
   public void cache(final StateToken encodeState, final StateAbstractDTO content) {
     assert encodeState != null;
@@ -77,6 +102,12 @@ public class ContentCacheDefault implements ContentCache {
     }
   }
 
+  /**
+   * Gets the cached.
+   *
+   * @param newState the new state
+   * @return the cached
+   */
   private StateAbstractDTO getCached(final StateToken newState) {
     assert newState != null;
     final StateAbstractDTO cached = cacheMap.get(newState);
@@ -84,6 +115,9 @@ public class ContentCacheDefault implements ContentCache {
     return useCache ? cached : newState.hasAll() ? cached : null;
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.ContentCache#getContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, com.google.gwt.user.client.rpc.AsyncCallback)
+   */
   @Override
   public void getContent(final String user, final StateToken newState,
       final AsyncCallback<StateAbstractDTO> callback) {
@@ -98,11 +132,17 @@ public class ContentCacheDefault implements ContentCache {
     }
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.ContentCache#remove(cc.kune.core.shared.domain.utils.StateToken)
+   */
   @Override
   public void remove(final StateToken token) {
     cacheMap.remove(token);
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.core.client.state.ContentCache#removeCacheOfGroup(java.lang.String)
+   */
   @Override
   public void removeCacheOfGroup(final String group) {
     for (final StateToken entry : cacheMap.keySet()) {

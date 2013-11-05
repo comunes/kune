@@ -42,15 +42,33 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.wave.api.Participants;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class KuneWaveServerUtils.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class KuneWaveServerUtils {
 
+  /** The participant utils. */
   @Inject
   static Provider<ParticipantUtils> participantUtils;
+  
+  /** The user finder. */
   @Inject
   static Provider<UserFinder> userFinder;
+  
+  /** The wave service. */
   @Inject
   static Provider<KuneWaveService> waveService;
 
+  /**
+   * Gets the local participants except author.
+   *
+   * @param waveref the waveref
+   * @param author the author
+   * @return the local participants except author
+   */
   public static Collection<Addressee> getLocalParticipantsExceptAuthor(final WaveRef waveref,
       final String author) {
     final Participants participants = waveService.get().getParticipants(waveref, author);
@@ -69,10 +87,22 @@ public class KuneWaveServerUtils {
     return list;
   }
 
+  /**
+   * Gets the url.
+   *
+   * @param waveref the waveref
+   * @return the url
+   */
   public static String getUrl(final WaveRef waveref) {
     return JavaWaverefEncoder.encodeToUriPathSegment(waveref);
   }
 
+  /**
+   * Gets the wave ref.
+   *
+   * @param content the content
+   * @return the wave ref
+   */
   public static WaveRef getWaveRef(final Content content) {
     try {
       return JavaWaverefEncoder.decodeWaveRefFromPath(String.valueOf(content.getWaveId()));

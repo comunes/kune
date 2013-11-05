@@ -35,21 +35,57 @@ import cc.kune.core.server.rack.ContainerListener;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The listener interface for receiving kuneContainer events. The class that is
+ * interested in processing a kuneContainer event implements this interface, and
+ * the object created with that class is registered with a component using the
+ * component's <code>addKuneContainerListener<code> method. When
+ * the kuneContainer event occurs, that object's appropriate
+ * method is invoked.
+ * 
+ * @see ContainerListener
+ * 
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class KuneContainerListener implements ContainerListener {
+
+  /** The logger. */
   private final Logger logger; // NOPMD by vjrj on 16/07/09 22:38
+
+  /** The persistence service. */
   private final KunePersistenceService persistenceService;
 
+  /**
+   * Instantiates a new kune container listener.
+   * 
+   * @param persistenceService
+   *          the persistence service
+   * @param logger
+   *          the logger
+   */
   @Inject
   public KuneContainerListener(final KunePersistenceService persistenceService, final Logger logger) {
     this.persistenceService = persistenceService;
     this.logger = logger;
   }
 
+  /**
+   * Gets the logger.
+   * 
+   * @return the logger
+   */
   public Logger getLogger() {
     return logger;
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.rack.ContainerListener#start()
+   */
   @Override
   public void start() {
     logger.log(Level.INFO, "Kune persistence starting");
@@ -58,6 +94,11 @@ public class KuneContainerListener implements ContainerListener {
     logger.log(Level.INFO, "Kune server started");
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.rack.ContainerListener#stop()
+   */
   @Override
   public void stop() {
     logger.log(Level.INFO, "Stopping Kune...");

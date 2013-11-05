@@ -30,11 +30,25 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class I18nTranslateRecomendPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class I18nTranslateRecomendPanel extends Composite {
 
+  /** The recomm frame. */
   private final Frame recommFrame;
+  
+  /** The tab title. */
   private final Label tabTitle;
 
+  /**
+   * Instantiates a new i18n translate recomend panel.
+   *
+   * @param i18n the i18n
+   */
   @Inject
   public I18nTranslateRecomendPanel(final I18nTranslationService i18n) {
     tabTitle = new Label(i18n.t("Recommendations"));
@@ -44,10 +58,21 @@ public class I18nTranslateRecomendPanel extends Composite {
     initWidget(recommFrame);
   }
 
+  /**
+   * Gets the tab title.
+   *
+   * @return the tab title
+   */
   public IsWidget getTabTitle() {
     return tabTitle;
   }
 
+  /**
+   * Sets the size.
+   *
+   * @param width the width
+   * @param height the height
+   */
   public void setSize(final int width, final int height) {
     final String widthS = width + "px";
     final String heightS = height + "px";

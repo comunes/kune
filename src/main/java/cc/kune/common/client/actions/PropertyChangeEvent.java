@@ -37,6 +37,7 @@ exception statement from your version. */
 
 package cc.kune.common.client.actions;
 
+// TODO: Auto-generated Javadoc
 /**
  * PropertyChangeEvents are fired in the PropertyChange and VetoableChange event
  * classes. They represent the old and new values as well as the source Bean. If
@@ -90,23 +91,18 @@ public class PropertyChangeEvent {
    */
   private Object propagationId;
 
+  /** The source. */
   private final Object source;
 
   /**
    * Create a new PropertyChangeEvent. Remember that if you received a
    * PropertyChangeEvent and are sending a new one, you should also set the
    * propagation ID from the old PropertyChangeEvent.
-   * 
-   * @param source
-   *          the Bean containing the property
-   * @param propertyName
-   *          the property's name
-   * @param oldVal
-   *          the old value of the property
-   * @param newVal
-   *          the new value of the property
-   * @throws IllegalArgumentException
-   *           if source is null
+   *
+   * @param source the Bean containing the property
+   * @param propertyName the property's name
+   * @param oldVal the old value of the property
+   * @param newVal the new value of the property
    */
   public PropertyChangeEvent(final Object source, final String propertyName, final Object oldVal,
       final Object newVal) {
@@ -153,6 +149,11 @@ public class PropertyChangeEvent {
     return propertyName;
   }
 
+  /**
+   * Gets the source.
+   *
+   * @return the source
+   */
   public Object getSource() {
     return source;
   }
@@ -173,9 +174,7 @@ public class PropertyChangeEvent {
 
   /**
    * Utility method to rollback a change.
-   * 
-   * @param event
-   *          the event to rollback
+   *
    * @return a new event with old and new swapped
    */
   PropertyChangeEvent rollback() {

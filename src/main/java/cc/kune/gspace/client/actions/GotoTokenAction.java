@@ -34,12 +34,38 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GotoTokenAction.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GotoTokenAction extends AbstractExtendedAction {
+  
+  /** The rename handler. */
   private final HandlerRegistration renameHandler;
+  
+  /** The sn handler. */
   private final HandlerRegistration snHandler;
+  
+  /** The state manager. */
   private final StateManager stateManager;
+  
+  /** The token. */
   private final StateToken token;
 
+  /**
+   * Instantiates a new goto token action.
+   *
+   * @param icon the icon
+   * @param name the name
+   * @param tooltip the tooltip
+   * @param token the token
+   * @param style the style
+   * @param stateManager the state manager
+   * @param eventBus the event bus
+   * @param disableCurrent the disable current
+   */
   public GotoTokenAction(final Object icon, final String name, final String tooltip,
       final StateToken token, final String style, final StateManager stateManager,
       final EventBus eventBus, final boolean disableCurrent) {
@@ -72,11 +98,17 @@ public class GotoTokenAction extends AbstractExtendedAction {
         });
   }
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+   */
   @Override
   public void actionPerformed(final ActionEvent event) {
     this.stateManager.gotoStateToken(token);
   };
 
+  /* (non-Javadoc)
+   * @see cc.kune.common.client.actions.AbstractAction#onDettach()
+   */
   @Override
   public void onDettach() {
     super.onDettach();

@@ -27,19 +27,23 @@ import java.lang.annotation.RetentionPolicy;
 
 import com.google.inject.BindingAnnotation;
 
+// TODO: Auto-generated Javadoc
 /**
  * Use in *RPC methods to check if user is authenticated
  * 
- * The first param in the method must be the userHash
+ * The first param in the method must be the userHash.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Authenticated {
 
   /**
-   * if false, only checks for session expiration
-   * 
-   * @return
+   * if false, only checks for session expiration.
+   *
+   * @return true, if successful
    */
   boolean mandatory() default true;
 

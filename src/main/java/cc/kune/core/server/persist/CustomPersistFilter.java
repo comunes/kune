@@ -29,6 +29,7 @@ import com.google.inject.Singleton;
 import com.google.inject.persist.PersistService;
 import com.google.inject.persist.UnitOfWork;
 
+// TODO: Auto-generated Javadoc
 /**
  * Apply this filter to enable the HTTP Request unit of work and to have
  * guice-persist manage the lifecycle of active units of work. The filter
@@ -79,18 +80,30 @@ public class CustomPersistFilter implements Filter {
   // private final PersistService persistService;
   // private final UnitOfWork unitOfWork;
 
+  /**
+   * Instantiates a new custom persist filter.
+   *
+   * @param unitOfWork the unit of work
+   * @param persistService the persist service
+   */
   @Inject
   public CustomPersistFilter(final UnitOfWork unitOfWork, final PersistService persistService) {
     // this.unitOfWork = unitOfWork;
     // this.persistService = persistService;
   }
 
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#destroy()
+   */
   @Override
   public void destroy() {
     // Commented in kune
     // persistService.stop();
   }
 
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
+   */
   @Override
   @KuneTransactional
   public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse,
@@ -104,6 +117,9 @@ public class CustomPersistFilter implements Filter {
     // }
   }
 
+  /* (non-Javadoc)
+   * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
+   */
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
     // Commented in kune (because if not this is started twice)

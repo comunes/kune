@@ -29,9 +29,21 @@ import cc.kune.core.client.sitebar.search.EntitySearchPanel;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class AddMemberSearchPanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class AddMemberSearchPanel extends EntitySearchPanel {
 
+  /**
+   * Instantiates a new adds the member search panel.
+   *
+   * @param img the img
+   * @param i18n the i18n
+   */
   @Inject
   public AddMemberSearchPanel(final CoreResources img, final I18nUITranslationService i18n) {
     super(img, i18n);

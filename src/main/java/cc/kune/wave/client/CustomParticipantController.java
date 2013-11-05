@@ -58,23 +58,46 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.EventBus;
 
+// TODO: Auto-generated Javadoc
 /**
  * Installs the add/remove participant controls.
  *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class CustomParticipantController {
+  
+  /** The views. */
   private final DomAsViewProvider views;
+  
+  /** The models. */
   private final ModelAsViewProvider models;
+  
+  /** The profiles. */
   private final ProfileManager profiles;
+  
+  /** The local domain. */
   private final String localDomain;
+  
+  /** The popup. */
   private UniversalPopup popup = null;
+  
+  /** The user. */
   private final ParticipantId user;
+  
+  /** The event bus. */
   private static EventBus eventBus;
+  
+  /** The messages. */
   private static ParticipantMessages messages;
 
   /**
+   * Instantiates a new custom participant controller.
+   *
+   * @param views the views
+   * @param models the models
+   * @param profiles the profiles
    * @param localDomain nullable. if provided, automatic suffixing will occur.
-   * @param user
+   * @param user the user
    */
   CustomParticipantController(
       DomAsViewProvider views, ModelAsViewProvider models,
@@ -89,7 +112,14 @@ public final class CustomParticipantController {
 
   /**
    * Builds and installs the participant control feature.
-   * @param user
+   *
+   * @param panel the panel
+   * @param models the models
+   * @param profiles the profiles
+   * @param localDomain the local domain
+   * @param user the user
+   * @param messages the messages
+   * @param eventBus the event bus
    */
   public static void install(WavePanel panel, ModelAsViewProvider models,
       ProfileManager profiles, String localDomain, ParticipantId user, ParticipantMessages messages, EventBus eventBus) {
@@ -100,6 +130,11 @@ public final class CustomParticipantController {
     controller.install(panel.getHandlers());
   }
 
+  /**
+   * Install.
+   *
+   * @param handlers the handlers
+   */
   private void install(EventHandlerRegistry handlers) {
     handlers.registerClickHandler(TypeCodes.kind(Type.ADD_PARTICIPANT), new WaveClickHandler() {
       @Override
@@ -166,6 +201,8 @@ public final class CustomParticipantController {
    * Creates a new wave with the participants of the current wave. Showing
    * a popup dialog where the user can chose to deselect users that should not
    * be participants in the new wave
+   *
+   * @param context the context
    */
   private void handleNewWaveWithParticipantsButtonClicked(Element context) {
     ParticipantsView participantsUi = views.fromNewWaveWithParticipantsButton(context);
@@ -193,6 +230,8 @@ public final class CustomParticipantController {
 
   /**
    * Shows an add-participant popup.
+   *
+   * @param context the context
    */
   private void handleAddButtonClicked(final Element context) {
     WindowUtil.prompt("Add a participant(s) (separate with comma ','): ", "", new WindowPromptCallback() {
@@ -222,6 +261,8 @@ public final class CustomParticipantController {
 
   /**
    * Shows a participation popup for the clicked participant.
+   *
+   * @param context the context
    */
   private void handleParticipantClicked(Element context) {
     ParticipantView participantView = views.asParticipant(context);

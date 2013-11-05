@@ -27,8 +27,20 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class GroupOptDefLicensePanel.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class GroupOptDefLicensePanel extends EntityOptDefLicensePanel implements GroupOptDefLicenseView {
 
+  /**
+   * Instantiates a new group opt def license panel.
+   *
+   * @param i18n the i18n
+   * @param res the res
+   */
   @Inject
   public GroupOptDefLicensePanel(final I18nTranslationService i18n, final IconicResources res) {
     super(i18n, res);

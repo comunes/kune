@@ -132,6 +132,12 @@ import com.gwtplatform.mvp.client.proxy.ParameterTokenFormatter;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class CoreGinModule.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 public class CoreGinModule extends ExtendedGinModule {
 
   /*

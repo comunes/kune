@@ -31,10 +31,23 @@ import org.jivesoftware.smackx.Form;
 import org.jivesoftware.smackx.FormField;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class RoomConfigurationDumper.
+ *
+ * @author danigb@gmail.com
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 class RoomConfigurationDumper {
 
+  /** The Constant LOG. */
   private static final Log LOG = LogFactory.getLog(RoomConfigurationDumper.class);
 
+  /**
+   * Show configuration.
+   *
+   * @param form the form
+   */
   public static void showConfiguration(final Form form) {
     for (Iterator<FormField> fields = form.getFields(); fields.hasNext();) {
       FormField formField = fields.next();
@@ -48,6 +61,12 @@ class RoomConfigurationDumper {
     }
   }
 
+  /**
+   * Log.
+   *
+   * @param options the options
+   * @return the string
+   */
   private static String log(final Iterator<?> options) {
     String s = "";
     while (options.hasNext()) {
@@ -56,10 +75,21 @@ class RoomConfigurationDumper {
     return s;
   }
 
+  /**
+   * Log.
+   *
+   * @param string the string
+   */
   private static void log(final String string) {
     LOG.debug(string);
   }
 
+  /**
+   * Configure2.
+   *
+   * @param muc the muc
+   * @throws XMPPException the xMPP exception
+   */
   void configure2(final MultiUserChat muc) throws XMPPException {
     Form form = muc.getConfigurationForm().createAnswerForm();
     form.setAnswer("muc#roomconfig_passwordprotectedroom", false);
