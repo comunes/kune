@@ -70,8 +70,10 @@ public interface ContentServiceAsync {
 
   void delContent(String userHash, StateToken token, AsyncCallback<StateContainerDTO> asyncCallback);
 
-  void delParticipants(String userHash, StateToken token, String groupName,
-      SocialNetworkSubGroup subGroup, AsyncCallback<Boolean> callback);
+  void delParticipants(String userHash, StateToken token, String[] participants,
+      AsyncCallback<Boolean> callback);
+
+  void delPublicParticipant(String userHash, StateToken token, AsyncCallback<Boolean> callback);
 
   void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
@@ -89,11 +91,11 @@ public interface ContentServiceAsync {
   void rateContent(String userHash, StateToken token, Double value,
       AsyncCallback<RateResult> asyncCallback);
 
-  void removeAuthor(String userHash, StateToken token, String authorShortName,
-      AsyncCallback<Void> asyncCallback);
-
   // void save(String user, StateToken token, String content,
   // AsyncCallback<Void> asyncCallback);
+
+  void removeAuthor(String userHash, StateToken token, String authorShortName,
+      AsyncCallback<Void> asyncCallback);
 
   void renameContainer(String userHash, StateToken token, String newName,
       AsyncCallback<StateAbstractDTO> asyncCallback);

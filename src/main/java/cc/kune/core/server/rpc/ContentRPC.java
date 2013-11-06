@@ -282,12 +282,22 @@ public class ContentRPC implements ContentService, RPC {
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Administrator, mustCheckMembership = true)
   @KuneTransactional
-  public Boolean delParticipants(final String userHash, final StateToken token, final String groupName,
-      final SocialNetworkSubGroup subGroup) throws DefaultException {
+  public Boolean delParticipants(final String userHash, final StateToken token,
+      final String[] participants) throws DefaultException {
     final Long contentId = ContentUtils.parseId(token.getDocument());
-    final Group group = groupManager.findByShortName(groupName);
     final User user = getCurrentUser();
-    return contentManager.delParticipants(user, contentId, group, subGroup);
+    return contentManager.delParticipants(user, contentId, participants);
+  }
+
+  @Override
+  @Authenticated
+  @Authorizated(accessRolRequired = AccessRol.Administrator, mustCheckMembership = true)
+  @KuneTransactional
+  public Boolean delPublicParticipant(final String userHash, final StateToken token)
+      throws DefaultException {
+    final Long contentId = ContentUtils.parseId(token.getDocument());
+    final User user = getCurrentUser();
+    return contentManager.delPublicParticipant(user, contentId);
   }
 
   @Override
@@ -702,7 +712,6 @@ public class ContentRPC implements ContentService, RPC {
   @Authorizated(actionLevel = ActionLevel.content, accessRolRequired = AccessRol.Administrator, mustCheckMembership = true)
   @KuneTransactional
   public StateContentDTO setVisible(final String userHash, final StateToken token, final boolean visible) {
-    final User user = getCurrentUser();
     final Content content = finderService.getContent(ContentUtils.parseId(token.getDocument()));
     return mapper.map(contentManager.setVisible(content, visible), StateContentDTO.class);
   }
@@ -736,5 +745,4 @@ public class ContentRPC implements ContentService, RPC {
     return waveManager.writeToParticipants(content.getAuthors().get(0).getShortName(),
         user.getShortName(), content.getWaveId());
   }
-
 }

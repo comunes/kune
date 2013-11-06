@@ -70,4 +70,9 @@ public class ListsServiceHelper {
           }
         });
   }
+
+  public void subscribeAnUserToList(final String subscriber, final boolean subscribe,
+      final SimpleCallback onSuccess) {
+    subscribeAnUserToList(session.getCurrentStateToken(), subscriber, subscribe, onSuccess);
+  }
 }

@@ -27,30 +27,36 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.resources.iconic.IconicResources;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.gspace.client.share.ShareToListOnItemRemoved;
 import cc.kune.wave.client.KuneWaveProfileManager;
 
 import com.google.inject.Inject;
 
 public class ShareItemOfParticipant extends AbstractShareItemWithMenu {
 
+  private final ContentServiceHelper contentService;
   private final KuneWaveProfileManager profileManager;
   private final IconicResources res;
 
   @Inject
   public ShareItemOfParticipant(final ActionSimplePanel actionsPanel,
       final KuneWaveProfileManager profileManager, final ClientFileDownloadUtils downloadUtils,
-      final IconicResources res, final CommonResources commonResources) {
+      final IconicResources res, final CommonResources commonResources,
+      final ContentServiceHelper contentService) {
     super(I18n.tWithNT("is editor", "someone is editor"), actionsPanel, downloadUtils, commonResources);
     this.profileManager = profileManager;
     this.res = res;
+    this.contentService = contentService;
   }
 
-  public AbstractShareItemUi of(final String participant, final String typeId) {
+  public AbstractShareItemUi of(final String participant, final String typeId,
+      final ShareToListOnItemRemoved onItemRemoved) {
     try {
       final ProfileImpl profile = profileManager.getProfile(ParticipantId.of(participant));
       final String address = profile.getAddress();
@@ -60,8 +66,12 @@ public class ShareItemOfParticipant extends AbstractShareItemWithMenu {
       final MenuItemDescriptor remove = new MenuItemDescriptor(menu, true, new AbstractExtendedAction() {
         @Override
         public void actionPerformed(final ActionEvent event) {
-
-          NotifyUser.info("In development");
+          contentService.delParticipants(new SimpleCallback() {
+            @Override
+            public void onCallback() {
+              onItemRemoved.onRemove(ShareItemOfParticipant.this);
+            }
+          }, participant);
         }
       });
       remove.withText(I18n.t("Remove")).withIcon(res.del());

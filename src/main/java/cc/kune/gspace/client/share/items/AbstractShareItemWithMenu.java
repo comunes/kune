@@ -24,6 +24,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
+@Deprecated
 public abstract class AbstractShareItemWithMenu extends AbstractShareItemUi {
 
   protected MenuDescriptor menu;
@@ -36,4 +37,5 @@ public abstract class AbstractShareItemWithMenu extends AbstractShareItemUi {
         ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
     super.add(menu);
   }
+
 }

@@ -113,8 +113,15 @@ public class ContentRPCMock implements ContentService, RPC {
   }
 
   @Override
-  public Boolean delParticipants(final String userHash, final StateToken token, final String groupName,
-      final SocialNetworkSubGroup subGroup) throws DefaultException {
+  public Boolean delParticipants(final String userHash, final StateToken token,
+      final String[] participants) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Boolean delPublicParticipant(final String userHash, final StateToken token)
+      throws DefaultException {
     // TODO Auto-generated method stub
     return null;
   }

@@ -70,8 +70,9 @@ public interface ContentService extends RemoteService {
 
   StateContainerDTO delContent(String userHash, StateToken token) throws DefaultException;
 
-  Boolean delParticipants(String userHash, StateToken token, String groupName,
-      SocialNetworkSubGroup subGroup) throws DefaultException;
+  Boolean delParticipants(String userHash, StateToken token, String[] participants);
+
+  Boolean delPublicParticipant(String userHash, StateToken token) throws DefaultException;
 
   StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
 

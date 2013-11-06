@@ -19,6 +19,7 @@
  */
 package cc.kune.core.client.rpcservices;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.ConfirmAskEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.utils.OnAcceptCallback;
@@ -152,25 +153,30 @@ public class ContentServiceHelper {
         });
   }
 
-  public void delParticipants(final SocialNetworkSubGroup subGroup, final SimpleCallback onSuccess) {
-    delParticipants(session.getCurrentStateToken(), subGroup, onSuccess);
-  }
-
-  public void delParticipants(final StateToken token, final SocialNetworkSubGroup subGroup,
-      final SimpleCallback onSuccess) {
-    contentService.get().delParticipants(session.getUserHash(), token,
-        session.getCurrentGroupShortName(), subGroup, new AsyncCallback<Boolean>() {
+  public void delParticipants(final SimpleCallback onSuccess, final String... participants) {
+    contentService.get().delParticipants(session.getUserHash(), session.getCurrentStateToken(),
+        participants, new AsyncCallback<Boolean>() {
           @Override
           public void onFailure(final Throwable caught) {
+            Log.error("Error deleting participant", caught);
             NotifyUser.important(i18n.t("Seems that the list of partipants were deleted partially. Please, retry"));
           }
 
           @Override
           public void onSuccess(final Boolean result) {
             onSuccess.onCallback();
-            NotifyUser.info(result ? subGroup.equals(SocialNetworkSubGroup.PUBLIC) ? i18n.t("Not editable by anyone: Now only editors can participate")
-                : i18n.t("Removed")
-                : i18n.t("All these member are not partipating"));
+            NotifyUser.info(result ? i18n.t("Removed") : i18n.t("All these member are not partipating"));
+          }
+        });
+  }
+
+  public void delPublicParticipant(final SimpleCallback onSuccess) {
+    contentService.get().delPublicParticipant(session.getUserHash(), session.getCurrentStateToken(),
+        new AsyncCallbackSimple<Boolean>() {
+          @Override
+          public void onSuccess(final Boolean result) {
+            onSuccess.onCallback();
+            NotifyUser.info(i18n.t("Not editable by anyone: Now only editors can participate"));
           }
         });
   }
@@ -201,7 +207,7 @@ public class ContentServiceHelper {
     if (editable) {
       addParticipants(SocialNetworkSubGroup.PUBLIC, onSuccess);
     } else {
-      delParticipants(SocialNetworkSubGroup.PUBLIC, onSuccess);
+      delPublicParticipant(onSuccess);
     }
   }
 

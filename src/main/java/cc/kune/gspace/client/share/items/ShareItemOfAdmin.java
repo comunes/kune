@@ -25,26 +25,37 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.resources.iconic.IconicResources;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.gspace.client.share.ShareToListOnItemRemoved;
+import cc.kune.lists.client.rpc.ListsServiceHelper;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 
 public class ShareItemOfAdmin extends AbstractShareItemWithMenu {
 
+  private final ContentServiceHelper contentService;
+  private final ListsServiceHelper listService;
   private final IconicResources res;
 
   @Inject
   public ShareItemOfAdmin(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final IconicResources res,
-      final CommonResources commonResources) {
+      final CommonResources commonResources, final ContentServiceHelper contentService,
+      final ListsServiceHelper listService) {
     super(I18n.tWithNT("is admin", "someone is administrator"), actionsPanel, downloadUtils,
         commonResources);
     this.res = res;
+    this.contentService = contentService;
+    this.listService = listService;
   }
 
-  public AbstractShareItemUi of(final GroupDTO group, final String typeId) {
+  public AbstractShareItemUi of(final GroupDTO group, final String typeId,
+      final ShareToListOnItemRemoved onItemRemoved) {
     setGroupName(group);
     final MenuItemDescriptor adminToEditor = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override
@@ -57,8 +68,18 @@ public class ShareItemOfAdmin extends AbstractShareItemWithMenu {
     final MenuItemDescriptor remove = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
-        // TODO
-        NotifyUser.info("In development");
+        final String participant = group.getShortName();
+        final SimpleCallback onDel = new SimpleCallback() {
+          @Override
+          public void onCallback() {
+            onItemRemoved.onRemove(ShareItemOfAdmin.this);
+          }
+        };
+        if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+          listService.subscribeAnUserToList(participant, false, onDel);
+        } else {
+          contentService.delParticipants(onDel, participant);
+        }
       }
     });
     remove.withText(I18n.t("Remove")).withIcon(res.del());

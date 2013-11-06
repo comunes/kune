@@ -60,7 +60,9 @@ public interface ContentManager extends Manager<Content, Long> {
   Content createGadget(User user, Container container, String gadgetname, String typeIdChild,
       String title, String body, Map<String, String> gadgetProperties);
 
-  boolean delParticipants(User user, Long contentId, Group group, SocialNetworkSubGroup whichOnes);
+  boolean delParticipants(User user, Long contentId, String... participants);
+
+  boolean delPublicParticipant(User user, Long contentId);
 
   boolean findIfExistsTitle(Container container, String title);
 

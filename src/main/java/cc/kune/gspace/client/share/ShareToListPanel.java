@@ -34,7 +34,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  * The Class ShareToListPanel is used as a list of users/groups a document is
  * shared to
  */
-public class ShareToListPanel extends Composite implements ShareToListView {
+public class ShareToListPanel extends Composite implements ShareToListView, ShareToListOnItemRemoved {
 
   private static final String SCROLL_HEIGHT = "75px";
 
@@ -68,7 +68,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addAdmin(final GroupDTO admin) {
-    itemsPanel.add(ShareItemFactory.getAdmin().of(admin, typeId));
+    itemsPanel.add(ShareItemFactory.getAdmin().of(admin, typeId, this));
   }
 
   @Override
@@ -78,7 +78,7 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addEditor(final GroupDTO group) {
-    itemsPanel.add(ShareItemFactory.getEditor().of(group).with(typeId));
+    itemsPanel.add(ShareItemFactory.getEditor().of(group, typeId, this));
   }
 
   @Override
@@ -102,12 +102,12 @@ public class ShareToListPanel extends Composite implements ShareToListView {
 
   @Override
   public void addParticipant(final String waveParticipant) {
-    itemsPanel.add(ShareItemFactory.getParticipant().of(waveParticipant, typeId));
+    itemsPanel.add(ShareItemFactory.getParticipant().of(waveParticipant, typeId, this));
   }
 
   @Override
   public void addViewer(final GroupDTO viewer) {
-    itemsPanel.add(ShareItemFactory.getViewer().of(viewer).with(typeId));
+    itemsPanel.add(ShareItemFactory.getViewer().of(viewer, this).with(typeId));
   }
 
   @Override
@@ -127,6 +127,11 @@ public class ShareToListPanel extends Composite implements ShareToListView {
   @Override
   public IsWidget getView() {
     return this;
+  }
+
+  @Override
+  public void onRemove(final IsWidget widget) {
+    itemsPanel.remove(widget);
   }
 
   @Override

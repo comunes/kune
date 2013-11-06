@@ -28,6 +28,7 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.gspace.client.share.ShareToListOnItemRemoved;
 
 import com.google.inject.Inject;
 
@@ -44,7 +45,7 @@ public class ShareItemOfViewer extends AbstractShareItemWithMenu {
     this.res = res;
   }
 
-  public AbstractShareItemUi of(final GroupDTO group) {
+  public AbstractShareItemUi of(final GroupDTO group, final ShareToListOnItemRemoved onRemoved) {
     setGroupName(group);
     final MenuItemDescriptor toEditor = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override
@@ -62,7 +63,7 @@ public class ShareItemOfViewer extends AbstractShareItemWithMenu {
       }
     });
     remove.withText(I18n.t("Remove")).withIcon(res.del());
-    super.add(toEditor);
+    // super.add(toEditor);
     super.add(remove);
     return this;
   }

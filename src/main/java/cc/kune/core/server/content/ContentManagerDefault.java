@@ -258,18 +258,24 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   private boolean delParticipants(final User user, final Content content, final String... participants) {
     if (content.isWave()) {
-      return kuneWaveManager.delParticipants(KuneWaveServerUtils.getWaveRef(content),
-          user.getShortName(), participants);
+      // The author cannot be removed (by now)
+      final String author = getContentAuthor(content);
+      final Set<String> participantsSet = participantUtils.toSet(participants);
+      participantsSet.remove(author);
+      final WaveRef waveRef = KuneWaveServerUtils.getWaveRef(content);
+      return kuneWaveManager.delParticipants(waveRef, user.getShortName(), participantsSet);
     }
     return false;
   }
 
   @Override
-  public boolean delParticipants(final User user, final Long contentId, final Group group,
-      final SocialNetworkSubGroup whichOnes) {
-    final Set<String> members = participantsGroupToSet(group, whichOnes);
-    return delParticipants(user, finder.getContent(contentId),
-        members.toArray(new String[members.size()]));
+  public boolean delParticipants(final User user, final Long contentId, final String... participants) {
+    return delParticipants(user, finder.getContent(contentId), participants);
+  }
+
+  @Override
+  public boolean delPublicParticipant(final User user, final Long contentId) {
+    return delParticipants(user, finder.getContent(contentId), this.getPublicParticipant());
   }
 
   @Override
@@ -321,6 +327,10 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return list;
   }
 
+  private String getPublicParticipant() {
+    return participantUtils.getPublicParticipantId().toString();
+  }
+
   @Override
   public Double getRateAvg(final Content content) {
     return finder.getRateAvg(content);
@@ -361,7 +371,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   private Set<String> participantsGroupToSet(final Group group, final SocialNetworkSubGroup whichOnes) {
     final Set<String> members = new HashSet<String>();
     if (whichOnes.equals(SocialNetworkSubGroup.PUBLIC)) {
-      members.add(participantUtils.getPublicParticipantId().toString());
+      members.add(getPublicParticipant());
     } else {
       GroupServerUtils.getAllUserMembersAsString(members, group, whichOnes);
     }

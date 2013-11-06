@@ -21,6 +21,7 @@ package cc.kune.wave.server.kspecific;
 
 import java.net.URL;
 import java.util.Map;
+import java.util.Set;
 
 import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.id.WaveletId;
@@ -69,6 +70,8 @@ public interface KuneWaveService {
 
   WaveRef createWave(String title, String message, WaveRef waveIdToCopy,
       SimpleArgCallback<WaveRef> onCreate, URL gadgetUrl, ParticipantId... participantsArray);
+
+  boolean delParticipants(WaveRef waveName, String whoDel, Set<String> participants);
 
   boolean delParticipants(WaveRef waveName, String whoDel, String... participants);
 
