@@ -21,6 +21,7 @@ package cc.kune.gspace.client.share.items;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
@@ -36,7 +37,7 @@ import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 
-public class ShareItemOfAdmin extends AbstractShareItemWithMenu {
+public class ShareItemOfAdmin extends AbstractShareItemWithMenuUi {
 
   private final ContentServiceHelper contentService;
   private final ListsServiceHelper listService;
@@ -47,8 +48,10 @@ public class ShareItemOfAdmin extends AbstractShareItemWithMenu {
       final ClientFileDownloadUtils downloadUtils, final IconicResources res,
       final CommonResources commonResources, final ContentServiceHelper contentService,
       final ListsServiceHelper listService) {
-    super(I18n.tWithNT("is admin", "someone is administrator"), actionsPanel, downloadUtils,
-        commonResources);
+    super(actionsPanel, downloadUtils, commonResources);
+    // super(I18n.tWithNT("is admin", "someone is administrator"), actionsPanel,
+    // downloadUtils,
+    // commonResources);
     this.res = res;
     this.contentService = contentService;
     this.listService = listService;
@@ -56,16 +59,18 @@ public class ShareItemOfAdmin extends AbstractShareItemWithMenu {
 
   public AbstractShareItemUi of(final GroupDTO group, final String typeId,
       final ShareToListOnItemRemoved onItemRemoved) {
+    final MenuDescriptor menuDel = new MenuDescriptor();
     setGroupName(group);
-    final MenuItemDescriptor adminToEditor = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        // TODO
-        NotifyUser.info("In development");
-      }
-    });
+    final MenuItemDescriptor adminToEditor = new MenuItemDescriptor(menuDel,
+        new AbstractExtendedAction() {
+          @Override
+          public void actionPerformed(final ActionEvent event) {
+            // TODO
+            NotifyUser.info("In development");
+          }
+        });
     adminToEditor.withText(I18n.t("Change to editor")).withIcon(res.downArrow());
-    final MenuItemDescriptor remove = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
+    final MenuItemDescriptor remove = new MenuItemDescriptor(menuDel, new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
         final String participant = group.getShortName();

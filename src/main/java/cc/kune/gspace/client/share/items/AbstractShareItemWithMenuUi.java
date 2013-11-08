@@ -25,6 +25,8 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 
+import com.google.gwt.resources.client.ImageResource;
+
 public abstract class AbstractShareItemWithMenuUi extends AbstractShareItemUi {
 
   private final MenuDescriptor menu;
@@ -39,7 +41,13 @@ public abstract class AbstractShareItemWithMenuUi extends AbstractShareItemUi {
   }
 
   public void setValuesViaDescriptor(final ShareItemDescriptor descriptor) {
-    withIcon(descriptor.getItemIcon()).withText(descriptor.getItemText());
+    final Object itemIcon = descriptor.getItemIcon();
+    if (itemIcon instanceof ImageResource) {
+      withIcon((ImageResource) itemIcon);
+    } else if (itemIcon instanceof String) {
+      withIcon((String) itemIcon);
+    }
+    withText(descriptor.getItemText());
     menu.withText(descriptor.getMenuText());
     // We remove the previous items
     menu.clear();
