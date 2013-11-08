@@ -148,6 +148,8 @@ public interface UserService extends RemoteService {
    */
   void onlyCheckSession(String userHash) throws DefaultException;
 
+  String preLoginWithEmail(String email, String passwd);
+
   /**
    * Reload user info.
    *

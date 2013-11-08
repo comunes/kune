@@ -40,7 +40,6 @@ import cc.kune.core.client.sitebar.auth.AskForPasswordResetPanel;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -209,14 +208,10 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
   /* (non-Javadoc)
    * @see cc.kune.core.client.auth.SignIn#doSignIn(java.lang.String, java.lang.String, boolean, com.google.gwt.user.client.rpc.AsyncCallback)
    */
-  @Override
-  public void doSignIn(final String nickOrEmail, final String passwd, final boolean gotoHomePage,
+  private void continueLogin(final String shortName, final String passwd, final boolean gotoHomePage,
       final AsyncCallback<Void> extCallback) {
-    final UserDTO user = new UserDTO();
-    user.setShortName(nickOrEmail.toLowerCase());
-    user.setPassword(passwd);
-    saveAutocompleteLoginData(nickOrEmail, passwd);
-    waveClientAuthenticator.doLogin(nickOrEmail, passwd, new AsyncCallback<Void>() {
+    saveAutocompleteLoginData(shortName, passwd);
+    waveClientAuthenticator.doLogin(shortName, passwd, new AsyncCallback<Void>() {
       @Override
       public void onFailure(final Throwable caught) {
         Log.error("SignInPresenter/doLogin fails in Wave auth");
@@ -237,10 +232,33 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
             extCallback.onSuccess(null);
           }
         };
-        userService.login(user.getShortName(), user.getPassword(),
-            waveClientAuthenticator.getCookieTokenValue(), callback);
+        userService.login(shortName, passwd, waveClientAuthenticator.getCookieTokenValue(), callback);
       }
     });
+  }
+
+  @Override
+  public void doSignIn(final String nickOrEmail, final String passwd, final boolean gotoHomePage,
+      final AsyncCallback<Void> extCallback) {
+    final boolean isEmail = nickOrEmail.matches(TextUtils.EMAIL_REGEXP);
+    if (isEmail) {
+      userService.preLoginWithEmail(nickOrEmail, passwd, new AsyncCallback<String>() {
+        @Override
+        public void onFailure(final Throwable caught) {
+          Log.error("SignInPresenter/doLogin fails pre auth with email");
+          extCallback.onFailure(caught);
+        }
+
+        @Override
+        public void onSuccess(final String shortName) {
+          // We get the username of that email, so we continue the login
+          continueLogin(shortName, passwd, gotoHomePage, extCallback);
+        }
+      });
+    } else {
+      // It's a nickname aka user shortname, so, do login with this
+      continueLogin(nickOrEmail, passwd, gotoHomePage, extCallback);
+    }
   }
 
   /* (non-Javadoc)

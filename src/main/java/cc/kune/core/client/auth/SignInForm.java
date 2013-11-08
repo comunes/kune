@@ -95,7 +95,7 @@ public class SignInForm extends DefaultForm {
       protected void setAriaState(final String stateName, final String stateValue) {
       }
     };
-    loginNickOrEmailField.setFieldLabel(i18n.t("Username"));
+    loginNickOrEmailField.setFieldLabel(i18n.t("Username or email"));
     loginNickOrEmailField.setName(USER_FIELD_ID);
     loginNickOrEmailField.setWidth(DEF_SMALL_FIELD_WIDTH);
     loginNickOrEmailField.setAllowBlank(false);

@@ -23,9 +23,7 @@
 
 package cc.kune.common.shared.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -56,6 +54,7 @@ public class TextUtilsTest {
   public void testEmail() {
     assertTrue("kk@ex.com".matches(TextUtils.EMAIL_REGEXP));
     assertTrue("kk@local.net".matches(TextUtils.EMAIL_REGEXP));
+    assertTrue("admin@localhost.localdomain".matches(TextUtils.EMAIL_REGEXP));
   }
 
   /**

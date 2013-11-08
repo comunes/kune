@@ -140,6 +140,8 @@ public interface UserServiceAsync {
    */
   void onlyCheckSession(String userHash, AsyncCallback<Void> asyncCallback);
 
+  void preLoginWithEmail(String email, String passwd, AsyncCallback<String> callback);
+
   /**
    * Reload user info.
    *

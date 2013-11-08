@@ -303,12 +303,12 @@ public class UserRPC implements RPC, UserService {
    */
   @Override
   @KuneTransactional
-  public UserInfoDTO login(final String nickOrEmail, final String passwd, final String waveToken)
+  public UserInfoDTO login(final String nick, final String passwd, final String waveToken)
       throws DefaultException {
     // final SessionService sessionService = sessionServiceProvider.get();
     // sessionService.getNewSession();
 
-    final User user = userManager.login(nickOrEmail, passwd);
+    final User user = userManager.login(nick, passwd);
     return loginUser(user, waveToken);
   }
 
@@ -353,6 +353,13 @@ public class UserRPC implements RPC, UserService {
   /* (non-Javadoc)
    * @see cc.kune.core.client.rpcservices.UserService#reloadUserInfo(java.lang.String)
    */
+  @Override
+  @KuneTransactional
+  public String preLoginWithEmail(final String email, final String passwd) {
+    final User user = userManager.login(email, passwd);
+    return user.getShortName();
+  }
+
   @Override
   @Authenticated
   @KuneTransactional
