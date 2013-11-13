@@ -22,7 +22,8 @@
  */
 package cc.kune.core.server;
 
-import static com.google.inject.matcher.Matchers.*;
+import static com.google.inject.matcher.Matchers.annotatedWith;
+import static com.google.inject.matcher.Matchers.any;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -81,59 +82,51 @@ import cc.kune.wiki.server.WikiServerModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
-import com.google.inject.Scope;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.persist.jpa.KuneJpaLocalTxnInterceptor;
 import com.google.inject.persist.jpa.OpenfireJpaLocalTxnInterceptor;
 import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.ServletModule;
-import com.google.inject.servlet.SessionScoped;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class KuneRackModule.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneRackModule implements RackModule {
 
+  private static final String EMBED_SUFFIX = "/wse";
+
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(KuneRackModule.class);
-  
+
+  /** The suffix of the kune url. */
+  private static final String SUFFIX = "/ws";
+
+  /**
+   * The suffix regexp of the kune url, to match /ws/ and /wse/ (embed) for
+   * instance.
+   */
+  private static final String SUFFIX_REG_EXP = "/ws[e]*";
+
   /** The config module. */
   private final Module configModule;
-  
-  /** The suffix. */
-  private final String suffix;
 
   /**
    * Instantiates a new kune rack module.
+   * 
    */
   public KuneRackModule() {
-    this(null, "/ws", null);
-  }
-
-  /**
-   * Instantiates a new kune rack module.
-   *
-   * @param settedJpaUnit the setted jpa unit
-   * @param suffix the suffix
-   * @param sessionScope the session scope
-   */
-  private KuneRackModule(final String settedJpaUnit, final String suffix, final Scope sessionScope) {
-    this.suffix = suffix;
 
     configModule = new AbstractModule() {
       @Override
       public void configure() {
         bindInterceptor(Matchers.annotatedWith(LogThis.class), new NotInObject(),
             new LoggerMethodInterceptor());
-        if (sessionScope != null) {
-          bindScope(SessionScoped.class, sessionScope);
-        }
-        // This can be used also in Gin:
-        // http://code.google.com/p/google-gin/issues/detail?id=60
+        // if (sessionScope != null) {
+        // bindScope(SessionScoped.class, sessionScope);
+        // }
         requestStaticInjection(KuneWaveServerUtils.class);
         requestStaticInjection(EventsServerConversionUtil.class);
         requestStaticInjection(GroupServerUtils.class);
@@ -141,8 +134,12 @@ public class KuneRackModule implements RackModule {
     };
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.rack.RackModule#configure(cc.kune.core.server.rack.RackBuilder)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.rack.RackModule#configure(cc.kune.core.server.rack.
+   * RackBuilder)
    */
   @Override
   @SuppressWarnings("unchecked")
@@ -199,29 +196,37 @@ public class KuneRackModule implements RackModule {
 
     // NOTE: Commented this while testing Wave
     // builder.at("^/$").install(new RedirectFilter(KUNE_PREFIX + "/"));
-    builder.at("^" + suffix + "").install(new RedirectFilter(suffix + "/"));
+    builder.at("^" + SUFFIX).install(new RedirectFilter(SUFFIX + "/"));
+    builder.at("^" + EMBED_SUFFIX).install(new RedirectFilter(EMBED_SUFFIX + "/"));
 
-    builder.at("^" + suffix + "/$").install(new ListenerFilter(KuneApplicationListener.class),
-        new ForwardFilter(suffix + "/ws.html"));
+    builder.at("^" + SUFFIX + "/$").install(new ListenerFilter(KuneApplicationListener.class),
+        new ForwardFilter(SUFFIX + "/ws.html"));
 
-    builder.installGWTServices("^" + suffix + "/", SiteService.class, GroupService.class,
+    builder.at("^" + EMBED_SUFFIX + "/$").install(new ListenerFilter(KuneApplicationListener.class),
+        new ForwardFilter(EMBED_SUFFIX + "/wse.html"));
+
+    builder.installGWTServices("^" + SUFFIX_REG_EXP + "/", SiteService.class, GroupService.class,
         ContentService.class, UserService.class, SocialNetService.class, I18nService.class,
         ListsService.class, ClientStatsService.class, InvitationService.class);
-    builder.installRESTServices("^" + suffix + "/json/", TestJSONService.class, GroupJSONService.class,
-        UserJSONService.class, I18nTranslationJSONService.class, ContentJSONService.class);
-    builder.installServlet("^" + suffix + "/servlets/", FileUploadManager.class,
+    builder.installRESTServices("^" + SUFFIX_REG_EXP + "/json/", TestJSONService.class,
+        GroupJSONService.class, UserJSONService.class, I18nTranslationJSONService.class,
+        ContentJSONService.class);
+    builder.installServlet("^" + SUFFIX_REG_EXP + "/servlets/", FileUploadManager.class,
         FileDownloadManager.class, EntityLogoUploadManager.class, EntityLogoDownloadManager.class,
         FileGwtUploadServlet.class, EntityBackgroundDownloadManager.class,
         EntityBackgroundUploadManager.class, EventsServlet.class);
 
-    builder.at("^" + suffix + "/(.*)$").install(
-        new ForwardFilter("^" + suffix + "/(.*)$", suffix + "/{0}"));
+    builder.at("^" + SUFFIX + "/(.*)$").install(
+        new ForwardFilter("^" + SUFFIX + "/(.*)$", SUFFIX + "/{0}"));
+    builder.at("^" + EMBED_SUFFIX + "/(.*)$").install(
+        new ForwardFilter("^" + EMBED_SUFFIX + "/(.*)$", EMBED_SUFFIX + "/{0}"));
   }
 
   /**
    * Install guice modules.
-   *
-   * @param builder the builder
+   * 
+   * @param builder
+   *          the builder
    */
   private void installGuiceModules(final RackBuilder builder) {
     // https://code.google.com/p/google-guice/wiki/ServletModule
