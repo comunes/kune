@@ -45,7 +45,7 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
     ginjector.getEventLogger();
     ginjector.getErrorsDialog();
     // ginjector.getCorePresenter().get().forceReveal();
-    // ginjector.getOnAppStartFactory();
+    ginjector.getOnAppStartFactory();
     // ginjector.getStateManager();
     ginjector.getGwtGuiProvider();
     // ginjector.getGroupMembersPresenter();
