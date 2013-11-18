@@ -30,12 +30,9 @@ import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.shared.dto.WaveClientParams;
-import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.wave.client.KuneWaveProfileManager;
-import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsonUtils;
@@ -48,32 +45,41 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveClientManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveClientManager {
-  
+
   /** The web client. */
   private WaveClientView webClient;
 
   /**
    * Instantiates a new wave client manager.
-   *
-   * @param session the session
-   * @param stateManager the state manager
-   * @param eventBus the event bus
-   * @param userService the user service
-   * @param wsArmor the ws armor
-   * @param profiles the profiles
-   * @param inboxCount the inbox count
-   * @param tokenMatcher the token matcher
-   * @param webclientView the webclient view
+   * 
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param eventBus
+   *          the event bus
+   * @param userService
+   *          the user service
+   * @param wsArmor
+   *          the ws armor
+   * @param profiles
+   *          the profiles
+   * @param inboxCount
+   *          the inbox count
+   * @param tokenMatcher
+   *          the token matcher
+   * @param webclientView
+   *          the webclient view
    */
   @Inject
-  public WaveClientManager(final Session session, final StateManager stateManager,
-      final EventBus eventBus, final UserServiceAsync userService, final GSpaceArmor wsArmor,
-      final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount,
-      final TokenMatcher tokenMatcher, final WaveClientProvider webclientView) {
+  public WaveClientManager(final Session session, final EventBus eventBus,
+      final UserServiceAsync userService, final HasWaveContainer panel,
+      final KuneWaveProfileManager profiles, final TokenMatcher tokenMatcher,
+      final WaveClientProvider webclientView) {
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
@@ -88,13 +94,13 @@ public class WaveClientManager {
                 Scheduler.get().scheduleDeferred(new ScheduledCommand() {
                   @Override
                   public void execute() {
-                    final ForIsWidget userSpace = wsArmor.getUserSpace();
+                    final ForIsWidget waveContainer = panel.getForIsWidget();
                     if (webClient == null) {
-                      if (userSpace.getWidgetCount() > 0) {
-                        userSpace.remove(0);
+                      if (waveContainer.getWidgetCount() > 0) {
+                        waveContainer.remove(0);
                       }
                       webClient = webclientView.get();
-                      userSpace.add(webClient);
+                      waveContainer.add(webClient);
                     } else {
                       // this is done with the first webclient creation above
                       webClient.login();
@@ -121,7 +127,7 @@ public class WaveClientManager {
 
   /**
    * Gets the web client.
-   *
+   * 
    * @return the web client
    */
   public WaveClientView getWebClient() {
@@ -130,29 +136,32 @@ public class WaveClientManager {
 
   /**
    * Sets the client flags.
-   *
-   * @param object the new client flags
+   * 
+   * @param object
+   *          the new client flags
    */
   private native void setClientFlags(JavaScriptObject object) /*-{
-    $wnd.__client_flags = object;
+		$wnd.__client_flags = object;
   }-*/;
 
   /**
    * Sets the session json.
-   *
-   * @param object the new session json
+   * 
+   * @param object
+   *          the new session json
    */
   private native void setSessionJSON(JavaScriptObject object) /*-{
-    $wnd.__session = object;
+		$wnd.__session = object;
   }-*/;
 
   /**
    * Sets the websocket address.
-   *
-   * @param object the new websocket address
+   * 
+   * @param object
+   *          the new websocket address
    */
   private native void setWebsocketAddress(String object) /*-{
-    $wnd.__websocket_address = object;
+		$wnd.__websocket_address = object;
   }-*/;
 
 }

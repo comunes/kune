@@ -20,7 +20,7 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="com.google.gdt.eclipse.maven.mavenClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-war &quot;${workspace_loc:/kune}/target/kune-0.3.0-SNAPSHOT&quot;  -startupUrl /wse.html?locale=en&amp;log_level=ALL -noserver -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 cc.kune.KuneEmbedDev"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-war &quot;${workspace_loc:/kune}/target/kune-0.3.0-SNAPSHOT&quot; -startupUrl /wse.html?locale=en&amp;log_level=ALL -noserver -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 cc.kune.KuneEmbedDev"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="kune"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xss512m -Xmx1024m -XX:MaxPermSize=1024m"/>
 </launchConfiguration>

@@ -45,9 +45,6 @@ import com.google.gwt.user.client.Timer;
  */
 public abstract class AbstractKuneEntryPoint implements EntryPoint {
 
-  /** The ginjector. */
-  public final KuneGinjector ginjector = GWT.create(KuneGinjector.class);
-
   /**
    * On module load continue.
    */

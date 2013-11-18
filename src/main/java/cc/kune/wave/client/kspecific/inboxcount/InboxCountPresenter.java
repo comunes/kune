@@ -22,12 +22,10 @@
  */
 package cc.kune.wave.client.kspecific.inboxcount;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.waveprotocol.box.webclient.search.Digest;
 import org.waveprotocol.box.webclient.search.Search;
 import org.waveprotocol.box.webclient.search.Search.Listener;
+import org.waveprotocol.box.webclient.search.SimpleSearch;
 
 import cc.kune.core.client.events.InboxUnreadUpdatedEvent;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
@@ -35,6 +33,7 @@ import cc.kune.core.client.events.SndClickEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
+import cc.kune.wave.client.kspecific.OnWaveClientStartEvent;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;
@@ -43,14 +42,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InboxCountPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class InboxCountPresenter {
 
   /**
    * The Interface InboxCountView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface InboxCountView {
@@ -62,15 +61,17 @@ public class InboxCountPresenter {
 
     /**
      * Sets the total.
-     *
-     * @param total the new total
+     * 
+     * @param total
+     *          the new total
      */
     void setTotal(int total);
 
     /**
      * Show count.
-     *
-     * @param show the show
+     * 
+     * @param show
+     *          the show
      */
     void showCount(boolean show);
 
@@ -78,45 +79,45 @@ public class InboxCountPresenter {
 
   /** The current total. */
   private int currentTotal;
-  
-  /** The diggests. */
-  private final Map<Integer, Integer> diggests;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  // protected SimpleSearch search;
+
+  protected SimpleSearch search;
+
   /** The search listener. */
   private final Listener searchListener;
-  
   /** The session. */
   private final Session session;
+
   // private final Session session;
   /** The update timer. */
   private final Timer updateTimer;
-  
+
   /** The view. */
   private final InboxCountView view;
 
   /**
    * Instantiates a new inbox count presenter.
-   *
-   * @param view the view
-   * @param session the session
-   * @param eventBus the event bus
+   * 
+   * @param view
+   *          the view
+   * @param session
+   *          the session
+   * @param eventBus
+   *          the event bus
    */
   @Inject
   public InboxCountPresenter(final InboxCountView view, final Session session, final EventBus eventBus) {
     this.view = view;
     this.session = session;
     this.eventBus = eventBus;
-    // this.session = session;
-    diggests = new HashMap<Integer, Integer>();
     currentTotal = Search.UNKNOWN_SIZE;
 
     updateTimer = new Timer() {
       @Override
       public void run() {
-        update();
+        update(search);
       }
     };
 
@@ -129,28 +130,24 @@ public class InboxCountPresenter {
       @Override
       public void onDigestAdded(final int index, final Digest diggest) {
         log(index, diggest, "Diggest added: ");
-        updateDigest(index, diggest);
         shouldUpdate();
       }
 
       @Override
       public void onDigestReady(final int index, final Digest diggest) {
         log(index, diggest, "Diggest ready: ");
-        updateDigest(index, diggest);
         shouldUpdate();
       }
 
       @Override
       public void onDigestRemoved(final int index, final Digest diggest) {
         log(index, diggest, "Diggest removed: ");
-        updateDigest(index, diggest);
         shouldUpdate();
       }
 
       @Override
       public void onStateChanged() {
         shouldUpdate();
-        // diggests.clear();
       }
 
       @Override
@@ -162,10 +159,17 @@ public class InboxCountPresenter {
         updateTimer.schedule(3000);
       }
 
-      private void updateDigest(final int index, final Digest diggest) {
-        diggests.put(Integer.valueOf(index), Integer.valueOf(diggest.getUnreadCount()));
-      }
     };
+
+    eventBus.addHandler(OnWaveClientStartEvent.getType(),
+        new OnWaveClientStartEvent.OnWaveClientStartHandler() {
+          @Override
+          public void onOnWaveClientStart(final OnWaveClientStartEvent event) {
+            search = event.getView().getSearch();
+            search.addListener(searchListener);
+            update(search);
+          }
+        });
 
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
@@ -181,16 +185,6 @@ public class InboxCountPresenter {
             sendNoticeToUser();
           }
         });
-
-  }
-
-  /**
-   * Gets the search listener.
-   *
-   * @return the search listener
-   */
-  public Listener getSearchListener() {
-    return searchListener;
   }
 
   /**
@@ -203,8 +197,9 @@ public class InboxCountPresenter {
 
   /**
    * Sets the total.
-   *
-   * @param total the new total
+   * 
+   * @param total
+   *          the new total
    */
   private void setTotal(final int total) {
     view.setTotal(total);
@@ -218,13 +213,16 @@ public class InboxCountPresenter {
     currentTotal = total;
   }
 
-  /**
-   * Update.
-   */
-  private void update() {
+  protected void update(final SimpleSearch search) {
     int total = 0;
-    for (final Integer unread : diggests.values()) {
-      total += unread;
+    for (int i = 0, size = search.getMinimumTotal(); i < size; i++) {
+      if (search.getState() == org.waveprotocol.box.webclient.search.Search.State.READY) {
+        final Digest digest = search.getDigest(i);
+        if (digest == null) {
+          continue;
+        }
+        total += digest.getUnreadCount();
+      }
     }
     setTotal(total);
   }

@@ -26,6 +26,7 @@ import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.state.SiteParameters;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
@@ -42,18 +43,18 @@ public class KuneEntryPoint extends AbstractKuneEntryPoint {
   /** The Constant HOME_IDS_PREFIX. */
   protected static final String HOME_IDS_PREFIX = "k-home-";
 
+  /** The ginjector. */
+  KuneGinjector ginjector;
+
   /**
    * On module load continue.
    */
   @Override
   protected void onContinueModuleLoad() {
-    // FIXME: emite is loading (via EmiteBrowserEntryPoint) here! (maybe we
-    // don't need chat)
-    DelayedBindRegistry.bind(ginjector);
     ginjector.getSpinerPresenter();
 
     ginjector.getSessionExpirationManager();
-    ginjector.getEventLogger();
+    ginjector.getEventBusWithLogger();
     ginjector.getErrorsDialog();
     ginjector.getCorePresenter().get().forceReveal();
     ginjector.getOnAppStartFactory();
@@ -91,6 +92,9 @@ public class KuneEntryPoint extends AbstractKuneEntryPoint {
   @Override
   protected void onStartModuleLoad() {
     setHomeLocale();
+
+    ginjector = GWT.create(KuneGinjector.class);
+    DelayedBindRegistry.bind(ginjector);
   }
 
   /**

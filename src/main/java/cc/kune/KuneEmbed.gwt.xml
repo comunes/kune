@@ -7,17 +7,7 @@
   <inherits name='com.google.gwt.logging.Logging' />
   <inherits name="cc.kune.core.KuneCore" />
   <inherits name="cc.kune.wave.KuneWave" />
-  <inherits name="cc.kune.barters.KuneBarters" />
-  <inherits name="cc.kune.blogs.KuneBlogs" />
   <inherits name="cc.kune.chat.KuneChat" />
-  <inherits name="cc.kune.docs.KuneDocs" />
-  <inherits name="cc.kune.wiki.KuneWiki" />
-  <inherits name="cc.kune.events.KuneEvents" />
-  <inherits name="cc.kune.tasks.KuneTasks" />
-  <inherits name="cc.kune.lists.KuneLists" />
-  <inherits name="cc.kune.trash.KuneTrash" />
-  <inherits name="cc.kune.pspace.PSpace" />
-  <inherits name="cc.kune.hspace.HSpace" />
   <inherits name="org.adamtacy.GWTEffects"></inherits>
   <source path='client'
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
@@ -40,7 +30,7 @@
   <define-configuration-property name="gin.ginjector"
     is-multi-valued="false" />
   <set-configuration-property name="gin.ginjector"
-    value="cc.kune.client.KuneGinjector" />
+    value="cc.kune.client.KuneEmbedGinjector" />
 
   <!-- Entrypoint =============================================== -->
   <entry-point class="cc.kune.client.KuneEmbedEntryPoint" />

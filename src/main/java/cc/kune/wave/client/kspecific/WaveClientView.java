@@ -24,6 +24,7 @@ package cc.kune.wave.client.kspecific;
 
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
+import org.waveprotocol.box.webclient.search.SimpleSearch;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
@@ -37,10 +38,12 @@ import com.google.gwt.user.client.ui.IsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface WaveClientView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface WaveClientView extends IsWidget, IsMaximizable {
+
+  void addToBottonBar(IsWidget widget);
 
   /**
    * Clear.
@@ -49,47 +52,53 @@ public interface WaveClientView extends IsWidget, IsMaximizable {
 
   /**
    * Gets the channel.
-   *
+   * 
    * @return the channel
    */
   RemoteViewServiceMultiplexer getChannel();
 
   /**
    * Gets the loading.
-   *
+   * 
    * @return the loading
    */
   Element getLoading();
 
   /**
    * Gets the profiles.
-   *
+   * 
    * @return the profiles
    */
   ProfileManager getProfiles();
 
+  SimpleSearch getSearch();
+
   /**
    * Gets the stack trace async.
-   *
-   * @param caught the caught
-   * @param accessor the accessor
+   * 
+   * @param caught
+   *          the caught
+   * @param accessor
+   *          the accessor
    * @return the stack trace async
    */
   void getStackTraceAsync(Throwable caught, Accessor<SafeHtml> accessor);
 
   /**
    * Gets the wave holder.
-   *
+   * 
    * @return the wave holder
    */
   ImplPanel getWaveHolder();
 
   /**
    * Gets the web socket.
-   *
+   * 
    * @return the web socket
    */
   WaveWebSocketClient getWebSocket();
+
+  void hideBottomToolbar();
 
   /**
    * Login.
@@ -100,5 +109,7 @@ public interface WaveClientView extends IsWidget, IsMaximizable {
    * Logout.
    */
   void logout();
+
+  void showBottomToolbar();
 
 }

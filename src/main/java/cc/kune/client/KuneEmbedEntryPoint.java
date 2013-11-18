@@ -22,44 +22,32 @@
  */
 package cc.kune.client;
 
+import com.google.gwt.core.client.GWT;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
 /**
- * The KuneEntryPoint is used to start kune complete client
+ * The KuneEmbedEntryPoint is used to start kune complete client
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
+
+  /** The ginjector. */
+  private KuneEmbedGinjector ginjector;
 
   /**
    * On module load continue.
    */
   @Override
   protected void onContinueModuleLoad() {
-    // FIXME: emite is loading (via EmiteBrowserEntryPoint) here! (maybe we
-    // don't need chat)
-    DelayedBindRegistry.bind(ginjector);
     ginjector.getSpinerPresenter();
 
     ginjector.getSessionExpirationManager();
-    ginjector.getEventLogger();
-    ginjector.getErrorsDialog();
+    ginjector.getEventBusWithLogger();
+    // ginjector.getErrorsDialog();
     // ginjector.getCorePresenter().get().forceReveal();
-    ginjector.getOnAppStartFactory();
     // ginjector.getStateManager();
     ginjector.getGwtGuiProvider();
-    // ginjector.getGroupMembersPresenter();
-
-    /* Tools (order in GUI) */
-    // ginjector.getDocsParts();
-    // ginjector.getBlogsParts();
-    // ginjector.getWikiParts();
-    // ginjector.getEventsParts();
-    // ginjector.getTasksParts();
-    // ginjector.getListsParts();
-    // ginjector.getChatParts();
-    // ginjector.getBartersParts();
-    // ginjector.getTrashParts();
 
     // ginjector.getSiteLogo();
     // ginjector.getChatClient();
@@ -68,10 +56,7 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
     // ginjector.getPSpaceParts();
     // ginjector.getHSpaceParts();
 
-    // ginjector.getXmlActionsParser();
     // ginjector.getContentViewerSelector().init();
-
-    // ginjector.getGlobalShortcutRegister().enable();
   }
 
   /**
@@ -79,7 +64,8 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
    */
   @Override
   protected void onStartModuleLoad() {
-
+    ginjector = GWT.create(KuneEmbedGinjector.class);
+    DelayedBindRegistry.bind(ginjector);
   }
 
 }
