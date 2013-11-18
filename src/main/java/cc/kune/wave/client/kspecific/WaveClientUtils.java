@@ -24,49 +24,27 @@ package cc.kune.wave.client.kspecific;
 
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 
-import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.log.Log;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.wave.client.CustomStagesProvider;
 
 import com.google.gwt.user.client.ui.HasWidgets;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WaveClientUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveClientUtils {
-  
-  /**
-   * Adds the listener.
-   *
-   * @param stateManager the state manager
-   * @param wave the wave
-   * @param waveHolder the wave holder
-   * @param parent the parent
-   */
-  public static void addListener(final StateManager stateManager, final CustomStagesProvider wave,
-      final ImplPanel waveHolder, final HasWidgets parent) {
-    stateManager.addBeforeStateChangeListener(new BeforeActionListener() {
-      @Override
-      public boolean beforeAction() {
-        // This fix lot of problems when you are editing and move to other
-        // location (without stop editing)
-        Log.info("Before change history, clear wave");
-        clear(wave, waveHolder, parent);
-        return true;
-      }
-    });
-  }
 
   /**
    * Clear.
-   *
-   * @param wave the wave
-   * @param waveHolder the wave holder
-   * @param parent the parent
+   * 
+   * @param wave
+   *          the wave
+   * @param waveHolder
+   *          the wave holder
+   * @param parent
+   *          the parent
    */
   public static void clear(CustomStagesProvider wave, final ImplPanel waveHolder, final HasWidgets parent) {
     if (wave != null) {

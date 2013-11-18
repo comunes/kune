@@ -35,6 +35,7 @@ import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.state.SessionExpirationManager;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.TokenMatcher;
+import cc.kune.gspace.client.viewers.EmbedPresenter;
 import cc.kune.wave.client.kspecific.WaveEmbedGinModule;
 
 import com.calclab.hablar.client.HablarGinjector;
@@ -43,8 +44,10 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Interface KuneEmbedGinjector.
  * 
@@ -64,6 +67,8 @@ public interface KuneEmbedGinjector extends Ginjector, HablarGinjector {
    * @return the cookies manager
    */
   AsyncProvider<CookiesManager> getCookiesManager();
+
+  Provider<EmbedPresenter> getEmbedPresenter();
 
   /**
    * Gets the error handler.

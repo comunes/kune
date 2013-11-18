@@ -62,6 +62,8 @@ import cc.kune.core.client.state.impl.ContentCacheDefault;
 import cc.kune.core.client.state.impl.HistoryWrapperDefault;
 import cc.kune.core.client.state.impl.SessionDefault;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+import cc.kune.gspace.client.viewers.EmbedPanel;
+import cc.kune.gspace.client.viewers.EmbedPresenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Singleton;
@@ -119,6 +121,11 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
         SpinerPresenter.SpinerProxy.class);
     eagle(UserNotifierPopup.class);
     requestStaticInjection(NotifyUser.class);
+
+    bindPresenter(EmbedPresenter.class, EmbedPresenter.EmbedView.class, EmbedPanel.class,
+        EmbedPresenter.EmbedProxy.class);
+    s(EmbedPresenter.class);
+
     // bindPresenter(SpaceSelectorPresenter.class,
     // SpaceSelectorPresenter.SpaceSelectorView.class,
     // SpaceSelectorPanel.class,

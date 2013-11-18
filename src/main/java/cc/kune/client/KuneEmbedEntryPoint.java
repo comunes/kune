@@ -55,7 +55,7 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
     // ginjector.getGSpaceParts();
     // ginjector.getPSpaceParts();
     // ginjector.getHSpaceParts();
-
+    ginjector.getEmbedPresenter().get().forceReveal();
     // ginjector.getContentViewerSelector().init();
   }
 
