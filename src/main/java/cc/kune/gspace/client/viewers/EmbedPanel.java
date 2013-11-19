@@ -36,7 +36,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * The Class EmbedPanel.
+ * The Class EmbedPanel the panel of the embed component.
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -45,7 +45,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
   /**
    * The Interface EmbedPanelUiBinder.
    * 
-   * 
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface EmbedPanelUiBinder extends UiBinder<Widget, EmbedPanel> {
   }
@@ -59,20 +59,10 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
   /**
    * Instantiates a new content viewer panel.
    * 
-   * @param wsArmor
-   *          the ws armor
    * @param waveClient
    *          the wave client
-   * @param capabilitiesRegistry
-   *          the capabilities registry
-   * @param i18n
-   *          the i18n
    * @param eventBus
    *          the event bus
-   * @param stateManager
-   *          the state manager
-   * @param dropController
-   *          the drop controller
    * @param waveUnsavedIndicator
    *          the wave unsaved indicator
    * @param colorPicker
@@ -84,7 +74,6 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
       final Provider<AurorisColorPicker> colorPicker) {
     super(waveClient, eventBus, waveUnsavedIndicator, colorPicker);
     widget = uiBinder.createAndBindUi(this);
-
   }
 
   /*

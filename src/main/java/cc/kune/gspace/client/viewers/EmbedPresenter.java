@@ -39,6 +39,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.dto.StateNoContentDTO;
 import cc.kune.wave.client.kspecific.WaveClientManager;
 import cc.kune.wave.client.kspecific.WaveClientProvider;
 
@@ -51,16 +52,50 @@ import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 
+/**
+ * The Class EmbedPresenter is used to embed kune waves in other CMSs (for
+ * instance)
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
 @Singleton
 public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPresenter.EmbedProxy> {
 
+  /**
+   * The Interface EmbedProxy.
+   */
   @ProxyStandard
   public interface EmbedProxy extends Proxy<EmbedPresenter> {
   }
 
+  /**
+   * The Interface EmbedView.
+   */
   public interface EmbedView extends WaveViewerView {
   }
 
+  /**
+   * Instantiates a new embed presenter.
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param siteService
+   *          the site service
+   * @param service
+   *          the service
+   * @param waveClientManager
+   *          the wave client manager
+   * @param waveClient
+   *          the wave client
+   * @param matcher
+   *          the matcher
+   * @param session
+   *          the session
+   */
   @Inject
   public EmbedPresenter(final EventBus eventBus, final EmbedView view, final EmbedProxy proxy,
       final SiteServiceAsync siteService, final ContentServiceAsync service,
@@ -69,48 +104,76 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     super(eventBus, view, proxy);
     matcher.init(GwtWaverefEncoder.INSTANCE);
     final String currentHash = HistoryUtils.undoHashbang(History.getToken());
-    if (matcher.isGroupToken(currentHash)) {
-      siteService.getInitData(session.getUserHash(), new AsyncCallbackSimple<InitDataDTO>() {
-        @Override
-        public void onSuccess(final InitDataDTO initData) {
-          session.setInitData(initData);
-          session.setCurrentUserInfo(initData.getUserInfo(), null);
+    siteService.getInitData(session.getUserHash(), new AsyncCallbackSimple<InitDataDTO>() {
 
+      @Override
+      public void onSuccess(final InitDataDTO initData) {
+        session.setInitData(initData);
+        session.setCurrentUserInfo(initData.getUserInfo(), null);
+        NotifyUser.hideProgress();
+        if (matcher.isGroupToken(currentHash)) {
           // Ok is a token like group.tool.number
           final StateToken currentToken = new StateToken(currentHash);
           service.getContent(session.getUserHash(), currentToken,
               new AsyncCallbackSimple<StateAbstractDTO>() {
                 @Override
                 public void onSuccess(final StateAbstractDTO state) {
-                  NotifyUser.hideProgress();
                   if (state.getStateToken().equals(currentToken)) {
-                    getView().clear();
-                    final StateContentDTO stateContent = (StateContentDTO) state;
-                    final AccessRights rights = stateContent.getContentRights();
-                    Log.info("Content rights: " + rights);
-                    if (session.isLogged() && rights.isEditable()) {
-                      getView().setEditableContent(stateContent);
-                    } else {
-                      getView().setContent(stateContent);
-                    }
+                    onGetContentSucessful(session, state);
                   } else {
                     // getContent returns def content if content not found
                     notFound();
                   }
                 }
               });
+        } else {
+          if (matcher.isWaveToken(currentHash)) {
+            service.getContentByWaveRef(session.getUserHash(), currentHash,
+                new AsyncCallbackSimple<StateAbstractDTO>() {
+                  @Override
+                  public void onSuccess(final StateAbstractDTO state) {
+                    if (!(state instanceof StateNoContentDTO)) {
+                      onGetContentSucessful(session, state);
+                    } else {
+                      // getContent returns def content if content not found
+                      notFound();
+                    }
+                  }
+                });
+          } else {
+            // Do something
+            notFound();
+          }
         }
-      });
-    } else {
-      // Do something
-      notFound();
-    }
+      }
+    });
+
   }
 
+  /**
+   * Not found.
+   */
   private void notFound() {
     NotifyUser.important(I18n.t("Content not found"));
   }
 
+  private void onGetContentSucessful(final Session session, final StateAbstractDTO state) {
+    getView().clear();
+    final StateContentDTO stateContent = (StateContentDTO) state;
+    final AccessRights rights = stateContent.getContentRights();
+    Log.info("Content rights: " + rights);
+    if (session.isLogged() && rights.isEditable()) {
+      getView().setEditableContent(stateContent);
+    } else {
+      getView().setContent(stateContent);
+    }
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
+   */
   @Override
   protected void revealInParent() {
     RevealRootContentEvent.fire(this, this);
