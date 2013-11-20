@@ -1,5 +1,6 @@
 kune (0.3.0+b30) unstable; urgency=low
 
+  * Allow embed kune waves (closes #561)
   * Added Greek translation thanks to Akis Vassiliadis
   * Updated translations
   * Removed some deprecated method in menu items
