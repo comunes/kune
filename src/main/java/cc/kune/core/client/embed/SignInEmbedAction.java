@@ -38,10 +38,11 @@ import com.google.inject.Provider;
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class EmbedSignInAction extends AbstractSignInAction {
+public class SignInEmbedAction extends AbstractSignInAction {
 
   private final Session session;
-  private final Provider<SignIn> signIn;
+  private SignIn signIn;
+  private final Provider<SignIn> signInProv;
 
   /**
    * Instantiates a new sitebar sign in action.
@@ -54,11 +55,11 @@ public class EmbedSignInAction extends AbstractSignInAction {
    *          the session
    */
   @Inject
-  public EmbedSignInAction(final I18nUITranslationService i18n, final Session session,
+  public SignInEmbedAction(final I18nUITranslationService i18n, final Session session,
       final Provider<SignIn> signIn) {
     super();
     this.session = session;
-    this.signIn = signIn;
+    this.signInProv = signIn;
     putValue(Action.NAME, i18n.t("Sign in"));
     putValue(
         Action.TOOLTIP,
@@ -75,9 +76,12 @@ public class EmbedSignInAction extends AbstractSignInAction {
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
-    final String siteOnOverLogo = session.getInitData().getSiteLogoUrlOnOver();
-    signIn.get().setHeaderLogo(siteOnOverLogo);
-    signIn.get().showSignInDialog();
+    if (signIn == null) {
+      final String siteOnOverLogo = session.getInitData().getSiteLogoUrlOnOver();
+      signIn = signInProv.get();
+      signIn.setHeaderLogo(siteOnOverLogo);
+    }
+    signIn.showSignInDialog();
   }
 
 }

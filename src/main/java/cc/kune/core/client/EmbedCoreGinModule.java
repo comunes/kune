@@ -50,7 +50,7 @@ import cc.kune.core.client.auth.SignInPresenter.SignInView;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
-import cc.kune.core.client.embed.EmbedSignInAction;
+import cc.kune.core.client.embed.SignInEmbedAction;
 import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
@@ -175,7 +175,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     bind(LoginRememberManager.class).to(LoginRememberManagerImpl.class).in(Singleton.class);
     bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
 
-    bind(AbstractSignInAction.class).to(EmbedSignInAction.class).in(Singleton.class);
+    bind(AbstractSignInAction.class).to(SignInEmbedAction.class).in(Singleton.class);
 
     bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
     // bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);
