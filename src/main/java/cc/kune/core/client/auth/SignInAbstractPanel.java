@@ -32,6 +32,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -40,50 +41,65 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SignInAbstractPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class SignInAbstractPanel extends ViewImpl {
-  
+
   /** The Constant DEF_SIGN_IN_FORM_SIZE. */
   public static final int DEF_SIGN_IN_FORM_SIZE = 340;
-  
+
   /** The dialog. */
   private final BasicTopDialog dialog;
-  
+
   /** The error label id. */
   protected final String errorLabelId;
-  
+
   /** The i18n. */
   protected final I18nTranslationService i18n;
-  
+
   /** The images. */
   protected final NotifyLevelImages images;
-  
+
   /** The mask. */
   private final MaskWidgetView mask;
-  
+
   /** The message error bar. */
   protected MessageToolbar messageErrorBar;
 
   /**
    * Instantiates a new sign in abstract panel.
-   *
-   * @param dialogId the dialog id
-   * @param mask the mask
-   * @param i18n the i18n
-   * @param title the title
-   * @param autohide the autohide
-   * @param modal the modal
-   * @param autoscroll the autoscroll
-   * @param icon the icon
-   * @param firstButtonTitle the first button title
-   * @param firstButtonId the first button id
-   * @param cancelButtonTitle the cancel button title
-   * @param cancelButtonId the cancel button id
-   * @param images the images
-   * @param errorLabelId the error label id
-   * @param tabIndexStart the tab index start
+   * 
+   * @param dialogId
+   *          the dialog id
+   * @param mask
+   *          the mask
+   * @param i18n
+   *          the i18n
+   * @param title
+   *          the title
+   * @param autohide
+   *          the autohide
+   * @param modal
+   *          the modal
+   * @param autoscroll
+   *          the autoscroll
+   * @param icon
+   *          the icon
+   * @param firstButtonTitle
+   *          the first button title
+   * @param firstButtonId
+   *          the first button id
+   * @param cancelButtonTitle
+   *          the cancel button title
+   * @param cancelButtonId
+   *          the cancel button id
+   * @param images
+   *          the images
+   * @param errorLabelId
+   *          the error label id
+   * @param tabIndexStart
+   *          the tab index start
    */
   public SignInAbstractPanel(final String dialogId, final MaskWidgetView mask,
       final I18nTranslationService i18n, final String title, final boolean autohide,
@@ -104,7 +120,9 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     this.mask = mask;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -114,7 +132,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Gets the close.
-   *
+   * 
    * @return the close
    */
   public HasCloseHandlers<PopupPanel> getClose() {
@@ -123,7 +141,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Gets the first btn.
-   *
+   * 
    * @return the first btn
    */
   public HasClickHandlers getFirstBtn() {
@@ -132,7 +150,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Gets the inner panel.
-   *
+   * 
    * @return the inner panel
    */
   public ForIsWidget getInnerPanel() {
@@ -141,7 +159,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Gets the second btn.
-   *
+   * 
    * @return the second btn
    */
   public HasClickHandlers getSecondBtn() {
@@ -166,8 +184,9 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Mask.
-   *
-   * @param message the message
+   * 
+   * @param message
+   *          the message
    */
   public void mask(final String message) {
     mask.mask(dialog);
@@ -182,12 +201,24 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Sets the error message.
-   *
-   * @param message the message
-   * @param level the level
+   * 
+   * @param message
+   *          the message
+   * @param level
+   *          the level
    */
   public void setErrorMessage(final String message, final NotifyLevel level) {
     messageErrorBar.setErrorMessage(message, level);
+  }
+
+  public void setHeaderLogo(final String url) {
+    final Image logo = new Image(url);
+    logo.addStyleName("kune-Margin-7-trbl");
+    dialog.getMainPanel().insert(logo, 0);
+  }
+
+  public void setTitleIcon(final String url) {
+    dialog.setTitleIconUrl(url);
   }
 
   /**

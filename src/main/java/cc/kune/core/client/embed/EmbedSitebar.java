@@ -46,6 +46,7 @@ public class EmbedSitebar {
     this.toolbar = toolbar;
     signInLink.detachFromParent();
     signOutLink.detachFromParent();
+    @SuppressWarnings("deprecation")
     final String sitelogo = session.getInitData().getSiteLogoUrl();
     toolbar.add(signInLink);
     toolbar.add(signOutLink);

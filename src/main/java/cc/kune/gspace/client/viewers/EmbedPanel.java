@@ -35,6 +35,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class EmbedPanel the panel of the embed component.
  * 
@@ -55,6 +56,13 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /** The widget. */
   private final Widget widget;
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView#
+   * setContent(cc.kune.core.shared.dto.StateContentDTO)
+   */
 
   /**
    * Instantiates a new content viewer panel.
@@ -126,12 +134,16 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
     }
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView#
-   * setContent(cc.kune.core.shared.dto.StateContentDTO)
-   */
+  @Override
+  protected void postLoad() {
+    removeNewWaveBtn();
+  }
+
+  public native void removeNewWaveBtn() /*-{
+		$wnd.jQuery("button[class*='ParticipantsViewBuilder-Css-addMessage']")
+				.hide();
+  }-*/;
+
   @Override
   public void setContent(final StateContentDTO state) {
     super.setContent(state);
@@ -181,5 +193,4 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
   public void signOut() {
     super.signOut();
   }
-
 }

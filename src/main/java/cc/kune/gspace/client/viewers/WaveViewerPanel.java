@@ -241,6 +241,9 @@ public class WaveViewerPanel extends ViewImpl implements WaveViewerView {
     }
   }
 
+  protected void postLoad() {
+  }
+
   /*
    * (non-Javadoc)
    * 
@@ -303,6 +306,7 @@ public class WaveViewerPanel extends ViewImpl implements WaveViewerView {
           @Override
           public void execute() {
             loading.removeFromParent();
+            postLoad();
           }
         });
       }

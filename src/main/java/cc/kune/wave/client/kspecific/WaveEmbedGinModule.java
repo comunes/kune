@@ -43,7 +43,6 @@ public class WaveEmbedGinModule extends ExtendedGinModule {
   protected void configure() {
     bind(HasWaveContainer.class).to(WaveEmbedContainer.class).in(Singleton.class);
     s(AurorisColorPicker.class);
-    // s(PostEmbededWaveOpenActions.class);
     // s(WebClientMock.class);
     s(WebClient.class);
     // s(WaveClientProvider.class);
@@ -51,7 +50,5 @@ public class WaveEmbedGinModule extends ExtendedGinModule {
     s(WaveStatusIndicator.class);
     // eagle(WaveParts.class);
     s(KuneWaveProfileManager.class);
-    // s(InboxCountView.class, InboxCountPanel.class);
-    // s(InboxCountPresenter.class);
   }
 }

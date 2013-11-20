@@ -24,17 +24,18 @@ package cc.kune.common.client.ui;
 
 import com.google.gwt.user.client.Window;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class KuneWindowUtils.
- *
+ * 
+ * TODO: Merge with WindowUtils
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneWindowUtils {
-  
+
   /**
    * Gets the client height.
-   *
+   * 
    * @return the client height
    */
   public static int getClientHeight() {
@@ -43,7 +44,7 @@ public class KuneWindowUtils {
 
   /**
    * Gets the client width.
-   *
+   * 
    * @return the client width
    */
   public static int getClientWidth() {
@@ -52,10 +53,11 @@ public class KuneWindowUtils {
 
   /**
    * Open.
-   *
-   * @param url the url
+   * 
+   * @param url
+   *          the url
    */
-  public static void open(String url) {
+  public static void open(final String url) {
     Window.open(url, "_blank", "");
   }
 }

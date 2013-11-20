@@ -28,9 +28,10 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
-import cc.kune.core.shared.SessionConstants;
+import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * The Class SitebarSignInAction.
@@ -39,7 +40,8 @@ import com.google.inject.Inject;
  */
 public class EmbedSignInAction extends AbstractSignInAction {
 
-  private final SignIn signIn;
+  private final Session session;
+  private final Provider<SignIn> signIn;
 
   /**
    * Instantiates a new sitebar sign in action.
@@ -52,9 +54,10 @@ public class EmbedSignInAction extends AbstractSignInAction {
    *          the session
    */
   @Inject
-  public EmbedSignInAction(final I18nUITranslationService i18n, final SessionConstants session,
-      final SignIn signIn) {
+  public EmbedSignInAction(final I18nUITranslationService i18n, final Session session,
+      final Provider<SignIn> signIn) {
     super();
+    this.session = session;
     this.signIn = signIn;
     putValue(Action.NAME, i18n.t("Sign in"));
     putValue(
@@ -72,7 +75,9 @@ public class EmbedSignInAction extends AbstractSignInAction {
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
-    signIn.showSignInDialog();
+    final String siteOnOverLogo = session.getInitData().getSiteLogoUrlOnOver();
+    signIn.get().setHeaderLogo(siteOnOverLogo);
+    signIn.get().showSignInDialog();
   }
 
 }

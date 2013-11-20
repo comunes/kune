@@ -29,106 +29,121 @@ import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface BasicDialogView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface BasicDialogView {
 
   /**
    * Gets the bottom panel.
-   *
+   * 
    * @return the bottom panel
    */
   ForIsWidget getBottomPanel();
 
   /**
    * Gets the close btn.
-   *
+   * 
    * @return the close btn
    */
   HasClickHandlers getCloseBtn();
 
   /**
    * Gets the first btn.
-   *
+   * 
    * @return the first btn
    */
   HasClickHandlers getFirstBtn();
 
   /**
    * Gets the inner panel.
-   *
+   * 
    * @return the inner panel
    */
   ForIsWidget getInnerPanel();
 
   /**
+   * Gets the main panel.
+   * 
+   * @return the main panel
+   */
+  ForIsWidget getMainPanel();
+
+  /**
    * Gets the second btn.
-   *
+   * 
    * @return the second btn
    */
   HasClickHandlers getSecondBtn();
 
   /**
    * Gets the title text.
-   *
+   * 
    * @return the title text
    */
   HasDirectionalText getTitleText();
 
   /**
    * Sets the close btn tooltip.
-   *
-   * @param tooltip the new close btn tooltip
+   * 
+   * @param tooltip
+   *          the new close btn tooltip
    */
   void setCloseBtnTooltip(String tooltip);
 
   /**
    * Sets the close btn visible.
-   *
-   * @param visible the new close btn visible
+   * 
+   * @param visible
+   *          the new close btn visible
    */
   void setCloseBtnVisible(boolean visible);
 
   /**
    * Sets the first btn text.
-   *
-   * @param text the new first btn text
+   * 
+   * @param text
+   *          the new first btn text
    */
   void setFirstBtnText(String text);
 
   /**
    * Sets the first btn title.
-   *
-   * @param title the new first btn title
+   * 
+   * @param title
+   *          the new first btn title
    */
   void setFirstBtnTitle(String title);
 
   /**
    * Sets the first btn visible.
-   *
-   * @param visible the new first btn visible
+   * 
+   * @param visible
+   *          the new first btn visible
    */
   void setFirstBtnVisible(boolean visible);
 
   /**
    * Sets the second btn text.
-   *
-   * @param text the new second btn text
+   * 
+   * @param text
+   *          the new second btn text
    */
   void setSecondBtnText(String text);
 
   /**
    * Sets the second btn title.
-   *
-   * @param title the new second btn title
+   * 
+   * @param title
+   *          the new second btn title
    */
   void setSecondBtnTitle(String title);
 
   /**
    * Sets the second btn visible.
-   *
-   * @param visible the new second btn visible
+   * 
+   * @param visible
+   *          the new second btn visible
    */
   void setSecondBtnVisible(boolean visible);
 
