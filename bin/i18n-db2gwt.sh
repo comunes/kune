@@ -34,9 +34,9 @@ then
 fi
 if [[ $L = "en" ]]
 then
-  SEL="SELECT g.tr_key,g.tr_key,l.code,g.noteForTranslators FROM globalize_translations g, globalize_languages l where g.language_id = l.id AND l.code='en';"
+  SEL="SELECT g.tr_key,g.tr_key,l.code,g.noteForTranslators FROM globalize_translations g, globalize_languages l where g.language_id = l.id AND l.code='en' AND g.gtype='kune_core';"
 else 
-  SEL="SELECT p.tr_key,g.text,l.code,p.noteForTranslators FROM globalize_translations g, globalize_translations p, globalize_languages l where g.language_id = l.id AND l.code='$L' AND (g.parent_id = p.id OR g.parent_id = NULL) AND g.text != '';"
+  SEL="SELECT p.tr_key,g.text,l.code,p.noteForTranslators FROM globalize_translations g, globalize_translations p, globalize_languages l where g.language_id = l.id AND l.code='$L' AND g.gtype='kune_core' AND (g.parent_id = p.id OR g.parent_id = NULL) AND g.text != '';"
 fi
 
 if [[ $J -eq 1 ]] 

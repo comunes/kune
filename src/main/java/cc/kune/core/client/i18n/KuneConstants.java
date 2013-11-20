@@ -46,15 +46,11 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String addNewMember();
 
-  String address();
-
   String aDecentralizedWayToOfferOrAskForServicesAndGoodsToYourGroupsOrToAnyoneBarteringMeansTheExchangeOfGoo();
 
   String administrator();
 
   String administrators();
-
-  String all();
 
   String allowAnyPersonToEditThis();
 
@@ -75,8 +71,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String andNExternalUser();
 
   String andNExternalUsers();
-
-  String anErrorHasOccurred();
 
   String anOrganizationWorksTheSameWayAsAProjectExceptThatItMustBeALegalEntity();
 
@@ -103,8 +97,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String atMostDaily();
 
   String atMostHourly();
-
-  String aTurbulenceDetected();
 
   String autoAcceptRequestToJoin();
 
@@ -198,8 +190,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String clickHere();
 
-  String clickHereToReply();
-
   String clickToGoHereOrDropContentsHereToMoveThem();
 
   String clickToOpen();
@@ -288,8 +278,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String currentPassword();
 
-  String custom();
-
   String customUsedInAButtonToChooseACustomColor();
 
   String defaultAThemeName();
@@ -301,8 +289,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String descriptionOfTheAppointment();
 
   String documents();
-
-  String done();
 
   String donTHaveAnAccount();
 
@@ -352,13 +338,9 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String english();
 
-  String enterACustomGadgetUrl();
-
   String enterLanguage();
 
   String enterLinkUrl();
-
-  String enterLinkUrlOrWaveId();
 
   String enterToThisGroupPublicChatRoom();
 
@@ -404,15 +386,11 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String feedbackOfParamAboutParam();
 
-  String filter();
-
   String finishUsedInButton();
 
   String french();
 
   String from();
-
-  String game();
 
   String general();
 
@@ -423,6 +401,8 @@ public interface KuneConstants extends ConstantsWithLookup {
   String goToToday();
 
   String goUpOpenTheContainerFolder();
+
+  String greek();
 
   String greenAThemeName();
 
@@ -474,8 +454,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String ifYouWantToMoveSomethingJustDragAndDropItToItsDestination();
 
-  String image();
-
   String inbox();
 
   String inboxItShowsAListOfAllDocumentsAndContentsInWhichYouParticipate();
@@ -493,8 +471,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String invalidEmail();
 
   String invalidOperation();
-
-  String invalidWaveletId0();
 
   String invitationSent();
 
@@ -534,15 +510,9 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String leaveThisGroup();
 
-  String less();
-
   String license();
 
   String licenseWizard();
-
-  String link();
-
-  String linkToThisBlip();
 
   String listCreated();
 
@@ -563,8 +533,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String makeThisListNotPublic();
 
   String makeThisListPublic();
-
-  String map();
 
   String markAsDone();
 
@@ -613,10 +581,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String move();
 
   String moving();
-
-  String msgs();
-
-  String music();
 
   String name();
 
@@ -692,10 +656,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String newVectorImage();
 
-  String newWave();
-
-  String newWaveWithTheParticipantsOfCurrentWave();
-
   String newWikipage();
 
   String newYesNoMaybeVoting();
@@ -708,17 +668,11 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String nExternalUser();
 
-  String nextUnread();
-
   String nextUsedInButton();
 
   String no();
 
-  String noFileToUpload();
-
   String noHayListasCrearUna();
-
-  String none();
 
   String noResults();
 
@@ -736,11 +690,7 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String nSubscribedNPosts();
 
-  String of0();
-
   String offline();
-
-  String ofUnknown();
 
   String ok();
 
@@ -776,11 +726,7 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String options();
 
-  String orChooseOneOfTheseGadgets();
-
   String organization();
-
-  String other();
 
   String otherErrorTryingToVerifyYourPassword();
 
@@ -824,8 +770,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String pinkAThemeName();
 
-  String please();
-
   String pleaseConfirm();
 
   String pleaseConfirmTheDeletionOfThisMessage();
@@ -840,9 +784,9 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String pleaseProvideHereACommaSeparatedListOfEmails();
 
-  String pleaseSaveYourLastChangesToSomewhereAndReloadTheWave();
-
   String pleaseSignInAgain();
+
+  String pleaseSignInOrRegisterToCollaborate();
 
   String pleaseSignInOrRegisterToCreateAGroup();
 
@@ -866,8 +810,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String processing();
 
-  String productivity();
-
   String project();
 
   String publicDescription();
@@ -876,19 +818,13 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String purpleAThemeName();
 
-  String quotEverythingSShinyCapNNotToFretQuot();
-
   String reasonsNotToUseANonCommercialLicense();
-
-  String recent();
 
   String recommendations();
 
   String redAThemeName();
 
   String redblackAThemeName();
-
-  String refresh();
 
   String register();
 
@@ -902,8 +838,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String reloadThis();
 
-  String remove();
-
   String removeCurrentBackgroundImage();
 
   String removedAsMember();
@@ -913,8 +847,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String removeThisMember();
 
   String renaming();
-
-  String reply();
 
   String reportKuneIssuesProblems();
 
@@ -931,8 +863,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String russian();
 
   String saharaAThemeName();
-
-  String saved();
 
   String saving();
 
@@ -964,13 +894,9 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String selectedAsTheHomepage();
 
-  String selectGadget();
-
   String selectLicense();
 
   String selectOtherKindOfLicenses();
-
-  String selectSomeTextToChangeTheColor();
 
   String selectSomeTextToCreateALink();
 
@@ -991,8 +917,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String setYourGroupPreferencesHere();
 
   String share();
-
-  String shared();
 
   String sharedWithGeneralPublicNowAnyoneCanParticipate();
 
@@ -1015,8 +939,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String shortName();
 
   String shortTermUrgentTasks();
-
-  String showErrorDetail();
 
   String showHideTheChatWindow();
 
@@ -1054,8 +976,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String spanish();
 
-  String stackTrace();
-
   String startACollaborativeDocumentForTheMeetingMinutes();
 
   String startAPublicAssemblyWithMembers();
@@ -1079,8 +999,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String taskboardy();
 
   String tasks();
-
-  String team();
 
   String thanksForJoiningParamNowYouCanActivelyParticipateInParamYouCanAlsoUseYourPersonalSpaceToPublishConte();
 
@@ -1236,21 +1154,15 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String thisWillOpenASpecificChatroomToChatAboutThisPageOrDocumentItSUsefulToChatWithOthersAboutSomethingWhi();
 
-  String time();
-
   String tip();
 
   String titleOfTheNewPost();
 
   String to();
 
-  String toArchive();
-
   String today();
 
   String toHelpWithTheTranslationOfThisSoftwarePleaseContactBeforeWithThisSiteAdministrators();
-
-  String toInbox();
 
   String toJoinAChatroomYouNeedToBeOnline();
 
@@ -1272,8 +1184,6 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String trash();
 
-  String travel();
-
   String typeSomeCommaSeparatedKeywordsThatDefineYourGroup();
 
   String typeSomethingToSearchForUsersAndGroupsInParam();
@@ -1282,19 +1192,11 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String typeTheNameOfTheUserAndSelectHimHer();
 
-  String unsaved();
-
   String unsubscribe();
 
   String unsubscribed();
 
   String unsubscribeToThisList();
-
-  String uploadAttachment();
-
-  String uploadFile();
-
-  String use();
 
   String useACopyleftLicenseRecommended();
 
@@ -1320,17 +1222,9 @@ public interface KuneConstants extends ConstantsWithLookup {
 
   String useTheGnuLicensesRecommendedForFreeSoftwareWorksAndOtherKindOfLicenses();
 
-  String useThisReferenceToLinkToThisBlipFromTheWeb();
-
-  String useThisWaveIdToLinkToThisBlipFromOtherBlips();
-
-  String utility();
-
   String verifyYourEmail();
 
   String viaParamUsedInReferencesSomethingViasomeone();
-
-  String video();
 
   String visibilityOfYourNetworkChanged();
 
@@ -1341,8 +1235,6 @@ public interface KuneConstants extends ConstantsWithLookup {
   String visitThisMemberSHomepage();
 
   String visitYourHomepage();
-
-  String voice();
 
   String voting();
 

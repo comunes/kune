@@ -77,14 +77,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentViewerPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
-  
+
   /**
    * The Interface ContentViewerPanelUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface ContentViewerPanelUiBinder extends UiBinder<Widget, ContentViewerPanel> {
@@ -98,32 +98,32 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   /** The capabilities registry. */
   private final ContentCapabilitiesRegistry capabilitiesRegistry;
-  
+
   /** The channel. */
   private RemoteViewServiceMultiplexer channel;
-  
+
   /** The color picker. */
   private final Provider<AurorisColorPicker> colorPicker;
-  
+
   /** The content title. */
   private final ContentTitleWidget contentTitle;
-  
+
   /** The deck. */
   @UiField
   DeckPanel deck;
-  
+
   /** The drop controller. */
   private final ContentDropController dropController;
-  
+
   /** The dummy wave frame. */
   private FramedPanel dummyWaveFrame;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The gs armor. */
   private final GSpaceArmor gsArmor;
-  
+
   /** The id generator. */
   private IdGenerator idGenerator;
 
@@ -139,7 +139,7 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   /** The profiles. */
   private ProfileManager profiles;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
   /** The wave panel, if a wave is open. */
@@ -166,16 +166,25 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   /**
    * Instantiates a new content viewer panel.
-   *
-   * @param wsArmor the ws armor
-   * @param waveClient the wave client
-   * @param capabilitiesRegistry the capabilities registry
-   * @param i18n the i18n
-   * @param eventBus the event bus
-   * @param stateManager the state manager
-   * @param dropController the drop controller
-   * @param waveUnsavedIndicator the wave unsaved indicator
-   * @param colorPicker the color picker
+   * 
+   * @param wsArmor
+   *          the ws armor
+   * @param waveClient
+   *          the wave client
+   * @param capabilitiesRegistry
+   *          the capabilities registry
+   * @param i18n
+   *          the i18n
+   * @param eventBus
+   *          the event bus
+   * @param stateManager
+   *          the state manager
+   * @param dropController
+   *          the drop controller
+   * @param waveUnsavedIndicator
+   *          the wave unsaved indicator
+   * @param colorPicker
+   *          the color picker
    */
   @Inject
   public ContentViewerPanel(final GSpaceArmor wsArmor, final WaveClientProvider waveClient,
@@ -203,7 +212,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     onlyWebClient = WindowUtils.getParameter(SiteParameters.ONLY_WEBCLIENT) != null;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -211,8 +222,12 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     return widget;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#attach()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * attach()
    */
   @Override
   public void attach() {
@@ -221,16 +236,24 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     docContainer.showWidget(widget);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#blinkTitle()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * blinkTitle()
    */
   @Override
   public void blinkTitle() {
     contentTitle.highlightTitle();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#clear()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * clear()
    */
   @Override
   public void clear() {
@@ -242,16 +265,24 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     waveClear();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#detach()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * detach()
    */
   @Override
   public void detach() {
     clear();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#getEditTitle()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * getEditTitle()
    */
   @Override
   public HasEditHandler getEditTitle() {
@@ -260,8 +291,9 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   /**
    * Gets the wave ref.
-   *
-   * @param waveRefS the wave ref s
+   * 
+   * @param waveRefS
+   *          the wave ref s
    * @return the wave ref
    */
   private WaveRef getWaveRef(final String waveRefS) {
@@ -290,8 +322,12 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setContent(cc.kune.core.shared.dto.StateContentDTO)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * setContent(cc.kune.core.shared.dto.StateContentDTO)
    */
   @Override
   public void setContent(final StateContentDTO state) {
@@ -305,8 +341,12 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     deck.showWidget(1);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setEditableContent(cc.kune.core.shared.dto.StateContentDTO)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * setEditableContent(cc.kune.core.shared.dto.StateContentDTO)
    */
   @Override
   public void setEditableContent(final StateContentDTO state) {
@@ -317,8 +357,12 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     deck.showWidget(0);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setEditableTitle(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * setEditableTitle(java.lang.String)
    */
   @Override
   public void setEditableTitle(final String title) {
@@ -327,9 +371,11 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   /**
    * Sets the editable wave content.
-   *
-   * @param waveRefS the wave ref s
-   * @param isNewWave the is new wave
+   * 
+   * @param waveRefS
+   *          the wave ref s
+   * @param isNewWave
+   *          the is new wave
    */
   private void setEditableWaveContent(final String waveRefS, final boolean isNewWave) {
     if (onlyWebClient) {
@@ -365,16 +411,26 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setFooterActions(cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * setFooterActions
+   * (cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
    */
   @Override
   public void setFooterActions(final GuiActionDescCollection actions) {
     setToolbarActions(actions, gsArmor.getDocFooterToolbar());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#setSubheaderActions(cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * setSubheaderActions
+   * (cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
    */
   @Override
   public void setSubheaderActions(final GuiActionDescCollection actions) {
@@ -383,9 +439,11 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   /**
    * Sets the title.
-   *
-   * @param state the state
-   * @param editable the editable
+   * 
+   * @param state
+   *          the state
+   * @param editable
+   *          the editable
    */
   private void setTitle(final StateContentDTO state, final boolean editable) {
     contentTitle.setTitle(state.getTitle(), state.getTypeId(), state.getMimeType(), editable
@@ -395,17 +453,23 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
 
   /**
    * Sets the toolbar actions.
-   *
-   * @param actions the actions
-   * @param toolbar the toolbar
+   * 
+   * @param actions
+   *          the actions
+   * @param toolbar
+   *          the toolbar
    */
   private void setToolbarActions(final GuiActionDescCollection actions, final IsActionExtensible toolbar) {
     toolbar.clear();
     toolbar.addAll(actions);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#signIn()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * signIn()
    */
   @Override
   public void signIn() {
@@ -413,8 +477,12 @@ public class ContentViewerPanel extends ViewImpl implements ContentViewerView {
     // initWaveClientIfNeeded();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#signOut()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * signOut()
    */
   @Override
   public void signOut() {
