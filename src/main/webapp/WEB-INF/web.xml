@@ -162,6 +162,10 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <filter-name>rack</filter-name>
     <url-pattern>/ws/*</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>rack</filter-name>
+    <url-pattern>/wse/*</url-pattern>
+  </filter-mapping>
   <!-- Wave proxies with context /wiab/ ====================================================================== -->
   <!-- <servlet> -->
   <!-- <servlet-name>WiabSocketIO</servlet-name> -->

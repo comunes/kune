@@ -22,83 +22,39 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.Action;
-import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SiteTokens;
-import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.SessionConstants;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SitebarSignInLink.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarSignInLink extends ButtonDescriptor {
-
-  /**
-   * The Class SitebarSignInAction.
-   *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  public static class SitebarSignInAction extends AbstractExtendedAction {
-
-    /** The state manager. */
-    private final StateManager stateManager;
-
-    /**
-     * Instantiates a new sitebar sign in action.
-     *
-     * @param stateManager the state manager
-     * @param i18n the i18n
-     * @param session the session
-     */
-    @Inject
-    public SitebarSignInAction(final StateManager stateManager, final I18nUITranslationService i18n,
-        final SessionConstants session) {
-      super();
-      this.stateManager = stateManager;
-      putValue(Action.NAME, i18n.t("Sign in to collaborate"));
-      // putValue(
-      // Action.TOOLTIP,
-      // i18n.t("Please sign in or register to get full access to [%s] tools and contents",
-      // i18n.getSiteCommonName()));
-    }
-
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
-     */
-    @Override
-    public void actionPerformed(final ActionEvent event) {
-      stateManager.gotoHistoryTokenButRedirectToCurrent(SiteTokens.SIGN_IN);
-    }
-
-  }
 
   /** The Constant SITE_SIGN_IN. */
   public static final String SITE_SIGN_IN = "kune-ssilp-hy";
 
   /**
    * Instantiates a new sitebar sign in link.
-   *
-   * @param action the action
-   * @param eventBus the event bus
-   * @param session the session
+   * 
+   * @param action
+   *          the action
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
    */
   @Inject
-  public SitebarSignInLink(final SitebarSignInAction action, final EventBus eventBus,
+  public SitebarSignInLink(final AbstractSignInAction action, final EventBus eventBus,
       final Session session) {
     super(action);
     // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);

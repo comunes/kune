@@ -40,9 +40,11 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SignInAbstractPresenter.
- *
- * @param <V> the value type
- * @param <Proxy_> the generic type
+ * 
+ * @param <V>
+ *          the value type
+ * @param <Proxy_>
+ *          the generic type
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Proxy<?>> extends
@@ -50,33 +52,41 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /** The cookies manager. */
   protected final CookiesManager cookiesManager;
-  
+
   /** The goto token on cancel. */
   private String gotoTokenOnCancel;
-  
+
   /** The i18n. */
   protected final I18nUITranslationService i18n;
-  
+
   /** The login remember. */
   protected final LoginRememberManager loginRemember;
-  
+
   /** The session. */
   protected final Session session;
-  
+
   /** The state manager. */
   protected final StateManager stateManager;
 
   /**
    * Instantiates a new sign in abstract presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param session the session
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param cookiesManager the cookies manager
-   * @param loginRemember the login remember
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param cookiesManager
+   *          the cookies manager
+   * @param loginRemember
+   *          the login remember
    */
   public SignInAbstractPresenter(final EventBus eventBus, final View view, final Proxy<?> proxy,
       final Session session, final StateManager stateManager, final I18nUITranslationService i18n,
@@ -91,14 +101,16 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * Gets the goto token on cancel.
-   *
+   * 
    * @return the goto token on cancel
    */
   public String getGotoTokenOnCancel() {
     return gotoTokenOnCancel;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
    */
   @Override
@@ -142,10 +154,13 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * On sign in.
-   *
-   * @param userInfoDTO the user info dto
-   * @param gotoHomePage the goto home page
-   * @param passwd the passwd
+   * 
+   * @param userInfoDTO
+   *          the user info dto
+   * @param gotoHomePage
+   *          the goto home page
+   * @param passwd
+   *          the passwd
    */
   protected void onSignIn(final UserInfoDTO userInfoDTO, final boolean gotoHomePage, final String passwd) {
     final String userHash = userInfoDTO.getUserHash();
@@ -155,7 +170,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     session.setCurrentUserInfo(userInfoDTO, passwd);
     final I18nLanguageDTO language = userInfoDTO.getLanguage();
     session.setCurrentLanguage(language);
-    i18n.changeToLanguageIfNecessary(language.getCode(), language.getEnglishName(), true,
+    i18n.changeToLanguageIfNecessary(language.getCode(), language.getEnglishName(),
         new I18nLanguageChangeNeeded() {
           @Override
           public void onChangeNeeded() {
@@ -174,9 +189,11 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * Save autocomplete login data.
-   *
-   * @param nickOrEmail the nick or email
-   * @param password the password
+   * 
+   * @param nickOrEmail
+   *          the nick or email
+   * @param password
+   *          the password
    */
   protected void saveAutocompleteLoginData(final String nickOrEmail, final String password) {
     loginRemember.setNickOrEmail(nickOrEmail);
@@ -186,8 +203,9 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * Sets the goto token on cancel.
-   *
-   * @param gotoTokenOnCancel the new goto token on cancel
+   * 
+   * @param gotoTokenOnCancel
+   *          the new goto token on cancel
    */
   public void setGotoTokenOnCancel(final String gotoTokenOnCancel) {
     this.gotoTokenOnCancel = gotoTokenOnCancel;

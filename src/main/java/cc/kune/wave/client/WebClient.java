@@ -40,7 +40,6 @@ import org.waveprotocol.box.webclient.client.events.WaveCreationEventHandler;
 import org.waveprotocol.box.webclient.client.events.WaveSelectionEvent;
 import org.waveprotocol.box.webclient.client.events.WaveSelectionEventHandler;
 import org.waveprotocol.box.webclient.search.RemoteSearchService;
-import org.waveprotocol.box.webclient.search.Search;
 import org.waveprotocol.box.webclient.search.SearchPanelRenderer;
 import org.waveprotocol.box.webclient.search.SearchPanelWidget;
 import org.waveprotocol.box.webclient.search.SearchPresenter;
@@ -66,28 +65,22 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
-import cc.kune.common.client.actions.ui.ActionFlowPanel;
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
-import cc.kune.core.shared.dto.ContainerSimpleDTO;
-import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.gspace.client.viewers.PathToolbarUtils;
+import cc.kune.wave.client.kspecific.AfterOpenWaveEvent;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
+import cc.kune.wave.client.kspecific.BeforeOpenWaveEvent;
+import cc.kune.wave.client.kspecific.OnWaveClientStartEvent;
 import cc.kune.wave.client.kspecific.WaveClientClearEvent;
 import cc.kune.wave.client.kspecific.WaveClientUtils;
 import cc.kune.wave.client.kspecific.WaveClientView;
-import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
@@ -104,6 +97,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.UIObject;
@@ -119,7 +113,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class WebClient extends Composite implements WaveClientView {
-  
+
   /**
    * The Interface Binder.
    *
@@ -136,7 +130,7 @@ public class WebClient extends Composite implements WaveClientView {
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class ErrorHandler implements UncaughtExceptionHandler {
-    
+
     /**
      * Gets the stack trace async.
      *
@@ -271,7 +265,7 @@ public class WebClient extends Composite implements WaveClientView {
 
   /** The Constant BINDER. */
   private static final Binder BINDER = GWT.create(Binder.class);
-  
+
   /** The log. */
   static Log LOG = Log.get(WebClient.class);
 
@@ -295,13 +289,11 @@ public class WebClient extends Composite implements WaveClientView {
         + " Please save your last changes to somewhere and reload the wave.</b></div>"));
     return popup;
   }
-  
+
   /** The bottom bar. */
   @UiField
   SimplePanel bottomBar;
 
-  /** The bottom toolbar. */
-  private final ActionFlowPanel bottomToolbar;
 
   /** The channel. */
   private RemoteViewServiceMultiplexer channel;
@@ -314,15 +306,9 @@ public class WebClient extends Composite implements WaveClientView {
 
   /** The event bus. */
   private final EventBus eventBus;
-  
-  /** The i18n. */
-  private final I18nTranslationService i18n;
 
   /** The id generator. */
   private IdGenerator idGenerator;
-
-  /** The inbox count. */
-  private final InboxCountPresenter inboxCount;
 
   /** The kune session. */
   private final cc.kune.core.client.state.Session kuneSession;
@@ -337,15 +323,14 @@ public class WebClient extends Composite implements WaveClientView {
   @UiField
   DebugMessagePanel logPanel;
 
-  /** The path toolba utils. */
-  private final PathToolbarUtils pathToolbaUtils;
-
   /** The profiles. */
   private final ProfileManager profiles;
 
   /** The right panel. */
   @UiField
   DockLayoutPanel rightPanel;
+
+  private SimpleSearch search;
 
   /** The search panel. */
   @UiField(provided = true)
@@ -372,6 +357,7 @@ public class WebClient extends Composite implements WaveClientView {
   @UiField
   FramedPanel waveFrame;
 
+
   //FIXME UiField???
   /** The wave holder. */
   ImplPanel waveHolder;
@@ -381,7 +367,6 @@ public class WebClient extends Composite implements WaveClientView {
 
   /** The wave unsaved indicator. */
   private final CustomSavedStateIndicator waveUnsavedIndicator;
-
 
   /**
    * Create a remote websocket to talk to the server-side FedOne service.
@@ -393,28 +378,20 @@ public class WebClient extends Composite implements WaveClientView {
    *
    * @param eventBus the event bus
    * @param profiles the profiles
-   * @param inboxCount the inbox count
    * @param tokenMatcher the token matcher
    * @param kuneSession the kune session
-   * @param i18n the i18n
    * @param waveUnsavedIndicator the wave unsaved indicator
    * @param contentService the content service
-   * @param pathToolbaUtils the path toolba utils
-   * @param bottomToolbar the bottom toolbar
    * @param colorPicker the color picker
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final InboxCountPresenter inboxCount, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session kuneSession, final I18nTranslationService i18n, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final PathToolbarUtils pathToolbaUtils, final ActionFlowPanel bottomToolbar, final Provider<AurorisColorPicker> colorPicker) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session kuneSession, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final Provider<AurorisColorPicker> colorPicker) {
     this.eventBus = eventBus;
     this.profiles = profiles;
-    this.inboxCount = inboxCount;
     this.tokenMatcher = tokenMatcher;
     this.kuneSession = kuneSession;
-    this.i18n = i18n;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.contentService = contentService;
-    this.pathToolbaUtils = pathToolbaUtils;
-    this.bottomToolbar = bottomToolbar;
     this.colorPicker = colorPicker;
     searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
     ErrorHandler.install();
@@ -472,6 +449,13 @@ public class WebClient extends Composite implements WaveClientView {
       History.fireCurrentHistoryState();
     }
     LOG.info("SimpleWebClient.onModuleLoad() done");
+
+    eventBus.fireEvent(new OnWaveClientStartEvent(this));
+  }
+
+  @Override
+  public void addToBottonBar(final IsWidget widget) {
+    bottomBar.add(widget);
   }
 
   /* (non-Javadoc)
@@ -482,13 +466,6 @@ public class WebClient extends Composite implements WaveClientView {
   WaveClientUtils.clear(wave, waveHolder, waveFrame);
   waveFrame.clear();
 }
-
-  /**
-   * Clear bottom toolbar actions.
-   */
-  private void clearBottomToolbarActions() {
-    bottomToolbar.clear();
-  }
 
   /**
    * Creates the web socket.
@@ -513,13 +490,19 @@ public class WebClient extends Composite implements WaveClientView {
   public Element getLoading() {
     return loading;
   }
-  
+
+
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#getProfiles()
    */
   @Override
   public ProfileManager getProfiles() {
     return profiles;
+  }
+
+  @Override
+  public SimpleSearch getSearch() {
+    return search;
   }
 
   /* (non-Javadoc)
@@ -529,7 +512,6 @@ public class WebClient extends Composite implements WaveClientView {
   public void getStackTraceAsync(final Throwable caught, final Accessor<SafeHtml> accessor) {
     ErrorHandler.getStackTraceAsync(caught, accessor);
   }
-
 
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#getWaveHolder()
@@ -561,7 +543,8 @@ public class WebClient extends Composite implements WaveClientView {
   /**
    * Hide bottom toolbar.
    */
-  private void hideBottomToolbar() {
+  @Override
+  public void hideBottomToolbar() {
     rightPanel.setWidgetSize(bottomBar, 0);
     bottomBar.getParent().getElement().getStyle().setBottom(0d, Unit.PX);
   }
@@ -593,6 +576,7 @@ public class WebClient extends Composite implements WaveClientView {
     assert loggedInUser != null;
     channel = new RemoteViewServiceMultiplexer(websocket, loggedInUser.getAddress());
   }
+
 
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#logout()
@@ -639,7 +623,8 @@ public class WebClient extends Composite implements WaveClientView {
 
     WaveClientClearEvent.fire(eventBus);
     clear();
-    clearBottomToolbarActions();
+    eventBus.fireEvent(new BeforeOpenWaveEvent());;
+
     waveFrame.add(waveHolder);
 
     // Release the display:none.
@@ -658,7 +643,7 @@ public class WebClient extends Composite implements WaveClientView {
 
     final String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
 
-    setBottomToolbar(waveUri);
+    eventBus.fireEvent(new AfterOpenWaveEvent(waveUri));;
 
     final String encodedToken = HistoryUtils.undoHashbang(History.getToken());
     // Kune patch
@@ -680,30 +665,6 @@ public class WebClient extends Composite implements WaveClientView {
     final String tokenFromWaveref = HistoryUtils.hashbang(waveUri);
     SpaceConfEvent.fire(eventBus, Space.userSpace, tokenFromWaveref);
     History.newItem(tokenFromWaveref, false);
-  }
-
-  /**
-   * Sets the bottom toolbar.
-   *
-   * @param waveUri the new bottom toolbar
-   */
-  private void setBottomToolbar(final String waveUri) {
-    contentService.getContentByWaveRef(kuneSession.getUserHash(), waveUri, new AsyncCallbackSimple<StateAbstractDTO>() {
-      @Override
-      public void onSuccess(final StateAbstractDTO result) {
-        if (result instanceof StateContentDTO) {
-          final StateContentDTO state = (StateContentDTO) result;
-          final ContainerSimpleDTO doc = new ContainerSimpleDTO(state.getTitle(), state.getContainer().getStateToken(), state.getStateToken(), state.getTypeId());
-          final GuiActionDescCollection actions = pathToolbaUtils.createPath(state.getGroup(), state.getContainer(), false, true, doc);
-          bottomToolbar.addAll(actions);
-          rightPanel.setWidgetSize(bottomBar, 26);
-          bottomBar.getParent().getElement().getStyle().setBottom(12d, Unit.PX);
-        }
-        else {
-          hideBottomToolbar();
-        }
-      }
-    });
   }
 
   /* (non-Javadoc)
@@ -742,6 +703,7 @@ public class WebClient extends Composite implements WaveClientView {
                 turbulencePopup.show();
               }
               break;
+            case NEVER_CONNECTED:
             case RECONNECTING:
               element.setInnerText("Connecting...");
               element.setClassName("connecting");
@@ -769,8 +731,7 @@ public class WebClient extends Composite implements WaveClientView {
             ClientEvents.get().fireEvent(new WaveSelectionEvent(WaveRef.of(id)));
           }
         };
-    final Search search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
-    search.addListener(inboxCount.getSearchListener());
+    search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
     SearchPresenter.create(search, searchPanel, actionHandler, profiles);
   }
 
@@ -801,9 +762,8 @@ public class WebClient extends Composite implements WaveClientView {
 
     setupSearchPanel();
     setupWavePanel();
-    bottomBar.add(bottomToolbar);
   }
-  
+
   /**
    * Setup wave panel.
    */
@@ -818,6 +778,12 @@ public class WebClient extends Composite implements WaveClientView {
         openWave(waveRef, false, null);
       }
     });
+  }
+
+  @Override
+  public void showBottomToolbar() {
+    rightPanel.setWidgetSize(bottomBar, 26);
+    bottomBar.getParent().getElement().getStyle().setBottom(12d, Unit.PX);
   }
 
   /**

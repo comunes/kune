@@ -35,31 +35,37 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveParts.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveParts {
 
   /**
    * Instantiates a new wave parts.
-   *
-   * @param session the session
-   * @param waveClientManager the wave client manager
-   * @param waveOnlineStatus the wave online status
-   * @param inboxCount the inbox count
+   * 
+   * @param session
+   *          the session
+   * @param waveClientManager
+   *          the wave client manager
+   * @param waveOnlineStatus
+   *          the wave online status
+   * @param inboxCount
+   *          the inbox count
    */
   @Inject
   public WaveParts(final Session session, final Provider<WaveClientManager> waveClientManager,
       final Provider<WaveStatusIndicator> waveOnlineStatus,
-      final Provider<InboxCountPresenter> inboxCount) {
+      final Provider<PostWaveOpenActions> postOpenActions, final Provider<InboxCountPresenter> inboxCount) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
+        inboxCount.get();
         waveClientManager.get();
         waveOnlineStatus.get();
-        inboxCount.get();
         WindowUtil.instance = new WindowKuneWrapper();
+        postOpenActions.get();
       }
     });
+
   }
 }

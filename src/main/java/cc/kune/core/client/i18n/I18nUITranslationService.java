@@ -57,19 +57,19 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nUITranslationService.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class I18nUITranslationService extends I18nTranslationService {
-  
+
   /**
    * The Interface I18nLanguageChangeNeeded.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface I18nLanguageChangeNeeded {
-    
+
     /**
      * On change needed.
      */
@@ -80,31 +80,33 @@ public class I18nUITranslationService extends I18nTranslationService {
      */
     void onChangeNotNeeded();
   }
-  
+
+  private boolean askChangeToYourLanguage = true;
+
   /** The current lang. */
   private I18nLanguageDTO currentLang;
-  
+
   /** The current language code. */
   private String currentLanguageCode;
-  
+
   /** The early texts. */
   private final Set<Pair<String, String>> earlyTexts;
-  
+
   /** The i18n service. */
   private final I18nServiceAsync i18nService;
-  
+
   /** The is current lang rtl. */
   private boolean isCurrentLangRTL = false;
-  
+
   /** The is lang in properties. */
   private boolean isLangInProperties;
-  
+
   /** The kune constants. */
   private final KuneConstants kuneConstants;
-  
+
   /** The lexicon. */
   private HashMap<String, String> lexicon;
-  
+
   /** The session. */
   private final Session session;
 
@@ -113,11 +115,15 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Instantiates a new i18n ui translation service.
-   *
-   * @param session the session
-   * @param i18nService the i18n service
-   * @param eventBus the event bus
-   * @param kuneConstants the kune constants
+   * 
+   * @param session
+   *          the session
+   * @param i18nService
+   *          the i18n service
+   * @param eventBus
+   *          the event bus
+   * @param kuneConstants
+   *          the kune constants
    */
   @Inject
   public I18nUITranslationService(final Session session, final I18nServiceAsync i18nService,
@@ -159,9 +165,9 @@ public class I18nUITranslationService extends I18nTranslationService {
             Log.info("Workspace adaptation to server proposed language: " + currentLang.getEnglishName()
                 + ", isRTL: " + currentLang.getDirection() + " use properties: "
                 + shouldIuseProperties());
-
+            askChangeToYourLanguage = false;
             changeToLanguageIfNecessary(getCurrentGWTlanguage(), currentLang.getCode(),
-                currentLang.getEnglishName(), false, new I18nLanguageChangeNeeded() {
+                currentLang.getEnglishName(), new I18nLanguageChangeNeeded() {
 
                   @Override
                   public void onChangeNeeded() {
@@ -212,42 +218,49 @@ public class I18nUITranslationService extends I18nTranslationService {
     final Location location = WindowUtils.getLocation();
     final String hash = location.getHash();
     final String query = location.getQueryString();
+    final String path = location.getPath();
     final String protocol = location.getProtocol();
     final String newUrl = I18nUrlUtils.changeLang(query + (TextUtils.notEmpty(hash) ? hash : ""),
         newLocale);
     Log.info("Locale current query: " + query);
     Log.info("Locale current hash: " + hash);
-    Log.info("Locale new Url: " + newUrl);
-    WindowUtils.changeHrefKeepHash(protocol + "//" + location.getHost() + newUrl);
+    Log.info("Locale current path: " + path);
+    Log.info("Locale new Url: " + path + newUrl);
+    WindowUtils.changeHrefKeepHash(protocol + "//" + location.getHost() + path + newUrl);
   }
 
   /**
    * Change to language if necessary.
-   *
-   * @param wantedLang the wanted lang
-   * @param wantedLangEnglishName the wanted lang english name
-   * @param ask the ask
-   * @param listener the listener
+   * 
+   * @param wantedLang
+   *          the wanted lang
+   * @param wantedLangEnglishName
+   *          the wanted lang english name
+   * @param listener
+   *          the listener
    */
   public void changeToLanguageIfNecessary(final String wantedLang, final String wantedLangEnglishName,
-      final boolean ask, final I18nLanguageChangeNeeded listener) {
-    changeToLanguageIfNecessary(currentLang.getCode(), wantedLang, wantedLangEnglishName, ask, listener);
+      final I18nLanguageChangeNeeded listener) {
+    changeToLanguageIfNecessary(currentLang.getCode(), wantedLang, wantedLangEnglishName, listener);
   }
 
   /**
    * Change to language if necessary.
-   *
-   * @param currentLangCode the current lang code
-   * @param wantedLang the wanted lang
-   * @param wantedLangEnglishName the wanted lang english name
-   * @param ask the ask
-   * @param listener the listener
+   * 
+   * @param currentLangCode
+   *          the current lang code
+   * @param wantedLang
+   *          the wanted lang
+   * @param wantedLangEnglishName
+   *          the wanted lang english name
+   * @param listener
+   *          the listener
    * @return true if we should reload the client with the new language
    */
   private void changeToLanguageIfNecessary(final String currentLangCode, final String wantedLang,
-      final String wantedLangEnglishName, final boolean ask, final I18nLanguageChangeNeeded listener) {
+      final String wantedLangEnglishName, final I18nLanguageChangeNeeded listener) {
     if (!currentLangCode.equals(wantedLang) && isInConstantProperties(wantedLang)) {
-      if (!ask) {
+      if (!askChangeToYourLanguage) {
         listener.onChangeNeeded();
         setCurrentLanguage(wantedLang);
         changeLanguageInUrl(wantedLang);
@@ -277,8 +290,9 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Format date with locale.
-   *
-   * @param date the date
+   * 
+   * @param date
+   *          the date
    * @return the string
    */
   public String formatDateWithLocale(final Date date) {
@@ -287,9 +301,11 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Format date with locale.
-   *
-   * @param date the date
-   * @param shortFormat the short format
+   * 
+   * @param date
+   *          the date
+   * @param shortFormat
+   *          the short format
    * @return the string
    */
   public String formatDateWithLocale(final Date date, final boolean shortFormat) {
@@ -314,7 +330,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the current gw tlanguage.
-   *
+   * 
    * @return the current gw tlanguage
    */
   private String getCurrentGWTlanguage() {
@@ -325,7 +341,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the current language.
-   *
+   * 
    * @return the current language
    */
   public String getCurrentLanguage() {
@@ -334,7 +350,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the lexicon.
-   *
+   * 
    * @return the lexicon
    */
   public HashMap<String, String> getLexicon() {
@@ -343,7 +359,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the site common name.
-   *
+   * 
    * @return the site common name
    */
   public String getSiteCommonName() {
@@ -356,10 +372,13 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the trans from bd.
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
-   * @param encodeText the encode text
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
+   * @param encodeText
+   *          the encode text
    * @return the trans from bd
    */
   private String getTransFromBD(final String text, final String noteForTranslators,
@@ -392,8 +411,9 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Checks if is in constant properties.
-   *
-   * @param currentLang the current lang
+   * 
+   * @param currentLang
+   *          the current lang
    * @return true, if is in constant properties
    */
   private boolean isInConstantProperties(final String currentLang) {
@@ -409,14 +429,16 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Checks if is ready.
-   *
+   * 
    * @return true, if is ready
    */
   public boolean isReady() {
     return lexicon != null;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.shared.i18n.I18nTranslationService#isRTL()
    */
   @Override
@@ -426,9 +448,11 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Save.
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
    */
   private void save(final String text, final String noteForTranslators) {
     i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text, noteForTranslators,
@@ -444,10 +468,15 @@ public class I18nUITranslationService extends I18nTranslationService {
         });
   }
 
+  public void setAskChangeToYourLanguage(final boolean askChangeToYourLanguage) {
+    this.askChangeToYourLanguage = askChangeToYourLanguage;
+  }
+
   /**
    * Sets the current language.
-   *
-   * @param newLanguage the new current language
+   * 
+   * @param newLanguage
+   *          the new current language
    */
   public void setCurrentLanguage(final String newLanguage) {
     this.currentLanguageCode = newLanguage;
@@ -455,8 +484,9 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Sets the lexicon.
-   *
-   * @param lexicon the lexicon
+   * 
+   * @param lexicon
+   *          the lexicon
    */
   public void setLexicon(final HashMap<String, String> lexicon) {
     this.lexicon = lexicon;
@@ -464,17 +494,23 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Sets the translation after save.
-   *
-   * @param text the text
-   * @param translation the translation
+   * 
+   * @param text
+   *          the text
+   * @param translation
+   *          the translation
    */
   public void setTranslationAfterSave(final String text, final String translation) {
     lexicon.put(text, translation);
   }
 
+  public boolean shoudAskChangeToYourLanguage() {
+    return askChangeToYourLanguage;
+  }
+
   /**
    * Should iuse properties.
-   *
+   * 
    * @return true, if successful
    */
   private boolean shouldIuseProperties() {
@@ -488,9 +524,11 @@ public class I18nUITranslationService extends I18nTranslationService {
    * 
    * Warning: text is escaped as html before insert in the db. Don't use html
    * here (o user this method with params).
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
    * @return text translated in the current language
    */
   @Override

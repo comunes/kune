@@ -20,44 +20,11 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.ui;
 
-import com.google.gwt.user.client.Window;
+package cc.kune.wave.client.kspecific;
 
-/**
- * The Class KuneWindowUtils.
- * 
- * TODO: Merge with WindowUtils
- * 
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
-public class KuneWindowUtils {
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 
-  /**
-   * Gets the client height.
-   * 
-   * @return the client height
-   */
-  public static int getClientHeight() {
-    return Window.getClientHeight();
-  }
-
-  /**
-   * Gets the client width.
-   * 
-   * @return the client width
-   */
-  public static int getClientWidth() {
-    return Window.getClientWidth();
-  }
-
-  /**
-   * Open.
-   * 
-   * @param url
-   *          the url
-   */
-  public static void open(final String url) {
-    Window.open(url, "_blank", "");
-  }
+public interface HasWaveContainer {
+  ForIsWidget getForIsWidget();
 }

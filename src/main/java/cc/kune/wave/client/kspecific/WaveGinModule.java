@@ -29,10 +29,12 @@ import cc.kune.wave.client.kspecific.inboxcount.InboxCountPanel;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView;
 
+import com.google.inject.Singleton;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveGinModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveGinModule extends ExtendedGinModule {
@@ -43,6 +45,8 @@ public class WaveGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
+    bind(HasWaveContainer.class).to(WaveUserSpaceContainer.class).in(Singleton.class);
+    s(PostWaveOpenActions.class);
     s(AurorisColorPicker.class);
     s(WebClientMock.class);
     s(WebClient.class);

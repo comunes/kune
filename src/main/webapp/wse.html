@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>kune embeded</title>
+<!-- Use this if you want to force some language as default
+<meta name="gwt:property" content="locale=es" />
+-->
+<script type="text/javascript" language="javascript"
+    src="wse/wse.nocache.js"></script>
+<!--
+We will use this string for mention this site in messages like: "Thanks for joining this site"
+Your can use another string and the message will looks like "Thanks for joining example.org"
+ -->
+<meta name="kune.default.site.commonname" content="this site" />
+<meta name="emite.httpBase" content="/http-bind/" />
+<meta name="emite.host" content="localhost" />
+<meta name="emite.searchHost" content="search.localhost" />
+<!--<meta name="emite.session" content="login" />-->
+<meta name="hablar.roomService" content="rooms.localhost" />
+<meta name="hablar.login" content="false" />
+<meta name="hablar.hasVCard" content="false" />
+<meta name="hablar.search" content="false" />
+<meta name="hablar.hasSound" content="false" />
+<meta name="hablar.hasCopyToClipboard" content="true" />
+<!--<meta name="hablar.hasLogger" content="true" />-->
+<meta name="hablar.hasSignals" content="false" />
+<meta name="hablar.roster" content="true" />
+<meta name="hablar.dockRoster" content="left" />
+<meta name="hablar.icons" content="alt" />
+<!-- <meta name="hablar.layout" content="tabs" /> -->
+<meta name="hablar.layout" content="accordion" />
+<meta name="hablar.inline" content="vertical_dock_div" />
+<meta name="hablar.width" content="550px" />
+<meta name="hablar.height" content="400px" />
+
+<meta name="hablar.avatarProvider" content="kune-avatars" />
+
+<link type="text/css" rel="stylesheet" href="css/reset.css">
+<link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-all.css">
+<link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-gray.css">
+<link type="text/css" rel="stylesheet"
+    href="ws/gxt-custom/css/gxt-op-common.css">
+<link type="text/css" rel="stylesheet" href="ws/kune-hablar.css">
+<link type="text/css" rel="stylesheet" href="ws/kune-chat.css">
+<link type="text/css" rel="stylesheet" href="ws/kune-common.css">
+<link type="text/css" rel="stylesheet" href="ws/kune-custom-common.css">
+<link type="text/css" rel="stylesheet"
+    href="ws/fontface/ubuntufontface.css">
+<link type="text/css" rel="stylesheet" href="ws/kune-message.css">
+<link type="text/css" rel="stylesheet"
+    href="others/splash/style/permalink.css">
+<link type="text/css" rel="stylesheet"
+    href="others/splash/style/stuff.css">
+<link type="text/css" rel="stylesheet"
+    href="others/splash/style/main.css">
+<link type="text/css" rel="stylesheet" href="ws/ws.css">
+<script type="text/javascript" src="others/splash/js/wave-rpc.js"></script>
+<script type="text/javascript" src="others/splash/js/gadget.js"></script>
+<script type="text/javascript" src="others/splash/js/rpc.js"></script>
+<script type="text/javascript" src="others/splash/js/common_client.js"></script>
+<script type="text/javascript"
+    src="others/splash/js/permalink_client.js"></script>
+<!-- Moved this to local wave-rpc.js <script type="text/javascript" -->
+<!--     src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script> -->
+
+
+<style type="text/css">
+.banner {
+  margin: 30px;
+}
+</style>
+<!--[if IE 6]>
+    <link type="text/css" rel="stylesheet" href="ie6.css">
+<![endif]-->
+</head>
+<body>
+    <!-- Banner for wave errors -->
+    <div class="banner" id="banner"></div>
+    <!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
+    <!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
+    <form id="loginrender" action="javascript:;" style="display: none;">
+        <input type="text" id="usernamerender" name="usernamerender"
+            value="" /> <input type="password" id="passwordrender"
+            name="passwordrender" value="" />
+    </form>
+    <!-- Remember user/pass (this part is used to send the values to the browser) -->
+    <form id="login" action="javascript:;" style="display: none;">
+        <input type="text" id="username" name="username" value="" /> <input
+            type="password" id="password" name="password" value="" />
+    </form>
+    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+    <noscript>
+        <div
+            style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+            Your web browser must have JavaScript enabled in order for this
+            application to display correctly.</div>
+    </noscript>
+
+    <!-- Include with:
+       <object data="http://kune.example.com/#!some-group.docs.1" type="text/html"  style="width:100%;height:100%; overflow: hidden;"></object>
+       -->
+</body>
+</html>

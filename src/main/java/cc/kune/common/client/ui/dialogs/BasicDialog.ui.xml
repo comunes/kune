@@ -1,15 +1,15 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-  xmlns:d="urn:import:cc.kune.common.client.ui.dialogs" 
+  xmlns:d="urn:import:cc.kune.common.client.ui.dialogs"
   xmlns:k="urn:import:cc.kune.common.client.ui"
   xmlns:g="urn:import:com.google.gwt.user.client.ui" >
   <ui:with field='res'
     type='cc.kune.common.client.resources.CommonResources'/>
   <g:VerticalPanel addStyleNames="k-dialog-outerp, k-bottom-10corners">
     <g:FlowPanel>
-      <d:CloseDialogButton ui:field="closeBtn" addStyleNames="k-dialog-close-btn-dialog"/>      
+      <d:CloseDialogButton ui:field="closeBtn" addStyleNames="k-dialog-close-btn-dialog"/>
       <g:FlowPanel>
-        <g:FlowPanel addStyleNames="k-dialog-innerp, k-3corners">
+        <g:FlowPanel ui:field="flow" addStyleNames="k-dialog-innerp, k-3corners">
           <k:IconLabel ui:field="title" addStyleNames="k-dialog-title, "/>
           <g:FlowPanel ui:field="vp" addStyleNames="kune-Margin-Medium-trbl"/>
           <g:VerticalPanel ui:field="bottomPanel" width="100%"></g:VerticalPanel>

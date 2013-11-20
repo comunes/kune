@@ -884,7 +884,9 @@
                 <!-- <exclude>**gxt**</exclude> -->
                 <!-- </excludes> -->
                 <includes>
-                  <include>${basedir}/target/kune-0.1.0-SNAPSHOT/ws/**</include>
+		  <!-- FIXME try use ${project.version } here -->
+                  <include>${basedir}/target/kune-0.3.0-SNAPSHOT/ws/**</include>
+                  <include>${basedir}/target/kune-0.3.0-SNAPSHOT/wse/**</include>
                   <include>${basedir}/src/main/webapp/**</include>
                 </includes>
               </unpackOptions>
@@ -895,7 +897,9 @@
               <directory>${basedir}</directory>
               <outputDirectory>/</outputDirectory>
               <includes>
-                <include>**/target/kune-0.1.0-SNAPSHOT/ws/**</include>
+		<!-- FIXME try use ${project.version } here -->
+                <include>**/target/kune-0.3.0-SNAPSHOT/ws/**</include>
+                <include>**/target/kune-0.3.0-SNAPSHOT/wse/**</include>
                 <include>**src/main/webapp**</include>
               </includes>
             </fileSet>
@@ -1170,6 +1174,7 @@
               </hostedWebapp>
               <modules>
                 <module>${project.groupId}.KuneProd</module>
+                <module>${project.groupId}.KuneEmbedProd</module>
               </modules>
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
@@ -1229,6 +1234,7 @@
               </hostedWebapp>
               <modules>
                 <module>${project.groupId}.KuneDev</module>
+                <module>${project.groupId}.KuneEmbedDev</module>
               </modules>
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>

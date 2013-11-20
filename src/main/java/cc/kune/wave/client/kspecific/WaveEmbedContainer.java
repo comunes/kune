@@ -20,45 +20,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 package cc.kune.wave.client.kspecific;
 
-import org.waveprotocol.wave.client.widget.common.ImplPanel;
-
-import cc.kune.common.client.log.Log;
-import cc.kune.wave.client.CustomStagesProvider;
-
-import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 
 /**
- * The Class WaveClientUtils.
+ * The Class WaveEmbedContainer.
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class WaveClientUtils {
+public class WaveEmbedContainer implements HasWaveContainer {
+
+  /** The panel. */
+  private final FlowPanel panel;
 
   /**
-   * Clear.
-   * 
-   * @param wave
-   *          the wave
-   * @param waveHolder
-   *          the wave holder
-   * @param parent
-   *          the parent
+   * Instantiates a new wave embed panel.
    */
-  public static void clear(CustomStagesProvider wave, final ImplPanel waveHolder, final HasWidgets parent) {
-    if (wave != null) {
-      try {
-        wave.destroy();
-      } catch (final RuntimeException e) {
-        // When editing: java.lang.RuntimeException: Component not found: MENU
-        Log.error("Error clearing wave panel", e);
-      }
-      wave = null;
-    }
-    if (waveHolder != null && waveHolder.isAttached()) {
-      waveHolder.removeFromParent();
-      parent.remove(waveHolder);
-    }
+  public WaveEmbedContainer() {
+    panel = new FlowPanel();
   }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.wave.client.kspecific.HasWaveWidget#getForIsWidget()
+   */
+  @Override
+  public ForIsWidget getForIsWidget() {
+    return panel;
+  }
+
 }

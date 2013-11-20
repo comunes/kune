@@ -20,45 +20,40 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 package cc.kune.wave.client.kspecific;
 
-import org.waveprotocol.wave.client.widget.common.ImplPanel;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
-import cc.kune.common.client.log.Log;
-import cc.kune.wave.client.CustomStagesProvider;
-
-import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
+import com.google.inject.Inject;
 
 /**
- * The Class WaveClientUtils.
+ * The Class WaveUserSpaceContainer.
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class WaveClientUtils {
+public class WaveUserSpaceContainer implements HasWaveContainer {
+
+  private final GSpaceArmor armor;
 
   /**
-   * Clear.
-   * 
-   * @param wave
-   *          the wave
-   * @param waveHolder
-   *          the wave holder
-   * @param parent
-   *          the parent
+   * Instantiates a new wave embed panel.
    */
-  public static void clear(CustomStagesProvider wave, final ImplPanel waveHolder, final HasWidgets parent) {
-    if (wave != null) {
-      try {
-        wave.destroy();
-      } catch (final RuntimeException e) {
-        // When editing: java.lang.RuntimeException: Component not found: MENU
-        Log.error("Error clearing wave panel", e);
-      }
-      wave = null;
-    }
-    if (waveHolder != null && waveHolder.isAttached()) {
-      waveHolder.removeFromParent();
-      parent.remove(waveHolder);
-    }
+
+  @Inject
+  public WaveUserSpaceContainer(final GSpaceArmor armor) {
+    this.armor = armor;
   }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.wave.client.kspecific.HasWaveWidget#getForIsWidget()
+   */
+  @Override
+  public ForIsWidget getForIsWidget() {
+    return armor.getUserSpace();
+  }
+
 }

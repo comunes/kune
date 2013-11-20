@@ -91,7 +91,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface KuneGinjector.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @GinModules({ KuneGinModule.class, CoreGinModule.class, WaveGinModule.class, PSpaceGinModule.class,
@@ -109,98 +109,98 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
 
   /**
    * Gets the buddies and participation presenter.
-   *
+   * 
    * @return the buddies and participation presenter
    */
   AsyncProvider<UserSNPresenter> getBuddiesAndParticipationPresenter();
 
   /**
    * Gets the cookies manager.
-   *
+   * 
    * @return the cookies manager
    */
   AsyncProvider<CookiesManager> getCookiesManager();
 
   /**
    * Gets the core parts.
-   *
+   * 
    * @return the core parts
    */
   CoreParts getCoreParts();
 
   /**
    * Gets the core presenter.
-   *
+   * 
    * @return the core presenter
    */
   Provider<CorePresenter> getCorePresenter();
 
   /**
    * Gets the entity header presenter.
-   *
+   * 
    * @return the entity header presenter
    */
   AsyncProvider<EntityHeaderPresenter> getEntityHeaderPresenter();
 
   /**
    * Gets the error handler.
-   *
+   * 
    * @return the error handler
    */
   ErrorHandler getErrorHandler();
 
   /**
    * Gets the errors dialog.
-   *
+   * 
    * @return the errors dialog
    */
   ErrorsDialog getErrorsDialog();
 
   /**
    * Gets the event bus.
-   *
+   * 
    * @return the event bus
    */
   EventBus getEventBus();
 
   /**
    * Gets the event logger.
-   *
+   * 
    * @return the event logger
    */
-  EventBusWithLogging getEventLogger();
+  EventBusWithLogging getEventBusWithLogger();
 
   /**
    * Gets the global shortcut register.
-   *
+   * 
    * @return the global shortcut register
    */
   GlobalShortcutRegister getGlobalShortcutRegister();
 
   /**
    * Gets the group members presenter.
-   *
+   * 
    * @return the group members presenter
    */
   AsyncProvider<GroupSNPresenter> getGroupMembersPresenter();
 
   /**
    * Gets the gui provider.
-   *
+   * 
    * @return the gui provider
    */
   GuiProvider getGuiProvider();
 
   /**
    * Gets the gwt gui provider.
-   *
+   * 
    * @return the gwt gui provider
    */
   GwtGuiProvider getGwtGuiProvider();
 
   /**
    * Gets the h space parts.
-   *
+   * 
    * @return the h space parts
    */
   HSpaceParts getHSpaceParts();
@@ -209,147 +209,147 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
 
   /**
    * Gets the h space presenter.
-   *
+   * 
    * @return the h space presenter
    */
   AsyncProvider<HSpacePresenter> getHSpacePresenter();
 
   /**
    * Gets the i18n.
-   *
+   * 
    * @return the i18n
    */
   I18nTranslationService getI18n();
 
   /**
    * Gets the kune state manager.
-   *
+   * 
    * @return the kune state manager
    */
   StateManager getKuneStateManager();
 
   /**
    * Gets the new group presenter.
-   *
+   * 
    * @return the new group presenter
    */
   AsyncProvider<NewGroupPresenter> getNewGroupPresenter();
 
   /**
    * Gets the on app start factory.
-   *
+   * 
    * @return the on app start factory
    */
   OnAppStartFactory getOnAppStartFactory();
 
   /**
    * Gets the place manager.
-   *
+   * 
    * @return the place manager
    */
   PlaceManager getPlaceManager();
 
   /**
    * Gets the p space parts.
-   *
+   * 
    * @return the p space parts
    */
   PSpaceParts getPSpaceParts();
 
   /**
    * Gets the p space presenter.
-   *
+   * 
    * @return the p space presenter
    */
   AsyncProvider<PSpacePresenter> getPSpacePresenter();
 
   /**
    * Gets the register presenter.
-   *
+   * 
    * @return the register presenter
    */
   AsyncProvider<RegisterPresenter> getRegisterPresenter();
 
   /**
    * Gets the session expiration manager.
-   *
+   * 
    * @return the session expiration manager
    */
   SessionExpirationManager getSessionExpirationManager();
 
   /**
    * Gets the sign in presenter.
-   *
+   * 
    * @return the sign in presenter
    */
   AsyncProvider<SignInPresenter> getSignInPresenter();
 
   /**
    * Gets the sitebar actions presenter.
-   *
+   * 
    * @return the sitebar actions presenter
    */
   AsyncProvider<SitebarActionsPresenter> getSitebarActionsPresenter();
 
   /**
    * Gets the site logo.
-   *
+   * 
    * @return the site logo
    */
   SiteLogo getSiteLogo();
 
   /**
    * Gets the site token listeners.
-   *
+   * 
    * @return the site token listeners
    */
   SiteTokenListeners getSiteTokenListeners();
 
   /**
    * Gets the spaces tab presenter.
-   *
+   * 
    * @return the spaces tab presenter
    */
   AsyncProvider<SpaceSelectorPresenter> getSpacesTabPresenter();
 
   /**
    * Gets the spiner presenter.
-   *
+   * 
    * @return the spiner presenter
    */
   AsyncProvider<SpinerPresenter> getSpinerPresenter();
 
   /**
    * Gets the subtitles presenter.
-   *
+   * 
    * @return the subtitles presenter
    */
   AsyncProvider<SubtitlesManager> getSubtitlesPresenter();
 
   /**
    * Gets the token matcher.
-   *
+   * 
    * @return the token matcher
    */
   TokenMatcher getTokenMatcher();
 
   /**
    * Gets the user confirm presenter.
-   *
+   * 
    * @return the user confirm presenter
    */
   AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
 
   /**
    * Gets the wave parts.
-   *
+   * 
    * @return the wave parts
    */
   WaveParts getWaveParts();
 
   /**
    * Gets the xml actions parser.
-   *
+   * 
    * @return the xml actions parser
    */
   XMLActionsParser getXmlActionsParser();

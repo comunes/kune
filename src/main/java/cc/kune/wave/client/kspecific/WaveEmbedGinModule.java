@@ -22,43 +22,33 @@
  */
 package cc.kune.wave.client.kspecific;
 
-import org.waveprotocol.wave.client.widget.common.ImplPanel;
+import cc.kune.core.client.ExtendedGinModule;
+import cc.kune.wave.client.KuneWaveProfileManager;
+import cc.kune.wave.client.WebClient;
 
-import cc.kune.common.client.log.Log;
-import cc.kune.wave.client.CustomStagesProvider;
-
-import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.inject.Singleton;
 
 /**
- * The Class WaveClientUtils.
+ * The Class WaveGinModule.
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class WaveClientUtils {
-
-  /**
-   * Clear.
+public class WaveEmbedGinModule extends ExtendedGinModule {
+  /*
+   * (non-Javadoc)
    * 
-   * @param wave
-   *          the wave
-   * @param waveHolder
-   *          the wave holder
-   * @param parent
-   *          the parent
+   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
-  public static void clear(CustomStagesProvider wave, final ImplPanel waveHolder, final HasWidgets parent) {
-    if (wave != null) {
-      try {
-        wave.destroy();
-      } catch (final RuntimeException e) {
-        // When editing: java.lang.RuntimeException: Component not found: MENU
-        Log.error("Error clearing wave panel", e);
-      }
-      wave = null;
-    }
-    if (waveHolder != null && waveHolder.isAttached()) {
-      waveHolder.removeFromParent();
-      parent.remove(waveHolder);
-    }
+  @Override
+  protected void configure() {
+    bind(HasWaveContainer.class).to(WaveEmbedContainer.class).in(Singleton.class);
+    s(AurorisColorPicker.class);
+    // s(WebClientMock.class);
+    s(WebClient.class);
+    // s(WaveClientProvider.class);
+    s(WaveClientManager.class);
+    s(WaveStatusIndicator.class);
+    // eagle(WaveParts.class);
+    s(KuneWaveProfileManager.class);
   }
 }
