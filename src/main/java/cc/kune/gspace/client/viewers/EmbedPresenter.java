@@ -28,15 +28,16 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
-import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -45,9 +46,13 @@ import cc.kune.core.shared.dto.StateNoContentDTO;
 import cc.kune.wave.client.kspecific.WaveClientManager;
 import cc.kune.wave.client.kspecific.WaveClientProvider;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
@@ -76,6 +81,11 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   public interface EmbedView extends WaveViewerView {
   }
 
+  private final TokenMatcher matcher;
+  private final ContentServiceAsync service;
+  private final Session session;
+  private final Provider<EmbedSitebar> sitebar;
+
   /**
    * Instantiates a new embed presenter.
    * 
@@ -98,65 +108,85 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
    * @param session
    *          the session
    */
+  private Timer timer;
+
   @Inject
   public EmbedPresenter(final EventBus eventBus, final EmbedView view, final EmbedProxy proxy,
       final SiteServiceAsync siteService, final ContentServiceAsync service,
       final WaveClientManager waveClientManager, final WaveClientProvider waveClient,
-      final TokenMatcher matcher, final Session session) {
+      final I18nUITranslationService i18n, final TokenMatcher matcher, final Session session,
+      final Provider<EmbedSitebar> sitebar) {
     super(eventBus, view, proxy);
+    this.service = service;
+    this.matcher = matcher;
+    this.session = session;
+    this.sitebar = sitebar;
+    Log.info("Started embed presenter");
     matcher.init(GwtWaverefEncoder.INSTANCE);
-    final String currentHash = HistoryUtils.undoHashbang(History.getToken());
+    i18n.setAskChangeToYourLanguage(false);
     siteService.getInitData(session.getUserHash(), new AsyncCallbackSimple<InitDataDTO>() {
-
       @Override
       public void onSuccess(final InitDataDTO initData) {
         session.setInitData(initData);
         session.setCurrentUserInfo(initData.getUserInfo(), null);
-        if (matcher.isGroupToken(currentHash)) {
-          // Ok is a token like group.tool.number
-          final StateToken currentToken = new StateToken(currentHash);
-          service.getContent(session.getUserHash(), currentToken,
-              new AsyncCallbackSimple<StateAbstractDTO>() {
-                @Override
-                public void onSuccess(final StateAbstractDTO state) {
-                  if (state.getStateToken().equals(currentToken)) {
-                    onGetContentSucessful(session, state);
-                  } else {
-                    // getContent returns def content if content not found
-                    notFound();
-                  }
-                }
-              });
-        } else {
-          if (matcher.isWaveToken(currentHash)) {
-            service.getContentByWaveRef(session.getUserHash(), currentHash,
-                new AsyncCallbackSimple<StateAbstractDTO>() {
-                  @Override
-                  public void onSuccess(final StateAbstractDTO state) {
-                    if (!(state instanceof StateNoContentDTO)) {
-                      onGetContentSucessful(session, state);
-                    } else {
-                      // getContent returns def content if content not found
-                      notFound();
-                    }
-                  }
-                });
-          } else {
-            // Do something
-            notFound();
+        getContentFromHash();
+        // In user sign-in... get again content
+        timer = new Timer() {
+          @Override
+          public void run() {
+            getContentFromHash();
           }
-          NotifyUser.hideProgress();
-        }
+        };
+
+        session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
+          @Override
+          public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+            timer.schedule(1000);
+          }
+        });
       }
     });
-    session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
 
-      @Override
-      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-        // TODO Auto-generated method stub
+  }
 
+  private void getContentFromHash() {
+    final String currentHash = HistoryUtils.undoHashbang(History.getToken());
+    if (matcher.isGroupToken(currentHash)) {
+      // Ok is a token like group.tool.number
+      final StateToken currentToken = new StateToken(currentHash);
+      service.getContent(session.getUserHash(), currentToken,
+          new AsyncCallbackSimple<StateAbstractDTO>() {
+            @Override
+            public void onSuccess(final StateAbstractDTO state) {
+              NotifyUser.hideProgress();
+              if (state.getStateToken().equals(currentToken)) {
+                onGetContentSucessful(session, state);
+              } else {
+                // getContent returns def content if content not found
+                notFound();
+              }
+            }
+          });
+    } else {
+      if (matcher.isWaveToken(currentHash)) {
+        service.getContentByWaveRef(session.getUserHash(), currentHash,
+            new AsyncCallbackSimple<StateAbstractDTO>() {
+              @Override
+              public void onSuccess(final StateAbstractDTO state) {
+                NotifyUser.hideProgress();
+                if (!(state instanceof StateNoContentDTO)) {
+                  onGetContentSucessful(session, state);
+                } else {
+                  // getContent returns def content if content not found
+                  notFound();
+                }
+              }
+            });
+      } else {
+        // Do something
+        notFound();
       }
-    });
+    }
   }
 
   /**
@@ -169,13 +199,28 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   private void onGetContentSucessful(final Session session, final StateAbstractDTO state) {
     getView().clear();
     final StateContentDTO stateContent = (StateContentDTO) state;
-    final AccessRights rights = stateContent.getContentRights();
-    Log.info("Content rights: " + rights);
-    if (session.isLogged() && rights.isEditable()) {
+    // final AccessRights rights = stateContent.getContentRights();
+    // Log.info("Content rights: " + rights);
+
+    if (session.isLogged() && stateContent.isParticipant()) {
       getView().setEditableContent(stateContent);
     } else {
       getView().setContent(stateContent);
     }
+
+    // FIXME use GWTP here
+    GWT.runAsync(new RunAsyncCallback() {
+      @Override
+      public void onFailure(final Throwable reason) {
+        // By now, do nothing
+      }
+
+      @Override
+      public void onSuccess() {
+        sitebar.get();
+      }
+
+    });
   }
 
   /*

@@ -47,14 +47,14 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptGeneralPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implements UserOptGeneral {
 
   /** The ask change language. */
   private boolean askChangeLanguage = true;
-  
+
   /** The user service. */
   private final Provider<UserServiceAsync> userService;
 
@@ -63,14 +63,21 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
 
   /**
    * Instantiates a new user opt general presenter.
-   *
-   * @param session the session
-   * @param stateManager the state manager
-   * @param eventBus the event bus
-   * @param i18n the i18n
-   * @param entityOptions the entity options
-   * @param userService the user service
-   * @param view the view
+   * 
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param eventBus
+   *          the event bus
+   * @param i18n
+   *          the i18n
+   * @param entityOptions
+   *          the entity options
+   * @param userService
+   *          the user service
+   * @param view
+   *          the view
    */
   @Inject
   public UserOptGeneralPresenter(final Session session, final StateManager stateManager,
@@ -88,16 +95,24 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#applicable()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#applicable
+   * ()
    */
   @Override
   protected boolean applicable() {
     return session.isLogged();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#init(cc.kune.gspace.client.options.general.EntityOptGeneralView)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#init(cc
+   * .kune.gspace.client.options.general.EntityOptGeneralView)
    */
   @Override
   public void init(final EntityOptGeneralView view) {
@@ -120,7 +135,9 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.general.UserOptGeneral#isVisible()
    */
   @Override
@@ -128,8 +145,11 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     return view.isRendered();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#setState()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#setState()
    */
   @Override
   protected void setState() {
@@ -142,7 +162,9 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     userView.setEmail(currentUser.getEmail());
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.general.UserOptGeneral#update()
    */
   @Override
@@ -150,8 +172,12 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
     setState();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#updateInServer()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.EntityOptGeneralPresenter#updateInServer
+   * ()
    */
   @Override
   protected void updateInServer() {
@@ -173,7 +199,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
               stateManager.setRetrievedStateAndGo(result);
               sendChangeEntityEvent(currentUser.getShortName(), longName);
               if (askChangeLanguage) {
-                i18n.changeToLanguageIfNecessary(lang.getCode(), i18n.t(lang.getEnglishName()), true,
+                i18n.changeToLanguageIfNecessary(lang.getCode(), i18n.t(lang.getEnglishName()),
                     new I18nLanguageChangeNeeded() {
                       @Override
                       public void onChangeNeeded() {

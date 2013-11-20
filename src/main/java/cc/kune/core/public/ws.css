@@ -457,7 +457,7 @@ div.gwt-TabLayoutPanelTabInner img {
   background-color: #E0E0E0;
 }
 
-.k-publicspace-mask { /*	background-color: #fff !important;
+.k-publicspace-mask { /*  background-color: #fff !important;
   kfilter: alpha(opacity =       68) !important;
   -moz-opacity: 0.68 !important;
   -khtml-opacity: 0.68 !important;
@@ -1377,4 +1377,19 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
   font-size: 16px;
   font-family: kuneicons;
   font-weight: normal;
+}
+
+/* Embeded waves */
+
+.k-embed-sitebar {
+  border: 1px solid #ACACAC !important;
+  background-color: #FFF;
+  -moz-border-radius-bottomleft: 5px;
+  border-bottom-left-radius: 5px;
+  -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  line-height: 11px;
+  font-size: 14px;
 }

@@ -24,8 +24,10 @@
 package cc.kune.core.client.embed;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
+import cc.kune.common.shared.utils.Url;
 import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
+import cc.kune.core.client.state.Session;
 
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
@@ -39,13 +41,16 @@ public class EmbedSitebar {
   private final ActionFlowPanel toolbar;
 
   @Inject
-  public EmbedSitebar(final ActionFlowPanel toolbar, final SitebarSignInLink signInLink,
-      final SitebarSignOutLink signOutLink) {
+  public EmbedSitebar(final Session session, final ActionFlowPanel toolbar,
+      final SitebarSignInLink signInLink, final SitebarSignOutLink signOutLink) {
     this.toolbar = toolbar;
     signInLink.detachFromParent();
     signOutLink.detachFromParent();
+    final String sitelogo = session.getInitData().getSiteLogoUrl();
     toolbar.add(signInLink);
     toolbar.add(signOutLink);
+    signInLink.withIcon(new Url(sitelogo));
+    signOutLink.withIcon(new Url(sitelogo));
     popup = new PopupPanel(false, false);
     popup.setWidget(toolbar);
     popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
@@ -54,8 +59,9 @@ public class EmbedSitebar {
         setPopupPosition();
       }
     });
-    popup.setStyleName("oc-user-msg-popup");
     popup.setAnimationEnabled(false);
+    popup.setStyleName("oc-user-msg-popup");
+    popup.addStyleName("k-embed-sitebar");
     Window.addResizeHandler(new ResizeHandler() {
       @Override
       public void onResize(final ResizeEvent event) {
@@ -65,8 +71,6 @@ public class EmbedSitebar {
   }
 
   private void setPopupPosition() {
-    popup.setPopupPosition(Window.getClientWidth() - toolbar.getOffsetWidth() - 10,
-        toolbar.getOffsetHeight());
+    popup.setPopupPosition(Window.getClientWidth() - toolbar.getOffsetWidth() - 20, 0);
   }
-
 }
