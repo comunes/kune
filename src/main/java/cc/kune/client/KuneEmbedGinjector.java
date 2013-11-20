@@ -27,12 +27,14 @@ import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.EmbedCoreGinModule;
+import cc.kune.core.client.auth.RegisterPresenter;
+import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.cookies.CookiesManager;
+import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.ErrorsDialog;
-import cc.kune.core.client.state.SessionExpirationManager;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
@@ -69,6 +71,8 @@ public interface KuneEmbedGinjector extends Ginjector, HablarGinjector {
   AsyncProvider<CookiesManager> getCookiesManager();
 
   Provider<EmbedPresenter> getEmbedPresenter();
+
+  EmbedSitebar getEmbedSitebar();
 
   /**
    * Gets the error handler.
@@ -127,11 +131,18 @@ public interface KuneEmbedGinjector extends Ginjector, HablarGinjector {
   PlaceManager getPlaceManager();
 
   /**
-   * Gets the session expiration manager.
+   * Gets the register presenter.
    * 
-   * @return the session expiration manager
+   * @return the register presenter
    */
-  SessionExpirationManager getSessionExpirationManager();
+  AsyncProvider<RegisterPresenter> getRegisterPresenter();
+
+  /**
+   * Gets the sign in presenter.
+   * 
+   * @return the sign in presenter
+   */
+  AsyncProvider<SignInPresenter> getSignInPresenter();
 
   /**
    * Gets the site token listeners.

@@ -51,53 +51,59 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitebarSignOutLink.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarSignOutLink extends ButtonDescriptor {
 
   /**
    * The Class BeforeSignOut.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class BeforeSignOut extends BeforeActionCollection {
-    
+
     /** The Constant serialVersionUID. */
     private static final long serialVersionUID = 2326033703822323868L;
   }
 
   /**
    * The Class SitebarSignOutAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class SitebarSignOutAction extends AbstractExtendedAction {
 
     /** The before sign out. */
     private final BeforeSignOut beforeSignOut;
-    
+
     /** The event bus. */
     private final EventBus eventBus;
-    
+
     /** The session. */
     private final Session session;
-    
+
     /** The user service. */
     private final Provider<UserServiceAsync> userService;
-    
+
     /** The wave auth. */
     private final WaveClientSimpleAuthenticator waveAuth;
 
     /**
      * Instantiates a new sitebar sign out action.
-     *
-     * @param eventBus the event bus
-     * @param i18n the i18n
-     * @param beforeSignOut the before sign out
-     * @param userService the user service
-     * @param session the session
-     * @param waveAuth the wave auth
+     * 
+     * @param eventBus
+     *          the event bus
+     * @param i18n
+     *          the i18n
+     * @param beforeSignOut
+     *          the before sign out
+     * @param userService
+     *          the user service
+     * @param session
+     *          the session
+     * @param waveAuth
+     *          the wave auth
      */
     @Inject
     public SitebarSignOutAction(final EventBus eventBus, final I18nTranslationService i18n,
@@ -112,8 +118,12 @@ public class SitebarSignOutLink extends ButtonDescriptor {
       putValue(Action.NAME, i18n.t("Sign out"));
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -149,8 +159,9 @@ public class SitebarSignOutLink extends ButtonDescriptor {
 
     /**
      * On logout fail.
-     *
-     * @param caught the caught
+     * 
+     * @param caught
+     *          the caught
      */
     private void onLogoutFail(final Throwable caught) {
       eventBus.fireEvent(new ProgressHideEvent());
@@ -164,22 +175,27 @@ public class SitebarSignOutLink extends ButtonDescriptor {
     }
 
   }
-  
+
   /** The Constant SITE_SIGN_OUT. */
   public static final String SITE_SIGN_OUT = "k-ssolp-lb";
 
   /**
    * Instantiates a new sitebar sign out link.
-   *
-   * @param action the action
-   * @param eventBus the event bus
-   * @param errorHandler the error handler
-   * @param session the session
-   * @param sitebarActions the sitebar actions
+   * 
+   * @param action
+   *          the action
+   * @param eventBus
+   *          the event bus
+   * @param errorHandler
+   *          the error handler
+   * @param session
+   *          the session
+   * @param sitebarActions
+   *          the sitebar actions
    */
   @Inject
   public SitebarSignOutLink(final SitebarSignOutAction action, final EventBus eventBus,
-      final ErrorHandler errorHandler, final Session session, final SitebarActions sitebarActions) {
+      final ErrorHandler errorHandler, final Session session) {
     super(action);
     setId(SITE_SIGN_OUT);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,

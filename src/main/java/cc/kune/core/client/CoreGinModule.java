@@ -76,6 +76,7 @@ import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
+import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.MyGroupsMenu;
 import cc.kune.core.client.sitebar.SiteUserOptions;
@@ -84,6 +85,7 @@ import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.sitebar.SitebarActionsPanel;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter;
 import cc.kune.core.client.sitebar.SitebarNewGroupLink;
+import cc.kune.core.client.sitebar.SitebarSignInAction;
 import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink.BeforeSignOut;
@@ -216,6 +218,8 @@ public class CoreGinModule extends ExtendedGinModule {
 
     bind(LoginRememberManager.class).to(LoginRememberManagerImpl.class).in(Singleton.class);
     bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
+    bind(AbstractSignInAction.class).to(SitebarSignInAction.class).in(Singleton.class);
+
     bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
     bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);
     bind(EntityHeader.class).to(EntityHeaderPresenter.class).in(Singleton.class);

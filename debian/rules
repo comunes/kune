@@ -95,6 +95,7 @@ install/kune::
 # FIXME find another better way to do this (and remove rsync build dep)
 	rsync -aC --delete $(CURDIR)/src/main/webapp/* $(KUNE)/webapp
 	rsync -aC --delete $(TARGETC)/ws/* $(KUNE)/webclient/ws
+	rsync -aC --delete $(TARGETC)/wse/* $(KUNE)/webclient/wse
 
 #get-orig-source:
 #        sh -e debian/orig-tar.sh

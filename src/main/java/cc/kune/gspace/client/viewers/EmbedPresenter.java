@@ -28,6 +28,8 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
@@ -110,7 +112,6 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
       public void onSuccess(final InitDataDTO initData) {
         session.setInitData(initData);
         session.setCurrentUserInfo(initData.getUserInfo(), null);
-        NotifyUser.hideProgress();
         if (matcher.isGroupToken(currentHash)) {
           // Ok is a token like group.tool.number
           final StateToken currentToken = new StateToken(currentHash);
@@ -144,10 +145,18 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
             // Do something
             notFound();
           }
+          NotifyUser.hideProgress();
         }
       }
     });
+    session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
 
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        // TODO Auto-generated method stub
+
+      }
+    });
   }
 
   /**

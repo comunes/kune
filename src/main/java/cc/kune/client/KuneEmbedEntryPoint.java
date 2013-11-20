@@ -23,6 +23,7 @@
 package cc.kune.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.RunAsyncCallback;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
 /**
@@ -42,21 +43,22 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
   protected void onContinueModuleLoad() {
     ginjector.getSpinerPresenter();
 
-    ginjector.getSessionExpirationManager();
     ginjector.getEventBusWithLogger();
-    // ginjector.getErrorsDialog();
     // ginjector.getCorePresenter().get().forceReveal();
-    // ginjector.getStateManager();
     ginjector.getGwtGuiProvider();
-
-    // ginjector.getSiteLogo();
-    // ginjector.getChatClient();
-    // ginjector.getCoreParts();
-    // ginjector.getGSpaceParts();
-    // ginjector.getPSpaceParts();
-    // ginjector.getHSpaceParts();
     ginjector.getEmbedPresenter().get().forceReveal();
-    // ginjector.getContentViewerSelector().init();
+    GWT.runAsync(new RunAsyncCallback() {
+      @Override
+      public void onFailure(final Throwable reason) {
+        // By now, do nothing
+      }
+
+      @Override
+      public void onSuccess() {
+        ginjector.getEmbedSitebar();
+      }
+
+    });
   }
 
   /**

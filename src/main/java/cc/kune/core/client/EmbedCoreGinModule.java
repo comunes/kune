@@ -37,9 +37,22 @@ import cc.kune.common.shared.i18n.HasRTL;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
+import cc.kune.core.client.auth.LoginRememberManager;
+import cc.kune.core.client.auth.LoginRememberManagerImpl;
+import cc.kune.core.client.auth.Register;
+import cc.kune.core.client.auth.RegisterPanel;
+import cc.kune.core.client.auth.RegisterPresenter;
+import cc.kune.core.client.auth.RegisterPresenter.RegisterView;
+import cc.kune.core.client.auth.SignIn;
+import cc.kune.core.client.auth.SignInPanel;
+import cc.kune.core.client.auth.SignInPresenter;
+import cc.kune.core.client.auth.SignInPresenter.SignInView;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
+import cc.kune.core.client.embed.EmbedSignInAction;
+import cc.kune.core.client.embed.EmbedSitebar;
+import cc.kune.core.client.embed.StateManagerMock;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -48,14 +61,15 @@ import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPanel;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.SitebarSignOutLink.BeforeSignOut;
 import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SessionExpirationManager;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateTokenUtils;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.ContentCacheDefault;
@@ -125,7 +139,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     bindPresenter(EmbedPresenter.class, EmbedPresenter.EmbedView.class, EmbedPanel.class,
         EmbedPresenter.EmbedProxy.class);
     s(EmbedPresenter.class);
-
+    s(EmbedSitebar.class);
     // bindPresenter(SpaceSelectorPresenter.class,
     // SpaceSelectorPresenter.SpaceSelectorView.class,
     // SpaceSelectorPanel.class,
@@ -148,20 +162,22 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     // bindPresenter(EntityHeaderPresenter.class,
     // EntityHeaderPresenter.EntityHeaderView.class,
     // EntityHeaderPanel.class, EntityHeaderPresenter.EntityHeaderProxy.class);
-    // bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class,
-    // SignInPresenter.SignInProxy.class);
-    // bindPresenter(RegisterPresenter.class, RegisterView.class,
-    // RegisterPanel.class,
-    // RegisterPresenter.RegisterProxy.class);
+    bindPresenter(SignInPresenter.class, SignInView.class, SignInPanel.class,
+        SignInPresenter.SignInProxy.class);
+    bindPresenter(RegisterPresenter.class, RegisterView.class, RegisterPanel.class,
+        RegisterPresenter.RegisterProxy.class);
     bindPresenter(UserConfirmPresenter.class, UserConfirmPresenter.UserConfirmView.class,
         UserConfirmPanel.class, UserConfirmPresenter.UserConfirmProxy.class);
     // bindPresenter(SubtitlesManager.class,
     // SubtitlesManager.SubtitlesView.class, SubtitlesWidget.class,
     // SubtitlesManager.SubtitlesProxy.class);
 
-    // bind(LoginRememberManager.class).to(LoginRememberManagerImpl.class).in(Singleton.class);
-    // bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
-    // bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
+    bind(LoginRememberManager.class).to(LoginRememberManagerImpl.class).in(Singleton.class);
+    bind(SignIn.class).to(SignInPresenter.class).in(Singleton.class);
+
+    bind(AbstractSignInAction.class).to(EmbedSignInAction.class).in(Singleton.class);
+
+    bind(Register.class).to(RegisterPresenter.class).in(Singleton.class);
     // bind(NewGroup.class).to(NewGroupPresenter.class).in(Singleton.class);
     // bind(EntityHeader.class).to(EntityHeaderPresenter.class).in(Singleton.class);
 
@@ -180,11 +196,11 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     // Core App
     bind(Session.class).to(SessionDefault.class).in(Singleton.class);
     requestStaticInjection(StateTokenUtils.class);
-    s(SessionExpirationManager.class);
+    // s(SessionExpirationManager.class);
     s(ErrorHandler.class);
     requestStaticInjection(AsyncCallbackSimple.class);
-    // s(StateManagerDefault.class);
-    // bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
+    s(StateManagerMock.class);
+    bind(StateManager.class).to(StateManagerMock.class).in(Singleton.class);
     // s(AccessRightsClientManager.class);
     bind(ContentCache.class).to(ContentCacheDefault.class).in(Singleton.class);
     bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
