@@ -27,6 +27,7 @@ import org.waveprotocol.box.webclient.search.Search;
 import org.waveprotocol.box.webclient.search.Search.Listener;
 import org.waveprotocol.box.webclient.search.SimpleSearch;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.core.client.events.InboxUnreadUpdatedEvent;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.events.SndClickEvent;
@@ -205,6 +206,7 @@ public class InboxCountPresenter {
     view.setTotal(total);
     final boolean show = session.isLogged() && total != Search.UNKNOWN_SIZE && total > 0;
     view.showCount(show);
+    Log.info("Inbox count: Previous total: " + currentTotal + ", now total: " + total);
     final boolean greater = total > currentTotal;
     if (show && greater) {
       sendNoticeToUser();
@@ -222,6 +224,9 @@ public class InboxCountPresenter {
           continue;
         }
         total += digest.getUnreadCount();
+      } else {
+        // We are doing a search, so better not to update
+        return;
       }
     }
     setTotal(total);
