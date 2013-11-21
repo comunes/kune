@@ -50,8 +50,8 @@ import cc.kune.core.client.auth.SignInPresenter.SignInView;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
-import cc.kune.core.client.embed.SignInEmbedAction;
 import cc.kune.core.client.embed.EmbedSitebar;
+import cc.kune.core.client.embed.SignInEmbedAction;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
 import cc.kune.core.client.i18n.I18nUITranslationService;
@@ -78,6 +78,7 @@ import cc.kune.core.client.state.impl.SessionDefault;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.gspace.client.viewers.EmbedPanel;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
+import cc.kune.gspace.client.viewers.EmbedRootPresenter;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Singleton;
@@ -105,7 +106,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
 
     // gwtplatform
     bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
-    bind(RootPresenter.class).asEagerSingleton();
+    bind(RootPresenter.class).to(EmbedRootPresenter.class).asEagerSingleton();
     bind(PlaceManager.class).to(KunePlaceManager.class).in(Singleton.class);
 
     s(I18nUITranslationService.class);
