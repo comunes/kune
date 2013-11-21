@@ -123,7 +123,6 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     this.sitebar = sitebar;
     Log.info("Started embed presenter");
     matcher.init(GwtWaverefEncoder.INSTANCE);
-    i18n.setAskChangeToYourLanguage(false);
     siteService.getInitData(session.getUserHash(), new AsyncCallbackSimple<InitDataDTO>() {
       @Override
       public void onSuccess(final InitDataDTO initData) {

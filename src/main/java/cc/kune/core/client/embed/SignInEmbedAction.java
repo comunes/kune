@@ -61,10 +61,8 @@ public class SignInEmbedAction extends AbstractSignInAction {
     this.session = session;
     this.signInProv = signIn;
     putValue(Action.NAME, i18n.t("Sign in"));
-    putValue(
-        Action.TOOLTIP,
-        i18n.t("Please sign in or register to get full access to [%s] tools and contents",
-            i18n.getSiteCommonName()));
+    putValue(Action.TOOLTIP,
+        i18n.t("Please sign in to get access to [%s] and this document", i18n.getSiteCommonName()));
   }
 
   /*
@@ -80,6 +78,7 @@ public class SignInEmbedAction extends AbstractSignInAction {
       final String siteOnOverLogo = session.getInitData().getSiteLogoUrlOnOver();
       signIn = signInProv.get();
       signIn.setHeaderLogo(siteOnOverLogo);
+      signIn.setAskForLanguageChange(false);
     }
     signIn.showSignInDialog();
   }

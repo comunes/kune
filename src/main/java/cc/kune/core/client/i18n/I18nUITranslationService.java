@@ -81,8 +81,6 @@ public class I18nUITranslationService extends I18nTranslationService {
     void onChangeNotNeeded();
   }
 
-  private boolean askChangeToYourLanguage = true;
-
   /** The current lang. */
   private I18nLanguageDTO currentLang;
 
@@ -165,9 +163,9 @@ public class I18nUITranslationService extends I18nTranslationService {
             Log.info("Workspace adaptation to server proposed language: " + currentLang.getEnglishName()
                 + ", isRTL: " + currentLang.getDirection() + " use properties: "
                 + shouldIuseProperties());
-            askChangeToYourLanguage = false;
+
             changeToLanguageIfNecessary(getCurrentGWTlanguage(), currentLang.getCode(),
-                currentLang.getEnglishName(), new I18nLanguageChangeNeeded() {
+                currentLang.getEnglishName(), false, new I18nLanguageChangeNeeded() {
 
                   @Override
                   public void onChangeNeeded() {
@@ -240,8 +238,8 @@ public class I18nUITranslationService extends I18nTranslationService {
    *          the listener
    */
   public void changeToLanguageIfNecessary(final String wantedLang, final String wantedLangEnglishName,
-      final I18nLanguageChangeNeeded listener) {
-    changeToLanguageIfNecessary(currentLang.getCode(), wantedLang, wantedLangEnglishName, listener);
+      final boolean ask, final I18nLanguageChangeNeeded listener) {
+    changeToLanguageIfNecessary(currentLang.getCode(), wantedLang, wantedLangEnglishName, ask, listener);
   }
 
   /**
@@ -258,9 +256,9 @@ public class I18nUITranslationService extends I18nTranslationService {
    * @return true if we should reload the client with the new language
    */
   private void changeToLanguageIfNecessary(final String currentLangCode, final String wantedLang,
-      final String wantedLangEnglishName, final I18nLanguageChangeNeeded listener) {
+      final String wantedLangEnglishName, final boolean ask, final I18nLanguageChangeNeeded listener) {
     if (!currentLangCode.equals(wantedLang) && isInConstantProperties(wantedLang)) {
-      if (!askChangeToYourLanguage) {
+      if (!ask) {
         listener.onChangeNeeded();
         setCurrentLanguage(wantedLang);
         changeLanguageInUrl(wantedLang);
@@ -468,10 +466,6 @@ public class I18nUITranslationService extends I18nTranslationService {
         });
   }
 
-  public void setAskChangeToYourLanguage(final boolean askChangeToYourLanguage) {
-    this.askChangeToYourLanguage = askChangeToYourLanguage;
-  }
-
   /**
    * Sets the current language.
    * 
@@ -502,10 +496,6 @@ public class I18nUITranslationService extends I18nTranslationService {
    */
   public void setTranslationAfterSave(final String text, final String translation) {
     lexicon.put(text, translation);
-  }
-
-  public boolean shoudAskChangeToYourLanguage() {
-    return askChangeToYourLanguage;
   }
 
   /**

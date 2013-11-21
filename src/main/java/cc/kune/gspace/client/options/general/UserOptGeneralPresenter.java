@@ -199,7 +199,7 @@ public class UserOptGeneralPresenter extends EntityOptGeneralPresenter implement
               stateManager.setRetrievedStateAndGo(result);
               sendChangeEntityEvent(currentUser.getShortName(), longName);
               if (askChangeLanguage) {
-                i18n.changeToLanguageIfNecessary(lang.getCode(), i18n.t(lang.getEnglishName()),
+                i18n.changeToLanguageIfNecessary(lang.getCode(), i18n.t(lang.getEnglishName()), true,
                     new I18nLanguageChangeNeeded() {
                       @Override
                       public void onChangeNeeded() {

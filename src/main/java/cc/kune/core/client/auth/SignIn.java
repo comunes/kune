@@ -53,6 +53,15 @@ public interface SignIn {
   void hide();
 
   /**
+   * Sets the ask for language change (if the user has a different language that
+   * the current kune code, will ask or not to reload the client).
+   * 
+   * @param ask
+   *          the new ask for language change
+   */
+  void setAskForLanguageChange(boolean ask);
+
+  /**
    * Sets the error message.
    * 
    * @param message

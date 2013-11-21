@@ -50,6 +50,8 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Proxy<?>> extends
     Presenter<View, Proxy<?>> {
 
+  private boolean askForLanguageChange;
+
   /** The cookies manager. */
   protected final CookiesManager cookiesManager;
 
@@ -97,6 +99,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     this.i18n = i18n;
     this.cookiesManager = cookiesManager;
     this.loginRemember = loginRemember;
+    this.askForLanguageChange = true;
   }
 
   /**
@@ -171,7 +174,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     final I18nLanguageDTO language = userInfoDTO.getLanguage();
     session.setCurrentLanguage(language);
     i18n.changeToLanguageIfNecessary(language.getCode(), language.getEnglishName(),
-        new I18nLanguageChangeNeeded() {
+        askForLanguageChange, new I18nLanguageChangeNeeded() {
           @Override
           public void onChangeNeeded() {
           }
@@ -199,6 +202,10 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     loginRemember.setNickOrEmail(nickOrEmail);
     loginRemember.setPassword(password);
     loginRemember.clickFormLogin();
+  }
+
+  public void setAskForLanguageChange(final boolean askForLanguageChange) {
+    this.askForLanguageChange = askForLanguageChange;
   }
 
   /**
