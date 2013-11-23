@@ -1,3 +1,9 @@
+kune (0.3.0+b31) unstable; urgency=low
+
+  * cross-site deployment linker for #561
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 23 Nov 2013 10:50:00 +0100
+
 kune (0.3.0+b30) unstable; urgency=low
 
   * Allow embed kune waves (closes #561)
