@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd"> -->
+<!-- <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN"
+  "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd"> -->
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.1//EN" "../../gwt-module.dtd">
 <module>
   <inherits name="com.google.gwt.user.User" />
-  <inherits name="com.google.gwt.i18n.I18N"/>
+  <inherits name="com.google.gwt.i18n.I18N" />
   <inherits name='com.google.gwt.logging.Logging' />
   <inherits name="cc.kune.core.KuneCore" />
   <inherits name="cc.kune.wave.KuneWave" />
@@ -32,6 +33,9 @@
   <set-configuration-property name="gin.ginjector"
     value="cc.kune.client.KuneEmbedGinjector" />
 
+  <!-- For http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/FAQ_SOP
+    http://stackoverflow.com/questions/4923252/running-gwt-application-from-remote-machine -->
+  <add-linker name="xs" />
   <!-- Entrypoint =============================================== -->
   <entry-point class="cc.kune.client.KuneEmbedEntryPoint" />
 
