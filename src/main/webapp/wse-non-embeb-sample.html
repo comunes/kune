@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>kune embeded</title>
+<script type="text/javascript" language="javascript"
+    src="http://kune.cc/wse/wse.nocache.js"></script>
+<!--
+We will use this string for mention this site in messages like: "Thanks for joining this site"
+Your can use another string and the message will looks like "Thanks for joining example.org"
+ -->
+<meta name="kune.default.site.commonname" content="this site" />
+
+<link type="text/css" rel="stylesheet" href="css/reset.css">
+<link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-all.css">
+<link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-gray.css">
+<link type="text/css" rel="stylesheet"
+    href="ws/gxt-custom/css/gxt-op-common.css">
+<link type="text/css" rel="stylesheet" href="ws/kune-common.css">
+<link type="text/css" rel="stylesheet" href="ws/kune-custom-common.css">
+<link type="text/css" rel="stylesheet" href="ws/kune-message.css">
+<link type="text/css" rel="stylesheet"
+    href="others/splash/style/permalink.css">
+<link type="text/css" rel="stylesheet"
+    href="others/splash/style/stuff.css">
+<link type="text/css" rel="stylesheet"
+    href="others/splash/style/main.css">
+<link type="text/css" rel="stylesheet" href="ws/ws.css">
+<script type="text/javascript" src="others/splash/js/wave-rpc.js"></script>
+<script type="text/javascript" src="others/splash/js/gadget.js"></script>
+<script type="text/javascript" src="others/splash/js/rpc.js"></script>
+<script type="text/javascript" src="others/splash/js/common_client.js"></script>
+<script type="text/javascript"
+    src="others/splash/js/permalink_client.js"></script>
+<!--[if IE 6]>
+    <link type="text/css" rel="stylesheet" href="ie6.css">
+<![endif]-->
+</head>
+<body>
+    <!-- Banner for wave errors -->
+    <div class="banner" id="banner"></div>
+    <!-- Remember user/pass -->
+    <form id="loginrender" action="javascript:;" style="display: none;">
+        <input type="text" id="usernamerender" name="usernamerender"
+            value="" /> <input type="password" id="passwordrender"
+            name="passwordrender" value="" />
+    </form>
+    <form id="login" action="javascript:;" style="display: none;">
+        <input type="text" id="username" name="username" value="" /> <input
+            type="password" id="password" name="password" value="" />
+    </form>
+    <div id="kune-embed-hook"></div>
+</body>
+</html>

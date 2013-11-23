@@ -42,6 +42,8 @@
   <set-configuration-property name="gin.ginjector"
     value="cc.kune.client.KuneGinjector" />
 
+  <add-linker name="xsiframe" />
+
   <!-- Entrypoint =============================================== -->
   <entry-point class="cc.kune.client.KuneEntryPoint" />
 
