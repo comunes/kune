@@ -60,9 +60,9 @@ public class SignInEmbedAction extends AbstractSignInAction {
     super();
     this.session = session;
     this.signInProv = signIn;
-    putValue(Action.NAME, i18n.t("Sign in"));
+    putValue(Action.NAME, i18n.t("Participate"));
     putValue(Action.TOOLTIP,
-        i18n.t("Please sign in to get access to [%s] and this document", i18n.getSiteCommonName()));
+        i18n.t("Please sign in [%s] to participate in this document", i18n.getSiteCommonName()));
   }
 
   /*

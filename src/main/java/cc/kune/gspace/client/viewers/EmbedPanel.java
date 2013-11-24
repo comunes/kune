@@ -134,16 +134,39 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
     }
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.viewers.WaveViewerPanel#postLoad()
+   */
   @Override
   protected void postLoad() {
-    removeNewWaveBtn();
+    restyleWavePanel();
   }
 
-  public native void removeNewWaveBtn() /*-{
+  /**
+   * Restyle wave panel (dirty hack to style wave panel).
+   * $wnd.jQuery("div[class*='ParticipantsViewBuilder-Css-panel']"
+   * ).css("border", "0px");
+   */
+  public native void restyleWavePanel() /*-{
 		$wnd.jQuery("button[class*='ParticipantsViewBuilder-Css-addMessage']")
 				.hide();
+		$wnd.jQuery("div[class*='ToplevelToolbarWidget-Css-toolbar']").css(
+				"background", "none repeat scroll 0 0 #FFFFFF");
+		$wnd.jQuery("div[class*='ParticipantsViewBuilder-Css-panel']").css(
+				"background-color", "white");
+		$wnd.jQuery("span[class*='ParticipantsViewBuilder-Css-simple']").css(
+				"background-color", "white");
   }-*/;
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.WaveViewerPanel#setContent(cc.kune.core.shared
+   * .dto.StateContentDTO)
+   */
   @Override
   public void setContent(final StateContentDTO state) {
     super.setContent(state);

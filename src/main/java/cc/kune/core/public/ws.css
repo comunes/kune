@@ -1382,7 +1382,10 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
 /* Embeded waves */
 
 .k-embed-sitebar {
-  border: 1px solid #ACACAC !important;
+  border-top: 2px solid #FFF !important;
+  border-left: 1px solid #ACACAC !important;
+  border-right: 1px solid #ACACAC !important;
+  border-bottom: 1px solid #ACACAC !important;
   background-color: #FFF;
   -moz-border-radius-bottomleft: 5px;
   border-bottom-left-radius: 5px;
@@ -1392,4 +1395,8 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
   -webkit-border-bottom-right-radius: 5px;
   line-height: 11px;
   font-size: 14px;
+}
+
+.k-embed-sitebar div {
+  text-decoration: none;
 }
