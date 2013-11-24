@@ -22,6 +22,8 @@
  */
 package cc.kune.client;
 
+import cc.kune.gspace.client.viewers.EmbedPresenter;
+
 import com.google.gwt.core.client.GWT;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
@@ -43,7 +45,9 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
     ginjector.getSpinerPresenter();
     ginjector.getEventBusWithLogger();
     ginjector.getGwtGuiProvider();
-    ginjector.getEmbedPresenter().get().forceReveal();
+    final EmbedPresenter embedPresenter = ginjector.getEmbedPresenter().get();
+    embedPresenter.forceReveal();
+    com.google.gwt.user.client.History.addValueChangeHandler(embedPresenter);
   }
 
   /**

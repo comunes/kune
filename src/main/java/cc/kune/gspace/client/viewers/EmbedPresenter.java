@@ -48,6 +48,8 @@ import cc.kune.wave.client.kspecific.WaveClientProvider;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.RunAsyncCallback;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
@@ -66,7 +68,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
-public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPresenter.EmbedProxy> {
+public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPresenter.EmbedProxy>
+    implements ValueChangeHandler<String> {
 
   /**
    * The Interface EmbedProxy.
@@ -220,6 +223,11 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
       }
 
     });
+  }
+
+  @Override
+  public void onValueChange(final ValueChangeEvent<String> event) {
+    getContentFromHash();
   }
 
   /*
