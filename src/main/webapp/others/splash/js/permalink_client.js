@@ -79,7 +79,7 @@ $(document).ready(function() {
 
   // Listen for expansion of collapsed inline replies.
   // TODO(dhanji): Merge into a common.js (NOT common_client.js)
-  $('.inline-reply .count').live('click', function() {
+  $('.inline-reply').on('click', '.count', function() {
     var inlineReplyId = '#ir-' + $(this).parent().attr('ir-id');
     var countRef = $(this);
 
