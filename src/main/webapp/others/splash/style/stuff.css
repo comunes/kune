@@ -99,10 +99,11 @@ body {
 }
 
 .blip .time {
-  padding: 12px 12px 0 12px;
+  padding: 12px 12px 8px 12px;
   float: right;
-  font-size: 16px;
+  font-size: 14px;
   font-style: italic;
+  color: #808080;
 }
 
 .author-more {
