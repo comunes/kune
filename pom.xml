@@ -23,7 +23,7 @@
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
     <hibernate.version>4.1.2.Final</hibernate.version>
-    <wiab.version>0.3.42</wiab.version>
+    <wiab.version>0.3.43</wiab.version>
     <jetty.version>8.1.4.v20120524</jetty.version>
     <skipTests>true</skipTests>
   </properties>
@@ -480,7 +480,7 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>waveinabox-server-0.3</artifactId>
+      <artifactId>wave-in-a-box-server-0.4-incubating</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -500,12 +500,12 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>wave-api-0.3</artifactId>
+      <artifactId>wave-api-0.4-incubating</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>wave-api-0.3-src</artifactId>
+      <artifactId>wave-api-0.4-incubating-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -571,12 +571,12 @@
     <dependency>
       <groupId>com.glines.socketio.java</groupId>
       <artifactId>socketio-gwt</artifactId>
-      <version>23-10-2011</version>
+      <version>24-11-2013</version>
     </dependency>
     <dependency>
       <groupId>com.glines.socketio.java</groupId>
       <artifactId>socketio-gwt-sources</artifactId>
-      <version>23-10-2011</version>
+      <version>24-11-2013</version>
     </dependency>
     <!-- end wave -->
     <dependency>
@@ -1225,8 +1225,8 @@
             <version>${gwtmaven.version}</version>
             <configuration>
               <!-- <logLmeevel>INFO</logLevel> -->
-              <style>OBF</style>
-              <style>PRETTY</style>
+              <!--<style>OBF</style>-->
+              <style>DETAILED</style>
               <noServer>true</noServer>
               <gwtVersion>${gwt.version}</gwtVersion>
               <runTarget>/ws.html?log_level=DEBUG</runTarget>
@@ -1240,7 +1240,7 @@
               <compileReport>false</compileReport>
               <localWorkers>1</localWorkers><!-- Using all workers can temporarily
                 hang the mouse and isn't much faster -->
-              <extraJvmArgs>-Xmx1024m</extraJvmArgs>
+              <extraJvmArgs>-Xmx2048m</extraJvmArgs>
             </configuration>
             <executions>
               <execution>
