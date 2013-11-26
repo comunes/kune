@@ -66,6 +66,7 @@ import cc.kune.core.client.sitebar.SitebarSignOutLink.BeforeSignOut;
 import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SessionInstance;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
@@ -197,6 +198,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     // Core App
     bind(Session.class).to(SessionDefault.class).in(Singleton.class);
     requestStaticInjection(StateTokenUtils.class);
+    requestStaticInjection(SessionInstance.class);
     // s(SessionExpirationManager.class);
     s(ErrorHandler.class);
     requestStaticInjection(AsyncCallbackSimple.class);

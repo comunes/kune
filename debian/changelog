@@ -1,5 +1,7 @@
 kune (0.3.0+b32) unstable; urgency=low
 
+  * Wave minor fixes in style and translations
+  * Wave panel titles
   * Added some initial work for running supedev gwt mode
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 25 Nov 2013 12:43:44 +0100

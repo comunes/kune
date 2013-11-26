@@ -30,71 +30,67 @@ import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenMatcher;
-import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class TokenMatcherTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TokenMatcherTest {
 
   /** The Constant DEF_SITE_TOKEN. */
   private static final String DEF_SITE_TOKEN = "";
-  
+
   /** The Constant GROUP_TOKEN. */
   private static final String GROUP_TOKEN = "site.docs.1";
-  
+
   /** The Constant GROUP_TOKEN_ONLY_PROJECT. */
   private static final String GROUP_TOKEN_ONLY_PROJECT = "site";
-  
+
   /** The Constant GROUP_TOKEN_ONLY_PROJECT_AND_TOOL. */
   private static final String GROUP_TOKEN_ONLY_PROJECT_AND_TOOL = "site.docs";
-  
+
   /** The Constant REDIRECT_LINK. */
   private static final String REDIRECT_LINK = "example.com/w+jsdKixyHhZA";
-  
+
   /** The Constant SIGNIN_TOKEN. */
   private static final String SIGNIN_TOKEN = "signin";
-  
+
   /** The Constant SIGNIN_TOKEN_WITH_REDIRECT. */
   private static final String SIGNIN_TOKEN_WITH_REDIRECT = SIGNIN_TOKEN + "(" + REDIRECT_LINK + ")";
-  
+
   /** The Constant SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW. */
   private static final String SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW = SIGNIN_TOKEN + "("
       + SiteTokens.PREVIEW + "(" + REDIRECT_LINK + "))";
-  
+
   /** The Constant WAVE_TOKEN_SAMPLE1. */
   private static final String WAVE_TOKEN_SAMPLE1 = "example.com/w+abcd";
-  
+
   /** The Constant WAVE_TOKEN_SAMPLE2. */
   private static final String WAVE_TOKEN_SAMPLE2 = "example.com/w+abcd/~/conv+root";
-  
+
   /** The Constant WAVE_TOKEN_SAMPLE3. */
   private static final String WAVE_TOKEN_SAMPLE3 = "example.com/w+abcd/~/conv+root/b+45kg";
-  
-  /** The token matcher. */
-  private TokenMatcher tokenMatcher;
 
   /**
    * Before.
    */
   @Before
   public void before() {
-    final ReservedWordsRegistryDTO reservedWords = new ReservedWordsRegistryDTO();
-    reservedWords.add(SIGNIN_TOKEN);
-    tokenMatcher = new TokenMatcher(reservedWords);
-    tokenMatcher.init(JavaWaverefEncoder.INSTANCE);
+    TokenMatcher.getReservedWords().add(SIGNIN_TOKEN);
+
+    TokenMatcher.init(JavaWaverefEncoder.INSTANCE);
   }
 
   /**
    * Dont match group token.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   private void dontMatchGroupToken(final String token) {
-    assertFalse("Expected '" + token + "' dont match isGroup", tokenMatcher.isGroupToken(token));
+    assertFalse("Expected '" + token + "' dont match isGroup", TokenMatcher.isGroupToken(token));
   }
 
   /**
@@ -106,44 +102,38 @@ public class TokenMatcherTest {
     dontMatchWaveToken("!" + SIGNIN_TOKEN_WITH_REDIRECT);
     dontMatchGroupToken(SIGNIN_TOKEN_WITH_REDIRECT);
     dontMatchGroupToken("!" + SIGNIN_TOKEN_WITH_REDIRECT);
-    assertFalse(tokenMatcher.hasRedirect(SIGNIN_TOKEN));
-    assertFalse(tokenMatcher.hasRedirect("!" + SIGNIN_TOKEN));
+    assertFalse(TokenMatcher.hasRedirect(SIGNIN_TOKEN));
+    assertFalse(TokenMatcher.hasRedirect("!" + SIGNIN_TOKEN));
   }
 
   /**
    * Dont match wave token.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   private void dontMatchWaveToken(final String token) {
-    assertFalse("Expected '" + token + "' dont match isWaveToken", tokenMatcher.isWaveToken(token));
-  }
-
-  /**
-   * Test inbox.
-   */
-  @Test
-  public void testInbox() {
-    assertTrue(tokenMatcher.isInboxToken(SiteTokens.WAVE_INBOX));
-    assertTrue(tokenMatcher.isInboxToken("!" + SiteTokens.WAVE_INBOX));
+    assertFalse("Expected '" + token + "' dont match isWaveToken", TokenMatcher.isWaveToken(token));
   }
 
   /**
    * Match group token.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   private void matchGroupToken(final String token) {
-    assertTrue("Expected '" + token + "' match isGroup", tokenMatcher.isGroupToken(token));
+    assertTrue("Expected '" + token + "' match isGroup", TokenMatcher.isGroupToken(token));
   }
 
   /**
    * Match wave token.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   private void matchWaveToken(final String token) {
-    assertTrue("Expected '" + token + "' match isWaveToken", tokenMatcher.isWaveToken(token));
+    assertTrue("Expected '" + token + "' match isWaveToken", TokenMatcher.isWaveToken(token));
   }
 
   /**
@@ -186,11 +176,11 @@ public class TokenMatcherTest {
    */
   @Test
   public void shouldExtractRedirect() {
-    assertTrue(tokenMatcher.hasRedirect(SIGNIN_TOKEN_WITH_REDIRECT));
-    assertEquals(SIGNIN_TOKEN, tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getLeft());
-    assertEquals(SIGNIN_TOKEN, tokenMatcher.getRedirect("!" + SIGNIN_TOKEN_WITH_REDIRECT).getLeft());
-    assertEquals(REDIRECT_LINK, tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getRight());
-    assertEquals(REDIRECT_LINK, tokenMatcher.getRedirect("!" + SIGNIN_TOKEN_WITH_REDIRECT).getRight());
+    assertTrue(TokenMatcher.hasRedirect(SIGNIN_TOKEN_WITH_REDIRECT));
+    assertEquals(SIGNIN_TOKEN, TokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getLeft());
+    assertEquals(SIGNIN_TOKEN, TokenMatcher.getRedirect("!" + SIGNIN_TOKEN_WITH_REDIRECT).getLeft());
+    assertEquals(REDIRECT_LINK, TokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getRight());
+    assertEquals(REDIRECT_LINK, TokenMatcher.getRedirect("!" + SIGNIN_TOKEN_WITH_REDIRECT).getRight());
   }
 
   /**
@@ -198,13 +188,13 @@ public class TokenMatcherTest {
    */
   @Test
   public void shouldExtractRedirectInSignPreview() {
-    assertTrue(tokenMatcher.hasRedirect(SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW));
+    assertTrue(TokenMatcher.hasRedirect(SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW));
     assertEquals(
         "Expected " + SIGNIN_TOKEN + " but: "
-            + tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW).getLeft(), SIGNIN_TOKEN,
-        tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW).getLeft());
+            + TokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW).getLeft(), SIGNIN_TOKEN,
+        TokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT_TO_PREVIEW).getLeft());
     // assertEquals(REDIRECT_LINK,
-    // tokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getRight());
+    // TokenMatcher.getRedirect(SIGNIN_TOKEN_WITH_REDIRECT).getRight());
   }
 
   /**
@@ -244,6 +234,15 @@ public class TokenMatcherTest {
   public void testDefSiteTokenDontMatch() {
     dontMatchWaveToken(DEF_SITE_TOKEN);
     dontMatchGroupToken(DEF_SITE_TOKEN);
+  }
+
+  /**
+   * Test inbox.
+   */
+  @Test
+  public void testInbox() {
+    assertTrue(TokenMatcher.isInboxToken(SiteTokens.WAVE_INBOX));
+    assertTrue(TokenMatcher.isInboxToken("!" + SiteTokens.WAVE_INBOX));
   }
 
   /**

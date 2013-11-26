@@ -21,25 +21,27 @@
  *
  */
 
-package cc.kune.gspace.client.viewers;
+package cc.kune.core.client.state;
 
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.RootPresenter;
 
-public class EmbedRootPresenter extends RootPresenter {
+/**
+ * The Class SessionInstance.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
+public class SessionInstance {
 
-  public static final class EmbedRootView extends RootView {
-    @Override
-    public void setInSlot(final Object slot, final Widget widget) {
-      RootPanel.get("kune-embed-hook").add(widget);
-    }
-  }
-
+  /** The event bus. */
   @Inject
-  public EmbedRootPresenter(final EventBus eventBus, final EmbedRootView myRootView) {
-    super(eventBus, myRootView);
+  private static Session session;
+
+  /**
+   * Gets the.
+   * 
+   * @return the event bus
+   */
+  public static Session get() {
+    return session;
   }
 }

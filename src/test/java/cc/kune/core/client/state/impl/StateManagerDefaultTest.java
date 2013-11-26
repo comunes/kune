@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
+import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.core.client.events.AppStartEvent;
@@ -52,7 +53,6 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.InitDataDTO;
-import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -60,62 +60,62 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateManagerDefaultTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StateManagerDefaultTest {
 
   /** The Constant EMPTY_TOKEN. */
   private static final StateToken EMPTY_TOKEN = null;
-  
+
   /** The Constant GROUP1_TOOL1. */
   private static final StateToken GROUP1_TOOL1 = new StateToken("group1.tool1");
-  
+
   /** The Constant GROUP1_TOOL2. */
   private static final StateToken GROUP1_TOOL2 = new StateToken("group1.tool2");
-  
+
   /** The Constant GROUP2_TOOL1. */
   private static final StateToken GROUP2_TOOL1 = new StateToken("group2.tool1");
-  
+
   /** The Constant HASH. */
   private static final String HASH = "someUserHash";
-  
+
   /** The before change listener1. */
   private BeforeActionListener beforeChangeListener1;
-  
+
   /** The before change listener2. */
   private BeforeActionListener beforeChangeListener2;
-  
+
   /** The content provider. */
   private ContentCache contentProvider;
-  
+
   /** The event bus. */
   private EventBusTester eventBus;
-  
+
   /** The group change handler. */
   private GroupChangedHandler groupChangeHandler;
-  
+
   /** The history. */
   private HistoryWrapper history;
-  
+
   /** The session. */
   private Session session;
-  
+
   /** The site tokens. */
   private SiteTokenListeners siteTokens;
-  
+
   /** The state. */
   private StateAbstractDTO state;
-  
+
   /** The state change handler. */
   private StateChangedHandler stateChangeHandler;
-  
+
   /** The state manager. */
   private StateManagerDefault stateManager;
-  
+
   /** The token matcher. */
   private TokenMatcher tokenMatcher;
-  
+
   /** The tool change handler. */
   private ToolChangedHandler toolChangeHandler;
 
@@ -127,7 +127,7 @@ public class StateManagerDefaultTest {
     contentProvider = Mockito.mock(ContentCache.class);
     session = Mockito.mock(Session.class);
     history = Mockito.mock(HistoryWrapper.class);
-    tokenMatcher = new TokenMatcher(new ReservedWordsRegistryDTO());
+    TokenMatcher.init(JavaWaverefEncoder.INSTANCE);
     siteTokens = Mockito.mock(SiteTokenListeners.class);
     eventBus = new EventBusTester();
     Mockito.when(session.getUserHash()).thenReturn(HASH);
@@ -183,8 +183,9 @@ public class StateManagerDefaultTest {
 
   /**
    * Change state.
-   *
-   * @param tokens the tokens
+   * 
+   * @param tokens
+   *          the tokens
    */
   private void changeState(final String... tokens) {
     for (final String token : tokens) {
@@ -300,9 +301,11 @@ public class StateManagerDefaultTest {
 
   /**
    * Conf before state change listeners.
-   *
-   * @param value the value
-   * @param value2 the value2
+   * 
+   * @param value
+   *          the value
+   * @param value2
+   *          the value2
    * @return the string
    */
   private String confBeforeStateChangeListeners(final boolean value, final boolean value2) {
@@ -316,7 +319,7 @@ public class StateManagerDefaultTest {
 
   /**
    * Gets the def group.
-   *
+   * 
    * @return the def group
    */
   @Test
@@ -327,7 +330,7 @@ public class StateManagerDefaultTest {
 
   /**
    * Gets the wave token.
-   *
+   * 
    * @return the wave token
    */
   public void getWaveToken() {

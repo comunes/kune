@@ -381,7 +381,7 @@ public class CustomStagesProvider extends Stages {
  * A hook to install features that are not dependent an a certain stage.
  */
   protected void install() {
-  // WindowTitleHandler.install(waveStore, waveFrame);
+    CustomWindowTitleHandler.install(waveStore, waveFrame);
   }
 
 

@@ -23,8 +23,6 @@
 
 package cc.kune.gspace.client.viewers;
 
-import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
-
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
@@ -84,7 +82,6 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   public interface EmbedView extends WaveViewerView {
   }
 
-  private final TokenMatcher matcher;
   private final ContentServiceAsync service;
   private final Session session;
   private final Provider<EmbedSitebar> sitebar;
@@ -117,15 +114,14 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   public EmbedPresenter(final EventBus eventBus, final EmbedView view, final EmbedProxy proxy,
       final SiteServiceAsync siteService, final ContentServiceAsync service,
       final WaveClientManager waveClientManager, final WaveClientProvider waveClient,
-      final I18nUITranslationService i18n, final TokenMatcher matcher, final Session session,
-      final Provider<EmbedSitebar> sitebar) {
+      final I18nUITranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar) {
     super(eventBus, view, proxy);
     this.service = service;
-    this.matcher = matcher;
+
     this.session = session;
     this.sitebar = sitebar;
     Log.info("Started embed presenter");
-    matcher.init(GwtWaverefEncoder.INSTANCE);
+
     siteService.getInitData(session.getUserHash(), new AsyncCallbackSimple<InitDataDTO>() {
       @Override
       public void onSuccess(final InitDataDTO initData) {
@@ -153,7 +149,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
   private void getContentFromHash() {
     final String currentHash = HistoryUtils.undoHashbang(History.getToken());
-    if (matcher.isGroupToken(currentHash)) {
+    if (TokenMatcher.isGroupToken(currentHash)) {
       // Ok is a token like group.tool.number
       final StateToken currentToken = new StateToken(currentHash);
       service.getContent(session.getUserHash(), currentToken,
@@ -170,7 +166,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
             }
           });
     } else {
-      if (matcher.isWaveToken(currentHash)) {
+      if (TokenMatcher.isWaveToken(currentHash)) {
         service.getContentByWaveRef(session.getUserHash(), currentHash,
             new AsyncCallbackSimple<StateAbstractDTO>() {
               @Override

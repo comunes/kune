@@ -26,43 +26,33 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaverefEncoder;
 
 import cc.kune.common.shared.utils.Pair;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 
-import com.google.inject.Inject;
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class TokenMatcher.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TokenMatcher {
 
   /** The encoder. */
-  private WaverefEncoder encoder;
-  
-  /** The reserved words registry. */
-  private final ReservedWordsRegistryDTO reservedWordsRegistry;
+  private static WaverefEncoder encoder;
 
-  /**
-   * Instantiates a new token matcher.
-   *
-   * @param reservedWordsRegistry the reserved words registry
-   */
-  @Inject
-  public TokenMatcher(final ReservedWordsRegistryDTO reservedWordsRegistry) {
-    this.reservedWordsRegistry = reservedWordsRegistry;
-  }
+  /** The reserved words registry. */
+  private static ReservedWordsRegistryDTO reservedWordsRegistry = new ReservedWordsRegistryDTO();
 
   /**
    * Gets the redirect.
-   *
-   * @param htoken the htoken
+   * 
+   * @param htoken
+   *          the htoken
    * @return the redirect
    */
-  public Pair<String, String> getRedirect(final String htoken) {
+  public static Pair<String, String> getRedirect(final String htoken) {
     final String token = HistoryUtils.undoHashbang(htoken);
     final String[] splited = splitRedirect(token);
     if (hasRedirect(token, splited)) {
@@ -71,13 +61,18 @@ public class TokenMatcher {
     return null;
   }
 
+  public static ReservedWordsRegistryDTO getReservedWords() {
+    return reservedWordsRegistry;
+  }
+
   /**
    * Checks for redirect.
-   *
-   * @param htoken the htoken
+   * 
+   * @param htoken
+   *          the htoken
    * @return true, if successful
    */
-  public boolean hasRedirect(final String htoken) {
+  public static boolean hasRedirect(final String htoken) {
     final String token = HistoryUtils.undoHashbang(htoken);
     final String[] splited = splitRedirect(token);
     if (hasRedirect(token, splited)) {
@@ -88,67 +83,74 @@ public class TokenMatcher {
 
   /**
    * Checks for redirect.
-   *
-   * @param htoken the htoken
-   * @param splited the splited
+   * 
+   * @param htoken
+   *          the htoken
+   * @param splited
+   *          the splited
    * @return true, if successful
    */
-  private boolean hasRedirect(final String htoken, final String[] splited) {
+  private static boolean hasRedirect(final String htoken, final String[] splited) {
     final String token = HistoryUtils.undoHashbang(htoken);
     return token.endsWith(")") && splited.length == 2;
   }
 
   /**
    * Inits the.
-   *
-   * @param encoder the encoder
+   * 
+   * @param encoder
+   *          the encoder
    */
-  public void init(final WaverefEncoder encoder) {
+  public static void init(final WaverefEncoder encoder) {
     assert encoder != null;
-    this.encoder = encoder;
+    TokenMatcher.encoder = encoder;
   }
 
   /**
    * Checks if is group token.
-   *
-   * @param htoken the htoken
+   * 
+   * @param htoken
+   *          the htoken
    * @return true, if is group token
    */
-  public boolean isGroupToken(final String htoken) {
+  public static boolean isGroupToken(final String htoken) {
     final String token = HistoryUtils.undoHashbang(htoken);
     return token != null && !isWaveToken(token) && !hasRedirect(token)
         && !reservedWordsRegistry.contains(token) && !new StateToken(token).hasNothing();
   }
 
   /**
-   * Checks if is inbox token.
-   *
-   * @param htoken the htoken
-   * @return true, if is inbox token
-   */
-  public boolean isInboxToken(final String htoken) {
-    final String token = HistoryUtils.undoHashbang(htoken);
-    return SiteTokens.WAVE_INBOX.equals(token);
-  }
-
-  /**
    * Checks if is home token.
-   *
-   * @param htoken the htoken
+   * 
+   * @param htoken
+   *          the htoken
    * @return true, if is home token
    */
-  public boolean isHomeToken(final String htoken) {
+  public static boolean isHomeToken(final String htoken) {
     final String token = HistoryUtils.undoHashbang(htoken);
     return SiteTokens.HOME.equals(token);
   }
 
   /**
+   * Checks if is inbox token.
+   * 
+   * @param htoken
+   *          the htoken
+   * @return true, if is inbox token
+   */
+  public static boolean isInboxToken(final String htoken) {
+    final String token = HistoryUtils.undoHashbang(htoken);
+    return SiteTokens.WAVE_INBOX.equals(token);
+  }
+
+  /**
    * Checks if is wave token.
-   *
-   * @param htoken the htoken
+   * 
+   * @param htoken
+   *          the htoken
    * @return true, if is wave token
    */
-  public boolean isWaveToken(final String htoken) {
+  public static boolean isWaveToken(final String htoken) {
     final String token = HistoryUtils.undoHashbang(htoken);
     assert encoder != null;
     try {
@@ -160,13 +162,28 @@ public class TokenMatcher {
 
   /**
    * Split redirect.
-   *
-   * @param htoken the htoken
+   * 
+   * @param htoken
+   *          the htoken
    * @return the string[]
    */
-  private String[] splitRedirect(final String htoken) {
+  private static String[] splitRedirect(final String htoken) {
     final String token = HistoryUtils.undoHashbang(htoken);
     return token.split("\\(", 2);
   }
 
+  /**
+   * Instantiates a new token matcher.
+   * 
+   * @param reservedWordsRegistry
+   *          the reserved words registry
+   */
+  public TokenMatcher() {
+    SessionInstance.get().onAppStart(true, new AppStartHandler() {
+      @Override
+      public void onAppStart(final AppStartEvent event) {
+        reservedWordsRegistry = event.getInitData().getReservedWords();
+      }
+    });
+  }
 }
