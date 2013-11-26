@@ -74,7 +74,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class StateManagerDefault.
  * 
@@ -565,6 +564,8 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     if (beforeStateChangeCollection.checkBeforeAction()) {
       // There isn't a beforeStateChange listener that stops this history
       // change
+
+      // WARNING: String.toLowerCase breaks Wave URls
       final HistoryTokenCallback tokenListener = newToken != null ? siteTokens.get(newToken.toLowerCase())
           : null;
       boolean isSpecialHash = false;
@@ -578,8 +579,8 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         // token is not one of #newgroup #signin #translate ...
         final String newTokenLower = newToken != null ? newToken.toLowerCase() : null;
         if (newTokenLower != null && TokenMatcher.hasRedirect(newTokenLower)) {
-          final Pair<String, String> redirect = TokenMatcher.getRedirect(newTokenLower);
-          final String firstToken = redirect.getLeft();
+          final Pair<String, String> redirect = TokenMatcher.getRedirect(newToken);
+          final String firstToken = redirect.getLeft().toLowerCase();
           final String sndToken = redirect.getRight();
           if (firstToken.equals(SiteTokens.PREVIEW)) {
             SpaceSelectEvent.fire(eventBus, Space.publicSpace);
