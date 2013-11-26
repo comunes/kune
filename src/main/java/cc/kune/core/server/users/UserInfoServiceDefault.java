@@ -24,6 +24,8 @@ package cc.kune.core.server.users;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.authentication.SessionManager;
@@ -51,6 +53,9 @@ import com.google.inject.name.Named;
  */
 @Singleton
 public class UserInfoServiceDefault implements UserInfoService {
+
+  /** The Constant LOG. */
+  public static final Log LOG = LogFactory.getLog(UserInfoServiceDefault.class);
 
   /** The group manager. */
   private final GroupManager groupManager;
@@ -122,11 +127,17 @@ public class UserInfoServiceDefault implements UserInfoService {
       if (defaultContent != null) {
         userInfo.setHomePage(defaultContent.getStateToken().toString());
       }
-      final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
-      final JSONObject clientFlags = new JSONObject();
-      userInfo.setSessionJSON(waveClientServlet.getSessionJson(sessionFromToken).toString());
-      userInfo.setClientFlags(clientFlags.toString());
-      userInfo.setWebsocketAddress(websocketAddress);
+      try {
+        final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
+        final JSONObject clientFlags = new JSONObject();
+        userInfo.setSessionJSON(waveClientServlet.getSessionJson(sessionFromToken).toString());
+        userInfo.setClientFlags(clientFlags.toString());
+        userInfo.setWebsocketAddress(websocketAddress);
+      } catch (final Exception e) {
+        LOG.info("Cannot get wave session info for user: " + user.getShortName() + " and hash: "
+            + userHash);
+      }
+
     }
     return userInfo;
   }
