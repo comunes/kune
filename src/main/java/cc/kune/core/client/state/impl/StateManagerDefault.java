@@ -248,20 +248,20 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
    *          the second part
    */
   private void doActionOrSignInIfNeeded(final HistoryTokenCallback tokenListener,
-      final String currentToken, final String secondPart) {
+      final String currentToken, final String firstPart, final String secondPart) {
     // First of all we see if we are starting up, and we get the def content
     // first
     if (startingUp()) {
       // Starting with some token like "signin": load defContent first
-      Log.debug("Starting up with a token like #signin or #token(param): load defContent first");
+      Log.info("Starting up with a token like #signin or #token(param): load defContent first");
       getContent(new StateToken(SiteTokens.GROUP_HOME), false, new OnFinishGetContent() {
         @Override
         public void finish() {
-          doActionOrSignInIfNeededStarted(tokenListener, currentToken, secondPart);
+          doActionOrSignInIfNeededAfterStarted(tokenListener, currentToken, firstPart, secondPart);
         }
       });
     } else {
-      doActionOrSignInIfNeededStarted(tokenListener, currentToken, secondPart);
+      doActionOrSignInIfNeededAfterStarted(tokenListener, currentToken, firstPart, secondPart);
     }
   }
 
@@ -275,8 +275,8 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
    * @param secondPart
    *          the second part
    */
-  private void doActionOrSignInIfNeededStarted(final HistoryTokenCallback tokenListener,
-      final String currentToken, final String secondPart) {
+  private void doActionOrSignInIfNeededAfterStarted(final HistoryTokenCallback tokenListener,
+      final String currentToken, final String firstPart, final String secondPart) {
     if (tokenListener.authMandatory() && session.isNotLogged()) {
       Log.debug("login mandatory for " + currentToken);
       // Ok, we have to redirect because this token (for instance
@@ -285,7 +285,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
       if (TextUtils.notEmpty(infoMessage)) {
         signIn.get().setErrorMessage(infoMessage, NotifyLevel.info);
       }
-      redirectButSignInBefore(currentToken);
+      if (SiteTokens.SIGN_IN.equals(firstPart)) {
+        signIn.get().showSignInDialog(secondPart);
+      } else {
+        redirectButSignInBefore(currentToken);
+      }
     } else {
       // The auth is not mandatory, go ahead with the token action
       Log.debug("Executing action related with historytoken " + secondPart);
@@ -569,11 +573,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
       final HistoryTokenCallback tokenListener = newToken != null ? siteTokens.get(newToken.toLowerCase())
           : null;
       boolean isSpecialHash = false;
-      Log.debug("StateManager: on history changed (" + newToken + ")");
+      Log.info("StateManager: on history changed '" + newToken + "'");
       if (tokenListener != null) {
         isSpecialHash = true;
         Log.debug("token is one of #newgroup #signin #translate without #hash(redirection) ...");
-        doActionOrSignInIfNeeded(tokenListener, newToken, newToken);
+        doActionOrSignInIfNeeded(tokenListener, newToken, newToken, newToken);
       } else {
         Log.debug("Is not a special hash like #newgroup, etc, or maybe has a #hash(redirection)");
         // token is not one of #newgroup #signin #translate ...
@@ -602,8 +606,8 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             final HistoryTokenCallback tokenWithRedirect = siteTokens.get(firstToken);
             if (tokenWithRedirect != null) {
               isSpecialHash = true;
-              Log.info("Is some #subtitle(foo) or #verifyemail(hash) etc");
-              doActionOrSignInIfNeeded(tokenWithRedirect, newToken, sndToken);
+              Log.info("Is some #subtitle(foo) or #verifyemail(hash) etc, firstToken " + firstToken);
+              doActionOrSignInIfNeeded(tokenWithRedirect, newToken, firstToken, sndToken);
             }
           }
         }

@@ -189,11 +189,18 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
             if (gotoHomePage) {
               stateManager.gotoStateToken(new StateToken(userInfoDTO.getHomePage()).clearDocument());
             } else {
-              if (gotoTokenOnSuccess != null && gotoTokenOnSuccess.matches(TextUtils.URL_REGEXP)) {
-                // Redirect to other website
-                KuneWindowUtils.open(gotoTokenOnSuccess);
+              if (gotoTokenOnSuccess != null) {
+                if (gotoTokenOnSuccess.matches(TextUtils.URL_REGEXP)) {
+                  // Redirect to other website
+                  KuneWindowUtils.open(gotoTokenOnSuccess);
+                } else {
+                  // We know were to go after sign-in
+                  stateManager.gotoHistoryToken(gotoTokenOnSuccess);
+                }
+              } else {
+                // In other case, try to restore previous state
+                stateManager.redirectOrRestorePreviousToken(false);
               }
-              stateManager.redirectOrRestorePreviousToken(false);
             }
           }
         });
