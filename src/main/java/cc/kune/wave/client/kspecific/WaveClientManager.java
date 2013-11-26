@@ -30,7 +30,6 @@ import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.shared.dto.WaveClientParams;
 import cc.kune.wave.client.KuneWaveProfileManager;
 
@@ -42,7 +41,6 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WaveClientManager.
  * 
@@ -70,16 +68,13 @@ public class WaveClientManager {
    *          the profiles
    * @param inboxCount
    *          the inbox count
-   * @param tokenMatcher
-   *          the token matcher
    * @param webclientView
    *          the webclient view
    */
   @Inject
   public WaveClientManager(final Session session, final EventBus eventBus,
       final UserServiceAsync userService, final HasWaveContainer panel,
-      final KuneWaveProfileManager profiles, final TokenMatcher tokenMatcher,
-      final WaveClientProvider webclientView) {
+      final KuneWaveProfileManager profiles, final WaveClientProvider webclientView) {
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {

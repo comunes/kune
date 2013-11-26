@@ -344,8 +344,6 @@ public class WebClient extends Composite implements WaveClientView {
   @UiField
   Style style;
 
-  /** The token matcher. */
-  private final TokenMatcher tokenMatcher;
 
   /** The turbulence popup. */
   private final UniversalPopup turbulencePopup = createTurbulencePopup();
@@ -385,10 +383,9 @@ public class WebClient extends Composite implements WaveClientView {
    * @param colorPicker the color picker
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, final TokenMatcher tokenMatcher, final cc.kune.core.client.state.Session kuneSession, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final Provider<AurorisColorPicker> colorPicker) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles,final cc.kune.core.client.state.Session kuneSession, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final Provider<AurorisColorPicker> colorPicker) {
     this.eventBus = eventBus;
     this.profiles = profiles;
-    this.tokenMatcher = tokenMatcher;
     this.kuneSession = kuneSession;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.contentService = contentService;
@@ -431,7 +428,7 @@ public class WebClient extends Composite implements WaveClientView {
         final String currentToken = History.getToken();
         String waveToken = currentToken;
         // FIXME what about preview?
-        if (tokenMatcher.isGroupToken(currentToken) || tokenMatcher.isHomeToken(currentToken)) {
+        if (TokenMatcher.isGroupToken(currentToken) || TokenMatcher.isHomeToken(currentToken)) {
           waveToken = kuneSession.getContentState().getWaveRef();
           LOG.info("Kune URL: " + currentToken + " = " + waveToken);
         }
@@ -445,7 +442,7 @@ public class WebClient extends Composite implements WaveClientView {
 
     //WaveClientUtils.addListener(stateManager, wave, waveHolder, waveFrame);
 
-    if (tokenMatcher.isWaveToken(History.getToken())) {
+    if (TokenMatcher.isWaveToken(History.getToken())) {
       History.fireCurrentHistoryState();
     }
     LOG.info("SimpleWebClient.onModuleLoad() done");
@@ -647,7 +644,7 @@ public class WebClient extends Composite implements WaveClientView {
 
     final String encodedToken = HistoryUtils.undoHashbang(History.getToken());
     // Kune patch
-    if (encodedToken != null && !encodedToken.isEmpty() && !tokenMatcher.isInboxToken(encodedToken)) {
+    if (encodedToken != null && !encodedToken.isEmpty() && !TokenMatcher.isInboxToken(encodedToken)) {
       WaveRef fromWaveRef;
       try {
         fromWaveRef = GwtWaverefEncoder.decodeWaveRefFromPath(encodedToken);

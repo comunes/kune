@@ -113,9 +113,6 @@ public class StateManagerDefaultTest {
   /** The state manager. */
   private StateManagerDefault stateManager;
 
-  /** The token matcher. */
-  private TokenMatcher tokenMatcher;
-
   /** The tool change handler. */
   private ToolChangedHandler toolChangeHandler;
 
@@ -154,8 +151,7 @@ public class StateManagerDefaultTest {
       }
     }).when(session).onAppStart(anyBoolean(), (AppStartHandler) Mockito.anyObject());
     state = Mockito.mock(StateAbstractDTO.class);
-    stateManager = new StateManagerDefault(contentProvider, session, history, tokenMatcher, eventBus,
-        siteTokens, null);
+    stateManager = new StateManagerDefault(contentProvider, session, history, eventBus, siteTokens, null);
     stateChangeHandler = Mockito.mock(StateChangedHandler.class);
     groupChangeHandler = Mockito.mock(GroupChangedHandler.class);
     toolChangeHandler = Mockito.mock(ToolChangedHandler.class);

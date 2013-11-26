@@ -30,7 +30,7 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TextUtilsTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TextUtilsTest {
@@ -96,5 +96,15 @@ public class TextUtilsTest {
     assertFalse("http://localhost:9898/kk".matches(DOMAIN_REGEXP));
     assertFalse("http://localhost".matches(DOMAIN_REGEXP));
     assertFalse("ftp://localhost/kk".matches(DOMAIN_REGEXP));
+  }
+
+  /**
+   * Test urls.
+   */
+  @Test
+  public void testUrls() {
+    assertTrue("http://example.com".matches(TextUtils.URL_REGEXP));
+    assertTrue("http://example.com/".matches(TextUtils.URL_REGEXP));
+    assertTrue("http://example.com/asdfasdf".matches(TextUtils.URL_REGEXP));
   }
 }

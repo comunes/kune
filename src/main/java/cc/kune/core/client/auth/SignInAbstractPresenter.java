@@ -22,6 +22,8 @@
  */
 package cc.kune.core.client.auth;
 
+import cc.kune.common.client.ui.KuneWindowUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.i18n.I18nUITranslationService.I18nLanguageChangeNeeded;
@@ -57,6 +59,9 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /** The goto token on cancel. */
   private String gotoTokenOnCancel;
+
+  /** The goto token on success. */
+  private String gotoTokenOnSuccess;
 
   /** The i18n. */
   protected final I18nUITranslationService i18n;
@@ -184,6 +189,10 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
             if (gotoHomePage) {
               stateManager.gotoStateToken(new StateToken(userInfoDTO.getHomePage()).clearDocument());
             } else {
+              if (gotoTokenOnSuccess != null && gotoTokenOnSuccess.matches(TextUtils.URL_REGEXP)) {
+                // Redirect to other website
+                KuneWindowUtils.open(gotoTokenOnSuccess);
+              }
               stateManager.redirectOrRestorePreviousToken(false);
             }
           }
@@ -216,5 +225,15 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
    */
   public void setGotoTokenOnCancel(final String gotoTokenOnCancel) {
     this.gotoTokenOnCancel = gotoTokenOnCancel;
+  }
+
+  /**
+   * Sets the goto token on success.
+   * 
+   * @param gotoTokenOnSuccess
+   *          the new goto token on success
+   */
+  public void setGotoTokenOnSuccess(final String gotoTokenOnSuccess) {
+    this.gotoTokenOnSuccess = gotoTokenOnSuccess;
   }
 }

@@ -80,7 +80,7 @@ public class SignInEmbedAction extends AbstractSignInAction {
       signIn.setHeaderLogo(siteOnOverLogo);
       signIn.setAskForLanguageChange(false);
     }
-    signIn.showSignInDialog();
+    signIn.showSignInDialog("");
   }
 
 }

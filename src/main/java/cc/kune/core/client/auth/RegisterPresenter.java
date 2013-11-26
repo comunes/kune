@@ -61,7 +61,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RegisterPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RegisterPresenter extends
@@ -69,7 +69,7 @@ public class RegisterPresenter extends
 
   /**
    * The Interface RegisterProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -78,71 +78,74 @@ public class RegisterPresenter extends
 
   /**
    * The Interface RegisterView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface RegisterView extends SignInAbstractView {
 
     /**
      * Gets the email.
-     *
+     * 
      * @return the email
      */
     String getEmail();
 
     /**
      * Gets the long name.
-     *
+     * 
      * @return the long name
      */
     String getLongName();
 
     /**
      * Gets the register password.
-     *
+     * 
      * @return the register password
      */
     String getRegisterPassword();
 
     /**
      * Gets the short name.
-     *
+     * 
      * @return the short name
      */
     String getShortName();
 
     /**
      * Checks if is register form valid.
-     *
+     * 
      * @return true, if is register form valid
      */
     boolean isRegisterFormValid();
 
     /**
      * Checks if is valid.
-     *
+     * 
      * @return true, if is valid
      */
     boolean isValid();
 
     /**
      * Sets the email failed.
-     *
-     * @param msg the new email failed
+     * 
+     * @param msg
+     *          the new email failed
      */
     void setEmailFailed(final String msg);
 
     /**
      * Sets the long name failed.
-     *
-     * @param msg the new long name failed
+     * 
+     * @param msg
+     *          the new long name failed
      */
     void setLongNameFailed(final String msg);
 
     /**
      * Sets the short name failed.
-     *
-     * @param msg the new short name failed
+     * 
+     * @param msg
+     *          the new short name failed
      */
     void setShortNameFailed(final String msg);
 
@@ -152,26 +155,36 @@ public class RegisterPresenter extends
     void validate();
 
   }
-  
+
   /** The sign in provider. */
   private final Provider<SignIn> signInProvider;
-  
+
   /** The user service provider. */
   private final Provider<UserServiceAsync> userServiceProvider;
 
   /**
    * Instantiates a new register presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param session the session
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param userServiceProvider the user service provider
-   * @param signInProvider the sign in provider
-   * @param cookiesManager the cookies manager
-   * @param loginRemember the login remember
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param userServiceProvider
+   *          the user service provider
+   * @param signInProvider
+   *          the sign in provider
+   * @param cookiesManager
+   *          the cookies manager
+   * @param loginRemember
+   *          the login remember
    */
   @Inject
   public RegisterPresenter(final EventBus eventBus, final RegisterView view, final RegisterProxy proxy,
@@ -183,11 +196,14 @@ public class RegisterPresenter extends
     this.signInProvider = signInProvider;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.auth.Register#doRegister()
    */
   @Override
-  public void doRegister() {
+  public void doRegister(final String onSuccessToken) {
+    setGotoTokenOnSuccess(onSuccessToken);
     signInProvider.get().hide();
     if (!session.isLogged()) {
       NotifyUser.showProgress();
@@ -198,7 +214,9 @@ public class RegisterPresenter extends
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.auth.SignInAbstractPresenter#getView()
    */
   @Override
@@ -206,7 +224,9 @@ public class RegisterPresenter extends
     return (RegisterView) super.getView();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -323,8 +343,9 @@ public class RegisterPresenter extends
 
   /**
    * On registration failure.
-   *
-   * @param caught the caught
+   * 
+   * @param caught
+   *          the caught
    */
   private void onRegistrationFailure(final Throwable caught) {
     getView().unMask();
@@ -346,7 +367,9 @@ public class RegisterPresenter extends
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

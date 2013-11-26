@@ -22,10 +22,9 @@
  */
 package cc.kune.core.client.state.impl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class HistoryUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HistoryUtils {
@@ -41,7 +40,7 @@ public class HistoryUtils {
    *          the #history token fragment
    * @return the #!history token fragment with ! added
    */
-  public static String hashbang(String historyToken) {
+  public static String hashbang(final String historyToken) {
     return historyToken == null || historyToken.startsWith(PREFIX) ? historyToken : PREFIX
         + historyToken;
   }
@@ -53,7 +52,7 @@ public class HistoryUtils {
    *          the history token
    * @return the #!fragment history token without !
    */
-  public static String undoHashbang(String historyToken) {
+  public static String undoHashbang(final String historyToken) {
     return historyToken != null && historyToken.startsWith(PREFIX) ? historyToken.substring(1)
         : historyToken;
   }

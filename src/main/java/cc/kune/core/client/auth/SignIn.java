@@ -85,7 +85,10 @@ public interface SignIn {
 
   /**
    * Show sign in dialog.
+   * 
+   * @param token
+   *          after sing in
    */
-  void showSignInDialog();
+  void showSignInDialog(String token);
 
 }

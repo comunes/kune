@@ -59,7 +59,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SpaceSelectorPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SpaceSelectorPresenter extends
@@ -67,7 +67,7 @@ public class SpaceSelectorPresenter extends
 
   /**
    * The Interface SpaceSelectorProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -76,20 +76,20 @@ public class SpaceSelectorPresenter extends
 
   /**
    * The Interface SpaceSelectorView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SpaceSelectorView extends View {
 
     /** The group space id. */
     public static String GROUP_SPACE_ID = "k-space-group-id";
-    
+
     /** The home space id. */
     public static String HOME_SPACE_ID = "k-space-home-id";
-    
+
     /** The public space id. */
     public static String PUBLIC_SPACE_ID = "k-space-public-id";
-    
+
     /** The user space id. */
     public static String USER_SPACE_ID = "k-space-user-id";
 
@@ -115,71 +115,77 @@ public class SpaceSelectorPresenter extends
 
     /**
      * Gets the group btn.
-     *
+     * 
      * @return the group btn
      */
     HasClickHandlers getGroupBtn();
 
     /**
      * Gets the home btn.
-     *
+     * 
      * @return the home btn
      */
     HasClickHandlers getHomeBtn();
 
     /**
      * Gets the public btn.
-     *
+     * 
      * @return the public btn
      */
     HasClickHandlers getPublicBtn();
 
     /**
      * Gets the user btn.
-     *
+     * 
      * @return the user btn
      */
     HasClickHandlers getUserBtn();
 
     /**
      * Sets the group btn down.
-     *
-     * @param down the new group btn down
+     * 
+     * @param down
+     *          the new group btn down
      */
     void setGroupBtnDown(boolean down);
 
     /**
      * Sets the home btn down.
-     *
-     * @param down the new home btn down
+     * 
+     * @param down
+     *          the new home btn down
      */
     void setHomeBtnDown(boolean down);
 
     /**
      * Sets the public btn down.
-     *
-     * @param down the new public btn down
+     * 
+     * @param down
+     *          the new public btn down
      */
     void setPublicBtnDown(boolean down);
 
     /**
      * Sets the public visible.
-     *
-     * @param visible the new public visible
+     * 
+     * @param visible
+     *          the new public visible
      */
     void setPublicVisible(boolean visible);
 
     /**
      * Sets the user btn down.
-     *
-     * @param down the new user btn down
+     * 
+     * @param down
+     *          the new user btn down
      */
     void setUserBtnDown(boolean down);
 
     /**
      * Sets the window title.
-     *
-     * @param title the new window title
+     * 
+     * @param title
+     *          the new window title
      */
     void setWindowTitle(String title);
 
@@ -207,54 +213,65 @@ public class SpaceSelectorPresenter extends
 
   /** The armor. */
   private final GSpaceArmor armor;
-  
+
   /** The back manager. */
   private final GSpaceBackgroundManager backManager;
-  
+
   /** The current space. */
   private Space currentSpace;
-  
+
   /** The group token. */
   private String groupToken;
-  
+
   /** The home token. */
   private String homeToken;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The inbox token. */
   private String inboxToken;
-  
+
   /** The public token. */
   private String publicToken;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The shortcut register. */
   private final GlobalShortcutRegister shortcutRegister;
-  
+
   /** The sign in. */
   private final Provider<SignIn> signIn;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new space selector presenter.
-   *
-   * @param eventBus the event bus
-   * @param stateManager the state manager
-   * @param view the view
-   * @param proxy the proxy
-   * @param armor the armor
-   * @param session the session
-   * @param signIn the sign in
-   * @param backManager the back manager
-   * @param i18n the i18n
-   * @param mask the mask
-   * @param shortcutRegister the shortcut register
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param stateManager
+   *          the state manager
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param armor
+   *          the armor
+   * @param session
+   *          the session
+   * @param signIn
+   *          the sign in
+   * @param backManager
+   *          the back manager
+   * @param i18n
+   *          the i18n
+   * @param mask
+   *          the mask
+   * @param shortcutRegister
+   *          the shortcut register
    */
   @Inject
   public SpaceSelectorPresenter(final EventBus eventBus, final StateManager stateManager,
@@ -359,8 +376,9 @@ public class SpaceSelectorPresenter extends
 
   /**
    * On app start.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
@@ -383,8 +401,9 @@ public class SpaceSelectorPresenter extends
 
   /**
    * On group space select.
-   *
-   * @param shouldRestoreToken the should restore token
+   * 
+   * @param shouldRestoreToken
+   *          the should restore token
    */
   private void onGroupSpaceSelect(final boolean shouldRestoreToken) {
     restoreToken(shouldRestoreToken, groupToken);
@@ -404,8 +423,9 @@ public class SpaceSelectorPresenter extends
 
   /**
    * On home space select.
-   *
-   * @param shouldRestoreToken the should restore token
+   * 
+   * @param shouldRestoreToken
+   *          the should restore token
    */
   private void onHomeSpaceSelect(final boolean shouldRestoreToken) {
     restoreToken(shouldRestoreToken, homeToken);
@@ -426,8 +446,9 @@ public class SpaceSelectorPresenter extends
 
   /**
    * On public space select.
-   *
-   * @param shouldRestoreToken the should restore token
+   * 
+   * @param shouldRestoreToken
+   *          the should restore token
    */
   private void onPublicSpaceSelect(final boolean shouldRestoreToken) {
     restoreToken(shouldRestoreToken, inboxToken);
@@ -439,8 +460,9 @@ public class SpaceSelectorPresenter extends
 
   /**
    * On space conf.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @ProxyEvent
   public void onSpaceConf(final SpaceConfEvent event) {
@@ -464,8 +486,9 @@ public class SpaceSelectorPresenter extends
 
   /**
    * On space select.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @ProxyEvent
   public void onSpaceSelect(final SpaceSelectEvent event) {
@@ -504,8 +527,9 @@ public class SpaceSelectorPresenter extends
 
   /**
    * On user sign out.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @ProxyEvent
   public void onUserSignOut(final UserSignOutEvent event) {
@@ -517,8 +541,9 @@ public class SpaceSelectorPresenter extends
 
   /**
    * On user space select.
-   *
-   * @param shouldRestoreToken the should restore token
+   * 
+   * @param shouldRestoreToken
+   *          the should restore token
    */
   private void onUserSpaceSelect(final boolean shouldRestoreToken) {
     if (session.isLogged()) {
@@ -537,9 +562,11 @@ public class SpaceSelectorPresenter extends
 
   /**
    * Restore token.
-   *
-   * @param shouldRestoreToken the should restore token
-   * @param token the token
+   * 
+   * @param shouldRestoreToken
+   *          the should restore token
+   * @param token
+   *          the token
    */
   private void restoreToken(final boolean shouldRestoreToken, final String token) {
     if (shouldRestoreToken) {
@@ -549,15 +576,18 @@ public class SpaceSelectorPresenter extends
 
   /**
    * Restore token.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   private void restoreToken(final String token) {
     Log.info("Restoring token from SpaceSelector: " + token);
     stateManager.gotoHistoryToken(token);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -567,8 +597,9 @@ public class SpaceSelectorPresenter extends
 
   /**
    * Sets the down.
-   *
-   * @param space the new down
+   * 
+   * @param space
+   *          the new down
    */
   private void setDown(final Space space) {
     getView().setHomeBtnDown(space.equals(Space.homeSpace));

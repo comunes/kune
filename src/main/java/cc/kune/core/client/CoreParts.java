@@ -23,6 +23,8 @@
 package cc.kune.core.client;
 
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
+import cc.kune.common.client.ui.KuneWindowUtils;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.auth.AnonUsersManager;
 import cc.kune.core.client.auth.EmailNotVerifiedReminder;
 import cc.kune.core.client.auth.Register;
@@ -49,6 +51,7 @@ import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
 import cc.kune.core.client.sn.actions.registry.UserSNConfActions;
 import cc.kune.core.client.state.HistoryTokenAuthNotNeededCallback;
 import cc.kune.core.client.state.HistoryTokenMustBeAuthCallback;
+import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.client.state.LinkInterceptor;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokenListeners;
@@ -147,7 +150,7 @@ public class CoreParts {
       final Provider<TutorialViewer> tutorialViewer, final Provider<WebSocketChecker> websocketChecker,
       final Provider<EmailNotVerifiedReminder> emailNotVerifiedReminder,
       final Provider<SiteInvitationBtn> siteInvitation, final InvitationClientManager invitationManager,
-      final Provider<LinkInterceptor> linkInterceptor) {
+      final Provider<LinkInterceptor> linkInterceptor, final HistoryWrapper history) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -171,7 +174,17 @@ public class CoreParts {
         Scheduler.get().scheduleFinally(new ScheduledCommand() {
           @Override
           public void execute() {
-            signIn.get().showSignInDialog();
+            if (session.isLogged()) {
+              // We are logged, then redirect:
+              if (token != null && token.matches(TextUtils.URL_REGEXP)) {
+                // Redirect to other website
+                KuneWindowUtils.open(token);
+              } else {
+                history.newItem(token, true);
+              }
+            } else {
+              signIn.get().showSignInDialog(token);
+            }
           }
         });
       }
@@ -186,13 +199,13 @@ public class CoreParts {
     tokenListener.put(SiteTokens.REGISTER, new HistoryTokenAuthNotNeededCallback() {
       @Override
       public void onHistoryToken(final String token) {
-        register.get().doRegister();
+        register.get().doRegister(token);
       }
     });
     tokenListener.put(SiteTokens.TUTORIAL, new HistoryTokenAuthNotNeededCallback() {
       @Override
       public void onHistoryToken(final String token) {
-        // Do nothing (move SMD part here?)
+        // Do nothing (move SMD part here, but depends of getContent callback)
       }
     });
     tokenListener.put(SiteTokens.NEW_GROUP,

@@ -433,7 +433,8 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
    * @see cc.kune.core.client.auth.SignIn#showSignInDialog()
    */
   @Override
-  public void showSignInDialog() {
+  public void showSignInDialog(final String token) {
+    setGotoTokenOnSuccess(token);
     registerProvider.get().hide();
     registerProvider.get().setGotoTokenOnCancel(this.getGotoTokenOnCancel());
     if (session.isLogged()) {
@@ -441,7 +442,6 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     } else {
       eventBus.fireEvent(new ProgressShowEvent());
       getView().show();
-      // getView().center();
       eventBus.fireEvent(new ProgressHideEvent());
       getView().focusOnNickname();
       timer.configure(new Executer() {

@@ -25,7 +25,7 @@ package cc.kune.core.client.auth;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface Register.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface Register {
@@ -35,8 +35,11 @@ public interface Register {
 
   /**
    * Do register.
+   * 
+   * @param token
+   *          to go when success registered
    */
-  void doRegister();
+  void doRegister(String token);
 
   /**
    * Hide.
@@ -45,8 +48,9 @@ public interface Register {
 
   /**
    * Sets the goto token on cancel.
-   *
-   * @param gotoTokenOnCancel the new goto token on cancel
+   * 
+   * @param gotoTokenOnCancel
+   *          the new goto token on cancel
    */
   void setGotoTokenOnCancel(String gotoTokenOnCancel);
 

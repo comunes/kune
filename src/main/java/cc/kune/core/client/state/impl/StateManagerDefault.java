@@ -130,9 +130,6 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   /** The site tokens. */
   private final SiteTokenListeners siteTokens;
 
-  /** The token matcher. */
-  private final TokenMatcher tokenMatcher;
-
   /**
    * Instantiates a new state manager default.
    * 
@@ -153,9 +150,8 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
    */
   @Inject
   public StateManagerDefault(final ContentCache contentProvider, final Session session,
-      final HistoryWrapper history, final TokenMatcher tokenMatcher, final EventBus eventBus,
-      final SiteTokenListeners siteTokens, final Provider<SignIn> signIn) {
-    this.tokenMatcher = tokenMatcher;
+      final HistoryWrapper history, final EventBus eventBus, final SiteTokenListeners siteTokens,
+      final Provider<SignIn> signIn) {
     this.eventBus = eventBus;
     this.contentCache = contentProvider;
     this.session = session;
@@ -581,8 +577,8 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         Log.debug("Is not a special hash like #newgroup, etc, or maybe has a #hash(redirection)");
         // token is not one of #newgroup #signin #translate ...
         final String newTokenLower = newToken != null ? newToken.toLowerCase() : null;
-        if (newTokenLower != null && tokenMatcher.hasRedirect(newTokenLower)) {
-          final Pair<String, String> redirect = tokenMatcher.getRedirect(newTokenLower);
+        if (newTokenLower != null && TokenMatcher.hasRedirect(newTokenLower)) {
+          final Pair<String, String> redirect = TokenMatcher.getRedirect(newTokenLower);
           final String firstToken = redirect.getLeft();
           final String sndToken = redirect.getRight();
           if (firstToken.equals(SiteTokens.PREVIEW)) {
@@ -606,23 +602,11 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             if (tokenWithRedirect != null) {
               isSpecialHash = true;
               Log.info("Is some #subtitle(foo) or #verifyemail(hash) etc");
-              doActionOrSignInIfNeeded(tokenWithRedirect, newToken,
-                  tokenMatcher.getRedirect(newToken).getRight());
-            } else if (firstToken.equals(SiteTokens.NEW_GROUP)) {
-              siteTokens.get(SiteTokens.NEW_GROUP).onHistoryToken(newToken);
-            } else if (firstToken.equals(SiteTokens.SIGN_IN)) {
-              if (session.isLogged()) {
-                // We are logged, then redirect:
-                history.newItem(sndToken, false);
-                processHistoryToken(sndToken);
-              } else {
-                // We have to login
-                siteTokens.get(SiteTokens.SIGN_IN).onHistoryToken(newToken);
-              }
+              doActionOrSignInIfNeeded(tokenWithRedirect, newToken, sndToken);
             }
           }
         }
-        if (tokenMatcher.isWaveToken(newToken)) {
+        if (TokenMatcher.isWaveToken(newToken)) {
           if (session.isLogged()) {
             SpaceConfEvent.fire(eventBus, Space.userSpace, newToken);
             SpaceSelectEvent.fire(eventBus, Space.userSpace);
@@ -642,7 +626,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
           }
         } else if (!isSpecialHash) {
           // FIXME This can be in the top of isWaveToken....
-          if (tokenMatcher.isGroupToken(newToken)) {
+          if (TokenMatcher.isGroupToken(newToken)) {
             SpaceConfEvent.fire(eventBus, Space.groupSpace, newToken);
             SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(newToken));
             SpaceSelectEvent.fire(eventBus, Space.groupSpace);
@@ -678,9 +662,9 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   @Override
   public void redirectOrRestorePreviousToken(final boolean fireChange) {
     final String token = history.getToken();
-    if (tokenMatcher.hasRedirect(token)) {
+    if (TokenMatcher.hasRedirect(token)) {
       // URL of the form signin(group.tool)
-      final String previousToken = tokenMatcher.getRedirect(token).getRight();
+      final String previousToken = TokenMatcher.getRedirect(token).getRight();
       if (previousToken.equals(SiteTokens.WAVE_INBOX) && session.isNotLogged()) {
         // signin(inbox) && cancel
         restorePreviousToken(fireChange);
