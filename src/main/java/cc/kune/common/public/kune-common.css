@@ -3,7 +3,7 @@
 
 }
 
-.k-popup-bottom-centered { /*	z-index:100000; */
+.k-popup-bottom-centered { /*  z-index:100000; */
 
 }
 
@@ -162,7 +162,7 @@
 }
 
 .k-dialog-btn-area button {
-  margin: 10px 5px;
+  margin: 10px 5px !important;
 }
 
 .k-dialog-btn-area div { /* margin: 10px */
