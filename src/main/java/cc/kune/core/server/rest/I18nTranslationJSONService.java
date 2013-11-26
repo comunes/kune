@@ -31,7 +31,9 @@ import cc.kune.core.shared.dto.I18nTranslationDTO;
 import cc.kune.core.shared.dto.SearchResultDTO;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class I18nTranslationJSONService {
   private final I18nTranslationManager manager;
 

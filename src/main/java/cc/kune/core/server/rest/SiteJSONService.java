@@ -22,40 +22,26 @@
  */
 package cc.kune.core.server.rest;
 
-import cc.kune.core.server.manager.SearchResult;
-import cc.kune.core.server.manager.UserManager;
-import cc.kune.core.server.mapper.KuneMapper;
+import cc.kune.core.server.manager.SiteManager;
 import cc.kune.core.server.rack.filters.rest.REST;
-import cc.kune.core.shared.SearcherConstants;
-import cc.kune.core.shared.dto.GroupResultDTO;
-import cc.kune.core.shared.dto.SearchResultDTO;
-import cc.kune.domain.User;
+import cc.kune.core.shared.JSONConstants;
+import cc.kune.core.shared.dto.InitDataDTO;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class UserJSONService {
-  private final UserManager manager;
-  private final KuneMapper mapper;
+public class SiteJSONService {
+  private final SiteManager manager;
 
   @Inject
-  public UserJSONService(final UserManager manager, final KuneMapper mapper) {
+  public SiteJSONService(final SiteManager manager) {
     this.manager = manager;
-    this.mapper = mapper;
   }
 
-  @REST(params = { SearcherConstants.QUERY_PARAM })
-  public SearchResultDTO<GroupResultDTO> search(final String search) {
-    return search(search, null, null);
-  }
-
-  @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM,
-      SearcherConstants.LIMIT_PARAM })
-  public SearchResultDTO<GroupResultDTO> search(final String search, final Integer firstResult,
-      final Integer maxResults) {
-    final SearchResult<User> results = manager.search(search, firstResult, maxResults);
-    return mapper.mapSearchResult(results, GroupResultDTO.class);
+  @REST(params = { JSONConstants.HASH_PARAM })
+  public InitDataDTO getInitData(final String userHash) {
+    return manager.getInitData(userHash);
   }
 
 }

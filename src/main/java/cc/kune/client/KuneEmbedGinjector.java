@@ -27,12 +27,9 @@ import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.EmbedCoreGinModule;
-import cc.kune.core.client.auth.RegisterPresenter;
-import cc.kune.core.client.auth.SignInPresenter;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.errors.ErrorHandler;
-import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.state.SiteTokenListeners;
@@ -49,7 +46,6 @@ import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface KuneEmbedGinjector.
  * 
@@ -57,6 +53,7 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
  */
 @GinModules({ EmbedCoreGinModule.class, WaveEmbedGinModule.class, HablarModule.class })
 public interface KuneEmbedGinjector extends Ginjector, HablarGinjector {
+  // FIXME: Seems that hablar is needed in some point (Wave actions, probably)
 
   /*
    * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
@@ -131,20 +128,6 @@ public interface KuneEmbedGinjector extends Ginjector, HablarGinjector {
   PlaceManager getPlaceManager();
 
   /**
-   * Gets the register presenter.
-   * 
-   * @return the register presenter
-   */
-  AsyncProvider<RegisterPresenter> getRegisterPresenter();
-
-  /**
-   * Gets the sign in presenter.
-   * 
-   * @return the sign in presenter
-   */
-  AsyncProvider<SignInPresenter> getSignInPresenter();
-
-  /**
    * Gets the site token listeners.
    * 
    * @return the site token listeners
@@ -164,12 +147,5 @@ public interface KuneEmbedGinjector extends Ginjector, HablarGinjector {
    * @return the token matcher
    */
   TokenMatcher getTokenMatcher();
-
-  /**
-   * Gets the user confirm presenter.
-   * 
-   * @return the user confirm presenter
-   */
-  AsyncProvider<UserConfirmPresenter> getUserConfirmPresenter();
 
 }

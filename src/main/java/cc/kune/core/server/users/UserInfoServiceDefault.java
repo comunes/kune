@@ -22,6 +22,13 @@
  */
 package cc.kune.core.server.users;
 
+import javax.servlet.http.HttpSession;
+
+import org.json.JSONObject;
+import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.authentication.SessionManager;
+import org.waveprotocol.box.server.rpc.WaveClientServlet;
+
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
@@ -33,11 +40,12 @@ import cc.kune.domain.finders.UserSignInLogFinder;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserInfoServiceDefault.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -46,30 +54,48 @@ public class UserInfoServiceDefault implements UserInfoService {
 
   /** The group manager. */
   private final GroupManager groupManager;
-  
+
   /** The social network manager. */
   private final SocialNetworkManager socialNetworkManager;
-  
+
   /** The user sign in log finder. */
   private final UserSignInLogFinder userSignInLogFinder;
 
+  private final WaveClientServlet waveClientServlet;
+
+  private final SessionManager waveSessionManager;
+
+  private final String websocketAddress;
+
   /**
    * Instantiates a new user info service default.
-   *
-   * @param socialNetwork the social network
-   * @param groupManager the group manager
-   * @param userSignInLogFinder the user sign in log finder
+   * 
+   * @param socialNetwork
+   *          the social network
+   * @param groupManager
+   *          the group manager
+   * @param userSignInLogFinder
+   *          the user sign in log finder
    */
   @Inject
   public UserInfoServiceDefault(final SocialNetworkManager socialNetwork,
-      final GroupManager groupManager, UserSignInLogFinder userSignInLogFinder) {
+      final SessionManager waveSessionManager, final WaveClientServlet waveClientServlet,
+      final GroupManager groupManager, final UserSignInLogFinder userSignInLogFinder,
+      @Named(CoreSettings.HTTP_WEBSOCKET_PUBLIC_ADDRESS) final String websocketAddress) {
     this.socialNetworkManager = socialNetwork;
+    this.waveSessionManager = waveSessionManager;
+    this.waveClientServlet = waveClientServlet;
     this.groupManager = groupManager;
     this.userSignInLogFinder = userSignInLogFinder;
+    this.websocketAddress = websocketAddress;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.users.UserInfoService#buildInfo(cc.kune.domain.User, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.users.UserInfoService#buildInfo(cc.kune.domain.User,
+   * java.lang.String)
    */
   @Override
   public UserInfo buildInfo(final User user, final String userHash) throws DefaultException {
@@ -96,6 +122,11 @@ public class UserInfoServiceDefault implements UserInfoService {
       if (defaultContent != null) {
         userInfo.setHomePage(defaultContent.getStateToken().toString());
       }
+      final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
+      final JSONObject clientFlags = new JSONObject();
+      userInfo.setSessionJSON(waveClientServlet.getSessionJson(sessionFromToken).toString());
+      userInfo.setClientFlags(clientFlags.toString());
+      userInfo.setWebsocketAddress(websocketAddress);
     }
     return userInfo;
   }

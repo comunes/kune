@@ -30,60 +30,72 @@ import cc.kune.domain.I18nCountry;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.User;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class UserInfo.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserInfo {
-  
+
   /** The chat name. */
   private String chatName;
-  
+
+  /** The client flags. */
+  private String clientFlags;
+
   /** The enabled tools. */
   private List<String> enabledTools;
-  
+
   /** The groups is admin. */
   private Set<Group> groupsIsAdmin;
-  
+
   /** The groups is collab. */
   private Set<Group> groupsIsCollab;
-  
+
   /** The groups is participating. */
   private List<Group> groupsIsParticipating;
-  
+
   /** The home page. */
   private String homePage;
-  
+
+  /** The session json. */
+  private String sessionJSON;
+
   /** The show deleted content. */
   private boolean showDeletedContent;
-  
+
   /** The sign in count. */
   private Long signInCount;
-  
+
   /** The user. */
   private User user;
-  
+
   /** The user group. */
   private Group userGroup;
-  
+
   /** The user hash. */
   private String userHash;
 
+  /** The websocket address. */
+  private String websocketAddress;
+
   /**
    * Gets the chat name.
-   *
+   * 
    * @return the chat name
    */
   public String getChatName() {
     return chatName;
   }
 
+  public String getClientFlags() {
+    return clientFlags;
+  }
+
   /**
    * Gets the country.
-   *
+   * 
    * @return the country
    */
   public I18nCountry getCountry() {
@@ -92,7 +104,7 @@ public class UserInfo {
 
   /**
    * Gets the enabled tools.
-   *
+   * 
    * @return the enabled tools
    */
   public List<String> getEnabledTools() {
@@ -101,7 +113,7 @@ public class UserInfo {
 
   /**
    * Gets the groups is admin.
-   *
+   * 
    * @return the groups is admin
    */
   public Set<Group> getGroupsIsAdmin() {
@@ -110,7 +122,7 @@ public class UserInfo {
 
   /**
    * Gets the groups is collab.
-   *
+   * 
    * @return the groups is collab
    */
   public Set<Group> getGroupsIsCollab() {
@@ -119,7 +131,7 @@ public class UserInfo {
 
   /**
    * Gets the groups is participating.
-   *
+   * 
    * @return the groups is participating
    */
   public List<Group> getGroupsIsParticipating() {
@@ -128,7 +140,7 @@ public class UserInfo {
 
   /**
    * Gets the home page.
-   *
+   * 
    * @return the home page
    */
   public String getHomePage() {
@@ -137,7 +149,7 @@ public class UserInfo {
 
   /**
    * Gets the language.
-   *
+   * 
    * @return the language
    */
   public I18nLanguage getLanguage() {
@@ -146,16 +158,20 @@ public class UserInfo {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
     return user.getName();
   }
 
+  public String getSessionJSON() {
+    return sessionJSON;
+  }
+
   /**
    * Gets the short name.
-   *
+   * 
    * @return the short name
    */
   public String getShortName() {
@@ -164,7 +180,7 @@ public class UserInfo {
 
   /**
    * Gets the show deleted content.
-   *
+   * 
    * @return the show deleted content
    */
   public boolean getShowDeletedContent() {
@@ -173,7 +189,7 @@ public class UserInfo {
 
   /**
    * Gets the sign in count.
-   *
+   * 
    * @return the sign in count
    */
   public Long getSignInCount() {
@@ -182,7 +198,7 @@ public class UserInfo {
 
   /**
    * Gets the user.
-   *
+   * 
    * @return the user
    */
   public User getUser() {
@@ -191,7 +207,7 @@ public class UserInfo {
 
   /**
    * Gets the user group.
-   *
+   * 
    * @return the user group
    */
   public Group getUserGroup() {
@@ -200,26 +216,36 @@ public class UserInfo {
 
   /**
    * Gets the user hash.
-   *
+   * 
    * @return the user hash
    */
   public String getUserHash() {
     return userHash;
   }
 
+  public String getWebsocketAddress() {
+    return websocketAddress;
+  }
+
   /**
    * Sets the chat name.
-   *
-   * @param chatName the new chat name
+   * 
+   * @param chatName
+   *          the new chat name
    */
   public void setChatName(final String chatName) {
     this.chatName = chatName;
   }
 
+  public void setClientFlags(final String clientFlags) {
+    this.clientFlags = clientFlags;
+  }
+
   /**
    * Sets the enabled tools.
-   *
-   * @param enabledTools the new enabled tools
+   * 
+   * @param enabledTools
+   *          the new enabled tools
    */
   public void setEnabledTools(final List<String> enabledTools) {
     this.enabledTools = enabledTools;
@@ -227,8 +253,9 @@ public class UserInfo {
 
   /**
    * Sets the groups is admin.
-   *
-   * @param groupsIsAdmin the new groups is admin
+   * 
+   * @param groupsIsAdmin
+   *          the new groups is admin
    */
   public void setGroupsIsAdmin(final Set<Group> groupsIsAdmin) {
     this.groupsIsAdmin = groupsIsAdmin;
@@ -236,8 +263,9 @@ public class UserInfo {
 
   /**
    * Sets the groups is collab.
-   *
-   * @param groupsIsCollab the new groups is collab
+   * 
+   * @param groupsIsCollab
+   *          the new groups is collab
    */
   public void setGroupsIsCollab(final Set<Group> groupsIsCollab) {
     this.groupsIsCollab = groupsIsCollab;
@@ -245,8 +273,9 @@ public class UserInfo {
 
   /**
    * Sets the groups is participating.
-   *
-   * @param groupsIsParticipating the new groups is participating
+   * 
+   * @param groupsIsParticipating
+   *          the new groups is participating
    */
   public void setGroupsIsParticipating(final List<Group> groupsIsParticipating) {
     this.groupsIsParticipating = groupsIsParticipating;
@@ -254,17 +283,23 @@ public class UserInfo {
 
   /**
    * Sets the home page.
-   *
-   * @param homePage the new home page
+   * 
+   * @param homePage
+   *          the new home page
    */
   public void setHomePage(final String homePage) {
     this.homePage = homePage;
   }
 
+  public void setSessionJSON(final String sessionJSON) {
+    this.sessionJSON = sessionJSON;
+  }
+
   /**
    * Sets the show deleted content.
-   *
-   * @param showDeletedContent the new show deleted content
+   * 
+   * @param showDeletedContent
+   *          the new show deleted content
    */
   public void setShowDeletedContent(final boolean showDeletedContent) {
     this.showDeletedContent = showDeletedContent;
@@ -272,8 +307,9 @@ public class UserInfo {
 
   /**
    * Sets the sign in count.
-   *
-   * @param signInCount the new sign in count
+   * 
+   * @param signInCount
+   *          the new sign in count
    */
   public void setSignInCount(final Long signInCount) {
     this.signInCount = signInCount;
@@ -281,8 +317,9 @@ public class UserInfo {
 
   /**
    * Sets the user.
-   *
-   * @param user the new user
+   * 
+   * @param user
+   *          the new user
    */
   public void setUser(final User user) {
     this.user = user;
@@ -290,8 +327,9 @@ public class UserInfo {
 
   /**
    * Sets the user group.
-   *
-   * @param userGroup the new user group
+   * 
+   * @param userGroup
+   *          the new user group
    */
   public void setUserGroup(final Group userGroup) {
     this.userGroup = userGroup;
@@ -299,11 +337,16 @@ public class UserInfo {
 
   /**
    * Sets the user hash.
-   *
-   * @param userHash the new user hash
+   * 
+   * @param userHash
+   *          the new user hash
    */
   public void setUserHash(final String userHash) {
     this.userHash = userHash;
+  }
+
+  public void setWebsocketAddress(final String websocketAddress) {
+    this.websocketAddress = websocketAddress;
   }
 
 }

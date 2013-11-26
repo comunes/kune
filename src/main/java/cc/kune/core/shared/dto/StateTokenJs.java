@@ -20,37 +20,47 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.rpc;
+package cc.kune.core.shared.dto;
 
-import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.client.rpcservices.SiteService;
-import cc.kune.core.server.manager.impl.SiteManagerDefault;
-import cc.kune.core.server.persist.KuneTransactional;
-import cc.kune.core.shared.dto.InitDataDTO;
-
-import com.google.inject.Inject;
+import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The Class SiteRPC.
+ * The Class StateTokenJs
  * 
- * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SiteRPC implements RPC, SiteService {
+public class StateTokenJs extends JavaScriptObject {
 
-  private final SiteManagerDefault manager;
-
-  /**
-   * Instantiates a new site rpc.
-   */
-  @Inject
-  public SiteRPC(final SiteManagerDefault manager) {
-    this.manager = manager;
+  protected StateTokenJs() {
   }
 
-  @Override
-  @KuneTransactional
-  public InitDataDTO getInitData(final String userHash) throws DefaultException {
-    return manager.getInitData(userHash);
-  }
+  /** The document. */
+  public final native String getDocument() /*-{
+		return this.document;
+  }-*/;
+
+  /** The encoded. */
+  public final native String getEncoded() /*-{
+		return this.encoded;
+  }-*/;
+
+  // public String getEncoded() {
+  // return new StateToken(getGroup(), getTool(), getFolder(),
+  // getDocument()).getEncoded();
+  // }
+
+  /** The folder. */
+  public final native String getFolder() /*-{
+		return this.folder;
+  }-*/;
+
+  /** The group. */
+  public final native String getGroup() /*-{
+		return this.group;
+  }-*/;
+
+  /** The tool. */
+  public final native String getTool() /*-{
+		return this.tool;
+  }-*/;
 }

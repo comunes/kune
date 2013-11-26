@@ -25,6 +25,8 @@ package cc.kune.core.client.embed;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.shared.utils.Url;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
 import cc.kune.core.client.state.Session;
@@ -66,6 +68,15 @@ public class EmbedSitebar {
     Window.addResizeHandler(new ResizeHandler() {
       @Override
       public void onResize(final ResizeEvent event) {
+        setPopupPosition();
+      }
+    });
+
+    session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        // This is needed because the panel has different sinces depending on
+        // the session
         setPopupPosition();
       }
     });

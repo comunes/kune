@@ -1,5 +1,6 @@
-/*******************************************************************************
- * Copyright (C) 2007, 2013 Licensed to the Comunes Association (CA) under
+/*
+ *
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -17,35 +18,26 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *******************************************************************************/
-
-package cc.kune.core.server.rpc;
-
-import cc.kune.core.server.mbean.MBeanConstants;
-
-// TODO: Auto-generated Javadoc
-/**
- * MBean interface for JMX management of the {@link SiteRPC}.
  *
+ */
+package cc.kune.core.shared;
+
+/**
+ * The Class JSONConstants.
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public interface SiteRPCMBean {
+public final class JSONConstants {
 
-  /** The Constant MBEAN_OBJECT_NAME. */
-  public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SiteRPC";
+  /** /** The Constant HASH_PARAM. */
+  public final static String HASH_PARAM = "hash";
 
-  /**
-   * Gets the store untranslated string.
-   * 
-   * @return the store unstranslated string
-   */
-  boolean getStoreUntranslatedString();
+  /** The Constant TOKEN_PARAM. */
+  public final static String TOKEN_PARAM = "token";
 
   /**
-   * Sets the store untranslated string.
-   *
-   * @param storeUntranslatedString the new store untranslated string
+   * Instantiates a new json constants.
    */
-  void setStoreUntranslatedString(boolean storeUntranslatedString);
-
+  private JSONConstants() {
+  }
 }

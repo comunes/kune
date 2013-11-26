@@ -1,5 +1,6 @@
 kune (0.3.0+b32) unstable; urgency=low
 
+  * More work in #361 to embed waves
   * Wave minor fixes in style and translations
   * Wave panel titles
   * Added some initial work for running supedev gwt mode

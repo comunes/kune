@@ -1,6 +1,5 @@
-/*
- *
- * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
+/*******************************************************************************
+ * Copyright (C) 2007, 2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -18,39 +17,36 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-package cc.kune.core.server.rpc;
+ *******************************************************************************/
 
-import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.client.rpcservices.SiteService;
-import cc.kune.core.server.manager.impl.SiteManagerDefault;
-import cc.kune.core.server.persist.KuneTransactional;
-import cc.kune.core.shared.dto.InitDataDTO;
+package cc.kune.core.server.manager.impl;
 
-import com.google.inject.Inject;
+import cc.kune.core.server.mbean.MBeanConstants;
+import cc.kune.core.server.rpc.SiteRPC;
 
 /**
- * The Class SiteRPC.
+ * MBean interface for JMX management of the {@link SiteRPC}.
  * 
- * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SiteRPC implements RPC, SiteService {
+public interface SiteManagerDefaultMBean {
 
-  private final SiteManagerDefault manager;
+  /** The Constant MBEAN_OBJECT_NAME. */
+  public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SiteManagerDefault";
 
   /**
-   * Instantiates a new site rpc.
+   * Gets the store untranslated string.
+   * 
+   * @return the store unstranslated string
    */
-  @Inject
-  public SiteRPC(final SiteManagerDefault manager) {
-    this.manager = manager;
-  }
+  boolean getStoreUntranslatedString();
 
-  @Override
-  @KuneTransactional
-  public InitDataDTO getInitData(final String userHash) throws DefaultException {
-    return manager.getInitData(userHash);
-  }
+  /**
+   * Sets the store untranslated string.
+   * 
+   * @param storeUntranslatedString
+   *          the new store untranslated string
+   */
+  void setStoreUntranslatedString(boolean storeUntranslatedString);
+
 }

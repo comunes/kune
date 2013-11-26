@@ -29,62 +29,64 @@ import java.util.List;
 import cc.kune.core.server.rack.filters.rest.REST;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class TestJSONService {
 
-  @Inject
-  public TestJSONService() {
-  }
-
-  @REST(params = { "value" }, format = "json")
-  public String test(String value) {
-    return "The value is " + value;
-  }
-
-  @REST(params = { "name", "value" }, format = "json")
-  public List<SimpleObject> test2(String theName, String theValue) {
-    int total = 5;
-    ArrayList<SimpleObject> result = new ArrayList<SimpleObject>(total);
-    for (int index = 0; index < total; index++) {
-      result.add(new SimpleObject(theName + total, theValue + total, new Date()));
-    }
-    return result;
-  }
-
   public static class SimpleObject {
+    private Date date;
     private String name;
     private String value;
-    private Date date;
 
-    public SimpleObject(String name, String value, Date date) {
+    public SimpleObject(final String name, final String value, final Date date) {
       this.name = name;
       this.value = value;
       this.date = date;
-    }
-
-    public String getName() {
-      return name;
-    }
-
-    public void setName(String name) {
-      this.name = name;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    public void setValue(String value) {
-      this.value = value;
     }
 
     public Date getDate() {
       return date;
     }
 
-    public void setDate(Date date) {
+    public String getName() {
+      return name;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    public void setDate(final Date date) {
       this.date = date;
     }
 
+    public void setName(final String name) {
+      this.name = name;
+    }
+
+    public void setValue(final String value) {
+      this.value = value;
+    }
+
+  }
+
+  @Inject
+  public TestJSONService() {
+  }
+
+  @REST(params = { "value" }, format = "json")
+  public String test(final String value) {
+    return "The value is " + value;
+  }
+
+  @REST(params = { "name", "value" }, format = "json")
+  public List<SimpleObject> test2(final String theName, final String theValue) {
+    final int total = 5;
+    final ArrayList<SimpleObject> result = new ArrayList<SimpleObject>(total);
+    for (int index = 0; index < total; index++) {
+      result.add(new SimpleObject(theName + total, theValue + total, new Date()));
+    }
+    return result;
   }
 }

@@ -25,24 +25,22 @@ package cc.kune.core.client.embed;
 
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.core.client.auth.SignIn;
+import cc.kune.common.client.ui.KuneWindowUtils;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SiteTokens;
+import cc.kune.core.client.state.TokenUtils;
 
+import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * The Class SitebarSignInAction.
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SignInEmbedAction extends AbstractSignInAction {
-
-  private final Session session;
-  private SignIn signIn;
-  private final Provider<SignIn> signInProv;
+public class EmbedSignInAction extends AbstractSignInAction {
 
   /**
    * Instantiates a new sitebar sign in action.
@@ -55,11 +53,8 @@ public class SignInEmbedAction extends AbstractSignInAction {
    *          the session
    */
   @Inject
-  public SignInEmbedAction(final I18nUITranslationService i18n, final Session session,
-      final Provider<SignIn> signIn) {
+  public EmbedSignInAction(final I18nUITranslationService i18n) {
     super();
-    this.session = session;
-    this.signInProv = signIn;
     putValue(Action.NAME, i18n.t("Participate"));
     putValue(Action.TOOLTIP,
         i18n.t("Please sign in [%s] to participate in this document", i18n.getSiteCommonName()));
@@ -74,13 +69,8 @@ public class SignInEmbedAction extends AbstractSignInAction {
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
-    if (signIn == null) {
-      final String siteOnOverLogo = session.getInitData().getSiteLogoUrlOnOver();
-      signIn = signInProv.get();
-      signIn.setHeaderLogo(siteOnOverLogo);
-      signIn.setAskForLanguageChange(false);
-    }
-    signIn.showSignInDialog("");
+    KuneWindowUtils.open(GWT.getHostPageBaseURL() + "#!"
+        + TokenUtils.addRedirect(SiteTokens.SIGN_IN, WindowUtils.getLocation().getHref()));
   }
 
 }

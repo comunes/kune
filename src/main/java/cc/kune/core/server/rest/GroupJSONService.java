@@ -32,7 +32,9 @@ import cc.kune.core.shared.dto.SearchResultDTO;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class GroupJSONService {
   private final GroupManager manager;
   private final KuneMapper mapper;

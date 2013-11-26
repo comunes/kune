@@ -20,37 +20,37 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.server.rpc;
+package cc.kune.core.shared.dto;
 
-import cc.kune.core.client.errors.DefaultException;
-import cc.kune.core.client.rpcservices.SiteService;
-import cc.kune.core.server.manager.impl.SiteManagerDefault;
-import cc.kune.core.server.persist.KuneTransactional;
-import cc.kune.core.shared.dto.InitDataDTO;
-
-import com.google.inject.Inject;
+import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The Class SiteRPC.
+ * The Class StateAbstractDTOJs
  * 
- * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SiteRPC implements RPC, SiteService {
+public class StateAbstractDTOJs extends JavaScriptObject {
 
-  private final SiteManagerDefault manager;
-
-  /**
-   * Instantiates a new site rpc.
-   */
-  @Inject
-  public SiteRPC(final SiteManagerDefault manager) {
-    this.manager = manager;
+  protected StateAbstractDTOJs() {
   }
 
-  @Override
-  @KuneTransactional
-  public InitDataDTO getInitData(final String userHash) throws DefaultException {
-    return manager.getInitData(userHash);
-  }
+  public final native String getContent() /*-{
+		return this.content;
+  }-*/;
+
+  public final native JavaScriptObject getStateToken() /*-{
+		return this.stateToken;
+  }-*/;
+
+  public final native String getTitle() /*-{
+		return this.title;
+  }-*/;
+
+  public final native String getWaveRef() /*-{
+		return this.waveRef;
+  }-*/;
+
+  public final native boolean isParticipant() /*-{
+		return this.isParticipant;
+  }-*/;
 }

@@ -22,8 +22,7 @@
  */
 package cc.kune.core.server;
 
-import static com.google.inject.matcher.Matchers.annotatedWith;
-import static com.google.inject.matcher.Matchers.any;
+import static com.google.inject.matcher.Matchers.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -64,6 +63,7 @@ import cc.kune.core.server.rack.filters.rest.RESTServicesModule;
 import cc.kune.core.server.rest.ContentJSONService;
 import cc.kune.core.server.rest.GroupJSONService;
 import cc.kune.core.server.rest.I18nTranslationJSONService;
+import cc.kune.core.server.rest.SiteJSONService;
 import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
 import cc.kune.core.server.scheduler.CronServerTasksManager;
@@ -209,8 +209,8 @@ public class KuneRackModule implements RackModule {
         ContentService.class, UserService.class, SocialNetService.class, I18nService.class,
         ListsService.class, ClientStatsService.class, InvitationService.class);
     builder.installRESTServices("^" + SUFFIX_REG_EXP + "/json/", TestJSONService.class,
-        GroupJSONService.class, UserJSONService.class, I18nTranslationJSONService.class,
-        ContentJSONService.class);
+        SiteJSONService.class, GroupJSONService.class, UserJSONService.class,
+        I18nTranslationJSONService.class, ContentJSONService.class);
     builder.installServlet("^" + SUFFIX_REG_EXP + "/servlets/", FileUploadManager.class,
         FileDownloadManager.class, EntityLogoUploadManager.class, EntityLogoDownloadManager.class,
         FileGwtUploadServlet.class, EntityBackgroundDownloadManager.class,

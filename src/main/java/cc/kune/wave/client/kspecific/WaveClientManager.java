@@ -27,10 +27,8 @@ import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.WaveClientParams;
+import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.wave.client.KuneWaveProfileManager;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -47,9 +45,6 @@ import com.google.inject.Inject;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveClientManager {
-
-  /** The web client. */
-  private WaveClientView webClient;
 
   /**
    * Instantiates a new wave client manager.
@@ -71,45 +66,47 @@ public class WaveClientManager {
    * @param webclientView
    *          the webclient view
    */
+  private boolean ready = false;
+
+  /** The web client. */
+  private WaveClientView webClient;
+
   @Inject
-  public WaveClientManager(final Session session, final EventBus eventBus,
-      final UserServiceAsync userService, final HasWaveContainer panel,
+  public WaveClientManager(final Session session, final EventBus eventBus, final HasWaveContainer panel,
       final KuneWaveProfileManager profiles, final WaveClientProvider webclientView) {
     session.onUserSignIn(true, new UserSignInHandler() {
+
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
-        userService.getWaveClientParameters(session.getUserHash(),
-            new AsyncCallbackSimple<WaveClientParams>() {
-              @Override
-              public void onSuccess(final WaveClientParams result) {
-                setSessionJSON(JsonUtils.safeEval(result.getSessionJSON()));
-                setClientFlags(JsonUtils.safeEval(result.getClientFlags()));
-                setWebsocketAddress(result.getWebsocketAddress());
-                Log.info("Wave client session: " + result.getSessionJSON());
-                Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-                  @Override
-                  public void execute() {
-                    final ForIsWidget waveContainer = panel.getForIsWidget();
-                    if (webClient == null) {
-                      if (waveContainer.getWidgetCount() > 0) {
-                        waveContainer.remove(0);
-                      }
-                      webClient = webclientView.get();
-                      waveContainer.add(webClient);
-                    } else {
-                      // this is done with the first webclient creation above
-                      webClient.login();
-                      webClient.asWidget().setVisible(true);
-                    }
-                  }
-                });
+        final UserInfoDTO result = event.getUserInfo();
+        setSessionJSON(JsonUtils.safeEval(result.getSessionJSON()));
+        setClientFlags(JsonUtils.safeEval(result.getClientFlags()));
+        setWebsocketAddress(result.getWebsocketAddress());
+        Log.info("Wave client session: " + result.getSessionJSON());
+        ready = true;
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            final ForIsWidget waveContainer = panel.getForIsWidget();
+            if (webClient == null) {
+              if (waveContainer.getWidgetCount() > 0) {
+                waveContainer.remove(0);
               }
-            });
+              webClient = webclientView.get();
+              waveContainer.add(webClient);
+            } else {
+              // this is done with the first webclient creation above
+              webClient.login();
+              webClient.asWidget().setVisible(true);
+            }
+          }
+        });
       }
     });
     session.onUserSignOut(true, new UserSignOutHandler() {
       @Override
       public void onUserSignOut(final UserSignOutEvent event) {
+        ready = false;
         if (webClient != null) {
           webClient.asWidget().setVisible(false);
           webClient.logout();
@@ -118,15 +115,6 @@ public class WaveClientManager {
         setClientFlags(JsonUtils.safeEval("{}"));
       }
     });
-  }
-
-  /**
-   * Gets the web client.
-   * 
-   * @return the web client
-   */
-  public WaveClientView getWebClient() {
-    return webClient;
   }
 
   /**

@@ -27,25 +27,47 @@ import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.rack.filters.rest.REST;
+import cc.kune.core.server.rpc.ContentRPC;
+import cc.kune.core.shared.JSONConstants;
 import cc.kune.core.shared.SearcherConstants;
+import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.dto.SearchResultDTO;
+import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class ContentJSONService {
-  private final ContentManager contentManager;
-  private final KuneMapper mapper;
   private final ContainerManager containerManager;
+  private final ContentManager contentManager;
+  private final ContentRPC contentRpc;
+  private final KuneMapper mapper;
 
   @Inject
-  public ContentJSONService(final ContentManager contentManager,
+  public ContentJSONService(final ContentManager contentManager, final ContentRPC contentRpc,
       final ContainerManager containerManager, final KuneMapper mapper) {
+    this.contentRpc = contentRpc;
     this.containerManager = containerManager;
     this.contentManager = contentManager;
     this.mapper = mapper;
+  }
+
+  @REST(params = { JSONConstants.HASH_PARAM, JSONConstants.TOKEN_PARAM })
+  public StateAbstractDTO getContent(final String userHash, final String token) {
+    return contentRpc.getContent(userHash, new StateToken(token));
+  }
+
+  @REST(params = { JSONConstants.HASH_PARAM, JSONConstants.TOKEN_PARAM })
+  public StateAbstractDTO getContentByWaveRef(final String userHash, final String waveRef) {
+    return contentRpc.getContentByWaveRef(userHash, waveRef);
+  }
+
+  private SearchResultDTO<LinkDTO> map(final SearchResult<?> results) {
+    return mapper.mapSearchResult(results, LinkDTO.class);
   }
 
   @REST(params = { SearcherConstants.QUERY_PARAM })
@@ -57,10 +79,11 @@ public class ContentJSONService {
       SearcherConstants.LIMIT_PARAM })
   public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult,
       final Integer maxResults) {
-    SearchResult<Content> results = contentManager.search(search, firstResult, maxResults);
-    SearchResult<Container> resultsContainer = containerManager.search(search, firstResult, maxResults);
-    SearchResultDTO<LinkDTO> resultMapped = map(results);
-    SearchResultDTO<LinkDTO> containersMapped = map(resultsContainer);
+    final SearchResult<Content> results = contentManager.search(search, firstResult, maxResults);
+    final SearchResult<Container> resultsContainer = containerManager.search(search, firstResult,
+        maxResults);
+    final SearchResultDTO<LinkDTO> resultMapped = map(results);
+    final SearchResultDTO<LinkDTO> containersMapped = map(resultsContainer);
     resultMapped.getList().addAll(containersMapped.getList());
     resultMapped.setSize(resultMapped.getSize() + containersMapped.getSize());
     return resultMapped;
@@ -70,8 +93,8 @@ public class ContentJSONService {
       SearcherConstants.LIMIT_PARAM, SearcherConstants.GROUP_PARAM, SearcherConstants.MIMETYPE_PARAM })
   public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult,
       final Integer maxResults, final String group, final String mimetype) {
-    SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults, group,
-        mimetype);
+    final SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults,
+        group, mimetype);
     return map(results);
   }
 
@@ -81,10 +104,5 @@ public class ContentJSONService {
   public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult,
       final Integer maxResults, final String group, final String mimetype, final String mimetype2) {
     return map(contentManager.searchMime(search, firstResult, maxResults, group, mimetype, mimetype2));
-
-  }
-
-  private SearchResultDTO<LinkDTO> map(final SearchResult<?> results) {
-    return mapper.mapSearchResult(results, LinkDTO.class);
   }
 }

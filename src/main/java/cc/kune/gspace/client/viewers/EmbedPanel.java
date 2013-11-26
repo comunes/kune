@@ -154,10 +154,6 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 				.hide();
 		$wnd.jQuery("div[class*='ToplevelToolbarWidget-Css-toolbar']").css(
 				"background", "none repeat scroll 0 0 #FFFFFF");
-		$wnd.jQuery("div[class*='ParticipantsViewBuilder-Css-panel']").css(
-				"background-color", "white");
-		$wnd.jQuery("span[class*='ParticipantsViewBuilder-Css-simple']").css(
-				"background-color", "white");
   }-*/;
 
   /*

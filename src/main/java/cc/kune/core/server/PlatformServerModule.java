@@ -67,6 +67,7 @@ import cc.kune.core.server.manager.InvitationManager;
 import cc.kune.core.server.manager.KuneWaveManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.RateManager;
+import cc.kune.core.server.manager.SiteManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.TagManager;
 import cc.kune.core.server.manager.TagUserContentManager;
@@ -87,14 +88,15 @@ import cc.kune.core.server.manager.impl.InvitationManagerDefault;
 import cc.kune.core.server.manager.impl.KuneWaveManagerDefault;
 import cc.kune.core.server.manager.impl.LicenseManagerDefault;
 import cc.kune.core.server.manager.impl.RateManagerDefault;
+import cc.kune.core.server.manager.impl.SiteManagerDefault;
 import cc.kune.core.server.manager.impl.SocialNetworkManagerDefault;
 import cc.kune.core.server.manager.impl.TagManagerDefault;
 import cc.kune.core.server.manager.impl.TagUserContentManagerDefault;
 import cc.kune.core.server.manager.impl.ToolConfigurationManagerDefault;
 import cc.kune.core.server.manager.impl.UserManagerDefault;
 import cc.kune.core.server.manager.impl.UserSignInLogManagerDefault;
-import cc.kune.core.server.mapper.KuneMapperDefault;
 import cc.kune.core.server.mapper.KuneMapper;
+import cc.kune.core.server.mapper.KuneMapperDefault;
 import cc.kune.core.server.notifier.NotificationSender;
 import cc.kune.core.server.notifier.NotificationSenderDefault;
 import cc.kune.core.server.notifier.PendingNotificationSender;
@@ -134,7 +136,7 @@ import com.google.inject.matcher.Matchers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PlatformServerModule.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -144,6 +146,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
    * Bind managers.
    */
   private void bindManagers() {
+    bind(SiteManager.class).to(SiteManagerDefault.class);
     bind(UserManager.class).to(UserManagerDefault.class);
     bind(GroupManager.class).to(GroupManagerDefault.class);
     bind(ContentManager.class).to(ContentManagerDefault.class);
@@ -199,7 +202,9 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(ListServerService.class).to(ListServerServiceDefault.class);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.inject.AbstractModule#configure()
    */
   @Override

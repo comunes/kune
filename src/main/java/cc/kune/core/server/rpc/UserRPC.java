@@ -26,11 +26,8 @@ import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
 import org.jivesoftware.smack.util.Base64;
-import org.json.JSONObject;
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.SessionManager;
-import org.waveprotocol.box.server.rpc.WaveClientServlet;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.core.client.errors.AccessViolationException;
@@ -65,7 +62,6 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
 import cc.kune.core.shared.dto.UserDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
-import cc.kune.core.shared.dto.WaveClientParams;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
@@ -74,12 +70,11 @@ import cc.kune.wave.server.kspecific.ParticipantUtils;
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.name.Named;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserRPC.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -87,81 +82,89 @@ public class UserRPC implements RPC, UserService {
 
   /** The content rpc. */
   private final ContentRPC contentRPC;
-  
+
   /** The mapper. */
   private final KuneMapper mapper;
-  
+
   /** The part utils. */
   private final ParticipantUtils partUtils;
-  
+
   /** The reserverd words. */
   private final ReservedWordsRegistry reserverdWords;
-  
+
   /** The user finder. */
   private final UserFinder userFinder;
-  
+
   /** The user info service. */
   private final UserInfoService userInfoService;
-  
+
   /** The user manager. */
   private final UserManager userManager;
-  
+
   /** The user session manager. */
   private final UserSessionManager userSessionManager;
-  
+
   /** The user sign in log manager. */
   private final UserSignInLogManager userSignInLogManager;
-  
-  /** The wave client servlet. */
-  private final WaveClientServlet waveClientServlet;
-  
+
   /** The wave session manager. */
   private final SessionManager waveSessionManager;
-  
-  /** The websocket address. */
-  private final String websocketAddress;
 
   /**
    * Instantiates a new user rpc.
-   *
-   * @param userSessionProvider the user session provider
-   * @param userManager the user manager
-   * @param userInfoService the user info service
-   * @param mapper the mapper
-   * @param waveSessionManager the wave session manager
-   * @param waveClientServlet the wave client servlet
-   * @param reserverdWords the reserverd words
-   * @param contentRPC the content rpc
-   * @param userSessionManager the user session manager
-   * @param userFinder the user finder
-   * @param partUtils the part utils
-   * @param userSignInLogManager the user sign in log manager
-   * @param websocketAddress the websocket address
+   * 
+   * @param userSessionProvider
+   *          the user session provider
+   * @param userManager
+   *          the user manager
+   * @param userInfoService
+   *          the user info service
+   * @param mapper
+   *          the mapper
+   * @param waveSessionManager
+   *          the wave session manager
+   * @param waveClientServlet
+   *          the wave client servlet
+   * @param reserverdWords
+   *          the reserverd words
+   * @param contentRPC
+   *          the content rpc
+   * @param userSessionManager
+   *          the user session manager
+   * @param userFinder
+   *          the user finder
+   * @param partUtils
+   *          the part utils
+   * @param userSignInLogManager
+   *          the user sign in log manager
+   * @param websocketAddress
+   *          the websocket address
    */
   @Inject
   public UserRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
       final UserInfoService userInfoService, final KuneMapper mapper,
-      final SessionManager waveSessionManager, final WaveClientServlet waveClientServlet,
-      final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC,
-      final UserSessionManager userSessionManager, final UserFinder userFinder,
-      final ParticipantUtils partUtils, final UserSignInLogManager userSignInLogManager,
-      @Named(CoreSettings.HTTP_WEBSOCKET_PUBLIC_ADDRESS) final String websocketAddress) {
+      final SessionManager waveSessionManager, final ReservedWordsRegistry reserverdWords,
+      final ContentRPC contentRPC, final UserSessionManager userSessionManager,
+      final UserFinder userFinder, final ParticipantUtils partUtils,
+      final UserSignInLogManager userSignInLogManager) {
     this.userManager = userManager;
     this.userInfoService = userInfoService;
     this.mapper = mapper;
     this.waveSessionManager = waveSessionManager;
-    this.waveClientServlet = waveClientServlet;
     this.reserverdWords = reserverdWords;
     this.contentRPC = contentRPC;
     this.userSessionManager = userSessionManager;
     this.userFinder = userFinder;
     this.partUtils = partUtils;
     this.userSignInLogManager = userSignInLogManager;
-    this.websocketAddress = websocketAddress;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#askForEmailConfirmation(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#askForEmailConfirmation(java
+   * .lang.String)
    */
   @Authenticated
   @Override
@@ -171,8 +174,12 @@ public class UserRPC implements RPC, UserService {
     userManager.askForEmailConfirmation(user, EmailConfirmationType.emailVerification);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#askForPasswordReset(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#askForPasswordReset(java.lang
+   * .String)
    */
   @Override
   @KuneTransactional
@@ -185,8 +192,12 @@ public class UserRPC implements RPC, UserService {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#changePasswd(java.lang.String, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#changePasswd(java.lang.String,
+   * java.lang.String, java.lang.String)
    */
   @Override
   @Authenticated
@@ -230,8 +241,12 @@ public class UserRPC implements RPC, UserService {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#createUser(cc.kune.core.shared.dto.UserDTO, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#createUser(cc.kune.core.shared
+   * .dto.UserDTO, boolean)
    */
   @Override
   @KuneTransactional(rollbackOn = DefaultException.class)
@@ -243,8 +258,12 @@ public class UserRPC implements RPC, UserService {
         userDTO.getTimezone().getId(), wantPersonalHomepage);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#getBuddiesPresence(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#getBuddiesPresence(java.lang
+   * .String)
    */
   @Authenticated
   @Override
@@ -253,8 +272,12 @@ public class UserRPC implements RPC, UserService {
     return userManager.getBuddiesPresence(userSessionManager.getUser());
   };
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#getUserAvatarBaser64(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#getUserAvatarBaser64(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken)
    */
   @Override
   @Authenticated
@@ -274,32 +297,25 @@ public class UserRPC implements RPC, UserService {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#getWaveClientParameters(java.lang.String)
-   */
-  @Override
-  @Authenticated(mandatory = true)
-  public WaveClientParams getWaveClientParameters(final String userHash) {
-    final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
-    final JSONObject sessionJson = waveClientServlet.getSessionJson(sessionFromToken);
-    final JSONObject clientFlags = new JSONObject(); // waveClientServlet.getClientFlags();
-    return new WaveClientParams(sessionJson.toString(), clientFlags.toString(), websocketAddress);
-  }
-
   /**
    * Load user info.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    * @return the user info dto
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
     final UserInfo userInfo = userInfoService.buildInfo(user, userSessionManager.getHash());
     return mapper.map(userInfo, UserInfoDTO.class);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#login(java.lang.String, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.client.rpcservices.UserService#login(java.lang.String,
+   * java.lang.String, java.lang.String)
    */
   @Override
   @KuneTransactional
@@ -314,11 +330,14 @@ public class UserRPC implements RPC, UserService {
 
   /**
    * Login user.
-   *
-   * @param user the user
-   * @param waveToken the wave token
+   * 
+   * @param user
+   *          the user
+   * @param waveToken
+   *          the wave token
    * @return the user info dto
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
     if (user != null) {
@@ -330,7 +349,9 @@ public class UserRPC implements RPC, UserService {
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.rpcservices.UserService#logout(java.lang.String)
    */
   @Override
@@ -340,8 +361,12 @@ public class UserRPC implements RPC, UserService {
     userSessionManager.logout();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#onlyCheckSession(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#onlyCheckSession(java.lang.
+   * String)
    */
   @Override
   @Authenticated(mandatory = false)
@@ -350,8 +375,12 @@ public class UserRPC implements RPC, UserService {
     // Do almost nothing @Authenticated checks user session
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#reloadUserInfo(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#reloadUserInfo(java.lang.String
+   * )
    */
   @Override
   @KuneTransactional
@@ -368,8 +397,12 @@ public class UserRPC implements RPC, UserService {
     return loadUserInfo(user);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#resetPassword(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#resetPassword(java.lang.String,
+   * java.lang.String)
    */
   @Override
   @KuneTransactional
@@ -384,8 +417,13 @@ public class UserRPC implements RPC, UserService {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#setBuddiesVisibility(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.domain.UserSNetVisibility)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#setBuddiesVisibility(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken,
+   * cc.kune.core.shared.domain.UserSNetVisibility)
    */
   @Override
   @Authenticated(mandatory = true)
@@ -400,8 +438,13 @@ public class UserRPC implements RPC, UserService {
     userManager.setSNetVisibility(user, visibility);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#updateUser(java.lang.String, cc.kune.core.shared.dto.UserDTO, cc.kune.core.shared.dto.I18nLanguageSimpleDTO)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#updateUser(java.lang.String,
+   * cc.kune.core.shared.dto.UserDTO,
+   * cc.kune.core.shared.dto.I18nLanguageSimpleDTO)
    */
   @Override
   @Authenticated
@@ -417,8 +460,12 @@ public class UserRPC implements RPC, UserService {
     return contentRPC.getContent(userHash, userUpdated.getUserGroup().getStateToken());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.UserService#verifyPasswordHash(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.UserService#verifyPasswordHash(java.lang
+   * .String, java.lang.String)
    */
   @Authenticated
   @Override
