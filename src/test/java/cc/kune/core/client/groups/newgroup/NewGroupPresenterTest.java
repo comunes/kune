@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -32,6 +32,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.groups.newgroup.NewGroupPresenter.NewGroupProxy;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.gspace.client.options.GroupOptions;
 
 import com.google.gwt.event.shared.EventBus;
@@ -39,14 +40,14 @@ import com.google.gwt.event.shared.EventBus;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewGroupPresenterTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewGroupPresenterTest {
 
   /** The gr presenter. */
   private NewGroupPresenter grPresenter;
-  
+
   /** The mock gr panel. */
   private NewGroupPanel mockGrPanel;
 
@@ -59,7 +60,7 @@ public class NewGroupPresenterTest {
     grPresenter = new NewGroupPresenter(Mockito.mock(EventBus.class), mockGrPanel,
         Mockito.mock(NewGroupProxy.class), Mockito.mock(I18nTranslationService.class),
         Mockito.mock(Session.class), Mockito.mock(StateManager.class), null, null,
-        Mockito.mock(GroupOptions.class));
+        Mockito.mock(GroupOptions.class), Mockito.mock(SessionChecker.class));
   }
 
   /**

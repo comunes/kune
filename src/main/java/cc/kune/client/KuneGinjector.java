@@ -53,6 +53,7 @@ import cc.kune.core.client.state.SessionExpirationManager;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenMatcher;
+import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.core.client.sub.SubtitlesManager;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
@@ -205,14 +206,14 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
    */
   HSpaceParts getHSpaceParts();
 
-  // GxtGuiProvider getGxtGuiProvider();
-
   /**
    * Gets the h space presenter.
    * 
    * @return the h space presenter
    */
   AsyncProvider<HSpacePresenter> getHSpacePresenter();
+
+  // GxtGuiProvider getGxtGuiProvider();
 
   /**
    * Gets the i18n.
@@ -269,6 +270,8 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
    * @return the register presenter
    */
   AsyncProvider<RegisterPresenter> getRegisterPresenter();
+
+  SessionChecker getSessionChecker();
 
   /**
    * Gets the session expiration manager.

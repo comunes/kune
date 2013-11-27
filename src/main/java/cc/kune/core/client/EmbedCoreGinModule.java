@@ -62,7 +62,9 @@ import cc.kune.core.client.state.StateManagerMock;
 import cc.kune.core.client.state.StateTokenUtils;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.ContentCacheDefault;
+import cc.kune.core.client.state.impl.DummySessionChecker;
 import cc.kune.core.client.state.impl.HistoryWrapperDefault;
+import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.core.client.state.impl.SessionDefault;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.gspace.client.viewers.EmbedPanel;
@@ -187,6 +189,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
 
     // Core App
     bind(Session.class).to(SessionDefault.class).in(Singleton.class);
+    bind(SessionChecker.class).to(DummySessionChecker.class).in(Singleton.class);
     requestStaticInjection(StateTokenUtils.class);
     requestStaticInjection(SessionInstance.class);
     // s(SessionExpirationManager.class);

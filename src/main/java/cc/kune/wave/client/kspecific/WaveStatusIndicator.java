@@ -30,38 +30,43 @@ import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.sn.actions.SessionAction;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.impl.SessionChecker;
 
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveStatusIndicator.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveStatusIndicator {
 
   /**
    * The Class WaveStatusAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class WaveStatusAction extends SessionAction {
 
     /**
      * Instantiates a new wave status action.
-     *
-     * @param session the session
-     * @param i18n the i18n
+     * 
+     * @param session
+     *          the session
+     * @param i18n
+     *          the i18n
      */
     @Inject
-    public WaveStatusAction(final Session session, final I18nTranslationService i18n) {
+    public WaveStatusAction(final Session session, final I18nTranslationService i18n,
+        final SessionChecker sessionChecker) {
       super(session, true);
       setVisible(false);
       ClientEvents.get().addNetworkStatusEventHandler(new NetworkStatusEventHandler() {
@@ -79,13 +84,19 @@ public class WaveStatusIndicator {
             goOnline();
             break;
           case RECONNECTED:
-            session.check(new AsyncCallbackSimple<Void>() {
+            sessionChecker.check(new AsyncCallback<Void>() {
+              @Override
+              public void onFailure(final Throwable caught) {
+                Log.info("Check status fails: maybe here go to home or wait?");
+              }
+
               @Override
               public void onSuccess(final Void result) {
                 goOnline();
               }
             });
             break;
+          case NEVER_CONNECTED:
           case DISCONNECTED:
             if (session.isLogged()) {
               // FIXME: this is because we don't have way to logout in wave,
@@ -104,8 +115,12 @@ public class WaveStatusIndicator {
       });
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -116,8 +131,9 @@ public class WaveStatusIndicator {
 
   /**
    * Instantiates a new wave status indicator.
-   *
-   * @param action the action
+   * 
+   * @param action
+   *          the action
    */
   @Inject
   public WaveStatusIndicator(final WaveStatusAction action) {

@@ -24,6 +24,7 @@ package cc.kune.client;
 
 import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.state.SiteParameters;
 
 import com.google.gwt.core.client.GWT;
@@ -58,6 +59,13 @@ public class KuneEntryPoint extends AbstractKuneEntryPoint {
     ginjector.getErrorsDialog();
     ginjector.getCorePresenter().get().forceReveal();
     ginjector.getOnAppStartFactory();
+    ginjector.getSessionChecker().check(new AsyncCallbackSimple<Void>() {
+      @Override
+      public void onSuccess(final Void result) {
+        // Do nothing
+      }
+    });
+
     ginjector.getStateManager();
     ginjector.getGwtGuiProvider();
     ginjector.getGroupMembersPresenter();

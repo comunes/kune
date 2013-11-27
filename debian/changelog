@@ -1,3 +1,10 @@
+kune (0.3.0+b33) unstable; urgency=low
+
+  * SessionCheck to clean Session from rpc calls
+  * More work in #361 to embed waves
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 27 Nov 2013 14:51:42 +0100
+
 kune (0.3.0+b32) unstable; urgency=low
 
   * More work in #361 to embed waves

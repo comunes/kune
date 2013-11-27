@@ -38,6 +38,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
+import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupType;
 import cc.kune.core.shared.dto.LicenseDTO;
@@ -68,7 +69,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewGroupPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter.NewGroupProxy>
@@ -76,7 +77,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /**
    * The Interface NewGroupProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -85,43 +86,54 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /** The group options. */
   private final GroupOptions groupOptions;
-  
+
   /** The group service. */
   private final Provider<GroupServiceAsync> groupService;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The just created a group. */
   private boolean justCreatedAGroup;
-  
+
   /** The session. */
   private final Session session;
-  
+
+  private final SessionChecker sessionChecker;
+
   /** The sign in. */
   private final Provider<SignIn> signIn;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new new group presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param i18n the i18n
-   * @param session the session
-   * @param stateManager the state manager
-   * @param groupService the group service
-   * @param signIn the sign in
-   * @param groupOptions the group options
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param i18n
+   *          the i18n
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param groupService
+   *          the group service
+   * @param signIn
+   *          the sign in
+   * @param groupOptions
+   *          the group options
    */
   @Inject
   public NewGroupPresenter(final EventBus eventBus, final NewGroupView view, final NewGroupProxy proxy,
       final I18nTranslationService i18n, final Session session, final StateManager stateManager,
       final Provider<GroupServiceAsync> groupService, final Provider<SignIn> signIn,
-      final GroupOptions groupOptions) {
+      final GroupOptions groupOptions, final SessionChecker sessionChecker) {
     super(eventBus, view, proxy);
     this.i18n = i18n;
     this.session = session;
@@ -129,15 +141,18 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     this.groupService = groupService;
     this.signIn = signIn;
     this.groupOptions = groupOptions;
+    this.sessionChecker = sessionChecker;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroup#doNewGroup()
    */
   @Override
   public void doNewGroup() {
     justCreatedAGroup = false;
-    session.check(new AsyncCallbackSimple<Void>() {
+    sessionChecker.check(new AsyncCallbackSimple<Void>() {
       @Override
       public void onSuccess(final Void result) {
         if (session.isLogged()) {
@@ -158,7 +173,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
   /**
    * Automatically generate a "short name" for a group, after typing the
    * "long name":.
-   *
+   * 
    * @return the string
    */
   protected String generateShortName() {
@@ -185,7 +200,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /**
    * Gets the type of group.
-   *
+   * 
    * @return the type of group
    */
   private GroupType getTypeOfGroup() {
@@ -201,7 +216,9 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -326,7 +343,9 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
     getView().clearData();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -336,9 +355,11 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /**
    * Sets the message.
-   *
-   * @param message the message
-   * @param level the level
+   * 
+   * @param message
+   *          the message
+   * @param level
+   *          the level
    */
   public void setMessage(final String message, final NotifyLevel level) {
     getView().setMessage(message, level);
