@@ -37,8 +37,6 @@ import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
 import cc.kune.wave.client.kspecific.WaveEmbedGinModule;
 
-import com.calclab.hablar.client.HablarGinjector;
-import com.calclab.hablar.client.HablarModule;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
@@ -51,8 +49,8 @@ import com.gwtplatform.mvp.client.proxy.PlaceManager;
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-@GinModules({ EmbedCoreGinModule.class, WaveEmbedGinModule.class, HablarModule.class })
-public interface KuneEmbedGinjector extends Ginjector, HablarGinjector {
+@GinModules({ EmbedCoreGinModule.class, WaveEmbedGinModule.class })
+public interface KuneEmbedGinjector extends Ginjector {
   // FIXME: Seems that hablar is needed in some point (Wave actions, probably)
 
   /*

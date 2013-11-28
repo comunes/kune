@@ -26,12 +26,11 @@ import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.chat.client.LastConnectedManagerImpl;
 import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.wave.client.KuneWaveProfileManager;
+import cc.kune.wave.client.RosterProfileUpdater;
 import cc.kune.wave.client.WebClient;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPanel;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView;
-
-import com.google.inject.Singleton;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -47,8 +46,9 @@ public class WaveGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
-    bind(HasWaveContainer.class).to(WaveUserSpaceContainer.class).in(Singleton.class);
-    bind(LastConnectedManager.class).to(LastConnectedManagerImpl.class).in(Singleton.class);
+    s(HasWaveContainer.class, WaveUserSpaceContainer.class);
+    s(LastConnectedManager.class, LastConnectedManagerImpl.class);
+    s(RosterProfileUpdater.class);
     s(PostWaveOpenActions.class);
     s(AurorisColorPicker.class);
     s(WebClientMock.class);

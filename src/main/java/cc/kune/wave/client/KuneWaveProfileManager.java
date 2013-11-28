@@ -29,87 +29,61 @@ import org.waveprotocol.wave.client.account.impl.ProfileImpl;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
-import cc.kune.chat.client.ChatOptions;
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.FileConstants;
-import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
-import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.emite.im.client.roster.XmppRoster;
-import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
-import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
-import com.calclab.emite.im.client.roster.events.RosterRetrievedEvent;
-import com.calclab.emite.im.client.roster.events.RosterRetrievedHandler;
-import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class KuneWaveProfileManager is a workaround to show avatars in kune
  * while the Wave part is more mature (see in the future
  * RemoteProfileManagerImpl).
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> implements
-    ProfileManager {
+    ProfileManager, ProfileShouldBeUpdated {
   // TODO implement remote part of RemoteProfileManagerImpl
 
   /** The download utils. */
   private final ClientFileDownloadUtils downloadUtils;
-  
+
   /** The last connected manager. */
   private final LastConnectedManager lastConnectedManager;
-  
+
   /** The local domain. */
   private String localDomain;
 
   /**
    * Instantiates a new kune wave profile manager.
-   *
-   * @param eventBus the event bus
-   * @param downloadUtils the download utils
-   * @param lastConnectedManager the last connected manager
-   * @param roster the roster
-   * @param chatOptions the chat options
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param downloadUtils
+   *          the download utils
+   * @param lastConnectedManager
+   *          the last connected manager
+   * @param roster
+   *          the roster
+   * @param chatOptions
+   *          the chat options
    */
   @Inject
-  public KuneWaveProfileManager(final EventBus eventBus, final ClientFileDownloadUtils downloadUtils,
-      final LastConnectedManager lastConnectedManager, final XmppRoster roster,
-      final ChatOptions chatOptions) {
+  public KuneWaveProfileManager(final ClientFileDownloadUtils downloadUtils,
+      final LastConnectedManager lastConnectedManager) {
     this.downloadUtils = downloadUtils;
     this.lastConnectedManager = lastConnectedManager;
-    roster.addRosterRetrievedHandler(new RosterRetrievedHandler() {
-      @Override
-      public void onRosterRetrieved(final RosterRetrievedEvent event) {
-        for (final RosterItem item : event.getRosterItems()) {
-          refreshRosterItem(item.getJID(), false);
-        }
-      }
-    });
-    roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
-      @Override
-      public void onRosterItemChanged(final RosterItemChangedEvent event) {
-        refreshRosterItem(event.getRosterItem().getJID(), false);
-      }
-    });
-    eventBus.addHandler(CurrentEntityChangedEvent.getType(), new CurrentEntityChangedHandler() {
-      @Override
-      public void onCurrentLogoChanged(final CurrentEntityChangedEvent event) {
-        refreshRosterItem(chatOptions.uriFrom(event.getShortName()), true);
-      }
-    });
   }
 
   /**
    * Check avatar.
-   *
-   * @param profile the profile
-   * @param noCache the no cache
+   * 
+   * @param profile
+   *          the profile
+   * @param noCache
+   *          the no cache
    */
   private void checkAvatar(final ProfileImpl profile, final boolean noCache) {
     if (localDomain == null) {
@@ -124,8 +98,12 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     }
   }
 
-  /* (non-Javadoc)
-   * @see org.waveprotocol.wave.client.account.ProfileManager#getProfile(org.waveprotocol.wave.model.wave.ParticipantId)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.waveprotocol.wave.client.account.ProfileManager#getProfile(org.waveprotocol
+   * .wave.model.wave.ParticipantId)
    */
   @Override
   public ProfileImpl getProfile(final ParticipantId participantId) {
@@ -134,8 +112,9 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
 
   /**
    * Gets the username.
-   *
-   * @param address the address
+   * 
+   * @param address
+   *          the address
    * @return the username
    */
   private String getUsername(final String address) {
@@ -144,8 +123,9 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
 
   /**
    * Checks if is local.
-   *
-   * @param address the address
+   * 
+   * @param address
+   *          the address
    * @return true, if is local
    */
   private boolean isLocal(final String address) {
@@ -154,11 +134,14 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
 
   /**
    * Refresh address.
-   *
-   * @param address the address
-   * @param noCache the no cache
+   * 
+   * @param address
+   *          the address
+   * @param noCache
+   *          the no cache
    */
-  private void refreshAddress(final String address, final boolean noCache) {
+  @Override
+  public void refreshAddress(final String address, final boolean noCache) {
     try {
       refreshProfile(ParticipantId.of(address), true, noCache);
     } catch (final InvalidParticipantAddress e) {
@@ -168,10 +151,13 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
 
   /**
    * Refresh profile.
-   *
-   * @param participantId the participant id
-   * @param refresh the refresh
-   * @param noCache the no cache
+   * 
+   * @param participantId
+   *          the participant id
+   * @param refresh
+   *          the refresh
+   * @param noCache
+   *          the no cache
    * @return the profile impl
    */
   private ProfileImpl refreshProfile(final ParticipantId participantId, final boolean refresh,
@@ -193,20 +179,12 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
   }
 
   /**
-   * Refresh roster item.
-   *
-   * @param uri the uri
-   * @param noCache the no cache
-   */
-  private void refreshRosterItem(final XmppURI uri, final boolean noCache) {
-    refreshAddress(uri.toString(), noCache);
-  }
-
-  /**
    * Update profile avatar.
-   *
-   * @param profile the profile
-   * @param avatar the avatar
+   * 
+   * @param profile
+   *          the profile
+   * @param avatar
+   *          the avatar
    */
   private void updateProfileAvatar(final ProfileImpl profile, final String avatar) {
     profile.update(profile.getFirstName(), profile.getFullName(), avatar);
@@ -214,8 +192,9 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
 
   /**
    * Update status.
-   *
-   * @param profile the profile
+   * 
+   * @param profile
+   *          the profile
    */
   private void updateStatus(final ProfileImpl profile) {
     final String full = profile.getFullName();

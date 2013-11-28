@@ -28,8 +28,6 @@ import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.wave.client.KuneWaveProfileManager;
 import cc.kune.wave.client.WebClient;
 
-import com.google.inject.Singleton;
-
 /**
  * The Class WaveGinModule.
  * 
@@ -43,8 +41,8 @@ public class WaveEmbedGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
-    bind(HasWaveContainer.class).to(WaveEmbedContainer.class).in(Singleton.class);
-    bind(LastConnectedManager.class).to(DummyLastConnectedManager.class).in(Singleton.class);
+    s(HasWaveContainer.class, WaveEmbedContainer.class);
+    s(LastConnectedManager.class, DummyLastConnectedManager.class);
     s(AurorisColorPicker.class);
     s(WebClient.class);
     s(WaveClientManager.class);
