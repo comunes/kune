@@ -23,8 +23,8 @@
 
 package cc.kune.core.client.invitation;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.UserFieldFactory;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -53,7 +53,7 @@ public class ListInvitationConfirmDialog extends AbstractInvitationConfirmDialog
      * @param listShortName the list short name
      * @param groupLongName the group long name
      */
-    public Builder(final String redirect, final I18nUITranslationService i18n,
+    public Builder(final String redirect, final I18nTranslationService i18n,
         final String userWhoInvites, final String listShortName, final String groupLongName) {
       super(
           DIALOG_ID,

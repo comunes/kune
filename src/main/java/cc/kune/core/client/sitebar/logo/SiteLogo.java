@@ -23,9 +23,9 @@
 package cc.kune.core.client.sitebar.logo;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
@@ -63,7 +63,7 @@ public class SiteLogo extends Composite {
    */
   @Inject
   public SiteLogo(final Session session, final StateManager stateManager,
-      final I18nUITranslationService i18n) {
+      final I18nTranslationService i18n) {
     logo = new Image();
     logoOnOver = new Image();
 

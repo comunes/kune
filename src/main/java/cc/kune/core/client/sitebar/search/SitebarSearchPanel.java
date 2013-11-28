@@ -22,7 +22,7 @@
  \*/
 package cc.kune.core.client.sitebar.search;
 
-import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView;
 import cc.kune.core.client.state.StateManager;
@@ -90,7 +90,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
   @Inject
   public SitebarSearchPanel(final GSpaceArmor gs, final CoreResources img,
       final SessionConstants session, final StateManager stateManager,
-      final I18nUITranslationService i18n) {
+      final I18nTranslationService i18n) {
     searchButton = new PushButton(new Image(img.kuneSearchIco()), new Image(img.kuneSearchIcoPush()));
     searchButton.ensureDebugId(SITE_SEARCH_BUTTON);
     final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, false, true,

@@ -23,8 +23,8 @@
 package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.UserFieldFactory;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.DefaultFormUtils;
 import cc.kune.core.shared.dto.EmailNotificationFrequency;
@@ -112,7 +112,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
    * @param langSelector the lang selector
    */
   @Inject
-  public UserOptGeneralPanel(final I18nUITranslationService i18n, final IconicResources res,
+  public UserOptGeneralPanel(final I18nTranslationService i18n, final IconicResources res,
       final MaskWidget maskWidget, final LanguageSelectorPanel langSelector) {
     super(maskWidget, res.equalizerWhite(), i18n.t("General"), i18n.t("You can change these values:"));
     this.langSelector = langSelector;

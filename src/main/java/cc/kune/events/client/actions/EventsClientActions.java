@@ -23,8 +23,8 @@
 package cc.kune.events.client.actions;
 
 import static cc.kune.events.shared.EventsToolConstants.*;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -58,70 +58,111 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventsClientActions.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EventsClientActions extends AbstractFoldableToolActions {
-  
+
   /** The all. */
   final String[] all = { TYPE_ROOT, TYPE_MEETING };
-  
+
   /** The containers. */
   final String[] containers = { TYPE_ROOT };
-  
+
   /** The containers no root. */
   final String[] containersNoRoot = {};
-  
+
   /** The contents. */
   final String[] contents = { TYPE_MEETING };
 
   /**
    * Instantiates a new events client actions.
-   *
-   * @param i18n the i18n
-   * @param session the session
-   * @param stateManager the state manager
-   * @param registry the registry
-   * @param res the res
-   * @param newEventBtn the new event btn
-   * @param folderGoUp the folder go up
-   * @param openContentMenuItem the open content menu item
-   * @param delContentMenuItem the del content menu item
-   * @param optionsMenuContent the options menu content
-   * @param shareMenuContent the share menu content
-   * @param addAllMenuItem the add all menu item
-   * @param addAdminMembersMenuItem the add admin members menu item
-   * @param addCollabMembersMenuItem the add collab members menu item
-   * @param addPublicMenuItem the add public menu item
-   * @param participateBtn the participate btn
-   * @param cal1DayBtn the cal1 day btn
-   * @param cal3DaysBtn the cal3 days btn
-   * @param cal7DaysBtn the cal7 days btn
-   * @param calMonthBtn the cal month btn
-   * @param eventAddMenuItem the event add menu item
-   * @param eventOpenMenuItem the event open menu item
-   * @param calPrevBtn the cal prev btn
-   * @param eventRemoveMenuItem the event remove menu item
-   * @param copyContent the copy content
-   * @param tutorialBtn the tutorial btn
-   * @param writeToParticipants the write to participants
-   * @param purgeMenuItem the purge menu item
-   * @param purgeBtn the purge btn
-   * @param purgeFolderMenuItem the purge folder menu item
-   * @param moveContentMenuItem the move content menu item
-   * @param purgeFolderBtn the purge folder btn
-   * @param export the export
-   * @param calNextBtn the cal next btn
-   * @param onOverMenu the on over menu
-   * @param goToday the go today
-   * @param refresh the refresh
-   * @param shareInTwitter the share in twitter
-   * @param shareInGPlus the share in g plus
-   * @param shareInIdentica the share in identica
-   * @param shareInFacebook the share in facebook
+   * 
+   * @param i18n
+   *          the i18n
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param registry
+   *          the registry
+   * @param res
+   *          the res
+   * @param newEventBtn
+   *          the new event btn
+   * @param folderGoUp
+   *          the folder go up
+   * @param openContentMenuItem
+   *          the open content menu item
+   * @param delContentMenuItem
+   *          the del content menu item
+   * @param optionsMenuContent
+   *          the options menu content
+   * @param shareMenuContent
+   *          the share menu content
+   * @param addAllMenuItem
+   *          the add all menu item
+   * @param addAdminMembersMenuItem
+   *          the add admin members menu item
+   * @param addCollabMembersMenuItem
+   *          the add collab members menu item
+   * @param addPublicMenuItem
+   *          the add public menu item
+   * @param participateBtn
+   *          the participate btn
+   * @param cal1DayBtn
+   *          the cal1 day btn
+   * @param cal3DaysBtn
+   *          the cal3 days btn
+   * @param cal7DaysBtn
+   *          the cal7 days btn
+   * @param calMonthBtn
+   *          the cal month btn
+   * @param eventAddMenuItem
+   *          the event add menu item
+   * @param eventOpenMenuItem
+   *          the event open menu item
+   * @param calPrevBtn
+   *          the cal prev btn
+   * @param eventRemoveMenuItem
+   *          the event remove menu item
+   * @param copyContent
+   *          the copy content
+   * @param tutorialBtn
+   *          the tutorial btn
+   * @param writeToParticipants
+   *          the write to participants
+   * @param purgeMenuItem
+   *          the purge menu item
+   * @param purgeBtn
+   *          the purge btn
+   * @param purgeFolderMenuItem
+   *          the purge folder menu item
+   * @param moveContentMenuItem
+   *          the move content menu item
+   * @param purgeFolderBtn
+   *          the purge folder btn
+   * @param export
+   *          the export
+   * @param calNextBtn
+   *          the cal next btn
+   * @param onOverMenu
+   *          the on over menu
+   * @param goToday
+   *          the go today
+   * @param refresh
+   *          the refresh
+   * @param shareInTwitter
+   *          the share in twitter
+   * @param shareInGPlus
+   *          the share in g plus
+   * @param shareInIdentica
+   *          the share in identica
+   * @param shareInFacebook
+   *          the share in facebook
    */
   @Inject
-  public EventsClientActions(final I18nUITranslationService i18n, final Session session,
+  public EventsClientActions(final I18nTranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
       final Provider<NewEventBtn> newEventBtn, final Provider<GoParentFolderBtn> folderGoUp,
       final Provider<OpenMeetingMenuItem> openContentMenuItem,
@@ -210,8 +251,11 @@ public class EventsClientActions extends AbstractFoldableToolActions {
 
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#
+   * createPostSessionInitActions()
    */
   @Override
   protected void createPostSessionInitActions() {

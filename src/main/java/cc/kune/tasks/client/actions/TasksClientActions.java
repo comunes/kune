@@ -25,8 +25,8 @@ package cc.kune.tasks.client.actions;
 import static cc.kune.tasks.shared.TasksToolConstants.*;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
@@ -127,7 +127,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
    * @param shareInFacebook the share in facebook
    */
   @Inject
-  public TasksClientActions(final I18nUITranslationService i18n, final Session session,
+  public TasksClientActions(final I18nTranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
       final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewTaskMenuItem> newTaskItem,
       final Provider<NewTaskIconBtn> newTaskIconBtn, final Provider<NewFolderBtn> newFolderBtn,

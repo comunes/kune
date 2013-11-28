@@ -23,7 +23,7 @@
 package cc.kune.core.client.sitebar.search;
 
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
-import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -64,7 +64,7 @@ public abstract class EntitySearchPanel {
   private final BasicTopDialog dialog;
   
   /** The i18n. */
-  private final I18nUITranslationService i18n;
+  private final I18nTranslationService i18n;
   
   /** The search only users. */
   private boolean searchOnlyUsers;
@@ -81,7 +81,7 @@ public abstract class EntitySearchPanel {
    * @param img the img
    * @param i18n the i18n
    */
-  public EntitySearchPanel(final CoreResources img, final I18nUITranslationService i18n) {
+  public EntitySearchPanel(final CoreResources img, final I18nTranslationService i18n) {
     this.i18n = i18n;
     dialog = new BasicTopDialog.Builder(DIALOG_ID, false, true, i18n.getDirection()).autoscroll(false).firstButtonId(
         OK_ID).tabIndexStart(1).build();

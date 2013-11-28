@@ -23,7 +23,7 @@
 package cc.kune.wiki.client;
 
 import static cc.kune.wiki.shared.WikiToolConstants.*;
-import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
@@ -52,7 +52,7 @@ public class WikiClientTool extends FoldableAbstractClientTool {
    * @param history the history
    */
   @Inject
-  public WikiClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+  public WikiClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
     super(
         TOOL_NAME,

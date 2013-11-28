@@ -24,12 +24,12 @@ package cc.kune.core.client.auth;
 
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.UserNotifyEvent;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteParameters;
 
@@ -60,7 +60,7 @@ public class AnonUsersManager {
    */
   @Inject
   public AnonUsersManager(final Session session, final CookiesManager cookiesManager,
-      final I18nUITranslationService i18n, final EventBus eventBus) {
+      final I18nTranslationService i18n, final EventBus eventBus) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {

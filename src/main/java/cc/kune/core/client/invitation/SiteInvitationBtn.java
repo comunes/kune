@@ -27,9 +27,9 @@ import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.state.Session;
@@ -56,7 +56,7 @@ public class SiteInvitationBtn extends ButtonDescriptor {
    */
   @Inject
   SiteInvitationBtn(final Session session, final SiteInvitationAction action,
-      final I18nUITranslationService i18n, final IconicResources icons) {
+      final I18nTranslationService i18n, final IconicResources icons) {
     super(action);
     withText(i18n.t("Invite")).withToolTip(
         i18n.t("Invite others to [%s] via email", i18n.getSiteCommonName())).withStyles(

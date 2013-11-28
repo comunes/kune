@@ -23,7 +23,7 @@
 package cc.kune.core.client.sitebar.search;
 
 import cc.kune.common.client.tooltip.Tooltip;
-import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.shared.SearcherConstants;
 
 import com.google.gwt.i18n.client.HasDirection.Direction;
@@ -47,7 +47,7 @@ public class SearchBoxFactory {
    * @param callback the callback
    * @return the multivalue suggest box
    */
-  public static MultivalueSuggestBox create(final I18nUITranslationService i18n,
+  public static MultivalueSuggestBox create(final I18nTranslationService i18n,
       final boolean searchOnlyUsers, final boolean showNoResult, final String id,
       final OnEntitySelectedInSearch callback) {
     final MultivalueSuggestBox multivalueSBox = new MultivalueSuggestBox(

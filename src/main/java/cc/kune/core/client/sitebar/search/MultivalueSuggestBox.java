@@ -47,7 +47,7 @@ import java.util.Map;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.shared.SearcherConstants;
 import cc.kune.core.shared.dto.GroupType;
 
@@ -591,7 +591,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   }
 
   /** The i18n. */
-  private final I18nUITranslationService i18n;
+  private final I18nTranslationService i18n;
   
   /** The last query. */
   private com.google.gwt.http.client.Request lastQuery;
@@ -641,7 +641,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
    * @param isMultivalued - true for allowing multiple values
    * @param onExactMatch the on exact match
    */
-  public MultivalueSuggestBox(final I18nUITranslationService i18n, final boolean showNoResult,
+  public MultivalueSuggestBox(final I18nTranslationService i18n, final boolean showNoResult,
       final String restEndpointUrl, final boolean isMultivalued, final OnExactMatch onExactMatch) {
     this.i18n = i18n;
     this.showNoResult = showNoResult;

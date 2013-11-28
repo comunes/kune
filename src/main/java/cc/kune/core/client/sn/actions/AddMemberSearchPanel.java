@@ -22,7 +22,7 @@
  */
 package cc.kune.core.client.sn.actions;
 
-import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.search.EntitySearchPanel;
 
@@ -45,7 +45,7 @@ public class AddMemberSearchPanel extends EntitySearchPanel {
    * @param i18n the i18n
    */
   @Inject
-  public AddMemberSearchPanel(final CoreResources img, final I18nUITranslationService i18n) {
+  public AddMemberSearchPanel(final CoreResources img, final I18nTranslationService i18n) {
     super(img, i18n);
   }
 

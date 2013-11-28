@@ -23,8 +23,8 @@
 package cc.kune.chat.client.actions;
 
 import static cc.kune.chat.shared.ChatToolConstants.*;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -85,7 +85,7 @@ public class ChatClientActions extends AbstractFoldableToolActions {
    * @param shareInFacebook the share in facebook
    */
   @Inject
-  public ChatClientActions(final I18nUITranslationService i18n, final Session session,
+  public ChatClientActions(final I18nTranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
       final Provider<RefreshContentMenuItem> refresh, final Provider<NewRoomBtn> newRoomBtn,
       final Provider<OpenRoomMenuItem> openRoomMenuItem, final Provider<GoParentChatBtn> folderGoUp,

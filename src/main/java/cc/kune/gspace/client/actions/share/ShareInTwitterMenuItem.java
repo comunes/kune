@@ -24,7 +24,7 @@
 package cc.kune.gspace.client.actions.share;
 
 import cc.kune.common.client.utils.ClientFormattedString;
-import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
 
@@ -54,7 +54,7 @@ public class ShareInTwitterMenuItem extends AbstractShareInSocialNetMenuItem {
   @Inject
   public ShareInTwitterMenuItem(final AbstractShareInSocialNetAction action,
       final IconicResources iconic, final Session session, final ContentViewerShareMenu menu,
-      final I18nUITranslationService i18n) {
+      final I18nTranslationService i18n) {
     super(action, session, menu, i18n.t("Share this in twitter"), iconic.twitter(),
         ClientFormattedString.build(
             false,

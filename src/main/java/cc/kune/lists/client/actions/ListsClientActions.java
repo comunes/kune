@@ -25,8 +25,8 @@ package cc.kune.lists.client.actions;
 import static cc.kune.lists.shared.ListsToolConstants.*;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.invitation.ListInvitationMenuItem;
 import cc.kune.core.client.invitation.ListInvitationShareMenuItem;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
@@ -137,7 +137,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
    * @param inviteMenuItem the invite menu item
    */
   @Inject
-  public ListsClientActions(final I18nUITranslationService i18n, final Session session,
+  public ListsClientActions(final I18nTranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
       final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewListPostIconMenuItem> newPostItem,
       final Provider<NewListPostIconBtn> newPostIconBtn,

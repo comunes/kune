@@ -28,11 +28,11 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
@@ -124,7 +124,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   @Inject
   public EmbedPresenter(final EventBus eventBus, final EmbedView view, final EmbedProxy proxy,
       final WaveClientManager waveClientManager, final WaveClientProvider waveClient,
-      final I18nUITranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar) {
+      final I18nTranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar) {
     super(eventBus, view, proxy);
     this.session = session;
     this.sitebar = sitebar;

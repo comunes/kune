@@ -27,8 +27,8 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.AbstractAtBorderPopupPanel;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.SignIn;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
@@ -78,7 +78,7 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
   @Inject
   public FeedbackBottomPanel(final IconicResources res, final Session session,
       final Provider<SignIn> signIn, final StateManager stateManager,
-      final I18nUITranslationService i18n, final Provider<ContentServiceAsync> contentService) {
+      final I18nTranslationService i18n, final Provider<ContentServiceAsync> contentService) {
     super(false, false);
     final IconLabel btn = new IconLabel(res.refresh(), i18n.t("Give us feedback!"));
     Tooltip.to(

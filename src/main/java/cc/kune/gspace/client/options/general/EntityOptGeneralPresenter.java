@@ -36,37 +36,42 @@ import com.google.gwt.user.client.ui.IsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptGeneralPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntityOptGeneralPresenter {
 
   /** The entity options. */
   protected final EntityOptions entityOptions;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The i18n. */
   protected final I18nUITranslationService i18n;
-  
+
   /** The session. */
   protected final Session session;
-  
+
   /** The state manager. */
   protected final StateManager stateManager;
-  
+
   /** The view. */
   protected EntityOptGeneralView view;
 
   /**
    * Instantiates a new entity opt general presenter.
-   *
-   * @param session the session
-   * @param stateManager the state manager
-   * @param eventBus the event bus
-   * @param i18n the i18n
-   * @param entityOptions the entity options
+   * 
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param eventBus
+   *          the event bus
+   * @param i18n
+   *          the i18n
+   * @param entityOptions
+   *          the entity options
    */
   public EntityOptGeneralPresenter(final Session session, final StateManager stateManager,
       final EventBus eventBus, final I18nUITranslationService i18n, final EntityOptions entityOptions) {
@@ -79,14 +84,14 @@ public abstract class EntityOptGeneralPresenter {
 
   /**
    * Applicable.
-   *
+   * 
    * @return true, if successful
    */
   protected abstract boolean applicable();
 
   /**
    * Gets the view.
-   *
+   * 
    * @return the view
    */
   public IsWidget getView() {
@@ -95,8 +100,9 @@ public abstract class EntityOptGeneralPresenter {
 
   /**
    * Inits the.
-   *
-   * @param view the view
+   * 
+   * @param view
+   *          the view
    */
   public void init(final EntityOptGeneralView view) {
     this.view = view;
@@ -121,9 +127,11 @@ public abstract class EntityOptGeneralPresenter {
 
   /**
    * Send change entity event.
-   *
-   * @param shortName the short name
-   * @param longName the long name
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
    */
   protected void sendChangeEntityEvent(final String shortName, final String longName) {
     CurrentEntityChangedEvent.fire(eventBus, shortName, longName);

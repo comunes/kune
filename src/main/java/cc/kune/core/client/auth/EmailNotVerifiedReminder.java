@@ -27,10 +27,10 @@ import java.util.Date;
 
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.shared.SessionConstants;
@@ -57,7 +57,7 @@ public class EmailNotVerifiedReminder {
    */
   @Inject
   public EmailNotVerifiedReminder(final Session session, final EventBus eventBus,
-      final I18nUITranslationService i18n) {
+      final I18nTranslationService i18n) {
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
