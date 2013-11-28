@@ -29,7 +29,7 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nTranslationService.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class I18nTranslationService implements HasRTL {
@@ -43,8 +43,9 @@ public abstract class I18nTranslationService implements HasRTL {
 
   /**
    * Decode html.
-   *
-   * @param textToDecode the text to decode
+   * 
+   * @param textToDecode
+   *          the text to decode
    * @return the string
    */
   public String decodeHtml(final String textToDecode) {
@@ -55,14 +56,18 @@ public abstract class I18nTranslationService implements HasRTL {
 
   /**
    * Gets the direction.
-   *
+   * 
    * @return the direction
    */
   public Direction getDirection() {
     return isRTL() ? Direction.RTL : Direction.LTR;
   }
 
-  /* (non-Javadoc)
+  public abstract String getSiteCommonName();
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.shared.i18n.HasRTL#isRTL()
    */
   @Override
@@ -70,9 +75,11 @@ public abstract class I18nTranslationService implements HasRTL {
 
   /**
    * Use [%d] to reference the Integer parameters.
-   *
-   * @param pair the pair
-   * @param args the args
+   * 
+   * @param pair
+   *          the pair
+   * @param args
+   *          the args
    * @return the string
    */
   // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
@@ -86,9 +93,11 @@ public abstract class I18nTranslationService implements HasRTL {
 
   /**
    * Use [%d] to reference the Long parameter.
-   *
-   * @param pair the pair
-   * @param args the args
+   * 
+   * @param pair
+   *          the pair
+   * @param args
+   *          the args
    * @return the string
    */
   // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
@@ -102,9 +111,11 @@ public abstract class I18nTranslationService implements HasRTL {
 
   /**
    * Use [%s] to reference the string parameter.
-   *
-   * @param pair the pair
-   * @param args the args
+   * 
+   * @param pair
+   *          the pair
+   * @param args
+   *          the args
    * @return the string
    */
   // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
@@ -135,9 +146,11 @@ public abstract class I18nTranslationService implements HasRTL {
 
   /**
    * Use [%d] to reference the Integer parameters.
-   *
-   * @param text the text
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param args
+   *          the args
    * @return the string
    */
   // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
@@ -147,9 +160,11 @@ public abstract class I18nTranslationService implements HasRTL {
 
   /**
    * Use [%d] to reference the Long parameter.
-   *
-   * @param text the text
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param args
+   *          the args
    * @return the string
    */
   // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
@@ -159,9 +174,11 @@ public abstract class I18nTranslationService implements HasRTL {
 
   /**
    * Use [%s] to reference the String parameter.
-   *
-   * @param text the text
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param args
+   *          the args
    * @return the string
    */
   public String t(final String text, final String... args) {
@@ -175,9 +192,11 @@ public abstract class I18nTranslationService implements HasRTL {
    * 
    * Warning: text is escaped as html before insert in the db. Don't use html
    * here (o user this method with params).
-   *
-   * @param text the text
-   * @param noteForTranslators some note for facilitate the translation
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          some note for facilitate the translation
    * @return text translated in the current language
    */
   // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:49
@@ -189,10 +208,13 @@ public abstract class I18nTranslationService implements HasRTL {
    * Also adds [%NT noteForTranslators] at the end of text. This tag is later
    * renderer in the translator panel to inform translator how to do this
    * translation
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
+   * @param args
+   *          the args
    * @return the string
    */
   public String tWithNT(final String text, final String noteForTranslators, final Integer... args) {
@@ -205,10 +227,13 @@ public abstract class I18nTranslationService implements HasRTL {
    * Also adds [%NT noteForTranslators] at the end of text. This tag is later
    * renderer in the translator panel to inform translator how to do this
    * translation
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
+   * @param args
+   *          the args
    * @return the string
    */
   public String tWithNT(final String text, final String noteForTranslators, final Long... args) {
@@ -221,10 +246,13 @@ public abstract class I18nTranslationService implements HasRTL {
    * Also adds [%NT noteForTranslators] at the end of text. This tag is later
    * renderer in the translator panel to inform translator how to do this
    * translation
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
+   * @param args
+   *          the args
    * @return the string
    */
   public String tWithNT(final String text, final String noteForTranslators, final String... args) {

@@ -24,15 +24,26 @@ package cc.kune.common.shared.i18n;
 
 import cc.kune.common.shared.utils.TextUtils;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class I18nTranslationServiceMocked.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nTranslationServiceMocked extends I18nTranslationService {
-  
-  /* (non-Javadoc)
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.common.shared.i18n.I18nTranslationService#getSiteCommonName()
+   */
+  @Override
+  public String getSiteCommonName() {
+    return this.t("this site");
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.shared.i18n.I18nTranslationService#isRTL()
    */
   @Override
@@ -40,8 +51,12 @@ public class I18nTranslationServiceMocked extends I18nTranslationService {
     return false;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.shared.i18n.I18nTranslationService#tWithNT(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.shared.i18n.I18nTranslationService#tWithNT(java.lang.String,
+   * java.lang.String)
    */
   @Override
   public String tWithNT(final String text, final String noteForTranslators) {
@@ -49,4 +64,5 @@ public class I18nTranslationServiceMocked extends I18nTranslationService {
     final String translation = encodeText;
     return decodeHtml(translation);
   }
+
 }

@@ -29,6 +29,7 @@ import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.i18n.I18nTranslationServiceMultiLang;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.I18nTranslationManager;
+import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.I18nTranslation;
 
@@ -39,7 +40,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nTranslationServiceDefault.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -48,38 +49,50 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
 
   /** The initiliazied. */
   private boolean initiliazied = false;
-  
+
   /** The language manager. */
   private final I18nLanguageManager languageManager;
-  
+
+  private final String siteName;
+
   /** The translation manager. */
   private final I18nTranslationManager translationManager;
-  
+
   /** The user session manager. */
   private final Provider<UserSessionManager> userSessionManager;
 
   /**
    * Instantiates a new i18n translation service default.
-   *
-   * @param translationManager the translation manager
-   * @param userSessionManager the user session manager
-   * @param languageManager the language manager
+   * 
+   * @param translationManager
+   *          the translation manager
+   * @param userSessionManager
+   *          the user session manager
+   * @param languageManager
+   *          the language manager
    */
   @Inject
   public I18nTranslationServiceDefault(final I18nTranslationManager translationManager,
-      final Provider<UserSessionManager> userSessionManager, final I18nLanguageManager languageManager) {
+      final Provider<UserSessionManager> userSessionManager, final I18nLanguageManager languageManager,
+      final KuneProperties kuneProp) {
     this.translationManager = translationManager;
     this.userSessionManager = userSessionManager;
     this.languageManager = languageManager;
+    this.siteName = kuneProp.get(KuneProperties.SITE_COMMON_NAME);
   }
 
   /**
    * Def lang.
-   *
+   * 
    * @return the i18n language
    */
   private I18nLanguage defLang() {
     return languageManager.findByCode(I18nTranslation.DEFAULT_LANG);
+  }
+
+  @Override
+  public String getSiteCommonName() {
+    return siteName;
   }
 
   /**
@@ -89,7 +102,9 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
     initiliazied = true;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.shared.i18n.I18nTranslationService#isRTL()
    */
   @Override
@@ -101,10 +116,13 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
 
   /**
    * Use [%s] to reference the string parameter.
-   *
-   * @param lang the lang
-   * @param pair the pair
-   * @param args the args
+   * 
+   * @param lang
+   *          the lang
+   * @param pair
+   *          the pair
+   * @param args
+   *          the args
    * @return the string
    */
   // @PMD:REVIEWED:ShortMethodName: by vjrj on 21/05/09 13:50
@@ -121,8 +139,9 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
    * 
    * Warning: text is escaped as html before insert in the db. Don't use html
    * here (o user this method with params).
-   *
-   * @param text the text
+   * 
+   * @param text
+   *          the text
    * @return text translated in the current language
    */
   @Override
@@ -130,8 +149,12 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
     return tWithNT(text, "");
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.i18n.I18nTranslationServiceMultiLang#tWithNT(cc.kune.domain.I18nLanguage, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.i18n.I18nTranslationServiceMultiLang#tWithNT(cc.kune
+   * .domain.I18nLanguage, java.lang.String, java.lang.String)
    */
   @Override
   public String tWithNT(final I18nLanguage language, final String text, final String noteForTranslators) {
@@ -144,8 +167,13 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
     return decodeHtml(translation);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.i18n.I18nTranslationServiceMultiLang#tWithNT(cc.kune.domain.I18nLanguage, java.lang.String, java.lang.String, java.lang.String[])
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.i18n.I18nTranslationServiceMultiLang#tWithNT(cc.kune
+   * .domain.I18nLanguage, java.lang.String, java.lang.String,
+   * java.lang.String[])
    */
   @Override
   public String tWithNT(final I18nLanguage lang, final String text, final String noteForTranslators,
@@ -158,9 +186,11 @@ public class I18nTranslationServiceDefault extends I18nTranslationService implem
    * 
    * Warning: text is escaped as html before insert in the db. Don't use html
    * here (o user this method with params).
-   *
-   * @param text the text
-   * @param noteForTranslators some note for facilitate the translation
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          some note for facilitate the translation
    * @return text translated in the current language
    */
   @Override
