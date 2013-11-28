@@ -22,6 +22,8 @@
  */
 package cc.kune.wave.client.kspecific;
 
+import cc.kune.chat.client.LastConnectedManager;
+import cc.kune.chat.client.LastConnectedManagerImpl;
 import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.wave.client.KuneWaveProfileManager;
 import cc.kune.wave.client.WebClient;
@@ -46,6 +48,7 @@ public class WaveGinModule extends ExtendedGinModule {
   @Override
   protected void configure() {
     bind(HasWaveContainer.class).to(WaveUserSpaceContainer.class).in(Singleton.class);
+    bind(LastConnectedManager.class).to(LastConnectedManagerImpl.class).in(Singleton.class);
     s(PostWaveOpenActions.class);
     s(AurorisColorPicker.class);
     s(WebClientMock.class);

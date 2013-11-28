@@ -22,6 +22,8 @@
  */
 package cc.kune.wave.client.kspecific;
 
+import cc.kune.chat.client.DummyLastConnectedManager;
+import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.wave.client.KuneWaveProfileManager;
 import cc.kune.wave.client.WebClient;
@@ -42,13 +44,11 @@ public class WaveEmbedGinModule extends ExtendedGinModule {
   @Override
   protected void configure() {
     bind(HasWaveContainer.class).to(WaveEmbedContainer.class).in(Singleton.class);
+    bind(LastConnectedManager.class).to(DummyLastConnectedManager.class).in(Singleton.class);
     s(AurorisColorPicker.class);
-    // s(WebClientMock.class);
     s(WebClient.class);
-    // s(WaveClientProvider.class);
     s(WaveClientManager.class);
     s(WaveStatusIndicator.class);
-    // eagle(WaveParts.class);
     s(KuneWaveProfileManager.class);
   }
 }

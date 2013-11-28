@@ -24,32 +24,32 @@
 package cc.kune.chat.client;
 
 /**
- * The Interface LastConnectedManager is used to collect information about users
- * presence (similar to Whatsapp "last seen" functionality.
+ * The Class DummyLastConnectedManager, only used in kune embedded temporally
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public interface LastConnectedManager {
+public class DummyLastConnectedManager implements LastConnectedManager {
 
-  /**
-   * Gets presence info about some user
+  /*
+   * (non-Javadoc)
    * 
-   * @param username
-   *          the username
-   * @param standalone
-   *          the standalone
-   * @return the string
+   * @see cc.kune.chat.client.LastConnectedManager#get(java.lang.String,
+   * boolean)
    */
-  String get(String username, boolean standalone);
+  @Override
+  public String get(final String username, final boolean standalone) {
+    return "";
+  }
 
-  /**
-   * Updates the presence about this user (normally via xmpp info)
+  /*
+   * (non-Javadoc)
    * 
-   * @param username
-   *          the username
-   * @param lastConnected
-   *          the last connected
+   * @see cc.kune.chat.client.LastConnectedManager#update(java.lang.String,
+   * java.lang.Long)
    */
-  void update(String username, Long lastConnected);
+  @Override
+  public void update(final String username, final Long lastConnected) {
+    // Do nothing
+  }
 
 }
