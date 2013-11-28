@@ -29,7 +29,7 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.GroupManager;
@@ -43,21 +43,21 @@ import com.google.inject.persist.Transactional;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkMembersTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetworkMembersTest extends IntegrationTest {
-  
+
   /** The group. */
   private Group group;
-  
+
   /** The group finder. */
   @Inject
   GroupManager groupFinder;
-  
+
   /** The session. */
   @Inject
-  UserSession session;
+  UserSessionManager session;
 
   /** The social net manager. */
   @Inject
@@ -75,8 +75,9 @@ public class SocialNetworkMembersTest extends IntegrationTest {
 
   /**
    * Test admin add twice.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testAdminAddTwice() throws Exception {
@@ -93,8 +94,9 @@ public class SocialNetworkMembersTest extends IntegrationTest {
 
   /**
    * Test admin members of group finder.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testAdminMembersOfGroupFinder() throws Exception {
@@ -105,8 +107,9 @@ public class SocialNetworkMembersTest extends IntegrationTest {
 
   /**
    * Test collab members of group finder.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testCollabMembersOfGroupFinder() throws Exception {

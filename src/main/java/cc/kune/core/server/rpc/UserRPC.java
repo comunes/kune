@@ -40,7 +40,6 @@ import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserAuthException;
 import cc.kune.core.client.rpcservices.UserService;
-import cc.kune.core.server.UserSession;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.auth.ActionLevel;
 import cc.kune.core.server.auth.Authenticated;
@@ -69,7 +68,6 @@ import cc.kune.wave.server.kspecific.ParticipantUtils;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -141,12 +139,11 @@ public class UserRPC implements RPC, UserService {
    *          the websocket address
    */
   @Inject
-  public UserRPC(final Provider<UserSession> userSessionProvider, final UserManager userManager,
-      final UserInfoService userInfoService, final KuneMapper mapper,
-      final SessionManager waveSessionManager, final ReservedWordsRegistry reserverdWords,
-      final ContentRPC contentRPC, final UserSessionManager userSessionManager,
-      final UserFinder userFinder, final ParticipantUtils partUtils,
-      final UserSignInLogManager userSignInLogManager) {
+  public UserRPC(final UserManager userManager, final UserInfoService userInfoService,
+      final KuneMapper mapper, final SessionManager waveSessionManager,
+      final ReservedWordsRegistry reserverdWords, final ContentRPC contentRPC,
+      final UserSessionManager userSessionManager, final UserFinder userFinder,
+      final ParticipantUtils partUtils, final UserSignInLogManager userSignInLogManager) {
     this.userManager = userManager;
     this.userInfoService = userInfoService;
     this.mapper = mapper;

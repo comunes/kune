@@ -39,7 +39,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AuthenticatedMethodInterceptor.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AuthenticatedMethodInterceptor implements MethodInterceptor {
@@ -55,8 +55,12 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
   @Inject
   UserSessionManager userSessionManager;
 
-  /* (non-Javadoc)
-   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept
+   * .MethodInvocation)
    */
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
@@ -78,23 +82,25 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
         LOG.info("Not logged in server and mandatory");
         logLine(method, userHash, false);
         throw new UserMustBeLoggedException();
-      } else if (userSessionManager.isUserNotLoggedIn() && mandatory) {
+      } else if (userSessionManager.isUserNotLoggedIn(userHash) && mandatory) {
         LOG.info("Session expired (not logged in server and mandatory)");
         logLine(method, userHash, false);
         throw new SessionExpiredException();
-      } else if (userSessionManager.isUserNotLoggedIn() && userHash == null) {
+      } else if (userHash == null && !userSessionManager.isUserLoggedIn()) {
         // Ok, do nothing
-      } else if (userSessionManager.isUserNotLoggedIn() && userHash != null) {
+      } else if (userHash != null && userSessionManager.isUserNotLoggedIn(userHash)) {
         LOG.info("Session expired (not logged in server)");
         logLine(method, userHash, false);
         throw new SessionExpiredException();
-      } else if (!userSessionManager.getHash().equals(userHash)) {
+      } else {
         final String serverHash = userSessionManager.getHash();
-        userSessionManager.logout();
-        LOG.info("Session expired (userHash: " + userHash + " different from server hash: " + serverHash
-            + ")");
-        logLine(method, userHash, false);
-        throw new SessionExpiredException();
+        if (serverHash != null && !serverHash.equals(userHash)) {
+          userSessionManager.logout();
+          LOG.info("Session expired (userHash: " + userHash + " different from server hash: "
+              + serverHash + ")");
+          logLine(method, userHash, false);
+          throw new SessionExpiredException();
+        }
       }
       final Object result = invocation.proceed();
       logLine(method, userHash, false);
@@ -105,10 +111,13 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
 
   /**
    * Log line.
-   *
-   * @param method the method
-   * @param userHash the user hash
-   * @param start the start
+   * 
+   * @param method
+   *          the method
+   * @param userHash
+   *          the user hash
+   * @param start
+   *          the start
    */
   private void logLine(final String method, final String userHash, final boolean start) {
     LOG.info(new StringBuffer().append("----- ").append(start ? "Starting" : "Ending").append(

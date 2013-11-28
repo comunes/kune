@@ -31,7 +31,7 @@ import cc.kune.core.client.errors.GroupLongNameInUseException;
 import cc.kune.core.client.errors.GroupShortNameInUseException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.rpcservices.GroupService;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.AdmissionType;
@@ -48,7 +48,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupServiceTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupServiceTest extends IntegrationTest {
@@ -63,12 +63,13 @@ public class GroupServiceTest extends IntegrationTest {
 
   /** The session. */
   @Inject
-  UserSession session;
+  UserSessionManager session;
 
   /**
    * Creates the closed.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void createClosed() throws Exception {
@@ -93,8 +94,9 @@ public class GroupServiceTest extends IntegrationTest {
 
   /**
    * Creates the community.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void createCommunity() throws Exception {
@@ -118,9 +120,11 @@ public class GroupServiceTest extends IntegrationTest {
 
   /**
    * Creates the group.
-   *
-   * @param shortName the short name
-   * @param longName the long name
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
    * @return the group dto
    */
   private GroupDTO createGroup(final String shortName, final String longName) {
@@ -137,8 +141,9 @@ public class GroupServiceTest extends IntegrationTest {
 
   /**
    * Creates the group not logged.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = Exception.class)
   public void createGroupNotLogged() throws Exception {
@@ -149,8 +154,9 @@ public class GroupServiceTest extends IntegrationTest {
 
   /**
    * Creates the group null user hash.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = UserMustBeLoggedException.class)
   public void createGroupNullUserHash() throws Exception {
@@ -162,8 +168,9 @@ public class GroupServiceTest extends IntegrationTest {
 
   /**
    * Creates the group user logged.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void createGroupUserLogged() throws Exception {
@@ -187,8 +194,9 @@ public class GroupServiceTest extends IntegrationTest {
 
   /**
    * Creates the organization.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void createOrganization() throws Exception {
@@ -211,8 +219,9 @@ public class GroupServiceTest extends IntegrationTest {
 
   /**
    * Creates the orphaned project.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void createOrphanedProject() throws Exception {
@@ -237,8 +246,9 @@ public class GroupServiceTest extends IntegrationTest {
 
   /**
    * Creates the same long name.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = GroupLongNameInUseException.class)
   public void createSameLongName() throws Exception {
@@ -250,8 +260,9 @@ public class GroupServiceTest extends IntegrationTest {
 
   /**
    * Creates the same short name.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = GroupShortNameInUseException.class)
   public void createSameShortName() throws Exception {

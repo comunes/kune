@@ -160,8 +160,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   @Override
   public InitDataDTO getInitData(final String userHash) throws DefaultException {
     final InitDataDTO dataMapped = mapper.map(data, InitDataDTO.class);
-    final UserInfo userInfo = userInfoService.buildInfo(userSessionManager.getUser(),
-        userSessionManager.getHash());
+    final UserInfo userInfo = userInfoService.buildInfo(userSessionManager.getUser(userHash), userHash);
 
     if (userInfo != null) {
       dataMapped.setUserInfo(mapper.map(userInfo, UserInfoDTO.class));

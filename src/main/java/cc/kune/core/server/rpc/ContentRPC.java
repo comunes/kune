@@ -126,7 +126,7 @@ public class ContentRPC implements ContentService, RPC {
   private final TagUserContentManager tagManager;
 
   /** The user session. */
-  private final UserSessionManager userSession;
+  private final UserSessionManager userSessionManager;
 
   /** The wave manager. */
   private final KuneWaveManager waveManager;
@@ -169,7 +169,7 @@ public class ContentRPC implements ContentService, RPC {
       final ContainerManager containerManager, final TagUserContentManager tagManager,
       final KuneMapper mapper, final ChatManager chatManager, final KuneWaveManager waveManager) {
     this.finderService = finderService;
-    this.userSession = userSession;
+    this.userSessionManager = userSession;
     this.accessService = accessService;
     this.rightsService = rightsService;
     this.stateService = stateService;
@@ -467,8 +467,8 @@ public class ContentRPC implements ContentService, RPC {
   public StateAbstractDTO getContent(final String userHash, final StateToken token)
       throws DefaultException {
     Group defaultGroup;
-    final User user = getCurrentUser();
-    if (isUserLoggedIn()) {
+    final User user = getUser(userHash);
+    if (isUserLoggedIn(userHash)) {
       defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
       if (groupManager.findEnabledTools(defaultGroup.getId()).size() <= 1) {
         // 1, because the trash
@@ -505,7 +505,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @KuneTransactional
   public StateAbstractDTO getContentByWaveRef(final String userHash, final String waveRef) {
-    final User user = getCurrentUser();
+    final User user = getUser(userHash);
     try {
       // FIXME get this from a wave constant
       final String root = "/~/conv+root";
@@ -555,7 +555,7 @@ public class ContentRPC implements ContentService, RPC {
    * @return the current user
    */
   private User getCurrentUser() {
-    return userSession.getUser();
+    return userSessionManager.getUser();
   }
 
   /**
@@ -636,13 +636,17 @@ public class ContentRPC implements ContentService, RPC {
     return getSummaryTags(group);
   }
 
+  private User getUser(final String userHash) {
+    return userSessionManager.getUser(userHash);
+  }
+
   /**
    * Checks if is user logged in.
    * 
    * @return true, if is user logged in
    */
-  private boolean isUserLoggedIn() {
-    return userSession.isUserLoggedIn();
+  private boolean isUserLoggedIn(final String userHash) {
+    return userSessionManager.isUserLoggedIn(userHash);
   }
 
   /**
@@ -828,7 +832,7 @@ public class ContentRPC implements ContentService, RPC {
     final User rater = getCurrentUser();
     final Long contentId = ContentUtils.parseId(token.getDocument());
 
-    if (isUserLoggedIn()) {
+    if (isUserLoggedIn(userHash)) {
       return contentManager.rateContent(rater, contentId, value);
     } else {
       throw new AccessViolationException();

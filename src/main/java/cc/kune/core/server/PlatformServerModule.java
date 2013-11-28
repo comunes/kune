@@ -100,7 +100,6 @@ import cc.kune.core.server.mapper.KuneMapperDefault;
 import cc.kune.core.server.notifier.NotificationSender;
 import cc.kune.core.server.notifier.NotificationSenderDefault;
 import cc.kune.core.server.notifier.PendingNotificationSender;
-import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.core.server.persist.KunePersistenceService;
 import cc.kune.core.server.rpc.ContentRPC;
 import cc.kune.core.server.rpc.GroupRPC;
@@ -222,7 +221,8 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(EntityLogoUploadManager.class).in(Singleton.class);
     bind(EntityLogoDownloadManager.class).in(Singleton.class);
     bind(ParticipantUtils.class).in(Singleton.class);
-    bind(UsersOnline.class).to(UserSessionManager.class).asEagerSingleton();
+    // bind(UserSessionManager.class).to(UserSessionManagerImpl.class).in(Singleton.class);
+    // bind(UsersOnline.class).to(UserSessionManagerImpl.class).asEagerSingleton();
     requestStaticInjection(AccessRightsUtils.class);
     bind(WaveEmailNotifier.class).in(Singleton.class);
     bind(PendingNotificationSender.class).in(Singleton.class);

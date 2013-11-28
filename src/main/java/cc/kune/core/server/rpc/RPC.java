@@ -32,10 +32,11 @@ import com.google.inject.Singleton;
  * <li>implement a RemoteService interface in the server side</li>
  * <li>convert from domain objects to dto objects</li>
  * <li>has userHash protected methods</li>
- * <li>contains little (or nothing) bussines logic (should delegate to other
+ * <li>contains little (or nothing) business logic (should delegate to other
  * services/managers)</li>
- * </ul>.
- *
+ * </ul>
+ * .
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */

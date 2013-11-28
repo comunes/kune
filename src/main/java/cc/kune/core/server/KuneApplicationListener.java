@@ -28,44 +28,42 @@ import javax.servlet.http.HttpServletResponse;
 import cc.kune.core.server.rack.filters.ApplicationListener;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
-// TODO: Auto-generated Javadoc
 /**
- * The listener interface for receiving kuneApplication events.
- * The class that is interested in processing a kuneApplication
- * event implements this interface, and the object created
- * with that class is registered with a component using the
- * component's <code>addKuneApplicationListener<code> method. When
- * the kuneApplication event occurs, that object's appropriate
- * method is invoked.
- *
+ * The listener interface for listening httprequest
+ * 
  * @see KuneApplicationEvent
  */
 class KuneApplicationListener implements ApplicationListener {
-  
-  /** The user session provider. */
-  final Provider<UserSession> userSessionProvider;
 
   /**
    * Instantiates a new kune application listener.
-   *
-   * @param userSessionProvider the user session provider
    */
   @Inject
-  public KuneApplicationListener(final Provider<UserSession> userSessionProvider) {
-    this.userSessionProvider = userSessionProvider;
+  public KuneApplicationListener() {
+
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.rack.filters.ApplicationListener#doAfter(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.rack.filters.ApplicationListener#doAfter(javax.servlet
+   * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
    */
+  @Override
   public void doAfter(final HttpServletRequest request, final HttpServletResponse httpServletResponse) {
+    request.getSession();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.rack.filters.ApplicationListener#doBefore(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.rack.filters.ApplicationListener#doBefore(javax.servlet
+   * .http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
    */
+  @Override
   public void doBefore(final HttpServletRequest httpServletRequest,
       final HttpServletResponse httpServletResponse) {
   }

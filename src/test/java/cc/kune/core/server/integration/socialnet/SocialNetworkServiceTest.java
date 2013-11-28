@@ -30,7 +30,7 @@ import org.junit.Test;
 import cc.kune.core.client.errors.AlreadyUserMemberException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.client.rpcservices.SocialNetService;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -41,17 +41,17 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkServiceTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetworkServiceTest extends IntegrationTest {
-  
+
   /** The group token. */
   private StateToken groupToken;
-  
+
   /** The session. */
   @Inject
-  UserSession session;
+  UserSessionManager session;
 
   /** The social network service. */
   @Inject
@@ -68,8 +68,9 @@ public class SocialNetworkServiceTest extends IntegrationTest {
 
   /**
    * Test get group members not logged.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testGetGroupMembersNotLogged() throws Exception {
@@ -79,8 +80,9 @@ public class SocialNetworkServiceTest extends IntegrationTest {
 
   /**
    * Test get participation not logged.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testGetParticipationNotLogged() throws Exception {
@@ -90,8 +92,9 @@ public class SocialNetworkServiceTest extends IntegrationTest {
 
   /**
    * Test request join no logged.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = UserMustBeLoggedException.class)
   public void testRequestJoinNoLogged() throws Exception {
@@ -100,8 +103,9 @@ public class SocialNetworkServiceTest extends IntegrationTest {
 
   /**
    * Test request join personal group.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = AlreadyUserMemberException.class)
   public void testRequestJoinPersonalGroup() throws Exception {

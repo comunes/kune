@@ -49,6 +49,7 @@ import cc.kune.core.server.manager.file.FileDownloadManager;
 import cc.kune.core.server.manager.file.FileGwtUploadServlet;
 import cc.kune.core.server.manager.file.FileUploadManager;
 import cc.kune.core.server.manager.impl.GroupServerUtils;
+import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
 import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
 import cc.kune.core.server.persist.KuneTransactional;
@@ -82,6 +83,7 @@ import cc.kune.wiki.server.WikiServerModule;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Module;
+import com.google.inject.Singleton;
 import com.google.inject.matcher.Matchers;
 import com.google.inject.persist.jpa.KuneJpaLocalTxnInterceptor;
 import com.google.inject.persist.jpa.OpenfireJpaLocalTxnInterceptor;
@@ -127,6 +129,8 @@ public class KuneRackModule implements RackModule {
         // if (sessionScope != null) {
         // bindScope(SessionScoped.class, sessionScope);
         // }
+        bind(UserSessionManager.class).to(UserSessionManagerImpl.class).in(Singleton.class);
+        bind(UsersOnline.class).to(UserSessionManagerImpl.class).asEagerSingleton();
         requestStaticInjection(KuneWaveServerUtils.class);
         requestStaticInjection(EventsServerConversionUtil.class);
         requestStaticInjection(GroupServerUtils.class);

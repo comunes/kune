@@ -166,7 +166,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   }
 
   private void errorRetrieving() {
-    NotifyUser.important(I18n.t("Cannot reading this document"));
+    NotifyUser.important(I18n.t("Ups, we find some problem trying to show you this document"));
     NotifyUser.hideProgress();
   }
 
@@ -289,6 +289,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
   private void processRequest(final String url, final Callback<JavaScriptObject, Void> callback) {
     final JsonpRequestBuilder builder = new JsonpRequestBuilder();
+    builder.setTimeout(60000);
     @SuppressWarnings("unused")
     final JsonpRequest<JavaScriptObject> request = builder.requestObject(url,
         new AsyncCallback<JavaScriptObject>() {
@@ -304,6 +305,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
             callback.onSuccess(result);
           }
         });
+
   }
 
   /*

@@ -30,7 +30,7 @@ import org.junit.After;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.UserService;
-import cc.kune.core.server.UserSessionManager;
+import cc.kune.core.server.DummyUserSessionManager;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
@@ -39,7 +39,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class IntegrationTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -48,24 +48,26 @@ public abstract class IntegrationTest {
   /** The properties. */
   @Inject
   KuneBasicProperties properties;
-  
+
   /** The session. */
   @Inject
-  protected UserSessionManager session;
-  
+  protected DummyUserSessionManager session;
+
   /** The token. */
   protected String token;
-  
+
   /** The user service. */
   @Inject
   UserService userService;
 
   /**
    * Do login.
-   *
+   * 
    * @return the user info dto
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected UserInfoDTO doLogin() throws DefaultException, IOException {
     return doLogin(getSiteAdminShortName(), properties.getAdminPassword());
@@ -73,11 +75,14 @@ public abstract class IntegrationTest {
 
   /**
    * Do login.
-   *
-   * @param nick the nick
-   * @param pass the pass
+   * 
+   * @param nick
+   *          the nick
+   * @param pass
+   *          the pass
    * @return the user info dto
-   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected UserInfoDTO doLogin(final String nick, final String pass) throws IOException {
     waveLogin();
@@ -86,10 +91,12 @@ public abstract class IntegrationTest {
 
   /**
    * Do login with dummy user.
-   *
+   * 
    * @return the string
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected String doLoginWithDummyUser() throws DefaultException, IOException {
     waveLogin();
@@ -98,8 +105,9 @@ public abstract class IntegrationTest {
 
   /**
    * Do logout.
-   *
-   * @throws DefaultException the default exception
+   * 
+   * @throws DefaultException
+   *           the default exception
    */
   @After
   public void doLogout() throws DefaultException {
@@ -110,7 +118,7 @@ public abstract class IntegrationTest {
 
   /**
    * Gets the def license.
-   *
+   * 
    * @return the def license
    */
   protected String getDefLicense() {
@@ -119,7 +127,7 @@ public abstract class IntegrationTest {
 
   /**
    * Gets the def site long name.
-   *
+   * 
    * @return the def site long name
    */
   protected String getDefSiteLongName() {
@@ -128,7 +136,7 @@ public abstract class IntegrationTest {
 
   /**
    * Gets the def site short name.
-   *
+   * 
    * @return the def site short name
    */
   protected String getDefSiteShortName() {
@@ -137,7 +145,7 @@ public abstract class IntegrationTest {
 
   /**
    * Gets the hash.
-   *
+   * 
    * @return the hash
    */
   public String getHash() {
@@ -146,7 +154,7 @@ public abstract class IntegrationTest {
 
   /**
    * Gets the site admin short name.
-   *
+   * 
    * @return the site admin short name
    */
   protected String getSiteAdminShortName() {
@@ -155,8 +163,9 @@ public abstract class IntegrationTest {
 
   /**
    * Wave login.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected void waveLogin() throws IOException {
     token = "somesampletoken";

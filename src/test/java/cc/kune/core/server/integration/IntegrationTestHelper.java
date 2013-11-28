@@ -39,9 +39,12 @@ import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.barters.server.BarterServerModule;
 import cc.kune.chat.server.ChatServerModule;
+import cc.kune.core.server.DummyUserSessionManager;
 import cc.kune.core.server.PlatformServerModule;
 import cc.kune.core.server.TestConstants;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.manager.impl.GroupServerUtils;
+import cc.kune.core.server.notifier.UsersOnline;
 import cc.kune.core.server.persist.DataSourceKunePersistModule;
 import cc.kune.core.server.persist.DataSourceOpenfirePersistModule;
 import cc.kune.core.server.persist.KunePersistenceService;
@@ -67,7 +70,7 @@ import com.google.inject.servlet.SessionScoped;
 // TODO: Auto-generated Javadoc
 /**
  * The Class IntegrationTestHelper.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -75,7 +78,7 @@ public class IntegrationTestHelper {
 
   /**
    * Creates the injector.
-   *
+   * 
    * @return the injector
    */
   public static Injector createInjector() {
@@ -88,7 +91,7 @@ public class IntegrationTestHelper {
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
       final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule(
           "kune-tests.properties", TestConstants.PERSISTENCE_UNIT);
-      Module searchModule = injector.getInstance(SearchModule.class);
+      final Module searchModule = injector.getInstance(SearchModule.class);
       final Injector childInjector = injector.createChildInjector(
           wavePersistModule,
           searchModule,
@@ -99,6 +102,8 @@ public class IntegrationTestHelper {
             protected void configure() {
               bindScope(SessionScoped.class, Scopes.SINGLETON);
               bindScope(RequestScoped.class, Scopes.SINGLETON);
+              bind(UsersOnline.class).to(DummyUserSessionManager.class).asEagerSingleton();
+              bind(UserSessionManager.class).to(DummyUserSessionManager.class).asEagerSingleton();
               // Used by I18nRPC to detect user lang
               bind(HttpServletRequest.class).toInstance(Mockito.mock(HttpServletRequest.class));
               bindInterceptor(annotatedWith(KuneTransactional.class), any(),
@@ -128,9 +133,11 @@ public class IntegrationTestHelper {
 
   /**
    * Instantiates a new integration test helper.
-   *
-   * @param startPersistence the start persistence
-   * @param tests the tests
+   * 
+   * @param startPersistence
+   *          the start persistence
+   * @param tests
+   *          the tests
    */
   public IntegrationTestHelper(final boolean startPersistence, final Object... tests) {
     final Injector injector = createInjector();

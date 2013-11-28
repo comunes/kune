@@ -30,7 +30,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cc.kune.core.client.rpcservices.SiteService;
-import cc.kune.core.server.UserSession;
+import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.integration.IntegrationTest;
 import cc.kune.core.server.integration.IntegrationTestHelper;
 import cc.kune.core.server.manager.I18nLanguageManager;
@@ -43,7 +43,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InitDataTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -52,23 +52,24 @@ public class InitDataTest extends IntegrationTest {
   /** The group finder. */
   @Inject
   Group groupFinder;
-  
+
   /** The i18n lang manager. */
   @Inject
   I18nLanguageManager i18nLangManager;
-  
+
   /** The service. */
   @Inject
   SiteService service;
-  
+
   /** The session. */
   @Inject
-  UserSession session;
+  UserSessionManager session;
 
   /**
    * Assert valid license dto list.
-   *
-   * @param licenseList the license list
+   * 
+   * @param licenseList
+   *          the license list
    */
   private void assertValidLicenseDTOList(final List<LicenseDTO> licenseList) {
     assertTrue(licenseList.size() > 0);
@@ -88,8 +89,9 @@ public class InitDataTest extends IntegrationTest {
 
   /**
    * Test get init data.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testGetInitData() throws Exception {

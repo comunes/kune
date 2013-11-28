@@ -47,7 +47,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ShouldBeMemberMethodInterceptor.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ShouldBeMemberMethodInterceptor implements MethodInterceptor {
@@ -58,21 +58,25 @@ public class ShouldBeMemberMethodInterceptor implements MethodInterceptor {
   /** The group finder. */
   @Inject
   Provider<GroupFinder> groupFinder;
-  
+
   /** The kune properties. */
   @Inject
   Provider<KuneProperties> kuneProperties;
-  
+
   /** The request provider. */
   @Inject
   Provider<HttpServletRequest> requestProvider;
-  
+
   /** The user session manager. */
   @Inject
   UserSessionManager userSessionManager;
 
-  /* (non-Javadoc)
-   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept
+   * .MethodInvocation)
    */
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
@@ -96,7 +100,7 @@ public class ShouldBeMemberMethodInterceptor implements MethodInterceptor {
 
     if (userHash == null) {
       throw new UserMustBeLoggedException();
-    } else if (userSessionManager.isUserNotLoggedIn()) {
+    } else if (userSessionManager.isUserNotLoggedIn(userHash)) {
       LOG.info("Session expired (not logged in server and mandatory)");
       throw new SessionExpiredException();
     } else {
