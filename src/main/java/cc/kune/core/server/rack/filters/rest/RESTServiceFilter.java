@@ -58,19 +58,26 @@ public class RESTServiceFilter extends AbstractInjectedFilter {
   public void destroy() {
   }
 
+  @Override
   public void doFilter(final ServletRequest request, final ServletResponse response,
       final FilterChain chain) throws IOException, ServletException {
 
-    String methodName = getMethodName(request);
-    ParametersAdapter parameters = new ParametersAdapter(request);
+    final String methodName = getMethodName(request);
+    final ParametersAdapter parameters = new ParametersAdapter(request);
     LOG.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
 
     response.setCharacterEncoding("utf-8");
-    response.setContentType("text/json");
-    Object output = transactionalFilter.doService(serviceClass, methodName, parameters,
-        getInstance(serviceClass));
+
+    final String callbackMethod = getCallbackMethod(request);
+    final boolean isJsonP = isJSONPRequest(callbackMethod);
+
+    response.setContentType(isJsonP ? "text/javascript" : "text/json");
+
+    final Object output = wrap(
+        transactionalFilter.doService(serviceClass, methodName, parameters, getInstance(serviceClass)),
+        isJsonP, callbackMethod);
     if (output != null) {
-      PrintWriter writer = response.getWriter();
+      final PrintWriter writer = response.getWriter();
       writer.print(output);
       writer.flush();
     } else {
@@ -78,11 +85,33 @@ public class RESTServiceFilter extends AbstractInjectedFilter {
     }
   }
 
+  private String getCallbackMethod(final ServletRequest httpRequest) {
+    return httpRequest.getParameter("callback");
+  }
+
   private String getMethodName(final ServletRequest request) {
-    String relativeURL = RackHelper.getRelativeURL(request);
-    Matcher matcher = pattern.matcher(relativeURL);
+    final String relativeURL = RackHelper.getRelativeURL(request);
+    final Matcher matcher = pattern.matcher(relativeURL);
     matcher.find();
-    String methodName = matcher.group(1);
+    final String methodName = matcher.group(1);
     return methodName;
   }
+
+  private boolean isJSONPRequest(final String callbackMethod) {
+    return (callbackMethod != null && callbackMethod.length() > 0);
+  }
+
+  private String wrap(final String output, final boolean isJsonP, final String callbackMethod) {
+    if (!isJsonP) {
+      return output;
+    } else {
+      final StringBuffer wrapped = new StringBuffer();
+      wrapped.append(callbackMethod);
+      wrapped.append("(");
+      wrapped.append(output);
+      wrapped.append(");");
+      return wrapped.toString();
+    }
+  }
+
 }

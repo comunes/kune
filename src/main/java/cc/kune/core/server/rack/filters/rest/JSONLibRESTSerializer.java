@@ -35,6 +35,7 @@ public class JSONLibRESTSerializer implements RESTSerializer {
     config.setCycleDetectionStrategy(CycleDetectionStrategy.LENIENT);
   }
 
+  @Override
   public String serialize(final Object target, final String format) {
     if (format.equals(RESTMethod.FORMAT_JSON)) {
       return JSONSerializer.toJSON(target, config).toString();

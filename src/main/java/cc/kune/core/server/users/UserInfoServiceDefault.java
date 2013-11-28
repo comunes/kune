@@ -127,18 +127,21 @@ public class UserInfoServiceDefault implements UserInfoService {
       if (defaultContent != null) {
         userInfo.setHomePage(defaultContent.getStateToken().toString());
       }
-      try {
-        final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
-        final JSONObject clientFlags = new JSONObject();
-        userInfo.setSessionJSON(waveClientServlet.getSessionJson(sessionFromToken).toString());
-        userInfo.setClientFlags(clientFlags.toString());
-        userInfo.setWebsocketAddress(websocketAddress);
-      } catch (final Exception e) {
-        LOG.info("Cannot get wave session info for user: " + user.getShortName() + " and hash: "
-            + userHash);
-      }
-
+      setWaveSession(userHash, userInfo);
     }
     return userInfo;
+  }
+
+  private void setWaveSession(final String userHash, final UserInfo userInfo) {
+    try {
+      final HttpSession sessionFromToken = waveSessionManager.getSessionFromToken(userHash);
+      final JSONObject clientFlags = new JSONObject();
+      userInfo.setSessionJSON(waveClientServlet.getSessionJson(sessionFromToken).toString());
+      userInfo.setClientFlags(clientFlags.toString());
+      userInfo.setWebsocketAddress(websocketAddress);
+      userInfo.setUserHash(userHash);
+    } catch (final Exception e) {
+      LOG.info("Cannot get wave session info for user with hash: " + userHash);
+    }
   }
 }

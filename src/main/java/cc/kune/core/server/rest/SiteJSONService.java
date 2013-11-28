@@ -43,5 +43,4 @@ public class SiteJSONService {
   public InitDataDTO getInitData(final String userHash) {
     return manager.getInitData(userHash);
   }
-
 }

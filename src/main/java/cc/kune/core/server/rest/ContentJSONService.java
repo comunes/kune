@@ -22,6 +22,7 @@
  */
 package cc.kune.core.server.rest;
 
+import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.SearchResult;
@@ -58,12 +59,20 @@ public class ContentJSONService {
 
   @REST(params = { JSONConstants.HASH_PARAM, JSONConstants.TOKEN_PARAM })
   public StateAbstractDTO getContent(final String userHash, final String token) {
-    return contentRpc.getContent(userHash, new StateToken(token));
+    try {
+      return contentRpc.getContent(userHash, new StateToken(token));
+    } catch (final SessionExpiredException e) {
+      return contentRpc.getContent(null, new StateToken(token));
+    }
   }
 
   @REST(params = { JSONConstants.HASH_PARAM, JSONConstants.TOKEN_PARAM })
   public StateAbstractDTO getContentByWaveRef(final String userHash, final String waveRef) {
-    return contentRpc.getContentByWaveRef(userHash, waveRef);
+    try {
+      return contentRpc.getContentByWaveRef(userHash, waveRef);
+    } catch (final SessionExpiredException e) {
+      return contentRpc.getContentByWaveRef(null, waveRef);
+    }
   }
 
   private SearchResultDTO<LinkDTO> map(final SearchResult<?> results) {

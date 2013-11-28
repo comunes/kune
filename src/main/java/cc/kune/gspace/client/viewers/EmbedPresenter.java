@@ -50,19 +50,17 @@ import cc.kune.wave.client.kspecific.WaveClientProvider;
 
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JsonUtils;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.http.client.Request;
-import com.google.gwt.http.client.RequestBuilder;
-import com.google.gwt.http.client.RequestCallback;
-import com.google.gwt.http.client.RequestException;
-import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
+import com.google.gwt.jsonp.client.JsonpRequest;
+import com.google.gwt.jsonp.client.JsonpRequestBuilder;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -129,24 +127,23 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     this.session = session;
     this.sitebar = sitebar;
     TokenMatcher.init(GwtWaverefEncoder.INSTANCE);
-    Log.info("Started embed presenter");
+    final String userHash = session.getUserHash();
 
-    final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL()
-        + "json/SiteJSONService/getInitData?"
-        + new UrlParam(JSONConstants.HASH_PARAM, session.getUserHash()));
+    Log.info("Started embed presenter with userhash: " + userHash);
 
-    processRequest(builder, new Callback<Response, Void>() {
+    final String initUrl = GWT.getModuleBaseURL() + "json/SiteJSONService/getInitData?"
+        + new UrlParam(JSONConstants.HASH_PARAM, userHash);
+    processRequest(initUrl, new Callback<JavaScriptObject, Void>() {
       @Override
       public void onFailure(final Void reason) {
         // Do nothing
       }
 
       @Override
-      public void onSuccess(final Response response) {
-        final InitDataDTOJs initData = JsonUtils.safeEval(response.getText());
+      public void onSuccess(final JavaScriptObject response) {
+        final InitDataDTOJs initData = (InitDataDTOJs) response;
         session.setInitData(parse(initData));
         final UserInfoDTOJs userInfo = (UserInfoDTOJs) initData.getUserInfo();
-        // NotifyUser.info(json.getClass(), true);
         session.setCurrentUserInfo(parse(userInfo), null);
         getContentFromHash();
 
@@ -169,7 +166,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   }
 
   private void errorRetrieving() {
-    NotifyUser.important(I18n.t("Error retrieving content"));
+    NotifyUser.important(I18n.t("Cannot reading this document"));
     NotifyUser.hideProgress();
   }
 
@@ -181,21 +178,20 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
     if (isGroupToken || isWaveToken) {
       // Ok is a token like group.tool.number
-      final RequestBuilder request = new RequestBuilder(RequestBuilder.GET, GWT.getModuleBaseURL()
-          + "json/ContentJSONService/getContent" + suffix + "?"
-          + new UrlParam(JSONConstants.HASH_PARAM, session.getUserHash())
-          + new UrlParam("&" + JSONConstants.TOKEN_PARAM, URL.encodeQueryString(currentHash)));
-      processRequest(request, new Callback<Response, Void>() {
+      final String getContentUrl = GWT.getModuleBaseURL() + "json/ContentJSONService/getContent"
+          + suffix + "?" + new UrlParam(JSONConstants.HASH_PARAM, session.getUserHash())
+          + new UrlParam("&" + JSONConstants.TOKEN_PARAM, URL.encodeQueryString(currentHash));
+      processRequest(getContentUrl, new Callback<JavaScriptObject, Void>() {
         @Override
         public void onFailure(final Void reason) {
           notFound();
         }
 
         @Override
-        public void onSuccess(final Response response) {
+        public void onSuccess(final JavaScriptObject response) {
           // final StateToken currentToken = new StateToken(currentHash);
           NotifyUser.hideProgress();
-          final StateAbstractDTOJs state = JsonUtils.safeEval(response.getText());
+          final StateAbstractDTOJs state = (StateAbstractDTOJs) response;
           final StateTokenJs stateToken = (StateTokenJs) state.getStateToken();
 
           // getContent returns the default content if doesn't finds the content
@@ -238,7 +234,10 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     getView().clear();
     final StateContentDTO stateContent = (StateContentDTO) state;
 
-    if (session.isLogged() && stateContent.isParticipant()) {
+    final boolean isLogged = session.isLogged();
+    final boolean isParticipant = stateContent.isParticipant();
+    Log.info("Is logged: " + isLogged + " isParticipant: " + isParticipant);
+    if (isLogged && isParticipant) {
       getView().setEditableContent(stateContent);
     } else {
       getView().setContent(stateContent);
@@ -273,43 +272,38 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   }
 
   private UserInfoDTO parse(final UserInfoDTOJs userInfo) {
-    final UserInfoDTO info = new UserInfoDTO();
-    info.setUserHash(userInfo.getUserHash());
-    info.setSessionJSON(userInfo.getSessionJSON());
-    info.setWebsocketAddress(userInfo.getWebsocketAddress());
-    info.setClientFlags(userInfo.getClientFlags());
-
-    return info;
+    final String userHash = userInfo.getUserHash();
+    if (userHash == null) {
+      Log.info("We are NOT logged");
+      return null;
+    } else {
+      final UserInfoDTO info = new UserInfoDTO();
+      info.setUserHash(userHash);
+      Log.info("We are logged");
+      info.setSessionJSON(userInfo.getSessionJSON());
+      info.setWebsocketAddress(userInfo.getWebsocketAddress());
+      info.setClientFlags(userInfo.getClientFlags());
+      return info;
+    }
   }
 
-  private void processRequest(final RequestBuilder builder, final Callback<Response, Void> callback) {
-    try {
-      @SuppressWarnings("unused")
-      final Request request = builder.sendRequest(null, new RequestCallback() {
-        @Override
-        public void onError(final Request request, final Throwable exception) {
-          errorRetrieving();
-          Log.error("JSON exception: ", exception);
-          callback.onFailure(null);
-        }
-
-        @Override
-        public void onResponseReceived(final Request request, final Response response) {
-          if (200 == response.getStatusCode()) {
-            callback.onSuccess(response);
-          } else {
+  private void processRequest(final String url, final Callback<JavaScriptObject, Void> callback) {
+    final JsonpRequestBuilder builder = new JsonpRequestBuilder();
+    @SuppressWarnings("unused")
+    final JsonpRequest<JavaScriptObject> request = builder.requestObject(url,
+        new AsyncCallback<JavaScriptObject>() {
+          @Override
+          public void onFailure(final Throwable exception) {
             errorRetrieving();
-            Log.error("Couldn't retrieve JSON (" + response.getStatusText() + ")");
+            Log.error("JSON exception: ", exception);
             callback.onFailure(null);
           }
-        }
-      });
-    } catch (final RequestException exception) {
-      errorRetrieving();
-      Log.error("JSON exception: ", exception);
-      callback.onFailure(null);
-    }
 
+          @Override
+          public void onSuccess(final JavaScriptObject result) {
+            callback.onSuccess(result);
+          }
+        });
   }
 
   /*

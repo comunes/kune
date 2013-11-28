@@ -25,10 +25,9 @@ package cc.kune.core.server.users;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.domain.User;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface UserInfoService.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -36,11 +35,14 @@ public interface UserInfoService {
 
   /**
    * Builds the info.
-   *
-   * @param user the user
-   * @param userHash the user hash
+   * 
+   * @param user
+   *          the user
+   * @param userHash
+   *          the user hash
    * @return the user info
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   UserInfo buildInfo(User user, String userHash) throws DefaultException;
 

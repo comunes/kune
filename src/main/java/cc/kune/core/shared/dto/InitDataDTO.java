@@ -30,7 +30,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InitDataDTO.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -38,112 +38,112 @@ public class InitDataDTO implements IsSerializable {
 
   /** The avi embed object. */
   private String aviEmbedObject;
-  
+
   /** The chat domain. */
   private String chatDomain;
-  
+
   /** The chat http base. */
   private String chatHttpBase;
-  
+
   /** The chat room host. */
   private String chatRoomHost;
-  
+
   /** The countries. */
   private List<I18nCountryDTO> countries;
-  
+
   /** The current c cversion. */
   private String currentCCversion;
-  
+
   /** The default license. */
   private LicenseDTO defaultLicense;
-  
+
   /** The default ws theme. */
   private String defaultWsTheme;
-  
+
   /** The def tutorial language. */
   private String defTutorialLanguage;
-  
+
   /** The feedback enabled. */
   private boolean feedbackEnabled;
-  
+
   /** The flv embed object. */
   private String flvEmbedObject;
-  
+
   /** The full translated languages. */
   private List<I18nLanguageSimpleDTO> fullTranslatedLanguages;
-  
+
   /** The gallery permitted extensions. */
   private String galleryPermittedExtensions;
-  
+
   /** The group tools. */
   private List<ToolSimpleDTO> groupTools;
-  
+
   /** The g space themes. */
   private HashMap<String, GSpaceTheme> gSpaceThemes = new HashMap<String, GSpaceTheme>();
-  
+
   /** The img cropsize. */
   private int imgCropsize;
-  
+
   /** The img iconsize. */
   private int imgIconsize;
-  
+
   /** The img resizewidth. */
   private int imgResizewidth;
-  
+
   /** The img thumbsize. */
   private int imgThumbsize;
-  
+
   /** The languages. */
   private List<I18nLanguageSimpleDTO> languages;
-  
+
   /** The licenses. */
   private List<LicenseDTO> licenses;
-  
+
   /** The max file size in mb. */
   private String maxFileSizeInMb;
-  
+
   /** The mp3 embed object. */
   private String mp3EmbedObject;
-  
+
   /** The ogg embed object. */
   private String oggEmbedObject;
-  
+
   /** The public space visible. */
   private boolean publicSpaceVisible;
-  
+
   /** The reserved words. */
   private ReservedWordsRegistryDTO reservedWords;
-  
+
   /** The site logo url. */
   private String siteLogoUrl;
-  
+
   /** The site logo url on over. */
   private String siteLogoUrlOnOver;
-  
+
   /** The site short name. */
   private String siteShortName;
-  
+
   /** The site url. */
   private String siteUrl;
-  
+
   /** The store untranslated strings. */
   private boolean storeUntranslatedStrings;
-  
+
   /** The timezones. */
   private String[] timezones;
-  
+
   /** The translator enabled. */
   private boolean translatorEnabled;
-  
+
   /** The tutorial languages. */
   private List<String> tutorialLanguages;
-  
+
   /** The use client content cache. */
   private boolean useClientContentCache;
-  
+
   /** The user info. */
   private UserInfoDTO userInfo;
-  
+
   /** The user tools. */
   private List<ToolSimpleDTO> userTools;
 
@@ -155,7 +155,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the avi embed object.
-   *
+   * 
    * @return the avi embed object
    */
   public String getAviEmbedObject() {
@@ -164,7 +164,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the chat domain.
-   *
+   * 
    * @return the chat domain
    */
   public String getChatDomain() {
@@ -173,7 +173,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the chat http base.
-   *
+   * 
    * @return the chat http base
    */
   public String getChatHttpBase() {
@@ -182,7 +182,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the chat room host.
-   *
+   * 
    * @return the chat room host
    */
   public String getChatRoomHost() {
@@ -191,7 +191,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the countries.
-   *
+   * 
    * @return the countries
    */
   public List<I18nCountryDTO> getCountries() {
@@ -200,7 +200,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the current c cversion.
-   *
+   * 
    * @return the current c cversion
    */
   public String getCurrentCCversion() {
@@ -209,7 +209,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the default license.
-   *
+   * 
    * @return the default license
    */
   public LicenseDTO getDefaultLicense() {
@@ -218,7 +218,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the default ws theme.
-   *
+   * 
    * @return the default ws theme
    */
   public String getDefaultWsTheme() {
@@ -227,7 +227,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the def tutorial language.
-   *
+   * 
    * @return the def tutorial language
    */
   public String getDefTutorialLanguage() {
@@ -236,7 +236,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the flv embed object.
-   *
+   * 
    * @return the flv embed object
    */
   public String getFlvEmbedObject() {
@@ -245,7 +245,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the full translated languages.
-   *
+   * 
    * @return the full translated languages
    */
   public List<I18nLanguageSimpleDTO> getFullTranslatedLanguages() {
@@ -254,7 +254,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the gallery permitted extensions.
-   *
+   * 
    * @return the gallery permitted extensions
    */
   public String getGalleryPermittedExtensions() {
@@ -263,7 +263,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the group tools.
-   *
+   * 
    * @return the group tools
    */
   public List<ToolSimpleDTO> getGroupTools() {
@@ -272,7 +272,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the g space themes.
-   *
+   * 
    * @return the g space themes
    */
   public HashMap<String, GSpaceTheme> getgSpaceThemes() {
@@ -281,7 +281,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the img cropsize.
-   *
+   * 
    * @return the img cropsize
    */
   public int getImgCropsize() {
@@ -290,7 +290,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the img iconsize.
-   *
+   * 
    * @return the img iconsize
    */
   public int getImgIconsize() {
@@ -299,7 +299,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the img resizewidth.
-   *
+   * 
    * @return the img resizewidth
    */
   public int getImgResizewidth() {
@@ -308,7 +308,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the img thumbsize.
-   *
+   * 
    * @return the img thumbsize
    */
   public int getImgThumbsize() {
@@ -317,7 +317,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the languages.
-   *
+   * 
    * @return the languages
    */
   public List<I18nLanguageSimpleDTO> getLanguages() {
@@ -326,7 +326,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the licenses.
-   *
+   * 
    * @return the licenses
    */
   public List<LicenseDTO> getLicenses() {
@@ -335,7 +335,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the max file size in mb.
-   *
+   * 
    * @return the max file size in mb
    */
   public String getMaxFileSizeInMb() {
@@ -344,7 +344,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the mp3 embed object.
-   *
+   * 
    * @return the mp3 embed object
    */
   public String getMp3EmbedObject() {
@@ -353,7 +353,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the ogg embed object.
-   *
+   * 
    * @return the ogg embed object
    */
   public String getOggEmbedObject() {
@@ -362,7 +362,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the reserved words.
-   *
+   * 
    * @return the reserved words
    */
   public ReservedWordsRegistryDTO getReservedWords() {
@@ -371,7 +371,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the site logo url.
-   *
+   * 
    * @return the site logo url
    */
   @Deprecated
@@ -381,7 +381,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the site logo url on over.
-   *
+   * 
    * @return the site logo url on over
    */
   public String getSiteLogoUrlOnOver() {
@@ -390,7 +390,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the site short name.
-   *
+   * 
    * @return the site short name
    */
   public String getSiteShortName() {
@@ -399,7 +399,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the site url.
-   *
+   * 
    * @return the site url
    */
   public String getSiteUrl() {
@@ -408,7 +408,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the store untranslated strings.
-   *
+   * 
    * @return the store untranslated strings
    */
   public boolean getStoreUntranslatedStrings() {
@@ -417,7 +417,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the timezones.
-   *
+   * 
    * @return the timezones
    */
   public String[] getTimezones() {
@@ -426,7 +426,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the tutorial languages.
-   *
+   * 
    * @return the tutorial languages
    */
   public List<String> getTutorialLanguages() {
@@ -434,8 +434,17 @@ public class InitDataDTO implements IsSerializable {
   }
 
   /**
+   * Use client content cache.
+   * 
+   * @return true, if successful
+   */
+  public boolean getUseClientContentCache() {
+    return useClientContentCache;
+  }
+
+  /**
    * Gets the user info.
-   *
+   * 
    * @return the user info
    */
   public UserInfoDTO getUserInfo() {
@@ -444,7 +453,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the user tools.
-   *
+   * 
    * @return the user tools
    */
   public List<ToolSimpleDTO> getUserTools() {
@@ -453,7 +462,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Checks for user.
-   *
+   * 
    * @return true, if successful
    */
   public boolean hasUser() {
@@ -462,7 +471,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Checks if is feedback enabled.
-   *
+   * 
    * @return true, if is feedback enabled
    */
   public boolean isFeedbackEnabled() {
@@ -471,7 +480,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Checks if is public space visible.
-   *
+   * 
    * @return true, if is public space visible
    */
   public boolean isPublicSpaceVisible() {
@@ -480,7 +489,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Checks if is translator enabled.
-   *
+   * 
    * @return true, if is translator enabled
    */
   public boolean isTranslatorEnabled() {
@@ -489,8 +498,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the avi embed object.
-   *
-   * @param aviEmbedObject the new avi embed object
+   * 
+   * @param aviEmbedObject
+   *          the new avi embed object
    */
   public void setAviEmbedObject(final String aviEmbedObject) {
     this.aviEmbedObject = aviEmbedObject;
@@ -498,8 +508,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the chat domain.
-   *
-   * @param chatDomain the new chat domain
+   * 
+   * @param chatDomain
+   *          the new chat domain
    */
   public void setChatDomain(final String chatDomain) {
     this.chatDomain = chatDomain;
@@ -507,8 +518,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the chat http base.
-   *
-   * @param chatHttpBase the new chat http base
+   * 
+   * @param chatHttpBase
+   *          the new chat http base
    */
   public void setChatHttpBase(final String chatHttpBase) {
     this.chatHttpBase = chatHttpBase;
@@ -516,8 +528,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the chat room host.
-   *
-   * @param chatRoomHost the new chat room host
+   * 
+   * @param chatRoomHost
+   *          the new chat room host
    */
   public void setChatRoomHost(final String chatRoomHost) {
     this.chatRoomHost = chatRoomHost;
@@ -525,8 +538,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the countries.
-   *
-   * @param countries the new countries
+   * 
+   * @param countries
+   *          the new countries
    */
   public void setCountries(final List<I18nCountryDTO> countries) {
     this.countries = countries;
@@ -534,8 +548,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the current c cversion.
-   *
-   * @param currentCCversion the new current c cversion
+   * 
+   * @param currentCCversion
+   *          the new current c cversion
    */
   public void setCurrentCCversion(final String currentCCversion) {
     this.currentCCversion = currentCCversion;
@@ -543,8 +558,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the default license.
-   *
-   * @param defaultLicense the new default license
+   * 
+   * @param defaultLicense
+   *          the new default license
    */
   public void setDefaultLicense(final LicenseDTO defaultLicense) {
     this.defaultLicense = defaultLicense;
@@ -552,8 +568,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the default ws theme.
-   *
-   * @param defaultWsTheme the new default ws theme
+   * 
+   * @param defaultWsTheme
+   *          the new default ws theme
    */
   public void setDefaultWsTheme(final String defaultWsTheme) {
     this.defaultWsTheme = defaultWsTheme;
@@ -561,8 +578,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the def tutorial language.
-   *
-   * @param defTutorialLanguage the new def tutorial language
+   * 
+   * @param defTutorialLanguage
+   *          the new def tutorial language
    */
   public void setDefTutorialLanguage(final String defTutorialLanguage) {
     this.defTutorialLanguage = defTutorialLanguage;
@@ -570,8 +588,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the feedback enabled.
-   *
-   * @param feedbackEnabled the new feedback enabled
+   * 
+   * @param feedbackEnabled
+   *          the new feedback enabled
    */
   public void setFeedbackEnabled(final boolean feedbackEnabled) {
     this.feedbackEnabled = feedbackEnabled;
@@ -579,8 +598,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the flv embed object.
-   *
-   * @param flvEmbedObject the new flv embed object
+   * 
+   * @param flvEmbedObject
+   *          the new flv embed object
    */
   public void setFlvEmbedObject(final String flvEmbedObject) {
     this.flvEmbedObject = flvEmbedObject;
@@ -588,8 +608,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the full translated languages.
-   *
-   * @param fullTranslatedLanguages the new full translated languages
+   * 
+   * @param fullTranslatedLanguages
+   *          the new full translated languages
    */
   public void setFullTranslatedLanguages(final List<I18nLanguageSimpleDTO> fullTranslatedLanguages) {
     this.fullTranslatedLanguages = fullTranslatedLanguages;
@@ -597,8 +618,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the gallery permitted extensions.
-   *
-   * @param galleryPermittedExtensions the new gallery permitted extensions
+   * 
+   * @param galleryPermittedExtensions
+   *          the new gallery permitted extensions
    */
   public void setGalleryPermittedExtensions(final String galleryPermittedExtensions) {
     this.galleryPermittedExtensions = galleryPermittedExtensions;
@@ -606,8 +628,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the group tools.
-   *
-   * @param groupTools the new group tools
+   * 
+   * @param groupTools
+   *          the new group tools
    */
   public void setGroupTools(final List<ToolSimpleDTO> groupTools) {
     this.groupTools = groupTools;
@@ -615,8 +638,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Setg space themes.
-   *
-   * @param gSpaceThemes the g space themes
+   * 
+   * @param gSpaceThemes
+   *          the g space themes
    */
   public void setgSpaceThemes(final HashMap<String, GSpaceTheme> gSpaceThemes) {
     this.gSpaceThemes = gSpaceThemes;
@@ -624,8 +648,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the img cropsize.
-   *
-   * @param imgCropsize the new img cropsize
+   * 
+   * @param imgCropsize
+   *          the new img cropsize
    */
   public void setImgCropsize(final int imgCropsize) {
     this.imgCropsize = imgCropsize;
@@ -633,8 +658,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the img iconsize.
-   *
-   * @param imgIconsize the new img iconsize
+   * 
+   * @param imgIconsize
+   *          the new img iconsize
    */
   public void setImgIconsize(final int imgIconsize) {
     this.imgIconsize = imgIconsize;
@@ -642,8 +668,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the img resizewidth.
-   *
-   * @param imgResizewidth the new img resizewidth
+   * 
+   * @param imgResizewidth
+   *          the new img resizewidth
    */
   public void setImgResizewidth(final int imgResizewidth) {
     this.imgResizewidth = imgResizewidth;
@@ -651,8 +678,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the img thumbsize.
-   *
-   * @param imgThumbsize the new img thumbsize
+   * 
+   * @param imgThumbsize
+   *          the new img thumbsize
    */
   public void setImgThumbsize(final int imgThumbsize) {
     this.imgThumbsize = imgThumbsize;
@@ -660,8 +688,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the languages.
-   *
-   * @param languages the new languages
+   * 
+   * @param languages
+   *          the new languages
    */
   public void setLanguages(final List<I18nLanguageSimpleDTO> languages) {
     this.languages = languages;
@@ -669,8 +698,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the licenses.
-   *
-   * @param licenses the new licenses
+   * 
+   * @param licenses
+   *          the new licenses
    */
   public void setLicenses(final List<LicenseDTO> licenses) {
     this.licenses = licenses;
@@ -678,8 +708,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the max file size in mb.
-   *
-   * @param maxFileSizeInMb the new max file size in mb
+   * 
+   * @param maxFileSizeInMb
+   *          the new max file size in mb
    */
   public void setMaxFileSizeInMb(final String maxFileSizeInMb) {
     this.maxFileSizeInMb = maxFileSizeInMb;
@@ -687,8 +718,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the mp3 embed object.
-   *
-   * @param mp3EmbedObject the new mp3 embed object
+   * 
+   * @param mp3EmbedObject
+   *          the new mp3 embed object
    */
   public void setMp3EmbedObject(final String mp3EmbedObject) {
     this.mp3EmbedObject = mp3EmbedObject;
@@ -696,8 +728,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the ogg embed object.
-   *
-   * @param oggEmbedObject the new ogg embed object
+   * 
+   * @param oggEmbedObject
+   *          the new ogg embed object
    */
   public void setOggEmbedObject(final String oggEmbedObject) {
     this.oggEmbedObject = oggEmbedObject;
@@ -705,8 +738,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the public space visible.
-   *
-   * @param publicSpaceVisible the new public space visible
+   * 
+   * @param publicSpaceVisible
+   *          the new public space visible
    */
   public void setPublicSpaceVisible(final boolean publicSpaceVisible) {
     this.publicSpaceVisible = publicSpaceVisible;
@@ -714,8 +748,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the reserved words.
-   *
-   * @param reservedWords the new reserved words
+   * 
+   * @param reservedWords
+   *          the new reserved words
    */
   public void setReservedWords(final ReservedWordsRegistryDTO reservedWords) {
     this.reservedWords = reservedWords;
@@ -723,8 +758,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the site logo url.
-   *
-   * @param siteLogoUrl the new site logo url
+   * 
+   * @param siteLogoUrl
+   *          the new site logo url
    */
   public void setSiteLogoUrl(final String siteLogoUrl) {
     this.siteLogoUrl = siteLogoUrl;
@@ -732,8 +768,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the site logo url on over.
-   *
-   * @param siteLogoUrlOnOver the new site logo url on over
+   * 
+   * @param siteLogoUrlOnOver
+   *          the new site logo url on over
    */
   public void setSiteLogoUrlOnOver(final String siteLogoUrlOnOver) {
     this.siteLogoUrlOnOver = siteLogoUrlOnOver;
@@ -741,8 +778,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the site short name.
-   *
-   * @param siteShortName the new site short name
+   * 
+   * @param siteShortName
+   *          the new site short name
    */
   public void setSiteShortName(final String siteShortName) {
     this.siteShortName = siteShortName;
@@ -750,8 +788,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the site url.
-   *
-   * @param siteUrl the new site url
+   * 
+   * @param siteUrl
+   *          the new site url
    */
   public void setSiteUrl(final String siteUrl) {
     this.siteUrl = siteUrl;
@@ -759,8 +798,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the store untranslated strings.
-   *
-   * @param shouldStoreUntranslatedStrings the new store untranslated strings
+   * 
+   * @param shouldStoreUntranslatedStrings
+   *          the new store untranslated strings
    */
   public void setStoreUntranslatedStrings(final boolean shouldStoreUntranslatedStrings) {
     this.storeUntranslatedStrings = shouldStoreUntranslatedStrings;
@@ -768,8 +808,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the timezones.
-   *
-   * @param timezones the new timezones
+   * 
+   * @param timezones
+   *          the new timezones
    */
   public void setTimezones(final String[] timezones) {
     this.timezones = timezones;
@@ -777,8 +818,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the translator enabled.
-   *
-   * @param translatorEnabled the new translator enabled
+   * 
+   * @param translatorEnabled
+   *          the new translator enabled
    */
   public void setTranslatorEnabled(final boolean translatorEnabled) {
     this.translatorEnabled = translatorEnabled;
@@ -786,8 +828,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the tutorial languages.
-   *
-   * @param tutorialLanguages the new tutorial languages
+   * 
+   * @param tutorialLanguages
+   *          the new tutorial languages
    */
   public void setTutorialLanguages(final List<String> tutorialLanguages) {
     this.tutorialLanguages = tutorialLanguages;
@@ -795,8 +838,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the use client content cache.
-   *
-   * @param useClientContentCache the new use client content cache
+   * 
+   * @param useClientContentCache
+   *          the new use client content cache
    */
   public void setUseClientContentCache(final boolean useClientContentCache) {
     this.useClientContentCache = useClientContentCache;
@@ -804,8 +848,9 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the user info.
-   *
-   * @param currentUser the new user info
+   * 
+   * @param currentUser
+   *          the new user info
    */
   public void setUserInfo(final UserInfoDTO currentUser) {
     this.userInfo = currentUser;
@@ -813,20 +858,16 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the user tools.
-   *
-   * @param userTools the new user tools
+   * 
+   * @param userTools
+   *          the new user tools
    */
   public void setUserTools(final List<ToolSimpleDTO> userTools) {
     this.userTools = userTools;
   }
 
-  /**
-   * Use client content cache.
-   *
-   * @return true, if successful
-   */
   public boolean useClientContentCache() {
-    return useClientContentCache;
+    return getUseClientContentCache();
   }
 
 }
