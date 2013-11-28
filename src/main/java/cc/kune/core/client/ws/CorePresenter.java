@@ -22,6 +22,7 @@
  */
 package cc.kune.core.client.ws;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.i18n.I18nReadyEvent;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
@@ -38,24 +39,24 @@ import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CorePresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresenter.CoreProxy> {
-  
+
   /**
    * The Interface CoreProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyStandard
   public interface CoreProxy extends Proxy<CorePresenter> {
   }
-  
+
   /**
    * The Interface CoreView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface CoreView extends View {
@@ -63,18 +64,23 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
 
   /**
    * Instantiates a new core presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param appStarter the app starter
-   * @param i18n the i18n
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param appStarter
+   *          the app starter
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public CorePresenter(final EventBus eventBus, final CoreView view, final CoreProxy proxy,
-      final AppStarter appStarter, final I18nUITranslationService i18n) {
+      final AppStarter appStarter, final I18nTranslationService i18n) {
     super(eventBus, view, proxy);
-    if (i18n.isReady()) {
+    if (((I18nUITranslationService) i18n).isReady()) {
       appStarter.start();
     }
 
@@ -86,7 +92,9 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
     });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

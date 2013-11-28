@@ -23,8 +23,8 @@
 package cc.kune.barters.client.actions;
 
 import static cc.kune.barters.shared.BartersToolConstants.*;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -58,60 +58,91 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BartersClientActions.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BartersClientActions extends AbstractFoldableToolActions {
-  
+
   /** The all. */
   final String[] all = { TYPE_ROOT, TYPE_FOLDER, TYPE_BARTER };
-  
+
   /** The containers. */
   final String[] containers = { TYPE_ROOT, TYPE_FOLDER };
-  
+
   /** The containers no root. */
   final String[] containersNoRoot = { TYPE_FOLDER };
-  
+
   /** The contents. */
   final String[] contents = { TYPE_BARTER };
 
   /**
    * Instantiates a new barters client actions.
-   *
-   * @param i18n the i18n
-   * @param session the session
-   * @param stateManager the state manager
-   * @param registry the registry
-   * @param res the res
-   * @param folderGoUp the folder go up
-   * @param newBartersBtn the new barters btn
-   * @param newFolderBtn the new folder btn
-   * @param openContentMenuItem the open content menu item
-   * @param delContentMenuItem the del content menu item
-   * @param optionsMenuContent the options menu content
-   * @param shareMenuContent the share menu content
-   * @param addAllMenuItem the add all menu item
-   * @param addAdminMembersMenuItem the add admin members menu item
-   * @param addCollabMembersMenuItem the add collab members menu item
-   * @param addPublicMenuItem the add public menu item
-   * @param tutorialBtn the tutorial btn
-   * @param participateBtn the participate btn
-   * @param delFolderMenuItem the del folder menu item
-   * @param purgeMenuItem the purge menu item
-   * @param purgeBtn the purge btn
-   * @param purgeFolderMenuItem the purge folder menu item
-   * @param purgeFolderBtn the purge folder btn
-   * @param refresh the refresh
-   * @param copyContent the copy content
-   * @param moveContentMenuItem the move content menu item
-   * @param writeToParticipants the write to participants
-   * @param shareInTwitter the share in twitter
-   * @param shareInGPlus the share in g plus
-   * @param shareInIdentica the share in identica
-   * @param shareInFacebook the share in facebook
+   * 
+   * @param i18n
+   *          the i18n
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param registry
+   *          the registry
+   * @param res
+   *          the res
+   * @param folderGoUp
+   *          the folder go up
+   * @param newBartersBtn
+   *          the new barters btn
+   * @param newFolderBtn
+   *          the new folder btn
+   * @param openContentMenuItem
+   *          the open content menu item
+   * @param delContentMenuItem
+   *          the del content menu item
+   * @param optionsMenuContent
+   *          the options menu content
+   * @param shareMenuContent
+   *          the share menu content
+   * @param addAllMenuItem
+   *          the add all menu item
+   * @param addAdminMembersMenuItem
+   *          the add admin members menu item
+   * @param addCollabMembersMenuItem
+   *          the add collab members menu item
+   * @param addPublicMenuItem
+   *          the add public menu item
+   * @param tutorialBtn
+   *          the tutorial btn
+   * @param participateBtn
+   *          the participate btn
+   * @param delFolderMenuItem
+   *          the del folder menu item
+   * @param purgeMenuItem
+   *          the purge menu item
+   * @param purgeBtn
+   *          the purge btn
+   * @param purgeFolderMenuItem
+   *          the purge folder menu item
+   * @param purgeFolderBtn
+   *          the purge folder btn
+   * @param refresh
+   *          the refresh
+   * @param copyContent
+   *          the copy content
+   * @param moveContentMenuItem
+   *          the move content menu item
+   * @param writeToParticipants
+   *          the write to participants
+   * @param shareInTwitter
+   *          the share in twitter
+   * @param shareInGPlus
+   *          the share in g plus
+   * @param shareInIdentica
+   *          the share in identica
+   * @param shareInFacebook
+   *          the share in facebook
    */
   @Inject
-  public BartersClientActions(final I18nUITranslationService i18n, final Session session,
+  public BartersClientActions(final I18nTranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
       final Provider<GoParentFolderBtn> folderGoUp, final Provider<NewBartersBtn> newBartersBtn,
       final Provider<NewFolderBtn> newFolderBtn,
@@ -181,8 +212,11 @@ public class BartersClientActions extends AbstractFoldableToolActions {
         containersNoRoot);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#
+   * createPostSessionInitActions()
    */
   @Override
   protected void createPostSessionInitActions() {

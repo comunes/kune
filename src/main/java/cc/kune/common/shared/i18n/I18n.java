@@ -29,7 +29,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18n.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -41,16 +41,20 @@ public class I18n {
 
   /**
    * Gets the direction.
-   *
+   * 
    * @return the direction
    */
   public static Direction getDirection() {
     return i18n.getDirection();
   }
 
+  public static String getSiteCommonName() {
+    return i18n.getSiteCommonName();
+  }
+
   /**
    * Checks if is rtl.
-   *
+   * 
    * @return true, if is rtl
    */
   public static boolean isRTL() {
@@ -59,8 +63,9 @@ public class I18n {
 
   /**
    * T.
-   *
-   * @param text the text
+   * 
+   * @param text
+   *          the text
    * @return the string
    */
   public static String t(final String text) {
@@ -69,9 +74,11 @@ public class I18n {
 
   /**
    * T.
-   *
-   * @param text the text
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param args
+   *          the args
    * @return the string
    */
   public static String t(final String text, final Integer... args) {
@@ -80,9 +87,11 @@ public class I18n {
 
   /**
    * T.
-   *
-   * @param text the text
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param args
+   *          the args
    * @return the string
    */
   public static String t(final String text, final Long... args) {
@@ -91,9 +100,11 @@ public class I18n {
 
   /**
    * T.
-   *
-   * @param text the text
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param args
+   *          the args
    * @return the string
    */
   public static String t(final String text, final String... args) {
@@ -102,9 +113,11 @@ public class I18n {
 
   /**
    * T with nt.
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
    * @return the string
    */
   public static String tWithNT(final String text, final String noteForTranslators) {
@@ -113,10 +126,13 @@ public class I18n {
 
   /**
    * T with nt.
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
+   * @param args
+   *          the args
    * @return the string
    */
   public static String tWithNT(final String text, final String noteForTranslators, final Integer... args) {
@@ -125,10 +141,13 @@ public class I18n {
 
   /**
    * T with nt.
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
+   * @param args
+   *          the args
    * @return the string
    */
   public static String tWithNT(final String text, final String noteForTranslators, final Long... args) {
@@ -137,10 +156,13 @@ public class I18n {
 
   /**
    * T with nt.
-   *
-   * @param text the text
-   * @param noteForTranslators the note for translators
-   * @param args the args
+   * 
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
+   * @param args
+   *          the args
    * @return the string
    */
   public static String tWithNT(final String text, final String noteForTranslators, final String... args) {

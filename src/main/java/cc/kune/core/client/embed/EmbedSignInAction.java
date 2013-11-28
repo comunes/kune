@@ -27,7 +27,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.client.utils.WindowUtils;
-import cc.kune.core.client.i18n.I18nUITranslationService;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenUtils;
@@ -53,11 +53,11 @@ public class EmbedSignInAction extends AbstractSignInAction {
    *          the session
    */
   @Inject
-  public EmbedSignInAction(final I18nUITranslationService i18n) {
+  public EmbedSignInAction() {
     super();
-    putValue(Action.NAME, i18n.t("Participate"));
+    putValue(Action.NAME, I18n.t("Participate"));
     putValue(Action.TOOLTIP,
-        i18n.t("Please sign in [%s] to participate in this document", i18n.getSiteCommonName()));
+        I18n.t("Please sign in [%s] to participate in this document", I18n.getSiteCommonName()));
   }
 
   /*

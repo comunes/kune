@@ -22,43 +22,47 @@
  */
 package cc.kune.gspace.client.actions;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractFoldableToolActions.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractFoldableToolActions {
 
   /** The actions registry. */
   protected final ActionRegistryByType actionsRegistry;
-  
+
   /** The i18n. */
-  protected final I18nUITranslationService i18n;
-  
+  protected final I18nTranslationService i18n;
+
   /** The session. */
   protected final Session session;
-  
+
   /** The state manager. */
   protected final StateManager stateManager;
 
   /**
    * Instantiates a new abstract foldable tool actions.
-   *
-   * @param session the session
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param actionsRegistry the actions registry
+   * 
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param actionsRegistry
+   *          the actions registry
    */
   public AbstractFoldableToolActions(final Session session, final StateManager stateManager,
-      final I18nUITranslationService i18n, final ActionRegistryByType actionsRegistry) {
+      final I18nTranslationService i18n, final ActionRegistryByType actionsRegistry) {
     this.session = session;
     this.stateManager = stateManager;
     this.i18n = i18n;

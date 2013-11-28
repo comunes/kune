@@ -23,8 +23,8 @@
 package cc.kune.chat.client;
 
 import static cc.kune.chat.shared.ChatToolConstants.*;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.state.HistoryWrapper;
 import cc.kune.core.shared.dto.AccessRolDTO;
@@ -36,21 +36,25 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChatClientTool.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ChatClientTool extends FoldableAbstractClientTool {
 
   /**
    * Instantiates a new chat client tool.
-   *
-   * @param i18n the i18n
-   * @param toolSelector the tool selector
-   * @param cntCapRegistry the cnt cap registry
-   * @param history the history
+   * 
+   * @param i18n
+   *          the i18n
+   * @param toolSelector
+   *          the tool selector
+   * @param cntCapRegistry
+   *          the cnt cap registry
+   * @param history
+   *          the history
    */
   @Inject
-  public ChatClientTool(final I18nUITranslationService i18n, final ToolSelector toolSelector,
+  public ChatClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
       final ContentCapabilitiesRegistry cntCapRegistry, final HistoryWrapper history) {
     // FIXME: change this in ChatConstants and in db via migration
     super(
@@ -63,7 +67,9 @@ public class ChatClientTool extends FoldableAbstractClientTool {
     registerIcons();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.tool.AbstractClientTool#getName()
    */
   @Override

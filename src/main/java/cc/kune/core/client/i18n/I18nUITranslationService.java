@@ -126,6 +126,9 @@ public class I18nUITranslationService extends I18nTranslationService {
   @Inject
   public I18nUITranslationService(final Session session, final I18nServiceAsync i18nService,
       final EventBus eventBus, final KuneConstants kuneConstants) {
+    if (session != null) {
+      throw new RuntimeException();
+    }
     this.session = session;
     this.i18nService = i18nService;
     this.kuneConstants = kuneConstants;
@@ -360,6 +363,7 @@ public class I18nUITranslationService extends I18nTranslationService {
    * 
    * @return the site common name
    */
+  @Override
   public String getSiteCommonName() {
     if (siteCommonName == null) {
       final String meta = MetaUtils.get("kune.default.site.commonname");

@@ -45,7 +45,6 @@ import cc.kune.core.client.embed.EmbedSignInAction;
 import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.notify.spiner.SpinerPanel;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -101,8 +100,8 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     bind(RootPresenter.class).to(EmbedRootPresenter.class).asEagerSingleton();
     bind(PlaceManager.class).to(KunePlaceManager.class).in(Singleton.class);
 
-    s(I18nUITranslationService.class);
-    bind(HasRTL.class).to(I18nUITranslationService.class);
+    s(I18nTranslationServiceMocked.class);
+    bind(HasRTL.class).to(I18nTranslationServiceMocked.class);
     bind(I18nTranslationService.class).to(I18nTranslationServiceMocked.class).in(Singleton.class);
     s(I18n.class);
     requestStaticInjection(I18n.class);

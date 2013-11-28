@@ -27,11 +27,11 @@ import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.UserNotifyEvent;
+import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.events.GoHomeEvent;
 import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.core.client.events.UserMustBeLoggedEvent;
-import cc.kune.core.client.i18n.I18nUITranslationService;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
@@ -40,25 +40,27 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ErrorHandler.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ErrorHandler {
 
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The i18n. */
-  private final I18nUITranslationService i18n;
+  private final I18nTranslationService i18n;
 
   /**
    * Instantiates a new error handler.
-   *
-   * @param i18n the i18n
-   * @param eventBus the event bus
+   * 
+   * @param i18n
+   *          the i18n
+   * @param eventBus
+   *          the event bus
    */
   @Inject
-  public ErrorHandler(final I18nUITranslationService i18n, final EventBus eventBus) {
+  public ErrorHandler(final I18nTranslationService i18n, final EventBus eventBus) {
     this.i18n = i18n;
     this.eventBus = eventBus;
   }
@@ -79,8 +81,9 @@ public class ErrorHandler {
 
   /**
    * Log exception.
-   *
-   * @param caught the caught
+   * 
+   * @param caught
+   *          the caught
    */
   private void logException(final Throwable caught) {
     logException(caught, false);
@@ -88,9 +91,11 @@ public class ErrorHandler {
 
   /**
    * Log exception.
-   *
-   * @param caught the caught
-   * @param showException the show exception
+   * 
+   * @param caught
+   *          the caught
+   * @param showException
+   *          the show exception
    */
   private void logException(final Throwable caught, final boolean showException) {
     if (showException) {
@@ -102,8 +107,9 @@ public class ErrorHandler {
 
   /**
    * Process.
-   *
-   * @param caught the caught
+   * 
+   * @param caught
+   *          the caught
    */
   public void process(final Throwable caught) {
     eventBus.fireEvent(new ProgressHideEvent());
