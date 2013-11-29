@@ -93,7 +93,7 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
         logLine(method, userHash, false);
         throw new SessionExpiredException();
       } else {
-        final String serverHash = userSessionManager.getHash();
+        final String serverHash = userSessionManager.getHashFromSession();
         if (serverHash != null && !serverHash.equals(userHash)) {
           userSessionManager.logout();
           LOG.info("Session expired (userHash: " + userHash + " different from server hash: "

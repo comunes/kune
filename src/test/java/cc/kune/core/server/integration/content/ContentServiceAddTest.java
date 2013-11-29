@@ -23,8 +23,10 @@
 package cc.kune.core.server.integration.content;
 
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
-import static cc.kune.wiki.shared.WikiToolConstants.*;
-import static org.junit.Assert.*;
+import static cc.kune.wiki.shared.WikiToolConstants.TOOL_NAME;
+import static cc.kune.wiki.shared.WikiToolConstants.TYPE_WIKIPAGE;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -46,7 +48,7 @@ import cc.kune.docs.shared.DocsToolConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentServiceAddTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -57,8 +59,9 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
   /**
    * Inits the.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Before
   public void init() throws Exception {
@@ -67,21 +70,24 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
   /**
    * No logged in should throw illegal access.
-   *
-   * @throws ContentNotFoundException the content not found exception
-   * @throws Exception the exception
+   * 
+   * @throws ContentNotFoundException
+   *           the content not found exception
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = UserMustBeLoggedException.class)
   public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, Exception {
     defaultContent = getSiteDefaultContent();
-    contentService.addContent(session.getHash(), defaultContent.getContainer().getStateToken(),
-        "a name", TYPE_DOCUMENT);
+    contentService.addContent(session.getHashFromSession(),
+        defaultContent.getContainer().getStateToken(), "a name", TYPE_DOCUMENT);
   }
 
   /**
    * Test add content.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testAddContent() throws Exception {
@@ -93,7 +99,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     final AccessRights groupRights = defaultContent.getGroupRights();
 
     final String title = "New Content Title";
-    final StateContentDTO added = contentService.addContent(session.getHash(),
+    final StateContentDTO added = contentService.addContent(session.getHashFromSession(),
         defaultContent.getContainer().getStateToken(), title, TYPE_DOCUMENT);
     assertNotNull(added);
     final List<ContentSimpleDTO> contents = added.getContainer().getContents();
@@ -107,16 +113,17 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     assertNotNull(added.getAccessLists());
 
     final StateToken newState = added.getStateToken();
-    final StateContentDTO sameAgain = (StateContentDTO) contentService.getContent(session.getHash(),
-        newState);
+    final StateContentDTO sameAgain = (StateContentDTO) contentService.getContent(
+        session.getHashFromSession(), newState);
     assertNotNull(sameAgain);
     assertEquals(2, sameAgain.getContainer().getContents().size());
   }
 
   /**
    * Test add folder.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testAddFolder() throws Exception {
@@ -124,7 +131,7 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     defaultContent = getSiteDefaultContent();
     final ContainerDTO parent = defaultContent.getContainer();
     final String title = "folder name";
-    final StateContainerDTO newState = contentService.addFolder(session.getHash(),
+    final StateContainerDTO newState = contentService.addFolder(session.getHashFromSession(),
         parent.getStateToken(), title, DocsToolConstants.TYPE_FOLDER);
     assertNotNull(newState);
     assertNotNull(newState.getGroupMembers());
@@ -145,23 +152,25 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
   // @Test
   /**
    * Test add room.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   public void testAddRoom() throws Exception {
     doLogin();
     defaultContent = getSiteDefaultContent();
     final ContainerDTO parent = defaultContent.getContainer();
     final String roomName = "testroom";
-    final StateContainerDTO newState = contentService.addRoom(session.getHash(), parent.getStateToken(),
-        roomName);
+    final StateContainerDTO newState = contentService.addRoom(session.getHashFromSession(),
+        parent.getStateToken(), roomName);
     assertNotNull(newState);
   }
 
   /**
    * Test add two folders.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testAddTwoFolders() throws Exception {
@@ -169,11 +178,11 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     defaultContent = getSiteDefaultContent();
     final ContainerDTO parent = defaultContent.getContainer();
     final String title = "folder name";
-    final StateContainerDTO newState = contentService.addFolder(session.getHash(),
+    final StateContainerDTO newState = contentService.addFolder(session.getHashFromSession(),
         parent.getStateToken(), title, DocsToolConstants.TYPE_FOLDER);
     assertNotNull(newState);
 
-    final StateContainerDTO newState2 = contentService.addFolder(session.getHash(),
+    final StateContainerDTO newState2 = contentService.addFolder(session.getHashFromSession(),
         parent.getStateToken(), title, DocsToolConstants.TYPE_FOLDER);
     assertNotNull(newState2);
 
@@ -185,20 +194,21 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
 
   /**
    * Test add wiki content.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testAddWikiContent() throws Exception {
     doLogin();
 
     final StateToken wikiToken = new StateToken(super.getDefSiteShortName(), TOOL_NAME);
-    final StateContainerDTO wiki = (StateContainerDTO) contentService.getContent(session.getHash(),
-        wikiToken);
+    final StateContainerDTO wiki = (StateContainerDTO) contentService.getContent(
+        session.getHashFromSession(), wikiToken);
 
     final String title = "New wikipage";
-    final StateContentDTO added = contentService.addContent(session.getHash(), wiki.getStateToken(),
-        title, TYPE_WIKIPAGE);
+    final StateContentDTO added = contentService.addContent(session.getHashFromSession(),
+        wiki.getStateToken(), title, TYPE_WIKIPAGE);
     assertNotNull(added);
     final ContainerDTO wikiContainer = added.getContainer();
     final List<ContentSimpleDTO> contents = wikiContainer.getContents();

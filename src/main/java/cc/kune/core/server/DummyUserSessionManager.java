@@ -43,7 +43,7 @@ public class DummyUserSessionManager implements UserSessionManager, UsersOnline 
   }
 
   @Override
-  public String getHash() {
+  public String getHashFromSession() {
     return userHash;
   }
 

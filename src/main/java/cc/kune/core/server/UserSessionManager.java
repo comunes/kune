@@ -29,7 +29,7 @@ public interface UserSessionManager {
   static final String USER_HASH = "kune-userhash";
   static final String USER_ID = "kune-userid";
 
-  String getHash();
+  String getHashFromSession();
 
   User getUser();
 

@@ -98,7 +98,7 @@ public class SocialNetworkServiceTest extends IntegrationTest {
    */
   @Test(expected = UserMustBeLoggedException.class)
   public void testRequestJoinNoLogged() throws Exception {
-    socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
+    socialNetworkService.requestJoinGroup(session.getHashFromSession(), groupToken);
   }
 
   /**
@@ -110,7 +110,7 @@ public class SocialNetworkServiceTest extends IntegrationTest {
   @Test(expected = AlreadyUserMemberException.class)
   public void testRequestJoinPersonalGroup() throws Exception {
     doLogin();
-    socialNetworkService.requestJoinGroup(session.getHash(), groupToken);
+    socialNetworkService.requestJoinGroup(session.getHashFromSession(), groupToken);
   }
 
 }

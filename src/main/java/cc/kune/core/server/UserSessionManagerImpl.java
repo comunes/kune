@@ -55,13 +55,13 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(UserSessionManagerImpl.class);
 
-  /** The manager. */
-  private final UserManager userManager;
-
   /** The presence manager. */
   private final XmppRosterPresenceProvider presenceManager;
 
   private final Provider<HttpServletRequest> requestProvider;
+
+  /** The manager. */
+  private final UserManager userManager;
 
   private final org.waveprotocol.box.server.authentication.SessionManager waveSessionManager;
 
@@ -101,15 +101,19 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
   /*
    * (non-Javadoc)
    * 
-   * @see cc.kune.core.server.UserSessionManager#getHash()
+   * @see cc.kune.core.server.UserSessionManager#getHashFromSession()
    */
   @Override
-  public String getHash() {
-    final HttpSession session = requestProvider.get().getSession();
+  public String getHashFromSession() {
+    final HttpSession session = getSession();
     return session == null ? null : (String) session.getAttribute(USER_HASH);
   }
 
-  private HttpSession getSession(final String userHash) {
+  private HttpSession getSession() {
+    return requestProvider.get().getSession();
+  }
+
+  private HttpSession getSessionFromHash(final String userHash) {
     HttpSession session = null;
     if (userHash != null) {
       try {
@@ -128,7 +132,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    */
   @Override
   public User getUser() {
-    return getUser(getHash());
+    return getUser(getHashFromSession());
   }
 
   /*
@@ -138,7 +142,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    */
   @Override
   public User getUser(final String hash) {
-    final HttpSession session = getSession(hash);
+    final HttpSession session = getSessionFromHash(hash);
     if (session != null) {
       final Object attribute = session.getAttribute(USER_ID);
       return userManager.find((Long) attribute);
@@ -175,7 +179,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    */
   @Override
   public boolean isUserLoggedIn() {
-    return isUserLoggedIn(getHash());
+    return isUserLoggedIn(getHashFromSession());
   }
 
   /*
@@ -186,7 +190,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    */
   @Override
   public boolean isUserLoggedIn(final String hash) {
-    final HttpSession session = getSession(hash);
+    final HttpSession session = getSessionFromHash(hash);
     if (session == null) {
       return false;
     } else {
@@ -213,7 +217,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    */
   @Override
   public void login(final Long userId, final String newUserHash) {
-    final HttpSession session = getSession(newUserHash);
+    final HttpSession session = getSession();
     session.setAttribute(USER_ID, userId);
     session.setAttribute(USER_HASH, newUserHash);
   }
@@ -225,8 +229,9 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    */
   @Override
   public void logout() {
-    final HttpSession session = getSession(getHash());
+    final HttpSession session = getSession();
     session.setAttribute(USER_ID, null);
     session.setAttribute(USER_HASH, null);
+    waveSessionManager.logout(session);
   }
 }

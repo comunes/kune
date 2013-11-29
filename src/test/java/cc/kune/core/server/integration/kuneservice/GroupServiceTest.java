@@ -81,7 +81,7 @@ public class GroupServiceTest extends IntegrationTest {
     final LicenseDTO license = new LicenseDTO();
     license.setShortName("by-sa-v3.0");
     group.setDefaultLicense(license);
-    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    service.createNewGroup(session.getHashFromSession(), group, "Public desc", "tag1 tag2", null);
 
     final Group groupCreated = groupFinder.findByShortName("ysei");
     assertEquals(groupCreated.getShortName(), group.getShortName());
@@ -108,7 +108,7 @@ public class GroupServiceTest extends IntegrationTest {
     final LicenseDTO license = new LicenseDTO();
     license.setShortName("by-sa-v3.0");
     group.setDefaultLicense(license);
-    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    service.createNewGroup(session.getHashFromSession(), group, "Public desc", "tag1 tag2", null);
 
     final Group groupCreated = groupFinder.findByShortName("ysei");
     assertEquals(groupCreated.getShortName(), group.getShortName());
@@ -133,7 +133,7 @@ public class GroupServiceTest extends IntegrationTest {
     final LicenseDTO license = new LicenseDTO();
     license.setShortName("by-sa-v3.0");
     group.setDefaultLicense(license);
-    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    service.createNewGroup(session.getHashFromSession(), group, "Public desc", "tag1 tag2", null);
     final Group groupCreated = groupFinder.findByShortName(shortName);
     group.setId(groupCreated.getId());
     return group;
@@ -149,7 +149,7 @@ public class GroupServiceTest extends IntegrationTest {
   public void createGroupNotLogged() throws Exception {
     final GroupDTO group = new GroupDTO("ysei", "Yellow Submarine Environmental Initiative",
         GroupType.PROJECT);
-    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    service.createNewGroup(session.getHashFromSession(), group, "Public desc", "tag1 tag2", null);
   }
 
   /**
@@ -182,7 +182,7 @@ public class GroupServiceTest extends IntegrationTest {
     final LicenseDTO license = new LicenseDTO();
     license.setShortName("by-sa-v3.0");
     group.setDefaultLicense(license);
-    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    service.createNewGroup(session.getHashFromSession(), group, "Public desc", "tag1 tag2", null);
 
     final Group groupCreated = groupFinder.findByShortName("ysei");
     assertEquals(groupCreated.getShortName(), group.getShortName());
@@ -208,7 +208,7 @@ public class GroupServiceTest extends IntegrationTest {
     final LicenseDTO license = new LicenseDTO();
     license.setShortName("by-sa-v3.0");
     group.setDefaultLicense(license);
-    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    service.createNewGroup(session.getHashFromSession(), group, "Public desc", "tag1 tag2", null);
 
     final Group groupCreated = groupFinder.findByShortName("ysei");
     assertEquals(groupCreated.getShortName(), group.getShortName());
@@ -233,7 +233,7 @@ public class GroupServiceTest extends IntegrationTest {
     final LicenseDTO license = new LicenseDTO();
     license.setShortName("by-sa-v3.0");
     group.setDefaultLicense(license);
-    service.createNewGroup(session.getHash(), group, "Public desc", "tag1 tag2", null);
+    service.createNewGroup(session.getHashFromSession(), group, "Public desc", "tag1 tag2", null);
 
     final Group groupCreated = groupFinder.findByShortName("ysei");
     assertEquals(groupCreated.getShortName(), group.getShortName());

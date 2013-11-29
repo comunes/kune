@@ -304,7 +304,7 @@ public class UserRPC implements RPC, UserService {
    *           the default exception
    */
   private UserInfoDTO loadUserInfo(final User user) throws DefaultException {
-    final UserInfo userInfo = userInfoService.buildInfo(user, userSessionManager.getHash());
+    final UserInfo userInfo = userInfoService.buildInfo(user, userSessionManager.getHashFromSession());
     return mapper.map(userInfo, UserInfoDTO.class);
   }
 

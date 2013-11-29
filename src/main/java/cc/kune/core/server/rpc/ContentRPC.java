@@ -467,7 +467,7 @@ public class ContentRPC implements ContentService, RPC {
   public StateAbstractDTO getContent(final String userHash, final StateToken token)
       throws DefaultException {
     Group defaultGroup;
-    final User user = getUser(userHash);
+    final User user = userSessionManager.getUser(userHash);
     if (isUserLoggedIn(userHash)) {
       defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
       if (groupManager.findEnabledTools(defaultGroup.getId()).size() <= 1) {
@@ -505,7 +505,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @KuneTransactional
   public StateAbstractDTO getContentByWaveRef(final String userHash, final String waveRef) {
-    final User user = getUser(userHash);
+    final User user = userSessionManager.getUser(userHash);
     try {
       // FIXME get this from a wave constant
       final String root = "/~/conv+root";
@@ -636,8 +636,8 @@ public class ContentRPC implements ContentService, RPC {
     return getSummaryTags(group);
   }
 
-  private User getUser(final String userHash) {
-    return userSessionManager.getUser(userHash);
+  private User getUser() {
+    return userSessionManager.getUser();
   }
 
   /**

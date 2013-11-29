@@ -38,7 +38,7 @@ import cc.kune.core.shared.dto.StateNoContentDTO;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentServiceGetTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -46,8 +46,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Content of user with no home page.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void contentOfUserWithNoHomePage() throws Exception {
@@ -59,8 +60,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Content with logged user is editable.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void contentWithLoggedUserIsEditable() throws Exception {
@@ -82,8 +84,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Default countent should exist.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void defaultCountentShouldExist() throws Exception {
@@ -98,20 +101,23 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Def content of user with no home page.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void defContentOfUserWithNoHomePage() throws Exception {
     doLogin();
-    final StateAbstractDTO response = contentService.getContent(session.getHash(), new StateToken());
+    final StateAbstractDTO response = contentService.getContent(session.getHashFromSession(),
+        new StateToken());
     assertEquals(response.getStateToken(), getSiteDefaultContent().getStateToken());
   }
 
   /**
    * No content not logged.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void noContentNotLogged() throws Exception {
@@ -121,8 +127,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Non existent content.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent() throws Exception {
@@ -131,8 +138,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Non existent content2.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent2() throws Exception {
@@ -141,8 +149,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Non existent content3.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent3() throws Exception {
@@ -151,8 +160,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Non existent content4.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent4() throws Exception {
@@ -162,8 +172,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Non existent content5.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void nonExistentContent5() throws Exception {
@@ -172,8 +183,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Not logged user should not edit default doc.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void notLoggedUserShouldNotEditDefaultDoc() throws Exception {
@@ -188,8 +200,9 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
 
   /**
    * Unknown content.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void unknownContent() throws Exception {

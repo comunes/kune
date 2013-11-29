@@ -49,21 +49,22 @@ import cc.kune.trash.shared.TrashToolConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentServiceVariousTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /** The default content. */
   private StateContentDTO defaultContent;
-  
+
   /** The group short name. */
   private String groupShortName;
 
   /**
    * Adds the remove author.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Ignore
   @Test
@@ -85,8 +86,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Check result.
-   *
-   * @param cloudResult the cloud result
+   * 
+   * @param cloudResult
+   *          the cloud result
    */
   private void checkResult(final TagCloudResult cloudResult) {
     assertNotNull(cloudResult.getTagCountList());
@@ -108,8 +110,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Content rate and retrieve.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Ignore
   @Test
@@ -124,8 +127,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Content set language.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void contentSetLanguage() throws Exception {
@@ -137,11 +141,11 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Creates the new content.
-   *
+   * 
    * @return the state container dto
    */
   private StateContainerDTO createNewContent() {
-    final StateContainerDTO added = contentService.addContent(session.getHash(),
+    final StateContainerDTO added = contentService.addContent(session.getHashFromSession(),
         defaultContent.getStateToken(), "New Content Title", TYPE_DOCUMENT);
     assertNotNull(added);
     return added;
@@ -149,8 +153,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Def admin dont show as participation.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Ignore
   // FIXME: when State refactor do this test (with noLogin and without)
@@ -164,69 +169,72 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Def content remove.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = CannotDeleteDefaultContentException.class)
   public void defContentRemove() throws Exception {
     doLogin();
     defaultContent = getSiteDefaultContent();
-    contentService.delContent(session.getHash(), defaultContent.getStateToken());
+    contentService.delContent(session.getHashFromSession(), defaultContent.getStateToken());
   }
 
   /**
    * Del and purge content.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void delAndPurgeContent() throws Exception {
     doLogin();
     final StateContainerDTO trash = getTrash();
     final StateContainerDTO added = createNewContent();
-    final StateAbstractDTO retrievedContent = contentService.getContent(session.getHash(),
+    final StateAbstractDTO retrievedContent = contentService.getContent(session.getHashFromSession(),
         added.getStateToken());
     assertNotNull(retrievedContent.getStateToken());
-    final StateContainerDTO deleledContainer = contentService.delContent(session.getHash(),
+    final StateContainerDTO deleledContainer = contentService.delContent(session.getHashFromSession(),
         retrievedContent.getStateToken());
     assertEquals(1, defaultContent.getContainer().getContents().size());
     assertEquals(1, deleledContainer.getContainer().getContents().size());
     final StateContentDTO deletedContent = (StateContentDTO) contentService.getContent(
-        session.getHash(),
+        session.getHashFromSession(),
         retrievedContent.getStateToken().setTool(TrashToolConstants.TOOL_NAME).setFolder(
             trash.getStateToken().getFolder()));
     assertEquals(TrashToolConstants.TOOL_NAME, deletedContent.getToolName());
     assertEquals(1, deletedContent.getContainer().getContents().size());
-    final StateContainerDTO trashAfterPurge = contentService.purgeContent(session.getHash(),
+    final StateContainerDTO trashAfterPurge = contentService.purgeContent(session.getHashFromSession(),
         deletedContent.getStateToken());
     assertEquals(0, trashAfterPurge.getContainer().getContents().size());
   }
 
   /**
    * Del andy purge container.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void delAndyPurgeContainer() throws Exception {
     doLogin();
-    final StateContainerDTO state = contentService.addFolder(session.getHash(),
+    final StateContainerDTO state = contentService.addFolder(session.getHashFromSession(),
         defaultContent.getStateToken(), "some folder", DocsToolConstants.TYPE_FOLDER);
     final ContainerDTO newFolder = state.getContainer();
 
     final StateContainerDTO trash = getTrash();
     assertEquals(0, trash.getContainer().getContents().size());
     assertEquals(0, trash.getContainer().getChilds().size());
-    contentService.delContent(session.getHash(), newFolder.getStateToken());
+    contentService.delContent(session.getHashFromSession(), newFolder.getStateToken());
 
     final StateContainerDTO trashAfterDel = getTrash();
     assertEquals(0, trashAfterDel.getContainer().getContents().size());
     assertEquals(1, trashAfterDel.getContainer().getChilds().size());
     final StateContainerDTO deletedFolder = (StateContainerDTO) contentService.getContent(
-        session.getHash(),
+        session.getHashFromSession(),
         newFolder.getStateToken().setTool(TrashToolConstants.TOOL_NAME).setFolder(
             newFolder.getStateToken().getFolder()));
-    contentService.purgeContent(session.getHash(), deletedFolder.getStateToken());
+    contentService.purgeContent(session.getHashFromSession(), deletedFolder.getStateToken());
     final StateContainerDTO trashAfterPurge = getTrash();
     assertEquals(0, trashAfterPurge.getContainer().getContents().size());
     assertEquals(0, trashAfterPurge.getContainer().getChilds().size());
@@ -234,8 +242,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Folder rename.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void folderRename() throws Exception {
@@ -244,7 +253,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
     String newTitle = "folder new name";
     final String oldTitle = "some title";
-    final StateContainerDTO newState = contentService.addFolder(session.getHash(),
+    final StateContainerDTO newState = contentService.addFolder(session.getHashFromSession(),
         defaultContent.getStateToken(), oldTitle, DocsToolConstants.TYPE_FOLDER);
 
     final ContainerDTO newFolder = newState.getContainer();
@@ -275,8 +284,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Folder rename other group fails.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = AccessViolationException.class)
   public void folderRenameOtherGroupFails() throws Exception {
@@ -292,8 +302,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Folder root rename must fail.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = RuntimeException.class)
   public void folderRootRenameMustFail() throws Exception {
@@ -315,12 +326,12 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Gets the trash.
-   *
+   * 
    * @return the trash
    */
   private StateContainerDTO getTrash() {
     final StateAbstractDTO trash = contentService.getContent(
-        session.getHash(),
+        session.getHashFromSession(),
         defaultContent.getStateToken().copy().clearDocument().clearFolder().setTool(
             TrashToolConstants.TOOL_NAME));
     return (StateContainerDTO) trash;
@@ -328,8 +339,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Inits the.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Before
   public void init() throws Exception {
@@ -341,8 +353,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Sets the tags and results.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Ignore
   @Test
@@ -356,8 +369,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Sets the tags and retrieve.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void setTagsAndRetrieve() throws Exception {
@@ -368,8 +382,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Test set as def content.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testSetAsDefContent() throws Exception {
@@ -378,8 +393,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
     final StateContainerDTO added = createNewContent();
 
-    final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(session.getHash(),
-        added.getStateToken());
+    final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(
+        session.getHashFromSession(), added.getStateToken());
 
     assertFalse(defaultContent.getStateToken().equals(newDefContent.getStateToken()));
     assertTrue(added.getStateToken().equals(newDefContent.getStateToken()));
@@ -387,8 +402,9 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
   /**
    * Token rename.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void tokenRename() throws Exception {
@@ -398,7 +414,7 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
     final String oldTitle = "some title";
     String newTitle = "folder new name";
-    final StateContainerDTO newState = contentService.addFolder(session.getHash(),
+    final StateContainerDTO newState = contentService.addFolder(session.getHashFromSession(),
         folder.getStateToken(), oldTitle, DocsToolConstants.TYPE_FOLDER);
 
     final ContainerDTO newFolder = newState.getContainer();
