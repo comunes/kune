@@ -97,6 +97,16 @@ Your can use another string and the message will looks like "Thanks for joining 
             Your web browser must have JavaScript enabled in order for this
             application to display correctly.</div>
     </noscript>
+    <script type='text/javascript'>
+      // This is a example of how to configure the kune embbeded panel
+      var obj = {
+      'serverUrl': 'http://localhost:8888', 'readOnly': false, 'sitebarPosition': 50,
+      'signInText': 'Participate', 'showSignOut': true, 'showSignIn': true
+      };
+      window.onload = function () {
+        document.confEmbed(obj);
+      }
+    </script>
     <div id="kune-embed-hook"></div>
     <!-- Include with:
        <object data="http://kune.example.com/wse.html#!some-group.docs.1" type="text/html"  style="width:100%;height:100%; overflow: hidden;"></object>

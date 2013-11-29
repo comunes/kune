@@ -4,7 +4,7 @@
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>kune embeded</title>
 <script type="text/javascript" language="javascript"
-    src="http://localhost:8888/wse/wse.nocache.js"></script> 
+    src="http://localhost:8888/wse/wse.nocache.js"></script>
 
 <!--
 We will use this string for mention this site in messages like: "Thanks for joining this site"
@@ -75,5 +75,15 @@ Your can use another string and the message will looks like "Thanks for joining 
             type="password" id="password" name="password" value="" />
     </form>
     <div id="kune-embed-hook"></div>
+    <script type='text/javascript'>
+      // This is a example of how to configure the kune embbeded panel
+      var obj = {
+      'serverUrl': 'http://localhost:8888', 'readOnly': false, 'sitebarPosition': 50,
+      'signInText': 'Participate', 'showSignOut': true, 'showSignIn': true
+      };
+      window.onload = function () {
+        document.confEmbed(obj);
+      }
+    </script>
 </body>
 </html>

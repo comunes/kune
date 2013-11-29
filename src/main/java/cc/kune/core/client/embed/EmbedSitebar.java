@@ -39,19 +39,26 @@ import com.google.inject.Inject;
 
 public class EmbedSitebar {
 
+  private final EmbedConfiguration configuration;
   private final PopupPanel popup;
   private final ActionFlowPanel toolbar;
 
   @Inject
   public EmbedSitebar(final Session session, final ActionFlowPanel toolbar,
-      final SitebarSignInLink signInLink, final SitebarSignOutLink signOutLink) {
+      final SitebarSignInLink signInLink, final SitebarSignOutLink signOutLink,
+      final EmbedConfiguration configuration) {
     this.toolbar = toolbar;
+    this.configuration = configuration;
     signInLink.detachFromParent();
     signOutLink.detachFromParent();
     @SuppressWarnings("deprecation")
     final String sitelogo = session.getInitData().getSiteLogoUrl();
-    toolbar.add(signInLink);
-    toolbar.add(signOutLink);
+    if (configuration.get().getShowSignIn()) {
+      toolbar.add(signInLink);
+    }
+    if (configuration.get().getShowSignOut()) {
+      toolbar.add(signOutLink);
+    }
     signInLink.withIcon(new Url(sitelogo));
     signOutLink.withIcon(new Url(sitelogo));
     popup = new PopupPanel(false, false);
@@ -83,6 +90,7 @@ public class EmbedSitebar {
   }
 
   private void setPopupPosition() {
-    popup.setPopupPosition(Window.getClientWidth() - toolbar.getOffsetWidth() - 20, 0);
+    final Integer position = configuration.get().getSitebarPosition();
+    popup.setPopupPosition(Window.getClientWidth() - toolbar.getOffsetWidth() - position, 0);
   }
 }

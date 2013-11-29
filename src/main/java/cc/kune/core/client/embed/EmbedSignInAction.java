@@ -25,6 +25,7 @@ package cc.kune.core.client.embed;
 
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18n;
@@ -32,7 +33,6 @@ import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenUtils;
 
-import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 
 /**
@@ -41,6 +41,8 @@ import com.google.inject.Inject;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmbedSignInAction extends AbstractSignInAction {
+
+  private final EmbedConfiguration conf;
 
   /**
    * Instantiates a new sitebar sign in action.
@@ -53,9 +55,11 @@ public class EmbedSignInAction extends AbstractSignInAction {
    *          the session
    */
   @Inject
-  public EmbedSignInAction() {
+  public EmbedSignInAction(final EmbedConfiguration conf) {
     super();
-    putValue(Action.NAME, I18n.t("Participate"));
+    this.conf = conf;
+    final String signInText = conf.get().getSignInText();
+    putValue(Action.NAME, I18n.t(signInText == null ? signInText : "Participate"));
     putValue(Action.TOOLTIP,
         I18n.t("Please sign in [%s] to participate in this document", I18n.getSiteCommonName()));
   }
@@ -69,8 +73,13 @@ public class EmbedSignInAction extends AbstractSignInAction {
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
-    KuneWindowUtils.open(GWT.getHostPageBaseURL() + "#!"
-        + TokenUtils.addRedirect(SiteTokens.SIGN_IN, WindowUtils.getLocation().getHref()));
+    final String server = conf.get().getServerUrl();
+    if (server == null) {
+      NotifyUser.error(I18n.t("Configuration error, please configure the server of this document"));
+    } else {
+      KuneWindowUtils.open(server + "#!"
+          + TokenUtils.addRedirect(SiteTokens.SIGN_IN, WindowUtils.getLocation().getHref()));
+    }
   }
 
 }

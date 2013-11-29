@@ -30,7 +30,9 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.UrlParam;
+import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.client.embed.EmbedSitebar;
+import cc.kune.core.client.events.EmbAppStartEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
@@ -92,9 +94,10 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   public interface EmbedView extends WaveViewerView {
   }
 
+  private final EmbedConfiguration conf;
   private final Session session;
-  private final Provider<EmbedSitebar> sitebar;
 
+  private final Provider<EmbedSitebar> sitebar;
   /**
    * Instantiates a new embed presenter.
    * 
@@ -122,47 +125,24 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   @Inject
   public EmbedPresenter(final EventBus eventBus, final EmbedView view, final EmbedProxy proxy,
       final WaveClientManager waveClientManager, final WaveClientProvider waveClient,
-      final I18nTranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar) {
+      final I18nTranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar,
+      final EmbedConfiguration conf) {
     super(eventBus, view, proxy);
+    NotifyUser.showProgressLoading();
     this.session = session;
     this.sitebar = sitebar;
+    this.conf = conf;
+    EmbedConfiguration.export();
     TokenMatcher.init(GwtWaverefEncoder.INSTANCE);
-    final String userHash = session.getUserHash();
-
-    Log.info("Started embed presenter with userhash: " + userHash);
-
-    final String initUrl = GWT.getModuleBaseURL() + "json/SiteJSONService/getInitData?"
-        + new UrlParam(JSONConstants.HASH_PARAM, userHash);
-    processRequest(initUrl, new Callback<JavaScriptObject, Void>() {
+    eventBus.addHandler(EmbAppStartEvent.getType(), new EmbAppStartEvent.EmbAppStartHandler() {
       @Override
-      public void onFailure(final Void reason) {
-        // Do nothing
-      }
-
-      @Override
-      public void onSuccess(final JavaScriptObject response) {
-        final InitDataDTOJs initData = (InitDataDTOJs) response;
-        session.setInitData(parse(initData));
-        final UserInfoDTOJs userInfo = (UserInfoDTOJs) initData.getUserInfo();
-        session.setCurrentUserInfo(parse(userInfo), null);
-        getContentFromHash();
-
-        timer = new Timer() {
-          @Override
-          public void run() {
-            getContentFromHash();
-          }
-        };
-
-        session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
-          @Override
-          public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-            timer.schedule(500);
-          }
-        });
+      public void onAppStart(final EmbAppStartEvent event) {
+        onAppStarted();
       }
     });
-
+    if (conf.isReady()) {
+      onAppStarted();
+    }
   }
 
   private void errorRetrieving() {
@@ -230,6 +210,43 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     NotifyUser.hideProgress();
   }
 
+  private void onAppStarted() {
+    final String userHash = session.getUserHash();
+    Log.info("Started embed presenter with userhash: " + userHash);
+
+    final String initUrl = GWT.getModuleBaseURL() + "json/SiteJSONService/getInitData?"
+        + new UrlParam(JSONConstants.HASH_PARAM, userHash);
+    processRequest(initUrl, new Callback<JavaScriptObject, Void>() {
+      @Override
+      public void onFailure(final Void reason) {
+        // Do nothing
+      }
+
+      @Override
+      public void onSuccess(final JavaScriptObject response) {
+        final InitDataDTOJs initData = (InitDataDTOJs) response;
+        session.setInitData(parse(initData));
+        final UserInfoDTOJs userInfo = (UserInfoDTOJs) initData.getUserInfo();
+        session.setCurrentUserInfo(parse(userInfo), null);
+        getContentFromHash();
+
+        timer = new Timer() {
+          @Override
+          public void run() {
+            getContentFromHash();
+          }
+        };
+
+        session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
+          @Override
+          public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+            timer.schedule(500);
+          }
+        });
+      }
+    });
+  }
+
   private void onGetContentSucessful(final Session session, final StateAbstractDTO state) {
     getView().clear();
     final StateContentDTO stateContent = (StateContentDTO) state;
@@ -237,7 +254,10 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     final boolean isLogged = session.isLogged();
     final boolean isParticipant = stateContent.isParticipant();
     Log.info("Is logged: " + isLogged + " isParticipant: " + isParticipant);
-    if (isLogged && isParticipant) {
+    final Boolean readOnly = conf.get().getReadOnly();
+    Log.info("Is readonly: " + readOnly);
+    final Boolean isReadOnly = readOnly == null ? false : readOnly;
+    if (isLogged && isParticipant && !isReadOnly) {
       getView().setEditableContent(stateContent);
     } else {
       getView().setContent(stateContent);
