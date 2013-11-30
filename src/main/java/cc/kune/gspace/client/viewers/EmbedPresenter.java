@@ -31,10 +31,9 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.embed.EmbedConfiguration;
+import cc.kune.core.client.embed.EmbedJsActions;
 import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.events.EmbAppStartEvent;
-import cc.kune.core.client.events.UserSignInOrSignOutEvent;
-import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
@@ -61,7 +60,6 @@ import com.google.gwt.http.client.URL;
 import com.google.gwt.jsonp.client.JsonpRequest;
 import com.google.gwt.jsonp.client.JsonpRequestBuilder;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -98,6 +96,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   private final Session session;
 
   private final Provider<EmbedSitebar> sitebar;
+
   /**
    * Instantiates a new embed presenter.
    * 
@@ -120,7 +119,6 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
    * @param session
    *          the session
    */
-  private Timer timer;
 
   @Inject
   public EmbedPresenter(final EventBus eventBus, final EmbedView view, final EmbedProxy proxy,
@@ -129,10 +127,12 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
       final EmbedConfiguration conf) {
     super(eventBus, view, proxy);
     NotifyUser.showProgressLoading();
+    // FIXME: use AppStart to detect browser compatibility
     this.session = session;
     this.sitebar = sitebar;
     this.conf = conf;
     EmbedConfiguration.export();
+    EmbedJsActions.export();
     TokenMatcher.init(GwtWaverefEncoder.INSTANCE);
     eventBus.addHandler(EmbAppStartEvent.getType(), new EmbAppStartEvent.EmbAppStartHandler() {
       @Override
@@ -150,8 +150,8 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     NotifyUser.hideProgress();
   }
 
-  private void getContentFromHash() {
-    final String currentHash = HistoryUtils.undoHashbang(History.getToken());
+  private void getContentFromHash(final String currentHash) {
+
     final boolean isGroupToken = TokenMatcher.isGroupToken(currentHash);
     final boolean isWaveToken = TokenMatcher.isWaveToken(currentHash);
     final String suffix = isGroupToken ? "" : isWaveToken ? "ByWaveRef" : "";
@@ -202,6 +202,10 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     }
   }
 
+  private String getCurrentHash() {
+    return HistoryUtils.undoHashbang(History.getToken());
+  }
+
   /**
    * Not found.
    */
@@ -228,21 +232,13 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
         session.setInitData(parse(initData));
         final UserInfoDTOJs userInfo = (UserInfoDTOJs) initData.getUserInfo();
         session.setCurrentUserInfo(parse(userInfo), null);
-        getContentFromHash();
-
-        timer = new Timer() {
-          @Override
-          public void run() {
-            getContentFromHash();
-          }
-        };
-
-        session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
-          @Override
-          public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-            timer.schedule(500);
-          }
-        });
+        final String currentHash = getCurrentHash();
+        if (currentHash != null) {
+          RevealRootContentEvent.fire(EmbedPresenter.this, EmbedPresenter.this);
+          getContentFromHash(currentHash);
+        } else {
+          // Maybe we embed via JNSI
+        }
       }
     });
   }
@@ -280,7 +276,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
   @Override
   public void onValueChange(final ValueChangeEvent<String> event) {
-    getContentFromHash();
+    getContentFromHash(getCurrentHash());
   }
 
   private InitDataDTO parse(final InitDataDTOJs initJ) {
@@ -335,6 +331,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
    */
   @Override
   protected void revealInParent() {
-    RevealRootContentEvent.fire(this, this);
+    // We do this only if we embed this via url #tokenhash
+    // RevealRootContentEvent.fire(this, this);
   }
 }
