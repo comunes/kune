@@ -22,6 +22,8 @@
  */
 package cc.kune.client;
 
+import cc.kune.core.client.embed.EmbedConfiguration;
+import cc.kune.core.client.embed.EmbedJsActions;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
 
 import com.google.gwt.core.client.GWT;
@@ -55,6 +57,8 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
    */
   @Override
   protected void onStartModuleLoad() {
+    EmbedConfiguration.export();
+    EmbedJsActions.export();
     ginjector = GWT.create(KuneEmbedGinjector.class);
     DelayedBindRegistry.bind(ginjector);
   }

@@ -31,20 +31,18 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.embed.EmbedConfiguration;
-import cc.kune.core.client.embed.EmbedJsActions;
+import cc.kune.core.client.embed.EmbedOpenEvent;
 import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.events.EmbAppStartEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.core.shared.JSONConstants;
-import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.InitDataDTOJs;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateAbstractDTOJs;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateTokenJs;
-import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserInfoDTOJs;
 import cc.kune.wave.client.kspecific.WaveClientManager;
 import cc.kune.wave.client.kspecific.WaveClientProvider;
@@ -57,10 +55,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.http.client.URL;
-import com.google.gwt.jsonp.client.JsonpRequest;
-import com.google.gwt.jsonp.client.JsonpRequestBuilder;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -93,9 +88,10 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   }
 
   private final EmbedConfiguration conf;
+  private final boolean devMode = true;
   private final Session session;
-
   private final Provider<EmbedSitebar> sitebar;
+  protected String stateTokenToOpen;
 
   /**
    * Instantiates a new embed presenter.
@@ -127,41 +123,48 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
       final EmbedConfiguration conf) {
     super(eventBus, view, proxy);
     NotifyUser.showProgressLoading();
-    // FIXME: use AppStart to detect browser compatibility
+    // FIXME: Maybe use AppStart to detect browser compatibility in the future
     this.session = session;
     this.sitebar = sitebar;
     this.conf = conf;
-    EmbedConfiguration.export();
-    EmbedJsActions.export();
     TokenMatcher.init(GwtWaverefEncoder.INSTANCE);
+    eventBus.addHandler(EmbedOpenEvent.getType(), new EmbedOpenEvent.EmbedOpenHandler() {
+      @Override
+      public void onEmbedOpen(final EmbedOpenEvent event) {
+        stateTokenToOpen = event.getStateToken();
+        if (session.getInitData() == null) {
+          // Not initialized
+        } else {
+          // ok, we can continue
+          getContentFromHash(stateTokenToOpen);
+        }
+      }
+    });
     eventBus.addHandler(EmbAppStartEvent.getType(), new EmbAppStartEvent.EmbAppStartHandler() {
       @Override
       public void onAppStart(final EmbAppStartEvent event) {
+        // This event is generated after configuration via JSNI
         onAppStarted();
       }
     });
-    if (conf.isReady()) {
+    if (conf.isReady() || isCurrentHashValid(getCurrentHash())) {
+      // The event was fired already, so start!
       onAppStarted();
     }
   }
 
-  private void errorRetrieving() {
-    NotifyUser.important(I18n.t("Ups, we find some problem trying to show you this document"));
-    NotifyUser.hideProgress();
-  }
-
-  private void getContentFromHash(final String currentHash) {
-
-    final boolean isGroupToken = TokenMatcher.isGroupToken(currentHash);
-    final boolean isWaveToken = TokenMatcher.isWaveToken(currentHash);
+  private void getContentFromHash(final String stateTokenS) {
+    Log.info("Opening statetoken: " + stateTokenS);
+    final boolean isGroupToken = TokenMatcher.isGroupToken(stateTokenS);
+    final boolean isWaveToken = TokenMatcher.isWaveToken(stateTokenS);
     final String suffix = isGroupToken ? "" : isWaveToken ? "ByWaveRef" : "";
 
     if (isGroupToken || isWaveToken) {
       // Ok is a token like group.tool.number
       final String getContentUrl = GWT.getModuleBaseURL() + "json/ContentJSONService/getContent"
           + suffix + "?" + new UrlParam(JSONConstants.HASH_PARAM, session.getUserHash())
-          + new UrlParam("&" + JSONConstants.TOKEN_PARAM, URL.encodeQueryString(currentHash));
-      processRequest(getContentUrl, new Callback<JavaScriptObject, Void>() {
+          + new UrlParam("&" + JSONConstants.TOKEN_PARAM, URL.encodeQueryString(stateTokenS));
+      EmbedHelper.processRequest(getContentUrl, new Callback<JavaScriptObject, Void>() {
         @Override
         public void onFailure(final Void reason) {
           notFound();
@@ -172,27 +175,16 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
           // final StateToken currentToken = new StateToken(currentHash);
           NotifyUser.hideProgress();
           final StateAbstractDTOJs state = (StateAbstractDTOJs) response;
-          final StateTokenJs stateToken = (StateTokenJs) state.getStateToken();
+          final StateTokenJs stateTokenJs = (StateTokenJs) state.getStateToken();
 
           // getContent returns the default content if doesn't finds the content
-          if ((isGroupToken && currentHash.equals(stateToken.getEncoded()))
-              || (isWaveToken && currentHash.equals(state.getWaveRef()))) {
-            onGetContentSucessful(session, parse(state));
+          if ((isGroupToken && stateTokenS.equals(stateTokenJs.getEncoded()))
+              || (isWaveToken && stateTokenS.equals(state.getWaveRef()))) {
+            onGetContentSucessful(session, EmbedHelper.parse(state));
           } else {
             // getContent returns def content if content not found
             notFound();
           }
-        }
-
-        private StateAbstractDTO parse(final StateAbstractDTOJs stateJs) {
-          final StateContentDTO state = new StateContentDTO();
-          state.setContent(stateJs.getContent());
-          state.setWaveRef(stateJs.getWaveRef());
-          state.setTitle(stateJs.getTitle());
-          state.setIsParticipant(stateJs.isParticipant());
-          // state.setStateToken(new StateToken((StateTokenJs)
-          // stateJs.getStateToken()).getEncoded());
-          return state;
         }
       });
 
@@ -206,6 +198,11 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     return HistoryUtils.undoHashbang(History.getToken());
   }
 
+  private boolean isCurrentHashValid(final String currentHash) {
+    return currentHash != null
+        && (TokenMatcher.isGroupToken(currentHash) || TokenMatcher.isWaveToken(currentHash));
+  }
+
   /**
    * Not found.
    */
@@ -216,11 +213,11 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
   private void onAppStarted() {
     final String userHash = session.getUserHash();
-    Log.info("Started embed presenter with userhash: " + userHash);
+    Log.info("Started embed presenter with user hash: " + userHash);
 
     final String initUrl = GWT.getModuleBaseURL() + "json/SiteJSONService/getInitData?"
         + new UrlParam(JSONConstants.HASH_PARAM, userHash);
-    processRequest(initUrl, new Callback<JavaScriptObject, Void>() {
+    EmbedHelper.processRequest(initUrl, new Callback<JavaScriptObject, Void>() {
       @Override
       public void onFailure(final Void reason) {
         // Do nothing
@@ -229,15 +226,22 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
       @Override
       public void onSuccess(final JavaScriptObject response) {
         final InitDataDTOJs initData = (InitDataDTOJs) response;
-        session.setInitData(parse(initData));
+        session.setInitData(EmbedHelper.parse(initData));
         final UserInfoDTOJs userInfo = (UserInfoDTOJs) initData.getUserInfo();
-        session.setCurrentUserInfo(parse(userInfo), null);
+        session.setCurrentUserInfo(EmbedHelper.parse(userInfo), null);
         final String currentHash = getCurrentHash();
-        if (currentHash != null) {
-          RevealRootContentEvent.fire(EmbedPresenter.this, EmbedPresenter.this);
+        final boolean isValid = isCurrentHashValid(currentHash);
+        if (stateTokenToOpen != null) {
+          // The open event already received, so open the content
+          Log.info("Opening token from JSNI open call");
+          getContentFromHash(stateTokenToOpen);
+        } else if (isValid) {
+          // We start the embed from the url #hash
+          Log.info("Opening token from history token");
+          stateTokenToOpen = currentHash;
           getContentFromHash(currentHash);
         } else {
-          // Maybe we embed via JNSI
+          // We embed the document via JSNI, so, we wait for the open event
         }
       }
     });
@@ -259,7 +263,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
       getView().setContent(stateContent);
     }
 
-    // FIXME use GWTP here
+    // FIXME use GWTP here?
     GWT.runAsync(new RunAsyncCallback() {
       @Override
       public void onFailure(final Throwable reason) {
@@ -268,7 +272,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
       @Override
       public void onSuccess() {
-        sitebar.get();
+        sitebar.get().setStateToken(stateTokenToOpen);
       }
 
     });
@@ -276,52 +280,10 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
   @Override
   public void onValueChange(final ValueChangeEvent<String> event) {
-    getContentFromHash(getCurrentHash());
-  }
-
-  private InitDataDTO parse(final InitDataDTOJs initJ) {
-    final InitDataDTO init = new InitDataDTO();
-    init.setStoreUntranslatedStrings(initJ.getStoreUntranslatedStrings());
-    init.setSiteLogoUrl(initJ.getSiteLogoUrl());
-    init.setSiteLogoUrlOnOver(initJ.getsiteLogoUrlOnOver());
-    return init;
-  }
-
-  private UserInfoDTO parse(final UserInfoDTOJs userInfo) {
-    final String userHash = userInfo.getUserHash();
-    if (userHash == null) {
-      Log.info("We are NOT logged");
-      return null;
-    } else {
-      final UserInfoDTO info = new UserInfoDTO();
-      info.setUserHash(userHash);
-      Log.info("We are logged");
-      info.setSessionJSON(userInfo.getSessionJSON());
-      info.setWebsocketAddress(userInfo.getWebsocketAddress());
-      info.setClientFlags(userInfo.getClientFlags());
-      return info;
+    // Only used in dev mode
+    if (devMode) {
+      getContentFromHash(getCurrentHash());
     }
-  }
-
-  private void processRequest(final String url, final Callback<JavaScriptObject, Void> callback) {
-    final JsonpRequestBuilder builder = new JsonpRequestBuilder();
-    builder.setTimeout(60000);
-    @SuppressWarnings("unused")
-    final JsonpRequest<JavaScriptObject> request = builder.requestObject(url,
-        new AsyncCallback<JavaScriptObject>() {
-          @Override
-          public void onFailure(final Throwable exception) {
-            errorRetrieving();
-            Log.error("JSON exception: ", exception);
-            callback.onFailure(null);
-          }
-
-          @Override
-          public void onSuccess(final JavaScriptObject result) {
-            callback.onSuccess(result);
-          }
-        });
-
   }
 
   /*
@@ -331,7 +293,6 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
    */
   @Override
   protected void revealInParent() {
-    // We do this only if we embed this via url #tokenhash
-    // RevealRootContentEvent.fire(this, this);
+    RevealRootContentEvent.fire(this, this);
   }
 }

@@ -36,11 +36,14 @@ import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
+@Singleton
 public class EmbedSitebar {
 
   private final EmbedConfiguration configuration;
   private final PopupPanel popup;
+  private final SitebarSignInLink signInLink;
   private final ActionFlowPanel toolbar;
 
   @Inject
@@ -49,6 +52,7 @@ public class EmbedSitebar {
       final EmbedConfiguration configuration) {
     this.toolbar = toolbar;
     this.configuration = configuration;
+    this.signInLink = signInLink;
     signInLink.detachFromParent();
     signOutLink.detachFromParent();
     @SuppressWarnings("deprecation")
@@ -92,5 +96,9 @@ public class EmbedSitebar {
   private void setPopupPosition() {
     final Integer position = configuration.get().getSitebarPosition();
     popup.setPopupPosition(Window.getClientWidth() - toolbar.getOffsetWidth() - position, 0);
+  }
+
+  public void setStateToken(final String stateToken) {
+    signInLink.setTarget(stateToken);
   }
 }

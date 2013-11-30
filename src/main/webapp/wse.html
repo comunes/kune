@@ -88,8 +88,7 @@ Your can use another string and the message will looks like "Thanks for joining 
             Your web browser must have JavaScript enabled in order for this
             application to display correctly.</div>
     </noscript>
-    <div id="kune-sample-embed-hook1"></div>
-
+    <div id="kune-embed-hook"></div>
     <!-- You can include the previous nocache-js script in your page, and use it with something like: -->
     <script type='text/javascript'>
       // This is a example of how to configure the kune embbeded panel
@@ -99,14 +98,12 @@ Your can use another string and the message will looks like "Thanks for joining 
       };
       window.onload = function () {
         // General configuration
-        document.confEmbed(obj);
+        // document.confEmbed(obj);
         // We embed in the specified div that #kunegroup.doc
-        document.embed('kune-sample-embed-hook1', 'site.docs.3.1');
+        // document.embed('site.docs.3.1');
       }
     </script>
-    <div id="kune-embed-hook"></div>
-    <!-- or include in the 'kune-embed-hook' div, using a object and a #hash with the doc id like this
-    (it will load only the hash url, without any configuration):
+    <!-- or include in the 'kune-embed-hook' div, using a object and a #hash with the doc id without any configuration:
        <object data="http://kune.example.com/wse.html#!some-group.docs.1" type="text/html"
        style="width:100%; height:100%; overflow: hidden;"></object>
        -->

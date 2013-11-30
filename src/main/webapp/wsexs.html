@@ -64,25 +64,19 @@ Your can use another string and the message will looks like "Thanks for joining 
 <body>
     <!-- Banner for wave errors -->
     <div class="banner" id="banner"></div>
-    <!-- Remember user/pass -->
-    <form id="loginrender" action="javascript:;" style="display: none;">
-        <input type="text" id="usernamerender" name="usernamerender"
-            value="" /> <input type="password" id="passwordrender"
-            name="passwordrender" value="" />
-    </form>
-    <form id="login" action="javascript:;" style="display: none;">
-        <input type="text" id="username" name="username" value="" /> <input
-            type="password" id="password" name="password" value="" />
-    </form>
+
     <div id="kune-embed-hook"></div>
-    <script type='text/javascript'>
+        <script type='text/javascript'>
       // This is a example of how to configure the kune embbeded panel
       var obj = {
       'serverUrl': 'http://localhost:8888', 'readOnly': false, 'sitebarPosition': 50,
       'signInText': 'Participate', 'showSignOut': true, 'showSignIn': true
       };
       window.onload = function () {
-        document.confEmbed(obj);
+        // General configuration
+        // document.confEmbed(obj);
+        // We embed in the specified div that #kunegroup.doc
+        // document.embed('site.docs.3.1');
       }
     </script>
 </body>

@@ -25,14 +25,13 @@ package cc.kune.core.client.embed;
 
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.KuneWindowUtils;
-import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenUtils;
 
+import com.google.gwt.core.client.GWT;
 import com.google.inject.Inject;
 
 /**
@@ -74,12 +73,8 @@ public class EmbedSignInAction extends AbstractSignInAction {
   @Override
   public void actionPerformed(final ActionEvent event) {
     final String server = conf.get().getServerUrl();
-    if (server == null) {
-      NotifyUser.error(I18n.t("Configuration error, please configure the server of this document"));
-    } else {
-      KuneWindowUtils.open(server + "#!"
-          + TokenUtils.addRedirect(SiteTokens.SIGN_IN, WindowUtils.getLocation().getHref()));
-    }
+    KuneWindowUtils.open((server == null ? GWT.getHostPageBaseURL() : server) + "#!"
+        + TokenUtils.addRedirect(SiteTokens.SIGN_IN, (String) event.getTarget()));
   }
 
 }

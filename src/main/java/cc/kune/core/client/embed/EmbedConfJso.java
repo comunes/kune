@@ -3,7 +3,7 @@ package cc.kune.core.client.embed;
 import com.google.gwt.core.client.JavaScriptObject;
 
 /**
- * The Class EmbedConfJso is used to configure the embed system via a JNSI call
+ * The Class EmbedConfJso is used to configure the embed system via a JSNI call
  * from outside.
  */
 public class EmbedConfJso extends JavaScriptObject {
@@ -30,15 +30,15 @@ public class EmbedConfJso extends JavaScriptObject {
   }-*/;
 
   public final native boolean getShowSignIn() /*-{
-		return this.showSignIn || false;
+		return this.showSignIn || true;
   }-*/;
 
   public final native boolean getShowSignOut() /*-{
-		return this.showSignOut || false;
+		return this.showSignOut || true;
   }-*/;
 
   public final native String getSignInText() /*-{
-		return this.signInText;
+		return this.signInText || 'Participate';
   }-*/;
 
   /**
