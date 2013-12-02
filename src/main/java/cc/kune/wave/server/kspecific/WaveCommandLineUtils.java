@@ -23,33 +23,29 @@
 
 package cc.kune.wave.server.kspecific;
 
-import org.waveprotocol.box.server.persistence.file.FileUtils;
-import org.waveprotocol.wave.model.id.WaveletName;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
-import org.waveprotocol.wave.model.waveref.WaveRef;
-import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveCommandLineUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveCommandLineUtils {
 
   /**
    * The main method.
-   *
-   * @param args the arguments
+   * 
+   * @param args
+   *          the arguments
    */
-  public static void main(String[] args) {
-    try {
-      WaveRef waveRef = JavaWaverefEncoder.decodeWaveRefFromPath(args[1]);
-      WaveletName waveName = WaveletName.of(waveRef.getWaveId(), waveRef.getWaveletId());
-      String name = FileUtils.waveletNameToPathSegment(waveName);
-      System.out.println(name);
-    } catch (InvalidWaveRefException e) {
-      e.printStackTrace();
+  public static void main(final String[] args) {
+    for (final String arg : args) {
+      try {
+        System.out.println(WaveNameUtils.decode(arg));
+      } catch (final InvalidWaveRefException e) {
+        e.printStackTrace();
+      }
     }
   }
 }
