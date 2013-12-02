@@ -109,16 +109,13 @@ import com.google.inject.Singleton;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class WebClient extends Composite implements WaveClientView {
 
   /**
    * The Interface Binder.
-   *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
+   *   */
   interface Binder extends UiBinder<DockLayoutPanel, WebClient> {
   }
 
@@ -127,7 +124,6 @@ public class WebClient extends Composite implements WaveClientView {
    * (an alert placed on the top of the screen). Once the stack trace is
    * prepared, it is revealed in the banner via a link.
    *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class ErrorHandler implements UncaughtExceptionHandler {
 

@@ -22,19 +22,14 @@
  */
 package cc.kune.core.server.rest;
 
-import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.server.content.ContainerManager;
 import cc.kune.core.server.content.ContentManager;
 import cc.kune.core.server.manager.SearchResult;
 import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.rack.filters.rest.REST;
-import cc.kune.core.server.rpc.ContentRPC;
-import cc.kune.core.shared.JSONConstants;
 import cc.kune.core.shared.SearcherConstants;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LinkDTO;
 import cc.kune.core.shared.dto.SearchResultDTO;
-import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 
@@ -45,34 +40,14 @@ import com.google.inject.Singleton;
 public class ContentJSONService {
   private final ContainerManager containerManager;
   private final ContentManager contentManager;
-  private final ContentRPC contentRpc;
   private final KuneMapper mapper;
 
   @Inject
-  public ContentJSONService(final ContentManager contentManager, final ContentRPC contentRpc,
+  public ContentJSONService(final ContentManager contentManager,
       final ContainerManager containerManager, final KuneMapper mapper) {
-    this.contentRpc = contentRpc;
     this.containerManager = containerManager;
     this.contentManager = contentManager;
     this.mapper = mapper;
-  }
-
-  @REST(params = { JSONConstants.HASH_PARAM, JSONConstants.TOKEN_PARAM })
-  public StateAbstractDTO getContent(final String userHash, final String token) {
-    try {
-      return contentRpc.getContent(userHash, new StateToken(token));
-    } catch (final SessionExpiredException e) {
-      return contentRpc.getContent(null, new StateToken(token));
-    }
-  }
-
-  @REST(params = { JSONConstants.HASH_PARAM, JSONConstants.TOKEN_PARAM })
-  public StateAbstractDTO getContentByWaveRef(final String userHash, final String waveRef) {
-    try {
-      return contentRpc.getContentByWaveRef(userHash, waveRef);
-    } catch (final SessionExpiredException e) {
-      return contentRpc.getContentByWaveRef(null, waveRef);
-    }
   }
 
   private SearchResultDTO<LinkDTO> map(final SearchResult<?> results) {

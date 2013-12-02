@@ -47,7 +47,7 @@ public class EmbedConfJso extends JavaScriptObject {
    * @return the sitebar position
    */
   public final native int getSitebarPosition() /*-{
-		return this.sitebarPosition || 20;
+		return this.sitebarPosition || 30;
   }-*/;
 
 }

@@ -25,8 +25,8 @@ package cc.kune.core.server.rest;
 import cc.kune.core.server.UserSessionManager;
 import cc.kune.core.server.manager.SiteManager;
 import cc.kune.core.server.rack.filters.rest.REST;
-import cc.kune.core.shared.JSONConstants;
 import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -42,8 +42,14 @@ public class SiteCORSService {
     this.sessionManager = sessionManager;
   }
 
-  @REST(params = { JSONConstants.HASH_PARAM })
-  public InitDataDTO getInitData(final String userHash) {
-    return manager.getInitData(sessionManager.getHash());
+  @REST(params = {})
+  public InitDataDTO getInitData() {
+    final String hash = sessionManager.getHash();
+    final InitDataDTO initData = manager.getInitData(hash);
+    final UserInfoDTO userInfo = initData.getUserInfo();
+    if (userInfo != null) {
+      userInfo.setUserHash(hash);
+    }
+    return initData;
   }
 }

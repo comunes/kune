@@ -42,6 +42,7 @@ import com.google.inject.Inject;
 public class RESTServiceFilter extends AbstractInjectedFilter {
   private static final Log LOG = LogFactory.getLog(RESTServiceFilter.class);
 
+  private final boolean jsonpEnabled = false;
   private final Pattern pattern;
   private final Class<?> serviceClass;
 
@@ -88,8 +89,9 @@ public class RESTServiceFilter extends AbstractInjectedFilter {
     return httpRequest.getParameter("callback");
   }
 
+  @SuppressWarnings("unused")
   private boolean isJSONPRequest(final String callbackMethod) {
-    return (callbackMethod != null && callbackMethod.length() > 0);
+    return jsonpEnabled && (callbackMethod != null && callbackMethod.length() > 0);
   }
 
   private String wrap(final String output, final boolean isJsonP, final String callbackMethod) {

@@ -43,13 +43,13 @@ public class ContentCORSService {
     this.sessionManager = sessionManager;
   }
 
-  @REST(params = { JSONConstants.HASH_PARAM, JSONConstants.TOKEN_PARAM })
-  public StateAbstractDTO getContent(final String userHash, final String token) {
+  @REST(params = { JSONConstants.TOKEN_PARAM })
+  public StateAbstractDTO getContent(final String token) {
     return contentRpc.getContent(sessionManager.getHash(), new StateToken(token));
   }
 
-  @REST(params = { JSONConstants.HASH_PARAM, JSONConstants.TOKEN_PARAM })
-  public StateAbstractDTO getContentByWaveRef(final String userHash, final String waveRef) {
+  @REST(params = { JSONConstants.TOKEN_PARAM })
+  public StateAbstractDTO getContentByWaveRef(final String waveRef) {
     return contentRpc.getContentByWaveRef(sessionManager.getHash(), waveRef);
   }
 }

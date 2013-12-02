@@ -164,8 +164,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     if (isGroupToken || isWaveToken) {
       // Ok is a token like group.tool.number
       final String getContentUrl = server + "cors/ContentCORSService/getContent" + suffix + "?"
-          + new UrlParam(JSONConstants.HASH_PARAM, session.getUserHash())
-          + new UrlParam("&" + JSONConstants.TOKEN_PARAM, URL.encodeQueryString(stateTokenS));
+          + new UrlParam(JSONConstants.TOKEN_PARAM, URL.encodeQueryString(stateTokenS));
 
       // FIXME Exception if is not public?
 
@@ -228,8 +227,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     // FIXME
     server = "http://127.0.0.1:8888/wse/";
 
-    final String initUrl = server + "cors/SiteCORSService/getInitData?"
-        + new UrlParam(JSONConstants.HASH_PARAM, session.getUserHash());
+    final String initUrl = server + "cors/SiteCORSService/getInitData";
 
     EmbedHelper.processRequest(initUrl, new Callback<Response, Void>() {
       @Override

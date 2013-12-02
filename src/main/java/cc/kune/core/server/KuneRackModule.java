@@ -67,7 +67,6 @@ import cc.kune.core.server.rest.ContentJSONService;
 import cc.kune.core.server.rest.GroupJSONService;
 import cc.kune.core.server.rest.I18nTranslationJSONService;
 import cc.kune.core.server.rest.SiteCORSService;
-import cc.kune.core.server.rest.SiteJSONService;
 import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
 import cc.kune.core.server.scheduler.CronServerTasksManager;
@@ -216,8 +215,8 @@ public class KuneRackModule implements RackModule {
         ContentService.class, UserService.class, SocialNetService.class, I18nService.class,
         ListsService.class, ClientStatsService.class, InvitationService.class);
     builder.installRESTServices("^" + SUFFIX_REG_EXP + "/json/", TestJSONService.class,
-        SiteJSONService.class, GroupJSONService.class, UserJSONService.class,
-        I18nTranslationJSONService.class, ContentJSONService.class);
+        GroupJSONService.class, UserJSONService.class, I18nTranslationJSONService.class,
+        ContentJSONService.class);
     builder.installCORSServices("^" + SUFFIX_REG_EXP + "/cors/", SiteCORSService.class,
         ContentCORSService.class);
     builder.installServlet("^" + SUFFIX_REG_EXP + "/servlets/", FileUploadManager.class,
