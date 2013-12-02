@@ -467,8 +467,8 @@ public class ContentRPC implements ContentService, RPC {
   public StateAbstractDTO getContent(final String userHash, final StateToken token)
       throws DefaultException {
     Group defaultGroup;
-    final User user = userSessionManager.getUser(userHash);
-    if (isUserLoggedIn(userHash)) {
+    final User user = userSessionManager.getUser();
+    if (isUserLoggedIn()) {
       defaultGroup = groupManager.getGroupOfUserWithId(user.getId());
       if (groupManager.findEnabledTools(defaultGroup.getId()).size() <= 1) {
         // 1, because the trash
@@ -505,7 +505,7 @@ public class ContentRPC implements ContentService, RPC {
   @Override
   @KuneTransactional
   public StateAbstractDTO getContentByWaveRef(final String userHash, final String waveRef) {
-    final User user = userSessionManager.getUser(userHash);
+    final User user = userSessionManager.getUser();
     try {
       // FIXME get this from a wave constant
       final String root = "/~/conv+root";
@@ -645,8 +645,8 @@ public class ContentRPC implements ContentService, RPC {
    * 
    * @return true, if is user logged in
    */
-  private boolean isUserLoggedIn(final String userHash) {
-    return userSessionManager.isUserLoggedIn(userHash);
+  private boolean isUserLoggedIn() {
+    return userSessionManager.isUserLoggedIn();
   }
 
   /**
@@ -832,7 +832,7 @@ public class ContentRPC implements ContentService, RPC {
     final User rater = getCurrentUser();
     final Long contentId = ContentUtils.parseId(token.getDocument());
 
-    if (isUserLoggedIn(userHash)) {
+    if (isUserLoggedIn()) {
       return contentManager.rateContent(rater, contentId, value);
     } else {
       throw new AccessViolationException();

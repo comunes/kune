@@ -104,7 +104,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    * @see cc.kune.core.server.UserSessionManager#getHashFromSession()
    */
   @Override
-  public String getHashFromSession() {
+  public String getHash() {
     final HttpSession session = getSession();
     return session == null ? null : (String) session.getAttribute(USER_HASH);
   }
@@ -113,6 +113,9 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
     return requestProvider.get().getSession();
   }
 
+  @SuppressWarnings("unused")
+  // Right now this is only used in websocket connect (can be cross-domain) to
+  // get the session and in the InitData generation to get the websocket info
   private HttpSession getSessionFromHash(final String userHash) {
     HttpSession session = null;
     if (userHash != null) {
@@ -132,17 +135,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    */
   @Override
   public User getUser() {
-    return getUser(getHashFromSession());
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.core.server.UserSessionManager#getUser(java.lang.String)
-   */
-  @Override
-  public User getUser(final String hash) {
-    final HttpSession session = getSessionFromHash(hash);
+    final HttpSession session = getSession();
     if (session != null) {
       final Object attribute = session.getAttribute(USER_ID);
       return userManager.find((Long) attribute);
@@ -179,18 +172,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    */
   @Override
   public boolean isUserLoggedIn() {
-    return isUserLoggedIn(getHashFromSession());
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.server.UserSessionManager#isUserLoggedIn(java.lang.String)
-   */
-  @Override
-  public boolean isUserLoggedIn(final String hash) {
-    final HttpSession session = getSessionFromHash(hash);
+    final HttpSession session = getSession();
     if (session == null) {
       return false;
     } else {
@@ -205,8 +187,8 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
    * cc.kune.core.server.UserSessionManager#isUserNotLoggedIn(java.lang.String)
    */
   @Override
-  public boolean isUserNotLoggedIn(final String hash) {
-    return !isUserLoggedIn(hash);
+  public boolean isUserNotLoggedIn() {
+    return !isUserLoggedIn();
   }
 
   /*

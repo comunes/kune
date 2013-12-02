@@ -82,18 +82,18 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
         LOG.info("Not logged in server and mandatory");
         logLine(method, userHash, false);
         throw new UserMustBeLoggedException();
-      } else if (userSessionManager.isUserNotLoggedIn(userHash) && mandatory) {
+      } else if (userSessionManager.isUserNotLoggedIn() && mandatory) {
         LOG.info("Session expired (not logged in server and mandatory)");
         logLine(method, userHash, false);
         throw new SessionExpiredException();
       } else if (userHash == null && !userSessionManager.isUserLoggedIn()) {
         // Ok, do nothing
-      } else if (userHash != null && userSessionManager.isUserNotLoggedIn(userHash)) {
+      } else if (userHash != null && userSessionManager.isUserNotLoggedIn()) {
         LOG.info("Session expired (not logged in server)");
         logLine(method, userHash, false);
         throw new SessionExpiredException();
       } else {
-        final String serverHash = userSessionManager.getHashFromSession();
+        final String serverHash = userSessionManager.getHash();
         if (serverHash != null && !serverHash.equals(userHash)) {
           userSessionManager.logout();
           LOG.info("Session expired (userHash: " + userHash + " different from server hash: "

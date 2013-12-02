@@ -100,7 +100,7 @@ public class ShouldBeMemberMethodInterceptor implements MethodInterceptor {
 
     if (userHash == null) {
       throw new UserMustBeLoggedException();
-    } else if (userSessionManager.isUserNotLoggedIn(userHash)) {
+    } else if (userSessionManager.isUserNotLoggedIn()) {
       LOG.info("Session expired (not logged in server and mandatory)");
       throw new SessionExpiredException();
     } else {

@@ -43,17 +43,12 @@ public class DummyUserSessionManager implements UserSessionManager, UsersOnline 
   }
 
   @Override
-  public String getHashFromSession() {
+  public String getHash() {
     return userHash;
   }
 
   @Override
   public User getUser() {
-    return userManager.find(userId);
-  }
-
-  @Override
-  public User getUser(final String hash) {
     return userManager.find(userId);
   }
 
@@ -68,13 +63,8 @@ public class DummyUserSessionManager implements UserSessionManager, UsersOnline 
   }
 
   @Override
-  public boolean isUserLoggedIn(final String hash) {
-    return hash != null && hash.equals(userHash);
-  }
-
-  @Override
-  public boolean isUserNotLoggedIn(final String hash) {
-    return !isUserLoggedIn(hash);
+  public boolean isUserNotLoggedIn() {
+    return !isUserLoggedIn();
   }
 
   @Override

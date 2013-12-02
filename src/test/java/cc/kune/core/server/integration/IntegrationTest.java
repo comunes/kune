@@ -149,7 +149,7 @@ public abstract class IntegrationTest {
    * @return the hash
    */
   public String getHash() {
-    return session.getHashFromSession();
+    return session.getHash();
   }
 
   /**

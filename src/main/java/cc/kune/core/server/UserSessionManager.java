@@ -29,17 +29,13 @@ public interface UserSessionManager {
   static final String USER_HASH = "kune-userhash";
   static final String USER_ID = "kune-userid";
 
-  String getHashFromSession();
+  String getHash();
 
   User getUser();
 
-  User getUser(final String hash);
-
   boolean isUserLoggedIn();
 
-  boolean isUserLoggedIn(final String hash);
-
-  boolean isUserNotLoggedIn(final String hash);
+  boolean isUserNotLoggedIn();
 
   void login(final Long userId, final String newUserHash);
 

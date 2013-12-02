@@ -57,7 +57,7 @@ public abstract class ContentServiceIntegrationTest extends IntegrationTest {
   protected StateContentDTO getSiteDefaultContent() throws Exception {
     final StateToken stateToken = new StateToken(getDefSiteShortName());
     final StateContentDTO content = (StateContentDTO) contentService.getContent(
-        session.getHashFromSession(), stateToken);
+        session.getHash(), stateToken);
     return content;
   }
 

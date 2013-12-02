@@ -258,7 +258,7 @@ public class UserServiceTest extends IntegrationTest {
     assertNull(session.getUser().getId());
     doLogin(properties.getAdminShortName(), properties.getAdminPassword());
     assertNotNull(session.getUser().getId());
-    userService.changePasswd(session.getHashFromSession(), "otherpasswd", "kkkkkk");
+    userService.changePasswd(session.getHash(), "otherpasswd", "kkkkkk");
   }
 
   /**
@@ -272,10 +272,10 @@ public class UserServiceTest extends IntegrationTest {
     assertNull(session.getUser().getId());
     doLogin(properties.getAdminShortName(), properties.getAdminPassword());
     assertNotNull(session.getUser().getId());
-    userService.changePasswd(session.getHashFromSession(), properties.getAdminPassword(), "kkkkkk");
+    userService.changePasswd(session.getHash(), properties.getAdminPassword(), "kkkkkk");
     doLogout();
     doLogin(properties.getAdminShortName(), "kkkkkk");
-    userService.changePasswd(session.getHashFromSession(), "kkkkkk", properties.getAdminPassword());
+    userService.changePasswd(session.getHash(), "kkkkkk", properties.getAdminPassword());
     doLogout();
   }
 
@@ -314,7 +314,7 @@ public class UserServiceTest extends IntegrationTest {
   @Test
   public void testUserInfo() throws Exception {
     doLogin();
-    final UserInfo userInfo = userInfoService.buildInfo(session.getUser(), session.getHashFromSession());
+    final UserInfo userInfo = userInfoService.buildInfo(session.getUser(), session.getHash());
 
     final UserInfoDTO userInfoDTO = mapper.map(userInfo, UserInfoDTO.class);
     assertEquals(userInfo.getName(), userInfoDTO.getName());

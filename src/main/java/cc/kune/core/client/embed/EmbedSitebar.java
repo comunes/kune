@@ -30,6 +30,7 @@ import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHa
 import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.InitDataDTO;
 
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
@@ -43,28 +44,28 @@ public class EmbedSitebar {
 
   private final EmbedConfiguration configuration;
   private final PopupPanel popup;
+  private final Session session;
   private final SitebarSignInLink signInLink;
+  private final SitebarSignOutLink signOutLink;
   private final ActionFlowPanel toolbar;
 
   @Inject
   public EmbedSitebar(final Session session, final ActionFlowPanel toolbar,
       final SitebarSignInLink signInLink, final SitebarSignOutLink signOutLink,
       final EmbedConfiguration configuration) {
+    this.session = session;
     this.toolbar = toolbar;
+    this.signOutLink = signOutLink;
     this.configuration = configuration;
     this.signInLink = signInLink;
     signInLink.detachFromParent();
     signOutLink.detachFromParent();
-    @SuppressWarnings("deprecation")
-    final String sitelogo = session.getInitData().getSiteLogoUrl();
     if (configuration.get().getShowSignIn()) {
       toolbar.add(signInLink);
     }
     if (configuration.get().getShowSignOut()) {
       toolbar.add(signOutLink);
     }
-    signInLink.withIcon(new Url(sitelogo));
-    signOutLink.withIcon(new Url(sitelogo));
     popup = new PopupPanel(false, false);
     popup.setWidget(toolbar);
     popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
@@ -93,12 +94,19 @@ public class EmbedSitebar {
     });
   }
 
+  public void init(final String stateToken) {
+    signInLink.setTarget(stateToken);
+    final InitDataDTO initData = session.getInitData();
+    if (initData != null) {
+      @SuppressWarnings("deprecation")
+      final String sitelogo = initData.getSiteLogoUrl();
+      signInLink.withIcon(new Url(sitelogo));
+      signOutLink.withIcon(new Url(sitelogo));
+    }
+  }
+
   private void setPopupPosition() {
     final Integer position = configuration.get().getSitebarPosition();
     popup.setPopupPosition(Window.getClientWidth() - toolbar.getOffsetWidth() - position, 0);
-  }
-
-  public void setStateToken(final String stateToken) {
-    signInLink.setTarget(stateToken);
   }
 }

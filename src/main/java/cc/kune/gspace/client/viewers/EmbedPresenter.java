@@ -272,7 +272,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
       @Override
       public void onSuccess() {
-        sitebar.get().setStateToken(stateTokenToOpen);
+        sitebar.get().init(stateTokenToOpen);
       }
 
     });
