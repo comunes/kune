@@ -24,7 +24,6 @@ package cc.kune.core.server.rack.filters.rest;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.FilterChain;
@@ -62,7 +61,7 @@ public class RESTServiceFilter extends AbstractInjectedFilter {
   public void doFilter(final ServletRequest request, final ServletResponse response,
       final FilterChain chain) throws IOException, ServletException {
 
-    final String methodName = getMethodName(request);
+    final String methodName = RackHelper.getMethodName(request, pattern);
     final ParametersAdapter parameters = new ParametersAdapter(request);
     LOG.debug("JSON METHOD: '" + methodName + "' on: " + serviceClass.getSimpleName());
 
@@ -87,14 +86,6 @@ public class RESTServiceFilter extends AbstractInjectedFilter {
 
   private String getCallbackMethod(final ServletRequest httpRequest) {
     return httpRequest.getParameter("callback");
-  }
-
-  private String getMethodName(final ServletRequest request) {
-    final String relativeURL = RackHelper.getRelativeURL(request);
-    final Matcher matcher = pattern.matcher(relativeURL);
-    matcher.find();
-    final String methodName = matcher.group(1);
-    return methodName;
   }
 
   private boolean isJSONPRequest(final String callbackMethod) {

@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServlet;
 import cc.kune.core.server.rack.dock.RegexDock;
 import cc.kune.core.server.rack.dock.RegexMatcher;
 import cc.kune.core.server.rack.filters.gwts.GWTServiceFilter;
+import cc.kune.core.server.rack.filters.rest.CORSServiceFilter;
 import cc.kune.core.server.rack.filters.rest.RESTServiceFilter;
 import cc.kune.core.server.rack.filters.servlet.ServletServiceFilter;
 
@@ -37,8 +38,8 @@ import com.google.inject.Module;
 public class RackBuilder {
 
   public static class RackDockBuilder {
-    private final String regex;
     private final Rack rack;
+    private final String regex;
 
     public RackDockBuilder(final Rack rack, final String regex) {
       this.rack = rack;
@@ -80,6 +81,16 @@ public class RackBuilder {
 
   public Rack getRack() {
     return rack;
+  }
+
+  public void installCORSServices(final String root, final Class<?>... serviceClasses) {
+    for (final Class<?> serviceClass : serviceClasses) {
+      final String simpleName = serviceClass.getSimpleName();
+      final String pattern = root + simpleName + "/(.*)$";
+      final RegexDock dock = new RegexDock(pattern);
+      dock.setFilter(new CORSServiceFilter(pattern, serviceClass));
+      rack.add(dock);
+    }
   }
 
   public RackBuilder installGWTServices(final String root,

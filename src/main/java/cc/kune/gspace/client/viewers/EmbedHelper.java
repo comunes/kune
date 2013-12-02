@@ -11,6 +11,11 @@ import cc.kune.core.shared.dto.UserInfoDTOJs;
 
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.http.client.Request;
+import com.google.gwt.http.client.RequestBuilder;
+import com.google.gwt.http.client.RequestCallback;
+import com.google.gwt.http.client.RequestException;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.jsonp.client.JsonpRequest;
 import com.google.gwt.jsonp.client.JsonpRequestBuilder;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -37,21 +42,23 @@ public class EmbedHelper {
 
   public static UserInfoDTO parse(final UserInfoDTOJs userInfo) {
     final String userHash = userInfo.getUserHash();
-    if (userHash == null) {
+    if (userHash == null || userHash.equals("null")) {
       Log.info("We are NOT logged");
       return null;
     } else {
       final UserInfoDTO info = new UserInfoDTO();
       info.setUserHash(userHash);
-      Log.info("We are logged");
-      info.setSessionJSON(userInfo.getSessionJSON());
+      Log.info("We are logged, userhash: " + userHash);
+      final String waveSession = userInfo.getSessionJSON();
+      info.setSessionJSON(waveSession);
+      Log.info("wave session: " + waveSession);
       info.setWebsocketAddress(userInfo.getWebsocketAddress());
       info.setClientFlags(userInfo.getClientFlags());
       return info;
     }
   }
 
-  static void processRequest(final String url, final Callback<JavaScriptObject, Void> callback) {
+  static void processJSONRequest(final String url, final Callback<JavaScriptObject, Void> callback) {
     final JsonpRequestBuilder builder = new JsonpRequestBuilder();
     builder.setTimeout(60000);
     @SuppressWarnings("unused")
@@ -69,5 +76,34 @@ public class EmbedHelper {
           }
         });
 
+  }
+
+  static void processRequest(final String url, final Callback<Response, Void> callback) {
+    try {
+      final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
+      // Needed for CORS
+      builder.setIncludeCredentials(true);
+      @SuppressWarnings("unused")
+      final Request request = builder.sendRequest(null, new RequestCallback() {
+        @Override
+        public void onError(final Request request, final Throwable exception) {
+          Log.error("CORS exception: ", exception);
+          callback.onFailure(null);
+        }
+
+        @Override
+        public void onResponseReceived(final Request request, final Response response) {
+          if (200 == response.getStatusCode()) {
+            callback.onSuccess(response);
+          } else {
+            Log.error("Couldn't retrieve CORS (" + response.getStatusText() + ")");
+            callback.onFailure(null);
+          }
+        }
+      });
+    } catch (final RequestException exception) {
+      Log.error("CORS exception: ", exception);
+      callback.onFailure(null);
+    }
   }
 }

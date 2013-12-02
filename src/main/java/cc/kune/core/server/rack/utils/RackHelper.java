@@ -22,19 +22,22 @@
  */
 package cc.kune.core.server.rack.utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 
 public final class RackHelper {
   public static String buildForwardString(final ServletRequest request, final String forward) {
-    String parameters = RackHelper.extractParameters(request);
+    final String parameters = RackHelper.extractParameters(request);
     return new StringBuilder(forward).append(parameters).toString();
   }
 
   public static String extractParameters(final ServletRequest request) {
-    HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-    String uri = httpServletRequest.getRequestURI();
-    int index = uri.indexOf('?');
+    final HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+    final String uri = httpServletRequest.getRequestURI();
+    final int index = uri.indexOf('?');
     if (index > 0) {
       return uri.substring(index);
     } else {
@@ -42,15 +45,23 @@ public final class RackHelper {
     }
   }
 
+  public static String getMethodName(final ServletRequest request, final Pattern pattern) {
+    final String relativeURL = RackHelper.getRelativeURL(request);
+    final Matcher matcher = pattern.matcher(relativeURL);
+    matcher.find();
+    final String methodName = matcher.group(1);
+    return methodName;
+  }
+
   public static String getRelativeURL(final ServletRequest request) {
-    HttpServletRequest req = (HttpServletRequest) request;
-    String contextPath = req.getContextPath();
-    String uri = req.getRequestURI();
+    final HttpServletRequest req = (HttpServletRequest) request;
+    final String contextPath = req.getContextPath();
+    final String uri = req.getRequestURI();
     return uri.substring(contextPath.length());
   }
 
   public static String getURI(final ServletRequest request) {
-    HttpServletRequest httpServletRequest = (HttpServletRequest) request;
+    final HttpServletRequest httpServletRequest = (HttpServletRequest) request;
     return httpServletRequest.getRequestURI();
   }
 

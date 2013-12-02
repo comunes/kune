@@ -82,7 +82,8 @@ public class WaveClientManager {
         setSessionJSON(JsonUtils.safeEval(result.getSessionJSON()));
         setClientFlags(JsonUtils.safeEval(result.getClientFlags()));
         setWebsocketAddress(result.getWebsocketAddress());
-        Log.debug("Wave client session: " + result.getSessionJSON());
+        Log.info("Wave client session: " + result.getSessionJSON());
+        Log.info("Wave websocket address: " + result.getWebsocketAddress());
         ready = true;
         Scheduler.get().scheduleDeferred(new ScheduledCommand() {
           @Override

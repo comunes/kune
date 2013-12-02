@@ -668,6 +668,11 @@
       <artifactId>htmlunit</artifactId>
       <version>2.9</version>
     </dependency>
+    <dependency>
+      <groupId>com.thetransactioncompany</groupId>
+      <artifactId>cors-filter</artifactId>
+      <version>1.8</version>
+    </dependency>
   </dependencies>
   <distributionManagement>
     <repository>

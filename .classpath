@@ -40,6 +40,7 @@
 	<classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.1/commons-logging-1.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/communication-src/0.3.45/communication-src-0.3.45.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/concurrencycontrol-src/0.3.45/concurrencycontrol-src-0.3.45.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/thetransactioncompany/cors-filter/1.8/cors-filter-1.8.jar" sourcepath="M2_REPO/com/thetransactioncompany/cors-filter/1.8/cors-filter-1.8-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/crypto/0.3.45/crypto-0.3.45.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/crypto-src/0.3.45/crypto-src-0.3.45.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.5/cssparser-0.9.5.jar" sourcepath="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.5/cssparser-0.9.5-sources.jar"/>
@@ -112,6 +113,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/mnode/ical4j/ical4j/1.0.2/ical4j-1.0.2.jar" sourcepath="M2_REPO/org/mnode/ical4j/ical4j/1.0.2/ical4j-1.0.2-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-core-asl/1.7.3/jackson-core-asl-1.7.3.jar" sourcepath="M2_REPO/org/codehaus/jackson/jackson-core-asl/1.7.3/jackson-core-asl-1.7.3-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-mapper-asl/1.7.3/jackson-mapper-asl-1.7.3.jar" sourcepath="M2_REPO/org/codehaus/jackson/jackson-mapper-asl/1.7.3/jackson-mapper-asl-1.7.3-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/com/thetransactioncompany/java-property-utils/1.9/java-property-utils-1.9.jar" sourcepath="M2_REPO/com/thetransactioncompany/java-property-utils/1.9/java-property-utils-1.9-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/javassist/javassist/3.15.0-GA/javassist-3.15.0-GA.jar" sourcepath="M2_REPO/org/javassist/javassist/3.15.0-GA/javassist-3.15.0-GA-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/jaxen/jaxen/1.1-beta-8/jaxen-1.1-beta-8.jar" sourcepath="M2_REPO/jaxen/jaxen/1.1-beta-8/jaxen-1.1-beta-8-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jboss/logging/jboss-logging/3.1.0.GA/jboss-logging-3.1.0.GA.jar" sourcepath="M2_REPO/org/jboss/logging/jboss-logging/3.1.0.GA/jboss-logging-3.1.0.GA-sources.jar"/>

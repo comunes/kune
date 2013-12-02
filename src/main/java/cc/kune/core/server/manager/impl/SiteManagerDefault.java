@@ -27,6 +27,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.InitData;
 import cc.kune.core.server.UserSessionManager;
@@ -53,6 +56,8 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean {
+
+  private static final Log LOG = LogFactory.getLog(SiteManagerDefault.class);
 
   /** The chat properties. */
   private final ChatProperties chatProperties;
@@ -89,7 +94,6 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /** The user info service. */
   private final UserInfoService userInfoService;
-
   /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
@@ -161,7 +165,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   public InitDataDTO getInitData(final String userHash) throws DefaultException {
     final InitDataDTO dataMapped = mapper.map(data, InitDataDTO.class);
     final UserInfo userInfo = userInfoService.buildInfo(userSessionManager.getUser(), userHash);
-
+    LOG.info("Retrieve init data using userHash: " + userHash);
+    LOG.info("Session userHash: " + userSessionManager.getHash());
     if (userInfo != null) {
       dataMapped.setUserInfo(mapper.map(userInfo, UserInfoDTO.class));
     }

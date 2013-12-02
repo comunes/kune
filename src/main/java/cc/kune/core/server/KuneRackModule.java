@@ -22,7 +22,8 @@
  */
 package cc.kune.core.server;
 
-import static com.google.inject.matcher.Matchers.*;
+import static com.google.inject.matcher.Matchers.annotatedWith;
+import static com.google.inject.matcher.Matchers.any;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -61,9 +62,11 @@ import cc.kune.core.server.rack.filters.ForwardFilter;
 import cc.kune.core.server.rack.filters.ListenerFilter;
 import cc.kune.core.server.rack.filters.RedirectFilter;
 import cc.kune.core.server.rack.filters.rest.RESTServicesModule;
+import cc.kune.core.server.rest.ContentCORSService;
 import cc.kune.core.server.rest.ContentJSONService;
 import cc.kune.core.server.rest.GroupJSONService;
 import cc.kune.core.server.rest.I18nTranslationJSONService;
+import cc.kune.core.server.rest.SiteCORSService;
 import cc.kune.core.server.rest.SiteJSONService;
 import cc.kune.core.server.rest.TestJSONService;
 import cc.kune.core.server.rest.UserJSONService;
@@ -215,6 +218,8 @@ public class KuneRackModule implements RackModule {
     builder.installRESTServices("^" + SUFFIX_REG_EXP + "/json/", TestJSONService.class,
         SiteJSONService.class, GroupJSONService.class, UserJSONService.class,
         I18nTranslationJSONService.class, ContentJSONService.class);
+    builder.installCORSServices("^" + SUFFIX_REG_EXP + "/cors/", SiteCORSService.class,
+        ContentCORSService.class);
     builder.installServlet("^" + SUFFIX_REG_EXP + "/servlets/", FileUploadManager.class,
         FileDownloadManager.class, EntityLogoUploadManager.class, EntityLogoDownloadManager.class,
         FileGwtUploadServlet.class, EntityBackgroundDownloadManager.class,

@@ -49,11 +49,12 @@ import cc.kune.wave.client.kspecific.WaveClientProvider;
 
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.History;
 import com.google.inject.Inject;
@@ -89,6 +90,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
   private final EmbedConfiguration conf;
   private final boolean devMode = true;
+  private String server;
   private final Session session;
   private final Provider<EmbedSitebar> sitebar;
   protected String stateTokenToOpen;
@@ -136,7 +138,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
           // Not initialized
         } else {
           // ok, we can continue
-          getContentFromHash(stateTokenToOpen);
+          getContentFromHistoryHash(stateTokenToOpen);
         }
       }
     });
@@ -147,13 +149,13 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
         onAppStarted();
       }
     });
-    if (conf.isReady() || isCurrentHashValid(getCurrentHash())) {
+    if (conf.isReady() || isCurrentHistoryHashValid(getCurrentHistoryHash())) {
       // The event was fired already, so start!
       onAppStarted();
     }
   }
 
-  private void getContentFromHash(final String stateTokenS) {
+  private void getContentFromHistoryHash(final String stateTokenS) {
     Log.info("Opening statetoken: " + stateTokenS);
     final boolean isGroupToken = TokenMatcher.isGroupToken(stateTokenS);
     final boolean isWaveToken = TokenMatcher.isWaveToken(stateTokenS);
@@ -161,26 +163,30 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
     if (isGroupToken || isWaveToken) {
       // Ok is a token like group.tool.number
-      final String getContentUrl = GWT.getModuleBaseURL() + "json/ContentJSONService/getContent"
-          + suffix + "?" + new UrlParam(JSONConstants.HASH_PARAM, session.getUserHash())
+      final String getContentUrl = server + "cors/ContentCORSService/getContent" + suffix + "?"
+          + new UrlParam(JSONConstants.HASH_PARAM, session.getUserHash())
           + new UrlParam("&" + JSONConstants.TOKEN_PARAM, URL.encodeQueryString(stateTokenS));
-      EmbedHelper.processRequest(getContentUrl, new Callback<JavaScriptObject, Void>() {
+
+      // FIXME Exception if is not public?
+
+      EmbedHelper.processRequest(getContentUrl, new Callback<Response, Void>() {
+
         @Override
         public void onFailure(final Void reason) {
           notFound();
         }
 
         @Override
-        public void onSuccess(final JavaScriptObject response) {
+        public void onSuccess(final Response response) {
           // final StateToken currentToken = new StateToken(currentHash);
           NotifyUser.hideProgress();
-          final StateAbstractDTOJs state = (StateAbstractDTOJs) response;
+          final StateAbstractDTOJs state = JsonUtils.safeEval(response.getText());
           final StateTokenJs stateTokenJs = (StateTokenJs) state.getStateToken();
 
           // getContent returns the default content if doesn't finds the content
           if ((isGroupToken && stateTokenS.equals(stateTokenJs.getEncoded()))
               || (isWaveToken && stateTokenS.equals(state.getWaveRef()))) {
-            onGetContentSucessful(session, EmbedHelper.parse(state));
+            onGetContentSuccessful(session, EmbedHelper.parse(state));
           } else {
             // getContent returns def content if content not found
             notFound();
@@ -194,13 +200,13 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     }
   }
 
-  private String getCurrentHash() {
+  private String getCurrentHistoryHash() {
     return HistoryUtils.undoHashbang(History.getToken());
   }
 
-  private boolean isCurrentHashValid(final String currentHash) {
-    return currentHash != null
-        && (TokenMatcher.isGroupToken(currentHash) || TokenMatcher.isWaveToken(currentHash));
+  private boolean isCurrentHistoryHashValid(final String currentHistoryHash) {
+    return currentHistoryHash != null
+        && (TokenMatcher.isGroupToken(currentHistoryHash) || TokenMatcher.isWaveToken(currentHistoryHash));
   }
 
   /**
@@ -215,31 +221,41 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     final String userHash = session.getUserHash();
     Log.info("Started embed presenter with user hash: " + userHash);
 
-    final String initUrl = GWT.getModuleBaseURL() + "json/SiteJSONService/getInitData?"
-        + new UrlParam(JSONConstants.HASH_PARAM, userHash);
-    EmbedHelper.processRequest(initUrl, new Callback<JavaScriptObject, Void>() {
+    final String confServer = conf.get().getServerUrl();
+    server = confServer != null ? (confServer.endsWith("/") ? confServer + "wse/" : confServer + "/wse/")
+        : GWT.getModuleBaseURL();
+
+    // FIXME
+    server = "http://127.0.0.1:8888/wse/";
+
+    final String initUrl = server + "cors/SiteCORSService/getInitData?"
+        + new UrlParam(JSONConstants.HASH_PARAM, session.getUserHash());
+
+    EmbedHelper.processRequest(initUrl, new Callback<Response, Void>() {
       @Override
       public void onFailure(final Void reason) {
         // Do nothing
+        Log.info("Failed to get init data");
       }
 
       @Override
-      public void onSuccess(final JavaScriptObject response) {
-        final InitDataDTOJs initData = (InitDataDTOJs) response;
+      public void onSuccess(final Response response) {
+        final InitDataDTOJs initData = JsonUtils.safeEval(response.getText());
         session.setInitData(EmbedHelper.parse(initData));
         final UserInfoDTOJs userInfo = (UserInfoDTOJs) initData.getUserInfo();
+        session.setUserHash(userInfo.getUserHash());
         session.setCurrentUserInfo(EmbedHelper.parse(userInfo), null);
-        final String currentHash = getCurrentHash();
-        final boolean isValid = isCurrentHashValid(currentHash);
+        final String currentHash = getCurrentHistoryHash();
+        final boolean isValid = isCurrentHistoryHashValid(currentHash);
         if (stateTokenToOpen != null) {
           // The open event already received, so open the content
           Log.info("Opening token from JSNI open call");
-          getContentFromHash(stateTokenToOpen);
+          getContentFromHistoryHash(stateTokenToOpen);
         } else if (isValid) {
           // We start the embed from the url #hash
           Log.info("Opening token from history token");
           stateTokenToOpen = currentHash;
-          getContentFromHash(currentHash);
+          getContentFromHistoryHash(currentHash);
         } else {
           // We embed the document via JSNI, so, we wait for the open event
         }
@@ -247,7 +263,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     });
   }
 
-  private void onGetContentSucessful(final Session session, final StateAbstractDTO state) {
+  private void onGetContentSuccessful(final Session session, final StateAbstractDTO state) {
     getView().clear();
     final StateContentDTO stateContent = (StateContentDTO) state;
 
@@ -282,7 +298,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   public void onValueChange(final ValueChangeEvent<String> event) {
     // Only used in dev mode
     if (devMode) {
-      getContentFromHash(getCurrentHash());
+      getContentFromHistoryHash(getCurrentHistoryHash());
     }
   }
 
