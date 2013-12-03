@@ -32,6 +32,7 @@ import org.apache.commons.logging.LogFactory;
 import cc.kune.core.client.errors.SessionExpiredException;
 import cc.kune.core.client.errors.UserMustBeLoggedException;
 import cc.kune.core.server.UserSessionManager;
+import cc.kune.domain.User;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -96,8 +97,10 @@ public class AuthenticatedMethodInterceptor implements MethodInterceptor {
         final String serverHash = userSessionManager.getHash();
         if (serverHash != null && !serverHash.equals(userHash)) {
           userSessionManager.logout();
+          final User user = userSessionManager.getUser();
+          final String userName = user != null ? " for user " + user.getShortName() : "";
           LOG.info("Session expired (userHash: " + userHash + " different from server hash: "
-              + serverHash + ")");
+              + serverHash + ")" + userName);
           logLine(method, userHash, false);
           throw new SessionExpiredException();
         }
