@@ -79,7 +79,7 @@ public class TokenMatcherTest {
   @Before
   public void before() {
     TokenMatcher.getReservedWords().add(SIGNIN_TOKEN);
-
+    TokenMatcher.getReservedWords().add("kune");
     TokenMatcher.init(JavaWaverefEncoder.INSTANCE);
   }
 
@@ -124,6 +124,12 @@ public class TokenMatcherTest {
    */
   private void matchGroupToken(final String token) {
     assertTrue("Expected '" + token + "' match isGroup", TokenMatcher.isGroupToken(token));
+  }
+
+  /* If we use a reserved group name, will fail the matcher */
+  @Test
+  public void matchReservedGroups() {
+    dontMatchGroupToken("kune");
   }
 
   /**
