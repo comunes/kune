@@ -1,6 +1,7 @@
 package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.InitDataDTOJs;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -10,6 +11,7 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserInfoDTOJs;
 
 import com.google.gwt.core.client.Callback;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -21,6 +23,18 @@ import com.google.gwt.jsonp.client.JsonpRequestBuilder;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public class EmbedHelper {
+  public static String getServer() {
+    final String serverConf = EmbedConfiguration.get().getServerUrl();
+    return serverConf == null ? GWT.getHostPageBaseURL() : serverConf;
+  }
+
+  public static String getServerWithPath() {
+    final String confServer = EmbedConfiguration.get().getServerUrl();
+    final String server = confServer != null ? (confServer.endsWith("/") ? confServer + "wse/"
+        : confServer + "/wse/") : GWT.getModuleBaseURL();
+    return server;
+  }
+
   public static InitDataDTO parse(final InitDataDTOJs initJ) {
     final InitDataDTO init = new InitDataDTO();
     init.setStoreUntranslatedStrings(initJ.getStoreUntranslatedStrings());
@@ -58,7 +72,7 @@ public class EmbedHelper {
     }
   }
 
-  static void processJSONRequest(final String url, final Callback<JavaScriptObject, Void> callback) {
+  public static void processJSONRequest(final String url, final Callback<JavaScriptObject, Void> callback) {
     final JsonpRequestBuilder builder = new JsonpRequestBuilder();
     builder.setTimeout(60000);
     @SuppressWarnings("unused")
@@ -75,10 +89,9 @@ public class EmbedHelper {
             callback.onSuccess(result);
           }
         });
-
   }
 
-  static void processRequest(final String url, final Callback<Response, Void> callback) {
+  public static void processRequest(final String url, final Callback<Response, Void> callback) {
     try {
       final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
       // Needed for CORS

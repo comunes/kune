@@ -52,4 +52,9 @@ public class SiteCORSService {
     }
     return initData;
   }
+
+  @REST(params = {})
+  public void logout() {
+    sessionManager.logout();
+  }
 }

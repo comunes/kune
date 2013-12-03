@@ -42,6 +42,7 @@ import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
 import cc.kune.core.client.embed.EmbedSignInAction;
+import cc.kune.core.client.embed.EmbedSignOutAction;
 import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
@@ -49,6 +50,7 @@ import cc.kune.core.client.notify.spiner.SpinerPanel;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
+import cc.kune.core.client.sitebar.AbstractSignOutAction;
 import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.SitebarSignOutLink.BeforeSignOut;
 import cc.kune.core.client.state.ContentCache;
@@ -121,7 +123,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     s(EmbedSitebar.class);
 
     bind(AbstractSignInAction.class).to(EmbedSignInAction.class).in(Singleton.class);
-
+    bind(AbstractSignOutAction.class).to(EmbedSignOutAction.class).in(Singleton.class);
     s(UserMessagesPresenter.class);
     s(UserMessagesPanel.class);
 

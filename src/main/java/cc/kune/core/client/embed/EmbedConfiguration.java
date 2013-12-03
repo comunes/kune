@@ -13,20 +13,20 @@ public class EmbedConfiguration {
     $doc.confEmbed = $entry(@cc.kune.core.client.embed.EmbedConfiguration::init(Lcc/kune/core/client/embed/EmbedConfJso;))
   }-*/;
 
+  public static EmbedConfJso get() {
+    return conf;
+  }
+
   public static void init(final EmbedConfJso conf) {
     EmbedConfiguration.conf = conf;
     EventBusInstance.get().fireEvent(new EmbAppStartEvent(conf));
   }
 
-  public EmbedConfiguration() {
-  }
-
-  public EmbedConfJso get() {
-    return conf;
-  }
-
-  public boolean isReady() {
+  public static boolean isReady() {
     return conf != null;
+  }
+
+  public EmbedConfiguration() {
   }
 
 }

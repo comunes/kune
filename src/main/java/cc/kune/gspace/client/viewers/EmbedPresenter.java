@@ -34,6 +34,8 @@ import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.client.embed.EmbedOpenEvent;
 import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.events.EmbAppStartEvent;
+import cc.kune.core.client.events.UserSignOutEvent;
+import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
@@ -88,9 +90,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   public interface EmbedView extends WaveViewerView {
   }
 
-  private final EmbedConfiguration conf;
   private final boolean devMode = true;
-  private String server;
   private final Session session;
   private final Provider<EmbedSitebar> sitebar;
   protected String stateTokenToOpen;
@@ -121,14 +121,12 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   @Inject
   public EmbedPresenter(final EventBus eventBus, final EmbedView view, final EmbedProxy proxy,
       final WaveClientManager waveClientManager, final WaveClientProvider waveClient,
-      final I18nTranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar,
-      final EmbedConfiguration conf) {
+      final I18nTranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar) {
     super(eventBus, view, proxy);
     NotifyUser.showProgressLoading();
     // FIXME: Maybe use AppStart to detect browser compatibility in the future
     this.session = session;
     this.sitebar = sitebar;
-    this.conf = conf;
     TokenMatcher.init(GwtWaverefEncoder.INSTANCE);
     eventBus.addHandler(EmbedOpenEvent.getType(), new EmbedOpenEvent.EmbedOpenHandler() {
       @Override
@@ -149,7 +147,13 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
         onAppStarted();
       }
     });
-    if (conf.isReady() || isCurrentHistoryHashValid(getCurrentHistoryHash())) {
+    session.onUserSignOut(false, new UserSignOutHandler() {
+      @Override
+      public void onUserSignOut(final UserSignOutEvent event) {
+        getContentFromHistoryHash(stateTokenToOpen);
+      }
+    });
+    if (EmbedConfiguration.isReady() || isCurrentHistoryHashValid(getCurrentHistoryHash())) {
       // The event was fired already, so start!
       onAppStarted();
     }
@@ -163,7 +167,8 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
     if (isGroupToken || isWaveToken) {
       // Ok is a token like group.tool.number
-      final String getContentUrl = server + "cors/ContentCORSService/getContent" + suffix + "?"
+      final String getContentUrl = EmbedHelper.getServerWithPath()
+          + "cors/ContentCORSService/getContent" + suffix + "?"
           + new UrlParam(JSONConstants.TOKEN_PARAM, URL.encodeQueryString(stateTokenS));
 
       // FIXME Exception if is not public?
@@ -220,14 +225,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     final String userHash = session.getUserHash();
     Log.info("Started embed presenter with user hash: " + userHash);
 
-    final String confServer = conf.get().getServerUrl();
-    server = confServer != null ? (confServer.endsWith("/") ? confServer + "wse/" : confServer + "/wse/")
-        : GWT.getModuleBaseURL();
-
-    // FIXME
-    server = "http://127.0.0.1:8888/wse/";
-
-    final String initUrl = server + "cors/SiteCORSService/getInitData";
+    final String initUrl = EmbedHelper.getServerWithPath() + "cors/SiteCORSService/getInitData";
 
     EmbedHelper.processRequest(initUrl, new Callback<Response, Void>() {
       @Override
@@ -268,7 +266,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     final boolean isLogged = session.isLogged();
     final boolean isParticipant = stateContent.isParticipant();
     Log.info("Is logged: " + isLogged + " isParticipant: " + isParticipant);
-    final Boolean readOnly = conf.get().getReadOnly();
+    final Boolean readOnly = EmbedConfiguration.get().getReadOnly();
     Log.info("Is readonly: " + readOnly);
     final Boolean isReadOnly = readOnly == null ? false : readOnly;
     if (isLogged && isParticipant && !isReadOnly) {

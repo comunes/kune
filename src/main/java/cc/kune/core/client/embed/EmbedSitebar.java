@@ -41,8 +41,6 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class EmbedSitebar {
-
-  private final EmbedConfiguration configuration;
   private final PopupPanel popup;
   private final Session session;
   private final SitebarSignInLink signInLink;
@@ -51,19 +49,17 @@ public class EmbedSitebar {
 
   @Inject
   public EmbedSitebar(final Session session, final ActionFlowPanel toolbar,
-      final SitebarSignInLink signInLink, final SitebarSignOutLink signOutLink,
-      final EmbedConfiguration configuration) {
+      final SitebarSignInLink signInLink, final SitebarSignOutLink signOutLink) {
     this.session = session;
     this.toolbar = toolbar;
     this.signOutLink = signOutLink;
-    this.configuration = configuration;
     this.signInLink = signInLink;
     signInLink.detachFromParent();
     signOutLink.detachFromParent();
-    if (configuration.get().getShowSignIn()) {
+    if (EmbedConfiguration.get().getShowSignIn()) {
       toolbar.add(signInLink);
     }
-    if (configuration.get().getShowSignOut()) {
+    if (EmbedConfiguration.get().getShowSignOut()) {
       toolbar.add(signOutLink);
     }
     popup = new PopupPanel(false, false);
@@ -106,7 +102,7 @@ public class EmbedSitebar {
   }
 
   private void setPopupPosition() {
-    final Integer position = configuration.get().getSitebarPosition();
+    final Integer position = EmbedConfiguration.get().getSitebarPosition();
     popup.setPopupPosition(Window.getClientWidth() - toolbar.getOffsetWidth() - position, 0);
   }
 }

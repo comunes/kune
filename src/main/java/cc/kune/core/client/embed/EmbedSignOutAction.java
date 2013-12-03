@@ -23,41 +23,25 @@
 
 package cc.kune.core.client.embed;
 
-import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.ui.KuneWindowUtils;
-import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.sitebar.AbstractSignInAction;
-import cc.kune.core.client.state.SiteTokens;
-import cc.kune.core.client.state.TokenUtils;
+import cc.kune.core.client.sitebar.AbstractSignOutAction;
+import cc.kune.core.client.state.SessionInstance;
 import cc.kune.gspace.client.viewers.EmbedHelper;
 
-import com.google.inject.Inject;
+import com.google.gwt.core.client.Callback;
+import com.google.gwt.http.client.Response;
 
 /**
- * The Class EmbedSignInAction.
+ * The Class EmbedSignOutAction.
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class EmbedSignInAction extends AbstractSignInAction {
+public class EmbedSignOutAction extends AbstractSignOutAction {
 
   /**
-   * Instantiates a new sitebar sign in action.
-   * 
-   * @param stateManager
-   *          the state manager
-   * @param i18n
-   *          the i18n
-   * @param session
-   *          the session
+   * Instantiates a new sitebar sign out action.
    */
-  @Inject
-  public EmbedSignInAction() {
-    super();
-    final String signInText = EmbedConfiguration.get().getSignInText();
-    putValue(Action.NAME, I18n.t(signInText == null ? signInText : "Participate"));
-    putValue(Action.TOOLTIP,
-        I18n.t("Please sign in [%s] to participate in this document", I18n.getSiteCommonName()));
+  public EmbedSignOutAction() {
   }
 
   /*
@@ -69,8 +53,19 @@ public class EmbedSignInAction extends AbstractSignInAction {
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
-    KuneWindowUtils.open(EmbedHelper.getServer() + "#!"
-        + TokenUtils.addRedirect(SiteTokens.SIGN_IN, (String) event.getTarget()));
+    SessionInstance.get().signOut();
+    final String signOutUrl = EmbedHelper.getServerWithPath() + "cors/SiteCORSService/logout";
+    EmbedHelper.processRequest(signOutUrl, new Callback<Response, Void>() {
+
+      @Override
+      public void onFailure(final Void reason) {
+      }
+
+      @Override
+      public void onSuccess(final Response response) {
+
+      }
+    });
   }
 
 }
