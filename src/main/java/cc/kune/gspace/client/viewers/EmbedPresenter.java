@@ -147,12 +147,6 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
         onAppStarted();
       }
     });
-    session.onUserSignOut(false, new UserSignOutHandler() {
-      @Override
-      public void onUserSignOut(final UserSignOutEvent event) {
-        getContentFromHistoryHash(stateTokenToOpen);
-      }
-    });
     if (EmbedConfiguration.isReady() || isCurrentHistoryHashValid(getCurrentHistoryHash())) {
       // The event was fired already, so start!
       onAppStarted();
@@ -255,6 +249,16 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
         } else {
           // We embed the document via JSNI, so, we wait for the open event
         }
+        // We configure sign-out
+        session.onUserSignOut(false, new UserSignOutHandler() {
+          @Override
+          public void onUserSignOut(final UserSignOutEvent event) {
+            Log.info("On user sign out");
+            if (stateTokenToOpen != null) {
+              getContentFromHistoryHash(stateTokenToOpen);
+            }
+          }
+        });
       }
     });
   }

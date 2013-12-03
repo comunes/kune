@@ -25,7 +25,9 @@ package cc.kune.core.client.embed;
 
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.ui.KuneWindowUtils;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.state.SiteTokens;
@@ -69,8 +71,11 @@ public class EmbedSignInAction extends AbstractSignInAction {
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
-    KuneWindowUtils.open(EmbedHelper.getServer() + "#!"
-        + TokenUtils.addRedirect(SiteTokens.SIGN_IN, (String) event.getTarget()));
+    // If we want to go to the document it self: (String) event.getTarget()
+    final String redirect = EmbedHelper.getServer() + "#!"
+        + TokenUtils.addRedirect(SiteTokens.SIGN_IN, WindowUtils.getLocation().getHref());
+    Log.info("Redirecting to: " + redirect);
+    KuneWindowUtils.open(redirect);
   }
 
 }
