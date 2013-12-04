@@ -20,6 +20,8 @@
 
 package cc.kune.core.client.state;
 
+import cc.kune.common.client.log.Log;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Element;
@@ -48,23 +50,27 @@ public class LinkInterceptor implements NativePreviewHandler {
     final Event event = Event.as(nativeEventPreview.getNativeEvent());
     final String base = GWT.getHostPageBaseURL();
     if (nativeEventPreview.getTypeInt() == Event.ONCLICK) {
-      final Element target = DOM.eventGetTarget(event);
-      if (A.equalsIgnoreCase(target.getTagName())) {
-        final String href = DOM.getElementAttribute(target, HREF);
-        if (LinkInterceptorHelper.isLocal(href, base)) {
-          // Is a local link so we try to use the history without load a new
-          // page
-          final String hash = LinkInterceptorHelper.getHash(href);
-          if (hash.equals(href)) {
-            // Is not a different hash, so continue
+      try {
+        final Element target = DOM.eventGetTarget(event);
+        if (A.equalsIgnoreCase(target.getTagName())) {
+          final String href = DOM.getElementAttribute(target, HREF);
+          if (LinkInterceptorHelper.isLocal(href, base)) {
+            // Is a local link so we try to use the history without load a new
+            // page
+            final String hash = LinkInterceptorHelper.getHash(href);
+            if (hash.equals(href)) {
+              // Is not a different hash, so continue
+            } else {
+              // Is a local link so we use the history
+              history.newItem(hash);
+              nativeEventPreview.cancel();
+            }
           } else {
-            // Is a local link so we use the history
-            history.newItem(hash);
-            nativeEventPreview.cancel();
+            // External URL so just follow (normally with target="_blank")
           }
-        } else {
-          // External URL so just follow (normally with target="_blank")
         }
+      } catch (final Exception e) {
+        Log.info("Error trying to intercept link clink event");
       }
     }
   }
