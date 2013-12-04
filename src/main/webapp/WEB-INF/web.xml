@@ -121,7 +121,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <!-- </servlet-mapping> -->
   <servlet>
     <servlet-name>Proxy</servlet-name>
-    <servlet-class>de.spieleck.servlets.ProxyServlet</servlet-class>
+    <servlet-class>cc.kune.chat.server.ProxyServlet</servlet-class>
     <init-param>
       <param-name>remotePath</param-name>
       <param-value>/http-bind/</param-value>

@@ -1,3 +1,9 @@
+kune (0.3.0+b34) unstable; urgency=low
+
+  * Proxy servlet moved from hablar (should fix #566)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 04 Dec 2013 22:50:37 +0100
+
 kune (0.3.0+b33) unstable; urgency=low
 
   * Added support for Cross-Origin Resource Sharing (CORS)
