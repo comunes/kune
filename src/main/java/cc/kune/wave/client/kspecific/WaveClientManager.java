@@ -23,10 +23,10 @@
 package cc.kune.wave.client.kspecific;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
+import cc.kune.core.client.events.WaveSessionAvailableEvent;
+import cc.kune.core.client.events.WaveSessionAvailableEvent.WaveSessionAvailableHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.wave.client.KuneWaveProfileManager;
@@ -74,10 +74,9 @@ public class WaveClientManager {
   @Inject
   public WaveClientManager(final Session session, final EventBus eventBus, final HasWaveContainer panel,
       final KuneWaveProfileManager profiles, final WaveClientProvider webclientView) {
-    session.onUserSignIn(true, new UserSignInHandler() {
-
+    eventBus.addHandler(WaveSessionAvailableEvent.getType(), new WaveSessionAvailableHandler() {
       @Override
-      public void onUserSignIn(final UserSignInEvent event) {
+      public void onWaveSessionAvailable(final WaveSessionAvailableEvent event) {
         final UserInfoDTO result = event.getUserInfo();
         setSessionJSON(JsonUtils.safeEval(result.getSessionJSON()));
         setClientFlags(JsonUtils.safeEval(result.getClientFlags()));

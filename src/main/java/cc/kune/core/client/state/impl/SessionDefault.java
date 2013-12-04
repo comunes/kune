@@ -34,6 +34,7 @@ import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
+import cc.kune.core.client.events.WaveSessionAvailableEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -54,7 +55,6 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SessionDefault.
  * 
@@ -647,6 +647,9 @@ public class SessionDefault implements Session {
   public void setCurrentUserInfo(final UserInfoDTO currentUserInfo, final String password) {
     this.currentUserInfo = currentUserInfo;
     if (currentUserInfo != null) {
+      // First of all, prepare wave panel
+      eventBus.fireEvent(new WaveSessionAvailableEvent(currentUserInfo));
+      // Later the rest
       eventBus.fireEvent(new UserSignInEvent(this.currentUserInfo, password));
     } else {
       eventBus.fireEvent(new UserSignOutEvent());
