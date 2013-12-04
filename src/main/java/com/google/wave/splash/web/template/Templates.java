@@ -54,34 +54,34 @@ public class Templates {
   // Template file names go here.
   /** The Constant BLIP_TEMPLATE. */
   public static final String BLIP_TEMPLATE = "blip.html.fragment";
-  
+
   /** The Constant CLIENT_TEMPLATE. */
   public static final String CLIENT_TEMPLATE = "full_client.html";
-  
+
   /** The Constant FEED_TEMPLATE. */
   public static final String FEED_TEMPLATE = "feed.html.fragment";
-  
+
   /** The Constant HEADER_TEMPLATE. */
   public static final String HEADER_TEMPLATE = "header.html.fragment";
-  
+
   /** The Constant LOG. */
   private static final Logger LOG = Logger.getLogger(Templates.class.getName());
-  
+
   /** The Constant MOBILE_TEMPLATE. */
   public static final String MOBILE_TEMPLATE = "mobile_client.html";
-  
+
   /** The Constant PERMALINK_WAVE_TEMPLATE. */
   public static final String PERMALINK_WAVE_TEMPLATE = "permalink_client.html";
-  
+
   /** The Constant TEMPLATES_LOCATION. */
   private static final String TEMPLATES_LOCATION = "others/splash/";
-  
+
   /** The Constant WAVE_NOT_FOUND_TEMPLATE. */
   public static final String WAVE_NOT_FOUND_TEMPLATE = "wave_not_found.html.fragment";
 
   /** The markup. */
   private final Markup markup;
-  
+
   /** The prefix. */
   private String prefix;
 
@@ -89,6 +89,9 @@ public class Templates {
   private final boolean productionMode = true;
   /**
    * file name of template -> compiled template lazy cache.
+   * 
+   * FIXME: For new versions of guava
+   * http://code.google.com/p/guava-libraries/wiki/MapMakerMigration
    */
   private final ConcurrentMap<String, CompiledTemplate> templates = new MapMaker().makeComputingMap(new Function<String, CompiledTemplate>() {
     @Override
@@ -99,9 +102,11 @@ public class Templates {
 
   /**
    * Instantiates a new templates.
-   *
-   * @param markup the markup
-   * @param resourceBases the resource bases
+   * 
+   * @param markup
+   *          the markup
+   * @param resourceBases
+   *          the resource bases
    */
   @Inject
   public Templates(final Markup markup,
@@ -121,8 +126,9 @@ public class Templates {
 
   /**
    * Load template.
-   *
-   * @param template the template
+   * 
+   * @param template
+   *          the template
    * @return the compiled template
    */
   private CompiledTemplate loadTemplate(final String template) {

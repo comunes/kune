@@ -33,6 +33,7 @@ import javax.servlet.ServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.rack.filters.AbstractInjectedFilter;
 import cc.kune.core.server.rack.utils.RackHelper;
 
@@ -54,7 +55,7 @@ public class GWTServiceFilter extends AbstractInjectedFilter {
 
   @Override
   public void doFilter(final ServletRequest request, final ServletResponse response,
-      final FilterChain chain) throws IOException, ServletException {
+      final FilterChain chain) throws IOException, ServletException, DefaultException {
     LOG.info("--------------------------------------------------------------------------------");
     LOG.debug("SERVICE: " + RackHelper.getURI(request) + " - " + serviceClass.getSimpleName());
     servlet.service(request, response);

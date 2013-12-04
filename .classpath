@@ -43,7 +43,7 @@
 	<classpathentry kind="var" path="M2_REPO/com/thetransactioncompany/cors-filter/1.8/cors-filter-1.8.jar" sourcepath="M2_REPO/com/thetransactioncompany/cors-filter/1.8/cors-filter-1.8-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/crypto/0.3.45/crypto-0.3.45.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/crypto-src/0.3.45/crypto-src-0.3.45.jar"/>
-	<classpathentry kind="var" path="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.5/cssparser-0.9.5.jar" sourcepath="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.5/cssparser-0.9.5-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.11/cssparser-0.9.11.jar" sourcepath="M2_REPO/net/sourceforge/cssparser/cssparser/0.9.11/cssparser-0.9.11-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125.jar"/>
 	<classpathentry kind="var" path="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar" sourcepath="M2_REPO/dom4j/dom4j/1.6.1/dom4j-1.6.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-10/doxia-sink-api-1.0-alpha-10.jar" sourcepath="M2_REPO/org/apache/maven/doxia/doxia-sink-api/1.0-alpha-10/doxia-sink-api-1.0-alpha-10-sources.jar"/>
@@ -67,7 +67,6 @@
 	<classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-persist/3.0/guice-persist-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-persist/3.0/guice-persist-3.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/inject/extensions/guice-servlet/3.0/guice-servlet-3.0.jar" sourcepath="M2_REPO/com/google/inject/extensions/guice-servlet/3.0/guice-servlet-3.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/bradrydzewski/gwt-cal/0.9.3-dndCreation/gwt-cal-0.9.3-dndCreation.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-dev/2.5.1/gwt-dev-2.5.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-dev/2.5.1/gwt-dev-2.5.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/allen-sauer/gwt/dnd/gwt-dnd/3.2.3/gwt-dnd-3.2.3.jar" sourcepath="M2_REPO/com/allen-sauer/gwt/dnd/gwt-dnd/3.2.3/gwt-dnd-3.2.3-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/adamtacy/gwt-fx/r464/gwt-fx-r464.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/allen-sauer/gwt/log/gwt-log/3.2.1/gwt-log-3.2.1.jar" sourcepath="M2_REPO/com/allen-sauer/gwt/log/gwt-log/3.2.1/gwt-log-3.2.1-sources.jar"/>
@@ -105,11 +104,11 @@
 	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-search-orm/4.1.0.Final/hibernate-search-orm-4.1.0.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-search-orm/4.1.0.Final/hibernate-search-orm-4.1.0.Final-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-tools/3.2.4.GA/hibernate-tools-3.2.4.GA.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/hibernate/hibernate-validator/4.2.0.Final/hibernate-validator-4.2.0.Final.jar" sourcepath="M2_REPO/org/hibernate/hibernate-validator/4.2.0.Final/hibernate-validator-4.2.0.Final-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/net/sourceforge/htmlunit/htmlunit/2.9/htmlunit-2.9.jar" sourcepath="M2_REPO/net/sourceforge/htmlunit/htmlunit/2.9/htmlunit-2.9-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/net/sourceforge/htmlunit/htmlunit-core-js/2.9/htmlunit-core-js-2.9.jar" sourcepath="M2_REPO/net/sourceforge/htmlunit/htmlunit-core-js/2.9/htmlunit-core-js-2.9-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient/4.1.2/httpclient-4.1.2.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpclient/4.1.2/httpclient-4.1.2-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpcore/4.1.2/httpcore-4.1.2.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpcore/4.1.2/httpcore-4.1.2-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpmime/4.1.2/httpmime-4.1.2.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpmime/4.1.2/httpmime-4.1.2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sourceforge/htmlunit/htmlunit/2.13/htmlunit-2.13.jar" sourcepath="M2_REPO/net/sourceforge/htmlunit/htmlunit/2.13/htmlunit-2.13-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sourceforge/htmlunit/htmlunit-core-js/2.13/htmlunit-core-js-2.13.jar" sourcepath="M2_REPO/net/sourceforge/htmlunit/htmlunit-core-js/2.13/htmlunit-core-js-2.13-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpclient/4.3.1/httpclient-4.3.1.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpclient/4.3.1/httpclient-4.3.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpcore/4.3/httpcore-4.3.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpcore/4.3/httpcore-4.3-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/apache/httpcomponents/httpmime/4.3.1/httpmime-4.3.1.jar" sourcepath="M2_REPO/org/apache/httpcomponents/httpmime/4.3.1/httpmime-4.3.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/mnode/ical4j/ical4j/1.0.2/ical4j-1.0.2.jar" sourcepath="M2_REPO/org/mnode/ical4j/ical4j/1.0.2/ical4j-1.0.2-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-core-asl/1.7.3/jackson-core-asl-1.7.3.jar" sourcepath="M2_REPO/org/codehaus/jackson/jackson-core-asl/1.7.3/jackson-core-asl-1.7.3-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/codehaus/jackson/jackson-mapper-asl/1.7.3/jackson-mapper-asl-1.7.3.jar" sourcepath="M2_REPO/org/codehaus/jackson/jackson-mapper-asl/1.7.3/jackson-mapper-asl-1.7.3-sources.jar"/>
@@ -123,6 +122,10 @@
 	<classpathentry kind="var" path="M2_REPO/jdom/jdom/1.0/jdom-1.0.jar" sourcepath="M2_REPO/jdom/jdom/1.0/jdom-1.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jdom/jdom/1.1/jdom-1.1.jar" sourcepath="M2_REPO/org/jdom/jdom/1.1/jdom-1.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/codehaus/jettison/jettison/1.0-RC2/jettison-1.0-RC2.jar" sourcepath="M2_REPO/org/codehaus/jettison/jettison/1.0-RC2/jettison-1.0-RC2-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-http/8.1.12.v20130726/jetty-http-8.1.12.v20130726.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-http/8.1.12.v20130726/jetty-http-8.1.12.v20130726-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-io/8.1.12.v20130726/jetty-io-8.1.12.v20130726.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-io/8.1.12.v20130726/jetty-io-8.1.12.v20130726-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-util/8.1.12.v20130726/jetty-util-8.1.12.v20130726.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-util/8.1.12.v20130726/jetty-util-8.1.12.v20130726-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-websocket/8.1.12.v20130726/jetty-websocket-8.1.12.v20130726.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-websocket/8.1.12.v20130726/jetty-websocket-8.1.12.v20130726-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/jmagick/jmagick/6.2.6-0/jmagick-6.2.6-0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/java/dev/jna/jna/3.3.0/jna-3.3.0.jar" sourcepath="M2_REPO/net/java/dev/jna/jna/3.3.0/jna-3.3.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jruby/jruby-complete/1.2.0/jruby-complete-1.2.0.jar"/>
@@ -194,7 +197,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/model-src/0.3.45/model-src-0.3.45.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/mvel/mvel2/2.0.16/mvel2-2.0.16.jar" sourcepath="M2_REPO/org/mvel/mvel2/2.0.16/mvel2-2.0.16-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/mysql/mysql-connector-java/5.1.13/mysql-connector-java-5.1.13.jar"/>
-	<classpathentry kind="var" path="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.15/nekohtml-1.9.15.jar" sourcepath="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.15/nekohtml-1.9.15-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.19/nekohtml-1.9.19.jar" sourcepath="M2_REPO/net/sourceforge/nekohtml/nekohtml/1.9.19/nekohtml-1.9.19-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0.jar" sourcepath="M2_REPO/org/objenesis/objenesis/1.0/objenesis-1.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/thoughtworks/paranamer/paranamer/2.3/paranamer-2.3.jar" sourcepath="M2_REPO/com/thoughtworks/paranamer/paranamer/2.3/paranamer-2.3-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar" sourcepath="M2_REPO/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4-sources.jar"/>
@@ -250,8 +253,8 @@
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/wave-api-0.4-incubating-src/0.3.45/wave-api-0.4-incubating-src-0.3.45.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/wave-in-a-box-server-0.4-incubating/0.3.45/wave-in-a-box-server-0.4-incubating-0.3.45.jar"/>
 	<classpathentry kind="var" path="M2_REPO/xalan/xalan/2.7.1/xalan-2.7.1.jar" sourcepath="M2_REPO/xalan/xalan/2.7.1/xalan-2.7.1-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/xerces/xercesImpl/2.9.1/xercesImpl-2.9.1.jar"/>
-	<classpathentry kind="var" path="M2_REPO/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04.jar" sourcepath="M2_REPO/xml-apis/xml-apis/1.3.04/xml-apis-1.3.04-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0.jar" sourcepath="M2_REPO/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar" sourcepath="M2_REPO/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/de/zeigermann/xml/xml-im-exporter/1.1/xml-im-exporter-1.1.jar"/>
 	<classpathentry kind="var" path="M2_REPO/xpp3/xpp3_min/1.1.3.4.O/xpp3_min-1.1.3.4.O.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/thoughtworks/xstream/xstream/1.2.2/xstream-1.2.2.jar" sourcepath="M2_REPO/com/thoughtworks/xstream/xstream/1.2.2/xstream-1.2.2-sources.jar"/>

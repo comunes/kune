@@ -22,7 +22,6 @@
   <inherits name="org.adamtacy.GWTEffects"></inherits>
   <source path='client'
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
-  <super-source path="annotation" />
 
   <!-- Logging Configuration -->
   <set-property name="gwt.logging.enabled" value="TRUE" />

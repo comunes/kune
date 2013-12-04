@@ -42,7 +42,7 @@ import com.google.inject.name.Named;
 // TODO: Auto-generated Javadoc
 /**
  * The servlet for fetching available gadgets from a json file on the server.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @SuppressWarnings("serial")
@@ -51,17 +51,20 @@ public class CustomGadgetProviderServlet extends HttpServlet {
 
   /** The Constant LOG. */
   private static final Logger LOG = Logger.getLogger(FileAccountStore.class.getName());
-  
+
   /** The json cache. */
   private final ConcurrentMap<String, String> jsonCache;
 
   /**
    * Instantiates a new custom gadget provider servlet.
-   *
-   * @param resourceBases the resource bases
+   * 
+   * @param resourceBases
+   *          the resource bases
    */
   @Inject
   public CustomGadgetProviderServlet(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
+    // FIXME: For new versions of guava
+    // http://code.google.com/p/guava-libraries/wiki/MapMakerMigration
     jsonCache = new MapMaker().expireAfterWrite(5, TimeUnit.MINUTES).makeComputingMap(
         new Function<String, String>() {
           @Override
@@ -78,18 +81,22 @@ public class CustomGadgetProviderServlet extends HttpServlet {
         });
   }
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
+   * javax.servlet.http.HttpServletResponse)
    */
   @Override
-  protected void doGet(HttpServletRequest request, HttpServletResponse response)
+  protected void doGet(final HttpServletRequest request, final HttpServletResponse response)
       throws IOException {
     final String jsonString = jsonCache.get("");
     if (jsonString.equals("")) {
       response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
           "Error loading json data from file");
     } else {
-      PrintWriter out = response.getWriter();
+      final PrintWriter out = response.getWriter();
       out.print(jsonCache.get(""));
       out.flush();
     }

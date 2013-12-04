@@ -214,7 +214,8 @@ public class UserRPC implements RPC, UserService {
    */
   @Override
   @KuneTransactional
-  public void checkUserAndHash(final String username, final String passwdOrToken) {
+  public void checkUserAndHash(final String username, final String passwdOrToken)
+      throws SessionExpiredException {
     final User user = userManager.login(username, passwdOrToken);
     if (user != null) {
       return;

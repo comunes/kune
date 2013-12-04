@@ -30,6 +30,8 @@ import javax.servlet.ServletContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import cc.kune.core.client.errors.DefaultException;
+
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.SerializationException;
@@ -113,7 +115,7 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
   }
 
   @Override
-  public String processCall(final String payload) throws SerializationException {
+  public String processCall(final String payload) throws SerializationException, DefaultException {
     try {
       final RPCRequest rpcRequest = RPC.decodeRequest(payload, service.getClass());
       return RPC.invokeAndEncodeResponse(service, rpcRequest.getMethod(), rpcRequest.getParameters());

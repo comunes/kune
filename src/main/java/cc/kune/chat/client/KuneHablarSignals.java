@@ -46,7 +46,7 @@ import com.google.gwt.user.client.ui.HasText;
 // TODO: Auto-generated Javadoc
 /**
  * Install the signals module into Hablar.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneHablarSignals {
@@ -57,7 +57,7 @@ public class KuneHablarSignals {
   /**
    * Gets the {@link SignalMessages} object containing the internationalised
    * messages.
-   *
+   * 
    * @return the SignalMessages object containing the internationalised messages
    */
   public static SignalMessages i18n() {
@@ -67,8 +67,9 @@ public class KuneHablarSignals {
   /**
    * Sets the {@link SignalMessages} object containing the internationalised
    * messages.
-   *
-   * @param t the messages object
+   * 
+   * @param t
+   *          the messages object
    */
   public static void setMessages(final SignalMessages t) {
     KuneHablarSignals.signalMessages = t;
@@ -77,16 +78,22 @@ public class KuneHablarSignals {
   // FIXME: move to gin
   /**
    * Instantiates a new kune hablar signals.
-   *
-   * @param kuneEventBus the kune event bus
-   * @param session the session
-   * @param hablar the hablar
-   * @param action the action
-   * @param privateStorageManager the private storage manager
-   * @param i18n the i18n
-   * @param downUtils the down utils
+   * 
+   * @param kuneEventBus
+   *          the kune event bus
+   * @param session
+   *          the session
+   * @param hablar
+   *          the hablar
+   * @param action
+   *          the action
+   * @param privateStorageManager
+   *          the private storage manager
+   * @param i18n
+   *          the i18n
+   * @param downUtils
+   *          the down utils
    */
-  @SuppressWarnings("deprecation")
   public KuneHablarSignals(final EventBus kuneEventBus, final XmppSession session, final Hablar hablar,
       final ChatClientAction action, final PrivateStorageManager privateStorageManager,
       final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {

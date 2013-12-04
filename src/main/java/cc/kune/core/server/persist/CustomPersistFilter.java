@@ -24,6 +24,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
+import cc.kune.core.client.errors.DefaultException;
+
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.persist.PersistService;
@@ -82,9 +84,11 @@ public class CustomPersistFilter implements Filter {
 
   /**
    * Instantiates a new custom persist filter.
-   *
-   * @param unitOfWork the unit of work
-   * @param persistService the persist service
+   * 
+   * @param unitOfWork
+   *          the unit of work
+   * @param persistService
+   *          the persist service
    */
   @Inject
   public CustomPersistFilter(final UnitOfWork unitOfWork, final PersistService persistService) {
@@ -92,7 +96,9 @@ public class CustomPersistFilter implements Filter {
     // this.persistService = persistService;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see javax.servlet.Filter#destroy()
    */
   @Override
@@ -101,13 +107,16 @@ public class CustomPersistFilter implements Filter {
     // persistService.stop();
   }
 
-  /* (non-Javadoc)
-   * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest, javax.servlet.ServletResponse, javax.servlet.FilterChain)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.servlet.Filter#doFilter(javax.servlet.ServletRequest,
+   * javax.servlet.ServletResponse, javax.servlet.FilterChain)
    */
   @Override
   @KuneTransactional
   public void doFilter(final ServletRequest servletRequest, final ServletResponse servletResponse,
-      final FilterChain filterChain) throws IOException, ServletException {
+      final FilterChain filterChain) throws IOException, ServletException, DefaultException {
     // Commented in kune (using @KuneTransactional)
     // unitOfWork.begin();
     // try {
@@ -117,7 +126,9 @@ public class CustomPersistFilter implements Filter {
     // }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see javax.servlet.Filter#init(javax.servlet.FilterConfig)
    */
   @Override
