@@ -122,10 +122,6 @@
 	<classpathentry kind="var" path="M2_REPO/jdom/jdom/1.0/jdom-1.0.jar" sourcepath="M2_REPO/jdom/jdom/1.0/jdom-1.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jdom/jdom/1.1/jdom-1.1.jar" sourcepath="M2_REPO/org/jdom/jdom/1.1/jdom-1.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/codehaus/jettison/jettison/1.0-RC2/jettison-1.0-RC2.jar" sourcepath="M2_REPO/org/codehaus/jettison/jettison/1.0-RC2/jettison-1.0-RC2-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-http/8.1.12.v20130726/jetty-http-8.1.12.v20130726.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-http/8.1.12.v20130726/jetty-http-8.1.12.v20130726-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-io/8.1.12.v20130726/jetty-io-8.1.12.v20130726.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-io/8.1.12.v20130726/jetty-io-8.1.12.v20130726-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-util/8.1.12.v20130726/jetty-util-8.1.12.v20130726.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-util/8.1.12.v20130726/jetty-util-8.1.12.v20130726-sources.jar"/>
-	<classpathentry kind="var" path="M2_REPO/org/eclipse/jetty/jetty-websocket/8.1.12.v20130726/jetty-websocket-8.1.12.v20130726.jar" sourcepath="M2_REPO/org/eclipse/jetty/jetty-websocket/8.1.12.v20130726/jetty-websocket-8.1.12.v20130726-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/jmagick/jmagick/6.2.6-0/jmagick-6.2.6-0.jar"/>
 	<classpathentry kind="var" path="M2_REPO/net/java/dev/jna/jna/3.3.0/jna-3.3.0.jar" sourcepath="M2_REPO/net/java/dev/jna/jna/3.3.0/jna-3.3.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/jruby/jruby-complete/1.2.0/jruby-complete-1.2.0.jar"/>
