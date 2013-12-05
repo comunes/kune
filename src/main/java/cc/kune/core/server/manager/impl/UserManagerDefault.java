@@ -618,17 +618,17 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     return buddiesData;
   }
 
+  @Override
+  public Set<WaveEntity> getWaves(final User user) {
+    return user.getWaves();
+  }
+
   /*
    * (non-Javadoc)
    * 
    * @see cc.kune.core.server.manager.UserManager#login(java.lang.String,
    * java.lang.String)
    */
-  @Override
-  public Set<WaveEntity> getWaves(final User user) {
-    return user.getWaves();
-  }
-
   @Override
   public User login(final String nickOrEmail, final String passwd) {
     User user;

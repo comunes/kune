@@ -245,9 +245,6 @@ public class User implements HasId {
   // null);
   // }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
   public void addWave(final WaveEntity wave) {
     // FIXME: something related with lazy initialization (workaround using
     // size())
