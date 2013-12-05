@@ -26,6 +26,8 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -71,8 +73,17 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
 
   @Override
   protected void doUnexpectedFailure(final Throwable except) {
-    except.printStackTrace();
+    final Throwable cause = except.getCause();
+    LOG.info("Exception " + except.getMessage() + cause != null ? " cause: " + cause : "");
     super.doUnexpectedFailure(except);
+  }
+
+  @Override
+  public void executePojoRequest(final GwtRpcCommLayerPojoRequest pojoRequest,
+      final HttpServletRequest req, final HttpServletResponse resp) throws Throwable {
+    final Method method = getMethod(pojoRequest);
+    LOG.info("Method: " + method.getName());
+    super.executePojoRequest(pojoRequest, req, resp);
   }
 
   @SuppressWarnings({ "unused", "rawtypes" })
@@ -104,14 +115,14 @@ public class DelegatedRemoteServlet extends GwtRpcCommLayerServlet {
 
   @Override
   public void log(final String message) {
-    super.log(message);
+    // super.log(message);
     LOG.info(message);
   }
 
   @Override
   public void log(final String message, final Throwable t) {
-    LOG.info(message, t);
-    super.log(message, t);
+    LOG.info(message);
+    // super.log(message, t);
   }
 
   @Override

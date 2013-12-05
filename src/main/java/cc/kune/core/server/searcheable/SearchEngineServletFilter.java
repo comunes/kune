@@ -264,7 +264,7 @@ public class SearchEngineServletFilter implements Filter, OnbeforeunloadHandler,
           LOG.error(e);
         } catch (final ExecutionException e) {
           LOG.error(e);
-          e.printStackTrace();
+          // e.printStackTrace();
         }
       } else {
         try {
