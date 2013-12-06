@@ -22,8 +22,6 @@
  */
 package cc.kune.domain;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.TimeZone;
 
 import javax.persistence.Basic;
@@ -32,11 +30,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -64,7 +60,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class User.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -84,8 +80,9 @@ public class User implements HasId {
 
   /**
    * Checks if is known user.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    * @return true, if is known user
    */
   public static boolean isKnownUser(final User user) {
@@ -98,7 +95,7 @@ public class User implements HasId {
   private I18nCountry country;
 
   /** The created on. */
-  @org.hibernate.annotations.Index(name="createdOn")
+  @org.hibernate.annotations.Index(name = "createdOn")
   @Basic(optional = false)
   private final Long createdOn;
 
@@ -186,30 +183,29 @@ public class User implements HasId {
   /**
    * Instantiates a new user.
    */
-  // @IndexedEmbedded
-  // @LazyCollection(LazyCollectionOption.FALSE)
-  // @Fetch(FetchMode.JOIN)
-  // @ContainedIn
-  // @OrderBy("lastModifiedTime DESC")
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-  // @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-  private Set<WaveEntity> waves;
-
   public User() {
     this(null, null, null, null, null, null, null, null);
   }
 
   /**
    * Instantiates a new user.
-   *
-   * @param shortName the short name
-   * @param longName the long name
-   * @param email the email
-   * @param diggets the diggets
-   * @param salt the salt
-   * @param language the language
-   * @param country the country
-   * @param timezone the timezone
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
+   * @param email
+   *          the email
+   * @param diggets
+   *          the diggets
+   * @param salt
+   *          the salt
+   * @param language
+   *          the language
+   * @param country
+   *          the country
+   * @param timezone
+   *          the timezone
    */
   public User(final String shortName, final String longName, final String email, final byte[] diggets,
       final byte[] salt, final I18nLanguage language, final I18nCountry country, final TimeZone timezone) {
@@ -229,7 +225,6 @@ public class User implements HasId {
     emailNotifFreq = DEF_EMAIL_FREQ;
     // this.properties = properties;
     emailVerified = false;
-    this.waves = new HashSet<WaveEntity>();
   }
 
   // @OneToOne
@@ -244,13 +239,6 @@ public class User implements HasId {
   // this(shortName, longName, email, passwd, language, country, timezone,
   // null);
   // }
-
-  public void addWave(final WaveEntity wave) {
-    // FIXME: something related with lazy initialization (workaround using
-    // size())
-    waves.size();
-    waves.add(wave);
-  }
 
   @Override
   public boolean equals(final Object obj) {
@@ -276,7 +264,7 @@ public class User implements HasId {
 
   /**
    * Gets the country.
-   *
+   * 
    * @return the country
    */
   public I18nCountry getCountry() {
@@ -285,7 +273,7 @@ public class User implements HasId {
 
   /**
    * Gets the created on.
-   *
+   * 
    * @return the created on
    */
   public Long getCreatedOn() {
@@ -294,7 +282,7 @@ public class User implements HasId {
 
   /**
    * Gets the diggest.
-   *
+   * 
    * @return the diggest
    */
   public byte[] getDiggest() {
@@ -303,7 +291,7 @@ public class User implements HasId {
 
   /**
    * Gets the email.
-   *
+   * 
    * @return the email
    */
   public String getEmail() {
@@ -312,7 +300,7 @@ public class User implements HasId {
 
   /**
    * Gets the email check date.
-   *
+   * 
    * @return the email check date
    */
   public Long getEmailCheckDate() {
@@ -321,7 +309,7 @@ public class User implements HasId {
 
   /**
    * Gets the email confirm hash.
-   *
+   * 
    * @return the email confirm hash
    */
   public String getEmailConfirmHash() {
@@ -330,7 +318,7 @@ public class User implements HasId {
 
   /**
    * Gets the email notif freq.
-   *
+   * 
    * @return the email notif freq
    */
   public EmailNotificationFrequency getEmailNotifFreq() {
@@ -339,7 +327,7 @@ public class User implements HasId {
 
   /**
    * Gets the email verified.
-   *
+   * 
    * @return the email verified
    */
   public boolean getEmailVerified() {
@@ -348,14 +336,16 @@ public class User implements HasId {
 
   /**
    * Gets the checks for logo.
-   *
+   * 
    * @return the checks for logo
    */
   public boolean getHasLogo() {
     return hasLogo();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -365,7 +355,7 @@ public class User implements HasId {
 
   /**
    * Gets the language.
-   *
+   * 
    * @return the language
    */
   public I18nLanguage getLanguage() {
@@ -374,7 +364,7 @@ public class User implements HasId {
 
   /**
    * Gets the last login.
-   *
+   * 
    * @return the last login
    */
   public Long getLastLogin() {
@@ -383,7 +373,7 @@ public class User implements HasId {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -392,7 +382,7 @@ public class User implements HasId {
 
   /**
    * Gets the salt.
-   *
+   * 
    * @return the salt
    */
   public byte[] getSalt() {
@@ -401,7 +391,7 @@ public class User implements HasId {
 
   /**
    * Gets the short name.
-   *
+   * 
    * @return the short name
    */
   public String getShortName() {
@@ -410,7 +400,7 @@ public class User implements HasId {
 
   /**
    * Gets the s net visibility.
-   *
+   * 
    * @return the s net visibility
    */
   public UserSNetVisibility getSNetVisibility() {
@@ -419,7 +409,7 @@ public class User implements HasId {
 
   /**
    * Gets the state token.
-   *
+   * 
    * @return the state token
    */
   @Transient
@@ -429,7 +419,7 @@ public class User implements HasId {
 
   /**
    * Gets the timezone.
-   *
+   * 
    * @return the timezone
    */
   public TimeZone getTimezone() {
@@ -438,18 +428,16 @@ public class User implements HasId {
 
   /**
    * Gets the user group.
-   *
+   * 
    * @return the user group
    */
   public Group getUserGroup() {
     return userGroup;
   }
 
-  public Set<WaveEntity> getWaves() {
-    return waves;
-  }
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -462,7 +450,7 @@ public class User implements HasId {
 
   /**
    * Checks for logo.
-   *
+   * 
    * @return true, if successful
    */
   @Transient
@@ -472,22 +460,18 @@ public class User implements HasId {
 
   /**
    * Checks if is email verified.
-   *
+   * 
    * @return true, if is email verified
    */
   public boolean isEmailVerified() {
     return emailVerified == null ? false : emailVerified;
   }
 
-  public void removeWave(final WaveEntity wave) {
-    waves.size();
-    waves.remove(wave);
-  }
-
   /**
    * Sets the country.
-   *
-   * @param country the new country
+   * 
+   * @param country
+   *          the new country
    */
   public void setCountry(final I18nCountry country) {
     this.country = country;
@@ -495,8 +479,9 @@ public class User implements HasId {
 
   /**
    * Sets the diggest.
-   *
-   * @param diggest the new diggest
+   * 
+   * @param diggest
+   *          the new diggest
    */
   public void setDiggest(final byte[] diggest) {
     this.diggest = diggest;
@@ -504,8 +489,9 @@ public class User implements HasId {
 
   /**
    * Sets the email.
-   *
-   * @param email the new email
+   * 
+   * @param email
+   *          the new email
    */
   public void setEmail(final String email) {
     this.email = email;
@@ -513,8 +499,9 @@ public class User implements HasId {
 
   /**
    * Sets the email check date.
-   *
-   * @param emailCheckDate the new email check date
+   * 
+   * @param emailCheckDate
+   *          the new email check date
    */
   public void setEmailCheckDate(final Long emailCheckDate) {
     this.emailCheckDate = emailCheckDate;
@@ -522,8 +509,9 @@ public class User implements HasId {
 
   /**
    * Sets the email confirm hash.
-   *
-   * @param emailConfirmHash the new email confirm hash
+   * 
+   * @param emailConfirmHash
+   *          the new email confirm hash
    */
   public void setEmailConfirmHash(final String emailConfirmHash) {
     this.emailConfirmHash = emailConfirmHash;
@@ -531,8 +519,9 @@ public class User implements HasId {
 
   /**
    * Sets the email notif freq.
-   *
-   * @param emailNotifFreq the new email notif freq
+   * 
+   * @param emailNotifFreq
+   *          the new email notif freq
    */
   public void setEmailNotifFreq(final EmailNotificationFrequency emailNotifFreq) {
     this.emailNotifFreq = emailNotifFreq;
@@ -540,14 +529,17 @@ public class User implements HasId {
 
   /**
    * Sets the email verified.
-   *
-   * @param emailVerified the new email verified
+   * 
+   * @param emailVerified
+   *          the new email verified
    */
   public void setEmailVerified(final boolean emailVerified) {
     this.emailVerified = emailVerified;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -557,8 +549,9 @@ public class User implements HasId {
 
   /**
    * Sets the language.
-   *
-   * @param language the new language
+   * 
+   * @param language
+   *          the new language
    */
   public void setLanguage(final I18nLanguage language) {
     this.language = language;
@@ -566,8 +559,9 @@ public class User implements HasId {
 
   /**
    * Sets the last login.
-   *
-   * @param lastLogin the new last login
+   * 
+   * @param lastLogin
+   *          the new last login
    */
   public void setLastLogin(final Long lastLogin) {
     this.lastLogin = lastLogin;
@@ -575,8 +569,9 @@ public class User implements HasId {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public void setName(final String name) {
     this.name = name;
@@ -584,8 +579,9 @@ public class User implements HasId {
 
   /**
    * Sets the salt.
-   *
-   * @param salt the new salt
+   * 
+   * @param salt
+   *          the new salt
    */
   public void setSalt(final byte[] salt) {
     this.salt = salt;
@@ -593,8 +589,9 @@ public class User implements HasId {
 
   /**
    * Sets the short name.
-   *
-   * @param shortName the new short name
+   * 
+   * @param shortName
+   *          the new short name
    */
   public void setShortName(final String shortName) {
     this.shortName = shortName;
@@ -602,8 +599,9 @@ public class User implements HasId {
 
   /**
    * Sets the s net visibility.
-   *
-   * @param sNetVisibility the new s net visibility
+   * 
+   * @param sNetVisibility
+   *          the new s net visibility
    */
   public void setSNetVisibility(final UserSNetVisibility sNetVisibility) {
     this.sNetVisibility = sNetVisibility;
@@ -611,8 +609,9 @@ public class User implements HasId {
 
   /**
    * Sets the timezone.
-   *
-   * @param timezone the new timezone
+   * 
+   * @param timezone
+   *          the new timezone
    */
   public void setTimezone(final TimeZone timezone) {
     this.timezone = timezone;
@@ -620,18 +619,17 @@ public class User implements HasId {
 
   /**
    * Sets the user group.
-   *
-   * @param userGroup the new user group
+   * 
+   * @param userGroup
+   *          the new user group
    */
   public void setUserGroup(final Group userGroup) {
     this.userGroup = userGroup;
   }
 
-  public void setWaves(final HashSet<WaveEntity> waves) {
-    this.waves = waves;
-  }
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

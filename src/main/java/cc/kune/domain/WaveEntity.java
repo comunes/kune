@@ -21,34 +21,62 @@
 package cc.kune.domain;
 
 import java.io.Serializable;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.FieldBridge;
+import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Store;
+
+import cc.kune.domain.utils.DataFieldBridge;
 
 @Entity
 @IdClass(WaveRefKey.class)
-// @Indexed
-@Table(name = "wave")
-// @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class WaveEntity implements Serializable {
+@Table(name = "waves")
+public class WaveEntity implements Serializable, Comparator<WaveEntity> {
 
   private static final long serialVersionUID = 8890747607044939769L;
 
-  @Id
-  // @AttributeOverrides({ @AttributeOverride(name = "domain", column =
-  // @Column(name = "domain")),
-  // @AttributeOverride(name = "waveId", column = @Column(name = "waveId")),
-  // @AttributeOverride(name = "waveletId", column = @Column(name =
-  // "waveletId")) })
-  private String domain;
+  @Basic
+  private Long creationTime;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "id")
+  private ParticipantEntity creator;
+  @Id
+  private String domain;
   @Basic
   private Long lastModifiedTime;
+
+  @ManyToMany(mappedBy = "waves", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+  private Set<ParticipantEntity> participants;
+
+  // http://www.hibernate.org/112.html
+  /** The body. */
+  @Lob
+  @Column(length = 2147483647)
+  @Field(index = Index.YES, store = Store.NO)
+  @FieldBridge(impl = DataFieldBridge.class)
+  private char[] rendered;
+
   @Id
   private String waveId;
+
   @Id
   private String waveletId;
 
@@ -56,11 +84,33 @@ public class WaveEntity implements Serializable {
   }
 
   public WaveEntity(final String domain, final String waveId, final String waveletId,
-      final Long lastModifiedTime) {
+      final Long lastModifiedTime, final ParticipantEntity creator, final Long creationTime) {
     this.domain = domain;
     this.waveId = waveId;
     this.waveletId = waveletId;
     this.lastModifiedTime = lastModifiedTime;
+    this.creator = creator;
+    this.creationTime = creationTime;
+    this.participants = new HashSet<ParticipantEntity>();
+  }
+
+  public void add(final ParticipantEntity participant) {
+    participants.size();
+    participants.add(participant);
+    participant.add(this);
+  }
+
+  @Override
+  public int compare(final WaveEntity one, final WaveEntity two) {
+    return one.getLastModifiedTime().compareTo(two.getLastModifiedTime());
+  }
+
+  public Long getCreationTime() {
+    return creationTime;
+  }
+
+  public ParticipantEntity getCreator() {
+    return creator;
   }
 
   public String getDomain() {
@@ -71,6 +121,14 @@ public class WaveEntity implements Serializable {
     return lastModifiedTime;
   }
 
+  public Set<ParticipantEntity> getParticipants() {
+    return participants;
+  }
+
+  public char[] getRendered() {
+    return rendered;
+  }
+
   public String getWaveId() {
     return waveId;
   }
@@ -79,12 +137,38 @@ public class WaveEntity implements Serializable {
     return waveletId;
   }
 
+  public void remove(final ParticipantEntity participant) {
+    participants.size();
+    participants.remove(participant);
+    participant.remove(this);
+  }
+
+  public void setCreationTime(final Long creationTime) {
+    this.creationTime = creationTime;
+  }
+
+  public void setCreator(final ParticipantEntity creator) {
+    this.creator = creator;
+  }
+
   public void setDomain(final String domain) {
     this.domain = domain;
   }
 
   public void setLastModifiedTime(final Long lastModifiedTime) {
     this.lastModifiedTime = lastModifiedTime;
+  }
+
+  public void setParticipants(final Set<ParticipantEntity> participants) {
+    this.participants = participants;
+  }
+
+  public void setRendered(final char[] rendered) {
+    this.rendered = rendered;
+  }
+
+  public void setRendered(final String rendered) {
+    this.rendered = rendered.toCharArray();
   }
 
   public void setWaveId(final String waveId) {

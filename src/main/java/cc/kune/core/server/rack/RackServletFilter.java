@@ -42,7 +42,7 @@ import org.waveprotocol.box.server.waveserver.CustomImportServlet;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.error.ServerException;
-import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.manager.ParticipantEntityManager;
 import cc.kune.core.server.manager.WaveEntityManager;
 import cc.kune.core.server.mbean.MBeanRegister;
 import cc.kune.core.server.properties.KuneProperties;
@@ -51,7 +51,6 @@ import cc.kune.core.server.rack.dock.RequestMatcher;
 import cc.kune.core.server.rack.utils.RackHelper;
 import cc.kune.core.server.scheduler.CustomJobFactory;
 import cc.kune.core.server.searcheable.SearchEngineServletFilter;
-import cc.kune.wave.server.kspecific.ParticipantUtils;
 import cc.kune.wave.server.search.CustomPerUserWaveViewHandlerImpl;
 
 import com.google.inject.Binder;
@@ -202,9 +201,8 @@ public class RackServletFilter implements Filter {
 
     // Search init
     final CustomPerUserWaveViewHandlerImpl searcher = kuneChildInjector.getInstance(CustomPerUserWaveViewHandlerImpl.class);
-    searcher.init(kuneChildInjector.getInstance(UserManager.class),
-        kuneChildInjector.getInstance(WaveEntityManager.class),
-        kuneChildInjector.getInstance(ParticipantUtils.class));
+    searcher.init(kuneChildInjector.getInstance(WaveEntityManager.class),
+        kuneChildInjector.getInstance(ParticipantEntityManager.class));
 
     // Uncomment to generate the graph
     // graph("docs/wave-guice-graph.dot", injector);

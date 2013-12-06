@@ -1,7 +1,10 @@
 /*
  *
- * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
- * This file is part of kune.
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
+ * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -21,15 +24,16 @@
 package cc.kune.core.server.manager;
 
 import cc.kune.domain.ParticipantEntity;
-import cc.kune.domain.WaveEntity;
-import cc.kune.domain.WaveRefKey;
 
-public interface WaveEntityManager extends Manager<WaveEntity, WaveRefKey> {
+/**
+ * The Interface SharedWavesManager.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
+public interface ParticipantEntityManager extends Manager<ParticipantEntity, Long> {
 
-  WaveEntity add(String domain, String waveId, String waveletId, Long lastModifiedTime,
-      ParticipantEntity creator, Long creationTime);
+  ParticipantEntity createIfNotExist(String address);
 
-  WaveEntity find(String domain, String waveId, String waveletId);
+  ParticipantEntity find(String address);
 
-  void setLastModifiedTime(WaveEntity wave, long lastModifiedTime);
 }

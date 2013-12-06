@@ -35,6 +35,7 @@
     <class>cc.kune.domain.User</class>
     <class>cc.kune.domain.UserSignInLog</class>
     <class>cc.kune.domain.WaveEntity</class>
+    <class>cc.kune.domain.ParticipantEntity</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->
@@ -118,6 +119,9 @@
       <property name="hibernate.c3p0.idle_test_period" value="300"/>
       <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
       <property name="hibernate.c3p0.preferredTestQuery" value="SELECT 1"/>
+      <!-- http://stackoverflow.com/questions/3511422/java-c3p0-how-can-i-configure-autoreconnect-true -->
+      <property name="hibernate.c3p0.testConnectionOnCheckout"
+        value="true"/>
       <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
         value="true"/>
       <property name="hibernate.c3p0.unreturnedConnectionTimeout"
@@ -161,6 +165,7 @@
     <class>cc.kune.domain.User</class>
     <class>cc.kune.domain.UserSignInLog</class>
     <class>cc.kune.domain.WaveEntity</class>
+    <class>cc.kune.domain.ParticipantEntity</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->
@@ -193,6 +198,9 @@
       <property name="hibernate.c3p0.idle_test_period" value="300"/>
       <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
       <property name="hibernate.c3p0.preferredTestQuery" value="SELECT 1"/>
+      <!-- http://stackoverflow.com/questions/3511422/java-c3p0-how-can-i-configure-autoreconnect-true -->
+      <property name="hibernate.c3p0.testConnectionOnCheckout"
+        value="true"/>
       <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
         value="true"/>
       <property name="hibernate.c3p0.unreturnedConnectionTimeout"
@@ -241,6 +249,7 @@
     <class>cc.kune.domain.User</class>
     <class>cc.kune.domain.UserSignInLog</class>
     <class>cc.kune.domain.WaveEntity</class>
+    <class>cc.kune.domain.ParticipantEntity</class>
     <properties>
       <property name="hibernate.archive.autodetection" value=""/>
       <!-- In order to debug sql enable this -->
@@ -263,7 +272,7 @@
       <property name="hibernate.c3p0.acquire_increment" value="1"/>
       <property name="hibernate.c3p0.min_size" value="10"/>
       <property name="hibernate.c3p0.max_size" value="100"/>
-      <property name="hibernate.c3p0.timeout" value="100"/>
+      <property name="hibernate.c3p0.timeout" value="1800"/>
       <property name="hibernate.c3p0.max_statements" value="0"/>
       <property name="hibernate.c3p0.idle_test_period" value="300"/>
       <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
@@ -272,6 +281,9 @@
       <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
         value="true"/>
       <property name="hibernate.c3p0.preferredTestQuery" value="SELECT 1"/>
+      <!-- http://stackoverflow.com/questions/3511422/java-c3p0-how-can-i-configure-autoreconnect-true -->
+      <property name="hibernate.c3p0.testConnectionOnCheckout"
+        value="true"/>
       <property name="hibernate.search.default.directory_provider"
         value="filesystem"/>
       <property name="hibernate.search.default.indexBase"
@@ -314,6 +326,7 @@
     <class>cc.kune.domain.User</class>
     <class>cc.kune.domain.UserSignInLog</class>
     <class>cc.kune.domain.WaveEntity</class>
+    <class>cc.kune.domain.ParticipantEntity</class>
     <properties>
       <!-- In order to debug sql enable this -->
       <property name="hibernate.show_sql" value="false"/>

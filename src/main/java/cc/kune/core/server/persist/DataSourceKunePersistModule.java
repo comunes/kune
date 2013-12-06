@@ -45,6 +45,7 @@ import cc.kune.domain.finders.I18nLanguageFinder;
 import cc.kune.domain.finders.I18nTranslationFinder;
 import cc.kune.domain.finders.InvitationFinder;
 import cc.kune.domain.finders.LicenseFinder;
+import cc.kune.domain.finders.ParticipantEntityFinder;
 import cc.kune.domain.finders.RateFinder;
 import cc.kune.domain.finders.TagFinder;
 import cc.kune.domain.finders.TagUserContentFinder;
@@ -61,7 +62,7 @@ import com.google.inject.persist.jpa.KuneJpaLocalTxnInterceptor;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DataSourceKunePersistModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DataSourceKunePersistModule extends PrivateModule {
@@ -69,23 +70,23 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(DataSourceKunePersistModule.class);
-  
+
   /** The Constant MY_DATA_SOURCE_ONE_FILTER_KEY. */
   public static final Key<CustomPersistFilter> MY_DATA_SOURCE_ONE_FILTER_KEY = Key.get(
       CustomPersistFilter.class, DataSourceKune.class);
-  
+
   /** The kune config. */
   private String kuneConfig;
-  
+
   /** The kune properties. */
   private KunePropertiesDefault kuneProperties;
-  
+
   /** The log4 conf. */
   private String log4Conf = null;
-  
+
   /** The setted jpa unit. */
   private String settedJpaUnit = null;
-  
+
   /** The transaction interceptor. */
   private KuneJpaLocalTxnInterceptor transactionInterceptor;
 
@@ -98,16 +99,20 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Instantiates this module only during tests.
-   *
-   * @param settedProperties the setted properties
-   * @param settedJpaUnit the setted jpa unit
+   * 
+   * @param settedProperties
+   *          the setted properties
+   * @param settedJpaUnit
+   *          the setted jpa unit
    */
   public DataSourceKunePersistModule(final String settedProperties, final String settedJpaUnit) {
     this.settedJpaUnit = settedJpaUnit;
     init(settedProperties);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.inject.PrivateModule#configure()
    */
   @Override
@@ -184,7 +189,8 @@ public class DataSourceKunePersistModule extends PrivateModule {
     jpm.addFinder(UserFinder.class);
     jpm.addFinder(UserSignInLogFinder.class);
     jpm.addFinder(InvitationFinder.class);
-	jpm.addFinder(WaveEntityFinder.class);
+    jpm.addFinder(ParticipantEntityFinder.class);
+    jpm.addFinder(WaveEntityFinder.class);
     install(jpm);
 
     bind(Session.class).annotatedWith(DataSourceKune.class).toProvider(
@@ -216,7 +222,8 @@ public class DataSourceKunePersistModule extends PrivateModule {
     expose(UserFinder.class);
     expose(UserSignInLogFinder.class);
     expose(WaveEntityFinder.class);
-	expose(InvitationFinder.class);
+    expose(InvitationFinder.class);
+    expose(ParticipantEntityFinder.class);
     expose(MY_DATA_SOURCE_ONE_FILTER_KEY);
     // expose(KuneJpaLocalTxnInterceptor.class);
 
@@ -241,7 +248,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Gets the kune properties.
-   *
+   * 
    * @return the kune properties
    */
   public KuneProperties getKuneProperties() {
@@ -250,7 +257,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Gets the transaction interceptor.
-   *
+   * 
    * @return the transaction interceptor
    */
   public KuneJpaLocalTxnInterceptor getTransactionInterceptor() {
@@ -259,8 +266,9 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Inits the.
-   *
-   * @param settedProperties the setted properties
+   * 
+   * @param settedProperties
+   *          the setted properties
    */
   private void init(final String settedProperties) {
     final SystemConfiguration sysConf = new SystemConfiguration();
@@ -271,10 +279,13 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Sets the property if exists.
-   *
-   * @param dbProperties the db properties
-   * @param kuneProperty the kune property
-   * @param persistenceProperty the persistence property
+   * 
+   * @param dbProperties
+   *          the db properties
+   * @param kuneProperty
+   *          the kune property
+   * @param persistenceProperty
+   *          the persistence property
    */
   private void setPropertyIfExists(final Properties dbProperties, final String kuneProperty,
       final String persistenceProperty) {

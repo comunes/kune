@@ -26,6 +26,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
+import javax.persistence.NoResultException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewHandler;
@@ -37,12 +39,11 @@ import org.waveprotocol.wave.model.id.WaveletName;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.wave.data.ReadableWaveletData;
 
-import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.manager.ParticipantEntityManager;
 import cc.kune.core.server.manager.WaveEntityManager;
 import cc.kune.core.server.persist.KuneTransactional;
-import cc.kune.domain.User;
+import cc.kune.domain.ParticipantEntity;
 import cc.kune.domain.WaveEntity;
-import cc.kune.wave.server.kspecific.ParticipantUtils;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultimap;
@@ -59,10 +60,8 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
 
   public static final Log LOG = LogFactory.getLog(CustomPerUserWaveViewHandlerImpl.class);
 
-  private ParticipantUtils participantUtils;
-  private UserManager userManager;
+  private ParticipantEntityManager participantEntityManager;
   private WaveEntityManager waveEntityManager;
-
   private final ReadableWaveletDataProvider waveletProvider;
 
   @Inject
@@ -73,26 +72,13 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   @KuneTransactional
   private void addWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
     Preconditions.checkNotNull(waveEntity);
-    LOG.debug("Added wave to user " + participantId.getAddress());
-    try {
-      final User user = userManager.findByShortname(getShortname(participantId.getAddress()));
-      if (user != null) {
-        userManager.addWave(user, waveEntity);
-      } else {
-        warnUnknowUser(participantId);
-      }
-    } catch (final javax.persistence.NoResultException e) {
-      LOG.warn("Failed to retrieve user " + participantId.getAddress(), e);
-    }
+    LOG.debug("Added wave to participant " + participantId.getAddress());
+    waveEntity.add(participantEntityManager.createIfNotExist(participantId.getAddress()));
   }
 
   @Override
   public void close() throws IOException {
-    // TODO Auto-generated method stub
-  }
-
-  private String getShortname(final String address) {
-    return participantUtils.getAddressName(address);
+    // Probably nothing to do here...
   }
 
   @KuneTransactional
@@ -101,26 +87,27 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     final String waveId = waveletData.getWaveId().serialise();
     final String waveletId = waveletData.getWaveletId().serialise();
     final String domain = waveletData.getWaveId().getDomain();
-    // waveletData.getCreator()
-    // waveletData.getCreationTime()
-    // waveletData.getDocument(root?)
+    final ParticipantId creator = waveletData.getCreator();
+    final Long creationTime = waveletData.getCreationTime();
     try {
       waveEntity = waveEntityManager.find(domain, waveId, waveletId);
     } catch (final javax.persistence.NoResultException e) {
-      waveEntity = waveEntityManager.add(domain, waveId, waveletId, waveletData.getLastModifiedTime());
+      waveEntity = waveEntityManager.add(domain, waveId, waveletId, waveletData.getLastModifiedTime(),
+          participantEntityManager.createIfNotExist(creator.getAddress()), creationTime);
     }
     Preconditions.checkNotNull(waveEntity);
     return waveEntity;
   }
 
-  public void init(final UserManager userManager, final WaveEntityManager waveEntityManager,
-      final ParticipantUtils participantUtils) {
-    Preconditions.checkNotNull(userManager);
+  public void init(final WaveEntityManager waveEntityManager,
+      final ParticipantEntityManager partEntManager) {
+    this.participantEntityManager = partEntManager;
     Preconditions.checkNotNull(waveEntityManager);
-    Preconditions.checkNotNull(participantUtils);
-    this.userManager = userManager;
     this.waveEntityManager = waveEntityManager;
-    this.participantUtils = participantUtils;
+  }
+
+  private void logNotFound(final ParticipantId participantId) {
+    LOG.info("Failed to find and retrieve participant " + participantId.getAddress());
   }
 
   @Override
@@ -139,6 +126,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
           waveletData = waveletProvider.getReadableWaveletData(waveletName);
           final WaveEntity waveEntity = getWaveEntity(waveletData);
           addWaveToUser(waveEntity, participantId);
+          updateWaveEntity(waveEntity, waveletData);
         } catch (final WaveServerException e) {
           LOG.error("Failed to update index for " + waveletName, e);
           throw e;
@@ -165,6 +153,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
           waveletData = waveletProvider.getReadableWaveletData(waveletName);
           final WaveEntity waveEntity = getWaveEntity(waveletData);
           removeWaveToUser(waveEntity, participantId);
+          updateWaveEntity(waveEntity, waveletData);
         } catch (final WaveServerException e) {
           LOG.error("Failed to update index for " + waveletName, e);
           throw e;
@@ -180,6 +169,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   public ListenableFuture<Void> onWaveInit(final WaveletName waveletName) {
     Preconditions.checkNotNull(waveletName);
     LOG.debug("On wave init of wave " + waveletName.toString());
+    // FIXME... move this to task?
     ReadableWaveletData waveletData;
     try {
       waveletData = waveletProvider.getReadableWaveletData(waveletName);
@@ -205,42 +195,34 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   @KuneTransactional
   private void removeWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
     Preconditions.checkNotNull(waveEntity);
-    LOG.debug("Remove wave to user " + participantId.getAddress());
-    try {
-      final User user = userManager.findByShortname(getShortname(participantId.getAddress()));
-      if (user != null) {
-        userManager.removeWave(user, waveEntity);
-      } else {
-        warnUnknowUser(participantId);
-      }
-    } catch (final javax.persistence.NoResultException e) {
-      LOG.warn("Failed to retrieve user " + participantId.getAddress(), e);
-    }
+    LOG.debug("Remove wave to participant " + participantId.getAddress());
+    waveEntity.remove(participantEntityManager.createIfNotExist(participantId.getAddress()));
   }
 
   @Override
   @KuneTransactional
   public Multimap<WaveId, WaveletId> retrievePerUserWaveView(final ParticipantId participantId) {
-    LOG.debug("Retrive waves view of user " + participantId.getAddress());
+    final String address = participantId.getAddress();
+    LOG.debug("Retrive waves view of user " + address);
     final Multimap<WaveId, WaveletId> userWavesViewMap = HashMultimap.create();
     try {
-      final User user = userManager.findByShortname(getShortname(participantId.getAddress()));
-      if (user != null) {
-        for (final WaveEntity wave : user.getWaves()) {
+      final ParticipantEntity participantEntity = participantEntityManager.find(address);
+      if (participantEntity != null) {
+        for (final WaveEntity wave : participantEntity.getWaves()) {
           userWavesViewMap.put(WaveId.deserialise(wave.getWaveId()),
               WaveletId.deserialise(wave.getWaveletId()));
         }
       } else {
-        warnUnknowUser(participantId);
+        throw new NoResultException();
       }
     } catch (final javax.persistence.NoResultException e) {
-      LOG.error("Failed to retrieve user " + participantId.getAddress(), e);
+      logNotFound(participantId);
     }
     return userWavesViewMap;
   }
 
-  private void warnUnknowUser(final ParticipantId participantId) {
-    LOG.warn("Unknown user " + participantId.getAddress());
+  private void updateWaveEntity(final WaveEntity waveEntity, final ReadableWaveletData waveletData) {
+    waveEntityManager.setLastModifiedTime(waveEntity, waveletData.getLastModifiedTime());
   }
 
 }

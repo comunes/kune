@@ -67,6 +67,7 @@ import cc.kune.core.server.manager.InvitationManager;
 import cc.kune.core.server.manager.KuneWaveManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.RateManager;
+import cc.kune.core.server.manager.ParticipantEntityManager;
 import cc.kune.core.server.manager.SiteManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
 import cc.kune.core.server.manager.TagManager;
@@ -89,6 +90,7 @@ import cc.kune.core.server.manager.impl.InvitationManagerDefault;
 import cc.kune.core.server.manager.impl.KuneWaveManagerDefault;
 import cc.kune.core.server.manager.impl.LicenseManagerDefault;
 import cc.kune.core.server.manager.impl.RateManagerDefault;
+import cc.kune.core.server.manager.impl.ParticipantEntityManagerDefault;
 import cc.kune.core.server.manager.impl.SiteManagerDefault;
 import cc.kune.core.server.manager.impl.SocialNetworkManagerDefault;
 import cc.kune.core.server.manager.impl.TagManagerDefault;
@@ -97,8 +99,8 @@ import cc.kune.core.server.manager.impl.ToolConfigurationManagerDefault;
 import cc.kune.core.server.manager.impl.UserManagerDefault;
 import cc.kune.core.server.manager.impl.UserSignInLogManagerDefault;
 import cc.kune.core.server.manager.impl.WaveEntityManagerDefault;
-import cc.kune.core.server.mapper.KuneMapperDefault;
 import cc.kune.core.server.mapper.KuneMapper;
+import cc.kune.core.server.mapper.KuneMapperDefault;
 import cc.kune.core.server.notifier.NotificationSender;
 import cc.kune.core.server.notifier.NotificationSenderDefault;
 import cc.kune.core.server.notifier.PendingNotificationSender;
@@ -168,7 +170,8 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(KuneWaveManager.class).to(KuneWaveManagerDefault.class);
     bind(UserSignInLogManager.class).to(UserSignInLogManagerDefault.class);
     bind(InvitationManager.class).to(InvitationManagerDefault.class);
-	bind(WaveEntityManager.class).to(WaveEntityManagerDefault.class);
+    bind(WaveEntityManager.class).to(WaveEntityManagerDefault.class);
+    bind(ParticipantEntityManager.class).to(ParticipantEntityManagerDefault.class);
   }
 
   /**

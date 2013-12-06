@@ -208,4 +208,10 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+  <changeSet id="32" author="vjrj">
+    <comment>Waves index</comment>
+    <sqlFile path="src/main/resources/db/update-0027-waveindex.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>SELECT * FROM globalize_countries;</rollback>
+  </changeSet>
 </databaseChangeLog>

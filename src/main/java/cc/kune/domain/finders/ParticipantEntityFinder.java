@@ -1,7 +1,10 @@
 /*
  *
- * Copyright (C) 2007-2011 The kune development team (see CREDITS for details)
- * This file is part of kune.
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
+ * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -19,24 +22,17 @@
  */
 package cc.kune.domain.finders;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import cc.kune.domain.WaveEntity;
+import cc.kune.domain.ParticipantEntity;
 
 import com.google.inject.name.Named;
 import com.google.inject.persist.finder.Finder;
 
-public interface WaveEntityFinder {
-
-  @Finder(query = "SELECT count(*) FROM WaveEntity w")
-  public Long count();
-
-  @Finder(query = "FROM WaveEntity w WHERE domain = :domain AND waveId = :waveId AND waveletId = :waveletId")
-  public WaveEntity find(@Named("domain") final String domain, @Named("waveId") final String waveId,
-      @Named("waveletId") final String waveletId);
-
-  @Finder(query = "FROM WaveEntity w", returnAs = ArrayList.class)
-  public List<WaveEntity> getAll();
-
+/**
+ * The Interface SharedWavesFinder.
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
+public interface ParticipantEntityFinder {
+  @Finder(query = "from ParticipantEntity where address = :address")
+  public ParticipantEntity findByAddress(@Named("address") final String address);
 }

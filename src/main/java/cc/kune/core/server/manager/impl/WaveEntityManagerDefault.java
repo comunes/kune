@@ -25,6 +25,7 @@ import javax.persistence.EntityManager;
 import cc.kune.core.server.manager.WaveEntityManager;
 import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.server.persist.KuneTransactional;
+import cc.kune.domain.ParticipantEntity;
 import cc.kune.domain.WaveEntity;
 import cc.kune.domain.WaveRefKey;
 import cc.kune.domain.finders.WaveEntityFinder;
@@ -50,8 +51,9 @@ public class WaveEntityManagerDefault extends DefaultManager<WaveEntity, WaveRef
   @Override
   @KuneTransactional
   public WaveEntity add(final String domain, final String waveId, final String waveletId,
-      final Long lastModifiedTime) {
-    final WaveEntity wave = new WaveEntity(domain, waveId, waveletId, lastModifiedTime);
+      final Long lastModifiedTime, final ParticipantEntity creator, final Long creationTime) {
+    final WaveEntity wave = new WaveEntity(domain, waveId, waveletId, lastModifiedTime, creator,
+        creationTime);
     persist(wave, WaveEntity.class);
     return wave;
   }
@@ -59,6 +61,12 @@ public class WaveEntityManagerDefault extends DefaultManager<WaveEntity, WaveRef
   @Override
   public WaveEntity find(final String domain, final String waveId, final String waveletId) {
     return finder.find(domain, waveId, waveletId);
+  }
+
+  @Override
+  public void setLastModifiedTime(final WaveEntity wave, final long lastModifiedTime) {
+    wave.setLastModifiedTime(lastModifiedTime);
+    persist(wave);
   }
 
 }

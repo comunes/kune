@@ -19,9 +19,7 @@
  */
 package cc.kune.core.server.manager;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import javax.persistence.EntityExistsException;
 
@@ -30,6 +28,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cc.kune.core.server.PersistenceTest;
+import cc.kune.domain.ParticipantEntity;
 import cc.kune.domain.WaveEntity;
 import cc.kune.domain.WaveRefKey;
 import cc.kune.domain.finders.WaveEntityFinder;
@@ -38,11 +37,19 @@ import com.google.inject.Inject;
 
 public class WaveEntityManagerDefaultTest extends PersistenceTest {
 
+  private static final String CREATOR_ADDRESS = "somecreator@example.com";
   private static final String DOMAIN = "domain";
+  private static final String PART1_ADDRESS = "participator1@example.com";
+  private static final String PART2_ADDRESS = "participator2@example.com";
   private static final String WAVE_ID = "waveId";
   private static final String WAVELET_ID = "waveletId";
+  private ParticipantEntity creator;
   @Inject
   WaveEntityFinder finder;
+  @Inject
+  ParticipantEntityManager participantManager;
+  private ParticipantEntity participator1;
+  private ParticipantEntity participator2;
   private WaveEntity wave;
   @Inject
   WaveEntityManager waveEntityManager;
@@ -56,7 +63,7 @@ public class WaveEntityManagerDefaultTest extends PersistenceTest {
 
   @Test(expected = EntityExistsException.class)
   public void donAllowDuplicates() {
-    final WaveEntity wave2 = new WaveEntity(DOMAIN, WAVE_ID, WAVELET_ID, 0L);
+    final WaveEntity wave2 = new WaveEntity(DOMAIN, WAVE_ID, WAVELET_ID, 0L, creator, 0L);
     waveEntityManager.persist(wave2);
   }
 
@@ -64,11 +71,36 @@ public class WaveEntityManagerDefaultTest extends PersistenceTest {
   public void insertData() {
     openTransaction();
     assertTrue(finder.count() == 0);
-    wave = new WaveEntity(DOMAIN, WAVE_ID, WAVELET_ID, 0L);
+    creator = participantManager.createIfNotExist(CREATOR_ADDRESS);
+    participator1 = participantManager.createIfNotExist(PART1_ADDRESS);
+    participator2 = participantManager.createIfNotExist(PART2_ADDRESS);
+    wave = new WaveEntity(DOMAIN, WAVE_ID, WAVELET_ID, 0L, creator, 0L);
     waveEntityManager.persist(wave);
     wave.setLastModifiedTime(1L);
     waveEntityManager.merge(wave);
     assertTrue(finder.count() == 1);
+  }
+
+  @Test
+  public void testManageParticipants() {
+    closeTransaction();
+    final WaveEntity waveRetrieved = waveEntityManager.find(WaveRefKey.of(DOMAIN, WAVE_ID, WAVELET_ID));
+    assertNotNull(waveRetrieved);
+    waveRetrieved.add(creator);
+    waveRetrieved.add(participator1);
+    waveRetrieved.add(participator1);
+    waveRetrieved.add(participator1);
+    waveRetrieved.add(participator2);
+    waveRetrieved.remove(participator2);
+    assertEquals(2, waveRetrieved.getParticipants().size());
+    assertTrue(waveRetrieved.getParticipants().contains(creator));
+    assertTrue(waveRetrieved.getParticipants().contains(participator1));
+    assertFalse(waveRetrieved.getParticipants().contains(participator2));
+    assertEquals(1, participantManager.find(CREATOR_ADDRESS).getWaves().size());
+    assertEquals(1, participantManager.find(PART1_ADDRESS).getWaves().size());
+    assertEquals(0, participantManager.find(PART2_ADDRESS).getWaves().size());
+    assertTrue(participantManager.find(PART1_ADDRESS).getWaves().contains(waveRetrieved));
+    assertFalse(participantManager.find(PART2_ADDRESS).getWaves().contains(waveRetrieved));
   }
 
   @Test
@@ -81,4 +113,5 @@ public class WaveEntityManagerDefaultTest extends PersistenceTest {
     assertEquals(waveRetrieved.getWaveletId(), WAVELET_ID);
     assertEquals(1L, (long) waveRetrieved.getLastModifiedTime());
   }
+
 }
