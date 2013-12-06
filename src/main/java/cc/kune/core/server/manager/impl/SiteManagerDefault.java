@@ -138,7 +138,6 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     this.languageManager = languageManager;
     this.countryManager = countryManager;
     this.serverToolRegistry = serverToolRegistry;
-    loadProperties(kuneProperties);
     // By default we don't collect which part of the client is untranslated
     storeUntranslatedString = false;
     mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
@@ -163,6 +162,9 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
    */
   @Override
   public InitDataDTO getInitData(final String userHash) throws DefaultException {
+    if (data == null) {
+      loadProperties(kuneProperties);
+    }
     final InitDataDTO dataMapped = mapper.map(data, InitDataDTO.class);
     final UserInfo userInfo = userInfoService.buildInfo(userSessionManager.getUser(), userHash);
     LOG.info("Retrieve init data using userHash: " + userHash);

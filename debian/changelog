@@ -1,3 +1,9 @@
+kune (0.3.0+b35) unstable; urgency=low
+
+  * Wave indexing via db (fix #355)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 06 Dec 2013 20:23:34 +0100
+
 kune (0.3.0+b34) unstable; urgency=low
 
   * Proxy servlet moved from hablar (should fix #566)

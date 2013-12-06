@@ -81,7 +81,6 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     // Probably nothing to do here...
   }
 
-  @KuneTransactional
   private WaveEntity getWaveEntity(final ReadableWaveletData waveletData) {
     WaveEntity waveEntity;
     final String waveId = waveletData.getWaveId().serialise();

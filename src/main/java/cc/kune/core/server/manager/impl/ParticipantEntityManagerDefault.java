@@ -27,6 +27,7 @@ import javax.persistence.EntityManager;
 
 import cc.kune.core.server.manager.ParticipantEntityManager;
 import cc.kune.core.server.persist.DataSourceKune;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.domain.ParticipantEntity;
 import cc.kune.domain.finders.ParticipantEntityFinder;
 
@@ -53,6 +54,7 @@ public class ParticipantEntityManagerDefault extends DefaultManager<ParticipantE
   }
 
   @Override
+  @KuneTransactional
   public ParticipantEntity createIfNotExist(final String address) {
     ParticipantEntity participant;
     try {
@@ -66,6 +68,7 @@ public class ParticipantEntityManagerDefault extends DefaultManager<ParticipantE
   }
 
   @Override
+  @KuneTransactional
   public ParticipantEntity find(final String address) {
     return finder.findByAddress(address);
   }

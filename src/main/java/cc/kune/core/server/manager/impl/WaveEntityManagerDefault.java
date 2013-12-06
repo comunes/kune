@@ -59,11 +59,13 @@ public class WaveEntityManagerDefault extends DefaultManager<WaveEntity, WaveRef
   }
 
   @Override
+  @KuneTransactional
   public WaveEntity find(final String domain, final String waveId, final String waveletId) {
     return finder.find(domain, waveId, waveletId);
   }
 
   @Override
+  @KuneTransactional
   public void setLastModifiedTime(final WaveEntity wave, final long lastModifiedTime) {
     wave.setLastModifiedTime(lastModifiedTime);
     persist(wave);
