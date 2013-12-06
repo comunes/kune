@@ -41,12 +41,14 @@ import javax.persistence.Table;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.FieldBridge;
 import org.hibernate.search.annotations.Index;
+import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.Store;
 
 import cc.kune.domain.utils.DataFieldBridge;
 
 @Entity
 @IdClass(WaveRefKey.class)
+@Indexed
 @Table(name = "waves")
 public class WaveEntity implements Serializable, Comparator<WaveEntity> {
 
