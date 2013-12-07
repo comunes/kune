@@ -89,7 +89,7 @@ install/kune::
 	cp $(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b20
 	cp $(CURDIR)/src/main/resources/db/update-0025-i18n-country-codes.txt $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b24
 	cp $(CURDIR)/src/main/resources/db/update-0026-i18n-max-size.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b27
-	cp $(CURDIR)/src/main/resources/db/update-0027-waveindex.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b34
+	cp $(CURDIR)/src/main/resources/db/update-0027-waveindex.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b35
 
 # FIXME
 #	cp logrotate $(DEST)/etc/logrotate.d/
