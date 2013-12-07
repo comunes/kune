@@ -73,15 +73,22 @@ public class RESTServiceFilter extends AbstractInjectedFilter {
 
     response.setContentType(isJsonP ? "text/javascript" : "text/json");
 
-    final Object output = wrap(
-        transactionalFilter.doService(serviceClass, methodName, parameters, getInstance(serviceClass)),
-        isJsonP, callbackMethod);
-    if (output != null) {
-      final PrintWriter writer = response.getWriter();
-      writer.print(output);
-      writer.flush();
-    } else {
-      chain.doFilter(request, response);
+    final RESTResult result = transactionalFilter.doService(serviceClass, methodName, parameters,
+        getInstance(serviceClass));
+    if (result != null) {
+      if (result.getOutput() != null) {
+        final Object output = wrap(result.getOutput(), isJsonP, callbackMethod);
+        if (output != null) {
+          final PrintWriter writer = response.getWriter();
+          writer.print(output);
+          writer.flush();
+        } else {
+          chain.doFilter(request, response);
+        }
+
+      } else {
+        chain.doFilter(request, response);
+      }
     }
   }
 

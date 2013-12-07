@@ -32,17 +32,123 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestRESTMethodFinder.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TestRESTMethodFinder {
-  
+
+  /**
+   * The Class MyTestService.
+   * 
+   * @author danigb@gmail.com
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
+  public static class MyTestService {
+
+    /**
+     * Convert int method.
+     * 
+     * @param length
+     *          the length
+     * @param theStamp
+     *          the the stamp
+     * @return the string
+     */
+    @REST(params = { "length", "stamp" })
+    public String convertIntMethod(final int length, final long theStamp) {
+      return "the data: " + length + " " + theStamp;
+    }
+
+    /**
+     * Simple method.
+     * 
+     * @param name
+     *          the name
+     * @return the string
+     */
+    @REST(params = { "name" })
+    public String simpleMethod(final String name) {
+      return "the name: " + name;
+    }
+
+    /**
+     * Simple method.
+     * 
+     * @param name
+     *          the name
+     * @param value
+     *          the value
+     * @return the string
+     */
+    @REST(params = { "name", "value" })
+    public String simpleMethod(final String name, final String value) {
+      return "more params: " + name + ": " + value;
+    }
+  }
+
+  /**
+   * The Class TestParameters.
+   * 
+   * @author danigb@gmail.com
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
+  public static class TestParameters implements Parameters {
+
+    /** The map. */
+    private final HashMap<String, String> map;
+
+    /**
+     * Instantiates a new test parameters.
+     * 
+     * @param pairs
+     *          the pairs
+     */
+    public TestParameters(final String... pairs) {
+      this.map = new HashMap<String, String>();
+      for (int index = 0; index < pairs.length; index += 2) {
+        map.put(pairs[index], pairs[index + 1]);
+      }
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.core.server.rack.filters.rest.Parameters#get(java.lang.String)
+     */
+    @Override
+    public String get(final String name) {
+      return map.get(name);
+    }
+
+    /**
+     * Gets the size.
+     * 
+     * @return the size
+     */
+    public int getSize() {
+      return map.size();
+    }
+  }
+
   /** The finder. */
   private RESTMethodFinder finder;
-  
+
   /** The service. */
   private MyTestService service;
+
+  /**
+   * Conversion test.
+   */
+  @Test
+  public void conversionTest() {
+    final RESTMethod method = finder.findMethod("convertIntMethod", new TestParameters("length", "12",
+        "stamp", "13"), MyTestService.class);
+    assertNotNull(method);
+    assertTrue(method.invoke(service).getSuccess());
+    assertEquals("the data: 12 13", method.getResponse().toString());
+  }
 
   /**
    * Creates the objects.
@@ -58,20 +164,9 @@ public class TestRESTMethodFinder {
    */
   @Test
   public void notEnoughParameters() {
-    RESTMethod method = finder.findMethod("simpleMethod", new TestParameters(), MyTestService.class);
-    assertNull(method);
-  }
-
-  /**
-   * Simple test.
-   */
-  @Test
-  public void simpleTest() {
-    RESTMethod method = finder.findMethod("simpleMethod", new TestParameters("name", "theName"),
+    final RESTMethod method = finder.findMethod("simpleMethod", new TestParameters(),
         MyTestService.class);
-    assertNotNull(method);
-    assertTrue(method.invoke(service));
-    assertEquals("the name: theName", method.getResponse().toString());
+    assertNull(method);
   }
 
   /**
@@ -79,106 +174,22 @@ public class TestRESTMethodFinder {
    */
   @Test
   public void shouldTakeMoreParamsMethod() {
-    RESTMethod method = finder.findMethod("simpleMethod", new TestParameters("name", "theName", "value",
-        "theValue"), MyTestService.class);
+    final RESTMethod method = finder.findMethod("simpleMethod", new TestParameters("name", "theName",
+        "value", "theValue"), MyTestService.class);
     assertNotNull(method);
-    assertTrue(method.invoke(service));
+    assertTrue(method.invoke(service).getSuccess());
     assertEquals("more params: theName: theValue", method.getResponse().toString());
   }
 
   /**
-   * Conversion test.
+   * Simple test.
    */
   @Test
-  public void conversionTest() {
-    RESTMethod method = finder.findMethod("convertIntMethod", new TestParameters("length", "12",
-        "stamp", "13"), MyTestService.class);
+  public void simpleTest() {
+    final RESTMethod method = finder.findMethod("simpleMethod", new TestParameters("name", "theName"),
+        MyTestService.class);
     assertNotNull(method);
-    assertTrue(method.invoke(service));
-    assertEquals("the data: 12 13", method.getResponse().toString());
-  }
-
-  /**
-   * The Class MyTestService.
-   *
-   * @author danigb@gmail.com
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  public static class MyTestService {
-    
-    /**
-     * Simple method.
-     *
-     * @param name the name
-     * @return the string
-     */
-    @REST(params = { "name" })
-    public String simpleMethod(final String name) {
-      return "the name: " + name;
-    }
-
-    /**
-     * Simple method.
-     *
-     * @param name the name
-     * @param value the value
-     * @return the string
-     */
-    @REST(params = { "name", "value" })
-    public String simpleMethod(final String name, final String value) {
-      return "more params: " + name + ": " + value;
-    }
-
-    /**
-     * Convert int method.
-     *
-     * @param length the length
-     * @param theStamp the the stamp
-     * @return the string
-     */
-    @REST(params = { "length", "stamp" })
-    public String convertIntMethod(final int length, final long theStamp) {
-      return "the data: " + length + " " + theStamp;
-    }
-  }
-
-  /**
-   * The Class TestParameters.
-   *
-   * @author danigb@gmail.com
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  public static class TestParameters implements Parameters {
-    
-    /** The map. */
-    private final HashMap<String, String> map;
-
-    /**
-     * Instantiates a new test parameters.
-     *
-     * @param pairs the pairs
-     */
-    public TestParameters(final String... pairs) {
-      this.map = new HashMap<String, String>();
-      for (int index = 0; index < pairs.length; index += 2) {
-        map.put(pairs[index], pairs[index + 1]);
-      }
-    }
-
-    /* (non-Javadoc)
-     * @see cc.kune.core.server.rack.filters.rest.Parameters#get(java.lang.String)
-     */
-    public String get(final String name) {
-      return map.get(name);
-    }
-
-    /**
-     * Gets the size.
-     *
-     * @return the size
-     */
-    public int getSize() {
-      return map.size();
-    }
+    assertTrue(method.invoke(service).getSuccess());
+    assertEquals("the name: theName", method.getResponse().toString());
   }
 }

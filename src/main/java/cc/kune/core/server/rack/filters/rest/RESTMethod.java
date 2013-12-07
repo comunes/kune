@@ -30,11 +30,11 @@ public class RESTMethod {
   public static final String FORMAT_JSON = "json";
   public static final String FORMAT_XML = "xml";
 
-  private final Method method;
-  private final Parameters parameters;
-  private final String[] names;
-  private Object response;
   private final String format;
+  private final Method method;
+  private final String[] names;
+  private final Parameters parameters;
+  private Object response;
 
   public RESTMethod(final Method method, final String[] names, final Parameters parameters,
       final String format) {
@@ -42,24 +42,6 @@ public class RESTMethod {
     this.names = names;
     this.parameters = parameters;
     this.format = format;
-  }
-
-  public String getFormat() {
-    return format;
-  }
-
-  public Object getResponse() {
-    return response;
-  }
-
-  public boolean invoke(final Object service) {
-    Object[] values = convertParameters();
-    try {
-      response = method.invoke(service, values);
-      return true;
-    } catch (Exception e) {
-      return false;
-    }
   }
 
   private Object convert(final Class<?> type, final String stringValue) {
@@ -75,15 +57,33 @@ public class RESTMethod {
   }
 
   private Object[] convertParameters() {
-    int total = names.length;
-    Object[] values = new Object[total];
-    Class<?>[] types = method.getParameterTypes();
+    final int total = names.length;
+    final Object[] values = new Object[total];
+    final Class<?>[] types = method.getParameterTypes();
 
     for (int index = 0; index < total; index++) {
       values[index] = convert(types[index], parameters.get(names[index]));
     }
 
     return values;
+  }
+
+  public String getFormat() {
+    return format;
+  }
+
+  public Object getResponse() {
+    return response;
+  }
+
+  public RESTResult invoke(final Object service) {
+    final Object[] values = convertParameters();
+    try {
+      response = method.invoke(service, values);
+      return RESTResult.build(true);
+    } catch (final Exception e) {
+      return RESTResult.build(false, e);
+    }
   }
 
 }

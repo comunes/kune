@@ -711,6 +711,10 @@ public class WebClient extends Composite implements WaveClientView {
    * Setup search panel.
    */
   private void setupSearchPanel() {
+    if (kuneSession.isEmbedded()) {
+      // We don't use search in embed system
+      return;
+    }
     // On wave action fire an event.
     final SearchPresenter.WaveActionHandler actionHandler =
         new SearchPresenter.WaveActionHandler() {

@@ -38,13 +38,18 @@ public class TransactionalServiceExecutor {
   }
 
   @KuneTransactional
-  public String doService(final Class<?> serviceClass, final String methodName,
+  public RESTResult doService(final Class<?> serviceClass, final String methodName,
       final ParametersAdapter parameters, final Object serviceInstance) {
     String output = null;
     final RESTMethod rest = methodFinder.findMethod(methodName, parameters, serviceClass);
-    if (rest != null && rest.invoke(serviceInstance)) {
-      output = serializer.serialize(rest.getResponse(), rest.getFormat());
+    RESTResult result = null;
+    if (rest != null) {
+      result = rest.invoke(serviceInstance);
+      if (result.isSuccess()) {
+        output = serializer.serialize(rest.getResponse(), rest.getFormat());
+        result.setOutput(output);
+      }
     }
-    return output;
+    return result;
   }
 }

@@ -66,7 +66,7 @@ public abstract class AbstractCustomCORSFilter implements Filter {
   private CORSRequestHandler handler;
 
   protected abstract void customDoFilter(HttpServletRequest request, HttpServletResponse response)
-      throws IOException;
+      throws IOException, ServletException;
 
   /**
    * Called by the web container to indicate to a filter that it is being taken
@@ -251,7 +251,7 @@ public abstract class AbstractCustomCORSFilter implements Filter {
    * @throws ServletException
    *           On a general request processing exception.
    */
-  private void printMessage(final HttpServletResponse response, final int sc, final String msg)
+  protected void printMessage(final HttpServletResponse response, final int sc, final String msg)
       throws IOException, ServletException {
 
     // Set the status code
