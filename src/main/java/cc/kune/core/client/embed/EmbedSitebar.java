@@ -31,6 +31,7 @@ import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.gspace.client.viewers.EmbedHelper;
 
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
@@ -95,7 +96,7 @@ public class EmbedSitebar {
     final InitDataDTO initData = session.getInitData();
     if (initData != null) {
       @SuppressWarnings("deprecation")
-      final String sitelogo = initData.getSiteLogoUrl();
+      final String sitelogo = EmbedHelper.getServer() + initData.getSiteLogoUrl();
       signInLink.withIcon(new Url(sitelogo));
       signOutLink.withIcon(new Url(sitelogo));
     }

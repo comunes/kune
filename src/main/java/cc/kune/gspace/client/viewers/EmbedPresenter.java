@@ -127,6 +127,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     // FIXME: Maybe use AppStart to detect browser compatibility in the future
     this.session = session;
     this.sitebar = sitebar;
+    session.setEmbedded(true);
     TokenMatcher.init(GwtWaverefEncoder.INSTANCE);
     eventBus.addHandler(EmbedOpenEvent.getType(), new EmbedOpenEvent.EmbedOpenHandler() {
       @Override

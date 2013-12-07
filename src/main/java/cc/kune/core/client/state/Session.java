@@ -301,6 +301,13 @@ public interface Session {
   boolean isCurrentStateAPerson();
 
   /**
+   * Shows if is a embedded client.
+   * 
+   * @return true, if is embed
+   */
+  boolean isEmbedded();
+
+  /**
    * Checks if is in current user space.
    * 
    * @return true, if is in current user space
@@ -406,6 +413,8 @@ public interface Session {
    *          the passwd
    */
   void setCurrentUserInfo(UserInfoDTO currentUserInfo, String passwd);
+
+  void setEmbedded(boolean isEmbedded);
 
   /**
    * Sets the inits the data.

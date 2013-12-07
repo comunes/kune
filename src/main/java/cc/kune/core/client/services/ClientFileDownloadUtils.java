@@ -24,6 +24,7 @@ package cc.kune.core.client.services;
 
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
+import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -36,7 +37,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ClientFileDownloadUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
@@ -46,8 +47,9 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   /**
    * Instantiates a new client file download utils.
-   *
-   * @param session the session
+   * 
+   * @param session
+   *          the session
    */
   @Inject
   public ClientFileDownloadUtils(final Session session) {
@@ -56,14 +58,17 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   /**
    * Calculate url.
-   *
-   * @param token the token
-   * @param download the download
-   * @param useHash the use hash
+   * 
+   * @param token
+   *          the token
+   * @param download
+   *          the download
+   * @param useHash
+   *          the use hash
    * @return the string
    */
   private String calculateUrl(final StateToken token, final boolean download, final boolean useHash) {
-    final Url url = new Url(FileConstants.DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+    final Url url = new Url(server() + FileConstants.DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
         token.toString()));
     if (download) {
       url.add(new UrlParam(FileConstants.DOWNLOAD, download));
@@ -79,8 +84,9 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   /**
    * Download file.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   public void downloadFile(final StateToken token) {
     final String url = calculateUrl(token, true, true);
@@ -89,35 +95,40 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   /**
    * Gets the background image url.
-   *
-   * @param token the token
-   * @param noCache the no cache
+   * 
+   * @param token
+   *          the token
+   * @param noCache
+   *          the no cache
    * @return the background image url
    */
-  public String getBackgroundImageUrl(final StateToken token, boolean noCache) {
-    return new Url(FileConstants.BACKDOWNLOADSERVLET,
-        new UrlParam(FileConstants.TOKEN, token.toString())).toString() + getCacheSuffix(noCache);
+  public String getBackgroundImageUrl(final StateToken token, final boolean noCache) {
+    return new Url(server() + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+        token.toString())).toString() + getCacheSuffix(noCache);
   }
 
   /**
    * Gets the background resized url.
-   *
-   * @param token the token
-   * @param imageSize the image size
+   * 
+   * @param token
+   *          the token
+   * @param imageSize
+   *          the image size
    * @return the background resized url
    */
   public String getBackgroundResizedUrl(final StateToken token, final ImageSize imageSize) {
-    return new Url(FileConstants.BACKDOWNLOADSERVLET,
-        new UrlParam(FileConstants.TOKEN, token.toString()), new UrlParam(FileConstants.IMGSIZE,
-            imageSize.toString())).toString()
+    return new Url(server() + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+        token.toString()), new UrlParam(FileConstants.IMGSIZE, imageSize.toString())).toString()
         + getCacheSuffix(true);
   }
 
   /**
    * Gets the image resized url.
-   *
-   * @param token the token
-   * @param imageSize the image size
+   * 
+   * @param token
+   *          the token
+   * @param imageSize
+   *          the image size
    * @return the image resized url
    */
   public String getImageResizedUrl(final StateToken token, final ImageSize imageSize) {
@@ -127,8 +138,9 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   /**
    * Gets the image url.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the image url
    */
   public String getImageUrl(final StateToken token) {
@@ -137,12 +149,17 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   /**
    * Gets the url.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the url
    */
   public String getUrl(final StateToken token) {
     return calculateUrl(token, false, false);
+  }
+
+  private String server() {
+    return session.isEmbedded() ? EmbedConfiguration.get().getServerUrl() : "";
   }
 
 }
