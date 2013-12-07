@@ -29,7 +29,12 @@ public interface WaveEntityManager extends Manager<WaveEntity, WaveRefKey> {
   WaveEntity add(String domain, String waveId, String waveletId, Long lastModifiedTime,
       ParticipantEntity creator, Long creationTime);
 
+  void add(WaveEntity waveEntity, ParticipantEntity participant);
+
   WaveEntity find(String domain, String waveId, String waveletId);
 
+  void remove(WaveEntity waveEntity, ParticipantEntity participant);
+
   void setLastModifiedTime(WaveEntity wave, long lastModifiedTime);
+
 }

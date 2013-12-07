@@ -71,4 +71,19 @@ public class WaveEntityManagerDefault extends DefaultManager<WaveEntity, WaveRef
     persist(wave);
   }
 
+  @Override
+  @KuneTransactional
+  public void add(WaveEntity wave, ParticipantEntity participant) {
+    wave.add(participant);
+    persist(wave);
+  }
+
+  @Override
+  @KuneTransactional
+  public void remove(WaveEntity wave, ParticipantEntity participant) {
+    // TODO Auto-generated method stub
+    wave.remove(participant);
+    persist(wave);
+  }
+
 }

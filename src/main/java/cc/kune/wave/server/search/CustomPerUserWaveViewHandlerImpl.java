@@ -69,11 +69,12 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     this.waveletProvider = waveletProvider;
   }
 
-  @KuneTransactional
+  // @KuneTransactional
   private void addWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
     Preconditions.checkNotNull(waveEntity);
     LOG.debug("Added wave to participant " + participantId.getAddress());
-    waveEntity.add(participantEntityManager.createIfNotExist(participantId.getAddress()));
+    final ParticipantEntity participant = participantEntityManager.createIfNotExist(participantId.getAddress());
+    waveEntityManager.add(waveEntity, participant);
   }
 
   @Override
@@ -191,11 +192,12 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     return task;
   }
 
-  @KuneTransactional
+  // @KuneTransactional
   private void removeWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
     Preconditions.checkNotNull(waveEntity);
     LOG.debug("Remove wave to participant " + participantId.getAddress());
-    waveEntity.remove(participantEntityManager.createIfNotExist(participantId.getAddress()));
+    final ParticipantEntity participant = participantEntityManager.createIfNotExist(participantId.getAddress());
+    waveEntityManager.remove(waveEntity, participant);
   }
 
   @Override
