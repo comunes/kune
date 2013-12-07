@@ -32,8 +32,8 @@ NO_GWT=true
 JAVA_HOME := /usr/lib/jvm/java-6-openjdk
 
 kune-version:
-@echo $(KUNE_VERSION)
-@echo $(TARGETJAR)
+	@echo $(KUNE_VERSION)
+	@echo $(TARGETJAR)
 
 build/kune::
 
@@ -45,59 +45,59 @@ binary: binary-indep
 
 clean/kune::
 
-        mvn clean:clean
+	mvn clean:clean
 
 install/kune::
 
 # FIXME make this via http://www.debian.org/doc/manuals/maint-guide/dother.en.html#conffiles
-        cp $(CURDIR)/bin/server.sh $(KUNE)/bin/
-        cp $(TARGETJAR) $(KUNE)/lib/kune-complete.jar
-        cp $(RESOURCES)/wave-server-production.properties $(ETCDIR)/wave-server.properties
-        cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
-        cp $(RESOURCES)/logging.properties.sample $(ETCDIR)
-        cp $(RESOURCES)/jaas.config $(ETCDIR)
-        cp $(RESOURCES)/log4j.prod.properties $(ETCDIR)/log4j.properties
-        cp $(RESOURCES)/mail-notif-template.html $(ETCDIR)
-        cp $(RESOURCES)/thumbnail_patterns/* $(THUMBDIR)
+	cp $(CURDIR)/bin/server.sh $(KUNE)/bin/
+	cp $(TARGETJAR) $(KUNE)/lib/kune-complete.jar
+	cp $(RESOURCES)/wave-server-production.properties $(ETCDIR)/wave-server.properties
+	cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
+	cp $(RESOURCES)/logging.properties.sample $(ETCDIR)
+	cp $(RESOURCES)/jaas.config $(ETCDIR)
+	cp $(RESOURCES)/log4j.prod.properties $(ETCDIR)/log4j.properties
+	cp $(RESOURCES)/mail-notif-template.html $(ETCDIR)
+	cp $(RESOURCES)/thumbnail_patterns/* $(THUMBDIR)
 
-#        DB configuration, see:
-#        http://people.debian.org/~seanius/policy/examples/dbconfig-common/doc/dbconfig-common-using.html#bootstrap
-#        http://people.debian.org/~seanius/policy/dbconfig-common-using.html/
-#        /usr/share/doc/dbconfig-common/examples/
+#	DB configuration, see:
+#	http://people.debian.org/~seanius/policy/examples/dbconfig-common/doc/dbconfig-common-using.html#bootstrap
+#	http://people.debian.org/~seanius/policy/dbconfig-common-using.html/
+#	/usr/share/doc/dbconfig-common/examples/
 # Debuggin: http://people.debian.org/~seanius/policy/dbconfig-common-using.html/ch-develguide.html#s-debugging
 
-        cat $(CURDIR)/src/main/resources/db/kune_initialize.sql \
-            $(CURDIR)/src/main/resources/db/init-data-countries.sql \
-            $(CURDIR)/src/main/resources/db/init-data-languages.sql \
-            $(CURDIR)/src/main/resources/db/update-0020-names-width.sql \
-            $(CURDIR)/src/main/resources/db/update-0021-avatarLastModifiedTime-deb.sql \
-            $(CURDIR)/src/main/resources/db/update-0022-userSingInLog.sql \
-            $(CURDIR)/src/main/resources/db/update-0023-inviation.sql \
-            $(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql \
-            $(CURDIR)/src/main/resources/db/update-0008-i18n-pt-br.sql \
-            $(CURDIR)/src/main/resources/db/update-0025-i18n-country-codes.txt \
-            $(CURDIR)/src/main/resources/db/update-0026-i18n-max-size.sql \
-            $(CURDIR)/src/main/resources/db/update-0027-waveindex.sql \
-            > $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
-        # Add the upgrades algo in the previous install
-        cp $(CURDIR)/src/main/resources/db/init-data-countries.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5
-        cp $(CURDIR)/src/main/resources/db/init-data-languages.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b6
-        cp $(CURDIR)/src/main/resources/db/update-0020-names-width.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b12
-        cp $(CURDIR)/src/main/resources/db/update-0021-avatarLastModifiedTime-deb.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b23
-        cp $(CURDIR)/src/main/resources/db/update-0022-userSingInLog.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b25
-        cp $(CURDIR)/src/main/resources/db/update-0023-inviation.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b4
-        cp $(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b20
-        cp $(CURDIR)/src/main/resources/db/update-0025-i18n-country-codes.txt $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b24
-        cp $(CURDIR)/src/main/resources/db/update-0026-i18n-max-size.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b27
-        cp $(CURDIR)/src/main/resources/db/update-0027-waveindex.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b34
+	cat $(CURDIR)/src/main/resources/db/kune_initialize.sql \
+		$(CURDIR)/src/main/resources/db/init-data-countries.sql \
+		$(CURDIR)/src/main/resources/db/init-data-languages.sql \
+		$(CURDIR)/src/main/resources/db/update-0020-names-width.sql \
+		$(CURDIR)/src/main/resources/db/update-0021-avatarLastModifiedTime-deb.sql \
+		$(CURDIR)/src/main/resources/db/update-0022-userSingInLog.sql \
+		$(CURDIR)/src/main/resources/db/update-0023-inviation.sql \
+		$(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql \
+		$(CURDIR)/src/main/resources/db/update-0008-i18n-pt-br.sql \
+		$(CURDIR)/src/main/resources/db/update-0025-i18n-country-codes.txt \
+		$(CURDIR)/src/main/resources/db/update-0026-i18n-max-size.sql \
+		$(CURDIR)/src/main/resources/db/update-0027-waveindex.sql \
+		> $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
+#	Add the upgrades algo in the previous install
+	cp $(CURDIR)/src/main/resources/db/init-data-countries.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5
+	cp $(CURDIR)/src/main/resources/db/init-data-languages.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b6
+	cp $(CURDIR)/src/main/resources/db/update-0020-names-width.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b12
+	cp $(CURDIR)/src/main/resources/db/update-0021-avatarLastModifiedTime-deb.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b23
+	cp $(CURDIR)/src/main/resources/db/update-0022-userSingInLog.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.2.0+b25
+	cp $(CURDIR)/src/main/resources/db/update-0023-inviation.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b4
+	cp $(CURDIR)/src/main/resources/db/update-0024-add-indexes.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b20
+	cp $(CURDIR)/src/main/resources/db/update-0025-i18n-country-codes.txt $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b24
+	cp $(CURDIR)/src/main/resources/db/update-0026-i18n-max-size.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b27
+	cp $(CURDIR)/src/main/resources/db/update-0027-waveindex.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b34
 
 # FIXME
-#        cp logrotate $(DEST)/etc/logrotate.d/
+#	cp logrotate $(DEST)/etc/logrotate.d/
 
 # FIXME find another better way to do this (and remove rsync build dep)
-        rsync -aC --delete $(CURDIR)/src/main/webapp/* $(KUNE)/webapp
-        rsync -aC --delete $(TARGETC)/ws/* $(KUNE)/webclient/ws
-        rsync -aC --delete $(TARGETC)/wse/* $(KUNE)/webclient/wse
+	rsync -aC --delete $(CURDIR)/src/main/webapp/* $(KUNE)/webapp
+	rsync -aC --delete $(TARGETC)/ws/* $(KUNE)/webclient/ws
+	rsync -aC --delete $(TARGETC)/wse/* $(KUNE)/webclient/wse
 
 #get-orig-source:
-#        sh -e debian/orig-tar.sh
+#	sh -e debian/orig-tar.sh
