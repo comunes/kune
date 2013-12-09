@@ -1,3 +1,9 @@
+kune (0.3.0+b36) unstable; urgency=low
+
+  * Fix for #543 (allow spaces and other separators in invitations)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 09 Dec 2013 18:41:20 +0100
+
 kune (0.3.0+b35) unstable; urgency=low
 
   * Wave indexing via db (fix #355)

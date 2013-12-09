@@ -25,9 +25,10 @@ package cc.kune.common.shared.utils;
 
 import static org.junit.Assert.*;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class TextUtilsTest.
  * 
@@ -37,6 +38,14 @@ public class TextUtilsTest {
 
   /** The Constant DOMAIN_REGEXP. */
   private static final String DOMAIN_REGEXP = "^http([s]|)://localhost/.*";
+
+  private void compare(final String[] expected, final String[] result) {
+    assertTrue("Arrays not the same length (expected: " + Arrays.toString(expected) + " result: "
+        + Arrays.toString(result) + ")", expected.length == result.length);
+    for (int i = 0; i < expected.length; i++) {
+      assertEquals(result[i], expected[i]);
+    }
+  }
 
   /**
    * Test de accent.
@@ -69,8 +78,31 @@ public class TextUtilsTest {
     assertTrue("kk@ex.com,   kk@ex2.com, kk@ex3.com".matches(TextUtils.EMAIL_REGEXP_LIST));
     assertFalse("kk@ex.com   ;kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
     assertFalse("kk@ex.com;kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+    assertTrue("kk@ex.com kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
     // with Carriage Return, etc:
+    assertTrue("kk@ex.com\n kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+    assertFalse("kk@ex.com\n kk\n@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
     assertTrue("kk@ex.com, \t  \n  \f  \r kk@ex2.com".matches(TextUtils.EMAIL_REGEXP_LIST));
+  }
+
+  @Test
+  public void testEmailListSplit() {
+    compare(new String[] { "kk@ex.com", "kk@ex2.com" },
+        TextUtils.emailStringToArray("kk@ex.com,kk@ex2.com"));
+    compare(new String[] { "kk@ex.com", "kk@ex2.com" },
+        TextUtils.emailStringToArray("kk@ex.com, kk@ex2.com"));
+    compare(new String[] { "kk@ex.com", "kk@ex2.com" },
+        TextUtils.emailStringToArray("kk@ex.com,,,, kk@ex2.com"));
+    compare(new String[] { "kk@ex.com", "kk@ex2.com" },
+        TextUtils.emailStringToArray("kk@ex.com,     kk@ex2.com"));
+    compare(new String[] { "kk@ex.com", "kk@ex2.com", "kk@ex3.com" },
+        TextUtils.emailStringToArray("kk@ex.com,     kk@ex2.com, kk@ex3.com"));
+    compare(new String[] { "kk@ex.com", "kk@ex2.com" },
+        TextUtils.emailStringToArray("kk@ex.com kk@ex2.com"));
+    compare(new String[] { "kk@ex.com", "kk@ex2.com" },
+        TextUtils.emailStringToArray("kk@ex.com\n kk@ex2.com"));
+    compare(new String[] { "kk@ex.com", "kk@ex2.com" },
+        TextUtils.emailStringToArray("kk@ex.com, \t  \n  \f  \r kk@ex2.com"));
   }
 
   /**

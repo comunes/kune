@@ -32,7 +32,7 @@ import com.google.gwt.safehtml.shared.UriUtils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TextUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TextUtils {
@@ -40,10 +40,10 @@ public class TextUtils {
   // Original regexp from http://www.regular-expressions.info/email.html
   /** The Constant EMAIL_REGEXP. */
   public static final String EMAIL_REGEXP = "[-!#$%&\'*+/=?_`{|}~a-z0-9^]+(\\.[-!#$%&\'*+/=?_`{|}~a-z0-9^]+)*@(localhost|([a-z0-9]([-a-z0-9]*[a-z0-9])?\\.)+[a-z0-9]([-a-z0-9]*[a-z0-9]))?";
-  
+
   /** The Constant EMAIL_REGEXP_LIST. */
   public static final String EMAIL_REGEXP_LIST = "(" + EMAIL_REGEXP + "|,| |\\s)+";
-  
+
   /** The Constant IN_DEVELOPMENT. */
   public static final String IN_DEVELOPMENT = "In development";
 
@@ -68,10 +68,10 @@ public class TextUtils {
 
   /** The Constant SHORTNAME_REGEXP. */
   public static final String SHORTNAME_REGEXP = "^[a-z0-9]+$";
-  
+
   /** The Constant SHORTNAME_UPPER_REGEXP. */
   public static final String SHORTNAME_UPPER_REGEXP = "^[a-zA-Z0-9]+$";
-  
+
   /** Actual accented values, corresponds one to one with ASCII. */
   private static final String UNICODE = "\u00C0\u00E0\u00C8\u00E8\u00CC\u00EC\u00D2\u00F2\u00D9\u00F9"
       + "\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DD\u00FD"
@@ -89,11 +89,15 @@ public class TextUtils {
 
   /**
    * see WordUtils#abbreviate.
-   *
-   * @param str the str
-   * @param lower the lower
-   * @param upper the upper
-   * @param appendToEnd the append to end
+   * 
+   * @param str
+   *          the str
+   * @param lower
+   *          the lower
+   * @param upper
+   *          the upper
+   * @param appendToEnd
+   *          the append to end
    * @return the string
    */
   public static String abbreviate(final String str, int lower, int upper, final String appendToEnd) {
@@ -140,7 +144,7 @@ public class TextUtils {
 
   /**
    * Br.
-   *
+   * 
    * @return the string
    */
   public static String br() {
@@ -149,7 +153,7 @@ public class TextUtils {
 
   /**
    * Brbr.
-   *
+   * 
    * @return the string
    */
   public static String brbr() {
@@ -158,9 +162,11 @@ public class TextUtils {
 
   /**
    * see WordUtils#capitalize(String, char[]).
-   *
-   * @param str the str
-   * @param delimiters the delimiters
+   * 
+   * @param str
+   *          the str
+   * @param delimiters
+   *          the delimiters
    * @return the string
    */
   public static String capitalize(final String str, final char[] delimiters) {
@@ -190,9 +196,11 @@ public class TextUtils {
 
   /**
    * see WordUtils#capitalizeFully(String).
-   *
-   * @param str the str
-   * @param delimiters the delimiters
+   * 
+   * @param str
+   *          the str
+   * @param delimiters
+   *          the delimiters
    * @return the string
    */
   public static String capitalizeFully(String str, final char[] delimiters) {
@@ -205,9 +213,11 @@ public class TextUtils {
   }
 
   /**
-   * Removes accents from a string and replace it with ASCII equivalent (á => a).
-   *
-   * @param s The string to englishify
+   * Removes accents from a string and replace it with ASCII equivalent (á =>
+   * a).
+   * 
+   * @param s
+   *          The string to englishify
    * @return The string without the accents.
    */
   public static String deAccent(final String s) {
@@ -227,8 +237,9 @@ public class TextUtils {
 
   /**
    * Default string.
-   *
-   * @param str the str
+   * 
+   * @param str
+   *          the str
    * @return the string
    */
   private static String defaultString(final String str) {
@@ -237,9 +248,11 @@ public class TextUtils {
 
   /**
    * Ellipsis.
-   *
-   * @param text the text
-   * @param length the length
+   * 
+   * @param text
+   *          the text
+   * @param length
+   *          the length
    * @return the string
    */
   public static String ellipsis(final String text, final int length) {
@@ -248,9 +261,29 @@ public class TextUtils {
   }
 
   /**
+   * To email list to array.
+   * 
+   * @param textFieldValue
+   *          the text field value
+   * @return the string[]
+   */
+  public static String[] emailStringToArray(final String emailList) {
+    final String[] splitted = emailList.split("[, \\s]");
+    final ArrayList<String> withoutSpaces = new ArrayList<String>();
+    for (final String element : splitted) {
+      final String trim = element.trim();
+      if (trim.length() > 0) {
+        withoutSpaces.add(trim);
+      }
+    }
+    return withoutSpaces.toArray(new String[withoutSpaces.size()]);
+  }
+
+  /**
    * Empty.
-   *
-   * @param string the string
+   * 
+   * @param string
+   *          the string
    * @return true, if successful
    */
   public static boolean empty(final String string) {
@@ -261,8 +294,9 @@ public class TextUtils {
    * This method escape only some dangerous html chars
    * 
    * Try to use SimpleHtmlSanitizer better.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    * @return the string
    */
   public static String escapeHtmlLight(final String source) {
@@ -281,9 +315,11 @@ public class TextUtils {
 
   /**
    * Generates a href link (with target="_blank").
-   *
-   * @param href the href
-   * @param text the text
+   * 
+   * @param href
+   *          the href
+   * @param text
+   *          the text
    * @return the string
    */
   public static String generateHtmlLink(final String href, final String text) {
@@ -292,10 +328,13 @@ public class TextUtils {
 
   /**
    * Generates a href link.
-   *
-   * @param href the href
-   * @param text the text
-   * @param targetBlank the target blank
+   * 
+   * @param href
+   *          the href
+   * @param text
+   *          the text
+   * @param targetBlank
+   *          the target blank
    * @return the string
    */
   public static String generateHtmlLink(final String href, final String text, final boolean targetBlank) {
@@ -308,9 +347,11 @@ public class TextUtils {
 
   /**
    * Checks if is delimiter.
-   *
-   * @param ch the ch
-   * @param delimiters the delimiters
+   * 
+   * @param ch
+   *          the ch
+   * @param delimiters
+   *          the delimiters
    * @return true, if is delimiter
    */
   private static boolean isDelimiter(final char ch, final char[] delimiters) {
@@ -328,8 +369,9 @@ public class TextUtils {
 
   /**
    * Not empty.
-   *
-   * @param string the string
+   * 
+   * @param string
+   *          the string
    * @return true, if successful
    */
   public static boolean notEmpty(final String string) {
@@ -338,8 +380,9 @@ public class TextUtils {
 
   /**
    * Removes the http.
-   *
-   * @param text the text
+   * 
+   * @param text
+   *          the text
    * @return the string
    */
   public static String removeHttp(final String text) {
@@ -348,8 +391,9 @@ public class TextUtils {
 
   /**
    * Removes the last slash.
-   *
-   * @param text the text
+   * 
+   * @param text
+   *          the text
    * @return the string
    */
   public static String removeLastSlash(final String text) {
@@ -358,8 +402,9 @@ public class TextUtils {
 
   /**
    * Split tags.
-   *
-   * @param tagsString the tags string
+   * 
+   * @param tagsString
+   *          the tags string
    * @return the array list
    */
   public static ArrayList<String> splitTags(final String tagsString) {
@@ -388,8 +433,9 @@ public class TextUtils {
    */
   /**
    * Unescape.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    * @return the string
    */
   public static String unescape(final String source) {

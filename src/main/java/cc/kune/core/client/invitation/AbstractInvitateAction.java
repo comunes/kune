@@ -26,6 +26,7 @@ package cc.kune.core.client.invitation;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.actions.FieldValidationUtil;
 import cc.kune.core.client.actions.RolActionAutoUpdated;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -48,59 +49,74 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractInvitateAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
 
   /** The cancel id. */
   private final String cancelId;
-  
+
   /** The diag. */
   private PromptTopDialog diag;
-  
+
   /** The dialog id. */
   private final String dialogId;
-  
+
   /** The invitation service. */
   private final Provider<InvitationServiceAsync> invitationService;
-  
+
   /** The invite id. */
   private final String inviteId;
-  
+
   /** The prompt text. */
   private final String promptText;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The text box id. */
   private final String textBoxId;
-  
+
   /** The title. */
   private final String title;
-  
+
   /** The type. */
   private final InvitationType type;
 
   /**
    * Instantiates a new abstract invitate action.
-   *
-   * @param stateManager the state manager
-   * @param session the session
-   * @param rightsManager the rights manager
-   * @param invitationService the invitation service
-   * @param type the type
-   * @param rolRequired the rol required
-   * @param authNeed the auth need
-   * @param visibleForNonMemb the visible for non memb
-   * @param visibleForMembers the visible for members
-   * @param title the title
-   * @param promptText the prompt text
-   * @param dialogId the dialog id
-   * @param textBoxId the text box id
-   * @param inviteId the invite id
-   * @param cancelId the cancel id
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param rightsManager
+   *          the rights manager
+   * @param invitationService
+   *          the invitation service
+   * @param type
+   *          the type
+   * @param rolRequired
+   *          the rol required
+   * @param authNeed
+   *          the auth need
+   * @param visibleForNonMemb
+   *          the visible for non memb
+   * @param visibleForMembers
+   *          the visible for members
+   * @param title
+   *          the title
+   * @param promptText
+   *          the prompt text
+   * @param dialogId
+   *          the dialog id
+   * @param textBoxId
+   *          the text box id
+   * @param inviteId
+   *          the invite id
+   * @param cancelId
+   *          the cancel id
    */
   public AbstractInvitateAction(final StateManager stateManager, final Session session,
       final AccessRightsClientManager rightsManager,
@@ -121,8 +137,12 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
     this.cancelId = cancelId;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
@@ -162,8 +182,9 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
 
   /**
    * Do action.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   private void doAction(final StateToken token) {
     if (diag.isValid()) {
@@ -181,36 +202,21 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
       switch (type) {
       case TO_SITE:
         invitationService.get().inviteToSite(session.getUserHash(), token,
-            toArray(diag.getTextFieldValue()), callback);
+            TextUtils.emailStringToArray(diag.getTextFieldValue()), callback);
         break;
       case TO_GROUP:
         invitationService.get().inviteToGroup(session.getUserHash(), token,
-            toArray(diag.getTextFieldValue()), callback);
+            TextUtils.emailStringToArray(diag.getTextFieldValue()), callback);
         break;
       case TO_LISTS:
         invitationService.get().inviteToList(session.getUserHash(), token,
-            toArray(diag.getTextFieldValue()), callback);
+            TextUtils.emailStringToArray(diag.getTextFieldValue()), callback);
         break;
       default:
         break;
       }
 
     }
-  }
-
-  /**
-   * To array.
-   *
-   * @param textFieldValue the text field value
-   * @return the string[]
-   */
-  private String[] toArray(final String textFieldValue) {
-    final String[] splitted = textFieldValue.split(",");
-    final String[] withoutSpaces = new String[splitted.length];
-    for (int i = 0; i < splitted.length; i++) {
-      withoutSpaces[i] = splitted[i].trim();
-    }
-    return withoutSpaces;
   }
 
 }
