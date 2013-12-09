@@ -342,14 +342,14 @@ li#k-home-world-icon {
     <!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
     <!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
     <form id="loginrender" action="javascript:;" style="display: none;">
-        <input type="text" id="usernamerender" name="usernamerender"
-            value="" /> <input type="password" id="passwordrender"
+        <input type="text" id="usernamerender" name="usernamerender" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+            value="" /> <input type="password" id="passwordrender" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
             name="passwordrender" value="" />
     </form>
     <!-- Remember user/pass (this part is used to send the values to the browser) -->
     <form id="login" action="javascript:;" style="display: none;">
-        <input type="text" id="username" name="username" value="" /> <input
-            type="password" id="password" name="password" value="" />
+        <input type="text" id="username" name="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="" /> <input
+            type="password" id="password" name="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="" />
     </form>
     <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
     <noscript>

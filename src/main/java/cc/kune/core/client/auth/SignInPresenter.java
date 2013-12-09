@@ -360,7 +360,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
     if (getView().isSignInFormValid()) {
       getView().maskProcessing();
 
-      final String nickOrEmail = getView().getNickOrEmail();
+      final String nickOrEmail = getView().getNickOrEmail().toLowerCase();
       final String passwd = getView().getLoginPassword();
       doSignIn(nickOrEmail, passwd, false, new AsyncCallback<Void>() {
 
