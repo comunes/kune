@@ -44,9 +44,9 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
    */
   @Override
   protected void onContinueModuleLoad() {
-    ginjector.getSpinerPresenter();
     ginjector.getEventBusWithLogger();
     ginjector.getGwtGuiProvider();
+    ginjector.getSpinerPresenter();
     final EmbedPresenter embedPresenter = ginjector.getEmbedPresenter().get();
     embedPresenter.forceReveal();
     com.google.gwt.user.client.History.addValueChangeHandler(embedPresenter);
