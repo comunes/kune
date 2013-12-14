@@ -24,7 +24,6 @@ package cc.kune.core.client.services;
 
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
-import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -68,7 +67,7 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
    * @return the string
    */
   private String calculateUrl(final StateToken token, final boolean download, final boolean useHash) {
-    final Url url = new Url(server() + FileConstants.DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+    final Url url = new Url(prefix + FileConstants.DOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
         token.toString()));
     if (download) {
       url.add(new UrlParam(FileConstants.DOWNLOAD, download));
@@ -103,7 +102,7 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
    * @return the background image url
    */
   public String getBackgroundImageUrl(final StateToken token, final boolean noCache) {
-    return new Url(server() + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+    return new Url(prefix + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
         token.toString())).toString() + getCacheSuffix(noCache);
   }
 
@@ -117,7 +116,7 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
    * @return the background resized url
    */
   public String getBackgroundResizedUrl(final StateToken token, final ImageSize imageSize) {
-    return new Url(server() + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
+    return new Url(prefix + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
         token.toString()), new UrlParam(FileConstants.IMGSIZE, imageSize.toString())).toString()
         + getCacheSuffix(true);
   }
@@ -156,10 +155,6 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
    */
   public String getUrl(final StateToken token) {
     return calculateUrl(token, false, false);
-  }
-
-  private String server() {
-    return session.isEmbedded() ? EmbedConfiguration.get().getServerUrl() : "";
   }
 
 }

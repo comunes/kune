@@ -32,13 +32,13 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SharedFileDownloadUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SharedFileDownloadUtils {
 
   /** The prefix. */
-  private final String prefix;
+  protected String prefix;
 
   /**
    * Instantiates a new shared file download utils.
@@ -49,22 +49,19 @@ public class SharedFileDownloadUtils {
 
   /**
    * Instantiates a new shared file download utils.
-   *
-   * @param prefix the prefix
+   * 
+   * @param prefix
+   *          the prefix
    */
   public SharedFileDownloadUtils(final String prefix) {
-    if (prefix.endsWith("/")) {
-      final int lastSlash = prefix.lastIndexOf("/");
-      this.prefix = prefix.substring(0, lastSlash == -1 ? prefix.length() : lastSlash);
-    } else {
-      this.prefix = prefix;
-    }
+    setPrefix(prefix);
   }
 
   /**
    * Gets the cache suffix.
-   *
-   * @param noCache the no cache
+   * 
+   * @param noCache
+   *          the no cache
    * @return the cache suffix
    */
   public String getCacheSuffix(final boolean noCache) {
@@ -73,8 +70,9 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the group logo.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the group logo
    */
   public String getGroupLogo(final GroupDTO group) {
@@ -85,12 +83,17 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the logo avatar html.
-   *
-   * @param groupName the group name
-   * @param groupHasLogo the group has logo
-   * @param isPersonal the is personal
-   * @param size the size
-   * @param hvspace the hvspace
+   * 
+   * @param groupName
+   *          the group name
+   * @param groupHasLogo
+   *          the group has logo
+   * @param isPersonal
+   *          the is personal
+   * @param size
+   *          the size
+   * @param hvspace
+   *          the hvspace
    * @return the logo avatar html
    */
   public String getLogoAvatarHtml(final String groupName, final boolean groupHasLogo,
@@ -103,8 +106,9 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the logo image url.
-   *
-   * @param groupName the group name
+   * 
+   * @param groupName
+   *          the group name
    * @return the logo image url
    */
   public String getLogoImageUrl(final String groupName) {
@@ -113,9 +117,11 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the logo image url.
-   *
-   * @param groupName the group name
-   * @param noCache the no cache
+   * 
+   * @param groupName
+   *          the group name
+   * @param noCache
+   *          the no cache
    * @return the logo image url
    */
   public String getLogoImageUrl(final String groupName, final boolean noCache) {
@@ -126,7 +132,7 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the prefix.
-   *
+   * 
    * @return the prefix
    */
   public String getPrefix() {
@@ -135,8 +141,9 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the url.
-   *
-   * @param hash the hash
+   * 
+   * @param hash
+   *          the hash
    * @return the url
    */
   public String getUrl(final String hash) {
@@ -145,8 +152,9 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the user avatar.
-   *
-   * @param username the username
+   * 
+   * @param username
+   *          the username
    * @return the user avatar
    */
   public String getUserAvatar(final String username) {
@@ -155,9 +163,11 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the user avatar.
-   *
-   * @param username the username
-   * @param noCache the no cache
+   * 
+   * @param username
+   *          the username
+   * @param noCache
+   *          the no cache
    * @return the user avatar
    */
   public String getUserAvatar(final String username, final boolean noCache) {
@@ -168,13 +178,23 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the user avatar.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    * @return the user avatar
    */
   public String getUserAvatar(final UserSimpleDTO user) {
     return prefix
         + (user.hasLogo() ? getLogoImageUrl(user.getShortName()) : FileConstants.PERSON_NO_AVATAR_IMAGE);
+  }
+
+  public void setPrefix(final String prefix) {
+    if (prefix.endsWith("/")) {
+      final int lastSlash = prefix.lastIndexOf("/");
+      this.prefix = prefix.substring(0, lastSlash == -1 ? prefix.length() : lastSlash);
+    } else {
+      this.prefix = prefix;
+    }
   }
 
 }

@@ -1,3 +1,9 @@
+kune (0.3.0+b37) unstable; urgency=low
+
+  * More work in #561 to embed waves
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 14 Dec 2013 09:16:57 +0100
+
 kune (0.3.0+b36) unstable; urgency=low
 
   * Fix for #567. Safari on iphone/ipad capitalize the first letter of username"
