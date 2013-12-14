@@ -189,7 +189,9 @@ public class SharedFileDownloadUtils {
   }
 
   public void setPrefix(final String prefix) {
-    if (prefix.endsWith("/")) {
+    if (prefix == null) {
+      this.prefix = "";
+    } else if (prefix.endsWith("/")) {
       final int lastSlash = prefix.lastIndexOf("/");
       this.prefix = prefix.substring(0, lastSlash == -1 ? prefix.length() : lastSlash);
     } else {
