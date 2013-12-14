@@ -18,6 +18,17 @@
   <set-property name="user.agent" value="safari,gecko1_8,ie6,ie8"/>
   <set-property name="mobile.user.agent" value="not_mobile"/>
 
+  <!-- Remote logging and deobfuscation -->
+
+  <set-property name="gwt.logging.simpleRemoteHandler"
+    value="ENABLED" />
+  <set-property name="compiler.stackMode" value="emulated" />
+  <!-- <set-property name="compiler.useSourceMaps" value="true" /> -->
+  <set-configuration-property name="compiler.emulatedStack.recordLineNumbers"
+    value="true" />
+  <set-configuration-property name="compiler.emulatedStack.recordFileNames"
+    value="true" />
+
   <!-- I18n ===================================================== -->
   <!-- http://bit.ly/uCiBDm -->
   <!-- More locale name in package com.google.gwt.i18n.client.impl.cldr -->
