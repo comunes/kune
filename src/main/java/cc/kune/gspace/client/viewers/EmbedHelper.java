@@ -57,6 +57,7 @@ public class EmbedHelper {
   public static UserInfoDTO parse(final UserInfoDTOJs userInfo) {
     final String userHash = userInfo.getUserHash();
     if (userHash == null || userHash.equals("null")) {
+      // sesssion.setHash?
       Log.info("We are NOT logged");
       return null;
     } else {

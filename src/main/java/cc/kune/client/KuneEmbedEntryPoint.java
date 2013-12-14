@@ -22,11 +22,14 @@
  */
 package cc.kune.client;
 
+import cc.kune.common.client.log.Log;
+import cc.kune.core.client.embed.EmbedConfJso;
 import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.client.embed.EmbedJsActions;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Element;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
 /**
@@ -35,6 +38,10 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
+
+  private static native Element window() /*-{
+		return $wnd;
+  }-*/;
 
   /** The ginjector. */
   private KuneEmbedGinjector ginjector;
@@ -46,10 +53,24 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
   protected void onContinueModuleLoad() {
     ginjector.getEventBusWithLogger();
     ginjector.getGwtGuiProvider();
-    ginjector.getSpinerPresenter();
     final EmbedPresenter embedPresenter = ginjector.getEmbedPresenter().get();
     embedPresenter.forceReveal();
+    ginjector.getSpinerPresenter();
     com.google.gwt.user.client.History.addValueChangeHandler(embedPresenter);
+
+    // We try to read some js variables, and to fire some events if present
+    final Element wnd = window();
+    final EmbedConfJso conf = (EmbedConfJso) wnd.getPropertyJSO("kuneEmbedConf");
+    Log.info("kuneEmbedConf: " + conf);
+    if (conf != null) {
+      EmbedConfiguration.init(conf);
+    }
+    final String id = wnd.getPropertyString("kuneIdToEmbed");
+    Log.info("kuneIdToEmbed: " + id);
+    if (id != null) {
+      EmbedJsActions.embed(id);
+    }
+
   }
 
   /**
