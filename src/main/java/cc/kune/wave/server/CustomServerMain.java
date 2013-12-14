@@ -304,6 +304,7 @@ public class CustomServerMain {
     server.addServlet("/robot/register/*", injector.getInstance(RobotRegistrationServlet.class));
     server.addServlet("/robot/rpc", injector.getInstance(ActiveApiServlet.class));
     server.addServlet("/webclient/remote_logging", injector.getInstance(RemoteLoggingServiceImpl.class));
+    server.addServlet("/wse/remote_logging", injector.getInstance(RemoteLoggingServiceImpl.class));
     server.addServlet("/profile/*", injector.getInstance(FetchProfilesServlet.class));
     server.addServlet("/waveref/*", injector.getInstance(WaveRefServlet.class));
 
