@@ -75,11 +75,18 @@ Your can use another string and the message will looks like "Thanks for joining 
 
       // or calling these methods
 
+      function kuneEmbedInit() {
+        // General configuration
+        document.confEmbed(kuneEmbedConf);
+        // We embed in the specified div that #kunegroup.doc
+        document.embed(kuneIdToEmbed);
+      }
+
       window.onload = function () {
         // General configuration
         // document.confEmbed(kuneEmbedConf);
         // We embed in the specified div that #kunegroup.doc
-        // document.embed('site.docs.3.1');
+        // document.embed(kuneIdToEmbed);
       }
     </script>
     <!-- or include in the 'kune-embed-hook' div, using a object and a #hash with the doc id without any configuration:

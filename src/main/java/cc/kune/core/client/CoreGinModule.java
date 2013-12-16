@@ -76,6 +76,7 @@ import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.sitebar.AbstractSignOutAction;
 import cc.kune.core.client.sitebar.ErrorsDialog;
@@ -269,6 +270,7 @@ public class CoreGinModule extends ExtendedGinModule {
     eagle(CoreParts.class);
 
     // SN
+    s(ClientFileDownloadUtils.class);
     s(GroupSNAdminsMenuItemsRegistry.class);
     s(GroupSNCollabsMenuItemsRegistry.class);
     s(GroupSNPendingsMenuItemsRegistry.class);

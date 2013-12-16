@@ -18,13 +18,13 @@
   <!-- Remote logging and deobfuscation -->
 
   <set-property name="gwt.logging.simpleRemoteHandler"
-    value="ENABLED" />
-  <set-property name="compiler.stackMode" value="emulated" />
-  <set-property name="compiler.useSourceMaps" value="true" />
-  <set-configuration-property name="compiler.emulatedStack.recordLineNumbers"
-    value="true" />
-  <set-configuration-property name="compiler.emulatedStack.recordFileNames"
-    value="true" />
+    value="DISABLED" />
+  <!-- <set-property name="compiler.stackMode" value="emulated" /> -->
+  <!-- <set-property name="compiler.useSourceMaps" value="true" /> -->
+  <!-- <set-configuration-property name="compiler.emulatedStack.recordLineNumbers" -->
+  <!-- value="true" /> -->
+  <!-- <set-configuration-property name="compiler.emulatedStack.recordFileNames" -->
+  <!-- value="true" /> -->
 
   <!-- I18n ===================================================== -->
   <!-- http://bit.ly/uCiBDm -->

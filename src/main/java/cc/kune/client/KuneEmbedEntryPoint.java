@@ -22,8 +22,6 @@
  */
 package cc.kune.client;
 
-import cc.kune.common.client.log.Log;
-import cc.kune.core.client.embed.EmbedConfJso;
 import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.client.embed.EmbedJsActions;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
@@ -58,20 +56,15 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
     ginjector.getSpinerPresenter();
     com.google.gwt.user.client.History.addValueChangeHandler(embedPresenter);
 
-    // We try to read some js variables, and to fire some events if present
-    final Element wnd = window();
-    final EmbedConfJso conf = (EmbedConfJso) wnd.getPropertyJSO("kuneEmbedConf");
-    Log.info("kuneEmbedConf: " + conf);
-    if (conf != null) {
-      EmbedConfiguration.init(conf);
-    }
-    final String id = wnd.getPropertyString("kuneIdToEmbed");
-    Log.info("kuneIdToEmbed: " + id);
-    if (id != null) {
-      EmbedJsActions.embed(id);
-    }
-
+    // Inspired in:
+    // http://code.google.com/p/gwt-exporter/wiki/GettingStarted#Quick_start_guide
+    onLoad();
   }
+
+  private native void onLoad() /*-{
+		if ($wnd.kuneEmbedInit)
+			$wnd.kuneEmbedInit();
+  }-*/;
 
   /**
    * On start module load.

@@ -30,11 +30,11 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.ui.DottedTabPanel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
-import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.hspace.client.HSpacePresenter.HSpaceView;
 
@@ -56,14 +56,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HSpacePanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /**
    * The Interface HSpacePanelUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface HSpacePanelUiBinder extends UiBinder<Widget, HSpacePanel> {
@@ -71,7 +71,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /** The Constant K_HOME_GLOBAL_STATS. */
   public static final String K_HOME_GLOBAL_STATS = "k-home-global-stats";
-  
+
   /** The Constant K_HOME_GROUP_STATS. */
   public static final String K_HOME_GROUP_STATS = "k-home-group-stats";
 
@@ -82,68 +82,68 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   private static HSpacePanelUiBinder uiBinder = GWT.create(HSpacePanelUiBinder.class);
 
   /** The down utils. */
-  private final SharedFileDownloadUtils downUtils;
-  
+  private final ClientFileDownloadUtils downUtils;
+
   /** The global stats. */
   @UiField
   FlowPanel globalStats;
-  
+
   /** The global stats parent. */
   private final RootPanel globalStatsParent;
-  
+
   /** The global stats title. */
   @UiField
   public Label globalStatsTitle;
-  
+
   /** The global stats total groups count. */
   @UiField
   public InlineLabel globalStatsTotalGroupsCount;
-  
+
   /** The global stats total groups title. */
   @UiField
   public InlineLabel globalStatsTotalGroupsTitle;
-  
+
   /** The global stats total users count. */
   @UiField
   public InlineLabel globalStatsTotalUsersCount;
-  
+
   /** The global stats total users title. */
   @UiField
   public InlineLabel globalStatsTotalUsersTitle;
-  
+
   /** The group stats parent. */
   private final RootPanel groupStatsParent;
 
   /** The home toolbar. */
   private final ActionSimplePanel homeToolbar;
-  
+
   /** The last activity in your group. */
   @UiField
   public FlowPanel lastActivityInYourGroup;
-  
+
   /** The last activity in your groups text. */
   private final String lastActivityInYourGroupsText;
-  
+
   /** The last activity in your group title. */
   @UiField
   public Label lastActivityInYourGroupTitle;
-  
+
   /** The last activity panel. */
   @UiField
   FlowPanel lastActivityPanel;
-  
+
   /** The last groups. */
   @UiField
   public FlowPanel lastGroups;
-  
+
   /** The last groups panel. */
   @UiField
   FlowPanel lastGroupsPanel;
-  
+
   /** The last groups title. */
   @UiField
   public Label lastGroupsTitle;
-  
+
   /** The last published contents. */
   @UiField
   public FlowPanel lastPublishedContents;
@@ -161,26 +161,31 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /** The tab panel. */
   private final DottedTabPanel tabPanel;
-  
+
   /** The unread in your inbox. */
   @UiField
   public Hyperlink unreadInYourInbox;
-  
+
   /** The widget. */
   private final Widget widget;
 
   /**
    * Instantiates a new h space panel.
-   *
-   * @param i18n the i18n
-   * @param armor the armor
-   * @param linkProv the link prov
-   * @param downUtils the down utils
-   * @param homeToolbar the home toolbar
+   * 
+   * @param i18n
+   *          the i18n
+   * @param armor
+   *          the armor
+   * @param linkProv
+   *          the link prov
+   * @param downUtils
+   *          the down utils
+   * @param homeToolbar
+   *          the home toolbar
    */
   @Inject
   public HSpacePanel(final I18nTranslationService i18n, final GSpaceArmor armor,
-      final Provider<GroupContentHomeLink> linkProv, final SharedFileDownloadUtils downUtils,
+      final Provider<GroupContentHomeLink> linkProv, final ClientFileDownloadUtils downUtils,
       final ActionSimplePanel homeToolbar) {
     this.linkProv = linkProv;
     this.downUtils = downUtils;
@@ -215,7 +220,9 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     armor.getHomeSpace().add(RootPanel.get("k-home-wrapper"));
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -223,7 +230,9 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     return widget;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#blinkCurrentTab()
    */
   @Override
@@ -233,9 +242,11 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /**
    * Format.
-   *
-   * @param modifiedOn the modified on
-   * @param name the name
+   * 
+   * @param modifiedOn
+   *          the modified on
+   * @param name
+   *          the name
    * @return the string
    */
   private String format(final Long modifiedOn, final String name) {
@@ -243,23 +254,33 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     return TextUtils.ellipsis(modOn + " ~ " + name, 50);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalGroupsCount()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalGroupsCount
+   * ()
    */
   @Override
   public HasText getGlobalStatsTotalGroupsCount() {
     return globalStatsTotalGroupsCount;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalUsersCount()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalUsersCount
+   * ()
    */
   @Override
   public HasText getGlobalStatsTotalUsersCount() {
     return globalStatsTotalUsersCount;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getToolbar()
    */
   @Override
@@ -267,24 +288,35 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     return homeToolbar;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getUnreadInYourInbox()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#getUnreadInYourInbox()
    */
   @Override
   public HasText getUnreadInYourInbox() {
     return unreadInYourInbox;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setInboxUnreadVisible(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setInboxUnreadVisible(
+   * boolean)
    */
   @Override
   public void setInboxUnreadVisible(final boolean visible) {
     unreadInYourInbox.setVisible(visible);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastContentsOfMyGroup(java.util.List)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastContentsOfMyGroup
+   * (java.util.List)
    */
   @Override
   public void setLastContentsOfMyGroup(final List<ContentSimpleDTO> lastContentsOfMyGroupsList) {
@@ -298,8 +330,12 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastGroups(java.util.List)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastGroups(java.util
+   * .List)
    */
   @Override
   public void setLastGroups(final List<GroupDTO> lastGroupsList) {
@@ -312,8 +348,12 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastPublishedContents(java.util.List)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastPublishedContents
+   * (java.util.List)
    */
   @Override
   public void setLastPublishedContents(final List<ContentSimpleDTO> lastPublishedContentsList) {
@@ -329,8 +369,11 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setStatsVisible(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setStatsVisible(boolean)
    */
   @Override
   public void setStatsVisible(final boolean visible) {
@@ -342,8 +385,12 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#setUserGroupsActivityVisible(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setUserGroupsActivityVisible
+   * (boolean)
    */
   @Override
   public void setUserGroupsActivityVisible(final boolean visible) {

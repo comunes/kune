@@ -49,6 +49,7 @@ import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
 import cc.kune.core.client.notify.spiner.SpinerPanel;
 import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.sitebar.AbstractSignOutAction;
 import cc.kune.core.client.sitebar.ErrorsDialog;
@@ -152,6 +153,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     eagle(TokenMatcher.class);
     s(ActionRegistryByType.class);
 
+    s(ClientFileDownloadUtils.class);
     s(ErrorsDialog.class);
   }
 }
