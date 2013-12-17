@@ -42,12 +42,16 @@ public class EmbedConfJso extends JavaScriptObject {
   }-*/;
 
   /**
-   * Gets the sitebar position offset.
+   * Gets the sitebar right margin.
    * 
-   * @return the sitebar position
+   * @return the sitebar right margin
    */
-  public final native int getSitebarPosition() /*-{
-		return this.sitebarPosition || 30;
+  public final native int getSitebarRightMargin() /*-{
+		return this.sitebarRightMargin || 30;
+  }-*/;
+
+  public final native int getSitebarTopMargin() /*-{
+		return this.sitebarTopMargin || 0;
   }-*/;
 
 }

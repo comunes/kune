@@ -19,8 +19,6 @@ body.fontface {
     "DejaVu Sans", Tahoma, sans-serif;
 }
 
-m
-
 div,span {
   outline: 0 none;
 }
@@ -1395,6 +1393,7 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
   -webkit-border-bottom-right-radius: 5px;
   line-height: 11px;
   font-size: 14px;
+  z-index: 100000;
 }
 
 .k-embed-sitebar div {

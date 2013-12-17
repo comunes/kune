@@ -65,19 +65,14 @@ public class EmbedSitebar {
     }
     popup = new PopupPanel(false, false);
     popup.setWidget(toolbar);
-    popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
-      @Override
-      public void setPosition(final int offsetWidth, final int offsetHeight) {
-        setPopupPosition();
-      }
-    });
+    centerAndShow();
     popup.setAnimationEnabled(false);
     popup.setStyleName("oc-user-msg-popup");
     popup.addStyleName("k-embed-sitebar");
     Window.addResizeHandler(new ResizeHandler() {
       @Override
       public void onResize(final ResizeEvent event) {
-        setPopupPosition();
+        centerAndShow();
       }
     });
 
@@ -86,7 +81,19 @@ public class EmbedSitebar {
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
         // This is needed because the panel has different sinces depending on
         // the session
-        setPopupPosition();
+        centerAndShow();
+      }
+    });
+  }
+
+  private void centerAndShow() {
+    popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+      @Override
+      public void setPosition(final int offsetWidth, final int offsetHeight) {
+        final Integer rightMargin = EmbedConfiguration.get().getSitebarRightMargin();
+        final int left = Window.getClientWidth() - toolbar.getOffsetWidth() - rightMargin;
+        final int top = EmbedConfiguration.get().getSitebarTopMargin();
+        popup.setPopupPosition(left, top);
       }
     });
   }
@@ -100,10 +107,5 @@ public class EmbedSitebar {
       signInLink.withIcon(new Url(sitelogo));
       signOutLink.withIcon(new Url(sitelogo));
     }
-  }
-
-  private void setPopupPosition() {
-    final Integer position = EmbedConfiguration.get().getSitebarPosition();
-    popup.setPopupPosition(Window.getClientWidth() - toolbar.getOffsetWidth() - position, 0);
   }
 }

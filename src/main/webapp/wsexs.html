@@ -64,18 +64,34 @@ Your can use another string and the message will looks like "Thanks for joining 
     <!-- Banner for wave errors -->
     <div class="banner" id="banner"></div>
     <div id="kune-embed-hook"></div>
+    <!-- You can include the previous nocache-js script in your page, and use it with something like: -->
         <script type='text/javascript'>
       // This is a example of how to configure the kune embbeded panel
-      var obj = {
-      'serverUrl': 'http://localhost:8888/', 'readOnly': false, 'sitebarPosition': 50,
+      var kuneEmbedConf = {
+      'serverUrl': 'http://localhost:8888/', 'readOnly': false, 'sitebarRightMargin': 50, 'sitebarTopMargin': 0,
       'signInText': 'Participate', 'showSignOut': true, 'showSignIn': true
       };
+      var kuneIdToEmbed = 'site.docs.3.1';
+
+      // or calling these methods
+
+      function kuneEmbedInit() {
+        // General configuration
+        document.confEmbed(kuneEmbedConf);
+        // We embed in the specified div that #kunegroup.doc
+        document.embed(kuneIdToEmbed);
+      }
+
       window.onload = function () {
         // General configuration
-        // document.confEmbed(obj);
+        // document.confEmbed(kuneEmbedConf);
         // We embed in the specified div that #kunegroup.doc
-        // document.embed('site.docs.3.1');
+        // document.embed(kuneIdToEmbed);
       }
     </script>
+    <!-- or include in the 'kune-embed-hook' div, using a object and a #hash with the doc id without any configuration:
+       <object data="http://kune.example.com/wse.html#!some-group.docs.1" type="text/html"
+       style="width:100%; height:100%; overflow: hidden;"></object>
+       -->
 </body>
 </html>

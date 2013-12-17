@@ -33,8 +33,7 @@
 
   <!-- For http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/FAQ_SOP
     http://stackoverflow.com/questions/4923252/running-gwt-application-from-remote-machine
-    http://stackoverflow.com/questions/9856158/gwt-compile-to-html-file
-     -->
+    http://stackoverflow.com/questions/9856158/gwt-compile-to-html-file -->
   <add-linker name="xsiframe" />
   <!-- Entrypoint =============================================== -->
   <entry-point class="cc.kune.client.KuneEmbedEntryPoint" />

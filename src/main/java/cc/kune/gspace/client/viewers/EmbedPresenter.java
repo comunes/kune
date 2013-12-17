@@ -36,6 +36,7 @@ import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.events.EmbAppStartEvent;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
@@ -90,6 +91,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   public interface EmbedView extends WaveViewerView {
   }
 
+  private final ClientFileDownloadUtils clientDownUtils;
   private final boolean devMode = true;
   private final Session session;
   private final Provider<EmbedSitebar> sitebar;
@@ -121,8 +123,10 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   @Inject
   public EmbedPresenter(final EventBus eventBus, final EmbedView view, final EmbedProxy proxy,
       final WaveClientManager waveClientManager, final WaveClientProvider waveClient,
-      final I18nTranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar) {
+      final I18nTranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar,
+      final ClientFileDownloadUtils clientDownUtils) {
     super(eventBus, view, proxy);
+    this.clientDownUtils = clientDownUtils;
     NotifyUser.showProgressLoading();
     // FIXME: Maybe use AppStart to detect browser compatibility in the future
     this.session = session;
@@ -217,6 +221,9 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   }
 
   private void onAppStarted() {
+    // We set the prefix for avatars url with the server url
+    clientDownUtils.setPrefix(EmbedConfiguration.get().getServerUrl());
+
     final String userHash = session.getUserHash();
     Log.info("Started embed presenter with user hash: " + userHash);
 

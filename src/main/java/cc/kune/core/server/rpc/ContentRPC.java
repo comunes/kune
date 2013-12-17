@@ -636,10 +636,6 @@ public class ContentRPC implements ContentService, RPC {
     return getSummaryTags(group);
   }
 
-  private User getUser() {
-    return userSessionManager.getUser();
-  }
-
   /**
    * Checks if is user logged in.
    * 

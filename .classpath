@@ -69,7 +69,6 @@
 	<classpathentry kind="var" path="M2_REPO/com/bradrydzewski/gwt-cal/0.9.3-dndCreation/gwt-cal-0.9.3-dndCreation.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/allen-sauer/gwt/dnd/gwt-dnd/3.2.3/gwt-dnd-3.2.3.jar" sourcepath="M2_REPO/com/allen-sauer/gwt/dnd/gwt-dnd/3.2.3/gwt-dnd-3.2.3-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/adamtacy/gwt-fx/r464/gwt-fx-r464.jar"/>
-	<classpathentry kind="var" path="M2_REPO/com/allen-sauer/gwt/log/gwt-log/3.2.1/gwt-log-3.2.1.jar" sourcepath="M2_REPO/com/allen-sauer/gwt/log/gwt-log/3.2.1/gwt-log-3.2.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-servlet/2.5.1/gwt-servlet-2.5.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-servlet/2.5.1/gwt-servlet-2.5.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-user/2.5.1/gwt-user-2.5.1.jar" sourcepath="M2_REPO/com/google/gwt/gwt-user/2.5.1/gwt-user-2.5.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/waveprotocol/gwt-util-src/0.3.45/gwt-util-src-0.3.45.jar"/>

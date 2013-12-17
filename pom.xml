@@ -181,12 +181,6 @@
     </dependency>
     <!-- cc -->
     <dependency>
-      <groupId>com.allen-sauer.gwt.log</groupId>
-      <artifactId>gwt-log</artifactId>
-      <version>3.2.1</version>
-      <scope>provided</scope>
-    </dependency>
-    <dependency>
       <groupId>com.allen-sauer.gwt.voices</groupId>
       <artifactId>gwt-voices</artifactId>
       <version>3.2.0</version>

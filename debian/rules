@@ -98,6 +98,8 @@ install/kune::
 	rsync -aC --delete $(CURDIR)/src/main/webapp/* $(KUNE)/webapp
 	rsync -aC --delete $(TARGETC)/ws/* $(KUNE)/webclient/ws
 	rsync -aC --delete $(TARGETC)/wse/* $(KUNE)/webclient/wse
+	rsync -aC --delete $(TARGETC)/WEB-INF/deploy/ws/symbolMaps/ $(KUNE)/symbolMapsWs/
+	rsync -aC --delete $(TARGETC)/WEB-INF/deploy/wse/symbolMaps/ $(KUNE)/symbolMapsWse/
 
 #get-orig-source:
 #	sh -e debian/orig-tar.sh

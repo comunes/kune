@@ -10,8 +10,8 @@ public class EmbedConfiguration {
   private static EmbedConfJso conf;
 
   public static native void export() /*-{
-    $doc.confEmbed = $entry(@cc.kune.core.client.embed.EmbedConfiguration::init(Lcc/kune/core/client/embed/EmbedConfJso;))
-  }-*/;
+                                     $doc.confEmbed = $entry(@cc.kune.core.client.embed.EmbedConfiguration::init(Lcc/kune/core/client/embed/EmbedConfJso;))
+                                     }-*/;
 
   public static EmbedConfJso get() {
     return conf;
@@ -28,5 +28,4 @@ public class EmbedConfiguration {
 
   public EmbedConfiguration() {
   }
-
 }
