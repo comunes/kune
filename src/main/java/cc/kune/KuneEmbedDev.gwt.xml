@@ -7,6 +7,7 @@
   <inherits name="cc.kune.KuneEmbed"/>
 
   <set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" />
+
   <!-- Uncomment if you are enabling server side deobfuscation of StackTraces -->
   <!-- <set-property name="compiler.emulatedStack" value="true" /> -->
   <!-- <set-configuration-property name="compiler.emulatedStack.recordLineNumbers" value="true" /> -->
