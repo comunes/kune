@@ -33,8 +33,6 @@
   <set-property name="gwt.logging.hasWidgetsHandler" value="DISABLED" />
   <set-property name="gwt.logging.popupHandler" value="DISABLED" />
   <set-property name="gwt.logging.systemHandler" value="ENABLED" />
-  <set-property name="gwt.logging.simpleRemoteHandler"
-    value="DISABLED" />
 
   <!-- gwt-platform ============================================= -->
   <inherits name='com.gwtplatform.mvp.Mvp' />

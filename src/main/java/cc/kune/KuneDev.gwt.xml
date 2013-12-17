@@ -8,10 +8,13 @@
 
   <inherits name="cc.kune.Kune" />
 
-  <!-- Uncomment if you are enabling server side deobfuscation of StackTraces
-    <set-property name="compiler.emulatedStack" value="true" /> <set-configuration-property
-    name="compiler.emulatedStack.recordLineNumbers" value="true" /> <set-configuration-property
-    name="compiler.emulatedStack.recordFileNames" value="true" /> -->
+  <set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" />
+
+  <!-- Uncomment if you are enabling server side deobfuscation of StackTraces -->
+  <!-- <set-property name="compiler.emulatedStack" value="true" /> -->
+  <!-- <set-configuration-property name="compiler.emulatedStack.recordLineNumbers" value="true" /> -->
+  <!-- <set-configuration-property name="compiler.emulatedStack.recordFileNames" value="true" /> -->
+
   <!-- NOTE: this only compiles for chromium/safari ============= -->
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
   <!-- <set-property name="user.agent" value="gecko1_8" /> -->
