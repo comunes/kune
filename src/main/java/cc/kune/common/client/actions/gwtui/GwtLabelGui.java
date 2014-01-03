@@ -27,8 +27,8 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;

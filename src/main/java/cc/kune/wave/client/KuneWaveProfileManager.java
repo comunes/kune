@@ -29,22 +29,12 @@ import org.waveprotocol.wave.client.account.impl.ProfileImpl;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
-import cc.kune.chat.client.ChatOptions;
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.FileConstants;
-import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
-import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
-import com.calclab.emite.im.client.roster.RosterItem;
-import com.calclab.emite.im.client.roster.XmppRoster;
-import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
-import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
-import com.calclab.emite.im.client.roster.events.RosterRetrievedEvent;
-import com.calclab.emite.im.client.roster.events.RosterRetrievedHandler;
-import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 
 /**

@@ -25,7 +25,6 @@ package cc.kune.core.client.embed;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-
 import com.google.gwt.event.shared.HasHandlers;
 
 public class EmbedOpenEvent extends GwtEvent<EmbedOpenEvent.EmbedOpenHandler> { 

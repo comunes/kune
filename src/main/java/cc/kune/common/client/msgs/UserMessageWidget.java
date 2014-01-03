@@ -22,7 +22,8 @@
  */
 package cc.kune.common.client.msgs;
 
-import static com.google.gwt.query.client.GQuery.*;
+import static com.google.gwt.query.client.GQuery.$;
+import static com.google.gwt.query.client.GQuery.Effects;
 import cc.kune.common.client.msgs.resources.UserMessageImagesUtil;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.ui.Animations;

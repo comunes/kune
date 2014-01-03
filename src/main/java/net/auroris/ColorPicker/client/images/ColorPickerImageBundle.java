@@ -22,8 +22,8 @@
  */
 package net.auroris.ColorPicker.client.images;
 
-import com.google.gwt.user.client.ui.ImageBundle;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
+import com.google.gwt.user.client.ui.ImageBundle;
 
 // TODO: Auto-generated Javadoc
 /* Images for the ColorPicker
