@@ -106,7 +106,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
         shareSettings);
-    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
+    add(TOPBAR, all, shareInTwitter, shareInGPlus);
     add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);

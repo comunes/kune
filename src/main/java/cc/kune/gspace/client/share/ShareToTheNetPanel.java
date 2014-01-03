@@ -69,18 +69,18 @@ public class ShareToTheNetPanel extends Composite implements ShareToTheNetView {
     // Clone social net menu items
     final ButtonDescriptor twitterBtn = new ButtonDescriptor(twitterItem);
     final ButtonDescriptor gPlusBtn = new ButtonDescriptor(gPlusItem);
-    final ButtonDescriptor identicaBtn = new ButtonDescriptor(identicaItem);
+    // final ButtonDescriptor identicaBtn = new ButtonDescriptor(identicaItem);
 
     twitterBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
         ActionStyles.MENU_BTN_STYLE_NO_BORDER_LEFT);
     gPlusBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
         ActionStyles.MENU_BTN_STYLE_NO_BORDER_LEFT);
-    identicaBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
-        ActionStyles.MENU_BTN_STYLE_NO_BORDER_LEFT);
+    // identicaBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
+    // ActionStyles.MENU_BTN_STYLE_NO_BORDER_LEFT);
 
     actionsPanel.add(twitterBtn);
     actionsPanel.add(gPlusBtn);
-    actionsPanel.add(identicaBtn);
+    // actionsPanel.add(identicaBtn);
 
     flow.add(actionsPanel);
 

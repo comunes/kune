@@ -118,7 +118,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
     add(TOPBAR, allExceptRoot, shareInvitation);
     add(TOPBAR, containersNoRoot, shareDialog);
-    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
+    add(TOPBAR, all, shareInTwitter, shareInGPlus);
     add(TOPBAR, containersNoRoot, subscribersCount);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, delFolderMenuItem);
     add(TOPBAR, contents, participateBtn, copyContent, chatAbout, writeToParticipants);

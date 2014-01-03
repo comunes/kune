@@ -100,7 +100,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     add(BOTTOMBAR, contents, folderGoUp);
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
+    add(TOPBAR, all, shareInTwitter, shareInGPlus);
     add(TOPBAR, contents, shareSettings);
     // add(TOPBAR,
     // shareInFacebook, all);

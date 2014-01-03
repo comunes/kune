@@ -111,7 +111,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
         shareSettings);
-    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
+    add(TOPBAR, all, shareInTwitter, shareInGPlus);
     add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem);

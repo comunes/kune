@@ -93,7 +93,7 @@ public class BartersClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, contents, participateBtn, copyContent, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem, delContentMenuItem,
         addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(TOPBAR, all, shareInTwitter, shareInIdentica, shareInGPlus);
+    add(TOPBAR, all, shareInTwitter, shareInGPlus);
     add(TOPBAR, contents, shareSettings);
     // actionsRegistry.addAction(TOPBAR,
     // shareInFacebook, all);
