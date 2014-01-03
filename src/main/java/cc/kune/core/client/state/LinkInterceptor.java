@@ -41,8 +41,9 @@ public class LinkInterceptor implements NativePreviewHandler {
   @Inject
   public LinkInterceptor(final HistoryWrapper history) {
     this.history = history;
-    // FIXME: Disabled til ?dev=true param
-    // Event.addNativePreviewHandler(this);
+    if (SessionInstance.get().isGuiInDevelopment()) {
+      Event.addNativePreviewHandler(this);
+    }
   }
 
   @Override
