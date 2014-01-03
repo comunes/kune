@@ -1,5 +1,5 @@
 kune (0.3.0+b38) unstable; urgency=low
-
+  * Merge of share dialog (wip of #550)
   * More work in #561 to embed waves (jsni export improved, clientdownutils 
     singleton, removed server logs)
 
