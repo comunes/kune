@@ -25,7 +25,7 @@ package cc.kune.common.client.actions;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionStyles.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ActionStyles {
@@ -41,14 +41,13 @@ public class ActionStyles {
   public static final String MENU_BTN_STYLE_NO_BORDER_LEFT = "k-fl, k-noborder, k-no-backimage, k-nobackcolor";
 
   /** The Constant MENU_BTN_STYLE_NO_BORDER_RIGHT. */
-  public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
-  //  public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
+  public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-no-backimage, k-nobackcolor";
 
   /** The Constant MENU_BTN_STYLE_RIGHT. */
   public static final String MENU_BTN_STYLE_RIGHT = "gwt-Button k-button, k-btn, k-5corners, k-def-docbtn, k-fr";
-  
+
   public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
-  
+
   /** The Constant SITEBAR_STYLE. */
   public static final String SITEBAR_STYLE = "k-no-backimage, k-btn-sitebar, k-noborder, k-nobackcolor";
 
