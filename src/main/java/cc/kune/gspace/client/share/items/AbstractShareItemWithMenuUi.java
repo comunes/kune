@@ -29,7 +29,7 @@ import com.google.gwt.resources.client.ImageResource;
 
 public abstract class AbstractShareItemWithMenuUi extends AbstractShareItemUi {
 
-  private final MenuDescriptor menu;
+  protected final MenuDescriptor menu;
 
   public AbstractShareItemWithMenuUi(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final CommonResources res) {

@@ -21,7 +21,6 @@ package cc.kune.gspace.client.share.items;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.resources.CommonResources;
@@ -59,18 +58,16 @@ public class ShareItemOfAdmin extends AbstractShareItemWithMenuUi {
 
   public AbstractShareItemUi of(final GroupDTO group, final String typeId,
       final ShareToListOnItemRemoved onItemRemoved) {
-    final MenuDescriptor menuDel = new MenuDescriptor();
     setGroupName(group);
-    final MenuItemDescriptor adminToEditor = new MenuItemDescriptor(menuDel,
-        new AbstractExtendedAction() {
-          @Override
-          public void actionPerformed(final ActionEvent event) {
-            // TODO
-            NotifyUser.info("In development");
-          }
-        });
+    final MenuItemDescriptor adminToEditor = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        // TODO
+        NotifyUser.info("In development");
+      }
+    });
     adminToEditor.withText(I18n.t("Change to editor")).withIcon(res.downArrow());
-    final MenuItemDescriptor remove = new MenuItemDescriptor(menuDel, new AbstractExtendedAction() {
+    final MenuItemDescriptor remove = new MenuItemDescriptor(menu, new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
         final String participant = group.getShortName();
