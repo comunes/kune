@@ -1,5 +1,6 @@
-/*******************************************************************************
- * Copyright (C) 2007, 2013 Licensed to the Comunes Association (CA) under
+/*
+ *
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -17,8 +18,8 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *******************************************************************************/
-
+ *
+ */
 package cc.kune.client;
 
 import com.google.gwt.event.shared.EventBus;
@@ -29,23 +30,27 @@ import com.gwtplatform.mvp.client.proxy.TokenFormatter;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KunePlaceManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KunePlaceManager extends PlaceManagerImpl {
 
   /**
    * Instantiates a new kune place manager.
-   *
-   * @param eventBus the event bus
-   * @param tokenFormatter the token formatter
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param tokenFormatter
+   *          the token formatter
    */
   @Inject
   public KunePlaceManager(final EventBus eventBus, final TokenFormatter tokenFormatter) {
     super(eventBus, tokenFormatter);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.proxy.PlaceManager#revealDefaultPlace()
    */
   @Override

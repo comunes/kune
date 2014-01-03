@@ -42,21 +42,21 @@ public class ContentPosition {
   /** The Constant CENTER. */
   public static final String CENTER = "center";
 
-  /** The i18n. */
-  private static I18nTranslationService i18n;
-
   /** The Constant LEFT. */
   public static final String LEFT = "left";
 
+  /** The Constant RIGHT. */
+  public static final String RIGHT = "right";
+  
+  /** The i18n. */
+  private static I18nTranslationService i18n;
+  
   /** The position objs. */
   private static Object[][] positionObjs;
 
   /** The Constant POSITIONS. */
   protected static final String[][] POSITIONS = { new String[] { LEFT }, new String[] { CENTER },
       new String[] { RIGHT } };
-
-  /** The Constant RIGHT. */
-  public static final String RIGHT = "right";
 
   /**
    * Gets the positions.

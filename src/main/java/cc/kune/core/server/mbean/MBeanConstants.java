@@ -1,5 +1,6 @@
-/*******************************************************************************
- * Copyright (C) 2007, 2013 Licensed to the Comunes Association (CA) under
+/*
+ *
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -17,8 +18,8 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *******************************************************************************/
-
+ *
+ */
 package cc.kune.core.server.mbean;
 
 // TODO: Auto-generated Javadoc

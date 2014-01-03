@@ -1,5 +1,6 @@
-/*******************************************************************************
- * Copyright (C) 2007, 2013 Licensed to the Comunes Association (CA) under
+/*
+ *
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -17,8 +18,8 @@
  *
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *******************************************************************************/
-
+ *
+ */
 package cc.kune.chat.client;
 
 import cc.kune.core.client.services.ClientFileDownloadUtils;
@@ -31,22 +32,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneChatAvatarConfig.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneChatAvatarConfig implements AvatarConfig {
 
   /** The chat options. */
   private final ChatOptions chatOptions;
-  
+
   /** The down utils. */
   private final ClientFileDownloadUtils downUtils;
 
   /**
    * Instantiates a new kune chat avatar config.
-   *
-   * @param chatOptions the chat options
-   * @param downUtils the down utils
+   * 
+   * @param chatOptions
+   *          the chat options
+   * @param downUtils
+   *          the down utils
    */
   @Inject
   public KuneChatAvatarConfig(final ChatOptions chatOptions, final ClientFileDownloadUtils downUtils) {
@@ -54,8 +57,12 @@ public class KuneChatAvatarConfig implements AvatarConfig {
     this.downUtils = downUtils;
   }
 
-  /* (non-Javadoc)
-   * @see com.calclab.hablar.icons.client.AvatarConfig#getUrl(com.calclab.emite.core.client.xmpp.stanzas.XmppURI, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.calclab.hablar.icons.client.AvatarConfig#getUrl(com.calclab.emite.core
+   * .client.xmpp.stanzas.XmppURI, java.lang.String)
    */
   @Override
   public String getUrl(final XmppURI uri, final String size) {
