@@ -65,8 +65,8 @@ public abstract class AbstractCustomCORSFilter implements Filter {
    */
   private CORSRequestHandler handler;
 
-  protected abstract void customDoFilter(HttpServletRequest request, HttpServletResponse response)
-      throws IOException, ServletException;
+  protected abstract void customDoFilter(HttpServletRequest request, HttpServletResponse response,
+      final FilterChain chain) throws IOException, ServletException;
 
   /**
    * Called by the web container to indicate to a filter that it is being taken
@@ -107,7 +107,7 @@ public abstract class AbstractCustomCORSFilter implements Filter {
 
         // Simple / actual CORS request
         handler.handleActualRequest(request, response);
-        customDoFilter(request, response);
+        customDoFilter(request, response, chain);
 
       } else if (type.equals(CORSRequestType.PREFLIGHT)) {
 
@@ -119,7 +119,7 @@ public abstract class AbstractCustomCORSFilter implements Filter {
 
         // Not a CORS request, but allow it through
         request.setAttribute("cors.isCorsRequest", false); // tag
-        customDoFilter(request, response);
+        customDoFilter(request, response, chain);
 
       } else {
 

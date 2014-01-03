@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.util.regex.Pattern;
 
+import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -37,8 +38,8 @@ public class CORSServiceFilter extends AbstractCustomCORSFilter {
   }
 
   @Override
-  protected void customDoFilter(final HttpServletRequest request, final HttpServletResponse response)
-      throws IOException, ServletException {
+  protected void customDoFilter(final HttpServletRequest request, final HttpServletResponse response,
+      final FilterChain chain) throws IOException, ServletException {
     final boolean cors = (Boolean) request.getAttribute("cors.isCorsRequest");
 
     // This part is similar to RESTServiceFilter
