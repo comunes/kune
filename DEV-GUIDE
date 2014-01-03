@@ -458,7 +458,10 @@ We usually upload new packages to this repo via bin/repopubli.sh
 
 When doing a GIT commit, you should always provide an appropriate description of your changes. 
 
-After relevant commits, you should also update the Changelog (in "debian/changelog" ) using "dch". You should include there all the comments of the commit. This changelog will be included in the DEB package.
+After relevant commits, you should also update the Changelog (in "debian/changelog" ) using "dch". You should include there all the comments of the commit. This changelog will be included in the DEB package and tranks a summary of changes between debian package versions.
+
+Also update the ./Changelog using: http://git.savannah.gnu.org/gitweb/?p=gnulib.git;a=blob_plain;f=build-aux/gitlog-to-changelog
+perl $PATH-TO-GIT-CHANGELOG/git-to-changelog.pl > ChangeLog
 
 NOTE: If you don't have "dch", install it in Debian/Ubuntu/related: 'apt-get install devscripts'
 
