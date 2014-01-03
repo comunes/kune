@@ -35,30 +35,31 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseWizardSndForm.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseWizardSndForm extends DefaultForm implements LicenseWizardSndFormView {
-  
+
   /** The Constant COMMON_LICENSES_ID. */
   public static final String COMMON_LICENSES_ID = "k-lwsf-common";
-  
+
   /** The Constant OTHER_LICENSES_ID. */
   public static final String OTHER_LICENSES_ID = "k-lwsf-other";
-  
+
   /** The Constant RADIO_FIELD_NAME. */
   public static final String RADIO_FIELD_NAME = "k-lwsf-radio";
-  
+
   /** The common licenses radio. */
   private final Radio commonLicensesRadio;
-  
+
   /** The other licenses radio. */
   private final Radio otherLicensesRadio;
 
   /**
    * Instantiates a new license wizard snd form.
-   *
-   * @param i18n the i18n
+   * 
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public LicenseWizardSndForm(final I18nTranslationService i18n) {
@@ -87,7 +88,9 @@ public class LicenseWizardSndForm extends DefaultForm implements LicenseWizardSn
 
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.IsWidget#asWidget()
    */
   @Override
@@ -95,15 +98,20 @@ public class LicenseWizardSndForm extends DefaultForm implements LicenseWizardSn
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardSndFormView#isCommonLicensesSelected()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardSndFormView#
+   * isCommonLicensesSelected()
    */
   @Override
   public boolean isCommonLicensesSelected() {
     return commonLicensesRadio.getValue();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.ui.DefaultForm#reset()
    */
   @Override

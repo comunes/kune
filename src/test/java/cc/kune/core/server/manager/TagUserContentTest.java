@@ -40,25 +40,25 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagUserContentTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TagUserContentTest extends PersistencePreLoadedDataTest {
-  
+
   /** The Constant DUMMY_TAG. */
   private static final String DUMMY_TAG = "dummy";
-  
+
   /** The finder. */
   @Inject
   TagUserContentFinder finder;
-  
+
   /** The manager. */
   @Inject
   TagUserContentManagerDefault manager;
 
   /** The tag. */
   private Tag tag;
-  
+
   /** The tag manager. */
   @Inject
   TagManager tagManager;
@@ -85,7 +85,7 @@ public class TagUserContentTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the tag user content.
-   *
+   * 
    * @return the tag user content
    */
   private TagUserContent createTagUserContent() {
@@ -96,7 +96,7 @@ public class TagUserContentTest extends PersistencePreLoadedDataTest {
 
   /**
    * Gets the tags as string.
-   *
+   * 
    * @return the tags as string
    */
   @Test
@@ -108,7 +108,7 @@ public class TagUserContentTest extends PersistencePreLoadedDataTest {
 
   /**
    * Gets the tags grouped.
-   *
+   * 
    * @return the tags grouped
    */
   @Test

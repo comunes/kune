@@ -25,15 +25,15 @@ package cc.kune.core.server.notifier;
 // TODO: Auto-generated Javadoc
 /**
  * Type of notifications for users.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum NotificationType {
-  
+
   /** The chat. */
-  chat, 
- /** The email. */
- email, 
- /** The wave. */
- wave
+  chat,
+  /** The email. */
+  email,
+  /** The wave. */
+  wave
 }

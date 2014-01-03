@@ -43,25 +43,36 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GxtGuiProvider.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GxtGuiProvider {
 
   /**
    * Instantiates a new gxt gui provider.
-   *
-   * @param guiProvider the gui provider
-   * @param gxtSubMenuGui the gxt sub menu gui
-   * @param gxtMenuGui the gxt menu gui
-   * @param gxtMenuItemGui the gxt menu item gui
-   * @param gxtMenuSeparatorGui the gxt menu separator gui
-   * @param gxtPushButtonGui the gxt push button gui
-   * @param gxtButtonGui the gxt button gui
-   * @param gwtIconLabelGui the gwt icon label gui
-   * @param gxtToolbarGui the gxt toolbar gui
-   * @param gxtToolbarSeparatorGui the gxt toolbar separator gui
-   * @param gxtMenuTitleItemGui the gxt menu title item gui
+   * 
+   * @param guiProvider
+   *          the gui provider
+   * @param gxtSubMenuGui
+   *          the gxt sub menu gui
+   * @param gxtMenuGui
+   *          the gxt menu gui
+   * @param gxtMenuItemGui
+   *          the gxt menu item gui
+   * @param gxtMenuSeparatorGui
+   *          the gxt menu separator gui
+   * @param gxtPushButtonGui
+   *          the gxt push button gui
+   * @param gxtButtonGui
+   *          the gxt button gui
+   * @param gwtIconLabelGui
+   *          the gwt icon label gui
+   * @param gxtToolbarGui
+   *          the gxt toolbar gui
+   * @param gxtToolbarSeparatorGui
+   *          the gxt toolbar separator gui
+   * @param gxtMenuTitleItemGui
+   *          the gxt menu title item gui
    */
   @Inject
   public GxtGuiProvider(final GuiProvider guiProvider, final Provider<GxtSubMenuGui> gxtSubMenuGui,

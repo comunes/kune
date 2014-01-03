@@ -25,23 +25,24 @@ package cc.kune.domain.utils;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface HasId.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface HasId {
-  
+
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   Long getId();
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   void setId(Long id);
 }

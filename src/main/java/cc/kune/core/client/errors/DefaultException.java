@@ -28,7 +28,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DefaultException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DefaultException extends InvocationException implements IsSerializable {
@@ -45,9 +45,11 @@ public class DefaultException extends InvocationException implements IsSerializa
 
   /**
    * Instantiates a new default exception.
-   *
-   * @param statusCode the status code
-   * @param message the message
+   * 
+   * @param statusCode
+   *          the status code
+   * @param message
+   *          the message
    */
   public DefaultException(final int statusCode, final String message) {
     super(statusCode + " " + message);
@@ -56,8 +58,9 @@ public class DefaultException extends InvocationException implements IsSerializa
 
   /**
    * Instantiates a new default exception.
-   *
-   * @param message the message
+   * 
+   * @param message
+   *          the message
    */
   public DefaultException(final String message) {
     super(message);
@@ -65,9 +68,11 @@ public class DefaultException extends InvocationException implements IsSerializa
 
   /**
    * Instantiates a new default exception.
-   *
-   * @param message the message
-   * @param cause the cause
+   * 
+   * @param message
+   *          the message
+   * @param cause
+   *          the cause
    */
   public DefaultException(final String message, final Throwable cause) {
     super(message, cause);
@@ -75,8 +80,9 @@ public class DefaultException extends InvocationException implements IsSerializa
 
   /**
    * Instantiates a new default exception.
-   *
-   * @param cause the cause
+   * 
+   * @param cause
+   *          the cause
    */
   public DefaultException(final Throwable cause) {
     super("", cause);

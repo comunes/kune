@@ -29,26 +29,26 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LinkDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LinkDTO implements IsSerializable {
-  
-  /** The short name. */
-  private String shortName;
-  
-  /** The long name. */
-  private String longName;
-  
+
   /** The icon url. */
   private String iconUrl;
-  
+
   /** The link. */
   private String link;
-  
+
+  /** The long name. */
+  private String longName;
+
   /** The rate. */
   private Double rate;
-  
+
+  /** The short name. */
+  private String shortName;
+
   /** The tags. */
   private List<TagDTO> tags;
 
@@ -61,11 +61,15 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Instantiates a new link dto.
-   *
-   * @param shortName the short name
-   * @param longName the long name
-   * @param iconUrl the icon url
-   * @param link the link
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
+   * @param iconUrl
+   *          the icon url
+   * @param link
+   *          the link
    */
   public LinkDTO(final String shortName, final String longName, final String iconUrl, final String link) {
     this.shortName = shortName;
@@ -76,7 +80,7 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Gets the icon url.
-   *
+   * 
    * @return the icon url
    */
   public String getIconUrl() {
@@ -85,7 +89,7 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Gets the link.
-   *
+   * 
    * @return the link
    */
   public String getLink() {
@@ -94,7 +98,7 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Gets the long name.
-   *
+   * 
    * @return the long name
    */
   public String getLongName() {
@@ -103,7 +107,7 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Gets the rate.
-   *
+   * 
    * @return the rate
    */
   public Double getRate() {
@@ -112,7 +116,7 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Gets the short name.
-   *
+   * 
    * @return the short name
    */
   public String getShortName() {
@@ -121,7 +125,7 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Gets the tags.
-   *
+   * 
    * @return the tags
    */
   public List<TagDTO> getTags() {
@@ -130,8 +134,9 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Sets the icon url.
-   *
-   * @param iconUrl the new icon url
+   * 
+   * @param iconUrl
+   *          the new icon url
    */
   public void setIconUrl(final String iconUrl) {
     this.iconUrl = iconUrl;
@@ -139,8 +144,9 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Sets the link.
-   *
-   * @param link the new link
+   * 
+   * @param link
+   *          the new link
    */
   public void setLink(final String link) {
     this.link = link;
@@ -148,8 +154,9 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Sets the long name.
-   *
-   * @param longName the new long name
+   * 
+   * @param longName
+   *          the new long name
    */
   public void setLongName(final String longName) {
     this.longName = longName;
@@ -157,8 +164,9 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Sets the rate.
-   *
-   * @param rate the new rate
+   * 
+   * @param rate
+   *          the new rate
    */
   public void setRate(final Double rate) {
     this.rate = rate;
@@ -166,8 +174,9 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Sets the short name.
-   *
-   * @param shortName the new short name
+   * 
+   * @param shortName
+   *          the new short name
    */
   public void setShortName(final String shortName) {
     this.shortName = shortName;
@@ -175,14 +184,17 @@ public class LinkDTO implements IsSerializable {
 
   /**
    * Sets the tags.
-   *
-   * @param tags the new tags
+   * 
+   * @param tags
+   *          the new tags
    */
   public void setTags(final List<TagDTO> tags) {
     this.tags = tags;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

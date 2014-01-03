@@ -44,7 +44,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DocumentServerTool.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -52,12 +52,17 @@ public class DocumentServerTool extends AbstractWaveBasedServerTool {
 
   /**
    * Instantiates a new document server tool.
-   *
-   * @param contentManager the content manager
-   * @param containerManager the container manager
-   * @param configurationManager the configuration manager
-   * @param i18n the i18n
-   * @param creationService the creation service
+   * 
+   * @param contentManager
+   *          the content manager
+   * @param containerManager
+   *          the container manager
+   * @param configurationManager
+   *          the configuration manager
+   * @param i18n
+   *          the i18n
+   * @param creationService
+   *          the creation service
    */
   @Inject
   public DocumentServerTool(final ContentManager contentManager,
@@ -69,8 +74,11 @@ public class DocumentServerTool extends AbstractWaveBasedServerTool {
         ServerToolTarget.forBoth);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.tool.ServerTool#initGroup(cc.kune.domain.User, cc.kune.domain.Group, java.lang.Object[])
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.tool.ServerTool#initGroup(cc.kune.domain.User,
+   * cc.kune.domain.Group, java.lang.Object[])
    */
   @Override
   public Group initGroup(final User user, final Group group, final Object... otherVars) {

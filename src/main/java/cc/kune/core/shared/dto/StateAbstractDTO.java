@@ -32,29 +32,29 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateAbstractDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class StateAbstractDTO implements IsSerializable {
-  
+
   /** The enabled tools. */
   private List<String> enabledTools;
-  
+
   /** The group. */
   private GroupDTO group;
-  
+
   /** The root container. */
   private ContainerDTO rootContainer;
-  
+
   /** The social network data. */
   private SocialNetworkDataDTO socialNetworkData;
-  
+
   /** The state token. */
   private StateToken stateToken;
-  
+
   /** The title. */
   private String title;
-  
+
   /** The tool name. */
   private String toolName;
 
@@ -66,7 +66,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the enabled tools.
-   *
+   * 
    * @return the enabled tools
    */
   public List<String> getEnabledTools() {
@@ -75,7 +75,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the group.
-   *
+   * 
    * @return the group
    */
   public GroupDTO getGroup() {
@@ -84,7 +84,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the group members.
-   *
+   * 
    * @return the group members
    */
   public SocialNetworkDTO getGroupMembers() {
@@ -93,7 +93,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the group rights.
-   *
+   * 
    * @return the group rights
    */
   public AccessRights getGroupRights() {
@@ -102,7 +102,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the participation.
-   *
+   * 
    * @return the participation
    */
   public ParticipationDataDTO getParticipation() {
@@ -111,7 +111,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the root container.
-   *
+   * 
    * @return the root container
    */
   public ContainerDTO getRootContainer() {
@@ -120,7 +120,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the social network data.
-   *
+   * 
    * @return the social network data
    */
   public SocialNetworkDataDTO getSocialNetworkData() {
@@ -129,7 +129,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the state token.
-   *
+   * 
    * @return the state token
    */
   public StateToken getStateToken() {
@@ -138,7 +138,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the title.
-   *
+   * 
    * @return the title
    */
   public String getTitle() {
@@ -147,7 +147,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the tool name.
-   *
+   * 
    * @return the tool name
    */
   public String getToolName() {
@@ -156,7 +156,7 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Gets the user buddies.
-   *
+   * 
    * @return the user buddies
    */
   public UserBuddiesDataDTO getUserBuddies() {
@@ -165,8 +165,9 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Sets the enabled tools.
-   *
-   * @param enabledTools the new enabled tools
+   * 
+   * @param enabledTools
+   *          the new enabled tools
    */
   public void setEnabledTools(final List<String> enabledTools) {
     this.enabledTools = enabledTools;
@@ -174,8 +175,9 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Sets the group.
-   *
-   * @param group the new group
+   * 
+   * @param group
+   *          the new group
    */
   public void setGroup(final GroupDTO group) {
     this.group = group;
@@ -183,8 +185,9 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Sets the root container.
-   *
-   * @param rootContainer the new root container
+   * 
+   * @param rootContainer
+   *          the new root container
    */
   public void setRootContainer(final ContainerDTO rootContainer) {
     this.rootContainer = rootContainer;
@@ -192,8 +195,9 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Sets the social network data.
-   *
-   * @param socialNetworkData the new social network data
+   * 
+   * @param socialNetworkData
+   *          the new social network data
    */
   public void setSocialNetworkData(final SocialNetworkDataDTO socialNetworkData) {
     this.socialNetworkData = socialNetworkData;
@@ -201,8 +205,9 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Sets the state token.
-   *
-   * @param stateToken the new state token
+   * 
+   * @param stateToken
+   *          the new state token
    */
   public void setStateToken(final StateToken stateToken) {
     this.stateToken = stateToken;
@@ -210,8 +215,9 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Sets the title.
-   *
-   * @param title the new title
+   * 
+   * @param title
+   *          the new title
    */
   public void setTitle(final String title) {
     this.title = title;
@@ -219,14 +225,17 @@ public abstract class StateAbstractDTO implements IsSerializable {
 
   /**
    * Sets the tool name.
-   *
-   * @param toolName the new tool name
+   * 
+   * @param toolName
+   *          the new tool name
    */
   public void setToolName(final String toolName) {
     this.toolName = toolName;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

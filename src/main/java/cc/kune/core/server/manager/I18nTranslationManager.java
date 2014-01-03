@@ -33,35 +33,42 @@ import cc.kune.domain.I18nTranslation;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface I18nTranslationManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
   /**
    * Gets the lexicon.
-   *
-   * @param language the language
+   * 
+   * @param language
+   *          the language
    * @return the lexicon
    */
   HashMap<String, String> getLexicon(String language);
 
   /**
    * Gets the translated lexicon.
-   *
-   * @param language the language
-   * @param languageFrom the language from
+   * 
+   * @param language
+   *          the language
+   * @param languageFrom
+   *          the language from
    * @return the translated lexicon
    */
   List<I18nTranslationDTO> getTranslatedLexicon(String language, String languageFrom);
 
   /**
    * Gets the translated lexicon.
-   *
-   * @param language the language
-   * @param languageFrom the language from
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param language
+   *          the language
+   * @param languageFrom
+   *          the language from
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the translated lexicon
    */
   SearchResultDTO<I18nTranslationDTO> getTranslatedLexicon(String language, String languageFrom,
@@ -69,30 +76,39 @@ public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
   /**
    * Gets the translation.
-   *
-   * @param language the language
-   * @param text the text
-   * @param noteForTranslators the note for translators
+   * 
+   * @param language
+   *          the language
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
    * @return the translation
    */
   String getTranslation(String language, String text, String noteForTranslators);
 
   /**
    * Gets the untranslated lexicon.
-   *
-   * @param language the language
-   * @param languageFrom the language from
+   * 
+   * @param language
+   *          the language
+   * @param languageFrom
+   *          the language from
    * @return the untranslated lexicon
    */
   List<I18nTranslationDTO> getUntranslatedLexicon(String language, String languageFrom);
 
   /**
    * Gets the untranslated lexicon.
-   *
-   * @param language the language
-   * @param languageFrom the language from
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param language
+   *          the language
+   * @param languageFrom
+   *          the language from
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the untranslated lexicon
    */
   SearchResultDTO<I18nTranslationDTO> getUntranslatedLexicon(String language, String languageFrom,
@@ -100,11 +116,14 @@ public interface I18nTranslationManager extends Manager<I18nTranslation, Long> {
 
   /**
    * Sets the translation.
-   *
-   * @param id the id
-   * @param translation the translation
+   * 
+   * @param id
+   *          the id
+   * @param translation
+   *          the translation
    * @return the string
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   String setTranslation(Long id, String translation) throws DefaultException;
 

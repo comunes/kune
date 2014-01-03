@@ -33,7 +33,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewListPostIconBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewListPostIconBtn extends ButtonDescriptor {
@@ -41,11 +41,15 @@ public class NewListPostIconBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new new list post icon btn.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
-   * @param shorcutReg the shorcut reg
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
+   * @param shorcutReg
+   *          the shorcut reg
    */
   @Inject
   public NewListPostIconBtn(final I18nTranslationService i18n, final NewListPostAction action,

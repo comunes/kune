@@ -27,15 +27,15 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Enum UserSNetVisibility.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum UserSNetVisibility implements IsSerializable {
-  
+
   /** The anyone. */
-  anyone, 
- /** The yourbuddies. */
- yourbuddies, 
- /** The onlyyou. */
- onlyyou
+  anyone,
+  /** The onlyyou. */
+  onlyyou,
+  /** The yourbuddies. */
+  yourbuddies
 }

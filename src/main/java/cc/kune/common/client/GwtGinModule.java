@@ -37,12 +37,14 @@ import com.google.gwt.inject.client.AbstractGinModule;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GwtGinModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GwtGinModule extends AbstractGinModule {
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override

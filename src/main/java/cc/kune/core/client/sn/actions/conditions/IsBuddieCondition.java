@@ -36,7 +36,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class IsBuddieCondition.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -44,15 +44,17 @@ public class IsBuddieCondition implements GuiAddCondition {
 
   /** The session. */
   private final Session session;
-  
+
   /** The simple contact manager. */
   private final SimpleContactManager simpleContactManager;
 
   /**
    * Instantiates a new checks if is buddie condition.
-   *
-   * @param session the session
-   * @param simpleContactManager the simple contact manager
+   * 
+   * @param session
+   *          the session
+   * @param simpleContactManager
+   *          the simple contact manager
    */
   @Inject
   public IsBuddieCondition(final Session session, final SimpleContactManager simpleContactManager) {
@@ -62,8 +64,9 @@ public class IsBuddieCondition implements GuiAddCondition {
 
   /**
    * Checks if is buddie.
-   *
-   * @param targetName the target name
+   * 
+   * @param targetName
+   *          the target name
    * @return true, if is buddie
    */
   private boolean isBuddie(final String targetName) {
@@ -72,8 +75,9 @@ public class IsBuddieCondition implements GuiAddCondition {
 
   /**
    * Checks if is this group in roster.
-   *
-   * @param descr the descr
+   * 
+   * @param descr
+   *          the descr
    * @return true, if is this group in roster
    */
   private boolean isThisGroupInRoster(final GuiActionDescrip descr) {
@@ -83,8 +87,9 @@ public class IsBuddieCondition implements GuiAddCondition {
 
   /**
    * Checks if is this person in roster.
-   *
-   * @param descr the descr
+   * 
+   * @param descr
+   *          the descr
    * @return true, if is this person in roster
    */
   private boolean isThisPersonInRoster(final GuiActionDescrip descr) {
@@ -92,8 +97,12 @@ public class IsBuddieCondition implements GuiAddCondition {
     return isBuddie(targetName);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc
+   * .kune.common.client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {

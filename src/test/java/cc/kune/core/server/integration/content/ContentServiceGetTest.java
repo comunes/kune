@@ -108,8 +108,7 @@ public class ContentServiceGetTest extends ContentServiceIntegrationTest {
   @Test
   public void defContentOfUserWithNoHomePage() throws Exception {
     doLogin();
-    final StateAbstractDTO response = contentService.getContent(session.getHash(),
-        new StateToken());
+    final StateAbstractDTO response = contentService.getContent(session.getHash(), new StateToken());
     assertEquals(response.getStateToken(), getSiteDefaultContent().getStateToken());
   }
 

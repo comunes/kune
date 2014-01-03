@@ -31,23 +31,23 @@ import org.mockito.Mockito;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractGuiActionDescripTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AbstractGuiActionDescripTest {
 
   /** The add false cond. */
   private GuiAddCondition addFalseCond;
-  
+
   /** The add true cond1. */
   private GuiAddCondition addTrueCond1;
-  
+
   /** The add true cond2. */
   private GuiAddCondition addTrueCond2;
-  
+
   /** The add true cond3. */
   private GuiAddCondition addTrueCond3;
-  
+
   /** The descriptor. */
   private MenuDescriptor descriptor;
 

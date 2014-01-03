@@ -38,11 +38,11 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AddNewBuddiesAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AddNewBuddiesAction extends AbstractExtendedAction {
-  
+
   /** The Constant ADD_NEW_BUDDIES_TEXTBOX. */
   public static final String ADD_NEW_BUDDIES_TEXTBOX = "kune-add-newbuddies-tbox";
 
@@ -51,10 +51,13 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
 
   /**
    * Instantiates a new adds the new buddies action.
-   *
-   * @param res the res
-   * @param searchPanel the search panel
-   * @param contactsManager the contacts manager
+   * 
+   * @param res
+   *          the res
+   * @param searchPanel
+   *          the search panel
+   * @param contactsManager
+   *          the contacts manager
    */
   @Inject
   public AddNewBuddiesAction(final IconicResources res, final AddBuddieSearchPanel searchPanel,
@@ -82,8 +85,12 @@ public class AddNewBuddiesAction extends AbstractExtendedAction {
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

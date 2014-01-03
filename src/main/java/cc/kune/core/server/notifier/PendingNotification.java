@@ -28,17 +28,20 @@ import cc.kune.core.server.utils.FormattedString;
 /**
  * The Class PendingNotification is used to store and send notifications (for
  * instance email) via cron.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PendingNotification {
 
-  /** The Constant SITE_DEFAULT_SUBJECT_PREFIX. */
-  public static final String SITE_DEFAULT_SUBJECT_PREFIX = new String();
-  
-  /** The Constant NONE is used when for instance, all the destinations are not local, so, we should not notify them by email. */
+  /**
+   * The Constant NONE is used when for instance, all the destinations are not
+   * local, so, we should not notify them by email.
+   */
   public static final PendingNotification NONE = new PendingNotification(null, null, null, null, false,
       false, null);
+
+  /** The Constant SITE_DEFAULT_SUBJECT_PREFIX. */
+  public static final String SITE_DEFAULT_SUBJECT_PREFIX = new String();
 
   /** The body. */
   private final FormattedString body;
@@ -63,13 +66,19 @@ public class PendingNotification {
 
   /**
    * Instantiates a new pending notification.
-   *
-   * @param notifyType the notify type
-   * @param subject the subject
-   * @param body the body
-   * @param isHtml the is html
-   * @param forceSend the force send
-   * @param destProvider the dest provider
+   * 
+   * @param notifyType
+   *          the notify type
+   * @param subject
+   *          the subject
+   * @param body
+   *          the body
+   * @param isHtml
+   *          the is html
+   * @param forceSend
+   *          the force send
+   * @param destProvider
+   *          the dest provider
    */
   public PendingNotification(final NotificationType notifyType, final FormattedString subject,
       final FormattedString body, final boolean isHtml, final boolean forceSend,
@@ -79,14 +88,21 @@ public class PendingNotification {
 
   /**
    * Instantiates a new pending notification.
-   *
-   * @param notifyType the notify type
-   * @param subjectPrefix the subject prefix
-   * @param subject the subject
-   * @param body the body
-   * @param isHtml the is html
-   * @param forceSend the force send
-   * @param destProvider the dest provider
+   * 
+   * @param notifyType
+   *          the notify type
+   * @param subjectPrefix
+   *          the subject prefix
+   * @param subject
+   *          the subject
+   * @param body
+   *          the body
+   * @param isHtml
+   *          the is html
+   * @param forceSend
+   *          the force send
+   * @param destProvider
+   *          the dest provider
    */
   public PendingNotification(final NotificationType notifyType, final String subjectPrefix,
       final FormattedString subject, final FormattedString body, final boolean isHtml,
@@ -100,7 +116,9 @@ public class PendingNotification {
     this.destProvider = destProvider;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -186,14 +204,16 @@ public class PendingNotification {
 
   /**
    * Gets the subject prefix.
-   *
+   * 
    * @return the subject prefix
    */
   public String getSubjectPrefix() {
     return subjectPrefix;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override

@@ -37,7 +37,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ExtMediaDescrip.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -48,32 +48,32 @@ public class ExtMediaDescrip implements HasId {
   /** The detect regex. */
   @Column(nullable = false)
   private String detectRegex;
-  
+
   /** The embed template. */
   @Column(nullable = false, columnDefinition = "LONGTEXT")
   @Length(max = 1000)
   private String embedTemplate;
-  
+
   /** The height. */
   private int height;
-  
+
   /** The id. */
   @Id
   @GeneratedValue
   private Long id;
-  
+
   /** The id regex. */
   @Column(nullable = false)
   private String idRegex;
-  
+
   /** The name. */
   @Column(nullable = false)
   private String name;
-  
+
   /** The siteurl. */
   @Column(nullable = false)
   private String siteurl;
-  
+
   /** The width. */
   private int width;
 
@@ -86,14 +86,21 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Instantiates a new ext media descrip.
-   *
-   * @param name the name
-   * @param siteurl the siteurl
-   * @param detectRegex the detect regex
-   * @param idRegex the id regex
-   * @param embedTemplate the embed template
-   * @param defWidth the def width
-   * @param defHeight the def height
+   * 
+   * @param name
+   *          the name
+   * @param siteurl
+   *          the siteurl
+   * @param detectRegex
+   *          the detect regex
+   * @param idRegex
+   *          the id regex
+   * @param embedTemplate
+   *          the embed template
+   * @param defWidth
+   *          the def width
+   * @param defHeight
+   *          the def height
    */
   public ExtMediaDescrip(final String name, final String siteurl, final String detectRegex,
       final String idRegex, final String embedTemplate, final int defWidth, final int defHeight) {
@@ -108,7 +115,7 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Gets the detect regex.
-   *
+   * 
    * @return the detect regex
    */
   public String getDetectRegex() {
@@ -117,7 +124,7 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Gets the embed template.
-   *
+   * 
    * @return the embed template
    */
   public String getEmbedTemplate() {
@@ -126,14 +133,16 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Gets the height.
-   *
+   * 
    * @return the height
    */
   public int getHeight() {
     return height;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -143,7 +152,7 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Gets the id regex.
-   *
+   * 
    * @return the id regex
    */
   public String getIdRegex() {
@@ -152,7 +161,7 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -161,7 +170,7 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Gets the siteurl.
-   *
+   * 
    * @return the siteurl
    */
   public String getSiteurl() {
@@ -170,7 +179,7 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Gets the width.
-   *
+   * 
    * @return the width
    */
   public int getWidth() {
@@ -179,8 +188,9 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Sets the detect regex.
-   *
-   * @param detectRegex the new detect regex
+   * 
+   * @param detectRegex
+   *          the new detect regex
    */
   public void setDetectRegex(final String detectRegex) {
     this.detectRegex = detectRegex;
@@ -188,8 +198,9 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Sets the embed template.
-   *
-   * @param embedTemplate the new embed template
+   * 
+   * @param embedTemplate
+   *          the new embed template
    */
   public void setEmbedTemplate(final String embedTemplate) {
     this.embedTemplate = embedTemplate;
@@ -197,14 +208,17 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Sets the height.
-   *
-   * @param height the new height
+   * 
+   * @param height
+   *          the new height
    */
   public void setHeight(final int height) {
     this.height = height;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -214,8 +228,9 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Sets the id regex.
-   *
-   * @param idRegex the new id regex
+   * 
+   * @param idRegex
+   *          the new id regex
    */
   public void setIdRegex(final String idRegex) {
     this.idRegex = idRegex;
@@ -223,8 +238,9 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public void setName(final String name) {
     this.name = name;
@@ -232,8 +248,9 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Sets the siteurl.
-   *
-   * @param siteurl the new siteurl
+   * 
+   * @param siteurl
+   *          the new siteurl
    */
   public void setSiteurl(final String siteurl) {
     this.siteurl = siteurl;
@@ -241,8 +258,9 @@ public class ExtMediaDescrip implements HasId {
 
   /**
    * Sets the width.
-   *
-   * @param width the new width
+   * 
+   * @param width
+   *          the new width
    */
   public void setWidth(final int width) {
     this.width = width;

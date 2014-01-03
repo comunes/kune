@@ -46,7 +46,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSignInLog records the user signins for stats purposes.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -54,6 +54,42 @@ import cc.kune.domain.utils.HasId;
 @Table(name = "user_signin_log")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class UserSignInLog implements HasId {
+
+  /** The hash. */
+  @Field(index = Index.YES)
+  @Column
+  private final String hash;
+
+  /** The id. */
+  @Id
+  @DocumentId
+  @GeneratedValue
+  private Long id;
+
+  /** The ip address of the client. */
+  @org.hibernate.annotations.Index(name = "ipAddress")
+  @Column
+  private final String ipAddress;
+
+  /** The sign in date. */
+
+  @org.hibernate.annotations.Index(name = "signInDate")
+  @Basic
+  @Column(nullable = false)
+  private final Long signInDate;
+
+  /** The user. */
+  @IndexedEmbedded
+  @NotNull
+  @ManyToOne(fetch = FetchType.LAZY)
+  private final User user;
+
+  /** The user agent. */
+
+  @org.hibernate.annotations.Index(name = "userAgent")
+  @Field(index = Index.YES)
+  @Column
+  private final String userAgent;
 
   /**
    * Instantiates a new user sign in log.
@@ -67,22 +103,32 @@ public class UserSignInLog implements HasId {
    * @param hash
    *          the session hash
    */
-  public UserSignInLog(User user, String ipAddress, String userAgent, String hash) {
+  public UserSignInLog(final User user, final String ipAddress, final String userAgent, final String hash) {
     this.user = user;
     this.ipAddress = ipAddress;
-    long now = System.currentTimeMillis();
+    final long now = System.currentTimeMillis();
     this.signInDate = now;
     this.userAgent = userAgent;
     this.hash = hash;
   }
 
   /**
-   * Gets the user.
+   * Gets the hash.
    * 
-   * @return the user
+   * @return the hash
    */
-  public User getUser() {
-    return user;
+  public String getHash() {
+    return hash;
+  }
+
+  /**
+   * Gets the id.
+   * 
+   * @return the id
+   */
+  @Override
+  public Long getId() {
+    return id;
   }
 
   /**
@@ -104,6 +150,15 @@ public class UserSignInLog implements HasId {
   }
 
   /**
+   * Gets the user.
+   * 
+   * @return the user
+   */
+  public User getUser() {
+    return user;
+  }
+
+  /**
    * Gets the user agent.
    * 
    * @return the user agent
@@ -113,67 +168,14 @@ public class UserSignInLog implements HasId {
   }
 
   /**
-   * Gets the hash.
-   * 
-   * @return the hash
-   */
-  public String getHash() {
-    return hash;
-  }
-
-  /**
-   * Gets the id.
-   * 
-   * @return the id
-   */
-  public Long getId() {
-    return id;
-  }
-
-  /**
    * Sets the id.
    * 
    * @param id
    *          the new id
    */
-  public void setId(Long id) {
+  @Override
+  public void setId(final Long id) {
     this.id = id;
   }
-
-  /** The id. */
-  @Id
-  @DocumentId
-  @GeneratedValue
-  private Long id;
-
-  /** The user. */
-  @IndexedEmbedded
-  @NotNull
-  @ManyToOne(fetch = FetchType.LAZY)
-  private final User user;
-
-  /** The ip address of the client. */
-  @org.hibernate.annotations.Index(name="ipAddress")  
-  @Column
-  private final String ipAddress;
-
-  /** The sign in date. */
-
-  @org.hibernate.annotations.Index(name="signInDate")  
-  @Basic
-  @Column(nullable = false)
-  private final Long signInDate;
-
-  /** The user agent. */
-
-  @org.hibernate.annotations.Index(name="userAgent")  
-  @Field(index = Index.YES)
-  @Column
-  private final String userAgent;
-
-  /** The hash. */
-  @Field(index = Index.YES)
-  @Column
-  private final String hash;
 
 }

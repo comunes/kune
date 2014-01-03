@@ -30,7 +30,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ReservedWordsRegistryDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ReservedWordsRegistryDTO extends ArrayList<String> implements IsSerializable {
@@ -46,8 +46,9 @@ public class ReservedWordsRegistryDTO extends ArrayList<String> implements IsSer
 
   /**
    * Instantiates a new reserved words registry dto.
-   *
-   * @param list the list
+   * 
+   * @param list
+   *          the list
    */
   public ReservedWordsRegistryDTO(final List<String> list) {
     super(list);

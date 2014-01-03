@@ -37,7 +37,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneDragController.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneDragController extends PickupDragController {
@@ -47,8 +47,9 @@ public class KuneDragController extends PickupDragController {
 
   /**
    * Instantiates a new kune drag controller.
-   *
-   * @param armor the armor
+   * 
+   * @param armor
+   *          the armor
    */
   @Inject
   public KuneDragController(final GSpaceArmor armor) {
@@ -69,7 +70,9 @@ public class KuneDragController extends PickupDragController {
     setRootPanelSize();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.allen_sauer.gwt.dnd.client.PickupDragController#dragEnd()
    */
   @Override

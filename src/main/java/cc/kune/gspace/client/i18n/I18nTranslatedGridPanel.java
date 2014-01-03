@@ -33,22 +33,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nTranslatedGridPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nTranslatedGridPanel extends Composite {
 
   /** The list. */
   private final I18nCellList list;
-  
+
   /** The tab title. */
   private final Label tabTitle;
 
   /**
    * Instantiates a new i18n translated grid panel.
-   *
-   * @param i18n the i18n
-   * @param list the list
+   * 
+   * @param i18n
+   *          the i18n
+   * @param list
+   *          the list
    */
   @Inject
   public I18nTranslatedGridPanel(final I18nTranslationService i18n, final I18nCellList list) {
@@ -59,7 +61,7 @@ public class I18nTranslatedGridPanel extends Composite {
 
   /**
    * Gets the tab title.
-   *
+   * 
    * @return the tab title
    */
   public IsWidget getTabTitle() {
@@ -68,9 +70,11 @@ public class I18nTranslatedGridPanel extends Composite {
 
   /**
    * Sets the language.
-   *
-   * @param fromLanguage the from language
-   * @param toLanguage the to language
+   * 
+   * @param fromLanguage
+   *          the from language
+   * @param toLanguage
+   *          the to language
    */
   public void setLanguage(final I18nLanguageSimpleDTO fromLanguage,
       final I18nLanguageSimpleDTO toLanguage) {

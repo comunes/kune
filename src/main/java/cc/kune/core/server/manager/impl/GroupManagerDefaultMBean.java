@@ -27,7 +27,7 @@ import cc.kune.core.server.mbean.MBeanConstants;
 // TODO: Auto-generated Javadoc
 /**
  * MBean interface for JMX management of {@link GroupManagerDefault}.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface GroupManagerDefaultMBean {

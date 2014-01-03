@@ -44,7 +44,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkRPC.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetworkRPC implements SocialNetService, RPC {
@@ -54,20 +54,24 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
 
   /** The sn manager. */
   private final SocialNetworkManager snManager;
-  
+
   /** The user finder. */
   private final UserFinder userFinder;
-  
+
   /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
   /**
    * Instantiates a new social network rpc.
-   *
-   * @param userSessionManager the user session manager
-   * @param groupManager the group manager
-   * @param socialNetworkManager the social network manager
-   * @param userFinder the user finder
+   * 
+   * @param userSessionManager
+   *          the user session manager
+   * @param groupManager
+   *          the group manager
+   * @param socialNetworkManager
+   *          the social network manager
+   * @param userFinder
+   *          the user finder
    */
   @Inject
   public SocialNetworkRPC(final UserSessionManager userSessionManager, final GroupManager groupManager,
@@ -78,8 +82,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     this.userFinder = userFinder;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#acceptJoinGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#acceptJoinGroup(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
    */
   @Override
   @Authenticated
@@ -101,8 +109,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#addAdminMember(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#addAdminMember(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
    */
   @Override
   @Authenticated
@@ -118,8 +130,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#addAsBuddie(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#addAsBuddie(java.lang.
+   * String, java.lang.String)
    */
   @Override
   @Authenticated
@@ -128,8 +144,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     snManager.addAsBuddie(userSessionManager.getUser(), userFinder.findByShortName(userName));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#addCollabMember(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#addCollabMember(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
    */
   @Override
   @Authenticated
@@ -145,8 +165,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#addViewerMember(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#addViewerMember(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
    */
   @Override
   @Authenticated
@@ -164,8 +188,9 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
 
   /**
    * Check is not personal group.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    */
   private void checkIsNotPersonalGroup(final Group group) {
     if (group.isPersonal()) {
@@ -174,8 +199,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     ;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#deleteMember(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#deleteMember(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
    */
   @Override
   @Authenticated
@@ -191,8 +220,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#denyJoinGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#denyJoinGroup(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
    */
   @Override
   @Authenticated
@@ -210,17 +243,23 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
 
   /**
    * Generate response.
-   *
-   * @param userLogged the user logged
-   * @param group the group
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
    * @return the social network data dto
    */
   private SocialNetworkDataDTO generateResponse(final User userLogged, final Group group) {
     return snManager.generateResponse(userLogged, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#getSocialNetwork(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#getSocialNetwork(java.
+   * lang.String, cc.kune.core.shared.domain.utils.StateToken)
    */
   @Override
   @Authenticated(mandatory = false)
@@ -234,8 +273,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(user, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#requestJoinGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#requestJoinGroup(java.
+   * lang.String, cc.kune.core.shared.domain.utils.StateToken)
    */
   @Override
   @Authenticated
@@ -249,8 +292,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return snManager.requestToJoin(user, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#setAdminAsCollab(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#setAdminAsCollab(java.
+   * lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
    */
   @Override
   @Authenticated
@@ -266,8 +313,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#setCollabAsAdmin(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#setCollabAsAdmin(java.
+   * lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
    */
   @Override
   @Authenticated
@@ -283,8 +334,12 @@ public class SocialNetworkRPC implements SocialNetService, RPC {
     return generateResponse(userLogged, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.SocialNetService#unJoinGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.SocialNetService#unJoinGroup(java.lang.
+   * String, cc.kune.core.shared.domain.utils.StateToken)
    */
   @Override
   @Authenticated

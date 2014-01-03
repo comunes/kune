@@ -35,26 +35,26 @@ import cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseWizardPresenterTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseWizardPresenterTest {
 
   /** The first form. */
   private LicenseWizardFirstFormView firstForm;
-  
+
   /** The frd form. */
   private LicenseWizardFrdFormView frdForm;
-  
+
   /** The license wizard. */
   private LicenseWizardPresenter licenseWizard;
-  
+
   /** The snd form. */
   private LicenseWizardSndFormView sndForm;
-  
+
   /** The trd form. */
   private LicenseWizardTrdFormView trdForm;
-  
+
   /** The view. */
   private LicenseWizardView view;
 

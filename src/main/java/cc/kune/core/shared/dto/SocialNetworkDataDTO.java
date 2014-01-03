@@ -31,32 +31,32 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkDataDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetworkDataDTO implements IsSerializable {
 
   /** The group members. */
   private SocialNetworkDTO groupMembers;
-  
+
   /** The group rights. */
   private AccessRights groupRights;
-  
+
   /** The is buddies visible. */
   private boolean isBuddiesVisible;
-  
+
   /** The is members visible. */
   private boolean isMembersVisible;
-  
+
   /** The social network visibility. */
   private SocialNetworkVisibility socialNetworkVisibility;
-  
+
   /** The user buddies. */
   private UserBuddiesDataDTO userBuddies;
-  
+
   /** The user buddies visibility. */
   private UserSNetVisibility userBuddiesVisibility;
-  
+
   /** The user participation. */
   private ParticipationDataDTO userParticipation;
 
@@ -69,15 +69,23 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Instantiates a new social network data dto.
-   *
-   * @param socialNetworkVisibility the social network visibility
-   * @param groupMembers the group members
-   * @param userParticipation the user participation
-   * @param userBuddiesVisibility the user buddies visibility
-   * @param userBuddies the user buddies
-   * @param groupRights the group rights
-   * @param isBuddiesVisible the is buddies visible
-   * @param isMembersVisible the is members visible
+   * 
+   * @param socialNetworkVisibility
+   *          the social network visibility
+   * @param groupMembers
+   *          the group members
+   * @param userParticipation
+   *          the user participation
+   * @param userBuddiesVisibility
+   *          the user buddies visibility
+   * @param userBuddies
+   *          the user buddies
+   * @param groupRights
+   *          the group rights
+   * @param isBuddiesVisible
+   *          the is buddies visible
+   * @param isMembersVisible
+   *          the is members visible
    */
   public SocialNetworkDataDTO(final SocialNetworkVisibility socialNetworkVisibility,
       final SocialNetworkDTO groupMembers, final ParticipationDataDTO userParticipation,
@@ -95,7 +103,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Gets the group members.
-   *
+   * 
    * @return the group members
    */
   public SocialNetworkDTO getGroupMembers() {
@@ -104,7 +112,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Gets the group rights.
-   *
+   * 
    * @return the group rights
    */
   public AccessRights getGroupRights() {
@@ -113,7 +121,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Gets the checks if is buddies visible.
-   *
+   * 
    * @return the checks if is buddies visible
    */
   public boolean getIsBuddiesVisible() {
@@ -122,7 +130,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Gets the checks if is members visible.
-   *
+   * 
    * @return the checks if is members visible
    */
   public boolean getIsMembersVisible() {
@@ -131,7 +139,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Gets the social network visibility.
-   *
+   * 
    * @return the social network visibility
    */
   public SocialNetworkVisibility getSocialNetworkVisibility() {
@@ -140,7 +148,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Gets the user buddies.
-   *
+   * 
    * @return the user buddies
    */
   public UserBuddiesDataDTO getUserBuddies() {
@@ -149,7 +157,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Gets the user buddies visibility.
-   *
+   * 
    * @return the user buddies visibility
    */
   public UserSNetVisibility getUserBuddiesVisibility() {
@@ -158,7 +166,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Gets the user participation.
-   *
+   * 
    * @return the user participation
    */
   public ParticipationDataDTO getUserParticipation() {
@@ -167,7 +175,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Checks if is buddies visible.
-   *
+   * 
    * @return true, if is buddies visible
    */
   public boolean isBuddiesVisible() {
@@ -176,7 +184,7 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Checks if is members visible.
-   *
+   * 
    * @return true, if is members visible
    */
   public boolean isMembersVisible() {
@@ -185,8 +193,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the buddies visible.
-   *
-   * @param isBuddiesVisible the new buddies visible
+   * 
+   * @param isBuddiesVisible
+   *          the new buddies visible
    */
   public void setBuddiesVisible(final boolean isBuddiesVisible) {
     this.isBuddiesVisible = isBuddiesVisible;
@@ -194,8 +203,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the group members.
-   *
-   * @param groupMembers the new group members
+   * 
+   * @param groupMembers
+   *          the new group members
    */
   public void setGroupMembers(final SocialNetworkDTO groupMembers) {
     this.groupMembers = groupMembers;
@@ -203,8 +213,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the group rights.
-   *
-   * @param groupRights the new group rights
+   * 
+   * @param groupRights
+   *          the new group rights
    */
   public void setGroupRights(final AccessRights groupRights) {
     this.groupRights = groupRights;
@@ -212,8 +223,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the checks if is buddies visible.
-   *
-   * @param isBuddiesVisible the new checks if is buddies visible
+   * 
+   * @param isBuddiesVisible
+   *          the new checks if is buddies visible
    */
   public void setIsBuddiesVisible(final boolean isBuddiesVisible) {
     setBuddiesVisible(isBuddiesVisible);
@@ -221,8 +233,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the checks if is members visible.
-   *
-   * @param isMembersVisible the new checks if is members visible
+   * 
+   * @param isMembersVisible
+   *          the new checks if is members visible
    */
   public void setIsMembersVisible(final boolean isMembersVisible) {
     setMembersVisible(isMembersVisible);
@@ -230,8 +243,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the members visible.
-   *
-   * @param isMembersVisible the new members visible
+   * 
+   * @param isMembersVisible
+   *          the new members visible
    */
   public void setMembersVisible(final boolean isMembersVisible) {
     this.isMembersVisible = isMembersVisible;
@@ -239,8 +253,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the social network visibility.
-   *
-   * @param socialNetworkVisibility the new social network visibility
+   * 
+   * @param socialNetworkVisibility
+   *          the new social network visibility
    */
   public void setSocialNetworkVisibility(final SocialNetworkVisibility socialNetworkVisibility) {
     this.socialNetworkVisibility = socialNetworkVisibility;
@@ -248,8 +263,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the user buddies.
-   *
-   * @param userBuddies the new user buddies
+   * 
+   * @param userBuddies
+   *          the new user buddies
    */
   public void setUserBuddies(final UserBuddiesDataDTO userBuddies) {
     this.userBuddies = userBuddies;
@@ -257,8 +273,9 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the user buddies visibility.
-   *
-   * @param userBuddiesVisibility the new user buddies visibility
+   * 
+   * @param userBuddiesVisibility
+   *          the new user buddies visibility
    */
   public void setUserBuddiesVisibility(final UserSNetVisibility userBuddiesVisibility) {
     this.userBuddiesVisibility = userBuddiesVisibility;
@@ -266,14 +283,17 @@ public class SocialNetworkDataDTO implements IsSerializable {
 
   /**
    * Sets the user participation.
-   *
-   * @param userParticipation the new user participation
+   * 
+   * @param userParticipation
+   *          the new user participation
    */
   public void setUserParticipation(final ParticipationDataDTO userParticipation) {
     this.userParticipation = userParticipation;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

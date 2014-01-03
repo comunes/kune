@@ -52,53 +52,64 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MyGroupsMenu.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class MyGroupsMenu extends MenuDescriptor {
-  
+
   /** The Constant MENU_ID. */
   public static final String MENU_ID = "k-sitebar-my-group";
-  
+
   /** The Constant NEW_GROUP_MENUITEM_ID. */
   public static final String NEW_GROUP_MENUITEM_ID = "k-sitebar-my-group-newmenuitem";
-  
+
   /** The download provider. */
   private final Provider<ClientFileDownloadUtils> downloadProvider;
-  
+
   /** The goto group provider. */
   private final Provider<GotoGroupLastVisitedContentAction> gotoGroupProvider;
-  
+
   /** The new group action. */
   private final SitebarNewGroupAction newGroupAction;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The sitebar new group link. */
   private final SitebarNewGroupLink sitebarNewGroupLink;
-  
+
   /** The site options. */
   private final SitebarActions siteOptions;
-  
+
   /** The user service. */
   private final UserServiceAsync userService;
 
   /**
    * Instantiates a new my groups menu.
-   *
-   * @param downloadProvider the download provider
-   * @param res the res
-   * @param session the session
-   * @param gotoGroupProvider the goto group provider
-   * @param newGroupAction the new group action
-   * @param siteOptions the site options
-   * @param global the global
-   * @param menuShowAction the menu show action
-   * @param eventBus the event bus
-   * @param userService the user service
-   * @param sitebarNewGroupLink the sitebar new group link
+   * 
+   * @param downloadProvider
+   *          the download provider
+   * @param res
+   *          the res
+   * @param session
+   *          the session
+   * @param gotoGroupProvider
+   *          the goto group provider
+   * @param newGroupAction
+   *          the new group action
+   * @param siteOptions
+   *          the site options
+   * @param global
+   *          the global
+   * @param menuShowAction
+   *          the menu show action
+   * @param eventBus
+   *          the event bus
+   * @param userService
+   *          the user service
+   * @param sitebarNewGroupLink
+   *          the sitebar new group link
    */
   @Inject
   public MyGroupsMenu(final Provider<ClientFileDownloadUtils> downloadProvider, final CoreResources res,
@@ -142,8 +153,9 @@ public class MyGroupsMenu extends MenuDescriptor {
 
   /**
    * Adds the partipation to menu.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    */
   private void addPartipationToMenu(final GroupDTO group) {
     final GotoGroupLastVisitedContentAction action = gotoGroupProvider.get();
@@ -155,8 +167,9 @@ public class MyGroupsMenu extends MenuDescriptor {
 
   /**
    * Regenerate menu.
-   *
-   * @param isLogged the is logged
+   * 
+   * @param isLogged
+   *          the is logged
    */
   private void regenerateMenu(final boolean isLogged) {
     if (isLogged) {

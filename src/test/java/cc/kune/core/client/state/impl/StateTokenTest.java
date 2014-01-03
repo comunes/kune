@@ -31,7 +31,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateTokenTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */

@@ -25,11 +25,11 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SessionExpiredException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SessionExpiredException extends DefaultException {
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -1603881986661302041L;
 }

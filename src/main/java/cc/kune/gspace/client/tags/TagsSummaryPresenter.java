@@ -46,7 +46,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagsSummaryPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TagsSummaryPresenter extends
@@ -55,7 +55,7 @@ public class TagsSummaryPresenter extends
 
   /**
    * The Interface TagsSummaryProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -64,18 +64,22 @@ public class TagsSummaryPresenter extends
 
   /**
    * The Interface TagsSummaryView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface TagsSummaryView extends View {
-    
+
     /**
      * Adds the tag.
-     *
-     * @param name the name
-     * @param count the count
-     * @param style the style
-     * @param clickHandler the click handler
+     * 
+     * @param name
+     *          the name
+     * @param count
+     *          the count
+     * @param style
+     *          the style
+     * @param clickHandler
+     *          the click handler
      */
     void addTag(String name, Long count, String style, ClickHandler clickHandler);
 
@@ -86,26 +90,32 @@ public class TagsSummaryPresenter extends
 
     /**
      * Sets the visible.
-     *
-     * @param visible the new visible
+     * 
+     * @param visible
+     *          the new visible
      */
     void setVisible(boolean visible);
   }
 
   /** The Constant MAXSIZE. */
   private static final int MAXSIZE = 26;
-  
+
   /** The Constant MINSIZE. */
   private static final int MINSIZE = 11;
 
   /**
    * Instantiates a new tags summary presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param session the session
-   * @param stateManager the state manager
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
    */
   @Inject
   public TagsSummaryPresenter(final EventBus eventBus, final TagsSummaryView view,
@@ -126,8 +136,9 @@ public class TagsSummaryPresenter extends
 
   /**
    * Do search tag.
-   *
-   * @param name the name
+   * 
+   * @param name
+   *          the name
    */
   public void doSearchTag(final String name) {
     // searcherProvider.get().doSearchOfType(
@@ -137,7 +148,9 @@ public class TagsSummaryPresenter extends
     NotifyUser.info("Searcher in development");
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -147,8 +160,9 @@ public class TagsSummaryPresenter extends
 
   /**
    * Sets the cloud.
-   *
-   * @param tagCloudResult the new cloud
+   * 
+   * @param tagCloudResult
+   *          the new cloud
    */
   private void setCloud(final TagCloudResult tagCloudResult) {
     // Inspired in snippet http://www.bytemycode.com/snippets/snippet/415/
@@ -169,8 +183,12 @@ public class TagsSummaryPresenter extends
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tags.TagsSummary#setGroupTags(cc.kune.core.shared.domain.TagCloudResult)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.tags.TagsSummary#setGroupTags(cc.kune.core.shared
+   * .domain.TagCloudResult)
    */
   @Override
   public void setGroupTags(final TagCloudResult tagCloud) {
@@ -181,8 +199,9 @@ public class TagsSummaryPresenter extends
   // @PMD:REVIEWED:DefaultPackage: by vjrj on 27/05/09 3:13
   /**
    * Sets the state.
-   *
-   * @param state the new state
+   * 
+   * @param state
+   *          the new state
    */
   void setState(final StateContainerDTO state) {
     if (state.getTagCloudResult() != null && state.getTagCloudResult().getTagCountList().size() > 0) {

@@ -45,31 +45,35 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DefaultManager.
- *
- * @param <T> the generic type
- * @param <K> the key type
+ * 
+ * @param <T>
+ *          the generic type
+ * @param <K>
+ *          the key type
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class DefaultManager<T, K> {
-  
+
   /** The Constant LUCENE_VERSION. */
   protected final static Version LUCENE_VERSION = Version.LUCENE_35;
-  
+
   /** The entity class. */
   private final Class<T> entityClass;
-  
+
   /** The log. */
   protected final Log log;
-  
+
   /** The provider. */
   private final Provider<EntityManager> provider;
 
   /**
    * Instantiates a new default manager.
-   *
-   * @param provider the provider
-   * @param entityClass the entity class
+   * 
+   * @param provider
+   *          the provider
+   * @param entityClass
+   *          the entity class
    */
   public DefaultManager(final Provider<EntityManager> provider, final Class<T> entityClass) {
     this.provider = provider;
@@ -79,10 +83,13 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * use carefully!!!.
-   *
-   * @param <X> the generic type
-   * @param entityClass the entity class
-   * @param primaryKey the primary key
+   * 
+   * @param <X>
+   *          the generic type
+   * @param entityClass
+   *          the entity class
+   * @param primaryKey
+   *          the primary key
    * @return the x
    */
   protected <X> X find(final Class<X> entityClass, final K primaryKey) {
@@ -91,8 +98,9 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Find.
-   *
-   * @param primaryKey the primary key
+   * 
+   * @param primaryKey
+   *          the primary key
    * @return the t
    */
   public T find(final K primaryKey) {
@@ -108,7 +116,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Gets the entity manager.
-   *
+   * 
    * @return the entity manager
    */
   private EntityManager getEntityManager() {
@@ -117,8 +125,9 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Gets the query.
-   *
-   * @param qlString the ql string
+   * 
+   * @param qlString
+   *          the ql string
    * @return the query
    */
   protected javax.persistence.Query getQuery(final String qlString) {
@@ -127,10 +136,13 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Merge.
-   *
-   * @param <E> the element type
-   * @param entity the entity
-   * @param entityClass the entity class
+   * 
+   * @param <E>
+   *          the element type
+   * @param entity
+   *          the entity
+   * @param entityClass
+   *          the entity class
    * @return the e
    */
   public <E> E merge(final E entity, final Class<E> entityClass) {
@@ -140,8 +152,9 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Merge.
-   *
-   * @param entity the entity
+   * 
+   * @param entity
+   *          the entity
    * @return the t
    */
   public T merge(final T entity) {
@@ -150,10 +163,13 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Persist.
-   *
-   * @param <E> the element type
-   * @param entity the entity
-   * @param entityClass the entity class
+   * 
+   * @param <E>
+   *          the element type
+   * @param entity
+   *          the entity
+   * @param entityClass
+   *          the entity class
    * @return the e
    */
   public <E> E persist(final E entity, final Class<E> entityClass) {
@@ -163,8 +179,9 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Persist.
-   *
-   * @param entity the entity
+   * 
+   * @param entity
+   *          the entity
    * @return the t
    */
   public T persist(final T entity) {
@@ -210,8 +227,9 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Removes the.
-   *
-   * @param entity the entity
+   * 
+   * @param entity
+   *          the entity
    */
   public void remove(final T entity) {
     getEntityManager().remove(entity);
@@ -219,8 +237,9 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   *
-   * @param query the query
+   * 
+   * @param query
+   *          the query
    * @return the search result
    */
   public SearchResult<T> search(final Query query) {
@@ -229,10 +248,13 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   *
-   * @param query the query
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param query
+   *          the query
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the search result
    */
   @SuppressWarnings("unchecked")
@@ -250,12 +272,17 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   *
-   * @param query the query
-   * @param fields the fields
-   * @param flags the flags
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param query
+   *          the query
+   * @param fields
+   *          the fields
+   * @param flags
+   *          the flags
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the search result
    */
   public SearchResult<T> search(final String query, final String[] fields,
@@ -272,12 +299,17 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   *
-   * @param queries the queries
-   * @param fields the fields
-   * @param flags the flags
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param queries
+   *          the queries
+   * @param fields
+   *          the fields
+   * @param flags
+   *          the flags
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the search result
    */
   public SearchResult<T> search(final String[] queries, final String[] fields,
@@ -294,11 +326,15 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   *
-   * @param queries the queries
-   * @param fields the fields
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param queries
+   *          the queries
+   * @param fields
+   *          the fields
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the search result
    */
   public SearchResult<T> search(final String[] queries, final String[] fields,
@@ -315,7 +351,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Size deprecated.
-   *
+   * 
    * @return the int
    */
   @SuppressWarnings("unchecked")

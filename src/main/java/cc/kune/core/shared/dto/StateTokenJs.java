@@ -36,13 +36,13 @@ public class StateTokenJs extends JavaScriptObject {
 
   /** The document. */
   public final native String getDocument() /*-{
-		return this.document;
-  }-*/;
+                                           return this.document;
+                                           }-*/;
 
   /** The encoded. */
   public final native String getEncoded() /*-{
-		return this.encoded;
-  }-*/;
+                                          return this.encoded;
+                                          }-*/;
 
   // public String getEncoded() {
   // return new StateToken(getGroup(), getTool(), getFolder(),
@@ -51,16 +51,16 @@ public class StateTokenJs extends JavaScriptObject {
 
   /** The folder. */
   public final native String getFolder() /*-{
-		return this.folder;
-  }-*/;
+                                         return this.folder;
+                                         }-*/;
 
   /** The group. */
   public final native String getGroup() /*-{
-		return this.group;
-  }-*/;
+                                        return this.group;
+                                        }-*/;
 
   /** The tool. */
   public final native String getTool() /*-{
-		return this.tool;
-  }-*/;
+                                       return this.tool;
+                                       }-*/;
 }

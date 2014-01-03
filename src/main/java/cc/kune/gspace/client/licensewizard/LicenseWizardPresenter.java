@@ -46,7 +46,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseWizardPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseWizardPresenter extends
@@ -54,7 +54,7 @@ public class LicenseWizardPresenter extends
 
   /**
    * The Interface LicenseWizardProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -63,19 +63,19 @@ public class LicenseWizardPresenter extends
 
   /** The cc vers. */
   private final String ccVers;
-  
+
   /** The frd form. */
   private final LicenseWizardFrdFormView frdForm;
-  
+
   /** The fst form. */
   private final LicenseWizardFirstFormView fstForm;
-  
+
   /** The select license listener. */
   private LicenseChooseCallback selectLicenseListener;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The snd form. */
   private final LicenseWizardSndFormView sndForm;
 
@@ -84,15 +84,23 @@ public class LicenseWizardPresenter extends
 
   /**
    * Instantiates a new license wizard presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param firstForm the first form
-   * @param sndForm the snd form
-   * @param trdForm the trd form
-   * @param frdForm the frd form
-   * @param session the session
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param firstForm
+   *          the first form
+   * @param sndForm
+   *          the snd form
+   * @param trdForm
+   *          the trd form
+   * @param frdForm
+   *          the frd form
+   * @param session
+   *          the session
    */
   @Inject
   public LicenseWizardPresenter(final EventBus eventBus, final LicenseWizardView view,
@@ -110,8 +118,9 @@ public class LicenseWizardPresenter extends
 
   /**
    * Gets the license from short name.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    * @return the license from short name
    */
   private LicenseDTO getLicenseFromShortName(final String shortName) {
@@ -128,8 +137,9 @@ public class LicenseWizardPresenter extends
 
   /**
    * In.
-   *
-   * @param page the page
+   * 
+   * @param page
+   *          the page
    * @return true, if successful
    */
   private boolean in(final IsWidget page) {
@@ -158,7 +168,9 @@ public class LicenseWizardPresenter extends
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -313,7 +325,9 @@ public class LicenseWizardPresenter extends
     frdForm.reset();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -354,8 +368,12 @@ public class LicenseWizardPresenter extends
     getView().setEnabled(true, false, true, true);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.licensewizard.LicenseWizard#start(cc.kune.gspace.client.licensewizard.LicenseChooseCallback)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.licensewizard.LicenseWizard#start(cc.kune.gspace.
+   * client.licensewizard.LicenseChooseCallback)
    */
   @Override
   public void start(final LicenseChooseCallback selectLicenseListener) {

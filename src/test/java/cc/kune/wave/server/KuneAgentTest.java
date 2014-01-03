@@ -42,7 +42,7 @@ import com.google.common.collect.Lists;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneAgentTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneAgentTest {
@@ -59,9 +59,11 @@ public class KuneAgentTest {
 
   /**
    * Before.
-   *
-   * @throws PersistenceException the persistence exception
-   * @throws InvalidParticipantAddress the invalid participant address
+   * 
+   * @throws PersistenceException
+   *           the persistence exception
+   * @throws InvalidParticipantAddress
+   *           the invalid participant address
    */
   @Before
   public void before() throws PersistenceException, InvalidParticipantAddress {
@@ -85,8 +87,9 @@ public class KuneAgentTest {
 
   /**
    * Test basic creation.
-   *
-   * @throws InvalidParticipantAddress the invalid participant address
+   * 
+   * @throws InvalidParticipantAddress
+   *           the invalid participant address
    */
   @Ignore
   @Test

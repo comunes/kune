@@ -46,15 +46,17 @@ public interface WaveViewerView extends View {
 
   /**
    * Sets the content.
-   *
-   * @param state the new content
+   * 
+   * @param state
+   *          the new content
    */
   void setContent(StateContentDTO state);
 
   /**
    * Sets the editable content.
-   *
-   * @param state the new editable content
+   * 
+   * @param state
+   *          the new editable content
    */
   void setEditableContent(StateContentDTO state);
 

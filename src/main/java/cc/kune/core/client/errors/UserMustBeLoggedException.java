@@ -25,11 +25,11 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserMustBeLoggedException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserMustBeLoggedException extends DefaultException {
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -5091069990899662849L;
 }

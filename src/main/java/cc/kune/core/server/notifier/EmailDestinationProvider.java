@@ -30,16 +30,18 @@ import cc.kune.domain.I18nLanguage;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EmailDestinationProvider.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmailDestinationProvider implements DestinationProvider {
-  
+
   /**
    * Builds the.
-   *
-   * @param defaultLanguage the default language
-   * @param emails the emails
+   * 
+   * @param defaultLanguage
+   *          the default language
+   * @param emails
+   *          the emails
    * @return the email destination provider
    */
   public static EmailDestinationProvider build(final I18nLanguage defaultLanguage,
@@ -53,15 +55,19 @@ public class EmailDestinationProvider implements DestinationProvider {
   /**
    * Instantiates a new destination provider (used for single notifications like
    * add/remove participant emails).
-   *
-   * @param lang the lang of the user
-   * @param emails the emails
+   * 
+   * @param lang
+   *          the lang of the user
+   * @param emails
+   *          the emails
    */
   public EmailDestinationProvider(final I18nLanguage lang, final String... emails) {
     list = Addressee.build(lang, emails);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -86,7 +92,9 @@ public class EmailDestinationProvider implements DestinationProvider {
     return true;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.notifier.DestinationProvider#getDest()
    */
   @Override
@@ -94,7 +102,9 @@ public class EmailDestinationProvider implements DestinationProvider {
     return list;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override

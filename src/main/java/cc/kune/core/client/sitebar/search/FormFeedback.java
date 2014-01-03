@@ -42,11 +42,11 @@ import com.google.gwt.user.client.ui.Label;
 // TODO: Auto-generated Javadoc
 /**
  * This widget shows an icon to give feedback on form fields.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FormFeedback extends Label {
-  
+
   /** Feedback status error. */
   public static final int ERROR = 2;
 
@@ -64,13 +64,13 @@ public class FormFeedback extends Label {
 
   /** Feedback status valid. */
   public static final int VALID = 3;
-  
+
   /** The Constant VALID_STYLE. */
   private static final String VALID_STYLE = "valid";
-  
+
   /** Feedback status warning. */
   public static final int WARNING = 1;
-  
+
   /** The Constant WARNING_STYLE. */
   private static final String WARNING_STYLE = "warning";
 
@@ -86,9 +86,10 @@ public class FormFeedback extends Label {
 
   /**
    * Creates a new FormFeedback widget.
-   *
-   * @param inform true if this feedback widget needs our standard for styles and
-   * false otherwise
+   * 
+   * @param inform
+   *          true if this feedback widget needs our standard for styles and
+   *          false otherwise
    */
   public FormFeedback(final boolean inform) {
     getElement().addClassName("rpt-formfeedback");
@@ -99,7 +100,7 @@ public class FormFeedback extends Label {
 
   /**
    * Gets the status of this FormFeedback.
-   *
+   * 
    * @return the form feedback
    */
   public int getStatus() {
@@ -118,8 +119,9 @@ public class FormFeedback extends Label {
 
   /**
    * Sets the status for this FormFeedback.
-   *
-   * @param status the status
+   * 
+   * @param status
+   *          the status
    */
   public void setStatus(final int status) {
     mstatus = status;

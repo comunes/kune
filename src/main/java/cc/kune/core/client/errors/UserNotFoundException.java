@@ -25,11 +25,11 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserNotFoundException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserNotFoundException extends DefaultException {
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 6207713694613166661L;
 }

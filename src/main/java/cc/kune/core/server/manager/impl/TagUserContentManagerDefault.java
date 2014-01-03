@@ -48,28 +48,31 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagUserContentManagerDefault.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class TagUserContentManagerDefault extends DefaultManager<TagUserContent, Long> implements
     TagUserContentManager {
-  
+
   /** The finder. */
   private final TagUserContentFinder finder;
-  
+
   /** The provider. */
   private final Provider<EntityManager> provider;
-  
+
   /** The tag manager. */
   private final TagManager tagManager;
 
   /**
    * Instantiates a new tag user content manager default.
-   *
-   * @param provider the provider
-   * @param tagManager the tag manager
-   * @param finder the finder
+   * 
+   * @param provider
+   *          the provider
+   * @param tagManager
+   *          the tag manager
+   * @param finder
+   *          the finder
    */
   @Inject
   public TagUserContentManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
@@ -82,9 +85,11 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /**
    * Find.
-   *
-   * @param user the user
-   * @param content the content
+   * 
+   * @param user
+   *          the user
+   * @param content
+   *          the content
    * @return the list
    */
   public List<Tag> find(final User user, final Content content) {
@@ -93,8 +98,9 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /**
    * Gets the max count.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the max count
    */
   private int getMaxCount(final Group group) {
@@ -103,8 +109,9 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /**
    * Gets the min count.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the min count
    */
   private int getMinCount(final Group group) {
@@ -113,16 +120,21 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /**
    * Gets the summary by group.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the summary by group
    */
   private List<TagCount> getSummaryByGroup(final Group group) {
     return finder.getTagsGroups(group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.TagUserContentManager#getTagCloudResultByGroup(cc.kune.domain.Group)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.TagUserContentManager#getTagCloudResultByGroup
+   * (cc.kune.domain.Group)
    */
   @Override
   public TagCloudResult getTagCloudResultByGroup(final Group group) {
@@ -133,8 +145,12 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.TagUserContentManager#getTagsAsString(cc.kune.domain.User, cc.kune.domain.Content)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.TagUserContentManager#getTagsAsString(cc.kune
+   * .domain.User, cc.kune.domain.Content)
    */
   @Override
   public String getTagsAsString(final User user, final Content content) {
@@ -149,8 +165,12 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     return tagConcatenated.toString().replaceFirst(" ", "");
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.TagUserContentManager#remove(cc.kune.domain.User, cc.kune.domain.Content)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.TagUserContentManager#remove(cc.kune.domain
+   * .User, cc.kune.domain.Content)
    */
   @Override
   public void remove(final User user, final Content content) {
@@ -159,8 +179,12 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.TagUserContentManager#setTags(cc.kune.domain.User, cc.kune.domain.Content, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.TagUserContentManager#setTags(cc.kune.domain
+   * .User, cc.kune.domain.Content, java.lang.String)
    */
   @Override
   public void setTags(final User user, final Content content, final String tags) {

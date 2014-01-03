@@ -46,7 +46,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Invitation.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -54,28 +54,28 @@ import cc.kune.domain.utils.HasId;
 @Table(name = "invitation")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Invitation implements HasId {
-  
+
   /** The date. */
   @Basic
   private Long date;
-  
+
   /** The from user. */
   @ManyToOne
   private User fromUser;
-  
+
   /** The hash. */
   @Column(unique = true, nullable = false)
   private String hash;
-  
+
   /** The id. */
   @Id
   @DocumentId
   @GeneratedValue
   private Long id;
-  
+
   /** The invited to token. */
   private String invitedToToken;
-  
+
   /** The notif type. */
   @Enumerated(EnumType.STRING)
   private NotificationType notifType;
@@ -83,7 +83,7 @@ public class Invitation implements HasId {
   /** The to. */
   @Column(name = "invitTo")
   private String to;
-  
+
   /** The type. */
   @Enumerated(EnumType.STRING)
   private InvitationType type;
@@ -102,13 +102,19 @@ public class Invitation implements HasId {
 
   /**
    * Instantiates a new invitation.
-   *
-   * @param from the from
-   * @param hash the hash
-   * @param invitedToToken the invited to token
-   * @param notifType the notif type
-   * @param to the to
-   * @param type the type
+   * 
+   * @param from
+   *          the from
+   * @param hash
+   *          the hash
+   * @param invitedToToken
+   *          the invited to token
+   * @param notifType
+   *          the notif type
+   * @param to
+   *          the to
+   * @param type
+   *          the type
    */
   public Invitation(final User from, final String hash, final String invitedToToken,
       final NotificationType notifType, final String to, final InvitationType type) {
@@ -124,7 +130,7 @@ public class Invitation implements HasId {
 
   /**
    * Gets the date.
-   *
+   * 
    * @return the date
    */
   public Long getDate() {
@@ -133,7 +139,7 @@ public class Invitation implements HasId {
 
   /**
    * Gets the from.
-   *
+   * 
    * @return the from
    */
   public User getFrom() {
@@ -142,7 +148,7 @@ public class Invitation implements HasId {
 
   /**
    * Gets the from user.
-   *
+   * 
    * @return the from user
    */
   public User getFromUser() {
@@ -151,14 +157,16 @@ public class Invitation implements HasId {
 
   /**
    * Gets the hash.
-   *
+   * 
    * @return the hash
    */
   public String getHash() {
     return hash;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -168,7 +176,7 @@ public class Invitation implements HasId {
 
   /**
    * Gets the invited to token.
-   *
+   * 
    * @return the invited to token
    */
   public StateToken getInvitedToToken() {
@@ -177,7 +185,7 @@ public class Invitation implements HasId {
 
   /**
    * Gets the notif type.
-   *
+   * 
    * @return the notif type
    */
   public NotificationType getNotifType() {
@@ -186,7 +194,7 @@ public class Invitation implements HasId {
 
   /**
    * Gets the to.
-   *
+   * 
    * @return the to
    */
   public String getTo() {
@@ -195,7 +203,7 @@ public class Invitation implements HasId {
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public InvitationType getType() {
@@ -204,7 +212,7 @@ public class Invitation implements HasId {
 
   /**
    * Gets the used.
-   *
+   * 
    * @return the used
    */
   public Boolean getUsed() {
@@ -213,8 +221,9 @@ public class Invitation implements HasId {
 
   /**
    * Sets the date.
-   *
-   * @param date the new date
+   * 
+   * @param date
+   *          the new date
    */
   public void setDate(final Long date) {
     this.date = date;
@@ -222,8 +231,9 @@ public class Invitation implements HasId {
 
   /**
    * Sets the from.
-   *
-   * @param from the new from
+   * 
+   * @param from
+   *          the new from
    */
   public void setFrom(final User from) {
     this.fromUser = from;
@@ -231,14 +241,17 @@ public class Invitation implements HasId {
 
   /**
    * Sets the hash.
-   *
-   * @param hash the new hash
+   * 
+   * @param hash
+   *          the new hash
    */
   public void setHash(final String hash) {
     this.hash = hash;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -248,8 +261,9 @@ public class Invitation implements HasId {
 
   /**
    * Sets the invited to token.
-   *
-   * @param invitedToToken the new invited to token
+   * 
+   * @param invitedToToken
+   *          the new invited to token
    */
   public void setInvitedToToken(final String invitedToToken) {
     this.invitedToToken = invitedToToken;
@@ -257,8 +271,9 @@ public class Invitation implements HasId {
 
   /**
    * Sets the notif type.
-   *
-   * @param notifType the new notif type
+   * 
+   * @param notifType
+   *          the new notif type
    */
   public void setNotifType(final NotificationType notifType) {
     this.notifType = notifType;
@@ -266,8 +281,9 @@ public class Invitation implements HasId {
 
   /**
    * Sets the to.
-   *
-   * @param to the new to
+   * 
+   * @param to
+   *          the new to
    */
   public void setTo(final String to) {
     this.to = to;
@@ -275,8 +291,9 @@ public class Invitation implements HasId {
 
   /**
    * Sets the type.
-   *
-   * @param type the new type
+   * 
+   * @param type
+   *          the new type
    */
   public void setType(final InvitationType type) {
     this.type = type;
@@ -284,8 +301,9 @@ public class Invitation implements HasId {
 
   /**
    * Sets the used.
-   *
-   * @param used the new used
+   * 
+   * @param used
+   *          the new used
    */
   public void setUsed(final Boolean used) {
     this.used = used;

@@ -33,37 +33,46 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface I18nServiceAsync.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface I18nServiceAsync {
 
   /**
    * Gets the initial language.
-   *
-   * @param localeParam the locale param
-   * @param callback the callback
+   * 
+   * @param localeParam
+   *          the locale param
+   * @param callback
+   *          the callback
    * @return the initial language
    */
   void getInitialLanguage(String localeParam, AsyncCallback<I18nLanguageDTO> callback);
 
   /**
    * Gets the lexicon.
-   *
-   * @param language the language
-   * @param callback the callback
+   * 
+   * @param language
+   *          the language
+   * @param callback
+   *          the callback
    * @return the lexicon
    */
   void getLexicon(String language, AsyncCallback<HashMap<String, String>> callback);
 
   /**
    * Gets the translated lexicon.
-   *
-   * @param userHash the user hash
-   * @param language the language
-   * @param languageFrom the language from
-   * @param toTranslate the to translate
-   * @param callback the callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param language
+   *          the language
+   * @param languageFrom
+   *          the language from
+   * @param toTranslate
+   *          the to translate
+   * @param callback
+   *          the callback
    * @return the translated lexicon
    */
   void getTranslatedLexicon(String userHash, String language, String languageFrom, boolean toTranslate,
@@ -71,12 +80,17 @@ public interface I18nServiceAsync {
 
   /**
    * Gets the translation.
-   *
-   * @param userHash the user hash
-   * @param language the language
-   * @param text the text
-   * @param noteForTranslators the note for translators
-   * @param callback the callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param language
+   *          the language
+   * @param text
+   *          the text
+   * @param noteForTranslators
+   *          the note for translators
+   * @param callback
+   *          the callback
    * @return the translation
    */
   void getTranslation(String userHash, String language, String text, String noteForTranslators,
@@ -84,11 +98,15 @@ public interface I18nServiceAsync {
 
   /**
    * Sets the translation.
-   *
-   * @param userHash the user hash
-   * @param id the id
-   * @param translation the translation
-   * @param asyncCallback the async callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param id
+   *          the id
+   * @param translation
+   *          the translation
+   * @param asyncCallback
+   *          the async callback
    */
   void setTranslation(String userHash, Long id, String translation, AsyncCallback<String> asyncCallback);
 

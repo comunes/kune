@@ -29,7 +29,7 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface StateService.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -37,27 +37,33 @@ public interface StateService {
 
   /**
    * Creates the.
-   *
-   * @param userLogged the user logged
-   * @param container the container
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param container
+   *          the container
    * @return the state container
    */
   StateContainer create(User userLogged, Container container);
 
   /**
    * Creates the.
-   *
-   * @param userLogged the user logged
-   * @param content the content
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param content
+   *          the content
    * @return the state content
    */
   StateContent create(User userLogged, Content content);
 
   /**
    * Creates the no home.
-   *
-   * @param user the user
-   * @param groupShortName the group short name
+   * 
+   * @param user
+   *          the user
+   * @param groupShortName
+   *          the group short name
    * @return the state no content
    */
   StateNoContent createNoHome(User user, String groupShortName);

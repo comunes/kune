@@ -27,7 +27,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetworkDTO implements IsSerializable {
@@ -48,7 +48,7 @@ public class SocialNetworkDTO implements IsSerializable {
 
   /**
    * Gets the access lists.
-   *
+   * 
    * @return the access lists
    */
   public AccessListsDTO getAccessLists() {
@@ -57,7 +57,7 @@ public class SocialNetworkDTO implements IsSerializable {
 
   /**
    * Gets the pending collaborators.
-   *
+   * 
    * @return the pending collaborators
    */
   public GroupListDTO getPendingCollaborators() {
@@ -66,8 +66,9 @@ public class SocialNetworkDTO implements IsSerializable {
 
   /**
    * Sets the access lists.
-   *
-   * @param accessLists the new access lists
+   * 
+   * @param accessLists
+   *          the new access lists
    */
   public void setAccessLists(final AccessListsDTO accessLists) {
     this.accessLists = accessLists;
@@ -75,16 +76,20 @@ public class SocialNetworkDTO implements IsSerializable {
 
   /**
    * Sets the pending collaborators.
-   *
-   * @param pendingCollaborators the new pending collaborators
+   * 
+   * @param pendingCollaborators
+   *          the new pending collaborators
    */
   public void setPendingCollaborators(final GroupListDTO pendingCollaborators) {
     this.pendingCollaborators = pendingCollaborators;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
+  @Override
   public String toString() {
     return "SocialNetworkDTO[accessList: " + accessLists + "; pendingsCollabs: " + pendingCollaborators
         + "]";

@@ -50,7 +50,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FileUploadManagerAbstract.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class FileUploadManagerAbstract extends HttpServlet {
@@ -75,29 +75,42 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
 
   /**
    * Before respond.
-   *
-   * @param response the response
-   * @param w the w
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param response
+   *          the response
+   * @param w
+   *          the w
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected abstract void beforeRespond(final HttpServletResponse response, final Writer w)
       throws IOException;
 
   /**
    * Creates the uploaded file.
-   *
-   * @param userHash the user hash
-   * @param stateToken the state token
-   * @param fileName the file name
-   * @param file the file
-   * @param typeId the type id
-   * @throws Exception the exception
+   * 
+   * @param userHash
+   *          the user hash
+   * @param stateToken
+   *          the state token
+   * @param fileName
+   *          the file name
+   * @param file
+   *          the file
+   * @param typeId
+   *          the type id
+   * @throws Exception
+   *           the exception
    */
   abstract void createUploadedFile(final String userHash, final StateToken stateToken,
       final String fileName, final FileItem file, final String typeId) throws Exception;
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * javax.servlet.http.HttpServlet#doPost(javax.servlet.http.HttpServletRequest
+   * , javax.servlet.http.HttpServletResponse)
    */
   @Override
   @SuppressWarnings({ "rawtypes" })
@@ -160,10 +173,13 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
 
   /**
    * Do response.
-   *
-   * @param response the response
-   * @param additionalResponse the additional response
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param response
+   *          the response
+   * @param additionalResponse
+   *          the additional response
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected void doResponse(final HttpServletResponse response, final String additionalResponse)
       throws IOException {
@@ -172,11 +188,15 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
 
   /**
    * Do response.
-   *
-   * @param response the response
-   * @param additionalResponse the additional response
-   * @param responseCode the response code
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param response
+   *          the response
+   * @param additionalResponse
+   *          the additional response
+   * @param responseCode
+   *          the response code
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected void doResponse(final HttpServletResponse response, final String additionalResponse,
       final int responseCode) throws IOException {
@@ -190,8 +210,9 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
 
   /**
    * Log file del.
-   *
-   * @param delResult the del result
+   * 
+   * @param delResult
+   *          the del result
    */
   protected void logFileDel(final boolean delResult) {
     if (!delResult) {
@@ -201,9 +222,11 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
 
   /**
    * On file upload exception.
-   *
-   * @param response the response
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param response
+   *          the response
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected void onFileUploadException(final HttpServletResponse response) throws IOException {
     doResponse(response, null);
@@ -211,10 +234,13 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
 
   /**
    * On other exception.
-   *
-   * @param response the response
-   * @param e the e
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param response
+   *          the response
+   * @param e
+   *          the e
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected void onOtherException(final HttpServletResponse response, final Exception e)
       throws IOException {
@@ -225,9 +251,11 @@ public abstract class FileUploadManagerAbstract extends HttpServlet {
 
   /**
    * On success.
-   *
-   * @param response the response
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param response
+   *          the response
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   protected void onSuccess(final HttpServletResponse response) throws IOException {
     doResponse(response, null);

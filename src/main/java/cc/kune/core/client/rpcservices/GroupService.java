@@ -37,7 +37,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface GroupService.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @RemoteServiceRelativePath("GroupService")
@@ -45,95 +45,127 @@ public interface GroupService extends RemoteService {
 
   /**
    * Change def license.
-   *
-   * @param userHash the user hash
-   * @param groupToken the group token
-   * @param license the license
+   * 
+   * @param userHash
+   *          the user hash
+   * @param groupToken
+   *          the group token
+   * @param license
+   *          the license
    */
   void changeDefLicense(final String userHash, final StateToken groupToken, final LicenseDTO license);
 
   /**
    * Change group ws theme.
-   *
-   * @param userHash the user hash
-   * @param groupToken the group token
-   * @param theme the theme
-   * @throws DefaultException the default exception
+   * 
+   * @param userHash
+   *          the user hash
+   * @param groupToken
+   *          the group token
+   * @param theme
+   *          the theme
+   * @throws DefaultException
+   *           the default exception
    */
   void changeGroupWsTheme(String userHash, StateToken groupToken, String theme) throws DefaultException;
 
   /**
    * Clear group back image.
-   *
-   * @param userHash the user hash
-   * @param token the token
+   * 
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
    * @return the group dto
    */
   GroupDTO clearGroupBackImage(String userHash, StateToken token);
 
   /**
    * Creates the new group.
-   *
-   * @param userHash the user hash
-   * @param group the group
-   * @param publicDesc the public desc
-   * @param tags the tags
-   * @param enabledTools the enabled tools
+   * 
+   * @param userHash
+   *          the user hash
+   * @param group
+   *          the group
+   * @param publicDesc
+   *          the public desc
+   * @param tags
+   *          the tags
+   * @param enabledTools
+   *          the enabled tools
    * @return the state abstract dto
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   StateAbstractDTO createNewGroup(String userHash, GroupDTO group, String publicDesc, String tags,
       String[] enabledTools) throws DefaultException;
 
   /**
    * Gets the group.
-   *
-   * @param userHash the user hash
-   * @param token the token
+   * 
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
    * @return the group
    */
   GroupDTO getGroup(String userHash, StateToken token);
 
   /**
    * Sets the group new members joining policy.
-   *
-   * @param userHash the user hash
-   * @param groupToken the group token
-   * @param admissionPolicy the admission policy
+   * 
+   * @param userHash
+   *          the user hash
+   * @param groupToken
+   *          the group token
+   * @param admissionPolicy
+   *          the admission policy
    */
   void setGroupNewMembersJoiningPolicy(String userHash, StateToken groupToken,
       AdmissionType admissionPolicy);
 
   /**
    * Sets the social network visibility.
-   *
-   * @param userHash the user hash
-   * @param groupToken the group token
-   * @param visibility the visibility
+   * 
+   * @param userHash
+   *          the user hash
+   * @param groupToken
+   *          the group token
+   * @param visibility
+   *          the visibility
    */
   void setSocialNetworkVisibility(String userHash, StateToken groupToken,
       SocialNetworkVisibility visibility);
 
   /**
    * Sets the tool enabled.
-   *
-   * @param userHash the user hash
-   * @param groupToken the group token
-   * @param toolName the tool name
-   * @param enabled the enabled
-   * @throws ToolIsDefaultException the tool is default exception
+   * 
+   * @param userHash
+   *          the user hash
+   * @param groupToken
+   *          the group token
+   * @param toolName
+   *          the tool name
+   * @param enabled
+   *          the enabled
+   * @throws ToolIsDefaultException
+   *           the tool is default exception
    */
   void setToolEnabled(String userHash, StateToken groupToken, String toolName, boolean enabled)
       throws ToolIsDefaultException;
 
   /**
    * Update group.
-   *
-   * @param userHash the user hash
-   * @param token the token
-   * @param groupDTO the group dto
+   * 
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
+   * @param groupDTO
+   *          the group dto
    * @return the state abstract dto
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   StateAbstractDTO updateGroup(String userHash, StateToken token, GroupDTO groupDTO)
       throws DefaultException;

@@ -38,7 +38,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FileManagerTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FileManagerTest {
@@ -46,14 +46,15 @@ public class FileManagerTest {
   /** The file manager. */
   @Inject
   FileManager fileManager;
-  
+
   /** The temp dir. */
   private String tempDir;
 
   /**
    * Inject.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Before
   public void inject() throws IOException {
@@ -64,8 +65,9 @@ public class FileManagerTest {
 
   /**
    * Seq.
-   *
-   * @param file the file
+   * 
+   * @param file
+   *          the file
    * @return the string
    */
   private String seq(final String file) {
@@ -74,8 +76,9 @@ public class FileManagerTest {
 
   /**
    * Test3 file creation with seq.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void test3FileCreationWithSeq() throws IOException {
@@ -92,8 +95,9 @@ public class FileManagerTest {
 
   /**
    * Test dir creation.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testDirCreation() throws IOException {
@@ -108,8 +112,9 @@ public class FileManagerTest {
 
   /**
    * Test file creation with seq.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testFileCreationWithSeq() throws IOException {

@@ -28,7 +28,7 @@ import com.google.gwt.resources.client.ImageResource;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface IconResources.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Deprecated
@@ -36,7 +36,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Adds the green.
-   *
+   * 
    * @return the image resource
    */
   @Source("add-green.png")
@@ -44,7 +44,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Bug.
-   *
+   * 
    * @return the image resource
    */
   @Source("bug.png")
@@ -52,7 +52,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Checked.
-   *
+   * 
    * @return the image resource
    */
   @Source("checked.png")
@@ -60,7 +60,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Css.
-   *
+   * 
    * @return the icon css resource
    */
   @Source("kicon.css")
@@ -68,7 +68,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Del green.
-   *
+   * 
    * @return the image resource
    */
   @Source("del-green.png")
@@ -76,7 +76,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Group home.
-   *
+   * 
    * @return the image resource
    */
   @Source("group-home.png")
@@ -84,7 +84,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Info.
-   *
+   * 
    * @return the image resource
    */
   @Source("info.png")
@@ -92,7 +92,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Kune icon16.
-   *
+   * 
    * @return the image resource
    */
   @Source("kune-icon16.png")
@@ -100,7 +100,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Language.
-   *
+   * 
    * @return the image resource
    */
   @Source("language.png")
@@ -108,7 +108,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Maximize.
-   *
+   * 
    * @return the image resource
    */
   @Source("arrow_out.png")
@@ -116,7 +116,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Minimize.
-   *
+   * 
    * @return the image resource
    */
   @Source("arrow_in.png")
@@ -124,7 +124,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Prefs.
-   *
+   * 
    * @return the image resource
    */
   @Source("prefs.png")
@@ -132,7 +132,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Radiochecked.
-   *
+   * 
    * @return the image resource
    */
   @Source("radiochecked.png")
@@ -140,7 +140,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Radio un checked.
-   *
+   * 
    * @return the image resource
    */
   @Source("radiounchecked.png")
@@ -148,7 +148,7 @@ public interface IconResources extends ClientBundle {
 
   /**
    * Un checked.
-   *
+   * 
    * @return the image resource
    */
   @Source("unchecked.png")

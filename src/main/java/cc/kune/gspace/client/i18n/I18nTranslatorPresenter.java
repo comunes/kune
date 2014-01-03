@@ -38,7 +38,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nTranslatorPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nTranslatorPresenter extends
@@ -47,7 +47,7 @@ public class I18nTranslatorPresenter extends
 
   /**
    * The Interface I18nTranslatorProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -56,7 +56,7 @@ public class I18nTranslatorPresenter extends
 
   /**
    * The Interface I18nTranslatorView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface I18nTranslatorView extends
@@ -69,8 +69,9 @@ public class I18nTranslatorPresenter extends
 
     /**
      * Sets the language.
-     *
-     * @param currentLanguage the new language
+     * 
+     * @param currentLanguage
+     *          the new language
      */
     void setLanguage(I18nLanguageSimpleDTO currentLanguage);
 
@@ -81,12 +82,17 @@ public class I18nTranslatorPresenter extends
 
   /**
    * Instantiates a new i18n translator presenter.
-   *
-   * @param eventBus the event bus
-   * @param proxy the proxy
-   * @param session the session
-   * @param i18n the i18n
-   * @param view the view
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param proxy
+   *          the proxy
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param view
+   *          the view
    */
   @Inject
   public I18nTranslatorPresenter(final EventBus eventBus, final I18nTranslatorProxy proxy,
@@ -102,23 +108,32 @@ public class I18nTranslatorPresenter extends
     getView().hide();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView
+   * ()
    */
   @Override
   public I18nTranslatorView getView() {
     return (I18nTranslatorView) super.getView();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#hide()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#hide()
    */
   @Override
   public void hide() {
     getView().hide();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -127,8 +142,11 @@ public class I18nTranslatorPresenter extends
     getView().init();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#show()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#show()
    */
   @Override
   public void show() {

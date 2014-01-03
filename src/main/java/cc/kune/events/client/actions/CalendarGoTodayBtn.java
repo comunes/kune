@@ -31,16 +31,18 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CalendarGoTodayBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CalendarGoTodayBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new calendar go today btn.
-   *
-   * @param action the action
-   * @param i18n the i18n
+   * 
+   * @param action
+   *          the action
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public CalendarGoTodayBtn(final CalendarGoTodayAction action, final I18nTranslationService i18n) {

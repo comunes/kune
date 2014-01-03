@@ -34,7 +34,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupInvitationMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -42,10 +42,13 @@ public class GroupInvitationMenuItem extends MenuItemDescriptor {
 
   /**
    * Instantiates a new group invitation menu item.
-   *
-   * @param action the action
-   * @param icons the icons
-   * @param optionsMenu the options menu
+   * 
+   * @param action
+   *          the action
+   * @param icons
+   *          the icons
+   * @param optionsMenu
+   *          the options menu
    */
   @Inject
   GroupInvitationMenuItem(final GroupInvitationAction action, final IconicResources icons,

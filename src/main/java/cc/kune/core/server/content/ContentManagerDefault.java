@@ -93,7 +93,7 @@ import com.google.wave.api.Participants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentManagerDefault.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */

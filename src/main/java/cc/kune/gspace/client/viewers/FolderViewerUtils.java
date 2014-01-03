@@ -62,52 +62,60 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FolderViewerUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FolderViewerUtils {
 
   /** The actions registry. */
   private final ActionRegistryByType actionsRegistry;
-  
+
   /** The capab reg. */
   private final ContentCapabilitiesRegistry capabReg;
-  
+
   /** The download utils provider. */
   private final Provider<ClientFileDownloadUtils> downloadUtilsProvider;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The icons registry. */
   private final IconsRegistry iconsRegistry;
-  
+
   /** The path toolbar utils. */
   private final PathToolbarUtils pathToolbarUtils;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
-  
+
   /** The view. */
   private AbstractFolderViewerView view;
 
   /**
    * Instantiates a new folder viewer utils.
-   *
-   * @param capabilitiesRegistry the capabilities registry
-   * @param eventBus the event bus
-   * @param session the session
-   * @param downloadUtilsProvider the download utils provider
-   * @param i18n the i18n
-   * @param actionsRegistry the actions registry
-   * @param stateManager the state manager
-   * @param pathToolbarUtils the path toolbar utils
+   * 
+   * @param capabilitiesRegistry
+   *          the capabilities registry
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
+   * @param downloadUtilsProvider
+   *          the download utils provider
+   * @param i18n
+   *          the i18n
+   * @param actionsRegistry
+   *          the actions registry
+   * @param stateManager
+   *          the state manager
+   * @param pathToolbarUtils
+   *          the path toolbar utils
    */
   @Inject
   public FolderViewerUtils(final ContentCapabilitiesRegistry capabilitiesRegistry,
@@ -128,15 +136,23 @@ public class FolderViewerUtils {
 
   /**
    * Adds the item.
-   *
-   * @param tool the tool
-   * @param content the content
-   * @param mimeType the mime type
-   * @param status the status
-   * @param parentStateToken the parent state token
-   * @param rights the rights
-   * @param modifiedOn the modified on
-   * @param isContainer the is container
+   * 
+   * @param tool
+   *          the tool
+   * @param content
+   *          the content
+   * @param mimeType
+   *          the mime type
+   * @param status
+   *          the status
+   * @param parentStateToken
+   *          the parent state token
+   * @param rights
+   *          the rights
+   * @param modifiedOn
+   *          the modified on
+   * @param isContainer
+   *          the is container
    */
   private void addItem(final String tool, final AbstractContentSimpleDTO content,
       final BasicMimeTypeDTO mimeType, final ContentStatus status, final StateToken parentStateToken,
@@ -180,9 +196,11 @@ public class FolderViewerUtils {
 
   /**
    * Creates the child items.
-   *
-   * @param container the container
-   * @param containerRights the container rights
+   * 
+   * @param container
+   *          the container
+   * @param containerRights
+   *          the container rights
    */
   private void createChildItems(final ContainerDTO container, final AccessRights containerRights) {
     if (container.getContents().size() + container.getChilds().size() == 0) {
@@ -220,8 +238,9 @@ public class FolderViewerUtils {
 
   /**
    * Gen id.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the string
    */
   private String genId(final StateToken token) {
@@ -230,10 +249,13 @@ public class FolderViewerUtils {
 
   /**
    * Gets the icon.
-   *
-   * @param token the token
-   * @param contentTypeId the content type id
-   * @param mimeType the mime type
+   * 
+   * @param token
+   *          the token
+   * @param contentTypeId
+   *          the content type id
+   * @param mimeType
+   *          the mime type
    * @return the icon
    */
   private Object getIcon(final StateToken token, final String contentTypeId,
@@ -247,10 +269,13 @@ public class FolderViewerUtils {
 
   /**
    * Gets the icon.
-   *
-   * @param stateToken the state token
-   * @param typeId the type id
-   * @param status the status
+   * 
+   * @param stateToken
+   *          the state token
+   * @param typeId
+   *          the type id
+   * @param status
+   *          the status
    * @return the icon
    */
   private Object getIcon(final StateToken stateToken, final String typeId, final ContentStatus status) {
@@ -259,10 +284,13 @@ public class FolderViewerUtils {
 
   /**
    * Gets the tooltip.
-   *
-   * @param token the token
-   * @param mimeType the mime type
-   * @param draggable the draggable
+   * 
+   * @param token
+   *          the token
+   * @param mimeType
+   *          the mime type
+   * @param draggable
+   *          the draggable
    * @return the tooltip
    */
   private String getTooltip(final StateToken token, final BasicMimeTypeDTO mimeType,
@@ -278,7 +306,7 @@ public class FolderViewerUtils {
 
   /**
    * Gets the view.
-   *
+   * 
    * @return the view
    */
   private AbstractFolderViewerView getView() {
@@ -287,9 +315,11 @@ public class FolderViewerUtils {
 
   /**
    * Sets the content.
-   *
-   * @param view the view
-   * @param state the state
+   * 
+   * @param view
+   *          the view
+   * @param state
+   *          the state
    */
   public void setContent(final AbstractFolderViewerView view, @Nonnull final HasContent state) {
     this.view = view;
@@ -315,8 +345,9 @@ public class FolderViewerUtils {
 
   /**
    * Show empty msg.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    */
   private void showEmptyMsg(final String typeId) {
     // msg is already translated

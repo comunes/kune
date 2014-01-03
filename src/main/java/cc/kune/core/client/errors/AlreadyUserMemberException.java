@@ -25,11 +25,11 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AlreadyUserMemberException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AlreadyUserMemberException extends DefaultException {
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -6365615768192330492L;
 }

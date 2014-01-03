@@ -34,14 +34,14 @@ import com.google.inject.persist.finder.Finder;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface UserSignInLogFinder.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface UserSignInLogFinder {
 
   /**
    * Count.
-   *
+   * 
    * @return the long
    */
   @Finder(query = "SELECT count(*) FROM UserSignInLog u")
@@ -49,8 +49,9 @@ public interface UserSignInLogFinder {
 
   /**
    * Count by user.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    * @return the long
    */
   @Finder(query = "select count (*) from UserSignInLog where user = :user")
@@ -58,7 +59,7 @@ public interface UserSignInLogFinder {
 
   /**
    * Gets the all.
-   *
+   * 
    * @return the all
    */
   @Finder(query = "from UserSignInLog", returnAs = ArrayList.class)

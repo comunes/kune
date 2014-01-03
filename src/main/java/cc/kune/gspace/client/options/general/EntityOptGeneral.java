@@ -24,7 +24,7 @@ package cc.kune.gspace.client.options.general;
 
 /**
  * The Interface EntityOptGeneral.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptGeneral {

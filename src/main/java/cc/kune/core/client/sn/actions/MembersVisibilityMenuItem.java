@@ -31,7 +31,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MembersVisibilityMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MembersVisibilityMenuItem extends MenuRadioItemDescriptor {
@@ -41,9 +41,11 @@ public class MembersVisibilityMenuItem extends MenuRadioItemDescriptor {
 
   /**
    * Instantiates a new members visibility menu item.
-   *
-   * @param parent the parent
-   * @param action the action
+   * 
+   * @param parent
+   *          the parent
+   * @param action
+   *          the action
    */
   @Inject
   public MembersVisibilityMenuItem(final MenuDescriptor parent, final MembersVisibilityAction action) {
@@ -52,8 +54,9 @@ public class MembersVisibilityMenuItem extends MenuRadioItemDescriptor {
 
   /**
    * With visibility.
-   *
-   * @param visibility the visibility
+   * 
+   * @param visibility
+   *          the visibility
    * @return the menu radio item descriptor
    */
   public MenuRadioItemDescriptor withVisibility(final SocialNetworkVisibility visibility) {

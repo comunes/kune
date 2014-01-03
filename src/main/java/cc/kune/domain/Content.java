@@ -71,7 +71,7 @@ import cc.kune.wiki.shared.WikiToolConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Content.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -83,13 +83,13 @@ public class Content implements HasStateToken {
 
   /** The Constant GROUP. */
   public static final String GROUP = "group";
-  
+
   /** The Constant MIMETYPE. */
   public static final String MIMETYPE = "mimetype";
-  
+
   /** The Constant NO_CONTENT. */
   public static final Content NO_CONTENT = new Content();
-  
+
   /** The Constant TITLE. */
   public static final String TITLE = "title";
 
@@ -109,12 +109,12 @@ public class Content implements HasStateToken {
   private Container container;
 
   /** The created on. */
-  @org.hibernate.annotations.Index(name="createdOn")
+  @org.hibernate.annotations.Index(name = "createdOn")
   @Basic(optional = false)
   private Long createdOn;
 
   /** The deleted on. */
-  @org.hibernate.annotations.Index(name="deletedOn")
+  @org.hibernate.annotations.Index(name = "deletedOn")
   @Basic(optional = true)
   private Date deletedOn;
 
@@ -150,17 +150,17 @@ public class Content implements HasStateToken {
   private BasicMimeType mimeType;
 
   /** The modified on. */
-  @org.hibernate.annotations.Index(name="modifiedOn")
+  @org.hibernate.annotations.Index(name = "modifiedOn")
   @Basic(optional = true)
   private Long modifiedOn;
 
   /** The published on. */
-  @org.hibernate.annotations.Index(name="publishedOn")
+  @org.hibernate.annotations.Index(name = "publishedOn")
   @Basic(optional = true)
   private Date publishedOn;
 
   /** The status. */
-  @org.hibernate.annotations.Index(name="status")
+  @org.hibernate.annotations.Index(name = "status")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   private ContentStatus status;
@@ -174,12 +174,12 @@ public class Content implements HasStateToken {
   private String typeId;
 
   /** The version. */
-  @org.hibernate.annotations.Index(name="version")
+  @org.hibernate.annotations.Index(name = "version")
   @Version
   private Integer version;
 
   /** The wave id. */
-  @org.hibernate.annotations.Index(name="waveId")
+  @org.hibernate.annotations.Index(name = "waveId")
   private String waveId;
 
   /**
@@ -197,8 +197,9 @@ public class Content implements HasStateToken {
 
   /**
    * Adds the author.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    */
   public void addAuthor(final User user) {
     if (!this.authors.contains(user)) {
@@ -208,8 +209,9 @@ public class Content implements HasStateToken {
 
   /**
    * Adds the revision.
-   *
-   * @param revision the revision
+   * 
+   * @param revision
+   *          the revision
    */
   public void addRevision(final Revision revision) {
     if (lastRevision == null) {
@@ -229,7 +231,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the access lists.
-   *
+   * 
    * @return the access lists
    */
   @Transient
@@ -239,7 +241,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the authors.
-   *
+   * 
    * @return the authors
    */
   public List<User> getAuthors() {
@@ -248,7 +250,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the container.
-   *
+   * 
    * @return the container
    */
   public Container getContainer() {
@@ -257,7 +259,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the created on.
-   *
+   * 
    * @return the created on
    */
   public Long getCreatedOn() {
@@ -266,7 +268,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the deleted on.
-   *
+   * 
    * @return the deleted on
    */
   public Date getDeletedOn() {
@@ -275,7 +277,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the filename.
-   *
+   * 
    * @return the filename
    */
   public String getFilename() {
@@ -284,7 +286,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -293,7 +295,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the language.
-   *
+   * 
    * @return the language
    */
   public I18nLanguage getLanguage() {
@@ -302,7 +304,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the last revision.
-   *
+   * 
    * @return the last revision
    */
   public Revision getLastRevision() {
@@ -311,7 +313,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the license.
-   *
+   * 
    * @return the license
    */
   public License getLicense() {
@@ -320,7 +322,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the mime type.
-   *
+   * 
    * @return the mime type
    */
   public BasicMimeType getMimeType() {
@@ -329,7 +331,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the modified on.
-   *
+   * 
    * @return the modified on
    */
   public Long getModifiedOn() {
@@ -338,8 +340,9 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the owner.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the owner
    */
   public Group getOwner(final Group group) {
@@ -348,14 +351,16 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the published on.
-   *
+   * 
    * @return the published on
    */
   public Date getPublishedOn() {
     return publishedOn;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasStateToken#getStateToken()
    */
   @Override
@@ -366,7 +371,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the state token encoded.
-   *
+   * 
    * @return the state token encoded
    */
   @Transient
@@ -376,7 +381,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the status.
-   *
+   * 
    * @return the status
    */
   public ContentStatus getStatus() {
@@ -385,7 +390,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the title.
-   *
+   * 
    * @return the title
    */
   public String getTitle() {
@@ -394,7 +399,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the translations.
-   *
+   * 
    * @return the translations
    */
   public List<ContentTranslation> getTranslations() {
@@ -403,7 +408,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the type id.
-   *
+   * 
    * @return the type id
    */
   public String getTypeId() {
@@ -412,7 +417,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the version.
-   *
+   * 
    * @return the version
    */
   public int getVersion() {
@@ -421,7 +426,7 @@ public class Content implements HasStateToken {
 
   /**
    * Gets the wave id.
-   *
+   * 
    * @return the wave id
    */
   public String getWaveId() {
@@ -430,7 +435,7 @@ public class Content implements HasStateToken {
 
   /**
    * Checks for access list.
-   *
+   * 
    * @return true, if successful
    */
   @Transient
@@ -440,7 +445,7 @@ public class Content implements HasStateToken {
 
   /**
    * Checks if is wave.
-   *
+   * 
    * @return true, if is wave
    */
   @Transient
@@ -455,8 +460,9 @@ public class Content implements HasStateToken {
 
   /**
    * Removes the author.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    */
   public void removeAuthor(final User user) {
     this.authors.remove(user);
@@ -464,8 +470,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the access lists.
-   *
-   * @param accessLists the new access lists
+   * 
+   * @param accessLists
+   *          the new access lists
    */
   public void setAccessLists(final AccessLists accessLists) {
     this.accessLists = accessLists;
@@ -473,8 +480,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the authors.
-   *
-   * @param authors the new authors
+   * 
+   * @param authors
+   *          the new authors
    */
   public void setAuthors(final List<User> authors) {
     this.authors = authors;
@@ -482,8 +490,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the container.
-   *
-   * @param container the new container
+   * 
+   * @param container
+   *          the new container
    */
   public void setContainer(final Container container) {
     this.container = container;
@@ -491,8 +500,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the created on.
-   *
-   * @param createdOn the new created on
+   * 
+   * @param createdOn
+   *          the new created on
    */
   public void setCreatedOn(final Long createdOn) {
     this.createdOn = createdOn;
@@ -500,8 +510,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the deleted on.
-   *
-   * @param date the new deleted on
+   * 
+   * @param date
+   *          the new deleted on
    */
   public void setDeletedOn(final Date date) {
     this.deletedOn = date;
@@ -509,8 +520,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the filename.
-   *
-   * @param filename the new filename
+   * 
+   * @param filename
+   *          the new filename
    */
   public void setFilename(final String filename) {
     this.filename = filename;
@@ -519,8 +531,9 @@ public class Content implements HasStateToken {
   // @PMD:REVIEWED:ShortVariable: by vjrj on 21/05/09 15:28
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -528,8 +541,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the language.
-   *
-   * @param language the new language
+   * 
+   * @param language
+   *          the new language
    */
   public void setLanguage(final I18nLanguage language) {
     this.language = language;
@@ -537,8 +551,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the last revision.
-   *
-   * @param revision the new last revision
+   * 
+   * @param revision
+   *          the new last revision
    */
   public void setLastRevision(final Revision revision) {
     this.lastRevision = revision;
@@ -546,8 +561,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the license.
-   *
-   * @param license the new license
+   * 
+   * @param license
+   *          the new license
    */
   public void setLicense(final License license) {
     this.license = license;
@@ -555,8 +571,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the mime type.
-   *
-   * @param mimeType the new mime type
+   * 
+   * @param mimeType
+   *          the new mime type
    */
   public void setMimeType(final BasicMimeType mimeType) {
     this.mimeType = mimeType;
@@ -564,8 +581,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the modified on.
-   *
-   * @param modifiedOn the new modified on
+   * 
+   * @param modifiedOn
+   *          the new modified on
    */
   public void setModifiedOn(final Long modifiedOn) {
     this.modifiedOn = modifiedOn;
@@ -573,8 +591,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the published on.
-   *
-   * @param publishedOn the new published on
+   * 
+   * @param publishedOn
+   *          the new published on
    */
   public void setPublishedOn(final Date publishedOn) {
     this.publishedOn = publishedOn;
@@ -582,8 +601,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the status.
-   *
-   * @param status the new status
+   * 
+   * @param status
+   *          the new status
    */
   public void setStatus(final ContentStatus status) {
     this.status = status;
@@ -591,8 +611,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the translations.
-   *
-   * @param translations the new translations
+   * 
+   * @param translations
+   *          the new translations
    */
   public void setTranslations(final List<ContentTranslation> translations) {
     this.translations = translations;
@@ -600,8 +621,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the type id.
-   *
-   * @param typeId the new type id
+   * 
+   * @param typeId
+   *          the new type id
    */
   public void setTypeId(final String typeId) {
     this.typeId = typeId;
@@ -609,8 +631,9 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the version.
-   *
-   * @param version the new version
+   * 
+   * @param version
+   *          the new version
    */
   public void setVersion(final Integer version) {
     this.version = version;
@@ -618,14 +641,17 @@ public class Content implements HasStateToken {
 
   /**
    * Sets the wave id.
-   *
-   * @param waveId the new wave id
+   * 
+   * @param waveId
+   *          the new wave id
    */
   public void setWaveId(final String waveId) {
     this.waveId = waveId;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

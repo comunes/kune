@@ -31,11 +31,11 @@ import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 // TODO: Auto-generated Javadoc
 /**
  * The Class IconsRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class IconsRegistry {
-  
+
   /** The content types icons. */
   private final Map<String, Object> contentTypesIcons;
 
@@ -48,8 +48,9 @@ public class IconsRegistry {
 
   /**
    * Gets the content type icon.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return the content type icon
    */
   public Object getContentTypeIcon(final String typeId) {
@@ -59,9 +60,11 @@ public class IconsRegistry {
   /**
    * If there is a specific icon for a type/subtype pair or a generic type icon
    * in defect.
-   *
-   * @param typeId the kune typeId (see *ClientTool)
-   * @param mimeType the mime type
+   * 
+   * @param typeId
+   *          the kune typeId (see *ClientTool)
+   * @param mimeType
+   *          the mime type
    * @return the content type icon
    */
   public Object getContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType) {
@@ -83,9 +86,11 @@ public class IconsRegistry {
 
   /**
    * Gets the content type icon.
-   *
-   * @param typeId the type id
-   * @param contentStatus the content status
+   * 
+   * @param typeId
+   *          the type id
+   * @param contentStatus
+   *          the content status
    * @return the content type icon
    */
   public Object getContentTypeIcon(final String typeId, final ContentStatus contentStatus) {
@@ -95,10 +100,13 @@ public class IconsRegistry {
 
   /**
    * Register content type icon.
-   *
-   * @param typeId the type id
-   * @param mimeType the mime type
-   * @param icon the icon
+   * 
+   * @param typeId
+   *          the type id
+   * @param mimeType
+   *          the mime type
+   * @param icon
+   *          the icon
    */
   public void registerContentTypeIcon(final String typeId, final BasicMimeTypeDTO mimeType,
       final Object icon) {
@@ -107,10 +115,13 @@ public class IconsRegistry {
 
   /**
    * Register content type icon.
-   *
-   * @param typeId the type id
-   * @param contentStatus the content status
-   * @param icon the icon
+   * 
+   * @param typeId
+   *          the type id
+   * @param contentStatus
+   *          the content status
+   * @param icon
+   *          the icon
    */
   public void registerContentTypeIcon(final String typeId, final ContentStatus contentStatus,
       final Object icon) {
@@ -119,9 +130,11 @@ public class IconsRegistry {
 
   /**
    * Register content type icon.
-   *
-   * @param contentTypeId the content type id
-   * @param icon the icon
+   * 
+   * @param contentTypeId
+   *          the content type id
+   * @param icon
+   *          the icon
    */
   public void registerContentTypeIcon(final String contentTypeId, final Object icon) {
     contentTypesIcons.put(contentTypeId, icon);

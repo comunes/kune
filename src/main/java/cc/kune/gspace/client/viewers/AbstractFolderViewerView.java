@@ -34,17 +34,20 @@ import com.gwtplatform.mvp.client.View;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface AbstractFolderViewerView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface AbstractFolderViewerView extends View {
-  
+
   /**
    * Adds the item.
-   *
-   * @param item the item
-   * @param clickHandler the click handler
-   * @param doubleClickHandler the double click handler
+   * 
+   * @param item
+   *          the item
+   * @param clickHandler
+   *          the click handler
+   * @param doubleClickHandler
+   *          the double click handler
    */
   void addItem(FolderItemDescriptor item, ClickHandler clickHandler,
       DoubleClickHandler doubleClickHandler);
@@ -71,7 +74,7 @@ public interface AbstractFolderViewerView extends View {
 
   /**
    * Gets the edits the title.
-   *
+   * 
    * @return the edits the title
    */
   HasEditHandler getEditTitle();
@@ -83,36 +86,41 @@ public interface AbstractFolderViewerView extends View {
 
   /**
    * Sets the container.
-   *
-   * @param state the new container
+   * 
+   * @param state
+   *          the new container
    */
   void setContainer(StateContainerDTO state);
 
   /**
    * Sets the editable title.
-   *
-   * @param title the new editable title
+   * 
+   * @param title
+   *          the new editable title
    */
   void setEditableTitle(String title);
 
   /**
    * Sets the footer actions.
-   *
-   * @param actions the new footer actions
+   * 
+   * @param actions
+   *          the new footer actions
    */
   void setFooterActions(GuiActionDescCollection actions);
 
   /**
    * Sets the subheader actions.
-   *
-   * @param actions the new subheader actions
+   * 
+   * @param actions
+   *          the new subheader actions
    */
   void setSubheaderActions(GuiActionDescCollection actions);
 
   /**
    * Show empty msg.
-   *
-   * @param message the message
+   * 
+   * @param message
+   *          the message
    */
   void showEmptyMsg(String message);
 

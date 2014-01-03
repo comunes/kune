@@ -38,43 +38,44 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AboutKuneDialog.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AboutKuneDialog {
 
   /**
    * The Interface Binder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface Binder extends UiBinder<Widget, AboutKuneDialog> {
   }
-  
+
   /** The Constant ABOUT_KUNE_BTN_ID. */
   public static final String ABOUT_KUNE_BTN_ID = "kune-about-button-diag";
-  
+
   /** The Constant ABOUT_KUNE_ID. */
   public static final String ABOUT_KUNE_ID = "kune-about-diag";
-  
+
   /** The Constant BINDER. */
   private static final Binder BINDER = GWT.create(Binder.class);
-  
+
   /** The dialog. */
   private final BasicTopDialog dialog;
-  
+
   /** The flow. */
   @UiField
   FlowPanel flow;
-  
+
   /** The frame. */
   @UiField
   Frame frame;
 
   /**
    * Instantiates a new about kune dialog.
-   *
-   * @param i18n the i18n
+   * 
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public AboutKuneDialog(final I18nTranslationService i18n) {

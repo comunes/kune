@@ -29,14 +29,14 @@ import com.google.gwt.user.client.ui.IsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityOptions.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptions extends AbstractTabbedDialog {
 
   /**
    * Gets the view.
-   *
+   * 
    * @return the view
    */
   public IsWidget getView();

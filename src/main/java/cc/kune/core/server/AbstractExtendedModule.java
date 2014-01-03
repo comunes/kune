@@ -42,7 +42,7 @@ import com.google.inject.matcher.Matcher;
  * An extension of AbstractModule that provides support for member injection of
  * instances constructed at bind-time; in particular, itself and
  * MethodInterceptors.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 
@@ -54,62 +54,45 @@ import com.google.inject.matcher.Matcher;
 
 public abstract class AbstractExtendedModule extends AbstractModule {
 
+  /** The Constant COUNT. */
+  private static final AtomicInteger COUNT = new AtomicInteger();
+
   /**
    * Hack to ensure unique Keys for binding different instances of
    * ExtendedModule. The prefix is chosen to reduce the chances of a conflict
    * with some other use of
-   *
+   * 
    * @return the unique annotation
    * @Named. A better solution would be to invent an Annotation for just this
-   * purpose.
+   *         purpose.
    */
   private static Annotation getUniqueAnnotation() {
     return named("ExtendedModule-" + COUNT.incrementAndGet());
   }
 
-  /** The to be injected. */
-  private final Set<Object> toBeInjected = new HashSet<Object>();
-
   /** The self injected. */
   private boolean selfInjected = false;
 
-  /** The Constant COUNT. */
-  private static final AtomicInteger COUNT = new AtomicInteger();
+  /** The to be injected. */
+  private final Set<Object> toBeInjected = new HashSet<Object>();
 
   /**
    * Overridden version of bindInterceptor that, in addition to the standard
    * behavior, arranges for field and method injection of each MethodInterceptor
    * in {@code interceptors}.
-   *
-   * @param classMatcher the class matcher
-   * @param methodMatcher the method matcher
-   * @param interceptors the interceptors
+   * 
+   * @param classMatcher
+   *          the class matcher
+   * @param methodMatcher
+   *          the method matcher
+   * @param interceptors
+   *          the interceptors
    */
   @Override
   public void bindInterceptor(final Matcher<? super Class<?>> classMatcher,
       final Matcher<? super Method> methodMatcher, final MethodInterceptor... interceptors) {
     registerForInjection(interceptors);
     super.bindInterceptor(classMatcher, methodMatcher, interceptors);
-  }
-
-  /**
-   * Arranges for this module and each of the given objects (if any) to be field
-   * and method injected when the Injector is created. It is safe to call this
-   * method more than once, and it is safe to call it more than once on the same
-   * object(s).
-   *
-   * @param <T> the generic type
-   * @param objects the objects
-   */
-  protected <T> void registerForInjection(final T... objects) {
-    ensureSelfInjection();
-    if (objects != null) {
-      for (T object : objects) {
-        if (object != null) {
-          toBeInjected.add(object);
-        }
-      }
-    }
   }
 
   /**
@@ -124,14 +107,37 @@ public abstract class AbstractExtendedModule extends AbstractModule {
 
   /**
    * Inject registered objects.
-   *
-   * @param injector the injector
+   * 
+   * @param injector
+   *          the injector
    */
   @SuppressWarnings("unused")
   @Inject
   private void injectRegisteredObjects(final Injector injector) {
-    for (Object injectee : toBeInjected) {
+    for (final Object injectee : toBeInjected) {
       injector.injectMembers(injectee);
+    }
+  }
+
+  /**
+   * Arranges for this module and each of the given objects (if any) to be field
+   * and method injected when the Injector is created. It is safe to call this
+   * method more than once, and it is safe to call it more than once on the same
+   * object(s).
+   * 
+   * @param <T>
+   *          the generic type
+   * @param objects
+   *          the objects
+   */
+  protected <T> void registerForInjection(final T... objects) {
+    ensureSelfInjection();
+    if (objects != null) {
+      for (final T object : objects) {
+        if (object != null) {
+          toBeInjected.add(object);
+        }
+      }
     }
   }
 }

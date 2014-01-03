@@ -29,11 +29,11 @@ import com.google.gwt.user.client.ui.IsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface GSpaceCenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface GSpaceCenter extends InsertPanel.ForIsWidget {
-  
+
   /**
    * Clear.
    */
@@ -41,8 +41,9 @@ public interface GSpaceCenter extends InsertPanel.ForIsWidget {
 
   /**
    * Show widget.
-   *
-   * @param widget the widget
+   * 
+   * @param widget
+   *          the widget
    */
   void showWidget(IsWidget widget);
 }

@@ -27,19 +27,19 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Enum EmailNotificationFrequency.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum EmailNotificationFrequency implements IsSerializable {
-  
+
   /** The daily. */
   daily, // at most daily, (not used yet)
   /** The hourly. */
- hourly, // at most hourly (not used yet)
+  hourly, // at most hourly (not used yet)
   /** The immediately. */
- immediately, // almost immediately (currently used)
+  immediately, // almost immediately (currently used)
   /** The no. */
- no; // I don't need email notifications (currently used)
+  no; // I don't need email notifications (currently used)
 
   // private EmailNotificationFrequency() {
   // }

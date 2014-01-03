@@ -27,7 +27,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PSpaceGinModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PSpaceGinModule extends AbstractPresenterModule {

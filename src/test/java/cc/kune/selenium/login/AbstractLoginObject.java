@@ -34,27 +34,28 @@ import cc.kune.selenium.SeleniumConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractLoginObject.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AbstractLoginObject extends PageObject {
-  
+
   /** The sign in link. */
   @FindBy(id = SeleniumConstants.GWTDEV + SitebarSignInLink.SITE_SIGN_IN)
   protected WebElement signInLink;
-  
+
   /** The sign out link. */
   @FindBy(id = SeleniumConstants.GWTDEV + SitebarSignOutLink.SITE_SIGN_OUT)
   protected WebElement signOutLink;
-  
+
   /** The user menu. */
   @FindBy(id = SeleniumConstants.GWTDEV + SiteUserOptionsPresenter.LOGGED_USER_MENU_ID)
   protected WebElement userMenu;
 
   /**
    * Assert is connected as.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    */
   public void assertIsConnectedAs(final String user) {
     waitFor(userMenu, user);

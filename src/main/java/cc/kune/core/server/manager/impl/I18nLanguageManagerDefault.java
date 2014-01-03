@@ -39,7 +39,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nLanguageManagerDefault.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -51,9 +51,11 @@ public class I18nLanguageManagerDefault extends DefaultManager<I18nLanguage, Lon
 
   /**
    * Instantiates a new i18n language manager default.
-   *
-   * @param provider the provider
-   * @param finder the finder
+   * 
+   * @param provider
+   *          the provider
+   * @param finder
+   *          the finder
    */
   @Inject
   public I18nLanguageManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
@@ -62,35 +64,46 @@ public class I18nLanguageManagerDefault extends DefaultManager<I18nLanguage, Lon
     this.finder = finder;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nLanguageManager#getDefaultLanguage()
-   */
-  @Override
-  public I18nLanguage getDefaultLanguage() {
-    return findByCode(I18nTranslation.DEFAULT_LANG);
-  }
-
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nLanguageManager#findByCode(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.I18nLanguageManager#findByCode(java.lang.String
+   * )
    */
   @Override
   public I18nLanguage findByCode(final String language) {
     return finder.findByCode(language);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nLanguageManager#findByCodes(java.util.List)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.I18nLanguageManager#findByCodes(java.util.List)
    */
   @Override
   public List<I18nLanguage> findByCodes(final List<String> languages) {
     return finder.findByCodes(languages);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.manager.I18nLanguageManager#getAll()
    */
   @Override
   public List<I18nLanguage> getAll() {
     return finder.getAll();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.manager.I18nLanguageManager#getDefaultLanguage()
+   */
+  @Override
+  public I18nLanguage getDefaultLanguage() {
+    return findByCode(I18nTranslation.DEFAULT_LANG);
   }
 }

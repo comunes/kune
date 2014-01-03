@@ -30,22 +30,23 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WindowFocusEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WindowFocusEvent extends GwtEvent<WindowFocusEvent.WindowFocusHandler> {
 
   /**
    * The Interface HasWindowFocusHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasWindowFocusHandlers extends HasHandlers {
-    
+
     /**
      * Adds the window focus handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addWindowFocusHandler(WindowFocusHandler handler);
@@ -53,15 +54,16 @@ public class WindowFocusEvent extends GwtEvent<WindowFocusEvent.WindowFocusHandl
 
   /**
    * The Interface WindowFocusHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface WindowFocusHandler extends EventHandler {
-    
+
     /**
      * On window focus.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onWindowFocus(WindowFocusEvent event);
   }
@@ -71,9 +73,11 @@ public class WindowFocusEvent extends GwtEvent<WindowFocusEvent.WindowFocusHandl
 
   /**
    * Fire.
-   *
-   * @param source the source
-   * @param hasFocus the has focus
+   * 
+   * @param source
+   *          the source
+   * @param hasFocus
+   *          the has focus
    */
   public static void fire(final HasHandlers source, final boolean hasFocus) {
     source.fireEvent(new WindowFocusEvent(hasFocus));
@@ -81,7 +85,7 @@ public class WindowFocusEvent extends GwtEvent<WindowFocusEvent.WindowFocusHandl
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<WindowFocusHandler> getType() {
@@ -100,22 +104,29 @@ public class WindowFocusEvent extends GwtEvent<WindowFocusEvent.WindowFocusHandl
 
   /**
    * Instantiates a new window focus event.
-   *
-   * @param hasFocus the has focus
+   * 
+   * @param hasFocus
+   *          the has focus
    */
   public WindowFocusEvent(final boolean hasFocus) {
     this.hasFocus = hasFocus;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final WindowFocusHandler handler) {
     handler.onWindowFocus(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -136,7 +147,9 @@ public class WindowFocusEvent extends GwtEvent<WindowFocusEvent.WindowFocusHandl
     return true;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -144,7 +157,9 @@ public class WindowFocusEvent extends GwtEvent<WindowFocusEvent.WindowFocusHandl
     return TYPE;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -156,14 +171,16 @@ public class WindowFocusEvent extends GwtEvent<WindowFocusEvent.WindowFocusHandl
 
   /**
    * Checks if is checks for focus.
-   *
+   * 
    * @return true, if is checks for focus
    */
   public boolean isHasFocus() {
     return hasFocus;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

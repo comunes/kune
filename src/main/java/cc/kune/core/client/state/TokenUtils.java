@@ -27,16 +27,18 @@ import cc.kune.common.client.utils.Base64Utils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TokenUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TokenUtils {
 
   /**
    * Adds the redirect.
-   *
-   * @param token the token
-   * @param redirect the redirect
+   * 
+   * @param token
+   *          the token
+   * @param redirect
+   *          the redirect
    * @return the string
    */
   public static String addRedirect(final String token, final String redirect) {
@@ -45,8 +47,9 @@ public class TokenUtils {
 
   /**
    * Compose.
-   *
-   * @param params the params
+   * 
+   * @param params
+   *          the params
    * @return the string
    */
   private static String compose(final String... params) {
@@ -59,8 +62,9 @@ public class TokenUtils {
 
   /**
    * Preview.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the string
    */
   public static String preview(final String token) {
@@ -69,10 +73,13 @@ public class TokenUtils {
 
   /**
    * Subtitle.
-   *
-   * @param title the title
-   * @param description the description
-   * @param redirect the redirect
+   * 
+   * @param title
+   *          the title
+   * @param description
+   *          the description
+   * @param redirect
+   *          the redirect
    * @return the string
    */
   public static String subtitle(final String title, final String description, final String redirect) {
@@ -84,8 +91,9 @@ public class TokenUtils {
 
   /**
    * Tutorial.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the string
    */
   public static String tutorial(final String token) {

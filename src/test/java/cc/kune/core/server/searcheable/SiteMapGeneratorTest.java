@@ -30,32 +30,31 @@ import cc.kune.core.server.integration.IntegrationTestHelper;
 
 import com.google.inject.Inject;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class SiteMapGeneratorTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SiteMapGeneratorTest extends IntegrationTest {
 
-    /** The generator. */
-    @Inject
-    SiteMapGenerator generator;
+  /** The generator. */
+  @Inject
+  SiteMapGenerator generator;
 
-    /**
-     * Before.
-     */
-    @Before
-    public void before() {
-        new IntegrationTestHelper(true, this);
-    }
+  /**
+   * Before.
+   */
+  @Before
+  public void before() {
+    new IntegrationTestHelper(true, this);
+  }
 
-    /**
-     * Generate sitemap.
-     */
-    @Test
-    public void generateSitemap() {
-        generator.generate();
-    }
+  /**
+   * Generate sitemap.
+   */
+  @Test
+  public void generateSitemap() {
+    generator.generate();
+  }
 }

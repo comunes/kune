@@ -48,17 +48,17 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FeedbackBottomPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
-  
+
   /** The Constant GIVE_US_FEEDBACK_ID. */
   public static final String GIVE_US_FEEDBACK_ID = "k-give-feed-diag-id";
-  
+
   /** The Constant GIVE_US_FEEDBACK_SEND_BTN_ID. */
   public static final String GIVE_US_FEEDBACK_SEND_BTN_ID = "k-give-feed-diag-send-btn-id";
-  
+
   /** The Constant ID. */
   public static final String ID = "k-give-feedback-btn";
 
@@ -67,18 +67,24 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
 
   /**
    * Instantiates a new feedback bottom panel.
-   *
-   * @param res the res
-   * @param session the session
-   * @param signIn the sign in
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param contentService the content service
+   * 
+   * @param res
+   *          the res
+   * @param session
+   *          the session
+   * @param signIn
+   *          the sign in
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param contentService
+   *          the content service
    */
   @Inject
   public FeedbackBottomPanel(final IconicResources res, final Session session,
-      final Provider<SignIn> signIn, final StateManager stateManager,
-      final I18nTranslationService i18n, final Provider<ContentServiceAsync> contentService) {
+      final Provider<SignIn> signIn, final StateManager stateManager, final I18nTranslationService i18n,
+      final Provider<ContentServiceAsync> contentService) {
     super(false, false);
     final IconLabel btn = new IconLabel(res.refresh(), i18n.t("Give us feedback!"));
     Tooltip.to(
@@ -141,8 +147,11 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.ui.AbstractAtBorderPopupPanel#setCenterPositionImpl()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.ui.AbstractAtBorderPopupPanel#setCenterPositionImpl()
    */
   @Override
   protected void setCenterPositionImpl() {

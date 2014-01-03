@@ -37,12 +37,12 @@ import com.google.wave.api.Wavelet;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RenderedWavesCache.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class RenderedWavesCache extends CachedCollection<String, Pair<Long, String>> {
-  
+
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(RenderedWavesCache.class);
 
@@ -54,8 +54,9 @@ public class RenderedWavesCache extends CachedCollection<String, Pair<Long, Stri
 
   /**
    * Instantiates a new rendered waves cache.
-   *
-   * @param kuneWaveService the kune wave service
+   * 
+   * @param kuneWaveService
+   *          the kune wave service
    */
   @Inject
   public RenderedWavesCache(final KuneWaveService kuneWaveService) {
@@ -65,8 +66,9 @@ public class RenderedWavesCache extends CachedCollection<String, Pair<Long, Stri
 
   /**
    * Gets the or render.
-   *
-   * @param wavelet the wavelet
+   * 
+   * @param wavelet
+   *          the wavelet
    * @return the or render
    */
   public String getOrRender(final Wavelet wavelet) {
@@ -86,8 +88,9 @@ public class RenderedWavesCache extends CachedCollection<String, Pair<Long, Stri
 
   /**
    * Ref.
-   *
-   * @param wavelet the wavelet
+   * 
+   * @param wavelet
+   *          the wavelet
    * @return the string
    */
   private String ref(final Wavelet wavelet) {

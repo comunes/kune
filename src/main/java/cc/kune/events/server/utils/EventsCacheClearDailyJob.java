@@ -35,7 +35,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventsCacheClearDailyJob.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -43,10 +43,13 @@ public class EventsCacheClearDailyJob extends ClearCacheDailyJob {
 
   /**
    * Instantiates a new events cache clear daily job.
-   *
-   * @param cache the cache
-   * @throws ParseException the parse exception
-   * @throws SchedulerException the scheduler exception
+   * 
+   * @param cache
+   *          the cache
+   * @throws ParseException
+   *           the parse exception
+   * @throws SchedulerException
+   *           the scheduler exception
    */
   @Inject
   public EventsCacheClearDailyJob(final EventsCache cache) throws ParseException, SchedulerException {

@@ -43,7 +43,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityHeaderPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityHeaderPresenter extends
@@ -52,31 +52,33 @@ public class EntityHeaderPresenter extends
 
   /**
    * The Interface EntityHeaderProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
   public interface EntityHeaderProxy extends Proxy<EntityHeaderPresenter> {
   }
-  
+
   /**
    * The Interface EntityHeaderView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface EntityHeaderView extends View {
-    
+
     /**
      * Adds the action.
-     *
-     * @param descriptor the descriptor
+     * 
+     * @param descriptor
+     *          the descriptor
      */
     void addAction(GuiActionDescrip descriptor);
 
     /**
      * Adds the widget.
-     *
-     * @param widget the widget
+     * 
+     * @param widget
+     *          the widget
      */
     void addWidget(IsWidget widget);
 
@@ -87,23 +89,27 @@ public class EntityHeaderPresenter extends
 
     /**
      * Sets the logo image.
-     *
-     * @param group the group
-     * @param noCache the no cache
+     * 
+     * @param group
+     *          the group
+     * @param noCache
+     *          the no cache
      */
     void setLogoImage(GroupDTO group, boolean noCache);
 
     /**
      * Sets the logo image visible.
-     *
-     * @param visible the new logo image visible
+     * 
+     * @param visible
+     *          the new logo image visible
      */
     void setLogoImageVisible(boolean visible);
 
     /**
      * Sets the logo text.
-     *
-     * @param groupName the new logo text
+     * 
+     * @param groupName
+     *          the new logo text
      */
     void setLogoText(final String groupName);
 
@@ -114,15 +120,17 @@ public class EntityHeaderPresenter extends
 
     /**
      * Sets the online status group.
-     *
-     * @param group the new online status group
+     * 
+     * @param group
+     *          the new online status group
      */
     void setOnlineStatusGroup(String group);
 
     /**
      * Sets the online status visible.
-     *
-     * @param visible the new online status visible
+     * 
+     * @param visible
+     *          the new online status visible
      */
     void setOnlineStatusVisible(boolean visible);
 
@@ -139,18 +147,23 @@ public class EntityHeaderPresenter extends
 
   /** The Constant LARGE_NAME_LIMIT. */
   private static final int LARGE_NAME_LIMIT = 17;
-  
+
   /** The Constant MEDIUM_NAME_LIMIT. */
   private static final int MEDIUM_NAME_LIMIT = 80;
 
   /**
    * Instantiates a new entity header presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param stateManager the state manager
-   * @param session the session
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
    */
   @Inject
   public EntityHeaderPresenter(final EventBus eventBus, final EntityHeaderView view,
@@ -172,23 +185,33 @@ public class EntityHeaderPresenter extends
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.ws.entheader.EntityHeader#addAction(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.ws.entheader.EntityHeader#addAction(cc.kune.common.
+   * client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public void addAction(final GuiActionDescrip descriptor) {
     getView().addAction(descriptor);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.ws.entheader.EntityHeader#addWidget(com.google.gwt.user.client.ui.IsWidget)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.ws.entheader.EntityHeader#addWidget(com.google.gwt.
+   * user.client.ui.IsWidget)
    */
   @Override
   public void addWidget(final IsWidget widget) {
     getView().addWidget(widget);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -198,9 +221,11 @@ public class EntityHeaderPresenter extends
 
   /**
    * Sets the group logo.
-   *
-   * @param group the group
-   * @param noCache the no cache
+   * 
+   * @param group
+   *          the group
+   * @param noCache
+   *          the no cache
    */
   void setGroupLogo(final GroupDTO group, final boolean noCache) {
     setLogoText(group.getLongName());
@@ -226,8 +251,9 @@ public class EntityHeaderPresenter extends
 
   /**
    * Sets the logo text.
-   *
-   * @param name the new logo text
+   * 
+   * @param name
+   *          the new logo text
    */
   void setLogoText(final String name) {
     final int length = name.length();

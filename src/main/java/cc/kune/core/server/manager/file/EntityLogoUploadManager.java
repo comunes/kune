@@ -50,29 +50,32 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityLogoUploadManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
 
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(FileGwtUploadServlet.class);
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
-  
+
   /** The group manager. */
   private final GroupManager groupManager;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
 
   /**
    * Instantiates a new entity logo upload manager.
-   *
-   * @param kuneProperties the kune properties
-   * @param groupManager the group manager
-   * @param i18n the i18n
+   * 
+   * @param kuneProperties
+   *          the kune properties
+   * @param groupManager
+   *          the group manager
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public EntityLogoUploadManager(final KuneProperties kuneProperties, final GroupManager groupManager,
@@ -84,14 +87,21 @@ public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
 
   /**
    * Creates the uploaded file.
-   *
-   * @param stateToken the state token
-   * @param mimeTypeS the mime type s
-   * @param origFile the orig file
-   * @throws Exception the exception
-   * @throws IOException Signals that an I/O exception has occurred.
-   * @throws MagickException the magick exception
-   * @throws FileNotFoundException the file not found exception
+   * 
+   * @param stateToken
+   *          the state token
+   * @param mimeTypeS
+   *          the mime type s
+   * @param origFile
+   *          the orig file
+   * @throws Exception
+   *           the exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
+   * @throws MagickException
+   *           the magick exception
+   * @throws FileNotFoundException
+   *           the file not found exception
    */
   protected void createUploadedFile(final StateToken stateToken, final String mimeTypeS,
       final File origFile) throws Exception, IOException, MagickException, FileNotFoundException {
@@ -120,8 +130,13 @@ public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.file.FileGwtUploadAbstractServlet#createUploadedFile(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, org.apache.commons.fileupload.FileItem, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.manager.file.FileGwtUploadAbstractServlet#
+   * createUploadedFile(java.lang.String,
+   * cc.kune.core.shared.domain.utils.StateToken, java.lang.String,
+   * org.apache.commons.fileupload.FileItem, java.lang.String)
    */
   @Override
   @Authenticated

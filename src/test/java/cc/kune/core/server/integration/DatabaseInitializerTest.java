@@ -48,39 +48,39 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DatabaseInitializerTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DatabaseInitializerTest {
-  
+
   /** The container manager. */
   @Inject
   ContainerManager containerManager;
-  
+
   /** The content manager. */
   @Inject
   ContentManager contentManager;
-  
+
   /** The country manager. */
   @Inject
   I18nCountryManager countryManager;
-  
+
   /** The default group. */
   private Group defaultGroup;
-  
+
   /** The group manager. */
   @Inject
   GroupManager groupManager;
-  
+
   /** The language manager. */
   @Inject
   I18nLanguageManager languageManager;
-  
+
   /** The license manager. */
   @Inject
   LicenseManager licenseManager;
-  
+
   /** The trans manager. */
   @Inject
   I18nTranslationManager transManager;

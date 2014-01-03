@@ -34,7 +34,7 @@ import com.google.wave.api.Markup;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneWaveMarkupTests.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneWaveMarkupTests {

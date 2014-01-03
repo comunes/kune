@@ -34,19 +34,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewWikiMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewWikiMenuItem extends NewContentMenuItem {
 
   /**
    * Instantiates a new new wiki menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
-   * @param shorcutReg the shorcut reg
-   * @param wikiFolderNewMenu the wiki folder new menu
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
+   * @param shorcutReg
+   *          the shorcut reg
+   * @param wikiFolderNewMenu
+   *          the wiki folder new menu
    */
   @Inject
   public NewWikiMenuItem(final I18nTranslationService i18n, final NewContentAction action,

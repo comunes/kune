@@ -40,7 +40,7 @@ import cc.kune.domain.utils.HasId;
  * 
  * More info: http://en.wikipedia.org/wiki/Date_and_time_notation_by_country
  * http://en.wikipedia.org/wiki/Common_Locale_Data_Repository
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -50,7 +50,7 @@ import cc.kune.domain.utils.HasId;
 public class I18nCountry implements HasId {
 
   /** The code. */
-  @org.hibernate.annotations.Index(name="code")
+  @org.hibernate.annotations.Index(name = "code")
   @Column(name = "code", length = 2)
   private String code;
 
@@ -75,7 +75,7 @@ public class I18nCountry implements HasId {
   private String decimalSep;
 
   /** The english name. */
-  @org.hibernate.annotations.Index(name="english_name")
+  @org.hibernate.annotations.Index(name = "english_name")
   @Column(name = "english_name")
   private String englishName;
 
@@ -103,17 +103,27 @@ public class I18nCountry implements HasId {
 
   /**
    * Instantiates a new i18n country.
-   *
-   * @param id the id
-   * @param code the code
-   * @param currencyCode the currency code
-   * @param currencyDecimalSep the currency decimal sep
-   * @param currencyFormat the currency format
-   * @param dateFormat the date format
-   * @param decimalSep the decimal sep
-   * @param englishName the english name
-   * @param numberGroupingScheme the number grouping scheme
-   * @param thousandsSep the thousands sep
+   * 
+   * @param id
+   *          the id
+   * @param code
+   *          the code
+   * @param currencyCode
+   *          the currency code
+   * @param currencyDecimalSep
+   *          the currency decimal sep
+   * @param currencyFormat
+   *          the currency format
+   * @param dateFormat
+   *          the date format
+   * @param decimalSep
+   *          the decimal sep
+   * @param englishName
+   *          the english name
+   * @param numberGroupingScheme
+   *          the number grouping scheme
+   * @param thousandsSep
+   *          the thousands sep
    */
   public I18nCountry(final Long id, final String code, final String currencyCode,
       final String currencyDecimalSep, final String currencyFormat, final String dateFormat,
@@ -133,7 +143,7 @@ public class I18nCountry implements HasId {
 
   /**
    * Gets the code.
-   *
+   * 
    * @return the code
    */
   public String getCode() {
@@ -142,7 +152,7 @@ public class I18nCountry implements HasId {
 
   /**
    * Gets the currency code.
-   *
+   * 
    * @return the currency code
    */
   public String getCurrencyCode() {
@@ -151,7 +161,7 @@ public class I18nCountry implements HasId {
 
   /**
    * Gets the currency decimal sep.
-   *
+   * 
    * @return the currency decimal sep
    */
   public String getCurrencyDecimalSep() {
@@ -160,7 +170,7 @@ public class I18nCountry implements HasId {
 
   /**
    * Gets the currency format.
-   *
+   * 
    * @return the currency format
    */
   public String getCurrencyFormat() {
@@ -169,7 +179,7 @@ public class I18nCountry implements HasId {
 
   /**
    * Gets the date format.
-   *
+   * 
    * @return the date format
    */
   public String getDateFormat() {
@@ -178,7 +188,7 @@ public class I18nCountry implements HasId {
 
   /**
    * Gets the decimal sep.
-   *
+   * 
    * @return the decimal sep
    */
   public String getDecimalSep() {
@@ -187,14 +197,16 @@ public class I18nCountry implements HasId {
 
   /**
    * Gets the english name.
-   *
+   * 
    * @return the english name
    */
   public String getEnglishName() {
     return this.englishName;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -204,7 +216,7 @@ public class I18nCountry implements HasId {
 
   /**
    * Gets the number grouping scheme.
-   *
+   * 
    * @return the number grouping scheme
    */
   public String getNumberGroupingScheme() {
@@ -213,7 +225,7 @@ public class I18nCountry implements HasId {
 
   /**
    * Gets the thousands sep.
-   *
+   * 
    * @return the thousands sep
    */
   public String getThousandsSep() {
@@ -222,8 +234,9 @@ public class I18nCountry implements HasId {
 
   /**
    * Sets the code.
-   *
-   * @param code the new code
+   * 
+   * @param code
+   *          the new code
    */
   public void setCode(final String code) {
     this.code = code;
@@ -231,8 +244,9 @@ public class I18nCountry implements HasId {
 
   /**
    * Sets the currency code.
-   *
-   * @param currencyCode the new currency code
+   * 
+   * @param currencyCode
+   *          the new currency code
    */
   public void setCurrencyCode(final String currencyCode) {
     this.currencyCode = currencyCode;
@@ -240,8 +254,9 @@ public class I18nCountry implements HasId {
 
   /**
    * Sets the currency decimal sep.
-   *
-   * @param currencyDecimalSep the new currency decimal sep
+   * 
+   * @param currencyDecimalSep
+   *          the new currency decimal sep
    */
   public void setCurrencyDecimalSep(final String currencyDecimalSep) {
     this.currencyDecimalSep = currencyDecimalSep;
@@ -249,8 +264,9 @@ public class I18nCountry implements HasId {
 
   /**
    * Sets the currency format.
-   *
-   * @param currencyFormat the new currency format
+   * 
+   * @param currencyFormat
+   *          the new currency format
    */
   public void setCurrencyFormat(final String currencyFormat) {
     this.currencyFormat = currencyFormat;
@@ -258,8 +274,9 @@ public class I18nCountry implements HasId {
 
   /**
    * Sets the date format.
-   *
-   * @param dateFormat the new date format
+   * 
+   * @param dateFormat
+   *          the new date format
    */
   public void setDateFormat(final String dateFormat) {
     this.dateFormat = dateFormat;
@@ -267,8 +284,9 @@ public class I18nCountry implements HasId {
 
   /**
    * Sets the decimal sep.
-   *
-   * @param decimalSep the new decimal sep
+   * 
+   * @param decimalSep
+   *          the new decimal sep
    */
   public void setDecimalSep(final String decimalSep) {
     this.decimalSep = decimalSep;
@@ -276,14 +294,17 @@ public class I18nCountry implements HasId {
 
   /**
    * Sets the english name.
-   *
-   * @param englishName the new english name
+   * 
+   * @param englishName
+   *          the new english name
    */
   public void setEnglishName(final String englishName) {
     this.englishName = englishName;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -293,8 +314,9 @@ public class I18nCountry implements HasId {
 
   /**
    * Sets the number grouping scheme.
-   *
-   * @param numberGroupingScheme the new number grouping scheme
+   * 
+   * @param numberGroupingScheme
+   *          the new number grouping scheme
    */
   public void setNumberGroupingScheme(final String numberGroupingScheme) {
     this.numberGroupingScheme = numberGroupingScheme;
@@ -302,8 +324,9 @@ public class I18nCountry implements HasId {
 
   /**
    * Sets the thousands sep.
-   *
-   * @param thousandsSep the new thousands sep
+   * 
+   * @param thousandsSep
+   *          the new thousands sep
    */
   public void setThousandsSep(final String thousandsSep) {
     this.thousandsSep = thousandsSep;

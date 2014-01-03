@@ -27,7 +27,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityOptionsTabView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptionsTabView extends IsWidget {
@@ -37,7 +37,7 @@ public interface EntityOptionsTabView extends IsWidget {
 
   /**
    * Gets the tab title.
-   *
+   * 
    * @return the tab title
    */
   IsWidget getTabTitle();

@@ -25,7 +25,7 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EmailHashInvalidException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmailHashInvalidException extends DefaultException {

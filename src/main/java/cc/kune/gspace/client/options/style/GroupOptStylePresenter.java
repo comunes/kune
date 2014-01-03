@@ -38,24 +38,34 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupOptStylePresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupOptStylePresenter extends EntityOptStylePresenter implements GroupOptStyle {
 
   /**
    * Instantiates a new group opt style presenter.
-   *
-   * @param eventBus the event bus
-   * @param session the session
-   * @param stateManager the state manager
-   * @param entityOptions the entity options
-   * @param groupService the group service
-   * @param backManager the back manager
-   * @param view the view
-   * @param styleSelector the style selector
-   * @param i18n the i18n
-   * @param fileDownUtils the file down utils
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param entityOptions
+   *          the entity options
+   * @param groupService
+   *          the group service
+   * @param backManager
+   *          the back manager
+   * @param view
+   *          the view
+   * @param styleSelector
+   *          the style selector
+   * @param i18n
+   *          the i18n
+   * @param fileDownUtils
+   *          the file down utils
    */
   @Inject
   public GroupOptStylePresenter(final EventBus eventBus, final Session session,

@@ -26,7 +26,7 @@ package cc.kune.gspace.client.actions;
 /**
  * A group of actions that must be grouped and showed in some perspective (on
  * edit, etc).
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class ActionGroups {

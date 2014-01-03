@@ -41,7 +41,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupSNPendingsMenuItemsRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupSNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
@@ -51,18 +51,29 @@ public class GroupSNPendingsMenuItemsRegistry extends AbstractSNMembersActionsRe
 
   /**
    * Instantiates a new group sn pendings menu items registry.
-   *
-   * @param session the session
-   * @param isAdministrableCondition the is administrable condition
-   * @param isPersonCondition the is person condition
-   * @param isGroupCondition the is group condition
-   * @param changeToCollabAction the change to collab action
-   * @param changeToAdminAction the change to admin action
-   * @param removeMemberAction the remove member action
-   * @param acceptJoinGroupAction the accept join group action
-   * @param denyJoinGroupAction the deny join group action
-   * @param gotoGroupAction the goto group action
-   * @param gotoPersonAction the goto person action
+   * 
+   * @param session
+   *          the session
+   * @param isAdministrableCondition
+   *          the is administrable condition
+   * @param isPersonCondition
+   *          the is person condition
+   * @param isGroupCondition
+   *          the is group condition
+   * @param changeToCollabAction
+   *          the change to collab action
+   * @param changeToAdminAction
+   *          the change to admin action
+   * @param removeMemberAction
+   *          the remove member action
+   * @param acceptJoinGroupAction
+   *          the accept join group action
+   * @param denyJoinGroupAction
+   *          the deny join group action
+   * @param gotoGroupAction
+   *          the goto group action
+   * @param gotoPersonAction
+   *          the goto person action
    */
   @Inject
   public GroupSNPendingsMenuItemsRegistry(final SessionConstants session,

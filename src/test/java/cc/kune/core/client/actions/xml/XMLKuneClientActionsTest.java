@@ -36,24 +36,25 @@ import cc.kune.core.server.content.XMLActionReader;
 // TODO: Auto-generated Javadoc
 /**
  * The Class XMLKuneClientActionsTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class XMLKuneClientActionsTest {
 
   /** The actions. */
   private XMLKuneClientActions actions;
-  
+
   /** The extensions. */
   private Map<String, XMLWaveExtension> extensions;
-  
+
   /** The gui action descriptors. */
   private List<XMLGuiActionDescriptor> guiActionDescriptors;
 
   /**
    * Before.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Before
   public void before() throws IOException {

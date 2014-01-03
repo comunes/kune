@@ -35,14 +35,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewContainerBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewContainerBtn extends ButtonDescriptor {
 
   /**
    * The Class NewContainerAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class NewContainerAction extends RolAction {
@@ -52,8 +52,9 @@ public class NewContainerBtn extends ButtonDescriptor {
 
     /**
      * Instantiates a new new container action.
-     *
-     * @param contentService the content service
+     * 
+     * @param contentService
+     *          the content service
      */
     @Inject
     public NewContainerAction(final ContentServiceHelper contentService) {
@@ -61,8 +62,12 @@ public class NewContainerBtn extends ButtonDescriptor {
       this.contentService = contentService;
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -73,23 +78,30 @@ public class NewContainerBtn extends ButtonDescriptor {
 
   /** The Constant BTN_ID. */
   public static final String BTN_ID = "k-newctner-id";
-  
+
   /** The Constant ID. */
   private static final String ID = "ctnernewid";
-  
+
   /** The Constant NEW_NAME. */
   private static final String NEW_NAME = "ctnernewname";
 
   /**
    * Instantiates a new new container btn.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param icon the icon
-   * @param title the title
-   * @param tooltip the tooltip
-   * @param newName the new name
-   * @param id the id
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param icon
+   *          the icon
+   * @param title
+   *          the title
+   * @param tooltip
+   *          the tooltip
+   * @param newName
+   *          the new name
+   * @param id
+   *          the id
    */
   public NewContainerBtn(final I18nTranslationService i18n, final NewContainerAction action,
       final ImageResource icon, final String title, final String tooltip, final String newName,

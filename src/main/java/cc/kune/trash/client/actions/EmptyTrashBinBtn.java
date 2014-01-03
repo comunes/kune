@@ -44,30 +44,33 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EmptyTrashBinBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmptyTrashBinBtn extends ButtonDescriptor {
 
   /**
    * The Class EmptyTrashBinAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class EmptyTrashBinAction extends RolAction {
 
     /** The content service. */
     private final ContentServiceHelper contentService;
-    
+
     /** The session. */
     private final Session session;
 
     /**
      * Instantiates a new empty trash bin action.
-     *
-     * @param contentService the content service
-     * @param res the res
-     * @param session the session
+     * 
+     * @param contentService
+     *          the content service
+     * @param res
+     *          the res
+     * @param session
+     *          the session
      */
     @Inject
     public EmptyTrashBinAction(final ContentServiceHelper contentService, final CoreResources res,
@@ -77,8 +80,12 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
       this.session = session;
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -86,15 +93,17 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
     }
 
   }
-  
+
   /** The reg. */
   private final HandlerRegistration reg;
 
   /**
    * Instantiates a new empty trash bin btn.
-   *
-   * @param action the action
-   * @param stateManager the state manager
+   * 
+   * @param action
+   *          the action
+   * @param stateManager
+   *          the state manager
    */
   @Inject
   public EmptyTrashBinBtn(final EmptyTrashBinAction action, final StateManager stateManager) {
@@ -114,8 +123,12 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#onDetach()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#onDetach
+   * ()
    */
   @Override
   public void onDetach() {
@@ -125,8 +138,9 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
 
   /**
    * Sets the visibility.
-   *
-   * @param ctn the new visibility
+   * 
+   * @param ctn
+   *          the new visibility
    */
   private void setVisibility(final ContainerDTO ctn) {
     final boolean visible = ctn.getChilds().size() > 0 || ctn.getContents().size() > 0;

@@ -35,18 +35,22 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ListsClientTool.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ListsClientTool extends FoldableAbstractClientTool {
 
   /**
    * Instantiates a new lists client tool.
-   *
-   * @param i18n the i18n
-   * @param toolSelector the tool selector
-   * @param cntCapRegistry the cnt cap registry
-   * @param history the history
+   * 
+   * @param i18n
+   *          the i18n
+   * @param toolSelector
+   *          the tool selector
+   * @param cntCapRegistry
+   *          the cnt cap registry
+   * @param history
+   *          the history
    */
   @Inject
   public ListsClientTool(final I18nTranslationService i18n, final ToolSelector toolSelector,
@@ -69,7 +73,9 @@ public class ListsClientTool extends FoldableAbstractClientTool {
     registerIcons();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.tool.AbstractClientTool#getName()
    */
   @Override

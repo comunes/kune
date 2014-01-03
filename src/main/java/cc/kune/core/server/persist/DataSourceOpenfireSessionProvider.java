@@ -32,7 +32,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DataSourceOpenfireSessionProvider.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DataSourceOpenfireSessionProvider implements Provider<Session> {
@@ -43,9 +43,9 @@ public class DataSourceOpenfireSessionProvider implements Provider<Session> {
 
   /**
    * Gets the.
-   *
+   * 
    * @return the Hibernate session, being the delegate of the entity manager
-   * provided by the injected entity manager provider.
+   *         provided by the injected entity manager provider.
    */
   @Override
   public Session get() {

@@ -66,31 +66,35 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventsServlet.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EventsServlet extends HttpServlet {
-  
+
   /** The Constant LOG. */
   private static final Log LOG = LogFactory.getLog(EventsServlet.class);
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -5559665146847701343L;
 
   /** The container manager. */
   @Inject
   ContainerManager containerManager;
-  
+
   /** The file utils. */
   @Inject
   FileUtils fileUtils;
-  
+
   /** The kune properties. */
   @Inject
   KuneProperties kuneProperties;
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
+   * javax.servlet.http.HttpServletResponse)
    */
   @SuppressWarnings("unchecked")
   @Override
@@ -141,11 +145,14 @@ public class EventsServlet extends HttpServlet {
 
   /**
    * Gets the container.
-   *
-   * @param userHash the user hash
-   * @param stateToken the state token
+   * 
+   * @param userHash
+   *          the user hash
+   * @param stateToken
+   *          the state token
    * @return the container
-   * @throws ContentNotFoundException the content not found exception
+   * @throws ContentNotFoundException
+   *           the content not found exception
    */
   @Authenticated(mandatory = false)
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.container)
@@ -156,9 +163,11 @@ public class EventsServlet extends HttpServlet {
 
   /**
    * Return404.
-   *
-   * @param resp the resp
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param resp
+   *          the resp
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   private void return404(final HttpServletResponse resp) throws IOException {
     FileDownloadManagerUtils.returnNotFound404(resp);

@@ -25,64 +25,64 @@ package cc.kune.selenium;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SeleniumConf.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SeleniumConf {
 
   /**
    * The Enum Driver.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public enum Driver {
-    
+
     /** The chrome. */
-    chrome, 
- /** The firefox. */
- firefox
+    chrome,
+    /** The firefox. */
+    firefox
   }
 
   /**
    * The Enum Lang.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public enum Lang {
-    
+
     /** The en. */
-    en, 
- /** The es. */
- es
+    en,
+    /** The es. */
+    es
   }
 
   /**
    * The Enum Site.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public enum Site {
-    
+
     /** The demo. */
-    demo("kune.beta.iepala.es"), 
- /** The kunecc. */
- kunecc("kune.cc"), 
- /** The localhost. */
- localhost("localhost:8888",
-        "&log_level=INFO&gwt.codesvr=127.0.0.1:9997"), 
- /** The socialglobal. */
- socialglobal("social.gloobal.net");
+    demo("kune.beta.iepala.es"),
+    /** The kunecc. */
+    kunecc("kune.cc"),
+    /** The localhost. */
+    localhost("localhost:8888", "&log_level=INFO&gwt.codesvr=127.0.0.1:9997"),
+    /** The socialglobal. */
+    socialglobal("social.gloobal.net");
 
     /** The domain. */
     private String domain;
-    
+
     /** The params. */
     private String params;
 
     /**
      * Instantiates a new site.
-     *
-     * @param domain the domain
+     * 
+     * @param domain
+     *          the domain
      */
     Site(final String domain) {
       this(domain, "");
@@ -90,9 +90,11 @@ public final class SeleniumConf {
 
     /**
      * Instantiates a new site.
-     *
-     * @param domain the domain
-     * @param params the params
+     * 
+     * @param domain
+     *          the domain
+     * @param params
+     *          the params
      */
     Site(final String domain, final String params) {
       this.domain = domain;
@@ -101,7 +103,7 @@ public final class SeleniumConf {
 
     /**
      * Gets the domain.
-     *
+     * 
      * @return the domain
      */
     public String getDomain() {
@@ -110,7 +112,7 @@ public final class SeleniumConf {
 
     /**
      * Gets the params.
-     *
+     * 
      * @return the params
      */
     public String getParams() {
@@ -123,10 +125,10 @@ public final class SeleniumConf {
   /* Configure this for use other lang, site, or driver */
   /** The Constant LANG. */
   public static final Lang LANG = Lang.es;
-  
+
   /** The Constant SITE. */
   public static final Site SITE = Site.socialglobal;
-  
+
   /** The Constant TIMEOUT. */
   public static final int TIMEOUT = 25;
 

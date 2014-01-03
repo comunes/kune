@@ -28,20 +28,21 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * Syntactic sugar!.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class ChatProperties {
-  
+
   /** The properties. */
   private final KuneProperties properties;
 
   /**
    * Instantiates a new chat properties.
-   *
-   * @param properties the properties
+   * 
+   * @param properties
+   *          the properties
    */
   @Inject
   public ChatProperties(final KuneProperties properties) {
@@ -50,7 +51,7 @@ public class ChatProperties {
 
   /**
    * Gets the admin jid.
-   *
+   * 
    * @return the admin jid
    */
   public String getAdminJID() {
@@ -59,7 +60,7 @@ public class ChatProperties {
 
   /**
    * Gets the admin passwd.
-   *
+   * 
    * @return the admin passwd
    */
   public String getAdminPasswd() {
@@ -68,7 +69,7 @@ public class ChatProperties {
 
   /**
    * Gets the domain.
-   *
+   * 
    * @return the domain
    */
   public String getDomain() {
@@ -77,7 +78,7 @@ public class ChatProperties {
 
   /**
    * Gets the http base.
-   *
+   * 
    * @return the http base
    */
   public String getHttpBase() {
@@ -86,7 +87,7 @@ public class ChatProperties {
 
   /**
    * Gets the room host.
-   *
+   * 
    * @return the room host
    */
   public String getRoomHost() {

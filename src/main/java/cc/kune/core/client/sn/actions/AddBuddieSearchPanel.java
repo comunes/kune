@@ -32,7 +32,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AddBuddieSearchPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -40,9 +40,11 @@ public class AddBuddieSearchPanel extends EntitySearchPanel {
 
   /**
    * Instantiates a new adds the buddie search panel.
-   *
-   * @param img the img
-   * @param i18n the i18n
+   * 
+   * @param img
+   *          the img
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public AddBuddieSearchPanel(final CoreResources img, final I18nTranslationService i18n) {

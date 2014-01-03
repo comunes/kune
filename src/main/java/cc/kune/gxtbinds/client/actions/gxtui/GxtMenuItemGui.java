@@ -27,7 +27,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GxtMenuItemGui.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GxtMenuItemGui extends AbstractGxtMenuItemGui {
@@ -41,8 +41,9 @@ public class GxtMenuItemGui extends AbstractGxtMenuItemGui {
 
   /**
    * Instantiates a new gxt menu item gui.
-   *
-   * @param descriptor the descriptor
+   * 
+   * @param descriptor
+   *          the descriptor
    */
   public GxtMenuItemGui(final MenuItemDescriptor descriptor) {
     super(descriptor);

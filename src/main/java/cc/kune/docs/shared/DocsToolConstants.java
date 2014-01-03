@@ -28,35 +28,35 @@ import cc.kune.core.shared.ToolConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DocsToolConstants.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class DocsToolConstants {
-  
+
   /** The Constant ICON_TYPE_DOCUMENT. */
   public static final KuneIcon ICON_TYPE_DOCUMENT = new KuneIcon('b');
-  
+
   /** The Constant ICON_TYPE_FOLDER. */
   public static final KuneIcon ICON_TYPE_FOLDER = new KuneIcon('f');
-  
+
   /** The Constant ICON_TYPE_ROOT. */
   public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('a');
-  
+
   /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "documents";
-  
+
   /** The Constant TOOL_NAME. */
   public static final String TOOL_NAME = "docs";
-  
+
   /** The Constant TYPE_DOCUMENT. */
   public static final String TYPE_DOCUMENT = TOOL_NAME + "." + "doc";
-  
+
   /** The Constant TYPE_FOLDER. */
   public static final String TYPE_FOLDER = TOOL_NAME + "." + "folder";
-  
+
   /** The Constant TYPE_ROOT. */
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
-  
+
   /** The Constant TYPE_UPLOADEDFILE. */
   public static final String TYPE_UPLOADEDFILE = TOOL_NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 

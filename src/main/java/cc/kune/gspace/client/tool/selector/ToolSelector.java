@@ -25,15 +25,16 @@ package cc.kune.gspace.client.tool.selector;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ToolSelector.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface ToolSelector {
 
   /**
    * Adds the tool.
-   *
-   * @param item the item
+   * 
+   * @param item
+   *          the item
    */
   void addTool(ToolSelectorItem item);
 

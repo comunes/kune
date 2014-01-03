@@ -27,9 +27,11 @@ import org.apache.lucene.search.BooleanClause;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface Manager.
- *
- * @param <T> the generic type
- * @param <X> the generic type
+ * 
+ * @param <T>
+ *          the generic type
+ * @param <X>
+ *          the generic type
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -37,24 +39,27 @@ public interface Manager<T, X> {
 
   /**
    * Find.
-   *
-   * @param id the id
+   * 
+   * @param id
+   *          the id
    * @return the t
    */
   T find(X id);
 
   /**
    * Merge.
-   *
-   * @param entity the entity
+   * 
+   * @param entity
+   *          the entity
    * @return the t
    */
   T merge(T entity);
 
   /**
    * Persist.
-   *
-   * @param entity the entity
+   * 
+   * @param entity
+   *          the entity
    * @return the t
    */
   T persist(T entity);
@@ -66,19 +71,25 @@ public interface Manager<T, X> {
 
   /**
    * Removes the.
-   *
-   * @param entity the entity
+   * 
+   * @param entity
+   *          the entity
    */
   void remove(T entity);
 
   /**
    * Search.
-   *
-   * @param query the query
-   * @param fields the fields
-   * @param flags the flags
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param query
+   *          the query
+   * @param fields
+   *          the fields
+   * @param flags
+   *          the flags
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the search result
    */
   SearchResult<T> search(final String query, final String[] fields, final BooleanClause.Occur[] flags,
@@ -86,12 +97,17 @@ public interface Manager<T, X> {
 
   /**
    * Search.
-   *
-   * @param queries the queries
-   * @param fields the fields
-   * @param flags the flags
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param queries
+   *          the queries
+   * @param fields
+   *          the fields
+   * @param flags
+   *          the flags
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the search result
    */
   SearchResult<T> search(final String[] queries, final String[] fields,
@@ -99,11 +115,15 @@ public interface Manager<T, X> {
 
   /**
    * Search.
-   *
-   * @param queries the queries
-   * @param fields the fields
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param queries
+   *          the queries
+   * @param fields
+   *          the fields
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the search result
    */
   SearchResult<T> search(final String[] queries, final String[] fields, final Integer firstResult,

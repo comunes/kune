@@ -33,20 +33,23 @@ import cc.kune.common.shared.utils.AbstractFormattedString;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FormattedString.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FormattedString extends AbstractFormattedString {
-  
+
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(FormattedString.class);
 
   /**
    * Builds the.
-   *
-   * @param shouldBeTranslated the should be translated
-   * @param template the template
-   * @param args the args
+   * 
+   * @param shouldBeTranslated
+   *          the should be translated
+   * @param template
+   *          the template
+   * @param args
+   *          the args
    * @return the formatted string
    */
   public static FormattedString build(final boolean shouldBeTranslated, final String template,
@@ -80,10 +83,13 @@ public class FormattedString extends AbstractFormattedString {
 
   /**
    * Instantiates a new formatted string.
-   *
-   * @param shouldBeTranslated the should be translated
-   * @param template the template
-   * @param args the args
+   * 
+   * @param shouldBeTranslated
+   *          the should be translated
+   * @param template
+   *          the template
+   * @param args
+   *          the args
    */
   public FormattedString(final boolean shouldBeTranslated, final String template, final Object... args) {
     super(shouldBeTranslated, template, args);
@@ -113,15 +119,19 @@ public class FormattedString extends AbstractFormattedString {
 
   /**
    * Copy.
-   *
+   * 
    * @return the formatted string
    */
   public FormattedString copy() {
     return new FormattedString(shouldBeTranslated(), getTemplate(), getArgs());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.shared.utils.AbstractFormattedString#format(java.lang.String, java.lang.Object[])
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.shared.utils.AbstractFormattedString#format(java.lang.String
+   * , java.lang.Object[])
    */
   @Override
   public String format(final String template, final Object... args) {

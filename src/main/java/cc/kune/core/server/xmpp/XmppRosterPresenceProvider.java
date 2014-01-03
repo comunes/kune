@@ -22,20 +22,20 @@
  */
 package cc.kune.core.server.xmpp;
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Interface XmppRosterPreseneProvider should allow to get users's roster
  * presence information from different providers (initially openfire).
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface XmppRosterPresenceProvider {
 
   /**
    * Gets the last connected.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    * @return the last connected
    */
   Long getLastConnected(String user);

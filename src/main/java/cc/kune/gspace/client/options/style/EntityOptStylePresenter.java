@@ -55,50 +55,59 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptStylePresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntityOptStylePresenter implements EntityOptStyle {
-  
+
   /** The back manager. */
   private final GSpaceBackgroundManager backManager;
-  
+
   /** The entity options. */
   private final EntityOptions entityOptions;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The file download utils. */
   private final ClientFileDownloadUtils fileDownloadUtils;
-  
+
   /** The group service. */
   private final Provider<GroupServiceAsync> groupService;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
-  
+
   /** The view. */
   private EntityOptStyleView view;
 
   /**
    * Instantiates a new entity opt style presenter.
-   *
-   * @param eventBus the event bus
-   * @param session the session
-   * @param stateManager the state manager
-   * @param entityOptions the entity options
-   * @param groupService the group service
-   * @param backManager the back manager
-   * @param styleSelector the style selector
-   * @param i18n the i18n
-   * @param fileDownloadUtils the file download utils
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param entityOptions
+   *          the entity options
+   * @param groupService
+   *          the group service
+   * @param backManager
+   *          the back manager
+   * @param styleSelector
+   *          the style selector
+   * @param i18n
+   *          the i18n
+   * @param fileDownloadUtils
+   *          the file download utils
    */
   protected EntityOptStylePresenter(final EventBus eventBus, final Session session,
       final StateManager stateManager, final EntityOptions entityOptions,
@@ -132,7 +141,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * Gets the view.
-   *
+   * 
    * @return the view
    */
   public IsWidget getView() {
@@ -141,8 +150,9 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * Inits the.
-   *
-   * @param view the view
+   * 
+   * @param view
+   *          the view
    */
   public void init(final EntityOptStyleView view) {
     this.view = view;
@@ -193,8 +203,9 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * On submit complete.
-   *
-   * @param uploader the uploader
+   * 
+   * @param uploader
+   *          the uploader
    */
   private void onSubmitComplete(final IUploader uploader) {
     final String response = uploader.getServerInfo().message;
@@ -210,8 +221,9 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * On submit failed.
-   *
-   * @param responseText the response text
+   * 
+   * @param responseText
+   *          the response text
    */
   private void onSubmitFailed(final String responseText) {
     NotifyUser.error(i18n.t("Error setting the background"), responseText);
@@ -219,8 +231,9 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * Sets the back image.
-   *
-   * @param token the new back image
+   * 
+   * @param token
+   *          the new back image
    */
   private void setBackImage(final StateToken token) {
     view.setBackImage(fileDownloadUtils.getBackgroundResizedUrl(token, ImageSize.thumb));

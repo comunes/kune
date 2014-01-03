@@ -46,14 +46,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nCellList.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nCellList extends Composite {
 
   /**
    * The UiBinder interface used by this example.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface Binder extends UiBinder<Widget, I18nCellList> {
@@ -61,14 +61,14 @@ public class I18nCellList extends Composite {
 
   /**
    * The Cell used to render a {@link I18nTranslationDTO}.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   static class TranslationCell extends AbstractCell<I18nTranslationDTO> {
-    
+
     /** The dirty style. */
     private static String DIRTY_STYLE = "font-style: italic;";
-    
+
     /** The odd style. */
     private static String ODD_STYLE = "";
 
@@ -80,7 +80,9 @@ public class I18nCellList extends Composite {
     public TranslationCell() {
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see com.google.gwt.cell.client.AbstractCell#dependsOnSelection()
      */
     @Override
@@ -88,8 +90,14 @@ public class I18nCellList extends Composite {
       return super.dependsOnSelection();
     }
 
-    /* (non-Javadoc)
-     * @see com.google.gwt.cell.client.AbstractCell#onBrowserEvent(com.google.gwt.cell.client.Cell.Context, com.google.gwt.dom.client.Element, java.lang.Object, com.google.gwt.dom.client.NativeEvent, com.google.gwt.cell.client.ValueUpdater)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.google.gwt.cell.client.AbstractCell#onBrowserEvent(com.google.gwt
+     * .cell.client.Cell.Context, com.google.gwt.dom.client.Element,
+     * java.lang.Object, com.google.gwt.dom.client.NativeEvent,
+     * com.google.gwt.cell.client.ValueUpdater)
      */
     @Override
     public void onBrowserEvent(final com.google.gwt.cell.client.Cell.Context context,
@@ -98,8 +106,14 @@ public class I18nCellList extends Composite {
       super.onBrowserEvent(context, parent, value, event, valueUpdater);
     }
 
-    /* (non-Javadoc)
-     * @see com.google.gwt.cell.client.AbstractCell#onEnterKeyDown(com.google.gwt.cell.client.Cell.Context, com.google.gwt.dom.client.Element, java.lang.Object, com.google.gwt.dom.client.NativeEvent, com.google.gwt.cell.client.ValueUpdater)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.google.gwt.cell.client.AbstractCell#onEnterKeyDown(com.google.gwt
+     * .cell.client.Cell.Context, com.google.gwt.dom.client.Element,
+     * java.lang.Object, com.google.gwt.dom.client.NativeEvent,
+     * com.google.gwt.cell.client.ValueUpdater)
      */
     @Override
     protected void onEnterKeyDown(final com.google.gwt.cell.client.Cell.Context context,
@@ -108,8 +122,13 @@ public class I18nCellList extends Composite {
 
     }
 
-    /* (non-Javadoc)
-     * @see com.google.gwt.cell.client.AbstractCell#render(com.google.gwt.cell.client.Cell.Context, java.lang.Object, com.google.gwt.safehtml.shared.SafeHtmlBuilder)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * com.google.gwt.cell.client.AbstractCell#render(com.google.gwt.cell.client
+     * .Cell.Context, java.lang.Object,
+     * com.google.gwt.safehtml.shared.SafeHtmlBuilder)
      */
     @Override
     public void render(final Context context, final I18nTranslationDTO value, final SafeHtmlBuilder sb) {
@@ -155,10 +174,13 @@ public class I18nCellList extends Composite {
 
   /**
    * Instantiates a new i18n cell list.
-   *
-   * @param data the data
-   * @param i18n the i18n
-   * @param saver the saver
+   * 
+   * @param data
+   *          the data
+   * @param i18n
+   *          the i18n
+   * @param saver
+   *          the saver
    */
   @Inject
   public I18nCellList(final I18nTranslationDataProvider data, final I18nUITranslationService i18n,
@@ -225,10 +247,13 @@ public class I18nCellList extends Composite {
 
   /**
    * Sets the language.
-   *
-   * @param fromLanguage the from language
-   * @param toLanguage the to language
-   * @param toTranslate the to translate
+   * 
+   * @param fromLanguage
+   *          the from language
+   * @param toLanguage
+   *          the to language
+   * @param toTranslate
+   *          the to translate
    */
   public void setLanguage(final I18nLanguageSimpleDTO fromLanguage,
       final I18nLanguageSimpleDTO toLanguage, final boolean toTranslate) {

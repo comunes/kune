@@ -31,17 +31,20 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptToolsPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptToolsPanel extends EntityOptToolsPanel implements UserOptToolsView {
 
   /**
    * Instantiates a new user opt tools panel.
-   *
-   * @param i18n the i18n
-   * @param res the res
-   * @param maskWidget the mask widget
+   * 
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param maskWidget
+   *          the mask widget
    */
   @Inject
   public UserOptToolsPanel(final I18nTranslationService i18n, final IconicResources res,

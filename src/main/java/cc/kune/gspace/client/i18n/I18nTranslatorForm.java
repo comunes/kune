@@ -39,14 +39,14 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * A form used for editing translations.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nTranslatorForm extends Composite {
 
   /**
    * The Interface Binder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface Binder extends UiBinder<Widget, I18nTranslatorForm> {
@@ -54,54 +54,54 @@ public class I18nTranslatorForm extends Composite {
 
   /** The ui binder. */
   private static Binder uiBinder = GWT.create(Binder.class);
-  
+
   /** The copy icon. */
   @UiField
   PushButton copyIcon;
-  
+
   /** The data provider. */
   private I18nTranslationDataProvider dataProvider;
-  
+
   /** The i18n. */
   private I18nTranslationService i18n;
-  
+
   /** The item. */
   private I18nTranslationDTO item;
-  
+
   /** The keyboard recomendation. */
   @UiField
   Label keyboardRecomendation;
-  
+
   /** The keyboard recomendation title. */
   @UiField
   Label keyboardRecomendationTitle;
-  
+
   /** The keyboard timer. */
   private final Timer keyboardTimer;
-  
+
   /** The note for translators. */
   @UiField
   Label noteForTranslators;
-  
+
   /** The note for translators tittle. */
   @UiField
   Label noteForTranslatorsTittle;
-  
+
   /** The saver. */
   private I18nTranslatorSaver saver;
-  
+
   /** The to language title. */
   @UiField
   Label toLanguageTitle;
-  
+
   /** The to translate. */
   @UiField
   Label toTranslate;
-  
+
   /** The to translate title. */
   @UiField
   Label toTranslateTitle;
-  
+
   /** The translation. */
   @UiField
   TextArea translation;
@@ -135,8 +135,9 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Handle blur.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @UiHandler("translation")
   void handleBlur(final BlurEvent event) {
@@ -145,8 +146,9 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Handle click on copy icon.
-   *
-   * @param e the e
+   * 
+   * @param e
+   *          the e
    */
   @UiHandler("copyIcon")
   void handleClickOnCopyIcon(final ClickEvent e) {
@@ -157,8 +159,9 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Handle key press.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @UiHandler("translation")
   void handleKeyPress(final ChangeEvent event) {
@@ -167,8 +170,9 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Handle key press.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @UiHandler("translation")
   void handleKeyPress(final KeyPressEvent event) {
@@ -189,10 +193,13 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Inits the.
-   *
-   * @param dataProvider the data provider
-   * @param i18n the i18n
-   * @param saver the saver
+   * 
+   * @param dataProvider
+   *          the data provider
+   * @param i18n
+   *          the i18n
+   * @param saver
+   *          the saver
    */
   public void init(final I18nTranslationDataProvider dataProvider, final I18nTranslationService i18n,
       final I18nTranslatorSaver saver) {
@@ -225,8 +232,9 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Sets the info.
-   *
-   * @param item the new info
+   * 
+   * @param item
+   *          the new info
    */
   public void setInfo(final I18nTranslationDTO item) {
     saveIfNeeded();
@@ -244,8 +252,9 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Sets the to language.
-   *
-   * @param language the new to language
+   * 
+   * @param language
+   *          the new to language
    */
   public void setToLanguage(final I18nLanguageSimpleDTO language) {
     toLanguageTitle.setText(i18n.tWithNT("to [%s]:", "For example, 'to Spanish':",

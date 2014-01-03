@@ -35,7 +35,7 @@ import cc.kune.selenium.SeleniumUtils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewGroupPageObject.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewGroupPageObject extends PageObject {
@@ -43,48 +43,54 @@ public class NewGroupPageObject extends PageObject {
   /** The closed type. */
   @FindBy(id = NewGroupPanel.CLOSED_GROUP_TYPE_ID)
   public WebElement closedType;
-  
+
   /** The community type. */
   @FindBy(id = NewGroupPanel.COMM_GROUP_TYPE_ID)
   public WebElement communityType;
-  
+
   /** The long name. */
   @FindBy(id = NewGroupPanel.LONGNAME_FIELD + SeleniumConstants.INPUT)
   public WebElement longName;
-  
+
   /** The org type. */
   @FindBy(id = NewGroupPanel.ORG_GROUP_TYPE_ID)
   public WebElement orgType;
-  
+
   /** The project type. */
   @FindBy(id = NewGroupPanel.PROJ_GROUP_TYPE_ID)
   public WebElement projectType;
-  
+
   /** The public description. */
   @FindBy(id = NewGroupPanel.PUBLICDESC_FIELD + SeleniumConstants.INPUT)
   public WebElement publicDescription;
-  
+
   /** The register btn. */
   @FindBy(id = SeleniumConstants.GWTDEV + NewGroupPanel.REGISTER_BUTTON)
   public WebElement registerBtn;
-  
+
   /** The short name. */
   @FindBy(id = NewGroupPanel.SHORTNAME_FIELD + SeleniumConstants.INPUT)
   public WebElement shortName;
-  
+
   /** The tags. */
   @FindBy(id = NewGroupPanel.TAGS_FIELD + SeleniumConstants.INPUT)
   public WebElement tags;
 
   /**
    * Creates the.
-   *
-   * @param sufix the sufix
-   * @param shortname the shortname
-   * @param longname the longname
-   * @param description the description
-   * @param tagsS the tags s
-   * @param groupType the group type
+   * 
+   * @param sufix
+   *          the sufix
+   * @param shortname
+   *          the shortname
+   * @param longname
+   *          the longname
+   * @param description
+   *          the description
+   * @param tagsS
+   *          the tags s
+   * @param groupType
+   *          the group type
    */
   public void create(final String sufix, final String shortname, final String longname,
       final String description, final String tagsS, final GroupType groupType) {

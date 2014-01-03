@@ -30,12 +30,14 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BartersGinModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BartersGinModule extends AbstractPresenterModule {
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override

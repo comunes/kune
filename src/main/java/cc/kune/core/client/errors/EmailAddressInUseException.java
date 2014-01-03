@@ -25,11 +25,11 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EmailAddressInUseException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmailAddressInUseException extends DefaultException {
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 3740509040361715407L;
 }

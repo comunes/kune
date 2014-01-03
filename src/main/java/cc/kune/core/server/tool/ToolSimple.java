@@ -25,14 +25,14 @@ package cc.kune.core.server.tool;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolSimple.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolSimple {
 
   /** The name. */
   private final String name;
-  
+
   /** The root name. */
   private final String rootName;
 
@@ -45,16 +45,20 @@ public class ToolSimple {
 
   /**
    * Instantiates a new tool simple.
-   *
-   * @param name the name
-   * @param rootName the root name
+   * 
+   * @param name
+   *          the name
+   * @param rootName
+   *          the root name
    */
   public ToolSimple(final String name, final String rootName) {
     this.name = name;
     this.rootName = rootName;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -88,7 +92,7 @@ public class ToolSimple {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -97,14 +101,16 @@ public class ToolSimple {
 
   /**
    * Gets the root name.
-   *
+   * 
    * @return the root name
    */
   public String getRootName() {
     return rootName;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override

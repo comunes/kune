@@ -30,22 +30,23 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RenameContentEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameContentHandler> {
 
   /**
    * The Interface HasRenameEventHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasRenameEventHandlers extends HasHandlers {
-    
+
     /**
      * Adds the rename event handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addRenameEventHandler(RenameContentHandler handler);
@@ -53,15 +54,16 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * The Interface RenameContentHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface RenameContentHandler extends EventHandler {
-    
+
     /**
      * On rename event.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onRenameEvent(RenameContentEvent event);
   }
@@ -71,11 +73,15 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Fire.
-   *
-   * @param source the source
-   * @param token the token
-   * @param oldName the old name
-   * @param newName the new name
+   * 
+   * @param source
+   *          the source
+   * @param token
+   *          the token
+   * @param oldName
+   *          the old name
+   * @param newName
+   *          the new name
    */
   public static void fire(final HasHandlers source,
       final cc.kune.core.shared.domain.utils.StateToken token, final java.lang.String oldName,
@@ -85,7 +91,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<RenameContentHandler> getType() {
@@ -94,10 +100,10 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /** The new name. */
   java.lang.String newName;
-  
+
   /** The old name. */
   java.lang.String oldName;
-  
+
   /** The token. */
   cc.kune.core.shared.domain.utils.StateToken token;
 
@@ -110,10 +116,13 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Instantiates a new rename content event.
-   *
-   * @param token the token
-   * @param oldName the old name
-   * @param newName the new name
+   * 
+   * @param token
+   *          the token
+   * @param oldName
+   *          the old name
+   * @param newName
+   *          the new name
    */
   public RenameContentEvent(final cc.kune.core.shared.domain.utils.StateToken token,
       final java.lang.String oldName, final java.lang.String newName) {
@@ -122,15 +131,21 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
     this.newName = newName;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final RenameContentHandler handler) {
     handler.onRenameEvent(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -169,7 +184,9 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
     return true;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -179,7 +196,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Gets the new name.
-   *
+   * 
    * @return the new name
    */
   public java.lang.String getNewName() {
@@ -188,7 +205,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Gets the old name.
-   *
+   * 
    * @return the old name
    */
   public java.lang.String getOldName() {
@@ -197,14 +214,16 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Gets the token.
-   *
+   * 
    * @return the token
    */
   public cc.kune.core.shared.domain.utils.StateToken getToken() {
     return token;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -216,7 +235,9 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
     return hashCode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

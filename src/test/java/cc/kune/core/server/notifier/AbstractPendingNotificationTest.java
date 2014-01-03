@@ -29,29 +29,29 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractPendingNotificationTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractPendingNotificationTest {
 
   /** The diferent provider. */
   protected LocalUserDestinationProvider diferentProvider;
-  
+
   /** The other diferent user. */
   protected User otherDiferentUser;
-  
+
   /** The same user. */
   protected User sameUser;
-  
+
   /** The some similar user provider. */
   protected LocalUserDestinationProvider someSimilarUserProvider;
-  
+
   /** The some similar user provider2. */
   protected LocalUserDestinationProvider someSimilarUserProvider2;
-  
+
   /** The some user provider. */
   protected LocalUserDestinationProvider someUserProvider;
-  
+
   /** The user. */
   protected User user;
 

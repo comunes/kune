@@ -34,23 +34,26 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NotImplementedDropManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NotImplementedDropManager {
 
   /** The drag controller. */
   private final KuneDragController dragController;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
 
   /**
    * Instantiates a new not implemented drop manager.
-   *
-   * @param i18n the i18n
-   * @param gSpaceArmor the g space armor
-   * @param dragController the drag controller
+   * 
+   * @param i18n
+   *          the i18n
+   * @param gSpaceArmor
+   *          the g space armor
+   * @param dragController
+   *          the drag controller
    */
   @Inject
   public NotImplementedDropManager(final I18nTranslationService i18n, final GSpaceArmor gSpaceArmor,
@@ -62,8 +65,9 @@ public class NotImplementedDropManager {
 
   /**
    * Register.
-   *
-   * @param widget the widget
+   * 
+   * @param widget
+   *          the widget
    */
   public void register(final Widget widget) {
     registerImpl(widget);
@@ -71,8 +75,9 @@ public class NotImplementedDropManager {
 
   /**
    * Register impl.
-   *
-   * @param widget the widget
+   * 
+   * @param widget
+   *          the widget
    */
   private void registerImpl(final Widget widget) {
     final NotImplementedDropController dropController = new NotImplementedDropController(widget, i18n);

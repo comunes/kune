@@ -31,17 +31,20 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class OpenDocMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class OpenDocMenuItem extends OpenContentMenuItem {
 
   /**
    * Instantiates a new open doc menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
    */
   @Inject
   public OpenDocMenuItem(final I18nTranslationService i18n, final OpenContentAction action,

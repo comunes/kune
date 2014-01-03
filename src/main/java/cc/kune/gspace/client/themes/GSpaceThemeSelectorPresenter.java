@@ -45,30 +45,33 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceThemeSelectorPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceThemeSelectorPresenter {
 
   /**
    * The Class ThemeAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   class ThemeAction extends AbstractExtendedAction {
 
     /** The manager. */
     private final GSpaceThemeManager manager;
-    
+
     /** The theme. */
     private final GSpaceTheme theme;
 
     /**
      * Instantiates a new theme action.
-     *
-     * @param theme the theme
-     * @param eventBus the event bus
-     * @param manager the manager
+     * 
+     * @param theme
+     *          the theme
+     * @param eventBus
+     *          the event bus
+     * @param manager
+     *          the manager
      */
     public ThemeAction(final GSpaceTheme theme, final EventBus eventBus, final GSpaceThemeManager manager) {
       super();
@@ -78,8 +81,12 @@ public class GSpaceThemeSelectorPresenter {
       putValue(SMALL_ICON, theme.getBackColors()[0]);
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -93,37 +100,43 @@ public class GSpaceThemeSelectorPresenter {
 
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The item map. */
   private final HashMap<String, MenuRadioItemDescriptor> itemMap;
-  
+
   /** The manager. */
   private final GSpaceThemeManager manager;
-  
+
   /** The menu. */
   private MenuDescriptor menu;
-  
+
   /** The res. */
   private final IconicResources res;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The view. */
   private ActionExtensibleView view;
 
   /**
    * Instantiates a new g space theme selector presenter.
-   *
-   * @param session the session
-   * @param i18n the i18n
-   * @param res the res
-   * @param eventBus the event bus
-   * @param manager the manager
-   * @param view the view
+   * 
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param eventBus
+   *          the event bus
+   * @param manager
+   *          the manager
+   * @param view
+   *          the view
    */
   @Inject
   public GSpaceThemeSelectorPresenter(final Session session, final I18nTranslationService i18n,
@@ -177,8 +190,9 @@ public class GSpaceThemeSelectorPresenter {
 
   /**
    * Creates the theme.
-   *
-   * @param theme the theme
+   * 
+   * @param theme
+   *          the theme
    */
   private void createTheme(final GSpaceTheme theme) {
     final ThemeAction action = new ThemeAction(theme, eventBus, manager);
@@ -189,9 +203,11 @@ public class GSpaceThemeSelectorPresenter {
 
   /**
    * Select.
-   *
-   * @param oldTheme the old theme
-   * @param newTheme the new theme
+   * 
+   * @param oldTheme
+   *          the old theme
+   * @param newTheme
+   *          the new theme
    */
   public void select(final GSpaceTheme oldTheme, final GSpaceTheme newTheme) {
     final String oldThemeName = oldTheme.getName();
@@ -208,8 +224,9 @@ public class GSpaceThemeSelectorPresenter {
 
   /**
    * Sets the themes.
-   *
-   * @param initData the new themes
+   * 
+   * @param initData
+   *          the new themes
    */
   private void setThemes(final InitDataDTO initData) {
     view.add(menu);

@@ -26,7 +26,7 @@ package cc.kune.core.client.errors;
 /**
  * The Class ContainerNotEmptyException throwed when people try to remove
  * folders that not are empty.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CannotDeleteDefaultContentException extends DefaultException {

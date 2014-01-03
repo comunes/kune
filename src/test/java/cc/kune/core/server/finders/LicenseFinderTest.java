@@ -40,24 +40,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseFinderTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseFinderTest extends PersistenceTest {
-  
+
   /** The finder. */
   @Inject
   LicenseFinder finder;
-  
+
   /** The license1. */
   private License license1;
-  
+
   /** The license2. */
   private License license2;
-  
+
   /** The license def. */
   private License licenseDef;
-  
+
   /** The properties. */
   @Inject
   KuneBasicProperties properties;

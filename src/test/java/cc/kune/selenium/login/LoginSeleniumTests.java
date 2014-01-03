@@ -29,16 +29,18 @@ import cc.kune.selenium.KuneSeleniumTest;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LoginSeleniumTests.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LoginSeleniumTests extends KuneSeleniumTest {
 
   /**
    * Basic sign in.
-   *
-   * @param user the user
-   * @param passwd the passwd
+   * 
+   * @param user
+   *          the user
+   * @param passwd
+   *          the passwd
    */
   @Test(dataProvider = "correctlogin")
   public void basicSignIn(final String user, final String passwd) {
@@ -61,9 +63,11 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
 
   /**
    * Severals sign in sing out.
-   *
-   * @param user the user
-   * @param passwd the passwd
+   * 
+   * @param user
+   *          the user
+   * @param passwd
+   *          the passwd
    */
   @Test(dataProvider = "correctlogin")
   public void severalsSignInSingOut(final String user, final String passwd) {
@@ -91,9 +95,11 @@ public class LoginSeleniumTests extends KuneSeleniumTest {
 
   /**
    * Sign in with token.
-   *
-   * @param user the user
-   * @param passwd the passwd
+   * 
+   * @param user
+   *          the user
+   * @param passwd
+   *          the passwd
    */
   @Test(dataProvider = "correctlogin")
   public void signInWithToken(final String user, final String passwd) {

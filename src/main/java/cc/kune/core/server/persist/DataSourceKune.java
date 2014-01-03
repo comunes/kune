@@ -32,7 +32,7 @@ import com.google.inject.BindingAnnotation;
 
 /**
  * The Interface DataSourceKune.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Retention(RetentionPolicy.RUNTIME)

@@ -49,7 +49,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupOptionsPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupOptionsPresenter extends
@@ -58,7 +58,7 @@ public class GroupOptionsPresenter extends
 
   /**
    * The Interface GroupOptionsProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -67,48 +67,57 @@ public class GroupOptionsPresenter extends
 
   /**
    * The Interface GroupOptionsView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface GroupOptionsView extends EntityOptionsView {
-    
+
     /**
      * Adds the action.
-     *
-     * @param descriptor the descriptor
+     * 
+     * @param descriptor
+     *          the descriptor
      */
     void addAction(GuiActionDescrip descriptor);
   }
 
   /** The Constant GROUP_OPTIONS_ICON. */
   public static final String GROUP_OPTIONS_ICON = "k-eop-icon";
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The img. */
   private final CoreResources img;
-  
+
   /** The prefs item. */
   private ButtonDescriptor prefsItem;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new group options presenter.
-   *
-   * @param eventBus the event bus
-   * @param proxy the proxy
-   * @param stateManager the state manager
-   * @param session the session
-   * @param i18n the i18n
-   * @param img the img
-   * @param view the view
-   * @param tokenListener the token listener
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param proxy
+   *          the proxy
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param img
+   *          the img
+   * @param view
+   *          the view
+   * @param tokenListener
+   *          the token listener
    */
   @Inject
   public GroupOptionsPresenter(final EventBus eventBus, final GroupOptionsProxy proxy,
@@ -123,8 +132,9 @@ public class GroupOptionsPresenter extends
 
   /**
    * Check state.
-   *
-   * @param state the state
+   * 
+   * @param state
+   *          the state
    */
   private void checkState(final StateAbstractDTO state) {
     if (!state.getGroup().isPersonal() && state.getGroupRights().isAdministrable()) {
@@ -160,15 +170,21 @@ public class GroupOptionsPresenter extends
     getView().addAction(prefsItem);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView
+   * ()
    */
   @Override
   public GroupOptionsView getView() {
     return (GroupOptionsView) super.getView();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -191,7 +207,9 @@ public class GroupOptionsPresenter extends
 
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.GroupOptions#show(java.lang.String)
    */
   @Override
@@ -201,7 +219,9 @@ public class GroupOptionsPresenter extends
     checkState(session.getCurrentState());
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.GroupOptions#showTooltip()
    */
   @Override

@@ -28,14 +28,14 @@ import com.google.gwt.resources.client.ImageResource;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface IconicResources.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface IconicResources extends ClientBundle {
 
   /**
    * Adds the.
-   *
+   * 
    * @return the image resource
    */
   @Source("add.png")
@@ -43,7 +43,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Alert.
-   *
+   * 
    * @return the image resource
    */
   @Source("alert.png")
@@ -51,7 +51,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Barters add.
-   *
+   * 
    * @return the image resource
    */
   @Source("barters-add.png")
@@ -59,7 +59,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Barters grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("barters-g.png")
@@ -67,7 +67,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Barters white.
-   *
+   * 
    * @return the image resource
    */
   @Source("barters.png")
@@ -75,7 +75,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Blog post add.
-   *
+   * 
    * @return the image resource
    */
   @Source("blog-posts-add.png")
@@ -83,7 +83,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Blog posts grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("blog-posts-g.png")
@@ -91,7 +91,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Blog posts white.
-   *
+   * 
    * @return the image resource
    */
   @Source("blog-posts.png")
@@ -99,7 +99,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Blogs add.
-   *
+   * 
    * @return the image resource
    */
   @Source("blogs-add.png")
@@ -107,7 +107,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Blogs grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("blogs-g.png")
@@ -115,7 +115,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Blogs white.
-   *
+   * 
    * @return the image resource
    */
   @Source("blogs.png")
@@ -123,7 +123,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Chats add.
-   *
+   * 
    * @return the image resource
    */
   @Source("chats-add.png")
@@ -131,7 +131,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Chats grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("chats-g.png")
@@ -139,7 +139,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Chats white.
-   *
+   * 
    * @return the image resource
    */
   @Source("chats.png")
@@ -147,7 +147,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Copyleft grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("copyleft-g.png")
@@ -155,7 +155,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Copyleft white.
-   *
+   * 
    * @return the image resource
    */
   @Source("copyleft.png")
@@ -163,7 +163,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Del.
-   *
+   * 
    * @return the image resource
    */
   @Source("del.png")
@@ -171,7 +171,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Docs add.
-   *
+   * 
    * @return the image resource
    */
   @Source("docs-add.png")
@@ -179,7 +179,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Docs grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("docs-g.png")
@@ -187,7 +187,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Docs root grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("docs-root-g.png")
@@ -195,7 +195,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Docs root white.
-   *
+   * 
    * @return the image resource
    */
   @Source("docs-root.png")
@@ -203,7 +203,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Docs white.
-   *
+   * 
    * @return the image resource
    */
   @Source("docs.png")
@@ -211,7 +211,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Down arrow.
-   *
+   * 
    * @return the image resource
    */
   @Source("down-arrow.png")
@@ -219,7 +219,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Edits the grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("edit-g.png")
@@ -227,7 +227,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Equalizer grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("equalizer-g.png")
@@ -235,7 +235,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Equalizer white.
-   *
+   * 
    * @return the image resource
    */
   @Source("equalizer.png")
@@ -243,7 +243,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Event add.
-   *
+   * 
    * @return the image resource
    */
   @Source("event-add.png")
@@ -251,7 +251,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Event grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("event-g.png")
@@ -259,7 +259,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Events grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("events-g.png")
@@ -267,7 +267,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Events white.
-   *
+   * 
    * @return the image resource
    */
   @Source("events.png")
@@ -275,7 +275,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Event white.
-   *
+   * 
    * @return the image resource
    */
   @Source("event.png")
@@ -283,7 +283,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Facebook.
-   *
+   * 
    * @return the image resource
    */
   @Source("facebook.png")
@@ -291,7 +291,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Folder add.
-   *
+   * 
    * @return the image resource
    */
   @Source("folder-add.png")
@@ -299,7 +299,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Folder grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("folder-g.png")
@@ -307,7 +307,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Folder white.
-   *
+   * 
    * @return the image resource
    */
   @Source("folder.png")
@@ -315,7 +315,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Forbiden.
-   *
+   * 
    * @return the image resource
    */
   @Source("forbiden.png")
@@ -323,7 +323,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Google plus.
-   *
+   * 
    * @return the image resource
    */
   @Source("g-plus.png")
@@ -331,7 +331,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Home.
-   *
+   * 
    * @return the image resource
    */
   @Source("home.png")
@@ -339,7 +339,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Identica.
-   *
+   * 
    * @return the image resource
    */
   @Source("identica.png")
@@ -347,7 +347,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Info.
-   *
+   * 
    * @return the image resource
    */
   @Source("info.png")
@@ -355,7 +355,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Kune.
-   *
+   * 
    * @return the image resource
    */
   @Source("kune.png")
@@ -363,7 +363,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Left arrow.
-   *
+   * 
    * @return the image resource
    */
   @Source("left-arrow.png")
@@ -371,7 +371,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Lists add.
-   *
+   * 
    * @return the image resource
    */
   @Source("lists-add.png")
@@ -379,7 +379,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Lists grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("lists-g.png")
@@ -387,7 +387,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Lists post add.
-   *
+   * 
    * @return the image resource
    */
   @Source("lists-post-add.png")
@@ -395,7 +395,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Lists post grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("lists-post-g.png")
@@ -403,7 +403,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Lists post white.
-   *
+   * 
    * @return the image resource
    */
   @Source("lists-post.png")
@@ -411,7 +411,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Lists white.
-   *
+   * 
    * @return the image resource
    */
   @Source("lists.png")
@@ -419,7 +419,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Lock grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("lock-g.png")
@@ -427,7 +427,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Lock white.
-   *
+   * 
    * @return the image resource
    */
   @Source("lock.png")
@@ -435,7 +435,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Maximize.
-   *
+   * 
    * @return the image resource
    */
   @Source("maximize.png")
@@ -443,7 +443,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Minimize.
-   *
+   * 
    * @return the image resource
    */
   @Source("minimize.png")
@@ -451,7 +451,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Mobile.
-   *
+   * 
    * @return the image resource
    */
   @Source("mobile.png")
@@ -459,7 +459,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Move.
-   *
+   * 
    * @return the image resource
    */
   @Source("move.png")
@@ -467,7 +467,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * No copyleft grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("no-copyleft-g.png")
@@ -475,7 +475,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * No copyleft white.
-   *
+   * 
    * @return the image resource
    */
   @Source("no-copyleft.png")
@@ -483,7 +483,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Picture add.
-   *
+   * 
    * @return the image resource
    */
   @Source("picture-add.png")
@@ -491,7 +491,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Picture grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("picture-g.png")
@@ -499,7 +499,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Picture white.
-   *
+   * 
    * @return the image resource
    */
   @Source("picture.png")
@@ -507,7 +507,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Prefs.
-   *
+   * 
    * @return the image resource
    */
   @Source("prefs.png")
@@ -515,7 +515,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Refreh.
-   *
+   * 
    * @return the image resource
    */
   @Source("refresh.png")
@@ -523,7 +523,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Refresh.
-   *
+   * 
    * @return the image resource
    */
   @Source("refresh.png")
@@ -531,7 +531,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Right arrow.
-   *
+   * 
    * @return the image resource
    */
   @Source("right-arrow.png")
@@ -539,7 +539,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Style grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("style-g.png")
@@ -547,7 +547,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Style white.
-   *
+   * 
    * @return the image resource
    */
   @Source("style.png")
@@ -555,7 +555,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Task done.
-   *
+   * 
    * @return the image resource
    */
   @Source("task-done.png")
@@ -563,7 +563,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Tasks add.
-   *
+   * 
    * @return the image resource
    */
   @Source("tasks-add.png")
@@ -571,7 +571,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Tasks folder add.
-   *
+   * 
    * @return the image resource
    */
   @Source("tasks-folder-add.png")
@@ -579,7 +579,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Tasks folder grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("tasks-folder-g.png")
@@ -587,7 +587,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Tasks folder white.
-   *
+   * 
    * @return the image resource
    */
   @Source("tasks-folder.png")
@@ -595,7 +595,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Tasks grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("tasks-g.png")
@@ -603,7 +603,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Tasks new.
-   *
+   * 
    * @return the image resource
    */
   @Source("task-new.png")
@@ -611,7 +611,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Tasks white.
-   *
+   * 
    * @return the image resource
    */
   @Source("tasks.png")
@@ -619,7 +619,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Tools grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("tools-g.png")
@@ -627,7 +627,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Tools white.
-   *
+   * 
    * @return the image resource
    */
   @Source("tools.png")
@@ -635,7 +635,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Trash grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("trash-g.png")
@@ -643,7 +643,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Trash white.
-   *
+   * 
    * @return the image resource
    */
   @Source("trash.png")
@@ -651,7 +651,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Twitter.
-   *
+   * 
    * @return the image resource
    */
   @Source("twitter.png")
@@ -659,7 +659,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Undo.
-   *
+   * 
    * @return the image resource
    */
   @Source("undo.png")
@@ -667,7 +667,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Up arrow.
-   *
+   * 
    * @return the image resource
    */
   @Source("up-arrow.png")
@@ -675,7 +675,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Wikis add.
-   *
+   * 
    * @return the image resource
    */
   @Source("wikis-add.png")
@@ -683,7 +683,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Wikis folder add.
-   *
+   * 
    * @return the image resource
    */
   @Source("wikis-folder-add.png")
@@ -691,7 +691,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Wikis folder grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("wikis-folder-g.png")
@@ -699,7 +699,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Wikis folder white.
-   *
+   * 
    * @return the image resource
    */
   @Source("wikis-folder.png")
@@ -707,7 +707,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Wikis grey.
-   *
+   * 
    * @return the image resource
    */
   @Source("wikis-g.png")
@@ -715,7 +715,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Wikis white.
-   *
+   * 
    * @return the image resource
    */
   @Source("wikis.png")
@@ -723,7 +723,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * World.
-   *
+   * 
    * @return the image resource
    */
   @Source("world.png")
@@ -731,7 +731,7 @@ public interface IconicResources extends ClientBundle {
 
   /**
    * Write.
-   *
+   * 
    * @return the image resource
    */
   @Source("write.png")

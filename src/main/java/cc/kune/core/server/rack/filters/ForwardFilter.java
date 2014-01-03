@@ -53,31 +53,32 @@ public class ForwardFilter extends AbstractInjectedFilter {
   public void destroy() {
   }
 
+  @Override
   public void doFilter(final ServletRequest request, final ServletResponse response,
       final FilterChain chain) throws IOException, ServletException {
 
-    String relativeURL = RackHelper.getRelativeURL(request);
-    Matcher matcher = pattern.matcher(relativeURL);
+    final String relativeURL = RackHelper.getRelativeURL(request);
+    final Matcher matcher = pattern.matcher(relativeURL);
     matcher.matches();
 
-    int groupCount = matcher.groupCount();
+    final int groupCount = matcher.groupCount();
     // log.debug("GROUP COUNT: " + groupCount);
     String replaced = forward;
     for (int index = 0; index < groupCount; index++) {
-      String tag = "{" + index + "}";
-      String group = matcher.group(index + 1);
+      final String tag = "{" + index + "}";
+      final String group = matcher.group(index + 1);
       // log.debug("REPLACING " + tag + " WITH + " + group);
       replaced = replaced.replace(tag, group);
     }
 
-    String forwardString = RackHelper.buildForwardString(request, replaced);
+    final String forwardString = RackHelper.buildForwardString(request, replaced);
     forward(request, response, forwardString);
   }
 
   private void forward(final ServletRequest request, final ServletResponse response,
       final String forwardString) throws ServletException, IOException {
     // log.debug("FORWADING TO: " + forwardString);
-    HttpServletRequest httpRequest = (HttpServletRequest) request;
+    final HttpServletRequest httpRequest = (HttpServletRequest) request;
     httpRequest.getRequestDispatcher(forwardString).forward(request, response);
   }
 

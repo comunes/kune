@@ -26,15 +26,15 @@ package cc.kune.gspace.client.i18n;
 // TODO: Auto-generated Javadoc
 /**
  * The Enum LanguageSelectorType.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum LanguageSelectorType {
-  
+
   /** The all. */
-  ALL, 
- /** The all except english. */
- ALL_EXCEPT_ENGLISH, 
- /** The only full translated. */
- ONLY_FULL_TRANSLATED
+  ALL,
+  /** The all except english. */
+  ALL_EXCEPT_ENGLISH,
+  /** The only full translated. */
+  ONLY_FULL_TRANSLATED
 }

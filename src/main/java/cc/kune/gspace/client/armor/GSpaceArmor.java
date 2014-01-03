@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface GSpaceArmor.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface GSpaceArmor extends IsMaximizable {
@@ -45,147 +45,148 @@ public interface GSpaceArmor extends IsMaximizable {
 
   /**
    * Enable center scroll.
-   *
-   * @param enable the enable
+   * 
+   * @param enable
+   *          the enable
    */
   void enableCenterScroll(boolean enable);
 
   /**
    * Gets the doc container.
-   *
+   * 
    * @return the doc container
    */
   GSpaceCenter getDocContainer();
 
   /**
    * Gets the doc container height.
-   *
+   * 
    * @return the doc container height
    */
   int getDocContainerHeight();
 
   /**
    * Gets the doc footer.
-   *
+   * 
    * @return the doc footer
    */
   ForIsWidget getDocFooter();
 
   /**
    * Gets the doc footer toolbar.
-   *
+   * 
    * @return the doc footer toolbar
    */
   IsActionExtensible getDocFooterToolbar();
 
   /**
    * Gets the doc header.
-   *
+   * 
    * @return the doc header
    */
   ForIsWidget getDocHeader();
 
   /**
    * Gets the doc subheader.
-   *
+   * 
    * @return the doc subheader
    */
   ForIsWidget getDocSubheader();
 
   /**
    * Gets the entity footer.
-   *
+   * 
    * @return the entity footer
    */
   ForIsWidget getEntityFooter();
 
   /**
    * Gets the entity footer toolbar.
-   *
+   * 
    * @return the entity footer toolbar
    */
   IsActionExtensible getEntityFooterToolbar();
 
   /**
    * Gets the entity header.
-   *
+   * 
    * @return the entity header
    */
   ForIsWidget getEntityHeader();
 
   /**
    * Gets the entity tools center.
-   *
+   * 
    * @return the entity tools center
    */
   ForIsWidget getEntityToolsCenter();
 
   /**
    * Gets the entity tools north.
-   *
+   * 
    * @return the entity tools north
    */
   ForIsWidget getEntityToolsNorth();
 
   /**
    * Gets the entity tools south.
-   *
+   * 
    * @return the entity tools south
    */
   ForIsWidget getEntityToolsSouth();
 
   /**
    * Gets the header toolbar.
-   *
+   * 
    * @return the header toolbar
    */
   IsActionExtensible getHeaderToolbar();
 
   /**
    * Gets the home space.
-   *
+   * 
    * @return the home space
    */
   SimplePanel getHomeSpace();
 
   /**
    * Gets the mainpanel.
-   *
+   * 
    * @return the mainpanel
    */
   IsWidget getMainpanel();
 
   /**
    * Gets the public space.
-   *
+   * 
    * @return the public space
    */
   SimplePanel getPublicSpace();
 
   /**
    * Gets the sitebar.
-   *
+   * 
    * @return the sitebar
    */
   ForIsWidget getSitebar();
 
   /**
    * Gets the subheader toolbar.
-   *
+   * 
    * @return the subheader toolbar
    */
   IsActionExtensible getSubheaderToolbar();
 
   /**
    * Gets the tools south toolbar.
-   *
+   * 
    * @return the tools south toolbar
    */
   IsActionExtensible getToolsSouthToolbar();
 
   /**
    * Gets the user space.
-   *
+   * 
    * @return the user space
    */
   ForIsWidget getUserSpace();
@@ -212,15 +213,17 @@ public interface GSpaceArmor extends IsMaximizable {
 
   /**
    * Sets the back image.
-   *
-   * @param url the new back image
+   * 
+   * @param url
+   *          the new back image
    */
   void setBackImage(String url);
 
   /**
    * Sets the rtl.
-   *
-   * @param direction the new rtl
+   * 
+   * @param direction
+   *          the new rtl
    */
   void setRTL(Direction direction);
 }

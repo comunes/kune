@@ -31,7 +31,7 @@ import cc.kune.core.server.integration.IntegrationTestHelper;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentServiceSaveTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -41,8 +41,9 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
   /**
    * Inits the.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Before
   public void init() throws Exception {
@@ -53,8 +54,9 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
   /**
    * Test save and retrieve.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Ignore
   @Test
@@ -75,8 +77,9 @@ public class ContentServiceSaveTest extends ContentServiceIntegrationTest {
 
   /**
    * Test save and retrieve big.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Ignore
   @Test

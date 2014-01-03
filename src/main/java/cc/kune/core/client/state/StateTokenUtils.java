@@ -29,7 +29,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateTokenUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StateTokenUtils {
@@ -43,8 +43,9 @@ public class StateTokenUtils {
 
   /**
    * Gets the group space url.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the group space url
    */
   public static String getGroupSpaceUrl(final StateToken token) {
@@ -53,8 +54,9 @@ public class StateTokenUtils {
 
   /**
    * Gets the public space url.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the public space url
    */
   public static String getPublicSpaceUrl(final StateToken token) {

@@ -38,7 +38,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveClientSimpleAuthenticator.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveClientSimpleAuthenticator {
@@ -48,8 +48,9 @@ public class WaveClientSimpleAuthenticator {
 
   /**
    * Instantiates a new wave client simple authenticator.
-   *
-   * @param eventBus the event bus
+   * 
+   * @param eventBus
+   *          the event bus
    */
   @Inject
   public WaveClientSimpleAuthenticator(final EventBus eventBus) {
@@ -58,10 +59,13 @@ public class WaveClientSimpleAuthenticator {
 
   /**
    * Do login.
-   *
-   * @param userWithoutDomain the user without domain
-   * @param passwd the passwd
-   * @param callback the callback
+   * 
+   * @param userWithoutDomain
+   *          the user without domain
+   * @param passwd
+   *          the passwd
+   * @param callback
+   *          the callback
    */
   public void doLogin(final String userWithoutDomain, final String passwd,
       final AsyncCallback<Void> callback) {
@@ -94,8 +98,9 @@ public class WaveClientSimpleAuthenticator {
 
   /**
    * Do logout.
-   *
-   * @param callback the callback
+   * 
+   * @param callback
+   *          the callback
    */
   public void doLogout(final AsyncCallback<Void> callback) {
     // Original: <a href=\"/auth/signout?r=/\">"
@@ -122,7 +127,7 @@ public class WaveClientSimpleAuthenticator {
 
   /**
    * Gets the cookie token value.
-   *
+   * 
    * @return the cookie token value
    */
   public String getCookieTokenValue() {

@@ -35,7 +35,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class IsNotMeCondition.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -46,8 +46,9 @@ public class IsNotMeCondition implements GuiAddCondition {
 
   /**
    * Instantiates a new checks if is not me condition.
-   *
-   * @param session the session
+   * 
+   * @param session
+   *          the session
    */
   @Inject
   public IsNotMeCondition(final Session session) {
@@ -56,7 +57,7 @@ public class IsNotMeCondition implements GuiAddCondition {
 
   /**
    * Current name.
-   *
+   * 
    * @return the string
    */
   private String currentName() {
@@ -65,8 +66,9 @@ public class IsNotMeCondition implements GuiAddCondition {
 
   /**
    * Checks if is not this group.
-   *
-   * @param descr the descr
+   * 
+   * @param descr
+   *          the descr
    * @return true, if is not this group
    */
   private boolean isNotThisGroup(final GuiActionDescrip descr) {
@@ -77,8 +79,9 @@ public class IsNotMeCondition implements GuiAddCondition {
 
   /**
    * Checks if is not this person.
-   *
-   * @param descr the descr
+   * 
+   * @param descr
+   *          the descr
    * @return true, if is not this person
    */
   private boolean isNotThisPerson(final GuiActionDescrip descr) {
@@ -87,8 +90,12 @@ public class IsNotMeCondition implements GuiAddCondition {
     return !currentName.equals(targetName);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc
+   * .kune.common.client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {

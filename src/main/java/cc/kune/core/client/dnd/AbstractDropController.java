@@ -37,7 +37,7 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractDropController.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractDropController implements DropTarget {
@@ -174,8 +174,9 @@ public abstract class AbstractDropController implements DropTarget {
   /**
    * On group drop finished, is fired when all the widgets are dropped (at the
    * end).
-   *
-   * @param dropController the drop controller
+   * 
+   * @param dropController
+   *          the drop controller
    */
   public void onGroupDropFinished(final SimpleDropController dropController) {
 
@@ -193,10 +194,13 @@ public abstract class AbstractDropController implements DropTarget {
 
   /**
    * On preview allowed.
-   *
-   * @param widget the widget
-   * @param dropController the drop controller
-   * @throws VetoDragException the veto drag exception
+   * 
+   * @param widget
+   *          the widget
+   * @param dropController
+   *          the drop controller
+   * @throws VetoDragException
+   *           the veto drag exception
    */
   public void onPreviewAllowed(final Widget widget, final SimpleDropController dropController)
       throws VetoDragException {
@@ -205,8 +209,9 @@ public abstract class AbstractDropController implements DropTarget {
 
   /**
    * Register type to accept this kind of widgets to be dropped here.
-   *
-   * @param classType the class type
+   * 
+   * @param classType
+   *          the class type
    */
   public void registerType(final Class<?> classType) {
     acceptedTypes.add(classType);
@@ -215,8 +220,9 @@ public abstract class AbstractDropController implements DropTarget {
   /**
    * Sets the target (for instance a StateToken id, to perform operations),
    * because with the widget we don't have all the info.
-   *
-   * @param target the new target
+   * 
+   * @param target
+   *          the new target
    */
   public void setTarget(final Object target) {
     this.target = target;

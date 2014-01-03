@@ -38,34 +38,39 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetServiceHelper.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetServiceHelper {
 
   /** The eventbus. */
   private final EventBus eventbus;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The sn service provider. */
   private final Provider<SocialNetServiceAsync> snServiceProvider;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new social net service helper.
-   *
-   * @param stateManager the state manager
-   * @param session the session
-   * @param eventbus the eventbus
-   * @param i18n the i18n
-   * @param snServiceProvider the sn service provider
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param eventbus
+   *          the eventbus
+   * @param i18n
+   *          the i18n
+   * @param snServiceProvider
+   *          the sn service provider
    */
   @Inject
   public SocialNetServiceHelper(final StateManager stateManager, final Session session,
@@ -80,8 +85,9 @@ public class SocialNetServiceHelper {
 
   /**
    * Change to admin.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    */
   public void changeToAdmin(final String shortName) {
     NotifyUser.showProgress();
@@ -97,8 +103,9 @@ public class SocialNetServiceHelper {
 
   /**
    * Change to collab.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    */
   public void changeToCollab(final String shortName) {
     NotifyUser.showProgress();
@@ -114,8 +121,9 @@ public class SocialNetServiceHelper {
 
   /**
    * On success.
-   *
-   * @param result the result
+   * 
+   * @param result
+   *          the result
    */
   private void onSuccess(final SocialNetworkDataDTO result) {
     NotifyUser.hideProgress();
@@ -125,8 +133,9 @@ public class SocialNetServiceHelper {
 
   /**
    * Un join group.
-   *
-   * @param groupToken the group token
+   * 
+   * @param groupToken
+   *          the group token
    */
   public void unJoinGroup(final StateToken groupToken) {
     NotifyUser.askConfirmation(i18n.t("Leave this group"), i18n.t("Are you sure?"),

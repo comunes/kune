@@ -33,19 +33,24 @@ import cc.kune.selenium.SeleniumUtils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupSeleniumTests.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupSeleniumTests extends KuneSeleniumTest {
 
   /**
    * New group tests.
-   *
-   * @param shortname the shortname
-   * @param longname the longname
-   * @param description the description
-   * @param tags the tags
-   * @param groupType the group type
+   * 
+   * @param shortname
+   *          the shortname
+   * @param longname
+   *          the longname
+   * @param description
+   *          the description
+   * @param tags
+   *          the tags
+   * @param groupType
+   *          the group type
    */
   @Test(dataProvider = "newGroups")
   public void newGroupTests(final String shortname, final String longname, final String description,

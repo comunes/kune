@@ -47,19 +47,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TrashServerTool.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TrashServerTool extends AbstractServerTool {
 
   /**
    * Instantiates a new trash server tool.
-   *
-   * @param contentManager the content manager
-   * @param containerManager the container manager
-   * @param configurationManager the configuration manager
-   * @param i18n the i18n
-   * @param creationService the creation service
+   * 
+   * @param contentManager
+   *          the content manager
+   * @param containerManager
+   *          the container manager
+   * @param configurationManager
+   *          the configuration manager
+   * @param i18n
+   *          the i18n
+   * @param creationService
+   *          the creation service
    */
   @Inject
   public TrashServerTool(final ContentManager contentManager, final ContainerManager containerManager,
@@ -72,16 +77,20 @@ public class TrashServerTool extends AbstractServerTool {
 
   /**
    * Inits the group.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the group
    */
   public Group initGroup(final Group group) {
     return initGroup(null, group);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.tool.ServerTool#initGroup(cc.kune.domain.User, cc.kune.domain.Group, java.lang.Object[])
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.tool.ServerTool#initGroup(cc.kune.domain.User,
+   * cc.kune.domain.Group, java.lang.Object[])
    */
   @Override
   public Group initGroup(final User user, final Group group, final Object... vars) {
@@ -89,8 +98,12 @@ public class TrashServerTool extends AbstractServerTool {
     return group;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.AbstractServerTool#onCreateContent(cc.kune.domain.Content, cc.kune.domain.Container)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.AbstractServerTool#onCreateContent(cc.kune.domain.Content
+   * , cc.kune.domain.Container)
    */
   @Override
   public void onCreateContent(final Content content, final Container parent) {
@@ -98,8 +111,12 @@ public class TrashServerTool extends AbstractServerTool {
     super.onCreateContent(content, parent);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.AbstractServerTool#setContainerAcl(cc.kune.domain.Container)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.AbstractServerTool#setContainerAcl(cc.kune.domain.Container
+   * )
    */
   @Override
   protected void setContainerAcl(final Container container) {

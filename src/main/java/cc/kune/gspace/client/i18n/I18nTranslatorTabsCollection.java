@@ -28,10 +28,15 @@ import com.google.inject.Singleton;
 
 /**
  * The Class I18nTranslatorTabsCollection.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @SuppressWarnings("serial")
 @Singleton
 public class I18nTranslatorTabsCollection extends ProvidersCollection {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 }

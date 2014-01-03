@@ -29,22 +29,24 @@ import com.google.gwt.user.client.ui.IsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityHeader.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityHeader {
 
   /**
    * Adds the action.
-   *
-   * @param descriptor the descriptor
+   * 
+   * @param descriptor
+   *          the descriptor
    */
   void addAction(GuiActionDescrip descriptor);
 
   /**
    * Adds the widget.
-   *
-   * @param widget the widget
+   * 
+   * @param widget
+   *          the widget
    */
   void addWidget(IsWidget widget);
 

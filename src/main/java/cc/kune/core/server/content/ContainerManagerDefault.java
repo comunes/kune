@@ -53,7 +53,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContainerManagerDefault.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -62,16 +62,19 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 
   /** The container finder. */
   private final ContainerFinder containerFinder;
-  
+
   /** The content finder. */
   private final ContentFinder contentFinder;
 
   /**
    * Instantiates a new container manager default.
-   *
-   * @param provider the provider
-   * @param contentFinder the content finder
-   * @param containerFinder the container finder
+   * 
+   * @param provider
+   *          the provider
+   * @param contentFinder
+   *          the content finder
+   * @param containerFinder
+   *          the container finder
    */
   @Inject
   public ContainerManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
@@ -81,8 +84,13 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     this.containerFinder = containerFinder;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#createFolder(cc.kune.domain.Group, cc.kune.domain.Container, java.lang.String, cc.kune.domain.I18nLanguage, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.content.ContainerManager#createFolder(cc.kune.domain
+   * .Group, cc.kune.domain.Container, java.lang.String,
+   * cc.kune.domain.I18nLanguage, java.lang.String)
    */
   @Override
   public Container createFolder(final Group group, final Container parent, final String name,
@@ -97,8 +105,12 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     return child;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#createRootFolder(cc.kune.domain.Group, java.lang.String, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.content.ContainerManager#createRootFolder(cc.kune.domain
+   * .Group, java.lang.String, java.lang.String, java.lang.String)
    */
   @Override
   public Container createRootFolder(final Group group, final String toolName, final String name,
@@ -110,9 +122,11 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 
   /**
    * Duplicate code in ContentMD *.
-   *
-   * @param container the container
-   * @param title the title
+   * 
+   * @param container
+   *          the container
+   * @param title
+   *          the title
    * @return true, if successful
    */
   @Override
@@ -123,9 +137,11 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
 
   /**
    * Duplicate code in ContentMD *.
-   *
-   * @param container the container
-   * @param title the title
+   * 
+   * @param container
+   *          the container
+   * @param title
+   *          the title
    * @return the string
    */
   private String findInexistentName(final Container container, final String title) {
@@ -136,24 +152,36 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     return initialTitle;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#getTrashFolder(cc.kune.domain.Group)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.content.ContainerManager#getTrashFolder(cc.kune.domain
+   * .Group)
    */
   @Override
   public Container getTrashFolder(final Group group) {
     return containerFinder.findTypeId(group, TrashToolConstants.TYPE_ROOT);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#hasTrashFolder(cc.kune.domain.Group)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.content.ContainerManager#hasTrashFolder(cc.kune.domain
+   * .Group)
    */
   @Override
   public boolean hasTrashFolder(final Group group) {
     return containerFinder.findIfExistsTypeId(group, TrashToolConstants.TYPE_ROOT) > 0;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#moveContainer(cc.kune.domain.Container, cc.kune.domain.Container)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.content.ContainerManager#moveContainer(cc.kune.domain
+   * .Container, cc.kune.domain.Container)
    */
   @Override
   public Container moveContainer(final Container container, final Container newContainer) {
@@ -176,8 +204,12 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     return persist(container);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#purgeAll(cc.kune.domain.Container)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.content.ContainerManager#purgeAll(cc.kune.domain.Container
+   * )
    */
   @Override
   public Container purgeAll(final Container container) {
@@ -191,8 +223,12 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     return container;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#purgeContainer(cc.kune.domain.Container)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.content.ContainerManager#purgeContainer(cc.kune.domain
+   * .Container)
    */
   @Override
   public Container purgeContainer(final Container container) {
@@ -211,8 +247,12 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     return parent;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#renameFolder(cc.kune.domain.Group, cc.kune.domain.Container, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.content.ContainerManager#renameFolder(cc.kune.domain
+   * .Group, cc.kune.domain.Container, java.lang.String)
    */
   @Override
   public Container renameFolder(final Group group, final Container container, final String newName)
@@ -230,7 +270,9 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     return container;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.content.ContainerManager#search(java.lang.String)
    */
   @Override
@@ -238,8 +280,11 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
     return this.search(search, null, null);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#search(java.lang.String, java.lang.Integer, java.lang.Integer)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.content.ContainerManager#search(java.lang.String,
+   * java.lang.Integer, java.lang.Integer)
    */
   @Override
   public SearchResult<Container> search(final String search, final Integer firstResult,
@@ -249,8 +294,12 @@ public class ContainerManagerDefault extends DefaultManager<Container, Long> imp
         firstResult, maxResults);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContainerManager#setAccessList(cc.kune.domain.Container, cc.kune.domain.AccessLists)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.content.ContainerManager#setAccessList(cc.kune.domain
+   * .Container, cc.kune.domain.AccessLists)
    */
   @Override
   public void setAccessList(final Container container, final AccessLists accessList) {

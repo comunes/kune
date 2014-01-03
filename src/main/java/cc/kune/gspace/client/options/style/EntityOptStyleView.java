@@ -30,7 +30,7 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityOptStyleView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptStyleView extends EntityOptionsTabView, EntityOptionsUploaderView {
@@ -42,7 +42,7 @@ public interface EntityOptStyleView extends EntityOptionsTabView, EntityOptionsU
 
   /**
    * Gets the clear btn.
-   *
+   * 
    * @return the clear btn
    */
   HasClickHandlers getClearBtn();
@@ -54,16 +54,19 @@ public interface EntityOptStyleView extends EntityOptionsTabView, EntityOptionsU
 
   /**
    * Sets the back image.
-   *
-   * @param url the new back image
+   * 
+   * @param url
+   *          the new back image
    */
   public void setBackImage(final String url);
 
   /**
    * Sets the upload params.
-   *
-   * @param userHash the user hash
-   * @param token the token
+   * 
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
    */
   void setUploadParams(String userHash, String token);
 

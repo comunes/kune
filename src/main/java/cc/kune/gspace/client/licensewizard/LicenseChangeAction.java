@@ -40,34 +40,39 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseChangeAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseChangeAction {
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The group service. */
   private final Provider<GroupServiceAsync> groupService;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new license change action.
-   *
-   * @param groupService the group service
-   * @param session the session
-   * @param eventBus the event bus
-   * @param i18n the i18n
-   * @param stateManager the state manager
+   * 
+   * @param groupService
+   *          the group service
+   * @param session
+   *          the session
+   * @param eventBus
+   *          the event bus
+   * @param i18n
+   *          the i18n
+   * @param stateManager
+   *          the state manager
    */
   @Inject
   public LicenseChangeAction(final Provider<GroupServiceAsync> groupService, final Session session,
@@ -81,10 +86,13 @@ public class LicenseChangeAction {
 
   /**
    * Change license.
-   *
-   * @param token the token
-   * @param license the license
-   * @param callback the callback
+   * 
+   * @param token
+   *          the token
+   * @param license
+   *          the license
+   * @param callback
+   *          the callback
    */
   public void changeLicense(final StateToken token, final LicenseDTO license,
       final SimpleResponseCallback callback) {

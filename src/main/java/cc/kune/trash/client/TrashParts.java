@@ -35,20 +35,26 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TrashParts.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TrashParts {
 
   /**
    * Instantiates a new trash parts.
-   *
-   * @param session the session
-   * @param clientTool the client tool
-   * @param viewerSelector the viewer selector
-   * @param trashActions the trash actions
-   * @param contentViewer the content viewer
-   * @param folderViewer the folder viewer
+   * 
+   * @param session
+   *          the session
+   * @param clientTool
+   *          the client tool
+   * @param viewerSelector
+   *          the viewer selector
+   * @param trashActions
+   *          the trash actions
+   * @param contentViewer
+   *          the content viewer
+   * @param folderViewer
+   *          the folder viewer
    */
   @Inject
   public TrashParts(final SessionConstants session, final Provider<TrashClientTool> clientTool,

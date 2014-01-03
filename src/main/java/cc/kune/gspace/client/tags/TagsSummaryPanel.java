@@ -36,25 +36,27 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagsSummaryPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TagsSummaryPanel extends ViewImpl implements TagsSummaryView {
 
   /** The flow panel. */
   private final FlowPanel flowPanel;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The main panel. */
   private final FlowPanel mainPanel;
 
   /**
    * Instantiates a new tags summary panel.
-   *
-   * @param i18n the i18n
-   * @param ws the ws
+   * 
+   * @param i18n
+   *          the i18n
+   * @param ws
+   *          the ws
    */
   @Inject
   public TagsSummaryPanel(final I18nTranslationService i18n, final GSpaceArmor ws) {
@@ -74,8 +76,13 @@ public class TagsSummaryPanel extends ViewImpl implements TagsSummaryView {
     // ws.getEntityToolsSouth().add(mainPanel);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView#addTag(java.lang.String, java.lang.Long, java.lang.String, com.google.gwt.event.dom.client.ClickHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView#addTag(
+   * java.lang.String, java.lang.Long, java.lang.String,
+   * com.google.gwt.event.dom.client.ClickHandler)
    */
   @Override
   public void addTag(final String name, final Long count, final String style,
@@ -93,7 +100,9 @@ public class TagsSummaryPanel extends ViewImpl implements TagsSummaryView {
     flowPanel.add(label);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -101,16 +110,23 @@ public class TagsSummaryPanel extends ViewImpl implements TagsSummaryView {
     return mainPanel;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView#clear()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView#clear()
    */
   @Override
   public void clear() {
     flowPanel.clear();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView#setVisible(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView#setVisible
+   * (boolean)
    */
   @Override
   public void setVisible(final boolean visible) {

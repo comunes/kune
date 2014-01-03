@@ -64,7 +64,7 @@ import cc.kune.domain.utils.HasStateToken;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Container.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */

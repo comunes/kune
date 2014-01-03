@@ -27,15 +27,15 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Enum SocialNetworkVisibility.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum SocialNetworkVisibility implements IsSerializable {
-  
+
   /** The anyone. */
-  anyone, 
- /** The onlymembers. */
- onlymembers, 
- /** The onlyadmins. */
- onlyadmins
+  anyone,
+  /** The onlyadmins. */
+  onlyadmins,
+  /** The onlymembers. */
+  onlymembers
 }

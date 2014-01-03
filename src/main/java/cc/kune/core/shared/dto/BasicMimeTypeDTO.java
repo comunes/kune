@@ -27,25 +27,25 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BasicMimeTypeDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BasicMimeTypeDTO implements IsSerializable {
 
-  /** The Constant IMAGE. */
-  public static final String IMAGE = "image";
-  
-  /** The Constant VIDEO. */
-  public static final String VIDEO = "video";
-  
   /** The Constant AUDIO. */
   public static final String AUDIO = "audio";
 
-  /** The type. */
-  private String type;
-  
+  /** The Constant IMAGE. */
+  public static final String IMAGE = "image";
+
+  /** The Constant VIDEO. */
+  public static final String VIDEO = "video";
+
   /** The subtype. */
   private String subtype;
+
+  /** The type. */
+  private String type;
 
   /**
    * Instantiates a new basic mime type dto.
@@ -56,8 +56,9 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Instantiates a new basic mime type dto.
-   *
-   * @param mimetype the mimetype
+   * 
+   * @param mimetype
+   *          the mimetype
    */
   public BasicMimeTypeDTO(final String mimetype) {
     if (mimetype != null) {
@@ -71,9 +72,11 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Instantiates a new basic mime type dto.
-   *
-   * @param type the type
-   * @param subtype the subtype
+   * 
+   * @param type
+   *          the type
+   * @param subtype
+   *          the subtype
    */
   public BasicMimeTypeDTO(final String type, final String subtype) {
     this.type = type;
@@ -82,7 +85,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Gets the subtype.
-   *
+   * 
    * @return the subtype
    */
   public String getSubtype() {
@@ -91,7 +94,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public String getType() {
@@ -100,7 +103,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Checks if is avi.
-   *
+   * 
    * @return true, if is avi
    */
   public boolean isAvi() {
@@ -110,7 +113,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Checks if is flv.
-   *
+   * 
    * @return true, if is flv
    */
   public boolean isFlv() {
@@ -120,7 +123,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Duplicate code in BMT.
-   *
+   * 
    * @return true, if is image
    */
   public boolean isImage() {
@@ -129,7 +132,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Checks if is mp3.
-   *
+   * 
    * @return true, if is mp3
    */
   public boolean isMp3() {
@@ -139,7 +142,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Checks if is ogg.
-   *
+   * 
    * @return true, if is ogg
    */
   public boolean isOgg() {
@@ -149,7 +152,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Duplicate code in BMT.
-   *
+   * 
    * @return true, if is pdf
    */
   public boolean isPdf() {
@@ -158,7 +161,7 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Duplicate code in BMTDTO.
-   *
+   * 
    * @return true, if is text
    */
   public boolean isText() {
@@ -167,8 +170,9 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Sets the subtype.
-   *
-   * @param subtype the new subtype
+   * 
+   * @param subtype
+   *          the new subtype
    */
   public void setSubtype(final String subtype) {
     this.subtype = subtype;
@@ -176,14 +180,17 @@ public class BasicMimeTypeDTO implements IsSerializable {
 
   /**
    * Sets the type.
-   *
-   * @param type the new type
+   * 
+   * @param type
+   *          the new type
    */
   public void setType(final String type) {
     this.type = type;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

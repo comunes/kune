@@ -34,7 +34,7 @@ import com.google.gwt.user.client.ui.UIObject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GxtToolbarGui.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
@@ -51,15 +51,20 @@ public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
 
   /**
    * Instantiates a new gxt toolbar gui.
-   *
-   * @param descriptor the descriptor
+   * 
+   * @param descriptor
+   *          the descriptor
    */
   public GxtToolbarGui(final GuiActionDescrip descriptor) {
     super(descriptor);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.ParentWidget#add(com.google.gwt.user.client.ui.UIObject)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.ParentWidget#add(com.google.gwt.user.client
+   * .ui.UIObject)
    */
   @Override
   public void add(final UIObject uiObject) {
@@ -84,8 +89,12 @@ public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
   // return item;
   // }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.
+   * client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
@@ -97,51 +106,75 @@ public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
     return this;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int, com.google.gwt.user.client.ui.UIObject)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int,
+   * com.google.gwt.user.client.ui.UIObject)
    */
   @Override
   public void insert(final int position, final UIObject uiObject) {
     toolbar.insert((Component) uiObject, position);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
   protected void setEnabled(final boolean enabled) {
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
+   * .shared.res.KuneIcon)
    */
   @Override
   public void setIcon(final KuneIcon icon) {
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
+   * .lang.String)
    */
   @Override
   public void setIconBackground(final String back) {
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
+   * .String)
    */
   @Override
   protected void setIconStyle(final String style) {
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
+   * )
    */
   @Override
   public void setIconUrl(final String url) {
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
   @Override
   protected void setText(final String text) {

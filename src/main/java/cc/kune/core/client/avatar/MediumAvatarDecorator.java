@@ -24,7 +24,7 @@ package cc.kune.core.client.avatar;
 
 /**
  * The Interface MediumAvatarDecorator.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface MediumAvatarDecorator extends AvatarDecorator {

@@ -33,7 +33,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class IsNotParticipantOfCurrentStateCondition.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -44,16 +44,21 @@ public class IsNotParticipantOfCurrentStateCondition implements GuiAddCondition 
 
   /**
    * Instantiates a new checks if is not participant of current state condition.
-   *
-   * @param session the session
+   * 
+   * @param session
+   *          the session
    */
   @Inject
   public IsNotParticipantOfCurrentStateCondition(final Session session) {
     this.session = session;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc
+   * .kune.common.client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {

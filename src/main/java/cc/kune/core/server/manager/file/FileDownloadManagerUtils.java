@@ -41,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FileDownloadManagerUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FileDownloadManagerUtils {
@@ -51,10 +51,12 @@ public class FileDownloadManagerUtils {
 
   /**
    * Gets the inpu stream as string.
-   *
-   * @param iStream the i stream
+   * 
+   * @param iStream
+   *          the i stream
    * @return the inpu stream as string
-   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   public static String getInpuStreamAsString(final InputStream iStream) throws IOException {
     final StringWriter writer = new StringWriter();
@@ -64,9 +66,11 @@ public class FileDownloadManagerUtils {
 
   /**
    * Gets the input stream in resource bases.
-   *
-   * @param resourceBases the resource bases
-   * @param filename the filename
+   * 
+   * @param resourceBases
+   *          the resource bases
+   * @param filename
+   *          the filename
    * @return the input stream in resource bases
    */
   public static InputStream getInputStreamInResourceBases(final List<String> resourceBases,
@@ -85,11 +89,15 @@ public class FileDownloadManagerUtils {
 
   /**
    * Return file.
-   *
-   * @param in the in
-   * @param out the out
-   * @throws FileNotFoundException the file not found exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param in
+   *          the in
+   * @param out
+   *          the out
+   * @throws FileNotFoundException
+   *           the file not found exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   public static void returnFile(final InputStream in, final OutputStream out)
       throws FileNotFoundException, IOException {
@@ -108,11 +116,15 @@ public class FileDownloadManagerUtils {
 
   /**
    * Return file.
-   *
-   * @param filename the filename
-   * @param out the out
-   * @throws FileNotFoundException the file not found exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param filename
+   *          the filename
+   * @param out
+   *          the out
+   * @throws FileNotFoundException
+   *           the file not found exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   public static void returnFile(final String filename, final OutputStream out)
       throws FileNotFoundException, IOException {
@@ -133,9 +145,11 @@ public class FileDownloadManagerUtils {
 
   /**
    * Return not found404.
-   *
-   * @param resp the resp
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param resp
+   *          the resp
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   public static void returnNotFound404(final HttpServletResponse resp) throws IOException {
     resp.getWriter().println("Content not found");
@@ -144,9 +158,11 @@ public class FileDownloadManagerUtils {
 
   /**
    * Search file in resource bases.
-   *
-   * @param resourceBases the resource bases
-   * @param filename the filename
+   * 
+   * @param resourceBases
+   *          the resource bases
+   * @param filename
+   *          the filename
    * @return the file
    */
   public static File searchFileInResourceBases(final List<String> resourceBases, final String filename) {

@@ -32,29 +32,29 @@ import cc.kune.domain.License;
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateContainer.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StateContainer extends StateAbstract {
 
   /** The access lists. */
   private AccessLists accessLists;
-  
+
   /** The container. */
   private Container container;
-  
+
   /** The container rights. */
   private AccessRights containerRights;
-  
+
   /** The language. */
   private I18nLanguage language;
-  
+
   /** The license. */
   private License license;
-  
+
   /** The tag cloud result. */
   private TagCloudResult tagCloudResult;
-  
+
   /** The type id. */
   private String typeId;
 
@@ -66,7 +66,7 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Gets the access lists.
-   *
+   * 
    * @return the access lists
    */
   public AccessLists getAccessLists() {
@@ -75,7 +75,7 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Gets the container.
-   *
+   * 
    * @return the container
    */
   public Container getContainer() {
@@ -84,7 +84,7 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Gets the container rights.
-   *
+   * 
    * @return the container rights
    */
   public AccessRights getContainerRights() {
@@ -93,7 +93,7 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Gets the language.
-   *
+   * 
    * @return the language
    */
   public I18nLanguage getLanguage() {
@@ -102,7 +102,7 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Gets the license.
-   *
+   * 
    * @return the license
    */
   public License getLicense() {
@@ -111,7 +111,7 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Gets the tag cloud result.
-   *
+   * 
    * @return the tag cloud result
    */
   public TagCloudResult getTagCloudResult() {
@@ -120,7 +120,7 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Gets the type id.
-   *
+   * 
    * @return the type id
    */
   public String getTypeId() {
@@ -129,8 +129,9 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Checks if is type.
-   *
-   * @param type the type
+   * 
+   * @param type
+   *          the type
    * @return true, if is type
    */
   public boolean isType(final String type) {
@@ -139,8 +140,9 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Sets the access lists.
-   *
-   * @param accessLists the new access lists
+   * 
+   * @param accessLists
+   *          the new access lists
    */
   public void setAccessLists(final AccessLists accessLists) {
     this.accessLists = accessLists;
@@ -148,8 +150,9 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Sets the container.
-   *
-   * @param container the new container
+   * 
+   * @param container
+   *          the new container
    */
   public void setContainer(final Container container) {
     this.container = container;
@@ -157,8 +160,9 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Sets the container rights.
-   *
-   * @param containerRights the new container rights
+   * 
+   * @param containerRights
+   *          the new container rights
    */
   public void setContainerRights(final AccessRights containerRights) {
     this.containerRights = containerRights;
@@ -166,8 +170,9 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Sets the language.
-   *
-   * @param language the new language
+   * 
+   * @param language
+   *          the new language
    */
   public void setLanguage(final I18nLanguage language) {
     this.language = language;
@@ -175,8 +180,9 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Sets the license.
-   *
-   * @param license the new license
+   * 
+   * @param license
+   *          the new license
    */
   public void setLicense(final License license) {
     this.license = license;
@@ -184,8 +190,9 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Sets the tag cloud result.
-   *
-   * @param tagCloudResult the new tag cloud result
+   * 
+   * @param tagCloudResult
+   *          the new tag cloud result
    */
   public void setTagCloudResult(final TagCloudResult tagCloudResult) {
     this.tagCloudResult = tagCloudResult;
@@ -193,14 +200,17 @@ public class StateContainer extends StateAbstract {
 
   /**
    * Sets the type id.
-   *
-   * @param typeId the new type id
+   * 
+   * @param typeId
+   *          the new type id
    */
   public void setTypeId(final String typeId) {
     this.typeId = typeId;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.state.StateAbstract#toString()
    */
   @Override

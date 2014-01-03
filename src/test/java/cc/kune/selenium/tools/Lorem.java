@@ -25,7 +25,7 @@ package cc.kune.selenium.tools;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Lorem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class Lorem {

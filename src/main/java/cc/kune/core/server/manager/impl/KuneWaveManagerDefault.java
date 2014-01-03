@@ -56,7 +56,7 @@ import com.google.wave.api.Participants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneWaveManagerDefault.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -64,31 +64,37 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
 
   /** The group finder. */
   private final GroupFinder groupFinder;
-  
+
   /** The kune properties. */
   private final KuneProperties kuneProperties;
-  
+
   /** The participant utils. */
   private final ParticipantUtils participantUtils;
-  
+
   /** The user finder. */
   private final UserFinder userFinder;
-  
+
   /** The user manager. */
   private final UserManager userManager;
-  
+
   /** The wave service. */
   private final KuneWaveService waveService;
 
   /**
    * Instantiates a new kune wave manager default.
-   *
-   * @param waveService the wave service
-   * @param participantUtils the participant utils
-   * @param kuneProperties the kune properties
-   * @param groupFinder the group finder
-   * @param userFinder the user finder
-   * @param userManager the user manager
+   * 
+   * @param waveService
+   *          the wave service
+   * @param participantUtils
+   *          the participant utils
+   * @param kuneProperties
+   *          the kune properties
+   * @param groupFinder
+   *          the group finder
+   * @param userFinder
+   *          the user finder
+   * @param userManager
+   *          the user manager
    */
   @Inject
   public KuneWaveManagerDefault(final KuneWaveService waveService,
@@ -102,8 +108,12 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
     this.userManager = userManager;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.KuneWaveManager#sendFeedback(cc.kune.domain.User, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.KuneWaveManager#sendFeedback(cc.kune.domain
+   * .User, java.lang.String, java.lang.String)
    */
   @Override
   public String sendFeedback(final User user, final String title, final String body) {
@@ -117,16 +127,24 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
         KuneWaveService.DO_NOTHING_CBACK, partIds.toArray(new ParticipantId[0])));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.KuneWaveManager#writeTo(cc.kune.domain.User, java.lang.String, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.KuneWaveManager#writeTo(cc.kune.domain.User,
+   * java.lang.String, boolean)
    */
   @Override
   public String writeTo(final User user, final String groupName, final boolean onlyToAdmins) {
     return writeTo(user, groupName, onlyToAdmins, KuneWaveService.NO_TITLE, KuneWaveService.NO_MESSAGE);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.KuneWaveManager#writeTo(cc.kune.domain.User, java.lang.String, boolean, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.KuneWaveManager#writeTo(cc.kune.domain.User,
+   * java.lang.String, boolean, java.lang.String, java.lang.String)
    */
   @Override
   public String writeTo(final User user, final String groupName, final boolean onlyToAdmins,
@@ -152,8 +170,12 @@ public class KuneWaveManagerDefault implements KuneWaveManager {
         KuneWaveService.DO_NOTHING_CBACK, participantUtils.listFrom(toList)));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.KuneWaveManager#writeToParticipants(java.lang.String, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.KuneWaveManager#writeToParticipants(java.lang
+   * .String, java.lang.String, java.lang.String)
    */
   @Override
   public String writeToParticipants(final String author, final String from, final String waveId) {

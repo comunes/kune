@@ -30,41 +30,43 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AccessRightsChangedEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AccessRightsChangedEvent extends
     GwtEvent<AccessRightsChangedEvent.AccessRightsChangedHandler> {
 
   /**
-   * The Interface HasAccessRightsChangedHandlers.
-   *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  public interface HasAccessRightsChangedHandlers extends HasHandlers {
-    
-    /**
-     * Adds the access rights changed handler.
-     *
-     * @param handler the handler
-     * @return the handler registration
-     */
-    HandlerRegistration addAccessRightsChangedHandler(AccessRightsChangedHandler handler);
-  }
-
-  /**
    * The Interface AccessRightsChangedHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface AccessRightsChangedHandler extends EventHandler {
-    
+
     /**
      * On access rights changed.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onAccessRightsChanged(AccessRightsChangedEvent event);
+  }
+
+  /**
+   * The Interface HasAccessRightsChangedHandlers.
+   * 
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
+  public interface HasAccessRightsChangedHandlers extends HasHandlers {
+
+    /**
+     * Adds the access rights changed handler.
+     * 
+     * @param handler
+     *          the handler
+     * @return the handler registration
+     */
+    HandlerRegistration addAccessRightsChangedHandler(AccessRightsChangedHandler handler);
   }
 
   /** The Constant TYPE. */
@@ -72,43 +74,34 @@ public class AccessRightsChangedEvent extends
 
   /**
    * Fire.
-   *
-   * @param source the source
-   * @param previousRights the previous rights
-   * @param currentRights the current rights
+   * 
+   * @param source
+   *          the source
+   * @param previousRights
+   *          the previous rights
+   * @param currentRights
+   *          the current rights
    */
-  public static void fire(HasHandlers source,
-      cc.kune.core.shared.domain.utils.AccessRights previousRights,
-      cc.kune.core.shared.domain.utils.AccessRights currentRights) {
+  public static void fire(final HasHandlers source,
+      final cc.kune.core.shared.domain.utils.AccessRights previousRights,
+      final cc.kune.core.shared.domain.utils.AccessRights currentRights) {
     source.fireEvent(new AccessRightsChangedEvent(previousRights, currentRights));
   }
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<AccessRightsChangedHandler> getType() {
     return TYPE;
   }
 
-  /** The previous rights. */
-  cc.kune.core.shared.domain.utils.AccessRights previousRights;
-  
   /** The current rights. */
   cc.kune.core.shared.domain.utils.AccessRights currentRights;
 
-  /**
-   * Instantiates a new access rights changed event.
-   *
-   * @param previousRights the previous rights
-   * @param currentRights the current rights
-   */
-  public AccessRightsChangedEvent(cc.kune.core.shared.domain.utils.AccessRights previousRights,
-      cc.kune.core.shared.domain.utils.AccessRights currentRights) {
-    this.previousRights = previousRights;
-    this.currentRights = currentRights;
-  }
+  /** The previous rights. */
+  cc.kune.core.shared.domain.utils.AccessRights previousRights;
 
   /**
    * Instantiates a new access rights changed event.
@@ -117,7 +110,69 @@ public class AccessRightsChangedEvent extends
     // Possibly for serialization.
   }
 
-  /* (non-Javadoc)
+  /**
+   * Instantiates a new access rights changed event.
+   * 
+   * @param previousRights
+   *          the previous rights
+   * @param currentRights
+   *          the current rights
+   */
+  public AccessRightsChangedEvent(final cc.kune.core.shared.domain.utils.AccessRights previousRights,
+      final cc.kune.core.shared.domain.utils.AccessRights currentRights) {
+    this.previousRights = previousRights;
+    this.currentRights = currentRights;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
+   */
+  @Override
+  protected void dispatch(final AccessRightsChangedHandler handler) {
+    handler.onAccessRightsChanged(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final AccessRightsChangedEvent other = (AccessRightsChangedEvent) obj;
+    if (previousRights == null) {
+      if (other.previousRights != null) {
+        return false;
+      }
+    } else if (!previousRights.equals(other.previousRights)) {
+      return false;
+    }
+    if (currentRights == null) {
+      if (other.currentRights != null) {
+        return false;
+      }
+    } else if (!currentRights.equals(other.currentRights)) {
+      return false;
+    }
+    return true;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -126,57 +181,26 @@ public class AccessRightsChangedEvent extends
   }
 
   /**
-   * Gets the previous rights.
-   *
-   * @return the previous rights
-   */
-  public cc.kune.core.shared.domain.utils.AccessRights getPreviousRights() {
-    return previousRights;
-  }
-
-  /**
    * Gets the current rights.
-   *
+   * 
    * @return the current rights
    */
   public cc.kune.core.shared.domain.utils.AccessRights getCurrentRights() {
     return currentRights;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /**
+   * Gets the previous rights.
+   * 
+   * @return the previous rights
    */
-  @Override
-  protected void dispatch(AccessRightsChangedHandler handler) {
-    handler.onAccessRightsChanged(this);
+  public cc.kune.core.shared.domain.utils.AccessRights getPreviousRights() {
+    return previousRights;
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    AccessRightsChangedEvent other = (AccessRightsChangedEvent) obj;
-    if (previousRights == null) {
-      if (other.previousRights != null)
-        return false;
-    } else if (!previousRights.equals(other.previousRights))
-      return false;
-    if (currentRights == null) {
-      if (other.currentRights != null)
-        return false;
-    } else if (!currentRights.equals(other.currentRights))
-      return false;
-    return true;
-  }
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -187,7 +211,9 @@ public class AccessRightsChangedEvent extends
     return hashCode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

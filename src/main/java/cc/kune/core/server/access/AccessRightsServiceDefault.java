@@ -39,7 +39,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AccessRightsServiceDefault.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -49,10 +49,13 @@ public class AccessRightsServiceDefault implements AccessRightsService {
 
   /**
    * Can access.
-   *
-   * @param searchedGroup the searched group
-   * @param lists the lists
-   * @param rol the rol
+   * 
+   * @param searchedGroup
+   *          the searched group
+   * @param lists
+   *          the lists
+   * @param rol
+   *          the rol
    * @return true, if successful
    */
   private boolean canAccess(final Group searchedGroup, final AccessLists lists, final AccessRol rol) {
@@ -65,11 +68,15 @@ public class AccessRightsServiceDefault implements AccessRightsService {
    */
   /**
    * Depth first search.
-   *
-   * @param visited the visited
-   * @param searchedGroup the searched group
-   * @param list the list
-   * @param rol the rol
+   * 
+   * @param visited
+   *          the visited
+   * @param searchedGroup
+   *          the searched group
+   * @param list
+   *          the list
+   * @param rol
+   *          the rol
    * @return true, if successful
    */
   private boolean depthFirstSearch(final HashSet<Group> visited, final Group searchedGroup,
@@ -90,9 +97,11 @@ public class AccessRightsServiceDefault implements AccessRightsService {
 
   /**
    * Gets the.
-   *
-   * @param userGroup the user group
-   * @param accessList the access list
+   * 
+   * @param userGroup
+   *          the user group
+   * @param accessList
+   *          the access list
    * @return the access rights
    */
   public AccessRights get(final Group userGroup, final AccessLists accessList) {
@@ -112,8 +121,12 @@ public class AccessRightsServiceDefault implements AccessRightsService {
     return new AccessRights(isAdministrable, isEditable, isVisible);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.access.AccessRightsService#get(cc.kune.domain.User, cc.kune.domain.AccessLists)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.access.AccessRightsService#get(cc.kune.domain.User,
+   * cc.kune.domain.AccessLists)
    */
   @Override
   public AccessRights get(final User user, final AccessLists lists) {

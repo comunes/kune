@@ -34,14 +34,14 @@ import cc.kune.core.server.utils.AbsoluteFileDownloadUtils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NotificationHtmlHelperTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NotificationHtmlHelperTest {
-  
+
   /** The Constant GROUP_NAME. */
   private static final String GROUP_NAME = "groupShortName";
-  
+
   /** The Constant MESSAGE. */
   private static final String MESSAGE = "some message";
 

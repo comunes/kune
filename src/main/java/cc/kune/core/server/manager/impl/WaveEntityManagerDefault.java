@@ -60,29 +60,29 @@ public class WaveEntityManagerDefault extends DefaultManager<WaveEntity, WaveRef
 
   @Override
   @KuneTransactional
-  public WaveEntity find(final String domain, final String waveId, final String waveletId) {
-    return finder.find(domain, waveId, waveletId);
-  }
-
-  @Override
-  @KuneTransactional
-  public void setLastModifiedTime(final WaveEntity wave, final long lastModifiedTime) {
-    wave.setLastModifiedTime(lastModifiedTime);
-    persist(wave);
-  }
-
-  @Override
-  @KuneTransactional
-  public void add(WaveEntity wave, ParticipantEntity participant) {
+  public void add(final WaveEntity wave, final ParticipantEntity participant) {
     wave.add(participant);
     persist(wave);
   }
 
   @Override
   @KuneTransactional
-  public void remove(WaveEntity wave, ParticipantEntity participant) {
+  public WaveEntity find(final String domain, final String waveId, final String waveletId) {
+    return finder.find(domain, waveId, waveletId);
+  }
+
+  @Override
+  @KuneTransactional
+  public void remove(final WaveEntity wave, final ParticipantEntity participant) {
     // TODO Auto-generated method stub
     wave.remove(participant);
+    persist(wave);
+  }
+
+  @Override
+  @KuneTransactional
+  public void setLastModifiedTime(final WaveEntity wave, final long lastModifiedTime) {
+    wave.setLastModifiedTime(lastModifiedTime);
     persist(wave);
   }
 

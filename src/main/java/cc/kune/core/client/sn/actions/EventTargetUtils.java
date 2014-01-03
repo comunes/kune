@@ -30,15 +30,16 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventTargetUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EventTargetUtils {
 
   /**
    * Gets the target token.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    * @return the target token
    */
   public static StateToken getTargetToken(final ActionEvent event) {
@@ -54,8 +55,9 @@ public class EventTargetUtils {
 
   /**
    * Checks if is person.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    * @return true, if is person
    */
   public static boolean isPerson(final ActionEvent event) {

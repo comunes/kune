@@ -30,12 +30,14 @@ import cc.kune.tasks.client.actions.TasksNewMenu;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TasksGinModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TasksGinModule extends ExtendedGinModule {
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override

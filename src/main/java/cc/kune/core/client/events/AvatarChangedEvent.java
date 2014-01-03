@@ -30,37 +30,39 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AvatarChangedEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AvatarChangedEvent extends GwtEvent<AvatarChangedEvent.AvatarChangedHandler> {
 
   /**
    * The Interface AvatarChangedHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface AvatarChangedHandler extends EventHandler {
-    
+
     /**
      * On avatar changed.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onAvatarChanged(AvatarChangedEvent event);
   }
 
   /**
    * The Interface HasAvatarChangedHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasAvatarChangedHandlers extends HasHandlers {
-    
+
     /**
      * Adds the avatar changed handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addAvatarChangedHandler(AvatarChangedHandler handler);
@@ -71,9 +73,11 @@ public class AvatarChangedEvent extends GwtEvent<AvatarChangedEvent.AvatarChange
 
   /**
    * Fire.
-   *
-   * @param source the source
-   * @param photoBinary the photo binary
+   * 
+   * @param source
+   *          the source
+   * @param photoBinary
+   *          the photo binary
    */
   public static void fire(final HasHandlers source, final java.lang.String photoBinary) {
     source.fireEvent(new AvatarChangedEvent(photoBinary));
@@ -81,7 +85,7 @@ public class AvatarChangedEvent extends GwtEvent<AvatarChangedEvent.AvatarChange
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<AvatarChangedHandler> getType() {
@@ -100,22 +104,29 @@ public class AvatarChangedEvent extends GwtEvent<AvatarChangedEvent.AvatarChange
 
   /**
    * Instantiates a new avatar changed event.
-   *
-   * @param photoBinary the photo binary
+   * 
+   * @param photoBinary
+   *          the photo binary
    */
   public AvatarChangedEvent(final java.lang.String photoBinary) {
     this.photoBinary = photoBinary;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final AvatarChangedHandler handler) {
     handler.onAvatarChanged(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -140,7 +151,9 @@ public class AvatarChangedEvent extends GwtEvent<AvatarChangedEvent.AvatarChange
     return true;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -150,14 +163,16 @@ public class AvatarChangedEvent extends GwtEvent<AvatarChangedEvent.AvatarChange
 
   /**
    * Gets the photo binary.
-   *
+   * 
    * @return the photo binary
    */
   public java.lang.String getPhotoBinary() {
     return photoBinary;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -167,7 +182,9 @@ public class AvatarChangedEvent extends GwtEvent<AvatarChangedEvent.AvatarChange
     return hashCode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

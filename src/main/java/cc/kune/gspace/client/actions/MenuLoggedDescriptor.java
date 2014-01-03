@@ -30,15 +30,16 @@ import cc.kune.core.client.state.AccessRightsClientManager;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MenuLoggedDescriptor.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MenuLoggedDescriptor extends MenuDescriptor {
-  
+
   /**
    * Instantiates a new menu logged descriptor.
-   *
-   * @param rightsManager the rights manager
+   * 
+   * @param rightsManager
+   *          the rights manager
    */
   public MenuLoggedDescriptor(final AccessRightsClientManager rightsManager) {
     rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {

@@ -33,29 +33,32 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceBackgroundManagerImpl.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
 
   /** The download utils. */
   private final ClientFileDownloadUtils downloadUtils;
-  
+
   /** The g space armor. */
   private final GSpaceArmor gSpaceArmor;
-  
+
   /** The no cache. */
   private boolean noCache;
-  
+
   /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new g space background manager impl.
-   *
-   * @param downloadUtils the download utils
-   * @param gSpaceArmor the g space armor
-   * @param session the session
+   * 
+   * @param downloadUtils
+   *          the download utils
+   * @param gSpaceArmor
+   *          the g space armor
+   * @param session
+   *          the session
    */
   @Inject
   public GSpaceBackgroundManagerImpl(final ClientFileDownloadUtils downloadUtils,
@@ -66,16 +69,23 @@ public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
     noCache = false;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.style.GSpaceBackgroundManager#clearBackgroundImage()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.style.GSpaceBackgroundManager#clearBackgroundImage()
    */
   @Override
   public void clearBackgroundImage() {
     gSpaceArmor.clearBackImage();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.style.GSpaceBackgroundManager#restoreBackgroundImage()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.style.GSpaceBackgroundManager#restoreBackgroundImage
+   * ()
    */
   @Override
   public void restoreBackgroundImage() {
@@ -87,8 +97,11 @@ public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.style.GSpaceBackgroundManager#setBackgroundImage()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.style.GSpaceBackgroundManager#setBackgroundImage()
    */
   @Override
   public void setBackgroundImage() {
@@ -99,8 +112,11 @@ public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.style.GSpaceBackgroundManager#setNoCache(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.style.GSpaceBackgroundManager#setNoCache(boolean)
    */
   @Override
   public void setNoCache(final boolean noCache) {

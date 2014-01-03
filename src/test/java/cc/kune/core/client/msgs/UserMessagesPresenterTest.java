@@ -35,38 +35,38 @@ import cc.kune.common.client.notify.NotifyLevel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserMessagesPresenterTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserMessagesPresenterTest {
 
   /** The Constant ID_1. */
   private static final String ID_1 = "id1";
-  
+
   /** The Constant ID_2. */
   private static final String ID_2 = "id2";
-  
+
   /** The Constant MESSAGE_1. */
   private static final String MESSAGE_1 = "message 1";
-  
+
   /** The Constant MESSAGE_2. */
   private static final String MESSAGE_2 = "message 2";
-  
+
   /** The Constant TITLE_1. */
   private static final String TITLE_1 = "title 1";
-  
+
   /** The Constant TITLE_2. */
   private static final String TITLE_2 = "title 2";
-  
+
   /** The close callback. */
   private CloseCallback closeCallback;
-  
+
   /** The msg. */
   private UserMessage msg;
-  
+
   /** The presenter. */
   private UserMessagesPresenter presenter;
-  
+
   /** The view. */
   private UserMessagesView view;
 

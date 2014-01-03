@@ -31,7 +31,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 /**
  * The Class UserBuddiesPresenceDataDTO is used to get presence info of our
  * buddies.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserBuddiesPresenceDataDTO implements IsSerializable {
@@ -51,8 +51,9 @@ public class UserBuddiesPresenceDataDTO implements IsSerializable {
 
   /**
    * Gets the last connected time of a username.
-   *
-   * @param username the username
+   * 
+   * @param username
+   *          the username
    * @return the last connnected date
    */
   public Long get(final String username) {
@@ -73,8 +74,9 @@ public class UserBuddiesPresenceDataDTO implements IsSerializable {
 
   /**
    * Sets the map.
-   *
-   * @param map the map
+   * 
+   * @param map
+   *          the map
    */
   public void setMap(final Map<String, Long> map) {
     this.map = map;
@@ -82,7 +84,7 @@ public class UserBuddiesPresenceDataDTO implements IsSerializable {
 
   /**
    * Size.
-   *
+   * 
    * @return the int
    */
   public int size() {

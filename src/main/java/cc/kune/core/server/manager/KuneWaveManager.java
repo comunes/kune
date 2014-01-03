@@ -27,49 +27,63 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface KuneWaveManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface KuneWaveManager {
 
   /**
    * Send feedback.
-   *
-   * @param user the user
-   * @param title the title
-   * @param body the body
+   * 
+   * @param user
+   *          the user
+   * @param title
+   *          the title
+   * @param body
+   *          the body
    * @return the string
    */
   String sendFeedback(User user, String title, String body);
 
   /**
    * Write to.
-   *
-   * @param user the user
-   * @param groupName the group name
-   * @param onlyToAdmins the only to admins
+   * 
+   * @param user
+   *          the user
+   * @param groupName
+   *          the group name
+   * @param onlyToAdmins
+   *          the only to admins
    * @return the string
    */
   String writeTo(User user, String groupName, boolean onlyToAdmins);
 
   /**
    * Write to.
-   *
-   * @param user the user
-   * @param groupName the group name
-   * @param onlyToAdmins the only to admins
-   * @param title the title
-   * @param content the content
+   * 
+   * @param user
+   *          the user
+   * @param groupName
+   *          the group name
+   * @param onlyToAdmins
+   *          the only to admins
+   * @param title
+   *          the title
+   * @param content
+   *          the content
    * @return the string
    */
   String writeTo(User user, String groupName, boolean onlyToAdmins, String title, String content);
 
   /**
    * Write to participants.
-   *
-   * @param author the author
-   * @param from the from
-   * @param waveId the wave id
+   * 
+   * @param author
+   *          the author
+   * @param from
+   *          the from
+   * @param waveId
+   *          the wave id
    * @return the string
    */
   String writeToParticipants(String author, String from, String waveId);

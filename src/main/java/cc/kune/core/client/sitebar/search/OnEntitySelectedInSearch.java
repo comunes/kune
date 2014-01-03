@@ -25,15 +25,16 @@ package cc.kune.core.client.sitebar.search;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface OnEntitySelectedInSearch.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface OnEntitySelectedInSearch {
 
   /**
    * On seleted.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    */
   void onSeleted(String shortName);
 

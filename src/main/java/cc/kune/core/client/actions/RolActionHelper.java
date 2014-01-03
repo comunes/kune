@@ -60,6 +60,7 @@ public class RolActionHelper {
 
   /**
    * Must add.
+   * 
    * @param rolRequired
    *          the minimun rol required to add a action
    * @param higherRol

@@ -31,11 +31,16 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractSNMembersActionsRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @SuppressWarnings("serial")
 public abstract class AbstractSNMembersActionsRegistry extends ArrayList<Provider<MenuItemDescriptor>> {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /**
    * Instantiates a new abstract sn members actions registry.

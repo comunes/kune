@@ -37,14 +37,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PurgeContainerMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PurgeContainerMenuItem extends MenuItemDescriptor {
-  
+
   /**
    * The Class PurgeContainerAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class PurgeContainerAction extends RolAction {
@@ -54,9 +54,11 @@ public class PurgeContainerMenuItem extends MenuItemDescriptor {
 
     /**
      * Instantiates a new purge container action.
-     *
-     * @param contentService the content service
-     * @param res the res
+     * 
+     * @param contentService
+     *          the content service
+     * @param res
+     *          the res
      */
     @Inject
     public PurgeContainerAction(final ContentServiceHelper contentService, final IconicResources res) {
@@ -65,8 +67,12 @@ public class PurgeContainerMenuItem extends MenuItemDescriptor {
       this.withText(I18n.t("Delete permanently")).withIcon(res.trashGrey());
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -77,10 +83,13 @@ public class PurgeContainerMenuItem extends MenuItemDescriptor {
 
   /**
    * Instantiates a new purge container menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
    */
   @Inject
   public PurgeContainerMenuItem(final I18nTranslationService i18n, final PurgeContainerAction action,

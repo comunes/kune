@@ -42,37 +42,42 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptLogoPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLogo {
-  
+
   /** The entity options. */
   private final EntityOptions entityOptions;
-  
+
   /** The event bus. */
   protected final EventBus eventBus;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   protected final Session session;
-  
+
   /** The user service. */
   protected final Provider<UserServiceAsync> userService;
-  
+
   /** The view. */
   protected EntityOptLogoView view;
 
   /**
    * Instantiates a new entity opt logo presenter.
-   *
-   * @param eventBus the event bus
-   * @param session the session
-   * @param entityOptions the entity options
-   * @param userService the user service
-   * @param i18n the i18n
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
+   * @param entityOptions
+   *          the entity options
+   * @param userService
+   *          the user service
+   * @param i18n
+   *          the i18n
    */
   public EntityOptLogoPresenter(final EventBus eventBus, final Session session,
       final EntityOptions entityOptions, final Provider<UserServiceAsync> userService,
@@ -86,7 +91,7 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   /**
    * Gets the view.
-   *
+   * 
    * @return the view
    */
   public IsWidget getView() {
@@ -95,8 +100,9 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   /**
    * Inits the.
-   *
-   * @param view the view
+   * 
+   * @param view
+   *          the view
    */
   protected void init(final EntityOptLogoView view) {
     this.view = view;
@@ -119,8 +125,9 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   /**
    * On submit complete.
-   *
-   * @param uploader the uploader
+   * 
+   * @param uploader
+   *          the uploader
    */
   public void onSubmitComplete(final IUploader uploader) {
     final String response = uploader.getServerInfo().message;
@@ -137,8 +144,9 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   /**
    * On submit failed.
-   *
-   * @param responseText the response text
+   * 
+   * @param responseText
+   *          the response text
    */
   public void onSubmitFailed(final String responseText) {
     NotifyUser.error(i18n.t("Error setting the logo"));

@@ -34,19 +34,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AdminsGroupSNDropController.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AdminsGroupSNDropController extends GroupSNDropController {
 
   /**
    * Instantiates a new admins group sn drop controller.
-   *
-   * @param dragController the drag controller
-   * @param contentService the content service
-   * @param session the session
-   * @param i18n the i18n
-   * @param sNClientUtils the s n client utils
+   * 
+   * @param dragController
+   *          the drag controller
+   * @param contentService
+   *          the content service
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param sNClientUtils
+   *          the s n client utils
    */
   @Inject
   public AdminsGroupSNDropController(final KuneDragController dragController,

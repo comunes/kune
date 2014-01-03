@@ -50,7 +50,7 @@ import com.google.gwt.user.client.ui.AbstractImagePrototype;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractGxtMenuItemGui.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
@@ -67,8 +67,9 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
 
   /**
    * Instantiates a new abstract gxt menu item gui.
-   *
-   * @param descriptor the descriptor
+   * 
+   * @param descriptor
+   *          the descriptor
    */
   public AbstractGxtMenuItemGui(final MenuItemDescriptor descriptor) {
     super(descriptor);
@@ -77,9 +78,11 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
 
   /**
    * Conf check listener.
-   *
-   * @param descriptor the descriptor
-   * @param checkItem the check item
+   * 
+   * @param descriptor
+   *          the descriptor
+   * @param checkItem
+   *          the check item
    */
   private void confCheckListener(final MenuItemDescriptor descriptor, final CheckMenuItem checkItem) {
     descriptor.addPropertyChangeListener(new PropertyChangeListener() {
@@ -92,8 +95,12 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common
+   * .client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
@@ -133,8 +140,9 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
 
   /**
    * Creates the check item.
-   *
-   * @param descriptor the descriptor
+   * 
+   * @param descriptor
+   *          the descriptor
    * @return the check menu item
    */
   private CheckMenuItem createCheckItem(final MenuItemDescriptor descriptor) {
@@ -145,9 +153,11 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
 
   /**
    * Creates the short cut.
-   *
-   * @param key the key
-   * @param style the style
+   * 
+   * @param key
+   *          the key
+   * @param style
+   *          the style
    * @return the string
    */
   private String createShortCut(final KeyStroke key, final String style) {
@@ -160,14 +170,16 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
 
   /**
    * Gets the item.
-   *
+   * 
    * @return the item
    */
   public MenuItem getItem() {
     return item;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -175,48 +187,71 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
     item.setVisible(enabled);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
+   * .shared.res.KuneIcon)
    */
   @Override
   public void setIcon(final KuneIcon icon) {
     // TODO Auto-generated method stub
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
+   * .lang.String)
    */
   @Override
   public void setIconBackground(final String back) {
     throw new NotImplementedException();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google.gwt.resources.client.ImageResource)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
+   * .gwt.resources.client.ImageResource)
    */
   @Override
   public void setIconResource(final ImageResource icon) {
     item.setIcon(AbstractImagePrototype.create(icon));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
+   * .String)
    */
   @Override
   protected void setIconStyle(final String style) {
     item.setIconStyle(style);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
+   * )
    */
   @Override
   public void setIconUrl(final String url) {
     throw new NotImplementedException();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
   @Override
   protected void setText(final String text) {
@@ -231,7 +266,9 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
@@ -239,7 +276,9 @@ public abstract class AbstractGxtMenuItemGui extends AbstractChildGuiItem {
     item.setVisible(visible);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
    */
   @Override

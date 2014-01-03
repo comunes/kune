@@ -41,17 +41,17 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AcceptJoinGroupAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AcceptJoinGroupAction extends AbstractExtendedAction {
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The sn service provider. */
   private final Provider<SocialNetServiceAsync> snServiceProvider;
 
@@ -60,12 +60,17 @@ public class AcceptJoinGroupAction extends AbstractExtendedAction {
 
   /**
    * Instantiates a new accept join group action.
-   *
-   * @param stateManager the state manager
-   * @param session the session
-   * @param i18n the i18n
-   * @param res the res
-   * @param snServiceProvider the sn service provider
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param snServiceProvider
+   *          the sn service provider
    */
   @Inject
   public AcceptJoinGroupAction(final StateManager stateManager, final Session session,
@@ -79,8 +84,12 @@ public class AcceptJoinGroupAction extends AbstractExtendedAction {
     putValue(Action.SMALL_ICON, res.add());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

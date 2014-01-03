@@ -32,7 +32,7 @@ import com.calclab.hablar.search.client.SearchMessages;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nHelperTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nHelperTest {

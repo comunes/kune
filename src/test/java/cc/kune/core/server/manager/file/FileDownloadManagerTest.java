@@ -46,7 +46,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FileDownloadManagerTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FileDownloadManagerTest {
@@ -63,7 +63,7 @@ public class FileDownloadManagerTest {
 
   /** The filename. */
   private String filename;
-  
+
   /** The file utils. */
   private FileUtils fileUtils;
 
@@ -82,10 +82,13 @@ public class FileDownloadManagerTest {
 
   /**
    * Contentwhen.
-   *
-   * @param mimeType the mime type
-   * @param filename the filename
-   * @param extension the extension
+   * 
+   * @param mimeType
+   *          the mime type
+   * @param filename
+   *          the filename
+   * @param extension
+   *          the extension
    */
   private void contentwhen(final BasicMimeType mimeType, final String filename, final String extension) {
     Mockito.when(content.getMimeType()).thenReturn(mimeType);
@@ -94,8 +97,9 @@ public class FileDownloadManagerTest {
 
   /**
    * Creates the.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Before
   public void create() throws IOException {
@@ -117,8 +121,9 @@ public class FileDownloadManagerTest {
 
   /**
    * File with no extension download test.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Ignore
   public void fileWithNoExtensionDownloadTest() throws Exception {
@@ -127,8 +132,9 @@ public class FileDownloadManagerTest {
 
   /**
    * Test jpg thumb download.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testJpgThumbDownload() throws IOException {
@@ -148,8 +154,9 @@ public class FileDownloadManagerTest {
 
   /**
    * Test pdf download1.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testPdfDownload1() throws IOException {
@@ -167,8 +174,9 @@ public class FileDownloadManagerTest {
 
   /**
    * Test pdf download2.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testPdfDownload2() throws IOException {
@@ -188,8 +196,9 @@ public class FileDownloadManagerTest {
 
   /**
    * Test pdf download3.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testPdfDownload3() throws IOException {
@@ -209,8 +218,9 @@ public class FileDownloadManagerTest {
 
   /**
    * Test pdf download4.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testPdfDownload4() throws IOException {
@@ -230,8 +240,9 @@ public class FileDownloadManagerTest {
 
   /**
    * Test pdf download null mime.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testPdfDownloadNullMime() throws IOException {
@@ -249,8 +260,9 @@ public class FileDownloadManagerTest {
 
   /**
    * Test png download1.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testPngDownload1() throws IOException {
@@ -268,8 +280,9 @@ public class FileDownloadManagerTest {
 
   /**
    * Test png download2.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void testPngDownload2() throws IOException {

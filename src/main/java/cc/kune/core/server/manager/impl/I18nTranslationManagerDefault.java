@@ -46,7 +46,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nTranslationManagerDefault.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -55,19 +55,22 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
   /** The finder. */
   private final I18nTranslationFinder finder;
-  
+
   /** The lang cache. */
   private final ConcurrentHashMap<String, HashMap<String, String>> langCache;
-  
+
   /** The language manager. */
   private final I18nLanguageManager languageManager;
 
   /**
    * Instantiates a new i18n translation manager default.
-   *
-   * @param provider the provider
-   * @param finder the finder
-   * @param languageManager the language manager
+   * 
+   * @param provider
+   *          the provider
+   * @param finder
+   *          the finder
+   * @param languageManager
+   *          the language manager
    */
   @Inject
   public I18nTranslationManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
@@ -80,7 +83,7 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
   /**
    * Def lang.
-   *
+   * 
    * @return the i18n language
    */
   private I18nLanguage defLang() {
@@ -89,16 +92,21 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
   /**
    * Gets the language.
-   *
-   * @param languageId the language id
+   * 
+   * @param languageId
+   *          the language id
    * @return the language
    */
   private I18nLanguage getLanguage(final String languageId) {
     return languageManager.findByCode(languageId);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nTranslationManager#getLexicon(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.I18nTranslationManager#getLexicon(java.lang
+   * .String)
    */
   @Override
   public HashMap<String, String> getLexicon(final String languageId) {
@@ -112,8 +120,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
   /**
    * Gets the lexicon from db.
-   *
-   * @param language the language
+   * 
+   * @param language
+   *          the language
    * @return the lexicon from db
    */
   @SuppressWarnings("unchecked")
@@ -134,8 +143,12 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     return map;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nTranslationManager#getTranslatedLexicon(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.I18nTranslationManager#getTranslatedLexicon
+   * (java.lang.String, java.lang.String)
    */
   @Override
   public List<I18nTranslationDTO> getTranslatedLexicon(final String languageCode,
@@ -147,8 +160,12 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nTranslationManager#getTranslatedLexicon(java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.I18nTranslationManager#getTranslatedLexicon
+   * (java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer)
    */
   @Override
   public SearchResultDTO<I18nTranslationDTO> getTranslatedLexicon(final String languageCode,
@@ -164,8 +181,12 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     return new SearchResultDTO<I18nTranslationDTO>(list.size(), list);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nTranslationManager#getTranslation(java.lang.String, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.I18nTranslationManager#getTranslation(java.
+   * lang.String, java.lang.String, java.lang.String)
    */
   @Override
   public String getTranslation(final String language, final String text, final String noteForTranslators) {
@@ -196,8 +217,12 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nTranslationManager#getUntranslatedLexicon(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.I18nTranslationManager#getUntranslatedLexicon
+   * (java.lang.String, java.lang.String)
    */
   @Override
   public List<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode,
@@ -210,8 +235,12 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nTranslationManager#getUntranslatedLexicon(java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.I18nTranslationManager#getUntranslatedLexicon
+   * (java.lang.String, java.lang.String, java.lang.Integer, java.lang.Integer)
    */
   @Override
   public SearchResultDTO<I18nTranslationDTO> getUntranslatedLexicon(final String languageCode,
@@ -229,8 +258,9 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
 
   /**
    * Inits the unstranlated.
-   *
-   * @param languageCode the language code
+   * 
+   * @param languageCode
+   *          the language code
    * @return the i18n language
    */
   private I18nLanguage initUnstranlated(final String languageCode) {
@@ -250,8 +280,12 @@ public class I18nTranslationManagerDefault extends DefaultManager<I18nTranslatio
     return language;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.I18nTranslationManager#setTranslation(java.lang.Long, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.I18nTranslationManager#setTranslation(java.
+   * lang.Long, java.lang.String)
    */
   @Override
   public String setTranslation(final Long id, final String translation) throws DefaultException {

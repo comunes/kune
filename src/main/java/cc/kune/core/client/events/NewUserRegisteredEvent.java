@@ -30,22 +30,23 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewUserRegisteredEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewUserRegisteredEvent extends GwtEvent<NewUserRegisteredEvent.NewUserRegisteredHandler> {
 
   /**
    * The Interface HasNewUserRegisteredHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasNewUserRegisteredHandlers extends HasHandlers {
-    
+
     /**
      * Adds the new user registered handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addNewUserRegisteredHandler(NewUserRegisteredHandler handler);
@@ -53,15 +54,16 @@ public class NewUserRegisteredEvent extends GwtEvent<NewUserRegisteredEvent.NewU
 
   /**
    * The Interface NewUserRegisteredHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface NewUserRegisteredHandler extends EventHandler {
-    
+
     /**
      * On new user registered.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onNewUserRegistered(NewUserRegisteredEvent event);
   }
@@ -71,8 +73,9 @@ public class NewUserRegisteredEvent extends GwtEvent<NewUserRegisteredEvent.NewU
 
   /**
    * Fire.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new NewUserRegisteredEvent());
@@ -80,7 +83,7 @@ public class NewUserRegisteredEvent extends GwtEvent<NewUserRegisteredEvent.NewU
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<NewUserRegisteredHandler> getType() {
@@ -93,15 +96,21 @@ public class NewUserRegisteredEvent extends GwtEvent<NewUserRegisteredEvent.NewU
   public NewUserRegisteredEvent() {
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final NewUserRegisteredHandler handler) {
     handler.onNewUserRegistered(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -109,7 +118,9 @@ public class NewUserRegisteredEvent extends GwtEvent<NewUserRegisteredEvent.NewU
     return super.equals(obj);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -117,7 +128,9 @@ public class NewUserRegisteredEvent extends GwtEvent<NewUserRegisteredEvent.NewU
     return TYPE;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -125,7 +138,9 @@ public class NewUserRegisteredEvent extends GwtEvent<NewUserRegisteredEvent.NewU
     return super.hashCode();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

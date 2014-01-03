@@ -35,26 +35,26 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkCacheTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetworkCacheTest {
 
   /** The cache. */
   private SocialNetworkCache cache;
-  
+
   /** The data. */
   private SocialNetworkData data;
-  
+
   /** The group1. */
   private Group group1;
-  
+
   /** The group2. */
   private Group group2;
-  
+
   /** The user1. */
   private User user1;
-  
+
   /** The user2. */
   private User user2;
 

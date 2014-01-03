@@ -57,14 +57,14 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSNPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy> {
 
   /**
    * The Interface UserSNProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -73,41 +73,54 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * The Interface UserSNView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface UserSNView extends View {
 
     /**
      * Adds the buddie.
-     *
-     * @param user the user
-     * @param avatarUrl the avatar url
-     * @param tooltip the tooltip
-     * @param tooltipTitle the tooltip title
-     * @param menu the menu
-     * @param dragable the dragable
+     * 
+     * @param user
+     *          the user
+     * @param avatarUrl
+     *          the avatar url
+     * @param tooltip
+     *          the tooltip
+     * @param tooltipTitle
+     *          the tooltip title
+     * @param menu
+     *          the menu
+     * @param dragable
+     *          the dragable
      */
     void addBuddie(UserSimpleDTO user, String avatarUrl, String tooltip, String tooltipTitle,
         GuiActionDescCollection menu, boolean dragable);
 
     /**
      * Adds the participation.
-     *
-     * @param group the group
-     * @param avatarUrl the avatar url
-     * @param tooltip the tooltip
-     * @param tooltipTitle the tooltip title
-     * @param menu the menu
-     * @param dragable the dragable
+     * 
+     * @param group
+     *          the group
+     * @param avatarUrl
+     *          the avatar url
+     * @param tooltip
+     *          the tooltip
+     * @param tooltipTitle
+     *          the tooltip title
+     * @param menu
+     *          the menu
+     * @param dragable
+     *          the dragable
      */
     void addParticipation(GroupDTO group, String avatarUrl, String tooltip, String tooltipTitle,
         GuiActionDescCollection menu, boolean dragable);
 
     /**
      * Adds the text to buddie list.
-     *
-     * @param text the text
+     * 
+     * @param text
+     *          the text
      */
     void addTextToBuddieList(String text);
 
@@ -118,23 +131,26 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     /**
      * Gets the bottom toolbar.
-     *
+     * 
      * @return the bottom toolbar
      */
     IsActionExtensible getBottomToolbar();
 
     /**
      * Sets the buddies count.
-     *
-     * @param count the new buddies count
+     * 
+     * @param count
+     *          the new buddies count
      */
     void setBuddiesCount(int count);
 
     /**
      * Sets the buddies visible.
-     *
-     * @param visible the visible
-     * @param areMany the are many
+     * 
+     * @param visible
+     *          the visible
+     * @param areMany
+     *          the are many
      */
     void setBuddiesVisible(boolean visible, boolean areMany);
 
@@ -145,23 +161,27 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     /**
      * Sets the participation count.
-     *
-     * @param count the new participation count
+     * 
+     * @param count
+     *          the new participation count
      */
     void setParticipationCount(int count);
 
     /**
      * Sets the participation visible.
-     *
-     * @param visible the visible
-     * @param areMany the are many
+     * 
+     * @param visible
+     *          the visible
+     * @param areMany
+     *          the are many
      */
     void setParticipationVisible(boolean visible, boolean areMany);
 
     /**
      * Sets the visible.
-     *
-     * @param visible the new visible
+     * 
+     * @param visible
+     *          the new visible
      */
     void setVisible(boolean visible);
 
@@ -178,25 +198,34 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /** The conf actions registry. */
   private final UserSNConfActions confActionsRegistry;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The user menu items registry. */
   private final UserSNMenuItemsRegistry userMenuItemsRegistry;
 
   /**
    * Instantiates a new user sn presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param i18n the i18n
-   * @param stateManager the state manager
-   * @param session the session
-   * @param downloadProvider the download provider
-   * @param userMenuItemsRegistry the user menu items registry
-   * @param confActionsRegistry the conf actions registry
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param i18n
+   *          the i18n
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param downloadProvider
+   *          the download provider
+   * @param userMenuItemsRegistry
+   *          the user menu items registry
+   * @param confActionsRegistry
+   *          the conf actions registry
    */
   @Inject
   public UserSNPresenter(final EventBus eventBus, final UserSNView view, final UserSNProxy proxy,
@@ -235,7 +264,9 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     refreshActionsImpl();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
    */
   @Override
@@ -245,8 +276,9 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * On state changed.
-   *
-   * @param state the state
+   * 
+   * @param state
+   *          the state
    */
   private void onStateChanged(final StateAbstractDTO state) {
     if (state.getGroup().isNotPersonal()) {
@@ -284,8 +316,9 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * Refresh on sign in sign out.
-   *
-   * @param session the session
+   * 
+   * @param session
+   *          the session
    */
   private void refreshOnSignInSignOut(final Session session) {
     final StateAbstractDTO currentState = session.getCurrentState();
@@ -294,7 +327,9 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -304,8 +339,9 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * Sets the buddies state.
-   *
-   * @param state the state
+   * 
+   * @param state
+   *          the state
    * @return the int
    */
   private int setBuddiesState(final StateAbstractDTO state) {
@@ -344,8 +380,9 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * Sets the participation state.
-   *
-   * @param state the state
+   * 
+   * @param state
+   *          the state
    * @return the int
    */
   private int setParticipationState(final StateAbstractDTO state) {

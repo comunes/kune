@@ -25,7 +25,7 @@ package cc.kune.gspace.client.i18n;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface I18nTranslator.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface I18nTranslator {

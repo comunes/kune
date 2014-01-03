@@ -33,7 +33,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RosterPresence.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -51,7 +51,7 @@ public class RosterPresence {
 
   /**
    * Gets the offline date.
-   *
+   * 
    * @return the offline date
    */
   public Long getOfflineDate() {
@@ -60,7 +60,7 @@ public class RosterPresence {
 
   /**
    * Gets the username.
-   *
+   * 
    * @return the username
    */
   public String getUsername() {
@@ -69,8 +69,9 @@ public class RosterPresence {
 
   /**
    * Sets the offline date.
-   *
-   * @param offlineDate the new offline date
+   * 
+   * @param offlineDate
+   *          the new offline date
    */
   public void setOfflineDate(final Long offlineDate) {
     this.offlineDate = offlineDate.toString();
@@ -78,8 +79,9 @@ public class RosterPresence {
 
   /**
    * Sets the username.
-   *
-   * @param username the new username
+   * 
+   * @param username
+   *          the new username
    */
   public void setUsername(final String username) {
     this.username = username;

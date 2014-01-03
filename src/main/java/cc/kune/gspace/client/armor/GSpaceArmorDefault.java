@@ -49,25 +49,25 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceArmorDefault.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
 
   /**
    * The Interface GSpaceArmorDefaultUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface GSpaceArmorDefaultUiBinder extends UiBinder<Widget, GSpaceArmorDefault> {
   }
-  
+
   /** The Constant CENTER_NORTH_HEIGHT. */
   private static final int CENTER_NORTH_HEIGHT = 153;
-  
+
   /** The Constant CENTER_SOUTH_HEIGHT. */
   private static final int CENTER_SOUTH_HEIGHT = 36;
-  
+
   /** The Constant TOOLS_WIDTH. */
   private static final int TOOLS_WIDTH = 220;
 
@@ -77,110 +77,111 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
   /** The center north. */
   @UiField
   FlowPanel centerNorth;
-  
+
   /** The center panel. */
   @UiField
   GSpaceCenterPanel centerPanel;
-  
+
   /** The doc container parent. */
   @UiField
   DockLayoutPanel docContainerParent;
-  
+
   /** The doc footer. */
   @UiField
   FlowPanel docFooter;
-  
+
   /** The doc footer toolbar. */
   private final ActionFlowPanel docFooterToolbar;
-  
+
   /** The doc header. */
   @UiField
   FlowPanel docHeader;
-  
+
   /** The doc subheader. */
   @UiField
   FlowPanel docSubheader;
-  
+
   /** The entity footer. */
   @UiField
   FlowPanel entityFooter;
-  
+
   /** The entity footer toolbar. */
   private final ActionFlowPanel entityFooterToolbar;
-  
+
   /** The entity header. */
   @UiField
   FlowPanel entityHeader;
-  
+
   /** The entity tools center. */
   @UiField
   FlowPanel entityToolsCenter;
-  
+
   /** The entity tools container. */
   @UiField
   FlowPanel entityToolsContainer;
-  
+
   /** The entity tools main panel. */
   @UiField
   DockLayoutPanel entityToolsMainPanel;
-  
+
   /** The entity tools north. */
   @UiField
   FlowPanel entityToolsNorth;
-  
+
   /** The entity tools south. */
   @UiField
   FlowPanel entityToolsSouth;
-  
+
   /** The group space. */
   @UiField
   SplitLayoutPanel groupSpace;
-  
+
   /** The group space wrapper. */
   @UiField
   SimplePanel groupSpaceWrapper;
-  
+
   /** The header toolbar. */
   private final ActionFlowPanel headerToolbar;
-  
+
   /** The home space. */
   @UiField
   SimplePanel homeSpace;
-  
+
   /** The mainpanel. */
   @UiField
   DockLayoutPanel mainpanel;
-  
+
   /** The public space. */
   @UiField
   SimplePanel publicSpace;
-  
+
   /** The sitebar. */
   @UiField
   FlowPanel sitebar;
-  
+
   /** The split center. */
   @UiField
   DockLayoutPanel splitCenter;
-  
+
   /** The subheader toolbar. */
   private final ActionFlowPanel subheaderToolbar;
-  
+
   /** The tabs. */
   @UiField
   TabLayoutPanel tabs;
-  
+
   /** The tools south toolbar. */
   private final ActionFlowPanel toolsSouthToolbar;
-  
+
   /** The user space. */
   @UiField
   FlowPanel userSpace;
 
   /**
    * Instantiates a new g space armor default.
-   *
-   * @param toolbarProv the toolbar prov
+   * 
+   * @param toolbarProv
+   *          the toolbar prov
    */
   @Inject
   public GSpaceArmorDefault(final Provider<ActionFlowPanel> toolbarProv) {
@@ -201,7 +202,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     enableCenterScroll(true);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#clearBackImage()
    */
   @Override
@@ -212,7 +215,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     DOM.setStyleAttribute(groupSpaceWrapper.getElement(), CSS.A.BACKGROUND, bodyProp);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#enableCenterScroll(boolean)
    */
   @Override
@@ -220,7 +225,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     centerPanel.enableCenterScroll(enable);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getDocContainer()
    */
   @Override
@@ -228,7 +235,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return centerPanel;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getDocContainerHeight()
    */
   @Override
@@ -236,7 +245,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return centerPanel.getHeight();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getDocFooter()
    */
   @Override
@@ -244,7 +255,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return docFooter;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getDocFooterToolbar()
    */
   @Override
@@ -252,7 +265,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return docFooterToolbar;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getDocHeader()
    */
   @Override
@@ -260,7 +275,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return docHeader;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getDocSubheader()
    */
   @Override
@@ -268,7 +285,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return docSubheader;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getEntityFooter()
    */
   @Override
@@ -276,7 +295,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return entityFooter;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getEntityFooterToolbar()
    */
   @Override
@@ -284,7 +305,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return entityFooterToolbar;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getEntityHeader()
    */
   @Override
@@ -292,7 +315,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return entityHeader;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getEntityToolsCenter()
    */
   @Override
@@ -300,7 +325,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return entityToolsCenter;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getEntityToolsNorth()
    */
   @Override
@@ -308,7 +335,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return entityToolsNorth;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getEntityToolsSouth()
    */
   @Override
@@ -316,7 +345,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return entityToolsSouth;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getHeaderToolbar()
    */
   @Override
@@ -324,7 +355,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return headerToolbar;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getHomeSpace()
    */
   @Override
@@ -332,7 +365,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return homeSpace;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getMainpanel()
    */
   @Override
@@ -340,7 +375,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return mainpanel;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getPublicSpace()
    */
   @Override
@@ -348,7 +385,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return publicSpace;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getSitebar()
    */
   @Override
@@ -356,7 +395,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return sitebar;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getSubheaderToolbar()
    */
   @Override
@@ -364,7 +405,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return subheaderToolbar;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getToolsSouthToolbar()
    */
   @Override
@@ -372,7 +415,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return toolsSouthToolbar;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#getUserSpace()
    */
   @Override
@@ -380,7 +425,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     return userSpace;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#selectGroupSpace()
    */
   @Override
@@ -388,7 +435,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     tabs.selectTab(groupSpaceWrapper);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#selectHomeSpace()
    */
   @Override
@@ -396,7 +445,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     tabs.selectTab(homeSpace);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#selectPublicSpace()
    */
   @Override
@@ -404,7 +455,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     tabs.selectTab(publicSpace);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#selectUserSpace()
    */
   @Override
@@ -412,7 +465,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     tabs.selectTab(userSpace);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceArmor#setBackImage(java.lang.String)
    */
   @Override
@@ -421,7 +476,9 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     DOM.setStyleAttribute(groupSpaceWrapper.getElement(), CSS.A.BACKGROUND, bodyProp);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.maxmin.IsMaximizable#setMaximized(boolean)
    */
   @Override
@@ -433,9 +490,11 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
 
   /**
    * Sets the maximized.
-   *
-   * @param widget the widget
-   * @param maximized the maximized
+   * 
+   * @param widget
+   *          the widget
+   * @param maximized
+   *          the maximized
    */
   @SuppressWarnings("unused")
   private void setMaximized(final Widget widget, final boolean maximized) {
@@ -456,8 +515,12 @@ public class GSpaceArmorDefault extends Composite implements GSpaceArmor {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.armor.GSpaceArmor#setRTL(com.google.gwt.i18n.client.HasDirection.Direction)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.armor.GSpaceArmor#setRTL(com.google.gwt.i18n.client
+   * .HasDirection.Direction)
    */
   @Override
   public void setRTL(final Direction direction) {

@@ -25,7 +25,7 @@ package cc.kune.core.shared;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SessionConstants.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SessionConstants {

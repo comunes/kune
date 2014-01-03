@@ -40,7 +40,7 @@ import com.google.inject.Provider;
  * This action is similar to @link {@link UnJoinFromCurrentGroupAction} but is
  * used when you are not in this group (for instace you can leave a group from
  * your home page).
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UnJoinFromThisGroupAction extends RolAction {
@@ -50,11 +50,15 @@ public class UnJoinFromThisGroupAction extends RolAction {
 
   /**
    * Instantiates a new un join from this group action.
-   *
-   * @param i18n the i18n
-   * @param res the res
-   * @param snServiceProvider the sn service provider
-   * @param rightsClientManager the rights client manager
+   * 
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param snServiceProvider
+   *          the sn service provider
+   * @param rightsClientManager
+   *          the rights client manager
    */
   @Inject
   public UnJoinFromThisGroupAction(final I18nTranslationService i18n, final IconicResources res,
@@ -68,8 +72,12 @@ public class UnJoinFromThisGroupAction extends RolAction {
     putValue(Action.STYLES, "k-sn-join");
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

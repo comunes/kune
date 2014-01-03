@@ -41,7 +41,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkManagerMoreTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTest {
@@ -52,8 +52,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Last admin unjoin group with collabs fails.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = LastAdminInGroupException.class)
   public void lastAdminUnjoinGroupWithCollabsFails() throws Exception {
@@ -65,8 +66,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Last admin unjoin group without collabs orphaned.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void lastAdminUnjoinGroupWithoutCollabsOrphaned() throws Exception {
@@ -79,8 +81,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Not admin try delete member.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = AccessViolationException.class)
   public void notAdminTryDeleteMember() throws Exception {
@@ -116,8 +119,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Request join a closed group deny.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void requestJoinAClosedGroupDeny() throws Exception {
@@ -129,8 +133,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Request join a moderated group add user group to pending.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void requestJoinAModeratedGroupAddUserGroupToPending() throws Exception {
@@ -143,8 +148,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Request join a open group add user group to editors.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void requestJoinAOpenGroupAddUserGroupToEditors() throws Exception {
@@ -158,8 +164,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Request join a orphaned group add user group to admins.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void requestJoinAOrphanedGroupAddUserGroupToAdmins() throws Exception {
@@ -177,8 +184,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Request join twice a orphaned group add user group to admins.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = AlreadyGroupMemberException.class)
   public void requestJoinTwiceAOrphanedGroupAddUserGroupToAdmins() throws Exception {
@@ -191,8 +199,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Request to join twice dont duplicate pending.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void requestToJoinTwiceDontDuplicatePending() throws Exception {
@@ -205,8 +214,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Sets the admin anon member fails.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = Exception.class)
   public void setAdminAnonMemberFails() throws Exception {
@@ -217,8 +227,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Sets the admin as collab.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void setAdminAsCollab() throws Exception {
@@ -240,8 +251,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Sets the admin as collab not admin fails.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = AccessViolationException.class)
   public void setAdminAsCollabNotAdminFails() throws Exception {
@@ -253,8 +265,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Sets the admin not collab fails.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = Exception.class)
   public void setAdminNotCollabFails() throws Exception {
@@ -265,8 +278,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Sets the collab as admin.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void setCollabAsAdmin() throws Exception {
@@ -287,8 +301,9 @@ public class SocialNetworkManagerMoreTest extends AbstractSocialNetworkManagerTe
 
   /**
    * Sets the collab as admin not admin fails.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = AccessViolationException.class)
   public void setCollabAsAdminNotAdminFails() throws Exception {

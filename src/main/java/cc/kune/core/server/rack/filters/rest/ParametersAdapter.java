@@ -31,11 +31,12 @@ import javax.servlet.ServletRequest;
 public class ParametersAdapter implements Parameters {
   private final ServletRequest request;
 
-  public ParametersAdapter(ServletRequest request) {
+  public ParametersAdapter(final ServletRequest request) {
     this.request = request;
   }
 
-  public String get(String name) {
+  @Override
+  public String get(final String name) {
     return request.getParameter(name);
   }
 

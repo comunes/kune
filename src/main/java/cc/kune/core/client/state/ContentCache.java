@@ -30,7 +30,7 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ContentCache.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -38,34 +38,41 @@ public interface ContentCache {
 
   /**
    * Cache.
-   *
-   * @param token the token
-   * @param content the content
+   * 
+   * @param token
+   *          the token
+   * @param content
+   *          the content
    */
   void cache(StateToken token, StateAbstractDTO content);
 
   /**
-   * Removes the cache of group.
-   *
-   * @param group the group
-   */
-  void removeCacheOfGroup(String group);
-
-  /**
    * Gets the content.
-   *
-   * @param user the user
-   * @param newState the new state
-   * @param callback the callback
+   * 
+   * @param user
+   *          the user
+   * @param newState
+   *          the new state
+   * @param callback
+   *          the callback
    * @return the content
    */
   void getContent(String user, StateToken newState, AsyncCallback<StateAbstractDTO> callback);
 
   /**
    * Removes the.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   void remove(StateToken token);
+
+  /**
+   * Removes the cache of group.
+   * 
+   * @param group
+   *          the group
+   */
+  void removeCacheOfGroup(String group);
 
 }

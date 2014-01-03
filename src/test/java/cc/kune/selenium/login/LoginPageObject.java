@@ -34,7 +34,7 @@ import cc.kune.selenium.SeleniumConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LoginPageObject.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LoginPageObject extends AbstractLoginObject {
@@ -42,19 +42,19 @@ public class LoginPageObject extends AbstractLoginObject {
   /** The anon welcome. */
   @FindBy(id = SeleniumConstants.GWTDEV + AnonUsersManager.ANON_MESSAGE_CLOSE_ICON)
   private WebElement anonWelcome;
-  
+
   /** The create one link. */
   @FindBy(id = SeleniumConstants.GWTDEV + SignInPanel.CREATE_ONE)
   protected WebElement createOneLink;
-  
+
   /** The passwd. */
   @FindBy(id = SignInForm.PASSWORD_FIELD_ID)
   private WebElement passwd;
-  
+
   /** The sign in button. */
   @FindBy(id = SeleniumConstants.GWTDEV + SignInPanel.SIGN_IN_BUTTON_ID)
   private WebElement signInButton;
-  
+
   /** The user. */
   @FindBy(id = SignInForm.USER_FIELD_ID)
   private WebElement user;
@@ -78,10 +78,13 @@ public class LoginPageObject extends AbstractLoginObject {
 
   /**
    * Fill sig in in form.
-   *
-   * @param username the username
-   * @param password the password
-   * @param withReturn the with return
+   * 
+   * @param username
+   *          the username
+   * @param password
+   *          the password
+   * @param withReturn
+   *          the with return
    */
   public void fillSigInInForm(final String username, final String password, final boolean withReturn) {
     clearField(user);
@@ -100,7 +103,7 @@ public class LoginPageObject extends AbstractLoginObject {
 
   /**
    * Gets the anon msg.
-   *
+   * 
    * @return the anon msg
    */
   public WebElement getAnonMsg() {
@@ -109,7 +112,7 @@ public class LoginPageObject extends AbstractLoginObject {
 
   /**
    * Gets the header.
-   *
+   * 
    * @return the header
    */
   public WebElement getHeader() {
@@ -118,7 +121,7 @@ public class LoginPageObject extends AbstractLoginObject {
 
   /**
    * Header.
-   *
+   * 
    * @return the web element
    */
   public WebElement header() {
@@ -134,9 +137,11 @@ public class LoginPageObject extends AbstractLoginObject {
 
   /**
    * Sign in.
-   *
-   * @param username the username
-   * @param password the password
+   * 
+   * @param username
+   *          the username
+   * @param password
+   *          the password
    */
   public void signIn(final String username, final String password) {
     signIn(username, password, false);
@@ -144,10 +149,13 @@ public class LoginPageObject extends AbstractLoginObject {
 
   /**
    * Sign in.
-   *
-   * @param username the username
-   * @param password the password
-   * @param withReturn the with return
+   * 
+   * @param username
+   *          the username
+   * @param password
+   *          the password
+   * @param withReturn
+   *          the with return
    */
   public void signIn(final String username, final String password, final boolean withReturn) {
     assertIsDisconnected();

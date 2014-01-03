@@ -36,27 +36,30 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AccessRightsClientManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class AccessRightsClientManager {
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The previous rights. */
   private AccessRights previousRights;
-  
+
   /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new access rights client manager.
-   *
-   * @param eventBus the event bus
-   * @param stateManager the state manager
-   * @param session the session
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
    */
   @Inject
   public AccessRightsClientManager(final EventBus eventBus, final StateManager stateManager,
@@ -81,9 +84,11 @@ public class AccessRightsClientManager {
 
   /**
    * On rights changed.
-   *
-   * @param fireNow the fire now
-   * @param handler the handler
+   * 
+   * @param fireNow
+   *          the fire now
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   public HandlerRegistration onRightsChanged(final boolean fireNow,

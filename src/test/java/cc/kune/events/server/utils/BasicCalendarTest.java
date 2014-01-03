@@ -32,17 +32,17 @@ import net.fortuna.ical4j.util.Dates;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BasicCalendarTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BasicCalendarTest {
 
   /** The Constant DESCRIPTION. */
   protected static final String DESCRIPTION = "some description";
-  
+
   /** The Constant ID. */
   protected static final String ID = "some id";
-  
+
   /** The Constant TITLE. */
   protected static final String TITLE = "some title";
 
@@ -59,7 +59,7 @@ public class BasicCalendarTest {
 
   /**
    * Creates the cal.
-   *
+   * 
    * @return the calendar
    */
   protected Calendar createCal() {
@@ -72,7 +72,7 @@ public class BasicCalendarTest {
 
   /**
    * Gets the now.
-   *
+   * 
    * @return the now
    */
   protected Date getNow() {

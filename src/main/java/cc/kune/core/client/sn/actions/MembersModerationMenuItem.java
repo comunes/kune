@@ -31,7 +31,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MembersModerationMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MembersModerationMenuItem extends MenuRadioItemDescriptor {
@@ -41,9 +41,11 @@ public class MembersModerationMenuItem extends MenuRadioItemDescriptor {
 
   /**
    * Instantiates a new members moderation menu item.
-   *
-   * @param parent the parent
-   * @param action the action
+   * 
+   * @param parent
+   *          the parent
+   * @param action
+   *          the action
    */
   @Inject
   public MembersModerationMenuItem(final MenuDescriptor parent, final MembersModerationAction action) {
@@ -52,8 +54,9 @@ public class MembersModerationMenuItem extends MenuRadioItemDescriptor {
 
   /**
    * With moderation.
-   *
-   * @param admissionType the admission type
+   * 
+   * @param admissionType
+   *          the admission type
    * @return the menu radio item descriptor
    */
   public MenuRadioItemDescriptor withModeration(final AdmissionType admissionType) {

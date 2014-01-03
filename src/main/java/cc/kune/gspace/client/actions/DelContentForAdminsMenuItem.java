@@ -36,14 +36,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DelContentForAdminsMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
 
   /**
    * The Class DelContentForAdminsAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class DelContentForAdminsAction extends RolAction {
@@ -53,8 +53,9 @@ public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
 
     /**
      * Instantiates a new del content for admins action.
-     *
-     * @param contentService the content service
+     * 
+     * @param contentService
+     *          the content service
      */
     @Inject
     public DelContentForAdminsAction(final ContentServiceHelper contentService) {
@@ -63,8 +64,12 @@ public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
 
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -75,10 +80,13 @@ public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
 
   /**
    * Instantiates a new del content for admins menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
    */
   public DelContentForAdminsMenuItem(final I18nTranslationService i18n,
       final DelContentForAdminsAction action, final IconicResources res) {

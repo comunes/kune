@@ -27,15 +27,15 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Enum SocialNetworkRequestResult.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum SocialNetworkRequestResult implements IsSerializable {
-  
+
   /** The accepted. */
-  accepted, 
- /** The denied. */
- denied, 
- /** The moderated. */
- moderated
+  accepted,
+  /** The denied. */
+  denied,
+  /** The moderated. */
+  moderated
 }

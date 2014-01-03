@@ -28,7 +28,7 @@ import java.util.Collection;
 /**
  * The Interface DestinationProvider is used to provide a way to get a list of
  * Users (for instance to send notifications to them).
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface DestinationProvider {
@@ -36,15 +36,17 @@ public interface DestinationProvider {
   // This fails with some compilers @Override
   /**
    * Equals.
-   *
-   * @param obj the obj
+   * 
+   * @param obj
+   *          the obj
    * @return true, if successful
    */
+  @Override
   boolean equals(final Object obj);
 
   /**
    * Gets the destination list.
-   *
+   * 
    * @return the destination
    */
   Collection<Addressee> getDest();
@@ -52,9 +54,10 @@ public interface DestinationProvider {
   // This fails with some compilers @Override
   /**
    * Hash code.
-   *
+   * 
    * @return the int
    */
+  @Override
   int hashCode();
 
 }

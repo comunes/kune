@@ -27,7 +27,7 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GxtButtonGui.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GxtButtonGui extends AbstractGxtButtonGui {
@@ -41,8 +41,9 @@ public class GxtButtonGui extends AbstractGxtButtonGui {
 
   /**
    * Instantiates a new gxt button gui.
-   *
-   * @param buttonDescriptor the button descriptor
+   * 
+   * @param buttonDescriptor
+   *          the button descriptor
    */
   public GxtButtonGui(final ButtonDescriptor buttonDescriptor) {
     super(buttonDescriptor);

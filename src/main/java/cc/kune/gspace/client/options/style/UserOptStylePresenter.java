@@ -38,7 +38,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptStylePresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptStylePresenter extends EntityOptStylePresenter implements UserOptStyle {
@@ -47,17 +47,27 @@ public class UserOptStylePresenter extends EntityOptStylePresenter implements Us
 
   /**
    * Instantiates a new user opt style presenter.
-   *
-   * @param eventBus the event bus
-   * @param session the session
-   * @param stateManager the state manager
-   * @param entityOptions the entity options
-   * @param groupService the group service
-   * @param backManager the back manager
-   * @param view the view
-   * @param styleSelector the style selector
-   * @param i18n the i18n
-   * @param fileDownUtils the file down utils
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param entityOptions
+   *          the entity options
+   * @param groupService
+   *          the group service
+   * @param backManager
+   *          the back manager
+   * @param view
+   *          the view
+   * @param styleSelector
+   *          the style selector
+   * @param i18n
+   *          the i18n
+   * @param fileDownUtils
+   *          the file down utils
    */
   @Inject
   public UserOptStylePresenter(final EventBus eventBus, final Session session,

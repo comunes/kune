@@ -33,13 +33,13 @@ import cc.kune.core.client.errors.ContentNotPermittedException;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ListsServerToolTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ListsServerToolTest { // extends PersistenceTest {
 
   /** The server tool. */
- private ListsServerTool serverTool;
+  private ListsServerTool serverTool;
 
   /**
    * Before.

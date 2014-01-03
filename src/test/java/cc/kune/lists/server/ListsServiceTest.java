@@ -49,33 +49,35 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ListsServiceTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ListsServiceTest extends IntegrationTest {
-  
+
   /** The close list. */
   private StateContainerDTO closeList;
-  
+
   /** The content service. */
   @Inject
   ContentService contentService;
-  
+
   /** The lists service. */
   @Inject
   ListsService listsService;
-  
+
   /** The open list. */
   private StateContainerDTO openList;
-  
+
   /** The user group. */
   private GroupDTO userGroup;
 
   /**
    * Inits the.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Before
   public void init() throws DefaultException, IOException {
@@ -90,9 +92,11 @@ public class ListsServiceTest extends IntegrationTest {
 
   /**
    * Post to close should fail test.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test(expected = AccessViolationException.class)
   public void postToCloseShouldFailTest() throws DefaultException, IOException {
@@ -103,9 +107,11 @@ public class ListsServiceTest extends IntegrationTest {
 
   /**
    * Post to open by others test.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void postToOpenByOthersTest() throws DefaultException, IOException {
@@ -118,9 +124,11 @@ public class ListsServiceTest extends IntegrationTest {
 
   /**
    * Post to open close and later open by others test.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void postToOpenCloseAndLaterOpenByOthersTest() throws DefaultException, IOException {
@@ -134,9 +142,11 @@ public class ListsServiceTest extends IntegrationTest {
 
   /**
    * Subscribe several to close test.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void subscribeSeveralToCloseTest() throws DefaultException, IOException {
@@ -153,9 +163,11 @@ public class ListsServiceTest extends IntegrationTest {
 
   /**
    * Subscribe to close should fail test.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test(expected = AccessViolationException.class)
   public void subscribeToCloseShouldFailTest() throws DefaultException, IOException {
@@ -166,9 +178,11 @@ public class ListsServiceTest extends IntegrationTest {
 
   /**
    * Subscribe to open and later close list should fail test.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test(expected = AccessViolationException.class)
   public void subscribeToOpenAndLaterCloseListShouldFailTest() throws DefaultException, IOException {
@@ -180,8 +194,9 @@ public class ListsServiceTest extends IntegrationTest {
 
   /**
    * Subscribe unsubs several.
-   *
-   * @param list the list
+   * 
+   * @param list
+   *          the list
    */
   private void subscribeUnsubsSeveral(final StateContainerDTO list) {
     final AccessListsDTO initialAcl = list.getAccessLists();

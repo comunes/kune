@@ -29,7 +29,7 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KunePropertiesTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */

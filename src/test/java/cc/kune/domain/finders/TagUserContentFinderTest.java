@@ -33,7 +33,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagUserContentFinderTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TagUserContentFinderTest extends PersistencePreLoadedDataTest {

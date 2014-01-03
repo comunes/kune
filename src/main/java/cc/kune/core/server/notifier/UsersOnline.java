@@ -25,7 +25,7 @@ package cc.kune.core.server.notifier;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface UsersOnline.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface UsersOnline {

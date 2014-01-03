@@ -25,11 +25,11 @@ package cc.kune.core.server;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestConstants.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class TestConstants {
-  
+
   /** The Constant PERSISTENCE_MYSQL_UNIT. */
   public static final String PERSISTENCE_MYSQL_UNIT = "test_db";
   // test: use memory
@@ -38,7 +38,7 @@ public final class TestConstants {
   // FIXME: for some reason with test_db now the database is not initialized
   /** The Constant PERSISTENCE_UNIT. */
   public static final String PERSISTENCE_UNIT = "test";
-  
+
   /** The Constant WAVE_TEST_PROPFILE. */
   public static final String WAVE_TEST_PROPFILE = "wave-server-testing.properties";
 

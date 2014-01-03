@@ -25,15 +25,16 @@ package cc.kune.core.client.sitebar.search;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface OnExactMatch.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface OnExactMatch {
-  
+
   /**
    * On exact match.
-   *
-   * @param march the march
+   * 
+   * @param march
+   *          the march
    */
   void onExactMatch(String march);
 }

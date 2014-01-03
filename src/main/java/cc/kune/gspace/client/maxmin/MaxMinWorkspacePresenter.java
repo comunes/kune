@@ -48,7 +48,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MaxMinWorkspacePresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MaxMinWorkspacePresenter
@@ -59,17 +59,20 @@ implements MaxMinWorkspace {
 
   /**
    * The Class MaximizeAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class MaximizeAction extends AbstractExtendedAction {
-    
+
     /**
      * Instantiates a new maximize action.
-     *
-     * @param name the name
-     * @param img the img
-     * @param tooltip the tooltip
+     * 
+     * @param name
+     *          the name
+     * @param img
+     *          the img
+     * @param tooltip
+     *          the tooltip
      */
     public MaximizeAction(final String name, final ImageResource img, final String tooltip) {
       super();
@@ -78,18 +81,22 @@ implements MaxMinWorkspace {
       putValue(Action.TOOLTIP, tooltip);
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
       showMaximized(true);
     }
   }
-  
+
   /**
    * The Interface MaxMinWorkspaceProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -98,26 +105,29 @@ implements MaxMinWorkspace {
 
   /**
    * The Interface MaxMinWorkspaceView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface MaxMinWorkspaceView extends View, IsMaximizable {
 
   }
-  
+
   /**
    * The Class MinimizeAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class MinimizeAction extends AbstractExtendedAction {
-    
+
     /**
      * Instantiates a new minimize action.
-     *
-     * @param name the name
-     * @param img the img
-     * @param tooltip the tooltip
+     * 
+     * @param name
+     *          the name
+     * @param img
+     *          the img
+     * @param tooltip
+     *          the tooltip
      */
     public MinimizeAction(final String name, final ImageResource img, final String tooltip) {
       super();
@@ -126,15 +136,19 @@ implements MaxMinWorkspace {
       putValue(Action.TOOLTIP, tooltip);
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
       showMaximized(false);
     }
   }
-  
+
   /** The Constant MAX_ICON. */
   public static final String MAX_ICON = "mmwp-max_bt";
 
@@ -170,12 +184,17 @@ implements MaxMinWorkspace {
 
   /**
    * Instantiates a new max min workspace presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param shortcutReg the shortcut reg
-   * @param images the images
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param shortcutReg
+   *          the shortcut reg
+   * @param images
+   *          the images
    */
   @Inject
   public MaxMinWorkspacePresenter(final EventBus eventBus, final MaxMinWorkspaceView view,
@@ -242,7 +261,9 @@ implements MaxMinWorkspace {
     });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.maxmin.MaxMinWorkspace#maximize()
    */
   @Override
@@ -250,7 +271,9 @@ implements MaxMinWorkspace {
     showMaximized(true);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.maxmin.MaxMinWorkspace#minimize()
    */
   @Override
@@ -258,7 +281,9 @@ implements MaxMinWorkspace {
     showMaximized(false);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -267,7 +292,9 @@ implements MaxMinWorkspace {
     createActions();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -277,8 +304,9 @@ implements MaxMinWorkspace {
 
   /**
    * Show maximized.
-   *
-   * @param maximized the maximized
+   * 
+   * @param maximized
+   *          the maximized
    */
   private void showMaximized(final boolean maximized) {
     if (SmallScreen) {

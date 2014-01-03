@@ -30,29 +30,29 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InvitationDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class InvitationDTO implements IsSerializable {
-  
+
   /** The date. */
   private Long date;
-  
+
   /** The description. */
   private String description;
-  
+
   /** The from user. */
   private UserSimpleDTO fromUser;
-  
+
   /** The hash. */
   private String hash;
-  
+
   /** The invited to token. */
   private String invitedToToken;
-  
+
   /** The name. */
   private String name;
-  
+
   /** The type. */
   private InvitationType type;
 
@@ -65,14 +65,21 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Instantiates a new invitation dto.
-   *
-   * @param date the date
-   * @param fromUser the from user
-   * @param hash the hash
-   * @param invitedToToken the invited to token
-   * @param type the type
-   * @param name the name
-   * @param description the description
+   * 
+   * @param date
+   *          the date
+   * @param fromUser
+   *          the from user
+   * @param hash
+   *          the hash
+   * @param invitedToToken
+   *          the invited to token
+   * @param type
+   *          the type
+   * @param name
+   *          the name
+   * @param description
+   *          the description
    */
   public InvitationDTO(final Long date, final UserSimpleDTO fromUser, final String hash,
       final String invitedToToken, final InvitationType type, final String name, final String description) {
@@ -87,7 +94,7 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Gets the date.
-   *
+   * 
    * @return the date
    */
   public Long getDate() {
@@ -96,7 +103,7 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Gets the description.
-   *
+   * 
    * @return the description
    */
   public String getDescription() {
@@ -105,7 +112,7 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Gets the from user.
-   *
+   * 
    * @return the from user
    */
   public UserSimpleDTO getFromUser() {
@@ -114,7 +121,7 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Gets the hash.
-   *
+   * 
    * @return the hash
    */
   public String getHash() {
@@ -123,7 +130,7 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Gets the invited to token.
-   *
+   * 
    * @return the invited to token
    */
   public String getInvitedToToken() {
@@ -132,7 +139,7 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -141,7 +148,7 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public InvitationType getType() {
@@ -150,8 +157,9 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Sets the date.
-   *
-   * @param date the new date
+   * 
+   * @param date
+   *          the new date
    */
   public void setDate(final Long date) {
     this.date = date;
@@ -159,8 +167,9 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Sets the description.
-   *
-   * @param description the new description
+   * 
+   * @param description
+   *          the new description
    */
   public void setDescription(final String description) {
     this.description = description;
@@ -168,8 +177,9 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Sets the from user.
-   *
-   * @param fromUser the new from user
+   * 
+   * @param fromUser
+   *          the new from user
    */
   public void setFromUser(final UserSimpleDTO fromUser) {
     this.fromUser = fromUser;
@@ -177,8 +187,9 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Sets the hash.
-   *
-   * @param hash the new hash
+   * 
+   * @param hash
+   *          the new hash
    */
   public void setHash(final String hash) {
     this.hash = hash;
@@ -186,8 +197,9 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Sets the invited to token.
-   *
-   * @param invitedToToken the new invited to token
+   * 
+   * @param invitedToToken
+   *          the new invited to token
    */
   public void setInvitedToToken(final String invitedToToken) {
     this.invitedToToken = invitedToToken;
@@ -195,8 +207,9 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public void setName(final String name) {
     this.name = name;
@@ -204,8 +217,9 @@ public class InvitationDTO implements IsSerializable {
 
   /**
    * Sets the type.
-   *
-   * @param type the new type
+   * 
+   * @param type
+   *          the new type
    */
   public void setType(final InvitationType type) {
     this.type = type;

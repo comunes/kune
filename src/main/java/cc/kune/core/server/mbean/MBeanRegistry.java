@@ -39,7 +39,7 @@ import com.google.inject.Singleton;
 /**
  * The Class MBeanRegistry is responsible of mbean objects registration into the
  * JVM MBean Server.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -47,7 +47,7 @@ public class MBeanRegistry {
 
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(MBeanRegistry.class);
-  
+
   /** The mbean server. */
   private final MBeanServer mbeanServer;
 
@@ -60,9 +60,11 @@ public class MBeanRegistry {
 
   /**
    * Register this object itself in the JVM MBean Server.
-   *
-   * @param object the object
-   * @param objectName the object name
+   * 
+   * @param object
+   *          the object
+   * @param objectName
+   *          the object name
    */
   public void registerAsMBean(final Object object, final String objectName) {
     ObjectName mbeanName = null;

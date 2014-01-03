@@ -40,7 +40,7 @@ import com.google.inject.Singleton;
  * The Class EventsCache is used to cache events of a group. Right now is only
  * used in the export functionality because we don't have a way to detect gadget
  * changes (of dates, etc) to expire this elements.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @LogThis

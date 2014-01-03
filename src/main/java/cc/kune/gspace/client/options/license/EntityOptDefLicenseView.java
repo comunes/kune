@@ -30,36 +30,38 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityOptDefLicenseView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptDefLicenseView extends EntityOptionsTabView {
 
   /**
    * Gets the change.
-   *
+   * 
    * @return the change
    */
   HasClickHandlers getChange();
 
   /**
    * Gets the license image.
-   *
+   * 
    * @return the license image
    */
   HasClickHandlers getLicenseImage();
 
   /**
    * Open window.
-   *
-   * @param url the url
+   * 
+   * @param url
+   *          the url
    */
   void openWindow(String url);
 
   /**
    * Sets the license.
-   *
-   * @param defaultLicense the new license
+   * 
+   * @param defaultLicense
+   *          the new license
    */
   void setLicense(LicenseDTO defaultLicense);
 

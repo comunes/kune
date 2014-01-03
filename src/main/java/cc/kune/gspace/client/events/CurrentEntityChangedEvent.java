@@ -30,7 +30,7 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CurrentEntityChangedEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CurrentEntityChangedEvent extends
@@ -38,30 +38,32 @@ public class CurrentEntityChangedEvent extends
 
   /**
    * The Interface CurrentEntityChangedHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface CurrentEntityChangedHandler extends EventHandler {
-    
+
     /**
      * On current logo changed.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onCurrentLogoChanged(CurrentEntityChangedEvent event);
   }
 
   /**
    * The Interface HasCurrentLogoChangedHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasCurrentLogoChangedHandlers extends HasHandlers {
-    
+
     /**
      * Adds the current logo changed handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addCurrentLogoChangedHandler(CurrentEntityChangedHandler handler);
@@ -69,53 +71,64 @@ public class CurrentEntityChangedEvent extends
 
   /** The Constant TYPE. */
   private static final Type<CurrentEntityChangedHandler> TYPE = new Type<CurrentEntityChangedHandler>();
-  
-  /** The short name. */
-  private final String shortName;
-  
-  /** The long name. */
-  private final String longName;
 
   /**
    * Fire.
-   *
-   * @param source the source
-   * @param shortName the short name
-   * @param longName the long name
+   * 
+   * @param source
+   *          the source
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
    */
-  public static void fire(final HasHandlers source, String shortName, String longName) {
+  public static void fire(final HasHandlers source, final String shortName, final String longName) {
     source.fireEvent(new CurrentEntityChangedEvent(shortName, longName));
   }
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<CurrentEntityChangedHandler> getType() {
     return TYPE;
   }
 
+  /** The long name. */
+  private final String longName;
+
+  /** The short name. */
+  private final String shortName;
+
   /**
    * Instantiates a new current entity changed event.
-   *
-   * @param shortName the short name
-   * @param longName the long name
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
    */
-  public CurrentEntityChangedEvent(String shortName, String longName) {
+  public CurrentEntityChangedEvent(final String shortName, final String longName) {
     this.shortName = shortName;
     this.longName = longName;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final CurrentEntityChangedHandler handler) {
     handler.onCurrentLogoChanged(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -123,7 +136,9 @@ public class CurrentEntityChangedEvent extends
     return super.equals(obj);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -131,25 +146,9 @@ public class CurrentEntityChangedEvent extends
     return TYPE;
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#hashCode()
-   */
-  @Override
-  public int hashCode() {
-    return super.hashCode();
-  }
-
-  /* (non-Javadoc)
-   * @see com.google.web.bindery.event.shared.Event#toString()
-   */
-  @Override
-  public String toString() {
-    return "CurrentEntityChangedEvent [shortName=" + shortName + ", longName=" + longName + "]";
-  }
-
   /**
    * Gets the long name.
-   *
+   * 
    * @return the long name
    */
   public String getLongName() {
@@ -158,10 +157,30 @@ public class CurrentEntityChangedEvent extends
 
   /**
    * Gets the short name.
-   *
+   * 
    * @return the short name
    */
   public String getShortName() {
     return shortName;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#hashCode()
+   */
+  @Override
+  public int hashCode() {
+    return super.hashCode();
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.google.web.bindery.event.shared.Event#toString()
+   */
+  @Override
+  public String toString() {
+    return "CurrentEntityChangedEvent [shortName=" + shortName + ", longName=" + longName + "]";
   }
 }

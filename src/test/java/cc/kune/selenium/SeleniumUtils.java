@@ -43,22 +43,24 @@ import cc.kune.common.shared.utils.TextUtils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SeleniumUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SeleniumUtils {
 
   /** The fast speed. */
   private static boolean fastSpeed = true;
-  
+
   /** The Constant LOG. */
   private static final Log LOG = LogFactory.getLog(SeleniumUtils.class);
 
   /**
    * Do screenshot.
-   *
-   * @param webdriver the webdriver
-   * @param filename the filename
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param filename
+   *          the filename
    */
   public static void doScreenshot(final WebDriver webdriver, final String filename) {
     final File scrFile = ((TakesScreenshot) webdriver).getScreenshotAs(OutputType.FILE);
@@ -72,9 +74,11 @@ public class SeleniumUtils {
 
   /**
    * Double click.
-   *
-   * @param webdriver the webdriver
-   * @param element the element
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param element
+   *          the element
    */
   public static void doubleClick(final WebDriver webdriver, final WebElement element) {
     SeleniumUtils.moveMouseTo(webdriver, element);
@@ -87,8 +91,9 @@ public class SeleniumUtils {
 
   /**
    * Fast speed.
-   *
-   * @param fastSpeed the fast speed
+   * 
+   * @param fastSpeed
+   *          the fast speed
    */
   public static void fastSpeed(final boolean fastSpeed) {
     SeleniumUtils.fastSpeed = fastSpeed;
@@ -96,8 +101,9 @@ public class SeleniumUtils {
 
   /**
    * Hide cursor.
-   *
-   * @param webdriver the webdriver
+   * 
+   * @param webdriver
+   *          the webdriver
    */
   public static void hideCursor(final WebDriver webdriver) {
     jsExec(webdriver).executeScript("khideCursor();");
@@ -105,9 +111,11 @@ public class SeleniumUtils {
 
   /**
    * Hightlight.
-   *
-   * @param element the element
-   * @param webdriver the webdriver
+   * 
+   * @param element
+   *          the element
+   * @param webdriver
+   *          the webdriver
    */
   public static void hightlight(final WebElement element, final WebDriver webdriver) {
     SeleniumUtils.showCursor(webdriver, element);
@@ -124,8 +132,9 @@ public class SeleniumUtils {
 
   /**
    * Inits the cursor.
-   *
-   * @param webdriver the webdriver
+   * 
+   * @param webdriver
+   *          the webdriver
    */
   public static void initCursor(final WebDriver webdriver) {
     jsExec(webdriver).executeScript("ksetCursor(100,100);");
@@ -134,8 +143,9 @@ public class SeleniumUtils {
 
   /**
    * Js exec.
-   *
-   * @param webdriver the webdriver
+   * 
+   * @param webdriver
+   *          the webdriver
    * @return the javascript executor
    */
   public static JavascriptExecutor jsExec(final WebDriver webdriver) {
@@ -144,9 +154,11 @@ public class SeleniumUtils {
 
   /**
    * Move mouse to.
-   *
-   * @param webdriver the webdriver
-   * @param element the element
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param element
+   *          the element
    */
   public static void moveMouseTo(final WebDriver webdriver, final WebElement element) {
     SeleniumUtils.showCursor(webdriver, element);
@@ -157,11 +169,15 @@ public class SeleniumUtils {
 
   /**
    * Move mouse to.
-   *
-   * @param webdriver the webdriver
-   * @param element the element
-   * @param xOffset the x offset
-   * @param yOffset the y offset
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param element
+   *          the element
+   * @param xOffset
+   *          the x offset
+   * @param yOffset
+   *          the y offset
    */
   public static void moveMouseTo(final WebDriver webdriver, final WebElement element, final int xOffset,
       final int yOffset) {
@@ -174,11 +190,15 @@ public class SeleniumUtils {
 
   /**
    * Move mouse to and click.
-   *
-   * @param webdriver the webdriver
-   * @param element the element
-   * @param xOffset the x offset
-   * @param yOffset the y offset
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param element
+   *          the element
+   * @param xOffset
+   *          the x offset
+   * @param yOffset
+   *          the y offset
    */
   public static void moveMouseToAndClick(final WebDriver webdriver, final WebElement element,
       final int xOffset, final int yOffset) {
@@ -192,8 +212,9 @@ public class SeleniumUtils {
 
   /**
    * Show cursor.
-   *
-   * @param webdriver the webdriver
+   * 
+   * @param webdriver
+   *          the webdriver
    */
   public static void showCursor(final WebDriver webdriver) {
     jsExec(webdriver).executeScript("kshowCursor();");
@@ -201,10 +222,13 @@ public class SeleniumUtils {
 
   /**
    * Show cursor.
-   *
-   * @param webdriver the webdriver
-   * @param x the x
-   * @param y the y
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param x
+   *          the x
+   * @param y
+   *          the y
    */
   public static void showCursor(final WebDriver webdriver, final int x, final int y) {
     // LOG.info("Mover cursor to x: " + x + ", y: " + y);
@@ -213,9 +237,11 @@ public class SeleniumUtils {
 
   /**
    * Show cursor.
-   *
-   * @param webdriver the webdriver
-   * @param element the element
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param element
+   *          the element
    */
   public static void showCursor(final WebDriver webdriver, final WebElement element) {
     final Point location = element.getLocation();
@@ -224,11 +250,15 @@ public class SeleniumUtils {
 
   /**
    * Show cursor.
-   *
-   * @param webdriver the webdriver
-   * @param element the element
-   * @param xOffset the x offset
-   * @param yOffset the y offset
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param element
+   *          the element
+   * @param xOffset
+   *          the x offset
+   * @param yOffset
+   *          the y offset
    */
   public static void showCursor(final WebDriver webdriver, final WebElement element, final int xOffset,
       final int yOffset) {
@@ -238,10 +268,13 @@ public class SeleniumUtils {
 
   /**
    * Show msg.
-   *
-   * @param webdriver the webdriver
-   * @param header the header
-   * @param msg the msg
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param header
+   *          the header
+   * @param msg
+   *          the msg
    */
   public static void showMsg(final WebDriver webdriver, final String header, final String msg) {
     final String opts = TextUtils.notEmpty(header) ? "header: '" + header + "'," : "";
@@ -252,9 +285,11 @@ public class SeleniumUtils {
 
   /**
    * Show tooltip.
-   *
-   * @param webdriver the webdriver
-   * @param element the element
+   * 
+   * @param webdriver
+   *          the webdriver
+   * @param element
+   *          the element
    */
   public static void showTooltip(final WebDriver webdriver, final WebElement element) {
     SeleniumUtils.moveMouseTo(webdriver, element);
@@ -264,8 +299,9 @@ public class SeleniumUtils {
 
   /**
    * Sleep.
-   *
-   * @param milliseconds the milliseconds
+   * 
+   * @param milliseconds
+   *          the milliseconds
    */
   public static void sleep(final int milliseconds) {
     try {

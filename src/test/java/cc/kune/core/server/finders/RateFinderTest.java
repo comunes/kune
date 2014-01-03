@@ -44,14 +44,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RateFinderTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RateFinderTest extends PersistencePreLoadedDataTest {
 
   /** The entity manager. */
   private EntityManager entityManager;
-  
+
   /** The rate finder. */
   @Inject
   RateFinder rateFinder;

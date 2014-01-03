@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UrlUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UrlUtils {
@@ -42,7 +42,7 @@ public class UrlUtils {
 
   /**
    * No cache string suffix.
-   *
+   * 
    * @return the string
    */
   public static String noCacheStringSuffix() {
@@ -52,8 +52,9 @@ public class UrlUtils {
 
   /**
    * Of.
-   *
-   * @param urlString the url string
+   * 
+   * @param urlString
+   *          the url string
    * @return the url
    */
   public static URL of(final String urlString) {

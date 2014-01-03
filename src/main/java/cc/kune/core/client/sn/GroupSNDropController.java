@@ -40,32 +40,38 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupSNDropController.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupSNDropController extends AbstractDropController {
 
   /** The content service. */
   private final ContentServiceHelper contentService;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The s n client utils. */
   private final SocialNetServiceHelper sNClientUtils;
-  
+
   /** The sub group. */
   private final SocialNetworkSubGroup subGroup;
 
   /**
    * Instantiates a new group sn drop controller.
-   *
-   * @param dragController the drag controller
-   * @param subGroup the sub group
-   * @param contentService the content service
-   * @param session the session
-   * @param i18n the i18n
-   * @param sNClientUtils the s n client utils
+   * 
+   * @param dragController
+   *          the drag controller
+   * @param subGroup
+   *          the sub group
+   * @param contentService
+   *          the content service
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param sNClientUtils
+   *          the s n client utils
    */
   public GroupSNDropController(final KuneDragController dragController,
       final SocialNetworkSubGroup subGroup, final ContentServiceHelper contentService,
@@ -80,8 +86,13 @@ public class GroupSNDropController extends AbstractDropController {
     registerType(BasicDragableThumb.class);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.dnd.AbstractDropController#onDropAllowed(com.google.gwt.user.client.ui.Widget, com.allen_sauer.gwt.dnd.client.drop.SimpleDropController)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.dnd.AbstractDropController#onDropAllowed(com.google
+   * .gwt.user.client.ui.Widget,
+   * com.allen_sauer.gwt.dnd.client.drop.SimpleDropController)
    */
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
@@ -100,8 +111,13 @@ public class GroupSNDropController extends AbstractDropController {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.dnd.AbstractDropController#onPreviewAllowed(com.google.gwt.user.client.ui.Widget, com.allen_sauer.gwt.dnd.client.drop.SimpleDropController)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.dnd.AbstractDropController#onPreviewAllowed(com.google
+   * .gwt.user.client.ui.Widget,
+   * com.allen_sauer.gwt.dnd.client.drop.SimpleDropController)
    */
   @Override
   public void onPreviewAllowed(final Widget widget, final SimpleDropController dropController)

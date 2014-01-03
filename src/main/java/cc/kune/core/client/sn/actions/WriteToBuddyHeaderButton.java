@@ -22,7 +22,7 @@
  */
 package cc.kune.core.client.sn.actions;
 
-import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
@@ -41,19 +41,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WriteToBuddyHeaderButton.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WriteToBuddyHeaderButton {
 
   /**
    * Instantiates a new write to buddy header button.
-   *
-   * @param writeToAction the write to action
-   * @param entityHeader the entity header
-   * @param stateManager the state manager
-   * @param session the session
-   * @param simpleContactManager the simple contact manager
+   * 
+   * @param writeToAction
+   *          the write to action
+   * @param entityHeader
+   *          the entity header
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param simpleContactManager
+   *          the simple contact manager
    */
   @Inject
   public WriteToBuddyHeaderButton(final WriteToAction writeToAction, final EntityHeader entityHeader,
@@ -66,7 +71,7 @@ public class WriteToBuddyHeaderButton {
     writeToAction.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {
-        if (event.getPropertyName().equals(AbstractAction.ENABLED)) {
+        if (event.getPropertyName().equals(Action.ENABLED)) {
           button.setVisible((Boolean) event.getNewValue());
         }
       }

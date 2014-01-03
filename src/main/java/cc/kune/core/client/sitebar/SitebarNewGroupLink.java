@@ -43,14 +43,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitebarNewGroupLink.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarNewGroupLink extends ButtonDescriptor {
-  
+
   /**
    * The Class SitebarNewGroupAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class SitebarNewGroupAction extends AbstractExtendedAction {
@@ -60,9 +60,11 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
     /**
      * Instantiates a new sitebar new group action.
-     *
-     * @param stateManager the state manager
-     * @param i18n the i18n
+     * 
+     * @param stateManager
+     *          the state manager
+     * @param i18n
+     *          the i18n
      */
     @Inject
     public SitebarNewGroupAction(final StateManager stateManager, final I18nTranslationService i18n) {
@@ -73,8 +75,12 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
           + "(NGO, collective, academic group...)"));
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -84,19 +90,25 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
   /** The Constant NEW_GROUP_BTN_ID. */
   public static final String NEW_GROUP_BTN_ID = "k-site-newgroup-btn";
-  
+
   /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new sitebar new group link.
-   *
-   * @param newGroupAction the new group action
-   * @param sitebarActions the sitebar actions
-   * @param i18n the i18n
-   * @param eventBus the event bus
-   * @param coreResources the core resources
-   * @param session the session
+   * 
+   * @param newGroupAction
+   *          the new group action
+   * @param sitebarActions
+   *          the sitebar actions
+   * @param i18n
+   *          the i18n
+   * @param eventBus
+   *          the event bus
+   * @param coreResources
+   *          the core resources
+   * @param session
+   *          the session
    */
   @Inject
   public SitebarNewGroupLink(final SitebarNewGroupAction newGroupAction,
@@ -121,8 +133,9 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
   /**
    * Recalculate.
-   *
-   * @param notLogged the not logged
+   * 
+   * @param notLogged
+   *          the not logged
    */
   public void recalculate(final boolean notLogged) {
     if (notLogged) {

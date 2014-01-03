@@ -22,11 +22,11 @@
  */
 package cc.kune.gspace.client.actions.share;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.gspace.client.actions.MenuLoggedDescriptor;
-import cc.kune.gspace.client.actions.SNActionStyles;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -41,7 +41,7 @@ public class ContentViewerShareMenu extends MenuLoggedDescriptor {
       final AccessRightsClientManager rightsManager) {
     super(rightsManager);
     this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with group members, etc")).withIcon(
-        res.world()).withStyles(SNActionStyles.MENU_BTN_STYLE_LEFT).withId(ID);
+        res.world()).withStyles(ActionStyles.MENU_BTN_STYLE_LEFT).withId(ID);
   }
 
 }

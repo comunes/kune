@@ -55,22 +55,10 @@ import com.google.inject.Inject;
 /**
  * Some snippets from:
  * http://www.onjava.com/pub/a/onjava/excerpt/jebp_3/index1.html?page=1
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FileDownloadManager extends HttpServlet {
-
-  /** The Constant serialVersionUID. */
-  private static final long serialVersionUID = -1160659289588014049L;
-
-  /** The Constant RESP_HEADER_ATTACHMENT_FILENAME. */
-  static final String RESP_HEADER_ATTACHMENT_FILENAME = "attachment; filename=\"";
-  
-  /** The Constant RESP_HEADER_CONTEND_DISP. */
-  static final String RESP_HEADER_CONTEND_DISP = "Content-Disposition";
-  
-  /** The Constant RESP_HEADER_END. */
-  static final String RESP_HEADER_END = "\"";
 
   /** The Constant APPLICATION_X_DOWNLOAD. */
   static final String APPLICATION_X_DOWNLOAD = "application/x-download";
@@ -78,53 +66,50 @@ public class FileDownloadManager extends HttpServlet {
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(FileDownloadManager.class);
 
+  /** The Constant RESP_HEADER_ATTACHMENT_FILENAME. */
+  static final String RESP_HEADER_ATTACHMENT_FILENAME = "attachment; filename=\"";
+
+  /** The Constant RESP_HEADER_CONTEND_DISP. */
+  static final String RESP_HEADER_CONTEND_DISP = "Content-Disposition";
+
+  /** The Constant RESP_HEADER_END. */
+  static final String RESP_HEADER_END = "\"";
+
+  /** The Constant serialVersionUID. */
+  private static final long serialVersionUID = -1160659289588014049L;
+
   /** The content manager. */
   @Inject
   ContentManager contentManager;
-  
-  /** The kune properties. */
-  @Inject
-  KuneProperties kuneProperties;
-  
+
   /** The file utils. */
   @Inject
   FileUtils fileUtils;
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
-   */
-  @Override
-  protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
-      throws ServletException, IOException {
-
-    final String userHash = req.getParameter(FileConstants.HASH);
-    final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
-    final String downloadS = req.getParameter(FileConstants.DOWNLOAD);
-    final String imageSizeS = req.getParameter(FileConstants.IMGSIZE);
-
-    try {
-      final Content cnt = getContentForDownload(userHash, stateToken);
-      final String absFilename = buildResponse(cnt, stateToken, downloadS, imageSizeS, resp, fileUtils);
-      final OutputStream out = resp.getOutputStream();
-      FileDownloadManagerUtils.returnFile(absFilename, out);
-    } catch (final ContentNotFoundException e) {
-      FileDownloadManagerUtils.returnNotFound404(resp);
-      return;
-    }
-  }
+  /** The kune properties. */
+  @Inject
+  KuneProperties kuneProperties;
 
   /**
    * Builds the response.
-   *
-   * @param cnt the cnt
-   * @param stateToken the state token
-   * @param downloadS the download s
-   * @param imageSizeS the image size s
-   * @param resp the resp
-   * @param fileUtils the file utils
+   * 
+   * @param cnt
+   *          the cnt
+   * @param stateToken
+   *          the state token
+   * @param downloadS
+   *          the download s
+   * @param imageSizeS
+   *          the image size s
+   * @param resp
+   *          the resp
+   * @param fileUtils
+   *          the file utils
    * @return the string
-   * @throws FileNotFoundException the file not found exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws FileNotFoundException
+   *           the file not found exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   String buildResponse(final Content cnt, final StateToken stateToken, final String downloadS,
       final String imageSizeS, final HttpServletResponse resp, final FileUtils fileUtils)
@@ -175,13 +160,43 @@ public class FileDownloadManager extends HttpServlet {
     return absFilename;
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
+   * javax.servlet.http.HttpServletResponse)
+   */
+  @Override
+  protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
+      throws ServletException, IOException {
+
+    final String userHash = req.getParameter(FileConstants.HASH);
+    final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
+    final String downloadS = req.getParameter(FileConstants.DOWNLOAD);
+    final String imageSizeS = req.getParameter(FileConstants.IMGSIZE);
+
+    try {
+      final Content cnt = getContentForDownload(userHash, stateToken);
+      final String absFilename = buildResponse(cnt, stateToken, downloadS, imageSizeS, resp, fileUtils);
+      final OutputStream out = resp.getOutputStream();
+      FileDownloadManagerUtils.returnFile(absFilename, out);
+    } catch (final ContentNotFoundException e) {
+      FileDownloadManagerUtils.returnNotFound404(resp);
+      return;
+    }
+  }
+
   /**
    * Gets the content for download.
-   *
-   * @param userHash the user hash
-   * @param stateToken the state token
+   * 
+   * @param userHash
+   *          the user hash
+   * @param stateToken
+   *          the state token
    * @return the content for download
-   * @throws ContentNotFoundException the content not found exception
+   * @throws ContentNotFoundException
+   *           the content not found exception
    */
   @Authenticated(mandatory = false)
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.content)

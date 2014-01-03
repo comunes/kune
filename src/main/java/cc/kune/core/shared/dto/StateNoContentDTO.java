@@ -26,7 +26,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * Used for contents not found or users without homepage.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StateNoContentDTO extends StateAbstractDTO implements IsSerializable {

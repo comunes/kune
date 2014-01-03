@@ -30,16 +30,18 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptDefLicensePanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptDefLicensePanel extends EntityOptDefLicensePanel implements UserOptDefLicenseView {
 
   /**
    * Instantiates a new user opt def license panel.
-   *
-   * @param i18n the i18n
-   * @param res the res
+   * 
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
    */
   @Inject
   public UserOptDefLicensePanel(final I18nTranslationService i18n, final IconicResources res) {

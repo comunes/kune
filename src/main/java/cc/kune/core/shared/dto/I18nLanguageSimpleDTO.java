@@ -27,15 +27,16 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nLanguageSimpleDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nLanguageSimpleDTO implements IsSerializable {
 
   /**
    * Creates the.
-   *
-   * @param language the language
+   * 
+   * @param language
+   *          the language
    * @return the i18n language simple dto
    */
   public static I18nLanguageSimpleDTO create(final I18nLanguageDTO language) {
@@ -56,9 +57,11 @@ public class I18nLanguageSimpleDTO implements IsSerializable {
 
   /**
    * Instantiates a new i18n language simple dto.
-   *
-   * @param code the code
-   * @param englishName the english name
+   * 
+   * @param code
+   *          the code
+   * @param englishName
+   *          the english name
    */
   public I18nLanguageSimpleDTO(final String code, final String englishName) {
     this.code = code;
@@ -67,7 +70,7 @@ public class I18nLanguageSimpleDTO implements IsSerializable {
 
   /**
    * Gets the code.
-   *
+   * 
    * @return the code
    */
   public String getCode() {
@@ -76,7 +79,7 @@ public class I18nLanguageSimpleDTO implements IsSerializable {
 
   /**
    * Gets the english name.
-   *
+   * 
    * @return the english name
    */
   public String getEnglishName() {
@@ -85,8 +88,9 @@ public class I18nLanguageSimpleDTO implements IsSerializable {
 
   /**
    * Sets the code.
-   *
-   * @param code the new code
+   * 
+   * @param code
+   *          the new code
    */
   public void setCode(final String code) {
     this.code = code;
@@ -94,8 +98,9 @@ public class I18nLanguageSimpleDTO implements IsSerializable {
 
   /**
    * Sets the english name.
-   *
-   * @param englishName the new english name
+   * 
+   * @param englishName
+   *          the new english name
    */
   public void setEnglishName(final String englishName) {
     this.englishName = englishName;

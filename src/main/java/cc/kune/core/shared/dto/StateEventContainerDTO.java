@@ -28,7 +28,7 @@ import java.util.Map;
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateEventContainerDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StateEventContainerDTO extends StateContainerDTO {
@@ -44,7 +44,7 @@ public class StateEventContainerDTO extends StateContainerDTO {
 
   /**
    * Gets the appointments.
-   *
+   * 
    * @return the appointments
    */
   public List<Map<String, String>> getAppointments() {
@@ -53,8 +53,9 @@ public class StateEventContainerDTO extends StateContainerDTO {
 
   /**
    * Sets the appointments.
-   *
-   * @param appointments the appointments
+   * 
+   * @param appointments
+   *          the appointments
    */
   public void setAppointments(final List<Map<String, String>> appointments) {
     this.appointments = appointments;

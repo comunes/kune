@@ -38,14 +38,14 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserConfirmPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserConfirmPresenter extends Presenter<UserConfirmView, UserConfirmProxy> {
-  
+
   /**
    * The Interface UserConfirmProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -54,25 +54,29 @@ public class UserConfirmPresenter extends Presenter<UserConfirmView, UserConfirm
 
   /**
    * The Interface UserConfirmView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface UserConfirmView extends View {
-    
+
     /**
      * Confirm ask.
-     *
-     * @param ask the ask
+     * 
+     * @param ask
+     *          the ask
      */
     public void confirmAsk(ConfirmAskEvent ask);
   }
 
   /**
    * Instantiates a new user confirm presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
    */
   @Inject
   public UserConfirmPresenter(final EventBus eventBus, final UserConfirmView view,
@@ -82,15 +86,18 @@ public class UserConfirmPresenter extends Presenter<UserConfirmView, UserConfirm
 
   /**
    * On confirm ask.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @ProxyEvent
   public void onConfirmAsk(final ConfirmAskEvent event) {
     getView().confirmAsk(event);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

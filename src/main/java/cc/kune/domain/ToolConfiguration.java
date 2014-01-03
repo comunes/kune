@@ -37,7 +37,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolConfiguration.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -49,7 +49,7 @@ public class ToolConfiguration {
   @Basic
   @Column(columnDefinition = "BIT", length = 1)
   private boolean enabled;
-  
+
   /** The id. */
   @Id
   @GeneratedValue
@@ -68,7 +68,7 @@ public class ToolConfiguration {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -77,7 +77,7 @@ public class ToolConfiguration {
 
   /**
    * Gets the root.
-   *
+   * 
    * @return the root
    */
   public Container getRoot() {
@@ -86,7 +86,7 @@ public class ToolConfiguration {
 
   /**
    * Checks if is enabled.
-   *
+   * 
    * @return true, if is enabled
    */
   public boolean isEnabled() {
@@ -95,8 +95,9 @@ public class ToolConfiguration {
 
   /**
    * Sets the enabled.
-   *
-   * @param enabled the new enabled
+   * 
+   * @param enabled
+   *          the new enabled
    */
   public void setEnabled(final boolean enabled) {
     this.enabled = enabled;
@@ -104,8 +105,9 @@ public class ToolConfiguration {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -113,8 +115,9 @@ public class ToolConfiguration {
 
   /**
    * Sets the root.
-   *
-   * @param root the root
+   * 
+   * @param root
+   *          the root
    * @return the container
    */
   public Container setRoot(final Container root) {

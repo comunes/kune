@@ -32,16 +32,18 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PSpaceParts.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PSpaceParts {
 
   /**
    * Instantiates a new p space parts.
-   *
-   * @param session the session
-   * @param pspacePresenter the pspace presenter
+   * 
+   * @param session
+   *          the session
+   * @param pspacePresenter
+   *          the pspace presenter
    */
   @Inject
   public PSpaceParts(final Session session, final Provider<PSpacePresenter> pspacePresenter) {

@@ -28,7 +28,7 @@ import com.google.inject.Singleton;
 
 /**
  * The Class GroupSNOptionsMenu.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton

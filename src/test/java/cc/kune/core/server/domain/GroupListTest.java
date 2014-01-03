@@ -34,14 +34,14 @@ import cc.kune.domain.GroupList;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupListTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupListTest {
-  
+
   /** The included group. */
   private Group includedGroup;
-  
+
   /** The list. */
   private GroupList list;
 

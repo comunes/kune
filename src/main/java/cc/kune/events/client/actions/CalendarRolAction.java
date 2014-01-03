@@ -36,20 +36,26 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CalendarRolAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class CalendarRolAction extends RolAction {
 
   /**
    * Instantiates a new calendar rol action.
-   *
-   * @param eventBus the event bus
-   * @param session the session
-   * @param calendar the calendar
-   * @param rolRequired the rol required
-   * @param authNeed the auth need
-   * @param onlyOnApp the only on app
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
+   * @param calendar
+   *          the calendar
+   * @param rolRequired
+   *          the rol required
+   * @param authNeed
+   *          the auth need
+   * @param onlyOnApp
+   *          the only on app
    */
   public CalendarRolAction(final EventBus eventBus, final Session session,
       final Provider<CalendarViewer> calendar, final AccessRolDTO rolRequired, final boolean authNeed,

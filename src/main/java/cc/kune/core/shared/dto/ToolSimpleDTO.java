@@ -27,14 +27,14 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolSimpleDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolSimpleDTO implements IsSerializable {
-  
+
   /** The name. */
   private String name;
-  
+
   /** The root name. */
   private String rootName;
 
@@ -47,18 +47,20 @@ public class ToolSimpleDTO implements IsSerializable {
 
   /**
    * Instantiates a new tool simple dto.
-   *
-   * @param name the name
-   * @param rootName the root name
+   * 
+   * @param name
+   *          the name
+   * @param rootName
+   *          the root name
    */
-  public ToolSimpleDTO(String name, String rootName) {
+  public ToolSimpleDTO(final String name, final String rootName) {
     this.name = name;
     this.rootName = rootName;
   }
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -67,7 +69,7 @@ public class ToolSimpleDTO implements IsSerializable {
 
   /**
    * Gets the root name.
-   *
+   * 
    * @return the root name
    */
   public String getRootName() {
@@ -76,19 +78,21 @@ public class ToolSimpleDTO implements IsSerializable {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
-  public void setName(String name) {
+  public void setName(final String name) {
     this.name = name;
   }
 
   /**
    * Sets the root name.
-   *
-   * @param rootName the new root name
+   * 
+   * @param rootName
+   *          the new root name
    */
-  public void setRootName(String rootName) {
+  public void setRootName(final String rootName) {
     this.rootName = rootName;
   }
 }

@@ -29,23 +29,23 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupListDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupListDTO implements IsSerializable {
-  
+
   /** The Constant EVERYONE. */
   public static final String EVERYONE = "EVERYONE";
-  
+
   /** The Constant NOBODY. */
   public static final String NOBODY = "NOBODY";
-  
+
   /** The Constant NORMAL. */
   public static final String NORMAL = "NORMAL";
-  
+
   /** The list. */
   private Set<GroupDTO> list;
-  
+
   /** The mode. */
   private String mode;
 
@@ -58,8 +58,9 @@ public class GroupListDTO implements IsSerializable {
 
   /**
    * Instantiates a new group list dto.
-   *
-   * @param list the list
+   * 
+   * @param list
+   *          the list
    */
   public GroupListDTO(final Set<GroupDTO> list) {
     this.list = list;
@@ -67,7 +68,7 @@ public class GroupListDTO implements IsSerializable {
 
   /**
    * Gets the list.
-   *
+   * 
    * @return the list
    */
   public Set<GroupDTO> getList() {
@@ -76,7 +77,7 @@ public class GroupListDTO implements IsSerializable {
 
   /**
    * Gets the mode.
-   *
+   * 
    * @return the mode
    */
   public String getMode() {
@@ -85,8 +86,9 @@ public class GroupListDTO implements IsSerializable {
 
   /**
    * Includes.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return true, if successful
    */
   public boolean includes(final GroupDTO group) {
@@ -103,8 +105,9 @@ public class GroupListDTO implements IsSerializable {
 
   /**
    * Sets the list.
-   *
-   * @param list the new list
+   * 
+   * @param list
+   *          the new list
    */
   public void setList(final Set<GroupDTO> list) {
     this.list = list;
@@ -112,14 +115,17 @@ public class GroupListDTO implements IsSerializable {
 
   /**
    * Sets the mode.
-   *
-   * @param mode the new mode
+   * 
+   * @param mode
+   *          the new mode
    */
   public void setMode(final String mode) {
     this.mode = mode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

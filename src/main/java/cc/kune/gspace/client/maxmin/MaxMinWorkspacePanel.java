@@ -32,22 +32,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MaxMinWorkspacePanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
 
   /** The gs armor. */
   private final GSpaceArmor gsArmor;
-  
+
   /** The wave client. */
   private final WaveClientProvider waveClient;
 
   /**
    * Instantiates a new max min workspace panel.
-   *
-   * @param gsArmor the gs armor
-   * @param waveClient the wave client
+   * 
+   * @param gsArmor
+   *          the gs armor
+   * @param waveClient
+   *          the wave client
    */
   @Inject
   public MaxMinWorkspacePanel(final GSpaceArmor gsArmor, final WaveClientProvider waveClient) {
@@ -55,14 +57,19 @@ public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
     this.waveClient = waveClient;
   }
 
-  /* (non-Javadoc)
-   * @see com.gwtplatform.mvp.client.View#addToSlot(java.lang.Object, com.google.gwt.user.client.ui.Widget)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.gwtplatform.mvp.client.View#addToSlot(java.lang.Object,
+   * com.google.gwt.user.client.ui.Widget)
    */
   @Override
   public void addToSlot(final Object slot, final Widget content) {
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -70,21 +77,29 @@ public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see com.gwtplatform.mvp.client.View#removeFromSlot(java.lang.Object, com.google.gwt.user.client.ui.Widget)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.gwtplatform.mvp.client.View#removeFromSlot(java.lang.Object,
+   * com.google.gwt.user.client.ui.Widget)
    */
   @Override
   public void removeFromSlot(final Object slot, final Widget content) {
   }
 
-  /* (non-Javadoc)
-   * @see com.gwtplatform.mvp.client.View#setInSlot(java.lang.Object, com.google.gwt.user.client.ui.Widget)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.gwtplatform.mvp.client.View#setInSlot(java.lang.Object,
+   * com.google.gwt.user.client.ui.Widget)
    */
   @Override
   public void setInSlot(final Object slot, final Widget content) {
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.maxmin.IsMaximizable#setMaximized(boolean)
    */
   @Override

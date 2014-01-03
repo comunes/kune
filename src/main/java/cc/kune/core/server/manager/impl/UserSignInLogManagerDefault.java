@@ -38,7 +38,7 @@ import com.google.inject.Singleton;
 /**
  * The Class UserSignInLogManagerDefault manages the table of user signin
  * records.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -52,7 +52,7 @@ public class UserSignInLogManagerDefault extends DefaultManager<UserSignInLog, L
    *          the provider
    */
   @Inject
-  public UserSignInLogManagerDefault(@DataSourceKune Provider<EntityManager> provider) {
+  public UserSignInLogManagerDefault(@DataSourceKune final Provider<EntityManager> provider) {
     super(provider, UserSignInLog.class);
   }
 
@@ -63,8 +63,9 @@ public class UserSignInLogManagerDefault extends DefaultManager<UserSignInLog, L
    * cc.kune.core.server.manager.UserSignInLogManager#log(cc.kune.domain.User,
    * java.lang.String, java.lang.Long, java.lang.String, java.lang.String)
    */
-  public void log(User user, String ipAddress, String userAgent, String hash) {
-    UserSignInLog logRegister = new UserSignInLog(user, ipAddress, userAgent, hash);
+  @Override
+  public void log(final User user, final String ipAddress, final String userAgent, final String hash) {
+    final UserSignInLog logRegister = new UserSignInLog(user, ipAddress, userAgent, hash);
     persist(logRegister);
   }
 

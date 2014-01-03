@@ -32,23 +32,26 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupOptLogoPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupOptLogoPanel extends EntityOptLogoPanel implements GroupOptLogoView {
-  
+
   /** The Constant BUTTON_ID. */
   public static final String BUTTON_ID = "k-golp-sendb";
-  
+
   /** The Constant PANEL_ID. */
   public static final String PANEL_ID = "k-golp-pan";
 
   /**
    * Instantiates a new group opt logo panel.
-   *
-   * @param eventBus the event bus
-   * @param i18n the i18n
-   * @param res the res
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
    */
   @Inject
   public GroupOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,

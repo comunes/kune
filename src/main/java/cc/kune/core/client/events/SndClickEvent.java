@@ -30,22 +30,23 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SndClickEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /**
    * The Interface HasSndClickHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasSndClickHandlers extends HasHandlers {
-    
+
     /**
      * Adds the snd click handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addSndClickHandler(SndClickHandler handler);
@@ -53,15 +54,16 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /**
    * The Interface SndClickHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SndClickHandler extends EventHandler {
-    
+
     /**
      * On click.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onClick(SndClickEvent event);
   }
@@ -71,8 +73,9 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /**
    * Fire.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new SndClickEvent());
@@ -80,7 +83,7 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<SndClickHandler> getType() {
@@ -93,15 +96,21 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
   public SndClickEvent() {
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final SndClickHandler handler) {
     handler.onClick(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -109,7 +118,9 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
     return super.equals(obj);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -117,7 +128,9 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
     return TYPE;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -125,7 +138,9 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
     return super.hashCode();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

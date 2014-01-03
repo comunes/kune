@@ -35,20 +35,23 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChangeToCollabAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ChangeToCollabAction extends AbstractExtendedAction {
-  
+
   /** The s n client utils. */
   private final SocialNetServiceHelper sNClientUtils;
 
   /**
    * Instantiates a new change to collab action.
-   *
-   * @param i18n the i18n
-   * @param res the res
-   * @param sNClientUtils the s n client utils
+   * 
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param sNClientUtils
+   *          the s n client utils
    */
   @Inject
   public ChangeToCollabAction(final I18nTranslationService i18n, final IconicResources res,
@@ -58,8 +61,12 @@ public class ChangeToCollabAction extends AbstractExtendedAction {
     putValue(Action.SMALL_ICON, res.downArrow());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

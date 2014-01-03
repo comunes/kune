@@ -25,11 +25,11 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserRegistrationException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserRegistrationException extends DefaultException {
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -4530874249465164135L;
 
@@ -42,8 +42,9 @@ public class UserRegistrationException extends DefaultException {
 
   /**
    * Instantiates a new user registration exception.
-   *
-   * @param msg the msg
+   * 
+   * @param msg
+   *          the msg
    */
   public UserRegistrationException(final String msg) {
     super(msg);

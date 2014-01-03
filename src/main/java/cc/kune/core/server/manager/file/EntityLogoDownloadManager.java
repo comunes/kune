@@ -49,47 +49,50 @@ import com.google.inject.name.Named;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityLogoDownloadManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityLogoDownloadManager extends HttpServlet {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -1958945058088446881L;
-  
-  /** The group logo. */
-  private final byte[] groupLogo;
-  
-  /** The group manager. */
-  GroupManager groupManager;
-  
-  /** The group mime. */
-  private final String groupMime;
-  
-  /** The person logo. */
-  private final byte[] personLogo;
-  
-  /** The person mime. */
-  private final String personMime;
-  
-  /** The unknown logo. */
-  private final byte[] unknownLogo;
-  
-  /** The unknown mime. */
-  private final String unknownMime;
-  
-  /** The default last modified. */
-  final private long defaultLastModified;
-  
+
   /** The current last modified. */
   private long currentLastModified;
 
+  /** The default last modified. */
+  final private long defaultLastModified;
+
+  /** The group logo. */
+  private final byte[] groupLogo;
+
+  /** The group manager. */
+  GroupManager groupManager;
+
+  /** The group mime. */
+  private final String groupMime;
+
+  /** The person logo. */
+  private final byte[] personLogo;
+
+  /** The person mime. */
+  private final String personMime;
+
+  /** The unknown logo. */
+  private final byte[] unknownLogo;
+
+  /** The unknown mime. */
+  private final String unknownMime;
+
   /**
    * Instantiates a new entity logo download manager.
-   *
-   * @param resourceBases the resource bases
-   * @param groupManager the group manager
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param resourceBases
+   *          the resource bases
+   * @param groupManager
+   *          the group manager
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Inject
   public EntityLogoDownloadManager(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases,
@@ -111,8 +114,12 @@ public class EntityLogoDownloadManager extends HttpServlet {
     defaultLastModified = 0l;
   }
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
+   * javax.servlet.http.HttpServletResponse)
    */
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
@@ -148,23 +155,14 @@ public class EntityLogoDownloadManager extends HttpServlet {
     }
   }
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpServlet#getLastModified(javax.servlet.http.HttpServletRequest)
-   */
-  @Override
-  protected long getLastModified(HttpServletRequest req) {
-    // http://oreilly.com/catalog/jservlet/chapter/ch03.html#14260
-    // (...)to play it safe, getLastModified() should always round down to the
-    // nearest thousand milliseconds.
-    return currentLastModified / 1000 * 1000;
-  }
-
   /**
    * Gets the by.
-   *
-   * @param file the file
+   * 
+   * @param file
+   *          the file
    * @return the by
-   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   private byte[] getBy(final File file) throws IOException {
     final BufferedInputStream is = new BufferedInputStream(new FileInputStream(file));
@@ -175,9 +173,11 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /**
    * Gets the file.
-   *
-   * @param resourceBases the resource bases
-   * @param location the location
+   * 
+   * @param resourceBases
+   *          the resource bases
+   * @param location
+   *          the location
    * @return the file
    */
   private File getFile(final List<String> resourceBases, final String location) {
@@ -185,10 +185,25 @@ public class EntityLogoDownloadManager extends HttpServlet {
     return file;
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.servlet.http.HttpServlet#getLastModified(javax.servlet.http.
+   * HttpServletRequest)
+   */
+  @Override
+  protected long getLastModified(final HttpServletRequest req) {
+    // http://oreilly.com/catalog/jservlet/chapter/ch03.html#14260
+    // (...)to play it safe, getLastModified() should always round down to the
+    // nearest thousand milliseconds.
+    return currentLastModified / 1000 * 1000;
+  }
+
   /**
    * Gets the mime.
-   *
-   * @param file the file
+   * 
+   * @param file
+   *          the file
    * @return the mime
    */
   private String getMime(final File file) {
@@ -197,11 +212,15 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /**
    * Reply.
-   *
-   * @param resp the resp
-   * @param logo the logo
-   * @param mime the mime
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param resp
+   *          the resp
+   * @param logo
+   *          the logo
+   * @param mime
+   *          the mime
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   private void reply(final HttpServletResponse resp, final byte[] logo, final String mime)
       throws IOException {
@@ -213,9 +232,11 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /**
    * Unknown result.
-   *
-   * @param resp the resp
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param resp
+   *          the resp
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   private void unknownResult(final HttpServletResponse resp) throws IOException {
     reply(resp, unknownLogo, unknownMime);

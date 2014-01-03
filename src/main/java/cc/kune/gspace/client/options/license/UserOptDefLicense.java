@@ -24,7 +24,7 @@ package cc.kune.gspace.client.options.license;
 
 /**
  * The Interface UserOptDefLicense.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface UserOptDefLicense extends EntityOptDefLicense {

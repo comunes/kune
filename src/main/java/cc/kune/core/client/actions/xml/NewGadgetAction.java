@@ -42,53 +42,65 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewGadgetAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewGadgetAction extends RolAction {
 
   /** The body. */
   private final String body;
-  
+
   /** The content service. */
   private final Provider<ContentServiceAsync> contentService;
-  
+
   /** The content viewer. */
   private final ContentViewerPresenter contentViewer;
-  
+
   /** The gadget name. */
   private final String gadgetName;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
-  
+
   /** The title. */
   private final String title;
-  
+
   /** The type id. */
   private final String typeId;
 
   /**
    * Instantiates a new new gadget action.
-   *
-   * @param contentService the content service
-   * @param contentViewerPresenter the content viewer presenter
-   * @param stateManager the state manager
-   * @param session the session
-   * @param i18n the i18n
-   * @param rol the rol
-   * @param authNeeded the auth needed
-   * @param gadgetName the gadget name
-   * @param typeId the type id
-   * @param iconUrl the icon url
-   * @param title the title
-   * @param body the body
+   * 
+   * @param contentService
+   *          the content service
+   * @param contentViewerPresenter
+   *          the content viewer presenter
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param rol
+   *          the rol
+   * @param authNeeded
+   *          the auth needed
+   * @param gadgetName
+   *          the gadget name
+   * @param typeId
+   *          the type id
+   * @param iconUrl
+   *          the icon url
+   * @param title
+   *          the title
+   * @param body
+   *          the body
    */
   public NewGadgetAction(final Provider<ContentServiceAsync> contentService,
       final ContentViewerPresenter contentViewerPresenter, final StateManager stateManager,
@@ -108,8 +120,12 @@ public class NewGadgetAction extends RolAction {
     putValue(Action.SMALL_ICON, iconUrl);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

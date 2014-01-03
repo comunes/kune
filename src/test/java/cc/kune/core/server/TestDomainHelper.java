@@ -36,7 +36,7 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestDomainHelper.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -44,10 +44,13 @@ public abstract class TestDomainHelper {
 
   /**
    * Creates the access lists.
-   *
-   * @param groupAdmin the group admin
-   * @param groupEditor the group editor
-   * @param groupViewer the group viewer
+   * 
+   * @param groupAdmin
+   *          the group admin
+   * @param groupEditor
+   *          the group editor
+   * @param groupViewer
+   *          the group viewer
    * @return the access lists
    */
   public static AccessLists createAccessLists(final Group groupAdmin, final Group groupEditor,
@@ -68,7 +71,7 @@ public abstract class TestDomainHelper {
 
   /**
    * Creates the big text.
-   *
+   * 
    * @return the string
    */
   public static String createBigText() {
@@ -222,10 +225,13 @@ public abstract class TestDomainHelper {
 
   /**
    * Creates the descriptor.
-   *
-   * @param id the id
-   * @param title the title
-   * @param content the content
+   * 
+   * @param id
+   *          the id
+   * @param title
+   *          the title
+   * @param content
+   *          the content
    * @return the content
    */
   public static Content createDescriptor(final long id, final String title, final String content) {
@@ -240,8 +246,9 @@ public abstract class TestDomainHelper {
 
   /**
    * Creates the folder with id.
-   *
-   * @param id the id
+   * 
+   * @param id
+   *          the id
    * @return the container
    */
   public static Container createFolderWithId(final long id) {
@@ -252,10 +259,13 @@ public abstract class TestDomainHelper {
 
   /**
    * Creates the folder with id and group and tool.
-   *
-   * @param id the id
-   * @param groupShortName the group short name
-   * @param toolName the tool name
+   * 
+   * @param id
+   *          the id
+   * @param groupShortName
+   *          the group short name
+   * @param toolName
+   *          the tool name
    * @return the container
    */
   public static Container createFolderWithIdAndGroupAndTool(final int id, final String groupShortName,
@@ -270,9 +280,11 @@ public abstract class TestDomainHelper {
 
   /**
    * Creates the folder with id and tool name.
-   *
-   * @param id the id
-   * @param toolName the tool name
+   * 
+   * @param id
+   *          the id
+   * @param toolName
+   *          the tool name
    * @return the container
    */
   public static Container createFolderWithIdAndToolName(final int id, final String toolName) {
@@ -283,8 +295,9 @@ public abstract class TestDomainHelper {
 
   /**
    * Creates the group.
-   *
-   * @param number the number
+   * 
+   * @param number
+   *          the number
    * @return the group
    */
   public static Group createGroup(final int number) {
@@ -295,11 +308,15 @@ public abstract class TestDomainHelper {
 
   /**
    * Creates the social network.
-   *
-   * @param groupInAdmins the group in admins
-   * @param groupInCollab the group in collab
-   * @param groupInViewer the group in viewer
-   * @param groupInPendings the group in pendings
+   * 
+   * @param groupInAdmins
+   *          the group in admins
+   * @param groupInCollab
+   *          the group in collab
+   * @param groupInViewer
+   *          the group in viewer
+   * @param groupInPendings
+   *          the group in pendings
    * @return the social network
    */
   public static SocialNetwork createSocialNetwork(final Group groupInAdmins, final Group groupInCollab,
@@ -315,8 +332,9 @@ public abstract class TestDomainHelper {
 
   /**
    * Creates the user.
-   *
-   * @param number the number
+   * 
+   * @param number
+   *          the number
    * @return the user
    */
   public static User createUser(final int number) {

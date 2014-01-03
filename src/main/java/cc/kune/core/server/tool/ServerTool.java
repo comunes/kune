@@ -31,7 +31,7 @@ import cc.kune.domain.User;
 /**
  * Tools must have a corresponding module and must be marked asEagerSingleton.
  * The register method must have the @Inject annotation
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -39,71 +39,83 @@ public interface ServerTool {
 
   /**
    * Check types before container creation.
-   *
-   * @param parentTypeId the parent type id
-   * @param typeId the type id
+   * 
+   * @param parentTypeId
+   *          the parent type id
+   * @param typeId
+   *          the type id
    */
   void checkTypesBeforeContainerCreation(String parentTypeId, String typeId);
 
   /**
    * Check types before content creation.
-   *
-   * @param parentTypeId the parent type id
-   * @param typeId the type id
+   * 
+   * @param parentTypeId
+   *          the parent type id
+   * @param typeId
+   *          the type id
    */
   void checkTypesBeforeContentCreation(String parentTypeId, String typeId);
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   String getName();
 
   /**
    * Gets the root name.
-   *
+   * 
    * @return the root name
    */
   String getRootName();
 
   /**
    * Gets the target.
-   *
+   * 
    * @return the target
    */
   ServerToolTarget getTarget();
 
   /**
    * Inits the group.
-   *
-   * @param user the user
-   * @param group the group
-   * @param vars the vars
+   * 
+   * @param user
+   *          the user
+   * @param group
+   *          the group
+   * @param vars
+   *          the vars
    * @return the group
    */
   Group initGroup(User user, Group group, Object... vars);
 
   /**
    * On create container.
-   *
-   * @param container the container
-   * @param parent the parent
+   * 
+   * @param container
+   *          the container
+   * @param parent
+   *          the parent
    */
   void onCreateContainer(Container container, Container parent);
 
   /**
    * On create content.
-   *
-   * @param content the content
-   * @param parent the parent
+   * 
+   * @param content
+   *          the content
+   * @param parent
+   *          the parent
    */
   void onCreateContent(Content content, Container parent);
 
   /**
    * Register.
-   *
-   * @param registry the registry
+   * 
+   * @param registry
+   *          the registry
    */
   void register(ServerToolRegistry registry);
 }

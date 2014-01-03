@@ -33,26 +33,26 @@ import cc.kune.common.client.utils.TimerWrapper;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TooltipTimersTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TooltipTimersTest {
-  
+
   /** The hide timer. */
   private TimerWrapper hideTimer;
-  
+
   /** The hide timer scheduled. */
   protected boolean hideTimerScheduled = false;
-  
+
   /** The security timer. */
   private TimerWrapper securityTimer;
-  
+
   /** The show timer. */
   private TimerWrapper showTimer;
-  
+
   /** The show timer scheduled. */
   protected boolean showTimerScheduled = false;
-  
+
   /** The timers. */
   private TooltipTimers timers;
 

@@ -35,7 +35,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FileUploadManagerTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FileUploadManagerTest extends ContentServiceIntegrationTest {
@@ -54,8 +54,9 @@ public class FileUploadManagerTest extends ContentServiceIntegrationTest {
 
   /**
    * Test session exp.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = SessionExpiredException.class)
   public void testSessionExp() throws Exception {
@@ -64,8 +65,9 @@ public class FileUploadManagerTest extends ContentServiceIntegrationTest {
 
   /**
    * Test user must be auth.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = UserMustBeLoggedException.class)
   public void testUserMustBeAuth() throws Exception {

@@ -25,7 +25,7 @@ package cc.kune.core.shared.dto;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RoomDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RoomDTO {
@@ -44,8 +44,9 @@ public class RoomDTO {
 
   /**
    * Instantiates a new room dto.
-   *
-   * @param name the name
+   * 
+   * @param name
+   *          the name
    */
   public RoomDTO(final String name) {
     this();
@@ -54,7 +55,7 @@ public class RoomDTO {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -62,17 +63,8 @@ public class RoomDTO {
   }
 
   /**
-   * Sets the name.
-   *
-   * @param name the new name
-   */
-  public void setName(final String name) {
-    this.name = name;
-  }
-
-  /**
    * Gets the subject.
-   *
+   * 
    * @return the subject
    */
   public String getSubject() {
@@ -80,9 +72,20 @@ public class RoomDTO {
   }
 
   /**
+   * Sets the name.
+   * 
+   * @param name
+   *          the new name
+   */
+  public void setName(final String name) {
+    this.name = name;
+  }
+
+  /**
    * Sets the subject.
-   *
-   * @param subject the new subject
+   * 
+   * @param subject
+   *          the new subject
    */
   public void setSubject(final String subject) {
     this.subject = subject;

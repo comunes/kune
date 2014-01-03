@@ -62,17 +62,17 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 
 /**
  * The Class AccessListsDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AccessListsDTO implements IsSerializable {
-  
+
   /** The admins. */
   private GroupListDTO admins;
-  
+
   /** The editors. */
   private GroupListDTO editors;
-  
+
   /** The viewers. */
   private GroupListDTO viewers;
 
@@ -85,10 +85,13 @@ public class AccessListsDTO implements IsSerializable {
 
   /**
    * Instantiates a new access lists dto.
-   *
-   * @param admins the admins
-   * @param editors the editors
-   * @param viewers the viewers
+   * 
+   * @param admins
+   *          the admins
+   * @param editors
+   *          the editors
+   * @param viewers
+   *          the viewers
    */
   public AccessListsDTO(final GroupListDTO admins, final GroupListDTO editors, final GroupListDTO viewers) {
     this.admins = admins;
@@ -98,7 +101,7 @@ public class AccessListsDTO implements IsSerializable {
 
   /**
    * Gets the admins.
-   *
+   * 
    * @return the admins
    */
   public GroupListDTO getAdmins() {
@@ -107,7 +110,7 @@ public class AccessListsDTO implements IsSerializable {
 
   /**
    * Gets the editors.
-   *
+   * 
    * @return the editors
    */
   public GroupListDTO getEditors() {
@@ -116,7 +119,7 @@ public class AccessListsDTO implements IsSerializable {
 
   /**
    * Gets the viewers.
-   *
+   * 
    * @return the viewers
    */
   public GroupListDTO getViewers() {
@@ -125,8 +128,9 @@ public class AccessListsDTO implements IsSerializable {
 
   /**
    * Sets the admins.
-   *
-   * @param admins the new admins
+   * 
+   * @param admins
+   *          the new admins
    */
   public void setAdmins(final GroupListDTO admins) {
     this.admins = admins;
@@ -134,8 +138,9 @@ public class AccessListsDTO implements IsSerializable {
 
   /**
    * Sets the editors.
-   *
-   * @param editors the new editors
+   * 
+   * @param editors
+   *          the new editors
    */
   public void setEditors(final GroupListDTO editors) {
     this.editors = editors;
@@ -143,14 +148,17 @@ public class AccessListsDTO implements IsSerializable {
 
   /**
    * Sets the viewers.
-   *
-   * @param viewers the new viewers
+   * 
+   * @param viewers
+   *          the new viewers
    */
   public void setViewers(final GroupListDTO viewers) {
     this.viewers = viewers;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

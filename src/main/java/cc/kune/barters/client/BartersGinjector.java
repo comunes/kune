@@ -27,14 +27,14 @@ import com.google.gwt.inject.client.Ginjector;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface BartersGinjector.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface BartersGinjector extends Ginjector {
 
   /**
    * Gets the barters parts.
-   *
+   * 
    * @return the barters parts
    */
   BartersParts getBartersParts();

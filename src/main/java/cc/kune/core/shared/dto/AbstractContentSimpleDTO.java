@@ -29,23 +29,23 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractContentSimpleDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractContentSimpleDTO implements IsSerializable {
 
   /** The id. */
   protected Long id;
-  
+
   /** The state token. */
   private StateToken stateToken;
-  
+
   /** The type id. */
   private String typeId;
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -54,14 +54,14 @@ public abstract class AbstractContentSimpleDTO implements IsSerializable {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public abstract String getName();
 
   /**
    * Gets the state token.
-   *
+   * 
    * @return the state token
    */
   public StateToken getStateToken() {
@@ -70,7 +70,7 @@ public abstract class AbstractContentSimpleDTO implements IsSerializable {
 
   /**
    * Gets the type id.
-   *
+   * 
    * @return the type id
    */
   public String getTypeId() {
@@ -79,8 +79,9 @@ public abstract class AbstractContentSimpleDTO implements IsSerializable {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -88,15 +89,17 @@ public abstract class AbstractContentSimpleDTO implements IsSerializable {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public abstract void setName(final String name);
 
   /**
    * Sets the state token.
-   *
-   * @param stateToken the new state token
+   * 
+   * @param stateToken
+   *          the new state token
    */
   public void setStateToken(final StateToken stateToken) {
     this.stateToken = stateToken;
@@ -104,8 +107,9 @@ public abstract class AbstractContentSimpleDTO implements IsSerializable {
 
   /**
    * Sets the type id.
-   *
-   * @param typeId the new type id
+   * 
+   * @param typeId
+   *          the new type id
    */
   public void setTypeId(final String typeId) {
     this.typeId = typeId;

@@ -30,7 +30,7 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestRESTServiceDefinition.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -67,17 +67,19 @@ public class TestRESTServiceDefinition {
 
   /**
    * The Class SimpleRESTService.
-   *
+   * 
    * @author danigb@gmail.com
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class SimpleRESTService {
-    
+
     /**
      * Two.
-     *
-     * @param one the one
-     * @param two the two
+     * 
+     * @param one
+     *          the one
+     * @param two
+     *          the two
      */
     @REST(params = { "one", "two" })
     public void two(final String one, final String two) {
@@ -85,10 +87,13 @@ public class TestRESTServiceDefinition {
 
     /**
      * Three.
-     *
-     * @param one the one
-     * @param two the two
-     * @param three the three
+     * 
+     * @param one
+     *          the one
+     * @param two
+     *          the two
+     * @param three
+     *          the three
      */
     @REST(params = { "one", "two", "three" })
     public void three(final String one, final String two, final String three) {
@@ -96,8 +101,9 @@ public class TestRESTServiceDefinition {
 
     /**
      * One.
-     *
-     * @param one the one
+     * 
+     * @param one
+     *          the one
      */
     @REST(params = { "one" })
     public void one(final String one) {

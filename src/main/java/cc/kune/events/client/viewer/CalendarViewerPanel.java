@@ -78,41 +78,50 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CalendarViewerPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CalendarViewerPanel extends AbstractFolderViewerPanel implements CalendarViewerView {
 
   /** The calendar. */
   private final Calendar calendar;
-  
+
   /** The client x. */
   private int clientX;
-  
+
   /** The client y. */
   private int clientY;
-  
+
   /** The content title. */
   private ContentTitleWidget contentTitle;
-  
+
   /** The tooltip. */
   private Tooltip tooltip;
-  
+
   /** The tooltip panel. */
   private PopupPanel tooltipPanel;
 
   /**
    * Instantiates a new calendar viewer panel.
-   *
-   * @param gsArmor the gs armor
-   * @param eventBus the event bus
-   * @param i18n the i18n
-   * @param guiProvider the gui provider
-   * @param res the res
-   * @param capabilitiesRegistry the capabilities registry
-   * @param dragController the drag controller
-   * @param contentDropControllerProv the content drop controller prov
-   * @param containerDropControllerProv the container drop controller prov
+   * 
+   * @param gsArmor
+   *          the gs armor
+   * @param eventBus
+   *          the event bus
+   * @param i18n
+   *          the i18n
+   * @param guiProvider
+   *          the gui provider
+   * @param res
+   *          the res
+   * @param capabilitiesRegistry
+   *          the capabilities registry
+   * @param dragController
+   *          the drag controller
+   * @param contentDropControllerProv
+   *          the content drop controller prov
+   * @param containerDropControllerProv
+   *          the container drop controller prov
    */
   @Inject
   public CalendarViewerPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
@@ -166,56 +175,87 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#addAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #addAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
    */
   @Override
   public void addAppointment(final Appointment appointment) {
     calendar.addAppointment(appointment);
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.HasAppointments#addAppointments(java.util.ArrayList)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.bradrydzewski.gwt.calendar.client.HasAppointments#addAppointments(java
+   * .util.ArrayList)
    */
   @Override
   public void addAppointments(final ArrayList<Appointment> appointments) {
     calendar.addAppointments(appointments);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#addClickHandler(com.google.gwt.event.dom.client.ClickHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #addClickHandler(com.google.gwt.event.dom.client.ClickHandler)
    */
   @Override
   public HandlerRegistration addClickHandler(final ClickHandler clickHandler) {
     return calendar.addHandler(clickHandler, ClickEvent.getType());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#addCreateHandler(com.bradrydzewski.gwt.calendar.client.event.CreateHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #addCreateHandler
+   * (com.bradrydzewski.gwt.calendar.client.event.CreateHandler)
    */
   @Override
   public HandlerRegistration addCreateHandler(final CreateHandler<Appointment> handler) {
     return calendar.addCreateHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.event.HasDateRequestHandlers#addDateRequestHandler(com.bradrydzewski.gwt.calendar.client.event.DateRequestHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.bradrydzewski.gwt.calendar.client.event.HasDateRequestHandlers#
+   * addDateRequestHandler
+   * (com.bradrydzewski.gwt.calendar.client.event.DateRequestHandler)
    */
   @Override
   public HandlerRegistration addDateRequestHandler(final DateRequestHandler<Date> handler) {
     return calendar.addDateRequestHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.event.HasDeleteHandlers#addDeleteHandler(com.bradrydzewski.gwt.calendar.client.event.DeleteHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.bradrydzewski.gwt.calendar.client.event.HasDeleteHandlers#addDeleteHandler
+   * (com.bradrydzewski.gwt.calendar.client.event.DeleteHandler)
    */
   @Override
   public HandlerRegistration addDeleteHandler(final DeleteHandler<Appointment> handler) {
     return calendar.addDeleteHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.gspace.client.viewers.items.FolderItemDescriptor, com.google.gwt.event.dom.client.ClickHandler, com.google.gwt.event.dom.client.DoubleClickHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.
+   * gspace.client.viewers.items.FolderItemDescriptor,
+   * com.google.gwt.event.dom.client.ClickHandler,
+   * com.google.gwt.event.dom.client.DoubleClickHandler)
    */
   @Override
   public void addItem(final FolderItemDescriptor item, final ClickHandler clickHandler,
@@ -223,47 +263,69 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     // Do nothing right now, calendar appointments has a different treatment
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.event.HasMouseOverHandlers#addMouseOverHandler(com.bradrydzewski.gwt.calendar.client.event.MouseOverHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.bradrydzewski.gwt.calendar.client.event.HasMouseOverHandlers#
+   * addMouseOverHandler
+   * (com.bradrydzewski.gwt.calendar.client.event.MouseOverHandler)
    */
   @Override
   public HandlerRegistration addMouseOverHandler(final MouseOverHandler<Appointment> handler) {
     return calendar.addMouseOverHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.logical.shared.HasOpenHandlers#addOpenHandler(com.google.gwt.event.logical.shared.OpenHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.logical.shared.HasOpenHandlers#addOpenHandler(com.
+   * google.gwt.event.logical.shared.OpenHandler)
    */
   @Override
   public HandlerRegistration addOpenHandler(final OpenHandler<Appointment> handler) {
     return calendar.addOpenHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.logical.shared.HasSelectionHandlers#addSelectionHandler(com.google.gwt.event.logical.shared.SelectionHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.logical.shared.HasSelectionHandlers#addSelectionHandler
+   * (com.google.gwt.event.logical.shared.SelectionHandler)
    */
   @Override
   public HandlerRegistration addSelectionHandler(final SelectionHandler<Appointment> handler) {
     return calendar.addSelectionHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.event.HasTimeBlockClickHandlers#addTimeBlockClickHandler(com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see com.bradrydzewski.gwt.calendar.client.event.HasTimeBlockClickHandlers#
+   * addTimeBlockClickHandler
+   * (com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickHandler)
    */
   @Override
   public HandlerRegistration addTimeBlockClickHandler(final TimeBlockClickHandler<Date> handler) {
     return calendar.addTimeBlockClickHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.event.HasUpdateHandlers#addUpdateHandler(com.bradrydzewski.gwt.calendar.client.event.UpdateHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.bradrydzewski.gwt.calendar.client.event.HasUpdateHandlers#addUpdateHandler
+   * (com.bradrydzewski.gwt.calendar.client.event.UpdateHandler)
    */
   @Override
   public HandlerRegistration addUpdateHandler(final UpdateHandler<Appointment> handler) {
     return calendar.addUpdateHandler(handler);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#attach()
    */
   @Override
@@ -272,8 +334,11 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     super.attach();
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.HasAppointments#clearAppointments()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.bradrydzewski.gwt.calendar.client.HasAppointments#clearAppointments()
    */
   @Override
   public void clearAppointments() {
@@ -282,7 +347,9 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#detach()
    */
   @Override
@@ -291,7 +358,9 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.bradrydzewski.gwt.calendar.client.HasLayout#doLayout()
    */
   @Override
@@ -299,80 +368,120 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     calendar.doLayout();
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.HasHandlers#fireEvent(com.google.gwt.event.shared.GwtEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.HasHandlers#fireEvent(com.google.gwt.event.
+   * shared.GwtEvent)
    */
   @Override
   public void fireEvent(final GwtEvent<?> event) {
     calendar.fireEvent(event);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#getClientX()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #getClientX()
    */
   @Override
   public int getClientX() {
     return clientX;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#getClientY()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #getClientY()
    */
   @Override
   public int getClientY() {
     return clientY;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#getCurrentDate()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #getCurrentDate()
    */
   @Override
   public Date getCurrentDate() {
     return calendar.getDate();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#getDate()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #getDate()
    */
   @Override
   public Date getDate() {
     return calendar.getDate();
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.HasAppointments#getSelectedAppointment()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.bradrydzewski.gwt.calendar.client.HasAppointments#getSelectedAppointment
+   * ()
    */
   @Override
   public Appointment getSelectedAppointment() {
     return calendar.getSelectedAppointment();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#goToday()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #goToday()
    */
   @Override
   public void goToday() {
     calendar.setDate(new Date()); // calendar date, not required
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.HasAppointments#hasAppointmentSelected()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.bradrydzewski.gwt.calendar.client.HasAppointments#hasAppointmentSelected
+   * ()
    */
   @Override
   public boolean hasAppointmentSelected() {
     return calendar.hasAppointmentSelected();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#removeAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #removeAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
    */
   @Override
   public void removeAppointment(final Appointment appointment) {
     calendar.removeAppointment(appointment);
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.HasAppointments#removeAppointment(com.bradrydzewski.gwt.calendar.client.Appointment, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.bradrydzewski.gwt.calendar.client.HasAppointments#removeAppointment
+   * (com.bradrydzewski.gwt.calendar.client.Appointment, boolean)
    */
   @Override
   public void removeAppointment(final Appointment appointment, final boolean fireEvents) {
@@ -387,7 +496,9 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     calendar.doLayout();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.bradrydzewski.gwt.calendar.client.HasLayout#resumeLayout()
    */
   @Override
@@ -397,7 +508,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /**
    * Sets the calendar settings.
-   *
+   * 
    * @return the calendar settings
    */
   private CalendarSettings setCalendarSettings() {
@@ -411,40 +522,60 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     return settings;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#setDate(java.util.Date)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #setDate(java.util.Date)
    */
   @Override
   public void setDate(final Date date) {
     calendar.setDate(date);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#setOnMouseOverTooltipText(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #setOnMouseOverTooltipText(java.lang.String)
    */
   @Override
   public void setOnMouseOverTooltipText(final String text) {
     tooltip.setText(text);
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.HasAppointments#setSelectedAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.bradrydzewski.gwt.calendar.client.HasAppointments#setSelectedAppointment
+   * (com.bradrydzewski.gwt.calendar.client.Appointment)
    */
   @Override
   public void setSelectedAppointment(final Appointment appointment) {
     calendar.setSelectedAppointment(appointment);
   }
 
-  /* (non-Javadoc)
-   * @see com.bradrydzewski.gwt.calendar.client.HasAppointments#setSelectedAppointment(com.bradrydzewski.gwt.calendar.client.Appointment, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.bradrydzewski.gwt.calendar.client.HasAppointments#setSelectedAppointment
+   * (com.bradrydzewski.gwt.calendar.client.Appointment, boolean)
    */
   @Override
   public void setSelectedAppointment(final Appointment appointment, final boolean fireEvents) {
     calendar.setSelectedAppointment(appointment, fireEvents);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#setView(com.bradrydzewski.gwt.calendar.client.CalendarViews)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #setView(com.bradrydzewski.gwt.calendar.client.CalendarViews)
    */
   @Override
   public void setView(final CalendarViews view) {
@@ -452,8 +583,12 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     calendar.scrollToHour(6);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#setView(com.bradrydzewski.gwt.calendar.client.CalendarViews, int)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #setView(com.bradrydzewski.gwt.calendar.client.CalendarViews, int)
    */
   @Override
   public void setView(final CalendarViews view, final int days) {
@@ -461,8 +596,12 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     calendar.scrollToHour(6);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#showEmptyMsg(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#showEmptyMsg(java
+   * .lang.String)
    */
   @Override
   public void showEmptyMsg(final String emptyMessage) {
@@ -470,7 +609,9 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     // super.showEmptyMsg(emptyMessage);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#showFolder()
    */
   @Override
@@ -480,7 +621,9 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     resizeCalendar();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.bradrydzewski.gwt.calendar.client.HasLayout#suspendLayout()
    */
   @Override
@@ -488,8 +631,12 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
     calendar.suspendLayout();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView#updateTitle(com.bradrydzewski.gwt.calendar.client.CalendarViews)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
+   * #updateTitle(com.bradrydzewski.gwt.calendar.client.CalendarViews)
    */
   @Override
   public void updateTitle(final CalendarViews currentCalView) {

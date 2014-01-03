@@ -30,22 +30,23 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MyGroupsChangedEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MyGroupsChangedEvent extends GwtEvent<MyGroupsChangedEvent.MyGroupsChangedHandler> {
 
   /**
    * The Interface HasMyGroupsChangedHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasMyGroupsChangedHandlers extends HasHandlers {
-    
+
     /**
      * Adds the my groups changed handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addMyGroupsChangedHandler(MyGroupsChangedHandler handler);
@@ -53,15 +54,16 @@ public class MyGroupsChangedEvent extends GwtEvent<MyGroupsChangedEvent.MyGroups
 
   /**
    * The Interface MyGroupsChangedHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface MyGroupsChangedHandler extends EventHandler {
-    
+
     /**
      * On my groups changed.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onMyGroupsChanged(MyGroupsChangedEvent event);
   }
@@ -71,8 +73,9 @@ public class MyGroupsChangedEvent extends GwtEvent<MyGroupsChangedEvent.MyGroups
 
   /**
    * Fire.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new MyGroupsChangedEvent());
@@ -80,7 +83,7 @@ public class MyGroupsChangedEvent extends GwtEvent<MyGroupsChangedEvent.MyGroups
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<MyGroupsChangedHandler> getType() {
@@ -93,15 +96,21 @@ public class MyGroupsChangedEvent extends GwtEvent<MyGroupsChangedEvent.MyGroups
   public MyGroupsChangedEvent() {
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final MyGroupsChangedHandler handler) {
     handler.onMyGroupsChanged(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -109,7 +118,9 @@ public class MyGroupsChangedEvent extends GwtEvent<MyGroupsChangedEvent.MyGroups
     return super.equals(obj);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -117,7 +128,9 @@ public class MyGroupsChangedEvent extends GwtEvent<MyGroupsChangedEvent.MyGroups
     return TYPE;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -125,7 +138,9 @@ public class MyGroupsChangedEvent extends GwtEvent<MyGroupsChangedEvent.MyGroups
     return super.hashCode();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

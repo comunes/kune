@@ -31,6 +31,7 @@ public class RegexDock extends AbstractDock {
     this.pattern = Pattern.compile(regex);
   }
 
+  @Override
   public boolean matches(final String url) {
     return pattern.matcher(url).matches();
   }

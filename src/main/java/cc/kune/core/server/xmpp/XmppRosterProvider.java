@@ -28,7 +28,7 @@ import java.util.Collection;
 /**
  * The Interface XmppRosterProvider should allow to get users's roster
  * information from different providers (initially openfire).
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface XmppRosterProvider {
@@ -42,8 +42,9 @@ public interface XmppRosterProvider {
 
   /**
    * Gets the roster.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    * @return the roster
    */
   Collection<RosterItem> getRoster(String user);

@@ -27,14 +27,19 @@ import org.hibernate.search.bridge.builtin.StringBridge;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DataFieldBridge.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DataFieldBridge extends StringBridge {
-  
-  /* (non-Javadoc)
-   * @see org.hibernate.search.bridge.builtin.StringBridge#objectToString(java.lang.Object)
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.hibernate.search.bridge.builtin.StringBridge#objectToString(java.lang
+   * .Object)
    */
+  @Override
   public String objectToString(final Object object) {
     if (object != null) {
       return new String((char[]) object);

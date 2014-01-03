@@ -77,7 +77,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupManagerDefault.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -87,53 +87,66 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /** The file manager. */
   private final FileManager fileManager;
-  
+
   /** The finder. */
   private final GroupFinder finder;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The kune properties. */
   private final KuneProperties kuneProperties;
-  
+
   /** The license finder. */
   private final LicenseFinder licenseFinder;
-  
+
   /** The license manager. */
   private final LicenseManager licenseManager;
-  
+
   /** The properties. */
   private final KuneBasicProperties properties;
-  
+
   /** The server tool registry. */
   private final ServerToolRegistry serverToolRegistry;
-  
+
   /** The sn cache. */
   private final SocialNetworkCache snCache;
-  
+
   /** The trash tool. */
   private final Provider<TrashServerTool> trashTool;
-  
+
   /** The user finder. */
   private final UserFinder userFinder;
 
   /**
    * Instantiates a new group manager default.
-   *
-   * @param provider the provider
-   * @param finder the finder
-   * @param userFinder the user finder
-   * @param kuneProperties the kune properties
-   * @param properties the properties
-   * @param licenseManager the license manager
-   * @param licenseFinder the license finder
-   * @param fileManager the file manager
-   * @param serverToolRegistry the server tool registry
-   * @param trashTool the trash tool
-   * @param i18n the i18n
-   * @param snCache the sn cache
-   * @param mBeanRegistry the m bean registry
+   * 
+   * @param provider
+   *          the provider
+   * @param finder
+   *          the finder
+   * @param userFinder
+   *          the user finder
+   * @param kuneProperties
+   *          the kune properties
+   * @param properties
+   *          the properties
+   * @param licenseManager
+   *          the license manager
+   * @param licenseFinder
+   *          the license finder
+   * @param fileManager
+   *          the file manager
+   * @param serverToolRegistry
+   *          the server tool registry
+   * @param trashTool
+   *          the trash tool
+   * @param i18n
+   *          the i18n
+   * @param snCache
+   *          the sn cache
+   * @param mBeanRegistry
+   *          the m bean registry
    */
   @Inject
   public GroupManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
@@ -158,8 +171,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     this.snCache = snCache;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#changeDefLicense(cc.kune.domain.User, cc.kune.domain.Group, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#changeDefLicense(cc.kune.domain
+   * .User, cc.kune.domain.Group, java.lang.String)
    */
   @Override
   public void changeDefLicense(final User user, final Group group, final String licName) {
@@ -170,8 +187,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     group.setDefaultLicense(license);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#changeWsTheme(cc.kune.domain.User, cc.kune.domain.Group, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#changeWsTheme(cc.kune.domain.User,
+   * cc.kune.domain.Group, java.lang.String)
    */
   @Override
   public void changeWsTheme(final User user, final Group group, final String theme)
@@ -180,8 +201,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     group.setWorkspaceTheme(theme);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#checkIfLongNameAreInUse(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#checkIfLongNameAreInUse(java.lang
+   * .String)
    */
   @Override
   public void checkIfLongNameAreInUse(final String longName) {
@@ -190,8 +215,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#checkIfShortNameAreInUse(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#checkIfShortNameAreInUse(java.
+   * lang.String)
    */
   @Override
   public void checkIfShortNameAreInUse(final String shortName) {
@@ -200,8 +229,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#clearGroupBackImage(cc.kune.domain.Group)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#clearGroupBackImage(cc.kune.domain
+   * .Group)
    */
   @Override
   public void clearGroupBackImage(final Group group) {
@@ -213,7 +246,9 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     group.setBackgroundMime(null);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.manager.GroupManager#count()
    */
   @Override
@@ -223,8 +258,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     // return super.size();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#createGroup(cc.kune.domain.Group, cc.kune.domain.User, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#createGroup(cc.kune.domain.Group,
+   * cc.kune.domain.User, java.lang.String)
    */
   @Override
   public Group createGroup(final Group group, final User user, final String publicDescrip)
@@ -250,8 +289,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#createUserGroup(cc.kune.domain.User)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#createUserGroup(cc.kune.domain
+   * .User)
    */
   @Override
   public Group createUserGroup(final User user) throws GroupShortNameInUseException,
@@ -259,8 +302,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     return createUserGroup(user, true);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#createUserGroup(cc.kune.domain.User, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#createUserGroup(cc.kune.domain
+   * .User, boolean)
    */
   @Override
   public Group createUserGroup(final User user, final boolean wantPersonalHomepage)
@@ -300,32 +347,44 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     return userGroup;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#findAdminInGroups(java.lang.Long)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#findAdminInGroups(java.lang.Long)
    */
   @Override
   public Set<Group> findAdminInGroups(final Long groupId) {
     return finder.findAdminInGroups(groupId);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#findByShortName(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#findByShortName(java.lang.String)
    */
   @Override
   public Group findByShortName(final String shortName) {
     return finder.findByShortName(shortName);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#findCollabInGroups(java.lang.Long)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#findCollabInGroups(java.lang.Long)
    */
   @Override
   public Set<Group> findCollabInGroups(final Long groupId) {
     return finder.findCollabInGroups(groupId);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#findEnabledTools(java.lang.Long)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#findEnabledTools(java.lang.Long)
    */
   @Override
   public List<String> findEnabledTools(final Long id) {
@@ -334,8 +393,9 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Gets the def group mode.
-   *
-   * @param isClosed the is closed
+   * 
+   * @param isClosed
+   *          the is closed
    * @return the def group mode
    */
   private GroupListMode getDefGroupMode(final boolean isClosed) {
@@ -344,23 +404,30 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Gets the def sn visibility.
-   *
-   * @param isClosed the is closed
+   * 
+   * @param isClosed
+   *          the is closed
    * @return the def sn visibility
    */
   private SocialNetworkVisibility getDefSNVisibility(final boolean isClosed) {
     return isClosed ? SocialNetworkVisibility.onlymembers : SocialNetworkVisibility.anyone;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#getGroupOfUserWithId(java.lang.Long)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#getGroupOfUserWithId(java.lang
+   * .Long)
    */
   @Override
   public Group getGroupOfUserWithId(final Long userId) {
     return userId != null ? find(User.class, userId).getUserGroup() : null;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.manager.GroupManager#getSiteDefaultGroup()
    */
   @Override
@@ -371,12 +438,17 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Inits the group.
-   *
-   * @param user the user
-   * @param group the group
-   * @param toolsToEnable the tools to enable
-   * @param vars the vars
-   * @throws GroupShortNameInUseException the group short name in use exception
+   * 
+   * @param user
+   *          the user
+   * @param group
+   *          the group
+   * @param toolsToEnable
+   *          the tools to enable
+   * @param vars
+   *          the vars
+   * @throws GroupShortNameInUseException
+   *           the group short name in use exception
    */
   private void initGroup(final User user, final Group group, final List<String> toolsToEnable,
       final Object... vars) throws GroupShortNameInUseException {
@@ -401,11 +473,15 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Inits the social network.
-   *
-   * @param group the group
-   * @param userGroup the user group
-   * @param publicVisibility the public visibility
-   * @param snVisibility the sn visibility
+   * 
+   * @param group
+   *          the group
+   * @param userGroup
+   *          the user group
+   * @param publicVisibility
+   *          the public visibility
+   * @param snVisibility
+   *          the sn visibility
    */
   private void initSocialNetwork(final Group group, final Group userGroup,
       final GroupListMode publicVisibility, final SocialNetworkVisibility snVisibility) {
@@ -416,15 +492,20 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#initTrash(cc.kune.domain.Group)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#initTrash(cc.kune.domain.Group)
    */
   @Override
   public void initTrash(final Group group) {
     trashTool.get().initGroup(group);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.manager.GroupManager#search(java.lang.String)
    */
   @Override
@@ -432,8 +513,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     return this.search(search, null, null);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#search(java.lang.String, java.lang.Integer, java.lang.Integer)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.manager.GroupManager#search(java.lang.String,
+   * java.lang.Integer, java.lang.Integer)
    */
   @Override
   @KuneTransactional
@@ -447,8 +531,9 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Sets the admission type.
-   *
-   * @param group the new admission type
+   * 
+   * @param group
+   *          the new admission type
    */
   private void setAdmissionType(final Group group) {
     final GroupType groupType = group.getGroupType();
@@ -467,8 +552,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#setDefaultContent(java.lang.String, cc.kune.domain.Content)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#setDefaultContent(java.lang.String
+   * , cc.kune.domain.Content)
    */
   @Override
   public void setDefaultContent(final String groupShortName, final Content content) {
@@ -476,8 +565,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     group.setDefaultContent(content);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#setGroupBackgroundImage(cc.kune.domain.Group, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#setGroupBackgroundImage(cc.kune
+   * .domain.Group, java.lang.String, java.lang.String)
    */
   @Override
   public void setGroupBackgroundImage(final Group group, final String backgroundFileName,
@@ -489,10 +582,13 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Sets the social network.
-   *
-   * @param group the group
-   * @param publicVisibility the public visibility
-   * @param snVisibility the sn visibility
+   * 
+   * @param group
+   *          the group
+   * @param publicVisibility
+   *          the public visibility
+   * @param snVisibility
+   *          the sn visibility
    * @return the social network
    */
   private SocialNetwork setSocialNetwork(final Group group, final GroupListMode publicVisibility,
@@ -504,8 +600,12 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     return network;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#setToolEnabled(cc.kune.domain.User, java.lang.String, java.lang.String, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.GroupManager#setToolEnabled(cc.kune.domain.
+   * User, java.lang.String, java.lang.String, boolean)
    */
   @Override
   public void setToolEnabled(final User userLogged, final String groupShortName, final String tool,
@@ -522,8 +622,11 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
     toolConfiguration.setEnabled(enabled);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.GroupManager#update(java.lang.Long, cc.kune.core.shared.dto.GroupDTO)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.manager.GroupManager#update(java.lang.Long,
+   * cc.kune.core.shared.dto.GroupDTO)
    */
   @Override
   public Group update(final Long groupId, final GroupDTO groupDTO) {

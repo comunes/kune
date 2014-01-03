@@ -28,11 +28,11 @@ import java.util.Map;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EmptyMessagesRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmptyMessagesRegistry {
-  
+
   /** The registry. */
   private final Map<String, String> registry;
 
@@ -45,8 +45,9 @@ public class EmptyMessagesRegistry {
 
   /**
    * Gets the content type icon.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return the content type icon
    */
   public String getContentTypeIcon(final String typeId) {
@@ -55,9 +56,11 @@ public class EmptyMessagesRegistry {
 
   /**
    * Register.
-   *
-   * @param contentTypeId the content type id
-   * @param message the message
+   * 
+   * @param contentTypeId
+   *          the content type id
+   * @param message
+   *          the message
    */
   public void register(final String contentTypeId, final String message) {
     registry.put(contentTypeId, message);

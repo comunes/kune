@@ -34,7 +34,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RosterItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -47,7 +47,7 @@ public class RosterItem {
   @GeneratedValue
   @Column(name = "rosterID")
   private Long id;
-  
+
   /** The jid. */
   private String jid;
 
@@ -63,7 +63,7 @@ public class RosterItem {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -72,7 +72,7 @@ public class RosterItem {
 
   /**
    * Gets the jid.
-   *
+   * 
    * @return the jid
    */
   public String getJid() {
@@ -81,7 +81,7 @@ public class RosterItem {
 
   /**
    * Gets the nick.
-   *
+   * 
    * @return the nick
    */
   public String getNick() {
@@ -101,7 +101,7 @@ public class RosterItem {
    * <p>
    * 3 - The roster item and owner have a mutual subscription.
    * </p>
-   *
+   * 
    * @return the sub status
    */
   public byte getSubStatus() {
@@ -110,7 +110,7 @@ public class RosterItem {
 
   /**
    * Gets the username.
-   *
+   * 
    * @return the username
    */
   public String getUsername() {
@@ -119,8 +119,9 @@ public class RosterItem {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -128,8 +129,9 @@ public class RosterItem {
 
   /**
    * Sets the jid.
-   *
-   * @param jid the new jid
+   * 
+   * @param jid
+   *          the new jid
    */
   public void setJid(final String jid) {
     this.jid = jid;
@@ -137,8 +139,9 @@ public class RosterItem {
 
   /**
    * Sets the nick.
-   *
-   * @param nick the new nick
+   * 
+   * @param nick
+   *          the new nick
    */
   public void setNick(final String nick) {
     this.nick = nick;
@@ -146,8 +149,9 @@ public class RosterItem {
 
   /**
    * Sets the sub status.
-   *
-   * @param subStatus the new sub status
+   * 
+   * @param subStatus
+   *          the new sub status
    */
   public void setSubStatus(final byte subStatus) {
     this.subStatus = subStatus;
@@ -155,8 +159,9 @@ public class RosterItem {
 
   /**
    * Sets the username.
-   *
-   * @param username the new username
+   * 
+   * @param username
+   *          the new username
    */
   public void setUsername(final String username) {
     this.username = username;

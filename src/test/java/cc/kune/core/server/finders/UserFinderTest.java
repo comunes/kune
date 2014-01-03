@@ -39,11 +39,11 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserFinderTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserFinderTest extends PersistencePreLoadedDataTest {
-  
+
   /** The finder. */
   @Inject
   UserFinder finder;

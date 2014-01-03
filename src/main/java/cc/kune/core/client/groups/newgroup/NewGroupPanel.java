@@ -50,86 +50,86 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewGroupPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewGroupPanel extends ViewImpl implements NewGroupView {
-  
+
   /** The Constant CANCEL_BUTTON. */
   public static final String CANCEL_BUTTON = "k-ngp-cancel-bt";
-  
+
   /** The Constant CLOSED_GROUP_TYPE_ID. */
   public static final String CLOSED_GROUP_TYPE_ID = "k-ngp-type_of_group_closed";
-  
+
   /** The Constant COMM_GROUP_TYPE_ID. */
   public static final String COMM_GROUP_TYPE_ID = "k-ngp-type_of_group_comm";
-  
+
   /** The Constant ERROR_MSG_BAR. */
   public static final String ERROR_MSG_BAR = "k-ngp-error-mb";
-  
+
   /** The Constant LABEL_WIDTH. */
   private static final int LABEL_WIDTH = 100;
-  
+
   /** The Constant LONGNAME_FIELD. */
   public static final String LONGNAME_FIELD = "k-ngp-long_name";
-  
+
   /** The Constant NEWGROUP_WIZARD. */
   public static final String NEWGROUP_WIZARD = "k-ngp-wiz";
-  
+
   /** The Constant ORG_GROUP_TYPE_ID. */
   public static final String ORG_GROUP_TYPE_ID = "k-ngp-type_of_group_org";
-  
+
   /** The Constant PROJ_GROUP_TYPE_ID. */
   public static final String PROJ_GROUP_TYPE_ID = "k-ngp-type_of_group_proj";
-  
+
   /** The Constant PUBLICDESC_FIELD. */
   public static final String PUBLICDESC_FIELD = "k-ngp-public_desc";
-  
+
   /** The Constant REGISTER_BUTTON. */
   public static final String REGISTER_BUTTON = "k-ngp-finish-bt";
-  
+
   /** The Constant SHORTNAME_FIELD. */
   public static final String SHORTNAME_FIELD = "k-ngp-short_name";
-  
+
   /** The Constant TAGS_FIELD. */
   public static final String TAGS_FIELD = "k-ngp-tags";
-  
+
   /** The Constant TYPEOFGROUP_FIELD. */
   public static final String TYPEOFGROUP_FIELD = "k-ngp-type_of_group";
 
   /** The closed radio. */
   private Radio closedRadio;
-  
+
   /** The community radio. */
   private Radio communityRadio;
-  
+
   /** The dialog. */
   private final BasicTopDialog dialog;
 
   /** The form. */
   private final FormPanel form;
-  
+
   /** The group field factory. */
   private final GroupFieldFactory groupFieldFactory;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The long name field. */
   private TextField<String> longNameField;
-  
+
   /** The mask. */
   private final MaskWidgetView mask;
-  
+
   /** The message error bar. */
   private final MessageToolbar messageErrorBar;
-  
+
   /** The org radio. */
   private Radio orgRadio;
-  
+
   /** The project radio. */
   private Radio projectRadio;
-  
+
   /** The public desc field. */
   private TextArea publicDescField;
 
@@ -144,11 +144,15 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /**
    * Instantiates a new new group panel.
-   *
-   * @param i18n the i18n
-   * @param img the img
-   * @param mask the mask
-   * @param groupFieldFactory the group field factory
+   * 
+   * @param i18n
+   *          the i18n
+   * @param img
+   *          the img
+   * @param mask
+   *          the mask
+   * @param groupFieldFactory
+   *          the group field factory
    */
   @Inject
   public NewGroupPanel(final I18nTranslationService i18n, final NotifyLevelImages img,
@@ -170,7 +174,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     dialog.getInnerPanel().add(form);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -178,7 +184,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return null;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#clearData()
    */
   @Override
@@ -190,7 +198,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /**
    * Creates the new group initial data form.
-   *
+   * 
    * @return the form panel
    */
   private FormPanel createNewGroupInitialDataForm() {
@@ -259,8 +267,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /**
    * Creates the tag field.
-   *
-   * @param tag the tag
+   * 
+   * @param tag
+   *          the tag
    * @return the text field
    */
   private TextField<String> createTagField(TextField<String> tag) {
@@ -277,7 +286,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return tag;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#focusOnLongName()
    */
   @Override
@@ -285,7 +296,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     longNameField.focus();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#focusOnShortName()
    */
   @Override
@@ -293,7 +306,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     shortNameField.focus();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getClose()
    */
   @Override
@@ -301,7 +316,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return dialog.getClose();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getFirstBtn()
    */
   @Override
@@ -309,7 +326,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return dialog.getFirstBtn();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getLongName()
    */
   @Override
@@ -317,7 +336,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return longNameField.getValue();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getLongNameField()
    */
   @Override
@@ -325,7 +346,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return longNameField;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getPublicDesc()
    */
   @Override
@@ -333,7 +356,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return publicDescField.getValue();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getSecondBtn()
    */
   @Override
@@ -341,7 +366,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return dialog.getSecondBtn();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getShortName()
    */
   @Override
@@ -349,7 +376,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return shortNameField.getValue();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getTags()
    */
   @Override
@@ -357,7 +386,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return tag1.getRawValue();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#hide()
    */
   @Override
@@ -365,7 +396,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     dialog.hide();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#hideMessage()
    */
   @Override
@@ -373,7 +406,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     messageErrorBar.hideErrorMessage();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isClosed()
    */
   @Override
@@ -381,7 +416,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return closedRadio.getValue();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isCommunity()
    */
   @Override
@@ -389,7 +426,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return communityRadio.getValue();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isFormValid()
    */
   @Override
@@ -397,7 +436,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return form.isValid();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isOrganization()
    */
   @Override
@@ -405,7 +446,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     return orgRadio.getValue();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isProject()
    */
   @Override
@@ -415,14 +458,17 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /**
    * Mask.
-   *
-   * @param message the message
+   * 
+   * @param message
+   *          the message
    */
   public void mask(final String message) {
     mask.mask(dialog);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#maskProcessing()
    */
   @Override
@@ -430,47 +476,69 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     mask.mask(dialog, i18n.t("Processing"));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.groups.newgroup.NewGroupView#setLongName(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.groups.newgroup.NewGroupView#setLongName(java.lang.
+   * String)
    */
   @Override
   public void setLongName(final String longName) {
     longNameField.setValue(longName);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.groups.newgroup.NewGroupView#setLongNameFailed(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.groups.newgroup.NewGroupView#setLongNameFailed(java
+   * .lang.String)
    */
   @Override
   public void setLongNameFailed(final String msg) {
     longNameField.markInvalid(msg);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.groups.newgroup.NewGroupView#setMessage(java.lang.String, cc.kune.common.client.notify.NotifyLevel)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.groups.newgroup.NewGroupView#setMessage(java.lang.String
+   * , cc.kune.common.client.notify.NotifyLevel)
    */
   @Override
   public void setMessage(final String message, final NotifyLevel level) {
     messageErrorBar.setErrorMessage(message, level);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.groups.newgroup.NewGroupView#setShortName(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.groups.newgroup.NewGroupView#setShortName(java.lang
+   * .String)
    */
   @Override
   public void setShortName(final String shortName) {
     shortNameField.setValue(shortName);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.groups.newgroup.NewGroupView#setShortNameFailed(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.groups.newgroup.NewGroupView#setShortNameFailed(java
+   * .lang.String)
    */
   @Override
   public void setShortNameFailed(final String msg) {
     shortNameField.markInvalid(msg);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#show()
    */
   @Override
@@ -478,7 +546,9 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     dialog.showCentered();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#unMask()
    */
   @Override

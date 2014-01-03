@@ -27,21 +27,21 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Enum GroupType.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum GroupType implements IsSerializable {
-  
+
   /** The closed. */
-  CLOSED, 
- /** The community. */
- COMMUNITY, 
- /** The organization. */
- ORGANIZATION, 
- /** The orphaned project. */
- ORPHANED_PROJECT, 
- /** The personal. */
- PERSONAL, 
- /** The project. */
- PROJECT
+  CLOSED,
+  /** The community. */
+  COMMUNITY,
+  /** The organization. */
+  ORGANIZATION,
+  /** The orphaned project. */
+  ORPHANED_PROJECT,
+  /** The personal. */
+  PERSONAL,
+  /** The project. */
+  PROJECT
 }

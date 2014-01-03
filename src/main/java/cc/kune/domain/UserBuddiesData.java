@@ -28,7 +28,7 @@ import java.util.List;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserBuddiesData.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserBuddiesData {
@@ -38,7 +38,7 @@ public class UserBuddiesData {
 
   /** The buddies. */
   private List<User> buddies;
-  
+
   /** The other ext buddies. */
   private int otherExtBuddies;
 
@@ -52,8 +52,9 @@ public class UserBuddiesData {
 
   /**
    * Contains.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    * @return true, if successful
    */
   public boolean contains(final String shortName) {
@@ -67,7 +68,7 @@ public class UserBuddiesData {
 
   /**
    * Gets the buddies.
-   *
+   * 
    * @return the buddies
    */
   public List<User> getBuddies() {
@@ -76,7 +77,7 @@ public class UserBuddiesData {
 
   /**
    * Gets the other ext buddies.
-   *
+   * 
    * @return the other ext buddies
    */
   public int getOtherExtBuddies() {
@@ -85,8 +86,9 @@ public class UserBuddiesData {
 
   /**
    * Sets the buddies.
-   *
-   * @param buddies the new buddies
+   * 
+   * @param buddies
+   *          the new buddies
    */
   public void setBuddies(final List<User> buddies) {
     this.buddies = buddies;
@@ -94,14 +96,17 @@ public class UserBuddiesData {
 
   /**
    * Sets the other ext buddies.
-   *
-   * @param otherExtBuddies the new other ext buddies
+   * 
+   * @param otherExtBuddies
+   *          the new other ext buddies
    */
   public void setOtherExtBuddies(final int otherExtBuddies) {
     this.otherExtBuddies = otherExtBuddies;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

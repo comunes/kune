@@ -32,21 +32,28 @@ import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractClientTool.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractClientTool {
 
   /**
    * Instantiates a new abstract client tool.
-   *
-   * @param shortName the short name
-   * @param longName the long name
-   * @param tooltip the tooltip
-   * @param icon the icon
-   * @param visibleForRol the visible for rol
-   * @param toolSelector the tool selector
-   * @param history the history
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
+   * @param tooltip
+   *          the tooltip
+   * @param icon
+   *          the icon
+   * @param visibleForRol
+   *          the visible for rol
+   * @param toolSelector
+   *          the tool selector
+   * @param history
+   *          the history
    */
   public AbstractClientTool(final String shortName, final String longName, final String tooltip,
       final KuneIcon icon, final AccessRolDTO visibleForRol, final ToolSelector toolSelector,
@@ -59,7 +66,7 @@ public abstract class AbstractClientTool {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public abstract String getName();

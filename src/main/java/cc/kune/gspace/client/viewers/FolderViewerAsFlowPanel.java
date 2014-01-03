@@ -52,42 +52,49 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FolderViewerAsFlowPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
-  
+
   /**
    * The Interface FolderViewerAsFlowPanelUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface FolderViewerAsFlowPanelUiBinder extends UiBinder<Widget, FolderViewerAsFlowPanel> {
   }
-  
+
   /** The Constant ICONLABELMAXSIZE. */
   private static final int ICONLABELMAXSIZE = 20;
-  
+
   /** The Constant ICONSIZE. */
   private static final int ICONSIZE = 100;
-  
+
   /** The ui binder. */
   private static FolderViewerAsFlowPanelUiBinder uiBinder = GWT.create(FolderViewerAsFlowPanelUiBinder.class);
-  
+
   /** The flow. */
   @UiField
   FlowPanel flow;
 
   /**
    * Instantiates a new folder viewer as flow panel.
-   *
-   * @param gsArmor the gs armor
-   * @param eventBus the event bus
-   * @param i18n the i18n
-   * @param capabilitiesRegistry the capabilities registry
-   * @param dragController the drag controller
-   * @param contentDropControllerProv the content drop controller prov
-   * @param containerDropControllerProv the container drop controller prov
+   * 
+   * @param gsArmor
+   *          the gs armor
+   * @param eventBus
+   *          the event bus
+   * @param i18n
+   *          the i18n
+   * @param capabilitiesRegistry
+   *          the capabilities registry
+   * @param dragController
+   *          the drag controller
+   * @param contentDropControllerProv
+   *          the content drop controller prov
+   * @param containerDropControllerProv
+   *          the container drop controller prov
    */
   @Inject
   public FolderViewerAsFlowPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
@@ -100,8 +107,14 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
     widget = uiBinder.createAndBindUi(this);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.gspace.client.viewers.items.FolderItemDescriptor, com.google.gwt.event.dom.client.ClickHandler, com.google.gwt.event.dom.client.DoubleClickHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.
+   * gspace.client.viewers.items.FolderItemDescriptor,
+   * com.google.gwt.event.dom.client.ClickHandler,
+   * com.google.gwt.event.dom.client.DoubleClickHandler)
    */
   @Override
   public void addItem(final FolderItemDescriptor item, final ClickHandler clickHandler,
@@ -111,7 +124,9 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
         item.getActionCollection(), doubleClickHandler, item.getStateToken()));
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#clear()
    */
   @Override
@@ -122,14 +137,21 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
 
   /**
    * Creates the thumb.
-   *
-   * @param text the text
-   * @param icon the icon
-   * @param tooltip the tooltip
-   * @param tooltipTitle the tooltip title
-   * @param menuitems the menuitems
-   * @param doubleClickHandler the double click handler
-   * @param token the token
+   * 
+   * @param text
+   *          the text
+   * @param icon
+   *          the icon
+   * @param tooltip
+   *          the tooltip
+   * @param tooltipTitle
+   *          the tooltip title
+   * @param menuitems
+   *          the menuitems
+   * @param doubleClickHandler
+   *          the double click handler
+   * @param token
+   *          the token
    * @return the basic dragable thumb
    */
   public BasicDragableThumb createThumb(final String text, final Object icon, final String tooltip,
@@ -157,8 +179,12 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
     return thumb;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#setContainer(cc.kune.core.shared.dto.StateContainerDTO)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#setContainer(cc
+   * .kune.core.shared.dto.StateContainerDTO)
    */
   @Override
   public void setContainer(final StateContainerDTO state) {

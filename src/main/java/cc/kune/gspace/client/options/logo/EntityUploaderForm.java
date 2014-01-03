@@ -40,31 +40,33 @@ import com.google.gwt.user.client.ui.Label;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityUploaderForm.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityUploaderForm extends Composite {
 
   /** The btn. */
   private final EntityOptUploadButton btn;
-  
+
   /** The dialog info label. */
   private final Label dialogInfoLabel;
-  
+
   /** The token field. */
   private final Hidden tokenField;
-  
+
   /** The uploader. */
   private final MultiUploader uploader;
-  
+
   /** The userhash field. */
   private final Hidden userhashField;
 
   /**
    * Instantiates a new entity uploader form.
-   *
-   * @param servlet the servlet
-   * @param btnText the btn text
+   * 
+   * @param servlet
+   *          the servlet
+   * @param btnText
+   *          the btn text
    */
   public EntityUploaderForm(final String servlet, final String btnText) {
     btn = new EntityOptUploadButton(btnText);
@@ -85,8 +87,9 @@ public class EntityUploaderForm extends Composite {
 
   /**
    * Adds the on cancel upload handler.
-   *
-   * @param handler the handler
+   * 
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   public HandlerRegistration addOnCancelUploadHandler(final OnCancelUploaderHandler handler) {
@@ -95,8 +98,9 @@ public class EntityUploaderForm extends Composite {
 
   /**
    * Adds the on change upload handler.
-   *
-   * @param handler the handler
+   * 
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   public HandlerRegistration addOnChangeUploadHandler(final OnChangeUploaderHandler handler) {
@@ -105,8 +109,9 @@ public class EntityUploaderForm extends Composite {
 
   /**
    * Adds the on finish upload handler.
-   *
-   * @param handler the handler
+   * 
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   public HandlerRegistration addOnFinishUploadHandler(final OnFinishUploaderHandler handler) {
@@ -115,8 +120,9 @@ public class EntityUploaderForm extends Composite {
 
   /**
    * Adds the on start upload handler.
-   *
-   * @param handler the handler
+   * 
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   public HandlerRegistration addOnStartUploadHandler(final OnStartUploaderHandler handler) {
@@ -125,7 +131,7 @@ public class EntityUploaderForm extends Composite {
 
   /**
    * Gets the btn.
-   *
+   * 
    * @return the btn
    */
   public HasText getBtn() {
@@ -153,8 +159,9 @@ public class EntityUploaderForm extends Composite {
 
   /**
    * Sets the label text.
-   *
-   * @param text the new label text
+   * 
+   * @param text
+   *          the new label text
    */
   public void setLabelText(final String text) {
     dialogInfoLabel.setText(text);
@@ -162,9 +169,11 @@ public class EntityUploaderForm extends Composite {
 
   /**
    * Sets the upload params.
-   *
-   * @param userHash the user hash
-   * @param token the token
+   * 
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
    */
   public void setUploadParams(final String userHash, final String token) {
     userhashField.setValue(userHash);

@@ -31,7 +31,7 @@ import org.hibernate.search.annotations.Store;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BasicMimeType.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Embeddable
@@ -40,7 +40,7 @@ public class BasicMimeType {
   /** The mimesubtype. */
   @Field(index = Index.YES, store = Store.NO)
   private String mimesubtype;
-  
+
   /** The mimetype. */
   @Field(index = Index.YES, store = Store.NO)
   private String mimetype;
@@ -54,8 +54,9 @@ public class BasicMimeType {
 
   /**
    * Instantiates a new basic mime type.
-   *
-   * @param mimetype the mimetype
+   * 
+   * @param mimetype
+   *          the mimetype
    */
   public BasicMimeType(final String mimetype) {
     if (mimetype != null) {
@@ -69,9 +70,11 @@ public class BasicMimeType {
 
   /**
    * Instantiates a new basic mime type.
-   *
-   * @param type the type
-   * @param subtype the subtype
+   * 
+   * @param type
+   *          the type
+   * @param subtype
+   *          the subtype
    */
   public BasicMimeType(final String type, final String subtype) {
     this.mimetype = type;
@@ -80,7 +83,7 @@ public class BasicMimeType {
 
   /**
    * Gets the subtype.
-   *
+   * 
    * @return the subtype
    */
   public String getSubtype() {
@@ -89,7 +92,7 @@ public class BasicMimeType {
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public String getType() {
@@ -98,7 +101,7 @@ public class BasicMimeType {
 
   /**
    * Duplicate code in BMTDTO.
-   *
+   * 
    * @return true, if is image
    */
   public boolean isImage() {
@@ -107,7 +110,7 @@ public class BasicMimeType {
 
   /**
    * Duplicate code in BMTDTO.
-   *
+   * 
    * @return true, if is pdf
    */
   public boolean isPdf() {
@@ -117,7 +120,7 @@ public class BasicMimeType {
 
   /**
    * Duplicate code in BMTDTO.
-   *
+   * 
    * @return true, if is text
    */
   public boolean isText() {
@@ -127,8 +130,9 @@ public class BasicMimeType {
 
   /**
    * Sets the subtype.
-   *
-   * @param subtype the new subtype
+   * 
+   * @param subtype
+   *          the new subtype
    */
   public void setSubtype(final String subtype) {
     this.mimesubtype = subtype;
@@ -136,14 +140,17 @@ public class BasicMimeType {
 
   /**
    * Sets the type.
-   *
-   * @param type the new type
+   * 
+   * @param type
+   *          the new type
    */
   public void setType(final String type) {
     this.mimetype = type;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

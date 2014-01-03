@@ -26,7 +26,7 @@ package cc.kune.core.client.state;
 /**
  * The Class HistoryTokenMustBeAuthCallback is used to indicate the action
  * related to this token (like #inbox, etc) should be authenticated.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class HistoryTokenMustBeAuthCallback implements HistoryTokenCallback {
@@ -36,8 +36,9 @@ public abstract class HistoryTokenMustBeAuthCallback implements HistoryTokenCall
 
   /**
    * Instantiates a new history token must be auth callback.
-   *
-   * @param signInMessage the sign in message
+   * 
+   * @param signInMessage
+   *          the sign in message
    */
   public HistoryTokenMustBeAuthCallback(final String signInMessage) {
     this.infoMessage = signInMessage;
@@ -53,7 +54,9 @@ public abstract class HistoryTokenMustBeAuthCallback implements HistoryTokenCall
     return true;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.state.HistoryTokenCallback#getInfoMessage()
    */
   @Override

@@ -33,19 +33,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AddCollabMembersToContentMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AddCollabMembersToContentMenuItem extends AddMembersToContentMenuItem {
 
   /**
    * Instantiates a new adds the collab members to content menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param isAGroupCondition the is a group condition
-   * @param menu the menu
-   * @param res the res
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param isAGroupCondition
+   *          the is a group condition
+   * @param menu
+   *          the menu
+   * @param res
+   *          the res
    */
   @Inject
   public AddCollabMembersToContentMenuItem(final I18nTranslationService i18n,

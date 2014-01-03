@@ -47,45 +47,51 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SetContentStatusAsAdminMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
 
   /**
    * The Class SetContentStatusAsAdminAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class SetContentStatusAsAdminAction extends RolAction {
 
     /** The content service. */
     private final Provider<ContentServiceAsync> contentService;
-    
+
     /** The event bus. */
     private final EventBus eventBus;
-    
+
     /** The i18n. */
     private final I18nTranslationService i18n;
-    
+
     /** The presenter. */
     private final Provider<FolderViewerPresenter> presenter;
-    
+
     /** The session. */
     private final Session session;
-    
+
     /** The state manager. */
     private final StateManager stateManager;
 
     /**
      * Instantiates a new sets the content status as admin action.
-     *
-     * @param eventBus the event bus
-     * @param stateManager the state manager
-     * @param session the session
-     * @param contentService the content service
-     * @param i18n the i18n
-     * @param presenter the presenter
+     * 
+     * @param eventBus
+     *          the event bus
+     * @param stateManager
+     *          the state manager
+     * @param session
+     *          the session
+     * @param contentService
+     *          the content service
+     * @param i18n
+     *          the i18n
+     * @param presenter
+     *          the presenter
      */
     @Inject
     public SetContentStatusAsAdminAction(final EventBus eventBus, final StateManager stateManager,
@@ -100,8 +106,12 @@ public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
       this.presenter = presenter;
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -121,8 +131,9 @@ public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
 
     /**
      * Do action.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     private void doAction(final ActionEvent event) {
       NotifyUser.showProgress();
@@ -150,19 +161,22 @@ public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
     }
 
   }
-  
+
   /** The Constant CONFIRM. */
   private static final String CONFIRM = "setctnconfirm";
-  
+
   /** The Constant STATUS. */
   private static final String STATUS = "setctnstatus";
 
   /**
    * Instantiates a new sets the content status as admin menu item.
-   *
-   * @param action the action
-   * @param status the status
-   * @param confirm the confirm
+   * 
+   * @param action
+   *          the action
+   * @param status
+   *          the status
+   * @param confirm
+   *          the confirm
    */
   public SetContentStatusAsAdminMenuItem(final SetContentStatusAsAdminAction action,
       final ContentStatus status, final Boolean confirm) {

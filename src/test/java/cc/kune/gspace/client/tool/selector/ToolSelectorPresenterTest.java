@@ -35,32 +35,32 @@ import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorVie
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolSelectorPresenterTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolSelectorPresenterTest {
 
   /** The Constant GROUP1_NAME. */
   private static final String GROUP1_NAME = "group1";
-  
+
   /** The Constant GROUP1_TOOL1. */
   private static final StateToken GROUP1_TOOL1 = new StateToken("group1.tool1");
-  
+
   /** The Constant GROUP1_TOOL2. */
   private static final StateToken GROUP1_TOOL2 = new StateToken("group1.tool2");
-  
+
   /** The Constant TOOL1_NAME. */
   private static final String TOOL1_NAME = "tool1";
-  
+
   /** The Constant TOOL2_NAME. */
   private static final String TOOL2_NAME = "tool2";
-  
+
   /** The tool selector. */
   private ToolSelectorPresenter toolSelector;
-  
+
   /** The tool selector item1. */
   private ToolSelectorItem toolSelectorItem1;
-  
+
   /** The tool selector item2. */
   private ToolSelectorItem toolSelectorItem2;
 
@@ -146,7 +146,8 @@ public class ToolSelectorPresenterTest {
   }
 
   /**
-   * Sets the state with a different tool name must select and un select the older.
+   * Sets the state with a different tool name must select and un select the
+   * older.
    */
   @Test
   public void setStateWithADifferentToolNameMustSelectAndUnSelectTheOlder() {

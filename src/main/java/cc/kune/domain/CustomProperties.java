@@ -38,7 +38,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CustomProperties.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -46,14 +46,14 @@ import cc.kune.domain.utils.HasId;
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class CustomProperties implements HasId {
 
+  /** The data. */
+  @Lob
+  private HashMap<Class<?>, Object> data;
+
   /** The id. */
   @Id
   @GeneratedValue
   private Long id;
-
-  /** The data. */
-  @Lob
-  private HashMap<Class<?>, Object> data;
 
   /**
    * Instantiates a new custom properties.
@@ -64,7 +64,7 @@ public class CustomProperties implements HasId {
 
   /**
    * Gets the data.
-   *
+   * 
    * @return the data
    */
   public HashMap<Class<?>, Object> getData() {
@@ -73,9 +73,11 @@ public class CustomProperties implements HasId {
 
   /**
    * Gets the data.
-   *
-   * @param <T> the generic type
-   * @param type the type
+   * 
+   * @param <T>
+   *          the generic type
+   * @param type
+   *          the type
    * @return the data
    */
   @SuppressWarnings("unchecked")
@@ -83,18 +85,23 @@ public class CustomProperties implements HasId {
     return (T) data.get(type);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#getId()
    */
+  @Override
   public Long getId() {
     return id;
   }
 
   /**
    * Checks for propertie.
-   *
-   * @param <T> the generic type
-   * @param type the type
+   * 
+   * @param <T>
+   *          the generic type
+   * @param type
+   *          the type
    * @return true, if successful
    */
   public <T> boolean hasPropertie(final Class<T> type) {
@@ -103,10 +110,13 @@ public class CustomProperties implements HasId {
 
   /**
    * Sets the data.
-   *
-   * @param <T> the generic type
-   * @param type the type
-   * @param value the value
+   * 
+   * @param <T>
+   *          the generic type
+   * @param type
+   *          the type
+   * @param value
+   *          the value
    * @return the t
    */
   @SuppressWarnings("unchecked")
@@ -116,16 +126,20 @@ public class CustomProperties implements HasId {
 
   /**
    * Sets the data.
-   *
-   * @param data the data
+   * 
+   * @param data
+   *          the data
    */
   public void setData(final HashMap<Class<?>, Object> data) {
     this.data = data;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
+  @Override
   public void setId(final Long id) {
     this.id = id;
   }

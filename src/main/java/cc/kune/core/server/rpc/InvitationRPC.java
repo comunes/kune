@@ -49,39 +49,44 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InvitationRPC.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class InvitationRPC implements RPC, InvitationService {
 
   /** The container manager. */
   private final ContainerManager containerManager;
-  
+
   /** The group finder. */
   private final GroupFinder groupFinder;
-  
+
   /** The invitation manager. */
   private final InvitationManager invitationManager;
-  
+
   /** The mapper. */
   private final KuneMapper mapper;
-  
+
   /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
   /**
    * Instantiates a new invitation rpc.
-   *
-   * @param invitationManager the invitation manager
-   * @param userSessionManager the user session manager
-   * @param mapper the mapper
-   * @param groupFinder the group finder
-   * @param containerManager the container manager
+   * 
+   * @param invitationManager
+   *          the invitation manager
+   * @param userSessionManager
+   *          the user session manager
+   * @param mapper
+   *          the mapper
+   * @param groupFinder
+   *          the group finder
+   * @param containerManager
+   *          the container manager
    */
   @Inject
   public InvitationRPC(final InvitationManager invitationManager,
-      final UserSessionManager userSessionManager, final KuneMapper mapper, final GroupFinder groupFinder,
-      final ContainerManager containerManager) {
+      final UserSessionManager userSessionManager, final KuneMapper mapper,
+      final GroupFinder groupFinder, final ContainerManager containerManager) {
     this.containerManager = containerManager;
     this.invitationManager = invitationManager;
     this.userSessionManager = userSessionManager;
@@ -89,8 +94,12 @@ public class InvitationRPC implements RPC, InvitationService {
     this.groupFinder = groupFinder;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.InvitationService#confirmationInvitationToGroup(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.InvitationService#confirmationInvitationToGroup
+   * (java.lang.String, java.lang.String)
    */
   @Override
   public void confirmationInvitationToGroup(final String userHash, final String invitationHash)
@@ -98,8 +107,12 @@ public class InvitationRPC implements RPC, InvitationService {
     invitationManager.confirmInvitationToGroup(getUser(), invitationHash);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.InvitationService#confirmationInvitationToSite(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.InvitationService#confirmationInvitationToSite
+   * (java.lang.String, java.lang.String)
    */
   @Override
   @Authenticated
@@ -109,8 +122,12 @@ public class InvitationRPC implements RPC, InvitationService {
     invitationManager.confirmInvitationToSite(getUser(), invitationHash);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.InvitationService#confirmInvitationToList(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.InvitationService#confirmInvitationToList
+   * (java.lang.String, java.lang.String)
    */
   @Override
   public StateContainerDTO confirmInvitationToList(final String userHash, final String invitationHash)
@@ -118,8 +135,12 @@ public class InvitationRPC implements RPC, InvitationService {
     return invitationManager.confirmInvitationToList(getUser(), invitationHash);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.InvitationService#getInvitation(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.InvitationService#getInvitation(java.lang
+   * .String)
    */
   @Override
   @KuneTransactional
@@ -145,15 +166,19 @@ public class InvitationRPC implements RPC, InvitationService {
 
   /**
    * Gets the user.
-   *
+   * 
    * @return the user
    */
   private User getUser() {
     return userSessionManager.getUser();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.InvitationService#inviteToGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String[])
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.InvitationService#inviteToGroup(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String[])
    */
   @Override
   @Authenticated
@@ -163,8 +188,12 @@ public class InvitationRPC implements RPC, InvitationService {
     invitationManager.invite(getUser(), InvitationType.TO_GROUP, NotificationType.email, token, emails);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.InvitationService#inviteToList(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String[])
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.InvitationService#inviteToList(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String[])
    */
   @Override
   @Authenticated
@@ -174,8 +203,12 @@ public class InvitationRPC implements RPC, InvitationService {
     invitationManager.invite(getUser(), InvitationType.TO_LISTS, NotificationType.email, token, emails);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.InvitationService#inviteToSite(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String[])
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.InvitationService#inviteToSite(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String[])
    */
   @Override
   @Authenticated

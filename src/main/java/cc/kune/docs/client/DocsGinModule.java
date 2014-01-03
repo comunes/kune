@@ -30,12 +30,14 @@ import cc.kune.docs.client.actions.DocsNewMenu;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DocsGinModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DocsGinModule extends ExtendedGinModule {
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override

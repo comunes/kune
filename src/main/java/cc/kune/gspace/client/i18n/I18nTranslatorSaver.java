@@ -37,27 +37,30 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nTranslatorSaver.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class I18nTranslatorSaver {
-  
+
   /** The i18n. */
   private final I18nUITranslationService i18n;
-  
+
   /** The i18n service. */
   private final Provider<I18nServiceAsync> i18nService;
-  
+
   /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new i18n translator saver.
-   *
-   * @param session the session
-   * @param i18nService the i18n service
-   * @param i18n the i18n
+   * 
+   * @param session
+   *          the session
+   * @param i18nService
+   *          the i18n service
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public I18nTranslatorSaver(final Session session, final Provider<I18nServiceAsync> i18nService,
@@ -69,8 +72,9 @@ public class I18nTranslatorSaver {
 
   /**
    * Save.
-   *
-   * @param item the item
+   * 
+   * @param item
+   *          the item
    */
   public void save(final I18nTranslationDTO item) {
     NotifyUser.showProgress(i18n.t("Saving"));

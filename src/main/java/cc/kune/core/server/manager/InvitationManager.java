@@ -34,7 +34,7 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface InvitationManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface InvitationManager extends Manager<Invitation, Long> {
@@ -78,8 +78,9 @@ public interface InvitationManager extends Manager<Invitation, Long> {
 
   /**
    * Gets the invitation via the hash.
-   *
-   * @param invitationHash the invitation hash
+   * 
+   * @param invitationHash
+   *          the invitation hash
    * @return the invitation
    */
   Invitation get(String invitationHash);

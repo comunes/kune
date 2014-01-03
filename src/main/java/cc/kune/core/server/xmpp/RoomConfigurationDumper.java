@@ -34,7 +34,7 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RoomConfigurationDumper.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -44,27 +44,10 @@ class RoomConfigurationDumper {
   private static final Log LOG = LogFactory.getLog(RoomConfigurationDumper.class);
 
   /**
-   * Show configuration.
-   *
-   * @param form the form
-   */
-  public static void showConfiguration(final Form form) {
-    for (Iterator<FormField> fields = form.getFields(); fields.hasNext();) {
-      FormField formField = fields.next();
-      log("Field label: " + formField.getLabel());
-      log("Field variable: " + formField.getVariable());
-      log("Field type: " + formField.getType());
-      log("Field desc: " + formField.getDescription());
-      log("Field options: " + log(formField.getOptions()));
-      log("Field values: " + log(formField.getValues()));
-      log("Field end -------------------");
-    }
-  }
-
-  /**
    * Log.
-   *
-   * @param options the options
+   * 
+   * @param options
+   *          the options
    * @return the string
    */
   private static String log(final Iterator<?> options) {
@@ -77,21 +60,43 @@ class RoomConfigurationDumper {
 
   /**
    * Log.
-   *
-   * @param string the string
+   * 
+   * @param string
+   *          the string
    */
   private static void log(final String string) {
     LOG.debug(string);
   }
 
   /**
+   * Show configuration.
+   * 
+   * @param form
+   *          the form
+   */
+  public static void showConfiguration(final Form form) {
+    for (final Iterator<FormField> fields = form.getFields(); fields.hasNext();) {
+      final FormField formField = fields.next();
+      log("Field label: " + formField.getLabel());
+      log("Field variable: " + formField.getVariable());
+      log("Field type: " + formField.getType());
+      log("Field desc: " + formField.getDescription());
+      log("Field options: " + log(formField.getOptions()));
+      log("Field values: " + log(formField.getValues()));
+      log("Field end -------------------");
+    }
+  }
+
+  /**
    * Configure2.
-   *
-   * @param muc the muc
-   * @throws XMPPException the xMPP exception
+   * 
+   * @param muc
+   *          the muc
+   * @throws XMPPException
+   *           the xMPP exception
    */
   void configure2(final MultiUserChat muc) throws XMPPException {
-    Form form = muc.getConfigurationForm().createAnswerForm();
+    final Form form = muc.getConfigurationForm().createAnswerForm();
     form.setAnswer("muc#roomconfig_passwordprotectedroom", false);
     // form.setAnswer("muc#roomconfig_roomname",
     // mucRoomDialog.getRoomName());

@@ -37,34 +37,42 @@ import com.google.gwt.event.shared.HandlerRegistration;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GotoTokenAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GotoTokenAction extends AbstractExtendedAction {
-  
+
   /** The rename handler. */
   private final HandlerRegistration renameHandler;
-  
+
   /** The sn handler. */
   private final HandlerRegistration snHandler;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
-  
+
   /** The token. */
   private final StateToken token;
 
   /**
    * Instantiates a new goto token action.
-   *
-   * @param icon the icon
-   * @param name the name
-   * @param tooltip the tooltip
-   * @param token the token
-   * @param style the style
-   * @param stateManager the state manager
-   * @param eventBus the event bus
-   * @param disableCurrent the disable current
+   * 
+   * @param icon
+   *          the icon
+   * @param name
+   *          the name
+   * @param tooltip
+   *          the tooltip
+   * @param token
+   *          the token
+   * @param style
+   *          the style
+   * @param stateManager
+   *          the state manager
+   * @param eventBus
+   *          the event bus
+   * @param disableCurrent
+   *          the disable current
    */
   public GotoTokenAction(final Object icon, final String name, final String tooltip,
       final StateToken token, final String style, final StateManager stateManager,
@@ -81,7 +89,7 @@ public class GotoTokenAction extends AbstractExtendedAction {
     snHandler = stateManager.onSocialNetworkChanged(true, new SocialNetworkChangedHandler() {
       @Override
       public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
-        boolean weAreInThisState = !token.equals(event.getState().getStateToken());
+        final boolean weAreInThisState = !token.equals(event.getState().getStateToken());
         putValue(Action.STYLES, disableCurrent ? (weAreInThisState ? style : style
             + ", k-button-disabled") : style);
       }
@@ -98,15 +106,21 @@ public class GotoTokenAction extends AbstractExtendedAction {
         });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
     this.stateManager.gotoStateToken(token);
   };
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.AbstractAction#onDettach()
    */
   @Override

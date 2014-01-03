@@ -38,7 +38,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ClearUpdatedWavesHourlyJob.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ClearUpdatedWavesHourlyJob implements Job {
@@ -51,10 +51,13 @@ public class ClearUpdatedWavesHourlyJob implements Job {
 
   /**
    * Instantiates a new clear updated waves hourly job.
-   *
-   * @param waveNotifier the wave notifier
-   * @throws ParseException the parse exception
-   * @throws SchedulerException the scheduler exception
+   * 
+   * @param waveNotifier
+   *          the wave notifier
+   * @throws ParseException
+   *           the parse exception
+   * @throws SchedulerException
+   *           the scheduler exception
    */
   @Inject
   public ClearUpdatedWavesHourlyJob(final WaveEmailNotifier waveNotifier) throws ParseException,
@@ -62,7 +65,9 @@ public class ClearUpdatedWavesHourlyJob implements Job {
     this.waveNotifier = waveNotifier;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
    */
   @Override

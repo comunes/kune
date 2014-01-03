@@ -37,7 +37,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptionsCollection.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @SuppressWarnings("serial")
@@ -45,14 +45,25 @@ import com.google.inject.Singleton;
 public class UserOptionsCollection extends ProvidersCollection {
 
   /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+
+  /**
    * Instantiates a new user options collection.
-   *
-   * @param ug the ug
-   * @param up the up
-   * @param utc the utc
-   * @param ul the ul
-   * @param ups the ups
-   * @param udl the udl
+   * 
+   * @param ug
+   *          the ug
+   * @param up
+   *          the up
+   * @param utc
+   *          the utc
+   * @param ul
+   *          the ul
+   * @param ups
+   *          the ups
+   * @param udl
+   *          the udl
    */
   @Inject
   public UserOptionsCollection(final Provider<UserOptGeneral> ug, final Provider<UserOptPass> up,

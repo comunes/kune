@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BasicDragableThumb.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
@@ -41,13 +41,19 @@ public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
 
   /**
    * Instantiates a new basic dragable thumb.
-   *
-   * @param imageRef the image ref
-   * @param imgSize the img size
-   * @param text the text
-   * @param textMaxLenght the text max lenght
-   * @param crop the crop
-   * @param token the token
+   * 
+   * @param imageRef
+   *          the image ref
+   * @param imgSize
+   *          the img size
+   * @param text
+   *          the text
+   * @param textMaxLenght
+   *          the text max lenght
+   * @param crop
+   *          the crop
+   * @param token
+   *          the token
    */
   public BasicDragableThumb(final Object imageRef, final int imgSize, final String text,
       final int textMaxLenght, final boolean crop, final StateToken token) {
@@ -55,7 +61,9 @@ public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
     this.token = token;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.allen_sauer.gwt.dnd.client.HasDragHandle#getDragHandle()
    */
   @Override
@@ -65,7 +73,7 @@ public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
 
   /**
    * Gets the token.
-   *
+   * 
    * @return the token
    */
   public StateToken getToken() {

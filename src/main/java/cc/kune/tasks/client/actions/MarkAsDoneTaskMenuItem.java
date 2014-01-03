@@ -32,17 +32,20 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MarkAsDoneTaskMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MarkAsDoneTaskMenuItem extends SetContentStatusAsAdminMenuItem {
 
   /**
    * Instantiates a new mark as done task menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
    */
   @Inject
   public MarkAsDoneTaskMenuItem(final I18nTranslationService i18n,

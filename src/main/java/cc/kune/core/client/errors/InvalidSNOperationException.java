@@ -25,7 +25,7 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InvalidSNOperationException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class InvalidSNOperationException extends DefaultException {
@@ -42,8 +42,9 @@ public class InvalidSNOperationException extends DefaultException {
 
   /**
    * Instantiates a new invalid sn operation exception.
-   *
-   * @param message the message
+   * 
+   * @param message
+   *          the message
    */
   public InvalidSNOperationException(final String message) {
     super(message);

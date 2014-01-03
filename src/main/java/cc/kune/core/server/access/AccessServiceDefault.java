@@ -38,7 +38,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AccessServiceDefault.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -47,15 +47,17 @@ public class AccessServiceDefault implements AccessService {
 
   /** The access rights service. */
   private final AccessRightsService accessRightsService;
-  
+
   /** The finder. */
   private final FinderService finder;
 
   /**
    * Instantiates a new access service default.
-   *
-   * @param finder the finder
-   * @param accessRightsService the access rights service
+   * 
+   * @param finder
+   *          the finder
+   * @param accessRightsService
+   *          the access rights service
    */
   @Inject
   public AccessServiceDefault(final FinderService finder, final AccessRightsService accessRightsService) {
@@ -63,8 +65,12 @@ public class AccessServiceDefault implements AccessService {
     this.accessRightsService = accessRightsService;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.access.AccessService#accessToContainer(cc.kune.domain.Container, cc.kune.domain.User, cc.kune.core.shared.domain.AccessRol)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.access.AccessService#accessToContainer(cc.kune.domain
+   * .Container, cc.kune.domain.User, cc.kune.core.shared.domain.AccessRol)
    */
   @Override
   public Container accessToContainer(final Container container, final User user,
@@ -74,8 +80,12 @@ public class AccessServiceDefault implements AccessService {
     return container;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.access.AccessService#accessToContainer(java.lang.Long, cc.kune.domain.User, cc.kune.core.shared.domain.AccessRol)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.access.AccessService#accessToContainer(java.lang.Long,
+   * cc.kune.domain.User, cc.kune.core.shared.domain.AccessRol)
    */
   @Override
   public Container accessToContainer(final Long folderId, final User user, final AccessRol accessRol)
@@ -84,8 +94,12 @@ public class AccessServiceDefault implements AccessService {
     return accessToContainer(container, user, accessRol);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.access.AccessService#accessToContent(cc.kune.domain.Content, cc.kune.domain.User, cc.kune.core.shared.domain.AccessRol)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.access.AccessService#accessToContent(cc.kune.domain
+   * .Content, cc.kune.domain.User, cc.kune.core.shared.domain.AccessRol)
    */
   @Override
   public Content accessToContent(final Content content, final User user, final AccessRol accessRol) {
@@ -94,8 +108,12 @@ public class AccessServiceDefault implements AccessService {
     return content;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.access.AccessService#accessToContent(java.lang.Long, cc.kune.domain.User, cc.kune.core.shared.domain.AccessRol)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.access.AccessService#accessToContent(java.lang.Long,
+   * cc.kune.domain.User, cc.kune.core.shared.domain.AccessRol)
    */
   @Override
   public Content accessToContent(final Long contentId, final User user, final AccessRol accessRol)
@@ -106,10 +124,13 @@ public class AccessServiceDefault implements AccessService {
 
   /**
    * Check.
-   *
-   * @param rights the rights
-   * @param accessRol the access rol
-   * @throws AccessViolationException the access violation exception
+   * 
+   * @param rights
+   *          the rights
+   * @param accessRol
+   *          the access rol
+   * @throws AccessViolationException
+   *           the access violation exception
    */
   private void check(final AccessRights rights, final AccessRol accessRol)
       throws AccessViolationException {
@@ -120,9 +141,11 @@ public class AccessServiceDefault implements AccessService {
 
   /**
    * Check tool is enabled.
-   *
-   * @param group the group
-   * @param toolName the tool name
+   * 
+   * @param group
+   *          the group
+   * @param toolName
+   *          the tool name
    */
   private void checkToolIsEnabled(final Group group, final String toolName) {
     final ToolConfiguration toolConf = group.getToolConfiguration(toolName);
@@ -133,9 +156,11 @@ public class AccessServiceDefault implements AccessService {
 
   /**
    * Checks if is valid.
-   *
-   * @param accessRol the access rol
-   * @param rights the rights
+   * 
+   * @param accessRol
+   *          the access rol
+   * @param rights
+   *          the rights
    * @return true, if is valid
    */
   private boolean isValid(final AccessRol accessRol, final AccessRights rights) {

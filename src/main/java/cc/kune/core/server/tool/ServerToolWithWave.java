@@ -27,7 +27,7 @@ import cc.kune.domain.Container;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ServerToolWithWave.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface ServerToolWithWave extends ServerTool {

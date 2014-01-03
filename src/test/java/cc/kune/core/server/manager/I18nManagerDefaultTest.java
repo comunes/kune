@@ -42,23 +42,23 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nManagerDefaultTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nManagerDefaultTest extends PersistenceTest {
-  
+
   /** The country manager. */
   @Inject
   I18nCountryManager countryManager;
-  
+
   /** The language manager. */
   @Inject
   I18nLanguageManager languageManager;
-  
+
   /** The translation manager. */
   @Inject
   I18nTranslationManager translationManager;
-  
+
   /** The translation service. */
   @Inject
   I18nTranslationService translationService;
@@ -85,7 +85,7 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   /**
    * Gets the lexicon list.
-   *
+   * 
    * @return the lexicon list
    */
   @Test
@@ -106,7 +106,7 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   /**
    * Gets the non existent translation in any lang returns key.
-   *
+   * 
    * @return the non existent translation in any lang returns key
    */
   @Test
@@ -135,7 +135,7 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   /**
    * Gets the non existent translation returns default language.
-   *
+   * 
    * @return the non existent translation returns default language
    */
   @Test
@@ -147,7 +147,7 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   /**
    * Gets the translation.
-   *
+   * 
    * @return the translation
    */
   @Test
@@ -159,7 +159,7 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   /**
    * Gets the translation ut f8.
-   *
+   * 
    * @return the translation ut f8
    */
   @Test
@@ -171,7 +171,7 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   /**
    * Gets the translation with int arg from service.
-   *
+   * 
    * @return the translation with int arg from service
    */
   @Test
@@ -182,7 +182,7 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   /**
    * Gets the translation with string arg from service.
-   *
+   * 
    * @return the translation with string arg from service
    */
   @Test
@@ -193,7 +193,7 @@ public class I18nManagerDefaultTest extends PersistenceTest {
 
   /**
    * Gets the translation with string arg with nt from service.
-   *
+   * 
    * @return the translation with string arg with nt from service
    */
   @Test

@@ -32,7 +32,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ListsService.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @RemoteServiceRelativePath("ListsService")

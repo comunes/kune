@@ -37,14 +37,14 @@ import com.google.gwt.user.client.ui.Label;
 /**
  * The Class PromptTopDialog shows a top dialog with some textfield and two
  * buttons.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * The Class Builder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class Builder extends BasicTopDialog.Builder {
@@ -54,9 +54,6 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /** The empty text. */
     private String emptyText;
-
-    /** The field width. */
-    private int promptWidth;
 
     /** The max length. */
     private int maxLength = 0;
@@ -75,8 +72,11 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /** The prompt lines. */
     private int promptLines = 1;
+
     /** The prompt text. */
     private String promptText;
+    /** The field width. */
+    private int promptWidth;
     /** The regex. */
     private String regex;
 
@@ -145,18 +145,6 @@ public class PromptTopDialog extends BasicTopDialog {
      */
     public Builder emptyTextField(final String emptyText) {
       this.emptyText = emptyText;
-      return this;
-    }
-
-    /**
-     * Field width.
-     * 
-     * @param promptWidth
-     *          the field width
-     * @return the builder
-     */
-    public Builder promptWidth(final int promptWidth) {
-      this.promptWidth = promptWidth;
       return this;
     }
 
@@ -234,6 +222,18 @@ public class PromptTopDialog extends BasicTopDialog {
     }
 
     /**
+     * Field width.
+     * 
+     * @param promptWidth
+     *          the field width
+     * @return the builder
+     */
+    public Builder promptWidth(final int promptWidth) {
+      this.promptWidth = promptWidth;
+      return this;
+    }
+
+    /**
      * Regex.
      * 
      * @param regex
@@ -283,7 +283,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * The Interface OnEnter.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface OnEnter {

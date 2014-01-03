@@ -27,7 +27,7 @@ import org.jivesoftware.smack.XMPPException;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChatException.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -45,8 +45,9 @@ public class ChatException extends RuntimeException {
 
   /**
    * Instantiates a new chat exception.
-   *
-   * @param cause the cause
+   * 
+   * @param cause
+   *          the cause
    */
   public ChatException(final XMPPException cause) {
     super(cause);

@@ -31,13 +31,13 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KunePersistenceService.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class KunePersistenceService {
-  
+
   /** The database initializer. */
   @Inject
   DatabaseInitializer databaseInitializer;

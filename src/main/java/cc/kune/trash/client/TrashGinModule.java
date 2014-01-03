@@ -28,12 +28,14 @@ import cc.kune.trash.client.actions.TrashClientActions;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TrashGinModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TrashGinModule extends ExtendedGinModule {
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override

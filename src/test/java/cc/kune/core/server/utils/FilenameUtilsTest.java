@@ -29,7 +29,7 @@ import cc.kune.core.client.errors.NameNotPermittedException;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FilenameUtilsTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FilenameUtilsTest {

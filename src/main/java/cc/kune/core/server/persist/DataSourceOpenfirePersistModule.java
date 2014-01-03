@@ -48,31 +48,34 @@ import com.google.inject.persist.jpa.OpenfireJpaLocalTxnInterceptor;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DataSourceOpenfirePersistModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DataSourceOpenfirePersistModule extends PrivateModule {
-  
+
   /** The Constant MY_DATA_SOURCE_TWO_FILTER_KEY. */
   public static final Key<CustomPersistFilter> MY_DATA_SOURCE_TWO_FILTER_KEY = Key.get(
       CustomPersistFilter.class, DataSourceOpenfire.class);
-  
+
   /** The kune properties. */
   private final KuneProperties kuneProperties;
-  
+
   /** The transaction interceptor. */
   private OpenfireJpaLocalTxnInterceptor transactionInterceptor;
 
   /**
    * Instantiates a new data source openfire persist module.
-   *
-   * @param kuneProperties the kune properties
+   * 
+   * @param kuneProperties
+   *          the kune properties
    */
   public DataSourceOpenfirePersistModule(final KuneProperties kuneProperties) {
     this.kuneProperties = kuneProperties;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.inject.PrivateModule#configure()
    */
   @Override
@@ -129,7 +132,7 @@ public class DataSourceOpenfirePersistModule extends PrivateModule {
 
   /**
    * Gets the transaction interceptor.
-   *
+   * 
    * @return the transaction interceptor
    */
   public OpenfireJpaLocalTxnInterceptor getTransactionInterceptor() {

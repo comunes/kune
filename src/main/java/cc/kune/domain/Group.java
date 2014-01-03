@@ -60,7 +60,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Group.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -76,7 +76,7 @@ public class Group implements HasId {
   // public static final String PROPS_ID = "groupprops";
 
   /** The admission type. */
-  @org.hibernate.annotations.Index(name="admissionType")
+  @org.hibernate.annotations.Index(name = "admissionType")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   AdmissionType admissionType;
@@ -88,7 +88,7 @@ public class Group implements HasId {
   private String backgroundMime;
 
   /** The created on. */
-  @org.hibernate.annotations.Index(name="createdOn")
+  @org.hibernate.annotations.Index(name = "createdOn")
   @Basic(optional = false)
   private final Long createdOn;
 
@@ -100,9 +100,8 @@ public class Group implements HasId {
   @OneToOne
   private License defaultLicense;
 
-
   /** The group type. */
-  @org.hibernate.annotations.Index(name="groupType")
+  @org.hibernate.annotations.Index(name = "groupType")
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
   GroupType groupType;
@@ -128,8 +127,7 @@ public class Group implements HasId {
   /** The long name. */
   @Field(index = Index.YES, store = Store.NO)
   @Column(nullable = false, unique = true)
-
-  @org.hibernate.annotations.Index(name="longName")
+  @org.hibernate.annotations.Index(name = "longName")
   @Length(min = 3, max = CoreConstants.MAX_LONG_NAME_SIZE, message = "The longName must be between 3 and "
       + CoreConstants.MAX_LONG_NAME_SIZE + " characters of length")
   private String longName;
@@ -141,7 +139,7 @@ public class Group implements HasId {
   @Pattern(regexp = "^[a-z0-9]+$", message = "The name must be between 3 and "
       + CoreConstants.MAX_SHORT_NAME_SIZE
       + " lowercase characters. It can only contain Western characters, numbers, and dashes")
-  @org.hibernate.annotations.Index(name="shortName")
+  @org.hibernate.annotations.Index(name = "shortName")
   private String shortName;
 
   /** The social network. */
@@ -165,9 +163,11 @@ public class Group implements HasId {
 
   /**
    * Instantiates a new group.
-   *
-   * @param shortName the short name
-   * @param longName the long name
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
    */
   public Group(final String shortName, final String longName) {
     this(shortName, longName, null, GroupType.PROJECT);
@@ -175,11 +175,15 @@ public class Group implements HasId {
 
   /**
    * Instantiates a new group.
-   *
-   * @param shortName the short name
-   * @param longName the long name
-   * @param defaultLicense the default license
-   * @param type the type
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
+   * @param defaultLicense
+   *          the default license
+   * @param type
+   *          the type
    */
   public Group(final String shortName, final String longName, final License defaultLicense,
       final GroupType type) {
@@ -194,7 +198,9 @@ public class Group implements HasId {
     this.logoLastModifiedTime = System.currentTimeMillis();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -221,8 +227,9 @@ public class Group implements HasId {
 
   /**
    * Exist tool config.
-   *
-   * @param toolName the tool name
+   * 
+   * @param toolName
+   *          the tool name
    * @return true, if successful
    */
   public boolean existToolConfig(final String toolName) {
@@ -231,7 +238,7 @@ public class Group implements HasId {
 
   /**
    * Gets the access lists.
-   *
+   * 
    * @return the access lists
    */
   @Transient
@@ -241,7 +248,7 @@ public class Group implements HasId {
 
   /**
    * Gets the admission type.
-   *
+   * 
    * @return the admission type
    */
   public AdmissionType getAdmissionType() {
@@ -250,7 +257,7 @@ public class Group implements HasId {
 
   /**
    * Gets the background image.
-   *
+   * 
    * @return the background image
    */
   public String getBackgroundImage() {
@@ -259,7 +266,7 @@ public class Group implements HasId {
 
   /**
    * Gets the background mime.
-   *
+   * 
    * @return the background mime
    */
   public String getBackgroundMime() {
@@ -268,7 +275,7 @@ public class Group implements HasId {
 
   /**
    * Gets the created on.
-   *
+   * 
    * @return the created on
    */
   public Long getCreatedOn() {
@@ -277,7 +284,7 @@ public class Group implements HasId {
 
   /**
    * Gets the default content.
-   *
+   * 
    * @return the default content
    */
   public Content getDefaultContent() {
@@ -286,7 +293,7 @@ public class Group implements HasId {
 
   /**
    * Gets the default license.
-   *
+   * 
    * @return the default license
    */
   public License getDefaultLicense() {
@@ -295,7 +302,7 @@ public class Group implements HasId {
 
   /**
    * Gets the group type.
-   *
+   * 
    * @return the group type
    */
   public GroupType getGroupType() {
@@ -304,7 +311,7 @@ public class Group implements HasId {
 
   /**
    * Gets the checks for background.
-   *
+   * 
    * @return the checks for background
    */
   public boolean getHasBackground() {
@@ -313,14 +320,16 @@ public class Group implements HasId {
 
   /**
    * Gets the checks for logo.
-   *
+   * 
    * @return the checks for logo
    */
   public boolean getHasLogo() {
     return hasLogo();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -330,7 +339,7 @@ public class Group implements HasId {
 
   /**
    * Gets the logo.
-   *
+   * 
    * @return the logo
    */
   public byte[] getLogo() {
@@ -339,7 +348,7 @@ public class Group implements HasId {
 
   /**
    * Gets the logo last modified time.
-   *
+   * 
    * @return the logo last modified time
    */
   public Long getLogoLastModifiedTime() {
@@ -351,7 +360,7 @@ public class Group implements HasId {
 
   /**
    * Gets the logo mime.
-   *
+   * 
    * @return the logo mime
    */
   public BasicMimeType getLogoMime() {
@@ -360,7 +369,7 @@ public class Group implements HasId {
 
   /**
    * Gets the long name.
-   *
+   * 
    * @return the long name
    */
   public String getLongName() {
@@ -369,8 +378,9 @@ public class Group implements HasId {
 
   /**
    * Gets the root.
-   *
-   * @param toolName the tool name
+   * 
+   * @param toolName
+   *          the tool name
    * @return the root
    */
   public Container getRoot(final String toolName) {
@@ -379,7 +389,7 @@ public class Group implements HasId {
 
   /**
    * Gets the short name.
-   *
+   * 
    * @return the short name
    */
   public String getShortName() {
@@ -388,7 +398,7 @@ public class Group implements HasId {
 
   /**
    * Gets the social network.
-   *
+   * 
    * @return the social network
    */
   public SocialNetwork getSocialNetwork() {
@@ -397,7 +407,7 @@ public class Group implements HasId {
 
   /**
    * Gets the state token.
-   *
+   * 
    * @return the state token
    */
   @Transient
@@ -407,8 +417,9 @@ public class Group implements HasId {
 
   /**
    * Gets the tool configuration.
-   *
-   * @param name the name
+   * 
+   * @param name
+   *          the name
    * @return the tool configuration
    */
   public ToolConfiguration getToolConfiguration(final String name) {
@@ -417,7 +428,7 @@ public class Group implements HasId {
 
   /**
    * Gets the tools config.
-   *
+   * 
    * @return the tools config
    */
   public Map<String, ToolConfiguration> getToolsConfig() {
@@ -426,7 +437,7 @@ public class Group implements HasId {
 
   /**
    * Gets the workspace theme.
-   *
+   * 
    * @return the workspace theme
    */
   public String getWorkspaceTheme() {
@@ -435,7 +446,7 @@ public class Group implements HasId {
 
   /**
    * Checks for background.
-   *
+   * 
    * @return true, if successful
    */
   @Transient
@@ -443,7 +454,9 @@ public class Group implements HasId {
     return backgroundImage != null;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -456,7 +469,7 @@ public class Group implements HasId {
 
   /**
    * Checks for logo.
-   *
+   * 
    * @return true, if successful
    */
   @Transient
@@ -466,7 +479,7 @@ public class Group implements HasId {
 
   /**
    * Checks if is personal.
-   *
+   * 
    * @return true, if is personal
    */
   public boolean isPersonal() {
@@ -475,8 +488,9 @@ public class Group implements HasId {
 
   /**
    * Sets the admission type.
-   *
-   * @param admissionType the new admission type
+   * 
+   * @param admissionType
+   *          the new admission type
    */
   public void setAdmissionType(final AdmissionType admissionType) {
     this.admissionType = admissionType;
@@ -484,8 +498,9 @@ public class Group implements HasId {
 
   /**
    * Sets the background image.
-   *
-   * @param backgroundImage the new background image
+   * 
+   * @param backgroundImage
+   *          the new background image
    */
   public void setBackgroundImage(final String backgroundImage) {
     this.backgroundImage = backgroundImage;
@@ -493,8 +508,9 @@ public class Group implements HasId {
 
   /**
    * Sets the background mime.
-   *
-   * @param backgroundMime the new background mime
+   * 
+   * @param backgroundMime
+   *          the new background mime
    */
   public void setBackgroundMime(final String backgroundMime) {
     this.backgroundMime = backgroundMime;
@@ -502,8 +518,9 @@ public class Group implements HasId {
 
   /**
    * Sets the default content.
-   *
-   * @param defaultContent the new default content
+   * 
+   * @param defaultContent
+   *          the new default content
    */
   public void setDefaultContent(final Content defaultContent) {
     this.defaultContent = defaultContent;
@@ -511,8 +528,9 @@ public class Group implements HasId {
 
   /**
    * Sets the default license.
-   *
-   * @param defaultLicense the new default license
+   * 
+   * @param defaultLicense
+   *          the new default license
    */
   public void setDefaultLicense(final License defaultLicense) {
     this.defaultLicense = defaultLicense;
@@ -520,14 +538,17 @@ public class Group implements HasId {
 
   /**
    * Sets the group type.
-   *
-   * @param groupType the new group type
+   * 
+   * @param groupType
+   *          the new group type
    */
   public void setGroupType(final GroupType groupType) {
     this.groupType = groupType;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -537,8 +558,9 @@ public class Group implements HasId {
 
   /**
    * Sets the logo.
-   *
-   * @param logo the new logo
+   * 
+   * @param logo
+   *          the new logo
    */
   public void setLogo(final byte[] logo) {
     this.logo = logo;
@@ -547,8 +569,9 @@ public class Group implements HasId {
 
   /**
    * Sets the logo mime.
-   *
-   * @param logoMime the new logo mime
+   * 
+   * @param logoMime
+   *          the new logo mime
    */
   public void setLogoMime(final BasicMimeType logoMime) {
     this.logoMime = logoMime;
@@ -556,8 +579,9 @@ public class Group implements HasId {
 
   /**
    * Sets the long name.
-   *
-   * @param longName the new long name
+   * 
+   * @param longName
+   *          the new long name
    */
   public void setLongName(final String longName) {
     this.longName = longName;
@@ -565,8 +589,9 @@ public class Group implements HasId {
 
   /**
    * Sets the short name.
-   *
-   * @param shortName the new short name
+   * 
+   * @param shortName
+   *          the new short name
    */
   public void setShortName(final String shortName) {
     this.shortName = shortName;
@@ -574,8 +599,9 @@ public class Group implements HasId {
 
   /**
    * Sets the social network.
-   *
-   * @param socialNetwork the new social network
+   * 
+   * @param socialNetwork
+   *          the new social network
    */
   public void setSocialNetwork(final SocialNetwork socialNetwork) {
     this.socialNetwork = socialNetwork;
@@ -583,9 +609,11 @@ public class Group implements HasId {
 
   /**
    * Sets the tool config.
-   *
-   * @param name the name
-   * @param config the config
+   * 
+   * @param name
+   *          the name
+   * @param config
+   *          the config
    * @return the tool configuration
    */
   public ToolConfiguration setToolConfig(final String name, final ToolConfiguration config) {
@@ -595,14 +623,17 @@ public class Group implements HasId {
 
   /**
    * Sets the workspace theme.
-   *
-   * @param workspaceTheme the new workspace theme
+   * 
+   * @param workspaceTheme
+   *          the new workspace theme
    */
   public void setWorkspaceTheme(final String workspaceTheme) {
     this.workspaceTheme = workspaceTheme;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

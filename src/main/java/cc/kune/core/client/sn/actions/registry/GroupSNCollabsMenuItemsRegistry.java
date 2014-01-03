@@ -48,7 +48,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupSNCollabsMenuItemsRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupSNCollabsMenuItemsRegistry extends AbstractSNMembersActionsRegistry {
@@ -58,25 +58,43 @@ public class GroupSNCollabsMenuItemsRegistry extends AbstractSNMembersActionsReg
 
   /**
    * Instantiates a new group sn collabs menu items registry.
-   *
-   * @param session the session
-   * @param i18n the i18n
-   * @param isLogged the is logged
-   * @param isAdministrableCondition the is administrable condition
-   * @param isPersonCondition the is person condition
-   * @param isGroupCondition the is group condition
-   * @param isBuddie the is buddie
-   * @param isMe the is me
-   * @param isNotMe the is not me
-   * @param changeToCollabAction the change to collab action
-   * @param changeToAdminAction the change to admin action
-   * @param removeMemberAction the remove member action
-   * @param acceptJoinGroupAction the accept join group action
-   * @param denyJoinGroupAction the deny join group action
-   * @param gotoGroupAction the goto group action
-   * @param gotoMemberAction the goto member action
-   * @param gotoYourHomePageAction the goto your home page action
-   * @param writeToAction the write to action
+   * 
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param isLogged
+   *          the is logged
+   * @param isAdministrableCondition
+   *          the is administrable condition
+   * @param isPersonCondition
+   *          the is person condition
+   * @param isGroupCondition
+   *          the is group condition
+   * @param isBuddie
+   *          the is buddie
+   * @param isMe
+   *          the is me
+   * @param isNotMe
+   *          the is not me
+   * @param changeToCollabAction
+   *          the change to collab action
+   * @param changeToAdminAction
+   *          the change to admin action
+   * @param removeMemberAction
+   *          the remove member action
+   * @param acceptJoinGroupAction
+   *          the accept join group action
+   * @param denyJoinGroupAction
+   *          the deny join group action
+   * @param gotoGroupAction
+   *          the goto group action
+   * @param gotoMemberAction
+   *          the goto member action
+   * @param gotoYourHomePageAction
+   *          the goto your home page action
+   * @param writeToAction
+   *          the write to action
    */
   @Inject
   public GroupSNCollabsMenuItemsRegistry(final SessionConstants session,

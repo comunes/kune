@@ -41,31 +41,36 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DenyJoinGroupAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DenyJoinGroupAction extends AbstractExtendedAction {
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The sn service provider. */
   private final Provider<SocialNetServiceAsync> snServiceProvider;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new deny join group action.
-   *
-   * @param stateManager the state manager
-   * @param session the session
-   * @param i18n the i18n
-   * @param res the res
-   * @param snServiceProvider the sn service provider
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param snServiceProvider
+   *          the sn service provider
    */
   @Inject
   public DenyJoinGroupAction(final StateManager stateManager, final Session session,
@@ -79,8 +84,12 @@ public class DenyJoinGroupAction extends AbstractExtendedAction {
     putValue(Action.SMALL_ICON, res.del());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

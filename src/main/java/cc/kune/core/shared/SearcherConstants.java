@@ -25,7 +25,7 @@ package cc.kune.core.shared;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SearcherConstants.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SearcherConstants {
@@ -47,19 +47,19 @@ public final class SearcherConstants {
 
   /** The Constant LIMIT_PARAM. */
   public final static String LIMIT_PARAM = "limit";
-  
+
   /** The Constant MIMETYPE_PARAM. */
   public final static String MIMETYPE_PARAM = "mimetype";
-  
+
   /** The Constant MIMETYPE2_PARAM. */
   public final static String MIMETYPE2_PARAM = "mimetype2";
-  
+
   /** The Constant QUERY_PARAM. */
   public final static String QUERY_PARAM = "query";
-  
+
   /** The Constant START_PARAM. */
   public final static String START_PARAM = "start";
-  
+
   /** The Constant TO_LANGUAGE_PARAM. */
   public final static String TO_LANGUAGE_PARAM = "to";
 

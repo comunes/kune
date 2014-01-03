@@ -25,11 +25,11 @@ package cc.kune.core.client.init;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface NavigatorSupport.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface NavigatorSupport {
-  
+
   /**
    * On not supported.
    */

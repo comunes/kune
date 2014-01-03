@@ -27,15 +27,16 @@ import cc.kune.core.shared.dto.LicenseDTO;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface LicenseChooseCallback.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface LicenseChooseCallback {
 
   /**
    * On selected.
-   *
-   * @param license the license
+   * 
+   * @param license
+   *          the license
    */
   void onSelected(LicenseDTO license);
 

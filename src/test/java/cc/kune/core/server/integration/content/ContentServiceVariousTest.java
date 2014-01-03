@@ -393,8 +393,8 @@ public class ContentServiceVariousTest extends ContentServiceIntegrationTest {
 
     final StateContainerDTO added = createNewContent();
 
-    final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(
-        session.getHash(), added.getStateToken());
+    final ContentSimpleDTO newDefContent = contentService.setAsDefaultContent(session.getHash(),
+        added.getStateToken());
 
     assertFalse(defaultContent.getStateToken().equals(newDefContent.getStateToken()));
     assertTrue(added.getStateToken().equals(newDefContent.getStateToken()));

@@ -30,22 +30,23 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserMustBeLoggedEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserMustBeLoggedEvent extends GwtEvent<UserMustBeLoggedEvent.UserMustBeLoggedHandler> {
 
   /**
    * The Interface HasUserMustBeLoggedHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasUserMustBeLoggedHandlers extends HasHandlers {
-    
+
     /**
      * Adds the user must be logged handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addUserMustBeLoggedHandler(UserMustBeLoggedHandler handler);
@@ -53,15 +54,16 @@ public class UserMustBeLoggedEvent extends GwtEvent<UserMustBeLoggedEvent.UserMu
 
   /**
    * The Interface UserMustBeLoggedHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface UserMustBeLoggedHandler extends EventHandler {
-    
+
     /**
      * On user must be logged.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onUserMustBeLogged(UserMustBeLoggedEvent event);
   }
@@ -71,8 +73,9 @@ public class UserMustBeLoggedEvent extends GwtEvent<UserMustBeLoggedEvent.UserMu
 
   /**
    * Fire.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new UserMustBeLoggedEvent());
@@ -80,7 +83,7 @@ public class UserMustBeLoggedEvent extends GwtEvent<UserMustBeLoggedEvent.UserMu
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<UserMustBeLoggedHandler> getType() {
@@ -93,15 +96,21 @@ public class UserMustBeLoggedEvent extends GwtEvent<UserMustBeLoggedEvent.UserMu
   public UserMustBeLoggedEvent() {
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final UserMustBeLoggedHandler handler) {
     handler.onUserMustBeLogged(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -109,7 +118,9 @@ public class UserMustBeLoggedEvent extends GwtEvent<UserMustBeLoggedEvent.UserMu
     return super.equals(obj);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -117,7 +128,9 @@ public class UserMustBeLoggedEvent extends GwtEvent<UserMustBeLoggedEvent.UserMu
     return TYPE;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -125,7 +138,9 @@ public class UserMustBeLoggedEvent extends GwtEvent<UserMustBeLoggedEvent.UserMu
     return super.hashCode();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

@@ -25,7 +25,7 @@ package cc.kune.core.server.manager.impl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentConstants.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class ContentConstants {

@@ -35,22 +35,22 @@ public class StateAbstractDTOJs extends JavaScriptObject {
   }
 
   public final native String getContent() /*-{
-		return this.content;
-  }-*/;
+                                          return this.content;
+                                          }-*/;
 
   public final native JavaScriptObject getStateToken() /*-{
-		return this.stateToken;
-  }-*/;
+                                                       return this.stateToken;
+                                                       }-*/;
 
   public final native String getTitle() /*-{
-		return this.title;
-  }-*/;
+                                        return this.title;
+                                        }-*/;
 
   public final native String getWaveRef() /*-{
-		return this.waveRef;
-  }-*/;
+                                          return this.waveRef;
+                                          }-*/;
 
   public final native boolean isParticipant() /*-{
-		return this.isParticipant;
-  }-*/;
+                                              return this.isParticipant;
+                                              }-*/;
 }

@@ -27,20 +27,10 @@ import com.gwtplatform.mvp.client.UiHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SpaceSelectorUiHandlers.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SpaceSelectorUiHandlers extends UiHandlers {
-  
-  /**
-   * On home space select.
-   */
-  void onHomeSpaceSelect();
-
-  /**
-   * On user space select.
-   */
-  void onUserSpaceSelect();
 
   /**
    * On group space select.
@@ -48,7 +38,17 @@ public interface SpaceSelectorUiHandlers extends UiHandlers {
   void onGroupSpaceSelect();
 
   /**
+   * On home space select.
+   */
+  void onHomeSpaceSelect();
+
+  /**
    * On public space select.
    */
   void onPublicSpaceSelect();
+
+  /**
+   * On user space select.
+   */
+  void onUserSpaceSelect();
 }

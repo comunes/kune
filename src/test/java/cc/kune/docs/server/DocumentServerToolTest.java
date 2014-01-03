@@ -30,13 +30,13 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DocumentServerToolTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DocumentServerToolTest { // extends PersistenceTest {
 
   /** The server tool. */
- private DocumentServerTool serverTool;
+  private DocumentServerTool serverTool;
 
   /**
    * Before.

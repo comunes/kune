@@ -27,68 +27,94 @@ import cc.kune.common.shared.utils.AbstractFormattedString;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface MailService.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface MailService {
 
   /**
    * Sends email.
-   *
-   * @param subject the email subject
-   * @param body the body of the email in text or html format
-   * @param isHtml the is html
-   * @param tos the recipients
+   * 
+   * @param subject
+   *          the email subject
+   * @param body
+   *          the body of the email in text or html format
+   * @param isHtml
+   *          the is html
+   * @param tos
+   *          the recipients
    */
   void send(AbstractFormattedString subject, AbstractFormattedString body, boolean isHtml, String... tos);
 
   /**
    * Sends email.
-   *
-   * @param from the sender
-   * @param subject the email subject
-   * @param body the body of the email in text or html format
-   * @param isHtml the is html
-   * @param tos the recipients
+   * 
+   * @param from
+   *          the sender
+   * @param subject
+   *          the email subject
+   * @param body
+   *          the body of the email in text or html format
+   * @param isHtml
+   *          the is html
+   * @param tos
+   *          the recipients
    */
-  void send(String from, AbstractFormattedString subject, AbstractFormattedString body, boolean isHtml, String... tos);
+  void send(String from, AbstractFormattedString subject, AbstractFormattedString body, boolean isHtml,
+      String... tos);
 
   /**
    * Sends html email with default site "from".
-   *
-   * @param subject the email subject
-   * @param body the body of the email in html format
-   * @param tos the recipients
+   * 
+   * @param subject
+   *          the email subject
+   * @param body
+   *          the body of the email in html format
+   * @param tos
+   *          the recipients
    */
   void sendHtml(AbstractFormattedString subject, AbstractFormattedString body, String... tos);
 
   /**
    * Sends html email.
-   *
-   * @param from the sender
-   * @param subject the email subject
-   * @param body the body of the email in html format
-   * @param tos the recipients
+   * 
+   * @param from
+   *          the sender
+   * @param subject
+   *          the email subject
+   * @param body
+   *          the body of the email in html format
+   * @param tos
+   *          the recipients
    */
-  void sendHtml(String from, AbstractFormattedString subject, AbstractFormattedString body, String... tos);
+  void sendHtml(String from, AbstractFormattedString subject, AbstractFormattedString body,
+      String... tos);
 
   /**
    * Sends email with default site "from".
-   *
-   * @param subject the email subject
-   * @param body the body of the email in text format
-   * @param tos the recipients
+   * 
+   * @param subject
+   *          the email subject
+   * @param body
+   *          the body of the email in text format
+   * @param tos
+   *          the recipients
    */
   void sendPlain(AbstractFormattedString subject, AbstractFormattedString body, String... tos);
 
   /**
    * Sends plain email.
-   *
-   * @param from the sender
-   * @param subject the email subject
-   * @param body the body of the email in text format
-   * @param tos the recipients
+   * 
+   * @param from
+   *          the sender
+   * @param subject
+   *          the email subject
+   * @param body
+   *          the body of the email in text format
+   * @param tos
+   *          the recipients
    */
-  void sendPlain(String from, AbstractFormattedString subject, AbstractFormattedString body, String... tos);
+  void sendPlain(String from, AbstractFormattedString subject, AbstractFormattedString body,
+      String... tos);
 
 }

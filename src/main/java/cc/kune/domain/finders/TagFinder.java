@@ -30,15 +30,16 @@ import com.google.inject.persist.finder.Finder;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface TagFinder.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface TagFinder {
 
   /**
    * Find by tag name.
-   *
-   * @param tag the tag
+   * 
+   * @param tag
+   *          the tag
    * @return the tag
    */
   @Finder(query = "FROM Tag g WHERE g.name = :name")

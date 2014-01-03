@@ -62,7 +62,7 @@ import com.google.inject.Provider;
 /**
  * You must call {@link GroupSNPresenter#refreshActions()} when adding some
  * action externally with.
- *
+ * 
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
  */
 
@@ -73,24 +73,41 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
   /**
    * Instantiates a new group sn conf actions.
-   *
-   * @param session the session
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param membersVisibility the members visibility
-   * @param membersModeration the members moderation
-   * @param res the res
-   * @param isLoggedCondition the is logged condition
-   * @param joinGroupAction the join group action
-   * @param groupInvitation the group invitation
-   * @param writeToMembers the write to members
-   * @param writeToAdmins the write to admins
-   * @param isGroupCondition the is group condition
-   * @param unJoinGroupAction the un join group action
-   * @param addEntityToThisGroupAction the add entity to this group action
-   * @param optionsMenu the options menu
-   * @param moderationSubMenu the moderation sub menu
-   * @param visibilitySubMenu the visibility sub menu
+   * 
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param membersVisibility
+   *          the members visibility
+   * @param membersModeration
+   *          the members moderation
+   * @param res
+   *          the res
+   * @param isLoggedCondition
+   *          the is logged condition
+   * @param joinGroupAction
+   *          the join group action
+   * @param groupInvitation
+   *          the group invitation
+   * @param writeToMembers
+   *          the write to members
+   * @param writeToAdmins
+   *          the write to admins
+   * @param isGroupCondition
+   *          the is group condition
+   * @param unJoinGroupAction
+   *          the un join group action
+   * @param addEntityToThisGroupAction
+   *          the add entity to this group action
+   * @param optionsMenu
+   *          the options menu
+   * @param moderationSubMenu
+   *          the moderation sub menu
+   * @param visibilitySubMenu
+   *          the visibility sub menu
    */
   @Inject
   public GroupSNConfActions(final Session session, final StateManager stateManager,
@@ -196,10 +213,11 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
   /**
    * You must call {@link GroupSNPresenter#refreshActions()} when adding some
    * action externally with.
-   *
-   * @param action the action
+   * 
+   * @param action
+   *          the action
    * @return true, if successful
-   * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
+   *         {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
    */
   @Override
   public boolean add(final GuiActionDescrip action) {
@@ -208,8 +226,9 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
   /**
    * Adds the impl.
-   *
-   * @param action the action
+   * 
+   * @param action
+   *          the action
    * @return true, if successful
    */
   private boolean addImpl(final GuiActionDescrip action) {

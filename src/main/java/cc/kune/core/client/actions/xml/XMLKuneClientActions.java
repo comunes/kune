@@ -34,22 +34,24 @@ import com.calclab.emite.core.client.services.Services;
 // TODO: Auto-generated Javadoc
 /**
  * The Class XMLKuneClientActions.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class XMLKuneClientActions extends DelegatedPacket {
 
   /** The extensions. */
   private Map<String, XMLWaveExtension> extensions;
-  
+
   /** The gui action descriptors. */
   private List<XMLGuiActionDescriptor> guiActionDescriptors;
 
   /**
    * Instantiates a new xML kune client actions.
-   *
-   * @param services the services
-   * @param xmlS the xml s
+   * 
+   * @param services
+   *          the services
+   * @param xmlS
+   *          the xml s
    */
   public XMLKuneClientActions(final Services services, final String xmlS) {
     super(services.toXML(xmlS));
@@ -57,7 +59,7 @@ public class XMLKuneClientActions extends DelegatedPacket {
 
   /**
    * Gets the extensions.
-   *
+   * 
    * @return the extensions
    */
   public Map<String, XMLWaveExtension> getExtensions() {
@@ -73,7 +75,7 @@ public class XMLKuneClientActions extends DelegatedPacket {
 
   /**
    * Gets the gui action descriptors.
-   *
+   * 
    * @return the gui action descriptors
    */
   public List<XMLGuiActionDescriptor> getGuiActionDescriptors() {

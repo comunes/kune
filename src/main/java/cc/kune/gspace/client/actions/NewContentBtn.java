@@ -31,25 +31,33 @@ import com.google.gwt.resources.client.ImageResource;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewContentBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class NewContentBtn extends ButtonDescriptor {
-  
+
   /** The Constant BTN_ID. */
   public static final String BTN_ID = "k-newctn-id";
 
   /**
    * Instantiates a new new content btn.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param icon the icon
-   * @param shorcutReg the shorcut reg
-   * @param title the title
-   * @param tooltip the tooltip
-   * @param newName the new name
-   * @param id the id
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param icon
+   *          the icon
+   * @param shorcutReg
+   *          the shorcut reg
+   * @param title
+   *          the title
+   * @param tooltip
+   *          the tooltip
+   * @param newName
+   *          the new name
+   * @param id
+   *          the id
    */
   public NewContentBtn(final I18nTranslationService i18n, final NewContentAction action,
       final ImageResource icon, final GlobalShortcutRegister shorcutReg, final String title,

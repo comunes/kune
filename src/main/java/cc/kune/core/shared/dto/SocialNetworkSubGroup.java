@@ -28,20 +28,20 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 /**
  * The Enum SocialNetworkSubGroup is a way to indicate a part of a group
  * SNetwork.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum SocialNetworkSubGroup implements IsSerializable {
-  
+
   /** The admins members only. */
   ADMINS,
-  
+
   /** all members. */
   ALL_GROUP_MEMBERS,
-  
+
   /** The collabs members only. */
   COLLABS,
-  
+
   /** Public in general *. */
   PUBLIC
 }

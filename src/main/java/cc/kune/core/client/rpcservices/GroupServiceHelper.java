@@ -28,7 +28,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupServiceHelper.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupServiceHelper {
@@ -39,8 +39,9 @@ public class GroupServiceHelper {
 
   /**
    * Instantiates a new group service helper.
-   *
-   * @param groupService the group service
+   * 
+   * @param groupService
+   *          the group service
    */
   @Inject
   public GroupServiceHelper(final Provider<GroupServiceAsync> groupService) {

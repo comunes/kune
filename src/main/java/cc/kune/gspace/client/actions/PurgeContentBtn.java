@@ -35,14 +35,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PurgeContentBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PurgeContentBtn extends ButtonDescriptor {
 
   /**
    * The Class PurgeContentAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class PurgeContentAction extends RolAction {
@@ -52,9 +52,11 @@ public class PurgeContentBtn extends ButtonDescriptor {
 
     /**
      * Instantiates a new purge content action.
-     *
-     * @param contentService the content service
-     * @param res the res
+     * 
+     * @param contentService
+     *          the content service
+     * @param res
+     *          the res
      */
     @Inject
     public PurgeContentAction(final ContentServiceHelper contentService, final IconicResources res) {
@@ -63,8 +65,12 @@ public class PurgeContentBtn extends ButtonDescriptor {
       this.withText(I18n.t("Delete permanently")).withIcon(res.trashGrey());
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -75,8 +81,9 @@ public class PurgeContentBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new purge content btn.
-   *
-   * @param action the action
+   * 
+   * @param action
+   *          the action
    */
   @Inject
   public PurgeContentBtn(final PurgeContentAction action) {

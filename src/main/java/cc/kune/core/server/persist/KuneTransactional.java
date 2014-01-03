@@ -31,7 +31,7 @@ import java.lang.annotation.Target;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface KuneTransactional.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Target({ ElementType.METHOD, ElementType.TYPE })
@@ -46,7 +46,7 @@ public @interface KuneTransactional {
    * the universal set plus any exceptions in the ignore set represents the list
    * of exceptions that will trigger a commit. Note that ignore exceptions take
    * precedence over rollbackOn, but with subtype granularity.
-   *
+   * 
    * @return the class<? extends exception>[]
    */
   Class<? extends Exception>[] ignore() default {};
@@ -54,7 +54,7 @@ public @interface KuneTransactional {
   /**
    * A list of exceptions to rollback on, if thrown by the transactional method.
    * These exceptions are propagated correctly after a rollback.
-   *
+   * 
    * @return the class<? extends exception>[]
    */
   Class<? extends Exception>[] rollbackOn() default java.lang.RuntimeException.class;

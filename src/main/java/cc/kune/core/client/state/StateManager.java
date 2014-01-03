@@ -38,7 +38,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
  * Some methods of the StateManager should we rewritten (because its origin is
  * previous to Apache Wave and now is very confusing), but this take control of
  * the #history changes, get the content from the server (or from cache), etc.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -46,23 +46,26 @@ public interface StateManager {
 
   /**
    * Adds the before state change listener.
-   *
-   * @param listener you can use this {@link BeforeActionListener} to intercept changes
-   * of state (for instance if you are editing and what to save, etc.
+   * 
+   * @param listener
+   *          you can use this {@link BeforeActionListener} to intercept changes
+   *          of state (for instance if you are editing and what to save, etc.
    */
   void addBeforeStateChangeListener(BeforeActionListener listener);
 
   /**
    * This permits to add custom #framents to urls and its associated actions.
-   *
-   * @param token the url #fragment
-   * @param historyTokenCallback the action that will be executed when the previous url fragment
+   * 
+   * @param token
+   *          the url #fragment
+   * @param historyTokenCallback
+   *          the action that will be executed when the previous url fragment
    */
   void addSiteToken(String token, HistoryTokenCallback historyTokenCallback);
 
   /**
    * Gets the current token.
-   *
+   * 
    * @return the current token
    */
   String getCurrentToken();
@@ -74,15 +77,17 @@ public interface StateManager {
 
   /**
    * Goto history token.
-   *
-   * @param newToken the new token
+   * 
+   * @param newToken
+   *          the new token
    */
   void gotoHistoryToken(String newToken);
 
   /**
    * Goto history token but redirect to current.
-   *
-   * @param signin the signin
+   * 
+   * @param signin
+   *          the signin
    */
   void gotoHistoryTokenButRedirectToCurrent(String signin);
 
@@ -93,33 +98,40 @@ public interface StateManager {
 
   /**
    * Goto state token.
-   *
-   * @param newToken the new token
+   * 
+   * @param newToken
+   *          the new token
    */
   void gotoStateToken(StateToken newToken);
 
   /**
    * Goto state token.
-   *
-   * @param token the token
-   * @param useCache the use cache
+   * 
+   * @param token
+   *          the token
+   * @param useCache
+   *          the use cache
    */
   void gotoStateToken(StateToken token, boolean useCache);
 
   /**
    * On group changed.
-   *
-   * @param fireNow the fire now
-   * @param handler the handler
+   * 
+   * @param fireNow
+   *          the fire now
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   HandlerRegistration onGroupChanged(boolean fireNow, GroupChangedEvent.GroupChangedHandler handler);
 
   /**
    * On social network changed.
-   *
-   * @param fireNow the fire now
-   * @param handler the handler
+   * 
+   * @param fireNow
+   *          the fire now
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   HandlerRegistration onSocialNetworkChanged(boolean fireNow,
@@ -127,26 +139,31 @@ public interface StateManager {
 
   /**
    * On state changed.
-   *
-   * @param fireNow if true, fire handler with current state
-   * @param handler the handler
+   * 
+   * @param fireNow
+   *          if true, fire handler with current state
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   HandlerRegistration onStateChanged(boolean fireNow, StateChangedEvent.StateChangedHandler handler);
 
   /**
    * On tool changed.
-   *
-   * @param fireNow the fire now
-   * @param handler the handler
+   * 
+   * @param fireNow
+   *          the fire now
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   HandlerRegistration onToolChanged(boolean fireNow, ToolChangedEvent.ToolChangedHandler handler);
 
   /**
    * Redirect or restore previous token.
-   *
-   * @param fireChange the fire change
+   * 
+   * @param fireChange
+   *          the fire change
    */
   void redirectOrRestorePreviousToken(boolean fireChange);
 
@@ -162,36 +179,41 @@ public interface StateManager {
 
   /**
    * Removes the before state change listener.
-   *
-   * @param listener the listener
+   * 
+   * @param listener
+   *          the listener
    */
   void removeBeforeStateChangeListener(BeforeActionListener listener);
 
   /**
    * Removes the cache.
-   *
-   * @param parentToken the parent token
+   * 
+   * @param parentToken
+   *          the parent token
    */
   void removeCache(StateToken parentToken);
 
   /**
    * Removes the cache of group.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    */
   void removeCacheOfGroup(String group);
 
   /**
    * Removes the site token.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   void removeSiteToken(String token);
 
   /**
    * Restore previous token.
-   *
-   * @param fireChange if only change the browser #token or also fire the event
+   * 
+   * @param fireChange
+   *          if only change the browser #token or also fire the event
    */
   void restorePreviousToken(boolean fireChange);
 
@@ -202,29 +224,33 @@ public interface StateManager {
 
   /**
    * Sets the history state token.
-   *
-   * @param token the new history state token
+   * 
+   * @param token
+   *          the new history state token
    */
   void setHistoryStateToken(String token);
 
   /**
    * Sets the retrieved state.
-   *
-   * @param state the new retrieved state
+   * 
+   * @param state
+   *          the new retrieved state
    */
   void setRetrievedState(StateAbstractDTO state);
 
   /**
    * Sets the retrieved state and go.
-   *
-   * @param state the new retrieved state and go
+   * 
+   * @param state
+   *          the new retrieved state and go
    */
   void setRetrievedStateAndGo(StateAbstractDTO state);
 
   /**
    * Sets the social network.
-   *
-   * @param socialNet the new social network
+   * 
+   * @param socialNet
+   *          the new social network
    */
   void setSocialNetwork(SocialNetworkDataDTO socialNet);
 

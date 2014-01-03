@@ -27,15 +27,16 @@ import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GxtMenuCheckItemGui.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GxtMenuCheckItemGui extends AbstractGxtMenuItemGui {
 
   /**
    * Instantiates a new gxt menu check item gui.
-   *
-   * @param descriptor the descriptor
+   * 
+   * @param descriptor
+   *          the descriptor
    */
   public GxtMenuCheckItemGui(final MenuCheckItemDescriptor descriptor) {
     super(descriptor);

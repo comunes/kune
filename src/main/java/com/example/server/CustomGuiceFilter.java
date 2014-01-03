@@ -113,6 +113,10 @@ public class CustomGuiceFilter extends GuiceFilter {
   @SuppressWarnings("serial")
   public static class HelloWorldServlet extends HttpServlet {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /** The hw. */
     private final HelloWorldInjected hw;
 

@@ -39,24 +39,31 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UnJoinFromCurrentGroupAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UnJoinFromCurrentGroupAction extends SNRolAction {
-  
+
   /** The sn service helper. */
   private final Provider<SocialNetServiceHelper> snServiceHelper;
 
   /**
    * Instantiates a new un join from current group action.
-   *
-   * @param stateManager the state manager
-   * @param session the session
-   * @param i18n the i18n
-   * @param res the res
-   * @param snServiceHelper the sn service helper
-   * @param rightsClientManager the rights client manager
-   * @param snService the sn service
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param snServiceHelper
+   *          the sn service helper
+   * @param rightsClientManager
+   *          the rights client manager
+   * @param snService
+   *          the sn service
    */
   @Inject
   public UnJoinFromCurrentGroupAction(final StateManager stateManager, final Session session,
@@ -73,8 +80,12 @@ public class UnJoinFromCurrentGroupAction extends SNRolAction {
     putValue(Action.STYLES, "k-sn-join");
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

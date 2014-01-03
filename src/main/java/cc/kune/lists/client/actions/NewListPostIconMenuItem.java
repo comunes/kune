@@ -32,19 +32,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewListPostIconMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewListPostIconMenuItem extends MenuItemDescriptor {
 
   /**
    * Instantiates a new new list post icon menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
-   * @param shorcutReg the shorcut reg
-   * @param menu the menu
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
+   * @param shorcutReg
+   *          the shorcut reg
+   * @param menu
+   *          the menu
    */
   @Inject
   public NewListPostIconMenuItem(final I18nTranslationService i18n, final NewListPostAction action,

@@ -45,38 +45,44 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RenameAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RenameAction {
-  
+
   /** The content cache. */
   private final ContentCache contentCache;
-  
+
   /** The content service. */
   private final Provider<ContentServiceAsync> contentService;
-  
+
   /** The error handler. */
   private final ErrorHandler errorHandler;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new rename action.
-   *
-   * @param i18n the i18n
-   * @param session the session
-   * @param eventBus the event bus
-   * @param contentService the content service
-   * @param errorHandler the error handler
-   * @param contentCache the content cache
+   * 
+   * @param i18n
+   *          the i18n
+   * @param session
+   *          the session
+   * @param eventBus
+   *          the event bus
+   * @param contentService
+   *          the content service
+   * @param errorHandler
+   *          the error handler
+   * @param contentCache
+   *          the content cache
    */
   @Inject
   public RenameAction(final I18nTranslationService i18n, final Session session, final EventBus eventBus,
@@ -92,11 +98,15 @@ public class RenameAction {
 
   /**
    * Rename.
-   *
-   * @param token the token
-   * @param oldName the old name
-   * @param newName the new name
-   * @param listener the listener
+   * 
+   * @param token
+   *          the token
+   * @param oldName
+   *          the old name
+   * @param newName
+   *          the new name
+   * @param listener
+   *          the listener
    */
   public void rename(final StateToken token, final String oldName, final String newName,
       final RenameListener listener) {

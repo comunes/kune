@@ -30,15 +30,16 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WikiFolderNewMenu.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WikiFolderNewMenu extends NewMenuProvider {
 
   /**
    * Instantiates a new wiki folder new menu.
-   *
-   * @param menu the menu
+   * 
+   * @param menu
+   *          the menu
    */
   @Inject
   public WikiFolderNewMenu(final AbstractNewMenu menu) {

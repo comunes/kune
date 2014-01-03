@@ -35,18 +35,21 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SessionExpirationManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class SessionExpirationManager {
-  
+
   /**
    * Instantiates a new session expiration manager.
-   *
-   * @param eventBus the event bus
-   * @param session the session
-   * @param i18n the i18n
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public SessionExpirationManager(final EventBus eventBus, final Session session,

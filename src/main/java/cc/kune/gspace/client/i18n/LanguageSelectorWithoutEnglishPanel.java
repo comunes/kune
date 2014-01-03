@@ -30,16 +30,18 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LanguageSelectorWithoutEnglishPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LanguageSelectorWithoutEnglishPanel extends AbstractLanguageSelectorPanel {
 
   /**
    * Instantiates a new language selector without english panel.
-   *
-   * @param i18n the i18n
-   * @param session the session
+   * 
+   * @param i18n
+   *          the i18n
+   * @param session
+   *          the session
    */
   @Inject
   public LanguageSelectorWithoutEnglishPanel(final I18nTranslationService i18n, final Session session) {

@@ -26,7 +26,7 @@ package cc.kune.core.client.state;
 /**
  * The Class HistoryTokenNotLoggedCallback is used to indicate the action
  * related to this token (like #about, etc) should not be authenticated.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class HistoryTokenAuthNotNeededCallback implements HistoryTokenCallback {
@@ -41,7 +41,9 @@ public abstract class HistoryTokenAuthNotNeededCallback implements HistoryTokenC
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.state.HistoryTokenCallback#getInfoMessage()
    */
   @Override

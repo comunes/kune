@@ -33,13 +33,15 @@ import com.google.gwt.user.client.ui.RootLayoutPanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceArmorEntryPoint.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Deprecated
 public class GSpaceArmorEntryPoint implements EntryPoint {
-  
-  /* (non-Javadoc)
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
    */
   @Override

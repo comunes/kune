@@ -27,7 +27,7 @@ import com.google.inject.Provider;
 /**
  * The Class PendingNotificationProvider is used to generate notifications in a
  * deferred way of waves updates (for instance).
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class PendingNotificationProvider implements Provider<PendingNotification> {

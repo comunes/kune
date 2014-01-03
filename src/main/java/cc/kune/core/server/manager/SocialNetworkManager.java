@@ -37,165 +37,219 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SocialNetworkManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SocialNetworkManager extends Manager<SocialNetwork, Long> {
 
   /**
    * Accept join group.
-   *
-   * @param userLogged the user logged
-   * @param group the group
-   * @param inGroup the in group
-   * @throws DefaultException the default exception
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
+   * @param inGroup
+   *          the in group
+   * @throws DefaultException
+   *           the default exception
    */
   void acceptJoinGroup(User userLogged, Group group, Group inGroup) throws DefaultException;
 
   /**
    * Adds the as buddie.
-   *
-   * @param userLogged the user logged
-   * @param toUser the to user
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param toUser
+   *          the to user
    */
   void addAsBuddie(User userLogged, User toUser);
 
   /**
    * Adds the group to admins.
-   *
-   * @param userLogged the user logged
-   * @param group the group
-   * @param inGroup the in group
-   * @throws DefaultException the default exception
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
+   * @param inGroup
+   *          the in group
+   * @throws DefaultException
+   *           the default exception
    */
   void addGroupToAdmins(User userLogged, Group group, Group inGroup) throws DefaultException;
 
   /**
    * Adds the group to collabs.
-   *
-   * @param userLogged the user logged
-   * @param group the group
-   * @param inGroup the in group
-   * @throws DefaultException the default exception
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
+   * @param inGroup
+   *          the in group
+   * @throws DefaultException
+   *           the default exception
    */
   void addGroupToCollabs(User userLogged, Group group, Group inGroup) throws DefaultException;
 
   /**
    * Adds the group to viewers.
-   *
-   * @param userLogged the user logged
-   * @param group the group
-   * @param inGroup the in group
-   * @throws DefaultException the default exception
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
+   * @param inGroup
+   *          the in group
+   * @throws DefaultException
+   *           the default exception
    */
   void addGroupToViewers(User userLogged, Group group, Group inGroup) throws DefaultException;
 
   /**
    * Delete member.
-   *
-   * @param userLogged the user logged
-   * @param group the group
-   * @param inGroup the in group
-   * @throws DefaultException the default exception
-   * @throws AccessViolationException the access violation exception
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
+   * @param inGroup
+   *          the in group
+   * @throws DefaultException
+   *           the default exception
+   * @throws AccessViolationException
+   *           the access violation exception
    */
   void deleteMember(User userLogged, Group group, Group inGroup) throws DefaultException,
       AccessViolationException;
 
   /**
    * Deny join group.
-   *
-   * @param userLogged the user logged
-   * @param group the group
-   * @param inGroup the in group
-   * @throws DefaultException the default exception
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
+   * @param inGroup
+   *          the in group
+   * @throws DefaultException
+   *           the default exception
    */
   void denyJoinGroup(User userLogged, Group group, Group inGroup) throws DefaultException;
 
   /**
    * Find participation.
-   *
-   * @param user the user
-   * @param group the group
+   * 
+   * @param user
+   *          the user
+   * @param group
+   *          the group
    * @return the participation data
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   ParticipationData findParticipation(User user, Group group) throws DefaultException;
 
   /**
    * Find participation aggregated.
-   *
-   * @param userLogged the user logged
-   * @param group the group
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
    * @return the list
-   * @throws AccessViolationException the access violation exception
+   * @throws AccessViolationException
+   *           the access violation exception
    */
   List<Group> findParticipationAggregated(User userLogged, Group group) throws AccessViolationException;
 
   /**
    * Generate response.
-   *
-   * @param userLogged the user logged
-   * @param group the group
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
    * @return the social network data dto
    */
   SocialNetworkDataDTO generateResponse(User userLogged, Group group);
 
   /**
    * Gets the.
-   *
-   * @param userLogged the user logged
-   * @param group the group
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
    * @return the social network
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   SocialNetwork get(User userLogged, Group group) throws DefaultException;
 
   /**
    * Gets the social network data.
-   *
-   * @param userLogged the user logged
-   * @param group the group
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
    * @return the social network data
    */
   SocialNetworkData getSocialNetworkData(User userLogged, Group group);
 
   /**
    * Request to join.
-   *
-   * @param user the user
-   * @param inGroup the in group
+   * 
+   * @param user
+   *          the user
+   * @param inGroup
+   *          the in group
    * @return the social network request result
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   SocialNetworkRequestResult requestToJoin(User user, Group inGroup) throws DefaultException;
 
   /**
    * Sets the admin as collab.
-   *
-   * @param userLogged the user logged
-   * @param group the group
-   * @param inGroup the in group
-   * @throws DefaultException the default exception
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
+   * @param inGroup
+   *          the in group
+   * @throws DefaultException
+   *           the default exception
    */
   void setAdminAsCollab(User userLogged, Group group, Group inGroup) throws DefaultException;
 
   /**
    * Sets the collab as admin.
-   *
-   * @param userLogged the user logged
-   * @param group the group
-   * @param inGroup the in group
-   * @throws DefaultException the default exception
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param group
+   *          the group
+   * @param inGroup
+   *          the in group
+   * @throws DefaultException
+   *           the default exception
    */
   void setCollabAsAdmin(User userLogged, Group group, Group inGroup) throws DefaultException;
 
   /**
    * Un join group.
-   *
-   * @param groupToUnJoin the group to un join
-   * @param inGroup the in group
-   * @throws DefaultException the default exception
+   * 
+   * @param groupToUnJoin
+   *          the group to un join
+   * @param inGroup
+   *          the in group
+   * @throws DefaultException
+   *           the default exception
    */
   void unJoinGroup(Group groupToUnJoin, Group inGroup) throws DefaultException;
 

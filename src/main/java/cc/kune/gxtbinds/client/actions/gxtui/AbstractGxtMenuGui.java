@@ -41,44 +41,44 @@ import com.google.gwt.user.client.ui.UIObject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractGxtMenuGui.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements ParentWidget {
 
   /**
    * The Enum MenuPosition.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public enum MenuPosition {
-    
+
     /** The b. */
     b, // The top left corner (default)
     /** The bl. */
- bl, // The center of the top edge
+    bl, // The center of the top edge
     /** The br. */
- br, // The bottom right corner ,// The top right corner
+    br, // The bottom right corner ,// The top right corner
     /** The c. */
- c, // The center of the left edge
+    c, // The center of the left edge
     /** The l. */
- l, // In the center of the element
+    l, // In the center of the element
     /** The r. */
- r, // The center of the right edge
+    r, // The center of the right edge
     /** The t. */
- t, // The bottom left corner
+    t, // The bottom left corner
     /** The tl. */
- tl, // The center of the bottom edge
+    tl, // The center of the bottom edge
     /** The tr. */
- tr
+    tr
   }
-  
+
   /** The Constant DEF_MENU_POSITION. */
   public static final String DEF_MENU_POSITION = "bl";
-  
+
   /** The Constant MENU_POSITION. */
   public static final String MENU_POSITION = "menu-position";
-  
+
   /** The menu. */
   protected Menu menu;
 
@@ -90,15 +90,20 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
 
   /**
    * Instantiates a new abstract gxt menu gui.
-   *
-   * @param descriptor the descriptor
+   * 
+   * @param descriptor
+   *          the descriptor
    */
   public AbstractGxtMenuGui(final GuiActionDescrip descriptor) {
     super(descriptor);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.ParentWidget#add(com.google.gwt.user.client.ui.UIObject)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.ParentWidget#add(com.google.gwt.user.client
+   * .ui.UIObject)
    */
   @Override
   public void add(final UIObject item) {
@@ -112,8 +117,12 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
     menu.add(new SeparatorMenuItem());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#configureItemFromProperties()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#configureItemFromProperties
+   * ()
    */
   @Override
   public void configureItemFromProperties() {
@@ -128,8 +137,12 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common
+   * .client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
@@ -157,7 +170,7 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
 
   /**
    * Gets the menu position.
-   *
+   * 
    * @return the menu position
    */
   protected String getMenuPosition() {
@@ -165,31 +178,44 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
     return position == null ? DEF_MENU_POSITION : position.name();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int, com.google.gwt.user.client.ui.UIObject)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int,
+   * com.google.gwt.user.client.ui.UIObject)
    */
   @Override
   public void insert(final int position, final UIObject item) {
     menu.insert((MenuItem) item, position);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
+   * .lang.String)
    */
   @Override
   public void setIconBackground(final String back) {
     throw new NotImplementedException();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
+   * )
    */
   @Override
   public void setIconUrl(final String url) {
     throw new NotImplementedException();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
    */
   @Override
@@ -199,8 +225,9 @@ public abstract class AbstractGxtMenuGui extends AbstractChildGuiItem implements
 
   /**
    * Show.
-   *
-   * @param relative the relative
+   * 
+   * @param relative
+   *          the relative
    */
   public void show(final Object relative) {
     if (relative instanceof String) {

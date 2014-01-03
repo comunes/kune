@@ -33,7 +33,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ListInvitationBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -41,9 +41,11 @@ public class ListInvitationBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new list invitation btn.
-   *
-   * @param action the action
-   * @param icons the icons
+   * 
+   * @param action
+   *          the action
+   * @param icons
+   *          the icons
    */
   @Inject
   ListInvitationBtn(final ListInvitationAction action, final IconicResources icons) {

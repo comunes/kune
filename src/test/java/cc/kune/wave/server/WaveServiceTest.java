@@ -27,7 +27,7 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveServiceTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveServiceTest {

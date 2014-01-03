@@ -28,11 +28,11 @@ import java.util.List;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EmptyFolderTutorialRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmptyFolderTutorialRegistry {
-  
+
   /** The registry. */
   private final List<String> registry;
 
@@ -45,8 +45,9 @@ public class EmptyFolderTutorialRegistry {
 
   /**
    * Checks for tutorial.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if successful
    */
   public boolean hasTutorial(final String typeId) {
@@ -55,8 +56,9 @@ public class EmptyFolderTutorialRegistry {
 
   /**
    * Register.
-   *
-   * @param contentTypeId the content type id
+   * 
+   * @param contentTypeId
+   *          the content type id
    */
   public void register(final String contentTypeId) {
     registry.add(contentTypeId);

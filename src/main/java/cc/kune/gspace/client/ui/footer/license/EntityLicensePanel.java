@@ -40,31 +40,33 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityLicensePanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
-  
+
   /** The Constant LICENSE_LABEL. */
   public static final String LICENSE_LABEL = "k-elp-lic-lab";
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The license bar. */
   private final FlowPanel licenseBar;
-  
+
   /** The license image. */
   private final Image licenseImage;
-  
+
   /** The tooltip. */
   private final Tooltip tooltip;
 
   /**
    * Instantiates a new entity license panel.
-   *
-   * @param i18n the i18n
-   * @param armor the armor
+   * 
+   * @param i18n
+   *          the i18n
+   * @param armor
+   *          the armor
    */
   @Inject
   public EntityLicensePanel(final I18nTranslationService i18n, final GSpaceArmor armor) {
@@ -78,7 +80,9 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
     tooltip = Tooltip.to(licenseImage, ".");
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -86,40 +90,56 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.EntityLicenseView#attach()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.
+   * EntityLicenseView#attach()
    */
   @Override
   public void attach() {
     licenseBar.setVisible(true);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.EntityLicenseView#detach()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.
+   * EntityLicenseView#detach()
    */
   @Override
   public void detach() {
     licenseBar.setVisible(false);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.EntityLicenseView#getImage()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.
+   * EntityLicenseView#getImage()
    */
   @Override
   public HasClickHandlers getImage() {
     return licenseImage;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.EntityLicenseView#openWindow(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.
+   * EntityLicenseView#openWindow(java.lang.String)
    */
   @Override
   public void openWindow(final String url) {
     KuneWindowUtils.open(url);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.EntityLicenseView#showLicense(java.lang.String, cc.kune.core.shared.dto.LicenseDTO)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.ui.footer.license.EntityLicensePresenter.
+   * EntityLicenseView#showLicense(java.lang.String,
+   * cc.kune.core.shared.dto.LicenseDTO)
    */
   @Override
   public void showLicense(final String groupName, final LicenseDTO licenseDTO) {

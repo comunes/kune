@@ -32,23 +32,26 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptLogoPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptLogoPanel extends EntityOptLogoPanel implements UserOptLogoView {
-  
+
   /** The Constant BUTTON_ID. */
   public static final String BUTTON_ID = "k-uolp-sendb";
-  
+
   /** The Constant PANEL_ID. */
   public static final String PANEL_ID = "k-uolp-pan";
 
   /**
    * Instantiates a new user opt logo panel.
-   *
-   * @param eventBus the event bus
-   * @param i18n the i18n
-   * @param res the res
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
    */
   @Inject
   public UserOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,

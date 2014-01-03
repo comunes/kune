@@ -41,21 +41,28 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptLogoPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptLogoPresenter extends EntityOptLogoPresenter {
 
   /**
    * Instantiates a new user opt logo presenter.
-   *
-   * @param eventBus the event bus
-   * @param session the session
-   * @param entityOptions the entity options
-   * @param stateManager the state manager
-   * @param userService the user service
-   * @param view the view
-   * @param i18n the i18n
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
+   * @param entityOptions
+   *          the entity options
+   * @param stateManager
+   *          the state manager
+   * @param userService
+   *          the user service
+   * @param view
+   *          the view
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public UserOptLogoPresenter(final EventBus eventBus, final Session session,
@@ -74,16 +81,21 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
 
   /**
    * Inits the.
-   *
-   * @param view the view
+   * 
+   * @param view
+   *          the view
    */
   private void init(final UserOptLogoView view) {
     super.init(view);
     view.setPersonalGroupsLabels();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#onSubmitComplete(gwtupload.client.IUploader)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#onSubmitComplete
+   * (gwtupload.client.IUploader)
    */
   @Override
   public void onSubmitComplete(final IUploader uploader) {
@@ -100,7 +112,9 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#setState()
    */
   @Override

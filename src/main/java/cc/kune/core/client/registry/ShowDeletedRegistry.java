@@ -24,7 +24,7 @@ package cc.kune.core.client.registry;
 
 /**
  * Conents registered here will be showed as deleted in.
- *
+ * 
  * {@link FolderVieverPresenter}
  */
 public class ShowDeletedRegistry extends AbstractContentRegistry {

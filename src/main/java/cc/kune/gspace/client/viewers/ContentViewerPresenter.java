@@ -61,7 +61,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentViewerPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentViewerPresenter extends
@@ -70,7 +70,7 @@ public class ContentViewerPresenter extends
 
   /**
    * The Interface ContentViewerProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -79,7 +79,7 @@ public class ContentViewerPresenter extends
 
   /**
    * The Interface ContentViewerView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface ContentViewerView extends View {
@@ -106,43 +106,48 @@ public class ContentViewerPresenter extends
 
     /**
      * Gets the edits the title.
-     *
+     * 
      * @return the edits the title
      */
     HasEditHandler getEditTitle();
 
     /**
      * Sets the content.
-     *
-     * @param state the new content
+     * 
+     * @param state
+     *          the new content
      */
     void setContent(StateContentDTO state);
 
     /**
      * Sets the editable content.
-     *
-     * @param state the new editable content
+     * 
+     * @param state
+     *          the new editable content
      */
     void setEditableContent(StateContentDTO state);
 
     /**
      * Sets the editable title.
-     *
-     * @param title the new editable title
+     * 
+     * @param title
+     *          the new editable title
      */
     void setEditableTitle(String title);
 
     /**
      * Sets the footer actions.
-     *
-     * @param actions the new footer actions
+     * 
+     * @param actions
+     *          the new footer actions
      */
     void setFooterActions(GuiActionDescCollection actions);
 
     /**
      * Sets the subheader actions.
-     *
-     * @param actions the new subheader actions
+     * 
+     * @param actions
+     *          the new subheader actions
      */
     void setSubheaderActions(GuiActionDescCollection actions);
 
@@ -160,31 +165,40 @@ public class ContentViewerPresenter extends
 
   /** The actions registry. */
   private final ActionRegistryByType actionsRegistry;
-  
+
   /** The edit handler. */
   private HandlerRegistration editHandler;
-  
+
   /** The path toolbar utils. */
   private final PathToolbarUtils pathToolbarUtils;
-  
+
   /** The rename action. */
   private final Provider<RenameAction> renameAction;
-  
+
   /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new content viewer presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param stateManager the state manager
-   * @param proxy the proxy
-   * @param session the session
-   * @param actionsRegistry the actions registry
-   * @param renameAction the rename action
-   * @param pathToolbarUtils the path toolbar utils
-   * @param wavClientManager the wav client manager
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param stateManager
+   *          the state manager
+   * @param proxy
+   *          the proxy
+   * @param session
+   *          the session
+   * @param actionsRegistry
+   *          the actions registry
+   * @param renameAction
+   *          the rename action
+   * @param pathToolbarUtils
+   *          the path toolbar utils
+   * @param wavClientManager
+   *          the wav client manager
    */
   @Inject
   public ContentViewerPresenter(final EventBus eventBus, final ContentViewerView view,
@@ -217,7 +231,9 @@ public class ContentViewerPresenter extends
     });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.tool.ContentViewer#attach()
    */
   @Override
@@ -258,7 +274,9 @@ public class ContentViewerPresenter extends
     });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.tool.ContentViewer#detach()
    */
   @Override
@@ -266,7 +284,9 @@ public class ContentViewerPresenter extends
     getView().detach();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -274,8 +294,12 @@ public class ContentViewerPresenter extends
     RevealRootContentEvent.fire(this, this);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tool.ContentViewer#setContent(cc.kune.core.shared.dto.HasContent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.tool.ContentViewer#setContent(cc.kune.core.shared
+   * .dto.HasContent)
    */
   @Override
   public void setContent(@Nonnull final HasContent state) {

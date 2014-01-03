@@ -30,7 +30,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserBuddiesDataDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserBuddiesDataDTO implements IsSerializable {
@@ -40,7 +40,7 @@ public class UserBuddiesDataDTO implements IsSerializable {
 
   /** The buddies. */
   private List<UserSimpleDTO> buddies;
-  
+
   /** The other ext buddies. */
   private int otherExtBuddies;
 
@@ -54,12 +54,13 @@ public class UserBuddiesDataDTO implements IsSerializable {
 
   /**
    * Contains.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    * @return true, if successful
    */
   public boolean contains(final String shortName) {
-    for (UserSimpleDTO buddie : buddies) {
+    for (final UserSimpleDTO buddie : buddies) {
       if (buddie.getShortName().equals(shortName)) {
         return true;
       }
@@ -69,7 +70,7 @@ public class UserBuddiesDataDTO implements IsSerializable {
 
   /**
    * Gets the buddies.
-   *
+   * 
    * @return the buddies
    */
   public List<UserSimpleDTO> getBuddies() {
@@ -78,7 +79,7 @@ public class UserBuddiesDataDTO implements IsSerializable {
 
   /**
    * Gets the other ext buddies.
-   *
+   * 
    * @return the other ext buddies
    */
   public int getOtherExtBuddies() {
@@ -87,8 +88,9 @@ public class UserBuddiesDataDTO implements IsSerializable {
 
   /**
    * Sets the buddies.
-   *
-   * @param buddies the new buddies
+   * 
+   * @param buddies
+   *          the new buddies
    */
   public void setBuddies(final List<UserSimpleDTO> buddies) {
     this.buddies = buddies;
@@ -96,14 +98,17 @@ public class UserBuddiesDataDTO implements IsSerializable {
 
   /**
    * Sets the other ext buddies.
-   *
-   * @param otherExternalBuddies the new other ext buddies
+   * 
+   * @param otherExternalBuddies
+   *          the new other ext buddies
    */
   public void setOtherExtBuddies(final int otherExternalBuddies) {
     this.otherExtBuddies = otherExternalBuddies;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

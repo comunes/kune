@@ -22,6 +22,7 @@
  */
 package cc.kune.gspace.client.viewers;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ToolbarStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
@@ -38,7 +39,6 @@ import cc.kune.core.shared.dto.ContainerDTO;
 import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.actions.GotoTokenAction;
-import cc.kune.gspace.client.actions.SNActionStyles;
 
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
@@ -47,38 +47,44 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PathToolbarUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PathToolbarUtils {
 
   /** The download provider. */
   private final Provider<ClientFileDownloadUtils> downloadProvider;
-  
+
   /** The drop controller. */
   private final Provider<FolderContainerDropController> dropController;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The icons registry. */
   private final IconsRegistry iconsRegistry;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new path toolbar utils.
-   *
-   * @param dropController the drop controller
-   * @param stateManager the state manager
-   * @param capabilitiesRegistry the capabilities registry
-   * @param eventBus the event bus
-   * @param i18n the i18n
-   * @param downloadProvider the download provider
+   * 
+   * @param dropController
+   *          the drop controller
+   * @param stateManager
+   *          the state manager
+   * @param capabilitiesRegistry
+   *          the capabilities registry
+   * @param eventBus
+   *          the event bus
+   * @param i18n
+   *          the i18n
+   * @param downloadProvider
+   *          the download provider
    */
   @Inject
   public PathToolbarUtils(final Provider<FolderContainerDropController> dropController,
@@ -95,15 +101,18 @@ public class PathToolbarUtils {
 
   /**
    * Creates the group button.
-   *
-   * @param group the group
-   * @param showGroupName the show group name
-   * @param minimal the minimal
+   * 
+   * @param group
+   *          the group
+   * @param showGroupName
+   *          the show group name
+   * @param minimal
+   *          the minimal
    * @return the button descriptor
    */
   private ButtonDescriptor createGroupButton(final GroupDTO group, final boolean showGroupName,
       final boolean minimal) {
-    final String style = ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " + SNActionStyles.BTN_SMALL : "");
+    final String style = ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " + ActionStyles.BTN_SMALL : "");
     final String tooltip = group.getLongName();
     final GotoTokenAction action = new GotoTokenAction(null,
         showGroupName ? group.getShortName() : null, tooltip, group.getStateToken(), style,
@@ -119,11 +128,15 @@ public class PathToolbarUtils {
 
   /**
    * Creates the path.
-   *
-   * @param group the group
-   * @param container the container
-   * @param withDrop the with drop
-   * @param showGroupName the show group name
+   * 
+   * @param group
+   *          the group
+   * @param container
+   *          the container
+   * @param withDrop
+   *          the with drop
+   * @param showGroupName
+   *          the show group name
    * @return the gui action desc collection
    */
   public GuiActionDescCollection createPath(final GroupDTO group, final ContainerDTO container,
@@ -133,12 +146,17 @@ public class PathToolbarUtils {
 
   /**
    * Creates the path.
-   *
-   * @param group the group
-   * @param container the container
-   * @param withDrop the with drop
-   * @param showGroupName the show group name
-   * @param extra the extra
+   * 
+   * @param group
+   *          the group
+   * @param container
+   *          the container
+   * @param withDrop
+   *          the with drop
+   * @param showGroupName
+   *          the show group name
+   * @param extra
+   *          the extra
    * @return the gui action desc collection
    */
   public GuiActionDescCollection createPath(final GroupDTO group, final ContainerDTO container,
@@ -187,13 +205,19 @@ public class PathToolbarUtils {
 
   /**
    * Creates the path button.
-   *
-   * @param container the container
-   * @param length the length
-   * @param pos the pos
-   * @param isTheLastExtra the is the last extra
-   * @param withDrop the with drop
-   * @param hasExtra the has extra
+   * 
+   * @param container
+   *          the container
+   * @param length
+   *          the length
+   * @param pos
+   *          the pos
+   * @param isTheLastExtra
+   *          the is the last extra
+   * @param withDrop
+   *          the with drop
+   * @param hasExtra
+   *          the has extra
    * @return the button descriptor
    */
   private ButtonDescriptor createPathButton(final ContainerSimpleDTO container, final int length,

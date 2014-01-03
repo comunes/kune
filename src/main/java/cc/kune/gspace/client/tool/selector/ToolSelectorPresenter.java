@@ -51,7 +51,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolSelectorPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolSelectorPresenter extends
@@ -60,7 +60,7 @@ public class ToolSelectorPresenter extends
 
   /**
    * The Interface ToolSelectorProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -69,15 +69,16 @@ public class ToolSelectorPresenter extends
 
   /**
    * The Interface ToolSelectorView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface ToolSelectorView extends View {
-    
+
     /**
      * Adds the item.
-     *
-     * @param item the item
+     * 
+     * @param item
+     *          the item
      */
     void addItem(ToolSelectorItemView item);
   }
@@ -87,11 +88,15 @@ public class ToolSelectorPresenter extends
 
   /**
    * Instantiates a new tool selector presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param stateManager the state manager
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param stateManager
+   *          the state manager
    */
   @Inject
   public ToolSelectorPresenter(final EventBus eventBus, final ToolSelectorView view,
@@ -129,8 +134,12 @@ public class ToolSelectorPresenter extends
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tool.selector.ToolSelector#addTool(cc.kune.gspace.client.tool.selector.ToolSelectorItem)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.tool.selector.ToolSelector#addTool(cc.kune.gspace
+   * .client.tool.selector.ToolSelectorItem)
    */
   @Override
   public void addTool(final ToolSelectorItem item) {
@@ -150,8 +159,9 @@ public class ToolSelectorPresenter extends
 
   /**
    * Check tool.
-   *
-   * @param tool the tool
+   * 
+   * @param tool
+   *          the tool
    */
   private void checkTool(final ToolSelectorItem tool) {
     if (tool == null) {
@@ -162,8 +172,9 @@ public class ToolSelectorPresenter extends
 
   /**
    * On group changed.
-   *
-   * @param newGroupName the new group name
+   * 
+   * @param newGroupName
+   *          the new group name
    */
   void onGroupChanged(final String newGroupName) {
     for (final String name : tools.keySet()) {
@@ -173,11 +184,15 @@ public class ToolSelectorPresenter extends
 
   /**
    * On tool changed.
-   *
-   * @param oldTool the old tool
-   * @param newTool the new tool
-   * @param oldToken the old token
-   * @param newToken the new token
+   * 
+   * @param oldTool
+   *          the old tool
+   * @param newTool
+   *          the new tool
+   * @param oldToken
+   *          the old token
+   * @param newToken
+   *          the new token
    */
   void onToolChanged(final String oldTool, final String newTool, final StateToken oldToken,
       final StateToken newToken) {
@@ -199,7 +214,9 @@ public class ToolSelectorPresenter extends
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

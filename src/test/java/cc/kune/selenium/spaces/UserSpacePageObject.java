@@ -31,7 +31,7 @@ import cc.kune.selenium.PageObject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSpacePageObject.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserSpacePageObject extends PageObject {
@@ -59,7 +59,7 @@ public class UserSpacePageObject extends PageObject {
   /** The root blip text. */
   @FindBy(xpath = "//ul/div")
   private WebElement rootBlipText;
-  
+
   /** The root edit. */
   @FindBy(xpath = "//div[3]/div/div/div/div/div/div/span")
   // this works but with click coords 5,5
@@ -73,7 +73,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Gets the adds the parcipant.
-   *
+   * 
    * @return the adds the parcipant
    */
   public WebElement getAddParcipant() {
@@ -82,7 +82,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Gets the cursive.
-   *
+   * 
    * @return the cursive
    */
   public WebElement getCursive() {
@@ -91,7 +91,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Gets the first reply titlebar.
-   *
+   * 
    * @return the first reply titlebar
    */
   public WebElement getFirstReplyTitlebar() {
@@ -100,7 +100,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Gets the first wave.
-   *
+   * 
    * @return the first wave
    */
   public WebElement getFirstWave() {
@@ -109,7 +109,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Gets the new wave.
-   *
+   * 
    * @return the new wave
    */
   public WebElement getNewWave() {
@@ -118,7 +118,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Gets the reply root blip.
-   *
+   * 
    * @return the reply root blip
    */
   public WebElement getReplyRootBlip() {
@@ -127,7 +127,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Gets the root blip.
-   *
+   * 
    * @return the root blip
    */
   public WebElement getRootBlip() {
@@ -136,7 +136,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Gets the root blip text.
-   *
+   * 
    * @return the root blip text
    */
   public WebElement getRootBlipText() {
@@ -145,7 +145,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Gets the root edit.
-   *
+   * 
    * @return the root edit
    */
   public WebElement getRootEdit() {
@@ -154,7 +154,7 @@ public class UserSpacePageObject extends PageObject {
 
   /**
    * Root blip text.
-   *
+   * 
    * @return the web element
    */
   public WebElement rootBlipText() {

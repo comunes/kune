@@ -32,16 +32,18 @@ import com.google.gwt.resources.client.ImageResource;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TabTitleGenerator.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TabTitleGenerator {
 
   /**
    * Format.
-   *
-   * @param title the title
-   * @param maxLength the max length
+   * 
+   * @param title
+   *          the title
+   * @param maxLength
+   *          the max length
    * @return the string
    */
   private static String format(final String title, final int maxLength) {
@@ -50,11 +52,15 @@ public class TabTitleGenerator {
 
   /**
    * Generate.
-   *
-   * @param res the res
-   * @param title the title
-   * @param maxLength the max length
-   * @param id the id
+   * 
+   * @param res
+   *          the res
+   * @param title
+   *          the title
+   * @param maxLength
+   *          the max length
+   * @param id
+   *          the id
    * @return the icon label
    */
   public static IconLabel generate(final ImageResource res, final String title, final int maxLength,
@@ -67,10 +73,13 @@ public class TabTitleGenerator {
 
   /**
    * Generate.
-   *
-   * @param res the res
-   * @param title the title
-   * @param id the id
+   * 
+   * @param res
+   *          the res
+   * @param title
+   *          the title
+   * @param id
+   *          the id
    * @return the icon label
    */
   public static IconLabel generate(final ImageResource res, final String title, final String id) {
@@ -81,11 +90,15 @@ public class TabTitleGenerator {
 
   /**
    * Sets the text.
-   *
-   * @param tabTitle the tab title
-   * @param title the title
-   * @param maxLength the max length
-   * @param direction the direction
+   * 
+   * @param tabTitle
+   *          the tab title
+   * @param title
+   *          the title
+   * @param maxLength
+   *          the max length
+   * @param direction
+   *          the direction
    */
   public static void setText(final IconLabel tabTitle, final String title, final int maxLength,
       final Direction direction) {
@@ -95,10 +108,13 @@ public class TabTitleGenerator {
 
   /**
    * Sets the tooltip.
-   *
-   * @param title the title
-   * @param maxLength the max length
-   * @param tabTitle the tab title
+   * 
+   * @param title
+   *          the title
+   * @param maxLength
+   *          the max length
+   * @param tabTitle
+   *          the tab title
    */
   private static void setTooltip(final String title, final int maxLength, final IconLabel tabTitle) {
     if (title.length() > maxLength) {

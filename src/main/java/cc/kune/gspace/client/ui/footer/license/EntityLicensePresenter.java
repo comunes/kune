@@ -45,7 +45,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityLicensePresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityLicensePresenter extends
@@ -53,20 +53,20 @@ public class EntityLicensePresenter extends
 
   /**
    * The Interface EntityLicenseProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
   public interface EntityLicenseProxy extends Proxy<EntityLicensePresenter> {
   }
-  
+
   /**
    * The Interface EntityLicenseView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface EntityLicenseView extends View {
-    
+
     /**
      * Attach.
      */
@@ -79,23 +79,26 @@ public class EntityLicensePresenter extends
 
     /**
      * Gets the image.
-     *
+     * 
      * @return the image
      */
     HasClickHandlers getImage();
 
     /**
      * Open window.
-     *
-     * @param url the url
+     * 
+     * @param url
+     *          the url
      */
     void openWindow(String url);
 
     /**
      * Show license.
-     *
-     * @param groupName the group name
-     * @param licenseDTO the license dto
+     * 
+     * @param groupName
+     *          the group name
+     * @param licenseDTO
+     *          the license dto
      */
     void showLicense(String groupName, LicenseDTO licenseDTO);
 
@@ -106,12 +109,17 @@ public class EntityLicensePresenter extends
 
   /**
    * Instantiates a new entity license presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param session the session
-   * @param proxy the proxy
-   * @param stateManager the state manager
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param session
+   *          the session
+   * @param proxy
+   *          the proxy
+   * @param stateManager
+   *          the state manager
    */
   @Inject
   public EntityLicensePresenter(final EventBus eventBus, final EntityLicenseView view,
@@ -141,7 +149,9 @@ public class EntityLicensePresenter extends
     });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -151,8 +161,9 @@ public class EntityLicensePresenter extends
 
   /**
    * Sets the license.
-   *
-   * @param state the new license
+   * 
+   * @param state
+   *          the new license
    */
   private void setLicense(final StateContainerDTO state) {
     this.license = state.getLicense();
@@ -162,8 +173,9 @@ public class EntityLicensePresenter extends
 
   /**
    * Sets the state.
-   *
-   * @param state the new state
+   * 
+   * @param state
+   *          the new state
    */
   private void setState(final StateAbstractDTO state) {
     if (state instanceof HasContent) {

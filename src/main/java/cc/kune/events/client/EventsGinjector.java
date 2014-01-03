@@ -30,21 +30,21 @@ import com.google.gwt.inject.client.Ginjector;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EventsGinjector.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EventsGinjector extends Ginjector {
 
   /**
    * Gets the calendar viewer presenter.
-   *
+   * 
    * @return the calendar viewer presenter
    */
   AsyncProvider<CalendarViewerPresenter> getCalendarViewerPresenter();
 
   /**
    * Gets the events parts.
-   *
+   * 
    * @return the events parts
    */
   EventsParts getEventsParts();

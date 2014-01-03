@@ -37,30 +37,30 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupFinderTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupFinderTest extends PersistenceTest {
-  
+
   /** The Constant LONG_NAME_A. */
   private static final String LONG_NAME_A = "long name a";
-  
+
   /** The Constant LONG_NAME_B. */
   private static final String LONG_NAME_B = "long name b";
-  
+
   /** The Constant LONG_NAME_C. */
   private static final String LONG_NAME_C = "long name c";
-  
+
   /** The Constant SHORT_NAME_A. */
   private static final String SHORT_NAME_A = "shortnamea";
-  
+
   /** The Constant SHORT_NAME_B. */
   private static final String SHORT_NAME_B = "shortnameb";
-  
+
   /** The Constant SHORT_NAME_C. */
   private static final String SHORT_NAME_C = "shortnamec";
-  
+
   /** The group finder. */
   @Inject
   GroupFinder groupFinder;
@@ -111,4 +111,3 @@ public class GroupFinderTest extends PersistenceTest {
     assertEquals(SHORT_NAME_A, groupFinder.getAll().get(0).getShortName());
   }
 }
- 

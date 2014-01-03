@@ -58,7 +58,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HSpacePresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpacePresenter.HSpaceProxy>
@@ -66,7 +66,7 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
 
   /**
    * The Interface HSpaceProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -75,7 +75,7 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
 
   /**
    * The Interface HSpaceView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HSpaceView extends View {
@@ -87,94 +87,107 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
 
     /**
      * Gets the global stats total groups count.
-     *
+     * 
      * @return the global stats total groups count
      */
     HasText getGlobalStatsTotalGroupsCount();
 
     /**
      * Gets the global stats total users count.
-     *
+     * 
      * @return the global stats total users count
      */
     HasText getGlobalStatsTotalUsersCount();
 
     /**
      * Gets the toolbar.
-     *
+     * 
      * @return the toolbar
      */
     IsActionExtensible getToolbar();
 
     /**
      * Gets the unread in your inbox.
-     *
+     * 
      * @return the unread in your inbox
      */
     HasText getUnreadInYourInbox();
 
     /**
      * Sets the inbox unread visible.
-     *
-     * @param visible the new inbox unread visible
+     * 
+     * @param visible
+     *          the new inbox unread visible
      */
     void setInboxUnreadVisible(boolean visible);
 
     /**
      * Sets the last contents of my group.
-     *
-     * @param lastContentsOfMyGroupsList the new last contents of my group
+     * 
+     * @param lastContentsOfMyGroupsList
+     *          the new last contents of my group
      */
     void setLastContentsOfMyGroup(List<ContentSimpleDTO> lastContentsOfMyGroupsList);
 
     /**
      * Sets the last groups.
-     *
-     * @param lastGroups the new last groups
+     * 
+     * @param lastGroups
+     *          the new last groups
      */
     void setLastGroups(List<GroupDTO> lastGroups);
 
     /**
      * Sets the last published contents.
-     *
-     * @param lastPublishedContentsList the new last published contents
+     * 
+     * @param lastPublishedContentsList
+     *          the new last published contents
      */
     void setLastPublishedContents(List<ContentSimpleDTO> lastPublishedContentsList);
 
     /**
      * Sets the stats visible.
-     *
-     * @param visible the new stats visible
+     * 
+     * @param visible
+     *          the new stats visible
      */
     void setStatsVisible(boolean visible);
 
     /**
      * Sets the user groups activity visible.
-     *
-     * @param visible the new user groups activity visible
+     * 
+     * @param visible
+     *          the new user groups activity visible
      */
     void setUserGroupsActivityVisible(boolean visible);
   }
 
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
-  
+
   /** The stats service. */
   private final Provider<ClientStatsServiceAsync> statsService;
 
   /**
    * Instantiates a new h space presenter.
-   *
-   * @param session the session
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param statsService the stats service
-   * @param stateManager the state manager
-   * @param i18n the i18n
+   * 
+   * @param session
+   *          the session
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param statsService
+   *          the stats service
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public HSpacePresenter(final Session session, final EventBus eventBus, final HSpaceView view,
@@ -201,7 +214,9 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
         });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.hspace.client.HSpace#getToolbar()
    */
   @Override
@@ -209,7 +224,9 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
     return getView().getToolbar();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -274,7 +291,9 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
     });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.PresenterWidget#onReveal()
    */
   @Override
@@ -282,7 +301,9 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
     super.onReveal();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

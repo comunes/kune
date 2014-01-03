@@ -32,7 +32,7 @@ import com.google.inject.BindingAnnotation;
  * Use in *RPC methods to check if user is authenticated
  * 
  * The first param in the method must be the userHash.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -42,7 +42,7 @@ public @interface Authenticated {
 
   /**
    * if false, only checks for session expiration.
-   *
+   * 
    * @return true, if successful
    */
   boolean mandatory() default true;

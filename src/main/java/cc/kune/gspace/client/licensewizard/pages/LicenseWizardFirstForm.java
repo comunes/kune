@@ -43,36 +43,37 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseWizardFirstForm.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizardFirstFormView {
-  
+
   /** The Constant POINT. */
   private static final String POINT = "»&nbsp;";
-  
+
   /** The Constant RADIO_ANOTHER_ID. */
   public static final String RADIO_ANOTHER_ID = "k-lwff-another";
-  
+
   /** The Constant RADIO_COPYLEFT_ID. */
   public static final String RADIO_COPYLEFT_ID = "k-lwff-copyleft";
-  
+
   /** The Constant RADIO_FIELD_NAME. */
   private static final String RADIO_FIELD_NAME = "k-lwff-radio";
-  
+
   /** The another license radio. */
   private final Radio anotherLicenseRadio;
-  
+
   /** The copyleft radio. */
   private final Radio copyleftRadio;
-  
+
   /** The on change. */
   private SimpleCallback onChange;
 
   /**
    * Instantiates a new license wizard first form.
-   *
-   * @param i18n the i18n
+   * 
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public LicenseWizardFirstForm(final I18nTranslationService i18n) {
@@ -132,7 +133,9 @@ public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizard
     add(infoFS);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.IsWidget#asWidget()
    */
   @Override
@@ -140,23 +143,33 @@ public class LicenseWizardFirstForm extends DefaultForm implements LicenseWizard
     return this.getFormPanel();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardFirstFormView#isCopyleft()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.licensewizard.pages.LicenseWizardFirstFormView#isCopyleft
+   * ()
    */
   @Override
   public boolean isCopyleft() {
     return copyleftRadio.getValue();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardFirstFormView#onChange(cc.kune.common.shared.utils.SimpleCallback)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.licensewizard.pages.LicenseWizardFirstFormView#onChange
+   * (cc.kune.common.shared.utils.SimpleCallback)
    */
   @Override
   public void onChange(final SimpleCallback onChange) {
     this.onChange = onChange;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.ui.DefaultForm#reset()
    */
   @Override

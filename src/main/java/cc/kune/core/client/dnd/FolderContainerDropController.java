@@ -46,39 +46,46 @@ import com.google.inject.Inject;
  * The Class FolderContainerDropController is responsable of the drop process to
  * folders. Must not be a @singleton, and should exist one drop controller per
  * item
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FolderContainerDropController extends AbstractDropController {
 
   /** The content cache. */
   private final ContentCache contentCache;
-  
+
   /** The content service. */
   private final ContentServiceAsync contentService;
-  
+
   /** The erro handler. */
   private final ErrorHandler erroHandler;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new folder container drop controller.
-   *
-   * @param dragController the drag controller
-   * @param contentService the content service
-   * @param session the session
-   * @param stateManager the state manager
-   * @param erroHandler the erro handler
-   * @param i18n the i18n
-   * @param contentCache the content cache
+   * 
+   * @param dragController
+   *          the drag controller
+   * @param contentService
+   *          the content service
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param erroHandler
+   *          the erro handler
+   * @param i18n
+   *          the i18n
+   * @param contentCache
+   *          the content cache
    */
   @Inject
   public FolderContainerDropController(final KuneDragController dragController,
@@ -96,9 +103,11 @@ public class FolderContainerDropController extends AbstractDropController {
 
   /**
    * Move.
-   *
-   * @param widget the widget
-   * @param destToken the dest token
+   * 
+   * @param widget
+   *          the widget
+   * @param destToken
+   *          the dest token
    */
   private void move(final Widget widget, final StateToken destToken) {
     widget.removeFromParent();
@@ -129,8 +138,13 @@ public class FolderContainerDropController extends AbstractDropController {
     NotifyUser.hideProgress();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.dnd.AbstractDropController#onDropAllowed(com.google.gwt.user.client.ui.Widget, com.allen_sauer.gwt.dnd.client.drop.SimpleDropController)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.dnd.AbstractDropController#onDropAllowed(com.google
+   * .gwt.user.client.ui.Widget,
+   * com.allen_sauer.gwt.dnd.client.drop.SimpleDropController)
    */
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {

@@ -62,7 +62,7 @@ import com.google.inject.Injector;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneSeleniumDefaults.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneSeleniumDefaults {
@@ -72,49 +72,49 @@ public class KuneSeleniumDefaults {
 
   /** The Constant LOG. */
   private static final Log LOG = LogFactory.getLog(KuneSeleniumDefaults.class);
-  
+
   /** The must close finally. */
   public static boolean mustCloseFinally = false;
-  
+
   /** The base url. */
   private final String baseUrl;
-  
+
   /** The chat. */
   protected final ChatPageObject chat;
-  
+
   /** The entity header. */
   protected final EntityHeaderPageObject entityHeader;
-  
+
   /** The group space. */
   protected GroupSpacePageObject groupSpace;
-  
+
   /** The home space. */
   protected final HomeSpacePageObject homeSpace;
-  
+
   /** The injector. */
   private final Injector injector;
-  
+
   /** The login. */
   protected LoginPageObject login;
-  
+
   /** The messages. */
   private final ResourceBundle messages;
-  
+
   /** The new group. */
   protected NewGroupPageObject newGroup;
-  
+
   /** The register. */
   protected RegisterPageObject register;
-  
+
   /** The site. */
   protected final SitePageObject site;
-  
+
   /** The subtitle popup. */
   private WebElement subtitlePopup;
-  
+
   /** The user space. */
   protected UserSpacePageObject userSpace;
-  
+
   /** The webdriver. */
   private final WebDriver webdriver;
 
@@ -152,8 +152,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Answer on next prompt.
-   *
-   * @param answer the answer
+   * 
+   * @param answer
+   *          the answer
    */
   public void answerOnNextPrompt(final String answer) {
     final Alert alert = webdriver.switchTo().alert();
@@ -164,8 +165,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Before methods.
-   *
-   * @param context the context
+   * 
+   * @param context
+   *          the context
    */
   @BeforeMethod
   public void beforeMethods(final ITestContext context) {
@@ -220,7 +222,7 @@ public class KuneSeleniumDefaults {
 
   /**
    * Creates the correct login.
-   *
+   * 
    * @return the object[][]
    */
   @DataProvider(name = "correctlogin")
@@ -231,7 +233,7 @@ public class KuneSeleniumDefaults {
 
   /**
    * Creates the correct register.
-   *
+   * 
    * @return the object[][]
    */
   @DataProvider(name = "correctregister")
@@ -242,7 +244,7 @@ public class KuneSeleniumDefaults {
 
   /**
    * Creates the incorrect login.
-   *
+   * 
    * @return the object[][]
    */
   @DataProvider(name = "incorrectlogin")
@@ -254,8 +256,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Do screenshot.
-   *
-   * @param filename the filename
+   * 
+   * @param filename
+   *          the filename
    */
   public void doScreenshot(final String filename) {
     SeleniumUtils.doScreenshot(webdriver, filename);
@@ -263,8 +266,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Gets the.
-   *
-   * @param url the url
+   * 
+   * @param url
+   *          the url
    */
   public void get(final String url) {
     webdriver.get(url);
@@ -272,7 +276,7 @@ public class KuneSeleniumDefaults {
 
   /**
    * Gets the current history token.
-   *
+   * 
    * @return the current history token
    */
   public String getCurrentHistoryToken() {
@@ -284,7 +288,7 @@ public class KuneSeleniumDefaults {
 
   /**
    * Gets the page source.
-   *
+   * 
    * @return the page source
    */
   public String getPageSource() {
@@ -293,8 +297,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Goto token.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   public void gotoToken(final StateToken token) {
     get(baseUrl + token);
@@ -302,8 +307,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Goto token.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    */
   public void gotoToken(final String token) {
     get(baseUrl + token);
@@ -319,7 +325,7 @@ public class KuneSeleniumDefaults {
 
   /**
    * New groups.
-   *
+   * 
    * @return the object[][]
    */
   @DataProvider(name = "newGroups")
@@ -332,8 +338,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Open.
-   *
-   * @param url the url
+   * 
+   * @param url
+   *          the url
    */
   public void open(final String url) {
     webdriver.get(url);
@@ -356,9 +363,11 @@ public class KuneSeleniumDefaults {
 
   /**
    * Send keys but in a slow way (word by word).
-   *
-   * @param element the element
-   * @param strings the strings
+   * 
+   * @param element
+   *          the element
+   * @param strings
+   *          the strings
    */
   public void sendKeys(final WebElement element, final String... strings) {
     for (final String s : strings) {
@@ -374,9 +383,11 @@ public class KuneSeleniumDefaults {
 
   /**
    * Sets the position.
-   *
-   * @param x the x
-   * @param y the y
+   * 
+   * @param x
+   *          the x
+   * @param y
+   *          the y
    */
   public void setPosition(final int x, final int y) {
     webdriver.manage().window().setPosition(new Point(x, y));
@@ -384,9 +395,11 @@ public class KuneSeleniumDefaults {
 
   /**
    * Show cursor.
-   *
-   * @param x the x
-   * @param y the y
+   * 
+   * @param x
+   *          the x
+   * @param y
+   *          the y
    */
   public void showCursor(final int x, final int y) {
     SeleniumUtils.showCursor(webdriver, x, y);
@@ -394,8 +407,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Show msg.
-   *
-   * @param msg the msg
+   * 
+   * @param msg
+   *          the msg
    */
   public void showMsg(final String msg) {
     SeleniumUtils.showMsg(webdriver, "", msg);
@@ -403,9 +417,11 @@ public class KuneSeleniumDefaults {
 
   /**
    * Show msg.
-   *
-   * @param title the title
-   * @param msg the msg
+   * 
+   * @param title
+   *          the title
+   * @param msg
+   *          the msg
    */
   public void showMsg(final String title, final String msg) {
     SeleniumUtils.showMsg(webdriver, title, msg);
@@ -413,8 +429,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Show title slide.
-   *
-   * @param title the title
+   * 
+   * @param title
+   *          the title
    */
   public void showTitleSlide(final String title) {
     showTitleSlide(title, "", getCurrentHistoryToken());
@@ -422,9 +439,11 @@ public class KuneSeleniumDefaults {
 
   /**
    * Show title slide.
-   *
-   * @param title the title
-   * @param description the description
+   * 
+   * @param title
+   *          the title
+   * @param description
+   *          the description
    */
   public void showTitleSlide(final String title, final String description) {
     showTitleSlide(title, description, getCurrentHistoryToken());
@@ -432,10 +451,13 @@ public class KuneSeleniumDefaults {
 
   /**
    * Show title slide.
-   *
-   * @param title the title
-   * @param description the description
-   * @param token the token
+   * 
+   * @param title
+   *          the title
+   * @param description
+   *          the description
+   * @param token
+   *          the token
    */
   public void showTitleSlide(final String title, final String description, final String token) {
     gotoToken(TokenUtils.subtitle(title, description, token));
@@ -450,8 +472,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Show tooltip.
-   *
-   * @param element the element
+   * 
+   * @param element
+   *          the element
    */
   public void showTooltip(final WebElement element) {
     SeleniumUtils.showTooltip(webdriver, element);
@@ -459,8 +482,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * Sleep.
-   *
-   * @param milliseconds the milliseconds
+   * 
+   * @param milliseconds
+   *          the milliseconds
    */
   public void sleep(final int milliseconds) {
     SeleniumUtils.sleep(milliseconds);
@@ -468,8 +492,9 @@ public class KuneSeleniumDefaults {
 
   /**
    * T.
-   *
-   * @param message the message
+   * 
+   * @param message
+   *          the message
    * @return the string
    */
   public String t(final String message) {

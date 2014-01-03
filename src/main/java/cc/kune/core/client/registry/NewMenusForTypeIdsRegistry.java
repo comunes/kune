@@ -30,11 +30,11 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewMenusForTypeIdsRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewMenusForTypeIdsRegistry {
-  
+
   /** The registry. */
   private final Map<String, MenuDescriptor> registry;
 
@@ -47,8 +47,9 @@ public class NewMenusForTypeIdsRegistry {
 
   /**
    * Gets the.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return the menu descriptor
    */
   public MenuDescriptor get(final String typeId) {
@@ -57,7 +58,7 @@ public class NewMenusForTypeIdsRegistry {
 
   /**
    * Length.
-   *
+   * 
    * @return the int
    */
   public int length() {
@@ -66,9 +67,11 @@ public class NewMenusForTypeIdsRegistry {
 
   /**
    * Register.
-   *
-   * @param contentTypeId the content type id
-   * @param menu the menu
+   * 
+   * @param contentTypeId
+   *          the content type id
+   * @param menu
+   *          the menu
    */
   public void register(final String contentTypeId, final MenuDescriptor menu) {
     registry.put(contentTypeId, menu);

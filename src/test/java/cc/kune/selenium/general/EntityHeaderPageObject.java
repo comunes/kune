@@ -32,7 +32,7 @@ import cc.kune.selenium.SeleniumConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityHeaderPageObject.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityHeaderPageObject extends PageObject {
@@ -40,7 +40,7 @@ public class EntityHeaderPageObject extends PageObject {
   /** The logo image. */
   @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_IMAGE)
   protected WebElement logoImage;
-  
+
   /** The logo name. */
   @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_NAME)
   protected WebElement logoName;
@@ -53,8 +53,9 @@ public class EntityHeaderPageObject extends PageObject {
 
   /**
    * Wait for entity title.
-   *
-   * @param text the text
+   * 
+   * @param text
+   *          the text
    */
   public void waitForEntityTitle(final String text) {
     waitFor(logoName, text);

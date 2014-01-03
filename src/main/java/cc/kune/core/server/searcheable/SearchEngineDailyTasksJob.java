@@ -39,31 +39,36 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SearchEngineDailyTasksJob.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SearchEngineDailyTasksJob implements Job {
 
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(SearchEngineDailyTasksJob.class);
-  
+
   /** The search engine servlet. */
   private final Provider<SearchEngineServletFilter> searchEngineServlet;
 
   /**
    * Instantiates a new search engine daily tasks job.
-   *
-   * @param searchEngineServlet the search engine servlet
-   * @throws ParseException the parse exception
-   * @throws SchedulerException the scheduler exception
+   * 
+   * @param searchEngineServlet
+   *          the search engine servlet
+   * @throws ParseException
+   *           the parse exception
+   * @throws SchedulerException
+   *           the scheduler exception
    */
   @Inject
-  public SearchEngineDailyTasksJob(final Provider<SearchEngineServletFilter> searchEngineServlet) throws ParseException,
-      SchedulerException {
+  public SearchEngineDailyTasksJob(final Provider<SearchEngineServletFilter> searchEngineServlet)
+      throws ParseException, SchedulerException {
     this.searchEngineServlet = searchEngineServlet;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
    */
   @Override

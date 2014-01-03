@@ -38,7 +38,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ExtMediaDescripManagerDefault.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -50,9 +50,11 @@ public class ExtMediaDescripManagerDefault extends DefaultManager<ExtMediaDescri
 
   /**
    * Instantiates a new ext media descrip manager default.
-   *
-   * @param provider the provider
-   * @param extMediaFinder the ext media finder
+   * 
+   * @param provider
+   *          the provider
+   * @param extMediaFinder
+   *          the ext media finder
    */
   @Inject
   public ExtMediaDescripManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
@@ -61,7 +63,9 @@ public class ExtMediaDescripManagerDefault extends DefaultManager<ExtMediaDescri
     this.extMediaFinder = extMediaFinder;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.manager.ExtMediaDescripManager#getAll()
    */
   @Override

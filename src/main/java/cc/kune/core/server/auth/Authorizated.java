@@ -36,7 +36,7 @@ import com.google.inject.BindingAnnotation;
  * 
  * The first parameter in the method must be the userHash and if you want to
  * check also the second parameter should be the token of the Content (use.
- *
+ * 
  * {@link ActionLevel#content}) or Container ({@link ActionLevel#container})
  * etc.
  */
@@ -48,21 +48,21 @@ public @interface Authorizated {
 
   /**
    * Access rol required.
-   *
+   * 
    * @return the access rol
    */
   AccessRol accessRolRequired() default cc.kune.core.shared.domain.AccessRol.Viewer;
 
   /**
    * If the action is over a "group", "tool", "container" or over the content.
-   *
+   * 
    * @return the action level
    */
   ActionLevel actionLevel() default cc.kune.core.server.auth.ActionLevel.content;
 
   /**
    * Must check membership.
-   *
+   * 
    * @return true, if successful
    */
   boolean mustCheckMembership() default true;

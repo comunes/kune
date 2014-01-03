@@ -29,7 +29,7 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LocalUserDestinationProviderTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LocalUserDestinationProviderTest extends AbstractPendingNotificationTest {

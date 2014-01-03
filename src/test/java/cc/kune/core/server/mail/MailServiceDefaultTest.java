@@ -33,7 +33,7 @@ import cc.kune.core.server.utils.FormattedString;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MailServiceDefaultTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MailServiceDefaultTest {

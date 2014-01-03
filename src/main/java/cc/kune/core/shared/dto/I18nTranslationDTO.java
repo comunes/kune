@@ -28,7 +28,7 @@ import com.google.gwt.view.client.ProvidesKey;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nTranslationDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTranslationDTO> {
@@ -40,25 +40,25 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
       return item == null ? null : item.getId();
     }
   };
-  
+
   /** The dirty. */
   private boolean dirty;
-  
+
   /** The id. */
   private Long id;
-  
+
   /** The note for translators. */
   private String noteForTranslators;
-  
+
   /** The parent id. */
   private Long parentId;
-  
+
   /** The parent tr key. */
   private String parentTrKey;
-  
+
   /** The text. */
   private String text;
-  
+
   /** The tr key. */
   private String trKey;
   /*
@@ -77,14 +77,21 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Instantiates a new i18n translation dto.
-   *
-   * @param id the id
-   * @param trKey the tr key
-   * @param trKeyFrom the tr key from
-   * @param text the text
-   * @param parentId the parent id
-   * @param parentTrKey the parent tr key
-   * @param noteForTranslators the note for translators
+   * 
+   * @param id
+   *          the id
+   * @param trKey
+   *          the tr key
+   * @param trKeyFrom
+   *          the tr key from
+   * @param text
+   *          the text
+   * @param parentId
+   *          the parent id
+   * @param parentTrKey
+   *          the parent tr key
+   * @param noteForTranslators
+   *          the note for translators
    */
   public I18nTranslationDTO(final Long id, final String trKey, final String trKeyFrom,
       final String text, final Long parentId, final String parentTrKey, final String noteForTranslators) {
@@ -98,7 +105,9 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
     setDirty(false);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Comparable#compareTo(java.lang.Object)
    */
   @Override
@@ -108,7 +117,7 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -117,7 +126,7 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Gets the note for translators.
-   *
+   * 
    * @return the note for translators
    */
   public String getNoteForTranslators() {
@@ -126,7 +135,7 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Gets the parent id.
-   *
+   * 
    * @return the parent id
    */
   public Long getParentId() {
@@ -135,7 +144,7 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Gets the parent tr key.
-   *
+   * 
    * @return the parent tr key
    */
   public String getParentTrKey() {
@@ -144,7 +153,7 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Gets the text.
-   *
+   * 
    * @return the text
    */
   public String getText() {
@@ -153,7 +162,7 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Gets the tr key.
-   *
+   * 
    * @return the tr key
    */
   public String getTrKey() {
@@ -162,7 +171,7 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Gets the tr key from.
-   *
+   * 
    * @return the tr key from
    */
   public String getTrKeyFrom() {
@@ -171,7 +180,7 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Checks if is dirty.
-   *
+   * 
    * @return true, if is dirty
    */
   public boolean isDirty() {
@@ -180,8 +189,9 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Sets the dirty.
-   *
-   * @param dirty the new dirty
+   * 
+   * @param dirty
+   *          the new dirty
    */
   public void setDirty(final boolean dirty) {
     this.dirty = dirty;
@@ -189,8 +199,9 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -198,8 +209,9 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Sets the note for translators.
-   *
-   * @param noteForTranslators the new note for translators
+   * 
+   * @param noteForTranslators
+   *          the new note for translators
    */
   public void setNoteForTranslators(final String noteForTranslators) {
     this.noteForTranslators = noteForTranslators;
@@ -207,8 +219,9 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Sets the parent id.
-   *
-   * @param parentId the new parent id
+   * 
+   * @param parentId
+   *          the new parent id
    */
   public void setParentId(final Long parentId) {
     this.parentId = parentId;
@@ -216,8 +229,9 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Sets the parent tr key.
-   *
-   * @param parentTrKey the new parent tr key
+   * 
+   * @param parentTrKey
+   *          the new parent tr key
    */
   public void setParentTrKey(final String parentTrKey) {
     this.parentTrKey = parentTrKey;
@@ -225,8 +239,9 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Sets the text.
-   *
-   * @param text the new text
+   * 
+   * @param text
+   *          the new text
    */
   public void setText(final String text) {
     this.text = text;
@@ -234,8 +249,9 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Sets the tr key.
-   *
-   * @param trKey the new tr key
+   * 
+   * @param trKey
+   *          the new tr key
    */
   public void setTrKey(final String trKey) {
     this.trKey = trKey;
@@ -243,8 +259,9 @@ public class I18nTranslationDTO implements IsSerializable, Comparable<I18nTransl
 
   /**
    * Sets the tr key from.
-   *
-   * @param trKeyFrom the new tr key from
+   * 
+   * @param trKeyFrom
+   *          the new tr key from
    */
   public void setTrKeyFrom(final String trKeyFrom) {
     this.trKeyFrom = trKeyFrom;

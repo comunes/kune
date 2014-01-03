@@ -25,7 +25,7 @@ package cc.kune.gspace.client.style;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface GSpaceBackgroundManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface GSpaceBackgroundManager {
@@ -47,8 +47,9 @@ public interface GSpaceBackgroundManager {
 
   /**
    * Sets the no cache.
-   *
-   * @param noCache the new no cache
+   * 
+   * @param noCache
+   *          the new no cache
    */
   void setNoCache(boolean noCache);
 }

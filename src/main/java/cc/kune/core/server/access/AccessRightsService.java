@@ -29,7 +29,7 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface AccessRightsService.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -37,9 +37,11 @@ public interface AccessRightsService {
 
   /**
    * Gets the.
-   *
-   * @param user the user
-   * @param lists the lists
+   * 
+   * @param user
+   *          the user
+   * @param lists
+   *          the lists
    * @return the access rights
    */
   AccessRights get(User user, AccessLists lists);

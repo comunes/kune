@@ -27,15 +27,15 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Enum SubscriptionMode.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum SubscriptionMode implements IsSerializable {
-  
+
+  /** The auto accept all. */
+  autoAcceptAll,
+  /** The auto reject all. */
+  autoRejectAll,
   /** The manual. */
-  manual, 
- /** The auto accept all. */
- autoAcceptAll, 
- /** The auto reject all. */
- autoRejectAll
+  manual
 }

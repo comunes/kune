@@ -28,63 +28,74 @@ import java.io.IOException;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface FileManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface FileManager {
 
   /**
    * Create a new file adding a numeric sequence if the file already exists.
-   *
-   * @param dir the directory (use File.separator for dir delimiters)
-   * @param fileName (the new file name)
+   * 
+   * @param dir
+   *          the directory (use File.separator for dir delimiters)
+   * @param fileName
+   *          (the new file name)
    * @return if 'file.txt' exists it creates 'file 1.txt' and if 'file 1.txt'
-   * exists it creates 'file 2.txt' and so on
-   * @throws IOException Signals that an I/O exception has occurred.
+   *         exists it creates 'file 2.txt' and so on
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   File createFileWithSequentialName(String dir, String fileName) throws IOException;
 
   /**
    * Exists.
-   *
-   * @param file path
+   * 
+   * @param file
+   *          path
    * @return returns true if exists
    */
   boolean exists(String file);
 
   /**
    * Mkdir.
-   *
-   * @param dir the directory (use File.separator for dir delimiters)
+   * 
+   * @param dir
+   *          the directory (use File.separator for dir delimiters)
    * @return true if and only if the directory was created, along with all
-   * necessary parent directories; false otherwise
+   *         necessary parent directories; false otherwise
    */
   boolean mkdir(String dir);
 
   /**
    * Mv.
-   *
-   * @param oldFile the old file
-   * @param newFile the new file
+   * 
+   * @param oldFile
+   *          the old file
+   * @param newFile
+   *          the new file
    * @return true, if successful
    */
   boolean mv(String oldFile, String newFile);
 
   /**
    * Rm.
-   *
-   * @param dir the directory (use File.separator for dir delimiters)
-   * @param file the file to remove
+   * 
+   * @param dir
+   *          the directory (use File.separator for dir delimiters)
+   * @param file
+   *          the file to remove
    * @return true, if successful
    */
   boolean rm(String dir, String file);
 
   /**
    * Rmdir.
-   *
-   * @param dir the directory (use File.separator for dir delimiters)
+   * 
+   * @param dir
+   *          the directory (use File.separator for dir delimiters)
    * @return true, if successful
-   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   boolean rmdir(String dir) throws IOException;
 

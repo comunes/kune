@@ -38,37 +38,45 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AddGadgetAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AddGadgetAction extends RolAction {
 
   /** The content service. */
   private final Provider<ContentServiceAsync> contentService;
-  
+
   /** The gadget ext name. */
   private final String gadgetExtName;
-  
+
   /** The gadget name. */
   private final String gadgetName;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new adds the gadget action.
-   *
-   * @param contentService the content service
-   * @param session the session
-   * @param i18n the i18n
-   * @param rol the rol
-   * @param authNeeded the auth needed
-   * @param gadgetExtName the gadget ext name
-   * @param gadgetName the gadget name
-   * @param iconUrl the icon url
+   * 
+   * @param contentService
+   *          the content service
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param rol
+   *          the rol
+   * @param authNeeded
+   *          the auth needed
+   * @param gadgetExtName
+   *          the gadget ext name
+   * @param gadgetName
+   *          the gadget name
+   * @param iconUrl
+   *          the icon url
    */
   public AddGadgetAction(final Provider<ContentServiceAsync> contentService, final Session session,
       final I18nTranslationService i18n, final AccessRolDTO rol, final boolean authNeeded,
@@ -82,8 +90,12 @@ public class AddGadgetAction extends RolAction {
     putValue(Action.SMALL_ICON, iconUrl);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

@@ -36,15 +36,15 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DomainContext.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DomainContext {
-  
+
   /** The groups. */
   private final HashMap<String, Group> groups;
-  
+
   /** The users. */
   private final HashMap<String, User> users;
 
@@ -58,8 +58,9 @@ public class DomainContext {
 
   /**
    * Creates the groups.
-   *
-   * @param groupNames the group names
+   * 
+   * @param groupNames
+   *          the group names
    */
   public void createGroups(final String... groupNames) {
     Group group;
@@ -71,8 +72,9 @@ public class DomainContext {
 
   /**
    * Creates the orphan group.
-   *
-   * @param groupNames the group names
+   * 
+   * @param groupNames
+   *          the group names
    */
   public void createOrphanGroup(final String... groupNames) {
     Group group;
@@ -85,8 +87,9 @@ public class DomainContext {
 
   /**
    * Creates the users.
-   *
-   * @param userNames the user names
+   * 
+   * @param userNames
+   *          the user names
    */
   public void createUsers(final String... userNames) {
     User user;
@@ -100,8 +103,9 @@ public class DomainContext {
 
   /**
    * Gets the default access list of.
-   *
-   * @param userName the user name
+   * 
+   * @param userName
+   *          the user name
    * @return the default access list of
    */
   public AccessLists getDefaultAccessListOf(final String userName) {
@@ -110,8 +114,9 @@ public class DomainContext {
 
   /**
    * Gets the group.
-   *
-   * @param groupName the group name
+   * 
+   * @param groupName
+   *          the group name
    * @return the group
    */
   public Group getGroup(final String groupName) {
@@ -120,8 +125,9 @@ public class DomainContext {
 
   /**
    * Gets the group of.
-   *
-   * @param userName the user name
+   * 
+   * @param userName
+   *          the user name
    * @return the group of
    */
   public Group getGroupOf(final String userName) {
@@ -132,8 +138,9 @@ public class DomainContext {
 
   /**
    * Gets the social network of.
-   *
-   * @param userName the user name
+   * 
+   * @param userName
+   *          the user name
    * @return the social network of
    */
   private SocialNetwork getSocialNetworkOf(final String userName) {
@@ -144,8 +151,9 @@ public class DomainContext {
 
   /**
    * Gets the user.
-   *
-   * @param userName the user name
+   * 
+   * @param userName
+   *          the user name
    * @return the user
    */
   public User getUser(final String userName) {
@@ -154,8 +162,9 @@ public class DomainContext {
 
   /**
    * In social network of.
-   *
-   * @param userName the user name
+   * 
+   * @param userName
+   *          the user name
    * @return the social network operator
    */
   public SocialNetworkOperator inSocialNetworkOf(final String userName) {

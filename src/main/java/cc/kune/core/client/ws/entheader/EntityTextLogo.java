@@ -36,42 +36,43 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityTextLogo.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityTextLogo extends VerticalPanel {
 
   /** The Constant _100. */
   private static final String _100 = "100%";
-  
+
   /** The Constant LOGO_IMAGE. */
   public static final String LOGO_IMAGE = "k-elogop-image";
 
   /** The Constant LOGO_LARGE_FONT_STYLE. */
   private static final String LOGO_LARGE_FONT_STYLE = "k-elogo-l-l";
-  
+
   /** The Constant LOGO_MEDIUM_FONT_STYLE. */
   private static final String LOGO_MEDIUM_FONT_STYLE = "k-elogo-l-m";
-  
+
   /** The Constant LOGO_NAME. */
   public static final String LOGO_NAME = "k-elogop-ln";
-  
+
   /** The Constant LOGO_SMALL_FONT_STYLE. */
   private static final String LOGO_SMALL_FONT_STYLE = "k-elogo-l-s";
-  
+
   /** The avatar decorator. */
   private final MediumAvatarDecorator avatarDecorator;
-  
+
   /** The logo image. */
   private final Image logoImage;
-  
+
   /** The logo label. */
   private final Label logoLabel;
 
   /**
    * Instantiates a new entity text logo.
-   *
-   * @param avatarDecorator the avatar decorator
+   * 
+   * @param avatarDecorator
+   *          the avatar decorator
    */
   @Inject
   public EntityTextLogo(final MediumAvatarDecorator avatarDecorator) {
@@ -132,8 +133,9 @@ public class EntityTextLogo extends VerticalPanel {
 
   /**
    * Sets the logo image.
-   *
-   * @param imageProto the new logo image
+   * 
+   * @param imageProto
+   *          the new logo image
    */
   public void setLogoImage(final AbstractImagePrototype imageProto) {
     imageProto.applyTo(logoImage);
@@ -141,8 +143,9 @@ public class EntityTextLogo extends VerticalPanel {
 
   /**
    * Sets the logo image.
-   *
-   * @param url the new logo image
+   * 
+   * @param url
+   *          the new logo image
    */
   public void setLogoImage(final String url) {
     logoImage.setUrl(FileConstants.ASITE_PREFIX + "images/clear.gif");
@@ -153,8 +156,9 @@ public class EntityTextLogo extends VerticalPanel {
 
   /**
    * Sets the logo text.
-   *
-   * @param text the new logo text
+   * 
+   * @param text
+   *          the new logo text
    */
   public void setLogoText(final String text) {
     setLogoTextImpl(text);
@@ -162,8 +166,9 @@ public class EntityTextLogo extends VerticalPanel {
 
   /**
    * Sets the logo text impl.
-   *
-   * @param text the new logo text impl
+   * 
+   * @param text
+   *          the new logo text impl
    */
   private void setLogoTextImpl(final String text) {
     logoLabel.setText(text);
@@ -171,8 +176,9 @@ public class EntityTextLogo extends VerticalPanel {
 
   /**
    * Sets the logo visible.
-   *
-   * @param visible the new logo visible
+   * 
+   * @param visible
+   *          the new logo visible
    */
   public void setLogoVisible(final boolean visible) {
     logoImage.setVisible(visible);
@@ -188,8 +194,9 @@ public class EntityTextLogo extends VerticalPanel {
 
   /**
    * Sets the online status group.
-   *
-   * @param group the new online status group
+   * 
+   * @param group
+   *          the new online status group
    */
   public void setOnlineStatusGroup(final String group) {
     avatarDecorator.setItem(group);
@@ -197,8 +204,9 @@ public class EntityTextLogo extends VerticalPanel {
 
   /**
    * Sets the online status visible.
-   *
-   * @param visible the new online status visible
+   * 
+   * @param visible
+   *          the new online status visible
    */
   public void setOnlineStatusVisible(final boolean visible) {
     avatarDecorator.setDecoratorVisible(visible);

@@ -37,35 +37,35 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class XmppManagerDefaultTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class XmppManagerDefaultTest {
-  
+
   /**
-   * The listener interface for receiving output events.
-   * The class that is interested in processing a output
-   * event implements this interface, and the object created
-   * with that class is registered with a component using the
+   * The listener interface for receiving output events. The class that is
+   * interested in processing a output event implements this interface, and the
+   * object created with that class is registered with a component using the
    * component's <code>addOutputListener<code> method. When
    * the output event occurs, that object's appropriate
    * method is invoked.
-   *
+   * 
    * @see OutputEvent
    */
   public static class OutputListener implements RoomListener {
-    
+
     /** The hits. */
     private int hits;
-    
+
     /** The name. */
     private final String name;
 
     /**
      * Instantiates a new output listener.
-     *
-     * @param name the name
+     * 
+     * @param name
+     *          the name
      */
     public OutputListener(final String name) {
       this.name = name;
@@ -74,15 +74,18 @@ public class XmppManagerDefaultTest {
 
     /**
      * Gets the hits.
-     *
+     * 
      * @return the hits
      */
     public int getHits() {
       return hits;
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.core.server.xmpp.RoomListener#onMessage(java.lang.String, java.lang.String, java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see cc.kune.core.server.xmpp.RoomListener#onMessage(java.lang.String,
+     * java.lang.String, java.lang.String)
      */
     @Override
     public void onMessage(final String from, final String to, final String body) {

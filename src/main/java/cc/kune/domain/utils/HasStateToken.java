@@ -27,14 +27,14 @@ import cc.kune.core.shared.domain.utils.StateToken;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface HasStateToken.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface HasStateToken {
 
   /**
    * Gets the state token.
-   *
+   * 
    * @return the state token
    */
   StateToken getStateToken();

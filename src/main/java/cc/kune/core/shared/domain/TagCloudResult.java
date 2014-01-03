@@ -30,19 +30,19 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagCloudResult.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TagCloudResult implements IsSerializable {
-  
-  /** The tag count list. */
-  private List<TagCount> tagCountList;
-  
+
   /** The max value. */
   private int maxValue;
-  
+
   /** The min value. */
   private int minValue;
+
+  /** The tag count list. */
+  private List<TagCount> tagCountList;
 
   /**
    * Instantiates a new tag cloud result.
@@ -53,10 +53,13 @@ public class TagCloudResult implements IsSerializable {
 
   /**
    * Instantiates a new tag cloud result.
-   *
-   * @param tagCountList the tag count list
-   * @param maxValue the max value
-   * @param minValue the min value
+   * 
+   * @param tagCountList
+   *          the tag count list
+   * @param maxValue
+   *          the max value
+   * @param minValue
+   *          the min value
    */
   public TagCloudResult(final List<TagCount> tagCountList, final int maxValue, final int minValue) {
     this.tagCountList = tagCountList;
@@ -66,7 +69,7 @@ public class TagCloudResult implements IsSerializable {
 
   /**
    * Gets the max value.
-   *
+   * 
    * @return the max value
    */
   public int getMaxValue() {
@@ -75,7 +78,7 @@ public class TagCloudResult implements IsSerializable {
 
   /**
    * Gets the min value.
-   *
+   * 
    * @return the min value
    */
   public int getMinValue() {
@@ -84,7 +87,7 @@ public class TagCloudResult implements IsSerializable {
 
   /**
    * Gets the tag count list.
-   *
+   * 
    * @return the tag count list
    */
   public List<TagCount> getTagCountList() {
@@ -93,8 +96,9 @@ public class TagCloudResult implements IsSerializable {
 
   /**
    * Sets the max value.
-   *
-   * @param maxValue the new max value
+   * 
+   * @param maxValue
+   *          the new max value
    */
   public void setMaxValue(final int maxValue) {
     this.maxValue = maxValue;
@@ -102,8 +106,9 @@ public class TagCloudResult implements IsSerializable {
 
   /**
    * Sets the min value.
-   *
-   * @param minValue the new min value
+   * 
+   * @param minValue
+   *          the new min value
    */
   public void setMinValue(final int minValue) {
     this.minValue = minValue;
@@ -111,14 +116,17 @@ public class TagCloudResult implements IsSerializable {
 
   /**
    * Sets the tag count list.
-   *
-   * @param tagCountList the new tag count list
+   * 
+   * @param tagCountList
+   *          the new tag count list
    */
   public void setTagCountList(final List<TagCount> tagCountList) {
     this.tagCountList = tagCountList;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

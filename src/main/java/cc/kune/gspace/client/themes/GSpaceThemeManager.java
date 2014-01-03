@@ -50,44 +50,50 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceThemeManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceThemeManager {
 
   /** The css added. */
   private StyleElement cssAdded;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The group service provider. */
   private final Provider<GroupServiceAsync> groupServiceProvider;
-  
+
   /** The previous theme. */
   private GSpaceTheme previousTheme;
-  
+
   /** The res. */
   private final GSpaceArmorResources res;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The themes. */
   protected HashMap<String, GSpaceTheme> themes;
-  
+
   /** The ws back manager. */
   private final GSpaceBackgroundManager wsBackManager;
 
   /**
    * Instantiates a new g space theme manager.
-   *
-   * @param session the session
-   * @param groupServiceProvider the group service provider
-   * @param stateManager the state manager
-   * @param wsBackManager the ws back manager
-   * @param eventBus the event bus
-   * @param res the res
+   * 
+   * @param session
+   *          the session
+   * @param groupServiceProvider
+   *          the group service provider
+   * @param stateManager
+   *          the state manager
+   * @param wsBackManager
+   *          the ws back manager
+   * @param eventBus
+   *          the event bus
+   * @param res
+   *          the res
    */
   @Inject
   public GSpaceThemeManager(final Session session,
@@ -116,9 +122,11 @@ public class GSpaceThemeManager {
 
   /**
    * Change css.
-   *
-   * @param res the res
-   * @param themeName the theme name
+   * 
+   * @param res
+   *          the res
+   * @param themeName
+   *          the theme name
    */
   private void changeCss(final GSpaceArmorResources res, final String themeName) {
     final GSpaceTheme theme = themes.get(themeName);
@@ -131,9 +139,11 @@ public class GSpaceThemeManager {
 
   /**
    * Change theme.
-   *
-   * @param token the token
-   * @param newTheme the new theme
+   * 
+   * @param token
+   *          the token
+   * @param newTheme
+   *          the new theme
    */
   public void changeTheme(final StateToken token, final GSpaceTheme newTheme) {
     NotifyUser.showProgress();
@@ -151,8 +161,9 @@ public class GSpaceThemeManager {
 
   /**
    * On change group ws theme.
-   *
-   * @param newTheme the new theme
+   * 
+   * @param newTheme
+   *          the new theme
    */
   protected void onChangeGroupWsTheme(final GSpaceTheme newTheme) {
     NotifyUser.showProgress();
@@ -168,8 +179,9 @@ public class GSpaceThemeManager {
 
   /**
    * Sets the state.
-   *
-   * @param state the new state
+   * 
+   * @param state
+   *          the new state
    */
   private void setState(final StateAbstractDTO state) {
     setTheme(themes.get(state.getGroup().getWorkspaceTheme()));
@@ -183,8 +195,9 @@ public class GSpaceThemeManager {
 
   /**
    * Sets the theme.
-   *
-   * @param newTheme the new theme
+   * 
+   * @param newTheme
+   *          the new theme
    */
   private void setTheme(final GSpaceTheme newTheme) {
     if (previousTheme == null || !previousTheme.equals(newTheme)) {

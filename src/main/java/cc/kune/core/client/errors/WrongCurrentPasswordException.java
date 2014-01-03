@@ -25,7 +25,7 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WrongCurrentPasswordException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WrongCurrentPasswordException extends DefaultException {

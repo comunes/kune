@@ -28,102 +28,124 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentCapabilitiesRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentCapabilitiesRegistry {
 
   /** The acl editable. */
   private final AclEditableRegistry aclEditable;
-  
+
   /** The authorable. */
   private final AuthorableRegistry authorable;
-  
+
   /** The can be homepage. */
   private final CanBeHomepageRegistry canBeHomepage;
-  
+
   /** The comentable. */
   private final ComentableRegistry comentable;
-  
+
   /** The dragable. */
   private final DragableRegistry dragable;
-  
+
   /** The dropable. */
   private final DropableRegistry dropable;
-  
+
   /** The email subscribe able. */
   private final EmailSubscribeAbleRegistry emailSubscribeAble;
-  
+
   /** The empty folder tutorial registry. */
   private final EmptyFolderTutorialRegistry emptyFolderTutorialRegistry;
-  
+
   /** The empty messages registry. */
   private final EmptyMessagesRegistry emptyMessagesRegistry;
-  
+
   /** The empty messages registry not logged. */
   private final EmptyMessagesRegistry emptyMessagesRegistryNotLogged;
-  
+
   /** The icons registry. */
   private final IconsRegistry iconsRegistry;
-  
+
   /** The licensable. */
   private final LicensableRegistry licensable;
-  
+
   /** The new menus. */
   private final NewMenusForTypeIdsRegistry newMenus;
-  
+
   /** The publish moderable. */
   private final PublishModerableRegistry publishModerable;
-  
+
   /** The rateable. */
   private final RateableRegistry rateable;
-  
+
   /** The renamable. */
   private final RenamableRegistry renamable;
-  
+
   /** The show deleted. */
   private final ShowDeletedRegistry showDeleted;
-  
+
   /** The tageable. */
   private final TageableRegistry tageable;
-  
+
   /** The translatable. */
   private final TranslatableRegistry translatable;
-  
+
   /** The versionable. */
   private final VersionableRegistry versionable;
-  
+
   /** The xmpp comentable. */
   private final XmppComentableRegistry xmppComentable;
-  
+
   /** The xmpp notify capable. */
   private final XmppNotifyCapableRegistry xmppNotifyCapable;
 
   /**
    * Instantiates a new content capabilities registry.
-   *
-   * @param authorableRegistry the authorable registry
-   * @param newMenus the new menus
-   * @param aclEditableRegistry the acl editable registry
-   * @param iconsRegistry the icons registry
-   * @param canBeHomepage the can be homepage
-   * @param comentable the comentable
-   * @param dragable the dragable
-   * @param dropable the dropable
-   * @param emailSubscribeAble the email subscribe able
-   * @param licensable the licensable
-   * @param publishModerable the publish moderable
-   * @param rateable the rateable
-   * @param tageable the tageable
-   * @param renamable the renamable
-   * @param translatable the translatable
-   * @param versionable the versionable
-   * @param emptyMessagesRegistry the empty messages registry
-   * @param emptyMessagesRegistryNotLogged the empty messages registry not logged
-   * @param xmppComentable the xmpp comentable
-   * @param xmppNotifyCapable the xmpp notify capable
-   * @param showDeleted the show deleted
-   * @param emptyFolderTutorialRegistry the empty folder tutorial registry
+   * 
+   * @param authorableRegistry
+   *          the authorable registry
+   * @param newMenus
+   *          the new menus
+   * @param aclEditableRegistry
+   *          the acl editable registry
+   * @param iconsRegistry
+   *          the icons registry
+   * @param canBeHomepage
+   *          the can be homepage
+   * @param comentable
+   *          the comentable
+   * @param dragable
+   *          the dragable
+   * @param dropable
+   *          the dropable
+   * @param emailSubscribeAble
+   *          the email subscribe able
+   * @param licensable
+   *          the licensable
+   * @param publishModerable
+   *          the publish moderable
+   * @param rateable
+   *          the rateable
+   * @param tageable
+   *          the tageable
+   * @param renamable
+   *          the renamable
+   * @param translatable
+   *          the translatable
+   * @param versionable
+   *          the versionable
+   * @param emptyMessagesRegistry
+   *          the empty messages registry
+   * @param emptyMessagesRegistryNotLogged
+   *          the empty messages registry not logged
+   * @param xmppComentable
+   *          the xmpp comentable
+   * @param xmppNotifyCapable
+   *          the xmpp notify capable
+   * @param showDeleted
+   *          the show deleted
+   * @param emptyFolderTutorialRegistry
+   *          the empty folder tutorial registry
    */
   @Inject
   public ContentCapabilitiesRegistry(final AuthorableRegistry authorableRegistry,
@@ -165,8 +187,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Can be homepage.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if successful
    */
   public boolean canBeHomepage(final String typeId) {
@@ -175,7 +198,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the acl editable.
-   *
+   * 
    * @return the acl editable
    */
   public AclEditableRegistry getAclEditable() {
@@ -184,7 +207,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the authorable.
-   *
+   * 
    * @return the authorable
    */
   public AuthorableRegistry getAuthorable() {
@@ -193,7 +216,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the can be homepage.
-   *
+   * 
    * @return the can be homepage
    */
   public CanBeHomepageRegistry getCanBeHomepage() {
@@ -202,7 +225,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the comentable.
-   *
+   * 
    * @return the comentable
    */
   public ComentableRegistry getComentable() {
@@ -211,7 +234,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the dragable.
-   *
+   * 
    * @return the dragable
    */
   public DragableRegistry getDragable() {
@@ -220,7 +243,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the dropable.
-   *
+   * 
    * @return the dropable
    */
   public DropableRegistry getDropable() {
@@ -229,7 +252,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the email subscribe able.
-   *
+   * 
    * @return the email subscribe able
    */
   public EmailSubscribeAbleRegistry getEmailSubscribeAble() {
@@ -238,7 +261,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the empty folder tutorial registry.
-   *
+   * 
    * @return the empty folder tutorial registry
    */
   public EmptyFolderTutorialRegistry getEmptyFolderTutorialRegistry() {
@@ -247,7 +270,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the empty messages registry.
-   *
+   * 
    * @return the empty messages registry
    */
   public EmptyMessagesRegistry getEmptyMessagesRegistry() {
@@ -256,7 +279,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the empty messages registry not logged.
-   *
+   * 
    * @return the empty messages registry not logged
    */
   public EmptyMessagesRegistry getEmptyMessagesRegistryNotLogged() {
@@ -265,7 +288,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the icons registry.
-   *
+   * 
    * @return the icons registry
    */
   public IconsRegistry getIconsRegistry() {
@@ -274,7 +297,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the licensable.
-   *
+   * 
    * @return the licensable
    */
   public LicensableRegistry getLicensable() {
@@ -283,7 +306,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the new menus.
-   *
+   * 
    * @return the new menus
    */
   public NewMenusForTypeIdsRegistry getNewMenus() {
@@ -292,7 +315,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the publish moderable.
-   *
+   * 
    * @return the publish moderable
    */
   public PublishModerableRegistry getPublishModerable() {
@@ -301,7 +324,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the rateable.
-   *
+   * 
    * @return the rateable
    */
   public RateableRegistry getRateable() {
@@ -310,7 +333,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the renamable.
-   *
+   * 
    * @return the renamable
    */
   public RenamableRegistry getRenamable() {
@@ -319,7 +342,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the show deleted.
-   *
+   * 
    * @return the show deleted
    */
   public ShowDeletedRegistry getShowDeleted() {
@@ -328,7 +351,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the tageable.
-   *
+   * 
    * @return the tageable
    */
   public TageableRegistry getTageable() {
@@ -337,7 +360,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the translatable.
-   *
+   * 
    * @return the translatable
    */
   public TranslatableRegistry getTranslatable() {
@@ -346,7 +369,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the versionable.
-   *
+   * 
    * @return the versionable
    */
   public VersionableRegistry getVersionable() {
@@ -355,7 +378,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the xmpp comentable.
-   *
+   * 
    * @return the xmpp comentable
    */
   public XmppComentableRegistry getXmppComentable() {
@@ -364,7 +387,7 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Gets the xmpp notificy capable.
-   *
+   * 
    * @return the xmpp notificy capable
    */
   public XmppNotifyCapableRegistry getXmppNotificyCapable() {
@@ -373,8 +396,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is acl editable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is acl editable
    */
   public boolean isAclEditable(final String typeId) {
@@ -383,8 +407,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is authorable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is authorable
    */
   public boolean isAuthorable(final String typeId) {
@@ -393,8 +418,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is comentable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is comentable
    */
   public boolean isComentable(final String typeId) {
@@ -403,8 +429,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is dragable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is dragable
    */
   public boolean isDragable(final String typeId) {
@@ -413,8 +440,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is dropable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is dropable
    */
   public boolean isDropable(final String typeId) {
@@ -423,8 +451,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is email subscribe able.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is email subscribe able
    */
   public boolean isEmailSubscribeAble(final String typeId) {
@@ -433,8 +462,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is licensable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is licensable
    */
   public boolean isLicensable(final String typeId) {
@@ -443,8 +473,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is publish moderable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is publish moderable
    */
   public boolean isPublishModerable(final String typeId) {
@@ -453,8 +484,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is rateable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is rateable
    */
   public boolean isRateable(final String typeId) {
@@ -463,8 +495,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is renamable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is renamable
    */
   public boolean isRenamable(final String typeId) {
@@ -473,8 +506,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is tageable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is tageable
    */
   public boolean isTageable(final String typeId) {
@@ -483,8 +517,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is translatable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is translatable
    */
   public boolean isTranslatable(final String typeId) {
@@ -493,8 +528,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is versionable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is versionable
    */
   public boolean isVersionable(final String typeId) {
@@ -503,8 +539,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is xmpp comentable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is xmpp comentable
    */
   public boolean isXmppComentable(final String typeId) {
@@ -513,8 +550,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Checks if is xmpp notify capable.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if is xmpp notify capable
    */
   public boolean isXmppNotifyCapable(final String typeId) {
@@ -523,8 +561,9 @@ public class ContentCapabilitiesRegistry {
 
   /**
    * Show deleted.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if successful
    */
   public boolean showDeleted(final String typeId) {

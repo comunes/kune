@@ -38,16 +38,18 @@ import com.google.inject.persist.finder.Finder;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface TagUserContentFinder.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface TagUserContentFinder {
 
   /**
    * Find.
-   *
-   * @param user the user
-   * @param content the content
+   * 
+   * @param user
+   *          the user
+   * @param content
+   *          the content
    * @return the list
    */
   @Finder(query = "FROM TagUserContent t WHERE t.user = :user AND t.content = :content", returnAs = ArrayList.class)
@@ -56,9 +58,11 @@ public interface TagUserContentFinder {
 
   /**
    * Find tags.
-   *
-   * @param user the user
-   * @param content the content
+   * 
+   * @param user
+   *          the user
+   * @param content
+   *          the content
    * @return the list
    */
   @Finder(query = "SELECT t.tag FROM TagUserContent t WHERE t.user = :user AND t.content = :content", returnAs = ArrayList.class)
@@ -66,8 +70,9 @@ public interface TagUserContentFinder {
 
   /**
    * Gets the max grouped.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the max grouped
    */
   @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) ASC LIMIT 0,1")
@@ -75,8 +80,9 @@ public interface TagUserContentFinder {
 
   /**
    * Gets the min grouped.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the min grouped
    */
   @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) DESC LIMIT 0,1")
@@ -84,8 +90,9 @@ public interface TagUserContentFinder {
 
   /**
    * Gets the tags groups.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the tags groups
    */
   @Finder(query = "SELECT NEW cc.kune.core.shared.domain.TagCount(t.name, COUNT(tuc.content.id)) "

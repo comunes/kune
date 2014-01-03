@@ -27,47 +27,47 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserDTO implements IsSerializable {
-  
+
   /** The avatar. */
   private String avatar;
-  
+
   /** The chat color. */
   private String chatColor;
-  
+
   /** The country. */
   private I18nCountryDTO country;
-  
+
   /** The email. */
   private String email;
-  
+
   /** The email notif freq. */
   private EmailNotificationFrequency emailNotifFreq;
-  
+
   /** The id. */
   private Long id;
-  
+
   /** The language. */
   private I18nLanguageDTO language;
-  
+
   /** The name. */
   private String name;
-  
+
   /** The password. */
   private String password;
-  
+
   /** The publish roster. */
   private boolean publishRoster;
-  
+
   /** The short name. */
   private String shortName;
-  
+
   /** The subscription mode. */
   private SubscriptionMode subscriptionMode;
-  
+
   /** The timezone. */
   private TimeZoneDTO timezone;
 
@@ -80,18 +80,29 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Instantiates a new user dto.
-   *
-   * @param shortName the short name
-   * @param name the name
-   * @param password the password
-   * @param email the email
-   * @param language the language
-   * @param country the country
-   * @param timezone the timezone
-   * @param avatar the avatar
-   * @param publishRoster the publish roster
-   * @param subscriptionMode the subscription mode
-   * @param chatColor the chat color
+   * 
+   * @param shortName
+   *          the short name
+   * @param name
+   *          the name
+   * @param password
+   *          the password
+   * @param email
+   *          the email
+   * @param language
+   *          the language
+   * @param country
+   *          the country
+   * @param timezone
+   *          the timezone
+   * @param avatar
+   *          the avatar
+   * @param publishRoster
+   *          the publish roster
+   * @param subscriptionMode
+   *          the subscription mode
+   * @param chatColor
+   *          the chat color
    */
   public UserDTO(final String shortName, final String name, final String password, final String email,
       final I18nLanguageDTO language, final I18nCountryDTO country, final TimeZoneDTO timezone,
@@ -112,7 +123,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the avatar.
-   *
+   * 
    * @return the avatar
    */
   public String getAvatar() {
@@ -121,7 +132,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the chat color.
-   *
+   * 
    * @return the chat color
    */
   public String getChatColor() {
@@ -130,7 +141,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the country.
-   *
+   * 
    * @return the country
    */
   public I18nCountryDTO getCountry() {
@@ -139,7 +150,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the email.
-   *
+   * 
    * @return the email
    */
   public String getEmail() {
@@ -148,7 +159,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the email notif freq.
-   *
+   * 
    * @return the email notif freq
    */
   public EmailNotificationFrequency getEmailNotifFreq() {
@@ -157,7 +168,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -166,7 +177,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the language.
-   *
+   * 
    * @return the language
    */
   public I18nLanguageDTO getLanguage() {
@@ -175,7 +186,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -184,7 +195,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the password.
-   *
+   * 
    * @return the password
    */
   public String getPassword() {
@@ -193,7 +204,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the short name.
-   *
+   * 
    * @return the short name
    */
   public String getShortName() {
@@ -202,7 +213,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the subscription mode.
-   *
+   * 
    * @return the subscription mode
    */
   public SubscriptionMode getSubscriptionMode() {
@@ -211,7 +222,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Gets the timezone.
-   *
+   * 
    * @return the timezone
    */
   public TimeZoneDTO getTimezone() {
@@ -220,7 +231,7 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Checks if is publish roster.
-   *
+   * 
    * @return true, if is publish roster
    */
   public boolean isPublishRoster() {
@@ -229,8 +240,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the avatar.
-   *
-   * @param avatar the new avatar
+   * 
+   * @param avatar
+   *          the new avatar
    */
   public void setAvatar(final String avatar) {
     this.avatar = avatar;
@@ -238,8 +250,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the chat color.
-   *
-   * @param chatColor the new chat color
+   * 
+   * @param chatColor
+   *          the new chat color
    */
   public void setChatColor(final String chatColor) {
     this.chatColor = chatColor;
@@ -247,8 +260,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the country.
-   *
-   * @param country the new country
+   * 
+   * @param country
+   *          the new country
    */
   public void setCountry(final I18nCountryDTO country) {
     this.country = country;
@@ -256,8 +270,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the email.
-   *
-   * @param email the new email
+   * 
+   * @param email
+   *          the new email
    */
   public void setEmail(final String email) {
     this.email = email;
@@ -265,8 +280,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the email notif freq.
-   *
-   * @param emailNotifFreq the new email notif freq
+   * 
+   * @param emailNotifFreq
+   *          the new email notif freq
    */
   public void setEmailNotifFreq(final EmailNotificationFrequency emailNotifFreq) {
     this.emailNotifFreq = emailNotifFreq;
@@ -274,8 +290,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -283,8 +300,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the language.
-   *
-   * @param language the new language
+   * 
+   * @param language
+   *          the new language
    */
   public void setLanguage(final I18nLanguageDTO language) {
     this.language = language;
@@ -292,8 +310,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public void setName(final String name) {
     this.name = name;
@@ -301,8 +320,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the password.
-   *
-   * @param password the new password
+   * 
+   * @param password
+   *          the new password
    */
   public void setPassword(final String password) {
     this.password = password;
@@ -310,8 +330,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the publish roster.
-   *
-   * @param publishRoster the new publish roster
+   * 
+   * @param publishRoster
+   *          the new publish roster
    */
   public void setPublishRoster(final boolean publishRoster) {
     this.publishRoster = publishRoster;
@@ -319,8 +340,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the short name.
-   *
-   * @param shortName the new short name
+   * 
+   * @param shortName
+   *          the new short name
    */
   public void setShortName(final String shortName) {
     this.shortName = shortName;
@@ -328,8 +350,9 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the subscription mode.
-   *
-   * @param subscriptionMode the new subscription mode
+   * 
+   * @param subscriptionMode
+   *          the new subscription mode
    */
   public void setSubscriptionMode(final SubscriptionMode subscriptionMode) {
     this.subscriptionMode = subscriptionMode;
@@ -337,14 +360,17 @@ public class UserDTO implements IsSerializable {
 
   /**
    * Sets the timezone.
-   *
-   * @param timezone the new timezone
+   * 
+   * @param timezone
+   *          the new timezone
    */
   public void setTimezone(final TimeZoneDTO timezone) {
     this.timezone = timezone;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

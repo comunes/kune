@@ -25,29 +25,32 @@ package cc.kune.core.client.contacts;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SimpleContactManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SimpleContactManager {
 
   /**
    * Adds the new buddy.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    */
   void addNewBuddy(String shortName);
 
   /**
    * Chat.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    */
   void chat(String shortName);
 
   /**
    * Checks if is buddy.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    * @return true, if is buddy
    */
   boolean isBuddy(String shortName);

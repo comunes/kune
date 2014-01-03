@@ -30,22 +30,23 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateChangedEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StateChangedEvent extends GwtEvent<StateChangedEvent.StateChangedHandler> {
 
   /**
    * The Interface HasStateChangedHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasStateChangedHandlers extends HasHandlers {
-    
+
     /**
      * Adds the state changed handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addStateChangedHandler(StateChangedHandler handler);
@@ -53,15 +54,16 @@ public class StateChangedEvent extends GwtEvent<StateChangedEvent.StateChangedHa
 
   /**
    * The Interface StateChangedHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface StateChangedHandler extends EventHandler {
-    
+
     /**
      * On state changed.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onStateChanged(StateChangedEvent event);
   }
@@ -71,9 +73,11 @@ public class StateChangedEvent extends GwtEvent<StateChangedEvent.StateChangedHa
 
   /**
    * Fire.
-   *
-   * @param source the source
-   * @param state the state
+   * 
+   * @param source
+   *          the source
+   * @param state
+   *          the state
    */
   public static void fire(final HasHandlers source, final cc.kune.core.shared.dto.StateAbstractDTO state) {
     source.fireEvent(new StateChangedEvent(state));
@@ -81,7 +85,7 @@ public class StateChangedEvent extends GwtEvent<StateChangedEvent.StateChangedHa
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<StateChangedHandler> getType() {
@@ -100,22 +104,29 @@ public class StateChangedEvent extends GwtEvent<StateChangedEvent.StateChangedHa
 
   /**
    * Instantiates a new state changed event.
-   *
-   * @param state the state
+   * 
+   * @param state
+   *          the state
    */
   public StateChangedEvent(final cc.kune.core.shared.dto.StateAbstractDTO state) {
     this.state = state;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final StateChangedHandler handler) {
     handler.onStateChanged(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -140,7 +151,9 @@ public class StateChangedEvent extends GwtEvent<StateChangedEvent.StateChangedHa
     return true;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -150,14 +163,16 @@ public class StateChangedEvent extends GwtEvent<StateChangedEvent.StateChangedHa
 
   /**
    * Gets the state.
-   *
+   * 
    * @return the state
    */
   public cc.kune.core.shared.dto.StateAbstractDTO getState() {
     return state;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -167,7 +182,9 @@ public class StateChangedEvent extends GwtEvent<StateChangedEvent.StateChangedHa
     return hashCode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

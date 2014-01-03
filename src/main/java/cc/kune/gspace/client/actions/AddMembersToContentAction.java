@@ -37,25 +37,27 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AddMembersToContentAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AddMembersToContentAction extends RolAction {
 
   /** The content service. */
   private final ContentServiceHelper contentService;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The sub group. */
   private SocialNetworkSubGroup subGroup;
 
   /**
    * Instantiates a new adds the members to content action.
-   *
-   * @param session the session
-   * @param contentService the content service
+   * 
+   * @param session
+   *          the session
+   * @param contentService
+   *          the content service
    */
   @Inject
   public AddMembersToContentAction(final Session session, final ContentServiceHelper contentService) {
@@ -64,8 +66,12 @@ public class AddMembersToContentAction extends RolAction {
     this.contentService = contentService;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
@@ -76,8 +82,9 @@ public class AddMembersToContentAction extends RolAction {
 
   /**
    * Sets the sub group.
-   *
-   * @param subGroup the new sub group
+   * 
+   * @param subGroup
+   *          the new sub group
    */
   public void setSubGroup(final SocialNetworkSubGroup subGroup) {
     this.subGroup = subGroup;

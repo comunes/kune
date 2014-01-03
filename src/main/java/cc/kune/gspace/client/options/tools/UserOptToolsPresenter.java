@@ -41,20 +41,26 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptToolsPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptToolsPresenter extends EntityOptToolsPresenter implements UserOptTools {
 
   /**
    * Instantiates a new user opt tools presenter.
-   *
-   * @param session the session
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param entityOptions the entity options
-   * @param groupService the group service
-   * @param view the view
+   * 
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param entityOptions
+   *          the entity options
+   * @param groupService
+   *          the group service
+   * @param view
+   *          the view
    */
   @Inject
   public UserOptToolsPresenter(final Session session, final StateManager stateManager,
@@ -70,24 +76,34 @@ public class UserOptToolsPresenter extends EntityOptToolsPresenter implements Us
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#applicable()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#applicable()
    */
   @Override
   protected boolean applicable() {
     return session.isLogged();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getAllTools()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getAllTools()
    */
   @Override
   protected Collection<ToolSimpleDTO> getAllTools() {
     return session.getUserTools();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getDefContentToken()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getDefContentToken
+   * ()
    */
   @Override
   protected StateToken getDefContentToken() {
@@ -95,8 +111,11 @@ public class UserOptToolsPresenter extends EntityOptToolsPresenter implements Us
     return homePage == null ? null : new StateToken(homePage);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getDefContentTooltip()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#
+   * getDefContentTooltip()
    */
   @Override
   protected String getDefContentTooltip() {
@@ -104,24 +123,35 @@ public class UserOptToolsPresenter extends EntityOptToolsPresenter implements Us
     return i18n.t("You cannot disable this tool because it's where your home page is located. To do that you have to select other content as the default home page but in another tool.");
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getEnabledTools()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getEnabledTools
+   * ()
    */
   @Override
   protected List<String> getEnabledTools() {
     return session.getCurrentUserInfo().getEnabledTools();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getOperationToken()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#getOperationToken
+   * ()
    */
   @Override
   protected StateToken getOperationToken() {
     return session.getCurrentUser().getStateToken();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#gotoDifLocationIfNecessary(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.options.tools.EntityOptToolsPresenter#
+   * gotoDifLocationIfNecessary(java.lang.String)
    */
   @Override
   protected void gotoDifLocationIfNecessary(final String toolName) {

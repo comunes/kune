@@ -33,39 +33,43 @@ import com.google.gwt.event.shared.HandlerRegistration;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityOptionsUploaderView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptionsUploaderView {
-  
+
   /**
    * Adds the on cancel upload handler.
-   *
-   * @param handler the handler
+   * 
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   HandlerRegistration addOnCancelUploadHandler(final OnCancelUploaderHandler handler);
 
   /**
    * Adds the on change upload handler.
-   *
-   * @param handler the handler
+   * 
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   HandlerRegistration addOnChangeUploadHandler(final OnChangeUploaderHandler handler);
 
   /**
    * Adds the on finish upload handler.
-   *
-   * @param handler the handler
+   * 
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   HandlerRegistration addOnFinishUploadHandler(final OnFinishUploaderHandler handler);
 
   /**
    * Adds the on start upload handler.
-   *
-   * @param handler the handler
+   * 
+   * @param handler
+   *          the handler
    * @return the handler registration
    */
   HandlerRegistration addOnStartUploadHandler(final OnStartUploaderHandler handler);

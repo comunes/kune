@@ -42,32 +42,38 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseWizardFrdForm.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFrdFormView {
 
   /**
    * The Class LicenseData.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @SuppressWarnings("serial")
   public class LicenseData extends BaseModel {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     /** The Constant LONGNAME. */
     private static final String LONGNAME = "longname";
-    
+
     /** The Constant SHORTNAME. */
     private static final String SHORTNAME = "shortname";
-    
+
     /** The Constant URL. */
     private static final String URL = "url";
 
     /**
      * Instantiates a new license data.
-     *
-     * @param license the license
+     * 
+     * @param license
+     *          the license
      */
     public LicenseData(final LicenseDTO license) {
       this(license.getShortName(), license.getLongName(), license.getUrl());
@@ -75,10 +81,13 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
 
     /**
      * Instantiates a new license data.
-     *
-     * @param shortname the shortname
-     * @param longname the longname
-     * @param url the url
+     * 
+     * @param shortname
+     *          the shortname
+     * @param longname
+     *          the longname
+     * @param url
+     *          the url
      */
     public LicenseData(final String shortname, final String longname, final String url) {
       set(SHORTNAME, shortname);
@@ -88,7 +97,7 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
 
     /**
      * Gets the longname.
-     *
+     * 
      * @return the longname
      */
     public String getLongname() {
@@ -97,7 +106,7 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
 
     /**
      * Gets the shortname.
-     *
+     * 
      * @return the shortname
      */
     public String getShortname() {
@@ -106,7 +115,7 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
 
     /**
      * Gets the url.
-     *
+     * 
      * @return the url
      */
     public String getUrl() {
@@ -116,27 +125,29 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
 
   /** The Constant COMMON_LICENSES_ID. */
   public static final String COMMON_LICENSES_ID = "k-lwsf-common";
-  
+
   /** The Constant OTHER_LICENSES_ID. */
   public static final String OTHER_LICENSES_ID = "k-lwsf-other";
-  
+
   /** The Constant RADIO_FIELD_NAME. */
   public static final String RADIO_FIELD_NAME = "k-lwsf-radio";
-  
+
   /** The cb. */
   private final ComboBox<LicenseData> cb;
 
   /** The on change. */
   private SimpleCallback onChange;
-  
+
   /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new license wizard frd form.
-   *
-   * @param i18n the i18n
-   * @param session the session
+   * 
+   * @param i18n
+   *          the i18n
+   * @param session
+   *          the session
    */
   @Inject
   public LicenseWizardFrdForm(final I18nTranslationService i18n, final Session session) {
@@ -171,7 +182,9 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
     add(cb);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.IsWidget#asWidget()
    */
   @Override
@@ -181,7 +194,7 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
 
   /**
    * Creates the store.
-   *
+   * 
    * @return the list store
    */
   private ListStore<LicenseData> createStore() {
@@ -195,23 +208,32 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
     return list;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView#getSelectedLicense()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView#
+   * getSelectedLicense()
    */
   @Override
   public String getSelectedLicense() {
     return cb.getValue().getShortname();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView#onChange(cc.kune.common.shared.utils.SimpleCallback)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView#onChange
+   * (cc.kune.common.shared.utils.SimpleCallback)
    */
   @Override
   public void onChange(final SimpleCallback onChange) {
     this.onChange = onChange;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.ui.DefaultForm#reset()
    */
   @Override
@@ -219,8 +241,12 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
     super.reset();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView#setFlags(boolean, boolean, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView#setFlags
+   * (boolean, boolean, boolean)
    */
   @Override
   public void setFlags(final boolean isCopyleft, final boolean isAppropiateForCulturalWorks,

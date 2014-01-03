@@ -39,36 +39,37 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserConfirmPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
-  
+
   /** The Constant CANCEL_ID. */
   public static final String CANCEL_ID = "k-conf-dial";
-  
+
   /** The Constant DIALOG_ID. */
   public static final String DIALOG_ID = "k-conf-dial-nok";
-  
+
   /** The Constant OK_ID. */
   public static final String OK_ID = "k-conf-dial-ok";
-  
+
   /** The accept handler. */
   private HandlerRegistration acceptHandler;
-  
+
   /** The ask label. */
   private final HTML askLabel;
-  
+
   /** The cancel handler. */
   private HandlerRegistration cancelHandler;
-  
+
   /** The dialog. */
   private final BasicTopDialog dialog;
 
   /**
    * Instantiates a new user confirm panel.
-   *
-   * @param i18n the i18n
+   * 
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public UserConfirmPanel(final I18nTranslationService i18n) {
@@ -79,7 +80,9 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
     dialog.getInnerPanel().add(askLabel);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -87,8 +90,12 @@ public class UserConfirmPanel extends ViewImpl implements UserConfirmView {
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmView#confirmAsk(cc.kune.common.client.notify.ConfirmAskEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmView
+   * #confirmAsk(cc.kune.common.client.notify.ConfirmAskEvent)
    */
   @Override
   public void confirmAsk(final ConfirmAskEvent ask) {

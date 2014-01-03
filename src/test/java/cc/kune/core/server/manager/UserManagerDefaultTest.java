@@ -44,12 +44,12 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserManagerDefaultTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
-  
+
   /** The group finder. */
   @Inject
   Group groupFinder;
@@ -86,7 +86,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Gets the time zone.
-   *
+   * 
    * @return the time zone
    */
   private TimeZone getTimeZone() {
@@ -123,8 +123,9 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
   /**
    * This was not working:
    * http://opensource.atlassian.com/projects/hibernate/browse/EJB-382
-   *
-   * @throws I18nNotFoundException the i18n not found exception
+   * 
+   * @throws I18nNotFoundException
+   *           the i18n not found exception
    */
   @Test(expected = GroupShortNameInUseException.class)
   public void testUserExist() throws I18nNotFoundException {
@@ -148,9 +149,11 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * User search.
-   *
-   * @throws Exception the exception
-   * @throws ParseException the parse exception
+   * 
+   * @throws Exception
+   *           the exception
+   * @throws ParseException
+   *           the parse exception
    */
   @Test
   public void userSearch() throws Exception, ParseException {

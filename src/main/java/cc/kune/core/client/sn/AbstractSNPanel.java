@@ -56,14 +56,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractSNPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AbstractSNPanel extends ViewImpl {
 
   /**
    * The Interface AbstractSNPanelUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface AbstractSNPanelUiBinder extends UiBinder<Widget, AbstractSNPanel> {
@@ -71,137 +71,143 @@ public class AbstractSNPanel extends ViewImpl {
 
   /** The Constant AVATARLABELMAXSIZE. */
   private final static int AVATARLABELMAXSIZE = 4;
-  
+
   /** The Constant AVATARSIZE. */
   private final static int AVATARSIZE = 22;
-  
+
   /** The Constant CATEG_HEIGHT. */
   private final static String CATEG_HEIGHT = "86px";
-  
+
   /** The Constant CATEG_MIN_HEIGHT. */
   private final static String CATEG_MIN_HEIGHT = "57px";
-  
+
   /** The ui binder. */
   private static AbstractSNPanelUiBinder uiBinder = GWT.create(AbstractSNPanelUiBinder.class);
-  
+
   /** The actions. */
   protected final ActionSimplePanel actions;
-  
+
   /** The armor. */
   protected final GSpaceArmor armor;
-  
+
   /** The avatar decorator prov. */
   protected final Provider<SmallAvatarDecorator> avatarDecoratorProv;
-  
+
   /** The bottom actions toolbar. */
   ActionFlowPanel bottomActionsToolbar;
-  
+
   /** The bottom panel. */
   @UiField
   FlowPanel bottomPanel;
-  
+
   /** The categories flow. */
   @UiField
   FlowPanel categoriesFlow;
-  
+
   /** The deck. */
   @UiField
   DeckPanel deck;
-  
+
   /** The drag controller. */
   protected final KuneDragController dragController;
-  
+
   /** The first category count. */
   @UiField
   Label firstCategoryCount;
-  
+
   /** The first category flow. */
   @UiField
   FlowPanel firstCategoryFlow;
-  
+
   /** The first category label. */
   @UiField
   Label firstCategoryLabel;
-  
+
   /** The first category panel. */
   @UiField
   DockLayoutPanel firstCategoryPanel;
-  
+
   /** The first category scroll. */
   @UiField
   ScrollPanel firstCategoryScroll;
-  
+
   /** The first deck label. */
   @UiField
   Label firstDeckLabel;
-  
+
   /** The last connected manager. */
   private final LastConnectedManager lastConnectedManager;
-  
+
   /** The main panel. */
   @UiField
   FlowPanel mainPanel;
-  
+
   /** The main title. */
   @UiField
   Label mainTitle;
-  
+
   /** The snd category count. */
   @UiField
   Label sndCategoryCount;
-  
+
   /** The snd category flow. */
   @UiField
   FlowPanel sndCategoryFlow;
-  
+
   /** The snd category label. */
   @UiField
   Label sndCategoryLabel;
-  
+
   /** The snd category panel. */
   @UiField
   DockLayoutPanel sndCategoryPanel;
-  
+
   /** The snd category scroll. */
   @UiField
   ScrollPanel sndCategoryScroll;
-  
+
   /** The snd deck label. */
   @UiField
   Label sndDeckLabel;
-  
+
   /** The trd category count. */
   @UiField
   Label trdCategoryCount;
-  
+
   /** The trd category flow. */
   @UiField
   FlowPanel trdCategoryFlow;
-  
+
   /** The trd category label. */
   @UiField
   Label trdCategoryLabel;
-  
+
   /** The trd category panel. */
   @UiField
   DockLayoutPanel trdCategoryPanel;
-  
+
   /** The trd category scroll. */
   @UiField
   ScrollPanel trdCategoryScroll;
-  
+
   /** The widget. */
   protected final Widget widget;
 
   /**
    * Instantiates a new abstract sn panel.
-   *
-   * @param i18n the i18n
-   * @param guiProvider the gui provider
-   * @param armor the armor
-   * @param avatarDecorator the avatar decorator
-   * @param dragController the drag controller
-   * @param lastConnectedManager the last connected manager
+   * 
+   * @param i18n
+   *          the i18n
+   * @param guiProvider
+   *          the gui provider
+   * @param armor
+   *          the armor
+   * @param avatarDecorator
+   *          the avatar decorator
+   * @param dragController
+   *          the drag controller
+   * @param lastConnectedManager
+   *          the last connected manager
    */
   public AbstractSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
       final GSpaceArmor armor, final Provider<SmallAvatarDecorator> avatarDecorator,
@@ -214,7 +220,9 @@ public class AbstractSNPanel extends ViewImpl {
     actions = new ActionSimplePanel(guiProvider, i18n);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -234,8 +242,9 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Count as string.
-   *
-   * @param count the count
+   * 
+   * @param count
+   *          the count
    * @return the string
    */
   protected String countAsString(final int count) {
@@ -244,16 +253,25 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Creates the thumb.
-   *
-   * @param isPersonal the is personal
-   * @param shortName the short name
-   * @param text the text
-   * @param avatarUrl the avatar url
-   * @param tooltip the tooltip
-   * @param tooltipTitle the tooltip title
-   * @param menuitems the menuitems
-   * @param token the token
-   * @param dragable the dragable
+   * 
+   * @param isPersonal
+   *          the is personal
+   * @param shortName
+   *          the short name
+   * @param text
+   *          the text
+   * @param avatarUrl
+   *          the avatar url
+   * @param tooltip
+   *          the tooltip
+   * @param tooltipTitle
+   *          the tooltip title
+   * @param menuitems
+   *          the menuitems
+   * @param token
+   *          the token
+   * @param dragable
+   *          the dragable
    * @return the basic dragable thumb
    */
   public BasicDragableThumb createThumb(final boolean isPersonal, final String shortName,
@@ -295,9 +313,11 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Decorate avatar with xmpp status.
-   *
-   * @param shortname the shortname
-   * @param thumb the thumb
+   * 
+   * @param shortname
+   *          the shortname
+   * @param thumb
+   *          the thumb
    * @return the small avatar decorator
    */
   public SmallAvatarDecorator decorateAvatarWithXmppStatus(final String shortname,
@@ -310,7 +330,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Gets the bottom toolbar.
-   *
+   * 
    * @return the bottom toolbar
    */
   public IsActionExtensible getBottomToolbar() {
@@ -319,9 +339,11 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Sets the first category visible.
-   *
-   * @param visible the visible
-   * @param big the big
+   * 
+   * @param visible
+   *          the visible
+   * @param big
+   *          the big
    */
   public void setFirstCategoryVisible(final boolean visible, final boolean big) {
     firstCategoryPanel.setVisible(visible);
@@ -330,9 +352,11 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Sets the snd category visible.
-   *
-   * @param visible the visible
-   * @param big the big
+   * 
+   * @param visible
+   *          the visible
+   * @param big
+   *          the big
    */
   public void setSndCategoryVisible(final boolean visible, final boolean big) {
     sndCategoryPanel.setVisible(visible);
@@ -341,9 +365,11 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Sets the tooltip.
-   *
-   * @param widget the widget
-   * @param title the title
+   * 
+   * @param widget
+   *          the widget
+   * @param title
+   *          the title
    */
   protected void setTooltip(final Widget widget, final String title) {
     Tooltip.to(widget, title);
@@ -351,9 +377,11 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Sets the trd category visible.
-   *
-   * @param visible the visible
-   * @param big the big
+   * 
+   * @param visible
+   *          the visible
+   * @param big
+   *          the big
    */
   public void setTrdCategoryVisible(final boolean visible, final boolean big) {
     trdCategoryPanel.setVisible(visible);

@@ -30,40 +30,42 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AppStartEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> {
 
   /**
-   * The Interface HasAppStartHandlers.
-   *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  public interface HasAppStartHandlers extends HasHandlers {
-    
-    /**
-     * Adds the app start handler.
-     *
-     * @param handler the handler
-     * @return the handler registration
-     */
-    HandlerRegistration addAppStartHandler(AppStartHandler handler);
-  }
-
-  /**
    * The Interface AppStartHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface AppStartHandler extends EventHandler {
-    
+
     /**
      * On app start.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onAppStart(AppStartEvent event);
+  }
+
+  /**
+   * The Interface HasAppStartHandlers.
+   * 
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
+  public interface HasAppStartHandlers extends HasHandlers {
+
+    /**
+     * Adds the app start handler.
+     * 
+     * @param handler
+     *          the handler
+     * @return the handler registration
+     */
+    HandlerRegistration addAppStartHandler(AppStartHandler handler);
   }
 
   /** The Constant TYPE. */
@@ -71,17 +73,19 @@ public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> {
 
   /**
    * Fire.
-   *
-   * @param source the source
-   * @param initData the init data
+   * 
+   * @param source
+   *          the source
+   * @param initData
+   *          the init data
    */
-  public static void fire(HasHandlers source, cc.kune.core.shared.dto.InitDataDTO initData) {
+  public static void fire(final HasHandlers source, final cc.kune.core.shared.dto.InitDataDTO initData) {
     source.fireEvent(new AppStartEvent(initData));
   }
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<AppStartHandler> getType() {
@@ -93,14 +97,43 @@ public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> {
 
   /**
    * Instantiates a new app start event.
-   *
-   * @param initData the init data
+   * 
+   * @param initData
+   *          the init data
    */
-  public AppStartEvent(cc.kune.core.shared.dto.InitDataDTO initData) {
+  public AppStartEvent(final cc.kune.core.shared.dto.InitDataDTO initData) {
     this.initData = initData;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
+   */
+  @Override
+  protected void dispatch(final AppStartHandler handler) {
+    handler.onAppStart(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(final Object other) {
+    if (other != null && other.getClass().equals(this.getClass())) {
+      final AppStartEvent o = (AppStartEvent) other;
+      return true && ((o.initData == null && this.initData == null) || (o.initData != null && o.initData.equals(this.initData)));
+    }
+    return false;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -110,34 +143,16 @@ public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> {
 
   /**
    * Gets the inits the data.
-   *
+   * 
    * @return the inits the data
    */
   public cc.kune.core.shared.dto.InitDataDTO getInitData() {
     return initData;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-   */
-  @Override
-  protected void dispatch(AppStartHandler handler) {
-    handler.onAppStart(this);
-  }
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object other) {
-    if (other != null && other.getClass().equals(this.getClass())) {
-      AppStartEvent o = (AppStartEvent) other;
-      return true && ((o.initData == null && this.initData == null) || (o.initData != null && o.initData.equals(this.initData)));
-    }
-    return false;
-  }
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -148,7 +163,9 @@ public class AppStartEvent extends GwtEvent<AppStartEvent.AppStartHandler> {
     return hashCode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

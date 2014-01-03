@@ -27,14 +27,14 @@ import com.google.gwt.inject.client.Ginjector;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface TrashGinjector.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface TrashGinjector extends Ginjector {
 
   /**
    * Gets the trash parts.
-   *
+   * 
    * @return the trash parts
    */
   TrashParts getTrashParts();

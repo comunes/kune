@@ -38,16 +38,17 @@ final public class StringW {
    * Quote a string so that it may be used in a regular expression without any
    * parts of the string being considered as a part of the regular expression's
    * control characters.
-   *
-   * @param str the str
+   * 
+   * @param str
+   *          the str
    * @return the string
    */
-  static public String quoteRegularExpression(String str) {
+  static public String quoteRegularExpression(final String str) {
     // replace ? + * / . ^ $ as long as they're not in character
     // class. so must be done by hand
-    char[] chrs = str.toCharArray();
-    int sz = chrs.length;
-    StringBuffer buffer = new StringBuffer(2 * sz);
+    final char[] chrs = str.toCharArray();
+    final int sz = chrs.length;
+    final StringBuffer buffer = new StringBuffer(2 * sz);
     for (int i = 0; i < sz; i++) {
       switch (chrs[i]) {
       case '[':
@@ -74,20 +75,24 @@ final public class StringW {
    * specified to forcibily truncate a string (in the case of an extremely long
    * word or such). All HTML/XML markup will be stripped from the string prior
    * to processing for truncation.
-   *
-   * @param str String the string to be truncated.
-   * @param lower int value of the lower limit.
-   * @param upper int value of the upper limit, -1 if no limit is desired. If the
-   * uppper limit is lower than the lower limit, it will be adjusted to
-   * be same as the lower limit.
-   * @param appendToEnd String to be appended to the end of the truncated string. This is
-   * appended ONLY if the string was indeed truncated. The append is
-   * does not count towards any lower/upper limits.
+   * 
+   * @param str
+   *          String the string to be truncated.
+   * @param lower
+   *          int value of the lower limit.
+   * @param upper
+   *          int value of the upper limit, -1 if no limit is desired. If the
+   *          uppper limit is lower than the lower limit, it will be adjusted to
+   *          be same as the lower limit.
+   * @param appendToEnd
+   *          String to be appended to the end of the truncated string. This is
+   *          appended ONLY if the string was indeed truncated. The append is
+   *          does not count towards any lower/upper limits.
    * @return the string
    * @author timster@mac.com
    */
   // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
-  public static String truncateNicely(String str, int lower, int upper, String appendToEnd) {
+  public static String truncateNicely(String str, final int lower, int upper, final String appendToEnd) {
     // strip markup from the string
     str = XmlW.removeXml(str);
 
@@ -131,11 +136,12 @@ final public class StringW {
    * Create a word-wrapped version of a String. Wrap at 80 characters and use
    * newlines as the delimiter. If a word is over 80 characters long use a -
    * sign to split it.
-   *
-   * @param str the str
+   * 
+   * @param str
+   *          the str
    * @return the string
    */
-  static public String wordWrap(String str) {
+  static public String wordWrap(final String str) {
     return wordWrap(str, 80, "\n", "-", true);
   }
 
@@ -143,12 +149,14 @@ final public class StringW {
    * Create a word-wrapped version of a String. Wrap at a specified width and
    * use newlines as the delimiter. If a word is over the width in lenght use a
    * - sign to split it.
-   *
-   * @param str the str
-   * @param width the width
+   * 
+   * @param str
+   *          the str
+   * @param width
+   *          the width
    * @return the string
    */
-  static public String wordWrap(String str, int width) {
+  static public String wordWrap(final String str, final int width) {
     return wordWrap(str, width, "\n", "-", true);
   }
 
@@ -167,7 +175,7 @@ final public class StringW {
    * @return String that has been word wrapped (with the delim inside width
    *         boundaries)
    */
-  static public String wordWrap(String str, int width, String delim, String split) {
+  static public String wordWrap(final String str, final int width, final String delim, final String split) {
     return wordWrap(str, width, delim, split, true);
   }
 
@@ -189,8 +197,9 @@ final public class StringW {
    * @return String that has been word wrapped
    */
   // @PMD:REVIEWED:AvoidReassigningParameters: by vjrj on 21/05/09 14:13
-  static public String wordWrap(String str, int width, String delim, String split, boolean delimInside) {
-    int sz = str.length();
+  static public String wordWrap(final String str, int width, final String delim, final String split,
+      final boolean delimInside) {
+    final int sz = str.length();
 
     // System.err.println( ">>>> inside: " + delimInside + " sz : " + sz );
 
@@ -198,7 +207,7 @@ final public class StringW {
     width++;
 
     // our best guess as to an initial size
-    StringBuffer buffer = new StringBuffer(sz / width * delim.length() + sz);
+    final StringBuffer buffer = new StringBuffer(sz / width * delim.length() + sz);
 
     // every line might include a delim on the end
     // System.err.println( "width before: "+ width );
@@ -253,7 +262,7 @@ final public class StringW {
       idx = -1;
 
       // figure out where the last space is
-      char[] chrs = substr.toCharArray();
+      final char[] chrs = substr.toCharArray();
       for (int j = width; j > 0; j--) {
         if (Character.isWhitespace(chrs[j - 1])) {
           idx = j;

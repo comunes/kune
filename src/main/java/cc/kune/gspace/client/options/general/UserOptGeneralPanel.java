@@ -44,72 +44,76 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptGeneralPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOptGeneralView {
 
   /** The Constant DAILY_TYPE_ID. */
   public static final String DAILY_TYPE_ID = "k-ngp-type_daily";
-  
+
   /** The Constant EMAIL_FIELD. */
   public static final String EMAIL_FIELD = "k-ngp-emial";
-  
+
   /** The Constant HOURLY_TYPE_ID. */
   public static final String HOURLY_TYPE_ID = "k-ngp-type_hourly";
-  
+
   /** The Constant IMMEDIATE_TYPE_ID. */
   public static final String IMMEDIATE_TYPE_ID = "k-ngp-type_immedi";
-  
+
   /** The Constant LONG_NAME_FIELD. */
   public static final String LONG_NAME_FIELD = "k-uogp-lname";
-  
+
   /** The Constant NO_TYPE_ID. */
   public static final String NO_TYPE_ID = "k-ngp-type_no";
-  
+
   /** The Constant TYPEOFEMAILNOTIF_FIELD. */
   public static final String TYPEOFEMAILNOTIF_FIELD = "k-ngp-type_of_email_notif";
 
   /** The daily radio. */
   private final Radio dailyRadio;
-  
+
   /** The email. */
   private final TextField<String> email;
-  
+
   /** The email notif type field set. */
   private final FieldSet emailNotifTypeFieldSet;
-  
+
   /** The hourly radio. */
   private final Radio hourlyRadio;
-  
+
   /** The immediate radio. */
   private final Radio immediateRadio;
-  
+
   /** The lang selector. */
   private final LanguageSelectorPanel langSelector;
-  
+
   /** The long name. */
   private final TextField<String> longName;
-  
+
   /** The no radio. */
   private final Radio noRadio;
-  
+
   /** The not verif label adapter. */
   private final AdapterField notVerifLabelAdapter;
-  
+
   /** The resend email verif adapter. */
   private final AdapterField resendEmailVerifAdapter;
-  
+
   /** The resend email verif btn. */
   private final Button resendEmailVerifBtn;
 
   /**
    * Instantiates a new user opt general panel.
-   *
-   * @param i18n the i18n
-   * @param res the res
-   * @param maskWidget the mask widget
-   * @param langSelector the lang selector
+   * 
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param maskWidget
+   *          the mask widget
+   * @param langSelector
+   *          the lang selector
    */
   @Inject
   public UserOptGeneralPanel(final I18nTranslationService i18n, final IconicResources res,
@@ -178,7 +182,9 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     add(resendEmailVerifAdapter);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.general.UserOptGeneralView#getEmail()
    */
   @Override
@@ -186,8 +192,11 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     return email.getValue();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.UserOptGeneralView#getEmailNotif()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.UserOptGeneralView#getEmailNotif()
    */
   @Override
   public EmailNotificationFrequency getEmailNotif() {
@@ -204,7 +213,9 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     return EmailNotificationFrequency.no;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.general.UserOptGeneralView#getLanguage()
    */
   @Override
@@ -212,7 +223,9 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     return langSelector.getLanguage();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.general.UserOptGeneralView#getLongName()
    */
   @Override
@@ -220,24 +233,36 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     return longName.getValue();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.UserOptGeneralView#getResendEmailVerif()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.UserOptGeneralView#getResendEmailVerif
+   * ()
    */
   @Override
   public HasClickHandlers getResendEmailVerif() {
     return resendEmailVerifBtn;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.UserOptGeneralView#setEmail(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.UserOptGeneralView#setEmail(java.
+   * lang.String)
    */
   @Override
   public void setEmail(final String email) {
     this.email.setValue(email);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.UserOptGeneralView#setEmailNotifChecked(cc.kune.core.shared.dto.EmailNotificationFrequency)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.UserOptGeneralView#setEmailNotifChecked
+   * (cc.kune.core.shared.dto.EmailNotificationFrequency)
    */
   @Override
   public void setEmailNotifChecked(final EmailNotificationFrequency freq) {
@@ -259,8 +284,12 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.UserOptGeneralView#setEmailVerified(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.UserOptGeneralView#setEmailVerified
+   * (boolean)
    */
   @Override
   public void setEmailVerified(final boolean verified) {
@@ -269,24 +298,35 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     emailNotifTypeFieldSet.setVisible(verified);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.UserOptGeneralView#setLanguage(cc.kune.core.shared.dto.I18nLanguageSimpleDTO)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.UserOptGeneralView#setLanguage(cc
+   * .kune.core.shared.dto.I18nLanguageSimpleDTO)
    */
   @Override
   public void setLanguage(final I18nLanguageSimpleDTO language) {
     langSelector.setLanguage(language);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.UserOptGeneralView#setLongName(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.UserOptGeneralView#setLongName(java
+   * .lang.String)
    */
   @Override
   public void setLongName(final String longName) {
     this.longName.setValue(longName);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.UserOptGeneralView#setResendEmailVerifEnabled(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.options.general.UserOptGeneralView#
+   * setResendEmailVerifEnabled(boolean)
    */
   @Override
   public void setResendEmailVerifEnabled(final boolean enabled) {

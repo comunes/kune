@@ -24,7 +24,7 @@ package cc.kune.core.client.registry;
 
 /**
  * The Class CanBeHomepageRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CanBeHomepageRegistry extends AbstractContentRegistry {

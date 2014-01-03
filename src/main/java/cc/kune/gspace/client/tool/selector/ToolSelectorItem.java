@@ -29,57 +29,61 @@ import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelecto
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ToolSelectorItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface ToolSelectorItem {
 
   /**
-   * Gets the visible for rol.
-   *
-   * @return the visible for rol
-   */
-  AccessRolDTO getVisibleForRol();
-
-  /**
    * Gets the tool short name.
-   *
+   * 
    * @return the tool short name
    */
   String getToolShortName();
 
   /**
    * Gets the view.
-   *
+   * 
    * @return the view
    */
   ToolSelectorItemView getView();
 
   /**
+   * Gets the visible for rol.
+   * 
+   * @return the visible for rol
+   */
+  AccessRolDTO getVisibleForRol();
+
+  /**
    * Sets the group short name.
-   *
-   * @param groupShortName the new group short name
+   * 
+   * @param groupShortName
+   *          the new group short name
    */
   void setGroupShortName(String groupShortName);
 
   /**
    * Sets the selected.
-   *
-   * @param selected the new selected
+   * 
+   * @param selected
+   *          the new selected
    */
   void setSelected(boolean selected);
 
   /**
    * Sets the token.
-   *
-   * @param token the new token
+   * 
+   * @param token
+   *          the new token
    */
   void setToken(StateToken token);
 
   /**
    * Sets the visible.
-   *
-   * @param visible the new visible
+   * 
+   * @param visible
+   *          the new visible
    */
   void setVisible(boolean visible);
 

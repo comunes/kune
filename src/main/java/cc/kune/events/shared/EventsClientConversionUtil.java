@@ -34,17 +34,19 @@ import com.bradrydzewski.gwt.calendar.client.Appointment;
 /**
  * The Class EventsConversionUtil is used to convert Appointments to Gadgets
  * properties and viceversa.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EventsClientConversionUtil {
 
   /**
    * To app.
-   *
-   * @param properties the properties
+   * 
+   * @param properties
+   *          the properties
    * @return the appointment
-   * @throws Exception the exception
+   * @throws Exception
+   *           the exception
    */
   public static Appointment toApp(final Map<String, String> properties) throws Exception {
     final Appointment app = new Appointment();
@@ -70,8 +72,9 @@ public class EventsClientConversionUtil {
 
   /**
    * To map.
-   *
-   * @param app the app
+   * 
+   * @param app
+   *          the app
    * @return the map
    */
   public static Map<String, String> toMap(final Appointment app) {

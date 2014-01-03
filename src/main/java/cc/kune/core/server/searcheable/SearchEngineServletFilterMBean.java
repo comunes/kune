@@ -26,78 +26,79 @@ import cc.kune.core.server.mbean.MBeanConstants;
 // TODO: Auto-generated Javadoc
 /**
  * MBean interface for JMX management of the {@link SearchEngineServletFilter}.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SearchEngineServletFilterMBean {
 
-    /** The Constant MBEAN_OBJECT_NAME. */
-    public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SearchEngineServletFilter";
+  /** The Constant MBEAN_OBJECT_NAME. */
+  public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SearchEngineServletFilter";
 
-    /**
-     * Enable or disable search functionality.
-     *
-     * @param enabled the new enabled
-     */
-    void setEnabled(boolean enabled);
+  /**
+   * Clear the htmlunit cache.
+   */
+  void clearCache();
 
-    /**
-     * Clear the htmlunit cache.
-     */
-    void clearCache();
+  /**
+   * Client close all windows (htmlunit).
+   */
+  void closeAllWindows();
 
-    /**
-     * Sets the executor thread size.
-     *
-     * @param size
-     *            the new executor thread size
-     */
-    void setExecutorThreadSize(int size);
+  /**
+   * Gets the cache max size.
+   * 
+   * @return the cache max size
+   */
+  int getCacheMaxSize();
 
-    /**
-     * Gets the cache size.
-     *
-     * @return the cache size
-     */
-    int getCacheSize();
+  /**
+   * Gets the cache size.
+   * 
+   * @return the cache size
+   */
+  int getCacheSize();
 
-    /**
-     * Sets the max cache size (maximum number of files in cache).
-     *
-     * @param size
-     *            the new cache size
-     */
-    void setCacheMaxSize(int size);
+  /**
+   * Gets the executor thread size.
+   * 
+   * @return the executor thread size
+   */
+  int getExecutorThreadSize();
 
-    /**
-     * Gets the executor thread size.
-     *
-     * @return the executor thread size
-     */
-    int getExecutorThreadSize();
+  /**
+   * Inits the web client (useful if htmlunit has some memory leak).
+   */
+  void initWebClient();
 
-    /**
-     * Inits the web client (useful if htmlunit has some memory leak).
-     */
-    void initWebClient();
+  /**
+   * Checks if is enabled.
+   * 
+   * @return true, if is enable
+   */
+  boolean isEnabled();
 
-    /**
-     * Gets the cache max size.
-     *
-     * @return the cache max size
-     */
-    int getCacheMaxSize();
+  /**
+   * Sets the max cache size (maximum number of files in cache).
+   * 
+   * @param size
+   *          the new cache size
+   */
+  void setCacheMaxSize(int size);
 
-    /**
-     * Client close all windows (htmlunit).
-     */
-    void closeAllWindows();
+  /**
+   * Enable or disable search functionality.
+   * 
+   * @param enabled
+   *          the new enabled
+   */
+  void setEnabled(boolean enabled);
 
-    /**
-     * Checks if is enabled.
-     *
-     * @return true, if is enable
-     */
-    boolean isEnabled();
+  /**
+   * Sets the executor thread size.
+   * 
+   * @param size
+   *          the new executor thread size
+   */
+  void setExecutorThreadSize(int size);
 
 }

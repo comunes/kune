@@ -32,16 +32,18 @@ import cc.kune.core.server.utils.FormattedString;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FormattedStringTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FormattedStringTest {
 
   /**
    * Check copy.
-   *
-   * @param orig the orig
-   * @param copy the copy
+   * 
+   * @param orig
+   *          the orig
+   * @param copy
+   *          the copy
    */
   private void checkCopy(final AbstractFormattedString orig, final AbstractFormattedString copy) {
     copy.setTemplate("Other");

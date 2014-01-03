@@ -75,8 +75,8 @@ public class SessionDefault implements Session {
   private final EventBus eventBus;
   private InitDataDTO initData;
 
-  private boolean isEmbedded = false;
   private Boolean isDev;
+  private boolean isEmbedded = false;
   /** The languages array. */
   private Object[][] languagesArray;
   private Object[][] timezonesArray;
@@ -432,7 +432,8 @@ public class SessionDefault implements Session {
     return currentState == null ? false : currentState.getGroup().isPersonal();
   }
 
- public boolean isEmbedded() {
+  @Override
+  public boolean isEmbedded() {
     return isEmbedded;
   }
 
@@ -658,6 +659,7 @@ public class SessionDefault implements Session {
     eventBus.fireEvent(new UserSignInOrSignOutEvent(isLogged()));
   }
 
+  @Override
   public void setEmbedded(final boolean isEmbedded) {
     this.isEmbedded = isEmbedded;
   }

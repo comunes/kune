@@ -37,30 +37,34 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SiteInvitationAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SiteInvitationAction extends AbstractInvitateAction {
 
   /** The Constant CANCEL_ID. */
   public static final String CANCEL_ID = "k-site-inv-cancel-id";
-  
+
   /** The Constant DIALOG_ID. */
   public static final String DIALOG_ID = "k-site-inv-diag-id";
-  
+
   /** The Constant INVITE_ID. */
   public static final String INVITE_ID = "k-site-inv-invite-id";
-  
+
   /** The Constant TEXTBOX_ID. */
   public static final String TEXTBOX_ID = "k-site-inv-textbox-id";
 
   /**
    * Instantiates a new site invitation action.
-   *
-   * @param stateManager the state manager
-   * @param session the session
-   * @param rightsManager the rights manager
-   * @param invitationService the invitation service
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param rightsManager
+   *          the rights manager
+   * @param invitationService
+   *          the invitation service
    */
   @Inject
   public SiteInvitationAction(final StateManager stateManager, final Session session,

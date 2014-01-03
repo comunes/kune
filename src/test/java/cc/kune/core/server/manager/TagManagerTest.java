@@ -38,22 +38,22 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagManagerTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TagManagerTest extends PersistenceTest {
-  
+
   /** The content manager. */
   @Inject
   ContentManager contentManager;
-  
+
   /** The tag. */
   private Tag tag;
-  
+
   /** The tag finder. */
   @Inject
   TagFinder tagFinder;
-  
+
   /** The tag manager. */
   @Inject
   TagManager tagManager;

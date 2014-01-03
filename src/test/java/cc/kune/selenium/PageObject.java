@@ -45,7 +45,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PageObject.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class PageObject {
@@ -60,8 +60,9 @@ public abstract class PageObject {
 
   /**
    * Clear field.
-   *
-   * @param elem the elem
+   * 
+   * @param elem
+   *          the elem
    */
   protected void clearField(final WebElement elem) {
     elem.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
@@ -69,8 +70,9 @@ public abstract class PageObject {
 
   /**
    * Find element.
-   *
-   * @param by the by
+   * 
+   * @param by
+   *          the by
    * @return the web element
    */
   public WebElement findElement(final By by) {
@@ -79,8 +81,9 @@ public abstract class PageObject {
 
   /**
    * Find elements.
-   *
-   * @param by the by
+   * 
+   * @param by
+   *          the by
    * @return the list
    */
   public List<WebElement> findElements(final By by) {
@@ -89,8 +92,9 @@ public abstract class PageObject {
 
   /**
    * Gets the by id.
-   *
-   * @param id the id
+   * 
+   * @param id
+   *          the id
    * @return the by id
    */
   public WebElement getById(final String id) {
@@ -99,7 +103,7 @@ public abstract class PageObject {
 
   /**
    * Gets the current url.
-   *
+   * 
    * @return the current url
    */
   public String getCurrentUrl() {
@@ -108,7 +112,7 @@ public abstract class PageObject {
 
   /**
    * Gets the title.
-   *
+   * 
    * @return the title
    */
   public String getTitle() {
@@ -117,7 +121,7 @@ public abstract class PageObject {
 
   /**
    * Gets the web driver.
-   *
+   * 
    * @return the web driver
    */
   protected WebDriver getWebDriver() {
@@ -126,7 +130,7 @@ public abstract class PageObject {
 
   /**
    * Gets the window handle.
-   *
+   * 
    * @return the window handle
    */
   public String getWindowHandle() {
@@ -135,7 +139,7 @@ public abstract class PageObject {
 
   /**
    * Gets the window handles.
-   *
+   * 
    * @return the window handles
    */
   public Set<String> getWindowHandles() {
@@ -144,8 +148,9 @@ public abstract class PageObject {
 
   /**
    * Hightlight.
-   *
-   * @param element the element
+   * 
+   * @param element
+   *          the element
    */
   public void hightlight(final WebElement element) {
     SeleniumUtils.hightlight(element, webdriver);
@@ -160,8 +165,9 @@ public abstract class PageObject {
 
   /**
    * Checks if is element present.
-   *
-   * @param id the id
+   * 
+   * @param id
+   *          the id
    * @return true, if is element present
    */
   public boolean isElementPresent(final String id) {
@@ -172,8 +178,9 @@ public abstract class PageObject {
 
   /**
    * Checks if is present.
-   *
-   * @param element the element
+   * 
+   * @param element
+   *          the element
    * @return true, if is present
    */
   public boolean isPresent(final WebElement element) {
@@ -188,8 +195,9 @@ public abstract class PageObject {
 
   /**
    * Checks if is text present.
-   *
-   * @param text the text
+   * 
+   * @param text
+   *          the text
    * @return true, if is text present
    */
   public boolean isTextPresent(final String text) {
@@ -198,7 +206,7 @@ public abstract class PageObject {
 
   /**
    * Manage.
-   *
+   * 
    * @return the options
    */
   public Options manage() {
@@ -207,7 +215,7 @@ public abstract class PageObject {
 
   /**
    * Navigate.
-   *
+   * 
    * @return the navigation
    */
   public Navigation navigate() {
@@ -223,8 +231,9 @@ public abstract class PageObject {
 
   /**
    * Show tooltip.
-   *
-   * @param element the element
+   * 
+   * @param element
+   *          the element
    */
   public void showTooltip(final WebElement element) {
     SeleniumUtils.showTooltip(webdriver, element);
@@ -232,8 +241,9 @@ public abstract class PageObject {
 
   /**
    * Sleep.
-   *
-   * @param milliseconds the milliseconds
+   * 
+   * @param milliseconds
+   *          the milliseconds
    */
   public void sleep(final int milliseconds) {
     SeleniumUtils.sleep(milliseconds);
@@ -241,7 +251,7 @@ public abstract class PageObject {
 
   /**
    * Switch to.
-   *
+   * 
    * @return the target locator
    */
   public TargetLocator switchTo() {
@@ -250,8 +260,9 @@ public abstract class PageObject {
 
   /**
    * Visibility of element located.
-   *
-   * @param locator the locator
+   * 
+   * @param locator
+   *          the locator
    * @return the expected condition
    */
   public ExpectedCondition<WebElement> visibilityOfElementLocated(final By locator) {
@@ -271,9 +282,11 @@ public abstract class PageObject {
    * Thanks to:
    * http://groups.google.com/group/webdriver/browse_frm/thread/6e705242
    * cc6d75ed/f5f8dca438397254?lnk=gst#f5f8dca438397254
-   *
-   * @param waitForWhat the wait for what
-   * @param runnable the runnable
+   * 
+   * @param waitForWhat
+   *          the wait for what
+   * @param runnable
+   *          the runnable
    */
   protected void waitFor(final String waitForWhat, final Runnable runnable) {
     int i = 0;
@@ -313,8 +326,9 @@ public abstract class PageObject {
 
   /**
    * Wait for.
-   *
-   * @param element the element
+   * 
+   * @param element
+   *          the element
    */
   public void waitFor(final WebElement element) {
     final String id = element.getAttribute("id");
@@ -329,9 +343,11 @@ public abstract class PageObject {
 
   /**
    * Wait for.
-   *
-   * @param element the element
-   * @param text the text
+   * 
+   * @param element
+   *          the element
+   * @param text
+   *          the text
    */
   protected void waitFor(final WebElement element, final String text) {
     // LOG.info("WAIT FOR: " + text);
@@ -347,8 +363,9 @@ public abstract class PageObject {
 
   /**
    * Wait for id.
-   *
-   * @param id the id
+   * 
+   * @param id
+   *          the id
    */
   protected void waitForId(final String id) {
     // LOG.info("WAIT FOR: " + id);
@@ -362,9 +379,11 @@ public abstract class PageObject {
 
   /**
    * Wait for value.
-   *
-   * @param element the element
-   * @param text the text
+   * 
+   * @param element
+   *          the element
+   * @param text
+   *          the text
    */
   protected void waitForValue(final WebElement element, final String text) {
     // LOG.info("WAIT FOR: " + text);

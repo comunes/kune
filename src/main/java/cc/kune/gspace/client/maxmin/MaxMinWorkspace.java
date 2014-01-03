@@ -25,7 +25,7 @@ package cc.kune.gspace.client.maxmin;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface MaxMinWorkspace.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface MaxMinWorkspace {

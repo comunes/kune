@@ -29,46 +29,28 @@ import cc.kune.domain.Tag;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Link.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class Link {
-  
-  /** The short name. */
-  private String shortName;
-  
-  /** The long name. */
-  private String longName;
-  
+
   /** The icon url. */
   private String iconUrl;
-  
+
   /** The link. */
   private String link;
-  
+
+  /** The long name. */
+  private String longName;
+
   /** The rate. */
   private Double rate;
-  
+
+  /** The short name. */
+  private String shortName;
+
   /** The tags. */
   private List<Tag> tags;
-
-  /**
-   * Gets the rate.
-   *
-   * @return the rate
-   */
-  public Double getRate() {
-    return rate;
-  }
-
-  /**
-   * Sets the rate.
-   *
-   * @param rate the new rate
-   */
-  public void setRate(final Double rate) {
-    this.rate = rate;
-  }
 
   /**
    * Instantiates a new link.
@@ -79,11 +61,15 @@ public class Link {
 
   /**
    * Instantiates a new link.
-   *
-   * @param shortName the short name
-   * @param longName the long name
-   * @param iconUrl the icon url
-   * @param link the link
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
+   * @param iconUrl
+   *          the icon url
+   * @param link
+   *          the link
    */
   public Link(final String shortName, final String longName, final String iconUrl, final String link) {
     this.shortName = shortName;
@@ -93,62 +79,8 @@ public class Link {
   }
 
   /**
-   * Gets the short name.
-   *
-   * @return the short name
-   */
-  public String getShortName() {
-    return shortName;
-  }
-
-  /**
-   * Sets the short name.
-   *
-   * @param shortName the new short name
-   */
-  public void setShortName(final String shortName) {
-    this.shortName = shortName;
-  }
-
-  /**
-   * Gets the link.
-   *
-   * @return the link
-   */
-  public String getLink() {
-    return link;
-  }
-
-  /**
-   * Sets the link.
-   *
-   * @param link the new link
-   */
-  public void setLink(final String link) {
-    this.link = link;
-  }
-
-  /**
-   * Gets the long name.
-   *
-   * @return the long name
-   */
-  public String getLongName() {
-    return longName;
-  }
-
-  /**
-   * Sets the long name.
-   *
-   * @param longName the new long name
-   */
-  public void setLongName(final String longName) {
-    this.longName = longName;
-  }
-
-  /**
    * Gets the icon url.
-   *
+   * 
    * @return the icon url
    */
   public String getIconUrl() {
@@ -156,17 +88,44 @@ public class Link {
   }
 
   /**
-   * Sets the icon url.
-   *
-   * @param iconUrl the new icon url
+   * Gets the link.
+   * 
+   * @return the link
    */
-  public void setIconUrl(final String iconUrl) {
-    this.iconUrl = iconUrl;
+  public String getLink() {
+    return link;
+  }
+
+  /**
+   * Gets the long name.
+   * 
+   * @return the long name
+   */
+  public String getLongName() {
+    return longName;
+  }
+
+  /**
+   * Gets the rate.
+   * 
+   * @return the rate
+   */
+  public Double getRate() {
+    return rate;
+  }
+
+  /**
+   * Gets the short name.
+   * 
+   * @return the short name
+   */
+  public String getShortName() {
+    return shortName;
   }
 
   /**
    * Gets the tags.
-   *
+   * 
    * @return the tags
    */
   public List<Tag> getTags() {
@@ -174,9 +133,60 @@ public class Link {
   }
 
   /**
+   * Sets the icon url.
+   * 
+   * @param iconUrl
+   *          the new icon url
+   */
+  public void setIconUrl(final String iconUrl) {
+    this.iconUrl = iconUrl;
+  }
+
+  /**
+   * Sets the link.
+   * 
+   * @param link
+   *          the new link
+   */
+  public void setLink(final String link) {
+    this.link = link;
+  }
+
+  /**
+   * Sets the long name.
+   * 
+   * @param longName
+   *          the new long name
+   */
+  public void setLongName(final String longName) {
+    this.longName = longName;
+  }
+
+  /**
+   * Sets the rate.
+   * 
+   * @param rate
+   *          the new rate
+   */
+  public void setRate(final Double rate) {
+    this.rate = rate;
+  }
+
+  /**
+   * Sets the short name.
+   * 
+   * @param shortName
+   *          the new short name
+   */
+  public void setShortName(final String shortName) {
+    this.shortName = shortName;
+  }
+
+  /**
    * Sets the tags.
-   *
-   * @param tags the new tags
+   * 
+   * @param tags
+   *          the new tags
    */
   public void setTags(final List<Tag> tags) {
     this.tags = tags;

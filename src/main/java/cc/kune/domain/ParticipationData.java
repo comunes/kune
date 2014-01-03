@@ -27,14 +27,14 @@ import java.util.Set;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ParticipationData.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ParticipationData {
-  
+
   /** The groups is admin. */
   private Set<Group> groupsIsAdmin;
-  
+
   /** The groups is collab. */
   private Set<Group> groupsIsCollab;
 
@@ -47,9 +47,11 @@ public class ParticipationData {
 
   /**
    * Instantiates a new participation data.
-   *
-   * @param groupsIsAdmin the groups is admin
-   * @param groupsIsCollab the groups is collab
+   * 
+   * @param groupsIsAdmin
+   *          the groups is admin
+   * @param groupsIsCollab
+   *          the groups is collab
    */
   public ParticipationData(final Set<Group> groupsIsAdmin, final Set<Group> groupsIsCollab) {
     this.groupsIsAdmin = groupsIsAdmin;
@@ -58,7 +60,7 @@ public class ParticipationData {
 
   /**
    * Gets the groups is admin.
-   *
+   * 
    * @return the groups is admin
    */
   public Set<Group> getGroupsIsAdmin() {
@@ -67,7 +69,7 @@ public class ParticipationData {
 
   /**
    * Gets the groups is collab.
-   *
+   * 
    * @return the groups is collab
    */
   public Set<Group> getGroupsIsCollab() {
@@ -76,8 +78,9 @@ public class ParticipationData {
 
   /**
    * Sets the groups is admin.
-   *
-   * @param groupsIsAdmin the new groups is admin
+   * 
+   * @param groupsIsAdmin
+   *          the new groups is admin
    */
   public void setGroupsIsAdmin(final Set<Group> groupsIsAdmin) {
     this.groupsIsAdmin = groupsIsAdmin;
@@ -85,8 +88,9 @@ public class ParticipationData {
 
   /**
    * Sets the groups is collab.
-   *
-   * @param groupsIsCollab the new groups is collab
+   * 
+   * @param groupsIsCollab
+   *          the new groups is collab
    */
   public void setGroupsIsCollab(final Set<Group> groupsIsCollab) {
     this.groupsIsCollab = groupsIsCollab;

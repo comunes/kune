@@ -32,7 +32,7 @@ import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
 /**
  * The Class WaveDestinationProvider. A WaveRef is used to get the participants
  * and to send notifications to them
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveDestinationProvider implements DestinationProvider {
@@ -48,9 +48,11 @@ public class WaveDestinationProvider implements DestinationProvider {
 
   /**
    * Instantiates a new wave destination provider.
-   *
-   * @param ref the ref
-   * @param author the author
+   * 
+   * @param ref
+   *          the ref
+   * @param author
+   *          the author
    */
   public WaveDestinationProvider(final WaveRef ref, final String author) {
     this.ref = ref;

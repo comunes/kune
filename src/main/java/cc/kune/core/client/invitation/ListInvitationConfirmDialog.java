@@ -29,14 +29,14 @@ import cc.kune.core.client.auth.UserFieldFactory;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ListInvitationConfirmDialog.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ListInvitationConfirmDialog extends AbstractInvitationConfirmDialog {
-  
+
   /**
    * The Class Builder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class Builder extends AbstractInvitationConfirmDialog.Builder {
@@ -46,12 +46,17 @@ public class ListInvitationConfirmDialog extends AbstractInvitationConfirmDialog
 
     /**
      * Instantiates a new builder.
-     *
-     * @param redirect the redirect
-     * @param i18n the i18n
-     * @param userWhoInvites the user who invites
-     * @param listShortName the list short name
-     * @param groupLongName the group long name
+     * 
+     * @param redirect
+     *          the redirect
+     * @param i18n
+     *          the i18n
+     * @param userWhoInvites
+     *          the user who invites
+     * @param listShortName
+     *          the list short name
+     * @param groupLongName
+     *          the group long name
      */
     public Builder(final String redirect, final I18nTranslationService i18n,
         final String userWhoInvites, final String listShortName, final String groupLongName) {
@@ -69,8 +74,9 @@ public class ListInvitationConfirmDialog extends AbstractInvitationConfirmDialog
 
   /**
    * Instantiates a new list invitation confirm dialog.
-   *
-   * @param builder the builder
+   * 
+   * @param builder
+   *          the builder
    */
   protected ListInvitationConfirmDialog(final ListInvitationConfirmDialog.Builder builder) {
     super(builder);

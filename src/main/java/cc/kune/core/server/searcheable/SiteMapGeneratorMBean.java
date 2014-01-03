@@ -26,7 +26,7 @@ import cc.kune.core.server.mbean.MBeanConstants;
 // TODO: Auto-generated Javadoc
 /**
  * MBean interface for JMX management of the {@link SitemapGenerator}.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SiteMapGeneratorMBean {

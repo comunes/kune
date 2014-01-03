@@ -27,14 +27,14 @@ import cc.kune.common.client.actions.ActionStyles;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SNActionStyles.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SNActionStyles extends ActionStyles {
 
   /** The Constant SN_OPTIONS_STYLES. */
   public static final String SN_OPTIONS_STYLES = "k-sn-options-menu, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor, k-btn-min";
-  
+
   /** The Constant SN_OPTIONS_STYLES_NEWBIE. */
   public static final String SN_OPTIONS_STYLES_NEWBIE = MENU_BTN_STYLE_LEFT
       + ", k-sn-options-newbie-btn";

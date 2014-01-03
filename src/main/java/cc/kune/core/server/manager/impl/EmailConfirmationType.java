@@ -26,14 +26,14 @@ package cc.kune.core.server.manager.impl;
 /**
  * The Enum EmailConfirmationType is used internally to differentiate several
  * types of email confirmation/verification.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum EmailConfirmationType {
-  
+
   /** The email verification. */
-  emailVerification, 
- /** The password reset. */
- passwordReset
+  emailVerification,
+  /** The password reset. */
+  passwordReset
 
 }

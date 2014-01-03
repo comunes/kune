@@ -31,17 +31,20 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DelFolderMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DelFolderMenuItem extends DelContainerForEditorsMenuItem {
 
   /**
    * Instantiates a new del folder menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
    */
   @Inject
   public DelFolderMenuItem(final I18nTranslationService i18n, final DelContainerForEditorAction action,

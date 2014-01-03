@@ -45,30 +45,37 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSNPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The no buddies. */
   private final Label noBuddies;
-  
+
   /** The no public. */
   private final Label noPublic;
 
   /**
    * Instantiates a new user sn panel.
-   *
-   * @param i18n the i18n
-   * @param guiProvider the gui provider
-   * @param armor the armor
-   * @param avatarDecorator the avatar decorator
-   * @param dragController the drag controller
-   * @param notDrop the not drop
-   * @param lastConnectedManager the last connected manager
+   * 
+   * @param i18n
+   *          the i18n
+   * @param guiProvider
+   *          the gui provider
+   * @param armor
+   *          the armor
+   * @param avatarDecorator
+   *          the avatar decorator
+   * @param dragController
+   *          the drag controller
+   * @param notDrop
+   *          the not drop
+   * @param lastConnectedManager
+   *          the last connected manager
    */
   @Inject
   public UserSNPanel(final I18nTranslationService i18n, final GuiProvider guiProvider,
@@ -103,8 +110,14 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     notDrop.register(trdCategoryScroll);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#addBuddie(cc.kune.core.shared.dto.UserSimpleDTO, java.lang.String, java.lang.String, java.lang.String, cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sn.UserSNPresenter.UserSNView#addBuddie(cc.kune.core
+   * .shared.dto.UserSimpleDTO, java.lang.String, java.lang.String,
+   * java.lang.String,
+   * cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection, boolean)
    */
   @Override
   public void addBuddie(final UserSimpleDTO user, final String avatarUrl, final String tooltip,
@@ -114,8 +127,14 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     firstCategoryFlow.add((Widget) decorateAvatarWithXmppStatus(user.getShortName(), thumb));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#addParticipation(cc.kune.core.shared.dto.GroupDTO, java.lang.String, java.lang.String, java.lang.String, cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sn.UserSNPresenter.UserSNView#addParticipation(cc.kune
+   * .core.shared.dto.GroupDTO, java.lang.String, java.lang.String,
+   * java.lang.String,
+   * cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection, boolean)
    */
   @Override
   public void addParticipation(final GroupDTO group, final String avatarUrl, final String tooltip,
@@ -124,8 +143,12 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
         avatarUrl, tooltip, tooltipTitle, menu, group.getStateToken(), dragable));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#addTextToBuddieList(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sn.UserSNPresenter.UserSNView#addTextToBuddieList(java
+   * .lang.String)
    */
   @Override
   public void addTextToBuddieList(final String text) {
@@ -134,7 +157,9 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     firstCategoryFlow.add(label);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#setBuddiesCount(int)
    */
   @Override
@@ -143,15 +168,21 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     firstCategoryLabel.setText(i18n.t("Buddies"));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#setBuddiesVisible(boolean, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sn.UserSNPresenter.UserSNView#setBuddiesVisible(boolean
+   * , boolean)
    */
   @Override
   public void setBuddiesVisible(final boolean visible, final boolean areMany) {
     super.setFirstCategoryVisible(visible, areMany);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#setNoBuddies()
    */
   @Override
@@ -161,23 +192,33 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     super.setFirstCategoryVisible(true, true);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#setParticipationCount(int)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sn.UserSNPresenter.UserSNView#setParticipationCount
+   * (int)
    */
   @Override
   public void setParticipationCount(final int count) {
     sndCategoryCount.setText(countAsString(count));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#setParticipationVisible(boolean, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sn.UserSNPresenter.UserSNView#setParticipationVisible
+   * (boolean, boolean)
    */
   @Override
   public void setParticipationVisible(final boolean visible, final boolean areMany) {
     super.setSndCategoryVisible(visible, areMany);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#setVisible(boolean)
    */
   @Override
@@ -187,14 +228,17 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /**
    * Sets the visible impl.
-   *
-   * @param visible the new visible impl
+   * 
+   * @param visible
+   *          the new visible impl
    */
   private void setVisibleImpl(final boolean visible) {
     mainPanel.setVisible(visible);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#showBuddies()
    */
   @Override
@@ -202,8 +246,11 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     deck.showWidget(2);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#showBuddiesNotPublic()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sn.UserSNPresenter.UserSNView#showBuddiesNotPublic()
    */
   @Override
   public void showBuddiesNotPublic() {

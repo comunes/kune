@@ -29,7 +29,7 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityOptGeneralView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptGeneralView extends EntityOptionsTabView {
@@ -41,14 +41,14 @@ public interface EntityOptGeneralView extends EntityOptionsTabView {
 
   /**
    * Checks if is rendered.
-   *
+   * 
    * @return true, if is rendered
    */
   boolean isRendered();
 
   /**
    * Checks if is valid.
-   *
+   * 
    * @return true, if is valid
    */
   boolean isValid();
@@ -59,9 +59,15 @@ public interface EntityOptGeneralView extends EntityOptionsTabView {
   void mask();
 
   /**
+   * Reset.
+   */
+  void reset();
+
+  /**
    * Sets the change handler.
-   *
-   * @param changeHandler the new change handler
+   * 
+   * @param changeHandler
+   *          the new change handler
    */
   void setChangeHandler(ChangeHandler changeHandler);
 
@@ -69,9 +75,4 @@ public interface EntityOptGeneralView extends EntityOptionsTabView {
    * Unmask.
    */
   void unmask();
-
-  /**
-   * Reset.
-   */
-  void reset();
 }

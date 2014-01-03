@@ -30,7 +30,7 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkChangedEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetworkChangedEvent extends
@@ -38,15 +38,16 @@ public class SocialNetworkChangedEvent extends
 
   /**
    * The Interface HasSocialNetworkChangedHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasSocialNetworkChangedHandlers extends HasHandlers {
-    
+
     /**
      * Adds the social network changed handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addSocialNetworkChangedHandler(SocialNetworkChangedHandler handler);
@@ -54,15 +55,16 @@ public class SocialNetworkChangedEvent extends
 
   /**
    * The Interface SocialNetworkChangedHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SocialNetworkChangedHandler extends EventHandler {
-    
+
     /**
      * On social network changed.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onSocialNetworkChanged(SocialNetworkChangedEvent event);
   }
@@ -72,17 +74,19 @@ public class SocialNetworkChangedEvent extends
 
   /**
    * Fire.
-   *
-   * @param source the source
-   * @param state the state
+   * 
+   * @param source
+   *          the source
+   * @param state
+   *          the state
    */
-  public static void fire(HasHandlers source, cc.kune.core.shared.dto.StateAbstractDTO state) {
+  public static void fire(final HasHandlers source, final cc.kune.core.shared.dto.StateAbstractDTO state) {
     source.fireEvent(new SocialNetworkChangedEvent(state));
   }
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<SocialNetworkChangedHandler> getType() {
@@ -94,21 +98,63 @@ public class SocialNetworkChangedEvent extends
 
   /**
    * Instantiates a new social network changed event.
-   *
-   * @param state the state
-   */
-  public SocialNetworkChangedEvent(cc.kune.core.shared.dto.StateAbstractDTO state) {
-    this.state = state;
-  }
-
-  /**
-   * Instantiates a new social network changed event.
    */
   protected SocialNetworkChangedEvent() {
     // Possibly for serialization.
   }
 
-  /* (non-Javadoc)
+  /**
+   * Instantiates a new social network changed event.
+   * 
+   * @param state
+   *          the state
+   */
+  public SocialNetworkChangedEvent(final cc.kune.core.shared.dto.StateAbstractDTO state) {
+    this.state = state;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
+   */
+  @Override
+  protected void dispatch(final SocialNetworkChangedHandler handler) {
+    handler.onSocialNetworkChanged(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final SocialNetworkChangedEvent other = (SocialNetworkChangedEvent) obj;
+    if (state == null) {
+      if (other.state != null) {
+        return false;
+      }
+    } else if (!state.equals(other.state)) {
+      return false;
+    }
+    return true;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -118,42 +164,16 @@ public class SocialNetworkChangedEvent extends
 
   /**
    * Gets the state.
-   *
+   * 
    * @return the state
    */
   public cc.kune.core.shared.dto.StateAbstractDTO getState() {
     return state;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-   */
-  @Override
-  protected void dispatch(SocialNetworkChangedHandler handler) {
-    handler.onSocialNetworkChanged(this);
-  }
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    SocialNetworkChangedEvent other = (SocialNetworkChangedEvent) obj;
-    if (state == null) {
-      if (other.state != null)
-        return false;
-    } else if (!state.equals(other.state))
-      return false;
-    return true;
-  }
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -163,7 +183,9 @@ public class SocialNetworkChangedEvent extends
     return hashCode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

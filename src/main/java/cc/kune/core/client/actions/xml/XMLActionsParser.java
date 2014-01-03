@@ -54,53 +54,62 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class XMLActionsParser.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class XMLActionsParser {
-  
+
   /** The Constant SEP. */
   private static final String SEP = "»";
 
   /** The action registry. */
   private final ActionRegistryByType actionRegistry;
-  
+
   /** The content service. */
   private final Provider<ContentServiceAsync> contentService;
-  
+
   /** The content viewer. */
   private final ContentViewerPresenter contentViewer;
-  
+
   /** The err handler. */
   private final ErrorHandler errHandler;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The new menus registry. */
   private final NewMenusForTypeIdsRegistry newMenusRegistry;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
-  
+
   /** The submenus. */
   private final HashMap<String, SubMenuDescriptor> submenus;
 
   /**
    * Instantiates a new xML actions parser.
-   *
-   * @param errHandler the err handler
-   * @param contentViewer the content viewer
-   * @param actionRegistry the action registry
-   * @param contentService the content service
-   * @param session the session
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param newMenusRegistry the new menus registry
-   * @param services the services
+   * 
+   * @param errHandler
+   *          the err handler
+   * @param contentViewer
+   *          the content viewer
+   * @param actionRegistry
+   *          the action registry
+   * @param contentService
+   *          the content service
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param newMenusRegistry
+   *          the new menus registry
+   * @param services
+   *          the services
    */
   @Inject
   public XMLActionsParser(final ErrorHandler errHandler, final ContentViewerPresenter contentViewer,
@@ -140,11 +149,15 @@ public class XMLActionsParser {
 
   /**
    * Creates the menu item.
-   *
-   * @param descrip the descrip
-   * @param tool the tool
-   * @param origTypeId the orig type id
-   * @param action the action
+   * 
+   * @param descrip
+   *          the descrip
+   * @param tool
+   *          the tool
+   * @param origTypeId
+   *          the orig type id
+   * @param action
+   *          the action
    * @return the provider
    */
   private Provider<GuiActionDescrip> createMenuItem(final XMLGuiActionDescriptor descrip,
@@ -170,11 +183,15 @@ public class XMLActionsParser {
 
   /**
    * Gets the sub menu.
-   *
-   * @param menu the menu
-   * @param tool the tool
-   * @param typeId the type id
-   * @param parentS the parent s
+   * 
+   * @param menu
+   *          the menu
+   * @param tool
+   *          the tool
+   * @param typeId
+   *          the type id
+   * @param parentS
+   *          the parent s
    * @return the sub menu
    */
   private SubMenuDescriptor getSubMenu(final MenuDescriptor menu, final String tool,
@@ -201,10 +218,13 @@ public class XMLActionsParser {
 
   /**
    * Gets the sub path id.
-   *
-   * @param typeId the type id
-   * @param path the path
-   * @param i the i
+   * 
+   * @param typeId
+   *          the type id
+   * @param path
+   *          the path
+   * @param i
+   *          the i
    * @return the sub path id
    */
   private String getSubPathId(final String typeId, final String[] path, final int i) {
@@ -217,8 +237,9 @@ public class XMLActionsParser {
 
   /**
    * On failed.
-   *
-   * @param ex the ex
+   * 
+   * @param ex
+   *          the ex
    */
   private void onFailed(final Throwable ex) {
     errHandler.process(ex);
@@ -226,8 +247,9 @@ public class XMLActionsParser {
 
   /**
    * Parses the.
-   *
-   * @param xml the xml
+   * 
+   * @param xml
+   *          the xml
    */
   private void parse(final XMLKuneClientActions xml) {
     final Map<String, XMLWaveExtension> extensions = xml.getExtensions();
@@ -265,12 +287,14 @@ public class XMLActionsParser {
 
   /**
    * Proxy.
-   *
-   * @param iconUrl the icon url
-   * @param gadgetUrl the gadget url
+   * 
+   * @param iconUrl
+   *          the icon url
+   * @param gadgetUrl
+   *          the gadget url
    * @return the string
    */
-  private String proxy(String iconUrl, String gadgetUrl) {
+  private String proxy(final String iconUrl, final String gadgetUrl) {
     // FIXME: create a proxy servlet for that
     // More info: http://edwardstx.net/2010/06/http-proxy-servlet/
     return "https://www-ig-opensocial.googleusercontent.com/gadgets/proxy?refresh=86400&url=" + iconUrl

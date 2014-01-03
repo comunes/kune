@@ -30,15 +30,16 @@ import com.google.inject.persist.finder.Finder;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface InvitationFinder.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface InvitationFinder {
 
   /**
    * Find by hash.
-   *
-   * @param hash the hash
+   * 
+   * @param hash
+   *          the hash
    * @return the invitation
    */
   @Finder(query = "from Invitation where hash = :hash")

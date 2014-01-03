@@ -24,7 +24,7 @@ package cc.kune.gspace.client.options;
 
 /**
  * The Interface UserOptions.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface UserOptions extends EntityOptions {

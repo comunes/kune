@@ -31,7 +31,7 @@ import com.calclab.emite.core.client.packet.IPacket;
 // TODO: Auto-generated Javadoc
 /**
  * The Class XMLGuiActionDescriptor.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class XMLGuiActionDescriptor extends DelegatedPacket {
@@ -44,8 +44,9 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Instantiates a new xML gui action descriptor.
-   *
-   * @param xml the xml
+   * 
+   * @param xml
+   *          the xml
    */
   public XMLGuiActionDescriptor(final IPacket xml) {
     super(xml);
@@ -53,7 +54,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the desc name.
-   *
+   * 
    * @return the desc name
    */
   public String getDescName() {
@@ -62,7 +63,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the description.
-   *
+   * 
    * @return the description
    */
   public String getDescription() {
@@ -71,7 +72,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the extension name.
-   *
+   * 
    * @return the extension name
    */
   public String getExtensionName() {
@@ -80,7 +81,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the new content text intro.
-   *
+   * 
    * @return the new content text intro
    */
   public String getNewContentTextIntro() {
@@ -89,7 +90,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the new content title.
-   *
+   * 
    * @return the new content title
    */
   public String getNewContentTitle() {
@@ -98,7 +99,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the participants.
-   *
+   * 
    * @return the participants
    */
   public String getParticipants() {
@@ -107,7 +108,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the path.
-   *
+   * 
    * @return the path
    */
   public String getPath() {
@@ -116,7 +117,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the rol.
-   *
+   * 
    * @return the rol
    */
   public XMLRol getRol() {
@@ -128,7 +129,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public String getType() {
@@ -137,7 +138,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Gets the type ids.
-   *
+   * 
    * @return the type ids
    */
   public List<XMLTypeId> getTypeIds() {
@@ -152,7 +153,7 @@ public class XMLGuiActionDescriptor extends DelegatedPacket {
 
   /**
    * Checks if is enabled.
-   *
+   * 
    * @return true, if is enabled
    */
   public boolean isEnabled() {

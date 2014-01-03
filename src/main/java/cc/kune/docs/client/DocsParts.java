@@ -35,20 +35,26 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DocsParts.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DocsParts {
 
   /**
    * Instantiates a new docs parts.
-   *
-   * @param session the session
-   * @param clientTool the client tool
-   * @param viewerSelector the viewer selector
-   * @param docsActions the docs actions
-   * @param contentViewer the content viewer
-   * @param folderViewer the folder viewer
+   * 
+   * @param session
+   *          the session
+   * @param clientTool
+   *          the client tool
+   * @param viewerSelector
+   *          the viewer selector
+   * @param docsActions
+   *          the docs actions
+   * @param contentViewer
+   *          the content viewer
+   * @param folderViewer
+   *          the folder viewer
    */
   @Inject
   public DocsParts(final SessionConstants session, final Provider<DocsClientTool> clientTool,

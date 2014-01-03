@@ -35,7 +35,7 @@ import com.google.inject.Singleton;
 /**
  * The Class PendingNotificationSender is used to store and send pending
  * notifications via cron tasks.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -80,14 +80,21 @@ public class PendingNotificationSender {
 
   /**
    * Adds the.
-   *
-   * @param type the type
-   * @param subjectPrefix the subject prefix
-   * @param subject the subject
-   * @param body the body
-   * @param isHtml the is html
-   * @param forceSend the force send
-   * @param to the to
+   * 
+   * @param type
+   *          the type
+   * @param subjectPrefix
+   *          the subject prefix
+   * @param subject
+   *          the subject
+   * @param body
+   *          the body
+   * @param isHtml
+   *          the is html
+   * @param forceSend
+   *          the force send
+   * @param to
+   *          the to
    */
   public void add(final NotificationType type, final String subjectPrefix,
       final FormattedString subject, final FormattedString body, final boolean isHtml,
@@ -103,14 +110,21 @@ public class PendingNotificationSender {
 
   /**
    * Adds the.
-   *
-   * @param type the type
-   * @param subjectPrefix the subject prefix
-   * @param subject the subject
-   * @param body the body
-   * @param isHtml the is html
-   * @param forceSend the force send
-   * @param dest the dest
+   * 
+   * @param type
+   *          the type
+   * @param subjectPrefix
+   *          the subject prefix
+   * @param subject
+   *          the subject
+   * @param body
+   *          the body
+   * @param isHtml
+   *          the is html
+   * @param forceSend
+   *          the force send
+   * @param dest
+   *          the dest
    */
   public void add(final NotificationType type, final String subjectPrefix,
       final FormattedString subject, final FormattedString body, final boolean isHtml,
@@ -125,8 +139,9 @@ public class PendingNotificationSender {
 
   /**
    * Adds a pending notification.
-   *
-   * @param notificationProv the notification prov
+   * 
+   * @param notificationProv
+   *          the notification prov
    */
   public void add(final PendingNotificationProvider notificationProv) {
     if (!immediatePendNotif.contains(notificationProv) && !hourlyPendNotif.contains(notificationProv)) {
@@ -217,7 +232,9 @@ public class PendingNotificationSender {
     send(immediatePendNotif, hourlyPendNotif, EmailNotificationFrequency.immediately);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

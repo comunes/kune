@@ -27,23 +27,23 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nCountryDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nCountryDTO implements IsSerializable {
 
   /** The code. */
   private String code;
-  
-  /** The english name. */
-  private String englishName;
-  
+
   /** The date format. */
   private String dateFormat;
 
+  /** The english name. */
+  private String englishName;
+
   /**
    * Gets the code.
-   *
+   * 
    * @return the code
    */
   public String getCode() {
@@ -52,7 +52,7 @@ public class I18nCountryDTO implements IsSerializable {
 
   /**
    * Gets the date format.
-   *
+   * 
    * @return the date format
    */
   public String getDateFormat() {
@@ -61,7 +61,7 @@ public class I18nCountryDTO implements IsSerializable {
 
   /**
    * Gets the english name.
-   *
+   * 
    * @return the english name
    */
   public String getEnglishName() {
@@ -70,8 +70,9 @@ public class I18nCountryDTO implements IsSerializable {
 
   /**
    * Sets the code.
-   *
-   * @param code the new code
+   * 
+   * @param code
+   *          the new code
    */
   public void setCode(final String code) {
     this.code = code;
@@ -79,8 +80,9 @@ public class I18nCountryDTO implements IsSerializable {
 
   /**
    * Sets the date format.
-   *
-   * @param dateFormat the new date format
+   * 
+   * @param dateFormat
+   *          the new date format
    */
   public void setDateFormat(final String dateFormat) {
     this.dateFormat = dateFormat;
@@ -88,8 +90,9 @@ public class I18nCountryDTO implements IsSerializable {
 
   /**
    * Sets the english name.
-   *
-   * @param englishName the new english name
+   * 
+   * @param englishName
+   *          the new english name
    */
   public void setEnglishName(final String englishName) {
     this.englishName = englishName;

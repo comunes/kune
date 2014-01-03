@@ -27,15 +27,16 @@ import java.util.List;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SearchResultDTO.
- *
- * @param <T> the generic type
+ * 
+ * @param <T>
+ *          the generic type
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SearchResultDTO<T> {
-  
+
   /** The list. */
   List<T> list;
-  
+
   /** The size. */
   int size;
 
@@ -48,9 +49,11 @@ public class SearchResultDTO<T> {
 
   /**
    * Instantiates a new search result dto.
-   *
-   * @param size the size
-   * @param list the list
+   * 
+   * @param size
+   *          the size
+   * @param list
+   *          the list
    */
   public SearchResultDTO(final int size, final List<T> list) {
     this.list = list;
@@ -59,7 +62,7 @@ public class SearchResultDTO<T> {
 
   /**
    * Gets the list.
-   *
+   * 
    * @return the list
    */
   public List<T> getList() {
@@ -68,7 +71,7 @@ public class SearchResultDTO<T> {
 
   /**
    * Gets the size.
-   *
+   * 
    * @return the size
    */
   public int getSize() {
@@ -77,8 +80,9 @@ public class SearchResultDTO<T> {
 
   /**
    * Sets the list.
-   *
-   * @param list the new list
+   * 
+   * @param list
+   *          the new list
    */
   public void setList(final List<T> list) {
     this.list = list;
@@ -86,14 +90,17 @@ public class SearchResultDTO<T> {
 
   /**
    * Sets the size.
-   *
-   * @param size the new size
+   * 
+   * @param size
+   *          the new size
    */
   public void setSize(final int size) {
     this.size = size;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

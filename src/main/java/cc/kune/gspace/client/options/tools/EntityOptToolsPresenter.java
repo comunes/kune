@@ -45,37 +45,42 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptToolsPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntityOptToolsPresenter {
 
   /** The entity options. */
   private final EntityOptions entityOptions;
-  
+
   /** The group service. */
   private final Provider<GroupServiceAsync> groupService;
-  
+
   /** The i18n. */
   protected final I18nTranslationService i18n;
-  
+
   /** The session. */
   protected final Session session;
-  
+
   /** The state manager. */
   protected final StateManager stateManager;
-  
+
   /** The view. */
   private EntityOptToolsView view;
 
   /**
    * Instantiates a new entity opt tools presenter.
-   *
-   * @param session the session
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param entityOptions the entity options
-   * @param groupService the group service
+   * 
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param entityOptions
+   *          the entity options
+   * @param groupService
+   *          the group service
    */
   public EntityOptToolsPresenter(final Session session, final StateManager stateManager,
       final I18nTranslationService i18n, final EntityOptions entityOptions,
@@ -89,49 +94,49 @@ public abstract class EntityOptToolsPresenter {
 
   /**
    * Applicable.
-   *
+   * 
    * @return true, if successful
    */
   protected abstract boolean applicable();
 
   /**
    * Gets the all tools.
-   *
+   * 
    * @return the all tools
    */
   protected abstract Collection<ToolSimpleDTO> getAllTools();
 
   /**
    * Gets the def content token.
-   *
+   * 
    * @return the def content token
    */
   protected abstract StateToken getDefContentToken();
 
   /**
    * Gets the def content tooltip.
-   *
+   * 
    * @return the def content tooltip
    */
   protected abstract String getDefContentTooltip();
 
   /**
    * Gets the enabled tools.
-   *
+   * 
    * @return the enabled tools
    */
   protected abstract List<String> getEnabledTools();
 
   /**
    * Gets the operation token.
-   *
+   * 
    * @return the operation token
    */
   protected abstract StateToken getOperationToken();
 
   /**
    * Gets the view.
-   *
+   * 
    * @return the view
    */
   public IsWidget getView() {
@@ -140,15 +145,17 @@ public abstract class EntityOptToolsPresenter {
 
   /**
    * Goto dif location if necessary.
-   *
-   * @param toolName the tool name
+   * 
+   * @param toolName
+   *          the tool name
    */
   protected abstract void gotoDifLocationIfNecessary(String toolName);
 
   /**
    * Inits the.
-   *
-   * @param view the view
+   * 
+   * @param view
+   *          the view
    */
   public void init(final EntityOptToolsView view) {
     this.view = view;
@@ -158,9 +165,11 @@ public abstract class EntityOptToolsPresenter {
 
   /**
    * On check.
-   *
-   * @param tool the tool
-   * @param checked the checked
+   * 
+   * @param tool
+   *          the tool
+   * @param checked
+   *          the checked
    */
   private void onCheck(final ToolSimpleDTO tool, final boolean checked) {
     final List<String> enabledTools = getEnabledTools();
@@ -213,9 +222,11 @@ public abstract class EntityOptToolsPresenter {
 
   /**
    * Sets the tool checked in server.
-   *
-   * @param checked the checked
-   * @param toolName the tool name
+   * 
+   * @param checked
+   *          the checked
+   * @param toolName
+   *          the tool name
    */
   protected void setToolCheckedInServer(final boolean checked, final String toolName) {
     // view.mask();

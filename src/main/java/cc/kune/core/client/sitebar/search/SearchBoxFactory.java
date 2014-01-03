@@ -39,12 +39,17 @@ public class SearchBoxFactory {
 
   /**
    * Creates the.
-   *
-   * @param i18n the i18n
-   * @param searchOnlyUsers the search only users
-   * @param showNoResult the show no result
-   * @param id the id
-   * @param callback the callback
+   * 
+   * @param i18n
+   *          the i18n
+   * @param searchOnlyUsers
+   *          the search only users
+   * @param showNoResult
+   *          the show no result
+   * @param id
+   *          the id
+   * @param callback
+   *          the callback
    * @return the multivalue suggest box
    */
   public static MultivalueSuggestBox create(final I18nTranslationService i18n,

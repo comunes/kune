@@ -38,21 +38,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupServerUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupServerUtils {
-  
+
   /** The user finder. */
   @Inject
   private static UserFinder userFinder;
 
   /**
    * Gets the all user members.
-   *
-   * @param users the users
-   * @param ofGroup the of group
-   * @param subGroup the sub group
+   * 
+   * @param users
+   *          the users
+   * @param ofGroup
+   *          the of group
+   * @param subGroup
+   *          the sub group
    * @return the all user members
    */
   public static void getAllUserMembers(final Set<User> users, final Group ofGroup,
@@ -75,10 +78,13 @@ public class GroupServerUtils {
 
   /**
    * Gets the all user members as string.
-   *
-   * @param users the users
-   * @param ofGroup the of group
-   * @param subGroup the sub group
+   * 
+   * @param users
+   *          the users
+   * @param ofGroup
+   *          the of group
+   * @param subGroup
+   *          the sub group
    * @return the all user members as string
    */
   public static void getAllUserMembersAsString(final Set<String> users, final Group ofGroup,
@@ -100,9 +106,11 @@ public class GroupServerUtils {
 
   /**
    * Gets the group members.
-   *
-   * @param ofGroup the of group
-   * @param subGroup the sub group
+   * 
+   * @param ofGroup
+   *          the of group
+   * @param subGroup
+   *          the sub group
    * @return the group members
    */
   public static final Collection<Group> getGroupMembers(final Group ofGroup,

@@ -79,8 +79,8 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
   @Test(expected = UserMustBeLoggedException.class)
   public void noLoggedInShouldThrowIllegalAccess() throws ContentNotFoundException, Exception {
     defaultContent = getSiteDefaultContent();
-    contentService.addContent(session.getHash(),
-        defaultContent.getContainer().getStateToken(), "a name", TYPE_DOCUMENT);
+    contentService.addContent(session.getHash(), defaultContent.getContainer().getStateToken(),
+        "a name", TYPE_DOCUMENT);
   }
 
   /**
@@ -113,8 +113,8 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     assertNotNull(added.getAccessLists());
 
     final StateToken newState = added.getStateToken();
-    final StateContentDTO sameAgain = (StateContentDTO) contentService.getContent(
-        session.getHash(), newState);
+    final StateContentDTO sameAgain = (StateContentDTO) contentService.getContent(session.getHash(),
+        newState);
     assertNotNull(sameAgain);
     assertEquals(2, sameAgain.getContainer().getContents().size());
   }
@@ -161,8 +161,8 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     defaultContent = getSiteDefaultContent();
     final ContainerDTO parent = defaultContent.getContainer();
     final String roomName = "testroom";
-    final StateContainerDTO newState = contentService.addRoom(session.getHash(),
-        parent.getStateToken(), roomName);
+    final StateContainerDTO newState = contentService.addRoom(session.getHash(), parent.getStateToken(),
+        roomName);
     assertNotNull(newState);
   }
 
@@ -203,12 +203,12 @@ public class ContentServiceAddTest extends ContentServiceIntegrationTest {
     doLogin();
 
     final StateToken wikiToken = new StateToken(super.getDefSiteShortName(), TOOL_NAME);
-    final StateContainerDTO wiki = (StateContainerDTO) contentService.getContent(
-        session.getHash(), wikiToken);
+    final StateContainerDTO wiki = (StateContainerDTO) contentService.getContent(session.getHash(),
+        wikiToken);
 
     final String title = "New wikipage";
-    final StateContentDTO added = contentService.addContent(session.getHash(),
-        wiki.getStateToken(), title, TYPE_WIKIPAGE);
+    final StateContentDTO added = contentService.addContent(session.getHash(), wiki.getStateToken(),
+        title, TYPE_WIKIPAGE);
     assertNotNull(added);
     final ContainerDTO wikiContainer = added.getContainer();
     final List<ContentSimpleDTO> contents = wikiContainer.getContents();

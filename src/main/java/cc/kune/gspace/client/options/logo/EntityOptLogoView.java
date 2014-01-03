@@ -29,14 +29,14 @@ import cc.kune.gspace.client.options.EntityOptionsUploaderView;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityOptLogoView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptLogoView extends EntityOptionsTabView, EntityOptionsUploaderView {
 
   /**
    * Gets the on submit.
-   *
+   * 
    * @return the on submit
    */
   OnAcceptCallback getOnSubmit();
@@ -58,9 +58,11 @@ public interface EntityOptLogoView extends EntityOptionsTabView, EntityOptionsUp
 
   /**
    * Sets the upload params.
-   *
-   * @param userHash the user hash
-   * @param token the token
+   * 
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
    */
   void setUploadParams(String userHash, String token);
 

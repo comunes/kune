@@ -36,28 +36,30 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GotoGroupLastVisitedContentAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GotoGroupLastVisitedContentAction extends AbstractExtendedAction {
 
   /** The group. */
   public GroupDTO group;
-  
+
   /** The last visited. */
   protected StateToken lastVisited;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new goto group last visited content action.
-   *
-   * @param stateManager the state manager
-   * @param session the session
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
    */
   @Inject
   public GotoGroupLastVisitedContentAction(final StateManager stateManager, final Session session) {
@@ -73,8 +75,12 @@ public class GotoGroupLastVisitedContentAction extends AbstractExtendedAction {
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
@@ -83,8 +89,9 @@ public class GotoGroupLastVisitedContentAction extends AbstractExtendedAction {
 
   /**
    * Sets the group.
-   *
-   * @param group the new group
+   * 
+   * @param group
+   *          the new group
    */
   public void setGroup(final GroupDTO group) {
     this.group = group;

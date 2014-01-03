@@ -25,14 +25,14 @@ package cc.kune.gspace.client.options.general;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface UserOptGeneral.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface UserOptGeneral extends EntityOptGeneral {
 
   /**
    * Checks if is visible.
-   *
+   * 
    * @return true, if is visible
    */
   boolean isVisible();

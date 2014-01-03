@@ -34,9 +34,11 @@ import org.apache.commons.collections.map.LRUMap;
 /**
  * The Class CachedCollection implements some custom cache for often accessed
  * (and costly) objects.
- *
- * @param <K> the key type
- * @param <V> the value type
+ * 
+ * @param <K>
+ *          the key type
+ * @param <V>
+ *          the value type
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -65,8 +67,9 @@ public class CachedCollection<K, V> {
 
   /**
    * Contains key.
-   *
-   * @param key the key
+   * 
+   * @param key
+   *          the key
    * @return true, if successful
    */
   public boolean containsKey(final Object key) {
@@ -75,8 +78,9 @@ public class CachedCollection<K, V> {
 
   /**
    * Contains value.
-   *
-   * @param value the value
+   * 
+   * @param value
+   *          the value
    * @return true, if successful
    */
   public boolean containsValue(final Object value) {
@@ -85,7 +89,7 @@ public class CachedCollection<K, V> {
 
   /**
    * Entry set.
-   *
+   * 
    * @return the sets the
    */
   public Set<java.util.Map.Entry<K, V>> entrySet() {
@@ -94,8 +98,9 @@ public class CachedCollection<K, V> {
 
   /**
    * Gets the.
-   *
-   * @param key the key
+   * 
+   * @param key
+   *          the key
    * @return the v
    */
   public V get(final Object key) {
@@ -104,7 +109,7 @@ public class CachedCollection<K, V> {
 
   /**
    * Checks if is empty.
-   *
+   * 
    * @return true, if is empty
    */
   public boolean isEmpty() {
@@ -113,7 +118,7 @@ public class CachedCollection<K, V> {
 
   /**
    * Key set.
-   *
+   * 
    * @return the sets the
    */
   public Set<K> keySet() {
@@ -122,9 +127,11 @@ public class CachedCollection<K, V> {
 
   /**
    * Put.
-   *
-   * @param key the key
-   * @param value the value
+   * 
+   * @param key
+   *          the key
+   * @param value
+   *          the value
    * @return the v
    */
   public V put(final K key, final V value) {
@@ -133,8 +140,9 @@ public class CachedCollection<K, V> {
 
   /**
    * Put all.
-   *
-   * @param m the m
+   * 
+   * @param m
+   *          the m
    */
   public void putAll(final Map<? extends K, ? extends V> m) {
     cache.putAll(m);
@@ -142,8 +150,9 @@ public class CachedCollection<K, V> {
 
   /**
    * Removes the.
-   *
-   * @param key the key
+   * 
+   * @param key
+   *          the key
    * @return the v
    */
   public V remove(final Object key) {
@@ -152,7 +161,7 @@ public class CachedCollection<K, V> {
 
   /**
    * Size.
-   *
+   * 
    * @return the int
    */
   public int size() {
@@ -161,7 +170,7 @@ public class CachedCollection<K, V> {
 
   /**
    * Values.
-   *
+   * 
    * @return the collection
    */
   public Collection<V> values() {

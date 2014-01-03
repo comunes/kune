@@ -40,14 +40,14 @@ import cc.kune.gspace.client.tags.TagsSummaryPresenter.TagsSummaryView;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagsSummaryPresenterTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TagsSummaryPresenterTest {
 
   /** The tags summary presenter. */
   private TagsSummaryPresenter tagsSummaryPresenter;
-  
+
   /** The view. */
   private TagsSummaryView view;
 

@@ -30,40 +30,42 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GoHomeEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> {
 
   /**
-   * The Interface HasGoHomeHandlers.
-   *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  public interface HasGoHomeHandlers extends HasHandlers {
-    
-    /**
-     * Adds the go home handler.
-     *
-     * @param handler the handler
-     * @return the handler registration
-     */
-    HandlerRegistration addGoHomeHandler(GoHomeHandler handler);
-  }
-
-  /**
    * The Interface GoHomeHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface GoHomeHandler extends EventHandler {
-    
+
     /**
      * On go home.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onGoHome(GoHomeEvent event);
+  }
+
+  /**
+   * The Interface HasGoHomeHandlers.
+   * 
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
+  public interface HasGoHomeHandlers extends HasHandlers {
+
+    /**
+     * Adds the go home handler.
+     * 
+     * @param handler
+     *          the handler
+     * @return the handler registration
+     */
+    HandlerRegistration addGoHomeHandler(GoHomeHandler handler);
   }
 
   /** The Constant TYPE. */
@@ -71,16 +73,17 @@ public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> {
 
   /**
    * Fire.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    */
-  public static void fire(HasHandlers source) {
+  public static void fire(final HasHandlers source) {
     source.fireEvent(new GoHomeEvent());
   }
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<GoHomeHandler> getType() {
@@ -93,7 +96,31 @@ public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> {
   public GoHomeEvent() {
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
+   */
+  @Override
+  protected void dispatch(final GoHomeHandler handler) {
+    handler.onGoHome(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(final Object obj) {
+    return super.equals(obj);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -101,23 +128,9 @@ public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> {
     return TYPE;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-   */
-  @Override
-  protected void dispatch(GoHomeHandler handler) {
-    handler.onGoHome(this);
-  }
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object obj) {
-    return super.equals(obj);
-  }
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -125,7 +138,9 @@ public class GoHomeEvent extends GwtEvent<GoHomeEvent.GoHomeHandler> {
     return super.hashCode();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

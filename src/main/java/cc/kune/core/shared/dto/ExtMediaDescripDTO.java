@@ -27,40 +27,40 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ExtMediaDescripDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ExtMediaDescripDTO implements IsSerializable {
 
-  /** The Constant URL. */
-  public static final String URL = "###URL###";
-  
   /** The Constant HEIGHT. */
   public static final String HEIGHT = "###HEIGHT###";
-  
+
+  /** The Constant URL. */
+  public static final String URL = "###URL###";
+
   /** The Constant WIDTH. */
   public static final String WIDTH = "###WIDTH###";
 
-  /** The name. */
-  private String name;
-  
-  /** The siteurl. */
-  private String siteurl;
-  
   /** The detect regex. */
   private String detectRegex;
-  
-  /** The id regex. */
-  private String idRegex;
-  
+
   /** The embed template. */
   private String embedTemplate;
-  
-  /** The width. */
-  private int width;
-  
+
   /** The height. */
   private int height;
+
+  /** The id regex. */
+  private String idRegex;
+
+  /** The name. */
+  private String name;
+
+  /** The siteurl. */
+  private String siteurl;
+
+  /** The width. */
+  private int width;
 
   /**
    * Instantiates a new ext media descrip dto.
@@ -71,14 +71,21 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Instantiates a new ext media descrip dto.
-   *
-   * @param name the name
-   * @param siteurl the siteurl
-   * @param detectRegex the detect regex
-   * @param idRegex the id regex
-   * @param embedTemplate the embed template
-   * @param defWidth the def width
-   * @param defHeight the def height
+   * 
+   * @param name
+   *          the name
+   * @param siteurl
+   *          the siteurl
+   * @param detectRegex
+   *          the detect regex
+   * @param idRegex
+   *          the id regex
+   * @param embedTemplate
+   *          the embed template
+   * @param defWidth
+   *          the def width
+   * @param defHeight
+   *          the def height
    */
   public ExtMediaDescripDTO(final String name, final String siteurl, final String detectRegex,
       final String idRegex, final String embedTemplate, final int defWidth, final int defHeight) {
@@ -93,7 +100,7 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Gets the detect regex.
-   *
+   * 
    * @return the detect regex
    */
   public String getDetectRegex() {
@@ -102,8 +109,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Gets the embed.
-   *
-   * @param url the url
+   * 
+   * @param url
+   *          the url
    * @return the embed
    */
   public String getEmbed(final String url) {
@@ -116,7 +124,7 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Gets the embed template.
-   *
+   * 
    * @return the embed template
    */
   public String getEmbedTemplate() {
@@ -125,7 +133,7 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Gets the height.
-   *
+   * 
    * @return the height
    */
   public int getHeight() {
@@ -134,8 +142,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Gets the id.
-   *
-   * @param url the url
+   * 
+   * @param url
+   *          the url
    * @return the id
    */
   public String getId(final String url) {
@@ -145,7 +154,7 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Gets the id regex.
-   *
+   * 
    * @return the id regex
    */
   public String getIdRegex() {
@@ -154,7 +163,7 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -163,7 +172,7 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Gets the siteurl.
-   *
+   * 
    * @return the siteurl
    */
   public String getSiteurl() {
@@ -172,7 +181,7 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Gets the width.
-   *
+   * 
    * @return the width
    */
   public int getWidth() {
@@ -181,8 +190,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Checks if is.
-   *
-   * @param url the url
+   * 
+   * @param url
+   *          the url
    * @return true, if successful
    */
   public boolean is(final String url) {
@@ -191,8 +201,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Sets the detect regex.
-   *
-   * @param detectRegex the new detect regex
+   * 
+   * @param detectRegex
+   *          the new detect regex
    */
   public void setDetectRegex(final String detectRegex) {
     this.detectRegex = detectRegex;
@@ -200,8 +211,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Sets the embed template.
-   *
-   * @param embedTemplate the new embed template
+   * 
+   * @param embedTemplate
+   *          the new embed template
    */
   public void setEmbedTemplate(final String embedTemplate) {
     this.embedTemplate = embedTemplate;
@@ -209,8 +221,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Sets the height.
-   *
-   * @param height the new height
+   * 
+   * @param height
+   *          the new height
    */
   public void setHeight(final int height) {
     this.height = height;
@@ -218,8 +231,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Sets the id regex.
-   *
-   * @param idRegex the new id regex
+   * 
+   * @param idRegex
+   *          the new id regex
    */
   public void setIdRegex(final String idRegex) {
     this.idRegex = idRegex;
@@ -227,8 +241,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public void setName(final String name) {
     this.name = name;
@@ -236,8 +251,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Sets the siteurl.
-   *
-   * @param siteurl the new siteurl
+   * 
+   * @param siteurl
+   *          the new siteurl
    */
   public void setSiteurl(final String siteurl) {
     this.siteurl = siteurl;
@@ -245,8 +261,9 @@ public class ExtMediaDescripDTO implements IsSerializable {
 
   /**
    * Sets the width.
-   *
-   * @param width the new width
+   * 
+   * @param width
+   *          the new width
    */
   public void setWidth(final int width) {
     this.width = width;

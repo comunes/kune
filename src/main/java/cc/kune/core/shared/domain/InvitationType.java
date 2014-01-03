@@ -29,7 +29,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 /**
  * The Enum InvitationType describes types of invitations (usually email
  * invitations).
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum InvitationType implements IsSerializable {

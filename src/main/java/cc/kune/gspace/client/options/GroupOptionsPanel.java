@@ -35,30 +35,34 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupOptionsPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements GroupOptionsView {
 
   /** The Constant GROUP_OP_PANEL_ID. */
   public static final String GROUP_OP_PANEL_ID = "k-gop-diagpan";
-  
+
   /** The Constant GROUP_OP_PANEL_ID_CLOSE. */
   public static final String GROUP_OP_PANEL_ID_CLOSE = GROUP_OP_PANEL_ID + "-close";
-  
+
   /** The Constant GROUP_OPTIONS_ERROR_ID. */
   public static final String GROUP_OPTIONS_ERROR_ID = "k-gop-err-mess";
-  
+
   /** The entity header. */
   private final EntityHeader entityHeader;
 
   /**
    * Instantiates a new group options panel.
-   *
-   * @param entityHeader the entity header
-   * @param i18n the i18n
-   * @param images the images
-   * @param entityOptionsGroup the entity options group
+   * 
+   * @param entityHeader
+   *          the entity header
+   * @param i18n
+   *          the i18n
+   * @param images
+   *          the images
+   * @param entityOptionsGroup
+   *          the entity options group
    */
   @Inject
   public GroupOptionsPanel(final EntityHeader entityHeader, final I18nTranslationService i18n,
@@ -70,8 +74,12 @@ public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements Grou
     super.setTitle(i18n.t(CoreMessages.GROUP_OPTIONS_DIALOG_TITLE));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.GroupOptionsPresenter.GroupOptionsView#addAction(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.GroupOptionsPresenter.GroupOptionsView#addAction
+   * (cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public void addAction(final GuiActionDescrip descriptor) {

@@ -34,7 +34,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class OpenfireXmppRosterPresenceProvider.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class OpenfireXmppRosterPresenceProvider extends DefaultManager<RosterPresence, Long> implements
@@ -46,9 +46,11 @@ public class OpenfireXmppRosterPresenceProvider extends DefaultManager<RosterPre
 
   /**
    * Instantiates a new openfire xmpp roster presence provider.
-   *
-   * @param em the em
-   * @param finder the finder
+   * 
+   * @param em
+   *          the em
+   * @param finder
+   *          the finder
    */
   @Inject
   public OpenfireXmppRosterPresenceProvider(@DataSourceOpenfire final Provider<EntityManager> em,
@@ -57,8 +59,12 @@ public class OpenfireXmppRosterPresenceProvider extends DefaultManager<RosterPre
     this.finder = finder;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.xmpp.XmppRosterPresenceProvider#getLastConnected(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.xmpp.XmppRosterPresenceProvider#getLastConnected(java
+   * .lang.String)
    */
   @Override
   @OpenfireTransactional

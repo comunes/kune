@@ -27,7 +27,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TagDTO implements IsSerializable {
@@ -44,8 +44,9 @@ public class TagDTO implements IsSerializable {
 
   /**
    * Instantiates a new tag dto.
-   *
-   * @param name the name
+   * 
+   * @param name
+   *          the name
    */
   public TagDTO(final String name) {
     this.name = name;
@@ -53,7 +54,7 @@ public class TagDTO implements IsSerializable {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -62,16 +63,20 @@ public class TagDTO implements IsSerializable {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public void setName(final String name) {
     this.name = name;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
+  @Override
   public String toString() {
     return name;
   }

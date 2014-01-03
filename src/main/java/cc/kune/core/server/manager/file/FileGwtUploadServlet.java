@@ -34,29 +34,35 @@ import cc.kune.core.shared.domain.utils.StateToken;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FileGwtUploadServlet.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FileGwtUploadServlet extends FileGwtUploadAbstractServlet {
 
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(FileGwtUploadServlet.class);
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
 
   /**
    * Instantiates a new file gwt upload servlet.
-   *
-   * @param kuneProperties the kune properties
+   * 
+   * @param kuneProperties
+   *          the kune properties
    */
   @Inject
   public FileGwtUploadServlet(final KuneProperties kuneProperties) {
     super(kuneProperties);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.file.FileGwtUploadAbstractServlet#createUploadedFile(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, org.apache.commons.fileupload.FileItem, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.manager.file.FileGwtUploadAbstractServlet#
+   * createUploadedFile(java.lang.String,
+   * cc.kune.core.shared.domain.utils.StateToken, java.lang.String,
+   * org.apache.commons.fileupload.FileItem, java.lang.String)
    */
   @Override
   protected String createUploadedFile(final String userHash, final StateToken stateToken,

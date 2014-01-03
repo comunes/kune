@@ -55,27 +55,30 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CronServerTasksManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class CronServerTasksManager implements ContainerListener {
-  
+
   /** The Constant DEF_GROUP. */
   private static final String DEF_GROUP = "groupdef";
-  
+
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(CronServerTasksManager.class);
-  
+
   /** The sched. */
   private final Scheduler sched;
 
   /**
    * Instantiates a new cron server tasks manager.
-   *
-   * @param sf the sf
-   * @param jobFactory the job factory
-   * @throws SchedulerException the scheduler exception
+   * 
+   * @param sf
+   *          the sf
+   * @param jobFactory
+   *          the job factory
+   * @throws SchedulerException
+   *           the scheduler exception
    */
   @Inject
   public CronServerTasksManager(final StdSchedulerFactory sf, final CustomJobFactory jobFactory)
@@ -86,8 +89,9 @@ public class CronServerTasksManager implements ContainerListener {
 
   /**
    * Log error.
-   *
-   * @param e the e
+   * 
+   * @param e
+   *          the e
    */
   private void logError(final Exception e) {
     LOG.error("Error starting cron scheduler", e);
@@ -95,13 +99,18 @@ public class CronServerTasksManager implements ContainerListener {
 
   /**
    * Schedule job.
-   *
-   * @param jobClass the job class
-   * @param cronExpression the cron expression
-   * @param identify the identify
+   * 
+   * @param jobClass
+   *          the job class
+   * @param cronExpression
+   *          the cron expression
+   * @param identify
+   *          the identify
    * @return the date
-   * @throws SchedulerException the scheduler exception
-   * @throws ParseException the parse exception
+   * @throws SchedulerException
+   *           the scheduler exception
+   * @throws ParseException
+   *           the parse exception
    */
   public Date scheduleJob(final Class<? extends Job> jobClass, final String cronExpression,
       final String identify) throws SchedulerException, ParseException {
@@ -111,7 +120,9 @@ public class CronServerTasksManager implements ContainerListener {
     return sched.scheduleJob(job, trigger);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.rack.ContainerListener#start()
    */
   @Override
@@ -137,7 +148,9 @@ public class CronServerTasksManager implements ContainerListener {
     LOG.info("Cron manager started");
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.rack.ContainerListener#stop()
    */
   @Override

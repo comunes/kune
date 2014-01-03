@@ -34,19 +34,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewDocMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewDocMenuItem extends NewContentMenuItem {
 
   /**
    * Instantiates a new new doc menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
-   * @param shorcutReg the shorcut reg
-   * @param docsFolderNewMenu the docs folder new menu
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
+   * @param shorcutReg
+   *          the shorcut reg
+   * @param docsFolderNewMenu
+   *          the docs folder new menu
    */
   @Inject
   public NewDocMenuItem(final I18nTranslationService i18n, final NewContentAction action,

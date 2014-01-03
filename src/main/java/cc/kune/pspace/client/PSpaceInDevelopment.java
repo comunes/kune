@@ -54,14 +54,14 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PSpaceInDevelopment.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PSpaceInDevelopment extends Composite {
 
   /**
    * The Interface PSpaceInDevelopmentUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface PSpaceInDevelopmentUiBinder extends UiBinder<Widget, PSpaceInDevelopment> {
@@ -69,58 +69,64 @@ public class PSpaceInDevelopment extends Composite {
 
   /** The ui binder. */
   private static PSpaceInDevelopmentUiBinder uiBinder = GWT.create(PSpaceInDevelopmentUiBinder.class);
-  
+
   /** The container. */
   @UiField
   FlowPanel container;
-  
+
   /** The content panel. */
   @UiField
   FlowPanel contentPanel;
-  
+
   /** The download provider. */
   private final Provider<ClientFileDownloadUtils> downloadProvider;
-  
+
   /** The entity logo. */
   @UiField
   Image entityLogo;
-  
+
   /** The entity name. */
   @UiField
   Label entityName;
-  
+
   /** The header panel. */
   @UiField
   FlowPanel headerPanel;
-  
+
   /** The images. */
   private final CoreResources images;
-  
+
   /** The in devel. */
   @UiField
   Label inDevel;
-  
+
   /** The in devel support. */
   @UiField
   HTMLPanel inDevelSupport;
-  
+
   /** The main panel. */
   @UiField
   FlowPanel mainPanel;
-  
+
   /** The photo panel. */
   @UiField
   FlowPanel photoPanel;
 
   /**
    * Instantiates a new p space in development.
-   *
-   * @param stateManager the state manager
-   * @param images the images
-   * @param session the session
-   * @param downloadProvider the download provider
-   * @param i18n the i18n
-   * @param eventBus the event bus
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param images
+   *          the images
+   * @param session
+   *          the session
+   * @param downloadProvider
+   *          the download provider
+   * @param i18n
+   *          the i18n
+   * @param eventBus
+   *          the event bus
    */
   @Inject
   public PSpaceInDevelopment(final StateManager stateManager, final CoreResources images,
@@ -151,9 +157,11 @@ public class PSpaceInDevelopment extends Composite {
 
   /**
    * Sets the group logo.
-   *
-   * @param group the group
-   * @param noCache the no cache
+   * 
+   * @param group
+   *          the group
+   * @param noCache
+   *          the no cache
    */
   void setGroupLogo(final GroupDTO group, final boolean noCache) {
     setLogoText(group.getLongName());
@@ -172,9 +180,11 @@ public class PSpaceInDevelopment extends Composite {
 
   /**
    * Sets the logo image.
-   *
-   * @param stateToken the state token
-   * @param noCache the no cache
+   * 
+   * @param stateToken
+   *          the state token
+   * @param noCache
+   *          the no cache
    */
   private void setLogoImage(final StateToken stateToken, final boolean noCache) {
     entityLogo.setUrl(downloadProvider.get().getLogoImageUrl(stateToken.getGroup())
@@ -183,8 +193,9 @@ public class PSpaceInDevelopment extends Composite {
 
   /**
    * Sets the logo image visible.
-   *
-   * @param visible the new logo image visible
+   * 
+   * @param visible
+   *          the new logo image visible
    */
   private void setLogoImageVisible(final boolean visible) {
     entityLogo.setVisible(visible);
@@ -192,8 +203,9 @@ public class PSpaceInDevelopment extends Composite {
 
   /**
    * Sets the logo text.
-   *
-   * @param longName the new logo text
+   * 
+   * @param longName
+   *          the new logo text
    */
   private void setLogoText(final String longName) {
     entityName.setText(longName);

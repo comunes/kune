@@ -37,7 +37,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptDefLicensePresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptDefLicensePresenter extends EntityOptDefLicensePresenter implements
@@ -45,12 +45,17 @@ public class UserOptDefLicensePresenter extends EntityOptDefLicensePresenter imp
 
   /**
    * Instantiates a new user opt def license presenter.
-   *
-   * @param entityOptions the entity options
-   * @param session the session
-   * @param view the view
-   * @param licenseWizard the license wizard
-   * @param licChangeAction the lic change action
+   * 
+   * @param entityOptions
+   *          the entity options
+   * @param session
+   *          the session
+   * @param view
+   *          the view
+   * @param licenseWizard
+   *          the license wizard
+   * @param licChangeAction
+   *          the lic change action
    */
   @Inject
   public UserOptDefLicensePresenter(final UserOptions entityOptions, final Session session,
@@ -66,24 +71,34 @@ public class UserOptDefLicensePresenter extends EntityOptDefLicensePresenter imp
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.license.EntityOptDefLicensePresenter#applicable()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.license.EntityOptDefLicensePresenter#applicable
+   * ()
    */
   @Override
   protected boolean applicable() {
     return session.isLogged();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.license.EntityOptDefLicensePresenter#getCurrentDefLicense()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.options.license.EntityOptDefLicensePresenter#
+   * getCurrentDefLicense()
    */
   @Override
   protected LicenseDTO getCurrentDefLicense() {
     return session.getCurrentState().getGroup().getDefaultLicense();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.license.EntityOptDefLicensePresenter#getOperationToken()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.options.license.EntityOptDefLicensePresenter#
+   * getOperationToken()
    */
   @Override
   protected StateToken getOperationToken() {

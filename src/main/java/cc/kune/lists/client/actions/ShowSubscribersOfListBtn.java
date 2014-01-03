@@ -33,17 +33,20 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ShowSubscribersOfListBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ShowSubscribersOfListBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new show subscribers of list btn.
-   *
-   * @param i18n the i18n
-   * @param session the session
-   * @param res the res
+   * 
+   * @param i18n
+   *          the i18n
+   * @param session
+   *          the session
+   * @param res
+   *          the res
    */
   @Inject
   public ShowSubscribersOfListBtn(final I18nTranslationService i18n, final Session session,

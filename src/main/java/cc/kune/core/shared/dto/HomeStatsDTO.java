@@ -29,23 +29,23 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HomeStatsDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HomeStatsDTO implements IsSerializable {
 
   /** The last contents of my groups. */
   private List<ContentSimpleDTO> lastContentsOfMyGroups;
-  
+
   /** The last groups. */
   private List<GroupDTO> lastGroups;
-  
+
   /** The last published contents. */
   private List<ContentSimpleDTO> lastPublishedContents;
-  
+
   /** The total groups. */
   private Long totalGroups;
-  
+
   /** The total users. */
   private Long totalUsers;
 
@@ -57,7 +57,7 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Gets the last contents of my groups.
-   *
+   * 
    * @return the last contents of my groups
    */
   public List<ContentSimpleDTO> getLastContentsOfMyGroups() {
@@ -66,7 +66,7 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Gets the last groups.
-   *
+   * 
    * @return the last groups
    */
   public List<GroupDTO> getLastGroups() {
@@ -75,7 +75,7 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Gets the last published contents.
-   *
+   * 
    * @return the last published contents
    */
   public List<ContentSimpleDTO> getLastPublishedContents() {
@@ -84,7 +84,7 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Gets the total groups.
-   *
+   * 
    * @return the total groups
    */
   public Long getTotalGroups() {
@@ -93,7 +93,7 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Gets the total users.
-   *
+   * 
    * @return the total users
    */
   public Long getTotalUsers() {
@@ -102,8 +102,9 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Sets the last contents of my groups.
-   *
-   * @param lastContentsOfMyGroups the new last contents of my groups
+   * 
+   * @param lastContentsOfMyGroups
+   *          the new last contents of my groups
    */
   public void setLastContentsOfMyGroups(final List<ContentSimpleDTO> lastContentsOfMyGroups) {
     this.lastContentsOfMyGroups = lastContentsOfMyGroups;
@@ -111,8 +112,9 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Sets the last groups.
-   *
-   * @param lastGroups the new last groups
+   * 
+   * @param lastGroups
+   *          the new last groups
    */
   public void setLastGroups(final List<GroupDTO> lastGroups) {
     this.lastGroups = lastGroups;
@@ -120,8 +122,9 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Sets the last published contents.
-   *
-   * @param lastPublishedContents the new last published contents
+   * 
+   * @param lastPublishedContents
+   *          the new last published contents
    */
   public void setLastPublishedContents(final List<ContentSimpleDTO> lastPublishedContents) {
     this.lastPublishedContents = lastPublishedContents;
@@ -129,8 +132,9 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Sets the total groups.
-   *
-   * @param totalGroups the new total groups
+   * 
+   * @param totalGroups
+   *          the new total groups
    */
   public void setTotalGroups(final Long totalGroups) {
     this.totalGroups = totalGroups;
@@ -138,8 +142,9 @@ public class HomeStatsDTO implements IsSerializable {
 
   /**
    * Sets the total users.
-   *
-   * @param totalUsers the new total users
+   * 
+   * @param totalUsers
+   *          the new total users
    */
   public void setTotalUsers(final Long totalUsers) {
     this.totalUsers = totalUsers;

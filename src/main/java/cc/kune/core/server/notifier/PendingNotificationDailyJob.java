@@ -38,7 +38,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PendingNotificationDailyJob.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PendingNotificationDailyJob implements Job {
@@ -51,10 +51,13 @@ public class PendingNotificationDailyJob implements Job {
 
   /**
    * Instantiates a new pending notification daily job.
-   *
-   * @param pendingManager the pending manager
-   * @throws ParseException the parse exception
-   * @throws SchedulerException the scheduler exception
+   * 
+   * @param pendingManager
+   *          the pending manager
+   * @throws ParseException
+   *           the parse exception
+   * @throws SchedulerException
+   *           the scheduler exception
    */
   @Inject
   public PendingNotificationDailyJob(final PendingNotificationSender pendingManager)
@@ -62,7 +65,9 @@ public class PendingNotificationDailyJob implements Job {
     this.pendingManager = pendingManager;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
    */
   @Override

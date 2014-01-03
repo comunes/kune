@@ -54,56 +54,57 @@ import com.google.wave.api.Wavelet;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneWaveServiceDefaultTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /** The Constant MESSAGE. */
   private static final String MESSAGE = "testing";
-  
+
   /** The Constant NEW_PARTICIPANT. */
   private static final String NEW_PARTICIPANT = "newparti";
-  
+
   /** The Constant NEW_PARTICIPANT2. */
   private static final String NEW_PARTICIPANT2 = "newparti2";
-  
+
   /** The Constant RICHTEXT_MESSAGE. */
   private static final String RICHTEXT_MESSAGE = "<b>" + MESSAGE + "</b>";
-  
+
   /** The Constant SOME_OTHER_PROPERTY. */
   private static final String SOME_OTHER_PROPERTY = "someOtherProperty";
-  
+
   /** The Constant SOME_OTHER_VALUE. */
   private static final String SOME_OTHER_VALUE = "someOtherValue";
-  
+
   /** The Constant SOME_PROPERTY. */
   private static final String SOME_PROPERTY = "someProperty";
-  
+
   /** The Constant SOME_VALUE. */
   private static final String SOME_VALUE = "someValue";
-  
+
   /** The Constant TEST_GADGET. */
   private static final String TEST_GADGET = "http://wave-api.appspot.com/public/gadgets/areyouin/gadget.xml";
-  
+
   /** The Constant TITLE. */
   private static final String TITLE = "title";
-  
+
   /** The Constant TITLENEW. */
   private static final String TITLENEW = "titleNew";
-  
+
   /** The manager. */
   @Inject
   KuneWaveService manager;
-  
+
   /** The participant utils. */
   @Inject
   ParticipantUtils participantUtils;
 
   /**
    * Adds the and del main participant.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   @Ignore
@@ -132,8 +133,9 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Adds the and del participant twice.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void addAndDelParticipantTwice() throws IOException {
@@ -162,8 +164,9 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Adds the and remove participant.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void addAndRemoveParticipant() throws IOException {
@@ -198,9 +201,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Adds the gadget.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void addGadget() throws DefaultException, IOException {
@@ -217,9 +222,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Adds the gadget and check properties.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void addGadgetAndCheckProperties() throws DefaultException, IOException {
@@ -261,8 +268,9 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Adding to set maintains order.
-   *
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void addingToSetMaintainsOrder() throws IOException {
@@ -277,9 +285,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Adds the participant.
-   *
-   * @param whoAdds the who adds
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @param whoAdds
+   *          the who adds
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   private void addParticipant(final String whoAdds) throws IOException {
     doLogin();
@@ -299,9 +309,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Author add participant.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void authorAddParticipant() throws DefaultException, IOException {
@@ -319,8 +331,9 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Creates the test wave.
-   *
-   * @param callback the callback
+   * 
+   * @param callback
+   *          the callback
    */
   private void createTestWave(final SimpleArgCallback<WaveRef> callback) {
     manager.createWave(TITLE, RICHTEXT_MESSAGE, callback, participantUtils.of(getSiteAdminShortName()));
@@ -328,9 +341,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Creates the wave.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void createWave() throws DefaultException, IOException {
@@ -349,9 +364,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Creates the wave with gadget.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void createWaveWithGadget() throws DefaultException, IOException {
@@ -369,9 +386,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Creates the wave with title.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void createWaveWithTitle() throws DefaultException, IOException {
@@ -390,9 +409,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Gets the first gadget.
-   *
-   * @param fetchWavelet the fetch wavelet
-   * @param testGadget the test gadget
+   * 
+   * @param fetchWavelet
+   *          the fetch wavelet
+   * @param testGadget
+   *          the test gadget
    * @return the first gadget
    */
   private Gadget getFirstGadget(final Wavelet fetchWavelet, final String testGadget) {
@@ -408,9 +429,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Other member add participant.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void otherMemberAddParticipant() throws DefaultException, IOException {
@@ -420,9 +443,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Render wave.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void renderWave() throws DefaultException, IOException {
@@ -437,9 +462,11 @@ public class KuneWaveServiceDefaultTest extends IntegrationTest {
 
   /**
    * Sets the title.
-   *
-   * @throws DefaultException the default exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * 
+   * @throws DefaultException
+   *           the default exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   @Test
   public void setTitle() throws DefaultException, IOException {

@@ -31,8 +31,9 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AsyncCallbackSimple.
- *
- * @param <T> the generic type
+ * 
+ * @param <T>
+ *          the generic type
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AsyncCallbackSimple<T> implements AsyncCallback<T> {
@@ -41,8 +42,11 @@ public abstract class AsyncCallbackSimple<T> implements AsyncCallback<T> {
   @Inject
   private static ErrorHandler errorHandler;
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.user.client.rpc.AsyncCallback#onFailure(java.lang.Throwable)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.user.client.rpc.AsyncCallback#onFailure(java.lang.Throwable)
    */
   @Override
   public void onFailure(final Throwable caught) {

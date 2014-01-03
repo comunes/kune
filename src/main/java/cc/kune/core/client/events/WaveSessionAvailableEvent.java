@@ -27,7 +27,8 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class WaveSessionAvailableEvent extends GwtEvent<WaveSessionAvailableEvent.WaveSessionAvailableHandler> { 
+public class WaveSessionAvailableEvent extends
+    GwtEvent<WaveSessionAvailableEvent.WaveSessionAvailableHandler> {
 
   public interface HasWaveSessionAvailableHandlers extends HasHandlers {
     HandlerRegistration addWaveSessionAvailableHandler(WaveSessionAvailableHandler handler);
@@ -39,7 +40,7 @@ public class WaveSessionAvailableEvent extends GwtEvent<WaveSessionAvailableEven
 
   private static final Type<WaveSessionAvailableHandler> TYPE = new Type<WaveSessionAvailableHandler>();
 
-  public static void fire(HasHandlers source, cc.kune.core.shared.dto.UserInfoDTO userInfo) {
+  public static void fire(final HasHandlers source, final cc.kune.core.shared.dto.UserInfoDTO userInfo) {
     source.fireEvent(new WaveSessionAvailableEvent(userInfo));
   }
 
@@ -49,12 +50,39 @@ public class WaveSessionAvailableEvent extends GwtEvent<WaveSessionAvailableEven
 
   cc.kune.core.shared.dto.UserInfoDTO userInfo;
 
-  public WaveSessionAvailableEvent(cc.kune.core.shared.dto.UserInfoDTO userInfo) {
+  protected WaveSessionAvailableEvent() {
+    // Possibly for serialization.
+  }
+
+  public WaveSessionAvailableEvent(final cc.kune.core.shared.dto.UserInfoDTO userInfo) {
     this.userInfo = userInfo;
   }
 
-  protected WaveSessionAvailableEvent() {
-    // Possibly for serialization.
+  @Override
+  protected void dispatch(final WaveSessionAvailableHandler handler) {
+    handler.onWaveSessionAvailable(this);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final WaveSessionAvailableEvent other = (WaveSessionAvailableEvent) obj;
+    if (userInfo == null) {
+      if (other.userInfo != null) {
+        return false;
+      }
+    } else if (!userInfo.equals(other.userInfo)) {
+      return false;
+    }
+    return true;
   }
 
   @Override
@@ -67,28 +95,6 @@ public class WaveSessionAvailableEvent extends GwtEvent<WaveSessionAvailableEven
   }
 
   @Override
-  protected void dispatch(WaveSessionAvailableHandler handler) {
-    handler.onWaveSessionAvailable(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-        return true;
-    if (obj == null)
-        return false;
-    if (getClass() != obj.getClass())
-        return false;
-    WaveSessionAvailableEvent other = (WaveSessionAvailableEvent) obj;
-    if (userInfo == null) {
-      if (other.userInfo != null)
-        return false;
-    } else if (!userInfo.equals(other.userInfo))
-      return false;
-    return true;
-  }
-
-  @Override
   public int hashCode() {
     int hashCode = 23;
     hashCode = (hashCode * 37) + (userInfo == null ? 1 : userInfo.hashCode());
@@ -97,8 +103,6 @@ public class WaveSessionAvailableEvent extends GwtEvent<WaveSessionAvailableEven
 
   @Override
   public String toString() {
-    return "WaveSessionAvailableEvent["
-                 + userInfo
-    + "]";
+    return "WaveSessionAvailableEvent[" + userInfo + "]";
   }
 }

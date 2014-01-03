@@ -29,22 +29,23 @@ import com.google.gwt.user.client.ui.IsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface LicenseWizardFirstFormView.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface LicenseWizardFirstFormView extends IsWidget {
 
   /**
    * Checks if is copyleft.
-   *
+   * 
    * @return true, if is copyleft
    */
   boolean isCopyleft();
 
   /**
    * On change.
-   *
-   * @param onChange the on change
+   * 
+   * @param onChange
+   *          the on change
    */
   void onChange(SimpleCallback onChange);
 

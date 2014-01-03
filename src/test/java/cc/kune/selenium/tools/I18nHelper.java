@@ -34,17 +34,20 @@ import com.google.gwt.i18n.client.Messages.DefaultMessage;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nHelper.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nHelper {
 
   /**
    * Gets the.
-   *
-   * @param classToMock the class to mock
-   * @param method the method
-   * @param arguments the arguments
+   * 
+   * @param classToMock
+   *          the class to mock
+   * @param method
+   *          the method
+   * @param arguments
+   *          the arguments
    * @return the string
    */
   public static String get(final Class<? extends Messages> classToMock, final Method method,
@@ -54,10 +57,13 @@ public class I18nHelper {
 
   /**
    * Gets the.
-   *
-   * @param messageType the message type
-   * @param methodName the method name
-   * @param params the params
+   * 
+   * @param messageType
+   *          the message type
+   * @param methodName
+   *          the method name
+   * @param params
+   *          the params
    * @return the string
    */
   public static String get(final Class<? extends Messages> messageType, final String methodName,
@@ -80,8 +86,9 @@ public class I18nHelper {
 
   /**
    * Gets the first int.
-   *
-   * @param params the params
+   * 
+   * @param params
+   *          the params
    * @return the first int
    */
   private static int getFirstInt(final Object[] params) {
@@ -96,10 +103,13 @@ public class I18nHelper {
 
   /**
    * Gets the plural.
-   *
-   * @param method the method
-   * @param value the value
-   * @param def the def
+   * 
+   * @param method
+   *          the method
+   * @param value
+   *          the value
+   * @param def
+   *          the def
    * @return the plural
    */
   private static String getPlural(final Method method, final int value, final String def) {
@@ -127,9 +137,11 @@ public class I18nHelper {
 
   /**
    * I18n default value.
-   *
-   * @param method the method
-   * @param params the params
+   * 
+   * @param method
+   *          the method
+   * @param params
+   *          the params
    * @return the string
    */
   private static String i18nDefaultValue(final Method method, final Class<?>... params) {
@@ -141,8 +153,9 @@ public class I18nHelper {
 
   /**
    * Instantiates a new i18n helper.
-   *
-   * @param messagesClass the messages class
+   * 
+   * @param messagesClass
+   *          the messages class
    */
   public I18nHelper(final Class<? extends Messages> messagesClass) {
     this.messagesClass = messagesClass;
@@ -150,9 +163,11 @@ public class I18nHelper {
 
   /**
    * Gets the.
-   *
-   * @param methodName the method name
-   * @param params the params
+   * 
+   * @param methodName
+   *          the method name
+   * @param params
+   *          the params
    * @return the string
    */
   public String get(final String methodName, final Object... params) {

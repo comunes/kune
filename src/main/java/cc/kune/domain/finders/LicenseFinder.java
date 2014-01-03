@@ -33,15 +33,16 @@ import com.google.inject.persist.finder.Finder;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface LicenseFinder.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface LicenseFinder {
 
   /**
    * Find by short name.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    * @return the license
    */
   @Finder(query = "from License l where l.shortName = :shortName")
@@ -49,7 +50,7 @@ public interface LicenseFinder {
 
   /**
    * Gets the all.
-   *
+   * 
    * @return the all
    */
   @Finder(query = "from License", returnAs = ArrayList.class)
@@ -57,7 +58,7 @@ public interface LicenseFinder {
 
   /**
    * Gets the cc.
-   *
+   * 
    * @return the cc
    */
   @Finder(query = "from License where isCC = true", returnAs = ArrayList.class)
@@ -65,7 +66,7 @@ public interface LicenseFinder {
 
   /**
    * Gets the not cc.
-   *
+   * 
    * @return the not cc
    */
   @Finder(query = "from License where isCC = false", returnAs = ArrayList.class)

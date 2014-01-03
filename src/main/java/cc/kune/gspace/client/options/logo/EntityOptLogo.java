@@ -24,7 +24,7 @@ package cc.kune.gspace.client.options.logo;
 
 /**
  * The Interface EntityOptLogo.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptLogo {

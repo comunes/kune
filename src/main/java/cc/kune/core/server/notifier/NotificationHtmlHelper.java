@@ -32,7 +32,7 @@ import com.google.inject.Singleton;
 /**
  * The Class NotifyHtmlHelper is used to get html snippets for email
  * notifications.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -81,8 +81,9 @@ public class NotificationHtmlHelper {
 
   /**
    * Creates the link.
-   *
-   * @param hash the hash
+   * 
+   * @param hash
+   *          the hash
    * @return the string
    */
   public String createLink(final String hash) {
@@ -92,11 +93,15 @@ public class NotificationHtmlHelper {
 
   /**
    * Entity notification.
-   *
-   * @param groupName the group name
-   * @param hasLogo the has logo
-   * @param message the message
-   * @param isPersonal the is personal
+   * 
+   * @param groupName
+   *          the group name
+   * @param hasLogo
+   *          the has logo
+   * @param message
+   *          the message
+   * @param isPersonal
+   *          the is personal
    * @return the formatted string
    */
   private FormattedString entityNotification(final String groupName, final boolean hasLogo,
@@ -109,10 +114,13 @@ public class NotificationHtmlHelper {
 
   /**
    * Generates a group notification in html like [logo|message].
-   *
-   * @param groupName the group name you want to get the notification
-   * @param hasLogo the has logo?
-   * @param message the message to show close to the logo
+   * 
+   * @param groupName
+   *          the group name you want to get the notification
+   * @param hasLogo
+   *          the has logo?
+   * @param message
+   *          the message to show close to the logo
    * @return the html string
    */
   public FormattedString groupNotification(final String groupName, final boolean hasLogo,
@@ -122,10 +130,13 @@ public class NotificationHtmlHelper {
 
   /**
    * Generates a user notification in html like [logo|message].
-   *
-   * @param userName the user name you want to get the notification
-   * @param hasLogo the has logo?
-   * @param message the message to show close to the logo
+   * 
+   * @param userName
+   *          the user name you want to get the notification
+   * @param hasLogo
+   *          the has logo?
+   * @param message
+   *          the message to show close to the logo
    * @return the html string
    */
   public FormattedString userNotification(final String userName, final boolean hasLogo,

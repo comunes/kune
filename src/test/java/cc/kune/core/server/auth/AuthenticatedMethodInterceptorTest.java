@@ -37,17 +37,17 @@ import cc.kune.core.server.integration.IntegrationTestHelper;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AuthenticatedMethodInterceptorTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 
   /** The auth. */
   private AuthenticatedMethodInterceptor auth;
-  
+
   /** The auth annotation. */
   private Authenticated authAnnotation;
-  
+
   /** The invocation. */
   private MethodInvocation invocation;
 
@@ -68,8 +68,9 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 
   /**
    * Hash null and mandatory must do nothing.
-   *
-   * @throws Throwable the throwable
+   * 
+   * @throws Throwable
+   *           the throwable
    */
   @Test(expected = UserMustBeLoggedException.class)
   public void hashNullAndMandatoryMustDoNothing() throws Throwable {
@@ -81,8 +82,9 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 
   /**
    * Hash null and not mandatory must do nothing.
-   *
-   * @throws Throwable the throwable
+   * 
+   * @throws Throwable
+   *           the throwable
    */
   @Test
   public void hashNullAndNotMandatoryMustDoNothing() throws Throwable {
@@ -94,8 +96,9 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 
   /**
    * Hash null as string and not mandatory must do nothing.
-   *
-   * @throws Throwable the throwable
+   * 
+   * @throws Throwable
+   *           the throwable
    */
   @Test
   public void hashNullAsStringAndNotMandatoryMustDoNothing() throws Throwable {
@@ -107,8 +110,9 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 
   /**
    * Other hash and mandatory and logged must session exp.
-   *
-   * @throws Throwable the throwable
+   * 
+   * @throws Throwable
+   *           the throwable
    */
   @Test(expected = SessionExpiredException.class)
   public void otherHashAndMandatoryAndLoggedMustSessionExp() throws Throwable {
@@ -121,8 +125,9 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 
   /**
    * Same hash and mandatory and logged must session exp.
-   *
-   * @throws Throwable the throwable
+   * 
+   * @throws Throwable
+   *           the throwable
    */
   @Test
   public void sameHashAndMandatoryAndLoggedMustSessionExp() throws Throwable {
@@ -135,8 +140,9 @@ public class AuthenticatedMethodInterceptorTest extends IntegrationTest {
 
   /**
    * Some hash and mandatory and not logged must session exp.
-   *
-   * @throws Throwable the throwable
+   * 
+   * @throws Throwable
+   *           the throwable
    */
   @Test(expected = SessionExpiredException.class)
   public void someHashAndMandatoryAndNotLoggedMustSessionExp() throws Throwable {

@@ -27,15 +27,16 @@ import cc.kune.domain.Tag;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface TagManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface TagManager extends Manager<Tag, Long> {
 
   /**
    * Find by tag name.
-   *
-   * @param tag the tag
+   * 
+   * @param tag
+   *          the tag
    * @return the tag
    */
   Tag findByTagName(String tag);

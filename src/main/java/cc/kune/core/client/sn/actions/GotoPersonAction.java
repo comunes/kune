@@ -31,17 +31,20 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GotoPersonAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GotoPersonAction extends GotoGroupAction {
 
   /**
    * Instantiates a new goto person action.
-   *
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param res the res
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
    */
   @Inject
   public GotoPersonAction(final StateManager stateManager, final I18nTranslationService i18n,

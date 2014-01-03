@@ -29,16 +29,18 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SiteServiceAsync.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SiteServiceAsync {
 
   /**
    * Gets the inits the data.
-   *
-   * @param userHash the user hash
-   * @param callback the callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param callback
+   *          the callback
    * @return the inits the data
    */
   void getInitData(String userHash, AsyncCallback<InitDataDTO> callback);

@@ -30,7 +30,7 @@ import com.google.gwt.resources.client.ImageResource;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface CoreResources.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface CoreResources extends CommonResources {

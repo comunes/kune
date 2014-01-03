@@ -52,7 +52,7 @@ import cc.kune.domain.utils.DataFieldBridge;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Revision.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -76,7 +76,7 @@ public class Revision {
   private Content content;
 
   /** The created on. */
-  @org.hibernate.annotations.Index(name="createdOn")
+  @org.hibernate.annotations.Index(name = "createdOn")
   @Basic(optional = false)
   private Long createdOn;
 
@@ -99,7 +99,7 @@ public class Revision {
   String title;
 
   /** The version. */
-  @org.hibernate.annotations.Index(name="version")
+  @org.hibernate.annotations.Index(name = "version")
   @Version
   private int version;
 
@@ -112,8 +112,9 @@ public class Revision {
 
   /**
    * Instantiates a new revision.
-   *
-   * @param content the content
+   * 
+   * @param content
+   *          the content
    */
   public Revision(final Content content) {
     this.content = content;
@@ -122,7 +123,7 @@ public class Revision {
 
   /**
    * Gets the body.
-   *
+   * 
    * @return the body
    */
   public char[] getBody() {
@@ -131,7 +132,7 @@ public class Revision {
 
   /**
    * Gets the content.
-   *
+   * 
    * @return the content
    */
   public Content getContent() {
@@ -140,7 +141,7 @@ public class Revision {
 
   /**
    * Gets the created on.
-   *
+   * 
    * @return the created on
    */
   public Long getCreatedOn() {
@@ -149,7 +150,7 @@ public class Revision {
 
   /**
    * Gets the editor.
-   *
+   * 
    * @return the editor
    */
   public User getEditor() {
@@ -158,7 +159,7 @@ public class Revision {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -167,7 +168,7 @@ public class Revision {
 
   /**
    * Gets the previous.
-   *
+   * 
    * @return the previous
    */
   public Revision getPrevious() {
@@ -176,7 +177,7 @@ public class Revision {
 
   /**
    * Gets the title.
-   *
+   * 
    * @return the title
    */
   public String getTitle() {
@@ -185,7 +186,7 @@ public class Revision {
 
   /**
    * Gets the version.
-   *
+   * 
    * @return the version
    */
   public int getVersion() {
@@ -194,7 +195,7 @@ public class Revision {
 
   /**
    * Checks if is last.
-   *
+   * 
    * @return true, if is last
    */
   @Transient
@@ -204,8 +205,9 @@ public class Revision {
 
   /**
    * Sets the body.
-   *
-   * @param body the new body
+   * 
+   * @param body
+   *          the new body
    */
   public void setBody(final String body) {
     this.body = body.toCharArray();
@@ -213,8 +215,9 @@ public class Revision {
 
   /**
    * Sets the content.
-   *
-   * @param content the new content
+   * 
+   * @param content
+   *          the new content
    */
   public void setContent(final Content content) {
     this.content = content;
@@ -222,8 +225,9 @@ public class Revision {
 
   /**
    * Sets the created on.
-   *
-   * @param modifiedOn the new created on
+   * 
+   * @param modifiedOn
+   *          the new created on
    */
   public void setCreatedOn(final Long modifiedOn) {
     this.createdOn = modifiedOn;
@@ -231,8 +235,9 @@ public class Revision {
 
   /**
    * Sets the editor.
-   *
-   * @param editor the new editor
+   * 
+   * @param editor
+   *          the new editor
    */
   public void setEditor(final User editor) {
     this.editor = editor;
@@ -240,8 +245,9 @@ public class Revision {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -249,8 +255,9 @@ public class Revision {
 
   /**
    * Sets the previous.
-   *
-   * @param previous the new previous
+   * 
+   * @param previous
+   *          the new previous
    */
   public void setPrevious(final Revision previous) {
     this.previous = previous;
@@ -258,8 +265,9 @@ public class Revision {
 
   /**
    * Sets the title.
-   *
-   * @param title the new title
+   * 
+   * @param title
+   *          the new title
    */
   public void setTitle(final String title) {
     this.title = title;
@@ -267,8 +275,9 @@ public class Revision {
 
   /**
    * Sets the version.
-   *
-   * @param version the new version
+   * 
+   * @param version
+   *          the new version
    */
   public void setVersion(final int version) {
     this.version = version;

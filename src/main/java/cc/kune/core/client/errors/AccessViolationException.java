@@ -25,12 +25,12 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AccessViolationException.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AccessViolationException extends DefaultException {
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -3786772632052256999L;
 
@@ -43,8 +43,9 @@ public class AccessViolationException extends DefaultException {
 
   /**
    * Instantiates a new access violation exception.
-   *
-   * @param msg the msg
+   * 
+   * @param msg
+   *          the msg
    */
   public AccessViolationException(final String msg) {
     super(msg);

@@ -28,15 +28,16 @@ import com.calclab.emite.core.client.packet.IPacket;
 // TODO: Auto-generated Javadoc
 /**
  * The Class XMLWaveExtension.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class XMLWaveExtension extends DelegatedPacket {
 
   /**
    * Instantiates a new xML wave extension.
-   *
-   * @param xml the xml
+   * 
+   * @param xml
+   *          the xml
    */
   public XMLWaveExtension(final IPacket xml) {
     super(xml);
@@ -44,7 +45,7 @@ public class XMLWaveExtension extends DelegatedPacket {
 
   /**
    * Gets the ext name.
-   *
+   * 
    * @return the ext name
    */
   public String getExtName() {
@@ -53,7 +54,7 @@ public class XMLWaveExtension extends DelegatedPacket {
 
   /**
    * Gets the gadget url.
-   *
+   * 
    * @return the gadget url
    */
   public String getGadgetUrl() {
@@ -62,7 +63,7 @@ public class XMLWaveExtension extends DelegatedPacket {
 
   /**
    * Gets the icon css.
-   *
+   * 
    * @return the icon css
    */
   public String getIconCss() {
@@ -71,7 +72,7 @@ public class XMLWaveExtension extends DelegatedPacket {
 
   /**
    * Gets the icon url.
-   *
+   * 
    * @return the icon url
    */
   public String getIconUrl() {
@@ -80,7 +81,7 @@ public class XMLWaveExtension extends DelegatedPacket {
 
   /**
    * Gets the installer url.
-   *
+   * 
    * @return the installer url
    */
   public String getInstallerUrl() {

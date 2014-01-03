@@ -56,37 +56,37 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DatabaseInitializer.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class DatabaseInitializer {
-  
+
   /** The Constant LOG. */
   private static final Log LOG = LogFactory.getLog(DatabaseInitializer.class);
-  
+
   /** The content manager. */
   private final ContentManager contentManager;
-  
+
   /** The country manager. */
   private final I18nCountryManager countryManager;
 
   /** The group manager. */
   private final GroupManager groupManager;
-  
+
   /** The language manager. */
   private final I18nLanguageManager languageManager;
-  
+
   /** The license manager. */
   private final LicenseManager licenseManager;
-  
+
   /** The properties. */
   private final KuneBasicProperties properties;
-  
+
   /** The translation manager. */
   private final I18nTranslationManager translationManager;
-  
+
   /** The translation service. */
   private final I18nTranslationServiceDefault translationService;
 
@@ -95,16 +95,25 @@ public class DatabaseInitializer {
 
   /**
    * Instantiates a new database initializer.
-   *
-   * @param properties the properties
-   * @param userManager the user manager
-   * @param groupManager the group manager
-   * @param licenseManager the license manager
-   * @param languageManager the language manager
-   * @param countryManager the country manager
-   * @param translationManager the translation manager
-   * @param contentManager the content manager
-   * @param translationService the translation service
+   * 
+   * @param properties
+   *          the properties
+   * @param userManager
+   *          the user manager
+   * @param groupManager
+   *          the group manager
+   * @param licenseManager
+   *          the license manager
+   * @param languageManager
+   *          the language manager
+   * @param countryManager
+   *          the country manager
+   * @param translationManager
+   *          the translation manager
+   * @param contentManager
+   *          the content manager
+   * @param translationService
+   *          the translation service
    */
   @Inject
   public DatabaseInitializer(final KuneBasicProperties properties, final UserManager userManager,
@@ -125,9 +134,11 @@ public class DatabaseInitializer {
 
   /**
    * Creates the def users group.
-   *
-   * @throws Exception the exception
-   * @throws UserMustBeLoggedException the user must be logged exception
+   * 
+   * @throws Exception
+   *           the exception
+   * @throws UserMustBeLoggedException
+   *           the user must be logged exception
    */
   private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
     final String adminName = properties.getAdminUserName();
@@ -233,8 +244,9 @@ public class DatabaseInitializer {
 
   /**
    * Inits the conditional.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   public void initConditional() throws Exception {
     if (groupManager.count() == 0) {
@@ -245,8 +257,9 @@ public class DatabaseInitializer {
 
   /**
    * Inits the database.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @KuneTransactional
   public void initDatabase() throws Exception {
@@ -257,8 +270,9 @@ public class DatabaseInitializer {
 
   /**
    * Initialize.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   private void initialize() throws Exception {
     LOG.warn("The default group '" + properties.getDefaultSiteName() + "' does not exist in Database, "

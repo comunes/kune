@@ -37,7 +37,7 @@ import org.hibernate.validator.constraints.Range;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Rate.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -45,7 +45,7 @@ import org.hibernate.validator.constraints.Range;
 @Table(name = "rates", uniqueConstraints = { @UniqueConstraint(columnNames = { "content_id", "rater_id" }) })
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Rate {
-  
+
   /** The content. */
   @ManyToOne
   Content content;
@@ -76,10 +76,13 @@ public class Rate {
 
   /**
    * Instantiates a new rate.
-   *
-   * @param rater the rater
-   * @param content the content
-   * @param value the value
+   * 
+   * @param rater
+   *          the rater
+   * @param content
+   *          the content
+   * @param value
+   *          the value
    */
   public Rate(final User rater, final Content content, final Double value) {
     this.rater = rater;
@@ -90,7 +93,7 @@ public class Rate {
 
   /**
    * Gets the content.
-   *
+   * 
    * @return the content
    */
   public Content getContent() {
@@ -99,7 +102,7 @@ public class Rate {
 
   /**
    * Gets the created on.
-   *
+   * 
    * @return the created on
    */
   public Long getCreatedOn() {
@@ -108,7 +111,7 @@ public class Rate {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -117,7 +120,7 @@ public class Rate {
 
   /**
    * Gets the rater.
-   *
+   * 
    * @return the rater
    */
   public User getRater() {
@@ -126,7 +129,7 @@ public class Rate {
 
   /**
    * Gets the value.
-   *
+   * 
    * @return the value
    */
   public Double getValue() {
@@ -135,8 +138,9 @@ public class Rate {
 
   /**
    * Sets the content.
-   *
-   * @param content the new content
+   * 
+   * @param content
+   *          the new content
    */
   public void setContent(final Content content) {
     this.content = content;
@@ -144,8 +148,9 @@ public class Rate {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -153,8 +158,9 @@ public class Rate {
 
   /**
    * Sets the rater.
-   *
-   * @param rater the new rater
+   * 
+   * @param rater
+   *          the new rater
    */
   public void setRater(final User rater) {
     this.rater = rater;
@@ -162,14 +168,17 @@ public class Rate {
 
   /**
    * Sets the value.
-   *
-   * @param value the new value
+   * 
+   * @param value
+   *          the new value
    */
   public void setValue(final Double value) {
     this.value = value;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

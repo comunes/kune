@@ -30,40 +30,42 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupChangedEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupChangedEvent extends GwtEvent<GroupChangedEvent.GroupChangedHandler> {
 
   /**
-   * The Interface HasGroupChangedHandlers.
-   *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  public interface HasGroupChangedHandlers extends HasHandlers {
-    
-    /**
-     * Adds the group changed handler.
-     *
-     * @param handler the handler
-     * @return the handler registration
-     */
-    HandlerRegistration addGroupChangedHandler(GroupChangedHandler handler);
-  }
-
-  /**
    * The Interface GroupChangedHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface GroupChangedHandler extends EventHandler {
-    
+
     /**
      * On group changed.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onGroupChanged(GroupChangedEvent event);
+  }
+
+  /**
+   * The Interface HasGroupChangedHandlers.
+   * 
+   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+   */
+  public interface HasGroupChangedHandlers extends HasHandlers {
+
+    /**
+     * Adds the group changed handler.
+     * 
+     * @param handler
+     *          the handler
+     * @return the handler registration
+     */
+    HandlerRegistration addGroupChangedHandler(GroupChangedHandler handler);
   }
 
   /** The Constant TYPE. */
@@ -71,40 +73,33 @@ public class GroupChangedEvent extends GwtEvent<GroupChangedEvent.GroupChangedHa
 
   /**
    * Fire.
-   *
-   * @param source the source
-   * @param previousGroup the previous group
-   * @param newGroup the new group
+   * 
+   * @param source
+   *          the source
+   * @param previousGroup
+   *          the previous group
+   * @param newGroup
+   *          the new group
    */
-  public static void fire(HasHandlers source, java.lang.String previousGroup, java.lang.String newGroup) {
+  public static void fire(final HasHandlers source, final java.lang.String previousGroup,
+      final java.lang.String newGroup) {
     source.fireEvent(new GroupChangedEvent(previousGroup, newGroup));
   }
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<GroupChangedHandler> getType() {
     return TYPE;
   }
 
-  /** The previous group. */
-  java.lang.String previousGroup;
-  
   /** The new group. */
   java.lang.String newGroup;
 
-  /**
-   * Instantiates a new group changed event.
-   *
-   * @param previousGroup the previous group
-   * @param newGroup the new group
-   */
-  public GroupChangedEvent(java.lang.String previousGroup, java.lang.String newGroup) {
-    this.previousGroup = previousGroup;
-    this.newGroup = newGroup;
-  }
+  /** The previous group. */
+  java.lang.String previousGroup;
 
   /**
    * Instantiates a new group changed event.
@@ -113,7 +108,68 @@ public class GroupChangedEvent extends GwtEvent<GroupChangedEvent.GroupChangedHa
     // Possibly for serialization.
   }
 
-  /* (non-Javadoc)
+  /**
+   * Instantiates a new group changed event.
+   * 
+   * @param previousGroup
+   *          the previous group
+   * @param newGroup
+   *          the new group
+   */
+  public GroupChangedEvent(final java.lang.String previousGroup, final java.lang.String newGroup) {
+    this.previousGroup = previousGroup;
+    this.newGroup = newGroup;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
+   */
+  @Override
+  protected void dispatch(final GroupChangedHandler handler) {
+    handler.onGroupChanged(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(final Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final GroupChangedEvent other = (GroupChangedEvent) obj;
+    if (previousGroup == null) {
+      if (other.previousGroup != null) {
+        return false;
+      }
+    } else if (!previousGroup.equals(other.previousGroup)) {
+      return false;
+    }
+    if (newGroup == null) {
+      if (other.newGroup != null) {
+        return false;
+      }
+    } else if (!newGroup.equals(other.newGroup)) {
+      return false;
+    }
+    return true;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -122,57 +178,26 @@ public class GroupChangedEvent extends GwtEvent<GroupChangedEvent.GroupChangedHa
   }
 
   /**
-   * Gets the previous group.
-   *
-   * @return the previous group
-   */
-  public java.lang.String getPreviousGroup() {
-    return previousGroup;
-  }
-
-  /**
    * Gets the new group.
-   *
+   * 
    * @return the new group
    */
   public java.lang.String getNewGroup() {
     return newGroup;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /**
+   * Gets the previous group.
+   * 
+   * @return the previous group
    */
-  @Override
-  protected void dispatch(GroupChangedHandler handler) {
-    handler.onGroupChanged(this);
+  public java.lang.String getPreviousGroup() {
+    return previousGroup;
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
-    GroupChangedEvent other = (GroupChangedEvent) obj;
-    if (previousGroup == null) {
-      if (other.previousGroup != null)
-        return false;
-    } else if (!previousGroup.equals(other.previousGroup))
-      return false;
-    if (newGroup == null) {
-      if (other.newGroup != null)
-        return false;
-    } else if (!newGroup.equals(other.newGroup))
-      return false;
-    return true;
-  }
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -183,7 +208,9 @@ public class GroupChangedEvent extends GwtEvent<GroupChangedEvent.GroupChangedHa
     return hashCode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

@@ -30,22 +30,23 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SessionExpiredEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExpiredHandler> {
 
   /**
    * The Interface HasSessionExpiredHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasSessionExpiredHandlers extends HasHandlers {
-    
+
     /**
      * Adds the session expired handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addSessionExpiredHandler(SessionExpiredHandler handler);
@@ -53,15 +54,16 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   /**
    * The Interface SessionExpiredHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SessionExpiredHandler extends EventHandler {
-    
+
     /**
      * On session expired.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onSessionExpired(SessionExpiredEvent event);
   }
@@ -71,16 +73,17 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   /**
    * Fire.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    */
-  public static void fire(HasHandlers source) {
+  public static void fire(final HasHandlers source) {
     source.fireEvent(new SessionExpiredEvent());
   }
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<SessionExpiredHandler> getType() {
@@ -93,7 +96,31 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
   public SessionExpiredEvent() {
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
+   */
+  @Override
+  protected void dispatch(final SessionExpiredHandler handler) {
+    handler.onSessionExpired(this);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see java.lang.Object#equals(java.lang.Object)
+   */
+  @Override
+  public boolean equals(final Object obj) {
+    return super.equals(obj);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -101,23 +128,9 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
     return TYPE;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
-   */
-  @Override
-  protected void dispatch(SessionExpiredHandler handler) {
-    handler.onSessionExpired(this);
-  }
-
-  /* (non-Javadoc)
-   * @see java.lang.Object#equals(java.lang.Object)
-   */
-  @Override
-  public boolean equals(Object obj) {
-    return super.equals(obj);
-  }
-
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -125,7 +138,9 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
     return super.hashCode();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

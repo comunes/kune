@@ -24,7 +24,7 @@ package cc.kune.core.client.registry;
 
 /**
  * The Class XmppComentableRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class XmppComentableRegistry extends AbstractContentRegistry {

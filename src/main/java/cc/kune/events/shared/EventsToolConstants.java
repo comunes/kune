@@ -27,29 +27,29 @@ import cc.kune.common.shared.res.KuneIcon;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventsToolConstants.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class EventsToolConstants {
-  
+
   /** The Constant ICON_TYPE_MEETING. */
   public static final KuneIcon ICON_TYPE_MEETING = new KuneIcon('h');
-  
+
   /** The Constant ICON_TYPE_ROOT. */
   public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('p');
-  
+
   /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "events";
-  
+
   /** The Constant TOOL_NAME. */
   public static final String TOOL_NAME = "events";
-  
+
   /** The Constant TYPE_MEETING. */
   public static final String TYPE_MEETING = TOOL_NAME + "." + "meeting";
-  
+
   /** The Constant TYPE_MEETING_DEF_GADGETNAME. */
   public static final String TYPE_MEETING_DEF_GADGETNAME = "massmob";
-  
+
   /** The Constant TYPE_ROOT. */
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
 

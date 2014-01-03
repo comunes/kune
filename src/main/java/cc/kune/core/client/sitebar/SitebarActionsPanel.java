@@ -37,33 +37,40 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitebarActionsPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView {
 
   /** The about panel. */
   private final Provider<AboutKuneDialog> aboutPanel;
-  
+
   /** The error panel. */
   private final Provider<ErrorsDialog> errorPanel;
-  
+
   /** The toolbar left. */
   private final ActionSimplePanel toolbarLeft;
-  
+
   /** The toolbar right. */
   private final ActionSimplePanel toolbarRight;
 
   /**
    * Instantiates a new sitebar actions panel.
-   *
-   * @param armor the armor
-   * @param toolbarRight the toolbar right
-   * @param toolbarLeft the toolbar left
-   * @param i18n the i18n
-   * @param aboutPanel the about panel
-   * @param errorPanel the error panel
-   * @param siteLogo the site logo
+   * 
+   * @param armor
+   *          the armor
+   * @param toolbarRight
+   *          the toolbar right
+   * @param toolbarLeft
+   *          the toolbar left
+   * @param i18n
+   *          the i18n
+   * @param aboutPanel
+   *          the about panel
+   * @param errorPanel
+   *          the error panel
+   * @param siteLogo
+   *          the site logo
    */
   @Inject
   public SitebarActionsPanel(final GSpaceArmor armor, final ActionSimplePanel toolbarRight,
@@ -83,7 +90,9 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
     armor.getSitebar().add(toolbarRight);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -91,32 +100,48 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
     return toolbarRight;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#getLeftBar()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#
+   * getLeftBar()
    */
   @Override
   public IsActionExtensible getLeftBar() {
     return toolbarLeft;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#getRightBar()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#
+   * getRightBar()
    */
   @Override
   public IsActionExtensible getRightBar() {
     return toolbarRight;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#showAboutDialog()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#
+   * showAboutDialog()
    */
   @Override
   public void showAboutDialog() {
     aboutPanel.get().showCentered();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#showErrorDialog()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#
+   * showErrorDialog()
    */
   @Override
   public void showErrorDialog() {

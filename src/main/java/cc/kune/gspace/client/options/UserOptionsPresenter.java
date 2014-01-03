@@ -46,7 +46,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptionsPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptionsPresenter extends
@@ -55,7 +55,7 @@ public class UserOptionsPresenter extends
 
   /**
    * The Interface UserOptionsProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -64,7 +64,7 @@ public class UserOptionsPresenter extends
 
   /**
    * The Interface UserOptionsView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface UserOptionsView extends EntityOptionsView {
@@ -72,30 +72,38 @@ public class UserOptionsPresenter extends
 
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The res. */
   private final IconicResources res;
-  
+
   /** The session. */
   private final Session session;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
-  
+
   /** The user options. */
   private final SiteUserOptions userOptions;
 
   /**
    * Instantiates a new user options presenter.
-   *
-   * @param eventBus the event bus
-   * @param proxy the proxy
-   * @param session the session
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param res the res
-   * @param userOptions the user options
-   * @param view the view
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param proxy
+   *          the proxy
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param userOptions
+   *          the user options
+   * @param view
+   *          the view
    */
   @Inject
   public UserOptionsPresenter(final EventBus eventBus, final UserOptionsProxy proxy,
@@ -115,15 +123,21 @@ public class UserOptionsPresenter extends
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView
+   * ()
    */
   @Override
   public UserOptionsView getView() {
     return (UserOptionsView) super.getView();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -148,8 +162,11 @@ public class UserOptionsPresenter extends
     userOptions.addAction(prefsItem);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#show()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#show()
    */
   @Override
   public void show() {

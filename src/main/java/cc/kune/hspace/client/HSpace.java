@@ -28,14 +28,14 @@ import cc.kune.common.client.actions.ui.IsActionExtensible;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface HSpace.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface HSpace {
-  
+
   /**
    * Gets the toolbar.
-   *
+   * 
    * @return the toolbar
    */
   IsActionExtensible getToolbar();

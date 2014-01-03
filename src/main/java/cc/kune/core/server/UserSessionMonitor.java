@@ -34,17 +34,21 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSessionMonitor.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class UserSessionMonitor implements HttpSessionListener {
-  
+
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(UserSessionMonitor.class);
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpSessionListener#sessionCreated(javax.servlet.http.HttpSessionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * javax.servlet.http.HttpSessionListener#sessionCreated(javax.servlet.http
+   * .HttpSessionEvent)
    */
   @Override
   public void sessionCreated(final HttpSessionEvent event) {
@@ -53,8 +57,12 @@ public class UserSessionMonitor implements HttpSessionListener {
     // event.getSession().getServletContext().getContextPath(),
   }
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpSessionListener#sessionDestroyed(javax.servlet.http.HttpSessionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * javax.servlet.http.HttpSessionListener#sessionDestroyed(javax.servlet.http
+   * .HttpSessionEvent)
    */
   @Override
   public void sessionDestroyed(final HttpSessionEvent event) {

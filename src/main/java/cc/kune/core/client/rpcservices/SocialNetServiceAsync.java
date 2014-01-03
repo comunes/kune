@@ -31,134 +31,178 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SocialNetServiceAsync.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SocialNetServiceAsync {
 
   /**
    * Accept join group.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param groupToAcceptShortName the group to accept short name
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param groupToAcceptShortName
+   *          the group to accept short name
+   * @param callback
+   *          the callback
    */
   void acceptJoinGroup(String hash, StateToken groupToken, String groupToAcceptShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 
   /**
    * Adds the admin member.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param groupToAddShortName the group to add short name
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param groupToAddShortName
+   *          the group to add short name
+   * @param callback
+   *          the callback
    */
   void addAdminMember(String hash, StateToken groupToken, String groupToAddShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 
   /**
    * Adds the as buddie.
-   *
-   * @param hash the hash
-   * @param userName the user name
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param userName
+   *          the user name
+   * @param callback
+   *          the callback
    */
   void addAsBuddie(String hash, String userName, AsyncCallback<Void> callback);
 
   /**
    * Adds the collab member.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param groupToAddShortName the group to add short name
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param groupToAddShortName
+   *          the group to add short name
+   * @param callback
+   *          the callback
    */
   void addCollabMember(String hash, StateToken groupToken, String groupToAddShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 
   /**
    * Adds the viewer member.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param groupToAddShortName the group to add short name
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param groupToAddShortName
+   *          the group to add short name
+   * @param callback
+   *          the callback
    */
   void addViewerMember(String hash, StateToken groupToken, String groupToAddShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 
   /**
    * Delete member.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param groupToDeleteShortName the group to delete short name
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param groupToDeleteShortName
+   *          the group to delete short name
+   * @param callback
+   *          the callback
    */
   void deleteMember(String hash, StateToken groupToken, String groupToDeleteShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 
   /**
    * Deny join group.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param groupToDenyShortName the group to deny short name
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param groupToDenyShortName
+   *          the group to deny short name
+   * @param callback
+   *          the callback
    */
   void denyJoinGroup(String hash, StateToken groupToken, String groupToDenyShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 
   /**
    * Gets the social network.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param callback
+   *          the callback
    * @return the social network
    */
   void getSocialNetwork(String hash, StateToken groupToken, AsyncCallback<SocialNetworkDataDTO> callback);
 
   /**
    * Request join group.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param callback
+   *          the callback
    */
   void requestJoinGroup(String hash, StateToken groupToken,
       AsyncCallback<SocialNetworkRequestResult> callback);
 
   /**
    * Sets the admin as collab.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param groupToSetCollabShortName the group to set collab short name
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param groupToSetCollabShortName
+   *          the group to set collab short name
+   * @param callback
+   *          the callback
    */
   void setAdminAsCollab(String hash, StateToken groupToken, String groupToSetCollabShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 
   /**
    * Sets the collab as admin.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param groupToSetAdminShortName the group to set admin short name
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param groupToSetAdminShortName
+   *          the group to set admin short name
+   * @param callback
+   *          the callback
    */
   void setCollabAsAdmin(String hash, StateToken groupToken, String groupToSetAdminShortName,
       AsyncCallback<SocialNetworkDataDTO> callback);
 
   /**
    * Un join group.
-   *
-   * @param hash the hash
-   * @param groupToken the group token
-   * @param callback the callback
+   * 
+   * @param hash
+   *          the hash
+   * @param groupToken
+   *          the group token
+   * @param callback
+   *          the callback
    */
   void unJoinGroup(String hash, StateToken groupToken, AsyncCallback<Void> callback);
 }

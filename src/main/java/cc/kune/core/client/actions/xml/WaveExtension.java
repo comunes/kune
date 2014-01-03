@@ -25,30 +25,30 @@ package cc.kune.core.client.actions.xml;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveExtension.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveExtension {
-  
+
   /**
    * The Class Builder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class Builder {
-    
+
     /** The gadget url. */
     private String gadgetUrl;
-    
+
     /** The icon css. */
     private String iconCss;
-    
+
     /** The icon url. */
     private String iconUrl;
-    
+
     /** The installer url. */
     private String installerUrl;
-    
+
     /** The name. */
     private String name;
 
@@ -60,7 +60,7 @@ public class WaveExtension {
 
     /**
      * Builds the.
-     *
+     * 
      * @return the wave extension
      */
     public WaveExtension build() {
@@ -69,8 +69,9 @@ public class WaveExtension {
 
     /**
      * Gadget url.
-     *
-     * @param gadgetUrl the gadget url
+     * 
+     * @param gadgetUrl
+     *          the gadget url
      * @return the builder
      */
     public Builder gadgetUrl(final String gadgetUrl) {
@@ -80,8 +81,9 @@ public class WaveExtension {
 
     /**
      * Icon css.
-     *
-     * @param iconCss the icon css
+     * 
+     * @param iconCss
+     *          the icon css
      * @return the builder
      */
     public Builder iconCss(final String iconCss) {
@@ -91,8 +93,9 @@ public class WaveExtension {
 
     /**
      * Icon url.
-     *
-     * @param iconUrl the icon url
+     * 
+     * @param iconUrl
+     *          the icon url
      * @return the builder
      */
     public Builder iconUrl(final String iconUrl) {
@@ -102,8 +105,9 @@ public class WaveExtension {
 
     /**
      * Installer url.
-     *
-     * @param installerUrl the installer url
+     * 
+     * @param installerUrl
+     *          the installer url
      * @return the builder
      */
     public Builder installerUrl(final String installerUrl) {
@@ -113,8 +117,9 @@ public class WaveExtension {
 
     /**
      * Name.
-     *
-     * @param name the name
+     * 
+     * @param name
+     *          the name
      * @return the builder
      */
     public Builder name(final String name) {
@@ -125,23 +130,24 @@ public class WaveExtension {
 
   /** The gadget url. */
   private final String gadgetUrl;
-  
+
   /** The icon css. */
   private final String iconCss;
-  
+
   /** The icon url. */
   private final String iconUrl;
-  
+
   /** The installer url. */
   private final String installerUrl;
-  
+
   /** The name. */
   private final String name;
 
   /**
    * Instantiates a new wave extension.
-   *
-   * @param builder the builder
+   * 
+   * @param builder
+   *          the builder
    */
   public WaveExtension(final Builder builder) {
     gadgetUrl = builder.gadgetUrl;
@@ -153,7 +159,7 @@ public class WaveExtension {
 
   /**
    * Gets the gadget url.
-   *
+   * 
    * @return the gadget url
    */
   public String getGadgetUrl() {
@@ -162,7 +168,7 @@ public class WaveExtension {
 
   /**
    * Gets the icon css.
-   *
+   * 
    * @return the icon css
    */
   public String getIconCss() {
@@ -171,7 +177,7 @@ public class WaveExtension {
 
   /**
    * Gets the icon url.
-   *
+   * 
    * @return the icon url
    */
   public String getIconUrl() {
@@ -180,7 +186,7 @@ public class WaveExtension {
 
   /**
    * Gets the installer url.
-   *
+   * 
    * @return the installer url
    */
   public String getInstallerUrl() {
@@ -189,7 +195,7 @@ public class WaveExtension {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {

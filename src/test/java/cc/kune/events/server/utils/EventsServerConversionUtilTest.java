@@ -25,17 +25,17 @@ package cc.kune.events.server.utils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventsServerConversionUtilTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EventsServerConversionUtilTest extends BasicCalendarTest {
-  
+
   /** The Constant DESCRIPTION. */
   protected static final String DESCRIPTION = "some description";
-  
+
   /** The Constant ID. */
   protected static final String ID = "some id";
-  
+
   /** The Constant TITLE. */
   protected static final String TITLE = "some title";
 

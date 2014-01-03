@@ -30,10 +30,23 @@ import com.google.gwt.user.client.History;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HistoryWrapperDefault.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HistoryWrapperDefault implements HistoryWrapper {
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.client.state.HistoryWrapper#checkHashbang()
+   */
+  @Override
+  public void checkHashbang() {
+    final String currentToken = History.getToken();
+    if (!currentToken.startsWith("!")) {
+      History.newItem(HistoryUtils.hashbang(currentToken), false);
+    }
+  }
 
   /*
    * (non-Javadoc)
@@ -43,6 +56,18 @@ public class HistoryWrapperDefault implements HistoryWrapper {
   @Override
   public String getToken() {
     return HistoryUtils.undoHashbang(History.getToken());
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.state.HistoryWrapper#newItem(cc.kune.core.shared.domain
+   * .utils.StateToken)
+   */
+  @Override
+  public void newItem(final StateToken token) {
+    newItem(token.toString());
   }
 
   /*
@@ -64,31 +89,6 @@ public class HistoryWrapperDefault implements HistoryWrapper {
   @Override
   public void newItem(final String historyToken, final boolean issueEvent) {
     History.newItem(HistoryUtils.hashbang(historyToken), issueEvent);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.core.client.state.HistoryWrapper#checkHashbang()
-   */
-  @Override
-  public void checkHashbang() {
-    String currentToken = History.getToken();
-    if (!currentToken.startsWith("!")) {
-      History.newItem(HistoryUtils.hashbang(currentToken), false);
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.state.HistoryWrapper#newItem(cc.kune.core.shared.domain
-   * .utils.StateToken)
-   */
-  @Override
-  public void newItem(StateToken token) {
-    newItem(token.toString());
   }
 
 }

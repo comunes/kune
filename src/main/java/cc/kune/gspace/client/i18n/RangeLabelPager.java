@@ -25,7 +25,7 @@ import com.google.gwt.view.client.Range;
 /**
  * A pager that displays the current range without any controls to change the
  * range.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RangeLabelPager extends AbstractPager {
@@ -42,8 +42,12 @@ public class RangeLabelPager extends AbstractPager {
     initWidget(label);
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.user.cellview.client.AbstractPager#onRangeOrRowCountChanged()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.user.cellview.client.AbstractPager#onRangeOrRowCountChanged
+   * ()
    */
   @Override
   protected void onRangeOrRowCountChanged() {

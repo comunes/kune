@@ -35,7 +35,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ShareInGPlusMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
@@ -45,12 +45,17 @@ public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
 
   /**
    * Instantiates a new share in g plus menu item.
-   *
-   * @param action the action
-   * @param iconic the iconic
-   * @param session the session
-   * @param menu the menu
-   * @param i18n the i18n
+   * 
+   * @param action
+   *          the action
+   * @param iconic
+   *          the iconic
+   * @param session
+   *          the session
+   * @param menu
+   *          the menu
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public ShareInGPlusMenuItem(final AbstractShareInSocialNetAction action, final IconicResources iconic,

@@ -28,15 +28,16 @@ import com.google.gwt.user.client.Timer;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneUiUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneUiUtils {
-  
+
   /**
    * Focus on field.
-   *
-   * @param field the field
+   * 
+   * @param field
+   *          the field
    */
   public static void focusOnField(final Field<?> field) {
     new Timer() {

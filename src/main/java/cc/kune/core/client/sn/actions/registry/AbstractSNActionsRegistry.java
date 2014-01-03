@@ -27,11 +27,16 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractSNActionsRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @SuppressWarnings("serial")
 public abstract class AbstractSNActionsRegistry extends GuiActionDescCollection {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /**
    * Instantiates a new abstract sn actions registry.

@@ -32,15 +32,16 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DocsNewMenu.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DocsNewMenu extends NewMenuProvider {
 
   /**
    * Instantiates a new docs new menu.
-   *
-   * @param menu the menu
+   * 
+   * @param menu
+   *          the menu
    */
   @Inject
   public DocsNewMenu(final @Nonnull AbstractNewMenu menu) {

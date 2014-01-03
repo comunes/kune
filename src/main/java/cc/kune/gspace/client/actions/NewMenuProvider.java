@@ -32,28 +32,31 @@ import com.google.inject.Provider;
  * entries. This can be register in a list of Providers<GuiDescriptor> but in
  * fact only references one item and can be used to select the parent of some
  * menu items
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class NewMenuProvider implements Provider<MenuDescriptor> {
 
   /** The Constant MENU_ID. */
   public static final String MENU_ID = "k-newmenu-id";
-  
+
   /** The menu. */
   private final AbstractNewMenu menu;
 
   /**
    * Instantiates a new new menu provider.
-   *
-   * @param menu the menu
+   * 
+   * @param menu
+   *          the menu
    */
   public NewMenuProvider(final AbstractNewMenu menu) {
     this.menu = menu;
     menu.setId(MENU_ID);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.inject.Provider#get()
    */
   @Override

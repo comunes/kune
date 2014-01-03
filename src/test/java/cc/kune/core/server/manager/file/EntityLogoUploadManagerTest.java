@@ -41,14 +41,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityLogoUploadManagerTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
   /** The Constant TEST_FILE. */
   private static final String TEST_FILE = "src/test/java/cc/kune/core/server/manager/file/orig.png";
-  
+
   /** The manager. */
   @Inject
   EntityLogoUploadManager manager;
@@ -63,8 +63,9 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
   /**
    * Test create logo.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testCreateLogo() throws Exception {
@@ -88,8 +89,9 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
   /**
    * Test session exp.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = SessionExpiredException.class)
   public void testSessionExp() throws Exception {
@@ -108,8 +110,9 @@ public class EntityLogoUploadManagerTest extends ContentServiceIntegrationTest {
 
   /**
    * Test user must be auth.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = UserMustBeLoggedException.class)
   public void testUserMustBeAuth() throws Exception {

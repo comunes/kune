@@ -41,14 +41,14 @@ import com.gwtplatform.mvp.client.UiHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SpinerPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SpinerPanel extends PopupViewWithUiHandlers<UiHandlers> implements SpinerView {
 
   /**
    * The Interface SpinerPanelUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface SpinerPanelUiBinder extends UiBinder<Widget, SpinerPanel> {
@@ -68,17 +68,18 @@ public class SpinerPanel extends PopupViewWithUiHandlers<UiHandlers> implements 
   /** The panel. */
   @UiField
   HorizontalPanel panel;
-  
+
   /** The popup. */
   private final PopupPanel popup;
-  
+
   /** The widget. */
   Widget widget;
 
   /**
    * Instantiates a new spiner panel.
-   *
-   * @param eventBus the event bus
+   * 
+   * @param eventBus
+   *          the event bus
    */
   @Inject
   public SpinerPanel(final EventBus eventBus) {
@@ -90,7 +91,9 @@ public class SpinerPanel extends PopupViewWithUiHandlers<UiHandlers> implements 
     show("");
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -98,7 +101,9 @@ public class SpinerPanel extends PopupViewWithUiHandlers<UiHandlers> implements 
     return popup;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.notify.spiner.SpinerPresenter.SpinerView#fade()
    */
   @Override
@@ -120,8 +125,12 @@ public class SpinerPanel extends PopupViewWithUiHandlers<UiHandlers> implements 
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.notify.spiner.SpinerPresenter.SpinerView#show(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.notify.spiner.SpinerPresenter.SpinerView#show(java.
+   * lang.String)
    */
   @Override
   public void show(final String message) {

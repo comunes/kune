@@ -150,11 +150,11 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
    * ).css("border", "0px");
    */
   public native void restyleWavePanel() /*-{
-		$wnd.jQuery("button[class*='ParticipantsViewBuilder-Css-addMessage']")
-				.hide();
-		$wnd.jQuery("div[class*='ToplevelToolbarWidget-Css-toolbar']").css(
-				"background", "none repeat scroll 0 0 #FFFFFF");
-  }-*/;
+                                        $wnd.jQuery("button[class*='ParticipantsViewBuilder-Css-addMessage']")
+                                        .hide();
+                                        $wnd.jQuery("div[class*='ToplevelToolbarWidget-Css-toolbar']").css(
+                                        "background", "none repeat scroll 0 0 #FFFFFF");
+                                        }-*/;
 
   /*
    * (non-Javadoc)

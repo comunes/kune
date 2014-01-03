@@ -32,7 +32,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SubscribeToListBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SubscribeToListBtn extends ButtonDescriptor {
@@ -42,11 +42,15 @@ public class SubscribeToListBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new subscribe to list btn.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param session the session
-   * @param res the res
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param session
+   *          the session
+   * @param res
+   *          the res
    */
   @Inject
   public SubscribeToListBtn(final I18nTranslationService i18n, final SubscriteToListAction action,

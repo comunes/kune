@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 /**
  * The Class SessionAction is used to create actions that depends of current
  * session auth status.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class SessionAction extends AbstractExtendedAction {

@@ -28,15 +28,16 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ExtendedGinModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class ExtendedGinModule extends AbstractPresenterModule {
 
   /**
    * Eagle.
-   *
-   * @param type the type
+   * 
+   * @param type
+   *          the type
    */
   protected void eagle(final Class<?> type) {
     bind(type).asEagerSingleton();
@@ -44,8 +45,9 @@ public abstract class ExtendedGinModule extends AbstractPresenterModule {
 
   /**
    * S.
-   *
-   * @param type the type
+   * 
+   * @param type
+   *          the type
    */
   protected void s(final Class<?> type) {
     bind(type).in(Singleton.class);
@@ -53,11 +55,15 @@ public abstract class ExtendedGinModule extends AbstractPresenterModule {
 
   /**
    * S.
-   *
-   * @param <V> the value type
-   * @param <W> the generic type
-   * @param type the type
-   * @param typeImpl the type impl
+   * 
+   * @param <V>
+   *          the value type
+   * @param <W>
+   *          the generic type
+   * @param type
+   *          the type
+   * @param typeImpl
+   *          the type impl
    */
   protected <V, W> void s(final Class<V> type, final Class<? extends V> typeImpl) {
     bind(type).to(typeImpl).in(Singleton.class);

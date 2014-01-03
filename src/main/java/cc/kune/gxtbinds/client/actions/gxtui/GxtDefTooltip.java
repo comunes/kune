@@ -27,32 +27,33 @@ import com.extjs.gxt.ui.client.widget.tips.ToolTipConfig;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GxtDefTooltip.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GxtDefTooltip extends ToolTipConfig {
-  
+
   /**
    * The Enum Position.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public enum Position {
-    
+
+    /** The bottom. */
+    bottom,
+    /** The left. */
+    left,
+    /** The right. */
+    right,
     /** The top. */
-    top, 
- /** The bottom. */
- bottom, 
- /** The left. */
- left, 
- /** The right. */
- right
+    top
   }
 
   /**
    * Instantiates a new gxt def tooltip.
-   *
-   * @param text the text
+   * 
+   * @param text
+   *          the text
    */
   public GxtDefTooltip(final String text) {
     this(null, text, Position.left);
@@ -60,9 +61,11 @@ public class GxtDefTooltip extends ToolTipConfig {
 
   /**
    * Instantiates a new gxt def tooltip.
-   *
-   * @param title the title
-   * @param text the text
+   * 
+   * @param title
+   *          the title
+   * @param text
+   *          the text
    */
   public GxtDefTooltip(final String title, final String text) {
     this(title, text, Position.left);
@@ -70,10 +73,13 @@ public class GxtDefTooltip extends ToolTipConfig {
 
   /**
    * Instantiates a new gxt def tooltip.
-   *
-   * @param title the title
-   * @param text the text
-   * @param pos the pos
+   * 
+   * @param title
+   *          the title
+   * @param text
+   *          the text
+   * @param pos
+   *          the pos
    */
   public GxtDefTooltip(final String title, final String text, final Position pos) {
     setText(text);

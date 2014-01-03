@@ -27,7 +27,7 @@ import com.google.gwt.view.client.HasRows;
 /**
  * A scrolling pager that automatically increases the range every time the
  * scroll bar reaches the bottom.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ShowMorePagerPanel extends AbstractPager {
@@ -89,8 +89,9 @@ public class ShowMorePagerPanel extends AbstractPager {
 
   /**
    * Ensure visible.
-   *
-   * @param object the object
+   * 
+   * @param object
+   *          the object
    */
   public void ensureVisible(final UIObject object) {
     scrollable.ensureVisible(object);
@@ -106,15 +107,23 @@ public class ShowMorePagerPanel extends AbstractPager {
     return incrementSize;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.user.cellview.client.AbstractPager#onRangeOrRowCountChanged()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.user.cellview.client.AbstractPager#onRangeOrRowCountChanged
+   * ()
    */
   @Override
   protected void onRangeOrRowCountChanged() {
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.user.cellview.client.AbstractPager#setDisplay(com.google.gwt.view.client.HasRows)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.user.cellview.client.AbstractPager#setDisplay(com.google
+   * .gwt.view.client.HasRows)
    */
   @Override
   public void setDisplay(final HasRows display) {

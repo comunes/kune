@@ -29,7 +29,7 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FolderViewerPresenterTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FolderViewerPresenterTest {

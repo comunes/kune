@@ -38,11 +38,11 @@ import com.google.inject.persist.Transactional;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PersistenceTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class PersistenceTest {
-  
+
   /** The provider. */
   @Inject
   @DataSourceKune
@@ -54,7 +54,6 @@ public abstract class PersistenceTest {
   public PersistenceTest() {
   }
 
-
   /**
    * Close transaction.
    */
@@ -64,7 +63,7 @@ public abstract class PersistenceTest {
 
   /**
    * Gets the manager.
-   *
+   * 
    * @return the manager
    */
   protected EntityManager getManager() {
@@ -73,7 +72,7 @@ public abstract class PersistenceTest {
 
   /**
    * Gets the transaction.
-   *
+   * 
    * @return the transaction
    */
   public EntityTransaction getTransaction() {
@@ -82,7 +81,7 @@ public abstract class PersistenceTest {
 
   /**
    * Open transaction.
-   *
+   * 
    * @return the entity manager
    */
   public EntityManager openTransaction() {
@@ -94,8 +93,9 @@ public abstract class PersistenceTest {
 
   /**
    * Persist.
-   *
-   * @param entities the entities
+   * 
+   * @param entities
+   *          the entities
    */
   public void persist(final Object... entities) {
     for (final Object entity : entities) {

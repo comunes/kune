@@ -38,9 +38,11 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractSNPresenter.
- *
- * @param <V> the value type
- * @param <Proxy_> the generic type
+ * 
+ * @param <V>
+ *          the value type
+ * @param <Proxy_>
+ *          the generic type
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractSNPresenter<V extends View, Proxy_ extends Proxy<?>> extends
@@ -54,11 +56,15 @@ public abstract class AbstractSNPresenter<V extends View, Proxy_ extends Proxy<?
 
   /**
    * Instantiates a new abstract sn presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param downloadProvider the download provider
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param downloadProvider
+   *          the download provider
    */
   public AbstractSNPresenter(final EventBus eventBus, final View view, final Proxy<?> proxy,
       final Provider<ClientFileDownloadUtils> downloadProvider) {
@@ -68,8 +74,9 @@ public abstract class AbstractSNPresenter<V extends View, Proxy_ extends Proxy<?
 
   /**
    * Are many.
-   *
-   * @param numAvatars the num avatars
+   * 
+   * @param numAvatars
+   *          the num avatars
    * @return true, if successful
    */
   protected boolean areMany(final int numAvatars) {
@@ -78,10 +85,13 @@ public abstract class AbstractSNPresenter<V extends View, Proxy_ extends Proxy<?
 
   /**
    * Creates the menu items.
-   *
-   * @param target the target
-   * @param registry the registry
-   * @param title the title
+   * 
+   * @param target
+   *          the target
+   * @param registry
+   *          the registry
+   * @param title
+   *          the title
    * @return the gui action desc collection
    */
   protected GuiActionDescCollection createMenuItems(final Object target,
@@ -98,8 +108,9 @@ public abstract class AbstractSNPresenter<V extends View, Proxy_ extends Proxy<?
 
   /**
    * Gets the avatar.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the avatar
    */
   protected String getAvatar(final GroupDTO group) {

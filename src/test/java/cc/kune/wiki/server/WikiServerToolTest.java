@@ -35,18 +35,19 @@ import cc.kune.wave.server.kspecific.ParticipantUtils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WikiServerToolTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WikiServerToolTest { // extends PersistenceTest {
 
   /** The server tool. */
- private WikiServerTool serverTool;
+  private WikiServerTool serverTool;
 
   /**
    * Before.
-   *
-   * @throws InvalidParticipantAddress the invalid participant address
+   * 
+   * @throws InvalidParticipantAddress
+   *           the invalid participant address
    */
   @Before
   public void before() throws InvalidParticipantAddress {

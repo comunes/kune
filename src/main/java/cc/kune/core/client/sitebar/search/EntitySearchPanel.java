@@ -37,49 +37,51 @@ import com.google.gwt.user.client.ui.TextBoxBase;
 /**
  * This panel is used to search for users to add as a buddies or to add to
  * groups as collaborators.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntitySearchPanel {
 
   /** The Constant DIALOG_ID. */
   public static final String DIALOG_ID = "entity-search-panel-diag";
-  
+
   /** The Constant OK_ID. */
   public static final String OK_ID = "entity-search-panel-ok-id";
-  
+
   /** The Constant SEARCH_TEXT_HEIGHT. */
   private static final int SEARCH_TEXT_HEIGHT = 13;
-  
+
   /** The Constant SEARCH_TEXT_WIDTH_BIG. */
   private static final int SEARCH_TEXT_WIDTH_BIG = 160;
-  
+
   /** The Constant SEARCH_TEXT_WIDTH_SMALL. */
   private static final int SEARCH_TEXT_WIDTH_SMALL = 120;
-  
+
   /** The callback. */
   private OnEntitySelectedInSearch callback;
-  
+
   /** The dialog. */
   private final BasicTopDialog dialog;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The search only users. */
   private boolean searchOnlyUsers;
-  
+
   /** The search text box. */
   private TextBoxBase searchTextBox;
-  
+
   /** The suggest box. */
   private SuggestBox suggestBox;
 
   /**
    * Instantiates a new entity search panel.
-   *
-   * @param img the img
-   * @param i18n the i18n
+   * 
+   * @param img
+   *          the img
+   * @param i18n
+   *          the i18n
    */
   public EntitySearchPanel(final CoreResources img, final I18nTranslationService i18n) {
     this.i18n = i18n;
@@ -104,8 +106,9 @@ public abstract class EntitySearchPanel {
 
   /**
    * Creates the.
-   *
-   * @param id the id
+   * 
+   * @param id
+   *          the id
    */
   private void create(final String id) {
     dialog.getTitleText().setText(
@@ -128,7 +131,7 @@ public abstract class EntitySearchPanel {
 
   /**
    * Gets the focus.
-   *
+   * 
    * @return the focus
    */
   public HasAllFocusHandlers getFocus() {
@@ -137,7 +140,7 @@ public abstract class EntitySearchPanel {
 
   /**
    * Gets the text box.
-   *
+   * 
    * @return the text box
    */
   public HasText getTextBox() {
@@ -146,10 +149,13 @@ public abstract class EntitySearchPanel {
 
   /**
    * Inits the.
-   *
-   * @param searchOnlyUsers the search only users
-   * @param id the id
-   * @param callback the callback
+   * 
+   * @param searchOnlyUsers
+   *          the search only users
+   * @param id
+   *          the id
+   * @param callback
+   *          the callback
    */
   public void init(final boolean searchOnlyUsers, final String id,
       final OnEntitySelectedInSearch callback) {
@@ -167,8 +173,9 @@ public abstract class EntitySearchPanel {
 
   /**
    * Sets the text search.
-   *
-   * @param text the new text search
+   * 
+   * @param text
+   *          the new text search
    */
   public void setTextSearch(final String text) {
     suggestBox.setValue(text, false);

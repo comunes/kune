@@ -33,7 +33,7 @@ import cc.kune.domain.I18nLanguage;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ContainerManager.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -41,111 +41,138 @@ public interface ContainerManager extends Manager<Container, Long> {
 
   /**
    * Creates the folder.
-   *
-   * @param group the group
-   * @param parent the parent
-   * @param name the name
-   * @param language the language
-   * @param typeId the type id
+   * 
+   * @param group
+   *          the group
+   * @param parent
+   *          the parent
+   * @param name
+   *          the name
+   * @param language
+   *          the language
+   * @param typeId
+   *          the type id
    * @return the container
    */
   Container createFolder(Group group, Container parent, String name, I18nLanguage language, String typeId);
 
   /**
    * Creates the root folder.
-   *
-   * @param group the group
-   * @param toolName the tool name
-   * @param name the name
-   * @param rootType the root type
+   * 
+   * @param group
+   *          the group
+   * @param toolName
+   *          the tool name
+   * @param name
+   *          the name
+   * @param rootType
+   *          the root type
    * @return the container
    */
   Container createRootFolder(Group group, String toolName, String name, final String rootType);
 
   /**
    * Find if exists title.
-   *
-   * @param container the container
-   * @param title the title
+   * 
+   * @param container
+   *          the container
+   * @param title
+   *          the title
    * @return true, if successful
    */
   boolean findIfExistsTitle(Container container, String title);
 
   /**
    * Gets the trash folder.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the trash folder
    */
   Container getTrashFolder(Group group);
 
   /**
    * Checks for trash folder.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return true, if successful
    */
   boolean hasTrashFolder(Group group);
 
   /**
    * Move container.
-   *
-   * @param container the container
-   * @param newContainer the new container
+   * 
+   * @param container
+   *          the container
+   * @param newContainer
+   *          the new container
    * @return the container
    */
   Container moveContainer(Container container, Container newContainer);
 
   /**
    * Purge all.
-   *
-   * @param container the container
+   * 
+   * @param container
+   *          the container
    * @return the container
    */
   Container purgeAll(Container container);
 
   /**
    * Purge container.
-   *
-   * @param container the container
+   * 
+   * @param container
+   *          the container
    * @return the container
    */
   Container purgeContainer(Container container);
 
   /**
    * Rename folder.
-   *
-   * @param group the group
-   * @param container the container
-   * @param newName the new name
+   * 
+   * @param group
+   *          the group
+   * @param container
+   *          the container
+   * @param newName
+   *          the new name
    * @return the container
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   Container renameFolder(Group group, Container container, String newName) throws DefaultException;
 
   /**
    * Search.
-   *
-   * @param search the search
+   * 
+   * @param search
+   *          the search
    * @return the search result
    */
   SearchResult<Container> search(String search);
 
   /**
    * Search.
-   *
-   * @param search the search
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param search
+   *          the search
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the search result
    */
   SearchResult<Container> search(String search, Integer firstResult, Integer maxResults);
 
   /**
    * Sets the access list.
-   *
-   * @param container the container
-   * @param accessList the access list
+   * 
+   * @param container
+   *          the container
+   * @param accessList
+   *          the access list
    */
   void setAccessList(Container container, AccessLists accessList);
 }

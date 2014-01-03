@@ -36,26 +36,26 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ActionRegistryByTypeTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ActionRegistryByTypeTest {
 
   /** The Constant OTHERACTIONGROUP. */
   private static final String OTHERACTIONGROUP = "otheractiongroup";
-  
+
   /** The Constant SOMEACTIONGROUP. */
   private static final String SOMEACTIONGROUP = "someactiongroup";
-  
+
   /** The Constant TOOL. */
   private static final String TOOL = "tool";
-  
+
   /** The action. */
   private GuiActionDescrip action;
-  
+
   /** The action registry by type. */
   private ActionRegistryByType actionRegistryByType;
-  
+
   /** The all rights. */
   private AccessRights allRights;
 

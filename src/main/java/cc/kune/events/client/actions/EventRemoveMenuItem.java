@@ -41,35 +41,42 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventRemoveMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class EventRemoveMenuItem extends MenuItemDescriptor {
-  
+
   /**
    * The Class EventEditAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class EventEditAction extends CalendarRolAction {
-    
+
     /** The calendar. */
     private final Provider<CalendarViewer> calendar;
-    
+
     /** The content service. */
     private final ContentServiceHelper contentService;
 
     /**
      * Instantiates a new event edit action.
-     *
-     * @param res the res
-     * @param calendar the calendar
-     * @param eventBus the event bus
-     * @param session the session
-     * @param i18n the i18n
-     * @param rightsMan the rights man
-     * @param contentService the content service
+     * 
+     * @param res
+     *          the res
+     * @param calendar
+     *          the calendar
+     * @param eventBus
+     *          the event bus
+     * @param session
+     *          the session
+     * @param i18n
+     *          the i18n
+     * @param rightsMan
+     *          the rights man
+     * @param contentService
+     *          the content service
      */
     @Inject
     public EventEditAction(final IconicResources res, final Provider<CalendarViewer> calendar,
@@ -81,8 +88,12 @@ public class EventRemoveMenuItem extends MenuItemDescriptor {
       withText(i18n.t("Remove this appointment")).withIcon(res.trashGrey());
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -92,18 +103,20 @@ public class EventRemoveMenuItem extends MenuItemDescriptor {
 
   /** The Constant CREATE_APP_ADD_ID. */
   public static final String CREATE_APP_ADD_ID = "event-add-menu-item-add-btn";
-  
+
   /** The Constant CREATE_APP_CANCEL_ID. */
   public static final String CREATE_APP_CANCEL_ID = "event-add-menu-item-add-btn";
-  
+
   /** The Constant CREATE_APP_ID. */
   public static final String CREATE_APP_ID = "event-add-menu-item-form";
 
   /**
    * Instantiates a new event remove menu item.
-   *
-   * @param action the action
-   * @param cal the cal
+   * 
+   * @param action
+   *          the action
+   * @param cal
+   *          the cal
    */
   @Inject
   public EventRemoveMenuItem(final EventEditAction action, final CalendarOnOverMenu cal) {

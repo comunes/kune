@@ -42,9 +42,10 @@ public class ListenerFilter extends AbstractInjectedFilter {
   public void destroy() {
   }
 
+  @Override
   public void doFilter(final ServletRequest request, final ServletResponse response,
       final FilterChain chain) throws IOException, ServletException {
-    ApplicationListener listener = super.getInstance(listenerClass);
+    final ApplicationListener listener = super.getInstance(listenerClass);
     listener.doBefore((HttpServletRequest) request, (HttpServletResponse) response);
     chain.doFilter(request, response);
     listener.doAfter((HttpServletRequest) request, (HttpServletResponse) response);

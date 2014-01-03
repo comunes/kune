@@ -48,12 +48,14 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SeleniumModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SeleniumModule extends PageObjectModule {
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.inject.AbstractModule#configure()
    */
   @Override
@@ -100,7 +102,7 @@ public class SeleniumModule extends PageObjectModule {
 
   /**
    * Creates the chrome driver.
-   *
+   * 
    * @return the remote web driver
    */
   private RemoteWebDriver createChromeDriver() {
@@ -120,7 +122,7 @@ public class SeleniumModule extends PageObjectModule {
 
   /**
    * Creat firefox driver.
-   *
+   * 
    * @return the firefox driver
    */
   private FirefoxDriver creatFirefoxDriver() {

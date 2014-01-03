@@ -29,14 +29,14 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ParticipationDataDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ParticipationDataDTO implements IsSerializable {
 
   /** The groups is admin. */
   private List<GroupDTO> groupsIsAdmin;
-  
+
   /** The groups is collab. */
   private List<GroupDTO> groupsIsCollab;
 
@@ -49,9 +49,11 @@ public class ParticipationDataDTO implements IsSerializable {
 
   /**
    * Instantiates a new participation data dto.
-   *
-   * @param groupsIsAdmin the groups is admin
-   * @param groupsIsCollab the groups is collab
+   * 
+   * @param groupsIsAdmin
+   *          the groups is admin
+   * @param groupsIsCollab
+   *          the groups is collab
    */
   public ParticipationDataDTO(final List<GroupDTO> groupsIsAdmin, final List<GroupDTO> groupsIsCollab) {
     this.groupsIsAdmin = groupsIsAdmin;
@@ -60,7 +62,7 @@ public class ParticipationDataDTO implements IsSerializable {
 
   /**
    * Gets the groups is admin.
-   *
+   * 
    * @return the groups is admin
    */
   public List<GroupDTO> getGroupsIsAdmin() {
@@ -69,7 +71,7 @@ public class ParticipationDataDTO implements IsSerializable {
 
   /**
    * Gets the groups is collab.
-   *
+   * 
    * @return the groups is collab
    */
   public List<GroupDTO> getGroupsIsCollab() {
@@ -78,8 +80,9 @@ public class ParticipationDataDTO implements IsSerializable {
 
   /**
    * Sets the groups is admin.
-   *
-   * @param groupsIsAdmin the new groups is admin
+   * 
+   * @param groupsIsAdmin
+   *          the new groups is admin
    */
   public void setGroupsIsAdmin(final List<GroupDTO> groupsIsAdmin) {
     this.groupsIsAdmin = groupsIsAdmin;
@@ -87,14 +90,17 @@ public class ParticipationDataDTO implements IsSerializable {
 
   /**
    * Sets the groups is collab.
-   *
-   * @param groupsIsCollab the new groups is collab
+   * 
+   * @param groupsIsCollab
+   *          the new groups is collab
    */
   public void setGroupsIsCollab(final List<GroupDTO> groupsIsCollab) {
     this.groupsIsCollab = groupsIsCollab;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

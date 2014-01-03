@@ -29,47 +29,47 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSimpleDTO.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserSimpleDTO implements IsSerializable {
-  
+
   /** The compound name. */
   private String compoundName;
-  
+
   /** The country. */
   private I18nCountryDTO country;
-  
+
   /** The created on. */
   private Long createdOn;
-  
+
   /** The email. */
   private String email;
-  
+
   /** The email notif freq. */
   private EmailNotificationFrequency emailNotifFreq;
-  
+
   /** The email verified. */
   private boolean emailVerified;
-  
+
   /** The has logo. */
   private boolean hasLogo;
-  
+
   /** The id. */
   private Long id;
-  
+
   /** The language. */
   private I18nLanguageDTO language;
-  
+
   /** The name. */
   private String name;
-  
+
   /** The short name. */
   private String shortName;
-  
+
   /** The state token. */
   private StateToken stateToken;
-  
+
   /** The timezone. */
   private TimeZoneDTO timezone;
 
@@ -82,12 +82,17 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Instantiates a new user simple dto.
-   *
-   * @param name the name
-   * @param shortName the short name
-   * @param language the language
-   * @param country the country
-   * @param timezone the timezone
+   * 
+   * @param name
+   *          the name
+   * @param shortName
+   *          the short name
+   * @param language
+   *          the language
+   * @param country
+   *          the country
+   * @param timezone
+   *          the timezone
    */
   public UserSimpleDTO(final String name, final String shortName, final I18nLanguageDTO language,
       final I18nCountryDTO country, final TimeZoneDTO timezone) {
@@ -98,7 +103,9 @@ public class UserSimpleDTO implements IsSerializable {
     this.timezone = timezone;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -132,7 +139,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the compound name.
-   *
+   * 
    * @return the compound name
    */
   public String getCompoundName() {
@@ -144,7 +151,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the country.
-   *
+   * 
    * @return the country
    */
   public I18nCountryDTO getCountry() {
@@ -153,7 +160,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the created on.
-   *
+   * 
    * @return the created on
    */
   public Long getCreatedOn() {
@@ -162,7 +169,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the email.
-   *
+   * 
    * @return the email
    */
   public String getEmail() {
@@ -171,7 +178,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the email notif freq.
-   *
+   * 
    * @return the email notif freq
    */
   public EmailNotificationFrequency getEmailNotifFreq() {
@@ -180,7 +187,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the email verified.
-   *
+   * 
    * @return the email verified
    */
   public boolean getEmailVerified() {
@@ -189,7 +196,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the checks for logo.
-   *
+   * 
    * @return the checks for logo
    */
   public boolean getHasLogo() {
@@ -198,7 +205,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -207,7 +214,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the language.
-   *
+   * 
    * @return the language
    */
   public I18nLanguageDTO getLanguage() {
@@ -216,7 +223,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -225,7 +232,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the short name.
-   *
+   * 
    * @return the short name
    */
   public String getShortName() {
@@ -234,7 +241,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the state token.
-   *
+   * 
    * @return the state token
    */
   public StateToken getStateToken() {
@@ -243,14 +250,16 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Gets the timezone.
-   *
+   * 
    * @return the timezone
    */
   public TimeZoneDTO getTimezone() {
     return timezone;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -264,7 +273,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Checks for logo.
-   *
+   * 
    * @return true, if successful
    */
   public boolean hasLogo() {
@@ -273,7 +282,7 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Checks if is email verified.
-   *
+   * 
    * @return true, if is email verified
    */
   public boolean isEmailVerified() {
@@ -282,8 +291,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the country.
-   *
-   * @param country the new country
+   * 
+   * @param country
+   *          the new country
    */
   public void setCountry(final I18nCountryDTO country) {
     this.country = country;
@@ -291,8 +301,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the created on.
-   *
-   * @param createdOn the new created on
+   * 
+   * @param createdOn
+   *          the new created on
    */
   public void setCreatedOn(final Long createdOn) {
     this.createdOn = createdOn;
@@ -300,8 +311,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the email.
-   *
-   * @param email the new email
+   * 
+   * @param email
+   *          the new email
    */
   public void setEmail(final String email) {
     this.email = email;
@@ -309,8 +321,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the email notif freq.
-   *
-   * @param emailNotifFreq the new email notif freq
+   * 
+   * @param emailNotifFreq
+   *          the new email notif freq
    */
   public void setEmailNotifFreq(final EmailNotificationFrequency emailNotifFreq) {
     this.emailNotifFreq = emailNotifFreq;
@@ -318,8 +331,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the email verified.
-   *
-   * @param emailVerified the new email verified
+   * 
+   * @param emailVerified
+   *          the new email verified
    */
   public void setEmailVerified(final boolean emailVerified) {
     this.emailVerified = emailVerified;
@@ -327,8 +341,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the checks for logo.
-   *
-   * @param hasLogo the new checks for logo
+   * 
+   * @param hasLogo
+   *          the new checks for logo
    */
   public void setHasLogo(final boolean hasLogo) {
     this.hasLogo = hasLogo;
@@ -336,8 +351,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -345,8 +361,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the language.
-   *
-   * @param language the new language
+   * 
+   * @param language
+   *          the new language
    */
   public void setLanguage(final I18nLanguageDTO language) {
     this.language = language;
@@ -354,8 +371,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public void setName(final String name) {
     this.name = name;
@@ -363,8 +381,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the short name.
-   *
-   * @param shortName the new short name
+   * 
+   * @param shortName
+   *          the new short name
    */
   public void setShortName(final String shortName) {
     this.shortName = shortName;
@@ -372,8 +391,9 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the state token.
-   *
-   * @param stateToken the new state token
+   * 
+   * @param stateToken
+   *          the new state token
    */
   public void setStateToken(final StateToken stateToken) {
     this.stateToken = stateToken;
@@ -381,14 +401,17 @@ public class UserSimpleDTO implements IsSerializable {
 
   /**
    * Sets the timezone.
-   *
-   * @param timezone the new timezone
+   * 
+   * @param timezone
+   *          the new timezone
    */
   public void setTimezone(final TimeZoneDTO timezone) {
     this.timezone = timezone;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

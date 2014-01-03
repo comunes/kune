@@ -31,7 +31,7 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CachedCollectionTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CachedCollectionTest {

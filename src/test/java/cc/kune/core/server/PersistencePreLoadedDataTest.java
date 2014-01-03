@@ -53,85 +53,85 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PersistencePreLoadedDataTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
-  
+
   /** The Constant USER_EMAIL. */
   protected static final String USER_EMAIL = "useremail@example.com";
-  
+
   /** The Constant USER_LONG_NAME. */
   protected static final String USER_LONG_NAME = "the user long name";
-  
+
   /** The Constant USER_PASSWORD. */
   protected static final String USER_PASSWORD = "userPassword";
-  
+
   /** The Constant USER_SHORT_NAME. */
   protected static final String USER_SHORT_NAME = "usershortname";
 
   /** The container. */
   protected Container container;
-  
+
   /** The container manager. */
   @Inject
   protected ContainerManager containerManager;
-  
+
   /** The content. */
   protected Content content;
-  
+
   /** The content manager. */
   @Inject
   protected ContentManager contentManager;
-  
+
   /** The country manager. */
   @Inject
   protected I18nCountryManager countryManager;
-  
+
   /** The creation service. */
   @Inject
   protected CreationService creationService;
-  
+
   /** The def license. */
   protected License defLicense;
-  
+
   /** The english. */
   protected I18nLanguage english;
-  
+
   /** The gb. */
   protected I18nCountry gb;
-  
+
   /** The group finder. */
   @Inject
   protected GroupFinder groupFinder;
-  
+
   /** The group manager. */
   @Inject
   protected GroupManager groupManager;
-  
+
   /** The language manager. */
   @Inject
   protected I18nLanguageManager languageManager;
-  
+
   /** The license finder. */
   @Inject
   protected LicenseFinder licenseFinder;
-  
+
   /** The license manager. */
   @Inject
   protected LicenseManager licenseManager;
-  
+
   /** The other container. */
   protected Container otherContainer;
   // @Inject
   // protected PropertyGroupManager propGroupManager;
   /** The user. */
   protected User user;
-  
+
   /** The user finder. */
   @Inject
   protected UserFinder userFinder;
-  
+
   /** The user manager. */
   @Inject
   protected UserManager userManager;
@@ -154,8 +154,9 @@ public abstract class PersistencePreLoadedDataTest extends PersistenceTest {
 
   /**
    * Pre load data.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Before
   public void preLoadData() throws Exception {

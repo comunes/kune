@@ -31,11 +31,11 @@ import com.google.gwt.user.client.ui.Image;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PrefetchUtilities.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PrefetchUtilities {
-  
+
   /**
    * Instantiates a new prefetch utilities.
    */

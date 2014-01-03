@@ -52,7 +52,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PasswordResetPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -60,44 +60,51 @@ public class PasswordResetPanel extends SignInAbstractPanel {
 
   /** The Constant CANCEL_BUTTON_ID. */
   public static final String CANCEL_BUTTON_ID = "k-pwd-reset-cancel";
-  
+
   /** The Constant ERRMSG. */
   public static final String ERRMSG = "k-pwd-reset-error";
-  
+
   /** The Constant PASSWD_RESET_DIALOG. */
   public static final String PASSWD_RESET_DIALOG = "k-pwd-reset-diag";
-  
+
   /** The Constant PASSWD_RESET_ID. */
   public static final String PASSWD_RESET_ID = "k-pwd-reset-email";
-  
+
   /** The Constant PASSWD2_RESET_DIALOG. */
   public static final String PASSWD2_RESET_DIALOG = "k-pwd-reset-diag";
-  
+
   /** The Constant RESET_BUTTON_ID. */
   public static final String RESET_BUTTON_ID = "k-pwd-reset-reset";
-  
+
   /** The confirm passwd field. */
   private final TextField<String> confirmPasswdField;
-  
+
   /** The new passwd field. */
   private final TextField<String> newPasswdField;
-  
+
   /** The password hash. */
   private String passwordHash;
-  
+
   /** The state manager. */
   private final StateManager stateManager;
 
   /**
    * Instantiates a new password reset panel.
-   *
-   * @param i18n the i18n
-   * @param session the session
-   * @param mask the mask
-   * @param images the images
-   * @param eventbus the eventbus
-   * @param userService the user service
-   * @param stateManager the state manager
+   * 
+   * @param i18n
+   *          the i18n
+   * @param session
+   *          the session
+   * @param mask
+   *          the mask
+   * @param images
+   *          the images
+   * @param eventbus
+   *          the eventbus
+   * @param userService
+   *          the user service
+   * @param stateManager
+   *          the state manager
    */
   @Inject
   public PasswordResetPanel(final I18nTranslationService i18n, final Session session,
@@ -169,7 +176,7 @@ public class PasswordResetPanel extends SignInAbstractPanel {
 
   /**
    * Gets the password hash.
-   *
+   * 
    * @return the password hash
    */
   public String getPasswordHash() {
@@ -177,7 +184,9 @@ public class PasswordResetPanel extends SignInAbstractPanel {
     return passwordHash;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.auth.SignInAbstractPanel#hide()
    */
   @Override
@@ -191,14 +200,17 @@ public class PasswordResetPanel extends SignInAbstractPanel {
 
   /**
    * Sets the password hash.
-   *
-   * @param passwordHash the new password hash
+   * 
+   * @param passwordHash
+   *          the new password hash
    */
   public void setPasswordHash(final String passwordHash) {
     this.passwordHash = passwordHash;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.auth.SignInAbstractPanel#show()
    */
   @Override

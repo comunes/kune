@@ -30,7 +30,7 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CalendarStateChangeEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CalendarStateChangeEvent extends
@@ -38,30 +38,32 @@ public class CalendarStateChangeEvent extends
 
   /**
    * The Interface CalendarStateChangeHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface CalendarStateChangeHandler extends EventHandler {
-    
+
     /**
      * On calendar state change.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onCalendarStateChange(CalendarStateChangeEvent event);
   }
 
   /**
    * The Interface HasCalendarStateChangeHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasCalendarStateChangeHandlers extends HasHandlers {
-    
+
     /**
      * Adds the calendar state change handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addCalendarStateChangeHandler(CalendarStateChangeHandler handler);
@@ -72,8 +74,9 @@ public class CalendarStateChangeEvent extends
 
   /**
    * Fire.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new CalendarStateChangeEvent());
@@ -81,7 +84,7 @@ public class CalendarStateChangeEvent extends
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<CalendarStateChangeHandler> getType() {
@@ -94,15 +97,21 @@ public class CalendarStateChangeEvent extends
   public CalendarStateChangeEvent() {
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final CalendarStateChangeHandler handler) {
     handler.onCalendarStateChange(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -110,7 +119,9 @@ public class CalendarStateChangeEvent extends
     return super.equals(obj);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -118,7 +129,9 @@ public class CalendarStateChangeEvent extends
     return TYPE;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -126,7 +139,9 @@ public class CalendarStateChangeEvent extends
     return super.hashCode();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

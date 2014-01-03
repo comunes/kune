@@ -31,7 +31,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CalendarOnOverMenu.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -39,8 +39,9 @@ public class CalendarOnOverMenu extends StandaloneMenuProvider {
 
   /**
    * Instantiates a new calendar on over menu.
-   *
-   * @param menu the menu
+   * 
+   * @param menu
+   *          the menu
    */
   @Inject
   public CalendarOnOverMenu(final AbstractStandaloneMenu menu) {

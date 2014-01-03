@@ -27,29 +27,32 @@ import com.google.gwt.user.client.ui.IsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface AvatarDecorator.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface AvatarDecorator {
 
   /**
    * Sets the decorator visible.
-   *
-   * @param visible the new decorator visible
+   * 
+   * @param visible
+   *          the new decorator visible
    */
   void setDecoratorVisible(boolean visible);
 
   /**
    * Sets the item.
-   *
-   * @param name the new item
+   * 
+   * @param name
+   *          the new item
    */
   void setItem(String name);
 
   /**
    * Sets the widget.
-   *
-   * @param widget the new widget
+   * 
+   * @param widget
+   *          the new widget
    */
   void setWidget(IsWidget widget);
 

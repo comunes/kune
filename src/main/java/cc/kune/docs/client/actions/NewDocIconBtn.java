@@ -34,18 +34,22 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewDocIconBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewDocIconBtn extends NewContentBtn {
 
   /**
    * Instantiates a new new doc icon btn.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
-   * @param shorcutReg the shorcut reg
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
+   * @param shorcutReg
+   *          the shorcut reg
    */
   @Inject
   public NewDocIconBtn(final I18nTranslationService i18n, final NewContentAction action,

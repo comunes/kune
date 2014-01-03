@@ -28,12 +28,14 @@ import com.google.inject.Module;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TrashServerModule.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TrashServerModule implements Module {
-  
-  /* (non-Javadoc)
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.inject.Module#configure(com.google.inject.Binder)
    */
   @Override

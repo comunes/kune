@@ -39,14 +39,14 @@ import com.gwtplatform.mvp.client.proxy.RevealRootPopupContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SpinerPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, SpinerPresenter.SpinerProxy> {
 
   /**
    * The Interface SpinerProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -55,11 +55,11 @@ public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, Spine
 
   /**
    * The Interface SpinerView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SpinerView extends PopupView {
-    
+
     /**
      * Fade.
      */
@@ -67,8 +67,9 @@ public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, Spine
 
     /**
      * Show.
-     *
-     * @param message the message
+     * 
+     * @param message
+     *          the message
      */
     void show(String message);
   }
@@ -78,11 +79,15 @@ public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, Spine
 
   /**
    * Instantiates a new spiner presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param i18n the i18n
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public SpinerPresenter(final EventBus eventBus, final SpinerView view, final SpinerProxy proxy,
@@ -94,8 +99,9 @@ public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, Spine
 
   /**
    * On i18n ready.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @ProxyEvent
   public void onI18nReady(final I18nReadyEvent event) {
@@ -104,8 +110,9 @@ public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, Spine
 
   /**
    * On progress hide.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @ProxyEvent
   public void onProgressHide(final ProgressHideEvent event) {
@@ -114,15 +121,18 @@ public class SpinerPresenter extends Presenter<SpinerPresenter.SpinerView, Spine
 
   /**
    * On progress show.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @ProxyEvent
   public void onProgressShow(final ProgressShowEvent event) {
     getView().show(event.getMessage());
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

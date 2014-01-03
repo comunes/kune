@@ -41,7 +41,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class IsNotMeConditionTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @RunWith(JukitoRunner.class)
@@ -50,28 +50,28 @@ public class IsNotMeConditionTest {
   /** The descr. */
   @Inject
   GuiActionDescrip descr;
-  
+
   /** The group. */
   GroupDTO group;
-  
+
   /** The is me condition. */
   private IsMeCondition isMeCondition;
-  
+
   /** The is not me condition. */
   private IsNotMeCondition isNotMeCondition;
-  
+
   /** The me. */
   UserSimpleDTO me;
-  
+
   /** The my group. */
   GroupDTO myGroup;
-  
+
   /** The other group. */
   GroupDTO otherGroup;
-  
+
   /** The other user. */
   UserSimpleDTO otherUser;
-  
+
   /** The session. */
   @Inject
   Session session;
@@ -115,8 +115,9 @@ public class IsNotMeConditionTest {
 
   /**
    * Should be added.
-   *
-   * @param mustBeAdded the must be added
+   * 
+   * @param mustBeAdded
+   *          the must be added
    */
   private void shouldBeAdded(final boolean mustBeAdded) {
     assertTrue(mustBeAdded);
@@ -124,8 +125,9 @@ public class IsNotMeConditionTest {
 
   /**
    * Should not be added.
-   *
-   * @param mustNotBeAdded the must not be added
+   * 
+   * @param mustNotBeAdded
+   *          the must not be added
    */
   private void shouldNotBeAdded(final boolean mustNotBeAdded) {
     assertFalse(mustNotBeAdded);

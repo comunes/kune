@@ -37,14 +37,14 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class License.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
 @Table(name = "licenses")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class License implements HasId {
-  
+
   /** The description. */
   private String description;
 
@@ -58,7 +58,7 @@ public class License implements HasId {
   private String imageUrl;
 
   /** The is cc. */
-  @org.hibernate.annotations.Index(name="isCC")  
+  @org.hibernate.annotations.Index(name = "isCC")
   @Basic
   @Column(columnDefinition = "BIT", length = 1)
   private boolean isCC;
@@ -76,12 +76,12 @@ public class License implements HasId {
   /** The long name. */
   @Column(unique = true)
   private String longName;
-  
+
   /** The rdf. */
   private String rdf;
 
   /** The short name. */
-  @org.hibernate.annotations.Index(name="shortName")
+  @org.hibernate.annotations.Index(name = "shortName")
   @Column(unique = true)
   private String shortName;
 
@@ -98,16 +98,25 @@ public class License implements HasId {
 
   /**
    * Instantiates a new license.
-   *
-   * @param shortName the short name
-   * @param longName the long name
-   * @param description the description
-   * @param url the url
-   * @param isCC the is cc
-   * @param isCopyleft the is copyleft
-   * @param isDeprecated the is deprecated
-   * @param rdf the rdf
-   * @param imageUrl the image url
+   * 
+   * @param shortName
+   *          the short name
+   * @param longName
+   *          the long name
+   * @param description
+   *          the description
+   * @param url
+   *          the url
+   * @param isCC
+   *          the is cc
+   * @param isCopyleft
+   *          the is copyleft
+   * @param isDeprecated
+   *          the is deprecated
+   * @param rdf
+   *          the rdf
+   * @param imageUrl
+   *          the image url
    */
   public License(final String shortName, final String longName, final String description,
       final String url, final boolean isCC, final boolean isCopyleft, final boolean isDeprecated,
@@ -125,14 +134,16 @@ public class License implements HasId {
 
   /**
    * Gets the description.
-   *
+   * 
    * @return the description
    */
   public String getDescription() {
     return description;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -142,7 +153,7 @@ public class License implements HasId {
 
   /**
    * Gets the image url.
-   *
+   * 
    * @return the image url
    */
   public String getImageUrl() {
@@ -151,7 +162,7 @@ public class License implements HasId {
 
   /**
    * Gets the long name.
-   *
+   * 
    * @return the long name
    */
   public String getLongName() {
@@ -160,7 +171,7 @@ public class License implements HasId {
 
   /**
    * Gets the rdf.
-   *
+   * 
    * @return the rdf
    */
   public String getRdf() {
@@ -169,7 +180,7 @@ public class License implements HasId {
 
   /**
    * Gets the short name.
-   *
+   * 
    * @return the short name
    */
   public String getShortName() {
@@ -178,7 +189,7 @@ public class License implements HasId {
 
   /**
    * Gets the url.
-   *
+   * 
    * @return the url
    */
   public String getUrl() {
@@ -187,7 +198,7 @@ public class License implements HasId {
 
   /**
    * Checks if is cc.
-   *
+   * 
    * @return true, if is cc
    */
   public boolean isCC() {
@@ -196,7 +207,7 @@ public class License implements HasId {
 
   /**
    * Checks if is copyleft.
-   *
+   * 
    * @return true, if is copyleft
    */
   public boolean isCopyleft() {
@@ -205,7 +216,7 @@ public class License implements HasId {
 
   /**
    * Checks if is deprecated.
-   *
+   * 
    * @return true, if is deprecated
    */
   public boolean isDeprecated() {
@@ -214,8 +225,9 @@ public class License implements HasId {
 
   /**
    * Sets the cc.
-   *
-   * @param isCC the new cc
+   * 
+   * @param isCC
+   *          the new cc
    */
   public void setCC(final boolean isCC) {
     this.isCC = isCC;
@@ -223,8 +235,9 @@ public class License implements HasId {
 
   /**
    * Sets the copyleft.
-   *
-   * @param isCopyleft the new copyleft
+   * 
+   * @param isCopyleft
+   *          the new copyleft
    */
   public void setCopyleft(final boolean isCopyleft) {
     this.isCopyleft = isCopyleft;
@@ -232,8 +245,9 @@ public class License implements HasId {
 
   /**
    * Sets the deprecated.
-   *
-   * @param isDeprecated the new deprecated
+   * 
+   * @param isDeprecated
+   *          the new deprecated
    */
   public void setDeprecated(final boolean isDeprecated) {
     this.isDeprecated = isDeprecated;
@@ -241,14 +255,17 @@ public class License implements HasId {
 
   /**
    * Sets the description.
-   *
-   * @param description the new description
+   * 
+   * @param description
+   *          the new description
    */
   public void setDescription(final String description) {
     this.description = description;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -258,8 +275,9 @@ public class License implements HasId {
 
   /**
    * Sets the image url.
-   *
-   * @param imageUrl the new image url
+   * 
+   * @param imageUrl
+   *          the new image url
    */
   public void setImageUrl(final String imageUrl) {
     this.imageUrl = imageUrl;
@@ -267,8 +285,9 @@ public class License implements HasId {
 
   /**
    * Sets the long name.
-   *
-   * @param longName the new long name
+   * 
+   * @param longName
+   *          the new long name
    */
   public void setLongName(final String longName) {
     this.longName = longName;
@@ -276,8 +295,9 @@ public class License implements HasId {
 
   /**
    * Sets the rdf.
-   *
-   * @param rdf the new rdf
+   * 
+   * @param rdf
+   *          the new rdf
    */
   public void setRdf(final String rdf) {
     this.rdf = rdf;
@@ -285,8 +305,9 @@ public class License implements HasId {
 
   /**
    * Sets the short name.
-   *
-   * @param shortName the new short name
+   * 
+   * @param shortName
+   *          the new short name
    */
   public void setShortName(final String shortName) {
     this.shortName = shortName;
@@ -294,8 +315,9 @@ public class License implements HasId {
 
   /**
    * Sets the url.
-   *
-   * @param url the new url
+   * 
+   * @param url
+   *          the new url
    */
   public void setUrl(final String url) {
     this.url = url;

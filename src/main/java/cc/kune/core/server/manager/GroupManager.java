@@ -38,7 +38,7 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface GroupManager.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -46,194 +46,238 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Change def license.
-   *
-   * @param user the user
-   * @param group the group
-   * @param licenseShortName the license short name
+   * 
+   * @param user
+   *          the user
+   * @param group
+   *          the group
+   * @param licenseShortName
+   *          the license short name
    */
   void changeDefLicense(User user, Group group, String licenseShortName);
 
   /**
    * Change ws theme.
-   *
-   * @param user the user
-   * @param group the group
-   * @param theme the theme
-   * @throws AccessViolationException the access violation exception
+   * 
+   * @param user
+   *          the user
+   * @param group
+   *          the group
+   * @param theme
+   *          the theme
+   * @throws AccessViolationException
+   *           the access violation exception
    */
   void changeWsTheme(User user, Group group, String theme) throws AccessViolationException;
 
   /**
    * Check if long name are in use.
-   *
-   * @param shortName the short name
+   * 
+   * @param shortName
+   *          the short name
    */
   void checkIfLongNameAreInUse(String shortName);
 
   /**
    * Check if short name are in use.
-   *
-   * @param longName the long name
+   * 
+   * @param longName
+   *          the long name
    */
   void checkIfShortNameAreInUse(String longName);
 
   /**
    * Clear group back image.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    */
   void clearGroupBackImage(Group group);
 
   /**
    * Count # of registered groups (only used to see in the database is
    * initialized).
-   *
+   * 
    * @return the int
    */
   Long count();
 
   /**
    * Creates the group.
-   *
-   * @param group the group
-   * @param user the user
-   * @param publicDescrip the public descrip
+   * 
+   * @param group
+   *          the group
+   * @param user
+   *          the user
+   * @param publicDescrip
+   *          the public descrip
    * @return the group
-   * @throws GroupShortNameInUseException the group short name in use exception
-   * @throws UserMustBeLoggedException the user must be logged exception
+   * @throws GroupShortNameInUseException
+   *           the group short name in use exception
+   * @throws UserMustBeLoggedException
+   *           the user must be logged exception
    */
   Group createGroup(Group group, User user, String publicDescrip) throws GroupShortNameInUseException,
       UserMustBeLoggedException;
 
   /**
    * Creates the user group.
-   *
-   * @param user the user
+   * 
+   * @param user
+   *          the user
    * @return the group
-   * @throws GroupShortNameInUseException the group short name in use exception
-   * @throws EmailAddressInUseException the email address in use exception
+   * @throws GroupShortNameInUseException
+   *           the group short name in use exception
+   * @throws EmailAddressInUseException
+   *           the email address in use exception
    */
   Group createUserGroup(User user) throws GroupShortNameInUseException, EmailAddressInUseException;
 
   /**
    * Creates the user group.
-   *
-   * @param user the user
-   * @param wantPersonalHomepage the want personal homepage
+   * 
+   * @param user
+   *          the user
+   * @param wantPersonalHomepage
+   *          the want personal homepage
    * @return the group
-   * @throws GroupShortNameInUseException the group short name in use exception
-   * @throws EmailAddressInUseException the email address in use exception
+   * @throws GroupShortNameInUseException
+   *           the group short name in use exception
+   * @throws EmailAddressInUseException
+   *           the email address in use exception
    */
   Group createUserGroup(User user, boolean wantPersonalHomepage) throws GroupShortNameInUseException,
       EmailAddressInUseException;
 
   /**
    * Find admin in groups.
-   *
-   * @param groupId the group id
+   * 
+   * @param groupId
+   *          the group id
    * @return the sets the
    */
   Set<Group> findAdminInGroups(Long groupId);
 
   /**
    * Find by short name.
-   *
-   * @param groupName the group name
+   * 
+   * @param groupName
+   *          the group name
    * @return the group
    */
   Group findByShortName(String groupName);
 
   /**
    * Find collab in groups.
-   *
-   * @param groupId the group id
+   * 
+   * @param groupId
+   *          the group id
    * @return the sets the
    */
   Set<Group> findCollabInGroups(Long groupId);
 
   /**
    * Find enabled tools.
-   *
-   * @param id the id
+   * 
+   * @param id
+   *          the id
    * @return the list
    */
   List<String> findEnabledTools(Long id);
 
   /**
    * IMPORTANT: returns null if userId is null.
-   *
-   * @param userId the user id
+   * 
+   * @param userId
+   *          the user id
    * @return the group of user with id
    */
   Group getGroupOfUserWithId(Long userId);
 
   /**
    * Gets the site default group.
-   *
+   * 
    * @return the site default group
    */
   Group getSiteDefaultGroup();
 
   /**
    * Inits the trash.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    */
   void initTrash(Group group);
 
   /**
    * Search.
-   *
-   * @param search the search
+   * 
+   * @param search
+   *          the search
    * @return the search result
    */
   SearchResult<Group> search(String search);
 
   /**
    * Search.
-   *
-   * @param search the search
-   * @param firstResult the first result
-   * @param maxResults the max results
+   * 
+   * @param search
+   *          the search
+   * @param firstResult
+   *          the first result
+   * @param maxResults
+   *          the max results
    * @return the search result
    */
   SearchResult<Group> search(String search, Integer firstResult, Integer maxResults);
 
   /**
    * Sets the default content.
-   *
-   * @param groupShortName the group short name
-   * @param content the content
+   * 
+   * @param groupShortName
+   *          the group short name
+   * @param content
+   *          the content
    */
   void setDefaultContent(String groupShortName, Content content);
 
   /**
    * Sets the group background image.
-   *
-   * @param group the group
-   * @param backgroundFileName the background file name
-   * @param mime the mime
+   * 
+   * @param group
+   *          the group
+   * @param backgroundFileName
+   *          the background file name
+   * @param mime
+   *          the mime
    */
   void setGroupBackgroundImage(Group group, String backgroundFileName, String mime);
 
   /**
    * Sets the tool enabled.
-   *
-   * @param userLogged the user logged
-   * @param groupShortName the group short name
-   * @param toolName the tool name
-   * @param enabled the enabled
-   * @throws ToolIsDefaultException the tool is default exception
+   * 
+   * @param userLogged
+   *          the user logged
+   * @param groupShortName
+   *          the group short name
+   * @param toolName
+   *          the tool name
+   * @param enabled
+   *          the enabled
+   * @throws ToolIsDefaultException
+   *           the tool is default exception
    */
   void setToolEnabled(User userLogged, String groupShortName, String toolName, boolean enabled)
       throws ToolIsDefaultException;
 
   /**
    * Update.
-   *
-   * @param groupId the id of the Group to update
-   * @param groupDTO the group with the name values to change (currently only changes
-   * shortname & longname)
+   * 
+   * @param groupId
+   *          the id of the Group to update
+   * @param groupDTO
+   *          the group with the name values to change (currently only changes
+   *          shortname & longname)
    * @return returns the Group just persisted
    */
   Group update(Long groupId, GroupDTO groupDTO);

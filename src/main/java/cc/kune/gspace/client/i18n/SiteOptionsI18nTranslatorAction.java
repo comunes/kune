@@ -42,31 +42,38 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SiteOptionsI18nTranslatorAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class SiteOptionsI18nTranslatorAction extends RolActionAutoUpdated {
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The translator. */
   private I18nTranslator translator;
-  
+
   /** The translator prov. */
   private final Provider<I18nTranslator> translatorProv;
 
   /**
    * Instantiates a new site options i18n translator action.
-   *
-   * @param stateManager the state manager
-   * @param session the session
-   * @param rightsManager the rights manager
-   * @param i18n the i18n
-   * @param img the img
-   * @param translatorProv the translator prov
-   * @param siteOptions the site options
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param rightsManager
+   *          the rights manager
+   * @param i18n
+   *          the i18n
+   * @param img
+   *          the img
+   * @param translatorProv
+   *          the translator prov
+   * @param siteOptions
+   *          the site options
    */
   @Inject
   public SiteOptionsI18nTranslatorAction(final StateManager stateManager, final Session session,
@@ -81,8 +88,12 @@ public class SiteOptionsI18nTranslatorAction extends RolActionAutoUpdated {
     MenuItemDescriptor.build(siteOptions.getOptionsMenu(), this);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

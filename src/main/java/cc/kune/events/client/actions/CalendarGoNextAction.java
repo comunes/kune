@@ -32,7 +32,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CalendarGoNextAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CalendarGoNextAction extends RolAction {
@@ -42,8 +42,9 @@ public class CalendarGoNextAction extends RolAction {
 
   /**
    * Instantiates a new calendar go next action.
-   *
-   * @param calViewer the cal viewer
+   * 
+   * @param calViewer
+   *          the cal viewer
    */
   @Inject
   public CalendarGoNextAction(final CalendarViewer calViewer) {
@@ -51,8 +52,12 @@ public class CalendarGoNextAction extends RolAction {
     this.calViewer = calViewer;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

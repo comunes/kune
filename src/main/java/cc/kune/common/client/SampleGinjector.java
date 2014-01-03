@@ -32,7 +32,7 @@ import com.google.gwt.inject.client.Ginjector;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SampleGinjector.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @GinModules(SampleGinModule.class)
@@ -40,21 +40,21 @@ public interface SampleGinjector extends Ginjector {
   // FIXME move this to sandbox!!!
   /**
    * Gets the global shortcut register.
-   *
+   * 
    * @return the global shortcut register
    */
   GlobalShortcutRegister getGlobalShortcutRegister();
 
   /**
    * Gets the gui provider.
-   *
+   * 
    * @return the gui provider
    */
   GuiProvider getGuiProvider();
 
   /**
    * Gets the gwt gui provider.
-   *
+   * 
    * @return the gwt gui provider
    */
   GwtGuiProvider getGwtGuiProvider();

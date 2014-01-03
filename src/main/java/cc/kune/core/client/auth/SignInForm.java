@@ -39,26 +39,26 @@ import com.google.gwt.user.client.ui.RootPanel;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SignInForm.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SignInForm extends DefaultForm {
-  
+
   /** The Constant LOGIN_ID. */
   private static final String LOGIN_ID = "loginrender";
-  
+
   /** The Constant PASSWORD_FIELD_ID. */
   public static final String PASSWORD_FIELD_ID = "kune-sif-psf";
-  
+
   /** The Constant USER_FIELD_ID. */
   public static final String USER_FIELD_ID = "kune-sif-nkf";
 
   /** The login nick or email field. */
   private final TextField<String> loginNickOrEmailField;
-  
+
   /** The login pass field. */
   private final TextField<String> loginPassField;
-  
+
   /** The on accept callback. */
   private OnAcceptCallback onAcceptCallback;
 
@@ -68,8 +68,9 @@ public class SignInForm extends DefaultForm {
    * >based in this</a> and <a href=
    * "http://www.sencha.com/forum/showthread.php?72027-Auto-complete-login-form"
    * >this</a>.
-   *
-   * @param i18n the i18n
+   * 
+   * @param i18n
+   *          the i18n
    */
   public SignInForm(final I18nTranslationService i18n) {
     final Listener<FieldEvent> enterListener = new Listener<FieldEvent>() {
@@ -152,7 +153,7 @@ public class SignInForm extends DefaultForm {
 
   /**
    * Gets the login password.
-   *
+   * 
    * @return the login password
    */
   public String getLoginPassword() {
@@ -161,7 +162,7 @@ public class SignInForm extends DefaultForm {
 
   /**
    * Gets the nick or email.
-   *
+   * 
    * @return the nick or email
    */
   public String getNickOrEmail() {
@@ -170,7 +171,7 @@ public class SignInForm extends DefaultForm {
 
   /**
    * Gets the nick or email field.
-   *
+   * 
    * @return the nick or email field
    */
   public Field<String> getNickOrEmailField() {
@@ -179,8 +180,9 @@ public class SignInForm extends DefaultForm {
 
   /**
    * Sets the login password.
-   *
-   * @param password the new login password
+   * 
+   * @param password
+   *          the new login password
    */
   public void setLoginPassword(final String password) {
     loginPassField.setValue(password);
@@ -188,8 +190,9 @@ public class SignInForm extends DefaultForm {
 
   /**
    * Sets the nick or email.
-   *
-   * @param nickOrEmail the new nick or email
+   * 
+   * @param nickOrEmail
+   *          the new nick or email
    */
   public void setNickOrEmail(final String nickOrEmail) {
     loginNickOrEmailField.setValue(nickOrEmail);
@@ -197,8 +200,9 @@ public class SignInForm extends DefaultForm {
 
   /**
    * Sets the on password return.
-   *
-   * @param onAcceptCallback the new on password return
+   * 
+   * @param onAcceptCallback
+   *          the new on password return
    */
   public void setOnPasswordReturn(final OnAcceptCallback onAcceptCallback) {
     this.onAcceptCallback = onAcceptCallback;

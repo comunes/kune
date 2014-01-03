@@ -35,20 +35,26 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EventsParts.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EventsParts {
 
   /**
    * Instantiates a new events parts.
-   *
-   * @param session the session
-   * @param clientTool the client tool
-   * @param viewerSelector the viewer selector
-   * @param meetsActions the meets actions
-   * @param contentViewer the content viewer
-   * @param calendarViewer the calendar viewer
+   * 
+   * @param session
+   *          the session
+   * @param clientTool
+   *          the client tool
+   * @param viewerSelector
+   *          the viewer selector
+   * @param meetsActions
+   *          the meets actions
+   * @param contentViewer
+   *          the content viewer
+   * @param calendarViewer
+   *          the calendar viewer
    */
   @Inject
   public EventsParts(final SessionConstants session, final Provider<EventsClientTool> clientTool,

@@ -29,24 +29,25 @@ import cc.kune.domain.I18nCountry;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface I18nCountryManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface I18nCountryManager extends Manager<I18nCountry, Long> {
 
   /**
-   * Gets the all.
-   *
-   * @return the all
-   */
-  List<I18nCountry> getAll();
-
-  /**
    * Find by code.
-   *
-   * @param country the country
+   * 
+   * @param country
+   *          the country
    * @return the i18n country
    */
   I18nCountry findByCode(String country);
+
+  /**
+   * Gets the all.
+   * 
+   * @return the all
+   */
+  List<I18nCountry> getAll();
 
 }

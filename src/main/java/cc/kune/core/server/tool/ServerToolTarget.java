@@ -25,17 +25,17 @@ package cc.kune.core.server.tool;
 // TODO: Auto-generated Javadoc
 /**
  * The Enum ServerToolTarget.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum ServerToolTarget {
-  
+
   /** This is a tool developed both for users and groups. */
   forBoth,
-  
+
   /** A tools developed only for groups. */
   forGroups,
-  
+
   /** A tool developed only for users. */
   forUsers
 }

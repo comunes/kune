@@ -31,21 +31,22 @@ import org.junit.Test;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DateUtilsTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DateUtilsTest {
 
   /** The Constant SAMPLE. */
   private static final String SAMPLE = "2012-03-05T00:00:00.000+0100";
-  
+
   /** The Constant SAMPLE2. */
   private static final String SAMPLE2 = "2012-03-05T00:00:00.000+01:00";
 
   /**
    * Basic test.
-   *
-   * @throws ParseException the parse exception
+   * 
+   * @throws ParseException
+   *           the parse exception
    */
   @Test
   public void basicTest() throws ParseException {

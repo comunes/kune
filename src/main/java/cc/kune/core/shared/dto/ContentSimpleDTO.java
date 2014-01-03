@@ -28,7 +28,7 @@ import cc.kune.core.shared.domain.utils.AccessRights;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentSimpleDTO.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -36,25 +36,25 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /** The mime type. */
   private BasicMimeTypeDTO mimeType;
-  
+
   /** The modified on. */
   private Long modifiedOn;
-  
+
   /** The rights. */
   private AccessRights rights;
-  
+
   /** The status. */
   private ContentStatus status;
-  
+
   /** The title. */
   private String title;
-  
+
   /** The wave id. */
   private String waveId;
 
   /**
    * Gets the mime type.
-   *
+   * 
    * @return the mime type
    */
   public BasicMimeTypeDTO getMimeType() {
@@ -63,14 +63,16 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Gets the modified on.
-   *
+   * 
    * @return the modified on
    */
   public Long getModifiedOn() {
     return modifiedOn;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.shared.dto.AbstractContentSimpleDTO#getName()
    */
   @Override
@@ -80,7 +82,7 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Gets the rights.
-   *
+   * 
    * @return the rights
    */
   public AccessRights getRights() {
@@ -89,7 +91,7 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Gets the status.
-   *
+   * 
    * @return the status
    */
   public ContentStatus getStatus() {
@@ -98,7 +100,7 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Gets the title.
-   *
+   * 
    * @return the title
    */
   public String getTitle() {
@@ -107,7 +109,7 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Gets the wave id.
-   *
+   * 
    * @return the wave id
    */
   public String getWaveId() {
@@ -116,8 +118,9 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Sets the mime type.
-   *
-   * @param mimeType the new mime type
+   * 
+   * @param mimeType
+   *          the new mime type
    */
   public void setMimeType(final BasicMimeTypeDTO mimeType) {
     this.mimeType = mimeType;
@@ -125,15 +128,19 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Sets the modified on.
-   *
-   * @param modifiedOn the new modified on
+   * 
+   * @param modifiedOn
+   *          the new modified on
    */
   public void setModifiedOn(final Long modifiedOn) {
     this.modifiedOn = modifiedOn;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.shared.dto.AbstractContentSimpleDTO#setName(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.shared.dto.AbstractContentSimpleDTO#setName(java.lang.String)
    */
   @Override
   public void setName(final String name) {
@@ -142,8 +149,9 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Sets the rights.
-   *
-   * @param rights the new rights
+   * 
+   * @param rights
+   *          the new rights
    */
   public void setRights(final AccessRights rights) {
     this.rights = rights;
@@ -151,8 +159,9 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Sets the status.
-   *
-   * @param status the new status
+   * 
+   * @param status
+   *          the new status
    */
   public void setStatus(final ContentStatus status) {
     this.status = status;
@@ -160,8 +169,9 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Sets the title.
-   *
-   * @param title the new title
+   * 
+   * @param title
+   *          the new title
    */
   public void setTitle(final String title) {
     this.title = title;
@@ -169,8 +179,9 @@ public class ContentSimpleDTO extends AbstractContentSimpleDTO {
 
   /**
    * Sets the wave id.
-   *
-   * @param waveId the new wave id
+   * 
+   * @param waveId
+   *          the new wave id
    */
   public void setWaveId(final String waveId) {
     this.waveId = waveId;

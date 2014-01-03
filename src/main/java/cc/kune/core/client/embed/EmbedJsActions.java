@@ -38,8 +38,8 @@ public class EmbedJsActions {
   }
 
   public static native void export() /*-{
-    $doc.embed = $entry(@cc.kune.core.client.embed.EmbedJsActions::embed(Ljava/lang/String;))
-  }-*/;
+                                     $doc.embed = $entry(@cc.kune.core.client.embed.EmbedJsActions::embed(Ljava/lang/String;))
+                                     }-*/;
 
   public EmbedJsActions() {
   }

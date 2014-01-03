@@ -30,16 +30,18 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Calendar1DayViewSelectBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class Calendar1DayViewSelectBtn extends AbstractCalendarViewSelectBtn {
 
   /**
    * Instantiates a new calendar1 day view select btn.
-   *
-   * @param action the action
-   * @param i18n the i18n
+   * 
+   * @param action
+   *          the action
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public Calendar1DayViewSelectBtn(final CalendarViewSelectAction action,

@@ -31,7 +31,7 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface CreationService.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -39,34 +39,47 @@ public interface CreationService {
 
   /**
    * Copy content.
-   *
-   * @param user the user
-   * @param container the container
-   * @param contentToCopy the content to copy
+   * 
+   * @param user
+   *          the user
+   * @param container
+   *          the container
+   * @param contentToCopy
+   *          the content to copy
    * @return the content
    */
   Content copyContent(User user, Container container, Content contentToCopy);
 
   /**
    * Creates the content.
-   *
-   * @param title the title
-   * @param body the body
-   * @param user the user
-   * @param container the container
-   * @param typeId the type id
+   * 
+   * @param title
+   *          the title
+   * @param body
+   *          the body
+   * @param user
+   *          the user
+   * @param container
+   *          the container
+   * @param typeId
+   *          the type id
    * @return the content
    */
   Content createContent(String title, String body, User user, Container container, String typeId);
 
   /**
    * Creates the folder.
-   *
-   * @param group the group
-   * @param parentFolderId the parent folder id
-   * @param name the name
-   * @param language the language
-   * @param contentTypeId the content type id
+   * 
+   * @param group
+   *          the group
+   * @param parentFolderId
+   *          the parent folder id
+   * @param name
+   *          the name
+   * @param language
+   *          the language
+   * @param contentTypeId
+   *          the content type id
    * @return the container
    */
   Container createFolder(Group group, Long parentFolderId, String name, I18nLanguage language,
@@ -74,11 +87,15 @@ public interface CreationService {
 
   /**
    * Creates the root folder.
-   *
-   * @param group the group
-   * @param name the name
-   * @param rootName the root name
-   * @param typeRoot the type root
+   * 
+   * @param group
+   *          the group
+   * @param name
+   *          the name
+   * @param rootName
+   *          the root name
+   * @param typeRoot
+   *          the type root
    * @return the container
    */
   Container createRootFolder(Group group, String name, String rootName, String typeRoot);

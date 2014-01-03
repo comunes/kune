@@ -36,29 +36,29 @@ import cc.kune.domain.UserBuddiesData;
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateAbstract.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class StateAbstract {
 
   /** The enabled tools. */
   private List<String> enabledTools;
-  
+
   /** The group. */
   private Group group;
-  
+
   /** The root container. */
   private Container rootContainer;
-  
+
   /** The social network data. */
   private SocialNetworkData socialNetworkData;
-  
+
   /** The state token. */
   private StateToken stateToken;
-  
+
   /** The title. */
   private String title;
-  
+
   /** The tool name. */
   private String toolName;
 
@@ -70,7 +70,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the enabled tools.
-   *
+   * 
    * @return the enabled tools
    */
   public List<String> getEnabledTools() {
@@ -79,7 +79,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the group.
-   *
+   * 
    * @return the group
    */
   public Group getGroup() {
@@ -88,7 +88,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the group members.
-   *
+   * 
    * @return the group members
    */
   public SocialNetwork getGroupMembers() {
@@ -97,7 +97,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the group rights.
-   *
+   * 
    * @return the group rights
    */
   public AccessRights getGroupRights() {
@@ -106,7 +106,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the participation.
-   *
+   * 
    * @return the participation
    */
   public ParticipationData getParticipation() {
@@ -115,7 +115,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the root container.
-   *
+   * 
    * @return the root container
    */
   public Container getRootContainer() {
@@ -124,7 +124,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the social network data.
-   *
+   * 
    * @return the social network data
    */
   public SocialNetworkData getSocialNetworkData() {
@@ -133,7 +133,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the state token.
-   *
+   * 
    * @return the state token
    */
   public StateToken getStateToken() {
@@ -142,7 +142,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the title.
-   *
+   * 
    * @return the title
    */
   public String getTitle() {
@@ -151,7 +151,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the tool name.
-   *
+   * 
    * @return the tool name
    */
   public String getToolName() {
@@ -160,7 +160,7 @@ public abstract class StateAbstract {
 
   /**
    * Gets the user buddies.
-   *
+   * 
    * @return the user buddies
    */
   public UserBuddiesData getUserBuddies() {
@@ -169,8 +169,9 @@ public abstract class StateAbstract {
 
   /**
    * Sets the enabled tools.
-   *
-   * @param enabledTools the new enabled tools
+   * 
+   * @param enabledTools
+   *          the new enabled tools
    */
   public void setEnabledTools(final List<String> enabledTools) {
     this.enabledTools = enabledTools;
@@ -178,8 +179,9 @@ public abstract class StateAbstract {
 
   /**
    * Sets the group.
-   *
-   * @param group the new group
+   * 
+   * @param group
+   *          the new group
    */
   public void setGroup(final Group group) {
     this.group = group;
@@ -187,8 +189,9 @@ public abstract class StateAbstract {
 
   /**
    * Sets the root container.
-   *
-   * @param rootContainer the new root container
+   * 
+   * @param rootContainer
+   *          the new root container
    */
   public void setRootContainer(final Container rootContainer) {
     this.rootContainer = rootContainer;
@@ -196,8 +199,9 @@ public abstract class StateAbstract {
 
   /**
    * Sets the social network data.
-   *
-   * @param socialNetworkData the new social network data
+   * 
+   * @param socialNetworkData
+   *          the new social network data
    */
   public void setSocialNetworkData(final SocialNetworkData socialNetworkData) {
     this.socialNetworkData = socialNetworkData;
@@ -205,8 +209,9 @@ public abstract class StateAbstract {
 
   /**
    * Sets the state token.
-   *
-   * @param stateToken the new state token
+   * 
+   * @param stateToken
+   *          the new state token
    */
   public void setStateToken(final StateToken stateToken) {
     this.stateToken = stateToken;
@@ -214,8 +219,9 @@ public abstract class StateAbstract {
 
   /**
    * Sets the title.
-   *
-   * @param title the new title
+   * 
+   * @param title
+   *          the new title
    */
   public void setTitle(final String title) {
     this.title = title;
@@ -223,14 +229,17 @@ public abstract class StateAbstract {
 
   /**
    * Sets the tool name.
-   *
-   * @param toolName the new tool name
+   * 
+   * @param toolName
+   *          the new tool name
    */
   public void setToolName(final String toolName) {
     this.toolName = toolName;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

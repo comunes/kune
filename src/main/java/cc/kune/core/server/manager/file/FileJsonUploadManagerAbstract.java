@@ -35,20 +35,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FileJsonUploadManagerAbstract.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbstract {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 8437422616838698647L;
-  
+
   /** The i18n. */
   @Inject
   I18nTranslationService i18n;
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.file.FileUploadManagerAbstract#beforeRespond(javax.servlet.http.HttpServletResponse, java.io.Writer)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.file.FileUploadManagerAbstract#beforeRespond
+   * (javax.servlet.http.HttpServletResponse, java.io.Writer)
    */
   @Override
   protected void beforeRespond(final HttpServletResponse response, final Writer w) throws IOException {
@@ -58,25 +62,34 @@ public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbs
 
   /**
    * Creates the json response.
-   *
-   * @param success the success
-   * @param message the message
+   * 
+   * @param success
+   *          the success
+   * @param message
+   *          the message
    * @return the jSON object
    */
   protected JSONObject createJsonResponse(final boolean success, final String message) {
     return new JSONObject();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.file.FileUploadManagerAbstract#onFileUploadException(javax.servlet.http.HttpServletResponse)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.manager.file.FileUploadManagerAbstract#
+   * onFileUploadException(javax.servlet.http.HttpServletResponse)
    */
   @Override
   protected void onFileUploadException(final HttpServletResponse response) throws IOException {
     doResponse(response, createJsonResponse(false, i18n.t("Error: File too large")).toString());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.file.FileUploadManagerAbstract#onOtherException(javax.servlet.http.HttpServletResponse, java.lang.Exception)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.file.FileUploadManagerAbstract#onOtherException
+   * (javax.servlet.http.HttpServletResponse, java.lang.Exception)
    */
   @Override
   protected void onOtherException(final HttpServletResponse response, final Exception e)
@@ -87,8 +100,12 @@ public abstract class FileJsonUploadManagerAbstract extends FileUploadManagerAbs
     doResponse(response, createJsonResponse(false, i18n.t("Error uploading file")).toString());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.manager.file.FileUploadManagerAbstract#onSuccess(javax.servlet.http.HttpServletResponse)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.manager.file.FileUploadManagerAbstract#onSuccess(javax
+   * .servlet.http.HttpServletResponse)
    */
   @Override
   protected void onSuccess(final HttpServletResponse response) throws IOException {

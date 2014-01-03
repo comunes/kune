@@ -33,7 +33,7 @@ import cc.kune.core.client.errors.ContentNotPermittedException;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BlogServerToolTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BlogServerToolTest {

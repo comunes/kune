@@ -34,19 +34,24 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewTaskMenuItem.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewTaskMenuItem extends NewContentMenuItem {
 
   /**
    * Instantiates a new new task menu item.
-   *
-   * @param i18n the i18n
-   * @param action the action
-   * @param res the res
-   * @param shorcutReg the shorcut reg
-   * @param tasksNewMenu the tasks new menu
+   * 
+   * @param i18n
+   *          the i18n
+   * @param action
+   *          the action
+   * @param res
+   *          the res
+   * @param shorcutReg
+   *          the shorcut reg
+   * @param tasksNewMenu
+   *          the tasks new menu
    */
   @Inject
   public NewTaskMenuItem(final I18nTranslationService i18n, final NewContentAction action,

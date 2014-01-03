@@ -30,22 +30,23 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneBasicProperties.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class KuneBasicProperties {
-  
+
   /** The properties. */
   private final KuneProperties properties;
-  
+
   /** The site url without http. */
   private String siteUrlWithoutHttp;
 
   /**
    * Instantiates a new kune basic properties.
-   *
-   * @param properties the properties
+   * 
+   * @param properties
+   *          the properties
    */
   @Inject
   public KuneBasicProperties(final KuneProperties properties) {
@@ -54,7 +55,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the admin email.
-   *
+   * 
    * @return the admin email
    */
   public String getAdminEmail() {
@@ -63,7 +64,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the admin password.
-   *
+   * 
    * @return the admin password
    */
   public String getAdminPassword() {
@@ -72,7 +73,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the admin short name.
-   *
+   * 
    * @return the admin short name
    */
   public String getAdminShortName() {
@@ -81,7 +82,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the admin user name.
-   *
+   * 
    * @return the admin user name
    */
   public String getAdminUserName() {
@@ -90,7 +91,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the default license.
-   *
+   * 
    * @return the default license
    */
   public String getDefaultLicense() {
@@ -99,7 +100,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the default site name.
-   *
+   * 
    * @return the default site name
    */
   public String getDefaultSiteName() {
@@ -108,7 +109,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the default site short name.
-   *
+   * 
    * @return the default site short name
    */
   public String getDefaultSiteShortName() {
@@ -118,7 +119,7 @@ public class KuneBasicProperties {
   /**
    * Gets the site common name (can be something like "this foo site" not
    * necessary a domain).
-   *
+   * 
    * @return the site common name
    */
   public String getSiteCommonName() {
@@ -127,7 +128,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the site url.
-   *
+   * 
    * @return the site url
    */
   public String getSiteUrl() {
@@ -136,7 +137,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the site url without http.
-   *
+   * 
    * @return the site url without http
    */
   public String getSiteUrlWithoutHttp() {
@@ -148,7 +149,7 @@ public class KuneBasicProperties {
 
   /**
    * Gets the welcomewave.
-   *
+   * 
    * @return the welcomewave
    */
   public String getWelcomewave() {

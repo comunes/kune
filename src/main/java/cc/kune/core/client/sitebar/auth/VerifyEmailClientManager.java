@@ -41,7 +41,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class VerifyEmailClientManager.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -49,12 +49,17 @@ public class VerifyEmailClientManager {
 
   /**
    * Instantiates a new verify email client manager.
-   *
-   * @param session the session
-   * @param tokens the tokens
-   * @param optGeneral the opt general
-   * @param i18n the i18n
-   * @param userService the user service
+   * 
+   * @param session
+   *          the session
+   * @param tokens
+   *          the tokens
+   * @param optGeneral
+   *          the opt general
+   * @param i18n
+   *          the i18n
+   * @param userService
+   *          the user service
    */
   @Inject
   VerifyEmailClientManager(final Session session, final SiteTokenListeners tokens,

@@ -50,52 +50,53 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PSpacePresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpacePresenter.PSpaceProxy> {
 
   /**
    * The Interface PSpaceProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
   public interface PSpaceProxy extends Proxy<PSpacePresenter> {
   }
-  
+
   /**
    * The Interface PSpaceView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface PSpaceView extends View {
 
     /**
      * Gets the action panel.
-     *
+     * 
      * @return the action panel
      */
     IsActionExtensible getActionPanel();
 
     /**
      * Gets the description.
-     *
+     * 
      * @return the description
      */
     HasText getDescription();
 
     /**
      * Gets the title.
-     *
+     * 
      * @return the title
      */
     HasText getTitle();
 
     /**
      * Sets the content goto public url.
-     *
-     * @param publicUrl the new content goto public url
+     * 
+     * @param publicUrl
+     *          the new content goto public url
      */
     void setContentGotoPublicUrl(String publicUrl);
   }
@@ -105,13 +106,19 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
 
   /**
    * Instantiates a new p space presenter.
-   *
-   * @param session the session
-   * @param stateManager the state manager
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param i18n the i18n
+   * 
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public PSpacePresenter(final Session session, final StateManager stateManager,
@@ -132,7 +139,9 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
     });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.PresenterWidget#onReveal()
    */
   @Override
@@ -140,7 +149,9 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
     super.onReveal();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -180,8 +191,9 @@ public class PSpacePresenter extends Presenter<PSpacePresenter.PSpaceView, PSpac
 
   /**
    * Sets the state.
-   *
-   * @param state the new state
+   * 
+   * @param state
+   *          the new state
    */
   public void setState(final StateAbstractDTO state) {
     if (state instanceof StateContainerDTO) {

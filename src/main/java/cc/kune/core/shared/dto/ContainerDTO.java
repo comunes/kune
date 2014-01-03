@@ -31,33 +31,33 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContainerDTO.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContainerDTO implements IsSerializable {
-  
+
   /** The absolute path. */
   private ContainerSimpleDTO[] absolutePath;
-  
+
   /** The childs. */
   private List<ContainerSimpleDTO> childs;
-  
+
   /** The contents. */
   private List<ContentSimpleDTO> contents;
-  
+
   /** The id. */
   private Long id;
-  
+
   /** The name. */
   private String name;
-  
+
   /** The parent token. */
   private StateToken parentToken;
-  
+
   /** The state token. */
   private StateToken stateToken;
-  
+
   /** The type id. */
   private String typeId;
 
@@ -69,7 +69,7 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Gets the absolute path.
-   *
+   * 
    * @return the absolute path
    */
   public ContainerSimpleDTO[] getAbsolutePath() {
@@ -96,7 +96,7 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Gets the id.
-   *
+   * 
    * @return the id
    */
   public Long getId() {
@@ -105,7 +105,7 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
@@ -114,7 +114,7 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Gets the parent token.
-   *
+   * 
    * @return the parent token
    */
   public StateToken getParentToken() {
@@ -123,7 +123,7 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Gets the state token.
-   *
+   * 
    * @return the state token
    */
   public StateToken getStateToken() {
@@ -132,7 +132,7 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Gets the type id.
-   *
+   * 
    * @return the type id
    */
   public String getTypeId() {
@@ -141,7 +141,7 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Checks if is root.
-   *
+   * 
    * @return true, if is root
    */
   public boolean isRoot() {
@@ -150,8 +150,9 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Sets the absolute path.
-   *
-   * @param absolutePath the new absolute path
+   * 
+   * @param absolutePath
+   *          the new absolute path
    */
   public void setAbsolutePath(final ContainerSimpleDTO[] absolutePath) {
     this.absolutePath = absolutePath;
@@ -159,8 +160,9 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Sets the childs.
-   *
-   * @param childs the new childs
+   * 
+   * @param childs
+   *          the new childs
    */
   public void setChilds(final List<ContainerSimpleDTO> childs) {
     this.childs = childs;
@@ -168,8 +170,9 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Sets the contents.
-   *
-   * @param contents the new contents
+   * 
+   * @param contents
+   *          the new contents
    */
   public void setContents(final List<ContentSimpleDTO> contents) {
     this.contents = contents;
@@ -177,8 +180,9 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Sets the id.
-   *
-   * @param id the new id
+   * 
+   * @param id
+   *          the new id
    */
   public void setId(final Long id) {
     this.id = id;
@@ -186,8 +190,9 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public void setName(final String name) {
     this.name = name;
@@ -195,8 +200,9 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Sets the parent token.
-   *
-   * @param parentToken the new parent token
+   * 
+   * @param parentToken
+   *          the new parent token
    */
   public void setParentToken(final StateToken parentToken) {
     this.parentToken = parentToken;
@@ -204,8 +210,9 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Sets the state token.
-   *
-   * @param stateToken the new state token
+   * 
+   * @param stateToken
+   *          the new state token
    */
   public void setStateToken(final StateToken stateToken) {
     this.stateToken = stateToken;
@@ -213,8 +220,9 @@ public class ContainerDTO implements IsSerializable {
 
   /**
    * Sets the type id.
-   *
-   * @param typeId the new type id
+   * 
+   * @param typeId
+   *          the new type id
    */
   public void setTypeId(final String typeId) {
     this.typeId = typeId;

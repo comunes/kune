@@ -29,17 +29,17 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceTheme.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceTheme implements IsSerializable {
-  
+
   /** The back colors. */
   private String[] backColors;
-  
+
   /** The colors. */
   private String[] colors;
-  
+
   /** The name. */
   private String name;
 
@@ -51,14 +51,17 @@ public class GSpaceTheme implements IsSerializable {
 
   /**
    * Instantiates a new g space theme.
-   *
-   * @param name the name
+   * 
+   * @param name
+   *          the name
    */
   public GSpaceTheme(final String name) {
     this.name = name;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -85,7 +88,7 @@ public class GSpaceTheme implements IsSerializable {
 
   /**
    * Gets the back colors.
-   *
+   * 
    * @return the back colors
    */
   public String[] getBackColors() {
@@ -94,7 +97,7 @@ public class GSpaceTheme implements IsSerializable {
 
   /**
    * Gets the colors.
-   *
+   * 
    * @return the colors
    */
   public String[] getColors() {
@@ -103,14 +106,16 @@ public class GSpaceTheme implements IsSerializable {
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
     return name;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -123,8 +128,9 @@ public class GSpaceTheme implements IsSerializable {
 
   /**
    * Sets the back colors.
-   *
-   * @param backColors the new back colors
+   * 
+   * @param backColors
+   *          the new back colors
    */
   public void setBackColors(final String[] backColors) {
     this.backColors = backColors;
@@ -132,8 +138,9 @@ public class GSpaceTheme implements IsSerializable {
 
   /**
    * Sets the colors.
-   *
-   * @param colors the new colors
+   * 
+   * @param colors
+   *          the new colors
    */
   public void setColors(final String[] colors) {
     this.colors = colors;
@@ -141,14 +148,17 @@ public class GSpaceTheme implements IsSerializable {
 
   /**
    * Sets the name.
-   *
-   * @param name the new name
+   * 
+   * @param name
+   *          the new name
    */
   public void setName(final String name) {
     this.name = name;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

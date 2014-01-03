@@ -24,7 +24,7 @@ package cc.kune.gspace.client.options.style;
 
 /**
  * The Interface GroupOptStyle.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface GroupOptStyle extends EntityOptStyle {

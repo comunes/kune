@@ -50,18 +50,15 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitebarSearchPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarSearchPresenter extends
     Presenter<SitebarSearchPresenter.SitebarSearchView, SitebarSearchPresenter.SitebarSearchProxy> {
 
-  /** The setsmall. */
-  private Timer setsmall;
-
   /**
    * The Interface SitebarSearchProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -70,7 +67,7 @@ public class SitebarSearchPresenter extends
 
   /**
    * The Interface SitebarSearchView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SitebarSearchView extends View {
@@ -87,21 +84,35 @@ public class SitebarSearchPresenter extends
 
     /**
      * Gets the button.
-     *
+     * 
      * @return the button
      */
     HasClickHandlers getButton();
 
     /**
+     * Gets the def label focus.
+     * 
+     * @return the def label focus
+     */
+    HasClickHandlers getDefLabelFocus();
+
+    /**
      * Gets the focus.
-     *
+     * 
      * @return the focus
      */
     HasAllFocusHandlers getFocus();
 
     /**
+     * Gets the key handler.
+     * 
+     * @return the key handler
+     */
+    HasAllKeyHandlers getKeyHandler();
+
+    /**
      * Gets the text box.
-     *
+     * 
      * @return the text box
      */
     HasText getTextBox();
@@ -112,9 +123,18 @@ public class SitebarSearchPresenter extends
     void selectSearchText();
 
     /**
+     * Sets the def text visible.
+     * 
+     * @param visible
+     *          the new def text visible
+     */
+    void setDefTextVisible(boolean visible);
+
+    /**
      * Sets the text search.
-     *
-     * @param text the new text search
+     * 
+     * @param text
+     *          the new text search
      */
     void setTextSearch(String text);
 
@@ -127,36 +147,22 @@ public class SitebarSearchPresenter extends
      * Sets the text search small.
      */
     void setTextSearchSmall();
-
-    /**
-     * Sets the def text visible.
-     *
-     * @param visible the new def text visible
-     */
-    void setDefTextVisible(boolean visible);
-
-    /**
-     * Gets the key handler.
-     *
-     * @return the key handler
-     */
-    HasAllKeyHandlers getKeyHandler();
-
-    /**
-     * Gets the def label focus.
-     *
-     * @return the def label focus
-     */
-    HasClickHandlers getDefLabelFocus();
   }
+
+  /** The setsmall. */
+  private final Timer setsmall;
 
   /**
    * Instantiates a new sitebar search presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param i18n the i18n
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public SitebarSearchPresenter(final EventBus eventBus, final SitebarSearchView view,
@@ -184,7 +190,9 @@ public class SitebarSearchPresenter extends
     getView().focus();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -198,7 +206,7 @@ public class SitebarSearchPresenter extends
     });
     getView().getDefLabelFocus().addClickHandler(new ClickHandler() {
       @Override
-      public void onClick(ClickEvent event) {
+      public void onClick(final ClickEvent event) {
         onSearchFocus();
         focus();
       }
@@ -229,17 +237,10 @@ public class SitebarSearchPresenter extends
   }
 
   /**
-   * On search focus.
-   */
-  public void onSearchFocus() {
-    getView().setTextSearchBig();
-    getView().setDefTextVisible(false);
-  }
-
-  /**
    * On search blur.
-   *
-   * @param search the search
+   * 
+   * @param search
+   *          the search
    */
   public void onSearchBlur(final String search) {
     if (search.length() == 0) {
@@ -252,7 +253,17 @@ public class SitebarSearchPresenter extends
     }
   }
 
-  /* (non-Javadoc)
+  /**
+   * On search focus.
+   */
+  public void onSearchFocus() {
+    getView().setTextSearchBig();
+    getView().setDefTextVisible(false);
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

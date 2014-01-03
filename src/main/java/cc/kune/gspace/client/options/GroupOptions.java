@@ -25,7 +25,7 @@ package cc.kune.gspace.client.options;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface GroupOptions.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface GroupOptions extends EntityOptions {

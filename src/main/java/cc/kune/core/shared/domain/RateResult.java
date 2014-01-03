@@ -27,19 +27,19 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RateResult.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RateResult implements IsSerializable {
-  
-  /** The rate. */
-  private Double rate;
-  
-  /** The rate by users. */
-  private Integer rateByUsers;
-  
+
   /** The current user rate. */
   private Double currentUserRate;
+
+  /** The rate. */
+  private Double rate;
+
+  /** The rate by users. */
+  private Integer rateByUsers;
 
   /**
    * Instantiates a new rate result.
@@ -50,10 +50,13 @@ public class RateResult implements IsSerializable {
 
   /**
    * Instantiates a new rate result.
-   *
-   * @param rate the rate
-   * @param rateByUsers the rate by users
-   * @param currentUserRate the current user rate
+   * 
+   * @param rate
+   *          the rate
+   * @param rateByUsers
+   *          the rate by users
+   * @param currentUserRate
+   *          the current user rate
    */
   public RateResult(final Double rate, final Integer rateByUsers, final Double currentUserRate) {
     this.rate = rate;
@@ -63,7 +66,7 @@ public class RateResult implements IsSerializable {
 
   /**
    * Gets the current user rate.
-   *
+   * 
    * @return the current user rate
    */
   public Double getCurrentUserRate() {
@@ -72,7 +75,7 @@ public class RateResult implements IsSerializable {
 
   /**
    * Gets the rate.
-   *
+   * 
    * @return the rate
    */
   public Double getRate() {
@@ -81,7 +84,7 @@ public class RateResult implements IsSerializable {
 
   /**
    * Gets the rate by users.
-   *
+   * 
    * @return the rate by users
    */
   public Integer getRateByUsers() {
@@ -90,8 +93,9 @@ public class RateResult implements IsSerializable {
 
   /**
    * Sets the current user rate.
-   *
-   * @param currentUserRate the new current user rate
+   * 
+   * @param currentUserRate
+   *          the new current user rate
    */
   public void setCurrentUserRate(final Double currentUserRate) {
     this.currentUserRate = currentUserRate;
@@ -99,8 +103,9 @@ public class RateResult implements IsSerializable {
 
   /**
    * Sets the rate.
-   *
-   * @param rate the new rate
+   * 
+   * @param rate
+   *          the new rate
    */
   public void setRate(final Double rate) {
     this.rate = rate;
@@ -108,8 +113,9 @@ public class RateResult implements IsSerializable {
 
   /**
    * Sets the rate by users.
-   *
-   * @param rateByUsers the new rate by users
+   * 
+   * @param rateByUsers
+   *          the new rate by users
    */
   public void setRateByUsers(final Integer rateByUsers) {
     this.rateByUsers = rateByUsers;

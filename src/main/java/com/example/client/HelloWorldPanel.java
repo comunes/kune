@@ -38,14 +38,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HelloWorldPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HelloWorldPanel extends ViewImpl implements HasText, HelloWorldView {
 
   /**
    * The Interface HelloWorldPanelUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface HelloWorldPanelUiBinder extends UiBinder<Widget, HelloWorldPanel> {
@@ -70,15 +70,18 @@ public class HelloWorldPanel extends ViewImpl implements HasText, HelloWorldView
 
   /**
    * Instantiates a new hello world panel.
-   *
-   * @param firstName the first name
+   * 
+   * @param firstName
+   *          the first name
    */
   public HelloWorldPanel(final String firstName) {
     widget = uiBinder.createAndBindUi(this);
     button.setText(firstName);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -86,7 +89,9 @@ public class HelloWorldPanel extends ViewImpl implements HasText, HelloWorldView
     return widget;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.HasText#getText()
    */
   @Override
@@ -96,15 +101,18 @@ public class HelloWorldPanel extends ViewImpl implements HasText, HelloWorldView
 
   /**
    * On click.
-   *
-   * @param e the e
+   * 
+   * @param e
+   *          the e
    */
   @UiHandler("button")
   void onClick(final ClickEvent e) {
     NotifyUser.info("Hello world!");
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.HasText#setText(java.lang.String)
    */
   @Override

@@ -30,7 +30,7 @@ import com.gwtplatform.mvp.client.gin.AbstractPresenterModule;
 // TODO: Auto-generated Javadoc
 /**
  * Sample of GinModule (but with GWTPlatform).
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HelloWordGinModule extends AbstractPresenterModule {
@@ -41,20 +41,22 @@ public class HelloWordGinModule extends AbstractPresenterModule {
    */
   /**
    * The Interface HelloWordGinjector.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HelloWordGinjector extends Ginjector {
-    
+
     /**
      * Gets the hello world presenter.
-     *
+     * 
      * @return the hello world presenter
      */
     AsyncProvider<HelloWorldPresenter> getHelloWorldPresenter();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override

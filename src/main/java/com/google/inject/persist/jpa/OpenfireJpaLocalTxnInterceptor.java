@@ -32,14 +32,14 @@ import com.google.inject.persist.UnitOfWork;
 // TODO: Auto-generated Javadoc
 /**
  * The Class OpenfireJpaLocalTxnInterceptor.
- *
+ * 
  * @author Dhanji R. Prasanna (dhanji@gmail.com)
  */
 public class OpenfireJpaLocalTxnInterceptor implements MethodInterceptor {
 
   /**
    * The Class Internal.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @OpenfireTransactional
@@ -58,8 +58,12 @@ public class OpenfireJpaLocalTxnInterceptor implements MethodInterceptor {
   @Inject
   private final UnitOfWork unitOfWork = null;
 
-  /* (non-Javadoc)
-   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept.MethodInvocation)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept
+   * .MethodInvocation)
    */
   @Override
   public Object invoke(final MethodInvocation methodInvocation) throws Throwable {
@@ -123,8 +127,9 @@ public class OpenfireJpaLocalTxnInterceptor implements MethodInterceptor {
   // TODO(dhanji): Cache this method's results.
   /**
    * Read transaction metadata.
-   *
-   * @param methodInvocation the method invocation
+   * 
+   * @param methodInvocation
+   *          the method invocation
    * @return the openfire transactional
    */
   private OpenfireTransactional readTransactionMetadata(final MethodInvocation methodInvocation) {
@@ -147,10 +152,13 @@ public class OpenfireJpaLocalTxnInterceptor implements MethodInterceptor {
 
   /**
    * Returns True if rollback DID NOT HAPPEN (i.e. if commit should continue).
-   *
-   * @param transactional The metadata annotaiton of the method
-   * @param e The exception to test for rollback
-   * @param txn A JPA Transaction to issue rollbacks on
+   * 
+   * @param transactional
+   *          The metadata annotaiton of the method
+   * @param e
+   *          The exception to test for rollback
+   * @param txn
+   *          A JPA Transaction to issue rollbacks on
    * @return true, if successful
    */
   private boolean rollbackIfNecessary(final OpenfireTransactional transactional, final Exception e,

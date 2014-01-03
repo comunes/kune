@@ -50,14 +50,14 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FolderItemWidget.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * The Interface FolderItemWidgetUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface FolderItemWidgetUiBinder extends UiBinder<Widget, FolderItemWidget> {
@@ -72,23 +72,23 @@ public class FolderItemWidget extends Composite implements HasText {
   /** The flow. */
   @UiField
   FlowPanel flow;
-  
+
   /** The focus panel. */
   @UiField
   FocusPanel focusPanel;
-  
+
   /** The icon. */
   @UiField
   Label icon;
-  
+
   /** The menu. */
   @UiField
   SimplePanel menu;
-  
+
   /** The modified. */
   @UiField
   InlineLabel modified;
-  
+
   /** The title. */
   @UiField
   InlineLabel title;
@@ -98,11 +98,15 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Instantiates a new folder item widget.
-   *
-   * @param icon the icon
-   * @param title the title
-   * @param token the token
-   * @param id the id
+   * 
+   * @param icon
+   *          the icon
+   * @param title
+   *          the title
+   * @param token
+   *          the token
+   * @param id
+   *          the id
    */
   public FolderItemWidget(final KuneIcon icon, final String title, final StateToken token,
       final String id) {
@@ -124,7 +128,7 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Gets the flow.
-   *
+   * 
    * @return the flow
    */
   public FlowPanel getFlow() {
@@ -133,7 +137,7 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Gets the icon.
-   *
+   * 
    * @return the icon
    */
   public Widget getIcon() {
@@ -142,7 +146,7 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Gets the row click.
-   *
+   * 
    * @return the row click
    */
   public HasClickHandlers getRowClick() {
@@ -151,7 +155,7 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Gets the row double click.
-   *
+   * 
    * @return the row double click
    */
   public HasDoubleClickHandlers getRowDoubleClick() {
@@ -160,7 +164,7 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Gets the row focus.
-   *
+   * 
    * @return the row focus
    */
   public HasAllFocusHandlers getRowFocus() {
@@ -169,14 +173,16 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Gets the row mouse.
-   *
+   * 
    * @return the row mouse
    */
   public HasAllMouseHandlers getRowMouse() {
     return focusPanel;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.HasText#getText()
    */
   @Override
@@ -186,7 +192,7 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Gets the title widget.
-   *
+   * 
    * @return the title widget
    */
   public Widget getTitleWidget() {
@@ -195,7 +201,7 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Gets the token.
-   *
+   * 
    * @return the token
    */
   public StateToken getToken() {
@@ -204,8 +210,9 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * On blur.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @UiHandler("focusPanel")
   public void onBlur(final BlurEvent event) {
@@ -215,8 +222,9 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * On focus.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @UiHandler("focusPanel")
   public void onFocus(final FocusEvent event) {
@@ -226,8 +234,9 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * On out.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @UiHandler("focusPanel")
   public void onOut(final MouseOutEvent event) {
@@ -237,8 +246,9 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * On over.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @UiHandler("focusPanel")
   public void onOver(final MouseOverEvent event) {
@@ -248,8 +258,9 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Sets the menu.
-   *
-   * @param toolbar the new menu
+   * 
+   * @param toolbar
+   *          the new menu
    */
   public void setMenu(final ActionSimplePanel toolbar) {
     menu.add(toolbar);
@@ -257,8 +268,9 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Sets the menu visible.
-   *
-   * @param visible the new menu visible
+   * 
+   * @param visible
+   *          the new menu visible
    */
   public void setMenuVisible(final boolean visible) {
     menu.getElement().getStyle().setOpacity(visible ? 1d : 0.2d);
@@ -266,8 +278,9 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Sets the modified text.
-   *
-   * @param text the new modified text
+   * 
+   * @param text
+   *          the new modified text
    */
   public void setModifiedText(final String text) {
     modified.setText(text);
@@ -275,8 +288,9 @@ public class FolderItemWidget extends Composite implements HasText {
 
   /**
    * Sets the select.
-   *
-   * @param selected the new select
+   * 
+   * @param selected
+   *          the new select
    */
   public void setSelect(final boolean selected) {
     clearFocusStyles();
@@ -284,7 +298,9 @@ public class FolderItemWidget extends Composite implements HasText {
     focusPanel.addStyleDependentName(selected ? "selected" : "noselected");
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.HasText#setText(java.lang.String)
    */
   @Override

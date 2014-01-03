@@ -25,7 +25,7 @@ package cc.kune.core.client.errors;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InvalidKuneTokenException.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class InvalidKuneTokenException extends DefaultException {
@@ -35,17 +35,18 @@ public class InvalidKuneTokenException extends DefaultException {
 
   /**
    * Instantiates a new invalid kune token exception.
-   *
-   * @param message the message
    */
-  public InvalidKuneTokenException(String message) {
-    super(message);
+  public InvalidKuneTokenException() {
+    super();
   }
 
   /**
    * Instantiates a new invalid kune token exception.
+   * 
+   * @param message
+   *          the message
    */
-  public InvalidKuneTokenException() {
-    super();
+  public InvalidKuneTokenException(final String message) {
+    super(message);
   }
 }

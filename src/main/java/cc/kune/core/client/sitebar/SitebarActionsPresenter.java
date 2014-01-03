@@ -49,7 +49,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitebarActionsPresenter.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarActionsPresenter extends
@@ -58,7 +58,7 @@ public class SitebarActionsPresenter extends
 
   /**
    * The Interface SitebarActionsProxy.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -67,21 +67,21 @@ public class SitebarActionsPresenter extends
 
   /**
    * The Interface SitebarActionsView.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SitebarActionsView extends View {
 
     /**
      * Gets the left bar.
-     *
+     * 
      * @return the left bar
      */
     IsActionExtensible getLeftBar();
 
     /**
      * Gets the right bar.
-     *
+     * 
      * @return the right bar
      */
     IsActionExtensible getRightBar();
@@ -99,41 +99,51 @@ public class SitebarActionsPresenter extends
 
   /** The Constant SITE_OPTIONS_MENU. */
   public static final String SITE_OPTIONS_MENU = "kune-sop-om";
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The icons. */
   private final IconicResources icons;
-  
+
   /** The my groups menu. */
   private final Provider<MyGroupsMenu> myGroupsMenu;
-  
+
   /** The new group link. */
   private final Provider<SitebarNewGroupLink> newGroupLink;
-  
+
   /** The res. */
   private final CoreResources res;
-  
+
   /** The sign in link. */
   private final Provider<SitebarSignInLink> signInLink;
-  
+
   /** The sign out link. */
   private final Provider<SitebarSignOutLink> signOutLink;
 
   /**
    * Instantiates a new sitebar actions presenter.
-   *
-   * @param eventBus the event bus
-   * @param view the view
-   * @param proxy the proxy
-   * @param i18n the i18n
-   * @param newGroupLink the new group link
-   * @param signOutLink the sign out link
-   * @param signInLink the sign in link
-   * @param res the res
-   * @param icons the icons
-   * @param myGroupsMenu the my groups menu
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param view
+   *          the view
+   * @param proxy
+   *          the proxy
+   * @param i18n
+   *          the i18n
+   * @param newGroupLink
+   *          the new group link
+   * @param signOutLink
+   *          the sign out link
+   * @param signInLink
+   *          the sign in link
+   * @param res
+   *          the res
+   * @param icons
+   *          the icons
+   * @param myGroupsMenu
+   *          the my groups menu
    */
   @Inject
   public SitebarActionsPresenter(final EventBus eventBus, final SitebarActionsView view,
@@ -154,7 +164,7 @@ public class SitebarActionsPresenter extends
 
   /**
    * Creates the goto kune.
-   *
+   * 
    * @return the menu item descriptor
    */
   private MenuItemDescriptor createGotoKune() {
@@ -171,7 +181,7 @@ public class SitebarActionsPresenter extends
 
   /**
    * Gets the options menu.
-   *
+   * 
    * @return the options menu
    */
   public MenuDescriptor getOptionsMenu() {
@@ -187,8 +197,9 @@ public class SitebarActionsPresenter extends
 
   /**
    * On app start.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
@@ -261,7 +272,9 @@ public class SitebarActionsPresenter extends
     refreshActionsImpl();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.sitebar.SitebarActions#refreshActions()
    */
   @Override
@@ -279,7 +292,9 @@ public class SitebarActionsPresenter extends
     getView().getRightBar().add(RIGHT_TOOLBAR);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

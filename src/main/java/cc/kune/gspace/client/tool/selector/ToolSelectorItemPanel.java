@@ -46,14 +46,14 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolSelectorItemPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolSelectorItemPanel extends Composite implements ToolSelectorItemView {
 
   /**
    * The Interface ToolSelectorItemPanelUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface ToolSelectorItemPanelUiBinder extends UiBinder<Widget, ToolSelectorItemPanel> {
@@ -68,35 +68,37 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   /** The arrow. */
   @UiField
   HTMLPanel arrow;
-  
+
   /** The flow. */
   @UiField
   FlowPanel flow;
-  
+
   /** The icon left. */
   @UiField
   Label iconLeft;
-  
+
   /** The icon right. */
   @UiField
   Image iconRight;
-  
+
   /** The label. */
   @UiField
   InlineLabel label;
-  
+
   /** The self. */
   @UiField
   FocusPanel self;
-  
+
   /** The short name. */
   private final String shortName;
 
   /**
    * Instantiates a new tool selector item panel.
-   *
-   * @param shortName the short name
-   * @param icon the icon
+   * 
+   * @param shortName
+   *          the short name
+   * @param icon
+   *          the icon
    */
   public ToolSelectorItemPanel(final String shortName, final KuneIcon icon) {
     this.shortName = shortName;
@@ -106,7 +108,9 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
     iconLeft.setText(icon.getCharacter().toString());
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.Widget#asWidget()
    */
   @Override
@@ -122,8 +126,11 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
     self.removeStyleDependentName("nofocus");
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#getFocus()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.
+   * ToolSelectorItemView#getFocus()
    */
   @Override
   public HasClickHandlers getFocus() {
@@ -132,15 +139,18 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * Gets the focus panel.
-   *
+   * 
    * @return the focus panel
    */
   public Widget getFocusPanel() {
     return flow;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#getLabel()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.
+   * ToolSelectorItemView#getLabel()
    */
   @Override
   public HasText getLabel() {
@@ -149,15 +159,18 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * Gets the name.
-   *
+   * 
    * @return the name
    */
   public String getName() {
     return shortName;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#getTarget()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.
+   * ToolSelectorItemView#getTarget()
    */
   @Override
   public Object getTarget() {
@@ -166,8 +179,9 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * On self mouse out.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @UiHandler("self")
   void onSelfMouseOut(final MouseOutEvent event) {
@@ -176,16 +190,20 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * On self mouse over.
-   *
-   * @param event the event
+   * 
+   * @param event
+   *          the event
    */
   @UiHandler("self")
   void onSelfMouseOver(final MouseOverEvent event) {
     focus();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#setSelected(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.
+   * ToolSelectorItemView#setSelected(boolean)
    */
   @Override
   public void setSelected(final boolean selected) {
@@ -202,15 +220,20 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView#setTooltip(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.
+   * ToolSelectorItemView#setTooltip(java.lang.String)
    */
   @Override
   public void setTooltip(final String tooltip) {
     Tooltip.to(this, tooltip);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
@@ -220,8 +243,9 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * Sets the visible impl.
-   *
-   * @param visible the new visible impl
+   * 
+   * @param visible
+   *          the new visible impl
    */
   private void setVisibleImpl(final boolean visible) {
     self.setVisible(visible);

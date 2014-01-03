@@ -31,17 +31,20 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractNewMenu.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AbstractNewMenu extends AbstractEditorsMenu {
 
   /**
    * Instantiates a new abstract new menu.
-   *
-   * @param res the res
-   * @param i18n the i18n
-   * @param rightsManager the rights manager
+   * 
+   * @param res
+   *          the res
+   * @param i18n
+   *          the i18n
+   * @param rightsManager
+   *          the rights manager
    */
   @Inject
   public AbstractNewMenu(final IconicResources res, final I18nTranslationService i18n,

@@ -24,7 +24,7 @@ package cc.kune.gspace.client.options.general;
 
 /**
  * The Interface UserOptPass.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface UserOptPass {

@@ -46,47 +46,49 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ErrorsDialog.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ErrorsDialog {
 
   /**
    * The Interface Binder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface Binder extends UiBinder<Widget, ErrorsDialog> {
   }
-  
+
   /** The Constant BINDER. */
   private static final Binder BINDER = GWT.create(Binder.class);
-  
+
   /** The Constant ERROR_LOGGER_BUTTON_ID. */
   public static final String ERROR_LOGGER_BUTTON_ID = "kune-error-button-diag";
-  
+
   /** The Constant ERROR_LOGGER_ID. */
   public static final String ERROR_LOGGER_ID = "kune-error-diag";
 
   /** The dialog. */
   private BasicTopDialog dialog;
-  
-  /** The panel. */
-  @UiField
-  FlowPanel panel;
-  
-  /** The scroll. */
-  @UiField
-  ScrollPanel scroll;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
 
+  /** The panel. */
+  @UiField
+  FlowPanel panel;
+
+  /** The scroll. */
+  @UiField
+  ScrollPanel scroll;
+
   /**
    * Instantiates a new errors dialog.
-   *
-   * @param i18n the i18n
-   * @param eventBus the event bus
+   * 
+   * @param i18n
+   *          the i18n
+   * @param eventBus
+   *          the event bus
    */
   @Inject
   public ErrorsDialog(final I18nTranslationService i18n, final EventBus eventBus) {

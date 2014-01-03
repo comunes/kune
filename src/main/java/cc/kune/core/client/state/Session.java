@@ -281,17 +281,17 @@ public interface Session {
    */
   boolean isCurrentStateAPerson();
 
- /**
-   * If we have using the development version of the Gui (param ?dev=true)
-   */
-  boolean isGuiInDevelopment();
-
   /**
    * Shows if is a embedded client.
    * 
    * @return true, if is embed
    */
   boolean isEmbedded();
+
+  /**
+   * If we have using the development version of the Gui (param ?dev=true)
+   */
+  boolean isGuiInDevelopment();
 
   /**
    * Checks if is in current user space.

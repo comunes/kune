@@ -28,7 +28,7 @@ import com.google.inject.Singleton;
 
 /**
  * The Class GroupSNVisibilitySubMenu.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton

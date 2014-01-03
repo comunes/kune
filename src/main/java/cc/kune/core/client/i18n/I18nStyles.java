@@ -41,7 +41,7 @@ public class I18nStyles {
    */
   private static native HeadElement getHeadElement()
   /*-{
-		return $doc.getElementsByTagName("head")[0];
+  	return $doc.getElementsByTagName("head")[0];
   }-*/;
 
   /**

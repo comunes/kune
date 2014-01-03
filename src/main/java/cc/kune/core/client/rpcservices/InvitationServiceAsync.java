@@ -32,75 +32,98 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface InvitationServiceAsync.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface InvitationServiceAsync {
 
   /**
    * Confirmation invitation to group.
-   *
-   * @param userHash the user hash
-   * @param invitationHash the invitation hash
-   * @param callback the callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param invitationHash
+   *          the invitation hash
+   * @param callback
+   *          the callback
    */
   void confirmationInvitationToGroup(String userHash, String invitationHash, AsyncCallback<Void> callback);
 
   /**
    * Confirmation invitation to site.
-   *
-   * @param userHash the user hash
-   * @param invitationHash the invitation hash
-   * @param callback the callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param invitationHash
+   *          the invitation hash
+   * @param callback
+   *          the callback
    */
   void confirmationInvitationToSite(String userHash, String invitationHash, AsyncCallback<Void> callback);
 
   /**
    * Confirm invitation to list.
-   *
-   * @param userHash the user hash
-   * @param invitationHash the invitation hash
-   * @param callback the callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param invitationHash
+   *          the invitation hash
+   * @param callback
+   *          the callback
    */
   void confirmInvitationToList(String userHash, String invitationHash,
       AsyncCallback<StateContainerDTO> callback);
 
   /**
    * Gets the invitation.
-   *
-   * @param invitationHash the invitation hash
-   * @param callback the callback
+   * 
+   * @param invitationHash
+   *          the invitation hash
+   * @param callback
+   *          the callback
    * @return the invitation
    */
   void getInvitation(String invitationHash, AsyncCallback<InvitationDTO> callback);
 
   /**
    * Invite to group.
-   *
-   * @param userHash the user hash
-   * @param token the token
-   * @param emails the emails
-   * @param callback the callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
+   * @param emails
+   *          the emails
+   * @param callback
+   *          the callback
    */
   void inviteToGroup(String userHash, StateToken token, String[] emails, AsyncCallback<Void> callback);
 
   /**
    * Invite to list.
-   *
-   * @param userHash the user hash
-   * @param token the token
-   * @param emails the emails
-   * @param callback the callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
+   * @param emails
+   *          the emails
+   * @param callback
+   *          the callback
    */
   void inviteToList(String userHash, StateToken token, String[] emails, AsyncCallback<Void> callback);
 
   /**
    * Invite to site.
-   *
-   * @param userHash the user hash
-   * @param token the token
-   * @param emails the emails
-   * @param callback the callback
+   * 
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
+   * @param emails
+   *          the emails
+   * @param callback
+   *          the callback
    */
   void inviteToSite(String userHash, StateToken token, String[] emails, AsyncCallback<Void> callback);
 

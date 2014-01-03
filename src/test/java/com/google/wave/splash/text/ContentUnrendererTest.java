@@ -34,7 +34,7 @@ import org.waveprotocol.wave.model.document.raw.impl.Text;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentUnrendererTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentUnrendererTest {

@@ -33,15 +33,16 @@ import com.google.inject.persist.finder.Finder;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface I18nLanguageFinder.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface I18nLanguageFinder {
 
   /**
    * Find by code.
-   *
-   * @param language the language
+   * 
+   * @param language
+   *          the language
    * @return the i18n language
    */
   @Finder(query = "FROM I18nLanguage l WHERE code = :language")
@@ -49,8 +50,9 @@ public interface I18nLanguageFinder {
 
   /**
    * Find by codes.
-   *
-   * @param languages the languages
+   * 
+   * @param languages
+   *          the languages
    * @return the list
    */
   @Finder(query = "FROM I18nLanguage l WHERE code in (:languages)", returnAs = ArrayList.class)
@@ -58,7 +60,7 @@ public interface I18nLanguageFinder {
 
   /**
    * Gets the all.
-   *
+   * 
    * @return the all
    */
   @Finder(query = "FROM I18nLanguage ORDER BY englishName", returnAs = ArrayList.class)

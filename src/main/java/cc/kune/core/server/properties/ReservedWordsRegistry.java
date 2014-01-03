@@ -33,7 +33,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ReservedWordsRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -44,8 +44,9 @@ public class ReservedWordsRegistry extends ArrayList<String> {
 
   /**
    * From list.
-   *
-   * @param kuneProperties the kune properties
+   * 
+   * @param kuneProperties
+   *          the kune properties
    * @return the list
    */
   public static List<String> fromList(final KuneProperties kuneProperties) {
@@ -54,8 +55,9 @@ public class ReservedWordsRegistry extends ArrayList<String> {
 
   /**
    * Instantiates a new reserved words registry.
-   *
-   * @param kuneProperties the kune properties
+   * 
+   * @param kuneProperties
+   *          the kune properties
    */
   @Inject
   public ReservedWordsRegistry(final KuneProperties kuneProperties) {
@@ -64,8 +66,9 @@ public class ReservedWordsRegistry extends ArrayList<String> {
 
   /**
    * Check.
-   *
-   * @param names the names
+   * 
+   * @param names
+   *          the names
    */
   public void check(final String... names) {
     for (final String name : names) {

@@ -35,7 +35,7 @@ import cc.kune.selenium.SeleniumUtils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RegisterPageObject.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RegisterPageObject extends AbstractLoginObject {
@@ -43,23 +43,23 @@ public class RegisterPageObject extends AbstractLoginObject {
   /** The email. */
   @FindBy(id = RegisterForm.EMAIL_FIELD + SeleniumConstants.INPUT)
   private WebElement email;
-  
+
   /** The long name. */
   @FindBy(id = RegisterForm.LONGNAME_FIELD + SeleniumConstants.INPUT)
   private WebElement longName;
-  
+
   /** The passwd. */
   @FindBy(id = RegisterForm.PASSWORD_FIELD + SeleniumConstants.INPUT)
   private WebElement passwd;
-  
+
   /** The register button. */
   @FindBy(id = SeleniumConstants.GWTDEV + RegisterPanel.REGISTER_BUTTON_ID)
   private WebElement registerButton;
-  
+
   /** The short name. */
   @FindBy(id = RegisterForm.NICK_FIELD + SeleniumConstants.INPUT)
   private WebElement shortName;
-  
+
   /** The welcome. */
   @FindBy(id = SeleniumConstants.GWTDEV + Register.WELCOME_ID)
   private WebElement welcome;
@@ -73,13 +73,19 @@ public class RegisterPageObject extends AbstractLoginObject {
 
   /**
    * Fill register form.
-   *
-   * @param nick the nick
-   * @param name the name
-   * @param pass the pass
-   * @param em the em
-   * @param withReturn the with return
-   * @param doScreenshot the do screenshot
+   * 
+   * @param nick
+   *          the nick
+   * @param name
+   *          the name
+   * @param pass
+   *          the pass
+   * @param em
+   *          the em
+   * @param withReturn
+   *          the with return
+   * @param doScreenshot
+   *          the do screenshot
    */
   public void fillRegisterForm(final String nick, final String name, final String pass, final String em,
       final boolean withReturn, final boolean doScreenshot) {
@@ -109,7 +115,7 @@ public class RegisterPageObject extends AbstractLoginObject {
 
   /**
    * Gets the welcome msg.
-   *
+   * 
    * @return the welcome msg
    */
   public WebElement getWelcomeMsg() {

@@ -29,11 +29,16 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ProvidersCollection.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @SuppressWarnings("serial")
 public class ProvidersCollection extends ArrayList<Provider<?>> {
+
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
 
   /**
    * Instantiates a new providers collection.

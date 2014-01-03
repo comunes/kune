@@ -49,7 +49,7 @@ import com.google.inject.Provider;
 /**
  * You must call {@link UserSNPresenter#refreshActions()} when adding some
  * action externally with.
- *
+ * 
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
  */
 
@@ -60,23 +60,30 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
 
   /** The Constant OPTIONS_MENU. */
   public static final MenuDescriptor OPTIONS_MENU = new MenuDescriptor();
-  
+
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
-  
+
   /** The Constant VISIBILITY_SUBMENU. */
   public static final SubMenuDescriptor VISIBILITY_SUBMENU = new SubMenuDescriptor();
 
   /**
    * Instantiates a new user sn conf actions.
-   *
-   * @param session the session
-   * @param stateManager the state manager
-   * @param i18n the i18n
-   * @param userBuddiesVisibility the user buddies visibility
-   * @param res the res
-   * @param isGroupCondition the is group condition
-   * @param addNewBuddiesAction the add new buddies action
+   * 
+   * @param session
+   *          the session
+   * @param stateManager
+   *          the state manager
+   * @param i18n
+   *          the i18n
+   * @param userBuddiesVisibility
+   *          the user buddies visibility
+   * @param res
+   *          the res
+   * @param isGroupCondition
+   *          the is group condition
+   * @param addNewBuddiesAction
+   *          the add new buddies action
    */
   @Inject
   public UserSNConfActions(final Session session, final StateManager stateManager,
@@ -140,10 +147,11 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
   /**
    * You must call {@link UserSNPresenter#refreshActions()} when adding some
    * action externally with.
-   *
-   * @param action the action
+   * 
+   * @param action
+   *          the action
    * @return true, if successful
-   * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
+   *         {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
    */
   @Override
   public boolean add(final GuiActionDescrip action) {
@@ -152,8 +160,9 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
 
   /**
    * Adds the impl.
-   *
-   * @param action the action
+   * 
+   * @param action
+   *          the action
    * @return true, if successful
    */
   private boolean addImpl(final GuiActionDescrip action) {

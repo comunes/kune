@@ -32,7 +32,7 @@ import com.google.gwt.user.client.Cookies;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CookiesManagerImpl.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CookiesManagerImpl implements CookiesManager {
@@ -46,7 +46,9 @@ public class CookiesManagerImpl implements CookiesManager {
   public CookiesManagerImpl() {
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.cookies.CookiesManager#getAnonCookie()
    */
   @Override
@@ -54,7 +56,9 @@ public class CookiesManagerImpl implements CookiesManager {
     return Cookies.getCookie(ANON);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.cookies.CookiesManager#getAuthCookie()
    */
   @Override
@@ -62,7 +66,9 @@ public class CookiesManagerImpl implements CookiesManager {
     return Cookies.getCookie(SessionConstants.USERHASH);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.cookies.CookiesManager#removeAnonCookie()
    */
   @Override
@@ -71,7 +77,9 @@ public class CookiesManagerImpl implements CookiesManager {
     Cookies.setCookie(ANON, null, new Date(0), null, "/", false);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.client.cookies.CookiesManager#removeAuthCookie()
    */
   @Override
@@ -87,8 +95,11 @@ public class CookiesManagerImpl implements CookiesManager {
     Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), null, "/", false);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.cookies.CookiesManager#setAnonCookie(java.lang.Boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.cookies.CookiesManager#setAnonCookie(java.lang.Boolean)
    */
   @Override
   public void setAnonCookie(final Boolean userRegister) {
@@ -98,8 +109,11 @@ public class CookiesManagerImpl implements CookiesManager {
     Cookies.setCookie(ANON, userRegister.toString(), expires, null, "/", false);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.cookies.CookiesManager#setAuthCookie(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.cookies.CookiesManager#setAuthCookie(java.lang.String)
    */
   @Override
   public void setAuthCookie(final String userHash) {

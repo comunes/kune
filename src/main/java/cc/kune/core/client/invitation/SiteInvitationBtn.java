@@ -40,7 +40,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SiteInvitationBtn.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -48,11 +48,15 @@ public class SiteInvitationBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new site invitation btn.
-   *
-   * @param session the session
-   * @param action the action
-   * @param i18n the i18n
-   * @param icons the icons
+   * 
+   * @param session
+   *          the session
+   * @param action
+   *          the action
+   * @param i18n
+   *          the i18n
+   * @param icons
+   *          the icons
    */
   @Inject
   SiteInvitationBtn(final Session session, final SiteInvitationAction action,

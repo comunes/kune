@@ -50,7 +50,7 @@ import com.google.inject.Inject;
 /**
  * Some snippets from:
  * http://www.onjava.com/pub/a/onjava/excerpt/jebp_3/index1.html?page=1
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 
@@ -61,10 +61,10 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
 
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(FileDownloadManager.class);
-  
+
   /** The Constant RESP_HEADER_ATTACHMENT_FILENAME. */
   static final String RESP_HEADER_ATTACHMENT_FILENAME = "attachment; filename=\"";
-  
+
   /** The Constant RESP_HEADER_CONTEND_DISP. */
   static final String RESP_HEADER_CONTEND_DISP = "Content-Disposition";
 
@@ -77,29 +77,36 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
   /** The file utils. */
   @Inject
   FileUtils fileUtils;
-  
+
   /** The group manager. */
   @Inject
   GroupManager groupManager;
-  
+
   /** The kune properties. */
   @Inject
   KuneProperties kuneProperties;
-  
+
   /** The last modified. */
   private long lastModified = 0l;
 
   /**
    * Builds the response.
-   *
-   * @param statetoken the statetoken
-   * @param filename the filename
-   * @param mimeType the mime type
-   * @param imgsize the imgsize
-   * @param resp the resp
+   * 
+   * @param statetoken
+   *          the statetoken
+   * @param filename
+   *          the filename
+   * @param mimeType
+   *          the mime type
+   * @param imgsize
+   *          the imgsize
+   * @param resp
+   *          the resp
    * @return the string
-   * @throws FileNotFoundException the file not found exception
-   * @throws IOException Signals that an I/O exception has occurred.
+   * @throws FileNotFoundException
+   *           the file not found exception
+   * @throws IOException
+   *           Signals that an I/O exception has occurred.
    */
   String buildResponse(final StateToken statetoken, final String filename, final String mimeType,
       final ImageSize imgsize, final HttpServletResponse resp) throws FileNotFoundException, IOException {
@@ -134,8 +141,12 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
     return absFilename;
   }
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
+   * javax.servlet.http.HttpServletResponse)
    */
   @Override
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
@@ -162,8 +173,11 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
     }
   }
 
-  /* (non-Javadoc)
-   * @see javax.servlet.http.HttpServlet#getLastModified(javax.servlet.http.HttpServletRequest)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see javax.servlet.http.HttpServlet#getLastModified(javax.servlet.http.
+   * HttpServletRequest)
    */
   @Override
   protected long getLastModified(final HttpServletRequest req) {

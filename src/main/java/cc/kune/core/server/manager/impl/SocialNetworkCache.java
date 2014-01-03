@@ -46,13 +46,13 @@ import com.google.inject.Singleton;
 /**
  * The Class SocialNetworkCache create a cache for maker faster the retrieve of
  * the SN of a user.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @LogThis
 @Singleton
 public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, SocialNetworkData> {
-  
+
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(SocialNetworkCache.class);
 
@@ -74,18 +74,18 @@ public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, Soci
    *          the group
    */
   public void expire(final Group group) {
-    SocialNetwork sn = group.getSocialNetwork();
-    AccessLists acl = sn.getAccessLists();
-    for (Group admins : acl.getAdmins().getList()) {
+    final SocialNetwork sn = group.getSocialNetwork();
+    final AccessLists acl = sn.getAccessLists();
+    for (final Group admins : acl.getAdmins().getList()) {
       expiredGroups.add(admins);
     }
-    for (Group editors : acl.getEditors().getList()) {
+    for (final Group editors : acl.getEditors().getList()) {
       expiredGroups.add(editors);
     }
-    for (Group viewers : acl.getViewers().getList()) {
+    for (final Group viewers : acl.getViewers().getList()) {
       expiredGroups.add(viewers);
     }
-    for (Group pending : sn.getPendingCollaborators().getList()) {
+    for (final Group pending : sn.getPendingCollaborators().getList()) {
       expiredGroups.add(pending);
     }
     expiredGroups.add(group);
@@ -93,9 +93,11 @@ public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, Soci
 
   /**
    * Gets the SN of some user/group from the cache if available.
-   *
-   * @param user the user
-   * @param group the group
+   * 
+   * @param user
+   *          the user
+   * @param group
+   *          the group
    * @return the social network data
    */
   public SocialNetworkData get(final User user, final Group group) {
@@ -117,10 +119,13 @@ public class SocialNetworkCache extends CachedCollection<Pair<User, Group>, Soci
 
   /**
    * Put.
-   *
-   * @param user the user
-   * @param group the group
-   * @param data the data
+   * 
+   * @param user
+   *          the user
+   * @param group
+   *          the group
+   * @param data
+   *          the data
    * @return the object
    */
   public Object put(final User user, final Group group, final SocialNetworkData data) {

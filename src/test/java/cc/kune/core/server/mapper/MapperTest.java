@@ -78,31 +78,33 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MapperTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MapperTest {
-  
+
   /** The Constant TESTGROUPSHORTNAME. */
   private static final String TESTGROUPSHORTNAME = "grouptest";
-  
+
   /** The Constant TESTTOOL. */
   private static final String TESTTOOL = "docs";
-  
+
   /** The group manager. */
   @Inject
   GroupManager groupManager;
-  
+
   /** The mapper. */
   @Inject
   KuneMapper mapper;
 
   /**
    * Assert mapping.
-   *
-   * @param mode the mode
-   * @param modeName the mode name
+   * 
+   * @param mode
+   *          the mode
+   * @param modeName
+   *          the mode name
    */
   private void assertMapping(final GroupListMode mode, final String modeName) {
     final GroupList list = new GroupList();
@@ -115,9 +117,11 @@ public class MapperTest {
 
   /**
    * Assert valid access lists mapping.
-   *
-   * @param groupList the group list
-   * @param groupListDTO the group list dto
+   * 
+   * @param groupList
+   *          the group list
+   * @param groupListDTO
+   *          the group list dto
    */
   private void assertValidAccessListsMapping(final GroupList groupList, final GroupListDTO groupListDTO) {
     final Set<Group> listOrig = groupList.getList();
@@ -136,7 +140,7 @@ public class MapperTest {
 
   /**
    * Creates the def container.
-   *
+   * 
    * @return the container
    */
   private Container createDefContainer() {
@@ -145,8 +149,9 @@ public class MapperTest {
 
   /**
    * Creates the def container.
-   *
-   * @param group the group
+   * 
+   * @param group
+   *          the group
    * @return the container
    */
   private Container createDefContainer(final Group group) {
@@ -155,9 +160,11 @@ public class MapperTest {
 
   /**
    * Creates the def container.
-   *
-   * @param group the group
-   * @param increment the increment
+   * 
+   * @param group
+   *          the group
+   * @param increment
+   *          the increment
    * @return the container
    */
   private Container createDefContainer(final Group group, final int increment) {
@@ -171,8 +178,9 @@ public class MapperTest {
 
   /**
    * Creates the def container.
-   *
-   * @param increment the increment
+   * 
+   * @param increment
+   *          the increment
    * @return the container
    */
   private Container createDefContainer(final int increment) {
@@ -181,7 +189,7 @@ public class MapperTest {
 
   /**
    * Creates the def content.
-   *
+   * 
    * @return the content
    */
   private Content createDefContent() {
@@ -197,7 +205,7 @@ public class MapperTest {
 
   /**
    * Creates the de group.
-   *
+   * 
    * @return the group
    */
   private Group createDeGroup() {

@@ -40,26 +40,27 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KunePropertiesDefault.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefaultMBean {
-  
+
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(KunePropertiesDefault.class);
-  
+
   /** The config. */
   private CompositeConfiguration config;
-  
+
   /** The file name. */
   private final String fileName;
 
   /**
    * Instantiates a new kune properties default.
-   *
-   * @param fileName the file name
+   * 
+   * @param fileName
+   *          the file name
    */
   @Inject
   public KunePropertiesDefault(final String fileName) {
@@ -81,9 +82,11 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /**
    * Check null.
-   *
-   * @param key the key
-   * @param value the value
+   * 
+   * @param key
+   *          the key
+   * @param value
+   *          the value
    */
   private void checkNull(final String key, final Object value) {
     if (value == null) {
@@ -93,7 +96,9 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.properties.KuneProperties#get(java.lang.String)
    */
   @Override
@@ -103,8 +108,11 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     return value;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.properties.KuneProperties#get(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.core.server.properties.KuneProperties#get(java.lang.String,
+   * java.lang.String)
    */
   @Override
   public String get(final String key, final String defaultValue) {
@@ -112,8 +120,11 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     return value != null ? value : defaultValue;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.properties.KuneProperties#getBoolean(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.properties.KuneProperties#getBoolean(java.lang.String)
    */
   @Override
   public boolean getBoolean(final String key) {
@@ -122,8 +133,11 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     return value;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.properties.KuneProperties#getInteger(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.properties.KuneProperties#getInteger(java.lang.String)
    */
   @Override
   public Integer getInteger(final String key) {
@@ -132,8 +146,11 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     return value;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.properties.KuneProperties#getList(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.properties.KuneProperties#getList(java.lang.String)
    */
   @Override
   public List<String> getList(final String key) {
@@ -143,8 +160,11 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     return value;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.properties.KuneProperties#getLong(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.properties.KuneProperties#getLong(java.lang.String)
    */
   @Override
   public Long getLong(final String key) {
@@ -153,15 +173,21 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     return value;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.properties.KunePropertiesDefaultMBean#getProperty(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.properties.KunePropertiesDefaultMBean#getProperty(java
+   * .lang.String)
    */
   @Override
   public String getProperty(final String key) {
     return this.get(key, "Value doesn't exist");
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.properties.KuneProperties#has(java.lang.String)
    */
   @Override
@@ -183,7 +209,9 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.core.server.properties.KunePropertiesDefaultMBean#reload()
    */
   @Override
@@ -192,8 +220,12 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
     this.loadConfiguration();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.properties.KunePropertiesDefaultMBean#setProperty(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.server.properties.KunePropertiesDefaultMBean#setProperty(java
+   * .lang.String, java.lang.String)
    */
   @Override
   public void setProperty(final String key, final String value) {

@@ -42,7 +42,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagUserContent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -58,7 +58,7 @@ public class TagUserContent implements HasId {
   private Content content;
 
   /** The created on. */
-  @org.hibernate.annotations.Index(name="createdOn")
+  @org.hibernate.annotations.Index(name = "createdOn")
   @Basic(optional = false)
   private final Long createdOn;
 
@@ -89,10 +89,13 @@ public class TagUserContent implements HasId {
 
   /**
    * Instantiates a new tag user content.
-   *
-   * @param tag the tag
-   * @param user the user
-   * @param content the content
+   * 
+   * @param tag
+   *          the tag
+   * @param user
+   *          the user
+   * @param content
+   *          the content
    */
   public TagUserContent(final Tag tag, final User user, final Content content) {
     this.tag = tag;
@@ -103,7 +106,7 @@ public class TagUserContent implements HasId {
 
   /**
    * Gets the content.
-   *
+   * 
    * @return the content
    */
   public Content getContent() {
@@ -112,14 +115,16 @@ public class TagUserContent implements HasId {
 
   /**
    * Gets the created on.
-   *
+   * 
    * @return the created on
    */
   public Long getCreatedOn() {
     return createdOn;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -129,7 +134,7 @@ public class TagUserContent implements HasId {
 
   /**
    * Gets the tag.
-   *
+   * 
    * @return the tag
    */
   public Tag getTag() {
@@ -138,7 +143,7 @@ public class TagUserContent implements HasId {
 
   /**
    * Gets the user.
-   *
+   * 
    * @return the user
    */
   public User getUser() {
@@ -147,14 +152,17 @@ public class TagUserContent implements HasId {
 
   /**
    * Sets the content.
-   *
-   * @param content the new content
+   * 
+   * @param content
+   *          the new content
    */
   public void setContent(final Content content) {
     this.content = content;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -164,8 +172,9 @@ public class TagUserContent implements HasId {
 
   /**
    * Sets the tag.
-   *
-   * @param tag the new tag
+   * 
+   * @param tag
+   *          the new tag
    */
   public void setTag(final Tag tag) {
     this.tag = tag;
@@ -173,8 +182,9 @@ public class TagUserContent implements HasId {
 
   /**
    * Sets the user.
-   *
-   * @param user the new user
+   * 
+   * @param user
+   *          the new user
    */
   public void setUser(final User user) {
     this.user = user;

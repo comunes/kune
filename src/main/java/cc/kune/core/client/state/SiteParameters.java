@@ -27,7 +27,7 @@ import cc.kune.common.client.utils.WindowUtils;
 // TODO: Auto-generated Javadoc
 /**
  * Some common url params like {@link ?locale}.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SiteParameters {
@@ -45,7 +45,7 @@ public final class SiteParameters {
    * webclient (not in the group space). Useful for debugging.
    */
   public static final String ONLY_WEBCLIENT = "onlywebclient";
-  
+
   /** The Constant UA_CHECK, if present, enable the User Agent check. */
   public static final String UA_CHECK = "ua";
 
@@ -57,7 +57,7 @@ public final class SiteParameters {
 
   /**
    * Check ua.
-   *
+   * 
    * @return true, if successful
    */
   public static boolean checkUA() {
@@ -66,7 +66,7 @@ public final class SiteParameters {
 
   /**
    * Checks if is search robot.
-   *
+   * 
    * @return true, if is search robot
    */
   public static boolean isSearchRobot() {

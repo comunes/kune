@@ -38,20 +38,20 @@ import cc.kune.domain.SocialNetwork;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AccessRightsServiceTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AccessRightsServiceTest {
-  
+
   /** The access rights manager. */
   private AccessRightsServiceDefault accessRightsManager;
-  
+
   /** The group1. */
   private Group group1;
-  
+
   /** The group2. */
   private Group group2;
-  
+
   /** The group3. */
   private Group group3;
 

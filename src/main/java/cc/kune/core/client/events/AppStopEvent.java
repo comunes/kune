@@ -30,37 +30,39 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AppStopEvent.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AppStopEvent extends GwtEvent<AppStopEvent.AppStopHandler> {
 
   /**
    * The Interface AppStopHandler.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface AppStopHandler extends EventHandler {
-    
+
     /**
      * On app stop.
-     *
-     * @param event the event
+     * 
+     * @param event
+     *          the event
      */
     public void onAppStop(AppStopEvent event);
   }
 
   /**
    * The Interface HasAppStopHandlers.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasAppStopHandlers extends HasHandlers {
-    
+
     /**
      * Adds the app stop handler.
-     *
-     * @param handler the handler
+     * 
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addAppStopHandler(AppStopHandler handler);
@@ -71,8 +73,9 @@ public class AppStopEvent extends GwtEvent<AppStopEvent.AppStopHandler> {
 
   /**
    * Fire.
-   *
-   * @param source the source
+   * 
+   * @param source
+   *          the source
    */
   public static void fire(final HasHandlers source) {
     source.fireEvent(new AppStopEvent());
@@ -80,7 +83,7 @@ public class AppStopEvent extends GwtEvent<AppStopEvent.AppStopHandler> {
 
   /**
    * Gets the type.
-   *
+   * 
    * @return the type
    */
   public static Type<AppStopHandler> getType() {
@@ -93,15 +96,21 @@ public class AppStopEvent extends GwtEvent<AppStopEvent.AppStopHandler> {
   public AppStopEvent() {
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final AppStopHandler handler) {
     handler.onAppStop(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -112,7 +121,9 @@ public class AppStopEvent extends GwtEvent<AppStopEvent.AppStopHandler> {
     return false;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -120,7 +131,9 @@ public class AppStopEvent extends GwtEvent<AppStopEvent.AppStopHandler> {
     return TYPE;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -130,7 +143,9 @@ public class AppStopEvent extends GwtEvent<AppStopEvent.AppStopHandler> {
     return hashCode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

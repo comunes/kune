@@ -46,7 +46,7 @@ import cc.kune.domain.utils.HasId;
  * 
  * http://en.wikipedia.org/wiki/Calendar_date
  * http://en.wikipedia.org/wiki/Date_and_time_notation_by_country
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -56,7 +56,7 @@ import cc.kune.domain.utils.HasId;
 public class I18nLanguage implements HasId {
 
   /** The code. */
-  @org.hibernate.annotations.Index(name="code")  
+  @org.hibernate.annotations.Index(name = "code")
   @Field(index = Index.YES, store = Store.NO)
   @Column(name = "code", unique = true)
   private String code;
@@ -74,7 +74,7 @@ public class I18nLanguage implements HasId {
   private String direction;
 
   /** The english name. */
-  @org.hibernate.annotations.Index(name="english_name")
+  @org.hibernate.annotations.Index(name = "english_name")
   @Field(index = Index.YES, store = Store.NO)
   @Column(name = "english_name")
   private String englishName;
@@ -149,11 +149,15 @@ public class I18nLanguage implements HasId {
   // Only for tests
   /**
    * Instantiates a new i18n language.
-   *
-   * @param id the id
-   * @param englishName the english name
-   * @param nativeName the native name
-   * @param code the code
+   * 
+   * @param id
+   *          the id
+   * @param englishName
+   *          the english name
+   * @param nativeName
+   *          the native name
+   * @param code
+   *          the code
    */
   public I18nLanguage(final Long id, final String englishName, final String nativeName, final String code) {
     this.id = id;
@@ -165,24 +169,41 @@ public class I18nLanguage implements HasId {
   // code is iso6391 || iso6392 || rfc3306 (see DatabaseInicializer)
   /**
    * Instantiates a new i18n language.
-   *
-   * @param id the id
-   * @param code the code
-   * @param direction the direction
-   * @param englishName the english name
-   * @param englishNameLocale the english name locale
-   * @param englishNameModifier the english name modifier
-   * @param iso6391 the iso6391
-   * @param iso6392 the iso6392
-   * @param iso6393 the iso6393
-   * @param macroLanguage the macro language
-   * @param nativeName the native name
-   * @param nativeNameLocale the native name locale
-   * @param nativeNameModifier the native name modifier
-   * @param pluralization the pluralization
-   * @param rfc3066 the rfc3066
-   * @param scope the scope
-   * @param dateFormat the date format
+   * 
+   * @param id
+   *          the id
+   * @param code
+   *          the code
+   * @param direction
+   *          the direction
+   * @param englishName
+   *          the english name
+   * @param englishNameLocale
+   *          the english name locale
+   * @param englishNameModifier
+   *          the english name modifier
+   * @param iso6391
+   *          the iso6391
+   * @param iso6392
+   *          the iso6392
+   * @param iso6393
+   *          the iso6393
+   * @param macroLanguage
+   *          the macro language
+   * @param nativeName
+   *          the native name
+   * @param nativeNameLocale
+   *          the native name locale
+   * @param nativeNameModifier
+   *          the native name modifier
+   * @param pluralization
+   *          the pluralization
+   * @param rfc3066
+   *          the rfc3066
+   * @param scope
+   *          the scope
+   * @param dateFormat
+   *          the date format
    */
   public I18nLanguage(final Long id, final String code, final String direction,
       final String englishName, final String englishNameLocale, final String englishNameModifier,
@@ -210,7 +231,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the code.
-   *
+   * 
    * @return the code
    */
   public String getCode() {
@@ -219,7 +240,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the date format.
-   *
+   * 
    * @return the date format
    */
   public String getDateFormat() {
@@ -228,7 +249,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the date format short.
-   *
+   * 
    * @return the date format short
    */
   public String getDateFormatShort() {
@@ -237,7 +258,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the direction.
-   *
+   * 
    * @return the direction
    */
   public String getDirection() {
@@ -246,7 +267,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the english name.
-   *
+   * 
    * @return the english name
    */
   public String getEnglishName() {
@@ -255,7 +276,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the english name locale.
-   *
+   * 
    * @return the english name locale
    */
   public String getEnglishNameLocale() {
@@ -264,14 +285,16 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the english name modifier.
-   *
+   * 
    * @return the english name modifier
    */
   public String getEnglishNameModifier() {
     return this.englishNameModifier;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -281,7 +304,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the iso6391.
-   *
+   * 
    * @return the iso6391
    */
   public String getIso6391() {
@@ -290,7 +313,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the iso6392.
-   *
+   * 
    * @return the iso6392
    */
   public String getIso6392() {
@@ -299,7 +322,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the iso6393.
-   *
+   * 
    * @return the iso6393
    */
   public String getIso6393() {
@@ -308,7 +331,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the macro language.
-   *
+   * 
    * @return the macro language
    */
   public Boolean getMacroLanguage() {
@@ -317,7 +340,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the native name.
-   *
+   * 
    * @return the native name
    */
   public String getNativeName() {
@@ -326,7 +349,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the native name locale.
-   *
+   * 
    * @return the native name locale
    */
   public String getNativeNameLocale() {
@@ -335,7 +358,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the native name modifier.
-   *
+   * 
    * @return the native name modifier
    */
   public String getNativeNameModifier() {
@@ -344,7 +367,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the pluralization.
-   *
+   * 
    * @return the pluralization
    */
   public String getPluralization() {
@@ -353,7 +376,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the rfc3066.
-   *
+   * 
    * @return the rfc3066
    */
   public String getRfc3066() {
@@ -362,7 +385,7 @@ public class I18nLanguage implements HasId {
 
   /**
    * Gets the scope.
-   *
+   * 
    * @return the scope
    */
   public String getScope() {
@@ -371,8 +394,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the code.
-   *
-   * @param code the new code
+   * 
+   * @param code
+   *          the new code
    */
   @Column(unique = true)
   public void setCode(final String code) {
@@ -381,8 +405,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the date format.
-   *
-   * @param dateFormat the new date format
+   * 
+   * @param dateFormat
+   *          the new date format
    */
   public void setDateFormat(final String dateFormat) {
     this.dateFormat = dateFormat;
@@ -390,8 +415,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the date format short.
-   *
-   * @param dateFormatShort the new date format short
+   * 
+   * @param dateFormatShort
+   *          the new date format short
    */
   public void setDateFormatShort(final String dateFormatShort) {
     this.dateFormatShort = dateFormatShort;
@@ -399,8 +425,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the direction.
-   *
-   * @param direction the new direction
+   * 
+   * @param direction
+   *          the new direction
    */
   public void setDirection(final String direction) {
     this.direction = direction;
@@ -408,8 +435,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the english name.
-   *
-   * @param englishName the new english name
+   * 
+   * @param englishName
+   *          the new english name
    */
   public void setEnglishName(final String englishName) {
     this.englishName = englishName;
@@ -417,8 +445,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the english name locale.
-   *
-   * @param englishNameLocale the new english name locale
+   * 
+   * @param englishNameLocale
+   *          the new english name locale
    */
   public void setEnglishNameLocale(final String englishNameLocale) {
     this.englishNameLocale = englishNameLocale;
@@ -426,14 +455,17 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the english name modifier.
-   *
-   * @param englishNameModifier the new english name modifier
+   * 
+   * @param englishNameModifier
+   *          the new english name modifier
    */
   public void setEnglishNameModifier(final String englishNameModifier) {
     this.englishNameModifier = englishNameModifier;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -443,8 +475,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the iso6391.
-   *
-   * @param iso6391 the new iso6391
+   * 
+   * @param iso6391
+   *          the new iso6391
    */
   public void setIso6391(final String iso6391) {
     this.iso6391 = iso6391;
@@ -452,8 +485,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the iso6392.
-   *
-   * @param iso6392 the new iso6392
+   * 
+   * @param iso6392
+   *          the new iso6392
    */
   public void setIso6392(final String iso6392) {
     this.iso6392 = iso6392;
@@ -461,8 +495,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the iso6393.
-   *
-   * @param iso6393 the new iso6393
+   * 
+   * @param iso6393
+   *          the new iso6393
    */
   public void setIso6393(final String iso6393) {
     this.iso6393 = iso6393;
@@ -470,8 +505,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the macro language.
-   *
-   * @param macroLanguage the new macro language
+   * 
+   * @param macroLanguage
+   *          the new macro language
    */
   public void setMacroLanguage(final Boolean macroLanguage) {
     this.macroLanguage = macroLanguage;
@@ -479,8 +515,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the native name.
-   *
-   * @param nativeName the new native name
+   * 
+   * @param nativeName
+   *          the new native name
    */
   public void setNativeName(final String nativeName) {
     this.nativeName = nativeName;
@@ -488,8 +525,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the native name locale.
-   *
-   * @param nativeNameLocale the new native name locale
+   * 
+   * @param nativeNameLocale
+   *          the new native name locale
    */
   public void setNativeNameLocale(final String nativeNameLocale) {
     this.nativeNameLocale = nativeNameLocale;
@@ -497,8 +535,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the native name modifier.
-   *
-   * @param nativeNameModifier the new native name modifier
+   * 
+   * @param nativeNameModifier
+   *          the new native name modifier
    */
   public void setNativeNameModifier(final String nativeNameModifier) {
     this.nativeNameModifier = nativeNameModifier;
@@ -506,8 +545,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the pluralization.
-   *
-   * @param pluralization the new pluralization
+   * 
+   * @param pluralization
+   *          the new pluralization
    */
   public void setPluralization(final String pluralization) {
     this.pluralization = pluralization;
@@ -515,8 +555,9 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the rfc3066.
-   *
-   * @param rfc3066 the new rfc3066
+   * 
+   * @param rfc3066
+   *          the new rfc3066
    */
   public void setRfc3066(final String rfc3066) {
     this.rfc3066 = rfc3066;
@@ -524,14 +565,17 @@ public class I18nLanguage implements HasId {
 
   /**
    * Sets the scope.
-   *
-   * @param scope the new scope
+   * 
+   * @param scope
+   *          the new scope
    */
   public void setScope(final String scope) {
     this.scope = scope;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

@@ -43,8 +43,11 @@ public class CustomJobFactory implements JobFactory {
   /** The injector. */
   private Injector injector;
 
-  /* (non-Javadoc)
-   * @see org.quartz.spi.JobFactory#newJob(org.quartz.spi.TriggerFiredBundle, org.quartz.Scheduler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.quartz.spi.JobFactory#newJob(org.quartz.spi.TriggerFiredBundle,
+   * org.quartz.Scheduler)
    */
   @Override
   public Job newJob(final TriggerFiredBundle bundle, final Scheduler scheduler)
@@ -54,8 +57,9 @@ public class CustomJobFactory implements JobFactory {
 
   /**
    * Sets the injector.
-   *
-   * @param injector the new injector
+   * 
+   * @param injector
+   *          the new injector
    */
   public void setInjector(final Injector injector) {
     this.injector = injector;

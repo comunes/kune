@@ -31,14 +31,14 @@ import cc.kune.core.shared.dto.GroupType;
 // TODO: Auto-generated Javadoc
 /**
  * Shared behaviour in selenium tests.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
 
   /**
    * Gets the temp string.
-   *
+   * 
    * @return the temp string
    */
   protected String getTempString() {
@@ -49,13 +49,19 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
 
   /**
    * Group creation.
-   *
-   * @param shortname the shortname
-   * @param longname the longname
-   * @param description the description
-   * @param tags the tags
-   * @param groupType the group type
-   * @param sufix the sufix
+   * 
+   * @param shortname
+   *          the shortname
+   * @param longname
+   *          the longname
+   * @param description
+   *          the description
+   * @param tags
+   *          the tags
+   * @param groupType
+   *          the group type
+   * @param sufix
+   *          the sufix
    */
   public void groupCreation(final String shortname, final String longname, final String description,
       final String tags, final GroupType groupType, final String sufix) {
@@ -189,9 +195,11 @@ public abstract class KuneSeleniumTest extends KuneSeleniumDefaults {
 
   /**
    * Login.
-   *
-   * @param user the user
-   * @param password the password
+   * 
+   * @param user
+   *          the user
+   * @param password
+   *          the password
    */
   protected void login(final String user, final String password) {
     login.signIn(user, password);

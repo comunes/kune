@@ -37,20 +37,20 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupOptGeneralPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupOptGeneralPanel extends EntityOptGeneralPanel implements GroupOptGeneralView {
 
   /** The Constant CLOSED_GROUP_TYPE_ID. */
   public static final String CLOSED_GROUP_TYPE_ID = "k-gogp-type_of_group_closed";
-  
+
   /** The Constant COMM_GROUP_TYPE_ID. */
   public static final String COMM_GROUP_TYPE_ID = "k-gopg-type_of_group_comm";
-  
+
   /** The Constant LONG_NAME_FIELD. */
   private static final String LONG_NAME_FIELD = "k-gogp-longname";
-  
+
   /** The Constant ORG_GROUP_TYPE_ID. */
   public static final String ORG_GROUP_TYPE_ID = "k-gopg-type_of_group_org";
 
@@ -59,35 +59,39 @@ public class GroupOptGeneralPanel extends EntityOptGeneralPanel implements Group
 
   /** The Constant SHORT_NAME_FIELD. */
   private static final String SHORT_NAME_FIELD = "k-gogp-shortname";
-  
+
   /** The Constant TYPEOFGROUP_FIELD. */
   public static final String TYPEOFGROUP_FIELD = "k-gogp-type_of_group";
-  
+
   /** The closed radio. */
   private final Radio closedRadio;
-  
+
   /** The community radio. */
   private final Radio communityRadio;
-  
+
   /** The long name. */
   private final TextField<String> longName;
-  
+
   /** The org radio. */
   private final Radio orgRadio;
-  
+
   /** The project radio. */
   private final Radio projectRadio;
-  
+
   /** The short name. */
   private final TextField<String> shortName;
 
   /**
    * Instantiates a new group opt general panel.
-   *
-   * @param i18n the i18n
-   * @param res the res
-   * @param maskWidget the mask widget
-   * @param groupFieldFactory the group field factory
+   * 
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param maskWidget
+   *          the mask widget
+   * @param groupFieldFactory
+   *          the group field factory
    */
   @Inject
   public GroupOptGeneralPanel(final I18nTranslationService i18n, final IconicResources res,
@@ -119,8 +123,11 @@ public class GroupOptGeneralPanel extends EntityOptGeneralPanel implements Group
     communityRadio.setTabIndex(6);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.GroupOptGeneralView#getGroupType()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.GroupOptGeneralView#getGroupType()
    */
   @Override
   public GroupType getGroupType() {
@@ -135,24 +142,34 @@ public class GroupOptGeneralPanel extends EntityOptGeneralPanel implements Group
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.GroupOptGeneralView#getLongName()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.GroupOptGeneralView#getLongName()
    */
   @Override
   public String getLongName() {
     return longName.getValue();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.GroupOptGeneralView#getShortName()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.GroupOptGeneralView#getShortName()
    */
   @Override
   public String getShortName() {
     return shortName.getValue();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.GroupOptGeneralView#setGroupType(cc.kune.core.shared.dto.GroupType)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.GroupOptGeneralView#setGroupType(
+   * cc.kune.core.shared.dto.GroupType)
    */
   @Override
   public void setGroupType(final GroupType groupType) {
@@ -174,24 +191,36 @@ public class GroupOptGeneralPanel extends EntityOptGeneralPanel implements Group
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.GroupOptGeneralView#setLongName(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.GroupOptGeneralView#setLongName(java
+   * .lang.String)
    */
   @Override
   public void setLongName(final String longName) {
     this.longName.setValue(longName);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.GroupOptGeneralView#setShortName(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.GroupOptGeneralView#setShortName(
+   * java.lang.String)
    */
   @Override
   public void setShortName(final String shortName) {
     this.shortName.setValue(shortName);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.general.GroupOptGeneralView#setShortNameEnabled(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.general.GroupOptGeneralView#setShortNameEnabled
+   * (boolean)
    */
   @Override
   public void setShortNameEnabled(final boolean enabled) {

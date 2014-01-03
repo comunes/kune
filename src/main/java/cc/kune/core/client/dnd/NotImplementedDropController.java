@@ -34,7 +34,7 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NotImplementedDropController.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NotImplementedDropController extends SimpleDropController {
@@ -44,25 +44,35 @@ public class NotImplementedDropController extends SimpleDropController {
 
   /**
    * Instantiates a new not implemented drop controller.
-   *
-   * @param dropTarget the drop target
-   * @param i18n the i18n
+   * 
+   * @param dropTarget
+   *          the drop target
+   * @param i18n
+   *          the i18n
    */
   public NotImplementedDropController(final Widget dropTarget, final I18nTranslationService i18n) {
     super(dropTarget);
     this.i18n = i18n;
   }
 
-  /* (non-Javadoc)
-   * @see com.allen_sauer.gwt.dnd.client.drop.AbstractDropController#onLeave(com.allen_sauer.gwt.dnd.client.DragContext)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.allen_sauer.gwt.dnd.client.drop.AbstractDropController#onLeave(com.
+   * allen_sauer.gwt.dnd.client.DragContext)
    */
   @Override
   public void onLeave(final DragContext context) {
     super.onLeave(context);
   }
 
-  /* (non-Javadoc)
-   * @see com.allen_sauer.gwt.dnd.client.drop.AbstractDropController#onPreviewDrop(com.allen_sauer.gwt.dnd.client.DragContext)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.allen_sauer.gwt.dnd.client.drop.AbstractDropController#onPreviewDrop
+   * (com.allen_sauer.gwt.dnd.client.DragContext)
    */
   @Override
   public void onPreviewDrop(final DragContext context) throws VetoDragException {

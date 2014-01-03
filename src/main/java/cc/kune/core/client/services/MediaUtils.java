@@ -29,7 +29,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 // TODO: Auto-generated Javadoc
 /**
  * The Class MediaUtils.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MediaUtils {
@@ -37,17 +37,19 @@ public class MediaUtils {
   /** The Constant DOC_URL_TAG. */
   public static final String DOC_URL_TAG = "###DOC_URL###";
 
-  /** The session. */
-  private final Session session;
-
   /** The download utils. */
   private final ClientFileDownloadUtils downloadUtils;
 
+  /** The session. */
+  private final Session session;
+
   /**
    * Instantiates a new media utils.
-   *
-   * @param session the session
-   * @param downloadUtils the download utils
+   * 
+   * @param session
+   *          the session
+   * @param downloadUtils
+   *          the download utils
    */
   public MediaUtils(final Session session, final ClientFileDownloadUtils downloadUtils) {
     this.session = session;
@@ -56,8 +58,9 @@ public class MediaUtils {
 
   /**
    * Gets the avi embed.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the avi embed
    */
   public String getAviEmbed(final StateToken token) {
@@ -67,8 +70,9 @@ public class MediaUtils {
 
   /**
    * Gets the flv embed.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the flv embed
    */
   public String getFlvEmbed(final StateToken token) {
@@ -78,8 +82,9 @@ public class MediaUtils {
 
   /**
    * Gets the mp3 embed.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the mp3 embed
    */
   public String getMp3Embed(final StateToken token) {
@@ -89,8 +94,9 @@ public class MediaUtils {
 
   /**
    * Gets the ogg embed.
-   *
-   * @param token the token
+   * 
+   * @param token
+   *          the token
    * @return the ogg embed
    */
   public String getOggEmbed(final StateToken token) {
@@ -100,8 +106,9 @@ public class MediaUtils {
 
   /**
    * Sets the center position.
-   *
-   * @param elementCode the element code
+   * 
+   * @param elementCode
+   *          the element code
    * @return the string
    */
   private String setCenterPosition(final String elementCode) {

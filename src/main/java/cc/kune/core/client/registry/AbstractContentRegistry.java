@@ -27,11 +27,11 @@ import java.util.ArrayList;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractContentRegistry.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractContentRegistry {
-  
+
   /** The registry. */
   private final ArrayList<String> registry;
 
@@ -44,7 +44,7 @@ public abstract class AbstractContentRegistry {
 
   /**
    * As array.
-   *
+   * 
    * @return the string[]
    */
   public String[] asArray() {
@@ -53,8 +53,9 @@ public abstract class AbstractContentRegistry {
 
   /**
    * Contains.
-   *
-   * @param typeId the type id
+   * 
+   * @param typeId
+   *          the type id
    * @return true, if successful
    */
   public boolean contains(final String typeId) {
@@ -63,8 +64,9 @@ public abstract class AbstractContentRegistry {
 
   /**
    * Register.
-   *
-   * @param typeIds the type ids
+   * 
+   * @param typeIds
+   *          the type ids
    */
   public void register(final String... typeIds) {
     for (final String typeId : typeIds) {
@@ -72,7 +74,9 @@ public abstract class AbstractContentRegistry {
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override
@@ -82,8 +86,9 @@ public abstract class AbstractContentRegistry {
 
   /**
    * Unregister.
-   *
-   * @param typeIds the type ids
+   * 
+   * @param typeIds
+   *          the type ids
    */
   public void unregister(final String... typeIds) {
     for (final String typeId : typeIds) {

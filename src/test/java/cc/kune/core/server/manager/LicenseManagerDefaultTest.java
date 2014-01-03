@@ -37,18 +37,18 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseManagerDefaultTest.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseManagerDefaultTest extends PersistenceTest {
-  
+
   /** The license. */
   private License license;
-  
+
   /** The license finder. */
   @Inject
   LicenseFinder licenseFinder;
-  
+
   /** The license manager. */
   @Inject
   LicenseManager licenseManager;

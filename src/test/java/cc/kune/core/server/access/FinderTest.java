@@ -44,7 +44,7 @@ import cc.kune.domain.finders.ContentFinder;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FinderTest.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -52,26 +52,27 @@ public class FinderTest {
 
   /** The container manager. */
   private ContainerManager containerManager;
-  
+
   /** The content finder. */
   private ContentFinder contentFinder;
-  
+
   /** The content manager. */
   private ContentManager contentManager;
-  
+
   /** The finder. */
   private FinderServiceDefault finder;
-  
+
   /** The group manager. */
   private GroupManager groupManager;
-  
+
   /** The rate manager. */
   private RateManager rateManager;
 
   /**
    * Content and folder match.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void contentAndFolderMatch() throws Exception {
@@ -85,8 +86,9 @@ public class FinderTest {
 
   /**
    * Content and groupl match.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void contentAndGrouplMatch() throws Exception {
@@ -101,8 +103,9 @@ public class FinderTest {
 
   /**
    * Content and tool match.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void contentAndToolMatch() throws Exception {
@@ -130,9 +133,10 @@ public class FinderTest {
 
   /**
    * Gets the group default content.
-   *
+   * 
    * @return the group default content
-   * @throws Exception the exception
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void getGroupDefaultContent() throws Exception {
@@ -148,8 +152,9 @@ public class FinderTest {
 
   /**
    * Test complete token.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testCompleteToken() throws Exception {
@@ -168,8 +173,9 @@ public class FinderTest {
 
   /**
    * Test container exists but content not found.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void testContainerExistsButContentNotFound() throws Exception {
@@ -178,8 +184,9 @@ public class FinderTest {
 
   /**
    * Test default group content.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testDefaultGroupContent() throws Exception {
@@ -193,8 +200,9 @@ public class FinderTest {
 
   /**
    * Test default group content has def license.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testDefaultGroupContentHasDefLicense() throws Exception {
@@ -208,8 +216,9 @@ public class FinderTest {
 
   /**
    * Test default user content.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testDefaultUserContent() throws Exception {
@@ -222,8 +231,9 @@ public class FinderTest {
 
   /**
    * Test doc missing.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testDocMissing() throws Exception {
@@ -246,8 +256,9 @@ public class FinderTest {
 
   /**
    * Test folder missing.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test
   public void testFolderMissing() throws Exception {
@@ -263,8 +274,9 @@ public class FinderTest {
 
   /**
    * Test ids.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void testIds() throws Exception {
@@ -278,8 +290,9 @@ public class FinderTest {
 
   /**
    * Voy a joder.
-   *
-   * @throws Exception the exception
+   * 
+   * @throws Exception
+   *           the exception
    */
   @Test(expected = ContentNotFoundException.class)
   public void voyAJoder() throws Exception {

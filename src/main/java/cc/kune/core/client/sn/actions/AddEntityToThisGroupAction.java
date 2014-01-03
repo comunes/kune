@@ -43,27 +43,34 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AddEntityToThisGroupAction.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AddEntityToThisGroupAction extends SNRolAction {
 
   /** The Constant ADD_NEW_MEMBER_TEXTBOX. */
   public static final String ADD_NEW_MEMBER_TEXTBOX = "kune-add-newMember-tbox";
-  
+
   /** The search panel. */
   private final AddMemberSearchPanel searchPanel;
 
   /**
    * Instantiates a new adds the entity to this group action.
-   *
-   * @param stateManager the state manager
-   * @param session the session
-   * @param i18n the i18n
-   * @param res the res
-   * @param snServiceProvider the sn service provider
-   * @param searchPanel the search panel
-   * @param rightsClientManager the rights client manager
+   * 
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param snServiceProvider
+   *          the sn service provider
+   * @param searchPanel
+   *          the search panel
+   * @param rightsClientManager
+   *          the rights client manager
    */
   @Inject
   public AddEntityToThisGroupAction(final StateManager stateManager, final Session session,
@@ -110,8 +117,12 @@ public class AddEntityToThisGroupAction extends SNRolAction {
 
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

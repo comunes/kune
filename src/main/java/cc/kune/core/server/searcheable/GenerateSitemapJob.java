@@ -39,23 +39,26 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GenerateSitemapJob.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GenerateSitemapJob implements Job {
 
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(GenerateSitemapJob.class);
-  
+
   /** The site map generator. */
   private final Provider<SiteMapGenerator> siteMapGenerator;
 
   /**
    * Instantiates a new generate sitemap job.
-   *
-   * @param siteMapGenerator the site map generator
-   * @throws ParseException the parse exception
-   * @throws SchedulerException the scheduler exception
+   * 
+   * @param siteMapGenerator
+   *          the site map generator
+   * @throws ParseException
+   *           the parse exception
+   * @throws SchedulerException
+   *           the scheduler exception
    */
   @Inject
   public GenerateSitemapJob(final Provider<SiteMapGenerator> siteMapGenerator) throws ParseException,
@@ -63,7 +66,9 @@ public class GenerateSitemapJob implements Job {
     this.siteMapGenerator = siteMapGenerator;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see org.quartz.Job#execute(org.quartz.JobExecutionContext)
    */
   @Override

@@ -33,7 +33,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class IsGroupCondition.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -46,8 +46,12 @@ public class IsGroupCondition implements GuiAddCondition {
   public IsGroupCondition() {
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.GuiAddCondition#mustBeAdded(cc
+   * .kune.common.client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public boolean mustBeAdded(final GuiActionDescrip descr) {

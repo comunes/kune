@@ -27,23 +27,25 @@ import cc.kune.domain.SocialNetwork;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SocialNetworkOperator.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SocialNetworkOperator {
-  
+
   /** The ctx. */
   private final DomainContext ctx;
-  
+
   /** The social network. */
   private final SocialNetwork socialNetwork;
 
   /**
    * Instantiates a new social network operator.
-   *
-   * @param ctx the ctx
-   * @param socialNetwork the social network
+   * 
+   * @param ctx
+   *          the ctx
+   * @param socialNetwork
+   *          the social network
    */
   public SocialNetworkOperator(final DomainContext ctx, final SocialNetwork socialNetwork) {
     this.ctx = ctx;
@@ -52,8 +54,9 @@ public class SocialNetworkOperator {
 
   /**
    * Adds the as administrator.
-   *
-   * @param userName the user name
+   * 
+   * @param userName
+   *          the user name
    */
   public void addAsAdministrator(final String userName) {
     socialNetwork.addAdmin(ctx.getGroupOf(userName));
@@ -61,8 +64,9 @@ public class SocialNetworkOperator {
 
   /**
    * Adds the as collaborator.
-   *
-   * @param userName the user name
+   * 
+   * @param userName
+   *          the user name
    */
   public void addAsCollaborator(final String userName) {
     socialNetwork.addCollaborator(ctx.getGroupOf(userName));

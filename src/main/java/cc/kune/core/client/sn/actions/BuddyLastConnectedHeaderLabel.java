@@ -25,7 +25,7 @@ package cc.kune.core.client.sn.actions;
 import cc.kune.chat.client.ChatOptions;
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.chat.client.actions.StartChatWithMemberAction;
-import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
@@ -48,28 +48,36 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BuddyLastConnectedHeaderLabel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BuddyLastConnectedHeaderLabel {
 
   /** The button. */
   private final ButtonDescriptor button;
-  
+
   /** The last connected manager. */
   private final LastConnectedManager lastConnectedManager;
 
   /**
    * Instantiates a new buddy last connected header label.
-   *
-   * @param chatAction the chat action
-   * @param entityHeader the entity header
-   * @param stateManager the state manager
-   * @param session the session
-   * @param simpleContactManager the simple contact manager
-   * @param lastConnectedManager the last connected manager
-   * @param roster the roster
-   * @param chatOptions the chat options
+   * 
+   * @param chatAction
+   *          the chat action
+   * @param entityHeader
+   *          the entity header
+   * @param stateManager
+   *          the state manager
+   * @param session
+   *          the session
+   * @param simpleContactManager
+   *          the simple contact manager
+   * @param lastConnectedManager
+   *          the last connected manager
+   * @param roster
+   *          the roster
+   * @param chatOptions
+   *          the chat options
    */
   @Inject
   public BuddyLastConnectedHeaderLabel(final StartChatWithMemberAction chatAction,
@@ -82,7 +90,7 @@ public class BuddyLastConnectedHeaderLabel {
     chatAction.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {
-        if (event.getPropertyName().equals(AbstractAction.ENABLED)) {
+        if (event.getPropertyName().equals(Action.ENABLED)) {
           button.setVisible((Boolean) event.getNewValue());
         }
       }
@@ -130,8 +138,9 @@ public class BuddyLastConnectedHeaderLabel {
 
   /**
    * Sets the label text.
-   *
-   * @param username the new label text
+   * 
+   * @param username
+   *          the new label text
    */
   private void setLabelText(final String username) {
     button.withText(lastConnectedManager.get(username, true));

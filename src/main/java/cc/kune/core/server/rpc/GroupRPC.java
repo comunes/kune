@@ -50,38 +50,44 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupRPC.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupRPC implements RPC, GroupService {
-  
+
   /** The content manager. */
   private final ContentManager contentManager;
-  
+
   /** The content rpc. */
   private final ContentRPC contentRPC;
-  
+
   /** The group manager. */
   private final GroupManager groupManager;
-  
+
   /** The mapper. */
   private final KuneMapper mapper;
-  
+
   /** The reserverd words. */
   private final ReservedWordsRegistry reserverdWords;
-  
+
   /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
   /**
    * Instantiates a new group rpc.
-   *
-   * @param userSessionManager the user session manager
-   * @param groupManager the group manager
-   * @param contentManager the content manager
-   * @param mapper the mapper
-   * @param reserverdWords the reserverd words
-   * @param contentRPC the content rpc
+   * 
+   * @param userSessionManager
+   *          the user session manager
+   * @param groupManager
+   *          the group manager
+   * @param contentManager
+   *          the content manager
+   * @param mapper
+   *          the mapper
+   * @param reserverdWords
+   *          the reserverd words
+   * @param contentRPC
+   *          the content rpc
    */
   @Inject
   public GroupRPC(final UserSessionManager userSessionManager, final GroupManager groupManager,
@@ -95,8 +101,13 @@ public class GroupRPC implements RPC, GroupService {
     this.contentRPC = contentRPC;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.GroupService#changeDefLicense(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.dto.LicenseDTO)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.GroupService#changeDefLicense(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken,
+   * cc.kune.core.shared.dto.LicenseDTO)
    */
   @Override
   @Authenticated
@@ -109,8 +120,12 @@ public class GroupRPC implements RPC, GroupService {
     groupManager.changeDefLicense(user, group, license.getShortName());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.GroupService#changeGroupWsTheme(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.GroupService#changeGroupWsTheme(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
    */
   @Override
   @Authenticated
@@ -123,8 +138,12 @@ public class GroupRPC implements RPC, GroupService {
     groupManager.changeWsTheme(user, group, theme);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.GroupService#clearGroupBackImage(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.GroupService#clearGroupBackImage(java.lang
+   * .String, cc.kune.core.shared.domain.utils.StateToken)
    */
   @Override
   @Authenticated
@@ -136,8 +155,13 @@ public class GroupRPC implements RPC, GroupService {
     return mapper.map(group, GroupDTO.class);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.GroupService#createNewGroup(java.lang.String, cc.kune.core.shared.dto.GroupDTO, java.lang.String, java.lang.String, java.lang.String[])
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.GroupService#createNewGroup(java.lang.String
+   * , cc.kune.core.shared.dto.GroupDTO, java.lang.String, java.lang.String,
+   * java.lang.String[])
    */
   @Override
   @Authenticated
@@ -155,8 +179,12 @@ public class GroupRPC implements RPC, GroupService {
         newGroup.getDefaultContent().getStateToken().copy().clearDocument());
   };
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.GroupService#getGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.GroupService#getGroup(java.lang.String,
+   * cc.kune.core.shared.domain.utils.StateToken)
    */
   @Override
   @Authenticated(mandatory = false)
@@ -168,7 +196,7 @@ public class GroupRPC implements RPC, GroupService {
 
   /**
    * Gets the user logged.
-   *
+   * 
    * @return the user logged
    */
   private User getUserLogged() {
@@ -176,8 +204,13 @@ public class GroupRPC implements RPC, GroupService {
     return user;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.GroupService#setGroupNewMembersJoiningPolicy(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.domain.AdmissionType)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.GroupService#setGroupNewMembersJoiningPolicy
+   * (java.lang.String, cc.kune.core.shared.domain.utils.StateToken,
+   * cc.kune.core.shared.domain.AdmissionType)
    */
   @Override
   @Authenticated(mandatory = true)
@@ -189,8 +222,13 @@ public class GroupRPC implements RPC, GroupService {
     group.setAdmissionType(AdmissionType.valueOf(admissionPolicy.toString()));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.GroupService#setSocialNetworkVisibility(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.domain.SocialNetworkVisibility)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.GroupService#setSocialNetworkVisibility
+   * (java.lang.String, cc.kune.core.shared.domain.utils.StateToken,
+   * cc.kune.core.shared.domain.SocialNetworkVisibility)
    */
   @Override
   @Authenticated(mandatory = true)
@@ -202,8 +240,12 @@ public class GroupRPC implements RPC, GroupService {
     group.getSocialNetwork().setVisibility(visibility);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.GroupService#setToolEnabled(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.GroupService#setToolEnabled(java.lang.String
+   * , cc.kune.core.shared.domain.utils.StateToken, java.lang.String, boolean)
    */
   @Override
   @Authenticated
@@ -214,8 +256,13 @@ public class GroupRPC implements RPC, GroupService {
     groupManager.setToolEnabled(getUserLogged(), groupToken.getGroup(), toolName, enabled);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.rpcservices.GroupService#updateGroup(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, cc.kune.core.shared.dto.GroupDTO)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.rpcservices.GroupService#updateGroup(java.lang.String,
+   * cc.kune.core.shared.domain.utils.StateToken,
+   * cc.kune.core.shared.dto.GroupDTO)
    */
   @Override
   @Authenticated

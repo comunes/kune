@@ -36,38 +36,38 @@ import com.calclab.hablar.core.client.Idify;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChatPageObject.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ChatPageObject extends PageObject {
 
   /** The Constant DEF_TESTING_USER. */
   public static final String DEF_TESTING_USER = "some.testing.user@gmail.com";
-  
+
   /** The add to roster. */
   @FindBy(id = SeleniumConstants.GWTDEV + "OpenChatWidget-addToRoster" + SeleniumConstants.INPUT)
   private WebElement addToRoster;
-  
+
   /** The chat icon. */
   @FindBy(id = SeleniumConstants.GWTDEV + ChatClient.CHAT_CLIENT_ICON_ID)
   public WebElement chatIcon;
-  
+
   /** The close chat. */
   @FindBy(xpath = "//div[14]/div/div/div/div/div/table/tbody/tr/td[2]/div")
   private WebElement closeChat;
-  
+
   /** The first contact. */
   @FindBy(id = "//div[3]/div/div[3]/div/div/div/div[2]/div/div/div/div/div/div")
   public WebElement firstContact;
-  
+
   /** The jid. */
   @FindBy(id = SeleniumConstants.GWTDEV + "OpenChatWidget-jabberId")
   private WebElement jid;
-  
+
   /** The open chat. */
   @FindBy(id = SeleniumConstants.GWTDEV + "HablarOpenChat-openAction")
   private WebElement openChat;
-  
+
   /** The open chat btn. */
   @FindBy(id = SeleniumConstants.GWTDEV + "OpenChatWidget-open")
   private WebElement openChatBtn;
@@ -82,8 +82,9 @@ public class ChatPageObject extends PageObject {
   // Duplicate in Hablar (we need a common PageObject)
   /**
    * Gets the header.
-   *
-   * @param uri the uri
+   * 
+   * @param uri
+   *          the uri
    * @return the header
    */
   public WebElement getHeader(final String uri) {
@@ -94,9 +95,11 @@ public class ChatPageObject extends PageObject {
 
   /**
    * Gets the item menu.
-   *
-   * @param groupId the group id
-   * @param jid the jid
+   * 
+   * @param groupId
+   *          the group id
+   * @param jid
+   *          the jid
    * @return the item menu
    */
   public WebElement getItemMenu(final String groupId, final String jid) {
@@ -106,8 +109,9 @@ public class ChatPageObject extends PageObject {
 
   /**
    * Gets the list.
-   *
-   * @param uri the uri
+   * 
+   * @param uri
+   *          the uri
    * @return the list
    */
   public WebElement getList(final String uri) {
@@ -118,8 +122,9 @@ public class ChatPageObject extends PageObject {
 
   /**
    * Gets the page.
-   *
-   * @param uri the uri
+   * 
+   * @param uri
+   *          the uri
    * @return the page
    */
   public WebElement getPage(final String uri) {
@@ -130,9 +135,11 @@ public class ChatPageObject extends PageObject {
 
   /**
    * Gets the roster item.
-   *
-   * @param groupId the group id
-   * @param jid the jid
+   * 
+   * @param groupId
+   *          the group id
+   * @param jid
+   *          the jid
    * @return the roster item
    */
   public WebElement getRosterItem(final String groupId, final String jid) {
@@ -142,8 +149,9 @@ public class ChatPageObject extends PageObject {
 
   /**
    * Gets the send.
-   *
-   * @param uri the uri
+   * 
+   * @param uri
+   *          the uri
    * @return the send
    */
   public WebElement getSend(final String uri) {
@@ -154,8 +162,9 @@ public class ChatPageObject extends PageObject {
 
   /**
    * Gets the talk box.
-   *
-   * @param uri the uri
+   * 
+   * @param uri
+   *          the uri
    * @return the talk box
    */
   public WebElement getTalkBox(final String uri) {
@@ -166,7 +175,7 @@ public class ChatPageObject extends PageObject {
 
   /**
    * Icon.
-   *
+   * 
    * @return the web element
    */
   public WebElement icon() {
@@ -175,8 +184,9 @@ public class ChatPageObject extends PageObject {
 
   /**
    * Open chat.
-   *
-   * @param uri the uri
+   * 
+   * @param uri
+   *          the uri
    */
   public void openChat(final XmppURI uri) {
     // hightlight(openChat);

@@ -33,7 +33,7 @@ import org.junit.runners.Suite.SuiteClasses;
  * find  src/test/java/org/ourproject/kune/{chat,docs,gallery,wiki,workspace,blogs,rack}  -name '*.java' -exec basename \{} .java \;| paste -s - - | sed 's/    /.class, /g'
  * 
  * </pre>
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @RunWith(Suite.class)

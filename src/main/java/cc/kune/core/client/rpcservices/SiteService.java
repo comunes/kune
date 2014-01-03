@@ -31,7 +31,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SiteService.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @RemoteServiceRelativePath("SiteService")
@@ -39,10 +39,12 @@ public interface SiteService extends RemoteService {
 
   /**
    * Gets the inits the data.
-   *
-   * @param userHash the user hash
+   * 
+   * @param userHash
+   *          the user hash
    * @return the inits the data
-   * @throws DefaultException the default exception
+   * @throws DefaultException
+   *           the default exception
    */
   InitDataDTO getInitData(String userHash) throws DefaultException;
 

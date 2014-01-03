@@ -31,7 +31,7 @@ import com.google.inject.matcher.AbstractMatcher;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NotInObject.
- *
+ * 
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -50,7 +50,9 @@ public class NotInObject extends AbstractMatcher<Method> {
         "equals" });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.inject.matcher.Matcher#matches(java.lang.Object)
    */
   @Override

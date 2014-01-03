@@ -45,7 +45,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptLogoPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
@@ -53,28 +53,34 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
   /** The Constant ICON_UPLD_SERVLET. */
   public static final String ICON_UPLD_SERVLET = GWT.getModuleBaseURL()
       + "servlets/EntityLogoUploadManager";
-  
+
   /** The Constant TAB_ID. */
   public static final String TAB_ID = "k-eodlp-logo-id";
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The tab title. */
   private final IconLabel tabTitle;
-  
+
   /** The uploader. */
   private final EntityUploaderForm uploader;
 
   /**
    * Instantiates a new entity opt logo panel.
-   *
-   * @param eventBus the event bus
-   * @param i18n the i18n
-   * @param panelId the panel id
-   * @param buttonId the button id
-   * @param inputId the input id
-   * @param res the res
+   * 
+   * @param eventBus
+   *          the event bus
+   * @param i18n
+   *          the i18n
+   * @param panelId
+   *          the panel id
+   * @param buttonId
+   *          the button id
+   * @param inputId
+   *          the input id
+   * @param res
+   *          the res
    */
   public EntityOptLogoPanel(final EventBus eventBus, final I18nTranslationService i18n,
       final String panelId, final String buttonId, final String inputId, final IconicResources res) {
@@ -92,39 +98,57 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     addStyleName("k-tab-panel");
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnCancelUploadHandler(gwtupload.client.IUploader.OnCancelUploaderHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#
+   * addOnCancelUploadHandler
+   * (gwtupload.client.IUploader.OnCancelUploaderHandler)
    */
   @Override
   public HandlerRegistration addOnCancelUploadHandler(final OnCancelUploaderHandler handler) {
     return uploader.addOnCancelUploadHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnChangeUploadHandler(gwtupload.client.IUploader.OnChangeUploaderHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#
+   * addOnChangeUploadHandler
+   * (gwtupload.client.IUploader.OnChangeUploaderHandler)
    */
   @Override
   public HandlerRegistration addOnChangeUploadHandler(final OnChangeUploaderHandler handler) {
     return uploader.addOnChangeUploadHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnFinishUploadHandler(gwtupload.client.IUploader.OnFinishUploaderHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#
+   * addOnFinishUploadHandler
+   * (gwtupload.client.IUploader.OnFinishUploaderHandler)
    */
   @Override
   public HandlerRegistration addOnFinishUploadHandler(final OnFinishUploaderHandler handler) {
     return uploader.addOnFinishUploadHandler(handler);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnStartUploadHandler(gwtupload.client.IUploader.OnStartUploaderHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnStartUploadHandler
+   * (gwtupload.client.IUploader.OnStartUploaderHandler)
    */
   @Override
   public HandlerRegistration addOnStartUploadHandler(final OnStartUploaderHandler handler) {
     return uploader.addOnStartUploadHandler(handler);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.logo.EntityOptLogoView#getOnSubmit()
    */
   @Override
@@ -132,7 +156,9 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     return null;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.EntityOptionsTabView#getTabTitle()
    */
   @Override
@@ -140,7 +166,9 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     return tabTitle;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.gspace.client.options.logo.EntityOptLogoView#reset()
    */
   @Override
@@ -148,8 +176,12 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     uploader.reset();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.logo.EntityOptLogoView#setNormalGroupsLabels()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.logo.EntityOptLogoView#setNormalGroupsLabels
+   * ()
    */
   @Override
   public void setNormalGroupsLabels() {
@@ -160,8 +192,12 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
         MAX_TABTITLE_LENGTH, i18n.getDirection());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.logo.EntityOptLogoView#setPersonalGroupsLabels()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.logo.EntityOptLogoView#setPersonalGroupsLabels
+   * ()
    */
   @Override
   public void setPersonalGroupsLabels() {
@@ -172,8 +208,12 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
         MAX_TABTITLE_LENGTH, i18n.getDirection());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.options.logo.EntityOptLogoView#setUploadParams(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.options.logo.EntityOptLogoView#setUploadParams(java
+   * .lang.String, java.lang.String)
    */
   @Override
   public void setUploadParams(final String userHash, final String token) {

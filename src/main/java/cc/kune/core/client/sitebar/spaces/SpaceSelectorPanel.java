@@ -45,61 +45,65 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SpaceSelectorPanel.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
-  
+
   /**
    * The Interface SpaceSelectorPanelUiBinder.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface SpaceSelectorPanelUiBinder extends UiBinder<Widget, SpaceSelectorPanel> {
   }
-  
+
   /** The ui binder. */
   private static SpaceSelectorPanelUiBinder uiBinder = GWT.create(SpaceSelectorPanelUiBinder.class);
-  
+
   /** The group button. */
   @UiField
   ToggleButton groupButton;
-  
+
   /** The group space tooltip. */
   private final Tooltip groupSpaceTooltip;
-  
+
   /** The home button. */
   @UiField
   ToggleButton homeButton;
-  
+
   /** The home space tooltip. */
   private final Tooltip homeSpaceTooltip;
-  
+
   /** The panel. */
   @UiField
   FlowPanel panel;
-  
+
   /** The public button. */
   @UiField
   ToggleButton publicButton;
-  
+
   /** The public space tooltip. */
   private final Tooltip publicSpaceTooltip;
-  
+
   /** The user button. */
   @UiField
   ToggleButton userButton;
-  
+
   /** The user space tooltip. */
   private final Tooltip userSpaceTooltip;
 
   /**
    * Instantiates a new space selector panel.
-   *
-   * @param armor the armor
-   * @param i18n the i18n
-   * @param res the res
-   * @param session the session
+   * 
+   * @param armor
+   *          the armor
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param session
+   *          the session
    */
   @Inject
   public SpaceSelectorPanel(final GSpaceArmor armor, final I18nTranslationService i18n,
@@ -130,7 +134,9 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
     publicButton.ensureDebugId(PUBLIC_SPACE_ID);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -140,152 +146,225 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /**
    * Blink.
-   *
-   * @param btn the btn
+   * 
+   * @param btn
+   *          the btn
    */
   private void blink(final UIObject btn) {
     final BlinkAnimation anim = new BlinkAnimation(btn, 400);
     anim.animate(3);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#blinkGroupBtn()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #blinkGroupBtn()
    */
   @Override
   public void blinkGroupBtn() {
     blink(groupButton);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#blinkHomeBtn()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #blinkHomeBtn()
    */
   @Override
   public void blinkHomeBtn() {
     blink(homeButton);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#blinkPublicBtn()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #blinkPublicBtn()
    */
   @Override
   public void blinkPublicBtn() {
     blink(publicButton);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#blinkUserBtn()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #blinkUserBtn()
    */
   @Override
   public void blinkUserBtn() {
     blink(userButton);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#getGroupBtn()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #getGroupBtn()
    */
   @Override
   public HasClickHandlers getGroupBtn() {
     return groupButton;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#getHomeBtn()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #getHomeBtn()
    */
   @Override
   public HasClickHandlers getHomeBtn() {
     return homeButton;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#getPublicBtn()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #getPublicBtn()
    */
   @Override
   public HasClickHandlers getPublicBtn() {
     return publicButton;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#getUserBtn()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #getUserBtn()
    */
   @Override
   public HasClickHandlers getUserBtn() {
     return userButton;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#setGroupBtnDown(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #setGroupBtnDown(boolean)
    */
   @Override
   public void setGroupBtnDown(final boolean down) {
     groupButton.setDown(down);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#setHomeBtnDown(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #setHomeBtnDown(boolean)
    */
   @Override
   public void setHomeBtnDown(final boolean down) {
     homeButton.setDown(down);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#setPublicBtnDown(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #setPublicBtnDown(boolean)
    */
   @Override
   public void setPublicBtnDown(final boolean down) {
     publicButton.setDown(down);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#setPublicVisible(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #setPublicVisible(boolean)
    */
   @Override
   public void setPublicVisible(final boolean visible) {
     publicButton.setVisible(visible);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#setUserBtnDown(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #setUserBtnDown(boolean)
    */
   @Override
   public void setUserBtnDown(final boolean down) {
     userButton.setDown(down);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#setWindowTitle(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #setWindowTitle(java.lang.String)
    */
   @Override
   public void setWindowTitle(final String title) {
     Window.setTitle(title);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#showGroupSpaceTooltip()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #showGroupSpaceTooltip()
    */
   @Override
   public void showGroupSpaceTooltip() {
     groupSpaceTooltip.showTemporally();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#showHomeSpaceTooltip()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #showHomeSpaceTooltip()
    */
   @Override
   public void showHomeSpaceTooltip() {
     homeSpaceTooltip.showTemporally();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#showPublicSpaceTooltip()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #showPublicSpaceTooltip()
    */
   @Override
   public void showPublicSpaceTooltip() {
     publicSpaceTooltip.showTemporally();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView#showUserSpaceTooltip()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
+   * #showUserSpaceTooltip()
    */
   @Override
   public void showUserSpaceTooltip() {

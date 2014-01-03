@@ -24,7 +24,7 @@ package cc.kune.core.client.avatar;
 
 /**
  * The Interface SmallAvatarDecorator.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SmallAvatarDecorator extends AvatarDecorator {

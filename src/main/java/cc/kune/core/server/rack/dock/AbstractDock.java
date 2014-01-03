@@ -27,11 +27,13 @@ import javax.servlet.Filter;
 public abstract class AbstractDock implements Dock {
   private Filter filter;
 
+  @Override
   public Filter getFilter() {
     return filter;
   }
 
-  public void setFilter(Filter filter) {
+  @Override
+  public void setFilter(final Filter filter) {
     this.filter = filter;
   }
 
