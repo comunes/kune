@@ -27,7 +27,7 @@ import cc.kune.gspace.client.actions.AddMembersToContentAction;
 public class AddMembersToContentMenuItem extends MenuItemDescriptor {
 
   public AddMembersToContentMenuItem(final String text, final SocialNetworkSubGroup subGroup,
-      final AddMembersToContentAction action, final ContentViewerShareSubMenu menu,
+      final AddMembersToContentAction action, final ContentViewerShareMenu menu,
       final IconicResources res) {
     super(action);
     action.setSubGroup(subGroup);

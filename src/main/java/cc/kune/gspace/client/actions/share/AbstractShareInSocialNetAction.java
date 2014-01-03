@@ -22,14 +22,20 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.client.utils.ClientFormattedString;
 import cc.kune.core.client.actions.RolAction;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.AccessRolDTO;
+
+import com.google.inject.Inject;
 
 public class AbstractShareInSocialNetAction extends RolAction {
 
   private ClientFormattedString url;
 
-  public AbstractShareInSocialNetAction() {
-    super(AccessRolDTO.Viewer, AccessRolDTO.Editor, false);
+  @Inject
+  public AbstractShareInSocialNetAction(final Session session) {
+    // FIXME remove after #550 is closed and removed from "In development"
+    super(AccessRolDTO.Viewer, session.isGuiInDevelopment() ? AccessRolDTO.Editor
+        : AccessRolDTO.Administrator, false);
   }
 
   @Override

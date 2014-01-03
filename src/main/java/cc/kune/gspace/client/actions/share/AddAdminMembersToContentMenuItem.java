@@ -32,10 +32,9 @@ public class AddAdminMembersToContentMenuItem extends AddMembersToContentMenuIte
   @Inject
   public AddAdminMembersToContentMenuItem(final I18nTranslationService i18n,
       final AddMembersToContentAction action, final IsCurrentStateAGroupCondition isAGroupCondition,
-      final ContentViewerShareSubMenu menu, final IconicResources res) {
+      final ContentViewerShareMenu menu, final IconicResources res) {
     super(i18n.t("Share with admins"), SocialNetworkSubGroup.ADMINS, action, menu, res);
     add(isAGroupCondition);
-
   }
 
 }

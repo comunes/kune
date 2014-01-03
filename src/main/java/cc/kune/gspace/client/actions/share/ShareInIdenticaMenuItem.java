@@ -24,7 +24,6 @@ import cc.kune.common.client.utils.ClientFormattedString;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.gwt.http.client.URL;
 import com.google.inject.Inject;
@@ -48,7 +47,6 @@ public class ShareInIdenticaMenuItem extends AbstractShareInSocialNetMenuItem {
                 + " "
                 + i18n.tWithNT("via [%s]", "used in references 'something via @someone'",
                     i18n.getSiteCommonName()))));
-    action.setHigherRol(AccessRolDTO.Editor);
   }
 
 }

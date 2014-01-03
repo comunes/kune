@@ -101,8 +101,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
     add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, all, addAllMenuItem);
-    add(TOPBAR, contents, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
     add(TOPBAR, all, shareInTwitter, shareInGPlus);
     add(TOPBAR, all, tutorialBtn);
     add(TOPBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);

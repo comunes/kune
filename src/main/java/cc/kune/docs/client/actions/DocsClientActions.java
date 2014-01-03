@@ -93,7 +93,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInTwitterMenuItem> shareInTwitter,
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
-      final Provider<ShareInFacebookMenuItem> shareInFacebook) {
+      final Provider<ShareInFacebookMenuItem> shareInFacaddAllMenuItemebook) {
     super(TOOL_NAME, session, registry);
     add(TOPBAR, all, optionsMenuContent, refresh, newDocIconBtn);
     add(TOPBAR, containers, newFolderBtn, foldersNewMenu, newDocMenuItem);
