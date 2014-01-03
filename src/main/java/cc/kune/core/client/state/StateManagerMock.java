@@ -25,7 +25,6 @@ package cc.kune.core.client.state;
 
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.ui.KuneWindowUtils;
-import cc.kune.common.client.utils.Location;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.events.SocialNetworkChangedEvent.SocialNetworkChangedHandler;
@@ -63,9 +62,8 @@ public class StateManagerMock implements StateManager {
   @Override
   public void gotoHistoryToken(final String newToken) {
     if ((SiteTokens.REGISTER.equals(newToken))) {
-      final Location location = WindowUtils.getLocation();
-      final String protocol = location.getProtocol();
-      KuneWindowUtils.open(protocol + "//" + location.getHost() + "#!" + SiteTokens.REGISTER);
+      final String protocol = WindowUtils.getProtocol();
+      KuneWindowUtils.open(protocol + "//" + WindowUtils.getHost() + "#!" + SiteTokens.REGISTER);
     }
   }
 

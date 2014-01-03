@@ -114,6 +114,10 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     addConditions.add(addCondition);
   }
 
+  public void detachFromParent() {
+    parent = NO_PARENT;
+  }
+
   /*
    * (non-Javadoc)
    * 

@@ -73,7 +73,7 @@ public class EmbedSignInAction extends AbstractSignInAction {
   public void actionPerformed(final ActionEvent event) {
     // If we want to go to the document it self: (String) event.getTarget()
     final String redirect = EmbedHelper.getServer() + "#!"
-        + TokenUtils.addRedirect(SiteTokens.SIGN_IN, WindowUtils.getLocation().getHref());
+        + TokenUtils.addRedirect(SiteTokens.SIGN_IN, WindowUtils.getHref());
     Log.info("Redirecting to: " + redirect);
     KuneWindowUtils.open(redirect);
   }

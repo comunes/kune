@@ -539,10 +539,4 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     doOperations(author, opQueue, "set title");
   }
 
-  private Set<String> toSet(final String[] array) {
-    final Set<String> set = new TreeSet<String>(Collections.reverseOrder());
-    set.addAll(Arrays.asList(array));
-    return set;
-  }
-
 }

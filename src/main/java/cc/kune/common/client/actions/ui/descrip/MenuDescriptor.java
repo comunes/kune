@@ -41,6 +41,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
   public static final String MENU_SHOW = "showmenu";
   public static final String MENU_SHOW_NEAR_TO = "showmenunearto";
   protected static final String MENU_STANDALONE = "menustandalone";
+  public static final String MENU_VERTICAL = "menuvertical";
 
   public MenuDescriptor() {
     this(new BaseAction(null, null));
@@ -53,6 +54,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
   public MenuDescriptor(final GuiActionDescrip parent, final AbstractAction action) {
     super(action);
     setParent(parent);
+    putValue(MENU_VERTICAL, true);
     putValue(MENU_HIDE, false);
     putValue(MENU_SHOW, false);
     putValue(MENU_CLEAR, false);

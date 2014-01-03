@@ -81,15 +81,15 @@ import com.google.gwt.user.client.ui.TextBoxBase;
 /**
  * A SuggestBox that uses REST and allows for multiple values, autocomplete and
  * browsing.
- *
+ * 
  * @author Bess Siegal <bsiegal@novell.com>
  */
 public class MultivalueSuggestBox extends Composite implements SelectionHandler<Suggestion>, Focusable,
     KeyUpHandler {
-  
+
   /**
    * Bean for name-value pairs.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   private class Option {
@@ -506,7 +506,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   private int mindexTo = 0;
   private boolean misMultivalued = false;
 
-  private final String mrestEndpointUrl;
+  private String mrestEndpointUrl;
 
   private final Map<String, String> mvalueMap;
 
@@ -935,6 +935,10 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   @Override
   public void setFocus(final boolean focused) {
     mfield.setFocus(focused);
+  }
+
+  public void setSearchUrl(final String searchUrl) {
+    mrestEndpointUrl = searchUrl;
   }
 
   @Override

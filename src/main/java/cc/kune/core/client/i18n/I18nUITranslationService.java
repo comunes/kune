@@ -31,7 +31,6 @@ import java.util.Set;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.utils.Location;
 import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -215,7 +214,7 @@ public class I18nUITranslationService extends I18nTranslationService {
   private void changeLanguageInUrl(final String newLocale) {
     final String hash = WindowUtils.getHash();
     final String query = WindowUtils.getQueryString();
-	final String path = WindowUtils.getPath();
+    final String path = WindowUtils.getPath();
     final String protocol = WindowUtils.getProtocol();
     final String newUrl = I18nUrlUtils.changeLang(query + (TextUtils.notEmpty(hash) ? hash : ""),
         newLocale);
@@ -223,7 +222,7 @@ public class I18nUITranslationService extends I18nTranslationService {
     Log.info("Locale current hash: " + hash);
     Log.info("Locale current path: " + path);
     Log.info("Locale new Url: " + path + newUrl);
-    WindowUtils.changeHrefKeepHash(protocol + "//" + location.getHost() + path + newUrl);
+    WindowUtils.changeHrefKeepHash(protocol + "//" + WindowUtils.getHost() + path + newUrl);
   }
 
   /**

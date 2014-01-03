@@ -91,7 +91,7 @@ public class ListsRPC implements ListsService, RPC {
   @Authenticated
   @Authorizated(accessRolRequired = AccessRol.Viewer, actionLevel = ActionLevel.container)
   @KuneTransactional
-  public StateContainerDTO subscribeToList(final String userHash, final StateToken token,
+  public StateContainerDTO subscribeMyselfToList(final String userHash, final StateToken token,
       final Boolean subscribe) {
     return listService.subscribeCurrentUserToList(token, subscribe);
   }
