@@ -28,6 +28,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.gwt.http.client.URL;
 import com.google.inject.Inject;
@@ -75,10 +76,12 @@ public class ShareInFacebookMenuItem extends AbstractShareInSocialNetMenuItem {
         ClientFormattedString.build(
             false,
             URL_TEMPLATE,
-            URL.encode(getCurrentUrl(session)),
+            URL.encode(ShareInSocialNetUtils.getCurrentUrl(session)),
             URL.encodeQueryString(downUtils.getGroupLogo(session.getCurrentState().getGroup())),
-            URL.encode(getTitle(session)),
+            URL.encode(ShareInSocialNetUtils.getTitle(session)),
             URL.encode(i18n.tWithNT("via [%s]", "used in references 'something via @someone'",
-                i18n.getSiteCommonName())), getCurrentUrl(session)));
+                i18n.getSiteCommonName())), ShareInSocialNetUtils.getCurrentUrl(session)));
+    action.setHigherRol(AccessRolDTO.Editor);
+    menu.setVisible(session.getCurrentState().getGroupRights().isVisible());
   }
 }

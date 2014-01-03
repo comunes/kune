@@ -23,10 +23,12 @@
 package cc.kune.blogs.client.actions;
 
 import static cc.kune.blogs.shared.BlogsToolConstants.*;
+import static cc.kune.gspace.client.actions.ActionGroups.*;
 import cc.kune.chat.client.actions.ChatAboutContentBtn;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.actions.ActionRegistryByType;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
@@ -50,6 +52,7 @@ import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddPublicToContentMenuItem;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
@@ -59,79 +62,21 @@ import cc.kune.trash.shared.TrashToolConstants;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class BlogsClientActions.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
 public class BlogsClientActions extends AbstractFoldableToolActions {
 
-  /** The all. */
   final String[] all = { TYPE_ROOT, TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
-  
-  /** The containers. */
   final String[] containers = { TYPE_ROOT, TYPE_BLOG };
-  
-  /** The containers no root. */
   final String[] containersNoRoot = { TYPE_BLOG };
-  
-  /** The contents. */
   final String[] contents = { TYPE_POST, TYPE_UPLOADEDFILE };
-  
-  /** The contents moderated. */
   final String[] contentsModerated = { TYPE_POST, TYPE_UPLOADEDFILE };
-  
-  /** The no root. */
   final String[] noRoot = { TYPE_BLOG, TYPE_POST, TYPE_UPLOADEDFILE };
 
-  /**
-   * Instantiates a new blogs client actions.
-   *
-   * @param i18n the i18n
-   * @param session the session
-   * @param stateManager the state manager
-   * @param registry the registry
-   * @param res the res
-   * @param folderGoUp the folder go up
-   * @param newPostItem the new post item
-   * @param newPostIconBtn the new post icon btn
-   * @param newBlogBtn the new blog btn
-   * @param openContentMenuItem the open content menu item
-   * @param delContentMenuItem the del content menu item
-   * @param refresh the refresh
-   * @param tutorialBtn the tutorial btn
-   * @param optionsMenuContent the options menu content
-   * @param shareMenuContent the share menu content
-   * @param addAllMenuItem the add all menu item
-   * @param addAdminMembersMenuItem the add admin members menu item
-   * @param addCollabMembersMenuItem the add collab members menu item
-   * @param addPublicMenuItem the add public menu item
-   * @param participateBtn the participate btn
-   * @param blogNewMenu the blog new menu
-   * @param postNewMenu the post new menu
-   * @param newMenusRegistry the new menus registry
-   * @param chatAbout the chat about
-   * @param delFolderMenuItem the del folder menu item
-   * @param copyContent the copy content
-   * @param purgeMenuItem the purge menu item
-   * @param purgeBtn the purge btn
-   * @param purgeFolderMenuItem the purge folder menu item
-   * @param purgeFolderBtn the purge folder btn
-   * @param writeToParticipants the write to participants
-   * @param moveContentMenuItem the move content menu item
-   * @param setAsHomePage the set as home page
-   * @param shareInTwitter the share in twitter
-   * @param shareInGPlus the share in g plus
-   * @param shareInIdentica the share in identica
-   * @param shareInFacebook the share in facebook
-   */
+s  @SuppressWarnings("unchecked")
   @Inject
-  public BlogsClientActions(final I18nTranslationService i18n, final Session session,
-      final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<GoParentBlogBtn> folderGoUp, final Provider<NewPostMenuItem> newPostItem,
-      final Provider<NewPostIconBtn> newPostIconBtn, final Provider<NewBlogBtn> newBlogBtn,
-      final Provider<OpenBlogMenuItem> openContentMenuItem,
+  public BlogsClientActions(final Session session, final ActionRegistryByType registry,
+      final CoreResources res, final Provider<GoParentBlogBtn> folderGoUp,
+      final Provider<NewPostMenuItem> newPostItem, final Provider<NewPostIconBtn> newPostIconBtn,
+      final Provider<NewBlogBtn> newBlogBtn, final Provider<OpenBlogMenuItem> openContentMenuItem,
       final Provider<DelPostMenuItem> delContentMenuItem,
       final Provider<RefreshContentMenuItem> refresh, final Provider<TutorialBtn> tutorialBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
@@ -139,7 +84,6 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
       final Provider<AddAdminMembersToContentMenuItem> addAdminMembersMenuItem,
       final Provider<AddCollabMembersToContentMenuItem> addCollabMembersMenuItem,
-      final Provider<AddPublicToContentMenuItem> addPublicMenuItem,
       final Provider<ParticipateInContentBtn> participateBtn, final BlogsNewMenu blogNewMenu,
       final PostNewMenu postNewMenu, final NewMenusForTypeIdsRegistry newMenusRegistry,
       final Provider<ChatAboutContentBtn> chatAbout, final Provider<DelBlogMenuItem> delFolderMenuItem,
@@ -150,67 +94,42 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final Provider<MoveContentMenuItem> moveContentMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
+      final Provider<ShareDialogMenuItem> shareSettings,
       final Provider<ShareInTwitterMenuItem> shareInTwitter,
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
       final Provider<ShareInFacebookMenuItem> shareInFacebook) {
-    super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newPostIconBtn, noRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, blogNewMenu, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, postNewMenu, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newPostItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newBlogBtn, TYPE_ROOT);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAllMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, all);
-    // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
-    // shareInFacebook, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, participateBtn, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, chatAbout, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, copyContent, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, writeToParticipants, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delContentMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, delFolderMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAllMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addAdminMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addCollabMembersMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, addPublicMenuItem, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, copyContent, contents);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, writeToParticipants, contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeBtn, contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeMenuItem,
-        contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.TOPBAR, purgeFolderBtn,
-        containersNoRoot);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, purgeFolderMenuItem,
-        containersNoRoot);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        contents);
-    actionsRegistry.addAction(TrashToolConstants.TOOL_NAME, ActionGroups.ITEM_MENU, moveContentMenuItem,
-        containersNoRoot);
+    super(TOOL_NAME, session, registry);
+    add(TOPBAR, all, optionsMenuContent);
+    add(TOPBAR, noRoot, newPostIconBtn);
+    add(TOPBAR, containersNoRoot, blogNewMenu);
+    add(TOPBAR, contents, postNewMenu);
+    add(TOPBAR, all, refresh);
+    add(TOPBAR, containersNoRoot, newPostItem);
+    add(TOOL_NAME, TOPBAR, newBlogBtn, TYPE_ROOT);
+    add(BOTTOMBAR, contents, folderGoUp);
+    add(BOTTOMBAR, containers, folderGoUp);
+    add(TOPBAR, all, shareMenuContent);
+    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(TOPBAR, all, shareInTwitter, shareInGPlus);
+    add(TOPBAR, contents, shareSettings);
+    add(TOPBAR, all, tutorialBtn);
+    add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);
+    add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem, delContentMenuItem,
+        addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem, copyContent,
+        writeToParticipants);
+    add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
+    add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
+    add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem,
+        moveContentMenuItem);
     newMenusRegistry.register(TYPE_BLOG, blogNewMenu.get());
     newMenusRegistry.register(TYPE_POST,
-        (MenuDescriptor) postNewMenu.get().withText(i18n.t("Add Gadget")));
+        (MenuDescriptor) postNewMenu.get().withText(I18n.t("Add Gadget")));
     newMenusRegistry.register(TYPE_UPLOADEDFILE, postNewMenu.get());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
-   */
   @Override
   protected void createPostSessionInitActions() {
   }

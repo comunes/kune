@@ -22,50 +22,26 @@
  */
 package cc.kune.gspace.client.actions;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import javax.annotation.Nonnull;
+
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.ContentStatus;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class AbstractFoldableToolActions.
- * 
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
+import com.google.inject.Provider;
+
 public abstract class AbstractFoldableToolActions {
 
-  /** The actions registry. */
   protected final ActionRegistryByType actionsRegistry;
+  private final String toolName;
 
-  /** The i18n. */
-  protected final I18nTranslationService i18n;
-
-  /** The session. */
-  protected final Session session;
-
-  /** The state manager. */
-  protected final StateManager stateManager;
-
-  /**
-   * Instantiates a new abstract foldable tool actions.
-   * 
-   * @param session
-   *          the session
-   * @param stateManager
-   *          the state manager
-   * @param i18n
-   *          the i18n
-   * @param actionsRegistry
-   *          the actions registry
-   */
-  public AbstractFoldableToolActions(final Session session, final StateManager stateManager,
-      final I18nTranslationService i18n, final ActionRegistryByType actionsRegistry) {
-    this.session = session;
-    this.stateManager = stateManager;
-    this.i18n = i18n;
+  public AbstractFoldableToolActions(final String toolName, final Session session,
+      final ActionRegistryByType actionsRegistry) {
+    this.toolName = toolName;
     this.actionsRegistry = actionsRegistry;
     session.onAppStart(true, new AppStartHandler() {
       @Override
@@ -75,9 +51,59 @@ public abstract class AbstractFoldableToolActions {
     });
   }
 
-  /**
-   * Creates the post session init actions.
-   */
+  public void add(@Nonnull final String actionsGroupId,
+      final @Nonnull Provider<? extends GuiActionDescrip> action, @Nonnull final String typeId) {
+    actionsRegistry.addAction(toolName, actionsGroupId, action, typeId);
+  }
+
+  public void add(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      final ContentStatus status, @Nonnull final String[] typeIds,
+      final @Nonnull Provider<? extends GuiActionDescrip> action) {
+    actionsRegistry.addActions(tool, actionsGroupId, status, typeIds, action);
+  }
+
+  public void add(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      final ContentStatus status, @Nonnull final String[] typeIds,
+      final @Nonnull Provider<? extends GuiActionDescrip>... actions) {
+    actionsRegistry.addActions(tool, actionsGroupId, status, typeIds, actions);
+  }
+
+  public void add(@Nonnull final String tool, final String actionsGroupId,
+      final GuiActionDescrip descrip, final String typeId) {
+    actionsRegistry.addAction(tool, actionsGroupId, descrip, typeId);
+  }
+
+  public void add(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      final Provider<? extends GuiActionDescrip> action) {
+    actionsRegistry.addAction(tool, actionsGroupId, action);
+  }
+
+  public void add(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      final @Nonnull Provider<? extends GuiActionDescrip> action, final ContentStatus status,
+      @Nonnull final String typeId) {
+    actionsRegistry.addAction(tool, actionsGroupId, action, status, typeId);
+  }
+
+  public void add(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      final @Nonnull Provider<? extends GuiActionDescrip> action, @Nonnull final String typeId) {
+    actionsRegistry.addAction(tool, actionsGroupId, action, typeId);
+  }
+
+  public void add(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      @Nonnull final String[] typeIds, final @Nonnull Provider<? extends GuiActionDescrip> action) {
+    actionsRegistry.addActions(tool, actionsGroupId, typeIds, action);
+  }
+
+  public void add(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      @Nonnull final String[] typeIds, final @Nonnull Provider<? extends GuiActionDescrip>... actionList) {
+    actionsRegistry.addActions(tool, actionsGroupId, typeIds, actionList);
+  }
+
+  public void add(@Nonnull final String actionsGroupId, @Nonnull final String[] typeIds,
+      final @Nonnull Provider<? extends GuiActionDescrip>... actionList) {
+    actionsRegistry.addActions(toolName, actionsGroupId, typeIds, actionList);
+  }
+
   protected abstract void createPostSessionInitActions();
 
 }

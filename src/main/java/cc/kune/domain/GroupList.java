@@ -46,57 +46,39 @@ import org.hibernate.annotations.FetchMode;
 
 import cc.kune.core.shared.domain.GroupListMode;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class GroupList.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
 @Entity
 @Table(name = "group_list")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class GroupList {
-  
-  /** The id. */
   @Id
   @GeneratedValue
   private Long id;
 
-  /** The list. */
   @Fetch(FetchMode.JOIN)
   @OrderBy("shortName ASC")
   @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
   @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
   Set<Group> list;
 
-  /** The mode. */
   @Enumerated(EnumType.STRING)
   @Basic
   private GroupListMode mode;
 
-  /**
-   * Instantiates a new group list.
-   */
   public GroupList() {
     this(new HashSet<Group>());
     this.mode = GroupListMode.NORMAL;
   }
 
-  /**
-   * Instantiates a new group list.
-   *
-   * @param list the list
-   */
+  public GroupList(final Group group) {
+    this();
+    add(group);
+  }
+
   public GroupList(final Set<Group> list) {
     this.list = list;
   }
 
-  /**
-   * Adds the.
-   *
-   * @param group the group
-   */
   public void add(final Group group) {
     list.add(group);
     // TODO: Get this outside Domain?
@@ -105,55 +87,26 @@ public class GroupList {
     }
   }
 
-  /**
-   * Clear.
-   */
   public void clear() {
     list.clear();
   }
 
-  /**
-   * Duplicate.
-   *
-   * @return the array list
-   */
   public ArrayList<Group> duplicate() {
     return new ArrayList<Group>(list);
   }
 
-  /**
-   * Gets the id.
-   *
-   * @return the id
-   */
   public Long getId() {
     return id;
   }
 
-  /**
-   * Gets the list.
-   *
-   * @return the list
-   */
   public Set<Group> getList() {
     return list;
   }
 
-  /**
-   * Gets the mode.
-   *
-   * @return the mode
-   */
   public GroupListMode getMode() {
     return mode;
   }
 
-  /**
-   * Includes.
-   *
-   * @param group the group
-   * @return true, if successful
-   */
   public boolean includes(final Group group) {
     // Duplicate code in GroupListDTO
     switch (mode) {
@@ -169,20 +122,10 @@ public class GroupList {
     }
   }
 
-  /**
-   * Checks if is empty.
-   *
-   * @return true, if is empty
-   */
   public boolean isEmpty() {
     return list.size() == 0;
   }
 
-  /**
-   * Removes the.
-   *
-   * @param group the group
-   */
   public void remove(final Group group) {
     list.remove(group);
     // TODO: Get this outside Domain?
@@ -191,36 +134,18 @@ public class GroupList {
     }
   }
 
-  /**
-   * Sets the id.
-   *
-   * @param id the new id
-   */
   public void setId(final Long id) {
     this.id = id;
   }
 
-  /**
-   * Sets the list.
-   *
-   * @param list the new list
-   */
   public void setList(final Set<Group> list) {
     this.list = list;
   }
 
-  /**
-   * Sets the mode.
-   *
-   * @param mode the new mode
-   */
   public void setMode(final GroupListMode mode) {
     this.mode = mode;
   }
 
-  /* (non-Javadoc)
-   * @see java.lang.Object#toString()
-   */
   @Override
   public String toString() {
     return "GroupList[(" + mode + "): " + list + "]";

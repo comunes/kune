@@ -396,7 +396,7 @@ public class ChatClientDefault implements ChatClient {
    * @param chatDomain the chat domain
    */
   private void checkChatDomain(final String chatDomain) {
-    final String httpDomain = WindowUtils.getLocation().getHostName();
+    final String httpDomain = WindowUtils.getHostName();
     if (!chatDomain.equals(httpDomain)) {
       Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
           + "). This will cause problems with the chat functionality. "

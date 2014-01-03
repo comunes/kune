@@ -455,7 +455,7 @@ div.gwt-TabLayoutPanelTabInner img {
   background-color: #E0E0E0;
 }
 
-.k-publicspace-mask { /*  background-color: #fff !important;
+.k-publicspace-mask { /*	background-color: #fff !important;
   kfilter: alpha(opacity =       68) !important;
   -moz-opacity: 0.68 !important;
   -khtml-opacity: 0.68 !important;
@@ -1361,7 +1361,6 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
 }
 
 /* font icons */
-
 .k-content-title-icon {
   font-size: 22px;
   font-family: kuneicons;
@@ -1375,6 +1374,93 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
   font-size: 16px;
   font-family: kuneicons;
   font-weight: normal;
+}
+
+/* Share dialog */
+
+.k-sharelist-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: brown;
+  margin: 7px 0px 5px 0px;
+}
+
+.k-sharelist-scroll {
+  overflow-x: hidden;
+  width: 290px;
+}
+
+.k-shareitem {
+  height: 18px;
+  margin-top: 4px !important;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+div.k-shareitem {
+  padding-left: 10px;
+  width: 250px;
+  color: #999999;
+}
+
+.k-sharetonet-introtexts {
+  color: #aa4400;
+  margin: 5px 0 0 0;
+}
+
+
+div.k-shareitem div.k-iconlabel {
+  padding-left: 5px;
+  overflow: hidden;
+  max-width: 165px;
+}
+
+.k-share-item-actions {
+  color: #d45500;
+  cursor: pointer;
+  font-size: 11px;
+  overflow: hidden;
+  float: right;
+  max-width: 100px;
+}
+
+.k-share-item-noactions {
+  color: #999;
+  cursor: default;
+}
+
+.k-share-others {
+  margin-top: 5px;
+  background-color: #f2f2f2;
+  padding: 10px 10px 0 10px;
+  color: #aa4400;
+}
+
+.k-share-searchbox, .k-sharelink-box {
+  float: left;
+}
+
+input.k-sharelink-box {
+    margin-left: 10px;
+}
+
+.k-share-searchbox input, input.k-sharelink-box {
+  border: 1px solid #E4A374;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  margin-top: 5px;
+  color: #999;
+  padding: 3px;
+}
+
+.k-share-searchbox-text {
+  margin: 1px 6px 0 3px;
+  padding-left: 1px;
+  color: #deaa87;
+  position: relative;
+  z-index: -1px;
+  top: -20px;
+  left: 5px;
 }
 
 /* Embeded waves */

@@ -23,13 +23,13 @@
 package cc.kune.chat.client.actions;
 
 import static cc.kune.chat.shared.ChatToolConstants.*;
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import static cc.kune.gspace.client.actions.ActionGroups.*;
 import cc.kune.core.client.actions.ActionRegistryByType;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
-import cc.kune.gspace.client.actions.ActionGroups;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.TutorialBtn;
@@ -42,48 +42,14 @@ import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ChatClientActions.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
 public class ChatClientActions extends AbstractFoldableToolActions {
 
-  /** The all. */
   final String[] all = { TYPE_ROOT, TYPE_ROOM };
-  
-  /** The containers. */
   final String[] containers = { TYPE_ROOT, TYPE_ROOM };
-  
-  /** The containers no root. */
   final String[] containersNoRoot = { TYPE_ROOM };
-  
-  /** The contents. */
   final String[] contents = {};
 
-  /**
-   * Instantiates a new chat client actions.
-   *
-   * @param i18n the i18n
-   * @param session the session
-   * @param stateManager the state manager
-   * @param registry the registry
-   * @param res the res
-   * @param refresh the refresh
-   * @param newRoomBtn the new room btn
-   * @param openRoomMenuItem the open room menu item
-   * @param folderGoUp the folder go up
-   * @param openRoomArchiveMenuItem the open room archive menu item
-   * @param openRoomBtn the open room btn
-   * @param tutorialBtn the tutorial btn
-   * @param optionsMenuContent the options menu content
-   * @param shareMenuContent the share menu content
-   * @param shareInTwitter the share in twitter
-   * @param shareInGPlus the share in g plus
-   * @param shareInIdentica the share in identica
-   * @param shareInFacebook the share in facebook
-   */
+  @SuppressWarnings("unchecked")
   @Inject
   public ChatClientActions(final I18nTranslationService i18n, final Session session,
       final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
@@ -97,28 +63,17 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInGPlusMenuItem> shareInGPlus,
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
       final Provider<ShareInFacebookMenuItem> shareInFacebook) {
-    super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, newRoomBtn, TYPE_ROOT);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.BOTTOMBAR, folderGoUp, containers);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, tutorialBtn, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, openRoomBtn, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomMenuItem, containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.ITEM_MENU, openRoomArchiveMenuItem,
-        containersNoRoot);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInTwitter, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInIdentica, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, shareInGPlus, all);
-    // actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR,
-    // shareInFacebook, all);
-
+    super(TOOL_NAME, session, registry);
+    add(TOPBAR, all, optionsMenuContent, refresh);
+    add(TOOL_NAME, TOPBAR, newRoomBtn, TYPE_ROOT);
+    add(BOTTOMBAR, containers, folderGoUp);
+    add(TOPBAR, all, tutorialBtn);
+    add(TOPBAR, containersNoRoot, openRoomBtn);
+    add(ITEM_MENU, containersNoRoot, openRoomMenuItem, openRoomArchiveMenuItem);
+    add(TOPBAR, all, shareMenuContent);
+    add(TOPBAR, all, shareInTwitter, shareInGPlus);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
-   */
   @Override
   protected void createPostSessionInitActions() {
   }

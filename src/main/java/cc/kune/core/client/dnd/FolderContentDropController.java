@@ -22,11 +22,8 @@
  */
 package cc.kune.core.client.dnd;
 
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.state.Session;
+import cc.kune.common.shared.utils.SimpleCallback;
+import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.ui.BasicDragableThumb;
 import cc.kune.core.shared.domain.utils.StateToken;
 
@@ -34,7 +31,6 @@ import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class FolderContentDropController is responsible of the drop process to
  * contents (for instance of user, to add then as participants). Must not be a
@@ -43,53 +39,23 @@ import com.google.inject.Inject;
  */
 public class FolderContentDropController extends AbstractDropController {
 
-  /** The content service. */
-  private final ContentServiceAsync contentService;
-  
-  /** The i18n. */
-  private final I18nTranslationService i18n;
-  
-  /** The session. */
-  private final Session session;
+  private final ContentServiceHelper contentService;
 
-  /**
-   * Instantiates a new folder content drop controller.
-   *
-   * @param dragController the drag controller
-   * @param contentService the content service
-   * @param session the session
-   * @param i18n the i18n
-   */
   @Inject
   public FolderContentDropController(final KuneDragController dragController,
-      final ContentServiceAsync contentService, final Session session, final I18nTranslationService i18n) {
+      final ContentServiceHelper contentService) {
     super(dragController);
-    this.i18n = i18n;
     registerType(BasicDragableThumb.class);
     this.contentService = contentService;
-    this.session = session;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.client.dnd.AbstractDropController#onDropAllowed(com.google.gwt.user.client.ui.Widget, com.allen_sauer.gwt.dnd.client.drop.SimpleDropController)
-   */
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
     dropController.getDropTarget().removeStyleName("k-drop-allowed-hover");
     if (widget instanceof BasicDragableThumb) {
       final BasicDragableThumb thumb = (BasicDragableThumb) widget;
       final String userName = thumb.getToken().getGroup();
-      contentService.addParticipant(session.getUserHash(), (StateToken) getTarget(), userName,
-          new AsyncCallbackSimple<Boolean>() {
-            @Override
-            public void onSuccess(final Boolean result) {
-              if (result) {
-                NotifyUser.info(i18n.t("User '[%s]' added as participant", userName));
-              } else {
-                NotifyUser.info(i18n.t("This user is already partipanting"));
-              }
-            }
-          });
+      contentService.addParticipant((StateToken) getTarget(), userName, SimpleCallback.DO_NOTHING);
     }
   }
 

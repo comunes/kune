@@ -161,7 +161,7 @@ public class ListsServiceTest extends IntegrationTest {
   public void subscribeToCloseShouldFailTest() throws DefaultException, IOException {
     doLogout();
     doLoginWithDummyUser();
-    listsService.subscribeToList(getHash(), closeList.getStateToken(), true);
+    listsService.subscribeMyselfToList(getHash(), closeList.getStateToken(), true);
   }
 
   /**
@@ -175,7 +175,7 @@ public class ListsServiceTest extends IntegrationTest {
     listsService.setPublic(token, openList.getStateToken(), false);
     doLogout();
     doLoginWithDummyUser();
-    listsService.subscribeToList(getHash(), openList.getStateToken(), true);
+    listsService.subscribeMyselfToList(getHash(), openList.getStateToken(), true);
   }
 
   /**
@@ -188,17 +188,17 @@ public class ListsServiceTest extends IntegrationTest {
     assertTrue(initialAcl.getAdmins().includes(userGroup));
     assertTrue(initialAcl.getEditors().getList().contains(userGroup));
 
-    StateContainerDTO state = listsService.subscribeToList(getHash(), list.getStateToken(), true);
+    StateContainerDTO state = listsService.subscribeMyselfToList(getHash(), list.getStateToken(), true);
     AccessListsDTO acl = state.getAccessLists();
     assertTrue(acl.getEditors().includes(userGroup));
     assertTrue(acl.getAdmins().includes(userGroup));
 
-    state = listsService.subscribeToList(getHash(), list.getStateToken(), false);
+    state = listsService.subscribeMyselfToList(getHash(), list.getStateToken(), false);
     acl = state.getAccessLists();
     assertFalse(acl.getEditors().includes(userGroup));
     assertTrue(acl.getAdmins().includes(userGroup));
 
-    state = listsService.subscribeToList(getHash(), list.getStateToken(), true);
+    state = listsService.subscribeMyselfToList(getHash(), list.getStateToken(), true);
     acl = state.getAccessLists();
     assertTrue(acl.getEditors().includes(userGroup));
     assertTrue(acl.getEditors().getList().contains(userGroup));

@@ -174,7 +174,7 @@ public class InvitationManagerDefault extends DefaultManager<Invitation, Long> i
       invitation.setUsed(true);
       persist(invitation);
       return listService.subscribeToListWithoutPermCheck(invitation.getInvitedToToken(),
-          user.getUserGroup());
+          user.getUserGroup(), true);
     } catch (final NoResultException exp) {
       throw new IncorrectHashException();
     }

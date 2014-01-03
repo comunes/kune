@@ -25,6 +25,7 @@ package cc.kune.wave.server.kspecific;
 import java.net.URL;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Nonnull;
 
@@ -177,9 +178,17 @@ public class KuneAgent extends AbstractBaseRobotAgent implements KuneWaveService
    * @see cc.kune.wave.server.kspecific.KuneWaveService#delParticipants(org.waveprotocol.wave.model.waveref.WaveRef, java.lang.String, java.lang.String[])
    */
   @Override
-  public void delParticipants(final WaveRef waveName, final String whoDel, final String... participants) {
+  public boolean delParticipants(final WaveRef waveName, final String whoDel,
+      final Set<String> participants) {
     // TODO Auto-generated method stub
+    return false;
+  }
 
+  @Override
+  public boolean delParticipants(final WaveRef waveName, final String whoDel,
+      final String... participants) {
+    // TODO Auto-generated method stub
+    return false;
   }
 
   /* (non-Javadoc)

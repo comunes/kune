@@ -157,6 +157,12 @@ public class GwtSubMenuGui extends AbstractGwtMenuGui implements HasMenuItem {
   public void setVisible(final boolean visible) {
     item.setVisible(visible);
     iconLabel.setVisible(visible);
+    // FIXME the ">" still visible when hidden
+    // This does not works:
+    // item.getElement().getStyle().setVisibility(
+    // visible ? Visibility.VISIBLE : Visibility.HIDDEN);
+    // item.getElement().getParentElement().getStyle().setVisibility(
+    // visible ? Visibility.VISIBLE : Visibility.HIDDEN);
     layout();
   }
 

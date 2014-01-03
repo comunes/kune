@@ -58,12 +58,16 @@ import cc.kune.core.server.persist.DataSourceKune;
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.utils.FilenameUtils;
+import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
+import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
+import cc.kune.domain.GroupList;
 import cc.kune.domain.I18nLanguage;
 import cc.kune.domain.Rate;
 import cc.kune.domain.Revision;
@@ -95,63 +99,20 @@ import com.google.wave.api.Participants;
  */
 @Singleton
 public class ContentManagerDefault extends DefaultManager<Content, Long> implements ContentManager {
-  
-  /** The container finder. */
   private final ContainerFinder containerFinder;
-  
-  /** The content finder. */
   private final ContentFinder contentFinder;
-  
-  /** The events cache. */
   private final EventsCache eventsCache;
-  
-  /** The finder. */
   private final FinderService finder;
-  
-  /** The i18n. */
   private final I18nTranslationService i18n;
-  
-  /** The kune wave manager. */
   private final KuneWaveService kuneWaveManager;
-  
-  /** The language finder. */
   private final I18nLanguageFinder languageFinder;
-  
-  /** The log. */
   private final Log LOG = LogFactory.getLog(ContentManagerDefault.class);
-  
-  /** The participant utils. */
   private final ParticipantUtils participantUtils;
-  
-  /** The tag manager. */
   private final TagUserContentManager tagManager;
-  
-  /** The tools. */
   private final ServerToolRegistry tools;
-  
-  /** The user finder. */
   private final UserFinder userFinder;
-  
-  /** The xml action reader. */
   private final XMLActionReader xmlActionReader;
 
-  /**
-   * Instantiates a new content manager default.
-   *
-   * @param provider the provider
-   * @param contentFinder the content finder
-   * @param containerFinder the container finder
-   * @param finder the finder
-   * @param userFinder the user finder
-   * @param languageFinder the language finder
-   * @param tagManager the tag manager
-   * @param kuneWaveManager the kune wave manager
-   * @param participantUtils the participant utils
-   * @param tools the tools
-   * @param xmlActionReader the xml action reader
-   * @param i18n the i18n
-   * @param eventsCache the events cache
-   */
   @Inject
   public ContentManagerDefault(@DataSourceKune final Provider<EntityManager> provider,
       final ContentFinder contentFinder, final ContainerFinder containerFinder,
@@ -175,9 +136,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     this.eventsCache = eventsCache;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#addAuthor(cc.kune.domain.User, java.lang.Long, java.lang.String)
-   */
   @Override
   public void addAuthor(final User user, final Long contentId, final String authorShortName)
       throws DefaultException {
@@ -189,30 +147,17 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.addAuthor(author);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#addGadgetToContent(cc.kune.domain.User, cc.kune.domain.Content, java.lang.String)
-   */
   @Override
   public void addGadgetToContent(final User user, final Content content, final String gadgetName) {
     final URL gadgetUrl = getGadgetUrl(gadgetName);
     addGadgetToContent(user, content, gadgetUrl);
   }
 
-  /**
-   * Adds the gadget to content.
-   *
-   * @param user the user
-   * @param content the content
-   * @param gadgetUrl the gadget url
-   */
   public void addGadgetToContent(final User user, final Content content, final URL gadgetUrl) {
     kuneWaveManager.addGadget(KuneWaveServerUtils.getWaveRef(content),
         participantUtils.of(user.getShortName()).toString(), gadgetUrl);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#addParticipant(cc.kune.domain.User, java.lang.Long, java.lang.String)
-   */
   @Override
   public boolean addParticipant(final User user, final Long contentId, final String participant) {
     final Content content = finder.getContent(contentId);
@@ -220,11 +165,14 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   }
 
   /**
-   * Adds the participant to a wave.
-   *
-   * @param user the user
-   * @param content the content
-   * @param participants the participants
+   * Adds the participant to a wave
+   * 
+   * @param user
+   *          the user
+   * @param content
+   *          the content
+   * @param participant
+   *          the participant
    * @return true, if successful added (not already participant)
    */
   private boolean addParticipants(final User user, final Content content, final String... participants) {
@@ -235,36 +183,30 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return false;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#addParticipants(cc.kune.domain.User, java.lang.Long, cc.kune.domain.Group, cc.kune.core.shared.dto.SocialNetworkSubGroup)
-   */
   @Override
   public boolean addParticipants(final User user, final Long contentId, final Group group,
       final SocialNetworkSubGroup whichOnes) {
-    final Set<String> members = new HashSet<String>();
-    if (whichOnes.equals(SocialNetworkSubGroup.PUBLIC)) {
-      members.add(participantUtils.getPublicParticipantId().toString());
-    } else {
-      GroupServerUtils.getAllUserMembersAsString(members, group, whichOnes);
-    }
-    final Content content = finder.getContent(contentId);
-    return addParticipants(user, content, members.toArray(new String[members.size()]));
+    final Set<String> members = participantsGroupToSet(group, whichOnes);
+    return addParticipants(user, finder.getContent(contentId),
+        members.toArray(new String[members.size()]));
   }
 
-  /**
-   * Clear events cache if necessary.
-   *
-   * @param previousParent the previous parent
-   */
+  @Override
+  public Content addToAcl(final Content content, final Group group, final AccessRol rol) {
+    final AccessLists acl = content.getAccessLists();
+    final GroupList list = getListFromRol(rol, acl);
+    list.add(group);
+    acl.setList(rol, list);
+    save(content);
+    return content;
+  }
+
   private void clearEventsCacheIfNecessary(final Container previousParent) {
     if (previousParent.getToolName().equals(EventsToolConstants.TOOL_NAME)) {
       eventsCache.remove(previousParent);
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#copyContent(cc.kune.domain.User, cc.kune.domain.Container, cc.kune.domain.Content)
-   */
   @Override
   public Content copyContent(final User user, final Container destination, final Content contentToCopy) {
     try {
@@ -278,36 +220,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
   }
 
-  /**
-   * Creates the content.
-   *
-   * @param title the title
-   * @param body the body
-   * @param author the author
-   * @param container the container
-   * @param typeId the type id
-   * @return the content
-   */
   protected Content createContent(final String title, final String body, final User author,
       final Container container, final String typeId) {
     return createContent(title, body, KuneWaveService.NO_WAVE_TO_COPY, author, container, typeId,
         KuneWaveService.WITHOUT_GADGET, Collections.<String, String> emptyMap());
   }
 
-  /**
-   * Creates the content.
-   *
-   * @param title the title
-   * @param body the body
-   * @param waveIdToCopy the wave id to copy
-   * @param author the author
-   * @param container the container
-   * @param typeId the type id
-   * @param gadgetUrl the gadget url
-   * @param gadgetProperties the gadget properties
-   * @param otherParticipants the other participants
-   * @return the content
-   */
   protected Content createContent(final String title, final String body, final WaveRef waveIdToCopy,
       final User author, final Container container, final String typeId, final URL gadgetUrl,
       final Map<String, String> gadgetProperties, final String... otherParticipants) {
@@ -335,9 +253,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return save(newContent);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#createGadget(cc.kune.domain.User, cc.kune.domain.Container, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.util.Map)
-   */
   @Override
   public Content createGadget(final User user, final Container container, final String gadgetname,
       final String typeIdChild, final String title, final String body,
@@ -351,22 +266,34 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return content;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#findIfExistsTitle(cc.kune.domain.Container, java.lang.String)
-   */
+  private boolean delParticipants(final User user, final Content content, final String... participants) {
+    if (content.isWave()) {
+      // The author cannot be removed (by now)
+      final String author = getContentAuthor(content);
+      final Set<String> participantsSet = participantUtils.toSet(participants);
+      participantsSet.remove(author);
+      final WaveRef waveRef = KuneWaveServerUtils.getWaveRef(content);
+      return kuneWaveManager.delParticipants(waveRef, user.getShortName(), participantsSet);
+    }
+    return false;
+  }
+
+  @Override
+  public boolean delParticipants(final User user, final Long contentId, final String... participants) {
+    return delParticipants(user, finder.getContent(contentId), participants);
+  }
+
+  @Override
+  public boolean delPublicParticipant(final User user, final Long contentId) {
+    return delParticipants(user, finder.getContent(contentId), this.getPublicParticipant());
+  }
+
   @Override
   public boolean findIfExistsTitle(final Container container, final String title) {
     return (contentFinder.findIfExistsTitle(container, title) > 0)
         || (containerFinder.findIfExistsTitle(container, title) > 0);
   }
 
-  /**
-   * Find inexistent title.
-   *
-   * @param container the container
-   * @param title the title
-   * @return the string
-   */
   private String findInexistentTitle(final Container container, final String title) {
     String initialTitle = String.valueOf(title);
     while (findIfExistsTitle(container, initialTitle)) {
@@ -375,22 +302,10 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return initialTitle;
   }
 
-  /**
-   * Gets the content author.
-   *
-   * @param content the content
-   * @return the content author
-   */
   private String getContentAuthor(final Content content) {
     return content.getAuthors().get(0).getShortName();
   }
 
-  /**
-   * Gets the gadget url.
-   *
-   * @param gadgetname the gadgetname
-   * @return the gadget url
-   */
   private URL getGadgetUrl(final String gadgetname) {
     URL gadgetUrl = null;
     final XMLWaveExtension extension = xmlActionReader.getActions().getExtensions().get(gadgetname);
@@ -404,25 +319,38 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return gadgetUrl;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#getRateAvg(cc.kune.domain.Content)
-   */
+  private GroupList getListFromRol(final AccessRol rol, final AccessLists acl) {
+    GroupList list;
+    switch (rol) {
+    case Administrator:
+      list = acl.getAdmins();
+      break;
+    case Editor:
+      list = acl.getEditors();
+      break;
+    case Viewer:
+      list = acl.getViewers();
+      break;
+    default:
+      throw new DefaultException("Error setting ACL");
+    }
+    return list;
+  }
+
+  private String getPublicParticipant() {
+    return participantUtils.getPublicParticipantId().toString();
+  }
+
   @Override
   public Double getRateAvg(final Content content) {
     return finder.getRateAvg(content);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#getRateByUsers(cc.kune.domain.Content)
-   */
   @Override
   public Long getRateByUsers(final Content content) {
     return finder.getRateByUsers(content);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#getRateContent(cc.kune.domain.User, cc.kune.domain.Content)
-   */
   @Override
   public Double getRateContent(final User rater, final Content content) {
     final Rate rate = finder.getRate(rater, content);
@@ -433,9 +361,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#moveContent(cc.kune.domain.Content, cc.kune.domain.Container)
-   */
   @Override
   public Content moveContent(final Content content, final Container newContainer) {
     if (newContainer.equals(content.getContainer())) {
@@ -453,9 +378,16 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return persist(content);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#purgeAll(cc.kune.domain.Container)
-   */
+  private Set<String> participantsGroupToSet(final Group group, final SocialNetworkSubGroup whichOnes) {
+    final Set<String> members = new HashSet<String>();
+    if (whichOnes.equals(SocialNetworkSubGroup.PUBLIC)) {
+      members.add(getPublicParticipant());
+    } else {
+      GroupServerUtils.getAllUserMembersAsString(members, group, whichOnes);
+    }
+    return members;
+  }
+
   @Override
   public Container purgeAll(final Container container) {
     Preconditions.checkState(container.isRoot(), "Trying to purge a non root folder: " + container);
@@ -475,10 +407,10 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   }
 
   /**
-   * Purge content (permanent delete).
-   *
-   * @param content the content to purge
-   * @return the container
+   * Purge content (permanent delete)
+   * 
+   * @param content
+   *          the content to purge
    */
   @Override
   public Container purgeContent(final Content content) {
@@ -509,9 +441,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return container;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#rateContent(cc.kune.domain.User, java.lang.Long, java.lang.Double)
-   */
   @Override
   public RateResult rateContent(final User rater, final Long contentId, final Double value)
       throws DefaultException {
@@ -530,9 +459,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         : 0, value);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#removeAuthor(cc.kune.domain.User, java.lang.Long, java.lang.String)
-   */
   @Override
   public void removeAuthor(final User user, final Long contentId, final String authorShortName)
       throws DefaultException {
@@ -544,9 +470,16 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.removeAuthor(author);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#renameContent(cc.kune.domain.User, java.lang.Long, java.lang.String)
-   */
+  @Override
+  public Content removeFromAcl(final Content content, final Group group, final AccessRol rol) {
+    final AccessLists acl = content.getAccessLists();
+    final GroupList list = getListFromRol(rol, acl);
+    list.remove(group);
+    acl.setList(rol, list);
+    save(content);
+    return content;
+  }
+
   @Override
   public Content renameContent(final User user, final Long contentId, final String newTitle)
       throws DefaultException {
@@ -566,18 +499,12 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return content;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#save(cc.kune.domain.Content)
-   */
   @Override
   public Content save(final Content content) {
     setModifiedTime(content);
     return persist(content);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#save(cc.kune.domain.User, cc.kune.domain.Content, java.lang.String)
-   */
   @Override
   public Content save(final User editor, final Content content, final String body) {
     setModifiedTime(content);
@@ -589,17 +516,11 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return persist(content);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#search(java.lang.String)
-   */
   @Override
   public SearchResult<Content> search(final String search) {
     return this.search(search, null, null);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#search(java.lang.String, java.lang.Integer, java.lang.Integer)
-   */
   @Override
   public SearchResult<Content> search(final String search, final Integer firstResult,
       final Integer maxResults) {
@@ -610,9 +531,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         "language.nativeName", "lastRevision.body", "lastRevision.title" }, firstResult, maxResults);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#searchMime(java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.String)
-   */
   @Override
   public SearchResult<Content> searchMime(final String search, final Integer firstResult,
       final Integer maxResults, final String groupShortName, final String mimetype) {
@@ -622,9 +540,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return new SearchResult<Content>(count.intValue(), list);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#searchMime(java.lang.String, java.lang.Integer, java.lang.Integer, java.lang.String, java.lang.String, java.lang.String)
-   */
   @Override
   public SearchResult<?> searchMime(final String search, final Integer firstResult,
       final Integer maxResults, final String groupShortName, final String mimetype,
@@ -636,9 +551,20 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return new SearchResult<Content>(count.intValue(), list);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#setGadgetProperties(cc.kune.domain.User, cc.kune.domain.Content, java.lang.String, java.util.Map)
-   */
+  @Override
+  public Content setAclMode(final Content content, final AccessRol rol, final GroupListMode mode) {
+    final AccessLists acl = content.getAccessLists();
+    // Group group = content.getContainer().getOwner();
+    final GroupList list = getListFromRol(rol, acl);
+    if (AccessRol.Administrator.equals(rol) && !GroupListMode.NORMAL.equals(mode)) {
+      throw new RuntimeException("Cannot set to admins other mode than normal");
+    }
+    list.setMode(mode);
+    acl.setList(rol, list);
+    save(content);
+    return content;
+  }
+
   @Override
   public void setGadgetProperties(final User user, final Content content, final String gadgetName,
       final Map<String, String> properties) {
@@ -650,9 +576,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
         getContentAuthor(content), gadgetUrl, properties);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#setLanguage(cc.kune.domain.User, java.lang.Long, java.lang.String)
-   */
   @Override
   public I18nLanguage setLanguage(final User user, final Long contentId, final String languageCode)
       throws DefaultException {
@@ -665,26 +588,15 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return language;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#setModifiedOn(cc.kune.domain.Content, long)
-   */
   @Override
   public void setModifiedOn(final Content content, final long lastModifiedTime) {
     content.setModifiedOn(lastModifiedTime);
   }
 
-  /**
-   * Sets the modified time.
-   *
-   * @param content the new modified time
-   */
   private void setModifiedTime(final Content content) {
     setModifiedOn(content, System.currentTimeMillis());
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#setPublishedOn(cc.kune.domain.User, java.lang.Long, java.util.Date)
-   */
   @Override
   public void setPublishedOn(final User user, final Long contentId, final Date publishedOn)
       throws DefaultException {
@@ -692,9 +604,6 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     content.setPublishedOn(publishedOn);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#setStatus(java.lang.Long, cc.kune.core.shared.domain.ContentStatus)
-   */
   @Override
   public Content setStatus(final Long contentId, final ContentStatus status) {
     final Content content = finder.getContent(contentId);
@@ -714,13 +623,20 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     return content;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.core.server.content.ContentManager#setTags(cc.kune.domain.User, java.lang.Long, java.lang.String)
-   */
   @Override
   public void setTags(final User user, final Long contentId, final String tags) throws DefaultException {
     final Content content = finder.getContent(contentId);
     tagManager.setTags(user, content, tags);
+  }
+
+  @Override
+  public Content setVisible(final Content content, final boolean visible) {
+    final AccessLists acl = content.getAccessLists();
+    final GroupList list = getListFromRol(AccessRol.Viewer, acl);
+    list.setMode(visible ? GroupListMode.EVERYONE : GroupListMode.NORMAL);
+    acl.setList(AccessRol.Viewer, list);
+    save(content);
+    return content;
   }
 
 }

@@ -27,25 +27,37 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /*
  * AccessList samples (using GroupListMode)
- *  
- * |---------------------------------------------------------+--------+---------------+----------+---------|
- * | AccessList (A: Admins, E:Editors, V: Viewers            |        | Administrable | Editable | Visible |
- * |---------------------------------------------------------+--------+---------------+----------+---------|
- * | (A:EVERYONE, E: EVERYONE, V:EVERYONE, P:NO)             | Group1 | yes           | yes      | yes     |
- * |                                                         | Group2 | yes           | yes      | yes     |
- * |---------------------------------------------------------+--------+---------------+----------+---------|
- * | (A:NORMAL(Group1), E: NORMAL, V:EVERYONE, P:NO)         | Group1 | yes           | yes      | yes     |
- * |                                                         | Group2 | no            | no       | yes     |
- * |---------------------------------------------------------+--------+---------------+----------+---------|
- * | (A:NORMAL(Group1), E: NORMAL(Group2), V:EVERYONE, P:NO) | Group1 | yes           | yes      | yes     |
- * |                                                         | Group2 | no            | yes      | yes     |
- * |                                                         | Group3 | no            | no       | yes     |
- * |---------------------------------------------------------+--------+---------------+----------+---------|
- * | (A:NORMAL(Group1), E: NORMAL, V:NORMAL(Group2), P:NO)   | Group1 | yes           | yes      | yes     |
- * |                                                         | Group2 | no            | no       | yes     |
- * |                                                         | Group3 | no            | no       | no      |
- * |---------------------------------------------------------+--------+---------------+----------+---------|
- * 
+
+ |---------------------------------------------------+--------+---------------+----------+---------|
+ | AccessList (A: Admins, E:Editors, V: Viewers      |        | Administrable | Editable | Visible |
+ |---------------------------------------------------+--------+---------------+----------+---------|
+ | (A:EVERYONE, E: EVERYONE, V:EVERYONE)             | Group1 | yes           | yes      | yes     |
+ |                                                   | Group2 | yes           | yes      | yes     |
+ |---------------------------------------------------+--------+---------------+----------+---------|
+ | (A:NORMAL(Group1), E: NORMAL, V:EVERYONE)         | Group1 | yes           | yes      | yes     |
+ |                                                   | Group2 | no            | no       | yes     |
+ |---------------------------------------------------+--------+---------------+----------+---------|
+ | (A:NORMAL(Group1), E: NORMAL(Group2), V:EVERYONE) | Group1 | yes           | yes      | yes     |
+ |                                                   | Group2 | no            | yes      | yes     |
+ |                                                   | Group3 | no            | no       | yes     |
+ |---------------------------------------------------+--------+---------------+----------+---------|
+ | (A:NORMAL(Group1), E: NORMAL, V:NORMAL(Group2))   | Group1 | yes           | yes      | yes     |
+ |                                                   | Group2 | no            | no       | yes     |
+ |                                                   | Group3 | no            | no       | no      |
+ |---------------------------------------------------+--------+---------------+----------+---------|
+ | (A:NORMAL(Group1), E:NORMAL(Group2), V: NOBODY)   | Group1 | yes           | yes      | yes     |
+ |                                                   | Group2 | no            | yes      | yes     |
+ |                                                   | Group3 | no            | no       | no      |
+ |---------------------------------------------------+--------+---------------+----------+---------|
+ | (A:NORMAL(Group1), E: NOBODY, V:NORMAL(Group2))   | Group1 | yes           | yes      | yes     |
+ |                                                   | Group2 | no            | no       | yes     |
+ |                                                   | Group3 | no            | no       | no      |
+ |---------------------------------------------------+--------+---------------+----------+---------|
+ | (A:NORMAL(Group1), E: NOBODY, V:NOBODY)           | Group1 | yes           | yes      | yes     |
+ |                                                   | Group2 | no            | no       | no      |
+ |                                                   | Group3 | no            | no       | no      |
+ |---------------------------------------------------+--------+---------------+----------+---------|
+
  */
 
 /**

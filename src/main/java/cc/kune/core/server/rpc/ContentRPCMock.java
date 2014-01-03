@@ -164,6 +164,20 @@ public class ContentRPCMock implements ContentService, RPC {
    * @see cc.kune.core.client.rpcservices.ContentService#getContent(java.lang.String, cc.kune.core.shared.domain.utils.StateToken)
    */
   @Override
+  public Boolean delParticipants(final String userHash, final StateToken token,
+      final String[] participants) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public Boolean delPublicParticipant(final String userHash, final StateToken token)
+      throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
   public StateAbstractDTO getContent(final String userHash, final StateToken token)
       throws DefaultException {
     return contentMock;
@@ -333,6 +347,12 @@ public class ContentRPCMock implements ContentService, RPC {
   /* (non-Javadoc)
    * @see cc.kune.core.client.rpcservices.ContentService#writeTo(java.lang.String, cc.kune.core.shared.domain.utils.StateToken, boolean)
    */
+  @Override
+  public StateContentDTO setVisible(final String userHash, final StateToken token, final boolean visible) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
   @Override
   public String writeTo(final String userHash, final StateToken token, final boolean onlyToAdmins)
       throws DefaultException {

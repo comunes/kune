@@ -30,19 +30,19 @@ package cc.kune.core.shared;
  */
 public final class SessionConstants {
 
-  /** The Constant _AN_HOUR in millisecons. */
+  /** The Constant _AN_HOUR in millisecons */
   public final static int _1_HOUR = 1000 * 60 * 60;
 
-  /** The Constant _2_HOURS in millisecons. */
+  /** The Constant _2_HOURS in millisecons */
   public final static int _2_HOURS = 2 * _1_HOUR;
 
-  /** The Constant _5_HOURS in millisecons. */
+  /** The Constant _5_HOURS in millisecons */
   public final static int _5_HOURS = 5 * _1_HOUR;
 
-  /** The Constant A_DAY in millisecons. */
+  /** The Constant A_DAY in millisecons */
   public final static long A_DAY = _1_HOUR * 24;
 
-  /** The Constant A_WEEK in millisecons. */
+  /** The Constant A_WEEK in millisecons */
   public final static long A_WEEK = A_DAY * 7;
 
   /** The Constant ANON_SESSION_DURATION. */
@@ -51,10 +51,18 @@ public final class SessionConstants {
   /** The Constant ANON_SESSION_DURATION_AFTER_REG. */
   public final static long ANON_SESSION_DURATION_AFTER_REG = A_DAY * 365;
 
+  /**
+   * Use http://kune.example.com/?dev=true to get some development functionality
+   */
+  public final static String DEVELOPMENT = "dev";
+
   /** The Constant JSESSIONID. */
   public static final String JSESSIONID = "JSESSIONID";
 
-  /** The Constant MIN_SIGN_IN_FOR_NEWBIES (number of access to kune under that, the user is viewed as a newbie (so, more help is needed). */
+  /**
+   * The Constant MIN_SIGN_IN_FOR_NEWBIES (number of access to kune under that,
+   * the user is viewed as a newbie (so, more help is needed)
+   */
   public final static long MIN_SIGN_IN_FOR_NEWBIES = 10;
   // session duration
   /** The Constant SESSION_DURATION. */

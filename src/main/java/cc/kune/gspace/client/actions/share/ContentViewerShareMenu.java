@@ -31,31 +31,17 @@ import cc.kune.gspace.client.actions.SNActionStyles;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ContentViewerShareMenu.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
 @Singleton
 public class ContentViewerShareMenu extends MenuLoggedDescriptor {
 
-  /** The Constant ID. */
-  private static final String ID = "k-cnt-viewer-share-menu";
+  public static final String ID = "k-cnt-viewer-share-menu";
 
-  /**
-   * Instantiates a new content viewer share menu.
-   *
-   * @param res the res
-   * @param i18n the i18n
-   * @param rightsManager the rights manager
-   */
   @Inject
   public ContentViewerShareMenu(final IconicResources res, final I18nTranslationService i18n,
       final AccessRightsClientManager rightsManager) {
     super(rightsManager);
     this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with group members, etc")).withIcon(
-        res.world()).withStyles(SNActionStyles.MENU_BTN_STYLE_RIGHT).withId(ID);
+        res.world()).withStyles(SNActionStyles.MENU_BTN_STYLE_LEFT).withId(ID);
   }
 
 }

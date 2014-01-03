@@ -28,7 +28,9 @@ import java.util.Map;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.Manager;
 import cc.kune.core.server.manager.SearchResult;
+import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.ContentStatus;
+import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.domain.RateResult;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.domain.Container;
@@ -95,14 +97,8 @@ public interface ContentManager extends Manager<Content, Long> {
    */
   boolean addParticipants(User user, Long contentId, Group group, SocialNetworkSubGroup whichOnes);
 
-  /**
-   * Copy content.
-   *
-   * @param user the user
-   * @param container the container
-   * @param contentToCopy the content to copy
-   * @return the content
-   */
+  Content addToAcl(Content content, Group group, AccessRol rol);
+
   Content copyContent(User user, Container container, Content contentToCopy);
 
   /**
@@ -120,13 +116,10 @@ public interface ContentManager extends Manager<Content, Long> {
   Content createGadget(User user, Container container, String gadgetname, String typeIdChild,
       String title, String body, Map<String, String> gadgetProperties);
 
-  /**
-   * Find if exists title.
-   *
-   * @param container the container
-   * @param title the title
-   * @return true, if successful
-   */
+  boolean delParticipants(User user, Long contentId, String... participants);
+
+  boolean delPublicParticipant(User user, Long contentId);
+
   boolean findIfExistsTitle(Container container, String title);
 
   /**
@@ -200,15 +193,8 @@ public interface ContentManager extends Manager<Content, Long> {
    */
   void removeAuthor(User user, Long contentId, String authorShortName) throws DefaultException;
 
-  /**
-   * Rename content.
-   *
-   * @param user the user
-   * @param contentId the content id
-   * @param newName the new name
-   * @return the content
-   * @throws DefaultException the default exception
-   */
+  Content removeFromAcl(Content content, Group group, AccessRol rol);
+
   Content renameContent(User user, Long contentId, String newName) throws DefaultException;
 
   /**
@@ -274,14 +260,8 @@ public interface ContentManager extends Manager<Content, Long> {
   SearchResult<?> searchMime(String search, Integer firstResult, Integer maxResults, String group,
       String mimetype, String mimetype2);
 
-  /**
-   * Sets the gadget properties.
-   *
-   * @param user the user
-   * @param content the content
-   * @param gadgetName the gadget name
-   * @param properties the properties
-   */
+  Content setAclMode(Content content, AccessRol rol, GroupListMode mode);
+
   void setGadgetProperties(User user, Content content, String gadgetName, Map<String, String> properties);
 
   /**
@@ -331,5 +311,7 @@ public interface ContentManager extends Manager<Content, Long> {
    * @throws DefaultException the default exception
    */
   void setTags(User user, Long contentId, String tags) throws DefaultException;
+
+  Content setVisible(Content content, boolean visible);
 
 }

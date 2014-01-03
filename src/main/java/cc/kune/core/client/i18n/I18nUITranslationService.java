@@ -213,11 +213,10 @@ public class I18nUITranslationService extends I18nTranslationService {
    *          String value of the new locale to go to.
    */
   private void changeLanguageInUrl(final String newLocale) {
-    final Location location = WindowUtils.getLocation();
-    final String hash = location.getHash();
-    final String query = location.getQueryString();
-    final String path = location.getPath();
-    final String protocol = location.getProtocol();
+    final String hash = WindowUtils.getHash();
+    final String query = WindowUtils.getQueryString();
+	final String path = WindowUtils.getPath();
+    final String protocol = WindowUtils.getProtocol();
     final String newUrl = I18nUrlUtils.changeLang(query + (TextUtils.notEmpty(hash) ? hash : ""),
         newLocale);
     Log.info("Locale current query: " + query);

@@ -82,7 +82,8 @@ import com.google.inject.Singleton;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
-public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager, GroupManagerDefaultMBean {
+public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager,
+    GroupManagerDefaultMBean {
 
   /** The file manager. */
   private final FileManager fileManager;
@@ -140,7 +141,8 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
       final KuneBasicProperties properties, final LicenseManager licenseManager,
       final LicenseFinder licenseFinder, final FileManager fileManager,
       final ServerToolRegistry serverToolRegistry, final Provider<TrashServerTool> trashTool,
-      final I18nTranslationService i18n, final SocialNetworkCache snCache, MBeanRegistry mBeanRegistry) {
+      final I18nTranslationService i18n, final SocialNetworkCache snCache,
+      final MBeanRegistry mBeanRegistry) {
     super(provider, Group.class);
     mBeanRegistry.registerAsMBean(this, GroupManagerDefaultMBean.MBEAN_OBJECT_NAME);
     this.finder = finder;
@@ -437,7 +439,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
   @KuneTransactional
   public SearchResult<Group> search(final String search, final Integer firstResult,
       final Integer maxResults) {
-    // Wilcard is not allowed in the first character of the query
+    // Wildcard is not allowed in the first character of the query
     final String escapedQuery = QueryParser.escape(search) + SearcherConstants.WILDCARD;
     return super.search(new String[] { escapedQuery, escapedQuery, escapedQuery }, new String[] {
         "longName", "shortName", "publicDesc" }, firstResult, maxResults);

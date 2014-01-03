@@ -56,7 +56,7 @@ public class ContentViewerOptionsMenu extends MenuDescriptor {
       this.withText(I18n.t("More"));
       this.withStyles(SNActionStyles.MENU_BTN_STYLE_RIGHT);
     } else {
-      this.withStyles(SNActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT);
+      this.withStyles(SNActionStyles.OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT);
     }
   }
 

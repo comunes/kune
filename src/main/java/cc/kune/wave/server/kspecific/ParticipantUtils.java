@@ -22,10 +22,13 @@
  */
 package cc.kune.wave.server.kspecific;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
@@ -259,6 +262,12 @@ public class ParticipantUtils {
     } catch (final InvalidParticipantAddress e) {
       throw new DefaultException("Error getting Wave participant Id");
     }
+  }
+
+  public Set<String> toSet(final String[] array) {
+    final Set<String> set = new TreeSet<String>(Collections.reverseOrder());
+    set.addAll(Arrays.asList(array));
+    return set;
   }
 
 }

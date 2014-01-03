@@ -22,10 +22,12 @@
  */
 package cc.kune.trash.client.actions;
 
-import static cc.kune.trash.shared.TrashToolConstants.*;
+import static cc.kune.gspace.client.actions.ActionGroups.TOPBAR;
+import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
+import static cc.kune.trash.shared.TrashToolConstants.TYPE_ROOT;
 import cc.kune.chat.client.actions.GoParentChatBtn;
-import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.ActionRegistryByType;
+import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -37,51 +39,24 @@ import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class TrashClientActions.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
 public class TrashClientActions extends AbstractFoldableToolActions {
 
-  /** The all. */
   final String[] all = { TYPE_ROOT };
-  
-  /** The containers. */
   final String[] containers = { TYPE_ROOT };
-  
-  /** The containers no root. */
   final String[] containersNoRoot = {};
 
-  /**
-   * Instantiates a new trash client actions.
-   *
-   * @param i18n the i18n
-   * @param session the session
-   * @param stateManager the state manager
-   * @param registry the registry
-   * @param res the res
-   * @param refresh the refresh
-   * @param folderGoUp the folder go up
-   * @param emptyTrashBin the empty trash bin
-   * @param optionsMenuContent the options menu content
-   */
+  @SuppressWarnings("unchecked")
   @Inject
-  public TrashClientActions(final I18nTranslationService i18n, final Session session,
-      final StateManager stateManager, final ActionRegistryByType registry, final CoreResources res,
-      final Provider<RefreshContentMenuItem> refresh, final Provider<GoParentChatBtn> folderGoUp,
-      final Provider<EmptyTrashBinBtn> emptyTrashBin,
+  public TrashClientActions(final Session session, final ActionRegistryByType registry,
+      final CoreResources res, final Provider<RefreshContentMenuItem> refresh,
+      final Provider<GoParentChatBtn> folderGoUp, final Provider<EmptyTrashBinBtn> emptyTrashBin,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent) {
-    super(session, stateManager, i18n, registry);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, optionsMenuContent, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, refresh, all);
-    actionsRegistry.addAction(TOOL_NAME, ActionGroups.TOPBAR, emptyTrashBin, TYPE_ROOT);
+    super(TOOL_NAME, session, registry);
+    add(TOPBAR, all, optionsMenuContent);
+    add(TOPBAR, all, refresh);
+    add(TOOL_NAME, TOPBAR, emptyTrashBin, TYPE_ROOT);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#createPostSessionInitActions()
-   */
   @Override
   protected void createPostSessionInitActions() {
   }

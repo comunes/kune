@@ -53,7 +53,6 @@ public class AddAdminMembersToContentMenuItem extends AddMembersToContentMenuIte
       final ContentViewerShareMenu menu, final IconicResources res) {
     super(i18n.t("Share with admins"), SocialNetworkSubGroup.ADMINS, action, menu, res);
     add(isAGroupCondition);
-
   }
 
 }

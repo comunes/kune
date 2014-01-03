@@ -100,14 +100,16 @@ public abstract class RolActionAutoUpdated extends AbstractExtendedAction {
   public void refreshStatus(final AccessRolDTO rolRequired, final boolean authNeed,
       final boolean isLogged, final boolean visibleForMembers, final boolean visibleForNonMemb,
       final AccessRights newRights) {
+
+    // TODO move this to {link @RolActionHelper}
     boolean newEnabled = false;
     if (authNeed && !isLogged) {
       newEnabled = false;
     } else {
       // Auth ok
-      newEnabled = RolComparator.isEnabled(rolRequired, newRights);
+      newEnabled = RolActionHelper.isAuthorized(rolRequired, newRights);
       if (newEnabled) {
-        final boolean isMember = RolComparator.isMember(newRights);
+        final boolean isMember = RolActionHelper.isMember(newRights);
         newEnabled = isMember && visibleForMembers || !isMember && visibleForNonMemb;
       }
     }

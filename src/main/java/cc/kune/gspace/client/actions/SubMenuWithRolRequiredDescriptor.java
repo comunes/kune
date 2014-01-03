@@ -20,38 +20,25 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.actions.share;
+package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
+import cc.kune.core.client.actions.RolActionHelper;
+import cc.kune.core.client.events.AccessRightsChangedEvent;
+import cc.kune.core.client.events.AccessRightsChangedEvent.AccessRightsChangedHandler;
+import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.shared.dto.AccessRolDTO;
 
-import com.google.inject.Inject;
-
-// TODO: Auto-generated Javadoc
-/**
- * The Class ContentViewerOptionsShareSubMenu (not used yet).
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
-public class ContentViewerOptionsShareSubMenu extends SubMenuDescriptor {
-
-  /** The Constant ID. */
-  public static final String ID = "k-cnt-viewer-share-opt-submenu";
-
-  /**
-   * Instantiates a new content viewer options share sub menu.
-   *
-   * @param i18n the i18n
-   * @param res the res
-   * @param parent the parent
-   */
-  @Inject
-  public ContentViewerOptionsShareSubMenu(final I18nTranslationService i18n, final IconicResources res,
-      final ContentViewerOptionsMenu parent) {
-    super();
-    this.withText(i18n.t("Share")).withIcon(res.add()).withId(ID).withParent(parent, false);
+public class SubMenuWithRolRequiredDescriptor extends SubMenuDescriptor {
+  public SubMenuWithRolRequiredDescriptor(final AccessRolDTO rolRequired,
+      final AccessRightsClientManager rightsManager) {
+    rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
+      @Override
+      public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
+        SubMenuWithRolRequiredDescriptor.this.setVisible(RolActionHelper.isAuthorized(rolRequired,
+            event.getCurrentRights()));
+      }
+    });
   }
 
 }

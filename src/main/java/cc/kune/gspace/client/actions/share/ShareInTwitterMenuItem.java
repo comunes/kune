@@ -60,9 +60,9 @@ public class ShareInTwitterMenuItem extends AbstractShareInSocialNetMenuItem {
             false,
             URL_TEMPLATE,
             URL.encodeQueryString("#"
-                + getTitle(session)
+                + ShareInSocialNetUtils.getTitle(session)
                 + " "
-                + getCurrentUrl(session)
+                + ShareInSocialNetUtils.getCurrentUrl(session)
                 + " "
                 + i18n.tWithNT("via [%s]", "used in references 'something via @someone'",
                     i18n.getSiteCommonName()))));

@@ -33,7 +33,6 @@ import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.gspace.client.actions.ActionUtils;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RenameAction;
-import cc.kune.gspace.client.actions.share.ContentViewerOptionsShareSubMenu;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.GSpaceArmorDefault;
@@ -114,6 +113,16 @@ import cc.kune.gspace.client.options.tools.UserOptTools;
 import cc.kune.gspace.client.options.tools.UserOptToolsPanel;
 import cc.kune.gspace.client.options.tools.UserOptToolsPresenter;
 import cc.kune.gspace.client.options.tools.UserOptToolsView;
+import cc.kune.gspace.client.share.ShareDialog;
+import cc.kune.gspace.client.share.ShareDialogPanel;
+import cc.kune.gspace.client.share.ShareDialogPresenter;
+import cc.kune.gspace.client.share.ShareToListPanel;
+import cc.kune.gspace.client.share.ShareToListView;
+import cc.kune.gspace.client.share.ShareToOthersPanel;
+import cc.kune.gspace.client.share.ShareToOthersView;
+import cc.kune.gspace.client.share.ShareToTheNetPanel;
+import cc.kune.gspace.client.share.ShareToTheNetView;
+import cc.kune.gspace.client.share.items.ShareItemFactory;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
 import cc.kune.gspace.client.style.GSpaceBackgroundManagerImpl;
 import cc.kune.gspace.client.tags.TagsSummaryPanel;
@@ -225,7 +234,6 @@ public class GSpaceGinModule extends ExtendedGinModule {
     // Actions
     s(ContentViewerOptionsMenu.class);
     s(ContentViewerShareMenu.class);
-    s(ContentViewerOptionsShareSubMenu.class);
     s(RenameAction.class);
     s(FeedbackBottomPanel.class);
     s(WriteToBuddyHeaderButton.class);
@@ -246,5 +254,18 @@ public class GSpaceGinModule extends ExtendedGinModule {
         I18nTranslatorPresenter.I18nTranslatorProxy.class);
     s(I18nTranslator.class, I18nTranslatorPresenter.class);
     s(SiteOptionsI18nTranslatorAction.class);
+
+    // ShareDialog
+    bindPresenter(ShareDialogPresenter.class, ShareDialogPresenter.ShareDialogView.class,
+        ShareDialogPanel.class, ShareDialogPresenter.ShareDialogProxy.class);
+    s(ShareDialog.class, ShareDialogPresenter.class);
+    s(ShareToListView.class, ShareToListPanel.class);
+    s(ShareToOthersView.class, ShareToOthersPanel.class);
+    s(ShareToTheNetView.class, ShareToTheNetPanel.class);
+    s(ShareItemFactory.class);
+    s(ShareToTheNetPanel.class);
+    s(ShareToOthersPanel.class);
+
+    requestStaticInjection(ShareItemFactory.class);
   }
 }

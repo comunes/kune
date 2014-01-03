@@ -42,12 +42,10 @@ public class ButtonDescriptor extends AbstractGuiActionDescrip {
     super(action);
   }
 
-  /**
-   * Instantiates a new button descriptor.
-   *
-   * @param text the text
-   * @param action the action
-   */
+  public ButtonDescriptor(final AbstractGuiActionDescrip descr) {
+    super(descr);
+  }
+
   public ButtonDescriptor(final String text, final AbstractAction action) {
     this(action);
     putValue(Action.NAME, text);

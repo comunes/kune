@@ -1,156 +1,111 @@
 /*
- * Copyright 2006, 2012 Robert Hanson <iamroberthanson AT gmail.com>
+ * Copyright (C) 2007-2014 The kune development team (see CREDITS for details)
+ * This file is part of kune.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
  *
- *    http://www.apache.org/licenses/LICENSE-2.0
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
 package cc.kune.common.client.utils;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class WindowUtils.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
+import com.google.gwt.user.client.Window;
+
 public class WindowUtils {
 
   /**
    * https://developer.mozilla.org/en/DOM/window.location
-   *
-   * @param newUrl the new url
+   * 
+   * @param newUrl
    */
   public static native void changeHref(String newUrl) /*-{
-                                                      $wnd.location.href = newUrl;
-                                                      }-*/;
+		$wnd.location.href = newUrl;
+  }-*/;
 
   /**
    * https://developer.mozilla.org/en/DOM/window.location
    * 
    * "If you need to change pathname but keep the hash as is, use the replace() method instead, which should work consistently across browsers."
-   *
-   * @param newUrl the new url
+   * 
+   * @param newUrl
    */
-  public static native void changeHrefKeepHash(String newUrl) /*-{
-                                                              // $wnd.location.href = newUrl;
-                                                              $wnd.location.replace(newUrl);
-                                                              }-*/;
+  public static void changeHrefKeepHash(final String newUrl) {
+    Window.Location.replace(newUrl);
+  }
 
-  /**
-   * Dont has web socket.
-   *
-   * @return true, if successful
-   */
   public static native boolean dontHasWebSocket() /*-{
-                                                  return !window.WebSocket
-                                                  }-*/;
+		return !window.WebSocket
+  }-*/;
 
   /**
-   * Gets the hash.
-   *
-   * @return the hash
-   */
-  private static native String getHash() /*-{
-                                         return $wnd.location.hash;
-                                         }-*/;
+   * sample: #site.docs.3.1
+   **/
+  public static String getHash() {
+    return Window.Location.getHash();
+  };
 
   /**
-   * Gets the host.
-   *
-   * @return the host
+   * sample: localhost:8080
+   * 
+   * @return
    */
-  private static native String getHost() /*-{
-                                         return $wnd.location.host;
-                                         }-*/;
-
-  /**
-   * Gets the host name.
-   *
-   * @return the host name
-   */
-  private static native String getHostName() /*-{
-                                             return $wnd.location.hostname;
-                                             }-*/;
-
-  /**
-   * Gets the href.
-   *
-   * @return the href
-   */
-  private static native String getHref() /*-{
-                                         return $wnd.location.href;
-                                         }-*/;
-
-  /**
-   * Gets the location.
-   *
-   * @return the location
-   */
-  public static Location getLocation() {
-    final Location result = new Location();
-    result.setHash(getHash());
-    result.setHost(getHost());
-    result.setHostName(getHostName());
-    result.setHref(getHref());
-    result.setPath(getPath());
-    result.setPort(getPort());
-    result.setProtocol(getProtocol());
-    result.setQueryString(getQueryString());
-    return result;
+  public static String getHost() {
+    return Window.Location.getHost();
   }
 
   /**
-   * Gets the path.
-   *
-   * @return the path
+   * sample: localhost
+   * 
+   * @return
    */
-  private static native String getPath() /*-{
-                                         return $wnd.location.pathname;
-                                         }-*/;
+  public static String getHostName() {
+    return Window.Location.getHostName();
+  }
 
   /**
-   * Gets the port.
-   *
-   * @return the port
-   */
-  private static native String getPort() /*-{
-                                         return $wnd.location.port;
-                                         }-*/;
+   * sample: http://localhost:8080/ws/#site.docs.3.1?locale=en&log_level=INFO
+   **/
+  public static String getHref() {
+    return Window.Location.getHref();
+  };
+
+  public static String getParameter(final String param) {
+    return Window.Location.getParameter(param);
+  }
 
   /**
-   * Gets the protocol.
-   *
-   * @return the protocol
+   * sample: /ws/
+   * 
+   * @return
    */
-  private static native String getProtocol() /*-{
-                                             return $wnd.location.protocol;
-                                             }-*/;
+  public static String getPath() {
+    return Window.Location.getPath();
+  }
+
+  public static String getPort() {
+    return Window.Location.getPort();
+  }
+
+  public static String getProtocol() {
+    return Window.Location.getProtocol();
+  }
 
   /**
-   * Gets the query string.
-   *
-   * @return the query string
+   * sample: ?locale=en&log_level=INFO
+   * 
+   * @return
    */
-  private static native String getQueryString() /*-{
-                                                return $wnd.location.search;
-                                                }-*/;
-
-  /**
-   * Gets the parameter.
-   *
-   * @param param the param
-   * @return the parameter
-   */
-  public static String getParameter(String param) {
-    return getLocation().getParameter(param);
+  public static String getQueryString() {
+    return Window.Location.getQueryString();
   }
 
 }

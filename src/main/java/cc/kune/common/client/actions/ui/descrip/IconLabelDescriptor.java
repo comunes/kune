@@ -23,6 +23,7 @@
 package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.BaseAction;
 
 import com.google.gwt.resources.client.ImageResource;
@@ -50,7 +51,7 @@ public class IconLabelDescriptor extends AbstractGuiActionDescrip {
    * @param text the text
    */
   public IconLabelDescriptor(final String text) {
-    this(new BaseAction(text, null));
+    this(text, "");
   }
 
   /**
@@ -60,7 +61,7 @@ public class IconLabelDescriptor extends AbstractGuiActionDescrip {
    * @param icon the icon
    */
   public IconLabelDescriptor(final String text, final ImageResource icon) {
-    this(new BaseAction(text, null, icon));
+    this(text, null, icon);
   }
 
   /**
@@ -70,7 +71,7 @@ public class IconLabelDescriptor extends AbstractGuiActionDescrip {
    * @param tooltip the tooltip
    */
   public IconLabelDescriptor(final String text, final String tooltip) {
-    this(new BaseAction(text, tooltip));
+    this(text, tooltip, "");
   }
 
   /**
@@ -82,6 +83,9 @@ public class IconLabelDescriptor extends AbstractGuiActionDescrip {
    */
   public IconLabelDescriptor(final String text, final String tooltip, final ImageResource icon) {
     this(new BaseAction(text, tooltip, icon));
+    putValue(Action.NAME, text);
+    putValue(Action.TOOLTIP, tooltip);
+    putValue(Action.SMALL_ICON, icon);
   }
 
   /**
@@ -93,6 +97,9 @@ public class IconLabelDescriptor extends AbstractGuiActionDescrip {
    */
   public IconLabelDescriptor(final String text, final String tooltip, final String icon) {
     this(new BaseAction(text, tooltip, icon));
+    putValue(Action.NAME, text);
+    putValue(Action.TOOLTIP, tooltip);
+    putValue(Action.SMALL_ICON, icon);
   }
 
   /* (non-Javadoc)

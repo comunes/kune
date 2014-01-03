@@ -27,25 +27,43 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.inject.Inject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class RolAction.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class RolAction extends AbstractExtendedAction {
 
   /** The auth need. */
   private final boolean authNeed;
-  
+
+  /** The higher rol. */
+  private AccessRolDTO higherRol;
+
   /** The rol required. */
   private final AccessRolDTO rolRequired;
 
   /**
    * Instantiates a new rol action.
-   *
-   * @param rolRequired the Rol required to allow this action
-   * @param authNeed if we need to be authenticated to execute this action
+   * 
+   * @param rolRequired
+   *          the rol required to allow this action
+   * @param higherRol
+   *          the higher rol to allo this action
+   * @param authNeed
+   *          if we need to be authenticated to execute this action
+   */
+  public RolAction(final AccessRolDTO rolRequired, final AccessRolDTO higherRol, final boolean authNeed) {
+    this.rolRequired = rolRequired;
+    this.higherRol = higherRol;
+    this.authNeed = authNeed;
+  }
+
+  /**
+   * Instantiates a new rol action.
+   * 
+   * @param rolRequired
+   *          the Rol required to allow this action
+   * @param authNeed
+   *          if we need to be authenticated to execute this action
    */
   @Inject
   public RolAction(final AccessRolDTO rolRequired, final boolean authNeed) {
@@ -54,8 +72,17 @@ public abstract class RolAction extends AbstractExtendedAction {
   }
 
   /**
+   * Gets the higher rol.
+   * 
+   * @return the higher rol
+   */
+  public AccessRolDTO getHigherRol() {
+    return higherRol;
+  }
+
+  /**
    * Gets the rol required.
-   *
+   * 
    * @return the rol required
    */
   public AccessRolDTO getRolRequired() {
@@ -64,11 +91,23 @@ public abstract class RolAction extends AbstractExtendedAction {
 
   /**
    * Checks if is auth need.
-   *
+   * 
    * @return true, if is auth need
    */
   public boolean isAuthNeed() {
     return authNeed;
+  }
+
+  /**
+   * When used, sets the maximum rol to allow this action, this is useful to
+   * allow actions only for viewers and/or editors, but not for admins, for
+   * instance.
+   * 
+   * @param higherRol
+   *          the new higher rol
+   */
+  public void setHigherRol(final AccessRolDTO higherRol) {
+    this.higherRol = higherRol;
   }
 
 }

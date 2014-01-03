@@ -28,62 +28,17 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.domain.Group;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Interface ListServerService.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
 public interface ListServerService {
 
-  /**
-   * Creates the list.
-   *
-   * @param userHash the user hash
-   * @param parentToken the parent token
-   * @param listName the list name
-   * @param description the description
-   * @param isPublic the is public
-   * @return the state container dto
-   */
   StateContainerDTO createList(final String userHash, final StateToken parentToken,
       final String listName, final String description, boolean isPublic);
 
-  /**
-   * New post.
-   *
-   * @param userHash the user hash
-   * @param parentToken the parent token
-   * @param postTitle the post title
-   * @return the state content dto
-   */
   StateContentDTO newPost(final String userHash, final StateToken parentToken, final String postTitle);
 
-  /**
-   * Sets the public.
-   *
-   * @param token the token
-   * @param isPublic the is public
-   * @return the state container dto
-   */
   StateContainerDTO setPublic(final StateToken token, final Boolean isPublic);
 
-  /**
-   * Subscribe current user to list.
-   *
-   * @param token the token
-   * @param subscribe the subscribe
-   * @return the state container dto
-   */
   StateContainerDTO subscribeCurrentUserToList(final StateToken token, final Boolean subscribe);
 
-  /**
-   * Subscribe to list without perm check.
-   *
-   * @param token the token
-   * @param userGroup the user group
-   * @return the state container dto
-   */
-  StateContainerDTO subscribeToListWithoutPermCheck(StateToken token, Group userGroup);
+  StateContainerDTO subscribeToListWithoutPermCheck(StateToken token, Group userGroup, Boolean subscribe);
 
 }

@@ -7,7 +7,7 @@
 <listAttribute key="com.google.gwt.eclipse.core.ENTRY_POINT_MODULES">
 <listEntry value="cc.kune.KuneDev"/>
 </listAttribute>
-<stringAttribute key="com.google.gwt.eclipse.core.URL" value="/?locale=en&amp;log_level=ALL"/>
+<stringAttribute key="com.google.gwt.eclipse.core.URL" value="/?locale=en&amp;log_level=ALL&amp;dev=true"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
 <listEntry value="/kune"/>
 </listAttribute>
@@ -20,7 +20,7 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="com.google.gdt.eclipse.maven.mavenClasspathProvider"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-war &quot;${workspace_loc:/kune}/target/kune-0.3.0-SNAPSHOT&quot; -startupUrl /?locale=en&amp;log_level=ALL -noserver -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 cc.kune.KuneDev"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-war &quot;${workspace_loc:/kune}/target/kune-0.3.0-SNAPSHOT&quot; -startupUrl /?locale=en&amp;log_level=ALL&amp;dev=true -noserver -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 cc.kune.KuneDev"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="kune"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xss512m -Xmx1024m -XX:MaxPermSize=1024m"/>
 </launchConfiguration>

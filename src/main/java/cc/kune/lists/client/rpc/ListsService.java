@@ -38,47 +38,16 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 @RemoteServiceRelativePath("ListsService")
 public interface ListsService extends RemoteService {
 
-  /**
-   * Creates the list.
-   *
-   * @param hash the hash
-   * @param parentToken the parent token
-   * @param name the name
-   * @param description the description
-   * @param isPublic the is public
-   * @return the state container dto
-   */
   StateContainerDTO createList(String hash, StateToken parentToken, String name, String description,
       boolean isPublic);
 
-  /**
-   * New post.
-   *
-   * @param userHash the user hash
-   * @param parentToken the parent token
-   * @param title the title
-   * @return the state content dto
-   */
   public StateContentDTO newPost(final String userHash, final StateToken parentToken, final String title);
 
-  /**
-   * Sets the public.
-   *
-   * @param hash the hash
-   * @param token the token
-   * @param isPublic the is public
-   * @return the state container dto
-   */
   StateContainerDTO setPublic(String hash, StateToken token, Boolean isPublic);
 
-  /**
-   * Subscribe to list.
-   *
-   * @param hash the hash
-   * @param token the token
-   * @param subscribe the subscribe
-   * @return the state container dto
-   */
-  StateContainerDTO subscribeToList(String hash, StateToken token, Boolean subscribe);
+  StateContainerDTO subscribeAnUserToList(String hash, StateToken token, String newSubscriber,
+      Boolean subscribe);
+
+  StateContainerDTO subscribeMyselfToList(String hash, StateToken token, Boolean subscribe);
 
 }

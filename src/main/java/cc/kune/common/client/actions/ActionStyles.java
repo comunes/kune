@@ -41,7 +41,8 @@ public class ActionStyles {
   
   /** The Constant MENU_BTN_STYLE_NO_BORDER_RIGHT. */
   public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
-  
+  //  public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
+
   /** The Constant MENU_BTN_STYLE_RIGHT. */
   public static final String MENU_BTN_STYLE_RIGHT = "gwt-Button k-button, k-btn, k-5corners, k-def-docbtn, k-fr";
   
