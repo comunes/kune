@@ -193,6 +193,10 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   @Override
   public Content addToAcl(final Content content, final Group group, final AccessRol rol) {
+    // FIXME: we should remove the previous group from other previous lists
+    if (true) {
+      throw new RuntimeException("In development");
+    }
     final AccessLists acl = content.getAccessLists();
     final GroupList list = getListFromRol(rol, acl);
     list.add(group);

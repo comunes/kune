@@ -25,40 +25,38 @@ import com.google.inject.Singleton;
 @Singleton
 public class ShareItemFactory {
   @Inject
-  private static Provider<ShareItemOfAdmin> admin;
-  @Inject
   private static Provider<ContentEditableShareItemUi> contentEditable;
+  @Inject
+  private static Provider<ContentRolShareItemUi> contentRol;
   @Inject
   private static Provider<ContentVisibleShareItemUi> contentVisible;
   @Inject
-  private static Provider<ShareItemOfEditor> editor;
-  @Inject
   private static Provider<ListPublicShareItemUi> listPublic;
+  @Inject
+  private static Provider<ListRolShareItemUi> listRol;
   @Inject
   private static Provider<ShareItemOfOwner> owner;
   @Inject
   private static Provider<ShareItemOfParticipant> participant;
-  @Inject
-  private static Provider<ShareItemOfViewer> viewer;
-
-  public static ShareItemOfAdmin getAdmin() {
-    return admin.get();
-  }
 
   public static ContentEditableShareItemUi getContentEditableByAnyone() {
     return contentEditable.get();
+  }
+
+  public static ContentRolShareItemUi createContentItem() {
+    return contentRol.get();
   }
 
   public static ContentVisibleShareItemUi getContentVisibleByAnyone() {
     return contentVisible.get();
   }
 
-  public static ShareItemOfEditor getEditor() {
-    return editor.get();
-  }
-
   public static ListPublicShareItemUi getListPublicByAnyone() {
     return listPublic.get();
+  }
+
+  public static ListRolShareItemUi createListItem() {
+    return listRol.get();
   }
 
   public static ShareItemOfOwner getOwner() {
@@ -67,10 +65,6 @@ public class ShareItemFactory {
 
   public static ShareItemOfParticipant getParticipant() {
     return participant.get();
-  }
-
-  public static ShareItemOfViewer getViewer() {
-    return viewer.get();
   }
 
   public ShareItemFactory() {

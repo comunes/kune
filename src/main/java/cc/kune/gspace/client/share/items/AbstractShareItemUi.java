@@ -75,6 +75,7 @@ public abstract class AbstractShareItemUi extends Composite {
     actionsPanel.add(menuItems);
   }
 
+  @Deprecated
   public void setGroupName(final GroupDTO group) {
     final boolean isAnUser = group.isPersonal();
     withText((isAnUser ? "" : I18n.t("Group") + ": ") + group.getLongName());

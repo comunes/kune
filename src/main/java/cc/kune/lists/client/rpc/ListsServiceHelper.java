@@ -24,6 +24,7 @@ import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 
 import com.google.inject.Inject;
@@ -53,6 +54,10 @@ public class ListsServiceHelper {
             NotifyUser.hideProgress();
           }
         });
+  }
+
+  public void setRol(final String group, final AccessRolDTO rol, final SimpleCallback onSucess) {
+    NotifyUser.info("This should add '" + group + "' to list of rol: " + rol);
   }
 
   public void subscribeAnUserToList(final StateToken list, final String subscriber,

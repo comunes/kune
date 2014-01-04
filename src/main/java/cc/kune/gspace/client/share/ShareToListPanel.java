@@ -19,6 +19,7 @@
 package cc.kune.gspace.client.share;
 
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.share.items.ShareItemFactory;
 import cc.kune.lists.shared.ListsToolConstants;
@@ -67,8 +68,8 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
   }
 
   @Override
-  public void addAdmin(final GroupDTO admin) {
-    itemsPanel.add(ShareItemFactory.getAdmin().of(admin, typeId, this));
+  public void addAdmin(final GroupDTO group) {
+    addItemForSomeRol(group, AccessRolDTO.Administrator);
   }
 
   @Override
@@ -78,7 +79,17 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
 
   @Override
   public void addEditor(final GroupDTO group) {
-    itemsPanel.add(ShareItemFactory.getEditor().of(group, typeId, this));
+    addItemForSomeRol(group, AccessRolDTO.Editor);
+  }
+
+  private void addItemForSomeRol(final GroupDTO group, final AccessRolDTO rol) {
+    if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
+      // FIXME
+      // itemsPanel.add(ShareItemFactory.getListPublicByAnyone().with(false));
+      itemsPanel.add(ShareItemFactory.createListItem().with(rol, group.getShortName()));
+    } else {
+      itemsPanel.add(ShareItemFactory.createContentItem().with(rol, group.getShortName()));
+    }
   }
 
   @Override
@@ -106,8 +117,8 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
   }
 
   @Override
-  public void addViewer(final GroupDTO viewer) {
-    itemsPanel.add(ShareItemFactory.getViewer().of(viewer, this).with(typeId));
+  public void addViewer(final GroupDTO group) {
+    addItemForSomeRol(group, AccessRolDTO.Viewer);
   }
 
   @Override
