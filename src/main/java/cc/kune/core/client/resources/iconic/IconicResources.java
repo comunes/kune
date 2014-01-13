@@ -482,6 +482,14 @@ public interface IconicResources extends ClientBundle {
   ImageResource noCopyleftWhite();
 
   /**
+   * World.
+   * 
+   * @return the image resource
+   */
+  @Source("no-world.png")
+  ImageResource noWorld();
+
+  /**
    * Picture add.
    * 
    * @return the image resource
