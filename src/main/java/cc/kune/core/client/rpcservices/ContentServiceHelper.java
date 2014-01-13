@@ -148,6 +148,7 @@ public class ContentServiceHelper {
             if (result) {
               NotifyUser.info(i18n.t("User '[%s]' added as participant", userName));
               onAdd.onCallback();
+              refreshState();
             } else {
               NotifyUser.info(i18n.t("This user is already participating"));
             }
@@ -174,6 +175,9 @@ public class ContentServiceHelper {
             NotifyUser.info(result ? subGroup.equals(SocialNetworkSubGroup.PUBLIC) ? i18n.t("Shared with general public. Now anyone can participate")
                 : i18n.t("Shared with members")
                 : i18n.t("All these members are already partipating"));
+            if (result) {
+              refreshState();
+            }
           }
         });
   }
@@ -223,6 +227,7 @@ public class ContentServiceHelper {
           public void onSuccess(final Boolean result) {
             onSuccess.onCallback();
             NotifyUser.info(i18n.t("Not editable by anyone: Now only editors can participate"));
+            refreshState();
           }
         });
   }
@@ -255,6 +260,10 @@ public class ContentServiceHelper {
         });
   }
 
+  private void refreshState() {
+    stateManager.refreshCurrentStateWithoutCache();
+  }
+
   public void setEditableByAnyone(final boolean editable, final SimpleCallback onSuccess) {
     if (editable) {
       addParticipants(SocialNetworkSubGroup.PUBLIC, onSuccess);
@@ -271,6 +280,7 @@ public class ContentServiceHelper {
             onSuccess.onCallback();
             NotifyUser.info(i18n.t(visible ? "Now, this is visible for everyone"
                 : "Now, this is not visible for everyone"));
+            stateManager.setRetrievedState(result);
           }
         });
   }
