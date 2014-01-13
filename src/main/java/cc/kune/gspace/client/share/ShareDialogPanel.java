@@ -45,7 +45,7 @@ public class ShareDialogPanel extends ViewImpl implements ShareDialogView {
   public ShareDialogPanel(final ShareToListView listView, final ShareToTheNetPanel shareToTheNetPanel,
       final ShareToOthersPanel shareToOthersPanel) {
     final Builder builder = new BasicTopDialog.Builder(DIALOG_ID, false, false, I18n.getDirection()).autoscroll(
-        true).width(280);
+        true).width(380);
     // builder.icon(icon);
     builder.firstButtonTitle(I18n.t("Close")).firstButtonId(FIRSTBUTTON_ID);
     dialog = builder.build();

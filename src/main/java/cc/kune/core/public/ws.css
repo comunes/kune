@@ -455,7 +455,7 @@ div.gwt-TabLayoutPanelTabInner img {
   background-color: #E0E0E0;
 }
 
-.k-publicspace-mask { /*	background-color: #fff !important;
+.k-publicspace-mask { /*  background-color: #fff !important;
   kfilter: alpha(opacity =       68) !important;
   -moz-opacity: 0.68 !important;
   -khtml-opacity: 0.68 !important;
@@ -1398,7 +1398,7 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML {
 
 div.k-shareitem {
   padding-left: 10px;
-  width: 250px;
+  width: 350px;
   color: #999999;
 }
 
@@ -1411,7 +1411,7 @@ div.k-shareitem {
 div.k-shareitem div.k-iconlabel {
   padding-left: 5px;
   overflow: hidden;
-  max-width: 165px;
+  max-width: 265px;
 }
 
 .k-share-item-actions {
@@ -1420,7 +1420,7 @@ div.k-shareitem div.k-iconlabel {
   font-size: 11px;
   overflow: hidden;
   float: right;
-  max-width: 100px;
+  max-width: 200px;
 }
 
 .k-share-item-noactions {

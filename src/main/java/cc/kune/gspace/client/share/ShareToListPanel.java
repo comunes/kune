@@ -58,7 +58,7 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
     itemsPanel = new VerticalPanel();
     final ScrollPanel scroll = new ScrollPanel();
     // scroll.setHeight(SCROLL_HEIGHT);
-    scroll.setWidth("280px");
+    scroll.setWidth("380px");
     DOM.setStyleAttribute(scroll.getElement(), "maxHeight", SCROLL_HEIGHT);
     scroll.setStyleName("k-sharelist-scroll");
     scroll.add(itemsPanel);
@@ -86,9 +86,9 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
     if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
       // FIXME
       // itemsPanel.add(ShareItemFactory.getListPublicByAnyone().with(false));
-      itemsPanel.add(ShareItemFactory.createListItem().with(rol, group.getShortName()));
+      itemsPanel.add(ShareItemFactory.createListItem().with(rol, group));
     } else {
-      itemsPanel.add(ShareItemFactory.createContentItem().with(rol, group.getShortName()));
+      itemsPanel.add(ShareItemFactory.createContentItem().with(rol, group));
     }
   }
 
