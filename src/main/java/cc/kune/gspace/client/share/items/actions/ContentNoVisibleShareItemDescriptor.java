@@ -25,6 +25,7 @@ package cc.kune.gspace.client.share.items.actions;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
+import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.gspace.client.share.items.ShareItemDescriptor;
 
 import com.google.inject.Inject;
@@ -35,8 +36,9 @@ import com.google.inject.Singleton;
 public class ContentNoVisibleShareItemDescriptor extends ShareItemDescriptor {
   public static class MakeContentVisibleAction extends AbstractMakeContentVisibleAction {
     @Inject
-    MakeContentVisibleAction(final Provider<ContentServiceHelper> helper) {
-      super(true, helper);
+    MakeContentVisibleAction(final Provider<ContentServiceHelper> helper,
+        final ContentViewerShareMenu menu) {
+      super(true, helper, menu);
     }
   }
 

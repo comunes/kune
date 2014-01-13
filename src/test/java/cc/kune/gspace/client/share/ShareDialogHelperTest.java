@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -38,6 +38,7 @@ import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
 import cc.kune.core.shared.dto.GroupType;
+import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.lists.shared.ListsToolConstants;
 
 public class ShareDialogHelperTest {
@@ -101,11 +102,12 @@ public class ShareDialogHelperTest {
     shareToOthers = Mockito.mock(ShareToOthersView.class);
     shareToList = Mockito.mock(ShareToListView.class);
     shareToTheNet = Mockito.mock(ShareToTheNetView.class);
+    final ContentViewerShareMenu menuBtn = Mockito.mock(ContentViewerShareMenu.class);
     currentGroup = new GroupDTO("current", "current", GroupType.PROJECT);
     group1 = new GroupDTO("shortname1", "longname 1", GroupType.PROJECT);
     group2 = new GroupDTO("shortname2", "longname 2", GroupType.PROJECT);
     group3 = new GroupDTO("shortname3", "longname 3", GroupType.PROJECT);
-    helper = new ShareDialogHelper(shareToList, shareToTheNet, shareToOthers);
+    helper = new ShareDialogHelper(shareToList, shareToTheNet, shareToOthers, menuBtn);
     helper.init(EVERYONE_IN_WAVE);
     shareToListInOrder = Mockito.inOrder(shareToList);
     participants = new ArrayList<String>();

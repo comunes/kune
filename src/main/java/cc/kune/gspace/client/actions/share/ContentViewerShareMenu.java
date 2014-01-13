@@ -23,9 +23,17 @@
 package cc.kune.gspace.client.actions.share;
 
 import cc.kune.common.client.actions.ActionStyles;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.AccessRightsClientManager;
+import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.domain.GroupListMode;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.actions.MenuLoggedDescriptor;
 
 import com.google.inject.Inject;
@@ -35,13 +43,39 @@ import com.google.inject.Singleton;
 public class ContentViewerShareMenu extends MenuLoggedDescriptor {
 
   public static final String ID = "k-cnt-viewer-share-menu";
+  private final IconicResources icons;
 
   @Inject
   public ContentViewerShareMenu(final IconicResources res, final I18nTranslationService i18n,
-      final AccessRightsClientManager rightsManager) {
+      final AccessRightsClientManager rightsManager, final StateManager stateManager) {
     super(rightsManager);
+    this.icons = res;
     this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with group members, etc")).withIcon(
         res.world()).withStyles(ActionStyles.MENU_BTN_STYLE_LEFT).withId(ID);
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        final StateAbstractDTO state = event.getState();
+        if (state instanceof StateContentDTO) {
+          final StateContentDTO cnt = (StateContentDTO) state;
+          final boolean anyone = cnt.getAccessLists().getViewers().getMode().equals(
+              GroupListMode.EVERYONE);
+          setVisibleToEveryone(anyone);
+        } else if (state instanceof StateContainerDTO) {
+          final StateContainerDTO cnt = (StateContainerDTO) state;
+          final boolean anyone = cnt.getAccessLists().getViewers().getMode().equals(
+              GroupListMode.EVERYONE);
+          setVisibleToEveryone(anyone);
+        }
+      }
+    });
+
+  }
+
+  public void setVisibleToEveryone(final Boolean visible) {
+    this.withIcon(visible ? icons.world() : icons.noWorld());
+    withToolTip(visible ? I18n.t("This is visible by everyone")
+        : I18n.t("This is not visible by everyone"));
   }
 
 }

@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,21 +24,26 @@ package cc.kune.gspace.client.share.items.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
+import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 
 import com.google.inject.Provider;
 
 public abstract class AbstractMakeContentVisibleAction extends AbstractToggleShareItemAction {
 
   private final Provider<ContentServiceHelper> helper;
+  private final ContentViewerShareMenu menu;
 
-  AbstractMakeContentVisibleAction(final boolean value, final Provider<ContentServiceHelper> helper) {
+  AbstractMakeContentVisibleAction(final boolean value, final Provider<ContentServiceHelper> helper,
+      final ContentViewerShareMenu menu) {
     super(value);
     this.helper = helper;
+    this.menu = menu;
   }
 
   @Override
   public void actionPerformed(final ActionEvent event) {
     helper.get().setVisible(value, onSuccess);
+    menu.setVisibleToEveryone(value);
   }
 
 }

@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -31,6 +31,7 @@ import java.util.Set;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
+import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
@@ -41,16 +42,19 @@ public class ShareDialogHelper {
 
   private static final List<String> NO_MORE_PARTICIPANTS = new ArrayList<String>();
   private String localDomain;
+  ContentViewerShareMenu shareMenuBtn;
   private final ShareToListView shareToListView;
   private final ShareToOthersView shareToOthersView;
   private final ShareToTheNetView shareToTheNetView;
 
   @Inject
   public ShareDialogHelper(final ShareToListView shareToListView,
-      final ShareToTheNetView shareToTheNetView, final ShareToOthersView shareToOthersView) {
+      final ShareToTheNetView shareToTheNetView, final ShareToOthersView shareToOthersView,
+      final ContentViewerShareMenu shareMenuBtn) {
     this.shareToListView = shareToListView;
     this.shareToTheNetView = shareToTheNetView;
     this.shareToOthersView = shareToOthersView;
+    this.shareMenuBtn = shareMenuBtn;
   }
 
   public void init(final String localDomain) {
@@ -123,6 +127,7 @@ public class ShareDialogHelper {
         || (viewerMode.equals(NORMAL) && viewersList.size() == 0);
     if (noViewers) {
       shareToListView.addNotVisibleByOthers();
+      shareMenuBtn.setVisibleToEveryone(false);
     } else {
       if (viewerMode.equals(NORMAL)) {
         for (final GroupDTO viewer : viewersList) {
@@ -130,10 +135,11 @@ public class ShareDialogHelper {
             shareToListView.addViewer(viewer);
           }
         }
+        shareMenuBtn.setVisibleToEveryone(false);
       } else if (viewerMode.equals(EVERYONE)) {
         shareToListView.addVisibleByAnyone();
+        shareMenuBtn.setVisibleToEveryone(true);
       }
     }
   }
-
 }
