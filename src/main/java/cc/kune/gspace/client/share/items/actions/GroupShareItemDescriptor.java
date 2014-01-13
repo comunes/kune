@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -42,5 +42,6 @@ public class GroupShareItemDescriptor extends ShareItemDescriptor {
     final boolean isAnUser = group.isPersonal();
     setItemText((isAnUser ? "" : I18n.t("Group") + ": ") + group.getLongName());
     setItemIcon(downloadUtils.getGroupLogo(group));
+    super.setGroup(group.getShortName());
   }
 }

@@ -23,7 +23,9 @@ import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.AccessRolDTO;
+import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.share.items.actions.AbstractRoleShareMenuItem;
+import cc.kune.gspace.client.share.items.actions.GroupShareItemDescriptor;
 
 import com.google.inject.Singleton;
 
@@ -53,7 +55,7 @@ public class AbstractRolShareItemUi extends AbstractShareItemWithMenuUi {
     changeToViewer.setNextRoleDescriptor(this.viewerDescr);
   }
 
-  public AbstractShareItemWithMenuUi with(final AccessRolDTO rol, final String group) {
+  public AbstractShareItemWithMenuUi with(final AccessRolDTO rol, final GroupDTO group) {
     ShareItemDescriptor descr;
     switch (rol) {
     case Administrator:
@@ -67,11 +69,10 @@ public class AbstractRolShareItemUi extends AbstractShareItemWithMenuUi {
       descr = viewerDescr;
       break;
     }
+    ((GroupShareItemDescriptor) adminDescr).setGroup(group);
+    ((GroupShareItemDescriptor) editorDescr).setGroup(group);
+    ((GroupShareItemDescriptor) viewerDescr).setGroup(group);
     setValuesViaDescriptor(descr);
-    descr.setGroup(group);
-    adminDescr.setGroup(group);
-    editorDescr.setGroup(group);
-    viewerDescr.setGroup(group);
     return this;
   }
 }
