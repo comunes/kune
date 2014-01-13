@@ -215,7 +215,7 @@ public class ShareDialogHelperTest {
     participants.add("@" + EVERYONE_IN_WAVE);
     helper.setState(currentGroup, acl, TYPE_DOCUMENT, participants);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addAdmin(group1);
+    shareToListInOrder.verify(shareToList, Mockito.times(0)).addAdmin(group1);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addEditableByAnyone();
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2);
@@ -230,7 +230,7 @@ public class ShareDialogHelperTest {
     final AccessListsDTO acl = acl(list(currentGroup, group1), list(group2), NOBODY);
     helper.setState(currentGroup, acl, TYPE_DOCUMENT, participants);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addAdmin(group1);
+    shareToListInOrder.verify(shareToList, Mockito.times(0)).addAdmin(group1);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addNotEditableByOthers();
@@ -257,7 +257,7 @@ public class ShareDialogHelperTest {
     final AccessListsDTO acl = acl(list(currentGroup, group1), NOBODY, NOBODY);
     helper.setState(currentGroup, acl, TYPE_DOCUMENT, participants);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addAdmin(group1);
+    shareToListInOrder.verify(shareToList, Mockito.times(0)).addAdmin(group1);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addEditor(group2);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2);

@@ -83,45 +83,46 @@ public class ShareDialogHelper {
 
     shareToTheNetView.setVisible(viewerMode.equals(EVERYONE));
     final boolean isAList = typeId.equals(ListsToolConstants.TYPE_LIST);
+    final boolean isWave = participants.size() != 0;
 
     shareToOthersView.setVisible(!editorMode.equals(EVERYONE) || isAList);
 
     // Admins
-    if (adminsMode.equals(NORMAL)) {
+    if (!isWave && adminsMode.equals(NORMAL)) {
       for (final GroupDTO admin : adminList) {
         if (!admin.equals(currentGroup)) {
           shareToListView.addAdmin(admin);
         }
       }
     }
-
-    // Editors
-    final boolean noEditors = editorMode.equals(NOBODY)
-        || (editorMode.equals(NORMAL) && editorsList.size() == 0 && participants.size() == 0);
-    if (noEditors && !isAList) {
-      shareToListView.addNotEditableByOthers();
-    } else {
-      if (editorMode.equals(NORMAL)) {
-        for (final GroupDTO editor : editorsList) {
-          if (!editor.equals(currentGroup)) {
-            shareToListView.addEditor(editor);
-          }
-        }
-      } else if (editorMode.equals(EVERYONE) && !isAList) {
+    if (isWave) {
+      // Participants
+      if (participants.contains(localDomain)) {
         shareToListView.addEditableByAnyone();
       }
-    }
-
-    // Participants
-    if (participants.contains(localDomain)) {
-      shareToListView.addEditableByAnyone();
-    }
-    for (final String participant : participants) {
-      if (!localDomain.equals(participant)) {
-        shareToListView.addParticipant(participant);
+      for (final String participant : participants) {
+        if (!localDomain.equals(participant)) {
+          shareToListView.addParticipant(participant);
+        }
+      }
+    } else {
+      // Editors
+      final boolean noEditors = editorMode.equals(NOBODY)
+          || (editorMode.equals(NORMAL) && editorsList.size() == 0);
+      if (noEditors && !isAList) {
+        shareToListView.addNotEditableByOthers();
+      } else {
+        if (editorMode.equals(NORMAL)) {
+          for (final GroupDTO editor : editorsList) {
+            if (!editor.equals(currentGroup)) {
+              shareToListView.addEditor(editor);
+            }
+          }
+        } else if (editorMode.equals(EVERYONE) && !isAList) {
+          shareToListView.addEditableByAnyone();
+        }
       }
     }
-
     // Viewers
     final boolean noViewers = viewerMode.equals(NOBODY)
         || (viewerMode.equals(NORMAL) && viewersList.size() == 0);
