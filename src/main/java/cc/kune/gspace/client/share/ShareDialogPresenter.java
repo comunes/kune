@@ -26,6 +26,7 @@ import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.StateTokenUtils;
@@ -111,14 +112,25 @@ public class ShareDialogPresenter extends
     this.contentService = contentService;
     this.listService = listService;
     this.helper.init(org.waveprotocol.box.webclient.client.Session.get().getDomain());
+    eventBus.addHandler(SpaceSelectEvent.getType(), new SpaceSelectEvent.SpaceSelectHandler() {
+      @Override
+      public void onSpaceSelect(final SpaceSelectEvent event) {
+        hideIfVisible();
+      }
+    });
     stateManager.onStateChanged(false, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {
-        if (getView().isVisible()) {
-          getView().hide();
-        }
+        hideIfVisible();
       }
+
     });
+  }
+
+  private void hideIfVisible() {
+    if (getView().isVisible()) {
+      getView().hide();
+    }
   }
 
   @Override
