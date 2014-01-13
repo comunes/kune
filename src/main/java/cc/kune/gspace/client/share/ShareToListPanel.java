@@ -41,6 +41,8 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
 
   private final VerticalPanel itemsPanel;
 
+  private final ScrollPanel scroll;
+
   private final Label title;
 
   private String typeId;
@@ -56,7 +58,7 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
     title.setStyleName("k-sharelist-title");
     final VerticalPanel vp = new VerticalPanel();
     itemsPanel = new VerticalPanel();
-    final ScrollPanel scroll = new ScrollPanel();
+    scroll = new ScrollPanel();
     // scroll.setHeight(SCROLL_HEIGHT);
     scroll.setWidth("380px");
     DOM.setStyleAttribute(scroll.getElement(), "maxHeight", SCROLL_HEIGHT);
@@ -132,6 +134,7 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
 
   @Override
   public void clear() {
+    scroll.setVerticalScrollPosition(0);
     itemsPanel.clear();
   }
 

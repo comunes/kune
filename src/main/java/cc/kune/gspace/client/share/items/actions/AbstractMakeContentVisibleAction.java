@@ -25,6 +25,7 @@ package cc.kune.gspace.client.share.items.actions;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.share.ShareToTheNetView;
 
 import com.google.inject.Provider;
 
@@ -32,18 +33,21 @@ public abstract class AbstractMakeContentVisibleAction extends AbstractToggleSha
 
   private final Provider<ContentServiceHelper> helper;
   private final ContentViewerShareMenu menu;
+  private final ShareToTheNetView netView;
 
   AbstractMakeContentVisibleAction(final boolean value, final Provider<ContentServiceHelper> helper,
-      final ContentViewerShareMenu menu) {
+      final ContentViewerShareMenu menu, final ShareToTheNetView netView) {
     super(value);
     this.helper = helper;
     this.menu = menu;
+    this.netView = netView;
   }
 
   @Override
   public void actionPerformed(final ActionEvent event) {
     helper.get().setVisible(value, onSuccess);
     menu.setVisibleToEveryone(value);
+    netView.setVisible(value);
   }
 
 }
