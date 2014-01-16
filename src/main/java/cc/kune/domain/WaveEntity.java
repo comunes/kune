@@ -65,7 +65,11 @@ public class WaveEntity implements Serializable, Comparator<WaveEntity> {
   @Basic
   private Long lastModifiedTime;
 
-  @ManyToMany(mappedBy = "waves", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+  /*
+   * Using fetch = FetchType.EAGER to avoid this on startup:
+   * http://stackoverflow.com/questions/20162077/hibernate-org-hibernate-lazyinitializationexception-failed-to-lazily-initialize
+   */
+  @ManyToMany(mappedBy = "waves", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
   private Set<ParticipantEntity> participants;
 
   // http://www.hibernate.org/112.html

@@ -69,7 +69,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     this.waveletProvider = waveletProvider;
   }
 
-  // @KuneTransactional
+  @KuneTransactional
   private void addWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
     Preconditions.checkNotNull(waveEntity);
     LOG.debug("Added wave to participant " + participantId.getAddress());
@@ -120,6 +120,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     final ListenableFutureTask<Void> task = new ListenableFutureTask<Void>(new Callable<Void>() {
 
       @Override
+      @KuneTransactional
       public Void call() throws Exception {
         ReadableWaveletData waveletData;
         try {
@@ -147,6 +148,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     final ListenableFutureTask<Void> task = new ListenableFutureTask<Void>(new Callable<Void>() {
 
       @Override
+      @KuneTransactional
       public Void call() throws Exception {
         ReadableWaveletData waveletData;
         try {
@@ -166,6 +168,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   }
 
   @Override
+  @KuneTransactional
   public ListenableFuture<Void> onWaveInit(final WaveletName waveletName) {
     Preconditions.checkNotNull(waveletName);
     LOG.debug("On wave init of wave " + waveletName.toString());
@@ -192,7 +195,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     return task;
   }
 
-  // @KuneTransactional
+  @KuneTransactional
   private void removeWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
     Preconditions.checkNotNull(waveEntity);
     LOG.debug("Remove wave to participant " + participantId.getAddress());
