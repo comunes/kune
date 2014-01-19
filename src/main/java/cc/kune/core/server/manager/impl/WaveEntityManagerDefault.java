@@ -62,7 +62,7 @@ public class WaveEntityManagerDefault extends DefaultManager<WaveEntity, WaveRef
   @KuneTransactional
   public void add(final WaveEntity wave, final ParticipantEntity participant) {
     wave.add(participant);
-    persist(wave);
+    merge(wave);
   }
 
   @Override
@@ -74,16 +74,15 @@ public class WaveEntityManagerDefault extends DefaultManager<WaveEntity, WaveRef
   @Override
   @KuneTransactional
   public void remove(final WaveEntity wave, final ParticipantEntity participant) {
-    // TODO Auto-generated method stub
     wave.remove(participant);
-    persist(wave);
+    merge(wave);
   }
 
   @Override
   @KuneTransactional
   public void setLastModifiedTime(final WaveEntity wave, final long lastModifiedTime) {
     wave.setLastModifiedTime(lastModifiedTime);
-    persist(wave);
+    merge(wave);
   }
 
 }

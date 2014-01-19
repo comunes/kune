@@ -37,7 +37,7 @@ import com.google.inject.Singleton;
 
 /**
  * The Class SharedWavesManagerDefault.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -64,6 +64,7 @@ public class ParticipantEntityManagerDefault extends DefaultManager<ParticipantE
       participant = new ParticipantEntity(address);
       persist(participant);
     }
+
     return participant;
   }
 
