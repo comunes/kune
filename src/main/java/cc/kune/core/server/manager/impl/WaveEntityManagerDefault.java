@@ -1,7 +1,10 @@
 /*
  *
- * Copyright (C) 2007-2012 The kune development team (see CREDITS for details)
- * This file is part of kune.
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
+ * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,7 +20,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-
 package cc.kune.core.server.manager.impl;
 
 import javax.persistence.EntityManager;
