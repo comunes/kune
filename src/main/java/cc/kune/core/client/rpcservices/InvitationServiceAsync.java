@@ -32,14 +32,14 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface InvitationServiceAsync.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface InvitationServiceAsync {
 
   /**
    * Confirmation invitation to group.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param invitationHash
@@ -51,7 +51,7 @@ public interface InvitationServiceAsync {
 
   /**
    * Confirmation invitation to site.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param invitationHash
@@ -63,7 +63,7 @@ public interface InvitationServiceAsync {
 
   /**
    * Confirm invitation to list.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param invitationHash
@@ -76,7 +76,7 @@ public interface InvitationServiceAsync {
 
   /**
    * Gets the invitation.
-   * 
+   *
    * @param invitationHash
    *          the invitation hash
    * @param callback
@@ -87,7 +87,7 @@ public interface InvitationServiceAsync {
 
   /**
    * Invite to group.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param token
@@ -101,7 +101,7 @@ public interface InvitationServiceAsync {
 
   /**
    * Invite to list.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param token
@@ -115,7 +115,7 @@ public interface InvitationServiceAsync {
 
   /**
    * Invite to site.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param token
@@ -126,5 +126,31 @@ public interface InvitationServiceAsync {
    *          the callback
    */
   void inviteToSite(String userHash, StateToken token, String[] emails, AsyncCallback<Void> callback);
+
+  /**
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
+   * @param shortName
+   *          the short name of the invited user
+   * @param callback
+   *          the callback
+   */
+  void inviteUserToGroup(String userHash, StateToken token, String shortName,
+      AsyncCallback<Void> callback);
+
+  /**
+   *
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
+   * @param shortName
+   *          the short name of the invited user
+   * @param callback
+   *          the callback
+   */
+  void inviteUserToList(String userHash, StateToken token, String shortName, AsyncCallback<Void> callback);
 
 }

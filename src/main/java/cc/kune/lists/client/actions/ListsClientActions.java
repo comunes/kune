@@ -30,6 +30,7 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.invitation.ListInvitationMenuItem;
 import cc.kune.core.client.invitation.ListInvitationShareMenuItem;
+import cc.kune.core.client.invitation.ListInviteUserMenuItem;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
@@ -104,7 +105,8 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<ShareInIdenticaMenuItem> shareInIdentica,
       final Provider<ShareInFacebookMenuItem> shareInFacebook,
       final Provider<ListInvitationShareMenuItem> shareInvitation,
-      final Provider<ListInvitationMenuItem> inviteMenuItem) {
+      final Provider<ListInvitationMenuItem> inviteMenuItem,
+      final Provider<ListInviteUserMenuItem> inviteUserMenuItem) {
     super(TOOL_NAME, session, registry);
     // add(NAME, TOOLBAR, newListMenuItem,
     // TYPE_ROOT);
@@ -128,6 +130,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, contents, participateBtn, copyContent, chatAbout, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem);
     add(ITEM_MENU, allExceptRoot, inviteMenuItem);
+    add(ITEM_MENU, allExceptRoot, inviteUserMenuItem);
     add(ITEM_MENU, contents, delPostMenuItem, addAllMenuItem, addAdminMembersMenuItem,
         addCollabMembersMenuItem, copyContent, writeToParticipants);
     add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);

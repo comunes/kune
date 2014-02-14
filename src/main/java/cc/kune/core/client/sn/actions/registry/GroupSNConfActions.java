@@ -32,6 +32,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.invitation.GroupInvitationMenuItem;
+import cc.kune.core.client.invitation.GroupInviteUserMenuItem;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sn.GroupSNPresenter;
 import cc.kune.core.client.sn.actions.AddEntityToThisGroupAction;
@@ -62,7 +63,7 @@ import com.google.inject.Provider;
 /**
  * You must call {@link GroupSNPresenter#refreshActions()} when adding some
  * action externally with.
- * 
+ *
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
  */
 
@@ -73,7 +74,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
   /**
    * Instantiates a new group sn conf actions.
-   * 
+   *
    * @param session
    *          the session
    * @param stateManager
@@ -114,9 +115,9 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final I18nTranslationService i18n, final Provider<MembersVisibilityMenuItem> membersVisibility,
       final Provider<MembersModerationMenuItem> membersModeration, final CoreResources res,
       final IsLoggedCondition isLoggedCondition, final JoinGroupAction joinGroupAction,
-      final GroupInvitationMenuItem groupInvitation, final WriteToMembers writeToMembers,
-      final WriteToAdmins writeToAdmins, final IsGroupCondition isGroupCondition,
-      final UnJoinFromCurrentGroupAction unJoinGroupAction,
+      final GroupInvitationMenuItem groupInvitation, final GroupInviteUserMenuItem groupUserInvitation,
+      final WriteToMembers writeToMembers, final WriteToAdmins writeToAdmins,
+      final IsGroupCondition isGroupCondition, final UnJoinFromCurrentGroupAction unJoinGroupAction,
       final AddEntityToThisGroupAction addEntityToThisGroupAction, final GroupSNOptionsMenu optionsMenu,
       final GroupSNModerationSubMenu moderationSubMenu, final GroupSNVisibilitySubMenu visibilitySubMenu) {
     final boolean isNewbie = session.isNewbie();
@@ -213,7 +214,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
   /**
    * You must call {@link GroupSNPresenter#refreshActions()} when adding some
    * action externally with.
-   * 
+   *
    * @param action
    *          the action
    * @return true, if successful
@@ -226,7 +227,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
 
   /**
    * Adds the impl.
-   * 
+   *
    * @param action
    *          the action
    * @return true, if successful

@@ -33,7 +33,7 @@ import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface InvitationService.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @RemoteServiceRelativePath("InvitationService")
@@ -41,7 +41,7 @@ public interface InvitationService extends RemoteService {
 
   /**
    * Confirmation invitation to group.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param invitationHash
@@ -54,7 +54,7 @@ public interface InvitationService extends RemoteService {
 
   /**
    * Confirmation invitation to site.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param invitationHash
@@ -67,7 +67,7 @@ public interface InvitationService extends RemoteService {
 
   /**
    * Confirm invitation to list.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param invitationHash
@@ -81,7 +81,7 @@ public interface InvitationService extends RemoteService {
 
   /**
    * Gets the invitation.
-   * 
+   *
    * @param invitationHash
    *          the invitation hash
    * @return the invitation
@@ -92,7 +92,7 @@ public interface InvitationService extends RemoteService {
 
   /**
    * Invite to group.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param token
@@ -104,7 +104,7 @@ public interface InvitationService extends RemoteService {
 
   /**
    * Invite to list.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param token
@@ -116,7 +116,7 @@ public interface InvitationService extends RemoteService {
 
   /**
    * Invite to site.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param token
@@ -125,5 +125,31 @@ public interface InvitationService extends RemoteService {
    *          the emails
    */
   void inviteToSite(String userHash, StateToken token, String[] emails);
+
+  /**
+   * Invite user to site.
+   *
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
+   * @param token
+   *          the token
+   * @param shortName
+   *          the short name of the invited user
+   */
+  void inviteUserToGroup(String userHash, StateToken token, String shortName);
+
+  /**
+   * Invite to list.
+   *
+   * @param userHash
+   *          the user hash
+   * @param token
+   *          the token
+   * @param emails
+   *          the emails
+   */
+  void inviteUserToList(String userHash, StateToken token, String shortName);
 
 }

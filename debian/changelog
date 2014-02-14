@@ -1,7 +1,12 @@
 kune (0.3.0+b38) unstable; urgency=low
+
+  [ Vicente J. Ruiz Jurado ]
   * Merge of share dialog (wip of #550)
   * More work in #561 to embed waves (jsni export improved, clientdownutils 
     singleton, removed server logs)
+
+  [Antonio Tenorio Fornés]
+  * Invite kune users to groups/list. Partial work for enhancement #467 
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 16 Dec 2013 15:47:59 +0100
 
