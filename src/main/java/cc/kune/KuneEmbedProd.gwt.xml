@@ -8,15 +8,17 @@
 
   <inherits name="cc.kune.KuneEmbed" />
 
-  <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />
+  <set-property name="gwt.logging.simpleRemoteHandler"
+    value="DISABLED" />
 
-  <!-- FIXME: this is only to debug this in production, and it should be removed after some bug fixing in Embed system -->
-  <set-property name="compiler.stackMode"
-       value="emulated" />
-  <set-configuration-property name="compiler.emulatedStack.recordLineNumbers"
-       value="true"/>
-  <set-configuration-property name="compiler.emulatedStack.recordFileNames"
-       value="true"/>
+  <!-- This is only to debug this in production, and it should be
+    removed after some bug fixing in Embed system. Warning: this make the package 30% bigger -->
+  <!-- <set-property name="compiler.stackMode" -->
+  <!-- value="emulated" /> -->
+  <!-- <set-configuration-property name="compiler.emulatedStack.recordLineNumbers" -->
+  <!-- value="true"/> -->
+  <!-- <set-configuration-property name="compiler.emulatedStack.recordFileNames" -->
+  <!-- value="true"/> -->
 
   <!-- NOTE: this only compiles for chromium/safari ============= -->
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
