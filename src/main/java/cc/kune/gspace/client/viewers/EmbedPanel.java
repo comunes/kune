@@ -22,6 +22,7 @@
  */
 package cc.kune.gspace.client.viewers;
 
+import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView;
 import cc.kune.wave.client.CustomSavedStateIndicator;
@@ -150,11 +151,11 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
    * ).css("border", "0px");
    */
   public native void restyleWavePanel() /*-{
-                                        $wnd.jQuery("button[class*='ParticipantsViewBuilder-Css-addMessage']")
-                                        .hide();
-                                        $wnd.jQuery("div[class*='ToplevelToolbarWidget-Css-toolbar']").css(
-                                        "background", "none repeat scroll 0 0 #FFFFFF");
-                                        }-*/;
+		$wnd.jQuery("button[class*='ParticipantsViewBuilder-Css-addMessage']")
+				.hide();
+		$wnd.jQuery("div[class*='ToplevelToolbarWidget-Css-toolbar']").css(
+				"background", "none repeat scroll 0 0 #FFFFFF");
+  }-*/;
 
   /*
    * (non-Javadoc)
@@ -165,6 +166,10 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
    */
   @Override
   public void setContent(final StateContentDTO state) {
+    // We do some html fix in html content because we are in embeded in another
+    // site domain, and the server don't know how to do this
+    state.setContent(EmbedHelper.fixContentUrls(EmbedConfiguration.get().getServerUrl(),
+        state.getContent()));
     super.setContent(state);
   }
 

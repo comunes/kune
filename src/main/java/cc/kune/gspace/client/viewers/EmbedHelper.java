@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,6 +24,7 @@ package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.embed.EmbedConfiguration;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.InitDataDTOJs;
 import cc.kune.core.shared.dto.StateAbstractDTO;
@@ -44,12 +45,44 @@ import com.google.gwt.jsonp.client.JsonpRequest;
 import com.google.gwt.jsonp.client.JsonpRequestBuilder;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
+/**
+ * The Class EmbedHelper.
+ * 
+ */
 public class EmbedHelper {
+
+  /**
+   * Fix content urls.
+   * 
+   * We do some html fix in html content because we are in embeded in another
+   * site domain, and the server don't know how to do this
+   * 
+   * @param serverUrl
+   *          the server url
+   * @param content
+   *          the content
+   * @return the string
+   */
+  public static String fixContentUrls(final String serverUrl, final String content) {
+    return content.replaceAll(FileConstants.LOGODOWNLOADSERVLET, serverUrl
+        + FileConstants.LOGODOWNLOADSERVLET);
+  }
+
+  /**
+   * Gets the server.
+   * 
+   * @return the server
+   */
   public static String getServer() {
     final String serverConf = EmbedConfiguration.get().getServerUrl();
     return serverConf == null ? GWT.getHostPageBaseURL() : serverConf;
   }
 
+  /**
+   * Gets the server with path.
+   * 
+   * @return the server with path
+   */
   public static String getServerWithPath() {
     final String confServer = EmbedConfiguration.get().getServerUrl();
     final String server = confServer != null ? (confServer.endsWith("/") ? confServer + "wse/"
@@ -57,6 +90,13 @@ public class EmbedHelper {
     return server;
   }
 
+  /**
+   * Parses the init data in js
+   * 
+   * @param init
+   *          data the init js
+   * @return the inidata DTO
+   */
   public static InitDataDTO parse(final InitDataDTOJs initJ) {
     final InitDataDTO init = new InitDataDTO();
     init.setStoreUntranslatedStrings(initJ.getStoreUntranslatedStrings());
@@ -65,6 +105,13 @@ public class EmbedHelper {
     return init;
   }
 
+  /**
+   * Parses the state in js.
+   * 
+   * @param stateJs
+   *          the state js
+   * @return the state abstract dto
+   */
   public static StateAbstractDTO parse(final StateAbstractDTOJs stateJs) {
     final StateContentDTO state = new StateContentDTO();
     state.setContent(stateJs.getContent());
@@ -76,6 +123,13 @@ public class EmbedHelper {
     return state;
   }
 
+  /**
+   * Parses the userInfo js.
+   * 
+   * @param userInfo
+   *          the user info
+   * @return the user info dto
+   */
   public static UserInfoDTO parse(final UserInfoDTOJs userInfo) {
     final String userHash = userInfo.getUserHash();
     if (userHash == null || userHash.equals("null")) {
@@ -95,6 +149,14 @@ public class EmbedHelper {
     }
   }
 
+  /**
+   * Process json request.
+   * 
+   * @param url
+   *          the url
+   * @param callback
+   *          the callback
+   */
   public static void processJSONRequest(final String url, final Callback<JavaScriptObject, Void> callback) {
     final JsonpRequestBuilder builder = new JsonpRequestBuilder();
     builder.setTimeout(60000);
@@ -114,6 +176,14 @@ public class EmbedHelper {
         });
   }
 
+  /**
+   * Process request.
+   * 
+   * @param url
+   *          the url
+   * @param callback
+   *          the callback
+   */
   public static void processRequest(final String url, final Callback<Response, Void> callback) {
     try {
       final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, url);
