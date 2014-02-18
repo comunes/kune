@@ -27,6 +27,8 @@
   <set-property name="gwt.logging.enabled" value="TRUE" />
   <set-property name="gwt.logging.logLevel" value="INFO" />
   <set-property name="gwt.logging.consoleHandler" value="ENABLED" />
+  <!-- Logs by calling method GWT.log. These messages can only be seen in
+    Development mode — look for them in the DevMode window -->
   <set-property name="gwt.logging.developmentModeHandler"
     value="ENABLED" />
   <set-property name="gwt.logging.firebugHandler" value="ENABLED" />

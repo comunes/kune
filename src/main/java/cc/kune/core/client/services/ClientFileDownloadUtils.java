@@ -24,7 +24,7 @@ package cc.kune.core.client.services;
 
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
-import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.SessionInstance;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.utils.SharedFileDownloadUtils;
@@ -33,7 +33,6 @@ import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ClientFileDownloadUtils.
  * 
@@ -41,18 +40,8 @@ import com.google.inject.Inject;
  */
 public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
-  /** The session. */
-  private final Session session;
-
-  /**
-   * Instantiates a new client file download utils.
-   * 
-   * @param session
-   *          the session
-   */
   @Inject
-  public ClientFileDownloadUtils(final Session session) {
-    this.session = session;
+  public ClientFileDownloadUtils() {
   }
 
   /**
@@ -73,7 +62,7 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
       url.add(new UrlParam(FileConstants.DOWNLOAD, download));
     }
     if (useHash) {
-      final String hash = session.getUserHash();
+      final String hash = SessionInstance.get().getUserHash();
       if (hash != null) {
         url.add(new UrlParam(FileConstants.HASH, hash));
       }

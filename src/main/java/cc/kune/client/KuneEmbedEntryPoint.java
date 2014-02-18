@@ -27,7 +27,6 @@ import cc.kune.core.client.embed.EmbedJsActions;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Element;
 import com.gwtplatform.mvp.client.DelayedBindRegistry;
 
 /**
@@ -36,10 +35,6 @@ import com.gwtplatform.mvp.client.DelayedBindRegistry;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
-
-  private static native Element window() /*-{
-		return $wnd;
-  }-*/;
 
   /** The ginjector. */
   private KuneEmbedGinjector ginjector;

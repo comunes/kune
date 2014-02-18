@@ -127,20 +127,24 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
       final ClientFileDownloadUtils clientDownUtils) {
     super(eventBus, view, proxy);
     this.clientDownUtils = clientDownUtils;
-    NotifyUser.showProgressLoading();
-    // FIXME: Maybe use AppStart to detect browser compatibility in the future
     this.session = session;
     this.sitebar = sitebar;
+    NotifyUser.showProgressLoading();
+    Log.info("Starting embed presenter");
+    // FIXME: Maybe use AppStart to detect browser compatibility in the future
     session.setEmbedded(true);
     TokenMatcher.init(GwtWaverefEncoder.INSTANCE);
     eventBus.addHandler(EmbedOpenEvent.getType(), new EmbedOpenEvent.EmbedOpenHandler() {
       @Override
       public void onEmbedOpen(final EmbedOpenEvent event) {
         stateTokenToOpen = event.getStateToken();
+        Log.info("Received EmbedOpenEvent with token:" + stateTokenToOpen);
         if (session.getInitData() == null) {
           // Not initialized
+          Log.debug("Session data not ready");
         } else {
           // ok, we can continue
+          Log.debug("Session data ready");
           getContentFromHistoryHash(stateTokenToOpen);
         }
       }
@@ -149,11 +153,13 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
       @Override
       public void onAppStart(final EmbAppStartEvent event) {
         // This event is generated after configuration via JSNI
+        Log.debug("App start event after conf loaded");
         onAppStarted();
       }
     });
     if (EmbedConfiguration.isReady() || isCurrentHistoryHashValid(getCurrentHistoryHash())) {
       // The event was fired already, so start!
+      Log.debug("App start after conf already loaded");
       onAppStarted();
     }
   }
