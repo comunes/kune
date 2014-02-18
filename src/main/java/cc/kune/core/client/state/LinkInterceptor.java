@@ -43,9 +43,7 @@ public class LinkInterceptor implements NativePreviewHandler {
   @Inject
   public LinkInterceptor(final HistoryWrapper history) {
     this.history = history;
-    if (SessionInstance.get().isGuiInDevelopment()) {
-      Event.addNativePreviewHandler(this);
-    }
+    Event.addNativePreviewHandler(this);
   }
 
   @Override

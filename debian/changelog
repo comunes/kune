@@ -1,6 +1,7 @@
 kune (0.3.0+b39) unstable; urgency=low
 
   * Some minor fix in embed system
+  * Intercept all a href links so don't open another window/tab for local #links (closes #366)
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 18 Feb 2014 11:27:26 +0100
 
