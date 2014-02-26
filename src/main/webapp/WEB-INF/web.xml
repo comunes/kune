@@ -18,107 +18,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <welcome-file-list>
     <welcome-file>ws.html</welcome-file>
   </welcome-file-list>
-  <!-- Wave proxies ========================================================================================= -->
-  <!-- <filter> -->
-  <!-- <filter-name>JettyContinuationFilter</filter-name> -->
-  <!-- <filter-class>org.eclipse.jetty.continuation.ContinuationFilter</filter-class> -->
-  <!-- </filter> -->
-  <!-- <filter-mapping> -->
-  <!-- <filter-name>JettyContinuationFilter</filter-name> -->
-  <!-- <servlet-name>Wiab</servlet-name> -->
-  <!-- <url-pattern>/*</url-pattern> -->
-  <!-- </filter-mapping> -->
-  <!-- <servlet> -->
-  <!-- <servlet-name>Wiab</servlet-name> -->
-  <!-- <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class> -->
-  <!-- <init-param> -->
-  <!-- <param-name>ProxyTo</param-name> -->
-  <!-- <param-value>http://127.0.0.1:9898/</param-value> -->
-  <!-- </init-param> -->
-  <!-- <init-param> -->
-  <!-- <param-name>Prefix</param-name> -->
-  <!-- <param-value>/</param-value> -->
-  <!-- </init-param> -->
-  <!-- </servlet> -->
-  <!-- <servlet-mapping> -->
-  <!-- <servlet-name>Wiab</servlet-name> -->
-  <!-- <url-pattern>/attachment/*</url-pattern> -->
-  <!-- <url-pattern>/auth/signin</url-pattern> -->
-  <!-- <url-pattern>/auth/signout</url-pattern> -->
-  <!-- <url-pattern>/auth/register</url-pattern> -->
-  <!-- <url-pattern>/fetch/*</url-pattern> -->
-  <!-- <url-pattern>/robot/dataapi</url-pattern> -->
-  <!-- <url-pattern>/robot/dataapi/oauth/*</url-pattern> -->
-  <!-- <url-pattern>/robot/dataapi/rpc</url-pattern> -->
-  <!-- <url-pattern>/robot/register/*</url-pattern> -->
-  <!-- <url-pattern>/robot/rpc</url-pattern> -->
-  <!-- <url-pattern>/gadgets</url-pattern> -->
-  <!-- <url-pattern>/gadgets/*</url-pattern> -->
-  <!-- <url-pattern>/socket.io/*</url-pattern> -->
-  <!-- <url-pattern>/socket</url-pattern> -->
-  <!-- <url-pattern>/static/*</url-pattern> -->
-  <!-- <url-pattern>/webclient/*</url-pattern> -->
-  <!-- <url-pattern>/*</url-pattern> -->
-  <!-- <load-on-startup>1</load-on-startup> -->
-  <!-- </servlet-mapping> -->
-  <!-- JRuby servlets ======================================================================================= -->
-  <!-- Note: this gives problems depending on the version of jetty or tomcat -->
-  <context-param>
-    <param-name>jruby.standalone</param-name>
-    <param-value>true</param-value>
-  </context-param>
-  <context-param>
-    <param-name>rails.root</param-name>
-    <param-value>/WEB-INF/publicspace/
-   </param-value>
-  </context-param>
-  <context-param>
-    <param-name>files.prefix</param-name>
-    <param-value>/WEB-INF/publicspace/public
-   </param-value>
-  </context-param>
-  <context-param>
-    <param-name>rails.env</param-name>
-    <param-value>production</param-value>
-  </context-param>
-  <context-param>
-    <param-name>jruby.max.runtimes</param-name>
-    <param-value>1</param-value>
-  </context-param>
-  <context-param>
-    <param-name>public.root</param-name>
-    <param-value>/public/</param-value>
-  </context-param>
-  <!-- Disabled while not used
-  <filter>
-    <filter-name>RackFilter</filter-name>
-    <filter-class>org.jruby.rack.RackFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>RackFilter</filter-name>
-    <url-pattern>/public/*</url-pattern>
-  </filter-mapping>
-  <listener>
-    <listener-class>org.jruby.rack.rails.RailsServletContextListener</listener-class>
-  </listener>
-   -->
   <!-- Emite xmpp proxy ======================================================================================= -->
-  <!-- <servlet> -->
-  <!-- <servlet-name>HttpBind</servlet-name> -->
-  <!-- <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class> -->
-  <!-- <init-param> -->
-  <!-- <param-name>ProxyTo</param-name> -->
-  <!-- <param-value>http://localhost:5280/</param-value> -->
-  <!-- </init-param> -->
-  <!-- <init-param> -->
-  <!-- <param-name>Prefix</param-name> -->
-  <!-- <param-value>/</param-value> -->
-  <!-- </init-param> -->
-  <!-- </servlet> -->
-  <!-- <servlet-mapping> -->
-  <!-- <servlet-name>HttpBind</servlet-name> -->
-  <!-- <url-pattern>/http-bind/</url-pattern> -->
-  <!-- </servlet-mapping> -->
   <servlet>
     <servlet-name>Proxy</servlet-name>
     <servlet-class>cc.kune.chat.server.ProxyServlet</servlet-class>
@@ -141,6 +41,8 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     </url-pattern>
   </servlet-mapping>
   <!-- Kune googleable configuration ========================================================================== -->
+  <!-- RackServletFilter gets all /ws* petitions but SearchEngineServletFilter class needs
+    to catch all /* petitions (looking for "_escaped_fragment_" special parameter). -->
   <filter>
     <filter-name>searcheable</filter-name>
     <filter-class>cc.kune.core.server.searcheable.SearchEngineServletFilter</filter-class>
@@ -166,38 +68,4 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
     <filter-name>rack</filter-name>
     <url-pattern>/wse/*</url-pattern>
   </filter-mapping>
-  <!-- Wave proxies with context /wiab/ ====================================================================== -->
-  <!-- <servlet> -->
-  <!-- <servlet-name>WiabSocketIO</servlet-name> -->
-  <!-- <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class> -->
-  <!-- <init-param> -->
-  <!-- <param-name>ProxyTo</param-name> -->
-  <!-- <param-value>http://127.0.0.1:9898/</param-value> -->
-  <!-- </init-param> -->
-  <!-- <init-param> -->
-  <!-- <param-name>Prefix</param-name> -->
-  <!-- <param-value>/</param-value> -->
-  <!-- </init-param> -->
-  <!-- </servlet> -->
-  <!-- <servlet-mapping> -->
-  <!-- <servlet-name>WiabSocketIO</servlet-name> -->
-  <!-- <url-pattern>/socket.io/*</url-pattern> -->
-  <!-- </servlet-mapping> -->
-  <!-- <servlet> -->
-  <!-- <servlet-name>WiabServlets</servlet-name> -->
-  <!-- <servlet-class>org.eclipse.jetty.servlets.ProxyServlet$Transparent</servlet-class> -->
-  <!-- <init-param> -->
-  <!-- <param-name>ProxyTo</param-name> -->
-  <!-- <param-value>http://127.0.0.1:9898/</param-value> -->
-  <!-- </init-param> -->
-  <!-- <init-param> -->
-  <!-- <param-name>Prefix</param-name> -->
-  <!-- <param-value>/</param-value> -->
-  <!-- </init-param> -->
-  <!-- </servlet> -->
-  <!-- <servlet-mapping> -->
-  <!-- <servlet-name>WiabServlets</servlet-name> -->
-  <!-- <url-pattern>/wiab/*</url-pattern> -->
-  <!-- </servlet-mapping> -->
-
 </web-app>

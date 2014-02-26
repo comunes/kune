@@ -62,17 +62,17 @@ import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.google.inject.Singleton;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class SearchEngineServletFilter. based in
- * https://developers.google.com/webmasters/ajax-crawling/docs/html-snapshot
- * http
- * ://coding.smashingmagazine.com/2011/09/27/searchable-dynamic-content-with-
- * ajax-crawling/ and
- * http://code.google.com/p/google-web-toolkit/source/browse/branches
- * /crawlability
- * /samples/showcase/src/com/google/gwt/sample/showcase/server/CrawlServlet
- * .java?r=6231
+ * The Class SearchEngineServletFilter. based in <a href=
+ * "https://developers.google.com/webmasters/ajax-crawling/docs/html-snapshot"
+ * >this</a>, <a href=
+ * "http://coding.smashingmagazine.com/2011/09/27/searchable-dynamic-content-with-ajax-crawling/"
+ * >this</a> and <a href=
+ * "http://code.google.com/p/google-web-toolkit/source/browse/branches/crawlability/samples/showcase/src/com/google/gwt/sample/showcase/server/CrawlServlet.java?r=6231"
+ * >this</a>.
+ * 
+ * This filter intercepts kune.example.com/* looking for _escaped_fragment_
+ * parameter. See: src/main/webapp/WEB-INF/web.xml
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
