@@ -100,10 +100,9 @@ public class DocsClientActions extends AbstractFoldableToolActions {
         (MenuDescriptor) docsNewMenu.get().withText(I18n.t("Add Gadget")));
     newMenusRegistry.register(TYPE_UPLOADEDFILE, docsNewMenu.get());
     add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
-        shareSettings);
+    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
     add(TOPBAR, all, shareIHelper.getShareInList());
-    add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(TOPBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);

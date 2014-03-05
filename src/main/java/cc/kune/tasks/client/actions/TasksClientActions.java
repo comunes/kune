@@ -105,10 +105,9 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     add(BOTTOMBAR, containers, folderGoUp);
     add(TOPBAR, all, tutorialBtn);
     add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
-        shareSettings);
+    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
     add(TOPBAR, all, shareIHelper.getShareInList());
-    add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(TOPBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem);
     add(TOOL_NAME, ITEM_MENU, marksAsDoneMenuItem, ContentStatus.publishedOnline, TYPE_TASK);
