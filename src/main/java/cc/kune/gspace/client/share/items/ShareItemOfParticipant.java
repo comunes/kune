@@ -24,7 +24,10 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
+import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.resources.CommonResources;
@@ -38,8 +41,9 @@ import cc.kune.wave.client.KuneWaveProfileManager;
 
 import com.google.inject.Inject;
 
-public class ShareItemOfParticipant extends AbstractShareItemWithMenu {
+public class ShareItemOfParticipant extends AbstractShareItemUi {
 
+  private final CommonResources commonResources;
   private final ContentServiceHelper contentService;
   private final KuneWaveProfileManager profileManager;
   private final IconicResources res;
@@ -49,33 +53,46 @@ public class ShareItemOfParticipant extends AbstractShareItemWithMenu {
       final KuneWaveProfileManager profileManager, final ClientFileDownloadUtils downloadUtils,
       final IconicResources res, final CommonResources commonResources,
       final ContentServiceHelper contentService) {
-    super(I18n.tWithNT("is editor", "someone is editor"), actionsPanel, downloadUtils, commonResources);
+    super(actionsPanel, downloadUtils);
     this.profileManager = profileManager;
     this.res = res;
+    this.commonResources = commonResources;
     this.contentService = contentService;
   }
 
   public AbstractShareItemUi of(final String participant, final String typeId,
-      final ShareToListOnItemRemoved onItemRemoved) {
+      final ShareToListOnItemRemoved onItemRemoved, final boolean creator) {
     try {
       final ProfileImpl profile = profileManager.getProfile(ParticipantId.of(participant));
       final String address = profile.getAddress();
-      // remove @localhost in the participant is local
+      // remove @localhost if the participant is local
       withText(profileManager.isLocal(address) ? profileManager.getUsername(address) : address);
       withIcon(profile.getImageUrl());
-      final MenuItemDescriptor remove = new MenuItemDescriptor(menu, true, new AbstractExtendedAction() {
-        @Override
-        public void actionPerformed(final ActionEvent event) {
-          contentService.delParticipants(new SimpleCallback() {
-            @Override
-            public void onCallback() {
-              onItemRemoved.onRemove(ShareItemOfParticipant.this);
-            }
-          }, participant);
-        }
-      });
-      remove.withText(I18n.t("Remove")).withIcon(res.del());
-      super.add(remove);
+      if (!creator) {
+        final MenuDescriptor menu = new MenuDescriptor(I18n.tWithNT("is editor", "someone is editor"));
+        menu.withIcon(commonResources.arrowdownsitebarSmall()).withStyles(
+            ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
+        super.add(menu);
+        final MenuItemDescriptor remove = new MenuItemDescriptor(menu, true,
+            new AbstractExtendedAction() {
+              @Override
+              public void actionPerformed(final ActionEvent event) {
+                contentService.delParticipants(new SimpleCallback() {
+                  @Override
+                  public void onCallback() {
+                    onItemRemoved.onRemove(ShareItemOfParticipant.this);
+                  }
+                }, participant);
+              }
+            });
+        remove.withText(I18n.t("Remove")).withIcon(res.del());
+        super.add(remove);
+      } else {
+        // Wave creator
+        final LabelDescriptor isCreator = new LabelDescriptor(I18n.t("can edit"));
+        isCreator.withStyles("k-share-item-noactions");
+        super.add(isCreator);
+      }
     } catch (final InvalidParticipantAddress e) {
       Log.debug("Cannot add this participant", e);
     }

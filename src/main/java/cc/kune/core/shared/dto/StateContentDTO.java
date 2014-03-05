@@ -41,13 +41,14 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
   private boolean isParticipant;
   private BasicMimeTypeDTO mimeType;
   private Date modifiedOn;
-  private List<String> participants;
   private Date publishedOn;
   private Double rate;
   private Integer rateByUsers;
   private ContentStatus status;
   private String tags;
   private int version;
+  private String waveCreator;
+  private List<String> waveParticipants;
   private String waveRef;
 
   public StateContentDTO() {
@@ -85,8 +86,8 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
     return modifiedOn;
   }
 
-  public List<String> getParticipants() {
-    return participants;
+  public List<String> getWaveParticipants() {
+    return waveParticipants;
   }
 
   public Date getPublishedOn() {
@@ -157,8 +158,8 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
     this.modifiedOn = modifiedOn;
   }
 
-  public void setParticipants(final List<String> participants) {
-    this.participants = participants;
+  public void setWaveParticipants(final List<String> participants) {
+    this.waveParticipants = participants;
   }
 
   public void setPublishedOn(final Date publishedOn) {
@@ -199,6 +200,14 @@ public class StateContentDTO extends StateContainerDTO implements IsSerializable
   public String toString() {
     return "StateDTO[" + getStateToken() + "/" + getTypeId() + (mimeType != null ? "-" + mimeType : "")
         + "]";
+  }
+
+  public String getWaveCreator() {
+    return waveCreator;
+  }
+
+  public void setWaveCreator(String waveCreator) {
+    this.waveCreator = waveCreator;
   }
 
 }

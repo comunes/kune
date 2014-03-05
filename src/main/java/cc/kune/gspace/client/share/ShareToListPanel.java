@@ -115,7 +115,12 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
 
   @Override
   public void addParticipant(final String waveParticipant) {
-    itemsPanel.add(ShareItemFactory.getParticipant().of(waveParticipant, typeId, this));
+    addParticipant(waveParticipant, false);
+  }
+
+  @Override
+  public void addParticipant(final String waveParticipant, final boolean isCreator) {
+    itemsPanel.add(ShareItemFactory.getParticipant().of(waveParticipant, typeId, this, isCreator));
   }
 
   @Override

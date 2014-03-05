@@ -218,12 +218,12 @@ public class ShareDialogHelperTest {
   public void whenShareDocToListNobodyAndEveryoneParticipants() {
     final AccessListsDTO acl = acl(list(currentGroup, group1), list(group2), NOBODY);
     participants.add(EVERYONE_IN_WAVE);
-    helper.setState(currentGroup, acl, TYPE_DOCUMENT, participants);
+    helper.setState(currentGroup, acl, TYPE_DOCUMENT, group1address, participants);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addAdmin(group1);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addEditableByAnyone();
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1);
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1, false);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2, false);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addParticipant(EVERYONE_IN_WAVE);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotVisibleByOthers();
     Mockito.verify(shareToTheNet, Mockito.times(1)).setVisible(false);
@@ -233,11 +233,11 @@ public class ShareDialogHelperTest {
   @Test
   public void whenShareDocToListNobodyAndParticipants() {
     final AccessListsDTO acl = acl(list(currentGroup, group1), list(group2), NOBODY);
-    helper.setState(currentGroup, acl, TYPE_DOCUMENT, participants);
+    helper.setState(currentGroup, acl, TYPE_DOCUMENT, group1address, participants);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addAdmin(group1);
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1);
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1, false);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2, false);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotEditableByOthers();
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addEditableByAnyone();
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotVisibleByOthers();
@@ -260,12 +260,12 @@ public class ShareDialogHelperTest {
   @Test
   public void whenShareDocToNobodyNobodyAndParticipants() {
     final AccessListsDTO acl = acl(list(currentGroup, group1), NOBODY, NOBODY);
-    helper.setState(currentGroup, acl, TYPE_DOCUMENT, participants);
+    helper.setState(currentGroup, acl, TYPE_DOCUMENT, group1address, participants);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addAdmin(group1);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addEditor(group2);
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1);
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY1, false);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(SOMEBODY2, false);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotEditableByOthers();
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotVisibleByOthers();
     Mockito.verify(shareToTheNet, Mockito.times(1)).setVisible(false);
@@ -304,12 +304,14 @@ public class ShareDialogHelperTest {
   public void whenShareWikiEditable() {
     final AccessListsDTO acl = acl(list(group1), list(group2), NOBODY);
     participants.add(EVERYONE_IN_WAVE);
-    participants.add(group2.getShortName() + "@" + DOMAIN);
-    helper.setState(currentGroup, acl, TYPE_WIKIPAGE, participants);
+    participants.add(group1address);
+    participants.add(group2address);
+    helper.setState(currentGroup, acl, TYPE_WIKIPAGE, group1address, participants);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addAdmin(group1);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addEditableByAnyone();
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(group2address);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(group1address, true);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(group2address, false);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addNotEditableByOthers();
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotVisibleByOthers();
     Mockito.verify(shareToTheNet, Mockito.times(1)).setVisible(false);
@@ -320,10 +322,10 @@ public class ShareDialogHelperTest {
   public void whenShareWikiNotEditable() {
     final AccessListsDTO acl = acl(list(group1), list(group2), NOBODY);
     participants.add(group2address);
-    helper.setState(currentGroup, acl, TYPE_WIKIPAGE, participants);
+    helper.setState(currentGroup, acl, TYPE_WIKIPAGE, group1address, participants);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addAdmin(group1);
-    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(group2address);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addParticipant(group2address, false);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotEditableByOthers();
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addNotVisibleByOthers();
     Mockito.verify(shareToTheNet, Mockito.times(1)).setVisible(false);

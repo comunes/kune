@@ -201,7 +201,8 @@ public class StateServiceDefault implements StateService {
         for (final String string : waveParticipants) {
           participantList.add(string);
         }
-        state.setParticipants(participantList);
+        state.setWaveParticipants(participantList);
+        state.setWaveCreator(wavelet.getCreator());
       } catch (final Exception e) {
         LOG.error("Error accessing wave " + waveRef, e);
         String waveUrl = null;

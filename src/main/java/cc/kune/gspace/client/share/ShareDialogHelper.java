@@ -40,6 +40,7 @@ import com.google.inject.Singleton;
 @Singleton
 public class ShareDialogHelper {
 
+  private static final String NO_CREATOR = "";
   private static final List<String> NO_MORE_PARTICIPANTS = new ArrayList<String>();
   private String localDomain;
   ShareMenu shareMenuBtn;
@@ -62,11 +63,11 @@ public class ShareDialogHelper {
   }
 
   public void setState(final GroupDTO currentGroup, final AccessListsDTO acl, final String typeId) {
-    setState(currentGroup, acl, typeId, NO_MORE_PARTICIPANTS);
+    setState(currentGroup, acl, typeId, NO_CREATOR, NO_MORE_PARTICIPANTS);
   }
 
   public void setState(final GroupDTO currentGroup, final AccessListsDTO acl, final String typeId,
-      final List<String> participants) {
+      final String waveCreator, final List<String> participants) {
     final GroupListDTO admins = acl.getAdmins();
     final GroupListDTO editors = acl.getEditors();
     final GroupListDTO viewers = acl.getViewers();
@@ -104,7 +105,7 @@ public class ShareDialogHelper {
       }
       for (final String participant : participants) {
         if (!localDomain.equals(participant)) {
-          shareToListView.addParticipant(participant);
+          shareToListView.addParticipant(participant, participant.equals(waveCreator));
         }
       }
       if (!editableByAny) {

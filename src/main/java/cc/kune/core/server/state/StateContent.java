@@ -45,13 +45,14 @@ public class StateContent extends StateContainer {
   private boolean isParticipant;
   private BasicMimeType mimeType;
   private Date modifiedOn;
-  private List<String> participants;
   private Date publishedOn;
   private Double rate;
   private Integer rateByUsers;
   private ContentStatus status;
   private String tags;
   private int version;
+  private String waveCreator;
+  private List<String> waveParticipants;
   private String waveRef;
 
   public StateContent() {
@@ -89,10 +90,6 @@ public class StateContent extends StateContainer {
     return modifiedOn;
   }
 
-  public List<String> getParticipants() {
-    return participants;
-  }
-
   public Date getPublishedOn() {
     return publishedOn;
   }
@@ -115,6 +112,14 @@ public class StateContent extends StateContainer {
 
   public int getVersion() {
     return version;
+  }
+
+  public String getWaveCreator() {
+    return waveCreator;
+  }
+
+  public List<String> getWaveParticipants() {
+    return waveParticipants;
   }
 
   public String getWaveRef() {
@@ -161,10 +166,6 @@ public class StateContent extends StateContainer {
     this.modifiedOn = modifiedOn;
   }
 
-  public void setParticipants(final List<String> participants) {
-    this.participants = participants;
-  }
-
   public void setPublishedOn(final Date publishedOn) {
     this.publishedOn = publishedOn;
   }
@@ -187,6 +188,14 @@ public class StateContent extends StateContainer {
 
   public void setVersion(final int version) {
     this.version = version;
+  }
+
+  public void setWaveCreator(final String waveCreator) {
+    this.waveCreator = waveCreator;
+  }
+
+  public void setWaveParticipants(final List<String> participants) {
+    this.waveParticipants = participants;
   }
 
   public void setWaveRef(final String waveRef) {

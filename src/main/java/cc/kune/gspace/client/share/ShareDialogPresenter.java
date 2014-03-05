@@ -188,7 +188,8 @@ public class ShareDialogPresenter extends
     if (cnt instanceof StateContentDTO) {
       final StateContentDTO content = (StateContentDTO) cnt;
       if (content.isWave()) {
-        helper.setState(currentGroup, acl, typeId, content.getParticipants());
+        helper.setState(currentGroup, acl, typeId, content.getWaveCreator(),
+            content.getWaveParticipants());
       } else {
         helper.setState(currentGroup, acl, typeId);
       }
