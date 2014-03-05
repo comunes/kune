@@ -23,6 +23,7 @@
 package cc.kune.lists.client.actions;
 
 import cc.kune.common.client.actions.AbstractAction;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
@@ -55,7 +56,6 @@ public class ShowSubscribersOfListBtn extends ButtonDescriptor {
     final int subscribers = session.getContainerState().getAccessLists().getEditors().getList().size();
     final int posts = session.getContainerState().getContainer().getContents().size();
     withText(i18n.t("[%d] subscribed, [%d] posts", subscribers, posts));
-    // withToolTip(i18n.t("Subscribe to this list"));
-    withStyles("k-def-docbtn, k-fl, k-noborder, k-no-backimage, k-nobackcolor");
+    withStyles("k-def-docbtn, " + ActionStyles.MENU_BTN_STYLE_NO_BORDER_LEFT);
   }
 }

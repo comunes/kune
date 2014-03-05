@@ -50,9 +50,9 @@ import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.gspace.client.actions.share.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
-import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInHelper;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -97,6 +97,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<MoveContentMenuItem> moveContentMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final Provider<ShareDialogMenuItem> shareDialog,
+      final Provider<ConfigureListMenuItem> configureList,
       final Provider<ListInvitationShareMenuItem> shareInvitation,
       final Provider<ListInvitationMenuItem> inviteMenuItem,
       final Provider<ListInviteUserMenuItem> inviteUserMenuItem,
@@ -115,11 +116,11 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
     add(TOPBAR, all, tutorialBtn, shareMenuContent);
+    add(TOPBAR, containersNoRoot, configureList);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
     add(TOPBAR, allExceptRoot, shareInvitation);
     add(TOPBAR, all, shareIHelper.getShareInList());
     add(TOPBAR, contents, shareDialog);
-    add(TOPBAR, containersNoRoot, shareDialog);
     add(TOPBAR, containersNoRoot, subscribersCount);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, delFolderMenuItem);
     add(TOPBAR, contents, participateBtn, copyContent, chatAbout, writeToParticipants);

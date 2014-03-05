@@ -16,27 +16,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 
-package cc.kune.gspace.client.actions.share;
+package cc.kune.lists.client.actions;
 
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
+import cc.kune.core.client.state.Session;
 import cc.kune.gspace.client.actions.IsInDevelopmentCondition;
+import cc.kune.gspace.client.actions.share.ShareDialogAction;
 import cc.kune.gspace.client.share.ShareDialog;
 
 import com.google.inject.Inject;
 
-public class ShareDialogMenuItem extends MenuItemDescriptor {
+public class ConfigureListMenuItem extends ButtonDescriptor {
 
   @Inject
-  public ShareDialogMenuItem(final ShareDialog shareDialog, final ShareDialogAction shareAction,
-      final ShareMenu menu, final IsInDevelopmentCondition isInDevAddCondition,
-      final IconicResources icons) {
+  public ConfigureListMenuItem(final ShareDialog shareDialog, final ShareDialogAction shareAction,
+      final IsInDevelopmentCondition isInDevAddCondition, final IconicResources icons,
+      final Session session) {
     super(shareAction);
-    withText(I18n.t("More sharing options"));
-    withIcon(icons.world());
+    withText(session.isNewbie() ? I18n.t("Configure") : "");
+    withToolTip(I18n.t("Configure this list: manage members, etc"));
+    withIcon(icons.prefs());
     withAddCondition(isInDevAddCondition);
-    setParent(menu, false);
   }
 
 }

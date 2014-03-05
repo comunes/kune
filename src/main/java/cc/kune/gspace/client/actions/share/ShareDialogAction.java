@@ -18,25 +18,45 @@
 
 package cc.kune.gspace.client.actions.share;
 
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.gspace.client.actions.IsInDevelopmentCondition;
+import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.core.client.actions.RolAction;
+import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.share.ShareDialog;
 
 import com.google.inject.Inject;
 
-public class ShareDialogMenuItem extends MenuItemDescriptor {
+/**
+ * The Class ShareDialogAction just show the share dialog
+ * 
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
+public class ShareDialogAction extends RolAction {
 
+  /** The share dialog. */
+  private final ShareDialog shareDialog;
+
+  /**
+   * Instantiates a new share dialog action.
+   * 
+   * @param shareDialog
+   *          the share dialog
+   */
   @Inject
-  public ShareDialogMenuItem(final ShareDialog shareDialog, final ShareDialogAction shareAction,
-      final ShareMenu menu, final IsInDevelopmentCondition isInDevAddCondition,
-      final IconicResources icons) {
-    super(shareAction);
-    withText(I18n.t("More sharing options"));
-    withIcon(icons.world());
-    withAddCondition(isInDevAddCondition);
-    setParent(menu, false);
+  public ShareDialogAction(final ShareDialog shareDialog) {
+    super(AccessRolDTO.Administrator, true);
+    this.shareDialog = shareDialog;
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
+   */
+  @Override
+  public void actionPerformed(final ActionEvent event) {
+    shareDialog.show();
   }
 
 }
