@@ -23,6 +23,7 @@
 package cc.kune.core.client.actions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Nonnull;
@@ -102,6 +103,19 @@ public class ActionRegistryByType {
       for (final Provider action : actions) {
         addActions(tool, actionsGroupId,
             new String[] { IdGenerator.generate(typeId, status.toString()) }, action);
+      }
+    }
+  }
+
+  @SuppressWarnings({ "unchecked", "rawtypes" })
+  public void addActions(@Nonnull final String tool, @Nonnull final String actionsGroupId,
+      @Nonnull final String[] typeIds,
+      final @Nonnull List<Provider<? extends GuiActionDescrip>> actionList) {
+    for (final String typeId : typeIds) {
+      for (final Provider action : actionList) {
+        final GuiActionDescProviderCollection actionColl = getActions(tool, actionsGroupId, typeId);
+        actionColl.add(action);
+        actions.put(genKey(tool, actionsGroupId, typeId), actionColl);
       }
     }
   }

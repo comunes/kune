@@ -44,10 +44,7 @@ import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInHelper;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -88,11 +85,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<PurgeContainerBtn> purgeFolderBtn, final Provider<ExportCalendarMenuItem> export,
       final Provider<CalendarGoNextBtn> calNextBtn, final CalendarOnOverMenu onOverMenu,
       final Provider<CalendarGoTodayBtn> goToday, final Provider<RefreshContentMenuItem> refresh,
-      final Provider<ShareDialogMenuItem> shareSettings,
-      final Provider<ShareInTwitterMenuItem> shareInTwitter,
-      final Provider<ShareInGPlusMenuItem> shareInGPlus,
-      final Provider<ShareInIdenticaMenuItem> shareInIdentica,
-      final Provider<ShareInFacebookMenuItem> shareInFacebook) {
+      final Provider<ShareDialogMenuItem> shareSettings, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
     add(TOPBAR, all, optionsMenuContent);
     add(TOPBAR, all, refresh);
@@ -103,7 +96,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     add(BOTTOMBAR, contents, folderGoUp);
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(TOPBAR, all, shareInTwitter, shareInGPlus);
+    add(TOPBAR, all, shareIHelper.getShareInList());
     add(TOPBAR, contents, shareSettings);
     // add(TOPBAR,
     // shareInFacebook, all);

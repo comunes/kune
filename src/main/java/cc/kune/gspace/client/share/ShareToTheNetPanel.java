@@ -18,13 +18,20 @@
 
 package cc.kune.gspace.client.share;
 
+import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.gspace.client.actions.share.ShareInDiggMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInLinkedinMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInRedditMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInTumblrMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -43,7 +50,9 @@ public class ShareToTheNetPanel extends Composite implements ShareToTheNetView {
   @Inject
   public ShareToTheNetPanel(final ShareInTwitterMenuItem twitterItem,
       final ShareInGPlusMenuItem gPlusItem, final ShareInIdenticaMenuItem identicaItem,
-      final ActionSimplePanel actionsPanel) {
+      final ShareInLinkedinMenuItem linkedItem, final ShareInTumblrMenuItem tumblrItem,
+      final ShareInDiggMenuItem diggItem, final ShareInRedditMenuItem redditItem,
+      final ShareInFacebookMenuItem facebookItem, final ActionSimplePanel actionsPanel) {
     final FlowPanel flow = new FlowPanel();
 
     final Label shareThisLinkTitle = new Label(I18n.t("share this link via:"));
@@ -66,21 +75,14 @@ public class ShareToTheNetPanel extends Composite implements ShareToTheNetView {
     flow.add(linkToShareIntro);
     flow.add(linkToShare);
     flow.add(shareThisLinkTitle);
-    // Clone social net menu items
-    final ButtonDescriptor twitterBtn = new ButtonDescriptor(twitterItem);
-    final ButtonDescriptor gPlusBtn = new ButtonDescriptor(gPlusItem);
-    // final ButtonDescriptor identicaBtn = new ButtonDescriptor(identicaItem);
 
-    twitterBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
-        ActionStyles.MENU_BTN_STYLE_NO_BORDER_LEFT);
-    gPlusBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
-        ActionStyles.MENU_BTN_STYLE_NO_BORDER_LEFT);
-    // identicaBtn.withParent(GuiActionDescrip.NO_PARENT).withText("").withStyles(
-    // ActionStyles.MENU_BTN_STYLE_NO_BORDER_LEFT);
-
-    actionsPanel.add(twitterBtn);
-    actionsPanel.add(gPlusBtn);
-    // actionsPanel.add(identicaBtn);
+    actionsPanel.add(btnFrom(twitterItem));
+    actionsPanel.add(btnFrom(gPlusItem));
+    actionsPanel.add(btnFrom(facebookItem));
+    actionsPanel.add(btnFrom(redditItem));
+    actionsPanel.add(btnFrom(diggItem));
+    actionsPanel.add(btnFrom(linkedItem));
+    actionsPanel.add(btnFrom(tumblrItem));
 
     flow.add(actionsPanel);
 
@@ -88,6 +90,15 @@ public class ShareToTheNetPanel extends Composite implements ShareToTheNetView {
     actionsPanel.addStyleName("k-fl");
 
     initWidget(flow);
+  }
+
+  private ButtonDescriptor btnFrom(final MenuItemDescriptor menuItem) {
+    // We convert ShareIn menu items to small buttons
+    final ButtonDescriptor btn = new ButtonDescriptor(menuItem);
+    final String text = (String) menuItem.getValue(Action.NAME);
+    btn.withParent(GuiActionDescrip.NO_PARENT).withText("").withToolTip(text).withStyles(
+        ActionStyles.MENU_BTN_STYLE_NO_BORDER_LEFT);
+    return btn;
   }
 
   @Override

@@ -1,5 +1,6 @@
 kune (0.3.0+b39) unstable; urgency=low
 
+  * Some more share in social network options (closes #391, and more work in #550)
   * Some minor fix in embed system
   * Intercept all a href links so don't open another window/tab for local #links (closes #366)
 

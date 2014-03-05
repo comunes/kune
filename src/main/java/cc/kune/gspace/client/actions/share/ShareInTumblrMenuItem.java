@@ -31,17 +31,17 @@ import cc.kune.core.client.state.Session;
 import com.google.inject.Inject;
 
 /**
- * The Class ShareInGPlusMenuItem.
+ * The Class ShareInTumblrMenuItem.
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
+public class ShareInTumblrMenuItem extends AbstractShareInSocialNetMenuItem {
 
   /** The Constant URL_TEMPLATE. */
-  private static final String URL_TEMPLATE = "https://plus.google.com/share?url=%s";
+  private static final String URL_TEMPLATE = "https://www.tumblr.com/login?s=&t=%s&u=%s&v=3";
 
   /**
-   * Instantiates a new share in g plus menu item.
+   * Instantiates a new share in tumblr menu item.
    * 
    * @param action
    *          the action
@@ -55,9 +55,11 @@ public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
    *          the i18n
    */
   @Inject
-  public ShareInGPlusMenuItem(final AbstractShareInSocialNetAction action, final IconicResources iconic,
-      final Session session, final ContentViewerShareMenu menu, final I18nTranslationService i18n) {
-    super(action, session, menu, i18n.t("Share this in google+"), iconic.googlePlus(),
-        ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonUrl()));
+  public ShareInTumblrMenuItem(final AbstractShareInSocialNetAction action,
+      final IconicResources iconic, final Session session, final ContentViewerShareMenu menu,
+      final I18nTranslationService i18n) {
+    super(action, session, menu, i18n.t("Share this in tumblr"), iconic.tumblr(),
+        ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonText(),
+            ShareInHelper.getCommonUrl()));
   }
 }

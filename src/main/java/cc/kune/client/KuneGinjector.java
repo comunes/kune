@@ -103,6 +103,10 @@ public interface KuneGinjector extends Ginjector, GSpaceGinjector, DocsGinjector
     WikiGinjector, BartersGinjector, EventsGinjector, ChatGinjector, TasksGinjector, ListsGinjector,
     TrashGinjector, HablarGinjector {
 
+  // Maybe use more this in the future
+  // public static final KuneGinjector INSTANCE =
+  // GWT.create(KuneGinjector.class);
+
   /*
    * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
    * see the GWTPlatform doc

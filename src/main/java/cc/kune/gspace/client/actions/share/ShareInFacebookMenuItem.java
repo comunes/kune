@@ -28,12 +28,9 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.AccessRolDTO;
 
-import com.google.gwt.http.client.URL;
 import com.google.inject.Inject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ShareInFacebookMenuItem.
  * 
@@ -42,20 +39,7 @@ import com.google.inject.Inject;
 public class ShareInFacebookMenuItem extends AbstractShareInSocialNetMenuItem {
 
   /** The Constant URL_TEMPLATE. */
-  private static final String URL_TEMPLATE = "https://www.facebook.com/dialog/feed?"
-      + "app_id=SOMETHINGHERE&" +
-      // LINK
-      "link=%s&" +
-      // IMAGE
-      "picture=%s&" +
-      // NAME
-      "name=%s&" +
-      // CAPTION
-      "caption=Reference%20Documentation&" +
-      // DESCRIPTION
-      "description=%s&" +
-      // REDIRECT
-      "redirect_uri=%s";
+  private static final String URL_TEMPLATE = "https://www.facebook.com/login.php?next=http%3A%2F%2Fwww.facebook.com%2Fsharer%2Fsharer.php%3Fu%3D%s%26t%3D%s&display=popup";
 
   /**
    * Instantiates a new share in facebook menu item.
@@ -77,17 +61,8 @@ public class ShareInFacebookMenuItem extends AbstractShareInSocialNetMenuItem {
   public ShareInFacebookMenuItem(final AbstractShareInSocialNetAction action,
       final IconicResources iconic, final Session session, final ContentViewerShareMenu menu,
       final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {
-    // THIS DOES NOT WORK (we need to study how the API works better).
     super(action, session, menu, i18n.t("Share this in facebook"), iconic.facebook(),
-        ClientFormattedString.build(
-            false,
-            URL_TEMPLATE,
-            URL.encode(ShareInSocialNetUtils.getCurrentUrl(session)),
-            URL.encodeQueryString(downUtils.getGroupLogo(session.getCurrentState().getGroup())),
-            URL.encode(ShareInSocialNetUtils.getTitle(session)),
-            URL.encode(i18n.tWithNT("via [%s]", "used in references 'something via @someone'",
-                i18n.getSiteCommonName())), ShareInSocialNetUtils.getCurrentUrl(session)));
-    action.setHigherRol(AccessRolDTO.Editor);
-    menu.setVisible(session.getCurrentState().getGroupRights().isVisible());
+        ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonUrl(),
+            ShareInHelper.getCommonText()));
   }
 }

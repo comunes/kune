@@ -40,7 +40,7 @@ import com.google.inject.Inject;
 public class ShareInTwitterMenuItem extends AbstractShareInSocialNetMenuItem {
 
   /** The Constant URL_TEMPLATE. */
-  private static final String URL_TEMPLATE = "https://twitter.com/intent/tweet?source=webclient&text=%s";
+  private static final String URL_TEMPLATE = "https://twitter.com/intent/tweet?text=%s";
 
   /**
    * Instantiates a new share in twitter menu item.

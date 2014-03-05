@@ -50,10 +50,7 @@ import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInHelper;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -93,11 +90,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<DelFolderMenuItem> delFolderMenuItem,
       final Provider<MoveContentMenuItem> moveContentMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
-      final Provider<ShareDialogMenuItem> shareSettings,
-      final Provider<ShareInTwitterMenuItem> shareInTwitter,
-      final Provider<ShareInGPlusMenuItem> shareInGPlus,
-      final Provider<ShareInIdenticaMenuItem> shareInIdentica,
-      final Provider<ShareInFacebookMenuItem> shareInFacebook) {
+      final Provider<ShareDialogMenuItem> shareSettings, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
     add(TOPBAR, all, optionsMenuContent);
     add(TOPBAR, all, refresh);
@@ -114,7 +107,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
         shareSettings);
-    add(TOPBAR, all, shareInTwitter, shareInGPlus);
+    add(TOPBAR, all, shareIHelper.getShareInList());
     add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem);

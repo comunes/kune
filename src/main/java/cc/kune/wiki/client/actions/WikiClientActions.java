@@ -47,10 +47,7 @@ import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInHelper;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -85,11 +82,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
       final Provider<CopyContentMenuItem> copyContent,
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final Provider<MoveContentMenuItem> moveContentMenuItem, final WikiPageNewMenu wikipageNewMenu,
-      final Provider<ShareDialogMenuItem> shareSettings,
-      final Provider<ShareInTwitterMenuItem> shareInTwitter,
-      final Provider<ShareInGPlusMenuItem> shareInGPlus,
-      final Provider<ShareInIdenticaMenuItem> shareInIdentica,
-      final Provider<ShareInFacebookMenuItem> shareInFacebook) {
+      final Provider<ShareDialogMenuItem> shareSettings, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
     // add(NAME, TOOLBAR, folderNewMenu,
     // containers);
@@ -105,7 +98,7 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     add(BOTTOMBAR, containers, folderGoUp);
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(TOPBAR, all, shareInTwitter, shareInGPlus);
+    add(TOPBAR, all, shareIHelper.getShareInList());
     add(TOPBAR, all, tutorialBtn);
     add(TOPBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);

@@ -49,10 +49,7 @@ import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInHelper;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -92,10 +89,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<MoveContentMenuItem> moveContentMenuItem,
       final NewMenusForTypeIdsRegistry newMenusRegistry, final DocsFolderNewMenu foldersNewMenu,
       final Provider<ShareDialogMenuItem> shareSettings, final DocsNewMenu docsNewMenu,
-      final Provider<ShareInTwitterMenuItem> shareInTwitter,
-      final Provider<ShareInGPlusMenuItem> shareInGPlus,
-      final Provider<ShareInIdenticaMenuItem> shareInIdentica,
-      final Provider<ShareInFacebookMenuItem> shareInFacaddAllMenuItemebook) {
+      final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
     add(TOPBAR, all, optionsMenuContent, refresh, newDocIconBtn);
     add(TOPBAR, containers, newFolderBtn, foldersNewMenu, newDocMenuItem);
@@ -108,7 +102,7 @@ public class DocsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem,
         shareSettings);
-    add(TOPBAR, all, shareInTwitter, shareInGPlus);
+    add(TOPBAR, all, shareIHelper.getShareInList());
     add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);

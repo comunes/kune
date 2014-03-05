@@ -34,10 +34,7 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.TutorialBtn;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
-import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInHelper;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -58,11 +55,7 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<OpenRoomArchiveMenuItem> openRoomArchiveMenuItem,
       final Provider<OpenRoomBtn> openRoomBtn, final Provider<TutorialBtn> tutorialBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
-      final Provider<ContentViewerShareMenu> shareMenuContent,
-      final Provider<ShareInTwitterMenuItem> shareInTwitter,
-      final Provider<ShareInGPlusMenuItem> shareInGPlus,
-      final Provider<ShareInIdenticaMenuItem> shareInIdentica,
-      final Provider<ShareInFacebookMenuItem> shareInFacebook) {
+      final Provider<ContentViewerShareMenu> shareMenuContent, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
     add(TOPBAR, all, optionsMenuContent, refresh);
     add(TOOL_NAME, TOPBAR, newRoomBtn, TYPE_ROOT);
@@ -71,7 +64,7 @@ public class ChatClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, containersNoRoot, openRoomBtn);
     add(ITEM_MENU, containersNoRoot, openRoomMenuItem, openRoomArchiveMenuItem);
     add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, all, shareInTwitter, shareInGPlus);
+    add(TOPBAR, all, shareIHelper.getShareInList());
   }
 
   @Override

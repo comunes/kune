@@ -170,6 +170,14 @@ public interface IconicResources extends ClientBundle {
   ImageResource del();
 
   /**
+   * Digg.
+   * 
+   * @return the image resource
+   */
+  @Source("digg.png")
+  ImageResource digg();
+
+  /**
    * Docs add.
    * 
    * @return the image resource
@@ -370,6 +378,14 @@ public interface IconicResources extends ClientBundle {
   ImageResource leftArrow();
 
   /**
+   * Linkedin.
+   * 
+   * @return the image resource
+   */
+  @Source("linkedin.png")
+  ImageResource linkedin();
+
+  /**
    * Lists add.
    * 
    * @return the image resource
@@ -522,6 +538,14 @@ public interface IconicResources extends ClientBundle {
   ImageResource prefs();
 
   /**
+   * reddit.
+   * 
+   * @return the image resource
+   */
+  @Source("reddit.png")
+  ImageResource reddit();
+
+  /**
    * Refreh.
    * 
    * @return the image resource
@@ -656,6 +680,14 @@ public interface IconicResources extends ClientBundle {
    */
   @Source("trash.png")
   ImageResource trashWhite();
+
+  /**
+   * Tumblr.
+   * 
+   * @return the image resource
+   */
+  @Source("tumblr.png")
+  ImageResource tumblr();
 
   /**
    * Twitter.

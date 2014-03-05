@@ -22,6 +22,8 @@
  */
 package cc.kune.gspace.client.actions;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
@@ -96,6 +98,11 @@ public abstract class AbstractFoldableToolActions {
   public void add(@Nonnull final String tool, @Nonnull final String actionsGroupId,
       @Nonnull final String[] typeIds, final @Nonnull Provider<? extends GuiActionDescrip>... actionList) {
     actionsRegistry.addActions(tool, actionsGroupId, typeIds, actionList);
+  }
+
+  public void add(@Nonnull final String actionsGroupId, @Nonnull final String[] typeIds,
+      final @Nonnull List<Provider<? extends GuiActionDescrip>> actionList) {
+    actionsRegistry.addActions(toolName, actionsGroupId, typeIds, actionList);
   }
 
   public void add(@Nonnull final String actionsGroupId, @Nonnull final String[] typeIds,

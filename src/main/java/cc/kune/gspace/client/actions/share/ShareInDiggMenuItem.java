@@ -31,17 +31,17 @@ import cc.kune.core.client.state.Session;
 import com.google.inject.Inject;
 
 /**
- * The Class ShareInGPlusMenuItem.
+ * The Class ShareInDiggMenuItem.
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
+public class ShareInDiggMenuItem extends AbstractShareInSocialNetMenuItem {
 
   /** The Constant URL_TEMPLATE. */
-  private static final String URL_TEMPLATE = "https://plus.google.com/share?url=%s";
+  private static final String URL_TEMPLATE = "http://digg.com/submit?url=%s&title=%s";
 
   /**
-   * Instantiates a new share in g plus menu item.
+   * Instantiates a new share in digg menu item.
    * 
    * @param action
    *          the action
@@ -55,9 +55,10 @@ public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
    *          the i18n
    */
   @Inject
-  public ShareInGPlusMenuItem(final AbstractShareInSocialNetAction action, final IconicResources iconic,
+  public ShareInDiggMenuItem(final AbstractShareInSocialNetAction action, final IconicResources iconic,
       final Session session, final ContentViewerShareMenu menu, final I18nTranslationService i18n) {
-    super(action, session, menu, i18n.t("Share this in google+"), iconic.googlePlus(),
-        ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonUrl()));
+    super(action, session, menu, i18n.t("Share this in digg"), iconic.digg(),
+        ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonUrl(),
+            ShareInHelper.getCommonText()));
   }
 }

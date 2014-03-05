@@ -52,10 +52,7 @@ import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
 import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInFacebookMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInGPlusMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInIdenticaMenuItem;
-import cc.kune.gspace.client.actions.share.ShareInTwitterMenuItem;
+import cc.kune.gspace.client.actions.share.ShareInHelper;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -100,13 +97,11 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<MoveContentMenuItem> moveContentMenuItem,
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final Provider<ShareDialogMenuItem> shareDialog,
-      final Provider<ShareInTwitterMenuItem> shareInTwitter,
-      final Provider<ShareInGPlusMenuItem> shareInGPlus,
-      final Provider<ShareInIdenticaMenuItem> shareInIdentica,
-      final Provider<ShareInFacebookMenuItem> shareInFacebook,
       final Provider<ListInvitationShareMenuItem> shareInvitation,
       final Provider<ListInvitationMenuItem> inviteMenuItem,
-      final Provider<ListInviteUserMenuItem> inviteUserMenuItem) {
+      final Provider<ListInviteUserMenuItem> inviteUserMenuItem,
+
+      final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
     // add(NAME, TOOLBAR, newListMenuItem,
     // TYPE_ROOT);
@@ -124,7 +119,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, allExceptRoot, shareInvitation);
     add(TOPBAR, containersNoRoot, shareDialog);
     add(TOPBAR, contents, shareDialog);
-    add(TOPBAR, all, shareInTwitter, shareInGPlus);
+    add(TOPBAR, all, shareIHelper.getShareInList());
     add(TOPBAR, containersNoRoot, subscribersCount);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, delFolderMenuItem);
     add(TOPBAR, contents, participateBtn, copyContent, chatAbout, writeToParticipants);
