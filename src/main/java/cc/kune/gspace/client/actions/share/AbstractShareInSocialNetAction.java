@@ -33,9 +33,7 @@ public class AbstractShareInSocialNetAction extends RolAction {
 
   @Inject
   public AbstractShareInSocialNetAction(final Session session) {
-    // FIXME remove after #550 is closed and removed from "In development"
-    super(AccessRolDTO.Viewer, session.isGuiInDevelopment() ? AccessRolDTO.Editor
-        : AccessRolDTO.Administrator, false);
+    super(AccessRolDTO.Viewer, false);
   }
 
   @Override
