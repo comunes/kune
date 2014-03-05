@@ -498,7 +498,7 @@ public interface IconicResources extends ClientBundle {
   ImageResource noCopyleftWhite();
 
   /**
-   * World.
+   * No world (used for non public resources).
    * 
    * @return the image resource
    */

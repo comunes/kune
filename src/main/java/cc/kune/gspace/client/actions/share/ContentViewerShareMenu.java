@@ -31,6 +31,7 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.GroupListMode;
+import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
@@ -58,15 +59,17 @@ public class ContentViewerShareMenu extends MenuLoggedDescriptor {
         final StateAbstractDTO state = event.getState();
         if (state instanceof StateContentDTO) {
           final StateContentDTO cnt = (StateContentDTO) state;
-          final boolean anyone = cnt.getAccessLists().getViewers().getMode().equals(
-              GroupListMode.EVERYONE);
-          setVisibleToEveryone(anyone);
+          setShareIconAndText(cnt.getAccessLists());
         } else if (state instanceof StateContainerDTO) {
           final StateContainerDTO cnt = (StateContainerDTO) state;
-          final boolean anyone = cnt.getAccessLists().getViewers().getMode().equals(
-              GroupListMode.EVERYONE);
-          setVisibleToEveryone(anyone);
+          setShareIconAndText(cnt.getAccessLists());
         }
+      }
+
+      private void setShareIconAndText(final AccessListsDTO acl) {
+        final String mode = acl.getViewers().getMode();
+        final boolean anyone = GroupListMode.valueOf(mode).equals(GroupListMode.EVERYONE);
+        setVisibleToEveryone(anyone);
       }
     });
 
@@ -74,8 +77,8 @@ public class ContentViewerShareMenu extends MenuLoggedDescriptor {
 
   public void setVisibleToEveryone(final Boolean visible) {
     this.withIcon(visible ? icons.world() : icons.noWorld());
-    withToolTip(visible ? I18n.t("This is visible by everyone")
-        : I18n.t("This is not visible by everyone"));
+    withToolTip(visible ? I18n.t("This is visible to everyone. More share options")
+        : I18n.t("This is not visible to everyone. Share this!"));
   }
 
 }
