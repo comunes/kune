@@ -56,7 +56,7 @@ public class ShareInRedditMenuItem extends AbstractShareInSocialNetMenuItem {
    */
   @Inject
   public ShareInRedditMenuItem(final AbstractShareInSocialNetAction action,
-      final IconicResources iconic, final Session session, final ContentViewerShareMenu menu,
+      final IconicResources iconic, final Session session, final ShareMenu menu,
       final I18nTranslationService i18n) {
     super(action, session, menu, i18n.t("Share this in reddit"), iconic.reddit(),
         ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonText(),

@@ -55,7 +55,7 @@ public class AddCollabMembersToContentMenuItem extends AddMembersToContentMenuIt
   @Inject
   public AddCollabMembersToContentMenuItem(final I18nTranslationService i18n,
       final AddMembersToContentAction action, final IsCurrentStateAGroupCondition isAGroupCondition,
-      final ContentViewerShareMenu menu, final IconicResources res) {
+      final ShareMenu menu, final IconicResources res) {
     super(i18n.t("Share with collaborators"), SocialNetworkSubGroup.COLLABS, action, menu, res);
     add(isAGroupCondition);
   }

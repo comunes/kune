@@ -23,7 +23,7 @@
 package cc.kune.gspace.client.share.items.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.share.ShareToTheNetView;
 import cc.kune.lists.client.rpc.ListsServiceHelper;
 
@@ -32,11 +32,11 @@ import com.google.inject.Provider;
 public abstract class AbstractMakeListPublicAction extends AbstractToggleShareItemAction {
 
   private final Provider<ListsServiceHelper> helper;
-  private final ContentViewerShareMenu menu;
+  private final ShareMenu menu;
   private final ShareToTheNetView netView;
 
   AbstractMakeListPublicAction(final boolean value, final Provider<ListsServiceHelper> helper,
-      final ContentViewerShareMenu menu, final ShareToTheNetView netView) {
+      final ShareMenu menu, final ShareToTheNetView netView) {
     super(value);
     this.helper = helper;
     this.menu = menu;

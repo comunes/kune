@@ -32,7 +32,7 @@ import com.google.inject.Inject;
 public class ShareDialogMenuItem extends MenuItemDescriptor {
 
   @Inject
-  public ShareDialogMenuItem(final ShareDialog shareDialog, final ContentViewerShareMenu menu,
+  public ShareDialogMenuItem(final ShareDialog shareDialog, final ShareMenu menu,
       final IsInDevelopmentCondition isInDevAddCondition, final IconicResources icons) {
     super(new RolAction(AccessRolDTO.Administrator, true) {
       @Override

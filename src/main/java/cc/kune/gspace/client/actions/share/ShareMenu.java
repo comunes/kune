@@ -41,13 +41,13 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 @Singleton
-public class ContentViewerShareMenu extends MenuLoggedDescriptor {
+public class ShareMenu extends MenuLoggedDescriptor {
 
   public static final String ID = "k-cnt-viewer-share-menu";
   private final IconicResources icons;
 
   @Inject
-  public ContentViewerShareMenu(final IconicResources res, final I18nTranslationService i18n,
+  public ShareMenu(final IconicResources res, final I18nTranslationService i18n,
       final AccessRightsClientManager rightsManager, final StateManager stateManager) {
     super(rightsManager);
     this.icons = res;

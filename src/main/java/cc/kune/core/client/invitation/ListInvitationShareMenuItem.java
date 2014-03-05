@@ -26,7 +26,7 @@ package cc.kune.core.client.invitation;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -52,7 +52,7 @@ public class ListInvitationShareMenuItem extends MenuItemDescriptor {
    */
   @Inject
   ListInvitationShareMenuItem(final ListInvitationAction action, final IconicResources icons,
-      final ContentViewerShareMenu menu) {
+      final ShareMenu menu) {
     super(action);
     withText(I18n.t("Invite others to this list via email")).withIcon(icons.listsPostGrey()).withParent(
         menu, false);

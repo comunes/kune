@@ -56,7 +56,7 @@ public class ShareInTumblrMenuItem extends AbstractShareInSocialNetMenuItem {
    */
   @Inject
   public ShareInTumblrMenuItem(final AbstractShareInSocialNetAction action,
-      final IconicResources iconic, final Session session, final ContentViewerShareMenu menu,
+      final IconicResources iconic, final Session session, final ShareMenu menu,
       final I18nTranslationService i18n) {
     super(action, session, menu, i18n.t("Share this in tumblr"), iconic.tumblr(),
         ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonText(),

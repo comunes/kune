@@ -59,7 +59,7 @@ public class ShareInFacebookMenuItem extends AbstractShareInSocialNetMenuItem {
    */
   @Inject
   public ShareInFacebookMenuItem(final AbstractShareInSocialNetAction action,
-      final IconicResources iconic, final Session session, final ContentViewerShareMenu menu,
+      final IconicResources iconic, final Session session, final ShareMenu menu,
       final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {
     super(action, session, menu, i18n.t("Share this in facebook"), iconic.facebook(),
         ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonUrl(),

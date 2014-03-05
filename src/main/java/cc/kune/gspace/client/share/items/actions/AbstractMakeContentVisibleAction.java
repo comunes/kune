@@ -24,7 +24,7 @@ package cc.kune.gspace.client.share.items.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.share.ShareToTheNetView;
 
 import com.google.inject.Provider;
@@ -32,11 +32,11 @@ import com.google.inject.Provider;
 public abstract class AbstractMakeContentVisibleAction extends AbstractToggleShareItemAction {
 
   private final Provider<ContentServiceHelper> helper;
-  private final ContentViewerShareMenu menu;
+  private final ShareMenu menu;
   private final ShareToTheNetView netView;
 
   AbstractMakeContentVisibleAction(final boolean value, final Provider<ContentServiceHelper> helper,
-      final ContentViewerShareMenu menu, final ShareToTheNetView netView) {
+      final ShareMenu menu, final ShareToTheNetView netView) {
     super(value);
     this.helper = helper;
     this.menu = menu;

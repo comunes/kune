@@ -50,7 +50,7 @@ public class AddMembersToContentMenuItem extends MenuItemDescriptor {
    *          the res
    */
   public AddMembersToContentMenuItem(final String text, final SocialNetworkSubGroup subGroup,
-      final AddMembersToContentAction action, final ContentViewerShareMenu menu,
+      final AddMembersToContentAction action, final ShareMenu menu,
       final IconicResources res) {
     super(action);
     action.setSubGroup(subGroup);

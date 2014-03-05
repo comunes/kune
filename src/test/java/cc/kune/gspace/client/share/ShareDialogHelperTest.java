@@ -39,7 +39,7 @@ import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
 import cc.kune.core.shared.dto.GroupType;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.lists.shared.ListsToolConstants;
 
 public class ShareDialogHelperTest {
@@ -106,7 +106,7 @@ public class ShareDialogHelperTest {
     shareToOthers = Mockito.mock(ShareToOthersView.class);
     shareToList = Mockito.mock(ShareToListView.class);
     shareToTheNet = Mockito.mock(ShareToTheNetView.class);
-    final ContentViewerShareMenu menuBtn = Mockito.mock(ContentViewerShareMenu.class);
+    final ShareMenu menuBtn = Mockito.mock(ShareMenu.class);
     currentGroup = new GroupDTO("current", "current", GroupType.PROJECT);
     group1 = new GroupDTO("shortname1", "longname 1", GroupType.PROJECT);
     group2 = new GroupDTO("shortname2", "longname 2", GroupType.PROJECT);

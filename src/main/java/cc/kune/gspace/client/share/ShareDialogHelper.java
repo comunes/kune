@@ -31,7 +31,7 @@ import java.util.Set;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
@@ -42,7 +42,7 @@ public class ShareDialogHelper {
 
   private static final List<String> NO_MORE_PARTICIPANTS = new ArrayList<String>();
   private String localDomain;
-  ContentViewerShareMenu shareMenuBtn;
+  ShareMenu shareMenuBtn;
   private final ShareToListView shareToListView;
   private final ShareToOthersView shareToOthersView;
   private final ShareToTheNetView shareToTheNetView;
@@ -50,7 +50,7 @@ public class ShareDialogHelper {
   @Inject
   public ShareDialogHelper(final ShareToListView shareToListView,
       final ShareToTheNetView shareToTheNetView, final ShareToOthersView shareToOthersView,
-      final ContentViewerShareMenu shareMenuBtn) {
+      final ShareMenu shareMenuBtn) {
     this.shareToListView = shareToListView;
     this.shareToTheNetView = shareToTheNetView;
     this.shareToOthersView = shareToOthersView;

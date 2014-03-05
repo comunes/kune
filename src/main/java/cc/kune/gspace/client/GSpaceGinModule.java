@@ -33,7 +33,7 @@ import cc.kune.core.client.sn.actions.WriteToBuddyHeaderButton;
 import cc.kune.gspace.client.actions.ActionUtils;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RenameAction;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.GSpaceArmorDefault;
 import cc.kune.gspace.client.feedback.FeedbackBottomPanel;
@@ -233,7 +233,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
     // Actions
     s(ContentViewerOptionsMenu.class);
-    s(ContentViewerShareMenu.class);
+    s(ShareMenu.class);
     s(RenameAction.class);
     s(FeedbackBottomPanel.class);
     s(WriteToBuddyHeaderButton.class);

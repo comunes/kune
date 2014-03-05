@@ -24,7 +24,7 @@ package cc.kune.gspace.client.share.items.actions;
 
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.share.ShareToTheNetView;
 import cc.kune.gspace.client.share.items.ShareItemDescriptor;
 import cc.kune.lists.client.rpc.ListsServiceHelper;
@@ -39,7 +39,7 @@ public class ListPublicShareItemDescriptor extends ShareItemDescriptor {
   public static class MakeListNonPublicAction extends AbstractMakeListPublicAction {
     @Inject
     MakeListNonPublicAction(final Provider<ListsServiceHelper> helper,
-        final ContentViewerShareMenu menu, final ShareToTheNetView netView) {
+        final ShareMenu menu, final ShareToTheNetView netView) {
       super(false, helper, menu, netView);
     }
   }

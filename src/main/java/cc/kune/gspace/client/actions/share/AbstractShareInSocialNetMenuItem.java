@@ -31,7 +31,7 @@ import com.google.gwt.resources.client.ImageResource;
 public class AbstractShareInSocialNetMenuItem extends MenuItemDescriptor {
 
   public AbstractShareInSocialNetMenuItem(final AbstractShareInSocialNetAction action,
-      final Session session, final ContentViewerShareMenu menu, final String text,
+      final Session session, final ShareMenu menu, final String text,
       final ImageResource icon, final ClientFormattedString url) {
     super(action);
     withText(text).withIcon(icon).withParent(menu, false);

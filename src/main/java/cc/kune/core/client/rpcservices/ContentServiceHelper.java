@@ -36,6 +36,7 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.SocialNetworkSubGroup;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
 import com.google.gwt.event.shared.EventBus;
@@ -58,6 +59,7 @@ public class ContentServiceHelper {
   private final FolderViewerPresenter folderViewer;
   private final I18nTranslationService i18n;
   private final Session session;
+  private final Provider<ShareMenu> shareMenu;
   private final StateManager stateManager;
 
   /**
@@ -81,7 +83,8 @@ public class ContentServiceHelper {
   @Inject
   public ContentServiceHelper(final Session session, final I18nTranslationService i18n,
       final EventBus eventBus, final Provider<ContentServiceAsync> contentService,
-      final ContentCache cache, final FolderViewerPresenter folderViewer, final StateManager stateManager) {
+      final ContentCache cache, final FolderViewerPresenter folderViewer,
+      final StateManager stateManager, final Provider<ShareMenu> shareMenu) {
     this.cache = cache;
     this.folderViewer = folderViewer;
     this.session = session;
@@ -89,6 +92,7 @@ public class ContentServiceHelper {
     this.eventBus = eventBus;
     this.contentService = contentService;
     this.stateManager = stateManager;
+    this.shareMenu = shareMenu;
     defCallback = new AsyncCallbackSimple<StateContainerDTO>() {
       @Override
       public void onFailure(final Throwable caught) {
@@ -148,7 +152,8 @@ public class ContentServiceHelper {
             if (result) {
               NotifyUser.info(i18n.t("User '[%s]' added as participant", userName));
               onAdd.onCallback();
-              refreshState();
+              // (vjrj) I think this is not needed:
+              // refreshState();
             } else {
               NotifyUser.info(i18n.t("This user is already participating"));
             }
@@ -176,7 +181,8 @@ public class ContentServiceHelper {
                 : i18n.t("Shared with members")
                 : i18n.t("All these members are already partipating"));
             if (result) {
-              refreshState();
+              // (vjrj) I think this is not needed:
+              // refreshState();
             }
           }
         });
@@ -227,7 +233,8 @@ public class ContentServiceHelper {
           public void onSuccess(final Boolean result) {
             onSuccess.onCallback();
             NotifyUser.info(i18n.t("Not editable by anyone: Now only editors can participate"));
-            refreshState();
+            // (vjrj) I think this is not needed:
+            // refreshState();
           }
         });
   }
@@ -260,9 +267,9 @@ public class ContentServiceHelper {
         });
   }
 
-  private void refreshState() {
-    stateManager.refreshCurrentStateWithoutCache();
-  }
+  // private void refreshState() {
+  // stateManager.refreshCurrentStateWithoutCache();
+  // }
 
   public void setEditableByAnyone(final boolean editable, final SimpleCallback onSuccess) {
     if (editable) {
@@ -281,6 +288,7 @@ public class ContentServiceHelper {
             NotifyUser.info(i18n.t(visible ? "Now, this is visible for everyone"
                 : "Now, this is not visible for everyone"));
             stateManager.setRetrievedState(result);
+            shareMenu.get().setVisibleToEveryone(visible);
           }
         });
   }

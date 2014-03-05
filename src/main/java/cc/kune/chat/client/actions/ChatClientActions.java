@@ -33,7 +33,7 @@ import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.TutorialBtn;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.actions.share.ShareInHelper;
 
 import com.google.inject.Inject;
@@ -55,7 +55,7 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<OpenRoomArchiveMenuItem> openRoomArchiveMenuItem,
       final Provider<OpenRoomBtn> openRoomBtn, final Provider<TutorialBtn> tutorialBtn,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
-      final Provider<ContentViewerShareMenu> shareMenuContent, final ShareInHelper shareIHelper) {
+      final Provider<ShareMenu> shareMenuContent, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
     add(TOPBAR, all, optionsMenuContent, refresh);
     add(TOOL_NAME, TOPBAR, newRoomBtn, TYPE_ROOT);

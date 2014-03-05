@@ -56,7 +56,7 @@ public class ShareInLinkedinMenuItem extends AbstractShareInSocialNetMenuItem {
    */
   @Inject
   public ShareInLinkedinMenuItem(final AbstractShareInSocialNetAction action,
-      final IconicResources iconic, final Session session, final ContentViewerShareMenu menu,
+      final IconicResources iconic, final Session session, final ShareMenu menu,
       final I18nTranslationService i18n) {
     super(action, session, menu, i18n.t("Share this in linkedin"), iconic.linkedin(),
         ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonUrl()));

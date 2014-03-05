@@ -56,7 +56,7 @@ public class ShareInGPlusMenuItem extends AbstractShareInSocialNetMenuItem {
    */
   @Inject
   public ShareInGPlusMenuItem(final AbstractShareInSocialNetAction action, final IconicResources iconic,
-      final Session session, final ContentViewerShareMenu menu, final I18nTranslationService i18n) {
+      final Session session, final ShareMenu menu, final I18nTranslationService i18n) {
     super(action, session, menu, i18n.t("Share this in google+"), iconic.googlePlus(),
         ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonUrl()));
   }

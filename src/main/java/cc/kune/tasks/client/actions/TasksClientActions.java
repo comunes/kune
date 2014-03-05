@@ -48,7 +48,7 @@ import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.gspace.client.actions.share.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInHelper;
 import cc.kune.trash.shared.TrashToolConstants;
@@ -74,7 +74,7 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<MarkAsNotDoneTaskMenuItem> marksAsNotDoneMenuItem,
       final Provider<RefreshContentMenuItem> refresh,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
-      final Provider<ContentViewerShareMenu> shareMenuContent,
+      final Provider<ShareMenu> shareMenuContent,
       final Provider<ParticipateInContentBtn> participateBtn, final Provider<TutorialBtn> tutorialBtn,
       final Provider<DelTaskMenuItem> delContentMenuItem,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,

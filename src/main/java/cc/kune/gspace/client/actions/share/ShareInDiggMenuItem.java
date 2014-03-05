@@ -56,7 +56,7 @@ public class ShareInDiggMenuItem extends AbstractShareInSocialNetMenuItem {
    */
   @Inject
   public ShareInDiggMenuItem(final AbstractShareInSocialNetAction action, final IconicResources iconic,
-      final Session session, final ContentViewerShareMenu menu, final I18nTranslationService i18n) {
+      final Session session, final ShareMenu menu, final I18nTranslationService i18n) {
     super(action, session, menu, i18n.t("Share this in digg"), iconic.digg(),
         ClientFormattedString.build(false, URL_TEMPLATE, ShareInHelper.getCommonUrl(),
             ShareInHelper.getCommonText()));

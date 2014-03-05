@@ -50,7 +50,7 @@ import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.gspace.client.actions.share.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
-import cc.kune.gspace.client.actions.share.ContentViewerShareMenu;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInHelper;
 import cc.kune.trash.shared.TrashToolConstants;
@@ -78,7 +78,7 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<RefreshListMenuItem> refreshList, final Provider<SubscribeToListBtn> subscribeBtn,
       final Provider<OptionsListMenu> optionsMenuContainer,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
-      final Provider<ContentViewerShareMenu> shareMenuContent,
+      final Provider<ShareMenu> shareMenuContent,
       final Provider<ShowSubscribersOfListBtn> subscribersCount,
       final Provider<TutorialBtn> tutorialBtn,
       final Provider<AddAllMembersToContentMenuItem> addAllMenuItem,
