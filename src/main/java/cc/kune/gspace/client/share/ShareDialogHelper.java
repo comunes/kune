@@ -83,6 +83,7 @@ public class ShareDialogHelper {
 
     shareToTheNetView.setVisible(viewerMode.equals(EVERYONE));
     final boolean isAList = typeId.equals(ListsToolConstants.TYPE_LIST);
+    // final boolean isAWiki = typeId.equals(WikiToolConstants.TYPE_WIKIPAGE);
     final boolean isWave = participants.size() != 0;
 
     shareToOthersView.setVisible(!editorMode.equals(EVERYONE) || isAList);
@@ -97,7 +98,8 @@ public class ShareDialogHelper {
     }
     if (isWave) {
       // Participants
-      if (participants.contains(localDomain)) {
+      final boolean editableByAny = participants.contains(localDomain);
+      if (editableByAny) {
         shareToListView.addEditableByAnyone();
       }
       for (final String participant : participants) {
@@ -105,11 +107,14 @@ public class ShareDialogHelper {
           shareToListView.addParticipant(participant);
         }
       }
+      if (!editableByAny) {
+        shareToListView.addNotEditableByOthers();
+      }
     } else {
       // Editors
       final boolean noEditors = editorMode.equals(NOBODY)
           || (editorMode.equals(NORMAL) && editorsList.size() == 0);
-      if (noEditors && !isAList) {
+      if ((noEditors && !isAList)) {
         shareToListView.addNotEditableByOthers();
       } else {
         if (editorMode.equals(NORMAL)) {
