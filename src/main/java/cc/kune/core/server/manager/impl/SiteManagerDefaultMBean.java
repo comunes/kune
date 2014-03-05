@@ -35,12 +35,16 @@ public interface SiteManagerDefaultMBean {
   /** The Constant MBEAN_OBJECT_NAME. */
   public static final String MBEAN_OBJECT_NAME = MBeanConstants.PREFIX + "SiteManagerDefault";
 
+  boolean getShowInDevelFeatures();
+
   /**
    * Gets the store untranslated string.
    * 
    * @return the store unstranslated string
    */
-  boolean getStoreUntranslatedString();
+  boolean getStoreUntranslatedStrings();
+
+  void setShowInDevelFeatures(final boolean showInDevelFeatures);
 
   /**
    * Sets the store untranslated string.
@@ -48,6 +52,6 @@ public interface SiteManagerDefaultMBean {
    * @param storeUntranslatedString
    *          the new store untranslated string
    */
-  void setStoreUntranslatedString(boolean storeUntranslatedString);
+  void setStoreUntranslatedStrings(boolean storeUntranslatedString);
 
 }

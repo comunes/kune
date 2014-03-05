@@ -114,6 +114,9 @@ public class InitDataDTO implements IsSerializable {
   /** The reserved words. */
   private ReservedWordsRegistryDTO reservedWords;
 
+  /** If the UI Devel Features should be showed */
+  private boolean showInDevelFeatures;
+
   /** The site logo url. */
   private String siteLogoUrl;
 
@@ -367,6 +370,10 @@ public class InitDataDTO implements IsSerializable {
    */
   public ReservedWordsRegistryDTO getReservedWords() {
     return this.reservedWords;
+  }
+
+  public boolean getShowInDevelFeatures() {
+    return showInDevelFeatures;
   }
 
   /**
@@ -754,6 +761,17 @@ public class InitDataDTO implements IsSerializable {
    */
   public void setReservedWords(final ReservedWordsRegistryDTO reservedWords) {
     this.reservedWords = reservedWords;
+  }
+
+  /**
+   * Sets the show in devel features via MBean (so the new clients will show ui
+   * in development features).
+   * 
+   * @param showInDevelFeatures
+   *          the new show in devel features
+   */
+  public void setShowInDevelFeatures(final boolean showInDevelFeatures) {
+    this.showInDevelFeatures = showInDevelFeatures;
   }
 
   /**

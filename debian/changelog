@@ -1,5 +1,6 @@
 kune (0.3.0+b39) unstable; urgency=low
 
+  * Add 'Show in ui devel features' property and Mbean
   * Several bug fixes for #550
   * Some more share in social network options (closes #391, and more work in #550)
   * Some minor fix in embed system

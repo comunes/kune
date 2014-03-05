@@ -90,6 +90,9 @@ public interface KuneProperties {
   /** The reserved words. */
   String RESERVED_WORDS = "kune.server.names.reservedwords";
 
+  /** The showDevelFeatures. */
+  String SHOW_DEVEL_FEATURES = "kune.devel.showFeatures";
+
   /** The site admin email. */
   String SITE_ADMIN_EMAIL = "kune.admin.email";
 

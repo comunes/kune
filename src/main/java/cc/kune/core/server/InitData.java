@@ -120,6 +120,9 @@ public class InitData {
   /** The reserved words. */
   private ReservedWordsRegistryDTO reservedWords;
 
+  /** If the UI Devel Features should be showed */
+  private boolean showInDevelFeatures;
+
   /** The site common name. */
   private String siteCommonName;
 
@@ -370,6 +373,10 @@ public class InitData {
    */
   public ReservedWordsRegistryDTO getReservedWords() {
     return this.reservedWords;
+  }
+
+  public boolean getShowInDevelFeatures() {
+    return showInDevelFeatures;
   }
 
   /**
@@ -751,6 +758,10 @@ public class InitData {
    */
   public void setReservedWords(final ReservedWordsRegistryDTO reservedWords) {
     this.reservedWords = reservedWords;
+  }
+
+  public void setShowInDevelFeatures(final boolean showInDevelFeatures) {
+    this.showInDevelFeatures = showInDevelFeatures;
   }
 
   /**

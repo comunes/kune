@@ -90,7 +90,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   private HashMap<String, GSpaceTheme> siteThemes;
 
   /** The store untranslated string. */
-  private boolean storeUntranslatedString;
+  private boolean storeUntranslatedStrings;
 
   /** The user info service. */
   private final UserInfoService userInfoService;
@@ -139,7 +139,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     this.countryManager = countryManager;
     this.serverToolRegistry = serverToolRegistry;
     // By default we don't collect which part of the client is untranslated
-    storeUntranslatedString = false;
+    storeUntranslatedStrings = false;
     mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
   }
 
@@ -175,8 +175,13 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
     dataMapped.setgSpaceThemes(siteThemes);
     dataMapped.setReservedWords(reservedWords);
-    dataMapped.setStoreUntranslatedStrings(storeUntranslatedString);
+    dataMapped.setStoreUntranslatedStrings(storeUntranslatedStrings);
     return dataMapped;
+  }
+
+  @Override
+  public boolean getShowInDevelFeatures() {
+    return data.getShowInDevelFeatures();
   }
 
   /**
@@ -200,8 +205,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
    * @see cc.kune.core.server.rpc.SiteRPCMBean#getStoreUntranslatedString()
    */
   @Override
-  public boolean getStoreUntranslatedString() {
-    return storeUntranslatedString;
+  public boolean getStoreUntranslatedStrings() {
+    return storeUntranslatedStrings;
   }
 
   /**
@@ -259,6 +264,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     data.setDefTutorialLanguage(kuneProperties.get(KuneProperties.KUNE_TUTORIALS_DEFLANG));
     data.setTutorialLanguages(kuneProperties.getList(KuneProperties.KUNE_TUTORIALS_LANGS));
     data.setPublicSpaceVisible(kuneProperties.getBoolean(KuneProperties.PUBLIC_SPACE_VISIBLE));
+    data.setShowInDevelFeatures(kuneProperties.getBoolean(KuneProperties.SHOW_DEVEL_FEATURES));
     return data;
   }
 
@@ -274,6 +280,11 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
   }
 
+  @Override
+  public void setShowInDevelFeatures(final boolean showInDevelFeatures) {
+    data.setShowInDevelFeatures(showInDevelFeatures);
+  }
+
   /*
    * (non-Javadoc)
    * 
@@ -281,8 +292,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
    * cc.kune.core.server.rpc.SiteRPCMBean#setStoreUntranslatedString(boolean)
    */
   @Override
-  public void setStoreUntranslatedString(final boolean storeUntranslatedString) {
-    this.storeUntranslatedString = storeUntranslatedString;
+  public void setStoreUntranslatedStrings(final boolean storeUntranslatedStrings) {
+    this.storeUntranslatedStrings = storeUntranslatedStrings;
   }
 
 }

@@ -74,7 +74,6 @@ public class SessionDefault implements Session {
   private UserInfoDTO currentUserInfo;
   private final EventBus eventBus;
   private InitDataDTO initData;
-
   private Boolean isDev;
   private boolean isEmbedded = false;
   /** The languages array. */
@@ -441,7 +440,9 @@ public class SessionDefault implements Session {
   public boolean isGuiInDevelopment() {
     if (isDev == null) {
       final String isDevParam = WindowUtils.getParameter(SessionConstants.DEVELOPMENT);
-      isDev = isDevParam == null ? false : Boolean.valueOf(isDevParam);
+      final boolean inDevUrlParam = isDevParam == null ? false : Boolean.valueOf(isDevParam);
+      // Server can force to show UI devel Features via MBean / properties
+      isDev = initData.getShowInDevelFeatures() || inDevUrlParam;
     }
     return isDev;
   }
