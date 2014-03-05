@@ -30,13 +30,13 @@ import com.google.gwt.resources.client.ImageResource;
 public abstract class AbstractShareItemWithMenuUi extends AbstractShareItemUi {
 
   protected final MenuDescriptor menu;
+  private final CommonResources res;
 
   public AbstractShareItemWithMenuUi(final ActionSimplePanel actionsPanel,
       final ClientFileDownloadUtils downloadUtils, final CommonResources res) {
     super(actionsPanel, downloadUtils);
+    this.res = res;
     menu = new MenuDescriptor("");
-    menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
-        ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
     super.add(menu);
   }
 
@@ -54,6 +54,15 @@ public abstract class AbstractShareItemWithMenuUi extends AbstractShareItemUi {
     for (final MenuItemDescriptor menuItem : descriptor.getMenuItems()) {
       menuItem.setParent(menu);
       super.add(menuItem);
+    }
+    // We disable the menu if we are this user (so we cannot remove or change
+    // myself permission)
+    menu.setEnabled(!descriptor.isMe());
+    if (!descriptor.isMe()) {
+      menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
+          ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", " + ActionStyles.SHARE_ITEM_ACTIONS);
+    } else {
+      menu.withStyles(ActionStyles.SHARE_ITEM_NO_ACTIONS);
     }
   }
 

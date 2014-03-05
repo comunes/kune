@@ -62,12 +62,13 @@ public class ShareDialogHelper {
     this.localDomain = "@" + localDomain;
   }
 
-  public void setState(final GroupDTO currentGroup, final AccessListsDTO acl, final String typeId) {
-    setState(currentGroup, acl, typeId, NO_CREATOR, NO_MORE_PARTICIPANTS);
+  public void setState(final GroupDTO currentGroup, final String currentUser, final AccessListsDTO acl,
+      final String typeId) {
+    setState(currentGroup, currentUser, acl, typeId, NO_CREATOR, NO_MORE_PARTICIPANTS);
   }
 
-  public void setState(final GroupDTO currentGroup, final AccessListsDTO acl, final String typeId,
-      final String waveCreator, final List<String> participants) {
+  public void setState(final GroupDTO currentGroup, final String currentUser, final AccessListsDTO acl,
+      final String typeId, final String waveCreator, final List<String> participants) {
     final GroupListDTO admins = acl.getAdmins();
     final GroupListDTO editors = acl.getEditors();
     final GroupListDTO viewers = acl.getViewers();
@@ -92,8 +93,11 @@ public class ShareDialogHelper {
     // Admins
     if (!isWave && adminsMode.equals(NORMAL)) {
       for (final GroupDTO admin : adminList) {
-        if (!admin.equals(currentGroup)) {
+        final boolean isMe = admin.getShortName().equals(currentUser);
+        if (!isMe) {
           shareToListView.addAdmin(admin);
+        } else {
+          shareToListView.addAdmin(admin, true);
         }
       }
     }

@@ -185,16 +185,17 @@ public class ShareDialogPresenter extends
 
     final AccessListsDTO acl = cnt.getAccessLists();
     final GroupDTO currentGroup = cnt.getGroup();
+    final String currentUser = session.getCurrentUser().getShortName();
     if (cnt instanceof StateContentDTO) {
       final StateContentDTO content = (StateContentDTO) cnt;
       if (content.isWave()) {
-        helper.setState(currentGroup, acl, typeId, content.getWaveCreator(),
+        helper.setState(currentGroup, currentUser, acl, typeId, content.getWaveCreator(),
             content.getWaveParticipants());
       } else {
-        helper.setState(currentGroup, acl, typeId);
+        helper.setState(currentGroup, currentUser, acl, typeId);
       }
     } else {
-      helper.setState(currentGroup, acl, typeId);
+      helper.setState(currentGroup, currentUser, acl, typeId);
     }
     shareToNetView.get().setLinkToShare(StateTokenUtils.getGroupSpaceUrl(session.getCurrentStateToken()));
     getView().show();

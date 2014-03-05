@@ -37,7 +37,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  */
 public class ShareToListPanel extends Composite implements ShareToListView, ShareToListOnItemRemoved {
 
-  private static final String SCROLL_HEIGHT = "75px";
+  private static final String SCROLL_HEIGHT = "100px";
+  private static final String SCROLLWIDTH = "380px";
 
   private final VerticalPanel itemsPanel;
 
@@ -59,8 +60,7 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
     final VerticalPanel vp = new VerticalPanel();
     itemsPanel = new VerticalPanel();
     scroll = new ScrollPanel();
-    // scroll.setHeight(SCROLL_HEIGHT);
-    scroll.setWidth("380px");
+    scroll.setWidth(SCROLLWIDTH);
     DOM.setStyleAttribute(scroll.getElement(), "maxHeight", SCROLL_HEIGHT);
     scroll.setStyleName("k-sharelist-scroll");
     scroll.add(itemsPanel);
@@ -75,6 +75,11 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
   }
 
   @Override
+  public void addAdmin(final GroupDTO group, final boolean isMe) {
+    addItemForSomeRol(group, AccessRolDTO.Administrator, isMe);
+  }
+
+  @Override
   public void addEditableByAnyone() {
     itemsPanel.add(ShareItemFactory.getContentEditableByAnyone().with(true));
   }
@@ -85,12 +90,14 @@ public class ShareToListPanel extends Composite implements ShareToListView, Shar
   }
 
   private void addItemForSomeRol(final GroupDTO group, final AccessRolDTO rol) {
+    addItemForSomeRol(group, rol, false);
+  }
+
+  private void addItemForSomeRol(final GroupDTO group, final AccessRolDTO rol, final boolean isMe) {
     if (typeId.equals(ListsToolConstants.TYPE_LIST)) {
-      // FIXME
-      // itemsPanel.add(ShareItemFactory.getListPublicByAnyone().with(false));
-      itemsPanel.add(ShareItemFactory.createListItem().with(rol, group));
+      itemsPanel.add(ShareItemFactory.createListItem().with(rol, group, isMe));
     } else {
-      itemsPanel.add(ShareItemFactory.createContentItem().with(rol, group));
+      itemsPanel.add(ShareItemFactory.createContentItem().with(rol, group, isMe));
     }
   }
 

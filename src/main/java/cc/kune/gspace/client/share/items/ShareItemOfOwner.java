@@ -18,6 +18,7 @@
 
 package cc.kune.gspace.client.share.items;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
 import cc.kune.common.shared.i18n.I18n;
@@ -37,7 +38,7 @@ public class ShareItemOfOwner extends AbstractShareItemUi {
   public AbstractShareItemUi of(final GroupDTO group) {
     setGroupName(group);
     final LabelDescriptor isOwner = new LabelDescriptor(I18n.t("is owner"));
-    isOwner.withStyles("k-share-item-noactions");
+    isOwner.withStyles(ActionStyles.SHARE_ITEM_NO_ACTIONS);
     super.add(isOwner);
     return this;
   }

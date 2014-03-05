@@ -27,6 +27,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 public class ShareItemDescriptor {
   public static final String GROUP = "share-item-group";
   public static final String ITEM = "share-item";
+  private boolean isMe;
   private Object itemIcon;
   private String itemText;
   private final MenuItemDescriptor[] menuItems;
@@ -61,10 +62,18 @@ public class ShareItemDescriptor {
     return menuText;
   }
 
+  public boolean isMe() {
+    return isMe;
+  }
+
   public void setGroup(final String group) {
     for (final MenuItemDescriptor item : menuItems) {
       item.getAction().putValue(GROUP, group);
     }
+  }
+
+  public void setIsMe(final boolean isMe) {
+    this.isMe = isMe;
   }
 
   public void setItemIcon(final Object itemIcon) {

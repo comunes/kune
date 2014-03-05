@@ -40,22 +40,26 @@ import com.google.gwt.user.client.ui.Label;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GwtMenuGui.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GwtMenuGui extends AbstractGwtMenuGui {
 
   /** The button. */
   private Button button;
-  
+
   /** The icon label. */
   private IconLabel iconLabel;
-  
+
   /** The not stand alone. */
   private boolean notStandAlone;
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
+   * .String)
    */
   @Override
   protected void addStyle(final String style) {
@@ -66,8 +70,12 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common
+   * .client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
@@ -89,8 +97,10 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
       button.addClickHandler(new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
-          event.stopPropagation();
-          showRelativeTo(button);
+          if (button.isEnabled()) {
+            event.stopPropagation();
+            showRelativeTo(button);
+          }
         }
       });
       final String id = descriptor.getId();
@@ -127,18 +137,25 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     button.setHTML(iconLabel.getElement().getInnerHTML());
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
   public void setEnabled(final boolean enabled) {
     if (notStandAlone) {
-      button.setVisible(enabled);
+      button.setEnabled(enabled);
+      // button.setVisible(enabled);
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common.shared.res.KuneIcon)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
+   * .shared.res.KuneIcon)
    */
   @Override
   public void setIcon(final KuneIcon icon) {
@@ -148,8 +165,12 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
+   * .lang.String)
    */
   @Override
   public void setIconBackground(final String backgroundColor) {
@@ -159,8 +180,12 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google.gwt.resources.client.ImageResource)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
+   * .gwt.resources.client.ImageResource)
    */
   @Override
   public void setIconResource(final ImageResource resource) {
@@ -172,8 +197,9 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
 
   /**
    * Sets the icon right resource.
-   *
-   * @param resource the new icon right resource
+   * 
+   * @param resource
+   *          the new icon right resource
    */
   public void setIconRightResource(final ImageResource resource) {
     if (notStandAlone) {
@@ -182,8 +208,12 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
+   * .String)
    */
   @Override
   public void setIconStyle(final String style) {
@@ -193,8 +223,12 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
+   * )
    */
   @Override
   public void setIconUrl(final String url) {
@@ -204,8 +238,11 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
   @Override
   public void setText(final String text) {
@@ -215,8 +252,12 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
+   * .String)
    */
   @Override
   public void setToolTipText(final String tooltipText) {
@@ -225,7 +266,9 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
@@ -237,7 +280,9 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#show()
    */
   @Override

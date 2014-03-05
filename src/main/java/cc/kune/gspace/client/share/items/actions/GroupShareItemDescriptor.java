@@ -38,10 +38,11 @@ public class GroupShareItemDescriptor extends ShareItemDescriptor {
     this.downloadUtils = downloadUtils;
   }
 
-  public void setGroup(final GroupDTO group) {
+  public GroupShareItemDescriptor setGroup(final GroupDTO group) {
     final boolean isAnUser = group.isPersonal();
     setItemText((isAnUser ? "" : I18n.t("Group") + ": ") + group.getLongName());
     setItemIcon(downloadUtils.getGroupLogo(group));
     super.setGroup(group.getShortName());
+    return this;
   }
 }

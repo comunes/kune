@@ -55,7 +55,8 @@ public class AbstractRolShareItemUi extends AbstractShareItemWithMenuUi {
     changeToViewer.setNextRoleDescriptor(this.viewerDescr);
   }
 
-  public AbstractShareItemWithMenuUi with(final AccessRolDTO rol, final GroupDTO group) {
+  public AbstractShareItemWithMenuUi with(final AccessRolDTO rol, final GroupDTO group,
+      final boolean isMe) {
     ShareItemDescriptor descr;
     switch (rol) {
     case Administrator:
@@ -69,9 +70,9 @@ public class AbstractRolShareItemUi extends AbstractShareItemWithMenuUi {
       descr = viewerDescr;
       break;
     }
-    ((GroupShareItemDescriptor) adminDescr).setGroup(group);
-    ((GroupShareItemDescriptor) editorDescr).setGroup(group);
-    ((GroupShareItemDescriptor) viewerDescr).setGroup(group);
+    ((GroupShareItemDescriptor) adminDescr).setGroup(group).setIsMe(isMe);
+    ((GroupShareItemDescriptor) editorDescr).setGroup(group).setIsMe(isMe);
+    ((GroupShareItemDescriptor) viewerDescr).setGroup(group).setIsMe(isMe);
     setValuesViaDescriptor(descr);
     return this;
   }

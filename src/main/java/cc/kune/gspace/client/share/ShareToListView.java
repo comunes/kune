@@ -26,6 +26,8 @@ public interface ShareToListView {
 
   void addAdmin(GroupDTO admin);
 
+  void addAdmin(GroupDTO admin, boolean isMe);
+
   void addEditableByAnyone();
 
   void addEditor(GroupDTO editor);

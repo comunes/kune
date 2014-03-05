@@ -48,6 +48,9 @@ public class ActionStyles {
 
   public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-def-docbtn, k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
 
+  public static final String SHARE_ITEM_ACTIONS = "k-share-item-actions";
+
+  public static final String SHARE_ITEM_NO_ACTIONS = "k-share-item-noactions";
   /** The Constant SITEBAR_STYLE. */
   public static final String SITEBAR_STYLE = "k-no-backimage, k-btn-sitebar, k-noborder, k-nobackcolor";
 
