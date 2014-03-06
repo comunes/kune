@@ -23,6 +23,7 @@
 package cc.kune.gspace.client.viewers;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.dto.InitDataDTO;
@@ -64,7 +65,7 @@ public class EmbedHelper {
    * @return the string
    */
   public static String fixContentUrls(final String serverUrl, final String content) {
-    return content.replaceAll(FileConstants.LOGODOWNLOADSERVLET, serverUrl
+    return content.replaceAll(FileConstants.LOGODOWNLOADSERVLET, TextUtils.removeLastSlash(serverUrl)
         + FileConstants.LOGODOWNLOADSERVLET);
   }
 
