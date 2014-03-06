@@ -11,7 +11,7 @@ public class EmbedHelperTest {
 
   @Test
   public void testContentSeveralUrls() {
-    final String expected = "something http://server.example.com/" + FileConstants.LOGODOWNLOADSERVLET
+    final String expected = "something http://server.example.com" + FileConstants.LOGODOWNLOADSERVLET
         + " something ";
     final String content = "something " + FileConstants.LOGODOWNLOADSERVLET + " something ";
     assertEquals(expected + expected + expected,
@@ -21,7 +21,7 @@ public class EmbedHelperTest {
   @Test
   public void testContentUrl() {
     assertEquals(
-        "something http://server.example.com/" + FileConstants.LOGODOWNLOADSERVLET + " something",
+        "something http://server.example.com" + FileConstants.LOGODOWNLOADSERVLET + " something",
         EmbedHelper.fixContentUrls("http://server.example.com/", "something "
             + FileConstants.LOGODOWNLOADSERVLET + " something"));
   }
