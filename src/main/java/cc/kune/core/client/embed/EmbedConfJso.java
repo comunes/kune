@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -39,8 +39,8 @@ public class EmbedConfJso extends JavaScriptObject {
    * @return the read only
    */
   public final native boolean getReadOnly() /*-{
-                                            return this.readOnly || false;
-                                            }-*/;
+		return this.readOnly || false;
+  }-*/;
 
   /**
    * Gets the kune server hostname.
@@ -48,20 +48,21 @@ public class EmbedConfJso extends JavaScriptObject {
    * @return the server
    */
   public final native String getServerUrl() /*-{
-                                            return this.serverUrl;
-                                            }-*/;
+		return this.serverUrl || $wnd.location.protocol + '//'
+				+ $wnd.location.host + '/';
+  }-*/;
 
   public final native boolean getShowSignIn() /*-{
-                                              return this.showSignIn || true;
-                                              }-*/;
+		return this.showSignIn || true;
+  }-*/;
 
   public final native boolean getShowSignOut() /*-{
-                                               return this.showSignOut || true;
-                                               }-*/;
+		return this.showSignOut || true;
+  }-*/;
 
   public final native String getSignInText() /*-{
-                                             return this.signInText || 'Participate';
-                                             }-*/;
+		return this.signInText || 'Participate';
+  }-*/;
 
   /**
    * Gets the sitebar right margin.
@@ -69,11 +70,11 @@ public class EmbedConfJso extends JavaScriptObject {
    * @return the sitebar right margin
    */
   public final native int getSitebarRightMargin() /*-{
-                                                  return this.sitebarRightMargin || 30;
-                                                  }-*/;
+		return this.sitebarRightMargin || 30;
+  }-*/;
 
   public final native int getSitebarTopMargin() /*-{
-                                                return this.sitebarTopMargin || 0;
-                                                }-*/;
+		return this.sitebarTopMargin || 0;
+  }-*/;
 
 }

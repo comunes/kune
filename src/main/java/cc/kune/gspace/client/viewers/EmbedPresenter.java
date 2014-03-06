@@ -138,7 +138,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
       @Override
       public void onEmbedOpen(final EmbedOpenEvent event) {
         stateTokenToOpen = event.getStateToken();
-        Log.info("Received EmbedOpenEvent with token:" + stateTokenToOpen);
+        Log.info("Received EmbedOpenEvent with token: " + stateTokenToOpen);
         if (session.getInitData() == null) {
           // Not initialized
           Log.debug("Session data not ready");
@@ -157,9 +157,16 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
         onAppStarted();
       }
     });
-    if (EmbedConfiguration.isReady() || isCurrentHistoryHashValid(getCurrentHistoryHash())) {
+    if (EmbedConfiguration.isReady()) {
       // The event was fired already, so start!
       Log.debug("App start after conf already loaded");
+      // We set the prefix for avatars url with the server url
+      onAppStarted();
+    } else if (isCurrentHistoryHashValid(getCurrentHistoryHash())) {
+      // The event was fired already, so start!
+      Log.debug("App start after valid hash");
+      // We set the prefix for avatars url with the server url
+      EmbedConfiguration.setDefValues();
       onAppStarted();
     }
   }
@@ -247,8 +254,10 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
         final InitDataDTOJs initData = JsonUtils.safeEval(response.getText());
         session.setInitData(EmbedHelper.parse(initData));
         final UserInfoDTOJs userInfo = (UserInfoDTOJs) initData.getUserInfo();
-        session.setUserHash(userInfo.getUserHash());
-        session.setCurrentUserInfo(EmbedHelper.parse(userInfo), null);
+        if (userInfo != null) {
+          session.setUserHash(userInfo.getUserHash());
+          session.setCurrentUserInfo(EmbedHelper.parse(userInfo), null);
+        }
         final String currentHash = getCurrentHistoryHash();
         final boolean isValid = isCurrentHistoryHashValid(currentHash);
         if (stateTokenToOpen != null) {
