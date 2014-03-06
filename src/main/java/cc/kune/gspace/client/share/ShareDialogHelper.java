@@ -29,6 +29,7 @@ import java.util.List;
 import java.util.Set;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.core.shared.domain.GroupListMode;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
@@ -84,8 +85,10 @@ public class ShareDialogHelper {
     // Owner
     shareToListView.addOwner(currentGroup);
 
-    Log.debug("Share Dialog: editors list size: " + editorsList.size());
     Log.debug("Share Dialog: editors list mode: " + editorMode);
+    if (editorMode.equals(GroupListMode.NORMAL)) {
+      Log.debug("Share Dialog: editors list size: " + editorsList.size());
+    }
 
     shareToTheNetView.setVisible(viewerMode.equals(EVERYONE));
     final boolean isAList = typeId.equals(ListsToolConstants.TYPE_LIST);

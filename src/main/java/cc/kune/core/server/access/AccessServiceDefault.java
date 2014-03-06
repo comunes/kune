@@ -31,6 +31,7 @@ import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.ToolConfiguration;
 import cc.kune.domain.User;
+import cc.kune.lists.shared.ListsToolConstants;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -91,7 +92,11 @@ public class AccessServiceDefault implements AccessService {
   public Container accessToContainer(final Long folderId, final User user, final AccessRol accessRol)
       throws DefaultException {
     final Container container = finder.getFolder(folderId);
-    return accessToContainer(container, user, accessRol);
+    // Hack for public or non-public lists (in the editor acl list are the
+    // subscribers). We just check if the list is public to allow posts
+    final AccessRol rolToCheck = container.getTypeId().equals(ListsToolConstants.TYPE_LIST)
+        && accessRol.equals(AccessRol.Editor) ? AccessRol.Viewer : accessRol;
+    return accessToContainer(container, user, rolToCheck);
   }
 
   /*
