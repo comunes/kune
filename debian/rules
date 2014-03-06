@@ -78,6 +78,7 @@ install/kune::
 		$(CURDIR)/src/main/resources/db/update-0025-i18n-country-codes.txt \
 		$(CURDIR)/src/main/resources/db/update-0026-i18n-max-size.sql \
 		$(CURDIR)/src/main/resources/db/update-0027-waveindex.sql \
+		$(CURDIR)/src/main/resources/db/update-0028-lists-mode-fix.sql \
 		> $(DEST)/usr/share/dbconfig-common/data/kune/install/mysql
 #	Add the upgrades algo in the previous install
 	cp $(CURDIR)/src/main/resources/db/init-data-countries.sql     $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.1.0+b5
@@ -90,6 +91,7 @@ install/kune::
 	cp $(CURDIR)/src/main/resources/db/update-0025-i18n-country-codes.txt $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b24
 	cp $(CURDIR)/src/main/resources/db/update-0026-i18n-max-size.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b27
 	cp $(CURDIR)/src/main/resources/db/update-0027-waveindex.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b35
+	cp $(CURDIR)/src/main/resources/db/update-0028-lists-mode-fix.sql $(DEST)/usr/share/dbconfig-common/data/kune/upgrade/mysql/0.3.0+b40
 
 # FIXME
 #	cp logrotate $(DEST)/etc/logrotate.d/

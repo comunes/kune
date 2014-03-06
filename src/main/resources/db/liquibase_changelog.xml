@@ -214,4 +214,10 @@
       encoding="utf8" stripComments="1" />
     <rollback>SELECT * FROM globalize_countries;</rollback>
   </changeSet>
+  <changeSet id="33" author="vjrj">
+    <comment>List mode fix</comment>
+    <sqlFile path="src/main/resources/db/update-0028-lists-mode-fix.sql"
+      encoding="utf8" stripComments="1" />
+    <rollback>SELECT * FROM globalize_countries;</rollback>
+  </changeSet>
 </databaseChangeLog>

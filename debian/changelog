@@ -1,3 +1,10 @@
+kune (0.3.0+b40) unstable; urgency=low
+
+  * Fix for lists subscriptors group list mode (#550)
+  * Removed singleton for list and admin members (#550)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 06 Mar 2014 13:11:08 +0100
+
 kune (0.3.0+b39) unstable; urgency=low
 
   * Add 'Show in ui devel features' property and Mbean

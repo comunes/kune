@@ -30,9 +30,7 @@ import cc.kune.gspace.client.share.items.actions.EditorOfContentShareItemDescrip
 import cc.kune.gspace.client.share.items.actions.ViewerOfContentShareItemDescriptor;
 
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
-@Singleton
 public class ContentRolShareItemUi extends AbstractRolShareItemUi {
   @Inject
   public ContentRolShareItemUi(final ActionSimplePanel actionsPanel,

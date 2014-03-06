@@ -71,6 +71,10 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     }
   }
 
+  public String getAddress(final String kuneUsername) {
+    return kuneUsername + "@" + Session.get().getDomain();
+  }
+
   @Override
   public ProfileImpl getProfile(final ParticipantId participantId) {
     return refreshProfile(participantId, true, false);

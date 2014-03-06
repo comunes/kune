@@ -276,10 +276,11 @@ public class ShareDialogHelperTest {
 
   @Test
   public void whenShareListToGroupListAndClosed() {
-    final AccessListsDTO acl = acl(list(group1), list(group2), NOBODY);
+    final AccessListsDTO acl = acl(list(group1), list(group1, group2), NOBODY);
     helper.setState(currentGroup, currentUser, acl, ListsToolConstants.TYPE_LIST);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addOwner(currentGroup);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addAdmin(group1);
+    shareToListInOrder.verify(shareToList, Mockito.times(1)).addEditor(group1);
     shareToListInOrder.verify(shareToList, Mockito.times(1)).addEditor(group2);
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addNotEditableByOthers();
     shareToListInOrder.verify(shareToList, Mockito.times(0)).addEditableByAnyone();

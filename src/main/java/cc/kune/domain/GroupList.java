@@ -82,7 +82,7 @@ public class GroupList {
   public void add(final Group group) {
     list.add(group);
     // TODO: Get this outside Domain?
-    if (getMode() == GroupListMode.NOBODY) {
+    if (getMode() != GroupListMode.NORMAL) {
       setMode(GroupListMode.NORMAL);
     }
   }

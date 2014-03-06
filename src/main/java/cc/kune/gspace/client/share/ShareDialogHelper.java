@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.core.shared.dto.AccessListsDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.GroupListDTO;
@@ -83,6 +84,9 @@ public class ShareDialogHelper {
     // Owner
     shareToListView.addOwner(currentGroup);
 
+    Log.debug("Share Dialog: editors list size: " + editorsList.size());
+    Log.debug("Share Dialog: editors list mode: " + editorMode);
+
     shareToTheNetView.setVisible(viewerMode.equals(EVERYONE));
     final boolean isAList = typeId.equals(ListsToolConstants.TYPE_LIST);
     // final boolean isAWiki = typeId.equals(WikiToolConstants.TYPE_WIKIPAGE);
@@ -124,9 +128,8 @@ public class ShareDialogHelper {
       } else {
         if (editorMode.equals(NORMAL)) {
           for (final GroupDTO editor : editorsList) {
-            if (!editor.equals(currentGroup)) {
-              shareToListView.addEditor(editor);
-            }
+            Log.debug("Share Dialog: adding editor: " + editor.getShortName());
+            shareToListView.addEditor(editor);
           }
         } else if (editorMode.equals(EVERYONE) && !isAList) {
           shareToListView.addEditableByAnyone();
@@ -142,9 +145,7 @@ public class ShareDialogHelper {
     } else {
       if (viewerMode.equals(NORMAL)) {
         for (final GroupDTO viewer : viewersList) {
-          if (!viewer.equals(currentGroup)) {
-            shareToListView.addViewer(viewer);
-          }
+          shareToListView.addViewer(viewer);
         }
         shareMenuBtn.setVisibleToEveryone(false);
       } else if (viewerMode.equals(EVERYONE)) {
