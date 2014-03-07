@@ -1,5 +1,6 @@
 kune (0.3.0+b40) unstable; urgency=low
 
+  * Added an embed doc action to Share menu (#561)
   * Several fixes for #561
   * Fix for lists subscriptors group list mode (#550)
   * Removed singleton for list and admin members (#550)
