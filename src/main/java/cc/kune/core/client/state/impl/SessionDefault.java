@@ -25,7 +25,6 @@ package cc.kune.core.client.state.impl;
 import java.util.Collection;
 import java.util.List;
 
-import cc.kune.common.client.log.Log;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.events.AppStartEvent;
@@ -37,8 +36,6 @@ import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHa
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.events.WaveSessionAvailableEvent;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
@@ -58,7 +55,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * The Class SessionDefault.
@@ -80,7 +76,6 @@ public class SessionDefault implements Session {
   private Object[][] languagesArray;
   private Object[][] timezonesArray;
   private String userHash;
-  private final Provider<UserServiceAsync> userServiceProvider;
 
   /**
    * Instantiates a new session default.
@@ -93,25 +88,12 @@ public class SessionDefault implements Session {
    *          the event bus
    */
   @Inject
-  public SessionDefault(final CookiesManager cookieManager,
-      final Provider<UserServiceAsync> userServiceProvider, final EventBus eventBus) {
+  public SessionDefault(final CookiesManager cookieManager, final EventBus eventBus) {
     this.cookieManager = cookieManager;
     this.eventBus = eventBus;
     this.userHash = cookieManager.getAuthCookie();
     this.userHash = userHash == null || userHash.equals("null") ? null : userHash;
-    this.userServiceProvider = userServiceProvider;
     languagesArray = null;
-    check(new AsyncCallbackSimple<Void>() {
-      @Override
-      public void onSuccess(final Void result) {
-      }
-    });
-  }
-
-  @Override
-  public void check(final AsyncCallbackSimple<Void> callback) {
-    Log.debug("Checking session (userhash: " + getUserHash() + ")");
-    userServiceProvider.get().onlyCheckSession(getUserHash(), callback);
   }
 
   @Override

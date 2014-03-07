@@ -222,11 +222,13 @@
 .oc-user-msg {
   background-color: #FFCC00;
   padding: 3px;
+	z-index: 1000;
 }
 
 .oc-user-msg-popup {
   padding: 0px;
   border: 0px;
+	z-index: 1000;
 }
 
 .oc-floatleft {

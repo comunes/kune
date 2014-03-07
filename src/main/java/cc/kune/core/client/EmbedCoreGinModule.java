@@ -30,7 +30,7 @@ import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.msgs.UserMessagesPanel;
 import cc.kune.common.client.msgs.UserMessagesPresenter;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.notify.UserNotifierPopup;
+import cc.kune.common.client.notify.SimpleUserNotifierPopup;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.shared.i18n.HasRTL;
@@ -115,7 +115,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     // Presenters
     bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerPanel.class,
         SpinerPresenter.SpinerProxy.class);
-    eagle(UserNotifierPopup.class);
+    eagle(SimpleUserNotifierPopup.class);
     requestStaticInjection(NotifyUser.class);
 
     bindPresenter(EmbedPresenter.class, EmbedPresenter.EmbedView.class, EmbedPanel.class,
