@@ -16,7 +16,7 @@
     <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
     <gwt.version>2.5.1</gwt.version>
     <!-- <gwtmaven.version>2.2.0</gwtmaven.version> -->
-    <gwtmaven.version>2.1.0-1</gwtmaven.version>
+    <gwtmaven.version>2.5.1</gwtmaven.version>
     <maven.compiler.source>1.6</maven.compiler.source>
     <maven.compiler.target>1.6</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
