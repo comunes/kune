@@ -1252,14 +1252,15 @@
               </modules>
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
-              <localWorkers>1</localWorkers><!-- Using all workers can temporarily
+              <draftCompile>true</draftCompile>
+              <localWorkers>2</localWorkers><!-- Using all workers can temporarily
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx2048m</extraJvmArgs>
             </configuration>
             <executions>
               <execution>
                 <configuration>
-                  <extraJvmArgs>-Xmx1024M</extraJvmArgs>
+                  <extraJvmArgs>-Xmx2048m</extraJvmArgs>
                 </configuration>
                 <id>gwtcompile</id>
                 <phase>prepare-package</phase>

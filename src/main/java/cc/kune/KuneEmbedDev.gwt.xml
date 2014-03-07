@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Sam: property "set-property-fallback" does not appear in the DTD. Bug GWT: http://ur1.ca/a3ehr -->
-<!-- <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN" "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd"> -->
+<!-- Sam: property "set-property-fallback" does not appear in the DTD. Bug
+  GWT: http://ur1.ca/a3ehr -->
+<!-- <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.0.1//EN"
+  "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd"> -->
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.1//EN" "../../gwt-module.dtd">
 <module rename-to="wse">
 
   <inherits name="cc.kune.KuneEmbed"/>
 
-  <set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" />
+  <set-property name="gwt.logging.simpleRemoteHandler"
+    value="ENABLED"/>
 
   <!-- Uncomment if you are enabling server side deobfuscation of StackTraces -->
   <!-- <set-property name="compiler.emulatedStack" value="true" /> -->
-  <!-- <set-configuration-property name="compiler.emulatedStack.recordLineNumbers" value="true" /> -->
-  <!-- <set-configuration-property name="compiler.emulatedStack.recordFileNames" value="true" /> -->
+  <!-- <set-configuration-property name="compiler.emulatedStack.recordLineNumbers"
+    value="true" /> -->
+  <!-- <set-configuration-property name="compiler.emulatedStack.recordFileNames"
+    value="true" /> -->
 
   <!-- NOTE: this only compiles for chromium/safari ============= -->
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
@@ -21,7 +26,7 @@
   <!-- Remote logging and deobfuscation -->
 
   <set-property name="gwt.logging.simpleRemoteHandler"
-    value="DISABLED" />
+    value="DISABLED"/>
   <!-- <set-property name="compiler.stackMode" value="emulated" /> -->
   <!-- <set-property name="compiler.useSourceMaps" value="true" /> -->
   <!-- <set-configuration-property name="compiler.emulatedStack.recordLineNumbers" -->
@@ -31,9 +36,9 @@
 
   <!-- I18n ===================================================== -->
   <!-- http://bit.ly/uCiBDm -->
-  <extend-property name="locale" values="en,es"/>
+  <extend-property name="locale" values="en,ar,es"/>
   <set-property-fallback name="locale" value="en"/>
-  <set-property name="locale" value="en,es"/>
+  <set-property name="locale" value="en,ar,es"/>
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave -->
@@ -50,6 +55,10 @@
 
   <!-- Superdev mode ============================================ -->
   <set-configuration-property name="devModeRedirectEnabled"
-    value="true" />
+    value="true"/>
+
+  <!-- Faster compilation ====================================== -->
+  <!-- http://stackoverflow.com/questions/1011863/how-do-i-speed-up-the-gwt-compiler -->
+  <collapse-all-properties/>
 
 </module>
