@@ -252,6 +252,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     data.setImgThumbsize(kuneProperties.getInteger(KuneProperties.IMAGES_THUMBSIZE));
     data.setImgCropsize(kuneProperties.getInteger(KuneProperties.IMAGES_CROPSIZE));
     data.setImgIconsize(kuneProperties.getInteger(KuneProperties.IMAGES_ICONSIZE));
+    data.setKuneEmbedTemplate(kuneProperties.get(KuneProperties.KUNE_DOC_EMBEDED_TEMPLATE));
     data.setFlvEmbedObject(kuneProperties.get(KuneProperties.FLV_EMBEDED_OBJECT));
     data.setMp3EmbedObject(kuneProperties.get(KuneProperties.MP3_EMBEDED_OBJECT));
     data.setOggEmbedObject(kuneProperties.get(KuneProperties.OGG_EMBEDED_OBJECT));

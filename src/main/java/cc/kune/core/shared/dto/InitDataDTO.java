@@ -93,6 +93,9 @@ public class InitDataDTO implements IsSerializable {
   /** The img thumbsize. */
   private int imgThumbsize;
 
+  /** The kune embed template. */
+  private String kuneEmbedTemplate;
+
   /** The languages. */
   private List<I18nLanguageSimpleDTO> languages;
 
@@ -316,6 +319,10 @@ public class InitDataDTO implements IsSerializable {
    */
   public int getImgThumbsize() {
     return imgThumbsize;
+  }
+
+  public String getKuneEmbedTemplate() {
+    return kuneEmbedTemplate;
   }
 
   /**
@@ -691,6 +698,10 @@ public class InitDataDTO implements IsSerializable {
    */
   public void setImgThumbsize(final int imgThumbsize) {
     this.imgThumbsize = imgThumbsize;
+  }
+
+  public void setKuneEmbedTemplate(final String kuneEmbedTemplate) {
+    this.kuneEmbedTemplate = kuneEmbedTemplate;
   }
 
   /**

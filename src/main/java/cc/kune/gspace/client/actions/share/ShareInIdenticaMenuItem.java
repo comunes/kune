@@ -65,9 +65,9 @@ public class ShareInIdenticaMenuItem extends AbstractShareInSocialNetMenuItem {
             false,
             URL_TEMPLATE,
             URL.encodeQueryString("#"
-                + ShareInSocialNetUtils.getTitle(session)
+                + ShareInHelper.getTitle(session)
                 + " "
-                + ShareInSocialNetUtils.getCurrentUrl(session)
+                + ShareInHelper.getCurrentUrl(session)
                 + " "
                 + i18n.tWithNT("via [%s]", "used in references 'something via @someone'",
                     i18n.getSiteCommonName()))));

@@ -28,7 +28,12 @@ import java.util.List;
 
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SessionInstance;
+import cc.kune.core.client.state.StateTokenUtils;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 
 import com.google.gwt.http.client.URL;
 import com.google.inject.Inject;
@@ -44,17 +49,38 @@ import com.google.inject.Singleton;
 public class ShareInHelper {
 
   public static String getCommonText() {
-    return URL.encodeQueryString(ShareInSocialNetUtils.getTitle(SessionInstance.get())
+    return URL.encodeQueryString(getTitle(SessionInstance.get())
         + " "
         + I18n.tWithNT("via [%s]", "used in references 'something via @someone'",
             I18n.getSiteCommonName()));
   }
 
   public static String getCommonUrl() {
-    return URL.encodeQueryString(ShareInSocialNetUtils.getCurrentUrl(SessionInstance.get()));
+    return URL.encodeQueryString(getCurrentUrl(SessionInstance.get()));
   }
 
-  private final List<Provider<? extends GuiActionDescrip>> shareInList;
+  public static String getCurrentUrl(final Session session) {
+    return getCurrentUrl(session, false);
+  }
+
+  public static String getCurrentUrl(final Session session, final boolean embeded) {
+    return StateTokenUtils.getGroupSpaceUrl(session.getCurrentState().getStateToken(), embeded);
+  }
+
+  public static String getTitle(final Session session) {
+    final StateAbstractDTO state = session.getCurrentState();
+    final String prefix = session.getCurrentGroupShortName() + ", ";
+    if (!(state instanceof StateContentDTO)) {
+      return prefix
+          + (((StateContainerDTO) state).getContainer().isRoot() ? I18n.t(state.getTitle())
+              : state.getTitle());
+    } else {
+      return prefix + session.getCurrentState().getTitle();
+    }
+  }
+
+  private final List<Provider<? extends GuiActionDescrip>> shareInAllList;
+  private final ArrayList<Provider<? extends GuiActionDescrip>> shareInWavesList;
 
   @Inject
   public ShareInHelper(final Provider<ShareInTwitterMenuItem> shareInTwitter,
@@ -64,19 +90,27 @@ public class ShareInHelper {
       final Provider<ShareInLinkedinMenuItem> shareInLinked,
       final Provider<ShareInTumblrMenuItem> shareInTumblr,
       final Provider<ShareInDiggMenuItem> shareInDigg,
-      final Provider<ShareInRedditMenuItem> shareInReddit) {
-    shareInList = new ArrayList<Provider<? extends GuiActionDescrip>>();
+      final Provider<ShareInRedditMenuItem> shareInReddit,
+      final Provider<ShareInEmbededMenuItem> shareInEmbed) {
+    shareInAllList = new ArrayList<Provider<? extends GuiActionDescrip>>();
+    shareInWavesList = new ArrayList<Provider<? extends GuiActionDescrip>>();
 
-    shareInList.add(shareInTwitter);
-    shareInList.add(shareInGPlus);
-    shareInList.add(shareInFacebook);
-    shareInList.add(shareInReddit);
-    shareInList.add(shareInDigg);
-    shareInList.add(shareInLinked);
-    shareInList.add(shareInTumblr);
+    shareInAllList.add(shareInTwitter);
+    shareInAllList.add(shareInGPlus);
+    shareInAllList.add(shareInFacebook);
+    shareInAllList.add(shareInReddit);
+    shareInAllList.add(shareInDigg);
+    shareInAllList.add(shareInLinked);
+    shareInAllList.add(shareInTumblr);
+
+    shareInWavesList.add(shareInEmbed);
   }
 
-  public List<Provider<? extends GuiActionDescrip>> getShareInList() {
-    return shareInList;
+  public List<Provider<? extends GuiActionDescrip>> getShareInAll() {
+    return shareInAllList;
+  }
+
+  public List<Provider<? extends GuiActionDescrip>> getShareInWaves() {
+    return shareInWavesList;
   }
 }

@@ -48,9 +48,9 @@ import cc.kune.gspace.client.actions.WriteToParticipantsMenuItem;
 import cc.kune.gspace.client.actions.share.AddAdminMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddAllMembersToContentMenuItem;
 import cc.kune.gspace.client.actions.share.AddCollabMembersToContentMenuItem;
-import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.actions.share.ShareDialogMenuItem;
 import cc.kune.gspace.client.actions.share.ShareInHelper;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.trash.shared.TrashToolConstants;
 
 import com.google.inject.Inject;
@@ -106,7 +106,8 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, all, tutorialBtn);
     add(TOPBAR, all, shareMenuContent);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(TOPBAR, all, shareIHelper.getShareInList());
+    add(TOPBAR, contents, shareIHelper.getShareInWaves());
+    add(TOPBAR, all, shareIHelper.getShareInAll());
     add(TOPBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem);

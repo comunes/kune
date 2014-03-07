@@ -24,6 +24,7 @@ package cc.kune.client;
 
 import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.client.embed.EmbedJsActions;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
 
 import com.google.gwt.core.client.GWT;
@@ -48,6 +49,7 @@ public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
     ginjector.getGwtGuiProvider();
     final EmbedPresenter embedPresenter = ginjector.getEmbedPresenter().get();
     embedPresenter.forceReveal();
+    GWT.<CoreResources> create(CoreResources.class).coreCss().ensureInjected();
     ginjector.getSpinerPresenter();
     com.google.gwt.user.client.History.addValueChangeHandler(embedPresenter);
 

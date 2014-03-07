@@ -64,7 +64,7 @@ public class ChatClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, containersNoRoot, openRoomBtn);
     add(ITEM_MENU, containersNoRoot, openRoomMenuItem, openRoomArchiveMenuItem);
     add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, all, shareIHelper.getShareInList());
+    add(TOPBAR, all, shareIHelper.getShareInAll());
   }
 
   @Override

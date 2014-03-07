@@ -99,6 +99,9 @@ public class InitData {
   /** The img thumbsize. */
   private int imgThumbsize;
 
+  /** The kune embed template. */
+  private String kuneEmbedTemplate;
+
   /** The languages. */
   private List<I18nLanguage> languages;
 
@@ -319,6 +322,10 @@ public class InitData {
    */
   public int getImgThumbsize() {
     return imgThumbsize;
+  }
+
+  public String getKuneEmbedTemplate() {
+    return kuneEmbedTemplate;
   }
 
   /**
@@ -688,6 +695,10 @@ public class InitData {
    */
   public void setImgThumbsize(final int imgThumbsize) {
     this.imgThumbsize = imgThumbsize;
+  }
+
+  public void setKuneEmbedTemplate(final String kuneEmbedTemplate) {
+    this.kuneEmbedTemplate = kuneEmbedTemplate;
   }
 
   /**

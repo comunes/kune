@@ -26,6 +26,8 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.ui.ContentPosition;
 import cc.kune.core.shared.domain.utils.StateToken;
 
+import com.google.inject.Inject;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class MediaUtils.
@@ -51,6 +53,7 @@ public class MediaUtils {
    * @param downloadUtils
    *          the download utils
    */
+  @Inject
   public MediaUtils(final Session session, final ClientFileDownloadUtils downloadUtils) {
     this.session = session;
     this.downloadUtils = downloadUtils;
@@ -78,6 +81,10 @@ public class MediaUtils {
   public String getFlvEmbed(final StateToken token) {
     return setCenterPosition(session.getInitData().getFlvEmbedObject().replace(DOC_URL_TAG,
         session.getSiteUrl() + downloadUtils.getUrl(token)));
+  }
+
+  public String getKuneDocEmbedCode(final String url) {
+    return session.getInitData().getKuneEmbedTemplate().replace(DOC_URL_TAG, url);
   }
 
   /**

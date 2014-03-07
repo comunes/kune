@@ -119,7 +119,8 @@ public class ListsClientActions extends AbstractFoldableToolActions {
     add(TOPBAR, containersNoRoot, configureList);
     add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
     add(TOPBAR, allExceptRoot, shareInvitation);
-    add(TOPBAR, all, shareIHelper.getShareInList());
+    add(TOPBAR, contents, shareIHelper.getShareInWaves());
+    add(TOPBAR, all, shareIHelper.getShareInAll());
     add(TOPBAR, contents, shareDialog);
     add(TOPBAR, containersNoRoot, subscribersCount);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, delFolderMenuItem);

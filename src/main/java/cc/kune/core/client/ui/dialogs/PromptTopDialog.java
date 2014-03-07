@@ -351,6 +351,10 @@ public class PromptTopDialog extends BasicTopDialog {
     super.getInnerPanel().add(textField);
   }
 
+  public void addStyleToTextField(final String style) {
+    textField.addStyleName(style);
+  }
+
   /**
    * Clear text field value.
    */
@@ -399,6 +403,20 @@ public class PromptTopDialog extends BasicTopDialog {
    */
   public void setTextFieldFocus() {
     textField.focus();
+  }
+
+  public void setTextFieldFocusOnClick() {
+    textField.addListener(Events.OnClick, new Listener<FieldEvent>() {
+      @Override
+      public void handleEvent(final FieldEvent fe) {
+        textField.focus();
+      }
+    });
+
+  }
+
+  public void setTextFieldReadOnly(final boolean readonly) {
+    textField.setReadOnly(readonly);
   }
 
   /**

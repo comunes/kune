@@ -234,6 +234,14 @@ public interface IconicResources extends ClientBundle {
   ImageResource editGrey();
 
   /**
+   * Embed.
+   * 
+   * @return the image resource
+   */
+  @Source("embed.png")
+  ImageResource embed();
+
+  /**
    * Equalizer grey.
    * 
    * @return the image resource

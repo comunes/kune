@@ -49,7 +49,18 @@ public class StateTokenUtils {
    * @return the group space url
    */
   public static String getGroupSpaceUrl(final StateToken token) {
-    return session.getSiteUrl() + "/#" + token.getEncoded();
+    return getGroupSpaceUrl(token, false);
+  }
+
+  /**
+   * Gets the group space url.
+   * 
+   * @param token
+   *          the token
+   * @return the group space url
+   */
+  public static String getGroupSpaceUrl(final StateToken token, final boolean embeded) {
+    return session.getSiteUrl() + "/" + (embeded ? "wse.html" : "") + "#!" + token.getEncoded();
   }
 
   /**

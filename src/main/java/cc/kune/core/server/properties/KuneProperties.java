@@ -72,6 +72,9 @@ public interface KuneProperties {
   /** The images thumbsize. */
   String IMAGES_THUMBSIZE = "kune.images.thumbsize";
 
+  /** The kune doc embeded template. */
+  String KUNE_DOC_EMBEDED_TEMPLATE = "kune.media.kunedocembeded";
+
   /** The kune tutorials deflang. */
   String KUNE_TUTORIALS_DEFLANG = "kune.tutorial.defaultlang";
 
