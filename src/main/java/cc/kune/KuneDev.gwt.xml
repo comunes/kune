@@ -20,12 +20,11 @@
   <!-- <set-property name="user.agent" value="gecko1_8" /> -->
   <set-property name="user.agent" value="gecko1_8,safari" />
 
-
   <!-- I18n ===================================================== -->
   <!-- http://bit.ly/uCiBDm -->
-  <extend-property name="locale" values="en,ar,es" />
+  <extend-property name="locale" values="en,es" />
   <set-property-fallback name="locale" value="en" />
-  <set-property name="locale" value="en,ar,es" />
+  <set-property name="locale" value="en,es" />
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave -->

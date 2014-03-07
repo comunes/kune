@@ -149,7 +149,7 @@ Only after making sure the previous steps have been finished, you can proceed to
 
 WARNING: The above paragraph means that the installation instructions are NOT in this document. Please, check out the referenced INSTALL document for the installation instructions, and come back here when those are finished.
 
-** GWT's Hosted Mode
+** GWT's Hosted Mode and SuperDev Mode
 
 Before running hosted mode for the first time compile once with:
  mvn compile -Dliquibase.should.run=false && mvn gwt:compile -P development
@@ -162,12 +162,16 @@ Kune runs a specific jetty server (not necessary the one used by GWT), so we run
 
 For now It's better not to use the "internal server" of GWT hosted mode because we need to control the version of the (jetty) server that we use, for compatibility reasons. This is why we run separately the client (hosted mode) and the server. 
 
-In the "bin" directory there are (mainly) two launch configurations, one for the server and one for the client:
+In the "bin" directory there are (mainly) three launch configurations, one for the server and one for the client:
 (1) "kune server via mvn.launch"
 (2) "kune client  -no-server.launch"
+(3) "kune-superdev.launch"
+
+also there are some client launch equivalent to test the embeded functionality.
+ 
 These configurations are Eclipse running configurations that are normally imported by Eclipse when you import the project (in GNU/Linux at least). See the "Run" and the "Run External" icons and menu options in the Eclipse toolbar to find these launchs. If they are not there, try to import them (in Eclipse: File > Import > Launch Configurations > select the launchs from the "bin" directory). Also you can try to fix the path for the "mvn" command (especially Windows users). Another option is to create a new launch to run a external "mvn exec:java" because the previous launch were created in GNU/Linux systems.
 
-Run it! Launch the first, (1), (it's equivalent to mvn exec:java) to start the kune server. After that, launch the second (2) to start kune in hosted mode and connect to the previous server (that was launched with (1)). Since then, you will be able to make code modifications (in the client code), and refresh the browser to see the changes (with no compiling :)  Changes in the server code would need compiling. 
+Run it! Launch the first, (1), (it's equivalent to mvn exec:java) to start the kune server. After that, launch the second (2) to start kune in hosted mode and connect to the previous server (that was launched with (1)). Use (3) to launch the new superdev mode. Since then, in you are using (1) you will be able to make code modifications (in the client code), and refresh the browser to see the changes (with no compiling :)  Changes in the server code would need compiling. 
 
 NOTE: It's easy to distinguish Client code from Server code, as Client has "client" in the package name, while Server has "server". There is also "shared" code.
 
@@ -176,6 +180,22 @@ NOTE: Compilation will be mandatory when you aim to build the DEB package. In th
 NOTE: If you want to run Server in debug mode, you should run "kune server via mvn with debug.launch" (then you will see the [DEBUG] comments in the Eclipse Console). If you want to run the Client in debug mode, you can run it using the Debug icon, as usual in Java programs.
 
 NOTE: If you have errors or problems during compilation or launching, check out the TROUBLESHOOT file for help. If you are still unable to solve it, contact the Kune developers (http://kune.ourproject.org/contact/ ) and we'll try to help you. 
+
+*** GWT Superdev mode
+
+If you want to use the superdev mode you can:
+1) Run the previous gwt:compile command, run the server (2) and later the superdev launch (3)
+2) Open the code server http://localhost:9876/
+3) Drag&drop the devmode on/off bookmarks to your browser bookmarks toolbar (you need to do this only one time)
+4) open the server http://localhost:8888/
+5) There you can click in your bookmarks on "Dev Mode On" and compile if you do some changes in your java code.
+
+In chrome, for debugging and logs
+- Launch Chrome Developer Tools (F12)
+- For debugging, you need to Enable JS Source Maps in Chrome Developer Tools preferences
+- Open the Source tab and observe the files, or the Console tab to see the logs
+
+More info about Superdev mode (also a screenshot): http://stackoverflow.com/questions/18330001/super-dev-mode-in-gwt
 
 ***  Optionally
 

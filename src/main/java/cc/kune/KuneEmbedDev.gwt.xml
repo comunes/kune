@@ -31,9 +31,9 @@
 
   <!-- I18n ===================================================== -->
   <!-- http://bit.ly/uCiBDm -->
-  <extend-property name="locale" values="en,ar,es"/>
+  <extend-property name="locale" values="en,es"/>
   <set-property-fallback name="locale" value="en"/>
-  <set-property name="locale" value="en,ar,es"/>
+  <set-property name="locale" value="en,es"/>
 
   <!-- Webclient log level ====================================== -->
   <!-- Turn off logging in wave -->
@@ -47,5 +47,9 @@
   <!-- For make CSS obfuscation more pretty -->
   <set-configuration-property name="CssResource.style"
     value="pretty"/>
+
+  <!-- Superdev mode ============================================ -->
+  <set-configuration-property name="devModeRedirectEnabled"
+    value="true" />
 
 </module>
