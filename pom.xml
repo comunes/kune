@@ -1287,6 +1287,65 @@
         </plugins>
       </build>
     </profile>
+    <profile>
+      <id>embDevelopment</id>
+      <build>
+        <plugins>
+          <!-- Warning if you modify this part take in to account that exist
+            to profiles: development and production -->
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>gwt-maven-plugin</artifactId>
+            <version>${gwtmaven.version}</version>
+            <configuration>
+              <!-- <logLmeevel>INFO</logLevel> -->
+              <!--<style>OBF</style> -->
+              <style>DETAILED</style>
+              <noServer>true</noServer>
+              <gwtVersion>${gwt.version}</gwtVersion>
+              <runTarget>/ws.html?log_level=DEBUG</runTarget>
+              <hostedWebapp>${project.build.directory}/${project.build.finalName}
+              </hostedWebapp>
+              <modules>
+                <module>${project.groupId}.KuneEmbedDev</module>
+              </modules>
+              <copyWebapp>true</copyWebapp>
+              <compileReport>false</compileReport>
+              <draftCompile>true</draftCompile>
+              <localWorkers>2</localWorkers><!-- Using all workers can temporarily
+                hang the mouse and isn't much faster -->
+              <extraJvmArgs>-Xmx2048m</extraJvmArgs>
+            </configuration>
+            <executions>
+              <execution>
+                <configuration>
+                  <extraJvmArgs>-Xmx2048m</extraJvmArgs>
+                </configuration>
+                <id>gwtcompile</id>
+                <phase>prepare-package</phase>
+                <goals>
+                  <goal>compile</goal>
+                  <!-- http://mojo.codehaus.org/gwt-maven-plugin/user-guide/library.html -->
+                  <!-- <goal>resources</goal> -->
+                </goals>
+              </execution>
+            </executions>
+            <dependencies>
+              <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-dev</artifactId>
+                <version>${gwt.version}</version>
+              </dependency>
+              <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt-user</artifactId>
+                <version>${gwt.version}</version>
+              </dependency>
+            </dependencies>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
   <reporting>
     <plugins>
