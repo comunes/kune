@@ -60,8 +60,6 @@ Your can use another string and the message will looks like "Thanks for joining 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript"
     src="others/splash/js/permalink_client.js"></script>
-<!-- Moved this to local wave-rpc.js <script type="text/javascript" -->
-<!--     src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script> -->
 <!--[if IE 6]>
     <link type="text/css" rel="stylesheet" href="ie6.css">
 <![endif]-->
@@ -69,45 +67,13 @@ Your can use another string and the message will looks like "Thanks for joining 
 <body>
     <!-- Banner for wave errors -->
     <div class="banner" id="banner"></div>
-    <!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
-    <!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
     <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
     <noscript>
         <div
             style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
             Your web browser must have JavaScript enabled in order for this
-            application to display correctly.</div>
+            document to display correctly.</div>
     </noscript>
     <div id="kune-embed-hook"></div>
-    <!-- You can include the previous nocache-js script in your page, and use it with something like: -->
-    <script type='text/javascript'>
-      // This is a example of how to configure the kune embbeded panel
-      // Note: serverUrl should have a trailing slash
-      var kuneEmbedConf = {
-      'serverUrl': 'http://127.0.0.1:8888/', 'readOnly': false, 'sitebarRightMargin': 50, 'sitebarTopMargin': 0,
-      'signInText': 'Participate', 'showSignOut': true, 'showSignIn': true
-      };
-      var kuneIdToEmbed = 'site.docs.3.1';
-
-      // or calling these methods
-
-      function kuneEmbedInit() {
-        // General configuration
-        document.confEmbed(kuneEmbedConf);
-        // We embed in the specified div that #kunegroup.doc
-        document.embed(kuneIdToEmbed);
-      }
-
-      window.onload = function () {
-        // General configuration
-        // document.confEmbed(kuneEmbedConf);
-        // We embed in the specified div that #kunegroup.doc
-        // document.embed(kuneIdToEmbed);
-      }
-    </script>
-    <!-- or include in the 'kune-embed-hook' div, using a object and a #hash with the doc id without any configuration:
-       <object data="http://kune.example.com/wse.html#!some-group.docs.1" type="text/html"
-       style="width:100%; height:100%; overflow: hidden;"></object>
-       -->
 </body>
 </html>
