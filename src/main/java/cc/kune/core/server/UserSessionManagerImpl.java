@@ -91,6 +91,8 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
     final HashSessionManager hSessionManager = (HashSessionManager) jettySessionManager;
     hSessionManager.setMaxInactiveInterval(-1);
     hSessionManager.setSavePeriod(5);
+    // Delete sessions with problems http://jira.codehaus.org/browse/JETTY-1484
+    hSessionManager.setDeleteUnrestorableSessions(true);
     hSessionManager.addEventListener(userSessionMonitor);
     LOG.debug(String.format("User sessions: %d", hSessionManager.getSessions()));
     LOG.debug(String.format("User sessions total: %d", hSessionManager.getSessionsTotal()));
