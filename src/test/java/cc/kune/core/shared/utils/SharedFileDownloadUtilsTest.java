@@ -78,9 +78,11 @@ public class SharedFileDownloadUtilsTest {
       assertTrue(
           util.getLogoAvatarHtml(GROUP, false, true, 50, 5),
           util.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains(
-              "http://example.org/others/defuser.jpg"));
-      assertTrue(utilNoPrefix.getLogoAvatarHtml(GROUP, false, true, 50, 5),
-          util.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains("/others/defuser.jpg"));
+              "/EntityLogoDownloadManager?token=groupname&onlyusers=false"));
+      assertTrue(
+          utilNoPrefix.getLogoAvatarHtml(GROUP, false, true, 50, 5),
+          util.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains(
+              "/EntityLogoDownloadManager?token=groupname&onlyusers=false"));
       assertTrue(
           util.getLogoAvatarHtml(GROUP, true, false, 50, 5),
           util.getLogoAvatarHtml(GROUP, true, false, 50, 5).contains(
