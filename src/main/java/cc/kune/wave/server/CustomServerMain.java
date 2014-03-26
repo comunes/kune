@@ -260,6 +260,11 @@ public class CustomServerMain {
 
   public static void run(final Module coreSettings) throws PersistenceException,
       ConfigurationException, WaveServerException {
+    // TODO(vjrj): Enable shutdown server
+    // final ShutdownMonitor shutdown = ShutdownMonitor.getInstance();
+    // shutdown.setPort(6969);
+    // shutdown.setKey("somekey");
+
     Injector settingsInjector = Guice.createInjector(coreSettings);
     final boolean enableFederation = settingsInjector.getInstance(Key.get(Boolean.class,
         Names.named(CoreSettings.ENABLE_FEDERATION)));
