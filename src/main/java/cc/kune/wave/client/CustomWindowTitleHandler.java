@@ -20,10 +20,10 @@
 package cc.kune.wave.client;
 
 import org.waveprotocol.box.webclient.client.Session;
-import org.waveprotocol.box.webclient.search.WaveContext;
 import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.model.conversation.TitleHelper;
+import org.waveprotocol.wave.model.document.WaveContext;
 
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.state.TokenMatcher;

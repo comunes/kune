@@ -24,7 +24,6 @@ import java.util.Set;
 
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.StageTwoProvider;
-import org.waveprotocol.box.webclient.search.WaveContext;
 import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.client.StageOne;
@@ -58,6 +57,7 @@ import org.waveprotocol.wave.client.wavepanel.view.dom.full.BlipQueueRenderer;
 import org.waveprotocol.wave.client.widget.popup.PopupChromeFactory;
 import org.waveprotocol.wave.client.widget.popup.PopupFactory;
 import org.waveprotocol.wave.model.conversation.ConversationView;
+import org.waveprotocol.wave.model.document.WaveContext;
 import org.waveprotocol.wave.model.id.IdGenerator;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
@@ -70,15 +70,13 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Provider;
 
-// TODO: Auto-generated Javadoc
 /**
- * Stages for loading the undercurrent Wave Panel.
+ * Stages for loading the undercurrent Wave Panel
  *
  * @author zdwang@google.com (David Wang)
  */
 public class CustomStagesProvider extends Stages {
 
-  /** The Constant HALT. */
   private final static AsyncHolder<Object> HALT = new AsyncHolder<Object>() {
     @Override
     public void call(final Accessor<Object> accessor) {
@@ -88,12 +86,6 @@ public class CustomStagesProvider extends Stages {
 
   /**
    * Finds the blip that should receive the focus and selects it.
-   *
-   * @param reader the reader
-   * @param views the views
-   * @param wave the wave
-   * @param focusFrame the focus frame
-   * @param waveRef the wave ref
    */
   private static void selectAndFocusOnBlip(final Reader reader, final ModelAsViewProvider views,
       final ConversationView wave, final FocusFramePresenter focusFrame, final WaveRef waveRef) {
@@ -105,85 +97,43 @@ public class CustomStagesProvider extends Stages {
       focusFrame.focus(blipUi);
     }
   }
-  
-  /** The channel. */
   private final RemoteViewServiceMultiplexer channel;
-  
-  /** The closed. */
   private boolean closed;
-  
-  /** The color picker. */
   private final Provider<AurorisColorPicker> colorPicker;
-  
-  /** The event bus. */
   private final EventBus eventBus;
-  
-  /** The id generator. */
   private final IdGenerator idGenerator;
-  
-  /** The is new wave. */
   private final boolean isNewWave;
-  
-  /** The local domain. */
   private final String localDomain;
-  
-  /** The one. */
   private StageOne one;
-  
-  /** The participants. */
   private final Set<ParticipantId> participants;
-  
-  /** The profiles. */
   private final ProfileManager profiles;
 
-  /** The root panel. */
   private final LogicalPanel rootPanel;
-  
-  /** The three. */
   private StageThree three;
-  
-  /** The two. */
   private StageTwo two;
-  
-  /** The wave. */
   private WaveContext wave;
-  
-  /** The wave frame. */
-  @SuppressWarnings("unused")
   private final FramedPanel waveFrame;
 
-  /** The wave panel element. */
   private final Element wavePanelElement;
 
-  /** The wave ref. */
   private final WaveRef waveRef;
 
-  /** The wave store. */
   private final WaveStore waveStore;
-  
-  /** The wave unsaved indicator. */
   private final CustomSavedStateIndicator waveUnsavedIndicator;
 
   /**
-   * Instantiates a new custom stages provider.
-   *
    * @param wavePanelElement the DOM element to become the wave panel.
-   * @param waveUnsavedIndicator the wave unsaved indicator
+   * @param unsavedIndicatorElement the element that displays the wave saved state.
    * @param rootPanel a panel that this an ancestor of wavePanelElement. This is
-   * used for adopting to the GWT widget tree.
+   *        used for adopting to the GWT widget tree.
    * @param waveFrame the wave frame.
    * @param waveRef the id of the wave to open. If null, it means, create a new
-   * wave.
+   *        wave.
    * @param channel the communication channel.
-   * @param idGenerator the id generator
-   * @param profiles the profiles
-   * @param store the store
    * @param isNewWave true if the wave is a new client-created wave
-   * @param localDomain the local domain
+   * @param idGenerator
    * @param participants the participants to add to the newly created wave. null
-   * if only the creator should be added
-   * @param eventBus the event bus
-   * @param colorPicker the color picker
+   *                     if only the creator should be added
    */
   public CustomStagesProvider(final Element wavePanelElement, final CustomSavedStateIndicator waveUnsavedIndicator,
       final LogicalPanel rootPanel, final FramedPanel waveFrame, final WaveRef waveRef, final RemoteViewServiceMultiplexer channel,
@@ -205,9 +155,6 @@ public class CustomStagesProvider extends Stages {
     this.colorPicker = colorPicker;
   }
 
-  /* (non-Javadoc)
-   * @see org.waveprotocol.wave.client.Stages#createStageOneLoader(org.waveprotocol.wave.client.StageZero)
-   */
   @Override
   protected AsyncHolder<StageOne> createStageOneLoader(final StageZero zero) {
     return haltIfClosed(new StageOne.DefaultProvider(zero) {
@@ -223,9 +170,6 @@ public class CustomStagesProvider extends Stages {
     });
   }
 
-  /* (non-Javadoc)
-   * @see org.waveprotocol.wave.client.Stages#createStageThreeLoader(org.waveprotocol.wave.client.StageTwo)
-   */
   @Override
   protected AsyncHolder<StageThree> createStageThreeLoader(final StageTwo two) {
     return haltIfClosed(new StageThree.DefaultProvider(this.two = two) {
@@ -273,30 +217,21 @@ public class CustomStagesProvider extends Stages {
         KeepFocusInView.install(edit, panel);
         stageTwo.getDiffController().upgrade(edit);
         colorPicker.get();
-      }
+       }
     });
   }
 
-  /* (non-Javadoc)
-   * @see org.waveprotocol.wave.client.Stages#createStageTwoLoader(org.waveprotocol.wave.client.StageOne)
-   */
   @Override
   protected AsyncHolder<StageTwo> createStageTwoLoader(final StageOne one) {
     return haltIfClosed(new StageTwoProvider(this.one = one, waveRef, channel, isNewWave,
       idGenerator, profiles, waveUnsavedIndicator, participants));
   };
 
-  /* (non-Javadoc)
-   * @see org.waveprotocol.wave.client.Stages#createStageZeroLoader()
-   */
   @Override
   protected AsyncHolder<StageZero> createStageZeroLoader() {
     return haltIfClosed(super.createStageZeroLoader());
   }
 
-  /**
-   * Destroy.
-   */
   public void destroy() {
     Log.info("Destroy wave");
     if (wave != null) {
@@ -331,12 +266,8 @@ public class CustomStagesProvider extends Stages {
   }
 
   /**
-   * Halt if closed.
-   *
-   * @param <T> the generic type
-   * @param provider the provider
    * @return a halting provider if this stage is closed. Otherwise, returns the
-   * given provider.
+   *         given provider.
    */
   @SuppressWarnings("unchecked") // HALT is safe as a holder for any type
   private <T> AsyncHolder<T> haltIfClosed(final AsyncHolder<T> provider) {
@@ -344,11 +275,6 @@ public class CustomStagesProvider extends Stages {
     return closed ? (AsyncHolder<T>) HALT : provider;
   }
 
-  /**
-   * Handle existing wave.
-   *
-   * @param three the three
-   */
   private void handleExistingWave(final StageThree three) {
   Log.info("Handle existing wave");
   if (waveRef.hasDocumentId()) {
@@ -358,12 +284,6 @@ public class CustomStagesProvider extends Stages {
         one.getFocusFrame(), waveRef);
   }
   }
-  
-  /**
-   * Inits the new wave.
-   *
-   * @param three the three
-   */
   private void initNewWave(final StageThree three) {
     Log.info("Init new wave");
     // Do the new-wave flow.
@@ -385,12 +305,6 @@ public class CustomStagesProvider extends Stages {
   }
 
 
-  /**
-   * On stage three loaded.
-   *
-   * @param x the x
-   * @param whenReady the when ready
-   */
   private void onStageThreeLoaded(final StageThree x, final Accessor<StageThree> whenReady) {
     Log.info("On stage three loaded");
     if (closed) {

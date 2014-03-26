@@ -42,6 +42,7 @@ import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;
+import cc.kune.initials.InitialsAvatarsServerUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -63,6 +64,8 @@ public class EntityLogoDownloadManager extends HttpServlet {
   /** The default last modified. */
   final private long defaultLastModified;
 
+  private final String domain;
+
   /** The group logo. */
   private final byte[] groupLogo;
 
@@ -71,12 +74,6 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /** The group mime. */
   private final String groupMime;
-
-  /** The person logo. */
-  private final byte[] personLogo;
-
-  /** The person mime. */
-  private final String personMime;
 
   /** The unknown logo. */
   private final byte[] unknownLogo;
@@ -96,12 +93,10 @@ public class EntityLogoDownloadManager extends HttpServlet {
    */
   @Inject
   public EntityLogoDownloadManager(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases,
-      final GroupManager groupManager) throws IOException {
+      final GroupManager groupManager, @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain)
+      throws IOException {
     this.groupManager = groupManager;
-
-    final File personFile = getFile(resourceBases, FileConstants.PERSON_NO_AVATAR_IMAGE);
-    personMime = getMime(personFile);
-    personLogo = getBy(personFile);
+    this.domain = domain;
 
     final File groupFile = getFile(resourceBases, FileConstants.GROUP_NO_AVATAR_IMAGE);
     groupMime = getMime(groupFile);
@@ -141,7 +136,8 @@ public class EntityLogoDownloadManager extends HttpServlet {
       }
       if (!group.hasLogo()) {
         if (group.isPersonal()) {
-          reply(resp, personLogo, personMime);
+          InitialsAvatarsServerUtils.doInitialsResponse(resp, 100, 100, group.getShortName() + "@"
+              + domain);
         } else {
           reply(resp, groupLogo, groupMime);
         }

@@ -22,19 +22,21 @@
  */
 package cc.kune.wave.client;
 
+import org.waveprotocol.box.profile.ProfileResponse;
+import org.waveprotocol.box.profile.ProfileResponse.FetchedProfile;
 import org.waveprotocol.box.webclient.client.Session;
-import org.waveprotocol.wave.client.account.ProfileManager;
+import org.waveprotocol.box.webclient.profile.FetchProfilesService;
+import org.waveprotocol.box.webclient.profile.FetchProfilesServiceImpl;
 import org.waveprotocol.wave.client.account.impl.AbstractProfileManager;
 import org.waveprotocol.wave.client.account.impl.ProfileImpl;
+import org.waveprotocol.wave.client.debug.logger.DomLogger;
+import org.waveprotocol.wave.common.logging.LoggerBundle;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.log.Log;
-import cc.kune.core.client.services.ClientFileDownloadUtils;
-import cc.kune.core.shared.FileConstants;
 
-import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.google.inject.Inject;
 
 /**
@@ -44,31 +46,40 @@ import com.google.inject.Inject;
  * 
  */
 public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> implements
-    ProfileManager {
-  // TODO implement remote part of RemoteProfileManagerImpl
+    FetchProfilesService.Callback {
 
-  private final ClientFileDownloadUtils downloadUtils;
-  private final LastConnectedManager lastConnectedManager;
-  private String localDomain;
+  private final static LoggerBundle LOG = new DomLogger("fetchProfiles");
 
-  @Inject
-  public KuneWaveProfileManager(final ClientFileDownloadUtils downloadUtils,
-      final LastConnectedManager lastConnectedManager) {
-    this.downloadUtils = downloadUtils;
-    this.lastConnectedManager = lastConnectedManager;
+  static private void deserializeAndUpdateProfile(final KuneWaveProfileManager manager,
+      final FetchedProfile fetchedProfile) {
+    final ParticipantId participantId = ParticipantId.ofUnsafe(fetchedProfile.getAddress());
+    final ProfileImpl profile = manager.getProfile(participantId);
+    // Profiles already exist for all profiles that have been requested.
+    assert profile != null;
+    // Updates profiles - this also notifies listeners.
+    profile.update(fetchedProfile.getName(), fetchedProfile.getName(), fetchedProfile.getImageUrl());
   }
 
-  private void checkAvatar(final ProfileImpl profile, final boolean noCache) {
-    if (localDomain == null) {
-      localDomain = "@" + Session.get().getDomain();
+  /**
+   * Deserializes {@link ProfileResponse} and updates the profiles.
+   */
+  static void deserializeResponseAndUpdateProfiles(final KuneWaveProfileManager manager,
+      final ProfileResponse profileResponse) {
+    int i = 0;
+    for (final FetchedProfile fetchedProfile : profileResponse.getProfiles()) {
+      deserializeAndUpdateProfile(manager, fetchedProfile);
+      i++;
     }
-    final String address = profile.getAddress();
-    if (address.equals(localDomain) || address.equals("@")) {
-      updateProfileAvatar(profile, FileConstants.WORLD_AVATAR_IMAGE);
+  }
 
-    } else if (isLocal(address)) {
-      updateProfileAvatar(profile, downloadUtils.getUserAvatar(getUsername(address), noCache));
-    }
+  private final FetchProfilesServiceImpl fetchProfilesService;
+
+  private final LastConnectedManager lastConnectedManager;
+
+  @Inject
+  public KuneWaveProfileManager(final LastConnectedManager lastConnectedManager) {
+    this.lastConnectedManager = lastConnectedManager;
+    fetchProfilesService = FetchProfilesServiceImpl.create();
   }
 
   public String getAddress(final String kuneUsername) {
@@ -88,6 +99,17 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     return Session.get().getDomain() != null && address.contains(Session.get().getDomain());
   }
 
+  @Override
+  public void onFailure(final String message) {
+    LOG.error().log(message);
+    // TODO (user) Try to re-fetch the profile.
+  }
+
+  @Override
+  public void onSuccess(final ProfileResponse profileResponse) {
+    deserializeResponseAndUpdateProfiles(this, profileResponse);
+  }
+
   public void refreshAddress(final String address, final boolean noCache) {
     try {
       refreshProfile(ParticipantId.of(address), true, noCache);
@@ -102,8 +124,12 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
     ProfileImpl profile = profiles.get(address);
     if (profile == null) {
       profile = new ProfileImpl(this, participantId);
+      profiles.put(address, profile);
+      LOG.trace().log("Fetching profile: " + address);
+      fetchProfilesService.fetch(this, address);
+
       updateStatus(profile);
-      checkAvatar(profile, noCache);
+
       profiles.put(address, profile);
     } else if (refresh) {
       // FIXME This hangs weblclient in stage two
@@ -112,14 +138,6 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
       // profiles.put(address, profile);
     }
     return profile;
-  }
-
-  private void refreshRosterItem(final XmppURI uri, final boolean noCache) {
-    refreshAddress(uri.toString(), noCache);
-  }
-
-  private void updateProfileAvatar(final ProfileImpl profile, final String avatar) {
-    profile.update(profile.getFirstName(), profile.getFullName(), avatar);
   }
 
   private void updateStatus(final ProfileImpl profile) {

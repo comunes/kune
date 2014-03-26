@@ -22,9 +22,9 @@
  */
 package cc.kune.chat.client.actions;
 
-import org.waveprotocol.box.webclient.client.ClientEvents;
-import org.waveprotocol.box.webclient.client.events.NetworkStatusEvent;
-import org.waveprotocol.box.webclient.client.events.NetworkStatusEventHandler;
+import org.waveprotocol.wave.client.events.ClientEvents;
+import org.waveprotocol.wave.client.events.NetworkStatusEvent;
+import org.waveprotocol.wave.client.events.NetworkStatusEventHandler;
 
 import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.resources.ChatResources;
@@ -57,26 +57,28 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChatSitebarActions.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ChatSitebarActions {
 
   /**
    * The Class ChangeOfflineStatusAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class ChangeOfflineStatusAction extends AbstractExtendedAction {
-    
+
     /** The session. */
     private final XmppSession session;
 
     /**
      * Instantiates a new change offline status action.
-     *
-     * @param session the session
-     * @param icon the icon
+     * 
+     * @param session
+     *          the session
+     * @param icon
+     *          the icon
      */
     public ChangeOfflineStatusAction(final XmppSession session, final ImageResource icon) {
       this.session = session;
@@ -90,8 +92,12 @@ public class ChatSitebarActions {
       });
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -101,27 +107,31 @@ public class ChatSitebarActions {
 
   /**
    * The Class ChangeOnlineStatusAction.
-   *
+   * 
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class ChangeOnlineStatusAction extends AbstractExtendedAction {
-    
+
     /** The icon. */
     private final ImageResource icon;
-    
+
     /** The manager. */
     private final PresenceManager manager;
-    
+
     /** The this presence. */
     private final Presence thisPresence;
 
     /**
      * Instantiates a new change online status action.
-     *
-     * @param presenceManager the presence manager
-     * @param statusText the status text
-     * @param show the show
-     * @param icon the icon
+     * 
+     * @param presenceManager
+     *          the presence manager
+     * @param statusText
+     *          the status text
+     * @param show
+     *          the show
+     * @param icon
+     *          the icon
      */
     public ChangeOnlineStatusAction(final PresenceManager presenceManager, final String statusText,
         final Show show, final ImageResource icon) {
@@ -131,8 +141,12 @@ public class ChatSitebarActions {
       updateStatusIcon(presenceManager.getOwnPresence());
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -145,8 +159,9 @@ public class ChatSitebarActions {
 
     /**
      * Update status icon.
-     *
-     * @param currentPresence the current presence
+     * 
+     * @param currentPresence
+     *          the current presence
      */
     public void updateStatusIcon(final Presence currentPresence) {
       if (thisPresence.getShow().equals(currentPresence.getShow())
@@ -156,66 +171,74 @@ public class ChatSitebarActions {
       }
     }
   }
-  
+
   /** The Constant AWAY_TIMER_MILLSECS. */
   private static final int AWAY_TIMER_MILLSECS = 60000;
 
   /** The Constant GROUP_CHAT_STATUS. */
   private static final String GROUP_CHAT_STATUS = "k-group-chat-status";
-  
+
   /** The Constant NO_STATUS. */
   private static final String NO_STATUS = null;
-  
+
   /** The away item. */
   private MenuRadioItemDescriptor awayItem;
-  
+
   /** The away timer. */
   private Timer awayTimer;
-  
+
   /** The busy item. */
   private MenuRadioItemDescriptor busyItem;
-  
+
   /** The chat client. */
   private final ChatClient chatClient;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The next presence. */
   private Presence nextPresence = Presence.build(NO_STATUS, Show.notSpecified);
-  
+
   /** The offline item. */
   private MenuRadioItemDescriptor offlineItem;
-  
+
   /** The online item. */
   private MenuRadioItemDescriptor onlineItem;
-  
+
   /** The presence manager. */
   private final PresenceManager presenceManager;
-  
+
   /** The res. */
   private final ChatResources res;
-  
+
   /** The user options. */
   private final SiteUserOptions userOptions;
-  
+
   /** The xmpp session. */
   private final XmppSession xmppSession;
 
   /**
    * Instantiates a new chat sitebar actions.
-   *
-   * @param session the session
-   * @param chatClient the chat client
-   * @param userOptions the user options
-   * @param i18n the i18n
-   * @param res the res
-   * @param xmppSession the xmpp session
-   * @param presenceManager the presence manager
-   * @param eventBus the event bus
+   * 
+   * @param session
+   *          the session
+   * @param chatClient
+   *          the chat client
+   * @param userOptions
+   *          the user options
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param xmppSession
+   *          the xmpp session
+   * @param presenceManager
+   *          the presence manager
+   * @param eventBus
+   *          the event bus
    */
   @Inject
   public ChatSitebarActions(final SessionConstants session, final ChatClient chatClient,
@@ -252,10 +275,13 @@ public class ChatSitebarActions {
 
   /**
    * Creates the chat status action.
-   *
-   * @param icon the icon
-   * @param text the text
-   * @param action the action
+   * 
+   * @param icon
+   *          the icon
+   * @param text
+   *          the text
+   * @param action
+   *          the action
    * @return the menu radio item descriptor
    */
   private MenuRadioItemDescriptor createChatStatusAction(final ImageResource icon, final String text,
@@ -340,10 +366,13 @@ public class ChatSitebarActions {
 
   /**
    * Online action.
-   *
-   * @param statusText the status text
-   * @param show the show
-   * @param icon the icon
+   * 
+   * @param statusText
+   *          the status text
+   * @param show
+   *          the show
+   * @param icon
+   *          the icon
    * @return the abstract extended action
    */
   private AbstractExtendedAction onlineAction(final String statusText, final Show show,
@@ -353,8 +382,9 @@ public class ChatSitebarActions {
 
   /**
    * Update menu presence.
-   *
-   * @param presence the presence
+   * 
+   * @param presence
+   *          the presence
    */
   private void updateMenuPresence(final Presence presence) {
     switch (presence.getShow()) {
@@ -379,9 +409,11 @@ public class ChatSitebarActions {
 
   /**
    * Update sitebar icon presence.
-   *
-   * @param presence the presence
-   * @param itemDescriptor the item descriptor
+   * 
+   * @param presence
+   *          the presence
+   * @param itemDescriptor
+   *          the item descriptor
    */
   private void updateSitebarIconPresence(final Presence presence, final MenuItemDescriptor itemDescriptor) {
     ((ChatSitebarActions.ChangeOnlineStatusAction) itemDescriptor.getAction()).updateStatusIcon(presence);

@@ -22,8 +22,7 @@
  */
 package cc.kune.core.server;
 
-import static com.google.inject.matcher.Matchers.annotatedWith;
-import static com.google.inject.matcher.Matchers.any;
+import static com.google.inject.matcher.Matchers.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,6 +34,7 @@ import org.waveprotocol.box.server.rpc.AttachmentServlet;
 import cc.kune.barters.server.BarterServerModule;
 import cc.kune.blogs.server.BlogServerModule;
 import cc.kune.chat.server.ChatServerModule;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.rpcservices.ContentService;
 import cc.kune.core.client.rpcservices.GroupService;
 import cc.kune.core.client.rpcservices.I18nService;
@@ -79,8 +79,10 @@ import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.ListsServerModule;
 import cc.kune.tasks.server.TaskServerModule;
 import cc.kune.trash.server.TrashServerModule;
+import cc.kune.wave.server.CustomInitialsProfilesFetcher;
 import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
 import cc.kune.wave.server.kspecific.WaveEmailNotifier;
+import cc.kune.wave.server.search.CustomPerUserWaveViewHandlerImpl;
 import cc.kune.wiki.server.WikiServerModule;
 
 import com.google.inject.AbstractModule;
@@ -138,6 +140,9 @@ public class KuneRackModule implements RackModule {
         requestStaticInjection(KuneWaveServerUtils.class);
         requestStaticInjection(EventsServerConversionUtil.class);
         requestStaticInjection(GroupServerUtils.class);
+        requestStaticInjection(I18n.class);
+        requestStaticInjection(CustomPerUserWaveViewHandlerImpl.class);
+        requestStaticInjection(CustomInitialsProfilesFetcher.class);
       }
     };
   }
@@ -198,6 +203,7 @@ public class KuneRackModule implements RackModule {
     builder.exclude("/socket");
     builder.exclude("/static/.*");
     builder.exclude("/webclient/.*");
+    builder.exclude("/initials/.*");
 
     // builder.at(".*").install(new LogFilter());
     builder.at(".*").install(new GuiceFilter());

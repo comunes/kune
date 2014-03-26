@@ -23,10 +23,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
-
-import javax.annotation.Nullable;
 
 import org.mvel2.templates.CompiledTemplate;
 import org.mvel2.templates.TemplateCompiler;
@@ -34,9 +32,12 @@ import org.mvel2.templates.TemplateRuntime;
 import org.mvel2.templates.util.TemplateTools;
 import org.waveprotocol.box.server.CoreSettings;
 
-import com.google.common.base.Function;
+import cc.kune.common.client.log.Log;
+
 import com.google.common.base.Preconditions;
-import com.google.common.collect.MapMaker;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -93,12 +94,14 @@ public class Templates {
    * FIXME: For new versions of guava
    * http://code.google.com/p/guava-libraries/wiki/MapMakerMigration
    */
-  private final ConcurrentMap<String, CompiledTemplate> templates = new MapMaker().makeComputingMap(new Function<String, CompiledTemplate>() {
-    @Override
-    public CompiledTemplate apply(@Nullable final String template) {
-      return loadTemplate(template);
-    }
-  });
+
+  private final LoadingCache<String, CompiledTemplate> templates = CacheBuilder.newBuilder().build(
+      new CacheLoader<String, CompiledTemplate>() {
+        @Override
+        public CompiledTemplate load(final String key) throws Exception {
+          return loadTemplate(key);
+        }
+      });
 
   /**
    * Instantiates a new templates.
@@ -181,8 +184,12 @@ public class Templates {
    */
   public String process(final String template, final Object context) {
     // Reload template each time for development mode.
-    final CompiledTemplate compiledTemplate = productionMode ? templates.get(template)
-        : loadTemplate(template);
+    CompiledTemplate compiledTemplate = null;
+    try {
+      compiledTemplate = productionMode ? templates.get(template) : loadTemplate(template);
+    } catch (final ExecutionException e) {
+      Log.error("Cannot process the template: ", e);
+    }
 
     final Map<String, Object> vars = Maps.newHashMap();
     vars.put("markup", markup);

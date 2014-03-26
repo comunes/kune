@@ -21,13 +21,13 @@ import java.util.Set;
 
 import javax.annotation.Nullable;
 
-import org.waveprotocol.box.webclient.client.ClientEvents;
-import org.waveprotocol.box.webclient.client.events.WaveCreationEvent;
 import org.waveprotocol.wave.client.account.Profile;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.EscapeUtils;
 import org.waveprotocol.wave.client.common.util.WindowPromptCallback;
 import org.waveprotocol.wave.client.common.util.WindowUtil;
+import org.waveprotocol.wave.client.events.ClientEvents;
+import org.waveprotocol.wave.client.events.WaveCreationEvent;
 import org.waveprotocol.wave.client.wavepanel.WavePanel;
 import org.waveprotocol.wave.client.wavepanel.event.EventHandlerRegistry;
 import org.waveprotocol.wave.client.wavepanel.event.WaveClickHandler;
@@ -65,28 +65,28 @@ import com.google.gwt.event.shared.EventBus;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class CustomParticipantController {
-  
+
   /** The views. */
   private final DomAsViewProvider views;
-  
+
   /** The models. */
   private final ModelAsViewProvider models;
-  
+
   /** The profiles. */
   private final ProfileManager profiles;
-  
+
   /** The local domain. */
   private final String localDomain;
-  
+
   /** The popup. */
   private UniversalPopup popup = null;
-  
+
   /** The user. */
   private final ParticipantId user;
-  
+
   /** The event bus. */
   private static EventBus eventBus;
-  
+
   /** The messages. */
   private static ParticipantMessages messages;
 

@@ -23,8 +23,8 @@
  */
 package cc.kune.core.client.state.impl;
 
-import org.waveprotocol.box.webclient.client.ClientEvents;
-import org.waveprotocol.box.webclient.client.events.WaveSelectionEvent;
+import org.waveprotocol.wave.client.events.ClientEvents;
+import org.waveprotocol.wave.client.events.WaveSelectionEvent;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 

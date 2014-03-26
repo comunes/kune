@@ -32,6 +32,7 @@ import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
+import org.waveprotocol.box.server.robots.ProfileFetcherModule;
 import org.waveprotocol.box.server.robots.RobotApiModule;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveServerImpl;
@@ -92,9 +93,11 @@ public class IntegrationTestHelper {
       final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule(
           "kune-tests.properties", TestConstants.PERSISTENCE_UNIT);
       final Module searchModule = injector.getInstance(SearchModule.class);
+      final Module profilesModule = injector.getInstance(ProfileFetcherModule.class);
       final Injector childInjector = injector.createChildInjector(
           wavePersistModule,
           searchModule,
+          profilesModule,
           kuneDataSource,
           new DataSourceOpenfirePersistModule(kuneDataSource.getKuneProperties()),
           new AbstractModule() {

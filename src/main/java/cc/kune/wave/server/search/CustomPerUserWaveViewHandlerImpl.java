@@ -62,14 +62,12 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
 
   public static final Log LOG = LogFactory.getLog(CustomPerUserWaveViewHandlerImpl.class);
 
-  private ParticipantEntityManager participantEntityManager;
-  private WaveEntityManager waveEntityManager;
-  private final ReadableWaveletDataProvider waveletProvider;
-
   @Inject
-  public CustomPerUserWaveViewHandlerImpl(final ReadableWaveletDataProvider waveletProvider) {
-    this.waveletProvider = waveletProvider;
-  }
+  private static ParticipantEntityManager participantEntityManager;
+  @Inject
+  private static WaveEntityManager waveEntityManager;
+  @Inject
+  private static ReadableWaveletDataProvider waveletProvider;
 
   @KuneTransactional
   private void addWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
@@ -101,12 +99,13 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     return waveEntity;
   }
 
-  public void init(final WaveEntityManager waveEntityManager,
-      final ParticipantEntityManager partEntManager) {
-    this.participantEntityManager = partEntManager;
-    Preconditions.checkNotNull(waveEntityManager);
-    this.waveEntityManager = waveEntityManager;
-  }
+  //
+  // public void init(final WaveEntityManager waveEntityManager,
+  // final ParticipantEntityManager partEntManager) {
+  // this.participantEntityManager = partEntManager;
+  // Preconditions.checkNotNull(waveEntityManager);
+  // this.waveEntityManager = waveEntityManager;
+  // }
 
   private void logNotFound(final ParticipantId participantId) {
     LOG.info("Failed to find and retrieve participant " + participantId.getAddress());
@@ -118,8 +117,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     Preconditions.checkNotNull(waveletName);
     Preconditions.checkNotNull(participantId);
 
-    @SuppressWarnings("deprecation")
-    final ListenableFutureTask<Void> task = new ListenableFutureTask<Void>(new Callable<Void>() {
+    final ListenableFutureTask<Void> task = ListenableFutureTask.<Void> create(new Callable<Void>() {
 
       @Override
       @KuneTransactional
@@ -146,8 +144,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
       final ParticipantId participantId) {
     Preconditions.checkNotNull(waveletName);
     Preconditions.checkNotNull(participantId);
-    @SuppressWarnings("deprecation")
-    final ListenableFutureTask<Void> task = new ListenableFutureTask<Void>(new Callable<Void>() {
+    final ListenableFutureTask<Void> task = ListenableFutureTask.<Void> create(new Callable<Void>() {
 
       @Override
       @KuneTransactional
@@ -186,8 +183,7 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     } catch (final WaveServerException e) {
       LOG.error("Failed to initialize index for " + waveletName, e);
     }
-    @SuppressWarnings("deprecation")
-    final ListenableFutureTask<Void> task = new ListenableFutureTask<Void>(new Callable<Void>() {
+    final ListenableFutureTask<Void> task = ListenableFutureTask.<Void> create(new Callable<Void>() {
       @Override
       public Void call() throws Exception {
         return null;

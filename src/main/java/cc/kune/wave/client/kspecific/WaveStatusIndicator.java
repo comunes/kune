@@ -22,9 +22,9 @@
  */
 package cc.kune.wave.client.kspecific;
 
-import org.waveprotocol.box.webclient.client.ClientEvents;
-import org.waveprotocol.box.webclient.client.events.NetworkStatusEvent;
-import org.waveprotocol.box.webclient.client.events.NetworkStatusEventHandler;
+import org.waveprotocol.wave.client.events.ClientEvents;
+import org.waveprotocol.wave.client.events.NetworkStatusEvent;
+import org.waveprotocol.wave.client.events.NetworkStatusEventHandler;
 
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;

@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
 
-import org.waveprotocol.box.webclient.client.ClientEvents;
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.DebugMessagePanel;
 import org.waveprotocol.box.webclient.client.HistoryProvider;
@@ -32,13 +31,6 @@ import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.Session;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
 import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
-import org.waveprotocol.box.webclient.client.events.Log;
-import org.waveprotocol.box.webclient.client.events.NetworkStatusEvent;
-import org.waveprotocol.box.webclient.client.events.NetworkStatusEventHandler;
-import org.waveprotocol.box.webclient.client.events.WaveCreationEvent;
-import org.waveprotocol.box.webclient.client.events.WaveCreationEventHandler;
-import org.waveprotocol.box.webclient.client.events.WaveSelectionEvent;
-import org.waveprotocol.box.webclient.client.events.WaveSelectionEventHandler;
 import org.waveprotocol.box.webclient.search.RemoteSearchService;
 import org.waveprotocol.box.webclient.search.SearchPanelRenderer;
 import org.waveprotocol.box.webclient.search.SearchPanelWidget;
@@ -52,6 +44,16 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import org.waveprotocol.wave.client.debug.logger.LogLevel;
+import org.waveprotocol.wave.client.doodad.attachment.AttachmentManagerImpl;
+import org.waveprotocol.wave.client.doodad.attachment.AttachmentManagerProvider;
+import org.waveprotocol.wave.client.events.ClientEvents;
+import org.waveprotocol.wave.client.events.Log;
+import org.waveprotocol.wave.client.events.NetworkStatusEvent;
+import org.waveprotocol.wave.client.events.NetworkStatusEventHandler;
+import org.waveprotocol.wave.client.events.WaveCreationEvent;
+import org.waveprotocol.wave.client.events.WaveCreationEventHandler;
+import org.waveprotocol.wave.client.events.WaveSelectionEvent;
+import org.waveprotocol.wave.client.events.WaveSelectionEventHandler;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 import org.waveprotocol.wave.client.widget.popup.CenterPopupPositioner;
 import org.waveprotocol.wave.client.widget.popup.PopupChrome;
@@ -74,6 +76,7 @@ import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
+import cc.kune.initials.InitialsResources;
 import cc.kune.wave.client.kspecific.AfterOpenWaveEvent;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
 import cc.kune.wave.client.kspecific.BeforeOpenWaveEvent;
@@ -741,6 +744,7 @@ public class WebClient extends Composite implements WaveClientView {
     final DockLayoutPanel self = BINDER.createAndBindUi(this);
     // kune-patch
     // RootPanel.get("app").add(self);
+    InitialsResources.INS.css().ensureInjected();
     initWidget(self);
     waveHolder = new ImplPanel("");
     waveHolder.addStyleName("k-waveHolder");
@@ -750,6 +754,7 @@ public class WebClient extends Composite implements WaveClientView {
     // cleared.
     self.getElement().getStyle().clearPosition();
     splitPanel.setWidgetMinSize(searchPanel, 300);
+    AttachmentManagerProvider.init(AttachmentManagerImpl.getInstance());
 
     if (LogLevel.showDebug()) {
       logPanel.enable();

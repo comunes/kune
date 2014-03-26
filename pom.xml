@@ -17,14 +17,14 @@
     <gwt.version>2.5.1</gwt.version>
     <!-- <gwtmaven.version>2.2.0</gwtmaven.version> -->
     <gwtmaven.version>2.5.1</gwtmaven.version>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
     <hibernate.version>4.1.2.Final</hibernate.version>
-    <wiab.version>0.3.45</wiab.version>
-    <jetty.version>8.1.4.v20120524</jetty.version>
+    <wiab.version>0.3.46</wiab.version>
+    <jetty.version>9.1.1.v20140108</jetty.version>
     <skipTests>true</skipTests>
   </properties>
   <repositories>
@@ -461,10 +461,8 @@
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>
-      <!-- Needs some migration
-      http://code.google.com/p/guava-libraries/wiki/MapMakerMigration
-      <version>15.0</version> -->
-      <version>r09</version>
+      <!-- Needs some migration http://code.google.com/p/guava-libraries/wiki/MapMakerMigration -->
+      <version>15.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.gxp</groupId>
@@ -666,21 +664,29 @@
       <version>2.2.2</version>
       <type>maven-plugin</type>
     </dependency>
-    <dependency>
-      <groupId>net.sourceforge.htmlunit</groupId>
-      <artifactId>htmlunit</artifactId>
-      <version>2.13</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>jetty-websocket</artifactId>
-          <groupId>org.eclipse.jetty</groupId>
-        </exclusion>
-      </exclusions>
-    </dependency>
+    <!-- We should replace this by other lib <dependency> <groupId>net.sourceforge.htmlunit</groupId>
+      <artifactId>htmlunit</artifactId> <version>2.13</version> <exclusions> <exclusion>
+      <artifactId>jetty-websocket</artifactId> <groupId>org.eclipse.jetty</groupId>
+      </exclusion> </exclusions> </dependency> -->
     <dependency>
       <groupId>com.thetransactioncompany</groupId>
       <artifactId>cors-filter</artifactId>
       <version>1.8</version>
+    </dependency>
+    <dependency>
+      <groupId>cc.kune</groupId>
+      <artifactId>gwt-initials-avatars-client</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>cc.kune</groupId>
+      <artifactId>gwt-initials-avatars-shared</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>cc.kune</groupId>
+      <artifactId>gwt-initials-avatars-server</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <distributionManagement>
@@ -965,7 +971,7 @@
         </configuration>
       </plugin>
       <plugin>
-        <groupId>org.mortbay.jetty</groupId>
+        <groupId>org.eclipse.jetty</groupId>
         <artifactId>jetty-maven-plugin</artifactId>
         <version>${jetty.version}</version>
         <configuration>
@@ -1120,15 +1126,15 @@
               <pluginExecutions>
                 <pluginExecution>
                   <pluginExecutionFilter>
-                    <groupId />
-                    <artifactId />
-                    <versionRange />
+                    <groupId/>
+                    <artifactId/>
+                    <versionRange/>
                     <goals>
-                      <goal />
+                      <goal/>
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1143,7 +1149,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <execute />
+                    <execute/>
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1156,7 +1162,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
               </pluginExecutions>

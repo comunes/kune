@@ -1,3 +1,11 @@
+kune (0.3.0+b41) unstable; urgency=low
+
+  * Wave updated.
+  * Jetty updated to 9.1.1. 
+  * Intials avatars.
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 26 Mar 2014 11:44:24 +0100
+
 kune (0.3.0+b40) unstable; urgency=low
 
   * Added an embed doc action to Share menu (#561)

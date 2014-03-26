@@ -39,20 +39,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.waveprotocol.box.server.persistence.file.FileUtils;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
-import org.waveprotocol.box.server.waveserver.CustomImportServlet;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.error.ServerException;
-import cc.kune.core.server.manager.ParticipantEntityManager;
-import cc.kune.core.server.manager.WaveEntityManager;
 import cc.kune.core.server.mbean.MBeanRegister;
-import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.rack.dock.Dock;
 import cc.kune.core.server.rack.dock.RequestMatcher;
 import cc.kune.core.server.rack.utils.RackHelper;
 import cc.kune.core.server.scheduler.CustomJobFactory;
 import cc.kune.core.server.searcheable.SearchEngineServletFilter;
-import cc.kune.wave.server.search.CustomPerUserWaveViewHandlerImpl;
 
 import com.google.gwt.logging.server.RemoteLoggingServiceImpl;
 import com.google.inject.Binder;
@@ -106,7 +101,9 @@ public class RackServletFilter implements Filter {
   private List<Dock> docks;
 
   private List<RequestMatcher> excludes;
+  private boolean initialized;
   private Injector injector;
+
   private Rack rack;
 
   @Override
@@ -174,6 +171,9 @@ public class RackServletFilter implements Filter {
 
   @Override
   public void init(final FilterConfig filterConfig) throws ServletException {
+    if (initialized) {
+      throw new ServerException("Trying to init RackServletFilter twice");
+    }
     LOG.debug("INITIALIZING RackServletFilter...");
     final RackModule module = getModule(filterConfig);
     final RackBuilder builder = new RackBuilder();
@@ -199,22 +199,21 @@ public class RackServletFilter implements Filter {
     excludes = rack.getExcludes();
     initFilters(filterConfig);
     LOG.debug("INITIALIZATION DONE!");
-    kuneChildInjector.getInstance(CustomImportServlet.class).init(
-        kuneChildInjector.getInstance(KuneProperties.class));
 
-    // Register some mbeans objects
+    // kuneChildInjector.getInstance(CustomImportServlet.class).init(
+    // kuneChildInjector.getInstance(KuneProperties.class));
+
+    LOG.debug("Register some mbeans objects");
     kuneChildInjector.getInstance(MBeanRegister.class);
 
-    // Search init
-    final CustomPerUserWaveViewHandlerImpl searcher = kuneChildInjector.getInstance(CustomPerUserWaveViewHandlerImpl.class);
-    searcher.init(kuneChildInjector.getInstance(WaveEntityManager.class),
-        kuneChildInjector.getInstance(ParticipantEntityManager.class));
-
+    LOG.debug("Configure remote logging");
     final String dir = FileUtils.isDirExistsAndNonEmpty(SYMBOL_MAPS_ON_PRODUCTION) ? "symbolMapsWse/"
         : FileUtils.isDirExistsAndNonEmpty(SYMBOL_MAPS_ON_DEV) ? SYMBOL_MAPS_ON_DEV : null;
     if (dir != null) {
       kuneChildInjector.getInstance(RemoteLoggingServiceImpl.class).setSymbolMapsDirectory(dir);
     }
+
+    initialized = true;
 
     // Uncomment to generate the graph
     // graph("docs/wave-guice-graph.dot", injector);
