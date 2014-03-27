@@ -1254,7 +1254,6 @@
               </hostedWebapp>
               <modules>
                 <module>${project.groupId}.KuneDev</module>
-                <module>${project.groupId}.KuneEmbedDev</module>
               </modules>
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
