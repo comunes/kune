@@ -1,30 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-  <classpathentry including="**/*.java" kind="src"
-    path="src/main/java"/>
-  <classpathentry kind="var"
-    path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar"
-    sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
-  <classpathentry kind="con"
-    path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-  <classpathentry kind="var"
-    path="M2_REPO/cc/kune/kune-java-gadget-lib/0.0.1-SNAPSHOT/kune-java-gadget-lib-0.0.1-SNAPSHOT.jar"/>
-  <classpathentry kind="var"
-    path="M2_REPO/junit/junit/4.10/junit-4.10.jar" sourcepath="M2_REPO/junit/junit/4.10/junit-4.10-sources.jar"/>
-  <classpathentry kind="var"
-    path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar"
-    sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
-  <classpathentry kind="var"
-    path="M2_REPO/com/google/gwt/gwt-user/2.1.1/gwt-user-2.1.1.jar"
-    sourcepath="M2_REPO/com/google/gwt/gwt-user/2.1.1/gwt-user-2.1.1-sources.jar"/>
-  <classpathentry kind="var"
-    path="M2_REPO/com/google/inject/guice/3.0/guice-3.0-no_aop.jar"/>
-  <classpathentry kind="var"
-    path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar"
-    sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>
-  <classpathentry kind="var"
-    path="M2_REPO/com/google/gwt/gwt-gin/1.0-r137/gwt-gin-1.0-r137.jar"/>
-  <classpathentry kind="con"
-    path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
-  <classpathentry kind="output" path="target/WEB-INF/classes"/>
+	<classpathentry kind="src" output="target/WEB-INF/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/ssd/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.5.1/gwt-2.5.1/gwt-user.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/ssd/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.5.1/gwt-2.5.1/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/ssd/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.5.1/gwt-2.5.1/gwt-dev.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/ssd/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.5.1/gwt-2.5.1/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/ssd/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.5.1/gwt-2.5.1/validation-api-1.0.0.GA.jar" sourcepath="/ssd/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.5.1/gwt-2.5.1/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="lib" path="/ssd/eclipse/plugins/com.google.gwt.eclipse.sdkbundle_2.5.1/gwt-2.5.1/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="target/WEB-INF/classes"/>
 </classpath>
