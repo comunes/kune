@@ -184,7 +184,7 @@ NOTE: If you have errors or problems during compilation or launching, check out 
 *** GWT Superdev mode
 
 If you want to use the superdev mode you can:
-1) Run the previous gwt:compile command, run the server (2) and later the superdev launch (3)
+1) Run the previous gwt:compile command, run the server (2) and later the superdev launch (3), also you can use `mvn gwt:run-codeserver -P development`
 2) Open the code server http://localhost:9876/
 3) Drag&drop the devmode on/off bookmarks to your browser bookmarks toolbar (you need to do this only one time)
 4) open the server http://localhost:8888/
