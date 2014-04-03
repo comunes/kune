@@ -62,7 +62,6 @@ import org.waveprotocol.box.server.rpc.NotificationServlet;
 import org.waveprotocol.box.server.rpc.SearchServlet;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
-import org.waveprotocol.box.server.rpc.UserRegistrationServlet;
 import org.waveprotocol.box.server.rpc.WaveRefServlet;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewBus;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewDistpatcher;
@@ -209,7 +208,8 @@ public class CustomServerMain {
 
     server.addServlet(SessionManager.SIGN_IN_URL, injector.getInstance(AuthenticationServlet.class));
     server.addServlet("/auth/signout", injector.getInstance(SignOutServlet.class));
-    server.addServlet("/auth/register", injector.getInstance(UserRegistrationServlet.class));
+    // Closes
+    // server.addServlet("/auth/register", injector.getInstance(UserRegistrationServlet.class));
     server.addServlet("/locale/*", injector.getInstance(LocaleServlet.class));
     server.addServlet("/fetch/*", injector.getInstance(FetchServlet.class));
     server.addServlet("/search/*", injector.getInstance(SearchServlet.class));
