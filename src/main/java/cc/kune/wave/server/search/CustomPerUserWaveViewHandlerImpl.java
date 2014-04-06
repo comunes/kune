@@ -63,11 +63,11 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   public static final Log LOG = LogFactory.getLog(CustomPerUserWaveViewHandlerImpl.class);
 
   @Inject
-  private static ParticipantEntityManager participantEntityManager;
+  private ParticipantEntityManager participantEntityManager;
   @Inject
-  private static WaveEntityManager waveEntityManager;
+  private WaveEntityManager waveEntityManager;
   @Inject
-  private static ReadableWaveletDataProvider waveletProvider;
+  private ReadableWaveletDataProvider waveletProvider;
 
   @KuneTransactional
   private void addWaveToUser(final WaveEntity waveEntity, final ParticipantId participantId) {
@@ -98,14 +98,6 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
     Preconditions.checkNotNull(waveEntity);
     return waveEntity;
   }
-
-  //
-  // public void init(final WaveEntityManager waveEntityManager,
-  // final ParticipantEntityManager partEntManager) {
-  // this.participantEntityManager = partEntManager;
-  // Preconditions.checkNotNull(waveEntityManager);
-  // this.waveEntityManager = waveEntityManager;
-  // }
 
   private void logNotFound(final ParticipantId participantId) {
     LOG.info("Failed to find and retrieve participant " + participantId.getAddress());
@@ -171,10 +163,8 @@ public class CustomPerUserWaveViewHandlerImpl implements PerUserWaveViewHandler,
   public ListenableFuture<Void> onWaveInit(final WaveletName waveletName) {
     Preconditions.checkNotNull(waveletName);
     LOG.debug("On wave init of wave " + waveletName.toString());
-    // FIXME... move this to task?
-    ReadableWaveletData waveletData;
     try {
-      waveletData = waveletProvider.getReadableWaveletData(waveletName);
+      final ReadableWaveletData waveletData = waveletProvider.getReadableWaveletData(waveletName);
       final WaveEntity waveEntity = getWaveEntity(waveletData);
       Preconditions.checkNotNull(waveEntity);
       for (final ParticipantId participantId : waveletData.getParticipants()) {

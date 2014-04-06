@@ -25,14 +25,7 @@ package cc.kune.wave.server;
 
 import org.waveprotocol.box.server.robots.operations.FetchProfilesService.ProfilesFetcher;
 
-import cc.kune.core.shared.FileConstants;
-import cc.kune.core.shared.utils.SharedFileDownloadUtils;
-import cc.kune.domain.Group;
-import cc.kune.domain.finders.GroupFinder;
-import cc.kune.wave.server.kspecific.ParticipantUtils;
-
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
 import com.google.wave.api.ParticipantProfile;
 
 /**
@@ -41,47 +34,15 @@ import com.google.wave.api.ParticipantProfile;
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-@Singleton
+
 public class CustomInitialsProfilesFetcher implements ProfilesFetcher {
+
   @Inject
-  private static SharedFileDownloadUtils downUtils;
-  @Inject
-  private static GroupFinder groupFinder;
-  @Inject
-  private static ParticipantUtils partUtils;
+  private static CustomInitialsProfilesFetcherImpl fetcher;
 
   @Override
   public ParticipantProfile fetchProfile(final String email) {
-    ParticipantProfile pTemp = null;
-    pTemp = ProfilesFetcher.SIMPLE_PROFILES_FETCHER.fetchProfile(email);
-    String name = pTemp.getName();
-    String imageUrl = getImageUrl(email);
-    if (partUtils.isLocal(email)) {
-      if (partUtils.getAtDomain().equals(email)) {
-        // @localhost participant
-        imageUrl = FileConstants.WORLD_AVATAR_IMAGE;
-        // FIXME i18n
-        name = "Anyone";
-      } else {
-        final String shortName = partUtils.getAddressName(email);
-        final Group group = groupFinder.findByShortName(shortName);
-        if (group != Group.NO_GROUP && group.hasLogo()) {
-          // Know group and have a configured logo
-          imageUrl = downUtils.getLogoImageUrl(shortName);
-          name = group.getLongName();
-        }
-      }
-    }
-    final ParticipantProfile profile = new ParticipantProfile(email, name, imageUrl,
-        pTemp.getProfileUrl());
-    return profile;
-  }
-
-  /**
-   * Returns the avatar URL for the given email address.
-   */
-  public String getImageUrl(final String email) {
-    return "/iniavatars/100x100/" + email;
+    return fetcher.fetchProfile(email);
   }
 
 }

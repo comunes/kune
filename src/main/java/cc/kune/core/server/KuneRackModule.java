@@ -80,8 +80,10 @@ import cc.kune.lists.server.ListsServerModule;
 import cc.kune.tasks.server.TaskServerModule;
 import cc.kune.trash.server.TrashServerModule;
 import cc.kune.wave.server.CustomInitialsProfilesFetcher;
+import cc.kune.wave.server.CustomInitialsProfilesFetcherImpl;
 import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
 import cc.kune.wave.server.kspecific.WaveEmailNotifier;
+import cc.kune.wave.server.search.CustomPerUserWaveViewHandler;
 import cc.kune.wave.server.search.CustomPerUserWaveViewHandlerImpl;
 import cc.kune.wiki.server.WikiServerModule;
 
@@ -132,6 +134,8 @@ public class KuneRackModule implements RackModule {
         // See: http://code.google.com/p/google-guice/issues/detail?id=461
         bindInterceptor(Matchers.annotatedWith(LogThis.class), new NotInObject(),
             new LoggerMethodInterceptor());
+        bindInterceptor(Matchers.annotatedWith(TestChildInterception.class), any(),
+            new TestChildInterceptor());
         // if (sessionScope != null) {
         // bindScope(SessionScoped.class, sessionScope);
         // }
@@ -141,8 +145,6 @@ public class KuneRackModule implements RackModule {
         requestStaticInjection(EventsServerConversionUtil.class);
         requestStaticInjection(GroupServerUtils.class);
         requestStaticInjection(I18n.class);
-        requestStaticInjection(CustomPerUserWaveViewHandlerImpl.class);
-        requestStaticInjection(CustomInitialsProfilesFetcher.class);
       }
     };
   }
@@ -258,6 +260,7 @@ public class KuneRackModule implements RackModule {
         final KuneJpaLocalTxnInterceptor kuneJpaTxnInterceptor = kuneDataSource.getTransactionInterceptor();
         // Warning: parent instances (like Wave classes) are not intercepted
         // See: http://code.google.com/p/google-guice/issues/detail?id=461
+        // and https://code.google.com/p/google-guice/issues/detail?id=390
         bindInterceptor(annotatedWith(KuneTransactional.class), any(), kuneJpaTxnInterceptor);
         bindInterceptor(any(), annotatedWith(KuneTransactional.class), kuneJpaTxnInterceptor);
         filter("/*").through(DataSourceKunePersistModule.MY_DATA_SOURCE_ONE_FILTER_KEY);
@@ -267,6 +270,14 @@ public class KuneRackModule implements RackModule {
           bindInterceptor(any(), annotatedWith(OpenfireTransactional.class), openfireJpaTxnInterceptor);
           filter("/*").through(DataSourceOpenfirePersistModule.MY_DATA_SOURCE_TWO_FILTER_KEY);
         }
+
+        // As parent instances are not intercepted by Guice AOP we have to use
+        // the delegation pattern with a child so it's binded in the child
+        // injector
+        bind(CustomPerUserWaveViewHandlerImpl.class).in(Singleton.class);
+        requestStaticInjection(CustomPerUserWaveViewHandler.class);
+        bind(CustomInitialsProfilesFetcherImpl.class).in(Singleton.class);
+        requestStaticInjection(CustomInitialsProfilesFetcher.class);
         super.configureServlets();
       }
     });

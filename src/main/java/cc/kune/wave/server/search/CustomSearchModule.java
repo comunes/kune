@@ -46,11 +46,10 @@ public class CustomSearchModule extends SearchModule {
       super.configure();
     } catch (final RuntimeException e) {
       if ("db".equals(searchType)) {
-        bind(PerUserWaveViewProvider.class).to(CustomPerUserWaveViewHandlerImpl.class).in(
+        bind(PerUserWaveViewProvider.class).to(CustomPerUserWaveViewHandler.class).in(Singleton.class);
+        bind(PerUserWaveViewBus.Listener.class).to(CustomPerUserWaveViewHandler.class).in(
             Singleton.class);
-        bind(PerUserWaveViewBus.Listener.class).to(CustomPerUserWaveViewHandlerImpl.class).in(
-            Singleton.class);
-        bind(PerUserWaveViewHandler.class).to(CustomPerUserWaveViewHandlerImpl.class).in(Singleton.class);
+        bind(PerUserWaveViewHandler.class).to(CustomPerUserWaveViewHandler.class).in(Singleton.class);
         bind(WaveIndexer.class).to(CustomWaveIndexerImpl.class);
       }
     }
