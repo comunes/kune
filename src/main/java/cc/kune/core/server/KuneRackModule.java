@@ -1,5 +1,6 @@
 /*
  *
+
  * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
@@ -260,6 +261,7 @@ public class KuneRackModule implements RackModule {
         // See: http://code.google.com/p/google-guice/issues/detail?id=461
         bindInterceptor(annotatedWith(KuneTransactional.class), any(), kuneJpaTxnInterceptor);
         bindInterceptor(any(), annotatedWith(KuneTransactional.class), kuneJpaTxnInterceptor);
+        bindInterceptor(any(), annotatedWith(TestChildInterception.class), new TestChildInterceptor());
         filter("/*").through(DataSourceKunePersistModule.MY_DATA_SOURCE_ONE_FILTER_KEY);
         if (!kuneProperties.getBoolean(KuneProperties.SITE_OPENFIRE_IGNORE)) {
           final OpenfireJpaLocalTxnInterceptor openfireJpaTxnInterceptor = openfireDataSource.getTransactionInterceptor();
