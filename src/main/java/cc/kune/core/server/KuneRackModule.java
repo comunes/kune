@@ -135,8 +135,6 @@ public class KuneRackModule implements RackModule {
         // See: http://code.google.com/p/google-guice/issues/detail?id=461
         bindInterceptor(Matchers.annotatedWith(LogThis.class), new NotInObject(),
             new LoggerMethodInterceptor());
-        bindInterceptor(Matchers.annotatedWith(TestChildInterception.class), any(),
-            new TestChildInterceptor());
         // if (sessionScope != null) {
         // bindScope(SessionScoped.class, sessionScope);
         // }
