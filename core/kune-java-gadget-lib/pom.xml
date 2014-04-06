@@ -38,7 +38,7 @@
     <dependency>
       <groupId>com.google.gwt.google-apis</groupId>
       <artifactId>gwt-gadgets</artifactId>
-      <version>1.0.3</version>
+      <version>${gwt-gadgets.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
@@ -47,9 +47,9 @@
       <classifier>no_aop</classifier>
     </dependency>
     <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-gin</artifactId>
-      <version>1.0-r137</version>
+      <groupId>com.google.gwt.inject</groupId>
+      <artifactId>gin</artifactId>
+      <version>${gin.version}</version>
     </dependency>
   </dependencies>
   <build>

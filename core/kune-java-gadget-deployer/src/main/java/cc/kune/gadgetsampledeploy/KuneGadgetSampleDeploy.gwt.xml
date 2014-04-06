@@ -14,6 +14,9 @@
   <!-- comment this if just testing !!!!!!!!!!! -->
   <!-- <set-property name="user.agent" value="gecko1_8"/> -->
 
+  <set-property-fallback name="locale" value="en" />
+  <set-property name="locale" value="en" />
+
   <!-- Specify the app entry point class. -->
   <entry-point class='cc.kune.gadgetsampledeploy.client.KuneGadgetSample'/>
 

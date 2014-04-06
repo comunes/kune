@@ -1,28 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-  <name>kune-java-gadget-sample-deployer</name>
-  <comment>A java gadget sample deployer for kune to show the creation
+	<name>kune-java-gadget-sample-deployer</name>
+	<comment>A java gadget sample deployer for kune to show the creation
     of kune gadgets. Ready to compile and copy/deploy to a webserver.
     NO_M2ECLIPSE_SUPPORT: Project files created with the
     maven-eclipse-plugin are not supported in M2Eclipse.</comment>
-  <projects/>
-  <buildSpec>
-    <buildCommand>
-      <name>org.eclipse.jdt.core.javabuilder</name>
-    </buildCommand>
-    <buildCommand>
-      <name>com.google.gdt.eclipse.core.webAppProjectValidator</name>
-    </buildCommand>
-    <buildCommand>
-      <name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
-    </buildCommand>
-    <buildCommand>
-      <name>org.eclipse.m2e.core.maven2Builder</name>
-    </buildCommand>
-  </buildSpec>
-  <natures>
-    <nature>org.eclipse.jdt.core.javanature</nature>
-    <nature>org.eclipse.m2e.core.maven2Nature</nature>
-    <nature>com.google.gwt.eclipse.core.gwtNature</nature>
-  </natures>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.google.gdt.eclipse.core.webAppProjectValidator</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>com.google.gwt.eclipse.core.gwtProjectValidator</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.m2e.core.maven2Builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.m2e.core.maven2Nature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>com.google.gwt.eclipse.core.gwtNature</nature>
+	</natures>
 </projectDescription>
