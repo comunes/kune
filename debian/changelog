@@ -1,5 +1,6 @@
 kune (0.3.0+b42) unstable; urgency=low
 
+  * Fix for #582. It solves issues with Custom Wave Search and Initials Profiler
   * Disabled /auth/register (#577)
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 27 Mar 2014 19:19:01 +0100
