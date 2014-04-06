@@ -22,7 +22,6 @@
  */
 package cc.kune.domain.utils;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface HasId.
  * 

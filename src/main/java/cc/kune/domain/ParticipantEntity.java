@@ -42,6 +42,8 @@ import org.hibernate.annotations.Sort;
 import org.hibernate.annotations.SortType;
 import org.hibernate.search.annotations.DocumentId;
 
+import cc.kune.domain.utils.HasId;
+
 /**
  * The Class Participants maps the waves of some participant
  * 
@@ -49,7 +51,7 @@ import org.hibernate.search.annotations.DocumentId;
  */
 @Entity
 @Table(name = "participants")
-public class ParticipantEntity {
+public class ParticipantEntity implements HasId {
 
   @Column(nullable = false, unique = true)
   private String address;
@@ -91,6 +93,11 @@ public class ParticipantEntity {
     return address;
   }
 
+  @Override
+  public Long getId() {
+    return id;
+  }
+
   public Set<WaveEntity> getWaves() {
     return waves;
   }
@@ -101,6 +108,11 @@ public class ParticipantEntity {
 
   public void setAddress(final String address) {
     this.address = address;
+  }
+
+  @Override
+  public void setId(final Long id) {
+    this.id = id;
   }
 
   public void setWaves(final SortedSet<WaveEntity> waves) {
