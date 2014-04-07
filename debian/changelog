@@ -1,3 +1,10 @@
+kune (0.3.0+b43) unstable; urgency=low
+
+  * Core updated to 1.7
+  * KuneOpenfireAuth command line options and updated libs.
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 07 Apr 2014 14:48:24 +0200
+
 kune (0.3.0+b42) unstable; urgency=low
 
   * Fix for #582. It solves issues with Custom Wave Search and Initials Profiler
