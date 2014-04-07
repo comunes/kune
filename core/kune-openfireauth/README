@@ -1,0 +1,4 @@
+Build the jar with:
+  mvn assembly:assembly -DdescriptorId=jar-with-dependencies
+put in /usr/share/openfire/lib/
+also put there a link to the wave-server.properties configuration so it can read the server public IP/port.

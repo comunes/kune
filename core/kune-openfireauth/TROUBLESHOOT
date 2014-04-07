@@ -1,0 +1,27 @@
+TROUBLESHOOTING for kune -*- mode: org; -*-
+#+ARCHIVE: %s_done::
+
+* TROUBLESHOOTING
+
+** Manual testing 
+You can test if the authentication works via command line using:
+java -jar kun-openfirauth.jar <public address:port> <useSsl> <user> <pass>
+for instance:
+java -jar kune-openfireauth.jar localhost false admin easyeasy
+
+** hostname vs ip address
+Seems like with the last kune version, the previous authentication via ip address gives a 404, so as a workaround we have to use the hostname 
+** Cannot login when using SSL.
+Probably is a issue with the certificate. 
+
+http://nodsw.com/blog/leeland/2006/12/06-no-more-unable-find-valid-certification-path-requested-target
+
+Follow the last procedure of:
+http://confluence.atlassian.com/display/CONFKB/Unable+to+Connect+to+SSL+Services+due+to+PKIX+Path+Building+Failed+sun.security.provider.certpath.SunCertPathBuilderException
+    Download the source http://confluence.atlassian.com/download/attachments/180292346/InstallCert.java?version=1&modificationDate=1315453596921
+    From a command line prompt, cd to the directory where you downloaded the source.
+    Run 'javac InstallCert'. Make sure java is on your path.
+    Run 'java InstallCert YOURDOMAIN:443'. Check the response and add the correct destination.
+    Copy the created jssecacets to you JAVA_HOME security folder, in our case:
+      /usr/lib/jvm/java-6-sun/jre/lib/security
+    Restart openfire

@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>cc.kune</groupId>
   <artifactId>kune-core</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <version>0.3.0-SNAPSHOT</version>
   <packaging>pom</packaging>
   <properties>
-    <maven.compiler.source>1.6</maven.compiler.source>
-    <maven.compiler.target>1.6</maven.compiler.target>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <wiab.version>0.3.13</wiab.version>
     <gwt.version>2.5.1</gwt.version>
@@ -15,10 +15,34 @@
     <gin.version>2.1.0</gin.version>
     <gwt-gadgets.version>1.2.1</gwt-gadgets.version>
   </properties>
+  <repositories>
+    <repository>
+      <id>comunes-internal</id>
+      <url>http://archiva.comunes.org/repository/comunes-internal/</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+        <enabled>false</enabled>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>comunes-snapshots</id>
+      <name>Comunes Archiva Snapshot Repository</name>
+      <url>http://archiva.comunes.org/repository/comunes-snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
   <modules>
     <module>kune-cli</module>
     <module>kune-java-gadget-sample</module>
     <module>kune-sandbox</module>
+    <module>kune-openfireauth</module>
   </modules>
   <distributionManagement>
     <repository>
