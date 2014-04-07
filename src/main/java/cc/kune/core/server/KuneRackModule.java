@@ -272,8 +272,8 @@ public class KuneRackModule implements RackModule {
         }
 
         // As parent instances are not intercepted by Guice AOP we have to use
-        // the delegation pattern with a child so it's binded in the child
-        // injector
+        // the delegation pattern with a child so Wave instances are binded in
+        // the kune child injector (and intercepted)
         bind(CustomPerUserWaveViewHandlerImpl.class).in(Singleton.class);
         requestStaticInjection(CustomPerUserWaveViewHandler.class);
         bind(CustomInitialsProfilesFetcherImpl.class).in(Singleton.class);
