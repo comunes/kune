@@ -13,7 +13,7 @@
     <gwt.version>2.5.1</gwt.version>
     <guice.version>3.0</guice.version>
     <gin.version>2.1.0</gin.version>
-    <gwt-gadgets.version>1.2.1</gwt-gadgets.version>
+    <gwt-gadgets.version>1.2.1-rc1</gwt-gadgets.version>
   </properties>
   <repositories>
     <repository>
