@@ -1,5 +1,6 @@
 kune (0.3.0+b43) unstable; urgency=low
 
+  * Gadget proxy fixed
   * Core updated to 1.7
   * KuneOpenfireAuth command line options and updated libs.
 

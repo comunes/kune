@@ -46,6 +46,7 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
   <filter>
     <filter-name>searcheable</filter-name>
     <filter-class>cc.kune.core.server.searcheable.SearchEngineServletFilter</filter-class>
+    <async-supported>true</async-supported>
   </filter>
   <filter-mapping>
     <filter-name>searcheable</filter-name>
