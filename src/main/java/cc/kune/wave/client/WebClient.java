@@ -583,6 +583,7 @@ public class WebClient extends Composite implements WaveClientView {
     channel = null;
     idGenerator = null;
     websocket = null;
+    searchPanel.clearDigests();
     clear();
   }
 
