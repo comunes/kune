@@ -64,6 +64,10 @@ public class ShareDialogHelper {
     this.localDomain = "@" + localDomain;
   }
 
+  public boolean isNotInitialized() {
+    return localDomain == null;
+  }
+
   public void setState(final GroupDTO currentGroup, final String currentUser, final AccessListsDTO acl,
       final String typeId) {
     setState(currentGroup, currentUser, acl, typeId, NO_CREATOR, NO_MORE_PARTICIPANTS);

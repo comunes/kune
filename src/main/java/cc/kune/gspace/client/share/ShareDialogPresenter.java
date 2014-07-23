@@ -88,6 +88,7 @@ public class ShareDialogPresenter extends
   private final Provider<ShareToListView> shareToListView;
   private final Provider<ShareToTheNetView> shareToNetView;
   private final Provider<ShareToOthersView> shareToOthersView;
+  private final StateManager stateManager;
 
   /**
    * Instantiates a new share dialog presenter.
@@ -112,22 +113,9 @@ public class ShareDialogPresenter extends
     this.shareToOthersView = shareToOthersView;
     this.session = session;
     this.helper = helper;
+    this.stateManager = stateManager;
     this.contentService = contentService;
     this.listService = listService;
-    this.helper.init(org.waveprotocol.box.webclient.client.Session.get().getDomain());
-    eventBus.addHandler(SpaceSelectEvent.getType(), new SpaceSelectEvent.SpaceSelectHandler() {
-      @Override
-      public void onSpaceSelect(final SpaceSelectEvent event) {
-        hideIfVisible();
-      }
-    });
-    stateManager.onStateChanged(false, new StateChangedHandler() {
-      @Override
-      public void onStateChanged(final StateChangedEvent event) {
-        hideIfVisible();
-      }
-
-    });
   }
 
   private void hideIfVisible() {
@@ -139,6 +127,19 @@ public class ShareDialogPresenter extends
   @Override
   protected void onBind() {
     super.onBind();
+    super.getEventBus().addHandler(SpaceSelectEvent.getType(),
+        new SpaceSelectEvent.SpaceSelectHandler() {
+          @Override
+          public void onSpaceSelect(final SpaceSelectEvent event) {
+            hideIfVisible();
+          }
+        });
+    stateManager.onStateChanged(false, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        hideIfVisible();
+      }
+    });
     final OnAddGroupListener addListener = new OnAddGroupListener() {
       @Override
       public void onAdd(final String groupName) {
@@ -167,6 +168,10 @@ public class ShareDialogPresenter extends
       }
     };
     shareToOthersView.get().onAddGroupListener(addListener);
+    // Fix for: http://redmine.ourproject.org/issues/585
+    if (helper.isNotInitialized()) {
+      this.helper.init(org.waveprotocol.box.webclient.client.Session.get().getDomain());
+    }
   }
 
   /*

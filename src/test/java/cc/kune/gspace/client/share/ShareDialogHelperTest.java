@@ -25,6 +25,7 @@ package cc.kune.gspace.client.share;
 import static cc.kune.core.shared.dto.GroupListDTO.*;
 import static cc.kune.docs.shared.DocsToolConstants.TYPE_DOCUMENT;
 import static cc.kune.wiki.shared.WikiToolConstants.TYPE_WIKIPAGE;
+import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -113,7 +114,9 @@ public class ShareDialogHelperTest {
     group2 = new GroupDTO("shortname2", "longname 2", GroupType.PROJECT);
     group3 = new GroupDTO("shortname3", "longname 3", GroupType.PROJECT);
     helper = new ShareDialogHelper(shareToList, shareToTheNet, shareToOthers, menuBtn);
+    assertTrue(helper.isNotInitialized());
     helper.init(DOMAIN);
+    assertFalse(helper.isNotInitialized());
     shareToListInOrder = Mockito.inOrder(shareToList);
     participants = new ArrayList<String>();
     participants.add(SOMEBODY1);
