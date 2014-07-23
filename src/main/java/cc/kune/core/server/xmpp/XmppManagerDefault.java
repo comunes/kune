@@ -321,7 +321,7 @@ public class XmppManagerDefault implements XmppManager {
     final Chat newChat = xmppConn.getChatManager().createChat(userJid, new MessageListener() {
       @Override
       public void processMessage(final Chat arg0, final Message arg1) {
-        LOG.info("Sended message: " + arg1.getBody());
+        LOG.info("Sent message: " + arg1.getBody());
       }
     });
     try {
