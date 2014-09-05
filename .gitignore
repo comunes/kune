@@ -60,7 +60,7 @@ core/kune-sandbox/war/kune_sandbox
 core/kune-java-gadget-lib/target
 core/kune-sandbox/war/WEB-INF/lib/
 *~
-.classpath
+/.classpath
 core/kune-color-picker/war/WEB-INF/classes/
 core/kune-color-picker/war/kune_color_picker
 src/main/gwt-unitCache/
