@@ -25,6 +25,9 @@ package cc.kune.core.server.xmpp;
 import java.util.Collection;
 
 import org.jivesoftware.smack.RosterEntry;
+import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.SmackException.NoResponseException;
+import org.jivesoftware.smack.SmackException.NotConnectedException;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -47,8 +50,10 @@ public interface XmppManager {
    * @param subject
    *          the subject
    * @return the room
+ * @throws SmackException 
+ * @throws NoResponseException 
    */
-  Room createRoom(ChatConnection connection, String roomName, String ownerAlias, String subject);
+  Room createRoom(ChatConnection connection, String roomName, String ownerAlias, String subject) throws NoResponseException, SmackException;
 
   /**
    * Destroy room.
@@ -57,8 +62,10 @@ public interface XmppManager {
    *          the conn
    * @param roomName
    *          the room name
+ * @throws NotConnectedException 
+ * @throws NoResponseException 
    */
-  void destroyRoom(ChatConnection conn, String roomName);
+  void destroyRoom(ChatConnection conn, String roomName) throws NoResponseException, NotConnectedException;
 
   /**
    * Disconnect.
@@ -98,8 +105,10 @@ public interface XmppManager {
    * @param alias
    *          the alias
    * @return the room
+ * @throws NotConnectedException 
+ * @throws NoResponseException 
    */
-  Room joinRoom(ChatConnection connection, String roomName, String alias);
+  Room joinRoom(ChatConnection connection, String roomName, String alias) throws NoResponseException, NotConnectedException;
 
   /**
    * Login.

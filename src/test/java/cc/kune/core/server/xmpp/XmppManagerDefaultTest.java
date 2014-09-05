@@ -26,6 +26,8 @@ import static org.junit.Assert.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -113,9 +115,11 @@ public class XmppManagerDefaultTest {
 
   /**
    * Test broadcast.
+ * @throws SmackException 
+ * @throws NoResponseException 
    */
   @Ignore
-  public void testBroadcast() {
+  public void testBroadcast() throws NoResponseException, SmackException {
     final String roomName = "roomName";
     final ChatConnection conn1 = manager.login("testUser1", "easy1", "test");
     final ChatConnection conn2 = manager.login("testUser2", "easy2", "test");
@@ -150,9 +154,11 @@ public class XmppManagerDefaultTest {
 
   /**
    * Test create room.
+ * @throws SmackException 
+ * @throws NoResponseException 
    */
   @Test
-  public void testCreateRoom() {
+  public void testCreateRoom() throws NoResponseException, SmackException {
     final ChatConnection handler1 = manager.login("admin", "easyeasy", "test");
     if (!manager.existRoom(handler1, "test-room")) {
       manager.createRoom(handler1, "test-room", "alias", "Always the same room");

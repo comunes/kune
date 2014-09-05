@@ -22,13 +22,15 @@
  */
 package cc.kune.core.server.xmpp;
 
-import java.util.Iterator;
+import java.util.Collection;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jivesoftware.smack.SmackException.NoResponseException;
+import org.jivesoftware.smack.SmackException.NotConnectedException;
 import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smackx.Form;
-import org.jivesoftware.smackx.FormField;
+import org.jivesoftware.smackx.xdata.Form;
+import org.jivesoftware.smackx.xdata.FormField;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
 // TODO: Auto-generated Javadoc
@@ -50,10 +52,10 @@ class RoomConfigurationDumper {
    *          the options
    * @return the string
    */
-  private static String log(final Iterator<?> options) {
+  private static String log(final Collection<? extends Object> options) {
     String s = "";
-    while (options.hasNext()) {
-      s += "| " + options.next().toString();
+    for (Object cs : options) {
+      s += "| " + cs.toString();
     }
     return s;
   }
@@ -75,8 +77,7 @@ class RoomConfigurationDumper {
    *          the form
    */
   public static void showConfiguration(final Form form) {
-    for (final Iterator<FormField> fields = form.getFields(); fields.hasNext();) {
-      final FormField formField = fields.next();
+    for (FormField formField : form.getFields()) {
       log("Field label: " + formField.getLabel());
       log("Field variable: " + formField.getVariable());
       log("Field type: " + formField.getType());
@@ -94,8 +95,10 @@ class RoomConfigurationDumper {
    *          the muc
    * @throws XMPPException
    *           the xMPP exception
+ * @throws NotConnectedException 
+ * @throws NoResponseException 
    */
-  void configure2(final MultiUserChat muc) throws XMPPException {
+  void configure2(final MultiUserChat muc) throws XMPPException, NoResponseException, NotConnectedException {
     final Form form = muc.getConfigurationForm().createAnswerForm();
     form.setAnswer("muc#roomconfig_passwordprotectedroom", false);
     // form.setAnswer("muc#roomconfig_roomname",

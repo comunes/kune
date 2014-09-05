@@ -22,8 +22,6 @@
  */
 package cc.kune.core.server.xmpp;
 
-import org.jivesoftware.smack.XMPPException;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChatException.
@@ -49,7 +47,7 @@ public class ChatException extends RuntimeException {
    * @param cause
    *          the cause
    */
-  public ChatException(final XMPPException cause) {
+  public ChatException(final Exception cause) {
     super(cause);
   }
 }

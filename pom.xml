@@ -49,6 +49,16 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>maven-central-snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
@@ -237,19 +247,9 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>jivesoftware</groupId>
-      <artifactId>smack</artifactId>
-      <version>3.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>jivesoftware</groupId>
-      <artifactId>smackx</artifactId>
-      <version>3.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>org.jivesoftware.smackx.debugger</groupId>
-      <artifactId>smackx-debugger</artifactId>
-      <version>3.0.4</version>
+      <groupId>org.igniterealtime.smack</groupId>
+      <artifactId>smack-java7</artifactId>
+      <version>4.1.0-alpha1-SNAPSHOT</version>
     </dependency>
     <!-- mysql -->
     <dependency>

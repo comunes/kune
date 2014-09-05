@@ -22,7 +22,7 @@
  */
 package cc.kune.core.server.xmpp;
 
-import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.AbstractXMPPConnection;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,7 +34,7 @@ import org.jivesoftware.smack.XMPPConnection;
 public class XmppConnection implements ChatConnection {
 
   /** The conn. */
-  private final XMPPConnection conn;
+  private final AbstractXMPPConnection conn;
 
   /** The user name. */
   private final String userName;
@@ -47,7 +47,7 @@ public class XmppConnection implements ChatConnection {
    * @param conn
    *          the conn
    */
-  public XmppConnection(final String userName, final XMPPConnection conn) {
+  public XmppConnection(final String userName, final AbstractXMPPConnection conn) {
     this.userName = userName;
     this.conn = conn;
   }
@@ -57,7 +57,7 @@ public class XmppConnection implements ChatConnection {
    * 
    * @return the conn
    */
-  public XMPPConnection getConn() {
+  public AbstractXMPPConnection getConn() {
     return conn;
   }
 

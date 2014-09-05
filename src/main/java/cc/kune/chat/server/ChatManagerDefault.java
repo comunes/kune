@@ -22,6 +22,10 @@
  */
 package cc.kune.chat.server;
 
+import org.jivesoftware.smack.SmackException;
+import org.jivesoftware.smack.SmackException.NoResponseException;
+import org.jivesoftware.smack.SmackException.NotConnectedException;
+
 import cc.kune.chat.shared.ChatToolConstants;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.ContentNotFoundException;
@@ -81,7 +85,15 @@ public class ChatManagerDefault implements ChatManager {
     final String userShortName = user.getShortName();
     final ChatConnection connection = xmppManager.login(userShortName, userHash, userHash);
     if (!xmppManager.existRoom(connection, roomName)) {
-      xmppManager.createRoom(connection, roomName, userShortName + userHash, subject);
+      try {
+        xmppManager.createRoom(connection, roomName, userShortName + userHash, subject);
+    } catch (NoResponseException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    } catch (SmackException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
       xmppManager.disconnect(connection);
     }
     try {
@@ -89,13 +101,37 @@ public class ChatManagerDefault implements ChatManager {
           ContentUtils.parseId(parentToken.getFolder()), roomName, user.getLanguage(),
           ChatToolConstants.TYPE_ROOM);
     } catch (final ContentNotFoundException e) {
-      xmppManager.destroyRoom(connection, roomName);
+      try {
+        xmppManager.destroyRoom(connection, roomName);
+    } catch (NoResponseException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+    } catch (NotConnectedException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+    }
       throw new ContentNotFoundException();
     } catch (final AccessViolationException e) {
-      xmppManager.destroyRoom(connection, roomName);
+      try {
+        xmppManager.destroyRoom(connection, roomName);
+    } catch (NoResponseException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+    } catch (NotConnectedException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+    }
       throw new AccessViolationException();
     } catch (final GroupNotFoundException e) {
-      xmppManager.destroyRoom(connection, roomName);
+      try {
+        xmppManager.destroyRoom(connection, roomName);
+    } catch (NoResponseException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+    } catch (NotConnectedException e1) {
+        // TODO Auto-generated catch block
+        e1.printStackTrace();
+    }
       throw new GroupNotFoundException();
     }
   }
