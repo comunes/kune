@@ -25,7 +25,7 @@ package cc.kune.core.server.rpc;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
-import org.jivesoftware.smack.util.Base64;
+import org.jivesoftware.util.Base64;
 import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.SessionManager;
 import org.waveprotocol.wave.model.wave.ParticipantId;
