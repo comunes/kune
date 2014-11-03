@@ -28,6 +28,7 @@ import org.jivesoftware.smack.SmackException.NotConnectedException;
 
 import cc.kune.chat.shared.ChatToolConstants;
 import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.AddRoomFailedException;
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.errors.GroupNotFoundException;
 import cc.kune.core.server.content.ContentUtils;
@@ -45,7 +46,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChatManagerDefault.
- *
+ * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -53,19 +54,22 @@ public class ChatManagerDefault implements ChatManager {
 
   /** The creation service. */
   private final CreationService creationService;
-  
+
   /** The group manager. */
   private final GroupManager groupManager;
-  
+
   /** The xmpp manager. */
   private final XmppManager xmppManager;
 
   /**
    * Instantiates a new chat manager default.
-   *
-   * @param xmppManager the xmpp manager
-   * @param groupManager the group manager
-   * @param creationService the creation service
+   * 
+   * @param xmppManager
+   *          the xmpp manager
+   * @param groupManager
+   *          the group manager
+   * @param creationService
+   *          the creation service
    */
   @Inject
   public ChatManagerDefault(final XmppManager xmppManager, final GroupManager groupManager,
@@ -75,25 +79,27 @@ public class ChatManagerDefault implements ChatManager {
     this.creationService = creationService;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.chat.server.ChatManager#addRoom(java.lang.String, cc.kune.domain.User, cc.kune.core.shared.domain.utils.StateToken, java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.chat.server.ChatManager#addRoom(java.lang.String,
+   * cc.kune.domain.User, cc.kune.core.shared.domain.utils.StateToken,
+   * java.lang.String, java.lang.String)
    */
   @Override
   public Container addRoom(final String userHash, final User user, final StateToken parentToken,
-      final String roomName, final String subject) {
+      final String roomName, final String subject) throws AddRoomFailedException {
     final String groupShortName = parentToken.getGroup();
     final String userShortName = user.getShortName();
     final ChatConnection connection = xmppManager.login(userShortName, userHash, userHash);
     if (!xmppManager.existRoom(connection, roomName)) {
       try {
         xmppManager.createRoom(connection, roomName, userShortName + userHash, subject);
-    } catch (NoResponseException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    } catch (SmackException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
+      } catch (final NoResponseException e) {
+        handleException(e);
+      } catch (final SmackException e) {
+        handleException(e);
+      }
       xmppManager.disconnect(connection);
     }
     try {
@@ -103,36 +109,34 @@ public class ChatManagerDefault implements ChatManager {
     } catch (final ContentNotFoundException e) {
       try {
         xmppManager.destroyRoom(connection, roomName);
-    } catch (NoResponseException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-    } catch (NotConnectedException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-    }
+      } catch (final NoResponseException e2) {
+        handleException(e2);
+      } catch (final NotConnectedException e2) {
+        handleException(e2);
+      }
       throw new ContentNotFoundException();
     } catch (final AccessViolationException e) {
       try {
         xmppManager.destroyRoom(connection, roomName);
-    } catch (NoResponseException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-    } catch (NotConnectedException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-    }
+      } catch (final NoResponseException e2) {
+        handleException(e2);
+      } catch (final NotConnectedException e2) {
+        handleException(e2);
+      }
       throw new AccessViolationException();
     } catch (final GroupNotFoundException e) {
       try {
         xmppManager.destroyRoom(connection, roomName);
-    } catch (NoResponseException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-    } catch (NotConnectedException e1) {
-        // TODO Auto-generated catch block
-        e1.printStackTrace();
-    }
+      } catch (final NoResponseException e2) {
+        handleException(e2);
+      } catch (final NotConnectedException e2) {
+        handleException(e2);
+      }
       throw new GroupNotFoundException();
     }
+  }
+
+  private void handleException(final Exception e) {
+    throw new AddRoomFailedException(e);
   }
 }

@@ -20,36 +20,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.chat.server;
+package cc.kune.core.client.errors;
 
-import cc.kune.core.client.errors.AddRoomFailedException;
-import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.domain.Container;
-import cc.kune.domain.User;
 
 /**
- * The Interface ChatManager.
+ * The Class AddRoomFailedException.
  * 
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public interface ChatManager {
+public class AddRoomFailedException extends DefaultException {
+
+  private static final long serialVersionUID = -375992425347319308L;
 
   /**
-   * Adds the room.
-   * 
-   * @param userHash
-   *          the user hash
-   * @param user
-   *          the user
-   * @param parentToken
-   *          the parent token
-   * @param roomName
-   *          the room name
-   * @param subject
-   *          the subject
-   * @return the container
+   * Instantiates a new access violation exception.
    */
-  Container addRoom(String userHash, User user, StateToken parentToken, String roomName, String subject)
-      throws AddRoomFailedException;
+  public AddRoomFailedException() {
+    super();
+  }
 
+  public AddRoomFailedException(final Exception e) {
+    super(e);
+  }
+
+  /**
+   * Instantiates a new access violation exception.
+   * 
+   * @param msg
+   *          the msg
+   */
+  public AddRoomFailedException(final String msg) {
+    super(msg);
+  }
 }

@@ -55,7 +55,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class XmppManagerDefault.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -70,7 +70,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /**
    * Instantiates a new xmpp manager default.
-   * 
+   *
    * @param chatProperties
    *          the chat properties
    */
@@ -81,13 +81,13 @@ public class XmppManagerDefault implements XmppManager {
 
   /**
    * Configure.
-   * 
+   *
    * @param muc
    *          the muc
    * @throws XMPPException
    *           the xMPP exception
- * @throws NotConnectedException 
- * @throws NoResponseException 
+ * @throws NotConnectedException
+ * @throws NoResponseException
    */
   private void configure(final MultiUserChat muc) throws XMPPException, NoResponseException, NotConnectedException {
     final Form form = muc.getConfigurationForm();
@@ -109,7 +109,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.xmpp.XmppManager#createRoom(cc.kune.core.server.xmpp
    * .ChatConnection, java.lang.String, java.lang.String, java.lang.String)
@@ -135,7 +135,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.xmpp.XmppManager#destroyRoom(cc.kune.core.server.xmpp
    * .ChatConnection, java.lang.String)
@@ -154,7 +154,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.xmpp.XmppManager#disconnect(cc.kune.core.server.xmpp
    * .ChatConnection)
@@ -165,14 +165,13 @@ public class XmppManagerDefault implements XmppManager {
     try {
         xConn.getConn().disconnect();
     } catch (NotConnectedException e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
+        LOG.info("We are not connected, so we cannot discconect", e);
     }
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.xmpp.XmppManager#existRoom(cc.kune.core.server.xmpp
    * .ChatConnection, java.lang.String)
@@ -186,7 +185,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /**
    * Gets the room name.
-   * 
+   *
    * @param room
    *          the room
    * @return the room name
@@ -197,7 +196,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.xmpp.XmppManager#getRoster(cc.kune.core.server.xmpp
    * .ChatConnection)
@@ -211,7 +210,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /**
    * Gets the server name.
-   * 
+   *
    * @return the server name
    */
   private String getServerName() {
@@ -220,7 +219,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /**
    * Checks if is not empty.
-   * 
+   *
    * @param field
    *          the field
    * @return true, if is not empty
@@ -231,7 +230,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /**
    * Checks if is not list.
-   * 
+   *
    * @param type
    *          the type
    * @return true, if is not list
@@ -243,7 +242,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /**
    * Checks if is visible.
-   * 
+   *
    * @param type
    *          the type
    * @return true, if is visible
@@ -254,7 +253,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.xmpp.XmppManager#joinRoom(cc.kune.core.server.xmpp.
    * ChatConnection, java.lang.String, java.lang.String)
@@ -276,7 +275,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.xmpp.XmppManager#login(java.lang.String,
    * java.lang.String, java.lang.String)
    */
@@ -295,7 +294,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.xmpp.XmppManager#sendMessage(cc.kune.core.server.xmpp
    * .Room, java.lang.String)
@@ -316,7 +315,7 @@ public class XmppManagerDefault implements XmppManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.xmpp.XmppManager#sendMessage(java.lang.String,
    * java.lang.String)
    */
@@ -340,14 +339,9 @@ public class XmppManagerDefault implements XmppManager {
       message.setBody(text);
       message.setSubject("");
       newChat.sendMessage(message);
+      xmppConn.disconnect();
     } catch (final Exception e) {
       LOG.error("Error Delivering xmpp message to " + userName + ": ", e);
     }
-    try {
-            xmppConn.disconnect();
-        } catch (NotConnectedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
   }
 }
