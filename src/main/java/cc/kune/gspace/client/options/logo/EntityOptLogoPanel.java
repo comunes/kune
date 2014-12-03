@@ -37,7 +37,7 @@ import cc.kune.core.shared.FileConstants;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.IsWidget;

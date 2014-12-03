@@ -31,7 +31,7 @@ import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;

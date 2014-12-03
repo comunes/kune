@@ -40,7 +40,7 @@ import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.lists.client.rpc.ListsServiceHelper;
 import cc.kune.lists.shared.ListsToolConstants;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;

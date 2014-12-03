@@ -28,25 +28,26 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolChangedEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandler> {
 
   /**
    * The Interface HasToolChangedHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasToolChangedHandlers extends HasHandlers {
 
     /**
      * Adds the tool changed handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -56,14 +57,14 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /**
    * The Interface ToolChangedHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface ToolChangedHandler extends EventHandler {
 
     /**
      * On tool changed.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -75,22 +76,22 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param previousToken
    *          the previous token
    * @param newToken
    *          the new token
    */
-  public static void fire(final HasHandlers source, final StateToken previousToken,
+  public static void fire(final EventBus eventBus, final StateToken previousToken,
       final StateToken newToken) {
-    source.fireEvent(new ToolChangedEvent(previousToken, newToken));
+    eventBus.fireEvent(new ToolChangedEvent(previousToken, newToken));
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<ToolChangedHandler> getType() {
@@ -112,7 +113,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /**
    * Instantiates a new tool changed event.
-   * 
+   *
    * @param previousToken
    *          the previous token
    * @param newToken
@@ -125,7 +126,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -137,7 +138,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -171,7 +172,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -181,7 +182,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /**
    * Gets the new token.
-   * 
+   *
    * @return the new token
    */
   public StateToken getNewToken() {
@@ -190,7 +191,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /**
    * Gets the new tool.
-   * 
+   *
    * @return the new tool
    */
   public java.lang.String getNewTool() {
@@ -199,7 +200,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /**
    * Gets the previous token.
-   * 
+   *
    * @return the previous token
    */
   public StateToken getPreviousToken() {
@@ -208,7 +209,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /**
    * Gets the previous tool.
-   * 
+   *
    * @return the previous tool
    */
   public java.lang.String getPreviousTool() {
@@ -217,7 +218,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -231,7 +232,7 @@ public class ToolChangedEvent extends GwtEvent<ToolChangedEvent.ToolChangedHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

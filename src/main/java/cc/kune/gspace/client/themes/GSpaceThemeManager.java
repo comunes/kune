@@ -43,7 +43,7 @@ import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
 
 import com.google.gwt.dom.client.StyleElement;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

@@ -35,7 +35,7 @@ import com.calclab.hablar.core.client.page.events.VisibilityChangedEvent;
 import com.calclab.hablar.core.client.page.events.VisibilityChangedHandler;
 import com.calclab.hablar.rooms.client.room.RoomPresenter;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**

@@ -26,7 +26,7 @@ import cc.kune.core.client.events.SndClickEvent;
 
 import com.calclab.hablar.signals.client.sound.SoundBundle;
 import com.calclab.hablar.signals.client.sound.SoundManager;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**

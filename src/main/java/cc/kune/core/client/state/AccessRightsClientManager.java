@@ -28,15 +28,15 @@ import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.shared.domain.utils.AccessRights;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AccessRightsClientManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -53,7 +53,7 @@ public class AccessRightsClientManager {
 
   /**
    * Instantiates a new access rights client manager.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param stateManager
@@ -84,7 +84,7 @@ public class AccessRightsClientManager {
 
   /**
    * On rights changed.
-   * 
+   *
    * @param fireNow
    *          the fire now
    * @param handler

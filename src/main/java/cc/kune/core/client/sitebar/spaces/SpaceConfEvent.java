@@ -26,25 +26,26 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SpaceConfEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /**
    * The Interface HasSpaceConfHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasSpaceConfHandlers extends HasHandlers {
 
     /**
      * Adds the space conf handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -54,14 +55,14 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /**
    * The Interface SpaceConfHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SpaceConfHandler extends EventHandler {
 
     /**
      * On space conf.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -73,22 +74,22 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param space
    *          the space
    * @param token
    *          the token
    */
-  public static void fire(final HasHandlers source,
+  public static void fire(final EventBus eventBus,
       final cc.kune.core.client.sitebar.spaces.Space space, final String token) {
-    source.fireEvent(new SpaceConfEvent(space, token));
+    eventBus.fireEvent(new SpaceConfEvent(space, token));
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<SpaceConfHandler> getType() {
@@ -110,7 +111,7 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /**
    * Instantiates a new space conf event.
-   * 
+   *
    * @param space
    *          the space
    * @param token
@@ -123,7 +124,7 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -135,7 +136,7 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -169,7 +170,7 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -179,7 +180,7 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /**
    * Gets the space.
-   * 
+   *
    * @return the space
    */
   public cc.kune.core.client.sitebar.spaces.Space getSpace() {
@@ -188,7 +189,7 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /**
    * Gets the token.
-   * 
+   *
    * @return the token
    */
   public String getToken() {
@@ -197,7 +198,7 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -210,7 +211,7 @@ public class SpaceConfEvent extends GwtEvent<SpaceConfEvent.SpaceConfHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

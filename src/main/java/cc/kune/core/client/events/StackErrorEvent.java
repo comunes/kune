@@ -26,25 +26,26 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class StackErrorEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler> {
 
   /**
    * The Interface HasStackErrorHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasStackErrorHandlers extends HasHandlers {
 
     /**
      * Adds the stack error handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -54,14 +55,14 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   /**
    * The Interface StackErrorHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface StackErrorHandler extends EventHandler {
 
     /**
      * On stack error.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -73,19 +74,19 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param exception
    *          the exception
    */
-  public static void fire(final HasHandlers source, final java.lang.Throwable exception) {
-    source.fireEvent(new StackErrorEvent(exception));
+  public static void fire(final EventBus eventBus, final java.lang.Throwable exception) {
+    eventBus.fireEvent(new StackErrorEvent(exception));
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<StackErrorHandler> getType() {
@@ -104,7 +105,7 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   /**
    * Instantiates a new stack error event.
-   * 
+   *
    * @param exception
    *          the exception
    */
@@ -114,7 +115,7 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -126,7 +127,7 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -153,7 +154,7 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -163,7 +164,7 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   /**
    * Gets the exception.
-   * 
+   *
    * @return the exception
    */
   public java.lang.Throwable getException() {
@@ -172,7 +173,7 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -184,7 +185,7 @@ public class StackErrorEvent extends GwtEvent<StackErrorEvent.StackErrorHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

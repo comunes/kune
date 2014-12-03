@@ -33,7 +33,7 @@ import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.sitebar.SitebarSignOutLink.BeforeSignOut;
 import cc.kune.core.client.state.Session;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;

@@ -26,25 +26,26 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class InboxUnreadUpdatedEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.InboxUnreadUpdatedHandler> {
 
   /**
    * The Interface HasInboxUnreadUpdatedHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasInboxUnreadUpdatedHandlers extends HasHandlers {
 
     /**
      * Adds the inbox unread updated handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -54,14 +55,14 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /**
    * The Interface InboxUnreadUpdatedHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface InboxUnreadUpdatedHandler extends EventHandler {
 
     /**
      * On inbox unread updated.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -73,21 +74,21 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param count
    *          the count
    * @param greater
    *          the greater
    */
-  public static void fire(final HasHandlers source, final int count, final boolean greater) {
-    source.fireEvent(new InboxUnreadUpdatedEvent(count, greater));
+  public static void fire(final EventBus eventBus, final int count, final boolean greater) {
+    eventBus.fireEvent(new InboxUnreadUpdatedEvent(count, greater));
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<InboxUnreadUpdatedHandler> getType() {
@@ -109,7 +110,7 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /**
    * Instantiates a new inbox unread updated event.
-   * 
+   *
    * @param count
    *          the count
    * @param greater
@@ -122,7 +123,7 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -134,7 +135,7 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -160,7 +161,7 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -170,7 +171,7 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /**
    * Gets the count.
-   * 
+   *
    * @return the count
    */
   public int getCount() {
@@ -179,7 +180,7 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -192,7 +193,7 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /**
    * Checks if is greater.
-   * 
+   *
    * @return true, if is greater
    */
   public boolean isGreater() {
@@ -201,7 +202,7 @@ public class InboxUnreadUpdatedEvent extends GwtEvent<InboxUnreadUpdatedEvent.In
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

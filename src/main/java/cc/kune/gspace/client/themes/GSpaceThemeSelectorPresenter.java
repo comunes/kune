@@ -39,7 +39,7 @@ import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.gspace.client.themes.GSpaceThemeChangeEvent.GSpaceThemeChangeHandler;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc

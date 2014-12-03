@@ -33,7 +33,7 @@ import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteParameters;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc

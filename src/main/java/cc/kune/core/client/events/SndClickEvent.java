@@ -26,25 +26,26 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SndClickEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /**
    * The Interface HasSndClickHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasSndClickHandlers extends HasHandlers {
 
     /**
      * Adds the snd click handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -54,14 +55,14 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /**
    * The Interface SndClickHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SndClickHandler extends EventHandler {
 
     /**
      * On click.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -73,17 +74,17 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    */
-  public static void fire(final HasHandlers source) {
-    source.fireEvent(new SndClickEvent());
+  public static void fire(final EventBus eventBus) {
+    eventBus.fireEvent(new SndClickEvent());
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<SndClickHandler> getType() {
@@ -98,7 +99,7 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -110,7 +111,7 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -120,7 +121,7 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -130,7 +131,7 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -140,7 +141,7 @@ public class SndClickEvent extends GwtEvent<SndClickEvent.SndClickHandler> {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

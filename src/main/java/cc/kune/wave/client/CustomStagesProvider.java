@@ -67,7 +67,7 @@ import cc.kune.wave.client.kspecific.AurorisColorPicker;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Provider;
 
 /**

@@ -36,7 +36,7 @@ import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHa
 import cc.kune.core.client.state.Session;
 import cc.kune.wave.client.kspecific.OnWaveClientStartEvent;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
 

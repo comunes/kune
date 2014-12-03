@@ -41,7 +41,7 @@ import cc.kune.wave.client.kspecific.WaveClientProvider;
 import cc.kune.wave.client.kspecific.WaveClientUtils;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;

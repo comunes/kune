@@ -30,7 +30,7 @@ import cc.kune.gspace.client.options.EntityOptions;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 
 // TODO: Auto-generated Javadoc

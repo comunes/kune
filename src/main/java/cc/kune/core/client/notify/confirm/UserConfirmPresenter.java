@@ -26,7 +26,7 @@ import cc.kune.common.client.notify.ConfirmAskEvent;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmProxy;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter.UserConfirmView;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;

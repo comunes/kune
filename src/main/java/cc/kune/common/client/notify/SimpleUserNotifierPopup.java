@@ -24,7 +24,7 @@ package cc.kune.common.client.notify;
 
 import cc.kune.common.client.msgs.UserMessagesPresenter;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 
 /**

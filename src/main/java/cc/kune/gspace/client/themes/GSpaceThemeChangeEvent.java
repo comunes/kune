@@ -26,25 +26,26 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceThemeChangeEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpaceThemeChangeHandler> {
 
   /**
    * The Interface GSpaceThemeChangeHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface GSpaceThemeChangeHandler extends EventHandler {
 
     /**
      * On gs theme change.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -53,14 +54,14 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /**
    * The Interface HasGsThemeChangeHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasGsThemeChangeHandlers extends HasHandlers {
 
     /**
      * Adds the gs theme change handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -73,22 +74,22 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param oldTheme
    *          the old theme
    * @param newTheme
    *          the new theme
    */
-  public static void fire(final HasHandlers source, final cc.kune.core.shared.dto.GSpaceTheme oldTheme,
+  public static void fire(final EventBus eventBus, final cc.kune.core.shared.dto.GSpaceTheme oldTheme,
       final cc.kune.core.shared.dto.GSpaceTheme newTheme) {
-    source.fireEvent(new GSpaceThemeChangeEvent(oldTheme, newTheme));
+    eventBus.fireEvent(new GSpaceThemeChangeEvent(oldTheme, newTheme));
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<GSpaceThemeChangeHandler> getType() {
@@ -110,7 +111,7 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /**
    * Instantiates a new g space theme change event.
-   * 
+   *
    * @param oldTheme
    *          the old theme
    * @param newTheme
@@ -124,7 +125,7 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -136,7 +137,7 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -170,7 +171,7 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -180,7 +181,7 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /**
    * Gets the new theme.
-   * 
+   *
    * @return the new theme
    */
   public cc.kune.core.shared.dto.GSpaceTheme getNewTheme() {
@@ -189,7 +190,7 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /**
    * Gets the old theme.
-   * 
+   *
    * @return the old theme
    */
   public cc.kune.core.shared.dto.GSpaceTheme getOldTheme() {
@@ -198,7 +199,7 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -211,7 +212,7 @@ public class GSpaceThemeChangeEvent extends GwtEvent<GSpaceThemeChangeEvent.GSpa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

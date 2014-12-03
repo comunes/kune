@@ -26,11 +26,12 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class CurrentEntityChangedEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CurrentEntityChangedEvent extends
@@ -38,14 +39,14 @@ public class CurrentEntityChangedEvent extends
 
   /**
    * The Interface CurrentEntityChangedHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface CurrentEntityChangedHandler extends EventHandler {
 
     /**
      * On current logo changed.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -54,14 +55,14 @@ public class CurrentEntityChangedEvent extends
 
   /**
    * The Interface HasCurrentLogoChangedHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasCurrentLogoChangedHandlers extends HasHandlers {
 
     /**
      * Adds the current logo changed handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -74,21 +75,21 @@ public class CurrentEntityChangedEvent extends
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param shortName
    *          the short name
    * @param longName
    *          the long name
    */
-  public static void fire(final HasHandlers source, final String shortName, final String longName) {
-    source.fireEvent(new CurrentEntityChangedEvent(shortName, longName));
+  public static void fire(final EventBus eventBus, final String shortName, final String longName) {
+    eventBus.fireEvent(new CurrentEntityChangedEvent(shortName, longName));
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<CurrentEntityChangedHandler> getType() {
@@ -103,7 +104,7 @@ public class CurrentEntityChangedEvent extends
 
   /**
    * Instantiates a new current entity changed event.
-   * 
+   *
    * @param shortName
    *          the short name
    * @param longName
@@ -116,7 +117,7 @@ public class CurrentEntityChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -128,7 +129,7 @@ public class CurrentEntityChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -138,7 +139,7 @@ public class CurrentEntityChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -148,7 +149,7 @@ public class CurrentEntityChangedEvent extends
 
   /**
    * Gets the long name.
-   * 
+   *
    * @return the long name
    */
   public String getLongName() {
@@ -157,7 +158,7 @@ public class CurrentEntityChangedEvent extends
 
   /**
    * Gets the short name.
-   * 
+   *
    * @return the short name
    */
   public String getShortName() {
@@ -166,7 +167,7 @@ public class CurrentEntityChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -176,7 +177,7 @@ public class CurrentEntityChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

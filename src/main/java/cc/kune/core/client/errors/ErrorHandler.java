@@ -33,14 +33,14 @@ import cc.kune.core.client.events.GoHomeEvent;
 import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.core.client.events.UserMustBeLoggedEvent;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ErrorHandler.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ErrorHandler {
@@ -53,7 +53,7 @@ public class ErrorHandler {
 
   /**
    * Instantiates a new error handler.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param eventBus
@@ -81,7 +81,7 @@ public class ErrorHandler {
 
   /**
    * Log exception.
-   * 
+   *
    * @param caught
    *          the caught
    */
@@ -91,7 +91,7 @@ public class ErrorHandler {
 
   /**
    * Log exception.
-   * 
+   *
    * @param caught
    *          the caught
    * @param showException
@@ -107,7 +107,7 @@ public class ErrorHandler {
 
   /**
    * Process.
-   * 
+   *
    * @param caught
    *          the caught
    */

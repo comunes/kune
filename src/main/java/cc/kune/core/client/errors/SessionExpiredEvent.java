@@ -26,25 +26,26 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SessionExpiredEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExpiredHandler> {
 
   /**
    * The Interface HasSessionExpiredHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasSessionExpiredHandlers extends HasHandlers {
 
     /**
      * Adds the session expired handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -54,14 +55,14 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   /**
    * The Interface SessionExpiredHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SessionExpiredHandler extends EventHandler {
 
     /**
      * On session expired.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -73,17 +74,17 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    */
-  public static void fire(final HasHandlers source) {
-    source.fireEvent(new SessionExpiredEvent());
+  public static void fire(final EventBus eventBus) {
+    eventBus.fireEvent(new SessionExpiredEvent());
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<SessionExpiredHandler> getType() {
@@ -98,7 +99,7 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -110,7 +111,7 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -120,7 +121,7 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -130,7 +131,7 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -140,7 +141,7 @@ public class SessionExpiredEvent extends GwtEvent<SessionExpiredEvent.SessionExp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

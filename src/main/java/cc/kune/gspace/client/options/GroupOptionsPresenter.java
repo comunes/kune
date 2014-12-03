@@ -41,7 +41,7 @@ import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.gspace.client.options.GroupOptionsPresenter.GroupOptionsView;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;

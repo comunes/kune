@@ -26,11 +26,12 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AccessRightsChangedEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AccessRightsChangedEvent extends
@@ -38,14 +39,14 @@ public class AccessRightsChangedEvent extends
 
   /**
    * The Interface AccessRightsChangedHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface AccessRightsChangedHandler extends EventHandler {
 
     /**
      * On access rights changed.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -54,14 +55,14 @@ public class AccessRightsChangedEvent extends
 
   /**
    * The Interface HasAccessRightsChangedHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasAccessRightsChangedHandlers extends HasHandlers {
 
     /**
      * Adds the access rights changed handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -74,23 +75,23 @@ public class AccessRightsChangedEvent extends
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param previousRights
    *          the previous rights
    * @param currentRights
    *          the current rights
    */
-  public static void fire(final HasHandlers source,
+  public static void fire(final EventBus eventBus,
       final cc.kune.core.shared.domain.utils.AccessRights previousRights,
       final cc.kune.core.shared.domain.utils.AccessRights currentRights) {
-    source.fireEvent(new AccessRightsChangedEvent(previousRights, currentRights));
+    eventBus.fireEvent(new AccessRightsChangedEvent(previousRights, currentRights));
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<AccessRightsChangedHandler> getType() {
@@ -112,7 +113,7 @@ public class AccessRightsChangedEvent extends
 
   /**
    * Instantiates a new access rights changed event.
-   * 
+   *
    * @param previousRights
    *          the previous rights
    * @param currentRights
@@ -126,7 +127,7 @@ public class AccessRightsChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -138,7 +139,7 @@ public class AccessRightsChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -172,7 +173,7 @@ public class AccessRightsChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -182,7 +183,7 @@ public class AccessRightsChangedEvent extends
 
   /**
    * Gets the current rights.
-   * 
+   *
    * @return the current rights
    */
   public cc.kune.core.shared.domain.utils.AccessRights getCurrentRights() {
@@ -191,7 +192,7 @@ public class AccessRightsChangedEvent extends
 
   /**
    * Gets the previous rights.
-   * 
+   *
    * @return the previous rights
    */
   public cc.kune.core.shared.domain.utils.AccessRights getPreviousRights() {
@@ -200,7 +201,7 @@ public class AccessRightsChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -213,7 +214,7 @@ public class AccessRightsChangedEvent extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

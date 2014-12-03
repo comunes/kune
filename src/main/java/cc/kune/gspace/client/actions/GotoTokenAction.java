@@ -31,13 +31,13 @@ import cc.kune.core.client.events.SocialNetworkChangedEvent.SocialNetworkChanged
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class GotoTokenAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GotoTokenAction extends AbstractExtendedAction {
@@ -56,7 +56,7 @@ public class GotoTokenAction extends AbstractExtendedAction {
 
   /**
    * Instantiates a new goto token action.
-   * 
+   *
    * @param icon
    *          the icon
    * @param name
@@ -108,7 +108,7 @@ public class GotoTokenAction extends AbstractExtendedAction {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)
@@ -120,7 +120,7 @@ public class GotoTokenAction extends AbstractExtendedAction {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.AbstractAction#onDettach()
    */
   @Override

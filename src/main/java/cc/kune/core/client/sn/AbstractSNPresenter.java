@@ -29,7 +29,7 @@ import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sn.actions.registry.AbstractSNMembersActionsRegistry;
 import cc.kune.core.shared.dto.GroupDTO;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;

@@ -26,6 +26,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,7 +42,7 @@ public class WaveClientClearEvent extends GwtEvent<WaveClientClearEvent.WaveClie
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasWaveClientClearHandlers extends HasHandlers {
-    
+
     /**
      * Adds the wave client clear handler.
      *
@@ -57,7 +58,7 @@ public class WaveClientClearEvent extends GwtEvent<WaveClientClearEvent.WaveClie
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface WaveClientClearHandler extends EventHandler {
-    
+
     /**
      * On wave client clear.
      *
@@ -72,10 +73,10 @@ public class WaveClientClearEvent extends GwtEvent<WaveClientClearEvent.WaveClie
   /**
    * Fire.
    *
-   * @param source the source
+   * @param eventBus the source
    */
-  public static void fire(final HasHandlers source) {
-    source.fireEvent(new WaveClientClearEvent());
+  public static void fire(final EventBus eventBus) {
+    eventBus.fireEvent(new WaveClientClearEvent());
   }
 
   /**

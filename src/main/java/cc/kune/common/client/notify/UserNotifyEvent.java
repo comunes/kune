@@ -27,6 +27,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -42,7 +43,7 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasUserNotifyHandlers extends HasHandlers {
-    
+
     /**
      * Adds the user notify handler.
      *
@@ -58,7 +59,7 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface UserNotifyCloser {
-    
+
     /**
      * Close.
      */
@@ -71,7 +72,7 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface UserNotifyHandler extends EventHandler {
-    
+
     /**
      * On user notify.
      *
@@ -124,17 +125,17 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Fire.
    *
-   * @param source the source
+   * @param eventBus the source
    * @param level the level
    * @param title the title
    * @param message the message
    * @param closeable the closeable
    * @return the user notify event
    */
-  public static UserNotifyEvent fire(final HasHandlers source, final NotifyLevel level,
+  public static UserNotifyEvent fire(final EventBus eventBus, final NotifyLevel level,
       final java.lang.String title, final java.lang.String message, final Boolean closeable) {
     final UserNotifyEvent event = new UserNotifyEvent(level, title, message, closeable);
-    source.fireEvent(event);
+    eventBus.fireEvent(event);
     return event;
   }
 
@@ -149,22 +150,22 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
 
   /** The click handler. */
   private ClickHandler clickHandler;
-  
+
   /** The closeable. */
   private final Boolean closeable;
-  
+
   /** The closer. */
   private UserNotifyCloser closer;
-  
+
   /** The id. */
   private java.lang.String id;
-  
+
   /** The level. */
   private final NotifyLevel level;
-  
+
   /** The message. */
   private final java.lang.String message;
-  
+
   /** The title. */
   private final java.lang.String title;
 

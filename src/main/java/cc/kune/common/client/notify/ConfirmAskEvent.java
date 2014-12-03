@@ -22,11 +22,14 @@
  */
 package cc.kune.common.client.notify;
 
+import cc.kune.common.client.utils.OnAcceptCallback;
+
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -42,7 +45,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface ConfirmAskHandler extends EventHandler {
-    
+
     /**
      * On confirm ask.
      *
@@ -57,7 +60,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasConfirmAskHandlers extends HasHandlers {
-    
+
     /**
      * Adds the confirm ask handler.
      *
@@ -72,11 +75,17 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   /**
    * Fire.
+   * @param string4
+   * @param string3
+   * @param string2
+   * @param string
+   * @param eventBus
    *
    * @param source the source
    * @param message the message
+   * @param onAcceptCallback
    */
-  public static void fire(final HasHandlers source, final java.lang.String message) {
+  public static void fire(EventBus eventBus, String string, String string2, String string3, String string4, final HasHandlers source, final java.lang.String message, OnAcceptCallback onAcceptCallback) {
     source.fireEvent(new ConfirmAskEvent(message));
   }
 
@@ -112,25 +121,25 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   /** The accept btn msg. */
   java.lang.String acceptBtnMsg;
-  
+
   /** The accept btn tooltip. */
   java.lang.String acceptBtnTooltip;
-  
+
   /** The callback. */
   cc.kune.common.shared.utils.SimpleResponseCallback callback;
-  
+
   /** The cancel btn msg. */
   java.lang.String cancelBtnMsg;
-  
+
   /** The cancel btn tooltip. */
   java.lang.String cancelBtnTooltip;
-  
+
   /** The icon. */
   ImageResource icon;
-  
+
   /** The message. */
   java.lang.String message;
-  
+
   /** The title. */
   java.lang.String title;
 

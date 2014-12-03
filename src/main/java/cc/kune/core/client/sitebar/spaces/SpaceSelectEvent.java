@@ -26,25 +26,26 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SpaceSelectEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandler> {
 
   /**
    * The Interface HasSpaceSelectHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasSpaceSelectHandlers extends HasHandlers {
 
     /**
      * Adds the space select handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -54,14 +55,14 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /**
    * The Interface SpaceSelectHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SpaceSelectHandler extends EventHandler {
 
     /**
      * On space select.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -73,34 +74,34 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param space
    *          the space
    */
-  public static void fire(final HasHandlers source, final cc.kune.core.client.sitebar.spaces.Space space) {
-    source.fireEvent(new SpaceSelectEvent(space));
+  public static void fire(final EventBus eventBus, final cc.kune.core.client.sitebar.spaces.Space space) {
+    eventBus.fireEvent(new SpaceSelectEvent(space));
   }
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param space
    *          the space
    * @param restoreToken
    *          the restore token
    */
-  public static void fire(final HasHandlers source,
+  public static void fire(final EventBus eventBus,
       final cc.kune.core.client.sitebar.spaces.Space space, final boolean restoreToken) {
-    source.fireEvent(new SpaceSelectEvent(space, restoreToken));
+    eventBus.fireEvent(new SpaceSelectEvent(space, restoreToken));
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<SpaceSelectHandler> getType() {
@@ -122,7 +123,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /**
    * Instantiates a new space select event.
-   * 
+   *
    * @param space
    *          the space
    */
@@ -132,7 +133,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /**
    * Instantiates a new space select event.
-   * 
+   *
    * @param space
    *          the space
    * @param restoreToken
@@ -146,7 +147,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -158,7 +159,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -185,7 +186,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -195,7 +196,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /**
    * Gets the space.
-   * 
+   *
    * @return the space
    */
   public cc.kune.core.client.sitebar.spaces.Space getSpace() {
@@ -204,7 +205,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -216,7 +217,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /**
    * Sets the restore token.
-   * 
+   *
    * @param restoreToken
    *          the new restore token
    */
@@ -226,7 +227,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /**
    * Should restore token.
-   * 
+   *
    * @return true, if successful
    */
   public boolean shouldRestoreToken() {
@@ -235,7 +236,7 @@ public class SpaceSelectEvent extends GwtEvent<SpaceSelectEvent.SpaceSelectHandl
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

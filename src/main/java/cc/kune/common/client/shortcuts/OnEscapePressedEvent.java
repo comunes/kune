@@ -26,6 +26,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,7 +42,7 @@ public class OnEscapePressedEvent extends GwtEvent<OnEscapePressedEvent.OnEscape
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasOnEscapePressedHandlers extends HasHandlers {
-    
+
     /**
      * Adds the on escape pressed handler.
      *
@@ -57,7 +58,7 @@ public class OnEscapePressedEvent extends GwtEvent<OnEscapePressedEvent.OnEscape
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface OnEscapePressedHandler extends EventHandler {
-    
+
     /**
      * On on escape pressed.
      *
@@ -72,10 +73,10 @@ public class OnEscapePressedEvent extends GwtEvent<OnEscapePressedEvent.OnEscape
   /**
    * Fire.
    *
-   * @param source the source
+   * @param eventBus the source
    */
-  public static void fire(final HasHandlers source) {
-    source.fireEvent(new OnEscapePressedEvent());
+  public static void fire(final EventBus eventBus) {
+    eventBus.fireEvent(new OnEscapePressedEvent());
   }
 
   /**

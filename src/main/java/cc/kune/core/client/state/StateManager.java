@@ -31,14 +31,14 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 // TODO: Auto-generated Javadoc
 /**
  * Some methods of the StateManager should we rewritten (because its origin is
  * previous to Apache Wave and now is very confusing), but this take control of
  * the #history changes, get the content from the server (or from cache), etc.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -46,7 +46,7 @@ public interface StateManager {
 
   /**
    * Adds the before state change listener.
-   * 
+   *
    * @param listener
    *          you can use this {@link BeforeActionListener} to intercept changes
    *          of state (for instance if you are editing and what to save, etc.
@@ -55,7 +55,7 @@ public interface StateManager {
 
   /**
    * This permits to add custom #framents to urls and its associated actions.
-   * 
+   *
    * @param token
    *          the url #fragment
    * @param historyTokenCallback
@@ -65,7 +65,7 @@ public interface StateManager {
 
   /**
    * Gets the current token.
-   * 
+   *
    * @return the current token
    */
   String getCurrentToken();
@@ -77,7 +77,7 @@ public interface StateManager {
 
   /**
    * Goto history token.
-   * 
+   *
    * @param newToken
    *          the new token
    */
@@ -85,7 +85,7 @@ public interface StateManager {
 
   /**
    * Goto history token but redirect to current.
-   * 
+   *
    * @param signin
    *          the signin
    */
@@ -98,7 +98,7 @@ public interface StateManager {
 
   /**
    * Goto state token.
-   * 
+   *
    * @param newToken
    *          the new token
    */
@@ -106,7 +106,7 @@ public interface StateManager {
 
   /**
    * Goto state token.
-   * 
+   *
    * @param token
    *          the token
    * @param useCache
@@ -116,7 +116,7 @@ public interface StateManager {
 
   /**
    * On group changed.
-   * 
+   *
    * @param fireNow
    *          the fire now
    * @param handler
@@ -127,7 +127,7 @@ public interface StateManager {
 
   /**
    * On social network changed.
-   * 
+   *
    * @param fireNow
    *          the fire now
    * @param handler
@@ -139,7 +139,7 @@ public interface StateManager {
 
   /**
    * On state changed.
-   * 
+   *
    * @param fireNow
    *          if true, fire handler with current state
    * @param handler
@@ -150,7 +150,7 @@ public interface StateManager {
 
   /**
    * On tool changed.
-   * 
+   *
    * @param fireNow
    *          the fire now
    * @param handler
@@ -161,7 +161,7 @@ public interface StateManager {
 
   /**
    * Redirect or restore previous token.
-   * 
+   *
    * @param fireChange
    *          the fire change
    */
@@ -179,7 +179,7 @@ public interface StateManager {
 
   /**
    * Removes the before state change listener.
-   * 
+   *
    * @param listener
    *          the listener
    */
@@ -187,7 +187,7 @@ public interface StateManager {
 
   /**
    * Removes the cache.
-   * 
+   *
    * @param parentToken
    *          the parent token
    */
@@ -195,7 +195,7 @@ public interface StateManager {
 
   /**
    * Removes the cache of group.
-   * 
+   *
    * @param group
    *          the group
    */
@@ -203,7 +203,7 @@ public interface StateManager {
 
   /**
    * Removes the site token.
-   * 
+   *
    * @param token
    *          the token
    */
@@ -211,7 +211,7 @@ public interface StateManager {
 
   /**
    * Restore previous token.
-   * 
+   *
    * @param fireChange
    *          if only change the browser #token or also fire the event
    */
@@ -224,7 +224,7 @@ public interface StateManager {
 
   /**
    * Sets the history state token.
-   * 
+   *
    * @param token
    *          the new history state token
    */
@@ -232,7 +232,7 @@ public interface StateManager {
 
   /**
    * Sets the retrieved state.
-   * 
+   *
    * @param state
    *          the new retrieved state
    */
@@ -240,7 +240,7 @@ public interface StateManager {
 
   /**
    * Sets the retrieved state and go.
-   * 
+   *
    * @param state
    *          the new retrieved state and go
    */
@@ -248,7 +248,7 @@ public interface StateManager {
 
   /**
    * Sets the social network.
-   * 
+   *
    * @param socialNet
    *          the new social network
    */

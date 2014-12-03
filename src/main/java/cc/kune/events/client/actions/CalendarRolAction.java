@@ -30,7 +30,7 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.events.client.viewer.CalendarStateChangeEvent;
 import cc.kune.events.client.viewer.CalendarViewer;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Provider;
 
 // TODO: Auto-generated Javadoc

@@ -38,20 +38,20 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.trash.shared.TrashToolConstants;
 
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class EmptyTrashBinBtn.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmptyTrashBinBtn extends ButtonDescriptor {
 
   /**
    * The Class EmptyTrashBinAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class EmptyTrashBinAction extends RolAction {
@@ -64,7 +64,7 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
 
     /**
      * Instantiates a new empty trash bin action.
-     * 
+     *
      * @param contentService
      *          the content service
      * @param res
@@ -82,7 +82,7 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -99,7 +99,7 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new empty trash bin btn.
-   * 
+   *
    * @param action
    *          the action
    * @param stateManager
@@ -125,7 +125,7 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#onDetach
    * ()
@@ -138,7 +138,7 @@ public class EmptyTrashBinBtn extends ButtonDescriptor {
 
   /**
    * Sets the visibility.
-   * 
+   *
    * @param ctn
    *          the new visibility
    */

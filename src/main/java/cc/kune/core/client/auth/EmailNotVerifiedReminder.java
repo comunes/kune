@@ -36,7 +36,7 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc

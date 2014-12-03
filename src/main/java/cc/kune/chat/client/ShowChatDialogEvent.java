@@ -26,6 +26,7 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -41,7 +42,7 @@ public class ShowChatDialogEvent extends GwtEvent<ShowChatDialogEvent.ShowChatDi
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasShowChatDialogHandlers extends HasHandlers {
-    
+
     /**
      * Adds the show chat dialog handler.
      *
@@ -57,7 +58,7 @@ public class ShowChatDialogEvent extends GwtEvent<ShowChatDialogEvent.ShowChatDi
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface ShowChatDialogHandler extends EventHandler {
-    
+
     /**
      * On show chat dialog.
      *
@@ -72,11 +73,11 @@ public class ShowChatDialogEvent extends GwtEvent<ShowChatDialogEvent.ShowChatDi
   /**
    * Fire.
    *
-   * @param source the source
+   * @param eventBus the source
    * @param show the show
    */
-  public static void fire(final HasHandlers source, final boolean show) {
-    source.fireEvent(new ShowChatDialogEvent(show));
+  public static void fire(final EventBus eventBus, final boolean show) {
+    eventBus.fireEvent(new ShowChatDialogEvent(show));
   }
 
   /**

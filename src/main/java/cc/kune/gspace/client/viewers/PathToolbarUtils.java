@@ -40,7 +40,7 @@ import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.actions.GotoTokenAction;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

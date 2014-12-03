@@ -37,7 +37,7 @@ import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
 import cc.kune.wave.client.kspecific.WaveEmbedGinModule;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;

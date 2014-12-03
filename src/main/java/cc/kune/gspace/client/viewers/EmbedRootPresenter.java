@@ -23,7 +23,7 @@
 
 package cc.kune.gspace.client.viewers;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;

@@ -74,7 +74,7 @@ import cc.kune.gspace.client.viewers.EmbedPanel;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
 import cc.kune.gspace.client.viewers.EmbedRootPresenter;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Singleton;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;

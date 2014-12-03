@@ -1,6 +1,7 @@
 kune (0.3.0+b46) unstable; urgency=medium
 
   * Updated gwt (2.6.1), merge latest wave code (atmosphere instead of websocket-io)
+  * Replaced deprecated EventBus
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 03 Dec 2014 02:25:03 +0100
 

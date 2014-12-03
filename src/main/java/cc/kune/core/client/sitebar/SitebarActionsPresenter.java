@@ -36,7 +36,7 @@ import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.resources.iconic.IconicResources;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Presenter;

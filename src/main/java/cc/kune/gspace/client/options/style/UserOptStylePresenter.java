@@ -31,7 +31,7 @@ import cc.kune.gspace.client.options.UserOptions;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPresenter;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 

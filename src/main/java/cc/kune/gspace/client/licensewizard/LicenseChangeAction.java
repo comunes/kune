@@ -33,14 +33,15 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.LicenseDTO;
 import cc.kune.gspace.client.ui.footer.license.LicenseChangedEvent;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.shared.HasHandlers;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseChangeAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseChangeAction {
@@ -62,7 +63,7 @@ public class LicenseChangeAction {
 
   /**
    * Instantiates a new license change action.
-   * 
+   *
    * @param groupService
    *          the group service
    * @param session
@@ -86,7 +87,7 @@ public class LicenseChangeAction {
 
   /**
    * Change license.
-   * 
+   *
    * @param token
    *          the token
    * @param license

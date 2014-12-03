@@ -24,7 +24,7 @@ package cc.kune.core.client.auth;
 
 import cc.kune.core.client.events.StackErrorEvent;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;

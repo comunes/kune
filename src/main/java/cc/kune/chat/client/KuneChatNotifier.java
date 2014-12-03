@@ -29,7 +29,7 @@ import cc.kune.core.client.services.ClientFileDownloadUtils;
 import com.calclab.hablar.signals.client.notifications.HablarNotifier;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
 

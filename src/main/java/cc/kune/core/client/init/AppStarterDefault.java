@@ -41,7 +41,7 @@ import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.shared.CoreConstants;
 import cc.kune.core.shared.dto.InitDataDTO;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;

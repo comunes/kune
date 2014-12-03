@@ -38,7 +38,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.gspace.client.options.UserOptionsPresenter.UserOptionsView;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;

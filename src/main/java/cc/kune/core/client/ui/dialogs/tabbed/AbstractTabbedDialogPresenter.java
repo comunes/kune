@@ -24,7 +24,7 @@ package cc.kune.core.client.ui.dialogs.tabbed;
 
 import cc.kune.common.client.notify.NotifyLevel;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;

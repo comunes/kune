@@ -33,7 +33,7 @@ import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.calclab.emite.im.client.roster.events.RosterRetrievedEvent;
 import com.calclab.emite.im.client.roster.events.RosterRetrievedHandler;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 

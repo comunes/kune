@@ -88,13 +88,13 @@ public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.Show
   /**
    * Fire.
    *
-   * @param source
+   * @param eventBus
    *          the source
    * @param onTutorialClose
    *          the on tutorial close
    */
-  public static void fire(final HasHandlers source, final TutorialViewer.OnTutorialClose onTutorialClose) {
-    source.fireEvent(new ShowHelpContainerEvent(onTutorialClose));
+  public static void fire(final EventBus eventBus, final TutorialViewer.OnTutorialClose onTutorialClose) {
+    eventBus.fireEvent(new ShowHelpContainerEvent(onTutorialClose));
   }
 
   /**

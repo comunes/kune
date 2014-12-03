@@ -27,7 +27,7 @@ import cc.kune.common.client.notify.ProgressShowEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.i18n.I18nReadyEvent;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.PopupView;
 import com.gwtplatform.mvp.client.Presenter;

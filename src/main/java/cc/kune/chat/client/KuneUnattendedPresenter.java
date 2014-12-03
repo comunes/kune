@@ -31,7 +31,7 @@ import com.calclab.hablar.signals.client.SignalPreferences;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedHandler;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**

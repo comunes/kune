@@ -35,7 +35,7 @@ import cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView;
 import cc.kune.gspace.client.licensewizard.pages.LicenseWizardSndFormView;
 import cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.Presenter;

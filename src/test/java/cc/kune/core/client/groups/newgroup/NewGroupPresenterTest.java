@@ -35,7 +35,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.gspace.client.options.GroupOptions;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
