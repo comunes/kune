@@ -24,8 +24,8 @@
 package cc.kune.gspace.client.viewers;
 
 import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.RootPresenter;
 
@@ -33,7 +33,7 @@ public class EmbedRootPresenter extends RootPresenter {
 
   public static final class EmbedRootView extends RootView {
     @Override
-    public void setInSlot(final Object slot, final Widget widget) {
+    public void setInSlot(final Object slot, final IsWidget widget) {
       RootPanel.get("kune-embed-hook").add(widget);
     }
   }

@@ -22,7 +22,8 @@
  */
 package cc.kune.core.server.integration;
 
-import static com.google.inject.matcher.Matchers.*;
+import static com.google.inject.matcher.Matchers.annotatedWith;
+import static com.google.inject.matcher.Matchers.any;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -31,11 +32,14 @@ import org.mockito.Mockito;
 import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.ServerModule;
+import org.waveprotocol.box.server.StatModule;
+import org.waveprotocol.box.server.executor.ExecutorsModule;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
 import org.waveprotocol.box.server.robots.ProfileFetcherModule;
 import org.waveprotocol.box.server.robots.RobotApiModule;
 import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveServerImpl;
+import org.waveprotocol.box.server.waveserver.WaveServerModule;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
 
 import cc.kune.barters.server.BarterServerModule;
@@ -71,7 +75,7 @@ import com.google.inject.servlet.SessionScoped;
 // TODO: Auto-generated Javadoc
 /**
  * The Class IntegrationTestHelper.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -79,7 +83,7 @@ public class IntegrationTestHelper {
 
   /**
    * Creates the injector.
-   * 
+   *
    * @return the injector
    */
   public static Injector createInjector() {
@@ -88,12 +92,17 @@ public class IntegrationTestHelper {
       System.setProperty("java.security.auth.login.config", "src/main/resources/jaas.config");
       injector = Guice.createInjector(CustomSettingsBinder.bindSettings(
           TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
+      Module profilingModule = injector.getInstance(StatModule.class);
+      ExecutorsModule executorsModule = injector.getInstance(ExecutorsModule.class);
+      injector = injector.createChildInjector(profilingModule, executorsModule);
+
       final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
       final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
       final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule(
           "kune-tests.properties", TestConstants.PERSISTENCE_UNIT);
       final Module searchModule = injector.getInstance(SearchModule.class);
       final Module profilesModule = injector.getInstance(ProfileFetcherModule.class);
+      final WaveServerModule waveServerModule = injector.getInstance(WaveServerModule.class);
       final Injector childInjector = injector.createChildInjector(
           wavePersistModule,
           searchModule,
@@ -119,7 +128,7 @@ public class IntegrationTestHelper {
               requestStaticInjection(GroupServerUtils.class);
             }
           }, new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
-          new DocumentServerModule(), new ChatServerModule(), new ServerModule(false, 1, 1, 1, 1, 1),
+          new DocumentServerModule(), new ChatServerModule(), new ServerModule(waveServerModule),
           federationModule, new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
           new EventsServerModule(), new TrashServerModule());
       try {
@@ -136,7 +145,7 @@ public class IntegrationTestHelper {
 
   /**
    * Instantiates a new integration test helper.
-   * 
+   *
    * @param startPersistence
    *          the start persistence
    * @param tests

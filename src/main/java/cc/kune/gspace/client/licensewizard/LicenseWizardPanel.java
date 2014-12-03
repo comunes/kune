@@ -28,13 +28,14 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.dialogs.WizardFormDialog;
 
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseWizardPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LicenseWizardPanel extends WizardFormDialog implements LicenseWizardView {
@@ -59,7 +60,7 @@ public class LicenseWizardPanel extends WizardFormDialog implements LicenseWizar
 
   /**
    * Instantiates a new license wizard panel.
-   * 
+   *
    * @param maskWidget
    *          the mask widget
    * @param i18n
@@ -78,17 +79,17 @@ public class LicenseWizardPanel extends WizardFormDialog implements LicenseWizar
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#addToSlot(java.lang.Object,
    * com.google.gwt.user.client.ui.Widget)
    */
   @Override
-  public void addToSlot(final Object slot, final Widget content) {
+  public void addToSlot(final Object slot, final IsWidget content) {
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -98,27 +99,27 @@ public class LicenseWizardPanel extends WizardFormDialog implements LicenseWizar
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#removeFromSlot(java.lang.Object,
    * com.google.gwt.user.client.ui.Widget)
    */
   @Override
-  public void removeFromSlot(final Object slot, final Widget content) {
+  public void removeFromSlot(final Object slot, final IsWidget content) {
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#setInSlot(java.lang.Object,
    * com.google.gwt.user.client.ui.Widget)
    */
   @Override
-  public void setInSlot(final Object slot, final Widget content) {
+  public void setInSlot(final Object slot, final IsWidget content) {
   }
 
   /**
    * Sets the wizard listener.
-   * 
+   *
    * @param listener
    *          the new wizard listener
    */

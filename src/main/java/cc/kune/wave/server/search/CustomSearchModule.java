@@ -22,6 +22,8 @@ import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewBus;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewHandler;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewProvider;
+import org.waveprotocol.box.server.waveserver.SearchProvider;
+import org.waveprotocol.box.server.waveserver.SimpleSearchProviderImpl;
 import org.waveprotocol.box.server.waveserver.WaveIndexer;
 
 import com.google.inject.Inject;
@@ -46,6 +48,7 @@ public class CustomSearchModule extends SearchModule {
       super.configure();
     } catch (final RuntimeException e) {
       if ("db".equals(searchType)) {
+        bind(SearchProvider.class).to(SimpleSearchProviderImpl.class).in(Singleton.class);
         bind(PerUserWaveViewProvider.class).to(CustomPerUserWaveViewHandler.class).in(Singleton.class);
         bind(PerUserWaveViewBus.Listener.class).to(CustomPerUserWaveViewHandler.class).in(
             Singleton.class);

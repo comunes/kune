@@ -37,7 +37,7 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 
-import com.google.gwt.event.shared.EventBus;
+import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -45,7 +45,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RenameAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RenameAction {
@@ -70,7 +70,7 @@ public class RenameAction {
 
   /**
    * Instantiates a new rename action.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param session
@@ -98,7 +98,7 @@ public class RenameAction {
 
   /**
    * Rename.
-   * 
+   *
    * @param token
    *          the token
    * @param oldName

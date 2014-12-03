@@ -26,25 +26,26 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class RenameContentEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameContentHandler> {
 
   /**
    * The Interface HasRenameEventHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasRenameEventHandlers extends HasHandlers {
 
     /**
      * Adds the rename event handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -54,14 +55,14 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * The Interface RenameContentHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface RenameContentHandler extends EventHandler {
 
     /**
      * On rename event.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -73,8 +74,8 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Fire.
-   * 
-   * @param source
+   *
+   * @param eventBus
    *          the source
    * @param token
    *          the token
@@ -83,15 +84,15 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
    * @param newName
    *          the new name
    */
-  public static void fire(final HasHandlers source,
+  public static void fire(final EventBus eventBus,
       final cc.kune.core.shared.domain.utils.StateToken token, final java.lang.String oldName,
       final java.lang.String newName) {
-    source.fireEvent(new RenameContentEvent(token, oldName, newName));
+    eventBus.fireEvent(new RenameContentEvent(token, oldName, newName));
   }
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<RenameContentHandler> getType() {
@@ -116,7 +117,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Instantiates a new rename content event.
-   * 
+   *
    * @param token
    *          the token
    * @param oldName
@@ -133,7 +134,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -145,7 +146,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -186,7 +187,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -196,7 +197,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Gets the new name.
-   * 
+   *
    * @return the new name
    */
   public java.lang.String getNewName() {
@@ -205,7 +206,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Gets the old name.
-   * 
+   *
    * @return the old name
    */
   public java.lang.String getOldName() {
@@ -214,7 +215,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /**
    * Gets the token.
-   * 
+   *
    * @return the token
    */
   public cc.kune.core.shared.domain.utils.StateToken getToken() {
@@ -223,7 +224,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -237,7 +238,7 @@ public class RenameContentEvent extends GwtEvent<RenameContentEvent.RenameConten
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

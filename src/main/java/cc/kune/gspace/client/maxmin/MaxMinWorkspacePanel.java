@@ -26,13 +26,14 @@ import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.maxmin.MaxMinWorkspacePresenter.MaxMinWorkspaceView;
 import cc.kune.wave.client.kspecific.WaveClientProvider;
 
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class MaxMinWorkspacePanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
@@ -45,7 +46,7 @@ public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
 
   /**
    * Instantiates a new max min workspace panel.
-   * 
+   *
    * @param gsArmor
    *          the gs armor
    * @param waveClient
@@ -59,17 +60,17 @@ public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#addToSlot(java.lang.Object,
    * com.google.gwt.user.client.ui.Widget)
    */
   @Override
-  public void addToSlot(final Object slot, final Widget content) {
+  public void addToSlot(final Object slot, final IsWidget content) {
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -79,27 +80,27 @@ public class MaxMinWorkspacePanel implements MaxMinWorkspaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#removeFromSlot(java.lang.Object,
    * com.google.gwt.user.client.ui.Widget)
    */
   @Override
-  public void removeFromSlot(final Object slot, final Widget content) {
+  public void removeFromSlot(final Object slot, final IsWidget content) {
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#setInSlot(java.lang.Object,
    * com.google.gwt.user.client.ui.Widget)
    */
   @Override
-  public void setInSlot(final Object slot, final Widget content) {
+  public void setInSlot(final Object slot, final IsWidget content) {
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.maxmin.IsMaximizable#setMaximized(boolean)
    */
   @Override
