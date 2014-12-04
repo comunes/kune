@@ -8,7 +8,7 @@
 
   <inherits name="cc.kune.Kune" />
 
-  <set-property name="gwt.logging.simpleRemoteHandler" value="ENABLED" />
+  <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />
 
   <!-- Uncomment if you are enabling server side deobfuscation of StackTraces -->
   <!-- <set-property name="compiler.emulatedStack" value="true" /> -->
