@@ -35,17 +35,58 @@
   <set-property name="gwt.logging.hasWidgetsHandler" value="DISABLED" />
   <set-property name="gwt.logging.popupHandler" value="DISABLED" />
   <set-property name="gwt.logging.systemHandler" value="ENABLED" />
-
-  <!-- gwt-platform ============================================= -->
-  <inherits name='com.gwtplatform.mvp.Mvp' />
-  <define-configuration-property name="gin.ginjector"
-    is-multi-valued="false" />
-  <set-configuration-property name="gin.ginjector"
-    value="cc.kune.client.KuneGinjector" />
-
   <add-linker name="xsiframe" />
 
-  <!-- Entrypoint =============================================== -->
-  <entry-point class="cc.kune.client.KuneEntryPoint" />
+  <!-- gwt-platform ============================================= -->
+
+  <!-- This is experimental, not used yet, but we are trying to simplify
+    the two entry points (embed/not embed) -->
+  <define-property name="embed" values="true, false" />
+  <property-provider name="embed"><![CDATA[
+  {
+    return document.getElementById('k-home-prewrap') == null;
+  }
+  ]]>
+  </property-provider>
+
+  <inherits name='com.gwtplatform.dispatch.Dispatch' />
+  <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
+
+  <set-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.core.client.CoreGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.barters.client.BartersGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.blogs.client.BlogsGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.chat.client.ChatGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.docs.client.DocsGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.events.client.EventsGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.gspace.client.GSpaceGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.hspace.client.HSpaceGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.lists.client.ListsGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.pspace.client.PSpaceGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.tasks.client.TasksGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.trash.client.TrashGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.wave.client.kspecific.WaveGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="cc.kune.wiki.client.WikiGinModule" />
+  <extend-configuration-property name="gin.ginjector.modules"
+    value="com.calclab.hablar.client.HablarModule" />
+
+  <set-configuration-property name="gwtp.prebootstrapper"
+    value="cc.kune.client.KunePreBootstrapper" />
+
+  <set-configuration-property name="gwtp.bootstrapper"
+    value="cc.kune.client.KuneBootstrapper" />
 
 </module>

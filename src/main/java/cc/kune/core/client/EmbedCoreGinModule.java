@@ -74,8 +74,9 @@ import cc.kune.gspace.client.viewers.EmbedPanel;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
 import cc.kune.gspace.client.viewers.EmbedRootPresenter;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
@@ -99,6 +100,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     requestStaticInjection(EventBusInstance.class);
 
     // gwtplatform
+    install(new CommonGinModule());
     bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
     bind(RootPresenter.class).to(EmbedRootPresenter.class).asEagerSingleton();
     bind(PlaceManager.class).to(KunePlaceManager.class).in(Singleton.class);

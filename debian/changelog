@@ -2,6 +2,7 @@ kune (0.3.0+b46) unstable; urgency=medium
 
   * Updated gwt (2.6.1), merge latest wave code (atmosphere instead of websocket-io)
   * Replaced deprecated EventBus
+  * Updated supedev to 2.6.1. Fix gwt classpath order issue
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 03 Dec 2014 02:25:03 +0100
 

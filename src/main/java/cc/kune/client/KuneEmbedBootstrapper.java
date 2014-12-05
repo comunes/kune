@@ -22,56 +22,50 @@
  */
 package cc.kune.client;
 
+import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
+import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.client.embed.EmbedJsActions;
+import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.gspace.client.viewers.EmbedPresenter;
 
 import com.google.gwt.core.client.GWT;
-import com.gwtplatform.mvp.client.DelayedBindRegistry;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.Bootstrapper;
 
 /**
  * The KuneEmbedEntryPoint is used to start kune complete client
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class KuneEmbedEntryPoint extends AbstractKuneEntryPoint {
+public class KuneEmbedBootstrapper implements Bootstrapper {
 
-  /** The ginjector. */
-  private KuneEmbedGinjector ginjector;
+  private EmbedPresenter embedPresenter;
 
-  /**
-   * On module load continue.
-   */
+  @Inject
+  public KuneEmbedBootstrapper(EventBusWithLogging eventBus, GwtGuiProvider gwtGuiProvider,
+      EmbedPresenter embedPresenter, SpinerPresenter spinerPresenter) {
+    this.embedPresenter = embedPresenter;
+  }
+
+  private native void onLoad() /*-{
+    if ($wnd.kuneEmbedInit)
+      $wnd.kuneEmbedInit();
+  }-*/;
+
   @Override
-  protected void onContinueModuleLoad() {
-    ginjector.getEventBusWithLogger();
-    ginjector.getGwtGuiProvider();
-    final EmbedPresenter embedPresenter = ginjector.getEmbedPresenter().get();
+  public void onBootstrap() {
+    EmbedConfiguration.export();
+    EmbedJsActions.export();
+
     embedPresenter.forceReveal();
     GWT.<CoreResources> create(CoreResources.class).coreCss().ensureInjected();
-    ginjector.getSpinerPresenter();
     com.google.gwt.user.client.History.addValueChangeHandler(embedPresenter);
 
     // Inspired in:
     // http://code.google.com/p/gwt-exporter/wiki/GettingStarted#Quick_start_guide
     onLoad();
-  }
-
-  private native void onLoad() /*-{
-		if ($wnd.kuneEmbedInit)
-			$wnd.kuneEmbedInit();
-  }-*/;
-
-  /**
-   * On start module load.
-   */
-  @Override
-  protected void onStartModuleLoad() {
-    EmbedConfiguration.export();
-    EmbedJsActions.export();
-    ginjector = GWT.create(KuneEmbedGinjector.class);
-    DelayedBindRegistry.bind(ginjector);
   }
 
 }

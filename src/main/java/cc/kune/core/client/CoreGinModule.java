@@ -135,10 +135,13 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+import cc.kune.gspace.client.viewers.EmbedPanel;
+import cc.kune.gspace.client.viewers.EmbedPresenter;
 import cc.kune.lists.client.rpc.ListsServiceHelper;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.common.client.CommonGinModule;
 import com.gwtplatform.mvp.client.RootPresenter;
 import com.gwtplatform.mvp.client.proxy.PlaceManager;
 import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
@@ -163,6 +166,7 @@ public class CoreGinModule extends ExtendedGinModule {
     requestStaticInjection(EventBusInstance.class);
 
     // gwtplatform
+    install(new CommonGinModule());
     bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
     bind(RootPresenter.class).asEagerSingleton();
     bind(PlaceManager.class).to(KunePlaceManager.class).in(Singleton.class);
@@ -196,6 +200,13 @@ public class CoreGinModule extends ExtendedGinModule {
     s(GroupFieldFactory.class);
 
     // Presenters
+
+    // This is not used in kune main app, but we added it as a workaround for a
+    // compilation error
+    bindPresenter(EmbedPresenter.class, EmbedPresenter.EmbedView.class, EmbedPanel.class,
+        EmbedPresenter.EmbedProxy.class);
+    s(EmbedPresenter.class);
+
     bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
         CorePresenter.CoreProxy.class);
     bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerPanel.class,

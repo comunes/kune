@@ -14,9 +14,9 @@
   </ciManagement>
   <properties>
     <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
-    <gwt.version>2.6.1</gwt.version>
+    <gwt.version>2.7.0</gwt.version>
     <!-- <gwtmaven.version>2.2.0</gwtmaven.version> -->
-    <gwtmaven.version>2.6.1</gwtmaven.version>
+    <gwtmaven.version>2.7.0</gwtmaven.version>
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -25,7 +25,7 @@
     <hibernate.version>4.1.2.Final</hibernate.version>
     <wiab.version>0.3.49</wiab.version>
     <jetty.version>9.1.1.v20140108</jetty.version>
-    <gwtp.version>1.2.1</gwtp.version>
+    <gwtp.version>1.3.1</gwtp.version>
     <skipTests>true</skipTests>
   </properties>
   <repositories>
@@ -136,7 +136,7 @@
     <dependency>
       <groupId>com.extjs</groupId>
       <artifactId>gxt</artifactId>
-      <version>2.3.0-gwt22</version>
+      <version>2.3.1a-gwt22</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -146,26 +146,31 @@
       <scope>provided</scope>
     </dependency>
 
-   <!-- MVP component -->
-   <dependency>
-     <groupId>com.gwtplatform</groupId>
-     <artifactId>gwtp-mvp-client</artifactId>
-     <version>${gwtp.version}</version>
-     <scope>provided</scope>
-   </dependency>
+    <!-- MVP component -->
 
-   <!-- Annotation component -->
-   <dependency>
-     <groupId>com.gwtplatform</groupId>
-     <artifactId>gwtp-processors</artifactId>
-     <version>${gwtp.version}</version>
-     <scope>provided</scope>
-   </dependency>
+    <dependency>
+      <groupId>com.gwtplatform</groupId>
+      <artifactId>gwtp-all</artifactId>
+      <version>${gwtp.version}</version>
+      <scope>provided</scope>
+      <exclusions>
+        <exclusion>
+          <artifactId>gwtp-dispatch-rpc-server-spring</artifactId>
+          <groupId>com.gwtplatform</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>gwtp-dispatch-rpc-server-guice</artifactId>
+          <groupId>com.gwtplatform</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
     <dependency>
       <groupId>com.google.gwt.inject</groupId>
       <artifactId>gin</artifactId>
       <version>2.1.2</version>
     </dependency>
+
     <!-- FIXME Try to remove this dependency -->
     <dependency>
       <groupId>org.adamtacy</groupId>
@@ -610,10 +615,9 @@
     <dependency>
       <groupId>com.googlecode.gwtquery</groupId>
       <artifactId>gwtquery</artifactId>
-      <version>1.1.0</version>
+      <version>1.4.2</version>
       <!-- If you are using old versions of gwt, uncomment the appropriate
-        line -->
-      <classifier>2.1.0</classifier>
+        line <classifier>2.1.0</classifier> -->
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -1131,15 +1135,15 @@
               <pluginExecutions>
                 <pluginExecution>
                   <pluginExecutionFilter>
-                    <groupId/>
-                    <artifactId/>
-                    <versionRange/>
+                    <groupId />
+                    <artifactId />
+                    <versionRange />
                     <goals>
-                      <goal/>
+                      <goal />
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1154,7 +1158,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <execute/>
+                    <execute />
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1167,7 +1171,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore/>
+                    <ignore />
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -1208,6 +1212,7 @@
               <!-- <localWorkers>1</localWorkers> Using all workers can temporarily
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx3072m</extraJvmArgs>
+              <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
             </configuration>
             <executions>
               <execution>
@@ -1267,6 +1272,8 @@
               <localWorkers>2</localWorkers><!-- Using all workers can temporarily
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx2048m</extraJvmArgs>
+              <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath> <!-- This forces to use gwt first in Clashpath (for instance to use jetty
+                correct version in superdev) -->
             </configuration>
             <executions>
               <execution>
@@ -1326,6 +1333,8 @@
               <localWorkers>2</localWorkers><!-- Using all workers can temporarily
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx2048m</extraJvmArgs>
+              <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath> <!-- This forces to use gwt first in Clashpath (for instance to use jetty
+                correct version in superdev) -->
             </configuration>
             <executions>
               <execution>
