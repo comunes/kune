@@ -21,9 +21,7 @@
     Development mode — look for them in the DevMode window -->
   <set-property name="gwt.logging.developmentModeHandler"
     value="ENABLED" />
-  <set-property name="gwt.logging.firebugHandler" value="ENABLED" />
   <set-property name="gwt.logging.hasWidgetsHandler" value="DISABLED" />
-  <set-property name="gwt.logging.popupHandler" value="DISABLED" />
   <set-property name="gwt.logging.systemHandler" value="ENABLED" />
 
   <!-- For http://code.google.com/p/google-web-toolkit-doc-1-5/wiki/FAQ_SOP
