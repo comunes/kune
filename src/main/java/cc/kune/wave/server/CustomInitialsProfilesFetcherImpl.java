@@ -23,7 +23,6 @@
 
 package cc.kune.wave.server;
 
-import org.waveprotocol.box.server.robots.operations.FetchProfilesService;
 import org.waveprotocol.box.server.robots.operations.FetchProfilesService.ProfilesFetcher;
 
 import cc.kune.core.server.persist.KuneTransactional;
