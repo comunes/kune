@@ -59,6 +59,7 @@ import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
+import com.calclab.emite.browser.client.AutoConfig;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.core.client.xmpp.stanzas.XmppURI;
 import com.calclab.emite.im.client.chat.ChatManager;
@@ -289,7 +290,7 @@ public class ChatClientDefault implements ChatClient {
       final Provider<AvatarProviderRegistry> avatarProviderRegistry,
       final Provider<PrivateStorageManager> privateStorageManager,
       final Provider<SubscriptionHandler> subscriptionHandler,
-      final Provider<KuneChatAvatarConfig> avatarConfig) {
+      final Provider<KuneChatAvatarConfig> avatarConfig, AutoConfig autoconfig) {
     this.kuneEventBus = kuneEventBus;
     this.i18n = i18n;
     this.res = res;
