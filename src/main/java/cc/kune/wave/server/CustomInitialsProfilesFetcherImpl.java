@@ -23,6 +23,7 @@
 
 package cc.kune.wave.server;
 
+import org.waveprotocol.box.server.robots.operations.FetchProfilesService;
 import org.waveprotocol.box.server.robots.operations.FetchProfilesService.ProfilesFetcher;
 
 import cc.kune.core.server.persist.KuneTransactional;
@@ -57,7 +58,7 @@ public class CustomInitialsProfilesFetcherImpl implements ProfilesFetcher {
     ParticipantProfile pTemp = null;
     pTemp = ProfilesFetcher.SIMPLE_PROFILES_FETCHER.fetchProfile(email);
     String name = pTemp.getName();
-    String imageUrl = getImageUrl(email);
+    String imageUrl = getInitialsImageUrl(email);
     if (partUtils.isLocal(email)) {
       if (partUtils.getAtDomain().equals(email)) {
         // @localhost participant
@@ -66,11 +67,17 @@ public class CustomInitialsProfilesFetcherImpl implements ProfilesFetcher {
         name = "Anyone";
       } else {
         final String shortName = partUtils.getAddressName(email);
-        final Group group = groupFinder.findByShortName(shortName);
-        if (group != Group.NO_GROUP && group.hasLogo()) {
-          // Know group and have a configured logo
-          imageUrl = downUtils.getLogoImageUrl(shortName);
-          name = group.getLongName();
+        try {
+          final Group group = groupFinder.findByShortName(shortName);
+          if (group != Group.NO_GROUP && group.hasLogo()) {
+            // Know group and have a configured logo
+            imageUrl = downUtils.getLogoImageUrl(shortName);
+            name = group.getLongName();
+          }
+        } catch (javax.persistence.NoResultException e) {
+          // User not found in this node (maybe deleted?)
+          // FIXME i18n
+          name = "User unknown";
         }
       }
     }
@@ -82,7 +89,7 @@ public class CustomInitialsProfilesFetcherImpl implements ProfilesFetcher {
   /**
    * Returns the avatar URL for the given email address.
    */
-  public String getImageUrl(final String email) {
+  private String getInitialsImageUrl(final String email) {
     return "/iniavatars/100x100/" + email;
   }
 
