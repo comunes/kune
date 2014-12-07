@@ -51,4 +51,6 @@ public interface GuiProvider {
    */
   <T, Z> void register(final Class<T> classType, final Provider<Z> provider);
 
+  int size();
+
 }

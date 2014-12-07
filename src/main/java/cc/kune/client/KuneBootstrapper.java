@@ -4,6 +4,7 @@ import cc.kune.barters.client.BartersParts;
 import cc.kune.blogs.client.BlogsParts;
 import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.ChatParts;
+import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.utils.MetaUtils;
@@ -62,7 +63,9 @@ public class KuneBootstrapper implements Bootstrapper {
 
       CoreParts coreParts, GSpaceParts gSpaceParts, PSpaceParts pSpaceParts, HSpaceParts hSpaceParts,
 
-      XMLActionsParser xmlActionsParser
+      XMLActionsParser xmlActionsParser,
+      
+      GwtGuiProvider guiProvider
 
   ) {
 

@@ -127,6 +127,10 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
    */
   protected void beforeAddWidget(final GuiActionDescrip descrip) {
     if (descrip.mustBeAdded()) {
+      if (bindings.size() == 0) {
+        throw new UIException("Bindings yet not registered aka injected");
+      }
+      assert bindings.size() != 0;
       final GuiBinding binding = bindings.get(descrip.getType());
       if (binding == null) {
         throw new UIException("Unknown binding for: " + descrip);

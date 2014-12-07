@@ -61,4 +61,9 @@ public class DefaultGuiProvider implements GuiProvider {
   public <T, Z> void register(final Class<T> classType, final Provider<Z> binding) {
     map.put(classType, binding);
   }
+
+  @Override
+  public int size() {
+    return map.size();
+  }
 }
