@@ -23,7 +23,8 @@
  */
 package cc.kune.core.server;
 
-import static com.google.inject.matcher.Matchers.*;
+import static com.google.inject.matcher.Matchers.annotatedWith;
+import static com.google.inject.matcher.Matchers.any;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -31,6 +32,7 @@ import org.waveprotocol.box.server.authentication.SessionManager;
 import org.waveprotocol.box.server.robots.dataapi.DataApiOAuthServlet;
 import org.waveprotocol.box.server.rpc.AttachmentInfoServlet;
 import org.waveprotocol.box.server.rpc.AttachmentServlet;
+import org.waveprotocol.box.stat.StatService;
 
 import cc.kune.barters.server.BarterServerModule;
 import cc.kune.blogs.server.BlogServerModule;
@@ -195,12 +197,16 @@ public class KuneRackModule implements RackModule {
     builder.exclude("/robot/rpc");
     builder.exclude("/webclient/remote_logging");
     builder.exclude("/profile/.*");
+    builder.exclude("/iniavatars/.*");
     builder.exclude("/waveref/.*");
-
+    builder.exclude(StatService.STAT_URL + "/.*");
+        
     builder.exclude("/gadgets");
     builder.exclude("/gadgets/.*");
     builder.exclude("/socket.io/*");
     builder.exclude("/socket.io/.*]");
+    builder.exclude("/atmosphere*");
+    builder.exclude("/atmosphere.*");
     builder.exclude("/socket");
     builder.exclude("/static/.*");
     builder.exclude("/webclient/.*");
