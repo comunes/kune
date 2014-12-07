@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.github.sdbg.debug.core.chromeLaunchConfig">
+<stringAttribute key="applicationArguments" value=""/>
+<stringAttribute key="applicationName" value=""/>
+<booleanAttribute key="launchFile" value="false"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/kune"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+<listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+<listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+</listAttribute>
+<stringAttribute key="projectName" value="kune"/>
+<booleanAttribute key="showLaunchOutput" value="false"/>
+<stringAttribute key="url" value="http://localhost:8888/?locale=en&amp;log_level=ALL&amp;dev=true"/>
+<stringAttribute key="urlQueryParams" value=""/>
+</launchConfiguration>
