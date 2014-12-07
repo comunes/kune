@@ -59,7 +59,7 @@ public class KuneBootstrapper implements Bootstrapper {
       DocsParts docs, BlogsParts blogs, WikiParts wiki, EventsParts events, TasksParts tasks,
       ListsParts lists, ChatParts chats, BartersParts barters, TrashParts trash,
 
-      SiteLogo siteLogo, ChatClient chatClient,
+      SiteLogo siteLogo,
 
       CoreParts coreParts, GSpaceParts gSpaceParts, PSpaceParts pSpaceParts, HSpaceParts hSpaceParts,
 
