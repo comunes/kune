@@ -135,8 +135,6 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
-import cc.kune.gspace.client.viewers.EmbedPanel;
-import cc.kune.gspace.client.viewers.EmbedPresenter;
 import cc.kune.lists.client.rpc.ListsServiceHelper;
 
 import com.google.inject.Singleton;
@@ -157,7 +155,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -200,12 +198,6 @@ public class CoreGinModule extends ExtendedGinModule {
     s(GroupFieldFactory.class);
 
     // Presenters
-
-    // This is not used in kune main app, but we added it as a workaround for a
-    // compilation error
-    bindPresenter(EmbedPresenter.class, EmbedPresenter.EmbedView.class, EmbedPanel.class,
-        EmbedPresenter.EmbedProxy.class);
-    s(EmbedPresenter.class);
 
     bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
         CorePresenter.CoreProxy.class);
