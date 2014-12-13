@@ -1,5 +1,6 @@
 kune (0.3.0+b46) unstable; urgency=medium
 
+  * Improved kune superdev lauchers in eclipse
   * Updated gwt (2.7.0) and gwtp.
   * Updated gwt (2.6.1), merge latest wave code (atmosphere instead of websocket-io)
   * Replaced deprecated EventBus

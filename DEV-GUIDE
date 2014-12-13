@@ -163,15 +163,15 @@ Kune runs a specific jetty server (not necessary the one used by GWT), so we run
 For now It's better not to use the "internal server" of GWT hosted mode because we need to control the version of the (jetty) server that we use, for compatibility reasons. This is why we run separately the client (hosted mode) and the server. 
 
 In the "bin" directory there are (mainly) three launch configurations, one for the server and one for the client:
-(1) "kune server via mvn.launch"
-(2) "kune client  -no-server.launch"
-(3) "kune-superdev.launch"
+(1) "kune-server-via-mvn.launch"
+(2) "kune-client-superdev.launch"
+(3) "kune-client-embed-superdev.launch"
 
 also there are some client launch equivalent to test the embeded functionality.
  
 These configurations are Eclipse running configurations that are normally imported by Eclipse when you import the project (in GNU/Linux at least). See the "Run" and the "Run External" icons and menu options in the Eclipse toolbar to find these launchs. If they are not there, try to import them (in Eclipse: File > Import > Launch Configurations > select the launchs from the "bin" directory). Also you can try to fix the path for the "mvn" command (especially Windows users). Another option is to create a new launch to run a external "mvn exec:java" because the previous launch were created in GNU/Linux systems.
 
-Run it! Launch the first, (1), (it's equivalent to mvn exec:java) to start the kune server. After that, launch the second (2) to start kune in hosted mode and connect to the previous server (that was launched with (1)). Use (3) to launch the new superdev mode. Since then, in you are using (1) you will be able to make code modifications (in the client code), and refresh the browser to see the changes (with no compiling :)  Changes in the server code would need compiling. 
+Run it! Launch the first, (1), (it's equivalent to mvn exec:java) to start the kune server. After that, launch the second (2) to start kune in superdev mode and connect to the previous server (that was launched with (1)). Use (3) to launch the superdev mode for test the embed system. Since then, in you are using (1) you will be able to make code modifications (in the client code), and refresh the browser to see the changes (with no compiling :)  Changes in the server code would need compiling. 
 
 NOTE: It's easy to distinguish Client code from Server code, as Client has "client" in the package name, while Server has "server". There is also "shared" code.
 
