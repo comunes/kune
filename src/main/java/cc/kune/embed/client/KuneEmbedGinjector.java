@@ -35,11 +35,11 @@ import cc.kune.embed.client.panels.EmbedPresenter;
 import cc.kune.embed.client.panels.EmbedSitebar;
 import cc.kune.wave.client.kspecific.WaveEmbedGinModule;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.AsyncProvider;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * The Interface KuneEmbedGinjector.
