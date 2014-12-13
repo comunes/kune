@@ -42,22 +42,22 @@ public interface CommonResources extends ClientBundle {
   @Source("arrowdownsitebar-small.gif")
   ImageResource arrowdownsitebarSmall();
 
-  @Source("icons/chain-close-black.png")
+  @Source("chain-close-black.png")
   ImageResource chainCloseBlack();
 
-  @Source("icons/chain-closed-grey.png")
+  @Source("chain-closed-grey.png")
   ImageResource chainClosedGrey();
 
-  @Source("icons/chain-close-white.png")
+  @Source("chain-close-white.png")
   ImageResource chainCloseWhite();
 
-  @Source("icons/chain-open-black.png")
+  @Source("chain-open-black.png")
   ImageResource chainOpenBlack();
 
-  @Source("icons/chain-open-grey.png")
+  @Source("chain-open-grey.png")
   ImageResource chainOpenGrey();
 
-  @Source("icons/chain-open-white.png")
+  @Source("chain-open-white.png")
   ImageResource chainOpenWhite();
 
   @Source("checked.png")
@@ -72,13 +72,13 @@ public interface CommonResources extends ClientBundle {
   @Source("common-resources.css")
   CommonStyle commonStyle();
 
-  @Source("icons/edit-black.png")
+  @Source("edit-black.png")
   ImageResource editBlack();
 
-  @Source("icons/edit-gray_dark.png")
+  @Source("edit-gray_dark.png")
   ImageResource editGrayDark();
 
-  @Source("icons/edit-white.png")
+  @Source("edit-white.png")
   ImageResource editWhite();
 
   @Source("error.png")
@@ -111,31 +111,31 @@ public interface CommonResources extends ClientBundle {
   @Source("fonts/kune/iconsfont.ttf")
   DataResource kuneFontResource();
 
-  @Source("icons/location-black.png")
+  @Source("location-black.png")
   ImageResource locationBlack();
 
-  @Source("icons/location-grey.png")
+  @Source("location-grey.png")
   ImageResource locationGrey();
 
-  @Source("icons/location-white.png")
+  @Source("location-white.png")
   ImageResource locationWhite();
 
-  @Source("icons/picture-black.png")
+  @Source("picture-black.png")
   ImageResource pictureBlack();
 
-  @Source("icons/picture-grey.png")
+  @Source("picture-grey.png")
   ImageResource pictureGrey();
 
-  @Source("icons/picture-white.png")
+  @Source("picture-white.png")
   ImageResource pictureWhite();
 
-  @Source("icons/pref-black.png")
+  @Source("pref-black.png")
   ImageResource prefBlack();
 
-  @Source("icons/pref-grey.png")
+  @Source("pref-grey.png")
   ImageResource prefGrey();
 
-  @Source("icons/pref-white.png")
+  @Source("pref-white.png")
   ImageResource prefWhite();
 
   @Source("radiochecked.png")
@@ -147,18 +147,18 @@ public interface CommonResources extends ClientBundle {
   @Source("cross.png")
   ImageResource redCross();
 
-  @Source("icons/trash-black.png")
+  @Source("trash-black.png")
   ImageResource trashBlack();
 
-  @Source("icons/trash-white.png")
+  @Source("trash-white.png")
   ImageResource trashWhite();
 
   @Source("unchecked.png")
   ImageResource unChecked();
 
-  @Source("icons/world-16.png")
+  @Source("world-16.png")
   ImageResource world16();
 
-  @Source("icons/world-deny-16.png")
+  @Source("world-deny-16.png")
   ImageResource worldDeny16();
 }

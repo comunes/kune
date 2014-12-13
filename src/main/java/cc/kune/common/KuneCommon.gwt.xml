@@ -12,6 +12,7 @@
   <source path='client'
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
   <public path="public"/>
+  <resource path=".../../../../resources/icons"/>
   <inherits name='org.cobogw.gwt.user.User'/>
   <inherits name='com.google.gwt.inject.Inject'/>
   <inherits name='com.google.gwt.query.Query'/>
