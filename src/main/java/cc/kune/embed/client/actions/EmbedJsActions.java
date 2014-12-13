@@ -20,26 +20,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+package cc.kune.embed.client.actions;
 
-package cc.kune.gspace.client.viewers;
+import cc.kune.common.client.events.EventBusInstance;
+import cc.kune.embed.client.events.EmbedOpenEvent;
 
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.RootPresenter;
+import com.google.inject.Singleton;
 
-public class EmbedRootPresenter extends RootPresenter {
+@Singleton
+public class EmbedJsActions {
 
-  public static final class EmbedRootView extends RootView {
-    @Override
-    public void setInSlot(final Object slot, final IsWidget widget) {
-      RootPanel.get("kune-embed-hook").add(widget);
-    }
+  public static void embed(final String stateToken) {
+    EventBusInstance.get().fireEvent(new EmbedOpenEvent(stateToken));
   }
 
-  @Inject
-  public EmbedRootPresenter(final EventBus eventBus, final EmbedRootView myRootView) {
-    super(eventBus, myRootView);
+  public static void embed(final String containerId, final String stateToken) {
+    // Not implemented
   }
+
+  public static native void export() /*-{
+                                     $doc.embed = $entry(@cc.kune.embed.client.actions.EmbedJsActions::embed(Ljava/lang/String;))
+                                     }-*/;
+
+  public EmbedJsActions() {
+  }
+
 }

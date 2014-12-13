@@ -21,10 +21,25 @@
  *
  */
 
-package cc.kune.gspace.client.viewers;
+package cc.kune.embed.client.panels;
 
-import com.gwtplatform.mvp.client.View;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.inject.Inject;
+import com.gwtplatform.mvp.client.RootPresenter;
 
-public interface WaveViewerView extends View, WaveViewer {
+public class EmbedRootPresenter extends RootPresenter {
 
+  public static final class EmbedRootView extends RootView {
+    @Override
+    public void setInSlot(final Object slot, final IsWidget widget) {
+      RootPanel.get("kune-embed-hook").add(widget);
+    }
+  }
+
+  @Inject
+  public EmbedRootPresenter(final EventBus eventBus, final EmbedRootView myRootView) {
+    super(eventBus, myRootView);
+  }
 }

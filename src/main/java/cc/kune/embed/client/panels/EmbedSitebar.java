@@ -21,7 +21,7 @@
  *
  */
 
-package cc.kune.core.client.embed;
+package cc.kune.embed.client.panels;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.shared.utils.Url;
@@ -31,7 +31,8 @@ import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.InitDataDTO;
-import cc.kune.gspace.client.viewers.EmbedHelper;
+import cc.kune.embed.client.EmbedHelper;
+import cc.kune.embed.client.conf.EmbedConfiguration;
 
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;

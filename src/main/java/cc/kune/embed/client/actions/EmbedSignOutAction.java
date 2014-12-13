@@ -21,12 +21,12 @@
  *
  */
 
-package cc.kune.core.client.embed;
+package cc.kune.embed.client.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.core.client.sitebar.AbstractSignOutAction;
 import cc.kune.core.client.state.SessionInstance;
-import cc.kune.gspace.client.viewers.EmbedHelper;
+import cc.kune.embed.client.EmbedHelper;
 
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.http.client.Response;

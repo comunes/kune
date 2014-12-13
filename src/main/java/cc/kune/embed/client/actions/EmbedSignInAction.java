@@ -21,7 +21,7 @@
  *
  */
 
-package cc.kune.core.client.embed;
+package cc.kune.embed.client.actions;
 
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -32,7 +32,8 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.TokenUtils;
-import cc.kune.gspace.client.viewers.EmbedHelper;
+import cc.kune.embed.client.EmbedHelper;
+import cc.kune.embed.client.conf.EmbedConfiguration;
 
 import com.google.inject.Inject;
 

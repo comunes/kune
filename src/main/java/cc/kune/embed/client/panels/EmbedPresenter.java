@@ -21,7 +21,7 @@
  *
  */
 
-package cc.kune.gspace.client.viewers;
+package cc.kune.embed.client.panels;
 
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
@@ -30,10 +30,6 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.UrlParam;
-import cc.kune.core.client.embed.EmbedConfiguration;
-import cc.kune.core.client.embed.EmbedOpenEvent;
-import cc.kune.core.client.embed.EmbedSitebar;
-import cc.kune.core.client.events.EmbAppStartEvent;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
@@ -47,6 +43,11 @@ import cc.kune.core.shared.dto.StateAbstractDTOJs;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateTokenJs;
 import cc.kune.core.shared.dto.UserInfoDTOJs;
+import cc.kune.embed.client.EmbedHelper;
+import cc.kune.embed.client.conf.EmbedConfiguration;
+import cc.kune.embed.client.events.EmbAppStartEvent;
+import cc.kune.embed.client.events.EmbedOpenEvent;
+import cc.kune.gspace.client.viewers.WaveViewer;
 import cc.kune.wave.client.kspecific.WaveClientManager;
 import cc.kune.wave.client.kspecific.WaveClientProvider;
 
@@ -56,39 +57,28 @@ import com.google.gwt.core.client.JsonUtils;
 import com.google.gwt.core.client.RunAsyncCallback;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-import com.gwtplatform.mvp.client.Presenter;
-import com.gwtplatform.mvp.client.annotations.ProxyStandard;
-import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * The Class EmbedPresenter is used to embed kune waves in other CMSs (for
  * instance)
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
-public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPresenter.EmbedProxy>
-    implements ValueChangeHandler<String> {
-
-  /**
-   * The Interface EmbedProxy.
-   */
-  @ProxyStandard
-  public interface EmbedProxy extends Proxy<EmbedPresenter> {
-  }
+public class EmbedPresenter implements ValueChangeHandler<String> {
 
   /**
    * The Interface EmbedView.
    */
-  public interface EmbedView extends WaveViewerView {
+  public interface EmbedView extends WaveViewer {
   }
 
   private final ClientFileDownloadUtils clientDownUtils;
@@ -96,10 +86,11 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
   private final Session session;
   private final Provider<EmbedSitebar> sitebar;
   protected String stateTokenToOpen;
+  private final Provider<EmbedView> view;
 
   /**
    * Instantiates a new embed presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -121,11 +112,11 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
    */
 
   @Inject
-  public EmbedPresenter(final EventBus eventBus, final EmbedView view, final EmbedProxy proxy,
+  public EmbedPresenter(final EventBus eventBus, final Provider<EmbedView> view,
       final WaveClientManager waveClientManager, final WaveClientProvider waveClient,
       final I18nTranslationService i18n, final Session session, final Provider<EmbedSitebar> sitebar,
       final ClientFileDownloadUtils clientDownUtils) {
-    super(eventBus, view, proxy);
+    this.view = view;
     this.clientDownUtils = clientDownUtils;
     this.session = session;
     this.sitebar = sitebar;
@@ -218,6 +209,10 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
 
   private String getCurrentHistoryHash() {
     return HistoryUtils.undoHashbang(History.getToken());
+  }
+
+  private WaveViewer getView() {
+    return view.get();
   }
 
   private boolean isCurrentHistoryHashValid(final String currentHistoryHash) {
@@ -325,13 +320,7 @@ public class EmbedPresenter extends Presenter<EmbedPresenter.EmbedView, EmbedPre
     }
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
-   */
-  @Override
-  protected void revealInParent() {
-    RevealRootContentEvent.fire(this, this);
+  public void show() {
+    RootPanel.get("kune-embed-hook").add(getView());
   }
 }

@@ -20,33 +20,35 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.viewers;
+package cc.kune.embed.client.panels;
 
-import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView;
+import cc.kune.embed.client.EmbedHelper;
+import cc.kune.embed.client.conf.EmbedConfiguration;
+import cc.kune.embed.client.panels.EmbedPresenter.EmbedView;
+import cc.kune.gspace.client.viewers.AbstractWaveViewerPanel;
 import cc.kune.wave.client.CustomSavedStateIndicator;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
 import cc.kune.wave.client.kspecific.WaveClientProvider;
 
 import com.google.gwt.core.client.GWT;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class EmbedPanel the panel of the embed component.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class EmbedPanel extends WaveViewerPanel implements EmbedView {
+public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /**
    * The Interface EmbedPanelUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface EmbedPanelUiBinder extends UiBinder<Widget, EmbedPanel> {
@@ -60,14 +62,14 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView#
    * setContent(cc.kune.core.shared.dto.StateContentDTO)
    */
 
   /**
    * Instantiates a new content viewer panel.
-   * 
+   *
    * @param waveClient
    *          the wave client
    * @param eventBus
@@ -87,7 +89,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -97,7 +99,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# attach()
    */
   @Override
@@ -107,7 +109,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# clear()
    */
   @Override
@@ -117,7 +119,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# detach()
    */
   @Override
@@ -137,7 +139,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.WaveViewerPanel#postLoad()
    */
   @Override
@@ -159,7 +161,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.WaveViewerPanel#setContent(cc.kune.core.shared
    * .dto.StateContentDTO)
@@ -175,7 +177,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView#
    * setEditableContent(cc.kune.core.shared.dto.StateContentDTO)
    */
@@ -186,7 +188,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /**
    * Sets the editable wave content.
-   * 
+   *
    * @param waveRefS
    *          the wave ref s
    * @param isNewWave
@@ -199,7 +201,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# signIn()
    */
   @Override
@@ -210,7 +212,7 @@ public class EmbedPanel extends WaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# signOut()
    */
   @Override

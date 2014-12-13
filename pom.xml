@@ -1215,7 +1215,7 @@
               </hostedWebapp>
               <modules>
                 <module>${project.groupId}.KuneProd</module>
-                <module>${project.groupId}.KuneEmbedProd</module>
+                <module>${project.groupId}.embed.KuneEmbedProd</module>
               </modules>
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
@@ -1336,7 +1336,7 @@
               <hostedWebapp>${project.build.directory}/${project.build.finalName}
               </hostedWebapp>
               <modules>
-                <module>${project.groupId}.KuneEmbedDev</module>
+                <module>${project.groupId}.embed.KuneEmbedDev</module>
               </modules>
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>

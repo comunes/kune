@@ -23,8 +23,51 @@
 
 package cc.kune.gspace.client.viewers;
 
-import com.gwtplatform.mvp.client.View;
+import cc.kune.core.shared.dto.StateContentDTO;
 
-public interface WaveViewerView extends View, WaveViewer {
+import com.google.gwt.user.client.ui.IsWidget;
+
+public interface WaveViewer extends IsWidget {
+
+  /**
+   * Attach.
+   */
+  void attach();
+
+  /**
+   * Clear.
+   */
+  void clear();
+
+  /**
+   * Detach.
+   */
+  void detach();
+
+  /**
+   * Sets the content.
+   *
+   * @param state
+   *          the new content
+   */
+  void setContent(StateContentDTO state);
+
+  /**
+   * Sets the editable content.
+   *
+   * @param state
+   *          the new editable content
+   */
+  void setEditableContent(StateContentDTO state);
+
+  /**
+   * Sign in.
+   */
+  void signIn();
+
+  /**
+   * Sign out.
+   */
+  void signOut();
 
 }

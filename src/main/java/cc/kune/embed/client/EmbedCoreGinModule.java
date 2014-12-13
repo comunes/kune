@@ -20,9 +20,8 @@ x * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client;
+package cc.kune.embed.client;
 
-import cc.kune.client.KunePlaceManager;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusInstance;
@@ -37,17 +36,13 @@ import cc.kune.common.shared.i18n.HasRTL;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.i18n.I18nTranslationServiceMocked;
+import cc.kune.core.client.ExtendedGinModule;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.cookies.CookiesManagerImpl;
-import cc.kune.core.client.embed.EmbedSignInAction;
-import cc.kune.core.client.embed.EmbedSignOutAction;
-import cc.kune.core.client.embed.EmbedSitebar;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
-import cc.kune.core.client.notify.spiner.SpinerPanel;
-import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
@@ -70,17 +65,14 @@ import cc.kune.core.client.state.impl.HistoryWrapperDefault;
 import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.core.client.state.impl.SessionDefault;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
-import cc.kune.gspace.client.viewers.EmbedPanel;
-import cc.kune.gspace.client.viewers.EmbedPresenter;
-import cc.kune.gspace.client.viewers.EmbedRootPresenter;
+import cc.kune.embed.client.actions.EmbedSignInAction;
+import cc.kune.embed.client.actions.EmbedSignOutAction;
+import cc.kune.embed.client.panels.EmbedPanel;
+import cc.kune.embed.client.panels.EmbedPresenter;
+import cc.kune.embed.client.panels.EmbedSitebar;
 
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.common.client.CommonGinModule;
-import com.gwtplatform.mvp.client.RootPresenter;
-import com.gwtplatform.mvp.client.proxy.PlaceManager;
-import com.gwtplatform.mvp.shared.proxy.ParameterTokenFormatter;
-import com.gwtplatform.mvp.shared.proxy.TokenFormatter;
 
 /**
  * The Class CoreGinModule.
@@ -91,7 +83,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -100,10 +92,10 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     requestStaticInjection(EventBusInstance.class);
 
     // gwtplatform
-    install(new CommonGinModule());
-    bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
-    bind(RootPresenter.class).to(EmbedRootPresenter.class).asEagerSingleton();
-    bind(PlaceManager.class).to(KunePlaceManager.class).in(Singleton.class);
+    // install(new CommonGinModule());
+    // bind(TokenFormatter.class).to(ParameterTokenFormatter.class).in(Singleton.class);
+    // bind(RootPresenter.class).to(EmbedRootPresenter.class).asEagerSingleton();
+    // bind(PlaceManager.class).to(KunePlaceManager.class).in(Singleton.class);
 
     s(I18nTranslationServiceMocked.class);
     bind(HasRTL.class).to(I18nTranslationServiceMocked.class);
@@ -114,14 +106,11 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     s(UserFieldFactory.class);
     s(GroupFieldFactory.class);
 
-    // Presenters
-    bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerPanel.class,
-        SpinerPresenter.SpinerProxy.class);
     eagle(SimpleUserNotifierPopup.class);
     requestStaticInjection(NotifyUser.class);
 
-    bindPresenter(EmbedPresenter.class, EmbedPresenter.EmbedView.class, EmbedPanel.class,
-        EmbedPresenter.EmbedProxy.class);
+    bind(EmbedPresenter.EmbedView.class).to(EmbedPanel.class).in(Singleton.class);
+
     s(EmbedPresenter.class);
     s(EmbedSitebar.class);
 

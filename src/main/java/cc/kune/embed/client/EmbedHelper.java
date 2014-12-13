@@ -20,11 +20,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gspace.client.viewers;
+package cc.kune.embed.client;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.embed.EmbedConfiguration;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.InitDataDTOJs;
@@ -33,6 +32,7 @@ import cc.kune.core.shared.dto.StateAbstractDTOJs;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserInfoDTOJs;
+import cc.kune.embed.client.conf.EmbedConfiguration;
 
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;

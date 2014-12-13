@@ -20,46 +20,55 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.client;
+package cc.kune.embed.client;
 
-import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
-import cc.kune.common.client.events.EventBusWithLogging;
-import cc.kune.core.client.embed.EmbedConfiguration;
-import cc.kune.core.client.embed.EmbedJsActions;
-import cc.kune.core.client.notify.spiner.SpinerPresenter;
+import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.core.client.resources.CoreResources;
-import cc.kune.gspace.client.viewers.EmbedPresenter;
+import cc.kune.embed.client.actions.EmbedJsActions;
+import cc.kune.embed.client.conf.EmbedConfiguration;
+import cc.kune.embed.client.panels.EmbedPresenter;
 
+import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
-import com.google.inject.Inject;
-import com.gwtplatform.mvp.client.Bootstrapper;
+import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 
 /**
  * The KuneEmbedEntryPoint is used to start kune complete client
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class KuneEmbedBootstrapper implements Bootstrapper {
+public class KuneEmbedEntryPoint implements EntryPoint {
 
-  private EmbedPresenter embedPresenter;
-
-  @Inject
-  public KuneEmbedBootstrapper(EventBusWithLogging eventBus, GwtGuiProvider gwtGuiProvider,
-      EmbedPresenter embedPresenter, SpinerPresenter spinerPresenter) {
-    this.embedPresenter = embedPresenter;
-  }
+  /** The ginjector. */
+  private KuneEmbedGinjector ginjector;
 
   private native void onLoad() /*-{
-    if ($wnd.kuneEmbedInit)
-      $wnd.kuneEmbedInit();
+		if ($wnd.kuneEmbedInit)
+			$wnd.kuneEmbedInit();
   }-*/;
 
   @Override
-  public void onBootstrap() {
+  public void onModuleLoad() {
+    GWT.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+      @Override
+      public void onUncaughtException(final Throwable excep) {
+        Log.error("Error in 'onPreBootstrap()' method", excep);
+        NotifyUser.showProgress("Error");
+        NotifyUser.logError(excep.getMessage());
+      }
+    });
+
     EmbedConfiguration.export();
     EmbedJsActions.export();
 
-    embedPresenter.forceReveal();
+    ginjector = GWT.create(KuneEmbedGinjector.class);
+
+    ginjector.getEventBusWithLogger();
+    ginjector.getGwtGuiProvider();
+
+    final EmbedPresenter embedPresenter = ginjector.getEmbedPresenter().get();
+    embedPresenter.show();
     GWT.<CoreResources> create(CoreResources.class).coreCss().ensureInjected();
     com.google.gwt.user.client.History.addValueChangeHandler(embedPresenter);
 
@@ -67,5 +76,4 @@ public class KuneEmbedBootstrapper implements Bootstrapper {
     // http://code.google.com/p/gwt-exporter/wiki/GettingStarted#Quick_start_guide
     onLoad();
   }
-
 }

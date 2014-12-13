@@ -20,10 +20,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.embed;
+package cc.kune.embed.client.conf;
 
 import cc.kune.common.client.events.EventBusInstance;
-import cc.kune.core.client.events.EmbAppStartEvent;
+import cc.kune.embed.client.events.EmbAppStartEvent;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.inject.Singleton;
@@ -33,7 +33,7 @@ public class EmbedConfiguration {
   private static EmbedConfJso conf;
 
   public static native void export() /*-{
-                                     $doc.confEmbed = $entry(@cc.kune.core.client.embed.EmbedConfiguration::init(Lcc/kune/core/client/embed/EmbedConfJso;))
+                                     $doc.confEmbed = $entry(@cc.kune.embed.client.conf.EmbedConfiguration::init(Lcc/kune/embed/client/conf/EmbedConfJso;))
                                      }-*/;
 
   public static EmbedConfJso get() {

@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import cc.kune.core.shared.FileConstants;
-import cc.kune.gspace.client.viewers.EmbedHelper;
+import cc.kune.embed.client.EmbedHelper;
 
 public class EmbedHelperTest {
 
