@@ -32,6 +32,7 @@ import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.SocialNetworkManager;
@@ -54,7 +55,7 @@ import com.google.wave.api.Wavelet;
 // TODO: Auto-generated Javadoc
 /**
  * The Class StateServiceDefault.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -87,7 +88,7 @@ public class StateServiceDefault implements StateService {
 
   /**
    * Instantiates a new state service default.
-   * 
+   *
    * @param groupManager
    *          the group manager
    * @param socialNetworkManager
@@ -119,7 +120,7 @@ public class StateServiceDefault implements StateService {
 
   /**
    * Calculate root container.
-   * 
+   *
    * @param container
    *          the container
    * @return the container
@@ -130,7 +131,7 @@ public class StateServiceDefault implements StateService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.state.StateService#create(cc.kune.domain.User,
    * cc.kune.domain.Container)
    */
@@ -154,7 +155,7 @@ public class StateServiceDefault implements StateService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.state.StateService#create(cc.kune.domain.User,
    * cc.kune.domain.Content)
    */
@@ -203,6 +204,8 @@ public class StateServiceDefault implements StateService {
         }
         state.setWaveParticipants(participantList);
         state.setWaveCreator(wavelet.getCreator());
+      } catch (final AccessViolationException e) {
+        throw e;
       } catch (final Exception e) {
         LOG.error("Error accessing wave " + waveRef, e);
         String waveUrl = null;
@@ -210,7 +213,7 @@ public class StateServiceDefault implements StateService {
           waveUrl = TextUtils.generateHtmlLink(
               "#"
                   + JavaWaverefEncoder.encodeToUriPathSegment(JavaWaverefEncoder.decodeWaveRefFromPath(waveRef)),
-              waveRef, false);
+                  waveRef, false);
         } catch (final InvalidWaveRefException invalidEx) {
         }
         state.setContent(i18n.t("Error accessing this document. "
@@ -244,7 +247,7 @@ public class StateServiceDefault implements StateService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.state.StateService#createNoHome(cc.kune.domain.User,
    * java.lang.String)
@@ -264,7 +267,7 @@ public class StateServiceDefault implements StateService {
 
   /**
    * Sets the common.
-   * 
+   *
    * @param state
    *          the state
    * @param userLogged
@@ -289,7 +292,7 @@ public class StateServiceDefault implements StateService {
 
   /**
    * Sets the social network.
-   * 
+   *
    * @param state
    *          the state
    * @param userLogged

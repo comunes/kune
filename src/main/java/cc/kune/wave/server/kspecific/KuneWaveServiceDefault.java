@@ -52,6 +52,7 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.shared.utils.SimpleArgCallback;
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
 
 import com.google.common.collect.ImmutableMap;
@@ -95,14 +96,14 @@ public class KuneWaveServiceDefault implements KuneWaveService {
   private static final List<String> NO_VALUES = Collections.<String> emptyList();
 
   /**
-   * 
+   *
    * Copy blips
-   * 
+   *
    * @param fromBlip
    * @param toBlip
-   * 
+   *
    * @author yurize@apache.org (Yuri Zelikov)
-   * 
+   *
    */
   public static void copyWavelet(final Blip fromBlip, final Blip toBlip) {
     for (final BlipContent blipContent : fromBlip.all().values()) {
@@ -405,7 +406,11 @@ public class KuneWaveServiceDefault implements KuneWaveService {
     if (response != null && response.isError()) {
       final String errorMessage = processErrorMessage(context.getResponse(reqId).getErrorMessage());
       onFailure(errorMessage);
-      throw new DefaultException(errorMessage);
+      if ("Access rejected".equals(errorMessage)) {
+        throw new AccessViolationException(errorMessage);
+      } else {
+        throw new DefaultException(errorMessage);
+      }
     } else {
       // Duplicate code from WaveService
       assert response != null;
