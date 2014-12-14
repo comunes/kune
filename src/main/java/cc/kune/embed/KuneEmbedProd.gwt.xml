@@ -6,7 +6,7 @@
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.1//EN" "../../gwt-module.dtd">
 <module rename-to="wse">
 
-  <inherits name="cc.kune.embedKuneEmbed" />
+  <inherits name="cc.kune.embed.KuneEmbed"/>
 
   <set-property name="gwt.logging.simpleRemoteHandler"
     value="DISABLED" />
