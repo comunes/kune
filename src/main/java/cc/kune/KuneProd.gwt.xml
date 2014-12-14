@@ -10,10 +10,10 @@
 
   <set-property name="gwt.logging.simpleRemoteHandler" value="DISABLED" />
 
-  <!-- NOTE: this only compiles for chromium/safari ============= -->
   <!--http://code.google.com/p/google-web-toolkit/issues/detail?id=42 -->
   <!-- <set-property name="user.agent" value="gecko1_8" /> -->
-  <set-property name="user.agent" value="safari,gecko1_8,ie6,ie8,ie9"/>
+  <!-- Available https://gwt.googlesource.com/gwt/+/master/user/src/com/google/gwt/useragent/UserAgent.gwt.xml -->
+  <set-property name="user.agent" value="safari,gecko1_8,ie8,ie9,ie19"/>
   <set-property name="mobile.user.agent" value="not_mobile"/>
 
   <!-- I18n ===================================================== -->
