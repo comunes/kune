@@ -42,7 +42,7 @@ import com.google.inject.servlet.RequestScoped;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FileGwtUploadAbstractServlet.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @RequestScoped
@@ -62,7 +62,7 @@ public abstract class FileGwtUploadAbstractServlet extends UploadAction {
 
   /**
    * Instantiates a new file gwt upload abstract servlet.
-   * 
+   *
    * @param kuneProperties
    *          the kune properties
    */
@@ -74,7 +74,7 @@ public abstract class FileGwtUploadAbstractServlet extends UploadAction {
 
   /**
    * Creates the uploaded file.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param stateToken
@@ -92,7 +92,7 @@ public abstract class FileGwtUploadAbstractServlet extends UploadAction {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see gwtupload.server.UploadAction#executeAction(javax.servlet.http.
    * HttpServletRequest, java.util.List)
    */
@@ -134,14 +134,14 @@ public abstract class FileGwtUploadAbstractServlet extends UploadAction {
     } finally {
       // Without this the session restoration fails
       removeSessionFileItems(request);
-      request.getSession().removeAttribute(ATTR_LAST_FILES);
+      request.getSession().removeAttribute("LAST_FILES");
     }
 
   }
 
   /**
    * Log file del.
-   * 
+   *
    * @param delResult
    *          the del result
    */
