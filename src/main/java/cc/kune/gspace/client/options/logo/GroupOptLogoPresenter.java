@@ -26,25 +26,26 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.GroupChangedEvent;
 import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.gspace.client.options.GroupOptions;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupOptLogoPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupOptLogoPresenter extends EntityOptLogoPresenter {
 
   /**
    * Instantiates a new group opt logo presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param session
@@ -64,8 +65,8 @@ public class GroupOptLogoPresenter extends EntityOptLogoPresenter {
   public GroupOptLogoPresenter(final EventBus eventBus, final Session session,
       final GroupOptions entityOptions, final StateManager stateManager,
       final Provider<UserServiceAsync> userService, final GroupOptLogoView view,
-      final I18nTranslationService i18n) {
-    super(eventBus, session, entityOptions, userService, i18n);
+      final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {
+    super(eventBus, session, entityOptions, userService, i18n, downUtils);
     init(view);
     stateManager.onGroupChanged(true, new GroupChangedHandler() {
       @Override
@@ -77,7 +78,7 @@ public class GroupOptLogoPresenter extends EntityOptLogoPresenter {
 
   /**
    * Inits the.
-   * 
+   *
    * @param view
    *          the view
    */

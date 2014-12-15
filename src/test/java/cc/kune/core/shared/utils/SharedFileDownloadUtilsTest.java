@@ -22,17 +22,19 @@
  */
 package cc.kune.core.shared.utils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import cc.kune.core.server.utils.ServerFileDownloadUtils;
 import cc.kune.core.shared.FileConstants;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SharedFileDownloadUtilsTest.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SharedFileDownloadUtilsTest {
@@ -41,26 +43,26 @@ public class SharedFileDownloadUtilsTest {
   private static final String GROUP = "groupname";
 
   /** The prefix utils. */
-  private SharedFileDownloadUtils[] prefixUtils;
+  private ServerFileDownloadUtils[] prefixUtils;
 
   /** The util no prefix. */
-  private SharedFileDownloadUtils utilNoPrefix;
+  private ServerFileDownloadUtils utilNoPrefix;
 
   /** The util prefix. */
-  private SharedFileDownloadUtils utilPrefix;
+  private ServerFileDownloadUtils utilPrefix;
 
   /** The util prefix with slash. */
-  private SharedFileDownloadUtils utilPrefixWithSlash;
+  private ServerFileDownloadUtils utilPrefixWithSlash;
 
   /**
    * Before.
    */
   @Before
   public void before() {
-    utilPrefix = new SharedFileDownloadUtils("http://example.org");
-    utilPrefixWithSlash = new SharedFileDownloadUtils("http://example.org/");
-    utilNoPrefix = new SharedFileDownloadUtils("");
-    prefixUtils = new SharedFileDownloadUtils[] { utilPrefix, utilPrefixWithSlash };
+    utilPrefix = new ServerFileDownloadUtils("http://example.org");
+    utilPrefixWithSlash = new ServerFileDownloadUtils("http://example.org/");
+    utilNoPrefix = new ServerFileDownloadUtils("");
+    prefixUtils = new ServerFileDownloadUtils[] { utilPrefix, utilPrefixWithSlash };
   }
 
   /**

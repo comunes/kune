@@ -22,6 +22,8 @@
  \*/
 package cc.kune.core.client.services;
 
+import java.util.ArrayList;
+
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.state.SessionInstance;
@@ -29,24 +31,38 @@ import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 
 /**
  * The Class ClientFileDownloadUtils.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
+  private final ArrayList<String> recentlyChanged;
+
   @Inject
   public ClientFileDownloadUtils() {
+    recentlyChanged = new ArrayList<String>();
+  }
+
+  /**
+   * We register the token of users/groups that we changed the avatar so we
+   * prevent to use the browser cache later
+   *
+   * @param token
+   */
+
+  @Override
+  public void addToRecentlyChanged(final String token) {
+    recentlyChanged.add(token);
   }
 
   /**
    * Calculate url.
-   * 
+   *
    * @param token
    *          the token
    * @param download
@@ -72,32 +88,32 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   /**
    * Download file.
-   * 
+   *
    * @param token
    *          the token
    */
   public void downloadFile(final StateToken token) {
     final String url = calculateUrl(token, true, true);
-    DOM.setElementAttribute(RootPanel.get("__download").getElement(), "src", url);
+    RootPanel.get("__download").getElement().setAttribute("src", url);
   }
 
   /**
    * Gets the background image url.
-   * 
+   *
    * @param token
    *          the token
    * @param noCache
    *          the no cache
    * @return the background image url
    */
-  public String getBackgroundImageUrl(final StateToken token, final boolean noCache) {
+  public String getBackgroundImageUrl(final StateToken token) {
     return new Url(prefix + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
-        token.toString())).toString() + getCacheSuffix(noCache);
+        token.toString())).toString() + getCacheSuffix(isRecentlyChanged(token.getGroup()));
   }
 
   /**
    * Gets the background resized url.
-   * 
+   *
    * @param token
    *          the token
    * @param imageSize
@@ -105,14 +121,15 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
    * @return the background resized url
    */
   public String getBackgroundResizedUrl(final StateToken token, final ImageSize imageSize) {
+    final String group = token.getGroup();
     return new Url(prefix + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
-        token.toString()), new UrlParam(FileConstants.IMGSIZE, imageSize.toString())).toString()
-        + getCacheSuffix(true);
+        group.toString()), new UrlParam(FileConstants.IMGSIZE, imageSize.toString())).toString()
+        + getCacheSuffix(isRecentlyChanged(group));
   }
 
   /**
    * Gets the image resized url.
-   * 
+   *
    * @param token
    *          the token
    * @param imageSize
@@ -126,7 +143,7 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   /**
    * Gets the image url.
-   * 
+   *
    * @param token
    *          the token
    * @return the image url
@@ -137,13 +154,18 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
   /**
    * Gets the url.
-   * 
+   *
    * @param token
    *          the token
    * @return the url
    */
   public String getUrl(final StateToken token) {
     return calculateUrl(token, false, false);
+  }
+
+  @Override
+  public boolean isRecentlyChanged(final String token) {
+    return recentlyChanged.contains(token);
   }
 
 }

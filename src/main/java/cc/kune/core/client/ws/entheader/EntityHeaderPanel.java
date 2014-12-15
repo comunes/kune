@@ -48,7 +48,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityHeaderPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
@@ -73,7 +73,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /**
    * Instantiates a new entity header panel.
-   * 
+   *
    * @param downloadProvider
    *          the download provider
    * @param images
@@ -143,7 +143,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /**
    * Sets the full logo.
-   * 
+   *
    * @param stateToken
    *          the state token
    * @param clipped
@@ -184,8 +184,9 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
    * #setLogoImage(cc.kune.core.shared.dto.GroupDTO, boolean)
    */
   @Override
-  public void setLogoImage(final GroupDTO group, final boolean noCache) {
-    final String url = downloadProvider.get().getLogoImageUrl(group.getShortName(), noCache);
+  public void setLogoImage(final GroupDTO group) {
+    final String shortName = group.getShortName();
+    final String url = downloadProvider.get().getLogoImageUrl(shortName);
     entityTextLogo.setLogoImage(url);
   }
 

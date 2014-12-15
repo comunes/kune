@@ -48,14 +48,14 @@ import cc.kune.gspace.client.themes.GSpaceThemeSelectorPresenter;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptStylePresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntityOptStylePresenter implements EntityOptStyle {
@@ -89,7 +89,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * Instantiates a new entity opt style presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param session
@@ -141,7 +141,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * Gets the view.
-   * 
+   *
    * @return the view
    */
   public IsWidget getView() {
@@ -150,7 +150,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * Inits the.
-   * 
+   *
    * @param view
    *          the view
    */
@@ -174,9 +174,10 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
         new SetBackgroundImageEvent.SetBackgroundImageHandler() {
           @Override
           public void onSetBackImage(final SetBackgroundImageEvent event) {
-            backManager.setNoCache(true);
             backManager.setBackgroundImage();
-            setBackImage(event.getToken());
+            final StateToken token = event.getToken();
+            fileDownloadUtils.addToRecentlyChanged(token.getGroup());
+            setBackImage(token);
           }
         });
     eventBus.addHandler(ClearBackgroundImageEvent.getType(),
@@ -203,11 +204,12 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * On submit complete.
-   * 
+   *
    * @param uploader
    *          the uploader
    */
   private void onSubmitComplete(final IUploader uploader) {
+    // final String response = uploader.getServerMessage().getMessage();
     final String response = uploader.getServerInfo().message;
     if (uploader.getStatus() == Status.SUCCESS) {
       if (response != null) {
@@ -221,7 +223,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * On submit failed.
-   * 
+   *
    * @param responseText
    *          the response text
    */
@@ -231,7 +233,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /**
    * Sets the back image.
-   * 
+   *
    * @param token
    *          the new back image
    */

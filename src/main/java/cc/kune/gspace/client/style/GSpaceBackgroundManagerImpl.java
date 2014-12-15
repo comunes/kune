@@ -33,7 +33,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceBackgroundManagerImpl.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
@@ -44,15 +44,12 @@ public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
   /** The g space armor. */
   private final GSpaceArmor gSpaceArmor;
 
-  /** The no cache. */
-  private boolean noCache;
-
   /** The session. */
   private final Session session;
 
   /**
    * Instantiates a new g space background manager impl.
-   * 
+   *
    * @param downloadUtils
    *          the download utils
    * @param gSpaceArmor
@@ -66,7 +63,6 @@ public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
     this.downloadUtils = downloadUtils;
     this.gSpaceArmor = gSpaceArmor;
     this.session = session;
-    noCache = false;
   }
 
   /*
@@ -91,7 +87,7 @@ public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
   public void restoreBackgroundImage() {
     final StateToken token = session.getCurrentStateToken();
     if (token != null) {
-      gSpaceArmor.setBackImage(downloadUtils.getBackgroundImageUrl(token, noCache));
+      gSpaceArmor.setBackImage(downloadUtils.getBackgroundImageUrl(token));
     } else {
       Log.info("Not restoring group background");
     }
@@ -107,19 +103,8 @@ public class GSpaceBackgroundManagerImpl implements GSpaceBackgroundManager {
   public void setBackgroundImage() {
     final StateToken token = session.getCurrentStateToken();
     if (token != null) {
-      Log.info("Set background for " + token + " noCache " + noCache);
-      gSpaceArmor.setBackImage(downloadUtils.getBackgroundImageUrl(token, noCache));
+      Log.info("Set background for " + token);
+      gSpaceArmor.setBackImage(downloadUtils.getBackgroundImageUrl(token));
     }
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.gspace.client.style.GSpaceBackgroundManager#setNoCache(boolean)
-   */
-  @Override
-  public void setNoCache(final boolean noCache) {
-    this.noCache = noCache;
   }
 }

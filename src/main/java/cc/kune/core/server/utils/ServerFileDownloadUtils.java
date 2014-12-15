@@ -22,7 +22,8 @@
  */
 package cc.kune.core.server.utils;
 
-import cc.kune.core.server.properties.KuneBasicProperties;
+import cc.kune.core.server.persist.CachedCollection;
+import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -34,10 +35,14 @@ import com.google.inject.Singleton;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
-public class AbsoluteFileDownloadUtils extends ServerFileDownloadUtils {
+public class ServerFileDownloadUtils extends SharedFileDownloadUtils {
 
-  /** The properties. */
-  private final KuneBasicProperties properties;
+  private CachedCollection<String, Boolean> recentlyChanged;
+
+  @Inject
+  public ServerFileDownloadUtils() {
+    init();
+  }
 
   /**
    * Instantiates a new absolute file download utils.
@@ -45,19 +50,24 @@ public class AbsoluteFileDownloadUtils extends ServerFileDownloadUtils {
    * @param properties
    *          the properties
    */
-  @Inject
-  public AbsoluteFileDownloadUtils(final KuneBasicProperties properties) {
-    super(properties.getSiteUrl());
-    this.properties = properties;
+  public ServerFileDownloadUtils(final String prefix) {
+    super(prefix);
+    init();
   }
 
-  /**
-   * Gets the site common name.
-   *
-   * @return the site common name
-   */
-  public String getSiteCommonName() {
-    return properties.getSiteCommonName();
+  @Override
+  public void addToRecentlyChanged(final String token) {
+    recentlyChanged.put(token, Boolean.TRUE);
+  }
+
+  private void init() {
+    // We add a cache of recently changed logos, etc
+    recentlyChanged = new CachedCollection<String, Boolean>(100);
+  }
+
+  @Override
+  public boolean isRecentlyChanged(final String token) {
+    return recentlyChanged.containsKey(token);
   }
 
 }

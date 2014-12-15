@@ -31,9 +31,9 @@ import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -43,16 +43,16 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityHeaderPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityHeaderPresenter extends
-    Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
-    EntityHeader {
+Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
+EntityHeader {
 
   /**
    * The Interface EntityHeaderProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -61,14 +61,14 @@ public class EntityHeaderPresenter extends
 
   /**
    * The Interface EntityHeaderView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface EntityHeaderView extends View {
 
     /**
      * Adds the action.
-     * 
+     *
      * @param descriptor
      *          the descriptor
      */
@@ -76,7 +76,7 @@ public class EntityHeaderPresenter extends
 
     /**
      * Adds the widget.
-     * 
+     *
      * @param widget
      *          the widget
      */
@@ -89,17 +89,15 @@ public class EntityHeaderPresenter extends
 
     /**
      * Sets the logo image.
-     * 
+     *
      * @param group
      *          the group
-     * @param noCache
-     *          the no cache
      */
-    void setLogoImage(GroupDTO group, boolean noCache);
+    void setLogoImage(GroupDTO group);
 
     /**
      * Sets the logo image visible.
-     * 
+     *
      * @param visible
      *          the new logo image visible
      */
@@ -107,7 +105,7 @@ public class EntityHeaderPresenter extends
 
     /**
      * Sets the logo text.
-     * 
+     *
      * @param groupName
      *          the new logo text
      */
@@ -120,7 +118,7 @@ public class EntityHeaderPresenter extends
 
     /**
      * Sets the online status group.
-     * 
+     *
      * @param group
      *          the new online status group
      */
@@ -128,7 +126,7 @@ public class EntityHeaderPresenter extends
 
     /**
      * Sets the online status visible.
-     * 
+     *
      * @param visible
      *          the new online status visible
      */
@@ -153,7 +151,7 @@ public class EntityHeaderPresenter extends
 
   /**
    * Instantiates a new entity header presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -172,14 +170,14 @@ public class EntityHeaderPresenter extends
     stateManager.onGroupChanged(true, new GroupChangedHandler() {
       @Override
       public void onGroupChanged(final GroupChangedEvent event) {
-        setGroupLogo(session.getCurrentState().getGroup(), false);
+        setGroupLogo(session.getCurrentState().getGroup());
       }
     });
     eventBus.addHandler(CurrentEntityChangedEvent.getType(), new CurrentEntityChangedHandler() {
       @Override
       public void onCurrentLogoChanged(final CurrentEntityChangedEvent event) {
         final GroupDTO group = session.getCurrentState().getGroup();
-        setGroupLogo(group, true);
+        setGroupLogo(group);
         setLogoText(group.getLongName());
       }
     });
@@ -187,7 +185,7 @@ public class EntityHeaderPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeader#addAction(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -199,7 +197,7 @@ public class EntityHeaderPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeader#addWidget(com.google.gwt.
    * user.client.ui.IsWidget)
@@ -211,7 +209,7 @@ public class EntityHeaderPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -221,16 +219,16 @@ public class EntityHeaderPresenter extends
 
   /**
    * Sets the group logo.
-   * 
+   *
    * @param group
    *          the group
    * @param noCache
    *          the no cache
    */
-  void setGroupLogo(final GroupDTO group, final boolean noCache) {
+  void setGroupLogo(final GroupDTO group) {
     setLogoText(group.getLongName());
     if (group.hasLogo()) {
-      getView().setLogoImage(group, noCache);
+      getView().setLogoImage(group);
       getView().setLogoImageVisible(true);
     } else {
       if (group.isPersonal()) {
@@ -251,7 +249,7 @@ public class EntityHeaderPresenter extends
 
   /**
    * Sets the logo text.
-   * 
+   *
    * @param name
    *          the new logo text
    */

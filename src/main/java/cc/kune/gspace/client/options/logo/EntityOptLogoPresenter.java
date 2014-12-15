@@ -30,22 +30,25 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.options.EntityOptions;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptLogoPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLogo {
+
+  private final ClientFileDownloadUtils downUtils;
 
   /** The entity options. */
   private final EntityOptions entityOptions;
@@ -67,7 +70,7 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   /**
    * Instantiates a new entity opt logo presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param session
@@ -81,17 +84,18 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
    */
   public EntityOptLogoPresenter(final EventBus eventBus, final Session session,
       final EntityOptions entityOptions, final Provider<UserServiceAsync> userService,
-      final I18nTranslationService i18n) {
+      final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {
     this.eventBus = eventBus;
     this.session = session;
     this.entityOptions = entityOptions;
     this.userService = userService;
     this.i18n = i18n;
+    this.downUtils = downUtils;
   }
 
   /**
    * Gets the view.
-   * 
+   *
    * @return the view
    */
   public IsWidget getView() {
@@ -100,7 +104,7 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   /**
    * Inits the.
-   * 
+   *
    * @param view
    *          the view
    */
@@ -125,7 +129,7 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   /**
    * On submit complete.
-   * 
+   *
    * @param uploader
    *          the uploader
    */
@@ -136,6 +140,7 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
         Log.info("Response uploading logo: " + response);
       }
       final GroupDTO currentGroup = session.getCurrentState().getGroup();
+      downUtils.isRecentlyChanged(currentGroup.getShortName());
       CurrentEntityChangedEvent.fire(eventBus, currentGroup.getShortName(), currentGroup.getLongName());
     } else {
       onSubmitFailed(response);
@@ -144,7 +149,7 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   /**
    * On submit failed.
-   * 
+   *
    * @param responseText
    *          the response text
    */

@@ -26,8 +26,8 @@ package cc.kune.wave.server;
 import org.waveprotocol.box.server.robots.operations.FetchProfilesService.ProfilesFetcher;
 
 import cc.kune.core.server.persist.KuneTransactional;
+import cc.kune.core.server.utils.ServerFileDownloadUtils;
 import cc.kune.core.shared.FileConstants;
-import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 import cc.kune.domain.Group;
 import cc.kune.domain.finders.GroupFinder;
 import cc.kune.wave.server.kspecific.ParticipantUtils;
@@ -39,13 +39,13 @@ import com.google.wave.api.ParticipantProfile;
 /**
  * A {@link ProfilesFetcher} implementation that assigns a default image URL for
  * the user avatar using it's initial and a random color
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class CustomInitialsProfilesFetcherImpl implements ProfilesFetcher {
   @Inject
-  private SharedFileDownloadUtils downUtils;
+  private ServerFileDownloadUtils downUtils;
   @Inject
   private GroupFinder groupFinder;
   @Inject
@@ -73,7 +73,7 @@ public class CustomInitialsProfilesFetcherImpl implements ProfilesFetcher {
             imageUrl = downUtils.getLogoImageUrl(shortName);
             name = group.getLongName();
           }
-        } catch (javax.persistence.NoResultException e) {
+        } catch (final javax.persistence.NoResultException e) {
           // User not found in this node (maybe deleted?)
           // FIXME i18n
           name = "User unknown";

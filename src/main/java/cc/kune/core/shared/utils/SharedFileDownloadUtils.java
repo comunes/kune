@@ -32,10 +32,10 @@ import cc.kune.core.shared.dto.UserSimpleDTO;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SharedFileDownloadUtils.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SharedFileDownloadUtils {
+public abstract class SharedFileDownloadUtils {
 
   /** The prefix. */
   protected String prefix;
@@ -49,7 +49,7 @@ public class SharedFileDownloadUtils {
 
   /**
    * Instantiates a new shared file download utils.
-   * 
+   *
    * @param prefix
    *          the prefix
    */
@@ -57,20 +57,22 @@ public class SharedFileDownloadUtils {
     setPrefix(prefix);
   }
 
+  public abstract void addToRecentlyChanged(String token);
+
   /**
    * Gets the cache suffix.
-   * 
+   *
    * @param noCache
    *          the no cache
    * @return the cache suffix
    */
-  public String getCacheSuffix(final boolean noCache) {
+  protected String getCacheSuffix(final boolean noCache) {
     return noCache ? UrlParam.noCacheStringSuffix() : "";
   }
 
   /**
    * Gets the group logo.
-   * 
+   *
    * @param group
    *          the group
    * @return the group logo
@@ -84,7 +86,7 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the logo avatar html.
-   * 
+   *
    * @param groupName
    *          the group name
    * @param groupHasLogo
@@ -107,33 +109,21 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the logo image url.
-   * 
+   *
    * @param groupName
    *          the group name
    * @return the logo image url
    */
   public String getLogoImageUrl(final String groupName) {
-    return getLogoImageUrl(groupName, false);
-  }
-
-  /**
-   * Gets the logo image url.
-   * 
-   * @param groupName
-   *          the group name
-   * @param noCache
-   *          the no cache
-   * @return the logo image url
-   */
-  public String getLogoImageUrl(final String groupName, final boolean noCache) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName),
-            new UrlParam(FileConstants.ONLY_USERS, false)).toString() + getCacheSuffix(noCache);
+            new UrlParam(FileConstants.ONLY_USERS, false)).toString()
+        + getCacheSuffix(isRecentlyChanged(groupName));
   }
 
   /**
    * Gets the prefix.
-   * 
+   *
    * @return the prefix
    */
   public String getPrefix() {
@@ -142,7 +132,7 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the url.
-   * 
+   *
    * @param hash
    *          the hash
    * @return the url
@@ -153,7 +143,7 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the user avatar.
-   * 
+   *
    * @param username
    *          the username
    * @return the user avatar
@@ -164,7 +154,7 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the user avatar.
-   * 
+   *
    * @param username
    *          the username
    * @param noCache
@@ -179,7 +169,7 @@ public class SharedFileDownloadUtils {
 
   /**
    * Gets the user avatar.
-   * 
+   *
    * @param user
    *          the user
    * @return the user avatar
@@ -187,6 +177,8 @@ public class SharedFileDownloadUtils {
   public String getUserAvatar(final UserSimpleDTO user) {
     return prefix + getLogoImageUrl(user.getShortName());
   }
+
+  public abstract boolean isRecentlyChanged(String token);
 
   public void setPrefix(final String prefix) {
     if (prefix == null) {
