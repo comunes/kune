@@ -114,6 +114,16 @@ do_reload() {
 }
 
 case "$1" in
+    force-start)
+    log_daemon_msg "Starting (forcing) $DESC" "$NAME"
+    START=true
+    do_start
+    case "$?" in
+        0|1) log_end_msg 0 ;;
+        2) log_end_msg 1 ;;
+    esac
+    ;;
+
     start)
     log_daemon_msg "Starting $DESC" "$NAME"
     do_start
