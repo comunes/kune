@@ -44,6 +44,7 @@ import cc.kune.core.client.cookies.CookiesManagerImpl;
 import cc.kune.core.client.errors.ErrorHandler;
 import cc.kune.core.client.groups.newgroup.GroupFieldFactory;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.services.ClientChangedLogosRegistry;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.sitebar.AbstractSignOutAction;
@@ -65,6 +66,7 @@ import cc.kune.core.client.state.impl.HistoryWrapperDefault;
 import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.core.client.state.impl.SessionDefault;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.embed.client.actions.EmbedSignInAction;
 import cc.kune.embed.client.actions.EmbedSignOutAction;
 import cc.kune.embed.client.panels.EmbedPanel;
@@ -83,7 +85,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -144,6 +146,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     eagle(TokenMatcher.class);
     s(ActionRegistryByType.class);
 
+    bind(ChangedLogosRegistry.class).to(ClientChangedLogosRegistry.class).in(Singleton.class);
     s(ClientFileDownloadUtils.class);
     s(ErrorsDialog.class);
   }
