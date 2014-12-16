@@ -4,7 +4,7 @@
 
 usage() {
     echo "$0 [-j <jar file>] [-k <kune-config>] [-w <wave-config>] [-s <jaas config>] [Debug options] [other options]
-    Example: $0 -j target/kune-0.3.0-SNAPSHOT-jar-with-dependencies.jar -l IGNORE -d -p -u 20000
+    Example: $0 -j target/kune-0.3.0-SNAPSHOT-jar-with-dependencies.jar -l IGNORE -d -p -u 20000 -o 8079 -y somekey
 
 Options:
 -j <jar file> : runs jar file generated via mvn assembly:assembly
@@ -13,6 +13,8 @@ Options:
 -l LOGLEVEL : IGNORE|DEBUG|INFO|WARN
 -x: -Xmx memory value
 -m: -Xms memory value
+-o: stop port
+-y: stop secret key
 
 Debug Options:
 -d: debug
@@ -46,8 +48,10 @@ LOGFILE=/var/log/kune/kune.log
 PIDFILE=/var/run/kune.pid
 MX=""
 MS=""
+STOP_KEY=somekey
+STOP_PORT=8079
 
-while getopts “hm:x:j:k:w:s:up:l:da” OPTION
+while getopts “hm:x:j:k:w:s:up:l:dao:y:t” OPTION
 do
     case $OPTION in
         h)
@@ -90,6 +94,15 @@ do
             ;;
         l)
             LOG_LEVEL=$OPTARG
+            ;;
+        o)
+            STOP_PORT=$OPTARG
+            ;;
+        y)
+            STOP_KEY=$OPTARG
+            ;;
+        t)
+            STOP_OPT="--stop"
             ;;
         d)
             DEBUG="y"
@@ -137,6 +150,9 @@ else
             -Dkune.server.config=$KUNE_CONFIG \
             -Dwave.server.config=$WAVE_CONFIG \
             -Djava.awt.headless=true \
+            -DSTOP.PORT=$STOP_PORT \
+            -DSTOP.KEY=$STOP_KEY \
+            $STOP_OPT \
             $MS \
 	    $MX \
 	    -jar $JAR >> $LOGFILE 2>> $LOGFILE
@@ -148,6 +164,9 @@ else
 	    -Dkune.server.config=$KUNE_CONFIG \
 	    -Dwave.server.config=$WAVE_CONFIG \
             -Djava.awt.headless=true \
+            -DSTOP.PORT=$STOP_PORT \
+            -DSTOP.KEY=$STOP_KEY \
+            $STOP_OPT \
             $MS \
 	    $MX \
 	    -jar $JAR >> $LOGFILE 2>> $LOGFILE

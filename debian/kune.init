@@ -33,6 +33,9 @@ DAEMON_ARGS="$KUNE_DEFAULT_ARGS -j /usr/share/kune/lib/kune-complete.jar -a"
 # Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
 . /lib/lsb/init-functions
 
+if hash telnet 2>/dev/null; then STOP_CMD=telnet; else
+if hash nc 2>/dev/null; then STOP_CMD=nc; fi; fi
+
 # check if param is true/yes/0
 is_true() {
     if [ "x$1" = "xtrue" -o "x$1" = "xyes" -o "x$1" = "x0" ] ; then
@@ -81,7 +84,7 @@ do_stop()
     #   1 if daemon was already stopped
     #   2 if daemon could not be stopped
     #   other if a failure occurred
-    start-stop-daemon --stop --quiet --retry=TERM/15/KILL/5 --pidfile $PIDFILE --name $NAME >> $LOGFILE 2>> $LOGFILE
+    (echo $STOP_KEY; sleep 2;  echo "stop"; sleep 2; echo "quit" ) | $STOP_CMD 127.0.0.1 $STOP_PORT >/dev/null 2>&1
     RETVAL="$?"
     [ "$RETVAL" = 2 ] && return 2
     # Wait for children to finish too if this is a daemon that forks

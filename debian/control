@@ -11,7 +11,7 @@ Standards-Version: 3.9.2
 Package: kune
 Pre-Depends: ucf
 Depends: libjmagick6-jni, sun-java6-jre | openjdk-6-jdk, mysql-server (>= 5.1) , adduser, dbconfig-common
-Recommends: openfire (>= 3.7.1), mysql-client, postfix | exim4
+Recommends: openfire (>= 3.7.1), mysql-client, postfix | exim4, telnet | nc
 Suggests:
 Architecture: all
 Description: Distributed social network of collaborative web tools

@@ -154,10 +154,6 @@ public class CustomServerMain {
 
   public static void run(Module coreSettings) throws PersistenceException,
       ConfigurationException, WaveServerException {
-    // TODO(vjrj): Enable shutdown server
-    // final ShutdownMonitor shutdown = ShutdownMonitor.getInstance();
-    // shutdown.setPort(6969);
-    // shutdown.setKey("somekey");
 
     Injector injector = Guice.createInjector(coreSettings);
     Module profilingModule = injector.getInstance(StatModule.class);

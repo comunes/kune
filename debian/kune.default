@@ -18,5 +18,5 @@ START=no
 # -d: debug
 # -u: Suspend the start (useful for debug the boot)
 # -p: port of debugger
-KUNE_DEFAULT_ARGS="-l INFO"
+KUNE_DEFAULT_ARGS="-l INFO -o 8079 -y somekey"
 
