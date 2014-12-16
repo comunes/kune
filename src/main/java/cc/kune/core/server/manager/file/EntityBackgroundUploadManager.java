@@ -38,6 +38,7 @@ import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Group;
 
@@ -46,7 +47,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityBackgroundUploadManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet {
@@ -56,6 +57,8 @@ public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet 
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
+
+  private final ChangedLogosRegistry changedLogosRegistry;
 
   /** The file manager. */
   private final FileManager fileManager;
@@ -68,7 +71,7 @@ public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet 
 
   /**
    * Instantiates a new entity background upload manager.
-   * 
+   *
    * @param kuneProperties
    *          the kune properties
    * @param groupManager
@@ -80,16 +83,18 @@ public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet 
    */
   @Inject
   public EntityBackgroundUploadManager(final KuneProperties kuneProperties,
-      final GroupManager groupManager, final I18nTranslationService i18n, final FileManager fileManager) {
+      final GroupManager groupManager, final I18nTranslationService i18n, final FileManager fileManager,
+      final ChangedLogosRegistry changedLogosRegistry) {
     super(kuneProperties);
     this.groupManager = groupManager;
     this.i18n = i18n;
     this.fileManager = fileManager;
+    this.changedLogosRegistry = changedLogosRegistry;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.manager.file.FileGwtUploadAbstractServlet#
    * createUploadedFile(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String,
@@ -132,7 +137,7 @@ public class EntityBackgroundUploadManager extends FileGwtUploadAbstractServlet 
 
       LOG.info("Mimetype: " + mimeType);
       groupManager.setGroupBackgroundImage(group, filenameUTF8, mimeTypeS);
-
+      changedLogosRegistry.add(group.getShortName());
     } catch (final Exception e) {
       return i18n.t("Error uploading background");
     }

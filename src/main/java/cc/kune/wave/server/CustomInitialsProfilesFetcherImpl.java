@@ -71,6 +71,7 @@ public class CustomInitialsProfilesFetcherImpl implements ProfilesFetcher {
           if (group != Group.NO_GROUP && group.hasLogo()) {
             // Know group and have a configured logo
             imageUrl = downUtils.getLogoImageUrl(shortName);
+            // FIXME: check if should be added a noCache
             name = group.getLongName();
           }
         } catch (final javax.persistence.NoResultException e) {

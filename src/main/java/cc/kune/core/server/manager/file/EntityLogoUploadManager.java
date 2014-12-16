@@ -42,6 +42,7 @@ import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.AccessRol;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.domain.BasicMimeType;
 import cc.kune.domain.Group;
 
@@ -50,7 +51,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityLogoUploadManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
@@ -61,6 +62,8 @@ public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = 1L;
 
+  private final ChangedLogosRegistry changedLogosRegistry;
+
   /** The group manager. */
   private final GroupManager groupManager;
 
@@ -69,7 +72,7 @@ public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
 
   /**
    * Instantiates a new entity logo upload manager.
-   * 
+   *
    * @param kuneProperties
    *          the kune properties
    * @param groupManager
@@ -79,15 +82,16 @@ public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
    */
   @Inject
   public EntityLogoUploadManager(final KuneProperties kuneProperties, final GroupManager groupManager,
-      final I18nTranslationService i18n) {
+      final I18nTranslationService i18n, final ChangedLogosRegistry changedLogosRegistry) {
     super(kuneProperties);
     this.groupManager = groupManager;
     this.i18n = i18n;
+    this.changedLogosRegistry = changedLogosRegistry;
   }
 
   /**
    * Creates the uploaded file.
-   * 
+   *
    * @param stateToken
    *          the state token
    * @param mimeTypeS
@@ -124,6 +128,7 @@ public class EntityLogoUploadManager extends FileGwtUploadAbstractServlet {
       group.setLogo(FileUtils.getBytesFromFile(tmpDestFile));
       group.setLogoMime(mimeType);
       logFileDel(tmpDestFile.delete());
+      changedLogosRegistry.add(group.getShortName());
     } else {
       logFileDel(tmpDestFile.delete());
       throw new Exception("Cannot create group logo thumb");

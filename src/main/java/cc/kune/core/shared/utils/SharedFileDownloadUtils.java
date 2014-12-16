@@ -39,11 +39,13 @@ public abstract class SharedFileDownloadUtils {
 
   /** The prefix. */
   protected String prefix;
+  private final ChangedLogosRegistry recentlyChanged;
 
   /**
    * Instantiates a new shared file download utils.
    */
-  public SharedFileDownloadUtils() {
+  public SharedFileDownloadUtils(final ChangedLogosRegistry recentlyChanged) {
+    this.recentlyChanged = recentlyChanged;
     this.prefix = "";
   }
 
@@ -53,21 +55,9 @@ public abstract class SharedFileDownloadUtils {
    * @param prefix
    *          the prefix
    */
-  public SharedFileDownloadUtils(final String prefix) {
+  public SharedFileDownloadUtils(final String prefix, final ChangedLogosRegistry recentlyChanged) {
+    this(recentlyChanged);
     setPrefix(prefix);
-  }
-
-  public abstract void addToRecentlyChanged(String token);
-
-  /**
-   * Gets the cache suffix.
-   *
-   * @param noCache
-   *          the no cache
-   * @return the cache suffix
-   */
-  protected String getCacheSuffix(final boolean noCache) {
-    return noCache ? UrlParam.noCacheStringSuffix() : "";
   }
 
   /**
@@ -117,8 +107,7 @@ public abstract class SharedFileDownloadUtils {
   public String getLogoImageUrl(final String groupName) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName),
-            new UrlParam(FileConstants.ONLY_USERS, false)).toString()
-        + getCacheSuffix(isRecentlyChanged(groupName));
+            new UrlParam(FileConstants.ONLY_USERS, false)).toString() + noCacheSuffix(groupName);
   }
 
   /**
@@ -149,22 +138,9 @@ public abstract class SharedFileDownloadUtils {
    * @return the user avatar
    */
   public String getUserAvatar(final String username) {
-    return getUserAvatar(username, false);
-  }
-
-  /**
-   * Gets the user avatar.
-   *
-   * @param username
-   *          the username
-   * @param noCache
-   *          the no cache
-   * @return the user avatar
-   */
-  public String getUserAvatar(final String username, final boolean noCache) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, username),
-            new UrlParam(FileConstants.ONLY_USERS, true)).toString() + getCacheSuffix(noCache);
+            new UrlParam(FileConstants.ONLY_USERS, true)).toString() + noCacheSuffix(username);
   }
 
   /**
@@ -178,7 +154,9 @@ public abstract class SharedFileDownloadUtils {
     return prefix + getLogoImageUrl(user.getShortName());
   }
 
-  public abstract boolean isRecentlyChanged(String token);
+  public String noCacheSuffix(final String shortName) {
+    return recentlyChanged.isRecentlyChanged(shortName) ? UrlParam.noCacheStringSuffix() : "";
+  }
 
   public void setPrefix(final String prefix) {
     if (prefix == null) {

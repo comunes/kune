@@ -121,8 +121,10 @@ import cc.kune.core.server.stats.StatsServiceDefault;
 import cc.kune.core.server.tool.ServerToolRegistry;
 import cc.kune.core.server.users.UserInfoService;
 import cc.kune.core.server.users.UserInfoServiceDefault;
+import cc.kune.core.server.utils.ServerChangedLogosRegistry;
 import cc.kune.core.server.xmpp.XmppManager;
 import cc.kune.core.server.xmpp.XmppManagerDefault;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.hspace.client.ClientStatsService;
 import cc.kune.lists.client.rpc.ListsService;
 import cc.kune.lists.server.ListServerService;
@@ -139,7 +141,7 @@ import com.google.inject.matcher.Matchers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PlatformServerModule.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -235,6 +237,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(NotificationSender.class).to(NotificationSenderDefault.class).in(Singleton.class);
     bind(CronServerTasksManager.class).in(Singleton.class);
     bind(XMLActionReader.class).in(Singleton.class);
+    bind(ChangedLogosRegistry.class).to(ServerChangedLogosRegistry.class).in(Singleton.class);
 
     bindInterceptor(Matchers.any(), Matchers.annotatedWith(Authenticated.class),
         outermostCall(new AuthenticatedMethodInterceptor()));

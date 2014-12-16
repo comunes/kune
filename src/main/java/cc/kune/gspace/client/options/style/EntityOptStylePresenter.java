@@ -40,6 +40,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.gspace.client.options.EntityOptions;
 import cc.kune.gspace.client.style.ClearBackgroundImageEvent;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
@@ -62,6 +63,8 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
 
   /** The back manager. */
   private final GSpaceBackgroundManager backManager;
+
+  private final ChangedLogosRegistry changedLogosRegistry;
 
   /** The entity options. */
   private final EntityOptions entityOptions;
@@ -113,7 +116,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
       final StateManager stateManager, final EntityOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GSpaceBackgroundManager backManager,
       final GSpaceThemeSelectorPresenter styleSelector, final I18nTranslationService i18n,
-      final ClientFileDownloadUtils fileDownloadUtils) {
+      final ClientFileDownloadUtils fileDownloadUtils, final ChangedLogosRegistry changedLogosRegistry) {
     this.eventBus = eventBus;
     this.session = session;
     this.stateManager = stateManager;
@@ -122,6 +125,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
     this.backManager = backManager;
     this.i18n = i18n;
     this.fileDownloadUtils = fileDownloadUtils;
+    this.changedLogosRegistry = changedLogosRegistry;
   }
 
   /**
@@ -130,13 +134,13 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
   private void clearBackImage() {
     groupService.get().clearGroupBackImage(session.getUserHash(), session.getCurrentStateToken(),
         new AsyncCallbackSimple<GroupDTO>() {
-          @Override
-          public void onSuccess(final GroupDTO result) {
-            view.clearBackImage();
-            backManager.clearBackgroundImage();
-            ClearBackgroundImageEvent.fire(eventBus);
-          }
-        });
+      @Override
+      public void onSuccess(final GroupDTO result) {
+        view.clearBackImage();
+        backManager.clearBackgroundImage();
+        ClearBackgroundImageEvent.fire(eventBus);
+      }
+    });
   }
 
   /**
@@ -172,21 +176,21 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
     });
     eventBus.addHandler(SetBackgroundImageEvent.getType(),
         new SetBackgroundImageEvent.SetBackgroundImageHandler() {
-          @Override
-          public void onSetBackImage(final SetBackgroundImageEvent event) {
-            backManager.setBackgroundImage();
-            final StateToken token = event.getToken();
-            fileDownloadUtils.addToRecentlyChanged(token.getGroup());
-            setBackImage(token);
-          }
-        });
+      @Override
+      public void onSetBackImage(final SetBackgroundImageEvent event) {
+        backManager.setBackgroundImage();
+        final StateToken token = event.getToken();
+        changedLogosRegistry.add(token.getGroup());
+        setBackImage(token);
+      }
+    });
     eventBus.addHandler(ClearBackgroundImageEvent.getType(),
         new ClearBackgroundImageEvent.ClearBackgroundImageHandler() {
-          @Override
-          public void onClearBackImage(final ClearBackgroundImageEvent event) {
-            view.clearBackImage();
-          }
-        });
+      @Override
+      public void onClearBackImage(final ClearBackgroundImageEvent event) {
+        view.clearBackImage();
+      }
+    });
     view.addOnStartUploadHandler(new OnStartUploaderHandler() {
       @Override
       public void onStart(final IUploader uploader) {
@@ -210,7 +214,7 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
    */
   private void onSubmitComplete(final IUploader uploader) {
     // final String response = uploader.getServerMessage().getMessage();
-    final String response = uploader.getServerInfo().message;
+    final String response = uploader.getServerMessage().getMessage();
     if (uploader.getStatus() == Status.SUCCESS) {
       if (response != null) {
         Log.info("Response uploading background: " + response);

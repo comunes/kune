@@ -29,10 +29,10 @@ import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
-import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.gspace.client.options.UserOptions;
 
 import com.google.inject.Inject;
@@ -69,8 +69,8 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
   public UserOptLogoPresenter(final EventBus eventBus, final Session session,
       final UserOptions entityOptions, final StateManager stateManager,
       final Provider<UserServiceAsync> userService, final UserOptLogoView view,
-      final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {
-    super(eventBus, session, entityOptions, userService, i18n, downUtils);
+      final I18nTranslationService i18n, final ChangedLogosRegistry changedLogos) {
+    super(eventBus, session, entityOptions, userService, i18n, changedLogos);
     init(view);
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
@@ -93,7 +93,7 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#onSubmitComplete
    * (gwtupload.client.IUploader)
@@ -105,17 +105,17 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
     if (session.getCurrentUser().getShortName().equals(group.getShortName())) {
       userService.get().getUserAvatarBaser64(session.getUserHash(), group.getStateToken(),
           new AsyncCallbackSimple<String>() {
-        @Override
-        public void onSuccess(final String photoBinary) {
-          AvatarChangedEvent.fire(eventBus, photoBinary);
-        }
-      });
+            @Override
+            public void onSuccess(final String photoBinary) {
+              AvatarChangedEvent.fire(eventBus, photoBinary);
+            }
+          });
     }
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#setState()
    */
   @Override

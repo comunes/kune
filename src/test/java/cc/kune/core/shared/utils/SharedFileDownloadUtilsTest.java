@@ -27,6 +27,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import cc.kune.core.server.utils.ServerFileDownloadUtils;
 import cc.kune.core.shared.FileConstants;
@@ -59,9 +60,10 @@ public class SharedFileDownloadUtilsTest {
    */
   @Before
   public void before() {
-    utilPrefix = new ServerFileDownloadUtils("http://example.org");
-    utilPrefixWithSlash = new ServerFileDownloadUtils("http://example.org/");
-    utilNoPrefix = new ServerFileDownloadUtils("");
+    final ChangedLogosRegistry changedLogos = Mockito.mock(ChangedLogosRegistry.class);
+    utilPrefix = new ServerFileDownloadUtils("http://example.org", changedLogos);
+    utilPrefixWithSlash = new ServerFileDownloadUtils("http://example.org/", changedLogos);
+    utilNoPrefix = new ServerFileDownloadUtils("", changedLogos);
     prefixUtils = new ServerFileDownloadUtils[] { utilPrefix, utilPrefixWithSlash };
   }
 

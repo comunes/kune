@@ -22,7 +22,7 @@
  */
 package cc.kune.core.server.utils;
 
-import cc.kune.core.server.persist.CachedCollection;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 
 import com.google.inject.Inject;
@@ -36,12 +36,9 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class ServerFileDownloadUtils extends SharedFileDownloadUtils {
-
-  private CachedCollection<String, Boolean> recentlyChanged;
-
   @Inject
-  public ServerFileDownloadUtils() {
-    init();
+  public ServerFileDownloadUtils(final ChangedLogosRegistry changedLogosRegistry) {
+    super(changedLogosRegistry);
   }
 
   /**
@@ -50,24 +47,8 @@ public class ServerFileDownloadUtils extends SharedFileDownloadUtils {
    * @param properties
    *          the properties
    */
-  public ServerFileDownloadUtils(final String prefix) {
-    super(prefix);
-    init();
-  }
-
-  @Override
-  public void addToRecentlyChanged(final String token) {
-    recentlyChanged.put(token, Boolean.TRUE);
-  }
-
-  private void init() {
-    // We add a cache of recently changed logos, etc
-    recentlyChanged = new CachedCollection<String, Boolean>(100);
-  }
-
-  @Override
-  public boolean isRecentlyChanged(final String token) {
-    return recentlyChanged.containsKey(token);
+  public ServerFileDownloadUtils(final String prefix, final ChangedLogosRegistry changedLogosRegistry) {
+    super(prefix, changedLogosRegistry);
   }
 
 }

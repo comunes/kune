@@ -22,13 +22,12 @@
  \*/
 package cc.kune.core.client.services;
 
-import java.util.ArrayList;
-
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.state.SessionInstance;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 
 import com.google.gwt.user.client.ui.RootPanel;
@@ -41,11 +40,10 @@ import com.google.inject.Inject;
  */
 public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
 
-  private final ArrayList<String> recentlyChanged;
-
   @Inject
-  public ClientFileDownloadUtils() {
-    recentlyChanged = new ArrayList<String>();
+  public ClientFileDownloadUtils(final ChangedLogosRegistry recentlyChangedRegistry) {
+    super(recentlyChangedRegistry);
+
   }
 
   /**
@@ -54,11 +52,6 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
    *
    * @param token
    */
-
-  @Override
-  public void addToRecentlyChanged(final String token) {
-    recentlyChanged.add(token);
-  }
 
   /**
    * Calculate url.
@@ -108,7 +101,7 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
    */
   public String getBackgroundImageUrl(final StateToken token) {
     return new Url(prefix + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
-        token.toString())).toString() + getCacheSuffix(isRecentlyChanged(token.getGroup()));
+        token.toString())).toString() + noCacheSuffix(token.getGroup());
   }
 
   /**
@@ -124,7 +117,7 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
     final String group = token.getGroup();
     return new Url(prefix + FileConstants.BACKDOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN,
         group.toString()), new UrlParam(FileConstants.IMGSIZE, imageSize.toString())).toString()
-        + getCacheSuffix(isRecentlyChanged(group));
+        + noCacheSuffix(group);
   }
 
   /**
@@ -161,11 +154,6 @@ public class ClientFileDownloadUtils extends SharedFileDownloadUtils {
    */
   public String getUrl(final StateToken token) {
     return calculateUrl(token, false, false);
-  }
-
-  @Override
-  public boolean isRecentlyChanged(final String token) {
-    return recentlyChanged.contains(token);
   }
 
 }

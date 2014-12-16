@@ -26,15 +26,17 @@ import static org.junit.Assert.assertNotNull;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.core.server.utils.AbsoluteFileDownloadUtils;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class NotificationHtmlHelperTest.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NotificationHtmlHelperTest {
@@ -63,7 +65,7 @@ public class NotificationHtmlHelperTest {
   @Before
   public void before() {
     helper = new NotificationHtmlHelper(new AbsoluteFileDownloadUtils(new KuneBasicProperties(
-        new KunePropertiesDefault("kune.properties"))));
+        new KunePropertiesDefault("kune.properties")), Mockito.mock(ChangedLogosRegistry.class)));
   }
 
 }

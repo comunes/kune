@@ -27,18 +27,19 @@ import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.gspace.client.options.UserOptions;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPresenter;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptStylePresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptStylePresenter extends EntityOptStylePresenter implements UserOptStyle {
@@ -47,7 +48,7 @@ public class UserOptStylePresenter extends EntityOptStylePresenter implements Us
 
   /**
    * Instantiates a new user opt style presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param session
@@ -74,9 +75,10 @@ public class UserOptStylePresenter extends EntityOptStylePresenter implements Us
       final StateManager stateManager, final UserOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GSpaceBackgroundManager backManager,
       final UserOptStyleView view, final GSpaceThemeSelectorPresenter styleSelector,
-      final I18nTranslationService i18n, final ClientFileDownloadUtils fileDownUtils) {
+      final I18nTranslationService i18n, final ClientFileDownloadUtils fileDownUtils,
+      final ChangedLogosRegistry changedLogosRegistry) {
     super(eventBus, session, stateManager, entityOptions, groupService, backManager, styleSelector,
-        i18n, fileDownUtils);
+        i18n, fileDownUtils, changedLogosRegistry);
     init(view);
   }
 }

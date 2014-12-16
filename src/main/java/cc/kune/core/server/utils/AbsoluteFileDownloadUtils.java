@@ -23,6 +23,7 @@
 package cc.kune.core.server.utils;
 
 import cc.kune.core.server.properties.KuneBasicProperties;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -46,8 +47,9 @@ public class AbsoluteFileDownloadUtils extends ServerFileDownloadUtils {
    *          the properties
    */
   @Inject
-  public AbsoluteFileDownloadUtils(final KuneBasicProperties properties) {
-    super(properties.getSiteUrl());
+  public AbsoluteFileDownloadUtils(final KuneBasicProperties properties,
+      final ChangedLogosRegistry registry) {
+    super(properties.getSiteUrl(), registry);
     this.properties = properties;
   }
 

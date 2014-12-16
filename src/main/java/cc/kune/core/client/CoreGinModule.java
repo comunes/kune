@@ -78,6 +78,7 @@ import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceHelper;
 import cc.kune.core.client.rpcservices.SocialNetServiceHelper;
+import cc.kune.core.client.services.ClientChangedLogosRegistry;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.sitebar.AbstractSignOutAction;
@@ -135,6 +136,7 @@ import cc.kune.core.client.ws.entheader.EntityHeader;
 import cc.kune.core.client.ws.entheader.EntityHeaderPanel;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.lists.client.rpc.ListsServiceHelper;
 
 import com.google.inject.Singleton;
@@ -155,7 +157,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -275,8 +277,10 @@ public class CoreGinModule extends ExtendedGinModule {
     s(NewMenusForTypeIdsRegistry.class);
     eagle(CoreParts.class);
 
-    // SN
+    bind(ChangedLogosRegistry.class).to(ClientChangedLogosRegistry.class).in(Singleton.class);
     s(ClientFileDownloadUtils.class);
+
+    // SN
     s(GroupSNAdminsMenuItemsRegistry.class);
     s(GroupSNCollabsMenuItemsRegistry.class);
     s(GroupSNPendingsMenuItemsRegistry.class);

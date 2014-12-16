@@ -30,9 +30,9 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
-import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GroupDTO;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.options.EntityOptions;
 
@@ -48,7 +48,7 @@ import com.google.web.bindery.event.shared.EventBus;
  */
 public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLogo {
 
-  private final ClientFileDownloadUtils downUtils;
+  private final ChangedLogosRegistry changedLogosRegistry;
 
   /** The entity options. */
   private final EntityOptions entityOptions;
@@ -84,13 +84,13 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
    */
   public EntityOptLogoPresenter(final EventBus eventBus, final Session session,
       final EntityOptions entityOptions, final Provider<UserServiceAsync> userService,
-      final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {
+      final I18nTranslationService i18n, final ChangedLogosRegistry changedLogosRegistry) {
     this.eventBus = eventBus;
     this.session = session;
     this.entityOptions = entityOptions;
     this.userService = userService;
     this.i18n = i18n;
-    this.downUtils = downUtils;
+    this.changedLogosRegistry = changedLogosRegistry;
   }
 
   /**
@@ -134,13 +134,13 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
    *          the uploader
    */
   public void onSubmitComplete(final IUploader uploader) {
-    final String response = uploader.getServerInfo().message;
+    final String response = uploader.getServerMessage().getMessage();
     if (uploader.getStatus() == Status.SUCCESS) {
       if (response != null) {
         Log.info("Response uploading logo: " + response);
       }
       final GroupDTO currentGroup = session.getCurrentState().getGroup();
-      downUtils.isRecentlyChanged(currentGroup.getShortName());
+      changedLogosRegistry.add(currentGroup.getShortName());
       CurrentEntityChangedEvent.fire(eventBus, currentGroup.getShortName(), currentGroup.getLongName());
     } else {
       onSubmitFailed(response);
