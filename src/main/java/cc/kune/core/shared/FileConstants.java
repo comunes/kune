@@ -25,7 +25,7 @@ package cc.kune.core.shared;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FileConstants.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class FileConstants {
@@ -94,6 +94,9 @@ public final class FileConstants {
 
   /** The Constant USER_LOGO_FIELD. */
   public final static String USER_LOGO_FIELD = "k-ulogov-ff";
+
+  /** The Constant WHITE_PIXEL. */
+  public final static String WHITE_PIXEL = "/others/white.png";
 
   /** The Constant WORLD_AVATAR_IMAGE. */
   public final static String WORLD_AVATAR_IMAGE = ASITE_PREFIX + "images/world-90.gif";

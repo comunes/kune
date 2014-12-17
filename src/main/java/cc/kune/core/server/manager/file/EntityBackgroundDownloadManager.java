@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
@@ -35,6 +36,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.waveprotocol.box.server.CoreSettings;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.services.ImageSize;
@@ -45,12 +47,13 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 // TODO: Auto-generated Javadoc
 /**
  * Some snippets from:
  * http://www.onjava.com/pub/a/onjava/excerpt/jebp_3/index1.html?page=1
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 
@@ -89,9 +92,18 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
   /** The last modified. */
   private long lastModified = 0l;
 
+  private final String whiteFile;
+
+  @Inject
+  public EntityBackgroundDownloadManager(
+      @Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
+    whiteFile = FileDownloadManagerUtils.searchFileInResourceBases(resourceBases,
+        FileConstants.WHITE_PIXEL).getPath();
+  }
+
   /**
    * Builds the response.
-   * 
+   *
    * @param statetoken
    *          the statetoken
    * @param filename
@@ -157,14 +169,15 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
     final ImageSize imgsize = imageSizeS == null ? null : ImageSize.valueOf(imageSizeS);
 
     try {
+      final OutputStream out = resp.getOutputStream();
       final Group group = groupManager.findByShortName(stateToken.getGroup());
       if (!group.hasBackground()) {
-        FileDownloadManagerUtils.returnNotFound404(resp);
+        // Don't have background so we return a white png pixel instead of a 404
+        FileDownloadManagerUtils.returnFile(whiteFile, out);
         return;
       }
       final String absFilename = buildResponse(stateToken, group.getBackgroundImage(),
           group.getBackgroundMime(), imgsize, resp);
-      final OutputStream out = resp.getOutputStream();
       FileDownloadManagerUtils.returnFile(absFilename, out);
     } catch (final ContentNotFoundException e) {
       FileDownloadManagerUtils.returnNotFound404(resp);
