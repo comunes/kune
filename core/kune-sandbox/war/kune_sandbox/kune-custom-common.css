@@ -116,7 +116,7 @@ button.k-button-left:hover {
   outline: 0 none;
 }
 
-button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,input[type="reset"][disabled],input[type="button"][disabled]:active,input[type="button"][disabled],select[disabled]>input[type="button"],select[disabled]>input[type="button"]:active,input[type="submit"][disabled]:active,input[type="submit"][disabled],.k-button-disabled,button.k-button-disabled
+button[disabled]:active,button[disabled],input[type="reset"][disabled]:active,input[type="reset"][disabled],input[type="button"][disabled]:active,input[type="button"][disabled],select[disabled]>input[type="button"],select[disabled]>input[type="button"]:active,input[type="submit"][disabled]:active,input[type="submit"][disabled],.k-button-disabled,button.k-button-disabled,button[disabled].k-button-right,button[disabled].k-button-left,button[disabled].k-button-center,button[disabled].k-button-alone
   {
   color: gray !important;
   border-color: #CCCCCC !important;

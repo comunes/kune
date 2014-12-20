@@ -3,7 +3,7 @@
 
 }
 
-.k-popup-bottom-centered { /*	z-index:100000; */
+.k-popup-bottom-centered { /*  z-index:100000; */
 
 }
 
@@ -141,6 +141,11 @@
   margin: 5px;
 }
 
+.k-dialog-intro {
+  color: #999999;
+  margin-bottom: 5px;
+}
+
 .k-dialog-title div {
   color: #552200;
   font-size: 16px;
@@ -162,7 +167,7 @@
 }
 
 .k-dialog-btn-area button {
-  margin: 10px 5px;
+  margin: 10px 5px !important;
 }
 
 .k-dialog-btn-area div { /* margin: 10px */
@@ -217,11 +222,13 @@
 .oc-user-msg {
   background-color: #FFCC00;
   padding: 3px;
+	z-index: 1000;
 }
 
 .oc-user-msg-popup {
   padding: 0px;
   border: 0px;
+	z-index: 1000;
 }
 
 .oc-floatleft {

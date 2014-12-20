@@ -36,12 +36,11 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.i18n.I18nTranslationServiceMocked;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class KuneSampleGinModule.
  *

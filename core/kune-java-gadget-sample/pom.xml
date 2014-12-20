@@ -4,8 +4,8 @@
   <parent>
     <artifactId>kune-core</artifactId>
     <groupId>cc.kune</groupId>
-    <version>0.0.1-SNAPSHOT</version>
     <relativePath>..</relativePath>
+    <version>0.3.0-SNAPSHOT</version>
   </parent>
   <artifactId>kune-java-gadget-sample</artifactId>
   <name>A gadget sample for kune</name>
@@ -72,4 +72,5 @@
     <name>Comunes Collective</name>
     <url>http://comunes.org</url>
   </organization>
+  <groupId>cc.kune</groupId>
 </project>

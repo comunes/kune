@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module rename-to='kune_sandbox'>
   <!-- Inherit the core Web Toolkit stuff. -->
-  <inherits name='com.google.gwt.user.User'/>
-  <inherits name="cc.kune.common.KuneCommon"/>
+  <inherits name='com.google.gwt.user.User' />
+  <inherits name="cc.kune.common.KuneCommon" />
   <!-- <inherits name="cc.kune.wave.KuneWave" /> -->
   <!-- <inherits name="org.adamtacy.GWTEffects"></inherits> -->
   <!-- Inherit the default GWT style sheet. You can change -->
@@ -12,12 +12,17 @@
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
   <!-- Other module inherits -->
-  <!-- Specify the app entry point class. -->
-  <entry-point class='cc.kune.sandbox.client.KuneSandboxEntryPoint'/>
+
   <!-- Specify the paths for translatable code -->
-  <source path='client'/>
-  <public path="public"/>
-  <stylesheet src="kune-sandbox.css"/>
-  <inherits name="com.extjs.gxt.ui.GXT"/>
+  <source path='client' />
+  <source path='shared' />
+  <public path="public" />
+  <stylesheet src="Kune _sandbox.css" />
+  <inherits name="com.extjs.gxt.ui.GXT" />
   <!-- <inherits name="plupload.Plupload"/> -->
+  
+  <add-linker name="xsiframe" />
+
+  <!-- Specify the app entry point class. -->
+  <entry-point class='cc.kune.sandbox.client.KuneSandboxEntryPoint' />
 </module>

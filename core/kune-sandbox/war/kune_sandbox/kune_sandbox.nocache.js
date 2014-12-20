@@ -1,11 +1,67 @@
-function kune_sandbox(){var Q='',wb='" for "gwt:onLoadErrorFn"',ub='" for "gwt:onPropertyErrorFn"',db='"><\/script>',fb='#',Ub='.cache.html',hb='/',Ob='0883AA2213D068B534727DAA99999DD0',Pb='19059E767D86EE7AEEFD437074F6182B',Qb='1BD7AA02497D1629E2703372B48B49D3',Rb='6077E51F63F5B5E0039C304C67AD0417',Tb=':',ob='::',cc='<script defer="defer">kune_sandbox.onInjectionDone(\'kune_sandbox\')<\/script>',cb='<script id="',rb='=',gb='?',tb='Bad handler "',Sb='DB4D98CDC03D9CD1844A0A7AEC5C4B1F',bc='DOMContentLoaded',eb='SCRIPT',bb='__gwt_marker_kune_sandbox',ib='base',$='baseUrl',U='begin',T='bootstrap',Vb='cbg_button.css',kb='clear.cache.gif',qb='content',Z='end',Ib='gecko',Jb='gecko1_8',V='gwt.codesvr=',W='gwt.hosted=',X='gwt.hybrid',vb='gwt:onLoadErrorFn',sb='gwt:onPropertyErrorFn',pb='gwt:property',$b='head',Mb='hosted.html?kune_sandbox',Zb='href',Hb='ie6',Gb='ie8',xb='iframe',jb='img',yb="javascript:''",_b='kune-common.css',ac='kune-sandbox.css',R='kune_sandbox',ab='kune_sandbox.nocache.js',nb='kune_sandbox::',Wb='link',Lb='loadExternalRefs',lb='meta',Ab='moduleRequested',Y='moduleStartup',Fb='msie',mb='name',Cb='opera',zb='position:absolute;width:0;height:0;border:none',Xb='rel',Eb='safari',_='script',Nb='selectingPermutation',S='startup',Yb='stylesheet',Kb='unknown',Bb='user.agent',Db='webkit';var m=window,n=document,o=m.__gwtStatsEvent?function(a){return m.__gwtStatsEvent(a)}:null,p=m.__gwtStatsSessionId?m.__gwtStatsSessionId:null,q,r,s,t=Q,u={},v=[],w=[],x=[],y=0,z,A;o&&o({moduleName:R,sessionId:p,subSystem:S,evtGroup:T,millis:(new Date).getTime(),type:U});if(!m.__gwt_stylesLoaded){m.__gwt_stylesLoaded={}}if(!m.__gwt_scriptsLoaded){m.__gwt_scriptsLoaded={}}function B(){var b=false;try{var c=m.location.search;return (c.indexOf(V)!=-1||(c.indexOf(W)!=-1||m.external&&m.external.gwtOnLoad))&&c.indexOf(X)==-1}catch(a){}B=function(){return b};return b}
-function C(){if(q&&r){var b=n.getElementById(R);var c=b.contentWindow;if(B()){c.__gwt_getProperty=function(a){return I(a)}}kune_sandbox=null;c.gwtOnLoad(z,R,t,y);o&&o({moduleName:R,sessionId:p,subSystem:S,evtGroup:Y,millis:(new Date).getTime(),type:Z})}}
-function D(){if(u[$]){t=u[$];return t}var e;var f=n.getElementsByTagName(_);for(var g=0;g<f.length;++g){if(f[g].src.indexOf(ab)!=-1){e=f[g]}}if(!e){var h=bb;var i;n.write(cb+h+db);i=n.getElementById(h);e=i&&i.previousSibling;while(e&&e.tagName!=eb){e=e.previousSibling}}function j(a){var b=a.lastIndexOf(fb);if(b==-1){b=a.length}var c=a.indexOf(gb);if(c==-1){c=a.length}var d=a.lastIndexOf(hb,Math.min(c,b));return d>=0?a.substring(0,d+1):Q}
-;if(e&&e.src){t=j(e.src)}if(t==Q){var k=n.getElementsByTagName(ib);if(k.length>0){t=k[k.length-1].href}else{t=j(n.location.href)}}else if(t.match(/^\w+:\/\//)){}else{var l=n.createElement(jb);l.src=t+kb;t=j(l.src)}if(i){i.parentNode.removeChild(i)}return t}
-function E(){var b=document.getElementsByTagName(lb);for(var c=0,d=b.length;c<d;++c){var e=b[c],f=e.getAttribute(mb),g;if(f){f=f.replace(nb,Q);if(f.indexOf(ob)>=0){continue}if(f==pb){g=e.getAttribute(qb);if(g){var h,i=g.indexOf(rb);if(i>=0){f=g.substring(0,i);h=g.substring(i+1)}else{f=g;h=Q}u[f]=h}}else if(f==sb){g=e.getAttribute(qb);if(g){try{A=eval(g)}catch(a){alert(tb+g+ub)}}}else if(f==vb){g=e.getAttribute(qb);if(g){try{z=eval(g)}catch(a){alert(tb+g+wb)}}}}}}
-function H(a,b){var c=x;for(var d=0,e=a.length-1;d<e;++d){c=c[a[d]]||(c[a[d]]=[])}c[a[e]]=b}
-function I(a){var b=w[a](),c=v[a];if(b in c){return b}var d=[];for(var e in c){d[c[e]]=e}if(A){A(a,d,b)}throw null}
-var J;function K(){if(!J){J=true;var a=n.createElement(xb);a.src=yb;a.id=R;a.style.cssText=zb;a.tabIndex=-1;n.body.appendChild(a);o&&o({moduleName:R,sessionId:p,subSystem:S,evtGroup:Y,millis:(new Date).getTime(),type:Ab});a.contentWindow.location.replace(t+M)}}
-w[Bb]=function(){var b=navigator.userAgent.toLowerCase();var c=function(a){return parseInt(a[1])*1000+parseInt(a[2])};if(b.indexOf(Cb)!=-1){return Cb}else if(b.indexOf(Db)!=-1){return Eb}else if(b.indexOf(Fb)!=-1){if(document.documentMode>=8){return Gb}else{var d=/msie ([0-9]+)\.([0-9]+)/.exec(b);if(d&&d.length==3){var e=c(d);if(e>=6000){return Hb}}}}else if(b.indexOf(Ib)!=-1){return Jb}return Kb};v[Bb]={gecko1_8:0,ie6:1,ie8:2,opera:3,safari:4};kune_sandbox.onScriptLoad=function(){if(J){r=true;C()}};kune_sandbox.onInjectionDone=function(){q=true;o&&o({moduleName:R,sessionId:p,subSystem:S,evtGroup:Lb,millis:(new Date).getTime(),type:Z});C()};E();D();var L;var M;if(B()){if(m.external&&(m.external.initModule&&m.external.initModule(R))){m.location.reload();return}M=Mb;L=Q}o&&o({moduleName:R,sessionId:p,subSystem:S,evtGroup:T,millis:(new Date).getTime(),type:Nb});if(!B()){try{H([Jb],Ob);H([Cb],Pb);H([Hb],Qb);H([Eb],Rb);H([Gb],Sb);L=x[I(Bb)];var N=L.indexOf(Tb);if(N!=-1){y=Number(L.substring(N+1));L=L.substring(0,N)}M=L+Ub}catch(a){return}}var O;function P(){if(!s){s=true;if(!__gwt_stylesLoaded[Vb]){var a=n.createElement(Wb);__gwt_stylesLoaded[Vb]=a;a.setAttribute(Xb,Yb);a.setAttribute(Zb,t+Vb);n.getElementsByTagName($b)[0].appendChild(a)}if(!__gwt_stylesLoaded[_b]){var a=n.createElement(Wb);__gwt_stylesLoaded[_b]=a;a.setAttribute(Xb,Yb);a.setAttribute(Zb,t+_b);n.getElementsByTagName($b)[0].appendChild(a)}if(!__gwt_stylesLoaded[ac]){var a=n.createElement(Wb);__gwt_stylesLoaded[ac]=a;a.setAttribute(Xb,Yb);a.setAttribute(Zb,t+ac);n.getElementsByTagName($b)[0].appendChild(a)}C();if(n.removeEventListener){n.removeEventListener(bc,P,false)}if(O){clearInterval(O)}}}
-if(n.addEventListener){n.addEventListener(bc,function(){K();P()},false)}var O=setInterval(function(){if(/loaded|complete/.test(n.readyState)){K();P()}},50);o&&o({moduleName:R,sessionId:p,subSystem:S,evtGroup:T,millis:(new Date).getTime(),type:Z});o&&o({moduleName:R,sessionId:p,subSystem:S,evtGroup:Lb,millis:(new Date).getTime(),type:U});n.write(cc)}
-kune_sandbox();
+/*
+ * Copyright 2014 Google Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
+ */
+
+/**
+ * This startup script is used when we run superdevmode from an app server.
+ */
+(function($wnd, $doc){
+  // document.head does not exist in IE8
+  var $head = $doc.head || $doc.getElementsByTagName('head')[0];
+  // Compute some codeserver urls so as the user does not need bookmarklets
+  var hostName = $wnd.location.hostname;
+  var serverUrl = 'http://' + hostName + ':9876';
+  var module = 'kune_sandbox';
+  var nocacheUrl = serverUrl + '/recompile-requester/' + module;
+
+  // Insert the superdevmode nocache script in the first position of the head
+  var devModeScript = $doc.createElement('script');
+  devModeScript.src = nocacheUrl;
+
+  // Everybody except IE8 does fire an error event
+  // This means that we do not detect a non running SDM with IE8.
+  if (devModeScript.addEventListener) {
+    var callback = function() {
+      // Don't show the confirmation dialogue twice (multimodule)
+      if (!$wnd.__gwt__sdm__confirmed &&
+           (!$wnd.__gwt_sdm__recompiler || !$wnd.__gwt_sdm__recompiler.loaded)) {
+        $wnd.__gwt__sdm__confirmed = true;
+        if ($wnd.confirm(
+            "Couldn't load " +  module + " from Super Dev Mode\n" +
+            "server at " + serverUrl + ".\n" +
+            "Please make sure this server is ready.\n" +
+            "Do you want to try again?")) {
+          $wnd.location.reload();
+        }
+      }
+    };
+    devModeScript.addEventListener("error", callback, true);
+  }
+
+  var injectScriptTag = function(){
+    $head.insertBefore(devModeScript, $head.firstElementChild || $head.children[0]);
+  };
+
+  if (/loaded|complete/.test($doc.readyState)) {
+    injectScriptTag();
+  } else {
+    //defer app script insertion until the body is ready
+    if($wnd.addEventListener){
+      $wnd.addEventListener('load', injectScriptTag, false);
+    } else{
+      $wnd.attachEvent('onload', injectScriptTag);
+    }
+  }
+})(window, document);

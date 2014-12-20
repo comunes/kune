@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -21,6 +21,9 @@
  *
  */
 package cc.kune.sandbox.client;
+
+import org.vectomatic.file.File;
+import org.vectomatic.file.FileList;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
@@ -51,15 +54,19 @@ import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.common.client.ui.DottedTab;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.PopupTopPanel;
+import cc.kune.common.client.ui.UploaderPanel;
 import cc.kune.common.client.ui.dialogs.BasicDialog;
 import cc.kune.common.client.ui.dialogs.MessagePanel;
 import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.ui.UploadFile;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -67,6 +74,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -82,11 +90,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class TestAction extends AbstractExtendedAction {
-    
+
     /**
      * Instantiates a new test action.
      *
-     * @param text the text
+     * @param text
+     *          the text
      */
     public TestAction(final String text) {
       super(text);
@@ -95,116 +104,62 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     /**
      * Instantiates a new test action.
      *
-     * @param text the text
-     * @param tooltip the tooltip
-     * @param icon the icon
+     * @param text
+     *          the text
+     * @param tooltip
+     *          the tooltip
+     * @param icon
+     *          the icon
      */
     public TestAction(final String text, final String tooltip, final String icon) {
       super(text, tooltip, icon);
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     *
+     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
+     * .common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
       testDialogs();
     }
   }
-  
-  /** The user msg. */
-  SimpleUserMessage userMsg = new SimpleUserMessage();
 
   /** The absolute panel. */
   private AbsolutePanel absolutePanel;
-  
-  /** The toolbar. */
-  private Toolbar toolbar;
-  
+
+  /** The ginjector. */
+  private KuneSampleGinjector ginjector;
+
   /** The res. */
   private CommonResources res;
 
   /** The shortcut register. */
   private GlobalShortcutRegister shortcutRegister;
 
-  /** The ginjector. */
-  private KuneSampleGinjector ginjector;
+  /** The toolbar. */
+  private Toolbar toolbar;
 
-  /**
-   * This is the entry point method.
-   */
-  @Override
-  public void onModuleLoad() {
-    ginjector = GWT.create(KuneSampleGinjector.class);
-    toolbar = ginjector.getToolbar();
-    res = CommonResources.INSTANCE;
-    res.commonStyle().ensureInjected();
-    ginjector.getUserNotifierPopup();
+  /** The user msg. */
+  SimpleUserMessage userMsg = new SimpleUserMessage();
 
-    absolutePanel = new AbsolutePanel();
-    testBarButtons();
-    testTooltips();
+  private Widget makeFileUpload() {
+    final UploaderPanel uploadPanel = new UploaderPanel(I18n.t("choose an image to upload"),
+        "image/png,image/gif,image/jpeg", new AsyncCallback<UploadFile>() {
+      @Override
+      public void onFailure(final Throwable caught) {
+        // TODO Auto-generated method stub
+      }
 
-    testActionToolbar();
-
-    final String defLocale = "en";
-
-    String locale = WindowUtils.getParameter("locale");
-    String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
-
-    for (String id : ids) {
-      RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
-      RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
-      if (someId != null)
-        someId.setVisible(true);
-      else if (defId != null)
-        defId.setVisible(true);
-    }
-
-    // testToolpanel();
-    // toolSelector.addWidget(new Label("Test"));
-
-    // testPromptDialog();
-
-    testSubWidget();
-
-    // testPUload();
-
-    shortcutRegister = ginjector.getGlobalShortcutRegister();
-    shortcutRegister.enable();
-
-    final ActionFlowPanel view = makeFlowToolbar();
-
-    final BasicThumb thumb = testThumbs();
-
-    absolutePanel.add(thumb, 100, 300);
-    absolutePanel.add(view, 200, 300);
-
-    DottedTab tab = new DottedTab();
-    absolutePanel.add(tab, 400, 400);
-
-    new BlinkAnimation(tab, 350).animate(5);
-
-    RootPanel.get().add(absolutePanel);
-  }
-
-  /**
-   * Test thumbs.
-   *
-   * @return the basic thumb
-   */
-  private BasicThumb testThumbs() {
-    final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
-        false, new ClickHandler() {
-
-          @Override
-          public void onClick(final ClickEvent event) {
-            userMsg.show("Testing");
-          }
-        });
-    thumb.setTooltip("Some thumb tooltip");
-    thumb.setOnOverLabel(true);
-    return thumb;
+      @Override
+      public void onSuccess(final UploadFile result) {
+        // TODO Auto-generated method stub
+      }
+    });
+    uploadPanel.setSize("250px", "150px");
+    return uploadPanel;
   }
 
   /**
@@ -229,7 +184,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final PushButtonDescriptor pushBtn = new PushButtonDescriptor(action2);
     pushBtn.setPushed(true);
     pushBtn.withText("Push btn").withStyles("k-button");
-    // FIXME when fix the style set also in I18nTranslatorForm.ui.xml (currently
+    // FIXME when fix the style set also in I18nTranslatorForm.ui.xml
+    // (currently
     // is set to "none")
 
     final ToolbarDescriptor toolbar = new ToolbarDescriptor();
@@ -283,22 +239,90 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   }
 
   /**
+   * This is the entry point method.
+   */
+  @Override
+  public void onModuleLoad() {
+    ginjector = GWT.create(KuneSampleGinjector.class);
+    toolbar = ginjector.getToolbar();
+    res = CommonResources.INSTANCE;
+    res.commonStyle().ensureInjected();
+    ginjector.getUserNotifierPopup();
+
+    absolutePanel = new AbsolutePanel();
+    testBarButtons();
+    testTooltips();
+
+    testActionToolbar();
+
+    final String defLocale = "en";
+
+    final String locale = WindowUtils.getParameter("locale");
+    final String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
+
+    for (final String id : ids) {
+      final RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
+      final RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
+      if (someId != null) {
+        someId.setVisible(true);
+      } else if (defId != null) {
+        defId.setVisible(true);
+      }
+    }
+
+    // testToolpanel();
+    // toolSelector.addWidget(new Label("Test"));
+
+    // testPromptDialog();
+
+    testSubWidget();
+
+    // testPUload();
+
+    shortcutRegister = ginjector.getGlobalShortcutRegister();
+    shortcutRegister.enable();
+
+    final ActionFlowPanel view = makeFlowToolbar();
+
+    final BasicThumb thumb = testThumbs();
+
+    absolutePanel.add(thumb, 100, 300);
+    absolutePanel.add(view, 200, 300);
+
+    final DottedTab tab = new DottedTab();
+    absolutePanel.add(tab, 400, 400);
+
+    absolutePanel.add(makeFileUpload(), 620, 0);
+
+    new BlinkAnimation(tab, 350).animate(5);
+
+    RootPanel.get().add(absolutePanel);
+  }
+
+  protected void process(final FileList files) {
+    GWT.log("length=" + files.getLength());
+    for (final File file : files) {
+      NotifyUser.info("Size: " + file.getSize());
+    }
+  }
+
+  /**
    * Test action toolbar.
    */
   public void testActionToolbar() {
 
-    AbstractExtendedAction action1 = new AbstractExtendedAction() {
+    final AbstractExtendedAction action1 = new AbstractExtendedAction() {
       @Override
-      public void actionPerformed(ActionEvent event) {
+      public void actionPerformed(final ActionEvent event) {
         // SimpleUserMessage simpleMes = new SimpleUserMessage();
         // simpleMes.show("Hellow world!");
         NotifyUser.info("Some title", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit");
       }
     };
 
-    AbstractExtendedAction action2 = new AbstractExtendedAction() {
+    final AbstractExtendedAction action2 = new AbstractExtendedAction() {
       @Override
-      public void actionPerformed(ActionEvent event) {
+      public void actionPerformed(final ActionEvent event) {
         NotifyUser.error(
             "Some title",
             "Lorem <a href='/'>ipsum</a> dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
@@ -306,12 +330,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       }
     };
 
-    IconLabelDescriptor iconLabel = new IconLabelDescriptor("Icon Label", res.info());
+    final IconLabelDescriptor iconLabel = new IconLabelDescriptor("Icon Label", res.info());
     iconLabel.setAction(action1);
 
-    ButtonDescriptor button1 = new ButtonDescriptor("button 1", action1);
-    ButtonDescriptor button2 = new ButtonDescriptor("button 2 but bigger bigger", action2);
-    ButtonDescriptor button3 = new ButtonDescriptor(action1);
+    final ButtonDescriptor button1 = new ButtonDescriptor("button 1", action1);
+    final ButtonDescriptor button2 = new ButtonDescriptor("button 2 but bigger bigger", action2);
+    final ButtonDescriptor button3 = new ButtonDescriptor(action1);
 
     button1.withIcon(res.info()).withToolTip("Some tooltip");
     button2.withIcon(res.info()).withToolTip("Some tooltip");
@@ -322,12 +346,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     toolbar.add(button2);
     toolbar.add(button3);
 
-    MenuDescriptor menu = new MenuDescriptor("Menu");
+    final MenuDescriptor menu = new MenuDescriptor("Menu");
     menu.setRightIcon(res.world16());
     menu.withIcon(res.info()).withToolTip("Some menu").withStyles("k-button, gwt-Button");
-    MenuItemDescriptor menuItem1 = new MenuItemDescriptor(menu, action1);
+    final MenuItemDescriptor menuItem1 = new MenuItemDescriptor(menu, action1);
     menuItem1.withIcon(res.info()).withText("Some menu item");
-    MenuItemDescriptor menuItem2 = new MenuItemDescriptor(menu, action1);
+    final MenuItemDescriptor menuItem2 = new MenuItemDescriptor(menu, action1);
     menuItem2.withIcon(res.info()).withText("Some other menu item");
 
     toolbar.add(menu);
@@ -335,17 +359,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(toolbar, 200, 200);
 
   }
-
-  // private void testPUload() {
-  // final Button browseButton = new Button();
-  // browseButton.getElement().setId("my-browse-button");
-  // final PluploadBuilder builder = new PluploadBuilder();
-  // // ADD ANY PLUPLOAD PROPERTIES HERE
-  // builder.uploadUrl("server/upload.php");
-  // builder.browseButton("my-browse-button");
-  // final Plupload plupload = builder.create();
-  // RootPanel.get().add(browseButton);
-  // }
 
   //
   // private void testPromptDialog() {
@@ -370,9 +383,9 @@ public class KuneSandboxEntryPoint implements EntryPoint {
    * Test bar buttons.
    */
   private void testBarButtons() {
-    Button btn1 = new Button("Btn 1");
-    Button btn2 = new Button("Btn 2");
-    Button btn3 = new Button("Btn 3");
+    final Button btn1 = new Button("Btn 1");
+    final Button btn2 = new Button("Btn 2");
+    final Button btn3 = new Button("Btn 3");
     btn1.addStyleName("k-button");
     btn1.addStyleName("k-button-left");
     btn2.addStyleName("k-button");
@@ -385,67 +398,23 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     btn1.addStyleName("k-fl");
     btn2.addStyleName("k-fl");
     btn3.addStyleName("k-fl");
-    FlowPanel vp = new FlowPanel();
+    final FlowPanel vp = new FlowPanel();
     vp.add(btn1);
     vp.add(btn2);
     vp.add(btn3);
     absolutePanel.add(vp, 100, 100);
   }
 
-  //
-  /**
-   * Test tooltips.
-   */
-  private void testTooltips() {
-
-    final Button button = new Button("Btn 1 biiggggggg");
-    final Button button2 = new Button("Btn 2 also biggggg");
-    final IconLabel button3 = new IconLabel(res.info(), "Btn 3");
-    final Button button4 = new Button("Btn 4");
-
-    int clientWidth = Window.getClientWidth();
-    int clientHeight = Window.getClientHeight();
-    absolutePanel.setSize(String.valueOf(clientWidth - 10) + "px", String.valueOf(clientHeight - 10)
-        + "px");
-    absolutePanel.add(button, 5, 5);
-    absolutePanel.add(button2, clientWidth - 80, 5);
-    absolutePanel.add(button3, 5, clientHeight - 40);
-    absolutePanel.add(button4, clientWidth - 80, clientHeight - 40);
-    Tooltip.to(button,
-        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
-    Tooltip.to(button2,
-        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
-    Tooltip.to(button3,
-        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
-    Tooltip.to(button4,
-        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
-
-  }
-
-  //
-  // private void testToolpanel() {
-  // ToolSelectorPanel toolSelector = new ToolSelectorPanel(new
-  // GSpaceArmorImpl(null), null);
-  // ToolSelectorItemPanel toolItem1 = new ToolSelectorItemPanel();
-  // toolItem1.getLabel().setText("documents");
-  // ToolSelectorItemPanel toolItem2 = new ToolSelectorItemPanel();
-  // toolItem2.getLabel().setText("something very longgggggg");
-  // ToolSelectorItemPanel toolItem3 = new ToolSelectorItemPanel();
-  // toolItem3.getLabel().setText("media");
-  // toolSelector.addItem(toolItem1);
-  // toolSelector.addItem(toolItem2);
-  // toolSelector.addItem(toolItem3);
-  // toolItem1.setSelected(true);
-  // toolItem2.setSelected(false);
-  // toolItem3.setSelected(false);
-  // toolSelector.asWidget().setWidth("200px");
-  // RootPanel.get().add(toolSelector.asWidget());
+  // private void testPUload() {
+  // final Button browseButton = new Button();
+  // browseButton.getElement().setId("my-browse-button");
+  // final PluploadBuilder builder = new PluploadBuilder();
+  // // ADD ANY PLUPLOAD PROPERTIES HERE
+  // builder.uploadUrl("server/upload.php");
+  // builder.browseButton("my-browse-button");
+  // final Plupload plupload = builder.create();
+  // RootPanel.get().add(browseButton);
   // }
-  //
 
   /**
    * Test dialogs.
@@ -461,9 +430,9 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     dialog.setSecondBtnText("Cancel");
     dialog.setFirstBtnTabIndex(2);
     dialog.setSecondBtnTabIndex(3);
-    ClickHandler clickHandler = new ClickHandler() {
+    final ClickHandler clickHandler = new ClickHandler() {
       @Override
-      public void onClick(ClickEvent event) {
+      public void onClick(final ClickEvent event) {
         pop2.hide();
       }
     };
@@ -505,7 +474,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     //
     // sub.setTitleText(new String(Base64Utils.fromBase64(bTitle)));
     // sub.setDescription(new String(Base64Utils.fromBase64(bDescr)));
-    // sub.setSize(Window.getClientWidth() + "px", Window.getClientHeight() +
+    // sub.setSize(Window.getClientWidth() + "px", Window.getClientHeight()
+    // +
     // "px");
     // Button btn = new Button("Click me");
     // btn.addClickHandler(new ClickHandler() {
@@ -517,5 +487,79 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // });
     // RootPanel.get().add(btn);
     // RootPanel.get().add(sub);
+  }
+
+  //
+  // private void testToolpanel() {
+  // ToolSelectorPanel toolSelector = new ToolSelectorPanel(new
+  // GSpaceArmorImpl(null), null);
+  // ToolSelectorItemPanel toolItem1 = new ToolSelectorItemPanel();
+  // toolItem1.getLabel().setText("documents");
+  // ToolSelectorItemPanel toolItem2 = new ToolSelectorItemPanel();
+  // toolItem2.getLabel().setText("something very longgggggg");
+  // ToolSelectorItemPanel toolItem3 = new ToolSelectorItemPanel();
+  // toolItem3.getLabel().setText("media");
+  // toolSelector.addItem(toolItem1);
+  // toolSelector.addItem(toolItem2);
+  // toolSelector.addItem(toolItem3);
+  // toolItem1.setSelected(true);
+  // toolItem2.setSelected(false);
+  // toolItem3.setSelected(false);
+  // toolSelector.asWidget().setWidth("200px");
+  // RootPanel.get().add(toolSelector.asWidget());
+  // }
+  //
+
+  /**
+   * Test thumbs.
+   *
+   * @return the basic thumb
+   */
+  private BasicThumb testThumbs() {
+    final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
+        false, new ClickHandler() {
+
+      @Override
+      public void onClick(final ClickEvent event) {
+        userMsg.show("Testing");
+      }
+    });
+    thumb.setTooltip("Some thumb tooltip");
+    thumb.setOnOverLabel(true);
+    return thumb;
+  }
+
+  //
+  /**
+   * Test tooltips.
+   */
+  private void testTooltips() {
+
+    final Button button = new Button("Btn 1 biiggggggg");
+    final Button button2 = new Button("Btn 2 also biggggg");
+    final IconLabel button3 = new IconLabel(res.info(), "Btn 3");
+    final Button button4 = new Button("Btn 4");
+
+    final int clientWidth = Window.getClientWidth();
+    final int clientHeight = Window.getClientHeight();
+    absolutePanel.setSize(String.valueOf(clientWidth - 10) + "px", String.valueOf(clientHeight - 10)
+        + "px");
+    absolutePanel.add(button, 5, 5);
+    absolutePanel.add(button2, clientWidth - 80, 5);
+    absolutePanel.add(button3, 5, clientHeight - 40);
+    absolutePanel.add(button4, clientWidth - 80, clientHeight - 40);
+    Tooltip.to(button,
+        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
+            100);
+    Tooltip.to(button2,
+        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
+            100);
+    Tooltip.to(button3,
+        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
+            100);
+    Tooltip.to(button4,
+        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
+            100);
+
   }
 }
