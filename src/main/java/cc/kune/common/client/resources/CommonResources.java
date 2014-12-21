@@ -63,6 +63,9 @@ public interface CommonResources extends ClientBundle {
   @Source("checked.png")
   ImageResource checked();
 
+  @Source("circle-spinner.gif")
+  ImageResource circleSpinner();
+
   @Source("clear.png")
   ImageResource clear();
 

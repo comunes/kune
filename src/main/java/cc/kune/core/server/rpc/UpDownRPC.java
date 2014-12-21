@@ -87,6 +87,9 @@ public class UpDownRPC implements RPC, UpDownService {
   }
 
   private void dumpUploadedFile(final UploadFile uploadedfile, final File origFile) throws IOException {
+    // TODO: find a better way to transmit/convert the image
+    // https://stackoverflow.com/questions/7431365/filereader-readasbinarystring-to-upload-files
+    // https://groups.google.com/forum/#!searchin/lib-gwt-file/servlet/lib-gwt-file/5g7aI4pZtzk/_6IiIcEyWS0J
     final String img64 = uploadedfile.getData();
     final String truncated = img64.substring(img64.indexOf(',') + 1);
     final FileOutputStream output = new FileOutputStream(origFile);

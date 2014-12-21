@@ -27,6 +27,8 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
@@ -38,24 +40,24 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.gspace.client.options.UserOptionsPresenter.UserOptionsView;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptionsPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptionsPresenter extends
-    AbstractTabbedDialogPresenter<UserOptionsView, UserOptionsPresenter.UserOptionsProxy> implements
-    UserOptions {
+AbstractTabbedDialogPresenter<UserOptionsView, UserOptionsPresenter.UserOptionsProxy> implements
+UserOptions {
 
   /**
    * The Interface UserOptionsProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -64,7 +66,7 @@ public class UserOptionsPresenter extends
 
   /**
    * The Interface UserOptionsView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface UserOptionsView extends EntityOptionsView {
@@ -87,7 +89,7 @@ public class UserOptionsPresenter extends
 
   /**
    * Instantiates a new user options presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param proxy
@@ -125,7 +127,7 @@ public class UserOptionsPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView
    * ()
@@ -137,7 +139,7 @@ public class UserOptionsPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -155,6 +157,14 @@ public class UserOptionsPresenter extends
         getView().hide();
       }
     });
+    stateManager.onStateChanged(false, new StateChangedHandler() {
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        if (!event.getState().getGroup().isPersonal()) {
+          getView().hide();
+        }
+      }
+    });
     userPrefsAction.putValue(Action.NAME, i18n.t("Your preferences"));
     userPrefsAction.putValue(Action.SMALL_ICON, res.prefs());
     final MenuItemDescriptor prefsItem = new MenuItemDescriptor(userPrefsAction);
@@ -164,7 +174,7 @@ public class UserOptionsPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#show()
    */

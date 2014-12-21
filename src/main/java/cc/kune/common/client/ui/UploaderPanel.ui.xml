@@ -52,12 +52,18 @@
     margin-top: 10px;
   }
   
+  .spinnerPanel {
+    height: 80px;
+    margin: 10px 0 0 130px;
+  }
+  
   .spinner {
+    
   }
   </ui:style>
 
   <g:FlowPanel ui:field="flow" addStyleNames="{style.flow}">
-    <g:Label ui:field="intro" addStyleNames="{style.intro}"/>
+    <g:Label ui:field="intro" addStyleNames="{style.intro}" />
     <g:DeckPanel ui:field="deck" addStyleNames="{style.deck}">
       <g:FlowPanel>
         <v:DropPanel ui:field="dropPanel" addStyleNames="{style.dropPanel}">
@@ -77,10 +83,9 @@
           </g:FlowPanel>
         </v:DropPanel>
       </g:FlowPanel>
-      <g:SimplePanel>
-<!--         <g:Image ui:field="spinner" styleName='{style.spinner}' -->
-<!--           resource="{img.kuneAnimG}" /> -->
-        <!-- TODO Here a spinner -->
+      <g:SimplePanel addStyleNames="{style.spinnerPanel}">
+        <g:Image ui:field="spinner" styleName='{style.spinner}'
+          resource="{img.circleSpinner}" />
       </g:SimplePanel>
     </g:DeckPanel>
   </g:FlowPanel>
