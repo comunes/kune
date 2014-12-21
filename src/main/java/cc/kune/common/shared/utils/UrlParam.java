@@ -22,7 +22,6 @@
  \*/
 package cc.kune.common.shared.utils;
 
-import java.util.Date;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -31,17 +30,17 @@ import java.util.Date;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UrlParam {
-  
+
   /**
    * No cache string suffix.
    *
    * @return the string
    */
-  public static String noCacheStringSuffix() {
-    final String noCache = "&nocache=" + new Date().getTime();
+  public static String noCacheStringSuffix(final String suffix) {
+    final String noCache = "&nocache=" + suffix;
     return noCache;
   }
-  
+
   /** The name. */
   private final String name;
 
@@ -51,8 +50,10 @@ public class UrlParam {
   /**
    * Instantiates a new url param.
    *
-   * @param name the name
-   * @param value the value
+   * @param name
+   *          the name
+   * @param value
+   *          the value
    */
   public UrlParam(final String name, final boolean value) {
     this.name = name;
@@ -62,8 +63,10 @@ public class UrlParam {
   /**
    * Instantiates a new url param.
    *
-   * @param name the name
-   * @param value the value
+   * @param name
+   *          the name
+   * @param value
+   *          the value
    */
   public UrlParam(final String name, final String value) {
     this.name = name;
@@ -88,7 +91,9 @@ public class UrlParam {
     return value;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#toString()
    */
   @Override

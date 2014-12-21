@@ -24,7 +24,6 @@ package cc.kune.pspace.client;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.events.GroupChangedEvent;
 import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
 import cc.kune.core.client.resources.CoreResources;
@@ -38,7 +37,6 @@ import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
 import com.google.gwt.core.client.GWT;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -50,18 +48,19 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class PSpaceInDevelopment.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PSpaceInDevelopment extends Composite {
 
   /**
    * The Interface PSpaceInDevelopmentUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface PSpaceInDevelopmentUiBinder extends UiBinder<Widget, PSpaceInDevelopment> {
@@ -114,7 +113,7 @@ public class PSpaceInDevelopment extends Composite {
 
   /**
    * Instantiates a new p space in development.
-   * 
+   *
    * @param stateManager
    *          the state manager
    * @param images
@@ -139,7 +138,7 @@ public class PSpaceInDevelopment extends Composite {
     stateManager.onGroupChanged(true, new GroupChangedHandler() {
       @Override
       public void onGroupChanged(final GroupChangedEvent event) {
-        setGroupLogo(session.getCurrentState().getGroup(), false);
+        setGroupLogo(session.getCurrentState().getGroup());
       }
     });
     inDevel.setText(i18n.t("Right now, the public web space of this group, it's under construction"));
@@ -150,23 +149,23 @@ public class PSpaceInDevelopment extends Composite {
       @Override
       public void onCurrentLogoChanged(final CurrentEntityChangedEvent event) {
         final GroupDTO group = session.getCurrentState().getGroup();
-        setGroupLogo(group, true);
+        setGroupLogo(group);
       }
     });
   }
 
   /**
    * Sets the group logo.
-   * 
+   *
    * @param group
    *          the group
    * @param noCache
    *          the no cache
    */
-  void setGroupLogo(final GroupDTO group, final boolean noCache) {
+  void setGroupLogo(final GroupDTO group) {
     setLogoText(group.getLongName());
     if (group.hasLogo()) {
-      setLogoImage(group.getStateToken(), noCache);
+      setLogoImage(group.getStateToken());
       setLogoImageVisible(true);
     } else {
       if (group.isPersonal()) {
@@ -180,20 +179,19 @@ public class PSpaceInDevelopment extends Composite {
 
   /**
    * Sets the logo image.
-   * 
+   *
    * @param stateToken
    *          the state token
    * @param noCache
    *          the no cache
    */
-  private void setLogoImage(final StateToken stateToken, final boolean noCache) {
-    entityLogo.setUrl(downloadProvider.get().getLogoImageUrl(stateToken.getGroup())
-        + (noCache ? UrlParam.noCacheStringSuffix() : ""));
+  private void setLogoImage(final StateToken stateToken) {
+    entityLogo.setUrl(downloadProvider.get().getLogoImageUrl(stateToken.getGroup()));
   }
 
   /**
    * Sets the logo image visible.
-   * 
+   *
    * @param visible
    *          the new logo image visible
    */
@@ -203,7 +201,7 @@ public class PSpaceInDevelopment extends Composite {
 
   /**
    * Sets the logo text.
-   * 
+   *
    * @param longName
    *          the new logo text
    */
