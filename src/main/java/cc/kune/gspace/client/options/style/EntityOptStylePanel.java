@@ -22,37 +22,34 @@
  */
 package cc.kune.gspace.client.options.style;
 
-import gwtupload.client.IUploader.OnCancelUploaderHandler;
-import gwtupload.client.IUploader.OnChangeUploaderHandler;
-import gwtupload.client.IUploader.OnFinishUploaderHandler;
-import gwtupload.client.IUploader.OnStartUploaderHandler;
-import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
+import cc.kune.common.client.ui.UploadFinishedEvent;
+import cc.kune.common.client.ui.UploadFinishedEvent.UploadFinishedHandler;
+import cc.kune.common.client.ui.UploaderPanel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.gspace.client.options.EntityOptionsView;
-import cc.kune.gspace.client.options.logo.EntityUploaderForm;
 import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.VerticalPanel;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptStylePanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView {
+public class EntityOptStylePanel extends Composite implements EntityOptStyleView {
 
   /** The Constant ICON_UPLD_SERVLET. */
   public static final String ICON_UPLD_SERVLET = GWT.getModuleBaseURL()
@@ -88,15 +85,14 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
   /** The tab title. */
   private final IconLabel tabTitle;
 
-  /** The uploader. */
-  private final EntityUploaderForm uploader;
+  private final UploaderPanel uploader;
 
   /** The ws theme info. */
   private final Label wsThemeInfo;
 
   /**
    * Instantiates a new entity opt style panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param res
@@ -109,7 +105,6 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     this.i18n = i18n;
     tabTitle = TabTitleGenerator.generate(res.styleWhite(), i18n.t("Style"), MAX_TABTITLE_LENGTH, TAB_ID);
     // super.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
-    super.setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
 
     final FlowPanel flow = new FlowPanel();
     wsThemeInfo = new Label(i18n.t("Change the group workspace theme:"));
@@ -123,9 +118,10 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     noHasBacklabel = i18n.t("You can also upload a background:");
     backgroundLabel = new IconLabel(res.pictureGrey(), hasBackLabel);
     backgroundLabel.addStyleName("k-clear");
-    chooseImage = i18n.t("Choose");
+    chooseImage = i18n.t("choose an image");
     changeImage = i18n.t("Change");
-    uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, chooseImage);
+    uploader = new UploaderPanel(chooseImage, FileConstants.ACCEPTED_IMAGES);
+    uploader.setLabelText("");
     uploader.addStyleName("k-clean");
     backImage = new Image();
     backImage.addStyleName("kune-Margin-Medium-trbl");
@@ -140,12 +136,12 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     flow.add(uploader);
     flow.addStyleName("oc-clean");
     backImage.addStyleName("k-fl");
-    add(flow);
-    final Label wsInfo = new Label(i18n.t("Select and configure the public space theme of this group:"));
-    wsInfo.addStyleName("kune-Margin-Medium-tb");
-    // add(wsInfo);
+    // final Label wsInfo = new
+    // Label(i18n.t("Select and configure the public space theme of this group:"));
+    // wsInfo.addStyleName("kune-Margin-Medium-tb");
+    // flow.add(wsInfo);
 
-    final VerticalPanel stylesPanel = new VerticalPanel();
+    // final VerticalPanel stylesPanel = new VerticalPanel();
     // final ClickHandler clickHandler = new ClickHandler() {
     //
     // @Override
@@ -160,64 +156,23 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     // thumb.setTooltip(i18n.t("Click to select and configure this theme"));
     // // add(thumb);
     // }
-    stylesPanel.addStyleName("oc-clean");
-    add(stylesPanel);
+    // stylesPanel.addStyleName("oc-clean");
+    // add(stylesPanel);
+    initWidget(flow);
+    super.setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
     setBackImageVisibleImpl(false);
     super.addStyleName("k-overflow-y-auto");
     super.addStyleName("k-tab-panel");
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#
-   * addOnCancelUploadHandler
-   * (gwtupload.client.IUploader.OnCancelUploaderHandler)
-   */
   @Override
-  public HandlerRegistration addOnCancelUploadHandler(final OnCancelUploaderHandler handler) {
-    return uploader.addOnCancelUploadHandler(handler);
+  public HandlerRegistration addUploadFinishedHandler(final UploadFinishedHandler handler) {
+    return uploader.addHandler(handler, UploadFinishedEvent.getType());
   }
 
   /*
    * (non-Javadoc)
-   * 
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#
-   * addOnChangeUploadHandler
-   * (gwtupload.client.IUploader.OnChangeUploaderHandler)
-   */
-  @Override
-  public HandlerRegistration addOnChangeUploadHandler(final OnChangeUploaderHandler handler) {
-    return uploader.addOnChangeUploadHandler(handler);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#
-   * addOnFinishUploadHandler
-   * (gwtupload.client.IUploader.OnFinishUploaderHandler)
-   */
-  @Override
-  public HandlerRegistration addOnFinishUploadHandler(final OnFinishUploaderHandler handler) {
-    return uploader.addOnFinishUploadHandler(handler);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnStartUploadHandler
-   * (gwtupload.client.IUploader.OnStartUploaderHandler)
-   */
-  @Override
-  public HandlerRegistration addOnStartUploadHandler(final OnStartUploaderHandler handler) {
-    return uploader.addOnStartUploadHandler(handler);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.style.EntityOptStyleView#clearBackImage()
    */
@@ -228,7 +183,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.style.EntityOptStyleView#getClearBtn()
    */
   @Override
@@ -238,7 +193,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.EntityOptionsTabView#getTabTitle()
    */
   @Override
@@ -248,7 +203,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
 
   /**
    * Gets the ws theme info.
-   * 
+   *
    * @return the ws theme info
    */
   public Label getWsThemeInfo() {
@@ -257,7 +212,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.style.EntityOptStyleView#reset()
    */
   @Override
@@ -267,7 +222,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.style.EntityOptStyleView#setBackImage(java
    * .lang.String)
@@ -280,7 +235,7 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
 
   /**
    * Sets the back image visible impl.
-   * 
+   *
    * @param visible
    *          the new back image visible impl
    */
@@ -291,16 +246,4 @@ public class EntityOptStylePanel extends FlowPanel implements EntityOptStyleView
     uploader.getBtn().setText(visible ? changeImage : chooseImage);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.gspace.client.options.style.EntityOptStyleView#setUploadParams(
-   * java.lang.String, java.lang.String)
-   */
-  @Override
-  public void setUploadParams(final String userHash, final String token) {
-    uploader.setUploadParams(userHash, token);
-    Log.info("Background uploader params: " + userHash + ", " + token);
-  }
 }

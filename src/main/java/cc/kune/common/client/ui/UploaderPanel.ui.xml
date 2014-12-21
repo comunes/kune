@@ -1,0 +1,87 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:v='urn:import:org.vectomatic.dnd' xmlns:f='urn:import:org.vectomatic.file'
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:with field='img'
+    type='cc.kune.common.client.resources.CommonResources' />
+  <ui:style>
+  .intro {
+    margin-bottom: 10px;
+  }
+  
+  .flow {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .deck {
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .innerFlow {
+    margin: 0 auto;
+    padding: 5px 20px;
+  }
+  
+  .dropPanel {
+    border: 4px dashed #808080;
+    z-index: 10;
+    height: 100%;
+  }
+  
+  .customUpload {
+    display: none;
+  }
+  
+  .dropIntro, .dropOr {
+    color: #808080;
+  }
+  
+  .dropIntro {
+    font-size: 18px;
+  }
+  
+  .dropOr {
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
+  .button {
+    margin-top: 10px;
+  }
+  
+  .spinner {
+  }
+  </ui:style>
+
+  <g:FlowPanel ui:field="flow" addStyleNames="{style.flow}">
+    <g:Label ui:field="intro" addStyleNames="{style.intro}"/>
+    <g:DeckPanel ui:field="deck" addStyleNames="{style.deck}">
+      <g:FlowPanel>
+        <v:DropPanel ui:field="dropPanel" addStyleNames="{style.dropPanel}">
+          <g:FlowPanel ui:field="innerFlow" addStyleNames="{style.innerFlow}">
+            <g:Label ui:field="dropIntro" addStyleNames="{style.dropIntro}">"Drag
+              an
+              image here</g:Label>
+            <f:FileUploadExt name="file" ui:field="customUpload"
+              styleName="{style.customUpload}" />
+            <g:FileUpload name="file" ui:field="upload"
+              styleName="{style.customUpload}" />
+            <g:Label ui:field="dropOr" addStyleNames="{style.dropOr}">or, if
+              you
+              prefer...</g:Label>
+            <g:Button text="Load files" ui:field="button"
+              addStyleNames="{style.button} k-button" />
+          </g:FlowPanel>
+        </v:DropPanel>
+      </g:FlowPanel>
+      <g:SimplePanel>
+<!--         <g:Image ui:field="spinner" styleName='{style.spinner}' -->
+<!--           resource="{img.kuneAnimG}" /> -->
+        <!-- TODO Here a spinner -->
+      </g:SimplePanel>
+    </g:DeckPanel>
+  </g:FlowPanel>
+</ui:UiBinder> 

@@ -137,6 +137,12 @@ http://www.opensource.org/licenses/mit-license.php
 Artistic License/GPL
 http://dev.perl.org/licenses/
 
+#lib-gwt-file#
+GWT library to add support for the W3C file API and HTML5 file drag-and-drop.
+https://code.google.com/p/lib-gwt-file/
+Copyright under LGPLv3
+http://www.gnu.org/licenses/lgpl.html
+
 kune documentation
 --------------------------------------------------------------------------------
 

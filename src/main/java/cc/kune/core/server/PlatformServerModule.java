@@ -32,6 +32,7 @@ import cc.kune.core.client.rpcservices.I18nService;
 import cc.kune.core.client.rpcservices.InvitationService;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.client.rpcservices.SocialNetService;
+import cc.kune.core.client.rpcservices.UpDownService;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.access.AccessRightsService;
 import cc.kune.core.server.access.AccessRightsServiceDefault;
@@ -77,7 +78,6 @@ import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.manager.UserSignInLogManager;
 import cc.kune.core.server.manager.WaveEntityManager;
 import cc.kune.core.server.manager.file.EntityLogoDownloadManager;
-import cc.kune.core.server.manager.file.EntityLogoUploadManager;
 import cc.kune.core.server.manager.file.FileDownloadManager;
 import cc.kune.core.server.manager.file.FileManagerDefault;
 import cc.kune.core.server.manager.file.FileUploadManager;
@@ -112,6 +112,7 @@ import cc.kune.core.server.rpc.InvitationRPC;
 import cc.kune.core.server.rpc.SiteRPC;
 import cc.kune.core.server.rpc.SocialNetworkRPC;
 import cc.kune.core.server.rpc.StatsRPC;
+import cc.kune.core.server.rpc.UpDownRPC;
 import cc.kune.core.server.rpc.UserRPC;
 import cc.kune.core.server.scheduler.CronServerTasksManager;
 import cc.kune.core.server.state.StateService;
@@ -189,6 +190,7 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(ListsService.class).to(ListsRPC.class);
     bind(ClientStatsService.class).to(StatsRPC.class);
     bind(InvitationService.class).to(InvitationRPC.class);
+    bind(UpDownService.class).to(UpDownRPC.class);
   }
 
   /**
@@ -226,7 +228,6 @@ public class PlatformServerModule extends AbstractExtendedModule {
     bind(ServerToolRegistry.class).in(Singleton.class);
     bind(FileUploadManager.class).in(Singleton.class);
     bind(FileDownloadManager.class).in(Singleton.class);
-    bind(EntityLogoUploadManager.class).in(Singleton.class);
     bind(EntityLogoDownloadManager.class).in(Singleton.class);
     bind(ParticipantUtils.class).in(Singleton.class);
     // bind(UserSessionManager.class).to(UserSessionManagerImpl.class).in(Singleton.class);

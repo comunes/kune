@@ -22,17 +22,13 @@
  */
 package cc.kune.gspace.client.options.style;
 
-import gwtupload.client.IUploadStatus.Status;
-import gwtupload.client.IUploader;
-import gwtupload.client.IUploader.OnFinishUploaderHandler;
-import gwtupload.client.IUploader.OnStartUploaderHandler;
-import cc.kune.common.client.log.Log;
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.client.ui.UploadFinishedEvent;
+import cc.kune.common.client.ui.UploadFinishedEvent.UploadFinishedHandler;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.GroupServiceAsync;
+import cc.kune.core.client.rpcservices.UpDownServiceAsync;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.services.ImageSize;
 import cc.kune.core.client.state.Session;
@@ -78,14 +74,13 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
   /** The group service. */
   private final Provider<GroupServiceAsync> groupService;
 
-  /** The i18n. */
-  private final I18nTranslationService i18n;
-
   /** The session. */
   private final Session session;
 
   /** The state manager. */
   private final StateManager stateManager;
+
+  private final UpDownServiceAsync upDownService;
 
   /** The view. */
   private EntityOptStyleView view;
@@ -115,17 +110,17 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
   protected EntityOptStylePresenter(final EventBus eventBus, final Session session,
       final StateManager stateManager, final EntityOptions entityOptions,
       final Provider<GroupServiceAsync> groupService, final GSpaceBackgroundManager backManager,
-      final GSpaceThemeSelectorPresenter styleSelector, final I18nTranslationService i18n,
-      final ClientFileDownloadUtils fileDownloadUtils, final ChangedLogosRegistry changedLogosRegistry) {
+      final GSpaceThemeSelectorPresenter styleSelector, final ClientFileDownloadUtils fileDownloadUtils,
+      final ChangedLogosRegistry changedLogosRegistry, final UpDownServiceAsync upDownService) {
     this.eventBus = eventBus;
     this.session = session;
     this.stateManager = stateManager;
     this.entityOptions = entityOptions;
     this.groupService = groupService;
     this.backManager = backManager;
-    this.i18n = i18n;
     this.fileDownloadUtils = fileDownloadUtils;
     this.changedLogosRegistry = changedLogosRegistry;
+    this.upDownService = upDownService;
   }
 
   /**
@@ -134,13 +129,13 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
   private void clearBackImage() {
     groupService.get().clearGroupBackImage(session.getUserHash(), session.getCurrentStateToken(),
         new AsyncCallbackSimple<GroupDTO>() {
-      @Override
-      public void onSuccess(final GroupDTO result) {
-        view.clearBackImage();
-        backManager.clearBackgroundImage();
-        ClearBackgroundImageEvent.fire(eventBus);
-      }
-    });
+          @Override
+          public void onSuccess(final GroupDTO result) {
+            view.clearBackImage();
+            backManager.clearBackgroundImage();
+            ClearBackgroundImageEvent.fire(eventBus);
+          }
+        });
   }
 
   /**
@@ -176,34 +171,41 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
     });
     eventBus.addHandler(SetBackgroundImageEvent.getType(),
         new SetBackgroundImageEvent.SetBackgroundImageHandler() {
-      @Override
-      public void onSetBackImage(final SetBackgroundImageEvent event) {
-        backManager.setBackgroundImage();
-        final StateToken token = event.getToken();
-        changedLogosRegistry.add(token.getGroup());
-        setBackImage(token);
-      }
-    });
+          @Override
+          public void onSetBackImage(final SetBackgroundImageEvent event) {
+            backManager.setBackgroundImage();
+            final StateToken token = event.getToken();
+            changedLogosRegistry.add(token.getGroup());
+            setBackImage(token);
+          }
+        });
     eventBus.addHandler(ClearBackgroundImageEvent.getType(),
         new ClearBackgroundImageEvent.ClearBackgroundImageHandler() {
+          @Override
+          public void onClearBackImage(final ClearBackgroundImageEvent event) {
+            view.clearBackImage();
+          }
+        });
+    view.addUploadFinishedHandler(new UploadFinishedHandler() {
       @Override
-      public void onClearBackImage(final ClearBackgroundImageEvent event) {
-        view.clearBackImage();
+      public void onUploadFinished(final UploadFinishedEvent event) {
+        upDownService.uploadBackground(session.getUserHash(), session.getCurrentStateToken(),
+            event.getFile(), new AsyncCallbackSimple<Void>() {
+              @Override
+              public void onFailure(final Throwable caught) {
+                super.onFailure(caught);
+                view.reset();
+              }
+
+              @Override
+              public void onSuccess(final Void result) {
+                onSubmitComplete();
+                view.reset();
+              }
+            });
       }
     });
-    view.addOnStartUploadHandler(new OnStartUploaderHandler() {
-      @Override
-      public void onStart(final IUploader uploader) {
-        setState();
-      }
-    });
-    view.addOnFinishUploadHandler(new OnFinishUploaderHandler() {
-      @Override
-      public void onFinish(final IUploader uploader) {
-        onSubmitComplete(uploader);
-        view.reset();
-      }
-    });
+
   }
 
   /**
@@ -212,27 +214,9 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
    * @param uploader
    *          the uploader
    */
-  private void onSubmitComplete(final IUploader uploader) {
+  private void onSubmitComplete() {
     // final String response = uploader.getServerMessage().getMessage();
-    final String response = uploader.getServerMessage().getMessage();
-    if (uploader.getStatus() == Status.SUCCESS) {
-      if (response != null) {
-        Log.info("Response uploading background: " + response);
-      }
-      SetBackgroundImageEvent.fire(eventBus, session.getCurrentState().getGroup().getStateToken());
-    } else {
-      onSubmitFailed(response);
-    }
-  }
-
-  /**
-   * On submit failed.
-   *
-   * @param responseText
-   *          the response text
-   */
-  private void onSubmitFailed(final String responseText) {
-    NotifyUser.error(i18n.t("Error setting the background"), responseText);
+    SetBackgroundImageEvent.fire(eventBus, session.getCurrentState().getGroup().getStateToken());
   }
 
   /**
@@ -256,7 +240,6 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
     } else {
       setBackImage(group.getStateToken());
     }
-    view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
   }
 
 }

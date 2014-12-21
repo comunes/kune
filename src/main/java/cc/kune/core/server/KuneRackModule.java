@@ -44,13 +44,11 @@ import cc.kune.core.client.rpcservices.I18nService;
 import cc.kune.core.client.rpcservices.InvitationService;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.client.rpcservices.SocialNetService;
+import cc.kune.core.client.rpcservices.UpDownService;
 import cc.kune.core.client.rpcservices.UserService;
 import cc.kune.core.server.manager.file.EntityBackgroundDownloadManager;
-import cc.kune.core.server.manager.file.EntityBackgroundUploadManager;
 import cc.kune.core.server.manager.file.EntityLogoDownloadManager;
-import cc.kune.core.server.manager.file.EntityLogoUploadManager;
 import cc.kune.core.server.manager.file.FileDownloadManager;
-import cc.kune.core.server.manager.file.FileGwtUploadServlet;
 import cc.kune.core.server.manager.file.FileUploadManager;
 import cc.kune.core.server.manager.impl.GroupServerUtils;
 import cc.kune.core.server.notifier.UsersOnline;
@@ -101,7 +99,7 @@ import com.google.inject.servlet.ServletModule;
 
 /**
  * The Class KuneRackModule.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -126,7 +124,7 @@ public class KuneRackModule implements RackModule {
 
   /**
    * Instantiates a new kune rack module.
-   * 
+   *
    */
   public KuneRackModule() {
 
@@ -200,7 +198,7 @@ public class KuneRackModule implements RackModule {
     builder.exclude("/iniavatars/.*");
     builder.exclude("/waveref/.*");
     builder.exclude(StatService.STAT_URL + "/.*");
-        
+
     builder.exclude("/gadgets");
     builder.exclude("/gadgets/.*");
     builder.exclude("/socket.io/*");
@@ -228,16 +226,15 @@ public class KuneRackModule implements RackModule {
 
     builder.installGWTServices("^" + SUFFIX_REG_EXP + "/", SiteService.class, GroupService.class,
         ContentService.class, UserService.class, SocialNetService.class, I18nService.class,
-        ListsService.class, ClientStatsService.class, InvitationService.class);
+        ListsService.class, ClientStatsService.class, InvitationService.class, UpDownService.class);
     builder.installRESTServices("^" + SUFFIX_REG_EXP + "/json/", TestJSONService.class,
         GroupJSONService.class, UserJSONService.class, I18nTranslationJSONService.class,
         ContentJSONService.class);
     builder.installCORSServices("^" + SUFFIX_REG_EXP + "/cors/", SiteCORSService.class,
         ContentCORSService.class);
     builder.installServlet("^" + SUFFIX_REG_EXP + "/servlets/", FileUploadManager.class,
-        FileDownloadManager.class, EntityLogoUploadManager.class, EntityLogoDownloadManager.class,
-        FileGwtUploadServlet.class, EntityBackgroundDownloadManager.class,
-        EntityBackgroundUploadManager.class, EventsServlet.class);
+        FileDownloadManager.class, EntityLogoDownloadManager.class,
+        EntityBackgroundDownloadManager.class, EventsServlet.class);
 
     builder.at("^" + SUFFIX + "/(.*)$").install(
         new ForwardFilter("^" + SUFFIX + "/(.*)$", SUFFIX + "/{0}"));
@@ -247,7 +244,7 @@ public class KuneRackModule implements RackModule {
 
   /**
    * Install guice modules.
-   * 
+   *
    * @param builder
    *          the builder
    */

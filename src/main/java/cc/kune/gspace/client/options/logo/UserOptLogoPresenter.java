@@ -22,12 +22,9 @@
  */
 package cc.kune.gspace.client.options.logo;
 
-import gwtupload.client.IUploader;
-import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.AvatarChangedEvent;
-import cc.kune.core.client.events.UserSignInEvent;
-import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.UpDownServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -69,15 +66,9 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
   public UserOptLogoPresenter(final EventBus eventBus, final Session session,
       final UserOptions entityOptions, final StateManager stateManager,
       final Provider<UserServiceAsync> userService, final UserOptLogoView view,
-      final I18nTranslationService i18n, final ChangedLogosRegistry changedLogos) {
-    super(eventBus, session, entityOptions, userService, i18n, changedLogos);
+      final ChangedLogosRegistry changedLogos, final UpDownServiceAsync upDownService) {
+    super(eventBus, session, entityOptions, userService, changedLogos, upDownService);
     init(view);
-    session.onUserSignIn(true, new UserSignInHandler() {
-      @Override
-      public void onUserSignIn(final UserSignInEvent event) {
-        setState();
-      }
-    });
   }
 
   /**
@@ -91,16 +82,9 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
     view.setPersonalGroupsLabels();
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#onSubmitComplete
-   * (gwtupload.client.IUploader)
-   */
   @Override
-  public void onSubmitComplete(final IUploader uploader) {
-    super.onSubmitComplete(uploader);
+  public void onSubmitComplete() {
+    super.onSubmitComplete();
     final GroupDTO group = session.getCurrentState().getGroup();
     if (session.getCurrentUser().getShortName().equals(group.getShortName())) {
       userService.get().getUserAvatarBaser64(session.getUserHash(), group.getStateToken(),
@@ -111,15 +95,5 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
             }
           });
     }
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#setState()
-   */
-  @Override
-  protected void setState() {
-    view.setUploadParams(session.getUserHash(), session.getCurrentUser().getStateToken().toString());
   }
 }

@@ -22,13 +22,9 @@
  \*/
 package cc.kune.gspace.client.options.logo;
 
-import gwtupload.client.IUploader.OnCancelUploaderHandler;
-import gwtupload.client.IUploader.OnChangeUploaderHandler;
-import gwtupload.client.IUploader.OnFinishUploaderHandler;
-import gwtupload.client.IUploader.OnStartUploaderHandler;
-import cc.kune.common.client.log.Log;
 import cc.kune.common.client.ui.IconLabel;
-import cc.kune.common.client.utils.OnAcceptCallback;
+import cc.kune.common.client.ui.UploadFinishedEvent.UploadFinishedHandler;
+import cc.kune.common.client.ui.UploaderPanel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.resources.iconic.IconicResources;
@@ -36,23 +32,17 @@ import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.gspace.client.options.EntityOptionsView;
 
-import com.google.gwt.core.client.GWT;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.web.bindery.event.shared.EventBus;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptLogoPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
-
-  /** The Constant ICON_UPLD_SERVLET. */
-  public static final String ICON_UPLD_SERVLET = GWT.getModuleBaseURL()
-      + "servlets/EntityLogoUploadManager";
 
   /** The Constant TAB_ID. */
   public static final String TAB_ID = "k-eodlp-logo-id";
@@ -63,12 +53,11 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
   /** The tab title. */
   private final IconLabel tabTitle;
 
-  /** The uploader. */
-  private final EntityUploaderForm uploader;
+  private final UploaderPanel uploader;
 
   /**
    * Instantiates a new entity opt logo panel.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param i18n
@@ -87,9 +76,10 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     super();
     this.i18n = i18n;
     tabTitle = TabTitleGenerator.generate(res.pictureWhite(), "", TAB_ID);
-    uploader = new EntityUploaderForm(ICON_UPLD_SERVLET, i18n.t("Choose"));
+    uploader = new UploaderPanel(i18n.t("choose an image"), FileConstants.ACCEPTED_IMAGES);
 
     initWidget(uploader);
+
     // Better autoadjust
     // setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
     setWidth(String.valueOf(EntityOptionsView.WIDTH_WOUT_MARGIN) + "px");
@@ -98,62 +88,9 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     addStyleName("k-tab-panel");
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#
-   * addOnCancelUploadHandler
-   * (gwtupload.client.IUploader.OnCancelUploaderHandler)
-   */
   @Override
-  public HandlerRegistration addOnCancelUploadHandler(final OnCancelUploaderHandler handler) {
-    return uploader.addOnCancelUploadHandler(handler);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#
-   * addOnChangeUploadHandler
-   * (gwtupload.client.IUploader.OnChangeUploaderHandler)
-   */
-  @Override
-  public HandlerRegistration addOnChangeUploadHandler(final OnChangeUploaderHandler handler) {
-    return uploader.addOnChangeUploadHandler(handler);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.gspace.client.options.EntityOptionsUploaderView#
-   * addOnFinishUploadHandler
-   * (gwtupload.client.IUploader.OnFinishUploaderHandler)
-   */
-  @Override
-  public HandlerRegistration addOnFinishUploadHandler(final OnFinishUploaderHandler handler) {
-    return uploader.addOnFinishUploadHandler(handler);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.gspace.client.options.EntityOptionsUploaderView#addOnStartUploadHandler
-   * (gwtupload.client.IUploader.OnStartUploaderHandler)
-   */
-  @Override
-  public HandlerRegistration addOnStartUploadHandler(final OnStartUploaderHandler handler) {
-    return uploader.addOnStartUploadHandler(handler);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.gspace.client.options.logo.EntityOptLogoView#getOnSubmit()
-   */
-  @Override
-  public OnAcceptCallback getOnSubmit() {
-    return null;
+  public HandlerRegistration addUploadFinishedHandler(final UploadFinishedHandler handler) {
+    return uploader.addUploadFinishedHandler(handler);
   }
 
   /*
@@ -206,19 +143,6 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
         FileConstants.LOGO_DEF_SIZE, FileConstants.LOGO_DEF_SIZE));
     TabTitleGenerator.setText(tabTitle, i18n.t(CoreMessages.ENT_LOGO_SELECTOR_PERSON_TITLE),
         MAX_TABTITLE_LENGTH, i18n.getDirection());
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.gspace.client.options.logo.EntityOptLogoView#setUploadParams(java
-   * .lang.String, java.lang.String)
-   */
-  @Override
-  public void setUploadParams(final String userHash, final String token) {
-    uploader.setUploadParams(userHash, token);
-    Log.info("Logo uploader params: " + userHash + ", " + token);
   }
 
 }

@@ -1,5 +1,6 @@
 kune (0.3.0+b46) unstable; urgency=medium
 
+  * Logo and background uploading rewrited with image drag/drop
   * Some works trying to prevent logos recently changed caching
   * Improved jetty server gracefully shutdown 
   * Improved kune superdev lauchers in eclipse

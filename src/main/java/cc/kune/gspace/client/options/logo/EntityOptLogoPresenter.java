@@ -22,13 +22,10 @@
  \*/
 package cc.kune.gspace.client.options.logo;
 
-import gwtupload.client.IUploadStatus.Status;
-import gwtupload.client.IUploader;
-import gwtupload.client.IUploader.OnFinishUploaderHandler;
-import gwtupload.client.IUploader.OnStartUploaderHandler;
-import cc.kune.common.client.log.Log;
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.client.ui.UploadFinishedEvent;
+import cc.kune.common.client.ui.UploadFinishedEvent.UploadFinishedHandler;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.UpDownServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -56,11 +53,10 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
   /** The event bus. */
   protected final EventBus eventBus;
 
-  /** The i18n. */
-  private final I18nTranslationService i18n;
-
   /** The session. */
   protected final Session session;
+
+  private final UpDownServiceAsync upDownService;
 
   /** The user service. */
   protected final Provider<UserServiceAsync> userService;
@@ -84,13 +80,13 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
    */
   public EntityOptLogoPresenter(final EventBus eventBus, final Session session,
       final EntityOptions entityOptions, final Provider<UserServiceAsync> userService,
-      final I18nTranslationService i18n, final ChangedLogosRegistry changedLogosRegistry) {
+      final ChangedLogosRegistry changedLogosRegistry, final UpDownServiceAsync upDownService) {
     this.eventBus = eventBus;
     this.session = session;
     this.entityOptions = entityOptions;
     this.userService = userService;
-    this.i18n = i18n;
     this.changedLogosRegistry = changedLogosRegistry;
+    this.upDownService = upDownService;
   }
 
   /**
@@ -111,17 +107,22 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
   protected void init(final EntityOptLogoView view) {
     this.view = view;
     entityOptions.addTab(view, view.getTabTitle());
-    setState();
-    view.addOnStartUploadHandler(new OnStartUploaderHandler() {
+    view.addUploadFinishedHandler(new UploadFinishedHandler() {
       @Override
-      public void onStart(final IUploader uploader) {
-        setState();
-      }
-    });
-    view.addOnFinishUploadHandler(new OnFinishUploaderHandler() {
-      @Override
-      public void onFinish(final IUploader uploader) {
-        onSubmitComplete(uploader);
+      public void onUploadFinished(final UploadFinishedEvent event) {
+        upDownService.uploadLogo(session.getUserHash(), session.getCurrentStateToken(), event.getFile(),
+            new AsyncCallbackSimple<Void>() {
+          @Override
+          public void onFailure(final Throwable caught) {
+            super.onFailure(caught);
+            view.reset();
+          }
+
+          @Override
+          public void onSuccess(final Void result) {
+            onSubmitComplete();
+          }
+        });
         view.reset();
       }
     });
@@ -133,33 +134,10 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
    * @param uploader
    *          the uploader
    */
-  public void onSubmitComplete(final IUploader uploader) {
-    final String response = uploader.getServerMessage().getMessage();
-    if (uploader.getStatus() == Status.SUCCESS) {
-      if (response != null) {
-        Log.info("Response uploading logo: " + response);
-      }
-      final GroupDTO currentGroup = session.getCurrentState().getGroup();
-      changedLogosRegistry.add(currentGroup.getShortName());
-      CurrentEntityChangedEvent.fire(eventBus, currentGroup.getShortName(), currentGroup.getLongName());
-    } else {
-      onSubmitFailed(response);
-    }
+  public void onSubmitComplete() {
+    final GroupDTO currentGroup = session.getCurrentState().getGroup();
+    changedLogosRegistry.add(currentGroup.getShortName());
+    CurrentEntityChangedEvent.fire(eventBus, currentGroup.getShortName(), currentGroup.getLongName());
+    view.reset();
   }
-
-  /**
-   * On submit failed.
-   *
-   * @param responseText
-   *          the response text
-   */
-  public void onSubmitFailed(final String responseText) {
-    NotifyUser.error(i18n.t("Error setting the logo"));
-  }
-
-  /**
-   * Sets the state.
-   */
-  protected abstract void setState();
-
 }

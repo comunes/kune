@@ -22,24 +22,16 @@
  \*/
 package cc.kune.gspace.client.options.logo;
 
-import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.gspace.client.options.EntityOptionsTabView;
 import cc.kune.gspace.client.options.EntityOptionsUploaderView;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityOptLogoView.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptLogoView extends EntityOptionsTabView, EntityOptionsUploaderView {
-
-  /**
-   * Gets the on submit.
-   * 
-   * @return the on submit
-   */
-  OnAcceptCallback getOnSubmit();
 
   /**
    * Reset.
@@ -55,15 +47,5 @@ public interface EntityOptLogoView extends EntityOptionsTabView, EntityOptionsUp
    * Sets the personal groups labels.
    */
   void setPersonalGroupsLabels();
-
-  /**
-   * Sets the upload params.
-   * 
-   * @param userHash
-   *          the user hash
-   * @param token
-   *          the token
-   */
-  void setUploadParams(String userHash, String token);
 
 }

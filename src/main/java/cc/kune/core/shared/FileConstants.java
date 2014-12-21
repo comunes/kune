@@ -30,6 +30,8 @@ package cc.kune.core.shared;
  */
 public final class FileConstants {
 
+  public final static String ACCEPTED_IMAGES = "png,jpg,gif,jpeg,bmp";
+
   /** The Constant ASITE_PREFIX. */
   public final static String ASITE_PREFIX = "/ws/";
 

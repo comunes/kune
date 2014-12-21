@@ -22,12 +22,9 @@
  */
 package cc.kune.gspace.client.options.logo;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.events.GroupChangedEvent;
-import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
+import cc.kune.core.client.rpcservices.UpDownServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.gspace.client.options.GroupOptions;
 
@@ -63,17 +60,12 @@ public class GroupOptLogoPresenter extends EntityOptLogoPresenter {
    */
   @Inject
   public GroupOptLogoPresenter(final EventBus eventBus, final Session session,
-      final GroupOptions entityOptions, final StateManager stateManager,
-      final Provider<UserServiceAsync> userService, final GroupOptLogoView view,
-      final I18nTranslationService i18n, final ChangedLogosRegistry logosChanged) {
-    super(eventBus, session, entityOptions, userService, i18n, logosChanged);
+      final GroupOptions entityOptions, final Provider<UserServiceAsync> userService,
+      final GroupOptLogoView view,
+
+      final ChangedLogosRegistry logosChanged, final UpDownServiceAsync upDownService) {
+    super(eventBus, session, entityOptions, userService, logosChanged, upDownService);
     init(view);
-    stateManager.onGroupChanged(true, new GroupChangedHandler() {
-      @Override
-      public void onGroupChanged(final GroupChangedEvent event) {
-        setState();
-      }
-    });
   }
 
   /**
@@ -87,13 +79,4 @@ public class GroupOptLogoPresenter extends EntityOptLogoPresenter {
     view.setNormalGroupsLabels();
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see cc.kune.gspace.client.options.logo.EntityOptLogoPresenter#setState()
-   */
-  @Override
-  protected void setState() {
-    view.setUploadParams(session.getUserHash(), session.getCurrentStateToken().toString());
-  }
 }

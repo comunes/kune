@@ -589,6 +589,11 @@
       <version>1.0.1</version>
     </dependency>
     <!-- end gwtupload -->
+    <dependency>
+    	<groupId>org.vectomatic</groupId>
+    	<artifactId>lib-gwt-file</artifactId>
+    	<version>0.3.6</version>
+    </dependency>
     <!-- others -->
     <dependency>
       <groupId>javax.mail</groupId>
