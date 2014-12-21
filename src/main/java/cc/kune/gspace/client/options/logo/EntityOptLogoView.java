@@ -33,10 +33,14 @@ import cc.kune.gspace.client.options.EntityOptionsUploaderView;
  */
 public interface EntityOptLogoView extends EntityOptionsTabView, EntityOptionsUploaderView {
 
+  void clearLogo();
+
   /**
    * Reset.
    */
   void reset();
+
+  void setLogo(String logoImageUrl);
 
   /**
    * Sets the normal groups labels.
@@ -47,5 +51,4 @@ public interface EntityOptLogoView extends EntityOptionsTabView, EntityOptionsUp
    * Sets the personal groups labels.
    */
   void setPersonalGroupsLabels();
-
 }

@@ -26,6 +26,7 @@ import cc.kune.core.client.events.AvatarChangedEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UpDownServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
@@ -66,8 +67,10 @@ public class UserOptLogoPresenter extends EntityOptLogoPresenter {
   public UserOptLogoPresenter(final EventBus eventBus, final Session session,
       final UserOptions entityOptions, final StateManager stateManager,
       final Provider<UserServiceAsync> userService, final UserOptLogoView view,
-      final ChangedLogosRegistry changedLogos, final UpDownServiceAsync upDownService) {
-    super(eventBus, session, entityOptions, userService, changedLogos, upDownService);
+      final ClientFileDownloadUtils downUtils, final ChangedLogosRegistry changedLogos,
+      final UpDownServiceAsync upDownService) {
+    super(eventBus, session, entityOptions, userService, downUtils, changedLogos, upDownService,
+        stateManager);
     init(view);
   }
 

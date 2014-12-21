@@ -60,6 +60,14 @@
   .spinner {
     
   }
+  
+  .file {
+    
+  }
+  
+  .preview {
+    float: right;
+  }
   </ui:style>
 
   <g:FlowPanel ui:field="flow" addStyleNames="{style.flow}">
@@ -68,18 +76,20 @@
       <g:FlowPanel>
         <v:DropPanel ui:field="dropPanel" addStyleNames="{style.dropPanel}">
           <g:FlowPanel ui:field="innerFlow" addStyleNames="{style.innerFlow}">
+            <g:Image ui:field="preview" addStyleNames="{style.preview}" />
             <g:Label ui:field="dropIntro" addStyleNames="{style.dropIntro}">"Drag
               an
               image here</g:Label>
             <f:FileUploadExt name="file" ui:field="customUpload"
-              styleName="{style.customUpload}" />
+              addStyleNames="{style.customUpload}" />
             <g:FileUpload name="file" ui:field="upload"
-              styleName="{style.customUpload}" />
+              addStyleNames="{style.customUpload}" />
             <g:Label ui:field="dropOr" addStyleNames="{style.dropOr}">or, if
               you
               prefer...</g:Label>
             <g:Button text="Load files" ui:field="button"
               addStyleNames="{style.button} k-button" />
+
           </g:FlowPanel>
         </v:DropPanel>
       </g:FlowPanel>

@@ -40,7 +40,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 
@@ -60,9 +59,6 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /** The background label. */
   private final IconLabel backgroundLabel;
-
-  /** The back image. */
-  private final Image backImage;
 
   /** The change image. */
   private final String changeImage;
@@ -123,19 +119,15 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
     uploader = new UploaderPanel(chooseImage, FileConstants.ACCEPTED_IMAGES);
     uploader.setLabelText("");
     uploader.addStyleName("k-clean");
-    backImage = new Image();
-    backImage.addStyleName("kune-Margin-Medium-trbl");
     clearBtn = new Button(i18n.t("Clear"));
     clearBtn.setStyleName("k-button");
-    clearBtn.addStyleName("k-fl");
+    clearBtn.addStyleName("k-fr");
     clearBtn.addStyleName("kune-Margin-20-lr");
     Tooltip.to(clearBtn, i18n.t("Remove current background image"));
     flow.add(backgroundLabel);
-    flow.add(backImage);
     flow.add(clearBtn);
     flow.add(uploader);
     flow.addStyleName("oc-clean");
-    backImage.addStyleName("k-fl");
     // final Label wsInfo = new
     // Label(i18n.t("Select and configure the public space theme of this group:"));
     // wsInfo.addStyleName("kune-Margin-Medium-tb");
@@ -179,6 +171,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
   @Override
   public void clearBackImage() {
     setBackImageVisibleImpl(false);
+    uploader.clearBackImage();
   }
 
   /*
@@ -229,8 +222,8 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
    */
   @Override
   public void setBackImage(final String url) {
-    backImage.setUrl(url);
     setBackImageVisibleImpl(true);
+    uploader.setBackImage(url);
   }
 
   /**
@@ -240,7 +233,6 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
    *          the new back image visible impl
    */
   private void setBackImageVisibleImpl(final boolean visible) {
-    backImage.setVisible(visible);
     clearBtn.setVisible(visible);
     backgroundLabel.setText(visible ? hasBackLabel : noHasBacklabel, i18n.getDirection());
     uploader.getBtn().setText(visible ? changeImage : chooseImage);

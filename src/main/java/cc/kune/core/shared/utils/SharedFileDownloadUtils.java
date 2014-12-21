@@ -71,7 +71,7 @@ public abstract class SharedFileDownloadUtils {
     return prefix
         + (group.hasLogo() ? getLogoImageUrl(group.getShortName())
             : group.isPersonal() ? getLogoImageUrl(group.getShortName()) : "/"
-                + FileConstants.GROUP_NO_AVATAR_IMAGE);
+            + FileConstants.GROUP_NO_AVATAR_IMAGE);
   }
 
   /**
@@ -93,8 +93,8 @@ public abstract class SharedFileDownloadUtils {
       final boolean isPersonal, final int size, final int hvspace) {
     final String imgUrl = groupHasLogo ? getLogoImageUrl(groupName)
         : isPersonal ? getLogoImageUrl(groupName) : prefix + "/" + FileConstants.GROUP_NO_AVATAR_IMAGE;
-    return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
-        + "px; height: " + size + "px;' src='" + imgUrl + "'>";
+        return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
+            + "px; height: " + size + "px;' src='" + imgUrl + "'>";
   }
 
   /**
@@ -155,7 +155,8 @@ public abstract class SharedFileDownloadUtils {
   }
 
   public String noCacheSuffix(final String shortName) {
-    return recentlyChanged.isRecentlyChanged(shortName) ? UrlParam.noCacheStringSuffix() : "";
+    return recentlyChanged.isRecentlyChanged(shortName) ? UrlParam.noCacheStringSuffix(recentlyChanged.getLastModified(shortName))
+        : "";
   }
 
   public void setPrefix(final String prefix) {

@@ -24,7 +24,9 @@ package cc.kune.gspace.client.options.logo;
 
 import cc.kune.core.client.rpcservices.UpDownServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.gspace.client.options.GroupOptions;
 
@@ -61,10 +63,11 @@ public class GroupOptLogoPresenter extends EntityOptLogoPresenter {
   @Inject
   public GroupOptLogoPresenter(final EventBus eventBus, final Session session,
       final GroupOptions entityOptions, final Provider<UserServiceAsync> userService,
-      final GroupOptLogoView view,
-
-      final ChangedLogosRegistry logosChanged, final UpDownServiceAsync upDownService) {
-    super(eventBus, session, entityOptions, userService, logosChanged, upDownService);
+      final GroupOptLogoView view, final StateManager stateManager,
+      final ClientFileDownloadUtils downUtils, final ChangedLogosRegistry logosChanged,
+      final UpDownServiceAsync upDownService) {
+    super(eventBus, session, entityOptions, userService, downUtils, logosChanged, upDownService,
+        stateManager);
     init(view);
   }
 

@@ -93,9 +93,14 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     return uploader.addUploadFinishedHandler(handler);
   }
 
+  @Override
+  public void clearLogo() {
+    uploader.clearBackImage();
+  }
+
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.EntityOptionsTabView#getTabTitle()
    */
   @Override
@@ -105,7 +110,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.logo.EntityOptLogoView#reset()
    */
   @Override
@@ -113,9 +118,14 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
     uploader.reset();
   }
 
+  @Override
+  public void setLogo(final String logoImageUrl) {
+    uploader.setBackImage(logoImageUrl);
+  }
+
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.logo.EntityOptLogoView#setNormalGroupsLabels
    * ()
@@ -131,7 +141,7 @@ public class EntityOptLogoPanel extends Composite implements EntityOptLogoView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.logo.EntityOptLogoView#setPersonalGroupsLabels
    * ()

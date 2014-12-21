@@ -12,6 +12,8 @@ public interface ChangedLogosRegistry {
 
   void add(String shortname);
 
+  String getLastModified(String token);
+
   boolean isRecentlyChanged(String shortname);
 
 }

@@ -19,6 +19,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.UploadFinishedEvent.UploadFinishedHandler;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.ui.UploadFile;
+import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 
 import com.google.gwt.core.client.GWT;
@@ -38,6 +39,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -73,6 +75,8 @@ public class UploaderPanel extends Composite {
   private final InputElement inputElement;
   @UiField
   Label intro;
+  @UiField
+  Image preview;
 
   public UploaderPanel(final String btnText, final String accepted) {
     initWidget(uiBinder.createAndBindUi(this));
@@ -89,6 +93,7 @@ public class UploaderPanel extends Composite {
     inputElement.setAccept(accepted);
     acceptedMimes = Arrays.asList(accepted.split(","));
 
+    preview.setHeight(FileConstants.LOGO_DEF_SIZE + "px");
     fileReader = new FileReader();
 
     fileReader.addErrorHandler(new ErrorHandler() {
@@ -125,6 +130,10 @@ public class UploaderPanel extends Composite {
   @UiHandler("button")
   public void browse(final ClickEvent event) {
     customUpload.click();
+  }
+
+  public void clearBackImage() {
+    preview.setVisible(false);
   }
 
   public HasText getBtn() {
@@ -184,6 +193,11 @@ public class UploaderPanel extends Composite {
   public void reset() {
     file = null;
     deck.showWidget(0);
+  }
+
+  public void setBackImage(final String logoImageUrl) {
+    preview.setUrl(logoImageUrl);
+    preview.setVisible(true);
   }
 
   private void setBorderColor(final String color) {

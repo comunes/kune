@@ -24,10 +24,14 @@ package cc.kune.gspace.client.options.logo;
 
 import cc.kune.common.client.ui.UploadFinishedEvent;
 import cc.kune.common.client.ui.UploadFinishedEvent.UploadFinishedHandler;
+import cc.kune.core.client.events.StateChangedEvent;
+import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.UpDownServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
@@ -47,6 +51,8 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   private final ChangedLogosRegistry changedLogosRegistry;
 
+  private final ClientFileDownloadUtils downUtils;
+
   /** The entity options. */
   private final EntityOptions entityOptions;
 
@@ -55,6 +61,8 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
 
   /** The session. */
   protected final Session session;
+
+  private final StateManager stateManager;
 
   private final UpDownServiceAsync upDownService;
 
@@ -75,18 +83,22 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
    *          the entity options
    * @param userService
    *          the user service
+   * @param stateManager
    * @param i18n
    *          the i18n
    */
   public EntityOptLogoPresenter(final EventBus eventBus, final Session session,
       final EntityOptions entityOptions, final Provider<UserServiceAsync> userService,
-      final ChangedLogosRegistry changedLogosRegistry, final UpDownServiceAsync upDownService) {
+      final ClientFileDownloadUtils downUtils, final ChangedLogosRegistry changedLogosRegistry,
+      final UpDownServiceAsync upDownService, final StateManager stateManager) {
     this.eventBus = eventBus;
     this.session = session;
     this.entityOptions = entityOptions;
     this.userService = userService;
+    this.downUtils = downUtils;
     this.changedLogosRegistry = changedLogosRegistry;
     this.upDownService = upDownService;
+    this.stateManager = stateManager;
   }
 
   /**
@@ -112,18 +124,30 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
       public void onUploadFinished(final UploadFinishedEvent event) {
         upDownService.uploadLogo(session.getUserHash(), session.getCurrentStateToken(), event.getFile(),
             new AsyncCallbackSimple<Void>() {
-          @Override
-          public void onFailure(final Throwable caught) {
-            super.onFailure(caught);
-            view.reset();
-          }
+              @Override
+              public void onFailure(final Throwable caught) {
+                super.onFailure(caught);
+                view.reset();
+              }
 
-          @Override
-          public void onSuccess(final Void result) {
-            onSubmitComplete();
-          }
-        });
+              @Override
+              public void onSuccess(final Void result) {
+                onSubmitComplete();
+              }
+            });
         view.reset();
+      }
+    });
+    stateManager.onStateChanged(true, new StateChangedHandler() {
+
+      @Override
+      public void onStateChanged(final StateChangedEvent event) {
+        final GroupDTO group = event.getState().getGroup();
+        if (group.hasLogo()) {
+          setLogo(group);
+        } else {
+          view.clearLogo();
+        }
       }
     });
   }
@@ -138,6 +162,11 @@ public abstract class EntityOptLogoPresenter implements GroupOptLogo, UserOptLog
     final GroupDTO currentGroup = session.getCurrentState().getGroup();
     changedLogosRegistry.add(currentGroup.getShortName());
     CurrentEntityChangedEvent.fire(eventBus, currentGroup.getShortName(), currentGroup.getLongName());
+    setLogo(currentGroup);
     view.reset();
+  }
+
+  private void setLogo(final GroupDTO group) {
+    view.setLogo(downUtils.getLogoImageUrl(group.getShortName()));
   }
 }
