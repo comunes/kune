@@ -119,7 +119,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
     backgroundLabel = new IconLabel(res.pictureGrey(), hasBackLabel);
     backgroundLabel.addStyleName("k-clear");
     chooseImage = i18n.t("choose an image");
-    changeImage = i18n.t("Change");
+    changeImage = i18n.t("choose another image");
     uploader = new UploaderPanel(chooseImage, FileConstants.ACCEPTED_IMAGES);
     uploader.setLabelText("");
     uploader.addStyleName("k-clean");
@@ -172,7 +172,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.gspace.client.options.style.EntityOptStyleView#clearBackImage()
    */
@@ -183,7 +183,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.options.style.EntityOptStyleView#getClearBtn()
    */
   @Override
@@ -193,7 +193,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.options.EntityOptionsTabView#getTabTitle()
    */
   @Override
@@ -212,7 +212,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.options.style.EntityOptStyleView#reset()
    */
   @Override
@@ -222,7 +222,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.gspace.client.options.style.EntityOptStyleView#setBackImage(java
    * .lang.String)
