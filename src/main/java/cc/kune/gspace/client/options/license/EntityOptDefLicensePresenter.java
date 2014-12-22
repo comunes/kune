@@ -118,7 +118,6 @@ public abstract class EntityOptDefLicensePresenter {
   protected void init(final EntityOptDefLicenseView view) {
     this.view = view;
     entityOptions.addTab(view, view.getTabTitle());
-    // setState();
     view.getChange().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
