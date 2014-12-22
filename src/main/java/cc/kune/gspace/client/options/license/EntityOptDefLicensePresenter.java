@@ -39,7 +39,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptDefLicensePresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntityOptDefLicensePresenter {
@@ -61,7 +61,7 @@ public abstract class EntityOptDefLicensePresenter {
 
   /**
    * Instantiates a new entity opt def license presenter.
-   * 
+   *
    * @param entityOptions
    *          the entity options
    * @param session
@@ -81,28 +81,28 @@ public abstract class EntityOptDefLicensePresenter {
 
   /**
    * Applicable.
-   * 
+   *
    * @return true, if successful
    */
   protected abstract boolean applicable();
 
   /**
    * Gets the current def license.
-   * 
+   *
    * @return the current def license
    */
   protected abstract LicenseDTO getCurrentDefLicense();
 
   /**
    * Gets the operation token.
-   * 
+   *
    * @return the operation token
    */
   protected abstract StateToken getOperationToken();
 
   /**
    * Gets the view.
-   * 
+   *
    * @return the view
    */
   public IsWidget getView() {
@@ -111,14 +111,14 @@ public abstract class EntityOptDefLicensePresenter {
 
   /**
    * Inits the.
-   * 
+   *
    * @param view
    *          the view
    */
   protected void init(final EntityOptDefLicenseView view) {
     this.view = view;
     entityOptions.addTab(view, view.getTabTitle());
-    setState();
+    // setState();
     view.getChange().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -165,7 +165,7 @@ public abstract class EntityOptDefLicensePresenter {
 
   /**
    * Sets the license.
-   * 
+   *
    * @param license
    *          the new license
    */

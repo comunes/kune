@@ -1,5 +1,6 @@
 kune (0.3.0+b46) unstable; urgency=medium
 
+  * Fixed exception when load kune in inbox (in a wave) and you try to set your prefs. Fix #587
   * Wave profiles should take into account avatars modifications, fixed #397
   * Avatar and logos cache issues when updated. Fix for #586
   * Avatar and backgrounds are shown in preferences. Fix for #549

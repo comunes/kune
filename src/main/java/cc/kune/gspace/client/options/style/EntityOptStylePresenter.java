@@ -129,13 +129,13 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
   private void clearBackImage() {
     groupService.get().clearGroupBackImage(session.getUserHash(), session.getCurrentStateToken(),
         new AsyncCallbackSimple<GroupDTO>() {
-          @Override
-          public void onSuccess(final GroupDTO result) {
-            view.clearBackImage();
-            backManager.clearBackgroundImage();
-            ClearBackgroundImageEvent.fire(eventBus);
-          }
-        });
+      @Override
+      public void onSuccess(final GroupDTO result) {
+        view.clearBackImage();
+        backManager.clearBackgroundImage();
+        ClearBackgroundImageEvent.fire(eventBus);
+      }
+    });
   }
 
   /**
@@ -156,7 +156,6 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
   public void init(final EntityOptStyleView view) {
     this.view = view;
     entityOptions.addTab(view, view.getTabTitle());
-    setState();
     view.getClearBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -171,38 +170,38 @@ public abstract class EntityOptStylePresenter implements EntityOptStyle {
     });
     eventBus.addHandler(SetBackgroundImageEvent.getType(),
         new SetBackgroundImageEvent.SetBackgroundImageHandler() {
-          @Override
-          public void onSetBackImage(final SetBackgroundImageEvent event) {
-            backManager.setBackgroundImage();
-            final StateToken token = event.getToken();
-            changedLogosRegistry.add(token.getGroup());
-            setBackImage(token);
-          }
-        });
+      @Override
+      public void onSetBackImage(final SetBackgroundImageEvent event) {
+        backManager.setBackgroundImage();
+        final StateToken token = event.getToken();
+        changedLogosRegistry.add(token.getGroup());
+        setBackImage(token);
+      }
+    });
     eventBus.addHandler(ClearBackgroundImageEvent.getType(),
         new ClearBackgroundImageEvent.ClearBackgroundImageHandler() {
-          @Override
-          public void onClearBackImage(final ClearBackgroundImageEvent event) {
-            view.clearBackImage();
-          }
-        });
+      @Override
+      public void onClearBackImage(final ClearBackgroundImageEvent event) {
+        view.clearBackImage();
+      }
+    });
     view.addUploadFinishedHandler(new UploadFinishedHandler() {
       @Override
       public void onUploadFinished(final UploadFinishedEvent event) {
         upDownService.uploadBackground(session.getUserHash(), session.getCurrentStateToken(),
             event.getFile(), new AsyncCallbackSimple<Void>() {
-              @Override
-              public void onFailure(final Throwable caught) {
-                super.onFailure(caught);
-                view.reset();
-              }
+          @Override
+          public void onFailure(final Throwable caught) {
+            super.onFailure(caught);
+            view.reset();
+          }
 
-              @Override
-              public void onSuccess(final Void result) {
-                onSubmitComplete();
-                view.reset();
-              }
-            });
+          @Override
+          public void onSuccess(final Void result) {
+            onSubmitComplete();
+            view.reset();
+          }
+        });
       }
     });
 
