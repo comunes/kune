@@ -1,3 +1,9 @@
+kune (0.3.0+b47) unstable; urgency=medium
+
+  * Debian default/kune minor change
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 22 Dec 2014 17:33:01 +0100
+
 kune (0.3.0+b46) unstable; urgency=medium
 
   * Fixed exception when load kune in inbox (in a wave) and you try to set your prefs. Fix #587

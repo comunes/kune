@@ -9,6 +9,12 @@
 # Start kune on boot?
 START=no
 
+# Stop port
+STOP_PORT=8079
+
+# Stop key
+STOP_KEY=somekey
+
 # Additional options that are passed to the Daemon.
 # Options:
 # -l LOGLEVEL : IGNORE|DEBUG|INFO|WARN
@@ -18,5 +24,5 @@ START=no
 # -d: debug
 # -u: Suspend the start (useful for debug the boot)
 # -p: port of debugger
-KUNE_DEFAULT_ARGS="-l INFO -o 8079 -y somekey"
+KUNE_DEFAULT_ARGS="-l INFO -o $STOP_PORT -y $STOP_KEY"
 
