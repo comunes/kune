@@ -224,6 +224,10 @@
       <a>hasLogo</a>
       <b>hasLogo</b>
     </field>
+    <field type="one-way">
+      <a>logoLastModifiedTime</a>
+      <b>logoLastModifiedTime</b>
+    </field>
     <field>
       <a>emailNotifFreq</a>
       <b>emailNotifFreq</b>

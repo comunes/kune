@@ -30,7 +30,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupDTO.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupDTO implements IsSerializable {
@@ -65,6 +65,9 @@ public class GroupDTO implements IsSerializable {
   /** The id. */
   private Long id;
 
+  /** The logoLastModifiedTime. */
+  private Long logoLastModifiedTime;
+
   /** The long name. */
   private String longName;
 
@@ -86,7 +89,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Instantiates a new group dto.
-   * 
+   *
    * @param shortName
    *          the short name
    * @param longName
@@ -129,7 +132,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the admission type.
-   * 
+   *
    * @return the admission type
    */
   public AdmissionType getAdmissionType() {
@@ -138,7 +141,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the background image.
-   * 
+   *
    * @return the background image
    */
   public String getBackgroundImage() {
@@ -147,7 +150,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the compound name.
-   * 
+   *
    * @return the compound name
    */
   public String getCompoundName() {
@@ -159,7 +162,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the created on.
-   * 
+   *
    * @return the created on
    */
   public Long getCreatedOn() {
@@ -168,7 +171,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the default content.
-   * 
+   *
    * @return the default content
    */
   public ContentSimpleDTO getDefaultContent() {
@@ -177,7 +180,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the default license.
-   * 
+   *
    * @return the default license
    */
   public LicenseDTO getDefaultLicense() {
@@ -186,7 +189,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the group type.
-   * 
+   *
    * @return the group type
    */
   public GroupType getGroupType() {
@@ -195,7 +198,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the checks for background.
-   * 
+   *
    * @return the checks for background
    */
   public boolean getHasBackground() {
@@ -204,7 +207,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the checks for logo.
-   * 
+   *
    * @return the checks for logo
    */
   public boolean getHasLogo() {
@@ -213,16 +216,20 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the id.
-   * 
+   *
    * @return the id
    */
   public Long getId() {
     return id;
   }
 
+  public Long getLogoLastModifiedTime() {
+    return logoLastModifiedTime;
+  }
+
   /**
    * Gets the long name.
-   * 
+   *
    * @return the long name
    */
   public String getLongName() {
@@ -231,7 +238,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the short name.
-   * 
+   *
    * @return the short name
    */
   public String getShortName() {
@@ -240,7 +247,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the state token.
-   * 
+   *
    * @return the state token
    */
   public StateToken getStateToken() {
@@ -252,7 +259,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Gets the workspace theme.
-   * 
+   *
    * @return the workspace theme
    */
   public String getWorkspaceTheme() {
@@ -261,7 +268,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Checks for background.
-   * 
+   *
    * @return true, if successful
    */
   public boolean hasBackground() {
@@ -283,7 +290,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Checks for logo.
-   * 
+   *
    * @return true, if successful
    */
   public boolean hasLogo() {
@@ -292,7 +299,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Checks if is not personal.
-   * 
+   *
    * @return true, if is not personal
    */
   public boolean isNotPersonal() {
@@ -301,7 +308,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Checks if is personal.
-   * 
+   *
    * @return true, if is personal
    */
   public boolean isPersonal() {
@@ -310,7 +317,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the admission type.
-   * 
+   *
    * @param admissionType
    *          the new admission type
    */
@@ -320,7 +327,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the background image.
-   * 
+   *
    * @param backgroundImage
    *          the new background image
    */
@@ -330,7 +337,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the created on.
-   * 
+   *
    * @param createdOn
    *          the new created on
    */
@@ -340,7 +347,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the default content.
-   * 
+   *
    * @param defaultContent
    *          the new default content
    */
@@ -350,7 +357,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the default license.
-   * 
+   *
    * @param defaultLicense
    *          the new default license
    */
@@ -360,7 +367,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the group type.
-   * 
+   *
    * @param groupType
    *          the new group type
    */
@@ -370,7 +377,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the checks for background.
-   * 
+   *
    * @param hasBackground
    *          the new checks for background
    */
@@ -380,7 +387,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the checks for logo.
-   * 
+   *
    * @param hasLogo
    *          the new checks for logo
    */
@@ -390,7 +397,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the id.
-   * 
+   *
    * @param id
    *          the new id
    */
@@ -398,9 +405,13 @@ public class GroupDTO implements IsSerializable {
     this.id = id;
   }
 
+  public void setLogoLastModifiedTime(final Long logoLastModifiedTime) {
+    this.logoLastModifiedTime = logoLastModifiedTime;
+  }
+
   /**
    * Sets the long name.
-   * 
+   *
    * @param name
    *          the new long name
    */
@@ -410,7 +421,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the short name.
-   * 
+   *
    * @param shortName
    *          the new short name
    */
@@ -420,7 +431,7 @@ public class GroupDTO implements IsSerializable {
 
   /**
    * Sets the workspace theme.
-   * 
+   *
    * @param workspaceTheme
    *          the new workspace theme
    */

@@ -69,9 +69,10 @@ public abstract class SharedFileDownloadUtils {
    */
   public String getGroupLogo(final GroupDTO group) {
     return prefix
-        + (group.hasLogo() ? getLogoImageUrl(group.getShortName())
+        + (group.hasLogo() ? getLogoImageUrl(group.getShortName(),
+            group.getLogoLastModifiedTime().toString())
             : group.isPersonal() ? getLogoImageUrl(group.getShortName()) : "/"
-            + FileConstants.GROUP_NO_AVATAR_IMAGE);
+                + FileConstants.GROUP_NO_AVATAR_IMAGE);
   }
 
   /**
@@ -93,8 +94,8 @@ public abstract class SharedFileDownloadUtils {
       final boolean isPersonal, final int size, final int hvspace) {
     final String imgUrl = groupHasLogo ? getLogoImageUrl(groupName)
         : isPersonal ? getLogoImageUrl(groupName) : prefix + "/" + FileConstants.GROUP_NO_AVATAR_IMAGE;
-        return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
-            + "px; height: " + size + "px;' src='" + imgUrl + "'>";
+    return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
+        + "px; height: " + size + "px;' src='" + imgUrl + "'>";
   }
 
   /**
@@ -108,6 +109,20 @@ public abstract class SharedFileDownloadUtils {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName),
             new UrlParam(FileConstants.ONLY_USERS, false)).toString() + noCacheSuffix(groupName);
+  }
+
+  /**
+   * Gets the logo image url.
+   *
+   * @param groupName
+   *          the group name
+   * @return the logo image url
+   */
+  public String getLogoImageUrl(final String groupName, final String suffix) {
+    return prefix
+        + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName),
+            new UrlParam(FileConstants.ONLY_USERS, false)).toString()
+        + UrlParam.noCacheStringSuffix(suffix);
   }
 
   /**
@@ -151,7 +166,7 @@ public abstract class SharedFileDownloadUtils {
    * @return the user avatar
    */
   public String getUserAvatar(final UserSimpleDTO user) {
-    return prefix + getLogoImageUrl(user.getShortName());
+    return prefix + getLogoImageUrl(user.getShortName(), user.getLogoLastModifiedTime().toString());
   }
 
   public String noCacheSuffix(final String shortName) {

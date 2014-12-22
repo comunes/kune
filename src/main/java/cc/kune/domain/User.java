@@ -60,7 +60,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class User.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -80,7 +80,7 @@ public class User implements HasId {
 
   /**
    * Checks if is known user.
-   * 
+   *
    * @param user
    *          the user
    * @return true, if is known user
@@ -189,7 +189,7 @@ public class User implements HasId {
 
   /**
    * Instantiates a new user.
-   * 
+   *
    * @param shortName
    *          the short name
    * @param longName
@@ -264,7 +264,7 @@ public class User implements HasId {
 
   /**
    * Gets the country.
-   * 
+   *
    * @return the country
    */
   public I18nCountry getCountry() {
@@ -273,7 +273,7 @@ public class User implements HasId {
 
   /**
    * Gets the created on.
-   * 
+   *
    * @return the created on
    */
   public Long getCreatedOn() {
@@ -282,7 +282,7 @@ public class User implements HasId {
 
   /**
    * Gets the diggest.
-   * 
+   *
    * @return the diggest
    */
   public byte[] getDiggest() {
@@ -291,7 +291,7 @@ public class User implements HasId {
 
   /**
    * Gets the email.
-   * 
+   *
    * @return the email
    */
   public String getEmail() {
@@ -300,7 +300,7 @@ public class User implements HasId {
 
   /**
    * Gets the email check date.
-   * 
+   *
    * @return the email check date
    */
   public Long getEmailCheckDate() {
@@ -309,7 +309,7 @@ public class User implements HasId {
 
   /**
    * Gets the email confirm hash.
-   * 
+   *
    * @return the email confirm hash
    */
   public String getEmailConfirmHash() {
@@ -318,7 +318,7 @@ public class User implements HasId {
 
   /**
    * Gets the email notif freq.
-   * 
+   *
    * @return the email notif freq
    */
   public EmailNotificationFrequency getEmailNotifFreq() {
@@ -327,7 +327,7 @@ public class User implements HasId {
 
   /**
    * Gets the email verified.
-   * 
+   *
    * @return the email verified
    */
   public boolean getEmailVerified() {
@@ -336,7 +336,7 @@ public class User implements HasId {
 
   /**
    * Gets the checks for logo.
-   * 
+   *
    * @return the checks for logo
    */
   public boolean getHasLogo() {
@@ -345,7 +345,7 @@ public class User implements HasId {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -355,7 +355,7 @@ public class User implements HasId {
 
   /**
    * Gets the language.
-   * 
+   *
    * @return the language
    */
   public I18nLanguage getLanguage() {
@@ -364,16 +364,21 @@ public class User implements HasId {
 
   /**
    * Gets the last login.
-   * 
+   *
    * @return the last login
    */
   public Long getLastLogin() {
     return lastLogin;
   }
 
+  @Transient
+  public Long getLogoLastModifiedTime() {
+    return userGroup.getLogoLastModifiedTime();
+  }
+
   /**
    * Gets the name.
-   * 
+   *
    * @return the name
    */
   public String getName() {
@@ -382,7 +387,7 @@ public class User implements HasId {
 
   /**
    * Gets the salt.
-   * 
+   *
    * @return the salt
    */
   public byte[] getSalt() {
@@ -391,7 +396,7 @@ public class User implements HasId {
 
   /**
    * Gets the short name.
-   * 
+   *
    * @return the short name
    */
   public String getShortName() {
@@ -400,7 +405,7 @@ public class User implements HasId {
 
   /**
    * Gets the s net visibility.
-   * 
+   *
    * @return the s net visibility
    */
   public UserSNetVisibility getSNetVisibility() {
@@ -409,7 +414,7 @@ public class User implements HasId {
 
   /**
    * Gets the state token.
-   * 
+   *
    * @return the state token
    */
   @Transient
@@ -419,7 +424,7 @@ public class User implements HasId {
 
   /**
    * Gets the timezone.
-   * 
+   *
    * @return the timezone
    */
   public TimeZone getTimezone() {
@@ -428,7 +433,7 @@ public class User implements HasId {
 
   /**
    * Gets the user group.
-   * 
+   *
    * @return the user group
    */
   public Group getUserGroup() {
@@ -437,7 +442,7 @@ public class User implements HasId {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -450,7 +455,7 @@ public class User implements HasId {
 
   /**
    * Checks for logo.
-   * 
+   *
    * @return true, if successful
    */
   @Transient
@@ -460,7 +465,7 @@ public class User implements HasId {
 
   /**
    * Checks if is email verified.
-   * 
+   *
    * @return true, if is email verified
    */
   public boolean isEmailVerified() {
@@ -469,7 +474,7 @@ public class User implements HasId {
 
   /**
    * Sets the country.
-   * 
+   *
    * @param country
    *          the new country
    */
@@ -479,7 +484,7 @@ public class User implements HasId {
 
   /**
    * Sets the diggest.
-   * 
+   *
    * @param diggest
    *          the new diggest
    */
@@ -489,7 +494,7 @@ public class User implements HasId {
 
   /**
    * Sets the email.
-   * 
+   *
    * @param email
    *          the new email
    */
@@ -499,7 +504,7 @@ public class User implements HasId {
 
   /**
    * Sets the email check date.
-   * 
+   *
    * @param emailCheckDate
    *          the new email check date
    */
@@ -509,7 +514,7 @@ public class User implements HasId {
 
   /**
    * Sets the email confirm hash.
-   * 
+   *
    * @param emailConfirmHash
    *          the new email confirm hash
    */
@@ -519,7 +524,7 @@ public class User implements HasId {
 
   /**
    * Sets the email notif freq.
-   * 
+   *
    * @param emailNotifFreq
    *          the new email notif freq
    */
@@ -529,7 +534,7 @@ public class User implements HasId {
 
   /**
    * Sets the email verified.
-   * 
+   *
    * @param emailVerified
    *          the new email verified
    */
@@ -539,7 +544,7 @@ public class User implements HasId {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -549,7 +554,7 @@ public class User implements HasId {
 
   /**
    * Sets the language.
-   * 
+   *
    * @param language
    *          the new language
    */
@@ -559,7 +564,7 @@ public class User implements HasId {
 
   /**
    * Sets the last login.
-   * 
+   *
    * @param lastLogin
    *          the new last login
    */
@@ -569,7 +574,7 @@ public class User implements HasId {
 
   /**
    * Sets the name.
-   * 
+   *
    * @param name
    *          the new name
    */
@@ -579,7 +584,7 @@ public class User implements HasId {
 
   /**
    * Sets the salt.
-   * 
+   *
    * @param salt
    *          the new salt
    */
@@ -589,7 +594,7 @@ public class User implements HasId {
 
   /**
    * Sets the short name.
-   * 
+   *
    * @param shortName
    *          the new short name
    */
@@ -599,7 +604,7 @@ public class User implements HasId {
 
   /**
    * Sets the s net visibility.
-   * 
+   *
    * @param sNetVisibility
    *          the new s net visibility
    */
@@ -609,7 +614,7 @@ public class User implements HasId {
 
   /**
    * Sets the timezone.
-   * 
+   *
    * @param timezone
    *          the new timezone
    */
@@ -619,7 +624,7 @@ public class User implements HasId {
 
   /**
    * Sets the user group.
-   * 
+   *
    * @param userGroup
    *          the new user group
    */
@@ -629,7 +634,7 @@ public class User implements HasId {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#toString()
    */
   @Override
