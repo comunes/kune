@@ -38,15 +38,17 @@ import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.log.Log;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * The Class KuneWaveProfileManager is a workaround to show avatars in kune
  * while the Wave part is more mature (see in the future
  * RemoteProfileManagerImpl)
- * 
+ *
  */
+@Singleton
 public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> implements
-    FetchProfilesService.Callback {
+FetchProfilesService.Callback {
 
   private final static LoggerBundle LOG = new DomLogger("fetchProfiles");
 
@@ -112,6 +114,9 @@ public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> 
 
   public void refreshAddress(final String address, final boolean noCache) {
     try {
+      if (noCache) {
+        profiles.remove(address);
+      }
       refreshProfile(ParticipantId.of(address), true, noCache);
     } catch (final InvalidParticipantAddress e) {
       Log.error("Invalid participant address: " + address, e);

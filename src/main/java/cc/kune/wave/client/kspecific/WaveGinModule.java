@@ -35,19 +35,20 @@ import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountVi
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveGinModule.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveGinModule extends ExtendedGinModule {
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
   protected void configure() {
     s(HasWaveContainer.class, WaveUserSpaceContainer.class);
     s(LastConnectedManager.class, LastConnectedManagerImpl.class);
+    s(KuneWaveProfileManager.class);
     s(RosterProfileUpdater.class);
     s(PostWaveOpenActions.class);
     s(AurorisColorPicker.class);
@@ -57,7 +58,6 @@ public class WaveGinModule extends ExtendedGinModule {
     s(WaveClientManager.class);
     s(WaveStatusIndicator.class);
     eagle(WaveParts.class);
-    s(KuneWaveProfileManager.class);
     s(InboxCountView.class, InboxCountPanel.class);
     s(InboxCountPresenter.class);
   }

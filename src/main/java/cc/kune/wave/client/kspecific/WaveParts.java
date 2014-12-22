@@ -27,6 +27,7 @@ import org.waveprotocol.wave.client.common.util.WindowUtil;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
+import cc.kune.wave.client.RosterProfileUpdater;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
 
 import com.google.inject.Inject;
@@ -35,14 +36,14 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveParts.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveParts {
 
   /**
    * Instantiates a new wave parts.
-   * 
+   *
    * @param session
    *          the session
    * @param waveClientManager
@@ -55,7 +56,8 @@ public class WaveParts {
   @Inject
   public WaveParts(final Session session, final Provider<WaveClientManager> waveClientManager,
       final Provider<WaveStatusIndicator> waveOnlineStatus,
-      final Provider<PostWaveOpenActions> postOpenActions, final Provider<InboxCountPresenter> inboxCount) {
+      final Provider<PostWaveOpenActions> postOpenActions,
+      final Provider<InboxCountPresenter> inboxCount, final Provider<RosterProfileUpdater> rosterProfiler) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
@@ -64,6 +66,7 @@ public class WaveParts {
         waveOnlineStatus.get();
         WindowUtil.instance = new WindowKuneWrapper();
         postOpenActions.get();
+        rosterProfiler.get();
       }
     });
 

@@ -24,6 +24,7 @@
 package cc.kune.wave.client;
 
 import cc.kune.chat.client.ChatOptions;
+import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
@@ -33,21 +34,20 @@ import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
 import com.calclab.emite.im.client.roster.events.RosterRetrievedEvent;
 import com.calclab.emite.im.client.roster.events.RosterRetrievedHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
  * The Class RosterProfileUpdater listen to xmpp roster updates and refresh wave
  * profile manager
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class RosterProfileUpdater {
   @Inject
-  public RosterProfileUpdater(final EventBus eventBus, final ChatOptions chatOptions,
-      final XmppRoster roster, final KuneWaveProfileManager profileManager) {
+  public RosterProfileUpdater(final ChatOptions chatOptions, final XmppRoster roster,
+      final KuneWaveProfileManager profileManager) {
     roster.addRosterRetrievedHandler(new RosterRetrievedHandler() {
       @Override
       public void onRosterRetrieved(final RosterRetrievedEvent event) {
@@ -62,7 +62,8 @@ public class RosterProfileUpdater {
         profileManager.refreshAddress(event.getRosterItem().getJID().toString(), false);
       }
     });
-    eventBus.addHandler(CurrentEntityChangedEvent.getType(), new CurrentEntityChangedHandler() {
+    EventBusInstance.get().addHandler(CurrentEntityChangedEvent.getType(),
+        new CurrentEntityChangedHandler() {
       @Override
       public void onCurrentLogoChanged(final CurrentEntityChangedEvent event) {
         profileManager.refreshAddress(chatOptions.uriFrom(event.getShortName()).toString(), true);
