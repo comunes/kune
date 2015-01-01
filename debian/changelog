@@ -1,5 +1,6 @@
 kune (0.3.0+b47) unstable; urgency=medium
 
+  * Fix some gadget broken urls
   * Debian default/kune minor change
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 22 Dec 2014 17:33:01 +0100

@@ -123,7 +123,7 @@
       </installerUrl>
       <gadgetUrl>http://google-wave-resources.googlecode.com/svn/trunk/samples/extensions/gadgets/mappy/map_v2.xml
       </gadgetUrl>
-      <iconUrl>https://wave-api.appspot.com/public/images/insertMap.png
+      <iconUrl>https://google-wave-resources.googlecode.com/svn/trunk/samples/extensions/gadgets/mappy/thumbnail_mappy.png
       </iconUrl>
       <iconCss></iconCss>
     </extension>
@@ -134,7 +134,7 @@
       </installerUrl>
       <gadgetUrl>http://cactus-wave.appspot.com/net.brucecooper.mindmapgadget.MindMapGadget/net.brucecooper.mindmapgadget.client.MindMapGadget.gadget.xml
       </gadgetUrl>
-      <iconUrl>https://wave-api.appspot.com/public/images/insertMap.png
+      <iconUrl>http://cactus-wave.appspot.com/icons/crimsoncactus.png
       </iconUrl>
       <iconCss></iconCss>
     </extension>
@@ -200,7 +200,7 @@
       </installerUrl>
       <gadgetUrl>http://jsvectoreditor.googlecode.com/svn/trunk/wave/vectoreditor.xml
       </gadgetUrl>
-      <iconUrl>http://upload.wikimedia.org/wikipedia/en/thumb/c/ce/SVG-logo.svg/200px-SVG-logo.svg.png
+      <iconUrl>https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/SVG_logo.svg/200px-SVG_logo.svg.png
       </iconUrl>
       <iconCss></iconCss>
     </extension>
@@ -343,7 +343,7 @@
       </description>
       <new-content-title>New Yes/no/Mini Voting</new-content-title>
       <new-content-textintro></new-content-textintro>
-      <enabled>true</enabled>
+      <enabled>false</enabled>
       <typeIds>
         <typeId origTypeId="docs.folder" destTypeId="docs.doc"/>
         <typeId origTypeId="docs.root" destTypeId="docs.doc"/>
