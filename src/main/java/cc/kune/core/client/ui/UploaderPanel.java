@@ -1,4 +1,4 @@
-package cc.kune.common.client.ui;
+package cc.kune.core.client.ui;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +16,7 @@ import org.vectomatic.file.events.LoadEndHandler;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.ui.UploadFinishedEvent;
 import cc.kune.common.client.ui.UploadFinishedEvent.UploadFinishedHandler;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.ui.UploadFile;

@@ -10,14 +10,14 @@
     <welcome-file>Kune_sandbox.html</welcome-file>
   </welcome-file-list>
 
-  <servlet>
-    <servlet-name>FileUploadTest</servlet-name>
-    <servlet-class>cc.kune.sandbox.server.ServletLogoUpload
-    </servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>FileUploadTest</servlet-name>
-    <url-pattern>/upload</url-pattern>
-  </servlet-mapping>
+<!--   <servlet> -->
+<!--     <servlet-name>FileUploadTest</servlet-name> -->
+<!--     <servlet-class>cc.kune.sandbox.server.ServletLogoUpload -->
+<!--     </servlet-class> -->
+<!--   </servlet> -->
+<!--   <servlet-mapping> -->
+<!--     <servlet-name>FileUploadTest</servlet-name> -->
+<!--     <url-pattern>/upload</url-pattern> -->
+<!--   </servlet-mapping> -->
 
 </web-app>

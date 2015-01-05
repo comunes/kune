@@ -26,9 +26,9 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.UploadFinishedEvent;
 import cc.kune.common.client.ui.UploadFinishedEvent.UploadFinishedHandler;
-import cc.kune.common.client.ui.UploaderPanel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
+import cc.kune.core.client.ui.UploaderPanel;
 import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.gspace.client.options.EntityOptionsView;
@@ -164,7 +164,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.style.EntityOptStyleView#clearBackImage()
    */
@@ -176,7 +176,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.style.EntityOptStyleView#getClearBtn()
    */
   @Override
@@ -186,7 +186,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.EntityOptionsTabView#getTabTitle()
    */
   @Override
@@ -205,7 +205,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.style.EntityOptStyleView#reset()
    */
   @Override
@@ -215,7 +215,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.style.EntityOptStyleView#setBackImage(java
    * .lang.String)
