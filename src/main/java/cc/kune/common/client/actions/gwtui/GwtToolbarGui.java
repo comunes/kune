@@ -115,7 +115,7 @@ public class GwtToolbarGui extends AbstractGuiItem implements ParentWidget {
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
    */
   @Override
-  protected void setIconBackground(final String backgroundColor) {
+  protected void setIconBackColor(final String backgroundColor) {
   }
 
   /* (non-Javadoc)

@@ -20,76 +20,92 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.gxtbinds.client.actions.gxtui;
+package cc.kune.bootstrap.client.actions.gwtui;
 
-import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
+import cc.kune.common.client.actions.gwtui.GwtComplexToolbar;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
+import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.shared.res.KuneIcon;
-import cc.kune.common.shared.utils.TextUtils;
 
-import com.extjs.gxt.ui.client.widget.menu.HeaderMenuItem;
+import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GxtMenuTitleItemGui.
- * 
+ * The Class BSToolbarGui.
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
+public class BSToolbarGui extends AbstractGuiItem implements ParentWidget {
 
-  /** The item. */
-  private HeaderMenuItem item;
+  /** The toolbar. */
+  private GwtComplexToolbar toolbar;
 
-  /**
-   * Instantiates a new gxt menu title item gui.
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.ParentWidget#add(com.google.gwt.user.client
+   * .ui.UIObject)
    */
-  public GxtMenuTitleItemGui() {
-    super();
+  @Override
+  public void add(final UIObject uiObject) {
+    toolbar.add(uiObject);
   }
 
   /**
-   * Instantiates a new gxt menu title item gui.
-   * 
-   * @param descriptor
-   *          the descriptor
+   * Adds the fill.
+   *
+   * @return the widget
    */
-  public GxtMenuTitleItemGui(final MenuItemDescriptor descriptor) {
-    super(descriptor);
+  public Widget addFill() {
+    return toolbar.addFill();
+  }
 
+  /**
+   * Adds the separator.
+   *
+   * @return the widget
+   */
+  public Widget addSeparator() {
+    return toolbar.addSeparator();
+  }
+
+  /**
+   * Adds the spacer.
+   *
+   * @return the widget
+   */
+  public Widget addSpacer() {
+    return toolbar.addSpacer();
   }
 
   /*
    * (non-Javadoc)
    * 
    * @see
-   * cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common
-   * .client.actions.ui.descrip.GuiActionDescrip)
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.
+   * client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
-    item = new HeaderMenuItem("");
-
-    final String id = descriptor.getId();
-    if (id != null) {
-      item.ensureDebugId(id);
-    }
-    child = item;
-    super.create(descriptor);
+    toolbar = new GwtComplexToolbar();
+    initWidget(toolbar);
     configureItemFromProperties();
+    descriptor.putValue(ParentWidget.PARENT_UI, this);
     return this;
   }
 
-  /**
-   * Gets the item.
+  /*
+   * (non-Javadoc)
    * 
-   * @return the item
+   * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int,
+   * com.google.gwt.user.client.ui.UIObject)
    */
-  public HeaderMenuItem getItem() {
-    return item;
+  @Override
+  public void insert(final int position, final UIObject widget) {
+    toolbar.insert(widget, position);
   }
 
   /*
@@ -99,7 +115,6 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
    */
   @Override
   protected void setEnabled(final boolean enabled) {
-    item.setVisible(enabled);
   }
 
   /*
@@ -121,7 +136,7 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
    * .lang.String)
    */
   @Override
-  public void setIconBackColor(final String back) {
+  protected void setIconBackColor(final String backgroundColor) {
   }
 
   /*
@@ -133,7 +148,6 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
    */
   @Override
   protected void setIconStyle(final String style) {
-    item.addStyleName(style);
   }
 
   /*
@@ -145,7 +159,6 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
    */
   @Override
   public void setIconUrl(final String url) {
-    throw new NotImplementedException();
   }
 
   /*
@@ -156,33 +169,6 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
    */
   @Override
   protected void setText(final String text) {
-    if (text != null) {
-      item.setText(text);
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
-   * .String)
-   */
-  @Override
-  public void setToolTipText(final String tooltip) {
-    if (TextUtils.notEmpty(tooltip)) {
-      item.setToolTip(new GxtDefTooltip(tooltip));
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
-   */
-  @Override
-  public void setVisible(final boolean visible) {
-    item.setVisible(visible);
   }
 
   /*
@@ -191,7 +177,8 @@ public class GxtMenuTitleItemGui extends AbstractChildGuiItem {
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
    */
   @Override
-  public boolean shouldBeAdded() { // NOPMD by vjrj on 18/01/11 0:48
-    return false;
+  public boolean shouldBeAdded() {
+    return true;
   }
+
 }

@@ -18,4 +18,6 @@
 	<classpathentry kind="var" path="M2_REPO/commons-fileupload/commons-fileupload/1.2/commons-fileupload-1.2.jar" sourcepath="M2_REPO/commons-fileupload/commons-fileupload/1.2/commons-fileupload-1.2-sources.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/kune"/>
 	<classpathentry kind="output" path="target/classes"/>
+	<classpathentry kind="var" path="M2_REPO/org/gwtbootstrap3/gwtbootstrap3/0.8.1/gwtbootstrap3-0.8.1.jar" sourcepath="M2_REPO/org/gwtbootstrap3/gwtbootstrap3/0.8.1/gwtbootstrap3-0.8.1-sources.jar"/>
+	<classpathentry kind="var" path="M2_REPO/org/gwtbootstrap3/gwtbootstrap3-extras/0.8.1/gwtbootstrap3-extras-0.8.1.jar" sourcepath="M2_REPO/org/gwtbootstrap3/gwtbootstrap3-extras/0.8.1/gwtbootstrap3-extras-0.8.1-sources.jar"/>
 </classpath>

@@ -23,7 +23,7 @@
 
 package cc.kune.sandbox.client;
 
-import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
+import cc.kune.bootstrap.client.actions.gwtui.BootstrapGuiProvider;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusInstance;
@@ -47,8 +47,10 @@ import com.google.web.bindery.event.shared.EventBus;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneSampleGinModule extends AbstractGinModule {
-  
-  /* (non-Javadoc)
+
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -63,7 +65,7 @@ public class KuneSampleGinModule extends AbstractGinModule {
     bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
 
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
-    bind(GwtGuiProvider.class).asEagerSingleton();
+    bind(BootstrapGuiProvider.class).asEagerSingleton();
 
     bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
 

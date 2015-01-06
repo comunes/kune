@@ -91,7 +91,7 @@ public class GwtToolbarSeparatorGui extends AbstractGuiItem {
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
    */
   @Override
-  public void setIconBackground(final String backgroundColor) {
+  public void setIconBackColor(final String backgroundColor) {
   }
 
   /* (non-Javadoc)

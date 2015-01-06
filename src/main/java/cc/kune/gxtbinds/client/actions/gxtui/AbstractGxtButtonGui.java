@@ -155,7 +155,7 @@ public abstract class AbstractGxtButtonGui extends AbstractChildGuiItem {
    * .lang.String)
    */
   @Override
-  public void setIconBackground(final String backgroundColor) {
+  public void setIconBackColor(final String backgroundColor) {
     throw new NotImplementedException();
   }
 

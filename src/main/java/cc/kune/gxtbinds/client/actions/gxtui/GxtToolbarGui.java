@@ -145,7 +145,7 @@ public class GxtToolbarGui extends AbstractGuiItem implements ParentWidget {
    * .lang.String)
    */
   @Override
-  public void setIconBackground(final String back) {
+  public void setIconBackColor(final String back) {
   }
 
   /*

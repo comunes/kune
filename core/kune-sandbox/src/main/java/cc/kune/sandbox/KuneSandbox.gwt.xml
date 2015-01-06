@@ -4,6 +4,7 @@
   <inherits name='com.google.gwt.user.User' />
   <inherits name="cc.kune.common.KuneCommon" />
   <inherits name="cc.kune.core.KuneCore" />
+  <inherits name="cc.kune.bootstrap.KuneBootstrap" />
   <!-- <inherits name="cc.kune.wave.KuneWave" /> -->
   <!-- <inherits name="org.adamtacy.GWTEffects"></inherits> -->
   <!-- Inherit the default GWT style sheet. You can change -->

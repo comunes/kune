@@ -22,19 +22,23 @@
  */
 package cc.kune.sandbox.client;
 
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.ButtonGroup;
+import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.vectomatic.file.File;
 import org.vectomatic.file.FileList;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
+import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
@@ -58,18 +62,18 @@ import cc.kune.common.client.ui.dialogs.BasicDialog;
 import cc.kune.common.client.ui.dialogs.MessagePanel;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.ui.UploaderPanel;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.WhiteSpace;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -115,7 +119,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
      * .common.client.actions.ActionEvent)
      */
@@ -171,13 +175,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     final PushButtonDescriptor pushBtn = new PushButtonDescriptor(action2);
     pushBtn.setPushed(true);
-    pushBtn.withText("Push btn").withStyles("k-button");
+    pushBtn.withText("Push btn");
     // FIXME when fix the style set also in I18nTranslatorForm.ui.xml
     // (currently
     // is set to "none")
 
     final ToolbarDescriptor toolbar = new ToolbarDescriptor();
-
     final ToolbarSeparatorDescriptor tsepFill = new ToolbarSeparatorDescriptor(Type.fill, toolbar);
     final ToolbarSeparatorDescriptor toolbarSpace = new ToolbarSeparatorDescriptor(Type.spacer, toolbar);
 
@@ -185,10 +188,10 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     pushBtn.setParent(toolbar);
 
     final MenuDescriptor menu = new MenuDescriptor(action);
-    menu.withText("Menu 1").withStyles(ActionStyles.MENU_BTN_STYLE_LEFT);
+    menu.withText("Menu 1").withIcon("http://lorempixel.com/100/100");
 
     final MenuDescriptor menu2 = new MenuDescriptor(action);
-    menu2.withText("Menu 2").withStyles(ActionStyles.MENU_BTN_STYLE_LEFT);
+    menu2.withText("Menu 2").withIcon(IconType.TREE);
 
     menu.setParent(toolbar);
     final SubMenuDescriptor submenu = new SubMenuDescriptor("Some Submenu", "tip", "oc-testico");
@@ -208,9 +211,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     action.setShortcut(shortcut);
 
+    final LabelDescriptor label = new LabelDescriptor("Some label");
+
     actions.add(toolbar, simpleBtn, tsepFill, pushBtn, toolbarSpace, menu, tsepFill, menuItem,
         menuItem2, menuSep, menuItem2, menuItem, iconLabelDescr, submenu, menuItem3, menuItem4, menu2,
-        iconLabelNoAct, menuItem5);
+        iconLabelNoAct, menuItem5, label);
 
     final ActionFlowPanel view = new ActionFlowPanel(ginjector.getGuiProvider(), ginjector.getHasRTL());
     view.addAll(actions);
@@ -279,7 +284,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     final DottedTab tab = new DottedTab();
     absolutePanel.add(tab, 400, 400);
-
+    absolutePanel.add(tab, 400, 400);
     absolutePanel.add(makeFileUpload(), 620, 0);
 
     new BlinkAnimation(tab, 350).animate(5);
@@ -304,7 +309,17 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       public void actionPerformed(final ActionEvent event) {
         // SimpleUserMessage simpleMes = new SimpleUserMessage();
         // simpleMes.show("Hellow world!");
-        NotifyUser.info("Some title", "Lorem ipsum dolor sit amet, consectetuer adipiscing elit");
+        NotifyUser.askConfirmation("Some title", "Some message",  new SimpleResponseCallback() {
+          
+          @Override
+          public void onSuccess() {
+         NotifyUser.info("Success");  }
+          
+          @Override
+          public void onCancel() {
+            NotifyUser.error("Cancel");            
+          }
+        });
       }
     };
 
@@ -327,7 +342,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     button1.withIcon(res.info()).withToolTip("Some tooltip");
     button2.withIcon(res.info()).withToolTip("Some tooltip");
-    button3.withIcon(res.info()).withToolTip("Some tooltip"); // .withStyles("k-button,gwt-Button,k-btn-min");
+    button3.withIcon(IconType.TWITTER).withToolTip("Some tooltip"); // .withStyles("k-button,gwt-Button,k-btn-min");
 
     toolbar.add(iconLabel);
     toolbar.add(button1);
@@ -336,7 +351,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     final MenuDescriptor menu = new MenuDescriptor("Menu");
     menu.setRightIcon(res.world16());
-    menu.withIcon(res.info()).withToolTip("Some menu").withStyles("k-button, gwt-Button");
+    menu.withIcon(res.info()).withToolTip("Some menu");
     final MenuItemDescriptor menuItem1 = new MenuItemDescriptor(menu, action1);
     menuItem1.withIcon(res.info()).withText("Some menu item");
     final MenuItemDescriptor menuItem2 = new MenuItemDescriptor(menu, action1);
@@ -374,22 +389,26 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final Button btn1 = new Button("Btn 1");
     final Button btn2 = new Button("Btn 2");
     final Button btn3 = new Button("Btn 3");
-    btn1.addStyleName("k-button");
-    btn1.addStyleName("k-button-left");
-    btn2.addStyleName("k-button");
-    btn2.addStyleName("k-button-center");
-    btn3.addStyleName("k-button");
-    btn3.addStyleName("k-button-right");
-    btn1.addStyleName("kune-Margin-Large-t");
-    btn2.addStyleName("kune-Margin-Large-t");
-    btn3.addStyleName("kune-Margin-Large-t");
-    btn1.addStyleName("k-fl");
-    btn2.addStyleName("k-fl");
-    btn3.addStyleName("k-fl");
+    final ButtonGroup buttonGroup = new ButtonGroup();
+    buttonGroup.add(btn1);
+    buttonGroup.add(btn2);
+    buttonGroup.add(btn3);
+
+    // btn1.addStyleName("k-button");
+    // btn1.addStyleName("k-button-left");
+    // btn2.addStyleName("k-button");
+    // btn2.addStyleName("k-button-center");
+    // btn3.addStyleName("k-button");
+    // btn3.addStyleName("k-button-right");
+    // btn1.addStyleName("kune-Margin-Large-t");
+    // btn2.addStyleName("kune-Margin-Large-t");
+    // btn3.addStyleName("kune-Margin-Large-t");
+    // btn1.addStyleName("k-fl");
+    // btn2.addStyleName("k-fl");
+    // btn3.addStyleName("k-fl");
     final FlowPanel vp = new FlowPanel();
-    vp.add(btn1);
-    vp.add(btn2);
-    vp.add(btn3);
+
+    vp.add(buttonGroup);
     absolutePanel.add(vp, 100, 100);
   }
 
@@ -507,11 +526,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
         false, new ClickHandler() {
 
-      @Override
-      public void onClick(final ClickEvent event) {
-        userMsg.show("Testing");
-      }
-    });
+          @Override
+          public void onClick(final ClickEvent event) {
+            userMsg.show("Testing");
+          }
+        });
     thumb.setTooltip("Some thumb tooltip");
     thumb.setOnOverLabel(true);
     return thumb;
@@ -525,6 +544,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     final Button button = new Button("Btn 1 biiggggggg");
     final Button button2 = new Button("Btn 2 also biggggg");
+    button.getElement().getStyle().setWhiteSpace(WhiteSpace.PRE_WRAP);
     final IconLabel button3 = new IconLabel(res.info(), "Btn 3");
     final Button button4 = new Button("Btn 4");
 
@@ -533,21 +553,21 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.setSize(String.valueOf(clientWidth - 10) + "px", String.valueOf(clientHeight - 10)
         + "px");
     absolutePanel.add(button, 5, 5);
-    absolutePanel.add(button2, clientWidth - 80, 5);
-    absolutePanel.add(button3, 5, clientHeight - 40);
-    absolutePanel.add(button4, clientWidth - 80, clientHeight - 40);
+    absolutePanel.add(button2, clientWidth - 90, 5);
+    absolutePanel.add(button3, 5, clientHeight - 50);
+    absolutePanel.add(button4, clientWidth - 90, clientHeight - 60);
     Tooltip.to(button,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button2,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button3,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button4,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
 
   }
 }

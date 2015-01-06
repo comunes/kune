@@ -34,7 +34,6 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
@@ -69,27 +68,27 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /** The flow. */
   @UiField
   FlowPanel flow;
-  
+
   /** The icon font left. */
   @UiField
   Label iconFontLeft;
-  
+
   /** The icon font right. */
   @UiField
   Label iconFontRight;
-  
+
   /** The icon left. */
   @UiField
   Image iconLeft;
-  
+
   /** The icon right. */
   @UiField
   Image iconRight;
-  
+
   /** The label. */
   @UiField
   Label label;
-  
+
   /** The self. */
   @UiField
   FocusPanel self;
@@ -104,8 +103,10 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Instantiates a new icon label.
    *
-   * @param imgRes the img res
-   * @param text the text
+   * @param imgRes
+   *          the img res
+   * @param text
+   *          the text
    */
   public IconLabel(final ImageResource imgRes, final String text) {
     this(text);
@@ -117,7 +118,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Instantiates a new icon label.
    *
-   * @param text the text
+   * @param text
+   *          the text
    */
   public IconLabel(final String text) {
     initWidget(uiBinder.createAndBindUi(this));
@@ -134,8 +136,12 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     setStyleFromDirection(Direction.LTR);
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.user.client.ui.HasWidgets#add(com.google.gwt.user.client.ui.Widget)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.user.client.ui.HasWidgets#add(com.google.gwt.user.client
+   * .ui.Widget)
    */
   @Override
   public void add(final Widget w) {
@@ -145,7 +151,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Adds the right icon style.
    *
-   * @param style the style
+   * @param style
+   *          the style
    */
   public void addRightIconStyle(final String style) {
     iconRight.addStyleName(style);
@@ -154,13 +161,16 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Adds the text style name.
    *
-   * @param style the style
+   * @param style
+   *          the style
    */
   public void addTextStyleName(final String style) {
     label.addStyleName(style);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.HasWidgets#clear()
    */
   @Override
@@ -171,8 +181,10 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Common style.
    *
-   * @param icon the icon
-   * @param imgCss the img css
+   * @param icon
+   *          the icon
+   * @param imgCss
+   *          the img css
    */
   private void commonStyle(final Image icon, final String imgCss) {
     setIconClear(icon);
@@ -183,7 +195,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Gets the float from direction.
    *
-   * @param direction the direction
+   * @param direction
+   *          the direction
    * @return the float from direction
    */
   private String getFloatFromDirection(final Direction direction) {
@@ -199,7 +212,9 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     return self;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.HasText#getText()
    */
   @Override
@@ -207,7 +222,9 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     return label.getText();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.HasDirectionalText#getTextDirection()
    */
   @Override
@@ -215,7 +232,9 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     return label.getTextDirection();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.HasWidgets#iterator()
    */
   @Override
@@ -226,7 +245,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Opossite.
    *
-   * @param direction the direction
+   * @param direction
+   *          the direction
    * @return the direction
    */
   private Direction opossite(final Direction direction) {
@@ -234,8 +254,12 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
         : Direction.LTR;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.user.client.ui.HasWidgets#remove(com.google.gwt.user.client.ui.Widget)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.user.client.ui.HasWidgets#remove(com.google.gwt.user.client
+   * .ui.Widget)
    */
   @Override
   public boolean remove(final Widget w) {
@@ -245,7 +269,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the icon clear.
    *
-   * @param icon the new icon clear
+   * @param icon
+   *          the new icon clear
    */
   private void setIconClear(final Image icon) {
     icon.setUrl(GWT.getModuleBaseURL() + "clear.cache.gif");
@@ -266,8 +291,10 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the icon rtl.
    *
-   * @param widget the widget
-   * @param direction the direction
+   * @param widget
+   *          the widget
+   * @param direction
+   *          the direction
    */
   private void setIconRTL(final Widget widget, final Direction direction) {
     widget.removeStyleName(getFloatFromDirection(opossite(direction)));
@@ -277,7 +304,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the id.
    *
-   * @param id the new id
+   * @param id
+   *          the new id
    */
   public void setId(final String id) {
     self.ensureDebugId(id);
@@ -286,7 +314,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the left icon.
    *
-   * @param imgCss the new left icon
+   * @param imgCss
+   *          the new left icon
    */
   public void setLeftIcon(final String imgCss) {
     commonStyle(iconLeft, imgCss);
@@ -298,16 +327,18 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the left icon background.
    *
-   * @param backgroundColor the new left icon background
+   * @param backgroundColor
+   *          the new left icon background
    */
   public void setLeftIconBackground(final String backgroundColor) {
-    DOM.setStyleAttribute(iconLeft.getElement(), "backgroundColor", backgroundColor);
+    iconLeft.getElement().getStyle().setBackgroundColor(backgroundColor);
   }
 
   /**
    * Sets the left icon font.
    *
-   * @param icon the new left icon font
+   * @param icon
+   *          the new left icon font
    */
   public void setLeftIconFont(final KuneIcon icon) {
     iconFontLeft.setText(icon.getCharacter().toString());
@@ -317,7 +348,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the left icon resource.
    *
-   * @param res the new left icon resource
+   * @param res
+   *          the new left icon resource
    */
   public void setLeftIconResource(final ImageResource res) {
     setLeftIconResourceImpl(res);
@@ -326,7 +358,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the left icon resource impl.
    *
-   * @param res the new left icon resource impl
+   * @param res
+   *          the new left icon resource impl
    */
   private void setLeftIconResourceImpl(final ImageResource res) {
     iconLeft.setResource(res);
@@ -339,7 +372,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the left icon url.
    *
-   * @param url the new left icon url
+   * @param url
+   *          the new left icon url
    */
   public void setLeftIconUrl(final String url) {
     iconLeft.setUrl(url);
@@ -353,7 +387,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the right icon.
    *
-   * @param imgCss the new right icon
+   * @param imgCss
+   *          the new right icon
    */
   public void setRightIcon(final String imgCss) {
     commonStyle(iconRight, imgCss);
@@ -366,16 +401,18 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the right icon background.
    *
-   * @param backgroundColor the new right icon background
+   * @param backgroundColor
+   *          the new right icon background
    */
   public void setRightIconBackground(final String backgroundColor) {
-    DOM.setStyleAttribute(iconRight.getElement(), "backgroundColor", backgroundColor);
+    iconRight.getElement().getStyle().setBackgroundColor(backgroundColor);
   }
 
   /**
    * Sets the right icon font.
    *
-   * @param icon the new right icon font
+   * @param icon
+   *          the new right icon font
    */
   public void setRightIconFont(final KuneIcon icon) {
     iconFontRight.setText(icon.getCharacter().toString());
@@ -385,7 +422,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the right icon resource.
    *
-   * @param res the new right icon resource
+   * @param res
+   *          the new right icon resource
    */
   public void setRightIconResource(final ImageResource res) {
     iconRight.setResource(res);
@@ -398,7 +436,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the right icon url.
    *
-   * @param url the new right icon url
+   * @param url
+   *          the new right icon url
    */
   public void setRightIconUrl(final String url) {
     iconRight.setUrl(url);
@@ -412,13 +451,16 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the style from direction.
    *
-   * @param direction the new style from direction
+   * @param direction
+   *          the new style from direction
    */
   private void setStyleFromDirection(final Direction direction) {
     setStyleName(getFloatFromDirection(direction));
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setStyleName(java.lang.String)
    */
   @Override
@@ -426,7 +468,9 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     flow.setStyleName(style);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.HasText#setText(java.lang.String)
    */
   @Override
@@ -436,8 +480,12 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
     setStyleFromDirection(Direction.LTR);
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.user.client.ui.HasDirectionalText#setText(java.lang.String, com.google.gwt.i18n.client.HasDirection.Direction)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.user.client.ui.HasDirectionalText#setText(java.lang.String,
+   * com.google.gwt.i18n.client.HasDirection.Direction)
    */
   @Override
   public void setText(final String text, final Direction dir) {
@@ -449,7 +497,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the text style.
    *
-   * @param text the new text style
+   * @param text
+   *          the new text style
    */
   private void setTextStyle(final String text) {
     label.setStyleDependentName("notext", TextUtils.empty(text));
@@ -459,7 +508,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the tooltip.
    *
-   * @param text the new tooltip
+   * @param text
+   *          the new tooltip
    */
   public void setTooltip(final String text) {
     Tooltip.to(label, text);
@@ -468,7 +518,8 @@ public class IconLabel extends Composite implements HasWidgets, HasDirectionalTe
   /**
    * Sets the word wrap.
    *
-   * @param wordWrap the new word wrap
+   * @param wordWrap
+   *          the new word wrap
    */
   public void setWordWrap(final boolean wordWrap) {
     label.setWordWrap(wordWrap);

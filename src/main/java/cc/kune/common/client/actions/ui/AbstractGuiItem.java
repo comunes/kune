@@ -50,7 +50,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   /** The descriptor. */
   protected GuiActionDescrip descriptor;
-  
+
   /** The tooltip. */
   protected Tooltip tooltip;
 
@@ -64,7 +64,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Instantiates a new abstract gui item.
    *
-   * @param descriptor the descriptor
+   * @param descriptor
+   *          the descriptor
    */
   public AbstractGuiItem(final GuiActionDescrip descriptor) {
     super();
@@ -74,7 +75,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Adds the style.
    *
-   * @param style the style
+   * @param style
+   *          the style
    */
   protected void addStyle(final String style) {
     if (super.isOrWasAttached()) {
@@ -121,8 +123,12 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     setDropTarget((DropTarget) descriptor.getValue(GuiActionDescrip.DROP_TARGET));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.GuiBinding#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.GuiBinding#create(cc.kune.common.client
+   * .actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public abstract AbstractGuiItem create(final GuiActionDescrip descriptor);
@@ -161,7 +167,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Gets the target object of action.
    *
-   * @param descriptor the descriptor
+   * @param descriptor
+   *          the descriptor
    * @return the target object of action
    */
   protected Object getTargetObjectOfAction(final GuiActionDescrip descriptor) {
@@ -172,7 +179,9 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
         : descriptor.isChild() ? descriptor.getParent().getTarget() : ActionEvent.NO_TARGET;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.Composite#onAttach()
    */
   @Override
@@ -181,7 +190,9 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     descriptor.onAttach();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.Composite#onDetach()
    */
   @Override
@@ -193,7 +204,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Sets the drop target.
    *
-   * @param dropTarget the new drop target
+   * @param dropTarget
+   *          the new drop target
    */
   private void setDropTarget(final DropTarget dropTarget) {
     if (dropTarget != null) {
@@ -204,14 +216,16 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Sets the enabled.
    *
-   * @param enabled the new enabled
+   * @param enabled
+   *          the new enabled
    */
   protected abstract void setEnabled(boolean enabled);
 
   /**
    * Sets the enabled.
    *
-   * @param enabled the new enabled
+   * @param enabled
+   *          the new enabled
    */
   private void setEnabled(final Boolean enabled) {
     setEnabled(enabled == null ? true : enabled);
@@ -220,16 +234,18 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Sets the icon.
    *
-   * @param icon the new icon
+   * @param icon
+   *          the new icon
    */
   public abstract void setIcon(final KuneIcon icon);
 
   /**
    * Sets the icon.
    *
-   * @param icon the new icon
+   * @param icon
+   *          the new icon
    */
-  private void setIcon(final Object icon) {
+  protected void setIcon(final Object icon) {
     if (icon instanceof KuneIcon) {
       setIcon((KuneIcon) icon);
     } else if (icon instanceof ImageResource) {
@@ -242,7 +258,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
         setIconUrl(iconS);
       } else {
         if (iconS.startsWith("#")) {
-          setIconBackground(iconS);
+          setIconBackColor(iconS);
         } else {
           setIconStyle(iconS);
         }
@@ -255,14 +271,16 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Sets the icon background.
    *
-   * @param backgroundColor the new icon background
+   * @param backgroundColor
+   *          the new icon background
    */
-  protected abstract void setIconBackground(String backgroundColor);
+  protected abstract void setIconBackColor(String backgroundColor);
 
   /**
    * Sets the icon resource.
    *
-   * @param icon the new icon resource
+   * @param icon
+   *          the new icon resource
    */
   public void setIconResource(final ImageResource icon) {
     setIconStyle(("k-icon-" + icon.getName()));
@@ -271,21 +289,24 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Sets the icon style.
    *
-   * @param style the new icon style
+   * @param style
+   *          the new icon style
    */
   protected abstract void setIconStyle(String style);
 
   /**
    * Sets the icon url.
    *
-   * @param url the new icon url
+   * @param url
+   *          the new icon url
    */
   public abstract void setIconUrl(String url);
 
   /**
    * Sets the styles.
    *
-   * @param styles the new styles
+   * @param styles
+   *          the new styles
    */
   protected void setStyles(final String styles) {
     if (styles != null) {
@@ -299,14 +320,16 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Sets the text.
    *
-   * @param text the new text
+   * @param text
+   *          the new text
    */
   protected abstract void setText(String text);
 
   /**
    * Sets the tool tip text.
    *
-   * @param tooltipText the new tool tip text
+   * @param tooltipText
+   *          the new tool tip text
    */
   public void setToolTipText(final String tooltipText) {
     if (shouldBeAdded()) {
@@ -317,8 +340,10 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Sets the tool tip text next to.
    *
-   * @param widget the widget
-   * @param tooltipText the tooltip text
+   * @param widget
+   *          the widget
+   * @param tooltipText
+   *          the tooltip text
    */
   public void setToolTipTextNextTo(final Widget widget, final String tooltipText) {
     if (tooltipText != null && !tooltipText.isEmpty()) {
@@ -331,7 +356,8 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /**
    * Sets the visible.
    *
-   * @param visible the new visible
+   * @param visible
+   *          the new visible
    */
   private void setVisible(final Boolean visible) {
     // if you have problems with setVisible check if the GuiItem calls
@@ -339,7 +365,9 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     setVisible(visible == null ? true : visible);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.GuiBinding#shouldBeAdded()
    */
   @Override

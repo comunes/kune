@@ -20,42 +20,36 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.actions.gwtui;
+package cc.kune.bootstrap.client.actions.gwtui;
+
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+import org.gwtbootstrap3.client.ui.constants.Toggle;
 
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.tooltip.Tooltip;
-import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.ButtonBase;
-import com.google.gwt.user.client.ui.ToggleButton;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class AbstractGwtButtonGui.
+ * The Class AbstractBSButtonGui.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
+public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /** The button. */
-  private ButtonBase button;
+  private CustomButton button;
 
   /** The enable tongle. */
   protected boolean enableTongle;
-
-  /** The icon label. */
-  private IconLabel iconLabel;
 
   /** The is child. */
   private boolean isChild;
@@ -63,7 +57,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   /**
    * Instantiates a new abstract gwt button gui.
    */
-  public AbstractGwtButtonGui() {
+  public AbstractBSButtonGui() {
     this(null, false);
   }
 
@@ -73,7 +67,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    * @param enableTongle
    *          the enable tongle
    */
-  public AbstractGwtButtonGui(final boolean enableTongle) {
+  public AbstractBSButtonGui(final boolean enableTongle) {
     this(null, enableTongle);
   }
 
@@ -83,7 +77,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    * @param buttonDescriptor
    *          the button descriptor
    */
-  public AbstractGwtButtonGui(final ButtonDescriptor buttonDescriptor) {
+  public AbstractBSButtonGui(final ButtonDescriptor buttonDescriptor) {
     this(buttonDescriptor, false);
   }
 
@@ -95,7 +89,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    * @param enableTongle
    *          the enable tongle
    */
-  public AbstractGwtButtonGui(final ButtonDescriptor buttonDescriptor, final boolean enableTongle) {
+  public AbstractBSButtonGui(final ButtonDescriptor buttonDescriptor, final boolean enableTongle) {
     super(buttonDescriptor);
     this.enableTongle = enableTongle;
   }
@@ -110,7 +104,6 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   @Override
   protected void addStyle(final String style) {
     button.addStyleName(style);
-    layout();
   }
 
   /*
@@ -123,23 +116,16 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
-    iconLabel = new IconLabel("");
+
+    button = new CustomButton();
     if (enableTongle) {
-      button = new ToggleButton();
-    } else {
-      button = new Button();
+      button.setDataToggle(Toggle.BUTTON);
     }
     final String value = (String) descriptor.getValue(Action.STYLES);
-    if (value == null) {
-      // Default btn styles
-      button.addStyleName("k-button");
-      button.addStyleName("k-btn");
-      button.addStyleName("k-5corners");
-    } else {
+    if (value != null) {
       setStyles(value);
     }
-    layout();
-    // button.setEnableToggle(enableTongle);
+
     final String id = descriptor.getId();
     if (id != null) {
       button.ensureDebugId(id);
@@ -165,13 +151,6 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     return this;
   }
 
-  /**
-   * Layout.
-   */
-  private void layout() {
-    button.setHTML(iconLabel.getElement().getInnerHTML());
-  }
-
   /*
    * (non-Javadoc)
    * 
@@ -183,7 +162,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
     // enabled
     // + " ----------------------------------");
     button.setEnabled(enabled);
-    button.getElement().getStyle().setOpacity(enabled ? 1d : 0.6d);
+    // button.getElement().getStyle().setOpacity(enabled ? 1d : 0.6d);
   }
 
   /*
@@ -195,7 +174,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    */
   @Override
   public void setIcon(final KuneIcon icon) {
-    iconLabel.setLeftIconFont(icon);
+    button.setIcon(icon);
   }
 
   /*
@@ -207,8 +186,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    */
   @Override
   public void setIconBackColor(final String backgroundColor) {
-    iconLabel.setLeftIconBackground(backgroundColor);
-    layout();
+    button.setIconBackColor(backgroundColor);
   }
 
   /*
@@ -220,8 +198,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    */
   @Override
   public void setIconResource(final ImageResource icon) {
-    iconLabel.setLeftIconResource(icon);
-    layout();
+    button.setIconResource(icon);
   }
 
   /*
@@ -233,8 +210,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    */
   @Override
   protected void setIconStyle(final String style) {
-    iconLabel.setRightIcon(style);
-    layout();
+    button.setIconStyle(style);
   }
 
   /*
@@ -246,8 +222,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    */
   @Override
   public void setIconUrl(final String url) {
-    iconLabel.setLeftIconUrl(url);
-    layout();
+    button.setIconUrl(url);
   }
 
   /**
@@ -257,11 +232,7 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    *          the new pressed
    */
   public void setPressed(final boolean pressed) {
-    final ToggleButton toggleButton = (ToggleButton) button;
-
-    if (toggleButton.isDown() != pressed) {
-      toggleButton.setDown(pressed);
-    }
+    button.setActive(pressed);
   }
 
   /*
@@ -272,8 +243,8 @@ public abstract class AbstractGwtButtonGui extends AbstractChildGuiItem {
    */
   @Override
   public void setText(final String text) {
-    iconLabel.setText(text, descriptor.getDirection());
-    layout();
+    // FIXME descriptor.getDirection()
+    button.setText(text);
   }
 
   /*

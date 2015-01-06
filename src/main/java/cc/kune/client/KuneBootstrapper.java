@@ -2,9 +2,8 @@ package cc.kune.client;
 
 import cc.kune.barters.client.BartersParts;
 import cc.kune.blogs.client.BlogsParts;
-import cc.kune.chat.client.ChatClient;
+import cc.kune.bootstrap.client.actions.gwtui.BootstrapGuiProvider;
 import cc.kune.chat.client.ChatParts;
-import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.utils.MetaUtils;
@@ -42,32 +41,37 @@ public class KuneBootstrapper implements Bootstrapper {
   /** The Constant HOME_IDS_PREFIX. */
   protected static final String HOME_IDS_PREFIX = "k-home-";
 
-  private SessionChecker sessionChecker;
+  private final ContentViewerSelector contentViewerSelector;
 
-  private ContentViewerSelector contentViewerSelector;
+  private final CorePresenter corePresenter;
 
-  private GlobalShortcutRegister globalShortcutRegister;
+  private final GlobalShortcutRegister globalShortcutRegister;
 
-  private CorePresenter corePresenter;
+  private final SessionChecker sessionChecker;
 
   @Inject
-  public KuneBootstrapper(SessionChecker sessionChecker, ContentViewerSelector contentViewerSelector,
-      GlobalShortcutRegister globalShortcutRegister, SpinerPresenter spinerPresenter,
-      SessionExpirationManager sessionExpirationManager, EventBusWithLogging eventBusWithLogging,
-      ErrorsDialog errorsDialog, CorePresenter corePresenter, OnAppStartFactory onAppStartFactory,
+  public KuneBootstrapper(final SessionChecker sessionChecker,
+      final ContentViewerSelector contentViewerSelector,
+      final GlobalShortcutRegister globalShortcutRegister, final SpinerPresenter spinerPresenter,
+      final SessionExpirationManager sessionExpirationManager,
+      final EventBusWithLogging eventBusWithLogging, final ErrorsDialog errorsDialog,
+      final CorePresenter corePresenter, final OnAppStartFactory onAppStartFactory,
 
-      DocsParts docs, BlogsParts blogs, WikiParts wiki, EventsParts events, TasksParts tasks,
-      ListsParts lists, ChatParts chats, BartersParts barters, TrashParts trash,
+      final DocsParts docs, final BlogsParts blogs, final WikiParts wiki, final EventsParts events,
+      final TasksParts tasks, final ListsParts lists, final ChatParts chats, final BartersParts barters,
+      final TrashParts trash,
 
-      SiteLogo siteLogo,
+      final SiteLogo siteLogo,
 
-      CoreParts coreParts, GSpaceParts gSpaceParts, PSpaceParts pSpaceParts, HSpaceParts hSpaceParts,
+      final CoreParts coreParts, final GSpaceParts gSpaceParts, final PSpaceParts pSpaceParts,
+      final HSpaceParts hSpaceParts,
 
-      XMLActionsParser xmlActionsParser,
-      
-      GwtGuiProvider guiProvider
+      final XMLActionsParser xmlActionsParser,
 
-  ) {
+      // Here you define the gui ui provider (gwt, gxt, bootstrap)
+      final BootstrapGuiProvider bootstrapProvider
+  // GwtGuiProvider guiProvider
+      ) {
 
     this.sessionChecker = sessionChecker;
     this.contentViewerSelector = contentViewerSelector;

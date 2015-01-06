@@ -110,7 +110,7 @@ public class GwtIconLabelGui extends AbstractGuiItem {
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java.lang.String)
    */
   @Override
-  public void setIconBackground(final String color) {
+  public void setIconBackColor(final String color) {
     iconLabel.setLeftIconBackground(color);
   }
 

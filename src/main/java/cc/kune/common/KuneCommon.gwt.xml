@@ -16,6 +16,8 @@
   <inherits name='org.cobogw.gwt.user.User' />
   <inherits name='com.google.gwt.inject.Inject' />
   <inherits name='com.google.gwt.query.Query' />
+  <inherits name="cc.kune.bootstrap.KuneBootstrap" />
+  
   <stylesheet src="kune-common.css" />
 
   <inherits name="org.vectomatic.libgwtfile" />

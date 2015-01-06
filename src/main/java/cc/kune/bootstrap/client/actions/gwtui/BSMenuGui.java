@@ -20,7 +20,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.actions.gwtui;
+package cc.kune.bootstrap.client.actions.gwtui;
+
+import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
@@ -28,28 +31,21 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
-import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Label;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GwtMenuGui.
- * 
+ * The Class BSMenuGui.
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class GwtMenuGui extends AbstractGwtMenuGui {
+public class BSMenuGui extends AbstractBSMenuGui {
 
   /** The button. */
-  private Button button;
-
-  /** The icon label. */
-  private IconLabel iconLabel;
+  private CustomButton button;
 
   /** The not stand alone. */
   private boolean notStandAlone;
@@ -64,9 +60,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   @Override
   protected void addStyle(final String style) {
     if (notStandAlone) {
-      // iconLabel.addStyleName(style);
       button.addStyleName(style);
-      // layout();
     }
   }
 
@@ -85,14 +79,11 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     // (sometimes, a menu showed in a grid, or other special widgets)
     notStandAlone = !((MenuDescriptor) descriptor).isStandalone();
     if (notStandAlone) {
-      button = new Button();
-      button.removeStyleName("gwt-Button");
+      button = new CustomButton();
       descriptor.putValue(MenuDescriptor.MENU_SHOW_NEAR_TO, button);
-      iconLabel = new IconLabel("");
       final ImageResource rightIcon = ((MenuDescriptor) descriptor).getRightIcon();
       if (rightIcon != null) {
-        iconLabel.setRightIconResource(rightIcon);
-        // iconLabel.addRightIconStyle("k-fr");
+        button.setIconRightResource(rightIcon);
       }
       button.addClickHandler(new ClickHandler() {
         @Override
@@ -130,13 +121,6 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
     return this;
   }
 
-  /**
-   * Layout.
-   */
-  private void layout() {
-    button.setHTML(iconLabel.getElement().getInnerHTML());
-  }
-
   /*
    * (non-Javadoc)
    * 
@@ -146,7 +130,6 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   public void setEnabled(final boolean enabled) {
     if (notStandAlone) {
       button.setEnabled(enabled);
-      // button.setVisible(enabled);
     }
   }
 
@@ -160,8 +143,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   @Override
   public void setIcon(final KuneIcon icon) {
     if (notStandAlone) {
-      iconLabel.setLeftIconFont(icon);
-      layout();
+      button.setIcon(icon);
     }
   }
 
@@ -175,8 +157,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   @Override
   public void setIconBackColor(final String backgroundColor) {
     if (notStandAlone) {
-      iconLabel.setLeftIconBackground(backgroundColor);
-      layout();
+      button.setIconBackColor(backgroundColor);
     }
   }
 
@@ -190,21 +171,19 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   @Override
   public void setIconResource(final ImageResource resource) {
     if (notStandAlone) {
-      iconLabel.setLeftIconResource(resource);
-      layout();
+      button.setIconResource(resource);
     }
   }
 
   /**
    * Sets the icon right resource.
-   * 
+   *
    * @param resource
    *          the new icon right resource
    */
   public void setIconRightResource(final ImageResource resource) {
     if (notStandAlone) {
-      iconLabel.setRightIconResource(resource);
-      layout();
+      button.setIconRightResource(resource);
     }
   }
 
@@ -218,8 +197,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   @Override
   public void setIconStyle(final String style) {
     if (notStandAlone) {
-      iconLabel.setRightIcon(style);
-      layout();
+      button.setIconStyle(style);
     }
   }
 
@@ -233,8 +211,7 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   @Override
   public void setIconUrl(final String url) {
     if (notStandAlone) {
-      iconLabel.setLeftIconUrl(url);
-      layout();
+      button.setIconUrl(url);
     }
   }
 
@@ -247,8 +224,8 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   @Override
   public void setText(final String text) {
     if (notStandAlone) {
-      iconLabel.setText(text, descriptor.getDirection());
-      layout();
+      // FIXME descriptor.getDirection()
+      button.setText(text);
     }
   }
 
@@ -275,8 +252,6 @@ public class GwtMenuGui extends AbstractGwtMenuGui {
   public void setVisible(final boolean visible) {
     if (notStandAlone) {
       button.setVisible(visible);
-    } else {
-      // button.setVisible(visible);
     }
   }
 
