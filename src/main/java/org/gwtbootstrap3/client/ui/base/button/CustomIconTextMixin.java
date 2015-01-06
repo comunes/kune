@@ -45,7 +45,7 @@ import com.google.gwt.user.client.ui.Image;
  * @author Vicente J. Ruiz Jurado (adaptation for kune)
  */
 public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & HasIconPosition>
-    implements HasText, HasIcon, HasIconPosition {
+implements HasText, HasIcon, HasIconPosition {
   private static final String DEF = "16px";
   private Icon icon;
   private boolean iconBordered = false;
@@ -200,7 +200,9 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
           position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
         }
 
-        if (text.getText() != null && text.getText().length() > 0) {
+        if (text.getText() != null && text.getText().length() > 0
+        // FIXME Workaround while we see who set's "undefined" as no text
+            && !"undefined".equals(text.getText())) {
           widget.insert(text, position);
         }
 
@@ -263,13 +265,19 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
   }
 
   public void setIconResource(final ImageResource icon) {
-    iconImage = new Image(icon);
+    if (iconImage == null) {
+      iconImage = new Image();
+    }
+    iconImage.setResource(icon);
     iconImage.setSize(DEF, DEF);
     render();
   }
 
   public void setIconRightResource(final ImageResource icon) {
-    iconRightImage = new Image(icon);
+    if (iconRightImage == null) {
+      iconRightImage = new Image();
+    }
+    iconRightImage.setResource(icon);
     iconRightImage.setSize(DEF, DEF);
     render();
   }
@@ -292,13 +300,18 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
   }
 
   public void setIconStyle(final String style) {
-    iconLabel = new Text(" ");
+    if (iconLabel == null) {
+      iconLabel = new Text(" ");
+    }
     iconLabel.addStyleName(style);
     render();
   }
 
   public void setIconUrl(final String url) {
-    iconImage = new Image(url);
+    if (iconImage == null) {
+      iconImage = new Image();
+    }
+    iconImage.setUrl(url);
     iconImage.setSize(DEF, DEF);
     render();
   }
@@ -307,4 +320,5 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
   public void setText(final String text) {
     this.text.setText(text);
   }
+
 }

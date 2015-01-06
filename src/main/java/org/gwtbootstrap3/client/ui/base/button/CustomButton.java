@@ -27,6 +27,23 @@ import cc.kune.common.shared.res.KuneIcon;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.DragEndEvent;
+import com.google.gwt.event.dom.client.DragEndHandler;
+import com.google.gwt.event.dom.client.DragEnterEvent;
+import com.google.gwt.event.dom.client.DragEnterHandler;
+import com.google.gwt.event.dom.client.DragEvent;
+import com.google.gwt.event.dom.client.DragHandler;
+import com.google.gwt.event.dom.client.DragLeaveEvent;
+import com.google.gwt.event.dom.client.DragLeaveHandler;
+import com.google.gwt.event.dom.client.DragOverEvent;
+import com.google.gwt.event.dom.client.DragOverHandler;
+import com.google.gwt.event.dom.client.DragStartEvent;
+import com.google.gwt.event.dom.client.DragStartHandler;
+import com.google.gwt.event.dom.client.DropEvent;
+import com.google.gwt.event.dom.client.DropHandler;
+import com.google.gwt.event.dom.client.HasAllDragAndDropHandlers;
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
 
 /**
@@ -44,9 +61,13 @@ import com.google.gwt.resources.client.ImageResource;
  * </pre>
  *
  * @author Sven Jacobs
- * @see org.gwtbootstrap3.client.ui.base.button.AbstractToggleButton
+ * @author Vicente J. Ruiz Jurado (added drag&drop, and other kind of icons, see
+ *         <a href="https://github.com/gwtbootstrap3/gwtbootstrap3/issues/213">
+ *         this bug</a>)
+ * @see org.gwtbootstrap3.client.ui.base.button.CustomAbstractToggleButton
  */
-public class CustomButton extends CustomAbstractToggleButton {
+public class CustomButton extends CustomAbstractToggleButton implements HasClickHandlers,
+HasAllDragAndDropHandlers {
 
   /**
    * Creates button with DEFAULT type.
@@ -72,6 +93,41 @@ public class CustomButton extends CustomAbstractToggleButton {
   public CustomButton(final String text, final IconType iconType, final ClickHandler clickHandler) {
     this(text, clickHandler);
     setIcon(iconType);
+  }
+
+  @Override
+  public HandlerRegistration addDragEndHandler(final DragEndHandler handler) {
+    return addDomHandler(handler, DragEndEvent.getType());
+  }
+
+  @Override
+  public HandlerRegistration addDragEnterHandler(final DragEnterHandler handler) {
+    return addDomHandler(handler, DragEnterEvent.getType());
+  }
+
+  @Override
+  public HandlerRegistration addDragHandler(final DragHandler handler) {
+    return addDomHandler(handler, DragEvent.getType());
+  }
+
+  @Override
+  public HandlerRegistration addDragLeaveHandler(final DragLeaveHandler handler) {
+    return addDomHandler(handler, DragLeaveEvent.getType());
+  }
+
+  @Override
+  public HandlerRegistration addDragOverHandler(final DragOverHandler handler) {
+    return addDomHandler(handler, DragOverEvent.getType());
+  }
+
+  @Override
+  public HandlerRegistration addDragStartHandler(final DragStartHandler handler) {
+    return addDomHandler(handler, DragStartEvent.getType());
+  }
+
+  @Override
+  public HandlerRegistration addDropHandler(final DropHandler handler) {
+    return addDomHandler(handler, DropEvent.getType());
   }
 
   @Override
@@ -108,4 +164,5 @@ public class CustomButton extends CustomAbstractToggleButton {
   public void setIconUrl(final String url) {
     super.setIconUrl(url);
   }
+
 }

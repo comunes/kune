@@ -22,6 +22,8 @@
  */
 package cc.kune.common.client.ui.dialogs;
 
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.utils.TextUtils;
@@ -31,7 +33,6 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
@@ -42,14 +43,14 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BasicDialog.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * The Interface BasicDialogUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface BasicDialogUiBinder extends UiBinder<Widget, BasicDialog> {
@@ -71,7 +72,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
   CloseDialogButton closeBtn;
   /** The first btn. */
   @UiField
-  Button firstBtn;
+  CustomButton firstBtn;
 
   /** The main panel. */
   @UiField
@@ -79,7 +80,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /** The second btn. */
   @UiField
-  Button secondBtn;
+  CustomButton secondBtn;
 
   /** The title. */
   @UiField
@@ -98,7 +99,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Ensure debug id first btn.
-   * 
+   *
    * @param id
    *          the id
    */
@@ -110,7 +111,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Ensure debug id second btn.
-   * 
+   *
    * @param id
    *          the id
    */
@@ -122,7 +123,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getBottomPanel()
    */
   @Override
@@ -132,7 +133,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Gets the btn panel.
-   * 
+   *
    * @return the btn panel
    */
   public FlowPanel getBtnPanel() {
@@ -141,7 +142,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getCloseBtn()
    */
   @Override
@@ -151,7 +152,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getFirstBtn()
    */
   @Override
@@ -161,7 +162,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getInnerPanel()
    */
   @Override
@@ -176,7 +177,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getSecondBtn()
    */
   @Override
@@ -186,7 +187,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getTitleText()
    */
   @Override
@@ -196,7 +197,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setCloseBtnTooltip(java
    * .lang.String)
@@ -208,7 +209,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setCloseBtnVisible(boolean
    * )
@@ -220,7 +221,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the first btn enabled.
-   * 
+   *
    * @param enabled
    *          the new first btn enabled
    */
@@ -237,7 +238,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the first btn id.
-   * 
+   *
    * @param id
    *          the new first btn id
    */
@@ -247,7 +248,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the first btn tab index.
-   * 
+   *
    * @param index
    *          the new first btn tab index
    */
@@ -257,7 +258,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setFirstBtnText(java.lang
    * .String)
@@ -270,7 +271,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setFirstBtnTitle(java.
    * lang.String)
@@ -282,7 +283,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setFirstBtnVisible(boolean
    * )
@@ -294,7 +295,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the inner height.
-   * 
+   *
    * @param height
    *          the new inner height
    */
@@ -304,7 +305,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the inner width.
-   * 
+   *
    * @param width
    *          the new inner width
    */
@@ -314,7 +315,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the second btn enabled.
-   * 
+   *
    * @param enabled
    *          the new second btn enabled
    */
@@ -324,7 +325,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the second btn id.
-   * 
+   *
    * @param id
    *          the new second btn id
    */
@@ -334,7 +335,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the second btn tab index.
-   * 
+   *
    * @param index
    *          the new second btn tab index
    */
@@ -344,7 +345,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnText(java.
    * lang.String)
@@ -357,7 +358,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnTitle(java
    * .lang.String)
@@ -369,7 +370,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnVisible(boolean
    * )
@@ -381,7 +382,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the title icon.
-   * 
+   *
    * @param img
    *          the new title icon
    */
@@ -391,7 +392,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the title icon css
-   * 
+   *
    * @param icon
    *          the new title icon css
    */
@@ -409,7 +410,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /**
    * Sets the title id.
-   * 
+   *
    * @param id
    *          the new title id
    */

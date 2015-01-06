@@ -1,25 +1,25 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-  xmlns:d="urn:import:cc.kune.common.client.ui.dialogs"
-  xmlns:k="urn:import:cc.kune.common.client.ui"
-  xmlns:g="urn:import:com.google.gwt.user.client.ui" >
+  xmlns:d="urn:import:cc.kune.common.client.ui.dialogs" xmlns:k="urn:import:cc.kune.common.client.ui"
+  xmlns:b="urn:import:org.gwtbootstrap3.client.ui.base.button" xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:with field='res'
-    type='cc.kune.common.client.resources.CommonResources'/>
+    type='cc.kune.common.client.resources.CommonResources' />
   <g:VerticalPanel addStyleNames="k-dialog-outerp, k-bottom-10corners">
     <g:FlowPanel>
-      <d:CloseDialogButton ui:field="closeBtn" addStyleNames="k-dialog-close-btn-dialog"/>
+      <d:CloseDialogButton ui:field="closeBtn"
+        addStyleNames="k-dialog-close-btn-dialog" />
       <g:FlowPanel>
         <g:FlowPanel ui:field="flow" addStyleNames="k-dialog-innerp, k-3corners">
-          <k:IconLabel ui:field="title" addStyleNames="k-dialog-title, "/>
-          <g:FlowPanel ui:field="vp" addStyleNames="kune-Margin-Medium-trbl"/>
+          <k:IconLabel ui:field="title" addStyleNames="k-dialog-title, " />
+          <g:FlowPanel ui:field="vp" addStyleNames="kune-Margin-Medium-trbl" />
           <g:VerticalPanel ui:field="bottomPanel" width="100%"></g:VerticalPanel>
         </g:FlowPanel>
       </g:FlowPanel>
       <g:FlowPanel ui:field="btnPanel" addStyleNames="k-dialog-btn-area, k-clear">
-        <g:Button ui:field="firstBtn"
-          addStyleNames="k-dialog-btn, k-dialog-firstBtn, k-5corners, k-button "/>
-        <g:Button ui:field="secondBtn"
-          addStyleNames="k-dialog-btn,k-dialog-secondBtn, k-5corners, k-button"/>
+        <b:CustomButton ui:field="firstBtn"
+          addStyleNames="k-dialog-firstBtn " />
+        <b:CustomButton ui:field="secondBtn"
+          addStyleNames="k-dialog-secondBtn" />
       </g:FlowPanel>
     </g:FlowPanel>
   </g:VerticalPanel>

@@ -63,13 +63,18 @@ import cc.kune.common.client.ui.dialogs.MessagePanel;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.ui.UploaderPanel;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog.Builder;
+import cc.kune.core.client.ui.dialogs.PromptTopDialog.OnEnter;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.WhiteSpace;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -119,7 +124,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
      * .common.client.actions.ActionEvent)
      */
@@ -265,7 +270,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     // testToolpanel();
     // toolSelector.addWidget(new Label("Test"));
-
     // testPromptDialog();
 
     testSubWidget();
@@ -309,15 +313,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       public void actionPerformed(final ActionEvent event) {
         // SimpleUserMessage simpleMes = new SimpleUserMessage();
         // simpleMes.show("Hellow world!");
-        NotifyUser.askConfirmation("Some title", "Some message",  new SimpleResponseCallback() {
-          
-          @Override
-          public void onSuccess() {
-         NotifyUser.info("Success");  }
-          
+        NotifyUser.askConfirmation("Some title", "Some message", new SimpleResponseCallback() {
+
           @Override
           public void onCancel() {
-            NotifyUser.error("Cancel");            
+            NotifyUser.error("Cancel");
+          }
+
+          @Override
+          public void onSuccess() {
+            NotifyUser.info("Success");
           }
         });
       }
@@ -363,25 +368,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
   }
 
-  //
-  // private void testPromptDialog() {
-  // Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?",
-  // false, true, Direction.LTR);
-  // builder.width("200px").height("200px").firstButtonTitle("Create").sndButtonTitle("Cancel");
-  // builder.regex(TextUtils.UNIX_NAME).regexText(
-  // "The name must contain only characters, numbers and dashes");
-  // PromptTopDialog diag = builder.build();
-  // diag.showCentered();
-  // diag.focusOnTextBox();
-  // diag.getFirstBtn().addClickHandler(new ClickHandler() {
-  //
-  // @Override
-  // public void onClick(ClickEvent event) {
-  // Window.alert("ok");
-  // }
-  // });
-  // }
-  //
   /**
    * Test bar buttons.
    */
@@ -411,17 +397,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     vp.add(buttonGroup);
     absolutePanel.add(vp, 100, 100);
   }
-
-  // private void testPUload() {
-  // final Button browseButton = new Button();
-  // browseButton.getElement().setId("my-browse-button");
-  // final PluploadBuilder builder = new PluploadBuilder();
-  // // ADD ANY PLUPLOAD PROPERTIES HERE
-  // builder.uploadUrl("server/upload.php");
-  // builder.browseButton("my-browse-button");
-  // final Plupload plupload = builder.create();
-  // RootPanel.get().add(browseButton);
-  // }
 
   /**
    * Test dialogs.
@@ -466,6 +441,42 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     // DOM.setStyleAttribute(pop.getElement(), "zIndex", "10000");
     // mask.mask(pop2, "JAarrrrr!");
+  }
+
+  // private void testPUload() {
+  // final Button browseButton = new Button();
+  // browseButton.getElement().setId("my-browse-button");
+  // final PluploadBuilder builder = new PluploadBuilder();
+  // // ADD ANY PLUPLOAD PROPERTIES HERE
+  // builder.uploadUrl("server/upload.php");
+  // builder.browseButton("my-browse-button");
+  // final Plupload plupload = builder.create();
+  // RootPanel.get().add(browseButton);
+  // }
+
+  private void testPromptDialog() {
+    final Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?", false, true,
+        Direction.LTR, new OnEnter() {
+
+      @Override
+      public void onEnter() {
+        NotifyUser.info("On Enter");
+
+      }
+    });
+    builder.width("200px").height("200px").firstButtonTitle("Create").sndButtonTitle("Cancel");
+    builder.regex(TextUtils.UNIX_NAME).regexText(
+        "The name must contain only characters, numbers and dashes");
+    final PromptTopDialog diag = builder.build();
+    diag.showCentered();
+    diag.focusOnTextBox();
+    diag.getFirstBtn().addClickHandler(new ClickHandler() {
+
+      @Override
+      public void onClick(final ClickEvent event) {
+        Window.alert("ok");
+      }
+    });
   }
 
   /**
@@ -526,11 +537,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
         false, new ClickHandler() {
 
-          @Override
-          public void onClick(final ClickEvent event) {
-            userMsg.show("Testing");
-          }
-        });
+      @Override
+      public void onClick(final ClickEvent event) {
+        userMsg.show("Testing");
+      }
+    });
     thumb.setTooltip("Some thumb tooltip");
     thumb.setOnOverLabel(true);
     return thumb;
@@ -558,16 +569,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(button4, clientWidth - 90, clientHeight - 60);
     Tooltip.to(button,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button2,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button3,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button4,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
 
   }
 }

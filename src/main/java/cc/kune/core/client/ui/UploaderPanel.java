@@ -3,6 +3,7 @@ package cc.kune.core.client.ui;
 import java.util.Arrays;
 import java.util.List;
 
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 import org.vectomatic.dnd.DataTransferExt;
 import org.vectomatic.dnd.DropPanel;
 import org.vectomatic.file.File;
@@ -35,7 +36,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -56,7 +56,7 @@ public class UploaderPanel extends Composite {
 
   private final List<String> acceptedMimes;
   @UiField
-  Button button;
+  CustomButton button;
   @UiField
   FileUploadExt customUpload;
   @UiField
