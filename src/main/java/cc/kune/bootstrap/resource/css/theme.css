@@ -1,3 +1,8 @@
 .btn {
   padding: 3px 12px;
 }
+
+.growl-icon-margin {
+  margin: 0 5px 5px 0;
+  font-size: 1.5em;
+}

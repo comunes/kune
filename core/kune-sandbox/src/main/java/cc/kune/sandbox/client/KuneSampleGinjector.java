@@ -24,13 +24,12 @@
 package cc.kune.sandbox.client;
 
 import cc.kune.common.client.actions.ui.GuiProvider;
-import cc.kune.common.client.notify.UserNotifierPopup;
+import cc.kune.common.client.notify.UserNotifierGrowl;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.HasRTL;
 
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
-
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,39 +39,39 @@ import com.google.gwt.inject.client.Ginjector;
  */
 @GinModules(KuneSampleGinModule.class)
 public interface KuneSampleGinjector extends Ginjector {
-  
-  /**
-   * Gets the gui provider.
-   *
-   * @return the gui provider
-   */
-  GuiProvider getGuiProvider();
-  
-  /**
-   * Gets the toolbar.
-   *
-   * @return the toolbar
-   */
-  Toolbar getToolbar();
-  
-  /**
-   * Gets the user notifier popup.
-   *
-   * @return the user notifier popup
-   */
-  UserNotifierPopup getUserNotifierPopup();
-  
+
   /**
    * Gets the global shortcut register.
    *
    * @return the global shortcut register
    */
   GlobalShortcutRegister getGlobalShortcutRegister();
-  
+
+  /**
+   * Gets the gui provider.
+   *
+   * @return the gui provider
+   */
+  GuiProvider getGuiProvider();
+
   /**
    * Gets the checks for rtl.
    *
    * @return the checks for rtl
    */
   HasRTL getHasRTL();
+
+  /**
+   * Gets the toolbar.
+   *
+   * @return the toolbar
+   */
+  Toolbar getToolbar();
+
+  /**
+   * Gets the user notifier popup.
+   *
+   * @return the user notifier popup
+   */
+  UserNotifierGrowl getUserNotifierGrowl();
 }

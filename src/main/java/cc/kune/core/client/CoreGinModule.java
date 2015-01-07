@@ -30,7 +30,7 @@ import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.msgs.UserMessagesPanel;
 import cc.kune.common.client.msgs.UserMessagesPresenter;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.notify.UserNotifierPopup;
+import cc.kune.common.client.notify.UserNotifierGrowl;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
@@ -157,7 +157,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -205,7 +205,8 @@ public class CoreGinModule extends ExtendedGinModule {
         CorePresenter.CoreProxy.class);
     bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerPanel.class,
         SpinerPresenter.SpinerProxy.class);
-    eagle(UserNotifierPopup.class);
+    // eagle(UserNotifierPopup.class);
+    eagle(UserNotifierGrowl.class);
     requestStaticInjection(NotifyUser.class);
     bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
         SpaceSelectorPanel.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);

@@ -26,8 +26,6 @@ import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.ButtonGroup;
 import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.constants.IconType;
-import org.vectomatic.file.File;
-import org.vectomatic.file.FileList;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
@@ -62,6 +60,7 @@ import cc.kune.common.client.ui.dialogs.BasicDialog;
 import cc.kune.common.client.ui.dialogs.MessagePanel;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.ui.UploaderPanel;
@@ -239,13 +238,18 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   /**
    * This is the entry point method.
    */
+  /*
+   * (non-Javadoc)
+   *
+   * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+   */
   @Override
   public void onModuleLoad() {
     ginjector = GWT.create(KuneSampleGinjector.class);
     toolbar = ginjector.getToolbar();
     res = CommonResources.INSTANCE;
     res.commonStyle().ensureInjected();
-    ginjector.getUserNotifierPopup();
+    ginjector.getUserNotifierGrowl();
 
     absolutePanel = new AbsolutePanel();
     testBarButtons();
@@ -296,13 +300,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     RootPanel.get().add(absolutePanel);
   }
 
-  protected void process(final FileList files) {
-    GWT.log("length=" + files.getLength());
-    for (final File file : files) {
-      NotifyUser.info("Size: " + file.getSize());
-    }
-  }
-
   /**
    * Test action toolbar.
    */
@@ -311,8 +308,9 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final AbstractExtendedAction action1 = new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
-        // SimpleUserMessage simpleMes = new SimpleUserMessage();
-        // simpleMes.show("Hellow world!");
+        final SimpleUserMessage simpleMes = new SimpleUserMessage();
+        simpleMes.show("Hellow world!");
+
         NotifyUser.askConfirmation("Some title", "Some message", new SimpleResponseCallback() {
 
           @Override
@@ -331,15 +329,25 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final AbstractExtendedAction action2 = new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
-        NotifyUser.error(
-            "Some title",
-            "Lorem <a href='/'>ipsum</a> dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit",
-            false);
+        final String title = "Some title";
+        final String message = "Lorem <a href='/'>ipsum</a> dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit";
+
+        NotifyUser.avatar("http://lorempixel.com/200/200", message, new ClickHandler() {
+          @Override
+          public void onClick(final ClickEvent event) {
+            NotifyUser.info("On click");
+          }
+        });
+        NotifyUser.error(title, message, true);
+        NotifyUser.important(message);
+        NotifyUser.info(message);
       }
     };
 
-    final IconLabelDescriptor iconLabel = new IconLabelDescriptor("Icon Label", res.info());
+    final IconLabelDescriptor iconLabel = new IconLabelDescriptor("This does not work");
     iconLabel.setAction(action1);
+    iconLabel.withText("Icon Label2");
+    iconLabel.withIcon(new KuneIcon('f'));
 
     final ButtonDescriptor button1 = new ButtonDescriptor("button 1", action1);
     final ButtonDescriptor button2 = new ButtonDescriptor("button 2 but bigger bigger", action2);
@@ -349,8 +357,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     button2.withIcon(res.info()).withToolTip("Some tooltip");
     button3.withIcon(IconType.TWITTER).withToolTip("Some tooltip"); // .withStyles("k-button,gwt-Button,k-btn-min");
 
-    toolbar.add(iconLabel);
     toolbar.add(button1);
+    toolbar.add(iconLabel);
     toolbar.add(button2);
     toolbar.add(button3);
 
@@ -555,7 +563,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     final Button button = new Button("Btn 1 biiggggggg");
     final Button button2 = new Button("Btn 2 also biggggg");
-    button.getElement().getStyle().setWhiteSpace(WhiteSpace.PRE_WRAP);
+    button.getElement().getStyle().setWhiteSpace(WhiteSpace.NORMAL);
+
     final IconLabel button3 = new IconLabel(res.info(), "Btn 3");
     final Button button4 = new Button("Btn 4");
 

@@ -28,7 +28,7 @@ import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.notify.UserNotifierPopup;
+import cc.kune.common.client.notify.UserNotifierGrowl;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
 import cc.kune.common.shared.i18n.HasRTL;
@@ -50,7 +50,7 @@ public class KuneSampleGinModule extends AbstractGinModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -60,7 +60,7 @@ public class KuneSampleGinModule extends AbstractGinModule {
     bind(I18n.class).in(Singleton.class);
     requestStaticInjection(I18n.class);
     requestStaticInjection(NotifyUser.class);
-    bind(UserNotifierPopup.class).asEagerSingleton();
+    // bind(UserNotifierPopup.class).asEagerSingleton();
     requestStaticInjection(EventBusInstance.class);
     bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
 
@@ -70,5 +70,8 @@ public class KuneSampleGinModule extends AbstractGinModule {
     bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
 
     bind(Toolbar.class).in(Singleton.class);
+
+    bind(UserNotifierGrowl.class).asEagerSingleton();
+
   }
 }
