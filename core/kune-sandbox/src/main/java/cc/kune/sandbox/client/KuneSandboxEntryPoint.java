@@ -22,14 +22,18 @@
  */
 package cc.kune.sandbox.client;
 
+import java.util.Date;
+
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.ButtonGroup;
 import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
@@ -82,7 +86,6 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-// TODO: Auto-generated Javadoc
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  *
@@ -180,9 +183,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final PushButtonDescriptor pushBtn = new PushButtonDescriptor(action2);
     pushBtn.setPushed(true);
     pushBtn.withText("Push btn");
-    // FIXME when fix the style set also in I18nTranslatorForm.ui.xml
-    // (currently
-    // is set to "none")
 
     final ToolbarDescriptor toolbar = new ToolbarDescriptor();
     final ToolbarSeparatorDescriptor tsepFill = new ToolbarSeparatorDescriptor(Type.fill, toolbar);
@@ -235,21 +235,97 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     return view;
   }
 
-  /**
-   * This is the entry point method.
-   */
-  /*
-   * (non-Javadoc)
-   *
-   * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
-   */
   @Override
   public void onModuleLoad() {
+
     ginjector = GWT.create(KuneSampleGinjector.class);
     toolbar = ginjector.getToolbar();
     res = CommonResources.INSTANCE;
     res.commonStyle().ensureInjected();
     ginjector.getUserNotifierGrowl();
+
+    final MainContainer mainPanel = new MainContainer();
+    // mainPanel.setWidth("100%");
+    // mainPanel.setHeight("100px");
+
+    // final ScrollableDeckPanel scroll = new ScrollableDeckPanel();
+    // final FlowPanel flow = new FlowPanel();
+
+    final CustomButton next = new CustomButton("Deck next", IconType.PLAY_CIRCLE, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        mainPanel.next();
+      }
+    });
+    next.setStyleName(ActionStyles.SITEBAR_STYLE);
+    mainPanel.getSitebar().add(next);
+    mainPanel.getFooter().add(new CustomButton("Footer", IconType.DOWNLOAD, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        mainPanel.prev();
+      }
+    }));
+
+    final FlowPanel flow = mainPanel.getFlow();
+
+    flow.add(new CustomButton("Show progress", IconType.PLAY_CIRCLE, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.showProgressLoading();
+      }
+    }));
+
+    flow.add(new CustomButton("Hide progress", IconType.STOP, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.hideProgress();
+      }
+    }));
+
+    flow.add(new CustomButton("Show date", IconType.CLOCK_O, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.showProgress("Date : " + new Date().getTime());
+      }
+    }));
+
+    flow.add(new CustomButton("Important message", IconType.WARNING, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.important("Alert!");
+      }
+    }));
+
+    flow.add(new CustomButton("Error message", IconType.QUESTION_CIRCLE, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.error("Title", "Error!", false);
+      }
+    }));
+    //
+    // scroll.insert(flow, 0);
+    // // scroll.setHeight("400px");
+    // mainPanel.addToMain(scroll);
+    // mainPanel.addToMain(new Label("Test panel"));
+    // RootLayoutPanel.get().add(mainPanel);
+    RootPanel.get().add(mainPanel);
+    // scroll.showWidget(0);
+
+    // TODO Add more tests here
+
+  }
+
+  public void onModuleLoadOld() {
+
+    // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
+
+    ginjector = GWT.create(KuneSampleGinjector.class);
+    toolbar = ginjector.getToolbar();
+    res = CommonResources.INSTANCE;
+    res.commonStyle().ensureInjected();
+    ginjector.getUserNotifierGrowl();
+
+    NotifyUser.showProgress("Starting");
 
     absolutePanel = new AbsolutePanel();
     testBarButtons();
@@ -298,6 +374,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     new BlinkAnimation(tab, 350).animate(5);
 
     RootPanel.get().add(absolutePanel);
+    // UserNotifierGrowl.close(growl);
   }
 
   /**
@@ -310,8 +387,9 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       public void actionPerformed(final ActionEvent event) {
         final SimpleUserMessage simpleMes = new SimpleUserMessage();
         simpleMes.show("Hellow world!");
-
-        NotifyUser.askConfirmation("Some title", "Some message", new SimpleResponseCallback() {
+        NotifyUser.showProgress("Savingggg");
+        NotifyUser.askConfirmation("Some title", "Some message", "Yeah!", "Nein",
+            new SimpleResponseCallback() {
 
           @Override
           public void onCancel() {
@@ -331,7 +409,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       public void actionPerformed(final ActionEvent event) {
         final String title = "Some title";
         final String message = "Lorem <a href='/'>ipsum</a> dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit";
-
+        NotifyUser.showProgress("Saving......" + new Date().getTime());
         NotifyUser.avatar("http://lorempixel.com/200/200", message, new ClickHandler() {
           @Override
           public void onClick(final ClickEvent event) {
@@ -341,6 +419,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
         NotifyUser.error(title, message, true);
         NotifyUser.important(message);
         NotifyUser.info(message);
+        NotifyUser.success(title, message);
       }
     };
 
@@ -406,6 +485,17 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(vp, 100, 100);
   }
 
+  // private void testPUload() {
+  // final Button browseButton = new Button();
+  // browseButton.getElement().setId("my-browse-button");
+  // final PluploadBuilder builder = new PluploadBuilder();
+  // // ADD ANY PLUPLOAD PROPERTIES HERE
+  // builder.uploadUrl("server/upload.php");
+  // builder.browseButton("my-browse-button");
+  // final Plupload plupload = builder.create();
+  // RootPanel.get().add(browseButton);
+  // }
+
   /**
    * Test dialogs.
    */
@@ -451,17 +541,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // mask.mask(pop2, "JAarrrrr!");
   }
 
-  // private void testPUload() {
-  // final Button browseButton = new Button();
-  // browseButton.getElement().setId("my-browse-button");
-  // final PluploadBuilder builder = new PluploadBuilder();
-  // // ADD ANY PLUPLOAD PROPERTIES HERE
-  // builder.uploadUrl("server/upload.php");
-  // builder.browseButton("my-browse-button");
-  // final Plupload plupload = builder.create();
-  // RootPanel.get().add(browseButton);
-  // }
-
   private void testPromptDialog() {
     final Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?", false, true,
         Direction.LTR, new OnEnter() {
@@ -486,6 +565,27 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       }
     });
   }
+
+  //
+  // private void testToolpanel() {
+  // ToolSelectorPanel toolSelector = new ToolSelectorPanel(new
+  // GSpaceArmorImpl(null), null);
+  // ToolSelectorItemPanel toolItem1 = new ToolSelectorItemPanel();
+  // toolItem1.getLabel().setText("documents");
+  // ToolSelectorItemPanel toolItem2 = new ToolSelectorItemPanel();
+  // toolItem2.getLabel().setText("something very longgggggg");
+  // ToolSelectorItemPanel toolItem3 = new ToolSelectorItemPanel();
+  // toolItem3.getLabel().setText("media");
+  // toolSelector.addItem(toolItem1);
+  // toolSelector.addItem(toolItem2);
+  // toolSelector.addItem(toolItem3);
+  // toolItem1.setSelected(true);
+  // toolItem2.setSelected(false);
+  // toolItem3.setSelected(false);
+  // toolSelector.asWidget().setWidth("200px");
+  // RootPanel.get().add(toolSelector.asWidget());
+  // }
+  //
 
   /**
    * Test sub widget.
@@ -514,27 +614,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // RootPanel.get().add(btn);
     // RootPanel.get().add(sub);
   }
-
-  //
-  // private void testToolpanel() {
-  // ToolSelectorPanel toolSelector = new ToolSelectorPanel(new
-  // GSpaceArmorImpl(null), null);
-  // ToolSelectorItemPanel toolItem1 = new ToolSelectorItemPanel();
-  // toolItem1.getLabel().setText("documents");
-  // ToolSelectorItemPanel toolItem2 = new ToolSelectorItemPanel();
-  // toolItem2.getLabel().setText("something very longgggggg");
-  // ToolSelectorItemPanel toolItem3 = new ToolSelectorItemPanel();
-  // toolItem3.getLabel().setText("media");
-  // toolSelector.addItem(toolItem1);
-  // toolSelector.addItem(toolItem2);
-  // toolSelector.addItem(toolItem3);
-  // toolItem1.setSelected(true);
-  // toolItem2.setSelected(false);
-  // toolItem3.setSelected(false);
-  // toolSelector.asWidget().setWidth("200px");
-  // RootPanel.get().add(toolSelector.asWidget());
-  // }
-  //
 
   /**
    * Test thumbs.

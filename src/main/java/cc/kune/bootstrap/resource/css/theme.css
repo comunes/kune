@@ -6,3 +6,13 @@
   margin: 0 5px 5px 0;
   font-size: 1.5em;
 }
+
+.alert-progress {
+  background-color: lightgrey;
+  border-color: transparent;
+  color: white;
+  width: auto;
+  height: 20px;
+  line-height: 0.1px;
+  padding: 2px 10px;
+}

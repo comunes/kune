@@ -27,10 +27,10 @@ import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,7 +40,7 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class NotifyUser {
-  
+
   /** The event bus. */
   @Inject
   private static EventBus eventBus;
@@ -62,10 +62,14 @@ public class NotifyUser {
   /**
    * Ask confirmation.
    *
-   * @param icon the icon
-   * @param title the title
-   * @param message the message
-   * @param callback the callback
+   * @param icon
+   *          the icon
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param callback
+   *          the callback
    */
   public static void askConfirmation(final ImageResource icon, final String title, final String message,
       final SimpleResponseCallback callback) {
@@ -75,21 +79,32 @@ public class NotifyUser {
   /**
    * Ask confirmation.
    *
-   * @param title the title
-   * @param message the message
-   * @param callback the callback
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param callback
+   *          the callback
    */
   public static void askConfirmation(final String title, final String message,
       final SimpleResponseCallback callback) {
     askConfirmation(null, title, message, callback);
   }
 
+  public static void askConfirmation(final String title, final String message, final String acceptBtn,
+      final String cancelBtn, final SimpleResponseCallback callback) {
+    eventBus.fireEvent(new ConfirmAskEvent(title, message, acceptBtn, cancelBtn, callback));
+  }
+
   /**
    * Avatar.
    *
-   * @param url the url
-   * @param message the message
-   * @param clickHandler the click handler
+   * @param url
+   *          the url
+   * @param message
+   *          the message
+   * @param clickHandler
+   *          the click handler
    */
   public static void avatar(final String url, final String message, final ClickHandler clickHandler) {
     final UserNotifyEvent event = new UserNotifyEvent(NotifyLevel.avatar.url(url), message);
@@ -100,7 +115,8 @@ public class NotifyUser {
   /**
    * Error.
    *
-   * @param message the message
+   * @param message
+   *          the message
    */
   public static void error(final String message) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message));
@@ -109,8 +125,10 @@ public class NotifyUser {
   /**
    * Error.
    *
-   * @param message the message
-   * @param closeable the closeable
+   * @param message
+   *          the message
+   * @param closeable
+   *          the closeable
    */
   public static void error(final String message, final boolean closeable) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message, closeable));
@@ -119,8 +137,10 @@ public class NotifyUser {
   /**
    * Error.
    *
-   * @param message the message
-   * @param additionalMessage the additional message
+   * @param message
+   *          the message
+   * @param additionalMessage
+   *          the additional message
    */
   public static void error(final String message, final String additionalMessage) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, message
@@ -130,9 +150,12 @@ public class NotifyUser {
   /**
    * Error.
    *
-   * @param title the title
-   * @param message the message
-   * @param closeable the closeable
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param closeable
+   *          the closeable
    */
   public static void error(final String title, final String message, final boolean closeable) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, title, message, closeable));
@@ -141,10 +164,14 @@ public class NotifyUser {
   /**
    * Error.
    *
-   * @param title the title
-   * @param message the message
-   * @param id the id
-   * @param closeable the closeable
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param id
+   *          the id
+   * @param closeable
+   *          the closeable
    */
   public static void error(final String title, final String message, final String id,
       final boolean closeable) {
@@ -161,7 +188,8 @@ public class NotifyUser {
   /**
    * Important.
    *
-   * @param message the message
+   * @param message
+   *          the message
    */
   public static void important(final String message) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.important, message));
@@ -170,7 +198,8 @@ public class NotifyUser {
   /**
    * Info.
    *
-   * @param message the message
+   * @param message
+   *          the message
    */
   public static void info(final String message) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message));
@@ -179,8 +208,10 @@ public class NotifyUser {
   /**
    * Info.
    *
-   * @param message the message
-   * @param closeable the closeable
+   * @param message
+   *          the message
+   * @param closeable
+   *          the closeable
    */
   public static void info(final String message, final boolean closeable) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message, closeable));
@@ -189,8 +220,10 @@ public class NotifyUser {
   /**
    * Info.
    *
-   * @param title the title
-   * @param message the message
+   * @param title
+   *          the title
+   * @param message
+   *          the message
    */
   public static void info(final String title, final String message) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, title, message));
@@ -199,10 +232,14 @@ public class NotifyUser {
   /**
    * Info.
    *
-   * @param title the title
-   * @param message the message
-   * @param id the id
-   * @param closeable the closeable
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param id
+   *          the id
+   * @param closeable
+   *          the closeable
    */
   public static void info(final String title, final String message, final String id,
       final boolean closeable) {
@@ -212,7 +249,8 @@ public class NotifyUser {
   /**
    * Log error.
    *
-   * @param message the message
+   * @param message
+   *          the message
    */
   public static void logError(final String message) {
     if (eventBus != null) {
@@ -223,11 +261,16 @@ public class NotifyUser {
   /**
    * Send event impl.
    *
-   * @param title the title
-   * @param message the message
-   * @param id the id
-   * @param closeable the closeable
-   * @param level the level
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param id
+   *          the id
+   * @param closeable
+   *          the closeable
+   * @param level
+   *          the level
    */
   private static void sendEventImpl(final String title, final String message, final String id,
       final boolean closeable, final NotifyLevel level) {
@@ -239,8 +282,10 @@ public class NotifyUser {
   /**
    * Show alert message.
    *
-   * @param title the title
-   * @param message the message
+   * @param title
+   *          the title
+   * @param message
+   *          the message
    */
   public static void showAlertMessage(final String title, final String message) {
     showAlertMessage(title, message, onOk);
@@ -249,9 +294,12 @@ public class NotifyUser {
   /**
    * Show alert message.
    *
-   * @param title the title
-   * @param message the message
-   * @param callback the callback
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param callback
+   *          the callback
    */
   public static void showAlertMessage(final String title, final String message,
       final SimpleResponseCallback callback) {
@@ -268,7 +316,8 @@ public class NotifyUser {
   /**
    * Show progress.
    *
-   * @param text the text
+   * @param text
+   *          the text
    */
   public static void showProgress(final String text) {
     eventBus.fireEvent(new ProgressShowEvent(text));
@@ -289,10 +338,19 @@ public class NotifyUser {
     eventBus.fireEvent(new ProgressShowEvent(I18n.t("Searching")));
   }
 
+  public static void success(final String message) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.success, message));
+  }
+
+  public static void success(final String title, final String message) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.success, title, message));
+  }
+
   /**
    * Very important.
    *
-   * @param message the message
+   * @param message
+   *          the message
    */
   public static void veryImportant(final String message) {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.veryImportant, message));

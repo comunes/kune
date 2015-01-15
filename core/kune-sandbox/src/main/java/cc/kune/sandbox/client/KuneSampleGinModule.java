@@ -35,6 +35,7 @@ import cc.kune.common.shared.i18n.HasRTL;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.i18n.I18nTranslationServiceMocked;
+import cc.kune.core.client.notify.confirm.UserConfirmBS;
 
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
@@ -50,7 +51,7 @@ public class KuneSampleGinModule extends AbstractGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -72,6 +73,7 @@ public class KuneSampleGinModule extends AbstractGinModule {
     bind(Toolbar.class).in(Singleton.class);
 
     bind(UserNotifierGrowl.class).asEagerSingleton();
+    bind(UserConfirmBS.class).asEagerSingleton();
 
   }
 }

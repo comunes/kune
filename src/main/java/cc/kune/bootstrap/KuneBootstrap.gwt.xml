@@ -4,6 +4,7 @@
   <inherits name="com.google.gwt.user.User" />
   <inherits name="org.gwtbootstrap3.GwtBootstrap3" />
   <inherits name="org.gwtbootstrap3.extras.growl.Growl"/>
+  <inherits name="org.gwtbootstrap3.extras.bootbox.Bootbox"/>
   <source path="client" />
   <public path='resource'>
     <include name='css/*.css' />

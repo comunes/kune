@@ -27,6 +27,7 @@ import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.notify.UserNotifierGrowl;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.HasRTL;
+import cc.kune.core.client.notify.confirm.UserConfirmBS;
 
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
@@ -67,6 +68,8 @@ public interface KuneSampleGinjector extends Ginjector {
    * @return the toolbar
    */
   Toolbar getToolbar();
+
+  UserConfirmBS getUserConfirmBS();
 
   /**
    * Gets the user notifier popup.

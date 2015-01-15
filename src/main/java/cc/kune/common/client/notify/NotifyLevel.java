@@ -29,19 +29,21 @@ package cc.kune.common.client.notify;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum NotifyLevel {
-  
+
   /** The avatar. */
-  avatar, 
- /** The error. */
- error, 
- /** The important. */
- important, 
- /** The info. */
- info, 
- /** The log. */
- log, 
- /** The very important. */
- veryImportant;
+  avatar,
+  /** The error. */
+  error,
+  /** The important. */
+  important,
+  /** The info. */
+  info,
+  /** The log. */
+  log,
+  /** The success level */
+  success,
+  /** The very important. */
+  veryImportant;
 
   /** The url. */
   private String url;
@@ -56,7 +58,8 @@ public enum NotifyLevel {
   /**
    * Instantiates a new notify level.
    *
-   * @param url the url
+   * @param url
+   *          the url
    */
   NotifyLevel(final String url) {
     this.url = url;
@@ -74,7 +77,8 @@ public enum NotifyLevel {
   /**
    * Url.
    *
-   * @param url the url
+   * @param url
+   *          the url
    * @return the notify level
    */
   public NotifyLevel url(final String url) {
