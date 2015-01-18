@@ -19,7 +19,7 @@
   <source path='client' />
   <source path='shared' />
   <public path="public" />
-  <stylesheet src="Kune _sandbox.css" />
+  <stylesheet src="Kune_sandbox.css" />
   <inherits name="com.extjs.gxt.ui.GXT" />
   <!-- <inherits name="plupload.Plupload"/> -->
 

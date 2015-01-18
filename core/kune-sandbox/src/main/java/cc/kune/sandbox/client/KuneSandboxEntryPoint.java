@@ -24,12 +24,26 @@ package cc.kune.sandbox.client;
 
 import java.util.Date;
 
+import org.gwtbootstrap3.client.ui.Anchor;
+import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.ButtonGroup;
+import org.gwtbootstrap3.client.ui.DropDown;
+import org.gwtbootstrap3.client.ui.DropDownMenu;
 import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.Navbar;
+import org.gwtbootstrap3.client.ui.NavbarCollapse;
+import org.gwtbootstrap3.client.ui.NavbarCollapseButton;
+import org.gwtbootstrap3.client.ui.NavbarHeader;
+import org.gwtbootstrap3.client.ui.NavbarNav;
 import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.client.ui.constants.Pull;
+import org.gwtbootstrap3.client.ui.constants.Toggle;
 
+import cc.kune.bootstrap.client.actions.gwtui.CustomAnchorListItem;
+import cc.kune.bootstrap.client.actions.gwtui.CustomListDropDown;
+import cc.kune.bootstrap.client.actions.gwtui.DropDownSubmenu;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -81,6 +95,7 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -126,7 +141,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
      * .common.client.actions.ActionEvent)
      */
@@ -244,6 +259,99 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     res.commonStyle().ensureInjected();
     ginjector.getUserNotifierGrowl();
 
+    final Navbar navbar = new Navbar();
+    final NavbarHeader header = new NavbarHeader();
+    final NavbarCollapseButton navbarCollapseButton = new NavbarCollapseButton();
+    navbarCollapseButton.setDataTarget("#test");
+    header.add(navbarCollapseButton);
+    navbar.add(header);
+
+    final NavbarCollapse navbarCollapse = new NavbarCollapse();
+    navbarCollapse.setId("test");
+
+    final NavbarNav navbarNav = new NavbarNav();
+    navbarNav.setPull(Pull.RIGHT);
+    // navbarNav.addStyleName(SMART_MENU_STYLE);
+
+    final CustomListDropDown navbarDropDown = new CustomListDropDown();
+    navbarCollapse.add(navbarNav);
+    navbarNav.add(navbarDropDown);
+    navbar.add(navbarCollapse);
+
+    final AnchorListItem simpleAnchor = new AnchorListItem("Anchor 1");
+    simpleAnchor.setIcon(IconType.TWITTER_SQUARE);
+    navbarNav.add(simpleAnchor);
+
+    navbarNav.add(new AnchorListItem("Anchor 2"));
+    navbarNav.add(new AnchorListItem("Anchor 3"));
+    final AnchorListItem menuitem1 = new AnchorListItem("Anchor menuitem 1");
+    menuitem1.setIcon(IconType.RANDOM);
+
+    navbarDropDown.add(menuitem1);
+    navbarDropDown.add(new AnchorListItem("Anchor menuitem 2"));
+    final CustomAnchorListItem menuitem3 = new CustomAnchorListItem("Anchor menuitem 3");
+    menuitem3.setIconUrl("http://lorempixel.com/100/100");
+    navbarDropDown.add(menuitem3);
+    final CustomAnchorListItem item1 = new CustomAnchorListItem("Testingggg");
+    item1.setIcon(IconType.HEART);
+    navbarDropDown.add(item1);
+
+    for (int i = 1; i < 50; i++) {
+      navbarDropDown.add(new AnchorListItem("Anchor " + i));
+    }
+
+    final CustomAnchorListItem itemSubmenu = new CustomAnchorListItem("Testing submenu");
+    itemSubmenu.setIcon(new KuneIcon('f'));
+    final DropDownSubmenu submenu = new DropDownSubmenu();
+    submenu.add(new AnchorListItem("sub item 1"));
+    submenu.add(new AnchorListItem("sub item 2"));
+    submenu.add(new AnchorListItem("sub item 3"));
+    itemSubmenu.add(submenu);
+    navbarDropDown.add(itemSubmenu);
+    RootPanel.get().add(navbar);
+
+    final DropDown dropDown = new DropDown();
+
+    final Anchor dropDownAnchor = new Anchor();
+    final Image thumb = new Image("http://lorempixel.com/100/100");
+    dropDownAnchor.add(thumb);
+    // thumb.getElement().setAttribute(Attributes.DATA_TOGGLE,
+    // Toggle.DROPDOWN.getToggle());
+    // dropDownAnchor.add(thumb);
+
+    // final Anchor dropDownAnchor = new Anchor();
+    // dropDownAnchor.setText("Label dropdown");
+    dropDownAnchor.setDataToggle(Toggle.DROPDOWN);
+    dropDown.add(dropDownAnchor);
+
+    final DropDownMenu dropDownMenu = new DropDownMenu();
+    dropDown.add(dropDownMenu);
+    final CustomAnchorListItem dditem1 = new CustomAnchorListItem("Test 1");
+    final CustomAnchorListItem dditem2 = new CustomAnchorListItem("Test 2");
+    dditem1.setIcon(new KuneIcon('g'));
+    dditem2.setIconUrl("http://lorempixel.com/101/101");
+    dropDownMenu.add(dditem1);
+    dropDownMenu.add(dditem2);
+
+    final CustomButton btn = new CustomButton("Text custom button");
+    btn.setIcon(new KuneIcon('f'));
+    RootPanel.get().add(btn);
+    RootPanel.get().add(dropDown);
+
+    // RootPanel.get().add(new TestBootstrap());
+
+    // TODO Add more tests here
+
+  }
+
+  public void onModuleLoad2() {
+
+    ginjector = GWT.create(KuneSampleGinjector.class);
+    toolbar = ginjector.getToolbar();
+    res = CommonResources.INSTANCE;
+    res.commonStyle().ensureInjected();
+    ginjector.getUserNotifierGrowl();
+
     final MainContainer mainPanel = new MainContainer();
     // mainPanel.setWidth("100%");
     // mainPanel.setHeight("100px");
@@ -258,7 +366,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       }
     });
     next.setStyleName(ActionStyles.SITEBAR_STYLE);
-    mainPanel.getSitebar().add(next);
+    // mainPanel.getSitebar().add(next);
     mainPanel.getFooter().add(new CustomButton("Footer", IconType.DOWNLOAD, new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -308,11 +416,19 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // mainPanel.addToMain(scroll);
     // mainPanel.addToMain(new Label("Test panel"));
     // RootLayoutPanel.get().add(mainPanel);
-    RootPanel.get().add(mainPanel);
-    // scroll.showWidget(0);
 
-    // TODO Add more tests here
+    // final MenuDescriptor menu = new MenuDescriptor("Menu");
 
+    // final MenuItemDescriptor menuItemDescriptor = new
+    // MenuItemDescriptor(menu, new TestAction(
+    // "Menu item"));
+    // toolbar.add(menu);
+
+    // mainPanel.getSitebar().add(toolbar);
+
+    // mainPanel.getSitebar().add(new TestBootstrap());
+
+    // mainPanel.getSitebar().add(navmenu);
   }
 
   public void onModuleLoadOld() {
@@ -391,16 +507,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
         NotifyUser.askConfirmation("Some title", "Some message", "Yeah!", "Nein",
             new SimpleResponseCallback() {
 
-          @Override
-          public void onCancel() {
-            NotifyUser.error("Cancel");
-          }
+              @Override
+              public void onCancel() {
+                NotifyUser.error("Cancel");
+              }
 
-          @Override
-          public void onSuccess() {
-            NotifyUser.info("Success");
-          }
-        });
+              @Override
+              public void onSuccess() {
+                NotifyUser.info("Success");
+              }
+            });
       }
     };
 
@@ -545,12 +661,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?", false, true,
         Direction.LTR, new OnEnter() {
 
-      @Override
-      public void onEnter() {
-        NotifyUser.info("On Enter");
+          @Override
+          public void onEnter() {
+            NotifyUser.info("On Enter");
 
-      }
-    });
+          }
+        });
     builder.width("200px").height("200px").firstButtonTitle("Create").sndButtonTitle("Cancel");
     builder.regex(TextUtils.UNIX_NAME).regexText(
         "The name must contain only characters, numbers and dashes");
@@ -624,11 +740,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
         false, new ClickHandler() {
 
-      @Override
-      public void onClick(final ClickEvent event) {
-        userMsg.show("Testing");
-      }
-    });
+          @Override
+          public void onClick(final ClickEvent event) {
+            userMsg.show("Testing");
+          }
+        });
     thumb.setTooltip("Some thumb tooltip");
     thumb.setOnOverLabel(true);
     return thumb;
@@ -657,16 +773,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(button4, clientWidth - 90, clientHeight - 60);
     Tooltip.to(button,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button2,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button3,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button4,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
 
   }
 }

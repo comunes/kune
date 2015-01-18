@@ -22,8 +22,8 @@
  */
 package cc.kune.bootstrap.client.actions.gwtui;
 
+import cc.kune.bootstrap.client.smartmenus.SmartMenusBundle;
 import cc.kune.common.client.actions.gwtui.GwtIconLabelGui;
-import cc.kune.common.client.actions.gwtui.GwtMenuItemGui;
 import cc.kune.common.client.actions.gwtui.GwtMenuSeparatorGui;
 import cc.kune.common.client.actions.gwtui.GwtMenuTitleItemGui;
 import cc.kune.common.client.actions.gwtui.GwtSubMenuGui;
@@ -42,6 +42,7 @@ import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -58,7 +59,7 @@ public class BootstrapGuiProvider {
   @Inject
   public BootstrapGuiProvider(final GuiProvider guiProvider,
       final Provider<GwtSubMenuGui> gwtSubMenuGui, final Provider<BSMenuGui> menuGui,
-      final Provider<GwtMenuItemGui> gwtMenuItemGui,
+      final Provider<BSMenuItemGui> bsMenuItemGui,
       final Provider<GwtMenuSeparatorGui> gwtMenuSeparatorGui,
       final Provider<BSPushButtonGui> pushButtonGui, final Provider<BSButtonGui> buttonGui,
       final Provider<BSLabelGui> labelGui, final Provider<GwtIconLabelGui> gwtIconLabelGui,
@@ -68,10 +69,10 @@ public class BootstrapGuiProvider {
 
     guiProvider.register(SubMenuDescriptor.class, gwtSubMenuGui);
     guiProvider.register(MenuDescriptor.class, menuGui);
-    guiProvider.register(MenuRadioItemDescriptor.class, gwtMenuItemGui);
-    guiProvider.register(MenuCheckItemDescriptor.class, gwtMenuItemGui);
+    guiProvider.register(MenuRadioItemDescriptor.class, bsMenuItemGui);
+    guiProvider.register(MenuCheckItemDescriptor.class, bsMenuItemGui);
     guiProvider.register(MenuTitleItemDescriptor.class, gwtMenuTitleItemGui);
-    guiProvider.register(MenuItemDescriptor.class, gwtMenuItemGui);
+    guiProvider.register(MenuItemDescriptor.class, bsMenuItemGui);
     guiProvider.register(MenuSeparatorDescriptor.class, gwtMenuSeparatorGui);
     guiProvider.register(PushButtonDescriptor.class, pushButtonGui);
     guiProvider.register(ButtonDescriptor.class, buttonGui);
@@ -79,6 +80,13 @@ public class BootstrapGuiProvider {
     guiProvider.register(LabelDescriptor.class, labelGui);
     guiProvider.register(ToolbarDescriptor.class, toolbarGui);
     guiProvider.register(ToolbarSeparatorDescriptor.class, toolbarSeparatorGui);
+
+    ScriptInjector.fromString(SmartMenusBundle.INSTANCE.smartmenus().getText()).setWindow(
+        ScriptInjector.TOP_WINDOW).inject();
+
+    ScriptInjector.fromString(SmartMenusBundle.INSTANCE.smartmenusBootstrap().getText()).setWindow(
+        ScriptInjector.TOP_WINDOW).inject();
+
   }
 
 }

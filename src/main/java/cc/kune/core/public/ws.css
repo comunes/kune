@@ -1377,6 +1377,13 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
   font-weight: normal;
 }
 
+/* Bootstrap kune icons */
+i.k-iconfontlabel {
+ font-style: normal;
+ vertical-align: middle;
+ font-size: 14px;
+}
+
 /* Share dialog */
 .k-sharelist-title {
   font-size: 14px;

@@ -1,7 +1,7 @@
 package cc.kune.sandbox.client;
 
 import org.gwtbootstrap3.client.ui.Label;
-import org.gwtbootstrap3.client.ui.Navbar;
+import org.gwtbootstrap3.client.ui.NavbarNav;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.constants.LabelType;
 import org.gwtbootstrap3.client.ui.html.Text;
@@ -30,11 +30,11 @@ public class MainContainer extends Composite {
   @UiField
   FlowPanel flow;
   @UiField
-  Navbar footerbar;
+  NavbarNav footerbar;
   @UiField
   ScrollPanel scroll;
   @UiField
-  Navbar sitebar;
+  NavbarNav sitebar;
 
   public MainContainer() {
     initWidget(uiBinder.createAndBindUi(this));
@@ -51,6 +51,47 @@ public class MainContainer extends Composite {
 
     scroll.getElement().getStyle().setOverflowX(Overflow.AUTO);
     scroll.getElement().getStyle().setOverflowY(Overflow.SCROLL);
+
+    // scroll.setTouchScrollingDisabled(false);
+    // NotifyUser.info("Touch enabled: " + !scroll.isTouchScrollingDisabled());
+
+    // getScrollableElement().getStyle().setOverflowX(Overflow.HIDDEN);
+    // scroll.getScrollableElement().getStyle().setOverflowY(Overflow.SCROLL);
+    //
+    // scroll.addScrollHandler(new ScrollHandler() {
+    //
+    // @Override
+    // public void onScroll(final ScrollEvent event) {
+    // // NotifyUser.info("scrolling");
+    // }
+    // });
+
+    // addTouchEndHandler(new TouchEndHandler() {
+    // @Override
+    // public void onTouchEnd(final TouchEndEvent event) {
+    // // NotifyUser.info("Touch end event");
+    // next();
+    // }
+    // });
+    // addTouchStartHandler(new TouchStartHandler() {
+    // @Override
+    // public void onTouchStart(final TouchStartEvent event) {
+    // // NotifyUser.info("Touch start event");
+    // }
+    // });
+    // addTouchCancelHandler(new TouchCancelHandler() {
+    // @Override
+    // public void onTouchCancel(final TouchCancelEvent event) {
+    // // NotifyUser.info("Touch cancel event");
+    // }
+    // });
+    // addTouchMoveHandler(new TouchMoveHandler() {
+    // @Override
+    // public void onTouchMove(final TouchMoveEvent event) {
+    // // NotifyUser.info("Touch move event");
+    //
+    // }
+    // });
   }
 
   public FlowPanel getFlow() {
@@ -84,4 +125,27 @@ public class MainContainer extends Composite {
     deck.showWidget(i);
   }
 
+  // @Override
+  // public HandlerRegistration addTouchCancelHandler(final TouchCancelHandler
+  // handler) {
+  // return scroll.addDomHandler(handler, TouchCancelEvent.getType());
+  // }
+  //
+  // @Override
+  // public HandlerRegistration addTouchEndHandler(final TouchEndHandler
+  // handler) {
+  // return scroll.addDomHandler(handler, TouchEndEvent.getType());
+  // }
+  //
+  // @Override
+  // public HandlerRegistration addTouchMoveHandler(final TouchMoveHandler
+  // handler) {
+  // return scroll.addDomHandler(handler, TouchMoveEvent.getType());
+  // }
+  //
+  // @Override
+  // public HandlerRegistration addTouchStartHandler(final TouchStartHandler
+  // handler) {
+  // return scroll.addDomHandler(handler, TouchStartEvent.getType());
+  // }
 }

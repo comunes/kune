@@ -1,0 +1,140 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:b="urn:import:org.gwtbootstrap3.client.ui" xmlns:h="urn:import:org.gwtbootstrap3.client.ui.html"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+  .important {
+    font-weight: bold;
+  }
+  </ui:style>
+  <b:Navbar>
+    <b:NavbarHeader>
+      <b:NavbarBrand>Brand</b:NavbarBrand>
+      <b:NavbarCollapseButton dataTarget="#navbar-collapse" />
+    </b:NavbarHeader>
+
+    <b:NavbarCollapse b:id="navbar-collapse">
+      <b:NavbarNav>
+        <b:AnchorListItem active="true">Item 1</b:AnchorListItem>
+        <b:AnchorListItem>Item 2</b:AnchorListItem>
+        <b:AnchorListItem>Item 3</b:AnchorListItem>
+        <b:AnchorListItem>Item 4</b:AnchorListItem>
+
+        <b:ListDropDown>
+          <b:AnchorButton dataToggle="DROPDOWN">Dropdown</b:AnchorButton>
+          <b:DropDownMenu>
+            <b:AnchorListItem icon="HEART">item 1</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 2</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 3</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 4</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 5</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 6</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 7</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 8</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 9</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 10</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 11</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 12</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 13</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 14</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 15</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 16</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 17</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 18</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 19</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 20</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 21</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 22</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 23</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 24</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 25</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 26</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 27</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 28</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 29</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 30</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 31</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 32</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 33</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 34</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 35</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 36</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 37</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 38</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 39</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 40</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 41</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 42</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 43</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 44</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 45</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 46</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 47</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 48</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 49</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 50</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 51</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 52</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 53</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 54</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 55</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 56</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 57</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 58</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 59</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 60</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 61</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 62</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 63</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 64</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 65</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 66</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 67</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 68</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 69</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 70</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 71</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 72</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 73</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 74</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 75</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 76</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 77</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 78</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 79</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 80</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 81</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 82</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 83</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 84</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 85</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 86</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 87</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 88</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 89</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 90</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 91</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 92</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 93</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 94</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 95</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 96</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 97</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 98</b:AnchorListItem>
+            <b:AnchorListItem icon="HEART">item 99</b:AnchorListItem>
+
+          </b:DropDownMenu>
+        </b:ListDropDown>
+      </b:NavbarNav>
+
+      <b:NavbarForm pull="LEFT">
+        <b:TextBox placeholder="Search" addStyleNames="col-lg-8" />
+      </b:NavbarForm>
+
+      <b:NavbarText pull="RIGHT">
+        <h:Text text="Signed in as" />
+        <b:NavbarLink>John Snow</b:NavbarLink>
+      </b:NavbarText>
+    </b:NavbarCollapse>
+  </b:Navbar>
+</ui:UiBinder> 

@@ -5,23 +5,24 @@
   body {
     margin-top: 40px !important;
   }
+  
   .navbars {
-  	height: 23px;
-  	min-height: 23px !important;
+    height: 23px;
+    min-height: 23px !important;
   }
   </ui:style>
 
   <g:ScrollPanel>
     <b:Container>
-      <b:Navbar ui:field="sitebar" position="FIXED_TOP" addStyleNames="{style.navbars}">
-        <b:Container>
-
-          <b:NavbarHeader>
-            <!-- <b:NavbarBrand>Kune</b:NavbarBrand> -->
-            <b:NavbarCollapseButton dataTarget="#navbar-collapse" />
-          </b:NavbarHeader>
-
-        </b:Container>
+      <b:Navbar position="FIXED_TOP" addStyleNames="{style.navbars}">
+        <b:NavbarHeader>
+          <!-- <b:NavbarBrand>Kune</b:NavbarBrand> -->
+          <b:NavbarCollapseButton dataTarget="#navbar-collapse" />
+        </b:NavbarHeader>
+        <b:NavbarCollapse b:id="navbar-collapse">
+          <b:NavbarNav ui:field="sitebar">
+          </b:NavbarNav>
+        </b:NavbarCollapse>
       </b:Navbar>
       <b:Container fluid="true" ui:field="mainContainer">
         <b:Row ui:field="mainRow">
@@ -36,12 +37,14 @@
           </b:Column>
         </b:Row>
       </b:Container>
-      <b:Navbar ui:field="footerbar" position="FIXED_BOTTOM" addStyleNames="{style.navbars}">
-        <b:Container>
-          <b:NavbarHeader>
-            <b:NavbarCollapseButton dataTarget="#navbar-collapse" />
-          </b:NavbarHeader>
-        </b:Container>
+      <b:Navbar position="FIXED_BOTTOM" addStyleNames="{style.navbars}">
+        <b:NavbarHeader>
+          <b:NavbarCollapseButton dataTarget="#footer-collapse" />
+        </b:NavbarHeader>
+        <b:NavbarCollapse b:id="footer-collapse">
+          <b:NavbarNav ui:field="footerbar">
+          </b:NavbarNav>
+        </b:NavbarCollapse>
       </b:Navbar>
     </b:Container>
   </g:ScrollPanel>

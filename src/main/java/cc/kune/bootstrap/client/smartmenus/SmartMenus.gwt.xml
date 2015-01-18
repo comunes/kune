@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module>
+    <public path="resource">
+        <include name="css/*.css"/>
+        <include name="*.js"/>
+        <include name="addons/bootstrap/*js"/>
+        <include name="addons/bootstrap/*css"/>
+    </public>
+    
+  <stylesheet src='addons/bootstrap/jquery.smartmenus.bootstrap.css' />
+  
+</module>

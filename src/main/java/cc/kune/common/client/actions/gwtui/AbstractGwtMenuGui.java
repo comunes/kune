@@ -53,7 +53,7 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
 
   /** The menu. */
   protected MenuBar menu;
-  
+
   /** The popup. */
   private PopupPanel popup;
 
@@ -66,14 +66,19 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
   /**
    * Instantiates a new abstract gwt menu gui.
    *
-   * @param descriptor the descriptor
+   * @param descriptor
+   *          the descriptor
    */
   public AbstractGwtMenuGui(final GuiActionDescrip descriptor) {
     super(descriptor);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.ParentWidget#add(com.google.gwt.user.client.ui.UIObject)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.ParentWidget#add(com.google.gwt.user.client
+   * .ui.UIObject)
    */
   @Override
   public void add(final UIObject item) {
@@ -89,8 +94,12 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     return menu.addSeparator();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#configureItemFromProperties()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#configureItemFromProperties
+   * ()
    */
   @Override
   public void configureItemFromProperties() {
@@ -105,8 +114,12 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     });
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common
+   * .client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
@@ -131,7 +144,7 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
           menu.moveSelectionUp();
         } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECT_ITEM)) {
           final HasMenuItem item = (HasMenuItem) ((MenuItemDescriptor) descriptor.getValue(MenuDescriptor.MENU_SELECT_ITEM)).getValue(MenuItemDescriptor.UI);
-          menu.selectItem(item.getMenuItem());
+          menu.selectItem((MenuItem) item.getMenuItem());
         }
       }
     });
@@ -166,15 +179,20 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int, com.google.gwt.user.client.ui.UIObject)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int,
+   * com.google.gwt.user.client.ui.UIObject)
    */
   @Override
   public void insert(final int position, final UIObject item) {
     menu.insertItem((MenuItem) item, position);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
    */
   @Override
@@ -190,7 +208,8 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
   /**
    * Show relative to.
    *
-   * @param relative the relative
+   * @param relative
+   *          the relative
    */
   public void showRelativeTo(final Object relative) {
     if (popup == null) {

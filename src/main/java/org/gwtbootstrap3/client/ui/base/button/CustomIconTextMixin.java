@@ -45,13 +45,13 @@ import com.google.gwt.user.client.ui.Image;
  * @author Vicente J. Ruiz Jurado (adaptation for kune)
  */
 public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & HasIconPosition>
-implements HasText, HasIcon, HasIconPosition {
+    implements HasText, HasIcon, HasIconPosition {
   private static final String DEF = "16px";
   private Icon icon;
   private boolean iconBordered = false;
   private IconFlip iconFlip = IconFlip.NONE;
   private Image iconImage;
-  private Text iconLabel;
+  private CustomIcon iconLabel;
   private boolean iconLight = false;
   private boolean iconMuted = false;
   private IconPosition iconPosition = IconPosition.LEFT;
@@ -163,7 +163,7 @@ implements HasText, HasIcon, HasIconPosition {
         if (icon != null) {
           icon.removeFromParent();
         }
-
+        final boolean hasIconType = iconType != null;
         final boolean hasIconImage = iconImage != null;
         final boolean hasIconRightImage = iconRightImage != null;
         final boolean hasIconLabel = iconLabel != null;
@@ -194,21 +194,25 @@ implements HasText, HasIcon, HasIconPosition {
         int position = 0;
 
         if (iconPosition == IconPosition.LEFT) {
-          widget.insert(icon, position++);
-          widget.insert(separator, position++);
-          position = addOtherIcons(hasIconImage, hasIconRightImage, hasIconLabel, position);
-          position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
+          if (hasIconType) {
+            widget.insert(icon, position++);
+            widget.insert(separator, position++);
+          }
+        position = addOtherIcons(hasIconImage, hasIconRightImage, hasIconLabel, position);
+        position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
         }
 
         if (text.getText() != null && text.getText().length() > 0
-        // FIXME Workaround while we see who set's "undefined" as no text
+            // FIXME Workaround while we see who set's "undefined" as no text
             && !"undefined".equals(text.getText())) {
           widget.insert(text, position);
         }
 
         if (iconPosition == IconPosition.RIGHT) {
-          widget.insert(separator, position++);
-          widget.insert(icon, position);
+          if (hasIconType) {
+            widget.insert(separator, position++);
+            widget.insert(icon, position);
+          }
           position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
           position = addOtherIcons(hasIconImage, hasIconRightImage, hasIconLabel, position);
         }
@@ -224,12 +228,13 @@ implements HasText, HasIcon, HasIconPosition {
   }
 
   public void setIcon(final KuneIcon icon) {
-    iconLabel = new Text(icon.getCharacter().toString());
+    iconLabel = new CustomIcon(icon.getCharacter().toString());
+    iconLabel.setStyleName("k-iconfontlabel");
     render();
   }
 
   public void setIconBackColor(final String backgroundColor) {
-    iconLabel = new Text(" ");
+    iconLabel = new CustomIcon(" ");
     iconLabel.getElement().getStyle().setBackgroundColor(backgroundColor);
     render();
   }
@@ -301,7 +306,7 @@ implements HasText, HasIcon, HasIconPosition {
 
   public void setIconStyle(final String style) {
     if (iconLabel == null) {
-      iconLabel = new Text(" ");
+      iconLabel = new CustomIcon(" ");
     }
     iconLabel.addStyleName(style);
     render();

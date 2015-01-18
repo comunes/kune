@@ -22,7 +22,7 @@
  */
 package cc.kune.common.client.actions.gwtui;
 
-import com.google.gwt.user.client.ui.MenuItem;
+import com.google.gwt.user.client.ui.UIObject;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -31,11 +31,11 @@ import com.google.gwt.user.client.ui.MenuItem;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface HasMenuItem {
-  
+
   /**
    * Gets the menu item.
    *
    * @return the menu item
    */
-  MenuItem getMenuItem();
+  UIObject getMenuItem();
 }
