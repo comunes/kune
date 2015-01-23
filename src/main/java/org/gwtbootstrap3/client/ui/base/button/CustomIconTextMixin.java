@@ -49,7 +49,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Vicente J. Ruiz Jurado (adaptation for kune)
  */
 public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & HasIconPosition>
-    implements HasText, HasIcon, HasIconPosition {
+implements HasText, HasIcon, HasIconPosition {
   private static final String DEF = "16px";
   private Icon icon;
   private boolean iconBordered = false;
@@ -242,7 +242,7 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
 
     if (!renderScheduled) {
       // We prevent to render several times the same widget
-      Scheduler.get().scheduleDeferred(renderCommand);
+      Scheduler.get().scheduleFinally(renderCommand);
       renderScheduled = true;
     }
 

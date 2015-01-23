@@ -62,13 +62,6 @@ public interface KuneSampleGinjector extends Ginjector {
    */
   HasRTL getHasRTL();
 
-  /**
-   * Gets the toolbar.
-   *
-   * @return the toolbar
-   */
-  Toolbar getToolbar();
-
   UserConfirmBS getUserConfirmBS();
 
   /**

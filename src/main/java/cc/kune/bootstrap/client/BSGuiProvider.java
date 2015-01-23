@@ -22,19 +22,20 @@
  */
 package cc.kune.bootstrap.client;
 
-import cc.kune.bootstrap.client.actions.gwtui.BSButtonGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSCheckMenuItemGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSIconLabelGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSLabelGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSMenuGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSMenuHeaderGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSMenuItemGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSMenuSeparatorGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSPushButtonGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSSubMenuGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSToolbarGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSToolbarItemGui;
-import cc.kune.bootstrap.client.actions.gwtui.BSToolbarSeparatorGui;
+import cc.kune.bootstrap.client.actions.ui.BSButtonGui;
+import cc.kune.bootstrap.client.actions.ui.BSCheckMenuItemGui;
+import cc.kune.bootstrap.client.actions.ui.BSIconLabelGui;
+import cc.kune.bootstrap.client.actions.ui.BSLabelGui;
+import cc.kune.bootstrap.client.actions.ui.BSMenuGui;
+import cc.kune.bootstrap.client.actions.ui.BSMenuHeaderGui;
+import cc.kune.bootstrap.client.actions.ui.BSMenuItemGui;
+import cc.kune.bootstrap.client.actions.ui.BSMenuSeparatorGui;
+import cc.kune.bootstrap.client.actions.ui.BSPushButtonGui;
+import cc.kune.bootstrap.client.actions.ui.BSRadioMenuItemGui;
+import cc.kune.bootstrap.client.actions.ui.BSSubMenuGui;
+import cc.kune.bootstrap.client.actions.ui.BSToolbarGui;
+import cc.kune.bootstrap.client.actions.ui.BSToolbarItemGui;
+import cc.kune.bootstrap.client.actions.ui.BSToolbarSeparatorGui;
 import cc.kune.bootstrap.client.smartmenus.SmartMenusBundle;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
@@ -67,21 +68,22 @@ public class BSGuiProvider {
    * Instantiates a new gwtbootstrap gui provider.
    */
   @Inject
-  public BSGuiProvider(final GuiProvider guiProvider, final Provider<BSSubMenuGui> bsSubMenuGui,
+  public BSGuiProvider(final GuiProvider guiProvider, final Provider<BSSubMenuGui> subMenuGui,
       final Provider<BSMenuGui> menuGui, final Provider<BSMenuItemGui> menuItemGui,
       final Provider<BSCheckMenuItemGui> checkMenuItemGui,
+      final Provider<BSRadioMenuItemGui> radioMenuItemGui,
       final Provider<BSMenuSeparatorGui> menuSeparatorGui,
       final Provider<BSPushButtonGui> pushButtonGui, final Provider<BSButtonGui> buttonGui,
       final Provider<BSLabelGui> labelGui, final Provider<BSIconLabelGui> iconLabelGui,
       final Provider<BSToolbarGui> toolbarGui,
       final Provider<BSToolbarSeparatorGui> toolbarSeparatorGui,
-      final Provider<BSMenuHeaderGui> bsMenuHeaderGui, final Provider<BSToolbarItemGui> bsToolbarItem) {
+      final Provider<BSMenuHeaderGui> menuHeaderGui, final Provider<BSToolbarItemGui> toolbarItem) {
 
-    guiProvider.register(SubMenuDescriptor.class, bsSubMenuGui);
+    guiProvider.register(SubMenuDescriptor.class, subMenuGui);
     guiProvider.register(MenuDescriptor.class, menuGui);
-    guiProvider.register(MenuRadioItemDescriptor.class, menuItemGui);
+    guiProvider.register(MenuRadioItemDescriptor.class, radioMenuItemGui);
     guiProvider.register(MenuCheckItemDescriptor.class, checkMenuItemGui);
-    guiProvider.register(MenuTitleItemDescriptor.class, bsMenuHeaderGui);
+    guiProvider.register(MenuTitleItemDescriptor.class, menuHeaderGui);
     guiProvider.register(MenuItemDescriptor.class, menuItemGui);
     guiProvider.register(MenuSeparatorDescriptor.class, menuSeparatorGui);
     guiProvider.register(PushButtonDescriptor.class, pushButtonGui);
@@ -90,7 +92,7 @@ public class BSGuiProvider {
     guiProvider.register(LabelDescriptor.class, labelGui);
     guiProvider.register(ToolbarDescriptor.class, toolbarGui);
     guiProvider.register(ToolbarSeparatorDescriptor.class, toolbarSeparatorGui);
-    guiProvider.register(ToolbarItemDescriptor.class, bsToolbarItem);
+    guiProvider.register(ToolbarItemDescriptor.class, toolbarItem);
 
     ScriptInjector.fromString(BootstrapBundle.INSTANCE.theme().getText()).setWindow(
         ScriptInjector.TOP_WINDOW).inject();
