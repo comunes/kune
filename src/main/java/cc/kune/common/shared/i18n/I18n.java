@@ -29,7 +29,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18n.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -39,9 +39,13 @@ public class I18n {
   @Inject
   private static I18nTranslationService i18n;
 
+  public static I18nTranslationService get() {
+    return i18n;
+  }
+
   /**
    * Gets the direction.
-   * 
+   *
    * @return the direction
    */
   public static Direction getDirection() {
@@ -54,7 +58,7 @@ public class I18n {
 
   /**
    * Checks if is rtl.
-   * 
+   *
    * @return true, if is rtl
    */
   public static boolean isRTL() {
@@ -63,7 +67,7 @@ public class I18n {
 
   /**
    * T.
-   * 
+   *
    * @param text
    *          the text
    * @return the string
@@ -74,7 +78,7 @@ public class I18n {
 
   /**
    * T.
-   * 
+   *
    * @param text
    *          the text
    * @param args
@@ -87,7 +91,7 @@ public class I18n {
 
   /**
    * T.
-   * 
+   *
    * @param text
    *          the text
    * @param args
@@ -100,7 +104,7 @@ public class I18n {
 
   /**
    * T.
-   * 
+   *
    * @param text
    *          the text
    * @param args
@@ -113,7 +117,7 @@ public class I18n {
 
   /**
    * T with nt.
-   * 
+   *
    * @param text
    *          the text
    * @param noteForTranslators
@@ -126,7 +130,7 @@ public class I18n {
 
   /**
    * T with nt.
-   * 
+   *
    * @param text
    *          the text
    * @param noteForTranslators
@@ -141,7 +145,7 @@ public class I18n {
 
   /**
    * T with nt.
-   * 
+   *
    * @param text
    *          the text
    * @param noteForTranslators
@@ -156,7 +160,7 @@ public class I18n {
 
   /**
    * T with nt.
-   * 
+   *
    * @param text
    *          the text
    * @param noteForTranslators

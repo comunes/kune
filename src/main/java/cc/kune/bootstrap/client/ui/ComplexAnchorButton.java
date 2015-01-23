@@ -1,7 +1,6 @@
-package cc.kune.bootstrap.client.actions.gwtui;
+package cc.kune.bootstrap.client.ui;
 
-import org.gwtbootstrap3.client.ui.Anchor;
-import org.gwtbootstrap3.client.ui.AnchorListItem;
+import org.gwtbootstrap3.client.ui.AnchorButton;
 import org.gwtbootstrap3.client.ui.base.button.CustomIconTextMixin;
 import org.gwtbootstrap3.client.ui.constants.IconFlip;
 import org.gwtbootstrap3.client.ui.constants.IconPosition;
@@ -13,16 +12,16 @@ import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.resources.client.ImageResource;
 
-public class CustomAnchorListItem extends AnchorListItem {
-  CustomIconTextMixin<Anchor> iconTextMixin;
+public class ComplexAnchorButton extends AnchorButton {
+  CustomIconTextMixin<AnchorButton> iconTextMixin;
 
-  public CustomAnchorListItem() {
-    iconTextMixin = new CustomIconTextMixin<Anchor>(anchor);
+  public ComplexAnchorButton() {
+    iconTextMixin = new CustomIconTextMixin<AnchorButton>(this);
+    iconTextMixin.addTextWidgetToParent();
   }
 
-  public CustomAnchorListItem(final String text) {
+  public ComplexAnchorButton(final String text) {
     this();
-    iconTextMixin.addTextWidgetToParent();
     setText(text);
   }
 
@@ -143,10 +142,5 @@ public class CustomAnchorListItem extends AnchorListItem {
 
   public void setIconUrl(final String url) {
     iconTextMixin.setIconUrl(url);
-  }
-
-  @Override
-  public void setText(final String text) {
-    iconTextMixin.setText(text);
   }
 }

@@ -22,15 +22,12 @@
  */
 package cc.kune.bootstrap.client.actions.gwtui;
 
-import org.gwtbootstrap3.client.ui.base.button.CustomButton;
-import org.gwtbootstrap3.client.ui.constants.Toggle;
-
-import cc.kune.common.client.actions.Action;
+import cc.kune.bootstrap.client.ui.IconLabel;
+import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -38,106 +35,69 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Class AbstractBSButtonGui.
+ * The Class BSIconLabelGui.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
+public class BSIconLabelGui extends AbstractBSChildGuiItem {
 
-  /** The button. */
-  private CustomButton button;
-
-  /** The enable tongle. */
-  protected boolean enableTongle;
-
-  /**
-   * Instantiates a new abstract gwt button gui.
-   */
-  public AbstractBSButtonGui() {
-    this(null, false);
-  }
-
-  /**
-   * Instantiates a new abstract gwt button gui.
-   *
-   * @param enableTongle
-   *          the enable tongle
-   */
-  public AbstractBSButtonGui(final boolean enableTongle) {
-    this(null, enableTongle);
-  }
-
-  /**
-   * Instantiates a new abstract gwt button gui.
-   *
-   * @param buttonDescriptor
-   *          the button descriptor
-   */
-  public AbstractBSButtonGui(final ButtonDescriptor buttonDescriptor) {
-    this(buttonDescriptor, false);
-  }
-
-  /**
-   * Instantiates a new abstract gwt button gui.
-   *
-   * @param buttonDescriptor
-   *          the button descriptor
-   * @param enableTongle
-   *          the enable tongle
-   */
-  public AbstractBSButtonGui(final ButtonDescriptor buttonDescriptor, final boolean enableTongle) {
-    super(buttonDescriptor);
-    this.enableTongle = enableTongle;
-  }
+  /** The icon label. */
+  private IconLabel iconLabel;
 
   /*
    * (non-Javadoc)
    *
    * @see
-   * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
-   * .String)
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#addStyle(java.lang.String)
    */
   @Override
   protected void addStyle(final String style) {
-    button.addStyleName(style);
+    iconLabel.addStyleName(style);
+  }
+
+  /*
+   * (non-Javadoc)
+   *
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#clearStyles()
+   */
+  @Override
+  protected void clearStyles() {
+    iconLabel.setStyleName("k-none");
+    iconLabel.setStyleName("k-table");
   }
 
   /*
    * (non-Javadoc)
    *
    * @see
-   * cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common
-   * .client.actions.ui.descrip.GuiActionDescrip)
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.
+   * client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
-
-    button = new CustomButton();
-    if (enableTongle) {
-      button.setDataToggle(Toggle.BUTTON);
-    }
-    final String value = (String) descriptor.getValue(Action.STYLES);
-    if (value != null) {
-      setStyles(value);
-    }
-
+    iconLabel = new IconLabel("");
+    descriptor.putValue(ParentWidget.PARENT_UI, this);
     final String id = descriptor.getId();
     if (id != null) {
-      button.ensureDebugId(id);
+      iconLabel.setId(id);
     }
     if (descriptor.isChild()) {
-      // If button is inside a toolbar don't init...
-      child = button;
+      // If label is inside a toolbar don't init...
+      child = iconLabel;
     } else {
-      initWidget(button);
+      initWidget(iconLabel);
     }
-    button.addClickHandler(new ClickHandler() {
+    iconLabel.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        descriptor.fire(new ActionEvent(button, getTargetObjectOfAction(descriptor),
-            Event.as(event.getNativeEvent())));
+        final AbstractAction action = descriptor.getAction();
+        if (action != null) {
+          action.actionPerformed(new ActionEvent(iconLabel, getTargetObjectOfAction(descriptor),
+              Event.as(event.getNativeEvent())));
+        }
       }
     });
     super.create(descriptor);
@@ -152,11 +112,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
    */
   @Override
   public void setEnabled(final boolean enabled) {
-    // Log.info("Set button" + descriptor.getValue(Action.NAME) + " enabled " +
-    // enabled
-    // + " ----------------------------------");
-    button.setEnabled(enabled);
-    // button.getElement().getStyle().setOpacity(enabled ? 1d : 0.6d);
+    iconLabel.setVisible(enabled);
   }
 
   /*
@@ -168,7 +124,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
    */
   @Override
   public void setIcon(final KuneIcon icon) {
-    button.setIcon(icon);
+    iconLabel.setIcon(icon);
   }
 
   /*
@@ -179,8 +135,8 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
    * .lang.String)
    */
   @Override
-  public void setIconBackColor(final String backgroundColor) {
-    button.setIconBackColor(backgroundColor);
+  public void setIconBackColor(final String color) {
+    iconLabel.setIconBackColor(color);
   }
 
   /*
@@ -192,7 +148,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
    */
   @Override
   public void setIconResource(final ImageResource icon) {
-    button.setIconResource(icon);
+    iconLabel.setIconResource(icon);
   }
 
   /*
@@ -204,7 +160,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
    */
   @Override
   protected void setIconStyle(final String style) {
-    button.setIconStyle(style);
+    iconLabel.setIconStyle(style);
   }
 
   /*
@@ -216,17 +172,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
    */
   @Override
   public void setIconUrl(final String url) {
-    button.setIconUrl(url);
-  }
-
-  /**
-   * Sets the pressed.
-   *
-   * @param pressed
-   *          the new pressed
-   */
-  public void setPressed(final boolean pressed) {
-    button.setActive(pressed);
+    iconLabel.setIconUrl(url);
   }
 
   /*
@@ -237,30 +183,13 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
    */
   @Override
   public void setText(final String text) {
-    // FIXME descriptor.getDirection()
-    button.setText(text);
+    // TODO: descriptor.getDirection()
+    iconLabel.setText(text);
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see
-   * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
-   * .String)
-   */
-  @Override
-  public void setToolTipText(final String tooltipText) {
-    Tooltip.to(button, tooltipText);
-  }
-
-  /*
-   * (non-Javadoc)
-   *
-   * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
-   */
   @Override
   public void setVisible(final boolean visible) {
-    button.setVisible(visible);
+    iconLabel.setVisible(visible);
   }
 
   /*

@@ -38,7 +38,7 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractUIActionDescriptor.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractGuiActionDescrip extends ChangeableObject implements GuiActionDescrip {
@@ -67,7 +67,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   /**
    * Instantiates a new abstract ui action descriptor. This is used for describe
    * UI button, menus, menu items and so on
-   * 
+   *
    * @param action
    *          the action
    */
@@ -80,10 +80,10 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     addConditions = new ArrayList<GuiAddCondition>();
   }
 
- /**
+  /**
    * Creates a action descriptor from a previous created descriptor cloning its
    * values
-   * 
+   *
    * @param descr
    *          the other descriptor
    */
@@ -168,7 +168,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   /**
    * Gets the location, a string used to group actions with locations (top bar,
    * bottom bar, user bar...).
-   * 
+   *
    * @return the location
    */
   @Override
@@ -188,7 +188,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
   /**
    * Gets the position.
-   * 
+   *
    * @return the position
    */
   @Override
@@ -231,6 +231,11 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
     } else {
       return guiValue;
     }
+  }
+
+  @Override
+  public boolean hasParent() {
+    return isChild();
   }
 
   /*
@@ -322,7 +327,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
   /**
    * Sets the action.
-   * 
+   *
    * @param action
    *          the new action
    */
@@ -370,7 +375,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
    * If we have several toolbars, we can group with the "location" string key
    * actions that must be in the same location (ex: top bar, bottom bar, and so
    * on).
-   * 
+   *
    * @param location
    *          the new location
    */
@@ -409,7 +414,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   /**
    * Sets the position (where the UI element will be positioned, for instance in
    * a toolbar or in a menu).
-   * 
+   *
    * @param position
    *          the new position
    */
@@ -467,7 +472,7 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
 
   /**
    * Toggle the value of a boolean property.
-   * 
+   *
    * @param property
    *          the property
    */

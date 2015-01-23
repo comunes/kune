@@ -2,7 +2,7 @@ package cc.kune.client;
 
 import cc.kune.barters.client.BartersParts;
 import cc.kune.blogs.client.BlogsParts;
-import cc.kune.bootstrap.client.actions.gwtui.BootstrapGuiProvider;
+import cc.kune.bootstrap.client.BSGuiProvider;
 import cc.kune.chat.client.ChatParts;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
@@ -69,9 +69,9 @@ public class KuneBootstrapper implements Bootstrapper {
       final XMLActionsParser xmlActionsParser,
 
       // Here you define the gui ui provider (gwt, gxt, bootstrap)
-      final BootstrapGuiProvider bootstrapProvider
-  // GwtGuiProvider guiProvider
-      ) {
+      final BSGuiProvider bootstrapProvider
+      // GwtGuiProvider guiProvider
+  ) {
 
     this.sessionChecker = sessionChecker;
     this.contentViewerSelector = contentViewerSelector;

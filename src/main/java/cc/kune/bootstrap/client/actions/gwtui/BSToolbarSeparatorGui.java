@@ -22,13 +22,14 @@
  */
 package cc.kune.bootstrap.client.actions.gwtui;
 
+import cc.kune.bootstrap.client.ui.ComplexNavbarNav;
+import cc.kune.common.client.actions.ui.AbstractBasicGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.shared.res.KuneIcon;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -38,7 +39,7 @@ import com.google.gwt.user.client.ui.Widget;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class BSToolbarSeparatorGui extends AbstractGuiItem {
+public class BSToolbarSeparatorGui extends AbstractBasicGuiItem {
 
   /** The widget. */
   private Widget widget;
@@ -53,7 +54,8 @@ public class BSToolbarSeparatorGui extends AbstractGuiItem {
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
-    final BSToolbarGui toolbar = ((BSToolbarGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
+    final ComplexNavbarNav toolbar = ((ComplexNavbarNav) descriptor.getParent().getValue(
+        ParentWidget.PARENT_UI));
     if (toolbar == null) {
       throw new UIException("To add a toolbar separator you need to add the toolbar before. Item: "
           + descriptor);
@@ -73,70 +75,7 @@ public class BSToolbarSeparatorGui extends AbstractGuiItem {
       break;
     }
     configureItemFromProperties();
-    return toolbar;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
-   */
-  @Override
-  protected void setEnabled(final boolean enabled) {
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
-   * .shared.res.KuneIcon)
-   */
-  @Override
-  public void setIcon(final KuneIcon icon) {
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
-   * .lang.String)
-   */
-  @Override
-  public void setIconBackColor(final String backgroundColor) {
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
-   * .String)
-   */
-  @Override
-  protected void setIconStyle(final String style) {
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
-   * )
-   */
-  @Override
-  public void setIconUrl(final String url) {
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
-   */
-  @Override
-  protected void setText(final String text) {
+    return this;
   }
 
   /*

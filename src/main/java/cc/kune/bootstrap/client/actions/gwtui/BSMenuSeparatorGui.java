@@ -22,27 +22,23 @@
  */
 package cc.kune.bootstrap.client.actions.gwtui;
 
-import org.gwtbootstrap3.client.ui.Navbar;
-import org.gwtbootstrap3.client.ui.NavbarCollapse;
-import org.gwtbootstrap3.client.ui.NavbarCollapseButton;
-import org.gwtbootstrap3.client.ui.NavbarHeader;
+import org.gwtbootstrap3.client.ui.DropDownHeader;
 
-import cc.kune.bootstrap.client.ui.ComplexNavbarNav;
 import cc.kune.common.client.actions.ui.AbstractBasicGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-
-import com.google.gwt.user.client.ui.HTMLPanel;
+import cc.kune.common.client.errors.UIException;
 
 /**
- * The Class BSToolbarGui.
+ * The Class GwtMenuSeparatorGui.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class BSToolbarGui extends AbstractBasicGuiItem {
+public class BSMenuSeparatorGui extends AbstractBasicGuiItem {
 
-  private ComplexNavbarNav navbarNav;
+  /** The separator. */
+  private DropDownHeader header;
 
   /*
    * (non-Javadoc)
@@ -54,59 +50,35 @@ public class BSToolbarGui extends AbstractBasicGuiItem {
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
-    String id = descriptor.getId();
-    if (id != null) {
-      id = HTMLPanel.createUniqueId();
+    final AbstractBSMenuGui menu = ((AbstractBSMenuGui) descriptor.getParent().getValue(
+        ParentWidget.PARENT_UI));
+    if (menu == null) {
+      throw new UIException("To add a menu separator you need to add the menu before. Item: "
+          + descriptor);
     }
+    header = new DropDownHeader();
 
-    final Navbar navbar = new Navbar();
-    final NavbarHeader header = new NavbarHeader();
-    final NavbarCollapseButton navbarCollapseButton = new NavbarCollapseButton();
-    navbarCollapseButton.setDataTarget("#" + id);
-    header.add(navbarCollapseButton);
-    navbar.add(header);
-    final NavbarCollapse navbarCollapse = new NavbarCollapse();
-    navbarCollapse.setId(id);
-    navbar.add(navbarCollapse);
-
-    navbarNav = new ComplexNavbarNav();
-    navbarCollapse.add(navbarNav);
-
-    initWidget(navbar);
     configureItemFromProperties();
-    descriptor.putValue(ParentWidget.PARENT_UI, navbarNav);
     return this;
   }
-
-  // /*
-  // * (non-Javadoc)
-  // *
-  // * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int,
-  // * com.google.gwt.user.client.ui.UIObject)
-  // */
-  // @Override
-  // public void insert(final int position, final UIObject widget) {
-  // navbarNav.insert(setPull(widget), position);
-  // }
-  //
-  // @Override
-  // public Iterator<Widget> iterator() {
-  // return navbarNav.iterator();
-  // }
-  //
-  // @Override
-  // public boolean remove(final Widget w) {
-  // return navbarNav.remove(w);
-  // }
 
   /*
    * (non-Javadoc)
    * 
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
+   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
-  public boolean shouldBeAdded() {
-    return true;
+  protected void setEnabled(final boolean enabled) {
+    header.setVisible(enabled);
   }
 
+  @Override
+  public void setVisible(final boolean visible) {
+    header.setVisible(visible);
+  }
+
+  @Override
+  public boolean shouldBeAdded() {
+    return false;
+  }
 }

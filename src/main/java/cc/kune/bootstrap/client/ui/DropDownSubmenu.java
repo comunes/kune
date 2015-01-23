@@ -1,4 +1,4 @@
-package cc.kune.bootstrap.client.actions.gwtui;
+package cc.kune.bootstrap.client.ui;
 
 import org.gwtbootstrap3.client.ui.constants.Styles;
 import org.gwtbootstrap3.client.ui.html.UnorderedList;

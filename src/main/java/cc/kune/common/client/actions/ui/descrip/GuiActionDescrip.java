@@ -63,7 +63,7 @@ public interface GuiActionDescrip {
   /**
    * Adds the condition (checked only when new content/container is evaluated in
    * a folder list, etc).
-   * 
+   *
    * @param addCondition
    *          the add condition
    */
@@ -71,7 +71,7 @@ public interface GuiActionDescrip {
 
   /**
    * Adds the property change listener.
-   * 
+   *
    * @param listener
    *          the listener
    */
@@ -79,7 +79,7 @@ public interface GuiActionDescrip {
 
   /**
    * Fire.
-   * 
+   *
    * @param event
    *          the event
    */
@@ -87,121 +87,123 @@ public interface GuiActionDescrip {
 
   /**
    * Gets the action.
-   * 
+   *
    * @return the action
    */
   AbstractAction getAction();
 
   /**
    * Gets the direction.
-   * 
+   *
    * @return the direction
    */
   Direction getDirection();
 
   /**
    * Gets the id.
-   * 
+   *
    * @return the id
    */
   String getId();
 
   /**
    * Gets the keys.
-   * 
+   *
    * @return the keys
    */
   Object[] getKeys();
 
   /**
    * Gets the location.
-   * 
+   *
    * @return the location
    */
   String getLocation();
 
   /**
    * Gets the parent.
-   * 
+   *
    * @return the parent
    */
   GuiActionDescrip getParent();
 
   /**
    * Gets the position.
-   * 
+   *
    * @return the position
    */
   int getPosition();
 
   /**
    * Gets the property change listeners.
-   * 
+   *
    * @return the property change listeners
    */
   PropertyChangeListener[] getPropertyChangeListeners();
 
   /**
    * Gets the target.
-   * 
+   *
    * @return the target
    */
   Object getTarget();
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   Class<?> getType();
 
   /**
    * Gets the value.
-   * 
+   *
    * @param key
    *          the key
    * @return the value
    */
   Object getValue(final String key);
 
+  boolean hasParent();
+
   /**
    * Checks for target.
-   * 
+   *
    * @return true, if successful
    */
   boolean hasTarget();
 
   /**
    * Checks if is child.
-   * 
+   *
    * @return true, if is child
    */
   boolean isChild();
 
   /**
    * Checks if is enabled.
-   * 
+   *
    * @return true, if is enabled
    */
   boolean isEnabled();
 
   /**
    * Checks if is rTL.
-   * 
+   *
    * @return true, if is rTL
    */
   boolean isRTL();
 
   /**
    * Checks if is visible.
-   * 
+   *
    * @return true, if is visible
    */
   boolean isVisible();
 
   /**
    * Must be added.
-   * 
+   *
    * @return true, if successful
    */
   boolean mustBeAdded();
@@ -218,7 +220,7 @@ public interface GuiActionDescrip {
 
   /**
    * Put value.
-   * 
+   *
    * @param key
    *          the key
    * @param value
@@ -228,7 +230,7 @@ public interface GuiActionDescrip {
 
   /**
    * Removes the property change listener.
-   * 
+   *
    * @param listener
    *          the listener
    */
@@ -236,7 +238,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the drop target.
-   * 
+   *
    * @param dropTarget
    *          the new drop target
    */
@@ -244,7 +246,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the enabled.
-   * 
+   *
    * @param enabled
    *          the new enabled
    */
@@ -252,7 +254,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the id.
-   * 
+   *
    * @param id
    *          the new id
    */
@@ -260,7 +262,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the location.
-   * 
+   *
    * @param location
    *          the new location
    */
@@ -268,7 +270,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the parent.
-   * 
+   *
    * @param parent
    *          the new parent
    */
@@ -276,7 +278,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the parent.
-   * 
+   *
    * @param parent
    *          the parent
    * @param addToParent
@@ -289,7 +291,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the position.
-   * 
+   *
    * @param position
    *          the new position
    */
@@ -297,7 +299,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the rTL.
-   * 
+   *
    * @param isRTL
    *          the new rTL
    */
@@ -305,7 +307,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the styles.
-   * 
+   *
    * @param styles
    *          the new styles
    */
@@ -313,7 +315,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the target.
-   * 
+   *
    * @param object
    *          the new target
    */
@@ -321,7 +323,7 @@ public interface GuiActionDescrip {
 
   /**
    * Sets the visible.
-   * 
+   *
    * @param visible
    *          the new visible
    */
@@ -339,7 +341,7 @@ public interface GuiActionDescrip {
 
   /**
    * With action.
-   * 
+   *
    * @param action
    *          the action
    * @return the gui action descrip
@@ -349,7 +351,7 @@ public interface GuiActionDescrip {
   /**
    * Adds the condition (checked only when new content/container is evaluated in
    * a folder list, etc).
-   * 
+   *
    * @param addCondition
    *          the add condition
    */
@@ -357,7 +359,7 @@ public interface GuiActionDescrip {
 
   /**
    * With icon.
-   * 
+   *
    * @param icon
    *          the icon
    * @return the gui action descrip
@@ -366,7 +368,7 @@ public interface GuiActionDescrip {
 
   /**
    * With icon cls.
-   * 
+   *
    * @param icon
    *          the icon
    * @return the gui action descrip
@@ -375,7 +377,7 @@ public interface GuiActionDescrip {
 
   /**
    * With id.
-   * 
+   *
    * @param id
    *          the id
    * @return the gui action descrip
@@ -384,7 +386,7 @@ public interface GuiActionDescrip {
 
   /**
    * With parent.
-   * 
+   *
    * @param parent
    *          the parent
    * @return the gui action descrip
@@ -393,7 +395,7 @@ public interface GuiActionDescrip {
 
   /**
    * With parent.
-   * 
+   *
    * @param parent
    *          the parent
    * @param addToParent
@@ -406,7 +408,7 @@ public interface GuiActionDescrip {
 
   /**
    * With position.
-   * 
+   *
    * @param position
    *          the position
    * @return the gui action descrip
@@ -416,8 +418,10 @@ public interface GuiActionDescrip {
   /**
    * With shortcut.
    *
-   * @param keystroke the keystroke
-   * @param register the register
+   * @param keystroke
+   *          the keystroke
+   * @param register
+   *          the register
    * @return the gui action descrip
    */
   GuiActionDescrip withShortcut(KeyStroke keystroke, GlobalShortcutRegister register);
@@ -425,15 +429,17 @@ public interface GuiActionDescrip {
   /**
    * With shortcut.
    *
-   * @param keys the keys (for instance "Ctrl+A")
-   * @param register the register
+   * @param keys
+   *          the keys (for instance "Ctrl+A")
+   * @param register
+   *          the register
    * @return the gui action descrip
    */
   GuiActionDescrip withShortcut(String keys, GlobalShortcutRegister register);
 
   /**
    * With styles.
-   * 
+   *
    * @param styles
    *          the styles
    * @return the gui action descrip
@@ -442,7 +448,7 @@ public interface GuiActionDescrip {
 
   /**
    * With text.
-   * 
+   *
    * @param text
    *          the text
    * @return the gui action descrip
@@ -451,7 +457,7 @@ public interface GuiActionDescrip {
 
   /**
    * With tool tip.
-   * 
+   *
    * @param tooltip
    *          the tooltip
    * @return the gui action descrip
@@ -460,7 +466,7 @@ public interface GuiActionDescrip {
 
   /**
    * With visible.
-   * 
+   *
    * @param visible
    *          the visibility
    * @return the gui action descrip

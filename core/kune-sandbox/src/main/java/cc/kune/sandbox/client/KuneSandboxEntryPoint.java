@@ -38,12 +38,14 @@ import org.gwtbootstrap3.client.ui.NavbarHeader;
 import org.gwtbootstrap3.client.ui.NavbarNav;
 import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 import org.gwtbootstrap3.client.ui.constants.IconType;
-import org.gwtbootstrap3.client.ui.constants.Pull;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 
-import cc.kune.bootstrap.client.actions.gwtui.CustomAnchorListItem;
-import cc.kune.bootstrap.client.actions.gwtui.CustomListDropDown;
-import cc.kune.bootstrap.client.actions.gwtui.DropDownSubmenu;
+import cc.kune.bootstrap.client.actions.gwtui.FlowActionExtensible;
+import cc.kune.bootstrap.client.ui.CheckListItem;
+import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
+import cc.kune.bootstrap.client.ui.ComplexListDropDown;
+import cc.kune.bootstrap.client.ui.DropDownSubmenu;
+import cc.kune.bootstrap.client.ui.RadioListItem;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -95,6 +97,7 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AbsolutePanel;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -253,95 +256,64 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   @Override
   public void onModuleLoad() {
 
+    // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
+
     ginjector = GWT.create(KuneSampleGinjector.class);
     toolbar = ginjector.getToolbar();
     res = CommonResources.INSTANCE;
     res.commonStyle().ensureInjected();
     ginjector.getUserNotifierGrowl();
 
-    final Navbar navbar = new Navbar();
-    final NavbarHeader header = new NavbarHeader();
-    final NavbarCollapseButton navbarCollapseButton = new NavbarCollapseButton();
-    navbarCollapseButton.setDataTarget("#test");
-    header.add(navbarCollapseButton);
-    navbar.add(header);
+    NotifyUser.showProgress("Starting");
 
-    final NavbarCollapse navbarCollapse = new NavbarCollapse();
-    navbarCollapse.setId("test");
+    absolutePanel = new AbsolutePanel();
+    testBarButtons();
+    testTooltips();
 
-    final NavbarNav navbarNav = new NavbarNav();
-    navbarNav.setPull(Pull.RIGHT);
-    // navbarNav.addStyleName(SMART_MENU_STYLE);
+    testActionToolbar();
 
-    final CustomListDropDown navbarDropDown = new CustomListDropDown();
-    navbarCollapse.add(navbarNav);
-    navbarNav.add(navbarDropDown);
-    navbar.add(navbarCollapse);
+    final String defLocale = "en";
 
-    final AnchorListItem simpleAnchor = new AnchorListItem("Anchor 1");
-    simpleAnchor.setIcon(IconType.TWITTER_SQUARE);
-    navbarNav.add(simpleAnchor);
+    final String locale = WindowUtils.getParameter("locale");
+    final String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
 
-    navbarNav.add(new AnchorListItem("Anchor 2"));
-    navbarNav.add(new AnchorListItem("Anchor 3"));
-    final AnchorListItem menuitem1 = new AnchorListItem("Anchor menuitem 1");
-    menuitem1.setIcon(IconType.RANDOM);
-
-    navbarDropDown.add(menuitem1);
-    navbarDropDown.add(new AnchorListItem("Anchor menuitem 2"));
-    final CustomAnchorListItem menuitem3 = new CustomAnchorListItem("Anchor menuitem 3");
-    menuitem3.setIconUrl("http://lorempixel.com/100/100");
-    navbarDropDown.add(menuitem3);
-    final CustomAnchorListItem item1 = new CustomAnchorListItem("Testingggg");
-    item1.setIcon(IconType.HEART);
-    navbarDropDown.add(item1);
-
-    for (int i = 1; i < 50; i++) {
-      navbarDropDown.add(new AnchorListItem("Anchor " + i));
+    for (final String id : ids) {
+      final RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
+      final RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
+      if (someId != null) {
+        someId.setVisible(true);
+      } else if (defId != null) {
+        defId.setVisible(true);
+      }
     }
 
-    final CustomAnchorListItem itemSubmenu = new CustomAnchorListItem("Testing submenu");
-    itemSubmenu.setIcon(new KuneIcon('f'));
-    final DropDownSubmenu submenu = new DropDownSubmenu();
-    submenu.add(new AnchorListItem("sub item 1"));
-    submenu.add(new AnchorListItem("sub item 2"));
-    submenu.add(new AnchorListItem("sub item 3"));
-    itemSubmenu.add(submenu);
-    navbarDropDown.add(itemSubmenu);
-    RootPanel.get().add(navbar);
+    // testToolpanel();
+    // toolSelector.addWidget(new Label("Test"));
+    // testPromptDialog();
 
-    final DropDown dropDown = new DropDown();
+    testSubWidget();
 
-    final Anchor dropDownAnchor = new Anchor();
-    final Image thumb = new Image("http://lorempixel.com/100/100");
-    dropDownAnchor.add(thumb);
-    // thumb.getElement().setAttribute(Attributes.DATA_TOGGLE,
-    // Toggle.DROPDOWN.getToggle());
-    // dropDownAnchor.add(thumb);
+    // testPUload();
 
-    // final Anchor dropDownAnchor = new Anchor();
-    // dropDownAnchor.setText("Label dropdown");
-    dropDownAnchor.setDataToggle(Toggle.DROPDOWN);
-    dropDown.add(dropDownAnchor);
+    shortcutRegister = ginjector.getGlobalShortcutRegister();
+    shortcutRegister.enable();
 
-    final DropDownMenu dropDownMenu = new DropDownMenu();
-    dropDown.add(dropDownMenu);
-    final CustomAnchorListItem dditem1 = new CustomAnchorListItem("Test 1");
-    final CustomAnchorListItem dditem2 = new CustomAnchorListItem("Test 2");
-    dditem1.setIcon(new KuneIcon('g'));
-    dditem2.setIconUrl("http://lorempixel.com/101/101");
-    dropDownMenu.add(dditem1);
-    dropDownMenu.add(dditem2);
+    final ActionFlowPanel view = makeFlowToolbar();
 
-    final CustomButton btn = new CustomButton("Text custom button");
-    btn.setIcon(new KuneIcon('f'));
-    RootPanel.get().add(btn);
-    RootPanel.get().add(dropDown);
+    final BasicThumb thumb = testThumbs();
 
-    // RootPanel.get().add(new TestBootstrap());
+    absolutePanel.add(thumb, 100, 300);
+    absolutePanel.add(view, 200, 300);
 
-    // TODO Add more tests here
+    final DottedTab tab = new DottedTab();
+    absolutePanel.add(tab, 400, 400);
+    absolutePanel.add(tab, 400, 400);
+    absolutePanel.add(makeFileUpload(), 620, 0);
 
+    new BlinkAnimation(tab, 350).animate(5);
+
+    RootPanel.get().add(absolutePanel);
+    // UserNotifierGrowl.close(growl);
   }
 
   public void onModuleLoad2() {
@@ -431,66 +403,175 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // mainPanel.getSitebar().add(navmenu);
   }
 
-  public void onModuleLoadOld() {
-
-    // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
-
+  public void onModuleLoadTests() {
     ginjector = GWT.create(KuneSampleGinjector.class);
     toolbar = ginjector.getToolbar();
     res = CommonResources.INSTANCE;
     res.commonStyle().ensureInjected();
     ginjector.getUserNotifierGrowl();
-
-    NotifyUser.showProgress("Starting");
-
     absolutePanel = new AbsolutePanel();
-    testBarButtons();
-    testTooltips();
 
-    testActionToolbar();
+    NotifyUser.info("Started");
 
-    final String defLocale = "en";
+    final Navbar navbar = new Navbar();
+    final NavbarHeader header = new NavbarHeader();
+    final NavbarCollapseButton navbarCollapseButton = new NavbarCollapseButton();
+    navbarCollapseButton.setDataTarget("#test");
+    header.add(navbarCollapseButton);
+    navbar.add(header);
+    final NavbarCollapse navbarCollapse = new NavbarCollapse();
+    navbarCollapse.setId("test");
+    navbar.add(navbarCollapse);
 
-    final String locale = WindowUtils.getParameter("locale");
-    final String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
+    final NavbarNav navbarNav = new NavbarNav();
 
-    for (final String id : ids) {
-      final RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
-      final RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
-      if (someId != null) {
-        someId.setVisible(true);
-      } else if (defId != null) {
-        defId.setVisible(true);
+    final ComplexListDropDown listDropDown = new ComplexListDropDown();
+    listDropDown.setMenuText("Menu");
+    listDropDown.setIcon(IconType.GEAR);
+    navbarCollapse.add(navbarNav);
+    navbarNav.add(listDropDown);
+
+    final AnchorListItem simpleAnchor = new AnchorListItem("Anchor 1");
+    simpleAnchor.setIcon(IconType.TWITTER_SQUARE);
+    navbarNav.add(simpleAnchor);
+
+    navbarNav.add(new AnchorListItem("Anchor 2"));
+    navbarNav.add(new AnchorListItem("Anchor 3"));
+    final AnchorListItem menuitem1 = new AnchorListItem("Anchor menuitem 1");
+    menuitem1.setIcon(IconType.RANDOM);
+
+    listDropDown.add(menuitem1);
+
+    final CheckListItem checkitem = new CheckListItem("Check item");
+    checkitem.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        checkitem.setChecked(!checkitem.isChecked());
       }
+    });
+    listDropDown.add(checkitem);
+
+    final RadioListItem radioitem = new RadioListItem("Check item");
+    radioitem.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        radioitem.setChecked(!radioitem.isChecked());
+      }
+    });
+    listDropDown.add(radioitem);
+
+    final CheckListItem checkitem2 = new CheckListItem("Check anchor");
+    checkitem2.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        checkitem2.setChecked(!checkitem2.isChecked());
+      }
+    });
+
+    navbarNav.add(checkitem2);
+    listDropDown.add(new AnchorListItem("Anchor menuitem 2"));
+    final ComplexAnchorListItem menuitem3 = new ComplexAnchorListItem("Anchor menuitem 3");
+    menuitem3.setIconUrl("http://lorempixel.com/100/100");
+    listDropDown.add(menuitem3);
+    final AnchorListItem item1 = new AnchorListItem("Testingggg");
+    item1.setIcon(IconType.HEART);
+    listDropDown.add(item1);
+
+    for (int i = 1; i < 50; i++) {
+      listDropDown.add(new AnchorListItem("Anchor " + i));
     }
 
-    // testToolpanel();
-    // toolSelector.addWidget(new Label("Test"));
-    // testPromptDialog();
+    final ComplexAnchorListItem itemSubmenu = new ComplexAnchorListItem("Testing submenu");
+    itemSubmenu.setIcon(new KuneIcon('f'));
+    final DropDownSubmenu submenu = new DropDownSubmenu();
+    submenu.add(new AnchorListItem("sub item 1"));
+    submenu.add(new AnchorListItem("sub item 2"));
+    submenu.add(new AnchorListItem("sub item 3"));
+    itemSubmenu.add(submenu);
+    listDropDown.add(itemSubmenu);
+    RootPanel.get().add(navbar);
 
-    testSubWidget();
+    final DropDown dropDown = new DropDown();
 
-    // testPUload();
+    final Anchor dropDownAnchor = new Anchor();
+    final Image thumb = new Image("http://lorempixel.com/30/30");
+    dropDownAnchor.add(thumb);
+    // thumb.getElement().setAttribute(Attributes.DATA_TOGGLE,
+    // Toggle.DROPDOWN.getToggle());
+    // dropDownAnchor.add(thumb);
 
-    shortcutRegister = ginjector.getGlobalShortcutRegister();
-    shortcutRegister.enable();
+    // final Anchor dropDownAnchor = new Anchor();
+    // dropDownAnchor.setText("Label dropdown");
+    dropDownAnchor.setDataToggle(Toggle.DROPDOWN);
+    dropDown.add(dropDownAnchor);
 
-    final ActionFlowPanel view = makeFlowToolbar();
+    final DropDownMenu dropDownMenu = new DropDownMenu();
+    dropDown.add(dropDownMenu);
+    final ComplexAnchorListItem dditem1 = new ComplexAnchorListItem("Test 1");
+    final ComplexAnchorListItem dditem2 = new ComplexAnchorListItem("Test 2");
+    dditem1.setIcon(new KuneIcon('g'));
+    dditem2.setIconUrl("http://lorempixel.com/101/101");
+    dropDownMenu.add(dditem1);
+    dropDownMenu.add(dditem2);
 
-    final BasicThumb thumb = testThumbs();
+    final CustomButton btn = new CustomButton("Text custom button");
+    Tooltip.to(btn, "Show the dropdown at 100,100 position (or hide it)");
+    btn.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        if (listDropDown.isMenuVisible()) {
+          listDropDown.hide();
+        } else {
+          listDropDown.show(100, 100);
+        }
+      }
+    });
+    btn.setIcon(new KuneIcon('f'));
 
-    absolutePanel.add(thumb, 100, 300);
-    absolutePanel.add(view, 200, 300);
+    // final cc.kune.bootstrap.client.ui.IconLabel iconLabel = new
+    // cc.kune.bootstrap.client.ui.IconLabel(
+    // "Text");
+    // iconLabel.setIcon(new KuneIcon('g'));
 
-    final DottedTab tab = new DottedTab();
-    absolutePanel.add(tab, 400, 400);
-    absolutePanel.add(tab, 400, 400);
-    absolutePanel.add(makeFileUpload(), 620, 0);
+    RootPanel.get().add(btn);
+    // RootPanel.get().add(iconLabel);
+    RootPanel.get().add(new HTML("<br>"));
+    RootPanel.get().add(dropDown);
+    RootPanel.get().add(new HTML("<br>"));
 
-    new BlinkAnimation(tab, 350).animate(5);
+    final ToolbarDescriptor toolbarDesc = new ToolbarDescriptor();
 
+    final ButtonDescriptor btnDesc = new ButtonDescriptor(new TestAction("Button desc"));
+    btnDesc.withIcon(new KuneIcon('z')).withToolTip("Show me a tooltip");
+    btnDesc.setParent(toolbarDesc);
+
+    final IconLabelDescriptor labelDesc = new IconLabelDescriptor(new TestAction("IconLabel desc"));
+    labelDesc.withIcon(new KuneIcon('l')).withToolTip("Show me a tooltip");
+    labelDesc.setParent(toolbarDesc);
+
+    final MenuDescriptor menu = new MenuDescriptor("Menu btn");
+    menu.setParent(toolbarDesc);
+    final MenuItemDescriptor menuItemDescriptor = new MenuItemDescriptor(menu, new TestAction(
+        "Menu item"));
+    menuItemDescriptor.withIcon(IconType.MAGIC);
+
+    final SubMenuDescriptor submenuDesc = new SubMenuDescriptor(menu, "Some submenu");
+    submenuDesc.withIcon(new KuneIcon('g'));
+    new MenuItemDescriptor(submenuDesc, new TestAction("Submenu item 1")).withIcon(IconType.FACEBOOK);
+    new MenuItemDescriptor(submenuDesc, new TestAction("Submenu item 2")).withIcon(IconType.FAST_BACKWARD);
+
+    // TODO Add more tests here
+
+    // Testing
+    final FlowActionExtensible flow = new FlowActionExtensible();
+    flow.add(toolbarDesc); // , toolbarDesc, menu, menuItemDescriptor);
+
+    RootPanel.get().add(flow);
+    // RootPanel.get().add(toolbarDesc);
+
+    // navbarDropDown.setMenuVisible(true);
     RootPanel.get().add(absolutePanel);
-    // UserNotifierGrowl.close(growl);
+
   }
 
   /**
@@ -657,6 +738,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // mask.mask(pop2, "JAarrrrr!");
   }
 
+  @SuppressWarnings("unused")
   private void testPromptDialog() {
     final Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?", false, true,
         Direction.LTR, new OnEnter() {

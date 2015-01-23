@@ -20,13 +20,20 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.bootstrap.client.actions.gwtui;
+package cc.kune.bootstrap.client;
 
+import cc.kune.bootstrap.client.actions.gwtui.BSButtonGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSIconLabelGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSLabelGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSMenuGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSMenuHeaderGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSMenuItemGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSMenuSeparatorGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSPushButtonGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSSubMenuGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSToolbarGui;
+import cc.kune.bootstrap.client.actions.gwtui.BSToolbarSeparatorGui;
 import cc.kune.bootstrap.client.smartmenus.SmartMenusBundle;
-import cc.kune.common.client.actions.gwtui.GwtIconLabelGui;
-import cc.kune.common.client.actions.gwtui.GwtMenuSeparatorGui;
-import cc.kune.common.client.actions.gwtui.GwtMenuTitleItemGui;
-import cc.kune.common.client.actions.gwtui.GwtSubMenuGui;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
@@ -51,35 +58,37 @@ import com.google.inject.Provider;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class BootstrapGuiProvider {
+public class BSGuiProvider {
 
   /**
    * Instantiates a new gwtbootstrap gui provider.
    */
   @Inject
-  public BootstrapGuiProvider(final GuiProvider guiProvider,
-      final Provider<GwtSubMenuGui> gwtSubMenuGui, final Provider<BSMenuGui> menuGui,
-      final Provider<BSMenuItemGui> bsMenuItemGui,
-      final Provider<GwtMenuSeparatorGui> gwtMenuSeparatorGui,
+  public BSGuiProvider(final GuiProvider guiProvider, final Provider<BSSubMenuGui> bsSubMenuGui,
+      final Provider<BSMenuGui> menuGui, final Provider<BSMenuItemGui> menuItemGui,
+      final Provider<BSMenuSeparatorGui> menuSeparatorGui,
       final Provider<BSPushButtonGui> pushButtonGui, final Provider<BSButtonGui> buttonGui,
-      final Provider<BSLabelGui> labelGui, final Provider<GwtIconLabelGui> gwtIconLabelGui,
+      final Provider<BSLabelGui> labelGui, final Provider<BSIconLabelGui> iconLabelGui,
       final Provider<BSToolbarGui> toolbarGui,
       final Provider<BSToolbarSeparatorGui> toolbarSeparatorGui,
-      final Provider<GwtMenuTitleItemGui> gwtMenuTitleItemGui) {
+      final Provider<BSMenuHeaderGui> bsMenuHeaderGui) {
 
-    guiProvider.register(SubMenuDescriptor.class, gwtSubMenuGui);
+    guiProvider.register(SubMenuDescriptor.class, bsSubMenuGui);
     guiProvider.register(MenuDescriptor.class, menuGui);
-    guiProvider.register(MenuRadioItemDescriptor.class, bsMenuItemGui);
-    guiProvider.register(MenuCheckItemDescriptor.class, bsMenuItemGui);
-    guiProvider.register(MenuTitleItemDescriptor.class, gwtMenuTitleItemGui);
-    guiProvider.register(MenuItemDescriptor.class, bsMenuItemGui);
-    guiProvider.register(MenuSeparatorDescriptor.class, gwtMenuSeparatorGui);
+    guiProvider.register(MenuRadioItemDescriptor.class, menuItemGui);
+    guiProvider.register(MenuCheckItemDescriptor.class, menuItemGui);
+    guiProvider.register(MenuTitleItemDescriptor.class, bsMenuHeaderGui);
+    guiProvider.register(MenuItemDescriptor.class, menuItemGui);
+    guiProvider.register(MenuSeparatorDescriptor.class, menuSeparatorGui);
     guiProvider.register(PushButtonDescriptor.class, pushButtonGui);
     guiProvider.register(ButtonDescriptor.class, buttonGui);
-    guiProvider.register(IconLabelDescriptor.class, gwtIconLabelGui);
+    guiProvider.register(IconLabelDescriptor.class, iconLabelGui);
     guiProvider.register(LabelDescriptor.class, labelGui);
     guiProvider.register(ToolbarDescriptor.class, toolbarGui);
     guiProvider.register(ToolbarSeparatorDescriptor.class, toolbarSeparatorGui);
+
+    ScriptInjector.fromString(BootstrapBundle.INSTANCE.theme().getText()).setWindow(
+        ScriptInjector.TOP_WINDOW).inject();
 
     ScriptInjector.fromString(SmartMenusBundle.INSTANCE.smartmenus().getText()).setWindow(
         ScriptInjector.TOP_WINDOW).inject();

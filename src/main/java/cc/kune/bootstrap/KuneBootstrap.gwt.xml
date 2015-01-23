@@ -15,7 +15,4 @@
 
   <stylesheet src='css/theme.css' />
 
-  <!-- This doesn't works with cross-site-iframes -->
-  <!-- <script src='js/theme.js' /> -->
-
 </module>

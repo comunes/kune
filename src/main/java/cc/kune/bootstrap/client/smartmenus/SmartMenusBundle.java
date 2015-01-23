@@ -12,6 +12,7 @@ public interface SmartMenusBundle extends ClientBundle {
   @Source("resource/jquery.smartmenus.js")
   TextResource smartmenus();
 
+  // Warning: min.js has not the same modified options (subIndicators, etc)
   // @Source("resource/addons/bootstrap/jquery.smartmenus.bootstrap.min.js")
   @Source("resource/addons/bootstrap/jquery.smartmenus.bootstrap.js")
   TextResource smartmenusBootstrap();

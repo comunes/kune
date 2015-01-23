@@ -36,20 +36,21 @@ public class ToolbarSeparatorDescriptor extends AbstractSeparatorDescriptor {
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public enum Type {
-    
     /** The fill. */
-    fill, 
- /** The separator. */
- separator, 
- /** The spacer. */
- spacer
+    fill,
+    /** The separator. */
+    separator,
+    /** The spacer. */
+    spacer
   }
 
   /**
    * Builds the.
    *
-   * @param type the type
-   * @param parent the parent
+   * @param type
+   *          the type
+   * @param parent
+   *          the parent
    * @return the toolbar separator descriptor
    */
   public static ToolbarSeparatorDescriptor build(final Type type, final ToolbarDescriptor parent) {
@@ -62,8 +63,10 @@ public class ToolbarSeparatorDescriptor extends AbstractSeparatorDescriptor {
   /**
    * Instantiates a new toolbar separator descriptor.
    *
-   * @param type the type
-   * @param parent the parent
+   * @param type
+   *          the type
+   * @param parent
+   *          the parent
    */
   public ToolbarSeparatorDescriptor(final Type type, final ToolbarDescriptor parent) {
     super();
@@ -80,8 +83,11 @@ public class ToolbarSeparatorDescriptor extends AbstractSeparatorDescriptor {
     return type;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
+  /*
+   * (non-Javadoc)
+   *
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
    */
   @Override
   public Class<?> getType() {

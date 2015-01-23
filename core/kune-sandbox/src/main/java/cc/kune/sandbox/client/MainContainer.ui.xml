@@ -17,9 +17,9 @@
       <b:Navbar position="FIXED_TOP" addStyleNames="{style.navbars}">
         <b:NavbarHeader>
           <!-- <b:NavbarBrand>Kune</b:NavbarBrand> -->
-          <b:NavbarCollapseButton dataTarget="#navbar-collapse" />
+          <b:NavbarCollapseButton dataTarget="#sitebar-collapse" />
         </b:NavbarHeader>
-        <b:NavbarCollapse b:id="navbar-collapse">
+        <b:NavbarCollapse b:id="sitebar-collapse">
           <b:NavbarNav ui:field="sitebar">
           </b:NavbarNav>
         </b:NavbarCollapse>
