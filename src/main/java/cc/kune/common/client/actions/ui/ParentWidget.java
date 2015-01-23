@@ -24,7 +24,6 @@ package cc.kune.common.client.actions.ui;
 
 import com.google.gwt.user.client.ui.UIObject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Interface ParentWidget.
  *
@@ -36,17 +35,21 @@ public interface ParentWidget {
   String PARENT_UI = "PARENT_UI";
 
   /**
-   * Adds the.
+   * Adds to the parent.
    *
-   * @param uiObject the ui object
+   * @param uiObject
+   *          the ui object
    */
   public void add(UIObject uiObject);
 
   /**
-   * Insert.
+   * Insert in to the parent.
    *
-   * @param position the position
-   * @param widget the widget
+   * @param position
+   *          the position
+   *
+   * @param uiObject
+   *          the ui object
    */
-  public void insert(final int position, final UIObject widget);
+  public void insert(final int position, final UIObject uiObject);
 }

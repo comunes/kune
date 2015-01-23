@@ -27,6 +27,10 @@ import java.util.List;
 
 import org.gwtbootstrap3.client.shared.event.HideEvent;
 import org.gwtbootstrap3.client.shared.event.HideHandler;
+import org.gwtbootstrap3.client.shared.event.ShowEvent;
+import org.gwtbootstrap3.client.shared.event.ShowHandler;
+import org.gwtbootstrap3.client.shared.event.ShownEvent;
+import org.gwtbootstrap3.client.shared.event.ShownHandler;
 import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.constants.Styles;
 
@@ -42,8 +46,6 @@ import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.Position;
 import cc.kune.common.shared.res.KuneIcon;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.UIObject;
@@ -68,7 +70,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
    * .String)
@@ -107,7 +109,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -118,31 +120,37 @@ public class BSMenuGui extends AbstractBSMenuGui {
     descriptor.putValue(ParentWidget.PARENT_UI, this);
     // Standalone menus are menus without and associated button in a toolbar
     // (sometimes, a menu showed in a grid, or other special widgets)
-    final Boolean inline = (Boolean) descriptor.getValue(MenuDescriptor.MENU_VERTICAL);
 
     notStandAlone = !((MenuDescriptor) descriptor).isStandalone();
     if (notStandAlone) {
       menu = new ComplexListDropDown();
       // TODO
+      // final Boolean inline = (Boolean)
+      // descriptor.getValue(MenuDescriptor.MENU_VERTICAL);
       // menu.setInline(inline);
       // descriptor.putValue(MenuDescriptor.MENU_SHOW_NEAR_TO, button);
       final ImageResource rightIcon = ((MenuDescriptor) descriptor).getRightIcon();
       if (rightIcon != null) {
         menu.setIconRightResource(rightIcon);
       }
-      menu.addClickHandler(new ClickHandler() {
-        @Override
-        public void onClick(final ClickEvent event) {
-          if (menu.isEnabled()) {
-            event.stopPropagation();
-            show();
-          }
-        }
-      });
       menu.addHideHandler(new HideHandler() {
         @Override
         public void onHide(final HideEvent hideEvent) {
           descriptor.putValue(MenuDescriptor.MENU_ONHIDE, menu);
+        }
+      });
+      menu.addShowHandler(new ShowHandler() {
+
+        @Override
+        public void onShow(final ShowEvent showEvent) {
+          hideTooltip();
+
+        }
+      });
+      menu.addShownHandler(new ShownHandler() {
+        @Override
+        public void onShown(final ShownEvent event) {
+          hideTooltip();
         }
       });
       descriptor.addPropertyChangeListener(new PropertyChangeListener() {
@@ -208,6 +216,12 @@ public class BSMenuGui extends AbstractBSMenuGui {
     return this;
   }
 
+  private void hideTooltip() {
+    if (tooltip.isVisibleOrWillBe()) {
+      tooltip.hide();
+    }
+  }
+
   @Override
   public void insert(final int position, final UIObject widget) {
     menu.insert((Widget) widget, position);
@@ -215,7 +229,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -227,7 +241,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
@@ -241,7 +255,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
@@ -255,7 +269,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
    * .gwt.resources.client.ImageResource)
@@ -281,7 +295,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
@@ -295,7 +309,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
@@ -309,7 +323,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -323,7 +337,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
@@ -337,7 +351,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
@@ -352,6 +366,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
     return !descriptor.hasParent();
   }
 
+  @Override
   protected void show() {
     final Object relative = descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO);
     if (relative instanceof String) {
@@ -368,4 +383,5 @@ public class BSMenuGui extends AbstractBSMenuGui {
     }
 
   }
+
 }

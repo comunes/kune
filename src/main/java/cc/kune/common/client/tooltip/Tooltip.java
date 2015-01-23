@@ -85,8 +85,10 @@ public class Tooltip extends PopupPanel {
   /**
    * Sets the hide on detach listener.
    *
-   * @param widget the widget
-   * @param tip the tip
+   * @param widget
+   *          the widget
+   * @param tip
+   *          the tip
    */
   private static void setHideOnDetachListener(final Widget widget, final Tooltip tip) {
     widget.addAttachHandler(new Handler() {
@@ -102,8 +104,10 @@ public class Tooltip extends PopupPanel {
   /**
    * To.
    *
-   * @param widget the widget
-   * @param text the text
+   * @param widget
+   *          the widget
+   * @param text
+   *          the text
    * @return the tooltip
    */
   public static Tooltip to(final Widget widget, final String text) {
@@ -117,8 +121,10 @@ public class Tooltip extends PopupPanel {
   /**
    * To.
    *
-   * @param widget the widget
-   * @param withContent the with content
+   * @param widget
+   *          the widget
+   * @param withContent
+   *          the with content
    * @return the tooltip
    */
   public static Tooltip to(final Widget widget, final Widget withContent) {
@@ -132,39 +138,39 @@ public class Tooltip extends PopupPanel {
   /** The arrow. */
   @UiField
   HTMLPanel arrow;
-  
+
   /** The arrow border. */
   @UiField
   HTMLPanel arrowBorder;
-  
+
   /** The contains text. */
   private boolean containsText;
-  
+
   /** The content. */
   @UiField
   FlowPanel content;
-  
+
   /** The flow. */
   @UiField
   FlowPanel flow;
-  
+
   /** The of widget. */
   private Widget ofWidget;
-  
+
   /** The text label. */
   private final Label textLabel;
-  
+
   /** The timers. */
   private final TooltipTimers timers;
-  
+
   /** The title. */
   @UiField
   InlineLabel title;
-  
+
   /** The tooltip. */
   @UiField
   HTMLPanel tooltip;
-  
+
   /** The width. */
   private int width = WIDTH_NOT_DEFINED;
 
@@ -174,6 +180,7 @@ public class Tooltip extends PopupPanel {
   public Tooltip() {
     super.add(uiBinder.createAndBindUi(this));
     super.setStyleName("k-tooltip-no-chrome");
+    super.getElement().getStyle().setZIndex(10000);
     super.setAutoHideEnabled(false);
     super.setAnimationEnabled(false);
     final TimerWrapper overTimer = new TimerWrapper();
@@ -226,7 +233,9 @@ public class Tooltip extends PopupPanel {
     return tooltip.getElement().getOffsetWidth();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.PopupPanel#hide()
    */
   @Override
@@ -236,7 +245,9 @@ public class Tooltip extends PopupPanel {
     Tooltip.current = null;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.PopupPanel#isVisible()
    */
   @Override
@@ -256,7 +267,8 @@ public class Tooltip extends PopupPanel {
   /**
    * Sets the content.
    *
-   * @param widget the new content
+   * @param widget
+   *          the new content
    */
   private void setContent(final Widget widget) {
     content.clear();
@@ -267,7 +279,8 @@ public class Tooltip extends PopupPanel {
   /**
    * Sets the text.
    *
-   * @param text the new text
+   * @param text
+   *          the new text
    */
   public void setText(final String text) {
     content.clear();
@@ -279,13 +292,16 @@ public class Tooltip extends PopupPanel {
   /**
    * Sets the width.
    *
-   * @param width the new width
+   * @param width
+   *          the new width
    */
   public void setWidth(final int width) {
     this.width = width;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.PopupPanel#show()
    */
   @Override
@@ -318,7 +334,8 @@ public class Tooltip extends PopupPanel {
   /**
    * Show at.
    *
-   * @param position the position
+   * @param position
+   *          the position
    */
   protected void showAt(final TooltipPosition position) {
     this.setPopupPosition(position.getLeft(), position.getTop());
@@ -361,7 +378,8 @@ public class Tooltip extends PopupPanel {
   /**
    * To.
    *
-   * @param ofWidget the of widget
+   * @param ofWidget
+   *          the of widget
    */
   private void to(final Widget ofWidget) {
     this.ofWidget = ofWidget;

@@ -258,7 +258,7 @@
   background-position: 0 0;
   background-repeat: no-repeat;
   height: 16px;
-  widows: 16px;
+  width: 16px;
 }
 
 .oc-tb-spacer {
@@ -387,15 +387,19 @@
 }
 
 /* shorcuts, only used in gxt guidescriptors */
+
+.oc-mshortcut,
 #oc-mshortcut {
   position: absolute;
   right: 10px;
 }
 
+.oc-mshortcut-hidden,
 #oc-mshortcut-hidden {
   visibility: hidden;
 }
 
+.oc-mshortcut a,
 #oc-mshortcut a {
   text-decoration: none;
   color: black;

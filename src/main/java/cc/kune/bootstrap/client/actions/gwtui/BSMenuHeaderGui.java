@@ -22,60 +22,25 @@
  */
 package cc.kune.bootstrap.client.actions.gwtui;
 
-import org.gwtbootstrap3.client.ui.Divider;
+import org.gwtbootstrap3.client.ui.DropDownHeader;
 
-import cc.kune.common.client.actions.ui.AbstractBasicGuiItem;
-import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.ParentWidget;
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.errors.UIException;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
- * The Class GwtMenuSeparatorGui.
+ * The Class BSMenuHeaderGui.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class BSMenuHeaderGui extends AbstractBasicGuiItem {
+public class BSMenuHeaderGui extends AbstractBSMenuSeparatorGui {
 
-  /** The separator. */
-  private Divider separator;
-
-  /*
-   * (non-Javadoc)
-   *
-   * @see
-   * cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.
-   * client.actions.ui.descrip.GuiActionDescrip)
-   */
   @Override
-  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-    final AbstractBSMenuGui menu = ((AbstractBSMenuGui) descriptor.getParent().getValue(
-        ParentWidget.PARENT_UI));
-    if (menu == null) {
-      throw new UIException("To add a menu separator you need to add the menu before. Item: "
-          + descriptor);
-    }
-    separator = new Divider();
-    return menu;
-  }
-
-  /*
-   * (non-Javadoc)
-   *
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
-   */
-  @Override
-  protected void setEnabled(final boolean enabled) {
-    separator.setVisible(enabled);
+  protected Widget createSeparator() {
+    return new DropDownHeader();
   }
 
   @Override
-  public void setVisible(final boolean visible) {
-    separator.setVisible(visible);
+  protected void setText(final String text) {
+    ((DropDownHeader) separator).setText(text);
   }
 
-  @Override
-  public boolean shouldBeAdded() {
-    return false;
-  }
 }

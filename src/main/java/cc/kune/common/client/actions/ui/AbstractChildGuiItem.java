@@ -22,22 +22,32 @@
  */
 package cc.kune.common.client.actions.ui;
 
+import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.UIException;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.UIObject;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AbstractChildGuiItem.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractChildGuiItem extends AbstractGuiItem {
-
   /** The child. */
   protected UIObject child;
-  
+
+  protected ClickHandler defClickHandler = new ClickHandler() {
+    @Override
+    public void onClick(final ClickEvent event) {
+      descriptor.fire(new ActionEvent(child, getTargetObjectOfAction(descriptor),
+          Event.as(event.getNativeEvent())));
+    }
+  };
+
   /** The parent. */
   protected ParentWidget parent;
 
@@ -51,14 +61,18 @@ public abstract class AbstractChildGuiItem extends AbstractGuiItem {
   /**
    * Instantiates a new abstract child gui item.
    *
-   * @param descriptor the descriptor
+   * @param descriptor
+   *          the descriptor
    */
   public AbstractChildGuiItem(final GuiActionDescrip descriptor) {
     super(descriptor);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#addStyle(java.lang.String)
+  /*
+   * (non-Javadoc)
+   *
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#addStyle(java.lang.String)
    */
   @Override
   protected void addStyle(final String style) {
@@ -67,8 +81,12 @@ public abstract class AbstractChildGuiItem extends AbstractGuiItem {
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   *
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.
+   * client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
@@ -76,7 +94,12 @@ public abstract class AbstractChildGuiItem extends AbstractGuiItem {
     if (descriptor.isChild()) {
       // A menu item is a child, a toolbar separator, also. A button can
       // be a child of a toolbar or not
-      parent = ((ParentWidget) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
+      try {
+        parent = ((ParentWidget) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
+      } catch (final ClassCastException e) {
+        throw new UIException("It seems that the parent is not a ParentWidget in the descriptor: "
+            + descriptor);
+      }
       if (parent == null) {
         throw new UIException("To add a item you need to add its parent before. Item: " + descriptor);
       }

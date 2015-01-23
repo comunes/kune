@@ -107,6 +107,9 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
    * Sets the item properties from the stored values.
    */
   public void configureItemFromProperties() {
+    if (descriptor == null) {
+      throw new RuntimeException("You didn't set the super.descriptor on GUI.create");
+    }
     configure();
   }
 
@@ -114,13 +117,13 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
    * Configure properties.
    */
   private void configureProperties() {
-    setText((String) (descriptor.getValue(Action.NAME)));
-    setToolTipText((String) (descriptor.getValue(Action.TOOLTIP)));
-    setIcon(descriptor.getValue(Action.SMALL_ICON));
-    setEnabled((Boolean) descriptor.getValue(AbstractAction.ENABLED));
-    setVisible((Boolean) descriptor.getValue(GuiActionDescrip.VISIBLE));
-    setStyles((String) descriptor.getValue(Action.STYLES));
-    setDropTarget((DropTarget) descriptor.getValue(GuiActionDescrip.DROP_TARGET));
+    setText((String) (getValue(Action.NAME)));
+    setToolTipText((String) (getValue(Action.TOOLTIP)));
+    setIcon(getValue(Action.SMALL_ICON));
+    setEnabled((Boolean) getValue(AbstractAction.ENABLED));
+    setVisible((Boolean) getValue(GuiActionDescrip.VISIBLE));
+    setStyles((String) getValue(Action.STYLES));
+    setDropTarget((DropTarget) getValue(GuiActionDescrip.DROP_TARGET));
   }
 
   /*
@@ -177,6 +180,14 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     // the action, if not we only pass the menuitem
     return descriptor.hasTarget() ? descriptor.getTarget()
         : descriptor.isChild() ? descriptor.getParent().getTarget() : ActionEvent.NO_TARGET;
+  }
+
+  private Object getValue(final String key) {
+    final Object value = descriptor.getValue(key);
+    if (value == null) {
+      return descriptor.getAction().getValue(key);
+    }
+    return value;
   }
 
   /*
@@ -347,7 +358,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
    */
   public void setToolTipTextNextTo(final Widget widget, final String tooltipText) {
     if (tooltipText != null && !tooltipText.isEmpty()) {
-      final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
+      final KeyStroke key = (KeyStroke) getValue(Action.ACCELERATOR_KEY);
       final String compountTooltip = key == null ? tooltipText : tooltipText + key.toString();
       tooltip = Tooltip.to(widget, compountTooltip);
     }

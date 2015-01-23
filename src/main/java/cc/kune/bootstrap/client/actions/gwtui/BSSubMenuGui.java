@@ -23,11 +23,13 @@
 package cc.kune.bootstrap.client.actions.gwtui;
 
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
+import cc.kune.bootstrap.client.ui.DropDownSubmenu;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 
@@ -53,7 +55,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -64,6 +66,8 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
     super.create(descriptor);
 
     anchorList = new ComplexAnchorListItem("");
+    final DropDownSubmenu submenu = new DropDownSubmenu();
+    anchorList.add(submenu);
     configureItemFromProperties();
     parentMenu = ((AbstractBSMenuGui) descriptor.getParent().getValue(PARENT_UI));
     final int position = descriptor.getPosition();
@@ -72,7 +76,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
     } else {
       parentMenu.insert(position, anchorList);
     }
-    descriptor.putValue(ParentWidget.PARENT_UI, this);
+    descriptor.putValue(ParentWidget.PARENT_UI, submenu);
     descriptor.putValue(MenuItemDescriptor.UI, this);
     return this;
   }
@@ -85,7 +89,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -95,7 +99,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
@@ -108,7 +112,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
@@ -121,7 +125,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
@@ -134,7 +138,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
@@ -147,7 +151,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -159,7 +163,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
@@ -167,13 +171,14 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
   @Override
   public void setToolTipText(final String tooltip) {
     if (TextUtils.notEmpty(tooltip)) {
-      anchorList.setTitle(tooltip);
+      Tooltip.to(anchorList, tooltip);
+      // anchorList.setTitle(tooltip);
     }
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
@@ -196,6 +201,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
   // return item;
   // }
 
+  @Override
   protected void show() {
     parentMenu.show();
     ((MenuDescriptor) descriptor.getParent()).selectMenu((MenuItemDescriptor) descriptor);

@@ -47,7 +47,6 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /** The button. */
   private CustomButton button;
-
   /** The enable tongle. */
   protected boolean enableTongle;
 

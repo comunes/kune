@@ -24,52 +24,65 @@ package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.Action;
+import cc.kune.common.client.actions.BaseAction;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class MenuTitleItemDescriptor.
+ * The Class ToolbarItemDescriptor.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class MenuTitleItemDescriptor extends MenuItemDescriptor {
+public class ToolbarItemDescriptor extends AbstractGuiActionDescrip {
 
   /**
-   * This GUI element only show a title (or header) in the menu, in the position
-   * you add it to the menu. Useful before a radio group, etc This is the
-   * preferred and more common used constructor.
-   *
-   * @param parent
-   *          menu
-   * @param title
-   *          the menu title
+   * Instantiates a new toolbar item descriptor.
    */
-  public MenuTitleItemDescriptor(final MenuDescriptor parent, final String title) {
-    super(AbstractAction.NO_ACTION);
-    putValue(Action.NAME, title);
-    setParent(parent);
+  public ToolbarItemDescriptor() {
+    this("", "");
   }
 
   /**
-   * This GUI element only show a title (or header) in the menu, in the position
-   * you add it to the menu. Useful before a radio group, etc You must define a
-   * menu item with its parent menu. Only use this constructor if you'll set the
-   * parent menu in the future (before render)
+   * Instantiates a new toolbar item descriptor.
    *
-   * @param title
-   *          the menu title
+   * @param text
+   *          the text
    */
-  public MenuTitleItemDescriptor(final String title) {
-    super(AbstractAction.NO_ACTION);
-    putValue(Action.NAME, title);
+  public ToolbarItemDescriptor(final String text) {
+    this(text, "");
+  }
+
+  public ToolbarItemDescriptor(final String text, final AbstractAction action) {
+    this(text, null, action);
+  }
+
+  /**
+   * Instantiates a new toolbar item descriptor.
+   *
+   * @param text
+   *          the text
+   * @param tooltip
+   *          the tooltip
+   */
+  public ToolbarItemDescriptor(final String text, final String tooltip) {
+    super(new BaseAction(text, tooltip));
+    putValue(Action.NAME, text);
+    putValue(Action.TOOLTIP, tooltip);
+  }
+
+  public ToolbarItemDescriptor(final String text, final String tooltip, final AbstractAction action) {
+    super(action);
+    putValue(Action.NAME, text);
+    putValue(Action.TOOLTIP, tooltip);
   }
 
   /*
    * (non-Javadoc)
-   * 
-   * @see cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor#getType()
+   *
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
    */
   @Override
   public Class<?> getType() {
-    return MenuTitleItemDescriptor.class;
+    return ToolbarItemDescriptor.class;
   }
+
 }

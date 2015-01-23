@@ -23,79 +23,18 @@
 package cc.kune.bootstrap.client.actions.gwtui;
 
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
-import cc.kune.common.client.actions.ui.AbstractGuiItem;
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.shared.res.KuneIcon;
-
-import com.google.gwt.resources.client.ImageResource;
 
 /**
- * The Class GwtMenuItemGui.
+ * The Class BSMenuItemGui.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class BSMenuItemGui extends AbstractBSChildGuiItem {
-
-  private ComplexAnchorListItem item;
+public class BSMenuItemGui extends AbstractBSMenuItemGui {
 
   @Override
-  public AbstractGuiItem create(final GuiActionDescrip descriptor) {
-    super.descriptor = descriptor;
-    final String id = descriptor.getId();
-    item = new ComplexAnchorListItem();
-    if (id != null) {
-      item.ensureDebugId(id);
-    }
-    child = item;
-    super.create(descriptor);
-    configureItemFromProperties();
-    return this;
-  }
+  protected ComplexAnchorListItem createMenuItem() {
+    return new ComplexAnchorListItem();
 
-  @Override
-  protected void setEnabled(final boolean enabled) {
-    item.setEnabled(enabled);
-  }
-
-  @Override
-  public void setIcon(final KuneIcon icon) {
-    item.setIcon(icon);
-  }
-
-  @Override
-  protected void setIconBackColor(final String backgroundColor) {
-    item.setIconBackColor(backgroundColor);
-  }
-
-  @Override
-  public void setIconResource(final ImageResource icon) {
-    item.setIconResource(icon);
-  }
-
-  @Override
-  protected void setIconStyle(final String style) {
-    item.setIconStyle(style);
-  }
-
-  @Override
-  public void setIconUrl(final String url) {
-    item.setIconUrl(url);
-
-  }
-
-  @Override
-  protected void setText(final String text) {
-    item.setText(text);
-  }
-
-  @Override
-  public void setVisible(final boolean visible) {
-    item.setVisible(visible);
-  }
-
-  @Override
-  public boolean shouldBeAdded() {
-    return !descriptor.isChild();
   }
 
 }
