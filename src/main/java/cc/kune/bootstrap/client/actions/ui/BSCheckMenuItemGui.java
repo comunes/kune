@@ -22,7 +22,6 @@
  */
 package cc.kune.bootstrap.client.actions.ui;
 
-import cc.kune.bootstrap.client.ui.AbstractCheckListItem;
 import cc.kune.bootstrap.client.ui.CheckListItem;
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 import cc.kune.common.client.actions.AbstractAction;
@@ -91,8 +90,7 @@ public class BSCheckMenuItemGui extends AbstractBSMenuItemGui {
   }
 
   private void setChecked(final boolean checked) {
-    ((AbstractCheckListItem) item).setChecked(checked);
-
+    ((CheckListItem) item).setChecked(checked);
   }
 
 }

@@ -22,7 +22,6 @@
  */
 package cc.kune.bootstrap.client.actions.ui;
 
-import cc.kune.bootstrap.client.ui.AbstractCheckListItem;
 import cc.kune.bootstrap.client.ui.CheckListItem;
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 import cc.kune.bootstrap.client.ui.RadioListItem;
@@ -93,7 +92,7 @@ public class BSRadioMenuItemGui extends AbstractBSMenuItemGui {
   }
 
   private void setChecked(final boolean checked) {
-    ((AbstractCheckListItem) item).setChecked(checked);
+    ((RadioListItem) item).setChecked(checked);
   }
 
 }

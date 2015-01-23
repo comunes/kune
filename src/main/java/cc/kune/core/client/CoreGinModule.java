@@ -157,7 +157,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -246,9 +246,6 @@ public class CoreGinModule extends ExtendedGinModule {
 
     // UI
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
-
-    // s(GxtGuiProvider.class);
-    // s(GwtGuiProvider.class);
 
     bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);
 
