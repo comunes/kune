@@ -22,8 +22,6 @@
  */
 package cc.kune.bootstrap.client.actions.gwtui;
 
-import org.gwtbootstrap3.client.ui.html.Text;
-
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.KeyStroke;
@@ -97,13 +95,11 @@ public abstract class AbstractBSMenuItemGui extends AbstractBSChildGuiItem {
 
   @Override
   protected void setText(final String text) {
+    item.setText(text);
     final KeyStroke key = (KeyStroke) descriptor.getValue(Action.ACCELERATOR_KEY);
     if (key != null) {
-      item.getAnchor().add(new Text(text));
-      item.getAnchor().add(createShortCut(key, "oc-mshortcut-hidden"));
-      item.getAnchor().add(createShortCut(key, "oc-mshortcut"));
-    } else {
-      item.setText(text);
+      item.setShortcut(createShortCut(key, "oc-mshortcut-hidden").toString()
+          + createShortCut(key, "oc-mshortcut").toString());
     }
   }
 

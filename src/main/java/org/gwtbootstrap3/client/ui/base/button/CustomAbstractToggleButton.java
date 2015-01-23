@@ -41,7 +41,7 @@ import com.google.gwt.resources.client.ImageResource;
  * @see org.gwtbootstrap3.client.ui.constants.Toggle
  */
 public abstract class CustomAbstractToggleButton extends CustomAbstractIconButton implements
-    HasDataToggle {
+HasDataToggle {
 
   private final Caret caret = new Caret();
   private final Text separator = new Text(" ");
@@ -54,7 +54,6 @@ public abstract class CustomAbstractToggleButton extends CustomAbstractIconButto
 
   protected CustomAbstractToggleButton(final ButtonType type) {
     setType(type);
-    iconTextMixin.addTextWidgetToParent();
   }
 
   @Override

@@ -57,6 +57,7 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
 import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
@@ -146,7 +147,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
      * .common.client.actions.ActionEvent)
      */
@@ -173,6 +174,17 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
   /** The user msg. */
   SimpleUserMessage userMsg = new SimpleUserMessage();
+
+  private void initializeInjector() {
+    ginjector = GWT.create(KuneSampleGinjector.class);
+    toolbar = ginjector.getToolbar();
+    res = CommonResources.INSTANCE;
+    res.commonStyle().ensureInjected();
+    ginjector.getUserNotifierGrowl();
+    absolutePanel = new AbsolutePanel();
+    shortcutRegister = ginjector.getGlobalShortcutRegister();
+    shortcutRegister.enable();
+  }
 
   private Widget makeFileUpload() {
     final UploaderPanel uploadPanel = new UploaderPanel(I18n.t("choose an image to upload"),
@@ -262,24 +274,21 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
   @Override
   public void onModuleLoad() {
-    ginjector = GWT.create(KuneSampleGinjector.class);
-    toolbar = ginjector.getToolbar();
-    res = CommonResources.INSTANCE;
-    res.commonStyle().ensureInjected();
-    ginjector.getUserNotifierGrowl();
-    absolutePanel = new AbsolutePanel();
+    initializeInjector();
 
     NotifyUser.info("Started");
 
-    final Navbar navbar = new Navbar();
+    RootPanel.get().add(testActionToolbar());
+
+    final Navbar simpleNavbar = new Navbar();
     final NavbarHeader header = new NavbarHeader();
     final NavbarCollapseButton navbarCollapseButton = new NavbarCollapseButton();
     navbarCollapseButton.setDataTarget("#test");
     header.add(navbarCollapseButton);
-    navbar.add(header);
+    simpleNavbar.add(header);
     final NavbarCollapse navbarCollapse = new NavbarCollapse();
     navbarCollapse.setId("test");
-    navbar.add(navbarCollapse);
+    simpleNavbar.add(navbarCollapse);
 
     final NavbarNav navbarNav = new NavbarNav();
 
@@ -347,7 +356,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     submenu.add(new AnchorListItem("sub item 3"));
     itemSubmenu.add(submenu);
     listDropDown.add(itemSubmenu);
-    RootPanel.get().add(navbar);
 
     final DropDown dropDown = new DropDown();
 
@@ -420,26 +428,19 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     // TODO Add more tests here
 
-    // Testing
     final FlowActionExtensible flow = new FlowActionExtensible();
-    flow.add(toolbarDesc); // , toolbarDesc, menu, menuItemDescriptor);
+    flow.add(toolbarDesc);
 
     RootPanel.get().add(flow);
-    // RootPanel.get().add(toolbarDesc);
     RootPanel.get().add(new HTML("<br>"));
-    RootPanel.get().add(testActionToolbar());
+    RootPanel.get().add(simpleNavbar);
     // navbarDropDown.setMenuVisible(true);
     RootPanel.get().add(absolutePanel);
 
   }
 
   public void onModuleLoad2() {
-
-    ginjector = GWT.create(KuneSampleGinjector.class);
-    toolbar = ginjector.getToolbar();
-    res = CommonResources.INSTANCE;
-    res.commonStyle().ensureInjected();
-    ginjector.getUserNotifierGrowl();
+    initializeInjector();
 
     final MainContainer mainPanel = new MainContainer();
     // mainPanel.setWidth("100%");
@@ -521,18 +522,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   }
 
   public void onModuleLoadOld() {
-
+    initializeInjector();
     // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
-
-    ginjector = GWT.create(KuneSampleGinjector.class);
-    toolbar = ginjector.getToolbar();
-    res = CommonResources.INSTANCE;
-    res.commonStyle().ensureInjected();
-    ginjector.getUserNotifierGrowl();
 
     NotifyUser.showProgress("Starting");
 
-    absolutePanel = new AbsolutePanel();
     testBarButtons();
     testTooltips();
 
@@ -558,11 +552,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // testPromptDialog();
 
     testSubWidget();
-
-    // testPUload();
-
-    shortcutRegister = ginjector.getGlobalShortcutRegister();
-    shortcutRegister.enable();
 
     final ActionFlowPanel view = makeFlowToolbar();
 
@@ -599,16 +588,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
         NotifyUser.askConfirmation("Some title", "Some message", "Yeah!", "Nein",
             new SimpleResponseCallback() {
 
-              @Override
-              public void onCancel() {
-                NotifyUser.error("Cancel");
-              }
+          @Override
+          public void onCancel() {
+            NotifyUser.error("Cancel");
+          }
 
-              @Override
-              public void onSuccess() {
-                NotifyUser.info("Success");
-              }
-            });
+          @Override
+          public void onSuccess() {
+            NotifyUser.info("Success");
+          }
+        });
       }
     };
 
@@ -631,13 +620,13 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       }
     };
 
-    final IconLabelDescriptor iconLabel = new IconLabelDescriptor("This does not work");
+    final IconLabelDescriptor iconLabel = new IconLabelDescriptor("This does not work?");
     iconLabel.setAction(action1);
-    iconLabel.withText("Icon Label2");
+    iconLabel.withText("Icon Label 1");
     iconLabel.withIcon(new KuneIcon('f'));
 
-    final ButtonDescriptor button1 = new ButtonDescriptor("button 1", action1);
-    final ButtonDescriptor button2 = new ButtonDescriptor("button 2 but bigger bigger", action2);
+    final ButtonDescriptor button1 = new ButtonDescriptor("button desc 1", action1);
+    final ButtonDescriptor button2 = new ButtonDescriptor("button desc 2 but bigger bigger", action2);
     final ButtonDescriptor button3 = new ButtonDescriptor(action1);
 
     button1.withIcon(res.info()).withToolTip("Some tooltip");
@@ -655,19 +644,28 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     anchorItem.withIcon(IconType.MAGNET);
     anchorItem.setParent(toolbarDesc);
 
+    final KeyStroke shortcut1 = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
+    shortcutRegister.put(shortcut1, action1);
+    final KeyStroke shortcut2 = Shortcut.getShortcut(false, true, false, false, Character.valueOf('D'));
+    shortcutRegister.put(shortcut2, action2);
+
     final MenuDescriptor menuDesc = new MenuDescriptor("Menu descr");
     menuDesc.setParent(toolbarDesc);
     menuDesc.setRightIcon(res.world16());
-    menuDesc.withIcon(res.info()).withToolTip("Some menu");
+    menuDesc.withIcon(res.info()).withToolTip("Some menu tooltip").withShortcut(shortcut1,
+        shortcutRegister);
     final MenuItemDescriptor menuItem1 = new MenuItemDescriptor(menuDesc, action1);
-    menuItem1.withIcon(res.info()).withText("Some menu item");
+    menuItem1.withIcon(res.locationBlack()).withText("Some menu item 1");
     final MenuItemDescriptor menuItem2 = new MenuItemDescriptor(menuDesc, action1);
-    menuItem2.withIcon(res.info()).withText("Some other menu item");
+    menuItem2.withIcon(res.info()).withText("Some menu item 2").withShortcut(shortcut2, shortcutRegister);
+
+    final MenuCheckItemDescriptor menuCheckItem1 = new MenuCheckItemDescriptor(menuDesc, action1);
+    menuCheckItem1.withText("Check item").withIcon(new KuneIcon('j'));
 
     final SubMenuDescriptor submenuDesc = new SubMenuDescriptor("Some Submenu", "tip", "oc-testico");
     submenuDesc.setParent(menuDesc);
 
-    final TestAction action3 = new TestAction("Action 3", "Some tooltip", "oc-testico");
+    final TestAction action3 = new TestAction("Some menu item 3", "Some tooltip", "oc-testico");
     final TestAction action4 = new TestAction("Action 4");
 
     final MenuSeparatorDescriptor menuSep = new MenuSeparatorDescriptor(menuDesc);
@@ -675,14 +673,15 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final MenuItemDescriptor menuItemDesc1 = new MenuItemDescriptor(menuDesc, action3);
     final MenuItemDescriptor menuItemDesc2 = new MenuItemDescriptor(menuDesc, action4);
     final MenuItemDescriptor menuItemDesc3 = new MenuItemDescriptor(submenuDesc, action1);
-    menuItemDesc3.withText("This text is setted");
+    menuItemDesc3.withText("This text is setted").withShortcut(shortcut1, shortcutRegister);
     final MenuItemDescriptor menuItemDesc4 = new MenuItemDescriptor(submenuDesc, action2);
+    menuItemDesc2.withText("This text is setted").withShortcut(shortcut2, shortcutRegister);
 
     // TODO: add more things here
 
     final FlowActionExtensible flowActions = new FlowActionExtensible();
 
-    flowActions.add(button1, iconLabel, button2, button3, toolbarDesc);
+    flowActions.add(toolbarDesc, button1, button2, button3, iconLabel);
 
     return flowActions;
   }
@@ -755,12 +754,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?", false, true,
         Direction.LTR, new OnEnter() {
 
-          @Override
-          public void onEnter() {
-            NotifyUser.info("On Enter");
+      @Override
+      public void onEnter() {
+        NotifyUser.info("On Enter");
 
-          }
-        });
+      }
+    });
     builder.width("200px").height("200px").firstButtonTitle("Create").sndButtonTitle("Cancel");
     builder.regex(TextUtils.UNIX_NAME).regexText(
         "The name must contain only characters, numbers and dashes");
@@ -834,11 +833,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
         false, new ClickHandler() {
 
-          @Override
-          public void onClick(final ClickEvent event) {
-            userMsg.show("Testing");
-          }
-        });
+      @Override
+      public void onClick(final ClickEvent event) {
+        userMsg.show("Testing");
+      }
+    });
     thumb.setTooltip("Some thumb tooltip");
     thumb.setOnOverLabel(true);
     return thumb;
@@ -867,16 +866,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(button4, clientWidth - 90, clientHeight - 60);
     Tooltip.to(button,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button2,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button3,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button4,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
 
   }
 }

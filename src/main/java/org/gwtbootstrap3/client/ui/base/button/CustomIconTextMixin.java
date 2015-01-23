@@ -33,10 +33,14 @@ import org.gwtbootstrap3.client.ui.html.Text;
 
 import cc.kune.common.shared.res.KuneIcon;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * Custom mixin for Widgets that have text and some optional icons.
@@ -51,7 +55,7 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
   private boolean iconBordered = false;
   private IconFlip iconFlip = IconFlip.NONE;
   private Image iconImage;
-  private CustomIcon iconLabel;
+  private Widget iconLabel;
   private boolean iconLight = false;
   private boolean iconMuted = false;
   private IconPosition iconPosition = IconPosition.LEFT;
@@ -60,8 +64,11 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
   private IconSize iconSize = IconSize.NONE;
   private boolean iconSpin = false;
   private IconType iconType;
+  private ScheduledCommand renderCommand;
+  private boolean renderScheduled;
   private final Text separator = new Text(" ");
   private final Text separator2 = new Text(" ");
+  private HTMLPanel shortcut;
   private final Text text = new Text();
   private final T widget;
 
@@ -69,8 +76,10 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
     this.widget = widget;
   }
 
-  public void addTextWidgetToParent() {
-    widget.add(text);
+  private Widget createCleanIcon() {
+    final Image icon = new Image();
+    icon.setUrl(GWT.getModuleBaseURL() + "clear.cache.gif");
+    return icon;
   }
 
   @Override
@@ -126,99 +135,117 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
   private void render() {
     // We defer to make sure the elements are available to manipulate their
     // positions
-    Scheduler.get().scheduleDeferred(new Scheduler.ScheduledCommand() {
-      private int addOtherIcons(final boolean hasIconImage, final boolean hasIconRightImage,
-          final boolean hasIconLabel, int position) {
-        if (hasIconImage) {
-          widget.insert(iconImage, position++);
-        }
-        if (hasIconRightImage) {
-          widget.insert(iconRightImage, position++);
-        }
-        if (hasIconLabel) {
-          widget.insert(iconLabel, position++);
-        }
-        return position;
-      }
-
-      private int addOtherSeparator(final boolean hasIconImage, final boolean hasIconRightImage,
-          final boolean hasIconLabel, int position) {
-        if (hasIconImage || hasIconRightImage || hasIconLabel) {
-          widget.insert(separator2, position++);
-        }
-        return position;
-      }
-
-      @Override
-      public void execute() {
-        if (text.isAttached()) {
-          text.removeFromParent();
-        }
-        if (separator.isAttached()) {
-          separator.removeFromParent();
-        }
-        if (separator2.isAttached()) {
-          separator2.removeFromParent();
-        }
-        if (icon != null) {
-          icon.removeFromParent();
-        }
-        final boolean hasIconType = iconType != null;
-        final boolean hasIconImage = iconImage != null;
-        final boolean hasIconRightImage = iconRightImage != null;
-        final boolean hasIconLabel = iconLabel != null;
-
-        if (hasIconImage) {
-          iconImage.removeFromParent();
-        }
-        if (hasIconRightImage) {
-          iconRightImage.removeFromParent();
-        }
-        if (hasIconLabel) {
-          iconLabel.removeFromParent();
-        }
-
-        icon = new Icon();
-        icon.setType(iconType);
-        icon.setSize(iconSize);
-        icon.setFlip(iconFlip);
-        icon.setRotate(iconRotate);
-        icon.setMuted(iconMuted);
-        icon.setSpin(iconSpin);
-        icon.setBorder(iconBordered);
-        icon.setLight(iconLight);
-
-        // Since we are dealing with Icon/Text, we can insert them at the right
-        // position
-        // Helps on widgets like ButtonDropDown, where it has a caret added
-        int position = 0;
-
-        if (iconPosition == IconPosition.LEFT) {
-          if (hasIconType) {
-            widget.insert(icon, position++);
-            widget.insert(separator, position++);
+    if (renderCommand == null) {
+      renderCommand = new Scheduler.ScheduledCommand() {
+        private int addOtherIcons(final boolean hasIconImage, final boolean hasIconRightImage,
+            final boolean hasIconLabel, int position) {
+          if (hasIconImage) {
+            widget.insert(iconImage, position++);
           }
-        position = addOtherIcons(hasIconImage, hasIconRightImage, hasIconLabel, position);
-        position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
-        }
-
-        if (text.getText() != null && text.getText().length() > 0
-            // FIXME Workaround while we see who set's "undefined" as no text
-            && !"undefined".equals(text.getText())) {
-          widget.insert(text, position);
-        }
-
-        if (iconPosition == IconPosition.RIGHT) {
-          if (hasIconType) {
-            widget.insert(separator, position++);
-            widget.insert(icon, position);
+          if (hasIconRightImage) {
+            widget.insert(iconRightImage, position++);
           }
-          position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
-          position = addOtherIcons(hasIconImage, hasIconRightImage, hasIconLabel, position);
+          if (hasIconLabel) {
+            widget.insert(iconLabel, position++);
+          }
+          return position;
         }
-      }
 
-    });
+        private int addOtherSeparator(final boolean hasIconImage, final boolean hasIconRightImage,
+            final boolean hasIconLabel, final int position) {
+          if (hasIconImage || hasIconRightImage || hasIconLabel) {
+            widget.insert(separator2, position);
+          }
+          return position;
+        }
+
+        @Override
+        public void execute() {
+          if (text.isAttached()) {
+            text.removeFromParent();
+          }
+          if (separator.isAttached()) {
+            separator.removeFromParent();
+          }
+          if (separator2.isAttached()) {
+            separator2.removeFromParent();
+          }
+          if (icon != null) {
+            icon.removeFromParent();
+          }
+          if (shortcut != null) {
+            shortcut.removeFromParent();
+          }
+          final boolean hasIconType = iconType != null;
+          final boolean hasIconImage = iconImage != null;
+          final boolean hasIconRightImage = iconRightImage != null;
+          final boolean hasIconLabel = iconLabel != null;
+          final boolean hasShortcut = shortcut != null;
+
+          if (hasIconImage) {
+            iconImage.removeFromParent();
+          }
+          if (hasIconRightImage) {
+            iconRightImage.removeFromParent();
+          }
+          if (hasIconLabel) {
+            iconLabel.removeFromParent();
+          }
+
+          icon = new Icon();
+          icon.setType(iconType);
+          icon.setSize(iconSize);
+          icon.setFlip(iconFlip);
+          icon.setRotate(iconRotate);
+          icon.setMuted(iconMuted);
+          icon.setSpin(iconSpin);
+          icon.setBorder(iconBordered);
+          icon.setLight(iconLight);
+
+          // Since we are dealing with Icon/Text, we can insert them at the
+          // right
+          // position.
+          // Helps on widgets like ButtonDropDown, where it has a caret added
+          int position = 0;
+
+          if (iconPosition == IconPosition.LEFT) {
+            if (hasIconType) {
+              widget.insert(icon, position++);
+              widget.insert(separator, position);
+            }
+            position = addOtherIcons(hasIconImage, hasIconRightImage, hasIconLabel, position);
+            position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
+          }
+
+          if (text.getText() != null && text.getText().length() > 0
+              && !"undefined".equals(text.getText())) {
+            widget.insert(text, position++);
+          }
+
+          if (hasShortcut) {
+            widget.insert(shortcut, position++);
+          }
+
+          if (iconPosition == IconPosition.RIGHT) {
+            if (hasIconType) {
+              widget.insert(separator, position++);
+              widget.insert(icon, position++);
+            }
+            position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
+            position = addOtherIcons(hasIconImage, hasIconRightImage, hasIconLabel, position);
+          }
+          renderScheduled = false;
+        }
+
+      };
+    }
+
+    if (!renderScheduled) {
+      // We prevent to render several times the same widget
+      Scheduler.get().scheduleDeferred(renderCommand);
+      renderScheduled = true;
+    }
+
   }
 
   @Override
@@ -228,13 +255,17 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
   }
 
   public void setIcon(final KuneIcon icon) {
-    iconLabel = new CustomIcon(icon.getCharacter().toString());
+    if (iconLabel == null) {
+      iconLabel = new CustomIcon(icon.getCharacter().toString());
+    }
     iconLabel.setStyleName("k-iconfontlabel");
     render();
   }
 
   public void setIconBackColor(final String backgroundColor) {
-    iconLabel = new CustomIcon(" ");
+    if (iconLabel == null) {
+      iconLabel = createCleanIcon();
+    }
     iconLabel.getElement().getStyle().setBackgroundColor(backgroundColor);
     render();
   }
@@ -306,7 +337,7 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
 
   public void setIconStyle(final String style) {
     if (iconLabel == null) {
-      iconLabel = new CustomIcon(" ");
+      iconLabel = createCleanIcon();
     }
     iconLabel.addStyleName(style);
     render();
@@ -321,9 +352,14 @@ public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & H
     render();
   }
 
+  public void setShortcut(final String shortcutHtml) {
+    shortcut = new HTMLPanel("span", shortcutHtml);
+  }
+
   @Override
   public void setText(final String text) {
     this.text.setText(text);
+    render();
   }
 
 }

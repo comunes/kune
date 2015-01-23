@@ -17,12 +17,11 @@ public class ComplexAnchorButton extends AnchorButton {
 
   public ComplexAnchorButton() {
     iconTextMixin = new CustomIconTextMixin<AnchorButton>(this);
-    iconTextMixin.addTextWidgetToParent();
   }
 
   public ComplexAnchorButton(final String text) {
     this();
-    setText(text);
+    iconTextMixin.setText(text);
   }
 
   @Override
@@ -142,5 +141,10 @@ public class ComplexAnchorButton extends AnchorButton {
 
   public void setIconUrl(final String url) {
     iconTextMixin.setIconUrl(url);
+  }
+
+  @Override
+  public void setText(final String text) {
+    iconTextMixin.setText(text);
   }
 }

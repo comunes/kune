@@ -70,7 +70,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
    * .String)
@@ -109,7 +109,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -144,7 +144,6 @@ public class BSMenuGui extends AbstractBSMenuGui {
         @Override
         public void onShow(final ShowEvent showEvent) {
           hideTooltip();
-
         }
       });
       menu.addShownHandler(new ShownHandler() {
@@ -229,7 +228,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -241,7 +240,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
@@ -255,7 +254,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
@@ -269,7 +268,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
    * .gwt.resources.client.ImageResource)
@@ -295,7 +294,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
@@ -309,7 +308,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
@@ -323,7 +322,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -337,7 +336,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
@@ -351,7 +350,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override

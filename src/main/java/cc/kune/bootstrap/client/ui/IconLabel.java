@@ -22,8 +22,7 @@ public class IconLabel extends Anchor {
 
   public IconLabel(final String text) {
     this();
-    iconTextMixin.addTextWidgetToParent();
-    setText(text);
+    iconTextMixin.setText(text);
   }
 
   @Override

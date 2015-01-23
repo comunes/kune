@@ -15,21 +15,14 @@ import com.google.gwt.resources.client.ImageResource;
 
 public class ComplexAnchorListItem extends AnchorListItem {
   CustomIconTextMixin<Anchor> iconTextMixin;
-  private final Anchor thisAnchor;
 
   public ComplexAnchorListItem() {
     iconTextMixin = new CustomIconTextMixin<Anchor>(anchor);
-    thisAnchor = anchor;
   }
 
   public ComplexAnchorListItem(final String text) {
     this();
-    iconTextMixin.addTextWidgetToParent();
-    setText(text);
-  }
-
-  public Anchor getAnchor() {
-    return thisAnchor;
+    iconTextMixin.setText(text);
   }
 
   @Override
@@ -149,6 +142,10 @@ public class ComplexAnchorListItem extends AnchorListItem {
 
   public void setIconUrl(final String url) {
     iconTextMixin.setIconUrl(url);
+  }
+
+  public void setShortcut(final String shortcutHtml) {
+    iconTextMixin.setShortcut(shortcutHtml);
   }
 
   @Override
