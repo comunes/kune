@@ -646,7 +646,13 @@
 						.parent().dataSM('sub', $ul);
 					// add sub indicator to parent item
 					if (this.opts.subIndicators) {
-						$ul.dataSM('parent-a').addClass('has-submenu')[this.opts.subIndicatorsPos](this.$subArrow.clone());
+            if (level == 2)
+							// Patched for kune
+              // Parents already have a caret/arrow
+						  $ul.dataSM('parent-a').addClass('has-submenu');
+            else 
+              // Add arrow to a submenu
+						  $ul.dataSM('parent-a').addClass('has-submenu')[this.opts.subIndicatorsPos](this.$subArrow.clone());
 					}
 				}
 			},

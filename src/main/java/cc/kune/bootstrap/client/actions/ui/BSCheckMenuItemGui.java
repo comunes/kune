@@ -43,13 +43,12 @@ import com.google.gwt.user.client.Event;
  */
 public class BSCheckMenuItemGui extends AbstractBSMenuItemGui {
 
-  private void confCheckListener(final MenuCheckItemDescriptor descriptor,
-      final ComplexAnchorListItem checkItem) {
+  private void confCheckListener(final MenuCheckItemDescriptor descriptor) {
     descriptor.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {
         if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
-          ((CheckListItem) checkItem).setChecked((Boolean) event.getNewValue());
+          setChecked((Boolean) event.getNewValue());
         }
       }
     });
@@ -78,9 +77,7 @@ public class BSCheckMenuItemGui extends AbstractBSMenuItemGui {
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.create(descriptor);
-    // In Radio item.setGroup(((MenuRadioItemDescriptor)
-    // descriptor).getGroup());
-    confCheckListener((MenuCheckItemDescriptor) descriptor, item);
+    confCheckListener((MenuCheckItemDescriptor) descriptor);
     return this;
   }
 

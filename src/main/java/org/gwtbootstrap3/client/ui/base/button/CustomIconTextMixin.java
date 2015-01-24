@@ -49,7 +49,7 @@ import com.google.gwt.user.client.ui.Widget;
  * @author Vicente J. Ruiz Jurado (adaptation for kune)
  */
 public class CustomIconTextMixin<T extends ComplexWidget & HasText & HasIcon & HasIconPosition>
-implements HasText, HasIcon, HasIconPosition {
+    implements HasText, HasIcon, HasIconPosition {
   private static final String DEF = "16px";
   private Icon icon;
   private boolean iconBordered = false;
@@ -151,9 +151,9 @@ implements HasText, HasIcon, HasIconPosition {
           return position;
         }
 
-        private int addOtherSeparator(final boolean hasIconImage, final boolean hasIconRightImage,
-            final boolean hasIconLabel, final int position) {
-          if (hasIconImage || hasIconRightImage || hasIconLabel) {
+        private int addOtherSeparator(final boolean hasIconType, final boolean hasIconImage,
+            final boolean hasIconRightImage, final boolean hasIconLabel, final int position) {
+          if (!hasIconType && (hasIconImage || hasIconRightImage || hasIconLabel)) {
             widget.insert(separator2, position);
           }
           return position;
@@ -214,7 +214,8 @@ implements HasText, HasIcon, HasIconPosition {
               widget.insert(separator, position);
             }
             position = addOtherIcons(hasIconImage, hasIconRightImage, hasIconLabel, position);
-            position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
+            position = addOtherSeparator(hasIconType, hasIconImage, hasIconRightImage, hasIconLabel,
+                position);
           }
 
           if (text.getText() != null && text.getText().length() > 0
@@ -231,7 +232,8 @@ implements HasText, HasIcon, HasIconPosition {
               widget.insert(separator, position++);
               widget.insert(icon, position++);
             }
-            position = addOtherSeparator(hasIconImage, hasIconRightImage, hasIconLabel, position);
+            position = addOtherSeparator(hasIconType, hasIconImage, hasIconRightImage, hasIconLabel,
+                position);
             position = addOtherIcons(hasIconImage, hasIconRightImage, hasIconLabel, position);
           }
           renderScheduled = false;

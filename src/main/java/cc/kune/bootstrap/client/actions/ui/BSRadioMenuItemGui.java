@@ -22,7 +22,6 @@
  */
 package cc.kune.bootstrap.client.actions.ui;
 
-import cc.kune.bootstrap.client.ui.CheckListItem;
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 import cc.kune.bootstrap.client.ui.RadioListItem;
 import cc.kune.common.client.actions.AbstractAction;
@@ -45,13 +44,12 @@ import com.google.gwt.user.client.Event;
  */
 public class BSRadioMenuItemGui extends AbstractBSMenuItemGui {
 
-  private void confCheckListener(final MenuCheckItemDescriptor descriptor,
-      final ComplexAnchorListItem checkItem) {
+  private void confCheckListener(final MenuRadioItemDescriptor descriptor) {
     descriptor.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {
-        if (event.getPropertyName().equals(MenuRadioItemDescriptor.CHECKED)) {
-          ((CheckListItem) checkItem).setChecked((Boolean) event.getNewValue());
+        if (event.getPropertyName().equals(MenuCheckItemDescriptor.CHECKED)) {
+          setChecked((Boolean) event.getNewValue());
         }
       }
     });
@@ -65,7 +63,7 @@ public class BSRadioMenuItemGui extends AbstractBSMenuItemGui {
       public void onClick(final ClickEvent event) {
         final AbstractAction action = descriptor.getAction();
         if (action != null) {
-          if (descriptor instanceof MenuCheckItemDescriptor) {
+          if (descriptor instanceof MenuRadioItemDescriptor) {
             final MenuRadioItemDescriptor checkItem = (MenuRadioItemDescriptor) descriptor;
             if (!checkItem.isChecked()) {
               checkItem.setChecked(true);
@@ -82,7 +80,7 @@ public class BSRadioMenuItemGui extends AbstractBSMenuItemGui {
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.create(descriptor);
-    confCheckListener((MenuRadioItemDescriptor) descriptor, item);
+    confCheckListener((MenuRadioItemDescriptor) descriptor);
     return this;
   }
 

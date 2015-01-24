@@ -34,16 +34,19 @@ public class MenuRadioItemDescriptor extends MenuCheckItemDescriptor {
 
   /** The Constant CHECKED_ITEM. */
   public static final String CHECKED_ITEM = "-checkeditem";
-  
+
   /** The group. */
   private final String group;
 
   /**
    * Instantiates a new menu radio item descriptor.
    *
-   * @param parent the parent
-   * @param action the action
-   * @param group the group
+   * @param parent
+   *          the parent
+   * @param action
+   *          the action
+   * @param group
+   *          the group
    */
   public MenuRadioItemDescriptor(final MenuDescriptor parent, final AbstractAction action,
       final String group) {
@@ -60,8 +63,11 @@ public class MenuRadioItemDescriptor extends MenuCheckItemDescriptor {
     return group;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor#getType()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor#getType()
    */
   @Override
   public Class<?> getType() {
@@ -77,8 +83,12 @@ public class MenuRadioItemDescriptor extends MenuCheckItemDescriptor {
     return group + CHECKED_ITEM;
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor#setChecked(boolean)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.descrip.MenuCheckItemDescriptor#setChecked
+   * (boolean)
    */
   @Override
   public void setChecked(final boolean checked) {

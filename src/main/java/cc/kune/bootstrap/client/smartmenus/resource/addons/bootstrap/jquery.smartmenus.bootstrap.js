@@ -21,7 +21,7 @@
 						// these are some good default options that should work for all
 						// you can, of course, tweak these as you like
 						subMenusSubOffsetX: 2,
-            subIndicators: false,
+            // subIndicators: false,
 						subMenusSubOffsetY: -6,
 						subIndicatorsPos: 'append',
 						subIndicatorsText: '...',
