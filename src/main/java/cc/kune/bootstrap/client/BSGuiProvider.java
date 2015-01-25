@@ -26,7 +26,6 @@ import cc.kune.bootstrap.client.actions.ui.BSButtonGui;
 import cc.kune.bootstrap.client.actions.ui.BSCheckMenuItemGui;
 import cc.kune.bootstrap.client.actions.ui.BSIconLabelGui;
 import cc.kune.bootstrap.client.actions.ui.BSLabelGui;
-import cc.kune.bootstrap.client.actions.ui.BSToolbarMenuGui;
 import cc.kune.bootstrap.client.actions.ui.BSMenuHeaderGui;
 import cc.kune.bootstrap.client.actions.ui.BSMenuItemGui;
 import cc.kune.bootstrap.client.actions.ui.BSMenuSeparatorGui;
@@ -35,7 +34,9 @@ import cc.kune.bootstrap.client.actions.ui.BSRadioMenuItemGui;
 import cc.kune.bootstrap.client.actions.ui.BSSubMenuGui;
 import cc.kune.bootstrap.client.actions.ui.BSToolbarGui;
 import cc.kune.bootstrap.client.actions.ui.BSToolbarItemGui;
+import cc.kune.bootstrap.client.actions.ui.BSToolbarMenuGui;
 import cc.kune.bootstrap.client.actions.ui.BSToolbarSeparatorGui;
+import cc.kune.bootstrap.client.actions.ui.BSWidgetMenuGui;
 import cc.kune.bootstrap.client.smartmenus.SmartMenusBundle;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
@@ -52,6 +53,7 @@ import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.inject.Inject;
@@ -77,7 +79,8 @@ public class BSGuiProvider {
       final Provider<BSLabelGui> labelGui, final Provider<BSIconLabelGui> iconLabelGui,
       final Provider<BSToolbarGui> toolbarGui,
       final Provider<BSToolbarSeparatorGui> toolbarSeparatorGui,
-      final Provider<BSMenuHeaderGui> menuHeaderGui, final Provider<BSToolbarItemGui> toolbarItem) {
+      final Provider<BSMenuHeaderGui> menuHeaderGui, final Provider<BSToolbarItemGui> toolbarItem,
+      final Provider<BSWidgetMenuGui> widgetMenu) {
 
     guiProvider.register(SubMenuDescriptor.class, subMenuGui);
     guiProvider.register(MenuDescriptor.class, menuGui);
@@ -93,6 +96,7 @@ public class BSGuiProvider {
     guiProvider.register(ToolbarDescriptor.class, toolbarGui);
     guiProvider.register(ToolbarSeparatorDescriptor.class, toolbarSeparatorGui);
     guiProvider.register(ToolbarItemDescriptor.class, toolbarItem);
+    guiProvider.register(WidgetMenuDescriptor.class, widgetMenu);
 
     ScriptInjector.fromString(BootstrapBundle.INSTANCE.theme().getText()).setWindow(
         ScriptInjector.TOP_WINDOW).inject();

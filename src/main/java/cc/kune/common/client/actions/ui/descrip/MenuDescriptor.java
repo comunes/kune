@@ -28,9 +28,8 @@ import cc.kune.common.client.actions.BaseAction;
 
 import com.google.gwt.resources.client.ImageResource;
 
-public class MenuDescriptor extends AbstractParentGuiActionDescrip {
+public class MenuDescriptor extends GenericMenuDescriptor {
 
-  public static final String MENU_CLEAR = "menuclear";
   public static final String MENU_HIDE = "hidemenu";
   public static final String MENU_ONHIDE = "menuonhide";
   public static final String MENU_ONSHOW = "menuonshow";
@@ -129,7 +128,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
   /**
    * Sets the standalone property (if the menu should have button (for a
    * toolbar) or is a menu independent.
-   * 
+   *
    * @param standalone
    *          the new standalone
    */
@@ -144,7 +143,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
   /**
    * Sets if the menu will ver vertical or horizontal (set this property before
    * attach it).
-   * 
+   *
    * @param vertical
    *          the new vertical
    */
@@ -161,7 +160,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
 
   /**
    * Show the menu near the Element object specified
-   * 
+   *
    * @param object
    *          the element to show menu near of it
    */
@@ -172,7 +171,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
 
   /**
    * Show the menu near the position specified
-   * 
+   *
    * @param position
    *          the position to show menu near of it
    */
@@ -183,7 +182,7 @@ public class MenuDescriptor extends AbstractParentGuiActionDescrip {
 
   /**
    * Show the menu near the Element id specified
-   * 
+   *
    * @param id
    *          the element id to show menu near of it
    */

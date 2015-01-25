@@ -49,6 +49,7 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ActionStyles;
+import cc.kune.common.client.actions.BaseAction;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
@@ -69,6 +70,7 @@ import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.notify.SimpleUserMessage;
@@ -359,12 +361,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final Anchor dropDownAnchor = new Anchor();
     final Image thumb = new Image("http://lorempixel.com/30/30");
     dropDownAnchor.add(thumb);
-    // thumb.getElement().setAttribute(Attributes.DATA_TOGGLE,
-    // Toggle.DROPDOWN.getToggle());
-    // dropDownAnchor.add(thumb);
-
-    // final Anchor dropDownAnchor = new Anchor();
-    // dropDownAnchor.setText("Label dropdown");
     dropDownAnchor.setDataToggle(Toggle.DROPDOWN);
     dropDown.add(dropDownAnchor);
 
@@ -376,6 +372,21 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     dditem2.setIconUrl("http://lorempixel.com/101/101");
     dropDownMenu.add(dditem1);
     dropDownMenu.add(dditem2);
+
+    // The same with descriptors
+
+    final Image thumb2 = new Image("http://lorempixel.com/30/30");
+    final WidgetMenuDescriptor widgetMenu = new WidgetMenuDescriptor(thumb2);
+    new MenuItemDescriptor(widgetMenu, new BaseAction("Menuitem desc in widget 1", "Some tooltip"));
+    new MenuItemDescriptor(widgetMenu, new BaseAction("Menuitem desc in widget 2", "Some tooltip"));
+
+    // Now with a button
+
+    final WidgetMenuDescriptor btnWithMenu = new WidgetMenuDescriptor();
+    final ButtonDescriptor btnForMenu = new ButtonDescriptor("Button desc with menu");
+    btnForMenu.withIcon("http://lorempixel.com/30/30").withParent(btnWithMenu);
+    new MenuItemDescriptor(btnWithMenu, new BaseAction("Menuitem desc in widget 1", "Some tooltip"));
+    new MenuItemDescriptor(btnWithMenu, new BaseAction("Menuitem desc in widget 2", "Some tooltip"));
 
     final CustomButton btn = new CustomButton("Text custom button");
     Tooltip.to(btn, "Show the dropdown at 100,100 position (or hide it)");
@@ -426,7 +437,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // TODO Add more tests here
 
     final FlowActionExtensible flow = new FlowActionExtensible();
-    flow.add(toolbarDesc);
+    flow.add(toolbarDesc, widgetMenu, btnWithMenu);
 
     RootPanel.get().add(flow);
     RootPanel.get().add(new HTML("<br>"));

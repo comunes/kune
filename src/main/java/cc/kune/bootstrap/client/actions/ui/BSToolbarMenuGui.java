@@ -66,7 +66,7 @@ public class BSToolbarMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
    * .String)
@@ -102,7 +102,7 @@ public class BSToolbarMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -213,52 +213,47 @@ public class BSToolbarMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
   public void setEnabled(final boolean enabled) {
-
     menu.setEnabled(enabled);
-
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
    */
   @Override
   public void setIcon(final KuneIcon icon) {
-
     menu.setIcon(icon);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
    */
   @Override
   public void setIconBackColor(final String backgroundColor) {
-
     menu.setIconBackColor(backgroundColor);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
    * .gwt.resources.client.ImageResource)
    */
   @Override
   public void setIconResource(final ImageResource resource) {
-
     menu.setIconResource(resource);
   }
 
@@ -269,39 +264,36 @@ public class BSToolbarMenuGui extends AbstractBSMenuGui {
    *          the new icon right resource
    */
   public void setIconRightResource(final ImageResource resource) {
-
     menu.setIconRightResource(resource);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
    */
   @Override
   public void setIconStyle(final String style) {
-
     menu.setIconStyle(style);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
    */
   @Override
   public void setIconUrl(final String url) {
-
     menu.setIconUrl(url);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -313,27 +305,24 @@ public class BSToolbarMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
    */
   @Override
   public void setToolTipText(final String tooltipText) {
-
     setToolTipTextNextTo(menu, tooltipText);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
   public void setVisible(final boolean visible) {
-
     menu.setVisible(visible);
-
   }
 
   @Override
@@ -356,7 +345,6 @@ public class BSToolbarMenuGui extends AbstractBSMenuGui {
     } else {
       menu.show();
     }
-
   }
 
 }

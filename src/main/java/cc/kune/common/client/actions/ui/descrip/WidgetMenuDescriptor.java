@@ -23,48 +23,41 @@
 package cc.kune.common.client.actions.ui.descrip;
 
 import cc.kune.common.client.actions.AbstractAction;
-import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.BaseAction;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ButtonDescriptor.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
-public class ButtonDescriptor extends AbstractGuiActionDescrip {
+import com.google.gwt.user.client.ui.IsWidget;
 
-  /**
-   * Instantiates a new button descriptor.
-   *
-   * @param action
-   *          the action
-   */
-  public ButtonDescriptor(final AbstractAction action) {
+public class WidgetMenuDescriptor extends GenericMenuDescriptor {
+
+  public static final String WIDGET = "widget_menu";
+
+  public WidgetMenuDescriptor() {
+    this(new BaseAction(null, null));
+  }
+
+  public WidgetMenuDescriptor(final AbstractAction action) {
     super(action);
+    setParent(NO_PARENT);
+    putValue(MENU_CLEAR, false);
   }
 
-  public ButtonDescriptor(final AbstractGuiActionDescrip descr) {
-    super(descr);
-  }
-
-  public ButtonDescriptor(final String text) {
-    this(text, new BaseAction(null, null));
-  }
-
-  public ButtonDescriptor(final String text, final AbstractAction action) {
+  public WidgetMenuDescriptor(final AbstractAction action, final IsWidget widget) {
     this(action);
-    putValue(Action.NAME, text);
+    putValue(WIDGET, widget);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
-   */
+  public WidgetMenuDescriptor(final IsWidget widget) {
+    this(new BaseAction(null, null), widget);
+  }
+
+  @Override
+  public void clear() {
+    toggle(MENU_CLEAR);
+    super.clear();
+  }
+
   @Override
   public Class<?> getType() {
-    return ButtonDescriptor.class;
+    return WidgetMenuDescriptor.class;
   }
 }
