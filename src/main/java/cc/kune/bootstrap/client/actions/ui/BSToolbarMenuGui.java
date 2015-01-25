@@ -31,7 +31,6 @@ import org.gwtbootstrap3.client.shared.event.ShowEvent;
 import org.gwtbootstrap3.client.shared.event.ShowHandler;
 import org.gwtbootstrap3.client.shared.event.ShownEvent;
 import org.gwtbootstrap3.client.shared.event.ShownHandler;
-import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.constants.Styles;
 
 import cc.kune.bootstrap.client.ui.ComplexListDropDown;
@@ -52,16 +51,13 @@ import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
- * The Class BSMenuGui.
+ * The Class BSToolbarMenuGui.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class BSMenuGui extends AbstractBSMenuGui {
+public class BSToolbarMenuGui extends AbstractBSMenuGui {
 
   private ComplexListDropDown menu;
-
-  /** The not stand alone. */
-  private boolean notStandAlone;
 
   @Override
   public void add(final UIObject uiObject) {
@@ -70,20 +66,17 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
    * .String)
    */
   @Override
   protected void addStyle(final String style) {
-    if (notStandAlone) {
-      menu.addStyleName(style);
-    }
+    menu.addStyleName(style);
   }
 
   private void clearCurrentActiveItem() {
-
     final int count = menu.getWidgetCount();
     for (int cur = 0; cur < count; cur++) {
       final Widget item = menu.getWidget(cur);
@@ -109,7 +102,7 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -118,87 +111,79 @@ public class BSMenuGui extends AbstractBSMenuGui {
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
     descriptor.putValue(ParentWidget.PARENT_UI, this);
-    // Standalone menus are menus without and associated button in a toolbar
-    // (sometimes, a menu showed in a grid, or other special widgets)
-
-    notStandAlone = !((MenuDescriptor) descriptor).isStandalone();
-    if (notStandAlone) {
-      menu = new ComplexListDropDown();
-      // TODO
-      // final Boolean inline = (Boolean)
-      // descriptor.getValue(MenuDescriptor.MENU_VERTICAL);
-      // menu.setInline(inline);
-      // descriptor.putValue(MenuDescriptor.MENU_SHOW_NEAR_TO, button);
-      final ImageResource rightIcon = ((MenuDescriptor) descriptor).getRightIcon();
-      if (rightIcon != null) {
-        menu.setIconRightResource(rightIcon);
+    menu = new ComplexListDropDown();
+    // TODO
+    // final Boolean inline = (Boolean)
+    // descriptor.getValue(MenuDescriptor.MENU_VERTICAL);
+    // menu.setInline(inline);
+    // descriptor.putValue(MenuDescriptor.MENU_SHOW_NEAR_TO, button);
+    final ImageResource rightIcon = ((MenuDescriptor) descriptor).getRightIcon();
+    if (rightIcon != null) {
+      menu.setIconRightResource(rightIcon);
+    }
+    menu.addHideHandler(new HideHandler() {
+      @Override
+      public void onHide(final HideEvent hideEvent) {
+        descriptor.putValue(MenuDescriptor.MENU_ONHIDE, menu);
       }
-      menu.addHideHandler(new HideHandler() {
-        @Override
-        public void onHide(final HideEvent hideEvent) {
-          descriptor.putValue(MenuDescriptor.MENU_ONHIDE, menu);
-        }
-      });
-      menu.addShowHandler(new ShowHandler() {
+    });
+    menu.addShowHandler(new ShowHandler() {
 
-        @Override
-        public void onShow(final ShowEvent showEvent) {
-          hideTooltip();
-        }
-      });
-      menu.addShownHandler(new ShownHandler() {
-        @Override
-        public void onShown(final ShownEvent event) {
-          hideTooltip();
-        }
-      });
-      descriptor.addPropertyChangeListener(new PropertyChangeListener() {
-        private void activeNextItem(final int increment) {
-          final int count = menu.getWidgetCount();
-          for (int cur = 0; cur < count && cur >= 0; cur = cur + increment) {
-            final Widget item = menu.getWidget(cur);
-            final List<String> styles = Arrays.asList(item.getStyleName().split(" "));
-            if (styles.contains(Styles.ACTIVE)) {
-              item.removeStyleName(Styles.ACTIVE);
-              final int proposed = cur + increment;
-              final int next = proposed >= count ? 0 : (proposed < 0) ? count - 1 : proposed;
-              menu.getWidget(next).addStyleName(Styles.ACTIVE);
-              break;
-            }
+      @Override
+      public void onShow(final ShowEvent showEvent) {
+        hideTooltip();
+      }
+    });
+    menu.addShownHandler(new ShownHandler() {
+      @Override
+      public void onShown(final ShownEvent event) {
+        hideTooltip();
+      }
+    });
+    descriptor.addPropertyChangeListener(new PropertyChangeListener() {
+      private void activeNextItem(final int increment) {
+        final int count = menu.getWidgetCount();
+        for (int cur = 0; cur < count && cur >= 0; cur = cur + increment) {
+          final Widget item = menu.getWidget(cur);
+          final List<String> styles = Arrays.asList(item.getStyleName().split(" "));
+          if (styles.contains(Styles.ACTIVE)) {
+            item.removeStyleName(Styles.ACTIVE);
+            final int proposed = cur + increment;
+            final int next = proposed >= count ? 0 : (proposed < 0) ? count - 1 : proposed;
+            menu.getWidget(next).addStyleName(Styles.ACTIVE);
+            break;
           }
         }
+      }
 
-        @Override
-        public void propertyChange(final PropertyChangeEvent event) {
-          if (event.getPropertyName().equals(MenuDescriptor.MENU_HIDE)) {
-            if (menu != null && menu.isVisible()) {
-              menu.hide();
-            }
-          } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW)) {
-            show();
-          } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_DOWN)) {
-            activeNextItem(1);
-          } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_UP)) {
-            activeNextItem(-1);
-          } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECT_ITEM)) {
-            final HasMenuItem item = (HasMenuItem) ((MenuItemDescriptor) descriptor.getValue(MenuDescriptor.MENU_SELECT_ITEM)).getValue(MenuItemDescriptor.UI);
-            clearCurrentActiveItem();
-            ((Widget) item).addStyleName(Styles.ACTIVE);
+      @Override
+      public void propertyChange(final PropertyChangeEvent event) {
+        if (event.getPropertyName().equals(MenuDescriptor.MENU_HIDE)) {
+          if (menu != null && menu.isVisible()) {
+            menu.hide();
           }
+        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW)) {
+          show();
+        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_DOWN)) {
+          activeNextItem(1);
+        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_UP)) {
+          activeNextItem(-1);
+        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECT_ITEM)) {
+          final HasMenuItem item = (HasMenuItem) ((MenuItemDescriptor) descriptor.getValue(MenuDescriptor.MENU_SELECT_ITEM)).getValue(MenuItemDescriptor.UI);
+          clearCurrentActiveItem();
+          ((Widget) item).addStyleName(Styles.ACTIVE);
         }
-      });
+      }
+    });
 
-      final String id = descriptor.getId();
-      if (id != null && "undefined".equals(id)) {
-        menu.ensureDebugId(id);
-      }
-      if (descriptor.isChild()) {
-        child = menu;
-      } else {
-        initWidget(menu);
-      }
+    final String id = descriptor.getId();
+    if (id != null && "undefined".equals(id)) {
+      menu.ensureDebugId(id);
+    }
+    if (descriptor.isChild()) {
+      child = menu;
     } else {
-      initWidget(new Label());
+      initWidget(menu);
     }
     super.create(descriptor);
     configureItemFromProperties();
@@ -228,56 +213,53 @@ public class BSMenuGui extends AbstractBSMenuGui {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
   public void setEnabled(final boolean enabled) {
-    if (notStandAlone) {
-      menu.setEnabled(enabled);
-    }
+
+    menu.setEnabled(enabled);
+
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
    */
   @Override
   public void setIcon(final KuneIcon icon) {
-    if (notStandAlone) {
-      menu.setIcon(icon);
-    }
+
+    menu.setIcon(icon);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
    */
   @Override
   public void setIconBackColor(final String backgroundColor) {
-    if (notStandAlone) {
-      menu.setIconBackColor(backgroundColor);
-    }
+
+    menu.setIconBackColor(backgroundColor);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
    * .gwt.resources.client.ImageResource)
    */
   @Override
   public void setIconResource(final ImageResource resource) {
-    if (notStandAlone) {
-      menu.setIconResource(resource);
-    }
+
+    menu.setIconResource(resource);
   }
 
   /**
@@ -287,77 +269,71 @@ public class BSMenuGui extends AbstractBSMenuGui {
    *          the new icon right resource
    */
   public void setIconRightResource(final ImageResource resource) {
-    if (notStandAlone) {
-      menu.setIconRightResource(resource);
-    }
+
+    menu.setIconRightResource(resource);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
    */
   @Override
   public void setIconStyle(final String style) {
-    if (notStandAlone) {
-      menu.setIconStyle(style);
-    }
+
+    menu.setIconStyle(style);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
    */
   @Override
   public void setIconUrl(final String url) {
-    if (notStandAlone) {
-      menu.setIconUrl(url);
-    }
+
+    menu.setIconUrl(url);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
   @Override
   public void setText(final String text) {
-    if (notStandAlone) {
-      // FIXME descriptor.getDirection()
-      menu.setMenuText(text);
-    }
+    // FIXME descriptor.getDirection()
+    menu.setMenuText(text);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
    */
   @Override
   public void setToolTipText(final String tooltipText) {
-    if (notStandAlone) {
-      setToolTipTextNextTo(menu, tooltipText);
-    }
+
+    setToolTipTextNextTo(menu, tooltipText);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
   public void setVisible(final boolean visible) {
-    if (notStandAlone) {
-      menu.setVisible(visible);
-    }
+
+    menu.setVisible(visible);
+
   }
 
   @Override

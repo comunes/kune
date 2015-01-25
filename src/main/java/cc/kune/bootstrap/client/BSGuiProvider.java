@@ -26,7 +26,7 @@ import cc.kune.bootstrap.client.actions.ui.BSButtonGui;
 import cc.kune.bootstrap.client.actions.ui.BSCheckMenuItemGui;
 import cc.kune.bootstrap.client.actions.ui.BSIconLabelGui;
 import cc.kune.bootstrap.client.actions.ui.BSLabelGui;
-import cc.kune.bootstrap.client.actions.ui.BSMenuGui;
+import cc.kune.bootstrap.client.actions.ui.BSToolbarMenuGui;
 import cc.kune.bootstrap.client.actions.ui.BSMenuHeaderGui;
 import cc.kune.bootstrap.client.actions.ui.BSMenuItemGui;
 import cc.kune.bootstrap.client.actions.ui.BSMenuSeparatorGui;
@@ -69,7 +69,7 @@ public class BSGuiProvider {
    */
   @Inject
   public BSGuiProvider(final GuiProvider guiProvider, final Provider<BSSubMenuGui> subMenuGui,
-      final Provider<BSMenuGui> menuGui, final Provider<BSMenuItemGui> menuItemGui,
+      final Provider<BSToolbarMenuGui> menuGui, final Provider<BSMenuItemGui> menuItemGui,
       final Provider<BSCheckMenuItemGui> checkMenuItemGui,
       final Provider<BSRadioMenuItemGui> radioMenuItemGui,
       final Provider<BSMenuSeparatorGui> menuSeparatorGui,

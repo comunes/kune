@@ -12,7 +12,7 @@ public class RadioListItem extends AbstractCheckListItem {
   }
 
   public RadioListItem(final String text) {
-    super(CHECKED_ICON, UNCHECKED_ICON);
+    this();
     setText(text);
   }
 }
