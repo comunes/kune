@@ -40,21 +40,23 @@ import com.google.gwt.user.client.ui.Composite;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractComposedGuiItem extends Composite implements IsActionExtensible {
-  
+
   /** The bindings. */
   private final GuiProvider bindings;
-  
+
   /** The gui items. */
   private GuiActionDescCollection guiItems;
-  
+
   /** The i18n. */
   private final HasRTL i18n;
 
   /**
    * Instantiates a new abstract composed gui item.
    *
-   * @param bindings the bindings
-   * @param i18n the i18n
+   * @param bindings
+   *          the bindings
+   * @param i18n
+   *          the i18n
    */
   public AbstractComposedGuiItem(final GuiProvider bindings, final HasRTL i18n) {
     super();
@@ -65,7 +67,8 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
   /**
    * Adds the.
    *
-   * @param descriptors the descriptors
+   * @param descriptors
+   *          the descriptors
    */
   public void add(final GuiActionDescCollection descriptors) {
     for (final GuiActionDescrip descriptor : descriptors) {
@@ -73,8 +76,12 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip[])
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.
+   * client.actions.ui.descrip.GuiActionDescrip[])
    */
   @Override
   public void add(final GuiActionDescrip... descriptors) {
@@ -83,8 +90,12 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.
+   * client.actions.ui.descrip.GuiActionDescrip)
    */
   @Override
   public void add(final GuiActionDescrip descriptor) {
@@ -95,7 +106,8 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
   /**
    * Adds the actions.
    *
-   * @param descriptors the descriptors
+   * @param descriptors
+   *          the descriptors
    */
   public void addActions(final List<GuiActionDescrip> descriptors) {
     for (final GuiActionDescrip descriptor : descriptors) {
@@ -103,8 +115,12 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
     }
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.IsActionExtensible#addAll(cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.IsActionExtensible#addAll(cc.kune.common
+   * .client.actions.ui.descrip.GuiActionDescCollection)
    */
   @Override
   public void addAll(final GuiActionDescCollection descriptors) {
@@ -116,47 +132,55 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
   /**
    * Adds the widget.
    *
-   * @param item the item
+   * @param item
+   *          the item
    */
   protected abstract void addWidget(AbstractGuiItem item);
 
   /**
    * Before add widget.
    *
-   * @param descrip the descrip
+   * @param descrip
+   *          the descrip
    */
   protected void beforeAddWidget(final GuiActionDescrip descrip) {
-    if (descrip.mustBeAdded()) {
-      if (bindings.size() == 0) {
-        throw new UIException("Bindings yet not registered aka injected");
-      }
-      assert bindings.size() != 0;
-      final GuiBinding binding = bindings.get(descrip.getType());
-      if (binding == null) {
-        throw new UIException("Unknown binding for: " + descrip);
-      } else {
-        // We set at that moment if the widget should be RTL or not
-        descrip.setRTL(i18n.isRTL());
-        final AbstractGuiItem item = binding.create(descrip);
-        if (binding.shouldBeAdded()) {
-          // TODO Change this ^ to shouldBeAttached
-          if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
-            addWidget(item);
-          } else {
-            insertWidget(item, descrip.getPosition());
+    try {
+      if (descrip.mustBeAdded()) {
+        if (bindings.size() == 0) {
+          throw new UIException("Bindings yet not registered aka injected");
+        }
+        assert bindings.size() != 0;
+        final GuiBinding binding = bindings.get(descrip.getType());
+        if (binding == null) {
+          throw new UIException("Unknown binding for: " + descrip);
+        } else {
+          // We set at that moment if the widget should be RTL or not
+          descrip.setRTL(i18n.isRTL());
+          final AbstractGuiItem item = binding.create(descrip);
+          if (binding.shouldBeAdded()) {
+            // TODO Change this ^ to shouldBeAttached
+            if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
+              addWidget(item);
+            } else {
+              insertWidget(item, descrip.getPosition());
+            }
+          }
+          if (descrip instanceof HasChilds) {
+            for (final GuiActionDescrip child : ((AbstractParentGuiActionDescrip) descrip).getChilds()) {
+              // Log.info("Child added: " + child.getValue(Action.NAME));
+              add(child);
+            }
           }
         }
-        if (descrip instanceof HasChilds) {
-          for (final GuiActionDescrip child : ((AbstractParentGuiActionDescrip) descrip).getChilds()) {
-            // Log.info("Child added: " + child.getValue(Action.NAME));
-            add(child);
-          }
-        }
       }
+    } catch (final ClassCastException e) {
+      throw new UIException("Class cath error in " + descrip);
     }
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.IsActionExtensible#clear()
    */
   @Override
@@ -179,8 +203,10 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
   /**
    * Insert widget.
    *
-   * @param item the item
-   * @param position the position
+   * @param item
+   *          the item
+   * @param position
+   *          the position
    */
   protected abstract void insertWidget(AbstractGuiItem item, int position);
 }

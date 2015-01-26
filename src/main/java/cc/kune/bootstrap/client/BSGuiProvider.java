@@ -26,6 +26,7 @@ import cc.kune.bootstrap.client.actions.ui.BSButtonGui;
 import cc.kune.bootstrap.client.actions.ui.BSCheckMenuItemGui;
 import cc.kune.bootstrap.client.actions.ui.BSIconLabelGui;
 import cc.kune.bootstrap.client.actions.ui.BSLabelGui;
+import cc.kune.bootstrap.client.actions.ui.BSMenuGui;
 import cc.kune.bootstrap.client.actions.ui.BSMenuHeaderGui;
 import cc.kune.bootstrap.client.actions.ui.BSMenuItemGui;
 import cc.kune.bootstrap.client.actions.ui.BSMenuSeparatorGui;
@@ -52,6 +53,7 @@ import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 
@@ -71,7 +73,7 @@ public class BSGuiProvider {
    */
   @Inject
   public BSGuiProvider(final GuiProvider guiProvider, final Provider<BSSubMenuGui> subMenuGui,
-      final Provider<BSToolbarMenuGui> menuGui, final Provider<BSMenuItemGui> menuItemGui,
+      final Provider<BSToolbarMenuGui> toolbarMenuGui, final Provider<BSMenuItemGui> menuItemGui,
       final Provider<BSCheckMenuItemGui> checkMenuItemGui,
       final Provider<BSRadioMenuItemGui> radioMenuItemGui,
       final Provider<BSMenuSeparatorGui> menuSeparatorGui,
@@ -80,7 +82,7 @@ public class BSGuiProvider {
       final Provider<BSToolbarGui> toolbarGui,
       final Provider<BSToolbarSeparatorGui> toolbarSeparatorGui,
       final Provider<BSMenuHeaderGui> menuHeaderGui, final Provider<BSToolbarItemGui> toolbarItem,
-      final Provider<BSWidgetMenuGui> widgetMenu) {
+      final Provider<BSWidgetMenuGui> widgetMenu, final Provider<BSMenuGui> menuGui) {
 
     guiProvider.register(SubMenuDescriptor.class, subMenuGui);
     guiProvider.register(MenuDescriptor.class, menuGui);
@@ -95,6 +97,7 @@ public class BSGuiProvider {
     guiProvider.register(LabelDescriptor.class, labelGui);
     guiProvider.register(ToolbarDescriptor.class, toolbarGui);
     guiProvider.register(ToolbarSeparatorDescriptor.class, toolbarSeparatorGui);
+    guiProvider.register(ToolbarMenuDescriptor.class, toolbarMenuGui);
     guiProvider.register(ToolbarItemDescriptor.class, toolbarItem);
     guiProvider.register(WidgetMenuDescriptor.class, widgetMenu);
 

@@ -68,6 +68,7 @@ import cc.kune.common.client.actions.ui.descrip.PushButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
@@ -150,7 +151,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
      * .common.client.actions.ActionEvent)
      */
@@ -382,11 +383,10 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     // Now with a button
 
-    final WidgetMenuDescriptor btnWithMenu = new WidgetMenuDescriptor();
-    final ButtonDescriptor btnForMenu = new ButtonDescriptor("Button desc with menu");
-    btnForMenu.withIcon("http://lorempixel.com/30/30").withParent(btnWithMenu);
-    new MenuItemDescriptor(btnWithMenu, new BaseAction("Menuitem desc in widget 1", "Some tooltip"));
-    new MenuItemDescriptor(btnWithMenu, new BaseAction("Menuitem desc in widget 2", "Some tooltip"));
+    final MenuDescriptor classicMenu = new MenuDescriptor("Button classic menu");
+    classicMenu.withIcon("http://lorempixel.com/30/30");
+    new MenuItemDescriptor(classicMenu, new BaseAction("Menuitem desc in widget 1", "Some tooltip"));
+    new MenuItemDescriptor(classicMenu, new BaseAction("Menuitem desc in widget 2", "Some tooltip"));
 
     final CustomButton btn = new CustomButton("Text custom button");
     Tooltip.to(btn, "Show the dropdown at 100,100 position (or hide it)");
@@ -437,7 +437,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // TODO Add more tests here
 
     final FlowActionExtensible flow = new FlowActionExtensible();
-    flow.add(toolbarDesc, widgetMenu, btnWithMenu);
+    flow.add(toolbarDesc, widgetMenu, classicMenu);
 
     RootPanel.get().add(flow);
     RootPanel.get().add(new HTML("<br>"));
@@ -576,7 +576,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     new BlinkAnimation(tab, 350).animate(5);
 
     RootPanel.get().add(absolutePanel);
-    // UserNotifierGrowl.close(growl);
+
   }
 
   /**
@@ -595,17 +595,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
         NotifyUser.showProgress("Savingggg");
         NotifyUser.askConfirmation("Some title", "Some message", "Yeah!", "Nein",
             new SimpleResponseCallback() {
+              @Override
+              public void onCancel() {
+                NotifyUser.error("Cancel");
+              }
 
           @Override
-          public void onCancel() {
-            NotifyUser.error("Cancel");
-          }
-
-          @Override
-          public void onSuccess() {
-            NotifyUser.info("Success");
-          }
-        });
+              public void onSuccess() {
+                NotifyUser.info("Success");
+              }
+            });
       }
     };
 
@@ -657,7 +656,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final KeyStroke shortcut2 = Shortcut.getShortcut(false, true, false, false, Character.valueOf('D'));
     shortcutRegister.put(shortcut2, action2);
 
-    final MenuDescriptor menuDesc = new MenuDescriptor("Menu descr");
+    final ToolbarMenuDescriptor menuDesc = new ToolbarMenuDescriptor("Menu descr");
     menuDesc.setParent(toolbarDesc);
     menuDesc.setRightIcon(res.world16());
     menuDesc.withIcon(new KuneIcon('b')).withToolTip("Some menu tooltip").withShortcut(shortcut1,
@@ -764,12 +763,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?", false, true,
         Direction.LTR, new OnEnter() {
 
-      @Override
-      public void onEnter() {
-        NotifyUser.info("On Enter");
+          @Override
+          public void onEnter() {
+            NotifyUser.info("On Enter");
 
-      }
-    });
+          }
+        });
     builder.width("200px").height("200px").firstButtonTitle("Create").sndButtonTitle("Cancel");
     builder.regex(TextUtils.UNIX_NAME).regexText(
         "The name must contain only characters, numbers and dashes");
@@ -843,11 +842,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
         false, new ClickHandler() {
 
-      @Override
-      public void onClick(final ClickEvent event) {
-        userMsg.show("Testing");
-      }
-    });
+          @Override
+          public void onClick(final ClickEvent event) {
+            userMsg.show("Testing");
+          }
+        });
     thumb.setTooltip("Some thumb tooltip");
     thumb.setOnOverLabel(true);
     return thumb;
@@ -876,16 +875,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(button4, clientWidth - 90, clientHeight - 60);
     Tooltip.to(button,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button2,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button3,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button4,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
 
   }
 }

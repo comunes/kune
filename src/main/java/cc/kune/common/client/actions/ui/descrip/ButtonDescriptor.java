@@ -34,6 +34,10 @@ import cc.kune.common.client.actions.BaseAction;
  */
 public class ButtonDescriptor extends AbstractGuiActionDescrip {
 
+  public ButtonDescriptor() {
+    this(new BaseAction(null, null));
+  }
+
   /**
    * Instantiates a new button descriptor.
    *
@@ -59,7 +63,7 @@ public class ButtonDescriptor extends AbstractGuiActionDescrip {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.descrip.AbstractGuiActionDescrip#getType()
    */
