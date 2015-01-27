@@ -24,7 +24,7 @@ package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.BeforeActionCollection;
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.shared.i18n.I18n;
@@ -33,20 +33,20 @@ import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitebarSignOutLink.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SitebarSignOutLink extends ButtonDescriptor {
+public class SitebarSignOutLink extends ToolbarItemDescriptor {
 
   /**
    * The Class BeforeSignOut.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class BeforeSignOut extends BeforeActionCollection {
@@ -60,7 +60,7 @@ public class SitebarSignOutLink extends ButtonDescriptor {
 
   /**
    * Instantiates a new sitebar sign out link.
-   * 
+   *
    * @param action
    *          the action
    * @param eventBus

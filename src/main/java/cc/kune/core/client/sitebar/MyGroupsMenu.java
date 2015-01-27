@@ -23,10 +23,10 @@
 package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.actions.ActionStyles;
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuShowAction;
+import cc.kune.common.client.actions.ui.descrip.ToolbarMenuDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.TextUtils;
@@ -44,19 +44,19 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class MyGroupsMenu.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
-public class MyGroupsMenu extends MenuDescriptor {
+public class MyGroupsMenu extends ToolbarMenuDescriptor {
 
   /** The Constant MENU_ID. */
   public static final String MENU_ID = "k-sitebar-my-group";
@@ -87,7 +87,7 @@ public class MyGroupsMenu extends MenuDescriptor {
 
   /**
    * Instantiates a new my groups menu.
-   * 
+   *
    * @param downloadProvider
    *          the download provider
    * @param res
@@ -132,7 +132,7 @@ public class MyGroupsMenu extends MenuDescriptor {
     setStyles(ActionStyles.SITEBAR_STYLE);
     withText(I18n.t("Your groups"));
     withToolTip(I18n.t("See your groups or create a new one"));
-    withIcon(res.arrowdownsitebarSmall());
+    // withIcon(res.arrowdownsitebarSmall());
     withShortcut("Alt+M", global);
     eventBus.addHandler(MyGroupsChangedEvent.getType(),
         new MyGroupsChangedEvent.MyGroupsChangedHandler() {
@@ -153,7 +153,7 @@ public class MyGroupsMenu extends MenuDescriptor {
 
   /**
    * Adds the partipation to menu.
-   * 
+   *
    * @param group
    *          the group
    */
@@ -167,7 +167,7 @@ public class MyGroupsMenu extends MenuDescriptor {
 
   /**
    * Regenerate menu.
-   * 
+   *
    * @param isLogged
    *          the is logged
    */

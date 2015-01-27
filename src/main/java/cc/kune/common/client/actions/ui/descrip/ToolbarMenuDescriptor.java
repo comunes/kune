@@ -23,7 +23,17 @@
 
 package cc.kune.common.client.actions.ui.descrip;
 
+import cc.kune.common.client.actions.AbstractAction;
+
 public class ToolbarMenuDescriptor extends MenuDescriptor {
+
+  public ToolbarMenuDescriptor() {
+    super();
+  }
+
+  public ToolbarMenuDescriptor(final AbstractAction action) {
+    super(action);
+  }
 
   public ToolbarMenuDescriptor(final String text) {
     super(text);

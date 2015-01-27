@@ -36,7 +36,8 @@ public class ComplexNavbarNav extends NavbarNav implements ParentWidget {
    * @return the widget
    */
   public Widget addSeparator() {
-    final Label separator = new Label("|");
+    final Label separator = new Label("");
+    setPull(separator);
     this.add(separator);
     return separator;
   }
@@ -48,12 +49,14 @@ public class ComplexNavbarNav extends NavbarNav implements ParentWidget {
    */
   public Widget addSpacer() {
     final Label separator = new Label(" ");
+    setPull(separator);
     this.add(separator);
     return separator;
   }
 
   @Override
   public void insert(final int position, final UIObject uiObject) {
+    setPull(uiObject);
     super.insert((Widget) uiObject, position);
   }
 

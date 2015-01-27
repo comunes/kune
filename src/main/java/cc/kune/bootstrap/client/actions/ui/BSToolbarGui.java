@@ -32,6 +32,7 @@ import cc.kune.common.client.actions.ui.AbstractBasicGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.user.client.ui.HTMLPanel;
 
@@ -55,11 +56,12 @@ public class BSToolbarGui extends AbstractBasicGuiItem {
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
     String id = descriptor.getId();
-    if (id != null) {
+    if ("undefined".equals(id) || TextUtils.empty(id)) {
       id = HTMLPanel.createUniqueId();
     }
 
     final Navbar navbar = new Navbar();
+    navbar.addStyleName("k-toolbar-navbar");
     final NavbarHeader header = new NavbarHeader();
     final NavbarCollapseButton navbarCollapseButton = new NavbarCollapseButton();
     navbarCollapseButton.setDataTarget("#" + id);
@@ -77,27 +79,6 @@ public class BSToolbarGui extends AbstractBasicGuiItem {
     descriptor.putValue(ParentWidget.PARENT_UI, navbarNav);
     return this;
   }
-
-  // /*
-  // * (non-Javadoc)
-  // *
-  // * @see cc.kune.common.client.actions.ui.ParentWidget#insert(int,
-  // * com.google.gwt.user.client.ui.UIObject)
-  // */
-  // @Override
-  // public void insert(final int position, final UIObject widget) {
-  // navbarNav.insert(setPull(widget), position);
-  // }
-  //
-  // @Override
-  // public Iterator<Widget> iterator() {
-  // return navbarNav.iterator();
-  // }
-  //
-  // @Override
-  // public boolean remove(final Widget w) {
-  // return navbarNav.remove(w);
-  // }
 
   /*
    * (non-Javadoc)

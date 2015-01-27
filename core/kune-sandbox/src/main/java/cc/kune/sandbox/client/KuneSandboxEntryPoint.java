@@ -31,6 +31,7 @@ import org.gwtbootstrap3.client.ui.ButtonGroup;
 import org.gwtbootstrap3.client.ui.DropDown;
 import org.gwtbootstrap3.client.ui.DropDownMenu;
 import org.gwtbootstrap3.client.ui.Label;
+import org.gwtbootstrap3.client.ui.ListDropDown;
 import org.gwtbootstrap3.client.ui.Navbar;
 import org.gwtbootstrap3.client.ui.NavbarCollapse;
 import org.gwtbootstrap3.client.ui.NavbarCollapseButton;
@@ -42,9 +43,10 @@ import org.gwtbootstrap3.client.ui.constants.Toggle;
 
 import cc.kune.bootstrap.client.ui.CheckListItem;
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
-import cc.kune.bootstrap.client.ui.ComplexListDropDown;
+import cc.kune.bootstrap.client.ui.ComplexDropDownMenu;
 import cc.kune.bootstrap.client.ui.DropDownSubmenu;
 import cc.kune.bootstrap.client.ui.RadioListItem;
+import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -291,12 +293,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     simpleNavbar.add(navbarCollapse);
 
     final NavbarNav navbarNav = new NavbarNav();
-
-    final ComplexListDropDown listDropDown = new ComplexListDropDown();
+    final ComplexDropDownMenu<ListDropDown> listDropDown = new ComplexDropDownMenu<ListDropDown>(
+        new ListDropDown());
     listDropDown.setMenuText("Plain menu");
     listDropDown.setIcon(IconType.GEAR);
     navbarCollapse.add(navbarNav);
-    navbarNav.add(listDropDown);
+    navbarNav.add(listDropDown.getWidget());
 
     final AnchorListItem simpleAnchor = new AnchorListItem("Anchor 1");
     simpleAnchor.setIcon(IconType.TWITTER_SQUARE);
@@ -388,6 +390,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     new MenuItemDescriptor(classicMenu, new BaseAction("Menuitem desc in widget 1", "Some tooltip"));
     new MenuItemDescriptor(classicMenu, new BaseAction("Menuitem desc in widget 2", "Some tooltip"));
 
+    final MenuDescriptor classicMenu2 = new MenuDescriptor("Button classic2 menu");
+    classicMenu2.withIcon("http://lorempixel.com/30/30");
+    new MenuItemDescriptor(classicMenu2, new BaseAction("Menuitem desc in widget 3", "Some tooltip"));
+    new MenuItemDescriptor(classicMenu2, new BaseAction("Menuitem desc in widget 4", "Some tooltip"));
+
     final CustomButton btn = new CustomButton("Text custom button");
     Tooltip.to(btn, "Show the dropdown at 100,100 position (or hide it)");
     btn.addClickHandler(new ClickHandler() {
@@ -437,7 +444,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // TODO Add more tests here
 
     final FlowActionExtensible flow = new FlowActionExtensible();
-    flow.add(toolbarDesc, widgetMenu, classicMenu);
+    flow.add(toolbarDesc, widgetMenu, classicMenu, classicMenu2);
 
     RootPanel.get().add(flow);
     RootPanel.get().add(new HTML("<br>"));
@@ -600,7 +607,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
                 NotifyUser.error("Cancel");
               }
 
-          @Override
+              @Override
               public void onSuccess() {
                 NotifyUser.info("Success");
               }
@@ -657,14 +664,34 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     shortcutRegister.put(shortcut2, action2);
 
     final ToolbarMenuDescriptor menuDesc = new ToolbarMenuDescriptor("Menu descr");
+    final ToolbarMenuDescriptor menuDesc2 = new ToolbarMenuDescriptor("Menu descr 2");
     menuDesc.setParent(toolbarDesc);
     menuDesc.setRightIcon(res.world16());
+
+    final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
+        toolbarDesc);
+    menuDesc2.setParent(toolbarDesc);
+    menuDesc2.withIcon(IconType.NAVICON);
+
     menuDesc.withIcon(new KuneIcon('b')).withToolTip("Some menu tooltip").withShortcut(shortcut1,
         shortcutRegister);
-    final MenuItemDescriptor menuItem1 = new MenuItemDescriptor(menuDesc, action1);
+    final MenuItemDescriptor menuItem1 = new MenuItemDescriptor(menuDesc, new AbstractAction() {
+
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        NotifyUser.success("Setting separator visibility to false");
+        separator.setVisible(false);
+      }
+    });
     menuItem1.withIcon(res.locationBlack()).withText("Some menu item 1");
     final MenuItemDescriptor menuItem2 = new MenuItemDescriptor(menuDesc, action1);
     menuItem2.withIcon(res.info()).withText("Some menu item 2").withShortcut(shortcut2, shortcutRegister);
+
+    final MenuItemDescriptor menuItem3 = new MenuItemDescriptor(menuDesc2, action1);
+    menuItem3.withIcon(res.locationBlack()).withText("Some other menu item 1");
+    final MenuItemDescriptor menuItem4 = new MenuItemDescriptor(menuDesc2, action1);
+    menuItem4.withIcon(res.info()).withText("Some other menu item 2").withShortcut(shortcut2,
+        shortcutRegister);
 
     final MenuCheckItemDescriptor menuCheckItem1 = new MenuCheckItemDescriptor(menuDesc, action1);
     menuCheckItem1.withText("Check item");

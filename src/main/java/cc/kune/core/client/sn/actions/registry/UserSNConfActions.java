@@ -49,7 +49,7 @@ import com.google.inject.Provider;
 /**
  * You must call {@link UserSNPresenter#refreshActions()} when adding some
  * action externally with.
- * 
+ *
  * {@link #add(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)}
  */
 
@@ -69,7 +69,7 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
 
   /**
    * Instantiates a new user sn conf actions.
-   * 
+   *
    * @param session
    *          the session
    * @param stateManager
@@ -91,7 +91,7 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
       final CoreResources res, final IsGroupCondition isGroupCondition,
       final AddNewBuddiesAction addNewBuddiesAction) {
     final boolean isNewbie = session.isNewbie();
-    final ImageResource icon = isNewbie ? res.prefGrey() : res.arrowdownsitebar();
+    final ImageResource icon = res.prefGrey();
     final String menuText = isNewbie ? i18n.t("Options") : "";
     final String menuTooltip = isNewbie ? "" : i18n.t("Options");
     final String menuStyle = isNewbie ? SNActionStyles.SN_OPTIONS_STYLES_NEWBIE
@@ -147,7 +147,7 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
   /**
    * You must call {@link UserSNPresenter#refreshActions()} when adding some
    * action externally with.
-   * 
+   *
    * @param action
    *          the action
    * @return true, if successful
@@ -160,7 +160,7 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
 
   /**
    * Adds the impl.
-   * 
+   *
    * @param action
    *          the action
    * @return true, if successful

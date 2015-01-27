@@ -29,7 +29,7 @@ import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
+import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
@@ -56,14 +56,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractSNPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AbstractSNPanel extends ViewImpl {
 
   /**
    * The Interface AbstractSNPanelUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface AbstractSNPanelUiBinder extends UiBinder<Widget, AbstractSNPanel> {
@@ -195,7 +195,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Instantiates a new abstract sn panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param guiProvider
@@ -222,7 +222,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -242,7 +242,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Count as string.
-   * 
+   *
    * @param count
    *          the count
    * @return the string
@@ -253,7 +253,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Creates the thumb.
-   * 
+   *
    * @param isPersonal
    *          the is personal
    * @param shortName
@@ -281,13 +281,13 @@ public class AbstractSNPanel extends ViewImpl {
         AVATARLABELMAXSIZE, false, token);
 
     final ClickHandler clickHand = new ClickHandler() {
-      MenuDescriptor menu;
+      WidgetMenuDescriptor menu;
 
       @Override
       public void onClick(final ClickEvent event) {
         if (menu == null) {
-          menu = new MenuDescriptor();
-          menu.setStandalone(true);
+          menu = new WidgetMenuDescriptor(thumb);
+          // menu.setStandalone(true);
           for (final GuiActionDescrip item : menuitems) {
             item.setParent(menu);
           }
@@ -295,7 +295,7 @@ public class AbstractSNPanel extends ViewImpl {
           // (Not needed after setParent Recursive) actions.add(menuitems);
         }
         thumb.hideTooltip();
-        menu.show(thumb);
+        menu.show();
       }
     };
     thumb.addClickHandler(clickHand);
@@ -313,7 +313,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Decorate avatar with xmpp status.
-   * 
+   *
    * @param shortname
    *          the shortname
    * @param thumb
@@ -330,7 +330,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Gets the bottom toolbar.
-   * 
+   *
    * @return the bottom toolbar
    */
   public IsActionExtensible getBottomToolbar() {
@@ -339,7 +339,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Sets the first category visible.
-   * 
+   *
    * @param visible
    *          the visible
    * @param big
@@ -352,7 +352,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Sets the snd category visible.
-   * 
+   *
    * @param visible
    *          the visible
    * @param big
@@ -365,7 +365,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Sets the tooltip.
-   * 
+   *
    * @param widget
    *          the widget
    * @param title
@@ -377,7 +377,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /**
    * Sets the trd category visible.
-   * 
+   *
    * @param visible
    *          the visible
    * @param big

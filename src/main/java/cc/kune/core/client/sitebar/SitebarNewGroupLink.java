@@ -25,7 +25,7 @@ package cc.kune.core.client.sitebar;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ActionStyles;
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -37,20 +37,20 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitebarNewGroupLink.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SitebarNewGroupLink extends ButtonDescriptor {
+public class SitebarNewGroupLink extends ToolbarItemDescriptor {
 
   /**
    * The Class SitebarNewGroupAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class SitebarNewGroupAction extends AbstractExtendedAction {
@@ -60,7 +60,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
     /**
      * Instantiates a new sitebar new group action.
-     * 
+     *
      * @param stateManager
      *          the state manager
      * @param i18n
@@ -77,7 +77,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -96,7 +96,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
   /**
    * Instantiates a new sitebar new group link.
-   * 
+   *
    * @param newGroupAction
    *          the new group action
    * @param sitebarActions
@@ -133,7 +133,7 @@ public class SitebarNewGroupLink extends ButtonDescriptor {
 
   /**
    * Recalculate.
-   * 
+   *
    * @param notLogged
    *          the not logged
    */

@@ -22,6 +22,8 @@
  */
 package cc.kune.core.client.sitebar;
 
+import org.gwtbootstrap3.client.ui.constants.IconType;
+
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
@@ -36,9 +38,9 @@ import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.resources.iconic.IconicResources;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -49,16 +51,16 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitebarActionsPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarActionsPresenter extends
-    Presenter<SitebarActionsPresenter.SitebarActionsView, SitebarActionsPresenter.SitebarActionsProxy>
-    implements SitebarActions {
+Presenter<SitebarActionsPresenter.SitebarActionsView, SitebarActionsPresenter.SitebarActionsProxy>
+implements SitebarActions {
 
   /**
    * The Interface SitebarActionsProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -67,21 +69,21 @@ public class SitebarActionsPresenter extends
 
   /**
    * The Interface SitebarActionsView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SitebarActionsView extends View {
 
     /**
      * Gets the left bar.
-     * 
+     *
      * @return the left bar
      */
     IsActionExtensible getLeftBar();
 
     /**
      * Gets the right bar.
-     * 
+     *
      * @return the right bar
      */
     IsActionExtensible getRightBar();
@@ -123,7 +125,7 @@ public class SitebarActionsPresenter extends
 
   /**
    * Instantiates a new sitebar actions presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -164,7 +166,7 @@ public class SitebarActionsPresenter extends
 
   /**
    * Creates the goto kune.
-   * 
+   *
    * @return the menu item descriptor
    */
   private MenuItemDescriptor createGotoKune() {
@@ -181,7 +183,7 @@ public class SitebarActionsPresenter extends
 
   /**
    * Gets the options menu.
-   * 
+   *
    * @return the options menu
    */
   public MenuDescriptor getOptionsMenu() {
@@ -197,14 +199,14 @@ public class SitebarActionsPresenter extends
 
   /**
    * On app start.
-   * 
+   *
    * @param event
    *          the event
    */
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
     MORE_MENU.withText(i18n.t("More"));
-    MORE_MENU.withIcon(res.arrowdownsitebarSmall());
+    MORE_MENU.withIcon(IconType.BARS);
     MORE_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     // OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION,
     // AbstractGxtMenuGui.MenuPosition.bl);
@@ -274,7 +276,7 @@ public class SitebarActionsPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.sitebar.SitebarActions#refreshActions()
    */
   @Override
@@ -294,7 +296,7 @@ public class SitebarActionsPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

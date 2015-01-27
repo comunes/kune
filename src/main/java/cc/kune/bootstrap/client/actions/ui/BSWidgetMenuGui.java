@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
-public class BSWidgetMenuGui extends AbstractBasicGuiItem implements ParentWidget {
+public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSMenuGui {
 
   private Anchor anchor;
   private DropDownMenu menu;
@@ -75,6 +75,11 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements ParentWidge
   @Override
   public void insert(final int position, final UIObject uiObject) {
     menu.insert((Widget) uiObject, position);
+  }
+
+  @Override
+  public void show() {
+    // menu.show();
   }
 
 }

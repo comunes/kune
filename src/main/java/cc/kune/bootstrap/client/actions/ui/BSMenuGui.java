@@ -5,6 +5,7 @@ import org.gwtbootstrap3.client.ui.DropDown;
 import cc.kune.bootstrap.client.ui.ComplexDropDownMenu;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
+import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
@@ -16,7 +17,7 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
-public class BSMenuGui extends AbstractBSMenuGui implements ParentWidget {
+public class BSMenuGui extends AbstractChildGuiItem implements AbstractBSMenuGui {
 
   private ComplexDropDownMenu<DropDown> menu;
 
@@ -24,6 +25,12 @@ public class BSMenuGui extends AbstractBSMenuGui implements ParentWidget {
   public void add(final UIObject uiObject) {
     final Widget childWidget = (Widget) uiObject;
     menu.add(childWidget);
+  }
+
+  @Override
+  protected void addStyle(final String style) {
+
+    menu.addStyleName(style);
   }
 
   @Override
@@ -190,7 +197,7 @@ public class BSMenuGui extends AbstractBSMenuGui implements ParentWidget {
   }
 
   @Override
-  protected void show() {
+  public void show() {
     menu.show();
   }
 }

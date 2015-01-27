@@ -121,7 +121,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final AddEntityToThisGroupAction addEntityToThisGroupAction, final GroupSNOptionsMenu optionsMenu,
       final GroupSNModerationSubMenu moderationSubMenu, final GroupSNVisibilitySubMenu visibilitySubMenu) {
     final boolean isNewbie = session.isNewbie();
-    final ImageResource icon = isNewbie ? res.prefGrey() : res.arrowdownsitebar();
+    final ImageResource icon = res.prefGrey();
     final String menuText = isNewbie ? i18n.t("Options") : "";
     final String menuTooltip = isNewbie ? "" : i18n.t("Options");
     final String menuStyle = isNewbie ? SNActionStyles.SN_OPTIONS_STYLES_NEWBIE

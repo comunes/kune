@@ -34,7 +34,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentViewerOptionsMenu.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -45,7 +45,7 @@ public class ContentViewerOptionsMenu extends MenuDescriptor {
 
   /**
    * Instantiates a new content viewer options menu.
-   * 
+   *
    * @param res
    *          the res
    * @param session
@@ -54,9 +54,10 @@ public class ContentViewerOptionsMenu extends MenuDescriptor {
   @Inject
   public ContentViewerOptionsMenu(final CoreResources res, final Session session) {
     super();
-    this.withIcon(res.arrowdownsitebar()).withId(ID);
+    // this.withIcon(res.arrowdownsitebar())
+    this.withId(ID);
+    this.withText(I18n.t("More"));
     if (session.isNewbie()) {
-      this.withText(I18n.t("More"));
       this.withStyles(ActionStyles.MENU_BTN_STYLE_RIGHT);
     } else {
       this.withStyles(ActionStyles.OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT);

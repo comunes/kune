@@ -27,7 +27,7 @@ import cc.kune.common.client.actions.BaseAction;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
-public class WidgetMenuDescriptor extends GenericMenuDescriptor {
+public class WidgetMenuDescriptor extends MenuDescriptor {
 
   public static final String WIDGET = "widget_menu";
 

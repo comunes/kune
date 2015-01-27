@@ -46,7 +46,7 @@ public class BSToolbarSeparatorGui extends AbstractBasicGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -74,13 +74,14 @@ public class BSToolbarSeparatorGui extends AbstractBasicGuiItem {
     default:
       break;
     }
+    widget.addStyleName("k-toolbar-separator");
     configureItemFromProperties();
     return this;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
@@ -90,7 +91,7 @@ public class BSToolbarSeparatorGui extends AbstractBasicGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
    */
   @Override

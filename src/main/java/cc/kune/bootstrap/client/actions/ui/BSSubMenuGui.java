@@ -24,10 +24,10 @@ package cc.kune.bootstrap.client.actions.ui;
 
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 import cc.kune.bootstrap.client.ui.DropDownSubmenu;
+import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
@@ -41,16 +41,16 @@ import com.google.gwt.user.client.ui.Widget;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
+public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenuGui { // HasMenuItem
 
   private ComplexAnchorListItem anchorList;
 
   /** The parent menu. */
-  private AbstractBSMenuGui parentMenu;
+  private ParentWidget parentMenu;
 
   @Override
   public void add(final UIObject uiObject) {
-    anchorList.add((Widget) uiObject);
+    // anchorList.add((Widget) uiObject);
   }
 
   /*
@@ -69,7 +69,7 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
     final DropDownSubmenu submenu = new DropDownSubmenu();
     anchorList.add(submenu);
     configureItemFromProperties();
-    parentMenu = ((AbstractBSMenuGui) descriptor.getParent().getValue(PARENT_UI));
+    parentMenu = ((ParentWidget) descriptor.getParent().getValue(PARENT_UI));
     final int position = descriptor.getPosition();
     if (position == GuiActionDescrip.NO_POSITION) {
       parentMenu.add(anchorList);
@@ -202,8 +202,10 @@ public class BSSubMenuGui extends AbstractBSMenuGui { // HasMenuItem
   // }
 
   @Override
-  protected void show() {
-    parentMenu.show();
-    ((MenuDescriptor) descriptor.getParent()).selectMenu((MenuItemDescriptor) descriptor);
+  public void show() {
+    // TODO
+    // parentMenu.show();
+    // ((MenuDescriptor) descriptor.getParent()).selectMenu((MenuItemDescriptor)
+    // descriptor);
   }
 }

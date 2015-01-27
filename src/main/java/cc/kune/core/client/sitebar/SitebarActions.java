@@ -22,13 +22,13 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarMenuDescriptor;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SitebarActions.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SitebarActions {
@@ -37,7 +37,7 @@ public interface SitebarActions {
   static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
 
   /** The Constant MORE_MENU. */
-  static final MenuDescriptor MORE_MENU = new MenuDescriptor();
+  static final ToolbarMenuDescriptor MORE_MENU = new ToolbarMenuDescriptor();
 
   /** The Constant RIGHT_TOOLBAR. */
   static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();

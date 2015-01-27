@@ -1,5 +1,6 @@
 kune (0.3.0+b47) unstable; urgency=medium
 
+  * Added gwtbootstrap user interface widgets
   * Fix some gadget broken urls
   * Debian default/kune minor change
 

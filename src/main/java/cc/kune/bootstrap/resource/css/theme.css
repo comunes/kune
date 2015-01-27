@@ -21,3 +21,23 @@ a.k-bs-iconlabel {
   text-decoration: none;
   color: gray;
 }
+
+nav.k-toolbar-navbar {
+  border: 0px;
+  margin: 0px;  
+  height: 23px;
+  min-height: 23px !important;
+  background-color: transparent;
+}
+
+nav.k-toolbar-navbar > div > ul > li > a {
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0px 7px;
+}
+
+nav.k-toolbar-navbar  .k-toolbar-separator {
+  border-left: 1px solid #B3B3B3;
+  height: 16px;
+  margin-top: 3px;
+}

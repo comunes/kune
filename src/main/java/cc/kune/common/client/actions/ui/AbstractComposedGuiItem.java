@@ -78,7 +78,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip[])
@@ -92,7 +92,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -117,7 +117,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.IsActionExtensible#addAll(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescCollection)
@@ -144,43 +144,45 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
    *          the descrip
    */
   protected void beforeAddWidget(final GuiActionDescrip descrip) {
-    try {
-      if (descrip.mustBeAdded()) {
-        if (bindings.size() == 0) {
-          throw new UIException("Bindings yet not registered aka injected");
+    if (descrip.mustBeAdded()) {
+      if (bindings.size() == 0) {
+        throw new UIException("Bindings yet not registered aka injected");
+      }
+      assert bindings.size() != 0;
+      final GuiBinding binding = bindings.get(descrip.getType());
+      if (binding == null) {
+        throw new UIException("Unknown binding for: " + descrip);
+      } else {
+        // We set at that moment if the widget should be RTL or not
+        descrip.setRTL(i18n.isRTL());
+        final AbstractGuiItem item;
+        try {
+          item = binding.create(descrip);
+        } catch (final ClassCastException e) {
+          throw new UIException("Class cath error in " + descrip + " " + e.getCause() + " "
+              + e.getMessage());
         }
-        assert bindings.size() != 0;
-        final GuiBinding binding = bindings.get(descrip.getType());
-        if (binding == null) {
-          throw new UIException("Unknown binding for: " + descrip);
-        } else {
-          // We set at that moment if the widget should be RTL or not
-          descrip.setRTL(i18n.isRTL());
-          final AbstractGuiItem item = binding.create(descrip);
-          if (binding.shouldBeAdded()) {
-            // TODO Change this ^ to shouldBeAttached
-            if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
-              addWidget(item);
-            } else {
-              insertWidget(item, descrip.getPosition());
-            }
+        if (binding.shouldBeAdded()) {
+          // TODO Change this ^ to shouldBeAttached
+          if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
+            addWidget(item);
+          } else {
+            insertWidget(item, descrip.getPosition());
           }
-          if (descrip instanceof HasChilds) {
-            for (final GuiActionDescrip child : ((AbstractParentGuiActionDescrip) descrip).getChilds()) {
-              // Log.info("Child added: " + child.getValue(Action.NAME));
-              add(child);
-            }
+        }
+        if (descrip instanceof HasChilds) {
+          for (final GuiActionDescrip child : ((AbstractParentGuiActionDescrip) descrip).getChilds()) {
+            // Log.info("Child added: " + child.getValue(Action.NAME));
+            add(child);
           }
         }
       }
-    } catch (final ClassCastException e) {
-      throw new UIException("Class cath error in " + descrip);
     }
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.IsActionExtensible#clear()
    */
   @Override

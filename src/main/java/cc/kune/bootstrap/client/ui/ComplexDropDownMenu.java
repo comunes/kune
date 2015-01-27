@@ -20,6 +20,7 @@ import com.google.gwt.event.logical.shared.AttachEvent.Handler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -34,6 +35,10 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
     menu = new DropDownMenu();
     anchor = new ComplexAnchorButton();
     anchor.setDataToggle(Toggle.DROPDOWN);
+    final String dataTarget = HTMLPanel.createUniqueId();
+    anchor.setDataTarget(dataTarget);
+    // Attributes.DATA_TARGET
+    menu.getElement().setAttribute("aria-labelledby", dataTarget);
     widget.add(anchor);
     widget.add(menu);
     widget.addAttachHandler(new Handler() {
@@ -70,6 +75,10 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
 
   public HandlerRegistration addShownHandler(final ShownHandler shownHandler) {
     return widget.addHandler(shownHandler, ShownEvent.getType());
+  }
+
+  public void addStyleName(final String style) {
+    anchor.addStyleName(style);
   }
 
   private native void bindJavaScriptEvents(final com.google.gwt.dom.client.Element e) /*-{
@@ -109,12 +118,24 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
     menu.clear();
   }
 
+  public void ensureDebugId(final String id) {
+    anchor.ensureDebugId(id);
+  }
+
+  public DropDownMenu getList() {
+    return menu;
+  }
+
   public String getText() {
     return anchor.getText();
   }
 
   public Widget getWidget() {
     return widget;
+  }
+
+  public int getWidgetCount() {
+    return menu.getWidgetCount();
   }
 
   public void hide() {
@@ -130,6 +151,10 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
   }
 
   public boolean isMenuVisible() {
+    return menu.isVisible();
+  }
+
+  public boolean isVisible() {
     return menu.isVisible();
   }
 

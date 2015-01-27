@@ -27,8 +27,8 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
@@ -50,14 +50,14 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SiteUserOptionsPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /** The Constant LOGGED_USER_MENU. */
-  public static final MenuDescriptor LOGGED_USER_MENU = new MenuDescriptor();
+  public static final ToolbarMenuDescriptor LOGGED_USER_MENU = new ToolbarMenuDescriptor();
 
   /** The Constant LOGGED_USER_MENU_ID. */
   public static final String LOGGED_USER_MENU_ID = "kune-sump-lum";
@@ -88,7 +88,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /**
    * Instantiates a new site user options presenter.
-   * 
+   *
    * @param session
    *          the session
    * @param stateManager
@@ -149,7 +149,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /**
    * Adds the action impl.
-   * 
+   *
    * @param descriptor
    *          the descriptor
    */
@@ -164,7 +164,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
     LOGGED_USER_MENU.setParent(SitebarActions.RIGHT_TOOLBAR);
     LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar");
-    LOGGED_USER_MENU.withIcon(res.arrowdownsitebarSmall());
+    // LOGGED_USER_MENU.withIcon(res.arrowdownsitebarSmall());
     separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
 
     final AbstractExtendedAction userHomeAction = new AbstractExtendedAction() {
@@ -190,7 +190,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /**
    * On user sign in.
-   * 
+   *
    * @param userInfoDTO
    *          the user info dto
    */
@@ -203,7 +203,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /**
    * Sets the logged user name.
-   * 
+   *
    * @param shortName
    *          the new logged user name
    */

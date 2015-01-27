@@ -23,29 +23,29 @@
 package cc.kune.core.client.sitebar;
 
 import cc.kune.common.client.actions.ActionStyles;
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * The Class SitebarSignInLink.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SitebarSignInLink extends ButtonDescriptor {
+public class SitebarSignInLink extends ToolbarItemDescriptor {
 
   /** The Constant SITE_SIGN_IN. */
   public static final String SITE_SIGN_IN = "kune-ssilp-hy";
 
   /**
    * Instantiates a new sitebar sign in link.
-   * 
+   *
    * @param action
    *          the action
    * @param eventBus

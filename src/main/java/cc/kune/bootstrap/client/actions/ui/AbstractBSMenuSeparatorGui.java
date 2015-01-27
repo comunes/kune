@@ -41,7 +41,7 @@ public abstract class AbstractBSMenuSeparatorGui extends AbstractBasicGuiItem {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -58,14 +58,14 @@ public abstract class AbstractBSMenuSeparatorGui extends AbstractBasicGuiItem {
     separator = createSeparator();
     menu.add(separator);
     configureItemFromProperties();
-    return menu;
+    return this;
   }
 
   protected abstract Widget createSeparator();
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override

@@ -31,7 +31,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class OptionsListMenu.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -39,15 +39,15 @@ public class OptionsListMenu extends MenuDescriptor {
 
   /**
    * Instantiates a new options list menu.
-   * 
+   *
    * @param res
    *          the res
    */
   @Inject
   public OptionsListMenu(final CoreResources res) {
     super();
-    this.withIcon(res.arrowdownsitebar()).withStyles(
-        "k-def-docbtn, k-fr, k-noborder, k-no-backimage, k-nobackcolor");
+    // this.withIcon(res.arrowdownsitebar())
+    this.withStyles("k-def-docbtn, k-fr, k-noborder, k-no-backimage, k-nobackcolor");
   }
 
 }
