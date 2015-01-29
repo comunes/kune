@@ -38,6 +38,7 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
     final String dataTarget = HTMLPanel.createUniqueId();
     anchor.setDataTarget(dataTarget);
     // Attributes.DATA_TARGET
+    anchor.getElement().setAttribute("aria-expanded", "true");
     menu.getElement().setAttribute("aria-labelledby", dataTarget);
     widget.add(anchor);
     widget.add(menu);
