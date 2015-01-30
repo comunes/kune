@@ -33,26 +33,26 @@ import cc.kune.common.shared.res.KuneIcon;
 public final class ChatToolConstants {
 
   /** The Constant ICON_TYPE_CHAT. */
-  public static final KuneIcon ICON_TYPE_CHAT = new KuneIcon('d');
-  
+  public static final KuneIcon ICON_TYPE_CHAT = KuneIcon.CHAT;
+
   /** The Constant ICON_TYPE_ROOM. */
-  public static final KuneIcon ICON_TYPE_ROOM = new KuneIcon('d');
-  
+  public static final KuneIcon ICON_TYPE_ROOM = KuneIcon.CHAT_TOOL;
+
   /** The Constant ICON_TYPE_ROOT. */
-  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('d');
-  
+  public static final KuneIcon ICON_TYPE_ROOT = KuneIcon.CHAT_TOOL;
+
   /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "chats";
-  
+
   /** The Constant TOOL_NAME. */
   public static final String TOOL_NAME = "chats";
-  
+
   /** The Constant TYPE_CHAT. */
   public static final String TYPE_CHAT = TOOL_NAME + "." + "chat";
-  
+
   /** The Constant TYPE_ROOM. */
   public static final String TYPE_ROOM = TOOL_NAME + "." + "room";
-  
+
   /** The Constant TYPE_ROOT. */
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
 

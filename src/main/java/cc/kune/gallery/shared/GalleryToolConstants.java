@@ -28,19 +28,19 @@ import cc.kune.core.shared.ToolConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GalleryToolConstants.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class GalleryToolConstants {
 
   /** The Constant ICON_TYPE_ALBUM. */
-  public static final KuneIcon ICON_TYPE_ALBUM = new KuneIcon('j');
+  public static final KuneIcon ICON_TYPE_ALBUM = KuneIcon.PICTURE;
 
   /** The Constant ICON_TYPE_ROOT. */
-  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('j');
+  public static final KuneIcon ICON_TYPE_ROOT = KuneIcon.PICTURE;
 
   /** The Constant ICON_TYPE_UPLOADEDFILE. */
-  public static final KuneIcon ICON_TYPE_UPLOADEDFILE = new KuneIcon('j');
+  public static final KuneIcon ICON_TYPE_UPLOADEDFILE = KuneIcon.PICTURE;
 
   /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "gallery";

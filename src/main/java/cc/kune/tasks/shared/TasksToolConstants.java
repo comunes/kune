@@ -27,19 +27,19 @@ import cc.kune.common.shared.res.KuneIcon;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TasksToolConstants.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class TasksToolConstants {
 
   /** The Constant ICON_TYPE_FOLDER. */
-  public static final KuneIcon ICON_TYPE_FOLDER = new KuneIcon('m');
+  public static final KuneIcon ICON_TYPE_FOLDER = KuneIcon.TASK_FOLDER;
 
   /** The Constant ICON_TYPE_ROOT. */
-  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('l');
+  public static final KuneIcon ICON_TYPE_ROOT = KuneIcon.TASKS;
 
   /** The Constant ICON_TYPE_TASK. */
-  public static final KuneIcon ICON_TYPE_TASK = new KuneIcon('l');
+  public static final KuneIcon ICON_TYPE_TASK = KuneIcon.TASKS;
 
   /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "tasks";

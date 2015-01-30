@@ -28,19 +28,19 @@ import cc.kune.core.shared.ToolConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DocsToolConstants.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class DocsToolConstants {
 
   /** The Constant ICON_TYPE_DOCUMENT. */
-  public static final KuneIcon ICON_TYPE_DOCUMENT = new KuneIcon('b');
+  public static final KuneIcon ICON_TYPE_DOCUMENT = KuneIcon.DOCS;
 
   /** The Constant ICON_TYPE_FOLDER. */
-  public static final KuneIcon ICON_TYPE_FOLDER = new KuneIcon('f');
+  public static final KuneIcon ICON_TYPE_FOLDER = KuneIcon.FOLDER;
 
   /** The Constant ICON_TYPE_ROOT. */
-  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('a');
+  public static final KuneIcon ICON_TYPE_ROOT = KuneIcon.DOCS_ROOT;
 
   /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "documents";

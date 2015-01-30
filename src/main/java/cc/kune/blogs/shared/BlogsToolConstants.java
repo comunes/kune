@@ -32,31 +32,31 @@ import cc.kune.core.shared.ToolConstants;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class BlogsToolConstants {
-  
+
   /** The Constant ICON_TYPE_BLOG. */
-  public static final KuneIcon ICON_TYPE_BLOG = new KuneIcon('q');
-  
+  public static final KuneIcon ICON_TYPE_BLOG = KuneIcon.BLOGS;
+
   /** The Constant ICON_TYPE_POST. */
-  public static final KuneIcon ICON_TYPE_POST = new KuneIcon('c');
-  
+  public static final KuneIcon ICON_TYPE_POST = KuneIcon.BLOG_POST;
+
   /** The Constant ICON_TYPE_ROOT. */
-  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('q');
-  
+  public static final KuneIcon ICON_TYPE_ROOT = KuneIcon.BLOGS;
+
   /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "blogs";
-  
+
   /** The Constant TOOL_NAME. */
   public static final String TOOL_NAME = "blogs";
-  
+
   /** The Constant TYPE_BLOG. */
   public static final String TYPE_BLOG = TOOL_NAME + "." + "blog";
-  
+
   /** The Constant TYPE_POST. */
   public static final String TYPE_POST = TOOL_NAME + "." + "post";
-  
+
   /** The Constant TYPE_ROOT. */
   public static final String TYPE_ROOT = TOOL_NAME + "." + "root";
-  
+
   /** The Constant TYPE_UPLOADEDFILE. */
   public static final String TYPE_UPLOADEDFILE = TOOL_NAME + "." + ToolConstants.UPLOADEDFILE_SUFFIX;
 

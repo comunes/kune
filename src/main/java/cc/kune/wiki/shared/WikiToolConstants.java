@@ -28,19 +28,19 @@ import cc.kune.core.shared.ToolConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WikiToolConstants.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class WikiToolConstants {
 
   /** The Constant ICON_TYPE_FOLDER. */
-  public static final KuneIcon ICON_TYPE_FOLDER = new KuneIcon('n');
+  public static final KuneIcon ICON_TYPE_FOLDER = KuneIcon.WIKI_FOLDER;
 
   /** The Constant ICON_TYPE_ROOT. */
-  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('e');
+  public static final KuneIcon ICON_TYPE_ROOT = KuneIcon.WIKI;
 
   /** The Constant ICON_TYPE_WIKIPAGE. */
-  public static final KuneIcon ICON_TYPE_WIKIPAGE = new KuneIcon('e');
+  public static final KuneIcon ICON_TYPE_WIKIPAGE = KuneIcon.WIKI;
 
   /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "wiki";

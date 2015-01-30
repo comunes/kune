@@ -27,19 +27,19 @@ import cc.kune.common.shared.res.KuneIcon;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ListsToolConstants.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class ListsToolConstants {
 
   /** The Constant ICON_TYPE_LIST. */
-  public static final KuneIcon ICON_TYPE_LIST = new KuneIcon('o');
+  public static final KuneIcon ICON_TYPE_LIST = KuneIcon.LISTS;
 
   /** The Constant ICON_TYPE_POST. */
-  public static final KuneIcon ICON_TYPE_POST = new KuneIcon('k');
+  public static final KuneIcon ICON_TYPE_POST = KuneIcon.LIST_POST_AND_MESSAGE;
 
   /** The Constant ICON_TYPE_ROOT. */
-  public static final KuneIcon ICON_TYPE_ROOT = new KuneIcon('o');
+  public static final KuneIcon ICON_TYPE_ROOT = KuneIcon.LISTS;
 
   /** The Constant ROOT_NAME. */
   public static final String ROOT_NAME = "lists";
