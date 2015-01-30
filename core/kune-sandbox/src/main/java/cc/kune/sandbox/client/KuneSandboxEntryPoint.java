@@ -39,6 +39,7 @@ import org.gwtbootstrap3.client.ui.NavbarHeader;
 import org.gwtbootstrap3.client.ui.NavbarNav;
 import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.gwtbootstrap3.client.ui.constants.NavbarPosition;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 
 import cc.kune.bootstrap.client.ui.CheckListItem;
@@ -50,7 +51,6 @@ import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.BaseAction;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
@@ -109,6 +109,7 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -153,7 +154,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
      * .common.client.actions.ActionEvent)
      */
@@ -165,18 +166,173 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
   /** The absolute panel. */
   private AbsolutePanel absolutePanel;
+  final AbstractExtendedAction action1 = new AbstractExtendedAction() {
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      final SimpleUserMessage simpleMes = new SimpleUserMessage();
+      // simpleMes.show("Hellow world!");
+      NotifyUser.showProgress("Savingggg");
+      NotifyUser.askConfirmation("Some title", "Some message", "Yeah!", "Nein",
+          new SimpleResponseCallback() {
+        @Override
+        public void onCancel() {
+          NotifyUser.error("Cancel");
+        }
+
+        @Override
+        public void onSuccess() {
+          NotifyUser.info("Success");
+        }
+      });
+    }
+  };
+
+  final AbstractExtendedAction action2 = new AbstractExtendedAction() {
+    @Override
+    public void actionPerformed(final ActionEvent event) {
+      final String title = "Some title";
+      final String message = "Lorem <a href='/'>ipsum</a> dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit";
+      NotifyUser.showProgress("Saving......" + new Date().getTime());
+      NotifyUser.avatar("http://lorempixel.com/200/200", message, new ClickHandler() {
+        @Override
+        public void onClick(final ClickEvent event) {
+          NotifyUser.info("On click");
+        }
+      });
+      NotifyUser.error(title, message, true);
+      NotifyUser.important(message);
+      NotifyUser.info(message);
+      NotifyUser.success(title, message);
+    }
+  };
 
   /** The ginjector. */
   private KuneSampleGinjector ginjector;
+
+  private MainContainer mainContainer;
 
   /** The res. */
   private CommonResources res;
 
   /** The shortcut register. */
   private GlobalShortcutRegister shortcutRegister;
-
   /** The user msg. */
   SimpleUserMessage userMsg = new SimpleUserMessage();
+
+  public void addNotifyUserTests(final FlowPanel flow) {
+
+    flow.add(new CustomButton("Show progress", IconType.PLAY_CIRCLE, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.showProgressLoading();
+      }
+    }));
+
+    flow.add(new CustomButton("Hide progress", IconType.STOP, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.hideProgress();
+      }
+    }));
+
+    flow.add(new CustomButton("Show date", IconType.CLOCK_O, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.showProgress("Date : " + new Date().getTime());
+      }
+    }));
+
+    flow.add(new CustomButton("Important message", IconType.WARNING, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.important("Alert!");
+      }
+    }));
+
+    flow.add(new CustomButton("Error message", IconType.QUESTION_CIRCLE, new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.error("Title", "Error!", false);
+      }
+    }));
+  }
+
+  /**
+   * Test action toolbar.
+   *
+   * @return
+   */
+  @SuppressWarnings("unused")
+  public ToolbarDescriptor createSitebarActions() {
+
+    final ToolbarDescriptor sitebarDesc = new ToolbarDescriptor();
+    final ToolbarItemDescriptor anchorItem = new ToolbarItemDescriptor();
+    anchorItem.setAction(new AbstractExtendedAction("Item descr") {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        mainContainer.next();
+      }
+    });
+    sitebarDesc.setPosition(NavbarPosition.FIXED_TOP);
+    anchorItem.withIcon(new KuneIcon('A'));
+    anchorItem.setParent(sitebarDesc);
+
+    final KeyStroke shortcut1 = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
+    shortcutRegister.put(shortcut1, action1);
+    final KeyStroke shortcut2 = Shortcut.getShortcut(false, true, false, false, Character.valueOf('D'));
+    shortcutRegister.put(shortcut2, action2);
+
+    final ToolbarMenuDescriptor menuDesc = new ToolbarMenuDescriptor("Menu descr");
+    final ToolbarMenuDescriptor menuDesc2 = new ToolbarMenuDescriptor("Menu descr 2");
+    menuDesc.setParent(sitebarDesc);
+    menuDesc.withIcon(new KuneIcon('I'));
+
+    final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
+        sitebarDesc);
+    menuDesc2.setParent(sitebarDesc);
+    menuDesc2.withIcon(new KuneIcon('d'));
+
+    menuDesc.withToolTip("Some menu tooltip").withShortcut(shortcut1, shortcutRegister);
+    final MenuItemDescriptor menuItem1 = new MenuItemDescriptor(menuDesc, new AbstractAction() {
+
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        NotifyUser.success("Setting separator visibility to false");
+        separator.setVisible(false);
+      }
+    });
+    menuItem1.withIcon(res.locationBlack()).withText("Some menu item 1");
+    final MenuItemDescriptor menuItem2 = new MenuItemDescriptor(menuDesc, action1);
+    menuItem2.withIcon(res.info()).withText("Some menu item 2").withShortcut(shortcut2, shortcutRegister);
+
+    final MenuItemDescriptor menuItem3 = new MenuItemDescriptor(menuDesc2, action1);
+    menuItem3.withIcon(res.locationBlack()).withText("Some other menu item 1");
+    final MenuItemDescriptor menuItem4 = new MenuItemDescriptor(menuDesc2, action1);
+    menuItem4.withIcon(res.info()).withText("Some other menu item 2").withShortcut(shortcut2,
+        shortcutRegister);
+
+    final MenuCheckItemDescriptor menuCheckItem1 = new MenuCheckItemDescriptor(menuDesc, action1);
+    menuCheckItem1.withText("Check item");
+
+    final SubMenuDescriptor submenuDesc = new SubMenuDescriptor("Some Submenu", "tip", "oc-testico");
+    submenuDesc.setParent(menuDesc);
+
+    final TestAction action3 = new TestAction("Some menu item 3", "Some tooltip", "oc-testico");
+    final TestAction action4 = new TestAction("Action 4");
+
+    final MenuSeparatorDescriptor menuSep = new MenuSeparatorDescriptor(menuDesc);
+    final MenuItemDescriptor menuHeaderItem = new MenuTitleItemDescriptor(menuDesc, "Header");
+    final MenuItemDescriptor menuItemDesc1 = new MenuItemDescriptor(menuDesc, action3);
+    final MenuItemDescriptor menuItemDesc2 = new MenuItemDescriptor(menuDesc, action4);
+    final MenuRadioItemDescriptor menuItemDesc3 = new MenuRadioItemDescriptor(submenuDesc, action1,
+        "somegroup");
+    menuItemDesc3.withText("This text is setted").withShortcut(shortcut1, shortcutRegister);
+    final MenuRadioItemDescriptor menuItemDesc4 = new MenuRadioItemDescriptor(submenuDesc, action2,
+        "somegroup");
+    menuItemDesc4.withText("This text is setted").withShortcut(shortcut2, shortcutRegister);
+
+    return sitebarDesc;
+  }
 
   private void initializeInjector() {
     ginjector = GWT.create(KuneSampleGinjector.class);
@@ -186,6 +342,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel = new AbsolutePanel();
     shortcutRegister = ginjector.getGlobalShortcutRegister();
     shortcutRegister.enable();
+    mainContainer = new MainContainer();
   }
 
   private Widget makeFileUpload() {
@@ -280,8 +437,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     NotifyUser.info("Started");
 
-    RootPanel.get().add(testActionToolbar());
-
     final Navbar simpleNavbar = new Navbar();
     final NavbarHeader header = new NavbarHeader();
     final NavbarCollapseButton navbarCollapseButton = new NavbarCollapseButton();
@@ -362,6 +517,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final DropDown dropDown = new DropDown();
 
     final Anchor dropDownAnchor = new Anchor();
+    // FIXME This fails:
+    // final BasicThumb thumb = testThumbs();
     final Image thumb = new Image("http://lorempixel.com/30/30");
     dropDownAnchor.add(thumb);
     dropDownAnchor.setDataToggle(Toggle.DROPDOWN);
@@ -414,24 +571,25 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // "Text");
     // iconLabel.setIcon(new KuneIcon('g'));
 
-    RootPanel.get().add(btn);
-    // RootPanel.get().add(iconLabel);
-    RootPanel.get().add(new HTML("<br>"));
-    RootPanel.get().add(dropDown);
-    RootPanel.get().add(new HTML("<br>"));
+    final FlowPanel flow = mainContainer.getFlow();
+    flow.insert(btn, 0);
+    flow.insert(new HTML("<br>"), 1);
+    flow.insert(dropDown, 2);
+    flow.insert(new HTML("<br>"), 3);
 
-    final ToolbarDescriptor toolbarDesc = new ToolbarDescriptor();
+    final ToolbarDescriptor bottomToolbar = new ToolbarDescriptor();
+    bottomToolbar.setPosition(NavbarPosition.FIXED_BOTTOM);
 
     final ButtonDescriptor btnDesc = new ButtonDescriptor(new TestAction("Button desc"));
     btnDesc.withIcon(new KuneIcon('z')).withToolTip("Show me a tooltip");
-    btnDesc.setParent(toolbarDesc);
+    btnDesc.setParent(bottomToolbar);
 
     final IconLabelDescriptor labelDesc = new IconLabelDescriptor(new TestAction("IconLabel desc"));
     labelDesc.withIcon(new KuneIcon('l')).withToolTip("Show me a tooltip");
-    labelDesc.setParent(toolbarDesc);
+    labelDesc.setParent(bottomToolbar);
 
     final MenuDescriptor menu = new MenuDescriptor("Menu btn");
-    menu.setParent(toolbarDesc);
+    menu.setParent(bottomToolbar);
     final MenuItemDescriptor menuItemDescriptor = new MenuItemDescriptor(menu, new TestAction(
         "Menu item"));
     menuItemDescriptor.withIcon(IconType.MAGIC);
@@ -443,97 +601,32 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     // TODO Add more tests here
 
-    final FlowActionExtensible flow = new FlowActionExtensible();
-    flow.add(toolbarDesc, widgetMenu, classicMenu, classicMenu2);
+    final FlowActionExtensible sitebar = new FlowActionExtensible();
+    sitebar.add(createSitebarActions());
 
-    RootPanel.get().add(flow);
-    RootPanel.get().add(new HTML("<br>"));
-    RootPanel.get().add(simpleNavbar);
-    // navbarDropDown.setMenuVisible(true);
-    RootPanel.get().add(absolutePanel);
+    final FlowActionExtensible bottombar = new FlowActionExtensible();
+    bottombar.add(bottomToolbar);
 
-  }
+    // RootPanel.get().add(testActionToolbar());
 
-  public void onModuleLoad2() {
-    initializeInjector();
+    final FlowActionExtensible mainFlow = new FlowActionExtensible();
+    mainFlow.add(widgetMenu, classicMenu, classicMenu2);
 
-    final MainContainer mainPanel = new MainContainer();
-    // mainPanel.setWidth("100%");
-    // mainPanel.setHeight("100px");
+    mainContainer.getSitebar().add(sitebar);
+    mainContainer.getFooter().add(bottombar);
+    flow.add(mainFlow);
+    flow.insert(simpleNavbar, 0);
 
-    // final ScrollableDeckPanel scroll = new ScrollableDeckPanel();
-    // final FlowPanel flow = new FlowPanel();
+    addNotifyUserTests(flow);
 
-    final CustomButton next = new CustomButton("Deck next", IconType.PLAY_CIRCLE, new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        mainPanel.next();
-      }
-    });
-    next.setStyleName(ActionStyles.SITEBAR_STYLE);
-    // mainPanel.getSitebar().add(next);
-    mainPanel.getFooter().add(new CustomButton("Footer", IconType.DOWNLOAD, new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        mainPanel.prev();
-      }
-    }));
+    RootLayoutPanel.get().add(mainContainer);
+    // RootPanel.get().add(absolutePanel);
 
-    final FlowPanel flow = mainPanel.getFlow();
+    // RootPanel.get().add(flow);
+    // RootPanel.get().add(new HTML("<br>"));
+    // // navbarDropDown.setMenuVisible(true);
+    // RootPanel.get().add(absolutePanel);
 
-    flow.add(new CustomButton("Show progress", IconType.PLAY_CIRCLE, new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        NotifyUser.showProgressLoading();
-      }
-    }));
-
-    flow.add(new CustomButton("Hide progress", IconType.STOP, new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        NotifyUser.hideProgress();
-      }
-    }));
-
-    flow.add(new CustomButton("Show date", IconType.CLOCK_O, new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        NotifyUser.showProgress("Date : " + new Date().getTime());
-      }
-    }));
-
-    flow.add(new CustomButton("Important message", IconType.WARNING, new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        NotifyUser.important("Alert!");
-      }
-    }));
-
-    flow.add(new CustomButton("Error message", IconType.QUESTION_CIRCLE, new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        NotifyUser.error("Title", "Error!", false);
-      }
-    }));
-    //
-    // scroll.insert(flow, 0);
-    // // scroll.setHeight("400px");
-    // mainPanel.addToMain(scroll);
-    // mainPanel.addToMain(new Label("Test panel"));
-    // RootLayoutPanel.get().add(mainPanel);
-
-    // final MenuDescriptor menu = new MenuDescriptor("Menu");
-
-    // final MenuItemDescriptor menuItemDescriptor = new
-    // MenuItemDescriptor(menu, new TestAction(
-    // "Menu item"));
-    // toolbar.add(menu);
-
-    // mainPanel.getSitebar().add(toolbar);
-
-    // mainPanel.getSitebar().add(new TestBootstrap());
-
-    // mainPanel.getSitebar().add(navmenu);
   }
 
   public void onModuleLoadOld() {
@@ -545,7 +638,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     testBarButtons();
     testTooltips();
 
-    absolutePanel.add(testActionToolbar(), 200, 200);
+    // absolutePanel.add(testActionToolbar(), 200, 200);
 
     final String defLocale = "en";
 
@@ -584,142 +677,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     RootPanel.get().add(absolutePanel);
 
-  }
-
-  /**
-   * Test action toolbar.
-   *
-   * @return
-   */
-  @SuppressWarnings("unused")
-  public Widget testActionToolbar() {
-
-    final AbstractExtendedAction action1 = new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        final SimpleUserMessage simpleMes = new SimpleUserMessage();
-        // simpleMes.show("Hellow world!");
-        NotifyUser.showProgress("Savingggg");
-        NotifyUser.askConfirmation("Some title", "Some message", "Yeah!", "Nein",
-            new SimpleResponseCallback() {
-              @Override
-              public void onCancel() {
-                NotifyUser.error("Cancel");
-              }
-
-              @Override
-              public void onSuccess() {
-                NotifyUser.info("Success");
-              }
-            });
-      }
-    };
-
-    final AbstractExtendedAction action2 = new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        final String title = "Some title";
-        final String message = "Lorem <a href='/'>ipsum</a> dolor sit amet, consectetuer adipiscing elit. Lorem ipsum dolor sit amet, consectetuer adipiscing elit";
-        NotifyUser.showProgress("Saving......" + new Date().getTime());
-        NotifyUser.avatar("http://lorempixel.com/200/200", message, new ClickHandler() {
-          @Override
-          public void onClick(final ClickEvent event) {
-            NotifyUser.info("On click");
-          }
-        });
-        NotifyUser.error(title, message, true);
-        NotifyUser.important(message);
-        NotifyUser.info(message);
-        NotifyUser.success(title, message);
-      }
-    };
-
-    final IconLabelDescriptor iconLabel = new IconLabelDescriptor("This does not work?");
-    iconLabel.setAction(action1);
-    iconLabel.withText("Icon Label 1");
-    iconLabel.withIcon(new KuneIcon('f'));
-
-    final ButtonDescriptor button1 = new ButtonDescriptor("button desc 1", action1);
-    final ButtonDescriptor button2 = new ButtonDescriptor("button desc 2 but bigger bigger", action2);
-    final ButtonDescriptor button3 = new ButtonDescriptor(action1);
-
-    button1.withIcon(res.info()).withToolTip("Some tooltip");
-    button2.withIcon(res.info()).withToolTip("Some tooltip");
-    button3.withIcon(IconType.TWITTER).withToolTip("Some tooltip"); // .withStyles("k-button,gwt-Button,k-btn-min");
-
-    final ToolbarDescriptor toolbarDesc = new ToolbarDescriptor();
-    final ToolbarItemDescriptor anchorItem = new ToolbarItemDescriptor();
-    anchorItem.setAction(new AbstractExtendedAction("Item descr") {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        NotifyUser.info("Clicked");
-      }
-    });
-    anchorItem.withIcon(IconType.MAGNET);
-    anchorItem.setParent(toolbarDesc);
-
-    final KeyStroke shortcut1 = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
-    shortcutRegister.put(shortcut1, action1);
-    final KeyStroke shortcut2 = Shortcut.getShortcut(false, true, false, false, Character.valueOf('D'));
-    shortcutRegister.put(shortcut2, action2);
-
-    final ToolbarMenuDescriptor menuDesc = new ToolbarMenuDescriptor("Menu descr");
-    final ToolbarMenuDescriptor menuDesc2 = new ToolbarMenuDescriptor("Menu descr 2");
-    menuDesc.setParent(toolbarDesc);
-    menuDesc.setRightIcon(res.world16());
-
-    final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
-        toolbarDesc);
-    menuDesc2.setParent(toolbarDesc);
-    menuDesc2.withIcon(IconType.NAVICON);
-
-    menuDesc.withIcon(new KuneIcon('b')).withToolTip("Some menu tooltip").withShortcut(shortcut1,
-        shortcutRegister);
-    final MenuItemDescriptor menuItem1 = new MenuItemDescriptor(menuDesc, new AbstractAction() {
-
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        NotifyUser.success("Setting separator visibility to false");
-        separator.setVisible(false);
-      }
-    });
-    menuItem1.withIcon(res.locationBlack()).withText("Some menu item 1");
-    final MenuItemDescriptor menuItem2 = new MenuItemDescriptor(menuDesc, action1);
-    menuItem2.withIcon(res.info()).withText("Some menu item 2").withShortcut(shortcut2, shortcutRegister);
-
-    final MenuItemDescriptor menuItem3 = new MenuItemDescriptor(menuDesc2, action1);
-    menuItem3.withIcon(res.locationBlack()).withText("Some other menu item 1");
-    final MenuItemDescriptor menuItem4 = new MenuItemDescriptor(menuDesc2, action1);
-    menuItem4.withIcon(res.info()).withText("Some other menu item 2").withShortcut(shortcut2,
-        shortcutRegister);
-
-    final MenuCheckItemDescriptor menuCheckItem1 = new MenuCheckItemDescriptor(menuDesc, action1);
-    menuCheckItem1.withText("Check item");
-
-    final SubMenuDescriptor submenuDesc = new SubMenuDescriptor("Some Submenu", "tip", "oc-testico");
-    submenuDesc.setParent(menuDesc);
-
-    final TestAction action3 = new TestAction("Some menu item 3", "Some tooltip", "oc-testico");
-    final TestAction action4 = new TestAction("Action 4");
-
-    final MenuSeparatorDescriptor menuSep = new MenuSeparatorDescriptor(menuDesc);
-    final MenuItemDescriptor menuHeaderItem = new MenuTitleItemDescriptor(menuDesc, "Header");
-    final MenuItemDescriptor menuItemDesc1 = new MenuItemDescriptor(menuDesc, action3);
-    final MenuItemDescriptor menuItemDesc2 = new MenuItemDescriptor(menuDesc, action4);
-    final MenuRadioItemDescriptor menuItemDesc3 = new MenuRadioItemDescriptor(submenuDesc, action1,
-        "somegroup");
-    menuItemDesc3.withText("This text is setted").withShortcut(shortcut1, shortcutRegister);
-    final MenuRadioItemDescriptor menuItemDesc4 = new MenuRadioItemDescriptor(submenuDesc, action2,
-        "somegroup");
-    menuItemDesc4.withText("This text is setted").withShortcut(shortcut2, shortcutRegister);
-
-    // TODO: add more things here
-
-    final FlowActionExtensible flowActions = new FlowActionExtensible();
-
-    flowActions.add(toolbarDesc, button1, button2, button3, iconLabel);
-
-    return flowActions;
   }
 
   /**
@@ -790,12 +747,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?", false, true,
         Direction.LTR, new OnEnter() {
 
-          @Override
-          public void onEnter() {
-            NotifyUser.info("On Enter");
+      @Override
+      public void onEnter() {
+        NotifyUser.info("On Enter");
 
-          }
-        });
+      }
+    });
     builder.width("200px").height("200px").firstButtonTitle("Create").sndButtonTitle("Cancel");
     builder.regex(TextUtils.UNIX_NAME).regexText(
         "The name must contain only characters, numbers and dashes");
@@ -809,6 +766,21 @@ public class KuneSandboxEntryPoint implements EntryPoint {
         Window.alert("ok");
       }
     });
+  }
+
+  public void testSimpleActions() {
+    final ButtonDescriptor button1 = new ButtonDescriptor("button desc 1", action1);
+    final ButtonDescriptor button2 = new ButtonDescriptor("button desc 2 but bigger bigger", action2);
+    final ButtonDescriptor button3 = new ButtonDescriptor(action1);
+
+    button1.withIcon(res.info()).withToolTip("Some tooltip");
+    button2.withIcon(res.info()).withToolTip("Some tooltip");
+    button3.withIcon(IconType.TWITTER).withToolTip("Some tooltip"); // .withStyles("k-button,gwt-Button,k-btn-min");
+    final IconLabelDescriptor iconLabel = new IconLabelDescriptor("This does not work?");
+    iconLabel.setAction(action1);
+    iconLabel.withText("Icon Label 1");
+    iconLabel.withIcon(new KuneIcon('f'));
+
   }
 
   //
@@ -869,11 +841,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
         false, new ClickHandler() {
 
-          @Override
-          public void onClick(final ClickEvent event) {
-            userMsg.show("Testing");
-          }
-        });
+      @Override
+      public void onClick(final ClickEvent event) {
+        userMsg.show("Testing");
+      }
+    });
     thumb.setTooltip("Some thumb tooltip");
     thumb.setOnOverLabel(true);
     return thumb;
@@ -902,16 +874,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(button4, clientWidth - 90, clientHeight - 60);
     Tooltip.to(button,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button2,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button3,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button4,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
 
   }
 }

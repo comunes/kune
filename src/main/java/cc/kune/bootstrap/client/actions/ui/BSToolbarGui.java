@@ -26,12 +26,14 @@ import org.gwtbootstrap3.client.ui.Navbar;
 import org.gwtbootstrap3.client.ui.NavbarCollapse;
 import org.gwtbootstrap3.client.ui.NavbarCollapseButton;
 import org.gwtbootstrap3.client.ui.NavbarHeader;
+import org.gwtbootstrap3.client.ui.constants.NavbarPosition;
 
 import cc.kune.bootstrap.client.ui.ComplexNavbarNav;
 import cc.kune.common.client.actions.ui.AbstractBasicGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.user.client.ui.HTMLPanel;
@@ -70,6 +72,11 @@ public class BSToolbarGui extends AbstractBasicGuiItem {
     final NavbarCollapse navbarCollapse = new NavbarCollapse();
     navbarCollapse.setId(id);
     navbar.add(navbarCollapse);
+
+    final NavbarPosition position = (NavbarPosition) descriptor.getValue(ToolbarDescriptor.POSITION);
+    if (position != null) {
+      navbar.setPosition(position);
+    }
 
     navbarNav = new ComplexNavbarNav();
     navbarCollapse.add(navbarNav);

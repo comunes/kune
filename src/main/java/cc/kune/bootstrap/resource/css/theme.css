@@ -27,7 +27,7 @@ nav.k-toolbar-navbar {
   margin: 0px;  
   height: 23px;
   min-height: 23px !important;
-  background-color: transparent;
+  /* background-color: white; */
 }
 
 nav.k-toolbar-navbar > div > ul > li > a {
@@ -41,3 +41,8 @@ nav.k-toolbar-navbar  .k-toolbar-separator {
   height: 16px;
   margin-top: 3px;
 }
+
+/* Active space in sitebar navbar */
+nav.k-toolbar-navbar > div > ul > li  > a.currentspace {
+  border-bottom: 3px solid #69312f;
+} 

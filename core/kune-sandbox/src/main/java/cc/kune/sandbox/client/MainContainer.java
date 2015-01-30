@@ -1,7 +1,7 @@
 package cc.kune.sandbox.client;
 
+import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.Label;
-import org.gwtbootstrap3.client.ui.NavbarNav;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.constants.LabelType;
 import org.gwtbootstrap3.client.ui.html.Text;
@@ -26,19 +26,18 @@ public class MainContainer extends Composite {
   private static MainContainerUiBinder uiBinder = GWT.create(MainContainerUiBinder.class);
 
   @UiField
+  Column bottomColumn;
+  @UiField
   DeckPanel deck;
   @UiField
   FlowPanel flow;
   @UiField
-  NavbarNav footerbar;
-  @UiField
   ScrollPanel scroll;
   @UiField
-  NavbarNav sitebar;
+  Column topColumn;
 
   public MainContainer() {
     initWidget(uiBinder.createAndBindUi(this));
-    final FlowPanel flow = new FlowPanel();
     deck.add(flow);
     flow.add(new Text(LoremUtils.LOREM_MULTI + LoremUtils.LOREM_MULTI));
     deck.add(new Label("Deck 1"));
@@ -99,11 +98,11 @@ public class MainContainer extends Composite {
   }
 
   public ComplexWidget getFooter() {
-    return footerbar;
+    return bottomColumn;
   }
 
   public ComplexWidget getSitebar() {
-    return sitebar;
+    return topColumn;
   }
 
   public void next() {
