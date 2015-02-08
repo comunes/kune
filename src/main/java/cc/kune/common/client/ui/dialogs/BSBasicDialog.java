@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -20,12 +20,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 package cc.kune.common.client.ui.dialogs;
 
-import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+import org.gwtbootstrap3.client.ui.Button;
+import org.gwtbootstrap3.client.ui.Modal;
 
 import cc.kune.common.client.tooltip.Tooltip;
-import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.core.client.GWT;
@@ -37,63 +38,28 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
-import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class BasicDialog.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
-public class BasicDialog extends Composite implements BasicDialogView {
+public class BSBasicDialog extends Composite implements BasicDialogView {
 
-  /**
-   * The Interface BasicDialogUiBinder.
-   *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  interface BasicDialogUiBinder extends UiBinder<Widget, BasicDialog> {
+  interface BSBasicDialogUiBinder extends UiBinder<Widget, BSBasicDialog> {
   }
 
-  /** The ui binder. */
-  private static BasicDialogUiBinder uiBinder = GWT.create(BasicDialogUiBinder.class);
+  private static BSBasicDialogUiBinder uiBinder = GWT.create(BSBasicDialogUiBinder.class);
 
-  /** The bottom panel. */
   @UiField
-  VerticalPanel bottomPanel;
-
-  /** The btn panel. */
+  FlowPanel bottomPanel;
   @UiField
-  FlowPanel btnPanel;
-
-  /** The close btn. */
+  Button firstBtn;
   @UiField
-  CloseDialogButton closeBtn;
-  /** The first btn. */
+  Modal modal;
   @UiField
-  CustomButton firstBtn;
-
-  /** The main panel. */
-  @UiField
-  FlowPanel flow;
-
-  /** The second btn. */
-  @UiField
-  CustomButton secondBtn;
-
-  /** The title. */
-  @UiField
-  IconLabel title;
-
-  /** The vp. */
+  Button secondBtn;
   @UiField
   FlowPanel vp;
 
-  /**
-   * Instantiates a new basic dialog.
-   */
-  public BasicDialog() {
+  public BSBasicDialog() {
     initWidget(uiBinder.createAndBindUi(this));
   }
 
@@ -121,33 +87,9 @@ public class BasicDialog extends Composite implements BasicDialogView {
     }
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getBottomPanel()
-   */
   @Override
   public ForIsWidget getBottomPanel() {
     return bottomPanel;
-  }
-
-  /**
-   * Gets the btn panel.
-   *
-   * @return the btn panel
-   */
-  public FlowPanel getBtnPanel() {
-    return btnPanel;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getCloseBtn()
-   */
-  @Override
-  public HasClickHandlers getCloseBtn() {
-    return closeBtn;
   }
 
   /*
@@ -155,9 +97,11 @@ public class BasicDialog extends Composite implements BasicDialogView {
    * 
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getFirstBtn()
    */
+
   @Override
-  public HasClickHandlers getFirstBtn() {
-    return firstBtn;
+  public HasClickHandlers getCloseBtn() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
   /*
@@ -165,34 +109,10 @@ public class BasicDialog extends Composite implements BasicDialogView {
    * 
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getInnerPanel()
    */
-  @Override
-  public ForIsWidget getInnerPanel() {
-    return vp;
-  }
 
   @Override
-  public ForIsWidget getMainPanel() {
-    return flow;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getSecondBtn()
-   */
-  @Override
-  public HasClickHandlers getSecondBtn() {
-    return secondBtn;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getTitleText()
-   */
-  @Override
-  public HasDirectionalText getTitleText() {
-    return title;
+  public HasClickHandlers getFirstBtn() {
+    return firstBtn;
   }
 
   /*
@@ -202,9 +122,10 @@ public class BasicDialog extends Composite implements BasicDialogView {
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setCloseBtnTooltip(java
    * .lang.String)
    */
+
   @Override
-  public void setCloseBtnTooltip(final String tooltip) {
-    Tooltip.to(closeBtn, tooltip);
+  public ForIsWidget getInnerPanel() {
+    return vp;
   }
 
   /*
@@ -214,9 +135,31 @@ public class BasicDialog extends Composite implements BasicDialogView {
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setCloseBtnVisible(boolean
    * )
    */
+
+  @Override
+  public ForIsWidget getMainPanel() {
+    return vp;
+  }
+
+  @Override
+  public HasClickHandlers getSecondBtn() {
+    return secondBtn;
+  }
+
+  @Override
+  public HasDirectionalText getTitleText() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public void setCloseBtnTooltip(final String tooltip) {
+    Tooltip.to(secondBtn, tooltip);
+  }
+
   @Override
   public void setCloseBtnVisible(final boolean visible) {
-    closeBtn.setVisible(visible);
+    secondBtn.setVisible(visible);
   }
 
   /**
@@ -229,65 +172,29 @@ public class BasicDialog extends Composite implements BasicDialogView {
     firstBtn.setEnabled(enabled);
   }
 
-  /**
-   * Sets the first btn focus.
-   */
   public void setFirstBtnFocus() {
     firstBtn.setFocus(true);
   }
 
-  /**
-   * Sets the first btn id.
-   *
-   * @param id
-   *          the new first btn id
-   */
   public void setFirstBtnId(final String id) {
     firstBtn.ensureDebugId(id);
   }
 
-  /**
-   * Sets the first btn tab index.
-   *
-   * @param index
-   *          the new first btn tab index
-   */
   public void setFirstBtnTabIndex(final int index) {
     firstBtn.setTabIndex(index);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.ui.dialogs.BasicDialogView#setFirstBtnText(java.lang
-   * .String)
-   */
   @Override
   public void setFirstBtnText(final String text) {
     firstBtn.setText(text);
     firstBtn.setVisible(TextUtils.notEmpty(text));
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.ui.dialogs.BasicDialogView#setFirstBtnTitle(java.
-   * lang.String)
-   */
   @Override
   public void setFirstBtnTitle(final String title) {
     firstBtn.setTitle(title);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.ui.dialogs.BasicDialogView#setFirstBtnVisible(boolean
-   * )
-   */
   @Override
   public void setFirstBtnVisible(final boolean visible) {
     firstBtn.setVisible(visible);
@@ -303,6 +210,14 @@ public class BasicDialog extends Composite implements BasicDialogView {
     vp.setHeight(height);
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnText(java.
+   * lang.String)
+   */
+
   /**
    * Sets the inner width.
    *
@@ -313,6 +228,14 @@ public class BasicDialog extends Composite implements BasicDialogView {
     vp.setWidth(width);
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnTitle(java
+   * .lang.String)
+   */
+
   /**
    * Sets the second btn enabled.
    *
@@ -322,6 +245,14 @@ public class BasicDialog extends Composite implements BasicDialogView {
   public void setSecondBtnEnabled(final boolean enabled) {
     secondBtn.setEnabled(enabled);
   }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnVisible(boolean
+   * )
+   */
 
   /**
    * Sets the second btn id.
@@ -343,38 +274,17 @@ public class BasicDialog extends Composite implements BasicDialogView {
     secondBtn.setTabIndex(index);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnText(java.
-   * lang.String)
-   */
   @Override
   public void setSecondBtnText(final String text) {
     secondBtn.setText(text);
     secondBtn.setVisible(TextUtils.notEmpty(text));
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnTitle(java
-   * .lang.String)
-   */
   @Override
   public void setSecondBtnTitle(final String title) {
     secondBtn.setTitle(title);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnVisible(boolean
-   * )
-   */
   @Override
   public void setSecondBtnVisible(final boolean visible) {
     secondBtn.setVisible(visible);
@@ -387,7 +297,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
    *          the new title icon
    */
   public void setTitleIcon(final ImageResource img) {
-    title.setLeftIconResource(img);
+    // title.setLeftIconResource(img);
   }
 
   /**
@@ -398,13 +308,13 @@ public class BasicDialog extends Composite implements BasicDialogView {
    */
   public void setTitleIcon(final String icon) {
     if (TextUtils.notEmpty(icon)) {
-      title.setLeftIcon(icon);
+      // title.setLeftIcon(icon);
     }
   }
 
   public void setTitleIconUrl(final String url) {
     if (TextUtils.notEmpty(url)) {
-      title.setLeftIconUrl(url);
+      // title.setLeftIconUrl(url);
     }
   }
 
@@ -415,7 +325,18 @@ public class BasicDialog extends Composite implements BasicDialogView {
    *          the new title id
    */
   public void setTitleId(final String id) {
-    title.ensureDebugId(id);
+    // title.ensureDebugId(id);
+  }
+
+  public void setTitleText(final String title) {
+    modal.setTitle(title);
+  }
+
+  public void show() {
+    if (!modal.isAttached()) {
+      RootLayoutPanel.get().add(this);
+    }
+    modal.show();
   }
 
 }

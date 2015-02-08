@@ -34,14 +34,14 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SampleGinModule.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SampleGinModule extends AbstractGinModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -50,5 +50,6 @@ public class SampleGinModule extends AbstractGinModule {
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
     bind(GwtGuiProvider.class).in(Singleton.class);
     bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
+
   }
 }

@@ -32,10 +32,10 @@ package cc.kune.common.shared.res;
 public enum KuneIcon {
   ADD('s'), ADD_SMALL('B'), BACK('w'), BARTER('g'), BLOG_POST('c'), BLOGS('q'), CHAT('K'), CHAT_TOOL('d'), COPYLEFT(
       'M'), DEL('t'), DEL_SMALL('C'), DOCS('b'), DOCS_ROOT('a'), EVENT('h'), EVENTS('p'), FACEBOOK('F'), FOLDER(
-      'f'), GOOGLE('G'), GROUP('I'), HOME('v'), IDENTICA('E'), INFO('x'), KUNE('A'), LIST_POST_AND_MESSAGE(
-      'k'), LISTS('o'), PICTURE('j'), REFRESH('u'), SETTINGS('z'), STOP('D'), TASK_FOLDER('m'), TASKS(
-      'l'), TRASH('i'), TWITTER('H'), UNDO('y'), WIKI('e'), WIKI_FOLDER('n'), WORLD('r'), WRITE('J'), YET_EMPTY(
-      'L');
+          'f'), GOOGLE('G'), GROUP('I'), HOME('v'), IDENTICA('E'), INFO('x'), KUNE('A'), LIST_POST_AND_MESSAGE(
+              'k'), LISTS('o'), PICTURE('j'), REFRESH('u'), SETTINGS('z'), STOP('D'), TASK_FOLDER('m'), TASKS(
+                  'l'), TRASH('i'), TWITTER('H'), UNDO('y'), WIKI('e'), WIKI_FOLDER('n'), WORLD('r'), WRITE('J'), YET_EMPTY(
+                      'L');
 
   private final Character character;
 
@@ -57,10 +57,5 @@ public enum KuneIcon {
   public Character getCharacter() {
     return character;
   };
-
-  //
-  // public static IconType fromStyleName(final String styleName) {
-  // return EnumHelper.fromStyleName(styleName, IconType.class, null);
-  // }
 
 }

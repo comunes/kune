@@ -1,0 +1,8 @@
+\.\#*
+\#*\#
+war/bower.json
+war/bower_components/
+war/images/
+war/index.html
+war/kune-polymer.js
+war/watch.sh

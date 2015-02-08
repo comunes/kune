@@ -22,13 +22,22 @@ a.k-bs-iconlabel {
   color: gray;
 }
 
+nav.k-toolbar-navbar > nav.ul {
+  float: inherit;
+}
+
+nav.k-toolbar-navbar > div > ul {
+  /* This make pull left/right to work */
+  float: none;
+}
+
 nav.k-toolbar-navbar {
   border: 0px;
   margin: 0px;  
   height: 23px;
   min-height: 23px !important;
-  /* background-color: white; */
-}
+  background-color: #f2f2f2;
+5}
 
 nav.k-toolbar-navbar > div > ul > li > a {
   margin-top: 0px;
@@ -43,6 +52,6 @@ nav.k-toolbar-navbar  .k-toolbar-separator {
 }
 
 /* Active space in sitebar navbar */
-nav.k-toolbar-navbar > div > ul > li  > a.currentspace {
+nav.k-toolbar-navbar > div > ul > li.current-item {
   border-bottom: 3px solid #69312f;
 } 

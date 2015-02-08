@@ -10,6 +10,11 @@ public class BSToolbarItemGui extends AbstractBSChildGuiItem {
   private ComplexAnchorListItem item;
 
   @Override
+  protected void addStyle(final String style) {
+    item.addStyleName(style);
+  }
+
+  @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
     item = new ComplexAnchorListItem();

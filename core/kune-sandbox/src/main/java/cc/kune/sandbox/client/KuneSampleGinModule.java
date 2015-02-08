@@ -52,7 +52,7 @@ public class KuneSampleGinModule extends AbstractGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -75,7 +75,7 @@ public class KuneSampleGinModule extends AbstractGinModule {
     bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
 
     bind(UserNotifierGrowl.class).asEagerSingleton();
+    bind(PaperProgressNotificator.class).asEagerSingleton();
     bind(UserConfirmBS.class).asEagerSingleton();
-
   }
 }

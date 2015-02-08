@@ -4,9 +4,6 @@ import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.Label;
 import org.gwtbootstrap3.client.ui.base.ComplexWidget;
 import org.gwtbootstrap3.client.ui.constants.LabelType;
-import org.gwtbootstrap3.client.ui.html.Text;
-
-import cc.kune.common.shared.utils.LoremUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Overflow;
@@ -39,7 +36,6 @@ public class MainContainer extends Composite {
   public MainContainer() {
     initWidget(uiBinder.createAndBindUi(this));
     deck.add(flow);
-    flow.add(new Text(LoremUtils.LOREM_MULTI + LoremUtils.LOREM_MULTI));
     deck.add(new Label("Deck 1"));
     final Label label2 = new Label("Deck 2");
     label2.setType(LabelType.WARNING);

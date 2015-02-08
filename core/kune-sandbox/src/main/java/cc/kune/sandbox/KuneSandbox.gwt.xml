@@ -14,6 +14,7 @@
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
   <!-- Other module inherits -->
+  <inherits name="br.com.rpa.GwtPolymer" />
 
   <!-- Specify the paths for translatable code -->
   <source path='client' />

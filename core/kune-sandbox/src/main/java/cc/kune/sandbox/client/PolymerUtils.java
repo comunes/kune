@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -21,29 +21,19 @@
  *
  */
 
-package cc.kune.gspace.client.armor;
+package cc.kune.sandbox.client;
 
-import com.google.gwt.user.client.ui.InsertPanel;
-import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.ui.HTMLPanel;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Interface GSpaceCenter.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
-public interface GSpaceCenter extends InsertPanel.ForIsWidget, IsWidget {
+public class PolymerUtils {
 
-  /**
-   * Clear.
-   */
-  void clear();
+  @SuppressWarnings("deprecation")
+  public native static com.google.gwt.user.client.Element getShadowElement(String father, String child) /*-{
+		return $doc.querySelector(father).shadowRoot.querySelector(child)
+  }-*/;
 
-  /**
-   * Show widget.
-   *
-   * @param widget
-   *          the widget
-   */
-  void showWidget(IsWidget widget);
+  public static HTMLPanel wrapDiv(final String id) {
+    return HTMLPanel.wrap(DOM.getElementById(id));
+  }
 }
