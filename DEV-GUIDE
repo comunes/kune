@@ -137,6 +137,7 @@ NOTE: When a URL repository is indicated, it should be added to Eclipse > Help >
 - [ ] AnyEditTools (to remove tabs and so on)
 - [ ] MercurialEclipse (if you wanna play with the WIAB code)
 - [ ] EGit for Mylyn (connecting EGit and Mylyn)
+- [ ] AutoDeriv (see our .derived file that works like .gitignore)
 
 *** Other Eclipse info
  
