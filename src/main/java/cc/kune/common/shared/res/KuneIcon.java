@@ -30,12 +30,47 @@ package cc.kune.common.shared.res;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum KuneIcon {
-  ADD('s'), ADD_SMALL('B'), BACK('w'), BARTER('g'), BLOG_POST('c'), BLOGS('q'), CHAT('K'), CHAT_TOOL('d'), COPYLEFT(
-      'M'), DEL('t'), DEL_SMALL('C'), DOCS('b'), DOCS_ROOT('a'), EVENT('h'), EVENTS('p'), FACEBOOK('F'), FOLDER(
-          'f'), GOOGLE('G'), GROUP('I'), HOME('v'), IDENTICA('E'), INFO('x'), KUNE('A'), LIST_POST_AND_MESSAGE(
-              'k'), LISTS('o'), PICTURE('j'), REFRESH('u'), SETTINGS('z'), STOP('D'), TASK_FOLDER('m'), TASKS(
-                  'l'), TRASH('i'), TWITTER('H'), UNDO('y'), WIKI('e'), WIKI_FOLDER('n'), WORLD('r'), WRITE('J'), YET_EMPTY(
-                      'L');
+  /* @formatter:off */
+  ADD('s'),
+  ADD_SMALL('B'),
+  BACK('w'),
+  BARTER('g'),
+  BLOG_POST('c'),
+  BLOGS('q'),
+  CHAT('K'),
+  CHAT_TOOL('d'),
+  COPYLEFT('M'),
+  DEL('t'),
+  DEL_SMALL('C'),
+  DOCS('b'),
+  DOCS_ROOT('a'),
+  EVENT('h'),
+  EVENTS('p'),
+  FACEBOOK('F'),
+  FOLDER('f'),
+  GOOGLE('G'),
+  GROUP('I'),
+  HOME('v'),
+  IDENTICA('E'),
+  INFO('x'),
+  KUNE('A'),
+  LIST_POST_AND_MESSAGE('k'),
+  LISTS('o'),
+  PICTURE('j'),
+  REFRESH('u'),
+  SETTINGS('z'),
+  STOP('D'),
+  TASK_FOLDER('m'),
+  TASKS('l'),
+  TRASH('i'),
+  TWITTER('H'),
+  UNDO('y'),
+  WIKI('e'),
+  WIKI_FOLDER('n'),
+  WORLD('r'),
+  WRITE('J'),
+  YET_EMPTY('L');
+  /* @formatter:on */
 
   private final Character character;
 

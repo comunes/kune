@@ -115,9 +115,9 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
     defSearchLabel.addStyleName("k-fr");
     defSearchLabel.addStyleName("k-sitebarsearch-deftext");
 
-    gs.getSitebar().add(multivalueSBox);
-    gs.getSitebar().add(searchButton);
-    gs.getSitebar().add(defSearchLabel);
+    gs.getSitebarLeft().add(multivalueSBox);
+    gs.getSitebarLeft().add(searchButton);
+    gs.getSitebarLeft().add(defSearchLabel);
     defSearchLabel.getElement().getStyle().setLeft(defSearchLabel.getOffsetWidth() + 27, Unit.PX);
     setTextSearchSmallImpl();
   }

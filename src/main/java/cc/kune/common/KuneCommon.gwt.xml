@@ -17,7 +17,8 @@
   <inherits name='com.google.gwt.inject.Inject' />
   <inherits name='com.google.gwt.query.Query' />
   <inherits name="cc.kune.bootstrap.KuneBootstrap" />
-  
+  <inherits name="cc.kune.polymer.KunePolymer" />  
+    
   <stylesheet src="kune-common.css" />
 
   <inherits name="org.vectomatic.libgwtfile" />

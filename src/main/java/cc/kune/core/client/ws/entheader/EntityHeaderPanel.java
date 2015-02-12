@@ -22,54 +22,56 @@
  */
 package cc.kune.core.client.ws.entheader;
 
-import cc.kune.common.client.actions.ui.ActionFlowPanel;
+import org.gwtbootstrap3.client.ui.html.Text;
+
+import br.com.rpa.client._coreelements.CoreIconButton;
 import cc.kune.common.client.actions.ui.GuiProvider;
+import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.ui.WrappedFlowPanel;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.avatar.MediumAvatarDecorator;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.core.client.sn.GroupMembersUpdatedEvent;
+import cc.kune.core.client.sn.UserFollowersUpdatedEvent;
 import cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView;
-import cc.kune.core.shared.FileConstants;
-import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewImpl;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class EntityHeaderPanel.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
+@Singleton
 public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
+  private final MediumAvatarDecorator decorator;
   /** The download provider. */
   private final Provider<ClientFileDownloadUtils> downloadProvider;
+  private final CoreIconButton followersBtn;
 
-  /** The entity text logo. */
-  private final EntityTextLogo entityTextLogo;
-
+  private final Text groupLongName;
   /** The images. */
   private final CoreResources images;
-
-  /** The main panel. */
-  private final HorizontalPanel mainPanel;
-
+  private final Image logo;
+  private final Element logoShadow;
+  private final Anchor shortNameAnchor;
   /** The toolbar. */
-  private final ActionFlowPanel toolbar;
-
-  /** The vpanel. */
-  private final VerticalPanel vpanel;
+  private final IsActionExtensible toolbar;
 
   /**
    * Instantiates a new entity header panel.
@@ -88,22 +90,41 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
    *          the i18n
    */
   @Inject
-  public EntityHeaderPanel(final Provider<ClientFileDownloadUtils> downloadProvider,
-      final CoreResources images, final GuiProvider bindings, final GSpaceArmor armor,
-      final EntityTextLogo entityTextLogo, final I18nTranslationService i18n) {
-    this.entityTextLogo = entityTextLogo;
-    mainPanel = new HorizontalPanel();
-    mainPanel.setWidth("100%");
+  public EntityHeaderPanel(final EventBus eventBus,
+      final Provider<ClientFileDownloadUtils> downloadProvider, final CoreResources images,
+      final GuiProvider bindings, final GSpaceArmor armor, final EntityTextLogo entityTextLogo,
+      final I18nTranslationService i18n, final MediumAvatarDecorator decorator) {
     this.downloadProvider = downloadProvider;
     this.images = images;
-    vpanel = new VerticalPanel();
-    vpanel.setWidth("100%");
-    vpanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_RIGHT);
-    mainPanel.add(entityTextLogo);
-    toolbar = new ActionFlowPanel(bindings, i18n);
-    vpanel.add(toolbar);
-    mainPanel.add(vpanel);
-    armor.getEntityHeader().add(mainPanel);
+    this.decorator = decorator;
+    toolbar = armor.getHeaderToolbar();
+
+    logo = armor.getGroupLogo();
+    logo.removeFromParent();
+    final WrappedFlowPanel groupNamePanel = armor.getGroupName();
+    groupLongName = new Text();
+    groupNamePanel.add(groupLongName);
+    logoShadow = armor.getLogoShadow();
+    final WrappedFlowPanel shorNamePanel = armor.getGroupShortName();
+    shortNameAnchor = new Anchor();
+    shorNamePanel.add(shortNameAnchor);
+    decorator.setWidget(logo);
+    logoShadow.appendChild(((Widget) decorator).getElement());
+    followersBtn = (CoreIconButton) armor.getFollowersButton();
+    eventBus.addHandler(GroupMembersUpdatedEvent.getType(),
+        new GroupMembersUpdatedEvent.GroupMembersUpdatedHandler() {
+      @Override
+      public void onGroupMembersUpdated(final GroupMembersUpdatedEvent event) {
+        followersBtn.setText(I18n.t("[%d] members", event.getMembers()));
+      }
+    });
+    eventBus.addHandler(UserFollowersUpdatedEvent.getType(),
+        new UserFollowersUpdatedEvent.UserFollowersUpdatedHandler() {
+      @Override
+      public void onUserFollowersUpdated(final UserFollowersUpdatedEvent event) {
+        followersBtn.setText(I18n.t("[%d] followers", event.getFollowers()));
+      }
+    });
   }
 
   /*
@@ -121,59 +142,11 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   /*
    * (non-Javadoc)
    * 
-   * @see
-   * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
-   * #addWidget(com.google.gwt.user.client.ui.IsWidget)
-   */
-  @Override
-  public void addWidget(final IsWidget view) {
-    final Widget widget = (Widget) view;
-    vpanel.add(widget);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
   public Widget asWidget() {
-    return mainPanel;
-  }
-
-  /**
-   * Sets the full logo.
-   *
-   * @param stateToken
-   *          the state token
-   * @param clipped
-   *          the clipped
-   */
-  @Deprecated
-  public void setFullLogo(final StateToken stateToken, final boolean clipped) {
-    mainPanel.clear();
-    final String imageUrl = downloadProvider.get().getImageUrl(stateToken);
-    Image logo;
-    if (clipped) {
-      logo = new Image(imageUrl, 0, 0, FileConstants.LOGO_DEF_WIDTH, FileConstants.LOGO_DEF_SIZE);
-    } else {
-      logo = new Image(imageUrl);
-      logo.setWidth(String.valueOf(FileConstants.LOGO_DEF_WIDTH));
-      logo.setHeight(String.valueOf(FileConstants.LOGO_DEF_SIZE));
-    }
-    mainPanel.add(logo);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
-   * #setLargeFont()
-   */
-  @Override
-  public void setLargeFont() {
-    entityTextLogo.setLargeFont();
+    return null;
   }
 
   /*
@@ -187,7 +160,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   public void setLogoImage(final GroupDTO group) {
     final String shortName = group.getShortName();
     final String url = downloadProvider.get().getLogoImageUrl(shortName);
-    entityTextLogo.setLogoImage(url);
+    logo.setUrl(url);
   }
 
   /*
@@ -199,7 +172,8 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
    */
   @Override
   public void setLogoImageVisible(final boolean visible) {
-    entityTextLogo.setLogoVisible(visible);
+    logo.setVisible(visible);
+    logoShadow.getStyle().setDisplay(visible ? Display.BLOCK : Display.NONE);
   }
 
   /*
@@ -210,20 +184,10 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
    * #setLogoText(java.lang.String)
    */
   @Override
-  public void setLogoText(final String groupName) {
-    entityTextLogo.setLogoText(groupName);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
-   * #setMediumFont()
-   */
-  @Override
-  public void setMediumFont() {
-    entityTextLogo.setMediumFont();
+  public void setLogoText(final String groupName, final String groupShortName) {
+    groupLongName.setText(groupName);
+    shortNameAnchor.setText("#" + groupShortName);
+    shortNameAnchor.setHref("#!" + groupShortName);
   }
 
   /*
@@ -235,7 +199,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
    */
   @Override
   public void setOnlineStatusGroup(final String group) {
-    entityTextLogo.setOnlineStatusGroup(group);
+    decorator.setItem(group);
   }
 
   /*
@@ -247,19 +211,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
    */
   @Override
   public void setOnlineStatusVisible(final boolean visible) {
-    entityTextLogo.setOnlineStatusVisible(visible);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
-   * #setSmallFont()
-   */
-  @Override
-  public void setSmallFont() {
-    entityTextLogo.setSmallFont();
+    decorator.setDecoratorVisible(visible);
   }
 
   /*
@@ -271,7 +223,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
    */
   @Override
   public void showDefUserLogo() {
-    entityTextLogo.setLogoImage(AbstractImagePrototype.create(images.unknown60()));
+    logo.setResource(images.unknown60());
   }
 
 }

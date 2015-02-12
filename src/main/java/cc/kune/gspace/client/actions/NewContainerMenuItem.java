@@ -38,14 +38,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewContainerMenuItem.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewContainerMenuItem extends MenuItemDescriptor {
 
   /**
    * The Class NewContainerAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class NewContainerAction extends RolAction {
@@ -55,7 +55,7 @@ public class NewContainerMenuItem extends MenuItemDescriptor {
 
     /**
      * Instantiates a new new container action.
-     * 
+     *
      * @param contentService
      *          the content service
      */
@@ -67,7 +67,7 @@ public class NewContainerMenuItem extends MenuItemDescriptor {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -87,7 +87,7 @@ public class NewContainerMenuItem extends MenuItemDescriptor {
 
   /**
    * Instantiates a new new container menu item.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param action
@@ -113,6 +113,6 @@ public class NewContainerMenuItem extends MenuItemDescriptor {
     // The name given to this new content
     action.putValue(NEW_NAME, newName);
     action.putValue(ID, id);
-    this.withText(title).withToolTip(tooltip).withIcon(icon).withStyles("k-def-docbtn, k-fr");
+    this.withText(title).withToolTip(tooltip).withIcon(icon); // .withStyles("k-def-docbtn, k-fr");
   }
 }

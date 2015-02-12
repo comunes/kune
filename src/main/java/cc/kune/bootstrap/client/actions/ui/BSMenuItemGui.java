@@ -24,6 +24,9 @@ package cc.kune.bootstrap.client.actions.ui;
 
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+
 /**
  * The Class BSMenuItemGui.
  *
@@ -33,7 +36,15 @@ public class BSMenuItemGui extends AbstractBSMenuItemGui {
 
   @Override
   protected void configureClickListener() {
-    item.addClickHandler(defClickHandler);
+    item.addClickHandler(new ClickHandler() {
+
+      @Override
+      public void onClick(final ClickEvent event) {
+        getParentMenu(descriptor).hide();
+        clickHandlerChildDefautl.onClick(event);
+      }
+    });
+
   }
 
   @Override

@@ -49,22 +49,22 @@ import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
 import com.calclab.emite.im.client.presence.PresenceManager;
 import com.calclab.emite.im.client.presence.events.OwnPresenceChangedEvent;
 import com.calclab.emite.im.client.presence.events.OwnPresenceChangedHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ChatSitebarActions.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ChatSitebarActions {
 
   /**
    * The Class ChangeOfflineStatusAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class ChangeOfflineStatusAction extends AbstractExtendedAction {
@@ -74,7 +74,7 @@ public class ChatSitebarActions {
 
     /**
      * Instantiates a new change offline status action.
-     * 
+     *
      * @param session
      *          the session
      * @param icon
@@ -94,7 +94,7 @@ public class ChatSitebarActions {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -107,7 +107,7 @@ public class ChatSitebarActions {
 
   /**
    * The Class ChangeOnlineStatusAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class ChangeOnlineStatusAction extends AbstractExtendedAction {
@@ -123,7 +123,7 @@ public class ChatSitebarActions {
 
     /**
      * Instantiates a new change online status action.
-     * 
+     *
      * @param presenceManager
      *          the presence manager
      * @param statusText
@@ -143,7 +143,7 @@ public class ChatSitebarActions {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -159,7 +159,7 @@ public class ChatSitebarActions {
 
     /**
      * Update status icon.
-     * 
+     *
      * @param currentPresence
      *          the current presence
      */
@@ -222,7 +222,7 @@ public class ChatSitebarActions {
 
   /**
    * Instantiates a new chat sitebar actions.
-   * 
+   *
    * @param session
    *          the session
    * @param chatClient
@@ -261,7 +261,10 @@ public class ChatSitebarActions {
   private void createActions() {
     final MenuTitleItemDescriptor chatActionsTitle = new MenuTitleItemDescriptor(
         SiteUserOptionsPresenter.LOGGED_USER_MENU, i18n.t("Set your chat status"));
-    userOptions.addAction(new MenuSeparatorDescriptor(SiteUserOptionsPresenter.LOGGED_USER_MENU));
+    final MenuSeparatorDescriptor separator = new MenuSeparatorDescriptor(
+        SiteUserOptionsPresenter.LOGGED_USER_MENU);
+    separator.setPosition(2);
+    userOptions.addAction(separator);
     userOptions.addAction(chatActionsTitle);
     onlineItem = createChatStatusAction(res.online(), i18n.t("Available"),
         onlineAction(NO_STATUS, Show.notSpecified, res.online()));
@@ -275,7 +278,7 @@ public class ChatSitebarActions {
 
   /**
    * Creates the chat status action.
-   * 
+   *
    * @param icon
    *          the icon
    * @param text
@@ -366,7 +369,7 @@ public class ChatSitebarActions {
 
   /**
    * Online action.
-   * 
+   *
    * @param statusText
    *          the status text
    * @param show
@@ -382,7 +385,7 @@ public class ChatSitebarActions {
 
   /**
    * Update menu presence.
-   * 
+   *
    * @param presence
    *          the presence
    */
@@ -409,7 +412,7 @@ public class ChatSitebarActions {
 
   /**
    * Update sitebar icon presence.
-   * 
+   *
    * @param presence
    *          the presence
    * @param itemDescriptor

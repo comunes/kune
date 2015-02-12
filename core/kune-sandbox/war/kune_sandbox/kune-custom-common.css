@@ -3,7 +3,7 @@
 /* buttons */
 .k-sn-mainpanel .x-btn button,.k-sn-mainpanel button,button.k-button,.gwt-FileUpload,button.gwt-Button
   {
-  font: 14px 'Ubuntu', arial;
+  font-size: 14px;
   border: 1px solid #ACACAC;
   cursor: pointer;
   cursor: hand;

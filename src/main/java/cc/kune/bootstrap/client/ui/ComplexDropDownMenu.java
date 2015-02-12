@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ComplexDropDownMenu<T extends ComplexWidget> {
 
+  private static final String OPEN = "open";
   private final ComplexAnchorButton anchor;
   private final DropDownMenu menu;
   private final T widget;
@@ -79,7 +80,7 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
   }
 
   public void addStyleName(final String style) {
-    anchor.addStyleName(style);
+    widget.addStyleName(style);
   }
 
   private native void bindJavaScriptEvents(final com.google.gwt.dom.client.Element e) /*-{
@@ -140,12 +141,8 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
   }
 
   public void hide() {
-    hide(menu.getElement());
+    widget.removeStyleName(OPEN);
   }
-
-  private native void hide(final com.google.gwt.dom.client.Element e) /*-{
-		$wnd.jQuery(e).hide();
-  }-*/;
 
   public void insert(final Widget uiObject, final int position) {
     menu.insert(uiObject, position);
@@ -244,12 +241,8 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
   }
 
   public void show() {
-    show(menu.getElement());
+    widget.addStyleName(OPEN);
   }
-
-  private native void show(final com.google.gwt.dom.client.Element e) /*-{
-		$wnd.jQuery(e).show();
-  }-*/;
 
   public void show(final int x, final int y) {
     show();

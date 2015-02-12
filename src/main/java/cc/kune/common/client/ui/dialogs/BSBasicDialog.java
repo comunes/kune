@@ -38,7 +38,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public class BSBasicDialog extends Composite implements BasicDialogView {
@@ -334,7 +334,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView {
 
   public void show() {
     if (!modal.isAttached()) {
-      RootLayoutPanel.get().add(this);
+      RootPanel.get().add(this);
     }
     modal.show();
   }

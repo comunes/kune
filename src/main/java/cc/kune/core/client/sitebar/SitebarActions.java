@@ -22,8 +22,9 @@
  */
 package cc.kune.core.client.sitebar;
 
+import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarMenuDescriptor;
+import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -37,7 +38,8 @@ public interface SitebarActions {
   static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
 
   /** The Constant MORE_MENU. */
-  static final ToolbarMenuDescriptor MORE_MENU = new ToolbarMenuDescriptor();
+  static final WidgetMenuDescriptor MORE_MENU = new WidgetMenuDescriptor(
+      PaperIconButton.wrap("sitebar_more_icon"));
 
   /** The Constant RIGHT_TOOLBAR. */
   static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();

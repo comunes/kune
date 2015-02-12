@@ -2,22 +2,10 @@ GCHARSET                                       "UTF-8
             "; body {
   background-color: transparent;
   color: black;
-  font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
-    "DejaVu Sans", Tahoma, sans-serif;
   font-size: small;
-  margin: 5px;
   overflow: hidden;
 }
 
-* {
-  font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
-    "DejaVu Sans", Tahoma, sans-serif;
-}
-
-body.fontface {
-  font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
-    "DejaVu Sans", Tahoma, sans-serif;
-}
 
 div,span {
   outline: 0 none;
@@ -111,8 +99,8 @@ k-btn-sitebar button spin,.k-sitebar button spin,.k-btn-sitebar div,.k-btn-siteb
 
 .k-btn-sitebar,.k-btn-sitebar button,.k-sitebar button,.k-btn-sitebar div,.k-btn-sitebar button div,.k-sitebar button div
   {
-  font: 13px 'Ubuntu', arial;
-  color: #999;
+  font-size: 16px;
+  color: #FFF;
   cursor: pointer;
   white-space: nowrap;
   background: none;
@@ -134,7 +122,7 @@ div div.siteBar table.k-sitebar div.k-iconlabel-left {
 }
 
 .k-sitebar-wave-status {
-  font: 13px 'Ubuntu', arial;
+  font-size: 13px;
   /* font-weight: bold; */
   color: #999;
   white-space: nowrap;
@@ -543,8 +531,6 @@ div.gwt-TabLayoutPanelTabInner img {
 
 .x-fieldset-header-text,.x-form-group-label,.x-form-cb-label {
   font-size: 14px;
-  font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
-    "DejaVu Sans", Tahoma, sans-serif;
 }
 
 .k-form-intro {
@@ -1079,11 +1065,11 @@ table.k-folder-viewer {
 
 /* end Decorated tabbar */
 .k-waveHolder {
-  position: absolute;
+/*  position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: 0; */
 }
 
 .GWTUpld,table.GWTUpld td {
@@ -1363,11 +1349,9 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 
 /* font icons */
 .k-content-title-icon {
-  font-size: 22px;
   font-family: kuneicons;
   color: #FFF;
   float: left;
-  margin: 5px 0 0 10px;
   font-weight: normal;
 }
 

@@ -133,9 +133,10 @@
 }
 
 .docEditor {
-  border-left: 1px solid #959595;
+  width: 100%;
+/*  border-left: 1px solid #959595;
   border-right: 1px solid #959595;
-  border-top: 1px solid #959595;
+  border-top: 1px solid #959595; 
   -webkit-border-top-left-radius: 4px;
   -moz-border-radius-topleft: 4px;
   border-top-left-radius: 4px;
@@ -146,21 +147,22 @@
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: 0; */
 }
 
 .docEditorContainer {
-  position: absolute;
+  width: 100%;
+  /*position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
-  right: 0;
+  right: 0; 
   -webkit-border-top-left-radius: 4px;
   -moz-border-radius-topleft: 4px;
   border-top-left-radius: 4px;
   -webkit-border-top-right-radius: 4px;
   -moz-border-radius-topright: 4px;
-  border-top-right-radius: 4px;
+  border-top-right-radius: 4px; */
 }
 
 .docFooter {

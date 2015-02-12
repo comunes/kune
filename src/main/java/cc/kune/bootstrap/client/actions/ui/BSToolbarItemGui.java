@@ -18,8 +18,12 @@ public class BSToolbarItemGui extends AbstractBSChildGuiItem {
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
     item = new ComplexAnchorListItem();
-    item.addClickHandler(defClickHandler);
-    child = item;
+    item.addClickHandler(clickHandlerChildDefautl);
+    if (descriptor.isChild()) {
+      child = item;
+    } else {
+      initWidget(item);
+    }
     super.create(descriptor);
     configureItemFromProperties();
     return this;
@@ -65,7 +69,7 @@ public class BSToolbarItemGui extends AbstractBSChildGuiItem {
 
   @Override
   public boolean shouldBeAdded() {
-    return false;
+    return !descriptor.isChild();
   }
 
 }

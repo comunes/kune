@@ -3,13 +3,17 @@
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <title>Kune</title>
+
 <!-- Use this if you want to force some language as default
 <meta name="gwt:property" content="locale=es" />
 -->
-<script type="text/javascript" language="javascript"
-    src="ws/ws.nocache.js"></script>
+
+<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <!--
-We will use this string for mention this site in messages like: "Thanks for joining this site"
+      We will use this string for mention this site in messages like: "Thanks for joining this site"
 Your can use another string and the message will looks like "Thanks for joining example.org"
  -->
 <meta name="kune.default.site.commonname" content="this site" />
@@ -38,456 +42,794 @@ You can add more ids here and below to show/hide then.
 <meta name="hablar.inline" content="vertical_dock_div" />
 <meta name="hablar.width" content="550px" />
 <meta name="hablar.height" content="400px" />
-<!--
-<meta name="hablar.avatarProvider" content="gravatar" /> -->
 <meta name="hablar.avatarProvider" content="kune-avatars" />
+
+<!-- Font depending on locale -->
+<script language="javascript" type="text/javascript">
+	function getQueryVariable(variable) {
+		var query = window.location.search.substring(1);
+		var vars = query.split('&');
+		for (var i = 0; i < vars.length; i++) {
+			var pair = vars[i].split('=');
+			if (decodeURIComponent(pair[0]) == variable) {
+				return decodeURIComponent(pair[1]);
+			}
+		}
+	}
+	locale = getQueryVariable('locale');
+	fontPrefix = '<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300,600';
+	fontSuffix = '" rel="stylesheet" type="text/css">';
+
+	switch (locale) {
+	case 'gl':
+		subset = '&subset=latin,greek-ext,greek';
+		break;
+	case 'ru':
+		subset = '&subset=cyrillic,cyrillic-ext,latin';
+		break;
+	case 'vi_VN':
+		subset = '&subset=vietnamese';
+	default:
+		subset = '';
+	}
+	font = fontPrefix + subset + fontSuffix;
+ document.write(font);
+</script>
+
+<script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+
+<link rel="import" href="bower_components/polymer/polymer.html">
+
+<!-- Core elements -->
+<link rel="import" href="bower_components/core-icons/core-icons.html">
+<link rel="import"
+		href="bower_components/core-toolbar/core-toolbar.html">
+<link rel="import"
+		href="bower_components/core-icon-button/core-icon-button.html">
+<link rel="import"
+		href="bower_components/core-header-panel/core-header-panel.html">
+<link rel="import" href="bower_components/core-icon/core-icon.html">
+<link rel="import"
+		href="bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
+<link rel="import"
+		href="bower_components/core-drawer-panel/core-drawer-panel.html">
+<link rel="import" href="bower_components/core-pages/core-pages.html">
+<link rel="import"
+		href="bower_components/core-media-query/core-media-query.html">
+
+<!-- Other elements -->
+<link rel="import"
+		href="bower_components/lorem-element/lorem-element.html">
+
+<!-- Paper elements -->
+<link rel="import"
+		href="bower_components/paper-button/paper-button.html">
+<link rel="import"
+		href="bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
+<link rel="import"
+		href="bower_components/paper-button/paper-button.html">
+<link rel="import"
+		href="bower_components/paper-shadow/paper-shadow.html">
+<link rel="import"
+		href="bower_components/paper-progress/paper-progress.html">
+
+<!-- Icon elements -->
+<link rel="import" href="bower_components/core-icons/av-icons.html">
+<link rel="import" href="bower_components/core-icons/social-icons.html">
+<link rel="import" href="bower_components/core-icons/editor-icons.html">
+
+<!-- Use the complete iconset for demo and development purposes only. Generate a custom component containing only icons you need using font-awesome-polymer-icons-generator
+          https://github.com/philya/font-awesome-polymer-icons-generator
+          -->
+<link rel="import"
+		href="bower_components/font-awesome-polymer-icons/fa-icons.html">
+
+<script type="text/javascript" language="javascript"
+	src="ws/ws.nocacheBORRAR.js"></script>
 
 <link rel="shortcut icon" href="ws/favicon.ico" />
 <!-- FIXME: make something local -->
-<script type="text/javascript">
-  WebFontConfig = {
-    google : {
-      families : [ 'Ubuntu' ]
-    }
-  };
-  (function() {
-    var wf = document.createElement('script');
-    wf.src = ('https:' == document.location.protocol ? 'https' : 'http')
-        + '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
-    wf.type = 'text/javascript';
-    wf.async = 'true';
-    var s = document.getElementsByTagName('script')[0];
-    s.parentNode.insertBefore(wf, s);
-  })();
-</script>
-<link
-    href='https://fonts.googleapis.com/css?family=Ubuntu:regular,italic,bold,bolditalic'
-    rel='stylesheet' type='text/css'>
-<link type="text/css" rel="stylesheet" href="css/reset.css">
+<!-- <link type="text/css" rel="stylesheet" href="css/reset.css"> -->
+<link type="text/css" rel="stylesheet" href="ws/css/bootstrap.min.css">
+<link type="text/css" rel="stylesheet" href="ws/css/theme.css">
 <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-all.css">
 <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-gray.css">
 <link type="text/css" rel="stylesheet"
-    href="ws/gxt-custom/css/gxt-op-common.css">
+		href="ws/gxt-custom/css/gxt-op-common.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-hablar.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-chat.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-common.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-custom-common.css">
-<link type="text/css" rel="stylesheet"
-    href="ws/fontface/ubuntufontface.css">
 <link type="text/css" rel="stylesheet" href="ws/kune-message.css">
 <link type="text/css" rel="stylesheet"
-    href="others/splash/style/permalink.css">
+		href="others/splash/style/permalink.css">
 <link type="text/css" rel="stylesheet"
-    href="others/splash/style/stuff.css">
+		href="others/splash/style/stuff.css">
 <link type="text/css" rel="stylesheet"
-    href="others/splash/style/main.css">
+		href="others/splash/style/main.css">
 <link type="text/css" rel="stylesheet" href="ws/ws.css">
 <script type="text/javascript" src="others/splash/js/wave-rpc.js"></script>
 <script type="text/javascript" src="others/splash/js/gadget.js"></script>
 <script type="text/javascript" src="others/splash/js/rpc.js"></script>
 <script type="text/javascript" src="others/splash/js/common_client.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script
+		src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript"
-    src="others/splash/js/permalink_client.js"></script>
+		src="others/splash/js/permalink_client.js"></script>
 <!-- Moved this to local wave-rpc.js <script type="text/javascript" -->
 <!-- 		src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script> -->
-
-
-<style type="text/css">
-body {
-  background-color: white;
-  color: black;
-  font-family: "Ubuntu Beta", UbuntuBeta, Ubuntu, "Bitstream Vera Sans",
-    "DejaVu Sans", Tahoma, sans-serif;
-  font-size: small;
-  overflow: hidden;
-}
-
-.k-home-loading {
-  position: absolute;
-  left: 2%;
-  top: 2%;
-  z-index: 20001;
-  height: auto;
-  border: solid 2px #ccc;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background-color: white;
-}
-
-.k-home-loading a {
-  color: #225588;
-}
-
-.k-home-loading .k-home-loading-indicator {
-  color: #444;
-  font: bold 13px tahoma, arial, helvetica;
-  padding: 3px 3px 8px;
-  margin: 0;
-  height: auto;
-}
-
-.k-home-loading-msg {
-  font: normal 10px arial, tahoma, sans-serif;
-}
-
-#k-home-prewrap {
-  margin-top: -22px;
-}
-
-#k-home-wrapper {
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  width: 665px;
-  min-width: 320px;
-}
-
-.k-home-ini {
-  font-size: 17px;
-  color: #69312f;
-  text-align: justify;
-}
-
-.k-home-ini a {
-  color: #803000;
-  font-weight: bold;
-}
-
-.k-home-ini strong {
-  font-weight: bold;
-}
-
-#k-home-table {
-  display: block;
-}
-
-#k-home-header {
-  display: table-row;
-  float: right;
-}
-
-#k-home-intro {
-  display: table-row;
-}
-
-.k-home-footer {
-  display: table-row;
-  font-size: 14px;
-  text-align: right;
-  color: #8a5050;
-}
-
-#k-home-logo {
-  margin: 50px 0 22px 0;
-}
-
-.k-home-summary,.k-home-summary a {
-  font-size: 26px;
-  color: #dd8a3d;
-  font-weight: bold;
-  white-space: nowrap;
-  text-decoration: none;
-}
-
-.k-home-summary a:hover {
-  text-decoration: underline;
-}
-
-.k-home-summary li {
-  padding-left: 41px;
-  background-repeat: no-repeat;
-  background-position: 0 .2em;
-  line-height: 42px;
-}
-
-#k-home-body {
-  clear: both;
-  display: block;
-}
-
-#k-home-left,#k-home-summary-left {
-  display: table-cell;
-}
-
-#k-home-left {
-  float: left;
-}
-
-#k-home-right,#k-home-summary-right {
-  display: table-cell;
-  text-align: right;
-  padding-left: 20px;
-}
-
-#k-home-summary-right {
-  padding-top: 45px;
-  vertical-align: top;
-}
-
-#k-home-right {
-  vertical-align: top;
-  padding-top: 20px;
-}
-
-#k-home-toolbar {
-  width: 100%;
-  padding-top: 10px;
-}
-
-div#k-home-toolbar table {
-  width: 100%;
-}
-
-.k-home-toolbar-btn {
-
-}
-
-div#k-home-toolbar table tbody tr td button.gwt-Button div.k-iconlabel {
-  white-space: normal !important;
-}
-
-div#k-home-toolbar table tbody tr td button.gwt-Button {
-
-}
-
-#k-home-group-stats {
-  color: #c87137;
-}
-
-#k-home-global-stats {
-
-}
-
-.k-home-title {
-  color: #c87137;
-  font-size: 18px;
-  font-weight: bold;
-  padding-top: 10px;
-}
-
-.k-home-normal-text {
-  color: #8a5050;
-  font-size: 16px;
-  line-height: 1.5em;
-  height: 120px;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.k-home-em-text {
-  color: #8a5050;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.k-home-group-cnt-icon {
-  float: left;
-}
-
-.k-home-group-inbox-link {
-
-}
-
-.k-home-group-inbox-link a {
-  color: green;
-}
-
-.k-home-group-cnt-link {
-  float: left;
-}
-
-.k-home-group-cnt-link a {
-  color: #8a5050;
-  padding-left: 10px;
-}
-
-.k-home-group-stats-item {
-  clear: both;
-  /*   line-height: 1.2em; */
-}
-
-.banner {
-  margin: 30px;
-}
-
-li#k-home-home-icon {
-  background-image: url(ws/images/kune-intro-user.png);
-}
-
-li#k-home-group-icon {
-  background-image: url(ws/images/kune-intro-group.png);
-}
-
-li#k-home-world-icon {
-  background-image: url(ws/images/kune-intro-world.png);
-}
-</style>
-<!--[if IE 6]>
-    <link type="text/css" rel="stylesheet" href="ie6.css">
-<![endif]-->
 </head>
-<body>
-    <!-- // This is only used for selenium tests (comment/remove in production) -->
-    <div id="kcursor"
-        style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
-        <img src="/others/cursor-orange.png">
-    </div>
-    <script src="others/js/fake-selenium-pointer.js"></script>
-    <!-- // End : This is only used for selenium tests (comment/remove in production) -->
+<body fit>
+		<!-- // This is only used for selenium tests (comment/remove in production) -->
+		<div id="kcursor"
+				style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
+				<img src="/others/cursor-orange.png">
+		</div>
+		<script src="others/js/fake-selenium-pointer.js"></script>
+		<!-- // End : This is only used for selenium tests (comment/remove in production) -->
 
-    <!-- Banner for wave errors -->
-    <div class="banner" id="banner"></div>
-    <!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
-    <!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
-    <form id="loginrender" action="javascript:;" style="display: none;">
-        <input type="text" id="usernamerender" name="usernamerender" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-            value="" /> <input type="password" id="passwordrender" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
-            name="passwordrender" value="" />
-    </form>
-    <!-- Remember user/pass (this part is used to send the values to the browser) -->
-    <form id="login" action="javascript:;" style="display: none;">
-        <input type="text" id="username" name="username" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="" /> <input
-            type="password" id="password" name="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" value="" />
-    </form>
-    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
-    <noscript>
-        <div
-            style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-            Your web browser must have JavaScript enabled in order for this
-            application to display correctly.</div>
-    </noscript>
-    <iframe id="__gwt_historyFrame" style="width: 0; height: 0; border: 0"></iframe>
-    <iframe src="" id="__download" style="width: 0; height: 0; border: 0"></iframe>
-    <div id="kuneinitialcurtain"></div>
-    <div class="k-home-loading" id="k-home-loading">
-        <div class="k-home-loading-indicator">
-            <img src="ws/images/kune-anim-g.gif" width="35" height="35"
-                alt="kune-loading"
-                style="margin-right: 3px; float: left; vertical-align: top;" />kune&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br />
-            <span class="k-home-loading-msg" id="k-home-loading-msg-def"
-                style="display: none;">Starting...</span> <span
-                class="k-home-loading-msg" id="k-home-loading-msg-es"
-                style="display: none;">Iniciando...</span> <span
-                class="k-home-loading-msg" id="k-home-loading-msg-fr"
-                style="display: none;">Démarrage...</span>
-        </div>
-    </div>
-    <div id="k-home-prewrap">
-        <div id="k-home-wrapper">
-            <!-- This id is required for kune (you can create a different .html but preserve this id) -->
-            <div id="k-home-table">
-                <div id="k-home-header"></div>
-                <!-- div home-header -->
-                <div id="k-home-intro">
-                    <div id="k-home-summary-left">
-                        <div id="k-home-logo">
-                            <img src="ws/logo-big-home.png" alt="" />
-                        </div>
-                        <div class="k-home-summary" id="k-home-summary-def"
-                            style="display: none;">
-                            <ul>
-                                <li id="k-home-home-icon"><a href="#inbox">Comunicate
-                                        with others</a></li>
-                                <li id="k-home-group-icon">
-                                    <!-- Put here your site default group name --> <a
-                                    href="#site">Work in collaboration</a>
-                                </li>
-                                <li id="k-home-world-icon"><a href="#preview()">And
-                                        share with the world</a></li>
-                            </ul>
-                        </div>
-                        <div class="k-home-summary" id="k-home-summary-es"
-                            style="display: none;">
-                            <ul>
-                                <li id="k-home-home-icon"><a href="#inbox">Comunícate
-                                        con otros/as</a></li>
-                                <li id="k-home-group-icon">
-                                    <!-- Put here your site default group name --> <a
-                                    href="#site">Trabaja en colaboración</a>
-                                </li>
-                                <li id="k-home-world-icon"><a href="#preview()">Y
-                                        comparte con el mundo</a></li>
-                            </ul>
-                        </div>
-                        <div class="k-home-summary" id="k-home-summary-fr"
-                            style="display: none;">
-                            <ul>
-                                <li id="k-home-home-icon"><a href="#inbox">Communiquer avec d'autres</a></li>
-                                <li id="k-home-group-icon">
-                                    <!-- Put here your site default group name --> <a
-                                    href="#site">Travailler ensemble</a>
-                                </li>
-                                <li id="k-home-world-icon"><a href="#preview()">Et partager avec le monde entier</a></li>
-                            </ul>
-                        </div>
-                        <!-- k-home-summary -->
-                    </div>
-                    <!-- k-home-summary-left -->
-                    <div id="k-home-summary-right">
-                        <div class="k-home-ini" id="k-home-ini-def"
-                            style="display: none;">
-                            Welcome! This site is a <a
-                                href="http://kune.ourproject.org/" target="_blank">Kune</a>
-                            node. Kune, which means "together" in esperanto, is a
-                            network of interconnected sites like this one, where you
-                            can <strong>communicate, share, collaborate with
-                                others and create your web spaces easily</strong>. <a
-                                href="#signin">Join!</a>
-                        </div>
-                        <div class="k-home-ini" id="k-home-ini-es"
-                            style="display: none;">
-                            ¡Bienvenido/a! Este sitio es un nodo de <a
-                                href="http://kune.ourproject.org/es/" target="_blank">Kune</a>.
-                            Kune, que significa "juntos" en esperanto, es una red de
-                            sitios interconectados como este, donde puedes <strong>comunicarte,
-                                compartir, colaborar con otras personas y crear tus
-                                espacios webs fácilmente</strong>. <a href="#signin">¡Únete!</a>
-                        </div>
-                        <div class="k-home-ini" id="k-home-ini-fr"
-                            style="display: none;">
-                            Bienvenue! Ce site est un nœud Kune. <a
-                                href="http://kune.ourproject.org/en/" target="_blank">Kune</a>,
-                            qui signifie "ensemble" en espéranto, est un réseau de
-                            sites interconnectés comme celui-ci, où vous pouvez <strong>communiquer,
-                                partager, coopérer avec d'autres et créer vos espaces
-                                web facilement. <a href="#signin">Rejoignez-nous!</a>
-                        </div>
-                        <!--  div k-home-ini -->
-                        <div id="k-home-toolbar">
-                            <!-- This id is optional for kune (you can create a different .html but preserve this id if you want the home signin/newgroup home buttons) -->
-                        </div>
-                        <!--  div k-home-toolbar -->
-                    </div>
-                    <!-- k-home-summary-right -->
-                </div>
-                <!-- div home-intro -->
-                <div id="k-home-body">
-                    <div id="k-home-left">
-                        <div id="k-home-group-stats" style="display: none;">
-                            <!-- This id is optional for kune (you can create a different .html and preserve this id if you want this stats) -->
-                        </div>
-                        <!-- div home-group-stats -->
-                    </div>
-                    <!-- div k-home-left -->
-                    <div id="k-home-right">
-                        <div id="k-home-global-stats" style="display: none;">
-                            <!-- This id is optional for kune (you can create a different .html but preserve this id if you want this stats) -->
-                        </div>
-                    </div>
-                    <!-- div k-home-right -->
-                </div>
-                <!-- div k-home-body -->
-                <div class="k-home-footer" id="k-home-footer-def" style="display: none;"></div>
-                <div class="k-home-footer" id="k-home-footer-es" style="display: none;"></div>
-                <div class="k-home-footer" id="k-home-footer-fr" style="display: none;"></div>
-                <!-- div k-home-footer -->
+		<!-- Banner for wave errors -->
+		<div style="display: none; position: absolute;" class="banner" id="banner"></div>
+		<!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
+		<!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
+		<form id="loginrender" action="javascript:;" style="display: none; position: absolute;">
+				<input type="text" id="usernamerender" name="usernamerender"
+						autocomplete="off" autocorrect="off" autocapitalize="off"
+						spellcheck="false" value="" /> <input type="password"
+						id="passwordrender" autocomplete="off" autocorrect="off"
+						autocapitalize="off" spellcheck="false" name="passwordrender"
+						value="" />
+		</form>
+		<!-- Remember user/pass (this part is used to send the values to the browser) -->
+		<form id="login" action="javascript:;" style="position: absolute; display: none;">
+				<input type="text" id="username" name="username" autocomplete="off"
+						autocorrect="off" autocapitalize="off" spellcheck="false" value="" />
+				<input type="password" id="password" name="password"
+						autocomplete="off" autocorrect="off" autocapitalize="off"
+						spellcheck="false" value="" />
+		</form>
+		<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+		<noscript>
+				<div
+						style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
+						Your web browser must have JavaScript enabled in order for this
+						application to display correctly.</div>
+		</noscript>
+		<iframe id="__gwt_historyFrame" style="position: absolute; width: 0; height: 0; border: 0"></iframe>
+		<iframe src="" id="__download" style="position: absolute; width: 0; height: 0; border: 0"></iframe>
+    <template id="kunetemplate" is="auto-binding">
+      <core-media-query query="(max-width: {{screensm - 1}}px)" queryMatches="{{xsmall}}"></core-media-query>
+      <core-media-query query="(min-width: {{screensm}}px) and (max-width: {{screenmd - 1}}px)" queryMatches="{{small}}"></core-media-query>
+      <core-media-query query="(min-width: {{screenmd}}px) and (max-width: {{screenlg - 1}}px)" queryMatches="{{medium}}"></core-media-query>
+      <core-media-query query="(min-width: {{screenlg}}px)" queryMatches="{{large}}"></core-media-query>
+
+      <!-- Extra small devices  -->
+      <core-media-query query="min-width: {{screenxs}}px" queryMatches="{{xsmallup}}"></core-media-query>
+      <!-- Small devices (tablets, 768px and up) -->
+      <core-media-query query="min-width: {{screensm}}px" queryMatches="{{smallup}}"></core-media-query>
+      <!-- Medium devices (desktops, 992px and up) -->
+      <core-media-query query="min-width: {{screenmd}}px" queryMatches="{{mediumup}}"></core-media-query>
+      <!-- Large devices (large desktops, 1200px and up) -->
+      <core-media-query query="min-width: {{screenlg}}px" queryMatccsshes="{{largeup}}"></core-media-query>
+
+      <div id="paper_progress_container" horizontal center-justified layout>
+        <paper-progress indeterminate id="paper_progress"></paper-progress>
+      </div>
+      
+      <!-- https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel -->
+      <core-drawer-panel transition drawerWidth="400px" responsivewidth="400px" selected="main" narrow="{{narrow}}" id="main_core_drawer_panel" forcenarrow touch-action="pan-y" unresolved>
+        <section id="main_left_section" drawer>
+          <div horizontal layout active>
+            <div id="inbox_container">
+              <core-header-panel mode="waterfall" id="inbox_core_header">
+                <core-toolbar id="inbox_toolbar">
+                  <paper-fab icon="mail" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
+                  <div id="div">Inbox</div>
+                  <div flex></div>
+                  <div layout horizontal end-justified>
+                    <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
+                    <paper-icon-button icon="fa:share" id="inbox_share_icon"></paper-icon-button>
+                  </div>
+                </core-toolbar>
+                <section id="inbox_result_section">
+                  <div id="inbox_result" layout vertical>
+                  </div>
+                </section>
+              </core-header-panel>
             </div>
-            <!-- div home-table -->
+            <paper-fab icon="view-column" mini id="inbox_show_hide" class="btn_gray" core-drawer-toggle></paper-fab>
+        </section>
+        <section id="main_right_section" main unresolved>
+          <core-pages selected="{{spaceselected}}" class="full-absolute-no-sitebar" notap>
+            <div id="home_space">
+              <div id="k_home_mask">
+                <div id="k_home_main_container" horizontal center-justified layout>
+                  <div id="k_home_main_v" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
+                    <div id="k_home_logo_container" horizontal layout>
+                      <div>
+                        <span id="k_home_logo"><img src="./others/kune-logo-alone{{small? '-big': xsmall ? '-small': '-big'}}.png"></span>
+                      </div>
+                      <div vertical layout>
+                        <div>
+                          <span id="k_home_logoname"><img src="./others/kune-logo-name-alone{{small ? '-big': xsmall? '-small': '-big'}}.png"></span>
+                        </div>
+                        <div><span id="k_home_motto">do it together<br>& share it</span></div>
+                      </div> <!-- end of logoname -->                      
+                    </div> <!-- end of logo -->
+                    <div id="k_home_main-buttons" horizontal end-justified layout>
+                      <div id="k_home_toolbar" vertical layout>
+                        
+                      </div> <!-- buttons-v -->
+                    </div> <!-- buttons -->
+                  </div> <!-- main-v -->
+                </div><!-- main_container -->
+              </div> <!-- main-mask -->              
+              <div id="k_home_center_container" vertical layout>
+                <div horizontal center-justified layout>
+                  <div id="k_home_center">
+                    <div id="k-description">
+                      Kune it's a web social toolbox where you can communicate, share and collaborate with others. Also kune is distributed, that is, it's not centralized like facebook, google plus, etc, so <a href="http://kune.cc">kune.cc</a> it's only a node among other similar kune nodes. Kune means "together" in esperanto.
+                      HISTORY
+                    </div> <!-- kune description -->
+                  </div> <!-- home-center -->
+                </div>  <!-- hor layout -->
+              </div> <!-- home_center_container -->                
+            </div><!-- home_space -->
+            <div id="user_space">Inbox</div>
+            <div id="group_space" vertical layout>
+              <core-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">
+                <core-toolbar id="header_core_toolbar" class="tall" flex>
+                  <core-drawer-panel transition drawerwidth="80%" selected="main" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
+                    <section id="group_core_drawer" drawer>
+                      <div horizontal layout>
+                        <div id="header_social_net">                          
+                        </div>
+                        <div flex></div>
+                        <paper-icon-button class="top black" icon="close" on-click="{{toggle_social_net}}" id="header_group_icon_settings"></paper-icon-button>
+                      </div>
+                    </section>
+                    <section id="group_core_main" main>
+                      <div id="header_groupname_div" class="top indent" layout horizontal>
+                        <div self-center>
+                          <paper-shadow animated id="header_group_paper_shadow" class="top">
+                            <img class="top" id="header_group_logo" width="{{xsmall? avatarsizes: small? avatarsizem: avatarsizel }}" height="{{xsmall? avatarsizes: small? avatarsizem: avatarsizel}}" src=""></img>
+                          </paper-shadow>
+                        </div>
+                        <div vertical id="header_group_name_group" layout self-center>
+                          <div id="header_group_name" class="top"></div>
+                          <div id="header_short_group_name" class="top"><a href="#"></a></div>                          
+                        </div>
+
+                        <div flex horizontal layout end-justified>
+                          <div id="social_net_group" vertical  layout>
+                            <div id="k_group_entity_toolbar" vertical layout end-justified>
+                            </div>
+                            <div horizontal layout end-justified>
+                              <core-icon-button icon="group-work" id="group_followers" on-click={{toggle_social_net}}></core-icon-button>
+                            </div>                            
+                          </div>
+                        </div>
+                      </div>
+                      <div id="document_name_and_path" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout style="width:100%">
+                        <div id="document_name" class="indent"></div>
+                        <div flex></div>
+                        <ol class="breadcrumb"><div id="miga" class=""></div></ol>
+                      </div>
+                      <!--                              
+                                 <div id="tools_toolbar" class="bottom">
+                                 <paper-fab icon="folder" id="tool_icon1"></paper-fab>
+                                 <core-icon-button icon="event" id="tool_icon2"></core-icon-button>
+                                 </div>
+                                 -->           
+                      <paper-fab icon="create" id="edit_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
+
+                    </section>
+                  </core-drawer-panel>
+                  <paper-shadow id="doc_toolbar_shadow">
+                    <core-toolbar  id="doc_toolbar" class="medium-tall" flex>
+                      <div id="doc_toolbar_extension" horizontal layout flex>
+                        
+                      </div>
+                    </core-toolbar>
+                  </paper-shadow>
+                </core-toolbar>
+                <section id="doc_content_section" content flex>
+                  <paper-shadow animated id="doc_content_shadow">
+                    <div id="doc_vert" layout vertical>
+                      <div id="doc_hor_end" layout horizontal end-justified>
+                        <div>
+                          <core-icon-button icon="social:share" id="doc_share_btn" theme="core-light-theme">Shared</core-icon-button>
+                        </div>
+                      </div>
+                      <!-- https://www.polymer-project.org/docs/polymer/expressions.html -->
+
+                      <div id="doc_content" >
+                        <!-- <content></content> -->
+                        <!-- xsmall: {{xsmall}}<br>
+                       small: {{small}}<br>
+                       medium: {{medium}}<br>
+                       large: {{large}}<br>
+                       xsmall or small: {{(xsmall || small)}}<br>
+                       xsmall & up: {{xsmallup}}<br>
+                       small & up: {{smallup}}<br>
+                       medium & up: {{mediumup}}<br>
+                       large & up: {{largeup}}<br>  -->
+                      </div>
+                    </div>
+                  </paper-shadow>
+                  <div horizontal layout center id="site_bottombar" flex></div>
+                </section>
+              </core-scroll-header-panel>
+            </div>
+          </core-pages>
+        </section>
+      </core-drawer-panel>
+
+      <core-toolbar id="sitebar_toolbar" unresolved>
+        <!-- FIXME: scrollable seems interesting but does not works with our paper-tab -->
+        <paper-tabs selected="{{spaceselected}}" id="space_selector_paper_tabs" horizontal center layout>
+          <paper-tab>
+            <!-- <img width="120px" height="24px" class="hidden-xs hidden-sm" src="./others/kune-logo-sitebar-white-narrow-false.png" id="home_space_icon"> -->
+            <paper-icon-button src="./others/kune-logo-sitebar-white-narrow-true.png" id="home_space_icon"></paper-icon-button>
+          </paper-tab>
+          <paper-tab class="hidden-sm hidden-xs">
+            <paper-icon-button icon="mail" id="user_space_icon"></paper-icon-button>
+          </paper-tab>
+          <paper-tab><paper-icon-button icon="group-work" id="group_space_icon"></paper-icon-button></paper-tab>
+ 
+        </paper-tabs>
+        <div id="sitebar_user_space_icon_group" class="sitebar_inbox_badge_container hidden-xs hidden-sm">
         </div>
-        <!-- home-wrapper -->
-    </div>
-    <!-- home-prewrap -->
-</body>
+        <div id="sitebar_left_extensionbar"></div>
+        <div id="sitebar_flex" flex></div>
+        <div id="sitebar_right_extensionbar"></div>
+
+        <div id="sitebar_chat_icon_group" class="hidden-xs hidden-sm">
+          <paper-icon-button src="./others/kune-sitebar-white-icon.png" id="sitebar_chat_icon"></paper-icon-button>
+        </div>
+        <core-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn">English</core-icon-button>
+        <core-icon-button icon="account-circle" id="sitebar_user_btn">
+          <span class="hidden-xs hidden-sm">John Doe</span>
+        </core-icon-button>
+        <paper-icon-button icon="search" on-click="{{ toggleSearch }}" id="sitebar_search_icon"></paper-icon-button>
+        <input type="search" id="sitebar_search_input" class="sitebar_search_hide" on-keyup="{{ onKeyPressSearch }}" autocomplete="off">
+        <paper-icon-button icon="more-vert" id="sitebar_more_icon"></paper-icon-button>
+        <div id="sitebar_flex_end" class="sitebar_search_hide" flex></div>
+        <paper-icon-button icon="close" on-click="{{ toggleSearch }}" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
+      </core-toolbar>
+
+      <style>
+
+       /* Home Space -------------------------------------------------------- */
+       body {
+         font-family: 'Open Sans', sans-serif;
+         /* position: absolute, etc, with fit polymer attribute in body */
+       }
+       #home_space {
+       }
+       #k_home_mask {
+         background-color: {{homebackcolor}};
+         padding: 30px;
+       }
+
+       #k_home_main_container {
+         color: #fff;
+       }
+       #k_home_main_v {
+         /* width: {{xsmall ? '100%' : small? '80%' : '60%'}}; ; */         
+       }
+       #k_home_logoname_motto {
+       }
+       #k_home_logo {
+         vertical-align: top;
+         padding-right: {{xsmall ? '5px' : '20px'}};
+       }
+       #k_home_logoname {
+         vertical-align: top;
+       }
+       #k_home_logoname {
+         padding: 0px;
+       }
+       #k_home_toolbar {
+         margin-left:  {{xsmall ? '0px' : '20px'}};
+       }
+       #k_home_center_container {
+         width: 100%;
+       }
+       #k_home_center {
+         width: {{xsmall ? '100%' : small? '80%' : '60%'}}; 
+         padding-top: 20px;
+         padding:  {{xsmall ? '20px 10px' : '20x 0px'}}; 
+         font-size: {{xsmall ? 16 : small? 20 : 24}}px;
+       }
+       #k_home_motto {
+         font-size: {{xsmall? '22' : small? '45' : '45'}}px;
+         color: #a56941;
+         float: left;
+         line-height: 1.1em;
+       }
+       #k_home_snd-btn {
+         margin-top: 5px;
+       }
+
+       /* Main panels ------------------------------------------------------- */
+       :host {
+         font-size: inherit;
+       }
+       core_selector {
+         font-size: 16px;
+       }
+       #main_core_drawer_panel {
+         position: absolute;
+         top: 0px;
+         right: 0px;
+         bottom: 0px;
+         left: 0px;
+       }
+       #main_left_section {
+         box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+         margin-top: 40px;
+         background-color: white;
+       }
+       #main_right_section {
+         margin-top: 40px;
+         height: 100%;
+         box-sizing: border-box;
+         background-color: #FFF;
+       }
+       /* Sitebar ----------------------------------------------------------- */
+       #sitebar_toolbar {
+         right: 0px;
+         left: 0px;
+         height: 40px;
+         color: rgb(255, 255, 255);
+         fill: rgb(255, 255, 255);
+         top: 0px;
+         position: absolute;
+         background-color: {{homebackcolor}};
+       }
+       #space_selector_paper_tabs {
+         color: rgb(255, 255, 255);
+         left: 0px;
+         top: 0px;
+         position: absolute;
+         opacity: 1;
+         height: 40px;
+         background-color: {{homebackcolor}};
+       }
+       #home_space, #group_space, #user_space {
+         margin-top: 40px;
+       }
+       .full-absolute-no-sitebar,
+       #group_space {
+         position: absolute;
+         top: 0px;
+         bottom: 0px;
+         left: 0px;
+         right: 0px;
+         width: 100%;
+       }
+       paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
+         background-color: rgb(105, 49, 47);
+       }
+       paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
+         height: 4px;
+       }
+       paper-button.custom > core-icon {
+         margin-right: 4px;
+       }
+       paper-tab::shadow #ink {
+         color: #FFF;
+         opacity: 0.2;
+       }
+       #sitebar_chat_icon,#sitebar_language_btn, #sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
+         margin-top: -20px;
+       }
+       #paper_progress {
+         z-index:1;
+       }
+       #paper_progress_container {
+       }
+       #paper_progress::shadow #activeProgress {
+         background-color: rgb(165, 105, 65);
+       }
+       .sitebar_inbox_badge_container {
+         top: -23px;
+         position: relative;
+         left: 155px;
+         float: left;
+       }
+       .sitebar_chats_badge {
+         position: relative;
+         top: -23px;
+         left: -20px;
+       }
+       .sitebar_inbox_badge {
+       }
+       .sitebar_search_hide {
+         visibility: hidden;
+         display: none;
+       }
+       .sitebar_search_on {
+         left: 0;
+         background: inherit;
+         z-index: 1001;
+       }
+       #sitebar_search_input {
+         background-color: inherit;
+         border: none;
+         font-size: 20px;
+         outline: none;
+         padding: 0;
+         color: inherit;
+         margin-top: -20px;
+       }
+       #sitebar_chat_icon_group {
+         margin: 0px;
+       }
+       /* Inbox ------------------------------------------------------------- */
+       #inbox_show_hide {
+         right: -20px;
+         position: absolute;
+         opacity: 0.4;
+         top: 10px;
+       }
+       #inbox_new_message {
+         left: -2px;
+         bottom: -40px;
+         position: absolute;
+         top: 42px;
+         opacity: 0.7;
+         z-index: 1;
+       }
+       #inbox_container, #inbox_core_header {
+         width: 100%;
+       }
+       #inbox_core_header {
+         left: 0px;
+         top: 0px;
+         position: absolute;
+         height: 100%;
+       }
+       #inbox_share_icon {
+       }
+       #inbox_toolbar {
+         color: gray;
+         height: 60px;
+         background-color: rgb(230, 230, 230);
+       }
+       #inbox_result_section {
+         height: 100%;
+         padding: 10px;
+         background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+       }
+       /* Other ------------------------------------------------------------- */
+       .btn_gray {
+         color: white;
+         z-index: 1;
+         background-color: gray;
+       }
+       .btn_green {
+         color: white;
+         background-color: rgb(153, 187, 0);
+       }
+       .black {
+         color: black;
+       }
+       .red {
+         color: red;
+       }
+       .hidden {
+         display: none;
+       }
+       html /deep/ core-icon-button {
+         /* Bootstrap breaks the 1rem font size of this buttons */
+         font-size: 16px;
+       }
+       /* Group space ------------------------------------------------------- */
+       #core_scroll_header_panel {
+         width: 100%;
+         left: 0px;
+         top: 0px;
+         right: 0px;
+         bottom: 0px;
+         position: absolute;
+       }
+       #core_drawer_group_header {
+         position: absolute;
+         top: 0px;
+         right: 0px;
+         bottom: 0px;
+         left: 0px;
+         height: {{xsmall? headers: small? headerm: headerl}}px;
+         border-right: 13px solid #FFF;
+       }
+       #group_core_drawer {
+         box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+         background-color: white;
+       }
+       #group_core_main {
+         box-sizing: border-box;
+        background-color: transparent;
+      }
+       #header_core_toolbar.tall {
+         height: {{xsmall? headers: small? headerm: headerl}}px;
+       }
+       #header_core_toolbar:before {
+         background-color: rgb(200, 113, 55);
+         content : "";
+         display: block;
+         position: absolute;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         z-index: -2;
+       }
+       #header_core_toolbar {
+         color: rgb(241, 241, 241);
+         fill: rgb(241, 241, 241);
+         background-color: transparent;
+       }
+       #header_core_toolbar:after {
+         content : "";
+         display: block;
+         position: absolute;
+         top: 0;
+         left: 0;
+         background-image: url(http://lorempixel.com/1000/1000);
+         background-attachment: fixed;
+         background-position: 50% 50%;
+         background-repeat: no-repeat;
+         width: 100%;
+         height: 100%;
+         opacity : 0.15;
+         z-index: -1;
+       }
+       #header_groupname_div {
+         width: 100%;
+         margin: 0px;
+       }
+       #header_group_paper_shadow {
+         position: relative;
+         left: {{xsmall? 10: small? 52: 52}}px;         
+         top: {{xsmall? 7: small? 10: 20 }}px;
+         width: {{xsmall ? avatarsizes : small? avatarsizem : avatarsizel}}px;
+         height: {{xsmall ? avatarsizes : small? avatarsizem : avatarsizel}}px;
+         border-radius: 2px;
+       }
+       #header_group_logo {
+         margin-right: 30px;
+       }
+       #header_group_name,#header_short_group_name {
+         position: relative;
+         left: {{xsmall? 20: small? 60: 60}}px;
+       }
+       #header_group_name_group {
+         margin-top: {{xsmall? 0: small? 0 : 20}}px;
+       }
+       #header_group_name {
+         top: {{xsmall? 7: 10}}px;
+         font-size: {{xsmall ? 22 : small? 40 : 50}}px;
+       }
+       #header_short_group_name {
+         font-size: {{xsmall ? 12 : small? 14 : 16}}px;
+       }
+       #header_short_group_name a {
+         color: #CCC;
+       }
+       #header_group_icon_add, #header_group_icon_settings {
+       }
+       #header_group_icon_settings {
+       }
+       #social_net_group {
+         padding: {{xsmall? '0 5px 0 0': '0 80px 0 5px'}};
+       }
+       /* Doc icon */
+       #document_name > div > div > div {
+         font-size: {{xsmall ? 14 : small? 22 : 28}}px;
+       }
+       #document_name > div > div > div > span {
+         font-size: {{xsmall ? 18 : small? 26 : 32}}px;
+       }
+       #document_name {
+         margin-bottom: 5px;
+         margin-left: {{xsmall ? 5 : 43}}px;
+         line-height: 1em;
+       }
+
+       #miga a, #miga li:before {
+         font-size: {{xsmall ? 16 : small? 20 : 22}}px;
+       }
+       #miga {         
+         margin-left: {{xsmall ? 5 : 0}}px;
+       }
+       #edit_fab {
+         left: {{xsmall ? -10 : 25}}px;
+         top: {{xsmall ? 155 : 280}}px;
+         position: absolute;
+       }
+
+       #doc_toolbar_shadow {
+         right: 0px;
+         left: -10px;         
+         bottom: 0px;
+         height: 40px;
+         position: absolute;         
+         margin: {{xsmall? '0px 27px 0px 20px' : '0px 77px 0px 70px'}};
+         top: {{xsmall? 134 : small? 154: 186}}px;         
+       }
+       #doc_toolbar {
+         color: gray;
+         height: 40px;
+         background-color: white;
+       }
+       #doc_toolbar /deep/ .toolbar-tools {
+         height: 40px;
+       }
+       core-toolbar.medium-tall {
+         line-height: 20px;
+       }
+       #doc_share_btn {
+         right: 10px;
+         position: relative;
+         top: {{xsmall ? 10 : 0}}px;
+       }
+       #tool_icon1 {
+         background-color: rgb(165, 105, 65);
+       }
+       html /deep/ #tool_icon2 /deep/ core-icon, #tool_icon2 /deep/ core-icon, #tool_icon2 core-icon {
+         width: 40px;
+         height: 40px;
+         color: rgb(165, 105, 65);
+         background-color: transparent;
+       }
+       #tools_toolbar {
+         right: -20px;
+         top: 280px;
+         position: relative;
+         z-index: 1;
+       }
+       #doc_share_btn {
+         color: grey;
+       }
+       #doc_content_shadow {
+         font-size: 16px;
+         padding: {{xsmall ? '10px' : '20px 60px 60px' }};
+         background-color: rgb(255, 255, 255);
+       }
+       #doc_content_section {
+         padding: {{xsmall ? '10px' : '60px' }};
+         background-color: rgb(223, 223, 223);
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         padding-top: {{xsmall? headers + 10: small? headerm + 60: headerl + 60}}px;
+       }       
+       #document_name_and_path {
+         position: absolute;
+         bottom: 10px;
+         padding: {{xsmall? '0': '0 80px 0 5px'}};
+       }
+       #site_bottombar {
+         right: 0px;
+         left: 0px;
+         height: 40px;
+         bottom: 0px;
+         position: absolute;         
+         border-top-color: rgb(231, 231, 231);
+         border-top-style: solid;
+         border-top-width: 1px;
+         color: rgb(51,51,51);
+         background-color: rgb(248, 248, 248);
+         padding: 0 15px;
+       } 
+      </style>
+    </template>
+    <script src="kune-polymer.js"></script>
+  </body>
 </html>

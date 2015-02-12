@@ -52,25 +52,25 @@ import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlexTable;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class FolderViewerAsTablePanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /**
    * The Interface FolderViewerAsTablePanelUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface FolderViewerAsTablePanelUiBinder extends UiBinder<Widget, FolderViewerAsTablePanel> {
@@ -94,7 +94,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /**
    * Instantiates a new folder viewer as table panel.
-   * 
+   *
    * @param gsArmor
    *          the gs armor
    * @param i18n
@@ -130,7 +130,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.
    * gspace.client.viewers.items.FolderItemDescriptor,
@@ -165,7 +165,8 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       }
     });
     final MenuDescriptor menu = new MenuDescriptor(i18n.t("Actions"));
-    menu.withIcon(res.arrowdown()).withStyles("k-def-docbtn, k-btn, k-button");
+    // menu.withIcon(res.arrowdown())
+    menu.withStyles("k-def-docbtn, k-btn, k-button");
     menu.setStandalone(false);
     toolbar.add(menu);
     final GuiActionDescCollection actions = item.getActionCollection();
@@ -211,7 +212,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#clear()
    */
   @Override
@@ -222,7 +223,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#setContainer(cc
    * .kune.core.shared.dto.StateContainerDTO)

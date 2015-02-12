@@ -26,6 +26,7 @@ import java.util.List;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.SocialNetworkChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent;
@@ -46,9 +47,9 @@ import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.UserBuddiesDataDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
@@ -57,14 +58,14 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSNPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy> {
 
   /**
    * The Interface UserSNProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -73,14 +74,14 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * The Interface UserSNView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface UserSNView extends View {
 
     /**
      * Adds the buddie.
-     * 
+     *
      * @param user
      *          the user
      * @param avatarUrl
@@ -99,7 +100,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     /**
      * Adds the participation.
-     * 
+     *
      * @param group
      *          the group
      * @param avatarUrl
@@ -118,7 +119,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     /**
      * Adds the text to buddie list.
-     * 
+     *
      * @param text
      *          the text
      */
@@ -131,14 +132,14 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     /**
      * Gets the bottom toolbar.
-     * 
+     *
      * @return the bottom toolbar
      */
     IsActionExtensible getBottomToolbar();
 
     /**
      * Sets the buddies count.
-     * 
+     *
      * @param count
      *          the new buddies count
      */
@@ -146,7 +147,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     /**
      * Sets the buddies visible.
-     * 
+     *
      * @param visible
      *          the visible
      * @param areMany
@@ -161,7 +162,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     /**
      * Sets the participation count.
-     * 
+     *
      * @param count
      *          the new participation count
      */
@@ -169,7 +170,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     /**
      * Sets the participation visible.
-     * 
+     *
      * @param visible
      *          the visible
      * @param areMany
@@ -179,7 +180,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
     /**
      * Sets the visible.
-     * 
+     *
      * @param visible
      *          the new visible
      */
@@ -207,7 +208,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * Instantiates a new user sn presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -256,17 +257,17 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     });
     stateManager.onSocialNetworkChanged(true,
         new SocialNetworkChangedEvent.SocialNetworkChangedHandler() {
-          @Override
-          public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
-            UserSNPresenter.this.onStateChanged(event.getState());
-          }
-        });
+      @Override
+      public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
+        UserSNPresenter.this.onStateChanged(event.getState());
+      }
+    });
     refreshActionsImpl();
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
    */
   @Override
@@ -276,7 +277,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * On state changed.
-   * 
+   *
    * @param state
    *          the state
    */
@@ -316,7 +317,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * Refresh on sign in sign out.
-   * 
+   *
    * @param session
    *          the session
    */
@@ -329,7 +330,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -339,7 +340,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /**
    * Sets the buddies state.
-   * 
+   *
    * @param state
    *          the state
    * @return the int
@@ -374,13 +375,14 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
         getView().setNoBuddies();
       }
     }
+    EventBusInstance.get().fireEvent(new UserFollowersUpdatedEvent(buddieNumber));
     getView().setBuddiesCount(buddieNumber);
     return buddieNumber;
   }
 
   /**
    * Sets the participation state.
-   * 
+   *
    * @param state
    *          the state
    * @return the int

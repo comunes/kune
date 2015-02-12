@@ -28,9 +28,12 @@ import cc.kune.common.client.actions.ui.descrip.AbstractParentGuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.HasChilds;
+import cc.kune.common.client.errors.NotImplementedException;
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.shared.i18n.HasRTL;
 
+import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.user.client.ui.Composite;
 
 // TODO: Auto-generated Javadoc
@@ -144,39 +147,50 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
    *          the descrip
    */
   protected void beforeAddWidget(final GuiActionDescrip descrip) {
-    if (descrip.mustBeAdded()) {
-      if (bindings.size() == 0) {
-        throw new UIException("Bindings yet not registered aka injected");
-      }
-      assert bindings.size() != 0;
-      final GuiBinding binding = bindings.get(descrip.getType());
-      if (binding == null) {
-        throw new UIException("Unknown binding for: " + descrip);
-      } else {
-        // We set at that moment if the widget should be RTL or not
-        descrip.setRTL(i18n.isRTL());
-        final AbstractGuiItem item;
-        try {
-          item = binding.create(descrip);
-        } catch (final ClassCastException e) {
-          throw new UIException("Class cath error in " + descrip + " " + e.getCause() + " "
-              + e.getMessage());
+    try {
+      if (descrip.mustBeAdded()) {
+        if (bindings.size() == 0) {
+          throw new UIException("Bindings yet not registered aka injected");
         }
-        if (binding.shouldBeAdded()) {
-          // TODO Change this ^ to shouldBeAttached
-          if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
-            addWidget(item);
-          } else {
-            insertWidget(item, descrip.getPosition());
+        assert bindings.size() != 0;
+        final GuiBinding binding = bindings.get(descrip.getType());
+        if (binding == null) {
+          throw new UIException("Unknown binding for: " + descrip);
+        } else {
+          // We set at that moment if the widget should be RTL or not
+          descrip.setRTL(i18n.isRTL());
+          final AbstractGuiItem item;
+          try {
+            item = binding.create(descrip);
+          } catch (final ClassCastException e) {
+            Log.error("Class cath error creating " + descrip);
+            throw e;
+          } catch (final JavaScriptException je) {
+            Log.error("Javascript error creating" + descrip);
+            throw je;
+          }
+          if (binding.shouldBeAdded()) {
+            // TODO Change this ^ to shouldBeAttached
+            if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
+              addWidget(item);
+            } else {
+              insertWidget(item, descrip.getPosition());
+            }
+          }
+          if (descrip instanceof HasChilds) {
+            for (final GuiActionDescrip child : ((AbstractParentGuiActionDescrip) descrip).getChilds()) {
+              // Log.info("Child added: " + child.getValue(Action.NAME));
+              add(child);
+            }
           }
         }
-        if (descrip instanceof HasChilds) {
-          for (final GuiActionDescrip child : ((AbstractParentGuiActionDescrip) descrip).getChilds()) {
-            // Log.info("Child added: " + child.getValue(Action.NAME));
-            add(child);
-          }
-        }
       }
+    } catch (final NotImplementedException e) {
+      throw new UIException("NotImplementedException trying to create " + descrip + " " + e.getCause()
+          + " " + e.getMessage(), e);
+    } catch (final Exception e) {
+      Log.error("Exception creating" + descrip);
+      throw e;
     }
   }
 

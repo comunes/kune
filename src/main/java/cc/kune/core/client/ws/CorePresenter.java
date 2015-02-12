@@ -27,19 +27,18 @@ import cc.kune.core.client.i18n.I18nReadyEvent;
 import cc.kune.core.client.i18n.I18nUITranslationService;
 import cc.kune.core.client.init.AppStarter;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyStandard;
 import com.gwtplatform.mvp.client.proxy.Proxy;
-import com.gwtplatform.mvp.client.proxy.RevealRootLayoutContentEvent;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class CorePresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -47,7 +46,7 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
 
   /**
    * The Interface CoreProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyStandard
@@ -56,7 +55,7 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
 
   /**
    * The Interface CoreView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface CoreView extends View {
@@ -64,7 +63,7 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
 
   /**
    * Instantiates a new core presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -99,7 +98,8 @@ public class CorePresenter extends Presenter<CorePresenter.CoreView, CorePresent
    */
   @Override
   protected void revealInParent() {
-    RevealRootLayoutContentEvent.fire(this, this);
+    // RevealRootLayoutContentEvent.fire(this, this);
+    // Now we don't use a RootLayout
   }
 
 }

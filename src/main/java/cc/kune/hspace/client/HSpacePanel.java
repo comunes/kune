@@ -22,6 +22,8 @@
  */
 package cc.kune.hspace.client;
 
+import static cc.kune.polymer.client.PolymerId.*;
+
 import java.util.List;
 
 import org.waveprotocol.wave.client.common.util.DateUtils;
@@ -29,6 +31,7 @@ import org.waveprotocol.wave.client.common.util.DateUtils;
 import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.ui.DottedTabPanel;
+import cc.kune.common.client.ui.WrappedFlowPanel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.SiteTokens;
@@ -56,27 +59,18 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HSpacePanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /**
    * The Interface HSpacePanelUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface HSpacePanelUiBinder extends UiBinder<Widget, HSpacePanel> {
   }
-
-  /** The Constant K_HOME_GLOBAL_STATS. */
-  public static final String K_HOME_GLOBAL_STATS = "k-home-global-stats";
-
-  /** The Constant K_HOME_GROUP_STATS. */
-  public static final String K_HOME_GROUP_STATS = "k-home-group-stats";
-
-  /** The Constant K_HOME_TOOLBAR. */
-  public static final String K_HOME_TOOLBAR = "k-home-toolbar";
 
   /** The ui binder. */
   private static HSpacePanelUiBinder uiBinder = GWT.create(HSpacePanelUiBinder.class);
@@ -89,7 +83,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   FlowPanel globalStats;
 
   /** The global stats parent. */
-  private final RootPanel globalStatsParent;
+  private final WrappedFlowPanel globalStatsParent;
 
   /** The global stats title. */
   @UiField
@@ -112,7 +106,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   public InlineLabel globalStatsTotalUsersTitle;
 
   /** The group stats parent. */
-  private final RootPanel groupStatsParent;
+  private final WrappedFlowPanel groupStatsParent;
 
   /** The home toolbar. */
   private final ActionSimplePanel homeToolbar;
@@ -171,7 +165,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /**
    * Instantiates a new h space panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param armor
@@ -205,9 +199,9 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     tabPanel.addTab(lastPublishedPanel, lastPublicationsText);
     globalStats.removeFromParent();
     unreadInYourInbox.setTargetHistoryToken(SiteTokens.WAVE_INBOX);
-    globalStatsParent = RootPanel.get(K_HOME_GLOBAL_STATS);
-    groupStatsParent = RootPanel.get(K_HOME_GROUP_STATS);
-    final RootPanel homeToolbarParent = RootPanel.get(K_HOME_TOOLBAR);
+    globalStatsParent = armor.wrapDiv(HOME_GLOBAL_STATS);
+    groupStatsParent = armor.wrapDiv(HOME_GROUP_STATS);
+    final WrappedFlowPanel homeToolbarParent = armor.wrapDiv(HOME_TOOLBAR);
     if (homeToolbarParent != null) {
       homeToolbarParent.add(homeToolbar);
     }
@@ -242,7 +236,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /**
    * Format.
-   * 
+   *
    * @param modifiedOn
    *          the modified on
    * @param name

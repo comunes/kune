@@ -271,13 +271,13 @@ wave.DataView.prototype.insertBlip = function(blipId, opt_parent, opt_indent,
   } else if (indent) {
     // See if the parent blip already has an inline child.
     var parentRef = $(opt_parent);
-    var indentRef = parentRef.children('.indent');
+    var indentRef = parentRef.children('.indents');
     if (indentRef.length) {
       // If it does, insert into it.
       indentRef.append(blipRef);
     } else {
       // Insert an indent wrapper.
-      indentRef = $('<div class="indent"></div>');
+      indentRef = $('<div class="indents"></div>');
       parentRef.after(indentRef);
       indentRef.append(blipRef);
     }

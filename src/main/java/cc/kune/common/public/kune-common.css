@@ -292,7 +292,7 @@
   -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   -moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   border: 1 px solid #BBBBBB;
-  font: 16px 'Ubuntu', arial;
+  font-size: 16px;
   /* font-weight: bold; */
   -webkit-border-bottom-right-radius: 5px;
   -moz-border-radius-bottomright: 5px;
@@ -313,7 +313,7 @@
   border: 1px solid #552200;
   border-top: 2px solid #552200;
   padding: 3px;
-  font: 16px 'Ubuntu', arial;
+  font-size: 16px;
   color: #333333;
   -webkit-border-bottom-right-radius: 5px;
   -moz-border-radius-bottomright: 5px;
@@ -690,12 +690,11 @@ div.k-iconlabel {
 
 /* End tabbar */
 .k-editableLabel {
-  font-weight: bold;
+  white-space: nowrap;
   padding: 3px
 }
 
-.k-editableLabel-high {
-  font-weight: bold;
+.k-editableLabel-high { 
   background-color: #FFFBC1;
   color: black !important;
 }

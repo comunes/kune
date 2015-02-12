@@ -205,11 +205,10 @@ implements SitebarActions {
    */
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
+
     MORE_MENU.withText(i18n.t("More"));
     MORE_MENU.withIcon(IconType.BARS);
     MORE_MENU.setStyles("k-no-backimage, k-btn-sitebar");
-    // OPTIONS_MENU.putValue(AbstractGxtMenuGui.MENU_POSITION,
-    // AbstractGxtMenuGui.MenuPosition.bl);
 
     final AbstractExtendedAction bugsAction = new AbstractExtendedAction() {
       @Override

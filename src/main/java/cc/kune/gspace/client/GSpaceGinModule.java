@@ -35,7 +35,9 @@ import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RenameAction;
 import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.armor.GSpaceArmor;
-import cc.kune.gspace.client.armor.GSpaceArmorDefault;
+import cc.kune.gspace.client.armor.GSpaceArmorPolymer;
+import cc.kune.gspace.client.armor.GSpaceCenter;
+import cc.kune.gspace.client.armor.GSpaceCenterPanel;
 import cc.kune.gspace.client.feedback.FeedbackBottomPanel;
 import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorPanel;
@@ -149,14 +151,14 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceGinModule.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -172,8 +174,9 @@ public class GSpaceGinModule extends ExtendedGinModule {
         EntityLicensePanel.class, EntityLicensePresenter.EntityLicenseProxy.class);
     bindPresenter(TagsSummaryPresenter.class, TagsSummaryPresenter.TagsSummaryView.class,
         TagsSummaryPanel.class, TagsSummaryPresenter.TagsSummaryProxy.class);
-    bind(GSpaceArmorDefault.class).in(Singleton.class);
-    bind(GSpaceArmor.class).to(GSpaceArmorDefault.class).in(Singleton.class);
+    bind(GSpaceCenter.class).to(GSpaceCenterPanel.class).in(Singleton.class);
+    bind(GSpaceArmorPolymer.class).in(Singleton.class);
+    bind(GSpaceArmor.class).to(GSpaceArmorPolymer.class).in(Singleton.class);
     bind(GSpaceParts.class).asEagerSingleton();
     bindPresenter(ToolSelectorPresenter.class, ToolSelectorPresenter.ToolSelectorView.class,
         ToolSelectorPanel.class, ToolSelectorPresenter.ToolSelectorProxy.class);

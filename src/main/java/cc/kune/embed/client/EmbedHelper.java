@@ -48,16 +48,16 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 
 /**
  * The Class EmbedHelper.
- * 
+ *
  */
 public class EmbedHelper {
 
   /**
    * Fix content urls.
-   * 
+   *
    * We do some html fix in html content because we are in embeded in another
    * site domain, and the server don't know how to do this
-   * 
+   *
    * @param serverUrl
    *          the server url
    * @param content
@@ -71,7 +71,7 @@ public class EmbedHelper {
 
   /**
    * Gets the server.
-   * 
+   *
    * @return the server
    */
   public static String getServer() {
@@ -81,7 +81,7 @@ public class EmbedHelper {
 
   /**
    * Gets the server with path.
-   * 
+   *
    * @return the server with path
    */
   public static String getServerWithPath() {
@@ -93,7 +93,7 @@ public class EmbedHelper {
 
   /**
    * Parses the init data in js
-   * 
+   *
    * @param init
    *          data the init js
    * @return the inidata DTO
@@ -101,14 +101,12 @@ public class EmbedHelper {
   public static InitDataDTO parse(final InitDataDTOJs initJ) {
     final InitDataDTO init = new InitDataDTO();
     init.setStoreUntranslatedStrings(initJ.getStoreUntranslatedStrings());
-    init.setSiteLogoUrl(initJ.getSiteLogoUrl());
-    init.setSiteLogoUrlOnOver(initJ.getsiteLogoUrlOnOver());
     return init;
   }
 
   /**
    * Parses the state in js.
-   * 
+   *
    * @param stateJs
    *          the state js
    * @return the state abstract dto
@@ -126,7 +124,7 @@ public class EmbedHelper {
 
   /**
    * Parses the userInfo js.
-   * 
+   *
    * @param userInfo
    *          the user info
    * @return the user info dto
@@ -152,7 +150,7 @@ public class EmbedHelper {
 
   /**
    * Process json request.
-   * 
+   *
    * @param url
    *          the url
    * @param callback
@@ -179,7 +177,7 @@ public class EmbedHelper {
 
   /**
    * Process request.
-   * 
+   *
    * @param url
    *          the url
    * @param callback

@@ -22,11 +22,8 @@
  */
 package cc.kune.gspace.client.viewers;
 
-import cc.kune.common.client.actions.ActionStyles;
-import cc.kune.common.client.actions.ToolbarStyles;
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
-import cc.kune.common.client.actions.ui.descrip.LabelDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.common.shared.utils.Url;
@@ -40,14 +37,14 @@ import cc.kune.core.shared.dto.ContainerSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.actions.GotoTokenAction;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class PathToolbarUtils.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PathToolbarUtils {
@@ -72,7 +69,7 @@ public class PathToolbarUtils {
 
   /**
    * Instantiates a new path toolbar utils.
-   * 
+   *
    * @param dropController
    *          the drop controller
    * @param stateManager
@@ -101,7 +98,7 @@ public class PathToolbarUtils {
 
   /**
    * Creates the group button.
-   * 
+   *
    * @param group
    *          the group
    * @param showGroupName
@@ -110,14 +107,15 @@ public class PathToolbarUtils {
    *          the minimal
    * @return the button descriptor
    */
-  private ButtonDescriptor createGroupButton(final GroupDTO group, final boolean showGroupName,
+  private ToolbarItemDescriptor createGroupButton(final GroupDTO group, final boolean showGroupName,
       final boolean minimal) {
-    final String style = ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " + ActionStyles.BTN_SMALL : "");
+    final String style = ""; // ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " +
+                             // ActionStyles.BTN_SMALL : "");
     final String tooltip = group.getLongName();
     final GotoTokenAction action = new GotoTokenAction(null,
         showGroupName ? group.getShortName() : null, tooltip, group.getStateToken(), style,
-        stateManager, eventBus, false);
-    final ButtonDescriptor btn = new ButtonDescriptor(action);
+            stateManager, eventBus, false);
+    final ToolbarItemDescriptor btn = new ToolbarItemDescriptor(action);
     // btn.withIcon(iconsRegistry.getContentTypeIcon(WikiToolConstants.TYPE_FOLDER));
 
     // FIXME: with Group Icon + Name we get some css issue
@@ -128,7 +126,7 @@ public class PathToolbarUtils {
 
   /**
    * Creates the path.
-   * 
+   *
    * @param group
    *          the group
    * @param container
@@ -146,7 +144,7 @@ public class PathToolbarUtils {
 
   /**
    * Creates the path.
-   * 
+   *
    * @param group
    *          the group
    * @param container
@@ -173,7 +171,7 @@ public class PathToolbarUtils {
 
     if (pathLength > 0) {
       actions.add(createGroupButton(group, showGroupName, !hasExtra));
-      actions.add(new LabelDescriptor().withStyles("k-button-arrow"));
+      // actions.add(new LabelDescriptor().withStyles("k-button-arrow"));
 
       // TODO RTL:
       // This is we want to align to the right
@@ -184,7 +182,7 @@ public class PathToolbarUtils {
         final boolean isTheLast = !isNotTheLast;
         final boolean isTheLastAndTheExtra = isTheLast && hasExtra;
         final ContainerSimpleDTO item = isTheLastAndTheExtra ? extra : path[i];
-        final ButtonDescriptor btn = createPathButton(item, pathLength, i, isTheLastAndTheExtra,
+        final ToolbarItemDescriptor btn = createPathButton(item, pathLength, i, isTheLastAndTheExtra,
             withDrop, hasExtra);
         if (withDrop) {
           if (isNotTheLast) {
@@ -196,7 +194,7 @@ public class PathToolbarUtils {
         actions.add(btn);
         // We add a small arrow between buttons
         if (isNotTheLast) {
-          actions.add(new LabelDescriptor().withStyles("k-button-arrow"));
+          // actions.add(new LabelDescriptor().withStyles("k-button-arrow"));
         }
       }
     }
@@ -205,7 +203,7 @@ public class PathToolbarUtils {
 
   /**
    * Creates the path button.
-   * 
+   *
    * @param container
    *          the container
    * @param length
@@ -220,10 +218,11 @@ public class PathToolbarUtils {
    *          the has extra
    * @return the button descriptor
    */
-  private ButtonDescriptor createPathButton(final ContainerSimpleDTO container, final int length,
+  private ToolbarItemDescriptor createPathButton(final ContainerSimpleDTO container, final int length,
       final int pos, final boolean isTheLastExtra, final boolean withDrop, final boolean hasExtra) {
     // +1 because of the first group button
-    final String style = ToolbarStyles.calculateStyle(pos + 1, length + 1);
+    final String style = "";// ToolbarStyles.calculateStyle(pos + 1, length +
+                            // 1);
 
     final String name = container.getName();
     // We should translate tool names: "Documents", "Wiki", etc.
@@ -238,7 +237,7 @@ public class PathToolbarUtils {
     final GotoTokenAction action = new GotoTokenAction(
         iconsRegistry.getContentTypeIcon(container.getTypeId()), truncatedName, tooltip,
         container.getStateToken(), style, stateManager, eventBus, !hasExtra);
-    final ButtonDescriptor btn = new ButtonDescriptor(action);
+    final ToolbarItemDescriptor btn = new ToolbarItemDescriptor(action);
 
     // If truncated, show tooltip
     if (title.length() > tooltipSize) {

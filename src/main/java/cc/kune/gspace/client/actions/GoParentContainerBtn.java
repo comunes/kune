@@ -22,8 +22,11 @@
  */
 package cc.kune.gspace.client.actions;
 
+import org.gwtbootstrap3.client.ui.constants.IconType;
+
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -41,14 +44,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GoParentContainerBtn.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GoParentContainerBtn extends ButtonDescriptor {
 
   /**
    * The Class GoParentContainerAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class GoParentContainerAction extends AbstractExtendedAction {
@@ -61,7 +64,7 @@ public class GoParentContainerBtn extends ButtonDescriptor {
 
     /**
      * Instantiates a new go parent container action.
-     * 
+     *
      * @param session
      *          the session
      * @param stateManager
@@ -75,7 +78,7 @@ public class GoParentContainerBtn extends ButtonDescriptor {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -102,7 +105,7 @@ public class GoParentContainerBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new go parent container btn.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param action
@@ -117,8 +120,8 @@ public class GoParentContainerBtn extends ButtonDescriptor {
   public GoParentContainerBtn(final I18nTranslationService i18n, final GoParentContainerAction action,
       final IconicResources res, final Session session, final String typeRoot) {
     super(action);
-    this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(res.leftArrow()).withStyles(
-        "k-btn-min, k-fl, k-btn-go-up");
+    this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(IconType.ARROW_LEFT).withStyles(
+        ActionStyles.OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT);
     this.withId(GO_PARENT_ID);
     final StateAbstractDTO state = session.getCurrentState();
     if (!session.isCurrentStateAContent()) {

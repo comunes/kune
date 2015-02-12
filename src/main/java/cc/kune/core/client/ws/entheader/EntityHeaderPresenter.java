@@ -31,7 +31,6 @@ import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
 
-import com.google.gwt.user.client.ui.IsWidget;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
@@ -47,8 +46,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityHeaderPresenter extends
-Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
-EntityHeader {
+    Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
+    EntityHeader {
 
   /**
    * The Interface EntityHeaderProxy.
@@ -75,19 +74,6 @@ EntityHeader {
     void addAction(GuiActionDescrip descriptor);
 
     /**
-     * Adds the widget.
-     *
-     * @param widget
-     *          the widget
-     */
-    void addWidget(IsWidget widget);
-
-    /**
-     * Sets the large font.
-     */
-    void setLargeFont();
-
-    /**
      * Sets the logo image.
      *
      * @param group
@@ -109,12 +95,7 @@ EntityHeader {
      * @param groupName
      *          the new logo text
      */
-    void setLogoText(final String groupName);
-
-    /**
-     * Sets the medium font.
-     */
-    void setMediumFont();
+    void setLogoText(final String groupName, String shortName);
 
     /**
      * Sets the online status group.
@@ -133,21 +114,10 @@ EntityHeader {
     void setOnlineStatusVisible(boolean visible);
 
     /**
-     * Sets the small font.
-     */
-    void setSmallFont();
-
-    /**
      * Show def user logo.
      */
     void showDefUserLogo();
   }
-
-  /** The Constant LARGE_NAME_LIMIT. */
-  private static final int LARGE_NAME_LIMIT = 17;
-
-  /** The Constant MEDIUM_NAME_LIMIT. */
-  private static final int MEDIUM_NAME_LIMIT = 80;
 
   /**
    * Instantiates a new entity header presenter.
@@ -178,14 +148,14 @@ EntityHeader {
       public void onCurrentLogoChanged(final CurrentEntityChangedEvent event) {
         final GroupDTO group = session.getCurrentState().getGroup();
         setGroupLogo(group);
-        setLogoText(group.getLongName());
+        setLogoText(group.getLongName(), group.getShortName());
       }
     });
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeader#addAction(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -197,19 +167,7 @@ EntityHeader {
 
   /*
    * (non-Javadoc)
-   *
-   * @see
-   * cc.kune.core.client.ws.entheader.EntityHeader#addWidget(com.google.gwt.
-   * user.client.ui.IsWidget)
-   */
-  @Override
-  public void addWidget(final IsWidget widget) {
-    getView().addWidget(widget);
-  }
-
-  /*
-   * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -226,7 +184,7 @@ EntityHeader {
    *          the no cache
    */
   void setGroupLogo(final GroupDTO group) {
-    setLogoText(group.getLongName());
+    setLogoText(group.getLongName(), group.getShortName());
     if (group.hasLogo()) {
       getView().setLogoImage(group);
       getView().setLogoImageVisible(true);
@@ -253,15 +211,7 @@ EntityHeader {
    * @param name
    *          the new logo text
    */
-  void setLogoText(final String name) {
-    final int length = name.length();
-    if (length <= LARGE_NAME_LIMIT) {
-      getView().setLargeFont();
-    } else if (length <= MEDIUM_NAME_LIMIT) {
-      getView().setMediumFont();
-    } else {
-      getView().setSmallFont();
-    }
-    getView().setLogoText(name);
+  void setLogoText(final String name, final String shortname) {
+    getView().setLogoText(name, shortname);
   }
 }

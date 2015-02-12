@@ -25,50 +25,36 @@ package cc.kune.core.client.ws;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.impl.StateManagerDefault;
-import cc.kune.gspace.client.armor.GSpaceArmorDefault;
+import cc.kune.gspace.client.armor.GSpaceArmorPolymer;
 import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class CoreView is where the general armor of Kune it created/attached.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CoreViewImpl extends ViewImpl implements CorePresenter.CoreView {
 
-  /** The armor. */
-  private final GSpaceArmorDefault armor;
-
   /**
    * Instantiates a new core view.
-   * 
+   *
    * @param armor
    *          the body
    * @param stateManager
    *          the state manager
    */
   @Inject
-  public CoreViewImpl(final GSpaceArmorDefault armor, final StateManagerDefault stateManager) {
-    this.armor = armor;
+  public CoreViewImpl(final GSpaceArmorPolymer armor, final StateManagerDefault stateManager) {
     CommonResources.INSTANCE.commonStyle().ensureInjected();
     GWT.<CoreResources> create(CoreResources.class).coreCss().ensureInjected();
     GWT.<GSpaceArmorResources> create(GSpaceArmorResources.class).style().ensureInjected();
     History.addValueChangeHandler(stateManager);
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.gwtplatform.mvp.client.View#asWidget()
-   */
-  @Override
-  public Widget asWidget() {
-    return armor;
-  }
 }

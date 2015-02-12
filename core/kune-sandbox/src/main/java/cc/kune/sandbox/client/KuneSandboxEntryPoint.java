@@ -24,6 +24,8 @@ package cc.kune.sandbox.client;
 
 import java.util.Date;
 
+import javax.validation.constraints.NotNull;
+
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Badge;
@@ -90,6 +92,7 @@ import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.common.client.ui.DottedTab;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.PopupTopPanel;
+import cc.kune.common.client.ui.WrappedFlowPanel;
 import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 import cc.kune.common.client.ui.dialogs.BasicDialog;
 import cc.kune.common.client.ui.dialogs.MessagePanel;
@@ -103,12 +106,14 @@ import cc.kune.core.client.ui.UploaderPanel;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog.Builder;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog.OnEnter;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.WhiteSpace;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.UmbrellaException;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
@@ -128,7 +133,6 @@ import com.google.gwt.user.client.ui.Widget;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneSandboxEntryPoint implements EntryPoint {
-
   /**
    * The Class TestAction.
    *
@@ -170,8 +174,56 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     public void actionPerformed(final ActionEvent event) {
       testDialog();
     }
+
   }
 
+  private static void ensureNotUmbrellaError(@NotNull final Throwable e) {
+    // https://stackoverflow.com/questions/11029002/gwt-client-umbrellaexception-get-full-error-message-in-java/11033699#11033699
+    for (final Throwable th : ((UmbrellaException) e).getCauses()) {
+      if (th instanceof UmbrellaException) {
+        ensureNotUmbrellaError(th);
+      } else {
+        GWT.log(th.getMessage());
+        GWT.log(getMessage(th), e);
+      }
+    }
+
+  }
+
+  private static String getMessage(Throwable throwable) {
+    // https://stackoverflow.com/questions/13663753/turn-a-stack-trace-into-a-string
+    String ret = "";
+    while (throwable != null) {
+      if (throwable instanceof com.google.gwt.event.shared.UmbrellaException) {
+        for (final Throwable thr2 : ((com.google.gwt.event.shared.UmbrellaException) throwable).getCauses()) {
+          if (ret != "") {
+            ret += "\nCaused by: ";
+          }
+          ret += thr2.toString();
+          ret += "\n  at " + getMessage(thr2);
+        }
+      } else if (throwable instanceof com.google.web.bindery.event.shared.UmbrellaException) {
+        for (final Throwable thr2 : ((com.google.web.bindery.event.shared.UmbrellaException) throwable).getCauses()) {
+          if (ret != "") {
+            ret += "\nCaused by: ";
+          }
+          ret += thr2.toString();
+          ret += "\n  at " + getMessage(thr2);
+        }
+      } else {
+        if (ret != "") {
+          ret += "\nCaused by: ";
+        }
+        ret += throwable.toString();
+        for (final StackTraceElement sTE : throwable.getStackTrace()) {
+          ret += "\n  at " + sTE;
+        }
+      }
+      throwable = throwable.getCause();
+    }
+
+    return ret;
+  }
   /** The absolute panel. */
   private AbsolutePanel absolutePanel;
 
@@ -371,6 +423,13 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   }
 
   private void initializeInjector() {
+    GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
+      @Override
+      public void onUncaughtException(@NotNull final Throwable e) {
+        ensureNotUmbrellaError(e);
+      }
+    });
+
     ginjector = GWT.create(KuneSampleGinjector.class);
     res = CommonResources.INSTANCE;
     res.commonStyle().ensureInjected();
@@ -396,8 +455,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   private ActionFlowPanel makeFlowToolbar() {
     final GuiActionDescCollection actions = new GuiActionDescCollection();
 
-    final TestAction action = new TestAction("Action 1", "Some tooltip", "oc-testico");
+    final TestAction action = new TestAction("Action 1");
+    action.withToolTip("Some tooltip").withIcon(res.chainClosedGrey());
+
     final TestAction action2 = new TestAction("Some action 2");
+    action2.withIcon("mail");
 
     final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
     shortcutRegister.put(shortcut, action);
@@ -405,6 +467,18 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     shortcutRegister.put(shortcut2, action2);
 
     final ButtonDescriptor simpleBtn = new ButtonDescriptor(action);
+
+    // Same action but different text
+    simpleBtn.putValue(Action.NAME, "Action 1 diff name");
+
+    final ButtonDescriptor iconBtn = new ButtonDescriptor(new AbstractExtendedAction() {
+
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        NotifyUser.info("Click!");
+      }
+    });
+    iconBtn.withIcon("polymer");
 
     // Same action but different text
     simpleBtn.putValue(Action.NAME, "Action 1 diff name");
@@ -449,7 +523,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     final LabelDescriptor label = new LabelDescriptor("Some label");
 
-    actions.add(toolbar, simpleBtn, tsepFill, pushBtn, toolbarSpace, menu, tsepFill, menuItem,
+    actions.add(toolbar, simpleBtn, tsepFill, pushBtn, iconBtn, toolbarSpace, menu, tsepFill, menuItem,
         menuItem2, menuSep, menuItem2, menuItem, iconLabelDescr, submenu, menuItem3, menuItem4, menu2,
         iconLabelNoAct, menuItem5, label);
 
@@ -470,39 +544,51 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   @Override
   public void onModuleLoad() {
     initializeInjector();
-    NotifyUser.info("Started");
-    final WrappedFlowPanel docContent = WrappedFlowPanel.wrap("doc_content");
+    // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
 
-    final CustomButton btn = new CustomButton("Sign in");
-    btn.setIcon(KuneIcon.KUNE);
-    btn.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        NotifyUser.info("Tested");
+    NotifyUser.showProgress("Starting...");
 
+    testTooltips();
+
+    // absolutePanel.add(testActionToolbar(), 200, 200);
+
+    final String defLocale = "en";
+
+    final String locale = WindowUtils.getParameter("locale");
+    final String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
+
+    for (final String id : ids) {
+      final RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
+      final RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
+      if (someId != null) {
+        someId.setVisible(true);
+      } else if (defId != null) {
+        defId.setVisible(true);
       }
-    });
-    docContent.insert(btn, 0);
+    }
 
-    final PaperFab fab = PaperFab.wrap(DOM.getElementById("edit_fab"));
+    // testToolpanel();
+    // toolSelector.addWidget(new Label("Test"));
+    // testPromptDialog();
 
-    fab.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        NotifyUser.success("New message");
-      }
-    });
-    final Badge inboxBadge = new Badge();
-    final Badge chatsBadge = new Badge();
-    inboxBadge.setText("99");
-    chatsBadge.setText("9");
-    PolymerUtils.wrapDiv("sitebar_user_space_icon_group").add(inboxBadge);
-    PolymerUtils.wrapDiv("sitebar_chat_icon_group").add(chatsBadge);
-    inboxBadge.addStyleName("btn_green");
-    chatsBadge.addStyleName("btn_green");
-    inboxBadge.addStyleName("sitebar_inbox_badge");
-    chatsBadge.addStyleName("sitebar_chats_badge");
-    NotifyUser.hideProgress();
+    testSubWidget();
+
+    final ActionFlowPanel view = makeFlowToolbar();
+
+    final BasicThumb thumb = testThumbs();
+
+    absolutePanel.add(thumb, 200, 10);
+    absolutePanel.add(view, 5, 150);
+
+    final DottedTab tab = new DottedTab();
+    absolutePanel.add(tab, 400, 400);
+    absolutePanel.add(tab, 400, 400);
+    absolutePanel.add(makeFileUpload(), 520, 0);
+
+    new BlinkAnimation(tab, 350).animate(5);
+
+    RootPanel.get().add(absolutePanel);
+
   }
 
   public void onModuleLoadBootstrapTests() {
@@ -704,53 +790,41 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     RootLayoutPanel.get().add(mainContainer);
   }
 
-  public void onModuleLoadOld() {
+  public void onModuleLoadPolymer() {
     initializeInjector();
-    // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
+    NotifyUser.info("Started");
+    final WrappedFlowPanel docContent = WrappedFlowPanel.wrap("doc_content");
 
-    NotifyUser.showProgress("Starting");
+    final CustomButton btn = new CustomButton("Sign in");
+    btn.setIcon(KuneIcon.KUNE);
+    btn.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.info("Tested");
 
-    testTooltips();
-
-    // absolutePanel.add(testActionToolbar(), 200, 200);
-
-    final String defLocale = "en";
-
-    final String locale = WindowUtils.getParameter("locale");
-    final String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
-
-    for (final String id : ids) {
-      final RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
-      final RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
-      if (someId != null) {
-        someId.setVisible(true);
-      } else if (defId != null) {
-        defId.setVisible(true);
       }
-    }
+    });
+    docContent.insert(btn, 0);
 
-    // testToolpanel();
-    // toolSelector.addWidget(new Label("Test"));
-    // testPromptDialog();
+    final PaperFab fab = PaperFab.wrap(DOM.getElementById("edit_fab"));
 
-    testSubWidget();
-
-    final ActionFlowPanel view = makeFlowToolbar();
-
-    final BasicThumb thumb = testThumbs();
-
-    absolutePanel.add(thumb, 200, 10);
-    absolutePanel.add(view, 5, 150);
-
-    final DottedTab tab = new DottedTab();
-    absolutePanel.add(tab, 400, 400);
-    absolutePanel.add(tab, 400, 400);
-    absolutePanel.add(makeFileUpload(), 520, 0);
-
-    new BlinkAnimation(tab, 350).animate(5);
-
-    RootPanel.get().add(absolutePanel);
-
+    fab.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        NotifyUser.success("New message");
+      }
+    });
+    final Badge inboxBadge = new Badge();
+    final Badge chatsBadge = new Badge();
+    inboxBadge.setText("99");
+    chatsBadge.setText("9");
+    PolymerUtils.wrapDiv("sitebar_user_space_icon_group").add(inboxBadge);
+    PolymerUtils.wrapDiv("sitebar_chat_icon_group").add(chatsBadge);
+    inboxBadge.addStyleName("btn_green");
+    chatsBadge.addStyleName("btn_green");
+    inboxBadge.addStyleName("sitebar_inbox_badge");
+    chatsBadge.addStyleName("sitebar_chats_badge");
+    NotifyUser.hideProgress();
   }
 
   /**
@@ -775,7 +849,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   private void testDialog() {
     final BSBasicDialog dialog = new BSBasicDialog();
     dialog.setFirstBtnText("Accept");
-    dialog.setSecondBtnText("Cancellll");
+    dialog.setSecondBtnText("Cancel");
     dialog.show();
   }
 
@@ -924,7 +998,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     final Button button = new Button("Btn 1 biiggggggg");
     final Button button2 = new Button("Btn 2 also biggggg");
-    button.getElement().getStyle().setWhiteSpace(WhiteSpace.NORMAL);
+    button2.getElement().getStyle().setWhiteSpace(WhiteSpace.NORMAL);
 
     final IconLabel button3 = new IconLabel(res.info(), "Btn 3");
     final Button button4 = new Button("Btn 4");

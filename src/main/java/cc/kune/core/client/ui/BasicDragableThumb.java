@@ -31,7 +31,7 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BasicDragableThumb.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
@@ -41,7 +41,7 @@ public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
 
   /**
    * Instantiates a new basic dragable thumb.
-   * 
+   *
    * @param imageRef
    *          the image ref
    * @param imgSize
@@ -63,7 +63,7 @@ public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.allen_sauer.gwt.dnd.client.HasDragHandle#getDragHandle()
    */
   @Override
@@ -73,7 +73,7 @@ public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
 
   /**
    * Gets the token.
-   * 
+   *
    * @return the token
    */
   public StateToken getToken() {

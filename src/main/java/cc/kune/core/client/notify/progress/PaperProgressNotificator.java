@@ -21,7 +21,7 @@
  *
  */
 
-package cc.kune.sandbox.client;
+package cc.kune.core.client.notify.progress;
 
 import br.com.rpa.client._paperelements.PaperProgress;
 import cc.kune.common.client.notify.ProgressHideEvent;

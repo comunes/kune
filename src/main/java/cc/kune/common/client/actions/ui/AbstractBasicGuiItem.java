@@ -13,6 +13,10 @@ public abstract class AbstractBasicGuiItem extends AbstractGuiItem {
   }
 
   @Override
+  protected void setIcon(final Object icon) {
+  }
+
+  @Override
   protected void setIconBackColor(final String backgroundColor) {
   }
 

@@ -21,22 +21,32 @@
  *
  */
 
-package cc.kune.sandbox.client;
+package cc.kune.gspace.client.armor;
+
+import static cc.kune.polymer.client.PolymerId.*;
 
 import java.util.HashMap;
 
+import br.com.rpa.client._coreelements.CoreIconButton;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.FlowActionExtensible;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
-import cc.kune.gspace.client.armor.GSpaceArmor;
-import cc.kune.gspace.client.armor.GSpaceCenter;
+import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.log.Log;
+import cc.kune.common.client.ui.HTMLId;
+import cc.kune.common.client.ui.WrappedFlowPanel;
+import cc.kune.polymer.client.PolymerUtils;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.BodyElement;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
@@ -46,6 +56,31 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class GSpaceArmorPolymer implements GSpaceArmor {
+
+  private static Element getElementById(final String id) {
+    return DOM.getElementById(id);
+  }
+
+  private native static Element getShadowElement(String father, String child) /*-{
+		return $doc.querySelector(father).shadowRoot.querySelector(child)
+  }-*/;
+
+  private static boolean isElementChildOfWidget(Element element) {
+    // Walk up the DOM hierarchy, looking for any widget with an event listener
+    // set. Though it is not dependable in the general case that a widget will
+    // have set its element's event listener at all times, it *is* dependable
+    // if the widget is attached. Which it will be in this case.
+    element = element.getParentElement();
+    final BodyElement body = Document.get().getBody();
+    while ((element != null) && (body != element)) {
+      if (Event.getEventListener(element) != null) {
+        Log.error("Element: " + element + " already wrapped/attached");
+        return true;
+      }
+      element = element.getParentElement().cast();
+    }
+    return false;
+  }
 
   private final GSpaceCenter centerPanel;
   private final ActionFlowPanel docFooterToolbar;
@@ -60,34 +95,39 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Inject
   GSpaceArmorPolymer(final GSpaceCenter centerPanel, final Provider<ActionFlowPanel> toolbarProv) {
+    panels = new HashMap<String, WrappedFlowPanel>();
+    elements = new HashMap<String, Element>();
+
+    // This (temporal) panel is for not already implemented panels, so we can
+    // continue without showing this widgets
+    // Should be deleted when finished
+    trash = new FlowPanel();
+    flowActionTrash = new FlowActionExtensible();
+    trash.add(flowActionTrash);
+
     docFooterToolbar = toolbarProv.get();
     headerToolbar = toolbarProv.get();
     subheaderToolbar = toolbarProv.get();
     toolsSouthToolbar = toolbarProv.get();
     entityFooterToolbar = toolbarProv.get();
-    getDocHeader().add(headerToolbar);
-    getDocSubheader().add(subheaderToolbar);
+
+    PolymerUtils.addFlexHorLayout(docFooterToolbar, subheaderToolbar, toolsSouthToolbar,
+        entityFooterToolbar);
+    PolymerUtils.addFlexVerLayout(headerToolbar);
+
+    getEntityHeader().add(headerToolbar);
     getDocFooter().add(docFooterToolbar);
     getEntityToolsSouth().add(toolsSouthToolbar);
     getEntityFooter().add(entityFooterToolbar);
-    this.centerPanel = centerPanel;
-    panels = new HashMap<String, WrappedFlowPanel>();
-    elements = new HashMap<String, Element>();
-    // This (temporal) panel is for not already implemented panels, so we can
-    // continue without showing this widgets
-    // Should be deleted when finished
-    getDiv("doc_content").add(centerPanel);
+    getDocSubheader().add(subheaderToolbar);
 
-    trash = new FlowPanel();
-    flowActionTrash = new FlowActionExtensible();
-    trash.add(flowActionTrash);
+    this.centerPanel = centerPanel;
+    wrapDiv(DOC_CONTENT).add(centerPanel);
   }
 
   @Override
   public void clearBackImage() {
-    final String bodyProp = "#FFFFFF url('" + GWT.getModuleBaseURL()
-        + "images/clear.gif') fixed top left";
-    getGroupHeader().setPropertyString("background", bodyProp);
+    setBackImage("none !important");
   }
 
   private SimplePanel createDummySimplePanel() {
@@ -98,17 +138,12 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public void enableCenterScroll(final boolean enable) {
-    PolymerUtils.getShadowElement("core_scroll_header_panel", "mainContainer").getStyle().setOverflowY(
-        enable ? Overflow.AUTO : Overflow.HIDDEN);
-  }
-
-  public WrappedFlowPanel getDiv(final String id) {
-    WrappedFlowPanel panel = panels.get(id);
-    if (panel == null) {
-      panel = WrappedFlowPanel.wrap(id);
-      panels.put(id, panel);
+    try {
+      getElementById("doc_content_section").getStyle().setOverflowY(
+          enable ? Overflow.AUTO : Overflow.HIDDEN);
+    } catch (final Exception e) {
+      Log.error("Cannot set scroll in center panel");
     }
-    return panel;
   }
 
   @Override
@@ -118,33 +153,35 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public int getDocContainerHeight() {
-    return getDiv("doc_content").getOffsetHeight();
+    return wrapDiv(DOC_CONTENT).getOffsetHeight();
   }
 
   @Override
   public ForIsWidget getDocFooter() {
-    return trash;
+    return wrapDiv(MIGA);
   }
 
   @Override
   public IsActionExtensible getDocFooterToolbar() {
-    return flowActionTrash;
+    return docFooterToolbar;
   }
 
   @Override
   public ForIsWidget getDocHeader() {
-    return getDiv("document_name");
+    return wrapDiv(DOC_HEADER);
   }
 
   @Override
   public ForIsWidget getDocSubheader() {
-    return getDiv("doc_toolbar");
+    return wrapDiv(DOC_TOOLBAR_EXTENSION);
   }
 
-  public Element getElement(final String id) {
+  @Override
+  public Element getElement(final HTMLId htmlId) {
+    final String id = htmlId.getId();
     Element element = elements.get(id);
     if (element == null) {
-      element = DOM.getElementById(id);
+      element = getElementById(id);
       elements.put(id, element);
     }
     return element;
@@ -152,7 +189,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public ForIsWidget getEntityFooter() {
-    return trash;
+    return wrapDiv(SITE_BOTTOMBAR);
   }
 
   @Override
@@ -162,7 +199,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public ForIsWidget getEntityHeader() {
-    return trash;
+    return wrapDiv(GROUP_ENTITY_TOOLBAR);
   }
 
   @Override
@@ -172,7 +209,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public ForIsWidget getEntityToolsNorth() {
-    return getDiv("header_social_net");
+    return wrapDiv(HEADER_SOCIAL_NET);
   }
 
   @Override
@@ -180,8 +217,24 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
     return trash;
   }
 
-  private Element getGroupHeader() {
-    return getElement("header_core_toolbar");
+  @Override
+  public ButtonBase getFollowersButton() {
+    return CoreIconButton.wrap(GROUP_FOLLOWERS.getId());
+  }
+
+  @Override
+  public Image getGroupLogo() {
+    return Image.wrap(getElement(HEADER_GROUP_LOGO));
+  }
+
+  @Override
+  public WrappedFlowPanel getGroupName() {
+    return wrapDiv(HEADER_GROUP_NAME);
+  }
+
+  @Override
+  public WrappedFlowPanel getGroupShortName() {
+    return wrapDiv(HEADER_SHORT_GROUP_NAME);
   }
 
   @Override
@@ -195,12 +248,17 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   public ForIsWidget getHomeSpaceFlow() {
-    return getDiv("k-home-center");
+    return wrapDiv(HOME_CENTER);
+  }
+
+  @Override
+  public Element getLogoShadow() {
+    return getElement(HEADER_GROUP_SHADOW);
   }
 
   @Override
   public IsWidget getMainpanel() {
-    return getDiv("kunetemplate");
+    return wrapDiv(GROUP_SPACE);
   }
 
   @Override
@@ -209,12 +267,17 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   @Override
-  public ForIsWidget getSitebar() {
-    return getDiv("sitebar_right_extensionbar");
+  public ForIsWidget getSitebarLeft() {
+    return wrapDiv(SITEBAR_LEFT_EXTENSIONBAR);
+  }
+
+  @Override
+  public ForIsWidget getSitebarRight() {
+    return wrapDiv(SITEBAR_RIGHT_EXTENSIONBAR);
   }
 
   private void getSpace(final int index) {
-    getElement("space_selector_paper_tabs").setPropertyInt("selected", index);
+    getElement(SPACE_SELECTOR).setPropertyInt("selected", index);
   }
 
   @Override
@@ -229,12 +292,12 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public ForIsWidget getUserSpace() {
-    return getDiv("#user_space");
+    return wrapDiv(USER_SPACE);
   }
 
   @Override
   public void selectGroupSpace() {
-    getSpace(1);
+    getSpace(2);
   }
 
   @Override
@@ -244,18 +307,18 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public void selectPublicSpace() {
-    getSpace(1);
-  }
-
-  @Override
-  public void selectUserSpace() {
     getSpace(2);
   }
 
   @Override
-  public void setBackImage(final String url) {
-    getGroupHeader().getStyle().setBackgroundImage(url);
+  public void selectUserSpace() {
+    getSpace(1);
   }
+
+  @Override
+  public native void setBackImage(final String url) /*-{
+		$doc.querySelector('#kunetemplate').group_back_image_url = url;
+  }-*/;
 
   @Override
   public void setMaximized(final boolean maximized) {
@@ -266,6 +329,24 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   public void setRTL(final Direction direction) {
     // TODO use reverse methods in Polymer also
     // http://stackoverflow.com/questions/26110405/polymer-rtl-text-based-on-an-attribute
+  }
+
+  @Override
+  public WrappedFlowPanel wrapDiv(final HTMLId htmlId) {
+    final String id = htmlId.getId();
+    WrappedFlowPanel panel = panels.get(id);
+    if (panel == null) {
+      Log.debug("Getting div '" + id + "' from html");
+      final Element element = getElement(htmlId);
+      if (isElementChildOfWidget(element)) {
+        throw new UIException("Parent is already wrapped/attached");
+      }
+      panel = WrappedFlowPanel.wrap(element);
+      PolymerUtils.addFlexHorLayout(panel);
+      assert panel != null;
+      panels.put(id, panel);
+    }
+    return panel;
   }
 
 }

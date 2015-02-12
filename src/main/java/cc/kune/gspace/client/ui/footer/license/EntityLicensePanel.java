@@ -33,6 +33,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -40,7 +41,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityLicensePanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
@@ -62,7 +63,7 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
 
   /**
    * Instantiates a new entity license panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param armor
@@ -76,7 +77,8 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
     licenseBar = new FlowPanel();
     licenseBar.add(licenseImage);
     licenseImage.addStyleName("k-footer-license-img");
-    armor.getEntityFooter().add(licenseBar);
+    final ForIsWidget entityFooter = armor.getEntityFooter();
+    entityFooter.add(licenseBar);
     tooltip = Tooltip.to(licenseImage, ".");
   }
 

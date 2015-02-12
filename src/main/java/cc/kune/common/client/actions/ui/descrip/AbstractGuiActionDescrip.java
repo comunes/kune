@@ -234,6 +234,11 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   }
 
   @Override
+  public boolean hasIcon() {
+    return getValue(Action.SMALL_ICON) != null;
+  }
+
+  @Override
   public boolean hasParent() {
     return isChild();
   }
@@ -246,6 +251,11 @@ public abstract class AbstractGuiActionDescrip extends ChangeableObject implemen
   @Override
   public boolean hasTarget() {
     return getValue(TARGET) != null;
+  }
+
+  @Override
+  public boolean hasText() {
+    return getValue(Action.NAME) != null;
   }
 
   /*

@@ -24,14 +24,12 @@
 package cc.kune.embed.client.panels;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
-import cc.kune.common.shared.utils.Url;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.sitebar.SitebarSignInLink;
 import cc.kune.core.client.sitebar.SitebarSignOutLink;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.InitDataDTO;
-import cc.kune.embed.client.EmbedHelper;
 import cc.kune.embed.client.conf.EmbedConfiguration;
 
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -101,12 +99,7 @@ public class EmbedSitebar {
 
   public void init(final String stateToken) {
     signInLink.setTarget(stateToken);
-    final InitDataDTO initData = session.getInitData();
-    if (initData != null) {
-      @SuppressWarnings("deprecation")
-      final String sitelogo = EmbedHelper.getServer() + initData.getSiteLogoUrl();
-      signInLink.withIcon(new Url(sitelogo));
-      signOutLink.withIcon(new Url(sitelogo));
-    }
+    signInLink.withIcon(KuneIcon.KUNE);
+    signOutLink.withIcon(KuneIcon.KUNE);
   }
 }

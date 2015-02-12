@@ -30,7 +30,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InitDataDTO.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -120,12 +120,6 @@ public class InitDataDTO implements IsSerializable {
   /** If the UI Devel Features should be showed */
   private boolean showInDevelFeatures;
 
-  /** The site logo url. */
-  private String siteLogoUrl;
-
-  /** The site logo url on over. */
-  private String siteLogoUrlOnOver;
-
   /** The site short name. */
   private String siteShortName;
 
@@ -161,7 +155,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the avi embed object.
-   * 
+   *
    * @return the avi embed object
    */
   public String getAviEmbedObject() {
@@ -170,7 +164,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the chat domain.
-   * 
+   *
    * @return the chat domain
    */
   public String getChatDomain() {
@@ -179,7 +173,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the chat http base.
-   * 
+   *
    * @return the chat http base
    */
   public String getChatHttpBase() {
@@ -188,7 +182,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the chat room host.
-   * 
+   *
    * @return the chat room host
    */
   public String getChatRoomHost() {
@@ -197,7 +191,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the countries.
-   * 
+   *
    * @return the countries
    */
   public List<I18nCountryDTO> getCountries() {
@@ -206,7 +200,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the current c cversion.
-   * 
+   *
    * @return the current c cversion
    */
   public String getCurrentCCversion() {
@@ -215,7 +209,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the default license.
-   * 
+   *
    * @return the default license
    */
   public LicenseDTO getDefaultLicense() {
@@ -224,7 +218,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the default ws theme.
-   * 
+   *
    * @return the default ws theme
    */
   public String getDefaultWsTheme() {
@@ -233,7 +227,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the def tutorial language.
-   * 
+   *
    * @return the def tutorial language
    */
   public String getDefTutorialLanguage() {
@@ -242,7 +236,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the flv embed object.
-   * 
+   *
    * @return the flv embed object
    */
   public String getFlvEmbedObject() {
@@ -251,7 +245,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the full translated languages.
-   * 
+   *
    * @return the full translated languages
    */
   public List<I18nLanguageSimpleDTO> getFullTranslatedLanguages() {
@@ -260,7 +254,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the gallery permitted extensions.
-   * 
+   *
    * @return the gallery permitted extensions
    */
   public String getGalleryPermittedExtensions() {
@@ -269,7 +263,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the group tools.
-   * 
+   *
    * @return the group tools
    */
   public List<ToolSimpleDTO> getGroupTools() {
@@ -278,7 +272,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the g space themes.
-   * 
+   *
    * @return the g space themes
    */
   public HashMap<String, GSpaceTheme> getgSpaceThemes() {
@@ -287,7 +281,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the img cropsize.
-   * 
+   *
    * @return the img cropsize
    */
   public int getImgCropsize() {
@@ -296,7 +290,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the img iconsize.
-   * 
+   *
    * @return the img iconsize
    */
   public int getImgIconsize() {
@@ -305,7 +299,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the img resizewidth.
-   * 
+   *
    * @return the img resizewidth
    */
   public int getImgResizewidth() {
@@ -314,7 +308,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the img thumbsize.
-   * 
+   *
    * @return the img thumbsize
    */
   public int getImgThumbsize() {
@@ -327,7 +321,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the languages.
-   * 
+   *
    * @return the languages
    */
   public List<I18nLanguageSimpleDTO> getLanguages() {
@@ -336,7 +330,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the licenses.
-   * 
+   *
    * @return the licenses
    */
   public List<LicenseDTO> getLicenses() {
@@ -345,7 +339,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the max file size in mb.
-   * 
+   *
    * @return the max file size in mb
    */
   public String getMaxFileSizeInMb() {
@@ -354,7 +348,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the mp3 embed object.
-   * 
+   *
    * @return the mp3 embed object
    */
   public String getMp3EmbedObject() {
@@ -363,7 +357,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the ogg embed object.
-   * 
+   *
    * @return the ogg embed object
    */
   public String getOggEmbedObject() {
@@ -372,7 +366,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the reserved words.
-   * 
+   *
    * @return the reserved words
    */
   public ReservedWordsRegistryDTO getReservedWords() {
@@ -384,27 +378,8 @@ public class InitDataDTO implements IsSerializable {
   }
 
   /**
-   * Gets the site logo url.
-   * 
-   * @return the site logo url
-   */
-  @Deprecated
-  public String getSiteLogoUrl() {
-    return siteLogoUrl;
-  }
-
-  /**
-   * Gets the site logo url on over.
-   * 
-   * @return the site logo url on over
-   */
-  public String getSiteLogoUrlOnOver() {
-    return siteLogoUrlOnOver;
-  }
-
-  /**
    * Gets the site short name.
-   * 
+   *
    * @return the site short name
    */
   public String getSiteShortName() {
@@ -413,7 +388,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the site url.
-   * 
+   *
    * @return the site url
    */
   public String getSiteUrl() {
@@ -422,7 +397,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the store untranslated strings.
-   * 
+   *
    * @return the store untranslated strings
    */
   public boolean getStoreUntranslatedStrings() {
@@ -431,7 +406,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the timezones.
-   * 
+   *
    * @return the timezones
    */
   public String[] getTimezones() {
@@ -440,7 +415,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the tutorial languages.
-   * 
+   *
    * @return the tutorial languages
    */
   public List<String> getTutorialLanguages() {
@@ -449,7 +424,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Use client content cache.
-   * 
+   *
    * @return true, if successful
    */
   public boolean getUseClientContentCache() {
@@ -458,7 +433,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the user info.
-   * 
+   *
    * @return the user info
    */
   public UserInfoDTO getUserInfo() {
@@ -467,7 +442,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Gets the user tools.
-   * 
+   *
    * @return the user tools
    */
   public List<ToolSimpleDTO> getUserTools() {
@@ -476,7 +451,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Checks for user.
-   * 
+   *
    * @return true, if successful
    */
   public boolean hasUser() {
@@ -485,7 +460,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Checks if is feedback enabled.
-   * 
+   *
    * @return true, if is feedback enabled
    */
   public boolean isFeedbackEnabled() {
@@ -494,7 +469,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Checks if is public space visible.
-   * 
+   *
    * @return true, if is public space visible
    */
   public boolean isPublicSpaceVisible() {
@@ -503,7 +478,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Checks if is translator enabled.
-   * 
+   *
    * @return true, if is translator enabled
    */
   public boolean isTranslatorEnabled() {
@@ -512,7 +487,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the avi embed object.
-   * 
+   *
    * @param aviEmbedObject
    *          the new avi embed object
    */
@@ -522,7 +497,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the chat domain.
-   * 
+   *
    * @param chatDomain
    *          the new chat domain
    */
@@ -532,7 +507,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the chat http base.
-   * 
+   *
    * @param chatHttpBase
    *          the new chat http base
    */
@@ -542,7 +517,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the chat room host.
-   * 
+   *
    * @param chatRoomHost
    *          the new chat room host
    */
@@ -552,7 +527,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the countries.
-   * 
+   *
    * @param countries
    *          the new countries
    */
@@ -562,7 +537,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the current c cversion.
-   * 
+   *
    * @param currentCCversion
    *          the new current c cversion
    */
@@ -572,7 +547,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the default license.
-   * 
+   *
    * @param defaultLicense
    *          the new default license
    */
@@ -582,7 +557,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the default ws theme.
-   * 
+   *
    * @param defaultWsTheme
    *          the new default ws theme
    */
@@ -592,7 +567,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the def tutorial language.
-   * 
+   *
    * @param defTutorialLanguage
    *          the new def tutorial language
    */
@@ -602,7 +577,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the feedback enabled.
-   * 
+   *
    * @param feedbackEnabled
    *          the new feedback enabled
    */
@@ -612,7 +587,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the flv embed object.
-   * 
+   *
    * @param flvEmbedObject
    *          the new flv embed object
    */
@@ -622,7 +597,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the full translated languages.
-   * 
+   *
    * @param fullTranslatedLanguages
    *          the new full translated languages
    */
@@ -632,7 +607,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the gallery permitted extensions.
-   * 
+   *
    * @param galleryPermittedExtensions
    *          the new gallery permitted extensions
    */
@@ -642,7 +617,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the group tools.
-   * 
+   *
    * @param groupTools
    *          the new group tools
    */
@@ -652,7 +627,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Setg space themes.
-   * 
+   *
    * @param gSpaceThemes
    *          the g space themes
    */
@@ -662,7 +637,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the img cropsize.
-   * 
+   *
    * @param imgCropsize
    *          the new img cropsize
    */
@@ -672,7 +647,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the img iconsize.
-   * 
+   *
    * @param imgIconsize
    *          the new img iconsize
    */
@@ -682,7 +657,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the img resizewidth.
-   * 
+   *
    * @param imgResizewidth
    *          the new img resizewidth
    */
@@ -692,7 +667,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the img thumbsize.
-   * 
+   *
    * @param imgThumbsize
    *          the new img thumbsize
    */
@@ -706,7 +681,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the languages.
-   * 
+   *
    * @param languages
    *          the new languages
    */
@@ -716,7 +691,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the licenses.
-   * 
+   *
    * @param licenses
    *          the new licenses
    */
@@ -726,7 +701,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the max file size in mb.
-   * 
+   *
    * @param maxFileSizeInMb
    *          the new max file size in mb
    */
@@ -736,7 +711,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the mp3 embed object.
-   * 
+   *
    * @param mp3EmbedObject
    *          the new mp3 embed object
    */
@@ -746,7 +721,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the ogg embed object.
-   * 
+   *
    * @param oggEmbedObject
    *          the new ogg embed object
    */
@@ -756,7 +731,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the public space visible.
-   * 
+   *
    * @param publicSpaceVisible
    *          the new public space visible
    */
@@ -766,7 +741,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the reserved words.
-   * 
+   *
    * @param reservedWords
    *          the new reserved words
    */
@@ -777,7 +752,7 @@ public class InitDataDTO implements IsSerializable {
   /**
    * Sets the show in devel features via MBean (so the new clients will show ui
    * in development features).
-   * 
+   *
    * @param showInDevelFeatures
    *          the new show in devel features
    */
@@ -786,28 +761,8 @@ public class InitDataDTO implements IsSerializable {
   }
 
   /**
-   * Sets the site logo url.
-   * 
-   * @param siteLogoUrl
-   *          the new site logo url
-   */
-  public void setSiteLogoUrl(final String siteLogoUrl) {
-    this.siteLogoUrl = siteLogoUrl;
-  }
-
-  /**
-   * Sets the site logo url on over.
-   * 
-   * @param siteLogoUrlOnOver
-   *          the new site logo url on over
-   */
-  public void setSiteLogoUrlOnOver(final String siteLogoUrlOnOver) {
-    this.siteLogoUrlOnOver = siteLogoUrlOnOver;
-  }
-
-  /**
    * Sets the site short name.
-   * 
+   *
    * @param siteShortName
    *          the new site short name
    */
@@ -817,7 +772,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the site url.
-   * 
+   *
    * @param siteUrl
    *          the new site url
    */
@@ -827,7 +782,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the store untranslated strings.
-   * 
+   *
    * @param shouldStoreUntranslatedStrings
    *          the new store untranslated strings
    */
@@ -837,7 +792,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the timezones.
-   * 
+   *
    * @param timezones
    *          the new timezones
    */
@@ -847,7 +802,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the translator enabled.
-   * 
+   *
    * @param translatorEnabled
    *          the new translator enabled
    */
@@ -857,7 +812,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the tutorial languages.
-   * 
+   *
    * @param tutorialLanguages
    *          the new tutorial languages
    */
@@ -867,7 +822,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the use client content cache.
-   * 
+   *
    * @param useClientContentCache
    *          the new use client content cache
    */
@@ -877,7 +832,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the user info.
-   * 
+   *
    * @param currentUser
    *          the new user info
    */
@@ -887,7 +842,7 @@ public class InitDataDTO implements IsSerializable {
 
   /**
    * Sets the user tools.
-   * 
+   *
    * @param userTools
    *          the new user tools
    */

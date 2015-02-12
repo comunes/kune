@@ -34,10 +34,10 @@ nav.k-toolbar-navbar > div > ul {
 nav.k-toolbar-navbar {
   border: 0px;
   margin: 0px;  
-  height: 23px;
-  min-height: 23px !important;
-  background-color: #f2f2f2;
-5}
+  height: 40px;
+  min-height: 40px !important;
+  background-color: transparent !important;
+}
 
 nav.k-toolbar-navbar > div > ul > li > a {
   margin-top: 0px;
@@ -45,13 +45,61 @@ nav.k-toolbar-navbar > div > ul > li > a {
   padding: 0px 7px;
 }
 
+nav.k-toolbar-navbar > div > ul > li > a {
+ color: #FFF !important;
+ font-size: 16px;
+}
+
 nav.k-toolbar-navbar  .k-toolbar-separator {
-  border-left: 1px solid #B3B3B3;
+ /*  border-left: 1px solid #B3B3B3;
   height: 16px;
-  margin-top: 3px;
+  margin-top: 3px; */
+  display: none;
 }
 
 /* Active space in sitebar navbar */
 nav.k-toolbar-navbar > div > ul > li.current-item {
   border-bottom: 3px solid #69312f;
 } 
+
+/* Warning: Smartmenus set this to normal */
+.navbar-nav .dropdown-menu > li > a {
+  white-space: nowrap;
+}
+
+.breadcrumb {
+  padding: 0px;
+  margin-bottom: 0px;
+  background-color: transparent;
+  border-radius: 0px;
+}
+
+.breadcrumb > div > div > div > button > i ,
+.breadcrumb a {
+  color: #FFF;
+}
+
+.breadcrumb > div > div > div > li {
+  display: inline-block;
+  white-space: nowrap;
+}
+.breadcrumb > div > div > div > li + li:before {
+  padding: 0 5px;
+  color: #ccc;
+  content: "/\00a0";
+}
+
+.breadcrumb > div > div > div > li.k-button-disabled a:hover {
+  text-decoration: none;
+  border-bottom: 0px;
+  cursor: text;
+}
+
+.breadcrumb > div > div > div > li > a:hover {  
+  text-decoration: none;
+  border-bottom: 1px solid;
+}
+
+.breadcrumb > .active {
+  color: #777;
+}

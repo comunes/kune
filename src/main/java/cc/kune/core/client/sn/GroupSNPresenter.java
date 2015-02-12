@@ -26,6 +26,7 @@ import java.util.Set;
 
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.core.client.events.SocialNetworkChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.UserSignInEvent;
@@ -45,9 +46,9 @@ import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.SocialNetworkDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
@@ -56,7 +57,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupSNPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupSNPresenter extends
@@ -64,7 +65,7 @@ public class GroupSNPresenter extends
 
   /**
    * The Interface GroupSNProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -73,14 +74,14 @@ public class GroupSNPresenter extends
 
   /**
    * The Interface GroupSNView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface GroupSNView extends View {
 
     /**
      * Adds the admin.
-     * 
+     *
      * @param group
      *          the group
      * @param avatarUrl
@@ -99,7 +100,7 @@ public class GroupSNPresenter extends
 
     /**
      * Adds the collab.
-     * 
+     *
      * @param group
      *          the group
      * @param avatarUrl
@@ -118,7 +119,7 @@ public class GroupSNPresenter extends
 
     /**
      * Adds the pending.
-     * 
+     *
      * @param group
      *          the group
      * @param avatarUrl
@@ -142,14 +143,14 @@ public class GroupSNPresenter extends
 
     /**
      * Gets the bottom toolbar.
-     * 
+     *
      * @return the bottom toolbar
      */
     IsActionExtensible getBottomToolbar();
 
     /**
      * Sets the admins count.
-     * 
+     *
      * @param count
      *          the new admins count
      */
@@ -157,7 +158,7 @@ public class GroupSNPresenter extends
 
     /**
      * Sets the admins visible.
-     * 
+     *
      * @param visible
      *          the visible
      * @param big
@@ -167,7 +168,7 @@ public class GroupSNPresenter extends
 
     /**
      * Sets the collabs count.
-     * 
+     *
      * @param count
      *          the new collabs count
      */
@@ -175,7 +176,7 @@ public class GroupSNPresenter extends
 
     /**
      * Sets the collabs visible.
-     * 
+     *
      * @param visible
      *          the visible
      * @param big
@@ -185,7 +186,7 @@ public class GroupSNPresenter extends
 
     /**
      * Sets the pendings count.
-     * 
+     *
      * @param count
      *          the new pendings count
      */
@@ -193,7 +194,7 @@ public class GroupSNPresenter extends
 
     /**
      * Sets the pending visible.
-     * 
+     *
      * @param visible
      *          the visible
      * @param big
@@ -203,7 +204,7 @@ public class GroupSNPresenter extends
 
     /**
      * Sets the visible.
-     * 
+     *
      * @param visible
      *          the new visible
      */
@@ -239,7 +240,7 @@ public class GroupSNPresenter extends
 
   /**
    * Instantiates a new group sn presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -314,7 +315,7 @@ public class GroupSNPresenter extends
 
   /**
    * On state changed.
-   * 
+   *
    * @param state
    *          the state
    */
@@ -350,7 +351,7 @@ public class GroupSNPresenter extends
 
   /**
    * Refresh on sign in sign out.
-   * 
+   *
    * @param session
    *          the session
    */
@@ -373,7 +374,7 @@ public class GroupSNPresenter extends
 
   /**
    * Sets the group members.
-   * 
+   *
    * @param socialNetwork
    *          the social network
    * @param rights
@@ -394,9 +395,12 @@ public class GroupSNPresenter extends
     getView().setCollabsCount(numCollabs);
     getView().setPendingsCount(numPendings);
 
-    if ((numAdmins + numCollabs) == 0) {
+    final int members = numAdmins + numCollabs;
+
+    if (members == 0) {
       getView().showOrphan();
     } else {
+      EventBusInstance.get().fireEvent(new GroupMembersUpdatedEvent(members));
       final boolean userIsAdmin = rights.isAdministrable();
       final boolean userIsEditor = rights.isEditable();
       final boolean userCanView = rights.isVisible();

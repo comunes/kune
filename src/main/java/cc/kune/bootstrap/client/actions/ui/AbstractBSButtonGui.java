@@ -26,17 +26,13 @@ import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 
 import cc.kune.common.client.actions.Action;
-import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.Event;
 
 /**
  * The Class AbstractBSButtonGui.
@@ -92,7 +88,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
    * .String)
@@ -104,7 +100,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -132,13 +128,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
     } else {
       initWidget(button);
     }
-    button.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        descriptor.fire(new ActionEvent(button, getTargetObjectOfAction(descriptor),
-            Event.as(event.getNativeEvent())));
-      }
-    });
+    button.addClickHandler(clickHandlerDefault);
     super.create(descriptor);
     configureItemFromProperties();
     return this;
@@ -146,7 +136,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -156,7 +146,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
@@ -168,7 +158,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
@@ -180,7 +170,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
    * .gwt.resources.client.ImageResource)
@@ -192,7 +182,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
@@ -204,7 +194,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
@@ -226,7 +216,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -238,7 +228,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
@@ -250,7 +240,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
@@ -260,7 +250,7 @@ public abstract class AbstractBSButtonGui extends AbstractBSChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
    */
   @Override

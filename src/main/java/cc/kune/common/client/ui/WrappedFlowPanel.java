@@ -21,69 +21,84 @@
  *
  */
 
-package cc.kune.sandbox.client;
+package cc.kune.common.client.ui;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.ComplexPanel;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-public class WrappedFlowPanel extends ComplexPanel implements InsertPanel.ForIsWidget {
+public class WrappedFlowPanel extends Composite implements InsertPanel.ForIsWidget {
+
   public static WrappedFlowPanel wrap(final Element element) {
-    // Assert that the element is attached.
-    assert Document.get().getBody().isOrHasChild(element);
-
-    final WrappedFlowPanel flow = new WrappedFlowPanel();
-    flow.setElement(element);
-
-    // Mark it attached and remember it for cleanup.
-    flow.onAttach();
-    RootPanel.detachOnWindowClose(flow);
-
-    return flow;
+    final HTMLPanel parent = HTMLPanel.wrap(element);
+    final WrappedFlowPanel child = new WrappedFlowPanel();
+    parent.add(child);
+    return child;
   }
 
   public static WrappedFlowPanel wrap(final String id) {
     return wrap(DOM.getElementById(id));
   }
+  private final FlowPanel flow;
 
-  /**
-   * Adds a new child widget to the panel.
-   *
-   * @param w
-   *          the widget to be added
-   */
-  @Override
-  public void add(final Widget w) {
-    add(w, getElement());
+  public WrappedFlowPanel() {
+    flow = new FlowPanel();
+    initWidget(flow);
   }
 
   @Override
+  public void add(final IsWidget w) {
+    flow.add(w);
+  }
+
+  @Override
+  public void add(final Widget w) {
+    flow.add(w);
+  }
+
   public void clear() {
-    getElement().removeAllChildren();
+    flow.clear();
+  }
+
+  @Override
+  public Widget getWidget(final int index) {
+    return flow.getWidget(index);
+  }
+
+  @Override
+  public int getWidgetCount() {
+    return flow.getWidgetCount();
+  }
+
+  @Override
+  public int getWidgetIndex(final IsWidget child) {
+    return flow.getWidgetIndex(child);
+  }
+
+  @Override
+  public int getWidgetIndex(final Widget child) {
+    return flow.getWidgetIndex(child);
   }
 
   @Override
   public void insert(final IsWidget w, final int beforeIndex) {
-    insert(asWidgetOrNull(w), beforeIndex);
+    flow.insert(w, beforeIndex);
+
   }
 
-  /**
-   * Inserts a widget before the specified index.
-   *
-   * @param w
-   *          the widget to be inserted
-   * @param beforeIndex
-   *          the index before which it will be inserted
-   * @throws IndexOutOfBoundsException
-   *           if <code>beforeIndex</code> is out of range
-   */
   @Override
   public void insert(final Widget w, final int beforeIndex) {
-    insert(w, getElement(), beforeIndex, true);
+    flow.insert(w, beforeIndex);
   }
+
+  @Override
+  public boolean remove(final int index) {
+    return flow.remove(index);
+  }
+
 }

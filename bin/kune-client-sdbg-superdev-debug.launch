@@ -14,7 +14,7 @@
 <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
 </listAttribute>
 <stringAttribute key="projectName" value="kune"/>
-<booleanAttribute key="showLaunchOutput" value="false"/>
+<booleanAttribute key="showLaunchOutput" value="true"/>
 <stringAttribute key="url" value="http://localhost:8888/?locale=en&amp;log_level=ALL&amp;dev=true"/>
 <stringAttribute key="urlQueryParams" value=""/>
 </launchConfiguration>

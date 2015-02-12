@@ -66,18 +66,18 @@ public class EditableLabel extends Composite implements HasEditHandler {
 
   /** The editable. */
   private boolean editable;
-  
+
   /** The label. */
   @UiField
   InlineLabel label;
-  
+
   /** The textbox. */
   @UiField
   TextBox textbox;
-  
+
   /** The tooltip. */
   private Tooltip tooltip;
-  
+
   /** The tooltip text. */
   private String tooltipText;
 
@@ -91,8 +91,12 @@ public class EditableLabel extends Composite implements HasEditHandler {
     tooltipText = "";
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.ui.HasEditHandler#addEditHandler(cc.kune.common.client.ui.EditEvent.EditHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.ui.HasEditHandler#addEditHandler(cc.kune.common.client
+   * .ui.EditEvent.EditHandler)
    */
   @Override
   public HandlerRegistration addEditHandler(final EditHandler handler) {
@@ -102,8 +106,10 @@ public class EditableLabel extends Composite implements HasEditHandler {
   /**
    * Blink timer.
    *
-   * @param add the add
-   * @param callback the callback
+   * @param add
+   *          the add
+   * @param callback
+   *          the callback
    */
   private void blinkTimer(final boolean add, final SimpleCallback callback) {
     new Timer() {
@@ -126,8 +132,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
     if (editable) {
       label.setVisible(false);
       textbox.setVisible(true);
-      textbox.selectAll();
       textbox.setFocus(true);
+      textbox.setCursorPos(textbox.getText().length());
     }
   }
 
@@ -153,7 +159,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
   /**
    * Handle keys.
    *
-   * @param event the event
+   * @param event
+   *          the event
    */
   @UiHandler("textbox")
   void handleKeys(final KeyDownEvent event) {
@@ -184,7 +191,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
   /**
    * On blur.
    *
-   * @param event the event
+   * @param event
+   *          the event
    */
   @UiHandler("textbox")
   void onBlur(final BlurEvent event) {
@@ -194,7 +202,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
   /**
    * On click.
    *
-   * @param e the e
+   * @param e
+   *          the e
    */
   @UiHandler("label")
   void onClick(final ClickEvent e) {
@@ -204,7 +213,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
   /**
    * On mouse out.
    *
-   * @param event the event
+   * @param event
+   *          the event
    */
   @UiHandler("label")
   void onMouseOut(final MouseOutEvent event) {
@@ -216,7 +226,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
   /**
    * On mouse over.
    *
-   * @param event the event
+   * @param event
+   *          the event
    */
   @UiHandler("label")
   void onMouseOver(final MouseOverEvent event) {
@@ -228,7 +239,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
   /**
    * Sets the editable.
    *
-   * @param editable the new editable
+   * @param editable
+   *          the new editable
    */
   public void setEditable(final boolean editable) {
     this.editable = editable;
@@ -243,7 +255,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
   /**
    * Sets the text.
    *
-   * @param text the new text
+   * @param text
+   *          the new text
    */
   public void setText(final String text) {
     label.setText(text);
@@ -253,7 +266,8 @@ public class EditableLabel extends Composite implements HasEditHandler {
   /**
    * Sets the tooltip.
    *
-   * @param tooltip the new tooltip
+   * @param tooltip
+   *          the new tooltip
    */
   public void setTooltip(final String tooltip) {
     this.tooltipText = tooltip;

@@ -395,7 +395,7 @@ a {
   padding-top: 0;
 }
 
-.indent .blip:first-child {
+.indents .blip:first-child {
   border-top: 1px dashed #cccccc;
   padding-top: 0.8em;
 }
@@ -458,7 +458,7 @@ a {
   -moz-box-shadow: 2px 2px 4px #999;
 }
 
-.indent {
+.indents {
   margin: 0 0 1.3em 6em;
   overflow: hidden;
   padding-left: 1em;

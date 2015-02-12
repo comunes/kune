@@ -35,7 +35,7 @@ import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FocusWidget;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -46,37 +46,42 @@ import com.google.gwt.user.client.ui.VerticalPanel;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class BasicThumb extends Composite {
-  
+public class BasicThumb extends FocusWidget {
+
   /** The Constant NOSIZE. */
   private static final int NOSIZE = -1;
-  
+
   /** The image. */
   private final Image image;
-  
+
   /** The image tooltip. */
   private Tooltip imageTooltip;
-  
+
   /** The label. */
   private final Label label;
-  
+
   /** The label tooltip. */
   private Tooltip labelTooltip;
-  
+
   /** The on over label. */
   private boolean onOverLabel;
-  
+
   /** The panel. */
   private final VerticalPanel panel;
 
   /**
    * Instantiates a new basic thumb.
    *
-   * @param imageRef the image ref
-   * @param imgSize the img size
-   * @param text the text
-   * @param textMaxLenght the text max lenght
-   * @param crop the crop
+   * @param imageRef
+   *          the image ref
+   * @param imgSize
+   *          the img size
+   * @param text
+   *          the text
+   * @param textMaxLenght
+   *          the text max lenght
+   * @param crop
+   *          the crop
    */
   public BasicThumb(final Object imageRef, final int imgSize, final String text,
       final int textMaxLenght, final boolean crop) {
@@ -86,12 +91,18 @@ public class BasicThumb extends Composite {
   /**
    * Instantiates a new basic thumb.
    *
-   * @param imageRef This can be a ImageResource or a String Url
-   * @param imgSize the img size
-   * @param text the text
-   * @param textMaxLenght the text max lenght
-   * @param crop the crop
-   * @param clickHandler the click handler
+   * @param imageRef
+   *          This can be a ImageResource or a String Url
+   * @param imgSize
+   *          the img size
+   * @param text
+   *          the text
+   * @param textMaxLenght
+   *          the text max lenght
+   * @param crop
+   *          the crop
+   * @param clickHandler
+   *          the click handler
    */
   public BasicThumb(final Object imageRef, final int imgSize, final String text,
       final int textMaxLenght, final boolean crop, final ClickHandler clickHandler) {
@@ -149,15 +160,18 @@ public class BasicThumb extends Composite {
         }
       }
     });
-    initWidget(panel);
+    setElement(panel.getElement());
   }
 
   /**
    * Instantiates a new basic thumb.
    *
-   * @param imageRef the image ref
-   * @param thumText the thum text
-   * @param clickHandler the click handler
+   * @param imageRef
+   *          the image ref
+   * @param thumText
+   *          the thum text
+   * @param clickHandler
+   *          the click handler
    */
   public BasicThumb(final Object imageRef, final String thumText, final ClickHandler clickHandler) {
     this(imageRef, NOSIZE, thumText, NOSIZE, false, clickHandler);
@@ -166,10 +180,14 @@ public class BasicThumb extends Composite {
   /**
    * Instantiates a new basic thumb.
    *
-   * @param imageRef the image ref
-   * @param text the text
-   * @param textMaxLenght the text max lenght
-   * @param clickHandler the click handler
+   * @param imageRef
+   *          the image ref
+   * @param text
+   *          the text
+   * @param textMaxLenght
+   *          the text max lenght
+   * @param clickHandler
+   *          the click handler
    */
   public BasicThumb(final Object imageRef, final String text, final int textMaxLenght,
       final ClickHandler clickHandler) {
@@ -177,36 +195,20 @@ public class BasicThumb extends Composite {
   }
 
   /**
-   * Adds the click handler.
-   *
-   * @param clickHandler the click handler
-   */
-  public void addClickHandler(final ClickHandler clickHandler) {
-    addClickHandlerImpl(clickHandler);
-  }
-
-  /**
    * Adds the click handler impl.
    *
-   * @param clickHandler the click handler
+   * @param clickHandler
+   *          the click handler
    */
   private void addClickHandlerImpl(final ClickHandler clickHandler) {
     panel.addDomHandler(clickHandler, ClickEvent.getType());
   }
 
   /**
-   * Adds the double click handler.
-   *
-   * @param clickHandler the click handler
-   */
-  public void addDoubleClickHandler(final DoubleClickHandler clickHandler) {
-    addDoubleClickHandlerImpl(clickHandler);
-  }
-
-  /**
    * Adds the double click handler impl.
    *
-   * @param clickHandler the click handler
+   * @param clickHandler
+   *          the click handler
    */
   private void addDoubleClickHandlerImpl(final DoubleClickHandler clickHandler) {
     panel.addDomHandler(clickHandler, DoubleClickEvent.getType());
@@ -234,7 +236,8 @@ public class BasicThumb extends Composite {
   /**
    * Sets the label visible.
    *
-   * @param visible the new label visible
+   * @param visible
+   *          the new label visible
    */
   public void setLabelVisible(final boolean visible) {
     label.setVisible(visible);
@@ -243,7 +246,8 @@ public class BasicThumb extends Composite {
   /**
    * Sets the on over label.
    *
-   * @param onOverLabel the new on over label
+   * @param onOverLabel
+   *          the new on over label
    */
   public void setOnOverLabel(final boolean onOverLabel) {
     this.onOverLabel = onOverLabel;
@@ -252,7 +256,8 @@ public class BasicThumb extends Composite {
   /**
    * Sets the text.
    *
-   * @param text the new text
+   * @param text
+   *          the new text
    */
   public void setText(final String text) {
     label.setText(text);
@@ -261,7 +266,8 @@ public class BasicThumb extends Composite {
   /**
    * Sets the thumb url.
    *
-   * @param url the new thumb url
+   * @param url
+   *          the new thumb url
    */
   public void setThumbUrl(final String url) {
     image.setUrl(url);
@@ -270,7 +276,8 @@ public class BasicThumb extends Composite {
   /**
    * Sets the tooltip.
    *
-   * @param tip the new tooltip
+   * @param tip
+   *          the new tooltip
    */
   public void setTooltip(final String tip) {
     imageTooltip = Tooltip.to(image, tip);
@@ -280,8 +287,10 @@ public class BasicThumb extends Composite {
   /**
    * Sets the tooltip.
    *
-   * @param tipTitle the tip title
-   * @param tip the tip
+   * @param tipTitle
+   *          the tip title
+   * @param tip
+   *          the tip
    */
   public void setTooltip(final String tipTitle, final String tip) {
     imageTooltip = Tooltip.to(image, tip);

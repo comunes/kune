@@ -71,8 +71,7 @@ import cc.kune.core.client.invitation.GroupInviteUserSearchPanel;
 import cc.kune.core.client.invitation.ListInviteUserSearchPanel;
 import cc.kune.core.client.notify.confirm.UserConfirmPanel;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
-import cc.kune.core.client.notify.spiner.SpinerPanel;
-import cc.kune.core.client.notify.spiner.SpinerPresenter;
+import cc.kune.core.client.notify.progress.PaperProgressNotificator;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -157,7 +156,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -203,8 +202,10 @@ public class CoreGinModule extends ExtendedGinModule {
 
     bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
         CorePresenter.CoreProxy.class);
-    bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class, SpinerPanel.class,
-        SpinerPresenter.SpinerProxy.class);
+    // bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class,
+    // SpinerPanel.class,
+    // SpinerPresenter.SpinerProxy.class);
+    eagle(PaperProgressNotificator.class);
     // eagle(UserNotifierPopup.class);
     eagle(UserNotifierGrowl.class);
     requestStaticInjection(NotifyUser.class);

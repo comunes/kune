@@ -5,6 +5,7 @@
   <inherits name="cc.kune.common.KuneCommon" />
   <inherits name="cc.kune.core.KuneCore" />
   <inherits name="cc.kune.bootstrap.KuneBootstrap" />
+  <inherits name="cc.kune.polymer.KunePolymer" />
   <!-- <inherits name="cc.kune.wave.KuneWave" /> -->
   <!-- <inherits name="org.adamtacy.GWTEffects"></inherits> -->
   <!-- Inherit the default GWT style sheet. You can change -->
@@ -14,7 +15,7 @@
   <!-- <inherits name='com.google.gwt.user.theme.chrome.Chrome'/> -->
   <!-- <inherits name='com.google.gwt.user.theme.dark.Dark'/> -->
   <!-- Other module inherits -->
-  <inherits name="br.com.rpa.GwtPolymer" />
+  
 
   <!-- Specify the paths for translatable code -->
   <source path='client' />

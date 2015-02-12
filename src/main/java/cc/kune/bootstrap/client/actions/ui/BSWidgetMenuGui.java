@@ -12,8 +12,15 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
+import cc.kune.common.client.errors.UIException;
 
-import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Position;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -21,19 +28,14 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
 
   private Anchor anchor;
   private DropDownMenu menu;
-  private IsWidget widget;
+  private Style menuStyle;
+  private Widget widget;
+  private HasClickHandlers widgetHasClick;
 
   @Override
   public void add(final UIObject uiObject) {
     final Widget childWidget = (Widget) uiObject;
-    if (widget == null) {
-      // the main widget is not configured, so we use the first added element,
-      // as main widget
-      anchor.add(childWidget);
-      widget = childWidget;
-    } else {
-      menu.add(childWidget);
-    }
+    menu.add(childWidget);
   }
 
   @Override
@@ -54,22 +56,39 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
     this.descriptor = descriptor;
     final DropDown dropDown = new DropDown();
     anchor = new Anchor();
-    widget = (IsWidget) descriptor.getValue(WidgetMenuDescriptor.WIDGET);
-    if (widget != null) {
-      // We have a simple widget (thumbs, etc) with a menu, or if not, we add
-      // the first child widget to the anchor
-      anchor.add(widget);
-    }
     anchor.setDataToggle(Toggle.DROPDOWN);
     dropDown.add(anchor);
-
     menu = new DropDownMenu();
     dropDown.add(menu);
+
+    // Inspired in:
+    // https://stackoverflow.com/questions/18666601/use-bootstrap-3-dropdown-menu-as-context-menu
+    menuStyle = menu.getElement().getStyle();
+    widget = (Widget) descriptor.getValue(WidgetMenuDescriptor.WIDGET);
+    try {
+      widgetHasClick = (HasClickHandlers) widget;
+    } catch (final ClassCastException e) {
+      throw new UIException("Cannot cast to HasClickHandlers descriptor" + descriptor);
+    }
+    widgetHasClick.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        show();
+        clickHandlerDefault.onClick(event);
+      }
+    });
+    hide();
 
     descriptor.putValue(ParentWidget.PARENT_UI, this);
     initWidget(dropDown);
     configureItemFromProperties();
     return this;
+  }
+
+  @Override
+  public void hide() {
+    menuStyle.setDisplay(Display.NONE);
+    menuStyle.setPosition(Position.ABSOLUTE);
   }
 
   @Override
@@ -79,7 +98,10 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
 
   @Override
   public void show() {
-    // menu.show();
+    menuStyle.setDisplay(Display.BLOCK);
+    menuStyle.setPosition(Position.STATIC);
+    menuStyle.setLeft(widget.getOffsetWidth() + 1, Unit.PX);
+    menuStyle.setTop(widget.getOffsetHeight() + 1, Unit.PX);
   }
 
 }

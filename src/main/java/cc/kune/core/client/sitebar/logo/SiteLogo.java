@@ -22,41 +22,26 @@
  */
 package cc.kune.core.client.sitebar.logo;
 
+import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.events.AppStartEvent;
-import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.SiteTokens;
-import cc.kune.core.client.state.StateManager;
+import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.polymer.client.PolymerId;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.PushButton;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SiteLogo.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SiteLogo extends Composite {
 
-  /** The btn. */
-  private final PushButton btn;
-
-  /** The logo. */
-  private final Image logo;
-
-  /** The logo on over. */
-  private final Image logoOnOver;
-
   /**
    * Instantiates a new site logo.
-   * 
+   *
    * @param session
    *          the session
    * @param stateManager
@@ -65,29 +50,8 @@ public class SiteLogo extends Composite {
    *          the i18n
    */
   @Inject
-  public SiteLogo(final Session session, final StateManager stateManager,
-      final I18nTranslationService i18n) {
-    logo = new Image();
-    logoOnOver = new Image();
-
-    btn = new PushButton(logo, new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        stateManager.gotoHistoryToken(SiteTokens.HOME);
-      }
-    });
-    btn.setStyleName("k-sitebar-logo");
-    btn.addStyleName("k-fr");
-    btn.addStyleName("k-pointer");
-    session.onAppStart(true, new AppStartHandler() {
-      @Override
-      public void onAppStart(final AppStartEvent event) {
-        logo.setUrl(event.getInitData().getSiteLogoUrl());
-        logoOnOver.setUrl(event.getInitData().getSiteLogoUrlOnOver());
-      }
-    });
-    btn.getUpHoveringFace().setImage(logoOnOver);
-    initWidget(btn);
+  public SiteLogo(final I18nTranslationService i18n, final GSpaceArmor armor) {
+    final PaperIconButton btn = PaperIconButton.wrap(armor.getElement(PolymerId.HOME_SPACE_ICON));
     Tooltip.to(btn, i18n.t("Home page of [%s]", i18n.getSiteCommonName()));
   }
 

@@ -24,22 +24,21 @@ package cc.kune.chat.client;
 
 import java.util.Date;
 
+import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.chat.client.ShowChatDialogEvent.ShowChatDialogHandler;
 import cc.kune.chat.client.ToggleShowChatDialogEvent.ToggleShowChatDialogHandler;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.chat.client.snd.KuneSoundManager;
 import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
-import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
@@ -98,6 +97,8 @@ import com.calclab.hablar.user.client.HablarUser;
 import com.calclab.hablar.usergroups.client.HablarUserGroups;
 import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.Dialog;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
@@ -168,8 +169,10 @@ public class ChatClientDefault implements ChatClient {
      *          the new blink
      */
     public void setBlink(final boolean blink) {
+      // TODO, maybe use:
+      // https://www.polymer-project.org/components/core-animation/demo.html
       final ImageResource icon = blink ? res.chatBlink() : res.chatNoBlink();
-      putValue(Action.SMALL_ICON, icon);
+      // putValue(Action.SMALL_ICON, icon);
       dialog.setIcon(AbstractImagePrototype.create(icon));
     }
 
@@ -190,8 +193,7 @@ public class ChatClientDefault implements ChatClient {
   /** The avatar provider registry. */
   private final Provider<AvatarProviderRegistry> avatarProviderRegistry;
 
-  /** The chat icon. */
-  protected ToolbarItemDescriptor chatIcon;
+  private PaperIconButton chatIcon;
 
   /** The chat manager. */
   private final Provider<ChatManager> chatManager;
@@ -439,7 +441,7 @@ public class ChatClientDefault implements ChatClient {
   private void checkChatDomain(final String chatDomain) {
     final String httpDomain = WindowUtils.getHostName();
     if (!chatDomain.equals(httpDomain)) {
-      Log.error("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
+      Log.warn("Your http domain (" + httpDomain + ") is different from the chat domain (" + chatDomain
           + "). This will cause problems with the chat functionality. "
           + "Please check kune.properties on the server.");
     }
@@ -450,13 +452,16 @@ public class ChatClientDefault implements ChatClient {
    */
   private void createActionIfNeeded() {
     if (chatIcon == null) {
-      chatIcon = new ToolbarItemDescriptor(action);
-      chatIcon.setParent(SitebarActions.LEFT_TOOLBAR);
-      chatIcon.setId(CHAT_CLIENT_ICON_ID);
-      chatIcon.setStyles(ActionStyles.SITEBAR_STYLE + ", k-chat-icon");
-      chatIcon.putValue(Action.NAME, i18n.t(CHAT_TITLE));
-      chatIcon.putValue(Action.SMALL_ICON, chatResources.chatNoBlink());
-      chatIcon.putValue(Action.TOOLTIP, i18n.t("Show/hide the chat window"));
+      chatIcon = PaperIconButton.wrap("sitebar_chat_icon");
+      chatIcon.addClickHandler(new ClickHandler() {
+        @Override
+        public void onClick(final ClickEvent event) {
+          action.actionPerformed(null);
+        }
+      });
+      chatIcon.ensureDebugId(CHAT_CLIENT_ICON_ID);
+      chatIcon.setText(i18n.t(CHAT_TITLE));
+      Tooltip.to(chatIcon, i18n.t("Show/hide the chat window"));
       final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
       shorcutRegister.put(shortcut, action);
       action.setShortcut(shortcut);

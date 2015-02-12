@@ -54,6 +54,8 @@ import org.waveprotocol.wave.client.wavepanel.impl.toolbar.ToolbarSwitcher;
 import org.waveprotocol.wave.client.wavepanel.view.BlipView;
 import org.waveprotocol.wave.client.wavepanel.view.dom.ModelAsViewProvider;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.BlipQueueRenderer;
+import org.waveprotocol.wave.client.wavepanel.view.dom.full.ViewFactories;
+import org.waveprotocol.wave.client.wavepanel.view.dom.full.ViewFactory;
 import org.waveprotocol.wave.client.widget.popup.PopupChromeFactory;
 import org.waveprotocol.wave.client.widget.popup.PopupFactory;
 import org.waveprotocol.wave.model.conversation.ConversationView;
@@ -67,8 +69,8 @@ import cc.kune.wave.client.kspecific.AurorisColorPicker;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * Stages for loading the undercurrent Wave Panel
@@ -217,14 +219,17 @@ public class CustomStagesProvider extends Stages {
         KeepFocusInView.install(edit, panel);
         stageTwo.getDiffController().upgrade(edit);
         colorPicker.get();
-       }
+      }
     });
   }
 
   @Override
   protected AsyncHolder<StageTwo> createStageTwoLoader(final StageOne one) {
     return haltIfClosed(new StageTwoProvider(this.one = one, waveRef, channel, isNewWave,
-      idGenerator, profiles, waveUnsavedIndicator, participants));
+        idGenerator, profiles, waveUnsavedIndicator, participants) { @Override
+      protected ViewFactory createViewFactories() {
+          return ViewFactories.FLOW;
+        }});
   };
 
   @Override
@@ -276,13 +281,13 @@ public class CustomStagesProvider extends Stages {
   }
 
   private void handleExistingWave(final StageThree three) {
-  Log.info("Handle existing wave");
-  if (waveRef.hasDocumentId()) {
-    final BlipQueueRenderer blipQueue = two.getBlipQueue();
-    blipQueue.flush();
-    selectAndFocusOnBlip(two.getReader(), two.getModelAsViewProvider(), two.getConversations(),
-        one.getFocusFrame(), waveRef);
-  }
+    Log.info("Handle existing wave");
+    if (waveRef.hasDocumentId()) {
+      final BlipQueueRenderer blipQueue = two.getBlipQueue();
+      blipQueue.flush();
+      selectAndFocusOnBlip(two.getReader(), two.getModelAsViewProvider(), two.getConversations(),
+          one.getFocusFrame(), waveRef);
+    }
   }
   private void initNewWave(final StageThree three) {
     Log.info("Init new wave");
@@ -298,8 +303,8 @@ public class CustomStagesProvider extends Stages {
   }
 
   /**
- * A hook to install features that are not dependent an a certain stage.
- */
+   * A hook to install features that are not dependent an a certain stage.
+   */
   protected void install() {
     CustomWindowTitleHandler.install(waveStore, waveFrame);
   }

@@ -25,49 +25,43 @@ package cc.kune.core.client.dnd;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.allen_sauer.gwt.dnd.client.PickupDragController;
-import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.core.client.Scheduler.ScheduledCommand;
-import com.google.gwt.event.logical.shared.ResizeEvent;
-import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class KuneDragController.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneDragController extends PickupDragController {
 
-  /** The main panel. */
-  private final Widget mainPanel;
+  // /** The main panel. */
+  // private final Widget mainPanel;
 
   /**
    * Instantiates a new kune drag controller.
-   * 
+   *
    * @param armor
    *          the armor
    */
   @Inject
   public KuneDragController(final GSpaceArmor armor) {
-    super(RootPanel.get(), false);
-    mainPanel = (Widget) armor.getMainpanel();
+    super(RootPanel.get(), true);
+    // mainPanel = (Widget) armor.getMainpanel();
     setBehaviorDragProxy(true);
     setBehaviorMultipleSelection(false);
     setBehaviorScrollIntoView(false);
     setBehaviorDragStartSensitivity(5);
-    Window.addResizeHandler(new ResizeHandler() {
-
-      @Override
-      public void onResize(final ResizeEvent event) {
-        setRootPanelSize();
-      }
-
-    });
-    setRootPanelSize();
+    // Window.addResizeHandler(new ResizeHandler() {
+    //
+    // @Override
+    // public void onResize(final ResizeEvent event) {
+    // setRootPanelSize();
+    // }
+    //
+    // });
+    // setRootPanelSize();
   }
 
   /*
@@ -84,14 +78,15 @@ public class KuneDragController extends PickupDragController {
   /**
    * Sets the root panel size.
    */
-  private void setRootPanelSize() {
-    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-      @Override
-      public void execute() {
-        // - 100 because of problems in chrommium (issue #76), not needed in ff
-        RootPanel.get().setPixelSize(mainPanel.getOffsetWidth(), mainPanel.getOffsetHeight() - 100);
-      }
-    });
-  }
+  // private void setRootPanelSize() {
+  // Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+  // @Override
+  // public void execute() {
+  // // - 100 because of problems in chrommium (issue #76), not needed in ff
+  // RootPanel.get().setPixelSize(mainPanel.getOffsetWidth(),
+  // mainPanel.getOffsetHeight() - 100);
+  // }
+  // });
+  // }
 
 }

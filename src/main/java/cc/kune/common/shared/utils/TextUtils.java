@@ -32,7 +32,7 @@ import com.google.gwt.safehtml.shared.UriUtils;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TextUtils.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TextUtils {
@@ -89,7 +89,7 @@ public class TextUtils {
 
   /**
    * see WordUtils#abbreviate.
-   * 
+   *
    * @param str
    *          the str
    * @param lower
@@ -144,7 +144,7 @@ public class TextUtils {
 
   /**
    * Br.
-   * 
+   *
    * @return the string
    */
   public static String br() {
@@ -153,7 +153,7 @@ public class TextUtils {
 
   /**
    * Brbr.
-   * 
+   *
    * @return the string
    */
   public static String brbr() {
@@ -162,7 +162,7 @@ public class TextUtils {
 
   /**
    * see WordUtils#capitalize(String, char[]).
-   * 
+   *
    * @param str
    *          the str
    * @param delimiters
@@ -196,7 +196,7 @@ public class TextUtils {
 
   /**
    * see WordUtils#capitalizeFully(String).
-   * 
+   *
    * @param str
    *          the str
    * @param delimiters
@@ -215,7 +215,7 @@ public class TextUtils {
   /**
    * Removes accents from a string and replace it with ASCII equivalent (á =>
    * a).
-   * 
+   *
    * @param s
    *          The string to englishify
    * @return The string without the accents.
@@ -237,7 +237,7 @@ public class TextUtils {
 
   /**
    * Default string.
-   * 
+   *
    * @param str
    *          the str
    * @return the string
@@ -248,7 +248,7 @@ public class TextUtils {
 
   /**
    * Ellipsis.
-   * 
+   *
    * @param text
    *          the text
    * @param length
@@ -262,7 +262,7 @@ public class TextUtils {
 
   /**
    * To email list to array.
-   * 
+   *
    * @param textFieldValue
    *          the text field value
    * @return the string[]
@@ -281,7 +281,7 @@ public class TextUtils {
 
   /**
    * Empty.
-   * 
+   *
    * @param string
    *          the string
    * @return true, if successful
@@ -292,9 +292,9 @@ public class TextUtils {
 
   /**
    * This method escape only some dangerous html chars
-   * 
+   *
    * Try to use SimpleHtmlSanitizer better.
-   * 
+   *
    * @param source
    *          the source
    * @return the string
@@ -315,7 +315,7 @@ public class TextUtils {
 
   /**
    * Generates a href link (with target="_blank").
-   * 
+   *
    * @param href
    *          the href
    * @param text
@@ -328,7 +328,7 @@ public class TextUtils {
 
   /**
    * Generates a href link.
-   * 
+   *
    * @param href
    *          the href
    * @param text
@@ -347,7 +347,7 @@ public class TextUtils {
 
   /**
    * Checks if is delimiter.
-   * 
+   *
    * @param ch
    *          the ch
    * @param delimiters
@@ -369,7 +369,7 @@ public class TextUtils {
 
   /**
    * Not empty.
-   * 
+   *
    * @param string
    *          the string
    * @return true, if successful
@@ -380,7 +380,7 @@ public class TextUtils {
 
   /**
    * Removes the http.
-   * 
+   *
    * @param text
    *          the text
    * @return the string
@@ -391,7 +391,7 @@ public class TextUtils {
 
   /**
    * Removes the last slash.
-   * 
+   *
    * @param text
    *          the text
    * @return the string
@@ -402,7 +402,7 @@ public class TextUtils {
 
   /**
    * Split tags.
-   * 
+   *
    * @param tagsString
    *          the tags string
    * @return the array list
@@ -433,7 +433,7 @@ public class TextUtils {
    */
   /**
    * Unescape.
-   * 
+   *
    * @param source
    *          the source
    * @return the string

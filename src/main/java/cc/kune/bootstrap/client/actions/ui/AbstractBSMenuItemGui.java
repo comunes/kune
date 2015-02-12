@@ -26,6 +26,7 @@ import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
+import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.res.KuneIcon;
@@ -64,6 +65,10 @@ public abstract class AbstractBSMenuItemGui extends AbstractBSChildGuiItem {
 
   private Widget createShortCut(final KeyStroke key, final String style) {
     return new BSMenuItemShortcut(key, style);
+  }
+
+  protected AbstractBSMenuGui getParentMenu(final GuiActionDescrip descriptor) {
+    return ((AbstractBSMenuGui) descriptor.getParent().getValue(ParentWidget.PARENT_UI));
   }
 
   @Override

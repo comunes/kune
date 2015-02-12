@@ -31,7 +31,7 @@ import org.junit.Test;
 
 /**
  * The Class TextUtilsTest.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TextUtilsTest {

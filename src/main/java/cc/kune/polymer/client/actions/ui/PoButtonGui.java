@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -20,20 +20,13 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+package cc.kune.polymer.client.actions.ui;
 
-package cc.kune.sandbox.client;
+/**
+ * The Class BSButtonGui.
+ *
+ * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ */
+public class PoButtonGui extends AbstractPoButtonGui {
 
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.ui.HTMLPanel;
-
-public class PolymerUtils {
-
-  @SuppressWarnings("deprecation")
-  public native static com.google.gwt.user.client.Element getShadowElement(String father, String child) /*-{
-		return $doc.querySelector(father).shadowRoot.querySelector(child)
-  }-*/;
-
-  public static HTMLPanel wrapDiv(final String id) {
-    return HTMLPanel.wrap(DOM.getElementById(id));
-  }
 }

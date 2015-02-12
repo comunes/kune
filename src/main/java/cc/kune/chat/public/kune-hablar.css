@@ -243,15 +243,6 @@ input[disabled] {
 
 }
 
-html {
-  font-family: Tahoma, sans-serif;
-  font-size: 12px;
-}
-
-body {
-  height: 90%;
-}
-
 /** HABLAR HEADER **/
 .hablar-Header {
   width: 100%;

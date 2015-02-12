@@ -22,6 +22,7 @@
  */
 package cc.kune.gspace.client.viewers;
 
+import static cc.kune.polymer.client.Layout.*;
 import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
@@ -30,6 +31,7 @@ import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.registry.IconsRegistry;
 import cc.kune.core.shared.dto.BasicMimeTypeDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -39,7 +41,7 @@ import com.google.gwt.user.client.ui.Label;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentTitleWidget.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentTitleWidget extends Composite {
@@ -64,7 +66,7 @@ public class ContentTitleWidget extends Composite {
 
   /**
    * Instantiates a new content title widget.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param gsArmor
@@ -78,6 +80,7 @@ public class ContentTitleWidget extends Composite {
     this.gsArmor = gsArmor;
     this.iconRegistry = iconRegistry;
     final FlowPanel flow = new FlowPanel();
+    PolymerUtils.addLayout(flow.getElement(), HORIZONTAL, LAYOUT);
     titleIcon = new Label();
     titleIcon.setStyleName("k-content-title-icon");
     editableTitle = new EditableLabel();
@@ -96,7 +99,7 @@ public class ContentTitleWidget extends Composite {
 
   /**
    * Gets the editable title.
-   * 
+   *
    * @return the editable title
    */
   public HasEditHandler getEditableTitle() {
@@ -112,7 +115,7 @@ public class ContentTitleWidget extends Composite {
 
   /**
    * Sets the text.
-   * 
+   *
    * @param text
    *          the new text
    */
@@ -122,7 +125,7 @@ public class ContentTitleWidget extends Composite {
 
   /**
    * Sets the title.
-   * 
+   *
    * @param title
    *          the title
    * @param typeId
@@ -156,7 +159,7 @@ public class ContentTitleWidget extends Composite {
 
   /**
    * Sets the title.
-   * 
+   *
    * @param title
    *          the title
    * @param typeId

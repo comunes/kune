@@ -99,7 +99,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /**
    * Instantiates a new site rpc.
-   * 
+   *
    * @param userSessionManager
    *          the user session manager
    * @param userManager
@@ -145,7 +145,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /**
    * Gets the colors.
-   * 
+   *
    * @param key
    *          the key
    * @return the colors
@@ -186,7 +186,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /**
    * Gets the site themes.
-   * 
+   *
    * @param themes
    *          the themes
    * @return the site themes
@@ -211,7 +211,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /**
    * Gets the theme from properties.
-   * 
+   *
    * @param themeName
    *          the theme name
    * @return the theme from properties
@@ -225,7 +225,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /**
    * Load init data.
-   * 
+   *
    * @return the inits the data
    */
   private InitData loadInitData() {
@@ -242,8 +242,6 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     data.setDefaultLicense(licenseManager.getDefLicense());
     data.setCurrentCCversion(this.kuneProperties.get(KuneProperties.CURRENT_CC_VERSION));
     data.setDefaultWsTheme(this.kuneProperties.get(KuneProperties.WS_THEMES_DEF));
-    data.setSiteLogoUrl(kuneProperties.get(KuneProperties.SITE_LOGO_URL));
-    data.setSiteLogoUrlOnOver(kuneProperties.get(KuneProperties.SITE_LOGO_URL_ONOVER));
     data.setGalleryPermittedExtensions(kuneProperties.get(KuneProperties.UPLOAD_GALLERY_PERMITTED_EXTS));
     data.setMaxFileSizeInMb(kuneProperties.get(KuneProperties.UPLOAD_MAX_FILE_SIZE));
     data.setUserTools(serverToolRegistry.getToolsAvailableForUsers());
@@ -271,7 +269,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /**
    * Load properties.
-   * 
+   *
    * @param kuneProperties
    *          the kune properties
    */

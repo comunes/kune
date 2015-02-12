@@ -36,7 +36,7 @@ import cc.kune.domain.License;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InitData.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -129,12 +129,6 @@ public class InitData {
   /** The site common name. */
   private String siteCommonName;
 
-  /** The site logo url. */
-  private String siteLogoUrl;
-
-  /** The site logo url on over. */
-  private String siteLogoUrlOnOver;
-
   /** The site short name. */
   private String siteShortName;
 
@@ -164,7 +158,7 @@ public class InitData {
 
   /**
    * Gets the avi embed object.
-   * 
+   *
    * @return the avi embed object
    */
   public String getAviEmbedObject() {
@@ -173,7 +167,7 @@ public class InitData {
 
   /**
    * Gets the chat domain.
-   * 
+   *
    * @return the chat domain
    */
   public String getChatDomain() {
@@ -182,7 +176,7 @@ public class InitData {
 
   /**
    * Gets the chat http base.
-   * 
+   *
    * @return the chat http base
    */
   public String getChatHttpBase() {
@@ -191,7 +185,7 @@ public class InitData {
 
   /**
    * Gets the chat room host.
-   * 
+   *
    * @return the chat room host
    */
   public String getChatRoomHost() {
@@ -200,7 +194,7 @@ public class InitData {
 
   /**
    * Gets the countries.
-   * 
+   *
    * @return the countries
    */
   public List<I18nCountry> getCountries() {
@@ -209,7 +203,7 @@ public class InitData {
 
   /**
    * Gets the current c cversion.
-   * 
+   *
    * @return the current c cversion
    */
   public String getCurrentCCversion() {
@@ -218,7 +212,7 @@ public class InitData {
 
   /**
    * Gets the default license.
-   * 
+   *
    * @return the default license
    */
   public License getDefaultLicense() {
@@ -227,7 +221,7 @@ public class InitData {
 
   /**
    * Gets the default ws theme.
-   * 
+   *
    * @return the default ws theme
    */
   public String getDefaultWsTheme() {
@@ -236,7 +230,7 @@ public class InitData {
 
   /**
    * Gets the def tutorial language.
-   * 
+   *
    * @return the def tutorial language
    */
   public String getDefTutorialLanguage() {
@@ -245,7 +239,7 @@ public class InitData {
 
   /**
    * Gets the flv embed object.
-   * 
+   *
    * @return the flv embed object
    */
   public String getFlvEmbedObject() {
@@ -254,7 +248,7 @@ public class InitData {
 
   /**
    * Gets the full translated languages.
-   * 
+   *
    * @return the full translated languages
    */
   public List<I18nLanguage> getFullTranslatedLanguages() {
@@ -263,7 +257,7 @@ public class InitData {
 
   /**
    * Gets the gallery permitted extensions.
-   * 
+   *
    * @return the gallery permitted extensions
    */
   public String getGalleryPermittedExtensions() {
@@ -272,7 +266,7 @@ public class InitData {
 
   /**
    * Gets the group tools.
-   * 
+   *
    * @return the group tools
    */
   public List<ToolSimple> getGroupTools() {
@@ -281,7 +275,7 @@ public class InitData {
 
   /**
    * Gets the g space themes.
-   * 
+   *
    * @return the g space themes
    */
   public HashMap<String, GSpaceTheme> getgSpaceThemes() {
@@ -290,7 +284,7 @@ public class InitData {
 
   /**
    * Gets the img cropsize.
-   * 
+   *
    * @return the img cropsize
    */
   public int getImgCropsize() {
@@ -299,7 +293,7 @@ public class InitData {
 
   /**
    * Gets the img iconsize.
-   * 
+   *
    * @return the img iconsize
    */
   public int getImgIconsize() {
@@ -308,7 +302,7 @@ public class InitData {
 
   /**
    * Gets the img resizewidth.
-   * 
+   *
    * @return the img resizewidth
    */
   public int getImgResizewidth() {
@@ -317,7 +311,7 @@ public class InitData {
 
   /**
    * Gets the img thumbsize.
-   * 
+   *
    * @return the img thumbsize
    */
   public int getImgThumbsize() {
@@ -330,7 +324,7 @@ public class InitData {
 
   /**
    * Gets the languages.
-   * 
+   *
    * @return the languages
    */
   public List<I18nLanguage> getLanguages() {
@@ -339,7 +333,7 @@ public class InitData {
 
   /**
    * Gets the licenses.
-   * 
+   *
    * @return the licenses
    */
   public List<License> getLicenses() {
@@ -348,7 +342,7 @@ public class InitData {
 
   /**
    * Gets the max file size in mb.
-   * 
+   *
    * @return the max file size in mb
    */
   public String getMaxFileSizeInMb() {
@@ -357,7 +351,7 @@ public class InitData {
 
   /**
    * Gets the mp3 embed object.
-   * 
+   *
    * @return the mp3 embed object
    */
   public String getMp3EmbedObject() {
@@ -366,7 +360,7 @@ public class InitData {
 
   /**
    * Gets the ogg embed object.
-   * 
+   *
    * @return the ogg embed object
    */
   public String getOggEmbedObject() {
@@ -375,7 +369,7 @@ public class InitData {
 
   /**
    * Gets the reserved words.
-   * 
+   *
    * @return the reserved words
    */
   public ReservedWordsRegistryDTO getReservedWords() {
@@ -388,7 +382,7 @@ public class InitData {
 
   /**
    * Gets the site common name.
-   * 
+   *
    * @return the site common name
    */
   public String getSiteCommonName() {
@@ -396,26 +390,8 @@ public class InitData {
   }
 
   /**
-   * Gets the site logo url.
-   * 
-   * @return the site logo url
-   */
-  public String getSiteLogoUrl() {
-    return siteLogoUrl;
-  }
-
-  /**
-   * Gets the site logo url on over.
-   * 
-   * @return the site logo url on over
-   */
-  public String getSiteLogoUrlOnOver() {
-    return siteLogoUrlOnOver;
-  }
-
-  /**
    * Gets the site short name.
-   * 
+   *
    * @return the site short name
    */
   public String getSiteShortName() {
@@ -424,7 +400,7 @@ public class InitData {
 
   /**
    * Gets the site url.
-   * 
+   *
    * @return the site url
    */
   public String getSiteUrl() {
@@ -433,7 +409,7 @@ public class InitData {
 
   /**
    * Gets the store untranslated strings.
-   * 
+   *
    * @return the store untranslated strings
    */
   public boolean getStoreUntranslatedStrings() {
@@ -442,7 +418,7 @@ public class InitData {
 
   /**
    * Gets the timezones.
-   * 
+   *
    * @return the timezones
    */
   public String[] getTimezones() {
@@ -451,7 +427,7 @@ public class InitData {
 
   /**
    * Gets the tutorial languages.
-   * 
+   *
    * @return the tutorial languages
    */
   public List<String> getTutorialLanguages() {
@@ -464,7 +440,7 @@ public class InitData {
 
   /**
    * Gets the user info.
-   * 
+   *
    * @return the user info
    */
   public UserInfo getUserInfo() {
@@ -473,7 +449,7 @@ public class InitData {
 
   /**
    * Gets the user tools.
-   * 
+   *
    * @return the user tools
    */
   public List<ToolSimple> getUserTools() {
@@ -482,7 +458,7 @@ public class InitData {
 
   /**
    * Checks if is feedback enabled.
-   * 
+   *
    * @return true, if is feedback enabled
    */
   public boolean isFeedbackEnabled() {
@@ -491,7 +467,7 @@ public class InitData {
 
   /**
    * Checks if is public space visible.
-   * 
+   *
    * @return true, if is public space visible
    */
   public boolean isPublicSpaceVisible() {
@@ -500,7 +476,7 @@ public class InitData {
 
   /**
    * Checks if is translator enabled.
-   * 
+   *
    * @return true, if is translator enabled
    */
   public boolean isTranslatorEnabled() {
@@ -509,7 +485,7 @@ public class InitData {
 
   /**
    * Sets the avi embed object.
-   * 
+   *
    * @param aviEmbedObject
    *          the new avi embed object
    */
@@ -519,7 +495,7 @@ public class InitData {
 
   /**
    * Sets the chat domain.
-   * 
+   *
    * @param chatDomain
    *          the new chat domain
    */
@@ -529,7 +505,7 @@ public class InitData {
 
   /**
    * Sets the chat http base.
-   * 
+   *
    * @param chatHttpBase
    *          the new chat http base
    */
@@ -539,7 +515,7 @@ public class InitData {
 
   /**
    * Sets the chat room host.
-   * 
+   *
    * @param chatRoomHost
    *          the new chat room host
    */
@@ -549,7 +525,7 @@ public class InitData {
 
   /**
    * Sets the countries.
-   * 
+   *
    * @param countries
    *          the new countries
    */
@@ -559,7 +535,7 @@ public class InitData {
 
   /**
    * Sets the current c cversion.
-   * 
+   *
    * @param currentCCversion
    *          the new current c cversion
    */
@@ -569,7 +545,7 @@ public class InitData {
 
   /**
    * Sets the default license.
-   * 
+   *
    * @param defaultLicense
    *          the new default license
    */
@@ -579,7 +555,7 @@ public class InitData {
 
   /**
    * Sets the default ws theme.
-   * 
+   *
    * @param defaultWsTheme
    *          the new default ws theme
    */
@@ -589,7 +565,7 @@ public class InitData {
 
   /**
    * Sets the def tutorial language.
-   * 
+   *
    * @param defTutorialLanguage
    *          the new def tutorial language
    */
@@ -599,7 +575,7 @@ public class InitData {
 
   /**
    * Sets the feedback enabled.
-   * 
+   *
    * @param feedbackEnabled
    *          the new feedback enabled
    */
@@ -609,7 +585,7 @@ public class InitData {
 
   /**
    * Sets the flv embed object.
-   * 
+   *
    * @param flvEmbedObject
    *          the new flv embed object
    */
@@ -619,7 +595,7 @@ public class InitData {
 
   /**
    * Sets the full translated languages.
-   * 
+   *
    * @param fullTranslatedLanguages
    *          the new full translated languages
    */
@@ -629,7 +605,7 @@ public class InitData {
 
   /**
    * Sets the gallery permitted extensions.
-   * 
+   *
    * @param galleryPermittedExtensions
    *          the new gallery permitted extensions
    */
@@ -639,7 +615,7 @@ public class InitData {
 
   /**
    * Sets the group tools.
-   * 
+   *
    * @param groupTools
    *          the new group tools
    */
@@ -649,7 +625,7 @@ public class InitData {
 
   /**
    * Setg space themes.
-   * 
+   *
    * @param gSpaceThemes
    *          the g space themes
    */
@@ -659,7 +635,7 @@ public class InitData {
 
   /**
    * Sets the img cropsize.
-   * 
+   *
    * @param imgCropsize
    *          the new img cropsize
    */
@@ -669,7 +645,7 @@ public class InitData {
 
   /**
    * Sets the img iconsize.
-   * 
+   *
    * @param imgIconsize
    *          the new img iconsize
    */
@@ -679,7 +655,7 @@ public class InitData {
 
   /**
    * Sets the img resizewidth.
-   * 
+   *
    * @param imgResizewidth
    *          the new img resizewidth
    */
@@ -689,7 +665,7 @@ public class InitData {
 
   /**
    * Sets the img thumbsize.
-   * 
+   *
    * @param imgThumbsize
    *          the new img thumbsize
    */
@@ -703,7 +679,7 @@ public class InitData {
 
   /**
    * Sets the languages.
-   * 
+   *
    * @param languages
    *          the new languages
    */
@@ -713,7 +689,7 @@ public class InitData {
 
   /**
    * Sets the licenses.
-   * 
+   *
    * @param licenses
    *          the new licenses
    */
@@ -723,7 +699,7 @@ public class InitData {
 
   /**
    * Sets the max file size in mb.
-   * 
+   *
    * @param maxFileSizeInMb
    *          the new max file size in mb
    */
@@ -733,7 +709,7 @@ public class InitData {
 
   /**
    * Sets the mp3 embed object.
-   * 
+   *
    * @param mp3EmbedObject
    *          the new mp3 embed object
    */
@@ -743,7 +719,7 @@ public class InitData {
 
   /**
    * Sets the ogg embed object.
-   * 
+   *
    * @param oggEmbedObject
    *          the new ogg embed object
    */
@@ -753,7 +729,7 @@ public class InitData {
 
   /**
    * Sets the public space visible.
-   * 
+   *
    * @param publicSpaceVisible
    *          the new public space visible
    */
@@ -763,7 +739,7 @@ public class InitData {
 
   /**
    * Sets the reserved words.
-   * 
+   *
    * @param reservedWords
    *          the new reserved words
    */
@@ -777,7 +753,7 @@ public class InitData {
 
   /**
    * Sets the site common name.
-   * 
+   *
    * @param siteCommonName
    *          the new site common name
    */
@@ -786,28 +762,8 @@ public class InitData {
   }
 
   /**
-   * Sets the site logo url.
-   * 
-   * @param siteLogoUrl
-   *          the new site logo url
-   */
-  public void setSiteLogoUrl(final String siteLogoUrl) {
-    this.siteLogoUrl = siteLogoUrl;
-  }
-
-  /**
-   * Sets the site logo url on over.
-   * 
-   * @param siteLogoUrlOnOver
-   *          the new site logo url on over
-   */
-  public void setSiteLogoUrlOnOver(final String siteLogoUrlOnOver) {
-    this.siteLogoUrlOnOver = siteLogoUrlOnOver;
-  }
-
-  /**
    * Sets the site short name.
-   * 
+   *
    * @param siteShortName
    *          the new site short name
    */
@@ -817,7 +773,7 @@ public class InitData {
 
   /**
    * Sets the site url.
-   * 
+   *
    * @param siteUrl
    *          the new site url
    */
@@ -827,7 +783,7 @@ public class InitData {
 
   /**
    * Sets the store untranslated strings.
-   * 
+   *
    * @param storeUntranslatedStrings
    *          the new store untranslated strings
    */
@@ -837,7 +793,7 @@ public class InitData {
 
   /**
    * Sets the timezones.
-   * 
+   *
    * @param timezones
    *          the new timezones
    */
@@ -847,7 +803,7 @@ public class InitData {
 
   /**
    * Sets the translator enabled.
-   * 
+   *
    * @param translatorEnabled
    *          the new translator enabled
    */
@@ -857,7 +813,7 @@ public class InitData {
 
   /**
    * Sets the tutorial languages.
-   * 
+   *
    * @param tutorialLanguages
    *          the new tutorial languages
    */
@@ -867,7 +823,7 @@ public class InitData {
 
   /**
    * Sets the use client content cache.
-   * 
+   *
    * @param useClientContentCache
    *          the new use client content cache
    */
@@ -877,7 +833,7 @@ public class InitData {
 
   /**
    * Sets the user info.
-   * 
+   *
    * @param currentUserInfo
    *          the new user info
    */
@@ -887,7 +843,7 @@ public class InitData {
 
   /**
    * Sets the user tools.
-   * 
+   *
    * @param userTools
    *          the new user tools
    */
@@ -897,7 +853,7 @@ public class InitData {
 
   /**
    * Use client content cache.
-   * 
+   *
    * @return true, if successful
    */
   public boolean useClientContentCache() {

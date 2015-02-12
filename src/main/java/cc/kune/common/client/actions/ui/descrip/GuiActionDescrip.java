@@ -164,6 +164,8 @@ public interface GuiActionDescrip {
    */
   Object getValue(final String key);
 
+  boolean hasIcon();
+
   boolean hasParent();
 
   /**
@@ -172,6 +174,8 @@ public interface GuiActionDescrip {
    * @return true, if successful
    */
   boolean hasTarget();
+
+  boolean hasText();
 
   /**
    * Checks if is child.

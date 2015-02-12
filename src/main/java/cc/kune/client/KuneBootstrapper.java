@@ -10,7 +10,6 @@ import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.CoreParts;
 import cc.kune.core.client.actions.xml.XMLActionsParser;
-import cc.kune.core.client.notify.spiner.SpinerPresenter;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.logo.SiteLogo;
@@ -50,12 +49,19 @@ public class KuneBootstrapper implements Bootstrapper {
   private final SessionChecker sessionChecker;
 
   @Inject
-  public KuneBootstrapper(final SessionChecker sessionChecker,
+  public KuneBootstrapper(
+      final SessionChecker sessionChecker,
       final ContentViewerSelector contentViewerSelector,
-      final GlobalShortcutRegister globalShortcutRegister, final SpinerPresenter spinerPresenter,
+      final GlobalShortcutRegister globalShortcutRegister,
       final SessionExpirationManager sessionExpirationManager,
-      final EventBusWithLogging eventBusWithLogging, final ErrorsDialog errorsDialog,
-      final CorePresenter corePresenter, final OnAppStartFactory onAppStartFactory,
+      final EventBusWithLogging eventBusWithLogging,
+      final ErrorsDialog errorsDialog,
+      final CorePresenter corePresenter,
+      final OnAppStartFactory onAppStartFactory,
+
+      // Here you define the gui ui provider (gwt, gxt, bootstrap, polymer)
+      final BSGuiProvider guiProvider,
+      // GwtGuiProvider guiProvider
 
       final DocsParts docs, final BlogsParts blogs, final WikiParts wiki, final EventsParts events,
       final TasksParts tasks, final ListsParts lists, final ChatParts chats, final BartersParts barters,
@@ -66,12 +72,7 @@ public class KuneBootstrapper implements Bootstrapper {
       final CoreParts coreParts, final GSpaceParts gSpaceParts, final PSpaceParts pSpaceParts,
       final HSpaceParts hSpaceParts,
 
-      final XMLActionsParser xmlActionsParser,
-
-      // Here you define the gui ui provider (gwt, gxt, bootstrap)
-      final BSGuiProvider bootstrapProvider
-      // GwtGuiProvider guiProvider
-  ) {
+      final XMLActionsParser xmlActionsParser) {
 
     this.sessionChecker = sessionChecker;
     this.contentViewerSelector = contentViewerSelector;

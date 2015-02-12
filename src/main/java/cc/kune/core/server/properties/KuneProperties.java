@@ -27,7 +27,7 @@ import java.util.List;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface KuneProperties.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -165,9 +165,6 @@ public interface KuneProperties {
   /** The site logo url. */
   String SITE_LOGO_URL = "kune.sitelogourl";
 
-  /** The site logo url onover. */
-  String SITE_LOGO_URL_ONOVER = "kune.sitelogourl.onover";
-
   /** The site name. */
   String SITE_NAME = "kune.default.site.name";
 
@@ -251,7 +248,7 @@ public interface KuneProperties {
 
   /**
    * Gets the.
-   * 
+   *
    * @param key
    *          the key
    * @return the string
@@ -260,7 +257,7 @@ public interface KuneProperties {
 
   /**
    * Gets the.
-   * 
+   *
    * @param key
    *          the key
    * @param defaultValue
@@ -271,7 +268,7 @@ public interface KuneProperties {
 
   /**
    * Gets the boolean.
-   * 
+   *
    * @param key
    *          the key
    * @return the boolean
@@ -280,7 +277,7 @@ public interface KuneProperties {
 
   /**
    * Gets the integer.
-   * 
+   *
    * @param key
    *          the key
    * @return the integer
@@ -289,7 +286,7 @@ public interface KuneProperties {
 
   /**
    * Gets the list.
-   * 
+   *
    * @param key
    *          the key
    * @return the list
@@ -298,7 +295,7 @@ public interface KuneProperties {
 
   /**
    * Gets the long.
-   * 
+   *
    * @param key
    *          the key
    * @return the long
@@ -307,7 +304,7 @@ public interface KuneProperties {
 
   /**
    * Checks for.
-   * 
+   *
    * @param key
    *          the key
    * @return true, if successful

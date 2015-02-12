@@ -55,7 +55,7 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -82,6 +82,11 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
   }
 
   @Override
+  public void hide() {
+    // TODO
+  }
+
+  @Override
   public void insert(final int position, final UIObject widget) {
     anchorList.insert((Widget) widget, position);
 
@@ -89,7 +94,7 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -99,7 +104,7 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
@@ -112,7 +117,7 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
@@ -125,7 +130,7 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
@@ -138,7 +143,7 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
@@ -151,7 +156,7 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -163,7 +168,7 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
@@ -178,17 +183,12 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
   public void setVisible(final boolean visible) {
     anchorList.setVisible(visible);
-  }
-
-  @Override
-  public boolean shouldBeAdded() {
-    return false;
   }
 
   // /*
@@ -202,10 +202,16 @@ public class BSSubMenuGui extends AbstractChildGuiItem implements AbstractBSMenu
   // }
 
   @Override
+  public boolean shouldBeAdded() {
+    return false;
+  }
+
+  @Override
   public void show() {
     // TODO
     // parentMenu.show();
     // ((MenuDescriptor) descriptor.getParent()).selectMenu((MenuItemDescriptor)
     // descriptor);
   }
+
 }

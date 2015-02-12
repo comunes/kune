@@ -99,6 +99,9 @@ public class UserNotifierGrowl {
           options.setInfoType();
           icon = iconStyleBase + IconType.INFO_CIRCLE.getCssName();
           break;
+        case log:
+          // Do nothing with this level
+          return;
         default:
           break;
         }
@@ -107,5 +110,4 @@ public class UserNotifierGrowl {
       }
     });
   }
-
 }

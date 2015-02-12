@@ -26,7 +26,6 @@ import cc.kune.common.client.actions.ui.ActionSimplePanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
-import cc.kune.core.client.sitebar.logo.SiteLogo;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.user.client.ui.Widget;
@@ -37,7 +36,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitebarActionsPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView {
@@ -56,7 +55,7 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
 
   /**
    * Instantiates a new sitebar actions panel.
-   * 
+   *
    * @param armor
    *          the armor
    * @param toolbarRight
@@ -75,8 +74,7 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
   @Inject
   public SitebarActionsPanel(final GSpaceArmor armor, final ActionSimplePanel toolbarRight,
       final ActionSimplePanel toolbarLeft, final I18nTranslationService i18n,
-      final Provider<AboutKuneDialog> aboutPanel, final Provider<ErrorsDialog> errorPanel,
-      final SiteLogo siteLogo) {
+      final Provider<AboutKuneDialog> aboutPanel, final Provider<ErrorsDialog> errorPanel) {
     this.toolbarRight = toolbarRight;
     this.toolbarLeft = toolbarLeft;
     this.aboutPanel = aboutPanel;
@@ -85,9 +83,8 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
     toolbarRight.addStyleName("k-floatright");
     toolbarLeft.addStyleName("k-sitebar");
     toolbarLeft.addStyleName("k-floatleft");
-    armor.getSitebar().add(toolbarLeft);
-    armor.getSitebar().add(siteLogo);
-    armor.getSitebar().add(toolbarRight);
+    armor.getSitebarLeft().add(toolbarLeft);
+    armor.getSitebarRight().add(toolbarRight);
   }
 
   /*

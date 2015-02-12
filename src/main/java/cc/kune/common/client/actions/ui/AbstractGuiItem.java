@@ -36,7 +36,10 @@ import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.common.shared.utils.Url;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -47,6 +50,14 @@ import com.google.gwt.user.client.ui.Widget;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractGuiItem extends Composite implements GuiBinding {
+
+  protected ClickHandler clickHandlerDefault = new ClickHandler() {
+    @Override
+    public void onClick(final ClickEvent event) {
+      descriptor.fire(new ActionEvent(this, getTargetObjectOfAction(descriptor),
+          Event.as(event.getNativeEvent())));
+    }
+  };
 
   /** The descriptor. */
   protected GuiActionDescrip descriptor;
@@ -128,7 +139,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.GuiBinding#create(cc.kune.common.client
    * .actions.ui.descrip.GuiActionDescrip)
@@ -192,7 +203,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.Composite#onAttach()
    */
   @Override
@@ -203,7 +214,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.Composite#onDetach()
    */
   @Override
@@ -378,7 +389,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.GuiBinding#shouldBeAdded()
    */
   @Override

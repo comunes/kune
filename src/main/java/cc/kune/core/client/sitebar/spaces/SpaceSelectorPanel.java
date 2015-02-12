@@ -22,21 +22,16 @@
  */
 package cc.kune.core.client.sitebar.spaces;
 
+import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.core.shared.SessionConstants;
-import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.ToggleButton;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -45,57 +40,28 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SpaceSelectorPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
-  /**
-   * The Interface SpaceSelectorPanelUiBinder.
-   * 
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  interface SpaceSelectorPanelUiBinder extends UiBinder<Widget, SpaceSelectorPanel> {
-  }
-
-  /** The ui binder. */
-  private static SpaceSelectorPanelUiBinder uiBinder = GWT.create(SpaceSelectorPanelUiBinder.class);
-
-  /** The group button. */
-  @UiField
-  ToggleButton groupButton;
+  private final PaperIconButton groupButton;
 
   /** The group space tooltip. */
   private final Tooltip groupSpaceTooltip;
 
-  /** The home button. */
-  @UiField
-  ToggleButton homeButton;
+  private final PaperIconButton homeButton;
 
-  /** The home space tooltip. */
   private final Tooltip homeSpaceTooltip;
 
-  /** The panel. */
-  @UiField
-  FlowPanel panel;
-
-  /** The public button. */
-  @UiField
-  ToggleButton publicButton;
-
-  /** The public space tooltip. */
-  private final Tooltip publicSpaceTooltip;
-
-  /** The user button. */
-  @UiField
-  ToggleButton userButton;
+  private final PaperIconButton userButton;
 
   /** The user space tooltip. */
   private final Tooltip userSpaceTooltip;
 
   /**
    * Instantiates a new space selector panel.
-   * 
+   *
    * @param armor
    *          the armor
    * @param i18n
@@ -106,9 +72,12 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
    *          the session
    */
   @Inject
-  public SpaceSelectorPanel(final GSpaceArmor armor, final I18nTranslationService i18n,
-      final GSpaceArmorResources res, final SessionConstants session) {
-    armor.getSitebar().insert(uiBinder.createAndBindUi(this), 0);
+  public SpaceSelectorPanel(final I18nTranslationService i18n, final GSpaceArmorResources res,
+      final SessionConstants session) {
+
+    homeButton = PaperIconButton.wrap("home_space_icon");
+    groupButton = PaperIconButton.wrap("group_space_icon");
+    userButton = PaperIconButton.wrap("user_space_icon");
     // homeButton.setVisible(false);
     final String siteCommonName = i18n.getSiteCommonName();
     homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Your home page in [%s]", siteCommonName)
@@ -119,19 +88,14 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
     groupSpaceTooltip = Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
         + "and publish contents for your personal or group web spaces")
         + " (Alt+G)");
-    publicSpaceTooltip = Tooltip.to(publicButton,
-        i18n.t("Public space: Where you can see a preview of how your Personal or "
-            + "Group Space looks like on the web")
-            + " (Alt+P)");
+    // publicSpaceTooltip = Tooltip.to(publicButton,
+    // i18n.t("Public space: Where you can see a preview of how your Personal or "
+    // + "Group Space looks like on the web")
+    // + " (Alt+P)");
     // homeSpaceTooltip.setWidth(0);
     userSpaceTooltip.setWidth(190);
     groupSpaceTooltip.setWidth(170);
-    publicSpaceTooltip.setWidth(150);
-
-    homeButton.ensureDebugId(HOME_SPACE_ID);
-    userButton.ensureDebugId(USER_SPACE_ID);
-    groupButton.ensureDebugId(GROUP_SPACE_ID);
-    publicButton.ensureDebugId(PUBLIC_SPACE_ID);
+    // publicSpaceTooltip.setWidth(150);
   }
 
   /*
@@ -141,12 +105,12 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
    */
   @Override
   public Widget asWidget() {
-    return panel;
+    return null;
   }
 
   /**
    * Blink.
-   * 
+   *
    * @param btn
    *          the btn
    */
@@ -177,18 +141,6 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
   @Override
   public void blinkHomeBtn() {
     blink(homeButton);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
-   * #blinkPublicBtn()
-   */
-  @Override
-  public void blinkPublicBtn() {
-    blink(publicButton);
   }
 
   /*
@@ -232,18 +184,6 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
    * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
-   * #getPublicBtn()
-   */
-  @Override
-  public HasClickHandlers getPublicBtn() {
-    return publicButton;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #getUserBtn()
    */
   @Override
@@ -259,8 +199,9 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
    * #setGroupBtnDown(boolean)
    */
   @Override
-  public void setGroupBtnDown(final boolean down) {
-    groupButton.setDown(down);
+  public void setGroupBtnActive(final boolean active) {
+    groupButton.setActive(active);
+
   }
 
   /*
@@ -271,32 +212,8 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
    * #setHomeBtnDown(boolean)
    */
   @Override
-  public void setHomeBtnDown(final boolean down) {
-    homeButton.setDown(down);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
-   * #setPublicBtnDown(boolean)
-   */
-  @Override
-  public void setPublicBtnDown(final boolean down) {
-    publicButton.setDown(down);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
-   * #setPublicVisible(boolean)
-   */
-  @Override
-  public void setPublicVisible(final boolean visible) {
-    publicButton.setVisible(visible);
+  public void setHomeBtnActive(final boolean active) {
+    homeButton.setActive(active);
   }
 
   /*
@@ -307,8 +224,8 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
    * #setUserBtnDown(boolean)
    */
   @Override
-  public void setUserBtnDown(final boolean down) {
-    userButton.setDown(down);
+  public void setUserBtnActive(final boolean active) {
+    userButton.setActive(active);
   }
 
   /*
@@ -345,18 +262,6 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
   @Override
   public void showHomeSpaceTooltip() {
     homeSpaceTooltip.showTemporally();
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
-   * #showPublicSpaceTooltip()
-   */
-  @Override
-  public void showPublicSpaceTooltip() {
-    publicSpaceTooltip.showTemporally();
   }
 
   /*

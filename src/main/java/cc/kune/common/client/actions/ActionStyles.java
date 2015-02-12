@@ -38,7 +38,7 @@ public class ActionStyles {
   public static final String CURRENT_TOOLBAR_ITEM = "current-item";
   // FIXME add here more styles and use then
   /** The Constant MENU_BTN_STYLE_LEFT. */
-  public static final String MENU_BTN_STYLE_LEFT = "k-def-docbtn, k-fl";
+  public static final String MENU_BTN_STYLE_LEFT = "k-fl";
 
   public static final String MENU_BTN_STYLE_NO_BORDER_LEFT = "k-fl, k-noborder, k-no-backimage, k-nobackcolor";
 
@@ -46,7 +46,7 @@ public class ActionStyles {
   public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-no-backimage, k-nobackcolor";
 
   /** The Constant MENU_BTN_STYLE_RIGHT. */
-  public static final String MENU_BTN_STYLE_RIGHT = "k-5corners, k-def-docbtn, k-fr";
+  public static final String MENU_BTN_STYLE_RIGHT = "k-fr";
 
   public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
 
@@ -54,7 +54,7 @@ public class ActionStyles {
   public static final String SHARE_ITEM_NO_ACTIONS = "k-share-item-noactions";
 
   /** The Constant SITEBAR_STYLE. */
-  public static final String SITEBAR_STYLE = "k-no-backimage, k-btn-sitebar, k-noborder, k-nobackcolor";
+  public static final String SITEBAR_STYLE = "k-no-backimage, k-noborder, k-nobackcolor";
 
   /** The Constant SITEBAR_STYLE_FL. */
   public static final String SITEBAR_STYLE_FL = SITEBAR_STYLE + ", k-fl";
