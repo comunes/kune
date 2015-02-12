@@ -5,7 +5,7 @@ kt.toggle_social_net = function() {
 }
 
 /* The initial space (0: for home, 1: for group space) useful during tests */
-kt.spaceselected=0;
+kt.spaceselected=2;
 
 /* Screen sizes (inspired in bootstrap) */
 kt.screenlg=1200;
@@ -25,7 +25,7 @@ kt.avatarsizem=60;
 kt.avatarsizes=50;
 
 kt.homebackcolor='rgb(255, 204, 170)';
-kt.group_back_image_url='url(http://lorempixel.com/1000/1000)';
+kt.group_back_image_url='http://lorempixel.com/1500/1500';
 kt.showingSearch=false;
 
 function toggleVis(id) {

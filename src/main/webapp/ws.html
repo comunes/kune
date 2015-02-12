@@ -95,7 +95,9 @@ You can add more ids here and below to show/hide then.
 		href="bower_components/core-drawer-panel/core-drawer-panel.html">
 <link rel="import" href="bower_components/core-pages/core-pages.html">
 <link rel="import"
-		href="bower_components/core-media-query/core-media-query.html">
+      href="bower_components/core-media-query/core-media-query.html">
+<link rel="import"
+      href="bower_components/core-image/core-image.html">
 
 <!-- Other elements -->
 <link rel="import"
@@ -279,8 +281,11 @@ You can add more ids here and below to show/hide then.
             </div><!-- home_space -->
             <div id="user_space">Inbox</div>
             <div id="group_space" vertical layout>
+              <div horizontal layout center id="site_bottombar" flex></div>
               <core-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">
+                <!-- FIXME: condensed: height 60 -->
                 <core-toolbar id="header_core_toolbar" class="tall" flex>
+                  
                   <core-drawer-panel transition drawerwidth="80%" selected="main" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
                     <section id="group_core_drawer" drawer>
                       <div horizontal layout>
@@ -333,7 +338,7 @@ You can add more ids here and below to show/hide then.
                         
                       </div>
                     </core-toolbar>
-                  </paper-shadow>
+                  </paper-shadow>                  
                 </core-toolbar>
                 <section id="doc_content_section" content flex>
                   <paper-shadow animated id="doc_content_shadow">
@@ -346,20 +351,12 @@ You can add more ids here and below to show/hide then.
                       <!-- https://www.polymer-project.org/docs/polymer/expressions.html -->
 
                       <div id="doc_content" >
-                        <!-- <content></content> -->
-                        <!-- xsmall: {{xsmall}}<br>
-                       small: {{small}}<br>
-                       medium: {{medium}}<br>
-                       large: {{large}}<br>
-                       xsmall or small: {{(xsmall || small)}}<br>
-                       xsmall & up: {{xsmallup}}<br>
-                       small & up: {{smallup}}<br>
-                       medium & up: {{mediumup}}<br>
-                       large & up: {{largeup}}<br>  -->
+                        <!-- <lorem-element></lorem-element>
+                        <lorem-element></lorem-element>
+                        <lorem-element></lorem-element> -->
                       </div>
                     </div>
                   </paper-shadow>
-                  <div horizontal layout center id="site_bottombar" flex></div>
                 </section>
               </core-scroll-header-panel>
             </div>
@@ -634,9 +631,28 @@ You can add more ids here and below to show/hide then.
          left: 0px;
          top: 0px;
          right: 0px;
-         bottom: 0px;
-         position: absolute;
+         bottom: 40px;
+         position: absolute;         
        }
+       /* background for toolbar when it is at its full size */
+       core-scroll-header-panel::shadow #headerContainer {
+         background-color: rgb(200, 113, 55);
+       }
+       core-scroll-header-panel::shadow #headerBg {
+         background-image: url({{group_back_image_url}});         
+         background-attachment: fixed;
+         background-position: 50% 50%;
+         background-repeat: no-repeat;
+         opacity : 0.15 !important;
+       }
+       /* background for toolbar when it is condensed  (not working because of previous opacity) */
+       core-scroll-header-panel::shadow #condensedHeaderBg {
+         background-color: rgb(200, 113, 55);
+       }
+       core-scroll-header-panel::shadow #mainContainer {
+         background-color: rgb(223, 223, 223);
+       }
+       
        #core_drawer_group_header {
          position: absolute;
          top: 0px;
@@ -644,7 +660,7 @@ You can add more ids here and below to show/hide then.
          bottom: 0px;
          left: 0px;
          height: {{xsmall? headers: small? headerm: headerl}}px;
-         border-right: 13px solid #FFF;
+         border-right: 13px solid #F2F2F2;
        }
        #group_core_drawer {
          box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
@@ -657,36 +673,10 @@ You can add more ids here and below to show/hide then.
        #header_core_toolbar.tall {
          height: {{xsmall? headers: small? headerm: headerl}}px;
        }
-       #header_core_toolbar:before {
-         background-color: rgb(200, 113, 55);
-         content : "";
-         display: block;
-         position: absolute;
-         top: 0;
-         left: 0;
-         width: 100%;
-         height: 100%;
-         z-index: -2;
-       }
        #header_core_toolbar {
          color: rgb(241, 241, 241);
          fill: rgb(241, 241, 241);
          background-color: transparent;
-       }
-       #header_core_toolbar:after {
-         content : "";
-         display: block;
-         position: absolute;
-         top: 0;
-         left: 0;
-         background-image: url(http://lorempixel.com/1000/1000);
-         background-attachment: fixed;
-         background-position: 50% 50%;
-         background-repeat: no-repeat;
-         width: 100%;
-         height: 100%;
-         opacity : 0.15;
-         z-index: -1;
        }
        #header_groupname_div {
          width: 100%;
@@ -800,9 +790,9 @@ You can add more ids here and below to show/hide then.
          padding: {{xsmall ? '10px' : '20px 60px 60px' }};
          background-color: rgb(255, 255, 255);
        }
+       
        #doc_content_section {
          padding: {{xsmall ? '10px' : '60px' }};
-         background-color: rgb(223, 223, 223);
          position: absolute;
          top: 0;
          left: 0;
