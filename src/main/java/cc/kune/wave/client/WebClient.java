@@ -19,6 +19,8 @@
 package cc.kune.wave.client;
 
 
+import static com.google.gwt.query.client.GQuery.$;
+
 import java.util.Date;
 import java.util.Set;
 import java.util.logging.Logger;
@@ -67,16 +69,22 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
+import br.com.rpa.client._paperelements.PaperFab;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.initials.InitialsResources;
+import cc.kune.polymer.client.PolymerId;
 import cc.kune.wave.client.kspecific.AfterOpenWaveEvent;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
 import cc.kune.wave.client.kspecific.BeforeOpenWaveEvent;
@@ -90,7 +98,9 @@ import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.query.client.GQuery;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -102,11 +112,11 @@ import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.SimplePanel;
-import com.google.gwt.user.client.ui.SplitLayoutPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -158,11 +168,11 @@ public class WebClient extends Composite implements WaveClientView {
             stack.appendEscaped(String.valueOf(error.getMessage())).appendHtmlConstant("<br>");
             for (final StackTraceElement elt : error.getStackTrace()) {
               stack.appendHtmlConstant("  ")
-                  .appendEscaped(maybe(elt.getClassName(), "??")).appendHtmlConstant(".") //
-                  .appendEscaped(maybe(elt.getMethodName(), "??")).appendHtmlConstant(" (") //
-                  .appendEscaped(maybe(elt.getFileName(), "??")).appendHtmlConstant(":") //
-                  .appendEscaped(maybe(elt.getLineNumber(), "??")).appendHtmlConstant(")") //
-                  .appendHtmlConstant("<br>");
+              .appendEscaped(maybe(elt.getClassName(), "??")).appendHtmlConstant(".") //
+              .appendEscaped(maybe(elt.getMethodName(), "??")).appendHtmlConstant(" (") //
+              .appendEscaped(maybe(elt.getFileName(), "??")).appendHtmlConstant(":") //
+              .appendEscaped(maybe(elt.getLineNumber(), "??")).appendHtmlConstant(")") //
+              .appendHtmlConstant("<br>");
             }
             error = error.getCause();
             if (error != null) {
@@ -179,7 +189,7 @@ public class WebClient extends Composite implements WaveClientView {
      * Install.
      */
     public static void install() {
-    GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
+      GWT.setUncaughtExceptionHandler(new ErrorHandler(GWT.getUncaughtExceptionHandler()));
     }
 
     /**
@@ -229,12 +239,12 @@ public class WebClient extends Composite implements WaveClientView {
     public void onUncaughtException(final Throwable e) {
       if (!hasFired) {
         hasFired = true;
-      //  final ErrorIndicatorPresenter error =
+        //  final ErrorIndicatorPresenter error =
         //    ErrorIndicatorPresenter.create(RootPanel.get("banner"));
         getStackTraceAsync(e, new Accessor<SafeHtml>() {
           @Override
           public void use(final SafeHtml stack) {
-          //  error.addDetail(stack, null);
+            //  error.addDetail(stack, null);
             // REMOTE_LOG.severe(stack.asString().replace("<br>", "\n"));
             final String message = stack.asString().replace("<br>", "\n");
             NotifyUser.logError(message);
@@ -331,13 +341,9 @@ public class WebClient extends Composite implements WaveClientView {
 
   private SimpleSearch search;
 
-  /** The search panel. */
-  @UiField(provided = true)
+  /** The search panel.
+  @UiField(provided = true) */
   final SearchPanelWidget searchPanel;
-
-  /** The split panel. */
-  @UiField(provided=true)
-  SplitLayoutPanel splitPanel;
 
   /** The style. */
   @UiField
@@ -382,7 +388,7 @@ public class WebClient extends Composite implements WaveClientView {
    * @param colorPicker the color picker
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles,final cc.kune.core.client.state.Session kuneSession, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final Provider<AurorisColorPicker> colorPicker) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles,final cc.kune.core.client.state.Session kuneSession, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final Provider<AurorisColorPicker> colorPicker, final GSpaceArmor armor) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.kuneSession = kuneSession;
@@ -404,6 +410,7 @@ public class WebClient extends Composite implements WaveClientView {
         });
       }
     });
+    armor.wrapDiv(PolymerId.INBOX_RESULT).add(searchPanel);
 
     ClientEvents.get().addWaveCreationEventHandler(
         new WaveCreationEventHandler() {
@@ -459,9 +466,9 @@ public class WebClient extends Composite implements WaveClientView {
    */
   @Override
   public void clear() {
-  WaveClientUtils.clear(wave, waveHolder, waveFrame);
-  waveFrame.clear();
-}
+    WaveClientUtils.clear(wave, waveHolder, waveFrame);
+    waveFrame.clear();
+  }
 
   /**
    * Creates the web socket.
@@ -618,9 +625,11 @@ public class WebClient extends Composite implements WaveClientView {
   private void openWaveImpl(final WaveRef waveRef, final boolean isNewWave, final Set<ParticipantId> participants) {
     LOG.info("WebClient.openWave()");
 
+    final String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
+
     WaveClientClearEvent.fire(eventBus);
     clear();
-    eventBus.fireEvent(new BeforeOpenWaveEvent());;
+    eventBus.fireEvent(new BeforeOpenWaveEvent(waveUri));;
 
     waveFrame.add(waveHolder);
 
@@ -637,8 +646,6 @@ public class WebClient extends Composite implements WaveClientView {
         loading.removeFromParent();
       }
     });
-
-    final String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
 
     eventBus.fireEvent(new AfterOpenWaveEvent(waveUri));;
 
@@ -664,14 +671,6 @@ public class WebClient extends Composite implements WaveClientView {
     History.newItem(tokenFromWaveref, false);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.gspace.client.maxmin.IsMaximizable#setMaximized(boolean)
-   */
-  @Override
-  public void setMaximized(final boolean maximized) {
-    splitPanel.setWidgetSize(searchPanel, maximized ? 0 : 400);
-  }
-
   /**
    * Setup connection indicator.
    */
@@ -685,26 +684,26 @@ public class WebClient extends Composite implements WaveClientView {
         final Element element = Document.get().getElementById("netstatus");
         if (element != null) {
           switch (event.getStatus()) {
-            case CONNECTED:
-            case RECONNECTED:
-              element.setInnerText("Online");
-              element.setClassName("online");
-              isTurbulenceDetected = false;
-              turbulencePopup.hide();
-              break;
-            case DISCONNECTED:
-              element.setInnerText("Offline");
-              element.setClassName("offline");
-              if (!isTurbulenceDetected) {
-                isTurbulenceDetected = true;
-                turbulencePopup.show();
-              }
-              break;
-            case NEVER_CONNECTED:
-            case RECONNECTING:
-              element.setInnerText("Connecting...");
-              element.setClassName("connecting");
-              break;
+          case CONNECTED:
+          case RECONNECTED:
+            element.setInnerText("Online");
+            element.setClassName("online");
+            isTurbulenceDetected = false;
+            turbulencePopup.hide();
+            break;
+          case DISCONNECTED:
+            element.setInnerText("Offline");
+            element.setClassName("offline");
+            if (!isTurbulenceDetected) {
+              isTurbulenceDetected = true;
+              turbulencePopup.show();
+            }
+            break;
+          case NEVER_CONNECTED:
+          case RECONNECTING:
+            element.setInnerText("Connecting...");
+            element.setClassName("connecting");
+            break;
           }
         }
       }
@@ -722,17 +721,18 @@ public class WebClient extends Composite implements WaveClientView {
     // On wave action fire an event.
     final SearchPresenter.WaveActionHandler actionHandler =
         new SearchPresenter.WaveActionHandler() {
-          @Override
-          public void onCreateWave() {
-            ClientEvents.get().fireEvent(new WaveCreationEvent());
-          }
+      @Override
+      public void onCreateWave() {
+        ClientEvents.get().fireEvent(new WaveCreationEvent());
+      }
 
-          @Override
-          public void onWaveSelected(final WaveId id) {
-            ClientEvents.get().fireEvent(new WaveSelectionEvent(WaveRef.of(id)));
-          }
-        };
+      @Override
+      public void onWaveSelected(final WaveId id) {
+        ClientEvents.get().fireEvent(new WaveSelectionEvent(WaveRef.of(id)));
+      }
+    };
     search = SimpleSearch.create(RemoteSearchService.create(), waveStore);
+
     SearchPresenter.create(search, searchPanel, actionHandler, profiles);
   }
 
@@ -741,7 +741,6 @@ public class WebClient extends Composite implements WaveClientView {
    */
   private void setupUi() {
     // Set up UI
-    splitPanel = new SplitLayoutPanel(2);
     final DockLayoutPanel self = BINDER.createAndBindUi(this);
     // kune-patch
     // RootPanel.get("app").add(self);
@@ -750,12 +749,40 @@ public class WebClient extends Composite implements WaveClientView {
     waveHolder = new ImplPanel("");
     waveHolder.addStyleName("k-waveHolder");
     waveFrame.add(waveHolder);
+
+    // FIXME Dirty workaround while we improve the Wave integration
+    $(".org-waveprotocol-wave-client-widget-toolbar-ToplevelToolbarWidget-Css-toolbar").hide();
+    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-north").hide();
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-search").hide();
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-toolbar").hide();
+    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-east").hide();
+    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-northEast").hide();
+    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-northWest").hide();
+    $(".org-waveprotocol-wave-client-wavepanel-view-dom-full-ParticipantsViewBuilder-Css-extra").css("paddingTop", "17px");
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-list").css("top", "0px");
+    final GQuery container = $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-contentContainer");
+    container.css("right","0px");
+    container.css("top","0px");
+    //container.css("backgroundColor", "transparent");
+    //$(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-self").css("backgroundColor", "transparent");
     // DockLayoutPanel forcibly conflicts with sensible layout control, and
     // sticks inline styles on elements without permission. They must be
     // cleared.
     self.getElement().getStyle().clearPosition();
-    splitPanel.setWidgetMinSize(searchPanel, 300);
+    // splitPanel.setWidgetMinSize(searchPanel, 300);
     AttachmentManagerProvider.init(AttachmentManagerImpl.getInstance());
+
+    final PaperFab newMsg = PaperFab.wrap(PolymerId.INBOX_NEW_MESSAGE.getId());
+    Tooltip.to(newMsg, I18n.t("New message"));
+    newMsg.addClickHandler(new ClickHandler() {
+
+      @Override
+      public void onClick(final ClickEvent event) {
+        // FIXME Dirty workaround while we improve the Wave integration
+        SpaceSelectEvent.fire(eventBus, Space.userSpace);
+        $(".org-waveprotocol-wave-client-widget-toolbar-buttons-HorizontalToolbarButtonWidget-Css-overlay").click();
+      }
+    });
 
     if (LogLevel.showDebug()) {
       logPanel.enable();

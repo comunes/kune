@@ -55,14 +55,14 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class FolderViewerUtils.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FolderViewerUtils {
@@ -99,7 +99,7 @@ public class FolderViewerUtils {
 
   /**
    * Instantiates a new folder viewer utils.
-   * 
+   *
    * @param capabilitiesRegistry
    *          the capabilities registry
    * @param eventBus
@@ -136,7 +136,7 @@ public class FolderViewerUtils {
 
   /**
    * Adds the item.
-   * 
+   *
    * @param tool
    *          the tool
    * @param content
@@ -196,7 +196,7 @@ public class FolderViewerUtils {
 
   /**
    * Creates the child items.
-   * 
+   *
    * @param container
    *          the container
    * @param containerRights
@@ -238,7 +238,7 @@ public class FolderViewerUtils {
 
   /**
    * Gen id.
-   * 
+   *
    * @param token
    *          the token
    * @return the string
@@ -249,7 +249,7 @@ public class FolderViewerUtils {
 
   /**
    * Gets the icon.
-   * 
+   *
    * @param token
    *          the token
    * @param contentTypeId
@@ -269,7 +269,7 @@ public class FolderViewerUtils {
 
   /**
    * Gets the icon.
-   * 
+   *
    * @param stateToken
    *          the state token
    * @param typeId
@@ -284,7 +284,7 @@ public class FolderViewerUtils {
 
   /**
    * Gets the tooltip.
-   * 
+   *
    * @param token
    *          the token
    * @param mimeType
@@ -306,7 +306,7 @@ public class FolderViewerUtils {
 
   /**
    * Gets the view.
-   * 
+   *
    * @return the view
    */
   private AbstractFolderViewerView getView() {
@@ -315,7 +315,7 @@ public class FolderViewerUtils {
 
   /**
    * Sets the content.
-   * 
+   *
    * @param view
    *          the view
    * @param state
@@ -330,7 +330,10 @@ public class FolderViewerUtils {
     // NotifyUser.info("Rights: " + rights, true);
     final GuiActionDescCollection topActions = actionsRegistry.getCurrentActions(
         stateContainer.getToolName(), stateContainer.getGroup(), stateContainer.getTypeId(),
-        session.isLogged(), rights, ActionGroups.TOPBAR);
+        session.isLogged(), rights, ActionGroups.DOC_TOP_TOOLBAR);
+    final GuiActionDescCollection topHeaderActions = actionsRegistry.getCurrentActions(
+        stateContainer.getToolName(), stateContainer.getGroup(), stateContainer.getTypeId(),
+        session.isLogged(), rights, ActionGroups.DOC_HEADER_BAR);
     final GuiActionDescCollection bottomActions = actionsRegistry.getCurrentActions(
         stateContainer.getToolName(), stateContainer.getGroup(), stateContainer.getTypeId(),
         session.isLogged(), rights, ActionGroups.BOTTOMBAR);
@@ -338,14 +341,15 @@ public class FolderViewerUtils {
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(stateContainer.getGroup(),
         container, true, false);
     bottomActions.addAll(pathActions);
-    getView().setSubheaderActions(topActions);
+    getView().setDocTopActions(topActions);
+    getView().setDocHeaderActions(topHeaderActions);
     getView().setFooterActions(bottomActions);
     createChildItems(container, stateContainer.getContainerRights());
   }
 
   /**
    * Show empty msg.
-   * 
+   *
    * @param typeId
    *          the type id
    */

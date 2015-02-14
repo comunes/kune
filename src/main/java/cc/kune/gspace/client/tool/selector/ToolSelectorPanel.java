@@ -26,6 +26,7 @@ import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -39,14 +40,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolSelectorPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
 
   /**
    * The Interface ToolSelectorPanelUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface ToolSelectorPanelUiBinder extends UiBinder<Widget, ToolSelectorPanel> {
@@ -64,7 +65,7 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
 
   /**
    * Instantiates a new tool selector panel.
-   * 
+   *
    * @param wsArmor
    *          the ws armor
    * @param dropControllerProv
@@ -75,11 +76,12 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
       final Provider<FolderContainerDropController> dropControllerProv) {
     this.dropControllerProv = dropControllerProv;
     wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
+    PolymerUtils.addFlexVerLayout(flow);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView
    * #addItem(cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.
@@ -96,7 +98,7 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override

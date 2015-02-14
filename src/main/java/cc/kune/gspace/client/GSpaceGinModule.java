@@ -58,9 +58,6 @@ import cc.kune.gspace.client.licensewizard.pages.LicenseWizardSndForm;
 import cc.kune.gspace.client.licensewizard.pages.LicenseWizardSndFormView;
 import cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdForm;
 import cc.kune.gspace.client.licensewizard.pages.LicenseWizardTrdFormView;
-import cc.kune.gspace.client.maxmin.MaxMinWorkspace;
-import cc.kune.gspace.client.maxmin.MaxMinWorkspacePanel;
-import cc.kune.gspace.client.maxmin.MaxMinWorkspacePresenter;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.GroupOptionsCollection;
 import cc.kune.gspace.client.options.GroupOptionsPanel;
@@ -158,7 +155,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -187,9 +184,6 @@ public class GSpaceGinModule extends ExtendedGinModule {
         FolderViewerAsTablePanel.class, FolderViewerPresenter.FolderViewerProxy.class);
     bindPresenter(SitebarSearchPresenter.class, SitebarSearchPresenter.SitebarSearchView.class,
         SitebarSearchPanel.class, SitebarSearchPresenter.SitebarSearchProxy.class);
-    bindPresenter(MaxMinWorkspacePresenter.class, MaxMinWorkspacePresenter.MaxMinWorkspaceView.class,
-        MaxMinWorkspacePanel.class, MaxMinWorkspacePresenter.MaxMinWorkspaceProxy.class);
-    bind(MaxMinWorkspace.class).to(MaxMinWorkspacePresenter.class).in(Singleton.class);
 
     s(NoHomePageViewer.class);
     s(TutorialViewer.class);

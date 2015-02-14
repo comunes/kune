@@ -63,15 +63,16 @@
   </ui:style>
   <g:DockLayoutPanel unit="PX" styleName="{style.root}">
     <g:center>
-      <g:SplitLayoutPanel ui:field="splitPanel"
+      <g:DockLayoutPanel ui:field="splitPanel"
         stylePrimaryName="{style.splitPanel}">
-        <g:south size="200">
+        <g:south size="0">
           <d:DebugMessagePanel ui:field="logPanel"
             addStyleNames="{style.debugPanel}"/>
         </g:south>
-        <g:west size="400" >
-          <s:SearchPanelWidget ui:field="searchPanel"
-            addStyleNames="{style.searchPanel}"/>
+        <g:west size="0" >
+        <g:Label></g:Label>
+<!--           <s:SearchPanelWidget ui:field="searchPanel" -->
+<!--             addStyleNames="{style.searchPanel}"/>  -->
         </g:west>
         <g:center>
           <g:DockLayoutPanel ui:field="rightPanel"
@@ -87,7 +88,7 @@
             </g:south>
           </g:DockLayoutPanel>
         </g:center>
-      </g:SplitLayoutPanel>
+      </g:DockLayoutPanel>
     </g:center>
   </g:DockLayoutPanel>
 </ui:UiBinder>

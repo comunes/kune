@@ -90,23 +90,23 @@ public class WikiClientActions extends AbstractFoldableToolActions {
     // containers);
     // add(NAME, TOOLBAR, newFolderMenuItem,
     // containers);
-    add(TOPBAR, all, optionsMenuContent, refresh);
-    add(TOPBAR, all, newWikiIconBtn);
-    add(TOPBAR, containers, newFolderBtn);
-    add(TOPBAR, contents, wikipageNewMenu);
+    add(DOC_TOP_TOOLBAR, all, optionsMenuContent, refresh);
+    add(DOC_TOP_TOOLBAR, all, newWikiIconBtn);
+    add(DOC_TOP_TOOLBAR, containers, newFolderBtn);
+    add(DOC_TOP_TOOLBAR, contents, wikipageNewMenu);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
-    add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(TOPBAR, contents, shareIHelper.getShareInWaves());
-    add(TOPBAR, all, shareIHelper.getShareInAll());
-    add(TOPBAR, all, tutorialBtn);
-    add(TOPBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
+    add(DOC_TOP_TOOLBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(DOC_TOP_TOOLBAR, contents, shareIHelper.getShareInWaves());
+    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
+    add(DOC_TOP_TOOLBAR, all, tutorialBtn);
+    add(DOC_TOP_TOOLBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem, delContentMenuItem,
         setAsHomePage, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem, copyContent,
         writeToParticipants);
-    add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
+    add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, contents, purgeBtn);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem,
         moveContentMenuItem);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, moveContentMenuItem,

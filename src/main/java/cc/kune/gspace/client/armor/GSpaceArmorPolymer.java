@@ -83,14 +83,15 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   private final GSpaceCenter centerPanel;
-  private final ActionFlowPanel docFooterToolbar;
+  private final ActionFlowPanel docFooterActionsToolbar;
+  private final ActionFlowPanel docHeaderRightActionsToolbar;
+  private final ActionFlowPanel docTopActionsToolbar;
   private final HashMap<String, Element> elements;
-  private final ActionFlowPanel entityFooterToolbar;
+  private final ActionFlowPanel entityFooterActionsToolbar;
   private final FlowActionExtensible flowActionTrash;
-  private final ActionFlowPanel headerToolbar;
+  private final ActionFlowPanel headerActionsTopToolbar;
   private final HashMap<String, WrappedFlowPanel> panels;
-  private final ActionFlowPanel subheaderToolbar;
-  private final ActionFlowPanel toolsSouthToolbar;
+  private final ActionFlowPanel toolsSouthActionsToolbar;
   private final FlowPanel trash;
 
   @Inject
@@ -105,21 +106,24 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
     flowActionTrash = new FlowActionExtensible();
     trash.add(flowActionTrash);
 
-    docFooterToolbar = toolbarProv.get();
-    headerToolbar = toolbarProv.get();
-    subheaderToolbar = toolbarProv.get();
-    toolsSouthToolbar = toolbarProv.get();
-    entityFooterToolbar = toolbarProv.get();
+    docHeaderRightActionsToolbar = toolbarProv.get();
+    docFooterActionsToolbar = toolbarProv.get();
+    headerActionsTopToolbar = toolbarProv.get();
+    docTopActionsToolbar = toolbarProv.get();
+    toolsSouthActionsToolbar = toolbarProv.get();
+    entityFooterActionsToolbar = toolbarProv.get();
 
-    PolymerUtils.addFlexHorLayout(docFooterToolbar, subheaderToolbar, toolsSouthToolbar,
-        entityFooterToolbar);
-    PolymerUtils.addFlexVerLayout(headerToolbar);
+    PolymerUtils.addFlexHorLayout(docFooterActionsToolbar, docTopActionsToolbar,
+        toolsSouthActionsToolbar, entityFooterActionsToolbar);
+    PolymerUtils.addFlexVerLayout(headerActionsTopToolbar);
 
-    getEntityHeader().add(headerToolbar);
-    getDocFooter().add(docFooterToolbar);
-    getEntityToolsSouth().add(toolsSouthToolbar);
-    getEntityFooter().add(entityFooterToolbar);
-    getDocSubheader().add(subheaderToolbar);
+    getEntityHeader().add(headerActionsTopToolbar);
+    getDocFooter().add(docFooterActionsToolbar);
+    getEntityToolsSouth().add(toolsSouthActionsToolbar);
+    getEntityFooter().add(entityFooterActionsToolbar);
+    getDocHeaderRight().add(docHeaderRightActionsToolbar);
+    getDocTopbar().add(docTopActionsToolbar);
+    // getDocSubheader().add(subheaderToolbar);
 
     this.centerPanel = centerPanel;
     wrapDiv(DOC_CONTENT).add(centerPanel);
@@ -140,7 +144,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   public void enableCenterScroll(final boolean enable) {
     try {
       getElementById("doc_content_section").getStyle().setOverflowY(
-          enable ? Overflow.AUTO : Overflow.HIDDEN);
+          enable ? Overflow.VISIBLE : Overflow.HIDDEN);
     } catch (final Exception e) {
       Log.error("Cannot set scroll in center panel");
     }
@@ -153,7 +157,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public int getDocContainerHeight() {
-    return wrapDiv(DOC_CONTENT).getOffsetHeight();
+    return wrapDiv(DOC_CONTENT_SECTION).getOffsetHeight();
   }
 
   @Override
@@ -162,17 +166,31 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   @Override
-  public IsActionExtensible getDocFooterToolbar() {
-    return docFooterToolbar;
+  public IsActionExtensible getDocFooterActionsToolbar() {
+    return docFooterActionsToolbar;
   }
 
   @Override
   public ForIsWidget getDocHeader() {
-    return wrapDiv(DOC_HEADER);
+    return wrapDiv(DOC_HEADER_LEFT_EXTENSIONBAR);
+  }
+
+  private WrappedFlowPanel getDocHeaderRight() {
+    return wrapDiv(DOC_HEADER_RIGHT_EXTENSIONBAR);
   }
 
   @Override
-  public ForIsWidget getDocSubheader() {
+  public IsActionExtensible getDocHeaderRightActionsToolbar() {
+    return docHeaderRightActionsToolbar;
+  }
+
+  @Override
+  public ActionFlowPanel getDocTopActionsToolbar() {
+    return docTopActionsToolbar;
+  }
+
+  @Override
+  public ForIsWidget getDocTopbar() {
     return wrapDiv(DOC_TOOLBAR_EXTENSION);
   }
 
@@ -193,7 +211,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   @Override
-  public IsActionExtensible getEntityFooterToolbar() {
+  public IsActionExtensible getEntityFooterActionsToolbar() {
     return flowActionTrash;
   }
 
@@ -204,7 +222,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public ForIsWidget getEntityToolsCenter() {
-    return trash;
+    return wrapDiv(GROUP_TOOLS_TOOLBAR);
   }
 
   @Override
@@ -238,8 +256,13 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   @Override
-  public IsActionExtensible getHeaderToolbar() {
-    return headerToolbar;
+  public IsActionExtensible getHeaderActionsTopToolbar() {
+    return headerActionsTopToolbar;
+  }
+
+  @Override
+  public ForIsWidget getHeaderBottombar() {
+    return wrapDiv(HEADER_BOTTOMBAR);
   }
 
   @Override
@@ -281,13 +304,13 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   @Override
-  public IsActionExtensible getSubheaderToolbar() {
-    return subheaderToolbar;
+  public IsActionExtensible getToolsSouthActionsToolbar() {
+    return toolsSouthActionsToolbar;
   }
 
   @Override
-  public IsActionExtensible getToolsSouthToolbar() {
-    return toolsSouthToolbar;
+  public IsActionExtensible getTopActionsToolbar() {
+    return docTopActionsToolbar;
   }
 
   @Override
@@ -322,11 +345,6 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }-*/;
 
   @Override
-  public void setMaximized(final boolean maximized) {
-    // TODO Auto-generated method stub
-  }
-
-  @Override
   public void setRTL(final Direction direction) {
     // TODO use reverse methods in Polymer also
     // http://stackoverflow.com/questions/26110405/polymer-rtl-text-based-on-an-attribute
@@ -339,6 +357,10 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
     if (panel == null) {
       Log.debug("Getting div '" + id + "' from html");
       final Element element = getElement(htmlId);
+      if (element == null) {
+        // Not found, return null as getElementById
+        return null;
+      }
       if (isElementChildOfWidget(element)) {
         throw new UIException("Parent is already wrapped/attached");
       }

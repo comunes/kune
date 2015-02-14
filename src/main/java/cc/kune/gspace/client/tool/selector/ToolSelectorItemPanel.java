@@ -25,6 +25,7 @@ package cc.kune.gspace.client.tool.selector;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -46,14 +47,14 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolSelectorItemPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolSelectorItemPanel extends Composite implements ToolSelectorItemView {
 
   /**
    * The Interface ToolSelectorItemPanelUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface ToolSelectorItemPanelUiBinder extends UiBinder<Widget, ToolSelectorItemPanel> {
@@ -94,7 +95,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * Instantiates a new tool selector item panel.
-   * 
+   *
    * @param shortName
    *          the short name
    * @param icon
@@ -103,6 +104,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   public ToolSelectorItemPanel(final String shortName, final KuneIcon icon) {
     this.shortName = shortName;
     initWidget(uiBinder.createAndBindUi(this));
+    PolymerUtils.addFlexHorLayout(flow);
     ensureDebugId(TOOL_ID_PREFIX + shortName);
     setVisibleImpl(false);
     iconLeft.setText(icon.getCharacter().toString());
@@ -139,7 +141,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * Gets the focus panel.
-   * 
+   *
    * @return the focus panel
    */
   public Widget getFocusPanel() {
@@ -159,7 +161,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * Gets the name.
-   * 
+   *
    * @return the name
    */
   public String getName() {
@@ -179,7 +181,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * On self mouse out.
-   * 
+   *
    * @param event
    *          the event
    */
@@ -190,7 +192,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * On self mouse over.
-   * 
+   *
    * @param event
    *          the event
    */
@@ -243,7 +245,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
 
   /**
    * Sets the visible impl.
-   * 
+   *
    * @param visible
    *          the new visible impl
    */

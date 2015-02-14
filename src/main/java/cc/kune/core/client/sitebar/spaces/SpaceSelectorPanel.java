@@ -29,6 +29,8 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
+import cc.kune.polymer.client.PolymerId;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.user.client.Window;
@@ -75,10 +77,10 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
   public SpaceSelectorPanel(final I18nTranslationService i18n, final GSpaceArmorResources res,
       final SessionConstants session) {
 
-    homeButton = PaperIconButton.wrap("home_space_icon");
-    groupButton = PaperIconButton.wrap("group_space_icon");
-    userButton = PaperIconButton.wrap("user_space_icon");
-    // homeButton.setVisible(false);
+    homeButton = PaperIconButton.wrap(PolymerId.HOME_SPACE_ICON.getId());
+    groupButton = PaperIconButton.wrap(PolymerId.GROUP_SPACE_ICON.getId());
+    userButton = PaperIconButton.wrap(PolymerId.USER_SPACE_ICON.getId());
+
     final String siteCommonName = i18n.getSiteCommonName();
     homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Your home page in [%s]", siteCommonName)
         + " (Alt+H)");
@@ -95,6 +97,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
     // homeSpaceTooltip.setWidth(0);
     userSpaceTooltip.setWidth(190);
     groupSpaceTooltip.setWidth(170);
+
     // publicSpaceTooltip.setWidth(150);
   }
 
@@ -214,6 +217,16 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
   @Override
   public void setHomeBtnActive(final boolean active) {
     homeButton.setActive(active);
+  }
+
+  @Override
+  public void setNarrowSwipeEnabled(final boolean enabled) {
+    PolymerUtils.setNarrowSwipeEnabled(enabled);
+  }
+
+  @Override
+  public void setNarrowVisible(final boolean visible) {
+    PolymerUtils.setNarrowVisible(visible);
   }
 
   /*

@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -21,21 +21,27 @@
  *
  */
 
-package cc.kune.gspace.client.maxmin;
+package cc.kune.core.client.sitebar.spaces;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface IsMaximizable.
- * 
+ * The Class NarrowManager controls the narrow area (inbox/chat) visibility
+ * depending on the status of the app (logged or not, etc)
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public interface IsMaximizable {
+public class NarrowManager {
 
-  /**
-   * Sets the maximized.
-   * 
-   * @param maximized
-   *          the new maximized
-   */
-  void setMaximized(boolean maximized);
+  public static boolean shouldNarrowBeVisible(final boolean logged, final Space space) {
+    if (space == null || !logged || space.equals(Space.homeSpace)) {
+      return false;
+    }
+    return true;
+  }
+
+  public static boolean shouldNarrowSwipeBeEnabled(final boolean logged, final Space space) {
+    if (space == null || !logged) {
+      return false;
+    }
+    return true;
+  }
 }

@@ -73,3 +73,6 @@ src/main/webapp/WEB-INF/deploy/
 /target
 /target
 core/kune-sandbox/gwt-unitCache/
+src/main/webapp/bower_components/
+\#*\#
+.\#*

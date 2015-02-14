@@ -39,7 +39,7 @@ public class SearchBoxFactory {
 
   /**
    * Creates the.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param searchOnlyUsers
@@ -53,9 +53,9 @@ public class SearchBoxFactory {
    * @return the multivalue suggest box
    */
   public static MultivalueSuggestBox create(final I18nTranslationService i18n,
-      final boolean searchOnlyUsers, final boolean showNoResult, final String id,
+      final boolean searchOnlyUsers, final boolean showNoResult, final String id, final boolean wrap,
       final OnEntitySelectedInSearch callback) {
-    final MultivalueSuggestBox multivalueSBox = new MultivalueSuggestBox(i18n, showNoResult,
+    final MultivalueSuggestBox multivalueSBox = new MultivalueSuggestBox(i18n, showNoResult, id, wrap,
         getSearchUrl(searchOnlyUsers), false, new OnExactMatch() {
           @Override
           public void onExactMatch(final String match) {
@@ -88,7 +88,7 @@ public class SearchBoxFactory {
             "Type something to search for users and groups in [%s]", siteCommonName));
     final TextBoxBase textBox = suggestBox.getTextBox();
     textBox.setDirection(i18n.isRTL() ? Direction.RTL : Direction.LTR);
-    textBox.ensureDebugId(id);
+    textBox.getElement().setId(id);
     return multivalueSBox;
   }
 

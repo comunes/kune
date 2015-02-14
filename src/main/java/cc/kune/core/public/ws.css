@@ -1349,8 +1349,7 @@ div.k-aurorisColorPicker table tbody tr td table tbody tr td div.gwt-HTML
 
 /* font icons */
 .k-content-title-icon {
-  font-family: kuneicons;
-  color: #FFF;
+  font-family: kuneicons;  
   float: left;
   font-weight: normal;
 }

@@ -47,7 +47,7 @@ import com.google.gwt.user.client.ui.Label;
 public class ContentTitleWidget extends Composite {
 
   /** The Constant ID. */
-  public static final String ID = "k-cnt-title-id";
+  public static final String ID = "document_name";
 
   /** The editable title. */
   private final EditableLabel editableTitle;
@@ -87,7 +87,7 @@ public class ContentTitleWidget extends Composite {
     flow.add(titleIcon);
     flow.add(editableTitle);
     initWidget(flow);
-    ensureDebugId(ID);
+    this.getElement().setId(ID);
   }
 
   /**

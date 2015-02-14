@@ -23,18 +23,16 @@
 package cc.kune.core.client.dnd;
 
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.gspace.client.armor.GSpaceArmor;
 
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.AttachEvent.Handler;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class NotImplementedDropManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NotImplementedDropManager {
@@ -47,7 +45,7 @@ public class NotImplementedDropManager {
 
   /**
    * Instantiates a new not implemented drop manager.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param gSpaceArmor
@@ -56,16 +54,15 @@ public class NotImplementedDropManager {
    *          the drag controller
    */
   @Inject
-  public NotImplementedDropManager(final I18nTranslationService i18n, final GSpaceArmor gSpaceArmor,
+  public NotImplementedDropManager(final I18nTranslationService i18n,
       final KuneDragController dragController) {
     this.i18n = i18n;
     this.dragController = dragController;
-    registerImpl((FlowPanel) gSpaceArmor.getEntityHeader());
   }
 
   /**
    * Register.
-   * 
+   *
    * @param widget
    *          the widget
    */
@@ -75,7 +72,7 @@ public class NotImplementedDropManager {
 
   /**
    * Register impl.
-   * 
+   *
    * @param widget
    *          the widget
    */

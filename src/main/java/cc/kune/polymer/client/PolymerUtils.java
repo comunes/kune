@@ -24,11 +24,13 @@
 package cc.kune.polymer.client;
 
 import static cc.kune.polymer.client.Layout.*;
+import br.com.rpa.client._paperelements.PaperFab;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 public class PolymerUtils {
+  private static PaperFab inboxShowHide = PaperFab.wrap(PolymerId.INBOX_SHOW_HIDE.getId());
 
   public static void addFlexHorLayout(final Widget... widgets) {
     addFlexLayout(HORIZONTAL, widgets);
@@ -50,4 +52,52 @@ public class PolymerUtils {
     }
   }
 
+  public native static String getMainSelected() /*-{
+		return $wnd.kt.main_selected;
+  }-*/;
+
+  public native static boolean isMainDrawerNarrow() /*-{
+		return $wnd.kt.main_narrow;
+  }-*/;
+
+  public native static boolean isXSmall() /*-{
+		return $wnd.kt.xsmall;
+  }-*/;
+
+  /**
+   * Shows/select the "inbox" drawer.
+   */
+  public static void setDrawerSelected() {
+    setMainSelected("drawer");
+  }
+
+  /**
+   * Shows/select the "main" panel.
+   */
+  public static void setMainSelected() {
+    setMainSelected("main");
+  }
+
+  private native static void setMainSelected(String selected) /*-{
+		$wnd.kt.main_selected = selected;
+  }-*/;
+
+  public static void setNarrowSwipeEnabled(final boolean enabled) {
+    setNarrowSwipeEnabledImpl(enabled);
+    inboxShowHide.setEnabled(enabled);
+  }
+
+  private native static void setNarrowSwipeEnabledImpl(final boolean enabled) /*-{
+		$wnd.kt.main_disableEdgeSwipe = !enabled;
+		$wnd.kt.main_disableSwipe = !enabled;
+  }-*/;
+
+  public static void setNarrowVisible(final boolean visible) {
+    setNarrowVisibleImpl(visible);
+    inboxShowHide.setVisible(visible);
+  }
+
+  private native static void setNarrowVisibleImpl(final boolean visible) /*-{
+		$wnd.kt.main_forcenarrow = !visible;
+  }-*/;
 }

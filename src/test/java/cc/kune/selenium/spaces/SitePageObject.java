@@ -28,7 +28,6 @@ import org.openqa.selenium.support.FindBy;
 import cc.kune.core.client.notify.confirm.UserConfirmPanel;
 import cc.kune.core.client.sitebar.MyGroupsMenu;
 import cc.kune.core.client.sitebar.SitebarNewGroupLink;
-import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView;
 import cc.kune.selenium.PageObject;
 import cc.kune.selenium.SeleniumConstants;
@@ -36,7 +35,7 @@ import cc.kune.selenium.SeleniumConstants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SitePageObject.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitePageObject extends PageObject {
@@ -74,7 +73,7 @@ public class SitePageObject extends PageObject {
   public WebElement publicSpaceBtn;
 
   /** The search text box. */
-  @FindBy(id = SeleniumConstants.GWTDEV + SitebarSearchPanel.SITE_SEARCH_TEXTBOX)
+  @FindBy(id = "sitebar_search_input")
   public WebElement searchTextBox;
 
   /** The user space btn. */

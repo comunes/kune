@@ -30,10 +30,13 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.SubMenuDescriptor;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.actions.ActionRegistryByType;
 import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.Session;
@@ -54,7 +57,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class XMLActionsParser.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class XMLActionsParser {
@@ -91,7 +94,7 @@ public class XMLActionsParser {
 
   /**
    * Instantiates a new xML actions parser.
-   * 
+   *
    * @param errHandler
    *          the err handler
    * @param contentViewer
@@ -125,31 +128,35 @@ public class XMLActionsParser {
     this.i18n = i18n;
     this.newMenusRegistry = newMenusRegistry;
     submenus = new HashMap<String, SubMenuDescriptor>();
-
     // Based on:
     // http://www.roseindia.net/tutorials/gwt/retrieving-xml-data.shtml
     final RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET,
         XMLActionsConstants.ACTIONS_XML_LOCATION_PATH_ABS);
-    try {
-      requestBuilder.sendRequest(null, new RequestCallback() {
-        @Override
-        public void onError(final Request request, final Throwable ex) {
+    session.onAppStart(false, new AppStartHandler() {
+      @Override
+      public void onAppStart(final AppStartEvent event) {
+        try {
+          requestBuilder.sendRequest(null, new RequestCallback() {
+            @Override
+            public void onError(final Request request, final Throwable ex) {
+              onFailed(ex);
+            }
+
+            @Override
+            public void onResponseReceived(final Request request, final Response response) {
+              parse(new XMLKuneClientActions(services, response.getText()));
+            }
+          });
+        } catch (final RequestException ex) {
           onFailed(ex);
         }
-
-        @Override
-        public void onResponseReceived(final Request request, final Response response) {
-          parse(new XMLKuneClientActions(services, response.getText()));
-        }
-      });
-    } catch (final RequestException ex) {
-      onFailed(ex);
-    }
+      }
+    });
   }
 
   /**
    * Creates the menu item.
-   * 
+   *
    * @param descrip
    *          the descrip
    * @param tool
@@ -164,7 +171,10 @@ public class XMLActionsParser {
       final String tool, final String origTypeId, final AbstractAction action) {
     final String path = descrip.getPath();
     final MenuDescriptor menu = newMenusRegistry.get(origTypeId);
-    assert menu != null;
+    if (menu == null) {
+      Log.warn("There is no new menu registered for tool: " + tool + "and typeId " + origTypeId);
+      return null;
+    }
     final SubMenuDescriptor submenu = getSubMenu(menu, tool, origTypeId, path);
     final Provider<GuiActionDescrip> menuItemProvider = new Provider<GuiActionDescrip>() {
       @Override
@@ -183,7 +193,7 @@ public class XMLActionsParser {
 
   /**
    * Gets the sub menu.
-   * 
+   *
    * @param menu
    *          the menu
    * @param tool
@@ -208,7 +218,7 @@ public class XMLActionsParser {
         subMenuDescriptor = new SubMenuDescriptor(parent, false, i18n.t(name));
         // subMenuDescriptor.setVisible(false);
         submenus.put(subpathId, subMenuDescriptor);
-        actionRegistry.addAction(tool, ActionGroups.TOPBAR, subMenuDescriptor, typeId);
+        actionRegistry.addAction(tool, ActionGroups.DOC_TOP_TOOLBAR, subMenuDescriptor, typeId);
       }
       current = subMenuDescriptor;
     }
@@ -218,7 +228,7 @@ public class XMLActionsParser {
 
   /**
    * Gets the sub path id.
-   * 
+   *
    * @param typeId
    *          the type id
    * @param path
@@ -237,7 +247,7 @@ public class XMLActionsParser {
 
   /**
    * On failed.
-   * 
+   *
    * @param ex
    *          the ex
    */
@@ -247,7 +257,7 @@ public class XMLActionsParser {
 
   /**
    * Parses the.
-   * 
+   *
    * @param xml
    *          the xml
    */
@@ -279,7 +289,9 @@ public class XMLActionsParser {
           }
           final Provider<GuiActionDescrip> menuItemProvider = createMenuItem(descrip, tool, origTypeId,
               action);
-          actionRegistry.addAction(tool, ActionGroups.TOPBAR, menuItemProvider, origTypeId);
+          if (menuItemProvider != null) {
+            actionRegistry.addAction(tool, ActionGroups.DOC_TOP_TOOLBAR, menuItemProvider, origTypeId);
+          }
         }
       }
     }
@@ -287,7 +299,7 @@ public class XMLActionsParser {
 
   /**
    * Proxy.
-   * 
+   *
    * @param iconUrl
    *          the icon url
    * @param gadgetUrl

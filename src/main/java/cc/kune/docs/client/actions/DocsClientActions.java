@@ -91,27 +91,28 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<ShareDialogMenuItem> shareSettings, final DocsNewMenu docsNewMenu,
       final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(TOPBAR, all, optionsMenuContent, refresh, newDocIconBtn);
-    add(TOPBAR, containers, newFolderBtn, foldersNewMenu, newDocMenuItem);
-    add(TOPBAR, contents, docsNewMenu);
-    add(TOPBAR, all, tutorialBtn);
-    add(TOPBAR, containers, newFolderMenuItem);
+    add(DOC_TOP_TOOLBAR, all, optionsMenuContent, refresh, newDocIconBtn);
+    add(DOC_TOP_TOOLBAR, containers, newFolderBtn, foldersNewMenu, newDocMenuItem);
+    add(DOC_TOP_TOOLBAR, contents, docsNewMenu);
+    add(DOC_TOP_TOOLBAR, all, tutorialBtn);
+    add(DOC_TOP_TOOLBAR, containers, newFolderMenuItem);
     newMenusRegistry.register(TYPE_DOCUMENT,
         (MenuDescriptor) docsNewMenu.get().withText(I18n.t("Add Gadget")));
     newMenusRegistry.register(TYPE_UPLOADEDFILE, docsNewMenu.get());
-    add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(TOPBAR, contents, shareIHelper.getShareInWaves());
-    add(TOPBAR, all, shareIHelper.getShareInAll());
-    add(TOPBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
+    add(DOC_TOP_TOOLBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(DOC_TOP_TOOLBAR, contents, shareIHelper.getShareInWaves());
+    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
+    add(DOC_TOP_TOOLBAR, contents, shareSettings, participateBtn, chatAbout, copyContent,
+        writeToParticipants);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem, delContentMenuItem,
         setAsHomePage, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem, copyContent,
         writeToParticipants);
-    add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
-    add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
+    add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, contents, purgeBtn);
+    add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, containersNoRoot, purgeFolderBtn);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem,
         moveContentMenuItem);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);

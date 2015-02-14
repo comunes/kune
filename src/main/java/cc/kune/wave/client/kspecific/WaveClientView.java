@@ -30,18 +30,16 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 
-import cc.kune.gspace.client.maxmin.IsMaximizable;
-
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.IsWidget;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface WaveClientView.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public interface WaveClientView extends IsWidget, IsMaximizable {
+public interface WaveClientView extends IsWidget {
 
   void addToBottonBar(IsWidget widget);
 
@@ -52,21 +50,21 @@ public interface WaveClientView extends IsWidget, IsMaximizable {
 
   /**
    * Gets the channel.
-   * 
+   *
    * @return the channel
    */
   RemoteViewServiceMultiplexer getChannel();
 
   /**
    * Gets the loading.
-   * 
+   *
    * @return the loading
    */
   Element getLoading();
 
   /**
    * Gets the profiles.
-   * 
+   *
    * @return the profiles
    */
   ProfileManager getProfiles();
@@ -75,7 +73,7 @@ public interface WaveClientView extends IsWidget, IsMaximizable {
 
   /**
    * Gets the stack trace async.
-   * 
+   *
    * @param caught
    *          the caught
    * @param accessor
@@ -86,14 +84,14 @@ public interface WaveClientView extends IsWidget, IsMaximizable {
 
   /**
    * Gets the wave holder.
-   * 
+   *
    * @return the wave holder
    */
   ImplPanel getWaveHolder();
 
   /**
    * Gets the web socket.
-   * 
+   *
    * @return the web socket
    */
   WaveWebSocketClient getWebSocket();

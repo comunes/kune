@@ -89,28 +89,28 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final Provider<ShareDialogMenuItem> shareSettings, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(TOPBAR, all, optionsMenuContent);
-    add(TOPBAR, noRoot, newPostIconBtn);
-    add(TOPBAR, containersNoRoot, blogNewMenu);
-    add(TOPBAR, contents, postNewMenu);
-    add(TOPBAR, all, refresh);
-    add(TOPBAR, containersNoRoot, newPostItem);
-    add(TOOL_NAME, TOPBAR, newBlogBtn, TYPE_ROOT);
+    add(DOC_TOP_TOOLBAR, all, optionsMenuContent);
+    add(DOC_TOP_TOOLBAR, noRoot, newPostIconBtn);
+    add(DOC_TOP_TOOLBAR, containersNoRoot, blogNewMenu);
+    add(DOC_TOP_TOOLBAR, contents, postNewMenu);
+    add(DOC_TOP_TOOLBAR, all, refresh);
+    add(DOC_TOP_TOOLBAR, containersNoRoot, newPostItem);
+    add(TOOL_NAME, DOC_TOP_TOOLBAR, newBlogBtn, TYPE_ROOT);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
-    add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(TOPBAR, contents, shareIHelper.getShareInWaves());
-    add(TOPBAR, all, shareIHelper.getShareInAll());
-    add(TOPBAR, contents, shareSettings);
-    add(TOPBAR, all, tutorialBtn);
-    add(TOPBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
+    add(DOC_TOP_TOOLBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(DOC_TOP_TOOLBAR, contents, shareIHelper.getShareInWaves());
+    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
+    add(DOC_TOP_TOOLBAR, contents, shareSettings);
+    add(DOC_TOP_TOOLBAR, all, tutorialBtn);
+    add(DOC_TOP_TOOLBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem, delContentMenuItem,
         addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem, copyContent,
         writeToParticipants);
-    add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
-    add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
+    add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, contents, purgeBtn);
+    add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, containersNoRoot, purgeFolderBtn);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem,
         moveContentMenuItem);

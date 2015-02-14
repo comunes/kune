@@ -93,7 +93,7 @@ public class EditableLabel extends Composite implements HasEditHandler {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.HasEditHandler#addEditHandler(cc.kune.common.client
    * .ui.EditEvent.EditHandler)

@@ -33,12 +33,11 @@ import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.Shortcut;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
@@ -99,7 +98,6 @@ import com.extjs.gxt.ui.client.Style.Scroll;
 import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
@@ -122,18 +120,21 @@ public class ChatClientDefault implements ChatClient {
    */
   public class ChatClientAction extends AbstractExtendedAction {
 
-    /** The res. */
-    private final ChatResources res;
-
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
+     */
     /**
      * Instantiates a new chat client action.
      *
      * @param res
      *          the res
      */
-    public ChatClientAction(final ChatResources res) {
+    public ChatClientAction() {
       super();
-      this.res = res;
       kuneEventBus.addHandler(NewUserRegisteredEvent.getType(),
           new NewUserRegisteredEvent.NewUserRegisteredHandler() {
         @Override
@@ -150,18 +151,13 @@ public class ChatClientDefault implements ChatClient {
       });
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
-     * common.client.actions.ActionEvent)
-     */
     @Override
     public void actionPerformed(final ActionEvent event) {
       kuneEventBus.fireEvent(new ToggleShowChatDialogEvent());
     }
 
+    // TODO, maybe use:
+    // https://www.polymer-project.org/components/core-animation/demo.html
     /**
      * Sets the blink.
      *
@@ -169,13 +165,12 @@ public class ChatClientDefault implements ChatClient {
      *          the new blink
      */
     public void setBlink(final boolean blink) {
-      // TODO, maybe use:
-      // https://www.polymer-project.org/components/core-animation/demo.html
-      final ImageResource icon = blink ? res.chatBlink() : res.chatNoBlink();
-      // putValue(Action.SMALL_ICON, icon);
-      dialog.setIcon(AbstractImagePrototype.create(icon));
-    }
+      if (anim == null) {
+        anim = new BlinkAnimation(chatIcon, 400);
+      }
 
+      anim.animate(10);
+    }
   }
 
   /** The Constant CHAT_TITLE. */
@@ -183,6 +178,8 @@ public class ChatClientDefault implements ChatClient {
 
   /** The action. */
   private final ChatClientAction action;
+
+  public BlinkAnimation anim;
 
   /** The avatar config. */
   private final Provider<KuneChatAvatarConfig> avatarConfig;
@@ -343,7 +340,7 @@ public class ChatClientDefault implements ChatClient {
     this.avatarManager = avatarManager;
     this.subscriptionManager = subscriptionManager;
     this.avatarConfig = avatarConfig;
-    action = new ChatClientAction(chatResources);
+    action = new ChatClientAction();
 
     session.onAppStart(true, new AppStartEvent.AppStartHandler() {
       @Override
@@ -398,7 +395,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.contacts.SimpleContactManager#addNewBuddy(java.lang
    * .String)
@@ -410,7 +407,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.contacts.SimpleContactManager#chat(java.lang.String)
    */
@@ -421,7 +418,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.chat.client.ChatClient#chat(com.calclab.emite.core.client.xmpp.
    * stanzas.XmppURI)
@@ -466,9 +463,6 @@ public class ChatClientDefault implements ChatClient {
       shorcutRegister.put(shortcut, action);
       action.setShortcut(shortcut);
       chatIcon.setVisible(session.isLogged());
-      ToolbarSeparatorDescriptor.build(Type.spacer, SitebarActions.LEFT_TOOLBAR);
-      ToolbarSeparatorDescriptor.build(Type.spacer, SitebarActions.LEFT_TOOLBAR);
-      ToolbarSeparatorDescriptor.build(Type.spacer, SitebarActions.LEFT_TOOLBAR);
     }
   }
 
@@ -518,7 +512,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#doLogin()
    */
   @Override
@@ -634,7 +628,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.contacts.SimpleContactManager#isBuddy(java.lang.String)
    */
@@ -645,7 +639,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.chat.client.ChatClient#isBuddy(com.calclab.emite.core.client.xmpp
    * .stanzas.XmppURI)
@@ -663,7 +657,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#isXmppLoggedIn()
    */
   @Override
@@ -673,7 +667,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#joinRoom(java.lang.String,
    * java.lang.String)
    */
@@ -684,7 +678,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#joinRoom(java.lang.String,
    * java.lang.String, java.lang.String)
    */
@@ -707,7 +701,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.chat.client.ChatClient#login(com.calclab.emite.core.client.xmpp
    * .stanzas.XmppURI, java.lang.String)
@@ -719,7 +713,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#loginIfNecessary()
    */
   @Override
@@ -733,7 +727,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#logout()
    */
   @Override
@@ -748,7 +742,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#roomUriFrom(java.lang.String)
    */
   @Override
@@ -758,7 +752,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#setAvatar(java.lang.String)
    */
   @Override
@@ -787,7 +781,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#show()
    */
   @Override
@@ -832,7 +826,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#uriFrom(java.lang.String)
    */
   @Override

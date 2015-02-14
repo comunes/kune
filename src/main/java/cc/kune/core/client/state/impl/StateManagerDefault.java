@@ -32,6 +32,7 @@ import cc.kune.common.client.actions.BeforeActionCollection;
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.shared.utils.Pair;
 import cc.kune.common.shared.utils.TextUtils;
@@ -65,6 +66,7 @@ import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -355,6 +357,10 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
               previousHash = history.getToken();
               history.newItem(currentToken, false);
               SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+            }
+            if (newState instanceof StateContentDTO) {
+              final StateContentDTO cnt = (StateContentDTO) newState;
+              NotifyUser.info(cnt.getWaveRef(), true);
             }
             andThen.finish();
           }

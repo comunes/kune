@@ -37,7 +37,7 @@ import com.google.gwt.user.client.ui.TextBoxBase;
 /**
  * This panel is used to search for users to add as a buddies or to add to
  * groups as collaborators.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class EntitySearchPanel {
@@ -77,7 +77,7 @@ public abstract class EntitySearchPanel {
 
   /**
    * Instantiates a new entity search panel.
-   * 
+   *
    * @param img
    *          the img
    * @param i18n
@@ -106,7 +106,7 @@ public abstract class EntitySearchPanel {
 
   /**
    * Creates the.
-   * 
+   *
    * @param id
    *          the id
    */
@@ -115,7 +115,7 @@ public abstract class EntitySearchPanel {
         i18n.t(searchOnlyUsers ? "Type the name of the user and select him/her:"
             : "Type the name of the user or group and select it:"), i18n.getDirection());
     final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, searchOnlyUsers, true, id,
-        callback);
+        false, callback);
     suggestBox = multivalueSBox.getSuggestBox();
     searchTextBox = suggestBox.getTextBox();
     dialog.getInnerPanel().add(multivalueSBox);
@@ -131,7 +131,7 @@ public abstract class EntitySearchPanel {
 
   /**
    * Gets the focus.
-   * 
+   *
    * @return the focus
    */
   public HasAllFocusHandlers getFocus() {
@@ -140,7 +140,7 @@ public abstract class EntitySearchPanel {
 
   /**
    * Gets the text box.
-   * 
+   *
    * @return the text box
    */
   public HasText getTextBox() {
@@ -149,7 +149,7 @@ public abstract class EntitySearchPanel {
 
   /**
    * Inits the.
-   * 
+   *
    * @param searchOnlyUsers
    *          the search only users
    * @param id
@@ -173,7 +173,7 @@ public abstract class EntitySearchPanel {
 
   /**
    * Sets the text search.
-   * 
+   *
    * @param text
    *          the new text search
    */

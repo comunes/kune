@@ -1,9 +1,6 @@
 package cc.kune.client;
 
-import cc.kune.barters.client.BartersParts;
-import cc.kune.blogs.client.BlogsParts;
 import cc.kune.bootstrap.client.BSGuiProvider;
-import cc.kune.chat.client.ChatParts;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.utils.MetaUtils;
@@ -18,15 +15,10 @@ import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.docs.client.DocsParts;
-import cc.kune.events.client.EventsParts;
 import cc.kune.gspace.client.GSpaceParts;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.hspace.client.HSpaceParts;
-import cc.kune.lists.client.ListsParts;
-import cc.kune.pspace.client.PSpaceParts;
-import cc.kune.tasks.client.TasksParts;
 import cc.kune.trash.client.TrashParts;
-import cc.kune.wiki.client.WikiParts;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
@@ -49,27 +41,32 @@ public class KuneBootstrapper implements Bootstrapper {
   private final SessionChecker sessionChecker;
 
   @Inject
-  public KuneBootstrapper(
-      final SessionChecker sessionChecker,
+  public KuneBootstrapper(final SessionChecker sessionChecker,
       final ContentViewerSelector contentViewerSelector,
       final GlobalShortcutRegister globalShortcutRegister,
       final SessionExpirationManager sessionExpirationManager,
-      final EventBusWithLogging eventBusWithLogging,
-      final ErrorsDialog errorsDialog,
-      final CorePresenter corePresenter,
-      final OnAppStartFactory onAppStartFactory,
+      final EventBusWithLogging eventBusWithLogging, final ErrorsDialog errorsDialog,
+      final CorePresenter corePresenter, final OnAppStartFactory onAppStartFactory,
 
       // Here you define the gui ui provider (gwt, gxt, bootstrap, polymer)
       final BSGuiProvider guiProvider,
       // GwtGuiProvider guiProvider
 
-      final DocsParts docs, final BlogsParts blogs, final WikiParts wiki, final EventsParts events,
-      final TasksParts tasks, final ListsParts lists, final ChatParts chats, final BartersParts barters,
+      final DocsParts docs,
+      /*
+       * final BlogsParts blogs, final WikiParts wiki, final EventsParts events,
+       * final TasksParts tasks, final ListsParts lists, final ChatParts chats,
+       * final BartersParts barters,
+       */
       final TrashParts trash,
 
       final SiteLogo siteLogo,
 
-      final CoreParts coreParts, final GSpaceParts gSpaceParts, final PSpaceParts pSpaceParts,
+      final CoreParts coreParts, final GSpaceParts gSpaceParts, /*
+                                                                 * final
+                                                                 * PSpaceParts
+                                                                 * pSpaceParts,
+                                                                 */
       final HSpaceParts hSpaceParts,
 
       final XMLActionsParser xmlActionsParser) {

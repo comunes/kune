@@ -57,14 +57,14 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ShareMenu> shareMenuContent, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(TOPBAR, all, optionsMenuContent, refresh);
-    add(TOOL_NAME, TOPBAR, newRoomBtn, TYPE_ROOT);
+    add(DOC_TOP_TOOLBAR, all, optionsMenuContent, refresh);
+    add(TOOL_NAME, DOC_TOP_TOOLBAR, newRoomBtn, TYPE_ROOT);
     add(BOTTOMBAR, containers, folderGoUp);
-    add(TOPBAR, all, tutorialBtn);
-    add(TOPBAR, containersNoRoot, openRoomBtn);
+    add(DOC_TOP_TOOLBAR, all, tutorialBtn);
+    add(DOC_TOP_TOOLBAR, containersNoRoot, openRoomBtn);
     add(ITEM_MENU, containersNoRoot, openRoomMenuItem, openRoomArchiveMenuItem);
-    add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, all, shareIHelper.getShareInAll());
+    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
+    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
   }
 
   @Override

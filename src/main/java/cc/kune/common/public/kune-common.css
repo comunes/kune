@@ -689,6 +689,7 @@ div.k-iconlabel {
 }
 
 /* End tabbar */
+
 .k-editableLabel {
   white-space: nowrap;
   padding: 3px
@@ -703,6 +704,14 @@ div.k-iconlabel {
   background-color: #FFFBC1;
   color: black !important;
 }
+
+.k-editableLabel-editing {
+    border: none;
+    outline: none;
+    padding: 0;
+    color: #808080;
+    margin: -14px 0 -16px 3px;
+} 
 
 .k-btn-min {
   min-width: 19px !important;

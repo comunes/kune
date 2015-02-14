@@ -34,14 +34,14 @@ import com.gwtplatform.mvp.client.View;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface AbstractFolderViewerView.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface AbstractFolderViewerView extends View {
 
   /**
    * Adds the item.
-   * 
+   *
    * @param item
    *          the item
    * @param clickHandler
@@ -74,7 +74,7 @@ public interface AbstractFolderViewerView extends View {
 
   /**
    * Gets the edits the title.
-   * 
+   *
    * @return the edits the title
    */
   HasEditHandler getEditTitle();
@@ -86,15 +86,25 @@ public interface AbstractFolderViewerView extends View {
 
   /**
    * Sets the container.
-   * 
+   *
    * @param state
    *          the new container
    */
   void setContainer(StateContainerDTO state);
 
+  void setDocHeaderActions(GuiActionDescCollection topHeaderActions);
+
+  /**
+   * Sets the subheader actions.
+   *
+   * @param actions
+   *          the new subheader actions
+   */
+  void setDocTopActions(GuiActionDescCollection actions);
+
   /**
    * Sets the editable title.
-   * 
+   *
    * @param title
    *          the new editable title
    */
@@ -102,23 +112,15 @@ public interface AbstractFolderViewerView extends View {
 
   /**
    * Sets the footer actions.
-   * 
+   *
    * @param actions
    *          the new footer actions
    */
   void setFooterActions(GuiActionDescCollection actions);
 
   /**
-   * Sets the subheader actions.
-   * 
-   * @param actions
-   *          the new subheader actions
-   */
-  void setSubheaderActions(GuiActionDescCollection actions);
-
-  /**
    * Show empty msg.
-   * 
+   *
    * @param message
    *          the message
    */

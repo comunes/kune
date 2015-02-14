@@ -22,10 +22,10 @@
  */
 package cc.kune.gspace.client.armor;
 
+import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.ui.HTMLId;
 import cc.kune.common.client.ui.WrappedFlowPanel;
-import cc.kune.gspace.client.maxmin.IsMaximizable;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.i18n.client.HasDirection.Direction;
@@ -40,7 +40,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public interface GSpaceArmor extends IsMaximizable {
+public interface GSpaceArmor {
 
   /**
    * Clear back image.
@@ -81,7 +81,7 @@ public interface GSpaceArmor extends IsMaximizable {
    *
    * @return the doc footer toolbar
    */
-  IsActionExtensible getDocFooterToolbar();
+  IsActionExtensible getDocFooterActionsToolbar();
 
   /**
    * Gets the doc header.
@@ -90,12 +90,16 @@ public interface GSpaceArmor extends IsMaximizable {
    */
   ForIsWidget getDocHeader();
 
+  IsActionExtensible getDocHeaderRightActionsToolbar();
+
+  ActionFlowPanel getDocTopActionsToolbar();
+
   /**
    * Gets the doc subheader.
    *
    * @return the doc subheader
    */
-  ForIsWidget getDocSubheader();
+  ForIsWidget getDocTopbar();
 
   Element getElement(HTMLId htmlId);
 
@@ -111,7 +115,7 @@ public interface GSpaceArmor extends IsMaximizable {
    *
    * @return the entity footer toolbar
    */
-  IsActionExtensible getEntityFooterToolbar();
+  IsActionExtensible getEntityFooterActionsToolbar();
 
   /**
    * Gets the entity header.
@@ -154,7 +158,9 @@ public interface GSpaceArmor extends IsMaximizable {
    *
    * @return the header toolbar
    */
-  IsActionExtensible getHeaderToolbar();
+  IsActionExtensible getHeaderActionsTopToolbar();
+
+  ForIsWidget getHeaderBottombar();
 
   /**
    * Gets the home space.
@@ -189,18 +195,13 @@ public interface GSpaceArmor extends IsMaximizable {
   ForIsWidget getSitebarRight();
 
   /**
-   * Gets the subheader toolbar.
-   *
-   * @return the subheader toolbar
-   */
-  IsActionExtensible getSubheaderToolbar();
-
-  /**
    * Gets the tools south toolbar.
    *
    * @return the tools south toolbar
    */
-  IsActionExtensible getToolsSouthToolbar();
+  IsActionExtensible getToolsSouthActionsToolbar();
+
+  IsActionExtensible getTopActionsToolbar();
 
   /**
    * Gets the user space.
@@ -246,4 +247,5 @@ public interface GSpaceArmor extends IsMaximizable {
   void setRTL(Direction direction);
 
   WrappedFlowPanel wrapDiv(HTMLId htmlId);
+
 }

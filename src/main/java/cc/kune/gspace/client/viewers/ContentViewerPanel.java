@@ -41,23 +41,23 @@ import cc.kune.wave.client.kspecific.WaveClientProvider;
 import cc.kune.wave.client.kspecific.WaveClientUtils;
 
 import com.google.gwt.core.client.GWT;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * The Class ContentViewerPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentViewerPanel extends WaveViewerPanel implements ContentViewerView {
 
   /**
    * The Interface ContentViewerPanelUiBinder.
-   * 
+   *
    */
   interface ContentViewerPanelUiBinder extends UiBinder<Widget, ContentViewerPanel> {
   }
@@ -83,7 +83,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /**
    * Instantiates a new content viewer panel.
-   * 
+   *
    * @param wsArmor
    *          the ws armor
    * @param waveClient
@@ -120,7 +120,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -130,7 +130,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * attach()
@@ -144,7 +144,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * blinkTitle()
@@ -156,15 +156,16 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * clear()
    */
   @Override
   public void clear() {
-    gsArmor.getSubheaderToolbar().clear();
-    gsArmor.getDocFooterToolbar().clear();
+    gsArmor.getDocHeaderRightActionsToolbar().clear();
+    gsArmor.getTopActionsToolbar().clear();
+    gsArmor.getDocFooterActionsToolbar().clear();
     gsArmor.getDocContainer().clear();
     UiUtils.clear(gsArmor.getDocHeader());
     super.clear();
@@ -172,7 +173,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * detach()
@@ -184,7 +185,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * getEditTitle()
@@ -216,7 +217,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setContent(cc.kune.core.shared.dto.StateContentDTO)
@@ -232,16 +233,34 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
     super.setContent(state);
   }
 
+  @Override
+  public void setDocHeaderActions(final GuiActionDescCollection docHeaderActions) {
+    setToolbarActions(docHeaderActions, gsArmor.getDocHeaderRightActionsToolbar());
+  }
+
   /*
    * (non-Javadoc)
-   * 
+   *
+   * @see
+   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
+   * setSubheaderActions
+   * (cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+   */
+  @Override
+  public void setDocTopToolbarActions(final GuiActionDescCollection actions) {
+    setToolbarActions(actions, gsArmor.getDocTopActionsToolbar());
+  }
+
+  /*
+   * (non-Javadoc)
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setEditableContent(cc.kune.core.shared.dto.StateContentDTO)
    */
   @Override
   public void setEditableContent(final StateContentDTO state) {
-    gsArmor.enableCenterScroll(false);
+    gsArmor.enableCenterScroll(true);
     dropController.setTarget(state.getStateToken());
     setTitle(state, true);
     super.setEditableContent(state);
@@ -249,7 +268,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setEditableTitle(java.lang.String)
@@ -261,7 +280,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /**
    * Sets the editable wave content.
-   * 
+   *
    * @param waveRefS
    *          the wave ref s
    * @param isNewWave
@@ -274,7 +293,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setFooterActions
@@ -282,25 +301,12 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
    */
   @Override
   public void setFooterActions(final GuiActionDescCollection actions) {
-    setToolbarActions(actions, gsArmor.getDocFooterToolbar());
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
-   * setSubheaderActions
-   * (cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
-   */
-  @Override
-  public void setSubheaderActions(final GuiActionDescCollection actions) {
-    setToolbarActions(actions, gsArmor.getSubheaderToolbar());
+    setToolbarActions(actions, gsArmor.getDocFooterActionsToolbar());
   }
 
   /**
    * Sets the title.
-   * 
+   *
    * @param state
    *          the state
    * @param editable
@@ -314,7 +320,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /**
    * Sets the toolbar actions.
-   * 
+   *
    * @param actions
    *          the actions
    * @param toolbar
@@ -327,7 +333,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * signIn()
@@ -340,7 +346,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * signOut()

@@ -33,13 +33,19 @@ import cc.kune.common.client.ui.HTMLId;
 public enum PolymerId implements HTMLId {
   /* @formatter:off */
 
+  CHAT_SITEBAR_ICON_GROUP("sitebar_chat_icon_group"),
   DOC_CONTENT("doc_content"),
-  DOC_HEADER("doc_hor_end"),
+  DOC_CONTENT_SECTION("doc_content_section"),
+  DOC_HEADER_LEFT_EXTENSIONBAR("doc_header_left_extensionbar"),
+  DOC_HEADER_RIGHT_EXTENSIONBAR("doc_header_right_extensionbar"),
   DOC_TOOLBAR_EXTENSION("doc_toolbar_extension"),
   DOCUMENT_NAME("document_name"),
   GROUP_ENTITY_TOOLBAR("k_group_entity_toolbar"),
   GROUP_FOLLOWERS("group_followers"),
   GROUP_SPACE("group_space"),
+  GROUP_SPACE_ICON("group_space_icon"),
+  GROUP_TOOLS_TOOLBAR("group_tools_toolbar"),
+  HEADER_BOTTOMBAR("header_bottom_extensionbar"),
   HEADER_CORE_TOOLBAR("header_core_toolbar"),
   HEADER_GROUP_LOGO("header_group_logo"),
   HEADER_GROUP_NAME("header_group_name"),
@@ -51,14 +57,20 @@ public enum PolymerId implements HTMLId {
   HOME_GROUP_STATS("k-home-group-stats"),
   HOME_SPACE_ICON("home_space_icon"),
   HOME_TOOLBAR("k_home_toolbar"),
+  INBOX_NEW_MESSAGE("inbox_new_message"),
+  INBOX_RESULT("inbox_result"),
+  INBOX_SHOW_HIDE("inbox_show_hide"),
+  INBOX_SITEBAR_ICON_GROUP("sitebar_user_space_icon_group"),
   KUNE_TEMPLATE("kunetemplate"),
   MIGA("miga"),
   SITE_BOTTOMBAR("site_bottombar"),
   SITEBAR_LEFT_EXTENSIONBAR("sitebar_left_extensionbar"),
   SITEBAR_RIGHT_EXTENSIONBAR("sitebar_right_extensionbar"),
+  SITEBAR_SEARCH_ICON("sitebar_search_icon"),
+  SITEBAR_SEARCH_INPUT("sitebar_search_input"),
   SPACE_SELECTOR("space_selector_paper_tabs"),
-  USER_SPACE("user_space");
-
+  USER_SPACE("user_space"),
+  USER_SPACE_ICON("user_space_icon");
   /* @formatter:on */
 
   private final String id;

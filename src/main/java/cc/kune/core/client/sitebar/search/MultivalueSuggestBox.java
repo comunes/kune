@@ -64,6 +64,7 @@ import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONObject;
 import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONValue;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -81,15 +82,15 @@ import com.google.gwt.user.client.ui.TextBoxBase;
 /**
  * A SuggestBox that uses REST and allows for multiple values, autocomplete and
  * browsing.
- * 
+ *
  * @author Bess Siegal <bsiegal@novell.com>
  */
 public class MultivalueSuggestBox extends Composite implements SelectionHandler<Suggestion>, Focusable,
-    KeyUpHandler {
+KeyUpHandler {
 
   /**
    * Bean for name-value pairs.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   private class Option {
@@ -162,7 +163,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Constructor. Must pass in the total size.
-     * 
+     *
      * @param totalSize
      *          the total size of the template
      */
@@ -172,7 +173,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Add an option
-     * 
+     *
      * @param option
      *          - the Option to add
      */
@@ -216,7 +217,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Constructor for navigation options
-     * 
+     *
      * @param nav
      *          - next or previous value
      * @param currentTextValue
@@ -234,7 +235,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Constructor for regular options
-     * 
+     *
      * @param displ
      *          - the name of the option
      * @param val
@@ -268,7 +269,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     /**
      * Get the name of the option. (when not multivalued, this will be the same
      * as getReplacementString)
-     * 
+     *
      * @return name
      */
     public String getName() {
@@ -282,7 +283,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
     /**
      * Get the value of the option
-     * 
+     *
      * @return value
      */
     public String getValue() {
@@ -296,8 +297,8 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   private class RestSuggestCallback extends OptionQueryCallback {
     private final SuggestOracle.Callback m_callback;
     private final String m_query; // this may be different from
-                                  // m_request.getQuery when multivalued it's
-                                  // only the substring after the last delimiter
+    // m_request.getQuery when multivalued it's
+    // only the substring after the last delimiter
     private final SuggestOracle.Request m_request;
 
     RestSuggestCallback(final Request request, final Callback callback, final String query) {
@@ -470,7 +471,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   /**
    * Returns a String without the last delimiter
-   * 
+   *
    * @param str
    *          - String to trim
    * @param delim
@@ -478,11 +479,11 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
    * @return the String without the last delimter
    */
   private static String trimLastDelimiter(String str, final String delim) { // NOPMD
-                                                                            // by
-                                                                            // vjrj
-                                                                            // on
-                                                                            // 4/05/11
-                                                                            // 19:46
+    // by
+    // vjrj
+    // on
+    // 4/05/11
+    // 19:46
     if (str.length() > 0) {
       str = str.substring(0, str.length() - delim.length());
     }
@@ -516,9 +517,9 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   /**
    * Constructor.
-   * 
+   *
    * @param i18n
-   * 
+   *
    * @param the
    *          URL for the REST endpoint. This URL should accept the parameters q
    *          (for query), indexFrom and indexTo
@@ -528,9 +529,12 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
    * @param showNoResult
    *          if we have to show noResult message when the search is empty or
    *          not
+   * @param wrap
+   * @param id
    */
   public MultivalueSuggestBox(final I18nTranslationService i18n, final boolean showNoResult,
-      final String restEndpointUrl, final boolean isMultivalued, final OnExactMatch onExactMatch) {
+      final String restEndpointUrl, final boolean isMultivalued, final String id, final boolean wrap,
+      final OnExactMatch onExactMatch) {
     this.i18n = i18n;
     this.showNoResult = showNoResult;
     mrestEndpointUrl = restEndpointUrl;
@@ -550,7 +554,13 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     // Create our own SuggestOracle that queries REST endpoint
     final SuggestOracle oracle = new RestSuggestOracle();
     // intialize the SuggestBox
-    mfield = new SuggestBox(oracle, textfield);
+
+    if (wrap) {
+      mfield = SuggestBox.wrap(oracle, DOM.getElementById(id));
+      Log.info("Textbox with id: " + id + " wrapped.");
+    } else {
+      mfield = new SuggestBox(oracle, textfield);
+    }
     if (isMultivalued) {
       // have to do this here b/c gwt suggest box wipes
       // style name if added in previous if
@@ -582,84 +592,84 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
     updateFormFeedback(FormFeedback.LOADING, null);
 
     queryOptions(displayValue, 0, FIND_EXACT_MATCH_QUERY_LIMIT, // return a
-                                                                // relatively
-                                                                // small amount
-                                                                // in case
-                                                                // wanted "Red"
-                                                                // and
-                                                                // "Brick Red"
-                                                                // is the first
-                                                                // thing
-                                                                // returned
+        // relatively
+        // small amount
+        // in case
+        // wanted "Red"
+        // and
+        // "Brick Red"
+        // is the first
+        // thing
+        // returned
         new OptionQueryCallback() {
 
-          @Override
-          public void error(final Throwable exception) {
-            // an exact match couldn't be found, just increment not found
-            mfindExactMatchesNot.add(displayValue);
-            finalizeFindExactMatches();
-          }
+      @Override
+      public void error(final Throwable exception) {
+        // an exact match couldn't be found, just increment not found
+        mfindExactMatchesNot.add(displayValue);
+        finalizeFindExactMatches();
+      }
 
-          private void extactMatchFound(final int position, final Option option) {
-            putValue(option.getName(), option.getValue());
-            Log.info("extactMatchFound ! exact match found for displ = " + displayValue);
+      private void extactMatchFound(final int position, final Option option) {
+        putValue(option.getName(), option.getValue());
+        Log.info("extactMatchFound ! exact match found for displ = " + displayValue);
 
-            // onExactMatch.onExactMatch(option.getValue());
-            // and replace the text
-            final String text = mfield.getText();
-            final String[] keys = text.split(DISPLAY_SEPARATOR.trim());
-            keys[position] = option.getName();
+        // onExactMatch.onExactMatch(option.getValue());
+        // and replace the text
+        final String text = mfield.getText();
+        final String[] keys = text.split(DISPLAY_SEPARATOR.trim());
+        keys[position] = option.getName();
+        String join = "";
+        for (final String n : keys) {
+          join += n.trim() + DISPLAY_SEPARATOR;
+        }
+        join = trimLastDelimiter(join, DISPLAY_SEPARATOR);
+        // Commented mfield.setText(join);
+
+        mfindExactMatchesFound++;
+      }
+
+      private void finalizeFindExactMatches() {
+        if (mfindExactMatchesFound + mfindExactMatchesNot.size() == mfindExactMatchesTotal) {
+          // when the found + not = total, we're done
+          if (mfindExactMatchesNot.size() > 0) {
             String join = "";
-            for (final String n : keys) {
-              join += n.trim() + DISPLAY_SEPARATOR;
+            for (final String val : mfindExactMatchesNot) {
+              join += val.trim() + DISPLAY_SEPARATOR;
             }
             join = trimLastDelimiter(join, DISPLAY_SEPARATOR);
-            // Commented mfield.setText(join);
-
-            mfindExactMatchesFound++;
+            updateFormFeedback(FormFeedback.ERROR, "Invalid:" + join);
+          } else {
+            updateFormFeedback(FormFeedback.VALID, null);
           }
+        }
+      }
 
-          private void finalizeFindExactMatches() {
-            if (mfindExactMatchesFound + mfindExactMatchesNot.size() == mfindExactMatchesTotal) {
-              // when the found + not = total, we're done
-              if (mfindExactMatchesNot.size() > 0) {
-                String join = "";
-                for (final String val : mfindExactMatchesNot) {
-                  join += val.trim() + DISPLAY_SEPARATOR;
-                }
-                join = trimLastDelimiter(join, DISPLAY_SEPARATOR);
-                updateFormFeedback(FormFeedback.ERROR, "Invalid:" + join);
-              } else {
-                updateFormFeedback(FormFeedback.VALID, null);
-              }
-            }
-          }
-
-          @Override
-          public void success(final OptionResultSet optResults) {
-            final int totSize = optResults.getTotalSize();
-            if (totSize == 1) {
-              // an exact match was found, so place it in the value map
-              final Option option = optResults.getOptions()[0];
+      @Override
+      public void success(final OptionResultSet optResults) {
+        final int totSize = optResults.getTotalSize();
+        if (totSize == 1) {
+          // an exact match was found, so place it in the value map
+          final Option option = optResults.getOptions()[0];
+          extactMatchFound(position, option);
+        } else {
+          // try to find the exact matches within the results
+          boolean found = false;
+          for (final Option option : optResults.getOptions()) {
+            if (displayValue.equalsIgnoreCase(option.getName())) {
               extactMatchFound(position, option);
-            } else {
-              // try to find the exact matches within the results
-              boolean found = false;
-              for (final Option option : optResults.getOptions()) {
-                if (displayValue.equalsIgnoreCase(option.getName())) {
-                  extactMatchFound(position, option);
-                  found = true;
-                  break;
-                }
-              }
-              if (!found) {
-                mfindExactMatchesNot.add(displayValue);
-                Log.info("RestExactMatchCallback -- exact match not found for displ = " + displayValue);
-              }
+              found = true;
+              break;
             }
-            finalizeFindExactMatches();
           }
-        });
+          if (!found) {
+            mfindExactMatchesNot.add(displayValue);
+            Log.info("RestExactMatchCallback -- exact match not found for displ = " + displayValue);
+          }
+        }
+        finalizeFindExactMatches();
+      }
+    });
   }
 
   /**
@@ -707,11 +717,11 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   }
 
   private String getFullReplaceText(final String displ, String replacePre) { // NOPMD
-                                                                             // by
-                                                                             // vjrj
-                                                                             // on
-                                                                             // 4/05/11
-                                                                             // 19:45
+    // by
+    // vjrj
+    // on
+    // 4/05/11
+    // 19:45
     // replace the last bit after the last comma
     if (replacePre.lastIndexOf(DISPLAY_SEPARATOR) > 0) {
       replacePre = replacePre.substring(0, replacePre.lastIndexOf(DISPLAY_SEPARATOR))
@@ -739,7 +749,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   /**
    * Get the value(s) as a String. If allowing multivalues, separated by the
    * VALUE_DELIM
-   * 
+   *
    * @return value(s) as a String
    */
   public String getValue() {
@@ -784,7 +794,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   /**
    * Get the value map
-   * 
+   *
    * @return value map
    */
   public Map<String, String> getValueMap() {
@@ -845,7 +855,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
   /**
    * Retrieve Options (name-value pairs) that are suggested from the REST
    * endpoint
-   * 
+   *
    * @param query
    *          - the String search term
    * @param from
@@ -948,7 +958,7 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
 
   /**
    * Convenience method to set the status and tooltip of the FormFeedback
-   * 
+   *
    * @param status
    *          - a FormFeedback status
    * @param tooltip
@@ -973,9 +983,9 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
       }.schedule(1500);
       // textBox.setEnabled(true);
       textBox.setFocus(false); // Blur then focus b/c of a strange problem with
-                               // the cursor or selection highlights no longer
-                               // visible within the textfield (this is a
-                               // workaround)
+      // the cursor or selection highlights no longer
+      // visible within the textfield (this is a
+      // workaround)
       textBox.setFocus(true);
     }
   }

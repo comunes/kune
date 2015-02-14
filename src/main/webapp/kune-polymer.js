@@ -4,8 +4,16 @@ kt.toggle_social_net = function() {
   document.querySelector('#core_drawer_group_header').togglePanel();
 }
 
-/* The initial space (0: for home, 1: for group space) useful during tests */
-kt.spaceselected=2;
+window.onresize = function(event) {
+  setContentMinHeight(); 
+};
+
+function setContentMinHeight() {
+  kt.docContentMinHeight = (document.documentElement.clientHeight - 350);  
+}
+
+/* The initial space (0: for home, 2: for group space) useful during tests */
+kt.spaceselected=0;
 
 /* Screen sizes (inspired in bootstrap) */
 kt.screenlg=1200;
@@ -27,6 +35,15 @@ kt.avatarsizes=50;
 kt.homebackcolor='rgb(255, 204, 170)';
 kt.group_back_image_url='http://lorempixel.com/1500/1500';
 kt.showingSearch=false;
+
+kt.main_forcenarrow=true;
+kt.main_disableEdgeSwipe=true;
+kt.main_disableSwipe=true;
+
+setContentMinHeight();
+
+/* user for testing */
+kt.red="red";
 
 function toggleVis(id) {
   el = document.querySelector(id);
@@ -61,13 +78,3 @@ kt.toggleSearch = function(e,detail,sender) {
     document.querySelector('#sitebar_search_input').focus()
   })
 };
-
-kt.onKeyPressSearch = function(e,detail,sender){
-  if(e.keyCode==13) {
-    if(sender.value) {
-      // recordSearch(sender.value);
-      var q="site:kune.cc+"+sender.value;
-      window.open("https://www.google.com/search?q="+q)
-    }
-  }
-}

@@ -22,7 +22,7 @@
  */
 package cc.kune.trash.client.actions;
 
-import static cc.kune.gspace.client.actions.ActionGroups.TOPBAR;
+import static cc.kune.gspace.client.actions.ActionGroups.DOC_TOP_TOOLBAR;
 import static cc.kune.trash.shared.TrashToolConstants.TOOL_NAME;
 import static cc.kune.trash.shared.TrashToolConstants.TYPE_ROOT;
 import cc.kune.chat.client.actions.GoParentChatBtn;
@@ -49,9 +49,9 @@ public class TrashClientActions extends AbstractFoldableToolActions {
       final Provider<GoParentChatBtn> folderGoUp, final Provider<EmptyTrashBinBtn> emptyTrashBin,
       final Provider<ContentViewerOptionsMenu> optionsMenuContent) {
     super(TOOL_NAME, session, registry);
-    add(TOPBAR, all, optionsMenuContent);
-    add(TOPBAR, all, refresh);
-    add(TOOL_NAME, TOPBAR, emptyTrashBin, TYPE_ROOT);
+    add(DOC_TOP_TOOLBAR, all, optionsMenuContent);
+    add(DOC_TOP_TOOLBAR, all, refresh);
+    add(TOOL_NAME, DOC_TOP_TOOLBAR, emptyTrashBin, TYPE_ROOT);
   }
 
   @Override

@@ -26,7 +26,7 @@ package cc.kune.gspace.client.actions;
 /**
  * A group of actions that must be grouped and showed in some perspective (on
  * edit, etc).
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class ActionGroups {
@@ -37,14 +37,17 @@ public final class ActionGroups {
    */
   public final static String BOTTOMBAR = "bottombar";
 
+  /** The Constant TOPBAR identifies actions in the top bar, above the content. */
+  public final static String DOC_HEADER_BAR = "doc_topbar";
+
+  public final static String ENTITY_DOC_HEADER = "doc_header";
+  public final static String DOC_TOP_TOOLBAR = "entity_bottombar";
+
   /**
    * The Constant ITEM_MENU identifies actions in the menu of each item of a
    * folder list.
    */
   public final static String ITEM_MENU = "menu-item";
-
-  /** The Constant TOPBAR identifies actions in the top bar, above the content. */
-  public final static String TOPBAR = "topbar";
 
   /**
    * Instantiates a new action groups.

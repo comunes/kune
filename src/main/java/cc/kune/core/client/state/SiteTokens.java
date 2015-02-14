@@ -29,7 +29,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * Some common history tokens like {@link #SIGN_IN} and {@link #NEW_GROUP}.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SiteTokens {
@@ -48,6 +48,8 @@ public final class SiteTokens {
 
   /** The Constant HOME. */
   public final static String HOME = "";
+
+  public final static String INBOX = "inbox";
 
   /** The Constant INVITATION. */
   public final static String INVITATION = "invitation";
@@ -81,13 +83,12 @@ public final class SiteTokens {
 
   /** The Constant VERIFY_EMAIL. */
   public final static String VERIFY_EMAIL = "verifyemail";
-
   /** The Constant WAVE_INBOX. */
-  public final static String WAVE_INBOX = "inbox";
+  public final static String WAVE_INBOX = INBOX;
 
   /**
    * Instantiates a new site tokens.
-   * 
+   *
    * @param reserverdWords
    *          the reserverd words
    */

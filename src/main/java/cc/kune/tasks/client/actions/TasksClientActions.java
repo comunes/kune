@@ -92,23 +92,23 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final Provider<ShareDialogMenuItem> shareSettings, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(TOPBAR, all, optionsMenuContent);
-    add(TOPBAR, all, refresh);
-    add(TOPBAR, all, newTaskIconBtn);
+    add(DOC_TOP_TOOLBAR, all, optionsMenuContent);
+    add(DOC_TOP_TOOLBAR, all, refresh);
+    add(DOC_TOP_TOOLBAR, all, newTaskIconBtn);
     // add(NAME, TOOLBAR, taskFolderNewMenu,
     // containers);
-    add(TOPBAR, contents, taskNewMenu);
-    add(TOPBAR, containers, newFolderBtn);
+    add(DOC_TOP_TOOLBAR, contents, taskNewMenu);
+    add(DOC_TOP_TOOLBAR, containers, newFolderBtn);
     // add(NAME, TOOLBAR, newTaskItem,
     // containers);
     add(BOTTOMBAR, contents, folderGoUp);
     add(BOTTOMBAR, containers, folderGoUp);
-    add(TOPBAR, all, tutorialBtn);
-    add(TOPBAR, all, shareMenuContent);
-    add(TOPBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(TOPBAR, contents, shareIHelper.getShareInWaves());
-    add(TOPBAR, all, shareIHelper.getShareInAll());
-    add(TOPBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(DOC_TOP_TOOLBAR, all, tutorialBtn);
+    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
+    add(DOC_TOP_TOOLBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(DOC_TOP_TOOLBAR, contents, shareIHelper.getShareInWaves());
+    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
+    add(DOC_TOP_TOOLBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem);
     add(TOOL_NAME, ITEM_MENU, marksAsDoneMenuItem, ContentStatus.publishedOnline, TYPE_TASK);
@@ -117,8 +117,8 @@ public class TasksClientActions extends AbstractFoldableToolActions {
     add(ITEM_MENU, containersNoRoot, delFolderMenuItem);
     add(ITEM_MENU, contents, delContentMenuItem, addAllMenuItem, addAdminMembersMenuItem,
         addCollabMembersMenuItem, copyContent, writeToParticipants);
-    add(TrashToolConstants.TOOL_NAME, TOPBAR, contents, purgeBtn);
-    add(TrashToolConstants.TOOL_NAME, TOPBAR, containersNoRoot, purgeFolderBtn);
+    add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, contents, purgeBtn);
+    add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, containersNoRoot, purgeFolderBtn);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, contents, purgeMenuItem, moveContentMenuItem);
     add(TrashToolConstants.TOOL_NAME, ITEM_MENU, containersNoRoot, purgeFolderMenuItem,
         moveContentMenuItem);

@@ -38,7 +38,6 @@ import cc.kune.gspace.client.i18n.I18nToTranslateGridPanel;
 import cc.kune.gspace.client.i18n.I18nTranslator;
 import cc.kune.gspace.client.i18n.I18nTranslatorTabsCollection;
 import cc.kune.gspace.client.i18n.SiteOptionsI18nTranslatorAction;
-import cc.kune.gspace.client.maxmin.MaxMinWorkspace;
 import cc.kune.gspace.client.options.GroupOptions;
 import cc.kune.gspace.client.options.UserOptions;
 import cc.kune.gspace.client.tags.TagsSummaryPresenter;
@@ -55,14 +54,14 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceParts.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceParts {
 
   /**
    * Instantiates a new g space parts.
-   * 
+   *
    * @param session
    *          the session
    * @param themeManager
@@ -114,7 +113,6 @@ public class GSpaceParts {
       final Provider<FolderViewerPresenter> folderViewer, final Provider<GroupOptions> go,
       final Provider<UserOptions> uo, final Provider<SitebarSearchPresenter> siteSearch,
       final Provider<SiteOptionsI18nTranslatorAction> transAction,
-      final Provider<MaxMinWorkspace> maxMinWorkspace,
       final Provider<FeedbackBottomPanel> feedbackPanel,
       final Provider<I18nToTranslateGridPanel> toTrans,
       final Provider<I18nTranslatorTabsCollection> gtranslator,
@@ -132,7 +130,6 @@ public class GSpaceParts {
         folderViewer.get();
         siteSearch.get();
         noHome.get();
-        maxMinWorkspace.get();
 
         // // Add User & Groups Options
         // final GroupOptionsCollection goc = gocProv.get();

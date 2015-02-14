@@ -2,9 +2,9 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
   xmlns:g="urn:import:com.google.gwt.user.client.ui">
   <ui:style>
-    .padl {
-      padding-left: 5px;
-    }
+  .padl {
+    padding-left: 5px;
+  }
   </ui:style>
   <g:FlowPanel>
     <g:FlowPanel ui:field="globalStats">
@@ -20,11 +20,7 @@
           styleName="k-home-normal-text"/>
         <g:InlineLabel ui:field="globalStatsTotalUsersCount"
           addStyleNames="{style.padl} k-home-em-text"/>
-      </g:FlowPanel>
-      <g:FlowPanel>
-      <g:Hyperlink ui:field="unreadInYourInbox"
-          addStyleNames="k-home-group-inbox-link k-home-normal-text"/>
-          </g:FlowPanel>
+      </g:FlowPanel>      
     </g:FlowPanel>
     <g:FlowPanel ui:field="lastGroupsPanel">
       <g:Label ui:field="lastGroupsTitle" styleName="k-home-title"/>

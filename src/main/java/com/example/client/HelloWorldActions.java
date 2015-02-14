@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -37,21 +37,21 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class HelloWorldActions.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HelloWorldActions {
 
   /**
    * The Class HelloWorldAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class HelloWorldAction extends AbstractExtendedAction {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -65,7 +65,7 @@ public class HelloWorldActions {
 
   /**
    * Instantiates a new hello world actions.
-   * 
+   *
    * @param res
    *          the res
    * @param siteUserOptions
@@ -81,7 +81,7 @@ public class HelloWorldActions {
     // An action in the sitebar
     final ButtonDescriptor siteBarBtn = new ButtonDescriptor(sharedAction);
     siteBarBtn.withText("HWorld!").withIcon(res.info());
-    siteBarBtn.setParent(SitebarActions.LEFT_TOOLBAR);
+    siteBarBtn.setParent(SitebarActions.RIGHT_TOOLBAR);
     siteBarBtn.setStyles(ActionStyles.SITEBAR_STYLE);
     // Other action in the sitebar options menu
 

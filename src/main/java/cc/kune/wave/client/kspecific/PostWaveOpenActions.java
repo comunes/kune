@@ -24,50 +24,57 @@
 package cc.kune.wave.client.kspecific;
 
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
-import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
+import cc.kune.common.client.log.Log;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.ContainerSimpleDTO;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.gspace.client.viewers.PathToolbarUtils;
+import cc.kune.polymer.client.PolymerUtils;
 
-import com.google.web.bindery.event.shared.EventBus;
+import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * The Class PostWaveOpenActions.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PostWaveOpenActions {
 
   private final ActionFlowPanel bottomToolbar;
   private final ContentServiceAsync contentService;
-  private final PathToolbarUtils pathToolbaUtils;
+  private final EventBus eventBus;
   private final Session session;
+  private final StateManager stateManager;
+  private final Timer timer;
   private WaveClientView webClient;
 
   @Inject
   public PostWaveOpenActions(final EventBus eventBus, final ContentServiceAsync contentService,
-      final Session session, final PathToolbarUtils pathToolbaUtils, final ActionFlowPanel bottomToolbar) {
+      final Session session, final ActionFlowPanel bottomToolbar, final StateManager stateManager) {
+    this.eventBus = eventBus;
     this.contentService = contentService;
     this.session = session;
-    this.pathToolbaUtils = pathToolbaUtils;
+    // Not used now
     this.bottomToolbar = bottomToolbar;
+    this.stateManager = stateManager;
     eventBus.addHandler(OnWaveClientStartEvent.getType(),
         new OnWaveClientStartEvent.OnWaveClientStartHandler() {
-          @Override
-          public void onOnWaveClientStart(final OnWaveClientStartEvent event) {
-            webClient = event.getView();
-            webClient.addToBottonBar(bottomToolbar);
-          }
-        });
+      @Override
+      public void onOnWaveClientStart(final OnWaveClientStartEvent event) {
+        webClient = event.getView();
+        webClient.addToBottonBar(bottomToolbar);
+      }
+    });
     eventBus.addHandler(BeforeOpenWaveEvent.getType(), new BeforeOpenWaveEvent.BeforeOpenWaveHandler() {
       @Override
       public void onBeforeOpenWave(final BeforeOpenWaveEvent event) {
-        beforeWaveOpen();
+        beforeWaveOpen(event.getWaveId());
       }
     });
     eventBus.addHandler(AfterOpenWaveEvent.getType(), new AfterOpenWaveEvent.AfterOpenWaveHandler() {
@@ -76,9 +83,16 @@ public class PostWaveOpenActions {
         afterWaveOpen(event.getWaveId());
       }
     });
+    timer = new Timer() {
+      @Override
+      public void run() {
+        PolymerUtils.setMainSelected();
+      }
+    };
   }
 
   private void afterWaveOpen(final String waveUri) {
+    Log.info("After open wave: " + waveUri);
 
     contentService.getContentByWaveRef(session.getUserHash(), waveUri,
         new AsyncCallbackSimple<StateAbstractDTO>() {
@@ -86,21 +100,24 @@ public class PostWaveOpenActions {
           public void onSuccess(final StateAbstractDTO result) {
             if (result instanceof StateContentDTO) {
               final StateContentDTO state = (StateContentDTO) result;
-              final ContainerSimpleDTO doc = new ContainerSimpleDTO(state.getTitle(),
-                  state.getContainer().getStateToken(), state.getStateToken(), state.getTypeId());
-              final GuiActionDescCollection actions = pathToolbaUtils.createPath(state.getGroup(),
-                  state.getContainer(), false, true, doc);
-              bottomToolbar.addAll(actions);
-              webClient.showBottomToolbar();
+              stateManager.setRetrievedStateAndGo(state);
+              SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+              timer.schedule(4000);
+              // webClient.showBottomToolbar();
             } else {
-              webClient.hideBottomToolbar();
+              // webClient.hideBottomToolbar();
+              SpaceSelectEvent.fire(eventBus, Space.userSpace);
+              if (PolymerUtils.isXSmall() && PolymerUtils.getMainSelected().equals("drawer")) {
+                PolymerUtils.setMainSelected();
+              }
             }
           }
         });
   }
 
-  private void beforeWaveOpen() {
+  private void beforeWaveOpen(final String waveUri) {
     bottomToolbar.clear();
+    Log.info("Before open wave: " + waveUri);
   }
 
 }

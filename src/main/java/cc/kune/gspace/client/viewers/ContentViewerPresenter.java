@@ -48,10 +48,10 @@ import cc.kune.gspace.client.actions.RenameListener;
 import cc.kune.gspace.client.tool.ContentViewer;
 import cc.kune.wave.client.kspecific.WaveClientManager;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
@@ -61,7 +61,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentViewerPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentViewerPresenter extends
@@ -70,7 +70,7 @@ public class ContentViewerPresenter extends
 
   /**
    * The Interface ContentViewerProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -79,7 +79,7 @@ public class ContentViewerPresenter extends
 
   /**
    * The Interface ContentViewerView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface ContentViewerView extends View {
@@ -106,22 +106,24 @@ public class ContentViewerPresenter extends
 
     /**
      * Gets the edits the title.
-     * 
+     *
      * @return the edits the title
      */
     HasEditHandler getEditTitle();
 
     /**
      * Sets the content.
-     * 
+     *
      * @param state
      *          the new content
      */
     void setContent(StateContentDTO state);
 
+    void setDocHeaderActions(GuiActionDescCollection headerBottomActions);
+
     /**
      * Sets the editable content.
-     * 
+     *
      * @param state
      *          the new editable content
      */
@@ -129,7 +131,7 @@ public class ContentViewerPresenter extends
 
     /**
      * Sets the editable title.
-     * 
+     *
      * @param title
      *          the new editable title
      */
@@ -137,7 +139,7 @@ public class ContentViewerPresenter extends
 
     /**
      * Sets the footer actions.
-     * 
+     *
      * @param actions
      *          the new footer actions
      */
@@ -145,11 +147,11 @@ public class ContentViewerPresenter extends
 
     /**
      * Sets the subheader actions.
-     * 
+     *
      * @param actions
      *          the new subheader actions
      */
-    void setSubheaderActions(GuiActionDescCollection actions);
+    void setDocTopToolbarActions(GuiActionDescCollection actions);
 
     /**
      * Sign in.
@@ -180,7 +182,7 @@ public class ContentViewerPresenter extends
 
   /**
    * Instantiates a new content viewer presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -329,16 +331,20 @@ public class ContentViewerPresenter extends
         throw new UIException("Unexpected status in Viewer");
       }
     }
-    final GuiActionDescCollection topActions = actionsRegistry.getCurrentActions(
+    final GuiActionDescCollection docTopToolbarActions = actionsRegistry.getCurrentActions(
         stateContent.getToolName(), stateContent.getGroup(), stateContent.getTypeId(),
-        session.isLogged(), rights, ActionGroups.TOPBAR);
+        session.isLogged(), rights, ActionGroups.DOC_TOP_TOOLBAR);
+    final GuiActionDescCollection docHeaderActions = actionsRegistry.getCurrentActions(
+        stateContent.getToolName(), stateContent.getGroup(), stateContent.getTypeId(),
+        session.isLogged(), rights, ActionGroups.DOC_HEADER_BAR);
     final GuiActionDescCollection bottomActions = actionsRegistry.getCurrentActions(
         stateContent.getToolName(), stateContent.getGroup(), stateContent.getTypeId(),
         session.isLogged(), rights, ActionGroups.BOTTOMBAR);
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(stateContent.getGroup(),
         stateContent.getContainer(), true, false);
     bottomActions.addAll(pathActions);
-    getView().setSubheaderActions(topActions);
+    getView().setDocTopToolbarActions(docTopToolbarActions);
+    getView().setDocHeaderActions(docHeaderActions);
     getView().setFooterActions(bottomActions);
   }
 }

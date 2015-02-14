@@ -23,6 +23,7 @@
 package cc.kune.hspace.client;
 
 import cc.kune.core.client.state.impl.HistoryUtils;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
@@ -30,6 +31,7 @@ import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Widget;
@@ -37,14 +39,14 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupContentHomeLink.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupContentHomeLink extends Composite {
 
   /**
    * The Interface GroupContentHomeLinkUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface GroupContentHomeLinkUiBinder extends UiBinder<Widget, GroupContentHomeLink> {
@@ -52,6 +54,9 @@ public class GroupContentHomeLink extends Composite {
 
   /** The ui binder. */
   private static GroupContentHomeLinkUiBinder uiBinder = GWT.create(GroupContentHomeLinkUiBinder.class);
+
+  @UiField
+  FlowPanel flow;
 
   /** The icon. */
   @UiField
@@ -70,7 +75,7 @@ public class GroupContentHomeLink extends Composite {
 
   /**
    * Sets the values.
-   * 
+   *
    * @param logoImageUrl
    *          the logo image url
    * @param text
@@ -85,6 +90,7 @@ public class GroupContentHomeLink extends Composite {
         icon.setUrl(logoImageUrl);
       }
     });
+    PolymerUtils.addFlexHorLayout(flow);
     link.setText(text);
     link.setTargetHistoryToken(HistoryUtils.PREFIX + historyToken);
   }

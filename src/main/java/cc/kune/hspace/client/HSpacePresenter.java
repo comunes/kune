@@ -62,7 +62,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpacePresenter.HSpaceProxy>
-implements HSpace {
+    implements HSpace {
 
   /**
    * The Interface HSpaceProxy.
@@ -107,21 +107,6 @@ implements HSpace {
     IsActionExtensible getToolbar();
 
     /**
-     * Gets the unread in your inbox.
-     *
-     * @return the unread in your inbox
-     */
-    HasText getUnreadInYourInbox();
-
-    /**
-     * Sets the inbox unread visible.
-     *
-     * @param visible
-     *          the new inbox unread visible
-     */
-    void setInboxUnreadVisible(boolean visible);
-
-    /**
      * Sets the last contents of my group.
      *
      * @param lastContentsOfMyGroupsList
@@ -162,6 +147,8 @@ implements HSpace {
     void setUserGroupsActivityVisible(boolean visible);
   }
 
+  private ButtonDescriptor pendingMessagesBtn;
+
   /** The session. */
   private final Session session;
 
@@ -199,24 +186,22 @@ implements HSpace {
     this.stateManager = stateManager;
     eventBus.addHandler(InboxUnreadUpdatedEvent.getType(),
         new InboxUnreadUpdatedEvent.InboxUnreadUpdatedHandler() {
-      @Override
-      public void onInboxUnreadUpdated(final InboxUnreadUpdatedEvent event) {
-        final int total = event.getCount();
-        if (total > 0 && session.isLogged()) {
-          getView().getUnreadInYourInbox().setText(
-              total == 1 ? i18n.t("One recent conversation unread") : i18n.t(
-                  "[%d] recent conversations unread", total));
-          getView().setInboxUnreadVisible(true);
-        } else {
-          getView().setInboxUnreadVisible(false);
-        }
-      }
-    });
+          @Override
+          public void onInboxUnreadUpdated(final InboxUnreadUpdatedEvent event) {
+            final int total = event.getCount();
+            final boolean pendingMensages = total > 0 && session.isLogged();
+            if (pendingMensages) {
+              pendingMessagesBtn.withText(total == 1 ? i18n.t("One message") : i18n.t("[%d] messages",
+              total));
+            }
+            pendingMessagesBtn.setVisible(pendingMensages);
+          }
+        });
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.hspace.client.HSpace#getToolbar()
    */
   @Override
@@ -226,7 +211,7 @@ implements HSpace {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -249,7 +234,16 @@ implements HSpace {
     });
     newGroupHomeBtn.withText(I18n.t(CoreMessages.NEW_GROUP_TITLE)).withStyles(
         "btn btn-default btn-lg btn-block");
+    pendingMessagesBtn = new ButtonDescriptor(new AbstractExtendedAction() {
+      @Override
+      public void actionPerformed(final ActionEvent event) {
+        stateManager.gotoHistoryToken(SiteTokens.INBOX);
+      }
+    });
+    pendingMessagesBtn.withText(I18n.t(CoreMessages.NEW_GROUP_TITLE)).withStyles(
+        "btn btn-default btn-lg btn-block btn_green");
     getView().getToolbar().add(signInHomeBtn);
+    getView().getToolbar().add(pendingMessagesBtn);
     getView().getToolbar().add(newGroupHomeBtn);
     final AsyncCallbackSimple<HomeStatsDTO> callback = new AsyncCallbackSimple<HomeStatsDTO>() {
       @Override
@@ -267,7 +261,6 @@ implements HSpace {
               getView().setLastContentsOfMyGroup(lastContentsOfMyGroups);
             }
             getView().setUserGroupsActivityVisible(myGroupsHasActivity);
-            getView().setInboxUnreadVisible(logged);
             getEventBus().addHandler(SpaceSelectEvent.getType(), new SpaceSelectHandler() {
               @Override
               public void onSpaceSelect(final SpaceSelectEvent event) {
@@ -295,7 +288,7 @@ implements HSpace {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.PresenterWidget#onReveal()
    */
   @Override
@@ -305,7 +298,7 @@ implements HSpace {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

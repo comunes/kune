@@ -22,19 +22,21 @@
  */
 package cc.kune.wave.client.kspecific.inboxcount;
 
+import org.gwtbootstrap3.client.ui.Badge;
+
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
+import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.polymer.client.PolymerId;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.user.client.ui.InlineLabel;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -42,34 +44,35 @@ import com.google.inject.Inject;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class InboxCountPanel extends PopupPanel implements InboxCountView {
+public class InboxCountPanel extends Badge implements InboxCountView {
 
   /** The blink animation. */
   private final BlinkAnimation blinkAnimation;
-  
-  /** The count. */
-  private final InlineLabel count;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The tooltip. */
   private final Tooltip tooltip;
 
   /**
    * Instantiates a new inbox count panel.
    *
-   * @param i18n the i18n
-   * @param eventBus the event bus
+   * @param i18n
+   *          the i18n
+   * @param eventBus
+   *          the event bus
    */
   @Inject
-  public InboxCountPanel(final I18nTranslationService i18n, final EventBus eventBus) {
+  public InboxCountPanel(final I18nTranslationService i18n, final EventBus eventBus,
+      final GSpaceArmor armor) {
     this.i18n = i18n;
-    count = new InlineLabel();
     setStylePrimaryName("k-space-sel-inbox-count");
-    super.setWidget(count);
     blinkAnimation = new BlinkAnimation(this, 400);
     tooltip = Tooltip.to(this, "Nothing");
+
+    armor.wrapDiv(PolymerId.INBOX_SITEBAR_ICON_GROUP).add(this);
+
     addDomHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -79,40 +82,41 @@ public class InboxCountPanel extends PopupPanel implements InboxCountView {
 
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView#blink()
+  /*
+   * (non-Javadoc)
+   *
+   * @see
+   * cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView
+   * #blink()
    */
   @Override
   public void blink() {
     blinkAnimation.animate(4);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView#setTotal(int)
+  /*
+   * (non-Javadoc)
+   *
+   * @see
+   * cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView
+   * #setTotal(int)
    */
   @Override
   public void setTotal(final int total) {
-    count.setText(String.valueOf(total));
+    super.setText(String.valueOf(total));
     tooltip.setText(total == 1 ? i18n.t("One recent conversation unread") : i18n.t(
         "[%d] recent conversations unread", total));
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView#showCount(boolean)
+  /*
+   * (non-Javadoc)
+   *
+   * @see
+   * cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView
+   * #showCount(boolean)
    */
   @Override
   public void showCount(final boolean show) {
-    if (show) {
-      super.setPopupPositionAndShow(new PositionCallback() {
-        @Override
-        public void setPosition(final int offsetWidth, final int offsetHeight) {
-          // user inbox icon is at 38px to the right, then we center the popup
-          // down the icon
-          setPopupPosition(38 - offsetWidth / 2, 20);
-        }
-      });
-    } else {
-      super.hide();
-    }
+    setVisible(show);
   }
 }

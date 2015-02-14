@@ -22,24 +22,25 @@
  */
 package cc.kune.hspace.client;
 
+import static cc.kune.polymer.client.Layout.*;
 import static cc.kune.polymer.client.PolymerId.*;
 
 import java.util.List;
 
 import org.waveprotocol.wave.client.common.util.DateUtils;
 
-import cc.kune.common.client.actions.ui.ActionSimplePanel;
+import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.ui.DottedTabPanel;
 import cc.kune.common.client.ui.WrappedFlowPanel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
-import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.ContentSimpleDTO;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.hspace.client.HSpacePresenter.HSpaceView;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.calclab.emite.core.client.packet.TextUtils;
 import com.google.gwt.core.client.GWT;
@@ -47,7 +48,6 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.Hyperlink;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -109,7 +109,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   private final WrappedFlowPanel groupStatsParent;
 
   /** The home toolbar. */
-  private final ActionSimplePanel homeToolbar;
+  private final ActionFlowPanel homeToolbar;
 
   /** The last activity in your group. */
   @UiField
@@ -156,10 +156,6 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   /** The tab panel. */
   private final DottedTabPanel tabPanel;
 
-  /** The unread in your inbox. */
-  @UiField
-  public Hyperlink unreadInYourInbox;
-
   /** The widget. */
   private final Widget widget;
 
@@ -180,10 +176,11 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
   @Inject
   public HSpacePanel(final I18nTranslationService i18n, final GSpaceArmor armor,
       final Provider<GroupContentHomeLink> linkProv, final ClientFileDownloadUtils downUtils,
-      final ActionSimplePanel homeToolbar) {
+      final ActionFlowPanel homeToolbar) {
     this.linkProv = linkProv;
     this.downUtils = downUtils;
     this.homeToolbar = homeToolbar;
+    homeToolbar.setLayout(VERTICAL, LAYOUT);
     widget = uiBinder.createAndBindUi(this);
     globalStatsTitle.setText(i18n.t("Stats"));
     globalStatsTotalGroupsTitle.setText(i18n.t("Hosted groups:"));
@@ -198,10 +195,11 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     tabPanel.addTab(lastGroupsPanel, lastCreatedGroupsText);
     tabPanel.addTab(lastPublishedPanel, lastPublicationsText);
     globalStats.removeFromParent();
-    unreadInYourInbox.setTargetHistoryToken(SiteTokens.WAVE_INBOX);
     globalStatsParent = armor.wrapDiv(HOME_GLOBAL_STATS);
     groupStatsParent = armor.wrapDiv(HOME_GROUP_STATS);
     final WrappedFlowPanel homeToolbarParent = armor.wrapDiv(HOME_TOOLBAR);
+    PolymerUtils.addFlexVerLayout(lastActivityPanel, lastActivityInYourGroup, lastPublishedPanel,
+        lastPublishedContents, lastGroupsPanel, lastGroups);
     if (homeToolbarParent != null) {
       homeToolbarParent.add(homeToolbar);
     }
@@ -216,7 +214,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -226,7 +224,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#blinkCurrentTab()
    */
   @Override
@@ -250,7 +248,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalGroupsCount
    * ()
@@ -262,7 +260,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalUsersCount
    * ()
@@ -274,7 +272,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getToolbar()
    */
   @Override
@@ -284,30 +282,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#getUnreadInYourInbox()
-   */
-  @Override
-  public HasText getUnreadInYourInbox() {
-    return unreadInYourInbox;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setInboxUnreadVisible(
-   * boolean)
-   */
-  @Override
-  public void setInboxUnreadVisible(final boolean visible) {
-    unreadInYourInbox.setVisible(visible);
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastContentsOfMyGroup
    * (java.util.List)
@@ -326,7 +301,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastGroups(java.util
    * .List)
@@ -344,7 +319,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastPublishedContents
    * (java.util.List)
@@ -365,7 +340,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setStatsVisible(boolean)
    */
@@ -381,7 +356,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setUserGroupsActivityVisible
    * (boolean)

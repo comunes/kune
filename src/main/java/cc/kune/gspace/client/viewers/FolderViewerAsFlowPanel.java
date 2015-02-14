@@ -172,8 +172,8 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
     };
     thumb.addClickHandler(clickHand);
     thumb.addDoubleClickHandler(doubleClickHandler);
-    gsArmor.getSubheaderToolbar().add(menu);
-    gsArmor.getSubheaderToolbar().addAll(menuitems);
+    gsArmor.getTopActionsToolbar().add(menu);
+    gsArmor.getTopActionsToolbar().addAll(menuitems);
     thumb.setTooltip(tooltipTitle, tooltip);
     thumb.setLabelVisible(true);
     return thumb;

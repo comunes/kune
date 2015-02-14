@@ -22,6 +22,8 @@
  */
 package cc.kune.core.client.sitebar;
 
+import org.gwtbootstrap3.client.ui.constants.Responsiveness;
+
 import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
@@ -127,9 +129,9 @@ public class MyGroupsMenu extends ToolbarMenuDescriptor {
     this.downloadProvider = downloadProvider;
     menuShowAction.setMenu(this);
     setId(MENU_ID);
-    setParent(SitebarActions.LEFT_TOOLBAR);
+    setParent(SitebarActions.RIGHT_TOOLBAR);
     setPosition(0);
-    setStyles(ActionStyles.SITEBAR_STYLE);
+    setStyles(ActionStyles.SITEBAR_STYLE + "," + Responsiveness.HIDDEN_XS);
     withText(I18n.t("Your groups"));
     withToolTip(I18n.t("See your groups or create a new one"));
     // withIcon(res.arrowdownsitebarSmall());

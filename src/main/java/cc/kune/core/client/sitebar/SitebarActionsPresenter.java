@@ -289,7 +289,8 @@ implements SitebarActions {
   private void refreshActionsImpl() {
     getView().getLeftBar().clear();
     getView().getRightBar().clear();
-    getView().getLeftBar().add(LEFT_TOOLBAR);
+    // Right now we only use the RIGHTBAR
+    // getView().getLeftBar().add(LEFT_TOOLBAR);
     getView().getRightBar().add(RIGHT_TOOLBAR);
   }
 

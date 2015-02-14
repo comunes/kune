@@ -47,7 +47,7 @@ public class KuneDragController extends PickupDragController {
    */
   @Inject
   public KuneDragController(final GSpaceArmor armor) {
-    super(RootPanel.get(), true);
+    super(RootPanel.get(), false);
     // mainPanel = (Widget) armor.getMainpanel();
     setBehaviorDragProxy(true);
     setBehaviorMultipleSelection(false);
@@ -66,7 +66,7 @@ public class KuneDragController extends PickupDragController {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.allen_sauer.gwt.dnd.client.PickupDragController#dragEnd()
    */
   @Override

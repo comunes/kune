@@ -23,6 +23,8 @@
 package cc.kune.common.client.actions.ui;
 
 import cc.kune.common.shared.i18n.HasRTL;
+import cc.kune.polymer.client.Layout;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.inject.Inject;
@@ -41,8 +43,10 @@ public class ActionFlowPanel extends AbstractComposedGuiItem implements ActionEx
   /**
    * Instantiates a new action flow panel.
    *
-   * @param guiProvider the gui provider
-   * @param i18n the i18n
+   * @param guiProvider
+   *          the gui provider
+   * @param i18n
+   *          the i18n
    */
   @Inject
   public ActionFlowPanel(final GuiProvider guiProvider, final HasRTL i18n) {
@@ -51,15 +55,21 @@ public class ActionFlowPanel extends AbstractComposedGuiItem implements ActionEx
     initWidget(bar);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractComposedGuiItem#addWidget(cc.kune.common.client.actions.ui.AbstractGuiItem)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractComposedGuiItem#addWidget(cc.kune
+   * .common.client.actions.ui.AbstractGuiItem)
    */
   @Override
   protected void addWidget(final AbstractGuiItem item) {
     bar.add(item);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractComposedGuiItem#clear()
    */
   @Override
@@ -68,12 +78,20 @@ public class ActionFlowPanel extends AbstractComposedGuiItem implements ActionEx
     bar.clear();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.AbstractComposedGuiItem#insertWidget(cc.kune.common.client.actions.ui.AbstractGuiItem, int)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ui.AbstractComposedGuiItem#insertWidget(cc
+   * .kune.common.client.actions.ui.AbstractGuiItem, int)
    */
   @Override
   protected void insertWidget(final AbstractGuiItem item, final int position) {
     final int count = bar.getWidgetCount();
     bar.insert(item, count < position ? count : position);
+  }
+
+  public void setLayout(final Layout... layout) {
+    PolymerUtils.addLayout(bar.getElement(), layout);
   }
 }

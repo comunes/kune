@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -27,28 +27,36 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-public class BeforeOpenWaveEvent extends GwtEvent<BeforeOpenWaveEvent.BeforeOpenWaveHandler> { 
-
-  public interface HasBeforeOpenWaveHandlers extends HasHandlers {
-    HandlerRegistration addBeforeOpenWaveHandler(BeforeOpenWaveHandler handler);
-  }
+public class BeforeOpenWaveEvent extends GwtEvent<BeforeOpenWaveEvent.BeforeOpenWaveHandler> {
 
   public interface BeforeOpenWaveHandler extends EventHandler {
     public void onBeforeOpenWave(BeforeOpenWaveEvent event);
   }
 
-  private static final Type<BeforeOpenWaveHandler> TYPE = new Type<BeforeOpenWaveHandler>();
-
-  public static void fire(HasHandlers source) {
-    source.fireEvent(new BeforeOpenWaveEvent());
+  public interface HasBeforeOpenWaveHandlers extends HasHandlers {
+    HandlerRegistration addBeforeOpenWaveHandler(BeforeOpenWaveHandler handler);
   }
+
+  private static final Type<BeforeOpenWaveHandler> TYPE = new Type<BeforeOpenWaveHandler>();
 
   public static Type<BeforeOpenWaveHandler> getType() {
     return TYPE;
   }
 
+  private final String waveId;
 
-  public BeforeOpenWaveEvent() {
+  public BeforeOpenWaveEvent(final String waveId) {
+    this.waveId = waveId;
+  }
+
+  @Override
+  protected void dispatch(final BeforeOpenWaveHandler handler) {
+    handler.onBeforeOpenWave(this);
+  }
+
+  @Override
+  public boolean equals(final Object obj) {
+    return super.equals(obj);
   }
 
   @Override
@@ -56,14 +64,8 @@ public class BeforeOpenWaveEvent extends GwtEvent<BeforeOpenWaveEvent.BeforeOpen
     return TYPE;
   }
 
-  @Override
-  protected void dispatch(BeforeOpenWaveHandler handler) {
-    handler.onBeforeOpenWave(this);
-  }
-
-  @Override
-  public boolean equals(Object obj) {
-    return super.equals(obj);
+  public String getWaveId() {
+    return waveId;
   }
 
   @Override
@@ -73,7 +75,6 @@ public class BeforeOpenWaveEvent extends GwtEvent<BeforeOpenWaveEvent.BeforeOpen
 
   @Override
   public String toString() {
-    return "BeforeOpenWaveEvent["
-    + "]";
+    return "BeforeOpenWaveEvent[" + waveId + "]";
   }
 }

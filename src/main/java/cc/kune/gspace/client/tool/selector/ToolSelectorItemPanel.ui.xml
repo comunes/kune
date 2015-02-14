@@ -9,6 +9,7 @@
                     text-shadow: 1px 1px 6px grey;
                     */
       margin-left: 5px;
+      display: none;
     }
 
     .link a:link {
@@ -30,7 +31,7 @@
       font-family: kuneicons;
       color: white; /* FIXME */
       float: left;
-      font-size: 16px;
+      font-size: 32px;
       font-weight: normal;
     }
 
@@ -39,6 +40,7 @@
       position: relative;
       right: -17px;
       top: -6px;
+      display: none;
     }
   </ui:style>
   <ui:with field='res'

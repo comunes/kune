@@ -34,9 +34,6 @@ import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
  */
 public interface SitebarActions {
 
-  /** The Constant LEFT_TOOLBAR. */
-  static final ToolbarDescriptor LEFT_TOOLBAR = new ToolbarDescriptor();
-
   /** The Constant MORE_MENU. */
   static final WidgetMenuDescriptor MORE_MENU = new WidgetMenuDescriptor(
       PaperIconButton.wrap("sitebar_more_icon"));

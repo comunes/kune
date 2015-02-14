@@ -36,18 +36,18 @@ import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.GSpaceCenter;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter.FolderViewerView;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractFolderViewerPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractFolderViewerPanel extends ViewImpl implements FolderViewerView {
@@ -84,7 +84,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
 
   /**
    * Instantiates a new abstract folder viewer panel.
-   * 
+   *
    * @param gsArmor
    *          the gs armor
    * @param eventBus
@@ -145,8 +145,9 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
    */
   @Override
   public void clear() {
-    gsArmor.getSubheaderToolbar().clear();
-    gsArmor.getDocFooterToolbar().clear();
+    gsArmor.getDocHeaderRightActionsToolbar().clear();
+    gsArmor.getTopActionsToolbar().clear();
+    gsArmor.getDocFooterActionsToolbar().clear();
     gsArmor.getDocContainer().clear();
     UiUtils.clear(gsArmor.getDocHeader());
   }
@@ -194,7 +195,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
 
   /**
    * Resize height.
-   * 
+   *
    * @param w
    *          the w
    */
@@ -215,6 +216,23 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     contentTitle.setTitle(title, state.getTypeId(), state.getContainerRights().isEditable()
         && capabilitiesRegistry.isRenamable(state.getTypeId()));
     Window.setTitle(state.getGroup().getLongName() + ": " + state.getTitle());
+  }
+
+  @Override
+  public void setDocHeaderActions(final GuiActionDescCollection actions) {
+    setToolbarActions(actions, gsArmor.getDocHeaderRightActionsToolbar());
+  }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.gspace.client.viewers.AbstractFolderViewerView#setSubheaderActions
+   * (cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
+   */
+  @Override
+  public void setDocTopActions(final GuiActionDescCollection actions) {
+    setToolbarActions(actions, gsArmor.getTopActionsToolbar());
   }
 
   /*
@@ -238,24 +256,12 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
    */
   @Override
   public void setFooterActions(final GuiActionDescCollection actions) {
-    setToolbarActions(actions, gsArmor.getDocFooterToolbar());
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.gspace.client.viewers.AbstractFolderViewerView#setSubheaderActions
-   * (cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection)
-   */
-  @Override
-  public void setSubheaderActions(final GuiActionDescCollection actions) {
-    setToolbarActions(actions, gsArmor.getSubheaderToolbar());
+    setToolbarActions(actions, gsArmor.getDocFooterActionsToolbar());
   }
 
   /**
    * Sets the toolbar actions.
-   * 
+   *
    * @param actions
    *          the actions
    * @param toolbar

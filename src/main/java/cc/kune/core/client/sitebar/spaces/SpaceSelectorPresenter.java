@@ -33,6 +33,8 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.resources.CoreMessages;
 import cc.kune.core.client.state.Session;
@@ -41,6 +43,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -144,6 +147,10 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
      *          the new home btn active
      */
     void setHomeBtnActive(boolean active);
+
+    void setNarrowSwipeEnabled(boolean enabled);
+
+    void setNarrowVisible(boolean visible);
 
     /**
      * Sets the user btn active.
@@ -276,6 +283,17 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
         // getView().setPublicVisible(event.getInitData().isPublicSpaceVisible());
       }
     });
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        confDrawer(currentSpace, session.isLogged());
+      }
+    });
+  }
+
+  private void confDrawer(final Space space, final boolean logged) {
+    getView().setNarrowVisible(NarrowManager.shouldNarrowBeVisible(logged, space));
+    getView().setNarrowSwipeEnabled(NarrowManager.shouldNarrowSwipeBeEnabled(logged, space));
   }
 
   /**
@@ -287,7 +305,6 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
       public void onClick(final ClickEvent event) {
         onHomeBtnClick();
       }
-
     });
     getView().getUserBtn().addClickHandler(new ClickHandler() {
       @Override
@@ -300,7 +317,6 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
       public void onClick(final ClickEvent event) {
         onGroupBtnClick();
       }
-
     });
   }
 
@@ -399,6 +415,7 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
   /**
    * On public btn click.
    */
+  @SuppressWarnings("unused")
   private void onPublicBtnClick() {
     restoreToken(publicToken);
   }
@@ -470,6 +487,7 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
       default:
         break;
       }
+      confDrawer(space, session.isLogged());
     }
   }
 
@@ -512,6 +530,11 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
       setActive(Space.userSpace);
       currentSpace = Space.userSpace;
       getView().setWindowTitle(i18n.t("Inbox"));
+      // Show inbox if xsmall
+      if (PolymerUtils.isXSmall() && PolymerUtils.getMainSelected().equals("main")) {
+        PolymerUtils.setDrawerSelected();
+      }
+
     } else {
       signIn.get().setErrorMessage(i18n.t(CoreMessages.SIGN_IN_TO_ACCESS_INBOX), NotifyLevel.info);
       stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN, inboxToken));
