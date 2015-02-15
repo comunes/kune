@@ -54,7 +54,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarSearchPresenter extends
-    Presenter<SitebarSearchPresenter.SitebarSearchView, SitebarSearchPresenter.SitebarSearchProxy> {
+Presenter<SitebarSearchPresenter.SitebarSearchView, SitebarSearchPresenter.SitebarSearchProxy> {
 
   /**
    * The Interface SitebarSearchProxy.
@@ -168,7 +168,7 @@ public class SitebarSearchPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -212,24 +212,20 @@ public class SitebarSearchPresenter extends
    *          the search
    */
   public void onSearchBlur(final String search) {
-    if (search.length() == 0) {
-      getView().toggleSearch();
-    } else {
-      setsmall.cancel();
-      setsmall.schedule(3000);
-    }
+    setsmall.cancel();
+    setsmall.schedule(3000);
   }
 
   /**
    * On search focus.
    */
   public void onSearchFocus() {
-    getView().toggleSearch();
+    // getView().toggleSearch();
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

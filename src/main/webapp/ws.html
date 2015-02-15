@@ -103,7 +103,9 @@
     <link rel="import"
           href="bower_components/core-image/core-image.html">
     <link rel="import"
-          href="bower_components/core-item/core-item.html">
+          href="bower_components/core-item/core-item.html">    
+    <link rel="import" href="bower_components/core-splitter/core-splitter.html">
+    
     <!-- Other elements -->
     <link rel="import"
 	  href="bower_components/lorem-element/lorem-element.html">
@@ -133,8 +135,8 @@
           https://github.com/philya/font-awesome-polymer-icons-generator
           -->
     <link rel="import"
-	  href="bower_components/font-awesome-polymer-icons/fa-icons.html">
-
+	  href="bower_components/font-awesome-polymer-icons/fa-icons.html">    
+    
     <script type="text/javascript" language="javascript"
 	    src="ws/ws.nocache.js"></script>
     
@@ -230,23 +232,38 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
       <!-- https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel -->
       <core-drawer-panel transition drawerWidth="400px" responsivewidth="1000px" selected="{{main_selected}}" narrow="{{main_narrow}}" id="main_core_drawer_panel" forcenarrow="{{main_forcenarrow}}" disableSwipe="{{main_disableSwipe}}" disableEdgeSwipe="{{main_disableEdgeSwipe}}"  touch-action="pan-y" unresolved>
         <section id="main_left_section" drawer>
-          <div horizontal layout active>
-            <div id="inbox_container">
-              <core-header-panel mode="waterfall" id="inbox_core_header">
-                <core-toolbar id="inbox_toolbar">
-                  <paper-fab icon="create" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
-                  <div id="div">Inbox</div>
-                  <div flex></div>
-                  <div layout horizontal end-justified>
-                    <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
-                    <paper-icon-button icon="fa:share" id="inbox_share_icon"></paper-icon-button>
-                  </div>
-                </core-toolbar>
-                <section id="inbox_result_section">
-                  <div id="inbox_result" layout vertical>
-                  </div>
-                </section>
-              </core-header-panel>
+          <div horizontal layout>
+            <div id="inbox_chat_container" vertical layout>
+              <div id="inbox_container">
+                <core-header-panel mode="waterfall" id="inbox_core_header">
+                  <core-toolbar id="inbox_toolbar">
+                    <paper-fab icon="create" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
+                    <div id="div">Inbox</div>
+                    <div flex></div>
+                    <div layout horizontal end-justified>
+                      <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
+                      <paper-icon-button icon="input" id="inbox_share_icon"></paper-icon-button>
+                    </div>
+                  </core-toolbar>
+                  <section id="inbox_result_section">
+                    <div id="inbox_result" layout vertical>                      
+                    </div>
+                  </section>
+                </core-header-panel>
+              </div>
+              <core-splitter id="inboxchat_splitter" minSize="250px" direction="up"></core-splitter>
+              <div id="chat_container">
+                <core-header-panel mode="waterfall" id="chat_core_header">
+                  <core-toolbar id="chat_toolbar">
+                    <div>Chat</div>
+                  </core-toolbar>
+                  <section id="chat_section">
+                    <div id="chat_centerpanel" layout vertical>
+                      <lorem-element></lorem-element>      
+                    </div>
+                  </section>
+                </core-header-panel>              
+              </div> <!-- Chat panel -->
             </div>
             <paper-fab icon="view-column" mini id="inbox_show_hide" class="btn_gray" core-drawer-toggle></paper-fab>
         </section>
@@ -317,19 +334,27 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
               </div>  <!-- hor layout -->
             </div> <!-- home_center_container -->                
           </div><!-- home_space -->
-          <div id="user_space">TODO: here a tutorial?</div>
+          <div id="user_space">
+            <paper-fab icon="create" id="edit_inbox_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
+            <paper-fab icon="reply" id="reply_inbox_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
+            <paper-fab icon="check" id="editdone_inbox_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
+          </div>
           <div id="group_space" vertical layout>
             <div horizontal layout center id="site_bottombar" flex></div>
+            <paper-fab icon="create" id="edit_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
+            <paper-fab icon="reply" id="reply_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
+            <paper-fab icon="check" id="editdone_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
             <div horizontal layout end-justified flex>
               <div id="group_tools_toolbar" vertical layout>
-                <paper-fab icon="kune:docs" class="active" label="documents"></paper-fab>
-                <paper-fab icon="kune:wiki" label="wiki"></paper-fab>
-                <paper-fab icon="kune:events" label="calendars"></paper-fab>
-                <paper-fab icon="kune:tasks" label="tasks"></paper-fab>
-                <paper-fab icon="kune:lists" label="forums"></paper-fab>
-                <paper-fab icon="kune:chat-tool" label="chats"></paper-fab>
-                <paper-fab icon="kune:barter" label="barters"></paper-fab>
-                <paper-fab icon="kune:trash" label="trash"></paper-fab>
+                <paper-fab mini?="{{xsmall}}" icon="kune:docs" class="active" id="k_tool_item_docs"></paper-fab>
+                <paper-fab mini?="{{xsmall}}" icon="kune:lists" id="k_tool_item_lists"></paper-fab>
+                <paper-fab mini?="{{xsmall}}" icon="kune:blogs" id="k_tool_item_blogs"></paper-fab>
+                <paper-fab mini?="{{xsmall}}" icon="kune:wiki" id="k_tool_item_wiki"></paper-fab>
+                <paper-fab mini?="{{xsmall}}" icon="kune:events" id="k_tool_item_events"></paper-fab>
+                <paper-fab mini?="{{xsmall}}" icon="kune:tasks" id="k_tool_item_tasks"></paper-fab>
+                <paper-fab mini?="{{xsmall}}" icon="kune:chat-tool" id="k_tool_item_chats"></paper-fab>
+                <paper-fab mini?="{{xsmall}}" icon="kune:barter" id="k_tool_item_barters"></paper-fab>
+                <paper-fab mini?="{{xsmall}}" icon="kune:trash" id="k_tool_item_trash"></paper-fab>
               </div> <!-- end group_tools_toolbar -->
             </div>
             <core-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">
@@ -338,7 +363,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                 
                 <core-drawer-panel transition drawerwidth="80%" selected="main" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
                   <section id="group_core_drawer" drawer>
-                    <div horizontal layout>
+                    <div horizontal layout>                      
                       <div id="header_social_net">                          
                       </div>
                       <div flex></div>
@@ -371,10 +396,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                       <ol class="breadcrumb"><div id="miga" class=""></div></ol>                        
                       <div flex></div>
                       <div id="header_bottom_extensionbar" class="indent"></div>
-                    </div>
-                    
-                    <paper-fab icon="create" id="edit_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
-
+                    </div>                    
                   </section>
                 </core-drawer-panel>
                 <paper-shadow id="doc_toolbar_shadow">
@@ -432,7 +454,9 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
           <span class="hidden-xs hidden-sm">John Doe</span>
         </core-icon-button>
         <paper-icon-button icon="search" on-click="{{ toggleSearch }}" id="sitebar_search_icon"></paper-icon-button>
-        <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
+        <div id="sitebar_search_group">
+          <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
+        </div>
         <paper-icon-button icon="more-vert" id="sitebar_more_icon"></paper-icon-button>
         <div id="sitebar_flex_end" class="sitebar_search_hide" flex></div>
         <paper-icon-button icon="close" on-click="{{ toggleSearch }}" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
@@ -623,6 +647,8 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          outline: none;
          padding: 0;
          color: inherit;
+       }
+       #sitebar_search_group {         
          margin-top: -20px;
        }
        #sitebar_chat_icon_group {
@@ -632,38 +658,52 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #inbox_show_hide {
          right: -20px;
          position: absolute;
-         opacity: 0.4;
-         top: 10px;
+         opacity: 0.8;
+         top: 10px;         
+         border-bottom-right-radius: 50%; border-top-right-radius: 50%;
+         border-bottom-left-radius: 5px; border-top-left-radius: 5px;
        }
        #inbox_new_message {
          left: -2px;
          position: absolute;
          top: 46px;
-         opacity: 0.7;
+         opacity: 0.9;
          z-index: 1;
          color: white;
          background-color: rgb(153, 187, 0);
        }
-       #inbox_container, #inbox_core_header {
+       #inbox_chat_container,#inbox_container, #inbox_core_header, #chat_container, #chat_core_header {
          width: 100%;
        }
-       #inbox_core_header {
-         left: 0px;
+       #inbox_container, #inbox_core_header, #chat_container, #chat_core_header {
+         height: 100%;
+       }
+       #inbox_core_header, #chat_core_header {
+         /* left: 0px;
          top: 0px;
          position: absolute;
-         height: 100%;
+         height: 100%; */
+       }
+       #inboxchat_splitter {
+         z-index: 2;
        }
        #inbox_share_icon {
        }
-       #inbox_toolbar {
+       #inbox_toolbar,#chat_toolbar {
          color: gray;
          height: 60px;
          background-color: rgb(230, 230, 230);
        }
-       #inbox_result_section {
-         height: 100%;
+       #inbox_result_section, #chat_centerpanel {
+         /*height: 100%;*/
          padding: 10px;
          background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+       }
+       #inbox_container {
+         overflow-y: scroll;
+       }
+       #chat_container {
+         overflow-y: scroll;
        }
        /* Other ------------------------------------------------------------- */
        .btn_gray {
@@ -778,10 +818,10 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #header_group_icon_settings {
        }
        #social_net_group {
-         padding: {{xsmall? '0 5px 0 0': '0 80px 0 5px'}};
+         padding: {{xsmall? '0 5px 0 0': '0 5px 0 5px'}};
        }
        #group_header_bottom {
-         margin-top: {{xsmall ? 44 : small? 25 : 25}}px;
+         margin-top: {{xsmall ? 44 : small? 33 : 33}}px;
        }
        /* Doc icon */
        #document_name > div {
@@ -804,12 +844,40 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #miga {
          margin-left: {{xsmall ? 5 : 35}}px;
        }
-       #edit_fab {
-         left: {{xsmall ? -10 : 25}}px;
-         top: {{xsmall ? 155 : 280}}px;
+       #edit_inbox_fab,#reply_inbox_fab,#editdone_inbox_fab {
          position: absolute;
+         z-index: 1;
        }
-
+       #edit_inbox_fab {
+         top: 100px;
+         right: 0px;
+       }
+       #reply_inbox_fab {
+         top: {{100 + (xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
+         right: 0px;
+       }
+       #editdone_inbox_fab {
+         top: {{100 + 2*(xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
+         right: 0px;
+       }
+       #edit_docgroup_fab, #reply_docgroup_fab, #editdone_docgroup_fab {
+         position: absolute;
+         z-index: 1;
+         left: {{xsmall ? -7 : 25}}px;
+       }
+       #edit_docgroup_fab {
+         top: {{xsmall ? 155 : 280}}px;
+       }
+       #reply_docgroup_fab {
+         top: {{xsmall? 155 + toolbarFabMinMargins: 280 + toolbarFabMargins}}px;
+       }
+       #editdone_docgroup_fab {
+         top: {{xsmall? 155 + 2*toolbarFabMinMargins: 280 + 2*toolbarFabMargins}}px;
+       }
+       paper-fab[disabled] {
+         color: #808080;
+         background-color:#CCC;
+       }
        #doc_toolbar_shadow {
          right: 0px;
          left: -10px;         
@@ -845,13 +913,22 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          background-color: transparent;
        }
        #group_tools_toolbar paper-fab {
-         right: {{xsmall ? 1 : 25}}px;         
+         right: {{xsmall ? 1 : 12}}px;         
          top: {{xsmall ? 155 : small? 220: 255}}px;
          position: relative;
          z-index: 1;
          color: grey;
          background-color: transparent;
-         margin-bottom: -5px;
+         -webkit-border-radius: 6px;
+         -webkit-border-top-right-radius: 2px;
+         -webkit-border-bottom-right-radius: 2px;
+         -moz-border-radius: 6px;
+         -moz-border-radius-topright: 2px;
+         -moz-border-radius-bottomright: 2px;
+         border-radius: 6px;
+         border-top-right-radius: 2px;
+         border-bottom-right-radius: 2px;
+         margin-bottom: 0px; /* Distance between tools */
        }
        #group_tools_toolbar paper-fab::shadow paper-shadow {
          visibility: hidden;

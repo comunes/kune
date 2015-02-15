@@ -58,15 +58,15 @@ public class ShareToOthersPanel extends Composite implements ShareToOthersView {
     final FlowPanel flow = new FlowPanel();
     flow.addStyleName("k-share-others");
 
-    multivalueSBox = SearchBoxFactory.create(i18n, false, true, SEARCH_TEXTBOX_ID, false,
+    multivalueSBox = SearchBoxFactory.create(i18n, false, true, SEARCH_TEXTBOX_ID,
         new OnEntitySelectedInSearch() {
-      @Override
-      public void onSeleted(final String shortName) {
-        if (addListener != null) {
-          addListener.onAdd(shortName);
-        }
-      }
-    });
+          @Override
+          public void onSeleted(final String shortName) {
+            if (addListener != null) {
+              addListener.onAdd(shortName);
+            }
+          }
+        });
     final SuggestBox suggestBox = multivalueSBox.getSuggestBox();
     final ValueBoxBase<String> searchTextBox = suggestBox.getValueBox();
     final Label suggestBoxIntro = new Label(I18n.t("drag and drop to add people or"));

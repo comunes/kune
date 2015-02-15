@@ -38,10 +38,10 @@ public final class ActionGroups {
   public final static String BOTTOMBAR = "bottombar";
 
   /** The Constant TOPBAR identifies actions in the top bar, above the content. */
-  public final static String DOC_HEADER_BAR = "doc_topbar";
 
-  public final static String ENTITY_DOC_HEADER = "doc_header";
-  public final static String DOC_TOP_TOOLBAR = "entity_bottombar";
+  public final static String DOC_HEADER_BAR = "doc_header_bar";
+  public final static String DOC_TOP_TOOLBAR = "doc_top_toolbar";
+  public final static String ENTITY_BOTTOMBAR = "entity_bottombar";
 
   /**
    * The Constant ITEM_MENU identifies actions in the menu of each item of a

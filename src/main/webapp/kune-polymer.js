@@ -27,13 +27,17 @@ kt.headers=140;
 kt.headerm=160;
 kt.headerl=192;
 
+kt.toolbarFabMargins=70;
+kt.toolbarFabMinMargins=60;
+
+
 /* Avatar sizes */
-kt.avatarsizel=80;
-kt.avatarsizem=60;
+kt.avatarsizel=100;
+kt.avatarsizem=80;
 kt.avatarsizes=50;
 
 kt.homebackcolor='rgb(255, 204, 170)';
-kt.group_back_image_url='http://lorempixel.com/1500/1500';
+/* kt.group_back_image_url='http://lorempixel.com/1500/1500'; */
 kt.showingSearch=false;
 
 kt.main_forcenarrow=true;
@@ -55,7 +59,7 @@ kt.toggleSearch = function(e,detail,sender) {
   if(e) {
     e.stopPropagation()
   }
-  if(e.target===kt.sitebar_search_input){
+  if(e && e.target===kt.sitebar_search_input){
     return
   }
   

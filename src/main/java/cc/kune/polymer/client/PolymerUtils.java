@@ -100,4 +100,8 @@ public class PolymerUtils {
   private native static void setNarrowVisibleImpl(final boolean visible) /*-{
 		$wnd.kt.main_forcenarrow = !visible;
   }-*/;
+
+  public native static void toggleSearch() /*-{
+		$wnd.kt.toggleSearch();
+  }-*/;
 }

@@ -53,15 +53,15 @@ public class SearchBoxFactory {
    * @return the multivalue suggest box
    */
   public static MultivalueSuggestBox create(final I18nTranslationService i18n,
-      final boolean searchOnlyUsers, final boolean showNoResult, final String id, final boolean wrap,
+      final boolean searchOnlyUsers, final boolean showNoResult, final String id,
       final OnEntitySelectedInSearch callback) {
-    final MultivalueSuggestBox multivalueSBox = new MultivalueSuggestBox(i18n, showNoResult, id, wrap,
+    final MultivalueSuggestBox multivalueSBox = new MultivalueSuggestBox(i18n, showNoResult,
         getSearchUrl(searchOnlyUsers), false, new OnExactMatch() {
-          @Override
-          public void onExactMatch(final String match) {
-            // NotifyUser.info(match);
-          }
-        }) {
+      @Override
+      public void onExactMatch(final String match) {
+        // NotifyUser.info(match);
+      }
+    }) {
 
       @Override
       public void onSelection(

@@ -26,10 +26,7 @@ import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.ToolSelectorItemView;
 import cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView;
-import cc.kune.polymer.client.PolymerUtils;
 
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
@@ -44,17 +41,6 @@ import com.gwtplatform.mvp.client.ViewImpl;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
-
-  /**
-   * The Interface ToolSelectorPanelUiBinder.
-   *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  interface ToolSelectorPanelUiBinder extends UiBinder<Widget, ToolSelectorPanel> {
-  }
-
-  /** The ui binder. */
-  private static ToolSelectorPanelUiBinder uiBinder = GWT.create(ToolSelectorPanelUiBinder.class);
 
   /** The drop controller prov. */
   private final Provider<FolderContainerDropController> dropControllerProv;
@@ -75,13 +61,14 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
   public ToolSelectorPanel(final GSpaceArmor wsArmor,
       final Provider<FolderContainerDropController> dropControllerProv) {
     this.dropControllerProv = dropControllerProv;
-    wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
-    PolymerUtils.addFlexVerLayout(flow);
+    // In polymer this is not needed
+    // wsArmor.getEntityToolsCenter().add(uiBinder.createAndBindUi(this));
+    // PolymerUtils.addFlexVerLayout(flow);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.gspace.client.tool.selector.ToolSelectorPresenter.ToolSelectorView
    * #addItem(cc.kune.gspace.client.tool.selector.ToolSelectorItemPresenter.
@@ -90,7 +77,7 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
   @Override
   public void addItem(final ToolSelectorItemView item) {
     final Widget widget = item.asWidget();
-    flow.add(widget);
+    // flow.add(widget);
     final FolderContainerDropController dropController = dropControllerProv.get();
     dropController.init(((ToolSelectorItemPanel) widget).getFocusPanel());
     dropController.setTarget(item.getTarget());
@@ -98,7 +85,7 @@ public class ToolSelectorPanel extends ViewImpl implements ToolSelectorView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override

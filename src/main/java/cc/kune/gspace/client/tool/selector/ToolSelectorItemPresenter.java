@@ -28,49 +28,43 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ToolSelectorItemPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /**
    * The Interface ToolSelectorItemView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface ToolSelectorItemView extends IsWidget {
-
-    /**
-     * Gets the focus.
-     * 
-     * @return the focus
-     */
-    HasClickHandlers getFocus();
+    HandlerRegistration addClickHandler(ClickHandler clickHandler);
 
     /**
      * Gets the label.
-     * 
+     *
      * @return the label
      */
     HasText getLabel();
 
     /**
      * Gets the target.
-     * 
+     *
      * @return the target
      */
     Object getTarget();
 
     /**
      * Sets the selected.
-     * 
+     *
      * @param selected
      *          the new selected
      */
@@ -78,7 +72,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
     /**
      * Sets the tooltip.
-     * 
+     *
      * @param tooltip
      *          the new tooltip
      */
@@ -86,7 +80,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
     /**
      * Sets the visible.
-     * 
+     *
      * @param visible
      *          the new visible
      */
@@ -119,7 +113,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /**
    * Instantiates a new tool selector item presenter.
-   * 
+   *
    * @param shortName
    *          the short name
    * @param longName
@@ -177,14 +171,14 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /**
    * Inits the.
-   * 
+   *
    * @param view
    *          the view
    */
   public void init(final ToolSelectorItemView view) {
     this.view = view;
     toolSelector.addTool(this);
-    view.getFocus().addClickHandler(new ClickHandler() {
+    view.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
         history.newItem(token);

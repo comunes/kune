@@ -1,5 +1,6 @@
 package cc.kune.client;
 
+import cc.kune.blogs.client.BlogsParts;
 import cc.kune.bootstrap.client.BSGuiProvider;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
@@ -19,6 +20,7 @@ import cc.kune.gspace.client.GSpaceParts;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.hspace.client.HSpaceParts;
 import cc.kune.trash.client.TrashParts;
+import cc.kune.wiki.client.WikiParts;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
@@ -53,20 +55,23 @@ public class KuneBootstrapper implements Bootstrapper {
       // GwtGuiProvider guiProvider
 
       final DocsParts docs,
-      /*
-       * final BlogsParts blogs, final WikiParts wiki, final EventsParts events,
-       * final TasksParts tasks, final ListsParts lists, final ChatParts chats,
-       * final BartersParts barters,
-       */
-      final TrashParts trash,
+
+      final BlogsParts blogs, final WikiParts wiki, /*
+                                                     * final EventsParts events,
+                                                     * final TasksParts tasks,
+                                                     * final ListsParts lists,
+                                                     * final ChatParts chats,
+                                                     * final BartersParts
+                                                     * barters,
+                                                     */final TrashParts trash,
 
       final SiteLogo siteLogo,
 
       final CoreParts coreParts, final GSpaceParts gSpaceParts, /*
-                                                                 * final
-                                                                 * PSpaceParts
-                                                                 * pSpaceParts,
-                                                                 */
+       * final
+       * PSpaceParts
+       * pSpaceParts,
+       */
       final HSpaceParts hSpaceParts,
 
       final XMLActionsParser xmlActionsParser) {

@@ -87,6 +87,7 @@ public class PostWaveOpenActions {
       @Override
       public void run() {
         PolymerUtils.setMainSelected();
+        PolymerUtils.setNarrowVisible(false);
       }
     };
   }

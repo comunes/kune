@@ -102,24 +102,25 @@ public class CustomStagesProvider extends Stages {
   private final RemoteViewServiceMultiplexer channel;
   private boolean closed;
   private final Provider<AurorisColorPicker> colorPicker;
+  private final CustomEditToolbar customEditToolbar;
   private final EventBus eventBus;
   private final IdGenerator idGenerator;
   private final boolean isNewWave;
   private final String localDomain;
   private StageOne one;
   private final Set<ParticipantId> participants;
-  private final ProfileManager profiles;
 
+  private final ProfileManager profiles;
   private final LogicalPanel rootPanel;
   private StageThree three;
   private StageTwo two;
   private WaveContext wave;
+
   private final FramedPanel waveFrame;
 
   private final Element wavePanelElement;
 
   private final WaveRef waveRef;
-
   private final WaveStore waveStore;
   private final CustomSavedStateIndicator waveUnsavedIndicator;
 
@@ -140,7 +141,7 @@ public class CustomStagesProvider extends Stages {
   public CustomStagesProvider(final Element wavePanelElement, final CustomSavedStateIndicator waveUnsavedIndicator,
       final LogicalPanel rootPanel, final FramedPanel waveFrame, final WaveRef waveRef, final RemoteViewServiceMultiplexer channel,
       final IdGenerator idGenerator, final ProfileManager profiles, final WaveStore store, final boolean isNewWave,
-      final String localDomain, final Set<ParticipantId> participants, final EventBus eventBus, final Provider<AurorisColorPicker> colorPicker) {
+      final String localDomain, final Set<ParticipantId> participants, final EventBus eventBus, final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar) {
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.wavePanelElement = wavePanelElement;
     this.waveFrame = waveFrame;
@@ -155,6 +156,7 @@ public class CustomStagesProvider extends Stages {
     this.participants = participants;
     this.eventBus = eventBus;
     this.colorPicker = colorPicker;
+    this.customEditToolbar = customEditToolbar;
   }
 
   @Override
@@ -219,6 +221,10 @@ public class CustomStagesProvider extends Stages {
         KeepFocusInView.install(edit, panel);
         stageTwo.getDiffController().upgrade(edit);
         colorPicker.get();
+
+        final FocusBlipSelector blipSelector =
+            FocusBlipSelector.create(stageTwo.getConversations(), stageTwo.getModelAsViewProvider(), stageTwo.getReader(), new ViewTraverser());
+        CustomEditController.install(focus, actions, edit,panel, blipSelector, customEditToolbar);
       }
     });
   }

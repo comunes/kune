@@ -23,6 +23,7 @@
 package cc.kune.core.client.sitebar.search;
 
 import br.com.rpa.client._paperelements.PaperIconButton;
+import cc.kune.common.client.ui.WrappedFlowPanel;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView;
@@ -30,10 +31,12 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.polymer.client.PolymerId;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasAllKeyHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.SuggestBox;
 import com.google.gwt.user.client.ui.TextBoxBase;
@@ -42,7 +45,6 @@ import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 // TODO: Auto-generated Javadoc
-@Singleton
 /**
  * The Class SitebarSearchPanel.
  *
@@ -50,11 +52,13 @@ import com.gwtplatform.mvp.client.ViewImpl;
  */
 public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
+  private static final String INPUT_ID = PolymerId.SITEBAR_SEARCH_INPUT.getId();
+
   /** The Constant SITE_SEARCH_BUTTON. */
   public static final String SITE_SEARCH_BUTTON = PolymerId.SITEBAR_SEARCH_ICON.getId();
 
   /** The Constant SITE_SEARCH_TEXTBOX. */
-  public static final String SITE_SEARCH_TEXTBOX = PolymerId.SITEBAR_SEARCH_INPUT.getId();
+  public static final String SITE_SEARCH_TEXTBOX = INPUT_ID;
 
   private final PaperIconButton searchButton;
 
@@ -79,23 +83,31 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
    *          the i18n
    */
   @Inject
-  public SitebarSearchPanel(final GSpaceArmor gs, final CoreResources img,
-      final SessionConstants session, final StateManager stateManager, final I18nTranslationService i18n) {
+  public SitebarSearchPanel(final CoreResources img, final SessionConstants session,
+      final StateManager stateManager, final I18nTranslationService i18n, final GSpaceArmor armor) {
     searchButton = PaperIconButton.wrap(PolymerId.SITEBAR_SEARCH_ICON.getId());
+    // We remove the previous search input
+    DOM.getElementById(INPUT_ID).removeFromParent();
+    ;
     final MultivalueSuggestBox multivalueSBox = SearchBoxFactory.create(i18n, false, true,
-        SITE_SEARCH_TEXTBOX, true, new OnEntitySelectedInSearch() {
-      @Override
-      public void onSeleted(final String shortName) {
-        stateManager.gotoHistoryToken(shortName);
-      }
-    });
+        SITE_SEARCH_TEXTBOX, new OnEntitySelectedInSearch() {
+          @Override
+          public void onSeleted(final String shortName) {
+            stateManager.gotoHistoryToken(shortName);
+          }
+        });
     suggestBox = multivalueSBox.getSuggestBox();
     searchTextBox = suggestBox.getTextBox();
+    searchTextBox.addStyleName("sitebar_search_hide");
+
+    final WrappedFlowPanel searchDiv = armor.wrapDiv(PolymerId.SITEBAR_SEARCH_GROUP);
+    searchDiv.add(multivalueSBox);
+
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -105,7 +117,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView
    * #clearSearchText()
@@ -117,7 +129,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView
    * #focus()
@@ -129,7 +141,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView
    * #getButton()
@@ -141,7 +153,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView
    * #getFocus()
@@ -153,7 +165,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView
    * #getKeyHandler()
@@ -165,7 +177,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView
    * #getTextBox()
@@ -177,7 +189,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView
    * #selectSearchText()
@@ -189,7 +201,7 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.search.SitebarSearchPresenter.SitebarSearchView
    * #setTextSearch(java.lang.String)
@@ -201,11 +213,6 @@ public class SitebarSearchPanel extends ViewImpl implements SitebarSearchView {
 
   @Override
   public void toggleSearch() {
-    toggleSearchImpl();
+    PolymerUtils.toggleSearch();
   }
-
-  public native void toggleSearchImpl() /*-{
-		kt.toggleSearch();
-  }-*/;
-
 }

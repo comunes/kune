@@ -24,6 +24,7 @@
 package cc.kune.core.client.notify.progress;
 
 import br.com.rpa.client._paperelements.PaperProgress;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.ProgressShowEvent;
 
@@ -63,6 +64,7 @@ public class PaperProgressNotificator {
         progress.setVisible(true);
         progress.setValue(0);
         progress.setIndeterminate(true);
+        NotifyUser.info(event.getMessage());
       }
     });
   }

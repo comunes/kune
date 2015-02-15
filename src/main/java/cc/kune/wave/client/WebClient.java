@@ -85,6 +85,7 @@ import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.initials.InitialsResources;
 import cc.kune.polymer.client.PolymerId;
+import cc.kune.polymer.client.PolymerUtils;
 import cc.kune.wave.client.kspecific.AfterOpenWaveEvent;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
 import cc.kune.wave.client.kspecific.BeforeOpenWaveEvent;
@@ -376,6 +377,8 @@ public class WebClient extends Composite implements WaveClientView {
    */
   private WaveWebSocketClient websocket;
 
+  private final CustomEditToolbar customEditToolbar;
+
   /**
    * This is the entry point method.
    *
@@ -388,13 +391,14 @@ public class WebClient extends Composite implements WaveClientView {
    * @param colorPicker the color picker
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles,final cc.kune.core.client.state.Session kuneSession, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final Provider<AurorisColorPicker> colorPicker, final GSpaceArmor armor) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles,final cc.kune.core.client.state.Session kuneSession, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final Provider<AurorisColorPicker> colorPicker, final GSpaceArmor armor, CustomEditToolbar customEditToolbar) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.kuneSession = kuneSession;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.contentService = contentService;
     this.colorPicker = colorPicker;
+    this.customEditToolbar = customEditToolbar;
     searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
     ErrorHandler.install();
     eventBus.addHandler(StackErrorEvent.getType(), new StackErrorEvent.StackErrorHandler() {
@@ -638,7 +642,7 @@ public class WebClient extends Composite implements WaveClientView {
     waveHolder.getElement().appendChild(loading);
     final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
     final CustomStagesProvider wave = new CustomStagesProvider(
-        holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus, colorPicker);
+        holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus, colorPicker,customEditToolbar);
     this.wave = wave;
     wave.load(new Command() {
       @Override
@@ -780,7 +784,10 @@ public class WebClient extends Composite implements WaveClientView {
       public void onClick(final ClickEvent event) {
         // FIXME Dirty workaround while we improve the Wave integration
         SpaceSelectEvent.fire(eventBus, Space.userSpace);
-        $(".org-waveprotocol-wave-client-widget-toolbar-buttons-HorizontalToolbarButtonWidget-Css-overlay").click();
+        // Show the message panel
+        PolymerUtils.setMainSelected();
+        ClientEvents.get().fireEvent(new WaveCreationEvent());
+        // $(".org-waveprotocol-wave-client-widget-toolbar-buttons-HorizontalToolbarButtonWidget-Css-overlay").click();
       }
     });
 
