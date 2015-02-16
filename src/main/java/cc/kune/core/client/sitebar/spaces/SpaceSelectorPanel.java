@@ -82,11 +82,10 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
     userButton = PaperIconButton.wrap(PolymerId.USER_SPACE_ICON.getId());
 
     final String siteCommonName = i18n.getSiteCommonName();
-    homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Your home page in [%s]", siteCommonName)
-        + " (Alt+H)");
+    homeSpaceTooltip = Tooltip.to(homeButton, i18n.t("Home page of [%s]", siteCommonName) + " (Alt+H)");
     userSpaceTooltip = Tooltip.to(userButton,
         i18n.t("Inbox: it shows a list of all documents and contents " + "in which you participate")
-            + " (Alt+I)");
+        + " (Alt+I)");
     groupSpaceTooltip = Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
         + "and publish contents for your personal or group web spaces")
         + " (Alt+G)");
@@ -103,7 +102,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -124,7 +123,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #blinkGroupBtn()
@@ -136,7 +135,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #blinkHomeBtn()
@@ -148,7 +147,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #blinkUserBtn()
@@ -160,7 +159,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #getGroupBtn()
@@ -172,7 +171,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #getHomeBtn()
@@ -184,7 +183,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #getUserBtn()
@@ -196,7 +195,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #setGroupBtnDown(boolean)
@@ -209,7 +208,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #setHomeBtnDown(boolean)
@@ -231,7 +230,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #setUserBtnDown(boolean)
@@ -243,7 +242,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #setWindowTitle(java.lang.String)
@@ -255,7 +254,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #showGroupSpaceTooltip()
@@ -267,7 +266,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #showHomeSpaceTooltip()
@@ -279,7 +278,7 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #showUserSpaceTooltip()

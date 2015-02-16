@@ -65,12 +65,12 @@ public class PostWaveOpenActions {
     this.stateManager = stateManager;
     eventBus.addHandler(OnWaveClientStartEvent.getType(),
         new OnWaveClientStartEvent.OnWaveClientStartHandler() {
-      @Override
-      public void onOnWaveClientStart(final OnWaveClientStartEvent event) {
-        webClient = event.getView();
-        webClient.addToBottonBar(bottomToolbar);
-      }
-    });
+          @Override
+          public void onOnWaveClientStart(final OnWaveClientStartEvent event) {
+            webClient = event.getView();
+            webClient.addToBottonBar(bottomToolbar);
+          }
+        });
     eventBus.addHandler(BeforeOpenWaveEvent.getType(), new BeforeOpenWaveEvent.BeforeOpenWaveHandler() {
       @Override
       public void onBeforeOpenWave(final BeforeOpenWaveEvent event) {
@@ -97,23 +97,24 @@ public class PostWaveOpenActions {
 
     contentService.getContentByWaveRef(session.getUserHash(), waveUri,
         new AsyncCallbackSimple<StateAbstractDTO>() {
-          @Override
-          public void onSuccess(final StateAbstractDTO result) {
-            if (result instanceof StateContentDTO) {
-              final StateContentDTO state = (StateContentDTO) result;
-              stateManager.setRetrievedStateAndGo(state);
-              SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-              timer.schedule(4000);
-              // webClient.showBottomToolbar();
-            } else {
-              // webClient.hideBottomToolbar();
-              SpaceSelectEvent.fire(eventBus, Space.userSpace);
-              if (PolymerUtils.isXSmall() && PolymerUtils.getMainSelected().equals("drawer")) {
-                PolymerUtils.setMainSelected();
-              }
-            }
+      @Override
+      public void onSuccess(final StateAbstractDTO result) {
+        if (result instanceof StateContentDTO) {
+          final StateContentDTO state = (StateContentDTO) result;
+          stateManager.setRetrievedStateAndGo(state);
+          SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+          // Disabled
+          // timer.schedule(4000);
+          // webClient.showBottomToolbar();
+        } else {
+          // webClient.hideBottomToolbar();
+          SpaceSelectEvent.fire(eventBus, Space.userSpace);
+          if (PolymerUtils.isXSmall() && PolymerUtils.getMainSelected().equals("drawer")) {
+            PolymerUtils.setMainSelected();
           }
-        });
+        }
+      }
+    });
   }
 
   private void beforeWaveOpen(final String waveUri) {

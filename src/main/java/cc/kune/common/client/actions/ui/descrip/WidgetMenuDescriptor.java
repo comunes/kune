@@ -60,4 +60,8 @@ public class WidgetMenuDescriptor extends MenuDescriptor {
   public Class<?> getType() {
     return WidgetMenuDescriptor.class;
   }
+
+  public void setWidget(final IsWidget widget) {
+    putValue(WIDGET, widget);
+  }
 }

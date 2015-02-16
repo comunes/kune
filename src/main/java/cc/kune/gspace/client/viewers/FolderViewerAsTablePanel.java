@@ -130,7 +130,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.
    * gspace.client.viewers.items.FolderItemDescriptor,
@@ -166,7 +166,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
     });
     final MenuDescriptor menu = new MenuDescriptor(i18n.t("Actions"));
     // menu.withIcon(res.arrowdown())
-    menu.withStyles("k-def-docbtn, k-btn, k-button");
+    menu.withStyles("k-def-docbtn, k-btn, k-button, pull-right");
     menu.setStandalone(false);
     toolbar.add(menu);
     final GuiActionDescCollection actions = item.getActionCollection();
@@ -212,7 +212,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#clear()
    */
   @Override
@@ -223,7 +223,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#setContainer(cc
    * .kune.core.shared.dto.StateContainerDTO)

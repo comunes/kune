@@ -33,6 +33,7 @@ import cc.kune.common.client.ui.HTMLId;
 public enum PolymerId implements HTMLId {
   /* @formatter:off */
 
+  CHAT_PANEL("chat_centerpanel"),
   CHAT_SITEBAR_ICON_GROUP("sitebar_chat_icon_group"),
   DOC_CONTENT("doc_content"),
   DOC_CONTENT_SECTION("doc_content_section"),
@@ -71,10 +72,12 @@ public enum PolymerId implements HTMLId {
   REPLY_INBOX_FAB("reply_inbox_fab"),
   SITE_BOTTOMBAR("site_bottombar"),
   SITEBAR_LEFT_EXTENSIONBAR("sitebar_left_extensionbar"),
+  SITEBAR_MORE_ICON("sitebar_more_icon"),
   SITEBAR_RIGHT_EXTENSIONBAR("sitebar_right_extensionbar"),
   SITEBAR_SEARCH_GROUP("sitebar_search_group"),
   SITEBAR_SEARCH_ICON("sitebar_search_icon"),
   SITEBAR_SEARCH_INPUT("sitebar_search_input"),
+  SITEBAR_USER_BTN("sitebar_user_btn"),
   SPACE_SELECTOR("space_selector_paper_tabs"),
   USER_SPACE("user_space"),
   USER_SPACE_ICON("user_space_icon");

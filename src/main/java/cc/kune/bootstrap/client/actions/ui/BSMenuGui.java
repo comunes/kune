@@ -9,7 +9,6 @@ import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
 
@@ -57,7 +56,6 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
       @Override
       public void onClick(final ClickEvent event) {
         event.stopPropagation();
-        NotifyUser.info("Stoping propagation");
         menu.show();
       }
     });
@@ -89,7 +87,7 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -99,7 +97,7 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
@@ -111,7 +109,7 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
@@ -123,7 +121,7 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
    * .gwt.resources.client.ImageResource)
@@ -135,7 +133,7 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
@@ -147,7 +145,7 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
@@ -169,7 +167,7 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -180,19 +178,20 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
    */
   @Override
   public void setToolTipText(final String tooltipText) {
-    Tooltip.to(menu.getWidget(), tooltipText);
+    // Tooltip.to(menu.getWidget(), tooltipText);
+    Tooltip.to(menu.getAnchor(), tooltipText);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
@@ -202,7 +201,7 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
    */
   @Override

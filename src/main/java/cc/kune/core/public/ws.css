@@ -1253,7 +1253,9 @@ div.docEditorContainer div.docEditor div.thread {
 .author-count-root {
   margin: -30px 0 0 -30px;
 }
-
+div.docEditor {
+  overflow: inherit;
+}
 div.docEditorContainer div.thread div.time {
   color: #A05A2C;
 }

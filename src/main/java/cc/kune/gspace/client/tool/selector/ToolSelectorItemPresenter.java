@@ -62,6 +62,8 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
      */
     Object getTarget();
 
+    IsWidget getWidget();
+
     /**
      * Sets the selected.
      *
@@ -139,7 +141,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.tool.selector.ToolSelectorItem#getToolShortName()
    */
@@ -150,7 +152,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.tool.selector.ToolSelectorItem#getView()
    */
   @Override
@@ -160,7 +162,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.tool.selector.ToolSelectorItem#getVisibleForRol()
    */
@@ -190,7 +192,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.tool.selector.ToolSelectorItem#setGroupShortName(
    * java.lang.String)
@@ -202,7 +204,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.tool.selector.ToolSelectorItem#setSelected(boolean)
    */
@@ -213,7 +215,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.tool.selector.ToolSelectorItem#setToken(cc.kune.core
    * .shared.domain.utils.StateToken)
@@ -225,7 +227,7 @@ public class ToolSelectorItemPresenter implements ToolSelectorItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.tool.selector.ToolSelectorItem#setVisible(boolean)
    */

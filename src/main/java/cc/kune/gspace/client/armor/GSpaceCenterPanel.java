@@ -28,7 +28,6 @@ import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InsertPanel;
@@ -40,7 +39,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceCenterPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -48,7 +47,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /**
    * The Interface GSpaceCenterPanelUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface GSpaceCenterPanelUiBinder extends UiBinder<Widget, GSpaceCenterPanel> {
@@ -108,7 +107,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /**
    * Enable center scroll.
-   * 
+   *
    * @param enable
    *          the enable
    */
@@ -118,18 +117,17 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
       // Move up???
       centerScroll.setAlwaysShowScrollBars(false);
       DOM.setStyleAttribute(centerScroll.getElement(), "position", "absolute");
-      DOM.setStyleAttribute((Element) centerScroll.getElement().getFirstChildElement(), "position",
-          "relative");
+      DOM.setStyleAttribute(centerScroll.getElement().getFirstChildElement(), "position", "relative");
     } else {
       centerScroll.getElement().getStyle().setOverflow(Overflow.HIDDEN);
       DOM.setStyleAttribute(centerScroll.getElement(), "position", "");
-      DOM.setStyleAttribute((Element) centerScroll.getElement().getFirstChildElement(), "position", "");
+      DOM.setStyleAttribute(centerScroll.getElement().getFirstChildElement(), "position", "");
     }
   }
 
   /**
    * Gets the deck.
-   * 
+   *
    * @return the deck
    */
   InsertPanel.ForIsWidget getDeck() {
@@ -138,7 +136,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /**
    * Gets the height.
-   * 
+   *
    * @return the height
    */
   public int getHeight() {

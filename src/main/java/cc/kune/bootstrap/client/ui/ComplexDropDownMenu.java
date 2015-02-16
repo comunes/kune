@@ -124,6 +124,10 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
     anchor.ensureDebugId(id);
   }
 
+  public ComplexAnchorButton getAnchor() {
+    return anchor;
+  }
+
   public DropDownMenu getList() {
     return menu;
   }

@@ -27,7 +27,6 @@ import java.util.Date;
 import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.chat.client.ShowChatDialogEvent.ShowChatDialogHandler;
 import cc.kune.chat.client.ToggleShowChatDialogEvent.ToggleShowChatDialogHandler;
-import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.chat.client.snd.KuneSoundManager;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
@@ -55,6 +54,8 @@ import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.SitebarActions;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.polymer.client.PolymerId;
 
 import com.calclab.emite.browser.client.AutoConfig;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
@@ -94,12 +95,9 @@ import com.calclab.hablar.roster.client.page.RosterPage;
 import com.calclab.hablar.signals.client.sound.HablarSoundSignals;
 import com.calclab.hablar.user.client.HablarUser;
 import com.calclab.hablar.usergroups.client.HablarUserGroups;
-import com.extjs.gxt.ui.client.Style.Scroll;
-import com.extjs.gxt.ui.client.widget.Dialog;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.AbstractImagePrototype;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -122,7 +120,7 @@ public class ChatClientDefault implements ChatClient {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -137,18 +135,18 @@ public class ChatClientDefault implements ChatClient {
       super();
       kuneEventBus.addHandler(NewUserRegisteredEvent.getType(),
           new NewUserRegisteredEvent.NewUserRegisteredHandler() {
-        @Override
-        public void onNewUserRegistered(final NewUserRegisteredEvent event) {
-          // Blink the chat some seconds
-          setBlink(true);
-          new Timer() {
             @Override
-            public void run() {
-              setBlink(false);
+            public void onNewUserRegistered(final NewUserRegisteredEvent event) {
+              // Blink the chat some seconds
+              setBlink(true);
+              new Timer() {
+                @Override
+                public void run() {
+                  setBlink(false);
+                }
+              }.schedule(20000);
             }
-          }.schedule(20000);
-        }
-      });
+          });
     }
 
     @Override
@@ -181,6 +179,8 @@ public class ChatClientDefault implements ChatClient {
 
   public BlinkAnimation anim;
 
+  private final GSpaceArmor armor;
+
   /** The avatar config. */
   private final Provider<KuneChatAvatarConfig> avatarConfig;
 
@@ -198,14 +198,10 @@ public class ChatClientDefault implements ChatClient {
   /** The chat options. */
   private final ChatOptions chatOptions;
 
-  /** The chat resources. */
-  private final ChatResources chatResources;
-
-  /** The dialog. */
-  private Dialog dialog;
-
   /** The down utils. */
   private final ClientFileDownloadUtils downUtils;
+
+  private boolean emiteInit;
 
   /** The i18n. */
   private final I18nTranslationService i18n;
@@ -306,10 +302,9 @@ public class ChatClientDefault implements ChatClient {
   public ChatClientDefault(final EventBus kuneEventBus, final I18nTranslationService i18n,
       final SitebarActions siteActions, final Session session, final CoreResources res,
       final ClientFileDownloadUtils downUtils, final GlobalShortcutRegister shorcutRegister,
-      final ChatOptions chatOptions, final ChatResources chatResources,
-      final Provider<XmppSession> xmppSession, final Provider<XmppRoster> roster,
-      final Provider<ChatManager> chatManager, final Provider<RoomManager> roomManager,
-      final Provider<AvatarManager> avatarManager,
+      final ChatOptions chatOptions, final Provider<XmppSession> xmppSession,
+      final Provider<XmppRoster> roster, final Provider<ChatManager> chatManager,
+      final Provider<RoomManager> roomManager, final Provider<AvatarManager> avatarManager,
       final Provider<SubscriptionManager> subscriptionManager,
       final Provider<PresenceManager> presenceManager, final Provider<StateManager> xmppStateManager,
       final Provider<RoomDiscoveryManager> roomDiscoveryManager,
@@ -317,7 +312,8 @@ public class ChatClientDefault implements ChatClient {
       final Provider<AvatarProviderRegistry> avatarProviderRegistry,
       final Provider<PrivateStorageManager> privateStorageManager,
       final Provider<SubscriptionHandler> subscriptionHandler,
-      final Provider<KuneChatAvatarConfig> avatarConfig, final AutoConfig autoconfig) {
+      final Provider<KuneChatAvatarConfig> avatarConfig, final AutoConfig autoconfig,
+      final GSpaceArmor armor) {
     this.kuneEventBus = kuneEventBus;
     this.i18n = i18n;
     this.res = res;
@@ -332,7 +328,7 @@ public class ChatClientDefault implements ChatClient {
     this.session = session;
     this.shorcutRegister = shorcutRegister;
     this.chatOptions = chatOptions;
-    this.chatResources = chatResources;
+
     this.xmppSession = xmppSession;
     this.roster = roster;
     this.chatManager = chatManager;
@@ -340,6 +336,7 @@ public class ChatClientDefault implements ChatClient {
     this.avatarManager = avatarManager;
     this.subscriptionManager = subscriptionManager;
     this.avatarConfig = avatarConfig;
+    this.armor = armor;
     action = new ChatClientAction();
 
     session.onAppStart(true, new AppStartEvent.AppStartHandler() {
@@ -378,11 +375,11 @@ public class ChatClientDefault implements ChatClient {
         });
         kuneEventBus.addHandler(AvatarChangedEvent.getType(),
             new AvatarChangedEvent.AvatarChangedHandler() {
-          @Override
-          public void onAvatarChanged(final AvatarChangedEvent event) {
-            setAvatar(event.getPhotoBinary());
-          }
-        });
+              @Override
+              public void onAvatarChanged(final AvatarChangedEvent event) {
+                setAvatar(event.getPhotoBinary());
+              }
+            });
       }
     });
     kuneEventBus.addHandler(AppStopEvent.getType(), new AppStopEvent.AppStopHandler() {
@@ -395,7 +392,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.contacts.SimpleContactManager#addNewBuddy(java.lang
    * .String)
@@ -407,7 +404,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.contacts.SimpleContactManager#chat(java.lang.String)
    */
@@ -418,7 +415,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.chat.client.ChatClient#chat(com.calclab.emite.core.client.xmpp.
    * stanzas.XmppURI)
@@ -477,42 +474,23 @@ public class ChatClientDefault implements ChatClient {
   private void createDialog(final KuneHablarWidget widget, final CustomHtmlConfig htmlConfig) {
     widget.addStyleName("k-chat-panel");
     setSize(widget, htmlConfig);
-    dialog.add(widget);
+    armor.wrapDiv(PolymerId.CHAT_PANEL).add(widget);
   }
 
   /**
    * Creates the dialog if needed.
    */
   private void createDialogIfNeeded() {
-    if (dialog == null) {
-      dialog = new Dialog();
-      dialog.setHeadingText(i18n.t(CHAT_TITLE));
-      dialog.setClosable(true);
-      dialog.setResizable(true);
-      dialog.setButtons("");
-      dialog.setBodyStyleName("k-chat-window");
-      dialog.setScrollMode(Scroll.NONE);
-      dialog.setHideOnButtonClick(true);
-      dialog.setCollapsible(true);
-      dialog.setPosition(0, 0);
-      dialog.setIcon(AbstractImagePrototype.create(chatResources.chatNoBlink()));
+    if (!emiteInit) {
       // dialog.getItem(0).getFocusSupport().setIgnore(true);
       initEmite();
+      emiteInit = true;
     }
-  }
-
-  /**
-   * Dialog visible.
-   *
-   * @return true, if successful
-   */
-  private boolean dialogVisible() {
-    return dialog != null && dialog.isVisible();
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#doLogin()
    */
   @Override
@@ -628,7 +606,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.contacts.SimpleContactManager#isBuddy(java.lang.String)
    */
@@ -639,7 +617,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.chat.client.ChatClient#isBuddy(com.calclab.emite.core.client.xmpp
    * .stanzas.XmppURI)
@@ -657,7 +635,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#isXmppLoggedIn()
    */
   @Override
@@ -667,7 +645,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#joinRoom(java.lang.String,
    * java.lang.String)
    */
@@ -678,7 +656,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#joinRoom(java.lang.String,
    * java.lang.String, java.lang.String)
    */
@@ -701,7 +679,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.chat.client.ChatClient#login(com.calclab.emite.core.client.xmpp
    * .stanzas.XmppURI, java.lang.String)
@@ -713,7 +691,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#loginIfNecessary()
    */
   @Override
@@ -727,14 +705,14 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#logout()
    */
   @Override
   public void logout() {
-    if (dialogVisible()) {
-      dialog.hide();
-    }
+    // if (dialogVisible()) {
+    // // dialog.hide();
+    // }
     if (isXmppLoggedIn()) {
       xmppSession.get().logout();
     }
@@ -742,7 +720,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#roomUriFrom(java.lang.String)
    */
   @Override
@@ -752,7 +730,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#setAvatar(java.lang.String)
    */
   @Override
@@ -770,18 +748,18 @@ public class ChatClientDefault implements ChatClient {
    */
   private void setSize(final Widget widget, final CustomHtmlConfig htmlConfig) {
     if (htmlConfig.width != null) {
-      widget.setWidth("98%");
-      dialog.setWidth(htmlConfig.width);
+      widget.setWidth("100%");
+      // dialog.setWidth(htmlConfig.width);
     }
-    if (htmlConfig.height != null) {
-      widget.setHeight("98%");
-      dialog.setHeight(htmlConfig.height);
-    }
+    // if (htmlConfig.height != null) {
+    // widget.setHeight("100%");
+    // dialog.setHeight(htmlConfig.height);
+
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#show()
    */
   @Override
@@ -799,20 +777,6 @@ public class ChatClientDefault implements ChatClient {
     Log.info("Show dialog: " + show);
     if (session.isLogged()) {
       createDialogIfNeeded();
-      if (dialog.getAbsoluteTop() == 0 && dialog.getAbsoluteLeft() == 0) {
-        // FIXME: parent is not a widget
-        // dialog.setPosition(((Widget)
-        // chatIcon.getValue(ParentWidget.PARENT_UI)).getAbsoluteLeft() + 20,
-        // 20);
-        dialog.setPosition(20, 20);
-      }
-      if (show) {
-        dialog.show();
-        dialog.setZIndex(0);
-        dialog.getHeader().setZIndex(0);
-      } else {
-        dialog.hide();
-      }
     }
   }
 
@@ -821,12 +785,12 @@ public class ChatClientDefault implements ChatClient {
    */
   private void toggleShowDialog() {
     Log.info("Toggle!");
-    showDialog(dialog == null ? true : !dialogVisible());
+    // showDialog(dialog == null ? true : !dialogVisible());
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.chat.client.ChatClient#uriFrom(java.lang.String)
    */
   @Override

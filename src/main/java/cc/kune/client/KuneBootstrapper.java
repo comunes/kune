@@ -10,7 +10,6 @@ import cc.kune.core.client.CoreParts;
 import cc.kune.core.client.actions.xml.XMLActionsParser;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.ErrorsDialog;
-import cc.kune.core.client.sitebar.logo.SiteLogo;
 import cc.kune.core.client.state.SessionExpirationManager;
 import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.client.state.impl.SessionChecker;
@@ -57,21 +56,20 @@ public class KuneBootstrapper implements Bootstrapper {
       final DocsParts docs,
 
       final BlogsParts blogs, final WikiParts wiki, /*
-                                                     * final EventsParts events,
-                                                     * final TasksParts tasks,
-                                                     * final ListsParts lists,
-                                                     * final ChatParts chats,
-                                                     * final BartersParts
-                                                     * barters,
-                                                     */final TrashParts trash,
-
-      final SiteLogo siteLogo,
+       * final EventsParts events,
+       * final TasksParts tasks,
+       * final ListsParts lists,
+       * final ChatParts chats,
+       * final BartersParts
+       * barters,
+       */
+      final TrashParts trash,
 
       final CoreParts coreParts, final GSpaceParts gSpaceParts, /*
-       * final
-       * PSpaceParts
-       * pSpaceParts,
-       */
+                                                                 * final
+                                                                 * PSpaceParts
+                                                                 * pSpaceParts,
+                                                                 */
       final HSpaceParts hSpaceParts,
 
       final XMLActionsParser xmlActionsParser) {

@@ -13,7 +13,7 @@ function setContentMinHeight() {
 }
 
 /* The initial space (0: for home, 2: for group space) useful during tests */
-kt.spaceselected=0;
+kt.spaceselected=2;
 
 /* Screen sizes (inspired in bootstrap) */
 kt.screenlg=1200;
@@ -29,7 +29,6 @@ kt.headerl=192;
 
 kt.toolbarFabMargins=70;
 kt.toolbarFabMinMargins=60;
-
 
 /* Avatar sizes */
 kt.avatarsizel=100;

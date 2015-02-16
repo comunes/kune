@@ -33,8 +33,8 @@ import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 
 // TODO: Auto-generated Javadoc
@@ -43,7 +43,7 @@ import com.google.gwt.user.client.ui.Widget;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class ToolSelectorItemPanel extends Composite implements ToolSelectorItemView {
+public class ToolSelectorItemPanel implements ToolSelectorItemView {
 
   /** The Constant TOOL_ID_PREFIX. */
   public static final String TOOL_ID_PREFIX = "k_tool_item_";
@@ -63,8 +63,9 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
    */
   public ToolSelectorItemPanel(final String shortName, final KuneIcon icon) {
     this.shortName = shortName;
+
     btn = PaperFab.wrap(TOOL_ID_PREFIX + shortName);
-    initWidget(btn);
+
     setVisibleImpl(false);
     btn.setStylePrimaryName("k-tool-item");
     btn.addMouseOverHandler(new MouseOverHandler() {
@@ -99,15 +100,15 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
    */
   @Override
   public Widget asWidget() {
-    return this;
+    return btn;
   }
 
   /**
    * Focus.
    */
   private void focus() {
-    this.addStyleDependentName("focus");
-    this.removeStyleDependentName("nofocus");
+    btn.addStyleDependentName("focus");
+    btn.removeStyleDependentName("nofocus");
   }
 
   /**
@@ -147,7 +148,12 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
    */
   @Override
   public Object getTarget() {
-    return this;
+    return btn;
+  }
+
+  @Override
+  public IsWidget getWidget() {
+    return btn;
   }
 
   /*
@@ -159,10 +165,10 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
   @Override
   public void setSelected(final boolean selected) {
     if (selected) {
-      this.addStyleName("active");
+      btn.addStyleName("active");
       // iconRight.setVisible(true);
     } else {
-      this.removeStyleName("active");
+      btn.removeStyleName("active");
     }
   }
 
@@ -174,7 +180,7 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
    */
   @Override
   public void setTooltip(final String tooltip) {
-    Tooltip.to(this, tooltip);
+    Tooltip.to(btn, tooltip);
   }
 
   /*
@@ -194,15 +200,15 @@ public class ToolSelectorItemPanel extends Composite implements ToolSelectorItem
    *          the new visible impl
    */
   private void setVisibleImpl(final boolean visible) {
-    super.setVisible(visible);
+    btn.setVisible(visible);
   }
 
   /**
    * Unfocus.
    */
   private void unfocus() {
-    this.addStyleDependentName("nofocus");
-    this.removeStyleDependentName("focus");
+    btn.addStyleDependentName("nofocus");
+    btn.removeStyleDependentName("focus");
   }
 
 }

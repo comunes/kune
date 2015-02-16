@@ -22,15 +22,16 @@
  \*/
 package cc.kune.core.client.sitebar;
 
+import br.com.rpa.client._coreelements.CoreIconButton;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.Shortcut;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarMenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.UserSignInEvent;
@@ -43,6 +44,7 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.polymer.client.PolymerId;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -57,7 +59,7 @@ import com.google.inject.Singleton;
 public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /** The Constant LOGGED_USER_MENU. */
-  public static final ToolbarMenuDescriptor LOGGED_USER_MENU = new ToolbarMenuDescriptor();
+  public static final WidgetMenuDescriptor LOGGED_USER_MENU = new WidgetMenuDescriptor();
 
   /** The Constant LOGGED_USER_MENU_ID. */
   public static final String LOGGED_USER_MENU_ID = "kune-sump-lum";
@@ -85,6 +87,8 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /** The state manager. */
   private final StateManager stateManager;
+
+  private final CoreIconButton userBtn;
 
   /**
    * Instantiates a new site user options presenter.
@@ -116,6 +120,9 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     this.icons = icons;
     this.siteOptions = siteOptions;
     this.shortCutRegister = shortCutRegister;
+    userBtn = CoreIconButton.wrap(PolymerId.SITEBAR_USER_BTN.getId());
+    LOGGED_USER_MENU.setWidget(userBtn);
+
     createActions();
     separator.setVisible(false);
     session.onUserSignIn(true, new UserSignInHandler() {
@@ -208,7 +215,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
    *          the new logged user name
    */
   private void setLoggedUserName(final String shortName) {
-    LOGGED_USER_MENU.putValue(Action.NAME, shortName);
+    userBtn.setText(shortName);
   }
 
 }

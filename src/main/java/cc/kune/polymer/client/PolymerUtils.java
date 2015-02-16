@@ -94,7 +94,7 @@ public class PolymerUtils {
 
   public static void setNarrowVisible(final boolean visible) {
     setNarrowVisibleImpl(visible);
-    inboxShowHide.setVisible(visible);
+    // inboxShowHide.setVisible(visible);
   }
 
   private native static void setNarrowVisibleImpl(final boolean visible) /*-{

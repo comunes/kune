@@ -138,7 +138,7 @@
 	  href="bower_components/font-awesome-polymer-icons/fa-icons.html">    
     
     <script type="text/javascript" language="javascript"
-	    src="ws/ws.nocache.js"></script>
+	    src="ws/ws.nocacheNO.js"></script>
     
     <link rel="shortcut icon" href="ws/favicon.ico" />
     <!-- FIXME: make something local -->
@@ -233,7 +233,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
       <core-drawer-panel transition drawerWidth="400px" responsivewidth="1000px" selected="{{main_selected}}" narrow="{{main_narrow}}" id="main_core_drawer_panel" forcenarrow="{{main_forcenarrow}}" disableSwipe="{{main_disableSwipe}}" disableEdgeSwipe="{{main_disableEdgeSwipe}}"  touch-action="pan-y" unresolved>
         <section id="main_left_section" drawer>
           <div horizontal layout>
-            <div id="inbox_chat_container" vertical layout>
+            <div id="inbox_chat_container" vertical layout fit>
               <div id="inbox_container">
                 <core-header-panel mode="waterfall" id="inbox_core_header">
                   <core-toolbar id="inbox_toolbar">
@@ -259,7 +259,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                   </core-toolbar>
                   <section id="chat_section">
                     <div id="chat_centerpanel" layout vertical>
-                      <lorem-element></lorem-element>      
+                      
                     </div>
                   </section>
                 </core-header-panel>              
@@ -411,12 +411,12 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                 <paper-shadow animated id="doc_content_shadow">
                   <div id="doc_vert" layout vertical>
                     <div horizontal layout>
-                      <div id="doc_header_left_extensionbar" layout horizontal start-justified>
-                      </div>
-                      <div id="doc_header_right_extensionbar" layout horizontal end-justified>
-                      </div>
+                      <div id="doc_header_left_extensionbar" layout horizontal></div>
+                      <div id="doc_header_flex" flex></div>
+                      <div id="doc_header_right_extensionbar" layout horizontal></div>
                     </div>                    
                     <div id="doc_content" >
+                      
                     </div>
                   </div>
                 </paper-shadow>
@@ -469,9 +469,11 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          font-family: 'Open Sans', sans-serif;
          /* position: absolute, etc, with fit polymer attribute in body */
        }
+
        #home_space {
          font-size: {{xsmall? '12' : small? '16' : '16'}}px;
        }
+
        #k_home_mask {
          background-color: {{homebackcolor}};
          padding: 30px;
@@ -480,36 +482,46 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #k_home_main_container {
          color: #fff;
        }
+
        #k_home_main_v {
          /* width: {{xsmall ? '100%' : small? '80%' : '60%'}}; ; */         
        }
+
        #k_home_logoname_motto {
        }
+
        #k_home_logo {
          vertical-align: top;
          padding-right: {{xsmall ? '5px' : '20px'}};
        }
+
        #k_home_logoname {
          vertical-align: top;
        }
+
        #k_home_logoname {
          padding: 0px;
        }
+
        #k_home_toolbar {
          margin: {{xsmall? '10px 0': '0 20px'}};
        }
+
        #k_home_center_container {
          width: 100%;
        }
+
        #k_home_center {
          width: {{xsmall ? '100%' : small? '80%' : '60%'}};
          padding:  {{xsmall ? '10px' : '20px 0px'}};
          font-size: {{xsmall? '17' : small? '20' : '20'}}px;
        }
+
        #k_home_center div {
          margin-top: {{xsmall? '5' : small? '10' : '10'}}px;
          margin-bottom: {{xsmall? '5' : small? '10' : '10'}}px;
        }
+
        #k_home_motto {
          font-size: {{xsmall? '22' : small? '45' : '45'}}px;
          color: #a56941;
@@ -517,33 +529,41 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          line-height: 1.3em;
          margin-top: 10px;         
        }
+       
        #k_home_snd-btn {
          margin-top: 5px;
        }
+
        #k_home_1st_description > div {
          margin-top: 10px;
          text-align: justify;
          text-justify: inter-word;
          font-size: {{xsmall ? 16 : small? 20 : 24}}px;
        }
+
        #k_home_tools {
          font-size: {{xsmall? '20' : small? '32' : '32'}}px;
          color: #69312f;
        }
+
        #k_home_tools div:first-child {
          margin-right: {{xsmall ? 20 : small? 40 : 40}}px;
        }
+
        #k_home_tools core-item::shadow #icon {
          margin: 0 6px;
        }
        
        /* Main panels ------------------------------------------------------- */
+
        :host {
          font-size: inherit;
        }
+
        core_selector {
          font-size: 16px;
        }
+
        #main_core_drawer_panel {
          position: absolute;
          top: 0px;
@@ -551,18 +571,22 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          bottom: 0px;
          left: 0px;
        }
+
        #main_left_section {
          box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
          margin-top: 40px;
          background-color: white;
        }
+
        #main_right_section {
          margin-top: 40px;
          height: 100%;
          box-sizing: border-box;
          background-color: #FFF;
        }
+
        /* Sitebar ----------------------------------------------------------- */
+
        #sitebar_toolbar {
          right: 0px;
          left: 0px;
@@ -573,6 +597,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          position: absolute;
          background-color: {{homebackcolor}};
        }
+
        #space_selector_paper_tabs {
          color: rgb(255, 255, 255);
          left: 0px;
@@ -582,9 +607,11 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          height: 40px;
          background-color: {{homebackcolor}};
        }
+
        #home_space, #group_space, #user_space {
          margin-top: 40px;
        }
+
        .full-absolute-no-sitebar,
        #group_space {
          position: absolute;
@@ -594,52 +621,66 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          right: 0px;
          width: 100%;
        }
+
        paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
          background-color: rgb(105, 49, 47);
        }
+
        paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
          height: 4px;
        }
+
        paper-button.custom > core-icon {
          margin-right: 4px;
        }
+
        paper-tab::shadow #ink {
-         color: #FFF;
+       0  color: #FFF;
          opacity: 0.2;
        }
+       
        #sitebar_chat_icon,#sitebar_language_btn, #sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
          margin-top: -20px;
        }
+       
        #paper_progress {
          z-index:1;
        }
+       
        #paper_progress_container {
        }
+       
        #paper_progress::shadow #activeProgress {
          background-color: rgb(165, 105, 65);
        }
+       
        .sitebar_inbox_badge_container {
          top: -23px;
          position: relative;
          left: 95px;
          float: left;
        }
+       
        .sitebar_chats_badge {
          position: relative;
          top: -23px;
          left: -20px;
        }
+       
        .sitebar_inbox_badge {
        }
+       
        .sitebar_search_hide {
          visibility: hidden;
          display: none;
        }
+       
        .sitebar_search_on {
          left: 0;
          background: inherit;
          z-index: 1001;
        }
+       
        #sitebar_search_input {
          background-color: inherit;
          border: none;
@@ -648,13 +689,17 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          padding: 0;
          color: inherit;
        }
+       
        #sitebar_search_group {         
          margin-top: -20px;
        }
+       
        #sitebar_chat_icon_group {
          margin: 0px;
        }
+       
        /* Inbox ------------------------------------------------------------- */
+
        #inbox_show_hide {
          right: -20px;
          position: absolute;
@@ -663,6 +708,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          border-bottom-right-radius: 50%; border-top-right-radius: 50%;
          border-bottom-left-radius: 5px; border-top-left-radius: 5px;
        }
+       
        #inbox_new_message {
          left: -2px;
          position: absolute;
@@ -672,62 +718,79 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          color: white;
          background-color: rgb(153, 187, 0);
        }
+       
        #inbox_chat_container,#inbox_container, #inbox_core_header, #chat_container, #chat_core_header {
          width: 100%;
        }
+       
        #inbox_container, #inbox_core_header, #chat_container, #chat_core_header {
          height: 100%;
        }
+       
        #inbox_core_header, #chat_core_header {
          /* left: 0px;
          top: 0px;
          position: absolute;
          height: 100%; */
        }
+       
        #inboxchat_splitter {
          z-index: 2;
        }
+       
        #inbox_share_icon {
        }
+       
        #inbox_toolbar,#chat_toolbar {
          color: gray;
          height: 60px;
          background-color: rgb(230, 230, 230);
        }
+       
        #inbox_result_section, #chat_centerpanel {
          /*height: 100%;*/
          padding: 10px;
          background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
        }
+       
        #inbox_container {
          overflow-y: scroll;
        }
+       
        #chat_container {
          overflow-y: scroll;
        }
+       
        /* Other ------------------------------------------------------------- */
+
        .btn_gray {
          color: white;
          z-index: 1;
          background-color: gray;
        }
+       
        .btn_green {
          color: white;
          background-color: rgb(153, 187, 0);
        }
+       
        .black {
          color: black;
        }
+       
        .red {
          color: red;
        }
+       
        .hidden {
          display: none;
        }
+       
        html /deep/ core-icon-button {
          /* Bootstrap breaks the 1rem font size of this buttons */
          font-size: 16px;
        }
+       
        /* Group space ------------------------------------------------------- */
        #core_scroll_header_panel {
          width: 100%;
@@ -737,10 +800,12 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          bottom: 40px;
          position: absolute;         
        }
+       
        /* background for toolbar when it is at its full size */
        core-scroll-header-panel::shadow #headerContainer {
          background-color: rgb(200, 113, 55);
        }
+       
        core-scroll-header-panel::shadow #headerBg {
          background-image: url({{group_back_image_url}});         
          background-attachment: fixed;
@@ -748,14 +813,16 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          background-repeat: no-repeat;
          opacity : 0.15 !important;
        }
+       
        /* background for toolbar when it is condensed  (not working because of previous opacity) */
        core-scroll-header-panel::shadow #condensedHeaderBg {
          background-color: rgb(200, 113, 55);
        }
+       
        core-scroll-header-panel::shadow #mainContainer {
          background-color: rgb(223, 223, 223);
        }
-       
+
        #core_drawer_group_header {
          position: absolute;
          top: 0px;
@@ -765,26 +832,32 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          height: {{xsmall? headers: small? headerm: headerl}}px;
          border-right: 13px solid #F2F2F2;
        }
+       
        #group_core_drawer {
          box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
          background-color: white;
        }
+       
        #group_core_main {
          box-sizing: border-box;
          background-color: transparent;
        }
+       
        #header_core_toolbar.tall {
          height: {{xsmall? headers: small? headerm: headerl}}px;
        }
+       
        #header_core_toolbar {
          color: rgb(241, 241, 241);
          fill: rgb(241, 241, 241);
          background-color: transparent;
        }
+
        #header_groupname_div {
          width: 100%;
          margin: 0px;
        }
+       
        #header_group_paper_shadow {
          position: relative;
          left: {{xsmall? 10: small? 52: 52}}px;         
@@ -793,187 +866,229 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          height: {{xsmall ? avatarsizes : small? avatarsizem : avatarsizel}}px;
          border-radius: 2px;
        }
+       
        #header_group_logo {
          margin-right: 30px;
        }
+       
        #header_group_name,#header_short_group_name {
          position: relative;
          left: {{xsmall? 20: small? 60: 60}}px;
        }
+       
        #header_group_name_group {
          margin-top: {{xsmall? 0: small? 0 : 20}}px;
        }
+       
        #header_group_name {
          top: {{xsmall? 7: 10}}px;
          font-size: {{xsmall ? 22 : small? 40 : 50}}px;
        }
+       
        #header_short_group_name {
          font-size: {{xsmall ? 12 : small? 14 : 16}}px;
        }
+       
        #header_short_group_name a {
          color: #CCC;
        }
+       
        #header_group_icon_add, #header_group_icon_settings {
        }
+       
        #header_group_icon_settings {
        }
+       
        #social_net_group {
          padding: {{xsmall? '0 5px 0 0': '0 5px 0 5px'}};
        }
+       
        #group_header_bottom {
          margin-top: {{xsmall ? 44 : small? 33 : 33}}px;
        }
+       
        /* Doc icon */
        #document_name > div {
          font-size: {{xsmall ? 14 : small? 22 : 28}}px;
        }
+
+       .k-content-title-icon {
+         margin-top: {{xsmall? 9: small? 10: 14}}px;
+       }
+
        #document_name > div > input,
        #document_name > div > span {
-         font-size: {{xsmall ? 22 : small? 26 : 32}}px;
+         font-size: {{xsmall ? 24 : small? 26 : 32}}px;
+         line-height: 1.3em;
        }
+
        #document_name {         
          margin-left: {{xsmall ? 10 : 2}}px;
          line-height: 1em;
          margin-bottom: 30px;
          margin-top: 20px;
        }
-
+       
        #miga a, #miga li:before {
          font-size: {{xsmall ? 16 : small? 20 : 22}}px;
        }
+
        #miga {
-         margin-left: {{xsmall ? 5 : 35}}px;
+         margin-left: {{xsmall ? 5 : 40}}px;
        }
+
        #edit_inbox_fab,#reply_inbox_fab,#editdone_inbox_fab {
          position: absolute;
          z-index: 1;
        }
+
        #edit_inbox_fab {
          top: 100px;
          right: 0px;
        }
+
        #reply_inbox_fab {
          top: {{100 + (xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
          right: 0px;
        }
+
        #editdone_inbox_fab {
          top: {{100 + 2*(xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
          right: 0px;
        }
+
        #edit_docgroup_fab, #reply_docgroup_fab, #editdone_docgroup_fab {
          position: absolute;
          z-index: 1;
          left: {{xsmall ? -7 : 25}}px;
        }
+
        #edit_docgroup_fab {
          top: {{xsmall ? 155 : 280}}px;
        }
+
        #reply_docgroup_fab {
          top: {{xsmall? 155 + toolbarFabMinMargins: 280 + toolbarFabMargins}}px;
        }
+       
        #editdone_docgroup_fab {
          top: {{xsmall? 155 + 2*toolbarFabMinMargins: 280 + 2*toolbarFabMargins}}px;
        }
+       
        paper-fab[disabled] {
          color: #808080;
          background-color:#CCC;
        }
+       
        #doc_toolbar_shadow {
          right: 0px;
          left: -10px;         
          bottom: 0px;
          height: 40px;
          position: absolute;         
-         margin: {{xsmall? '0px 27px 0px 20px' : '0px 77px 0px 70px'}};
+         margin: {{xsmall? '0px 25px 0px 20px' : '0px 75px 0px 70px'}};
          top: {{xsmall? 134 : small? 154: 186}}px;         
        }
+       
        #doc_toolbar {
          color: gray;
          height: 40px;
          background-color: white;
        }
+       
        #doc_toolbar /deep/ .toolbar-tools {
          height: 40px;
        }
+       
        core-toolbar.medium-tall {
          line-height: 20px;
        }
+       
        #doc_share_btn {
          right: 10px;
          position: relative;
          top: {{xsmall ? 10 : 0}}px;
        }
-       #tool_icon1 {
-         background-color: rgb(165, 105, 65);
-       }
-       html /deep/ #tool_icon2 /deep/ core-icon, #tool_icon2 /deep/ core-icon, #tool_icon2 core-icon {
-         width: 40px;
-         height: 40px;
-         color: rgb(165, 105, 65);
-         background-color: transparent;
-       }
+       
        #group_tools_toolbar paper-fab {
-         right: {{xsmall ? 1 : 12}}px;         
-         top: {{xsmall ? 155 : small? 220: 255}}px;
+         right: {{xsmall ? 25 : 75}}px;         
+         top: {{xsmall ? 210 : small? 260: 275}}px;
          position: relative;
          z-index: 1;
          color: grey;
          background-color: transparent;
-         -webkit-border-radius: 6px;
-         -webkit-border-top-right-radius: 2px;
-         -webkit-border-bottom-right-radius: 2px;
-         -moz-border-radius: 6px;
-         -moz-border-radius-topright: 2px;
-         -moz-border-radius-bottomright: 2px;
-         border-radius: 6px;
-         border-top-right-radius: 2px;
-         border-bottom-right-radius: 2px;
-         margin-bottom: 0px; /* Distance between tools */
+         border-radius: 50px !important;
+         border-top-right-radius: 0px !important;
+         border-bottom-right-radius: 0px !important; 
+         margin-bottom: 5px; /* Distance between tools */  
        }
+
        #group_tools_toolbar paper-fab::shadow paper-shadow {
          visibility: hidden;
        }
+
        #group_tools_toolbar paper-fab:hover::shadow paper-shadow {
          visibility: visible;
        }
+
        #group_tools_toolbar paper-fab.active::shadow paper-shadow {
          visibility: visible;
        }
+
        #group_tools_toolbar .active:hover,       
        #group_tools_toolbar .active {
          color: white;
          background-color: rgb(165, 105, 65);
        }
-       #group_tools_toolbar paper-fab:hover {
-          background: #eee;
+
+       #group_tools_toolbar paper-fab {
+          background-color: #eee;
           color: rgb(165, 105, 65);
-      }       
+       }
+
+       #group_tools_toolbar paper-fab[mini]::shadow #icon {
+         witdh: 20px;
+         height:20px;
+         left: 4px;  
+       }
+       
+       #group_tools_toolbar paper-fab:hover {
+         background-color: rgb(231, 231, 231);
+         color: rgb(165, 105, 65);
+       } 
+
        #group_tools_toolbar core-item::shadow #label {
          display: none;
        }
+       
        #doc_share_btn {
          color: grey;
        }
+       
        #doc_content_shadow {
          font-size: 16px;
-         padding: {{xsmall ? '30px 10px 10px 10px' : '20px 60px 60px' }};
+         padding: {{xsmall ? '30px 40px 10px 10px' : '20px 60px 60px' }};
          background-color: rgb(255, 255, 255);
          min-height: {{docContentMinHeight + (xsmall? 100: 0)}}px;
-       }       
+       }
+       
        #doc_content_section {
-         padding: {{xsmall ? '10px 27px 10px 10px' : '60px' }};
+         padding: {{xsmall ? '10px 10px 10px 10px' : '60px' }};
          position: absolute;
          top: 0;
          left: 0;
          right: 0;
          bottom: 0;
-         padding-top: {{xsmall? headers + 10: small? headerm + 60: headerl + 60}}px;
-       }       
+         padding-top: {{xsmall? headers + 50: small? headerm + 60: headerl + 60}}px;
+         overflow-y: scroll; /* This makes the scrollbar always visible, so the tools-bar is always in the same position */
+       }
+       
        #header_bottom {
          position: absolute;
          bottom: 10px;
          padding: {{xsmall? '0': '0 80px 0 5px'}};
        }
+       
        #site_bottombar {
          right: 0px;
          left: 0px;
@@ -987,6 +1102,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          background-color: rgb(248, 248, 248);
          padding: 0 15px;
        }
+       
       </style>
     </template>
     

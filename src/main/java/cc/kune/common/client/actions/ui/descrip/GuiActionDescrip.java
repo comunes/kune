@@ -442,7 +442,7 @@ public interface GuiActionDescrip {
   GuiActionDescrip withShortcut(String keys, GlobalShortcutRegister register);
 
   /**
-   * With styles.
+   * Add this list of styles (comma separated) to the final widget.
    *
    * @param styles
    *          the styles

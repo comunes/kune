@@ -25,6 +25,7 @@ package cc.kune.core.client.sitebar;
 import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
+import cc.kune.polymer.client.PolymerId;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -36,7 +37,7 @@ public interface SitebarActions {
 
   /** The Constant MORE_MENU. */
   static final WidgetMenuDescriptor MORE_MENU = new WidgetMenuDescriptor(
-      PaperIconButton.wrap("sitebar_more_icon"));
+      PaperIconButton.wrap(PolymerId.SITEBAR_MORE_ICON.getId()));
 
   /** The Constant RIGHT_TOOLBAR. */
   static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();

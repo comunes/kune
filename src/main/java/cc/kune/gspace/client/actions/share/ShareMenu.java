@@ -52,7 +52,7 @@ public class ShareMenu extends MenuLoggedDescriptor {
     super(rightsManager);
     this.icons = res;
     this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with group members, etc")).withIcon(
-        res.world()).withStyles(ActionStyles.MENU_BTN_STYLE_LEFT).withId(ID);
+        res.world()).withStyles(ActionStyles.MENU_BTN_STYLE_RIGHT).withId(ID);
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {

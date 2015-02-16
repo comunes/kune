@@ -22,7 +22,6 @@
  */
 package cc.kune.common.client.actions;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ActionStyles.
  *
@@ -32,33 +31,28 @@ public class ActionStyles {
 
   public static final String BTN_EDIT = "btn_green";
 
-  /** The Constant BTN_NO_BACK_NO_BORDER. */
   public static final String BTN_NO_BACK_NO_BORDER = "k-noborder-btn";
-  /** The Constant BTN_SMALL. */
+
   public static final String BTN_SMALL = "k-btn-min";
+
   public static final String CURRENT_TOOLBAR_ITEM = "current-item";
 
-  // FIXME add here more styles and use then
-  /** The Constant MENU_BTN_STYLE_LEFT. */
   public static final String MENU_BTN_STYLE_LEFT = "k-fl";
 
   public static final String MENU_BTN_STYLE_NO_BORDER_LEFT = "k-fl, k-noborder, k-no-backimage, k-nobackcolor";
 
-  /** The Constant MENU_BTN_STYLE_NO_BORDER_RIGHT. */
-  public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-no-backimage, k-nobackcolor";
+  public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-no-backimage, k-nobackcolor, pull-right";
 
-  /** The Constant MENU_BTN_STYLE_RIGHT. */
-  public static final String MENU_BTN_STYLE_RIGHT = "k-fr";
+  public static final String MENU_BTN_STYLE_RIGHT = "k-fr, pull-right";
 
-  public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
+  public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor, pull-right";
+
   public static final String SHARE_ITEM_ACTIONS = "k-share-item-actions";
 
   public static final String SHARE_ITEM_NO_ACTIONS = "k-share-item-noactions";
 
-  /** The Constant SITEBAR_STYLE. */
   public static final String SITEBAR_STYLE = "k-no-backimage, k-noborder, k-nobackcolor";
 
-  /** The Constant SITEBAR_STYLE_FL. */
   public static final String SITEBAR_STYLE_FL = SITEBAR_STYLE + ", k-fl";
 
 }

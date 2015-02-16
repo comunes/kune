@@ -27,6 +27,7 @@ import br.com.rpa.client._paperelements.PaperProgress;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.ProgressShowEvent;
+import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
@@ -64,7 +65,10 @@ public class PaperProgressNotificator {
         progress.setVisible(true);
         progress.setValue(0);
         progress.setIndeterminate(true);
-        NotifyUser.info(event.getMessage());
+        final String message = event.getMessage();
+        if (TextUtils.notEmpty(message)) {
+          NotifyUser.info(message);
+        }
       }
     });
   }
