@@ -29,9 +29,9 @@ import cc.kune.core.client.services.ClientFileDownloadUtils;
 import com.calclab.hablar.signals.client.notifications.HablarNotifier;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -40,43 +40,52 @@ import com.google.gwt.regexp.shared.RegExp;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneChatNotifier implements HablarNotifier {
-  
+
   /** The down utils. */
   private final ClientFileDownloadUtils downUtils;
-  
+
   /** The event bus. */
   private final EventBus eventBus;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
-  
+
   /** The reg exp. */
   private final RegExp regExp;
 
   /**
    * Instantiates a new kune chat notifier.
    *
-   * @param i18n the i18n
-   * @param downUtils the down utils
-   * @param eventBus the event bus
+   * @param i18n
+   *          the i18n
+   * @param downUtils
+   *          the down utils
+   * @param eventBus
+   *          the event bus
    */
   public KuneChatNotifier(final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils,
       final EventBus eventBus) {
     this.i18n = i18n;
     this.downUtils = downUtils;
     this.eventBus = eventBus;
-    regExp = RegExp.compile("User (.*) says «(.*)»");
+    regExp = RegExp.compile("(.*) says «(.*)»");
   }
 
-  /* (non-Javadoc)
-   * @see com.calclab.hablar.signals.client.notifications.HablarNotifier#getDisplayName()
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.calclab.hablar.signals.client.notifications.HablarNotifier#getDisplayName
+   * ()
    */
   @Override
   public String getDisplayName() {
     return "Bottom notifier";
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.calclab.hablar.signals.client.notifications.HablarNotifier#getId()
    */
   @Override
@@ -84,8 +93,12 @@ public class KuneChatNotifier implements HablarNotifier {
     return "kuneChatNotifier";
   }
 
-  /* (non-Javadoc)
-   * @see com.calclab.hablar.signals.client.notifications.HablarNotifier#show(java.lang.String, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.calclab.hablar.signals.client.notifications.HablarNotifier#show(java
+   * .lang.String, java.lang.String)
    */
   @Override
   public void show(final String userMessage, final String messageType) {
@@ -95,11 +108,11 @@ public class KuneChatNotifier implements HablarNotifier {
       final String user = m.getGroup(1);
       NotifyUser.avatar(downUtils.getUserAvatar(user),
           i18n.t("User [%s] says «[%s]»", user, m.getGroup(2)), new ClickHandler() {
-            @Override
-            public void onClick(final ClickEvent event) {
-              ShowChatDialogEvent.fire(eventBus, true);
-            }
-          });
+        @Override
+        public void onClick(final ClickEvent event) {
+          ShowChatDialogEvent.fire(eventBus, true);
+        }
+      });
     } else {
       NotifyUser.info(userMessage);
     }

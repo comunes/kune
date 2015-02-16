@@ -26,7 +26,7 @@ import com.google.web.bindery.event.shared.EventBus;
 @Singleton
 public class UserNotifierGrowl {
   /** The Constant AVATAR_SIZE. */
-  private static final int AVATAR_SIZE = 40;
+  private static final String AVATAR_SIZE = "40px";
   private static final String SEPARATOR = " ";
 
   /**
@@ -78,7 +78,8 @@ public class UserNotifierGrowl {
           final ClickHandler clickHandler = event.getClickHandler();
           final Container container = new Container();
           container.setFluid(true);
-          final Image avatar = new Image(event.getLevel().getUrl(), 0, 0, AVATAR_SIZE, AVATAR_SIZE);
+          final Image avatar = new Image(event.getLevel().getUrl());
+          avatar.setSize(AVATAR_SIZE, AVATAR_SIZE);
           avatar.addStyleName("k-fl");
           avatar.addStyleName("growl-icon-margin");
           container.add(avatar);
