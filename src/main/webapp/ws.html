@@ -138,7 +138,7 @@
 	  href="bower_components/font-awesome-polymer-icons/fa-icons.html">    
     
     <script type="text/javascript" language="javascript"
-	    src="ws/ws.nocacheNO.js"></script>
+	    src="ws/ws.nocache.js"></script>
     
     <link rel="shortcut icon" href="ws/favicon.ico" />
     <!-- FIXME: make something local -->
@@ -243,6 +243,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                     <div layout horizontal end-justified>
                       <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
                       <paper-icon-button icon="input" id="inbox_share_icon"></paper-icon-button>
+                      <paper-icon-button icon="arrow-back" on-click="{{closeMainDrawer}}" id="inbox_close_icon"></paper-icon-button>
                     </div>
                   </core-toolbar>
                   <section id="inbox_result_section">
@@ -251,14 +252,14 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                   </section>
                 </core-header-panel>
               </div>
-              <core-splitter id="inboxchat_splitter" minSize="250px" direction="up"></core-splitter>
+              <core-splitter id="inboxchat_splitter" minSize="120px" direction="up"></core-splitter>
               <div id="chat_container">
                 <core-header-panel mode="waterfall" id="chat_core_header">
                   <core-toolbar id="chat_toolbar">
                     <div>Chat</div>
                   </core-toolbar>
                   <section id="chat_section">
-                    <div id="chat_centerpanel" layout vertical>
+                    <div id="chat_centerpanel" layout vertical fit>
                       
                     </div>
                   </section>
@@ -612,6 +613,10 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          margin-top: 40px;
        }
 
+       #user_space {
+         overflow-y: scroll;
+       }
+
        .full-absolute-no-sitebar,
        #group_space {
          position: absolute;
@@ -732,6 +737,10 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          top: 0px;
          position: absolute;
          height: 100%; */
+       }
+
+       #inbox_close_icon {
+         display: {{main_forcenarrow? 'none': 'inline-block'}};
        }
        
        #inboxchat_splitter {
@@ -902,6 +911,11 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #social_net_group {
          padding: {{xsmall? '0 5px 0 0': '0 5px 0 5px'}};
        }
+
+       #k_group_entity_toolbar > div > div > button {
+         min-height: 39px;
+         color: #FFF;
+       }
        
        #group_header_bottom {
          margin-top: {{xsmall ? 44 : small? 33 : 33}}px;
@@ -944,17 +958,17 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
 
        #edit_inbox_fab {
          top: 100px;
-         right: 0px;
+         left: 0px;
        }
 
        #reply_inbox_fab {
          top: {{100 + (xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
-         right: 0px;
+         left: 0px;
        }
 
        #editdone_inbox_fab {
          top: {{100 + 2*(xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
-         right: 0px;
+         left: 0px;
        }
 
        #edit_docgroup_fab, #reply_docgroup_fab, #editdone_docgroup_fab {
@@ -964,15 +978,15 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
 
        #edit_docgroup_fab {
-         top: {{xsmall ? 155 : 280}}px;
+         top: {{xsmall ? 260 : small? 290 : 320}}px;
        }
 
        #reply_docgroup_fab {
-         top: {{xsmall? 155 + toolbarFabMinMargins: 280 + toolbarFabMargins}}px;
+         top: {{xsmall? 260 + toolbarFabMinMargins: (small? 290 : 320) + toolbarFabMargins}}px;
        }
        
        #editdone_docgroup_fab {
-         top: {{xsmall? 155 + 2*toolbarFabMinMargins: 280 + 2*toolbarFabMargins}}px;
+         top: {{xsmall? 260 + 2*toolbarFabMinMargins: (small? 290 : 320) + 2*toolbarFabMargins}}px;
        }
        
        paper-fab[disabled] {
@@ -1012,7 +1026,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        
        #group_tools_toolbar paper-fab {
          right: {{xsmall ? 25 : 75}}px;         
-         top: {{xsmall ? 210 : small? 260: 275}}px;
+         top: {{xsmall ? 260 : small? 290: 320}}px;
          position: relative;
          z-index: 1;
          color: grey;

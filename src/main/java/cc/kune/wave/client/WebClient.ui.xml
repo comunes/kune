@@ -6,7 +6,7 @@
     @def rootBackground #f4e3d7;
     @def gap 5px;
     .root {
-      background: rootBackground;
+ /*     background: rootBackground;
       position: absolute;
       top: 0;
       left: 0;
@@ -14,7 +14,7 @@
       bottom: 0;
       -moz-border-radius: 5px;
       -webkit-border-radius: 5px;
-      border-radius: 5px;
+      border-radius: 5px; */
     }
 
     .root2 {
@@ -54,11 +54,11 @@
     }
 
     .waveHolder {
-      position: absolute;
+      /* position: absolute;
       top: 0;
       bottom: 0;
       left: 0;
-      right: 0;
+      right: 0; */
     }
   </ui:style>
   <g:DockLayoutPanel unit="PX" styleName="{style.root}">

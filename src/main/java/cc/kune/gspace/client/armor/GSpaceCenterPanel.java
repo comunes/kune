@@ -24,10 +24,8 @@
 package cc.kune.gspace.client.armor;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InsertPanel;
@@ -73,7 +71,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.user.client.ui.InsertPanel.ForIsWidget#add(com.google.gwt
    * .user.client.ui.IsWidget)
@@ -85,7 +83,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.user.client.ui.InsertPanel#add(com.google.gwt.user.client
    * .ui.Widget)
@@ -97,7 +95,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.armor.GSpaceCenter#clear()
    */
   @Override
@@ -115,13 +113,16 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
     // TODO use here Element.getStyle()...
     if (enable) {
       // Move up???
-      centerScroll.setAlwaysShowScrollBars(false);
-      DOM.setStyleAttribute(centerScroll.getElement(), "position", "absolute");
-      DOM.setStyleAttribute(centerScroll.getElement().getFirstChildElement(), "position", "relative");
+      // centerScroll.setAlwaysShowScrollBars(false);
+      // DOM.setStyleAttribute(centerScroll.getElement(), "position",
+      // "absolute");
+      // DOM.setStyleAttribute(centerScroll.getElement().getFirstChildElement(),
+      // "position", "relative");
     } else {
-      centerScroll.getElement().getStyle().setOverflow(Overflow.HIDDEN);
-      DOM.setStyleAttribute(centerScroll.getElement(), "position", "");
-      DOM.setStyleAttribute(centerScroll.getElement().getFirstChildElement(), "position", "");
+      // centerScroll.getElement().getStyle().setOverflow(Overflow.HIDDEN);
+      // DOM.setStyleAttribute(centerScroll.getElement(), "position", "");
+      // DOM.setStyleAttribute(centerScroll.getElement().getFirstChildElement(),
+      // "position", "");
     }
   }
 
@@ -145,7 +146,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.IndexedPanel#getWidget(int)
    */
   @Override
@@ -155,7 +156,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.IndexedPanel#getWidgetCount()
    */
   @Override
@@ -165,7 +166,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.user.client.ui.IndexedPanel.ForIsWidget#getWidgetIndex(com
    * .google.gwt.user.client.ui.IsWidget)
@@ -177,7 +178,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.user.client.ui.IndexedPanel#getWidgetIndex(com.google.gwt
    * .user.client.ui.Widget)
@@ -189,7 +190,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.user.client.ui.InsertPanel.ForIsWidget#insert(com.google
    * .gwt.user.client.ui.IsWidget, int)
@@ -201,7 +202,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.user.client.ui.InsertPanel#insert(com.google.gwt.user.client
    * .ui.Widget, int)
@@ -213,7 +214,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.IndexedPanel#remove(int)
    */
   @Override
@@ -223,7 +224,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.armor.GSpaceCenter#showWidget(com.google.gwt.user
    * .client.ui.IsWidget)

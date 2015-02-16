@@ -1,5 +1,5 @@
 var kt = document.querySelector('#kunetemplate');
-
+var mdrawer = document.querySelector('#main_core_drawer_panel')
 kt.toggle_social_net = function() {
   document.querySelector('#core_drawer_group_header').togglePanel();
 }
@@ -53,6 +53,12 @@ function toggleVis(id) {
   if (el != null) el.classList.toggle("sitebar_search_hide");
   if (el != null) el.classList.toggle("sitebar_search_on");
 }
+
+kt.closeMainDrawer = function(e,detail,sender) {
+  kt.main_forcenarrow=true;
+  mdrawer.closeDrawer();
+}
+
 
 kt.toggleSearch = function(e,detail,sender) {
   if(e) {

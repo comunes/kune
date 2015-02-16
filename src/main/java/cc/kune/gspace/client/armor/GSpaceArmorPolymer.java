@@ -143,6 +143,10 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   @Override
   public void enableCenterScroll(final boolean enable) {
     try {
+      /*
+       * NOTE: With Overflow.SCROLL instead of VISIBLE, breaks header and wave
+       * navegation
+       */
       getElementById("doc_content_section").getStyle().setOverflowY(
           enable ? Overflow.VISIBLE : Overflow.HIDDEN);
     } catch (final Exception e) {
