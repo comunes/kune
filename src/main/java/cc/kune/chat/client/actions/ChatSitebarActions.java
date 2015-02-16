@@ -26,6 +26,7 @@ import org.waveprotocol.wave.client.events.ClientEvents;
 import org.waveprotocol.wave.client.events.NetworkStatusEvent;
 import org.waveprotocol.wave.client.events.NetworkStatusEventHandler;
 
+import br.com.rpa.client._coreelements.CoreIconButton;
 import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.AbstractAction;
@@ -86,7 +87,7 @@ public class ChatSitebarActions {
         @Override
         public void onStateChanged(final StateChangedEvent event) {
           if (!session.isReady()) {
-            SiteUserOptionsPresenter.LOGGED_USER_MENU.setRightIcon(icon);
+            setChatIcon(icon);
           }
         }
       });
@@ -167,7 +168,7 @@ public class ChatSitebarActions {
       if (thisPresence.getShow().equals(currentPresence.getShow())
           && ((currentPresence.getStatus() == null) || currentPresence.getStatus().equals(
               thisPresence.getStatus()))) {
-        SiteUserOptionsPresenter.LOGGED_USER_MENU.setRightIcon(icon);
+        setChatIcon(icon);
       }
     }
   }
@@ -381,6 +382,10 @@ public class ChatSitebarActions {
   private AbstractExtendedAction onlineAction(final String statusText, final Show show,
       final ImageResource icon) {
     return new ChangeOnlineStatusAction(presenceManager, statusText, show, icon);
+  }
+
+  private void setChatIcon(final ImageResource icon) {
+    ((CoreIconButton) SiteUserOptionsPresenter.LOGGED_USER_MENU.getWidget()).setIconSrc(icon.getSafeUri().asString());
   }
 
   /**
