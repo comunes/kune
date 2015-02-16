@@ -135,8 +135,9 @@ public class CustomEditToolbar {
     editInInbox.setVisible(visible);
     replyInGroup.setVisible(visible);
     replyInInbox.setVisible(visible);
-    // Dirty workaroud while we remove all edit links
-    $(".org-waveprotocol-wave-client-wavepanel-view-dom-full-BlipViewBuilder-Css-menu").hide();
+    // Dirty workaround while we remove all edit links (so yo can only remove
+    // just write comments)
+    $(".org-waveprotocol-wave-client-wavepanel-view-dom-full-BlipViewBuilder-Css-menu").remove();
   }
 
   public void setEditDoneVisible(final boolean visible) {
