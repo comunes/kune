@@ -2,6 +2,7 @@ package cc.kune.client;
 
 import cc.kune.blogs.client.BlogsParts;
 import cc.kune.bootstrap.client.BSGuiProvider;
+import cc.kune.chat.client.ChatParts;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.utils.MetaUtils;
@@ -56,20 +57,20 @@ public class KuneBootstrapper implements Bootstrapper {
       final DocsParts docs,
 
       final BlogsParts blogs, final WikiParts wiki, /*
-       * final EventsParts events,
-       * final TasksParts tasks,
-       * final ListsParts lists,
-       * final ChatParts chats,
-       * final BartersParts
-       * barters,
-       */
+                                                     * final EventsParts events,
+                                                     * final TasksParts tasks,
+                                                     * final ListsParts lists,
+                                                     */
+      final ChatParts chats, /*
+                              * final BartersParts barters,
+                              */
       final TrashParts trash,
 
       final CoreParts coreParts, final GSpaceParts gSpaceParts, /*
-                                                                 * final
-                                                                 * PSpaceParts
-                                                                 * pSpaceParts,
-                                                                 */
+       * final
+       * PSpaceParts
+       * pSpaceParts,
+       */
       final HSpaceParts hSpaceParts,
 
       final XMLActionsParser xmlActionsParser) {

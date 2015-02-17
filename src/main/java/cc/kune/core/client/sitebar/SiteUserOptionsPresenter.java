@@ -39,13 +39,15 @@ import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.resources.CoreMessages;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.resources.iconic.IconicResources;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.polymer.client.PolymerId;
+import cc.kune.polymer.client.PolymerUtils;
 
+import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -59,19 +61,19 @@ import com.google.inject.Singleton;
 public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /** The Constant LOGGED_USER_MENU. */
-  public static final WidgetMenuDescriptor LOGGED_USER_MENU = new WidgetMenuDescriptor();
+  public static final WidgetMenuDescriptor LOGGED_USER_MENU = new WidgetMenuDescriptor(
+      CoreIconButton.wrap(PolymerId.SITEBAR_USER_BTN.getId()));
 
   /** The Constant LOGGED_USER_MENU_ID. */
   public static final String LOGGED_USER_MENU_ID = "kune-sump-lum";
+
+  private final ClientFileDownloadUtils downUtils;
 
   /** The i18n. */
   private final I18nTranslationService i18n;
 
   /** The icons. */
   private final IconicResources icons;
-
-  /** The res. */
-  private final CoreResources res;
 
   /** The separator. */
   private ToolbarSeparatorDescriptor separator;
@@ -110,18 +112,17 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
    */
   @Inject
   public SiteUserOptionsPresenter(final Session session, final StateManager stateManager,
-      final I18nTranslationService i18n, final CoreResources img, final IconicResources icons,
-      final SitebarActions siteOptions, final GlobalShortcutRegister shortCutRegister) {
+      final I18nTranslationService i18n, final IconicResources icons, final SitebarActions siteOptions,
+      final GlobalShortcutRegister shortCutRegister, final ClientFileDownloadUtils downUtils) {
     super();
     this.session = session;
     this.stateManager = stateManager;
     this.i18n = i18n;
-    this.res = img;
     this.icons = icons;
     this.siteOptions = siteOptions;
     this.shortCutRegister = shortCutRegister;
-    userBtn = CoreIconButton.wrap(PolymerId.SITEBAR_USER_BTN.getId());
-    LOGGED_USER_MENU.setWidget(userBtn);
+    this.downUtils = downUtils;
+    userBtn = (CoreIconButton) LOGGED_USER_MENU.getWidget();
 
     createActions();
     separator.setVisible(false);
@@ -170,6 +171,8 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
   private void createActions() {
     LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
     LOGGED_USER_MENU.setParent(SitebarActions.RIGHT_TOOLBAR);
+    ((Widget) LOGGED_USER_MENU.getWidget()).setStylePrimaryName("core_icon_status");
+
     LOGGED_USER_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     // LOGGED_USER_MENU.withIcon(res.arrowdownsitebarSmall());
     separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
@@ -202,6 +205,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
    *          the user info dto
    */
   private void onUserSignIn(final UserInfoDTO userInfoDTO) {
+    PolymerUtils.setSitebarUserIconImage(downUtils.getUserAvatar(userInfoDTO.getShortName()));
     LOGGED_USER_MENU.setVisible(true);
     LOGGED_USER_MENU.setEnabled(true);
     setLoggedUserName(userInfoDTO.getShortName());

@@ -81,13 +81,14 @@ public class ChatSitebarActions {
      * @param icon
      *          the icon
      */
-    public ChangeOfflineStatusAction(final XmppSession session, final ImageResource icon) {
+    public ChangeOfflineStatusAction(final XmppSession session) {
       this.session = session;
       session.addSessionStateChangedHandler(true, new StateChangedHandler() {
         @Override
         public void onStateChanged(final StateChangedEvent event) {
           if (!session.isReady()) {
-            setChatIcon(icon);
+            chatIcon.setIcon("kune:chat-status");
+            chatIcon.setStyleName(STYLE_PREFIX + "offline");
           }
         }
       });
@@ -105,16 +106,12 @@ public class ChatSitebarActions {
       session.logout();
     }
   }
-
   /**
    * The Class ChangeOnlineStatusAction.
    *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class ChangeOnlineStatusAction extends AbstractExtendedAction {
-
-    /** The icon. */
-    private final ImageResource icon;
 
     /** The manager. */
     private final PresenceManager manager;
@@ -135,9 +132,8 @@ public class ChatSitebarActions {
      *          the icon
      */
     public ChangeOnlineStatusAction(final PresenceManager presenceManager, final String statusText,
-        final Show show, final ImageResource icon) {
+        final Show show) {
       this.manager = presenceManager;
-      this.icon = icon;
       thisPresence = Presence.build(statusText, show);
       updateStatusIcon(presenceManager.getOwnPresence());
     }
@@ -168,7 +164,7 @@ public class ChatSitebarActions {
       if (thisPresence.getShow().equals(currentPresence.getShow())
           && ((currentPresence.getStatus() == null) || currentPresence.getStatus().equals(
               thisPresence.getStatus()))) {
-        setChatIcon(icon);
+        setChatIcon(currentPresence.getShow());
       }
     }
   }
@@ -182,6 +178,8 @@ public class ChatSitebarActions {
   /** The Constant NO_STATUS. */
   private static final String NO_STATUS = null;
 
+  private static final String STYLE_PREFIX = "core-icon-status-";
+
   /** The away item. */
   private MenuRadioItemDescriptor awayItem;
 
@@ -193,6 +191,8 @@ public class ChatSitebarActions {
 
   /** The chat client. */
   private final ChatClient chatClient;
+
+  private final CoreIconButton chatIcon;
 
   /** The event bus. */
   private final EventBus eventBus;
@@ -245,6 +245,7 @@ public class ChatSitebarActions {
   public ChatSitebarActions(final SessionConstants session, final ChatClient chatClient,
       final SiteUserOptions userOptions, final I18nTranslationService i18n, final ChatResources res,
       final XmppSession xmppSession, final PresenceManager presenceManager, final EventBus eventBus) {
+    chatIcon = (CoreIconButton) SiteUserOptionsPresenter.LOGGED_USER_MENU.getWidget();
     this.chatClient = chatClient;
     this.userOptions = userOptions;
     this.i18n = i18n;
@@ -268,13 +269,11 @@ public class ChatSitebarActions {
     userOptions.addAction(separator);
     userOptions.addAction(chatActionsTitle);
     onlineItem = createChatStatusAction(res.online(), i18n.t("Available"),
-        onlineAction(NO_STATUS, Show.notSpecified, res.online()));
-    awayItem = createChatStatusAction(res.away(), i18n.t("Away"),
-        onlineAction(NO_STATUS, Show.away, res.away()));
-    busyItem = createChatStatusAction(res.busy(), i18n.t("Busy"),
-        onlineAction(NO_STATUS, Show.dnd, res.busy()));
+        onlineAction(NO_STATUS, Show.notSpecified));
+    awayItem = createChatStatusAction(res.away(), i18n.t("Away"), onlineAction(NO_STATUS, Show.away));
+    busyItem = createChatStatusAction(res.busy(), i18n.t("Busy"), onlineAction(NO_STATUS, Show.dnd));
     offlineItem = createChatStatusAction(res.offline(), i18n.t("Sign out of chat"),
-        new ChangeOfflineStatusAction(xmppSession, res.offline()));
+        new ChangeOfflineStatusAction(xmppSession));
   }
 
   /**
@@ -379,13 +378,29 @@ public class ChatSitebarActions {
    *          the icon
    * @return the abstract extended action
    */
-  private AbstractExtendedAction onlineAction(final String statusText, final Show show,
-      final ImageResource icon) {
-    return new ChangeOnlineStatusAction(presenceManager, statusText, show, icon);
+  private AbstractExtendedAction onlineAction(final String statusText, final Show show) {
+    return new ChangeOnlineStatusAction(presenceManager, statusText, show);
   }
 
-  private void setChatIcon(final ImageResource icon) {
-    ((CoreIconButton) SiteUserOptionsPresenter.LOGGED_USER_MENU.getWidget()).setIconSrc(icon.getSafeUri().asString());
+  private void setChatIcon(final Show show) {
+    switch (show) {
+    case notSpecified:
+      chatIcon.setIcon("kune:chat-status");
+      chatIcon.setStyleName(STYLE_PREFIX + "online");
+      break;
+    case dnd:
+      chatIcon.setIcon("kune:chat-status");
+      chatIcon.setStyleName(STYLE_PREFIX + "busy");
+      break;
+    case chat:
+      chatIcon.setIcon("kune:chat-status");
+      chatIcon.setStyleName(STYLE_PREFIX + "online");
+      break;
+    case away:
+      chatIcon.setIcon("kune:chat-status-away");
+      chatIcon.setStyleName(STYLE_PREFIX + "away");
+      break;
+    }
   }
 
   /**

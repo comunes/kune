@@ -64,6 +64,10 @@ public class PolymerUtils {
 		return $wnd.kt.xsmall;
   }-*/;
 
+  public native static void setBackImage(final String url) /*-{
+		$wnd.kt.group_back_image_url = url;
+  }-*/;
+
   /**
    * Shows/select the "inbox" drawer.
    */
@@ -99,6 +103,10 @@ public class PolymerUtils {
 
   private native static void setNarrowVisibleImpl(final boolean visible) /*-{
 		$wnd.kt.main_forcenarrow = !visible;
+  }-*/;
+
+  public native static void setSitebarUserIconImage(final String url) /*-{
+		$wnd.kt.user_icon_back_image_url = url;
   }-*/;
 
   public native static void toggleSearch() /*-{

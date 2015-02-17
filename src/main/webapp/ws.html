@@ -242,7 +242,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                     <div flex></div>
                     <div layout horizontal end-justified>
                       <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
-                      <paper-icon-button icon="input" id="inbox_share_icon"></paper-icon-button>
+                      <paper-icon-button icon="group-work" id="inbox_share_icon"></paper-icon-button>
                       <paper-icon-button icon="arrow-back" on-click="{{closeMainDrawer}}" id="inbox_close_icon"></paper-icon-button>
                     </div>
                   </core-toolbar>
@@ -451,9 +451,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
           <paper-icon-button icon="kune:chat" id="sitebar_chat_icon"></paper-icon-button>
         </div>
         <core-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn">English</core-icon-button>
-        <core-icon-button icon="account-circle" id="sitebar_user_btn">
-          <span class="hidden-xs hidden-sm">John Doe</span>
-        </core-icon-button>
+        <core-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></core-icon-button>
         <paper-icon-button icon="search" on-click="{{ toggleSearch }}" id="sitebar_search_icon"></paper-icon-button>
         <div id="sitebar_search_group">
           <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
@@ -801,6 +799,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
        
        /* Group space ------------------------------------------------------- */
+
        #core_scroll_header_panel {
          width: 100%;
          left: 0px;
@@ -1116,6 +1115,41 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          background-color: rgb(248, 248, 248);
          padding: 0 15px;
        }
+
+       /* Chat status icons ------------------------------------------------- */
+
+       #sitebar_user_btn {
+         visibility: hidden;
+         display: none;
+       }
+       
+       #sitebar_user_btn::shadow core-icon {
+       #sitebar_user_btn::shadow core-icon {
+         background-image: url({{user_icon_back_image_url}});
+         border-radius: 50%;
+         background-size: 24px;
+         margin-right: 3px;
+       }
+
+      .core-icon-status-away::shadow core-icon path:nth-child(2) {
+        fill: rgb(255, 255, 255);
+       }
+       
+      .core-icon-status-away::shadow core-icon path:first-child {
+        fill: rgb(144, 144, 144);
+       }
+       
+      .core-icon-status-online::shadow core-icon {
+        fill: rgb(95, 255, 39);
+       }
+       
+       .core-icon-status-busy::shadow core-icon {
+        fill: rgb(255, 85, 85);
+       }
+       
+       .core-icon-status-offline::shadow core-icon {
+        fill: rgb(128, 128, 128);
+      }
        
       </style>
     </template>
