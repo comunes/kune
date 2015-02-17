@@ -22,23 +22,19 @@
  */
 package cc.kune.wave.client.kspecific;
 
-import org.waveprotocol.wave.client.widget.common.ImplPanel;
-
 import cc.kune.common.client.log.Log;
 import cc.kune.wave.client.CustomStagesProvider;
 
-import com.google.gwt.user.client.ui.HasWidgets;
-
 /**
  * The Class WaveClientUtils.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveClientUtils {
 
   /**
    * Clear.
-   * 
+   *
    * @param wave
    *          the wave
    * @param waveHolder
@@ -46,7 +42,7 @@ public class WaveClientUtils {
    * @param parent
    *          the parent
    */
-  public static void clear(CustomStagesProvider wave, final ImplPanel waveHolder, final HasWidgets parent) {
+  public static void clear(CustomStagesProvider wave) {
     if (wave != null) {
       try {
         wave.destroy();
@@ -55,10 +51,6 @@ public class WaveClientUtils {
         Log.error("Error clearing wave panel", e);
       }
       wave = null;
-    }
-    if (waveHolder != null && waveHolder.isAttached()) {
-      waveHolder.removeFromParent();
-      parent.remove(waveHolder);
     }
   }
 }

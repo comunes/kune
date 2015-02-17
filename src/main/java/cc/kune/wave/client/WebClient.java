@@ -76,12 +76,16 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
+import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
+import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.initials.InitialsResources;
 import cc.kune.polymer.client.PolymerId;
@@ -361,9 +365,7 @@ public class WebClient extends Composite implements WaveClientView {
   @UiField
   FramedPanel waveFrame;
 
-
-  //FIXME UiField???
-  /** The wave holder. */
+  @UiField  
   ImplPanel waveHolder;
 
   /** The wave store. */
@@ -379,6 +381,12 @@ public class WebClient extends Composite implements WaveClientView {
 
   private final CustomEditToolbar customEditToolbar;
 
+  private String currentOpenedWaveUri;
+
+  private final StateManager stateManager;
+
+  private Timer hideInboxTimer;
+
   /**
    * This is the entry point method.
    *
@@ -391,10 +399,15 @@ public class WebClient extends Composite implements WaveClientView {
    * @param colorPicker the color picker
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles,final cc.kune.core.client.state.Session kuneSession, final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, final Provider<AurorisColorPicker> colorPicker, final GSpaceArmor armor, CustomEditToolbar customEditToolbar) {
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, 
+      final cc.kune.core.client.state.Session kuneSession, StateManager stateManager,
+      final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, 
+      final Provider<AurorisColorPicker> colorPicker, final GSpaceArmor armor, 
+      CustomEditToolbar customEditToolbar) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.kuneSession = kuneSession;
+    this.stateManager = stateManager;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.contentService = contentService;
     this.colorPicker = colorPicker;
@@ -470,8 +483,7 @@ public class WebClient extends Composite implements WaveClientView {
    */
   @Override
   public void clear() {
-    WaveClientUtils.clear(wave, waveHolder, waveFrame);
-    waveFrame.clear();
+    WaveClientUtils.clear(wave);
   }
 
   /**
@@ -518,14 +530,6 @@ public class WebClient extends Composite implements WaveClientView {
   @Override
   public void getStackTraceAsync(final Throwable caught, final Accessor<SafeHtml> accessor) {
     ErrorHandler.getStackTraceAsync(caught, accessor);
-  }
-
-  /* (non-Javadoc)
-   * @see cc.kune.wave.client.kspecific.WaveClientView#getWaveHolder()
-   */
-  @Override
-  public ImplPanel getWaveHolder() {
-    return waveHolder;
   }
 
   /* (non-Javadoc)
@@ -631,48 +635,83 @@ public class WebClient extends Composite implements WaveClientView {
 
     final String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
 
-    WaveClientClearEvent.fire(eventBus);
-    clear();
-    eventBus.fireEvent(new BeforeOpenWaveEvent(waveUri));;
-
-    waveFrame.add(waveHolder);
-
-    // Release the display:none.
-    UIObject.setVisible(waveFrame.getElement(), true);
-    waveHolder.getElement().appendChild(loading);
-    final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
-    final CustomStagesProvider wave = new CustomStagesProvider(
-        holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus, colorPicker,customEditToolbar);
-    this.wave = wave;
-    wave.load(new Command() {
+    contentService.getContentByWaveRef(kuneSession.getUserHash(), waveUri, new AsyncCallbackSimple<StateAbstractDTO>() {
+      
       @Override
-      public void execute() {
-        loading.removeFromParent();
+      public void onSuccess(StateAbstractDTO result) {
+        // It's a group content
+        if (result instanceof StateContentDTO) {
+          final StateContentDTO state = (StateContentDTO) result;
+          stateManager.setRetrievedStateAndGo(state);
+          SpaceSelectEvent.fire(eventBus, Space.groupSpace);
+          // If narrow, show
+          hideInboxTimer.schedule(PolymerUtils.isMainDrawerNarrow()? 0 : 4000);
+        } else {
+            hideInboxTimer.cancel();
+            // Not a group content
+            SpaceSelectEvent.fire(eventBus, Space.userSpace);
+            if (currentOpenedWaveUri.equals(waveUri)) { 
+              // Trying to open twice, skip...
+              cc.kune.common.client.log.Log.info("Trying to open the same wave twice");
+              return;
+            }
+              else
+                currentOpenedWaveUri = waveUri;
+                
+            WaveClientClearEvent.fire(eventBus);
+            clear();
+            eventBus.fireEvent(new BeforeOpenWaveEvent(waveUri));;
+
+            // Release the display:none.
+            UIObject.setVisible(waveFrame.getElement(), true);
+            waveHolder.getElement().appendChild(loading);
+            final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
+            final CustomStagesProvider wave = new CustomStagesProvider(
+                holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus, colorPicker,customEditToolbar);
+            WebClient.this.wave = wave;
+
+            wave.load(new Command() {
+              @Override
+              public void execute() {
+                loading.removeFromParent();
+              }
+            });
+
+            eventBus.fireEvent(new AfterOpenWaveEvent(waveUri));;
+            
+            PolymerUtils.setMainSelected();
+            if (PolymerUtils.isXSmall() || PolymerUtils.isMainDrawerNarrow())
+              PolymerUtils.setNarrowVisible(false);
+            
+            final String encodedToken = HistoryUtils.undoHashbang(History.getToken());
+            // Kune patch
+            if (encodedToken != null && !encodedToken.isEmpty() && 
+                !TokenMatcher.isInboxToken(encodedToken) && !TokenMatcher.isGroupToken(encodedToken)) {
+              WaveRef fromWaveRef;
+              try {
+                fromWaveRef = GwtWaverefEncoder.decodeWaveRefFromPath(encodedToken);
+              } catch (final InvalidWaveRefException e) {
+                cc.kune.common.client.log.Log.info("History token contains invalid path: " + encodedToken);
+                return;
+              }
+              if (fromWaveRef.getWaveId().equals(waveRef.getWaveId())) {
+                // History change was caused by clicking on a link, it's already
+                // updated by browser.
+                cc.kune.common.client.log.Log.info("History change by clicking a link, should be already in the browser bar");
+                SpaceConfEvent.fire(eventBus, Space.userSpace, encodedToken);
+                return;
+              }
+            }
+            final String tokenFromWaveref = HistoryUtils.hashbang(waveUri);
+            cc.kune.common.client.log.Log.info("Token from opened wave: " + tokenFromWaveref);
+            SpaceConfEvent.fire(eventBus, Space.userSpace, tokenFromWaveref);
+            History.newItem(tokenFromWaveref, false);
+        }
       }
+ 
     });
-
-    eventBus.fireEvent(new AfterOpenWaveEvent(waveUri));;
-
-    final String encodedToken = HistoryUtils.undoHashbang(History.getToken());
-    // Kune patch
-    if (encodedToken != null && !encodedToken.isEmpty() && !TokenMatcher.isInboxToken(encodedToken)) {
-      WaveRef fromWaveRef;
-      try {
-        fromWaveRef = GwtWaverefEncoder.decodeWaveRefFromPath(encodedToken);
-      } catch (final InvalidWaveRefException e) {
-        LOG.info("History token contains invalid path: " + encodedToken);
-        return;
-      }
-      if (fromWaveRef.getWaveId().equals(waveRef.getWaveId())) {
-        // History change was caused by clicking on a link, it's already
-        // updated by browser.
-        SpaceConfEvent.fire(eventBus, Space.userSpace, encodedToken);
-        return;
-      }
-    }
-    final String tokenFromWaveref = HistoryUtils.hashbang(waveUri);
-    SpaceConfEvent.fire(eventBus, Space.userSpace, tokenFromWaveref);
-    History.newItem(tokenFromWaveref, false);
+    
+  
   }
 
   /**
@@ -749,10 +788,7 @@ public class WebClient extends Composite implements WaveClientView {
     // kune-patch
     // RootPanel.get("app").add(self);
     InitialsResources.INS.css().ensureInjected();
-    initWidget(self);
-    waveHolder = new ImplPanel("");
-    waveHolder.addStyleName("k-waveHolder");
-    waveFrame.add(waveHolder);
+    initWidget(self);    
 
     // FIXME Dirty workaround while we improve the Wave integration
     $(".org-waveprotocol-wave-client-widget-toolbar-ToplevelToolbarWidget-Css-toolbar").hide();
@@ -796,7 +832,14 @@ public class WebClient extends Composite implements WaveClientView {
     } else {
       logPanel.removeFromParent();
     }
-
+    
+    hideInboxTimer = new Timer() {
+      @Override
+      public void run() {
+        PolymerUtils.setMainSelected();
+        PolymerUtils.setNarrowVisible(false);
+      }
+    };
     setupSearchPanel();
     setupWavePanel();
   }

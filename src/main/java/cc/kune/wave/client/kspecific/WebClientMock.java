@@ -28,7 +28,6 @@ import org.waveprotocol.box.webclient.search.SimpleSearch;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
-import org.waveprotocol.wave.client.widget.common.ImplPanel;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Composite;
@@ -46,9 +45,6 @@ public class WebClientMock extends Composite implements WaveClientView {
   /** The Constant MOCK_MSG. */
   private static final String MOCK_MSG = "This is only a mock of the wave client, only to make development testing not so heavy";
 
-  /** The impl panel. */
-  private ImplPanel implPanel;
-
   /**
    * Instantiates a new web client mock.
    */
@@ -64,7 +60,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.wave.client.kspecific.WaveClientView#clear()
    */
   @Override
@@ -73,7 +69,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.wave.client.kspecific.WaveClientView#getChannel()
    */
   @Override
@@ -83,7 +79,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.wave.client.kspecific.WaveClientView#getLoading()
    */
   @Override
@@ -93,7 +89,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.wave.client.kspecific.WaveClientView#getProfiles()
    */
   @Override
@@ -109,7 +105,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.wave.client.kspecific.WaveClientView#getStackTraceAsync(java.lang
    * .Throwable, org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor)
@@ -120,20 +116,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   *
-   * @see cc.kune.wave.client.kspecific.WaveClientView#getWaveHolder()
-   */
-  @Override
-  public ImplPanel getWaveHolder() {
-    if (implPanel == null) {
-      implPanel = new ImplPanel("<span style='padding:20px;'>" + MOCK_MSG + "</span>");
-    }
-    return implPanel;
-  }
-
-  /*
-   * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.wave.client.kspecific.WaveClientView#getWebSocket()
    */
   @Override
@@ -149,7 +132,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.wave.client.kspecific.WaveClientView#login()
    */
   @Override
@@ -158,7 +141,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.wave.client.kspecific.WaveClientView#logout()
    */
   @Override

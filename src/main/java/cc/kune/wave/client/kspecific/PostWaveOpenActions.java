@@ -23,19 +23,8 @@
 
 package cc.kune.wave.client.kspecific;
 
-import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.log.Log;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.sitebar.spaces.Space;
-import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.polymer.client.PolymerUtils;
 
-import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
@@ -46,31 +35,8 @@ import com.google.web.bindery.event.shared.EventBus;
  */
 public class PostWaveOpenActions {
 
-  private final ActionFlowPanel bottomToolbar;
-  private final ContentServiceAsync contentService;
-  private final EventBus eventBus;
-  private final Session session;
-  private final StateManager stateManager;
-  private final Timer timer;
-  private WaveClientView webClient;
-
   @Inject
-  public PostWaveOpenActions(final EventBus eventBus, final ContentServiceAsync contentService,
-      final Session session, final ActionFlowPanel bottomToolbar, final StateManager stateManager) {
-    this.eventBus = eventBus;
-    this.contentService = contentService;
-    this.session = session;
-    // Not used now
-    this.bottomToolbar = bottomToolbar;
-    this.stateManager = stateManager;
-    eventBus.addHandler(OnWaveClientStartEvent.getType(),
-        new OnWaveClientStartEvent.OnWaveClientStartHandler() {
-          @Override
-          public void onOnWaveClientStart(final OnWaveClientStartEvent event) {
-            webClient = event.getView();
-            webClient.addToBottonBar(bottomToolbar);
-          }
-        });
+  public PostWaveOpenActions(final EventBus eventBus) {
     eventBus.addHandler(BeforeOpenWaveEvent.getType(), new BeforeOpenWaveEvent.BeforeOpenWaveHandler() {
       @Override
       public void onBeforeOpenWave(final BeforeOpenWaveEvent event) {
@@ -83,42 +49,13 @@ public class PostWaveOpenActions {
         afterWaveOpen(event.getWaveId());
       }
     });
-    timer = new Timer() {
-      @Override
-      public void run() {
-        PolymerUtils.setMainSelected();
-        PolymerUtils.setNarrowVisible(false);
-      }
-    };
   }
 
   private void afterWaveOpen(final String waveUri) {
     Log.info("After open wave: " + waveUri);
-
-    contentService.getContentByWaveRef(session.getUserHash(), waveUri,
-        new AsyncCallbackSimple<StateAbstractDTO>() {
-      @Override
-      public void onSuccess(final StateAbstractDTO result) {
-        if (result instanceof StateContentDTO) {
-          final StateContentDTO state = (StateContentDTO) result;
-          stateManager.setRetrievedStateAndGo(state);
-          SpaceSelectEvent.fire(eventBus, Space.groupSpace);
-          // Disabled
-          // timer.schedule(4000);
-          // webClient.showBottomToolbar();
-        } else {
-          // webClient.hideBottomToolbar();
-          SpaceSelectEvent.fire(eventBus, Space.userSpace);
-          if (PolymerUtils.isXSmall() && PolymerUtils.getMainSelected().equals("drawer")) {
-            PolymerUtils.setMainSelected();
-          }
-        }
-      }
-    });
   }
 
   private void beforeWaveOpen(final String waveUri) {
-    bottomToolbar.clear();
     Log.info("Before open wave: " + waveUri);
   }
 

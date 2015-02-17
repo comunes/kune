@@ -28,7 +28,6 @@ import org.waveprotocol.box.webclient.search.SimpleSearch;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
-import org.waveprotocol.wave.client.widget.common.ImplPanel;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -81,13 +80,6 @@ public interface WaveClientView extends IsWidget {
    * @return the stack trace async
    */
   void getStackTraceAsync(Throwable caught, Accessor<SafeHtml> accessor);
-
-  /**
-   * Gets the wave holder.
-   *
-   * @return the wave holder
-   */
-  ImplPanel getWaveHolder();
 
   /**
    * Gets the web socket.

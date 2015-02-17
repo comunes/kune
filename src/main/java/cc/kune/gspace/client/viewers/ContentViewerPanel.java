@@ -209,7 +209,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
           // This fix lot of problems when you are editing and move to other
           // location (without stop editing)
           Log.info("Before change history, clear wave");
-          WaveClientUtils.clear(wave, waveHolder, waveHolderParent);
+          WaveClientUtils.clear(wave);
           return true;
         }
       });

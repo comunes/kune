@@ -110,12 +110,9 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
   /** The wave client prov. */
   private final WaveClientProvider waveClientProv;
 
-  /** The wave holder. */
-  protected ImplPanel waveHolder;
-
   /** The wave holder parent. */
   @UiField
-  public ImplPanel waveHolderParent;
+  public ImplPanel waveHolder;
 
   /** The wave store. */
   private final WaveStore waveStore = new SimpleWaveStore();
@@ -159,17 +156,17 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
     // widget = uiBinder.createAndBindUi(this);
     eventBus.addHandler(WaveClientClearEvent.getType(),
         new WaveClientClearEvent.WaveClientClearHandler() {
-          @Override
-          public void onWaveClientClear(final WaveClientClearEvent event) {
-            waveClear();
-          }
-        });
+      @Override
+      public void onWaveClientClear(final WaveClientClearEvent event) {
+        waveClear();
+      }
+    });
     onlyWebClient = WindowUtils.getParameter(SiteParameters.ONLY_WEBCLIENT) != null;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -179,7 +176,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * attach()
@@ -190,7 +187,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * clear()
@@ -203,7 +200,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * detach()
@@ -236,7 +233,6 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
       Log.info("Channel is null so, will create wave in ContentViewerPanel");
       final WaveClientView webClient = waveClientProv.get();
       loading = webClient.getLoading();
-      waveHolder = webClient.getWaveHolder();
       dummyWaveFrame = new FramedPanel();
       channel = webClient.getChannel();
       profiles = webClient.getProfiles();
@@ -249,7 +245,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setContent(cc.kune.core.shared.dto.StateContentDTO)
@@ -262,7 +258,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setEditableContent(cc.kune.core.shared.dto.StateContentDTO)
@@ -291,8 +287,6 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
       waveClientProv.get().clear();
       waveClear();
 
-      waveHolderParent.add(waveHolder);
-
       if (waveClientProv.get() instanceof WebClientMock) {
         // do nothing;
       } else {
@@ -319,7 +313,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * signIn()
@@ -332,7 +326,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * signOut()
@@ -347,7 +341,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
    */
   private void waveClear() {
     if (!onlyWebClient) {
-      WaveClientUtils.clear(wave, waveHolder, waveHolderParent);
+      WaveClientUtils.clear(wave);
     }
   }
 

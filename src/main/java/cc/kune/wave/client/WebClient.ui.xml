@@ -79,8 +79,8 @@
             addStyleNames="{style.wavePanel}">
             <g:center>
               <f:FramedPanel ui:field="waveFrame">
-                <!-- <w:ImplPanel ui:field="waveHolder" addStyleNames="{style.waveHolder}"
-                  /> -->
+                <w:ImplPanel ui:field="waveHolder" addStyleNames="k-waveHolder"
+                  />
               </f:FramedPanel>
             </g:center>
             <g:south size="0">
