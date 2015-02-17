@@ -597,6 +597,13 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          background-color: {{homebackcolor}};
        }
 
+       #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a,
+       #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a:hover,
+       #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a {
+         background-color: transparent;
+         color:rgb(105, 49, 47);
+       }       
+       
        #space_selector_paper_tabs {
          color: rgb(255, 255, 255);
          left: 0px;
@@ -957,17 +964,17 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
 
        #edit_inbox_fab {
          top: 100px;
-         left: 0px;
+         right: 0px;
        }
 
        #reply_inbox_fab {
          top: {{100 + (xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
-         left: 0px;
+         right: 0px;
        }
 
        #editdone_inbox_fab {
          top: {{100 + 2*(xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
-         left: 0px;
+         right: 0px;
        }
 
        #edit_docgroup_fab, #reply_docgroup_fab, #editdone_docgroup_fab {
