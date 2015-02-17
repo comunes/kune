@@ -41,6 +41,7 @@ import cc.kune.core.client.events.WindowFocusEvent;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.shared.SessionConstants;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.calclab.emite.core.client.events.StateChangedEvent;
 import com.calclab.emite.core.client.events.StateChangedHandler;
@@ -96,7 +97,7 @@ public class ChatSitebarActions {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -140,7 +141,7 @@ public class ChatSitebarActions {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -152,6 +153,8 @@ public class ChatSitebarActions {
         manager.changeOwnPresence(thisPresence);
       }
       nextPresence = thisPresence;
+      PolymerUtils.setNarrowVisible(true);
+      PolymerUtils.setDrawerSelected();
     }
 
     /**
