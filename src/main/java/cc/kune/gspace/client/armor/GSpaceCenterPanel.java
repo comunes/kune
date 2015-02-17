@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.InsertPanel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.ScrollPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Singleton;
 
@@ -52,6 +53,10 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /** The ui binder. */
   private static GSpaceCenterPanelUiBinder uiBinder = GWT.create(GSpaceCenterPanelUiBinder.class);
+
+  /** The center scroll. */
+  @UiField
+  ScrollPanel centerScroll;
 
   /** The deck. */
   @UiField

@@ -343,10 +343,9 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   @Override
-  // TODO avoid querySelector
-  public native void setBackImage(final String url) /*-{
-		$doc.querySelector('#kunetemplate').group_back_image_url = url;
-  }-*/;
+  public void setBackImage(final String url) {
+    PolymerUtils.setBackImage(url);
+  }
 
   @Override
   public void setRTL(final Direction direction) {
