@@ -57,7 +57,7 @@ public class SitePageObject extends PageObject {
   public WebElement homeSpaceBtn;
 
   /** The my group menu. */
-  @FindBy(id = SeleniumConstants.GWTDEV + MyGroupsMenu.MENU_ID)
+  @FindBy(id = SeleniumConstants.GWTDEV + "sitebar_my_groups_btn")
   public WebElement myGroupMenu;
 
   /** The my group menu new group item. */

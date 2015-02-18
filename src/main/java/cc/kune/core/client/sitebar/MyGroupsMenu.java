@@ -22,14 +22,13 @@
  */
 package cc.kune.core.client.sitebar;
 
-import org.gwtbootstrap3.client.ui.constants.Responsiveness;
-
-import cc.kune.common.client.actions.ActionStyles;
+import br.com.rpa.client._coreelements.CoreIconButton;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuShowAction;
-import cc.kune.common.client.actions.ui.descrip.ToolbarMenuDescriptor;
+import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.common.shared.utils.Url;
@@ -45,6 +44,7 @@ import cc.kune.core.client.sn.actions.GotoGroupLastVisitedContentAction;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
+import cc.kune.polymer.client.PolymerId;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -58,10 +58,10 @@ import com.google.web.bindery.event.shared.EventBus;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
-public class MyGroupsMenu extends ToolbarMenuDescriptor {
+public class MyGroupsMenu extends WidgetMenuDescriptor {
 
   /** The Constant MENU_ID. */
-  public static final String MENU_ID = "k-sitebar-my-group";
+  public static final String MENU_ID = PolymerId.SITEBAR_MY_GROUPS.getId();
 
   /** The Constant NEW_GROUP_MENUITEM_ID. */
   public static final String NEW_GROUP_MENUITEM_ID = "k-sitebar-my-group-newmenuitem";
@@ -120,6 +120,8 @@ public class MyGroupsMenu extends ToolbarMenuDescriptor {
       final GlobalShortcutRegister global, final MenuShowAction menuShowAction, final EventBus eventBus,
       final UserServiceAsync userService, final SitebarNewGroupLink sitebarNewGroupLink) {
     super(menuShowAction);
+    final CoreIconButton btn = CoreIconButton.wrap(MENU_ID);
+    setWidget(btn);
     this.session = session;
     this.gotoGroupProvider = gotoGroupProvider;
     this.newGroupAction = newGroupAction;
@@ -128,12 +130,12 @@ public class MyGroupsMenu extends ToolbarMenuDescriptor {
     this.sitebarNewGroupLink = sitebarNewGroupLink;
     this.downloadProvider = downloadProvider;
     menuShowAction.setMenu(this);
-    setId(MENU_ID);
+    // setId(MENU_ID);
     setParent(SitebarActions.RIGHT_TOOLBAR);
-    setPosition(0);
-    setStyles(ActionStyles.SITEBAR_STYLE + "," + Responsiveness.HIDDEN_XS);
-    withText(I18n.t("Your groups"));
-    withToolTip(I18n.t("See your groups or create a new one"));
+    // setPosition(0);
+    // setStyles(ActionStyles.SITEBAR_STYLE + "," + Responsiveness.HIDDEN_XS);
+    btn.setText(I18n.t("Your groups"));
+    Tooltip.to(btn, I18n.t("See your groups or create a new one"));
     // withIcon(res.arrowdownsitebarSmall());
     withShortcut("Alt+M", global);
     eventBus.addHandler(MyGroupsChangedEvent.getType(),

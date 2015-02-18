@@ -73,6 +73,7 @@ public enum PolymerId implements HTMLId {
   SITE_BOTTOMBAR("site_bottombar"),
   SITEBAR_LEFT_EXTENSIONBAR("sitebar_left_extensionbar"),
   SITEBAR_MORE_ICON("sitebar_more_icon"),
+  SITEBAR_MY_GROUPS("sitebar_mygroups_btn"),
   SITEBAR_RIGHT_EXTENSIONBAR("sitebar_right_extensionbar"),
   SITEBAR_SEARCH_GROUP("sitebar_search_group"),
   SITEBAR_SEARCH_ICON("sitebar_search_icon"),
@@ -91,6 +92,11 @@ public enum PolymerId implements HTMLId {
 
   @Override
   public String getId() {
+    return id;
+  }
+
+  @Override
+  public String toString() {
     return id;
   }
 
