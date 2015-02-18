@@ -71,6 +71,7 @@ kt.toggleSearch = function(e,detail,sender) {
   kt.showingSearch=!kt.showingSearch;
   
   toggleVis('#sitebar_language_btn');
+  toggleVis('#sitebar_mygroups_btn');
   toggleVis('#space_selector_paper_tabs');
   toggleVis('#sitebar_user_space_icon_group');
   toggleVis('#sitebar_chat_icon_group');

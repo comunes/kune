@@ -24,7 +24,7 @@
 package cc.kune.core.client.invitation;
 
 import cc.kune.common.client.actions.ActionStyles;
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -40,15 +40,15 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SiteInvitationBtn.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
-public class SiteInvitationBtn extends ButtonDescriptor {
+public class SiteInvitationBtn extends ToolbarItemDescriptor {
 
   /**
    * Instantiates a new site invitation btn.
-   * 
+   *
    * @param session
    *          the session
    * @param action
@@ -64,7 +64,7 @@ public class SiteInvitationBtn extends ButtonDescriptor {
     super(action);
     withText(i18n.t("Invite")).withToolTip(
         i18n.t("Invite others to [%s] via email", i18n.getSiteCommonName())).withStyles(
-        ActionStyles.SITEBAR_STYLE_FL).withParent(SitebarActions.RIGHT_TOOLBAR);
+            ActionStyles.SITEBAR_STYLE_FL).withParent(SitebarActions.RIGHT_TOOLBAR);
     // .withIcon(icons.listsPostGrey())
     // .withParent(SitebarActions.MORE_MENU);
 

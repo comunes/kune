@@ -25,19 +25,14 @@ package cc.kune.core.client.sitebar.search;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 
-import com.google.gwt.event.dom.client.BlurEvent;
-import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.FocusEvent;
-import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.HasAllFocusHandlers;
 import com.google.gwt.event.dom.client.HasAllKeyHandlers;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -126,9 +121,6 @@ Presenter<SitebarSearchPresenter.SitebarSearchView, SitebarSearchPresenter.Siteb
     void toggleSearch();
   }
 
-  /** The setsmall. */
-  private final Timer setsmall;
-
   /**
    * Instantiates a new sitebar search presenter.
    *
@@ -145,12 +137,7 @@ Presenter<SitebarSearchPresenter.SitebarSearchView, SitebarSearchPresenter.Siteb
   public SitebarSearchPresenter(final EventBus eventBus, final SitebarSearchView view,
       final SitebarSearchProxy proxy, final I18nTranslationService i18n) {
     super(eventBus, view, proxy);
-    setsmall = new Timer() {
-      @Override
-      public void run() {
-        getView().toggleSearch();
-      }
-    };
+
   }
 
   /**
@@ -174,18 +161,6 @@ Presenter<SitebarSearchPresenter.SitebarSearchView, SitebarSearchPresenter.Siteb
   @Override
   protected void onBind() {
     super.onBind();
-    getView().getFocus().addBlurHandler(new BlurHandler() {
-      @Override
-      public void onBlur(final BlurEvent event) {
-        onSearchBlur(getView().getTextBox().getText());
-      }
-    });
-    getView().getFocus().addFocusHandler(new FocusHandler() {
-      @Override
-      public void onFocus(final FocusEvent event) {
-        onSearchFocus();
-      }
-    });
     getView().getButton().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -203,17 +178,6 @@ Presenter<SitebarSearchPresenter.SitebarSearchView, SitebarSearchPresenter.Siteb
         }
       }
     });
-  }
-
-  /**
-   * On search blur.
-   *
-   * @param search
-   *          the search
-   */
-  public void onSearchBlur(final String search) {
-    setsmall.cancel();
-    setsmall.schedule(3000);
   }
 
   /**
