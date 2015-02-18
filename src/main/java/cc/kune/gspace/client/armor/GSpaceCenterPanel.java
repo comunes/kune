@@ -71,7 +71,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * com.google.gwt.user.client.ui.InsertPanel.ForIsWidget#add(com.google.gwt
    * .user.client.ui.IsWidget)
@@ -83,7 +83,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * com.google.gwt.user.client.ui.InsertPanel#add(com.google.gwt.user.client
    * .ui.Widget)
@@ -95,7 +95,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.armor.GSpaceCenter#clear()
    */
   @Override
@@ -137,7 +137,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.IndexedPanel#getWidget(int)
    */
   @Override
@@ -147,7 +147,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.IndexedPanel#getWidgetCount()
    */
   @Override
@@ -157,7 +157,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * com.google.gwt.user.client.ui.IndexedPanel.ForIsWidget#getWidgetIndex(com
    * .google.gwt.user.client.ui.IsWidget)
@@ -169,7 +169,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * com.google.gwt.user.client.ui.IndexedPanel#getWidgetIndex(com.google.gwt
    * .user.client.ui.Widget)
@@ -181,7 +181,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * com.google.gwt.user.client.ui.InsertPanel.ForIsWidget#insert(com.google
    * .gwt.user.client.ui.IsWidget, int)
@@ -193,7 +193,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * com.google.gwt.user.client.ui.InsertPanel#insert(com.google.gwt.user.client
    * .ui.Widget, int)
@@ -205,7 +205,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.IndexedPanel#remove(int)
    */
   @Override
@@ -215,7 +215,7 @@ public class GSpaceCenterPanel extends Composite implements GSpaceCenter {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.gspace.client.armor.GSpaceCenter#showWidget(com.google.gwt.user
    * .client.ui.IsWidget)

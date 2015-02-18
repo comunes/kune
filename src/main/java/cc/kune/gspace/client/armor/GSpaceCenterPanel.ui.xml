@@ -5,9 +5,9 @@
     type='cc.kune.gspace.client.armor.resources.GSpaceArmorResources'/>
   <ui:style>  
   </ui:style>
-  <g:ScrollPanel ui:field="centerScroll" styleName="{res.style.docEditor}">
+  <g:ScrollPanel ui:field="centerScroll" width="100%" styleName="">
     <g:DeckPanel ui:field="deck" width="100%" height="auto"
-      styleName="{res.style.docEditorContainer}">
+      styleName="">
     </g:DeckPanel>
   </g:ScrollPanel>
 </ui:UiBinder> 

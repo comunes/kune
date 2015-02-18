@@ -36,27 +36,30 @@ import cc.kune.core.shared.FileConstants;
 import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.gspace.client.armor.GSpaceCenter;
+import cc.kune.polymer.client.Layout;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Frame;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class TutorialViewer.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -64,7 +67,7 @@ public class TutorialViewer extends Composite {
 
   /**
    * The Interface OnTutorialClose.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface OnTutorialClose {
@@ -77,7 +80,7 @@ public class TutorialViewer extends Composite {
 
   /**
    * The Interface TutorialViewerUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface TutorialViewerUiBinder extends UiBinder<Widget, TutorialViewer> {
@@ -98,9 +101,11 @@ public class TutorialViewer extends Composite {
   /** The close btn. */
   @UiField
   CloseDialogButton closeBtn;
-
   /** The def lang. */
   private String defLang;
+
+  @UiField
+  FlowPanel flow;
 
   /** The frame. */
   @UiField
@@ -123,7 +128,7 @@ public class TutorialViewer extends Composite {
 
   /**
    * Instantiates a new tutorial viewer.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param session
@@ -161,6 +166,7 @@ public class TutorialViewer extends Composite {
         }
       }
     });
+    PolymerUtils.addLayout(flow.getElement(), Layout.FIT);
     Window.addResizeHandler(new ResizeHandler() {
       @Override
       public void onResize(final ResizeEvent event) {
@@ -193,7 +199,7 @@ public class TutorialViewer extends Composite {
 
   /**
    * Gets the tutorial lang.
-   * 
+   *
    * @return the tutorial lang
    */
   private String getTutorialLang() {
@@ -216,7 +222,7 @@ public class TutorialViewer extends Composite {
 
   /**
    * Sets the heigth.
-   * 
+   *
    * @param height
    *          the new heigth
    */
@@ -231,7 +237,7 @@ public class TutorialViewer extends Composite {
 
   /**
    * Sets the tool.
-   * 
+   *
    * @param tool
    *          the new tool
    */
