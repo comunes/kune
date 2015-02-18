@@ -127,7 +127,7 @@
     <!-- Icon elements -->
     <link rel="import" href="bower_components/core-icons/av-icons.html">
     <link rel="import" href="bower_components/core-icons/social-icons.html">
-    <link rel="import" href="bower_components/core-icons/editor-icons.html">
+    <link rel="import" href="bower_components/core-icons/social-icons.html">
     <link rel="import"
           href="bower_components/font-kune-polymer-icons/kune-icons.html">
     
@@ -345,19 +345,6 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
             <paper-fab icon="create" id="edit_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
             <paper-fab icon="reply" id="reply_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
             <paper-fab icon="check" id="editdone_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
-            <div horizontal layout end-justified flex>
-              <div id="group_tools_toolbar" vertical layout>
-                <paper-fab mini?="{{xsmall}}" icon="kune:docs" class="active" id="k_tool_item_docs"></paper-fab>
-                <paper-fab mini?="{{xsmall}}" icon="kune:lists" id="k_tool_item_lists"></paper-fab>
-                <paper-fab mini?="{{xsmall}}" icon="kune:blogs" id="k_tool_item_blogs"></paper-fab>
-                <paper-fab mini?="{{xsmall}}" icon="kune:wiki" id="k_tool_item_wiki"></paper-fab>
-                <paper-fab mini?="{{xsmall}}" icon="kune:events" id="k_tool_item_events"></paper-fab>
-                <paper-fab mini?="{{xsmall}}" icon="kune:tasks" id="k_tool_item_tasks"></paper-fab>
-                <paper-fab mini?="{{xsmall}}" icon="kune:chat-tool" id="k_tool_item_chats"></paper-fab>
-                <paper-fab mini?="{{xsmall}}" icon="kune:barter" id="k_tool_item_barters"></paper-fab>
-                <paper-fab mini?="{{xsmall}}" icon="kune:trash" id="k_tool_item_trash"></paper-fab>
-              </div> <!-- end group_tools_toolbar -->
-            </div>
             <core-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">
               <!-- FIXME: condensed: height 60 -->
               <core-toolbar id="header_core_toolbar" class="tall" flex>
@@ -396,23 +383,36 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                     <div id="group_header_bottom" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout style="width:100%">
                       <ol class="breadcrumb"><div id="miga" class=""></div></ol>                        
                       <div flex></div>
-                      <div id="header_bottom_extensionbar" class="indent"></div>
+                      <div id="header_bottom_extensionbar" class="btn-group indent"></div>
                     </div>                    
                   </section>
                 </core-drawer-panel>
                 <paper-shadow id="doc_toolbar_shadow">
                   <core-toolbar  id="doc_toolbar" class="medium-tall" flex>
-                    <div id="doc_toolbar_extension" horizontal layout flex>
+                    <div id="doc_toolbar_extension" class="btn-group" horizontal layout flex>
                       
                     </div>
                   </core-toolbar>
                 </paper-shadow>                  
               </core-toolbar>
               <section id="doc_content_section" content flex>
+                <div horizontal layout end-justified flex>
+                  <div id="group_tools_toolbar" vertical layout>
+                    <paper-fab mini?="{{xsmall}}" icon="kune:docs" class="active" id="k_tool_item_docs"></paper-fab>
+                    <paper-fab mini?="{{xsmall}}" icon="kune:lists" id="k_tool_item_lists"></paper-fab>
+                    <paper-fab mini?="{{xsmall}}" icon="kune:blogs" id="k_tool_item_blogs"></paper-fab>
+                    <paper-fab mini?="{{xsmall}}" icon="kune:wiki" id="k_tool_item_wiki"></paper-fab>
+                    <paper-fab mini?="{{xsmall}}" icon="kune:events" id="k_tool_item_events"></paper-fab>
+                    <paper-fab mini?="{{xsmall}}" icon="kune:tasks" id="k_tool_item_tasks"></paper-fab>
+                    <paper-fab mini?="{{xsmall}}" icon="kune:chat-tool" id="k_tool_item_chats"></paper-fab>
+                    <paper-fab mini?="{{xsmall}}" icon="kune:barter" id="k_tool_item_barters"></paper-fab>
+                    <paper-fab mini?="{{xsmall}}" icon="kune:trash" id="k_tool_item_trash"></paper-fab>
+                  </div> <!-- end group_tools_toolbar -->
+                </div>                
                 <paper-shadow animated id="doc_content_shadow">
                   <div id="doc_vert" layout vertical>
                     <div horizontal layout>
-                      <div id="doc_header_left_extensionbar" layout horizontal></div>
+                      <div id="doc_header_left_extensionbar" class="btn-group" layout horizontal></div>
                       <div id="doc_header_flex" flex></div>
                       <div id="doc_header_right_extensionbar" layout horizontal></div>
                     </div>                    
@@ -450,6 +450,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
         <div id="sitebar_chat_icon_group" class="hidden-xs hidden-sm">
           <paper-icon-button icon="kune:chat" id="sitebar_chat_icon"></paper-icon-button>
         </div>
+        <core-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></core-icon-button>
         <core-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn">English</core-icon-button>
         <core-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></core-icon-button>
         <paper-icon-button icon="search" on-click="{{ toggleSearch }}" id="sitebar_search_icon"></paper-icon-button>
@@ -649,7 +650,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          opacity: 0.2;
        }
        
-       #sitebar_chat_icon,#sitebar_language_btn, #sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
+       #sitebar_chat_icon,#sitebar_language_btn,#sitebar_mygroups_btn,#sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
          margin-top: -20px;
        }
        
@@ -1029,12 +1030,13 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          position: relative;
          top: {{xsmall ? 10 : 0}}px;
        }
-       
-       #group_tools_toolbar paper-fab {
-         right: {{xsmall ? 25 : 75}}px;         
+       #group_tools_toolbar {
+         right: {{xsmall ? 10 : 60}}px;         
          top: {{xsmall ? 260 : small? 290: 320}}px;
-         position: relative;
+         position: absolute;
          z-index: 1;
+       }        
+       #group_tools_toolbar paper-fab {
          color: grey;
          background-color: transparent;
          border-radius: 50px !important;
@@ -1066,6 +1068,10 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
           color: rgb(165, 105, 65);
        }
 
+       #group_tools_toolbar paper-fab::shadow #icon {
+         left: 4px;  
+       }
+       
        #group_tools_toolbar paper-fab[mini]::shadow #icon {
          witdh: 20px;
          height:20px;
@@ -1075,8 +1081,12 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #group_tools_toolbar paper-fab:hover {
          background-color: rgb(231, 231, 231);
          color: rgb(165, 105, 65);
-       } 
-
+       }
+       
+       #group_tools_toobar core-item {
+         /* Initially
+         display: none; */
+       }
        #group_tools_toolbar core-item::shadow #label {
          display: none;
        }
