@@ -72,6 +72,7 @@ public enum PolymerId implements HTMLId {
   REPLY_GROUP_FAB("reply_docgroup_fab"),
   REPLY_INBOX_FAB("reply_inbox_fab"),
   SITE_BOTTOMBAR("site_bottombar"),
+  SITEBAR_LANGUAGE_BTN("sitebar_language_btn"),
   SITEBAR_LEFT_EXTENSIONBAR("sitebar_left_extensionbar"),
   SITEBAR_MORE_ICON("sitebar_more_icon"),
   SITEBAR_MY_GROUPS("sitebar_mygroups_btn"),

@@ -60,6 +60,10 @@ public class PolymerUtils {
 		return $wnd.kt.main_narrow;
   }-*/;
 
+  public static boolean isMainSelected() {
+    return getMainSelected().equals("main");
+  }
+
   public native static boolean isXSmall() /*-{
 		return $wnd.kt.xsmall;
   }-*/;
