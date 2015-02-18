@@ -59,6 +59,15 @@ kt.closeMainDrawer = function(e,detail,sender) {
   document.getElementById('main_core_drawer_panel').closeDrawer();  
 }
 
+kt.blink = function(id, play) {
+  var animation = document.getElementById('opacity-infinite');
+  if (play) {
+    animation.target = document.getElementById(id);
+    animation.play();
+  }
+  else
+    animation.cancel();
+}
 
 kt.toggleSearch = function(e,detail,sender) {
   if(e) {

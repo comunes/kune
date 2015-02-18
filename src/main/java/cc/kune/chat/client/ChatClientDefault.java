@@ -36,7 +36,6 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.tooltip.Tooltip;
-import cc.kune.common.client.ui.BlinkAnimation;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
@@ -56,6 +55,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.polymer.client.PolymerId;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.calclab.emite.browser.client.AutoConfig;
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
@@ -97,7 +97,6 @@ import com.calclab.hablar.user.client.HablarUser;
 import com.calclab.hablar.usergroups.client.HablarUserGroups;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -137,14 +136,14 @@ public class ChatClientDefault implements ChatClient {
           new NewUserRegisteredEvent.NewUserRegisteredHandler() {
             @Override
             public void onNewUserRegistered(final NewUserRegisteredEvent event) {
-              // Blink the chat some seconds
-              setBlink(true);
-              new Timer() {
-                @Override
-                public void run() {
-                  setBlink(false);
-                }
-              }.schedule(20000);
+              // // Blink the chat some seconds
+              // setBlink(true);
+              // new Timer() {
+              // @Override
+              // public void run() {
+              // setBlink(false);
+              // }
+              // }.schedule(20000);
             }
           });
     }
@@ -153,22 +152,6 @@ public class ChatClientDefault implements ChatClient {
     public void actionPerformed(final ActionEvent event) {
       kuneEventBus.fireEvent(new ToggleShowChatDialogEvent());
     }
-
-    // TODO, maybe use:
-    // https://www.polymer-project.org/components/core-animation/demo.html
-    /**
-     * Sets the blink.
-     *
-     * @param blink
-     *          the new blink
-     */
-    public void setBlink(final boolean blink) {
-      if (anim == null) {
-        anim = new BlinkAnimation(chatIcon, 400);
-      }
-
-      anim.animate(10);
-    }
   }
 
   /** The Constant CHAT_TITLE. */
@@ -176,8 +159,6 @@ public class ChatClientDefault implements ChatClient {
 
   /** The action. */
   private final ChatClientAction action;
-
-  public BlinkAnimation anim;
 
   private final GSpaceArmor armor;
 
@@ -453,7 +434,7 @@ public class ChatClientDefault implements ChatClient {
           action.actionPerformed(null);
         }
       });
-      chatIcon.ensureDebugId(CHAT_CLIENT_ICON_ID);
+      chatIcon.getElement().setId(PolymerId.CHAT_SITEBAR_ICON.getId());
       chatIcon.setText(i18n.t(CHAT_TITLE));
       Tooltip.to(chatIcon, i18n.t("Show/hide the chat window"));
       final KeyStroke shortcut = Shortcut.getShortcut(false, true, false, false, Character.valueOf('C'));
@@ -785,7 +766,11 @@ public class ChatClientDefault implements ChatClient {
    */
   private void toggleShowDialog() {
     Log.info("Toggle!");
-    // showDialog(dialog == null ? true : !dialogVisible());
+    if (PolymerUtils.getMainSelected().equals("main")) {
+      PolymerUtils.setDrawerSelected();
+    } else {
+      PolymerUtils.setMainSelected();
+    }
   }
 
   /*

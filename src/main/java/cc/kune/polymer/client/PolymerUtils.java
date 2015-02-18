@@ -68,6 +68,10 @@ public class PolymerUtils {
 		$wnd.kt.group_back_image_url = url;
   }-*/;
 
+  public native static void setBlinkAnimation(final String id, boolean blink) /*-{
+		$wnd.kt.blink(id, blink);
+  }-*/;
+
   /**
    * Shows/select the "inbox" drawer.
    */

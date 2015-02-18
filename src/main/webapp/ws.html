@@ -105,6 +105,7 @@
     <link rel="import"
           href="bower_components/core-item/core-item.html">    
     <link rel="import" href="bower_components/core-splitter/core-splitter.html">
+    <link rel="import" href="bower_components/core-animation/core-animation.html">
     
     <!-- Other elements -->
     <link rel="import"
@@ -460,6 +461,16 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
         <div id="sitebar_flex_end" class="sitebar_search_hide" flex></div>
         <paper-icon-button icon="close" on-click="{{ toggleSearch }}" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
       </core-toolbar>
+      <core-animation id="opacity-infinite" duration="1000" iterations="Infinity" direction="alternate">
+        <core-animation-keyframe>
+          <core-animation-prop name="opacity" value="1">
+          </core-animation-prop>
+        </core-animation-keyframe>
+        <core-animation-keyframe>
+          <core-animation-prop name="opacity" value="0.3">
+          </core-animation-prop>
+        </core-animation-keyframe>
+      </core-animation>            
 
       <style>
        /* -*- engine:css -*- */
@@ -597,12 +608,22 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          background-color: {{homebackcolor}};
        }
 
+       #sitebar_toolbar .navbar-collapse {
+         padding: 0px;
+       }
+       
        #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a,
        #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a:hover,
        #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a {
          background-color: transparent;
          color:rgb(105, 49, 47);
        }       
+
+       #sitebar_toolbar paper-icon-button,
+       #sitebar_toolbar core-icon-button {
+         margin-left: 0px !important;
+         margin-right: 0px !important;         
+       }
        
        #space_selector_paper_tabs {
          color: rgb(255, 255, 255);
@@ -645,7 +666,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
 
        paper-tab::shadow #ink {
-       0  color: #FFF;
+         color: #FFF;
          opacity: 0.2;
        }
        
@@ -1030,10 +1051,10 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          top: {{xsmall ? 10 : 0}}px;
        }
        #group_tools_toolbar {
-         right: {{xsmall ? 10 : 60}}px;         
+         right: {{xsmall ? 0 : 0}}px;         
          top: {{xsmall ? 260 : small? 290: 320}}px;
          position: absolute;
-         z-index: 1;
+         z-index:  {{xsmall ? 1 : inherit}};
        }        
        #group_tools_toolbar paper-fab {
          color: grey;

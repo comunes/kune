@@ -34,6 +34,7 @@ public enum PolymerId implements HTMLId {
   /* @formatter:off */
 
   CHAT_PANEL("chat_centerpanel"),
+  CHAT_SITEBAR_ICON("sitebar_chat_icon"),
   CHAT_SITEBAR_ICON_GROUP("sitebar_chat_icon_group"),
   DOC_CONTENT("doc_content"),
   DOC_CONTENT_SECTION("doc_content_section"),

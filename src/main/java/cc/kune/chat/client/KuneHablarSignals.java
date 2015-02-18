@@ -39,14 +39,14 @@ import com.calclab.hablar.signals.client.preferences.SignalsPreferencesWidget;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
 import com.calclab.hablar.signals.client.unattended.UnattendedPresenter;
 import com.calclab.hablar.user.client.UserContainer;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * Install the signals module into Hablar.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneHablarSignals {
@@ -57,7 +57,7 @@ public class KuneHablarSignals {
   /**
    * Gets the {@link SignalMessages} object containing the internationalised
    * messages.
-   * 
+   *
    * @return the SignalMessages object containing the internationalised messages
    */
   public static SignalMessages i18n() {
@@ -67,7 +67,7 @@ public class KuneHablarSignals {
   /**
    * Sets the {@link SignalMessages} object containing the internationalised
    * messages.
-   * 
+   *
    * @param t
    *          the messages object
    */
@@ -78,7 +78,7 @@ public class KuneHablarSignals {
   // FIXME: move to gin
   /**
    * Instantiates a new kune hablar signals.
-   * 
+   *
    * @param kuneEventBus
    *          the kune event bus
    * @param session
@@ -117,7 +117,7 @@ public class KuneHablarSignals {
         BrowserFocusHandler.getInstance());
     new KuneBrowserFocusManager(kuneEventBus, hablarEventBus, manager, BrowserFocusHandler.getInstance());
     new UnattendedPresenter(hablarEventBus, preferences, manager, titleDisplay);
-    new KuneUnattendedPresenter(kuneEventBus, hablarEventBus, preferences, manager, action);
+    new KuneUnattendedPresenter(kuneEventBus, hablarEventBus, preferences, manager);
     final NotificationManager notificationManager = new NotificationManager(hablarEventBus, preferences);
 
     // notificationManager.addNotifier((BrowserPopupHablarNotifier)

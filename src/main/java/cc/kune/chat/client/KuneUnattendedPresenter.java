@@ -22,9 +22,10 @@
  */
 package cc.kune.chat.client;
 
-import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
 import cc.kune.common.client.log.Log;
 import cc.kune.core.client.events.SndClickEvent;
+import cc.kune.polymer.client.PolymerId;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.signals.client.SignalPreferences;
@@ -40,22 +41,26 @@ import com.google.web.bindery.event.shared.EventBus;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneUnattendedPresenter {
-  
+
   /** The active. */
   private boolean active;
 
   /**
    * Instantiates a new kune unattended presenter.
    *
-   * @param eventBus the event bus
-   * @param hablarEventBus the hablar event bus
-   * @param preferences the preferences
-   * @param unattendedManager the unattended manager
-   * @param action the action
+   * @param eventBus
+   *          the event bus
+   * @param hablarEventBus
+   *          the hablar event bus
+   * @param preferences
+   *          the preferences
+   * @param unattendedManager
+   *          the unattended manager
+   * @param action
+   *          the action
    */
   public KuneUnattendedPresenter(final EventBus eventBus, final HablarEventBus hablarEventBus,
-      final SignalPreferences preferences, final UnattendedPagesManager unattendedManager,
-      final ChatClientAction action) {
+      final SignalPreferences preferences, final UnattendedPagesManager unattendedManager) {
     active = false;
     hablarEventBus.addHandler(UnattendedChatsChangedEvent.TYPE, new UnattendedChatsChangedHandler() {
       @Override
@@ -64,10 +69,10 @@ public class KuneUnattendedPresenter {
         if (unattendedChatsCount > 0 && active == false) {
           active = true;
           SndClickEvent.fire(eventBus);
-          action.setBlink(true);
+          PolymerUtils.setBlinkAnimation(PolymerId.CHAT_SITEBAR_ICON.getId(), true);
           Log.info("BLINK true");
         } else if (unattendedChatsCount == 0 && active == true) {
-          action.setBlink(false);
+          PolymerUtils.setBlinkAnimation(PolymerId.CHAT_SITEBAR_ICON.getId(), false);
           active = false;
           Log.info("BLINK false");
         }
