@@ -22,7 +22,6 @@
  */
 package cc.kune.gspace.client.actions.share;
 
-import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.StateChangedEvent;
@@ -52,7 +51,7 @@ public class ShareMenu extends MenuLoggedDescriptor {
     super(rightsManager);
     this.icons = res;
     this.withText(i18n.t("Share")).withToolTip(i18n.t("Share this with group members, etc")).withIcon(
-        res.world()).withStyles(ActionStyles.MENU_BTN_STYLE_RIGHT).withId(ID);
+        res.world()).withId(ID);
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {
@@ -79,6 +78,7 @@ public class ShareMenu extends MenuLoggedDescriptor {
     this.withIcon(visible ? icons.world() : icons.noWorld());
     withToolTip(visible ? I18n.t("This is visible to everyone. More share options")
         : I18n.t("This is not visible to everyone. Share this!"));
+    setAtRight(true);
   }
 
 }

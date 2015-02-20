@@ -30,6 +30,7 @@ import com.google.gwt.resources.client.ImageResource;
 
 public class MenuDescriptor extends GenericMenuDescriptor {
 
+  public static final String MENU_ATRIGHT = "menuatright";
   public static final String MENU_HIDE = "hidemenu";
   public static final String MENU_ONHIDE = "menuonhide";
   public static final String MENU_ONSHOW = "menuonshow";
@@ -60,6 +61,7 @@ public class MenuDescriptor extends GenericMenuDescriptor {
     putValue(MENU_STANDALONE, false);
     putValue(MENU_SELECTION_DOWN, false);
     putValue(MENU_SELECTION_UP, false);
+    putValue(MENU_ATRIGHT, false);
   }
 
   public MenuDescriptor(final String text) {
@@ -101,6 +103,10 @@ public class MenuDescriptor extends GenericMenuDescriptor {
     toggle(MENU_HIDE);
   }
 
+  public boolean isAtRight() {
+    return (Boolean) super.getValue(MENU_ATRIGHT);
+  }
+
   public boolean isStandalone() {
     return (Boolean) super.getValue(MENU_STANDALONE);
   }
@@ -115,6 +121,16 @@ public class MenuDescriptor extends GenericMenuDescriptor {
 
   public void selectMenu(final MenuItemDescriptor item) {
     putValue(MENU_SELECT_ITEM, item);
+  }
+
+  /**
+   * Sets the at right (menus in the right of the screen) property
+   *
+   * @param atRight
+   *          the new at right
+   */
+  public void setAtRight(final boolean atRight) {
+    putValue(MENU_ATRIGHT, atRight);
   }
 
   public void setMenuPosition(final Position position) {

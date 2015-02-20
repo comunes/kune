@@ -23,37 +23,37 @@
 package cc.kune.core.client.auth;
 
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.gwtplatform.mvp.client.View;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface SignInAbstractView.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SignInAbstractView extends View {
 
   /**
    * Gets the close.
-   * 
+   *
    * @return the close
    */
-  HasCloseHandlers<PopupPanel> getClose();
+  HasCloseHandlers<BSBasicDialog> getClose();
 
   /**
    * Gets the first btn.
-   * 
+   *
    * @return the first btn
    */
   HasClickHandlers getFirstBtn();
 
   /**
    * Gets the second btn.
-   * 
+   *
    * @return the second btn
    */
   HasClickHandlers getSecondBtn();
@@ -70,7 +70,7 @@ public interface SignInAbstractView extends View {
 
   /**
    * Mask.
-   * 
+   *
    * @param message
    *          the message
    */
@@ -88,7 +88,7 @@ public interface SignInAbstractView extends View {
 
   /**
    * Sets the error message.
-   * 
+   *
    * @param message
    *          the message
    * @param level

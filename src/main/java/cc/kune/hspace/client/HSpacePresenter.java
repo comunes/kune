@@ -225,7 +225,7 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
       }
     });
     signInHomeBtn.withText(I18n.t(CoreMessages.SIGN_IN_TITLE)).withStyles(
-        "btn btn-default btn-lg btn-block");
+        "btn btn-default btn-lg btn-block btn_green");
     final ButtonDescriptor newGroupHomeBtn = new ButtonDescriptor(new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
@@ -235,13 +235,13 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
     newGroupHomeBtn.withText(I18n.t(CoreMessages.NEW_GROUP_TITLE)).withStyles(
         "btn btn-default btn-lg btn-block");
     pendingMessagesBtn = new ButtonDescriptor(new AbstractExtendedAction() {
+
       @Override
       public void actionPerformed(final ActionEvent event) {
         stateManager.gotoHistoryToken(SiteTokens.INBOX);
       }
     });
-    pendingMessagesBtn.withText(I18n.t(CoreMessages.NEW_GROUP_TITLE)).withStyles(
-        "btn btn-default btn-lg btn-block btn_green");
+    pendingMessagesBtn.withStyles("btn btn-default btn-lg btn-block btn_green");
     getView().getToolbar().add(signInHomeBtn);
     getView().getToolbar().add(pendingMessagesBtn);
     getView().getToolbar().add(newGroupHomeBtn);
@@ -257,19 +257,19 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
         final boolean logged = session.isLogged();
         final boolean myGroupsHasActivity = logged && lastContentsOfMyGroups != null
             && lastContentsOfMyGroups.size() > 0;
-            if (myGroupsHasActivity) {
-              getView().setLastContentsOfMyGroup(lastContentsOfMyGroups);
+        if (myGroupsHasActivity) {
+          getView().setLastContentsOfMyGroup(lastContentsOfMyGroups);
+        }
+        getView().setUserGroupsActivityVisible(myGroupsHasActivity);
+        getEventBus().addHandler(SpaceSelectEvent.getType(), new SpaceSelectHandler() {
+          @Override
+          public void onSpaceSelect(final SpaceSelectEvent event) {
+            if (event.getSpace().equals(Space.homeSpace)) {
+              getView().blinkCurrentTab();
             }
-            getView().setUserGroupsActivityVisible(myGroupsHasActivity);
-            getEventBus().addHandler(SpaceSelectEvent.getType(), new SpaceSelectHandler() {
-              @Override
-              public void onSpaceSelect(final SpaceSelectEvent event) {
-                if (event.getSpace().equals(Space.homeSpace)) {
-                  getView().blinkCurrentTab();
-                }
-              }
-            });
-            getView().blinkCurrentTab();
+          }
+        });
+        getView().blinkCurrentTab();
       }
     };
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
@@ -277,6 +277,7 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
         final boolean logged = event.isLogged();
         signInHomeBtn.setVisible(!logged);
+        pendingMessagesBtn.setVisible(logged);
         if (logged) {
           statsService.get().getHomeStats(session.getUserHash(), callback);
         } else {

@@ -57,7 +57,7 @@ public class ActionFlowPanel extends AbstractComposedGuiItem implements ActionEx
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractComposedGuiItem#addWidget(cc.kune
    * .common.client.actions.ui.AbstractGuiItem)
@@ -69,7 +69,7 @@ public class ActionFlowPanel extends AbstractComposedGuiItem implements ActionEx
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractComposedGuiItem#clear()
    */
   @Override
@@ -80,7 +80,7 @@ public class ActionFlowPanel extends AbstractComposedGuiItem implements ActionEx
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractComposedGuiItem#insertWidget(cc
    * .kune.common.client.actions.ui.AbstractGuiItem, int)

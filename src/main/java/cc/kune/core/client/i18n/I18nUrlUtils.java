@@ -22,6 +22,8 @@
  */
 package cc.kune.core.client.i18n;
 
+import cc.kune.common.client.log.Log;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
@@ -29,14 +31,14 @@ import cc.kune.common.shared.utils.UrlParam;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nUrlUtils.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nUrlUtils {
 
   /**
    * Adds the lang param to a url.
-   * 
+   *
    * @param lang
    *          the lang
    * @param changedUrl
@@ -48,14 +50,14 @@ public class I18nUrlUtils {
 
   /**
    * Change lang.
-   * 
+   *
    * @param url
    *          the url
    * @param lang
    *          the new lang
    * @return the new url
    */
-  public static String changeLang(final String url, final String lang) {
+  protected static String changeLang(final String url, final String lang) {
     final String[] hashSplitted = url.split("#");
     final String hash = hashSplitted.length > 1 ? hashSplitted[1] : "";
     String query = hashSplitted.length >= 1 ? hashSplitted[0] : (url.equals("#") ? "" : url);
@@ -78,4 +80,28 @@ public class I18nUrlUtils {
     return changedUrl.toString() + (url.contains("#") ? "#" + hash : "");
   }
 
+  /**
+   * See in:
+   * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread
+   * /5e4e25050d3be984/7035ec39354d06aa?lnk=gst&q=get+locale&rnum=23
+   *
+   * JSNI method to change the locale of the application - it effectively parses
+   * the existing URL and creates a new one for the chosen locale.
+   *
+   * @param newLocale
+   *          String value of the new locale to go to.
+   */
+  public static void changeLanguageInUrl(final String newLocale) {
+    final String hash = WindowUtils.getHash();
+    final String query = WindowUtils.getQueryString();
+    final String path = WindowUtils.getPath();
+    final String protocol = WindowUtils.getProtocol();
+    final String newUrl = I18nUrlUtils.changeLang(query + (TextUtils.notEmpty(hash) ? hash : ""),
+        newLocale);
+    Log.info("Locale current query: " + query);
+    Log.info("Locale current hash: " + hash);
+    Log.info("Locale current path: " + path);
+    Log.info("Locale new Url: " + path + newUrl);
+    WindowUtils.changeHrefKeepHash(protocol + "//" + WindowUtils.getHost() + path + newUrl);
+  }
 }

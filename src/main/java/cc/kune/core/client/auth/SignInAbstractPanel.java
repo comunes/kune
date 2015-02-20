@@ -25,6 +25,7 @@ package cc.kune.core.client.auth;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.ui.MaskWidgetView;
+import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
@@ -34,14 +35,13 @@ import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.gwtplatform.mvp.client.ViewImpl;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SignInAbstractPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class SignInAbstractPanel extends ViewImpl {
@@ -69,7 +69,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Instantiates a new sign in abstract panel.
-   * 
+   *
    * @param dialogId
    *          the dialog id
    * @param mask
@@ -113,6 +113,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
     builder.firstButtonTitle(firstButtonTitle).firstButtonId(firstButtonId);
     builder.sndButtonTitle(cancelButtonTitle).sndButtonId(cancelButtonId);
     builder.tabIndexStart(tabIndexStart);
+    builder.width(400);
     dialog = builder.build();
     this.i18n = i18n;
     this.images = images;
@@ -132,16 +133,16 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Gets the close.
-   * 
+   *
    * @return the close
    */
-  public HasCloseHandlers<PopupPanel> getClose() {
-    return dialog.getClose();
+  public HasCloseHandlers<BSBasicDialog> getClose() {
+    return dialog;
   }
 
   /**
    * Gets the first btn.
-   * 
+   *
    * @return the first btn
    */
   public HasClickHandlers getFirstBtn() {
@@ -150,7 +151,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Gets the inner panel.
-   * 
+   *
    * @return the inner panel
    */
   public ForIsWidget getInnerPanel() {
@@ -159,7 +160,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Gets the second btn.
-   * 
+   *
    * @return the second btn
    */
   public HasClickHandlers getSecondBtn() {
@@ -184,7 +185,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Mask.
-   * 
+   *
    * @param message
    *          the message
    */
@@ -201,7 +202,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /**
    * Sets the error message.
-   * 
+   *
    * @param message
    *          the message
    * @param level

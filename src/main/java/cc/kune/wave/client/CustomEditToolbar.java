@@ -97,7 +97,7 @@ public class CustomEditToolbar {
     // DEFAULT_BINDINGS.put(KeyCombo.SHIFT_DELETE, Action.DELETE_BLIP);
 
     final String editText = I18n.t("Edit") + " (Ctrl-E)";
-    editInGroup = wrapBtn(editHandler, PolymerId.EDIT_GROUP_FAB.getId(), editText);
+    editInGroup = wrapBtn(editHandler, PolymerId.EDIT_DOCGROUP_FAB.getId(), editText);
     editInInbox = wrapBtn(editHandler, PolymerId.EDIT_INBOX_FAB.getId(), editText);
 
     final String editDoneText = I18n.t("Done");
@@ -112,7 +112,11 @@ public class CustomEditToolbar {
     setEditDoneVisible(false);
   }
 
-  private void onClickEdit() {
+  public boolean isEditEnable() {
+    return editInGroup.isEnabled();
+  }
+
+  public void onClickEdit() {
     if (listener != null) {
       listener.onEdit();
     }

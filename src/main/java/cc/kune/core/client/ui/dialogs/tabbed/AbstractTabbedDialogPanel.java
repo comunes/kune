@@ -54,7 +54,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractTabbedDialogPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractTabbedDialogPanel extends ViewImpl implements AbstractTabbedDialogView {
@@ -121,7 +121,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Instantiates a new abstract tabbed dialog panel.
-   * 
+   *
    * @param dialogId
    *          the dialog id
    * @param title
@@ -167,7 +167,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Instantiates a new abstract tabbed dialog panel.
-   * 
+   *
    * @param dialogId
    *          the dialog id
    * @param title
@@ -201,7 +201,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Instantiates a new abstract tabbed dialog panel.
-   * 
+   *
    * @param dialogId
    *          the dialog id
    * @param title
@@ -244,7 +244,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Instantiates a new abstract tabbed dialog panel.
-   * 
+   *
    * @param dialogId
    *          the dialog id
    * @param title
@@ -391,17 +391,17 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Gets the close.
-   * 
+   *
    * @return the close
    */
   public HasCloseHandlers<?> getClose() {
     createDialogIfNecessary();
-    return dialog.getClose();
+    return dialog;
   }
 
   /**
    * Gets the first btn.
-   * 
+   *
    * @return the first btn
    */
   public HasClickHandlers getFirstBtn() {
@@ -411,7 +411,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Gets the inner panel.
-   * 
+   *
    * @return the inner panel
    */
   public ForIsWidget getInnerPanel() {
@@ -421,7 +421,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Gets the second btn.
-   * 
+   *
    * @return the second btn
    */
   public HasClickHandlers getSecondBtn() {
@@ -473,7 +473,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Checks if is visible.
-   * 
+   *
    * @return true, if is visible
    */
   public boolean isVisible() {
@@ -502,7 +502,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Sets the icon.
-   * 
+   *
    * @param icon
    *          the new icon
    */
@@ -512,7 +512,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Sets the icon cls.
-   * 
+   *
    * @param iconCls
    *          the new icon cls
    */
@@ -550,7 +550,7 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
 
   /**
    * Sets the title.
-   * 
+   *
    * @param title
    *          the new title
    */
@@ -559,6 +559,10 @@ public abstract class AbstractTabbedDialogPanel extends ViewImpl implements Abst
     if (dialog != null) {
       dialog.getTitleText().setText(title, direction);
     }
+  }
+
+  public void setWidth(final int width) {
+    this.width = width;
   }
 
   /*

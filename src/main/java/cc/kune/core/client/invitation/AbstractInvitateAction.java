@@ -49,7 +49,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractInvitateAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
@@ -86,7 +86,7 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
 
   /**
    * Instantiates a new abstract invitate action.
-   * 
+   *
    * @param stateManager
    *          the state manager
    * @param session
@@ -139,7 +139,7 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)
@@ -154,11 +154,11 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
     }
     final Builder builder = new PromptTopDialog.Builder(dialogId, title, false, true,
         I18n.getDirection(), new OnEnter() {
-          @Override
-          public void onEnter() {
-          }
-        });
-    builder.width("320px").height("120px").firstButtonTitle(I18n.t("Invite")).sndButtonTitle(
+      @Override
+      public void onEnter() {
+      }
+    });
+    builder.width("420px").height("320px").firstButtonTitle(I18n.t("Invite")).sndButtonTitle(
         I18n.t("Cancel")).firstButtonId(inviteId).sndButtonId(cancelId);
     builder.promptText(promptText).promptLines(3).emptyTextField(
         "simone@example.com, bertrand@example.com, luther@example.com").promptWidth(295);
@@ -182,7 +182,7 @@ public abstract class AbstractInvitateAction extends RolActionAutoUpdated {
 
   /**
    * Do action.
-   * 
+   *
    * @param token
    *          the token
    */

@@ -44,21 +44,21 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WaveStatusIndicator.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveStatusIndicator {
 
   /**
    * The Class WaveStatusAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class WaveStatusAction extends SessionAction {
 
     /**
      * Instantiates a new wave status action.
-     * 
+     *
      * @param session
      *          the session
      * @param i18n
@@ -101,7 +101,8 @@ public class WaveStatusIndicator {
             if (session.isLogged()) {
               // FIXME: this is because we don't have way to logout in wave,
               // websocket, etc
-              NotifyUser.showProgress(i18n.t("Connecting"));
+              NotifyUser.showProgress();
+              NotifyUser.important(i18n.t("Connecting"));
             }
             break;
           case RECONNECTING:
@@ -117,7 +118,7 @@ public class WaveStatusIndicator {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -131,7 +132,7 @@ public class WaveStatusIndicator {
 
   /**
    * Instantiates a new wave status indicator.
-   * 
+   *
    * @param action
    *          the action
    */

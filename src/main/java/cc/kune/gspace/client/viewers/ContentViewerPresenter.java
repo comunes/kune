@@ -65,8 +65,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentViewerPresenter extends
-    Presenter<ContentViewerPresenter.ContentViewerView, ContentViewerPresenter.ContentViewerProxy>
-    implements ContentViewer {
+Presenter<ContentViewerPresenter.ContentViewerView, ContentViewerPresenter.ContentViewerProxy>
+implements ContentViewer {
 
   /**
    * The Interface ContentViewerProxy.
@@ -122,6 +122,14 @@ public class ContentViewerPresenter extends
     void setDocHeaderActions(GuiActionDescCollection headerBottomActions);
 
     /**
+     * Sets the subheader actions.
+     *
+     * @param actions
+     *          the new subheader actions
+     */
+    void setDocTopToolbarActions(GuiActionDescCollection actions);
+
+    /**
      * Sets the editable content.
      *
      * @param state
@@ -144,14 +152,6 @@ public class ContentViewerPresenter extends
      *          the new footer actions
      */
     void setFooterActions(GuiActionDescCollection actions);
-
-    /**
-     * Sets the subheader actions.
-     *
-     * @param actions
-     *          the new subheader actions
-     */
-    void setDocTopToolbarActions(GuiActionDescCollection actions);
 
     /**
      * Sign in.
@@ -235,7 +235,7 @@ public class ContentViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.tool.ContentViewer#attach()
    */
   @Override
@@ -262,23 +262,23 @@ public class ContentViewerPresenter extends
       public void fire(final EditEvent event) {
         renameAction.get().rename(session.getCurrentStateToken(), session.getCurrentState().getTitle(),
             event.getText(), new RenameListener() {
-              @Override
-              public void onFail(final StateToken token, final String oldTitle) {
-                getView().setEditableTitle(oldTitle);
-              }
+          @Override
+          public void onFail(final StateToken token, final String oldTitle) {
+            getView().setEditableTitle(oldTitle);
+          }
 
-              @Override
-              public void onSuccess(final StateToken token, final String title) {
-                getView().setEditableTitle(title);
-              }
-            });
+          @Override
+          public void onSuccess(final StateToken token, final String title) {
+            getView().setEditableTitle(title);
+          }
+        });
       }
     });
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.tool.ContentViewer#detach()
    */
   @Override
@@ -288,7 +288,7 @@ public class ContentViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -298,7 +298,7 @@ public class ContentViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.tool.ContentViewer#setContent(cc.kune.core.shared
    * .dto.HasContent)
@@ -315,6 +315,7 @@ public class ContentViewerPresenter extends
         final org.waveprotocol.box.webclient.client.Session waveSession = org.waveprotocol.box.webclient.client.Session.get();
         if (waveSession != null && waveSession.isLoggedIn()) {
           getView().setEditableContent(stateContent);
+          // Try to select this wave (maybe using Searchpanel)
         } else {
           getView().setContent(stateContent);
           // When logged setEditable!

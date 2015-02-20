@@ -23,17 +23,17 @@
 package cc.kune.core.client.groups.newgroup;
 
 import cc.kune.common.client.notify.NotifyLevel;
+import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.gwtplatform.mvp.client.View;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface NewGroupView.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface NewGroupView extends View {
@@ -55,56 +55,56 @@ public interface NewGroupView extends View {
 
   /**
    * Gets the close.
-   * 
+   *
    * @return the close
    */
-  HasCloseHandlers<PopupPanel> getClose();
+  HasCloseHandlers<BSBasicDialog> getClose();
 
   /**
    * Gets the first btn.
-   * 
+   *
    * @return the first btn
    */
   HasClickHandlers getFirstBtn();
 
   /**
    * Gets the long name.
-   * 
+   *
    * @return the long name
    */
   String getLongName();
 
   /**
    * Gets the long name field.
-   * 
+   *
    * @return the long name field
    */
   TextField<String> getLongNameField();
 
   /**
    * Gets the public desc.
-   * 
+   *
    * @return the public desc
    */
   String getPublicDesc();
 
   /**
    * Gets the second btn.
-   * 
+   *
    * @return the second btn
    */
   HasClickHandlers getSecondBtn();
 
   /**
    * Gets the short name.
-   * 
+   *
    * @return the short name
    */
   String getShortName();
 
   /**
    * Gets the tags.
-   * 
+   *
    * @return the tags
    */
   String getTags();
@@ -121,35 +121,35 @@ public interface NewGroupView extends View {
 
   /**
    * Checks if is closed.
-   * 
+   *
    * @return true, if is closed
    */
   boolean isClosed();
 
   /**
    * Checks if is community.
-   * 
+   *
    * @return true, if is community
    */
   boolean isCommunity();
 
   /**
    * Checks if is form valid.
-   * 
+   *
    * @return true, if is form valid
    */
   boolean isFormValid();
 
   /**
    * Checks if is organization.
-   * 
+   *
    * @return true, if is organization
    */
   boolean isOrganization();
 
   /**
    * Checks if is project.
-   * 
+   *
    * @return true, if is project
    */
   boolean isProject();
@@ -161,7 +161,7 @@ public interface NewGroupView extends View {
 
   /**
    * Sets the long name.
-   * 
+   *
    * @param longName
    *          the new long name
    */
@@ -169,7 +169,7 @@ public interface NewGroupView extends View {
 
   /**
    * Sets the long name failed.
-   * 
+   *
    * @param msg
    *          the new long name failed
    */
@@ -177,7 +177,7 @@ public interface NewGroupView extends View {
 
   /**
    * Sets the message.
-   * 
+   *
    * @param message
    *          the message
    * @param level
@@ -187,7 +187,7 @@ public interface NewGroupView extends View {
 
   /**
    * Sets the short name.
-   * 
+   *
    * @param shortName
    *          the new short name
    */
@@ -195,7 +195,7 @@ public interface NewGroupView extends View {
 
   /**
    * Sets the short name failed.
-   * 
+   *
    * @param msg
    *          the new short name failed
    */

@@ -42,7 +42,7 @@ public enum PolymerId implements HTMLId {
   DOC_HEADER_RIGHT_EXTENSIONBAR("doc_header_right_extensionbar"),
   DOC_TOOLBAR_EXTENSION("doc_toolbar_extension"),
   DOCUMENT_NAME("document_name"),
-  EDIT_GROUP_FAB("edit_docgroup_fab"),
+  EDIT_DOCGROUP_FAB("edit_docgroup_fab"),
   EDIT_INBOX_FAB("edit_inbox_fab"),
   EDITDONE_GROUP_FAB("editdone_docgroup_fab"),
   EDITDONE_INBOX_FAB("editdone_inbox_fab"),
@@ -69,6 +69,7 @@ public enum PolymerId implements HTMLId {
   INBOX_SITEBAR_ICON_GROUP("sitebar_user_space_icon_group"),
   KUNE_TEMPLATE("kunetemplate"),
   MIGA("miga"),
+  PAPER_PROGRESS("paper_progress"),
   REPLY_GROUP_FAB("reply_docgroup_fab"),
   REPLY_INBOX_FAB("reply_inbox_fab"),
   SITE_BOTTOMBAR("site_bottombar"),
@@ -82,8 +83,10 @@ public enum PolymerId implements HTMLId {
   SITEBAR_SEARCH_INPUT("sitebar_search_input"),
   SITEBAR_USER_BTN("sitebar_user_btn"),
   SPACE_SELECTOR("space_selector_paper_tabs"),
+  TOAST("toast"),
   USER_SPACE("user_space"),
   USER_SPACE_ICON("user_space_icon");
+
   /* @formatter:on */
 
   private final String id;

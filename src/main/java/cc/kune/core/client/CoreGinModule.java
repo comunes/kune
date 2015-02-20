@@ -71,7 +71,7 @@ import cc.kune.core.client.invitation.GroupInviteUserSearchPanel;
 import cc.kune.core.client.invitation.ListInviteUserSearchPanel;
 import cc.kune.core.client.notify.confirm.UserConfirmPanel;
 import cc.kune.core.client.notify.confirm.UserConfirmPresenter;
-import cc.kune.core.client.notify.progress.PaperProgressNotificator;
+import cc.kune.core.client.notify.progress.PaperNotificator;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.registry.NewMenusForTypeIdsRegistry;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -83,6 +83,7 @@ import cc.kune.core.client.sitebar.AbstractSignInAction;
 import cc.kune.core.client.sitebar.AbstractSignOutAction;
 import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.sitebar.MyGroupsMenu;
+import cc.kune.core.client.sitebar.SiteLanguageSelector;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.client.sitebar.SitebarActions;
@@ -197,6 +198,14 @@ public class CoreGinModule extends ExtendedGinModule {
     s(UserFieldFactory.class);
     s(GroupFieldFactory.class);
 
+    s(SiteLanguageSelector.class);
+    s(MyGroupsMenu.class);
+    s(SiteUserOptionsPresenter.class);
+    s(SiteUserOptions.class, SiteUserOptionsPresenter.class);
+    s(SitebarNewGroupLink.class);
+    s(SitebarSignInLink.class);
+    s(SitebarSignOutLink.class);
+
     // Presenters
 
     bindPresenter(CorePresenter.class, CorePresenter.CoreView.class, CoreViewImpl.class,
@@ -204,7 +213,7 @@ public class CoreGinModule extends ExtendedGinModule {
     // bindPresenter(SpinerPresenter.class, SpinerPresenter.SpinerView.class,
     // SpinerPanel.class,
     // SpinerPresenter.SpinerProxy.class);
-    eagle(PaperProgressNotificator.class);
+    eagle(PaperNotificator.class);
     // eagle(UserNotifierPopup.class);
     eagle(UserNotifierGrowl.class);
     requestStaticInjection(NotifyUser.class);
@@ -292,13 +301,6 @@ public class CoreGinModule extends ExtendedGinModule {
     s(ContentServiceHelper.class);
     s(SocialNetServiceHelper.class);
     s(ListsServiceHelper.class);
-
-    s(MyGroupsMenu.class);
-    s(SiteUserOptionsPresenter.class);
-    s(SiteUserOptions.class, SiteUserOptionsPresenter.class);
-    s(SitebarNewGroupLink.class);
-    s(SitebarSignInLink.class);
-    s(SitebarSignOutLink.class);
 
     s(ErrorsDialog.class);
     s(XMLActionsParser.class);

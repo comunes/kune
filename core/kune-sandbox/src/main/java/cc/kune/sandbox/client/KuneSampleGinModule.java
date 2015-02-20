@@ -23,6 +23,7 @@
 
 package cc.kune.sandbox.client;
 
+import cc.kune.bootstrap.client.BSGuiProvider;
 import cc.kune.common.client.actions.ui.DefaultGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.GuiProviderInstance;
@@ -36,7 +37,6 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.i18n.I18nTranslationServiceMocked;
 import cc.kune.core.client.notify.confirm.UserConfirmBS;
-import cc.kune.polymer.client.PolymerGuiProvider;
 
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.inject.client.AbstractGinModule;
@@ -69,8 +69,9 @@ public class KuneSampleGinModule extends AbstractGinModule {
 
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
 
-    bind(PolymerGuiProvider.class).asEagerSingleton();
+    // bind(PolymerGuiProvider.class).asEagerSingleton();
     // bind(GwtGuiProvider.class).asEagerSingleton();
+    bind(BSGuiProvider.class).asEagerSingleton();
 
     bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
 

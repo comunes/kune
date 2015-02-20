@@ -35,7 +35,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupOptionsPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements GroupOptionsView {
@@ -54,7 +54,7 @@ public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements Grou
 
   /**
    * Instantiates a new group options panel.
-   * 
+   *
    * @param entityHeader
    *          the entity header
    * @param i18n
@@ -71,12 +71,13 @@ public class GroupOptionsPanel extends AbstractTabbedDialogPanel implements Grou
         GROUP_OP_PANEL_ID_CLOSE, null, null, entityOptionsGroup, i18n.getDirection());
     this.entityHeader = entityHeader;
     super.setIconCls("k-options-icon");
+    super.setWidth(EntityOptionsView.WIDTH + 40);
     super.setTitle(i18n.t(CoreMessages.GROUP_OPTIONS_DIALOG_TITLE));
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.GroupOptionsPresenter.GroupOptionsView#addAction
    * (cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)

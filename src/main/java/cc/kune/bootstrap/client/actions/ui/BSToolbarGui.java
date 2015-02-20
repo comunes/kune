@@ -49,7 +49,7 @@ public class BSToolbarGui extends AbstractBasicGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#create(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -87,9 +87,17 @@ public class BSToolbarGui extends AbstractBasicGuiItem {
     return this;
   }
 
+  @Override
+  protected void onUnload() {
+    super.onUnload();
+    navbarNav.clear();
+    navbarNav.removeFromParent();
+    navbarNav = null;
+  }
+
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
    */
   @Override

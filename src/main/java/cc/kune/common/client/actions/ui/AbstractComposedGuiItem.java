@@ -33,7 +33,6 @@ import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.shared.i18n.HasRTL;
 
-import com.google.gwt.core.client.JavaScriptException;
 import com.google.gwt.user.client.ui.Composite;
 
 // TODO: Auto-generated Javadoc
@@ -81,7 +80,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip[])
@@ -95,7 +94,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -120,7 +119,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.IsActionExtensible#addAll(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescCollection)
@@ -165,10 +164,11 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
           } catch (final ClassCastException e) {
             Log.error("Class cath error creating " + descrip);
             throw e;
-          } catch (final JavaScriptException je) {
-            Log.error("Javascript error creating" + descrip);
-            throw je;
           }
+          // catch (final JavaScriptException je) {
+          // Log.error("Javascript error creating" + descrip);
+          // throw je;
+          // }
           if (binding.shouldBeAdded()) {
             // TODO Change this ^ to shouldBeAttached
             if (descrip.getPosition() == GuiActionDescrip.NO_POSITION) {
@@ -196,7 +196,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.common.client.actions.ui.IsActionExtensible#clear()
    */
   @Override

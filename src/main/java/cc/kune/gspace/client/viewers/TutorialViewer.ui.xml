@@ -10,14 +10,6 @@
       height: 100%
       border: none;
     }
-    
-    .flow {
-      width: 100%;
-    }
   </ui:style>
-  <g:FlowPanel ui:field="flow" styleName="{style.flow}">
-    <d:CloseDialogButton ui:field="closeBtn"
-      addStyleNames="k-dialog-close-btn-normal" visible="true"/>
     <g:Frame styleName="{style.frame}" ui:field="frame"/>
-  </g:FlowPanel>
 </ui:UiBinder>

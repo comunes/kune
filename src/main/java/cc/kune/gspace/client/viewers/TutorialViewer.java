@@ -24,8 +24,8 @@ package cc.kune.gspace.client.viewers;
 
 import java.util.List;
 
+import br.com.rpa.client._paperelements.PaperDialog;
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.ui.dialogs.CloseDialogButton;
 import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.events.ToolChangedEvent;
 import cc.kune.core.client.events.ToolChangedEvent.ToolChangedHandler;
@@ -34,14 +34,8 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
-import cc.kune.gspace.client.armor.GSpaceArmor;
-import cc.kune.gspace.client.armor.GSpaceCenter;
-import cc.kune.polymer.client.Layout;
-import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -49,8 +43,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Frame;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -89,30 +83,26 @@ public class TutorialViewer extends Composite {
   /** The Constant CLOSE_BTN_ID. */
   public static final String CLOSE_BTN_ID = "k-tuto-view-close-btn";
 
-  /** The Constant FOOTBAR. */
-  private static final int FOOTBAR = 12;
-
   /** The Constant IFRAME_ID. */
   public static final String IFRAME_ID = "k-tuto-iframe";
+
+  private static final int SIZE_INT = 75;
+
+  private static final String SIZE_PERCENT = SIZE_INT + "%";
 
   /** The ui binder. */
   private static TutorialViewerUiBinder uiBinder = GWT.create(TutorialViewerUiBinder.class);
 
-  /** The close btn. */
-  @UiField
-  CloseDialogButton closeBtn;
   /** The def lang. */
   private String defLang;
 
-  @UiField
-  FlowPanel flow;
+  private final PaperDialog dialog;
+
+  // private final PaperButton dismissive;
 
   /** The frame. */
   @UiField
   public Frame frame;
-
-  /** The gs armor. */
-  private final GSpaceArmor gsArmor;
 
   /** The i18n. */
   private final I18nUITranslationService i18n;
@@ -142,31 +132,37 @@ public class TutorialViewer extends Composite {
    */
   @Inject
   public TutorialViewer(final I18nUITranslationService i18n, final Session session,
-      final EventBus eventBus, final StateManager stateManager, final GSpaceArmor gsArmor) {
+      final EventBus eventBus, final StateManager stateManager) {
     this.i18n = i18n;
     this.session = session;
-    this.gsArmor = gsArmor;
+
+    dialog = new PaperDialog();
+    dialog.setLayered(true);
+    // dismissive = new PaperButton();
+    // dismissive.setText(I18n.t("Close"));
+    // dialog.addStyleName("k-tutorial");
+
+    // dismissive.addClickHandler(new ClickHandler() {
+    // @Override
+    // public void onClick(final ClickEvent event) {
+    // TutorialViewer.this.dialog.setOpened(false);
+    // NotifyUser.info("Close pulsado");
+    // onTutorialClose.onClose();
+    // }
+    // });
     initWidget(uiBinder.createAndBindUi(this));
-    frame.ensureDebugId(IFRAME_ID);
+    // frame.ensureDebugId(IFRAME_ID);
+    // frame.setWidth(SIZE_PERCENT);
+    // frame.setHeight(SIZE_PERCENT);
+    resizeTutorialFrame();
+
     stateManager.onToolChanged(true, new ToolChangedHandler() {
       @Override
       public void onToolChanged(final ToolChangedEvent event) {
         setTool(event.getNewTool());
       }
     });
-    closeBtn.ensureDebugId(CLOSE_BTN_ID);
-    closeBtn.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        if (onTutorialClose == null) {
-          // If no close handler just refresh
-          stateManager.refreshCurrentState();
-        } else {
-          onTutorialClose.onClose();
-        }
-      }
-    });
-    PolymerUtils.addLayout(flow.getElement(), Layout.FIT);
+
     Window.addResizeHandler(new ResizeHandler() {
       @Override
       public void onResize(final ResizeEvent event) {
@@ -176,25 +172,25 @@ public class TutorialViewer extends Composite {
     });
     eventBus.addHandler(ShowHelpContainerEvent.getType(),
         new ShowHelpContainerEvent.ShowHelpContainerHandler() {
-          @Override
-          public void onShowHelpContainer(final ShowHelpContainerEvent event) {
-            onTutorialClose = event.getOnTutorialClose();
-            showTutorial();
-          }
-        });
+      @Override
+      public void onShowHelpContainer(final ShowHelpContainerEvent event) {
+        onTutorialClose = event.getOnTutorialClose();
+        showTutorial();
+      }
+    });
     eventBus.addHandler(NewUserRegisteredEvent.getType(),
         new NewUserRegisteredEvent.NewUserRegisteredHandler() {
+      @Override
+      public void onNewUserRegistered(final NewUserRegisteredEvent event) {
+        new Timer() {
           @Override
-          public void onNewUserRegistered(final NewUserRegisteredEvent event) {
-            new Timer() {
-              @Override
-              public void run() {
-                onTutorialClose = null;
-                showTutorial();
-              }
-            }.schedule(2000);
+          public void run() {
+            onTutorialClose = null;
+            showTutorial();
           }
-        });
+        }.schedule(2000);
+      }
+    });
   }
 
   /**
@@ -217,22 +213,18 @@ public class TutorialViewer extends Composite {
    * Resize tutorial frame.
    */
   private void resizeTutorialFrame() {
-    setHeigth(gsArmor.getDocContainerHeight());
-  }
-
-  /**
-   * Sets the heigth.
-   *
-   * @param height
-   *          the new heigth
-   */
-  private void setHeigth(final Integer height) {
-    if (height > FOOTBAR) {
-      final String he = (height - FOOTBAR) + "px";
-      frame.setWidth("100%");
-      frame.setHeight(he);
-      Log.debug("Resizing to: " + height);
-    }
+    int height = Window.getClientHeight();
+    int width = Window.getClientHeight();
+    height = (int) (((float) SIZE_INT * (float) height) / 100);
+    width = (int) (((float) SIZE_INT * (float) width) / 100);
+    final String hpercent = height + "px";
+    final String vpercent = width + "px";
+    // We rest the bottom are of buttons
+    frame.setHeight(height - 70 + "px");
+    frame.setWidth(width - 70 + "px");
+    dialog.setHeight(hpercent);
+    dialog.setWidth(vpercent);
+    Log.info("Resizing to h: " + hpercent + " w: " + vpercent);
   }
 
   /**
@@ -250,11 +242,13 @@ public class TutorialViewer extends Composite {
    * Show tutorial.
    */
   private void showTutorial() {
-    gsArmor.enableCenterScroll(false);
-    final GSpaceCenter docContainer = gsArmor.getDocContainer();
+    if (!dialog.isAttached()) {
+      RootPanel.get().add(dialog);
+    }
+    dialog.setHTML(frame.getElement().getString());
+    // dialog.addActionButtons(dismissive, 0);
     resizeTutorialFrame();
-    docContainer.add(this);
-    docContainer.showWidget(this);
+    dialog.setOpened(true);
   }
 
 }

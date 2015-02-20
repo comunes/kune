@@ -36,7 +36,6 @@ import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.core.client.dnd.FolderContentDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.shared.domain.ContentStatus;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
@@ -89,9 +88,6 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
   /** The gui provider. */
   private final GuiProvider guiProvider;
 
-  /** The res. */
-  private final CoreResources res;
-
   /**
    * Instantiates a new folder viewer as table panel.
    *
@@ -116,14 +112,13 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
    */
   @Inject
   public FolderViewerAsTablePanel(final GSpaceArmor gsArmor, final I18nTranslationService i18n,
-      final EventBus eventBus, final GuiProvider guiProvider, final CoreResources res,
+      final EventBus eventBus, final GuiProvider guiProvider,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
       final Provider<FolderContentDropController> contentDropControllerProv,
       final Provider<FolderContainerDropController> containerDropControllerProv) {
     super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
         containerDropControllerProv);
     this.guiProvider = guiProvider;
-    this.res = res;
     widget = uiBinder.createAndBindUi(this);
     widget.addStyleName("k-folder-viewer");
   }
@@ -165,8 +160,8 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       }
     });
     final MenuDescriptor menu = new MenuDescriptor(i18n.t("Actions"));
-    // menu.withIcon(res.arrowdown())
-    menu.withStyles("k-def-docbtn, k-btn, k-button, pull-right");
+    menu.setAtRight(true);
+    menu.withStyles("k-def-docbtn, k-btn, k-button");
     menu.setStandalone(false);
     toolbar.add(menu);
     final GuiActionDescCollection actions = item.getActionCollection();

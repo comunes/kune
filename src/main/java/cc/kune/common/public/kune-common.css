@@ -710,9 +710,8 @@ div.k-iconlabel {
     outline: none;
     padding: 0;
     color: #808080;
-    /* margin: -14px 0 -16px 3px; */
-    /* -1px 0 -1px 4px; */
-} 
+    margin: -1px 0 -1px 3px;
+}
 
 .k-btn-min {
   min-width: 19px !important;

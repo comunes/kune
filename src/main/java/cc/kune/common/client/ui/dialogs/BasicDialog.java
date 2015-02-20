@@ -123,7 +123,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getBottomPanel()
    */
   @Override
@@ -136,23 +136,14 @@ public class BasicDialog extends Composite implements BasicDialogView {
    *
    * @return the btn panel
    */
+  @Override
   public FlowPanel getBtnPanel() {
     return btnPanel;
   }
 
   /*
    * (non-Javadoc)
-   * 
-   * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getCloseBtn()
-   */
-  @Override
-  public HasClickHandlers getCloseBtn() {
-    return closeBtn;
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getFirstBtn()
    */
   @Override
@@ -162,7 +153,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getInnerPanel()
    */
   @Override
@@ -177,7 +168,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getSecondBtn()
    */
   @Override
@@ -187,7 +178,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getTitleText()
    */
   @Override
@@ -197,7 +188,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setCloseBtnTooltip(java
    * .lang.String)
@@ -209,7 +200,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setCloseBtnVisible(boolean
    * )
@@ -258,7 +249,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setFirstBtnText(java.lang
    * .String)
@@ -271,7 +262,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setFirstBtnTitle(java.
    * lang.String)
@@ -283,7 +274,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setFirstBtnVisible(boolean
    * )
@@ -345,7 +336,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnText(java.
    * lang.String)
@@ -358,7 +349,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnTitle(java
    * .lang.String)
@@ -370,7 +361,7 @@ public class BasicDialog extends Composite implements BasicDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnVisible(boolean
    * )

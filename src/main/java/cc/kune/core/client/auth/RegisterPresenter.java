@@ -26,6 +26,7 @@ import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 import cc.kune.core.client.auth.RegisterPresenter.RegisterView;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.errors.EmailAddressInUseException;
@@ -49,11 +50,10 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
@@ -61,15 +61,15 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RegisterPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class RegisterPresenter extends
-    SignInAbstractPresenter<RegisterView, RegisterPresenter.RegisterProxy> implements Register {
+SignInAbstractPresenter<RegisterView, RegisterPresenter.RegisterProxy> implements Register {
 
   /**
    * The Interface RegisterProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -78,56 +78,56 @@ public class RegisterPresenter extends
 
   /**
    * The Interface RegisterView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface RegisterView extends SignInAbstractView {
 
     /**
      * Gets the email.
-     * 
+     *
      * @return the email
      */
     String getEmail();
 
     /**
      * Gets the long name.
-     * 
+     *
      * @return the long name
      */
     String getLongName();
 
     /**
      * Gets the register password.
-     * 
+     *
      * @return the register password
      */
     String getRegisterPassword();
 
     /**
      * Gets the short name.
-     * 
+     *
      * @return the short name
      */
     String getShortName();
 
     /**
      * Checks if is register form valid.
-     * 
+     *
      * @return true, if is register form valid
      */
     boolean isRegisterFormValid();
 
     /**
      * Checks if is valid.
-     * 
+     *
      * @return true, if is valid
      */
     boolean isValid();
 
     /**
      * Sets the email failed.
-     * 
+     *
      * @param msg
      *          the new email failed
      */
@@ -135,7 +135,7 @@ public class RegisterPresenter extends
 
     /**
      * Sets the long name failed.
-     * 
+     *
      * @param msg
      *          the new long name failed
      */
@@ -143,7 +143,7 @@ public class RegisterPresenter extends
 
     /**
      * Sets the short name failed.
-     * 
+     *
      * @param msg
      *          the new short name failed
      */
@@ -164,7 +164,7 @@ public class RegisterPresenter extends
 
   /**
    * Instantiates a new register presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -198,7 +198,7 @@ public class RegisterPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.Register#doRegister()
    */
   @Override
@@ -216,7 +216,7 @@ public class RegisterPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInAbstractPresenter#getView()
    */
   @Override
@@ -226,7 +226,7 @@ public class RegisterPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -248,10 +248,10 @@ public class RegisterPresenter extends
         onCancel();
       }
     });
-    getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
+    getView().getClose().addCloseHandler(new CloseHandler<BSBasicDialog>() {
 
       @Override
-      public void onClose(final CloseEvent<PopupPanel> event) {
+      public void onClose(final CloseEvent<BSBasicDialog> event) {
         Log.debug("Closing register presenter");
         RegisterPresenter.this.onClose();
       }
@@ -301,39 +301,39 @@ public class RegisterPresenter extends
           signInProvider.get().doSignIn(getView().getShortName(), getView().getRegisterPassword(), true,
               new AsyncCallback<Void>() {
 
-                @Override
-                public void onFailure(final Throwable caught) {
-                  onRegistrationFailure(caught);
-                }
+            @Override
+            public void onFailure(final Throwable caught) {
+              onRegistrationFailure(caught);
+            }
 
-                @Override
-                public void onSuccess(final Void result) {
-                  NewUserRegisteredEvent.fire(getEventBus());
-                  getView().hide();
-                  getView().unMask();
-                  if (wantHomepage) {
-                    showWelcolmeDialog();
-                  } else {
-                    showWelcolmeDialogNoHomepage();
-                  }
-                }
-              });
+            @Override
+            public void onSuccess(final Void result) {
+              NewUserRegisteredEvent.fire(getEventBus());
+              getView().hide();
+              getView().unMask();
+              if (wantHomepage) {
+                showWelcolmeDialog();
+              } else {
+                showWelcolmeDialogNoHomepage();
+              }
+            }
+          });
         }
 
         private void showWelcolmeDialog() {
           NotifyUser.info(i18n.t("Welcome"), i18n.t("Thanks for joining [%s]. "
               + "Now you can actively participate in [%s]. "
               + "You can also use your personal space to publish contents. ",
-          // +
-          // "Note: your email is not verified, please follow the instructions you will receive by email.",
+              // +
+              // "Note: your email is not verified, please follow the instructions you will receive by email.",
               siteCommonName, siteCommonName), Register.WELCOME_ID, true);
         }
 
         private void showWelcolmeDialogNoHomepage() {
           NotifyUser.info(i18n.t("Welcome"), i18n.t("Thanks for joining [%s]. "
               + "Now you can actively participate in [%s]. ",
-          // +
-          // "Note: your email is not verified, please follow the instructions you will receive by email.",
+              // +
+              // "Note: your email is not verified, please follow the instructions you will receive by email.",
               siteCommonName, siteCommonName), Register.WELCOME_ID, true);
         }
       };
@@ -343,7 +343,7 @@ public class RegisterPresenter extends
 
   /**
    * On registration failure.
-   * 
+   *
    * @param caught
    *          the caught
    */
@@ -369,7 +369,7 @@ public class RegisterPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

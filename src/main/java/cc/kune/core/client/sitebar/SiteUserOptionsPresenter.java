@@ -22,6 +22,8 @@
  \*/
 package cc.kune.core.client.sitebar;
 
+import org.gwtbootstrap3.client.ui.constants.Responsiveness;
+
 import br.com.rpa.client._coreelements.CoreIconButton;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
@@ -47,6 +49,7 @@ import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.polymer.client.PolymerId;
 import cc.kune.polymer.client.PolymerUtils;
 
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -145,7 +148,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.SiteOptions#addAction(cc.kune.common.client
    * .actions.ui.descrip.GuiActionDescrip)
@@ -215,11 +218,13 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
   /**
    * Sets the logged user name.
    *
-   * @param shortName
+   * @param username
    *          the new logged user name
    */
-  private void setLoggedUserName(final String shortName) {
-    userBtn.setText(shortName);
+  private void setLoggedUserName(final String shortname) {
+    final InlineLabel username = new InlineLabel(shortname);
+    username.addStyleName(Responsiveness.HIDDEN_XS.getCssName());
+    userBtn.setHTML(username.getElement().getString());
   }
 
 }

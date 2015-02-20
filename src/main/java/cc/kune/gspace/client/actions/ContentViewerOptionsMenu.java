@@ -22,7 +22,6 @@
  */
 package cc.kune.gspace.client.actions;
 
-import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.resources.CoreResources;
@@ -57,11 +56,7 @@ public class ContentViewerOptionsMenu extends MenuDescriptor {
     // this.withIcon(res.arrowdownsitebar())
     this.withId(ID);
     this.withText(I18n.t("More"));
-    if (session.isNewbie()) {
-      this.withStyles(ActionStyles.MENU_BTN_STYLE_RIGHT);
-    } else {
-      this.withStyles(ActionStyles.OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT);
-    }
+    this.setAtRight(true);
   }
 
 }

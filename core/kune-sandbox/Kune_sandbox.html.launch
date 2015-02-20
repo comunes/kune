@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <launchConfiguration type="com.google.gdt.eclipse.suite.webapp">
+<booleanAttribute key="com.google.gdt.eclipse.core.AUTO_PORT_SELECTION" value="true"/>
 <stringAttribute key="com.google.gdt.eclipse.suiteMainTypeProcessor.PREVIOUSLY_SET_MAIN_TYPE_NAME" value="com.google.gwt.dev.DevMode"/>
 <booleanAttribute key="com.google.gdt.eclipse.suiteWarArgumentProcessor.IS_WAR_FROM_PROJECT_PROPERTIES" value="true"/>
+<booleanAttribute key="com.google.gwt.eclipse.core.CODE_SERVER_PORT_AUTO" value="true"/>
 <listAttribute key="com.google.gwt.eclipse.core.ENTRY_POINT_MODULES">
 <listEntry value="cc.kune.sandbox.KuneSandbox"/>
 </listAttribute>
@@ -33,7 +35,7 @@
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="com.google.gdt.eclipse.maven.mavenClasspathProvider"/>
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-superDevMode -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -startupUrl Kune_sandbox.html -logLevel INFO -codeServerPort 9997 -port 8888 -bindAddress 0.0.0.0 -war /home/vjrj/proyectos/dev/kune-git/core/kune-sandbox/war cc.kune.sandbox.KuneSandbox"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-superDevMode -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -startupUrl Kune_sandbox.html -logLevel INFO -codeServerPort auto -port auto -bindAddress 0.0.0.0 -war /home/vjrj/proyectos/dev/kune-git/core/kune-sandbox/war cc.kune.sandbox.KuneSandbox"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="kune-sandbox"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xmx512m"/>
 </launchConfiguration>

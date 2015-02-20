@@ -113,6 +113,9 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
     toolsSouthActionsToolbar = toolbarProv.get();
     entityFooterActionsToolbar = toolbarProv.get();
 
+    docHeaderRightActionsToolbar.addStyleName("btn-group");
+    docTopActionsToolbar.addStyleName("btn-group");
+
     PolymerUtils.addFlexHorLayout(docFooterActionsToolbar, docTopActionsToolbar,
         toolsSouthActionsToolbar, entityFooterActionsToolbar);
     PolymerUtils.addFlexVerLayout(headerActionsTopToolbar);

@@ -25,6 +25,7 @@ package cc.kune.core.client.groups.newgroup;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.auth.SignIn;
@@ -55,12 +56,11 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
@@ -69,15 +69,15 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewGroupPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter.NewGroupProxy>
-    implements NewGroup {
+implements NewGroup {
 
   /**
    * The Interface NewGroupProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -109,7 +109,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /**
    * Instantiates a new new group presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -146,7 +146,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroup#doNewGroup()
    */
   @Override
@@ -173,7 +173,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
   /**
    * Automatically generate a "short name" for a group, after typing the
    * "long name":.
-   * 
+   *
    * @return the string
    */
   protected String generateShortName() {
@@ -200,7 +200,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /**
    * Gets the type of group.
-   * 
+   *
    * @return the type of group
    */
   private GroupType getTypeOfGroup() {
@@ -218,7 +218,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -236,9 +236,9 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
         onCancel();
       }
     });
-    getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
+    getView().getClose().addCloseHandler(new CloseHandler<BSBasicDialog>() {
       @Override
-      public void onClose(final CloseEvent<PopupPanel> event) {
+      public void onClose(final CloseEvent<BSBasicDialog> event) {
         NewGroupPresenter.this.onClose();
       }
     });
@@ -345,7 +345,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -355,7 +355,7 @@ public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter
 
   /**
    * Sets the message.
-   * 
+   *
    * @param message
    *          the message
    * @param level

@@ -24,8 +24,6 @@ package cc.kune.sandbox.client;
 
 import java.util.Date;
 
-import javax.validation.constraints.NotNull;
-
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.AnchorListItem;
 import org.gwtbootstrap3.client.ui.Badge;
@@ -53,6 +51,7 @@ import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 import cc.kune.bootstrap.client.ui.ComplexDropDownMenu;
 import cc.kune.bootstrap.client.ui.DropDownSubmenu;
 import cc.kune.bootstrap.client.ui.RadioListItem;
+import cc.kune.client.SuperDevModeUncaughtExceptionHandler;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
@@ -95,6 +94,7 @@ import cc.kune.common.client.ui.PopupTopPanel;
 import cc.kune.common.client.ui.WrappedFlowPanel;
 import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 import cc.kune.common.client.ui.dialogs.BasicDialog;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.MessagePanel;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18n;
@@ -106,14 +106,12 @@ import cc.kune.core.client.ui.UploaderPanel;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog.Builder;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog.OnEnter;
-import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.WhiteSpace;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.UmbrellaException;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Window;
@@ -166,64 +164,22 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
      * .common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
-      testDialog();
-    }
-
-  }
-
-  private static void ensureNotUmbrellaError(@NotNull final Throwable e) {
-    // https://stackoverflow.com/questions/11029002/gwt-client-umbrellaexception-get-full-error-message-in-java/11033699#11033699
-    for (final Throwable th : ((UmbrellaException) e).getCauses()) {
-      if (th instanceof UmbrellaException) {
-        ensureNotUmbrellaError(th);
+      // We test two types of dialogs
+      if (((new Date().getTime()) & 1) == 0) {
+        testDialog();
       } else {
-        GWT.log(th.getMessage());
-        GWT.log(getMessage(th), e);
+        testPromptDialog();
       }
     }
 
   }
 
-  private static String getMessage(Throwable throwable) {
-    // https://stackoverflow.com/questions/13663753/turn-a-stack-trace-into-a-string
-    String ret = "";
-    while (throwable != null) {
-      if (throwable instanceof com.google.gwt.event.shared.UmbrellaException) {
-        for (final Throwable thr2 : ((com.google.gwt.event.shared.UmbrellaException) throwable).getCauses()) {
-          if (ret != "") {
-            ret += "\nCaused by: ";
-          }
-          ret += thr2.toString();
-          ret += "\n  at " + getMessage(thr2);
-        }
-      } else if (throwable instanceof com.google.web.bindery.event.shared.UmbrellaException) {
-        for (final Throwable thr2 : ((com.google.web.bindery.event.shared.UmbrellaException) throwable).getCauses()) {
-          if (ret != "") {
-            ret += "\nCaused by: ";
-          }
-          ret += thr2.toString();
-          ret += "\n  at " + getMessage(thr2);
-        }
-      } else {
-        if (ret != "") {
-          ret += "\nCaused by: ";
-        }
-        ret += throwable.toString();
-        for (final StackTraceElement sTE : throwable.getStackTrace()) {
-          ret += "\n  at " + sTE;
-        }
-      }
-      throwable = throwable.getCause();
-    }
-
-    return ret;
-  }
   /** The absolute panel. */
   private AbsolutePanel absolutePanel;
 
@@ -235,16 +191,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       NotifyUser.showProgress("Savingggg");
       NotifyUser.askConfirmation("Some title", "Some message", "Yeah!", "Nein",
           new SimpleResponseCallback() {
-            @Override
-            public void onCancel() {
-              NotifyUser.error("Cancel");
-            }
+        @Override
+        public void onCancel() {
+          NotifyUser.error("Cancel");
+        }
 
-            @Override
-            public void onSuccess() {
-              NotifyUser.info("Success");
-            }
-          });
+        @Override
+        public void onSuccess() {
+          NotifyUser.info("Success");
+        }
+      });
     }
   };
 
@@ -423,12 +379,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   }
 
   private void initializeInjector() {
-    GWT.setUncaughtExceptionHandler(new GWT.UncaughtExceptionHandler() {
-      @Override
-      public void onUncaughtException(@NotNull final Throwable e) {
-        ensureNotUmbrellaError(e);
-      }
-    });
+    GWT.setUncaughtExceptionHandler(new SuperDevModeUncaughtExceptionHandler());
 
     ginjector = GWT.create(KuneSampleGinjector.class);
     res = CommonResources.INSTANCE;
@@ -543,55 +494,6 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
   @Override
   public void onModuleLoad() {
-    initializeInjector();
-    // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
-
-    NotifyUser.showProgress("Starting...");
-
-    testTooltips();
-
-    // absolutePanel.add(testActionToolbar(), 200, 200);
-
-    final String defLocale = "en";
-
-    final String locale = WindowUtils.getParameter("locale");
-    final String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
-
-    for (final String id : ids) {
-      final RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
-      final RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
-      if (someId != null) {
-        someId.setVisible(true);
-      } else if (defId != null) {
-        defId.setVisible(true);
-      }
-    }
-
-    // testToolpanel();
-    // toolSelector.addWidget(new Label("Test"));
-    // testPromptDialog();
-
-    testSubWidget();
-
-    final ActionFlowPanel view = makeFlowToolbar();
-
-    final BasicThumb thumb = testThumbs();
-
-    absolutePanel.add(thumb, 200, 10);
-    absolutePanel.add(view, 5, 150);
-
-    final DottedTab tab = new DottedTab();
-    absolutePanel.add(tab, 400, 400);
-    absolutePanel.add(tab, 400, 400);
-    absolutePanel.add(makeFileUpload(), 520, 0);
-
-    new BlinkAnimation(tab, 350).animate(5);
-
-    RootPanel.get().add(absolutePanel);
-
-  }
-
-  public void onModuleLoadBootstrapTests() {
     initializeInjector();
 
     NotifyUser.info("Started");
@@ -790,6 +692,55 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     RootLayoutPanel.get().add(mainContainer);
   }
 
+  public void onModuleLoadBasicTests() {
+    initializeInjector();
+    // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
+
+    NotifyUser.showProgress("Starting...");
+
+    testTooltips();
+
+    // absolutePanel.add(testActionToolbar(), 200, 200);
+
+    final String defLocale = "en";
+
+    final String locale = WindowUtils.getParameter("locale");
+    final String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
+
+    for (final String id : ids) {
+      final RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
+      final RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
+      if (someId != null) {
+        someId.setVisible(true);
+      } else if (defId != null) {
+        defId.setVisible(true);
+      }
+    }
+
+    // testToolpanel();
+    // toolSelector.addWidget(new Label("Test"));
+    // testPromptDialog();
+
+    testSubWidget();
+
+    final ActionFlowPanel view = makeFlowToolbar();
+
+    final BasicThumb thumb = testThumbs();
+
+    absolutePanel.add(thumb, 200, 10);
+    absolutePanel.add(view, 5, 150);
+
+    final DottedTab tab = new DottedTab();
+    absolutePanel.add(tab, 400, 400);
+    absolutePanel.add(tab, 400, 400);
+    absolutePanel.add(makeFileUpload(), 520, 0);
+
+    new BlinkAnimation(tab, 350).animate(5);
+
+    RootPanel.get().add(absolutePanel);
+
+  }
+
   public void onModuleLoadPolymer() {
     initializeInjector();
     NotifyUser.info("Started");
@@ -818,8 +769,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final Badge chatsBadge = new Badge();
     inboxBadge.setText("99");
     chatsBadge.setText("9");
-    PolymerUtils.wrapDiv("sitebar_user_space_icon_group").add(inboxBadge);
-    PolymerUtils.wrapDiv("sitebar_chat_icon_group").add(chatsBadge);
+    // PolymerUtils.wrap(PolymerId.CHAT_SITEBAR_ICON_GROUP).add(inboxBadge);
+    // PolymerUtils.wrapDiv("sitebar_chat_icon_group").add(chatsBadge);
     inboxBadge.addStyleName("btn_green");
     chatsBadge.addStyleName("btn_green");
     inboxBadge.addStyleName("sitebar_inbox_badge");
@@ -847,9 +798,15 @@ public class KuneSandboxEntryPoint implements EntryPoint {
    */
 
   private void testDialog() {
-    final BSBasicDialog dialog = new BSBasicDialog();
+
+    final cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder builder = new BasicTopDialog.Builder(
+        "dialogId", true, true, Direction.DEFAULT);
+    final BSBasicDialog dialog = builder.build();
+    dialog.getTitleText().setText("Title");
     dialog.setFirstBtnText("Accept");
     dialog.setSecondBtnText("Cancel");
+    dialog.getMainPanel().add(new Image("http://lorempixel.com/600/400"));
+    dialog.getBottomPanel().add(new Image("http://lorempixel.com/40/40"));
     dialog.show();
   }
 
@@ -896,17 +853,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     // mask.mask(pop2, "JAarrrrr!");
   }
 
-  @SuppressWarnings("unused")
   private void testPromptDialog() {
     final Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?", false, true,
         Direction.LTR, new OnEnter() {
 
-          @Override
-          public void onEnter() {
-            NotifyUser.info("On Enter");
+      @Override
+      public void onEnter() {
+        NotifyUser.info("On Enter");
 
-          }
-        });
+      }
+    });
     builder.width("200px").height("200px").firstButtonTitle("Create").sndButtonTitle("Cancel");
     builder.regex(TextUtils.UNIX_NAME).regexText(
         "The name must contain only characters, numbers and dashes");
@@ -980,11 +936,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
         false, new ClickHandler() {
 
-          @Override
-          public void onClick(final ClickEvent event) {
-            userMsg.show("Testing");
-          }
-        });
+      @Override
+      public void onClick(final ClickEvent event) {
+        userMsg.show("Testing");
+      }
+    });
     thumb.setTooltip("Some thumb tooltip");
     thumb.setOnOverLabel(true);
     return thumb;
@@ -1013,16 +969,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(button4, clientWidth - 90, clientHeight - 60);
     Tooltip.to(button,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button2,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button3,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
     Tooltip.to(button4,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+            100);
 
   }
 }

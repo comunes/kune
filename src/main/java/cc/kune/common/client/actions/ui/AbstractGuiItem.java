@@ -31,6 +31,7 @@ import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.DropTarget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.errors.NotImplementedException;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
@@ -176,6 +177,14 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
         }
       }
     };
+  }
+
+  protected void ensureSingleton() {
+    final Object attached = descriptor.getValue("attached");
+    if (attached != null && (Boolean) attached) {
+      Log.error("Warning: this descriptor: " + descriptor + " is already attached");
+    }
+    descriptor.putValue("attached", true);
   }
 
   /**

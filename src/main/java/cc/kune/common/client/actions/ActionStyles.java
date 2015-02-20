@@ -37,22 +37,24 @@ public class ActionStyles {
 
   public static final String CURRENT_TOOLBAR_ITEM = "current-item";
 
+  public static final String DEF_BTN = "btn btn-default";
+
+  public static final String DEF_BTN_GROUP = "btn btn-default, btn-group";
+
   public static final String MENU_BTN_STYLE_LEFT = "k-fl";
 
   public static final String MENU_BTN_STYLE_NO_BORDER_LEFT = "k-fl, k-noborder, k-no-backimage, k-nobackcolor";
 
-  public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-no-backimage, k-nobackcolor, pull-right";
+  public static final String MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-no-backimage, k-nobackcolor";
 
-  public static final String MENU_BTN_STYLE_RIGHT = "k-fr, pull-right";
+  public static final String MENU_BTN_STYLE_RIGHT = "k-fr";
 
-  public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor, pull-right";
+  public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
 
   public static final String SHARE_ITEM_ACTIONS = "k-share-item-actions";
 
   public static final String SHARE_ITEM_NO_ACTIONS = "k-share-item-noactions";
 
   public static final String SITEBAR_STYLE = "k-no-backimage, k-noborder, k-nobackcolor";
-
   public static final String SITEBAR_STYLE_FL = SITEBAR_STYLE + ", k-fl";
-
 }

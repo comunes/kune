@@ -33,14 +33,16 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.viewers.ContentViewerPresenter;
+import cc.kune.wave.client.CustomEditToolbar;
 
+import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewContentAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewContentAction extends RolAction {
@@ -57,6 +59,8 @@ public class NewContentAction extends RolAction {
   /** The content viewer. */
   private final ContentViewerPresenter contentViewer;
 
+  private final CustomEditToolbar editToolbar;
+
   /** The session. */
   private final Session session;
 
@@ -65,7 +69,7 @@ public class NewContentAction extends RolAction {
 
   /**
    * Instantiates a new new content action.
-   * 
+   *
    * @param session
    *          the session
    * @param stateManager
@@ -78,17 +82,18 @@ public class NewContentAction extends RolAction {
   @Inject
   public NewContentAction(final Session session, final StateManager stateManager,
       final Provider<ContentServiceAsync> contentService,
-      final ContentViewerPresenter contentViewerPresenter) {
+      final ContentViewerPresenter contentViewerPresenter, final CustomEditToolbar editToolbar) {
     super(AccessRolDTO.Editor, true);
     this.session = session;
     this.stateManager = stateManager;
     this.contentService = contentService;
     this.contentViewer = contentViewerPresenter;
+    this.editToolbar = editToolbar;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)
@@ -102,17 +107,43 @@ public class NewContentAction extends RolAction {
     final StateToken parentToken = session.getCurrentStateToken().copy().clearDocument();
     contentService.get().addContent(session.getUserHash(), parentToken, newName, (String) getValue(ID),
         new AsyncCallbackSimple<StateContentDTO>() {
-          @Override
-          public void onSuccess(final StateContentDTO state) {
-            stateManager.removeCache(parentToken);
-            stateManager.setRetrievedStateAndGo(state);
-            NotifyUser.hideProgress();
-            // stateManager.refreshCurrentGroupState();
-            // contextNavigator.setEditOnNextStateChange(true);
-            // NotifyUser.info(i18n.tWithNT("[%s] created",
-            // "New content created, for instance", newName));
-            contentViewer.blinkTitle();
-          }
-        });
+      private Timer timer;
+
+      @Override
+      public void onSuccess(final StateContentDTO state) {
+        stateManager.removeCache(parentToken);
+        stateManager.setRetrievedStateAndGo(state);
+        NotifyUser.hideProgress();
+        // stateManager.refreshCurrentGroupState();
+        // contextNavigator.setEditOnNextStateChange(true);
+        // NotifyUser.info(i18n.tWithNT("[%s] created",
+        // "New content created, for instance", newName));
+
+        contentViewer.blinkTitle();
+
+        // Dirty hack: While we know how to start a document editing:
+        if (timer == null) {
+          timer = new Timer() {
+            private boolean retried = false;
+
+            @Override
+            public void run() {
+              try {
+                if (editToolbar.isEditEnable()) {
+                  editToolbar.onClickEdit();
+                }
+              } catch (final Exception e) {
+                // try again
+                if (!retried) {
+                  retried = true;
+                  timer.schedule(3000);
+                }
+              }
+            }
+          };
+        }
+        timer.schedule(3000);
+      }
+    });
   }
 }

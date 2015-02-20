@@ -3,6 +3,7 @@ package cc.kune.bootstrap.client.actions.ui;
 import org.gwtbootstrap3.client.ui.Anchor;
 import org.gwtbootstrap3.client.ui.DropDown;
 import org.gwtbootstrap3.client.ui.DropDownMenu;
+import org.gwtbootstrap3.client.ui.constants.Pull;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 
 import cc.kune.common.client.actions.PropertyChangeEvent;
@@ -11,24 +12,25 @@ import cc.kune.common.client.actions.ui.AbstractBasicGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.notify.NotifyUser;
 
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.dom.client.Style.Position;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSMenuGui {
 
-  private Anchor anchor;
+  private HandlerRegistration clickHandler;
   private DropDownMenu menu;
-  private Style menuStyle;
+  private PopupBSMenuGui popup;
   private Widget widget;
   private HasClickHandlers widgetHasClick;
 
@@ -55,29 +57,60 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     this.descriptor = descriptor;
     final DropDown dropDown = new DropDown();
-    anchor = new Anchor();
+    final Anchor anchor = new Anchor();
     anchor.setDataToggle(Toggle.DROPDOWN);
     dropDown.add(anchor);
     menu = new DropDownMenu();
-    dropDown.add(menu);
-
-    // Inspired in:
-    // https://stackoverflow.com/questions/18666601/use-bootstrap-3-dropdown-menu-as-context-menu
-    menuStyle = menu.getElement().getStyle();
     widget = (Widget) descriptor.getValue(WidgetMenuDescriptor.WIDGET);
+    popup = new PopupBSMenuGui(menu, widget, descriptor);
+    dropDown.add(menu);
     try {
       widgetHasClick = (HasClickHandlers) widget;
     } catch (final ClassCastException e) {
       throw new UIException("Cannot cast to HasClickHandlers descriptor" + descriptor);
     }
-    widgetHasClick.addClickHandler(new ClickHandler() {
+    clickHandler = widgetHasClick.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
-        show();
+        event.stopPropagation();
+        NotifyUser.showProgress("Clicked");
+        NotifyUser.info("Clicked");
         clickHandlerDefault.onClick(event);
+        menu.getElement().getStyle().setDisplay(Display.BLOCK);
+        show();
       }
     });
-    hide();
+
+    descriptor.addPropertyChangeListener(new PropertyChangeListener() {
+      @Override
+      public void propertyChange(final PropertyChangeEvent event) {
+        // if (event.getPropertyName().equals(MenuDescriptor.MENU_HIDE)) {
+        // if (popup != null && popup.isShowing()) {
+        // popup.hide();
+        // }
+        // } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW))
+        // {
+        // show();
+        // }
+        // } else if
+        // (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_DOWN))
+        // {
+        // menu.moveSelectionDown();
+        // } else if
+        // (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_UP)) {
+        // menu.moveSelectionUp();
+        // } else if
+        // (event.getPropertyName().equals(MenuDescriptor.MENU_SELECT_ITEM)) {
+        // final HasMenuItem item = (HasMenuItem) ((MenuItemDescriptor)
+        // descriptor.getValue(MenuDescriptor.MENU_SELECT_ITEM)).getValue(MenuItemDescriptor.UI);
+        // menu.selectItem((MenuItem) item.getMenuItem());
+        // }
+      }
+    });
+
+    if ((Boolean) descriptor.getValue(MenuDescriptor.MENU_ATRIGHT)) {
+      menu.setPull(Pull.RIGHT);
+    }
 
     descriptor.putValue(ParentWidget.PARENT_UI, this);
     initWidget(dropDown);
@@ -85,10 +118,12 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
     return this;
   }
 
+  /**
+   * Hide.
+   */
   @Override
   public void hide() {
-    menuStyle.setDisplay(Display.NONE);
-    menuStyle.setPosition(Position.ABSOLUTE);
+    popup.hide();
   }
 
   @Override
@@ -97,11 +132,45 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
   }
 
   @Override
+  protected void onUnload() {
+    super.onUnload();
+    NotifyUser.info("On unload " + descriptor);
+    popup = null;
+    clickHandler.removeHandler();
+    clickHandler = null;
+  }
+
+  @Override
+  protected void setEnabled(final boolean enabled) {
+    super.setEnabled(enabled);
+    if (widget instanceof HasEnabled) {
+      ((HasEnabled) widget).setEnabled(enabled);
+    }
+  }
+
+  @Override
+  public void setToolTipText(final String tooltipText) {
+    setToolTipTextNextTo(widget, tooltipText);
+    popup.setTooltip(tooltip);
+  }
+
+  @Override
+  public void setVisible(final boolean visible) {
+    super.setVisible(visible);
+    if (widget != null) {
+      widget.setVisible(visible);
+    }
+  }
+
+  @Override
+  public boolean shouldBeAdded() {
+    // Because widget already exists
+    return false;
+  }
+
+  @Override
   public void show() {
-    menuStyle.setDisplay(Display.BLOCK);
-    menuStyle.setPosition(Position.STATIC);
-    menuStyle.setLeft(widget.getOffsetWidth() + 1, Unit.PX);
-    menuStyle.setTop(widget.getOffsetHeight() + 1, Unit.PX);
+    popup.show();
   }
 
 }

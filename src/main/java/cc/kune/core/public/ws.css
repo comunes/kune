@@ -1174,10 +1174,10 @@ button.k-drop-allowed-hover,.k-drop-allowed-hover {
 
 .k-tabs .gwt-TabLayoutPanelTab {
   background-color: #d38d5f;
-  color: #552200;
-  height: 20px !important;
-  margin: 0 2px;
-  padding: 2px;
+  color: #552200;  
+  height: 24px !important;
+  margin: 0 2px -5px 0;
+  padding: 0px 2px;
   cursor: pointer;
   font-weight: bold;
 }
@@ -1480,4 +1480,8 @@ input.k-sharelink-box {
 
 .k-embed-sitebar div {
   text-decoration: none;
+}
+
+.k-tutorial {
+  
 }

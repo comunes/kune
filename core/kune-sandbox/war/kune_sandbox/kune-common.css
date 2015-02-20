@@ -689,13 +689,13 @@ div.k-iconlabel {
 }
 
 /* End tabbar */
+
 .k-editableLabel {
-  white-space: nowrap;
+  /* white-space: nowrap; */
   padding: 3px
 }
 
-.k-editableLabel-high {
-  font-weight: bold;
+.k-editableLabel-high { 
   background-color: #FFFBC1;
   color: black !important;
 }
@@ -704,6 +704,15 @@ div.k-iconlabel {
   background-color: #FFFBC1;
   color: black !important;
 }
+
+.k-editableLabel-editing {
+    border: none;
+    outline: none;
+    padding: 0;
+    color: #808080;
+    /* margin: -14px 0 -16px 3px; */
+    /* -1px 0 -1px 4px; */
+} 
 
 .k-btn-min {
   min-width: 19px !important;

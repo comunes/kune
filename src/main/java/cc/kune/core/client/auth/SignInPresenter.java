@@ -26,6 +26,7 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.ProgressShowEvent;
+import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 import cc.kune.common.client.utils.OnAcceptCallback;
 import cc.kune.common.client.utils.TimerWrapper;
 import cc.kune.common.client.utils.TimerWrapper.Executer;
@@ -47,11 +48,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
@@ -59,15 +59,15 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SignInPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInPresenter.SignInProxy>
-    implements SignIn {
+implements SignIn {
 
   /**
    * The Interface SignInProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -76,7 +76,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
   /**
    * The Interface SignInView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface SignInView extends SignInAbstractView {
@@ -93,35 +93,35 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
     /**
      * Gets the account register.
-     * 
+     *
      * @return the account register
      */
     HasClickHandlers getAccountRegister();
 
     /**
      * Gets the forgot passwd.
-     * 
+     *
      * @return the forgot passwd
      */
     HasClickHandlers getForgotPasswd();
 
     /**
      * Gets the login password.
-     * 
+     *
      * @return the login password
      */
     String getLoginPassword();
 
     /**
      * Gets the nick or email.
-     * 
+     *
      * @return the nick or email
      */
     String getNickOrEmail();
 
     /**
      * Checks if is sign in form valid.
-     * 
+     *
      * @return true, if is sign in form valid
      */
     boolean isSignInFormValid();
@@ -130,7 +130,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
     /**
      * Sets the login password.
-     * 
+     *
      * @param password
      *          the new login password
      */
@@ -138,7 +138,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
     /**
      * Sets the nick or email.
-     * 
+     *
      * @param nickOrEmail
      *          the new nick or email
      */
@@ -146,7 +146,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
     /**
      * Sets the on password return.
-     * 
+     *
      * @param onAcceptCallback
      *          the new on password return
      */
@@ -181,7 +181,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
   /**
    * Instantiates a new sign in presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -227,7 +227,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignIn#doSignIn(java.lang.String,
    * java.lang.String, boolean, com.google.gwt.user.client.rpc.AsyncCallback)
    */
@@ -286,7 +286,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInAbstractPresenter#getView()
    */
   @Override
@@ -306,7 +306,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -331,9 +331,9 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
         onCancel();
       }
     });
-    getView().getClose().addCloseHandler(new CloseHandler<PopupPanel>() {
+    getView().getClose().addCloseHandler(new CloseHandler<BSBasicDialog>() {
       @Override
-      public void onClose(final CloseEvent<PopupPanel> event) {
+      public void onClose(final CloseEvent<BSBasicDialog> event) {
         Log.debug("Closing signin presenter");
         SignInPresenter.this.onClose();
       }
@@ -380,7 +380,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
   /**
    * On sing in failed.
-   * 
+   *
    * @param caught
    *          the caught
    */
@@ -398,7 +398,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -408,7 +408,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignIn#setErrorMessage(java.lang.String,
    * cc.kune.common.client.notify.NotifyLevel)
    */
@@ -429,7 +429,7 @@ public class SignInPresenter extends SignInAbstractPresenter<SignInView, SignInP
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignIn#showSignInDialog()
    */
   @Override

@@ -40,6 +40,7 @@ import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.View;
@@ -54,9 +55,10 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
+@Singleton
 public class SitebarActionsPresenter extends
-Presenter<SitebarActionsPresenter.SitebarActionsView, SitebarActionsPresenter.SitebarActionsProxy>
-implements SitebarActions {
+    Presenter<SitebarActionsPresenter.SitebarActionsView, SitebarActionsPresenter.SitebarActionsProxy>
+    implements SitebarActions {
 
   /**
    * The Interface SitebarActionsProxy.
@@ -123,6 +125,8 @@ implements SitebarActions {
   /** The sign out link. */
   private final Provider<SitebarSignOutLink> signOutLink;
 
+  private final Provider<SiteLanguageSelector> siteLanguageSelector;
+
   /**
    * Instantiates a new sitebar actions presenter.
    *
@@ -152,7 +156,8 @@ implements SitebarActions {
       final SitebarActionsProxy proxy, final I18nTranslationService i18n,
       final Provider<SitebarNewGroupLink> newGroupLink, final Provider<SitebarSignOutLink> signOutLink,
       final Provider<SitebarSignInLink> signInLink, final CoreResources res,
-      final IconicResources icons, final Provider<MyGroupsMenu> myGroupsMenu) {
+      final IconicResources icons, final Provider<MyGroupsMenu> myGroupsMenu,
+      final Provider<SiteLanguageSelector> siteLanguageSelector) {
     super(eventBus, view, proxy);
     this.i18n = i18n;
     this.newGroupLink = newGroupLink;
@@ -161,6 +166,7 @@ implements SitebarActions {
     this.icons = icons;
     this.myGroupsMenu = myGroupsMenu;
     this.res = res;
+    this.siteLanguageSelector = siteLanguageSelector;
     init();
   }
 
@@ -205,10 +211,10 @@ implements SitebarActions {
    */
   @ProxyEvent
   public void onAppStart(final AppStartEvent event) {
-
     MORE_MENU.withText(i18n.t("More"));
     MORE_MENU.withIcon(IconType.BARS);
     MORE_MENU.setStyles("k-no-backimage, k-btn-sitebar");
+    MORE_MENU.setAtRight(true);
 
     final AbstractExtendedAction bugsAction = new AbstractExtendedAction() {
       @Override
@@ -259,6 +265,7 @@ implements SitebarActions {
     // shortcutReg.put(shortcut, aboutAction);
 
     signInLink.get();
+    siteLanguageSelector.get();
     myGroupsMenu.get();
     newGroupLink.get();
     createGotoKune();
@@ -270,12 +277,12 @@ implements SitebarActions {
     MenuItemDescriptor.build(MORE_MENU, wavePowered);
     MORE_MENU.setParent(RIGHT_TOOLBAR);
     signOutLink.get();
-    refreshActionsImpl();
+    getView().getRightBar().add(RIGHT_TOOLBAR);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.client.sitebar.SitebarActions#refreshActions()
    */
   @Override
@@ -289,6 +296,7 @@ implements SitebarActions {
   private void refreshActionsImpl() {
     getView().getLeftBar().clear();
     getView().getRightBar().clear();
+    RIGHT_TOOLBAR.clear();
     // Right now we only use the RIGHTBAR
     // getView().getLeftBar().add(LEFT_TOOLBAR);
     getView().getRightBar().add(RIGHT_TOOLBAR);
@@ -296,7 +304,7 @@ implements SitebarActions {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

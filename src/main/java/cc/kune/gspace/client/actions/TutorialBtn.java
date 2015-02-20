@@ -23,6 +23,7 @@
 package cc.kune.gspace.client.actions;
 
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
@@ -31,14 +32,14 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class TutorialBtn.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -46,7 +47,7 @@ public class TutorialBtn extends ButtonDescriptor {
 
   /**
    * The Class ShowTutorialAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @Singleton
@@ -60,7 +61,7 @@ public class TutorialBtn extends ButtonDescriptor {
 
     /**
      * Instantiates a new show tutorial action.
-     * 
+     *
      * @param eventBus
      *          the event bus
      * @param stateManager
@@ -75,7 +76,7 @@ public class TutorialBtn extends ButtonDescriptor {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -97,7 +98,7 @@ public class TutorialBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new tutorial btn.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param action
@@ -110,7 +111,7 @@ public class TutorialBtn extends ButtonDescriptor {
       final IconicResources res) {
     super(action);
     this.withToolTip(i18n.t("New to this tool? Here there is some help")).withIcon(res.info()).withStyles(
-        "k-btn-min, k-fr");
+        ActionStyles.DEF_BTN_GROUP);
     this.withId(INFO_CONTAINER_ID);
   }
 

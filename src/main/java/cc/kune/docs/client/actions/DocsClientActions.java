@@ -91,15 +91,16 @@ public class DocsClientActions extends AbstractFoldableToolActions {
       final Provider<ShareDialogMenuItem> shareSettings, final DocsNewMenu docsNewMenu,
       final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(DOC_HEADER_BAR, all, optionsMenuContent, refresh);
+    add(DOC_TOP_TOOLBAR, all, newDocIconBtn);
     add(DOC_TOP_TOOLBAR, containers, newFolderBtn, foldersNewMenu, newDocMenuItem);
     add(DOC_TOP_TOOLBAR, contents, docsNewMenu);
-    add(DOC_TOP_TOOLBAR, all, newDocIconBtn, tutorialBtn);
+    add(DOC_TOP_TOOLBAR, all, tutorialBtn);
     add(DOC_TOP_TOOLBAR, containers, newFolderMenuItem);
+    add(DOC_HEADER_BAR, all, shareMenuContent);
     newMenusRegistry.register(TYPE_DOCUMENT,
         (MenuDescriptor) docsNewMenu.get().withText(I18n.t("Add Gadget")));
     newMenusRegistry.register(TYPE_UPLOADEDFILE, docsNewMenu.get());
-    add(DOC_HEADER_BAR, all, shareMenuContent);
+    add(DOC_HEADER_BAR, all, optionsMenuContent, refresh);
     add(DOC_HEADER_BAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
     add(DOC_HEADER_BAR, contents, shareIHelper.getShareInWaves());
     add(DOC_HEADER_BAR, all, shareIHelper.getShareInAll());

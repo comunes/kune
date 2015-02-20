@@ -26,6 +26,7 @@ import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyLevelImages;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.MaskWidgetView;
+import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
 import cc.kune.common.client.ui.dialogs.MessageToolbar;
@@ -42,7 +43,6 @@ import com.extjs.gxt.ui.client.widget.form.TextArea;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.logical.shared.HasCloseHandlers;
-import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -50,7 +50,7 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewGroupPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewGroupPanel extends ViewImpl implements NewGroupView {
@@ -144,7 +144,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /**
    * Instantiates a new new group panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param img
@@ -164,6 +164,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
     builder.firstButtonTitle(i18n.t("Register")).firstButtonId(REGISTER_BUTTON);
     builder.sndButtonTitle(i18n.t("Cancel")).sndButtonId(CANCEL_BUTTON);
     builder.tabIndexStart(10);
+    builder.width(400);
     dialog = builder.build();
     this.i18n = i18n;
     this.mask = mask;
@@ -176,7 +177,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -186,7 +187,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#clearData()
    */
   @Override
@@ -198,7 +199,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /**
    * Creates the new group initial data form.
-   * 
+   *
    * @return the form panel
    */
   private FormPanel createNewGroupInitialDataForm() {
@@ -267,7 +268,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /**
    * Creates the tag field.
-   * 
+   *
    * @param tag
    *          the tag
    * @return the text field
@@ -288,7 +289,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#focusOnLongName()
    */
   @Override
@@ -298,7 +299,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#focusOnShortName()
    */
   @Override
@@ -308,17 +309,17 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getClose()
    */
   @Override
-  public HasCloseHandlers<PopupPanel> getClose() {
-    return dialog.getClose();
+  public HasCloseHandlers<BSBasicDialog> getClose() {
+    return dialog;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getFirstBtn()
    */
   @Override
@@ -328,7 +329,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getLongName()
    */
   @Override
@@ -338,7 +339,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getLongNameField()
    */
   @Override
@@ -348,7 +349,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getPublicDesc()
    */
   @Override
@@ -358,7 +359,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getSecondBtn()
    */
   @Override
@@ -368,7 +369,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getShortName()
    */
   @Override
@@ -378,7 +379,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#getTags()
    */
   @Override
@@ -388,7 +389,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#hide()
    */
   @Override
@@ -398,7 +399,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#hideMessage()
    */
   @Override
@@ -408,7 +409,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isClosed()
    */
   @Override
@@ -418,7 +419,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isCommunity()
    */
   @Override
@@ -428,7 +429,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isFormValid()
    */
   @Override
@@ -438,7 +439,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isOrganization()
    */
   @Override
@@ -448,7 +449,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#isProject()
    */
   @Override
@@ -458,7 +459,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /**
    * Mask.
-   * 
+   *
    * @param message
    *          the message
    */
@@ -468,7 +469,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#maskProcessing()
    */
   @Override
@@ -478,7 +479,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.groups.newgroup.NewGroupView#setLongName(java.lang.
    * String)
@@ -490,7 +491,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.groups.newgroup.NewGroupView#setLongNameFailed(java
    * .lang.String)
@@ -502,7 +503,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.groups.newgroup.NewGroupView#setMessage(java.lang.String
    * , cc.kune.common.client.notify.NotifyLevel)
@@ -514,7 +515,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.groups.newgroup.NewGroupView#setShortName(java.lang
    * .String)
@@ -526,7 +527,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.groups.newgroup.NewGroupView#setShortNameFailed(java
    * .lang.String)
@@ -538,7 +539,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#show()
    */
   @Override
@@ -548,7 +549,7 @@ public class NewGroupPanel extends ViewImpl implements NewGroupView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.groups.newgroup.NewGroupView#unMask()
    */
   @Override

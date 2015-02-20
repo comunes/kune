@@ -48,7 +48,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FeedbackBottomPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
@@ -67,7 +67,7 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
 
   /**
    * Instantiates a new feedback bottom panel.
-   * 
+   *
    * @param res
    *          the res
    * @param session
@@ -105,17 +105,17 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
               session.getCurrentUser().getShortName(), i18n.getSiteCommonName());
           final PromptTopDialog.Builder builder = new PromptTopDialog.Builder(GIVE_US_FEEDBACK_ID,
               title, false, true, i18n.getDirection(), new PromptTopDialog.OnEnter() {
-                @Override
-                public void onEnter() {
-                  // We do nothing to allow multiple lines
-                }
-              });
+            @Override
+            public void onEnter() {
+              // We do nothing to allow multiple lines
+            }
+          });
           builder.emptyTextField(i18n.t("Please, edit and write here your feedback about this tool. "
               + "We find your comments very useful, especially "
               + "if you mention the things you would like to see, " + "your personal/group needs, etc."));
-          builder.promptWidth(300).promptLines(7).width("320px").height("140px").firstButtonId(
+          builder.promptWidth(300).promptLines(7).width("360px").height("140px").firstButtonId(
               GIVE_US_FEEDBACK_SEND_BTN_ID).firstButtonTitle(i18n.t("Send")).sndButtonTitle(
-              i18n.t("Cancel"));
+                  i18n.t("Cancel"));
           diag = builder.build();
           diag.getFirstBtn().addClickHandler(new ClickHandler() {
             @Override
@@ -123,11 +123,11 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
               diag.hide();
               contentService.get().sendFeedback(session.getUserHash(), title, diag.getTextFieldValue(),
                   new AsyncCallbackSimple<String>() {
-                    @Override
-                    public void onSuccess(final String url) {
-                      stateManager.gotoHistoryToken(url);
-                    }
-                  });
+                @Override
+                public void onSuccess(final String url) {
+                  stateManager.gotoHistoryToken(url);
+                }
+              });
             }
           });
           diag.getSecondBtn().addClickHandler(new ClickHandler() {
@@ -149,7 +149,7 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.AbstractAtBorderPopupPanel#setCenterPositionImpl()
    */

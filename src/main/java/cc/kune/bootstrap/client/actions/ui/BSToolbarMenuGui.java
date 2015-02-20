@@ -25,32 +25,27 @@ package cc.kune.bootstrap.client.actions.ui;
 import java.util.Arrays;
 import java.util.List;
 
-import org.gwtbootstrap3.client.shared.event.HideEvent;
-import org.gwtbootstrap3.client.shared.event.HideHandler;
-import org.gwtbootstrap3.client.shared.event.ShowEvent;
-import org.gwtbootstrap3.client.shared.event.ShowHandler;
-import org.gwtbootstrap3.client.shared.event.ShownEvent;
-import org.gwtbootstrap3.client.shared.event.ShownHandler;
 import org.gwtbootstrap3.client.ui.ListDropDown;
+import org.gwtbootstrap3.client.ui.base.HasIcon;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.Styles;
 
 import cc.kune.bootstrap.client.ui.ComplexDropDownMenu;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.gwtui.HasMenuItem;
+import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
-import cc.kune.common.client.actions.ui.descrip.Position;
 import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -59,9 +54,10 @@ import com.google.gwt.user.client.ui.Widget;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class BSToolbarMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuGui {
+public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBSMenuGui {
 
   private ComplexDropDownMenu<ListDropDown> menu;
+  private PopupBSMenuGui popup;
 
   @Override
   public void add(final UIObject uiObject) {
@@ -123,6 +119,8 @@ public class BSToolbarMenuGui extends AbstractBSChildGuiItem implements Abstract
 
     menu = new ComplexDropDownMenu<ListDropDown>(new ListDropDown());
 
+    popup = new PopupBSMenuGui(menu.getList(), menu.getWidget(), descriptor);
+
     // TODO
     // final Boolean inline = (Boolean)
     // descriptor.getValue(MenuDescriptor.MENU_VERTICAL);
@@ -132,25 +130,7 @@ public class BSToolbarMenuGui extends AbstractBSChildGuiItem implements Abstract
     if (rightIcon != null) {
       menu.setIconRightResource(rightIcon);
     }
-    menu.addHideHandler(new HideHandler() {
-      @Override
-      public void onHide(final HideEvent hideEvent) {
-        descriptor.putValue(MenuDescriptor.MENU_ONHIDE, menu);
-      }
-    });
-    menu.addShowHandler(new ShowHandler() {
 
-      @Override
-      public void onShow(final ShowEvent showEvent) {
-        hideTooltip();
-      }
-    });
-    menu.addShownHandler(new ShownHandler() {
-      @Override
-      public void onShown(final ShownEvent event) {
-        hideTooltip();
-      }
-    });
     descriptor.addPropertyChangeListener(new PropertyChangeListener() {
       private void activeNextItem(final int increment) {
         final int count = menu.getWidgetCount();
@@ -169,13 +149,7 @@ public class BSToolbarMenuGui extends AbstractBSChildGuiItem implements Abstract
 
       @Override
       public void propertyChange(final PropertyChangeEvent event) {
-        if (event.getPropertyName().equals(MenuDescriptor.MENU_HIDE)) {
-          if (menu != null && menu.isVisible()) {
-            menu.hide();
-          }
-        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW)) {
-          show();
-        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_DOWN)) {
+        if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_DOWN)) {
           activeNextItem(1);
         } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_UP)) {
           activeNextItem(-1);
@@ -213,7 +187,7 @@ public class BSToolbarMenuGui extends AbstractBSChildGuiItem implements Abstract
 
   @Override
   public void hide() {
-    menu.hide();
+    popup.hide();
   }
 
   private void hideTooltip() {
@@ -247,6 +221,18 @@ public class BSToolbarMenuGui extends AbstractBSChildGuiItem implements Abstract
   @Override
   public void setIcon(final KuneIcon icon) {
     menu.setIcon(icon);
+  }
+
+  @Override
+  protected void setIcon(final Object icon) {
+    if (icon instanceof IconType) {
+      final UIObject widget = descriptor.isChild() ? child : getWidget();
+      if (widget instanceof HasIcon) {
+        ((HasIcon) widget).setIcon((IconType) icon);
+      }
+    } else {
+      super.setIcon(icon);
+    }
   }
 
   /*
@@ -329,6 +315,7 @@ public class BSToolbarMenuGui extends AbstractBSChildGuiItem implements Abstract
   @Override
   public void setToolTipText(final String tooltipText) {
     setToolTipTextNextTo(menu.getWidget(), tooltipText);
+    popup.setTooltip(tooltip);
   }
 
   /*
@@ -348,19 +335,7 @@ public class BSToolbarMenuGui extends AbstractBSChildGuiItem implements Abstract
 
   @Override
   public void show() {
-    final Object relative = descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO);
-    if (relative instanceof String) {
-      final RootPanel element = RootPanel.get((String) relative);
-      menu.show(element.getOffsetWidth(), element.getOffsetHeight());
-    } else if (relative instanceof UIObject) {
-      final UIObject object = (UIObject) relative;
-      menu.show(object.getOffsetWidth(), getOffsetHeight());
-    } else if (relative instanceof Position) {
-      final Position position = (Position) relative;
-      menu.show(position.getX(), position.getY());
-    } else {
-      menu.show();
-    }
+    popup.showRelativeTo(menu.getWidget());
   }
 
 }

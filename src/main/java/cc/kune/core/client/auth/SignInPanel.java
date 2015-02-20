@@ -41,7 +41,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SignInPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SignInPanel extends SignInAbstractPanel implements SignInView {
@@ -75,7 +75,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /**
    * Instantiates a new sign in panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param mask
@@ -100,7 +100,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /**
    * Creates the link.
-   * 
+   *
    * @param label
    *          the label
    * @param id
@@ -114,7 +114,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /**
    * Creates the register and forgot passwd.
-   * 
+   *
    * @return the vertical panel
    */
   private VerticalPanel createRegisterAndForgotPasswd() {
@@ -135,7 +135,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInPresenter.SignInView#focusOnNickname()
    */
   @Override
@@ -145,7 +145,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInPresenter.SignInView#focusOnPassword()
    */
   @Override
@@ -155,7 +155,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.auth.SignInPresenter.SignInView#getAccountRegister()
    */
@@ -166,7 +166,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInPresenter.SignInView#getForgotPasswd()
    */
   @Override
@@ -176,7 +176,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInPresenter.SignInView#getLoginPassword()
    */
   @Override
@@ -186,7 +186,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /**
    * Gets the nickname.
-   * 
+   *
    * @return the nickname
    */
   private Field<String> getNickname() {
@@ -195,7 +195,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInPresenter.SignInView#getNickOrEmail()
    */
   @Override
@@ -205,7 +205,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.auth.SignInPresenter.SignInView#isSignInFormValid()
    */
@@ -216,7 +216,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInAbstractView#reset()
    */
   @Override
@@ -226,7 +226,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.auth.SignInPresenter.SignInView#setLoginPassword(java
    * .lang.String)
@@ -238,7 +238,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.auth.SignInPresenter.SignInView#setNickOrEmail(java
    * .lang.String)
@@ -250,7 +250,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.auth.SignInPresenter.SignInView#setOnPasswordReturn
    * (cc.kune.common.client.utils.OnAcceptCallback)
@@ -262,7 +262,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInAbstractPanel#show()
    */
   @Override
@@ -273,7 +273,7 @@ public class SignInPanel extends SignInAbstractPanel implements SignInView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInPresenter.SignInView#validate()
    */
   @Override

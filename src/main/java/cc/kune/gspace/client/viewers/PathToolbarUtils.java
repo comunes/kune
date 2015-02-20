@@ -25,6 +25,7 @@ package cc.kune.gspace.client.viewers;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.common.shared.utils.Url;
 import cc.kune.core.client.dnd.FolderContainerDropController;
@@ -110,17 +111,22 @@ public class PathToolbarUtils {
   private ToolbarItemDescriptor createGroupButton(final GroupDTO group, final boolean showGroupName,
       final boolean minimal) {
     final String style = ""; // ToolbarStyles.CSS_BTN_LEFT + (minimal ? ", " +
-                             // ActionStyles.BTN_SMALL : "");
+    // ActionStyles.BTN_SMALL : "");
     final String tooltip = group.getLongName();
     final GotoTokenAction action = new GotoTokenAction(null,
         showGroupName ? group.getShortName() : null, tooltip, group.getStateToken(), style,
-            stateManager, eventBus, false);
+        stateManager, eventBus, false);
     final ToolbarItemDescriptor btn = new ToolbarItemDescriptor(action);
     // btn.withIcon(iconsRegistry.getContentTypeIcon(WikiToolConstants.TYPE_FOLDER));
 
     // FIXME: with Group Icon + Name we get some css issue
     // if (minimal)
-    btn.withIcon(new Url(downloadProvider.get().getGroupLogo(group)));
+    if (group.hasLogo()) {
+      btn.withIcon(new Url(downloadProvider.get().getGroupLogo(group)));
+    } else {
+      // btn.withIcon(IconType.HOME)
+      btn.withIcon(KuneIcon.HOME);
+    }
     return btn;
   }
 
@@ -222,7 +228,7 @@ public class PathToolbarUtils {
       final int pos, final boolean isTheLastExtra, final boolean withDrop, final boolean hasExtra) {
     // +1 because of the first group button
     final String style = "";// ToolbarStyles.calculateStyle(pos + 1, length +
-                            // 1);
+    // 1);
 
     final String name = container.getName();
     // We should translate tool names: "Documents", "Wiki", etc.

@@ -22,6 +22,7 @@
  */
 package cc.kune.docs.client.actions;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
@@ -34,14 +35,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewDocIconBtn.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewDocIconBtn extends NewContentBtn {
 
   /**
    * Instantiates a new new doc icon btn.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param action
@@ -57,7 +58,7 @@ public class NewDocIconBtn extends NewContentBtn {
     super(i18n, action, res.docsAdd(), shorcutReg, i18n.t("New doc"), i18n.t("Create a New Document. "
         + "If you choose to publish it, this document will appear as a new 'Page' in the public web"),
         i18n.t("New document"), DocsToolConstants.TYPE_DOCUMENT);
-    withStyles("k-btn-min, k-fl");
+    withStyles(ActionStyles.DEF_BTN_GROUP);
   }
 
 }

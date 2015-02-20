@@ -1,6 +1,7 @@
 package cc.kune.bootstrap.client.actions.ui;
 
 import org.gwtbootstrap3.client.ui.DropDown;
+import org.gwtbootstrap3.client.ui.constants.Pull;
 
 import cc.kune.bootstrap.client.ui.ComplexDropDownMenu;
 import cc.kune.common.client.actions.PropertyChangeEvent;
@@ -8,10 +9,12 @@ import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
 
+import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
@@ -21,6 +24,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuGui {
 
   private ComplexDropDownMenu<DropDown> menu;
+  private PopupBSMenuGui popup;
 
   @Override
   public void add(final UIObject uiObject) {
@@ -50,34 +54,35 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     this.descriptor = descriptor;
     final DropDown dropDown = new DropDown();
-
+    dropDown.addStyleName("btn-group");
     menu = new ComplexDropDownMenu<DropDown>(dropDown);
     menu.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
+        // Note: in smartmenus is setted to showOnClick: true,
         event.stopPropagation();
-        menu.show();
+        clickHandlerDefault.onClick(event);
+        menu.getList().getElement().getStyle().setDisplay(Display.BLOCK);
+        show();
       }
     });
 
-    // anchor = new Anchor();
-    // button = new CustomButton();
-    // anchor.add(button);
-    // anchor.setDataToggle(Toggle.DROPDOWN);
-    // dropDown.add(anchor);
-
-    // menu = new DropDownMenu();
-    // dropDown.add(menu);
+    popup = new PopupBSMenuGui(menu.getList(), menu.getWidget(), descriptor);
 
     descriptor.putValue(ParentWidget.PARENT_UI, this);
     initWidget(dropDown);
     configureItemFromProperties();
+
+    if ((Boolean) descriptor.getValue(MenuDescriptor.MENU_ATRIGHT)) {
+      menu.getList().setPull(Pull.RIGHT);
+    }
+
     return this;
   }
 
   @Override
   public void hide() {
-    menu.hide();
+    popup.hide();
   }
 
   @Override
@@ -211,6 +216,6 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
 
   @Override
   public void show() {
-    menu.show();
+    popup.show();
   }
 }

@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptionsPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserOptionsView {
@@ -50,7 +50,7 @@ public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserO
 
   /**
    * Instantiates a new user options panel.
-   * 
+   *
    * @param entityHeader
    *          the entity header
    * @param i18n
@@ -66,6 +66,7 @@ public class UserOptionsPanel extends AbstractTabbedDialogPanel implements UserO
     super(USER_OP_PANEL_ID, "", false, images, USER_OPTIONS_ERROR_ID, i18n.t("Close"),
         USER_OP_PANEL_ID_CLOSE, null, null, userOptionsGroup, i18n.getDirection());
     super.setIconCls("k-options-icon");
+    super.setWidth(EntityOptionsView.WIDTH + 40);
     super.setTitle(i18n.t(CoreMessages.USER_OPTIONS_DIALOG_TITLE));
   }
 

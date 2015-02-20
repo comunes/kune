@@ -46,17 +46,17 @@ import cc.kune.core.shared.dto.I18nLanguageDTO;
 
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.RepeatingCommand;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.LocaleInfo;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nUITranslationService.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -64,7 +64,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * The Interface I18nLanguageChangeNeeded.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface I18nLanguageChangeNeeded {
@@ -112,7 +112,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Instantiates a new i18n ui translation service.
-   * 
+   *
    * @param session
    *          the session
    * @param i18nService
@@ -166,17 +166,17 @@ public class I18nUITranslationService extends I18nTranslationService {
             changeToLanguageIfNecessary(getCurrentGWTlanguage(), currentLang.getCode(),
                 currentLang.getEnglishName(), false, new I18nLanguageChangeNeeded() {
 
-                  @Override
-                  public void onChangeNeeded() {
-                  }
+              @Override
+              public void onChangeNeeded() {
+              }
 
-                  @Override
-                  public void onChangeNotNeeded() {
-                    isCurrentLangRTL = currentLang.getDirection().equals(RTL);
-                    eventBus.fireEvent(new I18nReadyEvent());
-                    I18nStyles.setRTL(isCurrentLangRTL);
-                  }
-                });
+              @Override
+              public void onChangeNotNeeded() {
+                isCurrentLangRTL = currentLang.getDirection().equals(RTL);
+                eventBus.fireEvent(new I18nReadyEvent());
+                I18nStyles.setRTL(isCurrentLangRTL);
+              }
+            });
           }
         });
 
@@ -201,33 +201,8 @@ public class I18nUITranslationService extends I18nTranslationService {
   }
 
   /**
-   * See in:
-   * http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread
-   * /5e4e25050d3be984/7035ec39354d06aa?lnk=gst&q=get+locale&rnum=23
-   * 
-   * JSNI method to change the locale of the application - it effectively parses
-   * the existing URL and creates a new one for the chosen locale.
-   * 
-   * @param newLocale
-   *          String value of the new locale to go to.
-   */
-  private void changeLanguageInUrl(final String newLocale) {
-    final String hash = WindowUtils.getHash();
-    final String query = WindowUtils.getQueryString();
-    final String path = WindowUtils.getPath();
-    final String protocol = WindowUtils.getProtocol();
-    final String newUrl = I18nUrlUtils.changeLang(query + (TextUtils.notEmpty(hash) ? hash : ""),
-        newLocale);
-    Log.info("Locale current query: " + query);
-    Log.info("Locale current hash: " + hash);
-    Log.info("Locale current path: " + path);
-    Log.info("Locale new Url: " + path + newUrl);
-    WindowUtils.changeHrefKeepHash(protocol + "//" + WindowUtils.getHost() + path + newUrl);
-  }
-
-  /**
    * Change to language if necessary.
-   * 
+   *
    * @param wantedLang
    *          the wanted lang
    * @param wantedLangEnglishName
@@ -242,7 +217,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Change to language if necessary.
-   * 
+   *
    * @param currentLangCode
    *          the current lang code
    * @param wantedLang
@@ -259,25 +234,25 @@ public class I18nUITranslationService extends I18nTranslationService {
       if (!ask) {
         listener.onChangeNeeded();
         setCurrentLanguage(wantedLang);
-        changeLanguageInUrl(wantedLang);
+        I18nUrlUtils.changeLanguageInUrl(wantedLang);
       } else {
         NotifyUser.askConfirmation(t("Confirm please"),
             t("Do you want to reload this page to use '[%s]' language?", wantedLangEnglishName),
             new SimpleResponseCallback() {
-              @Override
-              public void onCancel() {
-                // User no accepted to change the language...
-                listener.onChangeNotNeeded();
-              }
+          @Override
+          public void onCancel() {
+            // User no accepted to change the language...
+            listener.onChangeNotNeeded();
+          }
 
-              @Override
-              public void onSuccess() {
-                // User accepted to change the language...
-                listener.onChangeNeeded();
-                setCurrentLanguage(wantedLang);
-                changeLanguageInUrl(wantedLang);
-              }
-            });
+          @Override
+          public void onSuccess() {
+            // User accepted to change the language...
+            listener.onChangeNeeded();
+            setCurrentLanguage(wantedLang);
+            I18nUrlUtils.changeLanguageInUrl(wantedLang);
+          }
+        });
       }
     } else {
       listener.onChangeNotNeeded();
@@ -286,7 +261,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Format date with locale.
-   * 
+   *
    * @param date
    *          the date
    * @return the string
@@ -297,7 +272,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Format date with locale.
-   * 
+   *
    * @param date
    *          the date
    * @param shortFormat
@@ -326,7 +301,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the current gw tlanguage.
-   * 
+   *
    * @return the current gw tlanguage
    */
   private String getCurrentGWTlanguage() {
@@ -337,7 +312,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the current language.
-   * 
+   *
    * @return the current language
    */
   public String getCurrentLanguage() {
@@ -346,7 +321,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the lexicon.
-   * 
+   *
    * @return the lexicon
    */
   public HashMap<String, String> getLexicon() {
@@ -355,7 +330,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the site common name.
-   * 
+   *
    * @return the site common name
    */
   @Override
@@ -369,7 +344,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Gets the trans from bd.
-   * 
+   *
    * @param text
    *          the text
    * @param noteForTranslators
@@ -408,7 +383,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Checks if is in constant properties.
-   * 
+   *
    * @param currentLang
    *          the current lang
    * @return true, if is in constant properties
@@ -426,7 +401,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Checks if is ready.
-   * 
+   *
    * @return true, if is ready
    */
   public boolean isReady() {
@@ -435,7 +410,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.shared.i18n.I18nTranslationService#isRTL()
    */
   @Override
@@ -445,7 +420,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Save.
-   * 
+   *
    * @param text
    *          the text
    * @param noteForTranslators
@@ -454,20 +429,20 @@ public class I18nUITranslationService extends I18nTranslationService {
   private void save(final String text, final String noteForTranslators) {
     i18nService.getTranslation(session.getUserHash(), currentLanguageCode, text, noteForTranslators,
         new AsyncCallback<String>() {
-          @Override
-          public void onFailure(final Throwable caught) {
-          }
+      @Override
+      public void onFailure(final Throwable caught) {
+      }
 
-          @Override
-          public void onSuccess(final String result) {
-            Log.debug("Registered in db '" + text + "' as pending translation");
-          }
-        });
+      @Override
+      public void onSuccess(final String result) {
+        Log.debug("Registered in db '" + text + "' as pending translation");
+      }
+    });
   }
 
   /**
    * Sets the current language.
-   * 
+   *
    * @param newLanguage
    *          the new current language
    */
@@ -477,7 +452,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Sets the lexicon.
-   * 
+   *
    * @param lexicon
    *          the lexicon
    */
@@ -487,7 +462,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Sets the translation after save.
-   * 
+   *
    * @param text
    *          the text
    * @param translation
@@ -499,7 +474,7 @@ public class I18nUITranslationService extends I18nTranslationService {
 
   /**
    * Should iuse properties.
-   * 
+   *
    * @return true, if successful
    */
   private boolean shouldIuseProperties() {
@@ -510,10 +485,10 @@ public class I18nUITranslationService extends I18nTranslationService {
    * In production, this method uses a hashmap. In development, if the text is
    * not in the hashmap, it makes a server petition (that stores the text
    * pending for translation in db).
-   * 
+   *
    * Warning: text is escaped as html before insert in the db. Don't use html
    * here (o user this method with params).
-   * 
+   *
    * @param text
    *          the text
    * @param noteForTranslators

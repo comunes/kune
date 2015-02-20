@@ -24,28 +24,37 @@
 package cc.kune.core.client.notify.progress;
 
 import br.com.rpa.client._paperelements.PaperProgress;
-import cc.kune.common.client.notify.NotifyUser;
+import br.com.rpa.client._paperelements.PaperToast;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.ProgressShowEvent;
 import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.polymer.client.PolymerId;
 
 import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 
-public class PaperProgressNotificator {
+@Singleton
+public class PaperNotificator {
 
   private static final int DELAY_MILLIS = 1000;
+  private static final int MAX_DELAY_MILLIS = 5000;
+
   private final PaperProgress progress;
+
   private final Timer timer;
+  private final PaperToast toast;
 
   @Inject
-  public PaperProgressNotificator(final EventBus eventBus) {
-    progress = PaperProgress.wrap("paper_progress");
+  public PaperNotificator(final EventBus eventBus) {
+    progress = PaperProgress.wrap(PolymerId.PAPER_PROGRESS.getId());
+    toast = PaperToast.wrap(PolymerId.TOAST.getId());
     timer = new Timer() {
       @Override
       public void run() {
         progress.setVisible(false);
+        toast.dismiss();
       }
     };
     eventBus.addHandler(ProgressHideEvent.getType(), new ProgressHideEvent.ProgressHideHandler() {
@@ -67,7 +76,9 @@ public class PaperProgressNotificator {
         progress.setIndeterminate(true);
         final String message = event.getMessage();
         if (TextUtils.notEmpty(message)) {
-          NotifyUser.info(message);
+          toast.setText(message);
+          toast.show();
+          timer.schedule(MAX_DELAY_MILLIS);
         }
       }
     });
