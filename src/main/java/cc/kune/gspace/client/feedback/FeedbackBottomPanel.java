@@ -113,7 +113,7 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
           builder.emptyTextField(i18n.t("Please, edit and write here your feedback about this tool. "
               + "We find your comments very useful, especially "
               + "if you mention the things you would like to see, " + "your personal/group needs, etc."));
-          builder.promptWidth(300).promptLines(7).width("360px").height("140px").firstButtonId(
+          builder.promptWidth(300).promptLines(7).width("340px").height("340px").firstButtonId(
               GIVE_US_FEEDBACK_SEND_BTN_ID).firstButtonTitle(i18n.t("Send")).sndButtonTitle(
                   i18n.t("Cancel"));
           diag = builder.build();

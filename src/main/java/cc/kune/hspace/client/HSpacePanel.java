@@ -50,7 +50,6 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -209,12 +208,12 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
     if (groupStatsParent != null) {
       groupStatsParent.add(tabPanel);
     }
-    armor.getHomeSpace().add(RootPanel.get("k-home-wrapper"));
+    // armor.getHomeSpace().add(RootPanel.get("k-home-wrapper"));
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -224,7 +223,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#blinkCurrentTab()
    */
   @Override
@@ -248,7 +247,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalGroupsCount
    * ()
@@ -260,7 +259,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#getGlobalStatsTotalUsersCount
    * ()
@@ -272,7 +271,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.hspace.client.HSpacePresenter.HSpaceView#getToolbar()
    */
   @Override
@@ -282,7 +281,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastContentsOfMyGroup
    * (java.util.List)
@@ -301,7 +300,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastGroups(java.util
    * .List)
@@ -319,7 +318,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setLastPublishedContents
    * (java.util.List)
@@ -340,7 +339,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setStatsVisible(boolean)
    */
@@ -356,7 +355,7 @@ public class HSpacePanel extends ViewImpl implements HSpaceView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.hspace.client.HSpacePresenter.HSpaceView#setUserGroupsActivityVisible
    * (boolean)

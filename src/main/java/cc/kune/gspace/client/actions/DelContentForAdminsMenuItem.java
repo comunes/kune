@@ -36,14 +36,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DelContentForAdminsMenuItem.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
 
   /**
    * The Class DelContentForAdminsAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class DelContentForAdminsAction extends RolAction {
@@ -53,7 +53,7 @@ public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
 
     /**
      * Instantiates a new del content for admins action.
-     * 
+     *
      * @param contentService
      *          the content service
      */
@@ -66,21 +66,23 @@ public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
-      contentService.delContent(((AbstractContentSimpleDTO) event.getTarget()).getStateToken());
+      final Object target = event.getTarget();
+      assert target != null : "Error in DelContent this item target is null";
+      contentService.delContent(((AbstractContentSimpleDTO) target).getStateToken());
     }
 
   }
 
   /**
    * Instantiates a new del content for admins menu item.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param action

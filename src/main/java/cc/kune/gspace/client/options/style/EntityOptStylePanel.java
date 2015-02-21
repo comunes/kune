@@ -22,6 +22,8 @@
  */
 package cc.kune.gspace.client.options.style;
 
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.UploadFinishedEvent;
@@ -37,7 +39,6 @@ import cc.kune.gspace.client.themes.GSpaceThemeSelectorPanel;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.IsWidget;
@@ -67,7 +68,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
   private final String chooseImage;
 
   /** The clear btn. */
-  private final Button clearBtn;
+  private final CustomButton clearBtn;
 
   /** The has back label. */
   private final String hasBackLabel;
@@ -119,8 +120,7 @@ public class EntityOptStylePanel extends Composite implements EntityOptStyleView
     uploader = new UploaderPanel(chooseImage, FileConstants.ACCEPTED_IMAGES);
     uploader.setLabelText("");
     uploader.addStyleName("k-clean");
-    clearBtn = new Button(i18n.t("Clear"));
-    clearBtn.setStyleName("k-button");
+    clearBtn = new CustomButton(i18n.t("Clear"));
     clearBtn.addStyleName("k-fr");
     clearBtn.addStyleName("kune-Margin-20-lr");
     Tooltip.to(clearBtn, i18n.t("Remove current background image"));

@@ -21,6 +21,8 @@
 package org.waveprotocol.box.webclient.search;
 
 
+import static cc.kune.polymer.client.Layout.*;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,31 +32,32 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.uibuilder.BuilderHelper;
 
-import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.initials.AvatarComposite;
 import cc.kune.initials.AvatarCompositeFactory;
 import cc.kune.initials.InitialLabel;
+import cc.kune.polymer.client.PolymerUtils;
 
+import com.allen_sauer.gwt.dnd.client.HasDragHandle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * DOM implementation of a digest view.
- *
- * @author hearnden@google.com (David Hearnden)
- */
-public final class DigestDomImpl implements DigestView {
-  interface Binder extends UiBinder<Widget, DigestDomImpl> {
-  }
+public final class CustomDigestDomImpl extends Composite implements DigestView, HasDragHandle {
 
+  interface Binder extends UiBinder<Widget, CustomDigestDomImpl> {
+  }
   interface Css extends CssResource {
     String avatar();
 
@@ -79,58 +82,79 @@ public final class DigestDomImpl implements DigestView {
     @Source("mock/digest.css")
     Css css();
   }
-
   private final static Binder BINDER = GWT.create(Binder.class);
-
-  @UiField(provided = true)
-  final static Css css = SearchPanelResourceLoader.getDigest().css();
 
   /** HTML attribute used to hold an id unique within digest widgets. */
   static String DIGEST_ID_ATTRIBUTE = "di";
 
   private static int idCounter;
-  private static final DigestDomMessages messages = GWT.create(DigestDomMessages.class);
 
+  private static final DigestDomMessages messages = GWT.create(DigestDomMessages.class);
   @UiField
-  SimplePanel avatars;
+  Element avatarsAndUnreadDiv;
+  @UiField
+  FlowPanel avatarsDiv;
   private final SearchPanelWidget container;
   @UiField
-  Element msgs;
+  Element main;
+  @UiField
+  Element mainLeft;
+  @UiField
+  HTMLPanel mainPanel;
+  @UiField
+  Element mainRight;
+  @UiField
+  InlineLabel msgs;
   private final Element self;
   @UiField
-  Element snippet;
+  InlineLabel snippet;
   @UiField
-  Element time;
+  InlineLabel time;
   @UiField
-  Element title;
+  InlineLabel title;
+  @UiField
+  FlowPanel unreadDiv;
 
-  DigestDomImpl(final SearchPanelWidget container) {
+  public CustomDigestDomImpl(final SearchPanelWidget container, final KuneDragController dragController) {
     this.container = container;
-    self = BINDER.createAndBindUi(this).getElement();
+
+    initWidget(BINDER.createAndBindUi(this));
+    self = this.getElement();
     self.setAttribute(BuilderHelper.KIND_ATTRIBUTE, "digest");
     self.setAttribute(DIGEST_ID_ATTRIBUTE, "D" + idCounter++);
 
+    PolymerUtils.addLayout(main, HORIZONTAL, LAYOUT, FLEX);
+    PolymerUtils.addLayout(mainLeft, VERTICAL, LAYOUT);
+    PolymerUtils.addLayout(mainRight, VERTICAL, LAYOUT, FLEX);
+
+    PolymerUtils.addLayout(avatarsAndUnreadDiv, VERTICAL, LAYOUT);
+    PolymerUtils.addLayout(avatarsDiv, HORIZONTAL, LAYOUT);
+
+    // FIXME if not in groups make it draggable
+    dragController.makeDraggable(this, title);
+    dragController.makeDraggable(this, snippet);
   }
 
   @Override
   public void deselect() {
-    self.removeClassName(css.selected());
+    self.removeClassName("k-digest-selected");
   }
 
-  Element getElement() {
-    return self;
+  @Override
+  public Widget getDragHandle() {
+    return this;
   }
 
-  /** @return an id of this widget, unique within the space of digest widgets. */
   String getId() {
-    return self.getAttribute(DIGEST_ID_ATTRIBUTE);
+    return getElement().getAttribute(DIGEST_ID_ATTRIBUTE);
   }
 
   @Override
   public void remove() {
-    self.removeFromParent();
-    throw new UIException("Uncomment this");
-    // container.onDigestRemoved(this);
+    // TODO
+    // self.removeFromParent();
+    setVisible(false);
+    container.onDigestRemoved(this);
   }
 
   private SafeHtml renderReadMessages(final int total) {
@@ -142,26 +166,26 @@ public final class DigestDomImpl implements DigestView {
 
   private SafeHtml renderUnreadMessages(final int unread, final int total) {
     final SafeHtmlBuilder html = new SafeHtmlBuilder();
-    html.appendHtmlConstant("<span class='" + css.unreadCount() + "'>");
+    html.appendHtmlConstant("<span class='" + "k-digest-unread-count" + "'>");
     html.appendHtmlConstant(String.valueOf(unread));
     html.appendHtmlConstant("</span>");
     html.appendHtmlConstant(" " + messages.of(total));
     return html.toSafeHtml();
   }
 
-  /** Restores this object to a post-constructor state. */
-  void reset() {
-    avatars.clear();
-    title.setInnerText("");
-    snippet.setInnerText("");
-    time.setInnerText("");
-    msgs.setInnerHTML("");
-    self.removeClassName(css.selected());
+  public void reset() {
+    title.setText("");
+    snippet.setText("");
+    time.setText("");
+    avatarsDiv.clear();
+    msgs.setText("");
+    self.removeClassName("k-digest-selected");
+    setVisible(false);
   }
 
   @Override
   public void select() {
-    self.addClassName(css.selected());
+    self.addClassName("k-digest-selected");
   }
 
   @Override
@@ -171,39 +195,47 @@ public final class DigestDomImpl implements DigestView {
       final String imageUrl = profile.getImageUrl();
       final Widget avatar = imageUrl.contains("iniavatars")?
           new InitialLabel(profile.getAddress()) : new Image(imageUrl);
-          avatar.setTitle(profile.getFullName());
+          Tooltip.to(avatar,profile.getFullName());
+
+          // FIXME: Last connected?
           // Try to use MediumAvatarDecorator or similar
           names.add(avatar);
     }
     final AvatarComposite composite = AvatarCompositeFactory.get40().build(names);
-    avatars.add(composite);
+    composite.addStyleName("k-digest-avatar");
+    avatarsDiv.add(composite);
   }
 
   @Override
   public void setMessageCounts(final int unread, final int total) {
+    // TODO Auto-generated method stub
     if (unread == 0) {
-      msgs.setInnerHTML(renderReadMessages(total).asString());
-      title.removeClassName(css.unread());
-      time.removeClassName(css.unread());
+      msgs.getElement().setInnerHTML(renderReadMessages(total).asString());
+      title.removeStyleName("k-digest-unread");
+      time.removeStyleName("k-digest-unread");
     } else {
-      msgs.setInnerHTML(renderUnreadMessages(unread, total).asString());
-      title.addClassName(css.unread());
-      time.addClassName(css.unread());
+      msgs.getElement().setInnerHTML(renderUnreadMessages(unread, total).asString());
+      title.addStyleName("k-digest-unread");
+      time.addStyleName("k-digest-unread");
     }
   }
 
   @Override
-  public void setSnippet(final String snippet) {
-    this.snippet.setInnerText(snippet);
+  public void setSnippet(final String text) {
+    snippet.setText(text);
   }
 
   @Override
-  public void setTimestamp(final String time) {
-    this.time.setInnerText(time);
+  public void setTimestamp(final String text) {
+    time.setText(text);
+    // Rendering
+    setVisible(true);
   }
 
   @Override
-  public void setTitleText(final String title) {
-    this.title.setInnerText(title);
+  public void setTitleText(final String text) {
+    title.setText(text);
   }
+
+
 }

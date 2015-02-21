@@ -8,6 +8,8 @@
   <inherits name="cc.kune.bootstrap.client.smartmenus.SmartMenus"/>
   
   <source path="client" />
+  <source path="resource/js"/>
+  
   <public path='resource'>
     <include name='css/*.css' />
     <include name='js/*.js' />

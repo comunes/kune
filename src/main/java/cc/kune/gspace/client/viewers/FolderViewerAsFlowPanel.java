@@ -28,6 +28,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.core.client.dnd.FolderContentDropController;
+import cc.kune.core.client.dnd.InboxToContainerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.ui.BasicDragableThumb;
@@ -40,7 +41,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -48,18 +48,19 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class FolderViewerAsFlowPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
 
   /**
    * The Interface FolderViewerAsFlowPanelUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface FolderViewerAsFlowPanelUiBinder extends UiBinder<Widget, FolderViewerAsFlowPanel> {
@@ -80,7 +81,7 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
 
   /**
    * Instantiates a new folder viewer as flow panel.
-   * 
+   *
    * @param gsArmor
    *          the gs armor
    * @param eventBus
@@ -101,15 +102,16 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
       final I18nTranslationService i18n, final ContentCapabilitiesRegistry capabilitiesRegistry,
       final KuneDragController dragController,
       final Provider<FolderContentDropController> contentDropControllerProv,
-      final Provider<FolderContainerDropController> containerDropControllerProv) {
+      final Provider<FolderContainerDropController> containerDropControllerProv,
+      final InboxToContainerDropController inbDropController) {
     super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
-        containerDropControllerProv);
+        containerDropControllerProv, inbDropController);
     widget = uiBinder.createAndBindUi(this);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.
    * gspace.client.viewers.items.FolderItemDescriptor,
@@ -126,7 +128,7 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#clear()
    */
   @Override
@@ -137,7 +139,7 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
 
   /**
    * Creates the thumb.
-   * 
+   *
    * @param text
    *          the text
    * @param icon
@@ -181,7 +183,7 @@ public class FolderViewerAsFlowPanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#setContainer(cc
    * .kune.core.shared.dto.StateContainerDTO)

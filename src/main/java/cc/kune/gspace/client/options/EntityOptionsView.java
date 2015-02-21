@@ -27,7 +27,7 @@ import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter.Abstr
 // TODO: Auto-generated Javadoc
 /**
  * The Interface EntityOptionsView.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface EntityOptionsView extends AbstractTabbedDialogView {
@@ -36,8 +36,8 @@ public interface EntityOptionsView extends AbstractTabbedDialogView {
   int HEIGHT = 270;
 
   /** The width. */
-  int WIDTH = 500;
+  int WIDTH = 530;
 
   /** The width wout margin. */
-  int WIDTH_WOUT_MARGIN = 480;
+  int WIDTH_WOUT_MARGIN = 510;
 }

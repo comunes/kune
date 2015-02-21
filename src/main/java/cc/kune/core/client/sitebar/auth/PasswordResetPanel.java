@@ -42,17 +42,17 @@ import cc.kune.core.client.ui.DefaultForm;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class PasswordResetPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -90,7 +90,7 @@ public class PasswordResetPanel extends SignInAbstractPanel {
 
   /**
    * Instantiates a new password reset panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param session
@@ -139,32 +139,31 @@ public class PasswordResetPanel extends SignInAbstractPanel {
           } else {
             userService.get().resetPassword(getPasswordHash(), newPasswdField.getValue(),
                 new AsyncCallback<Void>() {
-                  @Override
-                  public void onFailure(final Throwable caught) {
-                    if (caught instanceof EmailHashInvalidException) {
-                      PasswordResetPanel.this.setErrorMessage(i18n.t("Invalid confirmation code"),
-                          NotifyLevel.error);
-                    } else {
-                      PasswordResetPanel.this.setErrorMessage(
-                          i18n.t("Other error trying to reset your password"), NotifyLevel.error);
-                    }
-                    StackErrorEvent.fire(eventbus, caught);
-                    PasswordResetPanel.this.messageErrorBar.setVisible(true);
-                  }
+              @Override
+              public void onFailure(final Throwable caught) {
+                if (caught instanceof EmailHashInvalidException) {
+                  PasswordResetPanel.this.setErrorMessage(i18n.t("Invalid confirmation code"),
+                      NotifyLevel.error);
+                } else {
+                  PasswordResetPanel.this.setErrorMessage(
+                      i18n.t("Other error trying to reset your password"), NotifyLevel.error);
+                }
+                StackErrorEvent.fire(eventbus, caught);
+                PasswordResetPanel.this.messageErrorBar.setVisible(true);
+              }
 
-                  @Override
-                  public void onSuccess(final Void result) {
-                    NotifyUser.info(i18n.t("Your password has been reset. Sign in"));
-                    hide();
-                    stateManager.gotoHistoryToken(SiteTokens.SIGN_IN);
-                  }
-                });
+              @Override
+              public void onSuccess(final Void result) {
+                NotifyUser.info(i18n.t("Your password has been reset. Sign in"));
+                hide();
+                stateManager.gotoHistoryToken(SiteTokens.SIGN_IN);
+              }
+            });
           }
         }
       }
     });
     super.getSecondBtn().addClickHandler(new ClickHandler() {
-
       @Override
       public void onClick(final ClickEvent event) {
         hide();
@@ -176,7 +175,7 @@ public class PasswordResetPanel extends SignInAbstractPanel {
 
   /**
    * Gets the password hash.
-   * 
+   *
    * @return the password hash
    */
   public String getPasswordHash() {
@@ -186,7 +185,7 @@ public class PasswordResetPanel extends SignInAbstractPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInAbstractPanel#hide()
    */
   @Override
@@ -200,7 +199,7 @@ public class PasswordResetPanel extends SignInAbstractPanel {
 
   /**
    * Sets the password hash.
-   * 
+   *
    * @param passwordHash
    *          the new password hash
    */
@@ -210,7 +209,7 @@ public class PasswordResetPanel extends SignInAbstractPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.auth.SignInAbstractPanel#show()
    */
   @Override

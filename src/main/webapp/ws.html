@@ -146,6 +146,7 @@
 
     <link type="text/css" rel="stylesheet" href="ws/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="ws/css/theme.css">
+    <link type="text/css" rel="stylesheet" href="css/no-collapse.css">
     <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-all.css">
     <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-gray.css">
     <link type="text/css" rel="stylesheet"
@@ -344,7 +345,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
             <paper-fab icon="check" id="editdone_inbox_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
           </div>
           <div id="group_space" vertical layout>
-            <div horizontal layout center id="site_bottombar" flex></div>
+            <div horizontal layout center end-justified id="site_bottombar" flex></div>
             <paper-fab icon="create" id="edit_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
             <paper-fab icon="reply" id="reply_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
             <paper-fab icon="check" id="editdone_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
@@ -375,7 +376,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
 
                       <div flex horizontal layout end-justified>
                         <div id="social_net_group" vertical  layout>
-                          <div id="k_group_entity_toolbar" vertical layout end-justified>
+                          <div id="k_group_entity_toolbar" horizontal layout end-justified>
                           </div>
                           <div horizontal layout end-justified>
                             <core-icon-button icon="group-work" id="group_followers" on-click={{toggle_social_net}}></core-icon-button>
@@ -444,8 +445,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
           <paper-tab><paper-icon-button icon="group-work" id="group_space_icon"></paper-icon-button></paper-tab>
           
         </paper-tabs>
-        <div id="sitebar_user_space_icon_group" class="sitebar_inbox_badge_container">
-        </div>
+        <div id="sitebar_user_space_icon_group" class="sitebar_inbox_badge_container"></div>
         <div id="sitebar_left_extensionbar"></div>
         <div id="sitebar_flex" flex></div>
         <div id="sitebar_chat_icon_group" class="hidden-xs hidden-sm">
@@ -453,8 +453,8 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
         </div>
         <core-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn"></core-icon-button>
         <core-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></core-icon-button>        
-        <core-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></core-icon-button>
         <div id="sitebar_right_extensionbar"></div>
+        <core-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></core-icon-button>
         <paper-icon-button icon="search" on-click="{{ toggleSearch }}" id="sitebar_search_icon"></paper-icon-button>
         <div id="sitebar_search_group">
           <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
@@ -582,6 +582,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          right: 0px;
          bottom: 0px;
          left: 0px;
+         font-size: 16px;
        }
 
        #main_left_section {
@@ -625,6 +626,13 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #sitebar_toolbar core-icon-button {
          margin-left: 3px !important;
          margin-right: 3px !important;         
+       }
+
+       #sitebar_toolbar a:hover,
+       #sitebar_toolbar  paper-icon-button:hover,
+       #sitebar_toolbar core-icon-button:hover {
+         color: #808080 !important;
+         box-shadow: none !important;
        }
        
        #space_selector_paper_tabs {
@@ -810,6 +818,118 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #chat_container {
          overflow-y: scroll;
        }
+
+       #inbox_search_icon,#inbox_share_icon {
+         display: none;
+       }
+       
+       .k-digest-main {
+         min-width: 100px;
+         padding: 4px 10px 4px 4px; /* 4px padding, but a bit extra on the RHS. */
+         border-bottom: 1px solid #eee;
+         cursor: pointer;
+         color: grey;
+         font-size: 14px;
+       }       
+       
+       .k-digest-main:hover {
+         background-color: #eee;
+       }
+
+       .k-digest-main.k-digest-selected {
+         background-color: #789e35;
+         color: white;
+       }
+
+       .k-digest-inner {
+        line-height: 16px;
+        /* height: 43px;  /* Exactly 2 lines of text. */ */
+        overflow: hidden;
+       }
+
+       .k-digest-mainLeft {
+       }
+       
+       .k-digest-avatarsAndUnreadDiv {
+       }
+       
+       .k-digest-avatarsDiv {
+       }
+       
+       .k-digest-avatarsDiv {
+         float: left;
+         margin-right: 1em;
+         height: 43px;
+         width: 86px;
+         background-color: transparent;
+         /* border: 1px solid #cad0d9; */
+       }
+       .k-digest-avatar {
+         float: right;
+         height: 43px !important;
+         width: 43px !important;
+         margin-right: 4px;
+         border: 1px solid white; /* #b3b3b3;*/
+       }
+       
+       .k-digest-unreadDiv {
+       }
+       
+       .k-digest-unread-count {
+         color: white;
+         background-color: #99bb00;         
+         /* Make a bubble. Leading is 16px, so 8px border radius is a bubble. */
+         padding: 0 0.5em;
+         border-radius: 8px;
+         -moz-border-radius: 8px;
+         -webkit-border-radius: 8px;
+       }
+       
+       .k-digest-mainRight {
+       }
+       
+       .k-digest-titleDiv {
+       }
+       
+       .k-digest-title {
+         font-weight: bold;
+         color: grey;
+         max-height: 43px;
+       }
+       
+       .k-digest-snippetDiv {
+       }
+       
+       .k-digest-snippet {
+         max-height: 43px;
+       }
+       
+       .k-digest-timeDiv {
+       }
+       
+       .k-digest-time {
+         color: #808080;
+       }
+
+       .k-digest-unread {
+         font-weight: bold;
+         color: black;
+       }
+       
+       .k-digest-time {
+         font-style: italic;
+       }
+
+       .k-digest-unread.k-digest-time {
+         font-weight: normal;
+         color: #808080;
+       }
+
+       .k-digest-selected .k-digest-title,
+       .k-digest-selected .k-digest-time,
+       .k-digest-selected .k-digest-unread {
+         color: white;
+       }
        
        /* Other ------------------------------------------------------------- */
 
@@ -982,7 +1102,12 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          margin-left: {{xsmall ? 10 : 2}}px;
          line-height: 1em;
          margin-bottom: 30px;
-         margin-top: 20px;
+         margin-top: 30px;
+       }
+
+       #doc_header_right_extensionbar {
+         position: absolute;
+         right: {{xsmall ? 40 : small? 60 : 60}}px;
        }
        
        #miga a, #miga li:before {
@@ -991,6 +1116,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
 
        #miga {
          margin-left: {{xsmall ? 5 : 40}}px;
+         margin-top: {{xsmall ? -30 : 0}}px;
        }
 
        #edit_inbox_fab,#reply_inbox_fab,#editdone_inbox_fab {
@@ -1017,19 +1143,19 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          position: absolute;
          -webkit-transform: translateZ(0);
          z-index: 1;
-         left: {{xsmall ? -7 : 25}}px;
+         left: {{xsmall ? -7 : 31}}px;
        }
 
        #edit_docgroup_fab {
-         top: {{xsmall ? 260 : small? 290 : 320}}px;
+         top: {{xsmall ? 210 : small? 280 : 310}}px;
        }
 
        #reply_docgroup_fab {
-         top: {{xsmall? 260 + toolbarFabMinMargins: (small? 290 : 320) + toolbarFabMargins}}px;
+         top: {{xsmall? 210 + toolbarFabMinMargins: (small? 280 : 310) + toolbarFabMargins}}px;
        }
        
        #editdone_docgroup_fab {
-         top: {{xsmall? 260 + 2*toolbarFabMinMargins: (small? 290 : 320) + 2*toolbarFabMargins}}px;
+         top: {{xsmall? 210 + 2*toolbarFabMinMargins: (small? 280 : 310) + 2*toolbarFabMargins}}px;
        }
        
        paper-fab[disabled] {
@@ -1068,7 +1194,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
        #group_tools_toolbar {
          right: {{xsmall ? 0 : 0}}px;         
-         top: {{xsmall ? 260 : small? 290: 320}}px;
+         top: {{xsmall ? 270 : small? 280: 310}}px;
          position: absolute;
          z-index:  {{xsmall ? 1 : inherit}};
        }        

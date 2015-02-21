@@ -115,7 +115,7 @@ public class PathToolbarUtils {
     final String tooltip = group.getLongName();
     final GotoTokenAction action = new GotoTokenAction(null,
         showGroupName ? group.getShortName() : null, tooltip, group.getStateToken(), style,
-        stateManager, eventBus, false);
+            stateManager, eventBus, false);
     final ToolbarItemDescriptor btn = new ToolbarItemDescriptor(action);
     // btn.withIcon(iconsRegistry.getContentTypeIcon(WikiToolConstants.TYPE_FOLDER));
 

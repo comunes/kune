@@ -47,14 +47,14 @@ import com.gwtplatform.mvp.client.ViewImpl;
 // TODO: Auto-generated Javadoc
 /**
  * The Class PSpacePanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PSpacePanel extends ViewImpl implements PSpaceView {
 
   /**
    * The Interface PSpacePanelUiBinder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface PSpacePanelUiBinder extends UiBinder<Widget, PSpacePanel> {
@@ -100,7 +100,7 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
 
   /**
    * Instantiates a new p space panel.
-   * 
+   *
    * @param guiProvider
    *          the gui provider
    * @param res
@@ -124,13 +124,13 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
     layer.addClassName("k-box-5shadow");
     layer.addClassName("k-5corners");
     icon.setResource(res.browser32());
-    wsArmor.getPublicSpace().add(widget);
+    // wsArmor.getPublicSpace().add(widget);
     frame.add(inDevelopment);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -140,7 +140,7 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.pspace.client.PSpacePresenter.PSpaceView#getActionPanel()
    */
   @Override
@@ -150,7 +150,7 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.pspace.client.PSpacePresenter.PSpaceView#getDescription()
    */
   @Override
@@ -160,7 +160,7 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.pspace.client.PSpacePresenter.PSpaceView#getTitle()
    */
   @Override
@@ -170,7 +170,7 @@ public class PSpacePanel extends ViewImpl implements PSpaceView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.pspace.client.PSpacePresenter.PSpaceView#setContentGotoPublicUrl
    * (java.lang.String)

@@ -23,6 +23,7 @@
 
 package cc.kune.gspace.client.armor;
 
+import static cc.kune.polymer.client.Layout.*;
 import static cc.kune.polymer.client.PolymerId.*;
 
 import java.util.HashMap;
@@ -48,8 +49,6 @@ import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -117,8 +116,9 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
     docTopActionsToolbar.addStyleName("btn-group");
 
     PolymerUtils.addFlexHorLayout(docFooterActionsToolbar, docTopActionsToolbar,
-        toolsSouthActionsToolbar, entityFooterActionsToolbar);
-    PolymerUtils.addFlexVerLayout(headerActionsTopToolbar);
+        toolsSouthActionsToolbar);
+
+    PolymerUtils.addLayout(entityFooterActionsToolbar, HORIZONTAL, LAYOUT, END_JUSTIFIED);
 
     getEntityHeader().add(headerActionsTopToolbar);
     getDocFooter().add(docFooterActionsToolbar);
@@ -126,7 +126,6 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
     getEntityFooter().add(entityFooterActionsToolbar);
     getDocHeaderRight().add(docHeaderRightActionsToolbar);
     getDocTopbar().add(docTopActionsToolbar);
-    // getDocSubheader().add(subheaderToolbar);
 
     this.centerPanel = centerPanel;
     wrapDiv(DOC_CONTENT).add(centerPanel);
@@ -135,12 +134,6 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   @Override
   public void clearBackImage() {
     setBackImage("none !important");
-  }
-
-  private SimplePanel createDummySimplePanel() {
-    final SimplePanel panel = new SimplePanel();
-    trash.add(panel);
-    return panel;
   }
 
   @Override
@@ -272,11 +265,6 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
     return wrapDiv(HEADER_BOTTOMBAR);
   }
 
-  @Override
-  public SimplePanel getHomeSpace() {
-    return createDummySimplePanel();
-  }
-
   public ForIsWidget getHomeSpaceFlow() {
     return wrapDiv(HOME_CENTER);
   }
@@ -284,16 +272,6 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   @Override
   public Element getLogoShadow() {
     return getElement(HEADER_GROUP_SHADOW);
-  }
-
-  @Override
-  public IsWidget getMainpanel() {
-    return wrapDiv(GROUP_SPACE);
-  }
-
-  @Override
-  public SimplePanel getPublicSpace() {
-    return createDummySimplePanel();
   }
 
   @Override
@@ -371,7 +349,6 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
         throw new UIException("Parent is already wrapped/attached");
       }
       panel = WrappedFlowPanel.wrap(element);
-      PolymerUtils.addFlexHorLayout(panel);
       assert panel != null;
       panels.put(id, panel);
     }

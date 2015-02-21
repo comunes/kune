@@ -31,6 +31,7 @@ import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.core.client.dnd.FolderContentDropController;
+import cc.kune.core.client.dnd.InboxToContainerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.client.resources.CoreResources;
@@ -60,7 +61,6 @@ import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.DateTimeFormat;
@@ -74,11 +74,12 @@ import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class CalendarViewerPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CalendarViewerPanel extends AbstractFolderViewerPanel implements CalendarViewerView {
@@ -103,7 +104,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /**
    * Instantiates a new calendar viewer panel.
-   * 
+   *
    * @param gsArmor
    *          the gs armor
    * @param eventBus
@@ -128,9 +129,10 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
       final I18nTranslationService i18n, final GuiProvider guiProvider, final CoreResources res,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
       final Provider<FolderContentDropController> contentDropControllerProv,
-      final Provider<FolderContainerDropController> containerDropControllerProv) {
+      final Provider<FolderContainerDropController> containerDropControllerProv,
+      final InboxToContainerDropController inbDropController) {
     super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
-        containerDropControllerProv);
+        containerDropControllerProv, inbDropController);
     calendar = new Calendar();
     calendar.setSettings(setCalendarSettings());
     widget = calendar;
@@ -177,7 +179,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #addAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
@@ -189,7 +191,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.bradrydzewski.gwt.calendar.client.HasAppointments#addAppointments(java
    * .util.ArrayList)
@@ -201,7 +203,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #addClickHandler(com.google.gwt.event.dom.client.ClickHandler)
@@ -213,7 +215,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #addCreateHandler
@@ -226,7 +228,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.bradrydzewski.gwt.calendar.client.event.HasDateRequestHandlers#
    * addDateRequestHandler
    * (com.bradrydzewski.gwt.calendar.client.event.DateRequestHandler)
@@ -238,7 +240,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.bradrydzewski.gwt.calendar.client.event.HasDeleteHandlers#addDeleteHandler
    * (com.bradrydzewski.gwt.calendar.client.event.DeleteHandler)
@@ -250,7 +252,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.
    * gspace.client.viewers.items.FolderItemDescriptor,
@@ -265,7 +267,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.bradrydzewski.gwt.calendar.client.event.HasMouseOverHandlers#
    * addMouseOverHandler
    * (com.bradrydzewski.gwt.calendar.client.event.MouseOverHandler)
@@ -277,7 +279,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.logical.shared.HasOpenHandlers#addOpenHandler(com.
    * google.gwt.event.logical.shared.OpenHandler)
@@ -289,7 +291,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.logical.shared.HasSelectionHandlers#addSelectionHandler
    * (com.google.gwt.event.logical.shared.SelectionHandler)
@@ -301,7 +303,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.bradrydzewski.gwt.calendar.client.event.HasTimeBlockClickHandlers#
    * addTimeBlockClickHandler
    * (com.bradrydzewski.gwt.calendar.client.event.TimeBlockClickHandler)
@@ -313,7 +315,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.bradrydzewski.gwt.calendar.client.event.HasUpdateHandlers#addUpdateHandler
    * (com.bradrydzewski.gwt.calendar.client.event.UpdateHandler)
@@ -325,7 +327,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#attach()
    */
   @Override
@@ -336,7 +338,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.bradrydzewski.gwt.calendar.client.HasAppointments#clearAppointments()
    */
@@ -349,7 +351,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#detach()
    */
   @Override
@@ -360,7 +362,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.bradrydzewski.gwt.calendar.client.HasLayout#doLayout()
    */
   @Override
@@ -370,7 +372,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.HasHandlers#fireEvent(com.google.gwt.event.
    * shared.GwtEvent)
@@ -382,7 +384,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #getClientX()
@@ -394,7 +396,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #getClientY()
@@ -406,7 +408,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #getCurrentDate()
@@ -418,7 +420,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #getDate()
@@ -430,7 +432,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.bradrydzewski.gwt.calendar.client.HasAppointments#getSelectedAppointment
    * ()
@@ -442,7 +444,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #goToday()
@@ -454,7 +456,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.bradrydzewski.gwt.calendar.client.HasAppointments#hasAppointmentSelected
    * ()
@@ -466,7 +468,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #removeAppointment(com.bradrydzewski.gwt.calendar.client.Appointment)
@@ -478,7 +480,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.bradrydzewski.gwt.calendar.client.HasAppointments#removeAppointment
    * (com.bradrydzewski.gwt.calendar.client.Appointment, boolean)
@@ -498,7 +500,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.bradrydzewski.gwt.calendar.client.HasLayout#resumeLayout()
    */
   @Override
@@ -508,7 +510,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /**
    * Sets the calendar settings.
-   * 
+   *
    * @return the calendar settings
    */
   private CalendarSettings setCalendarSettings() {
@@ -524,7 +526,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #setDate(java.util.Date)
@@ -536,7 +538,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #setOnMouseOverTooltipText(java.lang.String)
@@ -548,7 +550,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.bradrydzewski.gwt.calendar.client.HasAppointments#setSelectedAppointment
    * (com.bradrydzewski.gwt.calendar.client.Appointment)
@@ -560,7 +562,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.bradrydzewski.gwt.calendar.client.HasAppointments#setSelectedAppointment
    * (com.bradrydzewski.gwt.calendar.client.Appointment, boolean)
@@ -572,7 +574,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #setView(com.bradrydzewski.gwt.calendar.client.CalendarViews)
@@ -585,7 +587,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #setView(com.bradrydzewski.gwt.calendar.client.CalendarViews, int)
@@ -598,7 +600,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#showEmptyMsg(java
    * .lang.String)
@@ -611,7 +613,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#showFolder()
    */
   @Override
@@ -623,7 +625,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.bradrydzewski.gwt.calendar.client.HasLayout#suspendLayout()
    */
   @Override
@@ -633,7 +635,7 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewerPresenter.CalendarViewerView
    * #updateTitle(com.bradrydzewski.gwt.calendar.client.CalendarViews)

@@ -22,8 +22,15 @@
  */
 package cc.kune.common.client.ui.dialogs;
 
+import cc.kune.common.client.events.EventBusInstance;
+import cc.kune.common.client.shortcuts.OnEscapePressedEvent;
+import cc.kune.common.client.shortcuts.OnEscapePressedEvent.OnEscapePressedHandler;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.TextUtils;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.Window;
 
@@ -280,11 +287,13 @@ public class BasicTopDialog extends BSBasicDialog {
   /** The Constant CLOSE_ID. */
   public static final String CLOSE_ID = "-close";
 
-  /** The height. */
-  private String height;
+  private HandlerRegistration closeClickHandler;
 
   // /** The popup. */
   // private final PopupTopPanel popup;
+
+  /** The height. */
+  private String height;
 
   /** The width. */
   private String width;
@@ -303,6 +312,7 @@ public class BasicTopDialog extends BSBasicDialog {
     if (TextUtils.notEmpty(builder.icon)) {
       super.setTitleIcon(builder.icon);
     }
+    setCloseBtn(builder.closeBtn);
     super.setFirstBtnText(builder.firstButtonTitle);
     super.setFirstBtnId(builder.firstButtonId);
     super.setFirstBtnTabIndex(builder.tabIndexStart);
@@ -346,8 +356,9 @@ public class BasicTopDialog extends BSBasicDialog {
   /**
    * Hide.
    */
+  @Override
   public void hide() {
-
+    super.hide();
   }
 
   /**
@@ -357,9 +368,36 @@ public class BasicTopDialog extends BSBasicDialog {
     setSizes(Window.getClientWidth(), Window.getClientHeight());
   }
 
+  private void setCloseBtn(final boolean closeBtn) {
+    setCloseBtnVisible(closeBtn);
+    if (closeBtn) {
+      setCloseBtnTooltip(I18n.t("Close") + " (Esc)");
+      EventBusInstance.get().addHandler(OnEscapePressedEvent.getType(), new OnEscapePressedHandler() {
+        @Override
+        public void onOnEscapePressed(final OnEscapePressedEvent event) {
+          if (modal.isVisible()) {
+            hide();
+          }
+        }
+      });
+      if (closeClickHandler == null) {
+        closeClickHandler = getSecondBtn().addClickHandler(new ClickHandler() {
+          @Override
+          public void onClick(final ClickEvent event) {
+            hide();
+          }
+        });
+      }
+    } else {
+      if (closeClickHandler != null) {
+        closeClickHandler.removeHandler();
+      }
+    }
+  }
+
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialog#setFirstBtnTitle(java.lang
    * .String)
@@ -371,7 +409,7 @@ public class BasicTopDialog extends BSBasicDialog {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setHeight(java.lang.String)
    */
   @Override
@@ -392,7 +430,7 @@ public class BasicTopDialog extends BSBasicDialog {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setSize(java.lang.String,
    * java.lang.String)
    */
@@ -449,7 +487,7 @@ public class BasicTopDialog extends BSBasicDialog {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setWidth(java.lang.String)
    */
   @Override

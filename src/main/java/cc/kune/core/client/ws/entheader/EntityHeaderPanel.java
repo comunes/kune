@@ -123,7 +123,8 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
           @Override
           public void onUserFollowersUpdated(final UserFollowersUpdatedEvent event) {
             final int followers = event.getFollowers();
-            followersBtn.setText(I18n.t(followers == 1 ? "One follower" : "[%d] followers", followers));
+           // followersBtn.setText(I18n.t(followers == 1 ? "One follower" : "[%d] followers", followers));
+            followersBtn.setText(I18n.t(followers == 1 ? "One buddy" : "[%d] buddies", followers));
           }
         });
   }

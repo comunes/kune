@@ -34,67 +34,36 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContainerDTO;
-import cc.kune.gspace.client.tool.selector.ToolSelectorItemPanel;
 import cc.kune.gspace.client.viewers.items.FolderItemWidget;
-import cc.kune.trash.shared.TrashToolConstants;
 
+import com.allen_sauer.gwt.dnd.client.VetoDragException;
 import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class FolderContainerDropController is responsable of the drop process to
- * folders. Must not be a @singleton, and should exist one drop controller per
- * item
+ * This class is responsible of the drop process of waves to folders. Should be
+ * a singleton and change the target on every statechange
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class FolderContainerDropController extends AbstractDropController {
+@Singleton
+public class InboxToContainerDropController extends AbstractDropController {
 
-  /** The content cache. */
   private final ContentCache contentCache;
-
-  /** The content service. */
   private final ContentServiceAsync contentService;
-
-  /** The erro handler. */
   private final ErrorHandler erroHandler;
-
-  /** The i18n. */
   private final I18nTranslationService i18n;
-
-  /** The session. */
   private final Session session;
-
-  /** The state manager. */
   private final StateManager stateManager;
 
-  /**
-   * Instantiates a new folder container drop controller.
-   *
-   * @param dragController
-   *          the drag controller
-   * @param contentService
-   *          the content service
-   * @param session
-   *          the session
-   * @param stateManager
-   *          the state manager
-   * @param erroHandler
-   *          the erro handler
-   * @param i18n
-   *          the i18n
-   * @param contentCache
-   *          the content cache
-   */
   @Inject
-  public FolderContainerDropController(final KuneDragController dragController,
+  public InboxToContainerDropController(final KuneDragController dragController,
       final ContentServiceAsync contentService, final Session session, final StateManager stateManager,
       final ErrorHandler erroHandler, final I18nTranslationService i18n, final ContentCache contentCache) {
     super(dragController);
-    registerType(FolderItemWidget.class);
     registerType(CustomDigestDomImpl.class);
     this.contentService = contentService;
     this.session = session;
@@ -117,20 +86,20 @@ public class FolderContainerDropController extends AbstractDropController {
     final StateToken tokenToMove = ((FolderItemWidget) widget).getToken();
     contentService.moveContent(session.getUserHash(), tokenToMove, destToken,
         new AsyncCallback<StateContainerDTO>() {
-      @Override
-      public void onFailure(final Throwable caught) {
-        erroHandler.process(caught);
-        stateManager.refreshCurrentState();
-        NotifyUser.hideProgress();
-      }
+          @Override
+          public void onFailure(final Throwable caught) {
+            erroHandler.process(caught);
+            stateManager.refreshCurrentState();
+            NotifyUser.hideProgress();
+          }
 
-      @Override
-      public void onSuccess(final StateContainerDTO result) {
-        NotifyUser.hideProgress();
-        contentCache.remove(tokenToMove);
-        contentCache.remove(destToken);
-      }
-    });
+          @Override
+          public void onSuccess(final StateContainerDTO result) {
+            NotifyUser.hideProgress();
+            contentCache.remove(tokenToMove);
+            contentCache.remove(destToken);
+          }
+        });
   }
 
   /**
@@ -143,7 +112,7 @@ public class FolderContainerDropController extends AbstractDropController {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.dnd.AbstractDropController#onDropAllowed(com.google
    * .gwt.user.client.ui.Widget,
@@ -152,31 +121,17 @@ public class FolderContainerDropController extends AbstractDropController {
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
     dropController.getDropTarget().removeStyleName("k-drop-allowed-hover");
-    if (widget instanceof FolderItemWidget) {
-      NotifyUser.showProgress(i18n.t("Moving"));
-      if (getTarget() != null) {
-        StateToken destToken;
-        if (getTarget() instanceof StateToken) {
-          destToken = (StateToken) getTarget();
-        } else if (getTarget() instanceof ToolSelectorItemPanel) {
-          destToken = new StateToken(session.getCurrentGroupShortName(),
-              ((ToolSelectorItemPanel) getTarget()).getName());
-          if (!destToken.getTool().equals(TrashToolConstants.TOOL_NAME)) {
-            // By now only move to trash
-            notImplemented();
-            return;
-          }
-        } else {
-          // No implemented
-          notImplemented();
-          return;
-        }
-        move(widget, destToken);
-      } else {
-        notImplemented();
-      }
-    } else {
+    if (widget instanceof CustomDigestDomImpl) {
       notImplemented();
     }
+  }
+
+  @Override
+  public void onPreviewAllowed(final Widget widget, final SimpleDropController dropController)
+      throws VetoDragException {
+    if (session.isCurrentStateAContent()) {
+      throw new VetoDragException();
+    }
+    super.onPreviewAllowed(widget, dropController);
   }
 }

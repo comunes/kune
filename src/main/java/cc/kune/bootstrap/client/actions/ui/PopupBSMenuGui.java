@@ -5,7 +5,6 @@ import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.Position;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
 
 import com.google.gwt.event.logical.shared.CloseEvent;
@@ -49,7 +48,6 @@ public class PopupBSMenuGui {
    * @return the popup panel
    */
   private PopupPanel createPopup() {
-    NotifyUser.info("creating");
     popup = new PopupPanel(true);
     popup.setStyleName("oc-menu");
     popup.add(popupContent);
@@ -88,7 +86,6 @@ public class PopupBSMenuGui {
 
   public void showRelativeTo(final Object relative) {
     createPopupIfNecessary();
-    NotifyUser.info("showing");
     if (relative instanceof String) {
       popup.showRelativeTo(RootPanel.get((String) relative));
     } else if (relative instanceof UIObject) {

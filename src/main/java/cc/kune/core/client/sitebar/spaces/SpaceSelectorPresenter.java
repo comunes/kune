@@ -66,7 +66,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SpaceSelectorPresenter extends
-Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> {
+    Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> {
 
   /**
    * The Interface SpaceSelectorProxy.
@@ -367,6 +367,7 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
    * On group btn click.
    */
   private void onGroupBtnClick() {
+    PolymerUtils.hideInboxWithDelay();
     if (groupToken.equals(SiteTokens.GROUP_HOME)) {
       // as current home is equal to "no content" token, we shall go to
       // group space def home page
@@ -495,6 +496,7 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
    * On user btn click.
    */
   private void onUserBtnClick() {
+    PolymerUtils.hideInboxCancel();
     signIn.get().setGotoTokenOnCancel(stateManager.getCurrentToken());
     restoreToken(inboxToken);
     if (session.isLogged()) {
@@ -523,6 +525,7 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
    *          the should restore token
    */
   private void onUserSpaceSelect(final boolean shouldRestoreToken) {
+    PolymerUtils.hideInboxCancel();
     if (session.isLogged()) {
       restoreToken(shouldRestoreToken, inboxToken);
       armor.selectUserSpace();
@@ -534,7 +537,6 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
       if (PolymerUtils.isXSmall() && PolymerUtils.getMainSelected().equals("main")) {
         PolymerUtils.setDrawerSelected();
       }
-
     } else {
       signIn.get().setErrorMessage(i18n.t(CoreMessages.SIGN_IN_TO_ACCESS_INBOX), NotifyLevel.info);
       stateManager.gotoHistoryToken(TokenUtils.addRedirect(SiteTokens.SIGN_IN, inboxToken));
@@ -569,7 +571,7 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

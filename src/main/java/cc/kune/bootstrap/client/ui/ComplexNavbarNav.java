@@ -12,7 +12,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class ComplexNavbarNav extends NavbarNav implements ParentWidget {
 
-  private Pull currentPull = Pull.LEFT;
+  private Pull currentPull;
 
   @Override
   public void add(final UIObject uiObject) {
@@ -62,7 +62,9 @@ public class ComplexNavbarNav extends NavbarNav implements ParentWidget {
 
   private Widget setPull(final UIObject uiObject) {
     final Widget widget = (Widget) uiObject;
-    widget.addStyleName(currentPull.equals(Pull.LEFT) ? Styles.PULL_LEFT : Styles.PULL_RIGHT);
+    if (Pull.RIGHT.equals(currentPull)) {
+      widget.addStyleName(Styles.PULL_RIGHT);
+    }
     return widget;
   }
 

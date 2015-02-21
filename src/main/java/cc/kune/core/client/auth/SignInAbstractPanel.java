@@ -123,7 +123,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -171,9 +171,7 @@ public abstract class SignInAbstractPanel extends ViewImpl {
    * Hide.
    */
   public void hide() {
-    if (dialog.isVisible()) {
-      dialog.hide();
-    }
+    dialog.hide();
   }
 
   /**

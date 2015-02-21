@@ -29,6 +29,7 @@ import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.core.client.dnd.FolderContentDropController;
+import cc.kune.core.client.dnd.InboxToContainerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.dto.StateContainerDTO;
@@ -73,6 +74,8 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
   /** The empty panel. */
   private final FlowPanel emptyPanel;
 
+  private final InboxToContainerDropController fromInboxDropController;
+
   /** The gs armor. */
   protected final GSpaceArmor gsArmor;
 
@@ -99,24 +102,29 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
    *          the content drop controller prov
    * @param containerDropControllerProv
    *          the container drop controller prov
+   * @param fromInboxDropController
    */
   public AbstractFolderViewerPanel(final GSpaceArmor gsArmor, final EventBus eventBus,
       final I18nTranslationService i18n, final ContentCapabilitiesRegistry capabilitiesRegistry,
       final KuneDragController dragController,
       final Provider<FolderContentDropController> contentDropControllerProv,
-      final Provider<FolderContainerDropController> containerDropControllerProv) {
+      final Provider<FolderContainerDropController> containerDropControllerProv,
+      final InboxToContainerDropController fromInboxDropController) {
     this.gsArmor = gsArmor;
     this.i18n = i18n;
     this.capabilitiesRegistry = capabilitiesRegistry;
     this.dragController = dragController;
     this.contentDropControllerProv = contentDropControllerProv;
     this.containerDropControllerProv = containerDropControllerProv;
+    this.fromInboxDropController = fromInboxDropController;
     emptyPanel = new FlowPanel();
     emptyLabel = new InlineLabel(i18n.t("This is empty."));
     emptyLabel.setStyleName("k-empty-msg");
     emptyPanel.setStyleName("k-empty-folder-panel");
     emptyPanel.add(emptyLabel);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+
+    fromInboxDropController.init((Widget) gsArmor.getDocHeader());
   }
 
   /*
@@ -216,6 +224,7 @@ public abstract class AbstractFolderViewerPanel extends ViewImpl implements Fold
     contentTitle.setTitle(title, state.getTypeId(), state.getContainerRights().isEditable()
         && capabilitiesRegistry.isRenamable(state.getTypeId()));
     Window.setTitle(state.getGroup().getLongName() + ": " + state.getTitle());
+    fromInboxDropController.setTarget(state.getStateToken());
   }
 
   @Override

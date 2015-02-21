@@ -32,8 +32,6 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.ui.ButtonBase;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
  * The Interface GSpaceArmor.
@@ -162,28 +160,7 @@ public interface GSpaceArmor {
 
   ForIsWidget getHeaderBottombar();
 
-  /**
-   * Gets the home space.
-   *
-   * @return the home space
-   */
-  SimplePanel getHomeSpace();
-
   Element getLogoShadow();
-
-  /**
-   * Gets the mainpanel.
-   *
-   * @return the mainpanel
-   */
-  IsWidget getMainpanel();
-
-  /**
-   * Gets the public space.
-   *
-   * @return the public space
-   */
-  SimplePanel getPublicSpace();
 
   /**
    * Gets the sitebar.

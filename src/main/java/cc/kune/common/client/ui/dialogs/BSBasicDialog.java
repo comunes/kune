@@ -30,6 +30,7 @@ import org.gwtbootstrap3.client.ui.Modal;
 import org.gwtbootstrap3.client.ui.ModalHeader;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.utils.TextUtils;
 
@@ -82,6 +83,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
     modal.addHideHandler(new ModalHideHandler() {
       @Override
       public void onHide(final ModalHideEvent evt) {
+        NotifyUser.info("On BSBasicDialog hide");
         CloseEvent.fire(BSBasicDialog.this, BSBasicDialog.this);
       }
     });
@@ -114,6 +116,9 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   @Override
   public HandlerRegistration addCloseHandler(final CloseHandler<BSBasicDialog> handler) {
+    // return (HandlerRegistration) modal.addHideHandler(new ModalHideHandler()
+    // {});
+
     return addHandler(handler, CloseEvent.getType());
   }
 
@@ -204,6 +209,10 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
     return title;
   }
 
+  public void hide() {
+    modal.hide();
+  }
+
   @Override
   public void setCloseBtnTooltip(final String tooltip) {
     Tooltip.to(secondBtn, tooltip);
@@ -217,7 +226,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
   public void setDialogHeight(final String height) {
     modal.setHeight(height + "px");
     if (height.contains("px")) {
-      modal.getElement().getStyle().setHeight(Double.parseDouble(height.replace("px", "")), Unit.PX);
+      modal.getElement().getStyle().setHeight(Double.parseDouble(height.replace("px", "") + 20), Unit.PX);
     } else if (height.contains("%")) {
       modal.getElement().getStyle().setHeight(Double.parseDouble(height.replace("%", "")), Unit.PCT);
     }
@@ -249,12 +258,6 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
     firstBtn.setTabIndex(index);
   }
 
-  @Override
-  public void setFirstBtnText(final String text) {
-    firstBtn.setText(text);
-    firstBtn.setVisible(TextUtils.notEmpty(text));
-  }
-
   /*
    * (non-Javadoc)
    * 
@@ -262,6 +265,12 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnText(java.
    * lang.String)
    */
+
+  @Override
+  public void setFirstBtnText(final String text) {
+    firstBtn.setText(text);
+    firstBtn.setVisible(TextUtils.notEmpty(text));
+  }
 
   @Override
   public void setFirstBtnTitle(final String title) {
@@ -272,6 +281,14 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
   public void setFirstBtnVisible(final boolean visible) {
     firstBtn.setVisible(visible);
   }
+
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnTitle(java
+   * .lang.String)
+   */
 
   /**
    * Sets the inner height.
@@ -288,8 +305,8 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
    * (non-Javadoc)
    * 
    * @see
-   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnTitle(java
-   * .lang.String)
+   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnVisible(boolean
+   * )
    */
 
   /**
@@ -302,14 +319,6 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
     Log.info("set width: " + width);
     vp.setWidth(width);
   }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnVisible(boolean
-   * )
-   */
 
   /**
    * Sets the second btn enabled.

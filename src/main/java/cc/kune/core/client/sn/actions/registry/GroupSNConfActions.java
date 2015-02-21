@@ -29,6 +29,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.invitation.GroupInvitationMenuItem;
@@ -55,7 +56,6 @@ import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.gspace.client.actions.SNActionStyles;
 
-import com.google.gwt.resources.client.ImageResource;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -121,7 +121,7 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
       final AddEntityToThisGroupAction addEntityToThisGroupAction, final GroupSNOptionsMenu optionsMenu,
       final GroupSNModerationSubMenu moderationSubMenu, final GroupSNVisibilitySubMenu visibilitySubMenu) {
     final boolean isNewbie = session.isNewbie();
-    final ImageResource icon = res.prefGrey();
+    final KuneIcon icon = KuneIcon.SETTINGS;
     final String menuText = isNewbie ? i18n.t("Options") : "";
     final String menuTooltip = isNewbie ? "" : i18n.t("Options");
     final String menuStyle = isNewbie ? SNActionStyles.SN_OPTIONS_STYLES_NEWBIE

@@ -74,6 +74,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
+import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -385,8 +386,6 @@ public class WebClient extends Composite implements WaveClientView {
 
   private final StateManager stateManager;
 
-  private Timer hideInboxTimer;
-
   /**
    * This is the entry point method.
    *
@@ -403,7 +402,7 @@ public class WebClient extends Composite implements WaveClientView {
       final cc.kune.core.client.state.Session kuneSession, StateManager stateManager,
       final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, 
       final Provider<AurorisColorPicker> colorPicker, final GSpaceArmor armor, 
-      CustomEditToolbar customEditToolbar) {
+      CustomEditToolbar customEditToolbar, final KuneDragController dragController) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.kuneSession = kuneSession;
@@ -412,7 +411,7 @@ public class WebClient extends Composite implements WaveClientView {
     this.contentService = contentService;
     this.colorPicker = colorPicker;
     this.customEditToolbar = customEditToolbar;
-    searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles));
+    searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles), dragController);
     ErrorHandler.install();
     eventBus.addHandler(StackErrorEvent.getType(), new StackErrorEvent.StackErrorHandler() {
       @Override
@@ -645,9 +644,9 @@ public class WebClient extends Composite implements WaveClientView {
           stateManager.setRetrievedStateAndGo(state);
           SpaceSelectEvent.fire(eventBus, Space.groupSpace);
           // If narrow, show
-          hideInboxTimer.schedule(PolymerUtils.isMainDrawerNarrow()? 0 : 4000);
+          // PolymerUtils.hideInboxWithDelay();
         } else {
-            hideInboxTimer.cancel();
+            // PolymerUtils.hideInboxCancel();;
             // Not a group content
             SpaceSelectEvent.fire(eventBus, Space.userSpace);
             if (currentOpenedWaveUri.equals(waveUri)) { 
@@ -832,14 +831,7 @@ public class WebClient extends Composite implements WaveClientView {
     } else {
       logPanel.removeFromParent();
     }
-    
-    hideInboxTimer = new Timer() {
-      @Override
-      public void run() {
-        PolymerUtils.setMainSelected();
-        PolymerUtils.setNarrowVisible(false);
-      }
-    };
+
     setupSearchPanel();
     setupWavePanel();
   }

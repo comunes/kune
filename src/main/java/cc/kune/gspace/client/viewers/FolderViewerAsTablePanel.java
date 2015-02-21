@@ -34,6 +34,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.dnd.FolderContainerDropController;
 import cc.kune.core.client.dnd.FolderContentDropController;
+import cc.kune.core.client.dnd.InboxToContainerDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.registry.ContentCapabilitiesRegistry;
 import cc.kune.core.shared.domain.ContentStatus;
@@ -115,9 +116,10 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
       final EventBus eventBus, final GuiProvider guiProvider,
       final ContentCapabilitiesRegistry capabilitiesRegistry, final KuneDragController dragController,
       final Provider<FolderContentDropController> contentDropControllerProv,
-      final Provider<FolderContainerDropController> containerDropControllerProv) {
+      final Provider<FolderContainerDropController> containerDropControllerProv,
+      final InboxToContainerDropController fromInboxDropController) {
     super(gsArmor, eventBus, i18n, capabilitiesRegistry, dragController, contentDropControllerProv,
-        containerDropControllerProv);
+        containerDropControllerProv, fromInboxDropController);
     this.guiProvider = guiProvider;
     widget = uiBinder.createAndBindUi(this);
     widget.addStyleName("k-folder-viewer");
@@ -125,7 +127,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerView#addItem(cc.kune.
    * gspace.client.viewers.items.FolderItemDescriptor,
@@ -207,7 +209,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#clear()
    */
   @Override
@@ -218,7 +220,7 @@ public class FolderViewerAsTablePanel extends AbstractFolderViewerPanel {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.AbstractFolderViewerPanel#setContainer(cc
    * .kune.core.shared.dto.StateContainerDTO)

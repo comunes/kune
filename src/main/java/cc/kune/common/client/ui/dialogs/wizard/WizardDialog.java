@@ -164,13 +164,10 @@ public class WizardDialog implements WizardDialogView {
       }
     });
     nextButton.ensureDebugId(nextId);
-    nextButton.addStyleName("k-dialog-btn");
-    nextButton.addStyleName("k-dialog-secondBtn");
-    nextButton.addStyleName("k-5corners");
-    nextButton.addStyleName("k-button");
+    nextButton.addStyleName("btn-group");
     nextButton.addStyleName("kune-Margin-Medium-l");
     dialog.getBtnPanel().add(nextButton);
-
+    dialog.getBtnPanel().addStyleName("btn-group");
     dialog.addCloseHandler(new CloseHandler<BSBasicDialog>() {
 
       @Override
@@ -186,10 +183,7 @@ public class WizardDialog implements WizardDialogView {
       }
     });
     backButton.ensureDebugId(backId);
-    backButton.addStyleName("k-dialog-btn");
-    backButton.addStyleName("k-dialog-secondBtn");
-    backButton.addStyleName("k-5corners");
-    backButton.addStyleName("k-button");
+    backButton.addStyleName("btn-group");
     backButton.addStyleName("kune-Margin-Medium-l");
     dialog.getBtnPanel().add(backButton);
 
@@ -207,7 +201,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#add(com.google
    * .gwt.user.client.ui.IsWidget)
@@ -219,7 +213,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#clear()
    */
   @Override
@@ -242,7 +236,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#hide()
    */
   @Override
@@ -252,7 +246,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#isCurrentPage(
    * com.google.gwt.user.client.ui.IsWidget)
@@ -269,7 +263,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#mask(java.lang
    * .String)
@@ -281,7 +275,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#maskProcessing()
    */
@@ -292,7 +286,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#remove(com.google
    * .gwt.user.client.ui.IsWidget)
@@ -307,7 +301,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setEnabled(boolean
    * , boolean, boolean, boolean)
@@ -323,7 +317,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setEnabledBackButton
    * (boolean)
@@ -335,7 +329,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setEnabledCancelButton
    * (boolean)
@@ -347,7 +341,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setEnabledFinishButton
    * (boolean)
@@ -359,7 +353,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setEnabledNextButton
    * (boolean)
@@ -371,7 +365,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setFinishText(
    * java.lang.String)
@@ -393,7 +387,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setListener(cc
    * .kune.common.client.ui.dialogs.wizard.WizardListener)
@@ -405,7 +399,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setVisible(boolean
    * , boolean, boolean, boolean)
@@ -421,7 +415,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setVisibleBackButton
    * (boolean)
@@ -433,7 +427,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setVisibleCancelButton
    * (boolean)
@@ -445,7 +439,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setVisibleFinishButton
    * (boolean)
@@ -457,7 +451,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#setVisibleNextButton
    * (boolean)
@@ -469,7 +463,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#show()
    */
   @Override
@@ -479,7 +473,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#show(com.google
    * .gwt.user.client.ui.IsWidget)
@@ -514,7 +508,7 @@ public class WizardDialog implements WizardDialogView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.wizard.WizardDialogView#unMask()
    */
   @Override

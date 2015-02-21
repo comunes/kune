@@ -22,6 +22,8 @@
  */
 package cc.kune.gspace.client.options.license;
 
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
 import cc.kune.common.client.ui.KuneWindowUtils;
@@ -33,7 +35,6 @@ import cc.kune.gspace.client.options.EntityOptionsView;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -43,7 +44,7 @@ import com.google.gwt.user.client.ui.Label;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityOptDefLicensePanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityOptDefLicensePanel extends Composite implements EntityOptDefLicenseView {
@@ -52,7 +53,7 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
   public static final String TAB_ID = "k-eodlp-lic-id";
 
   /** The change. */
-  private final Button change;
+  private final CustomButton change;
 
   /** The intro. */
   private final Label intro;
@@ -65,7 +66,7 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
 
   /**
    * Instantiates a new entity opt def license panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param res
@@ -84,8 +85,7 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
     flow.add(licenseImage);
     licenseImage.addStyleName("kune-pointer");
     licenseImage.addStyleName("kune-Margin-10-r");
-    change = new Button(i18n.t("Change"));
-    change.addStyleName("k-button");
+    change = new CustomButton(i18n.t("Change"));
     flow.add(change);
     initWidget(flow);
     // flow.setHeight(String.valueOf(EntityOptionsView.HEIGHT) + "px");
@@ -107,7 +107,7 @@ public class EntityOptDefLicensePanel extends Composite implements EntityOptDefL
 
   /**
    * Gets the intro.
-   * 
+   *
    * @return the intro
    */
   public Label getIntro() {

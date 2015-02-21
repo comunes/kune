@@ -23,6 +23,7 @@
 package cc.kune.gspace.client;
 
 import cc.kune.core.client.ExtendedGinModule;
+import cc.kune.core.client.dnd.InboxToContainerDropController;
 import cc.kune.core.client.sitebar.search.SitebarSearchPanel;
 import cc.kune.core.client.sitebar.search.SitebarSearchPresenter;
 import cc.kune.core.client.sn.AdminsGroupSNDropController;
@@ -155,7 +156,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -165,6 +166,7 @@ public class GSpaceGinModule extends ExtendedGinModule {
     s(FolderViewerUtils.class);
     s(ContentDropController.class);
     s(AdminsGroupSNDropController.class);
+    s(InboxToContainerDropController.class);
     s(CollabsGroupSNDropController.class);
     s(AllMembersGroupSNDropController.class);
     bindPresenter(EntityLicensePresenter.class, EntityLicensePresenter.EntityLicenseView.class,

@@ -23,17 +23,16 @@
 package cc.kune.gspace.client.options;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
@@ -41,24 +40,24 @@ import cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.gspace.client.options.GroupOptionsPresenter.GroupOptionsView;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupOptionsPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupOptionsPresenter extends
-    AbstractTabbedDialogPresenter<GroupOptionsView, GroupOptionsPresenter.GroupOptionsProxy> implements
-    GroupOptions {
+AbstractTabbedDialogPresenter<GroupOptionsView, GroupOptionsPresenter.GroupOptionsProxy> implements
+GroupOptions {
 
   /**
    * The Interface GroupOptionsProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -67,14 +66,14 @@ public class GroupOptionsPresenter extends
 
   /**
    * The Interface GroupOptionsView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface GroupOptionsView extends EntityOptionsView {
 
     /**
      * Adds the action.
-     * 
+     *
      * @param descriptor
      *          the descriptor
      */
@@ -87,9 +86,6 @@ public class GroupOptionsPresenter extends
   /** The i18n. */
   private final I18nTranslationService i18n;
 
-  /** The img. */
-  private final CoreResources img;
-
   /** The prefs item. */
   private ButtonDescriptor prefsItem;
 
@@ -101,7 +97,7 @@ public class GroupOptionsPresenter extends
 
   /**
    * Instantiates a new group options presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param proxy
@@ -122,17 +118,16 @@ public class GroupOptionsPresenter extends
   @Inject
   public GroupOptionsPresenter(final EventBus eventBus, final GroupOptionsProxy proxy,
       final StateManager stateManager, final Session session, final I18nTranslationService i18n,
-      final CoreResources img, final GroupOptionsView view, final SiteTokenListeners tokenListener) {
+      final GroupOptionsView view, final SiteTokenListeners tokenListener) {
     super(eventBus, view, proxy);
     this.stateManager = stateManager;
     this.session = session;
     this.i18n = i18n;
-    this.img = img;
   }
 
   /**
    * Check state.
-   * 
+   *
    * @param state
    *          the state
    */
@@ -156,9 +151,9 @@ public class GroupOptionsPresenter extends
       }
     };
     if (session.isNewbie()) {
-      groupPrefsAction.putValue(Action.NAME, i18n.t("Group options"));
+      groupPrefsAction.withText(i18n.t("Group options"));
     }
-    groupPrefsAction.putValue(Action.SMALL_ICON, img.prefGrey());
+    groupPrefsAction.withIcon(KuneIcon.SETTINGS);
     prefsItem = new ButtonDescriptor(groupPrefsAction);
     prefsItem.withStyles(ActionStyles.BTN_NO_BACK_NO_BORDER);
     // k-noborder,
@@ -172,7 +167,7 @@ public class GroupOptionsPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView
    * ()
@@ -184,7 +179,7 @@ public class GroupOptionsPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -209,7 +204,7 @@ public class GroupOptionsPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.GroupOptions#show(java.lang.String)
    */
   @Override
@@ -221,7 +216,7 @@ public class GroupOptionsPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.GroupOptions#showTooltip()
    */
   @Override

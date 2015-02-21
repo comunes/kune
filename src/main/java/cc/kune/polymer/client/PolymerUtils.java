@@ -27,9 +27,19 @@ import static cc.kune.polymer.client.Layout.*;
 import br.com.rpa.client._paperelements.PaperFab;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
 
 public class PolymerUtils {
+
+  public static Timer hideInboxTimer = new Timer() {
+    @Override
+    public void run() {
+      PolymerUtils.setMainSelected();
+      PolymerUtils.setNarrowVisible(false);
+    }
+  };
+
   private static PaperFab inboxShowHide = PaperFab.wrap(PolymerId.INBOX_SHOW_HIDE.getId());
 
   public static void addFlexHorLayout(final Widget... widgets) {
@@ -52,9 +62,21 @@ public class PolymerUtils {
     }
   }
 
+  public static void addLayout(final Widget widget, final Layout... layouts) {
+    addLayout(widget.getElement(), layouts);
+  }
+
   public native static String getMainSelected() /*-{
 		return $wnd.kt.main_selected;
   }-*/;
+
+  public static void hideInboxCancel() {
+    hideInboxTimer.cancel();
+  }
+
+  public static void hideInboxWithDelay() {
+    hideInboxTimer.schedule(PolymerUtils.isMainDrawerNarrow() ? 0 : 4000);
+  }
 
   public native static boolean isMainDrawerNarrow() /*-{
 		return $wnd.kt.main_narrow;
