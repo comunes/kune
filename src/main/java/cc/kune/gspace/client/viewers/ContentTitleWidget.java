@@ -105,7 +105,11 @@ public class ContentTitleWidget extends Composite {
   public HasEditHandler getEditableTitle() {
     return editableTitle;
   }
-
+  
+  public EditableLabel getEditableLabel() {
+    return editableTitle;
+  }
+  
   /**
    * Highlight title.
    */

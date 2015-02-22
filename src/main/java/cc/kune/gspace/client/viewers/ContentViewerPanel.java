@@ -26,6 +26,7 @@ import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.client.ui.HasEditHandler;
 import cc.kune.common.client.ui.UiUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -121,6 +122,8 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
     this.editToolbar = editToolbar;
     widget = uiBinder.createAndBindUi(this);
     contentTitle = new ContentTitleWidget(i18n, gsArmor, capabilitiesRegistry.getIconsRegistry());
+    EditableLabel dummyEditLabel = new EditableLabel();
+    super.setEditableTitle(dummyEditLabel);
   }
 
   /*

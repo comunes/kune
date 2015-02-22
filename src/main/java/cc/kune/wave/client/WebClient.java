@@ -26,7 +26,6 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 import org.waveprotocol.box.webclient.client.ClientIdGenerator;
-import org.waveprotocol.box.webclient.client.DebugMessagePanel;
 import org.waveprotocol.box.webclient.client.HistoryProvider;
 import org.waveprotocol.box.webclient.client.HistorySupport;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
@@ -39,15 +38,14 @@ import org.waveprotocol.box.webclient.search.SearchPanelWidget;
 import org.waveprotocol.box.webclient.search.SearchPresenter;
 import org.waveprotocol.box.webclient.search.SimpleSearch;
 import org.waveprotocol.box.webclient.search.WaveStore;
-import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.box.webclient.widget.loading.LoadingIndicator;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
-import org.waveprotocol.wave.client.debug.logger.LogLevel;
 import org.waveprotocol.wave.client.doodad.attachment.AttachmentManagerImpl;
 import org.waveprotocol.wave.client.doodad.attachment.AttachmentManagerProvider;
+import org.waveprotocol.wave.client.editor.extract.Repairer;
 import org.waveprotocol.wave.client.events.ClientEvents;
 import org.waveprotocol.wave.client.events.Log;
 import org.waveprotocol.wave.client.events.NetworkStatusEvent;
@@ -56,6 +54,7 @@ import org.waveprotocol.wave.client.events.WaveCreationEvent;
 import org.waveprotocol.wave.client.events.WaveCreationEventHandler;
 import org.waveprotocol.wave.client.events.WaveSelectionEvent;
 import org.waveprotocol.wave.client.events.WaveSelectionEventHandler;
+import org.waveprotocol.wave.client.wavepanel.view.dom.full.ViewFactories;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 import org.waveprotocol.wave.client.widget.popup.CenterPopupPositioner;
 import org.waveprotocol.wave.client.widget.popup.PopupChrome;
@@ -72,13 +71,16 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 import br.com.rpa.client._paperelements.PaperFab;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
+import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
@@ -103,10 +105,8 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.query.client.GQuery;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -114,10 +114,8 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -135,7 +133,7 @@ public class WebClient extends Composite implements WaveClientView {
   /**
    * The Interface Binder.
    *   */
-  interface Binder extends UiBinder<DockLayoutPanel, WebClient> {
+  interface Binder extends UiBinder<FlowPanel, WebClient> {
   }
 
   /**
@@ -305,10 +303,6 @@ public class WebClient extends Composite implements WaveClientView {
     return popup;
   }
 
-  /** The bottom bar. */
-  @UiField
-  SimplePanel bottomBar;
-
 
   /** The channel. */
   private RemoteViewServiceMultiplexer channel;
@@ -334,16 +328,8 @@ public class WebClient extends Composite implements WaveClientView {
   /** The logged in user. */
   private ParticipantId loggedInUser;
 
-  /** The log panel. */
-  @UiField
-  DebugMessagePanel logPanel;
-
   /** The profiles. */
   private final ProfileManager profiles;
-
-  /** The right panel. */
-  @UiField
-  DockLayoutPanel rightPanel;
 
   private SimpleSearch search;
 
@@ -364,8 +350,11 @@ public class WebClient extends Composite implements WaveClientView {
 
   /** The wave frame. */
   @UiField
-  FramedPanel waveFrame;
+  EditableLabel title;
 
+  @UiField
+  FlowPanel flow;
+  
   @UiField  
   ImplPanel waveHolder;
 
@@ -402,7 +391,7 @@ public class WebClient extends Composite implements WaveClientView {
       final cc.kune.core.client.state.Session kuneSession, StateManager stateManager,
       final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, 
       final Provider<AurorisColorPicker> colorPicker, final GSpaceArmor armor, 
-      CustomEditToolbar customEditToolbar, final KuneDragController dragController) {
+      CustomEditToolbar customEditToolbar, final KuneDragController dragController, ClientFileDownloadUtils downUtils, CoreResources res) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.kuneSession = kuneSession;
@@ -411,7 +400,7 @@ public class WebClient extends Composite implements WaveClientView {
     this.contentService = contentService;
     this.colorPicker = colorPicker;
     this.customEditToolbar = customEditToolbar;
-    searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles), dragController);
+    searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles), dragController, downUtils, res, armor);
     ErrorHandler.install();
     eventBus.addHandler(StackErrorEvent.getType(), new StackErrorEvent.StackErrorHandler() {
       @Override
@@ -472,10 +461,6 @@ public class WebClient extends Composite implements WaveClientView {
     eventBus.fireEvent(new OnWaveClientStartEvent(this));
   }
 
-  @Override
-  public void addToBottonBar(final IsWidget widget) {
-    bottomBar.add(widget);
-  }
 
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#clear()
@@ -549,16 +534,6 @@ public class WebClient extends Composite implements WaveClientView {
 		return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
 				+ $wnd.__websocket_address + "/";
   }-*/;
-
-  /**
-   * Hide bottom toolbar.
-   */
-  @Override
-  public void hideBottomToolbar() {
-    rightPanel.setWidgetSize(bottomBar, 0);
-    bottomBar.getParent().getElement().getStyle().setBottom(0d, Unit.PX);
-  }
-
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#login()
    */
@@ -662,11 +637,11 @@ public class WebClient extends Composite implements WaveClientView {
             eventBus.fireEvent(new BeforeOpenWaveEvent(waveUri));;
 
             // Release the display:none.
-            UIObject.setVisible(waveFrame.getElement(), true);
+            UIObject.setVisible(flow.getElement(), true);
             waveHolder.getElement().appendChild(loading);
             final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
             final CustomStagesProvider wave = new CustomStagesProvider(
-                holder, waveUnsavedIndicator, waveHolder, waveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus, colorPicker,customEditToolbar);
+                holder, waveUnsavedIndicator, waveHolder, title, waveRef, channel, idGenerator, profiles, waveStore, isNewWave, Session.get().getDomain(), participants, eventBus, colorPicker,customEditToolbar, ViewFactories.FIXED);
             WebClient.this.wave = wave;
 
             wave.load(new Command() {
@@ -783,25 +758,30 @@ public class WebClient extends Composite implements WaveClientView {
    */
   private void setupUi() {
     // Set up UI
-    final DockLayoutPanel self = BINDER.createAndBindUi(this);
+    final FlowPanel self = BINDER.createAndBindUi(this);
     // kune-patch
     // RootPanel.get("app").add(self);
     InitialsResources.INS.css().ensureInjected();
     initWidget(self);    
-
+    
+    // For dev purposes (disabled in kune)
+    Repairer.debugRepairIsFatal=false;
+    
     // FIXME Dirty workaround while we improve the Wave integration
+    /*
     $(".org-waveprotocol-wave-client-widget-toolbar-ToplevelToolbarWidget-Css-toolbar").hide();
-    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-north").hide();
+    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-north").hide(); */
     $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-search").hide();
     $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-toolbar").hide();
-    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-east").hide();
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-list").css("top", "0px");
+    /* $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-east").hide();
     $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-northEast").hide();
     $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-northWest").hide();
     $(".org-waveprotocol-wave-client-wavepanel-view-dom-full-ParticipantsViewBuilder-Css-extra").css("paddingTop", "17px");
-    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-list").css("top", "0px");
     final GQuery container = $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-contentContainer");
     container.css("right","0px");
-    container.css("top","0px");
+    container.css("top","0px"); */
+    
     //container.css("backgroundColor", "transparent");
     //$(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-self").css("backgroundColor", "transparent");
     // DockLayoutPanel forcibly conflicts with sensible layout control, and
@@ -826,12 +806,6 @@ public class WebClient extends Composite implements WaveClientView {
       }
     });
 
-    if (LogLevel.showDebug()) {
-      logPanel.enable();
-    } else {
-      logPanel.removeFromParent();
-    }
-
     setupSearchPanel();
     setupWavePanel();
   }
@@ -841,7 +815,7 @@ public class WebClient extends Composite implements WaveClientView {
    */
   private void setupWavePanel() {
     // Hide the frame until waves start getting opened.
-    UIObject.setVisible(waveFrame.getElement(), false);
+    UIObject.setVisible(flow.getElement(), false);
 
     // Handles opening waves.
     ClientEvents.get().addWaveSelectionEventHandler(new WaveSelectionEventHandler() {
@@ -850,12 +824,6 @@ public class WebClient extends Composite implements WaveClientView {
         openWave(waveRef, false, null);
       }
     });
-  }
-
-  @Override
-  public void showBottomToolbar() {
-    rightPanel.setWidgetSize(bottomBar, 26);
-    bottomBar.getParent().getElement().getStyle().setBottom(12d, Unit.PX);
   }
 
   /**

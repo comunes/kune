@@ -26,8 +26,8 @@ import org.waveprotocol.box.webclient.client.ClientIdGenerator;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
 import org.waveprotocol.box.webclient.search.WaveStore;
-import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.client.account.ProfileManager;
+import org.waveprotocol.wave.client.wavepanel.view.dom.full.ViewFactories;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
 import org.waveprotocol.wave.model.id.IdGenerator;
 import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
@@ -36,6 +36,7 @@ import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.shared.dto.StateContentDTO;
@@ -82,8 +83,6 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
   @UiField
   public DeckPanel deck;
 
-  /** The dummy wave frame. */
-  private FramedPanel dummyWaveFrame;
 
   /** The event bus. */
   private final EventBus eventBus;
@@ -123,6 +122,12 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
   /** The widget. */
   protected Widget widget;
 
+  private EditableLabel editableTitle;
+
+  public void setEditableTitle(EditableLabel editableTitle) {
+    this.editableTitle = editableTitle;
+  }
+  
   /**
    * Instantiates a new content viewer panel.
    *
@@ -153,6 +158,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.colorPicker = colorPicker;
     this.customEditToolbar = customEditToolbar;
+    this.editableTitle = editableTitle;
     // widget = uiBinder.createAndBindUi(this);
     eventBus.addHandler(WaveClientClearEvent.getType(),
         new WaveClientClearEvent.WaveClientClearHandler() {
@@ -233,7 +239,6 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
       Log.info("Channel is null so, will create wave in ContentViewerPanel");
       final WaveClientView webClient = waveClientProv.get();
       loading = webClient.getLoading();
-      dummyWaveFrame = new FramedPanel();
       channel = webClient.getChannel();
       profiles = webClient.getProfiles();
       idGenerator = ClientIdGenerator.create();
@@ -296,9 +301,9 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
         waveHolder.getElement().appendChild(loading);
         final Element holder = waveHolder.getElement().appendChild(Document.get().createDivElement());
         final CustomStagesProvider wave = new CustomStagesProvider(holder, waveUnsavedIndicator,
-            waveHolder, dummyWaveFrame, waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
+            waveHolder, editableTitle, waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
             org.waveprotocol.box.webclient.client.Session.get().getDomain(), null, eventBus,
-            colorPicker, customEditToolbar);
+            colorPicker, customEditToolbar, ViewFactories.FLOW);
         this.wave = wave;
         wave.load(new Command() {
           @Override

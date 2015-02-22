@@ -54,8 +54,8 @@ public final class FileConstants {
   /** The Constant GROUP_LOGO_FIELD. */
   public final static String GROUP_LOGO_FIELD = "k-glogov-ff";
 
-  /** The Constant GROUP_NO_AVATAR_IMAGE. */
-  public static final String GROUP_NO_AVATAR_IMAGE = "others/defgroup.gif";
+  /** The Constant GROUP_NO_AVATAR_IMAGE. (previously a gif) */
+  public static final String GROUP_NO_AVATAR_IMAGE = "others/defgroup.png";
 
   /** The Constant HASH. */
   public final static String HASH = "hash";
@@ -88,6 +88,9 @@ public final class FileConstants {
   /** The Constant TOKEN. */
   public final static String TOKEN = "token";
 
+  /** The Constant WHITE_PIXEL. */
+  public final static String TRANSPARENT_PIXEL = "/others/clear.png";
+
   /** The Constant TUTORIALS_PREFIX. */
   public final static String TUTORIALS_PREFIX = "/tutorials/";
 
@@ -96,6 +99,8 @@ public final class FileConstants {
 
   /** The Constant USER_LOGO_FIELD. */
   public final static String USER_LOGO_FIELD = "k-ulogov-ff";
+
+  public final static String WAVE_URI = "waveUri";
 
   /** The Constant WHITE_PIXEL. */
   public final static String WHITE_PIXEL = "/others/white.png";

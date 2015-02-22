@@ -49,7 +49,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class FinderServiceDefault.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -73,7 +73,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Instantiates a new finder service default.
-   * 
+   *
    * @param groupManager
    *          the group manager
    * @param containerManager
@@ -98,7 +98,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Check and parse.
-   * 
+   *
    * @param s
    *          the s
    * @return the long
@@ -118,7 +118,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Check folder id.
-   * 
+   *
    * @param folderId
    *          the folder id
    * @param container
@@ -132,7 +132,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Check group.
-   * 
+   *
    * @param groupName
    *          the group name
    * @param container
@@ -146,7 +146,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Check tool.
-   * 
+   *
    * @param toolName
    *          the tool name
    * @param container
@@ -160,7 +160,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Find by content reference.
-   * 
+   *
    * @param groupName
    *          the group name
    * @param toolName
@@ -190,7 +190,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Find by folder reference.
-   * 
+   *
    * @param groupName
    *          the group name
    * @param toolName
@@ -215,7 +215,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.access.FinderService#findByRootOnGroup(java.lang.String
    * , java.lang.String)
@@ -237,7 +237,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Find default content of group.
-   * 
+   *
    * @param group
    *          the group
    * @return the content
@@ -253,7 +253,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Find default content of group.
-   * 
+   *
    * @param groupName
    *          the group name
    * @return the content
@@ -267,7 +267,7 @@ public class FinderServiceDefault implements FinderService {
 
   /**
    * Generate folder fake content.
-   * 
+   *
    * @param container
    *          the container
    * @return the content
@@ -280,7 +280,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.access.FinderService#getContainer(java.lang.Long)
    */
   @Override
@@ -290,7 +290,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.access.FinderService#getContainer(java.lang.String)
    */
@@ -301,19 +301,21 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.access.FinderService#getContainerByWaveRef(java.lang
    * .String)
    */
   @Override
   public Content getContainerByWaveRef(final String waveRef) {
-    return contentFinder.findByWaveId(waveRef);
+    // FIXME get this from a wave constant
+    final String root = "/~/conv+root";
+    return contentFinder.findByWaveId(waveRef.endsWith("/~/conv+root") ? waveRef : waveRef + root);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.access.FinderService#getContent(java.lang.Long)
    */
   @Override
@@ -327,7 +329,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.access.FinderService#getContent(java.lang.String)
    */
   @Override
@@ -337,7 +339,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.access.FinderService#getContentOrDefContent(cc.kune
    * .core.shared.domain.utils.StateToken, cc.kune.domain.Group)
@@ -367,7 +369,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.access.FinderService#getFolder(java.lang.Long)
    */
   @Override
@@ -381,7 +383,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.access.FinderService#getRate(cc.kune.domain.User,
    * cc.kune.domain.Content)
    */
@@ -392,7 +394,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.access.FinderService#getRateAvg(cc.kune.domain.Content)
    */
@@ -404,7 +406,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.access.FinderService#getRateByUsers(cc.kune.domain.
    * Content)

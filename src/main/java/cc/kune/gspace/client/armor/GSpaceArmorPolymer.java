@@ -300,7 +300,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public ForIsWidget getUserSpace() {
-    return wrapDiv(USER_SPACE);
+    return wrapDiv(USER_SPACE_CONTENT);
   }
 
   @Override

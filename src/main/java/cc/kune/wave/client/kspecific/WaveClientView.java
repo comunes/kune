@@ -40,8 +40,6 @@ import com.google.gwt.user.client.ui.IsWidget;
  */
 public interface WaveClientView extends IsWidget {
 
-  void addToBottonBar(IsWidget widget);
-
   /**
    * Clear.
    */
@@ -88,8 +86,6 @@ public interface WaveClientView extends IsWidget {
    */
   WaveWebSocketClient getWebSocket();
 
-  void hideBottomToolbar();
-
   /**
    * Login.
    */
@@ -99,7 +95,5 @@ public interface WaveClientView extends IsWidget {
    * Logout.
    */
   void logout();
-
-  void showBottomToolbar();
 
 }

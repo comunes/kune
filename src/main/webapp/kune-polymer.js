@@ -13,7 +13,7 @@ function setContentMinHeight() {
 }
 
 /* The initial space (0: for home, 2: for group space) useful during tests */
-kt.spaceselected=2;
+kt.spaceselected=0;
 
 /* Screen sizes (inspired in bootstrap) */
 kt.screenlg=1200;

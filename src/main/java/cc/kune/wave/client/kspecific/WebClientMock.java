@@ -52,27 +52,6 @@ public class WebClientMock extends Composite implements WaveClientView {
     initWidget(new Label(MOCK_MSG));
   }
 
-  @Override
-  public void addToBottonBar(final IsWidget widget) {
-    // TODO Auto-generated method stub
-
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.wave.client.kspecific.WaveClientView#clear()
-   */
-  @Override
-  public void clear() {
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
-   * @see cc.kune.wave.client.kspecific.WaveClientView#getChannel()
-   */
-  @Override
   public RemoteViewServiceMultiplexer getChannel() {
     return null;
   }
@@ -99,7 +78,6 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   @Override
   public SimpleSearch getSearch() {
-    // TODO Auto-generated method stub
     return null;
   }
 
@@ -124,11 +102,6 @@ public class WebClientMock extends Composite implements WaveClientView {
     return null;
   }
 
-  @Override
-  public void hideBottomToolbar() {
-    // TODO Auto-generated method stub
-
-  }
 
   /*
    * (non-Javadoc)
@@ -149,9 +122,7 @@ public class WebClientMock extends Composite implements WaveClientView {
   }
 
   @Override
-  public void showBottomToolbar() {
-    // TODO Auto-generated method stub
-
+  public void clear() {
   }
 
 }

@@ -29,6 +29,8 @@ import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
+import com.google.gwt.http.client.URL;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class SharedFileDownloadUtils.
@@ -73,6 +75,12 @@ public abstract class SharedFileDownloadUtils {
             group.getLogoLastModifiedTime().toString())
             : group.isPersonal() ? getLogoImageUrl(group.getShortName()) : "/"
                 + FileConstants.GROUP_NO_AVATAR_IMAGE);
+  }
+
+  public String getGroupLogoFromWaveUri(final String fromWaveUri) {
+    return prefix
+        + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.WAVE_URI,
+            URL.encodeQueryString(fromWaveUri)), new UrlParam(FileConstants.ONLY_USERS, false)).toString();
   }
 
   /**

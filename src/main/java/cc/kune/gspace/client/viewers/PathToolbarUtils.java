@@ -115,7 +115,7 @@ public class PathToolbarUtils {
     final String tooltip = group.getLongName();
     final GotoTokenAction action = new GotoTokenAction(null,
         showGroupName ? group.getShortName() : null, tooltip, group.getStateToken(), style,
-            stateManager, eventBus, false);
+        stateManager, eventBus, false);
     final ToolbarItemDescriptor btn = new ToolbarItemDescriptor(action);
     // btn.withIcon(iconsRegistry.getContentTypeIcon(WikiToolConstants.TYPE_FOLDER));
 
@@ -191,11 +191,11 @@ public class PathToolbarUtils {
         final ToolbarItemDescriptor btn = createPathButton(item, pathLength, i, isTheLastAndTheExtra,
             withDrop, hasExtra);
         if (withDrop) {
-          if (isNotTheLast) {
-            final FolderContainerDropController dropTarget = dropController.get();
-            dropTarget.setTarget(item.getStateToken());
-            btn.setDropTarget(dropTarget);
-          }
+          // if (isNotTheLast) { Now we allow aslo for inbox drags
+          final FolderContainerDropController dropTarget = dropController.get();
+          dropTarget.setTarget(item.getStateToken());
+          btn.setDropTarget(dropTarget);
+          // }
         }
         actions.add(btn);
         // We add a small arrow between buttons

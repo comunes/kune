@@ -65,6 +65,7 @@ import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
 
 import com.google.gwt.core.client.GWT;
@@ -116,13 +117,13 @@ public class CustomStagesProvider extends Stages {
   private StageTwo two;
   private WaveContext wave;
 
-  private final FramedPanel waveFrame;
-
   private final Element wavePanelElement;
 
   private final WaveRef waveRef;
   private final WaveStore waveStore;
   private final CustomSavedStateIndicator waveUnsavedIndicator;
+  private EditableLabel editableTitle;
+  private ViewFactory viewFactory;
 
   /**
    * @param wavePanelElement the DOM element to become the wave panel.
@@ -139,12 +140,12 @@ public class CustomStagesProvider extends Stages {
    *                     if only the creator should be added
    */
   public CustomStagesProvider(final Element wavePanelElement, final CustomSavedStateIndicator waveUnsavedIndicator,
-      final LogicalPanel rootPanel, final FramedPanel waveFrame, final WaveRef waveRef, final RemoteViewServiceMultiplexer channel,
+      final LogicalPanel rootPanel, final EditableLabel editableTitle, final WaveRef waveRef, final RemoteViewServiceMultiplexer channel,
       final IdGenerator idGenerator, final ProfileManager profiles, final WaveStore store, final boolean isNewWave,
-      final String localDomain, final Set<ParticipantId> participants, final EventBus eventBus, final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar) {
+      final String localDomain, final Set<ParticipantId> participants, final EventBus eventBus, final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar, ViewFactory viewFactory) {
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.wavePanelElement = wavePanelElement;
-    this.waveFrame = waveFrame;
+    this.editableTitle = editableTitle;
     this.rootPanel = rootPanel;
     this.waveRef = waveRef;
     this.channel = channel;
@@ -157,6 +158,7 @@ public class CustomStagesProvider extends Stages {
     this.eventBus = eventBus;
     this.colorPicker = colorPicker;
     this.customEditToolbar = customEditToolbar;
+    this.viewFactory = viewFactory;
   }
 
   @Override
@@ -234,7 +236,7 @@ public class CustomStagesProvider extends Stages {
     return haltIfClosed(new StageTwoProvider(this.one = one, waveRef, channel, isNewWave,
         idGenerator, profiles, waveUnsavedIndicator, participants) { @Override
       protected ViewFactory createViewFactories() {
-          return ViewFactories.FLOW;
+          return viewFactory;
         }});
   };
 
@@ -312,7 +314,7 @@ public class CustomStagesProvider extends Stages {
    * A hook to install features that are not dependent an a certain stage.
    */
   protected void install() {
-    CustomWindowTitleHandler.install(waveStore, waveFrame);
+    CustomWindowTitleHandler.install(waveStore, editableTitle);
   }
 
 

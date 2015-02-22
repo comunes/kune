@@ -79,7 +79,7 @@ public class AbstractSNPanel extends ViewImpl {
   private final static String CATEG_HEIGHT = "86px";
 
   /** The Constant CATEG_MIN_HEIGHT. */
-  private final static String CATEG_MIN_HEIGHT = "57px";
+  private final static String CATEG_MIN_HEIGHT = "58px";
 
   /** The ui binder. */
   private static AbstractSNPanelUiBinder uiBinder = GWT.create(AbstractSNPanelUiBinder.class);
@@ -222,7 +222,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override

@@ -168,21 +168,6 @@ public class SpaceSelectorPresenter extends
      */
     void setWindowTitle(String title);
 
-    /**
-     * Show group space tooltip.
-     */
-    void showGroupSpaceTooltip();
-
-    /**
-     * Show home space tooltip.
-     */
-    void showHomeSpaceTooltip();
-
-    /**
-     * Show user space tooltip.
-     */
-    void showUserSpaceTooltip();
-
   }
 
   /** The armor. */
@@ -352,22 +337,12 @@ public class SpaceSelectorPresenter extends
 
   }
 
-  /**
-   * On app start.
-   *
-   * @param event
-   *          the event
-   */
-  @ProxyEvent
-  public void onAppStart(final AppStartEvent event) {
-    showTooltipWithDelay();
-  }
 
   /**
    * On group btn click.
    */
   private void onGroupBtnClick() {
-    PolymerUtils.hideInboxWithDelay();
+    // PolymerUtils.hideInboxWithDelay();
     if (groupToken.equals(SiteTokens.GROUP_HOME)) {
       // as current home is equal to "no content" token, we shall go to
       // group space def home page
@@ -496,7 +471,7 @@ public class SpaceSelectorPresenter extends
    * On user btn click.
    */
   private void onUserBtnClick() {
-    PolymerUtils.hideInboxCancel();
+    // PolymerUtils.hideInboxCancel();
     signIn.get().setGotoTokenOnCancel(stateManager.getCurrentToken());
     restoreToken(inboxToken);
     if (session.isLogged()) {
@@ -525,7 +500,7 @@ public class SpaceSelectorPresenter extends
    *          the should restore token
    */
   private void onUserSpaceSelect(final boolean shouldRestoreToken) {
-    PolymerUtils.hideInboxCancel();
+    // PolymerUtils.hideInboxCancel();
     if (session.isLogged()) {
       restoreToken(shouldRestoreToken, inboxToken);
       armor.selectUserSpace();
@@ -598,40 +573,5 @@ public class SpaceSelectorPresenter extends
       getView().setGroupBtnActive(true);
       break;
     }
-  }
-
-  /**
-   * Show tooltip now.
-   */
-  private void showTooltipNow() {
-    if (currentSpace != null) {
-      switch (currentSpace) {
-      case homeSpace:
-      default:
-        getView().showHomeSpaceTooltip();
-        getView().blinkHomeBtn();
-        break;
-      case userSpace:
-        getView().showUserSpaceTooltip();
-        getView().blinkUserBtn();
-        break;
-      case groupSpace:
-        getView().showGroupSpaceTooltip();
-        getView().blinkGroupBtn();
-        break;
-      }
-    }
-  }
-
-  /**
-   * Show tooltip with delay.
-   */
-  protected void showTooltipWithDelay() {
-    new Timer() {
-      @Override
-      public void run() {
-        showTooltipNow();
-      }
-    }.schedule(200);
   }
 }

@@ -33,7 +33,11 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.uibuilder.BuilderHelper;
 
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.dnd.KuneDragController;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.core.client.state.SessionInstance;
 import cc.kune.initials.AvatarComposite;
 import cc.kune.initials.AvatarCompositeFactory;
 import cc.kune.initials.InitialLabel;
@@ -42,6 +46,8 @@ import cc.kune.polymer.client.PolymerUtils;
 import com.allen_sauer.gwt.dnd.client.HasDragHandle;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.LoadEvent;
+import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -95,6 +101,10 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   @UiField
   FlowPanel avatarsDiv;
   private final SearchPanelWidget container;
+  private final ClientFileDownloadUtils downUtils;
+  
+  @UiField
+  Image groupAvatar;
   @UiField
   Element main;
   @UiField
@@ -112,27 +122,46 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   InlineLabel time;
   @UiField
   InlineLabel title;
+
   @UiField
   FlowPanel unreadDiv;
 
-  public CustomDigestDomImpl(final SearchPanelWidget container, final KuneDragController dragController) {
+  private String waveUri;
+
+  private final CoreResources res;
+  private Tooltip tooltip;
+
+  public CustomDigestDomImpl(final SearchPanelWidget container, final KuneDragController dragController, final ClientFileDownloadUtils downUtils, CoreResources res) {
     this.container = container;
+    this.downUtils = downUtils;
+    this.res = res;
 
     initWidget(BINDER.createAndBindUi(this));
     self = this.getElement();
     self.setAttribute(BuilderHelper.KIND_ATTRIBUTE, "digest");
     self.setAttribute(DIGEST_ID_ATTRIBUTE, "D" + idCounter++);
-
+    
     PolymerUtils.addLayout(main, HORIZONTAL, LAYOUT, FLEX);
     PolymerUtils.addLayout(mainLeft, VERTICAL, LAYOUT);
     PolymerUtils.addLayout(mainRight, VERTICAL, LAYOUT, FLEX);
-
     PolymerUtils.addLayout(avatarsAndUnreadDiv, VERTICAL, LAYOUT);
-    PolymerUtils.addLayout(avatarsDiv, HORIZONTAL, LAYOUT);
+    PolymerUtils.addLayout(avatarsDiv, HORIZONTAL, JUSTIFIED, LAYOUT);
+    tooltip = Tooltip.to(this, "");
+    groupAvatar.addLoadHandler(new LoadHandler() {
 
-    // FIXME if not in groups make it draggable
-    dragController.makeDraggable(this, title);
-    dragController.makeDraggable(this, snippet);
+      @Override
+      public void onLoad(LoadEvent event) {
+        if (groupAvatar.getWidth() == 1) {
+          // If the server loads an avatar, is already published in a group.
+          // if not, the servelt returns a 1x1 transparent pixel, so the wave can be dragged to a folder publish it.
+          dragController.makeDraggable(CustomDigestDomImpl.this, title);
+          dragController.makeDraggable(CustomDigestDomImpl.this, snippet);
+          if (SessionInstance.get().isNewbie())
+            tooltip.setText(I18n.t("Drag and drop into a group or personal folder to publish"));
+        }        
+        groupAvatar.setSize("41px","41px");
+      }
+    });
   }
 
   @Override
@@ -147,6 +176,10 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
 
   String getId() {
     return getElement().getAttribute(DIGEST_ID_ATTRIBUTE);
+  }
+
+  public String getWaveUri() {
+    return waveUri;
   }
 
   @Override
@@ -177,9 +210,12 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     title.setText("");
     snippet.setText("");
     time.setText("");
-    avatarsDiv.clear();
+    // remove avatars
+    groupAvatar.setResource(res.clear());
+    avatarsDiv.remove(0);
     msgs.setText("");
     self.removeClassName("k-digest-selected");
+    tooltip.setText("");
     setVisible(false);
   }
 
@@ -203,7 +239,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     }
     final AvatarComposite composite = AvatarCompositeFactory.get40().build(names);
     composite.addStyleName("k-digest-avatar");
-    avatarsDiv.add(composite);
+    avatarsDiv.insert(composite,0);
   }
 
   @Override
@@ -228,13 +264,16 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   @Override
   public void setTimestamp(final String text) {
     time.setText(text);
-    // Rendering
-    setVisible(true);
   }
 
   @Override
   public void setTitleText(final String text) {
     title.setText(text);
+  }
+
+  public void setWaveUri(final String waveUri) {
+    this.waveUri = waveUri;
+    groupAvatar.setUrl(downUtils.getGroupLogoFromWaveUri(waveUri));
   }
 
 

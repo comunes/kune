@@ -22,6 +22,7 @@
  */
 package cc.kune.embed.client.panels;
 
+import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.embed.client.EmbedHelper;
 import cc.kune.embed.client.conf.EmbedConfiguration;
@@ -83,8 +84,9 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
   @Inject
   public EmbedPanel(final WaveClientProvider waveClient, final EventBus eventBus,
       final CustomSavedStateIndicator waveUnsavedIndicator,
-      final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar) {
+      final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar, EditableLabel editableTitle) {
     super(waveClient, eventBus, waveUnsavedIndicator, colorPicker, customEditToolbar);
+    super.setEditableTitle(editableTitle);
     widget = uiBinder.createAndBindUi(this);
   }
 

@@ -1,4 +1,5 @@
 // @formatter:off
+
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -20,6 +21,7 @@
 
 package org.waveprotocol.box.webclient.search;
 
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.client.common.util.LinkedSequence;
 import org.waveprotocol.wave.client.uibuilder.BuilderHelper;
@@ -27,16 +29,28 @@ import org.waveprotocol.wave.client.widget.common.ImplPanel;
 import org.waveprotocol.wave.client.widget.toolbar.ToplevelToolbarWidget;
 import org.waveprotocol.wave.model.util.CollectionUtils;
 import org.waveprotocol.wave.model.util.StringMap;
+import org.waveprotocol.wave.model.waveref.WaveRef;
+import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.ui.WrappedFlowPanel;
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.dnd.KuneDragController;
+import cc.kune.core.client.resources.CoreResources;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.gspace.client.armor.GSpaceArmor;
+import cc.kune.polymer.client.PolymerId;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.common.base.Preconditions;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
+import com.google.gwt.event.dom.client.DragEvent;
 import com.google.gwt.event.dom.client.MouseEvent;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
@@ -48,6 +62,8 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.FocusPanel;
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -57,7 +73,7 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class SearchPanelWidget extends Composite implements SearchPanelView {
 
-  interface Binder extends UiBinder<FramedPanel, SearchPanelWidget> {
+  interface Binder extends UiBinder<FocusPanel, SearchPanelWidget> {
   }
 
   interface Css extends CssResource {
@@ -72,21 +88,21 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     String toolbar();
   }
 
+
   /**
    * Positioning constants for components of this panel.
    */
-// @formatter:off
   static class CssConstants {
     private static int SEARCH_HEIGHT_PX = 51; // To match wave panel.
-    private static int TOOLBAR_TOP_PX = 0 + SEARCH_HEIGHT_PX;
-    static String TOOLBAR_TOP = TOOLBAR_TOP_PX + "px";
     private static int TOOLBAR_HEIGHT_PX =
         SearchPanelResourceLoader.getPanel().emptyToolbar().getHeight();
+    private static int TOOLBAR_TOP_PX = 0 + SEARCH_HEIGHT_PX;
     private static int LIST_TOP_PX = TOOLBAR_TOP_PX + TOOLBAR_HEIGHT_PX;
-    static String LIST_TOP = LIST_TOP_PX + "px";
+
     // CSS constants exported to .css files
     static String SEARCH_HEIGHT = SEARCH_HEIGHT_PX + "px";
-
+    static String TOOLBAR_TOP = TOOLBAR_TOP_PX + "px";
+    static String LIST_TOP = LIST_TOP_PX + "px";
   }
 
   /** Resources used by this widget. */
@@ -113,33 +129,59 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
       new ToppingUpPool.Factory<CustomDigestDomImpl>() {
         @Override
         public CustomDigestDomImpl create() {
-          final CustomDigestDomImpl digest = new CustomDigestDomImpl(SearchPanelWidget.this, dragController);
+          final CustomDigestDomImpl digest = new CustomDigestDomImpl(SearchPanelWidget.this, dragController, downUtils, res);
           return digest;
         }
       }, 20);
   private final LinkedSequence<CustomDigestDomImpl> digests = LinkedSequence.create();
-  private final FramedPanel frame;
+  private final ClientFileDownloadUtils downUtils;
+  private final KuneDragController dragController;
+  private final FocusPanel frame;
   @UiField
   FlowPanel list;
   private Listener listener;
   private final SearchPanelRenderer renderer;
   @UiField
   SearchWidget search;
+
   @UiField
   ImplPanel self;
+
   @UiField
-  FlowPanel showMore;
+  CustomButton showMore;
 
   @UiField
   ToplevelToolbarWidget toolbar;
+  
+  @UiField
+  FocusPanel focus;
+  
+  private final CoreResources res;
 
-  private final KuneDragController dragController;
+  private WrappedFlowPanel inboxTitleFlow;
 
-  public SearchPanelWidget(final SearchPanelRenderer renderer, final KuneDragController dragController) {
+  private InlineLabel inboxTitle;
+
+  public SearchPanelWidget(final SearchPanelRenderer renderer, final KuneDragController dragController, final ClientFileDownloadUtils downUtils, CoreResources res, GSpaceArmor armor) {
+    this.downUtils = downUtils;
     this.dragController = dragController;
+    this.res = res;
     initWidget(frame = BINDER.createAndBindUi(this));
     showMore.setVisible(false);
+    showMore.setText(I18n.t("Show more results"));
+    showMore.setIcon(KuneIcon.ADD);
+    showMore.addStyleName("btn-lg");
+    showMore.addStyleName("btn-block");
+    inboxTitleFlow = armor.wrapDiv(PolymerId.INBOX_TITLE);
+    inboxTitle = new InlineLabel(I18n.t("Inbox"));
+    inboxTitleFlow.add(inboxTitle);
     this.renderer = renderer;
+    showMore.addClickHandler(new ClickHandler() {     
+      @Override
+      public void onClick(ClickEvent event) {
+       handleShowMoreClicked();        
+      }
+    });
   }
 
   @Override
@@ -179,31 +221,24 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   public ToplevelToolbarWidget getToolbar() {
     return toolbar;
   }
-  @UiHandler("self")
-  void handleClick(final DoubleClickEvent e) {
+  
+  @UiHandler("focus")
+  void handleDrag(final DragEvent e) {
     final Element target = e.getNativeEvent().getEventTarget().cast();
-    Log.info("Double click in wave");
-    handleClicksEvent(e, target);
+    final Element top = self.getElement();
+    while (!top.equals(target)) {
+      if ("digest".equals(target.getAttribute(BuilderHelper.KIND_ATTRIBUTE))) {
+        NotifyUser.important("We start to drag");
+        e.stopPropagation();
+        return;
+      }
+    }
   }
-
+  
   @UiHandler("self")
   void handleClick(final ClickEvent e) {
     final Element target = e.getNativeEvent().getEventTarget().cast();
     handleClicksEvent(e, target);
-  }
-
-  private void handleClicksEvent(final MouseEvent e, Element target) {
-    final Element top = self.getElement();
-    while (!top.equals(target)) {
-      if ("digest".equals(target.getAttribute(BuilderHelper.KIND_ATTRIBUTE))) {
-        handleClick(byId.get(target.getAttribute(CustomDigestDomImpl.DIGEST_ID_ATTRIBUTE)));
-        e.stopPropagation();
-        return;
-      } else if (showMore.equals(target)) {
-        handleShowMoreClicked();
-      }
-      target = target.getParentElement();
-    }
   }
 
   private void handleClick(final CustomDigestDomImpl digestUi) {
@@ -215,6 +250,25 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
       if (listener != null) {
         listener.onClicked(digestUi);
       }
+    }
+  }
+
+  @UiHandler("self")
+  void handleClick(final DoubleClickEvent e) {
+    final Element target = e.getNativeEvent().getEventTarget().cast();
+    Log.info("Double click in wave");
+    handleClicksEvent(e, target);
+  }
+
+  private void handleClicksEvent(final MouseEvent e, Element target) {
+    final Element top = self.getElement();
+    while (!top.equals(target)) {
+      if ("digest".equals(target.getAttribute(BuilderHelper.KIND_ATTRIBUTE))) {
+        handleClick(byId.get(target.getAttribute(CustomDigestDomImpl.DIGEST_ID_ATTRIBUTE)));
+        e.stopPropagation();
+        return;
+      } 
+      target = target.getParentElement();
     }
   }
 
@@ -235,11 +289,12 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   public CustomDigestDomImpl insertAfter(final DigestView ref, final Digest digest) {
     final CustomDigestDomImpl digestUi = digestPool.get();
     renderer.render(digest, digestUi);
+    setWaveUri(digest, digestUi);
 
     final Widget refDomImpl =  narrow(ref);
     final Widget refElement = refDomImpl != null ? refDomImpl : showMore;
     byId.put(digestUi.getId(), digestUi);
-    int position = list.getWidgetIndex(refElement);
+    final int position = list.getWidgetIndex(refElement);
     if (!refElement.equals(showMore)) {
       digests.insertAfter((CustomDigestDomImpl) refDomImpl, digestUi);
       list.insert(digestUi, position + 1);
@@ -254,13 +309,14 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   public CustomDigestDomImpl insertBefore(final DigestView ref, final Digest digest) {
     final CustomDigestDomImpl digestUi = digestPool.get();
     renderer.render(digest, digestUi);
+    setWaveUri(digest, digestUi);
 
     final Widget refDomImpl = narrow(ref);
     final Widget refElement = refDomImpl != null ? refDomImpl : showMore;
-    int position = list.getWidgetIndex(refElement);
+    final int position = list.getWidgetIndex(refElement);
     byId.put(digestUi.getId(), digestUi);
     digests.insertBefore((CustomDigestDomImpl) refDomImpl, digestUi);
-    list.insert(digestUi, position);    
+    list.insert(digestUi, position);
 
     return digestUi;
   }
@@ -289,6 +345,14 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   @Override
   public void setTitleText(final String text) {
-    frame.setTitleText(text);
+    // Right now not used because the message is very geek (20 of unknown) 
+    // inboxTitle.setText(text);
+  }
+
+  private void setWaveUri(final Digest digest, final CustomDigestDomImpl digestUi) {
+    final String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(WaveRef.of(digest.getWaveId()));
+    digestUi.setWaveUri(waveUri);
+    // As we reuse the digest, we show it after rendered
+    digestUi.setVisible(true);
   }
 }

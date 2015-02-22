@@ -83,7 +83,6 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
     modal.addHideHandler(new ModalHideHandler() {
       @Override
       public void onHide(final ModalHideEvent evt) {
-        NotifyUser.info("On BSBasicDialog hide");
         CloseEvent.fire(BSBasicDialog.this, BSBasicDialog.this);
       }
     });

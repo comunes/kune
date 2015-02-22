@@ -38,9 +38,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.waveprotocol.box.server.CoreSettings;
 
+import cc.kune.core.server.access.FinderService;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
+import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.initials.InitialsAvatarsServerUtils;
 
@@ -50,13 +52,19 @@ import com.google.inject.name.Named;
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityLogoDownloadManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityLogoDownloadManager extends HttpServlet {
 
   /** The Constant serialVersionUID. */
   private static final long serialVersionUID = -1958945058088446881L;
+
+  private final byte[] clearLogo;
+
+  private final String clearMime;
+
+  private final FinderService contentFinder;
 
   /** The current last modified. */
   private long currentLastModified;
@@ -83,7 +91,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /**
    * Instantiates a new entity logo download manager.
-   * 
+   *
    * @param resourceBases
    *          the resource bases
    * @param groupManager
@@ -93,10 +101,11 @@ public class EntityLogoDownloadManager extends HttpServlet {
    */
   @Inject
   public EntityLogoDownloadManager(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases,
-      final GroupManager groupManager, @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain)
-      throws IOException {
+      final GroupManager groupManager, @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain,
+      final FinderService contentFinder) throws IOException {
     this.groupManager = groupManager;
     this.domain = domain;
+    this.contentFinder = contentFinder;
 
     final File groupFile = getFile(resourceBases, FileConstants.GROUP_NO_AVATAR_IMAGE);
     groupMime = getMime(groupFile);
@@ -106,7 +115,15 @@ public class EntityLogoDownloadManager extends HttpServlet {
     unknownMime = getMime(unknownFile);
     unknownLogo = getBy(unknownFile);
 
+    final File clearFile = getFile(resourceBases, FileConstants.TRANSPARENT_PIXEL);
+    clearMime = getMime(clearFile);
+    clearLogo = getBy(clearFile);
+
     defaultLastModified = 0l;
+  }
+
+  private void clearResult(final HttpServletResponse resp) throws IOException {
+    reply(resp, clearLogo, clearMime);
   }
 
   /*
@@ -120,7 +137,27 @@ public class EntityLogoDownloadManager extends HttpServlet {
   protected void doGet(final HttpServletRequest req, final HttpServletResponse resp)
       throws ServletException, IOException {
     currentLastModified = defaultLastModified;
-    final StateToken stateToken = new StateToken(req.getParameter(FileConstants.TOKEN));
+
+    String parameter = req.getParameter(FileConstants.WAVE_URI);
+
+    if (parameter != null) {
+      // Is a waveref request for a group logo of content
+      try {
+        final String waveRef = parameter;
+        // FIXME get this from a wave constant
+        final Content content = contentFinder.getContainerByWaveRef(waveRef);
+        final Group group = content.getOwner();
+        replyWithGroupLogo(resp, group);
+        return;
+      } catch (final javax.persistence.NoResultException e) {
+        // Return transparent pixel
+        clearResult(resp);
+        return;
+      }
+    }
+
+    parameter = req.getParameter(FileConstants.TOKEN);
+    final StateToken stateToken = new StateToken(parameter);
     final String onlyUserS = req.getParameter(FileConstants.ONLY_USERS);
     final boolean onlyUsers = Boolean.parseBoolean(onlyUserS);
     Group group = Group.NO_GROUP;
@@ -134,18 +171,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
         unknownResult(resp);
         return;
       }
-      if (!group.hasLogo()) {
-        if (group.isPersonal()) {
-          InitialsAvatarsServerUtils.doInitialsResponse(resp, 100, 100, group.getShortName() + "@"
-              + domain);
-        } else {
-          reply(resp, groupLogo, groupMime);
-        }
-      } else {
-        // Has logo
-        currentLastModified = group.getLogoLastModifiedTime();
-        reply(resp, group.getLogo(), group.getLogoMime().toString());
-      }
+      replyWithGroupLogo(resp, group);
     } catch (final NoResultException e) {
       unknownResult(resp);
     }
@@ -153,7 +179,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /**
    * Gets the by.
-   * 
+   *
    * @param file
    *          the file
    * @return the by
@@ -169,7 +195,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /**
    * Gets the file.
-   * 
+   *
    * @param resourceBases
    *          the resource bases
    * @param location
@@ -197,7 +223,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /**
    * Gets the mime.
-   * 
+   *
    * @param file
    *          the file
    * @return the mime
@@ -208,7 +234,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /**
    * Reply.
-   * 
+   *
    * @param resp
    *          the resp
    * @param logo
@@ -226,9 +252,24 @@ public class EntityLogoDownloadManager extends HttpServlet {
     resp.getOutputStream().write(logo);
   }
 
+  private void replyWithGroupLogo(final HttpServletResponse resp, final Group group) throws IOException {
+    if (!group.hasLogo()) {
+      if (group.isPersonal()) {
+        InitialsAvatarsServerUtils.doInitialsResponse(resp, 100, 100, group.getShortName() + "@"
+            + domain);
+      } else {
+        reply(resp, groupLogo, groupMime);
+      }
+    } else {
+      // Has logo
+      currentLastModified = group.getLogoLastModifiedTime();
+      reply(resp, group.getLogo(), group.getLogoMime().toString());
+    }
+  }
+
   /**
    * Unknown result.
-   * 
+   *
    * @param resp
    *          the resp
    * @throws IOException
@@ -237,5 +278,4 @@ public class EntityLogoDownloadManager extends HttpServlet {
   private void unknownResult(final HttpServletResponse resp) throws IOException {
     reply(resp, unknownLogo, unknownMime);
   }
-
 }

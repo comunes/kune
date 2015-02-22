@@ -25,6 +25,7 @@ import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.model.conversation.TitleHelper;
 import org.waveprotocol.wave.model.document.WaveContext;
 
+import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.state.TokenMatcher;
 
@@ -38,18 +39,21 @@ import com.google.gwt.user.client.Window;
  */
 public final class CustomWindowTitleHandler implements WaveStore.Listener {
 
-  public static CustomWindowTitleHandler install(final WaveStore waveStore, final FramedPanel waveFrame) {
-    return new CustomWindowTitleHandler(waveStore, waveFrame);
+  public static CustomWindowTitleHandler install(final WaveStore waveStore, final EditableLabel editableLabel) {
+    return new CustomWindowTitleHandler(waveStore, editableLabel);
   }
   private final String defaultTitle;
-  private final FramedPanel waveFrame;
 
   private final WaveStore waveStore;
+  private EditableLabel editableLabel;
 
-  private CustomWindowTitleHandler(final WaveStore waveStore, final FramedPanel waveFrame) {
+  private CustomWindowTitleHandler(final WaveStore waveStore, final EditableLabel editableLabel) {
     this.waveStore = waveStore;
-    this.waveFrame = waveFrame;
+    this.editableLabel = editableLabel;    
     defaultTitle = I18n.t("Inbox") + " - " + Session.get().getAddress();
+    
+    // Right now we do not show the title
+    editableLabel.setVisible(false);
     init();
   }
 
@@ -77,7 +81,7 @@ public final class CustomWindowTitleHandler implements WaveStore.Listener {
         windowTitle = defaultTitle;
       }
       Window.setTitle(windowTitle);
-      waveFrame.setTitleText(waveTitle);
+      editableLabel.setText(waveTitle);
     }
   }
 }

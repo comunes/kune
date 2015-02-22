@@ -1,5 +1,6 @@
 package cc.kune.gspace.client.viewers;
 
+import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.wave.client.CustomEditToolbar;
 import cc.kune.wave.client.CustomSavedStateIndicator;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
