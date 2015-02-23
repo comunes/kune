@@ -602,6 +602,10 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #sitebar_toolbar .navbar-collapse {
          padding: 0px;
        }
+
+       #sitebar_right_extensionbar {
+         margin-top: {{xsmall? -20: 0}}px;
+       }
        
        #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a,
        #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a:hover,
@@ -1194,12 +1198,12 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          margin-bottom: 5px; /* Distance between tools */  
        }
 
-       #group_tools_toolbar paper-fab::shadow paper-shadow {
-         visibility: hidden;
+       #group_tools_toolbar paper-fab::shadow paper-shadow {         
+         visibility: visible;
        }
 
        #group_tools_toolbar paper-fab:hover::shadow paper-shadow {
-         visibility: visible;
+         visibility: hidden;
        }
 
        #group_tools_toolbar paper-fab.active::shadow paper-shadow {
@@ -1318,3 +1322,4 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
 
   </body>
 </html>
+
