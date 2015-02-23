@@ -24,6 +24,7 @@ package cc.kune.wave.client.kspecific;
 
 import net.auroris.ColorPicker.client.ColorPicker;
 
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.AbstractColorPicker;
 import org.waveprotocol.wave.client.wavepanel.impl.toolbar.color.ComplexColorPicker;
 
@@ -56,8 +57,8 @@ public class AurorisColorPicker extends AbstractColorPicker {
     auPickerPanel.setWidth("155px");
     auPickerPanel.addStyleName("k-aurorisColorPicker");
     final ColorPicker auPicker = new ColorPicker();
-    final Button okBtn = new Button("Ok");
-    final Button cancelBtn = new Button("Cancel");
+    final CustomButton okBtn = new CustomButton(I18n.t("Ok"));
+    final CustomButton cancelBtn = new CustomButton(I18n.t("Cancel"));
     okBtn.addStyleName("k-fl");
     okBtn.addStyleName("k-aurorisColorPicker-btn");
     cancelBtn.addStyleName("k-fr");
