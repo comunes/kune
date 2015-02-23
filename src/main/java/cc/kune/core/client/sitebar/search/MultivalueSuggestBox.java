@@ -862,8 +862,10 @@ public class MultivalueSuggestBox extends Composite implements SelectionHandler<
         + from + "&" + SearcherConstants.LIMIT_PARAM + "=" + PAGE_SIZE));
 
     // Set our headers
-    builder.setHeader("Accept", "application/json");
-    builder.setHeader("Accept-Charset", "UTF-8");
+    builder.setHeader("Accept", "application/json; charset=utf-8");
+    
+    // Fails on chrome
+    // builder.setHeader("Accept-Charset", "UTF-8");
 
     builder.setCallback(new RequestCallback() {
 
