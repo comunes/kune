@@ -235,12 +235,12 @@ public class HSpacePresenter extends Presenter<HSpacePresenter.HSpaceView, HSpac
     newGroupHomeBtn.withText(I18n.t(CoreMessages.NEW_GROUP_TITLE)).withStyles(
         "btn btn-default btn-lg btn-block");
     pendingMessagesBtn = new ButtonDescriptor(new AbstractExtendedAction() {
-
       @Override
       public void actionPerformed(final ActionEvent event) {
         stateManager.gotoHistoryToken(SiteTokens.INBOX);
       }
     });
+    pendingMessagesBtn.setVisible(false);
     pendingMessagesBtn.withStyles("btn btn-default btn-lg btn-block btn_green");
     getView().getToolbar().add(signInHomeBtn);
     getView().getToolbar().add(pendingMessagesBtn);
