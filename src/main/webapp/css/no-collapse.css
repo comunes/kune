@@ -97,6 +97,11 @@
     margin-left: 0;
   }
 
+  .navbar-collapse {
+    border-top: none;
+    box-shadow: none;
+  }
+  
   .navbar-static-top {
     border-radius: 0;
   }

@@ -22,6 +22,7 @@
  */
 package cc.kune.core.client.ui.dialogs;
 
+import br.com.rpa.client._paperelements.PaperInput;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.shared.utils.TextUtils;
 
@@ -334,7 +335,9 @@ public class PromptTopDialog extends BasicTopDialog {
     if (builder.maxLength != 0) {
       textField.setMaxLength(builder.maxLength);
     }
-    textField.setWidth(builder.promptWidth);
+    if (builder.promptWidth != 0) {
+      textField.setWidth(builder.promptWidth);
+    }
     textField.setAllowBlank(builder.allowBlank);
     textField.addListener(Events.OnKeyPress, new Listener<FieldEvent>() {
       @Override

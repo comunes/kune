@@ -272,8 +272,7 @@ public class LicenseWizardPresenter extends
   /**
    * On close.
    */
-  public void onClose() {
-    getView().hide();
+  public void onClose() {    
     reset();
   }
 

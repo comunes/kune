@@ -369,6 +369,7 @@ public class BasicTopDialog extends BSBasicDialog {
   }
 
   private void setCloseBtn(final boolean closeBtn) {
+    modal.setClosable(closeBtn);
     setCloseBtnVisible(closeBtn);
     if (closeBtn) {
       setCloseBtnTooltip(I18n.t("Close") + " (Esc)");

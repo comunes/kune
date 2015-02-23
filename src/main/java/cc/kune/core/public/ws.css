@@ -1122,14 +1122,16 @@ table.k-folder-viewer {
 
 .k-drop-allowed {
   border: solid 2px transparent;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
+}
+
+paper-fab.k-drop-allowed  {
+  border: 0px;
 }
 
 button.k-drop-allowed-hover,.k-drop-allowed-hover {
   border: dashed 2px #3a9fd6 !important;
 }
+
 
 .k-link-icon {
   background-image: url(images/link.gif) !important;
@@ -1490,4 +1492,12 @@ input.k-sharelink-box {
   background-color: transparent;
   border:none;
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.k-modal-header {
+  font-size: 18px;
+}
+
+.k-modal-header > div > img {
+  margin-top: 3px;
 }

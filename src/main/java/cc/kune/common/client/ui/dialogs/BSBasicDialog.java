@@ -23,15 +23,13 @@
 
 package cc.kune.common.client.ui.dialogs;
 
-import org.gwtbootstrap3.client.shared.event.ModalHideEvent;
-import org.gwtbootstrap3.client.shared.event.ModalHideHandler;
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Modal;
-import org.gwtbootstrap3.client.ui.ModalHeader;
+import org.gwtbootstrap3.client.ui.constants.IconType;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.core.client.GWT;
@@ -68,7 +66,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
   @UiField
   Modal modal;
   @UiField
-  ModalHeader modalHeader;
+  CustomModalHeader modalHeader;
   @UiField
   Button secondBtn;
 
@@ -80,12 +78,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
   public BSBasicDialog() {
     initWidget(uiBinder.createAndBindUi(this));
     this.fireEvent(null);
-    modal.addHideHandler(new ModalHideHandler() {
-      @Override
-      public void onHide(final ModalHideEvent evt) {
-        CloseEvent.fire(BSBasicDialog.this, BSBasicDialog.this);
-      }
-    });
+
     title = new HasDirectionalText() {
 
       @Override
@@ -115,10 +108,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   @Override
   public HandlerRegistration addCloseHandler(final CloseHandler<BSBasicDialog> handler) {
-    // return (HandlerRegistration) modal.addHideHandler(new ModalHideHandler()
-    // {});
-
-    return addHandler(handler, CloseEvent.getType());
+   return modalHeader.addHandler(handler, CloseEvent.getType());
   }
 
   /**
@@ -214,12 +204,12 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   @Override
   public void setCloseBtnTooltip(final String tooltip) {
-    Tooltip.to(secondBtn, tooltip);
+    Tooltip.to(modalHeader.getCloseButton(), tooltip);
   }
 
   @Override
   public void setCloseBtnVisible(final boolean visible) {
-    secondBtn.setVisible(visible);
+    modalHeader.setClosable(visible);   
   }
 
   public void setDialogHeight(final String height) {
@@ -372,9 +362,9 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
    *          the new title icon
    */
   public void setTitleIcon(final ImageResource img) {
-    // title.setLeftIconResource(img);
+    modalHeader.setIconResource(img);
   }
-
+  
   /**
    * Sets the title icon css
    *
@@ -383,13 +373,13 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
    */
   public void setTitleIcon(final String icon) {
     if (TextUtils.notEmpty(icon)) {
-      // title.setLeftIcon(icon);
+      modalHeader.setIconStyle(icon);
     }
   }
 
   public void setTitleIconUrl(final String url) {
     if (TextUtils.notEmpty(url)) {
-      // title.setLeftIconUrl(url);
+      modalHeader.setIconUrl(url);
     }
   }
 
@@ -400,7 +390,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
    *          the new title id
    */
   public void setTitleId(final String id) {
-    // title.ensureDebugId(id);
+    modalHeader.ensureDebugId(id);
   }
 
   public void setTitleText(final String title) {

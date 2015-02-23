@@ -166,7 +166,6 @@ public class WizardDialog implements WizardDialogView {
     nextButton.ensureDebugId(nextId);
     nextButton.addStyleName("btn-group");
     nextButton.addStyleName("kune-Margin-Medium-l");
-    dialog.getBtnPanel().add(nextButton);
     dialog.getBtnPanel().addStyleName("btn-group");
     dialog.addCloseHandler(new CloseHandler<BSBasicDialog>() {
 
@@ -186,6 +185,7 @@ public class WizardDialog implements WizardDialogView {
     backButton.addStyleName("btn-group");
     backButton.addStyleName("kune-Margin-Medium-l");
     dialog.getBtnPanel().add(backButton);
+    dialog.getBtnPanel().add(nextButton);
 
     dialog.setSecondBtnId(finishId);
     dialog.setSecondBtnText(i18n.tWithNT("Finish", "used in button"));
