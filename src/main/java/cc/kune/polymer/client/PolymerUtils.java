@@ -26,6 +26,7 @@ package cc.kune.polymer.client;
 import static cc.kune.polymer.client.Layout.*;
 import br.com.rpa.client._paperelements.PaperFab;
 
+import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
@@ -142,4 +143,31 @@ public class PolymerUtils {
   public native static void toggleSearch() /*-{
 		$wnd.kt.toggleSearch();
   }-*/;
+  
+  public static void setTheme(String c[], String bg[]) {
+    setTheme(toJsArray(c), toJsArray(bg));  
+  }
+  
+  private native static void setTheme(JsArrayString c, JsArrayString bg) /*-{
+    $wnd.kt.c1 = c[0]; $wnd.kt.bg1 = bg[0];
+    $wnd.kt.c2 = c[1]; $wnd.kt.bg2 = bg[1];
+    $wnd.kt.c3 = c[2]; $wnd.kt.bg3 = bg[2];
+    $wnd.kt.c4 = c[3]; $wnd.kt.bg4 = bg[3];
+    $wnd.kt.c5 = c[4]; $wnd.kt.bg5 = bg[4];
+    $wnd.kt.c6 = c[5]; $wnd.kt.bg6 = bg[5];
+    $wnd.kt.c7 = c[6]; $wnd.kt.bg7 = bg[6];
+    $wnd.kt.c8 = c[7]; $wnd.kt.bg8 = bg[7];
+  }-*/; 
+  
+  /**
+   * https://stackoverflow.com/questions/22167486/gwt-how-to-pass-java-array-into-javascript-native-method 
+   */   
+  private static JsArrayString toJsArray(String[] input) {
+    JsArrayString jsArrayString = JsArrayString.createArray().cast();
+        for (String s : input) {
+            jsArrayString.push(s);
+        }
+        return jsArrayString; 
+    }
+  
 }

@@ -83,6 +83,7 @@ nav.k-toolbar-navbar > div > ul > li.current-item {
   display: inline-block;
   white-space: nowrap;
 }
+
 .breadcrumb > div > div > div > li + li:before {
   padding: 0 5px;
   color: #ccc;

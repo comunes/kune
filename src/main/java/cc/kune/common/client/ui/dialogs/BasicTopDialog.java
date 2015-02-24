@@ -22,6 +22,8 @@
  */
 package cc.kune.common.client.ui.dialogs;
 
+import org.gwtbootstrap3.client.ui.constants.ModalBackdrop;
+
 import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.shortcuts.OnEscapePressedEvent;
 import cc.kune.common.client.shortcuts.OnEscapePressedEvent.OnEscapePressedHandler;
@@ -328,7 +330,11 @@ public class BasicTopDialog extends BSBasicDialog {
     if (height != null) {
       super.setDialogHeight(height);
     }
-
+    
+    modal.setDataBackdrop(builder.modal? ModalBackdrop.TRUE: ModalBackdrop.FALSE);
+    if (TextUtils.notEmpty(builder.dialogId)) {
+      modal.getElement().setId(builder.dialogId);
+    }
     // setWidthImpl(builder.width);
     // setHeightImpl(builder.height);
     // recalculateSize();

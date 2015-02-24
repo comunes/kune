@@ -184,8 +184,8 @@ public class GSpaceThemeSelectorPresenter {
    */
   private void createMenu() {
     menu = new MenuDescriptor("");
-    menu.putValue(Action.STYLES, "k-button");
-    menu.putValue(Action.SMALL_ICON, res.styleGrey());
+    // menu.putValue(Action.STYLES, "k-button k-z-index-10000");
+    menu.putValue(Action.SMALL_ICON, res.styleGrey());    
   }
 
   /**

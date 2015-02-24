@@ -1121,7 +1121,7 @@ table.k-folder-viewer {
 }
 
 .k-drop-allowed {
-  border: solid 2px transparent;
+  border: solid 2px transparent !important;
 }
 
 paper-fab.k-drop-allowed  {
@@ -1500,4 +1500,9 @@ input.k-sharelink-box {
 
 .k-modal-header > div > img {
   margin-top: 3px;
+}
+
+/* dropdown in select theme */
+div.oc-menu > div > ul.dropdown-menu {
+z-index: 10000; 
 }

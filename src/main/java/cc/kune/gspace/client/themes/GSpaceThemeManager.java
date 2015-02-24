@@ -41,21 +41,21 @@ import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.gspace.client.armor.resources.GSpaceArmorResources;
 import cc.kune.gspace.client.style.GSpaceBackgroundManager;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.dom.client.StyleElement;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class GSpaceThemeManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GSpaceThemeManager {
 
-  /** The css added. */
   private StyleElement cssAdded;
 
   /** The event bus. */
@@ -81,7 +81,7 @@ public class GSpaceThemeManager {
 
   /**
    * Instantiates a new g space theme manager.
-   * 
+   *
    * @param session
    *          the session
    * @param groupServiceProvider
@@ -122,7 +122,7 @@ public class GSpaceThemeManager {
 
   /**
    * Change css.
-   * 
+   *
    * @param res
    *          the res
    * @param themeName
@@ -130,16 +130,20 @@ public class GSpaceThemeManager {
    */
   private void changeCss(final GSpaceArmorResources res, final String themeName) {
     final GSpaceTheme theme = themes.get(themeName);
-    CurrentEntityTheme.setColors(themes.get(themeName).getColors(), theme.getBackColors());
+    final String[] colors = themes.get(themeName).getColors();
+    final String[] backColors = theme.getBackColors();
+    CurrentEntityTheme.setColors(colors, backColors);
+    PolymerUtils.setTheme(colors, backColors);
     if (cssAdded != null) {
       cssAdded.removeFromParent();
     }
     cssAdded = CSSUtils.addCss(res.style().getText());
+
   }
 
   /**
    * Change theme.
-   * 
+   *
    * @param token
    *          the token
    * @param newTheme
@@ -149,19 +153,19 @@ public class GSpaceThemeManager {
     NotifyUser.showProgress();
     groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(), token, newTheme.getName(),
         new AsyncCallbackSimple<Void>() {
-          @Override
-          public void onSuccess(final Void result) {
-            if (session.getCurrentState().getStateToken().getGroup().equals(token.getGroup())) {
-              setTheme(newTheme);
-            }
-            NotifyUser.hideProgress();
-          }
-        });
+      @Override
+      public void onSuccess(final Void result) {
+        if (session.getCurrentState().getStateToken().getGroup().equals(token.getGroup())) {
+          setTheme(newTheme);
+        }
+        NotifyUser.hideProgress();
+      }
+    });
   }
 
   /**
    * On change group ws theme.
-   * 
+   *
    * @param newTheme
    *          the new theme
    */
@@ -169,17 +173,17 @@ public class GSpaceThemeManager {
     NotifyUser.showProgress();
     groupServiceProvider.get().changeGroupWsTheme(session.getUserHash(),
         session.getCurrentState().getStateToken(), newTheme.getName(), new AsyncCallbackSimple<Void>() {
-          @Override
-          public void onSuccess(final Void result) {
-            setTheme(newTheme);
-            NotifyUser.hideProgress();
-          }
-        });
+      @Override
+      public void onSuccess(final Void result) {
+        setTheme(newTheme);
+        NotifyUser.hideProgress();
+      }
+    });
   }
 
   /**
    * Sets the state.
-   * 
+   *
    * @param state
    *          the new state
    */
@@ -195,7 +199,7 @@ public class GSpaceThemeManager {
 
   /**
    * Sets the theme.
-   * 
+   *
    * @param newTheme
    *          the new theme
    */

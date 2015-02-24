@@ -211,7 +211,8 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
     </noscript>
     <iframe id="__gwt_historyFrame" style="position: absolute; width: 0; height: 0; border: 0"></iframe>
     <iframe src="" id="__download" style="position: absolute; width: 0; height: 0; border: 0"></iframe>
-    <template id="kunetemplate" is="auto-binding">                  
+    <template id="kunetemplate" is="auto-binding">
+      <core-style ref="kune-theme"></core-style>
       <core-media-query query="(max-width: {{screensm - 1}}px)" queryMatches="{{xsmall}}"></core-media-query>
       <core-media-query query="(min-width: {{screensm}}px) and (max-width: {{screenmd - 1}}px)" queryMatches="{{small}}"></core-media-query>
       <core-media-query query="(min-width: {{screenmd}}px) and (max-width: {{screenlg - 1}}px)" queryMatches="{{medium}}"></core-media-query>
@@ -408,8 +409,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                 <div id="doc_header_flex" flex></div>
                 <div id="doc_header_right_extensionbar" layout horizontal></div>
               </div>                    
-              <div id="doc_content" >
-                
+              <div id="doc_content" >                
               </div>
             </div>
           </paper-shadow>
@@ -593,7 +593,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          left: 0px;
          height: 40px;
          color: rgb(255, 255, 255);
-         fill: rgb(255, 255, 255);
+         fill: #FFFFFF;
          top: 0px;
          position: absolute;
          background-color: {{homebackcolor}};
@@ -628,7 +628,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
        
        #space_selector_paper_tabs {
-         color: rgb(255, 255, 255);
+         color: #FFFFFF;
          left: 0px;
          top: 0px;
          position: absolute;
@@ -965,7 +965,8 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        
        /* background for toolbar when it is at its full size */
        core-scroll-header-panel::shadow #headerContainer {
-         background-color: rgb(200, 113, 55);
+         background-color: {{bg6}};
+         color: {{c6}};
        }
        
        core-scroll-header-panel::shadow #headerBg {
@@ -978,11 +979,12 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        
        /* background for toolbar when it is condensed  (not working because of previous opacity) */
        core-scroll-header-panel::shadow #condensedHeaderBg {
-         background-color: rgb(200, 113, 55);
+         background-color: {{bg4}};
+         color: {{c4}};
        }
        
        core-scroll-header-panel::shadow #mainContainer {
-         background-color: rgb(223, 223, 223);
+         background-color: {{bg8}};
        }
 
        #core_drawer_group_header {
@@ -1010,9 +1012,9 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
        
        #header_core_toolbar {
-         color: rgb(241, 241, 241);
-         fill: rgb(241, 241, 241);
-         background-color: transparent;
+         color: {{c6}};
+         fill: {{bg6}};
+         background-color: {{bg6}};
        }
 
        #header_groupname_div {
@@ -1052,7 +1054,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
        
        #header_short_group_name a {
-         color: #CCC;
+         color: {{c3}};   
        }
        
        #header_group_icon_add, #header_group_icon_settings {
@@ -1067,7 +1069,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
 
        #k_group_entity_toolbar > div > div > button {
          min-height: 39px;
-         color: #FFF;
+         color: {{c6}};
        }
        
        #group_header_bottom {
@@ -1109,7 +1111,20 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          margin-left: {{xsmall ? 5 : 40}}px;
          margin-top: {{xsmall ? -30 : 0}}px;
        }
-
+       
+       .breadcrumb > div > div > div > button > i ,
+       .breadcrumb a {
+         color: {{c6}};
+       }
+       
+       .breadcrumb > div > div > div > li + li:before {
+         color: {{c3}};         
+       }
+       
+       .breadcrumb > .active {
+         color: #777;
+       }
+       
        #edit_inbox_fab,#reply_inbox_fab,#editdone_inbox_fab {
          position: fixed;
          z-index: 1;
@@ -1212,13 +1227,13 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
 
        #group_tools_toolbar .active:hover,       
        #group_tools_toolbar .active {
-         color: white;
-         background-color: rgb(165, 105, 65);
+         color: {{c3}};
+         background-color: {{bg3}};
        }
 
        #group_tools_toolbar paper-fab {
          background-color: #eee;
-         color: rgb(165, 105, 65);
+         color: {{bg3}};
        }
 
        #group_tools_toolbar paper-fab::shadow #icon {
@@ -1232,8 +1247,8 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
        
        #group_tools_toolbar paper-fab:hover {
-         background-color: rgb(231, 231, 231);
-         color: rgb(165, 105, 65);
+         color: rgb(231, 231, 231);
+         background-color: {{bg4}};
        }
        
        #group_tools_toobar core-item {
@@ -1251,7 +1266,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #doc_content_shadow {
          font-size: 16px;
          padding: {{xsmall ? '30px 40px 10px 10px' : '20px 60px 60px' }};
-         background-color: rgb(255, 255, 255);
+         background-color: #FFFFFF;
          min-height: {{docContentMinHeight + (xsmall? 100: 0)}}px;
        }
        
@@ -1296,7 +1311,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
 
        .core-icon-status-away::shadow core-icon path:nth-child(2) {
-         fill: rgb(255, 255, 255);
+         fill: #FFFFFF;
        }
        
        .core-icon-status-away::shadow core-icon path:first-child {
