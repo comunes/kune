@@ -39,7 +39,7 @@
     <meta name="hablar.icons" content="alt" />
     <!-- <meta name="hablar.layout" content="tabs" /> -->
     <meta name="hablar.layout" content="accordion" />
-    <meta name="hablar.inline" content="vertical_dock_div" />
+    <meta name="hablar.inline" content="chat_centerpanel" />
     <meta name="hablar.width" content="550px" />
     <meta name="hablar.height" content="400px" />
     <meta name="hablar.avatarProvider" content="kune-avatars" />
@@ -250,10 +250,18 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
                 </div>
                 </core-toolbar>
                 <section id="inbox_result_section">
-                  <div id="inbox_result" layout vertical>
-                    
+                  <div vertical layout fit>
+                    <div id="inbox_result" flex three>
+                      
+                    </div>
+                    <div id="chat_centerpanel" flex two>
+                      <core-header-panel mode="seamed" flex>
+                        <core-toolbar>
+                          <div>Chat</div>
+                        </core-toolbar>
+                      </core-header-panel>
+                    </div>
                   </div>
-                  <div id="chat_centerpanel" layout vertical flex></div>
                 </section>
               </core-header-panel>
             </div>      
@@ -334,7 +342,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
       </div>
     </div>
     <div id="group_space" vertical layout>
-      <div horizontal layout center end-justified id="site_bottombar" flex></div>
+      <div horizontal layout center start-justified id="site_bottombar" flex></div>
       <paper-fab icon="create" id="edit_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
       <paper-fab icon="reply" id="reply_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
       <paper-fab icon="check" id="editdone_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
@@ -676,7 +684,11 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          opacity: 0.2;
        }
        
-       #sitebar_chat_icon,#sitebar_language_btn,#sitebar_mygroups_btn,#sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
+       #sitebar_chat_icon {
+         margin-top: -10px;
+       }
+
+       #sitebar_language_btn,#sitebar_mygroups_btn,#sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
          margin-top: -20px;
        }
        
@@ -919,7 +931,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        }
        
        .k-inbox-showmore {
-         margin-bottom: 100px;
+         margin-bottom: 50px;
        }
        
        /* Other ------------------------------------------------------------- */
@@ -979,8 +991,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        
        /* background for toolbar when it is condensed  (not working because of previous opacity) */
        core-scroll-header-panel::shadow #condensedHeaderBg {
-         background-color: {{bg4}};
-         color: {{c4}};
+         background-color: {{bg2}};
        }
        
        core-scroll-header-panel::shadow #mainContainer {
@@ -1014,7 +1025,7 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
        #header_core_toolbar {
          color: {{c6}};
          fill: {{bg6}};
-         background-color: {{bg6}};
+         background-color: transparent;
        }
 
        #header_groupname_div {
@@ -1301,13 +1312,46 @@ style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: re
          padding: 0 15px;
        }
 
-       /* Chat status icons ------------------------------------------------- */
+       #site_bottombar > div > div > img {
+         /* license */         
+         padding-left: {{xsmall ? '10px' : '60px' }};
+       }
+       
+       /* Chat -------------------------------------------------------------- */
 
        #sitebar_user_btn::shadow core-icon {
          background-image: url({{user_icon_back_image_url}});
          border-radius: 50%;
          background-size: 24px;
          margin-right: 3px;
+       }
+
+       .org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-self {
+         bottom: 40%;
+       }
+
+       #chat_centerpanel > div {
+         position: absolute;
+         top: 60%;
+         bottom: 50px;
+         left: 0;
+         right: 0;
+         margin-top: 50px;
+       }
+       
+       #gwt-debug-RosterWidget-roster > div:nth-child(2),
+       #gwt-debug-RosterWidget-actions {
+         height: 26px !important;
+       }
+       
+       #gwt-debug-RosterWidget-scroll {
+         top: 8px !important;
+       }
+       
+       .hablar-HablarWidget {
+         position: fixed;
+         width: 100%;
+         height: 100%;
        }
 
        .core-icon-status-away::shadow core-icon path:nth-child(2) {

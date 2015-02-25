@@ -49,13 +49,13 @@ public abstract class EntitySearchPanel {
   public static final String OK_ID = "entity-search-panel-ok-id";
 
   /** The Constant SEARCH_TEXT_HEIGHT. */
-  private static final int SEARCH_TEXT_HEIGHT = 13;
+  private static final int SEARCH_TEXT_HEIGHT = 26;
 
   /** The Constant SEARCH_TEXT_WIDTH_BIG. */
   private static final int SEARCH_TEXT_WIDTH_BIG = 160;
 
   /** The Constant SEARCH_TEXT_WIDTH_SMALL. */
-  private static final int SEARCH_TEXT_WIDTH_SMALL = 120;
+  private static final int SEARCH_TEXT_WIDTH_SMALL = 160;
 
   /** The callback. */
   private OnEntitySelectedInSearch callback;

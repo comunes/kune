@@ -98,6 +98,27 @@ kt.toggleSearch = function(e,detail,sender) {
   })
 }
 
+/* Color of group header */
+addEventListener('core-header-transform', function(e) {
+  var miga = $('.breadcrumb > div > div > div > button > i').add('#miga a')
+  var toolbar = $('#core_scroll_header_panel');
+
+  if (miga == null)
+    return;
+  
+  var d = e.detail;
+  // d.y: the amount that the header moves up
+  // d.height: the height of the header when it is at its full size
+  // d.condiensedHeight: the height of the header when it is condensed
+  //scale header's title
+  var m = d.height - d.condensedHeight;
+  var scale = Math.max(0.75, (m - d.y) / (m / 0.25)  + 0.75);
+  // titleStyle.transform = titleStyle.webkitTransform =  'scale(' + scale + ') translateZ(0)';
+  // adjust header's color
+  //toolbar.style.color = (d.y >= d.height - d.condensedHeight) ? 'blue' : 'green';
+  miga.css('color', (d.y >= d.height - d.condensedHeight) ? kt.c2 : kt.c6);
+});
+
 /* Default theme (useful for development without GWT) 
 kt.bg1="#deaa87";
 kt.bg2="#d99e76";
