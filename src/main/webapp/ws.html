@@ -1,8 +1,13 @@
 <!doctype html>
+<!-- -*- engine:html -*- -->
+<!-- htmllint indent-width=false -->
+<!-- htmllint indent-style="spaces" -->
+<!-- htmllint attr-req-value=false -->
+<!-- htmllint attr-name-style=false -->
+<!-- htmllint id-class-style=false -->
 <html>
-  <!-- -*- engine:html -*- -->
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
     <title>Kune</title>
 
     <!-- Use this if you want to force some language as default
@@ -46,15 +51,15 @@
 
     <!-- Font depending on locale -->
     <script language="javascript" type="text/javascript">
-     /* -*- engine:js -*- */
+     // -*- engine:js -*-
      function getQueryVariable(variable) {
        var query = window.location.search.substring(1);
        var vars = query.split('&');
        for (var i = 0; i < vars.length; i++) {
-	 var pair = vars[i].split('=');
-	 if (decodeURIComponent(pair[0]) == variable) {
-	   return decodeURIComponent(pair[1]);
-	 }
+         var pair = vars[i].split('=');
+         if (decodeURIComponent(pair[0]) == variable) {
+           return decodeURIComponent(pair[1]);
+         }
        }
      }
      locale = getQueryVariable('locale');
@@ -63,22 +68,22 @@
 
      switch (locale) {
        case 'gl':
-	 subset = '&subset=latin,greek-ext,greek';
-	 break;
+         subset = '&subset=latin,greek-ext,greek';
+         break;
        case 'ru':
-	 subset = '&subset=cyrillic,cyrillic-ext,latin';
-	 break;
+         subset = '&subset=cyrillic,cyrillic-ext,latin';
+         break;
        case 'vi_VN':
-	 subset = '&subset=vietnamese';
+         subset = '&subset=vietnamese';
        default:
-	 subset = '';
+         subset = '';
      }
      font = fontPrefix + subset + fontSuffix;
      document.write(font);
     </script>
-    
+
     <!-- -*- engine:html -*- -->
-    
+
     <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
 
     <link rel="import" href="bower_components/polymer/polymer.html">
@@ -86,67 +91,67 @@
     <!-- Core elements -->
     <link rel="import" href="bower_components/core-icons/core-icons.html">
     <link rel="import"
-	  href="bower_components/core-toolbar/core-toolbar.html">
+          href="bower_components/core-toolbar/core-toolbar.html">
     <link rel="import"
-	  href="bower_components/core-icon-button/core-icon-button.html">
+          href="bower_components/core-icon-button/core-icon-button.html">
     <link rel="import"
-	  href="bower_components/core-header-panel/core-header-panel.html">
+          href="bower_components/core-header-panel/core-header-panel.html">
     <link rel="import" href="bower_components/core-icon/core-icon.html">
     <link rel="import"
-	  href="bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
+          href="bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
     <link rel="import"
-	  href="bower_components/core-drawer-panel/core-drawer-panel.html">
+          href="bower_components/core-drawer-panel/core-drawer-panel.html">
     <link rel="import" href="bower_components/core-pages/core-pages.html">
     <link rel="import"
           href="bower_components/core-media-query/core-media-query.html">
     <link rel="import"
           href="bower_components/core-image/core-image.html">
     <link rel="import"
-          href="bower_components/core-item/core-item.html">    
+          href="bower_components/core-item/core-item.html">
     <link rel="import" href="bower_components/core-splitter/core-splitter.html">
     <link rel="import" href="bower_components/core-animation/core-animation.html">
     <link rel="import" href="bower_components/core-animation/core-animation-group.html">
-    
+
     <!-- Other elements -->
     <link rel="import"
-	  href="bower_components/lorem-element/lorem-element.html">
+          href="bower_components/lorem-element/lorem-element.html">
     <link rel="import" href="bower_components/akyral-waypoint/akyral-waypoint.html">
 
     <!-- Paper elements -->
     <link rel="import"
-	  href="bower_components/paper-button/paper-button.html">
+          href="bower_components/paper-button/paper-button.html">
     <link rel="import"
-	  href="bower_components/paper-icon-button/paper-icon-button.html">
+          href="bower_components/paper-icon-button/paper-icon-button.html">
     <link rel="import" href="bower_components/paper-fab/paper-fab.html">
     <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
     <link rel="import"
-	  href="bower_components/paper-button/paper-button.html">
+          href="bower_components/paper-button/paper-button.html">
     <link rel="import"
-	  href="bower_components/paper-shadow/paper-shadow.html">
+          href="bower_components/paper-shadow/paper-shadow.html">
     <link rel="import"
-	  href="bower_components/paper-progress/paper-progress.html">
+          href="bower_components/paper-progress/paper-progress.html">
     <link rel="import" href="bower_components/paper-toast/paper-toast.html">
     <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
     <link rel="import" href="bower_components/paper-dialog/paper-action-dialog.html">
     <link rel="import" href="bower_components/paper-spinner/paper-spinner.html">
-    
+
     <!-- Icon elements -->
     <link rel="import" href="bower_components/core-icons/av-icons.html">
     <link rel="import" href="bower_components/core-icons/social-icons.html">
     <link rel="import" href="bower_components/core-icons/social-icons.html">
     <link rel="import" href="bower_components/font-kune-polymer-icons/kune-icons.html">
-    
+
     <!-- Use the complete iconset for demo and development purposes only. Generate a custom component containing only icons you need using font-awesome-polymer-icons-generator
           https://github.com/philya/font-awesome-polymer-icons-generator
           -->
     <link rel="import"
-	  href="bower_components/font-awesome-polymer-icons/fa-icons.html">
+          href="bower_components/font-awesome-polymer-icons/fa-icons.html">
 
     <!-- - for debugging
           <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
           <link type="text/css" rel="stylesheet" href="ws/addons/bootstrap/jquery.smartmenus.bootstrap.js">
           -->
-    
+
     <link rel="shortcut icon" href="ws/favicon.ico" />
 
     <link type="text/css" rel="stylesheet" href="ws/css/bootstrap.min.css">
@@ -156,20 +161,20 @@
     <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-all.css">
     <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-gray.css">
     <link type="text/css" rel="stylesheet"
-	  href="ws/gxt-custom/css/gxt-op-common.css">
+          href="ws/gxt-custom/css/gxt-op-common.css">
     <link type="text/css" rel="stylesheet" href="ws/kune-hablar.css">
     <link type="text/css" rel="stylesheet" href="ws/kune-chat.css">
     <link type="text/css" rel="stylesheet" href="ws/kune-common.css">
     <link type="text/css" rel="stylesheet" href="ws/kune-custom-common.css">
     <link type="text/css" rel="stylesheet" href="ws/kune-message.css">
     <link type="text/css" rel="stylesheet"
-	  href="others/splash/style/permalink.css">
+          href="others/splash/style/permalink.css">
     <link type="text/css" rel="stylesheet"
-	  href="others/splash/style/stuff.css">
+          href="others/splash/style/stuff.css">
     <link type="text/css" rel="stylesheet"
-	  href="others/splash/style/main.css">
+          href="others/splash/style/main.css">
     <link type="text/css" rel="stylesheet" href="ws/ws.css">
-    
+
     <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="others/splash/js/wave-rpc.js"></script>
     <script type="text/javascript" src="others/splash/js/gadget.js"></script>
@@ -177,1459 +182,1482 @@
     <script type="text/javascript" src="others/splash/js/common_client.js"></script>
     <script type="text/javascript" src="others/splash/js/permalink_client.js"></script>
     <!-- Moved this to local wave-rpc.js <script type="text/javascript" -->
-    <!-- 		src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script> -->
+    <!-- src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script> -->
   </head>
   <body fit unresolved>
     <!-- // This is only used for selenium tests (comment/remove in production) -->
     <!--
-    <div id="kcursor"
-	 style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
-      <img src="others/cursor-orange.png">
-    </div>
-    <script src="others/js/fake-selenium-pointer.js"></script> -->
+         <div id="kcursor"
+         style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
+         <img src="others/cursor-orange.png">
+         </div>
+         <script src="others/js/fake-selenium-pointer.js"></script> -->
     <!-- // End : This is only used for selenium tests (comment/remove in production) -->
 
     <!-- Banner for wave errors -->
-    <div style="display: none; position: absolute;" class="banner" id="banner"></div>
+    <div class="hidden_el banner" id="banner"></div>
     <!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
     <!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
-    <form id="loginrender" action="javascript:;" style="display: none; position: absolute;">
-      <input type="text" id="usernamerender" name="usernamerender"
-	     autocomplete="off" autocorrect="off" autocapitalize="off"
-	     spellcheck="false" value="" /> <input type="password"
-						   id="passwordrender" autocomplete="off" autocorrect="off"
-						   autocapitalize="off" spellcheck="false" name="passwordrender"
-						   value="" />
-    </form>
-    <!-- Remember user/pass (this part is used to send the values to the browser) -->
-    <form id="login" action="javascript:;" style="position: absolute; display: none;">
-      <input type="text" id="username" name="username" autocomplete="off"
-	     autocorrect="off" autocapitalize="off" spellcheck="false" value="" />
+    <form id="loginrender" action="javascript:;" class="hidden_el">
+            <input type="text" id="usernamerender" name="usernamerender"
+     autocomplete="off" autocorrect="off" autocapitalize="off"
+     spellcheck="false" value="" /> <input type="password"
+   id="passwordrender" autocomplete="off" autocorrect="off"
+   autocapitalize="off" spellcheck="false" name="passwordrender"
+   value="" />
+        </form>
+<!-- Remember user/pass (this part is used to send the values to the browser) -->
+<form id="login" action="javascript:;" class="hidden_el">
+        <input type="text" id="username" name="username" autocomplete="off"
+     autocorrect="off" autocapitalize="off" spellcheck="false" value="" />
       <input type="password" id="password" name="password"
-	     autocomplete="off" autocorrect="off" autocapitalize="off"
-	     spellcheck="false" value="" />
+     autocomplete="off" autocorrect="off" autocapitalize="off"
+     spellcheck="false" value="" />
     </form>
-    
-    <template id="kunetemplate" is="auto-binding">
-      <core-style ref="kune-theme"></core-style>
-      <core-media-query query="(max-width: {{screensm - 1}}px)" queryMatches="{{xsmall}}"></core-media-query>
-      <core-media-query query="(min-width: {{screensm}}px) and (max-width: {{screenmd - 1}}px)" queryMatches="{{small}}"></core-media-query>
-      <core-media-query query="(min-width: {{screenmd}}px) and (max-width: {{screenlg - 1}}px)" queryMatches="{{medium}}"></core-media-query>
-      <core-media-query query="(min-width: {{screenlg}}px)" queryMatches="{{large}}"></core-media-query>
 
-      <!-- Extra small devices  -->
-      <core-media-query query="min-width: {{screenxs}}px" queryMatches="{{xsmallup}}"></core-media-query>
-      <!-- Small devices (tablets, 768px and up) -->
-      <core-media-query query="min-width: {{screensm}}px" queryMatches="{{smallup}}"></core-media-query>
-      <!-- Medium devices (desktops, 992px and up) -->
-      <core-media-query query="min-width: {{screenmd}}px" queryMatches="{{mediumup}}"></core-media-query>
-      <!-- Large devices (large desktops, 1200px and up) -->
-      <core-media-query query="min-width: {{screenlg}}px" queryMatccsshes="{{largeup}}"></core-media-query>
+<template id="kunetemplate" is="auto-binding">
+  
+  
+  <core-media-query query="(max-width: {{screensm - 1}}px)" queryMatches="{{xsmall}}"></core-media-query>
+  <core-media-query query="(min-width: {{screensm}}px) and (max-width: {{screenmd - 1}}px)" queryMatches="{{small}}"></core-media-query>
+  <core-media-query query="(min-width: {{screenmd}}px) and (max-width: {{screenlg - 1}}px)" queryMatches="{{medium}}"></core-media-query>
+  <core-media-query query="(min-width: {{screenlg}}px)" queryMatches="{{large}}"></core-media-query>
 
-      <div id="paper_progress_container" horizontal center-justified layout>
-        <paper-progress indeterminate id="paper_progress"></paper-progress>
-      </div>
-      <div id="paper_toast_container" horizontal end-justified layout>
-        <paper-toast duration="5000" id="toast"></paper-toast>
-      </div>
+  <!-- Extra small devices  -->
+  <core-media-query query="min-width: {{screenxs}}px" queryMatches="{{xsmallup}}"></core-media-query>
+  <!-- Small devices (tablets, 768px and up) -->
+  <core-media-query query="min-width: {{screensm}}px" queryMatches="{{smallup}}"></core-media-query>
+  <!-- Medium devices (desktops, 992px and up) -->
+  <core-media-query query="min-width: {{screenmd}}px" queryMatches="{{mediumup}}"></core-media-query>
+  <!-- Large devices (large desktops, 1200px and up) -->
+  <core-media-query query="min-width: {{screenlg}}px" queryMatccsshes="{{largeup}}"></core-media-query>
 
-      <div id="k_home_spin_container" fit>
-        <paper-spinner id="k_home_spin" active="{{spin_active}}"></paper-spinner>
-      </div>
-      
-      <!-- https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel -->
-      <core-drawer-panel transition drawerWidth="{{xsmall? 270: small? 300: 400}}px" responsivewidth="900px" selected="{{main_selected}}" narrow="{{main_narrow}}" id="main_core_drawer_panel" forcenarrow="{{main_forcenarrow}}" disableSwipe="{{main_disableSwipe}}" disableEdgeSwipe="{{main_disableEdgeSwipe}}"  touch-action="pan-y">
-        <section id="main_left_section" drawer>          
-          <div id="inbox_container" fit>
-            <core-header-panel mode="waterfall" id="inbox_core_header">
-              <core-toolbar id="inbox_toolbar">
-                <paper-fab icon="create" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
+  <div id="paper_progress_container" horizontal center-justified layout>
+    <paper-progress indeterminate id="paper_progress"></paper-progress>
+  </div>
+  <div id="paper_toast_container" horizontal end-justified layout>
+    <paper-toast duration="5000" id="toast"></paper-toast>
+  </div>
+
+  <div id="k_home_spin_container" fit>
+    <paper-spinner id="k_home_spin" active="{{spin_active}}"></paper-spinner>
+  </div>
+
+  <!-- https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel -->
+  <core-drawer-panel transition drawerWidth="{{xsmall? 270: small? 300: 400}}px" responsivewidth="900px" selected="{{main_selected}}" narrow="{{main_narrow}}" id="main_core_drawer_panel" forcenarrow="{{main_forcenarrow}}" disableSwipe="{{main_disableSwipe}}" disableEdgeSwipe="{{main_disableEdgeSwipe}}"  touch-action="pan-y">
+    <section id="main_left_section" drawer>
+      <div id="inbox_container" fit>
+        <core-header-panel mode="waterfall" id="inbox_core_header">
+                <core-toolbar id="inbox_toolbar">
+                  <paper-fab icon="create" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
                 <div id="inbox_title"></div>
                 <div flex></div>
                 <div layout horizontal end-justified>
-                  <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
+                    <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
                   <paper-icon-button icon="group-work" id="inbox_share_icon"></paper-icon-button>
                   <paper-icon-button icon="arrow-back" on-click="{{closeMainDrawer}}" id="inbox_close_icon"></paper-icon-button>
                 </div>
               </core-toolbar>
               <section id="inbox_result_section">
-                <div vertical layout fit>
-                  <div id="inbox_result" flex three>
-                    
+                  <div vertical layout fit>
+                    <div id="inbox_result" flex three>
+
                   </div>
                   <div id="chat_centerpanel" flex two>
-                    <core-header-panel mode="seamed" flex>
-                      <core-toolbar>
-                        <div>Chat</div>
+                      <core-header-panel mode="seamed" flex>
+                        <core-toolbar>
+                          <div>Chat</div>
                       </core-toolbar>
                     </core-header-panel>
                   </div>
                 </div>
               </section>
             </core-header-panel>
-          </div>      
-          <paper-fab icon="view-column" mini id="inbox_show_hide" class="btn_gray" core-drawer-toggle></paper-fab>            
-        </section>
-        <section id="main_right_section" main>
-          <core-pages selected="{{spaceselected}}" class="full-absolute-no-sitebar" notap>
+                </div>
+<paper-fab icon="view-column" mini id="inbox_show_hide" class="btn_gray" core-drawer-toggle></paper-fab>
+    </section>
+    <section id="main_right_section" main>
+      <core-pages selected="{{spaceselected}}" class="full_absolute_no_sitebar" notap>
 
-            /* Home Space -------------------------------------------------------- */
-            
-            <div id="home_space">
-              <core-header-panel id="home_space_core_header" mode="seamed" fit>
-                <core-toolbar id="k_home_mask">                  
-                  <div id="k_home_main_container" horizontal center-justified layout flex>
-                    <div id="k_home_main_v" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
-                      <div id="k_home_logo_container" horizontal layout>
-                        <div>
-                          <span id="k_home_logo">
-                            <img src="./others/kune-logo-alone{{small? '-big': xsmall ? '-med': '-big'}}.png">
-                          </span>
-                        </div>
-                        <div vertical layout>
-                          <div>
-                            <span id="k_home_logoname">
-                              <img src="./others/kune-logo-name-alone{{small ? '-big': xsmall? '-med': '-big'}}.png">
-                            </span>
-                          </div>
-                          <div><span id="k_home_motto">do it together<br>& share it</span></div>
-                        </div> <!-- end of logoname -->                      
-                      </div> <!-- end of logo -->
-                      <div id="k_home_main-buttons" horizontal end-justified layout>
-                        <div id="k_home_toolbar" vertical layout>                            
-                        </div>
+        /* Home Space -------------------------------------------------------- */
+
+        <div id="home_space">
+          <core-header-panel id="home_space_core_header" mode="seamed" fit>
+            <core-toolbar id="k_home_mask">
+              <div id="k_home_main_container" horizontal center-justified layout flex>
+                <div id="k_home_main_v" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
+                  <div id="k_home_logo_container" horizontal layout>
+                    <div>
+                      <span id="k_home_logo">
+                        <img src="./others/kune-logo-alone{{small? '-big': xsmall ? '-med': '-big'}}.png" alt="kune-logo-alone">
+                      </span>
+                    </div>
+                    <div vertical layout>
+                      <div>
+                        <span id="k_home_logoname">
+                          <img src="./others/kune-logo-name-alone{{small ? '-big': xsmall? '-med': '-big'}}.png" alt="kune-longo-name">
+                        </span>
                       </div>
+                      <div><span id="k_home_motto">do it together<br>& share it</span></div>
+                    </div> <!-- end of logoname -->
+                  </div> <!-- end of logo -->
+                  <div id="k_home_main_buttons" horizontal end-justified layout>
+                    <div id="k_home_toolbar" vertical layout>
                     </div>
                   </div>
-                </core-toolbar>
-                
-                <div id="k_home_scroller" fit unresolved>
-                  <div id="k_home_center">
-                    <div horizontal center-justified layout id="sec0">
-                      <div self-center>
-                        <div horizontal center-justified layout flex>
-                        </div>
-                        <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="1" ></akyral-waypoint>              
-                        <blockquote id="buck-blockquote">Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
-                          <cite id="buck">Buckminster Fuller</cite>
-                        </blockquote>
-                        
-                      </div>
-                    </div>          
-                    
-                    <div horizontal center-justified layout id="sec1">
-                      <div self-center>              
-                        <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="2" ></akyral-waypoint>   
-                        kune it's a web social toolbox where you can communicate, collaborate and share between equals.            
-                      </div>
+                </div>
+              </div>
+            </core-toolbar>
+
+            <div id="k_home_scroller" fit unresolved>
+              <div id="k_home_center">
+                <div horizontal center-justified layout id="sec0">
+                  <div self-center>
+                    <div horizontal center-justified layout flex>
                     </div>
-                    
-                    <div horizontal center-justified layout id="sec2">          
-                      <div self-center>
-                        <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="3" ></akyral-waypoint>
+                    <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="1" ></akyral-waypoint>
+                    <blockquote id="buck_blockquote">Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
+                      <cite id="buck">Buckminster Fuller</cite>
+                    </blockquote>
+
+                  </div>
+                </div>
+
+                <div horizontal center-justified layout id="sec1">
+                  <div self-center>
+                          <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="2" ></akyral-waypoint>
+                        kune it's a web social toolbox where you can communicate, collaborate and share between equals.
+                      </div>
+                </div>
+
+<div horizontal center-justified layout id="sec2">
+                        <div self-center>
+                          <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="3" ></akyral-waypoint>
                         kune.cc is just one the kune nodes. That is, kune is descentralized unlike other centralized platforms like Google+, or facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.
                       </div>
                     </div>
-                    
-                    <div horizontal center-justified layout id="sec3">          
-                      <div self-center>            
-                        Kune means "together" in esperanto.
-                      </div>
-                    </div>
-                    
-                    <div horizontal center-justified layout id="sec4">
-                      <div self-center>       
-                        <div id="k_home_tools" horizontal layout center-justified>
-                          <div vertical layout>
-                            <core-item icon="kune:docs" label="documents" horizontal center layout></core-item>
-                            <core-item icon="kune:events" label="calendars" horizontal center layout></core-item>
-                            <core-item icon="kune:chat-tool" label="chats" horizontal center layout></core-item>
-                            <core-item icon="kune:wiki" label="wiki" horizontal center layout></core-item>
-                          </div> <!-- end kune icons 1st column -->
-                          <div vertical layout>
-                            <core-item icon="kune:lists" label="forums" horizontal center layout></core-item>
-                            <core-item icon="kune:message" label="messages" horizontal center layout></core-item>
-                            <core-item icon="kune:tasks" label="tasks" horizontal center layout></core-item>
-                            <core-item icon="kune:barter" label="barters" horizontal center layout></core-item>
-                          </div> <!-- end kune icons 2nd column -->
-                        </div> <!-- end kune icons 2 columns -->
-                      </div>
-                    </div>
 
-                    <div horizontal center-justified layout id="sec5">
-                      <div self-center>                      
-                        <div vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
-                          <div id="k-home-group-stats">
-                            <!-- This id is optional for kune (you can create a different .html and preserve this id if you want this stats) -->
-                          </div>
-                          <div id="k-home-global-stats">
-                            <!-- This id is optional for kune (you can create a different .html but preserve this id if you want this stats) -->
-                          </div>
-                          <div>
-                            History
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                  </div>
-                </div> <!-- home-center -->
-                
-              </core-header-panel>
-            </div><!-- home_space -->
-            
-            /* User Space -------------------------------------------------------- */
-            
-            <div id="user_space" fit>
-              <paper-fab icon="create" id="edit_inbox_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
-              <paper-fab icon="reply" id="reply_inbox_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
-              <paper-fab icon="check" id="editdone_inbox_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
-              <div id="user_space_content">
-              </div>
-            </div>
-            
-            /* Group Space ------------------------------------------------------- */
-            
-            <div id="group_space" vertical layout>
-              <div horizontal layout center start-justified id="site_bottombar" flex></div>
-              <paper-fab icon="create" id="edit_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
-              <paper-fab icon="reply" id="reply_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
-              <paper-fab icon="check" id="editdone_docgroup_fab" mini?={{xsmall}} class="btn_green"></paper-fab>
-              <core-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">                
-                <core-toolbar id="header_core_toolbar" class="tall" flex>
-                  <core-drawer-panel transition drawerwidth="80%" selected="{{group_header_selected}}" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
-                    <section id="group_core_drawer" drawer>
-                      <div horizontal layout>
-                        <div id="header_social_net" fit></div>
-                        <div flex></div>
-                        <paper-icon-button class="top black" icon="close" on-click="{{toggle_social_net}}" id="header_group_icon_settings"></paper-icon-button>
-                      </div>
-                    </section>
-                    <section id="group_core_main" main>
-                      <div id="header_groupname_div" class="top indent" layout horizontal>
+<div horizontal center-justified layout id="sec3">
                         <div self-center>
-                          <paper-shadow animated id="header_group_paper_shadow" class="top">
-                            <!-- https://stackoverflow.com/questions/5775469/whats-the-valid-way-to-include-an-image-with-no-src -->
-                            <img class="top" id="header_group_logo"
-                                 width="{{xsmall? avatarsizes: small? avatarsizem: avatarsizel }}"
-                                 height="{{xsmall? avatarsizes: small? avatarsizem: avatarsizel}}"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="></img>
-                          </paper-shadow>
-                        </div>
-                        <div vertical id="header_group_name_group" layout self-center>
-                          <div id="header_group_name" class="top"></div>
-                          <div id="header_short_group_name" class="top"><a href="#"></a></div>                          
-                        </div>
-
-                        <div flex horizontal layout end-justified>
-                          <div id="social_net_group" vertical  layout>
-                            <div id="k_group_entity_toolbar" vertical layout end-justified>
-                            </div>
-                            <div horizontal layout end-justified>
-                              <core-icon-button icon="group-work" id="group_followers"
-                                                on-click={{toggle_social_net}}></core-icon-button>
-                            </div>                            
-                          </div>
-                        </div>
-                      </div>
-                      <div id="group_header_bottom" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout style="width:100%">
-                        <ol class="breadcrumb"><div id="miga" class=""></div></ol>                        
-                        <div flex></div>
-                        <div id="header_bottom_extensionbar" class="btn-group indent"></div>
-                      </div>                    
-                    </section>
-                  </core-drawer-panel>
-                  <paper-shadow id="doc_toolbar_shadow">
-                    <core-toolbar  id="doc_toolbar" class="medium-tall" flex>
-                      <div id="doc_toolbar_extension" class="btn-group" horizontal layout flex>                        
-                      </div>
-                    </core-toolbar>
-                  </paper-shadow>                  
-                </core-toolbar>
-                <section id="doc_content_section" content flex>
-                  <div horizontal layout end-justified flex>
-                    <div id="group_tools_toolbar" vertical layout>
-                      <paper-fab mini icon="kune:docs" class="active" id="k_tool_item_docs"></paper-fab>
-                      <paper-fab mini icon="kune:lists" id="k_tool_item_lists"></paper-fab>
-                      <paper-fab mini icon="kune:blogs" id="k_tool_item_blogs"></paper-fab>
-                      <paper-fab mini icon="kune:wiki" id="k_tool_item_wiki"></paper-fab>
-                      <paper-fab mini icon="kune:events" id="k_tool_item_events"></paper-fab>
-                      <paper-fab mini icon="kune:tasks" id="k_tool_item_tasks"></paper-fab>
-                      <paper-fab mini icon="kune:chat-tool" id="k_tool_item_chats"></paper-fab>
-                      <paper-fab mini icon="kune:barter" id="k_tool_item_barters"></paper-fab>
-                      <paper-fab mini icon="kune:trash" id="k_tool_item_trash"></paper-fab>
-                    </div> <!-- end group_tools_toolbar -->
-                  </div>                
-                  <paper-shadow animated id="doc_content_shadow">
-                    <div id="doc_vert" layout vertical>
-                      <div horizontal layout>
-                        <div id="doc_header_left_extensionbar" class="btn-group" layout horizontal></div>
-                        <div id="doc_header_flex" flex></div>
-                        <div id="doc_header_right_extensionbar" layout horizontal></div>
-                      </div>                    
-                      <div id="doc_content" >                
+                          Kune means "together" in esperanto.
                       </div>
                     </div>
-                  </paper-shadow>
+
+<div horizontal center-justified layout id="sec4">
+  <div self-center>
+    <div id="k_home_tools" horizontal layout center-justified>
+      <div vertical layout>
+        <core-item icon="kune:docs" label="documents" horizontal center layout></core-item>
+        <core-item icon="kune:events" label="calendars" horizontal center layout></core-item>
+        <core-item icon="kune:chat-tool" label="chats" horizontal center layout></core-item>
+        <core-item icon="kune:wiki" label="wiki" horizontal center layout></core-item>
+      </div> <!-- end kune icons 1st column -->
+      <div vertical layout>
+        <core-item icon="kune:lists" label="forums" horizontal center layout></core-item>
+        <core-item icon="kune:message" label="messages" horizontal center layout></core-item>
+        <core-item icon="kune:tasks" label="tasks" horizontal center layout></core-item>
+        <core-item icon="kune:barter" label="barters" horizontal center layout></core-item>
+      </div> <!-- end kune icons 2nd column -->
+    </div> <!-- end kune icons 2 columns -->
+  </div>
+</div>
+
+<div horizontal center-justified layout id="sec5">
+  <div self-center>
+    <div vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
+      <div id="k_home_group_stats">
+        <!-- This id is optional for kune (you can create a different .html and preserve this id if you want this stats) -->
+      </div>
+      <div id="k_home_global_stats">
+        <!-- This id is optional for kune (you can create a different .html but preserve this id if you want this stats) -->
+      </div>
+      <div>
+        History
+      </div>
+    </div>
+  </div>
+</div>
+
+              </div>
+            </div> <!-- home-center -->
+
+          </core-header-panel>
+        </div><!-- home_space -->
+
+        /* User Space -------------------------------------------------------- */
+
+        <div id="user_space" fit>
+          <paper-fab icon="create" id="edit_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
+          <paper-fab icon="reply" id="reply_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
+          <paper-fab icon="check" id="editdone_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
+          <div id="user_space_content">
+          </div>
+        </div>
+
+        /* Group Space ------------------------------------------------------- */
+
+        <div id="group_space" vertical layout>
+          <div horizontal layout center start-justified id="site_bottombar" flex></div>
+          <paper-fab icon="create" id="edit_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
+          <paper-fab icon="reply" id="reply_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
+          <paper-fab icon="check" id="editdone_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
+          <core-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">
+            <core-toolbar id="header_core_toolbar" class="tall" flex>
+              <core-drawer-panel transition drawerwidth="80%" selected="{{group_header_selected}}" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
+                <section id="group_core_drawer" drawer>
+                  <div horizontal layout>
+                    <div id="header_social_net" fit></div>
+                    <div flex></div>
+                    <paper-icon-button class="top black" icon="close" on-click="{{toggle_social_net}}" id="header_group_icon_settings"></paper-icon-button>
+                  </div>
                 </section>
-              </core-scroll-header-panel>
-            </div>
+                <section id="group_core_main" main>
+                  <div id="header_groupname_div" class="top indent" layout horizontal>
+                    <div self-center>
+                      <paper-shadow animated id="header_group_paper_shadow" class="top">
+                        <!-- https://stackoverflow.com/questions/5775469/whats-the-valid-way-to-include-an-image-with-no-src -->
+                        <img class="top" id="header_group_logo" alt="group logo"
+                             src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="></img>
+                      </paper-shadow>
+                    </div>
+                    <div vertical id="header_group_name_group" layout self-center>
+                      <div id="header_group_name" class="top"></div>
+                      <div id="header_short_group_name" class="top"><a href="#"></a></div>
+                    </div>
 
-          </core-pages>
-        </section>
-      </core-drawer-panel>
+                    <div flex horizontal layout end-justified>
+                      <div id="social_net_group" vertical  layout>
+                        <div id="k_group_entity_toolbar" vertical layout end-justified>
+                        </div>
+                        <div horizontal layout end-justified>
+                          <core-icon-button icon="group-work" id="group_followers" on-click="{{toggle_social_net}}">
+                          </core-icon-button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div id="group_header_bottom" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
+                    <ol class="breadcrumb"><div id="miga"></div></ol>
+                    <div flex></div>
+                    <div id="header_bottom_extensionbar" class="btn-group indent"></div>
+                  </div>
+                </section>
+              </core-drawer-panel>
+              <paper-shadow id="doc_toolbar_shadow">
+                <core-toolbar  id="doc_toolbar" class="medium-tall" flex>
+                  <div id="doc_toolbar_extension" class="btn-group" horizontal layout flex>
+                  </div>
+                </core-toolbar>
+              </paper-shadow>
+            </core-toolbar>
+            <section id="doc_content_section" content flex>
+              <div horizontal layout end-justified flex>
+                <div id="group_tools_toolbar" vertical layout>
+                  <paper-fab mini icon="kune:docs" class="active" id="k_tool_item_docs"></paper-fab>
+                  <paper-fab mini icon="kune:lists" id="k_tool_item_lists"></paper-fab>
+                  <paper-fab mini icon="kune:blogs" id="k_tool_item_blogs"></paper-fab>
+                  <paper-fab mini icon="kune:wiki" id="k_tool_item_wiki"></paper-fab>
+                  <paper-fab mini icon="kune:events" id="k_tool_item_events"></paper-fab>
+                  <paper-fab mini icon="kune:tasks" id="k_tool_item_tasks"></paper-fab>
+                  <paper-fab mini icon="kune:chat-tool" id="k_tool_item_chats"></paper-fab>
+                  <paper-fab mini icon="kune:barter" id="k_tool_item_barters"></paper-fab>
+                  <paper-fab mini icon="kune:trash" id="k_tool_item_trash"></paper-fab>
+                </div> <!-- end group_tools_toolbar -->
+              </div>
+              <paper-shadow animated id="doc_content_shadow">
+                <div id="doc_vert" layout vertical>
+                  <div horizontal layout>
+                    <div id="doc_header_left_extensionbar" class="btn-group" layout horizontal></div>
+                    <div id="doc_header_flex" flex></div>
+                    <div id="doc_header_right_extensionbar" layout horizontal></div>
+                  </div>
+                  <div id="doc_content" >
+                  </div>
+                </div>
+              </paper-shadow>
+            </section>
+          </core-scroll-header-panel>
+        </div>
 
-      <core-toolbar id="sitebar_toolbar">
-        <!-- FIXME: scrollable seems interesting but does not works with our paper-tab -->
-        <paper-tabs selected="{{spaceselected}}" id="space_selector_paper_tabs" horizontal center layout>
-          <paper-tab>
-            <!-- You can put here a "src" atribute with a link to your site logo (remove the icon attribute) -->
-            <paper-icon-button icon="kune:kune" id="home_space_icon"></paper-icon-button>
+      </core-pages>
+    </section>
+  </core-drawer-panel>
+
+  <core-toolbar id="sitebar_toolbar">
+            <!-- FIXME: scrollable seems interesting but does not works with our paper-tab -->
+            <paper-tabs selected="{{spaceselected}}" id="space_selector_paper_tabs" horizontal center layout>
+            <paper-tab>
+              <!-- You can put here a "src" atribute with a link to your site logo (remove the icon attribute) -->
+              <paper-icon-button icon="kune:kune" id="home_space_icon"></paper-icon-button>
           </paper-tab>
           <paper-tab>
-            <paper-icon-button icon="mail" id="user_space_icon"></paper-icon-button>
+              <paper-icon-button icon="mail" id="user_space_icon"></paper-icon-button>
           </paper-tab>
           <paper-tab><paper-icon-button icon="group-work" id="group_space_icon"></paper-icon-button></paper-tab>
-          
+
         </paper-tabs>
         <div id="sitebar_user_space_icon_group" class="sitebar_inbox_badge_container"></div>
         <div id="sitebar_left_extensionbar"></div>
         <div id="sitebar_flex" flex></div>
         <div id="sitebar_chat_icon_group" class="hidden-xs hidden-sm">
-          <paper-icon-button icon="kune:chat" id="sitebar_chat_icon"></paper-icon-button>
+            <paper-icon-button icon="kune:chat" id="sitebar_chat_icon"></paper-icon-button>
         </div>
         <core-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn"></core-icon-button>
-        <core-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></core-icon-button>        
+        <core-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></core-icon-button>
         <div id="sitebar_right_extensionbar"></div>
         <core-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></core-icon-button>
         <paper-icon-button icon="search" on-click="{{ toggleSearch }}" id="sitebar_search_icon"></paper-icon-button>
         <div id="sitebar_search_group">
-          <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
+            <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
         </div>
         <paper-icon-button icon="more-vert" id="sitebar_more_icon"></paper-icon-button>
         <div id="sitebar_flex_end" class="sitebar_search_hide" flex></div>
         <paper-icon-button icon="close" on-click="{{ toggleSearch }}" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
-      </core-toolbar>
+        </core-toolbar>
 
-      <core-animation id="opacity-infinite" duration="1000" iterations="Infinity" direction="alternate">
-        <core-animation-keyframe>
-          <core-animation-prop name="opacity" value="1">
+<core-animation id="opacity-infinite" duration="1000" iterations="Infinity" direction="alternate">
+          <core-animation-keyframe>
+            <core-animation-prop name="opacity" value="1">
           </core-animation-prop>
         </core-animation-keyframe>
         <core-animation-keyframe>
-          <core-animation-prop name="opacity" value="0.3">
+            <core-animation-prop name="opacity" value="0.3">
           </core-animation-prop>
         </core-animation-keyframe>
       </core-animation>
 
-      <core-animation-group id="opacity-scale" type="seq">
-        <core-animation duration="300">
-          <core-animation-keyframe>
-            <core-animation-prop name="opacity" value="1">
+<core-animation-group id="opacity-scale" type="seq">
+          <core-animation duration="300">
+            <core-animation-keyframe>
+              <core-animation-prop name="opacity" value="1">
             </core-animation-prop>
           </core-animation-keyframe>
           <core-animation-keyframe>
-            <core-animation-prop name="opacity" value="0.3">
+              <core-animation-prop name="opacity" value="0.3">
             </core-animation-prop>
           </core-animation-keyframe>
           <core-animation-keyframe>
-            <core-animation-prop name="opacity" value="1">
+              <core-animation-prop name="opacity" value="1">
             </core-animation-prop>
           </core-animation-keyframe>
         </core-animation>
         <core-animation duration="300">
-          <core-animation-keyframe>
-            <core-animation-prop name="transform" value="scale(1)">
+            <core-animation-keyframe>
+              <core-animation-prop name="transform" value="scale(1)">
             </core-animation-prop>
           </core-animation-keyframe>
           <core-animation-keyframe>
-            <core-animation-prop name="transform" value="scale(1.2)">
+              <core-animation-prop name="transform" value="scale(1.2)">
             </core-animation-prop>
           </core-animation-keyframe>
           <core-animation-keyframe>
-            <core-animation-prop name="transform" value="scale(1)">
+              <core-animation-prop name="transform" value="scale(1)">
             </core-animation-prop>
           </core-animation-keyframe>
         </core-animation>
       </core-animation-group>
-      
-      <style>
-       /* -*- engine:css -*- */
-       /* Home Space -------------------------------------------------------- */
-       body {
-         font-family: 'Open Sans', sans-serif;
-         /* position: absolute, etc, with fit polymer attribute in body */
-       }
-
-       #home_space {
-         font-size: {{xsmall? '12' : small? '16' : '16'}}px;
-       }
-
-       #home_space_core_header::shadow #mainContainer {
-         overflow: visible;
-       }
-       
-       #k_home_mask {
-         background-color: {{homebackcolor}};
-         padding: 30px;
-         height: {{xsmall? 220: 270}}px;
-         padding-top: {{xsmall? 80: 110}}px;
-       }
-
-       #k_home_main_container {
-         color: #FFFFFF;
-       }
-
-       #k_home_main_v {
-       }
-
-       #k_home_logoname_motto {
-       }
-
-       #k_home_logo {
-         vertical-align: top;
-         padding-right: {{xsmall ? '5px' : '20px'}};
-       }
-
-       #k_home_logoname {
-         vertical-align: top;
-       }
-
-       #k_home_logoname {
-         padding: 0px;
-       }
-
-       #k_home_toolbar {
-         margin: {{xsmall? '10px 0': '0 20px'}};
-       }
-
-       #k_home_center_container {
-         width: 100%;
-       }
-
-       #k_home_center {
-         width: {{xsmall ? '100%' : small? '80%' : '60%'}};
-         padding:  {{xsmall ? '10px' : '20px 0px'}};
-         font-size: {{xsmall? '17' : small? '20' : '20'}}px;
-         margin: 0 auto;
-       }
-
-       #k_home_center div {
-         margin-top: {{xsmall? '5' : small? '10' : '10'}}px;
-         margin-bottom: {{xsmall? '5' : small? '10' : '10'}}px;
-       }
-
-       #k_home_motto {
-         font-size: {{xsmall? '22' : small? '45' : '45'}}px;
-         color: #a56941;
-         float: left;
-         line-height: 1.3em;
-         margin-top: 10px;         
-       }
-       
-       #k_home_snd-btn {
-         margin-top: 5px;
-       }
-
-       #k_home_1st_description > div {
-         margin-top: 10px;
-         text-align: justify;
-         text-justify: inter-word;
-         font-size: {{xsmall ? 16 : small? 20 : 24}}px;
-       }
-
-       #k_home_tools {
-         font-size: {{xsmall? '20' : small? '32' : '32'}}px;
-         color: #69312f;
-       }
-
-       #k_home_tools div:first-child {
-         margin-right: {{xsmall ? 20 : small? 40 : 40}}px;
-       }
-
-       #k_home_tools core-item::shadow #icon {
-         margin: 0 6px;
-       }
-
-       #k_home_scroller {
-         padding: 20px;
-         overflow-y: auto;
-         overflow-x: hidden;
-         text-align: justify;
-       }
-
-       #k_home_spin_container {
-         background-color: {{homebackcolor}};
-         z-index: 100;
-         opacity: 0.7;
-       }
-       
-       #k_home_spin {
-         width: 100px;
-         height: 100px;
-         position: absolute;
-         margin: auto;
-         top: 0; left: 0; bottom: 0; right: 0;
-       }
-       
-       #k_home_spin::shadow .circle {
-         border-color: #a56941;
-       }
-       
-       #buck-blockquote {
-         margin: 1.5em 0 1.5em;
-         padding: 0 1em 0 2.5em;
-         position:relative;       
-       }
-
-       #buck-blockquote:before {
-         color: #ccc;
-         content: "\201C";
-         font-size: 5em;
-         position:absolute;
-         left:5px;
-         top: 0.3em;
-         line-height: 0.1em;
-       }
-
-       #buck-blockquote:after {
-         color: #ccc;
-         content: "\201D";
-         font-size: 5em;
-         position:absolute;
-         right:3px;
-         bottom: 0em;
-         line-height: 0.1em;
-       }
-
-       #buck {
-         display: block;
-         margin-top: 5px;
-       }
-       
-       blockquote cite:before {
-         content: "\2014 \2009";
-       }
-
-       #buck-blockquote, #sec0, #sec1, #sec2, #sec3 {
-         font-size: {{xsmall ? 16 : small? 20 : 24}}px;
-       }
-       
-       /* Main panels ------------------------------------------------------- */
-
-       :host {
-         font-size: inherit;
-       }
-
-       core_selector {
-         font-size: 16px;
-       }
-
-       #main_core_drawer_panel {
-         position: absolute;
-         top: 0px;
-         right: 0px;
-         bottom: 0px;
-         left: 0px;
-         font-size: 16px;
-       }
-
-       #main_left_section {
-         box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-         margin-top: 40px;         
-         background-color: white;
-       }
-
-       #main_right_section {
-         margin-top: 40px;
-         height: 100%;
-         box-sizing: border-box;
-         background-color: #FFF;
-       }
-
-       /* Sitebar ----------------------------------------------------------- */
-
-       #sitebar_toolbar {
-         right: 0px;
-         left: 0px;
-         height: 40px;
-         color: #FFFFFF;
-         fill: #FFFFFF;
-         top: 0px;
-         position: absolute;
-         background-color: {{homebackcolor}};
-         -moz-user-select: none;
-         -khtml-user-select: none;
-         -webkit-user-select: none;
-       }
-
-       #sitebar_toolbar .navbar-collapse {
-         padding: 0px;
-       }
-
-       #sitebar_right_extensionbar {
-         margin-top: {{xsmall? -20: 0}}px;
-       }
-       
-       #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a,
-       #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a:hover,
-       #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a {
-         background-color: transparent;
-         color:rgb(105, 49, 47);
-       }       
-
-       #sitebar_toolbar paper-icon-button,
-       #sitebar_toolbar core-icon-button {
-         margin-left: 3px !important;
-         margin-right: 3px !important;         
-       }
-
-       #sitebar_toolbar a:hover,
-       #sitebar_toolbar  paper-icon-button:hover,
-       #sitebar_toolbar core-icon-button:hover {
-         color: #808080 !important;
-         box-shadow: none !important;
-       }
-       
-       #space_selector_paper_tabs {
-         color: #FFFFFF;
-         left: 0px;
-         top: 0px;
-         position: absolute;
-         opacity: 1;
-         height: 40px;
-         background-color: {{homebackcolor}};
-       }
-
-       #home_space, #group_space, #user_space {
-         margin-top: 40px;
-       }
-
-       #user_space {         
-         margin: 40px 0 0 10px;
-       }
-
-       #user_space_content {
-         overflow-y: scroll;
-       }       
-
-       .full-absolute-no-sitebar,
-       #group_space {
-         position: absolute;
-         top: 0px;
-         bottom: 0px;
-         left: 0px;
-         right: 0px;
-         width: 100%;
-       }
-
-       paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
-         background-color: rgb(105, 49, 47);
-       }
-
-       paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
-         height: 4px;
-       }
-
-       paper-button.custom > core-icon {
-         margin-right: 4px;
-       }
-
-       paper-tab::shadow #ink {
-         color: #FFF;
-         opacity: 0.2;
-       }
-       
-       #sitebar_chat_icon {
-         margin-top: -10px;
-       }
-
-       #sitebar_language_btn,#sitebar_mygroups_btn,#sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
-         margin-top: -20px;
-       }
-       
-       #paper_progress,#toast {
-         z-index:1;
-       }
-
-       #toast {
-         left: 20px;
-         right: auto;
-         bottom: 10px;
-         background-color: #d3bc5f;
-         color: white;
-       }
-       
-       #paper_progress_container {
-       }
-       
-       #paper_progress::shadow #activeProgress {
-         background-color: rgb(165, 105, 65);
-       }
-
-       /* Tutorials */
-       html /deep/ paper-dialog   iframe {
-         border: none;
-       }
-       
-       .sitebar_inbox_badge_container {
-         top: -23px;
-         position: relative;
-         left: 95px;
-         float: left;
-       }
-       
-       .sitebar_chats_badge {
-         position: relative;
-         top: -23px;
-         left: -20px;
-       }
-       
-       .sitebar_inbox_badge {
-       }
-       
-       .sitebar_search_hide {
-         visibility: hidden;
-         display: none;
-       }
-       
-       .sitebar_search_on {
-         left: 0;
-         background: inherit;
-         z-index: 1001;
-       }
-       
-       #sitebar_search_input {
-         background-color: inherit;
-         border: none;
-         font-size: 20px;
-         outline: none;
-         padding: 0;
-         color: inherit;
-       }
-       
-       #sitebar_search_group {         
-         margin-top: -20px;
-       }
-       
-       #sitebar_chat_icon_group {
-         margin: 0px;
-       }
-       
-       /* Inbox ------------------------------------------------------------- */
-
-       #inbox_show_hide {
-         right: -20px;
-         position: absolute;
-         opacity: 0.8;
-         top: 10px;         
-         border-bottom-right-radius: 50%; border-top-right-radius: 50%;
-         border-bottom-left-radius: 5px; border-top-left-radius: 5px;
-       }
-       
-       #inbox_new_message {
-         right: -2px;
-         position: absolute;
-         top: 46px;
-         opacity: 0.9;
-         z-index: 1;
-         color: white;
-         background-color: rgb(153, 187, 0);
-       }
-       
-       #inbox_chat_container,  #inbox_container, #inbox_core_header, #chat_core_header {
-         width: 100%;
-       }
-       
-       #inbox_core_header, #chat_core_header, #inbox_container {
-         height: 100%;
-       }
-
-       #inbox_core_header {
-         left: 0px;
-         top: 0px;
-         position: absolute;
-         height: 100%;
-       }
-       #inbox_close_icon {
-         display: {{main_forcenarrow? 'none': 'inline-block'}};
-       }
-       
-       #inboxchat_splitter {
-         z-index: 2;
-       }
-       
-       #inbox_share_icon {
-       }
-       
-       #inbox_toolbar,#chat_toolbar {
-         color: gray;
-         height: 60px;
-         background-color: rgb(230, 230, 230);
-       }
-       
-       #inbox_result_section, #chat_centerpanel {
-         /* height: 100%; */
-         padding: 10px;
-         background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
-       }
-       
-       #inbox_search_icon,#inbox_share_icon {
-         display: none;
-       }
-       
-       .k-digest-main {
-         min-width: 100px;
-         padding: 4px 10px 4px 4px; /* 4px padding, but a bit extra on the RHS. */
-         border-bottom: 1px solid #eee;
-         cursor: pointer;
-         color: grey;
-         font-size: 14px;
-       }       
-       
-       .k-digest-main:hover {
-         background-color: #eee;
-       }
-
-       .k-digest-main.k-digest-selected {
-         background-color: #789e35;
-         color: white;
-       }
-
-       .k-digest-inner {
-         line-height: 16px;
-         /* height: 43px;  /* Exactly 2 lines of text. */ */
-         overflow: hidden;
-       }
-
-       .k-digest-mainLeft {
-       }
-       
-       .k-digest-avatarsAndUnreadDiv {
-       }
-       
-       .k-digest-avatarsDiv {
-       }
-       
-       .k-digest-avatarsDiv {
-         margin-right: 0.7em;
-         height: 43px;
-         width: 86px;
-         background-color: transparent;
-         /* border: 1px solid #cad0d9; */
-       }
-       .k-digest-avatar {         
-         height: 43px !important;
-         width: 43px !important;         
-         margin-left: 2px;
-         border: 1px solid transparent; /* #b3b3b3;*/
-       }
-       
-       .k-digest-unreadDiv {
-         text-align: center;
-         margin-top: 2px;
-       }
-       
-       .k-digest-unread-count {
-         color: white;
-         background-color: #99bb00;         
-         /* Make a bubble. Leading is 16px, so 8px border radius is a bubble. */
-         padding: 0 0.5em;
-         border-radius: 8px;
-         -moz-border-radius: 8px;
-         -webkit-border-radius: 8px;
-       }
-       
-       .k-digest-mainRight {
-       }
-       
-       .k-digest-titleDiv {
-       }
-       
-       .k-digest-title {
-         font-weight: bold;
-         color: grey;
-         max-height: 43px;
-       }
-       
-       .k-digest-snippetDiv {
-       }
-       
-       .k-digest-snippet {
-         max-height: 43px;
-       }
-       
-       .k-digest-timeDiv {
-       }
-       
-       .k-digest-time {
-         color: #808080;
-       }
-
-       .k-digest-unread {
-         font-weight: bold;
-         color: black;
-       }
-       
-       .k-digest-time {
-         font-style: italic;
-       }
-
-       .k-digest-unread.k-digest-time {
-         font-weight: normal;
-         color: #808080;
-       }
-
-       .k-digest-selected .k-digest-title,
-       .k-digest-selected .k-digest-time,
-       .k-digest-selected .k-digest-unread {
-         color: white;
-       }
-       
-       .k-inbox-showmore {
-         margin-bottom: 50px;
-       }
-       
-       /* Other ------------------------------------------------------------- */
-
-       .btn_gray {
-         color: white;
-         z-index: 1;
-         background-color: gray;
-       }
-       
-       .btn_green {
-         color: white;
-         background-color: rgb(153, 187, 0);
-       }
-       
-       .black {
-         color: black;
-       }
-       
-       .red {
-         color: red;
-       }
-       
-       .hidden {
-         display: none;
-       }
-       
-       html /deep/ core-icon-button {
-         /* Bootstrap breaks the 1rem font size of this buttons */
-         font-size: 16px;
-       }
-       
-       /* Group space ------------------------------------------------------- */
-
-       #core_scroll_header_panel {
-         width: 100%;
-         left: 0px;
-         top: 0px;
-         right: 0px;
-         bottom: 40px;
-         position: absolute;         
-       }
-       
-       /* background for toolbar when it is at its full size */
-       core-scroll-header-panel::shadow #headerContainer {
-         background-color: {{bg6}};
-         color: {{c6}};
-       }
-       
-       core-scroll-header-panel::shadow #headerBg {
-         background-image: url({{group_back_image_url}});         
-         background-attachment: fixed;
-         background-position: 50% 50%;
-         background-repeat: no-repeat;
-         opacity : 0.15 !important;
-       }
-       
-       /* background for toolbar when it is condensed  (not working because of previous opacity) */
-       core-scroll-header-panel::shadow #condensedHeaderBg {
-         background-color: {{bg2}};
-       }
-       
-       core-scroll-header-panel::shadow #mainContainer {
-         background-color: {{bg8}};
-       }
-
-       #core_drawer_group_header {
-         position: absolute;
-         top: 0px;
-         right: 0px;
-         bottom: 0px;
-         left: 0px;
-         height: {{xsmall? headers: small? headerm: headerl}}px;
-         border-right: 13px solid #F2F2F2;
-       }
-       
-       #group_core_drawer {
-         box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-         background-color: #FFFFFF; /* {{bg5}}; */
-         -moz-user-select: none;
-         -khtml-user-select: none;
-         -webkit-user-select: none;
-         user-select: none;
-       }
-       
-       #group_core_main {
-         box-sizing: border-box;
-         background-color: transparent;
-         -moz-user-select: none;
-         -khtml-user-select: none;
-         -webkit-user-select: none;
-         user-select: none;
-       }
-
-       #group_core_main core-icon-button::shadow core-icon {  
-         height: 16px;
-         width: 16px;
-       }
-       
-       FIXME,
-       #group_core_main core-icon-button {
-         font-size: 14px;
-       }
-       
-       #header_core_toolbar.tall {
-         height: {{xsmall? headers: small? headerm: headerl}}px;
-       }
-       
-       #header_core_toolbar {
-         color: {{c6}};
-         fill: {{bg6}};
-         background-color: transparent;
-       }
-
-       #header_groupname_div {
-         width: 100%;
-         margin: 0px;
-         moz-user-select: text;
-         -khtml-user-select: text;
-         -webkit-user-select: text;
-         user-select: text;
-       }
-       
-       #header_group_paper_shadow {
-         position: relative;
-         left: {{xsmall? 10: small? 52: 52}}px;         
-         top: {{xsmall? 7: small? 10: 20 }}px;
-         border-radius: 2px;
-       }
-       
-       #header_group_paper_shadow,
-       #header_group_paper_shadow img:first-child {
-         width: {{xsmall ? avatarsizes : small? avatarsizem : avatarsizel}}px;
-         height: {{xsmall ? avatarsizes : small? avatarsizem : avatarsizel}}px;
-       }
-       
-       .k-avatar-medium-decorator {
-         position: relative;
-         top: -6px;
-         left: {{xsmall ? avatarsizes-6: small? avatarsizem-6 : avatarsizel-6}}px;         
-       }
-
-       .k-avatar-small-decorator {
-         position: relative;         
-         top: 22px;
-         left: -7px;
-       }
-       
-       #header_group_logo {
-         margin-right: 30px;
-       }
-       
-       #header_group_name,#header_short_group_name {
-         position: relative;
-         left: {{xsmall? 20: small? 60: 60}}px;
-       }
-       
-       #header_group_name_group {
-         margin-top: {{xsmall? 0: small? 0 : 20}}px;
-       }
-       
-       #header_group_name {
-         top: {{xsmall? 7: 10}}px;
-         font-size: {{xsmall ? 22 : small? 40 : 50}}px;
-       }
-       
-       #header_short_group_name {
-         font-size: {{xsmall ? 12 : small? 14 : 16}}px;
-       }
-       
-       #header_short_group_name a {
-         color: {{c3}};   
-       }
-       
-       #header_group_icon_add, #header_group_icon_settings {
-       }
-       
-       #header_group_icon_settings {
-       }
-       
-       #social_net_group {
-         padding: {{xsmall? '0 5px 0 0': '0 5px 0 5px'}};
-       }
-
-       #k_group_entity_toolbar > div > div > button {
-         min-height: 39px;
-         color: {{c6}};
-       }
-       
-       #group_header_bottom {
-         margin-top: {{xsmall ? 44 : small? 33 : 33}}px;
-       }
-       
-       /* Doc icon */
-       #document_name > div {
-         font-size: {{xsmall ? 14 : small? 22 : 28}}px;
-       }
-
-       .k-content-title-icon {
-         margin-top: {{xsmall? 9: small? 10: 14}}px;
-       }
-
-       #document_name > div > input,
-       #document_name > div > span {
-         font-size: {{xsmall ? 24 : small? 26 : 32}}px;
-         line-height: 1.3em;
-       }
-
-       #document_name {         
-         margin-left: {{xsmall ? 10 : 2}}px;
-         line-height: 1em;
-         margin-bottom: 30px;
-         margin-top: 30px;
-       }
-
-       #doc_header_right_extensionbar {
-         position: absolute;
-         right: {{xsmall ? 40 : small? 60 : 60}}px;
-       }
-       
-       #miga a, #miga li:before {
-         font-size: {{xsmall ? 16 : small? 20 : 22}}px;
-       }
-
-       #miga {
-         margin-left: {{xsmall ? 5 : 40}}px;
-         margin-top: {{xsmall ? -30 : 0}}px;
-         moz-user-select: text;
-         -khtml-user-select: text;
-         -webkit-user-select: text;
-         user-select: text;
-       }
-       
-       .breadcrumb > div > div > div > button > i ,
-       .breadcrumb a {
-         color: {{c6}};
-       }
-       
-       .breadcrumb > div > div > div > li + li:before {
-         color: {{c3}};         
-       }
-       
-       .breadcrumb > .active {
-         color: #777;
-       }
-       
-       #edit_inbox_fab,#reply_inbox_fab,#editdone_inbox_fab {
-         position: fixed;
-         z-index: 1;
-       }
-
-       #edit_inbox_fab {
-         top: 100px;
-         right: 0px;
-       }
-
-       #reply_inbox_fab {
-         top: {{100 + (xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
-         right: 0px;
-       }
-
-       #editdone_inbox_fab {
-         top: {{100 + 2*(xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
-         right: 0px;
-       }
-
-       #edit_docgroup_fab, #reply_docgroup_fab, #editdone_docgroup_fab {
-         position: absolute;
-         -webkit-transform: translateZ(0);
-         z-index: 1;
-         left: {{xsmall ? -7 : 31}}px;
-       }
-
-       #edit_docgroup_fab {
-         top: {{xsmall ? 210 : small? 280 : 310}}px;
-       }
-
-       #reply_docgroup_fab {
-         top: {{xsmall? 210 + toolbarFabMinMargins: (small? 280 : 310) + toolbarFabMargins}}px;
-       }
-       
-       #editdone_docgroup_fab {
-         top: {{xsmall? 210 + 2*toolbarFabMinMargins: (small? 280 : 310) + 2*toolbarFabMargins}}px;
-       }
-       
-       paper-fab[disabled] {
-         color: #808080;
-         background-color:#CCC;
-       }
-       
-       #doc_toolbar_shadow {
-         right: 0px;
-         left: -10px;         
-         bottom: 0px;
-         height: 40px;
-         position: absolute;         
-         margin: {{xsmall? '0px 25px 0px 20px' : '0px 75px 0px 70px'}};
-         top: {{xsmall? 134 : small? 154: 186}}px;         
-       }
-       
-       #doc_toolbar {
-         color: gray;
-         height: 40px;
-         background-color: white;
-       }
-       
-       #doc_toolbar /deep/ .toolbar-tools {
-         height: 40px;
-       }
-       
-       core-toolbar.medium-tall {
-         line-height: 20px;
-       }
-       
-       #doc_share_btn {
-         right: 10px;
-         position: relative;
-         top: {{xsmall ? 10 : 0}}px;
-       }
-       #group_tools_toolbar {
-         right: {{xsmall ? 0 : 0}}px;         
-         top: {{xsmall ? 270 : small? 280: 310}}px;
-         position: absolute;
-         z-index:  {{xsmall ? 1 : inherit}};
-       }        
-       #group_tools_toolbar paper-fab {
-         color: grey;
-         background-color: transparent;
-         border-radius: 50px !important;
-         border-top-right-radius: 0px !important;
-         border-bottom-right-radius: 0px !important; 
-         margin-bottom: 5px; /* Distance between tools */  
-       }
-
-       #group_tools_toolbar paper-fab::shadow paper-shadow {         
-         visibility: visible;
-       }
-
-       #group_tools_toolbar paper-fab:hover::shadow paper-shadow {
-         visibility: hidden;
-       }
-
-       #group_tools_toolbar paper-fab.active::shadow paper-shadow {
-         visibility: visible;
-       }
-
-       #group_tools_toolbar .active:hover,       
-       #group_tools_toolbar .active {
-         color: {{c3}};
-         background-color: {{bg3}};
-       }
-
-       #group_tools_toolbar paper-fab {
-         background-color: #eee;
-         color: {{bg3}};
-       }
-
-       #group_tools_toolbar paper-fab::shadow #icon {
-         left: 4px;  
-       }
-       
-       #group_tools_toolbar paper-fab[mini]::shadow #icon {
-         witdh: 20px;
-         height:20px;
-         left: 4px;  
-       }
-       
-       #group_tools_toolbar paper-fab:hover {
-         color: rgb(231, 231, 231);
-         background-color: {{bg4}};
-       }
-       
-       #group_tools_toobar core-item {
-         /* Initially
-            display: none; */
-       }
-       #group_tools_toolbar core-item::shadow #label {
-         display: none;
-       }
-       
-       #doc_share_btn {
-         color: grey;
-       }
-       
-       #doc_content_shadow {
-         font-size: 16px;
-         padding: {{xsmall ? '30px 40px 10px 10px' : '20px 60px 60px' }};
-         background-color: #FFFFFF;
-         min-height: {{docContentMinHeight + (xsmall? 100: 0)}}px;
-         margin-bottom: 80px;
-       }
-       
-       #doc_content_section {
-         padding: {{xsmall ? '10px 10px 10px 10px' : '60px' }};
-         position: absolute;
-         top: 0;
-         left: 0;
-         right: 0;
-         bottom: 0;
-         padding-top: {{xsmall? headers + 50: small? headerm + 60: headerl + 60}}px;
-         overflow-y: scroll; /* This makes the scrollbar always visible, so the tools-bar is always in the same position */
-       }
-       
-       #header_bottom {
-         position: absolute;
-         bottom: 10px;
-         padding: {{xsmall? '0': '0 80px 0 5px'}};
-       }
-       
-       #site_bottombar {
-         right: 0px;
-         left: 0px;
-         height: 40px;
-         bottom: 0px;
-         position: absolute;         
-         border-top-color: rgb(231, 231, 231);
-         border-top-style: solid;
-         border-top-width: 1px;
-         color: rgb(51,51,51);
-         background-color: rgb(248, 248, 248);
-         padding: 0 15px;
-       }
-
-       #site_bottombar > div > div > img {
-         /* license */         
-         padding-left: {{xsmall ? '10px' : '60px' }};
-       }
-       
-       /* Chat -------------------------------------------------------------- */
-
-       #sitebar_user_btn::shadow core-icon {
-         background-image: url({{user_icon_back_image_url}});
-         border-radius: 50%;
-         background-size: 24px;
-         margin-right: 3px;
-       }
-
-       .org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-self {
-         bottom: 40%;
-       }
-
-       #chat_centerpanel > div {
-         position: absolute;
-         top: 60%;
-         bottom: 50px;
-         left: 0;
-         right: 0;
-         margin-top: 50px;
-       }
-       
-       #gwt-debug-RosterWidget-roster > div:nth-child(2),
-       #gwt-debug-RosterWidget-actions {
-         height: 26px !important;
-       }
-       
-       #gwt-debug-RosterWidget-scroll {
-         top: 8px !important;
-       }
-       
-       .hablar-HablarWidget {
-         position: fixed;
-         width: 100%;
-         height: 100%;
-       }
-
-       .core-icon-status-away::shadow core-icon path:nth-child(2) {
-         fill: #FFFFFF;
-       }
-       
-       .core-icon-status-away::shadow core-icon path:first-child {
-         fill: rgb(144, 144, 144);
-       }
-       
-       .core-icon-status-online::shadow core-icon {
-         fill: rgb(95, 255, 39);
-       }
-       
-       .core-icon-status-busy::shadow core-icon {
-         fill: rgb(255, 85, 85);
-       }
-       
-       .core-icon-status-offline::shadow core-icon {
-         fill: rgb(128, 128, 128);
-       }
-       
-      </style>
-    </template>
-    
-    <script src="kune-polymer.js"></script>
-    
-    <script>
-     window.addEventListener('polymer-ready', function(e) {       
-       // Not yet ready
-       // document.body.setAttribute('unresolved', '');       
-       var s = document.createElement('script');
-       s.type = "text/javascript";
-       s.src = "ws/ws.nocache.js";
-       // document.body.appendChild(s);
-     });
-     
-     addEventListener('template-bound', function(e) {       
-       var scope = e.target;
-       h = document.getElementById('k_home_scroller').offsetHeight;
-       h = h - h*2/100;
-
-       document.getElementById('sec0').style.height=h + "px";
-       document.getElementById('sec1').style.height=h + "px";
-       document.getElementById('sec2').style.height=h + "px";       
-       document.getElementById('sec3').style.height=h + "px";
-       document.getElementById('sec4').style.height=h + "px";
-       document.getElementById('sec5').style.height=h + "px";
-       
-       scope.belowWayPoint = function(e) {
-         id = e.target.attributes["data-id"].value;
-         scroll("sec" + id);
-       }
-
-       scope.aboveWayPoint = function(e) {
-         id = e.target.attributes["data-id"].value;
-         console.log("id above " + id);
-       }
-
-       $("#k_home_spin_container").hide();
-
-       kt.spin_active=false;
-       
-     });
-
-    </script>
-
-    <!-- - <script type="text/javascript" language="javascript" src="ws/ws.nocache.js"></script> -->
-    
-    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
-    <noscript>
-      <div
-style="width: 22em; position: absolute; left: 50%; margin-left: -11em; color: red; background-color: white; border: 1px solid red; padding: 4px; font-family: sans-serif">
-        Your web browser must have JavaScript enabled in order for this
-        application to display correctly.</div>
-    </noscript>
-    <iframe id="__gwt_historyFrame" style="position: absolute; width: 0; height: 0; border: 0"></iframe>
-    <iframe src="" id="__download" style="position: absolute; width: 0; height: 0; border: 0"></iframe>
-    
+
+<style>
+ /* -*- engine:css -*- */
+ /* Home Space -------------------------------------------------------- */
+ body {
+   font-family: 'Open Sans', sans-serif;
+   /* position: absolute, etc, with fit polymer attribute in body */
+ }
+
+ .hidden_el {
+   display: none;
+   position: absolute;
+ }
+ 
+ .gwt_code_iframe {
+   position: absolute; width: 0; height: 0; border: 0;
+ }
+
+ .gwt_noscript_warning {
+   width: 22em;
+   position: absolute;
+   left: 50%;
+   margin-left: -11em;
+   color: red;
+   background-color: white;
+   border: 1px solid red;
+   padding: 4px;
+   font-family: sans-serif;
+ }
+
+ 
+ #home_space {
+   font-size: {{xsmall? '12' : small? '16' : '16'}}px;
+ }
+
+ #home_space_core_header::shadow #mainContainer {
+   overflow: visible;
+ }
+
+ #k_home_mask {
+   background-color: {{homebackcolor}};
+   padding: 30px;
+   height: {{xsmall? 220: 270}}px;
+   padding-top: {{xsmall? 80: 110}}px;
+ }
+
+ #k_home_main_container {
+   color: #FFFFFF;
+ }
+
+ #k_home_main_v {
+ }
+
+ #k_home_logoname_motto {
+ }
+
+ #k_home_logo {
+   vertical-align: top;
+   padding-right: {{xsmall ? '5px' : '20px'}};
+ }
+
+ #k_home_logoname {
+   vertical-align: top;
+ }
+
+ #k_home_logoname {
+   padding: 0px;
+ }
+
+ #k_home_toolbar {
+   margin: {{xsmall? '10px 0': '0 20px'}};
+ }
+
+ #k_home_center_container {
+   width: 100%;
+ }
+
+ #k_home_center {
+   width: {{xsmall ? '100%' : small? '80%' : '60%'}};
+   padding:  {{xsmall ? '10px' : '20px 0px'}};
+   font-size: {{xsmall? '17' : small? '20' : '20'}}px;
+   margin: 0 auto;
+ }
+
+ #k_home_center div {
+   margin-top: {{xsmall? '5' : small? '10' : '10'}}px;
+   margin-bottom: {{xsmall? '5' : small? '10' : '10'}}px;
+ }
+
+ #k_home_motto {
+   font-size: {{xsmall? '22' : small? '45' : '45'}}px;
+   color: #a56941;
+   float: left;
+   line-height: 1.3em;
+   margin-top: 10px;
+ }
+
+ #k_home_snd-btn {
+   margin-top: 5px;
+ }
+
+ #k_home_1st_description > div {
+   margin-top: 10px;
+   text-align: justify;
+   text-justify: inter-word;
+   font-size: {{xsmall ? 16 : small? 20 : 24}}px;
+ }
+
+ #k_home_tools {
+   font-size: {{xsmall? '20' : small? '32' : '32'}}px;
+   color: #69312f;
+ }
+
+ #k_home_tools div:first-child {
+   margin-right: {{xsmall ? 20 : small? 40 : 40}}px;
+ }
+
+ #k_home_tools core-item::shadow #icon {
+   margin: 0 6px;
+ }
+
+ #k_home_scroller {
+   padding: 20px;
+   overflow-y: auto;
+   overflow-x: hidden;
+   text-align: justify;
+ }
+
+ #k_home_spin_container {
+   background-color: {{homebackcolor}};
+   z-index: 100;
+   opacity: 0.7;
+ }
+
+ #k_home_spin {
+   width: 100px;
+   height: 100px;
+   position: absolute;
+   margin: auto;
+   top: 0; left: 0; bottom: 0; right: 0;
+ }
+
+ #k_home_spin::shadow .circle {
+   border-color: #a56941;
+ }
+
+ #buck_blockquote {
+   margin: 1.5em 0 1.5em;
+   padding: 0 1em 0 2.5em;
+   position:relative;
+ }
+
+ #buck_blockquote:before {
+   color: #ccc;
+   content: "\201C";
+   font-size: 5em;
+   position:absolute;
+   left:5px;
+   top: 0.3em;
+   line-height: 0.1em;
+ }
+
+ #buck_blockquote:after {
+   color: #ccc;
+   content: "\201D";
+   font-size: 5em;
+   position:absolute;
+   right:3px;
+   bottom: 0em;
+   line-height: 0.1em;
+ }
+
+ #buck {
+   display: block;
+   margin-top: 5px;
+ }
+
+ blockquote cite:before {
+   content: "\2014 \2009";
+ }
+
+ #buck_blockquote, #sec0, #sec1, #sec2, #sec3 {
+   font-size: {{xsmall ? 16 : small? 20 : 24}}px;
+ }
+
+ /* Main panels ------------------------------------------------------- */
+
+ :host {
+   font-size: inherit;
+ }
+
+ core_selector {
+   font-size: 16px;
+ }
+
+ #main_core_drawer_panel {
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   bottom: 0px;
+   left: 0px;
+   font-size: 16px;
+ }
+
+ #main_left_section {
+   box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+   margin-top: 40px;
+   background-color: white;
+ }
+
+ #main_right_section {
+   margin-top: 40px;
+   height: 100%;
+   box-sizing: border-box;
+   background-color: #FFF;
+ }
+
+ /* Sitebar ----------------------------------------------------------- */
+
+ #sitebar_toolbar {
+   right: 0px;
+   left: 0px;
+   height: 40px;
+   color: #FFFFFF;
+   fill: #FFFFFF;
+   top: 0px;
+   position: absolute;
+   background-color: {{homebackcolor}};
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+ }
+
+ #sitebar_toolbar .navbar-collapse {
+   padding: 0px;
+ }
+
+ #sitebar_right_extensionbar {
+   margin-top: {{xsmall? -20: 0}}px;
+ }
+
+ #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a,
+ #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a:hover,
+ #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a {
+   background-color: transparent;
+   color:rgb(105, 49, 47);
+ }
+
+ #sitebar_toolbar paper-icon-button,
+ #sitebar_toolbar core-icon-button {
+   margin-left: 3px !important;
+   margin-right: 3px !important;
+ }
+
+ #sitebar_toolbar a:hover,
+ #sitebar_toolbar  paper-icon-button:hover,
+ #sitebar_toolbar core-icon-button:hover {
+   color: #808080 !important;
+   box-shadow: none !important;
+ }
+
+ #space_selector_paper_tabs {
+   color: #FFFFFF;
+   left: 0px;
+   top: 0px;
+   position: absolute;
+   opacity: 1;
+   height: 40px;
+   background-color: {{homebackcolor}};
+ }
+
+ #home_space, #group_space, #user_space {
+   margin-top: 40px;
+ }
+
+ #user_space {
+   margin: 40px 0 0 10px;
+ }
+
+ #user_space_content {
+   overflow-y: scroll;
+ }
+
+ .full_absolute_no_sitebar,
+ #group_space {
+   position: absolute;
+   top: 0px;
+   bottom: 0px;
+   left: 0px;
+   right: 0px;
+   width: 100%;
+ }
+
+ paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
+   background-color: rgb(105, 49, 47);
+ }
+
+ paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
+   height: 4px;
+ }
+
+ paper-button.custom > core-icon {
+   margin-right: 4px;
+ }
+
+ paper-tab::shadow #ink {
+   color: #FFF;
+   opacity: 0.2;
+ }
+
+ #sitebar_chat_icon {
+   margin-top: -10px;
+ }
+
+ #sitebar_language_btn,#sitebar_mygroups_btn,#sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
+   margin-top: -20px;
+ }
+
+ #paper_progress,#toast {
+   z-index:1;
+ }
+
+ #toast {
+   left: 20px;
+   right: auto;
+   bottom: 10px;
+   background-color: #d3bc5f;
+   color: white;
+ }
+
+ #paper_progress_container {
+ }
+
+ #paper_progress::shadow #activeProgress {
+   background-color: rgb(165, 105, 65);
+ }
+
+ /* Tutorials */
+ html /deep/ paper-dialog   iframe {
+   border: none;
+ }
+
+ .sitebar_inbox_badge_container {
+   top: -23px;
+   position: relative;
+   left: 95px;
+   float: left;
+ }
+
+ .sitebar_chats_badge {
+   position: relative;
+   top: -23px;
+   left: -20px;
+ }
+
+ .sitebar_inbox_badge {
+ }
+
+ .sitebar_search_hide {
+   visibility: hidden;
+   display: none;
+ }
+
+ .sitebar_search_on {
+   left: 0;
+   background: inherit;
+   z-index: 1001;
+ }
+
+ #sitebar_search_input {
+   background-color: inherit;
+   border: none;
+   font-size: 20px;
+   outline: none;
+   padding: 0;
+   color: inherit;
+ }
+
+ #sitebar_search_group {
+   margin-top: -20px;
+ }
+
+ #sitebar_chat_icon_group {
+   margin: 0px;
+ }
+
+ /* Inbox ------------------------------------------------------------- */
+
+ #inbox_show_hide {
+   right: -20px;
+   position: absolute;
+   opacity: 0.8;
+   top: 10px;
+   border-bottom-right-radius: 50%; border-top-right-radius: 50%;
+   border-bottom-left-radius: 5px; border-top-left-radius: 5px;
+ }
+
+ #inbox_new_message {
+   right: -2px;
+   position: absolute;
+   top: 46px;
+   opacity: 0.9;
+   z-index: 1;
+   color: white;
+   background-color: rgb(153, 187, 0);
+ }
+
+ #inbox_chat_container,  #inbox_container, #inbox_core_header, #chat_core_header {
+   width: 100%;
+ }
+
+ #inbox_core_header, #chat_core_header, #inbox_container {
+   height: 100%;
+ }
+
+ #inbox_core_header {
+   left: 0px;
+   top: 0px;
+   position: absolute;
+   height: 100%;
+ }
+ #inbox_close_icon {
+   display: {{main_forcenarrow? 'none': 'inline-block'}};
+ }
+
+ #inboxchat_splitter {
+   z-index: 2;
+ }
+
+ #inbox_share_icon {
+ }
+
+ #inbox_toolbar,#chat_toolbar {
+   color: gray;
+   height: 60px;
+   background-color: rgb(230, 230, 230);
+ }
+
+ #inbox_result_section, #chat_centerpanel {
+   /* height: 100%; */
+   padding: 10px;
+   background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+ }
+
+ #inbox_search_icon,#inbox_share_icon {
+   display: none;
+ }
+
+ .k-digest-main {
+   min-width: 100px;
+   padding: 4px 10px 4px 4px; /* 4px padding, but a bit extra on the RHS. */
+   border-bottom: 1px solid #eee;
+   cursor: pointer;
+   color: grey;
+   font-size: 14px;
+ }
+
+ .k-digest-main:hover {
+   background-color: #eee;
+ }
+
+ .k-digest-main.k-digest-selected {
+   background-color: #789e35;
+   color: white;
+ }
+
+ .k-digest-inner {
+   line-height: 16px;
+   /* height: 43px;  /* Exactly 2 lines of text. */ */
+   overflow: hidden;
+ }
+
+ .k-digest-mainLeft {
+ }
+
+ .k-digest-avatarsAndUnreadDiv {
+ }
+
+ .k-digest-avatarsDiv {
+ }
+
+ .k-digest-avatarsDiv {
+   margin-right: 0.7em;
+   height: 43px;
+   width: 86px;
+   background-color: transparent;
+   /* border: 1px solid #cad0d9; */
+ }
+ .k-digest-avatar {
+   height: 43px !important;
+   width: 43px !important;
+   margin-left: 2px;
+   border: 1px solid transparent; /* #b3b3b3;*/
+ }
+
+ .k-digest-unreadDiv {
+   text-align: center;
+   margin-top: 2px;
+ }
+
+ .k-digest-unread-count {
+   color: white;
+   background-color: #99bb00;
+   /* Make a bubble. Leading is 16px, so 8px border radius is a bubble. */
+   padding: 0 0.5em;
+   border-radius: 8px;
+   -moz-border-radius: 8px;
+   -webkit-border-radius: 8px;
+ }
+
+ .k-digest-mainRight {
+ }
+
+ .k-digest-titleDiv {
+ }
+
+ .k-digest-title {
+   font-weight: bold;
+   color: grey;
+   max-height: 43px;
+ }
+
+ .k-digest-snippetDiv {
+ }
+
+ .k-digest-snippet {
+   max-height: 43px;
+ }
+
+ .k-digest-timeDiv {
+ }
+
+ .k-digest-time {
+   color: #808080;
+ }
+
+ .k-digest-unread {
+   font-weight: bold;
+   color: black;
+ }
+
+ .k-digest-time {
+   font-style: italic;
+ }
+
+ .k-digest-unread.k-digest-time {
+   font-weight: normal;
+   color: #808080;
+ }
+
+ .k-digest-selected .k-digest-title,
+ .k-digest-selected .k-digest-time,
+ .k-digest-selected .k-digest-unread {
+   color: white;
+ }
+
+ .k-inbox-showmore {
+   margin-bottom: 50px;
+ }
+
+ /* Other ------------------------------------------------------------- */
+
+ .btn_gray {
+   color: white;
+   z-index: 1;
+   background-color: gray;
+ }
+
+ .btn_green {
+   color: white;
+   background-color: rgb(153, 187, 0);
+ }
+
+ .black {
+   color: black;
+ }
+
+ .red {
+   color: red;
+ }
+
+ .hidden {
+   display: none;
+ }
+
+ html /deep/ core-icon-button {
+   /* Bootstrap breaks the 1rem font size of this buttons */
+   font-size: 16px;
+ }
+
+ /* Group space ------------------------------------------------------- */
+
+ #core_scroll_header_panel {
+   width: 100%;
+   left: 0px;
+   top: 0px;
+   right: 0px;
+   bottom: 40px;
+   position: absolute;
+ }
+
+ /* background for toolbar when it is at its full size */
+ core-scroll-header-panel::shadow #headerContainer {
+   background-color: {{bg6}};
+   color: {{c6}};
+ }
+
+ core-scroll-header-panel::shadow #headerBg {
+   background-image: url({{group_back_image_url}});
+   background-attachment: fixed;
+   background-position: 50% 50%;
+   background-repeat: no-repeat;
+   opacity : 0.15 !important;
+ }
+
+ /* background for toolbar when it is condensed  (not working because of previous opacity) */
+ core-scroll-header-panel::shadow #condensedHeaderBg {
+   background-color: {{bg2}};
+ }
+
+ core-scroll-header-panel::shadow #mainContainer {
+   background-color: {{bg8}};
+ }
+
+ #core_drawer_group_header {
+   position: absolute;
+   top: 0px;
+   right: 0px;
+   bottom: 0px;
+   left: 0px;
+   height: {{xsmall? headers: small? headerm: headerl}}px;
+   border-right: 13px solid #F2F2F2;
+ }
+
+ #group_core_drawer {
+   box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+   background-color: #FFFFFF; /* {{bg5}}; */
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   user-select: none;
+ }
+
+ #group_core_main {
+   box-sizing: border-box;
+   background-color: transparent;
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+   user-select: none;
+ }
+
+ #group_core_main core-icon-button::shadow core-icon {
+   height: 16px;
+   width: 16px;
+ }
+
+ FIXME,
+ #group_core_main core-icon-button {
+   font-size: 14px;
+ }
+
+ #header_core_toolbar.tall {
+   height: {{xsmall? headers: small? headerm: headerl}}px;
+ }
+
+ #header_core_toolbar {
+   color: {{c6}};
+   fill: {{bg6}};
+   background-color: transparent;
+ }
+
+ #header_groupname_div {
+   width: 100%;
+   margin: 0px;
+   moz-user-select: text;
+   -khtml-user-select: text;
+   -webkit-user-select: text;
+   user-select: text;
+ }
+
+ #header_group_paper_shadow {
+   position: relative;
+   left: {{xsmall? 10: small? 52: 52}}px;
+   top: {{xsmall? 7: small? 10: 20 }}px;
+   border-radius: 2px;
+ }
+
+ #header_group_paper_shadow,
+ #header_group_paper_shadow img:first-child {
+   width: {{xsmall ? avatarsizes : small? avatarsizem : avatarsizel}}px;
+   height: {{xsmall ? avatarsizes : small? avatarsizem : avatarsizel}}px;
+ }
+
+ .k-avatar-medium-decorator {
+   position: relative;
+   top: -6px;
+   left: {{xsmall ? avatarsizes-6: small? avatarsizem-6 : avatarsizel-6}}px;
+ }
+
+ .k-avatar-small-decorator {
+   position: relative;
+   top: 22px;
+   left: -7px;
+ }
+
+ #header_group_logo {
+   margin-right: 30px;
+   width: {{xsmall? avatarsizes: small? avatarsizem: avatarsizel }}px;
+   height: {{xsmall? avatarsizes: small? avatarsizem: avatarsizel}}px;
+ }
+
+ #header_group_name,#header_short_group_name {
+   position: relative;
+   left: {{xsmall? 20: small? 60: 60}}px;
+ }
+
+ #header_group_name_group {
+   margin-top: {{xsmall? 0: small? 0 : 20}}px;
+ }
+
+ #header_group_name {
+   top: {{xsmall? 7: 10}}px;
+   font-size: {{xsmall ? 22 : small? 40 : 50}}px;
+ }
+
+ #header_short_group_name {
+   font-size: {{xsmall ? 12 : small? 14 : 16}}px;
+ }
+
+ #header_short_group_name a {
+   color: {{c3}};
+ }
+
+ #header_group_icon_add, #header_group_icon_settings {
+ }
+
+ #header_group_icon_settings {
+ }
+
+ #social_net_group {
+   padding: {{xsmall? '0 5px 0 0': '0 5px 0 5px'}};
+ }
+
+ #k_group_entity_toolbar > div > div > button {
+   min-height: 39px;
+   color: {{c6}};
+ }
+
+ #group_header_bottom {
+   margin-top: {{xsmall ? 44 : small? 33 : 33}}px;
+   width: 100%;
+ }
+
+ /* Doc icon */
+ #document_name > div {
+   font-size: {{xsmall ? 14 : small? 22 : 28}}px;
+ }
+
+ .k-content-title-icon {
+   margin-top: {{xsmall? 9: small? 10: 14}}px;
+ }
+
+ #document_name > div > input,
+ #document_name > div > span {
+   font-size: {{xsmall ? 24 : small? 26 : 32}}px;
+   line-height: 1.3em;
+ }
+
+ #document_name {
+   margin-left: {{xsmall ? 10 : 2}}px;
+   line-height: 1em;
+   margin-bottom: 30px;
+   margin-top: 30px;
+ }
+
+ #doc_header_right_extensionbar {
+   position: absolute;
+   right: {{xsmall ? 40 : small? 60 : 60}}px;
+ }
+
+ #miga a, #miga li:before {
+   font-size: {{xsmall ? 16 : small? 20 : 22}}px;
+ }
+
+ #miga {
+   margin-left: {{xsmall ? 5 : 40}}px;
+   margin-top: {{xsmall ? -30 : 0}}px;
+   moz-user-select: text;
+   -khtml-user-select: text;
+   -webkit-user-select: text;
+   user-select: text;
+ }
+
+ .breadcrumb > div > div > div > button > i ,
+ .breadcrumb a {
+   color: {{c6}};
+ }
+
+ .breadcrumb > div > div > div > li + li:before {
+   color: {{c3}};
+ }
+
+ .breadcrumb > .active {
+   color: #777;
+ }
+
+ #edit_inbox_fab,#reply_inbox_fab,#editdone_inbox_fab {
+   position: fixed;
+   z-index: 1;
+ }
+
+ #edit_inbox_fab {
+   top: 100px;
+   right: 0px;
+ }
+
+ #reply_inbox_fab {
+   top: {{100 + (xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
+   right: 0px;
+ }
+
+ #editdone_inbox_fab {
+   top: {{100 + 2*(xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
+   right: 0px;
+ }
+
+ #edit_docgroup_fab, #reply_docgroup_fab, #editdone_docgroup_fab {
+   position: absolute;
+   -webkit-transform: translateZ(0);
+   z-index: 1;
+   left: {{xsmall ? -7 : 31}}px;
+ }
+
+ #edit_docgroup_fab {
+   top: {{xsmall ? 210 : small? 280 : 310}}px;
+ }
+
+ #reply_docgroup_fab {
+   top: {{xsmall? 210 + toolbarFabMinMargins: (small? 280 : 310) + toolbarFabMargins}}px;
+ }
+
+ #editdone_docgroup_fab {
+   top: {{xsmall? 210 + 2*toolbarFabMinMargins: (small? 280 : 310) + 2*toolbarFabMargins}}px;
+ }
+
+ paper-fab[disabled] {
+   color: #808080;
+   background-color:#CCC;
+ }
+
+ #doc_toolbar_shadow {
+   right: 0px;
+   left: -10px;
+   bottom: 0px;
+   height: 40px;
+   position: absolute;
+   margin: {{xsmall? '0px 25px 0px 20px' : '0px 75px 0px 70px'}};
+   top: {{xsmall? 134 : small? 154: 186}}px;
+ }
+
+ #doc_toolbar {
+   color: gray;
+   height: 40px;
+   background-color: white;
+ }
+
+ #doc_toolbar /deep/ .toolbar-tools {
+   height: 40px;
+ }
+
+ core-toolbar.medium-tall {
+   line-height: 20px;
+ }
+
+ #doc_share_btn {
+   right: 10px;
+   position: relative;
+   top: {{xsmall ? 10 : 0}}px;
+ }
+ 
+ #group_tools_toolbar {
+   right: {{xsmall ? 0 : 0}}px;
+   top: {{xsmall ? 270 : small? 280: 310}}px;
+   position: absolute;
+   z-index:  {{xsmall ? 1 : inherit}};
+ }
+ 
+ #group_tools_toolbar paper-fab {
+   color: grey;
+   background-color: transparent;
+   border-radius: 50px !important;
+   border-top-right-radius: 0px !important;
+   border-bottom-right-radius: 0px !important;
+   margin-bottom: 5px; /* Distance between tools */ 
+ }
+
+ #group_tools_toolbar paper-fab::shadow paper-shadow {
+   visibility: visible;
+ }
+
+ #group_tools_toolbar paper-fab:hover::shadow paper-shadow {
+   visibility: hidden;
+ }
+
+ #group_tools_toolbar paper-fab.active::shadow paper-shadow {
+   visibility: visible;
+ }
+
+ #group_tools_toolbar .active:hover,
+ #group_tools_toolbar .active {
+   color: {{c3}};
+   background-color: {{bg3}};
+ }
+
+ #group_tools_toolbar paper-fab {
+   background-color: #eee;
+   color: {{bg3}};
+ }
+
+ #group_tools_toolbar paper-fab::shadow #icon {
+   left: 4px;
+ }
+
+ #group_tools_toolbar paper-fab[mini]::shadow #icon {
+   witdh: 20px;
+   height:20px;
+   left: 4px;
+ }
+
+ #group_tools_toolbar paper-fab:hover {
+   color: rgb(231, 231, 231);
+   background-color: {{bg4}};
+ }
+
+ #group_tools_toobar core-item {
+   /* Initially
+      display: none; */
+ }
+ #group_tools_toolbar core-item::shadow #label {
+   display: none;
+ }
+
+ #doc_share_btn {
+   color: grey;
+ }
+
+ #doc_content_shadow {
+   font-size: 16px;
+   padding: {{xsmall ? '30px 40px 10px 10px' : '20px 60px 60px' }};
+   background-color: #FFFFFF;
+   min-height: {{docContentMinHeight + (xsmall? 100: 0)}}px;
+   margin-bottom: 80px;
+ }
+
+ #doc_content_section {
+   padding: {{xsmall ? '10px 10px 10px 10px' : '60px' }};
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   padding-top: {{xsmall? headers + 50: small? headerm + 60: headerl + 60}}px;
+   overflow-y: scroll; /* This makes the scrollbar always visible, so the tools-bar is always in the same position */
+ }
+
+ #header_bottom {
+   position: absolute;
+   bottom: 10px;
+   padding: {{xsmall? '0': '0 80px 0 5px'}};
+ }
+
+ #site_bottombar {
+   right: 0px;
+   left: 0px;
+   height: 40px;
+   bottom: 0px;
+   position: absolute;
+   border-top-color: rgb(231, 231, 231);
+   border-top-style: solid;
+   border-top-width: 1px;
+   color: rgb(51,51,51);
+   background-color: rgb(248, 248, 248);
+   padding: 0 15px;
+ }
+
+ #site_bottombar > div > div > img {
+   /* license */ 
+   padding-left: {{xsmall ? '10px' : '60px' }};
+ }
+
+ /* Chat -------------------------------------------------------------- */
+
+ #sitebar_user_btn::shadow core-icon {
+   background-image: url({{user_icon_back_image_url}});
+   border-radius: 50%;
+   background-size: 24px;
+   margin-right: 3px;
+ }
+
+ .org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-self {
+   bottom: 40%;
+ }
+
+ #chat_centerpanel > div {
+   position: absolute;
+   top: 60%;
+   bottom: 50px;
+   left: 0;
+   right: 0;
+   margin-top: 50px;
+ }
+
+ #gwt-debug-RosterWidget-roster > div:nth-child(2),
+ #gwt-debug-RosterWidget-actions {
+   height: 26px !important;
+ }
+
+ #gwt-debug-RosterWidget-scroll {
+   top: 8px !important;
+ }
+
+ .hablar-HablarWidget {
+   position: fixed;
+   width: 100%;
+   height: 100%;
+ }
+
+ .core-icon-status-away::shadow core-icon path:nth-child(2) {
+   fill: #FFFFFF;
+ }
+
+ .core-icon-status-away::shadow core-icon path:first-child {
+   fill: rgb(144, 144, 144);
+ }
+
+ .core-icon-status-online::shadow core-icon {
+   fill: rgb(95, 255, 39);
+ }
+
+ .core-icon-status-busy::shadow core-icon {
+   fill: rgb(255, 85, 85);
+ }
+
+ .core-icon-status-offline::shadow core-icon {
+   fill: rgb(128, 128, 128);
+ }
+
+</style>
+</template>
+
+<script src="kune-polymer.js"></script>
+
+<script>
+ window.addEventListener('polymer-ready', function(e) {
+   // Not yet ready
+   // document.body.setAttribute('unresolved', '');
+   var s = document.createElement('script');
+   s.type = "text/javascript";
+   s.src = "ws/ws.nocache.js";
+   document.body.appendChild(s);
+ });
+
+ addEventListener('template-bound', function(e) {
+   var scope = e.target;
+   h = document.getElementById('k_home_scroller').offsetHeight;
+   h = h - h*2/100;
+
+   document.getElementById('sec0').style.height=h + "px";
+   document.getElementById('sec1').style.height=h + "px";
+   document.getElementById('sec2').style.height=h + "px";
+   document.getElementById('sec3').style.height=h + "px";
+   document.getElementById('sec4').style.height=h + "px";
+   document.getElementById('sec5').style.height=h + "px";
+
+   scope.belowWayPoint = function(e) {
+     id = e.target.attributes["data-id"].value;
+     scroll("sec" + id);
+   }
+
+   scope.aboveWayPoint = function(e) {
+     id = e.target.attributes["data-id"].value;
+     console.log("id above " + id);
+   }
+   
+   // scope.hideSpinner();
+   
+ });
+
+</script>
+
+<!-- - <script type="text/javascript" language="javascript" src="ws/ws.nocache.js"></script> -->
+
+<!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
+
+<noscript>
+  <div class="gwt_noscript_warning">
+    Your web browser must have JavaScript enabled in order for this
+    application to display correctly.</div>      
+</noscript>
+<iframe id="__gwt_historyFrame" class="gwt_code_iframe"></iframe>
+<iframe src="" id="__download" class="gwt_code_iframe"></iframe>
+
   </body>
 </html>
-

@@ -39,8 +39,9 @@ public class KuneBootstrapper implements Bootstrapper {
   /** The Constant HOME_IDS_PREFIX. */
   protected static final String HOME_IDS_PREFIX = "k-home-";
 
-  protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.GROUP_SPACE,
-    PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR, PolymerId.HOME_TOOLBAR };
+  protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.HOME_SCROLLER,
+      PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
+      PolymerId.HOME_TOOLBAR };
 
   private final ContentViewerSelector contentViewerSelector;
 
@@ -70,17 +71,17 @@ public class KuneBootstrapper implements Bootstrapper {
       final EventsParts events,
       /* final TasksParts tasks, */
       final ListsParts lists, final ChatParts chats, /*
-       * final BartersParts
-       * barters,
-       */
+                                                      * final BartersParts
+                                                      * barters,
+                                                      */
 
       final TrashParts trash,
 
       final CoreParts coreParts, final GSpaceParts gSpaceParts, /*
-       * final
-       * PSpaceParts
-       * pSpaceParts,
-       */
+                                                                 * final
+                                                                 * PSpaceParts
+                                                                 * pSpaceParts,
+                                                                 */
       final HSpaceParts hSpaceParts,
 
       final XMLActionsParser xmlActionsParser) {

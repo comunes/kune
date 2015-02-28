@@ -88,6 +88,10 @@ public class PolymerUtils {
 		$wnd.kt.group_header_selected = "main";
   }-*/;
 
+  public native static void hideSpinner() /*-{
+		$wnd.kt.hideSpinner();
+  }-*/;
+
   public static boolean isGroupHeaderMainSelected() {
     return getSNSelected().equals("main");
   }
@@ -164,7 +168,6 @@ public class PolymerUtils {
 
   public static void setNarrowVisible(final boolean visible) {
     setNarrowVisibleImpl(visible);
-    // inboxShowHide.setVisible(visible);
   }
 
   private native static void setNarrowVisibleImpl(final boolean visible) /*-{

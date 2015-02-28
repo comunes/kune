@@ -82,6 +82,12 @@ kt.blink = function(id, play) {
     animation.cancel();
 }
 
+
+kt.hideSpinner = function(e,detail,sender) {
+  $("#k_home_spin_container").hide();
+  kt.spin_active=false;
+}
+
 kt.toggleSearch = function(e,detail,sender) {
   if(e) {
     e.stopPropagation()
