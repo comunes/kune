@@ -32,6 +32,7 @@ import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.resources.CoreMessages;
@@ -65,26 +66,33 @@ public class AddAsBuddieHeaderButton {
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class AddAsBuddieHeaderAction extends AbstractExtendedAction {
-    
+
     /** The chat engine. */
     private final ChatClient chatEngine;
-    
+
     /** The session. */
     private final Session session;
-    
+
     /** The sn service. */
     private final Provider<SocialNetServiceAsync> snService;
 
     /**
      * Instantiates a new adds the as buddie header action.
      *
-     * @param chatEngine the chat engine
-     * @param session the session
-     * @param roster the roster
-     * @param stateManager the state manager
-     * @param i18n the i18n
-     * @param img the img
-     * @param snService the sn service
+     * @param chatEngine
+     *          the chat engine
+     * @param session
+     *          the session
+     * @param roster
+     *          the roster
+     * @param stateManager
+     *          the state manager
+     * @param i18n
+     *          the i18n
+     * @param img
+     *          the img
+     * @param snService
+     *          the sn service
      */
     @Inject
     public AddAsBuddieHeaderAction(final ChatClient chatEngine, final Session session,
@@ -113,11 +121,15 @@ public class AddAsBuddieHeaderButton {
         }
       });
       putValue(Action.NAME, i18n.t(CoreMessages.ADD_AS_A_BUDDY));
-      putValue(Action.SMALL_ICON, img.add());
+      putValue(Action.SMALL_ICON, KuneIcon.ADD);
     }
 
-    /* (non-Javadoc)
-     * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
+     * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
@@ -134,7 +146,8 @@ public class AddAsBuddieHeaderButton {
     /**
      * Current groups is as person.
      *
-     * @param state the state
+     * @param state
+     *          the state
      * @return true, if successful
      */
     private boolean currentGroupsIsAsPerson(final StateAbstractDTO state) {
@@ -144,7 +157,8 @@ public class AddAsBuddieHeaderButton {
     /**
      * Checks if is not me.
      *
-     * @param groupName the group name
+     * @param groupName
+     *          the group name
      * @return true, if is not me
      */
     private boolean isNotMe(final String groupName) {
@@ -164,7 +178,8 @@ public class AddAsBuddieHeaderButton {
     /**
      * Sets the state.
      *
-     * @param state the new state
+     * @param state
+     *          the new state
      */
     private void setState(final StateAbstractDTO state) {
       final String groupName = state.getGroup().getShortName();
@@ -181,8 +196,10 @@ public class AddAsBuddieHeaderButton {
   /**
    * Instantiates a new adds the as buddie header button.
    *
-   * @param buddieAction the buddie action
-   * @param entityHeader the entity header
+   * @param buddieAction
+   *          the buddie action
+   * @param entityHeader
+   *          the entity header
    */
   @Inject
   public AddAsBuddieHeaderButton(final AddAsBuddieHeaderAction buddieAction,

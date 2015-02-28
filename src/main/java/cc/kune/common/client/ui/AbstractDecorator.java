@@ -25,13 +25,9 @@ package cc.kune.common.client.ui;
 import cc.kune.common.client.tooltip.Tooltip;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.Float;
-import com.google.gwt.dom.client.Style.Position;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.Element;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
@@ -54,30 +50,30 @@ public class AbstractDecorator extends Composite {
    */
   interface Binder extends UiBinder<Widget, AbstractDecorator> {
   }
-  
+
   /** The Constant BINDER. */
   private static final Binder BINDER = GWT.create(Binder.class);
-  
+
   /** The decoration image. */
   @UiField
   Image decorationImage;
-  
+
   /** The left. */
   private int left = 0;
 
   /** The main panel. */
   @UiField
   FlowPanel mainPanel;
-  
+
   /** The offset. */
   private int offset = 0;
-  
+
   /** The tooltip. */
   private Tooltip tooltip;
-  
+
   /** The top. */
   private int top = 0;
-  
+
   /** The widget container. */
   @UiField
   SimplePanel widgetContainer;
@@ -90,6 +86,10 @@ public class AbstractDecorator extends Composite {
     decorationImage.setVisible(false);
   }
 
+  public void addStyleNameToImage(final String style) {
+    decorationImage.addStyleName(style);
+  }
+
   /**
    * Clear image.
    */
@@ -100,7 +100,8 @@ public class AbstractDecorator extends Composite {
   /**
    * Sets the decorator visible.
    *
-   * @param visible the new decorator visible
+   * @param visible
+   *          the new decorator visible
    */
   public void setDecoratorVisible(final boolean visible) {
     decorationImage.setVisible(visible);
@@ -109,7 +110,8 @@ public class AbstractDecorator extends Composite {
   /**
    * Sets the image.
    *
-   * @param img the new image
+   * @param img
+   *          the new image
    */
   public void setImage(final ImageResource img) {
     decorationImage.setResource(img);
@@ -120,9 +122,12 @@ public class AbstractDecorator extends Composite {
   /**
    * Sets the image position.
    *
-   * @param top the top
-   * @param left the left
-   * @param offset the offset
+   * @param top
+   *          the top
+   * @param left
+   *          the left
+   * @param offset
+   *          the offset
    */
   public void setImagePosition(final int top, final int left, final int offset) {
     this.top = top;
@@ -134,7 +139,8 @@ public class AbstractDecorator extends Composite {
   /**
    * Sets the image tooltip.
    *
-   * @param text the new image tooltip
+   * @param text
+   *          the new image tooltip
    */
   public void setImageTooltip(final String text) {
     if (tooltip == null) {
@@ -149,18 +155,19 @@ public class AbstractDecorator extends Composite {
    * Sets the position.
    */
   private void setPosition() {
-    final Element elem = decorationImage.getElement();
-    elem.getStyle().setPropertyPx("left", left);
-    elem.getStyle().setPropertyPx("top", top);
-    elem.getStyle().setPosition(Position.RELATIVE);
-    elem.getStyle().setFloat(Float.LEFT);
-    elem.getStyle().setMarginRight(offset, Unit.PX);
+    // final Element elem = decorationImage.getElement();
+    // elem.getStyle().setPropertyPx("left", left);
+    // elem.getStyle().setPropertyPx("top", top);
+    // elem.getStyle().setPosition(Position.RELATIVE);
+    // elem.getStyle().setFloat(Float.LEFT);
+    // elem.getStyle().setMarginRight(offset, Unit.PX);
   }
 
   /**
    * Sets the widget.
    *
-   * @param widget the new widget
+   * @param widget
+   *          the new widget
    */
   public void setWidget(final IsWidget widget) {
     widgetContainer.clear();

@@ -25,24 +25,23 @@ package cc.kune.selenium.general;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import cc.kune.core.client.ws.entheader.EntityTextLogo;
 import cc.kune.selenium.PageObject;
 import cc.kune.selenium.SeleniumConstants;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class EntityHeaderPageObject.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityHeaderPageObject extends PageObject {
 
   /** The logo image. */
-  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_IMAGE)
+  @FindBy(id = SeleniumConstants.GWTDEV + "FIXME")
   protected WebElement logoImage;
 
   /** The logo name. */
-  @FindBy(id = SeleniumConstants.GWTDEV + EntityTextLogo.LOGO_NAME)
+  @FindBy(id = SeleniumConstants.GWTDEV + "FIXME")
   protected WebElement logoName;
 
   /**
@@ -53,7 +52,7 @@ public class EntityHeaderPageObject extends PageObject {
 
   /**
    * Wait for entity title.
-   * 
+   *
    * @param text
    *          the text
    */

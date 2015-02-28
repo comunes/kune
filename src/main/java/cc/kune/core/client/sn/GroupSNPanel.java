@@ -22,6 +22,7 @@
  */
 package cc.kune.core.client.sn;
 
+import static cc.kune.polymer.client.Layout.*;
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.GuiProvider;
@@ -42,14 +43,14 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupSNPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /**
    * Instantiates a new group sn panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param guiProvider
@@ -91,6 +92,9 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
     firstDeckLabel.setText(i18n.t("The members of this group are not public"));
     bottomActionsToolbar = new ActionFlowPanel(guiProvider, i18n);
     bottomPanel.add(bottomActionsToolbar);
+    headerActionsToolbar = new ActionFlowPanel(guiProvider, i18n);
+    headerActionsToolbar.setLayout(HORIZONTAL, LAYOUT, END_JUSTIFIED);
+    armor.getEntityHeader().add(headerActionsToolbar);
     bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
     armor.getEntityToolsNorth().add(widget);
     deck.showWidget(2);
@@ -238,7 +242,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /**
    * Sets the visible impl.
-   * 
+   *
    * @param visible
    *          the new visible impl
    */

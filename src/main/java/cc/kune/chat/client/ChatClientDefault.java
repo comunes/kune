@@ -759,6 +759,7 @@ public class ChatClientDefault implements ChatClient {
    */
   @Override
   public void show() {
+    PolymerUtils.setBeatAnimation(PolymerId.CHAT_PANEL.getId(), true);
     showDialog(true);
   }
 
@@ -793,7 +794,8 @@ public class ChatClientDefault implements ChatClient {
    */
   private void toggleShowDialog() {
     Log.info("Toggle!");
-    showDialog(!UIObject.isVisible(chatDiv));
+    final Boolean isVisible = UIObject.isVisible(chatDiv) && !PolymerUtils.isMainSelected();
+    showDialog(!isVisible);
   }
 
   /*

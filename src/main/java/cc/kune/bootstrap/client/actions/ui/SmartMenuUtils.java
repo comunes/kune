@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -20,33 +20,22 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.events.client.actions;
 
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
-import cc.kune.common.shared.i18n.I18nTranslationService;
+package cc.kune.bootstrap.client.actions.ui;
 
-import com.google.inject.Inject;
+import com.google.gwt.dom.client.Element;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class CalendarGoPrevBtn.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
-public class CalendarGoPrevBtn extends ButtonDescriptor {
+public class SmartMenuUtils {
 
-  /**
-   * Instantiates a new calendar go prev btn.
-   *
-   * @param action
-   *          the action
-   * @param i18n
-   *          the i18n
-   */
-  @Inject
-  public CalendarGoPrevBtn(final CalendarGoPrevAction action, final I18nTranslationService i18n) {
-    super("«", action);
-    this.withToolTip(i18n.t("Previous"));
-  }
+  public native static void init() /*-{
+		$wnd.jQuery(".oc-menu").smartmenus();
+  }-*/;
 
+  public native static void init(Element element) /*-{
+		$wnd.jQuery(element).smartmenus();
+  }-*/;
+
+  public native static void init(String id) /*-{
+		$wnd.jQuery("#" + id).smartmenus();
+  }-*/;
 }

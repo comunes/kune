@@ -18,6 +18,7 @@ import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -56,6 +57,8 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
     final DropDown dropDown = new DropDown();
     dropDown.addStyleName("btn-group");
     menu = new ComplexDropDownMenu<DropDown>(dropDown);
+    final String id = HTMLPanel.createUniqueId();
+    dropDown.getElement().setId(id);
     menu.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -76,7 +79,6 @@ public class BSMenuGui extends AbstractBSChildGuiItem implements AbstractBSMenuG
     if ((Boolean) descriptor.getValue(MenuDescriptor.MENU_ATRIGHT)) {
       menu.getList().setPull(Pull.RIGHT);
     }
-
     return this;
   }
 

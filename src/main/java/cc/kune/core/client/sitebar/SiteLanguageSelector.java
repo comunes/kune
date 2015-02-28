@@ -72,7 +72,6 @@ public class SiteLanguageSelector extends WidgetMenuDescriptor {
     final CoreIconButton btn = CoreIconButton.wrap(MENU_ID);
     setWidget(btn);
     setParent(SitebarActions.RIGHT_TOOLBAR);
-
     Tooltip.to(btn, I18n.t("Choose your language"));
 
     session.onAppStart(true, new AppStartHandler() {

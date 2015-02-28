@@ -27,6 +27,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -41,7 +42,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WriteToAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WriteToAction extends AbstractExtendedAction {
@@ -63,7 +64,7 @@ public class WriteToAction extends AbstractExtendedAction {
 
   /**
    * Instantiates a new write to action.
-   * 
+   *
    * @param contentService
    *          the content service
    * @param i18n
@@ -84,12 +85,12 @@ public class WriteToAction extends AbstractExtendedAction {
     this.session = session;
     this.stateManager = stateManager;
     onlyToAdmins = false;
-    putValue(Action.SMALL_ICON, res.write());
+    putValue(Action.SMALL_ICON, KuneIcon.WRITE);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)
@@ -109,29 +110,29 @@ public class WriteToAction extends AbstractExtendedAction {
         isPerson ? i18n.t("Do you want to write a message to your buddy?")
             : onlyToAdmins ? i18n.t("Do you want to write a message to the administrators of this group?")
                 : i18n.t("Do you want to write a message to the members of this group?"),
-        new SimpleResponseCallback() {
-          @Override
-          public void onCancel() {
-            // Do nothing
-          }
+                new SimpleResponseCallback() {
+              @Override
+              public void onCancel() {
+                // Do nothing
+              }
 
-          @Override
-          public void onSuccess() {
-            contentService.get().writeTo(session.getUserHash(), token, onlyToAdmins,
-                new AsyncCallbackSimple<String>() {
+              @Override
+              public void onSuccess() {
+                contentService.get().writeTo(session.getUserHash(), token, onlyToAdmins,
+                    new AsyncCallbackSimple<String>() {
                   @Override
                   public void onSuccess(final String url) {
                     stateManager.gotoHistoryToken(url);
                     NotifyUser.info("Now you can edit this message");
                   }
                 });
-          }
-        });
+              }
+            });
   }
 
   /**
    * Sets the only to admin.
-   * 
+   *
    * @param onlyToAdmins
    *          the new only to admin
    */

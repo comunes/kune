@@ -51,7 +51,6 @@ import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 import cc.kune.bootstrap.client.ui.ComplexDropDownMenu;
 import cc.kune.bootstrap.client.ui.DropDownSubmenu;
 import cc.kune.bootstrap.client.ui.RadioListItem;
-import cc.kune.client.SuperDevModeUncaughtExceptionHandler;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
@@ -164,7 +163,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
      * .common.client.actions.ActionEvent)
      */
@@ -191,16 +190,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       NotifyUser.showProgress("Savingggg");
       NotifyUser.askConfirmation("Some title", "Some message", "Yeah!", "Nein",
           new SimpleResponseCallback() {
-        @Override
-        public void onCancel() {
-          NotifyUser.error("Cancel");
-        }
+            @Override
+            public void onCancel() {
+              NotifyUser.error("Cancel");
+            }
 
-        @Override
-        public void onSuccess() {
-          NotifyUser.info("Success");
-        }
-      });
+            @Override
+            public void onSuccess() {
+              NotifyUser.info("Success");
+            }
+          });
     }
   };
 
@@ -857,12 +856,12 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final Builder builder = new PromptTopDialog.Builder("kkj-kk", "Some ask text?", false, true,
         Direction.LTR, new OnEnter() {
 
-      @Override
-      public void onEnter() {
-        NotifyUser.info("On Enter");
+          @Override
+          public void onEnter() {
+            NotifyUser.info("On Enter");
 
-      }
-    });
+          }
+        });
     builder.width("200px").height("200px").firstButtonTitle("Create").sndButtonTitle("Cancel");
     builder.regex(TextUtils.UNIX_NAME).regexText(
         "The name must contain only characters, numbers and dashes");
@@ -936,11 +935,11 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
         false, new ClickHandler() {
 
-      @Override
-      public void onClick(final ClickEvent event) {
-        userMsg.show("Testing");
-      }
-    });
+          @Override
+          public void onClick(final ClickEvent event) {
+            userMsg.show("Testing");
+          }
+        });
     thumb.setTooltip("Some thumb tooltip");
     thumb.setOnOverLabel(true);
     return thumb;
@@ -969,16 +968,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(button4, clientWidth - 90, clientHeight - 60);
     Tooltip.to(button,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button2,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button3,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
     Tooltip.to(button4,
         "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-            100);
+        100);
 
   }
 }

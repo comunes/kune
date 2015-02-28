@@ -41,7 +41,7 @@ import cc.kune.core.shared.dto.StateContentDTO;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentRPCMock.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentRPCMock implements ContentService, RPC {
@@ -62,7 +62,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addAuthor(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -74,7 +74,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addContent(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String,
@@ -88,7 +88,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addFolder(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String,
@@ -102,7 +102,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addGadgetToContent(java.
    * lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -114,7 +114,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addNewContentWithGadget(
    * java.lang.String, cc.kune.core.shared.domain.utils.StateToken,
@@ -129,7 +129,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addNewContentWithGadgetAndState
    * (java.lang.String, cc.kune.core.shared.domain.utils.StateToken,
@@ -140,13 +140,13 @@ public class ContentRPCMock implements ContentService, RPC {
   public StateContentDTO addNewContentWithGadgetAndState(final String userHash,
       final StateToken currentStateToken, final String gadgetName, final String typeId,
       final String tile, final String body, final Map<String, String> gadgetState)
-      throws DefaultException {
+          throws DefaultException {
     return contentMock;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addParticipant(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -159,7 +159,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addParticipants(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String,
@@ -173,7 +173,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addRoom(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -186,7 +186,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#copyContent(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken,
@@ -200,7 +200,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#delContent(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken)
@@ -213,7 +213,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#getContent(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken)
@@ -240,7 +240,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#getContentByWaveRef(java
    * .lang.String, java.lang.String)
@@ -254,7 +254,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#getSummaryTags(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken)
@@ -268,7 +268,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#moveContent(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken,
@@ -280,9 +280,16 @@ public class ContentRPCMock implements ContentService, RPC {
     return containerMock;
   }
 
+  @Override
+  public StateContentDTO publishWave(final String userHash, final StateToken parentToken,
+      final String title, final String typeId, final String waveRef) throws DefaultException {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#purgeAll(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken)
@@ -295,7 +302,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#purgeContent(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken)
@@ -308,7 +315,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#rateContent(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken, java.lang.Double)
@@ -322,7 +329,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#removeAuthor(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -334,7 +341,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#renameContainer(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -348,7 +355,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#renameContent(java.lang.
    * String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -362,7 +369,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#sendFeedback(java.lang.String
    * , java.lang.String, java.lang.String)
@@ -374,7 +381,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setAsDefaultContent(java
    * .lang.String, cc.kune.core.shared.domain.utils.StateToken)
@@ -387,7 +394,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setGadgetProperties(java
    * .lang.String, cc.kune.core.shared.domain.utils.StateToken,
@@ -400,7 +407,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setLanguage(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -415,7 +422,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setPublishedOn(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken, java.util.Date)
@@ -429,7 +436,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setStatus(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken,
@@ -444,7 +451,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setStatusAsAdmin(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken,
@@ -459,7 +466,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setTags(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -473,7 +480,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#writeTo(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, boolean)
@@ -493,7 +500,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#writeTo(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, boolean, java.lang.String,
@@ -508,7 +515,7 @@ public class ContentRPCMock implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#writeToParticipants(java
    * .lang.String, cc.kune.core.shared.domain.utils.StateToken)

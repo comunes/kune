@@ -495,6 +495,17 @@
   border: 0px !important;
 }
 
+button.k-noborder-btn:hover {    
+  background-color: transparent;
+  border:none;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.k-noborder-btn a.btn {  
+  background-color: transparent;
+  border:none;  
+}
+
 .k-space-nowrap {
   white-space: nowrap;
 }

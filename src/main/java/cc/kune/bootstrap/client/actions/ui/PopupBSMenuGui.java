@@ -51,6 +51,7 @@ public class PopupBSMenuGui {
     popup = new PopupPanel(true);
     popup.setStyleName("oc-menu");
     popup.add(popupContent);
+    SmartMenuUtils.init(popup.getElement());
     popup.addCloseHandler(new CloseHandler<PopupPanel>() {
       @Override
       public void onClose(final CloseEvent<PopupPanel> event) {
@@ -81,7 +82,7 @@ public class PopupBSMenuGui {
 
   public void show() {
     createPopupIfNecessary();
-    popup.showRelativeTo((UIObject) relativeTo);
+    showRelativeTo(relativeTo);
   }
 
   public void showRelativeTo(final Object relative) {
@@ -89,7 +90,19 @@ public class PopupBSMenuGui {
     if (relative instanceof String) {
       popup.showRelativeTo(RootPanel.get((String) relative));
     } else if (relative instanceof UIObject) {
-      popup.showRelativeTo((UIObject) relative);
+      final Boolean atRight = ((Boolean) descriptor.getValue(MenuDescriptor.MENU_ATRIGHT));
+      if (atRight) {
+        popup.setPopupPositionAndShow(new PositionCallback() {
+          @Override
+          public void setPosition(final int offsetWidth, final int offsetHeight) {
+            final UIObject obj = (UIObject) relative;
+            popup.setPopupPosition(obj.getAbsoluteLeft() + obj.getOffsetWidth(),
+                obj.getAbsoluteTop() + 30);
+          }
+        });
+      } else {
+        popup.showRelativeTo((UIObject) relative);
+      }
     } else if (relative instanceof Position) {
       popup.setPopupPositionAndShow(new PositionCallback() {
         @Override

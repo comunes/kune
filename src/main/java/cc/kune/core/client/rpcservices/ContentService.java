@@ -49,84 +49,88 @@ public interface ContentService extends RemoteService {
       throws DefaultException;
 
   StateContainerDTO addFolder(String hash, StateToken parentToken, String typeId, String title)
-      throws DefaultException;
-
-  void addGadgetToContent(String userHash, StateToken currentStateToken, String gadgetName)
-      throws DefaultException;
-
-  StateContentDTO addNewContentWithGadget(String userHash, StateToken currentStateToken,
-      String gadgetName, String typeId, String title, String body) throws DefaultException;;
-
-  StateContentDTO addNewContentWithGadgetAndState(String userHash, StateToken currentStateToken,
-      String gadgetName, String typeId, String tile, String body, Map<String, String> gadgetState)
       throws DefaultException;;
 
-  Boolean addParticipant(String userHash, StateToken token, String participant) throws DefaultException;
+      void addGadgetToContent(String userHash, StateToken currentStateToken, String gadgetName)
+          throws DefaultException;
 
-  Boolean addParticipants(String userHash, StateToken token, String groupName,
-      SocialNetworkSubGroup subGroup) throws DefaultException;
+      StateContentDTO addNewContentWithGadget(String userHash, StateToken currentStateToken,
+          String gadgetName, String typeId, String title, String body) throws DefaultException;
 
-  StateContainerDTO addRoom(String user, StateToken parentToken, String name) throws DefaultException;
+      StateContentDTO addNewContentWithGadgetAndState(String userHash, StateToken currentStateToken,
+          String gadgetName, String typeId, String tile, String body, Map<String, String> gadgetState)
+              throws DefaultException;;
 
-  StateContentDTO copyContent(String userHash, StateToken parentToken, StateToken token)
-      throws DefaultException;
+              Boolean addParticipant(String userHash, StateToken token, String participant) throws DefaultException;;
 
-  StateContainerDTO delContent(String userHash, StateToken token) throws DefaultException;
+              Boolean addParticipants(String userHash, StateToken token, String groupName,
+                  SocialNetworkSubGroup subGroup) throws DefaultException;
 
-  Boolean delParticipants(String userHash, StateToken token, String[] participants);
+              StateContainerDTO addRoom(String user, StateToken parentToken, String name) throws DefaultException;
 
-  Boolean delPublicParticipant(String userHash, StateToken token) throws DefaultException;
+              StateContentDTO copyContent(String userHash, StateToken parentToken, StateToken token)
+                  throws DefaultException;
 
-  StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
+              StateContainerDTO delContent(String userHash, StateToken token) throws DefaultException;
 
-  StateAbstractDTO getContentByWaveRef(String userHash, String waveRef) throws DefaultException;
+              Boolean delParticipants(String userHash, StateToken token, String[] participants);
 
-  TagCloudResult getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
+              Boolean delPublicParticipant(String userHash, StateToken token) throws DefaultException;
 
-  StateContainerDTO moveContent(String userHash, StateToken contentToken, StateToken newContainerToken)
-      throws DefaultException;
+              StateAbstractDTO getContent(String userHash, StateToken token) throws DefaultException;
 
-  StateContainerDTO purgeAll(String userHash, StateToken token);
+              StateAbstractDTO getContentByWaveRef(String userHash, String waveRef) throws DefaultException;
 
-  StateContainerDTO purgeContent(String userHash, StateToken token);
+              TagCloudResult getSummaryTags(String userHash, StateToken groupToken) throws DefaultException;
 
-  RateResult rateContent(String userHash, StateToken token, Double value) throws DefaultException;
+              StateContainerDTO moveContent(String userHash, StateToken contentToken, StateToken newContainerToken)
+                  throws DefaultException;
 
-  void removeAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;
+              StateContentDTO publishWave(String userHash, StateToken parentToken, String title, String typeId,
+                  String waveUri) throws DefaultException;
 
-  // void save(String user, StateToken token, String content) throws
-  // DefaultException;
+              StateContainerDTO purgeAll(String userHash, StateToken token);
 
-  StateAbstractDTO renameContainer(String userHash, StateToken token, String newName)
-      throws DefaultException;
+              StateContainerDTO purgeContent(String userHash, StateToken token);
 
-  StateAbstractDTO renameContent(String userHash, StateToken token, String newName)
-      throws DefaultException;
+              RateResult rateContent(String userHash, StateToken token, Double value) throws DefaultException;
 
-  String sendFeedback(String userHash, String title, String body);
+              void removeAuthor(String userHash, StateToken token, String authorShortName) throws DefaultException;
 
-  ContentSimpleDTO setAsDefaultContent(String userHash, StateToken token);
+              // void save(String user, StateToken token, String content) throws
+              // DefaultException;
 
-  void setGadgetProperties(final String userHash, final StateToken currentStateToken,
-      final String gadgetName, final Map<String, String> properties) throws DefaultException;
+              StateAbstractDTO renameContainer(String userHash, StateToken token, String newName)
+                  throws DefaultException;
 
-  I18nLanguageDTO setLanguage(String userHash, StateToken token, String languageCode)
-      throws DefaultException;
+              StateAbstractDTO renameContent(String userHash, StateToken token, String newName)
+                  throws DefaultException;
 
-  void setPublishedOn(String userHash, StateToken token, Date date) throws DefaultException;
+              String sendFeedback(String userHash, String title, String body);
 
-  StateAbstractDTO setStatus(String userHash, StateToken stateToken, ContentStatus status);
+              ContentSimpleDTO setAsDefaultContent(String userHash, StateToken token);
 
-  StateAbstractDTO setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatus status);
+              void setGadgetProperties(final String userHash, final StateToken currentStateToken,
+                  final String gadgetName, final Map<String, String> properties) throws DefaultException;
 
-  TagCloudResult setTags(String userHash, StateToken token, String tags) throws DefaultException;
+              I18nLanguageDTO setLanguage(String userHash, StateToken token, String languageCode)
+                  throws DefaultException;
 
-  StateContentDTO setVisible(String userHash, StateToken token, boolean visible);
+              void setPublishedOn(String userHash, StateToken token, Date date) throws DefaultException;
 
-  String writeTo(String userHash, StateToken token, boolean onlyToAdmins) throws DefaultException;
+              StateAbstractDTO setStatus(String userHash, StateToken stateToken, ContentStatus status);
 
-  String writeTo(String userHash, StateToken token, boolean onlyToAdmins, String title, String message)
-      throws DefaultException;
+              StateAbstractDTO setStatusAsAdmin(String userHash, StateToken stateToken, ContentStatus status);
 
-  String writeToParticipants(String userHash, StateToken token) throws DefaultException;;
+              TagCloudResult setTags(String userHash, StateToken token, String tags) throws DefaultException;
+
+              StateContentDTO setVisible(String userHash, StateToken token, boolean visible);
+
+              String writeTo(String userHash, StateToken token, boolean onlyToAdmins) throws DefaultException;
+
+              String writeTo(String userHash, StateToken token, boolean onlyToAdmins, String title, String message)
+                  throws DefaultException;
+
+              String writeToParticipants(String userHash, StateToken token) throws DefaultException;
+
 }

@@ -46,6 +46,7 @@ import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -66,7 +67,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
    * .String)
@@ -102,7 +103,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -117,7 +118,10 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
           + " parent: " + parent);
     }
 
-    menu = new ComplexDropDownMenu<ListDropDown>(new ListDropDown());
+    final ListDropDown dDown = new ListDropDown();
+    menu = new ComplexDropDownMenu<ListDropDown>(dDown);
+    final String ddid = HTMLPanel.createUniqueId();
+    dDown.getElement().setId(ddid);
 
     popup = new PopupBSMenuGui(menu.getList(), menu.getWidget(), descriptor);
 
@@ -181,7 +185,6 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
         }
       }
     });
-
     return this;
   }
 
@@ -203,7 +206,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -213,7 +216,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
@@ -237,7 +240,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
@@ -249,7 +252,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
    * .gwt.resources.client.ImageResource)
@@ -271,7 +274,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
@@ -283,7 +286,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
@@ -295,7 +298,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -307,7 +310,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
@@ -320,7 +323,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override

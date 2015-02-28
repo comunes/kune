@@ -17,7 +17,7 @@ body { /*    background-color: #16181a;
     background-color: #232d38;
     border-color: #556;
     color: #fff;
-    font: normal 14px 'Ubuntu', Arial
+    font: normal 14px 'Open Sans', Arial
 }
 
 .x-mask-loading div {
@@ -191,7 +191,7 @@ ul.x-tab-strip-bottom {
 }
 
 .x-form-field {
-    font: normal 15px 'Ubuntu', Arial
+    font-size: 16px;
 }
 
 .x-form-text,textarea.x-form-field { /* color: #ffffff;
@@ -313,16 +313,16 @@ ul.x-tab-strip-bottom {
 }
 
 .x-form-grow-sizer {
-    font: normal 15px 'Ubuntu', Arial
+    font-size: 16px;
 }
 
 .x-form-item {
-    font: normal 15px 'Ubuntu', Arial
+    font-size: 16px;
 }
 /*
 .x-form-invalid-msg {
     color: #c0272b;
-    font: normal 14px 'Ubuntu', Arial background-image :
+    font: normal 14px 'Open Sans', Arial background-image :
          url(../images/default/shared/warning.gif);
 }
 */
@@ -358,7 +358,7 @@ ul.x-tab-strip-bottom {
 }
 
 .x-fieldset legend {
-    font: bold 14px 'Ubuntu', Arial color :     white !important;
+    font: bold 14px 'Open Sans', Arial color :     white !important;
 }
 
 .x-btn {
@@ -366,7 +366,7 @@ ul.x-tab-strip-bottom {
 }
 
 .x-btn button {
-    font: normal 13px 'Ubuntu', Arial color :     #fffffa;
+    font: normal 13px 'Open Sans', Arial color :     #fffffa;
     padding-left: 6px !important;
     padding-right: 6px !important;
 }
@@ -938,7 +938,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
     background-image: url(../images/grid/group-collapse.gif);
     background-position: 3px 6px;
     color: #ffd;
-    font: bold 14px 'Ubuntu', Arial
+    font: bold 14px 'Open Sans', Arial
 }
 
 .x-grid-group-collapsed .x-grid-group-hd div.x-grid-group-title {
@@ -959,7 +959,7 @@ td.x-grid3-hd-over .x-grid3-hd-inner,td.sort-desc .x-grid3-hd-inner,td.sort-asc 
 
 .x-grid-empty {
     color: gray;
-    font: normal 14px 'Ubuntu', Arial
+    font: normal 14px 'Open Sans', Arial
 }
 
 .x-grid-with-col-lines .x-grid3-row td.x-grid3-cell {
@@ -1312,7 +1312,7 @@ td.x-date-mp-sep {
 }
 
 .x-tip .x-tip-mc {
-    font: normal 14px 'Ubuntu', Arial
+    font: normal 14px 'Open Sans', Arial
 }
 
 .x-tip .x-tip-ml {
@@ -1320,11 +1320,11 @@ td.x-date-mp-sep {
 }
 
 .x-tip .x-tip-header-text {
-    font: bold 14px 'Ubuntu', Arial color :     #ffd;
+    font: bold 14px 'Open Sans', Arial color :     #ffd;
 }
 
 .x-tip .x-tip-body {
-    font: normal 14px 'Ubuntu', Arial color :     #000;
+    font: normal 14px 'Open Sans', Arial color :     #000;
 }
 
 .x-form-invalid-tip .x-tip-tc,.x-form-invalid-tip .x-tip-tl,.x-form-invalid-tip .x-tip-tr,.x-form-invalid-tip .x-tip-bc,.x-form-invalid-tip .x-tip-bl,.x-form-invalid-tip .x-tip-br,.x-form-invalid-tip .x-tip-ml,.x-form-invalid-tip .x-tip-mr
@@ -1344,7 +1344,7 @@ td.x-date-mp-sep {
     border-color: #552200;
     /* background-color: transparent;
     background-image: url(../images/menu/menu.gif); */
-    font: 13px 'Ubuntu', arial;
+    font: 13px 'Open Sans', arial;
     kfilter: alpha(opacity =               95);
     -moz-opacity: 0.95;
     -khtml-opacity: 0.95;
@@ -1503,7 +1503,7 @@ a.x-menu-item {
 /*
     border: 2px solid #232732;
     background-color: #555566 !important;*/
-    font: normal 15px 'Ubuntu', Arial
+    font: normal 15px 'Open Sans', Arial
 }
 
 .x-combo-list-inner {
@@ -1511,7 +1511,7 @@ a.x-menu-item {
 }
 
 .x-combo-list-hd {
-    font: bold 14px 'Ubuntu', Arial color :     fff;
+    font: bold 14px 'Open Sans', Arial color :     fff;
 /*    background-image: url(../images/default/layout/panel-title-light-bg.gif);
     border-bottom-color: #98c0f4; */
 }
@@ -1535,7 +1535,7 @@ a.x-menu-item {
 }
 
 .x-combo-list-small {
-    font: normal 14px 'Ubuntu', Arial
+    font: normal 14px 'Open Sans', Arial
 }
 
 .x-panel {
@@ -1599,7 +1599,7 @@ a.x-menu-item {
 }
 
 .x-panel-mc {
-    font: normal 14px 'Ubuntu', Arial background-color :     #3f4757;
+    font: normal 14px 'Open Sans', Arial background-color :     #3f4757;
 }
 
 .x-panel-ml {
@@ -1687,7 +1687,7 @@ a.x-menu-item {
 .x-window-mc {
     font-size: 16px;
   /*  border-color: #18181a;
-    font: normal 14px 'Ubuntu', Arial background-color :     #1f2833; */
+    font: normal 14px 'Open Sans', Arial background-color :     #1f2833; */
 }
 
 .x-window-ml {
@@ -1906,7 +1906,7 @@ body.x-body-masked .x-window-plain .x-window-mc {
 }
 
 .x-window-dlg .ext-mb-textarea {
-    font: normal 15px 'Ubuntu', Arial
+    font: normal 15px 'Open Sans', Arial
 }
 
 .x-window-dlg .x-msg-box-wait {

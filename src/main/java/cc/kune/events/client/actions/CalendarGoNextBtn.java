@@ -22,7 +22,6 @@
  */
 package cc.kune.events.client.actions;
 
-import cc.kune.common.client.actions.ToolbarStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 
@@ -31,14 +30,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CalendarGoNextBtn.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CalendarGoNextBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new calendar go next btn.
-   * 
+   *
    * @param action
    *          the action
    * @param i18n
@@ -47,7 +46,7 @@ public class CalendarGoNextBtn extends ButtonDescriptor {
   @Inject
   public CalendarGoNextBtn(final CalendarGoNextAction action, final I18nTranslationService i18n) {
     super("»", action);
-    this.withToolTip(i18n.t("Next")).withStyles(ToolbarStyles.CSS_BTN_RIGTH);
+    this.withToolTip(i18n.t("Next"));
   }
 
 }

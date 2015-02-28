@@ -28,17 +28,17 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.errors.ErrorHandler;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
 import cc.kune.core.client.state.ContentCache;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.dto.StateContainerDTO;
+import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.viewers.items.FolderItemWidget;
 
 import com.allen_sauer.gwt.dnd.client.VetoDragException;
 import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -84,17 +84,10 @@ public class InboxToContainerDropController extends AbstractDropController {
   private void move(final Widget widget, final StateToken destToken) {
     widget.removeFromParent();
     final StateToken tokenToMove = ((FolderItemWidget) widget).getToken();
-    contentService.moveContent(session.getUserHash(), tokenToMove, destToken,
-        new AsyncCallback<StateContainerDTO>() {
+    contentService.publishWave(session.getUserHash(), destToken, null, null,
+        ((CustomDigestDomImpl) widget).getWaveUri(), new AsyncCallbackSimple<StateContentDTO>() {
           @Override
-          public void onFailure(final Throwable caught) {
-            erroHandler.process(caught);
-            stateManager.refreshCurrentState();
-            NotifyUser.hideProgress();
-          }
-
-          @Override
-          public void onSuccess(final StateContainerDTO result) {
+          public void onSuccess(final StateContentDTO result) {
             NotifyUser.hideProgress();
             contentCache.remove(tokenToMove);
             contentCache.remove(destToken);

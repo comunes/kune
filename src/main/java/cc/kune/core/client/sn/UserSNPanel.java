@@ -22,6 +22,7 @@
  */
 package cc.kune.core.client.sn;
 
+import static cc.kune.polymer.client.Layout.*;
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.GuiProvider;
@@ -45,7 +46,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSNPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserSNPanel extends AbstractSNPanel implements UserSNView {
@@ -61,7 +62,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /**
    * Instantiates a new user sn panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param guiProvider
@@ -98,6 +99,9 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     sndDeckLabel.setText("NOT USED");
     bottomActionsToolbar = new ActionFlowPanel(guiProvider, i18n);
     bottomPanel.add(bottomActionsToolbar);
+    headerActionsToolbar = new ActionFlowPanel(guiProvider, i18n);
+    headerActionsToolbar.setLayout(HORIZONTAL, LAYOUT, END_JUSTIFIED);
+    armor.getEntityHeader().add(headerActionsToolbar);
     bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
     armor.getEntityToolsNorth().add(widget);
     deck.showWidget(2);
@@ -228,7 +232,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /**
    * Sets the visible impl.
-   * 
+   *
    * @param visible
    *          the new visible impl
    */

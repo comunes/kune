@@ -157,7 +157,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public int getDocContainerHeight() {
-    return wrapDiv(DOC_CONTENT_SECTION).getOffsetHeight();
+    return wrapDiv(DOC_CONTENT).getElement().getOffsetHeight();
   }
 
   @Override
@@ -337,6 +337,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   @Override
   public WrappedFlowPanel wrapDiv(final HTMLId htmlId) {
     final String id = htmlId.getId();
+    Log.debug("Wrapping id: " + id);
     WrappedFlowPanel panel = panels.get(id);
     if (panel == null) {
       Log.debug("Getting div '" + id + "' from html");
@@ -349,6 +350,9 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
         throw new UIException("Parent is already wrapped/attached");
       }
       panel = WrappedFlowPanel.wrap(element);
+      if (panel == null) {
+        Log.error("Error wrapping id: " + id);
+      }
       assert panel != null;
       panels.put(id, panel);
     }

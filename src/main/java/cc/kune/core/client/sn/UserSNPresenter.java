@@ -137,6 +137,8 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
      */
     IsActionExtensible getBottomToolbar();
 
+    IsActionExtensible getEntityToolbar();
+
     /**
      * Sets the buddies count.
      *
@@ -283,6 +285,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
    */
   private void onStateChanged(final StateAbstractDTO state) {
     if (state.getGroup().isNotPersonal()) {
+      getView().getEntityToolbar().clear();
       getView().setVisible(false);
     } else {
       getView().clear();
@@ -292,7 +295,6 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
         getView().setBuddiesVisible(true,
             areMany(state.getSocialNetworkData().getUserBuddies().getBuddies().size()));
         setBuddiesState(state);
-        // getView().setVisible(buddies + participeIn > 0);
       } else {
         getView().showBuddiesNotPublic();
       }
@@ -311,8 +313,10 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
    * Refresh actions impl.
    */
   private void refreshActionsImpl() {
-    getView().getBottomToolbar().clear();
-    getView().getBottomToolbar().addAll(confActionsRegistry);
+    // getView().getBottomToolbar().clear();
+
+    getView().getEntityToolbar().clear();
+    getView().getEntityToolbar().addAll(confActionsRegistry);
   }
 
   /**

@@ -22,6 +22,7 @@
  \*/
 package cc.kune.core.client.ws.entheader;
 
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.core.client.events.GroupChangedEvent;
 import cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler;
@@ -46,8 +47,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityHeaderPresenter extends
-    Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
-    EntityHeader {
+Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
+EntityHeader {
 
   /**
    * The Interface EntityHeaderProxy.
@@ -72,6 +73,8 @@ public class EntityHeaderPresenter extends
      *          the descriptor
      */
     void addAction(GuiActionDescrip descriptor);
+
+    void addAll(GuiActionDescCollection actionsRegistry);
 
     /**
      * Sets the logo image.
@@ -113,10 +116,7 @@ public class EntityHeaderPresenter extends
      */
     void setOnlineStatusVisible(boolean visible);
 
-    /**
-     * Show def user logo.
-     */
-    void showDefUserLogo();
+    void toolbarClear();
   }
 
   /**
@@ -155,7 +155,7 @@ public class EntityHeaderPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeader#addAction(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -165,9 +165,14 @@ public class EntityHeaderPresenter extends
     getView().addAction(descriptor);
   }
 
+  @Override
+  public void addAll(final GuiActionDescCollection actionsRegistry) {
+    getView().addAll(actionsRegistry);
+  }
+
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -184,18 +189,21 @@ public class EntityHeaderPresenter extends
    *          the no cache
    */
   void setGroupLogo(final GroupDTO group) {
-    setLogoText(group.getLongName(), group.getShortName());
-    if (group.hasLogo()) {
+    if (group.isNotPersonal() && !group.hasLogo()) {
+      getView().setLogoImageVisible(false);
+    } else {
+      setLogoText(group.getLongName(), group.getShortName());
       getView().setLogoImage(group);
       getView().setLogoImageVisible(true);
-    } else {
-      if (group.isPersonal()) {
-        getView().showDefUserLogo();
-        getView().setLogoImageVisible(true);
-      } else {
-        getView().setLogoImageVisible(false);
-      }
     }
+    // else {
+    // if (group.isPersonal()) {
+    // getView().showDefUserLogo();
+    // getView().setLogoImageVisible(true);
+    // } else {
+    // getView().setLogoImageVisible(false);
+    // }
+    // }
     if (group.isPersonal()) {
       getView().setOnlineStatusGroup(group.getShortName());
       getView().setOnlineStatusVisible(true);
@@ -213,5 +221,10 @@ public class EntityHeaderPresenter extends
    */
   void setLogoText(final String name, final String shortname) {
     getView().setLogoText(name, shortname);
+  }
+
+  @Override
+  public void toolbarClear() {
+    getView().toolbarClear();
   }
 }

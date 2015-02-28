@@ -28,6 +28,7 @@ import br.com.rpa.client._paperelements.PaperFab;
 
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -41,7 +42,7 @@ public class PolymerUtils {
     }
   };
 
-  private static PaperFab inboxShowHide = PaperFab.wrap(PolymerId.INBOX_SHOW_HIDE.getId());
+  private static PaperFab inboxShowHide;
 
   public static void addFlexHorLayout(final Widget... widgets) {
     addFlexLayout(HORIZONTAL, widgets);
@@ -71,12 +72,24 @@ public class PolymerUtils {
 		return $wnd.kt.main_selected;
   }-*/;
 
+  public native static String getSNSelected() /*-{
+		return $wnd.kt.group_header_selected;
+  }-*/;
+
   public static void hideInboxCancel() {
     hideInboxTimer.cancel();
   }
 
   public static void hideInboxWithDelay() {
     hideInboxTimer.schedule(PolymerUtils.isMainDrawerNarrow() ? 0 : 4000);
+  }
+
+  public native static void hideSN() /*-{
+		$wnd.kt.group_header_selected = "main";
+  }-*/;
+
+  public static boolean isGroupHeaderMainSelected() {
+    return getSNSelected().equals("main");
   }
 
   public native static boolean isMainDrawerNarrow() /*-{
@@ -97,8 +110,21 @@ public class PolymerUtils {
     }
   }
 
+  public static void resolved(final Element element) {
+    element.setAttribute("resolved", "");
+    element.removeAttribute("unresolved");
+  }
+
+  public static void resolved(final PolymerId id) {
+    resolved(DOM.getElementById(id.getId()));
+  }
+
   public native static void setBackImage(final String url) /*-{
 		$wnd.kt.group_back_image_url = url;
+  }-*/;
+
+  public native static void setBeatAnimation(final String id, boolean beat) /*-{
+		$wnd.kt.beat(id, beat);
   }-*/;
 
   public native static void setBlinkAnimation(final String id, boolean blink) /*-{
@@ -125,6 +151,9 @@ public class PolymerUtils {
 
   public static void setNarrowSwipeEnabled(final boolean enabled) {
     setNarrowSwipeEnabledImpl(enabled);
+    if (inboxShowHide == null) {
+      inboxShowHide = PaperFab.wrap(PolymerId.INBOX_SHOW_HIDE.getId());
+    }
     inboxShowHide.setEnabled(enabled);
   }
 
@@ -183,6 +212,15 @@ public class PolymerUtils {
       jsArrayString.push(s);
     }
     return jsArrayString;
+  }
+
+  public static void unresolved(final Element element) {
+    element.setAttribute("unresolved", "");
+    element.removeAttribute("resolved");
+  }
+
+  public static void unresolved(final PolymerId id) {
+    unresolved(DOM.getElementById(id.getId()));
   }
 
 }

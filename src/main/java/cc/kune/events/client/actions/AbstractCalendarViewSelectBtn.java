@@ -22,7 +22,6 @@
  */
 package cc.kune.events.client.actions;
 
-import cc.kune.common.client.actions.ToolbarStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 
 import com.bradrydzewski.gwt.calendar.client.CalendarViews;
@@ -30,14 +29,14 @@ import com.bradrydzewski.gwt.calendar.client.CalendarViews;
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractCalendarViewSelectBtn.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AbstractCalendarViewSelectBtn extends ButtonDescriptor {
 
   /**
    * Instantiates a new abstract calendar view select btn.
-   * 
+   *
    * @param action
    *          the action
    * @param text
@@ -52,7 +51,6 @@ public class AbstractCalendarViewSelectBtn extends ButtonDescriptor {
     super(text, action);
     action.setDays(days);
     action.setView(view);
-    this.withStyles(ToolbarStyles.CSS_BTN_CENTER);
   }
 
 }

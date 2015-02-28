@@ -27,6 +27,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.waveprotocol.wave.model.waveref.WaveRef;
 
 import cc.kune.core.server.tool.ServerTool;
 import cc.kune.core.server.tool.ServerToolRegistry;
@@ -45,7 +46,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CreationServiceDefault.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -69,7 +70,7 @@ public class CreationServiceDefault implements CreationService {
 
   /**
    * Instantiates a new creation service default.
-   * 
+   *
    * @param containerManager
    *          the container manager
    * @param contentManager
@@ -100,6 +101,12 @@ public class CreationServiceDefault implements CreationService {
     return content;
   }
 
+  @Override
+  public Content createContent(final String title, final String body, final User user,
+      final Container container, final String typeId) {
+    return createContent(title, body, user, container, typeId, KuneWaveService.NO_WAVE_TO_COPY, false);
+  }
+
   /*
    * (non-Javadoc)
    * 
@@ -110,14 +117,16 @@ public class CreationServiceDefault implements CreationService {
    */
   @Override
   public Content createContent(final String title, final String body, final User user,
-      final Container container, final String typeId) {
+      final Container container, final String typeId, final WaveRef waveRef,
+      final boolean publishExistingWave) {
     final ServerTool tool = tools.get(container.getToolName());
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeId);
     final URL gagdetUrl = tool instanceof ServerToolWithWaveGadget ? ((ServerToolWithWaveGadget) tool).getGadgetUrl()
         : KuneWaveService.WITHOUT_GADGET;
     final String[] otherParticipants = tool instanceof ServerToolWithWave ? ((ServerToolWithWave) tool).getNewContentAdditionalParts(container)
         : NO_MORE_PARTICIPANTS;
-    final Content content = contentManager.createContent(title, body, KuneWaveService.NO_WAVE_TO_COPY,
+
+    final Content content = contentManager.createContent(title, body, publishExistingWave, waveRef,
         user, container, typeId, gagdetUrl, NO_PROPERTIES, otherParticipants);
     tool.onCreateContent(content, container);
     return content;

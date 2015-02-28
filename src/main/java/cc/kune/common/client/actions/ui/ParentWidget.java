@@ -31,7 +31,10 @@ import com.google.gwt.user.client.ui.UIObject;
  */
 public interface ParentWidget {
 
-  /** The parent ui. */
+  /**
+   * The parent ui used to add a child like menu items. Useful when the parent
+   * widget to add a child is, for instance, a part of the parent widget
+   */
   String PARENT_UI = "PARENT_UI";
 
   /**

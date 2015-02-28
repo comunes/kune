@@ -11,8 +11,8 @@
   <!-- Dependencies ============================================= -->
   <inherits name="com.google.gwt.user.User"/>
   <inherits name="com.google.gwt.xml.XML"/>
-  <inherits name="cc.kune.gspace.GSpace"/>
   <inherits name="cc.kune.common.KuneCommon"/>
+  <inherits name="cc.kune.gspace.GSpace"/>  
   <inherits name="cc.kune.gxtbinds.KuneGxtBindings"/>
   <!-- Because of XML actions -->
   <inherits name='com.calclab.emite.core.EmiteCore'/>

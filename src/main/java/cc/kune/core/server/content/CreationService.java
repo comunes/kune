@@ -22,6 +22,8 @@
  */
 package cc.kune.core.server.content;
 
+import org.waveprotocol.wave.model.waveref.WaveRef;
+
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -31,7 +33,7 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface CreationService.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -39,7 +41,7 @@ public interface CreationService {
 
   /**
    * Copy content.
-   * 
+   *
    * @param user
    *          the user
    * @param container
@@ -52,7 +54,7 @@ public interface CreationService {
 
   /**
    * Creates the content.
-   * 
+   *
    * @param title
    *          the title
    * @param body
@@ -67,9 +69,12 @@ public interface CreationService {
    */
   Content createContent(String title, String body, User user, Container container, String typeId);
 
+  Content createContent(String title, String body, User user, Container container, String typeId,
+      WaveRef waveRef, boolean publishExistingWave);
+
   /**
    * Creates the folder.
-   * 
+   *
    * @param group
    *          the group
    * @param parentFolderId
@@ -87,7 +92,7 @@ public interface CreationService {
 
   /**
    * Creates the root folder.
-   * 
+   *
    * @param group
    *          the group
    * @param name

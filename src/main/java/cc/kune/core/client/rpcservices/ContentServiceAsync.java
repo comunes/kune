@@ -87,15 +87,18 @@ public interface ContentServiceAsync {
   void moveContent(String userHash, StateToken contentToken, StateToken newContainerToken,
       AsyncCallback<StateContainerDTO> asyncCallback);
 
+  void publishWave(String userHash, StateToken parentToken, String title, String typeId, String waveUri,
+      AsyncCallback<StateContentDTO> callback);
+
   void purgeAll(String userHash, StateToken token, AsyncCallback<StateContainerDTO> callback);
 
   void purgeContent(String userHash, StateToken token, AsyncCallback<StateContainerDTO> callback);
 
-  void rateContent(String userHash, StateToken token, Double value,
-      AsyncCallback<RateResult> asyncCallback);
-
   // void save(String user, StateToken token, String content,
   // AsyncCallback<Void> asyncCallback);
+
+  void rateContent(String userHash, StateToken token, Double value,
+      AsyncCallback<RateResult> asyncCallback);
 
   void removeAuthor(String userHash, StateToken token, String authorShortName,
       AsyncCallback<Void> asyncCallback);

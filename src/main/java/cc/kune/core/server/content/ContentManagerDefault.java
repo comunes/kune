@@ -93,7 +93,7 @@ import com.google.wave.api.Participants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentManagerDefault.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -166,7 +166,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   /**
    * Adds the participant to a wave
-   * 
+   *
    * @param user
    *          the user
    * @param content
@@ -215,7 +215,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
   public Content copyContent(final User user, final Container destination, final Content contentToCopy) {
     try {
       return createContent(
-          findInexistentTitle(destination, i18n.t("Copy of [%s]", contentToCopy.getTitle())), "",
+          findInexistentTitle(destination, i18n.t("Copy of [%s]", contentToCopy.getTitle())), "", false,
           JavaWaverefEncoder.decodeWaveRefFromPath(contentToCopy.getWaveId()), user, destination,
           contentToCopy.getTypeId(), KuneWaveService.WITHOUT_GADGET,
           Collections.<String, String> emptyMap());
@@ -224,14 +224,9 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     }
   }
 
-  protected Content createContent(final String title, final String body, final User author,
-      final Container container, final String typeId) {
-    return createContent(title, body, KuneWaveService.NO_WAVE_TO_COPY, author, container, typeId,
-        KuneWaveService.WITHOUT_GADGET, Collections.<String, String> emptyMap());
-  }
-
-  protected Content createContent(final String title, final String body, final WaveRef waveIdToCopy,
-      final User author, final Container container, final String typeId, final URL gadgetUrl,
+  protected Content createContent(final String title, final String body,
+      final boolean publishExistingWave, final WaveRef waveRefToUse, final User author,
+      final Container container, final String typeId, final URL gadgetUrl,
       final Map<String, String> gadgetProperties, final String... otherParticipants) {
     FilenameUtils.checkBasicFilename(title);
     final String newtitle = findInexistentTitle(container, title);
@@ -245,16 +240,33 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     revision.setTitle(newtitle);
     // Duplicate in StateServiceDefault
     if (newContent.isWave()) {
+      WaveRef waveRef;
       final String authorName = author.getShortName();
-      final WaveRef waveRef = kuneWaveManager.createWave(newtitle, body, waveIdToCopy,
-          KuneWaveService.DO_NOTHING_CBACK, gadgetUrl, gadgetProperties,
-          participantUtils.of(authorName, otherParticipants));
+      if (publishExistingWave) {
+        if (!kuneWaveManager.getParticipants(waveRefToUse, authorName).contains(
+            participantUtils.of(authorName))) {
+          throw new AccessViolationException("This user is not author of the wave to publish");
+        }
+        waveRef = waveRefToUse;
+      } else {
+        final WaveRef newWaveRef = kuneWaveManager.createWave(newtitle, body, waveRefToUse,
+            KuneWaveService.DO_NOTHING_CBACK, gadgetUrl, gadgetProperties,
+            participantUtils.of(authorName, otherParticipants));
+        waveRef = newWaveRef;
+      }
       newContent.setWaveId(JavaWaverefEncoder.encodeToUriPathSegment(waveRef));
       newContent.setModifiedOn((new Date()).getTime());
     }
     revision.setBody(body);
     newContent.addRevision(revision);
     return save(newContent);
+  }
+
+  protected Content createContent(final String title, final String body, final User author,
+      final Container container, final String typeId, final WaveRef waveRef,
+      final boolean publishExistingWave) {
+    return createContent(title, body, publishExistingWave, waveRef, author, container, typeId,
+        KuneWaveService.WITHOUT_GADGET, Collections.<String, String> emptyMap());
   }
 
   @Override
@@ -264,8 +276,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
     final String toolName = container.getToolName();
     final ServerTool tool = tools.get(toolName);
     tool.checkTypesBeforeContentCreation(container.getTypeId(), typeIdChild);
-    final Content content = createContent(title, body, KuneWaveService.NO_WAVE_TO_COPY, user, container,
-        typeIdChild, getGadgetUrl(gadgetname), gadgetProperties);
+    final Content content = createContent(title, body, false, KuneWaveService.NO_WAVE_TO_COPY, user,
+        container, typeIdChild, getGadgetUrl(gadgetname), gadgetProperties);
     tool.onCreateContent(content, container);
     return content;
   }
@@ -412,7 +424,7 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
 
   /**
    * Purge content (permanent delete)
-   * 
+   *
    * @param content
    *          the content to purge
    */

@@ -1,5 +1,7 @@
 var kt = document.querySelector('#kunetemplate');
 
+kt.spin_active=true;
+
 kt.toggle_social_net = function() {
   document.querySelector('#core_drawer_group_header').togglePanel();
 }
@@ -13,7 +15,7 @@ function setContentMinHeight() {
 }
 
 /* The initial space (0: for home, 2: for group space) useful during tests */
-kt.spaceselected=2;
+kt.spaceselected=0;
 
 /* Screen sizes (inspired in bootstrap) */
 kt.screenlg=1200;
@@ -59,6 +61,17 @@ kt.closeMainDrawer = function(e,detail,sender) {
   document.getElementById('main_core_drawer_panel').closeDrawer();  
 }
 
+
+kt.beat = function(id, play) {
+  var animation = document.getElementById('opacity-scale');
+  if (play) {
+    animation.target = document.getElementById(id);
+    animation.play();
+  }
+  else
+    animation.cancel();
+}
+
 kt.blink = function(id, play) {
   var animation = document.getElementById('opacity-infinite');
   if (play) {
@@ -84,7 +97,7 @@ kt.toggleSearch = function(e,detail,sender) {
   toggleVis('#space_selector_paper_tabs');
   toggleVis('#sitebar_user_space_icon_group');
   toggleVis('#sitebar_chat_icon_group');
-  toggleVis('#sitebar_user_btn');
+  // Problems with chat status toggleVis('#sitebar_user_btn');
   toggleVis('#sitebar_search_input');
   toggleVis('#sitebar_left_extensionbar');
   toggleVis('#sitebar_right_extensionbar');
@@ -118,6 +131,28 @@ addEventListener('core-header-transform', function(e) {
   //toolbar.style.color = (d.y >= d.height - d.condensedHeight) ? 'blue' : 'green';
   miga.css('color', (d.y >= d.height - d.condensedHeight) ? kt.c2 : kt.c6);
 });
+
+function scroll(id) {
+  console.log("target " + id);
+
+  if (id) {
+    element=document.getElementById(id);
+    var top = element.offsetTop - element.scrollTop + element.clientTop;
+    
+    var scroller = $("#k_home_scroller");
+    scroller.animate({scrollTop: top}, 300);           
+  }
+}
+
+kt.belowWayPoint = function(e) {
+  id = e.target.attributes["data-id"].value;
+  scroll("sec" + id);
+}
+
+kt.aboveWayPoint = function(e) {
+  id = e.target.attributes["data-id"].value;
+  console.log("id above " + id);
+}
 
 /* Default theme (useful for development without GWT) 
 kt.bg1="#deaa87";

@@ -64,10 +64,10 @@ public final class FileConstants {
   public final static String IMGSIZE = "imgsize";
 
   /** The Constant LOGO_DEF_MAX_SIZE. */
-  public final static int LOGO_DEF_MAX_SIZE = 120;
+  public final static int LOGO_DEF_MAX_SIZE = 150;
 
   /** The Constant LOGO_DEF_SIZE. */
-  public final static int LOGO_DEF_SIZE = 60;
+  public final static int LOGO_DEF_SIZE = 100;
 
   /** The Constant LOGO_DEF_WIDTH. */
   @Deprecated

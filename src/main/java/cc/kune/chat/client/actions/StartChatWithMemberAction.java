@@ -29,6 +29,7 @@ import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
@@ -42,19 +43,22 @@ import com.google.inject.Provider;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class StartChatWithMemberAction extends AbstractExtendedAction {
-  
+
   /** The chat client. */
   private final Provider<ChatClient> chatClient;
-  
+
   /** The i18n. */
   private final I18nTranslationService i18n;
 
   /**
    * Instantiates a new start chat with member action.
    *
-   * @param i18n the i18n
-   * @param res the res
-   * @param chatClient the chat client
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param chatClient
+   *          the chat client
    */
   @Inject
   public StartChatWithMemberAction(final I18nTranslationService i18n, final ChatResources res,
@@ -62,11 +66,15 @@ public class StartChatWithMemberAction extends AbstractExtendedAction {
     this.i18n = i18n;
     this.chatClient = chatClient;
     putValue(NAME, i18n.t("Chat with this group member"));
-    putValue(Action.SMALL_ICON, res.chat());
+    putValue(Action.SMALL_ICON, KuneIcon.CHAT);
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common.client.actions.ActionEvent)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
+   * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {

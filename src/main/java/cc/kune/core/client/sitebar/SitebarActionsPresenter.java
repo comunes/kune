@@ -215,7 +215,6 @@ public class SitebarActionsPresenter extends
     MORE_MENU.withIcon(IconType.BARS);
     MORE_MENU.setStyles("k-no-backimage, k-btn-sitebar");
     MORE_MENU.setAtRight(true);
-
     final AbstractExtendedAction bugsAction = new AbstractExtendedAction() {
       @Override
       public void actionPerformed(final ActionEvent event) {
@@ -296,7 +295,9 @@ public class SitebarActionsPresenter extends
   private void refreshActionsImpl() {
     getView().getLeftBar().clear();
     getView().getRightBar().clear();
+
     RIGHT_TOOLBAR.clear();
+
     // Right now we only use the RIGHTBAR
     // getView().getLeftBar().add(LEFT_TOOLBAR);
     getView().getRightBar().add(RIGHT_TOOLBAR);

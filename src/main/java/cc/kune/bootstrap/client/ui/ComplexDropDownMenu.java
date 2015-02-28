@@ -132,6 +132,10 @@ public class ComplexDropDownMenu<T extends ComplexWidget> {
     return menu;
   }
 
+  public DropDownMenu getMenu() {
+    return menu;
+  }
+
   public String getText() {
     return anchor.getText();
   }

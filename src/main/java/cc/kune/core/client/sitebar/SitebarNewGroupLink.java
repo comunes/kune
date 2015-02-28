@@ -22,6 +22,8 @@
  */
 package cc.kune.core.client.sitebar;
 
+import org.gwtbootstrap3.client.ui.constants.Responsiveness;
+
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ActionStyles;
@@ -77,7 +79,7 @@ public class SitebarNewGroupLink extends ToolbarItemDescriptor {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -116,7 +118,7 @@ public class SitebarNewGroupLink extends ToolbarItemDescriptor {
       final CoreResources coreResources, final Session session) {
     super(newGroupAction);
     this.session = session;
-    withId(NEW_GROUP_BTN_ID).withStyles(ActionStyles.SITEBAR_STYLE_FL);
+    withId(NEW_GROUP_BTN_ID).withStyles(ActionStyles.SITEBAR_STYLE_FL + "," + Responsiveness.HIDDEN_XS);
     withParent(SitebarActions.RIGHT_TOOLBAR);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
         SitebarActions.RIGHT_TOOLBAR);

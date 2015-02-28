@@ -42,12 +42,18 @@ public class SmallAvatarDecoratorImpl extends AvatarDecoratorImpl implements Sma
   /**
    * Instantiates a new small avatar decorator impl.
    *
-   * @param i18n the i18n
-   * @param res the res
-   * @param session the session
-   * @param presenceManager the presence manager
-   * @param roster the roster
-   * @param chatClient the chat client
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param session
+   *          the session
+   * @param presenceManager
+   *          the presence manager
+   * @param roster
+   *          the roster
+   * @param chatClient
+   *          the chat client
    */
   @Inject
   public SmallAvatarDecoratorImpl(final I18nTranslationService i18n, final CoreResources res,
@@ -56,6 +62,7 @@ public class SmallAvatarDecoratorImpl extends AvatarDecoratorImpl implements Sma
     super(i18n, session, presenceManager, roster, chatClient, res.chatDotBusySmall(),
         res.chatDotAwaySmall(), res.chatDotAwaySmall(), res.chatDotExtendedAwaySmall(),
         res.chatDotAvailableSmall());
-    setImagePosition(23, -9, -8);
+    // setImagePosition(23, -9, -8);
+    super.addStyleNameToImage("k-avatar-small-decorator");
   }
 }

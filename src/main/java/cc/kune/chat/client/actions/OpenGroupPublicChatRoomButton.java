@@ -42,8 +42,10 @@ public class OpenGroupPublicChatRoomButton {
   /**
    * Instantiates a new open group public chat room button.
    *
-   * @param openRoomAction the open room action
-   * @param entityHeader the entity header
+   * @param openRoomAction
+   *          the open room action
+   * @param entityHeader
+   *          the entity header
    */
   @Inject
   public OpenGroupPublicChatRoomButton(final OpenGroupPublicChatRoomAction openRoomAction,

@@ -30,7 +30,9 @@ import cc.kune.common.client.ui.HTMLId;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
+
 public enum PolymerId implements HTMLId {
+
   /* @formatter:off */
 
   CHAT_PANEL("chat_centerpanel"),
@@ -66,8 +68,8 @@ public enum PolymerId implements HTMLId {
   INBOX_NEW_MESSAGE("inbox_new_message"),
   INBOX_RESULT("inbox_result"),
   INBOX_SHOW_HIDE("inbox_show_hide"),
-  INBOX_TITLE("inbox_title"),
   INBOX_SITEBAR_ICON_GROUP("sitebar_user_space_icon_group"),
+  INBOX_TITLE("inbox_title"),
   KUNE_TEMPLATE("kunetemplate"),
   MIGA("miga"),
   PAPER_PROGRESS("paper_progress"),

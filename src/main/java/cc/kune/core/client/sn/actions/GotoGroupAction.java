@@ -28,13 +28,14 @@ import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class GotoGroupAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GotoGroupAction extends AbstractExtendedAction {
@@ -44,7 +45,7 @@ public class GotoGroupAction extends AbstractExtendedAction {
 
   /**
    * Instantiates a new goto group action.
-   * 
+   *
    * @param stateManager
    *          the state manager
    * @param i18n
@@ -62,7 +63,7 @@ public class GotoGroupAction extends AbstractExtendedAction {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)
@@ -70,6 +71,7 @@ public class GotoGroupAction extends AbstractExtendedAction {
   @Override
   public void actionPerformed(final ActionEvent event) {
     stateManager.gotoStateToken(EventTargetUtils.getTargetToken(event));
+    PolymerUtils.hideSN();
   }
 
 }

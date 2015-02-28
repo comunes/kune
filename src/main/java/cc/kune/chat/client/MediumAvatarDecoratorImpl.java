@@ -42,12 +42,18 @@ public class MediumAvatarDecoratorImpl extends AvatarDecoratorImpl implements Me
   /**
    * Instantiates a new medium avatar decorator impl.
    *
-   * @param i18n the i18n
-   * @param res the res
-   * @param session the session
-   * @param presenceManager the presence manager
-   * @param roster the roster
-   * @param chatClient the chat client
+   * @param i18n
+   *          the i18n
+   * @param res
+   *          the res
+   * @param session
+   *          the session
+   * @param presenceManager
+   *          the presence manager
+   * @param roster
+   *          the roster
+   * @param chatClient
+   *          the chat client
    */
   @Inject
   public MediumAvatarDecoratorImpl(final I18nTranslationService i18n, final CoreResources res,
@@ -56,6 +62,7 @@ public class MediumAvatarDecoratorImpl extends AvatarDecoratorImpl implements Me
     super(i18n, session, presenceManager, roster, chatClient, res.chatDotBusyMedium(),
         res.chatDotAwayMedium(), res.chatDotAwayMedium(), res.chatDotExtendedAwayMedium(),
         res.chatDotAvailableMedium());
-    setImagePosition(53, -6, -10);
+    // setImagePosition(FileConstants.LOGO_DEF_SIZE - 6, -6, -10);
+    super.addStyleNameToImage("k-avatar-medium-decorator");
   }
 }

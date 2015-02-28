@@ -95,7 +95,6 @@ public class AbstractSNPanel extends ViewImpl {
 
   /** The bottom actions toolbar. */
   ActionFlowPanel bottomActionsToolbar;
-
   /** The bottom panel. */
   @UiField
   FlowPanel bottomPanel;
@@ -134,6 +133,9 @@ public class AbstractSNPanel extends ViewImpl {
   /** The first deck label. */
   @UiField
   Label firstDeckLabel;
+
+  /** The bottom actions toolbar. */
+  ActionFlowPanel headerActionsToolbar;
 
   /** The last connected manager. */
   private final LastConnectedManager lastConnectedManager;
@@ -335,6 +337,14 @@ public class AbstractSNPanel extends ViewImpl {
    */
   public IsActionExtensible getBottomToolbar() {
     return bottomActionsToolbar;
+  }
+
+  public IsActionExtensible getEntityToolbar() {
+    return headerActionsToolbar;
+  }
+
+  public void setEntityHeaderToolbarVisible(final boolean visible) {
+    headerActionsToolbar.setVisible(visible);
   }
 
   /**

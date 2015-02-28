@@ -61,7 +61,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupSNPresenter extends
-    AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy> {
+AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy> {
 
   /**
    * The Interface GroupSNProxy.
@@ -148,6 +148,8 @@ public class GroupSNPresenter extends
      */
     IsActionExtensible getBottomToolbar();
 
+    IsActionExtensible getEntityToolbar();
+
     /**
      * Sets the admins count.
      *
@@ -183,6 +185,8 @@ public class GroupSNPresenter extends
      *          the big
      */
     void setCollabsVisible(boolean visible, boolean big);
+
+    void setEntityHeaderToolbarVisible(boolean visible);
 
     /**
      * Sets the pendings count.
@@ -224,6 +228,7 @@ public class GroupSNPresenter extends
      * Show orphan.
      */
     void showOrphan();
+
   }
 
   /** The actions registry. */
@@ -283,11 +288,11 @@ public class GroupSNPresenter extends
     });
     stateManager.onSocialNetworkChanged(true,
         new SocialNetworkChangedEvent.SocialNetworkChangedHandler() {
-          @Override
-          public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
-            GroupSNPresenter.this.onStateChanged(event.getState());
-          }
-        });
+      @Override
+      public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
+        GroupSNPresenter.this.onStateChanged(event.getState());
+      }
+    });
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
@@ -305,7 +310,7 @@ public class GroupSNPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
    */
   @Override
@@ -321,8 +326,10 @@ public class GroupSNPresenter extends
    */
   private void onStateChanged(final StateAbstractDTO state) {
     if (state.getGroup().isPersonal()) {
+      getView().setEntityHeaderToolbarVisible(false);
       getView().setVisible(false);
     } else {
+      getView().setEntityHeaderToolbarVisible(true);
       if (state.getSocialNetworkData().isMembersVisible()) {
         getView().clear();
         setGroupMembers(state.getGroupMembers(), state.getGroupRights());
@@ -345,8 +352,10 @@ public class GroupSNPresenter extends
    * Refresh actions impl.
    */
   private void refreshActionsImpl() {
-    getView().getBottomToolbar().clear();
-    getView().getBottomToolbar().addAll(actionsRegistry);
+    // getView().getBottomToolbar().clear();
+    // getView().getBottomToolbar().addAll(actionsRegistry);
+    getView().getEntityToolbar().clear();
+    getView().getEntityToolbar().addAll(actionsRegistry);
   }
 
   /**
@@ -364,7 +373,7 @@ public class GroupSNPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

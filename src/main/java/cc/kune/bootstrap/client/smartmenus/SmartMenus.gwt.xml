@@ -6,7 +6,7 @@
         <include name="addons/bootstrap/*js"/>
         <include name="addons/bootstrap/*css"/>
     </public>
-    
+       
   <stylesheet src='addons/bootstrap/jquery.smartmenus.bootstrap.css' />
   
 </module>

@@ -1,6 +1,5 @@
 package cc.kune.client;
 
-import cc.kune.blogs.client.BlogsParts;
 import cc.kune.bootstrap.client.BSGuiProvider;
 import cc.kune.chat.client.ChatParts;
 import cc.kune.common.client.events.EventBusWithLogging;
@@ -9,18 +8,24 @@ import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.CoreParts;
 import cc.kune.core.client.actions.xml.XMLActionsParser;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.state.SessionExpirationManager;
+import cc.kune.core.client.state.SessionInstance;
 import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.docs.client.DocsParts;
+import cc.kune.events.client.EventsParts;
 import cc.kune.gspace.client.GSpaceParts;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.hspace.client.HSpaceParts;
+import cc.kune.lists.client.ListsParts;
+import cc.kune.polymer.client.PolymerId;
+import cc.kune.polymer.client.PolymerUtils;
 import cc.kune.trash.client.TrashParts;
-import cc.kune.wiki.client.WikiParts;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
@@ -33,6 +38,9 @@ public class KuneBootstrapper implements Bootstrapper {
 
   /** The Constant HOME_IDS_PREFIX. */
   protected static final String HOME_IDS_PREFIX = "k-home-";
+
+  protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.GROUP_SPACE,
+    PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR, PolymerId.HOME_TOOLBAR };
 
   private final ContentViewerSelector contentViewerSelector;
 
@@ -56,14 +64,16 @@ public class KuneBootstrapper implements Bootstrapper {
 
       final DocsParts docs,
 
-      final BlogsParts blogs, final WikiParts wiki, /*
-                                                     * final EventsParts events,
-                                                     * final TasksParts tasks,
-                                                     * final ListsParts lists,
-                                                     */
-      final ChatParts chats, /*
-                              * final BartersParts barters,
-                              */
+      /*
+       * final BlogsParts blogs, final WikiParts wiki,
+       */
+      final EventsParts events,
+      /* final TasksParts tasks, */
+      final ListsParts lists, final ChatParts chats, /*
+       * final BartersParts
+       * barters,
+       */
+
       final TrashParts trash,
 
       final CoreParts coreParts, final GSpaceParts gSpaceParts, /*
@@ -98,6 +108,19 @@ public class KuneBootstrapper implements Bootstrapper {
     globalShortcutRegister.enable();
 
     setHomeLocale();
+
+    SessionInstance.get().onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        // TODO Auto-generated method stub
+        // Polymer preventing FOUC
+        // https://www.polymer-project.org/docs/polymer/styling.html#fouc-prevention
+        for (final PolymerId id : unresolvedIdList) {
+          PolymerUtils.resolved(id);
+        }
+        PolymerUtils.resolved(RootPanel.getBodyElement());
+      }
+    });
   }
 
   /**

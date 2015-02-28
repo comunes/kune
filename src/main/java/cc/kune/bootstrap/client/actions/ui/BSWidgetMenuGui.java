@@ -16,24 +16,23 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.notify.NotifyUser;
 
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSMenuGui {
 
-  private HandlerRegistration clickHandler;
   private DropDownMenu menu;
+
   private PopupBSMenuGui popup;
+
   private Widget widget;
-  private HasClickHandlers widgetHasClick;
 
   @Override
   public void add(final UIObject uiObject) {
@@ -56,27 +55,34 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
 
   @Override
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
+    final Object value = descriptor.getValue(ParentWidget.PARENT_UI);
+    if (value != null) {
+      // Already created ... so reset
+      ((BSWidgetMenuGui) value).getMenu().clear();
+      return this;
+    }
     this.descriptor = descriptor;
     final DropDown dropDown = new DropDown();
     final Anchor anchor = new Anchor();
     anchor.setDataToggle(Toggle.DROPDOWN);
     dropDown.add(anchor);
     menu = new DropDownMenu();
+
     widget = (Widget) descriptor.getValue(WidgetMenuDescriptor.WIDGET);
     popup = new PopupBSMenuGui(menu, widget, descriptor);
     dropDown.add(menu);
+    HasClickHandlers widgetHasClick;
     try {
       widgetHasClick = (HasClickHandlers) widget;
     } catch (final ClassCastException e) {
       throw new UIException("Cannot cast to HasClickHandlers descriptor" + descriptor);
     }
-    clickHandler = widgetHasClick.addClickHandler(new ClickHandler() {
+    widgetHasClick.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
         event.stopPropagation();
         Log.warn("Clicked");
         clickHandlerDefault.onClick(event);
-        menu.getElement().getStyle().setDisplay(Display.BLOCK);
         show();
       }
     });
@@ -84,14 +90,11 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
     descriptor.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {
-        // if (event.getPropertyName().equals(MenuDescriptor.MENU_HIDE)) {
-        // if (popup != null && popup.isShowing()) {
-        // popup.hide();
-        // }
-        // } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW))
-        // {
-        // show();
-        // }
+        if (event.getPropertyName().equals(MenuDescriptor.MENU_HIDE)) {
+          hide();
+        } else if (event.getPropertyName().equals(MenuDescriptor.MENU_SHOW)) {
+          show();
+        }
         // } else if
         // (event.getPropertyName().equals(MenuDescriptor.MENU_SELECTION_DOWN))
         // {
@@ -115,12 +118,15 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
     descriptor.putValue(ParentWidget.PARENT_UI, this);
     initWidget(dropDown);
     configureItemFromProperties();
+    final String id = HTMLPanel.createUniqueId();
+    menu.getElement().setId(id);
     return this;
   }
 
-  /**
-   * Hide.
-   */
+  public DropDownMenu getMenu() {
+    return menu;
+  }
+
   @Override
   public void hide() {
     popup.hide();
@@ -129,15 +135,6 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
   @Override
   public void insert(final int position, final UIObject uiObject) {
     menu.insert((Widget) uiObject, position);
-  }
-
-  @Override
-  protected void onUnload() {
-    super.onUnload();
-    NotifyUser.info("On unload " + descriptor);
-    popup = null;
-    clickHandler.removeHandler();
-    clickHandler = null;
   }
 
   @Override
@@ -170,6 +167,7 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
 
   @Override
   public void show() {
+    menu.getElement().getStyle().setDisplay(Display.BLOCK);
     popup.show();
   }
 

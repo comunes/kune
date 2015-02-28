@@ -72,12 +72,12 @@ import com.google.gwt.event.logical.shared.OpenEvent;
 import com.google.gwt.event.logical.shared.OpenHandler;
 import com.google.gwt.event.logical.shared.SelectionEvent;
 import com.google.gwt.event.logical.shared.SelectionHandler;
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.datepicker.client.CalendarUtil;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.Presenter;
 import com.gwtplatform.mvp.client.annotations.ProxyCodeSplit;
 import com.gwtplatform.mvp.client.proxy.Proxy;
@@ -86,16 +86,16 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CalendarViewerPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CalendarViewerPresenter extends
-    Presenter<CalendarViewerPresenter.CalendarViewerView, CalendarViewerPresenter.CalendarViewerProxy>
-    implements CalendarViewer {
+Presenter<CalendarViewerPresenter.CalendarViewerView, CalendarViewerPresenter.CalendarViewerProxy>
+implements CalendarViewer {
 
   /**
    * The Interface CalendarViewerProxy.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   @ProxyCodeSplit
@@ -104,17 +104,17 @@ public class CalendarViewerPresenter extends
 
   /**
    * The Interface CalendarViewerView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface CalendarViewerView extends HasSelectionHandlers<Appointment>,
-      HasDeleteHandlers<Appointment>, HasOpenHandlers<Appointment>, HasTimeBlockClickHandlers<Date>,
-      HasUpdateHandlers<Appointment>, HasDateRequestHandlers<Date>, HasMouseOverHandlers<Appointment>,
-      HasLayout, HasAppointments, AbstractFolderViewerView {
+  HasDeleteHandlers<Appointment>, HasOpenHandlers<Appointment>, HasTimeBlockClickHandlers<Date>,
+  HasUpdateHandlers<Appointment>, HasDateRequestHandlers<Date>, HasMouseOverHandlers<Appointment>,
+  HasLayout, HasAppointments, AbstractFolderViewerView {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * com.bradrydzewski.gwt.calendar.client.HasAppointments#addAppointment(
      * com.bradrydzewski.gwt.calendar.client.Appointment)
@@ -124,7 +124,7 @@ public class CalendarViewerPresenter extends
 
     /**
      * Adds the click handler.
-     * 
+     *
      * @param clickHandler
      *          the click handler
      * @return the handler registration
@@ -133,7 +133,7 @@ public class CalendarViewerPresenter extends
 
     /**
      * Adds the create handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -142,28 +142,28 @@ public class CalendarViewerPresenter extends
 
     /**
      * Gets the client x.
-     * 
+     *
      * @return the client x
      */
     int getClientX();
 
     /**
      * Gets the client y.
-     * 
+     *
      * @return the client y
      */
     int getClientY();
 
     /**
      * Gets the current date.
-     * 
+     *
      * @return the current date
      */
     Date getCurrentDate();
 
     /**
      * Gets the date.
-     * 
+     *
      * @return the date
      */
     Date getDate();
@@ -175,7 +175,7 @@ public class CalendarViewerPresenter extends
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * com.bradrydzewski.gwt.calendar.client.HasAppointments#removeAppointment
      * (com.bradrydzewski.gwt.calendar.client.Appointment)
@@ -185,7 +185,7 @@ public class CalendarViewerPresenter extends
 
     /**
      * Sets the date.
-     * 
+     *
      * @param date
      *          the new date
      */
@@ -193,7 +193,7 @@ public class CalendarViewerPresenter extends
 
     /**
      * Sets the on mouse over tooltip text.
-     * 
+     *
      * @param text
      *          the new on mouse over tooltip text
      */
@@ -201,7 +201,7 @@ public class CalendarViewerPresenter extends
 
     /**
      * Sets the view.
-     * 
+     *
      * @param view
      *          the new view
      */
@@ -209,7 +209,7 @@ public class CalendarViewerPresenter extends
 
     /**
      * Sets the view.
-     * 
+     *
      * @param view
      *          the view
      * @param days
@@ -219,7 +219,7 @@ public class CalendarViewerPresenter extends
 
     /**
      * Update title.
-     * 
+     *
      * @param currentCalView
      *          the current cal view
      */
@@ -258,7 +258,7 @@ public class CalendarViewerPresenter extends
 
   /**
    * Instantiates a new calendar viewer presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -288,12 +288,14 @@ public class CalendarViewerPresenter extends
     this.i18n = i18n;
     this.contentService = contentService;
     addListeners();
-    setViewImpl(DEF_VIEW, currentDaysView);
+    this.currentCalView = DEF_VIEW;
+    // This is necessary?
+    // setViewImpl(DEF_VIEW, currentDaysView);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewer#addAppointment(com.bradrydzewski
    * .gwt.calendar.client.Appointment)
@@ -347,15 +349,15 @@ public class CalendarViewerPresenter extends
         map.put(ICalConstants.DATE_TIME_END, DateUtils.toString(app.getEnd()));
         contentService.get().setGadgetProperties(session.getUserHash(), new StateToken(app.getId()),
             EventsToolConstants.TYPE_MEETING_DEF_GADGETNAME, map, new AsyncCallback<Void>() {
-              @Override
-              public void onFailure(final Throwable caught) {
-                event.setCancelled(true);
-              }
+          @Override
+          public void onFailure(final Throwable caught) {
+            event.setCancelled(true);
+          }
 
-              @Override
-              public void onSuccess(final Void result) {
-              }
-            });
+          @Override
+          public void onSuccess(final Void result) {
+          }
+        });
         hideMenu();
       }
     });
@@ -382,7 +384,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.tool.ContentViewer#attach()
    */
   @Override
@@ -393,7 +395,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.events.client.viewer.CalendarViewer#decrement()
    */
   @Override
@@ -403,7 +405,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.tool.ContentViewer#detach()
    */
   @Override
@@ -413,7 +415,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.events.client.viewer.CalendarViewer#getAppToEdit()
    */
   @Override
@@ -423,7 +425,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.events.client.viewer.CalendarViewer#getDate()
    */
   @Override
@@ -433,7 +435,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.events.client.viewer.CalendarViewer#getOnOverDate()
    */
   @Override
@@ -443,7 +445,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.events.client.viewer.CalendarViewer#goToday()
    */
   @Override
@@ -461,7 +463,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.events.client.viewer.CalendarViewer#increment()
    */
   @Override
@@ -471,7 +473,7 @@ public class CalendarViewerPresenter extends
 
   /**
    * Increment date.
-   * 
+   *
    * @param positive
    *          the positive
    */
@@ -492,7 +494,7 @@ public class CalendarViewerPresenter extends
 
   /**
    * Checks if is valid.
-   * 
+   *
    * @param app
    *          the app
    * @return true, if is valid
@@ -503,7 +505,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewer#removeAppointment(com.bradrydzewski
    * .gwt.calendar.client.Appointment)
@@ -515,7 +517,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -525,13 +527,14 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.tool.ContentViewer#setContent(cc.kune.core.shared
    * .dto.HasContent)
    */
   @Override
   public void setContent(@Nonnull final HasContent state) {
+    setViewImpl(currentCalView, currentDaysView);
     folderViewerUtils.setContent(getView(), state);
     getView().showFolder();
     final StateEventContainerDTO eventState = (StateEventContainerDTO) state;
@@ -558,7 +561,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.events.client.viewer.CalendarViewer#setDate(java.util.Date)
    */
   @Override
@@ -568,7 +571,7 @@ public class CalendarViewerPresenter extends
 
   /**
    * Sets the menu position.
-   * 
+   *
    * @param x
    *          the x
    * @param y
@@ -580,7 +583,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewer#setView(com.bradrydzewski.gwt
    * .calendar.client.CalendarViews)
@@ -592,7 +595,7 @@ public class CalendarViewerPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.events.client.viewer.CalendarViewer#setView(com.bradrydzewski.gwt
    * .calendar.client.CalendarViews, int)
@@ -604,7 +607,7 @@ public class CalendarViewerPresenter extends
 
   /**
    * Sets the view impl.
-   * 
+   *
    * @param calView
    *          the new view impl
    */
@@ -617,7 +620,7 @@ public class CalendarViewerPresenter extends
 
   /**
    * Sets the view impl.
-   * 
+   *
    * @param calView
    *          the cal view
    * @param days

@@ -2,8 +2,7 @@
   "name": "kune-index",
   "description": "",
   "homepage": "",
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "",
   "private": true,
   "dependencies": {
@@ -13,6 +12,7 @@
     "bootstrap": "~3.3.2",
     "font-awesome-polymer-icons": "~4.2.0-b2",
     "lorem-element": "~0.0.1",
-    "font-kune-polymer-icons": "~0.0.8"
+    "font-kune-polymer-icons": "~0.0.8",
+    "akyral-waypoint": "~1.0.1"
   }
 }

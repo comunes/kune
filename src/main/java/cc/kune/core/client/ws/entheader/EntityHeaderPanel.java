@@ -27,6 +27,7 @@ import org.gwtbootstrap3.client.ui.html.Text;
 import br.com.rpa.client._coreelements.CoreIconButton;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.ui.WrappedFlowPanel;
 import cc.kune.common.shared.i18n.I18n;
@@ -92,8 +93,8 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   @Inject
   public EntityHeaderPanel(final EventBus eventBus,
       final Provider<ClientFileDownloadUtils> downloadProvider, final CoreResources images,
-      final GuiProvider bindings, final GSpaceArmor armor, final EntityTextLogo entityTextLogo,
-      final I18nTranslationService i18n, final MediumAvatarDecorator decorator) {
+      final GuiProvider bindings, final GSpaceArmor armor, final I18nTranslationService i18n,
+      final MediumAvatarDecorator decorator) {
     this.downloadProvider = downloadProvider;
     this.images = images;
     this.decorator = decorator;
@@ -123,7 +124,8 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
           @Override
           public void onUserFollowersUpdated(final UserFollowersUpdatedEvent event) {
             final int followers = event.getFollowers();
-           // followersBtn.setText(I18n.t(followers == 1 ? "One follower" : "[%d] followers", followers));
+        // followersBtn.setText(I18n.t(followers == 1 ? "One follower" :
+        // "[%d] followers", followers));
             followersBtn.setText(I18n.t(followers == 1 ? "One buddy" : "[%d] buddies", followers));
           }
         });
@@ -139,6 +141,11 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   @Override
   public void addAction(final GuiActionDescrip descriptor) {
     toolbar.add(descriptor);
+  }
+
+  @Override
+  public void addAll(final GuiActionDescCollection actionsRegistry) {
+    toolbar.addAll(actionsRegistry);
   }
 
   /*
@@ -216,16 +223,9 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     decorator.setDecoratorVisible(visible);
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see
-   * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
-   * #showDefUserLogo()
-   */
   @Override
-  public void showDefUserLogo() {
-    logo.setResource(images.unknown60());
+  public void toolbarClear() {
+    toolbar.clear();
   }
 
 }

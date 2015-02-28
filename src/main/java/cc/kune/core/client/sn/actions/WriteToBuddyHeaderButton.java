@@ -41,14 +41,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class WriteToBuddyHeaderButton.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WriteToBuddyHeaderButton {
 
   /**
    * Instantiates a new write to buddy header button.
-   * 
+   *
    * @param writeToAction
    *          the write to action
    * @param entityHeader

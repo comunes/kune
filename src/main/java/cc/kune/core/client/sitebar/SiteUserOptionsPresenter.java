@@ -126,7 +126,6 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     this.shortCutRegister = shortCutRegister;
     this.downUtils = downUtils;
     userBtn = (CoreIconButton) LOGGED_USER_MENU.getWidget();
-
     createActions();
     separator.setVisible(false);
     session.onUserSignIn(true, new UserSignInHandler() {
@@ -148,7 +147,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.SiteOptions#addAction(cc.kune.common.client
    * .actions.ui.descrip.GuiActionDescrip)
@@ -173,6 +172,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
    */
   private void createActions() {
     LOGGED_USER_MENU.setId(LOGGED_USER_MENU_ID);
+    LOGGED_USER_MENU.setAtRight(true);
     LOGGED_USER_MENU.setParent(SitebarActions.RIGHT_TOOLBAR);
     ((Widget) LOGGED_USER_MENU.getWidget()).setStylePrimaryName("core_icon_status");
 

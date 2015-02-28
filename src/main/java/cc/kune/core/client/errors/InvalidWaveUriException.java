@@ -20,47 +20,31 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.common.client.actions;
+package cc.kune.core.client.errors;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ToolbarStyles.
+ * The Class InvalidWaveUriException
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class ToolbarStyles {
-  
-  /** The Constant CSS_BTN_ALONE. */
-  public static final String CSS_BTN_ALONE = "k-button,  k-button-alone, k-fl";
-  
-  /** The Constant CSS_BTN_CENTER. */
-  public static final String CSS_BTN_CENTER = "k-button, k-button-center, k-fl";
-  
-  /** The Constant CSS_BTN_LEFT. */
-  public static final String CSS_BTN_LEFT = "k-button, k-button-left, k-fl";
-  
-  /** The Constant CSS_BTN_RIGTH. */
-  public static final String CSS_BTN_RIGTH = "k-button, k-button-right, k-fl";
+public class InvalidWaveUriException extends DefaultException {
+
+  private static final long serialVersionUID = 1921873286955317889L;
 
   /**
-   * Calculate style.
-   *
-   * @param pos the pos
-   * @param length the length
-   * @return the string
+   * Instantiates a new invalid sn operation exception.
    */
-  public static String calculateStyle(final int pos, final int length) {
-    // GWT.log("PATH pos: " + pos + " length: " + length);
-    if (length == 1) {
-      return ToolbarStyles.CSS_BTN_ALONE;
-    }
-    if (pos == 0) {
-      return ToolbarStyles.CSS_BTN_LEFT;
-    }
-    if (pos == length - 1) {
-      return ToolbarStyles.CSS_BTN_RIGTH;
-    }
-    return ToolbarStyles.CSS_BTN_CENTER;
+  public InvalidWaveUriException() {
+    super();
   }
 
+  /**
+   * Instantiates a new invalid sn operation exception.
+   *
+   * @param message
+   *          the message
+   */
+  public InvalidWaveUriException(final String message) {
+    super(message);
+  }
 }

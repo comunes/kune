@@ -22,6 +22,7 @@
  \*/
 package cc.kune.core.client.ws.entheader;
 
+import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 
 // TODO: Auto-generated Javadoc
@@ -39,5 +40,9 @@ public interface EntityHeader {
    *          the descriptor
    */
   void addAction(GuiActionDescrip descriptor);
+
+  void addAll(GuiActionDescCollection actionsRegistry);
+
+  void toolbarClear();
 
 }
