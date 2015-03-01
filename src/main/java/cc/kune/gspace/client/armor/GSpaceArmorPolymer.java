@@ -119,6 +119,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
         toolsSouthActionsToolbar);
 
     PolymerUtils.addLayout(entityFooterActionsToolbar, HORIZONTAL, LAYOUT, START_JUSTIFIED);
+    PolymerUtils.addLayout(headerActionsTopToolbar, HORIZONTAL, LAYOUT, END_JUSTIFIED);
 
     getEntityHeader().add(headerActionsTopToolbar);
     getDocFooter().add(docFooterActionsToolbar);

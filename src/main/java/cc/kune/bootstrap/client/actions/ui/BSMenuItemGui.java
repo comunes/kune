@@ -40,7 +40,8 @@ public class BSMenuItemGui extends AbstractBSMenuItemGui {
 
       @Override
       public void onClick(final ClickEvent event) {
-        getParentMenu(descriptor).hide();
+        // It's this necessary?
+        // getParentMenu(descriptor).hide();
         clickHandlerChildDefautl.onClick(event);
       }
     });

@@ -24,15 +24,15 @@ package cc.kune.gspace.client.options;
 
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
+import cc.kune.common.client.actions.ActionStyles;
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
-import cc.kune.core.client.sn.actions.GroupSNOptionsMenu;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.StateManager;
@@ -52,8 +52,8 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupOptionsPresenter extends
-AbstractTabbedDialogPresenter<GroupOptionsView, GroupOptionsPresenter.GroupOptionsProxy> implements
-GroupOptions {
+    AbstractTabbedDialogPresenter<GroupOptionsView, GroupOptionsPresenter.GroupOptionsProxy> implements
+    GroupOptions {
 
   /**
    * The Interface GroupOptionsProxy.
@@ -83,13 +83,11 @@ GroupOptions {
   /** The Constant GROUP_OPTIONS_ICON. */
   public static final String GROUP_OPTIONS_ICON = "k-eop-icon";
 
-  private final GroupSNOptionsMenu groupSNoptMenu;
-
   /** The i18n. */
   private final I18nTranslationService i18n;
 
   /** The prefs item. */
-  private MenuItemDescriptor prefsItem;
+  private ButtonDescriptor prefsItem;
 
   /** The session. */
   private final Session session;
@@ -120,13 +118,12 @@ GroupOptions {
   @Inject
   public GroupOptionsPresenter(final EventBus eventBus, final GroupOptionsProxy proxy,
       final StateManager stateManager, final Session session, final I18nTranslationService i18n,
-      final GroupOptionsView view, final SiteTokenListeners tokenListener,
-      final GroupSNOptionsMenu groupSNoptMenu) {
+      final GroupOptionsView view, final SiteTokenListeners tokenListener) {
     super(eventBus, view, proxy);
     this.stateManager = stateManager;
     this.session = session;
     this.i18n = i18n;
-    this.groupSNoptMenu = groupSNoptMenu;
+
   }
 
   /**
@@ -154,9 +151,12 @@ GroupOptions {
         show();
       }
     };
+    if (session.isNewbie()) {
+      groupPrefsAction.withText(i18n.t("Group options"));
+    }
     groupPrefsAction.withIcon(KuneIcon.SETTINGS);
-    groupPrefsAction.withText(i18n.t("Other group preferences"));
-    prefsItem = new MenuItemDescriptor(groupSNoptMenu, groupPrefsAction);
+    prefsItem = new ButtonDescriptor(groupPrefsAction);
+    prefsItem.withStyles(ActionStyles.BTN_NO_BACK_NO_BORDER);
     prefsItem.setId(GROUP_OPTIONS_ICON);
     prefsItem.withToolTip(i18n.t("Set your group preferences here"));
     prefsItem.setVisible(false);
@@ -165,7 +165,7 @@ GroupOptions {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPresenter#getView
    * ()
@@ -177,7 +177,7 @@ GroupOptions {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -202,7 +202,7 @@ GroupOptions {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.options.GroupOptions#show(java.lang.String)
    */
   @Override
@@ -214,7 +214,7 @@ GroupOptions {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.options.GroupOptions#showTooltip()
    */
   @Override

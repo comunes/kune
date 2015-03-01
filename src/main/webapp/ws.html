@@ -703,6 +703,8 @@
         #k_home_tools {
           font-size: {{xsmall? '20' : small? '32' : '32'}}px;
           color: #69312f;
+          width: {{xsmall? "80%": "auto"}};
+          margin: {{xsmall? "0 auto": "0"}};
         }
 
         #k_home_center a {
@@ -917,6 +919,24 @@
           margin-top: -20px;
         }
 
+        #sitebar_toolbar div.k-tb-sep {
+          display: none;
+        }
+        
+        #sitebar_toolbar li {
+          list-style-type: none;
+          margin: {{xsmall? "-5px 8px 0 8px" : "-24px 8px 0 8px"}};
+        }
+
+        #sitebar_toolbar li a:hover {
+          text-decoration: none;
+        }
+        
+        #sitebar_toolbar li a{
+          color: white;
+          font-size: 16px;
+        }
+        
         #paper_progress,#toast {
           z-index:1;
         }

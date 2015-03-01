@@ -259,17 +259,17 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
     });
     stateManager.onSocialNetworkChanged(true,
         new SocialNetworkChangedEvent.SocialNetworkChangedHandler() {
-      @Override
-      public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
-        UserSNPresenter.this.onStateChanged(event.getState());
-      }
-    });
+          @Override
+          public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
+            UserSNPresenter.this.onStateChanged(event.getState());
+          }
+        });
     refreshActionsImpl();
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
    */
   @Override
@@ -313,10 +313,10 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
    * Refresh actions impl.
    */
   private void refreshActionsImpl() {
-    // getView().getBottomToolbar().clear();
-
-    getView().getEntityToolbar().clear();
-    getView().getEntityToolbar().addAll(confActionsRegistry);
+    getView().getBottomToolbar().clear();
+    getView().getBottomToolbar().addAll(confActionsRegistry);
+    // getView().getEntityToolbar().clear();
+    // getView().getEntityToolbar().addAll(confActionsRegistry);
   }
 
   /**
@@ -334,7 +334,7 @@ public class UserSNPresenter extends AbstractSNPresenter<UserSNView, UserSNProxy
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

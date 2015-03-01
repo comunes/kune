@@ -39,6 +39,8 @@ import cc.kune.bootstrap.client.actions.ui.BSToolbarMenuGui;
 import cc.kune.bootstrap.client.actions.ui.BSToolbarSeparatorGui;
 import cc.kune.bootstrap.client.actions.ui.BSWidgetMenuGui;
 import cc.kune.bootstrap.client.smartmenus.SmartMenusBundle;
+import cc.kune.common.client.actions.gwtui.GwtToolbarGui;
+import cc.kune.common.client.actions.gwtui.GwtToolbarSeparatorGui;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.IconLabelDescriptor;
@@ -81,6 +83,8 @@ public class BSGuiProvider {
       final Provider<BSLabelGui> labelGui, final Provider<BSIconLabelGui> iconLabelGui,
       final Provider<BSToolbarGui> toolbarGui,
       final Provider<BSToolbarSeparatorGui> toolbarSeparatorGui,
+      final Provider<GwtToolbarGui> toolbarGuiGwt,
+      final Provider<GwtToolbarSeparatorGui> toolbarSeparatorGuiGwt,
       final Provider<BSMenuHeaderGui> menuHeaderGui, final Provider<BSToolbarItemGui> toolbarItem,
       final Provider<BSWidgetMenuGui> widgetMenu, final Provider<BSMenuGui> menuGui) {
 
@@ -95,8 +99,8 @@ public class BSGuiProvider {
     guiProvider.register(ButtonDescriptor.class, buttonGui);
     guiProvider.register(IconLabelDescriptor.class, iconLabelGui);
     guiProvider.register(LabelDescriptor.class, labelGui);
-    guiProvider.register(ToolbarDescriptor.class, toolbarGui);
-    guiProvider.register(ToolbarSeparatorDescriptor.class, toolbarSeparatorGui);
+    guiProvider.register(ToolbarDescriptor.class, toolbarGuiGwt);
+    guiProvider.register(ToolbarSeparatorDescriptor.class, toolbarSeparatorGuiGwt);
     guiProvider.register(ToolbarMenuDescriptor.class, toolbarMenuGui);
     guiProvider.register(ToolbarItemDescriptor.class, toolbarItem);
     guiProvider.register(WidgetMenuDescriptor.class, widgetMenu);

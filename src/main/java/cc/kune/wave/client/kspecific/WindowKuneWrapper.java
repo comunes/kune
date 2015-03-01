@@ -56,7 +56,7 @@ public class WindowKuneWrapper implements WindowWrapper {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * org.waveprotocol.box.webclient.client.WindowWrapper#alert(java.lang.String)
    */
@@ -67,7 +67,7 @@ public class WindowKuneWrapper implements WindowWrapper {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * org.waveprotocol.wave.client.common.util.WindowWrapper#confirm(java.lang
    * .String, org.waveprotocol.wave.client.common.util.WindowConfirmCallback)
@@ -98,7 +98,7 @@ public class WindowKuneWrapper implements WindowWrapper {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * org.waveprotocol.wave.client.common.util.WindowWrapper#prompt(java.lang
    * .String, java.lang.String,
@@ -110,15 +110,15 @@ public class WindowKuneWrapper implements WindowWrapper {
     if (diag == null) {
       final Builder builder = new PromptTopDialog.Builder(WINDOW_PROMPT_ID, msg, false, true,
           I18n.getDirection(), new OnEnter() {
-            @Override
-            public void onEnter() {
-              doPromptAction();
-            }
-          });
+        @Override
+        public void onEnter() {
+          doPromptAction();
+        }
+      });
       builder.firstButtonTitle(I18n.t("Ok"));
       builder.sndButtonTitle(I18n.t("Cancel"));
-      builder.width("250px");
-      builder.promptWidth(210);   
+      // builder.width("250px");
+      builder.promptWidth(210);
       builder.tabIndexStart(1);
       diag = builder.build();
       diag.getFirstBtn().addClickHandler(new ClickHandler() {

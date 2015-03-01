@@ -24,7 +24,9 @@ package cc.kune.core.client.sn;
 
 import java.util.Set;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
 import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.core.client.events.SocialNetworkChangedEvent;
@@ -34,6 +36,7 @@ import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
 import cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
+import cc.kune.core.client.sn.actions.JoinGroupAction;
 import cc.kune.core.client.sn.actions.registry.GroupSNAdminsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNCollabsMenuItemsRegistry;
 import cc.kune.core.client.sn.actions.registry.GroupSNConfActions;
@@ -61,7 +64,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupSNPresenter extends
-AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy> {
+    AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy> {
 
   /**
    * The Interface GroupSNProxy.
@@ -240,6 +243,8 @@ AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy>
   /** The collabs menu items registry. */
   private final GroupSNCollabsMenuItemsRegistry collabsMenuItemsRegistry;
 
+  private final JoinGroupAction joinGroupAction;
+
   /** The pendings menu items registry. */
   private final GroupSNPendingsMenuItemsRegistry pendingsMenuItemsRegistry;
 
@@ -274,12 +279,13 @@ AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy>
       final GroupSNAdminsMenuItemsRegistry adminsMenuItemsRegistry,
       final GroupSNCollabsMenuItemsRegistry collabsMenuItemsRegistry,
       final GroupSNPendingsMenuItemsRegistry pendingsMenuItemsRegistry,
-      final GroupSNConfActions actionsRegistry) {
+      final GroupSNConfActions actionsRegistry, final JoinGroupAction joinGroupAction) {
     super(eventBus, view, proxy, downloadProvider);
     this.adminsMenuItemsRegistry = adminsMenuItemsRegistry;
     this.collabsMenuItemsRegistry = collabsMenuItemsRegistry;
     this.pendingsMenuItemsRegistry = pendingsMenuItemsRegistry;
     this.actionsRegistry = actionsRegistry;
+    this.joinGroupAction = joinGroupAction;
     stateManager.onStateChanged(true, new StateChangedEvent.StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {
@@ -288,11 +294,11 @@ AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy>
     });
     stateManager.onSocialNetworkChanged(true,
         new SocialNetworkChangedEvent.SocialNetworkChangedHandler() {
-      @Override
-      public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
-        GroupSNPresenter.this.onStateChanged(event.getState());
-      }
-    });
+          @Override
+          public void onSocialNetworkChanged(final SocialNetworkChangedEvent event) {
+            GroupSNPresenter.this.onStateChanged(event.getState());
+          }
+        });
     session.onUserSignIn(true, new UserSignInHandler() {
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
@@ -310,7 +316,7 @@ AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy>
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
    */
   @Override
@@ -352,10 +358,12 @@ AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy>
    * Refresh actions impl.
    */
   private void refreshActionsImpl() {
-    // getView().getBottomToolbar().clear();
-    // getView().getBottomToolbar().addAll(actionsRegistry);
+    getView().getBottomToolbar().clear();
+    getView().getBottomToolbar().addAll(actionsRegistry);
+    final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
+    joinBtn.setStyles(ActionStyles.BTN_NO_BACK_NO_BORDER);
     getView().getEntityToolbar().clear();
-    getView().getEntityToolbar().addAll(actionsRegistry);
+    getView().getEntityToolbar().add(joinBtn);
   }
 
   /**
@@ -373,7 +381,7 @@ AbstractSNPresenter<GroupSNPresenter.GroupSNView, GroupSNPresenter.GroupSNProxy>
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

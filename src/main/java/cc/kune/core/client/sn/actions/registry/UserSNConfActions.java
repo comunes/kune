@@ -22,7 +22,6 @@
  */
 package cc.kune.core.client.sn.actions.registry;
 
-import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
@@ -41,6 +40,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.UserSNetVisibility;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.gspace.client.actions.SNActionStyles;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -94,9 +94,9 @@ public class UserSNConfActions extends AbstractSNActionsRegistry {
     final KuneIcon icon = KuneIcon.SETTINGS;
     final String menuText = isNewbie ? i18n.t("Options") : "";
     final String menuTooltip = isNewbie ? "" : i18n.t("Options");
-    final String menuStyle = ActionStyles.BTN_NO_BACK_NO_BORDER;
+    final String menuStyle = isNewbie ? SNActionStyles.SN_OPTIONS_STYLES_NEWBIE
+        : SNActionStyles.SN_OPTIONS_STYLES;
     OPTIONS_MENU.withText(menuText).withToolTip(menuTooltip).withIcon(icon).withStyles(menuStyle);
-    OPTIONS_MENU.setAtRight(true);
     final MenuRadioItemDescriptor anyoneItem = userBuddiesVisibility.get().withVisibility(
         UserSNetVisibility.anyone);
     final MenuRadioItemDescriptor onlyYourBuddiesItem = userBuddiesVisibility.get().withVisibility(

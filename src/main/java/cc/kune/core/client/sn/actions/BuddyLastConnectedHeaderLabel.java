@@ -26,6 +26,7 @@ import cc.kune.chat.client.ChatOptions;
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.chat.client.actions.StartChatWithMemberAction;
 import cc.kune.common.client.actions.Action;
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.PropertyChangeEvent;
 import cc.kune.common.client.actions.PropertyChangeListener;
 import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
@@ -48,7 +49,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class BuddyLastConnectedHeaderLabel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class BuddyLastConnectedHeaderLabel {
@@ -61,7 +62,7 @@ public class BuddyLastConnectedHeaderLabel {
 
   /**
    * Instantiates a new buddy last connected header label.
-   * 
+   *
    * @param chatAction
    *          the chat action
    * @param entityHeader
@@ -86,7 +87,7 @@ public class BuddyLastConnectedHeaderLabel {
       final XmppRoster roster, final ChatOptions chatOptions) {
     this.lastConnectedManager = lastConnectedManager;
     button = new ButtonDescriptor(chatAction);
-    button.setStyles("k-buddy-last-connected");
+    button.setStyles("k-buddy-last-connected, " + ActionStyles.BTN_NO_BACK_NO_BORDER);
     chatAction.addPropertyChangeListener(new PropertyChangeListener() {
       @Override
       public void propertyChange(final PropertyChangeEvent event) {
@@ -138,7 +139,7 @@ public class BuddyLastConnectedHeaderLabel {
 
   /**
    * Sets the label text.
-   * 
+   *
    * @param username
    *          the new label text
    */

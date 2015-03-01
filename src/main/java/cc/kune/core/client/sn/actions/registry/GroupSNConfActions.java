@@ -22,8 +22,6 @@
  */
 package cc.kune.core.client.sn.actions.registry;
 
-import cc.kune.common.client.actions.ActionStyles;
-import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuRadioItemDescriptor;
@@ -55,6 +53,7 @@ import cc.kune.core.shared.domain.AdmissionType;
 import cc.kune.core.shared.domain.SocialNetworkVisibility;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
+import cc.kune.gspace.client.actions.SNActionStyles;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -124,9 +123,9 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     final KuneIcon icon = KuneIcon.SETTINGS;
     final String menuText = isNewbie ? i18n.t("Options") : "";
     final String menuTooltip = isNewbie ? "" : i18n.t("Options");
-    final String menuStyle = ActionStyles.BTN_NO_BACK_NO_BORDER;
+    final String menuStyle = isNewbie ? SNActionStyles.SN_OPTIONS_STYLES_NEWBIE
+        : SNActionStyles.SN_OPTIONS_STYLES;
     optionsMenu.withText(menuText).withToolTip(menuTooltip).withIcon(icon).withStyles(menuStyle);
-    optionsMenu.setAtRight(true);
     final MenuRadioItemDescriptor anyoneItem = membersVisibility.get().withVisibility(
         SocialNetworkVisibility.anyone);
     final MenuRadioItemDescriptor onlyMembersItem = membersVisibility.get().withVisibility(
@@ -156,17 +155,6 @@ public class GroupSNConfActions extends AbstractSNActionsRegistry {
     openItem.withParent(moderationSubMenu).withText(i18n.t("auto accept request to join"));
     closedItem.withParent(moderationSubMenu).withText(i18n.t("closed for new members"));
 
-    final ButtonDescriptor joinBtn = new ButtonDescriptor(joinGroupAction);
-    // Disabled, so we have more space
-    // final ButtonDescriptor unJoinBtn = new
-    // ButtonDescriptor(unJoinGroupAction);
-    // final ButtonDescriptor addMemberBtn = new
-    // ButtonDescriptor(addEntityToThisGroupAction);
-    // unJoinBtn.add(isLoggedCondition);
-    addImpl(joinBtn); // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
-    // addImpl(unJoinBtn); //
-    // .withStyles("k-no-backimage, k-noborder, k-nobackcolor"));
-    // addImpl(addMemberBtn);
     stateManager.onStateChanged(true, new StateChangedHandler() {
       @Override
       public void onStateChanged(final StateChangedEvent event) {

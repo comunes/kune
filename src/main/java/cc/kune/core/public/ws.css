@@ -1302,13 +1302,6 @@ button.k-buddy-last-connected {
   border: 1px solid transparent;
 }
 
-button.k-chat-add-as-buddie,button.k-noborder-btn {
-  background: none repeat scroll 0 0 transparent;
-  border: 1px solid transparent;
-  font-weight: normal;
-  margin: 1px;
-}
-
 div.k-feedback-btn {
   font-weight: normal;
   padding: 3px;
@@ -1488,9 +1481,23 @@ input.k-sharelink-box {
   
 }
 
+/*
+#k_group_entity_toolbar > div  > div  > button:hover {
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.1);
+} */
+
+button.k-chat-add-as-buddie,button.k-noborder-btn {
+  background: none repeat scroll 0 0 transparent;
+  border: 0px solid transparent;
+  font-weight: normal;
+  margin: 1px;
+}
+
 #gwt-debug-k-eop-icon:hover {
   background-color: transparent;
-  border:none;
+  border: 1px solid transparent;
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
