@@ -37,6 +37,8 @@ kt.avatarsizel=100;
 kt.avatarsizem=80;
 kt.avatarsizes=50;
 
+kt.homebackimg="others/home-back-trees.png";
+
 kt.homebackcolor='rgb(255, 204, 170)';
 /* kt.group_back_image_url='http://lorempixel.com/1500/1500'; */
 kt.showingSearch=false;
@@ -47,7 +49,7 @@ kt.main_disableSwipe=true;
 
 setContentMinHeight();
 
-/* user for testing */
+/* just used for testing */
 kt.red="red";
 
 function toggleVis(id) {
@@ -81,7 +83,6 @@ kt.blink = function(id, play) {
   else
     animation.cancel();
 }
-
 
 kt.hideSpinner = function(e,detail,sender) {
   $("#k_home_spin_container").hide();
@@ -148,16 +149,6 @@ function scroll(id) {
     var scroller = $("#k_home_scroller");
     scroller.animate({scrollTop: top}, 300);           
   }
-}
-
-kt.belowWayPoint = function(e) {
-  id = e.target.attributes["data-id"].value;
-  scroll("sec" + id);
-}
-
-kt.aboveWayPoint = function(e) {
-  id = e.target.attributes["data-id"].value;
-  console.log("id above " + id);
 }
 
 /* Default theme (useful for development without GWT) 

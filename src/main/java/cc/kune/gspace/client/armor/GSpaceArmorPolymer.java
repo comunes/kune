@@ -207,7 +207,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public ForIsWidget getEntityFooter() {
-    return wrapDiv(SITE_BOTTOMBAR);
+    return wrapDiv(GROUP_BOTTOMBAR);
   }
 
   @Override
