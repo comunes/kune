@@ -28,6 +28,7 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.resources.iconic.IconicResources;
+import cc.kune.core.client.state.SessionInstance;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.viewers.TutorialViewer.OnTutorialClose;
@@ -76,19 +77,20 @@ public class TutorialBtn extends ButtonDescriptor {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
      */
     @Override
     public void actionPerformed(final ActionEvent event) {
-      ShowHelpContainerEvent.fire(bus, new OnTutorialClose() {
-        @Override
-        public void onClose() {
-          stateManager.refreshCurrentState();
-        }
-      });
+      ShowHelpContainerEvent.fire(bus, SessionInstance.get().getCurrentStateToken().getTool(),
+          new OnTutorialClose() {
+            @Override
+            public void onClose() {
+              stateManager.refreshCurrentState();
+            }
+          });
     }
 
   }

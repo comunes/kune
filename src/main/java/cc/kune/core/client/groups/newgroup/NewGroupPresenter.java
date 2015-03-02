@@ -73,7 +73,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewGroupPresenter extends Presenter<NewGroupView, NewGroupPresenter.NewGroupProxy>
-implements NewGroup {
+    implements NewGroup {
 
   /**
    * The Interface NewGroupProxy.
@@ -146,7 +146,7 @@ implements NewGroup {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.client.groups.newgroup.NewGroup#doNewGroup()
    */
   @Override
@@ -218,7 +218,7 @@ implements NewGroup {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.HandlerContainerImpl#onBind()
    */
   @Override
@@ -324,7 +324,7 @@ implements NewGroup {
               new Timer() {
                 @Override
                 public void run() {
-                  ShowHelpContainerEvent.fire(getEventBus());
+                  ShowHelpContainerEvent.fire(getEventBus(), state.getStateToken().getTool());
                 }
               }.schedule(2000);
             }
@@ -345,7 +345,7 @@ implements NewGroup {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

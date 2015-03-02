@@ -177,7 +177,7 @@ public class FolderViewerUtils {
       final FolderItemDescriptor item = new FolderItemDescriptor(genId(stateToken),
           genId(parentStateToken), icon, name, tooltip, status, stateToken, modifiedOn,
           capabReg.isDragable(typeId) && rights.isAdministrable(), capabReg.isDropable(typeId)
-              && rights.isAdministrable(), currentActions, isContainer);
+          && rights.isAdministrable(), currentActions, isContainer);
       getView().addItem(item, new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
@@ -208,12 +208,13 @@ public class FolderViewerUtils {
       // No elements here, so, we show a empty message (or a tutorial)
       if (session.isLogged() && capabReg.getEmptyFolderTutorialRegistry().hasTutorial(typeId)) {
         // If we have a tutorial, we show it.
-        ShowHelpContainerEvent.fire(eventBus, new OnTutorialClose() {
-          @Override
-          public void onClose() {
-            showEmptyMsg(typeId);
-          }
-        });
+        ShowHelpContainerEvent.fire(eventBus, container.getStateToken().getTool(),
+            new OnTutorialClose() {
+              @Override
+              public void onClose() {
+                showEmptyMsg(typeId);
+              }
+            });
       } else {
         // If not, we show the empty message
         showEmptyMsg(typeId);
@@ -357,7 +358,7 @@ public class FolderViewerUtils {
     // msg is already translated
     final String msg = session.isLogged() ? capabReg.getEmptyMessagesRegistry().getContentTypeIcon(
         typeId) : capabReg.getEmptyMessagesRegistryNotLogged().getContentTypeIcon(typeId);
-    final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : msg;
-    getView().showEmptyMsg(emptyMessage);
+        final String emptyMessage = TextUtils.empty(msg) ? i18n.t("This is empty.") : msg;
+        getView().showEmptyMsg(emptyMessage);
   }
 }

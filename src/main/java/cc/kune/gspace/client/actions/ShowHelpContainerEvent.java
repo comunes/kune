@@ -81,8 +81,8 @@ public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.Show
    * @param eventBus
    *          the source
    */
-  public static void fire(final EventBus eventBus) {
-    eventBus.fireEvent(new ShowHelpContainerEvent(null));
+  public static void fire(final EventBus eventBus, final String tool) {
+    eventBus.fireEvent(new ShowHelpContainerEvent(tool, null));
   }
 
   /**
@@ -93,8 +93,9 @@ public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.Show
    * @param onTutorialClose
    *          the on tutorial close
    */
-  public static void fire(final EventBus eventBus, final TutorialViewer.OnTutorialClose onTutorialClose) {
-    eventBus.fireEvent(new ShowHelpContainerEvent(onTutorialClose));
+  public static void fire(final EventBus eventBus, final String tool,
+      final TutorialViewer.OnTutorialClose onTutorialClose) {
+    eventBus.fireEvent(new ShowHelpContainerEvent(tool, onTutorialClose));
   }
 
   /**
@@ -108,14 +109,18 @@ public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.Show
 
   /** The on tutorial close. */
   private final OnTutorialClose onTutorialClose;
+  private final String tool;
 
   /**
    * Instantiates a new show help container event.
    *
+   * @param tool
+   *
    * @param onTutorialClose
    *          the on tutorial close
    */
-  public ShowHelpContainerEvent(final TutorialViewer.OnTutorialClose onTutorialClose) {
+  public ShowHelpContainerEvent(final String tool, final TutorialViewer.OnTutorialClose onTutorialClose) {
+    this.tool = tool;
     this.onTutorialClose = onTutorialClose;
   }
 
@@ -158,6 +163,10 @@ public class ShowHelpContainerEvent extends GwtEvent<ShowHelpContainerEvent.Show
    */
   public OnTutorialClose getOnTutorialClose() {
     return onTutorialClose;
+  }
+
+  public String getTool() {
+    return tool;
   }
 
   /*
