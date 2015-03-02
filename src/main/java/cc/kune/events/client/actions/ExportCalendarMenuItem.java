@@ -22,6 +22,8 @@
  */
 package cc.kune.events.client.actions;
 
+import org.gwtbootstrap3.client.ui.constants.IconType;
+
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
@@ -42,14 +44,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ExportCalendarMenuItem.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ExportCalendarMenuItem extends MenuItemDescriptor {
 
   /**
    * The Class ExportCalendarAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class ExportCalendarAction extends RolAction {
@@ -62,7 +64,7 @@ public class ExportCalendarMenuItem extends MenuItemDescriptor {
 
     /**
      * Instantiates a new export calendar action.
-     * 
+     *
      * @param session
      *          the session
      * @param i18n
@@ -77,7 +79,7 @@ public class ExportCalendarMenuItem extends MenuItemDescriptor {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -101,7 +103,7 @@ public class ExportCalendarMenuItem extends MenuItemDescriptor {
 
   /**
    * Instantiates a new export calendar menu item.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param action
@@ -115,7 +117,8 @@ public class ExportCalendarMenuItem extends MenuItemDescriptor {
   public ExportCalendarMenuItem(final I18nTranslationService i18n, final ExportCalendarAction action,
       final ContentViewerOptionsMenu optionsMenu, final IconicResources res) {
     super(action);
-    this.withText(i18n.t("Export this calendar")).withIcon(res.mobile()).withParent(optionsMenu, false);
+    this.withText(i18n.t("Export this calendar")).withIcon(IconType.MOBILE).withParent(optionsMenu,
+        false);
   }
 
 }

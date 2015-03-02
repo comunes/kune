@@ -87,23 +87,20 @@ public class EventsClientActions extends AbstractFoldableToolActions {
       final Provider<CalendarGoTodayBtn> goToday, final Provider<RefreshContentMenuItem> refresh,
       final Provider<ShareDialogMenuItem> shareSettings, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(DOC_TOP_TOOLBAR, all, optionsMenuContent);
-    add(DOC_TOP_TOOLBAR, all, refresh);
-    add(DOC_TOP_TOOLBAR, containers, goToday, calPrevBtn, cal1DayBtn, cal3DaysBtn, cal7DaysBtn, calMonthBtn,
-        calNextBtn);
-    add(DOC_TOP_TOOLBAR, contents, participateBtn);
-    add(DOC_TOP_TOOLBAR, all, export);
-    add(BOTTOMBAR, contents, folderGoUp);
-    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
-    add(DOC_TOP_TOOLBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(DOC_TOP_TOOLBAR, contents, shareIHelper.getShareInWaves());
-    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
-    add(DOC_TOP_TOOLBAR, contents, shareSettings);
-    // add(TOPBAR,
-    // shareInFacebook, all);
+    add(DOC_TOP_TOOLBAR, containers, newEventBtn);
+    add(DOC_TOP_TOOLBAR, containers, goToday, calPrevBtn, cal1DayBtn, cal3DaysBtn, cal7DaysBtn,
+        calMonthBtn, calNextBtn);
     add(DOC_TOP_TOOLBAR, all, tutorialBtn);
-    add(DOC_TOP_TOOLBAR, contents, copyContent, writeToParticipants);
+    add(DOC_HEADER_BAR, contents, participateBtn);
+    add(DOC_HEADER_BAR, all, shareMenuContent);
+    add(DOC_HEADER_BAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(DOC_HEADER_BAR, contents, shareIHelper.getShareInWaves());
+    add(DOC_HEADER_BAR, all, shareIHelper.getShareInAll());
+    add(DOC_HEADER_BAR, contents, shareSettings);
+    add(DOC_HEADER_BAR, all, optionsMenuContent, refresh, export);
+    add(DOC_HEADER_BAR, contents, copyContent, writeToParticipants);
     // On over calendar menu
+    add(BOTTOMBAR, contents, folderGoUp);
     add(DOC_TOP_TOOLBAR, containers, onOverMenu);
     add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, contents, purgeBtn);
     add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, containersNoRoot, purgeFolderBtn);
@@ -113,8 +110,6 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     eventOpenMenuItem.get();
     eventAddMenuItem.get();
     eventRemoveMenuItem.get();
-
-    add(DOC_TOP_TOOLBAR, containers, newEventBtn);
 
     // For now, commented:
     // add(NAME, ITEM_MENU,
