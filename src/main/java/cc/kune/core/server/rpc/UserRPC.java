@@ -72,7 +72,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserRPC.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -110,7 +110,7 @@ public class UserRPC implements RPC, UserService {
 
   /**
    * Instantiates a new user rpc.
-   * 
+   *
    * @param userSessionProvider
    *          the user session provider
    * @param userManager
@@ -158,7 +158,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#askForEmailConfirmation(java
    * .lang.String)
@@ -173,7 +173,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#askForPasswordReset(java.lang
    * .String)
@@ -191,7 +191,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#changePasswd(java.lang.String,
    * java.lang.String, java.lang.String)
@@ -207,7 +207,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#checkUserAndHash(java.lang.
    * String, java.lang.String)
@@ -218,6 +218,7 @@ public class UserRPC implements RPC, UserService {
       throws SessionExpiredException {
     final User user = userManager.login(username, passwdOrToken);
     if (user != null) {
+      // External chat client login
       return;
     }
     final HttpSession session = waveSessionManager.getSessionFromToken(passwdOrToken);
@@ -241,7 +242,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#createUser(cc.kune.core.shared
    * .dto.UserDTO, boolean)
@@ -258,7 +259,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#getBuddiesPresence(java.lang
    * .String)
@@ -272,7 +273,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#getUserAvatarBaser64(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken)
@@ -297,7 +298,7 @@ public class UserRPC implements RPC, UserService {
 
   /**
    * Load user info.
-   * 
+   *
    * @param user
    *          the user
    * @return the user info dto
@@ -311,7 +312,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.rpcservices.UserService#login(java.lang.String,
    * java.lang.String, java.lang.String)
    */
@@ -328,7 +329,7 @@ public class UserRPC implements RPC, UserService {
 
   /**
    * Login user.
-   * 
+   *
    * @param user
    *          the user
    * @param waveToken
@@ -349,7 +350,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.rpcservices.UserService#logout(java.lang.String)
    */
   @Override
@@ -361,7 +362,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#onlyCheckSession(java.lang.
    * String)
@@ -375,7 +376,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#reloadUserInfo(java.lang.String
    * )
@@ -397,7 +398,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#resetPassword(java.lang.String,
    * java.lang.String)
@@ -417,7 +418,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#setBuddiesVisibility(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken,
@@ -438,7 +439,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#updateUser(java.lang.String,
    * cc.kune.core.shared.dto.UserDTO,
@@ -460,7 +461,7 @@ public class UserRPC implements RPC, UserService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.UserService#verifyPasswordHash(java.lang
    * .String, java.lang.String)

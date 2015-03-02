@@ -344,7 +344,7 @@ public class ChatClientDefault implements ChatClient {
         session.onUserSignIn(true, new UserSignInHandler() {
           @Override
           public void onUserSignIn(final UserSignInEvent event) {
-            doLogin(event.getPassword());
+            doLogin();
           }
         });
         session.onUserSignOut(true, new UserSignOutHandler() {
@@ -490,18 +490,8 @@ public class ChatClientDefault implements ChatClient {
    */
   @Override
   public void doLogin() {
-    doLogin(null);
-  }
-
-  /**
-   * Do login.
-   *
-   * @param password
-   *          the password
-   */
-  private void doLogin(final String password) {
     assert session.getCurrentUserInfo() != null;
-    doLogin(session.getCurrentUserInfo(), password == null ? session.getUserHash() : password);
+    doLogin(session.getCurrentUserInfo(), session.getUserHash());
   }
 
   /**
