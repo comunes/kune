@@ -30,21 +30,21 @@ import com.google.gwt.event.shared.HasHandlers;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSignInEvent.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler> {
 
   /**
    * The Interface HasUserSignInHandlers.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface HasUserSignInHandlers extends HasHandlers {
 
     /**
      * Adds the user sign in handler.
-     * 
+     *
      * @param handler
      *          the handler
      * @return the handler registration
@@ -54,14 +54,14 @@ public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler>
 
   /**
    * The Interface UserSignInHandler.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface UserSignInHandler extends EventHandler {
 
     /**
      * On user sign in.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -73,35 +73,31 @@ public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler>
 
   /**
    * Gets the type.
-   * 
+   *
    * @return the type
    */
   public static Type<UserSignInHandler> getType() {
     return TYPE;
   }
 
-  /** The password. */
-  private final String password;
-
   /** The user info. */
   private final cc.kune.core.shared.dto.UserInfoDTO userInfo;
 
   /**
    * Instantiates a new user sign in event.
-   * 
+   *
    * @param userInfo
    *          the user info
    * @param password
    *          the password
    */
-  public UserSignInEvent(final cc.kune.core.shared.dto.UserInfoDTO userInfo, final String password) {
+  public UserSignInEvent(final cc.kune.core.shared.dto.UserInfoDTO userInfo) {
     this.userInfo = userInfo;
-    this.password = password;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -113,7 +109,7 @@ public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -127,7 +123,7 @@ public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -136,17 +132,8 @@ public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler>
   }
 
   /**
-   * Gets the password.
-   * 
-   * @return the password
-   */
-  public String getPassword() {
-    return password;
-  }
-
-  /**
    * Gets the user info.
-   * 
+   *
    * @return the user info
    */
   public cc.kune.core.shared.dto.UserInfoDTO getUserInfo() {
@@ -155,7 +142,7 @@ public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -168,7 +155,7 @@ public class UserSignInEvent extends GwtEvent<UserSignInEvent.UserSignInHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override
