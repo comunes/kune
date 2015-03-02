@@ -29,7 +29,7 @@ import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.RolActionAutoUpdated;
 import cc.kune.core.client.resources.iconic.IconicResources;
-import cc.kune.core.client.sitebar.SitebarActionsPresenter;
+import cc.kune.core.client.sitebar.SiteLanguageSelector;
 import cc.kune.core.client.state.AccessRightsClientManager;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
@@ -42,7 +42,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SiteOptionsI18nTranslatorAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -59,7 +59,7 @@ public class SiteOptionsI18nTranslatorAction extends RolActionAutoUpdated {
 
   /**
    * Instantiates a new site options i18n translator action.
-   * 
+   *
    * @param stateManager
    *          the state manager
    * @param session
@@ -79,13 +79,14 @@ public class SiteOptionsI18nTranslatorAction extends RolActionAutoUpdated {
   public SiteOptionsI18nTranslatorAction(final StateManager stateManager, final Session session,
       final AccessRightsClientManager rightsManager, final I18nTranslationService i18n,
       final IconicResources img, final Provider<I18nTranslator> translatorProv,
-      final SitebarActionsPresenter siteOptions) {
+      final SiteLanguageSelector siteLangSelector) {
     super(stateManager, session, rightsManager, AccessRolDTO.Viewer, true, true, true);
     this.i18n = i18n;
     this.translatorProv = translatorProv;
     putValue(Action.NAME, i18n.t("Help with the translation"));
     putValue(Action.SMALL_ICON, img.world());
-    MenuItemDescriptor.build(siteOptions.getOptionsMenu(), this);
+    final MenuItemDescriptor menuItem = MenuItemDescriptor.build(siteLangSelector, this);
+    menuItem.setPosition(0);
   }
 
   /*
