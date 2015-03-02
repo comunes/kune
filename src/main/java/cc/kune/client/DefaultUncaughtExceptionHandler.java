@@ -54,7 +54,8 @@ public class DefaultUncaughtExceptionHandler implements GWT.UncaughtExceptionHan
         NotifyUser.error(
             I18n.t("We're sorry..."),
             I18n.t("For some reason [%s] is currently experiencing errors. "
-                + "Please provide us feedback with more info "
+                + "Try again refreshing your browser. "
+                + "If the problem persist, please provide us feedback with more info "
                 + "(see it in topbar menu > Errors info) so we can try to fix it. Thanks",
                 I18n.getSiteCommonName()), true);
         new Timer() {
