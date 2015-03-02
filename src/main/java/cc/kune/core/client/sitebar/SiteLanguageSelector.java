@@ -28,9 +28,12 @@ import br.com.rpa.client._coreelements.CoreIconButton;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
+import cc.kune.common.client.actions.ui.descrip.MenuTitleItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.i18n.I18nUrlUtils;
@@ -74,15 +77,23 @@ public class SiteLanguageSelector extends WidgetMenuDescriptor {
     setParent(SitebarActions.RIGHT_TOOLBAR);
     Tooltip.to(btn, I18n.t("Choose your language"));
 
+    /* Same as in KuneProd.gwt.xml */
+    final String[] availableLangs = { "ar", "ca", "de", "el", "en", "eo", "es", "eu", "fr", "gl", "hu",
+        "it", "pl", "pt", "pt_BR", "ro", "ru", "sl", "tr", "zh_HK", "zh_TW" };
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
         final String currentLocale = LocaleInfo.getCurrentLocale().getLocaleName();
         btn.setText(LocaleInfo.getLocaleNativeDisplayName(currentLocale));
-        for (final String locale : LocaleInfo.getAvailableLocaleNames()) {
+        // for (final String locale : LocaleInfo.getAvailableLocaleNames()) {
+        new MenuSeparatorDescriptor(SiteLanguageSelector.this);
+        new MenuTitleItemDescriptor(SiteLanguageSelector.this, I18n.t("Choose another language"));
+
+        for (final String locale : availableLangs) {
           final MenuItemDescriptor menuItem = new MenuItemDescriptor(SiteLanguageSelector.this,
               new LocaleAction(locale));
-          menuItem.withText(LocaleInfo.getLocaleNativeDisplayName(locale));
+          final String nativeName = LocaleInfo.getLocaleNativeDisplayName(locale);
+          menuItem.withText(TextUtils.notEmpty(nativeName) ? nativeName : locale);
           if (locale.equals(currentLocale)) {
             menuItem.setStyles(Styles.ACTIVE);
           }
