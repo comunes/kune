@@ -65,7 +65,6 @@ import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.SocialNetworkDataDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
-import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.actions.ShowHelpContainerEvent;
 
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -197,7 +196,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#addBeforeStateChangeListener(cc.
    * kune.common.client.actions.BeforeActionListener)
@@ -209,7 +208,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#addSiteToken(java.lang.String,
    * cc.kune.core.client.state.HistoryTokenCallback)
    */
@@ -228,12 +227,14 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     final String newGroup = newState.getStateToken().getGroup();
     final String previousGroup = getPreviousGroup();
     if (startingUp() || !previousGroup.equals(newGroup)) {
+      Log.debug("New group: " + newGroup);
       GroupChangedEvent.fire(eventBus, previousGroup, newGroup);
     }
     final String previousToolName = getPreviousTool();
     final String newTokenTool = newState.getStateToken().getTool();
     final String newToolName = newTokenTool == null ? "" : newTokenTool;
     if (startingUp() || previousToolName == null || !previousToolName.equals(newToolName)) {
+      Log.debug("New tool: " + newToolName);
       ToolChangedEvent.fire(eventBus, previousGroupToken, newState.getStateToken());
     }
   }
@@ -254,7 +255,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
     // first
     if (startingUp()) {
       // Starting with some token like "signin": load defContent first
-      Log.info("Starting up with a token like #signin or #token(param): load defContent first");
+      Log.debug("Starting up with a token like #signin or #token(param): load defContent first");
       getContent(new StateToken(SiteTokens.GROUP_HOME), false, new OnFinishGetContent() {
         @Override
         public void finish() {
@@ -348,6 +349,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         new AsyncCallbackSimple<StateAbstractDTO>() {
       @Override
       public void onSuccess(final StateAbstractDTO newState) {
+        Log.debug("Retrived new state sucessfully");
         setState(newState);
         final String currentToken = newState.getStateToken().toString();
         SpaceConfEvent.fire(eventBus, Space.groupSpace, currentToken);
@@ -357,9 +359,9 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
           history.newItem(currentToken, false);
           SpaceSelectEvent.fire(eventBus, Space.groupSpace);
         }
-        if (newState instanceof StateContentDTO) {
-          final StateContentDTO cnt = (StateContentDTO) newState;
-            }
+        // if (newState instanceof StateContentDTO) {
+        // final StateContentDTO cnt = (StateContentDTO) newState;
+        // }
         andThen.finish();
       }
     });
@@ -367,7 +369,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#getCurrentToken()
    */
   @Override
@@ -397,7 +399,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#gotoDefaultHomepage()
    */
   @Override
@@ -408,7 +410,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#gotoHistoryToken(java.lang.String)
    */
@@ -421,7 +423,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#gotoHistoryTokenButRedirectToCurrent
    * (java.lang.String)
@@ -433,7 +435,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#gotoHomeSpace()
    */
   @Override
@@ -443,7 +445,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#gotoStateToken(cc.kune.core.shared
    * .domain.utils.StateToken)
@@ -457,7 +459,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#gotoStateToken(cc.kune.core.shared
    * .domain.utils.StateToken, boolean)
@@ -472,7 +474,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#onGroupChanged(boolean,
    * cc.kune.core.client.events.GroupChangedEvent.GroupChangedHandler)
    */
@@ -489,7 +491,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#onSocialNetworkChanged(boolean,
    * cc
    * .kune.core.client.events.SocialNetworkChangedEvent.SocialNetworkChangedHandler
@@ -509,7 +511,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#onStateChanged(boolean,
    * cc.kune.core.client.events.StateChangedEvent.StateChangedHandler)
    */
@@ -525,7 +527,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#onToolChanged(boolean,
    * cc.kune.core.client.events.ToolChangedEvent.ToolChangedHandler)
    */
@@ -541,14 +543,14 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.logical.shared.ValueChangeHandler#onValueChange(com
    * .google.gwt.event.logical.shared.ValueChangeEvent)
    */
   @Override
   public void onValueChange(final ValueChangeEvent<String> event) {
-    Log.info("History event value changed: " + event.getValue());
+    Log.debug("History event value changed: " + event.getValue());
     // First of all check that we are generating this #!fragment urls, later
     history.checkHashbang();
     processHistoryToken(HistoryUtils.undoHashbang(event.getValue()));
@@ -577,7 +579,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
       final HistoryTokenCallback tokenListener = newToken != null ? siteTokens.get(newToken.toLowerCase())
           : null;
       boolean isSpecialHash = false;
-      Log.info("StateManager: on history changed '" + newToken + "'");
+      Log.debug("StateManager: on history changed '" + newToken + "'");
       if (tokenListener != null) {
         isSpecialHash = true;
         Log.debug("token is one of #newgroup #signin #translate without #hash(redirection) ...");
@@ -610,7 +612,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
             final HistoryTokenCallback tokenWithRedirect = siteTokens.get(firstToken);
             if (tokenWithRedirect != null) {
               isSpecialHash = true;
-              Log.info("Is some #subtitle(foo) or #verifyemail(hash) etc, firstToken " + firstToken);
+              Log.debug("Is some #subtitle(foo) or #verifyemail(hash) etc, firstToken " + firstToken);
               doActionOrSignInIfNeeded(tokenWithRedirect, newToken, firstToken, sndToken);
             }
           }
@@ -636,6 +638,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
         } else if (!isSpecialHash) {
           // FIXME This can be in the top of isWaveToken....
           if (TokenMatcher.isGroupToken(newToken)) {
+            Log.debug("StateManager: is a group token: '" + newToken + "'");
             SpaceConfEvent.fire(eventBus, Space.groupSpace, newToken);
             SpaceConfEvent.fire(eventBus, Space.publicSpace, TokenUtils.preview(newToken));
             SpaceSelectEvent.fire(eventBus, Space.groupSpace);
@@ -663,7 +666,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#redirectOrRestorePreviousToken(boolean
    * )
@@ -716,7 +719,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#removeBeforeStateChangeListener(
    * cc.kune.common.client.actions.BeforeActionListener)
@@ -728,7 +731,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#removeCache(cc.kune.core.shared.
    * domain.utils.StateToken)
@@ -740,7 +743,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#removeCacheOfGroup(java.lang.String)
    */
@@ -751,7 +754,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#removeSiteToken(java.lang.String)
    */
@@ -762,7 +765,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#restorePreviousToken(boolean)
    */
   @Override
@@ -778,7 +781,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.StateManager#resumeTokenChange()
    */
   @Override
@@ -793,7 +796,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#setHistoryStateToken(java.lang.String
    * )
@@ -807,7 +810,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#setRetrievedState(cc.kune.core.shared
    * .dto.StateAbstractDTO)
@@ -819,7 +822,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#setRetrievedStateAndGo(cc.kune.core
    * .shared.dto.StateAbstractDTO)
@@ -837,7 +840,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.StateManager#setSocialNetwork(cc.kune.core.shared
    * .dto.SocialNetworkDataDTO)
@@ -863,6 +866,7 @@ public class StateManagerDefault implements StateManager, ValueChangeHandler<Str
   void setState(final StateAbstractDTO newState) {
     session.setCurrentState(newState);
     final StateToken newToken = newState.getStateToken();
+    Log.debug("Set new state: " + newToken);
     contentCache.cache(newToken, newState);
     // history.newItem(newToken.toString(), false);
     StateChangedEvent.fire(eventBus, newState);
