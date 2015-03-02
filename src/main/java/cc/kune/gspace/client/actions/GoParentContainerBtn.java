@@ -121,7 +121,7 @@ public class GoParentContainerBtn extends ButtonDescriptor {
       final IconicResources res, final Session session, final String typeRoot) {
     super(action);
     this.withToolTip(i18n.t("Go up: Open the container folder")).withIcon(IconType.ARROW_LEFT).withStyles(
-        ActionStyles.OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT);
+        ActionStyles.OPTIONS_MENU_BTN_STYLE_NO_BORDER);
     this.withId(GO_PARENT_ID);
     final StateAbstractDTO state = session.getCurrentState();
     if (!session.isCurrentStateAContent()) {

@@ -100,7 +100,7 @@ public class EventsClientActions extends AbstractFoldableToolActions {
     add(DOC_HEADER_BAR, all, optionsMenuContent, refresh, export);
     add(DOC_HEADER_BAR, contents, copyContent, writeToParticipants);
     // On over calendar menu
-    add(BOTTOMBAR, contents, folderGoUp);
+    add(GROUP_HEADER_BOTTOM_BAR, contents, folderGoUp);
     add(DOC_TOP_TOOLBAR, containers, onOverMenu);
     add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, contents, purgeBtn);
     add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, containersNoRoot, purgeFolderBtn);

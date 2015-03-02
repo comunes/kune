@@ -109,13 +109,6 @@ public interface GSpaceArmor {
   ForIsWidget getEntityFooter();
 
   /**
-   * Gets the entity footer toolbar.
-   *
-   * @return the entity footer toolbar
-   */
-  IsActionExtensible getEntityFooterActionsToolbar();
-
-  /**
    * Gets the entity header.
    *
    * @return the entity header
@@ -135,13 +128,6 @@ public interface GSpaceArmor {
    * @return the entity tools north
    */
   ForIsWidget getEntityToolsNorth();
-
-  /**
-   * Gets the entity tools south.
-   *
-   * @return the entity tools south
-   */
-  ForIsWidget getEntityToolsSouth();
 
   ButtonBase getFollowersButton();
 
@@ -170,13 +156,6 @@ public interface GSpaceArmor {
   ForIsWidget getSitebarLeft();
 
   ForIsWidget getSitebarRight();
-
-  /**
-   * Gets the tools south toolbar.
-   *
-   * @return the tools south toolbar
-   */
-  IsActionExtensible getToolsSouthActionsToolbar();
 
   IsActionExtensible getTopActionsToolbar();
 

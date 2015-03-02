@@ -32,14 +32,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewListPostIconMenuItem.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class NewListPostIconMenuItem extends MenuItemDescriptor {
 
   /**
    * Instantiates a new new list post icon menu item.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param action
@@ -56,6 +56,6 @@ public class NewListPostIconMenuItem extends MenuItemDescriptor {
       final IconicResources res, final GlobalShortcutRegister shorcutReg, final ListsNewMenu menu) {
     super(menu.get(), false, action);
     this.withText(i18n.t("New post")).withToolTip(i18n.t("Create a new post")).withIcon(
-        res.listsPostAdd()).withStyles("k-def-docbtn, k-fr");
+        res.listsPostAdd()).withStyles("k-def-docbtn");
   }
 }

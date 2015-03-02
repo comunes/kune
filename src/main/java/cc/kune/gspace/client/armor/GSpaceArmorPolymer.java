@@ -30,7 +30,6 @@ import java.util.HashMap;
 
 import br.com.rpa.client._coreelements.CoreIconButton;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
-import cc.kune.common.client.actions.ui.FlowActionExtensible;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.client.log.Log;
@@ -46,7 +45,6 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.ButtonBase;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
@@ -87,43 +85,29 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   private final ActionFlowPanel docTopActionsToolbar;
   private final HashMap<String, Element> elements;
   private final ActionFlowPanel entityFooterActionsToolbar;
-  private final FlowActionExtensible flowActionTrash;
   private final ActionFlowPanel headerActionsTopToolbar;
   private final HashMap<String, WrappedFlowPanel> panels;
-  private final ActionFlowPanel toolsSouthActionsToolbar;
-  private final FlowPanel trash;
 
   @Inject
-  GSpaceArmorPolymer(final GSpaceCenter centerPanel, final Provider<ActionFlowPanel> toolbarProv) {
+  public GSpaceArmorPolymer(final GSpaceCenter centerPanel, final Provider<ActionFlowPanel> toolbarProv) {
     panels = new HashMap<String, WrappedFlowPanel>();
     elements = new HashMap<String, Element>();
-
-    // This (temporal) panel is for not already implemented panels, so we can
-    // continue without showing this widgets
-    // Should be deleted when finished
-    trash = new FlowPanel();
-    flowActionTrash = new FlowActionExtensible();
-    trash.add(flowActionTrash);
 
     docHeaderRightActionsToolbar = toolbarProv.get();
     docFooterActionsToolbar = toolbarProv.get();
     headerActionsTopToolbar = toolbarProv.get();
     docTopActionsToolbar = toolbarProv.get();
-    toolsSouthActionsToolbar = toolbarProv.get();
     entityFooterActionsToolbar = toolbarProv.get();
 
     docHeaderRightActionsToolbar.addStyleName("btn-group");
     docTopActionsToolbar.addStyleName("btn-group");
-
-    PolymerUtils.addFlexHorLayout(docFooterActionsToolbar, docTopActionsToolbar,
-        toolsSouthActionsToolbar);
 
     PolymerUtils.addLayout(entityFooterActionsToolbar, HORIZONTAL, LAYOUT, START_JUSTIFIED);
     PolymerUtils.addLayout(headerActionsTopToolbar, HORIZONTAL, LAYOUT, END_JUSTIFIED);
 
     getEntityHeader().add(headerActionsTopToolbar);
     getDocFooter().add(docFooterActionsToolbar);
-    getEntityToolsSouth().add(toolsSouthActionsToolbar);
+
     getEntityFooter().add(entityFooterActionsToolbar);
     getDocHeaderRight().add(docHeaderRightActionsToolbar);
     getDocTopbar().add(docTopActionsToolbar);
@@ -212,11 +196,6 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   @Override
-  public IsActionExtensible getEntityFooterActionsToolbar() {
-    return flowActionTrash;
-  }
-
-  @Override
   public ForIsWidget getEntityHeader() {
     return wrapDiv(GROUP_ENTITY_TOOLBAR);
   }
@@ -229,11 +208,6 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   @Override
   public ForIsWidget getEntityToolsNorth() {
     return wrapDiv(HEADER_SOCIAL_NET);
-  }
-
-  @Override
-  public ForIsWidget getEntityToolsSouth() {
-    return trash;
   }
 
   @Override
@@ -287,11 +261,6 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   private void getSpace(final int index) {
     getElement(SPACE_SELECTOR).setPropertyInt("selected", index);
-  }
-
-  @Override
-  public IsActionExtensible getToolsSouthActionsToolbar() {
-    return toolsSouthActionsToolbar;
   }
 
   @Override

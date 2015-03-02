@@ -22,6 +22,8 @@
  */
 package cc.kune.gspace.client.actions;
 
+import org.gwtbootstrap3.client.ui.constants.IconType;
+
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
@@ -41,14 +43,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CopyContentMenuItem.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CopyContentMenuItem extends MenuItemDescriptor {
 
   /**
    * The Class CopyContentAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class CopyContentAction extends RolAction {
@@ -67,7 +69,7 @@ public class CopyContentMenuItem extends MenuItemDescriptor {
 
     /**
      * Instantiates a new copy content action.
-     * 
+     *
      * @param session
      *          the session
      * @param stateManager
@@ -89,7 +91,7 @@ public class CopyContentMenuItem extends MenuItemDescriptor {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -103,19 +105,19 @@ public class CopyContentMenuItem extends MenuItemDescriptor {
           : session.getCurrentStateToken();
       contentService.copyContent(session.getUserHash(), parentToken, token,
           new AsyncCallbackSimple<StateContentDTO>() {
-            @Override
-            public void onSuccess(final StateContentDTO result) {
-              NotifyUser.hideProgress();
-              stateManager.setRetrievedStateAndGo(result);
-            }
-          });
+        @Override
+        public void onSuccess(final StateContentDTO result) {
+          NotifyUser.hideProgress();
+          stateManager.setRetrievedStateAndGo(result);
+        }
+      });
     }
 
   }
 
   /**
    * Instantiates a new copy content menu item.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param action
@@ -130,7 +132,7 @@ public class CopyContentMenuItem extends MenuItemDescriptor {
       final ContentViewerOptionsMenu optionsMenu, final CommonResources res) {
     super(action);
     this.withParent(optionsMenu, false);
-    this.withIcon(res.clear16());
+    this.withIcon(IconType.COPY);
     this.withText(i18n.t("Copy this to a new message"));
   }
 }

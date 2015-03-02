@@ -100,31 +100,29 @@ public class ListsClientActions extends AbstractFoldableToolActions {
       final Provider<ConfigureListMenuItem> configureList,
       final Provider<ListInvitationShareMenuItem> shareInvitation,
       final Provider<ListInvitationMenuItem> inviteMenuItem,
-      final Provider<ListInviteUserMenuItem> inviteUserMenuItem,
-
-      final ShareInHelper shareIHelper) {
+      final Provider<ListInviteUserMenuItem> inviteUserMenuItem, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
     // add(NAME, TOOLBAR, newListMenuItem,
     // TYPE_ROOT);
-    add(DOC_TOP_TOOLBAR, containers, optionsMenuContainer);
-    add(DOC_TOP_TOOLBAR, contents, optionsMenuContent);
     add(DOC_TOP_TOOLBAR, noRoot, newPostIconBtn);
     add(DOC_TOP_TOOLBAR, newListBtn, TYPE_ROOT);
     add(DOC_TOP_TOOLBAR, containersNoRoot, listNewMenu, subscribeBtn, newPostItem);
-    add(DOC_TOP_TOOLBAR, containers, refreshList);
-    add(DOC_TOP_TOOLBAR, contents, postNewMenu, refreshPost);
-    add(BOTTOMBAR, contents, folderGoUp);
-    add(BOTTOMBAR, containers, folderGoUp);
-    add(DOC_TOP_TOOLBAR, all, tutorialBtn, shareMenuContent);
+    add(DOC_TOP_TOOLBAR, contents, postNewMenu);
     add(DOC_TOP_TOOLBAR, containersNoRoot, configureList);
-    add(DOC_TOP_TOOLBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(DOC_TOP_TOOLBAR, allExceptRoot, shareInvitation);
-    add(DOC_TOP_TOOLBAR, contents, shareIHelper.getShareInWaves());
-    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
-    add(DOC_TOP_TOOLBAR, contents, shareDialog);
+    add(DOC_TOP_TOOLBAR, all, tutorialBtn);
     add(DOC_TOP_TOOLBAR, containersNoRoot, subscribersCount);
+    add(GROUP_HEADER_BOTTOM_BAR, contents, folderGoUp);
+    add(GROUP_HEADER_BOTTOM_BAR, containers, folderGoUp);
+    add(DOC_HEADER_BAR, all, shareMenuContent);
+    add(DOC_HEADER_BAR, contents, optionsMenuContent, refreshPost);
+    add(DOC_HEADER_BAR, containers, optionsMenuContainer, refreshList);
+    add(DOC_HEADER_BAR, allExceptRoot, shareInvitation);
+    add(DOC_HEADER_BAR, contents, shareIHelper.getShareInWaves());
+    add(DOC_HEADER_BAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(DOC_HEADER_BAR, all, shareIHelper.getShareInAll());
+    add(DOC_HEADER_BAR, contents, shareDialog);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, delFolderMenuItem);
-    add(DOC_TOP_TOOLBAR, contents, participateBtn, copyContent, chatAbout, writeToParticipants);
+    add(DOC_HEADER_BAR, contents, participateBtn, copyContent, chatAbout, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem);
     add(ITEM_MENU, allExceptRoot, inviteMenuItem);
     add(ITEM_MENU, allExceptRoot, inviteUserMenuItem);

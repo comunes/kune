@@ -340,7 +340,7 @@ implements ContentViewer {
         session.isLogged(), rights, ActionGroups.DOC_HEADER_BAR);
     final GuiActionDescCollection bottomActions = actionsRegistry.getCurrentActions(
         stateContent.getToolName(), stateContent.getGroup(), stateContent.getTypeId(),
-        session.isLogged(), rights, ActionGroups.BOTTOMBAR);
+        session.isLogged(), rights, ActionGroups.GROUP_HEADER_BOTTOM_BAR);
     final GuiActionDescCollection pathActions = pathToolbarUtils.createPath(stateContent.getGroup(),
         stateContent.getContainer(), true, false);
     bottomActions.addAll(pathActions);

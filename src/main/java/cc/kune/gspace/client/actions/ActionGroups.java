@@ -35,7 +35,7 @@ public final class ActionGroups {
    * The Constant BOTTOMBAR identifies actions in the bottom bar, below the
    * content.
    */
-  public final static String BOTTOMBAR = "bottombar";
+  public final static String GROUP_HEADER_BOTTOM_BAR = "bottombar";
 
   /** The Constant TOPBAR identifies actions in the top bar, above the content. */
 

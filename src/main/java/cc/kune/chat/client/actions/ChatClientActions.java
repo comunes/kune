@@ -33,8 +33,8 @@ import cc.kune.gspace.client.actions.AbstractFoldableToolActions;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
 import cc.kune.gspace.client.actions.RefreshContentMenuItem;
 import cc.kune.gspace.client.actions.TutorialBtn;
-import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.actions.share.ShareInHelper;
+import cc.kune.gspace.client.actions.share.ShareMenu;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -57,14 +57,14 @@ public class ChatClientActions extends AbstractFoldableToolActions {
       final Provider<ContentViewerOptionsMenu> optionsMenuContent,
       final Provider<ShareMenu> shareMenuContent, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(DOC_TOP_TOOLBAR, all, optionsMenuContent, refresh);
     add(TOOL_NAME, DOC_TOP_TOOLBAR, newRoomBtn, TYPE_ROOT);
-    add(BOTTOMBAR, containers, folderGoUp);
     add(DOC_TOP_TOOLBAR, all, tutorialBtn);
-    add(DOC_TOP_TOOLBAR, containersNoRoot, openRoomBtn);
+    add(DOC_HEADER_BAR, containersNoRoot, openRoomBtn);
+    add(GROUP_HEADER_BOTTOM_BAR, containers, folderGoUp);
     add(ITEM_MENU, containersNoRoot, openRoomMenuItem, openRoomArchiveMenuItem);
-    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
-    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
+    add(DOC_HEADER_BAR, all, shareMenuContent);
+    add(DOC_HEADER_BAR, all, optionsMenuContent, refresh);
+    add(DOC_HEADER_BAR, all, shareIHelper.getShareInAll());
   }
 
   @Override

@@ -92,28 +92,24 @@ public class TasksClientActions extends AbstractFoldableToolActions {
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final Provider<ShareDialogMenuItem> shareSettings, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(DOC_TOP_TOOLBAR, all, optionsMenuContent);
-    add(DOC_TOP_TOOLBAR, all, refresh);
     add(DOC_TOP_TOOLBAR, all, newTaskIconBtn);
-    // add(NAME, TOOLBAR, taskFolderNewMenu,
-    // containers);
     add(DOC_TOP_TOOLBAR, contents, taskNewMenu);
     add(DOC_TOP_TOOLBAR, containers, newFolderBtn);
-    // add(NAME, TOOLBAR, newTaskItem,
-    // containers);
-    add(BOTTOMBAR, contents, folderGoUp);
-    add(BOTTOMBAR, containers, folderGoUp);
     add(DOC_TOP_TOOLBAR, all, tutorialBtn);
-    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
-    add(DOC_TOP_TOOLBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(DOC_TOP_TOOLBAR, contents, shareIHelper.getShareInWaves());
-    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
-    add(DOC_TOP_TOOLBAR, contents, shareSettings, participateBtn, chatAbout, copyContent, writeToParticipants);
-    add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem);
-    add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem);
+    add(GROUP_HEADER_BOTTOM_BAR, contents, folderGoUp);
+    add(GROUP_HEADER_BOTTOM_BAR, containers, folderGoUp);
+    add(DOC_HEADER_BAR, all, shareMenuContent);
+    add(DOC_HEADER_BAR, all, optionsMenuContent, refresh);
+    add(DOC_HEADER_BAR, contents, shareIHelper.getShareInWaves());
+    add(DOC_HEADER_BAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(DOC_HEADER_BAR, all, shareIHelper.getShareInAll());
+    add(DOC_HEADER_BAR, contents, shareSettings, participateBtn, chatAbout, copyContent,
+        writeToParticipants);
     add(TOOL_NAME, ITEM_MENU, marksAsDoneMenuItem, ContentStatus.publishedOnline, TYPE_TASK);
     add(TOOL_NAME, ITEM_MENU, marksAsDoneMenuItem, ContentStatus.editingInProgress, TYPE_TASK);
     add(TOOL_NAME, ITEM_MENU, marksAsNotDoneMenuItem, ContentStatus.inTheDustbin, TYPE_TASK);
+    add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem);
+    add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem);
     add(ITEM_MENU, containersNoRoot, delFolderMenuItem);
     add(ITEM_MENU, contents, delContentMenuItem, addAllMenuItem, addAdminMembersMenuItem,
         addCollabMembersMenuItem, copyContent, writeToParticipants);

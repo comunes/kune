@@ -1,5 +1,7 @@
 package cc.kune.client;
 
+import cc.kune.barters.client.BartersParts;
+import cc.kune.blogs.client.BlogsParts;
 import cc.kune.bootstrap.client.BSGuiProvider;
 import cc.kune.chat.client.ChatParts;
 import cc.kune.common.client.events.EventBusWithLogging;
@@ -25,7 +27,9 @@ import cc.kune.hspace.client.HSpaceParts;
 import cc.kune.lists.client.ListsParts;
 import cc.kune.polymer.client.PolymerId;
 import cc.kune.polymer.client.PolymerUtils;
+import cc.kune.tasks.client.TasksParts;
 import cc.kune.trash.client.TrashParts;
+import cc.kune.wiki.client.WikiParts;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
@@ -40,8 +44,8 @@ public class KuneBootstrapper implements Bootstrapper {
   protected static final String HOME_IDS_PREFIX = "k-home-";
 
   protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.HOME_SCROLLER,
-      PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
-      PolymerId.HOME_TOOLBAR };
+    PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
+    PolymerId.HOME_TOOLBAR };
 
   private final ContentViewerSelector contentViewerSelector;
 
@@ -57,18 +61,8 @@ public class KuneBootstrapper implements Bootstrapper {
       final GlobalShortcutRegister globalShortcutRegister,
       final SessionExpirationManager sessionExpirationManager,
       final EventBusWithLogging eventBusWithLogging, final ErrorsDialog errorsDialog,
-      final DocsParts docs,
-
-      /*
-       * final BlogsParts blogs, final WikiParts wiki,
-       */
-      final EventsParts events,
-      /* final TasksParts tasks, */
-      final ListsParts lists, final ChatParts chats, /*
-                                                      * final BartersParts
-                                                      * barters,
-                                                      */
-
+      final DocsParts docs, final BlogsParts blogs, final WikiParts wiki, final EventsParts events,
+      final TasksParts tasks, final ListsParts lists, final ChatParts chats, final BartersParts barters,
       final TrashParts trash, final CorePresenter corePresenter,
       final OnAppStartFactory onAppStartFactory,
 
@@ -76,12 +70,7 @@ public class KuneBootstrapper implements Bootstrapper {
       final BSGuiProvider guiProvider,
       // GwtGuiProvider guiProvider
 
-      final CoreParts coreParts, final GSpaceParts gSpaceParts, /*
-                                                                 * final
-                                                                 * PSpaceParts
-                                                                 * pSpaceParts,
-                                                                 */
-      final HSpaceParts hSpaceParts,
+      final CoreParts coreParts, final GSpaceParts gSpaceParts, final HSpaceParts hSpaceParts,
 
       final XMLActionsParser xmlActionsParser) {
 
@@ -118,7 +107,7 @@ public class KuneBootstrapper implements Bootstrapper {
         for (final PolymerId id : unresolvedIdList) {
           PolymerUtils.resolved(id);
         }
-        PolymerUtils.resolved(RootPanel.getBodyElement());
+        // PolymerUtils.resolved(RootPanel.getBodyElement());
         PolymerUtils.hideSpinner();
       }
     });

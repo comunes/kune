@@ -49,6 +49,8 @@ public class ActionStyles {
 
   public static final String MENU_BTN_STYLE_RIGHT = "k-fr";
 
+  public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER = "k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
+
   public static final String OPTIONS_MENU_BTN_STYLE_NO_BORDER_RIGHT = "k-fr, k-noborder, k-optionsborder, k-no-backimage, k-nobackcolor";
 
   public static final String SHARE_ITEM_ACTIONS = "k-share-item-actions";

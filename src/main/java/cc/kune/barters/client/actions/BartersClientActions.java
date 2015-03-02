@@ -78,20 +78,20 @@ public class BartersClientActions extends AbstractFoldableToolActions {
       final Provider<WriteToParticipantsMenuItem> writeToParticipants,
       final Provider<ShareDialogMenuItem> shareSettings, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(DOC_TOP_TOOLBAR, all, optionsMenuContent, refresh);
-    add(BOTTOMBAR, contents, folderGoUp);
-    add(BOTTOMBAR, containers, folderGoUp);
-    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
-    add(DOC_TOP_TOOLBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
     add(DOC_TOP_TOOLBAR, all, tutorialBtn);
     add(DOC_TOP_TOOLBAR, containers, newBartersBtn, newFolderBtn);
+    add(GROUP_HEADER_BOTTOM_BAR, contents, folderGoUp);
+    add(GROUP_HEADER_BOTTOM_BAR, containers, folderGoUp);
+    add(DOC_HEADER_BAR, all, shareMenuContent);
+    add(DOC_HEADER_BAR, all, optionsMenuContent, refresh);
+    add(DOC_HEADER_BAR, contents, shareIHelper.getShareInWaves());
+    add(DOC_HEADER_BAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(DOC_HEADER_BAR, contents, participateBtn, copyContent, writeToParticipants);
+    add(DOC_HEADER_BAR, all, shareIHelper.getShareInAll());
+    add(DOC_HEADER_BAR, contents, shareSettings);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);
-    add(DOC_TOP_TOOLBAR, contents, participateBtn, copyContent, writeToParticipants);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem, delContentMenuItem,
         addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(DOC_TOP_TOOLBAR, contents, shareIHelper.getShareInWaves());
-    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
-    add(DOC_TOP_TOOLBAR, contents, shareSettings);
     add(ITEM_MENU, contents, copyContent);
     add(ITEM_MENU, contents, writeToParticipants);
     add(TrashToolConstants.TOOL_NAME, DOC_TOP_TOOLBAR, contents, purgeBtn);
@@ -103,7 +103,7 @@ public class BartersClientActions extends AbstractFoldableToolActions {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.actions.AbstractFoldableToolActions#
    * createPostSessionInitActions()
    */

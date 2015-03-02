@@ -89,22 +89,21 @@ public class BlogsClientActions extends AbstractFoldableToolActions {
       final Provider<SetAsHomePageMenuItem> setAsHomePage,
       final Provider<ShareDialogMenuItem> shareSettings, final ShareInHelper shareIHelper) {
     super(TOOL_NAME, session, registry);
-    add(DOC_TOP_TOOLBAR, all, optionsMenuContent);
     add(DOC_TOP_TOOLBAR, noRoot, newPostIconBtn);
     add(DOC_TOP_TOOLBAR, containersNoRoot, blogNewMenu);
     add(DOC_TOP_TOOLBAR, contents, postNewMenu);
-    add(DOC_TOP_TOOLBAR, all, refresh);
     add(DOC_TOP_TOOLBAR, containersNoRoot, newPostItem);
     add(TOOL_NAME, DOC_TOP_TOOLBAR, newBlogBtn, TYPE_ROOT);
-    add(BOTTOMBAR, contents, folderGoUp);
-    add(BOTTOMBAR, containers, folderGoUp);
-    add(DOC_TOP_TOOLBAR, all, shareMenuContent);
-    add(DOC_TOP_TOOLBAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
-    add(DOC_TOP_TOOLBAR, contents, shareIHelper.getShareInWaves());
-    add(DOC_TOP_TOOLBAR, all, shareIHelper.getShareInAll());
-    add(DOC_TOP_TOOLBAR, contents, shareSettings);
     add(DOC_TOP_TOOLBAR, all, tutorialBtn);
-    add(DOC_TOP_TOOLBAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
+    add(GROUP_HEADER_BOTTOM_BAR, contents, folderGoUp);
+    add(GROUP_HEADER_BOTTOM_BAR, containers, folderGoUp);
+    add(DOC_HEADER_BAR, all, shareMenuContent);
+    add(DOC_HEADER_BAR, all, optionsMenuContent, refresh);
+    add(DOC_HEADER_BAR, contents, shareIHelper.getShareInWaves());
+    add(DOC_HEADER_BAR, contents, addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem);
+    add(DOC_HEADER_BAR, all, shareIHelper.getShareInAll());
+    add(DOC_HEADER_BAR, contents, shareSettings);
+    add(DOC_HEADER_BAR, contents, participateBtn, chatAbout, copyContent, writeToParticipants);
     add(ITEM_MENU, containersNoRoot, openContentMenuItem, moveContentMenuItem, delFolderMenuItem);
     add(ITEM_MENU, contents, openContentMenuItem, moveContentMenuItem, delContentMenuItem,
         addAllMenuItem, addAdminMembersMenuItem, addCollabMembersMenuItem, copyContent,
