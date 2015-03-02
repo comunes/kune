@@ -77,13 +77,13 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupManagerDefault.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager,
-    GroupManagerDefaultMBean {
+GroupManagerDefaultMBean {
 
   /** The file manager. */
   private final FileManager fileManager;
@@ -120,7 +120,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Instantiates a new group manager default.
-   * 
+   *
    * @param provider
    *          the provider
    * @param finder
@@ -173,7 +173,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#changeDefLicense(cc.kune.domain
    * .User, cc.kune.domain.Group, java.lang.String)
@@ -189,7 +189,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#changeWsTheme(cc.kune.domain.User,
    * cc.kune.domain.Group, java.lang.String)
@@ -203,7 +203,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#checkIfLongNameAreInUse(java.lang
    * .String)
@@ -217,7 +217,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#checkIfShortNameAreInUse(java.
    * lang.String)
@@ -231,7 +231,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#clearGroupBackImage(cc.kune.domain
    * .Group)
@@ -248,7 +248,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.manager.GroupManager#count()
    */
   @Override
@@ -260,7 +260,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#createGroup(cc.kune.domain.Group,
    * cc.kune.domain.User, java.lang.String)
@@ -291,20 +291,20 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#createUserGroup(cc.kune.domain
    * .User)
    */
   @Override
   public Group createUserGroup(final User user) throws GroupShortNameInUseException,
-      EmailAddressInUseException {
+  EmailAddressInUseException {
     return createUserGroup(user, true);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#createUserGroup(cc.kune.domain
    * .User, boolean)
@@ -349,7 +349,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#findAdminInGroups(java.lang.Long)
    */
@@ -360,7 +360,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#findByShortName(java.lang.String)
    */
@@ -371,7 +371,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#findCollabInGroups(java.lang.Long)
    */
@@ -382,7 +382,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#findEnabledTools(java.lang.Long)
    */
@@ -393,7 +393,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Gets the def group mode.
-   * 
+   *
    * @param isClosed
    *          the is closed
    * @return the def group mode
@@ -404,7 +404,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Gets the def sn visibility.
-   * 
+   *
    * @param isClosed
    *          the is closed
    * @return the def sn visibility
@@ -415,7 +415,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#getGroupOfUserWithId(java.lang
    * .Long)
@@ -427,7 +427,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.manager.GroupManager#getSiteDefaultGroup()
    */
   @Override
@@ -438,7 +438,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Inits the group.
-   * 
+   *
    * @param user
    *          the user
    * @param group
@@ -473,7 +473,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Inits the social network.
-   * 
+   *
    * @param group
    *          the group
    * @param userGroup
@@ -494,7 +494,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#initTrash(cc.kune.domain.Group)
    */
@@ -505,7 +505,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.manager.GroupManager#search(java.lang.String)
    */
   @Override
@@ -515,12 +515,13 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.manager.GroupManager#search(java.lang.String,
    * java.lang.Integer, java.lang.Integer)
    */
   @Override
-  @KuneTransactional
+  //
+  // @KuneTransactional
   public SearchResult<Group> search(final String search, final Integer firstResult,
       final Integer maxResults) {
     // Wildcard is not allowed in the first character of the query
@@ -531,7 +532,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Sets the admission type.
-   * 
+   *
    * @param group
    *          the new admission type
    */
@@ -554,7 +555,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#setDefaultContent(java.lang.String
    * , cc.kune.domain.Content)
@@ -567,7 +568,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#setGroupBackgroundImage(cc.kune
    * .domain.Group, java.lang.String, java.lang.String)
@@ -582,7 +583,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /**
    * Sets the social network.
-   * 
+   *
    * @param group
    *          the group
    * @param publicVisibility
@@ -602,7 +603,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.GroupManager#setToolEnabled(cc.kune.domain.
    * User, java.lang.String, java.lang.String, boolean)
@@ -624,7 +625,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long> implements 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.manager.GroupManager#update(java.lang.Long,
    * cc.kune.core.shared.dto.GroupDTO)
    */
