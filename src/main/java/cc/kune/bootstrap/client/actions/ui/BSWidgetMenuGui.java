@@ -15,7 +15,6 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.log.Log;
 
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -81,7 +80,6 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
       @Override
       public void onClick(final ClickEvent event) {
         event.stopPropagation();
-        Log.warn("Clicked");
         clickHandlerDefault.onClick(event);
         show();
       }
