@@ -47,8 +47,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EntityHeaderPresenter extends
-Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
-EntityHeader {
+    Presenter<EntityHeaderPresenter.EntityHeaderView, EntityHeaderPresenter.EntityHeaderProxy> implements
+    EntityHeader {
 
   /**
    * The Interface EntityHeaderProxy.
@@ -155,7 +155,7 @@ EntityHeader {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeader#addAction(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -172,7 +172,7 @@ EntityHeader {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -189,10 +189,10 @@ EntityHeader {
    *          the no cache
    */
   void setGroupLogo(final GroupDTO group) {
+    setLogoText(group.getLongName(), group.getShortName());
     if (group.isNotPersonal() && !group.hasLogo()) {
       getView().setLogoImageVisible(false);
     } else {
-      setLogoText(group.getLongName(), group.getShortName());
       getView().setLogoImage(group);
       getView().setLogoImageVisible(true);
     }
