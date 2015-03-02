@@ -82,7 +82,12 @@ public class PopupBSMenuGui {
 
   public void show() {
     createPopupIfNecessary();
-    showRelativeTo(relativeTo);
+    final Object pos = descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO);
+    if (pos != null) {
+      showRelativeTo(pos);
+    } else {
+      showRelativeTo(relativeTo);
+    }
   }
 
   public void showRelativeTo(final Object relative) {
