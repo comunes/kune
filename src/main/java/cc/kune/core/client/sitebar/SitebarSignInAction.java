@@ -34,7 +34,7 @@ import com.google.inject.Inject;
 
 /**
  * The Class SitebarSignInAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SitebarSignInAction extends AbstractSignInAction {
@@ -44,7 +44,7 @@ public class SitebarSignInAction extends AbstractSignInAction {
 
   /**
    * Instantiates a new sitebar sign in action.
-   * 
+   *
    * @param stateManager
    *          the state manager
    * @param i18n
@@ -57,7 +57,8 @@ public class SitebarSignInAction extends AbstractSignInAction {
       final SessionConstants session) {
     super();
     this.stateManager = stateManager;
-    putValue(Action.NAME, i18n.t("Sign in to collaborate"));
+    putValue(Action.NAME, i18n.t("Sign in"));
+    putValue(Action.TOOLTIP, i18n.t("Sign in to collaborate"));
     // putValue(
     // Action.TOOLTIP,
     // i18n.t("Please sign in or register to get full access to [%s] tools and contents",
@@ -66,7 +67,7 @@ public class SitebarSignInAction extends AbstractSignInAction {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)

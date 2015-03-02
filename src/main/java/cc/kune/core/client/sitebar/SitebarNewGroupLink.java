@@ -118,7 +118,8 @@ public class SitebarNewGroupLink extends ToolbarItemDescriptor {
       final CoreResources coreResources, final Session session) {
     super(newGroupAction);
     this.session = session;
-    withId(NEW_GROUP_BTN_ID).withStyles(ActionStyles.SITEBAR_STYLE_FL + "," + Responsiveness.HIDDEN_XS);
+    withId(NEW_GROUP_BTN_ID).withStyles(
+        ActionStyles.SITEBAR_STYLE_FL + "," + Responsiveness.HIDDEN_XS.getCssName());
     withParent(SitebarActions.RIGHT_TOOLBAR);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
         SitebarActions.RIGHT_TOOLBAR);
