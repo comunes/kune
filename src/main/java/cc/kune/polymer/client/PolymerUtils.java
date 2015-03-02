@@ -201,6 +201,10 @@ public class PolymerUtils {
     setTheme(toJsArray(c), toJsArray(bg));
   }
 
+  public native static void showSpinner() /*-{
+		$wnd.kt.hideSpinner();
+  }-*/;
+
   public native static void toggleSearch() /*-{
 		$wnd.kt.toggleSearch();
   }-*/;

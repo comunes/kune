@@ -1,6 +1,5 @@
 package cc.kune.gspace.client.viewers;
 
-import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.wave.client.CustomEditToolbar;
 import cc.kune.wave.client.CustomSavedStateIndicator;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
@@ -17,7 +16,7 @@ public class WaveViewerPanel extends AbstractWaveViewerPanel implements View {
 
   public WaveViewerPanel(final WaveClientProvider waveClient, final EventBus eventBus,
       final CustomSavedStateIndicator waveUnsavedIndicator,
-      final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar) {
+      final Provider<AurorisColorPicker> colorPicker, final Provider<CustomEditToolbar> customEditToolbar) {
     super(waveClient, eventBus, waveUnsavedIndicator, colorPicker, customEditToolbar);
   }
 

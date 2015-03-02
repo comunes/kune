@@ -64,7 +64,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView#
    * setContent(cc.kune.core.shared.dto.StateContentDTO)
    */
@@ -84,7 +84,8 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
   @Inject
   public EmbedPanel(final WaveClientProvider waveClient, final EventBus eventBus,
       final CustomSavedStateIndicator waveUnsavedIndicator,
-      final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar, EditableLabel editableTitle) {
+      final Provider<AurorisColorPicker> colorPicker,
+      final Provider<CustomEditToolbar> customEditToolbar, final EditableLabel editableTitle) {
     super(waveClient, eventBus, waveUnsavedIndicator, colorPicker, customEditToolbar);
     super.setEditableTitle(editableTitle);
     widget = uiBinder.createAndBindUi(this);
@@ -92,7 +93,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -102,7 +103,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# attach()
    */
   @Override
@@ -112,7 +113,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# clear()
    */
   @Override
@@ -122,7 +123,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# detach()
    */
   @Override
@@ -142,7 +143,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.WaveViewerPanel#postLoad()
    */
   @Override
@@ -164,7 +165,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.WaveViewerPanel#setContent(cc.kune.core.shared
    * .dto.StateContentDTO)
@@ -180,7 +181,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView#
    * setEditableContent(cc.kune.core.shared.dto.StateContentDTO)
    */
@@ -204,7 +205,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# signIn()
    */
   @Override
@@ -215,7 +216,7 @@ public class EmbedPanel extends AbstractWaveViewerPanel implements EmbedView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.viewers.EmbedPresenter.EmbedView# signOut()
    */
   @Override

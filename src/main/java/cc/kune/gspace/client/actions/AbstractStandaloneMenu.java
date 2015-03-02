@@ -22,27 +22,41 @@
  */
 package cc.kune.gspace.client.actions;
 
+import cc.kune.common.client.actions.ActionStyles;
+import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
+import cc.kune.core.client.events.AccessRightsChangedEvent;
+import cc.kune.core.client.events.AccessRightsChangedEvent.AccessRightsChangedHandler;
 import cc.kune.core.client.state.AccessRightsClientManager;
 
+import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AbstractStandaloneMenu.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class AbstractStandaloneMenu extends AbstractEditorsMenu {
+public class AbstractStandaloneMenu extends WidgetMenuDescriptor {
 
   /**
    * Instantiates a new abstract standalone menu.
-   * 
+   *
    * @param rightsManager
    *          the rights manager
    */
   @Inject
   public AbstractStandaloneMenu(final AccessRightsClientManager rightsManager) {
-    super(rightsManager);
     setStandalone(true);
+    // We set a dummy widget
+    setWidget(new InlineLabel());
+    this.withStyles(ActionStyles.MENU_BTN_STYLE_LEFT);
+    rightsManager.onRightsChanged(true, new AccessRightsChangedHandler() {
+      @Override
+      public void onAccessRightsChanged(final AccessRightsChangedEvent event) {
+        AbstractStandaloneMenu.this.setVisible(event.getCurrentRights().isEditable());
+      }
+    });
+
   }
 }

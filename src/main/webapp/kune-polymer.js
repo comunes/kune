@@ -84,6 +84,11 @@ kt.blink = function(id, play) {
     animation.cancel();
 }
 
+kt.showSpinner = function(e,detail,sender) {
+  $("#k_home_spin_container").show();
+  kt.spin_active=true;
+}
+
 kt.hideSpinner = function(e,detail,sender) {
   $("#k_home_spin_container").hide();
   kt.spin_active=false;
@@ -147,7 +152,7 @@ function scroll(id) {
     var top = element.offsetTop - element.scrollTop + element.clientTop;
     
     var scroller = $("#k_home_scroller");
-    scroller.animate({scrollTop: top}, 300);           
+    scroller.animate({scrollTop: top}, 400);           
   }
 }
 
@@ -169,5 +174,5 @@ kt.c4="#FFF";
 kt.c5="#552200";
 kt.c6="#FFF";
 kt.c7="#a05a2c";
-kt.c8="#a05a2c";
-*/
+kt.c8="#a05a2c"; */
+

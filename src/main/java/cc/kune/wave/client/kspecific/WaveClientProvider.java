@@ -41,8 +41,10 @@ public class WaveClientProvider implements Provider<WaveClientView> {
   /**
    * Instantiates a new wave client provider.
    *
-   * @param webClient the web client
-   * @param webClientMock the web client mock
+   * @param webClient
+   *          the web client
+   * @param webClientMock
+   *          the web client mock
    */
   @Inject
   public WaveClientProvider(final Provider<WebClient> webClient,
@@ -52,7 +54,9 @@ public class WaveClientProvider implements Provider<WaveClientView> {
     // webClientProv = webClientMock;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see com.google.inject.Provider#get()
    */
   @Override

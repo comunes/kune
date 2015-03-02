@@ -36,7 +36,7 @@ import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 
 @Singleton
-public class PaperNotificator {
+public class ProgressNotificator {
 
   private static final int DELAY_MILLIS = 1000;
   private static final int MAX_DELAY_MILLIS = 5000;
@@ -47,7 +47,7 @@ public class PaperNotificator {
   private final PaperToast toast;
 
   @Inject
-  public PaperNotificator(final EventBus eventBus) {
+  public ProgressNotificator(final EventBus eventBus) {
     progress = PaperProgress.wrap(PolymerId.PAPER_PROGRESS.getId());
     toast = PaperToast.wrap(PolymerId.TOAST.getId());
     timer = new Timer() {

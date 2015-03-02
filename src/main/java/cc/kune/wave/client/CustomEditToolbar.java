@@ -26,7 +26,6 @@ package cc.kune.wave.client;
 import static com.google.gwt.query.client.GQuery.$;
 import br.com.rpa.client._paperelements.PaperFab;
 import cc.kune.common.client.actions.ActionStyles;
-import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.polymer.client.PolymerId;
@@ -78,24 +77,7 @@ public class CustomEditToolbar {
   private final PaperFab replyInInbox;
 
   @Inject
-  public CustomEditToolbar(final GlobalShortcutRegister shorcutRegister) {
-    // KeyStroke ctrlE = Shortcut.getShortcut(true,'E');
-    // shorcutRegister.put(ctrlE, new AbstractAction() {
-    // @Override
-    // public void actionPerformed(ActionEvent event) {
-    // onClickEdit();
-    // }
-    // });
-    //
-    // DEFAULT_BINDINGS.put(KeyCombo.CTRL_E, Action.EDIT_BLIP);
-    //
-    // DEFAULT_BINDINGS.put(KeyCombo.CTRL_R, Action.REPLY_TO_BLIP);
-    // DEFAULT_BINDINGS.put(KeyCombo.CTRL_ENTER, Action.REPLY_TO_BLIP);
-    // DEFAULT_BINDINGS.put(KeyCombo.ENTER, Action.REPLY_TO_BLIP);
-    //
-    // DEFAULT_BINDINGS.put(KeyCombo.SHIFT_ENTER, Action.CONTINUE_THREAD);
-    // DEFAULT_BINDINGS.put(KeyCombo.SHIFT_DELETE, Action.DELETE_BLIP);
-
+  public CustomEditToolbar() {
     final String editText = I18n.t("Edit") + " (Ctrl-E)";
     editInGroup = wrapBtn(editHandler, PolymerId.EDIT_DOCGROUP_FAB.getId(), editText);
     editInInbox = wrapBtn(editHandler, PolymerId.EDIT_INBOX_FAB.getId(), editText);

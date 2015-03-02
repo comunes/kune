@@ -77,12 +77,13 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
   /** The color picker. */
   private final Provider<AurorisColorPicker> colorPicker;
 
-  private final CustomEditToolbar customEditToolbar;
+  private final Provider<CustomEditToolbar> customEditToolbar;
 
   /** The deck. */
   @UiField
   public DeckPanel deck;
 
+  private EditableLabel editableTitle;
 
   /** The event bus. */
   private final EventBus eventBus;
@@ -122,12 +123,6 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
   /** The widget. */
   protected Widget widget;
 
-  private EditableLabel editableTitle;
-
-  public void setEditableTitle(EditableLabel editableTitle) {
-    this.editableTitle = editableTitle;
-  }
-  
   /**
    * Instantiates a new content viewer panel.
    *
@@ -152,13 +147,14 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
    */
   public AbstractWaveViewerPanel(final WaveClientProvider waveClient, final EventBus eventBus,
       final CustomSavedStateIndicator waveUnsavedIndicator,
-      final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar) {
+      final Provider<AurorisColorPicker> colorPicker, final Provider<CustomEditToolbar> customEditToolbar) {
     this.waveClientProv = waveClient;
     this.eventBus = eventBus;
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.colorPicker = colorPicker;
     this.customEditToolbar = customEditToolbar;
-    this.editableTitle = editableTitle;
+    // Not used right now
+    this.editableTitle = new EditableLabel();
     // widget = uiBinder.createAndBindUi(this);
     eventBus.addHandler(WaveClientClearEvent.getType(),
         new WaveClientClearEvent.WaveClientClearHandler() {
@@ -274,6 +270,10 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
     deck.showWidget(0);
   }
 
+  public void setEditableTitle(final EditableLabel editableTitle) {
+    this.editableTitle = editableTitle;
+  }
+
   /**
    * Sets the editable wave content.
    *
@@ -303,7 +303,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
         final CustomStagesProvider wave = new CustomStagesProvider(holder, waveUnsavedIndicator,
             waveHolder, editableTitle, waveRef, channel, idGenerator, profiles, waveStore, isNewWave,
             org.waveprotocol.box.webclient.client.Session.get().getDomain(), null, eventBus,
-            colorPicker, customEditToolbar, ViewFactories.FLOW);
+            colorPicker, customEditToolbar.get(), ViewFactories.FLOW);
         this.wave = wave;
         wave.load(new Command() {
           @Override

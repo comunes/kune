@@ -40,8 +40,8 @@ public class KuneBootstrapper implements Bootstrapper {
   protected static final String HOME_IDS_PREFIX = "k-home-";
 
   protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.HOME_SCROLLER,
-    PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
-    PolymerId.HOME_TOOLBAR };
+      PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
+      PolymerId.HOME_TOOLBAR };
 
   private final ContentViewerSelector contentViewerSelector;
 
@@ -57,12 +57,6 @@ public class KuneBootstrapper implements Bootstrapper {
       final GlobalShortcutRegister globalShortcutRegister,
       final SessionExpirationManager sessionExpirationManager,
       final EventBusWithLogging eventBusWithLogging, final ErrorsDialog errorsDialog,
-      final CorePresenter corePresenter, final OnAppStartFactory onAppStartFactory,
-
-      // Here you define the gui ui provider (gwt, gxt, bootstrap, polymer)
-      final BSGuiProvider guiProvider,
-      // GwtGuiProvider guiProvider
-
       final DocsParts docs,
 
       /*
@@ -71,17 +65,22 @@ public class KuneBootstrapper implements Bootstrapper {
       final EventsParts events,
       /* final TasksParts tasks, */
       final ListsParts lists, final ChatParts chats, /*
-       * final BartersParts
-       * barters,
-       */
+                                                      * final BartersParts
+                                                      * barters,
+                                                      */
 
-      final TrashParts trash,
+      final TrashParts trash, final CorePresenter corePresenter,
+      final OnAppStartFactory onAppStartFactory,
+
+      // Here you define the gui ui provider (gwt, gxt, bootstrap, polymer)
+      final BSGuiProvider guiProvider,
+      // GwtGuiProvider guiProvider
 
       final CoreParts coreParts, final GSpaceParts gSpaceParts, /*
-       * final
-       * PSpaceParts
-       * pSpaceParts,
-       */
+                                                                 * final
+                                                                 * PSpaceParts
+                                                                 * pSpaceParts,
+                                                                 */
       final HSpaceParts hSpaceParts,
 
       final XMLActionsParser xmlActionsParser) {

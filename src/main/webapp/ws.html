@@ -7,7 +7,7 @@
 <!-- htmllint id-class-style=false -->
 <html>
   <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>Kune</title>
 
     <!-- Use this if you want to force some language as default
@@ -184,41 +184,9 @@
     <!-- Moved this to local wave-rpc.js <script type="text/javascript" -->
     <!-- src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script> -->
   </head>
-<body fit unresolved>
-    <!-- // This is only used for selenium tests (comment/remove in production) -->
-    <!--
-       <div id="kcursor"
-       style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
-       <img src="others/cursor-orange.png">
-       </div>
-       <script src="others/js/fake-selenium-pointer.js"></script> -->
-    <!-- // End : This is only used for selenium tests (comment/remove in production) -->
-
-    <!-- Banner for wave errors -->
-    <div class="hidden_el banner" id="banner"></div>
-    <!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
-    <!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
-    <form id="loginrender" action="javascript:;" class="hidden_el">
-      <input type="text" id="usernamerender" name="usernamerender"
-             autocomplete="off" autocorrect="off" autocapitalize="off"
-             spellcheck="false" value="" /> <input type="password"
-                                                   id="passwordrender" autocomplete="off" autocorrect="off"
-                                                   autocapitalize="off" spellcheck="false" name="passwordrender"
-                                                   value="" />
-    </form>
-    <!-- Remember user/pass (this part is used to send the values to the browser) -->
-    <form id="login" action="javascript:;" class="hidden_el">
-      <input type="text" id="username" name="username" autocomplete="off"
-             autocorrect="off" autocapitalize="off" spellcheck="false" value="" />
-      <input type="password" id="password" name="password"
-             autocomplete="off" autocorrect="off" autocapitalize="off"
-             spellcheck="false" value="" />
-    </form>
-
-    <template id="kunetemplate" is="auto-binding">
-
-
-      <core-media-query query="(max-width: {{screensm - 1}}px)" queryMatches="{{xsmall}}"></core-media-query>
+<body fit>
+  <template id="kunetemplate" is="auto-binding">
+    <core-media-query query="(max-width: {{screensm - 1}}px)" queryMatches="{{xsmall}}"></core-media-query>
       <core-media-query query="(min-width: {{screensm}}px) and (max-width: {{screenmd - 1}}px)" queryMatches="{{small}}"></core-media-query>
       <core-media-query query="(min-width: {{screenmd}}px) and (max-width: {{screenlg - 1}}px)" queryMatches="{{medium}}"></core-media-query>
       <core-media-query query="(min-width: {{screenlg}}px)" queryMatches="{{large}}"></core-media-query>
@@ -405,7 +373,7 @@
 
             <!-- User Space -------------------------------------------------------- -->
 
-            <div id="user_space" fit>
+            <div id="user_space" fit unresolved>
               <paper-fab icon="create" id="edit_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="reply" id="reply_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="check" id="editdone_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
@@ -415,7 +383,7 @@
 
             <!-- Group Space ------------------------------------------------------- -->
 
-            <div id="group_space" vertical layout>
+            <div id="group_space" vertical layout unresolved>
               <div horizontal layout center start-justified id="group_bottombar" flex></div>
               <paper-fab icon="create" id="edit_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="reply" id="reply_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
@@ -584,15 +552,6 @@
           font-family: 'Open Sans', sans-serif;
           /* position: absolute, etc, with fit polymer attribute in body */
         }
-        
-        .hidden_el {
-          display: none;
-          position: absolute;
-        }
-
-        .gwt_code_iframe {
-          position: absolute; width: 0; height: 0; border: 0;
-        }
 
         .gwt_noscript_warning {
           width: 22em;
@@ -628,7 +587,11 @@
         }
 
         #home_space_core_header::shadow #mainContainer {
-          overflow: visible;
+          overflow: hidden;
+        }
+
+        #home_space_core_header #mainContainer { /* ff */
+          overflow: hidden;
         }
 
         #k_home_mask {
@@ -724,7 +687,7 @@
         }
 
         #k_home_spin_container {
-          background-color: {{homebackcolor}};
+          background-color: {{homebackcolor}};          
           z-index: 100;
           opacity: 0.7;
         }
@@ -737,6 +700,10 @@
           top: 0; left: 0; bottom: 0; right: 0;
         }
 
+        .circle { /* ff */
+          border-color: #a56941 !important;
+        }
+        
         #k_home_spin::shadow .circle {
           border-color: #a56941;
         }
@@ -849,6 +816,10 @@
           color:rgb(105, 49, 47);
         }
 
+        #sitebar_toolbar core-icon-button {
+          font-size: 16px;
+        }
+        
         #sitebar_toolbar paper-icon-button,
         #sitebar_toolbar core-icon-button {
           margin-left: 3px !important;
@@ -893,12 +864,13 @@
           right: 0px;
           width: 100%;
         }
-
+        
+        paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar { /* ff */
+          background-color: rgb(105, 49, 47);
+          height: 4px;
+        }
         paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
           background-color: rgb(105, 49, 47);
-        }
-
-        paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
           height: 4px;
         }
 
@@ -906,9 +878,14 @@
           margin-right: 4px;
         }
 
+        paper-tab paper-ripple#ink { /* ff */
+          color: #FFF;
+          opacity: 0.3;
+        }
+        
         paper-tab::shadow #ink {
           color: #FFF;
-          opacity: 0.2;
+          opacity: 0.3;
         }
 
         #sitebar_chat_icon {
@@ -952,6 +929,10 @@
         #paper_progress_container {
         }
 
+        div#paper_progress_container paper-progress#paper_progress div#progressContainer div#activeProgress  { /* ff */
+          background-color: rgb(165, 105, 65);
+        }
+        
         #paper_progress::shadow #activeProgress {
           background-color: rgb(165, 105, 65);
         }
@@ -1221,11 +1202,25 @@
         }
 
         /* background for toolbar when it is at its full size */
+        
+        core-scroll-header-panel #headerContainer { /* ff */
+          background-color: {{bg6}};
+          color: {{c6}};
+        }
+
         core-scroll-header-panel::shadow #headerContainer {
           background-color: {{bg6}};
           color: {{c6}};
         }
 
+        core-scroll-header-panel #headerBg { /* ff */
+          background-image: url({{group_back_image_url}});
+          background-attachment: fixed;
+          background-position: 50% 50%;
+          background-repeat: no-repeat;
+          opacity : 0.15 !important;
+        }
+        
         core-scroll-header-panel::shadow #headerBg {
           background-image: url({{group_back_image_url}});
           background-attachment: fixed;
@@ -1235,10 +1230,18 @@
         }
 
         /* background for toolbar when it is condensed  (not working because of previous opacity) */
+        core-scroll-header-panel #condensedHeaderBg { /* ff */ 
+          background-color: {{bg2}};
+        }
+        
         core-scroll-header-panel::shadow #condensedHeaderBg {
           background-color: {{bg2}};
         }
 
+        core-scroll-header-panel #mainContainer { /* ff */
+          background-color: {{bg8}};
+        }
+        
         core-scroll-header-panel::shadow #mainContainer {
           background-color: {{bg8}};
         }
@@ -1271,12 +1274,18 @@
           user-select: none;
         }
 
-        #group_core_main core-icon-button::shadow core-icon {
+        #group_core_main core-icon-button core-icon {
+          padding-left: 4px;
           height: 16px;
           width: 16px;
         }
-
-        FIXME,
+        
+        #group_core_main core-icon-button::shadow core-icon {
+          padding-left: 4px;
+          height: 16px;
+          width: 16px;
+        }
+        
         #group_core_main core-icon-button {
           font-size: 14px;
         }
@@ -1331,7 +1340,7 @@
           height: {{xsmall? avatarsizes: small? avatarsizem: avatarsizel}}px;
         }
 
-        #header_group_name,#header_short_group_name {
+        #header_group_name, #header_short_group_name {
           position: relative;
           left: {{xsmall? 20: small? 60: 60}}px;
         }
@@ -1532,6 +1541,18 @@
           visibility: visible;
         }
 
+        #group_tools_toolbar paper-fab paper-shadow { /* ff */
+          visibility: visible;
+        }
+
+        #group_tools_toolbar paper-fab:hover paper-shadow { /* ff */
+          visibility: hidden;
+        }
+
+        #group_tools_toolbar paper-fab.active paper-shadow { /* ff */
+          visibility: visible;
+        }
+
         #group_tools_toolbar .active:hover,
         #group_tools_toolbar .active {
           color: {{c3}};
@@ -1546,7 +1567,13 @@
         #group_tools_toolbar paper-fab::shadow #icon {
           left: 4px;
         }
-
+        
+        div#group_tools_toolbar paper-fab core-icon#icon {  /* ff */
+          witdh: 20px;
+          height:20px;
+          left: 4px;
+        }
+        
         #group_tools_toolbar paper-fab[mini]::shadow #icon {
           witdh: 20px;
           height:20px;
@@ -1562,6 +1589,11 @@
           /* Initially
              display: none; */
         }
+
+        #group_tools_toolbar core-item #label { /* ff */
+          display: none;
+        }
+
         #group_tools_toolbar core-item::shadow #label {
           display: none;
         }
@@ -1594,6 +1626,7 @@
           bottom: 10px;
           padding: {{xsmall? '0': '0 80px 0 5px'}};
         }
+        
         #home_bottombar,
         #group_bottombar {
           right: 0px;
@@ -1608,7 +1641,12 @@
           background-color: rgb(248, 248, 248);
           padding: 0 15px;
         }
-
+        
+        #home_bottombar a,
+        #group_bottombar a {
+          color: rgb(51,51,51);          
+        }
+        
         #group_bottombar > div > div > img {
           /* license */ 
           padding-left: {{xsmall ? '10px' : '60px' }};
@@ -1616,6 +1654,13 @@
 
         /* Chat -------------------------------------------------------------- */
 
+        #sitebar_user_btn core-icon { /* ff */
+          background-image: url({{user_icon_back_image_url}});
+          border-radius: 50%;
+          background-size: 24px;
+          margin-right: 3px;
+        }
+        
         #sitebar_user_btn::shadow core-icon {
           background-image: url({{user_icon_back_image_url}});
           border-radius: 50%;
@@ -1651,22 +1696,42 @@
           height: 100%;
         }
 
+        .core-icon-status-away core-icon path:nth-child(2) { /* ff */
+          fill: #FFFFFF;
+        }
+        
         .core-icon-status-away::shadow core-icon path:nth-child(2) {
           fill: #FFFFFF;
         }
-
+        
+        .core-icon-status-away core-icon path:first-child { /* ff */
+          fill: rgb(144, 144, 144);
+        }
+        
         .core-icon-status-away::shadow core-icon path:first-child {
           fill: rgb(144, 144, 144);
         }
 
+        .core-icon-status-online core-icon { /* ff */
+          fill: rgb(95, 255, 39);
+        }
+        
         .core-icon-status-online::shadow core-icon {
           fill: rgb(95, 255, 39);
         }
 
+        .core-icon-status-busy core-icon { /* ff */
+          fill: rgb(255, 85, 85);
+        }
+        
         .core-icon-status-busy::shadow core-icon {
           fill: rgb(255, 85, 85);
         }
-
+        
+        .core-icon-status-offline core-icon { /* ff */
+          fill: rgb(128, 128, 128);
+        }
+        
         .core-icon-status-offline::shadow core-icon {
           fill: rgb(128, 128, 128);
         }
@@ -1685,6 +1750,18 @@
         s.src = "ws/ws.nocache.js";
         // Coment this line for develop this initial page without gwt code
         document.body.appendChild(s);
+
+        var waypoints = document.querySelectorAll('akyral-waypoint');
+        function doIt(e){
+          console.log("Doit");
+          var el = this.nextElementSibling;
+          el.querySelector('.waypoint__state-event code').innerHTML = e.type;
+          el.className = 'waypoint__state-'+e.type.replace('akyral-waypoint-','');
+        }
+        [].forEach.call(waypoints, function(waypoint){
+          waypoint.addEventListener('akyral-waypoint-below', doIt)
+            waypoint.addEventListener('akyral-waypoint-above', doIt)
+        });
       });
 
       addEventListener('template-bound', function(e) {
@@ -1696,8 +1773,7 @@
         document.getElementById('sec1').style.height=h + "px";
         document.getElementById('sec2').style.height=h + "px";
         document.getElementById('sec3').style.height=h + "px";
-        document.getElementById('sec4').style.height=h + "px";
-        //document.getElementById('sec5').style.height=h + "px";
+        document.getElementById('sec4').style.height=h + "px";        
 
         var backs = ["others/home-back-trees.png",
                      "others/home-back-buck.png",
@@ -1724,25 +1800,52 @@
             // console.log("back " + scope.homebackimg);
           }
         }
-
+        
         // This is donw by gwt, but useful for development without gwt
-        // scope.hideSpinner();
+        scope.hideSpinner();
 
       });
 
     </script>
-
-    <!-- - <script type="text/javascript" language="javascript" src="ws/ws.nocache.js"></script> -->
-
-    <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
 
     <noscript>
       <div class="gwt_noscript_warning">
         Your web browser must have JavaScript enabled in order for this
         application to display correctly.</div>
     </noscript>
-    <iframe id="__gwt_historyFrame" class="gwt_code_iframe"></iframe>
-    <iframe src="" id="__download" class="gwt_code_iframe"></iframe>
+
+    <iframe id="__gwt_historyFrame" style="position: absolute; width: 0; height: 0; border: 0;"></iframe>
+    <iframe src="" id="__download" style="position: absolute; width: 0; height: 0; border: 0;"></iframe>
+    <!-- // This is only used for selenium tests (comment/remove in production) -->
+    <!--
+         <div id="kcursor"
+         style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
+         <img src="others/cursor-orange.png">
+         </div>
+         <script src="others/js/fake-selenium-pointer.js"></script> -->
+    <!-- // End : This is only used for selenium tests (comment/remove in production) -->
+
+    <!-- Banner for wave errors -->
+    <div class="banner" style="display: none; position: absolute;" id="banner"></div>
+    
+    <!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
+    <!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
+    <form id="loginrender" action="javascript:;" style="display: none; position: absolute;">
+      <input type="text" id="usernamerender" name="usernamerender"
+             autocomplete="off" autocorrect="off" autocapitalize="off"
+             spellcheck="false" value="" /> <input type="password"
+                                                   id="passwordrender" autocomplete="off" autocorrect="off"
+                                                   autocapitalize="off" spellcheck="false" name="passwordrender"
+                                                   value="" />
+    </form>
+    <!-- Remember user/pass (this part is used to send the values to the browser) -->
+    <form id="login" action="javascript:;" style="display: none; position: absolute;">
+      <input type="text" id="username" name="username" autocomplete="off"
+             autocorrect="off" autocapitalize="off" spellcheck="false" value="" />
+      <input type="password" id="password" name="password"
+             autocomplete="off" autocorrect="off" autocapitalize="off"
+             spellcheck="false" value="" />
+    </form>
 
   </body>
 </html>
