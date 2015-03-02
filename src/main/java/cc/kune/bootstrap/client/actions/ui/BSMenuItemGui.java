@@ -23,6 +23,7 @@
 package cc.kune.bootstrap.client.actions.ui;
 
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
+import cc.kune.common.client.log.Log;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -41,7 +42,11 @@ public class BSMenuItemGui extends AbstractBSMenuItemGui {
       @Override
       public void onClick(final ClickEvent event) {
         // It's this necessary?
-        // getParentMenu(descriptor).hide();
+        try {
+          getParentMenu(descriptor).hide();
+        } catch (final ClassCastException e) {
+          Log.error("Failed to close parent widget" + descriptor.getParent());
+        }
         clickHandlerChildDefautl.onClick(event);
       }
     });
