@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -20,39 +20,28 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 package cc.kune.common.client.ui;
+
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Interface MaskWidgetView.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
-public interface MaskWidgetView {
+public class PaperMask implements MaskWidgetView {
 
-  /**
-   * Mask.
-   *
-   * @param widget
-   *          the widget
-   */
-  void mask(IsWidget widget);
+  @Override
+  public void mask(final IsWidget widget) {
+    PolymerUtils.showSpinner();
+  }
 
-  /**
-   * Mask.
-   *
-   * @param widget
-   *          the widget
-   * @param message
-   *          the message
-   */
-  void mask(IsWidget widget, String message);
+  @Override
+  public void mask(final IsWidget widget, final String message) {
+    PolymerUtils.showSpinner();
+  }
 
-  /**
-   * Un mask.
-   */
-  void unMask();
+  @Override
+  public void unMask() {
+    PolymerUtils.hideSpinner();
+  }
 
 }

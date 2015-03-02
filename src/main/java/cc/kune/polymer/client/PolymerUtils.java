@@ -202,7 +202,7 @@ public class PolymerUtils {
   }
 
   public native static void showSpinner() /*-{
-		$wnd.kt.hideSpinner();
+		$wnd.kt.showSpinner();
   }-*/;
 
   public native static void toggleSearch() /*-{

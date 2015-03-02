@@ -40,6 +40,7 @@ import com.google.gwt.user.client.ui.Widget;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
+@Deprecated
 public class MaskWidget extends PopupPanel implements MaskWidgetView {
 
   /**
@@ -49,18 +50,18 @@ public class MaskWidget extends PopupPanel implements MaskWidgetView {
    */
   interface MaskWidgetUiBinder extends UiBinder<Widget, MaskWidget> {
   }
-  
+
   /** The ui binder. */
   private static MaskWidgetUiBinder uiBinder = GWT.create(MaskWidgetUiBinder.class);
-  
+
   /** The flow. */
   @UiField
   FlowPanel flow;
-  
+
   /** The icon. */
   @UiField
   Image icon;
-  
+
   /** The label. */
   @UiField
   Label label;
@@ -78,7 +79,9 @@ public class MaskWidget extends PopupPanel implements MaskWidgetView {
     setStyleName("k-mask");
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.user.client.ui.PopupPanel#isShowing()
    */
   @Override
@@ -86,16 +89,24 @@ public class MaskWidget extends PopupPanel implements MaskWidgetView {
     return super.isShowing();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.ui.MaskWidgetView#mask(com.google.gwt.user.client.ui.IsWidget)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.ui.MaskWidgetView#mask(com.google.gwt.user.client
+   * .ui.IsWidget)
    */
   @Override
   public void mask(final IsWidget widget) {
     mask(widget, "");
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.ui.MaskWidgetView#mask(com.google.gwt.user.client.ui.IsWidget, java.lang.String)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * cc.kune.common.client.ui.MaskWidgetView#mask(com.google.gwt.user.client
+   * .ui.IsWidget, java.lang.String)
    */
   @Override
   public void mask(final IsWidget widget, final String message) {
@@ -115,7 +126,9 @@ public class MaskWidget extends PopupPanel implements MaskWidgetView {
     });
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.ui.MaskWidgetView#unMask()
    */
   @Override

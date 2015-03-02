@@ -34,8 +34,8 @@ import cc.kune.common.client.notify.UserNotifierGrowl;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
-import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
+import cc.kune.common.client.ui.PaperMask;
 import cc.kune.common.shared.i18n.HasRTL;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -156,7 +156,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -255,7 +255,7 @@ public class CoreGinModule extends ExtendedGinModule {
     // UI
     bind(GuiProvider.class).to(DefaultGuiProvider.class).in(Singleton.class);
 
-    bind(MaskWidgetView.class).to(MaskWidget.class).in(Singleton.class);
+    bind(MaskWidgetView.class).to(PaperMask.class).in(Singleton.class);
 
     // Core App
     bind(Session.class).to(SessionDefault.class).in(Singleton.class);
