@@ -80,7 +80,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip[])
@@ -94,7 +94,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.IsActionExtensible#add(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -119,7 +119,7 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.IsActionExtensible#addAll(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescCollection)
@@ -188,15 +188,12 @@ public abstract class AbstractComposedGuiItem extends Composite implements IsAct
     } catch (final NotImplementedException e) {
       throw new UIException("NotImplementedException trying to create " + descrip + " " + e.getCause()
           + " " + e.getMessage(), e);
-    } catch (final Exception e) {
-      Log.error("Exception creating" + descrip);
-      throw e;
     }
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.IsActionExtensible#clear()
    */
   @Override

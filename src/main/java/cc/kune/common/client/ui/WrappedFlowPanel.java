@@ -51,9 +51,6 @@ public class WrappedFlowPanel extends Composite implements InsertPanel.ForIsWidg
         throw new UIException("Errow wrapping id " + id);
       }
       return wrap(element);
-    } catch (final Exception e) {
-      Log.error("Error wrapping id " + id);
-      throw e;
     }
   }
   private final FlowPanel flow;
