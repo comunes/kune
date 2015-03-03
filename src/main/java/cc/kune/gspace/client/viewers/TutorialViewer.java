@@ -172,26 +172,26 @@ public class TutorialViewer extends Composite {
     });
     eventBus.addHandler(ShowHelpContainerEvent.getType(),
         new ShowHelpContainerEvent.ShowHelpContainerHandler() {
-          @Override
-          public void onShowHelpContainer(final ShowHelpContainerEvent event) {
-            onTutorialClose = event.getOnTutorialClose();
-            setTool(event.getTool());
-            showTutorial();
-          }
-        });
+      @Override
+      public void onShowHelpContainer(final ShowHelpContainerEvent event) {
+        onTutorialClose = event.getOnTutorialClose();
+        setTool(event.getTool());
+        showTutorial();
+      }
+    });
     eventBus.addHandler(NewUserRegisteredEvent.getType(),
         new NewUserRegisteredEvent.NewUserRegisteredHandler() {
+      @Override
+      public void onNewUserRegistered(final NewUserRegisteredEvent event) {
+        new Timer() {
           @Override
-          public void onNewUserRegistered(final NewUserRegisteredEvent event) {
-            new Timer() {
-              @Override
-              public void run() {
-                onTutorialClose = null;
-                showTutorial();
-              }
-            }.schedule(2000);
+          public void run() {
+            onTutorialClose = null;
+            showTutorial();
           }
-        });
+        }.schedule(2000);
+      }
+    });
   }
 
   /**

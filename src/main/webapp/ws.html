@@ -279,14 +279,14 @@
 
                 <div horizontal layout center id="home_bottombar" flex>
                   <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
-                    <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>                  
+                    <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
                   </a>
                   <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
                     <paper-icon-button src="others/bc_logo_24.png"
-                                       title="donate with bitcoin"></paper-icon-button>                  
+                                       title="donate with bitcoin"></paper-icon-button>
                   </a>
                   <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
-                    <img 
+                    <img
                          src="http://api.flattr.com/button/flattr-badge-large.png"
                          alt="Flattr this" title="Flattr this" border="0">
                   </a>
@@ -297,15 +297,15 @@
 
                     <div horizontal center-justified layout id="sec0">
                       <div self-center>
-                        <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="1"></akyral-waypoint>
+                        <akyral-waypoint within="100" data-id="1"></akyral-waypoint>
                         kune it's a web social toolbox where you can communicate, collaborate and share between equals, using different tools:
-                        <div id="k_home_tools" wrap justified vertical?="{{!xsmall}}" horizontal?="{{xsmall}}" layout>  
+                        <div id="k_home_tools" wrap justified vertical?="{{!xsmall}}" horizontal?="{{xsmall}}" layout>
 
-                        <div  wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>                          
+                        <div  wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
                           <core-item icon="kune:docs" label="documents" horizontal center layout></core-item>
                           <core-item icon="kune:events" label="calendars" horizontal center layout></core-item>
                           <core-item icon="kune:chat-tool" label="chats" horizontal center layout></core-item>
-                          <core-item icon="kune:lists" label="forums" horizontal center layout></core-item>                            
+                          <core-item icon="kune:lists" label="forums" horizontal center layout></core-item>
                         </div>
                         <div wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
                           <core-item icon="kune:wiki" label="wiki" horizontal center layout></core-item>
@@ -321,8 +321,8 @@
                       <div self-center>
                         <div horizontal center-justified layout flex>
                         </div>
-                        <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="2"></akyral-waypoint>
-                        <blockquote id="buck_blockquote">Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
+                        <akyral-waypoint within="100" data-id="2"></akyral-waypoint>
+                         <blockquote id="buck_blockquote">Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
                           <cite id="buck">
                             <a href="https://en.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
                           </cite>
@@ -333,14 +333,14 @@
 
                     <div horizontal center-justified layout id="sec2">
                       <div self-center>
-                        <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="3"></akyral-waypoint>
+                        <akyral-waypoint within="100" data-id="3"></akyral-waypoint>
                         kune.cc is just one the kune nodes. That is, kune is descentralized unlike other centralized platforms like Google+, or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.
                       </div>
                     </div>
 
                     <div horizontal center-justified layout id="sec3">
                       <div self-center>
-                        <akyral-waypoint within="100" on-akyral-waypoint-above="{{ aboveWayPoint }}" on-akyral-waypoint-below="{{ belowWayPoint }}" data-id="4"></akyral-waypoint>
+                        <akyral-waypoint within="100" data-id="4"></akyral-waypoint>
                         Kune means "together" in esperanto.
                       </div>
                     </div>
@@ -545,7 +545,7 @@
       </core-animation-group>
 
       <style>
-        
+
         /* -*- engine:css -*- */
         /* Home Space -------------------------------------------------------- */
         body {
@@ -581,7 +581,7 @@
         .opa7 {
           opacity: 0.7;
         }
-        
+
         #home_space {
           font-size: {{xsmall? '12' : small? '16' : '16'}}px;
         }
@@ -597,14 +597,14 @@
         #k_home_mask {
           background-color: {{homebackcolor}};
           background-image: url({{homebackimg}});
-          background-repeat: no-repeat;          
-          background-position: 0% 20%;          
+          background-repeat: no-repeat;
+          background-position: 0% 20%;
           background-size: {{xsmall? "inherit": small? "inherit": "100%"}};
           padding: 30px;
           height: {{xsmall? 220: 270}}px;
           padding-top: {{xsmall? 80: 110}}px;
         }
-        
+
         #k_home_main_container {
           color: #FFFFFF;
         }
@@ -629,7 +629,7 @@
         }
 
         #k_home_toolbar {
-          margin: {{xsmall? '10px 0': '0 20px'}};          
+          margin: {{xsmall? '10px 0': '0 20px'}};
         }
 
         #k_home_center_container {
@@ -672,7 +672,7 @@
 
         #k_home_center a {
           color: #69312f;
-        }        
+        }
 
         #k_home_tools core-item::shadow #icon {
           margin: 0 6px;
@@ -687,7 +687,7 @@
         }
 
         #k_home_spin_container {
-          background-color: {{homebackcolor}};          
+          background-color: {{homebackcolor}};
           z-index: 10000;
           opacity: 0.7;
         }
@@ -703,7 +703,7 @@
         .circle { /* ff */
           border-color: #a56941 !important;
         }
-        
+
         #k_home_spin::shadow .circle {
           border-color: #a56941;
         }
@@ -711,7 +711,7 @@
         #buck_blockquote {
           margin: 1.5em 0 1.5em;
           padding: 0 1em 0 2.5em;
-          position: relative;          
+          position: relative;
         }
 
         #buck_blockquote:before {
@@ -752,7 +752,7 @@
           margin-bottom: 4px;
           opacity: 0.8;
         }
-        
+
         /* Main panels ------------------------------------------------------- */
 
         :host {
@@ -819,7 +819,7 @@
         #sitebar_toolbar core-icon-button {
           font-size: 16px;
         }
-        
+
         #sitebar_toolbar paper-icon-button,
         #sitebar_toolbar core-icon-button {
           margin-left: 3px !important;
@@ -864,7 +864,7 @@
           right: 0px;
           width: 100%;
         }
-        
+
         paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar { /* ff */
           background-color: rgb(105, 49, 47);
           height: 4px;
@@ -882,7 +882,7 @@
           color: #FFF;
           opacity: 0.3;
         }
-        
+
         paper-tab::shadow #ink {
           color: #FFF;
           opacity: 0.3;
@@ -899,7 +899,7 @@
         #sitebar_toolbar div.k-tb-sep {
           display: none;
         }
-        
+
         #sitebar_toolbar li {
           list-style-type: none;
           margin: {{xsmall? "-5px 8px 0 8px" : "-24px 8px 0 8px"}};
@@ -908,12 +908,12 @@
         #sitebar_toolbar li a:hover {
           text-decoration: none;
         }
-        
+
         #sitebar_toolbar li a{
           color: white;
           font-size: 16px;
         }
-        
+
         #paper_progress,#toast {
           z-index:1;
         }
@@ -932,7 +932,7 @@
         div#paper_progress_container paper-progress#paper_progress div#progressContainer div#activeProgress  { /* ff */
           background-color: rgb(165, 105, 65);
         }
-        
+
         #paper_progress::shadow #activeProgress {
           background-color: rgb(165, 105, 65);
         }
@@ -1202,7 +1202,7 @@
         }
 
         /* background for toolbar when it is at its full size */
-        
+
         core-scroll-header-panel #headerContainer { /* ff */
           background-color: {{bg6}};
           color: {{c6}};
@@ -1220,7 +1220,7 @@
           background-repeat: no-repeat;
           opacity : 0.15 !important;
         }
-        
+
         core-scroll-header-panel::shadow #headerBg {
           background-image: url({{group_back_image_url}});
           background-attachment: fixed;
@@ -1233,7 +1233,7 @@
         core-scroll-header-panel #condensedHeaderBg { /* ff */ 
           background-color: {{bg2}};
         }
-        
+
         core-scroll-header-panel::shadow #condensedHeaderBg {
           background-color: {{bg2}};
         }
@@ -1241,7 +1241,7 @@
         core-scroll-header-panel #mainContainer { /* ff */
           background-color: {{bg8}};
         }
-        
+
         core-scroll-header-panel::shadow #mainContainer {
           background-color: {{bg8}};
         }
@@ -1279,13 +1279,13 @@
           height: 16px;
           width: 16px;
         }
-        
+
         #group_core_main core-icon-button::shadow core-icon {
           padding-left: 4px;
           height: 16px;
           width: 16px;
         }
-        
+
         #group_core_main core-icon-button {
           font-size: 14px;
         }
@@ -1371,7 +1371,7 @@
         #header_social_net {
           overflow: auto;
         }
-        
+
         #social_net_group {
           padding: {{xsmall? '0 5px 0 0': '0 5px 0 5px'}};
         }
@@ -1492,7 +1492,8 @@
           margin: {{xsmall? '0px 25px 0px 20px' : '0px 75px 0px 70px'}};
           top: {{xsmall? 134 : small? 154: 186}}px;
         }
-
+        
+        paper-shadow#doc_toolbar_shadow core-toolbar#doc_toolbar div#topBar.toolbar-tools, 
         #doc_toolbar {
           color: gray;
           height: 40px;
@@ -1523,7 +1524,7 @@
         #group_tools_toolbar .k-drop-allowed {
           border-right: none !important;
         }
-        
+
         #group_tools_toolbar paper-fab {
           color: grey;
           background-color: transparent;
@@ -1571,13 +1572,13 @@
         #group_tools_toolbar paper-fab::shadow #icon {
           left: 4px;
         }
-        
+
         div#group_tools_toolbar paper-fab core-icon#icon {  /* ff */
           witdh: 20px;
           height:20px;
           left: 4px;
         }
-        
+
         #group_tools_toolbar paper-fab[mini]::shadow #icon {
           witdh: 20px;
           height:20px;
@@ -1630,7 +1631,7 @@
           bottom: 10px;
           padding: {{xsmall? '0': '0 80px 0 5px'}};
         }
-        
+
         #home_bottombar,
         #group_bottombar {
           right: 0px;
@@ -1645,12 +1646,12 @@
           background-color: rgb(248, 248, 248);
           padding: 0 15px;
         }
-        
+
         #home_bottombar a,
         #group_bottombar a {
-          color: rgb(51,51,51);          
+          color: rgb(51,51,51);
         }
-        
+
         #group_bottombar > div > div > img {
           /* license */ 
           padding-left: {{xsmall ? '10px' : '60px' }};
@@ -1664,7 +1665,7 @@
           background-size: 24px;
           margin-right: 3px;
         }
-        
+
         #sitebar_user_btn::shadow core-icon {
           background-image: url({{user_icon_back_image_url}});
           border-radius: 50%;
@@ -1703,15 +1704,15 @@
         .core-icon-status-away core-icon path:nth-child(2) { /* ff */
           fill: #FFFFFF;
         }
-        
+
         .core-icon-status-away::shadow core-icon path:nth-child(2) {
           fill: #FFFFFF;
         }
-        
+
         .core-icon-status-away core-icon path:first-child { /* ff */
           fill: rgb(144, 144, 144);
         }
-        
+
         .core-icon-status-away::shadow core-icon path:first-child {
           fill: rgb(144, 144, 144);
         }
@@ -1719,7 +1720,7 @@
         .core-icon-status-online core-icon { /* ff */
           fill: rgb(95, 255, 39);
         }
-        
+
         .core-icon-status-online::shadow core-icon {
           fill: rgb(95, 255, 39);
         }
@@ -1727,15 +1728,15 @@
         .core-icon-status-busy core-icon { /* ff */
           fill: rgb(255, 85, 85);
         }
-        
+
         .core-icon-status-busy::shadow core-icon {
           fill: rgb(255, 85, 85);
         }
-        
+
         .core-icon-status-offline core-icon { /* ff */
           fill: rgb(128, 128, 128);
         }
-        
+
         .core-icon-status-offline::shadow core-icon {
           fill: rgb(128, 128, 128);
         }
@@ -1777,7 +1778,7 @@
         document.getElementById('sec1').style.height=h + "px";
         document.getElementById('sec2').style.height=h + "px";
         document.getElementById('sec3').style.height=h + "px";
-        document.getElementById('sec4').style.height=h + "px";        
+        document.getElementById('sec4').style.height=h + "px";
 
         var backs = ["others/home-back-trees.png",
                      "others/home-back-buck.png",
@@ -1786,13 +1787,13 @@
                      "others/home-back-op-en.png"];
 
         var backSlideInit=false;
-        
+
         scope.belowWayPoint = function(e) {
           id = e.target.attributes["data-id"].value;
           scope.homebackimg = backs[id];
           console.log("id below " + id);
           backSlideInit=true;
-          // console.log(scope.homebackimg);          
+          // console.log(scope.homebackimg);
           scroll("sec" + id);
         }
 
@@ -1804,7 +1805,14 @@
             // console.log("back " + scope.homebackimg);
           }
         }
-        
+
+        var waypoints = document.querySelectorAll('akyral-waypoint');
+        console.log(waypoints.length);
+        [].forEach.call(waypoints, function(waypoint){
+          waypoint.addEventListener('akyral-waypoint-below', scope.belowWayPoint);
+          waypoint.addEventListener('akyral-waypoint-above', scope.aboveWayPoint);
+        });
+
         // This is donw by gwt, but useful for development without gwt
         // scope.hideSpinner();
 
@@ -1831,7 +1839,7 @@
 
     <!-- Banner for wave errors -->
     <div class="banner" style="display: none; position: absolute;" id="banner"></div>
-    
+
     <!-- Remember user/pass (this is removed from here and rendered in gxt form) -->
     <!-- action empty suggested in http://stackoverflow.com/questions/4254284/browser-stored-username-passwords-in-chrome -->
     <form id="loginrender" action="javascript:;" style="display: none; position: absolute;">
