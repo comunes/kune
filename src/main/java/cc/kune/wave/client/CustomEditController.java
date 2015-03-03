@@ -33,7 +33,7 @@ import org.waveprotocol.wave.client.wavepanel.impl.focus.FocusFramePresenter;
 import org.waveprotocol.wave.client.wavepanel.view.BlipView;
 
 public class CustomEditController implements EditSession.Listener, WavePanel.LifecycleListener,
-FocusFramePresenter.Listener, CustomEditToolbar.Listener {
+FocusFramePresenter.Listener, CustomEditToolbarImpl.Listener {
 
   public static void install(final FocusFramePresenter focus, final Actions actions,
       final EditSession edit, final WavePanelImpl panel, final FocusBlipSelector blipSelector,

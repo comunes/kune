@@ -22,9 +22,14 @@
  */
 package cc.kune.wave.client.kspecific;
 
+import org.waveprotocol.box.webclient.search.SearchPanelView;
+
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.chat.client.LastConnectedManagerImpl;
 import cc.kune.core.client.ExtendedGinModule;
+import cc.kune.wave.client.CustomEditToolbar;
+import cc.kune.wave.client.CustomEditToolbarImpl;
+import cc.kune.wave.client.CustomSearchPanelWidget;
 import cc.kune.wave.client.KuneWaveProfileManager;
 import cc.kune.wave.client.RosterProfileUpdater;
 import cc.kune.wave.client.WebClient;
@@ -46,6 +51,8 @@ public class WaveGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
+    s(SearchPanelView.class, CustomSearchPanelWidget.class);
+    s(CustomEditToolbar.class, CustomEditToolbarImpl.class);
     s(HasWaveContainer.class, WaveUserSpaceContainer.class);
     s(LastConnectedManager.class, LastConnectedManagerImpl.class);
     s(KuneWaveProfileManager.class);

@@ -57,7 +57,6 @@ public class SitebarSignInLink extends ToolbarItemDescriptor {
   public SitebarSignInLink(final AbstractSignInAction action, final EventBus eventBus,
       final Session session) {
     super(action);
-    // setParent(SitebarActionsPresenter.RIGHT_TOOLBAR);
     setId(SITE_SIGN_IN);
     setVisible(!session.isLogged());
     setStyles(ActionStyles.SITEBAR_STYLE_FL);

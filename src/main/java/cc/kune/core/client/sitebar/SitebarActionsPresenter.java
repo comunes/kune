@@ -24,6 +24,7 @@ package cc.kune.core.client.sitebar;
 
 import org.gwtbootstrap3.client.ui.constants.IconType;
 
+import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.common.client.actions.AbstractAction;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
@@ -37,6 +38,7 @@ import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.resources.iconic.IconicResources;
+import cc.kune.polymer.client.PolymerId;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -200,6 +202,7 @@ public class SitebarActionsPresenter extends
    * Inits the.
    */
   private void init() {
+    MORE_MENU.setWidget(PaperIconButton.wrap(PolymerId.SITEBAR_MORE_ICON.getId()));
     MORE_MENU.withId(SITE_OPTIONS_MENU);
   }
 

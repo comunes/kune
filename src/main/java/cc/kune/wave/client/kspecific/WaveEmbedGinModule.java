@@ -22,15 +22,20 @@
  */
 package cc.kune.wave.client.kspecific;
 
+import org.waveprotocol.box.webclient.search.SearchPanelView;
+
 import cc.kune.chat.client.DummyLastConnectedManager;
 import cc.kune.chat.client.LastConnectedManager;
 import cc.kune.core.client.ExtendedGinModule;
+import cc.kune.wave.client.CustomEditToolbar;
+import cc.kune.wave.client.DummySearchPanelView;
+import cc.kune.wave.client.EmbedEditToolbarImpl;
 import cc.kune.wave.client.KuneWaveProfileManager;
 import cc.kune.wave.client.WebClient;
 
 /**
  * The Class WaveGinModule.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class WaveEmbedGinModule extends ExtendedGinModule {
@@ -41,6 +46,8 @@ public class WaveEmbedGinModule extends ExtendedGinModule {
    */
   @Override
   protected void configure() {
+    s(SearchPanelView.class, DummySearchPanelView.class);
+    s(CustomEditToolbar.class, EmbedEditToolbarImpl.class);
     s(HasWaveContainer.class, WaveEmbedContainer.class);
     s(LastConnectedManager.class, DummyLastConnectedManager.class);
     s(AurorisColorPicker.class);

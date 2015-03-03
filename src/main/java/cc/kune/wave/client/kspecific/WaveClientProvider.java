@@ -56,7 +56,7 @@ public class WaveClientProvider implements Provider<WaveClientView> {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.inject.Provider#get()
    */
   @Override

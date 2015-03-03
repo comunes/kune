@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
+ * Copyright (C) 2007-2013 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -20,30 +20,49 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.core.client.sitebar;
 
-import br.com.rpa.client._paperelements.PaperIconButton;
-import cc.kune.common.client.actions.ui.descrip.ToolbarDescriptor;
-import cc.kune.common.client.actions.ui.descrip.WidgetMenuDescriptor;
-import cc.kune.polymer.client.PolymerId;
+package cc.kune.wave.client;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Interface SitebarActions.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
-public interface SitebarActions {
+import cc.kune.wave.client.CustomEditToolbarImpl.Listener;
 
-  /** The Constant MORE_MENU. */
-  static final WidgetMenuDescriptor MORE_MENU = new WidgetMenuDescriptor();
+import com.google.inject.Singleton;
 
-  /** The Constant RIGHT_TOOLBAR. */
-  static final ToolbarDescriptor RIGHT_TOOLBAR = new ToolbarDescriptor();
+@Singleton
+public class EmbedEditToolbarImpl implements CustomEditToolbar {
 
-  /**
-   * Refresh actions.
-   */
-  void refreshActions();
+  @Override
+  public boolean isEditEnable() {
+    // TODO Auto-generated method stub
+    return false;
+  }
 
+  @Override
+  public void onClickEdit() {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void setEditAndReplyVisible(final boolean visible) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void setEditDoneVisible(final boolean visible) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void setEnable(final boolean enable) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void setListener(final Listener listener) {
+    // TODO Auto-generated method stub
+
+  }
 }

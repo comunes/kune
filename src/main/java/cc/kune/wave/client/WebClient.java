@@ -19,7 +19,7 @@
 package cc.kune.wave.client;
 
 
-import static com.google.gwt.query.client.GQuery.$;
+
 
 import java.util.Date;
 import java.util.Set;
@@ -33,8 +33,7 @@ import org.waveprotocol.box.webclient.client.Session;
 import org.waveprotocol.box.webclient.client.SimpleWaveStore;
 import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
 import org.waveprotocol.box.webclient.search.RemoteSearchService;
-import org.waveprotocol.box.webclient.search.SearchPanelRenderer;
-import org.waveprotocol.box.webclient.search.SearchPanelWidget;
+import org.waveprotocol.box.webclient.search.SearchPanelView;
 import org.waveprotocol.box.webclient.search.SearchPresenter;
 import org.waveprotocol.box.webclient.search.SimpleSearch;
 import org.waveprotocol.box.webclient.search.WaveStore;
@@ -74,13 +73,10 @@ import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
-import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceConfEvent;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
@@ -89,7 +85,6 @@ import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.initials.InitialsResources;
 import cc.kune.polymer.client.PolymerId;
 import cc.kune.polymer.client.PolymerUtils;
@@ -333,9 +328,7 @@ public class WebClient extends Composite implements WaveClientView {
 
   private SimpleSearch search;
 
-  /** The search panel.
-  @UiField(provided = true) */
-  final SearchPanelWidget searchPanel;
+  final SearchPanelView searchPanel;
 
   /** The style. */
   @UiField
@@ -390,8 +383,8 @@ public class WebClient extends Composite implements WaveClientView {
   public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, 
       final cc.kune.core.client.state.Session kuneSession, StateManager stateManager,
       final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, 
-      final Provider<AurorisColorPicker> colorPicker, final GSpaceArmor armor, 
-      CustomEditToolbar customEditToolbar, final KuneDragController dragController, ClientFileDownloadUtils downUtils, CoreResources res) {
+      final Provider<AurorisColorPicker> colorPicker, SearchPanelView searchPanel,
+      CustomEditToolbar customEditToolbar) {
     this.eventBus = eventBus;
     this.profiles = profiles;
     this.kuneSession = kuneSession;
@@ -400,7 +393,7 @@ public class WebClient extends Composite implements WaveClientView {
     this.contentService = contentService;
     this.colorPicker = colorPicker;
     this.customEditToolbar = customEditToolbar;
-    searchPanel = new SearchPanelWidget(new SearchPanelRenderer(profiles), dragController, downUtils, res, armor);
+    this.searchPanel = searchPanel;
     ErrorHandler.install();
     eventBus.addHandler(StackErrorEvent.getType(), new StackErrorEvent.StackErrorHandler() {
       @Override
@@ -415,7 +408,6 @@ public class WebClient extends Composite implements WaveClientView {
         });
       }
     });
-    armor.wrapDiv(PolymerId.INBOX_RESULT).add(searchPanel);
 
     ClientEvents.get().addWaveCreationEventHandler(
         new WaveCreationEventHandler() {
@@ -766,45 +758,10 @@ public class WebClient extends Composite implements WaveClientView {
     
     // For dev purposes (disabled in kune)
     Repairer.debugRepairIsFatal=false;
-    
-    // FIXME Dirty workaround while we improve the Wave integration
-    /*
-    $(".org-waveprotocol-wave-client-widget-toolbar-ToplevelToolbarWidget-Css-toolbar").hide();
-    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-north").hide(); */
-    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-search").hide();
-    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-toolbar").hide();
-    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-list").css("top", "0px");
-    /* $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-east").hide();
-    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-northEast").hide();
-    $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-northWest").hide();
-    $(".org-waveprotocol-wave-client-wavepanel-view-dom-full-ParticipantsViewBuilder-Css-extra").css("paddingTop", "17px");
-    final GQuery container = $(".org-waveprotocol-box-webclient-widget-frame-FramedPanel-Css-contentContainer");
-    container.css("right","0px");
-    container.css("top","0px"); */
-    
-    //container.css("backgroundColor", "transparent");
-    //$(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-self").css("backgroundColor", "transparent");
-    // DockLayoutPanel forcibly conflicts with sensible layout control, and
-    // sticks inline styles on elements without permission. They must be
-    // cleared.
+
     self.getElement().getStyle().clearPosition();
     // splitPanel.setWidgetMinSize(searchPanel, 300);
     AttachmentManagerProvider.init(AttachmentManagerImpl.getInstance());
-
-    final PaperFab newMsg = PaperFab.wrap(PolymerId.INBOX_NEW_MESSAGE.getId());
-    Tooltip.to(newMsg, I18n.t("New message"));
-    newMsg.addClickHandler(new ClickHandler() {
-
-      @Override
-      public void onClick(final ClickEvent event) {
-        // FIXME Dirty workaround while we improve the Wave integration
-        SpaceSelectEvent.fire(eventBus, Space.userSpace);
-        // Show the message panel
-        PolymerUtils.setMainSelected();
-        ClientEvents.get().fireEvent(new WaveCreationEvent());
-        // $(".org-waveprotocol-wave-client-widget-toolbar-buttons-HorizontalToolbarButtonWidget-Css-overlay").click();
-      }
-    });
 
     setupSearchPanel();
     setupWavePanel();

@@ -21,8 +21,9 @@
 
 package org.waveprotocol.box.webclient.search;
 
+import static com.google.gwt.query.client.GQuery.$;
+
 import org.gwtbootstrap3.client.ui.base.button.CustomButton;
-import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.client.common.util.LinkedSequence;
 import org.waveprotocol.wave.client.uibuilder.BuilderHelper;
 import org.waveprotocol.wave.client.widget.common.ImplPanel;
@@ -42,7 +43,6 @@ import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.polymer.client.PolymerId;
-import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.common.base.Preconditions;
 import com.google.gwt.core.client.GWT;
@@ -65,7 +65,6 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
-
 /**
  * View interface for the search panel.
  *
@@ -93,12 +92,11 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
    * Positioning constants for components of this panel.
    */
   static class CssConstants {
-    private static int SEARCH_HEIGHT_PX = 51; // To match wave panel.
+    private static int SEARCH_HEIGHT_PX = 51; // To match wave panel. 
     private static int TOOLBAR_HEIGHT_PX =
         SearchPanelResourceLoader.getPanel().emptyToolbar().getHeight();
     private static int TOOLBAR_TOP_PX = 0 + SEARCH_HEIGHT_PX;
     private static int LIST_TOP_PX = TOOLBAR_TOP_PX + TOOLBAR_HEIGHT_PX;
-
     // CSS constants exported to .css files
     static String SEARCH_HEIGHT = SEARCH_HEIGHT_PX + "px";
     static String TOOLBAR_TOP = TOOLBAR_TOP_PX + "px";
@@ -136,11 +134,20 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   private final LinkedSequence<CustomDigestDomImpl> digests = LinkedSequence.create();
   private final ClientFileDownloadUtils downUtils;
   private final KuneDragController dragController;
-  private final FocusPanel frame;
+
+  @UiField
+  FocusPanel focus;
+  private final InlineLabel inboxTitle;
+  private final WrappedFlowPanel inboxTitleFlow;
   @UiField
   FlowPanel list;
+
   private Listener listener;
+
   private final SearchPanelRenderer renderer;
+
+  private final CoreResources res;
+
   @UiField
   SearchWidget search;
 
@@ -152,21 +159,12 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   @UiField
   ToplevelToolbarWidget toolbar;
-  
-  @UiField
-  FocusPanel focus;
-  
-  private final CoreResources res;
 
-  private WrappedFlowPanel inboxTitleFlow;
-
-  private InlineLabel inboxTitle;
-
-  public SearchPanelWidget(final SearchPanelRenderer renderer, final KuneDragController dragController, final ClientFileDownloadUtils downUtils, CoreResources res, GSpaceArmor armor) {
+  public SearchPanelWidget(final SearchPanelRenderer renderer, final KuneDragController dragController, final ClientFileDownloadUtils downUtils, final CoreResources res, final GSpaceArmor armor) {
     this.downUtils = downUtils;
     this.dragController = dragController;
     this.res = res;
-    initWidget(frame = BINDER.createAndBindUi(this));
+    initWidget(BINDER.createAndBindUi(this));
     showMore.setVisible(false);
     showMore.setText(I18n.t("Show more results"));
     showMore.setIcon(KuneIcon.ADD);
@@ -176,12 +174,17 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     inboxTitle = new InlineLabel(I18n.t("Inbox"));
     inboxTitleFlow.add(inboxTitle);
     this.renderer = renderer;
-    showMore.addClickHandler(new ClickHandler() {     
+    showMore.addClickHandler(new ClickHandler() {
       @Override
-      public void onClick(ClickEvent event) {
-       handleShowMoreClicked();        
+      public void onClick(final ClickEvent event) {
+        handleShowMoreClicked();
       }
     });
+    
+    // FIXME Dirty workaround while we improve the Wave integration
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-search").hide();
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-toolbar").hide();
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-list").css("top", "0px");
   }
 
   @Override
@@ -221,20 +224,7 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   public ToplevelToolbarWidget getToolbar() {
     return toolbar;
   }
-  
-  @UiHandler("focus")
-  void handleDrag(final DragEvent e) {
-    final Element target = e.getNativeEvent().getEventTarget().cast();
-    final Element top = self.getElement();
-    while (!top.equals(target)) {
-      if ("digest".equals(target.getAttribute(BuilderHelper.KIND_ATTRIBUTE))) {
-        NotifyUser.important("We start to drag");
-        e.stopPropagation();
-        return;
-      }
-    }
-  }
-  
+
   @UiHandler("self")
   void handleClick(final ClickEvent e) {
     final Element target = e.getNativeEvent().getEventTarget().cast();
@@ -267,8 +257,21 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
         handleClick(byId.get(target.getAttribute(CustomDigestDomImpl.DIGEST_ID_ATTRIBUTE)));
         e.stopPropagation();
         return;
-      } 
+      }
       target = target.getParentElement();
+    }
+  }
+
+  @UiHandler("focus")
+  void handleDrag(final DragEvent e) {
+    final Element target = e.getNativeEvent().getEventTarget().cast();
+    final Element top = self.getElement();
+    while (!top.equals(target)) {
+      if ("digest".equals(target.getAttribute(BuilderHelper.KIND_ATTRIBUTE))) {
+        NotifyUser.important("We start to drag");
+        e.stopPropagation();
+        return;
+      }
     }
   }
 
@@ -345,7 +348,7 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   @Override
   public void setTitleText(final String text) {
-    // Right now not used because the message is very geek (20 of unknown) 
+    // Right now not used because the message is very geek (20 of unknown)
     // inboxTitle.setText(text);
   }
 
