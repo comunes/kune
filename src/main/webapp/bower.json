@@ -6,9 +6,9 @@
   "author": "",
   "private": true,
   "dependencies": {
-    "polymer": "Polymer/polymer#latest",
-    "core-elements": "Polymer/core-elements#^0.5",
-    "paper-elements": "Polymer/paper-elements#^0.5",
+    "polymer": "Polymer/polymer#0.5.4",
+    "core-elements": "Polymer/core-elements#0.5.4",
+    "paper-elements": "Polymer/paper-elements#0.5.4",
     "bootstrap": "~3.3.2",
     "font-awesome-polymer-icons": "~4.2.0-b2",
     "lorem-element": "~0.0.1",
