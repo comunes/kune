@@ -1517,9 +1517,13 @@
           right: {{xsmall ? 0 : 0}}px;
           top: {{xsmall ? 270 : small? 280: 310}}px;
           position: absolute;
-          z-index:  {{xsmall ? 1 : inherit}};
+          z-index:  {{xsmall ? 1 : auto}};
         }
 
+        #group_tools_toolbar .k-drop-allowed {
+          border-right: none !important;
+        }
+        
         #group_tools_toolbar paper-fab {
           color: grey;
           background-color: transparent;
