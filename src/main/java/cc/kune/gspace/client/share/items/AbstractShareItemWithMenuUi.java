@@ -59,8 +59,8 @@ public abstract class AbstractShareItemWithMenuUi extends AbstractShareItemUi {
     // myself permission)
     menu.setEnabled(!descriptor.isMe());
     if (!descriptor.isMe()) {
-      menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
-          ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", " + ActionStyles.SHARE_ITEM_ACTIONS);
+      menu.withStyles(ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", "
+          + ActionStyles.SHARE_ITEM_ACTIONS);
     } else {
       menu.withStyles(ActionStyles.SHARE_ITEM_NO_ACTIONS);
     }

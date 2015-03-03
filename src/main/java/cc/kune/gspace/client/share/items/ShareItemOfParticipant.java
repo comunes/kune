@@ -70,21 +70,20 @@ public class ShareItemOfParticipant extends AbstractShareItemUi {
       withIcon(profile.getImageUrl());
       if (!creator) {
         final MenuDescriptor menu = new MenuDescriptor(I18n.tWithNT("is editor", "someone is editor"));
-        menu.withIcon(commonResources.arrowdownsitebarSmall()).withStyles(
-            ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
+        menu.withStyles(ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
         super.add(menu);
         final MenuItemDescriptor remove = new MenuItemDescriptor(menu, true,
             new AbstractExtendedAction() {
+          @Override
+          public void actionPerformed(final ActionEvent event) {
+            contentService.delParticipants(new SimpleCallback() {
               @Override
-              public void actionPerformed(final ActionEvent event) {
-                contentService.delParticipants(new SimpleCallback() {
-                  @Override
-                  public void onCallback() {
-                    onItemRemoved.onRemove(ShareItemOfParticipant.this);
-                  }
-                }, participant);
+              public void onCallback() {
+                onItemRemoved.onRemove(ShareItemOfParticipant.this);
               }
-            });
+            }, participant);
+          }
+        });
         remove.withText(I18n.t("Remove")).withIcon(res.del());
         super.add(remove);
       } else {

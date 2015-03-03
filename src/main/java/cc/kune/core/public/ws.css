@@ -1400,7 +1400,9 @@ div.k-shareitem div.k-iconlabel {
   max-width: 265px;
 }
 
+.k-share-item-actions .btn,
 .k-share-item-actions {
+  border: 0;
   color: #d45500;
   cursor: pointer;
   font-size: 11px;

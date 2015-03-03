@@ -35,7 +35,7 @@ public class ShareDialogMenuItem extends MenuItemDescriptor {
     super(shareAction);
     withText(I18n.t("More sharing options"));
     withIcon(icons.world());
-    withAddCondition(isInDevAddCondition);
+    // withAddCondition(isInDevAddCondition);
     setParent(menu, false);
   }
 

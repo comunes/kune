@@ -33,8 +33,7 @@ public abstract class AbstractShareItemWithMenu extends AbstractShareItemUi {
       final ClientFileDownloadUtils downloadUtils, final CommonResources res) {
     super(actionsPanel, downloadUtils);
     menu = new MenuDescriptor(menuTitle);
-    menu.withIcon(res.arrowdownsitebarSmall()).withStyles(
-        ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
+    menu.withStyles(ActionStyles.MENU_BTN_STYLE_NO_BORDER_RIGHT + ", k-share-item-actions");
     super.add(menu);
   }
 

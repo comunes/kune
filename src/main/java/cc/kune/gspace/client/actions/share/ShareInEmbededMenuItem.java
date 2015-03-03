@@ -42,7 +42,7 @@ import com.google.inject.Singleton;
 
 /**
  * The Class ShareInEmbededMenuItem.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ShareInEmbededMenuItem extends MenuItemDescriptor {
@@ -66,10 +66,10 @@ public class ShareInEmbededMenuItem extends MenuItemDescriptor {
           SessionInstance.get(), true));
       final Builder builder = new PromptTopDialog.Builder(EMBED_DIALOG_ID,
           I18n.t("Copy this code to your website"), true, false, I18n.getDirection(), new OnEnter() {
-            @Override
-            public void onEnter() {
-            }
-          });
+        @Override
+        public void onEnter() {
+        }
+      });
       builder.width("320px").height("120px").firstButtonTitle(I18n.t("Close")).firstButtonId(
           OK_BUTTON_ID);
       builder.promptLines(6).promptWidth(295);
@@ -92,7 +92,7 @@ public class ShareInEmbededMenuItem extends MenuItemDescriptor {
 
   /**
    * Instantiates a new share embed in other websites menu item.
-   * 
+   *
    * @param action
    *          the action
    * @param iconic
@@ -109,6 +109,6 @@ public class ShareInEmbededMenuItem extends MenuItemDescriptor {
       final ShareMenu menu, final IsInDevelopmentCondition isInDevAddCondition) {
     super(action);
     withText(I18n.t("Embed in other websites")).withIcon(iconic.embed()).withParent(menu, false);
-    withAddCondition(isInDevAddCondition);
+    // withAddCondition(isInDevAddCondition);
   }
 }
