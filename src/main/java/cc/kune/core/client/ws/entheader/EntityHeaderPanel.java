@@ -114,26 +114,27 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     followersBtn = (CoreIconButton) armor.getFollowersButton();
     eventBus.addHandler(GroupMembersUpdatedEvent.getType(),
         new GroupMembersUpdatedEvent.GroupMembersUpdatedHandler() {
-          @Override
-          public void onGroupMembersUpdated(final GroupMembersUpdatedEvent event) {
-            followersBtn.setText(I18n.t("[%d] members", event.getMembers()));
-          }
-        });
+      @Override
+      public void onGroupMembersUpdated(final GroupMembersUpdatedEvent event) {
+        final int members = event.getMembers();
+        followersBtn.setText(I18n.t(members == 1 ? "[%d] member" : "[%d] members", members));
+      }
+    });
     eventBus.addHandler(UserFollowersUpdatedEvent.getType(),
         new UserFollowersUpdatedEvent.UserFollowersUpdatedHandler() {
-          @Override
-          public void onUserFollowersUpdated(final UserFollowersUpdatedEvent event) {
-            final int followers = event.getFollowers();
-        // followersBtn.setText(I18n.t(followers == 1 ? "One follower" :
-        // "[%d] followers", followers));
-            followersBtn.setText(I18n.t(followers == 1 ? "One buddy" : "[%d] buddies", followers));
-          }
-        });
+      @Override
+      public void onUserFollowersUpdated(final UserFollowersUpdatedEvent event) {
+        final int followers = event.getFollowers();
+            // followersBtn.setText(I18n.t(followers == 1 ? "One follower" :
+            // "[%d] followers", followers));
+        followersBtn.setText(I18n.t(followers == 1 ? "One buddy" : "[%d] buddies", followers));
+      }
+    });
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #addAction(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
@@ -150,7 +151,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -160,7 +161,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setLogoImage(cc.kune.core.shared.dto.GroupDTO, boolean)
@@ -174,7 +175,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setLogoImageVisible(boolean)
@@ -187,7 +188,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setLogoText(java.lang.String)
@@ -201,7 +202,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setOnlineStatusGroup(java.lang.String)
@@ -213,7 +214,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setOnlineStatusVisible(boolean)
