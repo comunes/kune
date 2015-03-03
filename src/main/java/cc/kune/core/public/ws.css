@@ -1481,6 +1481,11 @@ input.k-sharelink-box {
   
 }
 
+/* tutorial iframer border in FF */
+paper-dialog div#scroller iframe {
+  border: 0;
+}
+
 /*
 #k_group_entity_toolbar > div  > div  > button:hover {
   background-color: transparent;
