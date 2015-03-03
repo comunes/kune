@@ -24,7 +24,6 @@
 package cc.kune.common.client.ui;
 
 import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.log.Log;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.DOM;
@@ -45,13 +44,11 @@ public class WrappedFlowPanel extends Composite implements InsertPanel.ForIsWidg
   }
 
   public static WrappedFlowPanel wrap(final String id) {
-    try {
-      final Element element = DOM.getElementById(id);
-      if (element == null) {
-        throw new UIException("Errow wrapping id " + id);
-      }
-      return wrap(element);
+    final Element element = DOM.getElementById(id);
+    if (element == null) {
+      throw new UIException("Errow wrapping id " + id);
     }
+    return wrap(element);
   }
   private final FlowPanel flow;
 
