@@ -68,7 +68,7 @@ public class BasicDragableThumb extends BasicThumb implements HasDragHandle {
    */
   @Override
   public Widget getDragHandle() {
-    return getImage();
+    return this;
   }
 
   /**
