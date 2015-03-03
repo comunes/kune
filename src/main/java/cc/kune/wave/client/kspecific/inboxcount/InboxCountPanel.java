@@ -70,7 +70,7 @@ public class InboxCountPanel extends Badge implements InboxCountView {
     setStylePrimaryName("k-space-sel-inbox-count");
     blinkAnimation = new BlinkAnimation(this, 400);
     tooltip = Tooltip.to(this, "Nothing");
-
+    setVisible(false);
     armor.wrapDiv(PolymerId.INBOX_SITEBAR_ICON_GROUP).add(this);
 
     addDomHandler(new ClickHandler() {
@@ -84,7 +84,7 @@ public class InboxCountPanel extends Badge implements InboxCountView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView
    * #blink()
@@ -96,7 +96,7 @@ public class InboxCountPanel extends Badge implements InboxCountView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView
    * #setTotal(int)
@@ -110,7 +110,7 @@ public class InboxCountPanel extends Badge implements InboxCountView {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView
    * #showCount(boolean)

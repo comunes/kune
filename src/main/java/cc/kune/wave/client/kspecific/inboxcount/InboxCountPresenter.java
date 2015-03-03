@@ -34,23 +34,23 @@ import cc.kune.core.client.events.SndClickEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
-import cc.kune.wave.client.kspecific.OnWaveClientStartEvent;
+import cc.kune.wave.client.kspecific.WaveClientProvider;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class InboxCountPresenter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class InboxCountPresenter {
 
   /**
    * The Interface InboxCountView.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface InboxCountView {
@@ -62,7 +62,7 @@ public class InboxCountPresenter {
 
     /**
      * Sets the total.
-     * 
+     *
      * @param total
      *          the new total
      */
@@ -70,7 +70,7 @@ public class InboxCountPresenter {
 
     /**
      * Show count.
-     * 
+     *
      * @param show
      *          the show
      */
@@ -100,7 +100,7 @@ public class InboxCountPresenter {
 
   /**
    * Instantiates a new inbox count presenter.
-   * 
+   *
    * @param view
    *          the view
    * @param session
@@ -109,7 +109,8 @@ public class InboxCountPresenter {
    *          the event bus
    */
   @Inject
-  public InboxCountPresenter(final InboxCountView view, final Session session, final EventBus eventBus) {
+  public InboxCountPresenter(final InboxCountView view, final Session session, final EventBus eventBus,
+      final WaveClientProvider waveView) {
     this.view = view;
     this.session = session;
     this.eventBus = eventBus;
@@ -162,20 +163,29 @@ public class InboxCountPresenter {
 
     };
 
-    eventBus.addHandler(OnWaveClientStartEvent.getType(),
-        new OnWaveClientStartEvent.OnWaveClientStartHandler() {
-          @Override
-          public void onOnWaveClientStart(final OnWaveClientStartEvent event) {
-            search = event.getView().getSearch();
-            search.addListener(searchListener);
-            update(search);
-          }
-        });
+    // eventBus.addHandler(OnWaveClientStartEvent.getType(),
+    // new OnWaveClientStartEvent.OnWaveClientStartHandler() {
+    // @Override
+    // public void onOnWaveClientStart(final OnWaveClientStartEvent event) {
+    // search = event.getView().getSearch();
+    // search.addListener(searchListener);
+    // update(search);
+    // }
+    // });
 
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-        view.showCount(event.isLogged());
+        final boolean logged = event.isLogged();
+        view.showCount(logged);
+        search = waveView.get().getSearch();
+        if (logged) {
+          search.addListener(searchListener);
+          update(search);
+        } else {
+          search.removeListener(searchListener);
+        }
+
       }
     });
 
@@ -198,7 +208,7 @@ public class InboxCountPresenter {
 
   /**
    * Sets the total.
-   * 
+   *
    * @param total
    *          the new total
    */
