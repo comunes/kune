@@ -23,6 +23,8 @@
 
 package cc.kune.wave.client;
 
+import static com.google.gwt.query.client.GQuery.$;
+
 import org.waveprotocol.box.webclient.search.SearchPanelRenderer;
 import org.waveprotocol.box.webclient.search.SearchPanelWidget;
 import org.waveprotocol.wave.client.events.ClientEvents;
@@ -69,6 +71,15 @@ public class CustomSearchPanelWidget extends SearchPanelWidget {
         // $(".org-waveprotocol-wave-client-widget-toolbar-buttons-HorizontalToolbarButtonWidget-Css-overlay").click();
       }
     });
+  }
+
+  @Override
+  protected void onAttach() {
+    super.onAttach();
+    // FIXME Dirty workaround while we improve the Wave integration
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-search").hide();
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-toolbar").hide();
+    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-list").css("top", "0px");
   }
 
 }

@@ -212,6 +212,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
   protected void initWaveClientIfNeeded() {
     if (channel == null) {
       super.initWaveClientIfNeeded();
+      dropController.init(waveHolder);
       stateManager.addBeforeStateChangeListener(new BeforeActionListener() {
         @Override
         public boolean beforeAction() {

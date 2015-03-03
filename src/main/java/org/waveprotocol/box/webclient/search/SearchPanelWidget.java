@@ -21,8 +21,6 @@
 
 package org.waveprotocol.box.webclient.search;
 
-import static com.google.gwt.query.client.GQuery.$;
-
 import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 import org.waveprotocol.wave.client.common.util.LinkedSequence;
 import org.waveprotocol.wave.client.uibuilder.BuilderHelper;
@@ -65,11 +63,13 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Singleton;
 /**
  * View interface for the search panel.
  *
  * @author hearnden@google.com (David Hearnden)
  */
+@Singleton
 public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   interface Binder extends UiBinder<FocusPanel, SearchPanelWidget> {
@@ -180,11 +180,7 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
         handleShowMoreClicked();
       }
     });
-    
-    // FIXME Dirty workaround while we improve the Wave integration
-    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-search").hide();
-    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-toolbar").hide();
-    $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-list").css("top", "0px");
+
   }
 
   @Override

@@ -22,6 +22,10 @@
  */
 package cc.kune.gspace.client.viewers;
 
+import org.waveprotocol.box.webclient.search.DragableParticipant;
+
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.dnd.AbstractDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -39,7 +43,7 @@ import com.google.inject.Singleton;
 /**
  * The Class ContentDropController is used to allow the drop of users as
  * participants to waves.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -53,7 +57,7 @@ public class ContentDropController extends AbstractDropController {
 
   /**
    * Instantiates a new content drop controller.
-   * 
+   *
    * @param dragController
    *          the drag controller
    * @param contentService
@@ -70,9 +74,19 @@ public class ContentDropController extends AbstractDropController {
     registerType(BasicDragableThumb.class);
   }
 
+  private void addParticipant(final String participant) {
+    contentService.addParticipant(session.getUserHash(), (StateToken) getTarget(), participant,
+        new AsyncCallbackSimple<Boolean>() {
+      @Override
+      public void onSuccess(final Boolean result) {
+        NotifyUser.info(I18n.t("Participant added"));
+      }
+    });
+  }
+
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.dnd.AbstractDropController#onDropAllowed(com.google
    * .gwt.user.client.ui.Widget,
@@ -80,18 +94,19 @@ public class ContentDropController extends AbstractDropController {
    */
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
-    final BasicDragableThumb thumb = (BasicDragableThumb) widget;
-    contentService.addParticipant(session.getUserHash(), (StateToken) getTarget(),
-        thumb.getToken().getGroup(), new AsyncCallbackSimple<Boolean>() {
-          @Override
-          public void onSuccess(final Boolean result) {
-          }
-        });
+    if (widget instanceof BasicDragableThumb) {
+      final BasicDragableThumb thumb = (BasicDragableThumb) widget;
+      final String participant = thumb.getToken().getGroup();
+      addParticipant(participant);
+    } else if (widget instanceof DragableParticipant) {
+      final DragableParticipant participant = (DragableParticipant) widget;
+      addParticipant(participant.getAddress());
+    }
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.dnd.AbstractDropController#onGroupDropFinished(com.
    * allen_sauer.gwt.dnd.client.drop.SimpleDropController)

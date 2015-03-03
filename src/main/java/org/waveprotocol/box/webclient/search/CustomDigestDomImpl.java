@@ -156,8 +156,8 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
           // if not, the servelt returns a 1x1 transparent pixel, so the wave can be dragged to a folder publish it.
           dragController.makeDraggable(CustomDigestDomImpl.this, title);
           dragController.makeDraggable(CustomDigestDomImpl.this, snippet);
-          if (SessionInstance.get().isNewbie())
-            tooltip.setText(I18n.t("Drag and drop into a group or personal folder to publish"));
+          // if (SessionInstance.get().isNewbie())
+          tooltip.setText(I18n.t("Drag and drop into a group or personal folder to publish"));
         }        
         groupAvatar.setSize("41px","41px");
       }
@@ -229,10 +229,15 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     final LinkedList<IsWidget> names = new LinkedList<IsWidget>();
     for (final Profile profile : profiles) {
       final String imageUrl = profile.getImageUrl();
+      String address = profile.getAddress();
+      
       final Widget avatar = imageUrl.contains("iniavatars")?
-          new InitialLabel(profile.getAddress()) : new Image(imageUrl);
+          new InitialLabel(address) : new Image(imageUrl);
           Tooltip.to(avatar,profile.getFullName());
 
+          // FIXME: seems that this not work for some reason. Maybe some work should be done in AvatarComposite
+          // new DragableImageParticipant(imageUrl, address)
+          
           // FIXME: Last connected?
           // Try to use MediumAvatarDecorator or similar
           names.add(avatar);
