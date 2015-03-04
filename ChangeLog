@@ -1,4 +1,631 @@
+2015-03-04  vjrj  <vjrj@ourproject.org>
+
+	Updated copyrights
+
+	Minor fixed test
+
+	Shared items Ui issues. Removed from development UI
+
+	Removed some unchecked exception
+
+	Member/members plurar
+
+	Removed some unchecked exception
+
+	Wayport improved. Minor css change
+
+	Tutorial css issue in ff
+
+	Minor fix in Inbox count
+
+2015-03-03  vjrj  <vjrj@ourproject.org>
+
+	Playing with d&d in search panel
+
+	Trying to fix bower versions
+
+	Removed invalid z-index. Remove border in d&d
+
+	Fix thumb dragging
+
+	Fixes to make embed panel to work again
+
+2015-03-02  vjrj  <vjrj@ourproject.org>
+
+	Improved language selector
+
+	Client tools actions reordering
+
+	Changed address with proper alias name
+
+	Show tutorial for tool
+
+	Css no ophuscated while beta
+
+	Set group name please, always
+
+	Changed log level
+
+	Changed join icon
+
+	Sitebar links in xsmall
+
+	Added new mask based on paper mask
+
+	Some refactor. FF fixes
+
+	Chat logins now only with userhash
+
+	Moved translator to languages menu
+
+	Improved general error message
+
+	Show menu at position
+
+	Sometimes the parent menu hide fails
+
+	Removed dev warn
+
+	Chat logins now only with userhash
+
+	Minor fixes in event tool
+
+	Some changes in transactions
+
+2015-03-01  vjrj  <vjrj@ourproject.org>
+
+	Several fixes in buttons & menus
+
+	Home space improved
+
+2015-02-28  vjrj  <vjrj@ourproject.org>
+
+	Some htmllint. More work with initial spinner
+
+	More work with new UI
+
+2015-02-25  vjrj  <vjrj@ourproject.org>
+
+	Chat show/hide. Feedback btn moved. Theme minor fix
+
+2015-02-24  vjrj  <vjrj@ourproject.org>
+
+	Theme selection added again
+
+2015-02-23  vjrj  <vjrj@ourproject.org>
+
+	Several fixes in dialogs
+
+	Not visible on init
+
+	Minor style changes
+
+	Changed old buttons
+
+	Fix charset security issue in chrome
+
+2015-02-22  vjrj  <vjrj@ourproject.org>
+
+	Several fixes with new UI
+
+2015-02-21  vjrj  <vjrj@ourproject.org>
+
+	More work with UI rewritten
+
+2015-02-20  vjrj  <vjrj@ourproject.org>
+
+	More work with UI rewritten
+
+2015-02-18  vjrj  <vjrj@ourproject.org>
+
+	Minor refactorization
+
+	Chat icon animations
+
+	Sitebar actions reorder and some fix in search
+
+	Trying to show tutorials
+
+	Edit tools not visible in folders
+
+	Tools now not are floating
+
+	Your groups paper btn
+
+	Updated styles and chat icons
+
+	Opening waves in different space are consistent
+
+2015-02-17  vjrj  <vjrj@ourproject.org>
+
+	Hide reply button instead of remove
+
+	Scrollbar issues (WIP)
+
+	Fixed style in chat status. Show chat when presence changed
+
+	Chat status sitebar menu fixed
+
+2015-02-16  vjrj  <vjrj@ourproject.org>
+
+	Added chat icon to sitebar
+
+	Removed old wave scroll panel
+
+	Drawer smaller
+
+	Fix for avatar chat notifications
+
+	Remove edit links (instead of hide)
+
+	Fix for wave navigation. Added close drawer
+
+	Some fixes in menus, progress indicator & toolselectors
+
+2015-02-15  vjrj  <vjrj@ourproject.org>
+
+	More work adding bootstrap+polymer
+
+2015-02-14  vjrj  <vjrj@ourproject.org>
+
+	More work adding bootstrap+polymer
+
+2015-02-12  vjrj  <vjrj@ourproject.org>
+
+	Fixed group back image
+
+	More work adding bootstrap+polymer
+
+2015-02-09  vjrj  <vjrj@ourproject.org>
+
+	Added AutoDerived
+
+	Remove downloading messages from mvn output
+
+	First works with polymer
+
+2015-01-30  vjrj  <vjrj@ourproject.org>
+
+	KuneIcon is now an enum
+
+	More work adding bootstrap
+
+2015-01-29  vjrj  <vjrj@ourproject.org>
+
+	Updated kune ttf font
+
+	Added aria attribute
+
+2015-01-27  vjrj  <vjrj@ourproject.org>
+
+	More work with gwtbootstrap3 (wip)
+
+2015-01-26  vjrj  <vjrj@ourproject.org>
+
+	More work with gwtbootstrap3 (wip)
+
+2015-01-25  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	More work with gwtbootstrap3 (wip)
+
+	More work with gwtbootstrap3 (wip)
+
+2015-01-24  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	More work with gwtbootstrap3 (wip)
+
+	More work with gwtbootstrap3 (wip)
+
+	More work with gwtbootstrap3 (wip)
+
+	More work with gwtbootstrap3 (wip)
+
+2015-01-23  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	More work with gwtbootstrap3 (wip)
+
+	More work with gwtbootstrap3 (wip)
+
+	More work with gwtbootstrap3 (wip)
+
+2015-01-18  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	More work with gwtbootstrap3 (wip). Added smartmenus
+
+2015-01-15  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	More work with gwtbootstrap3 (wip)
+
+	Added lorem text utils
+
+2015-01-07  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Added growl messages
+
+2015-01-06  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Added gwtbootstrap3 (wip)
+
+	Added gwtbootstrap3
+
+2015-01-05  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Minor refactorization
+
+	Updated subprojects classpath
+
+	Updated subprojects classpath
+
+2015-01-01  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Fix some gadget broken urls
+
+2014-12-22  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Debian default/kune minor change
+
+	Fixed exception when load kune in inbox (in a wave) and you try to set your prefs. Fix #587
+
+	Fixed exception when load kune in inbox (in a wave) and you try to set your prefs. Fix #587
+
+	More work in #586
+
+	Wave profiles should take into account avatars modifications, fixed #397
+
+2014-12-21  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Avatar and backgrounds are shown in preferences. Solved cache issues when updated. Fix for #548 and #586
+
+	Avatar and backgrounds are shown in preferences. Solved cache issues when updated. Fix for #548 and #586
+
+	Fixed button message in change back
+
+	Add new spinner gif missing in previous commit
+
+	Logo and background uploading rewrited with image drag/drop.
+
+	Changed spinner image
+
+	Logo and background uploading rewrited with image drag/drop (wip)
+
+2014-12-20  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Sandbox updated
+
+2014-12-17  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Return a white png background instead of 404
+
+	Revert "Added upload css"
+	This reverts commit cbd547de1cc300285576751d199e2ab77b63ae44.
+
+	Added upload css
+
+	Removed unused interface
+
+	Fix inject error in embed
+
+2014-12-16  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Some works trying to prevent logos recently changed caching
+
+	Improved jetty server gracefully shutdown
+
+2014-12-15  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Trying to fix #544
+
+	Added force start to init script
+
+	Fix M2_VARIABLE repo in launchers
+
+	Added maven3 dep
+
+2014-12-14  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Fix gwtupload error in servlet
+
+	Fix gwtupload error with ie10
+
+	Fixed 'ie19' agent
+
+	Removed ie6 agent
+
+	Fix typo in production configuration
+
+	Ignored client side strings test in server side
+
+2014-12-13  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Improved superdev lauchers
+
+	More work in embed & Cors
+
+	Fixed some wrong Eventbus import
+
+	Moving resources following gwt 2.7 warnings
+
+	Updated changelog
+
+	Added some wave access violation exception
+
+	Updated to gwtp 1 without errors. Embed is not using gwtp and it's in other module
+
+2014-12-12  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Removed unused presenter
+
+2014-12-08  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Removed unused import
+
+2014-12-07  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Catch not found user in profile fetcher
+
+	Added new wave servlets to Kune servlet managen exclusion list
+
+	Removed chat from boot (or trying to
+
+	Removed warning of unused variable
+
+	Added emite autoconfig as dependency for proper configuration
+
+	Improved lauchers for gwt 2.7 with debug
+
+	Some fixes for gwt 2.7
+
+2014-12-06  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Playing with gwt 2.7
+
+2014-12-05  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	New wave version and gwt 2.6.1 (round 2, WIP)
+
+2014-12-04  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Disable remote logging in dev mode
+
+	Updated supedev to 2.6.1. Fix gwt classpath order issue
+
+2014-12-03  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Replaced deprecated EventBus
+
+	New wave version and gwt 2.6.1 (round 1)
+
+2014-11-03  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Not using smack-java-4.1.0-alpha1 SNAPSHOT
+
+	Refactoring smack Base64
+
+	Improve xmpp server exceptions
+
+2014-09-05  Florian Schmaus  <flo@geekplace.eu>
+
+	Remove .classpath from VCS
+	as it's automatically generated by "mvn eclipse:eclipse"
+
+	Switch to Smack 4.1-SNAPSHOT
+
+2014-07-23  vjrj  <vjrj@ourproject.org>
+
+	English updated thanks to Hector Cartagena
+
+	Fix for #585
+
+2014-06-24  vjrj  <vjrj@ourproject.org>
+
+	Pretty compile gwt for find bugs
+
+2014-05-01  Antonio Tenorio Fornés  <antoniotenorio@ucm.es>
+
+	Inbox messages cleared on logout
+
+2014-04-10  vjrj  <vjrj@ourproject.org>
+
+	Gadget proxy fixed, thanks to @pablojan for its comments
+
+	Merge branch 'master' of gitorious.org:kune/trunk
+
+2014-04-09  pablojan  <pablojan@pablojan@gmail.com>
+
+	Fix gwt-gadget dependecy version
+
+2014-04-07  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Debian changelog
+
+	More comments
+
+	Fixed openfire auth. Update core to Java 1.7. kune openfire svn repo imported
+
+2014-04-06  vjrj  <vjrj@ourproject.org>
+
+	Changelog updated
+
+	Merge branch 'master' of gitorious.org:kune/trunk
+
+	Remove duplicate interceptor
+
+	Merge branch 'master' into transactionsFixWithInitials
+
+	Fix for #582
+
+	Add Test interceptor to child
+
+	HasId in ParticipantEntity
+
+	Child injector interception testers
+
+2014-04-03  pablojan  <pablojan@pablojan@gmail.com>
+
+	Merge with gadget sample GWT upgrade
+
+2014-03-27  pablojan  <pablojan@pablojan@gmail.com>
+
+	Gadget sample upgrade to GWT 2.5.1
+
+2014-03-27  vjrj  <vjrj@ourproject.org>
+
+	Register servlet disabled. Partial #577
+
+	Separate normal dev mode profile from embed dev mode
+
+	Added command line option
+
+2014-03-26  vjrj  <vjrj@ourproject.org>
+
+	Trying to compile with ie9
+
+	Shutdown TODO
+
+	Fixed faulty test
+
+	Wave updated. Jetty updated to 9.1.1. New initials avatars
+
+2014-03-25  vjrj  <vjrj@ourproject.org>
+
+	Added ie10 to Production
+
+	Preparing white list for supedev
+
+	Make public method in PartUtils
+
+	Remove unused classes
+
+	Delete unrestorable sessions
+
+2014-03-08  vjrj  <vjrj@ourproject.org>
+
+	Renaming and refactoring of entry ws*.html
+
+2014-03-07  vjrj  <vjrj@ourproject.org>
+
+	Added an embed doc action to Share menu (#561)
+
+	Added an embed doc action to Share menu (#561)
+
+	Added a embDevelopment profile just for compile the embeded module
+
+	Some fixes and improvements for #561
+
+	Improve dev gwt compile speed
+
+	Improved digg icon
+
+	Dev mode added and documented. Remove ar from dev languages
+
+	Update gwt-maven plugin to 2.5.1
+
+2014-03-06  vjrj  <vjrj@ourproject.org>
+
+	Removed symbolmap packaging
+
+	Several fixes for #561
+
+	Fix in test removing double //
+
+	Slash minor bug in #561
+
+	Some broked test fixed for #550
+
+	Fix for lists subscriptors group list mode. Removed singleton for list and admin members (#550)
+
+2014-03-05  vjrj  <vjrj@ourproject.org>
+
+	Add 'Show in ui devel features' property and Mbean (fixed small typo)
+
+	Add 'Show in ui devel features' property and Mbean
+
+	Several bug fixes for #550
+
+	Removed deprecated elements in #550
+
+	Share dialog menuitem and List configure dialog separated (#550)
+
+	Some improvements for participants in share dialog (#550)
+
+	Share menu renamed. Avoid refreshing state with visibility changes
+
+	Share actions reordering
+
+	Wiki pages editable but also not editable share menu item
+
+	Re-enable share buttons additionaly to #550
+
+	Minor fix in share button (#550)
+
+	Some share in icons more clear
+
+	Some more share in social network options (closes #391, and more work in #550)
+
+2014-02-26  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	.gitignore updated
+
+	Improved web.xml and SearchEngineServletFilter.java documentation
+
+2014-02-18  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Local link interception enabled (closes #366)
+
+	Removed debug info in embed compilation
+
+	New deb version
+
+	Fix the avatar urls in the content of embed panel
+
+	Added comment to *gwt.xml. More stack info in Embeded
+
+2014-02-14  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Invite kune users to groups/list. Partial work for enhancement #467 (Thanks to Antonio Tenorio Fornés)
+	Review: http://reviews.comunes.org/r/23/
+
+2014-01-28  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Added copyright to files without copyright. Correct old dates in copyrights
+
+2014-01-19  pablojan  <pablojan@pablojan@gmail.com>
+
+	Merge branch 'wave-db-indexer-fix'
+
+2014-01-16  pablojan  <pablojan@pablojan@gmail.com>
+
+	#571, #572 Fixes
+
+2014-01-13  vjrj  <vjrj@ourproject.org>
+
+	Added content refresh after share dialog action
+
+	Better wave perms in share dialog
+
+	Share to net visible or not on action
+
+	List visibility in menu button
+
+	Share dialog resized
+
+	Improved share menu icons, showing visible status
+
+	Change not shared to world icon
+
+	Close share dialog on space change
+
+2014-01-04  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	More actions for #550
+
 2014-01-03  Vicente J. Ruiz Jurado  <vjrj@ourproject.org>
+
+	Remove Override because compilation fails
+
+	More copyrights dates to 2014
+
+	Changelog updated
 
 	Clean-up and format
 
