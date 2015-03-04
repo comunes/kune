@@ -617,8 +617,9 @@ public class WebClient extends Composite implements WaveClientView {
             // Not a group content
             SpaceSelectEvent.fire(eventBus, Space.userSpace);
             if (currentOpenedWaveUri.equals(waveUri)) { 
-              // Trying to open twice, skip...
+              // Trying to open twice, skip for the first time...
               cc.kune.common.client.log.Log.info("Trying to open the same wave twice");
+              currentOpenedWaveUri = null;
               return;
             }
               else
@@ -649,6 +650,8 @@ public class WebClient extends Composite implements WaveClientView {
             if (PolymerUtils.isXSmall() || PolymerUtils.isMainDrawerNarrow())
               PolymerUtils.setNarrowVisible(false);
             
+            // We can now open again the same wave without errors
+            currentOpenedWaveUri = null;
             final String encodedToken = HistoryUtils.undoHashbang(History.getToken());
             // Kune patch
             if (encodedToken != null && !encodedToken.isEmpty() && 
