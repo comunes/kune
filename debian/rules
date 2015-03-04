@@ -39,7 +39,7 @@ build/kune::
 
 # mvn assembly:assembly -Dgwt.compiler.skip=$(NO_GWT) -P production
   # FIXME bower as build dep
-  (cd $(CURDIR)/src/main/webapp/; bower update)
+	(cd $(CURDIR)/src/main/webapp/; bower update)
 
 
 binary-indep: build install/kune
