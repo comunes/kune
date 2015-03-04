@@ -1,6 +1,10 @@
 /*
- * Copyright (C) 2007-2014 The kune development team (see CREDITS for details)
- * This file is part of kune.
+ *
+ * Copyright (C) 2007-2015 Licensed to the Comunes Association (CA) under
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
+ * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -16,6 +20,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
+
 package cc.kune.common.client.utils;
 
 import com.google.gwt.user.client.Window;
@@ -24,7 +29,7 @@ public class WindowUtils {
 
   /**
    * https://developer.mozilla.org/en/DOM/window.location
-   * 
+   *
    * @param newUrl
    */
   public static native void changeHref(String newUrl) /*-{
@@ -33,9 +38,9 @@ public class WindowUtils {
 
   /**
    * https://developer.mozilla.org/en/DOM/window.location
-   * 
+   *
    * "If you need to change pathname but keep the hash as is, use the replace() method instead, which should work consistently across browsers."
-   * 
+   *
    * @param newUrl
    */
   public static void changeHrefKeepHash(final String newUrl) {
@@ -55,7 +60,7 @@ public class WindowUtils {
 
   /**
    * sample: localhost:8080
-   * 
+   *
    * @return
    */
   public static String getHost() {
@@ -64,7 +69,7 @@ public class WindowUtils {
 
   /**
    * sample: localhost
-   * 
+   *
    * @return
    */
   public static String getHostName() {
@@ -84,7 +89,7 @@ public class WindowUtils {
 
   /**
    * sample: /ws/
-   * 
+   *
    * @return
    */
   public static String getPath() {
@@ -101,7 +106,7 @@ public class WindowUtils {
 
   /**
    * sample: ?locale=en&log_level=INFO
-   * 
+   *
    * @return
    */
   public static String getQueryString() {
