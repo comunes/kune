@@ -48,7 +48,6 @@ import cc.kune.polymer.client.PolymerUtils;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
@@ -277,6 +276,7 @@ public class SpaceSelectorPresenter extends
   }
 
   private void confDrawer(final Space space, final boolean logged) {
+    Log.warn("Configuring drawer: " + space + " is logged " + logged);
     getView().setNarrowVisible(NarrowManager.shouldNarrowBeVisible(logged, space));
     getView().setNarrowSwipeEnabled(NarrowManager.shouldNarrowSwipeBeEnabled(logged, space));
   }
@@ -336,7 +336,6 @@ public class SpaceSelectorPresenter extends
     // });
 
   }
-
 
   /**
    * On group btn click.
@@ -445,6 +444,7 @@ public class SpaceSelectorPresenter extends
   @ProxyEvent
   public void onSpaceSelect(final SpaceSelectEvent event) {
     final Space space = event.getSpace();
+    final boolean isFirstBoot = currentSpace == null;
     if (space != currentSpace) {
       final boolean restoreToken = event.shouldRestoreToken();
       switch (space) {
@@ -463,7 +463,11 @@ public class SpaceSelectorPresenter extends
       default:
         break;
       }
-      confDrawer(space, session.isLogged());
+      if (isFirstBoot && space == Space.groupSpace) {
+        confDrawer(null, session.isLogged());
+      } else {
+        confDrawer(space, session.isLogged());
+      }
     }
   }
 

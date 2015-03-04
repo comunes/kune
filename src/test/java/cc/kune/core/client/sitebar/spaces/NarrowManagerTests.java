@@ -39,7 +39,7 @@ public class NarrowManagerTests {
 
   @Test
   public void testBoot() {
-    assertFalse(NarrowManager.shouldNarrowSwipeBeEnabled(LOGGED, null));
+    assertTrue(NarrowManager.shouldNarrowSwipeBeEnabled(LOGGED, null));
     assertFalse(NarrowManager.shouldNarrowBeVisible(LOGGED, null));
   }
 

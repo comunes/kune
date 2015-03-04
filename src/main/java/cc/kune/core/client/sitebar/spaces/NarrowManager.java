@@ -32,14 +32,20 @@ package cc.kune.core.client.sitebar.spaces;
 public class NarrowManager {
 
   public static boolean shouldNarrowBeVisible(final boolean logged, final Space space) {
-    if (space == null || !logged || space.equals(Space.homeSpace)) {
+    if (space == null) {
+      return false;
+    }
+    if (!logged || space.equals(Space.homeSpace)) {
       return false;
     }
     return true;
   }
 
   public static boolean shouldNarrowSwipeBeEnabled(final boolean logged, final Space space) {
-    if (space == null || !logged) {
+    if (space == null) {
+      return true;
+    }
+    if (!logged) {
       return false;
     }
     return true;
