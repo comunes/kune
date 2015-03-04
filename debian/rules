@@ -38,8 +38,8 @@ kune-version:
 build/kune::
 
 # mvn assembly:assembly -Dgwt.compiler.skip=$(NO_GWT) -P production
-  # FIXME bower as build dep
-	(cd $(CURDIR)/src/main/webapp/; /usr/local/bin/bower update)
+# FIXME bower as build dep in the future
+#	(cd $(CURDIR)/src/main/webapp/; /usr/local/bin/bower update)
 
 
 binary-indep: build install/kune
