@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2014 Licensed to the Comunes Association (CA) under
+ * Copyright (C) 2007-2015 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -22,8 +22,7 @@
  */
 package cc.kune.core.shared.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -74,11 +73,11 @@ public class SharedFileDownloadUtilsTest {
   public void testGetLogoHtml() {
     for (final SharedFileDownloadUtils util : prefixUtils) {
       assertTrue(util.getLogoAvatarHtml(GROUP, false, false, 50, 5).contains(
-          "'http://example.org/others/defgroup.gif"));
+          "'http://example.org/others/defgroup.png"));
       assertTrue(
           util.getLogoAvatarHtml(GROUP, false, false, 50, 5),
           util.getLogoAvatarHtml(GROUP, false, false, 50, 5).contains(
-              "http://example.org/others/defgroup.gif"));
+              "http://example.org/others/defgroup.png"));
       assertTrue(
           util.getLogoAvatarHtml(GROUP, false, true, 50, 5),
           util.getLogoAvatarHtml(GROUP, false, true, 50, 5).contains(
