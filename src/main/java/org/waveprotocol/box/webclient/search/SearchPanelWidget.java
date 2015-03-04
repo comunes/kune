@@ -106,7 +106,7 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   /** Resources used by this widget. */
   interface Resources extends ClientBundle {
     /** CSS */
-    @Source("SearchPanel.css")
+    @Source("CustomSearchPanel.css")
     Css css();
 
     @Source("images/toolbar_empty.png")
@@ -257,6 +257,8 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
       target = target.getParentElement();
     }
   }
+
+
 
   private void handleShowMoreClicked() {
     if (listener != null) {

@@ -124,9 +124,6 @@ public class CustomEditToolbarImpl implements CustomEditToolbar {
     editInInbox.setVisible(visible);
     replyInGroup.setVisible(visible);
     replyInInbox.setVisible(visible);
-    // Dirty workaround while we hide all edit links
-
-    $(".org-waveprotocol-wave-client-wavepanel-view-dom-full-BlipViewBuilder-Css-menu").hide();
   }
 
   @Override
