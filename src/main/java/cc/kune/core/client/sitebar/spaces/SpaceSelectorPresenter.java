@@ -65,7 +65,7 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SpaceSelectorPresenter extends
-    Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> {
+Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.SpaceSelectorProxy> {
 
   /**
    * The Interface SpaceSelectorProxy.
@@ -276,7 +276,6 @@ public class SpaceSelectorPresenter extends
   }
 
   private void confDrawer(final Space space, final boolean logged) {
-    Log.warn("Configuring drawer: " + space + " is logged " + logged);
     getView().setNarrowVisible(NarrowManager.shouldNarrowBeVisible(logged, space));
     getView().setNarrowSwipeEnabled(NarrowManager.shouldNarrowSwipeBeEnabled(logged, space));
   }
@@ -464,6 +463,7 @@ public class SpaceSelectorPresenter extends
         break;
       }
       if (isFirstBoot && space == Space.groupSpace) {
+        // At boot, we prefer to not show the Inbox
         confDrawer(null, session.isLogged());
       } else {
         confDrawer(space, session.isLogged());
@@ -550,7 +550,7 @@ public class SpaceSelectorPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
