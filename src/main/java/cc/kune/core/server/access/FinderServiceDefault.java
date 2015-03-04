@@ -42,6 +42,7 @@ import cc.kune.domain.Group;
 import cc.kune.domain.Rate;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.ContentFinder;
+import cc.kune.wave.server.kspecific.WaveNameUtils;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -215,7 +216,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.server.access.FinderService#findByRootOnGroup(java.lang.String
    * , java.lang.String)
@@ -280,7 +281,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.server.access.FinderService#getContainer(java.lang.Long)
    */
   @Override
@@ -290,7 +291,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.server.access.FinderService#getContainer(java.lang.String)
    */
@@ -301,21 +302,19 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.server.access.FinderService#getContainerByWaveRef(java.lang
    * .String)
    */
   @Override
   public Content getContainerByWaveRef(final String waveRef) {
-    // FIXME get this from a wave constant
-    final String root = "/~/conv+root";
-    return contentFinder.findByWaveId(waveRef.endsWith("/~/conv+root") ? waveRef : waveRef + root);
+    return contentFinder.findByWaveId(WaveNameUtils.waveRefToRoot(waveRef));
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.server.access.FinderService#getContent(java.lang.Long)
    */
   @Override
@@ -329,7 +328,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.server.access.FinderService#getContent(java.lang.String)
    */
   @Override
@@ -339,7 +338,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.server.access.FinderService#getContentOrDefContent(cc.kune
    * .core.shared.domain.utils.StateToken, cc.kune.domain.Group)
@@ -367,9 +366,14 @@ public class FinderServiceDefault implements FinderService {
     }
   }
 
+  @Override
+  public Long getCountContentsByWaveRef(final String waveRef) {
+    return contentFinder.countByWaveId(WaveNameUtils.waveRefToRoot(waveRef));
+  }
+
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.server.access.FinderService#getFolder(java.lang.Long)
    */
   @Override
@@ -383,7 +387,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.server.access.FinderService#getRate(cc.kune.domain.User,
    * cc.kune.domain.Content)
    */
@@ -394,7 +398,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.server.access.FinderService#getRateAvg(cc.kune.domain.Content)
    */
@@ -406,7 +410,7 @@ public class FinderServiceDefault implements FinderService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.server.access.FinderService#getRateByUsers(cc.kune.domain.
    * Content)

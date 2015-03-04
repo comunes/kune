@@ -319,7 +319,6 @@ public class ChatClientDefault implements ChatClient {
     this.session = session;
     this.shorcutRegister = shorcutRegister;
     this.chatOptions = chatOptions;
-
     this.xmppSession = xmppSession;
     this.roster = roster;
     this.chatManager = chatManager;
@@ -512,6 +511,7 @@ public class ChatClientDefault implements ChatClient {
     createActionIfNeeded();
     createDialogIfNeeded();
     chatIcon.setVisible(true);
+    showDialog(false);
     login(chatOptions.useruri, chatOptions.passwd);
   }
 

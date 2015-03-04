@@ -47,7 +47,7 @@ public class BSMenuItemGui extends AbstractBSMenuItemGui {
         } catch (final ClassCastException e) {
           Log.error("Failed to close parent widget" + descriptor.getParent());
         }
-        clickHandlerChildDefautl.onClick(event);
+        clickHandlerChildDefault.onClick(event);
       }
     });
 

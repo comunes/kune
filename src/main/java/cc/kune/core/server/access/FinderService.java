@@ -34,7 +34,7 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface FinderService.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -42,7 +42,7 @@ public interface FinderService {
 
   /**
    * Find by root on group.
-   * 
+   *
    * @param groupName
    *          the group name
    * @param toolName
@@ -55,7 +55,7 @@ public interface FinderService {
 
   /**
    * Gets the container.
-   * 
+   *
    * @param folderId
    *          the folder id
    * @return the container
@@ -66,7 +66,7 @@ public interface FinderService {
 
   /**
    * Gets the container.
-   * 
+   *
    * @param folderId
    *          the folder id
    * @return the container
@@ -75,7 +75,7 @@ public interface FinderService {
 
   /**
    * Gets the container by wave ref.
-   * 
+   *
    * @param waveRef
    *          the wave ref
    * @return the container by wave ref
@@ -84,7 +84,7 @@ public interface FinderService {
 
   /**
    * Gets the content.
-   * 
+   *
    * @param contentId
    *          the content id
    * @return the content
@@ -95,7 +95,7 @@ public interface FinderService {
 
   /**
    * Gets the content.
-   * 
+   *
    * @param contentId
    *          the content id
    * @return the content
@@ -106,7 +106,7 @@ public interface FinderService {
 
   /**
    * Gets the content or def content.
-   * 
+   *
    * @param token
    *          the token
    * @param defaultGroup
@@ -117,9 +117,11 @@ public interface FinderService {
    */
   Content getContentOrDefContent(StateToken token, Group defaultGroup) throws DefaultException;
 
+  Long getCountContentsByWaveRef(String waveRef);
+
   /**
    * Gets the folder.
-   * 
+   *
    * @param folderId
    *          the folder id
    * @return the folder
@@ -130,7 +132,7 @@ public interface FinderService {
 
   /**
    * Gets the rate.
-   * 
+   *
    * @param user
    *          the user
    * @param content
@@ -141,7 +143,7 @@ public interface FinderService {
 
   /**
    * Gets the rate avg.
-   * 
+   *
    * @param content
    *          the content
    * @return the rate avg
@@ -150,7 +152,7 @@ public interface FinderService {
 
   /**
    * Gets the rate by users.
-   * 
+   *
    * @param content
    *          the content
    * @return the rate by users

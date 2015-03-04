@@ -65,6 +65,8 @@ public class FolderContainerDropController extends AbstractDropController {
   /** The i18n. */
   private final I18nTranslationService i18n;
 
+  private final InboxToContainerHelper inboxToContainerHelper;
+
   /** The session. */
   private final Session session;
 
@@ -92,8 +94,10 @@ public class FolderContainerDropController extends AbstractDropController {
   @Inject
   public FolderContainerDropController(final KuneDragController dragController,
       final ContentServiceAsync contentService, final Session session, final StateManager stateManager,
-      final ErrorHandler erroHandler, final I18nTranslationService i18n, final ContentCache contentCache) {
+      final ErrorHandler erroHandler, final I18nTranslationService i18n,
+      final ContentCache contentCache, final InboxToContainerHelper inboxToContainerHelper) {
     super(dragController);
+    this.inboxToContainerHelper = inboxToContainerHelper;
     registerType(FolderItemWidget.class);
     registerType(CustomDigestDomImpl.class);
     this.contentService = contentService;
@@ -175,6 +179,8 @@ public class FolderContainerDropController extends AbstractDropController {
       } else {
         notImplemented();
       }
+    } else if (widget instanceof CustomDigestDomImpl) {
+      inboxToContainerHelper.publish(widget, getTarget());
     } else {
       notImplemented();
     }

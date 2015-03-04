@@ -40,7 +40,7 @@ public abstract class AbstractChildGuiItem extends AbstractGuiItem {
   /** The child. */
   protected UIObject child;
 
-  protected ClickHandler clickHandlerChildDefautl = new ClickHandler() {
+  protected ClickHandler clickHandlerChildDefault = new ClickHandler() {
     @Override
     public void onClick(final ClickEvent event) {
       descriptor.fire(new ActionEvent(child, getTargetObjectOfAction(descriptor),

@@ -46,7 +46,7 @@ import com.google.wave.api.Participants;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ParticipantUtils.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -63,7 +63,7 @@ public class ParticipantUtils {
 
   /**
    * Instantiates a new participant utils.
-   * 
+   *
    * @param domain
    *          the domain
    * @param databaseProperties
@@ -80,7 +80,7 @@ public class ParticipantUtils {
 
   /**
    * Array from.
-   * 
+   *
    * @param parts
    *          the parts
    * @return the string[]
@@ -91,7 +91,7 @@ public class ParticipantUtils {
 
   /**
    * Array of participants but with lastParticipant at the end.
-   * 
+   *
    * @param parts
    *          the parts
    * @param lastParticipant
@@ -112,7 +112,7 @@ public class ParticipantUtils {
 
   /**
    * Gets the address name.
-   * 
+   *
    * @param address
    *          the address
    * @return the address name
@@ -124,7 +124,7 @@ public class ParticipantUtils {
 
   /**
    * Gets the at domain.
-   * 
+   *
    * @return the at domain
    */
   public String getAtDomain() {
@@ -136,7 +136,7 @@ public class ParticipantUtils {
 
   /**
    * Gets the domain.
-   * 
+   *
    * @return the domain
    */
   public String getDomain() {
@@ -145,7 +145,7 @@ public class ParticipantUtils {
 
   /**
    * Gets the public participant id.
-   * 
+   *
    * @return the public participant id
    */
   public ParticipantId getPublicParticipantId() {
@@ -154,7 +154,7 @@ public class ParticipantUtils {
 
   /**
    * Gets the super admin.
-   * 
+   *
    * @return the super admin
    */
   public ParticipantId getSuperAdmin() {
@@ -163,7 +163,7 @@ public class ParticipantUtils {
 
   /**
    * Checks if is local.
-   * 
+   *
    * @param address
    *          the address
    * @return true, if is local
@@ -174,7 +174,7 @@ public class ParticipantUtils {
 
   /**
    * List from.
-   * 
+   *
    * @param list
    *          the list
    * @return the participant id[]
@@ -189,7 +189,7 @@ public class ParticipantUtils {
 
   /**
    * List from.
-   * 
+   *
    * @param list
    *          the list
    * @return the participant id[]
@@ -205,7 +205,7 @@ public class ParticipantUtils {
 
   /**
    * List from.
-   * 
+   *
    * @param list
    *          the list
    * @return the participant id[]
@@ -220,7 +220,7 @@ public class ParticipantUtils {
 
   /**
    * Of.
-   * 
+   *
    * @param list
    *          the list
    * @return the participant id[]
@@ -231,7 +231,7 @@ public class ParticipantUtils {
 
   /**
    * Of.
-   * 
+   *
    * @param username
    *          the username
    * @return the participant id
@@ -242,7 +242,7 @@ public class ParticipantUtils {
 
   /**
    * Of.
-   * 
+   *
    * @param author
    *          the author
    * @param list
@@ -263,7 +263,7 @@ public class ParticipantUtils {
 
   /**
    * Of impl.
-   * 
+   *
    * @param username
    *          the username
    * @return the participant id

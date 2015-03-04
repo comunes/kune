@@ -35,14 +35,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ListsClientTool.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ListsClientTool extends FoldableAbstractClientTool {
 
   /**
    * Instantiates a new lists client tool.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param toolSelector
@@ -64,7 +64,7 @@ public class ListsClientTool extends FoldableAbstractClientTool {
     // registerAclEditableTypes();
     registerAuthorableTypes(TYPE_POST);
     registerDragableTypes();
-    registerDropableTypes(TYPE_POST);
+    registerDropableTypes(TYPE_LIST, TYPE_POST);
     registerPublishModerableTypes();
     registerRateableTypes(TYPE_POST);
     registerRenamableTypes(TYPE_LIST, TYPE_POST);

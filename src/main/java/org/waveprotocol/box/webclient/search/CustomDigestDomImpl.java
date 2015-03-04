@@ -1,4 +1,3 @@
-// @formatter:off
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -20,7 +19,6 @@
 
 package org.waveprotocol.box.webclient.search;
 
-
 import static cc.kune.polymer.client.Layout.*;
 
 import java.util.LinkedList;
@@ -32,12 +30,13 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.uibuilder.BuilderHelper;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
-import cc.kune.core.client.state.SessionInstance;
+import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.initials.AvatarComposite;
 import cc.kune.initials.AvatarCompositeFactory;
 import cc.kune.initials.InitialLabel;
@@ -100,9 +99,14 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   Element avatarsAndUnreadDiv;
   @UiField
   FlowPanel avatarsDiv;
+  /*
+   * When a wave is published we should ask for a group logo that skips the
+   * cache
+   */
+  private boolean cacheGroupLogo = true;
   private final SearchPanelWidget container;
   private final ClientFileDownloadUtils downUtils;
-  
+  private final KuneDragController dragController;
   @UiField
   Image groupAvatar;
   @UiField
@@ -115,6 +119,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   Element mainRight;
   @UiField
   InlineLabel msgs;
+  private final CoreResources res;
   private final Element self;
   @UiField
   InlineLabel snippet;
@@ -122,17 +127,15 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   InlineLabel time;
   @UiField
   InlineLabel title;
-
+  private final Tooltip tooltip;
   @UiField
   FlowPanel unreadDiv;
-
   private String waveUri;
 
-  private final CoreResources res;
-  private Tooltip tooltip;
-
-  public CustomDigestDomImpl(final SearchPanelWidget container, final KuneDragController dragController, final ClientFileDownloadUtils downUtils, CoreResources res) {
+  public CustomDigestDomImpl(final SearchPanelWidget container, final KuneDragController dragController,
+      final ClientFileDownloadUtils downUtils, final CoreResources res) {
     this.container = container;
+    this.dragController = dragController;
     this.downUtils = downUtils;
     this.res = res;
 
@@ -140,7 +143,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     self = this.getElement();
     self.setAttribute(BuilderHelper.KIND_ATTRIBUTE, "digest");
     self.setAttribute(DIGEST_ID_ATTRIBUTE, "D" + idCounter++);
-    
+
     PolymerUtils.addLayout(main, HORIZONTAL, LAYOUT, FLEX);
     PolymerUtils.addLayout(mainLeft, VERTICAL, LAYOUT);
     PolymerUtils.addLayout(mainRight, VERTICAL, LAYOUT, FLEX);
@@ -150,16 +153,20 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     groupAvatar.addLoadHandler(new LoadHandler() {
 
       @Override
-      public void onLoad(LoadEvent event) {
+      public void onLoad(final LoadEvent event) {
+
         if (groupAvatar.getWidth() == 1) {
           // If the server loads an avatar, is already published in a group.
-          // if not, the servelt returns a 1x1 transparent pixel, so the wave can be dragged to a folder publish it.
-          dragController.makeDraggable(CustomDigestDomImpl.this, title);
-          dragController.makeDraggable(CustomDigestDomImpl.this, snippet);
+          // if not, the servelt returns a 1x1 transparent pixel, so the wave
+          // can be dragged to a folder publish it.
+
           // if (SessionInstance.get().isNewbie())
           tooltip.setText(I18n.t("Drag and drop into a group or personal folder to publish"));
-        }        
-        groupAvatar.setSize("41px","41px");
+
+          // Note: see make not dragable below
+          makeDragable();
+        }
+        groupAvatar.setSize("41px", "41px");
       }
     });
   }
@@ -182,12 +189,32 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     return waveUri;
   }
 
+  private void makeDragable() {
+    dragController.makeDraggable(CustomDigestDomImpl.this, title);
+    dragController.makeDraggable(CustomDigestDomImpl.this, snippet);
+  }
+
+  public void makeNotDraggable() {
+    try {
+      dragController.makeNotDraggable(this);
+    } catch (final RuntimeException e) {
+      // gwt-dd don't have a way to check if some widget is dragable, and as
+      // this Digest are reusable, then sometimes are dragables when is not
+      // necessary
+      Log.debug("We tryied to remove a not (yet) dragable widget");
+    }
+  }
+
   @Override
   public void remove() {
     // TODO
     // self.removeFromParent();
     setVisible(false);
     container.onDigestRemoved(this);
+  }
+
+  public void removeTooltip() {
+    tooltip.setText("");
   }
 
   private SafeHtml renderReadMessages(final int total) {
@@ -215,8 +242,10 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     avatarsDiv.remove(0);
     msgs.setText("");
     self.removeClassName("k-digest-selected");
-    tooltip.setText("");
+    removeTooltip();
+    makeNotDraggable();
     setVisible(false);
+    cacheGroupLogo = true;
   }
 
   @Override
@@ -229,22 +258,29 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     final LinkedList<IsWidget> names = new LinkedList<IsWidget>();
     for (final Profile profile : profiles) {
       final String imageUrl = profile.getImageUrl();
-      String address = profile.getAddress();
-      
-      final Widget avatar = imageUrl.contains("iniavatars")?
-          new InitialLabel(address) : new Image(imageUrl);
-          Tooltip.to(avatar,profile.getFullName());
+      final String address = profile.getAddress();
 
-          // FIXME: seems that this not work for some reason. Maybe some work should be done in AvatarComposite
-          // new DragableImageParticipant(imageUrl, address)
-          
-          // FIXME: Last connected?
-          // Try to use MediumAvatarDecorator or similar
-          names.add(avatar);
+      final Widget avatar = imageUrl.contains("iniavatars") ? new InitialLabel(address) : new Image(
+          imageUrl);
+      Tooltip.to(avatar, profile.getFullName());
+
+      // FIXME: seems that this not work for some reason. Maybe some work should
+      // be done in AvatarComposite
+      // new DragableImageParticipant(imageUrl, address)
+
+      // FIXME: Last connected?
+      // Try to use MediumAvatarDecorator or similar
+      names.add(avatar);
     }
     final AvatarComposite composite = AvatarCompositeFactory.get40().build(names);
     composite.addStyleName("k-digest-avatar");
-    avatarsDiv.insert(composite,0);
+    avatarsDiv.insert(composite, 0);
+  }
+
+  public void setGroup(final GroupDTO group) {
+    // Now the get Logo by Uri should not be cached by the browser
+    cacheGroupLogo = false;
+    groupAvatar.setUrl(downUtils.getGroupLogo(group));
   }
 
   @Override
@@ -278,8 +314,8 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
 
   public void setWaveUri(final String waveUri) {
     this.waveUri = waveUri;
-    groupAvatar.setUrl(downUtils.getGroupLogoFromWaveUri(waveUri));
-  }
 
+    groupAvatar.setUrl(downUtils.getGroupLogoFromWaveUri(waveUri, cacheGroupLogo));
+  }
 
 }

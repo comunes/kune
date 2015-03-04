@@ -131,7 +131,7 @@ public class StateServiceDefault implements StateService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.server.state.StateService#create(cc.kune.domain.User,
    * cc.kune.domain.Container)
    */
@@ -155,12 +155,13 @@ public class StateServiceDefault implements StateService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.server.state.StateService#create(cc.kune.domain.User,
    * cc.kune.domain.Content)
    */
   @Override
   public StateContent create(final User userLogged, final Content content) {
+    // We retrieve that content building a State
     final StateContent state = new StateContent();
     final String typeId = content.getTypeId();
     state.setTypeId(typeId);
@@ -213,7 +214,7 @@ public class StateServiceDefault implements StateService {
           waveUrl = TextUtils.generateHtmlLink(
               "#"
                   + JavaWaverefEncoder.encodeToUriPathSegment(JavaWaverefEncoder.decodeWaveRefFromPath(waveRef)),
-                  waveRef, false);
+              waveRef, false);
         } catch (final InvalidWaveRefException invalidEx) {
         }
         state.setContent(i18n.t("Error accessing this document. "
@@ -247,7 +248,7 @@ public class StateServiceDefault implements StateService {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.server.state.StateService#createNoHome(cc.kune.domain.User,
    * java.lang.String)

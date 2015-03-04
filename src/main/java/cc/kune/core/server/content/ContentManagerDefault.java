@@ -43,6 +43,7 @@ import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.actions.xml.XMLWaveExtension;
 import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.ContentNotPermittedException;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.errors.I18nNotFoundException;
 import cc.kune.core.client.errors.MoveOnSameContainerException;
@@ -229,25 +230,32 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
       final Container container, final String typeId, final URL gadgetUrl,
       final Map<String, String> gadgetProperties, final String... otherParticipants) {
     FilenameUtils.checkBasicFilename(title);
-    final String newtitle = findInexistentTitle(container, title);
+    String newtitle = findInexistentTitle(container, title);
     final Content newContent = new Content();
     newContent.addAuthor(author);
     newContent.setLanguage(author.getLanguage());
     newContent.setTypeId(typeId);
     container.addContent(newContent);
     newContent.setContainer(container);
-    final Revision revision = new Revision(newContent);
-    revision.setTitle(newtitle);
-    // Duplicate in StateServiceDefault
+
+    // NOTE: See some related code in StateServiceDefault
     if (newContent.isWave()) {
       WaveRef waveRef;
       final String authorName = author.getShortName();
       if (publishExistingWave) {
-        if (!kuneWaveManager.getParticipants(waveRefToUse, authorName).contains(
-            participantUtils.of(authorName))) {
-          throw new AccessViolationException("This user is not author of the wave to publish");
+        final Participants participants = kuneWaveManager.getParticipants(waveRefToUse, authorName);
+
+        if (!participants.contains(participantUtils.of(authorName).getAddress())) {
+          LOG.debug("This user is not author of the wave to publish");
+          throw new ContentNotPermittedException();
+        }
+        if (finder.getCountContentsByWaveRef(JavaWaverefEncoder.encodeToUriPathSegment(waveRefToUse)) != 0) {
+          LOG.debug("This wave is already published");
+          throw new ContentNotPermittedException();
         }
         waveRef = waveRefToUse;
+        // We use the existing wave title
+        newtitle = kuneWaveManager.getTitle(waveRef, authorName);
       } else {
         final WaveRef newWaveRef = kuneWaveManager.createWave(newtitle, body, waveRefToUse,
             KuneWaveService.DO_NOTHING_CBACK, gadgetUrl, gadgetProperties,
@@ -257,6 +265,8 @@ public class ContentManagerDefault extends DefaultManager<Content, Long> impleme
       newContent.setWaveId(JavaWaverefEncoder.encodeToUriPathSegment(waveRef));
       newContent.setModifiedOn((new Date()).getTime());
     }
+    final Revision revision = new Revision(newContent);
+    revision.setTitle(newtitle);
     revision.setBody(body);
     newContent.addRevision(revision);
     return save(newContent);

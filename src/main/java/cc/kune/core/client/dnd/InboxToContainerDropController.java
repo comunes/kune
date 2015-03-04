@@ -24,20 +24,6 @@ package cc.kune.core.client.dnd;
 
 import org.waveprotocol.box.webclient.search.CustomDigestDomImpl;
 
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.errors.ErrorHandler;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.ContentServiceAsync;
-import cc.kune.core.client.state.ContentCache;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.client.state.StateManager;
-import cc.kune.core.shared.domain.utils.StateToken;
-import cc.kune.core.shared.dto.StateContentDTO;
-import cc.kune.gspace.client.viewers.items.FolderItemWidget;
-
-import com.allen_sauer.gwt.dnd.client.VetoDragException;
 import com.allen_sauer.gwt.dnd.client.drop.SimpleDropController;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -52,55 +38,14 @@ import com.google.inject.Singleton;
 @Singleton
 public class InboxToContainerDropController extends AbstractDropController {
 
-  private final ContentCache contentCache;
-  private final ContentServiceAsync contentService;
-  private final ErrorHandler erroHandler;
-  private final I18nTranslationService i18n;
-  private final Session session;
-  private final StateManager stateManager;
+  private final InboxToContainerHelper inboxToContainerHelper;
 
   @Inject
   public InboxToContainerDropController(final KuneDragController dragController,
-      final ContentServiceAsync contentService, final Session session, final StateManager stateManager,
-      final ErrorHandler erroHandler, final I18nTranslationService i18n, final ContentCache contentCache) {
+      final InboxToContainerHelper inboxToContainerHelper) {
     super(dragController);
+    this.inboxToContainerHelper = inboxToContainerHelper;
     registerType(CustomDigestDomImpl.class);
-    this.contentService = contentService;
-    this.session = session;
-    this.stateManager = stateManager;
-    this.erroHandler = erroHandler;
-    this.i18n = i18n;
-    this.contentCache = contentCache;
-  }
-
-  /**
-   * Move.
-   *
-   * @param widget
-   *          the widget
-   * @param destToken
-   *          the dest token
-   */
-  private void move(final Widget widget, final StateToken destToken) {
-    widget.removeFromParent();
-    final StateToken tokenToMove = ((FolderItemWidget) widget).getToken();
-    contentService.publishWave(session.getUserHash(), destToken, null, null,
-        ((CustomDigestDomImpl) widget).getWaveUri(), new AsyncCallbackSimple<StateContentDTO>() {
-          @Override
-          public void onSuccess(final StateContentDTO result) {
-            NotifyUser.hideProgress();
-            contentCache.remove(tokenToMove);
-            contentCache.remove(destToken);
-          }
-        });
-  }
-
-  /**
-   * Not implemented.
-   */
-  private void notImplemented() {
-    NotifyUser.info(i18n.t(TextUtils.IN_DEVELOPMENT));
-    NotifyUser.hideProgress();
   }
 
   /*
@@ -113,18 +58,27 @@ public class InboxToContainerDropController extends AbstractDropController {
    */
   @Override
   public void onDropAllowed(final Widget widget, final SimpleDropController dropController) {
-    dropController.getDropTarget().removeStyleName("k-drop-allowed-hover");
+    final Widget dropTarget = dropController.getDropTarget();
+    dropTarget.removeStyleName("k-drop-allowed-hover");
     if (widget instanceof CustomDigestDomImpl) {
-      notImplemented();
+      inboxToContainerHelper.publish(widget, getTarget());
     }
   }
 
-  @Override
-  public void onPreviewAllowed(final Widget widget, final SimpleDropController dropController)
-      throws VetoDragException {
-    if (session.isCurrentStateAContent()) {
-      throw new VetoDragException();
-    }
-    super.onPreviewAllowed(widget, dropController);
-  }
+  /*
+   * @Override public void onPreviewAllowed(final Widget widget, final
+   * SimpleDropController dropController) throws VetoDragException { if
+   * (session.isCurrentStateAContent()) { throw new VetoDragException(); }
+   * super.onPreviewAllowed(widget, dropController); }
+   */
+
+  /**
+   * Move.
+   *
+   * @param widget
+   *          the widget
+   * @param destToken
+   *          the dest token
+   */
+
 }

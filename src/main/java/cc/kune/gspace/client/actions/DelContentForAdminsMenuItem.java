@@ -66,7 +66,7 @@ public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -75,6 +75,7 @@ public class DelContentForAdminsMenuItem extends MenuItemDescriptor {
     public void actionPerformed(final ActionEvent event) {
       final Object target = event.getTarget();
       assert target != null : "Error in DelContent this item target is null";
+      assert target instanceof AbstractContentSimpleDTO : "Seems that the target is not correct setted";
       contentService.delContent(((AbstractContentSimpleDTO) target).getStateToken());
     }
 

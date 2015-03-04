@@ -258,19 +258,6 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     }
   }
 
-  @UiHandler("focus")
-  void handleDrag(final DragEvent e) {
-    final Element target = e.getNativeEvent().getEventTarget().cast();
-    final Element top = self.getElement();
-    while (!top.equals(target)) {
-      if ("digest".equals(target.getAttribute(BuilderHelper.KIND_ATTRIBUTE))) {
-        NotifyUser.important("We start to drag");
-        e.stopPropagation();
-        return;
-      }
-    }
-  }
-
   private void handleShowMoreClicked() {
     if (listener != null) {
       listener.onShowMoreClicked();

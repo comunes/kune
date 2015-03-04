@@ -40,7 +40,7 @@ public class BSToolbarItemGui extends AbstractBSChildGuiItem {
   public AbstractGuiItem create(final GuiActionDescrip descriptor) {
     super.descriptor = descriptor;
     item = new ComplexAnchorListItem();
-    item.addClickHandler(clickHandlerChildDefautl);
+    item.addClickHandler(clickHandlerChildDefault);
     if (descriptor.isChild()) {
       child = item;
     } else {

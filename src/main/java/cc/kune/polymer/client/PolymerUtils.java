@@ -34,7 +34,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class PolymerUtils {
 
-  public static Timer hideInboxTimer = new Timer() {
+  private static Timer hideInboxTimer = new Timer() {
     @Override
     public void run() {
       PolymerUtils.setMainSelected();

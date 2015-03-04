@@ -22,6 +22,8 @@
  */
 package cc.kune.core.shared.utils;
 
+import java.util.Date;
+
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.state.impl.HistoryUtils;
@@ -77,10 +79,11 @@ public abstract class SharedFileDownloadUtils {
                 + FileConstants.GROUP_NO_AVATAR_IMAGE);
   }
 
-  public String getGroupLogoFromWaveUri(final String fromWaveUri) {
+  public String getGroupLogoFromWaveUri(final String fromWaveUri, final boolean useCache) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.WAVE_URI,
-            URL.encodeQueryString(fromWaveUri)), new UrlParam(FileConstants.ONLY_USERS, false)).toString();
+            URL.encodeQueryString(fromWaveUri)), new UrlParam(FileConstants.ONLY_USERS, false))
+        + (useCache ? "" : UrlParam.noCacheStringSuffix(((Long) new Date().getTime()).toString()));
   }
 
   /**

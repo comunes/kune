@@ -86,8 +86,8 @@ public interface ContentService extends RemoteService {
               StateContainerDTO moveContent(String userHash, StateToken contentToken, StateToken newContainerToken)
                   throws DefaultException;
 
-              StateContentDTO publishWave(String userHash, StateToken parentToken, String title, String typeId,
-                  String waveUri) throws DefaultException;
+              StateContentDTO publishWave(String userHash, StateToken parentToken, String waveUri)
+                  throws DefaultException;
 
               StateContainerDTO purgeAll(String userHash, StateToken token);
 

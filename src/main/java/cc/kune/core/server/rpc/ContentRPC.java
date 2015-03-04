@@ -32,7 +32,9 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
+import cc.kune.blogs.shared.BlogsToolConstants;
 import cc.kune.chat.server.ChatManager;
+import cc.kune.common.client.errors.UIException;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.CannotDeleteDefaultContentException;
 import cc.kune.core.client.errors.ContainerNotEmptyException;
@@ -78,13 +80,18 @@ import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.StateEventContainerDTO;
 import cc.kune.core.shared.dto.StateNoContentDTO;
+import cc.kune.docs.shared.DocsToolConstants;
 import cc.kune.domain.AccessLists;
 import cc.kune.domain.Container;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.domain.User;
+import cc.kune.lists.shared.ListsToolConstants;
+import cc.kune.tasks.shared.TasksToolConstants;
 import cc.kune.trash.server.TrashServerUtils;
 import cc.kune.wave.server.kspecific.KuneWaveService;
+import cc.kune.wave.server.kspecific.WaveNameUtils;
+import cc.kune.wiki.shared.WikiToolConstants;
 
 import com.google.inject.Inject;
 
@@ -191,7 +198,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addAuthor(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -209,7 +216,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addContent(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String,
@@ -226,7 +233,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addFolder(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String,
@@ -246,7 +253,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addGadgetToContent(java.
    * lang.String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -265,7 +272,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addNewContentWithGadget(
    * java.lang.String, cc.kune.core.shared.domain.utils.StateToken,
@@ -277,14 +284,14 @@ public class ContentRPC implements ContentService, RPC {
   @KuneTransactional
   public StateContentDTO addNewContentWithGadget(final String userHash, final StateToken parentToken,
       final String gadgetname, final String typeId, final String title, final String body)
-      throws DefaultException {
+          throws DefaultException {
     return addNewContentWithGadgetAndState(userHash, parentToken, gadgetname, typeId, title, body,
         Collections.<String, String> emptyMap());
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addNewContentWithGadgetAndState
    * (java.lang.String, cc.kune.core.shared.domain.utils.StateToken,
@@ -308,7 +315,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addParticipant(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -326,7 +333,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addParticipants(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String,
@@ -346,7 +353,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#addRoom(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -363,7 +370,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#copyContent(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken,
@@ -398,12 +405,13 @@ public class ContentRPC implements ContentService, RPC {
    * @return the state content dto
    */
   private StateContentDTO createContent(final StateToken parentToken, final String title,
-      final String typeId, final WaveRef waveRed, final boolean publishExistingWave) {
+      final String typeId, final WaveRef waveRef, final boolean publishExistingWave) {
     final User user = getCurrentUser();
     final Container container = accessService.accessToContainer(
         ContentUtils.parseId(parentToken.getFolder()), user, AccessRol.Editor);
     final String body = "";
-    final Content addedContent = creationService.createContent(title, body, user, container, typeId);
+    final Content addedContent = creationService.createContent(title, body, user, container, typeId,
+        waveRef, publishExistingWave);
     return getState(user, addedContent);
   }
 
@@ -433,7 +441,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#delContent(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken)
@@ -462,7 +470,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#getContent(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken)
@@ -525,7 +533,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#getContentByWaveRef(java
    * .lang.String, java.lang.String)
@@ -647,7 +655,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#getSummaryTags(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken)
@@ -733,7 +741,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#moveContent(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken,
@@ -798,10 +806,31 @@ public class ContentRPC implements ContentService, RPC {
   @Authorizated(actionLevel = ActionLevel.container, accessRolRequired = AccessRol.Editor, mustCheckMembership = false)
   @KuneTransactional
   public StateContentDTO publishWave(final String userHash, final StateToken parentToken,
-      final String title, final String typeId, final String waveUri) throws DefaultException {
+      final String waveUri) throws DefaultException {
     try {
-      return createContent(parentToken, title, typeId,
-          JavaWaverefEncoder.decodeWaveRefFromPath(waveUri), true);
+      String typeId;
+
+      final Long containerId = ContentUtils.parseId(parentToken.getFolder());
+      final Container container = finderService.getContainer(containerId);
+      final String parentId = container.getTypeId();
+
+      if (parentId.equals(DocsToolConstants.TYPE_FOLDER) || parentId.equals(DocsToolConstants.TYPE_ROOT)) {
+        typeId = DocsToolConstants.TYPE_DOCUMENT;
+      } else if (parentId.equals(ListsToolConstants.TYPE_LIST)) {
+        typeId = ListsToolConstants.TYPE_POST;
+      } else if (parentId.equals(BlogsToolConstants.TYPE_BLOG)) {
+        typeId = BlogsToolConstants.TYPE_POST;
+      } else if (parentId.equals(TasksToolConstants.TYPE_ROOT)
+          || parentId.equals(TasksToolConstants.TYPE_FOLDER)) {
+        typeId = TasksToolConstants.TYPE_TASK;
+      } else if (parentId.equals(WikiToolConstants.TYPE_ROOT)
+          || parentId.equals(WikiToolConstants.TYPE_FOLDER)) {
+        typeId = WikiToolConstants.TYPE_WIKIPAGE;
+      } else {
+        throw new UIException("This is not allowed");
+      }
+      return createContent(parentToken, "Empty", typeId,
+          JavaWaverefEncoder.decodeWaveRefFromPath(WaveNameUtils.waveRefToRoot(waveUri)), true);
     } catch (final InvalidWaveRefException e) {
       throw new InvalidWaveUriException();
     }
@@ -809,7 +838,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#purgeAll(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken)
@@ -829,7 +858,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#purgeContent(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken)
@@ -853,7 +882,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#rateContent(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken, java.lang.Double)
@@ -876,7 +905,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#removeAuthor(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -894,7 +923,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#renameContainer(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -911,7 +940,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#renameContent(java.lang.
    * String, cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -1001,7 +1030,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#sendFeedback(java.lang.String
    * , java.lang.String, java.lang.String)
@@ -1017,7 +1046,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setAsDefaultContent(java
    * .lang.String, cc.kune.core.shared.domain.utils.StateToken)
@@ -1034,7 +1063,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setGadgetProperties(java
    * .lang.String, cc.kune.core.shared.domain.utils.StateToken,
@@ -1054,7 +1083,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setLanguage(java.lang.String
    * , cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -1072,7 +1101,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setPublishedOn(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken, java.util.Date)
@@ -1090,7 +1119,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setStatus(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken,
@@ -1113,7 +1142,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setStatusAsAdmin(java.lang
    * .String, cc.kune.core.shared.domain.utils.StateToken,
@@ -1146,7 +1175,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#setTags(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, java.lang.String)
@@ -1166,7 +1195,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#writeTo(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, boolean)
@@ -1191,7 +1220,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#writeTo(java.lang.String,
    * cc.kune.core.shared.domain.utils.StateToken, boolean, java.lang.String,
@@ -1208,7 +1237,7 @@ public class ContentRPC implements ContentService, RPC {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.ContentService#writeToParticipants(java
    * .lang.String, cc.kune.core.shared.domain.utils.StateToken)

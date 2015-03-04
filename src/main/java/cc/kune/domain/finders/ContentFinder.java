@@ -40,14 +40,14 @@ import com.google.inject.persist.finder.MaxResults;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface ContentFinder.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface ContentFinder {
 
   /**
    * All contents in user group.
-   * 
+   *
    * @param groupId
    *          the group id
    * @return the list
@@ -59,9 +59,12 @@ public interface ContentFinder {
       + "ORDER BY c.modifiedOn DESC", returnAs = ArrayList.class)
   public List<Content> allContentsInUserGroup(@Named("groupid") Long groupId);
 
+  @Finder(query = "SELECT count(*) FROM Content c WHERE waveId = :waveId")
+  public Long countByWaveId(@Named("waveId") final String waveId);
+
   /**
    * Find2 mime.
-   * 
+   *
    * @param groupShortName
    *          the group short name
    * @param title
@@ -84,7 +87,7 @@ public interface ContentFinder {
 
   /**
    * Find2 mime count.
-   * 
+   *
    * @param groupShortName
    *          the group short name
    * @param title
@@ -102,7 +105,7 @@ public interface ContentFinder {
 
   /**
    * Find by wave id.
-   * 
+   *
    * @param waveId
    *          the wave id
    * @return the content
@@ -112,7 +115,7 @@ public interface ContentFinder {
 
   /**
    * Find if exists title.
-   * 
+   *
    * @param container
    *          the container
    * @param title
@@ -125,7 +128,7 @@ public interface ContentFinder {
 
   /**
    * Find mime.
-   * 
+   *
    * @param groupShortName
    *          the group short name
    * @param title
@@ -145,7 +148,7 @@ public interface ContentFinder {
 
   /**
    * Find mime count.
-   * 
+   *
    * @param groupShortName
    *          the group short name
    * @param title
@@ -160,7 +163,7 @@ public interface ContentFinder {
 
   /**
    * Last modified contents.
-   * 
+   *
    * @param limit
    *          the limit
    * @param status
@@ -176,7 +179,7 @@ public interface ContentFinder {
 
   /**
    * Last modified contents in user group.
-   * 
+   *
    * @param limit
    *          the limit
    * @param groupId
