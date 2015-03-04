@@ -22,8 +22,6 @@
  */
 package cc.kune.core.shared.utils;
 
-import java.util.Date;
-
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.state.impl.HistoryUtils;
@@ -76,14 +74,14 @@ public abstract class SharedFileDownloadUtils {
         + (group.hasLogo() ? getLogoImageUrl(group.getShortName(),
             group.getLogoLastModifiedTime().toString())
             : group.isPersonal() ? getLogoImageUrl(group.getShortName()) : "/"
-                + FileConstants.GROUP_NO_AVATAR_IMAGE);
+            + FileConstants.GROUP_NO_AVATAR_IMAGE);
   }
 
-  public String getGroupLogoFromWaveUri(final String fromWaveUri, final boolean useCache) {
+  public String getGroupLogoFromWaveUri(final String fromWaveUri) {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.WAVE_URI,
             URL.encodeQueryString(fromWaveUri)), new UrlParam(FileConstants.ONLY_USERS, false))
-        + (useCache ? "" : UrlParam.noCacheStringSuffix(((Long) new Date().getTime()).toString()));
+        + noCacheSuffix(fromWaveUri);
   }
 
   /**
@@ -105,8 +103,8 @@ public abstract class SharedFileDownloadUtils {
       final boolean isPersonal, final int size, final int hvspace) {
     final String imgUrl = groupHasLogo ? getLogoImageUrl(groupName)
         : isPersonal ? getLogoImageUrl(groupName) : prefix + "/" + FileConstants.GROUP_NO_AVATAR_IMAGE;
-    return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
-        + "px; height: " + size + "px;' src='" + imgUrl + "'>";
+        return "<img hspace='" + hvspace + "' vspace='" + hvspace + "' align='left' style='width: " + size
+            + "px; height: " + size + "px;' src='" + imgUrl + "'>";
   }
 
   /**
@@ -133,7 +131,7 @@ public abstract class SharedFileDownloadUtils {
     return prefix
         + new Url(FileConstants.LOGODOWNLOADSERVLET, new UrlParam(FileConstants.TOKEN, groupName),
             new UrlParam(FileConstants.ONLY_USERS, false)).toString()
-        + UrlParam.noCacheStringSuffix(suffix);
+            + UrlParam.noCacheStringSuffix(suffix);
   }
 
   /**

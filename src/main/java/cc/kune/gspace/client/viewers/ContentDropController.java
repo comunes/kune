@@ -22,10 +22,10 @@
  */
 package cc.kune.gspace.client.viewers;
 
+import org.waveprotocol.box.webclient.search.DragableImageParticipant;
+import org.waveprotocol.box.webclient.search.DragableInitialParticipant;
 import org.waveprotocol.box.webclient.search.DragableParticipant;
 
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.dnd.AbstractDropController;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -72,6 +72,8 @@ public class ContentDropController extends AbstractDropController {
     this.contentService = contentService;
     this.session = session;
     registerType(BasicDragableThumb.class);
+    registerType(DragableImageParticipant.class);
+    registerType(DragableInitialParticipant.class);
   }
 
   private void addParticipant(final String participant) {
@@ -79,7 +81,8 @@ public class ContentDropController extends AbstractDropController {
         new AsyncCallbackSimple<Boolean>() {
       @Override
       public void onSuccess(final Boolean result) {
-        NotifyUser.info(I18n.t("Participant added"));
+        // This sometimes is very redundant as we see the participant added
+        // NotifyUser.info(I18n.t("Participant added"));
       }
     });
   }

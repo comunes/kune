@@ -34,6 +34,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContentDTO;
+import cc.kune.core.shared.utils.ChangedLogosRegistry;
 
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
@@ -43,34 +44,39 @@ import com.google.inject.Singleton;
 public class InboxToContainerHelper {
 
   private final ContentServiceAsync contentService;
+  private final ChangedLogosRegistry recentlyChanged;
   private final Session session;
   private final StateManager stateManager;
 
   @Inject
   public InboxToContainerHelper(final ContentServiceAsync contentService, final Session session,
-      final StateManager stateManager) {
+      final StateManager stateManager, final ChangedLogosRegistry recentlyChanged) {
     this.contentService = contentService;
     this.session = session;
     this.stateManager = stateManager;
+    this.recentlyChanged = recentlyChanged;
   }
 
   public void publish(final Widget widget, final Object target) {
     try {
       final StateToken destToken = (StateToken) target;
       final CustomDigestDomImpl digest = (CustomDigestDomImpl) widget;
-      contentService.publishWave(session.getUserHash(), destToken, digest.getWaveUri(),
+      final String waveUri = digest.getWaveUri();
+      contentService.publishWave(session.getUserHash(), destToken, waveUri,
           new AsyncCallbackSimple<StateContentDTO>() {
-            @Override
-            public void onSuccess(final StateContentDTO result) {
-              NotifyUser.hideProgress();
-              NotifyUser.success(I18n.t("Published"));
-              digest.setGroup(result.getGroup());
-              digest.makeNotDraggable();
-              digest.removeTooltip();
-              // contentCache.remove(destToken);
-              stateManager.setRetrievedStateAndGo(result);
-            }
-          });
+        @Override
+        public void onSuccess(final StateContentDTO result) {
+          NotifyUser.hideProgress();
+          NotifyUser.success(I18n.t("Published"));
+          digest.setGroup(result.getGroup());
+          digest.makeNotDraggable();
+          digest.removeTooltip();
+          // This prevents to use previous 1x1 logo
+          recentlyChanged.add(waveUri);
+          // contentCache.remove(destToken);
+          stateManager.setRetrievedStateAndGo(result);
+        }
+      });
     } catch (final ClassCastException e) {
       Log.error("Some cast problem in d&d of type:" + widget + " to target: " + target, e);
     }
