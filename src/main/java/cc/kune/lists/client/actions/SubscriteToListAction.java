@@ -39,14 +39,14 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContainerDTO;
 import cc.kune.lists.client.rpc.ListsServiceAsync;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SubscriteToListAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SubscriteToListAction extends RolAction {
@@ -74,7 +74,7 @@ public class SubscriteToListAction extends RolAction {
 
   /**
    * Instantiates a new subscrite to list action.
-   * 
+   *
    * @param signIn
    *          the sign in
    * @param i18n
@@ -103,7 +103,7 @@ public class SubscriteToListAction extends RolAction {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)
@@ -113,12 +113,12 @@ public class SubscriteToListAction extends RolAction {
     if (session.isLogged()) {
       if (isMember()) {
         ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
-            i18n.t("No"), null, null, new OnAcceptCallback() {
-              @Override
-              public void onSuccess() {
-                performAction();
-              }
-            });
+            i18n.t("No"), new OnAcceptCallback() {
+          @Override
+          public void onSuccess() {
+            performAction();
+          }
+        });
       } else {
         performAction();
       }
@@ -132,7 +132,7 @@ public class SubscriteToListAction extends RolAction {
 
   /**
    * Checks if is member.
-   * 
+   *
    * @return the boolean
    */
   private Boolean isMember() {
@@ -147,14 +147,14 @@ public class SubscriteToListAction extends RolAction {
     final boolean subcribe = !isMember();
     listService.get().subscribeMyselfToList(session.getUserHash(), session.getCurrentStateToken(),
         Boolean.valueOf(subcribe), new AsyncCallbackSimple<StateContainerDTO>() {
-          @Override
-          public void onSuccess(final StateContainerDTO result) {
-            NotifyUser.info(subcribe ? i18n.t("Subscribed") : i18n.t("Unsubscribed"));
-            stateManager.setRetrievedState(result);
-            stateManager.refreshCurrentState();
-            NotifyUser.hideProgress();
-          }
-        });
+      @Override
+      public void onSuccess(final StateContainerDTO result) {
+        NotifyUser.info(subcribe ? i18n.t("Subscribed") : i18n.t("Unsubscribed"));
+        stateManager.setRetrievedState(result);
+        stateManager.refreshCurrentState();
+        NotifyUser.hideProgress();
+      }
+    });
   }
 
 }

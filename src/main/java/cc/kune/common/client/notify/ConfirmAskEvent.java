@@ -22,14 +22,11 @@
  */
 package cc.kune.common.client.notify;
 
-import cc.kune.common.client.utils.OnAcceptCallback;
-
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 import com.google.gwt.resources.client.ImageResource;
-import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -49,7 +46,8 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     /**
      * On confirm ask.
      *
-     * @param event the event
+     * @param event
+     *          the event
      */
     public void onConfirmAsk(ConfirmAskEvent event);
   }
@@ -64,7 +62,8 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     /**
      * Adds the confirm ask handler.
      *
-     * @param handler the handler
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addConfirmAskHandler(ConfirmAskHandler handler);
@@ -75,31 +74,45 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   /**
    * Fire.
+   *
    * @param string4
    * @param string3
    * @param string2
    * @param string
    * @param eventBus
    *
-   * @param source the source
-   * @param message the message
+   * @param source
+   *          the source
+   * @param message
+   *          the message
    * @param onAcceptCallback
    */
-  public static void fire(EventBus eventBus, String string, String string2, String string3, String string4, final HasHandlers source, final java.lang.String message, OnAcceptCallback onAcceptCallback) {
-    source.fireEvent(new ConfirmAskEvent(message));
+  public static void fire(final com.google.web.bindery.event.shared.EventBus source,
+      final java.lang.String title, final java.lang.String message, final java.lang.String acceptBtnMsg,
+      final java.lang.String cancelBtnMsg,
+      final cc.kune.common.shared.utils.SimpleResponseCallback callback) {
+    source.fireEvent(new ConfirmAskEvent(title, message, acceptBtnMsg, cancelBtnMsg, "", "", callback));
   }
 
   /**
    * Fire.
    *
-   * @param source the source
-   * @param title the title
-   * @param message the message
-   * @param acceptBtnMsg the accept btn msg
-   * @param cancelBtnMsg the cancel btn msg
-   * @param acceptBtnTooltip the accept btn tooltip
-   * @param cancelBtnTooltip the cancel btn tooltip
-   * @param callback the callback
+   * @param source
+   *          the source
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param acceptBtnMsg
+   *          the accept btn msg
+   * @param cancelBtnMsg
+   *          the cancel btn msg
+   * @param acceptBtnTooltip
+   *          the accept btn tooltip
+   * @param cancelBtnTooltip
+   *          the cancel btn tooltip
+   * @param callback
+   *          the callback
    */
   public static void fire(final HasHandlers source, final java.lang.String title,
       final java.lang.String message, final java.lang.String acceptBtnMsg,
@@ -153,12 +166,18 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
   /**
    * Instantiates a new confirm ask event.
    *
-   * @param icon the icon
-   * @param title the title
-   * @param message the message
-   * @param acceptBtnMsg the accept btn msg
-   * @param cancelBtnMsg the cancel btn msg
-   * @param callback the callback
+   * @param icon
+   *          the icon
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param acceptBtnMsg
+   *          the accept btn msg
+   * @param cancelBtnMsg
+   *          the cancel btn msg
+   * @param callback
+   *          the callback
    */
   public ConfirmAskEvent(final ImageResource icon, final java.lang.String title,
       final java.lang.String message, final java.lang.String acceptBtnMsg,
@@ -171,14 +190,22 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
   /**
    * Instantiates a new confirm ask event.
    *
-   * @param icon the icon
-   * @param title the title
-   * @param message the message
-   * @param acceptBtnMsg the accept btn msg
-   * @param cancelBtnMsg the cancel btn msg
-   * @param acceptBtnTooltip the accept btn tooltip
-   * @param cancelBtnTooltip the cancel btn tooltip
-   * @param callback the callback
+   * @param icon
+   *          the icon
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param acceptBtnMsg
+   *          the accept btn msg
+   * @param cancelBtnMsg
+   *          the cancel btn msg
+   * @param acceptBtnTooltip
+   *          the accept btn tooltip
+   * @param cancelBtnTooltip
+   *          the cancel btn tooltip
+   * @param callback
+   *          the callback
    */
   public ConfirmAskEvent(final ImageResource icon, final java.lang.String title,
       final java.lang.String message, final java.lang.String acceptBtnMsg,
@@ -192,7 +219,8 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
   /**
    * Instantiates a new confirm ask event.
    *
-   * @param message the message
+   * @param message
+   *          the message
    */
   public ConfirmAskEvent(final java.lang.String message) {
     this.message = message;
@@ -201,11 +229,16 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
   /**
    * Instantiates a new confirm ask event.
    *
-   * @param title the title
-   * @param message the message
-   * @param acceptBtnMsg the accept btn msg
-   * @param cancelBtnMsg the cancel btn msg
-   * @param callback the callback
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param acceptBtnMsg
+   *          the accept btn msg
+   * @param cancelBtnMsg
+   *          the cancel btn msg
+   * @param callback
+   *          the callback
    */
   public ConfirmAskEvent(final java.lang.String title, final java.lang.String message,
       final java.lang.String acceptBtnMsg, final java.lang.String cancelBtnMsg,
@@ -220,13 +253,20 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
   /**
    * Instantiates a new confirm ask event.
    *
-   * @param title the title
-   * @param message the message
-   * @param acceptBtnMsg the accept btn msg
-   * @param cancelBtnMsg the cancel btn msg
-   * @param acceptBtnTooltip the accept btn tooltip
-   * @param cancelBtnTooltip the cancel btn tooltip
-   * @param callback the callback
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param acceptBtnMsg
+   *          the accept btn msg
+   * @param cancelBtnMsg
+   *          the cancel btn msg
+   * @param acceptBtnTooltip
+   *          the accept btn tooltip
+   * @param cancelBtnTooltip
+   *          the cancel btn tooltip
+   * @param callback
+   *          the callback
    */
   public ConfirmAskEvent(final java.lang.String title, final java.lang.String message,
       final java.lang.String acceptBtnMsg, final java.lang.String cancelBtnMsg,
@@ -237,15 +277,21 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     this.cancelBtnTooltip = cancelBtnTooltip;
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
+   * .EventHandler)
    */
   @Override
   protected void dispatch(final ConfirmAskHandler handler) {
     handler.onConfirmAsk(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -330,7 +376,9 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     return acceptBtnTooltip;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -392,7 +440,9 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     return title;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -408,7 +458,9 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
     return hashCode;
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

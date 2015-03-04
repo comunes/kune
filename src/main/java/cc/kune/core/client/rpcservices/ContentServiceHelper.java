@@ -39,15 +39,15 @@ import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.gspace.client.actions.share.ShareMenu;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentServiceHelper.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentServiceHelper {
@@ -64,7 +64,7 @@ public class ContentServiceHelper {
 
   /**
    * Instantiates a new content service helper.
-   * 
+   *
    * @param session
    *          the session
    * @param i18n
@@ -118,7 +118,7 @@ public class ContentServiceHelper {
 
   /**
    * Adds the container.
-   * 
+   *
    * @param id
    *          the id
    * @param newName
@@ -131,34 +131,34 @@ public class ContentServiceHelper {
     final StateToken parentToken = session.getCurrentStateToken();
     contentService.get().addFolder(session.getUserHash(), parentToken, newName, id,
         new AsyncCallbackSimple<StateContainerDTO>() {
-          @Override
-          public void onSuccess(final StateContainerDTO state) {
-            stateManager.removeCache(parentToken);
-            stateManager.setRetrievedStateAndGo(state);
-            NotifyUser.hideProgress();
-            // NotifyUser.info(i18n.tWithNT("[%s] created",
-            // "New folder created, for instance", newName));
-            folderViewer.highlightTitle();
-          }
-        });
+      @Override
+      public void onSuccess(final StateContainerDTO state) {
+        stateManager.removeCache(parentToken);
+        stateManager.setRetrievedStateAndGo(state);
+        NotifyUser.hideProgress();
+        // NotifyUser.info(i18n.tWithNT("[%s] created",
+        // "New folder created, for instance", newName));
+        folderViewer.highlightTitle();
+      }
+    });
     cache.remove(parentToken);
   }
 
   public void addParticipant(final StateToken token, final String userName, final SimpleCallback onAdd) {
     contentService.get().addParticipant(session.getUserHash(), token, userName,
         new AsyncCallbackSimple<Boolean>() {
-          @Override
-          public void onSuccess(final Boolean result) {
-            if (result) {
-              NotifyUser.info(i18n.t("User '[%s]' added as participant", userName));
-              onAdd.onCallback();
-              // (vjrj) I think this is not needed:
-              // refreshState();
-            } else {
-              NotifyUser.info(i18n.t("This user is already participating"));
-            }
-          }
-        });
+      @Override
+      public void onSuccess(final Boolean result) {
+        if (result) {
+          NotifyUser.info(i18n.t("User '[%s]' added as participant", userName));
+          onAdd.onCallback();
+          // (vjrj) I think this is not needed:
+          // refreshState();
+        } else {
+          NotifyUser.info(i18n.t("This user is already participating"));
+        }
+      }
+    });
   }
 
   public void addParticipants(final SocialNetworkSubGroup subGroup, final SimpleCallback onSuccess) {
@@ -169,23 +169,23 @@ public class ContentServiceHelper {
       final SimpleCallback onSuccess) {
     contentService.get().addParticipants(session.getUserHash(), token,
         session.getCurrentGroupShortName(), subGroup, new AsyncCallback<Boolean>() {
-          @Override
-          public void onFailure(final Throwable caught) {
-            NotifyUser.important(i18n.t("Seems that the list of partipants were added partially. Please, retry"));
-          }
+      @Override
+      public void onFailure(final Throwable caught) {
+        NotifyUser.important(i18n.t("Seems that the list of partipants were added partially. Please, retry"));
+      }
 
-          @Override
-          public void onSuccess(final Boolean result) {
-            onSuccess.onCallback();
-            NotifyUser.info(result ? subGroup.equals(SocialNetworkSubGroup.PUBLIC) ? i18n.t("Shared with general public. Now anyone can participate")
-                : i18n.t("Shared with members")
-                : i18n.t("All these members are already partipating"));
-            if (result) {
-              // (vjrj) I think this is not needed:
-              // refreshState();
-            }
-          }
-        });
+      @Override
+      public void onSuccess(final Boolean result) {
+        onSuccess.onCallback();
+        NotifyUser.info(result ? subGroup.equals(SocialNetworkSubGroup.PUBLIC) ? i18n.t("Shared with general public. Now anyone can participate")
+            : i18n.t("Shared with members")
+            : i18n.t("All these members are already partipating"));
+        if (result) {
+          // (vjrj) I think this is not needed:
+          // refreshState();
+        }
+      }
+    });
   }
 
   public void addToAcl(final String group, final AccessRolDTO rol, final SimpleCallback onSuccess) {
@@ -194,77 +194,77 @@ public class ContentServiceHelper {
 
   /**
    * Del content.
-   * 
+   *
    * @param token
    *          the token
    */
   public void delContent(final StateToken token) {
     ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
-        i18n.t("No"), null, null, new OnAcceptCallback() {
-          @Override
-          public void onSuccess() {
-            NotifyUser.showProgress();
-            contentService.get().delContent(session.getUserHash(), token, defCallback);
-          }
-        });
+        i18n.t("No"), new OnAcceptCallback() {
+      @Override
+      public void onSuccess() {
+        NotifyUser.showProgress();
+        contentService.get().delContent(session.getUserHash(), token, defCallback);
+      }
+    });
   }
 
   public void delParticipants(final SimpleCallback onSuccess, final String... participants) {
     contentService.get().delParticipants(session.getUserHash(), session.getCurrentStateToken(),
         participants, new AsyncCallback<Boolean>() {
-          @Override
-          public void onFailure(final Throwable caught) {
-            Log.error("Error deleting participant", caught);
-            NotifyUser.important(i18n.t("Seems that the list of partipants were deleted partially. Please, retry"));
-          }
+      @Override
+      public void onFailure(final Throwable caught) {
+        Log.error("Error deleting participant", caught);
+        NotifyUser.important(i18n.t("Seems that the list of partipants were deleted partially. Please, retry"));
+      }
 
-          @Override
-          public void onSuccess(final Boolean result) {
-            onSuccess.onCallback();
-            NotifyUser.info(result ? i18n.t("Removed") : i18n.t("All these member are not partipating"));
-          }
-        });
+      @Override
+      public void onSuccess(final Boolean result) {
+        onSuccess.onCallback();
+        NotifyUser.info(result ? i18n.t("Removed") : i18n.t("All these member are not partipating"));
+      }
+    });
   }
 
   public void delPublicParticipant(final SimpleCallback onSuccess) {
     contentService.get().delPublicParticipant(session.getUserHash(), session.getCurrentStateToken(),
         new AsyncCallbackSimple<Boolean>() {
-          @Override
-          public void onSuccess(final Boolean result) {
-            onSuccess.onCallback();
-            NotifyUser.info(i18n.t("Not editable by anyone: Now only editors can participate"));
-            // (vjrj) I think this is not needed:
-            // refreshState();
-          }
-        });
+      @Override
+      public void onSuccess(final Boolean result) {
+        onSuccess.onCallback();
+        NotifyUser.info(i18n.t("Not editable by anyone: Now only editors can participate"));
+        // (vjrj) I think this is not needed:
+        // refreshState();
+      }
+    });
   }
 
   public void purgeAll(final StateToken token) {
     ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
-        i18n.t("No"), null, null, new OnAcceptCallback() {
-          @Override
-          public void onSuccess() {
-            NotifyUser.showProgress();
-            contentService.get().purgeAll(session.getUserHash(), token, defCallback);
-          }
-        });
+        i18n.t("No"), new OnAcceptCallback() {
+      @Override
+      public void onSuccess() {
+        NotifyUser.showProgress();
+        contentService.get().purgeAll(session.getUserHash(), token, defCallback);
+      }
+    });
   }
 
   /**
    * Purge content.
-   * 
+   *
    * @param token
    *          the token
    */
   public void purgeContent(final StateToken token) {
     ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
-        i18n.t("No"), null, null, new OnAcceptCallback() {
-          @Override
-          public void onSuccess() {
-            NotifyUser.showProgress();
-            contentService.get().purgeContent(session.getUserHash(), token, defCallback);
-          }
-        });
+        i18n.t("No"), new OnAcceptCallback() {
+      @Override
+      public void onSuccess() {
+        NotifyUser.showProgress();
+        contentService.get().purgeContent(session.getUserHash(), token, defCallback);
+      }
+    });
   }
 
   // private void refreshState() {
@@ -282,14 +282,14 @@ public class ContentServiceHelper {
   public void setVisible(final boolean visible, final SimpleCallback onSuccess) {
     contentService.get().setVisible(session.getUserHash(), session.getCurrentStateToken(), visible,
         new AsyncCallbackSimple<StateContentDTO>() {
-          @Override
-          public void onSuccess(final StateContentDTO result) {
-            onSuccess.onCallback();
-            NotifyUser.info(i18n.t(visible ? "Now, this is visible for everyone"
-                : "Now, this is not visible for everyone"));
-            stateManager.setRetrievedState(result);
-            shareMenu.get().setVisibleToEveryone(visible);
-          }
-        });
+      @Override
+      public void onSuccess(final StateContentDTO result) {
+        onSuccess.onCallback();
+        NotifyUser.info(i18n.t(visible ? "Now, this is visible for everyone"
+            : "Now, this is not visible for everyone"));
+        stateManager.setRetrievedState(result);
+        shareMenu.get().setVisibleToEveryone(visible);
+      }
+    });
   }
 }

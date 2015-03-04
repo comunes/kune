@@ -40,21 +40,21 @@ import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.gspace.client.viewers.FolderViewerPresenter;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class SetContentStatusAsAdminMenuItem.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
 
   /**
    * The Class SetContentStatusAsAdminAction.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class SetContentStatusAsAdminAction extends RolAction {
@@ -79,7 +79,7 @@ public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
 
     /**
      * Instantiates a new sets the content status as admin action.
-     * 
+     *
      * @param eventBus
      *          the event bus
      * @param stateManager
@@ -108,7 +108,7 @@ public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -118,12 +118,12 @@ public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
       final Boolean confirm = (Boolean) getValue(CONFIRM);
       if (confirm) {
         ConfirmAskEvent.fire(eventBus, i18n.t("Please confirm"), i18n.t("Are you sure?"), i18n.t("Yes"),
-            i18n.t("No"), null, null, new OnAcceptCallback() {
-              @Override
-              public void onSuccess() {
-                doAction(event);
-              }
-            });
+            i18n.t("No"), new OnAcceptCallback() {
+          @Override
+          public void onSuccess() {
+            doAction(event);
+          }
+        });
       } else {
         doAction(event);
       }
@@ -131,7 +131,7 @@ public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
 
     /**
      * Do action.
-     * 
+     *
      * @param event
      *          the event
      */
@@ -141,23 +141,23 @@ public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
       final StateToken token = ((AbstractContentSimpleDTO) event.getTarget()).getStateToken();
       contentService.get().setStatusAsAdmin(session.getUserHash(), token, status,
           new AsyncCallbackSimple<StateAbstractDTO>() {
-            @Override
-            public void onSuccess(final StateAbstractDTO state) {
-              // Is this necessary?
-              // session.setCurrentState(state);
-              final StateToken parent = token.copy().clearDocument();
-              if (session.getCurrentStateToken().equals(parent)) {
-                stateManager.refreshCurrentStateWithoutCache();
-                // Warning: the previous action
-                // is asynchronous (it gets a
-                // content)
-                presenter.get().refreshState();
-              } else {
-                stateManager.gotoStateToken(parent, false);
-              }
-              NotifyUser.hideProgress();
-            }
-          });
+        @Override
+        public void onSuccess(final StateAbstractDTO state) {
+          // Is this necessary?
+          // session.setCurrentState(state);
+          final StateToken parent = token.copy().clearDocument();
+          if (session.getCurrentStateToken().equals(parent)) {
+            stateManager.refreshCurrentStateWithoutCache();
+            // Warning: the previous action
+            // is asynchronous (it gets a
+            // content)
+            presenter.get().refreshState();
+          } else {
+            stateManager.gotoStateToken(parent, false);
+          }
+          NotifyUser.hideProgress();
+        }
+      });
     }
 
   }
@@ -170,7 +170,7 @@ public class SetContentStatusAsAdminMenuItem extends MenuItemDescriptor {
 
   /**
    * Instantiates a new sets the content status as admin menu item.
-   * 
+   *
    * @param action
    *          the action
    * @param status
