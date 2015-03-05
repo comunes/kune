@@ -22,7 +22,7 @@
  */
 package cc.kune.gspace.client.licensewizard;
 
-import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.wizard.WizardListener;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
@@ -69,7 +69,7 @@ public class LicenseWizardPanel extends WizardFormDialog implements LicenseWizar
    *          the res
    */
   @Inject
-  public LicenseWizardPanel(final MaskWidget maskWidget, final I18nTranslationService i18n,
+  public LicenseWizardPanel(final MaskWidgetView maskWidget, final I18nTranslationService i18n,
       final IconicResources res) {
     super(LIC_WIZ_DIALOG, i18n.t("License wizard"), true, false, WIDTH, null, BACK_BTN_ID, NEXT_BTN_ID,
         FINISH_BTN_ID, CANCEL_BTN_ID, CLOSE_BTN_ID, i18n, maskWidget);

@@ -22,7 +22,9 @@
  */
 package cc.kune.gspace.client.options.general;
 
-import cc.kune.common.client.ui.MaskWidget;
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.resources.iconic.IconicResources;
@@ -37,7 +39,6 @@ import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 
@@ -101,7 +102,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
   private final AdapterField resendEmailVerifAdapter;
 
   /** The resend email verif btn. */
-  private final Button resendEmailVerifBtn;
+  private final CustomButton resendEmailVerifBtn;
 
   /**
    * Instantiates a new user opt general panel.
@@ -117,7 +118,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
    */
   @Inject
   public UserOptGeneralPanel(final I18nTranslationService i18n, final IconicResources res,
-      final MaskWidget maskWidget, final LanguageSelectorPanel langSelector) {
+      final MaskWidgetView maskWidget, final LanguageSelectorPanel langSelector) {
     super(maskWidget, res.equalizerWhite(), i18n.t("General"), i18n.t("You can change these values:"));
     this.langSelector = langSelector;
     longName = UserFieldFactory.createUserLongName(LONG_NAME_FIELD);
@@ -172,7 +173,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     notVerifLabelAdapter.setWidth(DefaultFormUtils.BIG_FIELD_SIZE);
     super.add(notVerifLabelAdapter);
 
-    resendEmailVerifBtn = new Button(i18n.t("Resend verification email"));
+    resendEmailVerifBtn = new CustomButton(i18n.t("Resend verification email"));
     resendEmailVerifBtn.addStyleName("k-button");
     resendEmailVerifAdapter = new AdapterField(resendEmailVerifBtn);
     resendEmailVerifAdapter.setValidateOnBlur(false);

@@ -25,7 +25,7 @@ package cc.kune.common.client.ui.dialogs.wizard;
 import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.BSBasicDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
@@ -64,7 +64,7 @@ public class WizardDialog implements WizardDialogView {
   private WizardListener listener;
 
   /** The mask widget. */
-  private final MaskWidget maskWidget;
+  private final MaskWidgetView maskWidget;
 
   /** The next button. */
   private final CustomButton nextButton;
@@ -102,7 +102,7 @@ public class WizardDialog implements WizardDialogView {
   public WizardDialog(final String dialogId, final String header, final boolean modal,
       final boolean minimizable, final String width, final String height, final String backId,
       final String nextId, final String finishId, final String cancelId, final String closeId,
-      final I18nTranslationService i18n, final MaskWidget maskWidget) {
+      final I18nTranslationService i18n, final MaskWidgetView maskWidget) {
     this(dialogId, header, modal, minimizable, width, height, backId, nextId, finishId, cancelId,
         closeId, i18n, maskWidget, null);
   }
@@ -142,7 +142,7 @@ public class WizardDialog implements WizardDialogView {
   public WizardDialog(final String dialogId, final String header, final boolean modal,
       final boolean minimizable, final String width, final String height, final String backId,
       final String nextId, final String finishId, final String cancelId, final String closeId,
-      final I18nTranslationService i18n, final MaskWidget maskWidget, final WizardListener listener) {
+      final I18nTranslationService i18n, final MaskWidgetView maskWidget, final WizardListener listener) {
     this.maskWidget = maskWidget;
     this.listener = listener;
     this.i18n = i18n;

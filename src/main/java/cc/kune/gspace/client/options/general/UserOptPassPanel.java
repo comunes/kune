@@ -22,14 +22,15 @@
  */
 package cc.kune.gspace.client.options.general;
 
-import cc.kune.common.client.ui.MaskWidget;
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.auth.UserFieldFactory;
 import cc.kune.core.client.resources.iconic.IconicResources;
 
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.ui.Button;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
@@ -50,7 +51,7 @@ public class UserOptPassPanel extends EntityOptGeneralPanel implements UserOptPa
   public static final String NEW_PASSWD_REPEATED_FIELD = "k-uopp-newPassRepeated";
 
   /** The change btn. */
-  private final Button changeBtn;
+  private final CustomButton changeBtn;
 
   /** The current passwd. */
   private final TextField<String> currentPasswd;
@@ -73,13 +74,13 @@ public class UserOptPassPanel extends EntityOptGeneralPanel implements UserOptPa
    */
   @Inject
   public UserOptPassPanel(final I18nTranslationService i18n, final IconicResources res,
-      final MaskWidget maskWidget) {
+      final MaskWidgetView maskWidget) {
     super(maskWidget, res.lockWhite(), i18n.t("Security"), i18n.t("Change your password:"));
     currentPasswd = UserFieldFactory.createUserPasswd(CURRENT_PASSWD_FIELD, i18n.t("Current password"));
     newPasswd = UserFieldFactory.createUserPasswd(NEW_PASSWD_FIELD, i18n.t("New password"));
     newPasswdRepeated = UserFieldFactory.createUserPasswd(NEW_PASSWD_REPEATED_FIELD,
         i18n.t("New password (repeat it)"));
-    changeBtn = new Button(i18n.t("Change it"));
+    changeBtn = new CustomButton(i18n.t("Change it"));
     add(currentPasswd);
     add(newPasswd);
     add(newPasswdRepeated);

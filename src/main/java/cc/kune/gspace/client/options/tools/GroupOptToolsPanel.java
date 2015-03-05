@@ -22,7 +22,7 @@
  */
 package cc.kune.gspace.client.options.tools;
 
-import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 
@@ -48,7 +48,7 @@ public class GroupOptToolsPanel extends EntityOptToolsPanel implements GroupOptT
    */
   @Inject
   public GroupOptToolsPanel(final I18nTranslationService i18n, final IconicResources res,
-      final MaskWidget maskWidget) {
+      final MaskWidgetView maskWidget) {
     super(i18n, res, maskWidget);
   }
 

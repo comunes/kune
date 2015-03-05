@@ -27,7 +27,7 @@ import java.util.HashMap;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.IconLabel;
-import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.ui.DefaultForm;
@@ -62,7 +62,7 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
   private final I18nTranslationService i18n;
 
   /** The mask widget. */
-  private final MaskWidget maskWidget;
+  private final MaskWidgetView maskWidget;
 
   /** The tab title. */
   private final IconLabel tabTitle;
@@ -78,7 +78,7 @@ public class EntityOptToolsPanel extends DefaultForm implements EntityOptToolsVi
    *          the mask widget
    */
   public EntityOptToolsPanel(final I18nTranslationService i18n, final IconicResources res,
-      final MaskWidget maskWidget) {
+      final MaskWidgetView maskWidget) {
     this.maskWidget = maskWidget;
     tabTitle = TabTitleGenerator.generate(res.toolsWhite(), i18n.t("Tools"), MAX_TABTITLE_LENGTH, TAB_ID);
     this.i18n = i18n;

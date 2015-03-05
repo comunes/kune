@@ -22,11 +22,12 @@
  */
 package cc.kune.gspace.client.options.logo;
 
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.HasText;
@@ -40,7 +41,7 @@ import com.google.gwt.user.client.ui.HasText;
 public class EntityOptUploadButton extends Composite implements HasClickHandlers {
 
   /** The btn. */
-  private final Button btn;
+  private final CustomButton btn;
 
   /**
    * Instantiates a new entity opt upload button.
@@ -50,7 +51,7 @@ public class EntityOptUploadButton extends Composite implements HasClickHandlers
    */
   public EntityOptUploadButton(final String text) {
     final DecoratorPanel decorator = new DecoratorPanel();
-    btn = new Button(text);
+    btn = new CustomButton(text);
     btn.addStyleName("k-button");
     initWidget(decorator);
     decorator.setWidget(btn);

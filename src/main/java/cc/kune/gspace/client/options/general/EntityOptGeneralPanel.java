@@ -23,7 +23,7 @@
 package cc.kune.gspace.client.options.general;
 
 import cc.kune.common.client.ui.IconLabel;
-import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.client.ui.dialogs.tabbed.TabTitleGenerator;
 import cc.kune.gspace.client.options.EntityOptionsView;
@@ -51,7 +51,7 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
   public static final String TAB_ID = "k-eodlp-gen-id";
 
   /** The mask widget. */
-  private final MaskWidget maskWidget;
+  private final MaskWidgetView maskWidget;
 
   /** The tab title. */
   private final IconLabel tabTitle;
@@ -68,7 +68,7 @@ public class EntityOptGeneralPanel extends DefaultForm implements EntityOptGener
    * @param introMessage
    *          the intro message
    */
-  public EntityOptGeneralPanel(final MaskWidget maskWidget, final ImageResource img, final String title,
+  public EntityOptGeneralPanel(final MaskWidgetView maskWidget, final ImageResource img, final String title,
       final String introMessage) {
     this.maskWidget = maskWidget;
 

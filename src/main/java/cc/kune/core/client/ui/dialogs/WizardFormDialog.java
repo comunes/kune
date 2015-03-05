@@ -23,7 +23,7 @@
 package cc.kune.core.client.ui.dialogs;
 
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.ui.MaskWidget;
+import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.dialogs.wizard.WizardDialog;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.ui.DefaultForm;
@@ -72,7 +72,7 @@ public class WizardFormDialog extends WizardDialog {
   public WizardFormDialog(final String dialogId, final String header, final boolean modal,
       final boolean minimizable, final String width, final String height, final String backId,
       final String nextId, final String finishId, final String cancelId, final String closeId,
-      final I18nTranslationService i18n, final MaskWidget maskWidget) {
+      final I18nTranslationService i18n, final MaskWidgetView maskWidget) {
     super(dialogId, header, modal, minimizable, width, height, backId, nextId, finishId, cancelId,
         closeId, i18n, maskWidget);
   }
