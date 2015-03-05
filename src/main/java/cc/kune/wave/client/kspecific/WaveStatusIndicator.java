@@ -101,8 +101,7 @@ public class WaveStatusIndicator {
             if (session.isLogged()) {
               // FIXME: this is because we don't have way to logout in wave,
               // websocket, etc
-              NotifyUser.showProgress();
-              NotifyUser.important(i18n.t("Connecting"));
+              NotifyUser.showProgress(i18n.t("Connecting"));
             }
             break;
           case RECONNECTING:
