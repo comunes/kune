@@ -17,8 +17,8 @@ version: 2.4.1
 
 body {
   color: brown;
-  font-family: 'Ubuntu', Arial;
-  font-size: 17px;
+  font-family: 'Open Sans', Arial;
+  font-size: 13px;
   background-color: transparent;
   padding: 0px 15px;
 }
