@@ -44,7 +44,6 @@ import org.waveprotocol.wave.client.common.safehtml.SafeHtmlBuilder;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 import org.waveprotocol.wave.client.doodad.attachment.AttachmentManagerImpl;
 import org.waveprotocol.wave.client.doodad.attachment.AttachmentManagerProvider;
-import org.waveprotocol.wave.client.editor.extract.Repairer;
 import org.waveprotocol.wave.client.events.ClientEvents;
 import org.waveprotocol.wave.client.events.Log;
 import org.waveprotocol.wave.client.events.NetworkStatusEvent;
@@ -67,11 +66,8 @@ import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
-import br.com.rpa.client._paperelements.PaperFab;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.EditableLabel;
-import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.events.StackErrorEvent;
@@ -86,7 +82,6 @@ import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.initials.InitialsResources;
-import cc.kune.polymer.client.PolymerId;
 import cc.kune.polymer.client.PolymerUtils;
 import cc.kune.wave.client.kspecific.AfterOpenWaveEvent;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
@@ -100,8 +95,6 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.GWT.UncaughtExceptionHandler;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -347,8 +340,8 @@ public class WebClient extends Composite implements WaveClientView {
 
   @UiField
   FlowPanel flow;
-  
-  @UiField  
+
+  @UiField
   ImplPanel waveHolder;
 
   /** The wave store. */
@@ -380,9 +373,9 @@ public class WebClient extends Composite implements WaveClientView {
    * @param colorPicker the color picker
    */
   @Inject
-  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles, 
+  public WebClient(final EventBus eventBus, final KuneWaveProfileManager profiles,
       final cc.kune.core.client.state.Session kuneSession, StateManager stateManager,
-      final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService, 
+      final CustomSavedStateIndicator waveUnsavedIndicator, final ContentServiceAsync contentService,
       final Provider<AurorisColorPicker> colorPicker, SearchPanelView searchPanel,
       CustomEditToolbar customEditToolbar) {
     this.eventBus = eventBus;
@@ -523,8 +516,8 @@ public class WebClient extends Composite implements WaveClientView {
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl() /*-{
-		return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
-				+ $wnd.__websocket_address + "/";
+    return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
+        + $wnd.__websocket_address + "/";
   }-*/;
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#login()
@@ -602,7 +595,7 @@ public class WebClient extends Composite implements WaveClientView {
     final String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
 
     contentService.getContentByWaveRef(kuneSession.getUserHash(), waveUri, new AsyncCallbackSimple<StateAbstractDTO>() {
-      
+
       @Override
       public void onSuccess(StateAbstractDTO result) {
         // It's a group content
@@ -616,7 +609,7 @@ public class WebClient extends Composite implements WaveClientView {
             // PolymerUtils.hideInboxCancel();;
             // Not a group content
             SpaceSelectEvent.fire(eventBus, Space.userSpace);
-            if (currentOpenedWaveUri.equals(waveUri)) { 
+            if (currentOpenedWaveUri.equals(waveUri)) {
               // Trying to open twice, skip for the first time...
               cc.kune.common.client.log.Log.info("Trying to open the same wave twice");
               currentOpenedWaveUri = null;
@@ -624,7 +617,7 @@ public class WebClient extends Composite implements WaveClientView {
             }
               else
                 currentOpenedWaveUri = waveUri;
-                
+
             WaveClientClearEvent.fire(eventBus);
             clear();
             eventBus.fireEvent(new BeforeOpenWaveEvent(waveUri));;
@@ -645,16 +638,16 @@ public class WebClient extends Composite implements WaveClientView {
             });
 
             eventBus.fireEvent(new AfterOpenWaveEvent(waveUri));;
-            
+
             PolymerUtils.setMainSelected();
             if (PolymerUtils.isXSmall() || PolymerUtils.isMainDrawerNarrow())
               PolymerUtils.setNarrowVisible(false);
-            
+
             // We can now open again the same wave without errors
             currentOpenedWaveUri = null;
             final String encodedToken = HistoryUtils.undoHashbang(History.getToken());
             // Kune patch
-            if (encodedToken != null && !encodedToken.isEmpty() && 
+            if (encodedToken != null && !encodedToken.isEmpty() &&
                 !TokenMatcher.isInboxToken(encodedToken) && !TokenMatcher.isGroupToken(encodedToken)) {
               WaveRef fromWaveRef;
               try {
@@ -677,10 +670,10 @@ public class WebClient extends Composite implements WaveClientView {
             History.newItem(tokenFromWaveref, false);
         }
       }
- 
+
     });
-    
-  
+
+
   }
 
   /**
@@ -757,10 +750,7 @@ public class WebClient extends Composite implements WaveClientView {
     // kune-patch
     // RootPanel.get("app").add(self);
     InitialsResources.INS.css().ensureInjected();
-    initWidget(self);    
-    
-    // For dev purposes (disabled in kune)
-    Repairer.debugRepairIsFatal=false;
+    initWidget(self);
 
     self.getElement().getStyle().clearPosition();
     // splitPanel.setWidgetMinSize(searchPanel, 300);
@@ -792,6 +782,6 @@ public class WebClient extends Composite implements WaveClientView {
    * @return true, if successful
    */
   private native boolean useSocketIO() /*-{
-		return !window.WebSocket
+    return !window.WebSocket
   }-*/;
 }
