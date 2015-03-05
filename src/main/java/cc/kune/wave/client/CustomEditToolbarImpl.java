@@ -78,15 +78,15 @@ public class CustomEditToolbarImpl implements CustomEditToolbar {
 
   @Inject
   public CustomEditToolbarImpl() {
-    final String editText = I18n.t("Edit") + " (Ctrl-E)";
+    final String editText = I18n.t("Edit") + " " + I18n.t("(Ctrl-E)");
     editInGroup = wrapBtn(editHandler, PolymerId.EDIT_DOCGROUP_FAB.getId(), editText);
     editInInbox = wrapBtn(editHandler, PolymerId.EDIT_INBOX_FAB.getId(), editText);
 
-    final String editDoneText = I18n.t("Done");
+    final String editDoneText = I18n.t("Done" + " " + I18n.t("(Shift-Enter)"));
     editDoneInGroup = wrapBtn(editDoneHandler, PolymerId.EDITDONE_GROUP_FAB.getId(), editDoneText);
     editDoneInInbox = wrapBtn(editDoneHandler, PolymerId.EDITDONE_INBOX_FAB.getId(), editDoneText);
 
-    final String replyText = I18n.t("Reply" + " (Ctrl-R)");
+    final String replyText = I18n.t("Reply" + " " + I18n.t("(Shift-Enter)"));
     replyInGroup = wrapBtn(replyHandler, PolymerId.REPLY_GROUP_FAB.getId(), replyText);
     replyInInbox = wrapBtn(replyHandler, PolymerId.REPLY_INBOX_FAB.getId(), replyText);
 
