@@ -76,7 +76,7 @@
       <g:Label styleName="{style.icon}" ui:field="icon"/>
       <g:InlineLabel styleName="{style.title}" ui:field="title"/>
       <g:SimplePanel styleName="{style.menu}" ui:field="menu"/>
-      <g:InlineLabel styleName="{style.modified}"
+      <g:InlineLabel addStyleNames="{style.modified} hidden-xs hidden-sm"
         ui:field="modified"/>
     </g:FlowPanel>
   </g:FocusPanel>
