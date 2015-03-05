@@ -163,27 +163,18 @@ public class InboxCountPresenter {
 
     };
 
-    // eventBus.addHandler(OnWaveClientStartEvent.getType(),
-    // new OnWaveClientStartEvent.OnWaveClientStartHandler() {
-    // @Override
-    // public void onOnWaveClientStart(final OnWaveClientStartEvent event) {
-    // search = event.getView().getSearch();
-    // search.addListener(searchListener);
-    // update(search);
-    // }
-    // });
-
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
         final boolean logged = event.isLogged();
         view.showCount(logged);
-        search = waveView.get().getSearch();
         if (logged) {
+          search = waveView.get().getSearch();
           search.addListener(searchListener);
           update(search);
         } else {
-          search.removeListener(searchListener);
+          if (search != null)
+            search.removeListener(searchListener);
         }
 
       }
