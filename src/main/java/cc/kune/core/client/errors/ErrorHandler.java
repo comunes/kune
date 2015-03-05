@@ -22,62 +22,53 @@
  */
 package cc.kune.core.client.errors;
 
-import cc.kune.client.DefaultUncaughtExceptionHandler;
+import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.notify.ProgressHideEvent;
 import cc.kune.common.client.notify.UserNotifyEvent;
-import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.events.GoHomeEvent;
 import cc.kune.core.client.events.StackErrorEvent;
 import cc.kune.core.client.events.UserMustBeLoggedEvent;
 
-import com.google.web.bindery.event.shared.EventBus;
 import com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException;
-import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ErrorHandler.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
+@Singleton
 public class ErrorHandler {
-
-  /** The event bus. */
-  private final EventBus eventBus;
-
-  /** The i18n. */
-  private final I18nTranslationService i18n;
+  protected static final String ERROR_ID = "k-general-service-error";
 
   /**
    * Instantiates a new error handler.
    *
-   * @param i18n
-   *          the i18n
-   * @param eventBus
+   * @param I18n
+   *          the I18n
+   * @param EventBusInstance.get()
    *          the event bus
    */
-  @Inject
-  public ErrorHandler(final I18nTranslationService i18n, final EventBus eventBus) {
-    this.i18n = i18n;
-    this.eventBus = eventBus;
+  public ErrorHandler() {
   }
 
   /**
    * Do session expired.
    */
   public void doSessionExpired() {
-    eventBus.fireEvent(new SessionExpiredEvent());
+    EventBusInstance.get().fireEvent(new SessionExpiredEvent());
   }
 
   /**
    * Go home.
    */
   private void goHome() {
-    GoHomeEvent.fire(eventBus);
+    GoHomeEvent.fire(EventBusInstance.get());
   }
 
   /**
@@ -113,99 +104,110 @@ public class ErrorHandler {
    *          the caught
    */
   public void process(final Throwable caught) {
-    eventBus.fireEvent(new ProgressHideEvent());
+    EventBusInstance.get().fireEvent(new ProgressHideEvent());
     if (caught instanceof AccessViolationException) {
       logException(caught);
       final String msg = caught.getMessage();
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("You do not have rights to perform that action")
-              + (!TextUtils.empty(msg) && msg.length() > 2 ? ". " + i18n.t(msg) : "")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          I18n.t("You do not have rights to perform that action")
+              + (!TextUtils.empty(msg) && msg.length() > 2 ? ". " + I18n.t(msg) : "")));
       goHome();
     } else if (caught instanceof SessionExpiredException) {
       logException(caught);
       doSessionExpired();
     } else if (caught instanceof UserMustBeLoggedException) {
       logException(caught);
-      UserMustBeLoggedEvent.fire(eventBus);
+      UserMustBeLoggedEvent.fire(EventBusInstance.get());
     } else if (caught instanceof GroupNotFoundException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.veryImportant, i18n.t("Group not found")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.veryImportant, I18n.t("Group not found")));
       goHome();
     } else if (caught instanceof IncompatibleRemoteServiceException) {
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("Your browser is outdated with the server software. Please reload this page.")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          I18n.t("Your browser is outdated with the server software. Please reload this page.")));
     } else if (caught instanceof ContentNotFoundException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.veryImportant, i18n.t("Content not found")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.veryImportant, I18n.t("Content not found")));
       goHome();
     } else if (caught instanceof ContentNotPermittedException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("Action not permitted in this location")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          I18n.t("Action not permitted in this location")));
       goHome();
     } else if (caught instanceof ContainerNotPermittedException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("Action not permitted in this location")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          I18n.t("Action not permitted in this location")));
       goHome();
     } else if (caught instanceof NameInUseException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("A content with the same name already exist. Please rename it")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          I18n.t("A content with the same name already exist. Please rename it")));
     } else if (caught instanceof LastAdminInGroupException) {
       logException(caught);
-      NotifyUser.showAlertMessage(i18n.t("Warning"),
-          i18n.t("Sorry, you are the last admin of this group."
+      NotifyUser.showAlertMessage(I18n.t("Warning"),
+          I18n.t("Sorry, you are the last admin of this group."
               + " Look for someone to substitute you appropriately as admin before leaving this group."));
 
     } else if (caught instanceof InvalidSNOperationException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t("Invalid operation")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error, I18n.t("Invalid operation")));
     } else if (caught instanceof AlreadyGroupMemberException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("This group is already a group member")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          I18n.t("This group is already a group member")));
     } else if (caught instanceof AlreadyUserMemberException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("This user is already a group member")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          I18n.t("This user is already a group member")));
     } else if (caught instanceof EmailAddressInUseException) {
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t(
-          "This email is already used in [%s]. Please choose another.", i18n.getSiteCommonName())));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error, I18n.t(
+          "This email is already used in [%s]. Please choose another.", I18n.getSiteCommonName())));
     } else if (caught instanceof EmailHashInvalidException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("This confirmation email is invalid")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          I18n.t("This confirmation email is invalid")));
     } else if (caught instanceof EmailHashExpiredException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(
           NotifyLevel.error,
-          i18n.t("This email verification is expired. In your preferences, resend you the confirmation email")));
+          I18n.t("This email verification is expired. In your preferences, resend you the confirmation email")));
     } else if (caught instanceof MoveOnSameContainerException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info,
-          i18n.t("You are trying to move this to the same location")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.info,
+          I18n.t("You are trying to move this to the same location")));
     } else if (caught instanceof NameNotPermittedException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t("This name is not permitted")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.info, I18n.t("This name is not permitted")));
     } else if (caught instanceof ContainerNotEmptyException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error, i18n.t("This is not empty")));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error, I18n.t("This is not empty")));
     } else if (caught instanceof CannotDeleteDefaultContentException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("This is the default content of the group, you cannot delete it. "
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.error,
+          I18n.t("This is the default content of the group, you cannot delete it. "
               + "Please select other content as default group content before delete this")));
     } else if (caught instanceof UnderDevelopmentException) {
       logException(caught);
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t(TextUtils.IN_DEVELOPMENT)));
+      EventBusInstance.get().fireEvent(new UserNotifyEvent(NotifyLevel.info, I18n.t(TextUtils.IN_DEVELOPMENT)));
     } else {
       logException(caught, true);
       final String error = "Other kind of exception received in ErrorHandler (" + caught.getMessage()
           + ")";
-      DefaultUncaughtExceptionHandler.showGeneralError(error);
-      StackErrorEvent.fire(eventBus, caught);
+      showGeneralError(error);
+      StackErrorEvent.fire(EventBusInstance.get(), caught);
     }
   }
 
+  public static void showGeneralError(final String message) {
+    NotifyUser.logError(message);
+    NotifyUser.showProgress();
+    NotifyUser.error(
+        I18n.t("We're sorry..."),
+        I18n.t("For some reason [%s] is currently experiencing errors. "
+            + "Try again refreshing your browser. "
+            + "If the problem persist, please provide us feedback with more info "
+            + "(see it in topbar menu > Errors info) so we can try to fix it. Thanks",
+            I18n.getSiteCommonName()), ERROR_ID, true);
+  }
 }

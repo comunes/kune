@@ -28,7 +28,6 @@ import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18n;
 import cc.kune.wave.client.WebClient.ErrorHandler;
 
 import com.google.gwt.core.client.GWT;
@@ -36,7 +35,7 @@ import com.google.gwt.event.shared.UmbrellaException;
 import com.google.gwt.user.client.Timer;
 
 public class DefaultUncaughtExceptionHandler implements GWT.UncaughtExceptionHandler {
-  protected static final String ERROR_ID = "k-general-service-error";
+
 
   @Override
   public void onUncaughtException(final Throwable excep) {
@@ -51,7 +50,7 @@ public class DefaultUncaughtExceptionHandler implements GWT.UncaughtExceptionHan
       @Override
       public void use(final SafeHtml stack) {
         final String message = stack.asString().replace("<br>", "\n");
-        showGeneralError(message);
+        cc.kune.core.client.errors.ErrorHandler.showGeneralError(message);
         new Timer() {
           @Override
           public void run() {
@@ -72,16 +71,6 @@ public class DefaultUncaughtExceptionHandler implements GWT.UncaughtExceptionHan
     return e;
   }
 
-  public static void showGeneralError(final String message) {
-    NotifyUser.logError(message);
-    NotifyUser.showProgress();
-    NotifyUser.error(
-        I18n.t("We're sorry..."),
-        I18n.t("For some reason [%s] is currently experiencing errors. "
-            + "Try again refreshing your browser. "
-            + "If the problem persist, please provide us feedback with more info "
-            + "(see it in topbar menu > Errors info) so we can try to fix it. Thanks",
-            I18n.getSiteCommonName()), ERROR_ID, true);
-  }
+
 
 }
