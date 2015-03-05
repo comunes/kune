@@ -22,6 +22,7 @@
  */
 package cc.kune.core.client.errors;
 
+import cc.kune.client.DefaultUncaughtExceptionHandler;
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
@@ -200,12 +201,9 @@ public class ErrorHandler {
       eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, i18n.t(TextUtils.IN_DEVELOPMENT)));
     } else {
       logException(caught, true);
-      // FIXME: Remore "with our servers"
-      eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-          i18n.t("Oops! Something has gone wrong with our servers. Retry later, please.")));
       final String error = "Other kind of exception received in ErrorHandler (" + caught.getMessage()
           + ")";
-      Log.error(error, caught);
+      DefaultUncaughtExceptionHandler.showGeneralError(error);
       StackErrorEvent.fire(eventBus, caught);
     }
   }

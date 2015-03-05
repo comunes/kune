@@ -36,6 +36,8 @@ import com.google.gwt.event.shared.UmbrellaException;
 import com.google.gwt.user.client.Timer;
 
 public class DefaultUncaughtExceptionHandler implements GWT.UncaughtExceptionHandler {
+  protected static final String ERROR_ID = "k-general-service-error";
+
   @Override
   public void onUncaughtException(final Throwable excep) {
     final Throwable unwrapped = unwrap(excep);
@@ -49,15 +51,7 @@ public class DefaultUncaughtExceptionHandler implements GWT.UncaughtExceptionHan
       @Override
       public void use(final SafeHtml stack) {
         final String message = stack.asString().replace("<br>", "\n");
-        NotifyUser.logError(message);
-        NotifyUser.showProgress();
-        NotifyUser.error(
-            I18n.t("We're sorry..."),
-            I18n.t("For some reason [%s] is currently experiencing errors. "
-                + "Try again refreshing your browser. "
-                + "If the problem persist, please provide us feedback with more info "
-                + "(see it in topbar menu > Errors info) so we can try to fix it. Thanks",
-                I18n.getSiteCommonName()), true);
+        showGeneralError(message);
         new Timer() {
           @Override
           public void run() {
@@ -76,6 +70,18 @@ public class DefaultUncaughtExceptionHandler implements GWT.UncaughtExceptionHan
       }
     }
     return e;
+  }
+
+  public static void showGeneralError(final String message) {
+    NotifyUser.logError(message);
+    NotifyUser.showProgress();
+    NotifyUser.error(
+        I18n.t("We're sorry..."),
+        I18n.t("For some reason [%s] is currently experiencing errors. "
+            + "Try again refreshing your browser. "
+            + "If the problem persist, please provide us feedback with more info "
+            + "(see it in topbar menu > Errors info) so we can try to fix it. Thanks",
+            I18n.getSiteCommonName()), ERROR_ID, true);
   }
 
 }

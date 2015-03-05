@@ -32,8 +32,11 @@ import org.gwtbootstrap3.extras.growl.client.ui.GrowlOptions;
 import org.gwtbootstrap3.extras.growl.client.ui.GrowlPosition;
 import org.gwtbootstrap3.extras.growl.client.ui.GrowlTemplate;
 
+import cc.kune.common.shared.utils.TextUtils;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Image;
 import com.google.inject.Inject;
@@ -72,11 +75,22 @@ public class UserNotifierGrowl {
         position.setTop(false);
         options.setGrowlPosition(position);
 
+        String id = event.getId();
+        boolean hasId = TextUtils.notEmpty(id);
+
+        if (hasId && DOM.getElementById(id) != null) {
+          // this notification is already present so, don't do nothing
+          return;
+        }
+
         final GrowlTemplate gt = GrowlHelper.getNewTemplate();
-        gt.setTitleDivider("<br>");
+
+        // As a workaround, we set the id in the <br>
+
+        gt.setTitleDivider(hasId? "<br id=\""+ id + "\">": "<br>");
         options.setTemplateObject(gt);
 
-        // TODO event.getId()
+
 
         final Boolean closeable = event.getCloseable();
         if (closeable) {
