@@ -60,14 +60,14 @@ import com.gwtplatform.mvp.client.Bootstrapper;
 public class KuneBootstrapper implements Bootstrapper {
 
   /** The Constant HOME_IDS_DEF_SUFFIX. */
-  protected static final String HOME_IDS_DEF_SUFFIX = "-def";
+  protected static final String HOME_IDS_DEF_SUFFIX = "_def";
 
   /** The Constant HOME_IDS_PREFIX. */
-  protected static final String HOME_IDS_PREFIX = "k-home-";
+  protected static final String HOME_IDS_PREFIX = "k_home_";
 
   protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.HOME_SCROLLER,
-    PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
-    PolymerId.HOME_TOOLBAR };
+      PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
+      PolymerId.HOME_TOOLBAR };
 
   private final ContentViewerSelector contentViewerSelector;
 
@@ -147,7 +147,7 @@ public class KuneBootstrapper implements Bootstrapper {
       final String[] ids = meta.split(",[ ]*");
 
       for (final String id : ids) {
-        final RootPanel someElement = RootPanel.get(HOME_IDS_PREFIX + id + "-" + currentLocale);
+        final RootPanel someElement = RootPanel.get(HOME_IDS_PREFIX + id + "_" + currentLocale);
         final RootPanel defElement = RootPanel.get(HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX);
         if (someElement != null) {
           someElement.setVisible(true);

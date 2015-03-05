@@ -23,10 +23,11 @@
           -->
     <meta name="kune.default.site.commonname" content="this site" />
     <!--  we use this array of id to show or hide the ids of this html depending on the locale
-          Sample: k-home-summary-es will be visible if locale=es
+          Sample: k_home_summary_es will be visible if locale=es of k_home_summary_def for
+          the default language
           You can add more ids here and below to show/hide then.
           -->
-    <meta name="kune.home.ids" content="loading-msg, summary, ini, footer" />
+    <meta name="kune.home.ids" content="motto, tool_docs, tool_events, tool_chats, tool_lists, tool_wiki, tool_messages, tool_tasks, tool_barters, slide-1" />
     <meta name="emite.httpBase" content="/http-bind/" />
     <meta name="emite.host" content="localhost" />
     <meta name="emite.searchHost" content="search.localhost" />
@@ -39,7 +40,8 @@
     <meta name="hablar.hasCopyToClipboard" content="true" />
     <!--<meta name="hablar.hasLogger" content="true" />-->
     <meta name="hablar.hasSignals" content="false" />
-    <meta name="hablar.roster" content="true" />
+    <meta name="hablar.ros
+                ter" content="true" />
     <meta name="hablar.dockRoster" content="left" />
     <meta name="hablar.icons" content="alt" />
     <!-- <meta name="hablar.layout" content="tabs" /> -->
@@ -266,7 +268,10 @@
                               <core-image fade preload src="./others/kune-logo-name-alone{{small ? '-big': xsmall? '-med': '-big'}}.png" alt="kune-longo-name"></core-image>
                             </span>
                           </div>
-                          <div><span id="k_home_motto">do it together<br>& share it</span></div>
+                          <div>
+                            <span id="k_home_motto_def" style="display: none;" class="k_home_motto">do it together<br>& share it</span>
+                            <span id="k_home_motto_es" style="display: none;" class="k_home_motto">hazlo en colectivo<br>y comp&aacute;rtelo</span>
+                          </div>
                         </div> <!-- end of logoname -->
                       </div> <!-- end of logo -->
                       <div id="k_home_main_buttons" horizontal end-justified layout>
@@ -298,20 +303,51 @@
                     <div horizontal center-justified layout id="sec0">
                       <div self-center>
                         <akyral-waypoint within="100" data-id="1"></akyral-waypoint>
-                        kune it's a web social toolbox where you can communicate, collaborate and share between equals, using different tools:
+                        <span style="display: none;" id="k_home_slide-1_def">
+                          kune it's a social network where you can communicate,
+                          collaborate and share between equals, using different web tools:
+                        </span>
+                        <span style="display: none;" id="k_home_slide-1_es">
+                          kune es una red social donde puedes comunicarte colaborar y
+                          compartir entre iguales, usando diferentes herramientas web:
+                        </span>
                         <div id="k_home_tools" wrap justified vertical?="{{!xsmall}}" horizontal?="{{xsmall}}" layout>
 
                         <div  wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
-                          <core-item icon="kune:docs" label="documents" horizontal center layout></core-item>
-                          <core-item icon="kune:events" label="calendars" horizontal center layout></core-item>
-                          <core-item icon="kune:chat-tool" label="chats" horizontal center layout></core-item>
-                          <core-item icon="kune:lists" label="forums" horizontal center layout></core-item>
+                          <core-item icon="kune:docs" horizontal center layout>
+                            <span id="k_home_tool_docs_def" style="display: none;">documents</span>
+                            <span id="k_home_tool_docs_es" style="display: none;">documentos</span>
+                          </core-item>
+                          <core-item icon="kune:events" horizontal center layout>
+                            <span id="k_home_tool_events_def" style="display: none;">calendars</span>
+                            <span id="k_home_tool_events_es" style="display: none;">calendarios</span>
+                          </core-item>
+                          <core-item icon="kune:chat-tool" horizontal center layout>
+                            <span id="k_home_tool_chats_def" style="display: none;">chats</span>
+                            <span id="k_home_tool_chats_es" style="display: none;">chats</span>
+                          </core-item>
+                          <core-item icon="kune:lists" horizontal center layout>
+                            <span id="k_home_tool_lists_def" style="display: none;">forums</span>
+                            <span id="k_home_tool_lists_es" style="display: none;">foros</span>
+                          </core-item>
                         </div>
                         <div wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
-                          <core-item icon="kune:wiki" label="wiki" horizontal center layout></core-item>
-                          <core-item icon="kune:message" label="messages" horizontal center layout></core-item>
-                          <core-item icon="kune:tasks" label="tasks" horizontal center layout></core-item>
-                          <core-item icon="kune:barter" label="barters" horizontal center layout></core-item>
+                          <core-item icon="kune:wiki" horizontal center layout>
+                            <span id="k_home_tool_wiki_def" style="display: none;">wiki</span>
+                            <span id="k_home_tool_wiki_es" style="display: none;">wiki</span>
+                          </core-item>
+                          <core-item icon="kune:message" horizontal center layout>
+                            <span id="k_home_tool_messages_def" style="display: none;">messages</span>
+                            <span id="k_home_tool_messages_es" style="display: none;">mensajes</span>
+                          </core-item>
+                          <core-item icon="kune:tasks" horizontal center layout>
+                            <span id="k_home_tool_tasks_def" style="display: none;">tasks</span>
+                            <span id="k_home_tool_tasks_es" style="display: none;">tareas</span>
+                          </core-item>
+                          <core-item icon="kune:barter" horizontal center layout>
+                            <span id="k_home_tool_barters_def" style="display: none;">barters</span>
+                            <span id="k_home_tool_barters_es" style="display: none;">trueques</span>
+                          </core-item>
                         </div> <!-- end kune icons 2 columns -->
                         </div>
                         </div>
@@ -648,7 +684,7 @@
           margin-bottom: {{xsmall? '5' : small? '10' : '10'}}px;
         }
 
-        #k_home_motto {
+        .k_home_motto {
           font-size: {{xsmall? '22' : small? '45' : '45'}}px;
           color: #a56941;
           float: left;
@@ -688,7 +724,7 @@
 
         #k_home_spin_container {
           background-color: {{homebackcolor}};
-          z-index: 10000;
+          z-index: 1000;
           opacity: 0.7;
         }
 
