@@ -27,7 +27,7 @@
           the default language
           You can add more ids here and below to show/hide then.
           -->
-    <meta name="kune.home.ids" content="motto, tool_docs, tool_events, tool_chats, tool_lists, tool_wiki, tool_messages, tool_tasks, tool_barters, slide-1" />
+    <meta name="kune.home.ids" content="motto, tool_docs, tool_events, tool_chats, tool_lists, tool_wiki, tool_messages, tool_tasks, tool_barters, slide-1, buck, decen, meaning, super, continuation" />
     <meta name="emite.httpBase" content="/http-bind/" />
     <meta name="emite.host" content="localhost" />
     <meta name="emite.searchHost" content="search.localhost" />
@@ -270,7 +270,7 @@
                           </div>
                           <div>
                             <span id="k_home_motto_def" style="display: none;" class="k_home_motto">do it together<br>& share it</span>
-                            <span id="k_home_motto_es" style="display: none;" class="k_home_motto">hazlo en colectivo<br>y comp&aacute;rtelo</span>
+                            <span id="k_home_motto_es" style="display: none;" class="k_home_motto">trabaja y comparte<br>en colectivo</span>
                           </div>
                         </div> <!-- end of logoname -->
                       </div> <!-- end of logo -->
@@ -358,11 +358,22 @@
                         <div horizontal center-justified layout flex>
                         </div>
                         <akyral-waypoint within="100" data-id="2"></akyral-waypoint>
-                         <blockquote id="buck_blockquote">Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
-                          <cite id="buck">
-                            <a href="https://en.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
-                          </cite>
-                        </blockquote>
+                        <span id="k_home_buck_def" style="display: none;">
+                          <blockquote class="buck_blockquote">
+                            Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
+                            <cite class="buck">
+                              <a href="https://en.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
+                            </cite>
+                          </blockquote>
+                        </span>
+                        <span id="k_home_buck_es" style="display: none;">
+                          <blockquote class="buck_blockquote">
+                            Haced que el mundo funcione para el 100% de la humanidad, en el menor tiempo posible, a través de la cooperación expontánea, y sin ningún daño ecológico o desventaja para nadie.                            
+                            <cite class="buck">
+                              <a href="https://es.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
+                            </cite>
+                          </blockquote>
+                        </span>
                       </div>
                     </div>
 
@@ -370,36 +381,64 @@
                     <div horizontal center-justified layout id="sec2">
                       <div self-center>
                         <akyral-waypoint within="100" data-id="3"></akyral-waypoint>
-                        kune.cc is just one the kune nodes. That is, kune is descentralized unlike other centralized platforms like Google+, or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.
+                        <span id="k_home_decen_def" style="display: none;">
+                          Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization. kune.cc is just one more node in this decentralized social network.
+                        </span>
+                        <span id="k_home_decen_es" style="display: none;">
+                          Kune es decentralizado, a diferencia de otras redes sociales como Google+ o Facebook. Así que como en un servicio de email, puedes elegir entre diferentes proveedores de kune y evitar la centralización de datos personales. kune.cc es solo un nodo más en esa red social descentralizada.
+                        </span>
                       </div>
                     </div>
 
                     <div horizontal center-justified layout id="sec3">
                       <div self-center>
                         <akyral-waypoint within="100" data-id="4"></akyral-waypoint>
-                        Kune means "together" in esperanto.
+                        <span id="k_home_meaning_def" style="display: none;">
+                          Kune means "together" in esperanto.
+                        </span>
+                        <span id="k_home_meaning_es" style="display: none;">
+                          Kune significa "juntos" en esperanto.
+                        </span>
                       </div>
                     </div>
 
                     <div horizontal center-justified layout id="sec4">
                       <div self-center>
-                        <div vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
-                          <div id="k_home_group_statsDISABLED">
-                            <!-- This id is optional for kune (you can create a different .html and preserve this id if you want this stats) -->
-                          </div>
-                          <div id="k_home_global_statsDISABLED">
-                            <!-- This id is optional for kune (you can create a different .html but preserve this id if you want this stats) -->
-                          </div>
-                          <div>
-                            kune is a continuation of the effort that we started in 2002 with
+                        <akyral-waypoint within="100" data-id="5"></akyral-waypoint>
+                        <span id="k_home_continuation_def" style="display: none;">
+                            kune is the continuation of the effort that we started in 2002 with
                             <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                            with a simple goal: bring the collaborative philosophy of
-                            Free Software to other areas.
-                            So we share our web services and tools to allow people to share knowledge.
-                          </div>
-                        </div>
+                            with a main goal:<br>to bring the collaborative philosophy of
+                            <a href="https://en.wikipedia.org/wiki/Free_software" target="_blank">Free Software</a>
+                            to other areas.
+                            We share our web services and tools to allow people to work together,
+                            to collaborate, to share knowledge, skills, solutions, etcetera.
+                        </span>
+                        <span id="k_home_continuation_es" style="display: none;">
+                          kune es la continuación del esfuerzo que comenzamos en el 2002 con                          
+                          <a href="http://ourproject.org" target="_blank">ourproject.org</a>
+                          con un objetivo principal:<br>llevar la filosofía colaborativa del                          
+                          <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
+                          a otras áreas.
+                          Compartimos nuestros servicios web y nuestras herramientas para
+                          permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
+                          soluciones, etcétera.                          
+                        </span>                        
                       </div>
                     </div>
+
+                    <div horizontal center-justified layout id="sec5">
+                      <div self-center>
+                        <akyral-waypoint within="100" data-id="4"></akyral-waypoint>
+                        <span id="k_home_super_def" style="display: none;">
+                          Welcome to the era where collaboration supersede to the corporation
+                        </span>
+                        <span id="k_home_super_es" style="display: none;">
+                          Bienvenido/a a la era en la que la cooperación substituye a la corporación
+                        </span>
+                      </div>
+                    </div>
+                    
 
                   </div>
                 </div> <!-- home-center -->
@@ -672,13 +711,16 @@
           width: 100%;
         }
 
+        #k_home_center,.buck_blockquote {
+          font-size: {{xsmall ? 18 : small? 20 : 24}}px;
+        }
+        
         #k_home_center {
-          width: {{xsmall ? '100%' : small? '80%' : '60%'}};
-          /* padding:  {{xsmall ? '10px' : '20px 0px'}}; */
-          font-size: {{xsmall? '17' : small? '20' : '20'}}px;
+          width: {{xsmall ? '100%' : small? '80%' : '60%'}};          
           margin: 0 auto;
         }
-
+        
+        
         #k_home_center div {
           margin-top: {{xsmall? '5' : small? '10' : '10'}}px;
           margin-bottom: {{xsmall? '5' : small? '10' : '10'}}px;
@@ -744,13 +786,13 @@
           border-color: #a56941;
         }
 
-        #buck_blockquote {
+        .buck_blockquote {
           margin: 1.5em 0 1.5em;
           padding: 0 1em 0 2.5em;
           position: relative;
         }
 
-        #buck_blockquote:before {
+        .buck_blockquote:before {
           color: #ccc;
           content: "\201C";
           font-size: 5em;
@@ -760,7 +802,7 @@
           line-height: 0.1em;
         }
 
-        #buck_blockquote:after {
+        .buck_blockquote:after {
           color: #ccc;
           content: "\201D";
           font-size: 5em;
@@ -770,7 +812,7 @@
           line-height: 0.1em;
         }
 
-        #buck {
+        .buck {
           display: block;
           margin-top: 5px;
           font-style: italic;
@@ -780,9 +822,10 @@
           content: "\2014 \2009";
         }
 
-        #buck_blockquote, #sec0, #sec1, #sec2, #sec3 {
+        /*
+        .buck_blockquote, #sec0, #sec1, #sec2, #sec3 {
           font-size: {{xsmall ? 16 : small? 20 : 24}}px;
-        }
+        } */
 
         .k_home_kune_flattr {
           margin-bottom: 4px;
@@ -1816,12 +1859,15 @@
         document.getElementById('sec2').style.height=h + "px";
         document.getElementById('sec3').style.height=h + "px";
         document.getElementById('sec4').style.height=h + "px";
+        document.getElementById('sec5').style.height=h + "px";
 
         var backs = ["others/home-back-trees.png",
                      "others/home-back-buck.png",
                      "others/home-back-decen.png",
                      "others/home-back-kunes.png",
-                     "others/home-back-op-en.png"];
+                     "others/home-back-op-en.png",
+                     "others/home-back-op-en.png"
+        ];
 
         var backSlideInit=false;
 

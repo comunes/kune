@@ -1,3 +1,9 @@
+kune (0.3.0+b48) unstable; urgency=medium
+
+  * Updates in home page (translations, etc)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 06 Mar 2015 01:12:30 +0100
+
 kune (0.3.0+b47) unstable; urgency=medium
 
   * Mayor update of our user interface
