@@ -101,6 +101,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   private final SearchPanelWidget container;
   private final ClientFileDownloadUtils downUtils;
   private final KuneDragController dragController;
+  private boolean draggable;
   @UiField
   Image groupAvatar;
   @UiField
@@ -154,11 +155,9 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
           // if not, the servelt returns a 1x1 transparent pixel, so the wave
           // can be dragged to a folder publish it.
 
-          // if (SessionInstance.get().isNewbie())
-          tooltip.setText(I18n.t("Drag and drop into a group or personal folder to publish"));
-
-          // Note: see make not dragable below
-          makeDragable();
+          draggable = true;
+        } else {
+          draggable = false;
         }
         groupAvatar.setSize("41px", "41px");
       }
@@ -181,6 +180,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   @Override
   public void deselect() {
     self.removeClassName("k-digest-selected");
+    makeNotDraggable();
   }
 
   @Override
@@ -197,11 +197,13 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   }
 
   private void makeDragable() {
+    tooltip.setText(I18n.t("Drag and drop into a group or personal folder to publish"));
     dragController.makeDraggable(CustomDigestDomImpl.this, title);
     dragController.makeDraggable(CustomDigestDomImpl.this, snippet);
   }
 
   public void makeNotDraggable() {
+    removeTooltip();
     try {
       dragController.makeNotDraggable(this);
     } catch (final RuntimeException e) {
@@ -249,14 +251,19 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     avatarsDiv.remove(0);
     msgs.setText("");
     self.removeClassName("k-digest-selected");
-    removeTooltip();
     makeNotDraggable();
     setVisible(false);
+    draggable = false;
   }
 
   @Override
   public void select() {
     self.addClassName("k-digest-selected");
+    if (draggable) {
+      makeDragable();
+    } else {
+      makeNotDraggable();
+    }
   }
 
   @Override
