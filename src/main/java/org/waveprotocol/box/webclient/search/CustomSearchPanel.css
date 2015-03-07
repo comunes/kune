@@ -23,15 +23,8 @@
 @eval listTop org.waveprotocol.box.webclient.search.SearchPanelWidget.CssConstants.LIST_TOP;
 @eval toolbarTop org.waveprotocol.box.webclient.search.SearchPanelWidget.CssConstants.TOOLBAR_TOP;
 
-/* Size to container. */
 .self {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
-  background-color: white;
-  z-index: 0;
+
 }
 
 .search {

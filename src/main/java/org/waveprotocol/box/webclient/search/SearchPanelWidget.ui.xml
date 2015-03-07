@@ -34,7 +34,7 @@
     xmlns:t="urn:import:org.waveprotocol.wave.client.widget.toolbar">
   <ui:with field="css" type="org.waveprotocol.box.webclient.search.SearchPanelWidget.Css"/>
   <g:FocusPanel ui:field="focus">
-    <w:ImplPanel ui:field='self' styleName='{css.self}'>
+    <w:ImplPanel ui:field='self' addStyleNames='searchPanelWidget'>
       <s:SearchWidget ui:field='search' addStyleNames='{css.search}'/>
       <t:ToplevelToolbarWidget ui:field='toolbar' addStyleNames='{css.toolbar}'/>
       <g:FlowPanel ui:field='list' styleName='{css.list}'>

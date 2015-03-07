@@ -230,10 +230,9 @@
               </core-toolbar>
               <section id="inbox_result_section">
                 <div vertical layout fit>
-                  <div id="inbox_result" flex three>
-
+                  <div id="inbox_result" flex>
                   </div>
-                  <div id="chat_centerpanel" flex two>
+                  <div id="chat_centerpanel" flex>
                     <core-header-panel mode="seamed" flex>
                       <core-toolbar>
                         <div>Chat</div>
@@ -718,8 +717,7 @@
         #k_home_center {
           width: {{xsmall ? '100%' : small? '80%' : '60%'}};          
           margin: 0 auto;
-        }
-        
+        }        
         
         #k_home_center div {
           margin-top: {{xsmall? '5' : small? '10' : '10'}}px;
@@ -1119,7 +1117,7 @@
 
         #inbox_result_section, #chat_centerpanel {
           /* height: 100%; */
-          padding: 10px;
+          /* padding: 10px; */
           background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
         }
 
@@ -1753,13 +1751,33 @@
           margin-right: 3px;
         }
 
-        .org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-self {
-          bottom: 40%;
+        
+        @external .*
+
+        /* Size to container. */
+        .self {
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          bottom: 0;
+          background-color: white;
+          z-index: 0;
+        }
+
+        .searchPanelWidget {
+          position: absolute;
+          top: 0;
+          right: 0;
+          left: 0;
+          background-color: white;
+          z-index: 0;
+          bottom: 0;
         }
 
         #chat_centerpanel > div {
           position: absolute;
-          top: 60%;
+          top: 50%;
           bottom: 50px;
           left: 0;
           right: 0;

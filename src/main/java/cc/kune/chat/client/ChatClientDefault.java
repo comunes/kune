@@ -22,7 +22,6 @@
  */
 package cc.kune.chat.client;
 
-import static cc.kune.polymer.client.Layout.*;
 import static com.google.gwt.query.client.GQuery.$;
 
 import java.util.Date;
@@ -46,7 +45,6 @@ import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStopEvent;
 import cc.kune.core.client.events.AvatarChangedEvent;
-import cc.kune.core.client.events.NewUserRegisteredEvent;
 import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.events.UserSignOutEvent;
@@ -122,38 +120,6 @@ public class ChatClientDefault implements ChatClient {
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public class ChatClientAction extends AbstractExtendedAction {
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see
-     * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
-     * common.client.actions.ActionEvent)
-     */
-    /**
-     * Instantiates a new chat client action.
-     *
-     * @param res
-     *          the res
-     */
-    public ChatClientAction() {
-      super();
-      kuneEventBus.addHandler(NewUserRegisteredEvent.getType(),
-          new NewUserRegisteredEvent.NewUserRegisteredHandler() {
-            @Override
-            public void onNewUserRegistered(final NewUserRegisteredEvent event) {
-              // // Blink the chat some seconds
-              // setBlink(true);
-              // new Timer() {
-              // @Override
-              // public void run() {
-              // setBlink(false);
-              // }
-              // }.schedule(20000);
-            }
-          });
-    }
-
     @Override
     public void actionPerformed(final ActionEvent event) {
       kuneEventBus.fireEvent(new ToggleShowChatDialogEvent());
@@ -194,8 +160,6 @@ public class ChatClientDefault implements ChatClient {
 
   /** The i18n. */
   private final I18nTranslationService i18n;
-
-  private final Element inboxDiv;
 
   /** The kune event bus. */
   private final EventBus kuneEventBus;
@@ -329,7 +293,6 @@ public class ChatClientDefault implements ChatClient {
     this.armor = armor;
 
     chatDiv = armor.getElement(PolymerId.CHAT_PANEL);
-    inboxDiv = armor.getElement(PolymerId.INBOX_RESULT);
 
     action = new ChatClientAction();
 
@@ -369,11 +332,11 @@ public class ChatClientDefault implements ChatClient {
         });
         kuneEventBus.addHandler(AvatarChangedEvent.getType(),
             new AvatarChangedEvent.AvatarChangedHandler() {
-              @Override
-              public void onAvatarChanged(final AvatarChangedEvent event) {
-                setAvatar(event.getPhotoBinary());
-              }
-            });
+          @Override
+          public void onAvatarChanged(final AvatarChangedEvent event) {
+            setAvatar(event.getPhotoBinary());
+          }
+        });
       }
     });
     kuneEventBus.addHandler(AppStopEvent.getType(), new AppStopEvent.AppStopHandler() {
@@ -765,16 +728,12 @@ public class ChatClientDefault implements ChatClient {
       createDialogIfNeeded();
       if (show) {
         PolymerUtils.setDrawerSelected();
-        PolymerUtils.addLayout(chatDiv, TWO);
-        PolymerUtils.addLayout(inboxDiv, THREE);
         chatDiv.getStyle().setDisplay(Display.BLOCK);
-        $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-self").css("bottom", "40%");
+        $(".searchPanelWidget").css("bottom", "50%");
       } else {
         PolymerUtils.setMainSelected();
-        PolymerUtils.removeLayout(chatDiv, TWO);
-        PolymerUtils.removeLayout(inboxDiv, THREE);
         chatDiv.getStyle().setDisplay(Display.NONE);
-        $(".org-waveprotocol-box-webclient-search-SearchPanelWidget-Css-self").css("bottom", "0px");
+        $(".searchPanelWidget").css("bottom", "0px");
       }
     }
   }
