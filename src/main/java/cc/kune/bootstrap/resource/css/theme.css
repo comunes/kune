@@ -283,7 +283,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #a56941;
+  /* color: #a56941; */
   text-decoration: none;
 }
 a:hover,
@@ -5838,7 +5838,7 @@ nav.k-toolbar-navbar > div > ul {
 
 nav.k-toolbar-navbar {
   border: 0px;
-  margin: 0px;  
+  margin: 0px;
   height: 40px;
   min-height: 40px !important;
   background-color: transparent !important;
@@ -5865,7 +5865,7 @@ nav.k-toolbar-navbar  .k-toolbar-separator {
 /* Active space in sitebar navbar */
 nav.k-toolbar-navbar > div > ul > li.current-item {
   border-bottom: 3px solid #69312f;
-} 
+}
 
 /* Warning: Smartmenus set this to normal */
 .navbar-nav .dropdown-menu > li > a {
@@ -5901,7 +5901,7 @@ nav.k-toolbar-navbar > div > ul > li.current-item {
   cursor: text;
 }
 
-.breadcrumb > div > div > div > li > a:hover {  
+.breadcrumb > div > div > div > li > a:hover {
   text-decoration: none;
   border-bottom: 1px solid;
 }
