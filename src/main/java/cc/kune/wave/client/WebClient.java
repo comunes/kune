@@ -516,8 +516,8 @@ public class WebClient extends Composite implements WaveClientView {
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl() /*-{
-    return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
-        + $wnd.__websocket_address + "/";
+		return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
+				+ $wnd.__websocket_address + "/";
   }-*/;
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#login()
@@ -591,6 +591,7 @@ public class WebClient extends Composite implements WaveClientView {
    */
   private void openWaveImpl(final WaveRef waveRef, final boolean isNewWave, final Set<ParticipantId> participants) {
     LOG.info("WebClient.openWave()");
+    NotifyUser.showProgress();
 
     final String waveUri = GwtWaverefEncoder.encodeToUriPathSegment(waveRef);
 
@@ -634,6 +635,8 @@ public class WebClient extends Composite implements WaveClientView {
               @Override
               public void execute() {
                 loading.removeFromParent();
+
+                NotifyUser.hideProgress();
               }
             });
 
@@ -646,7 +649,7 @@ public class WebClient extends Composite implements WaveClientView {
             // We can now open again the same wave without errors
             currentOpenedWaveUri = null;
             final String encodedToken = HistoryUtils.undoHashbang(History.getToken());
-            // Kune patch
+
             if (encodedToken != null && !encodedToken.isEmpty() &&
                 !TokenMatcher.isInboxToken(encodedToken) && !TokenMatcher.isGroupToken(encodedToken)) {
               WaveRef fromWaveRef;
@@ -782,6 +785,6 @@ public class WebClient extends Composite implements WaveClientView {
    * @return true, if successful
    */
   private native boolean useSocketIO() /*-{
-    return !window.WebSocket
+		return !window.WebSocket
   }-*/;
 }
