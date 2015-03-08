@@ -40,7 +40,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class I18nTranslatorPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I18nTranslatorView {
@@ -55,7 +55,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
   private static final String TRANSLATOR_PANEL_ID = "i18n-trans-panel";
 
   /** The Constant WIDTH. */
-  private static final int WIDTH = 570;
+  private static final int WIDTH = 600;
 
   /** The checkbox. */
   private final CheckBox checkbox;
@@ -77,7 +77,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
   /**
    * Instantiates a new i18n translator panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param images
@@ -167,7 +167,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
   /**
    * Refresh langs.
-   * 
+   *
    * @param lanSelectorFullTranslatedPanel
    *          the lan selector full translated panel
    * @param lanSelectorPanel
@@ -192,7 +192,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
   /**
    * Sets the language.
-   * 
+   *
    * @param fromLanguage
    *          the from language
    * @param toLanguage
