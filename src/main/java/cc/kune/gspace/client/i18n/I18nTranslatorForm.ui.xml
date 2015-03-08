@@ -66,6 +66,7 @@
     .toTranlateLabel {
       height: 95px !important;
       overflow-y: scroll;
+      text-align: left;
     }
   </ui:style>
   <g:FlowPanel addStyleNames="{style.table}">
