@@ -15,6 +15,7 @@
  */
 package cc.kune.gspace.client.i18n;
 
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
@@ -25,7 +26,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.KeyPressEvent;
+import com.google.gwt.event.dom.client.KeyUpEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
@@ -39,14 +40,14 @@ import com.google.gwt.user.client.ui.Widget;
 // TODO: Auto-generated Javadoc
 /**
  * A form used for editing translations.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class I18nTranslatorForm extends Composite {
 
   /**
    * The Interface Binder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   interface Binder extends UiBinder<Widget, I18nTranslatorForm> {
@@ -135,7 +136,7 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Handle blur.
-   * 
+   *
    * @param event
    *          the event
    */
@@ -146,7 +147,7 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Handle click on copy icon.
-   * 
+   *
    * @param e
    *          the e
    */
@@ -159,7 +160,7 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Handle key press.
-   * 
+   *
    * @param event
    *          the event
    */
@@ -170,30 +171,34 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Handle key press.
-   * 
+   *
    * @param event
    *          the event
    */
   @UiHandler("translation")
-  void handleKeyPress(final KeyPressEvent event) {
+  void handleKeys(final KeyUpEvent event) {
+    Log.debug("Translator key " + event.getNativeKeyCode());
+    Log.debug("Translator is Alt " + event.isAltKeyDown());
     if (event.isAltKeyDown()
         && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_PAGEUP) {
+      Log.debug("Translator pageup");
       saveIfNeeded();
       dataProvider.selectPrevious();
     } else if (event.isAltKeyDown()
         && event.getNativeEvent().getKeyCode() == com.google.gwt.event.dom.client.KeyCodes.KEY_PAGEDOWN) {
+      Log.debug("Translator pagedown");
       saveIfNeeded();
       dataProvider.selectNext();
-    } else if (event.isAltKeyDown() && event.getCharCode() == 'v') {
+    } else if (event.isAltKeyDown() && event.getNativeKeyCode() == 86) {
+      Log.debug("Translator copy");
       copyTranslation();
-      event.stopPropagation();
       updateWithTimer();
     }
   }
 
   /**
    * Inits the.
-   * 
+   *
    * @param dataProvider
    *          the data provider
    * @param i18n
@@ -232,7 +237,7 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Sets the info.
-   * 
+   *
    * @param item
    *          the new info
    */
@@ -252,7 +257,7 @@ public class I18nTranslatorForm extends Composite {
 
   /**
    * Sets the to language.
-   * 
+   *
    * @param language
    *          the new to language
    */
