@@ -34,6 +34,7 @@ import cc.kune.common.client.notify.UserNotifierGrowl;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
+import cc.kune.common.client.shortcuts.GlobalShortcutsInstance;
 import cc.kune.common.client.ui.MaskWidgetView;
 import cc.kune.common.client.ui.PaperMask;
 import cc.kune.common.shared.i18n.HasRTL;
@@ -187,6 +188,7 @@ public class CoreGinModule extends ExtendedGinModule {
 
     bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
     bind(GlobalShortcuts.class).in(Singleton.class);
+    requestStaticInjection(GlobalShortcutsInstance.class);
 
     s(AnonUsersManager.class);
     s(LinkInterceptor.class);
