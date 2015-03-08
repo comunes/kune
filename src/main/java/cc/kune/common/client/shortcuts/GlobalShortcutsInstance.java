@@ -23,40 +23,21 @@
 
 package cc.kune.common.client.shortcuts;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
-import cc.kune.common.client.actions.ActionEvent;
-import cc.kune.common.client.actions.KeyStroke;
-import cc.kune.common.client.actions.Shortcut;
-
-import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.web.bindery.event.shared.EventBus;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class GlobalShortcuts.
- *
- * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
- */
-@Singleton
-public class GlobalShortcuts {
+public class GlobalShortcutsInstance {
+
+
+  /** The event bus. */
+  @Inject
+  private static GlobalShortcutRegister register;
 
   /**
-   * Instantiates a new global shortcuts.
+   * Gets the.
    *
-   * @param register the register
-   * @param eventBus the event bus
+   * @return the event bus
    */
-  @Inject
-  public GlobalShortcuts(final GlobalShortcutRegister register, final EventBus eventBus) {
-    register.put(KeyStroke.getKeyStroke(KeyCodes.KEY_ESCAPE, 0), new AbstractExtendedAction() {
-      @Override
-      public void actionPerformed(final ActionEvent event) {
-        OnEscapePressedEvent.fire(eventBus);
-      }
-    });
-    // More global shortcuts here (...)
+  public static GlobalShortcutRegister get() {
+    return register;
   }
-
 }

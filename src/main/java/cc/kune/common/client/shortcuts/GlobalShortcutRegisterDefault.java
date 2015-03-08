@@ -47,9 +47,10 @@ public class GlobalShortcutRegisterDefault extends InputMap implements GlobalSho
 
   /** The event handler. */
   private final NativePreviewHandler eventHandler;
-  
+
   /** The handler reg. */
   private HandlerRegistration handlerReg;
+
 
   /**
    * Instantiates a new global shortcut register default.
@@ -83,6 +84,7 @@ public class GlobalShortcutRegisterDefault extends InputMap implements GlobalSho
    */
   @Override
   public void disable() {
+    Log.debug("Global shortcut disabled");
     if (handlerReg != null) {
       handlerReg.removeHandler();
     }
@@ -93,6 +95,7 @@ public class GlobalShortcutRegisterDefault extends InputMap implements GlobalSho
    */
   @Override
   public void enable() {
+    Log.debug("Global shortcut enabled");
     enableImpl();
   }
 

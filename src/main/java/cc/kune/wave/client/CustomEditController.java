@@ -32,6 +32,9 @@ import org.waveprotocol.wave.client.wavepanel.impl.focus.FocusBlipSelector;
 import org.waveprotocol.wave.client.wavepanel.impl.focus.FocusFramePresenter;
 import org.waveprotocol.wave.client.wavepanel.view.BlipView;
 
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.client.shortcuts.GlobalShortcutsInstance;
+
 public class CustomEditController implements EditSession.Listener, WavePanel.LifecycleListener,
 FocusFramePresenter.Listener, CustomEditToolbarImpl.Listener {
 
@@ -50,6 +53,7 @@ FocusFramePresenter.Listener, CustomEditToolbarImpl.Listener {
   private final FocusFramePresenter focus;
   private final WavePanelImpl panel;
   BlipView rootBlip;
+  private GlobalShortcutRegister globalShortcuts;
 
   public CustomEditController(final FocusFramePresenter focus, final Actions actions,
       final EditSession edit, final WavePanelImpl panel, final FocusBlipSelector blipSelector,
@@ -66,6 +70,7 @@ FocusFramePresenter.Listener, CustomEditToolbarImpl.Listener {
     editToolbar.setListener(this);
     editToolbar.setEditAndReplyVisible(true);
     editToolbar.setEditDoneVisible(false);
+    globalShortcuts = GlobalShortcutsInstance.get();
   }
 
   private BlipView getFocusedOrRoot() {
@@ -86,11 +91,13 @@ FocusFramePresenter.Listener, CustomEditToolbarImpl.Listener {
   @Override
   public void onEdit() {
     actions.startEditing(getFocusedOrRoot());
+    globalShortcuts.disable();
   }
 
   @Override
   public void onEditDone() {
     actions.stopEditing();
+    globalShortcuts.enable();
   }
 
   @Override
@@ -132,6 +139,7 @@ FocusFramePresenter.Listener, CustomEditToolbarImpl.Listener {
     // On edit session end
     editToolbar.setEnable(true);
     editToolbar.setEditDoneVisible(false);
+    globalShortcuts.enable();
   }
 
   @Override
@@ -139,5 +147,6 @@ FocusFramePresenter.Listener, CustomEditToolbarImpl.Listener {
     // On edit session start
     editToolbar.setEnable(false);
     editToolbar.setEditDoneVisible(true);
+    globalShortcuts.disable();
   }
 }
