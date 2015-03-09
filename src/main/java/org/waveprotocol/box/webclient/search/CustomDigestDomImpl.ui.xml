@@ -27,7 +27,11 @@
 
             <g:FlowPanel addStyleNames='k-digest-avatar'>
 
-              <g:SimplePanel addStyleNames='k-digest-group-avatar'><g:Image ui:field="groupAvatar"></g:Image></g:SimplePanel>
+              <g:SimplePanel addStyleNames='k-digest-group-avatar'>
+
+                <g:Image ui:field="groupAvatar"></g:Image>
+
+              </g:SimplePanel>
 
             </g:FlowPanel> <!-- first avatar -->
 
