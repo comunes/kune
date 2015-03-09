@@ -93,7 +93,9 @@ public class SiteLanguageSelector extends WidgetMenuDescriptor {
           final MenuItemDescriptor menuItem = new MenuItemDescriptor(SiteLanguageSelector.this,
               new LocaleAction(locale));
           final String nativeName = LocaleInfo.getLocaleNativeDisplayName(locale);
-          menuItem.withText(TextUtils.notEmpty(nativeName) ? nativeName : locale);
+          String text = TextUtils.notEmpty(nativeName) ? nativeName : locale;
+          text = text.equals("qu") ? "Quechua" : text;
+          menuItem.withText(text);
           if (locale.equals(currentLocale)) {
             menuItem.setStyles(Styles.ACTIVE);
           }

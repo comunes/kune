@@ -1,3 +1,10 @@
+kune (0.3.0+b50) unstable; urgency=medium
+
+  * Quechua has no locale name, manual setted
+  * overflow-x hidden in inbox
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 09 Mar 2015 21:38:31 +0100
+
 kune (0.3.0+b49) unstable; urgency=medium
 
   * Some minor style changes
