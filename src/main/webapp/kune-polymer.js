@@ -39,7 +39,9 @@ kt.avatarsizes=50;
 
 kt.homebackimg="others/home-back-trees.png";
 
-kt.homebackcolor='rgb(255, 204, 170)';
+//kt.homebackcolor = 'rgb(255, 204, 170)'; 1st...
+kt.homebackcolor = "#e8c6b2";
+
 /* kt.group_back_image_url='http://lorempixel.com/1500/1500'; */
 kt.showingSearch=false;
 
