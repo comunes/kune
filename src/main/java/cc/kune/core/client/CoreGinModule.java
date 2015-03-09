@@ -120,6 +120,7 @@ import cc.kune.core.client.state.SessionInstance;
 import cc.kune.core.client.state.SiteTokenListeners;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
+import cc.kune.core.client.state.StateManagerInstance;
 import cc.kune.core.client.state.StateTokenUtils;
 import cc.kune.core.client.state.TokenMatcher;
 import cc.kune.core.client.state.impl.ContentCacheDefault;
@@ -269,6 +270,7 @@ public class CoreGinModule extends ExtendedGinModule {
     requestStaticInjection(AsyncCallbackSimple.class);
     s(StateManagerDefault.class);
     bind(StateManager.class).to(StateManagerDefault.class).in(Singleton.class);
+    requestStaticInjection(StateManagerInstance.class);
     s(AccessRightsClientManager.class);
     bind(ContentCache.class).to(ContentCacheDefault.class).in(Singleton.class);
     bind(HistoryWrapper.class).to(HistoryWrapperDefault.class).in(Singleton.class);
