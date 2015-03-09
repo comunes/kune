@@ -98,9 +98,9 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
     bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
     armor.getEntityToolsNorth().add(widget);
     deck.showWidget(2);
-    adminsDropController.init(firstCategoryFlow);
+    adminsDropController.init(firstCategoryPanel);
     adminsDropController.init(firstCategoryLabel);
-    collabsDropController.init(sndCategoryFlow);
+    collabsDropController.init(sndCategoryPanel);
     collabsDropController.init(sndCategoryLabel);
     allMembersDropController.init(mainTitle);
   }

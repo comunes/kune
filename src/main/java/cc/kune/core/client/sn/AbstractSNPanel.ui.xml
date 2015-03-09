@@ -14,28 +14,34 @@
     <g:DeckPanel ui:field="deck" addStyleNames="k-sn-deck">
       <g:Label ui:field="firstDeckLabel" addStyleNames="k-sn-novisible-label"/>
       <g:Label ui:field="sndDeckLabel" addStyleNames="k-sn-orphan-label"/>
-      <g:FlowPanel width="100%" ui:field="categoriesFlow">
-        <g:FlowPanel ui:field="firstCategoryPanel" addStyleNames="k-sn-1st-panel">
-          <g:Label text="Admins" ui:field="firstCategoryLabel"
-            addStyleNames="k-sn-adminslabel"/>
-          <g:Label ui:field="firstCategoryCount" addStyleNames="k-sn-adminsCountlabel"/>
-          <g:FlowPanel addStyleNames="k-sn-adminsflow"
-            ui:field="firstCategoryFlow"/>
+      <g:FlowPanel>
+        <g:FlowPanel width="100%" ui:field="categoriesFlow">
+          <g:FlowPanel ui:field="firstCategoryPanel"
+            addStyleNames="k-sn-1st-panel">
+            <g:Label text="Admins" ui:field="firstCategoryLabel"
+              addStyleNames="k-sn-adminslabel"/>
+            <g:Label ui:field="firstCategoryCount"
+              addStyleNames="k-sn-adminsCountlabel"/>
+            <g:FlowPanel addStyleNames="k-sn-adminsflow"
+              ui:field="firstCategoryFlow"/>
+          </g:FlowPanel>
         </g:FlowPanel>
-      </g:FlowPanel>
-      <g:FlowPanel ui:field="sndCategoryPanel" addStyleNames="k-sn-2nd-panel">
-        <g:Label text="Collabs" ui:field="sndCategoryLabel"
-          addStyleNames="k-sn-collabslabel"/>
-        <g:Label ui:field="sndCategoryCount" addStyleNames="k-sn-collabsCountlabel"/>
-        <g:FlowPanel ui:field="sndCategoryFlow"
-          addStyleNames="k-sn-collabsflow"/>
-      </g:FlowPanel>
-      <g:FlowPanel ui:field="trdCategoryPanel" addStyleNames="k-sn-3rd-panel">
-        <g:Label text="Pendings" ui:field="trdCategoryLabel"
-          addStyleNames="k-sn-pendingslabel"/>
-        <g:Label ui:field="trdCategoryCount" addStyleNames="k-sn-pendingsCountlabel"/>
-        <g:FlowPanel addStyleNames="k-sn-pendingsflow"
-          ui:field="trdCategoryFlow"/>
+        <g:FlowPanel ui:field="sndCategoryPanel"
+          addStyleNames="k-sn-2nd-panel">
+          <g:Label text="Collabs" ui:field="sndCategoryLabel"
+            addStyleNames="k-sn-collabslabel"/>
+          <g:Label ui:field="sndCategoryCount" addStyleNames="k-sn-collabsCountlabel"/>
+          <g:FlowPanel ui:field="sndCategoryFlow"
+            addStyleNames="k-sn-collabsflow"/>
+        </g:FlowPanel>
+        <g:FlowPanel ui:field="trdCategoryPanel"
+          addStyleNames="k-sn-3rd-panel">
+          <g:Label text="Pendings" ui:field="trdCategoryLabel"
+            addStyleNames="k-sn-pendingslabel"/>
+          <g:Label ui:field="trdCategoryCount" addStyleNames="k-sn-pendingsCountlabel"/>
+          <g:FlowPanel addStyleNames="k-sn-pendingsflow"
+            ui:field="trdCategoryFlow"/>
+        </g:FlowPanel>
       </g:FlowPanel>
     </g:DeckPanel>
   </g:FlowPanel>

@@ -47,7 +47,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.DeckPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
