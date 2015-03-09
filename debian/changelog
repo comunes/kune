@@ -2,6 +2,7 @@ kune (0.3.0+b49) unstable; urgency=medium
 
   * Some minor style changes
   * Some fixes in wave (delete visible, i18n issues)
+  * Added Quechua and Hebred languages
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 07 Mar 2015 15:46:11 +0100
 

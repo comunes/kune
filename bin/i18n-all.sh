@@ -9,11 +9,13 @@ bin/i18n-db2gwt.sh -l tr > KuneConstants_tr.properties
 bin/i18n-db2gwt.sh -l de > KuneConstants_de.properties
 bin/i18n-db2gwt.sh -l ar > KuneConstants_ar.properties
 bin/i18n-db2gwt.sh -l ru > KuneConstants_ru.properties
+bin/i18n-db2gwt.sh -l he > KuneConstants_he.properties
 bin/i18n-db2gwt.sh -l hu > KuneConstants_hu.properties
 bin/i18n-db2gwt.sh -l pl > KuneConstants_pl.properties
 bin/i18n-db2gwt.sh -l gl > KuneConstants_gl.properties
 bin/i18n-db2gwt.sh -l eu > KuneConstants_eu.properties
 bin/i18n-db2gwt.sh -l sl > KuneConstants_sl.properties
+bin/i18n-db2gwt.sh -l qu > KuneConstants_qu.properties
 bin/i18n-db2gwt.sh -l pt > KuneConstants_pt.properties
 bin/i18n-db2gwt.sh -l pt_BR > KuneConstants_pt_BR.properties
 bin/i18n-db2gwt.sh -l zh_TW | tee KuneConstants_zh_HK.properties > KuneConstants_zh_TW.properties

@@ -32,7 +32,6 @@ import org.waveprotocol.wave.model.waveref.WaveRef;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.log.Log;
-import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.ui.WrappedFlowPanel;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.res.KuneIcon;
@@ -48,7 +47,6 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.DoubleClickEvent;
-import com.google.gwt.event.dom.client.DragEvent;
 import com.google.gwt.event.dom.client.MouseEvent;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
@@ -92,7 +90,7 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
    * Positioning constants for components of this panel.
    */
   static class CssConstants {
-    private static int SEARCH_HEIGHT_PX = 51; // To match wave panel. 
+    private static int SEARCH_HEIGHT_PX = 51; // To match wave panel.
     private static int TOOLBAR_HEIGHT_PX =
         SearchPanelResourceLoader.getPanel().emptyToolbar().getHeight();
     private static int TOOLBAR_TOP_PX = 0 + SEARCH_HEIGHT_PX;
@@ -275,6 +273,7 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   @Override
   public CustomDigestDomImpl insertAfter(final DigestView ref, final Digest digest) {
+    Log.info("SearchPanel insertAfter");
     final CustomDigestDomImpl digestUi = digestPool.get();
     renderer.render(digest, digestUi);
     setWaveUri(digest, digestUi);
@@ -282,6 +281,8 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     final Widget refDomImpl =  narrow(ref);
     final Widget refElement = refDomImpl != null ? refDomImpl : showMore;
     byId.put(digestUi.getId(), digestUi);
+    // We detach the element before inserting it again or before position calculations
+    detachDigest(digestUi);
     final int position = list.getWidgetIndex(refElement);
     if (!refElement.equals(showMore)) {
       digests.insertAfter((CustomDigestDomImpl) refDomImpl, digestUi);
@@ -295,18 +296,25 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   @Override
   public CustomDigestDomImpl insertBefore(final DigestView ref, final Digest digest) {
+    Log.info("SearchPanel insertBefore");
     final CustomDigestDomImpl digestUi = digestPool.get();
     renderer.render(digest, digestUi);
     setWaveUri(digest, digestUi);
 
     final Widget refDomImpl = narrow(ref);
     final Widget refElement = refDomImpl != null ? refDomImpl : showMore;
+    detachDigest(digestUi);
     final int position = list.getWidgetIndex(refElement);
     byId.put(digestUi.getId(), digestUi);
     digests.insertBefore((CustomDigestDomImpl) refDomImpl, digestUi);
-    list.insert(digestUi, position);
+    list.insert(digestUi, (position-1 == 0? 0:position-1));
 
     return digestUi;
+  }
+
+  private void detachDigest(final CustomDigestDomImpl digestUi) {
+    if (digestUi.isAttached())
+      digestUi.removeFromParent();
   }
 
   void onDigestRemoved(final CustomDigestDomImpl digestUi) {
