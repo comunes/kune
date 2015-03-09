@@ -45,10 +45,9 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.DeckPanel;
-import com.google.gwt.user.client.ui.DockLayoutPanel;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.ScrollPanel;
+
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
@@ -74,12 +73,6 @@ public class AbstractSNPanel extends ViewImpl {
 
   /** The Constant AVATARSIZE. */
   private final static int AVATARSIZE = 22;
-
-  /** The Constant CATEG_HEIGHT. */
-  private final static String CATEG_HEIGHT = "86px";
-
-  /** The Constant CATEG_MIN_HEIGHT. */
-  private final static String CATEG_MIN_HEIGHT = "58px";
 
   /** The ui binder. */
   private static AbstractSNPanelUiBinder uiBinder = GWT.create(AbstractSNPanelUiBinder.class);
@@ -124,11 +117,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /** The first category panel. */
   @UiField
-  DockLayoutPanel firstCategoryPanel;
-
-  /** The first category scroll. */
-  @UiField
-  ScrollPanel firstCategoryScroll;
+  FlowPanel firstCategoryPanel;
 
   /** The first deck label. */
   @UiField
@@ -162,11 +151,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /** The snd category panel. */
   @UiField
-  DockLayoutPanel sndCategoryPanel;
-
-  /** The snd category scroll. */
-  @UiField
-  ScrollPanel sndCategoryScroll;
+  FlowPanel sndCategoryPanel;
 
   /** The snd deck label. */
   @UiField
@@ -186,11 +171,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /** The trd category panel. */
   @UiField
-  DockLayoutPanel trdCategoryPanel;
-
-  /** The trd category scroll. */
-  @UiField
-  ScrollPanel trdCategoryScroll;
+  FlowPanel trdCategoryPanel;
 
   /** The widget. */
   protected final Widget widget;
@@ -224,7 +205,7 @@ public class AbstractSNPanel extends ViewImpl {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -357,7 +338,6 @@ public class AbstractSNPanel extends ViewImpl {
    */
   public void setFirstCategoryVisible(final boolean visible, final boolean big) {
     firstCategoryPanel.setVisible(visible);
-    firstCategoryPanel.setHeight(visible ? (big ? CATEG_HEIGHT : CATEG_MIN_HEIGHT) : "0px");
   }
 
   /**
@@ -370,7 +350,6 @@ public class AbstractSNPanel extends ViewImpl {
    */
   public void setSndCategoryVisible(final boolean visible, final boolean big) {
     sndCategoryPanel.setVisible(visible);
-    sndCategoryPanel.setHeight(visible ? (big ? CATEG_HEIGHT : CATEG_MIN_HEIGHT) : "0px");
   }
 
   /**
@@ -395,6 +374,5 @@ public class AbstractSNPanel extends ViewImpl {
    */
   public void setTrdCategoryVisible(final boolean visible, final boolean big) {
     trdCategoryPanel.setVisible(visible);
-    trdCategoryPanel.setHeight(visible ? (big ? CATEG_HEIGHT : CATEG_MIN_HEIGHT) : "0px");
   }
 }

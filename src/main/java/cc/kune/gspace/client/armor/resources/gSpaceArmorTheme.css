@@ -22,11 +22,11 @@
 }
 
 .k-sn-maintitle {
-  color: c5;
+  /* color: c5; */
 }
 
 .entityToolsNorth span,.k-sn-deck div {
-  color: c1;
+  /* color: c1; */
 }
 
 .k-sn-1st-panel {
@@ -34,18 +34,18 @@
 }
 
 .k-sn-2nd-panel {
-  background-color: bc2;
+  /* background-color: bc2; */
 }
 
 .k-sn-2nd-panel span {
-  color: c2;
+  /* color: c2; */
 }
 
 .k-sn-3rd-panel {
 }
 
 .entityToolsCenter span {
-  color: #FFF;
+  /* color: #FFF; */
 }
 
 .k-tool-panel {

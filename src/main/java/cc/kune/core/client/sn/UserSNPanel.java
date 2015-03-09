@@ -109,14 +109,11 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
     noBuddies.addStyleName("kune-Margin-Medium-l");
     noPublic = new Label(i18n.t(CoreMessages.BUDDIES_NOT_PUBLIC));
     noPublic.addStyleName("kune-Margin-Medium-l");
-    notDrop.register(firstCategoryScroll);
-    notDrop.register(sndCategoryScroll);
-    notDrop.register(trdCategoryScroll);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.UserSNPresenter.UserSNView#addBuddie(cc.kune.core
    * .shared.dto.UserSimpleDTO, java.lang.String, java.lang.String,
@@ -133,7 +130,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.UserSNPresenter.UserSNView#addParticipation(cc.kune
    * .core.shared.dto.GroupDTO, java.lang.String, java.lang.String,
@@ -149,7 +146,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.UserSNPresenter.UserSNView#addTextToBuddieList(java
    * .lang.String)
@@ -163,7 +160,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#setBuddiesCount(int)
    */
   @Override
@@ -174,7 +171,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.UserSNPresenter.UserSNView#setBuddiesVisible(boolean
    * , boolean)
@@ -186,7 +183,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#setNoBuddies()
    */
   @Override
@@ -198,7 +195,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.UserSNPresenter.UserSNView#setParticipationCount
    * (int)
@@ -210,7 +207,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.UserSNPresenter.UserSNView#setParticipationVisible
    * (boolean, boolean)
@@ -222,7 +219,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#setVisible(boolean)
    */
   @Override
@@ -242,7 +239,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.sn.UserSNPresenter.UserSNView#showBuddies()
    */
   @Override
@@ -252,7 +249,7 @@ public class UserSNPanel extends AbstractSNPanel implements UserSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.UserSNPresenter.UserSNView#showBuddiesNotPublic()
    */

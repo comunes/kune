@@ -98,16 +98,16 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
     bottomActionsToolbar.setStyleName("k-sn-bottomPanel-actions");
     armor.getEntityToolsNorth().add(widget);
     deck.showWidget(2);
-    adminsDropController.init(firstCategoryScroll);
+    adminsDropController.init(firstCategoryFlow);
     adminsDropController.init(firstCategoryLabel);
-    collabsDropController.init(sndCategoryScroll);
+    collabsDropController.init(sndCategoryFlow);
     collabsDropController.init(sndCategoryLabel);
     allMembersDropController.init(mainTitle);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#addAdmin(cc.kune.core
    * .shared.dto.GroupDTO, java.lang.String, java.lang.String, java.lang.String,
@@ -125,7 +125,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#addCollab(cc.kune.core
    * .shared.dto.GroupDTO, java.lang.String, java.lang.String, java.lang.String,
@@ -143,7 +143,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#addPending(cc.kune.
    * core.shared.dto.GroupDTO, java.lang.String, java.lang.String,
@@ -161,7 +161,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#setAdminsCount(int)
    */
@@ -173,7 +173,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#setAdminsVisible(boolean
    * , boolean)
@@ -185,7 +185,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#setCollabsCount(int)
    */
@@ -196,7 +196,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#setCollabsVisible(boolean
    * , boolean)
@@ -208,7 +208,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#setPendingsCount(int)
    */
@@ -219,7 +219,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#setPendingVisible(boolean
    * , boolean)
@@ -231,7 +231,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#setVisible(boolean)
    */
@@ -252,7 +252,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#showMemberNotPublic()
    */
@@ -263,7 +263,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#showMembers()
    */
   @Override
@@ -273,7 +273,7 @@ public class GroupSNPanel extends AbstractSNPanel implements GroupSNView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.sn.GroupSNPresenter.GroupSNView#showOrphan()
    */
   @Override
