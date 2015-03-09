@@ -78,8 +78,8 @@ public class SiteLanguageSelector extends WidgetMenuDescriptor {
     Tooltip.to(btn, I18n.t("Choose your language"));
 
     /* Same as in KuneProd.gwt.xml */
-    final String[] availableLangs = { "ar", "ca", "de", "el", "en", "eo", "es", "eu", "fr", "gl", "hu",
-        "it", "pl", "pt", "pt_BR", "ro", "ru", "sl", "tr", "zh_HK", "zh_TW" };
+    final String[] availableLangs = { "ar", "ca", "de", "el", "en", "eo", "es", "eu", "fr", "gl", "he", "hu",
+        "it", "pl", "pt", "pt_BR", "qu", "ro", "ru", "sl", "tr", "zh_HK", "zh_TW" };
     session.onAppStart(true, new AppStartHandler() {
       @Override
       public void onAppStart(final AppStartEvent event) {
