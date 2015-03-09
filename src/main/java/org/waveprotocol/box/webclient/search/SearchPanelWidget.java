@@ -282,7 +282,6 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     final Widget refElement = refDomImpl != null ? refDomImpl : showMore;
     byId.put(digestUi.getId(), digestUi);
     // We detach the element before inserting it again or before position calculations
-    detachDigest(digestUi);
     final int position = list.getWidgetIndex(refElement);
     if (!refElement.equals(showMore)) {
       digests.insertAfter((CustomDigestDomImpl) refDomImpl, digestUi);
@@ -303,11 +302,10 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
     final Widget refDomImpl = narrow(ref);
     final Widget refElement = refDomImpl != null ? refDomImpl : showMore;
-    detachDigest(digestUi);
     final int position = list.getWidgetIndex(refElement);
     byId.put(digestUi.getId(), digestUi);
     digests.insertBefore((CustomDigestDomImpl) refDomImpl, digestUi);
-    list.insert(digestUi, (position-1 == 0? 0:position-1));
+    list.insert(digestUi, position);
 
     return digestUi;
   }
