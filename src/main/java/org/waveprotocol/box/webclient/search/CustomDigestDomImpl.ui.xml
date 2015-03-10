@@ -25,15 +25,11 @@
 
           <g:FlowPanel ui:field="avatarsDiv" addStyleNames='k-digest-avatarsDiv'>
 
-            <g:FlowPanel addStyleNames='k-digest-avatar'>
+            <g:SimplePanel ui:field="avatarsSummary">
+            </g:SimplePanel> <!-- first avatar -->
 
-              <g:SimplePanel addStyleNames='k-digest-group-avatar'>
-
-                <g:Image ui:field="groupAvatar"></g:Image>
-
-              </g:SimplePanel>
-
-            </g:FlowPanel> <!-- first avatar -->
+            <g:SimplePanel ui:field="groupAvatarContainer" addStyleNames='k-digest-group-avatar'>
+            </g:SimplePanel>
 
           </g:FlowPanel> <!-- avatars -->
 
@@ -57,6 +53,7 @@
 
         <div ui:field="timeDiv" addStyleNames='k-digest-timeDiv'>
           <g:InlineLabel ui:field="time" addStyleNames='k-digest-time'></g:InlineLabel>
+          <g:InlineLabel ui:field="position"></g:InlineLabel>
         </div> <!-- timeDiv -->
 
       </div> <!-- mainRight -->

@@ -1,5 +1,7 @@
 kune (0.3.0+b50) unstable; urgency=medium
 
+  * Fix typing issues in chrome+linux
+  * Improved search inbox (group space selection on inbox, drag&drop issues)
   * Quechua has no locale name, manual setted
   * overflow-x hidden in inbox
 

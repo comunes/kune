@@ -125,7 +125,7 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
       new ToppingUpPool.Factory<CustomDigestDomImpl>() {
         @Override
         public CustomDigestDomImpl create() {
-          final CustomDigestDomImpl digest = new CustomDigestDomImpl(SearchPanelWidget.this, dragController, downUtils, res);
+          final CustomDigestDomImpl digest = new CustomDigestDomImpl(SearchPanelWidget.this, dragController, downUtils);
           return digest;
         }
       }, 20);
@@ -144,7 +144,6 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   private final SearchPanelRenderer renderer;
 
-  private final CoreResources res;
 
   @UiField
   SearchWidget search;
@@ -158,10 +157,9 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   @UiField
   ToplevelToolbarWidget toolbar;
 
-  public SearchPanelWidget(final SearchPanelRenderer renderer, final KuneDragController dragController, final ClientFileDownloadUtils downUtils, final CoreResources res, final GSpaceArmor armor) {
+  public SearchPanelWidget(final SearchPanelRenderer renderer, final KuneDragController dragController, final ClientFileDownloadUtils downUtils, final GSpaceArmor armor) {
     this.downUtils = downUtils;
     this.dragController = dragController;
-    this.res = res;
     initWidget(BINDER.createAndBindUi(this));
     showMore.setVisible(false);
     showMore.setText(I18n.t("Show more results"));
@@ -178,7 +176,6 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
         handleShowMoreClicked();
       }
     });
-
   }
 
   @Override
@@ -187,6 +184,8 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
       digests.getFirst().remove(); // onDigestRemoved removes it from digests.
     }
     assert digests.isEmpty();
+    list.clear();
+    list.add(showMore);
   }
 
   @Override
@@ -256,8 +255,6 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     }
   }
 
-
-
   private void handleShowMoreClicked() {
     if (listener != null) {
       listener.onShowMoreClicked();
@@ -278,17 +275,21 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     renderer.render(digest, digestUi);
     setWaveUri(digest, digestUi);
 
+
     final Widget refDomImpl =  narrow(ref);
     final Widget refElement = refDomImpl != null ? refDomImpl : showMore;
     byId.put(digestUi.getId(), digestUi);
     // We detach the element before inserting it again or before position calculations
+    detachDigest(digestUi);
     final int position = list.getWidgetIndex(refElement);
     if (!refElement.equals(showMore)) {
       digests.insertAfter((CustomDigestDomImpl) refDomImpl, digestUi);
       list.insert(digestUi, position + 1);
+      digestUi.setPosition("" + position + 1);
     } else {
       digests.insertBefore((CustomDigestDomImpl) refDomImpl, digestUi);
       list.insert(digestUi, position);
+      digestUi.setPosition("" + position);
     }
     return digestUi;
   }
@@ -300,12 +301,14 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     renderer.render(digest, digestUi);
     setWaveUri(digest, digestUi);
 
+    detachDigest(digestUi);
     final Widget refDomImpl = narrow(ref);
     final Widget refElement = refDomImpl != null ? refDomImpl : showMore;
     final int position = list.getWidgetIndex(refElement);
     byId.put(digestUi.getId(), digestUi);
     digests.insertBefore((CustomDigestDomImpl) refDomImpl, digestUi);
     list.insert(digestUi, position);
+    digestUi.setPosition("" + position);
 
     return digestUi;
   }
@@ -348,5 +351,10 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     digestUi.setWaveUri(waveUri);
     // As we reuse the digest, we show it after rendered
     digestUi.setVisible(true);
+  }
+
+  @Override
+  public void reRender(DigestView digestView, Digest digest) {
+    renderer.render(digest, digestView);
   }
 }

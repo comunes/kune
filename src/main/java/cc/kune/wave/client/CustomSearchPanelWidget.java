@@ -52,8 +52,8 @@ public class CustomSearchPanelWidget extends SearchPanelWidget {
   @Inject
   public CustomSearchPanelWidget(final KuneWaveProfileManager profiles,
       final KuneDragController dragController, final ClientFileDownloadUtils downUtils,
-      final CoreResources res, final GSpaceArmor armor) {
-    super(new SearchPanelRenderer(profiles), dragController, downUtils, res, armor);
+      final GSpaceArmor armor) {
+    super(new SearchPanelRenderer(profiles), dragController, downUtils, armor);
     armor.wrapDiv(PolymerId.INBOX_RESULT).add(this);
     final PaperFab newMsg = PaperFab.wrap(PolymerId.INBOX_NEW_MESSAGE.getId());
     Tooltip.to(newMsg, I18n.t("New message"));

@@ -34,7 +34,6 @@ import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.dnd.KuneDragController;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.initials.AvatarComposite;
@@ -43,6 +42,8 @@ import cc.kune.polymer.client.PolymerUtils;
 
 import com.allen_sauer.gwt.dnd.client.HasDragHandle;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;
@@ -56,6 +57,7 @@ import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 
 public final class CustomDigestDomImpl extends Composite implements DigestView, HasDragHandle {
@@ -103,8 +105,6 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   private final KuneDragController dragController;
   private boolean draggable;
   @UiField
-  Image groupAvatar;
-  @UiField
   Element main;
   @UiField
   Element mainLeft;
@@ -114,25 +114,35 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   Element mainRight;
   @UiField
   InlineLabel msgs;
-  private final CoreResources res;
   private final Element self;
   @UiField
   InlineLabel snippet;
   @UiField
   InlineLabel time;
   @UiField
+  InlineLabel position;
+  @UiField
   InlineLabel title;
   private final Tooltip tooltip;
   @UiField
   FlowPanel unreadDiv;
+  @UiField
+  SimplePanel avatarsSummary;
+  @UiField
+  SimplePanel groupAvatarContainer;
+
   private String waveUri;
+  private List<Profile> currentProfiles;
+
+  public void setPosition(String text) {
+    position.setText(text);
+  }
 
   public CustomDigestDomImpl(final SearchPanelWidget container, final KuneDragController dragController,
-      final ClientFileDownloadUtils downUtils, final CoreResources res) {
+      final ClientFileDownloadUtils downUtils) {
     this.container = container;
     this.dragController = dragController;
     this.downUtils = downUtils;
-    this.res = res;
 
     initWidget(BINDER.createAndBindUi(this));
     self = this.getElement();
@@ -145,23 +155,36 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     PolymerUtils.addLayout(avatarsAndUnreadDiv, VERTICAL, LAYOUT);
     PolymerUtils.addLayout(avatarsDiv, HORIZONTAL, JUSTIFIED, LAYOUT);
     tooltip = Tooltip.to(this, "");
-    groupAvatar.addLoadHandler(new LoadHandler() {
+    position.setVisible(false); // only for test
+  }
 
+  private void createGroupAvatar(String url) {
+    groupAvatarContainer.clear();
+    final Image groupAvatar = new Image();
+    groupAvatar.addLoadHandler(new LoadHandler() {
       @Override
       public void onLoad(final LoadEvent event) {
-
-        if (groupAvatar.getWidth() == 1) {
-          // If the server loads an avatar, is already published in a group.
-          // if not, the servelt returns a 1x1 transparent pixel, so the wave
-          // can be dragged to a folder publish it.
-
-          draggable = true;
-        } else {
-          draggable = false;
-        }
-        groupAvatar.setSize("41px", "41px");
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            if (groupAvatar.getWidth() == 1) {
+              // If the server loads an avatar, is already published in a group.
+              // if not, the servelt returns a 1x1 transparent pixel, so the
+              // wave
+              // can be dragged to a folder publish it.
+              draggable = true;
+            } else {
+              draggable = false;
+            }
+            //Log.info("Inbox group avatar size: " + groupAvatar.getWidth() + "x"
+            //    + groupAvatar.getHeight());
+            groupAvatar.setSize("41px", "41px");
+          }
+        });
       }
     });
+    groupAvatarContainer.add(groupAvatar);
+    groupAvatar.setUrl(url);
   }
 
   private DragableImageParticipant createImageDragable(final String imageUrl, final String address) {
@@ -210,7 +233,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
       // gwt-dd don't have a way to check if some widget is dragable, and as
       // this Digest are reusable, then sometimes are dragables when is not
       // necessary
-      Log.debug("We tryied to remove a not (yet) dragable widget");
+      Log.debug("We tried to remove a not (yet) dragable widget");
     }
   }
 
@@ -247,28 +270,40 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     snippet.setText("");
     time.setText("");
     // remove avatars
-    groupAvatar.setResource(res.clear());
-    avatarsDiv.remove(0);
+    groupAvatarContainer.clear();
     msgs.setText("");
     self.removeClassName("k-digest-selected");
     makeNotDraggable();
     setVisible(false);
     draggable = false;
+    currentProfiles = null;
+    avatarsSummary.clear();
+    position.setText("");
   }
 
   @Override
   public void select() {
     self.addClassName("k-digest-selected");
     if (draggable) {
+      // Log.info("Digests is dragable");
       makeDragable();
     } else {
       makeNotDraggable();
+      // Log.info("Digests is not dragable");
     }
   }
 
   @Override
   public void setAvatars(final List<Profile> profiles) {
-    final LinkedList<IsWidget> names = new LinkedList<IsWidget>();
+    if (currentProfiles != null && profiles.size() == currentProfiles.size()) {
+      // Same participants, same avatars
+      Log.debug("SearchPanel same avatars");
+      return;
+    }
+    Log.debug("SearchPanel different avatars");
+    currentProfiles = profiles;
+
+    LinkedList<IsWidget> names = new LinkedList<IsWidget>();
     for (final Profile profile : profiles) {
       final String imageUrl = profile.getImageUrl();
       final String address = profile.getAddress();
@@ -285,13 +320,14 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
       // Try to use MediumAvatarDecorator or similar
       names.add(avatar);
     }
-    final AvatarComposite composite = AvatarCompositeFactory.get40().build(names);
+    AvatarComposite composite = AvatarCompositeFactory.get40().build(names);
     composite.addStyleName("k-digest-avatar");
-    avatarsDiv.insert(composite, 0);
+    avatarsSummary.clear();
+    avatarsSummary.add(composite);
   }
 
   public void setGroup(final GroupDTO group) {
-    groupAvatar.setUrl(downUtils.getGroupLogo(group));
+    createGroupAvatar(downUtils.getGroupLogo(group));
   }
 
   @Override
@@ -325,7 +361,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
 
   public void setWaveUri(final String waveUri) {
     this.waveUri = waveUri;
-    groupAvatar.setUrl(downUtils.getGroupLogoFromWaveUri(waveUri));
+    createGroupAvatar(downUtils.getGroupLogoFromWaveUri(waveUri));
   }
 
 }
