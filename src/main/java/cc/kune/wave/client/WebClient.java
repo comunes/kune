@@ -516,8 +516,8 @@ public class WebClient extends Composite implements WaveClientView {
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl() /*-{
-		return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
-				+ $wnd.__websocket_address + "/";
+    return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
+        + $wnd.__websocket_address + "/";
   }-*/;
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#login()
@@ -615,10 +615,9 @@ public class WebClient extends Composite implements WaveClientView {
               cc.kune.common.client.log.Log.info("Trying to open the same wave twice");
               currentOpenedWaveUri = null;
               return;
-            }
-              else
+            } else {
                 currentOpenedWaveUri = waveUri;
-
+            }
             WaveClientClearEvent.fire(eventBus);
             clear();
             eventBus.fireEvent(new BeforeOpenWaveEvent(waveUri));;
@@ -785,6 +784,12 @@ public class WebClient extends Composite implements WaveClientView {
    * @return true, if successful
    */
   private native boolean useSocketIO() /*-{
-		return !window.WebSocket
+    return !window.WebSocket
   }-*/;
+
+
+  @Override
+  public WaveStore getWaveStore() {
+    return waveStore;
+  }
 }

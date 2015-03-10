@@ -25,6 +25,7 @@ package cc.kune.wave.client.kspecific;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
 import org.waveprotocol.box.webclient.search.SimpleSearch;
+import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
@@ -95,5 +96,7 @@ public interface WaveClientView extends IsWidget {
    * Logout.
    */
   void logout();
+
+  WaveStore getWaveStore();
 
 }

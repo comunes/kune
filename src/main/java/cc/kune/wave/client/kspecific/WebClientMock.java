@@ -25,6 +25,7 @@ package cc.kune.wave.client.kspecific;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.WaveWebSocketClient;
 import org.waveprotocol.box.webclient.search.SimpleSearch;
+import org.waveprotocol.box.webclient.search.WaveStore;
 import org.waveprotocol.wave.client.account.ProfileManager;
 import org.waveprotocol.wave.client.common.safehtml.SafeHtml;
 import org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor;
@@ -34,7 +35,6 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class WebClientMock.
  *
@@ -58,7 +58,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.wave.client.kspecific.WaveClientView#getLoading()
    */
   @Override
@@ -68,7 +68,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.wave.client.kspecific.WaveClientView#getProfiles()
    */
   @Override
@@ -83,7 +83,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.wave.client.kspecific.WaveClientView#getStackTraceAsync(java.lang
    * .Throwable, org.waveprotocol.wave.client.common.util.AsyncHolder.Accessor)
@@ -94,7 +94,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.wave.client.kspecific.WaveClientView#getWebSocket()
    */
   @Override
@@ -105,7 +105,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.wave.client.kspecific.WaveClientView#login()
    */
   @Override
@@ -114,7 +114,7 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.wave.client.kspecific.WaveClientView#logout()
    */
   @Override
@@ -123,6 +123,11 @@ public class WebClientMock extends Composite implements WaveClientView {
 
   @Override
   public void clear() {
+  }
+
+  @Override
+  public WaveStore getWaveStore() {
+    return null;
   }
 
 }

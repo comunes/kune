@@ -114,14 +114,13 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
   @UiField
   public ImplPanel waveHolder;
 
-  /** The wave store. */
-  private final WaveStore waveStore = new SimpleWaveStore();
-
   /** The wave unsaved indicator. */
   private final CustomSavedStateIndicator waveUnsavedIndicator;
 
   /** The widget. */
   protected Widget widget;
+
+  private WaveStore waveStore;
 
   /**
    * Instantiates a new content viewer panel.
@@ -168,7 +167,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -178,7 +177,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * attach()
@@ -189,7 +188,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * clear()
@@ -202,7 +201,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * detach()
@@ -236,6 +235,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
       final WaveClientView webClient = waveClientProv.get();
       loading = webClient.getLoading();
       channel = webClient.getChannel();
+      waveStore = webClient.getWaveStore();
       profiles = webClient.getProfiles();
       idGenerator = ClientIdGenerator.create();
     }
@@ -246,7 +246,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setContent(cc.kune.core.shared.dto.StateContentDTO)
@@ -259,7 +259,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setEditableContent(cc.kune.core.shared.dto.StateContentDTO)
@@ -318,7 +318,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * signIn()
@@ -331,7 +331,7 @@ public abstract class AbstractWaveViewerPanel implements WaveViewer {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * signOut()
