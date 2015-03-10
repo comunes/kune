@@ -349,7 +349,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.contacts.SimpleContactManager#addNewBuddy(java.lang
    * .String)
@@ -361,7 +361,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.contacts.SimpleContactManager#chat(java.lang.String)
    */
@@ -372,7 +372,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.chat.client.ChatClient#chat(com.calclab.emite.core.client.xmpp.
    * stanzas.XmppURI)
@@ -430,7 +430,6 @@ public class ChatClientDefault implements ChatClient {
    */
   private void createDialog(final KuneHablarWidget widget, final CustomHtmlConfig htmlConfig) {
     widget.addStyleName("k-chat-panel");
-    setSize(widget, htmlConfig);
     armor.wrapDiv(PolymerId.CHAT_PANEL).add(widget);
   }
 
@@ -447,7 +446,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#doLogin()
    */
   @Override
@@ -554,7 +553,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.contacts.SimpleContactManager#isBuddy(java.lang.String)
    */
@@ -565,7 +564,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.chat.client.ChatClient#isBuddy(com.calclab.emite.core.client.xmpp
    * .stanzas.XmppURI)
@@ -583,7 +582,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#isXmppLoggedIn()
    */
   @Override
@@ -593,7 +592,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#joinRoom(java.lang.String,
    * java.lang.String)
    */
@@ -604,7 +603,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#joinRoom(java.lang.String,
    * java.lang.String, java.lang.String)
    */
@@ -627,7 +626,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.chat.client.ChatClient#login(com.calclab.emite.core.client.xmpp
    * .stanzas.XmppURI, java.lang.String)
@@ -639,7 +638,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#loginIfNecessary()
    */
   @Override
@@ -653,7 +652,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#logout()
    */
   @Override
@@ -668,7 +667,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#roomUriFrom(java.lang.String)
    */
   @Override
@@ -678,7 +677,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#setAvatar(java.lang.String)
    */
   @Override
@@ -686,28 +685,9 @@ public class ChatClientDefault implements ChatClient {
     avatarManager.get().setVCardAvatar(photoBinary);
   }
 
-  /**
-   * Sets the size.
-   *
-   * @param widget
-   *          the widget
-   * @param htmlConfig
-   *          the html config
-   */
-  private void setSize(final Widget widget, final CustomHtmlConfig htmlConfig) {
-    if (htmlConfig.width != null) {
-      widget.setWidth("100%");
-      // dialog.setWidth(htmlConfig.width);
-    }
-    // if (htmlConfig.height != null) {
-    // widget.setHeight("100%");
-    // dialog.setHeight(htmlConfig.height);
-
-  }
-
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#show()
    */
   @Override
@@ -749,7 +729,7 @@ public class ChatClientDefault implements ChatClient {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.chat.client.ChatClient#uriFrom(java.lang.String)
    */
   @Override

@@ -97,7 +97,7 @@ public class ChatSitebarActions {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -141,7 +141,7 @@ public class ChatSitebarActions {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.
      * common.client.actions.ActionEvent)
@@ -153,8 +153,7 @@ public class ChatSitebarActions {
         manager.changeOwnPresence(thisPresence);
       }
       nextPresence = thisPresence;
-      PolymerUtils.setNarrowVisible(true);
-      PolymerUtils.setDrawerSelected();
+      chatClient.show();
     }
 
     /**

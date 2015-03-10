@@ -234,7 +234,7 @@
                   </div>
                   <div id="chat_centerpanel" flex>
                     <core-header-panel mode="seamed" flex>
-                      <core-toolbar>
+                      <core-toolbar id="chat_toolbar">
                         <div>Chat</div>
                       </core-toolbar>
                     </core-header-panel>
@@ -1069,7 +1069,7 @@
           right: -20px;
           position: absolute;
           opacity: 0.8;
-          top: 10px;
+          top: 0px;
           border-bottom-right-radius: 50%; border-top-right-radius: 50%;
           border-bottom-left-radius: 5px; border-top-left-radius: 5px;
         }
@@ -1111,10 +1111,20 @@
 
         #inbox_toolbar,#chat_toolbar {
           color: gray;
-          height: 60px;
+          height: 40px;
           background-color: rgb(230, 230, 230);
         }
 
+        #chat_toolbar .toolbar-tools,
+        #inbox_toolbar .toolbar-tools { /* ff */
+          height: 40px;
+        }
+        
+        #chat_toolbar::shadow .toolbar-tools,
+        #inbox_toolbar::shadow .toolbar-tools {
+          height: 40px;
+        }
+        
         #inbox_result_section, #chat_centerpanel {
           /* height: 100%; */
           /* padding: 10px; */
@@ -1132,7 +1142,7 @@
           cursor: pointer;
           color: grey;
           font-size: 14px;
-          overflow-x: hidden;
+          overflow-x: hidden;          
         }
 
         .k-digest-main:hover {
@@ -1177,7 +1187,7 @@
           height: 43px !important;
           width: 43px !important;          
           margin-left: 2px;
-          border: 1px solid transparent; /* #b3b3b3;*/
+          /* border: 1px solid transparent;*/ /* #b3b3b3;*/
         }
 
         
@@ -1762,9 +1772,6 @@
           margin-right: 3px;
         }
 
-        
-        @external .*
-
         /* Size to container. */
         .self {
           position: absolute;
@@ -1792,7 +1799,7 @@
           bottom: 50px;
           left: 0;
           right: 0;
-          margin-top: 50px;
+          margin-top: 40px;
         }
 
         #gwt-debug-RosterWidget-roster > div:nth-child(2),
@@ -1806,7 +1813,7 @@
 
         .hablar-HablarWidget {
           position: fixed;
-          width: 100%;
+          width: 98%;
           height: 100%;
         }
 
@@ -1926,7 +1933,7 @@
         });
 
         // This is donw by gwt, but useful for development without gwt
-        // scope.hideSpinner();
+        //scope.hideSpinner();
 
       });
 
