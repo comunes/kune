@@ -263,11 +263,11 @@ public class ChatSitebarActions {
    * Creates the actions.
    */
   private void createActions() {
-    final MenuTitleItemDescriptor chatActionsTitle = new MenuTitleItemDescriptor(
-        SiteUserOptionsPresenter.LOGGED_USER_MENU, i18n.t("Set your chat status"));
     final MenuSeparatorDescriptor separator = new MenuSeparatorDescriptor(
         SiteUserOptionsPresenter.LOGGED_USER_MENU);
-    separator.setPosition(2);
+    final MenuTitleItemDescriptor chatActionsTitle = new MenuTitleItemDescriptor(
+        SiteUserOptionsPresenter.LOGGED_USER_MENU, i18n.t("Set your chat status"));
+    // separator.setPosition(2);
     userOptions.addAction(separator);
     userOptions.addAction(chatActionsTitle);
     onlineItem = createChatStatusAction(res.online(), i18n.t("Available"),
