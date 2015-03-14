@@ -22,7 +22,7 @@
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
     <hibernate.version>4.1.2.Final</hibernate.version>
-    <wiab.version>0.3.54</wiab.version>
+    <wiab.version>0.3.55</wiab.version>
     <jetty.version>9.1.1.v20140108</jetty.version>
     <gwtp.version>1.3.1</gwtp.version>
     <skipTests>true</skipTests>
