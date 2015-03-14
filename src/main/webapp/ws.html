@@ -1442,6 +1442,18 @@
           left: {{xsmall? 20: small? 60: 60}}px;
         }
 
+        #header_group_name {
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          width: 92%;
+        }
+
+        #header_group_name:hover {
+          text-overflow: inherit;
+          overflow: visible;
+        }
+        
         #header_group_name_group {
           margin-top: {{xsmall? 0: small? 0 : 20}}px;
         }
