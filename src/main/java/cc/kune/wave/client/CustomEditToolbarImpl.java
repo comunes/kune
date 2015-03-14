@@ -23,7 +23,6 @@
 
 package cc.kune.wave.client;
 
-import static com.google.gwt.query.client.GQuery.$;
 import br.com.rpa.client._paperelements.PaperFab;
 import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.tooltip.Tooltip;
@@ -82,11 +81,11 @@ public class CustomEditToolbarImpl implements CustomEditToolbar {
     editInGroup = wrapBtn(editHandler, PolymerId.EDIT_DOCGROUP_FAB.getId(), editText);
     editInInbox = wrapBtn(editHandler, PolymerId.EDIT_INBOX_FAB.getId(), editText);
 
-    final String editDoneText = I18n.t("Done" + " " + I18n.t("(Shift-Enter)"));
+    final String editDoneText = I18n.t("Done") + " " + I18n.t("(Shift-Enter)");
     editDoneInGroup = wrapBtn(editDoneHandler, PolymerId.EDITDONE_GROUP_FAB.getId(), editDoneText);
     editDoneInInbox = wrapBtn(editDoneHandler, PolymerId.EDITDONE_INBOX_FAB.getId(), editDoneText);
 
-    final String replyText = I18n.t("Reply" + " " + I18n.t("(Shift-Enter)"));
+    final String replyText = I18n.t("Reply") + " " + I18n.t("(Shift-Enter)");
     replyInGroup = wrapBtn(replyHandler, PolymerId.REPLY_GROUP_FAB.getId(), replyText);
     replyInInbox = wrapBtn(replyHandler, PolymerId.REPLY_INBOX_FAB.getId(), replyText);
 
