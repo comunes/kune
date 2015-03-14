@@ -55,7 +55,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
   private static final String TRANSLATOR_PANEL_ID = "i18n-trans-panel";
 
   /** The Constant WIDTH. */
-  private static final int WIDTH = 600;
+  private static final int WIDTH = 650;
 
   /** The checkbox. */
   private final CheckBox checkbox;
@@ -107,6 +107,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
     // Warning: Modal = true == you cannot select languages with mouse
     super(TRANSLATOR_PANEL_ID, "", false, false, images, TRANSLATOR_ERROR_ID, i18n.t("Close"), null,
         null, null, transGroup, i18n.getDirection());
+    setWidth(WIDTH);
     setIcon(res.world());
     this.lanSelectorPanel = lanSelectorPanel;
     this.lanSelectorFullTranslatedPanel = lanSelectorFullTranslatedPanel;
@@ -153,7 +154,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView#init
    * ()
@@ -181,7 +182,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView#
    * setLanguage(cc.kune.core.shared.dto.I18nLanguageSimpleDTO)
    */
@@ -214,7 +215,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel#show()
    */
   @Override
