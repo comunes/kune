@@ -481,12 +481,12 @@
                                  src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="></img>
                           </paper-shadow>
                         </div>
-                        <div vertical id="header_group_name_group" layout self-center>
+                        <div flex vertical id="header_group_name_group" layout self-center>
                           <div id="header_group_name" class="top"></div>
                           <div id="header_short_group_name" class="top"><a href="#"></a></div>
                         </div>
 
-                        <div flex horizontal layout end-justified>
+                        <div horizontal layout end-justified>
                           <div id="social_net_group" vertical  layout>
                             <div id="k_group_entity_toolbar" vertical layout end-justified>
                             </div>
@@ -1442,16 +1442,17 @@
           left: {{xsmall? 20: small? 60: 60}}px;
         }
 
-        #header_group_name {
+        #header_group_name div {
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          width: 92%;
+          max-width: 95%;
         }
 
-        #header_group_name:hover {
+        #header_group_name:hover div {
           text-overflow: inherit;
           overflow: visible;
+          white-space: inherit;
         }
         
         #header_group_name_group {
