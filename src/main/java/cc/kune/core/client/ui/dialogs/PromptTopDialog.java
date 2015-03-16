@@ -38,14 +38,14 @@ import com.google.gwt.user.client.ui.Label;
 /**
  * The Class PromptTopDialog shows a top dialog with some textfield and two
  * buttons.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * The Class Builder.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class Builder extends BasicTopDialog.Builder {
@@ -87,12 +87,13 @@ public class PromptTopDialog extends BasicTopDialog {
     /** The textbox id. */
     private String textboxId;
 
-    /** The width. */
-    private int width = 0;
+    private String textFieldStyle;
+
+    private int textFieldWidth;
 
     /**
      * Instantiates a new builder.
-     * 
+     *
      * @param dialogId
      *          the dialog id (used for debuggin)
      * @param title
@@ -116,7 +117,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Allow blank.
-     * 
+     *
      * @param allowBlank
      *          the allow blank
      * @return the builder
@@ -128,7 +129,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder#build()
      */
     @Override
@@ -139,7 +140,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Empty text showed when the prompt field is empty.
-     * 
+     *
      * @param emptyText
      *          the empty text
      * @return the builder
@@ -151,7 +152,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Max length.
-     * 
+     *
      * @param maxLength
      *          the max length
      * @return the builder
@@ -163,7 +164,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Max length text.
-     * 
+     *
      * @param maxLengthText
      *          the max length text
      * @return the builder
@@ -175,7 +176,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Min length.
-     * 
+     *
      * @param minLength
      *          the min length
      * @return the builder
@@ -187,7 +188,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Min length text.
-     * 
+     *
      * @param minLengthText
      *          the min length text
      * @return the builder
@@ -200,7 +201,7 @@ public class PromptTopDialog extends BasicTopDialog {
     /**
      * The number of lines that the prompt has. If > 1 will be a textarea, if
      * not a textfield
-     * 
+     *
      * @param promptLines
      *          the prompt lines
      * @return the builder
@@ -212,7 +213,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Prompt text showed just before the text field.
-     * 
+     *
      * @param promptText
      *          the prompt text
      * @return the builder
@@ -224,7 +225,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Field width.
-     * 
+     *
      * @param promptWidth
      *          the field width
      * @return the builder
@@ -236,7 +237,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Regex.
-     * 
+     *
      * @param regex
      *          the regex
      * @return the builder
@@ -248,7 +249,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Regex text.
-     * 
+     *
      * @param regexText
      *          the regex text
      * @return the builder
@@ -260,7 +261,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
     /**
      * Textbox id.
-     * 
+     *
      * @param textboxId
      *          the textbox id
      * @return the builder
@@ -270,21 +271,19 @@ public class PromptTopDialog extends BasicTopDialog {
       return this;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder#width(int)
-     */
-    @Override
-    public Builder width(final int width) {
-      this.width = width;
+    public Builder textFieldWidth(final int width) {
+      this.textFieldWidth = width;
       return this;
+    }
+
+    public void withTextFieldStyle(String textFieldStyle) {
+      this.textFieldStyle = textFieldStyle;
     }
   }
 
   /**
    * The Interface OnEnter.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public interface OnEnter {
@@ -303,7 +302,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Instantiates a new prompt top dialog.
-   * 
+   *
    * @param builder
    *          the builder
    */
@@ -317,6 +316,9 @@ public class PromptTopDialog extends BasicTopDialog {
     } else {
       textField = new TextField<String>();
     }
+    if (TextUtils.notEmpty(builder.textFieldStyle)) {
+      textField.addStyleName(builder.textFieldStyle);
+    }
     textField.setRegex(builder.regex);
     textField.getMessages().setRegexText(builder.regexText);
     textField.getMessages().setMinLengthText(builder.minLengthText);
@@ -326,8 +328,8 @@ public class PromptTopDialog extends BasicTopDialog {
     if (TextUtils.notEmpty(builder.emptyText)) {
       textField.setEmptyText(builder.emptyText);
     }
-    if (builder.width != 0) {
-      textField.setWidth(builder.width);
+    if (builder.textFieldWidth != 0) {
+      textField.setWidth(builder.textFieldWidth);
     }
     if (builder.minLength != 0) {
       textField.setMinLength(builder.minLength);
@@ -374,7 +376,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Gets the text field value.
-   * 
+   *
    * @return the text field value
    */
   public String getTextFieldValue() {
@@ -383,7 +385,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Checks if is valid.
-   * 
+   *
    * @return true, if is valid
    */
   public boolean isValid() {
@@ -392,7 +394,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Sets the prompt label.
-   * 
+   *
    * @param promptText
    *          the new prompt label
    */
@@ -402,7 +404,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Sets the text field focus.
-   * 
+   *
    */
   public void setTextFieldFocus() {
     textField.focus();
@@ -424,7 +426,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Sets the text field select on focus.
-   * 
+   *
    * @param selectOnFocus
    *          the new text field select on focus
    */
@@ -434,7 +436,7 @@ public class PromptTopDialog extends BasicTopDialog {
 
   /**
    * Sets the text field value.
-   * 
+   *
    * @param text
    *          the new text field value
    */

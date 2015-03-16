@@ -1518,3 +1518,7 @@ button.k-chat-add-as-buddie, button.k-noborder-btn {
 div.oc-menu>div>ul.dropdown-menu {
   z-index: 10000;
 }
+
+.k-to-lower > input  {
+  text-transform: lowercase;
+}

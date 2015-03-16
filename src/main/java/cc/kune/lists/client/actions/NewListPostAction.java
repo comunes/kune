@@ -35,7 +35,6 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
 import cc.kune.core.client.state.TokenUtils;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog;
-import cc.kune.core.client.ui.dialogs.PromptTopDialog.Builder;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog.OnEnter;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
@@ -51,7 +50,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewListPostAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -95,7 +94,7 @@ public class NewListPostAction extends RolAction {
 
   /**
    * Instantiates a new new list post action.
-   * 
+   *
    * @param session
    *          the session
    * @param stateManager
@@ -127,7 +126,7 @@ public class NewListPostAction extends RolAction {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)
@@ -135,15 +134,16 @@ public class NewListPostAction extends RolAction {
   @Override
   public void actionPerformed(final ActionEvent event) {
     if (session.isLogged()) {
-      final Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Title of the new post?"), false,
+      final PromptTopDialog.Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Title of the new post?"), false,
           true, i18n.getDirection(), new OnEnter() {
             @Override
             public void onEnter() {
               doAction();
             }
           });
-      builder.width("300px").height("50px").firstButtonTitle(i18n.t("Post")).sndButtonTitle(
-          i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID).width(270);
+      builder.width("320px").height("50px").firstButtonTitle(i18n.t("Post")).sndButtonTitle(
+          i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID);
+      builder.textFieldWidth(270);
       builder.textboxId(TEXTBOX_ID);
       diag = builder.build();
       diag.showCentered();

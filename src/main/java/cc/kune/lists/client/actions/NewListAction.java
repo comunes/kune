@@ -22,9 +22,12 @@
  */
 package cc.kune.lists.client.actions;
 
+import javax.swing.plaf.TextUI;
+
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.actions.FieldValidationUtil;
 import cc.kune.core.client.actions.RolAction;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -49,7 +52,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class NewListAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -90,7 +93,7 @@ public class NewListAction extends RolAction {
 
   /**
    * Instantiates a new new list action.
-   * 
+   *
    * @param session
    *          the session
    * @param stateManager
@@ -119,26 +122,29 @@ public class NewListAction extends RolAction {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)
    */
   @Override
   public void actionPerformed(final ActionEvent event) {
-    final Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Name of the new list?"), false,
+    final PromptTopDialog.Builder builder = new PromptTopDialog.Builder(ID, i18n.t("Name of the new list?"), false,
         true, i18n.getDirection(), new OnEnter() {
           @Override
           public void onEnter() {
             doAction();
           }
         });
-    builder.width("300px").height("50px").firstButtonTitle(i18n.t("Create")).sndButtonTitle(
-        i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID).width(270);
+    builder.withTextFieldStyle("k-to-lower");
+    builder.textFieldWidth(270);
+    builder.width("320px").height("50px").firstButtonTitle(i18n.t("Create")).sndButtonTitle(
+        i18n.t("Cancel")).firstButtonId(CREATE_ID).sndButtonId(CANCEL_ID);
     FieldValidationUtil.restrictToUnixName(builder, TEXTBOX_ID);
     diag = builder.build();
     diag.showCentered();
     diag.focusOnTextBox();
+
     diag.getSecondBtn().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -163,7 +169,7 @@ public class NewListAction extends RolAction {
       NotifyUser.showProgress();
       diag.hide();
       listsService.get().createList(session.getUserHash(), session.getCurrentStateToken(),
-          diag.getTextFieldValue(), ListsToolConstants.TYPE_LIST, true,
+          diag.getTextFieldValue().toLowerCase(), ListsToolConstants.TYPE_LIST, true,
           new AsyncCallbackSimple<StateContainerDTO>() {
             @Override
             public void onSuccess(final StateContainerDTO state) {

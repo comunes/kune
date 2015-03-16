@@ -65,6 +65,16 @@ public class TextUtilsTest {
     assertTrue("kk@local.net".matches(TextUtils.EMAIL_REGEXP));
     assertTrue("admin@localhost.localdomain".matches(TextUtils.EMAIL_REGEXP));
   }
+  @Test
+  public void testListNames() {
+    assertTrue("some-list".matches(TextUtils.LIST_NAME_REGEXP));
+    assertTrue("some_list".matches(TextUtils.LIST_NAME_REGEXP));
+    assertTrue("some-2list2".matches(TextUtils.LIST_NAME_REGEXP));
+    assertTrue("SOME-2list2".matches(TextUtils.LIST_NAME_REGEXP));
+    assertFalse("some list".matches(TextUtils.LIST_NAME_REGEXP));
+    assertFalse("some@list".matches(TextUtils.LIST_NAME_REGEXP));
+  }
+
 
   /**
    * Test email list.

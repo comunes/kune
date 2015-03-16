@@ -72,6 +72,8 @@ public class TextUtils {
   /** The Constant SHORTNAME_UPPER_REGEXP. */
   public static final String SHORTNAME_UPPER_REGEXP = "^[a-zA-Z0-9]+$";
 
+  public static final String LIST_NAME_REGEXP = "^[a-zA-Z0-9_\\-]+$";
+
   /** Actual accented values, corresponds one to one with ASCII. */
   private static final String UNICODE = "\u00C0\u00E0\u00C8\u00E8\u00CC\u00EC\u00D2\u00F2\u00D9\u00F9"
       + "\u00C1\u00E1\u00C9\u00E9\u00CD\u00ED\u00D3\u00F3\u00DA\u00FA\u00DD\u00FD"
