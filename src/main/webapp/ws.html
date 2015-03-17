@@ -132,7 +132,6 @@
     <!-- Other elements -->
     <link rel="import"
           href="bower_components/lorem-element/lorem-element.html">
-    <link rel="import" href="bower_components/akyral-waypoint/akyral-waypoint.html">
 
     <!-- Paper elements -->
     <link rel="import"
@@ -190,6 +189,8 @@
           href="others/splash/style/stuff.css">
     <link type="text/css" rel="stylesheet"
           href="others/splash/style/main.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.default.css">
     <link type="text/css" rel="stylesheet" href="ws/ws.css">
 
     <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script>
@@ -200,6 +201,7 @@
     <script type="text/javascript" src="others/splash/js/permalink_client.js"></script>
     <!-- Moved this to local wave-rpc.js <script type="text/javascript" -->
     <!-- src="http://wave.google.com/gadgets/js/core:rpc.js?c=1"></script> -->
+    <script src="others/js/owl.carousel.min.js"></script>
   </head>
 <body fit>
   <template id="kunetemplate" is="auto-binding">
@@ -215,7 +217,7 @@
       <!-- Medium devices (desktops, 992px and up) -->
       <core-media-query query="min-width: {{screenmd}}px" queryMatches="{{mediumup}}"></core-media-query>
       <!-- Large devices (large desktops, 1200px and up) -->
-      <core-media-query query="min-width: {{screenlg}}px" queryMatccsshes="{{largeup}}"></core-media-query>
+      <core-media-query query="min-width: {{screenlg}}px" queryMatches="{{largeup}}"></core-media-query>
 
       <div id="paper_progress_container" horizontal center-justified layout>
         <paper-progress indeterminate id="paper_progress"></paper-progress>
@@ -312,11 +314,10 @@
                 </div>
 
                 <div id="k_home_scroller" fit unresolved>
-                  <div id="k_home_center">
+                  <div id="k_home_center" class="owl-carousel" >
 
                     <div horizontal center-justified layout id="sec0">
                       <div self-center>
-                        <akyral-waypoint within="100" data-id="1"></akyral-waypoint>
                         <span style="display: none;" id="k_home_slide-1_def">
                           kune it's a social network where you can communicate,
                           collaborate and share between equals, using different web tools:
@@ -371,7 +372,6 @@
                       <div self-center>
                         <div horizontal center-justified layout flex>
                         </div>
-                        <akyral-waypoint within="100" data-id="2"></akyral-waypoint>
                         <span id="k_home_buck_def" style="display: none;">
                           <blockquote class="buck_blockquote">
                             Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
@@ -394,7 +394,6 @@
 
                     <div horizontal center-justified layout id="sec2">
                       <div self-center>
-                        <akyral-waypoint within="100" data-id="3"></akyral-waypoint>
                         <span id="k_home_decen_def" style="display: none;">
                           Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization. kune.cc is just one more node in this decentralized social network.
                         </span>
@@ -406,7 +405,6 @@
 
                     <div horizontal center-justified layout id="sec3">
                       <div self-center>
-                        <akyral-waypoint within="100" data-id="4"></akyral-waypoint>
                         <span id="k_home_meaning_def" style="display: none;">
                           Kune means "together" in esperanto.
                         </span>
@@ -418,11 +416,10 @@
 
                     <div horizontal center-justified layout id="sec4">
                       <div self-center>
-                        <akyral-waypoint within="100" data-id="5"></akyral-waypoint>
                         <span id="k_home_continuation_def" style="display: none;">
                             kune is the continuation of the effort that we started in 2002 with
                             <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                            with a main goal:<br>to bring the collaborative philosophy of
+                            with a main goal:<br>To bring the collaborative philosophy of
                             <a href="https://en.wikipedia.org/wiki/Free_software" target="_blank">Free Software</a>
                             to other areas.
                             We share our web services and tools to allow people to work together,
@@ -431,7 +428,7 @@
                         <span id="k_home_continuation_es" style="display: none;">
                           kune es la continuación del esfuerzo que comenzamos en el 2002 con                          
                           <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                          con un objetivo principal:<br>llevar la filosofía colaborativa del                          
+                          con un objetivo principal:<br>Llevar la filosofía colaborativa del                          
                           <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
                           a otras áreas.
                           Compartimos nuestros servicios web y nuestras herramientas para
@@ -443,7 +440,6 @@
 
                     <div horizontal center-justified layout id="sec5">
                       <div self-center>
-                        <akyral-waypoint within="100" data-id="4"></akyral-waypoint>
                         <span id="k_home_super_def" style="display: none;">
                           Welcome to the era where collaboration supersede to the corporation
                         </span>
@@ -726,7 +722,11 @@
         }
 
         #k_home_center,.buck_blockquote {
-          font-size: {{xsmall ? 18 : small? 20 : 24}}px;
+          font-size: {{xsmall ? 18 : small? 24 : 30}}px;
+        }
+
+        #k_home_center a {
+          text-decoration: none;
         }
         
         #k_home_center {
@@ -744,7 +744,7 @@
           color: #a56941;
           float: left;
           line-height: 1.3em;
-          margin-top: 10px;
+          margin-top: {{xsmall? '0' : '10'}}px;
         }
 
         #k_home_1st_description > div {
@@ -831,14 +831,13 @@
           font-style: italic;
         }
 
+        .buck a {
+          text-decoration: none;
+        }
+
         blockquote cite:before {
           content: "\2014 \2009";
         }
-
-        /*
-        .buck_blockquote, #sec0, #sec1, #sec2, #sec3 {
-          font-size: {{xsmall ? 16 : small? 20 : 24}}px;
-        } */
 
         .k_home_kune_flattr {
           margin-bottom: 4px;
@@ -1899,31 +1898,20 @@
         s.src = "ws/ws.nocache.js";
         // Coment this line for develop this initial page without gwt code
         document.body.appendChild(s);
-
-        var waypoints = document.querySelectorAll('akyral-waypoint');
-        function doIt(e){
-          console.log("Doit");
-          var el = this.nextElementSibling;
-          el.querySelector('.waypoint__state-event code').innerHTML = e.type;
-          el.className = 'waypoint__state-'+e.type.replace('akyral-waypoint-','');
-        }
-        [].forEach.call(waypoints, function(waypoint){
-          waypoint.addEventListener('akyral-waypoint-below', doIt)
-            waypoint.addEventListener('akyral-waypoint-above', doIt)
-        });
       });
-
+        
       addEventListener('template-bound', function(e) {
         var scope = e.target;
+        
         h = document.getElementById('k_home_scroller').offsetHeight;
-        h = h - h*2/100;
+        h = h - h*2/100 - 150;
 
         document.getElementById('sec0').style.height=h + "px";
         document.getElementById('sec1').style.height=h + "px";
         document.getElementById('sec2').style.height=h + "px";
         document.getElementById('sec3').style.height=h + "px";
         document.getElementById('sec4').style.height=h + "px";
-        document.getElementById('sec5').style.height=h + "px";
+        document.getElementById('sec5').style.height=h + "px"; 
 
         var backs = ["others/home-back-trees.png",
                      "others/home-back-buck.png",
@@ -1932,33 +1920,6 @@
                      "others/home-back-op-en.png",
                      "others/home-back-op-en.png"
         ];
-
-        var backSlideInit=false;
-
-        scope.belowWayPoint = function(e) {
-          id = e.target.attributes["data-id"].value;
-          scope.homebackimg = backs[id];
-          console.log("id below " + id);
-          backSlideInit=true;
-          // console.log(scope.homebackimg);
-          // scroll("sec" + id);
-        }
-
-        scope.aboveWayPoint = function(e) {
-          if (backSlideInit) {
-            id = e.target.attributes["data-id"].value;
-            console.log("id above " + id);
-            scope.homebackimg = backs[id-1];
-            // console.log("back " + scope.homebackimg);
-          }
-        }
-
-        var waypoints = document.querySelectorAll('akyral-waypoint');
-        // console.log(waypoints.length);
-        [].forEach.call(waypoints, function(waypoint){
-          waypoint.addEventListener('akyral-waypoint-below', scope.belowWayPoint);
-          waypoint.addEventListener('akyral-waypoint-above', scope.aboveWayPoint);
-        });
 
         // Show proper language messages
         meta = getMetaContent("kune.home.ids");
@@ -1991,8 +1952,29 @@
         // This is donw by gwt, but useful for development without gwt
         // scope.hideSpinner();
 
-      });
+        // http://www.owlcarousel.owlgraphic.com/index.html
+        var owl = $(".owl-carousel");
 
+        owl.owlCarousel(
+          {
+            loop: true,
+            margin: 50,
+            nav: false,
+            autoplay:true,
+            center: true,
+            // autoplaySpeed: true,            
+            autoplayTimeout:10000,
+            autoplayHoverPause:true,
+            // animateOut: 'fadeOut',
+            items: 1
+          }
+        );
+        
+        owl.on('changed.owl.carousel', function(event) {
+          scope.homebackimg = backs[event.item.index];
+        });
+        
+      });
     </script>
 
     <noscript>
