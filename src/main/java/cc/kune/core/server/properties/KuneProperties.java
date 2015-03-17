@@ -81,6 +81,22 @@ public interface KuneProperties {
   /** The kune tutorials langs. */
   String KUNE_TUTORIALS_LANGS = "kune.tutorial.langs";
 
+  String MOTD_CLOSE_BTN_TEXT = "kune.motd.closebtntext";
+
+  String MOTD_COOKIE_NAME = "kune.motd.cookiename";
+
+  String MOTD_ENABLED = "kune.motd.enabled";
+
+  String MOTD_MESSAGE = "kune.motd.message";
+
+  String MOTD_OK_BTN_TEXT = "kune.motd.okbtntext";
+
+  String MOTD_OK_BTN_URL = "kune.motd.okbtnurl";
+
+  String MOTD_SHOULD_REMEMBER = "kune.motd.shouldremember";
+
+  String MOTD_TITLE = "kune.motd.title";
+
   /** The M p3_ embede d_ object. */
   String MP3_EMBEDED_OBJECT = "kune.media.mp3embededobject";
 
@@ -224,25 +240,18 @@ public interface KuneProperties {
 
   /** The upload gallery permitted exts. */
   String UPLOAD_GALLERY_PERMITTED_EXTS = "kune.upload.gallerypermittedextensions";
-
   /** The upload location. */
   String UPLOAD_LOCATION = "kune.upload.location";
-
   /** The upload max file size. */
   String UPLOAD_MAX_FILE_SIZE = "kune.upload.maxfilesizeinmegas";
-
   /** The upload max file size in ks. */
   String UPLOAD_MAX_FILE_SIZE_IN_KS = "kune.upload.maxfilesizeinks";
-
   /** The use client content cache. */
   String USE_CLIENT_CONTENT_CACHE = "kune.client.useContentCache";
-
   /** The welcome wave. */
   String WELCOME_WAVE = "kune.site.welcomewave";
-
   /** The ws themes. */
   String WS_THEMES = "kune.wsthemes";
-
   /** The ws themes def. */
   String WS_THEMES_DEF = "kune.wsthemes.default";
 

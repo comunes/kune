@@ -25,6 +25,7 @@ package cc.kune.core.client.cookies;
 import java.util.Date;
 
 import cc.kune.common.client.log.Log;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.shared.SessionConstants;
 
 import com.google.gwt.user.client.Cookies;
@@ -32,7 +33,7 @@ import com.google.gwt.user.client.Cookies;
 // TODO: Auto-generated Javadoc
 /**
  * The Class CookiesManagerImpl.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CookiesManagerImpl implements CookiesManager {
@@ -91,8 +92,8 @@ public class CookiesManagerImpl implements CookiesManager {
     Cookies.removeCookie(SessionConstants.USERHASH);
     Cookies.removeCookie(SessionConstants.JSESSIONID);
     // Workaround:
-    Cookies.setCookie(SessionConstants.USERHASH, null, new Date(0), null, "/", false);
-    Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), null, "/", false);
+    Cookies.setCookie(SessionConstants.USERHASH, null, new Date(0), null, "/", WindowUtils.isHttps());
+    Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), null, "/", WindowUtils.isHttps());
   }
 
   /*
@@ -119,8 +120,8 @@ public class CookiesManagerImpl implements CookiesManager {
   public void setAuthCookie(final String userHash) {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
     final Date expires = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
-    Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, null, "/", false);
-    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, expires, null, "/", false);
+    Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, null, "/", WindowUtils.isHttps());
+    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, expires, null, "/", WindowUtils.isHttps());
     Log.info("Received hash: " + userHash, null);
   }
 }

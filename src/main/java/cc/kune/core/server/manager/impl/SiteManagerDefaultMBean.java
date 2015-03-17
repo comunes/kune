@@ -27,7 +27,7 @@ import cc.kune.core.server.rpc.SiteRPC;
 
 /**
  * MBean interface for JMX management of the {@link SiteRPC}.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SiteManagerDefaultMBean {
@@ -39,16 +39,18 @@ public interface SiteManagerDefaultMBean {
 
   /**
    * Gets the store untranslated string.
-   * 
+   *
    * @return the store unstranslated string
    */
   boolean getStoreUntranslatedStrings();
+
+  void reloadInitData();
 
   void setShowInDevelFeatures(final boolean showInDevelFeatures);
 
   /**
    * Sets the store untranslated string.
-   * 
+   *
    * @param storeUntranslatedString
    *          the new store untranslated string
    */

@@ -113,4 +113,8 @@ public class WindowUtils {
     return Window.Location.getQueryString();
   }
 
+  public static boolean isHttps() {
+    return getProtocol().equals("https");
+  }
+
 }

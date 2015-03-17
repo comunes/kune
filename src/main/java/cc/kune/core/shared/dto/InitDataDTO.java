@@ -105,6 +105,8 @@ public class InitDataDTO implements IsSerializable {
   /** The max file size in mb. */
   private String maxFileSizeInMb;
 
+  private MotdDTO motd;
+
   /** The mp3 embed object. */
   private String mp3EmbedObject;
 
@@ -344,6 +346,10 @@ public class InitDataDTO implements IsSerializable {
    */
   public String getMaxFileSizeInMb() {
     return maxFileSizeInMb;
+  }
+
+  public MotdDTO getMotd() {
+    return motd;
   }
 
   /**
@@ -707,6 +713,10 @@ public class InitDataDTO implements IsSerializable {
    */
   public void setMaxFileSizeInMb(final String maxFileSizeInMb) {
     this.maxFileSizeInMb = maxFileSizeInMb;
+  }
+
+  public void setMotd(final MotdDTO motd) {
+    this.motd = motd;
   }
 
   /**

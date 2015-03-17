@@ -1,5 +1,6 @@
 kune (0.3.0+b51) unstable; urgency=medium
 
+  * Added MOTD (message of the day) functionality
   * List names should be alphanumeric + hiphensor underscores
   * Fix translator width
   * Fix some i18n typo

@@ -1,0 +1,129 @@
+/*
+ *
+ * Copyright (C) 2007-2015 Licensed to the Comunes Association (CA) under
+ * one or more contributor license agreements (see COPYRIGHT for details).
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
+ * compliance with the License. This file is part of kune.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+package cc.kune.core.client.cookies;
+
+import java.util.Date;
+
+import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+
+import cc.kune.common.client.ui.KuneWindowUtils;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog;
+import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
+import cc.kune.common.client.utils.WindowUtils;
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.events.AppStartEvent;
+import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.state.SessionInstance;
+import cc.kune.core.shared.SessionConstants;
+import cc.kune.core.shared.dto.MotdDTO;
+
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.Label;
+import com.google.inject.Singleton;
+
+@Singleton
+public class MotdManager {
+
+  public MotdManager() {
+    SessionInstance.get().onAppStart(true, new AppStartHandler() {
+
+      @Override
+      public void onAppStart(final AppStartEvent event) {
+        final Timer timer = new Timer() {
+
+          @Override
+          public void run() {
+            final MotdDTO motd = event.getInitData().getMotd();
+            if (motd == null) {
+              return;
+            }
+
+            final Builder builder = new BasicTopDialog.Builder("k-motd", true, false,
+                I18n.getDirection());
+
+            // motdDialog.addStyleName("k-motd-dialog");
+
+            if (motd.getTitle() != null) {
+              builder.title(motd.getTitle());
+            }
+
+            final BasicTopDialog dialog = builder.build();
+
+            dialog.setFirstBtnText(I18n.t(motd.getOkBtnText()));
+
+            dialog.setCloseBtnVisible(true);
+
+            dialog.getInnerPanel().add(new Label(motd.getMessage()));
+
+            dialog.setSecondBtnText(I18n.t(motd.getCloseBtnText()));
+            dialog.getSecondBtn().addClickHandler(new ClickHandler() {
+              @Override
+              public void onClick(final ClickEvent event) {
+                setCookie(motd.getCookieName(), inDays(90));
+                dialog.hide();
+              }
+            });
+            if (motd.getShouldRemember() > 0) {
+              final CustomButton laterBtn = new CustomButton((I18n.t("Maybe later")));
+              laterBtn.addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(final ClickEvent event) {
+                  setCookie(motd.getCookieName(), inDays(motd.getShouldRemember()));
+                  dialog.hide();
+                }
+              });
+              dialog.getBtnPanel().add(laterBtn);
+            }
+
+            dialog.getFirstBtn().addClickHandler(new ClickHandler() {
+              @Override
+              public void onClick(final ClickEvent event) {
+                setCookie(motd.getCookieName(), inDays(7));
+                KuneWindowUtils.open(motd.getOkBtnUrl());
+                dialog.hide();
+              }
+            });
+
+            dialog.show();
+
+          }
+        };
+        timer.schedule(10000);
+      }
+    });
+  }
+
+  private Date inDays(final int days) {
+    return new Date(System.currentTimeMillis() + SessionConstants.A_DAY * days);
+  }
+
+  private void setCookie(final String motdCookieName, final Date expires) {
+    Cookies.removeCookie(motdCookieName);
+    Cookies.setCookie(motdCookieName, null, expires, null, "/", WindowUtils.isHttps());
+  }
+
+}

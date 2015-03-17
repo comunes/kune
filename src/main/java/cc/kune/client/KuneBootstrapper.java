@@ -32,6 +32,7 @@ import cc.kune.common.client.utils.MetaUtils;
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.CoreParts;
 import cc.kune.core.client.actions.xml.XMLActionsParser;
+import cc.kune.core.client.cookies.MotdManager;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
@@ -55,6 +56,7 @@ import cc.kune.wiki.client.WikiParts;
 
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Bootstrapper;
 
 public class KuneBootstrapper implements Bootstrapper {
@@ -66,14 +68,16 @@ public class KuneBootstrapper implements Bootstrapper {
   protected static final String HOME_IDS_PREFIX = "k_home_";
 
   protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.HOME_SCROLLER,
-      PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
-      PolymerId.HOME_TOOLBAR };
+    PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
+    PolymerId.HOME_TOOLBAR };
 
   private final ContentViewerSelector contentViewerSelector;
 
   private final CorePresenter corePresenter;
 
   private final GlobalShortcutRegister globalShortcutRegister;
+
+  private final Provider<MotdManager> motdManager;
 
   private final SessionChecker sessionChecker;
 
@@ -94,12 +98,13 @@ public class KuneBootstrapper implements Bootstrapper {
 
       final CoreParts coreParts, final GSpaceParts gSpaceParts, final HSpaceParts hSpaceParts,
 
-      final XMLActionsParser xmlActionsParser) {
+      final Provider<MotdManager> motdManager, final XMLActionsParser xmlActionsParser) {
 
     this.sessionChecker = sessionChecker;
     this.contentViewerSelector = contentViewerSelector;
     this.globalShortcutRegister = globalShortcutRegister;
     this.corePresenter = corePresenter;
+    this.motdManager = motdManager;
   }
 
   @Override
@@ -131,6 +136,7 @@ public class KuneBootstrapper implements Bootstrapper {
         }
         // PolymerUtils.resolved(RootPanel.getBodyElement());
         PolymerUtils.hideSpinner();
+        motdManager.get();
       }
     });
   }

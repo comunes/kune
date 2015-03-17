@@ -48,6 +48,7 @@ import cc.kune.core.server.users.UserInfo;
 import cc.kune.core.server.users.UserInfoService;
 import cc.kune.core.shared.dto.GSpaceTheme;
 import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.MotdDTO;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 
@@ -80,6 +81,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   /** The mapper. */
   private final KuneMapper mapper;
 
+  private MotdDTO motd;
+
   /** The reserved words. */
   private ReservedWordsRegistryDTO reservedWords;
 
@@ -91,9 +94,9 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /** The store untranslated string. */
   private boolean storeUntranslatedStrings;
-
   /** The user info service. */
   private final UserInfoService userInfoService;
+
   /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
@@ -172,10 +175,10 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     if (userInfo != null) {
       dataMapped.setUserInfo(mapper.map(userInfo, UserInfoDTO.class));
     }
-
     dataMapped.setgSpaceThemes(siteThemes);
     dataMapped.setReservedWords(reservedWords);
     dataMapped.setStoreUntranslatedStrings(storeUntranslatedStrings);
+    dataMapped.setMotd(motd);
     return dataMapped;
   }
 
@@ -264,6 +267,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     data.setTutorialLanguages(kuneProperties.getList(KuneProperties.KUNE_TUTORIALS_LANGS));
     data.setPublicSpaceVisible(kuneProperties.getBoolean(KuneProperties.PUBLIC_SPACE_VISIBLE));
     data.setShowInDevelFeatures(kuneProperties.getBoolean(KuneProperties.SHOW_DEVEL_FEATURES));
+
     return data;
   }
 
@@ -277,6 +281,24 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     data = loadInitData();
     siteThemes = getSiteThemes(this.kuneProperties.getList(KuneProperties.WS_THEMES));
     reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
+
+    if (kuneProperties.getBoolean(KuneProperties.MOTD_ENABLED)) {
+      motd = new MotdDTO();
+      motd.setTitle(kuneProperties.get(KuneProperties.MOTD_TITLE));
+      motd.setMessage(kuneProperties.get(KuneProperties.MOTD_MESSAGE));
+      motd.setOkBtnText(kuneProperties.get(KuneProperties.MOTD_OK_BTN_TEXT));
+      motd.setOkBtnUrl(kuneProperties.get(KuneProperties.MOTD_OK_BTN_URL));
+      motd.setCloseBtnText(kuneProperties.get(KuneProperties.MOTD_CLOSE_BTN_TEXT));
+      motd.setCookieName(kuneProperties.get(KuneProperties.MOTD_COOKIE_NAME));
+      motd.setShouldRemember(kuneProperties.getInteger(KuneProperties.MOTD_SHOULD_REMEMBER));
+    } else {
+      motd = null;
+    }
+  }
+
+  @Override
+  public void reloadInitData() {
+    loadProperties(kuneProperties);
   }
 
   @Override
