@@ -28,8 +28,6 @@ import cc.kune.bootstrap.client.BSGuiProvider;
 import cc.kune.chat.client.ChatParts;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
-import cc.kune.common.client.utils.MetaUtils;
-import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.CoreParts;
 import cc.kune.core.client.actions.xml.XMLActionsParser;
 import cc.kune.core.client.cookies.MotdManager;
@@ -39,7 +37,6 @@ import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.sitebar.ErrorsDialog;
 import cc.kune.core.client.state.SessionExpirationManager;
 import cc.kune.core.client.state.SessionInstance;
-import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.client.state.impl.SessionChecker;
 import cc.kune.core.client.ws.CorePresenter;
 import cc.kune.docs.client.DocsParts;
@@ -54,22 +51,15 @@ import cc.kune.tasks.client.TasksParts;
 import cc.kune.trash.client.TrashParts;
 import cc.kune.wiki.client.WikiParts;
 
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.Bootstrapper;
 
 public class KuneBootstrapper implements Bootstrapper {
 
-  /** The Constant HOME_IDS_DEF_SUFFIX. */
-  protected static final String HOME_IDS_DEF_SUFFIX = "_def";
-
-  /** The Constant HOME_IDS_PREFIX. */
-  protected static final String HOME_IDS_PREFIX = "k_home_";
-
   protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.HOME_SCROLLER,
-    PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
-    PolymerId.HOME_TOOLBAR };
+      PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
+      PolymerId.HOME_TOOLBAR };
 
   private final ContentViewerSelector contentViewerSelector;
 
@@ -123,8 +113,6 @@ public class KuneBootstrapper implements Bootstrapper {
 
     globalShortcutRegister.enable();
 
-    setHomeLocale();
-
     SessionInstance.get().onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
@@ -140,28 +128,4 @@ public class KuneBootstrapper implements Bootstrapper {
       }
     });
   }
-
-  /**
-   * Home set locale. In ws.html there is some no visible elements with the
-   * different locales and we only show the current locale
-   */
-  private void setHomeLocale() {
-    final String currentLocale = WindowUtils.getParameter(SiteParameters.LOCALE);
-
-    final String meta = MetaUtils.get("kune.home.ids");
-    if (meta != null) {
-      final String[] ids = meta.split(",[ ]*");
-
-      for (final String id : ids) {
-        final RootPanel someElement = RootPanel.get(HOME_IDS_PREFIX + id + "_" + currentLocale);
-        final RootPanel defElement = RootPanel.get(HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX);
-        if (someElement != null) {
-          someElement.setVisible(true);
-        } else if (defElement != null) {
-          defElement.setVisible(true);
-        }
-      }
-    }
-  }
-
 }

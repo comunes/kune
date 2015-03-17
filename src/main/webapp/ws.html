@@ -50,10 +50,10 @@
     <meta name="hablar.width" content="550px" />
     <meta name="hablar.height" content="400px" />
     <meta name="hablar.avatarProvider" content="kune-avatars" />
-
-    <!-- Font depending on locale -->
+    
     <script language="javascript" type="text/javascript">
       // -*- engine:js -*-
+
       function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
         var vars = query.split('&');
@@ -64,6 +64,20 @@
           }
         }
       }
+
+      // See MetaUtils.java 
+      function getMetaContent(name) {
+        var metas = document.getElementsByTagName('meta'); 
+        for (i=0; i < metas.length; i++) {
+          // console.log("meta: " + metas[i].getAttribute("name"));
+          if (metas[i].getAttribute("name") == name) { 
+            return metas[i].getAttribute("content"); 
+          }
+        }
+        return "";
+      }
+
+      // Font depending on locale
       locale = getQueryVariable('locale');
       fontPrefix = '<link href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300,600';
       fontSuffix = '" rel="stylesheet" type="text/css">';
@@ -82,6 +96,7 @@
       }
       font = fontPrefix + subset + fontSuffix;
       document.write(font);
+
     </script>
 
     <!-- -*- engine:html -*- -->
@@ -1926,7 +1941,7 @@
           console.log("id below " + id);
           backSlideInit=true;
           // console.log(scope.homebackimg);
-          scroll("sec" + id);
+          // scroll("sec" + id);
         }
 
         scope.aboveWayPoint = function(e) {
@@ -1939,14 +1954,42 @@
         }
 
         var waypoints = document.querySelectorAll('akyral-waypoint');
-        console.log(waypoints.length);
+        // console.log(waypoints.length);
         [].forEach.call(waypoints, function(waypoint){
           waypoint.addEventListener('akyral-waypoint-below', scope.belowWayPoint);
           waypoint.addEventListener('akyral-waypoint-above', scope.aboveWayPoint);
         });
 
+        // Show proper language messages
+        meta = getMetaContent("kune.home.ids");
+
+        HOME_IDS_DEF_SUFFIX = "_def";
+        HOME_IDS_PREFIX = "k_home_";
+
+        // console.log("Locale: " + locale);
+        currentLocale = locale;
+      
+        if (meta != null) {
+          // console.log("Meta: " + meta);
+          var ids = meta.split(/[\s,]+/);
+          for (i=0; i < ids.length; i++) {
+            var id = ids[i];    
+            var lid = HOME_IDS_PREFIX + id + "_" + currentLocale
+            var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
+            //console.log("Id: " + ldefid);
+            var someElement = document.getElementById(lid);
+            var defElement = document.getElementById(ldefid);    
+            if (someElement != null) {
+              someElement.style.display="inherit";
+            } else if (defElement != null) {
+              // console.log("Setting def element " + defElement);
+              defElement.style.display="inherit";
+            }
+          }
+        }
+        
         // This is donw by gwt, but useful for development without gwt
-        //scope.hideSpinner();
+        // scope.hideSpinner();
 
       });
 
