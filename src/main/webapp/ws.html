@@ -395,10 +395,10 @@
                     <div horizontal center-justified layout id="sec2">
                       <div self-center>
                         <span id="k_home_decen_def" style="display: none;">
-                          Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization. kune.cc is just one more node in this decentralized social network.
+                          <p>Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.</p><p>kune.cc is just one more node in this decentralized social network.</p>
                         </span>
                         <span id="k_home_decen_es" style="display: none;">
-                          Kune es decentralizado, a diferencia de otras redes sociales como Google+ o Facebook. Así que como en un servicio de email, puedes elegir entre diferentes proveedores de kune y evitar la centralización de datos personales. kune.cc es solo un nodo más en esa red social descentralizada.
+                          <p>Kune es decentralizado, a diferencia de otras redes sociales como Google+ o Facebook. Así que como en un servicio de email, puedes elegir entre diferentes proveedores de kune y evitar la centralización de datos personales.</p><p>kune.cc es solo un nodo más en esa red social descentralizada.</p>
                         </span>
                       </div>
                     </div>
@@ -417,23 +417,23 @@
                     <div horizontal center-justified layout id="sec4">
                       <div self-center>
                         <span id="k_home_continuation_def" style="display: none;">
-                            kune is the continuation of the effort that we started in 2002 with
+                            <p>kune is the continuation of the effort that we started in 2002 with
                             <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                            with a main goal:<br>To bring the collaborative philosophy of
+                            with a main goal:</p><p>To bring the collaborative philosophy of
                             <a href="https://en.wikipedia.org/wiki/Free_software" target="_blank">Free Software</a>
-                            to other areas.
+                            to other areas.</p><p>
                             We share our web services and tools to allow people to work together,
-                            to collaborate, to share knowledge, skills, solutions, etcetera.
+                            to collaborate, to share knowledge, skills, solutions, etcetera.</p>
                         </span>
                         <span id="k_home_continuation_es" style="display: none;">
-                          kune es la continuación del esfuerzo que comenzamos en el 2002 con                          
+                          <p>kune es la continuación del esfuerzo que comenzamos en el 2002 con                          
                           <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                          con un objetivo principal:<br>Llevar la filosofía colaborativa del                          
+                          con un objetivo principal:</p><p>Llevar la filosofía colaborativa del                          
                           <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
-                          a otras áreas.
+                          a otras áreas.</p><p>
                           Compartimos nuestros servicios web y nuestras herramientas para
                           permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
-                          soluciones, etcétera.                          
+                          soluciones, etcétera.</p>                          
                         </span>                        
                       </div>
                     </div>
@@ -696,7 +696,7 @@
 
         #k_home_main_v {
         }
-
+        
         #k_home_logoname_motto {
         }
 
@@ -765,6 +765,11 @@
           color: #69312f;
         }
 
+        #sec2 > div > span > p,
+        #sec4 > div > span > p {
+          padding-top: 20px;
+        }
+        
         #k_home_tools core-item::shadow #icon {
           margin: 0 6px;
         }
@@ -1915,10 +1920,11 @@
 
         var backs = ["others/home-back-trees.png",
                      "others/home-back-buck.png",
-                     "others/home-back-decen.png",
-                     "others/home-back-kunes.png",
+                     "others/home-back-decen.png",                     
+                     "others/home-back-four-handed-seat.png",
                      "others/home-back-op-en.png",
-                     "others/home-back-op-en.png"
+                     "others/home-back-gears.png",
+                     "others/home-back-trees.png" // again
         ];
 
         // Show proper language messages
@@ -1971,7 +1977,9 @@
         );
         
         owl.on('changed.owl.carousel', function(event) {
-          scope.homebackimg = backs[event.item.index];
+          var i = event.item.index-2
+          // console.log("Show back: " + i);
+          scope.homebackimg = backs[i];
         });
         
       });

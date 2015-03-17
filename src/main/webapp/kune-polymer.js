@@ -146,18 +146,6 @@ addEventListener('core-header-transform', function(e) {
   miga.css('color', (d.y >= d.height - d.condensedHeight) ? kt.c2 : kt.c6);
 });
 
-function scroll(id) {
-  console.log("target " + id);
-
-  if (id) {
-    element=document.getElementById(id);
-    var top = element.offsetTop - element.scrollTop + element.clientTop;
-    
-    var scroller = $("#k_home_scroller");
-    scroller.animate({scrollTop: top}, 400);           
-  }
-}
-
 /* Default theme (useful for development without GWT) 
 kt.bg1="#deaa87";
 kt.bg2="#d99e76";
