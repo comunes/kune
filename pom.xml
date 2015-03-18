@@ -1,10 +1,9 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>cc.kune</groupId>
   <artifactId>kune</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
   <name>kune</name>
   <description>kune free/open/libre collaboration platform</description>
   <url>http://kune.ourproject.org</url>
@@ -1124,12 +1123,11 @@
         <version>0.10</version>
         <configuration>
           <licenses>
-            <license
-              implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
+            <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
               <licenseFamilyCategory>AGPL3</licenseFamilyCategory>
               <licenseFamilyName>GNU Affero General Public License,
                 Version 3</licenseFamilyName>
-              <notes></notes>
+              <notes />
               <patterns>
                 <pattern>Copyright (C) 2007-2013 Licensed to the
                   Comunes
