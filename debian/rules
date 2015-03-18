@@ -13,7 +13,7 @@ include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 
 
 #KUNE_VERSION:=$(shell $(CURDIR)/bin/kune-version)
-KUNE_VERSION:=1.0.0
+KUNE_VERSION:=1.0.1-SNAPSHOT
 
 DEST := $(CURDIR)/debian/kune
 TARGET := $(CURDIR)/target
