@@ -1,3 +1,9 @@
+kune (1.0.0+b1) unstable; urgency=medium
+
+  * Relase of 1.0.0
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 18 Mar 2015 11:02:20 +0100
+
 kune (0.3.0+b52) unstable; urgency=medium
 
   * Feedback not visible in small devices

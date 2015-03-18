@@ -469,8 +469,7 @@ We usually upload new packages to this repo via bin/repopubli.sh
 
 * Making a Kune release
 
-- [ ] check the current scm configuration with something like: mvn -DstartDate=2012-09-01 -DendDate=2012-09-21 scm:changelog
-- [ ] do the las commits, change debian version and scripts grep -r CURRENTVERSION-SNAPSHOT src/ debian/ bin/ and change these files with CURRENTVERSION
+- [ ] do the last commits, change debian version and scripts grep -r CURRENTVERSION-SNAPSHOT src/ debian/ bin/ and change these files with CURRENTVERSION
 - [ ] do a mvn release:prepare
 - [ ] if all it's ok: mvn release:perform
 - [ ] if things goes wrong mvn release:prepare -Dresume=false or even mvn release:clean

@@ -96,7 +96,7 @@ public class RackServletFilter implements Filter {
 
   private static final Log LOG = LogFactory.getLog(RackServletFilter.class);
   private static final String MODULE_PARAMETER = RackModule.class.getName();
-  private static final String SYMBOL_MAPS_ON_DEV = "target/kune-0.3.0-SNAPSHOT/WEB-INF/deploy/wse/symbolMaps";
+  private static final String SYMBOL_MAPS_ON_DEV = "target/kune-1.0.0/WEB-INF/deploy/wse/symbolMaps";
   private static final String SYMBOL_MAPS_ON_PRODUCTION = "symbolMapsWse";
   private List<Dock> docks;
 
