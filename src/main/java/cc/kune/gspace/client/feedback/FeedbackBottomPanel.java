@@ -22,6 +22,8 @@
  */
 package cc.kune.gspace.client.feedback;
 
+import org.gwtbootstrap3.client.ui.constants.Responsiveness;
+
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.AbstractAtBorderPopupPanel;
@@ -94,6 +96,7 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
     btn.ensureDebugId(ID);
     setStyleName("k-feedback-btn");
     addStyleName("k-popup-bottom-centered");
+    addStyleName(Responsiveness.HIDDEN_XS.getCssName());
     // addStyleName("k-top-5corners");
     add(btn);
     showCentered();
@@ -149,7 +152,7 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.ui.AbstractAtBorderPopupPanel#setCenterPositionImpl()
    */
