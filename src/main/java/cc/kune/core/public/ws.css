@@ -903,6 +903,7 @@ table.k-folder-viewer {
   -khtml-opacity: 0.90;
   opacity: 0.90;
   margin-left: 3px;
+  z-index: 1200;
 }
 
 .gwt-SuggestBoxPopup .item {
