@@ -62,54 +62,60 @@ public class MotdManager {
               return;
             }
 
-            final Builder builder = new BasicTopDialog.Builder("k-motd", true, false,
-                I18n.getDirection());
+            final String cookieName = motd.getCookieName();
 
-            // motdDialog.addStyleName("k-motd-dialog");
+            final String motdCookie = Cookies.getCookie(cookieName);
 
-            if (motd.getTitle() != null) {
-              builder.title(motd.getTitle());
-            }
+            if (motdCookie == null) {
 
-            final BasicTopDialog dialog = builder.build();
+              final Builder builder = new BasicTopDialog.Builder("k-motd", true, false,
+                  I18n.getDirection());
 
-            dialog.setFirstBtnText(I18n.t(motd.getOkBtnText()));
+              // motdDialog.addStyleName("k-motd-dialog");
 
-            dialog.setCloseBtnVisible(true);
-
-            dialog.getInnerPanel().add(new Label(motd.getMessage()));
-
-            dialog.setSecondBtnText(I18n.t(motd.getCloseBtnText()));
-            dialog.getSecondBtn().addClickHandler(new ClickHandler() {
-              @Override
-              public void onClick(final ClickEvent event) {
-                setCookie(motd.getCookieName(), inDays(90));
-                dialog.hide();
+              if (motd.getTitle() != null) {
+                builder.title(motd.getTitle());
               }
-            });
-            if (motd.getShouldRemember() > 0) {
-              final CustomButton laterBtn = new CustomButton((I18n.t("Maybe later")));
-              laterBtn.addClickHandler(new ClickHandler() {
+
+              final BasicTopDialog dialog = builder.build();
+
+              dialog.setFirstBtnText(I18n.t(motd.getOkBtnText()));
+
+              dialog.setCloseBtnVisible(true);
+
+              dialog.getInnerPanel().add(new Label(motd.getMessage()));
+
+              dialog.setSecondBtnText(I18n.t(motd.getCloseBtnText()));
+              dialog.getSecondBtn().addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(final ClickEvent event) {
-                  setCookie(motd.getCookieName(), inDays(motd.getShouldRemember()));
+                  setCookie(cookieName, inDays(90));
                   dialog.hide();
                 }
               });
-              dialog.getBtnPanel().add(laterBtn);
-            }
-
-            dialog.getFirstBtn().addClickHandler(new ClickHandler() {
-              @Override
-              public void onClick(final ClickEvent event) {
-                setCookie(motd.getCookieName(), inDays(7));
-                KuneWindowUtils.open(motd.getOkBtnUrl());
-                dialog.hide();
+              if (motd.getShouldRemember() > 0) {
+                final CustomButton laterBtn = new CustomButton((I18n.t("Maybe later")));
+                laterBtn.addClickHandler(new ClickHandler() {
+                  @Override
+                  public void onClick(final ClickEvent event) {
+                    setCookie(cookieName, inDays(motd.getShouldRemember()));
+                    dialog.hide();
+                  }
+                });
+                dialog.getBtnPanel().add(laterBtn);
               }
-            });
 
-            dialog.show();
+              dialog.getFirstBtn().addClickHandler(new ClickHandler() {
+                @Override
+                public void onClick(final ClickEvent event) {
+                  setCookie(cookieName, inDays(7));
+                  KuneWindowUtils.open(motd.getOkBtnUrl());
+                  dialog.hide();
+                }
+              });
 
+              dialog.show();
+            }
           }
         };
         timer.schedule(10000);
