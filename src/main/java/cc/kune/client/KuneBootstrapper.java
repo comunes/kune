@@ -58,8 +58,8 @@ import com.gwtplatform.mvp.client.Bootstrapper;
 public class KuneBootstrapper implements Bootstrapper {
 
   protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.HOME_SCROLLER,
-      PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
-      PolymerId.HOME_TOOLBAR };
+    PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
+    PolymerId.HOME_TOOLBAR };
 
   private final ContentViewerSelector contentViewerSelector;
 
@@ -116,7 +116,6 @@ public class KuneBootstrapper implements Bootstrapper {
     SessionInstance.get().onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-        // TODO Auto-generated method stub
         // Polymer preventing FOUC
         // https://www.polymer-project.org/docs/polymer/styling.html#fouc-prevention
         for (final PolymerId id : unresolvedIdList) {
