@@ -24,6 +24,7 @@ package cc.kune.gspace.client.feedback;
 
 import org.gwtbootstrap3.client.ui.constants.Responsiveness;
 
+import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.AbstractAtBorderPopupPanel;
@@ -34,6 +35,8 @@ import cc.kune.core.client.auth.SignIn;
 import cc.kune.core.client.resources.iconic.IconicResources;
 import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
 import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.client.state.StateManager;
@@ -100,6 +103,16 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
     // addStyleName("k-top-5corners");
     add(btn);
     showCentered();
+    // At start: hide it...
+    setVisible(false);
+    EventBusInstance.get().addHandler(SpaceSelectEvent.getType(),
+        new SpaceSelectEvent.SpaceSelectHandler() {
+          @Override
+          public void onSpaceSelect(final SpaceSelectEvent event) {
+            // We do not show this on home space
+            setVisible(!event.getSpace().equals(Space.homeSpace));
+          }
+        });
     btn.getFocus().addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
@@ -108,17 +121,17 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
               session.getCurrentUser().getShortName(), i18n.getSiteCommonName());
           final PromptTopDialog.Builder builder = new PromptTopDialog.Builder(GIVE_US_FEEDBACK_ID,
               title, false, true, i18n.getDirection(), new PromptTopDialog.OnEnter() {
-            @Override
-            public void onEnter() {
-              // We do nothing to allow multiple lines
-            }
-          });
+                @Override
+                public void onEnter() {
+                  // We do nothing to allow multiple lines
+                }
+              });
           builder.emptyTextField(i18n.t("Please, edit and write here your feedback about this tool. "
               + "We find your comments very useful, especially "
               + "if you mention the things you would like to see, " + "your personal/group needs, etc."));
           builder.promptWidth(300).promptLines(7).width("340px").height("340px").firstButtonId(
               GIVE_US_FEEDBACK_SEND_BTN_ID).firstButtonTitle(i18n.t("Send")).sndButtonTitle(
-                  i18n.t("Cancel"));
+              i18n.t("Cancel"));
           diag = builder.build();
           diag.getFirstBtn().addClickHandler(new ClickHandler() {
             @Override
@@ -126,11 +139,11 @@ public class FeedbackBottomPanel extends AbstractAtBorderPopupPanel {
               diag.hide();
               contentService.get().sendFeedback(session.getUserHash(), title, diag.getTextFieldValue(),
                   new AsyncCallbackSimple<String>() {
-                @Override
-                public void onSuccess(final String url) {
-                  stateManager.gotoHistoryToken(url);
-                }
-              });
+                    @Override
+                    public void onSuccess(final String url) {
+                      stateManager.gotoHistoryToken(url);
+                    }
+                  });
             }
           });
           diag.getSecondBtn().addClickHandler(new ClickHandler() {
