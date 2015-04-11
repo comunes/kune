@@ -27,7 +27,7 @@
           the default language
           You can add more ids here and below to show/hide then.
           -->
-    <meta name="kune.home.ids" content="motto, tool_docs, tool_events, tool_chats, tool_lists, tool_wiki, tool_messages, tool_tasks, tool_barters, slide-1, buck, decen, meaning, super, continuation" />
+    <meta name="kune.home.ids" content="motto, tool_docs, tool_events, tool_chats, tool_lists, tool_wiki, tool_messages, tool_tasks, tool_barters, slide-1, buck, decen, meaning, super, continuation, copyleft" />
     <meta name="emite.httpBase" content="/http-bind/" />
     <meta name="emite.host" content="localhost" />
     <meta name="emite.searchHost" content="search.localhost" />
@@ -299,18 +299,33 @@
                 </core-toolbar>
 
                 <div horizontal layout center id="home_bottombar" flex>
-                  <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
-                    <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
-                  </a>
-                  <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
-                    <paper-icon-button src="others/bc_logo_24.png"
-                                       title="donate with bitcoin"></paper-icon-button>
-                  </a>
-                  <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
-                    <img
+                  <div flex class="hidden-xs">
+                    <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
+                      <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
+                    </a>
+                    <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
+                      <paper-icon-button src="others/bc_logo_24.png"
+                                         title="donate with bitcoin"></paper-icon-button>
+                    </a>
+                    <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
+                      <img
                          src="http://api.flattr.com/button/flattr-badge-large.png"
                          alt="Flattr this" title="Flattr this" border="0">
-                  </a>
+                    </a>
+                  </div>
+                  <div flex class="owl-theme hidden-xs">
+                    <div class="owl-controls">
+                      <div id="customOwlDots" class="owl-dots"></div>
+                    </div>
+                  </div>
+                  <div flex id="home_copyleft">                    
+                    © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
+                    <span style="display: none;" id="k_home_copyleft_def">
+                      <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                      <span style="display: none;" id="k_home_copyleft_es">
+                        <a href="http://kune.ourproject.org" target="_blank">kune</a> es un proyecto de <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                    </span>
+                  </div>
                 </div>
 
                 <div id="k_home_scroller" fit unresolved>
@@ -327,41 +342,40 @@
                           compartir entre iguales, usando diferentes herramientas web:
                         </span>
                         <div id="k_home_tools" wrap justified vertical?="{{!xsmall}}" horizontal?="{{xsmall}}" layout>
-
-                        <div  wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
+                          <div wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
                           <core-item icon="kune:docs" horizontal center layout>
-                            <span id="k_home_tool_docs_def" style="display: none;">documents</span>
-                            <span id="k_home_tool_docs_es" style="display: none;">documentos</span>
+                            <span id="k_home_tool_docs_def" class="hidden-xs" style="display: none;">documents</span>
+                            <span id="k_home_tool_docs_es" class="hidden-xs" style="display: none;">documentos</span>
                           </core-item>
                           <core-item icon="kune:events" horizontal center layout>
-                            <span id="k_home_tool_events_def" style="display: none;">calendars</span>
-                            <span id="k_home_tool_events_es" style="display: none;">calendarios</span>
+                            <span id="k_home_tool_events_def" class="hidden-xs" style="display: none;">calendars</span>
+                            <span id="k_home_tool_events_es" class="hidden-xs" style="display: none;">calendarios</span>
                           </core-item>
                           <core-item icon="kune:chat-tool" horizontal center layout>
-                            <span id="k_home_tool_chats_def" style="display: none;">chats</span>
-                            <span id="k_home_tool_chats_es" style="display: none;">chats</span>
+                            <span id="k_home_tool_chats_def" class="hidden-xs"  style="display: none;">chats</span>
+                            <span id="k_home_tool_chats_es" class="hidden-xs" style="display: none;">chats</span>
                           </core-item>
                           <core-item icon="kune:lists" horizontal center layout>
-                            <span id="k_home_tool_lists_def" style="display: none;">forums</span>
-                            <span id="k_home_tool_lists_es" style="display: none;">foros</span>
+                            <span id="k_home_tool_lists_def" class="hidden-xs" style="display: none;">forums</span>
+                            <span id="k_home_tool_lists_es" class="hidden-xs" style="display: none;">foros</span>
                           </core-item>
                         </div>
                         <div wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
                           <core-item icon="kune:wiki" horizontal center layout>
-                            <span id="k_home_tool_wiki_def" style="display: none;">wiki</span>
-                            <span id="k_home_tool_wiki_es" style="display: none;">wiki</span>
+                            <span id="k_home_tool_wiki_def" class="hidden-xs" style="display: none;">wiki</span>
+                            <span id="k_home_tool_wiki_es" class="hidden-xs" style="display: none;">wiki</span>
                           </core-item>
                           <core-item icon="kune:message" horizontal center layout>
-                            <span id="k_home_tool_messages_def" style="display: none;">messages</span>
-                            <span id="k_home_tool_messages_es" style="display: none;">mensajes</span>
+                            <span id="k_home_tool_messages_def" class="hidden-xs" style="display: none;">messages</span>
+                            <span id="k_home_tool_messages_es" class="hidden-xs" style="display: none;">mensajes</span>
                           </core-item>
                           <core-item icon="kune:tasks" horizontal center layout>
-                            <span id="k_home_tool_tasks_def" style="display: none;">tasks</span>
-                            <span id="k_home_tool_tasks_es" style="display: none;">tareas</span>
+                            <span id="k_home_tool_tasks_def" class="hidden-xs" style="display: none;">tasks</span>
+                            <span id="k_home_tool_tasks_es" class="hidden-xs" style="display: none;">tareas</span>
                           </core-item>
                           <core-item icon="kune:barter" horizontal center layout>
-                            <span id="k_home_tool_barters_def" style="display: none;">barters</span>
-                            <span id="k_home_tool_barters_es" style="display: none;">trueques</span>
+                            <span id="k_home_tool_barters_def" class="hidden-xs" style="display: none;">barters</span>
+                            <span id="k_home_tool_barters_es" class="hidden-xs" style="display: none;">trueques</span>
                           </core-item>
                         </div> <!-- end kune icons 2 columns -->
                         </div>
@@ -722,7 +736,7 @@
         }
 
         #k_home_center,.buck_blockquote {
-          font-size: {{xsmall ? 18 : small? 24 : 24}}px;
+          font-size: {{xsmall ? 16 : small? 20: 24}}px;
         }
 
         #k_home_center a {
@@ -755,7 +769,7 @@
         }
 
         #k_home_tools {
-          font-size: {{xsmall? '20' : small? '32' : '32'}}px;
+          font-size: {{xsmall? '18' : small? '26' : '32'}}px;
           color: #69312f;
           width: {{xsmall? "80%": "auto"}};
           margin: {{xsmall? "0 auto": "0"}};
@@ -780,6 +794,7 @@
           overflow-x: hidden;
           text-align: justify;
           bottom: 40px;
+          cursor: ew-resize;
         }
 
         #k_home_spin_container {
@@ -1778,10 +1793,31 @@
         }
 
         #home_bottombar a,
+        #home_bottombar a:visited,
+        #home_bottombar a:hover {          
+          text-decoration: none;
+        }
+
+        #home_copyleft {          
+          font-size: 12px;
+          color: grey;
+          text-align: right;
+        }
+        
+        #home_copyleft a {
+          text-decoration: underline;
+          color: gray;
+        }
+        
         #group_bottombar a {
           color: rgb(51,51,51);
         }
 
+        #home_bottombar > div > a > img {
+          /* flattr */
+          margin-top: -30px;
+        }
+ 
         #group_bottombar > div > div > img {
           /* license */ 
           opacity: 0.7;
@@ -1908,15 +1944,22 @@
       addEventListener('template-bound', function(e) {
         var scope = e.target;
         
-        h = document.getElementById('k_home_scroller').offsetHeight;
-        h = h - h*2/100 - 120;
+        function resizeHome() {
+          h = document.getElementById('k_home_scroller').offsetHeight;
+          h = h - h*2/100 - 120;
+          document.getElementById('sec0').style.height=h + "px";
+          document.getElementById('sec1').style.height=h + "px";
+          document.getElementById('sec2').style.height=h + "px";
+          document.getElementById('sec3').style.height=h + "px";
+          document.getElementById('sec4').style.height=h + "px";
+          document.getElementById('sec5').style.height=h + "px";
+        }
 
-        document.getElementById('sec0').style.height=h + "px";
-        document.getElementById('sec1').style.height=h + "px";
-        document.getElementById('sec2').style.height=h + "px";
-        document.getElementById('sec3').style.height=h + "px";
-        document.getElementById('sec4').style.height=h + "px";
-        document.getElementById('sec5').style.height=h + "px"; 
+        resizeHome();
+        
+        window.onresize = function() {
+          resizeHome();
+        }        
 
         var backs = ["others/home-back-trees.png",
                      "others/home-back-buck.png",
@@ -1972,6 +2015,7 @@
             autoplayTimeout:10000,
             autoplayHoverPause:true,
             // animateOut: 'fadeOut',
+            dotsContainer: '#customOwlDots',
             items: 1
           }
         );

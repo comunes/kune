@@ -164,5 +164,8 @@ kt.c4="#FFF";
 kt.c5="#552200";
 kt.c6="#FFF";
 kt.c7="#a05a2c";
-kt.c8="#a05a2c"; */
+ kt.c8="#a05a2c"; */
+
+var d = new Date();
+kt.this_year = d.getFullYear();
 

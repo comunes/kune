@@ -1,5 +1,7 @@
 kune (1.0.0+b2) unstable; urgency=medium
 
+  * Several fixes in home. Added copyleft.
+  * Feedback not in home space
   * Fix some z-index issue adding new members
   * Fix bug in motd manager that did not check the cookie
   * Added some sql utilities
