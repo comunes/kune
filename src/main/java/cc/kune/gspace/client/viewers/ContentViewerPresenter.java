@@ -65,8 +65,8 @@ import com.gwtplatform.mvp.client.proxy.RevealRootContentEvent;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentViewerPresenter extends
-Presenter<ContentViewerPresenter.ContentViewerView, ContentViewerPresenter.ContentViewerProxy>
-implements ContentViewer {
+    Presenter<ContentViewerPresenter.ContentViewerView, ContentViewerPresenter.ContentViewerProxy>
+    implements ContentViewer {
 
   /**
    * The Interface ContentViewerProxy.
@@ -110,6 +110,8 @@ implements ContentViewer {
      * @return the edits the title
      */
     HasEditHandler getEditTitle();
+
+    void injectSplash();
 
     /**
      * Sets the content.
@@ -170,6 +172,9 @@ implements ContentViewer {
 
   /** The edit handler. */
   private HandlerRegistration editHandler;
+
+  /** We detect if splash js/css is injected or not */
+  private boolean isSplashInit = false;
 
   /** The path toolbar utils. */
   private final PathToolbarUtils pathToolbarUtils;
@@ -235,7 +240,7 @@ implements ContentViewer {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.tool.ContentViewer#attach()
    */
   @Override
@@ -262,23 +267,23 @@ implements ContentViewer {
       public void fire(final EditEvent event) {
         renameAction.get().rename(session.getCurrentStateToken(), session.getCurrentState().getTitle(),
             event.getText(), new RenameListener() {
-          @Override
-          public void onFail(final StateToken token, final String oldTitle) {
-            getView().setEditableTitle(oldTitle);
-          }
+              @Override
+              public void onFail(final StateToken token, final String oldTitle) {
+                getView().setEditableTitle(oldTitle);
+              }
 
-          @Override
-          public void onSuccess(final StateToken token, final String title) {
-            getView().setEditableTitle(title);
-          }
-        });
+              @Override
+              public void onSuccess(final StateToken token, final String title) {
+                getView().setEditableTitle(title);
+              }
+            });
       }
     });
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.tool.ContentViewer#detach()
    */
   @Override
@@ -288,7 +293,7 @@ implements ContentViewer {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override
@@ -298,7 +303,7 @@ implements ContentViewer {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.gspace.client.tool.ContentViewer#setContent(cc.kune.core.shared
    * .dto.HasContent)
@@ -327,6 +332,13 @@ implements ContentViewer {
     } else {
       if (rights.isVisible()) {
         // Show contents
+        if (!isSplashInit) {
+          // Only here you should inject splash js/css once
+          // Following this suggestion:
+          // http://stackoverflow.com/questions/29753964/gwt-scriptinjector-vs-adding-script-tag-to-index-html-page
+          getView().injectSplash();
+          isSplashInit = true;
+        }
         getView().setContent(stateContent);
       } else {
         throw new UIException("Unexpected status in Viewer");

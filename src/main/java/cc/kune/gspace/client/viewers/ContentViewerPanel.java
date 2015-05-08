@@ -43,6 +43,7 @@ import cc.kune.wave.client.kspecific.WaveClientProvider;
 import cc.kune.wave.client.kspecific.WaveClientUtils;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
@@ -226,6 +227,15 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
         }
       });
     }
+  }
+
+  @Override
+  public void injectSplash() {
+    ScriptInjector.fromUrl("others/splash/js/wave-rpc.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
+    ScriptInjector.fromUrl("others/splash/js/gadget.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
+    ScriptInjector.fromUrl("others/splash/js/rpc.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
+    ScriptInjector.fromUrl("others/splash/js/common_client.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
+    ScriptInjector.fromUrl("others/splash/js/permalink_client.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
   }
 
   /*
