@@ -25,103 +25,24 @@ package cc.kune.gspace.client.licensewizard.pages;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.dto.LicenseDTO;
 
-import com.extjs.gxt.ui.client.data.BaseModel;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.watopi.chosen.client.ChosenOptions;
+import com.watopi.chosen.client.event.ChosenChangeEvent;
+import com.watopi.chosen.client.event.ChosenChangeEvent.ChosenChangeHandler;
+import com.watopi.chosen.client.gwt.ChosenListBox;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class LicenseWizardFrdForm.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFrdFormView {
-
-  /**
-   * The Class LicenseData.
-   * 
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  @SuppressWarnings("serial")
-  public class LicenseData extends BaseModel {
-
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-
-    /** The Constant LONGNAME. */
-    private static final String LONGNAME = "longname";
-
-    /** The Constant SHORTNAME. */
-    private static final String SHORTNAME = "shortname";
-
-    /** The Constant URL. */
-    private static final String URL = "url";
-
-    /**
-     * Instantiates a new license data.
-     * 
-     * @param license
-     *          the license
-     */
-    public LicenseData(final LicenseDTO license) {
-      this(license.getShortName(), license.getLongName(), license.getUrl());
-    }
-
-    /**
-     * Instantiates a new license data.
-     * 
-     * @param shortname
-     *          the shortname
-     * @param longname
-     *          the longname
-     * @param url
-     *          the url
-     */
-    public LicenseData(final String shortname, final String longname, final String url) {
-      set(SHORTNAME, shortname);
-      set(LONGNAME, longname);
-      set(URL, url);
-    }
-
-    /**
-     * Gets the longname.
-     * 
-     * @return the longname
-     */
-    public String getLongname() {
-      return get(LONGNAME);
-    }
-
-    /**
-     * Gets the shortname.
-     * 
-     * @return the shortname
-     */
-    public String getShortname() {
-      return get(SHORTNAME);
-    }
-
-    /**
-     * Gets the url.
-     * 
-     * @return the url
-     */
-    public String getUrl() {
-      return get(URL);
-    }
-  }
+public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdFormView {
 
   /** The Constant COMMON_LICENSES_ID. */
   public static final String COMMON_LICENSES_ID = "k-lwsf-common";
@@ -132,18 +53,14 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
   /** The Constant RADIO_FIELD_NAME. */
   public static final String RADIO_FIELD_NAME = "k-lwsf-radio";
 
-  /** The cb. */
-  private final ComboBox<LicenseData> cb;
+  private final ChosenListBox licenseChoose;
 
   /** The on change. */
   private SimpleCallback onChange;
 
-  /** The session. */
-  private final Session session;
-
   /**
    * Instantiates a new license wizard frd form.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param session
@@ -151,35 +68,36 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
    */
   @Inject
   public LicenseWizardFrdForm(final I18nTranslationService i18n, final Session session) {
-    this.session = session;
 
-    setFrame(true);
-    super.setPadding(10);
+    // setFrame(true);
+    // super.setPadding(10);
 
-    super.setAutoHeight(true);
     final Label intro = new Label();
     intro.setText(i18n.t("Select other kind of licenses:"));
     intro.addStyleName("kune-Margin-10-b");
 
-    super.setHideLabels(true);
-
-    cb = new ComboBox<LicenseData>();
-    cb.setLabelSeparator("");
-    cb.setStore(createStore());
-    cb.setDisplayField(LicenseData.LONGNAME);
-    cb.setValueField(LicenseData.SHORTNAME);
-    cb.setTriggerAction(TriggerAction.ALL);
-    cb.setEmptyText(i18n.t("Select license"));
-    cb.setWidth(300);
-    cb.setTitle("Licenses");
-    cb.addListener(Events.Select, new Listener<BaseEvent>() {
+    // super.setHideLabels(true);
+    final ChosenOptions options = new ChosenOptions();
+    options.setNoResultsText(i18n.t("License not found"));
+    options.setPlaceholderText(i18n.t("Select license"));
+    options.setSearchContains(true);
+    licenseChoose = new ChosenListBox(false, options);
+    // First empty
+    licenseChoose.addItem("", "");
+    for (final LicenseDTO license : session.getLicenses()) {
+      if (!license.isCC()) {
+        licenseChoose.addItem(license.getLongName(), license.getShortName());
+      }
+    }
+    licenseChoose.addChosenChangeHandler(new ChosenChangeHandler() {
       @Override
-      public void handleEvent(final BaseEvent be) {
+      public void onChange(final ChosenChangeEvent event) {
         onChange.onCallback();
       }
     });
-    add(intro);
-    add(cb);
+    add(licenseChoose);
+
+    // super.setHeight(200);
   }
 
   /*
@@ -189,23 +107,7 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
    */
   @Override
   public Widget asWidget() {
-    return this.getFormPanel();
-  }
-
-  /**
-   * Creates the store.
-   * 
-   * @return the list store
-   */
-  private ListStore<LicenseData> createStore() {
-    final ListStore<LicenseData> list = new ListStore<LicenseData>();
-
-    for (final LicenseDTO license : session.getLicenses()) {
-      if (!license.isCC()) {
-        list.add(new LicenseData(license));
-      }
-    }
-    return list;
+    return this;
   }
 
   /*
@@ -216,7 +118,7 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
    */
   @Override
   public String getSelectedLicense() {
-    return cb.getValue().getShortname();
+    return licenseChoose.getSelectedValue();
   }
 
   /*
@@ -238,7 +140,8 @@ public class LicenseWizardFrdForm extends DefaultForm implements LicenseWizardFr
    */
   @Override
   public void reset() {
-    super.reset();
+    // super.reset();
+    licenseChoose.setSelectedIndex(0);
   }
 
   /*

@@ -1,5 +1,6 @@
-kune (1.0.0+b3) unstable; urgency=medium
+kune (1.0.1+b3) unstable; urgency=medium
 
+  * Fixed select box for licenses
   * Improved select box for languages in translator and user profiles
   * Improved client start-up of kune
 
@@ -17,7 +18,7 @@ kune (1.0.0+b2) unstable; urgency=medium
 
 kune (1.0.0+b1) unstable; urgency=medium
 
-  * Relase of 1.0.0
+  * Release of 1.0.0
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 18 Mar 2015 11:02:20 +0100
 
