@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2007-2015 Licensed to the Comunes Association (CA) under
+x * Copyright (C) 2007-2015 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
  * The CA licenses this file to you under the GNU Affero General Public
  * License version 3, (the "License"); you may not use this file except in
@@ -68,15 +68,10 @@ public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdF
    */
   @Inject
   public LicenseWizardFrdForm(final I18nTranslationService i18n, final Session session) {
-
-    // setFrame(true);
-    // super.setPadding(10);
-
     final Label intro = new Label();
     intro.setText(i18n.t("Select other kind of licenses:"));
     intro.addStyleName("kune-Margin-10-b");
 
-    // super.setHideLabels(true);
     final ChosenOptions options = new ChosenOptions();
     options.setNoResultsText(i18n.t("License not found"));
     options.setPlaceholderText(i18n.t("Select license"));
@@ -96,8 +91,6 @@ public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdF
       }
     });
     add(licenseChoose);
-
-    // super.setHeight(200);
   }
 
   /*
@@ -140,7 +133,6 @@ public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdF
    */
   @Override
   public void reset() {
-    // super.reset();
     licenseChoose.setSelectedIndex(0);
   }
 
@@ -154,6 +146,5 @@ public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdF
   @Override
   public void setFlags(final boolean isCopyleft, final boolean isAppropiateForCulturalWorks,
       final boolean isNonComercial) {
-
   }
 }
