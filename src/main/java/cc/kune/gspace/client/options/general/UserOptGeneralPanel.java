@@ -35,7 +35,6 @@ import cc.kune.gspace.client.i18n.LanguageSelectorPanel;
 
 import com.extjs.gxt.ui.client.widget.form.AdapterField;
 import com.extjs.gxt.ui.client.widget.form.FieldSet;
-import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.extjs.gxt.ui.client.widget.form.Radio;
 import com.extjs.gxt.ui.client.widget.form.TextField;
 import com.google.gwt.event.dom.client.HasClickHandlers;
@@ -45,7 +44,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserOptGeneralPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOptGeneralView {
@@ -106,7 +105,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /**
    * Instantiates a new user opt general panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param res
@@ -124,8 +123,8 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     longName = UserFieldFactory.createUserLongName(LONG_NAME_FIELD);
     add(longName);
     langSelector.setLangTitle(i18n.t("Your language"));
-    langSelector.setLabelAlign(LabelAlign.LEFT);
     langSelector.setLangSeparator(":");
+    langSelector.setTitleWidth("100px");
     add(langSelector);
 
     email = UserFieldFactory.createUserEmail(EMAIL_FIELD);

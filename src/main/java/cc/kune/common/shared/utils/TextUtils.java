@@ -50,6 +50,8 @@ public class TextUtils {
   /** The Constant IN_DEVELOPMENT_P. */
   public static final String IN_DEVELOPMENT_P = " (in development)";
 
+  public static final String LIST_NAME_REGEXP = "^[a-zA-Z0-9_\\-]+$";
+
   /** The Constant NUM_REGEXP. */
   public static final String NUM_REGEXP = "^[0-9]+$";
 
@@ -64,15 +66,13 @@ public class TextUtils {
       + "Aa" // ring
       + "Cc" // cedilla
       + "Nn" // n tilde (spanish)
-  ;
+      ;
 
   /** The Constant SHORTNAME_REGEXP. */
   public static final String SHORTNAME_REGEXP = "^[a-z0-9]+$";
 
   /** The Constant SHORTNAME_UPPER_REGEXP. */
   public static final String SHORTNAME_UPPER_REGEXP = "^[a-zA-Z0-9]+$";
-
-  public static final String LIST_NAME_REGEXP = "^[a-zA-Z0-9_\\-]+$";
 
   /** Actual accented values, corresponds one to one with ASCII. */
   private static final String UNICODE = "\u00C0\u00E0\u00C8\u00E8\u00CC\u00EC\u00D2\u00F2\u00D9\u00F9"
@@ -367,6 +367,10 @@ public class TextUtils {
       }
     }
     return false;
+  }
+
+  public static boolean isEmpty(final String text) {
+    return empty(text);
   }
 
   /**

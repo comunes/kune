@@ -34,7 +34,6 @@ import com.extjs.gxt.ui.client.event.BaseEvent;
 import com.extjs.gxt.ui.client.event.Events;
 import com.extjs.gxt.ui.client.event.Listener;
 import com.extjs.gxt.ui.client.widget.form.CheckBox;
-import com.extjs.gxt.ui.client.widget.form.FormPanel.LabelAlign;
 import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
@@ -142,19 +141,17 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
     super.getInnerPanel().insert(lanSelectorFullTranslatedPanel, 1);
     lanSelectorFullTranslatedPanel.setLangTitle(i18n.t("from"));
-    lanSelectorFullTranslatedPanel.setLabelAlign(LabelAlign.RIGHT);
     lanSelectorFullTranslatedPanel.setLangSeparator(":");
     lanSelectorFullTranslatedPanel.addChangeListener(onLangChange);
     super.getInnerPanel().insert(lanSelectorPanel, 2);
     lanSelectorPanel.setLangTitle(i18n.t("to"));
-    lanSelectorPanel.setLabelAlign(LabelAlign.RIGHT);
     lanSelectorPanel.setLangSeparator(":");
     lanSelectorPanel.addChangeListener(onLangChange);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView#init
    * ()
@@ -182,7 +179,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.gspace.client.i18n.I18nTranslatorPresenter.I18nTranslatorView#
    * setLanguage(cc.kune.core.shared.dto.I18nLanguageSimpleDTO)
    */
@@ -215,7 +212,7 @@ public class I18nTranslatorPanel extends AbstractTabbedDialogPanel implements I1
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.core.client.ui.dialogs.tabbed.AbstractTabbedDialogPanel#show()
    */
   @Override

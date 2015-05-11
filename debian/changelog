@@ -1,3 +1,10 @@
+kune (1.0.0+b3) unstable; urgency=medium
+
+  * Improved select box for languages in translator and user profiles
+  * Improved client start-up of kune
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 12 May 2015 00:04:18 +0200
+
 kune (1.0.0+b2) unstable; urgency=medium
 
   * Several fixes in home. Added copyleft.

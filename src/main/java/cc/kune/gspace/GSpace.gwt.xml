@@ -5,4 +5,5 @@
   <source path='client'
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
   <inherits name="cc.kune.pspace.PSpace" />
+  <inherits name='com.watopi.chosen.Chosen'/>
 </module>

@@ -27,125 +27,43 @@ import java.util.List;
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleCallback;
+import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.state.Session;
-import cc.kune.core.client.ui.DefaultForm;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 
-import com.extjs.gxt.ui.client.data.BaseModel;
-import com.extjs.gxt.ui.client.event.BaseEvent;
-import com.extjs.gxt.ui.client.event.Events;
-import com.extjs.gxt.ui.client.event.Listener;
-import com.extjs.gxt.ui.client.store.ListStore;
-import com.extjs.gxt.ui.client.widget.form.ComboBox;
-import com.extjs.gxt.ui.client.widget.form.ComboBox.TriggerAction;
-import com.extjs.gxt.ui.client.widget.form.FormPanel;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.InlineLabel;
+import com.watopi.chosen.client.ChosenOptions;
+import com.watopi.chosen.client.event.ChosenChangeEvent;
+import com.watopi.chosen.client.event.ChosenChangeEvent.ChosenChangeHandler;
+import com.watopi.chosen.client.gwt.ChosenListBox;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class AbstractLanguageSelectorPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public abstract class AbstractLanguageSelectorPanel extends FormPanel {
-
-  /**
-   * The Class LanguageData.
-   * 
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
-  @SuppressWarnings("serial")
-  public class LanguageData extends BaseModel {
-
-    /**
-     * 
-     */
-    private static final long serialVersionUID = 1L;
-
-    /** The Constant CODE. */
-    private static final String CODE = "code";
-
-    /** The Constant ENGLISH_NAME. */
-    private static final String ENGLISH_NAME = "englishName";
-
-    /**
-     * Instantiates a new language data.
-     * 
-     * @param code
-     *          the code
-     * @param englishName
-     *          the english name
-     */
-    public LanguageData(final String code, final String englishName) {
-      set(CODE, code);
-      set(ENGLISH_NAME, englishName);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#equals(java.lang.Object)
-     */
-    @Override
-    public boolean equals(final Object obj) {
-      if (this == obj) {
-        return true;
-      }
-      if (obj == null) {
-        return false;
-      }
-      if (getClass() != obj.getClass()) {
-        return false;
-      }
-      return getCode().equals(((LanguageData) obj).getCode());
-    }
-
-    /**
-     * Gets the code.
-     * 
-     * @return the code
-     */
-    public String getCode() {
-      return get(CODE);
-    }
-
-    /**
-     * Gets the english name.
-     * 
-     * @return the english name
-     */
-    public String getEnglishName() {
-      return get(ENGLISH_NAME);
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see java.lang.Object#hashCode()
-     */
-    @Override
-    public int hashCode() {
-      final int prime = 31;
-      int result = 1;
-      result = prime * result + (getCode() == null ? 0 : getCode().hashCode());
-      return result;
-    }
-  }
+public abstract class AbstractLanguageSelectorPanel extends FlowPanel {
 
   /** The Constant LANG_FIELD. */
   public static final String LANG_FIELD = "k-langsp-lf";
 
+  private final InlineLabel fieldSep;
+
+  private final InlineLabel fieldTitle;
+
   /** The i18n. */
   private final I18nTranslationService i18n;
 
-  /** The lang combo. */
-  private ComboBox<LanguageData> langCombo;
-
+  private ChosenListBox langChoose;
   /** The session. */
   private final Session session;
 
+  private final FlowPanel titlePanel;
+
   /**
    * Instantiates a new abstract language selector panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param session
@@ -159,111 +77,89 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
     this.i18n = i18n;
     this.session = session;
 
-    setBorders(false);
-    setFrame(false);
-    setHeaderVisible(false);
-    setBodyBorder(false);
-    // setWidth(300);
-    setLabelWidth(DefaultForm.DEF_FIELD_LABEL_WITH + 25);
-    setPadding(0);
-    createLangCombo(type);
-    super.add(langCombo);
+    createLangChoose(type);
+    titlePanel = new FlowPanel();
+    fieldTitle = new InlineLabel();
+    fieldSep = new InlineLabel();
+    fieldTitle.addStyleName("k-fl");
+    fieldTitle.addStyleName("x-form-item-label");
+    fieldTitle.addStyleName("k-white-nowrap");
+    fieldSep.addStyleName("k-fl");
+    fieldSep.addStyleName("x-form-item-label");
+    langChoose.addStyleName("k-fl");
+    titlePanel.addStyleName("k-fl");
+    titlePanel.addStyleName("kune-Margin-10-r");
+    // fieldTitle.setWidth("140px");
+    titlePanel.add(fieldTitle);
+    titlePanel.add(fieldSep);
+    super.add(titlePanel);
+    super.add(langChoose);
   }
 
   /**
    * Adds the change listener.
-   * 
+   *
    * @param onChange
    *          the on change
    */
   public void addChangeListener(final SimpleCallback onChange) {
-    langCombo.addListener(Events.Select, new Listener<BaseEvent>() {
+    langChoose.addChosenChangeHandler(new ChosenChangeHandler() {
       @Override
-      public void handleEvent(final BaseEvent be) {
+      public void onChange(final ChosenChangeEvent event) {
         onChange.onCallback();
       }
     });
   }
 
-  /**
-   * Creates the lang combo.
-   * 
-   * @param type
-   *          the type
-   */
-  private void createLangCombo(final LanguageSelectorType type) {
-    // Field.setMsgTarget("side");
-    // NOTE: The Combo box in modal popups fails!
-    langCombo = new ComboBox<LanguageData>();
-    langCombo.setName(LANG_FIELD);
-    langCombo.setMinChars(1);
-    // langCombo.setMode(ComboBox.LOCAL);
-    langCombo.setStore(createStore(type));
-    langCombo.setDisplayField("language");
-    langCombo.setTriggerAction(TriggerAction.ALL);
-    langCombo.setEmptyText(i18n.t("Enter language"));
-    langCombo.setLoadingText(i18n.t("Searching..."));
-    langCombo.setDisplayField(LanguageData.ENGLISH_NAME);
-    langCombo.setValueField(LanguageData.CODE);
-    langCombo.setTypeAhead(true);
-    langCombo.setTypeAheadDelay(1000);
-    langCombo.setSelectOnFocus(false);
-    langCombo.setWidth(140);
-    langCombo.setPageSize(7);
-    langCombo.setForceSelection(true);
-    langCombo.setAllowBlank(false);
+  private void addItem(final I18nLanguageSimpleDTO lang) {
+    langChoose.addItem(lang.getEnglishName(), lang.getCode());
   }
 
-  /**
-   * Creates the store.
-   * 
-   * @param type
-   *          the type
-   * @return the list store
-   */
-  private ListStore<LanguageData> createStore(final LanguageSelectorType type) {
-    final ListStore<LanguageData> list = new ListStore<LanguageData>();
+  @Override
+  public void clear() {
+    reset();
+  }
+
+  private void createLangChoose(final LanguageSelectorType type) {
+    final ChosenOptions options = new ChosenOptions();
+    options.setNoResultsText(i18n.t("Language not found"));
+    options.setPlaceholderText(i18n.t("Enter language"));
+    options.setSearchContains(true);
+    langChoose = new ChosenListBox(false, options);
+
     final List<I18nLanguageSimpleDTO> langs = type == LanguageSelectorType.ONLY_FULL_TRANSLATED ? session.getFullTranslatedLanguages()
         : session.getLanguages();
+    // Note: First empty, from the gwtchosen doc: on single selects, the first
+    // element is assumed to be selected by the browser. To take advantage of
+    // the default text support, you will need to include a blank option as the
+    // first element of your select list.
+    langChoose.addItem("");
     for (final I18nLanguageSimpleDTO lang : langs) {
       switch (type) {
       case ALL_EXCEPT_ENGLISH:
       case ONLY_FULL_TRANSLATED:
         if (!lang.getCode().equals("en")) {
-          list.add(getLangData(lang));
+          addItem(lang);
         }
         break;
       case ALL:
       default:
-        list.add(getLangData(lang));
+        addItem(lang);
         break;
       }
     }
-    return list;
-  }
-
-  /**
-   * Gets the lang data.
-   * 
-   * @param lang
-   *          the lang
-   * @return the lang data
-   */
-  private LanguageData getLangData(final I18nLanguageSimpleDTO lang) {
-    return new LanguageData(lang.getCode(), lang.getEnglishName());
   }
 
   /**
    * Gets the language.
-   * 
+   *
    * @return the language
    */
   public I18nLanguageSimpleDTO getLanguage() {
-    final LanguageData value = langCombo.getValue();
-    if (value == null) {
+    final String langCode = langChoose.getSelectedValue();
+    if (TextUtils.isEmpty(langCode)) {
       return null;
     }
-    final String langCode = value.getCode();
     for (final I18nLanguageSimpleDTO lang : session.getLanguages()) {
       if (lang.getCode().equals(langCode)) {
         return lang;
@@ -274,69 +170,81 @@ public abstract class AbstractLanguageSelectorPanel extends FormPanel {
 
   /**
    * Gets the language code.
-   * 
+   *
    * @return the language code
    */
   public String getLanguageCode() {
-    return langCombo.getValue().getCode();
+    return langChoose.getSelectedValue();
+
   }
 
   /**
    * Gets the language english name.
-   * 
+   *
    * @return the language english name
    */
   public String getLanguageEnglishName() {
-    return langCombo.getValue().getEnglishName();
+    final I18nLanguageSimpleDTO lang = getLanguage();
+    return lang == null ? null : lang.getEnglishName();
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.extjs.gxt.ui.client.widget.form.FormPanel#reset()
-   */
-  @Override
-  public void reset() {
-    langCombo.reset();
+  private void reset() {
+    // Read Note in createLangChoose()
+    langChoose.setItemSelected(0, true);
+  }
+
+  public void setEnabled(final Boolean enabled) {
+    langChoose.setEnabled(enabled);
   }
 
   /**
    * Sets the lang separator.
-   * 
+   *
    * @param separator
    *          the new lang separator
    */
   public void setLangSeparator(final String separator) {
-    langCombo.setLabelSeparator(separator);
+    fieldSep.setText(separator);
   }
 
   /**
    * Sets the lang title.
-   * 
+   *
    * @param langFieldTitle
    *          the new lang title
    */
   public void setLangTitle(final String langFieldTitle) {
     if (langFieldTitle == null) {
-      setHideLabels(true);
+      fieldTitle.setVisible(false);
+      fieldSep.setVisible(false);
     } else {
       if (langFieldTitle != null) {
-        langCombo.setFieldLabel(langFieldTitle);
+        fieldTitle.setText(langFieldTitle);
       }
     }
   }
 
   /**
    * Sets the language.
-   * 
+   *
    * @param language
    *          the new language
    */
   public void setLanguage(final I18nLanguageSimpleDTO language) {
     if (language == null) {
-      langCombo.clear();
+      reset();
     } else {
-      langCombo.setValue(getLangData(language));
+      for (int i = 0; i < langChoose.getItemCount(); i++) {
+        final String val = langChoose.getValue(i);
+        if (val.equals(language.getCode())) {
+          langChoose.setSelectedIndex(i);
+          return;
+        }
+      }
     }
+  }
+
+  public void setTitleWidth(final String width) {
+    titlePanel.setWidth(width);
   }
 }

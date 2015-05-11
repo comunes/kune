@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>cc.kune</groupId>
   <artifactId>kune</artifactId>
@@ -58,6 +59,10 @@
         <enabled>true</enabled>
       </snapshots>
     </repository>
+    <repository>
+      <id>plugins</id>
+      <url>http://gwtquery-plugins.googlecode.com/svn/mavenrepo</url>
+    </repository>
   </repositories>
   <pluginRepositories>
     <pluginRepository>
@@ -96,11 +101,11 @@
       <version>5.0.3</version>
       <scope>provided</scope>
     </dependency>
-    <!--http://mojo.codehaus.org/gwt-maven-plugin/user-guide/project.html 
-      Note : Don't define gwt-dev as project dependency : this JAR only contains 
-      gwt SDK tools and has many common libraries packaged that may conflict with 
-      the ones defined for your project, resulting in uncomprehensible NoSuchMethodErrors. 
-      The gwt-maven-plugin will automagically resolve the required dependency and 
+    <!--http://mojo.codehaus.org/gwt-maven-plugin/user-guide/project.html
+      Note : Don't define gwt-dev as project dependency : this JAR only contains
+      gwt SDK tools and has many common libraries packaged that may conflict with
+      the ones defined for your project, resulting in uncomprehensible NoSuchMethodErrors.
+      The gwt-maven-plugin will automagically resolve the required dependency and
       add it to classpath when lauching GWT tools. -->
     <!-- <dependency> -->
     <!-- <groupId>com.google.gwt</groupId> -->
@@ -115,7 +120,7 @@
       <!-- <version>2.1-SNAPSHOT-r1160</version> -->
       <version>3.0</version>
     </dependency>
-    <!-- <dependency> <groupId>com.googlecode.gwt.inject</groupId> <artifactId>gin</artifactId> 
+    <!-- <dependency> <groupId>com.googlecode.gwt.inject</groupId> <artifactId>gin</artifactId>
       <version>gin-1.1-SNAPSHOT</version> </dependency> -->
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
@@ -625,8 +630,14 @@
       <groupId>com.googlecode.gwtquery</groupId>
       <artifactId>gwtquery</artifactId>
       <version>1.4.2</version>
-      <!-- If you are using old versions of gwt, uncomment the appropriate 
+      <!-- If you are using old versions of gwt, uncomment the appropriate
         line <classifier>2.1.0</classifier> -->
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.watopi</groupId>
+      <artifactId>gwtchosen</artifactId>
+      <version>1.1.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -646,9 +657,9 @@
       <version>2.2.2</version>
       <type>maven-plugin</type>
     </dependency>
-    <!-- We should replace this by other lib <dependency> <groupId>net.sourceforge.htmlunit</groupId> 
-      <artifactId>htmlunit</artifactId> <version>2.13</version> <exclusions> <exclusion> 
-      <artifactId>jetty-websocket</artifactId> <groupId>org.eclipse.jetty</groupId> 
+    <!-- We should replace this by other lib <dependency> <groupId>net.sourceforge.htmlunit</groupId>
+      <artifactId>htmlunit</artifactId> <version>2.13</version> <exclusions> <exclusion>
+      <artifactId>jetty-websocket</artifactId> <groupId>org.eclipse.jetty</groupId>
       </exclusion> </exclusions> </dependency> -->
     <dependency>
       <groupId>com.thetransactioncompany</groupId>
@@ -799,8 +810,8 @@
             </systemProperty>
             <!-- <systemProperty> -->
             <!-- <key>kune.db.persistence.name</key> -->
-            <!-- Persistence name, choose between: production, development, 
-              test_db (testing environment using mysql db), test (testing environment using 
+            <!-- Persistence name, choose between: production, development,
+              test_db (testing environment using mysql db), test (testing environment using
               h2 db). See persistence.xml -->
             <!-- <value>development</value> -->
             <!-- </systemProperty> -->
@@ -848,7 +859,7 @@
           <compilerId>eclipse</compilerId>
           <source>1.7</source>
           <target>1.7</target>
-          <!-- Uncomment and run mvn with -X -e if we have same compile problems 
+          <!-- Uncomment and run mvn with -X -e if we have same compile problems
             <compilerArgument>-verbose</compilerArgument> <fork>true</fork> <verbose>true</verbose> -->
           <optimize>true</optimize>
         </configuration>
@@ -894,7 +905,7 @@
             <name>junit</name>
             <value>true</value>
           </property>
-          <!-- Skip the normal tests, we'll run them in the integration-test 
+          <!-- Skip the normal tests, we'll run them in the integration-test
             phase -->
           <skipTests>${skipTests}</skipTests>
         </configuration>
@@ -1023,11 +1034,11 @@
       <!-- gwtp & GenEvent need this plugin -->
       <!-- maybe test: http://mojo.codehaus.org/apt-maven-plugin/index.html -->
       <!-- instead of this: https://code.google.com/p/maven-annotation-plugin/ -->
-      <!-- <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId> 
-        <version>1.3.7</version> <executions> <execution> <id>process</id> <goals> 
-        <goal>process</goal> </goals> <phase>generate-sources</phase> </execution> 
-        </executions> </plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>apt-maven-plugin</artifactId> 
-        <version>1.0-alpha-4</version> <executions> <execution> <goals> <goal>process</goal> 
+      <!-- <plugin> <groupId>org.bsc.maven</groupId> <artifactId>maven-processor-plugin</artifactId>
+        <version>1.3.7</version> <executions> <execution> <id>process</id> <goals>
+        <goal>process</goal> </goals> <phase>generate-sources</phase> </execution>
+        </executions> </plugin> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>apt-maven-plugin</artifactId>
+        <version>1.0-alpha-4</version> <executions> <execution> <goals> <goal>process</goal>
         <goal>test-process</goal> </goals> </execution> </executions> </plugin> -->
       <!-- BETTER user: http://code.google.com/p/acris/wiki/AnnotationProcessing -->
       <plugin>
@@ -1047,7 +1058,7 @@
               <password>db4kune</password>
               <verbose>true</verbose>
             </configuration>
-            <!-- <configuration> <verbose>true</verbose> <propertiesFile> 
+            <!-- <configuration> <verbose>true</verbose> <propertiesFile>
               src/main/resources/db/liquibase.properties </propertiesFile> </configuration> -->
             <goals>
               <goal>update</goal>
@@ -1066,7 +1077,7 @@
               <mainClass>cc.kune.wave.server.CustomServerMain</mainClass>
               <!-- <classpathPrefix>~/.m2/repository/</classpathPrefix> -->
               <!-- <classpathLayoutType>repository</classpathLayoutType> -->
-              <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType' 
+              <!-- NOTE: Deprecated in version 2.4. Use 'classpathLayoutType'
                 instead. -->
               <classpathMavenRepositoryLayout>true
               </classpathMavenRepositoryLayout>
@@ -1123,11 +1134,12 @@
         <version>0.10</version>
         <configuration>
           <licenses>
-            <license implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
+            <license
+              implementation="org.apache.rat.analysis.license.SimplePatternBasedLicense">
               <licenseFamilyCategory>AGPL3</licenseFamilyCategory>
               <licenseFamilyName>GNU Affero General Public License,
                 Version 3</licenseFamilyName>
-              <notes />
+              <notes/>
               <patterns>
                 <pattern>Copyright (C) 2007-2013 Licensed to the
                   Comunes
@@ -1149,7 +1161,7 @@
     </extensions>
     <pluginManagement>
       <plugins>
-        <!--This plugin's configuration is used to store Eclipse m2e settings 
+        <!--This plugin's configuration is used to store Eclipse m2e settings
           only. It has no influence on the Maven build itself. -->
         <plugin>
           <groupId>org.eclipse.m2e</groupId>
@@ -1160,15 +1172,15 @@
               <pluginExecutions>
                 <pluginExecution>
                   <pluginExecutionFilter>
-                    <groupId />
-                    <artifactId />
-                    <versionRange />
+                    <groupId/>
+                    <artifactId/>
+                    <versionRange/>
                     <goals>
-                      <goal />
+                      <goal/>
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1183,7 +1195,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <execute />
+                    <execute/>
                   </action>
                 </pluginExecution>
                 <pluginExecution>
@@ -1196,7 +1208,7 @@
                     </goals>
                   </pluginExecutionFilter>
                   <action>
-                    <ignore />
+                    <ignore/>
                   </action>
                 </pluginExecution>
               </pluginExecutions>
@@ -1211,7 +1223,7 @@
       <id>production</id>
       <build>
         <plugins>
-          <!-- Warning if you modify this part take in to account that exist 
+          <!-- Warning if you modify this part take in to account that exist
             to profiles: development and production -->
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -1234,7 +1246,7 @@
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
               <localWorkers>2</localWorkers>
-              <!-- <localWorkers>1</localWorkers> Using all workers can temporarily 
+              <!-- <localWorkers>1</localWorkers> Using all workers can temporarily
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx3072m</extraJvmArgs>
               <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
@@ -1273,7 +1285,7 @@
       <id>development</id>
       <build>
         <plugins>
-          <!-- Warning if you modify this part take in to account that exist 
+          <!-- Warning if you modify this part take in to account that exist
             to profiles: development and production -->
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -1294,10 +1306,10 @@
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
               <draftCompile>true</draftCompile>
-              <localWorkers>2</localWorkers><!-- Using all workers can temporarily 
+              <localWorkers>2</localWorkers><!-- Using all workers can temporarily
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx2048m</extraJvmArgs>
-              <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath> <!-- This forces to use gwt first in Clashpath (for instance to use jetty 
+              <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath> <!-- This forces to use gwt first in Clashpath (for instance to use jetty
                 correct version in superdev) -->
             </configuration>
             <executions>
@@ -1334,7 +1346,7 @@
       <id>embDevelopment</id>
       <build>
         <plugins>
-          <!-- Warning if you modify this part take in to account that exist 
+          <!-- Warning if you modify this part take in to account that exist
             to profiles: development and production -->
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
@@ -1355,10 +1367,10 @@
               <copyWebapp>true</copyWebapp>
               <compileReport>false</compileReport>
               <draftCompile>true</draftCompile>
-              <localWorkers>2</localWorkers><!-- Using all workers can temporarily 
+              <localWorkers>2</localWorkers><!-- Using all workers can temporarily
                 hang the mouse and isn't much faster -->
               <extraJvmArgs>-Xmx2048m</extraJvmArgs>
-              <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath> <!-- This forces to use gwt first in Clashpath (for instance to use jetty 
+              <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath> <!-- This forces to use gwt first in Clashpath (for instance to use jetty
                 correct version in superdev) -->
             </configuration>
             <executions>

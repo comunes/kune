@@ -30,14 +30,14 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LanguageSelectorOnlyFullTranslatedPanel.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LanguageSelectorOnlyFullTranslatedPanel extends AbstractLanguageSelectorPanel {
 
   /**
    * Instantiates a new language selector only full translated panel.
-   * 
+   *
    * @param i18n
    *          the i18n
    * @param session

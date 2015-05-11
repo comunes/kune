@@ -1523,3 +1523,10 @@ div.oc-menu>div>ul.dropdown-menu {
 .k-to-lower > input  {
   text-transform: lowercase;
 }
+
+.com-watopi-chosen-client-resources-ChozenCss-chzn-container {
+  font-size: 14px !important;
+}
+.k-white-nowrap {
+  white-space: nowrap;
+}
