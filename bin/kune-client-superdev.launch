@@ -31,7 +31,7 @@
 <stringAttribute key="org.eclipse.jdt.launching.CLASSPATH_PROVIDER" value="com.google.gdt.eclipse.maven.mavenClasspathProvider"/>
 <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="com.google.gwt.dev.DevMode"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-superDevMode -war &quot;${workspace_loc:/kune}/target/kune-1.0.1-SNAPSHOT&quot; -startupUrl /?locale=en&amp;log_level=ALL&amp;dev=true -noserver -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 -bindAddress 0.0.0.0 cc.kune.KuneDev"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-superDevMode -war &quot;${workspace_loc:/kune}/target/kune-1.0.1-SNAPSHOT&quot; -startupUrl /?locale=en&amp;logLevel=ALL&amp;dev=true -noserver -remoteUI &quot;${gwt_remote_ui_server_port}:${unique_id}&quot; -logLevel INFO -codeServerPort 9997 -bindAddress 0.0.0.0 cc.kune.KuneDev"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="kune"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Xss512m -Xmx1536m -XX:MaxPermSize=1024m"/>
 </launchConfiguration>
