@@ -407,10 +407,10 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
    * Toogle tooltip visible.
    */
   public void toogleTooltipVisible() {
-    if (Tooltip.tip.isVisibleOrWillBe()) {
-      Tooltip.tip.hide();
+    if (Tooltip.getTip().isVisibleOrWillBe()) {
+      Tooltip.getTip().hide();
     } else {
-      Tooltip.tip.showTemporally(this, (String) (getValue(Action.TOOLTIP)));
+      Tooltip.getTip().showTemporally(this, (String) (getValue(Action.TOOLTIP)));
     }
   }
 }

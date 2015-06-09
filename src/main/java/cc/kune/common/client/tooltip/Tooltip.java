@@ -36,8 +36,6 @@ import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.event.logical.shared.AttachEvent;
-import com.google.gwt.event.logical.shared.AttachEvent.Handler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Window;
@@ -48,7 +46,6 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Tooltip.
  *
@@ -64,28 +61,16 @@ public class Tooltip extends PopupPanel {
   interface TooltipUiBinder extends UiBinder<Widget, Tooltip> {
   }
 
-  public static Tooltip tip;
+  private static Tooltip tip;
 
   /** The ui binder. */
   private static TooltipUiBinder uiBinder = GWT.create(TooltipUiBinder.class);
 
-  /**
-   * Sets the hide on detach listener.
-   *
-   * @param widget
-   *          the widget
-   * @param tip
-   *          the tip
-   */
-  private static void setHideOnDetachListener(final Widget widget, final Tooltip tip) {
-    widget.addAttachHandler(new Handler() {
-      @Override
-      public void onAttachOrDetach(final AttachEvent event) {
-        if (!event.isAttached()) {
-          tip.hide();
-        }
-      }
-    });
+  public static Tooltip getTip() {
+    if (tip == null) {
+      tip = new Tooltip();
+    }
+    return tip;
   }
 
   /**
@@ -97,40 +82,36 @@ public class Tooltip extends PopupPanel {
    *          the text
    */
   public static void to(final Widget forWidget, final String text) {
-    if (tip == null) {
-      tip = new Tooltip();
-    }
     forWidget.addDomHandler(new MouseOverHandler() {
       @Override
       public void onMouseOver(final MouseOverEvent event) {
-        tip.getTimers().configureOver(new Executer() {
+        getTip().getTimers().configureOver(new Executer() {
           @Override
           public void execute() {
-            tip.show(forWidget, text);
+            getTip().show(forWidget, text);
           }
         });
-        tip.getTimers().onOver();
+        getTip().getTimers().onOver();
       }
     }, MouseOverEvent.getType());
     forWidget.addDomHandler(new FocusHandler() {
       @Override
       public void onFocus(final FocusEvent event) {
-        tip.getTimers().onOut();
+        getTip().getTimers().onOut();
       }
     }, FocusEvent.getType());
     forWidget.addDomHandler(new BlurHandler() {
       @Override
       public void onBlur(final BlurEvent event) {
-        tip.getTimers().onOut();
+        getTip().getTimers().onOut();
       }
     }, BlurEvent.getType());
     forWidget.addDomHandler(new MouseOutHandler() {
       @Override
       public void onMouseOut(final MouseOutEvent event) {
-        tip.getTimers().onOut();
+        getTip().getTimers().onOut();
       }
     }, MouseOutEvent.getType());
-    setHideOnDetachListener(forWidget, tip);
   }
 
   /** The arrow. */
@@ -140,9 +121,6 @@ public class Tooltip extends PopupPanel {
   /** The arrow border. */
   @UiField
   HTMLPanel arrowBorder;
-
-  /** The contains text. */
-  private boolean containsText;
 
   /** The content. */
   @UiField
@@ -187,10 +165,12 @@ public class Tooltip extends PopupPanel {
     };
     final TimerWrapper outTimer = new TimerWrapper();
     final TimerWrapper securityTimer = new TimerWrapper();
+    timers = new TooltipTimers(overTimer, outTimer, securityTimer);
     outTimer.configure(hideExecuter);
     securityTimer.configure(hideExecuter);
-    timers = new TooltipTimers(overTimer, outTimer, securityTimer);
     textLabel = new Label();
+    content.add(textLabel);
+
   }
 
   /**
@@ -201,7 +181,7 @@ public class Tooltip extends PopupPanel {
   private TooltipPosition calculatePosition(final Widget forWidget) {
     return TooltipPositionCalculator.calculate(Window.getClientWidth(), Window.getClientHeight(),
         forWidget.getAbsoluteLeft(), forWidget.getAbsoluteTop(), forWidget.getOffsetWidth(),
-        forWidget.getOffsetHeight(), Tooltip.tip.getWidth(), Tooltip.tip.getHeight());
+        forWidget.getOffsetHeight(), getTip().getWidth(), getTip().getHeight());
   }
 
   /**
@@ -213,7 +193,7 @@ public class Tooltip extends PopupPanel {
     return mainPanel.getElement().getOffsetHeight();
   }
 
-  public TooltipTimers getTimers() {
+  protected TooltipTimers getTimers() {
     return timers;
   }
 
@@ -258,39 +238,21 @@ public class Tooltip extends PopupPanel {
   }
 
   /**
-   * Sets the content.
-   *
-   * @param widget
-   *          the new content
-   */
-
-  @SuppressWarnings("unused")
-  private void setContent(final Widget widget) {
-    content.clear();
-    content.add(widget);
-    containsText = false;
-  }
-
-  /**
    * Sets the text.
    *
    * @param text
    *          the new text
    */
   public void setText(final String text) {
-    content.clear();
-    content.add(textLabel);
     textLabel.setText(text);
-    containsText = true;
   }
 
   public void show(final Widget forWidget, final String text) {
-    if (current != null && !current.equals(forWidget)) {
-      Tooltip.tip.hide();
+    if (current != null && !current.equals(forWidget) && getTip().isShowing()) {
+      Tooltip.getTip().hide();
     }
     setText(text);
-    if (!Tooltip.this.isShowing() && forWidget.isAttached() && forWidget.isVisible()
-        && (!containsText || TextUtils.notEmpty(textLabel.getText()))) {
+    if (forWidget.isAttached() && forWidget.isVisible() && (TextUtils.notEmpty(textLabel.getText()))) {
       Tooltip.super.show();
       current = forWidget;
       final int clientWidth = Window.getClientWidth();
@@ -312,7 +274,7 @@ public class Tooltip extends PopupPanel {
    *          the position
    */
   protected void showAt(final TooltipPosition position) {
-    tip.setPopupPosition(position.getLeft(), position.getTop());
+    getTip().setPopupPosition(position.getLeft(), position.getTop());
     switch (position.getArrowPosition()) {
     case N:
     case NW:
@@ -349,7 +311,7 @@ public class Tooltip extends PopupPanel {
    * Show at.
    */
   private void showAt(final Widget forWidget) {
-    Tooltip.tip.showAt(calculatePosition(forWidget));
+    Tooltip.getTip().showAt(calculatePosition(forWidget));
   }
 
   /**

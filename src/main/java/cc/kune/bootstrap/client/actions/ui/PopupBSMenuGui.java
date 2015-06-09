@@ -135,6 +135,6 @@ public class PopupBSMenuGui {
       });
     }
     descriptor.putValue(MenuDescriptor.MENU_ONSHOW, popup);
-    Tooltip.tip.hide();
+    Tooltip.getTip().hide();
   }
 }

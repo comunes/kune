@@ -221,7 +221,7 @@ public class BasicThumb extends FocusWidget {
    * Hide tooltip.
    */
   public void hideTooltip() {
-    Tooltip.tip.hide();
+    Tooltip.getTip().hide();
   }
 
   /**

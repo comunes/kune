@@ -165,11 +165,11 @@ public class CalendarViewerPanel extends AbstractFolderViewerPanel implements Ca
         tooltipPanel.setPopupPosition(DOM.getAbsoluteLeft(element), DOM.getAbsoluteTop(element)
             + element.getOffsetHeight());
         tooltipPanel.show();
-        if (Tooltip.tip.isShowing()) {
+        if (Tooltip.getTip().isShowing()) {
           tooltipPanel.hide();
-          Tooltip.tip.hide();
+          Tooltip.getTip().hide();
         } else {
-          Tooltip.tip.showTemporally(tooltipPanel, tooltipText);
+          Tooltip.getTip().showTemporally(tooltipPanel, tooltipText);
         }
         // NotifyUser.info("On mouse");
       }

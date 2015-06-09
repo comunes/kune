@@ -177,7 +177,7 @@ public class EditableLabel extends Composite implements HasEditHandler {
           blinkTimer(false, new SimpleCallback() {
             @Override
             public void onCallback() {
-              Tooltip.tip.showTemporally(label, tooltipText);
+              Tooltip.getTip().showTemporally(label, tooltipText);
             }
           });
         }

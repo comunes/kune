@@ -81,23 +81,13 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
 
       @Override
       public void onUserSignIn(final UserSignInEvent event) {
-        if (session.isNewbie()) {
-          Tooltip.to(homeButton, i18n.t("Home page of [%s]", siteCommonName) + " (Alt+H)");
-          Tooltip.to(userButton, i18n.t("Inbox: it shows a list of all documents and contents "
-              + "in which you participate")
-              + " (Alt+I)");
-          Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
-              + "and publish contents for your personal or group web spaces")
-              + " (Alt+G)");
-          // publicSpaceTooltip = Tooltip.to(publicButton,
-          // i18n.t("Public space: Where you can see a preview of how your Personal or "
-          // + "Group Space looks like on the web")
-          // + " (Alt+P)");
-          // homeSpaceTooltip.setWidth(0);
-          // userSpaceTooltip.setWidth(190);
-          // groupSpaceTooltip.setWidth(170);
-
-        }
+        Tooltip.to(homeButton, i18n.t("Home page of [%s]", siteCommonName) + " (Alt+H)");
+        Tooltip.to(userButton, i18n.t("Inbox: it shows a list of all documents and contents "
+            + "in which you participate")
+            + " (Alt+I)");
+        Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
+            + "and publish contents for your personal or group web spaces")
+            + " (Alt+G)");
       }
     });
 

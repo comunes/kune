@@ -230,7 +230,7 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
       });
     }
     descriptor.putValue(MenuDescriptor.MENU_ONSHOW, popup);
-    Tooltip.tip.hide();
+    Tooltip.getTip().hide();
   }
 
 }
