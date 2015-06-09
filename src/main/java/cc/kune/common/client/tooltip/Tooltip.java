@@ -45,12 +45,14 @@ import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Singleton;
 
 /**
  * The Class Tooltip.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
+@Singleton
 public class Tooltip extends PopupPanel {
 
   /**
@@ -60,6 +62,44 @@ public class Tooltip extends PopupPanel {
    */
   interface TooltipUiBinder extends UiBinder<Widget, Tooltip> {
   }
+
+  private static BlurHandler blurHandler = new BlurHandler() {
+    @Override
+    public void onBlur(final BlurEvent event) {
+      getTip().getTimers().onOut();
+    }
+  };
+
+  private static FocusHandler focusHandler = new FocusHandler() {
+    @Override
+    public void onFocus(final FocusEvent event) {
+      getTip().getTimers().onOut();
+    }
+  };
+
+  private static final String KUNE_TOOLTIP_ATTR = "kune_tooltip";
+
+  private static MouseOutHandler mouseOutHandler = new MouseOutHandler() {
+    @Override
+    public void onMouseOut(final MouseOutEvent event) {
+      getTip().getTimers().onOut();
+    }
+  };
+
+  private static MouseOverHandler mouseOverHandler = new MouseOverHandler() {
+    @Override
+    public void onMouseOver(final MouseOverEvent event) {
+      final Widget source = (Widget) event.getSource();
+      final String text = source.getElement().getAttribute(KUNE_TOOLTIP_ATTR);
+      getTip().getTimers().configureOver(new Executer() {
+        @Override
+        public void execute() {
+          getTip().show(source, text);
+        }
+      });
+      getTip().getTimers().onOver();
+    }
+  };
 
   private static Tooltip tip;
 
@@ -82,36 +122,11 @@ public class Tooltip extends PopupPanel {
    *          the text
    */
   public static void to(final Widget forWidget, final String text) {
-    forWidget.addDomHandler(new MouseOverHandler() {
-      @Override
-      public void onMouseOver(final MouseOverEvent event) {
-        getTip().getTimers().configureOver(new Executer() {
-          @Override
-          public void execute() {
-            getTip().show(forWidget, text);
-          }
-        });
-        getTip().getTimers().onOver();
-      }
-    }, MouseOverEvent.getType());
-    forWidget.addDomHandler(new FocusHandler() {
-      @Override
-      public void onFocus(final FocusEvent event) {
-        getTip().getTimers().onOut();
-      }
-    }, FocusEvent.getType());
-    forWidget.addDomHandler(new BlurHandler() {
-      @Override
-      public void onBlur(final BlurEvent event) {
-        getTip().getTimers().onOut();
-      }
-    }, BlurEvent.getType());
-    forWidget.addDomHandler(new MouseOutHandler() {
-      @Override
-      public void onMouseOut(final MouseOutEvent event) {
-        getTip().getTimers().onOut();
-      }
-    }, MouseOutEvent.getType());
+    forWidget.getElement().setAttribute(KUNE_TOOLTIP_ATTR, text);
+    forWidget.addDomHandler(mouseOverHandler, MouseOverEvent.getType());
+    forWidget.addDomHandler(focusHandler, FocusEvent.getType());
+    forWidget.addDomHandler(blurHandler, BlurEvent.getType());
+    forWidget.addDomHandler(mouseOutHandler, MouseOutEvent.getType());
   }
 
   /** The arrow. */
@@ -170,7 +185,6 @@ public class Tooltip extends PopupPanel {
     securityTimer.configure(hideExecuter);
     textLabel = new Label();
     content.add(textLabel);
-
   }
 
   /**
