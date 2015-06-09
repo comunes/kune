@@ -765,8 +765,8 @@
     </developer>
   </developers>
   <scm>
-    <connection>scm:git:ssh://git@gitorious.org/kune/trunk.git</connection>
-    <url>scm:git:ssh://git@gitorious.org/kune/trunk.git</url>
+		<connection>scm:git:git://github.com/comunes/kune.git</connection>
+	  <url>https://github.com/comunes/kune</url>
   </scm>
   <build>
     <resources>

@@ -3,7 +3,7 @@ NOTE: This document is best viewed with GNU Emacs Org-mode (open with Emacs, Alt
 
 * Summary of development resources
 
-| Code                             | https://gitorious.org/kune |
+| Code                             | https://github.com/comunes/kune |
 | Bugs (send issues here)          | http://redmine.comunes.org |
 | Continuous Integration           | http://ci.comunes.org      |
 | Reviews (send your patches here) | http://reviews.comunes.org |
@@ -36,13 +36,13 @@ The previous link has also other more general information (texts and references)
 ** Get the code: How to checkout the Kune code
 
 Our code is in this Gitorious:
-https://gitorious.org/kune
+https://github.com/comunes/kune
 
 *** Anonymous GIT Access
 
 This project's GIT repository can be checked out through anonymous access with the following command(s).
 
- git clone git@gitorious.org:kune/trunk.git
+ git clone https://github.com/comunes/kune.git
 
 The Eclipse IDE has some plugins for GIT and it's hightly recomended to use one, because it would get rid of file/package renaming and other refactorizations.
 
@@ -239,7 +239,7 @@ There are also some interesting diagrams, that although they are outdated, they 
 - [ ] kune/artwork/old/kune-diagram-part3-0.1.png # (outdated)
 
 NOTE: For an updated db schema, look into the Java classes of package cc.kune.domain.
-NOTE: You will need to clone the repository https://gitorious.org/kune/artwork inside kune repository
+NOTE: You will need to clone the repository https://github.com/comunes/kune-artwork inside kune repository
 
 * Languages and frameworks used in Kune development
 
@@ -314,7 +314,7 @@ Averyone is invited to join the Kune developer community and send patches to the
 - We advise you to subscribe to at least the kune-devel kune list: http://kune.cc/#!kune.lists.1226 (you need a kune user)
 - If you need help, don't hesitate to ask on a kune list: http://kune.cc/#kune.lists
 - When your patch is ready, put it on the Review Board at http://reviews.comunes.org/ and request code review.
-- You can submit the patch to the Kune Git repo: https://gitorious.org/kune
+- You can submit the patch to the Kune Git repo: https://github.com/comunes/kune
 
 * Some recommendations
 
