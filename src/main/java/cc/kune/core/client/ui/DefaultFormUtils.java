@@ -33,7 +33,7 @@ import com.extjs.gxt.ui.client.widget.form.Radio;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DefaultFormUtils.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DefaultFormUtils {
@@ -43,7 +43,7 @@ public class DefaultFormUtils {
 
   /**
    * Creates the field set.
-   * 
+   *
    * @param heading
    *          the heading
    * @return the field set
@@ -54,7 +54,7 @@ public class DefaultFormUtils {
 
   /**
    * Creates the field set.
-   * 
+   *
    * @param heading
    *          the heading
    * @param width
@@ -73,7 +73,7 @@ public class DefaultFormUtils {
 
   /**
    * Creates the radio.
-   * 
+   *
    * @param fieldSet
    *          the field set
    * @param radioLabel
@@ -95,13 +95,10 @@ public class DefaultFormUtils {
     fieldSet.add(radio);
 
     radio.addListener(Events.OnMouseOver, new Listener<BaseEvent>() {
-      private Tooltip tooltip;
-
       @Override
       public void handleEvent(final BaseEvent be) {
-        if (radioTip != null && tooltip == null) {
-          tooltip = Tooltip.to(radio, radioTip);
-          tooltip.setWidth(300);
+        if (radioTip != null) {
+          Tooltip.to(radio, radioTip);
         }
       }
     });

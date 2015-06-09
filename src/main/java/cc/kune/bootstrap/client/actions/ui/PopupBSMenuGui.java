@@ -43,7 +43,6 @@ public class PopupBSMenuGui {
   private PopupPanel popup;
   protected IsWidget popupContent;
   private final IsWidget relativeTo;
-  private Tooltip tooltip;
 
   public PopupBSMenuGui(final IsWidget content, final IsWidget relativeTo,
       final GuiActionDescrip descriptor) {
@@ -98,10 +97,6 @@ public class PopupBSMenuGui {
     return isShowing();
   }
 
-  public void setTooltip(final Tooltip tooltip) {
-    this.tooltip = tooltip;
-  }
-
   public void show() {
     createPopupIfNecessary();
     final Object pos = descriptor.getValue(MenuDescriptor.MENU_SHOW_NEAR_TO);
@@ -140,8 +135,6 @@ public class PopupBSMenuGui {
       });
     }
     descriptor.putValue(MenuDescriptor.MENU_ONSHOW, popup);
-    if (tooltip != null) {
-      tooltip.hide();
-    }
+    Tooltip.tip.hide();
   }
 }

@@ -68,25 +68,25 @@ public class SpaceSelectorPanel extends ViewImpl implements SpaceSelectorView {
    *          the session
    */
   @Inject
-  public SpaceSelectorPanel(final I18nTranslationService i18n, final GSpaceArmorResources res,    
-final Session session) {
+  public SpaceSelectorPanel(final I18nTranslationService i18n, final GSpaceArmorResources res,
+      final Session session) {
 
     homeButton = PaperIconButton.wrap(PolymerId.HOME_SPACE_ICON.getId());
     groupButton = PaperIconButton.wrap(PolymerId.GROUP_SPACE_ICON.getId());
     userButton = PaperIconButton.wrap(PolymerId.USER_SPACE_ICON.getId());
 
     final String siteCommonName = i18n.getSiteCommonName();
-    
+
     session.onUserSignIn(true, new UserSignInHandler() {
-      
+
       @Override
-      public void onUserSignIn(UserSignInEvent event) {
+      public void onUserSignIn(final UserSignInEvent event) {
         if (session.isNewbie()) {
           Tooltip.to(homeButton, i18n.t("Home page of [%s]", siteCommonName) + " (Alt+H)");
-          Tooltip userSpaceTooltip = Tooltip.to(userButton,
-              i18n.t("Inbox: it shows a list of all documents and contents " + "in which you participate")
+          Tooltip.to(userButton, i18n.t("Inbox: it shows a list of all documents and contents "
+              + "in which you participate")
               + " (Alt+I)");
-          Tooltip groupSpaceTooltip = Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
+          Tooltip.to(groupButton, i18n.t("Group and personal space: Where you can create "
               + "and publish contents for your personal or group web spaces")
               + " (Alt+G)");
           // publicSpaceTooltip = Tooltip.to(publicButton,
@@ -94,8 +94,8 @@ final Session session) {
           // + "Group Space looks like on the web")
           // + " (Alt+P)");
           // homeSpaceTooltip.setWidth(0);
-          userSpaceTooltip.setWidth(190);
-          groupSpaceTooltip.setWidth(170);
+          // userSpaceTooltip.setWidth(190);
+          // groupSpaceTooltip.setWidth(170);
 
         }
       }
@@ -106,7 +106,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -127,7 +127,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #blinkGroupBtn()
@@ -139,7 +139,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #blinkHomeBtn()
@@ -151,7 +151,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #blinkUserBtn()
@@ -163,7 +163,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #getGroupBtn()
@@ -175,7 +175,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #getHomeBtn()
@@ -187,7 +187,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #getUserBtn()
@@ -199,7 +199,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #setGroupBtnDown(boolean)
@@ -212,7 +212,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #setHomeBtnDown(boolean)
@@ -234,7 +234,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #setUserBtnDown(boolean)
@@ -246,7 +246,7 @@ final Session session) {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.core.client.sitebar.spaces.SpaceSelectorPresenter.SpaceSelectorView
    * #setWindowTitle(java.lang.String)

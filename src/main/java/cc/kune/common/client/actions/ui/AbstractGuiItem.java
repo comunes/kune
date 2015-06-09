@@ -63,9 +63,6 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
   /** The descriptor. */
   protected GuiActionDescrip descriptor;
 
-  /** The tooltip. */
-  protected Tooltip tooltip;
-
   /**
    * Instantiates a new abstract gui item.
    */
@@ -140,7 +137,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.GuiBinding#create(cc.kune.common.client
    * .actions.ui.descrip.GuiActionDescrip)
@@ -212,7 +209,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.Composite#onAttach()
    */
   @Override
@@ -223,7 +220,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.Composite#onDetach()
    */
   @Override
@@ -380,7 +377,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
     if (tooltipText != null && !tooltipText.isEmpty()) {
       final KeyStroke key = (KeyStroke) getValue(Action.ACCELERATOR_KEY);
       final String compountTooltip = key == null ? tooltipText : tooltipText + key.toString();
-      tooltip = Tooltip.to(widget, compountTooltip);
+      Tooltip.to(widget, compountTooltip);
     }
   }
 
@@ -398,7 +395,7 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.common.client.actions.ui.GuiBinding#shouldBeAdded()
    */
   @Override
@@ -410,12 +407,10 @@ public abstract class AbstractGuiItem extends Composite implements GuiBinding {
    * Toogle tooltip visible.
    */
   public void toogleTooltipVisible() {
-    if (tooltip != null) {
-      if (tooltip.isVisibleOrWillBe()) {
-        tooltip.hide();
-      } else {
-        tooltip.showTemporally();
-      }
+    if (Tooltip.tip.isVisibleOrWillBe()) {
+      Tooltip.tip.hide();
+    } else {
+      Tooltip.tip.showTemporally(this, (String) (getValue(Action.TOOLTIP)));
     }
   }
 }

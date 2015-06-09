@@ -168,7 +168,6 @@ public class BSWidgetMenuGui extends AbstractBasicGuiItem implements AbstractBSM
   @Override
   public void setToolTipText(final String tooltipText) {
     setToolTipTextNextTo(widget, tooltipText);
-    popup.setTooltip(tooltip);
   }
 
   @Override

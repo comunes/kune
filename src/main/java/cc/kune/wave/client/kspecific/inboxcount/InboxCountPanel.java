@@ -52,9 +52,6 @@ public class InboxCountPanel extends Badge implements InboxCountView {
   /** The i18n. */
   private final I18nTranslationService i18n;
 
-  /** The tooltip. */
-  private final Tooltip tooltip;
-
   /**
    * Instantiates a new inbox count panel.
    *
@@ -69,7 +66,7 @@ public class InboxCountPanel extends Badge implements InboxCountView {
     this.i18n = i18n;
     setStylePrimaryName("k-space-sel-inbox-count");
     blinkAnimation = new BlinkAnimation(this, 400);
-    tooltip = Tooltip.to(this, "Nothing");
+
     setVisible(false);
     armor.wrapDiv(PolymerId.INBOX_SITEBAR_ICON_GROUP).add(this);
 
@@ -104,8 +101,10 @@ public class InboxCountPanel extends Badge implements InboxCountView {
   @Override
   public void setTotal(final int total) {
     super.setText(String.valueOf(total));
-    tooltip.setText(total == 1 ? i18n.t("One recent conversation unread") : i18n.t(
-        "[%d] recent conversations unread", total));
+    Tooltip.to(
+        this,
+        total == 1 ? i18n.t("One recent conversation unread") : i18n.t(
+            "[%d] recent conversations unread", total));
   }
 
   /*

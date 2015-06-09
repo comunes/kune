@@ -23,6 +23,7 @@
 package cc.kune.common.client.tooltip;
 
 import cc.kune.common.client.utils.TimerWrapper;
+import cc.kune.common.client.utils.TimerWrapper.Executer;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -34,19 +35,22 @@ public class TooltipTimers {
 
   /** The hide timer. */
   private final TimerWrapper hideTimer;
-  
+
   /** The security timer. */
   private final TimerWrapper securityTimer;
-  
+
   /** The show timer. */
   private final TimerWrapper showTimer;
 
   /**
    * Instantiates a new tooltip timers.
    *
-   * @param showTimer the show timer
-   * @param hideTimer the hide timer
-   * @param securityTimer the security timer
+   * @param showTimer
+   *          the show timer
+   * @param hideTimer
+   *          the hide timer
+   * @param securityTimer
+   *          the security timer
    */
   public TooltipTimers(final TimerWrapper showTimer, final TimerWrapper hideTimer,
       final TimerWrapper securityTimer) {
@@ -62,6 +66,10 @@ public class TooltipTimers {
     showTimer.cancel();
     hideTimer.cancel();
     securityTimer.cancel();
+  }
+
+  public void configureOver(final Executer executer) {
+    showTimer.configure(executer);
   }
 
   /**

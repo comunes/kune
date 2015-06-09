@@ -1,5 +1,6 @@
 kune (1.0.1+b3) unstable; urgency=medium
 
+  * Tooltip is now a singleton
   * Fixed select box for licenses
   * Improved select box for languages in translator and user profiles
   * Improved client start-up of kune

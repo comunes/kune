@@ -290,6 +290,252 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     flow.add(flowactions);
   }
 
+  public void basicTests() {
+
+    // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
+
+    NotifyUser.showProgress("Starting...");
+
+    testTooltips();
+
+    // absolutePanel.add(testActionToolbar(), 200, 200);
+
+    final String defLocale = "en";
+
+    final String locale = WindowUtils.getParameter("locale");
+    final String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
+
+    for (final String id : ids) {
+      final RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
+      final RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
+      if (someId != null) {
+        someId.setVisible(true);
+      } else if (defId != null) {
+        defId.setVisible(true);
+      }
+    }
+
+    // testToolpanel();
+    // toolSelector.addWidget(new Label("Test"));
+    // testPromptDialog();
+
+    testSubWidget();
+
+    final ActionFlowPanel view = makeFlowToolbar();
+
+    final BasicThumb thumb = testThumbs();
+
+    absolutePanel.add(thumb, 200, 10);
+    absolutePanel.add(view, 5, 150);
+
+    final DottedTab tab = new DottedTab();
+    absolutePanel.add(tab, 400, 400);
+    absolutePanel.add(tab, 400, 400);
+    absolutePanel.add(makeFileUpload(), 520, 0);
+
+    new BlinkAnimation(tab, 350).animate(5);
+
+    RootPanel.get().add(absolutePanel);
+
+  }
+
+  public void completeTests() {
+    NotifyUser.info("Started");
+
+    final Navbar simpleNavbar = new Navbar();
+    final NavbarHeader header = new NavbarHeader();
+    final NavbarCollapseButton navbarCollapseButton = new NavbarCollapseButton();
+    navbarCollapseButton.setDataTarget("#test");
+    header.add(navbarCollapseButton);
+    simpleNavbar.add(header);
+    final NavbarCollapse navbarCollapse = new NavbarCollapse();
+    navbarCollapse.setId("test");
+    simpleNavbar.add(navbarCollapse);
+
+    final NavbarNav navbarNav = new NavbarNav();
+    final ComplexDropDownMenu<ListDropDown> listDropDown = new ComplexDropDownMenu<ListDropDown>(
+        new ListDropDown());
+    listDropDown.setMenuText("Plain menu");
+    listDropDown.setIcon(IconType.GEAR);
+    navbarCollapse.add(navbarNav);
+    navbarNav.add(listDropDown.getWidget());
+
+    final AnchorListItem simpleAnchor = new AnchorListItem("Anchor 1");
+    simpleAnchor.setIcon(IconType.TWITTER_SQUARE);
+    navbarNav.add(simpleAnchor);
+
+    navbarNav.add(new AnchorListItem("Anchor 2"));
+    navbarNav.add(new AnchorListItem("Anchor 3"));
+    final AnchorListItem menuitem1 = new AnchorListItem("Anchor menuitem 1");
+    menuitem1.setIcon(IconType.RANDOM);
+
+    listDropDown.add(menuitem1);
+
+    final CheckListItem checkitem = new CheckListItem("Check item");
+    checkitem.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        checkitem.setChecked(!checkitem.isChecked());
+      }
+    });
+    listDropDown.add(checkitem);
+
+    final RadioListItem radioitem = new RadioListItem("Check item");
+    radioitem.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        radioitem.setChecked(!radioitem.isChecked());
+      }
+    });
+    listDropDown.add(radioitem);
+
+    final CheckListItem checkitem2 = new CheckListItem("Check anchor");
+    checkitem2.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        checkitem2.setChecked(!checkitem2.isChecked());
+      }
+    });
+
+    navbarNav.add(checkitem2);
+    listDropDown.add(new AnchorListItem("Anchor menuitem 2"));
+    final ComplexAnchorListItem menuitem3 = new ComplexAnchorListItem("Anchor menuitem 3");
+    menuitem3.setIconUrl("http://lorempixel.com/100/100");
+    listDropDown.add(menuitem3);
+    final AnchorListItem item1 = new AnchorListItem("Testingggg");
+    item1.setIcon(IconType.HEART);
+    listDropDown.add(item1);
+
+    for (int i = 1; i < 50; i++) {
+      listDropDown.add(new AnchorListItem("Anchor " + i));
+    }
+
+    final ComplexAnchorListItem itemSubmenu = new ComplexAnchorListItem("Testing submenu");
+    itemSubmenu.setIcon(KuneIcon.FOLDER);
+    final DropDownSubmenu submenu = new DropDownSubmenu();
+    submenu.add(new AnchorListItem("sub item 1"));
+    submenu.add(new AnchorListItem("sub item 2"));
+    submenu.add(new AnchorListItem("sub item 3"));
+    itemSubmenu.add(submenu);
+    listDropDown.add(itemSubmenu);
+
+    final DropDown dropDown = new DropDown();
+
+    final Anchor dropDownAnchor = new Anchor();
+    // FIXME This fails:
+    // final BasicThumb thumb = testThumbs();
+    final Image thumb = new Image("http://lorempixel.com/30/30");
+    dropDownAnchor.add(thumb);
+    dropDownAnchor.setDataToggle(Toggle.DROPDOWN);
+    dropDown.add(dropDownAnchor);
+
+    final DropDownMenu dropDownMenu = new DropDownMenu();
+    dropDown.add(dropDownMenu);
+    final ComplexAnchorListItem dditem1 = new ComplexAnchorListItem("Test 1");
+    final ComplexAnchorListItem dditem2 = new ComplexAnchorListItem("Test 2");
+    dditem1.setIcon(KuneIcon.BARTER);
+    dditem2.setIconUrl("http://lorempixel.com/101/101");
+    dropDownMenu.add(dditem1);
+    dropDownMenu.add(dditem2);
+
+    // The same with descriptors
+
+    final Image thumb2 = new Image("http://lorempixel.com/30/30");
+    final WidgetMenuDescriptor widgetMenu = new WidgetMenuDescriptor(thumb2);
+    new MenuItemDescriptor(widgetMenu, new BaseAction("Menuitem desc in widget 1", "Some tooltip"));
+    new MenuItemDescriptor(widgetMenu, new BaseAction("Menuitem desc in widget 2", "Some tooltip"));
+
+    // Now with a button
+
+    final MenuDescriptor classicMenu = new MenuDescriptor("Button classic menu");
+    classicMenu.withIcon("http://lorempixel.com/30/30");
+    new MenuItemDescriptor(classicMenu, new BaseAction("Menuitem desc in widget 1", "Some tooltip"));
+    new MenuItemDescriptor(classicMenu, new BaseAction("Menuitem desc in widget 2", "Some tooltip"));
+
+    final MenuDescriptor classicMenu2 = new MenuDescriptor("Button classic2 menu");
+    classicMenu2.withIcon("http://lorempixel.com/30/30");
+    new MenuItemDescriptor(classicMenu2, new BaseAction("Menuitem desc in widget 3", "Some tooltip"));
+    new MenuItemDescriptor(classicMenu2, new BaseAction("Menuitem desc in widget 4", "Some tooltip"));
+
+    final CustomButton btn = new CustomButton("Text custom button");
+    Tooltip.to(btn, "Show the dropdown at 100,100 position (or hide it)");
+    btn.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(final ClickEvent event) {
+        if (listDropDown.isMenuVisible()) {
+          listDropDown.hide();
+        } else {
+          listDropDown.show(100, 100);
+        }
+      }
+    });
+    btn.setIcon(KuneIcon.FOLDER);
+
+    // final cc.kune.bootstrap.client.ui.IconLabel iconLabel = new
+    // cc.kune.bootstrap.client.ui.IconLabel(
+    // "Text");
+    // iconLabel.setIcon(new KuneIcon('g'));
+
+    final FlowPanel flow = mainContainer.getFlow();
+    flow.insert(btn, 0);
+    flow.insert(new HTML("<br>"), 1);
+    flow.insert(dropDown, 2);
+    flow.insert(new HTML("<br>"), 3);
+
+    final ToolbarDescriptor bottomToolbar = new ToolbarDescriptor();
+    bottomToolbar.setPosition(NavbarPosition.FIXED_BOTTOM);
+
+    final ButtonDescriptor btnDesc = new ButtonDescriptor(new TestAction("Button desc"));
+    btnDesc.withIcon(KuneIcon.SETTINGS).withToolTip("Show me a tooltip");
+    btnDesc.setParent(bottomToolbar);
+
+    final IconLabelDescriptor labelDesc = new IconLabelDescriptor(new TestAction("IconLabel desc"));
+    labelDesc.withIcon(KuneIcon.TASKS).withToolTip("Show me a tooltip");
+    labelDesc.setParent(bottomToolbar);
+
+    final MenuDescriptor menu = new MenuDescriptor("Menu btn");
+    menu.setParent(bottomToolbar);
+    final MenuItemDescriptor menuItemDescriptor = new MenuItemDescriptor(menu, new TestAction(
+        "Menu item"));
+    menuItemDescriptor.withIcon(IconType.MAGIC);
+
+    final SubMenuDescriptor submenuDesc = new SubMenuDescriptor(menu, "Some submenu");
+    submenuDesc.withIcon(KuneIcon.BARTER);
+    new MenuItemDescriptor(submenuDesc, new TestAction("Submenu item 1")).withIcon(IconType.FACEBOOK);
+    new MenuItemDescriptor(submenuDesc, new TestAction("Submenu item 2")).withIcon(IconType.FAST_BACKWARD);
+
+    // TODO Add more tests here
+
+    final FlowActionExtensible sitebar = new FlowActionExtensible();
+    sitebar.add(createSitebarActions());
+
+    final FlowActionExtensible bottombar = new FlowActionExtensible();
+    bottombar.add(bottomToolbar);
+
+    // RootPanel.get().add(testActionToolbar());
+
+    final FlowActionExtensible mainFlow = new FlowActionExtensible();
+    mainFlow.add(widgetMenu, classicMenu, classicMenu2);
+
+    final PaperFab paperFab = new PaperFab();
+    paperFab.setIcon("polymer");
+
+    mainContainer.getSitebar().add(sitebar);
+    mainContainer.getFooter().add(bottombar);
+    mainContainer.getFooter().add(paperFab);
+    final PaperButton paperBtn = new PaperButton();
+    mainContainer.getFooter().add(paperBtn);
+    flow.add(mainFlow);
+    flow.insert(simpleNavbar, 0);
+
+    testBarButtons(flow);
+    addNotifyUserTests(flow);
+    addSimpleActions(flow);
+    flow.add(new Text(LoremUtils.LOREM_MULTI + LoremUtils.LOREM_MULTI));
+
+    RootLayoutPanel.get().add(mainContainer);
+  }
+
   /**
    * Test action toolbar.
    *
@@ -494,250 +740,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
   @Override
   public void onModuleLoad() {
     initializeInjector();
-
-    NotifyUser.info("Started");
-
-    final Navbar simpleNavbar = new Navbar();
-    final NavbarHeader header = new NavbarHeader();
-    final NavbarCollapseButton navbarCollapseButton = new NavbarCollapseButton();
-    navbarCollapseButton.setDataTarget("#test");
-    header.add(navbarCollapseButton);
-    simpleNavbar.add(header);
-    final NavbarCollapse navbarCollapse = new NavbarCollapse();
-    navbarCollapse.setId("test");
-    simpleNavbar.add(navbarCollapse);
-
-    final NavbarNav navbarNav = new NavbarNav();
-    final ComplexDropDownMenu<ListDropDown> listDropDown = new ComplexDropDownMenu<ListDropDown>(
-        new ListDropDown());
-    listDropDown.setMenuText("Plain menu");
-    listDropDown.setIcon(IconType.GEAR);
-    navbarCollapse.add(navbarNav);
-    navbarNav.add(listDropDown.getWidget());
-
-    final AnchorListItem simpleAnchor = new AnchorListItem("Anchor 1");
-    simpleAnchor.setIcon(IconType.TWITTER_SQUARE);
-    navbarNav.add(simpleAnchor);
-
-    navbarNav.add(new AnchorListItem("Anchor 2"));
-    navbarNav.add(new AnchorListItem("Anchor 3"));
-    final AnchorListItem menuitem1 = new AnchorListItem("Anchor menuitem 1");
-    menuitem1.setIcon(IconType.RANDOM);
-
-    listDropDown.add(menuitem1);
-
-    final CheckListItem checkitem = new CheckListItem("Check item");
-    checkitem.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        checkitem.setChecked(!checkitem.isChecked());
-      }
-    });
-    listDropDown.add(checkitem);
-
-    final RadioListItem radioitem = new RadioListItem("Check item");
-    radioitem.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        radioitem.setChecked(!radioitem.isChecked());
-      }
-    });
-    listDropDown.add(radioitem);
-
-    final CheckListItem checkitem2 = new CheckListItem("Check anchor");
-    checkitem2.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        checkitem2.setChecked(!checkitem2.isChecked());
-      }
-    });
-
-    navbarNav.add(checkitem2);
-    listDropDown.add(new AnchorListItem("Anchor menuitem 2"));
-    final ComplexAnchorListItem menuitem3 = new ComplexAnchorListItem("Anchor menuitem 3");
-    menuitem3.setIconUrl("http://lorempixel.com/100/100");
-    listDropDown.add(menuitem3);
-    final AnchorListItem item1 = new AnchorListItem("Testingggg");
-    item1.setIcon(IconType.HEART);
-    listDropDown.add(item1);
-
-    for (int i = 1; i < 50; i++) {
-      listDropDown.add(new AnchorListItem("Anchor " + i));
-    }
-
-    final ComplexAnchorListItem itemSubmenu = new ComplexAnchorListItem("Testing submenu");
-    itemSubmenu.setIcon(KuneIcon.FOLDER);
-    final DropDownSubmenu submenu = new DropDownSubmenu();
-    submenu.add(new AnchorListItem("sub item 1"));
-    submenu.add(new AnchorListItem("sub item 2"));
-    submenu.add(new AnchorListItem("sub item 3"));
-    itemSubmenu.add(submenu);
-    listDropDown.add(itemSubmenu);
-
-    final DropDown dropDown = new DropDown();
-
-    final Anchor dropDownAnchor = new Anchor();
-    // FIXME This fails:
-    // final BasicThumb thumb = testThumbs();
-    final Image thumb = new Image("http://lorempixel.com/30/30");
-    dropDownAnchor.add(thumb);
-    dropDownAnchor.setDataToggle(Toggle.DROPDOWN);
-    dropDown.add(dropDownAnchor);
-
-    final DropDownMenu dropDownMenu = new DropDownMenu();
-    dropDown.add(dropDownMenu);
-    final ComplexAnchorListItem dditem1 = new ComplexAnchorListItem("Test 1");
-    final ComplexAnchorListItem dditem2 = new ComplexAnchorListItem("Test 2");
-    dditem1.setIcon(KuneIcon.BARTER);
-    dditem2.setIconUrl("http://lorempixel.com/101/101");
-    dropDownMenu.add(dditem1);
-    dropDownMenu.add(dditem2);
-
-    // The same with descriptors
-
-    final Image thumb2 = new Image("http://lorempixel.com/30/30");
-    final WidgetMenuDescriptor widgetMenu = new WidgetMenuDescriptor(thumb2);
-    new MenuItemDescriptor(widgetMenu, new BaseAction("Menuitem desc in widget 1", "Some tooltip"));
-    new MenuItemDescriptor(widgetMenu, new BaseAction("Menuitem desc in widget 2", "Some tooltip"));
-
-    // Now with a button
-
-    final MenuDescriptor classicMenu = new MenuDescriptor("Button classic menu");
-    classicMenu.withIcon("http://lorempixel.com/30/30");
-    new MenuItemDescriptor(classicMenu, new BaseAction("Menuitem desc in widget 1", "Some tooltip"));
-    new MenuItemDescriptor(classicMenu, new BaseAction("Menuitem desc in widget 2", "Some tooltip"));
-
-    final MenuDescriptor classicMenu2 = new MenuDescriptor("Button classic2 menu");
-    classicMenu2.withIcon("http://lorempixel.com/30/30");
-    new MenuItemDescriptor(classicMenu2, new BaseAction("Menuitem desc in widget 3", "Some tooltip"));
-    new MenuItemDescriptor(classicMenu2, new BaseAction("Menuitem desc in widget 4", "Some tooltip"));
-
-    final CustomButton btn = new CustomButton("Text custom button");
-    Tooltip.to(btn, "Show the dropdown at 100,100 position (or hide it)");
-    btn.addClickHandler(new ClickHandler() {
-      @Override
-      public void onClick(final ClickEvent event) {
-        if (listDropDown.isMenuVisible()) {
-          listDropDown.hide();
-        } else {
-          listDropDown.show(100, 100);
-        }
-      }
-    });
-    btn.setIcon(KuneIcon.FOLDER);
-
-    // final cc.kune.bootstrap.client.ui.IconLabel iconLabel = new
-    // cc.kune.bootstrap.client.ui.IconLabel(
-    // "Text");
-    // iconLabel.setIcon(new KuneIcon('g'));
-
-    final FlowPanel flow = mainContainer.getFlow();
-    flow.insert(btn, 0);
-    flow.insert(new HTML("<br>"), 1);
-    flow.insert(dropDown, 2);
-    flow.insert(new HTML("<br>"), 3);
-
-    final ToolbarDescriptor bottomToolbar = new ToolbarDescriptor();
-    bottomToolbar.setPosition(NavbarPosition.FIXED_BOTTOM);
-
-    final ButtonDescriptor btnDesc = new ButtonDescriptor(new TestAction("Button desc"));
-    btnDesc.withIcon(KuneIcon.SETTINGS).withToolTip("Show me a tooltip");
-    btnDesc.setParent(bottomToolbar);
-
-    final IconLabelDescriptor labelDesc = new IconLabelDescriptor(new TestAction("IconLabel desc"));
-    labelDesc.withIcon(KuneIcon.TASKS).withToolTip("Show me a tooltip");
-    labelDesc.setParent(bottomToolbar);
-
-    final MenuDescriptor menu = new MenuDescriptor("Menu btn");
-    menu.setParent(bottomToolbar);
-    final MenuItemDescriptor menuItemDescriptor = new MenuItemDescriptor(menu, new TestAction(
-        "Menu item"));
-    menuItemDescriptor.withIcon(IconType.MAGIC);
-
-    final SubMenuDescriptor submenuDesc = new SubMenuDescriptor(menu, "Some submenu");
-    submenuDesc.withIcon(KuneIcon.BARTER);
-    new MenuItemDescriptor(submenuDesc, new TestAction("Submenu item 1")).withIcon(IconType.FACEBOOK);
-    new MenuItemDescriptor(submenuDesc, new TestAction("Submenu item 2")).withIcon(IconType.FAST_BACKWARD);
-
-    // TODO Add more tests here
-
-    final FlowActionExtensible sitebar = new FlowActionExtensible();
-    sitebar.add(createSitebarActions());
-
-    final FlowActionExtensible bottombar = new FlowActionExtensible();
-    bottombar.add(bottomToolbar);
-
-    // RootPanel.get().add(testActionToolbar());
-
-    final FlowActionExtensible mainFlow = new FlowActionExtensible();
-    mainFlow.add(widgetMenu, classicMenu, classicMenu2);
-
-    final PaperFab paperFab = new PaperFab();
-    paperFab.setIcon("polymer");
-
-    mainContainer.getSitebar().add(sitebar);
-    mainContainer.getFooter().add(bottombar);
-    mainContainer.getFooter().add(paperFab);
-    final PaperButton paperBtn = new PaperButton();
-    mainContainer.getFooter().add(paperBtn);
-    flow.add(mainFlow);
-    flow.insert(simpleNavbar, 0);
-
-    testBarButtons(flow);
-    addNotifyUserTests(flow);
-    addSimpleActions(flow);
-    flow.add(new Text(LoremUtils.LOREM_MULTI + LoremUtils.LOREM_MULTI));
-
-    RootLayoutPanel.get().add(mainContainer);
-  }
-
-  public void onModuleLoadBasicTests() {
-    initializeInjector();
-    // final Growl growl = UserNotifierGrowl.showProgress("Loading...");
-
-    NotifyUser.showProgress("Starting...");
-
-    testTooltips();
-
-    // absolutePanel.add(testActionToolbar(), 200, 200);
-
-    final String defLocale = "en";
-
-    final String locale = WindowUtils.getParameter("locale");
-    final String[] ids = new String[] { "summary", "ini", "footer", "kuneloading-msg" };
-
-    for (final String id : ids) {
-      final RootPanel someId = RootPanel.get("k-home-" + id + "-" + locale);
-      final RootPanel defId = RootPanel.get("k-home-" + id + "-" + defLocale);
-      if (someId != null) {
-        someId.setVisible(true);
-      } else if (defId != null) {
-        defId.setVisible(true);
-      }
-    }
-
-    // testToolpanel();
-    // toolSelector.addWidget(new Label("Test"));
-    // testPromptDialog();
-
-    testSubWidget();
-
-    final ActionFlowPanel view = makeFlowToolbar();
-
-    final BasicThumb thumb = testThumbs();
-
-    absolutePanel.add(thumb, 200, 10);
-    absolutePanel.add(view, 5, 150);
-
-    final DottedTab tab = new DottedTab();
-    absolutePanel.add(tab, 400, 400);
-    absolutePanel.add(tab, 400, 400);
-    absolutePanel.add(makeFileUpload(), 520, 0);
-
-    new BlinkAnimation(tab, 350).animate(5);
-
-    RootPanel.get().add(absolutePanel);
-
+    basicTests();
+    // completeTests();
   }
 
   public void onModuleLoadPolymer() {
@@ -967,17 +971,13 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(button3, 5, clientHeight - 50);
     absolutePanel.add(button4, clientWidth - 90, clientHeight - 60);
     Tooltip.to(button,
-        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ");
     Tooltip.to(button2,
-        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ");
     Tooltip.to(button3,
-        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ");
     Tooltip.to(button4,
-        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ").setWidth(
-        100);
+        "Some tooltip, Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec vitae eros. ");
 
   }
 }

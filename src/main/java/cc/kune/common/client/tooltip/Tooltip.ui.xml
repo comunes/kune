@@ -4,7 +4,7 @@
   <ui:style>
   </ui:style>
    <g:HTMLPanel>
-  <g:HTMLPanel ui:field="tooltip"
+  <g:HTMLPanel ui:field="mainPanel"
     addStyleNames="k-tooltip, k-3corners, k-box-3shadow">
     <g:FlowPanel ui:field="flow">
       <g:InlineLabel ui:field="title" />

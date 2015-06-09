@@ -75,9 +75,6 @@ public class EditableLabel extends Composite implements HasEditHandler {
   @UiField
   TextBox textbox;
 
-  /** The tooltip. */
-  private Tooltip tooltip;
-
   /** The tooltip text. */
   private String tooltipText;
 
@@ -180,7 +177,7 @@ public class EditableLabel extends Composite implements HasEditHandler {
           blinkTimer(false, new SimpleCallback() {
             @Override
             public void onCallback() {
-              tooltip.showTemporally();
+              Tooltip.tip.showTemporally(label, tooltipText);
             }
           });
         }
@@ -244,12 +241,7 @@ public class EditableLabel extends Composite implements HasEditHandler {
    */
   public void setEditable(final boolean editable) {
     this.editable = editable;
-    if (tooltip == null) {
-      tooltip = Tooltip.to(label, getTooltipValue());
-
-    } else {
-      tooltip.setText(getTooltipValue());
-    }
+    Tooltip.to(label, getTooltipValue());
   }
 
   /**

@@ -68,9 +68,6 @@ public class AbstractDecorator extends Composite {
   /** The offset. */
   private int offset = 0;
 
-  /** The tooltip. */
-  private Tooltip tooltip;
-
   /** The top. */
   private int top = 0;
 
@@ -143,12 +140,8 @@ public class AbstractDecorator extends Composite {
    *          the new image tooltip
    */
   public void setImageTooltip(final String text) {
-    if (tooltip == null) {
-      tooltip = Tooltip.to(decorationImage, text);
-      decorationImage.addStyleName("k-pointer");
-    } else {
-      tooltip.setText(text);
-    }
+    Tooltip.to(decorationImage, text);
+    decorationImage.addStyleName("k-pointer");
   }
 
   /**

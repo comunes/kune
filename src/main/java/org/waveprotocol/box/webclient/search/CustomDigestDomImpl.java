@@ -100,10 +100,15 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   Element avatarsAndUnreadDiv;
   @UiField
   FlowPanel avatarsDiv;
+  @UiField
+  SimplePanel avatarsSummary;
   private final SearchPanelWidget container;
+  private List<Profile> currentProfiles;
   private final ClientFileDownloadUtils downUtils;
   private final KuneDragController dragController;
   private boolean draggable;
+  @UiField
+  SimplePanel groupAvatarContainer;
   @UiField
   Element main;
   @UiField
@@ -114,29 +119,19 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   Element mainRight;
   @UiField
   InlineLabel msgs;
+  @UiField
+  InlineLabel position;
   private final Element self;
   @UiField
   InlineLabel snippet;
   @UiField
   InlineLabel time;
   @UiField
-  InlineLabel position;
-  @UiField
   InlineLabel title;
-  private final Tooltip tooltip;
+
   @UiField
   FlowPanel unreadDiv;
-  @UiField
-  SimplePanel avatarsSummary;
-  @UiField
-  SimplePanel groupAvatarContainer;
-
   private String waveUri;
-  private List<Profile> currentProfiles;
-
-  public void setPosition(String text) {
-    position.setText(text);
-  }
 
   public CustomDigestDomImpl(final SearchPanelWidget container, final KuneDragController dragController,
       final ClientFileDownloadUtils downUtils) {
@@ -154,11 +149,11 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     PolymerUtils.addLayout(mainRight, VERTICAL, LAYOUT, FLEX);
     PolymerUtils.addLayout(avatarsAndUnreadDiv, VERTICAL, LAYOUT);
     PolymerUtils.addLayout(avatarsDiv, HORIZONTAL, JUSTIFIED, LAYOUT);
-    tooltip = Tooltip.to(this, "");
+    Tooltip.to(this, "");
     position.setVisible(false); // only for test
   }
 
-  private void createGroupAvatar(String url) {
+  private void createGroupAvatar(final String url) {
     groupAvatarContainer.clear();
     final Image groupAvatar = new Image();
     groupAvatar.addLoadHandler(new LoadHandler() {
@@ -176,8 +171,9 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
             } else {
               draggable = false;
             }
-            //Log.info("Inbox group avatar size: " + groupAvatar.getWidth() + "x"
-            //    + groupAvatar.getHeight());
+            // Log.info("Inbox group avatar size: " + groupAvatar.getWidth() +
+            // "x"
+            // + groupAvatar.getHeight());
             groupAvatar.setSize("41px", "41px");
           }
         });
@@ -220,7 +216,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   }
 
   private void makeDragable() {
-    tooltip.setText(I18n.t("Drag and drop into a group or personal folder to publish"));
+    Tooltip.to(this, I18n.t("Drag and drop into a group or personal folder to publish"));
     dragController.makeDraggable(CustomDigestDomImpl.this, title);
     dragController.makeDraggable(CustomDigestDomImpl.this, snippet);
   }
@@ -246,7 +242,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   }
 
   public void removeTooltip() {
-    tooltip.setText("");
+    Tooltip.to(this, "");
   }
 
   private SafeHtml renderReadMessages(final int total) {
@@ -303,7 +299,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
     Log.debug("SearchPanel different avatars");
     currentProfiles = profiles;
 
-    LinkedList<IsWidget> names = new LinkedList<IsWidget>();
+    final LinkedList<IsWidget> names = new LinkedList<IsWidget>();
     for (final Profile profile : profiles) {
       final String imageUrl = profile.getImageUrl();
       final String address = profile.getAddress();
@@ -320,7 +316,7 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
       // Try to use MediumAvatarDecorator or similar
       names.add(avatar);
     }
-    AvatarComposite composite = AvatarCompositeFactory.get40().build(names);
+    final AvatarComposite composite = AvatarCompositeFactory.get40().build(names);
     composite.addStyleName("k-digest-avatar");
     avatarsSummary.clear();
     avatarsSummary.add(composite);
@@ -342,6 +338,10 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
       title.addStyleName("k-digest-unread");
       time.addStyleName("k-digest-unread");
     }
+  }
+
+  public void setPosition(final String text) {
+    position.setText(text);
   }
 
   @Override

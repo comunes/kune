@@ -58,9 +58,6 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
   /** The license image. */
   private final Image licenseImage;
 
-  /** The tooltip. */
-  private final Tooltip tooltip;
-
   /**
    * Instantiates a new entity license panel.
    *
@@ -79,7 +76,6 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
     licenseImage.addStyleName("k-footer-license-img");
     final ForIsWidget entityFooter = armor.getEntityFooter();
     entityFooter.add(licenseBar);
-    tooltip = Tooltip.to(licenseImage, ".");
   }
 
   /*
@@ -148,6 +144,6 @@ public class EntityLicensePanel extends ViewImpl implements EntityLicenseView {
     final String licenseText = i18n.t("© [%s], under license: [%s]", groupName, licenseDTO.getLongName());
     // KuneUiUtils.setQuickTip(licenseLabel, licenseText);
     licenseImage.setUrl(GWT.getModuleBaseURL() + licenseDTO.getImageUrl());
-    tooltip.setText(licenseText);
+    Tooltip.to(licenseImage, licenseText);
   }
 }

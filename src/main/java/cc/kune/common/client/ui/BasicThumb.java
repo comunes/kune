@@ -54,14 +54,8 @@ public class BasicThumb extends FocusWidget {
   /** The image. */
   private final Image image;
 
-  /** The image tooltip. */
-  private Tooltip imageTooltip;
-
   /** The label. */
   private final Label label;
-
-  /** The label tooltip. */
-  private Tooltip labelTooltip;
 
   /** The on over label. */
   private boolean onOverLabel;
@@ -227,10 +221,7 @@ public class BasicThumb extends FocusWidget {
    * Hide tooltip.
    */
   public void hideTooltip() {
-    if (imageTooltip != null) {
-      imageTooltip.hide();
-      labelTooltip.hide();
-    }
+    Tooltip.tip.hide();
   }
 
   /**
@@ -280,8 +271,7 @@ public class BasicThumb extends FocusWidget {
    *          the new tooltip
    */
   public void setTooltip(final String tip) {
-    imageTooltip = Tooltip.to(image, tip);
-    labelTooltip = Tooltip.to(label, tip);
+    Tooltip.to(this, tip);
   }
 
   /**
@@ -293,7 +283,6 @@ public class BasicThumb extends FocusWidget {
    *          the tip
    */
   public void setTooltip(final String tipTitle, final String tip) {
-    imageTooltip = Tooltip.to(image, tip);
-    labelTooltip = Tooltip.to(label, tip);
+    Tooltip.to(this, tip);
   }
 }

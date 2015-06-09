@@ -67,7 +67,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
    * .String)
@@ -103,7 +103,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.gwtui.AbstractGwtMenuGui#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -193,12 +193,6 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
     popup.hide();
   }
 
-  private void hideTooltip() {
-    if (tooltip != null && tooltip.isVisibleOrWillBe()) {
-      tooltip.hide();
-    }
-  }
-
   @Override
   public void insert(final int position, final UIObject widget) {
     menu.insert((Widget) widget, position);
@@ -206,7 +200,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -216,7 +210,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
@@ -240,7 +234,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
@@ -252,7 +246,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
    * .gwt.resources.client.ImageResource)
@@ -274,7 +268,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
@@ -286,7 +280,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
@@ -298,7 +292,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -310,7 +304,7 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
@@ -318,12 +312,11 @@ public class BSToolbarMenuGui extends AbstractChildGuiItem implements AbstractBS
   @Override
   public void setToolTipText(final String tooltipText) {
     setToolTipTextNextTo(menu.getWidget(), tooltipText);
-    popup.setTooltip(tooltip);
   }
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override

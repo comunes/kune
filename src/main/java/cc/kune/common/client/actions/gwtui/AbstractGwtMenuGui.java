@@ -32,6 +32,7 @@ import cc.kune.common.client.actions.ui.descrip.MenuDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.Position;
 import cc.kune.common.client.resources.SubMenuResources;
+import cc.kune.common.client.tooltip.Tooltip;
 
 import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.event.logical.shared.CloseHandler;
@@ -229,9 +230,7 @@ public abstract class AbstractGwtMenuGui extends AbstractChildGuiItem implements
       });
     }
     descriptor.putValue(MenuDescriptor.MENU_ONSHOW, popup);
-    if (tooltip != null) {
-      tooltip.hide();
-    }
+    Tooltip.tip.hide();
   }
 
 }
