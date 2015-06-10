@@ -24,6 +24,7 @@ package cc.kune.embed.client;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.resources.CommonResources;
 import cc.kune.core.client.resources.CoreResources;
 import cc.kune.embed.client.actions.EmbedJsActions;
 import cc.kune.embed.client.conf.EmbedConfiguration;
@@ -65,10 +66,11 @@ public class KuneEmbedEntryPoint implements EntryPoint {
     ginjector = GWT.create(KuneEmbedGinjector.class);
 
     ginjector.getEventBusWithLogger();
-    ginjector.getGwtGuiProvider();
+    ginjector.getBSGuiProvider();
 
     final EmbedPresenter embedPresenter = ginjector.getEmbedPresenter().get();
     embedPresenter.show();
+    CommonResources.INSTANCE.commonStyle().ensureInjected();
     GWT.<CoreResources> create(CoreResources.class).coreCss().ensureInjected();
     com.google.gwt.user.client.History.addValueChangeHandler(embedPresenter);
 

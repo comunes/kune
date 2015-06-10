@@ -22,21 +22,17 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
 /**
- * The Class SitebarSignInLink.
+ * The Class EmbedSitebarSignInLink.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SitebarSignInLink extends AbstractSitebarSignInLink {
-
-  private final ToolbarSeparatorDescriptor separator;
+public class EmbedSitebarSignInLink extends AbstractSitebarSignInLink {
 
   /**
    * Instantiates a new sitebar sign in link.
@@ -49,16 +45,8 @@ public class SitebarSignInLink extends AbstractSitebarSignInLink {
    *          the session
    */
   @Inject
-  public SitebarSignInLink(final AbstractSignInAction action, final EventBus eventBus,
+  public EmbedSitebarSignInLink(final AbstractSignInAction action, final EventBus eventBus,
       final Session session) {
     super(action, eventBus, session);
-    setParent(SitebarActions.RIGHT_TOOLBAR);
-    separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
-  }
-
-  @Override
-  protected void onUserSignInOrSignOut(final boolean logged) {
-    super.onUserSignInOrSignOut(logged);
-    separator.setVisible(!logged);
   }
 }

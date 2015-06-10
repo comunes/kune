@@ -22,27 +22,20 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.common.client.actions.BeforeActionCollection;
-import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
-import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.errors.ErrorHandler;
-import cc.kune.core.client.events.UserSignInOrSignOutEvent;
-import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class SitebarSignOutLink.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SitebarSignOutLink extends ToolbarItemDescriptor {
+public class SitebarSignOutLink extends AbstractSitebarSignOutLink {
 
   /**
    * The Class BeforeSignOut.
@@ -55,8 +48,7 @@ public class SitebarSignOutLink extends ToolbarItemDescriptor {
     private static final long serialVersionUID = 2326033703822323868L;
   }
 
-  /** The Constant SITE_SIGN_OUT. */
-  public static final String SITE_SIGN_OUT = "k-ssolp-lb";
+  private final ToolbarSeparatorDescriptor separator;
 
   /**
    * Instantiates a new sitebar sign out link.
@@ -74,22 +66,15 @@ public class SitebarSignOutLink extends ToolbarItemDescriptor {
    */
   @Inject
   public SitebarSignOutLink(final AbstractSignOutAction action, final EventBus eventBus,
-      final ErrorHandler errorHandler, final Session session) {
-    super(action);
-    setId(SITE_SIGN_OUT);
-    final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
-        SitebarActions.RIGHT_TOOLBAR);
-    withText(I18n.t("Sign out"));
+      final Session session) {
+    super(action, eventBus, session);
+    separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
     setParent(SitebarActions.RIGHT_TOOLBAR);
-    setVisible(session.isLogged());
-    setStyles(ActionStyles.SITEBAR_STYLE_FL);
-    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
-      @Override
-      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-        final boolean logged = event.isLogged();
-        SitebarSignOutLink.this.setVisible(logged);
-        separator.setVisible(logged);
-      }
-    });
+  }
+
+  @Override
+  protected void onUserSignInOrSignOut(final boolean logged) {
+    super.onUserSignInOrSignOut(logged);
+    separator.setVisible(logged);
   }
 }

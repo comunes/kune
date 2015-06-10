@@ -22,43 +22,59 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.client.actions.ActionStyles;
+import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
+// TODO: Auto-generated Javadoc
 /**
- * The Class SitebarSignInLink.
+ * The Class SitebarSignOutLink.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SitebarSignInLink extends AbstractSitebarSignInLink {
+public class AbstractSitebarSignOutLink extends ToolbarItemDescriptor {
 
-  private final ToolbarSeparatorDescriptor separator;
+  /** The Constant SITE_SIGN_OUT. */
+  public static final String SITE_SIGN_OUT = "k-ssolp-lb";
 
   /**
-   * Instantiates a new sitebar sign in link.
+   * Instantiates a new sitebar sign out link.
    *
    * @param action
    *          the action
    * @param eventBus
    *          the event bus
+   * @param errorHandler
+   *          the error handler
    * @param session
    *          the session
+   * @param sitebarActions
+   *          the sitebar actions
    */
   @Inject
-  public SitebarSignInLink(final AbstractSignInAction action, final EventBus eventBus,
+  public AbstractSitebarSignOutLink(final AbstractSignOutAction action, final EventBus eventBus,
       final Session session) {
-    super(action, eventBus, session);
-    setParent(SitebarActions.RIGHT_TOOLBAR);
-    separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
+    super(action);
+    setId(SITE_SIGN_OUT);
+    withText(I18n.t("Sign out"));
+    setVisible(session.isLogged());
+    setStyles(ActionStyles.SITEBAR_STYLE_FL);
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        final boolean logged = event.isLogged();
+        AbstractSitebarSignOutLink.this.onUserSignInOrSignOut(logged);
+      }
+    });
   }
 
-  @Override
   protected void onUserSignInOrSignOut(final boolean logged) {
-    super.onUserSignInOrSignOut(logged);
-    separator.setVisible(!logged);
+    AbstractSitebarSignOutLink.this.setVisible(logged);
   }
 }

@@ -45,17 +45,24 @@ public class DefaultGuiProvider implements GuiProvider {
     map = new HashMap<Class<?>, Provider<?>>();
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   * 
    * @see cc.kune.common.client.actions.ui.GuiProvider#get(java.lang.Class)
    */
   @Override
   public <T> GuiBinding get(final Class<T> classType) {
     // If this return a NPE is because any GuiProvider has register bindings
-    return (GuiBinding) map.get(classType).get();
+    final Provider<?> provider = map.get(classType);
+    assert provider != null : "We don't have registered a gui provider for this descriptor type";
+    return (GuiBinding) provider.get();
   }
 
-  /* (non-Javadoc)
-   * @see cc.kune.common.client.actions.ui.GuiProvider#register(java.lang.Class, com.google.inject.Provider)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see cc.kune.common.client.actions.ui.GuiProvider#register(java.lang.Class,
+   * com.google.inject.Provider)
    */
   @Override
   public <T, Z> void register(final Class<T> classType, final Provider<Z> binding) {

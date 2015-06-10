@@ -22,11 +22,12 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
-import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.common.client.actions.ActionStyles;
+import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
 
-import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
 /**
@@ -34,9 +35,10 @@ import com.google.web.bindery.event.shared.EventBus;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SitebarSignInLink extends AbstractSitebarSignInLink {
+public class AbstractSitebarSignInLink extends ToolbarItemDescriptor {
 
-  private final ToolbarSeparatorDescriptor separator;
+  /** The Constant SITE_SIGN_IN. */
+  public static final String SITE_SIGN_IN = "kune-ssilp-hy";
 
   /**
    * Instantiates a new sitebar sign in link.
@@ -48,17 +50,23 @@ public class SitebarSignInLink extends AbstractSitebarSignInLink {
    * @param session
    *          the session
    */
-  @Inject
-  public SitebarSignInLink(final AbstractSignInAction action, final EventBus eventBus,
+
+  public AbstractSitebarSignInLink(final AbstractSignInAction action, final EventBus eventBus,
       final Session session) {
-    super(action, eventBus, session);
-    setParent(SitebarActions.RIGHT_TOOLBAR);
-    separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
+    super(action);
+    setId(SITE_SIGN_IN);
+    setVisible(!session.isLogged());
+    setStyles(ActionStyles.SITEBAR_STYLE_FL);
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        final boolean logged = event.isLogged();
+        AbstractSitebarSignInLink.this.onUserSignInOrSignOut(logged);
+      }
+    });
   }
 
-  @Override
   protected void onUserSignInOrSignOut(final boolean logged) {
-    super.onUserSignInOrSignOut(logged);
-    separator.setVisible(!logged);
+    setVisible(!logged);
   }
 }

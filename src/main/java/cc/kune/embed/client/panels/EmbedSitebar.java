@@ -27,8 +27,8 @@ import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
-import cc.kune.core.client.sitebar.SitebarSignInLink;
-import cc.kune.core.client.sitebar.SitebarSignOutLink;
+import cc.kune.core.client.sitebar.EmbedSitebarSignInLink;
+import cc.kune.core.client.sitebar.EmbedSitebarSignOutLink;
 import cc.kune.core.client.state.Session;
 import cc.kune.embed.client.conf.EmbedConfiguration;
 
@@ -42,20 +42,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class EmbedSitebar {
   private final PopupPanel popup;
-  private final Session session;
-  private final SitebarSignInLink signInLink;
-  private final SitebarSignOutLink signOutLink;
+  private final EmbedSitebarSignInLink signInLink;
+  private final EmbedSitebarSignOutLink signOutLink;
   private final ActionFlowPanel toolbar;
 
   @Inject
   public EmbedSitebar(final Session session, final ActionFlowPanel toolbar,
-      final SitebarSignInLink signInLink, final SitebarSignOutLink signOutLink) {
-    this.session = session;
+      final EmbedSitebarSignInLink signInLink, final EmbedSitebarSignOutLink signOutLink) {
     this.toolbar = toolbar;
     this.signOutLink = signOutLink;
     this.signInLink = signInLink;
-    signInLink.detachFromParent();
-    signOutLink.detachFromParent();
     if (EmbedConfiguration.get().getShowSignIn()) {
       toolbar.add(signInLink);
     }

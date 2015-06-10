@@ -22,7 +22,7 @@
  */
 package cc.kune.embed.client;
 
-import cc.kune.common.client.actions.gwtui.GwtGuiProvider;
+import cc.kune.bootstrap.client.BSGuiProvider;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.events.EventBusWithLogging;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -54,6 +54,13 @@ public interface KuneEmbedGinjector extends Ginjector {
    * You have to add here all the GWTPresenters (as Provider or AsyncProvider)
    * see the GWTPlatform doc
    */
+
+  /**
+   * Gets the gwt gui provider.
+   *
+   * @return the gwt gui provider
+   */
+  BSGuiProvider getBSGuiProvider();
 
   /**
    * Gets the cookies manager.
@@ -100,13 +107,6 @@ public interface KuneEmbedGinjector extends Ginjector {
    * @return the gui provider
    */
   GuiProvider getGuiProvider();
-
-  /**
-   * Gets the gwt gui provider.
-   *
-   * @return the gwt gui provider
-   */
-  GwtGuiProvider getGwtGuiProvider();
 
   /**
    * Gets the i18n.
