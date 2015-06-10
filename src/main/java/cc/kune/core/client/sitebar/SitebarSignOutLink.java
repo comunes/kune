@@ -48,8 +48,6 @@ public class SitebarSignOutLink extends AbstractSitebarSignOutLink {
     private static final long serialVersionUID = 2326033703822323868L;
   }
 
-  private final ToolbarSeparatorDescriptor separator;
-
   /**
    * Instantiates a new sitebar sign out link.
    *
@@ -68,13 +66,14 @@ public class SitebarSignOutLink extends AbstractSitebarSignOutLink {
   public SitebarSignOutLink(final AbstractSignOutAction action, final EventBus eventBus,
       final Session session) {
     super(action, eventBus, session);
-    separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
     setParent(SitebarActions.RIGHT_TOOLBAR);
   }
 
   @Override
   protected void onUserSignInOrSignOut(final boolean logged) {
     super.onUserSignInOrSignOut(logged);
+    final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
+        SitebarActions.RIGHT_TOOLBAR);
     separator.setVisible(logged);
   }
 }

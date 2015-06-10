@@ -36,8 +36,6 @@ import com.google.web.bindery.event.shared.EventBus;
  */
 public class SitebarSignInLink extends AbstractSitebarSignInLink {
 
-  private final ToolbarSeparatorDescriptor separator;
-
   /**
    * Instantiates a new sitebar sign in link.
    *
@@ -53,12 +51,14 @@ public class SitebarSignInLink extends AbstractSitebarSignInLink {
       final Session session) {
     super(action, eventBus, session);
     setParent(SitebarActions.RIGHT_TOOLBAR);
-    separator = new ToolbarSeparatorDescriptor(Type.separator, SitebarActions.RIGHT_TOOLBAR);
+
   }
 
   @Override
   protected void onUserSignInOrSignOut(final boolean logged) {
     super.onUserSignInOrSignOut(logged);
+    final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
+        SitebarActions.RIGHT_TOOLBAR);
     separator.setVisible(!logged);
   }
 }

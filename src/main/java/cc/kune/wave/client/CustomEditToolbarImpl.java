@@ -146,6 +146,7 @@ public class CustomEditToolbarImpl implements CustomEditToolbar {
 
   private PaperFab wrapBtn(final ClickHandler clickHandler, final String id, final String text) {
     final PaperFab btn = PaperFab.wrap(id);
+    assert btn != null : "Cannot wrap edit buttons";
     Tooltip.to(btn, text);
     btn.addStyleName(ActionStyles.BTN_EDIT);
     btn.addClickHandler(clickHandler);
