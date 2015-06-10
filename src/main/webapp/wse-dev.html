@@ -1,80 +1,120 @@
 <!doctype html>
 <html>
-<head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<title>kune embeded</title>
-<script type="text/javascript" language="javascript"
-    src="wse/wse.nocache.js"></script>
-<!--
-We will use this string for mention this site in messages like: "Thanks for joining this site"
-Your can use another string and the message will looks like "Thanks for joining example.org"
- -->
-<meta name="kune.default.site.commonname" content="this site" />
-<meta name="emite.httpBase" content="/http-bind/" />
-<meta name="emite.host" content="localhost" />
-<meta name="emite.searchHost" content="search.localhost" />
-<!--<meta name="emite.session" content="login" />-->
-<meta name="hablar.roomService" content="rooms.localhost" />
-<meta name="hablar.login" content="false" />
-<meta name="hablar.hasVCard" content="false" />
-<meta name="hablar.search" content="false" />
-<meta name="hablar.hasSound" content="false" />
-<meta name="hablar.hasCopyToClipboard" content="true" />
-<!--<meta name="hablar.hasLogger" content="true" />-->
-<meta name="hablar.hasSignals" content="false" />
-<meta name="hablar.roster" content="true" />
-<meta name="hablar.dockRoster" content="left" />
-<meta name="hablar.icons" content="alt" />
-<!-- <meta name="hablar.layout" content="tabs" /> -->
-<meta name="hablar.layout" content="accordion" />
-<meta name="hablar.inline" content="vertical_dock_div" />
-<meta name="hablar.width" content="550px" />
-<meta name="hablar.height" content="400px" />
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>kune embeded</title>
+    <script type="text/javascript" language="javascript"
+            src="wse/wse.nocache.js"></script>
+    <!--
+      We will use this string for mention this site in messages like: "Thanks for joining this site"
+      Your can use another string and the message will looks like "Thanks for joining example.org"
+      -->
+    <meta name="kune.default.site.commonname" content="this site" />
+    <meta name="emite.httpBase" content="/http-bind/" />
+    <meta name="emite.host" content="localhost" />
+    <meta name="emite.searchHost" content="search.localhost" />
+    <!--<meta name="emite.session" content="login" />-->
+    <meta name="hablar.roomService" content="rooms.localhost" />
+    <meta name="hablar.login" content="false" />
+    <meta name="hablar.hasVCard" content="false" />
+    <meta name="hablar.search" content="false" />
+    <meta name="hablar.hasSound" content="false" />
+    <meta name="hablar.hasCopyToClipboard" content="true" />
+    <!--<meta name="hablar.hasLogger" content="true" />-->
+    <meta name="hablar.hasSignals" content="false" />
+    <meta name="hablar.roster" content="true" />
+    <meta name="hablar.dockRoster" content="left" />
+    <meta name="hablar.icons" content="alt" />
+    <!-- <meta name="hablar.layout" content="tabs" /> -->
+    <meta name="hablar.layout" content="accordion" />
+    <meta name="hablar.inline" content="vertical_dock_div" />
+    <meta name="hablar.width" content="550px" />
+    <meta name="hablar.height" content="400px" />
 
-<meta name="hablar.avatarProvider" content="kune-avatars" />
+    <meta name="hablar.avatarProvider" content="kune-avatars" />
 
-<link type="text/css" rel="stylesheet" href="css/reset.css">
-<link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-all.css">
-<link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-gray.css">
-<link type="text/css" rel="stylesheet"
-    href="ws/gxt-custom/css/gxt-op-common.css">
-<link type="text/css" rel="stylesheet" href="ws/kune-hablar.css">
-<link type="text/css" rel="stylesheet" href="ws/kune-chat.css">
-<link type="text/css" rel="stylesheet" href="ws/kune-common.css">
-<link type="text/css" rel="stylesheet" href="ws/kune-custom-common.css">
-<link type="text/css" rel="stylesheet" href="ws/kune-message.css">
-<link type="text/css" rel="stylesheet"
-    href="others/splash/style/permalink.css">
-<link type="text/css" rel="stylesheet"
-    href="others/splash/style/stuff.css">
-<link type="text/css" rel="stylesheet"
-    href="others/splash/style/main.css">
-<link type="text/css" rel="stylesheet" href="ws/ws.css">
-<script type="text/javascript" src="others/splash/js/wave-rpc.js"></script>
-<script type="text/javascript" src="others/splash/js/gadget.js"></script>
-<script type="text/javascript" src="others/splash/js/rpc.js"></script>
-<script type="text/javascript" src="others/splash/js/common_client.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script type="text/javascript"
-    src="others/splash/js/permalink_client.js"></script>
-<!--[if IE 6]>
-    <link type="text/css" rel="stylesheet" href="ie6.css">
-<![endif]-->
-</head>
-<body>
+    <link type="text/css" rel="stylesheet" href="css/reset.css">
+    <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-all.css">
+    <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-gray.css">
+    <link type="text/css" rel="stylesheet"
+          href="ws/gxt-custom/css/gxt-op-common.css">
+    <link type="text/css" rel="stylesheet" href="ws/kune-hablar.css">
+    <link type="text/css" rel="stylesheet" href="ws/kune-chat.css">
+    <link type="text/css" rel="stylesheet" href="ws/kune-common.css">
+    <link type="text/css" rel="stylesheet" href="ws/kune-custom-common.css">
+    <link type="text/css" rel="stylesheet" href="ws/kune-message.css">
+    <link type="text/css" rel="stylesheet"
+          href="others/splash/style/permalink.css">
+    <link type="text/css" rel="stylesheet"
+          href="others/splash/style/stuff.css">
+    <link type="text/css" rel="stylesheet"
+          href="others/splash/style/main.css">
+    <link type="text/css" rel="stylesheet" href="ws/ws.css">
+    <script type="text/javascript" src="others/splash/js/wave-rpc.js"></script>
+    <script type="text/javascript" src="others/splash/js/gadget.js"></script>
+    <script type="text/javascript" src="others/splash/js/rpc.js"></script>
+    <script type="text/javascript" src="others/splash/js/common_client.js"></script>
+    <script
+    src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript"
+            src="others/splash/js/permalink_client.js"></script>
+    <!--[if IE 6]>
+       <link type="text/css" rel="stylesheet" href="ie6.css">
+       <![endif]-->
+    <style type="text/css">
+
+      /* Embeded waves */
+      .k-embed-sitebar {
+        border-top: 2px solid #FFF !important;
+        border-left: 1px solid #ACACAC !important;
+        border-right: 1px solid #ACACAC !important;
+        border-bottom: 1px solid #ACACAC !important;
+        background-color: #FFF;
+        -moz-border-radius-bottomleft: 5px;
+        border-bottom-left-radius: 5px;
+        -webkit-border-bottom-left-radius: 5px;
+        -moz-border-radius-bottomright: 5px;
+        border-bottom-right-radius: 5px;
+        -webkit-border-bottom-right-radius: 5px;
+        line-height: 11px;
+        font-size: 14px;
+        z-index: 100000;
+        padding: 3px 10px !important;
+      }
+
+      .k-embed-sitebar a {
+        white-space: nowrap;
+        color: #808080;
+      }
+
+      .k-embed-sitebar a:hover {
+        text-decoration: none;
+      }
+
+      .k-embed-sitebar div {
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
     <!-- Banner for wave errors -->
     <div class="banner" id="banner"></div>
     <div id="kune-embed-hook"></div>
     <!-- You can include the previous nocache-js script in your page, and use it with something like: -->
-        <script type='text/javascript'>
+    <script type='text/javascript'>
       // This is a example of how to configure the kune embbeded panel
       // Note: serverUrl should have a trailing slash
       var kuneEmbedConf = {
-      'serverUrl': 'http://127.0.0.1:8888/', 'readOnly': false, 'sitebarRightMargin': 50, 'sitebarTopMargin': 0,
-      'signInText': 'Participate', 'showSignOut': true, 'showSignIn': true
+        'serverUrl' : 'http://127.0.0.1:8888/',
+        'readOnly' : false,
+        'sitebarRightMargin' : 50,
+        'sitebarTopMargin' : 0,
+        'signInText' : 'Participate',
+        'showSignOut' : true,
+        'showSignIn' : true
       };
       var kuneIdToEmbed = 'site.docs.9.2';
-      
+
       // or calling these methods
 
       function kuneEmbedInit() {
@@ -84,7 +124,7 @@ Your can use another string and the message will looks like "Thanks for joining 
         document.embed(kuneIdToEmbed);
       }
 
-      window.onload = function () {
+      window.onload = function() {
         // General configuration
         // document.confEmbed(kuneEmbedConf);
         // We embed in the specified div that #kunegroup.doc
@@ -95,5 +135,5 @@ Your can use another string and the message will looks like "Thanks for joining 
        <object data="http://kune.example.com/wse.html#!some-group.docs.1" type="text/html"
        style="width:100%; height:100%; overflow: hidden;"></object>
        -->
-</body>
+  </body>
 </html>

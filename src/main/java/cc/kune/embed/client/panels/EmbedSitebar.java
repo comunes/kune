@@ -32,6 +32,8 @@ import cc.kune.core.client.sitebar.EmbedSitebarSignOutLink;
 import cc.kune.core.client.state.Session;
 import cc.kune.embed.client.conf.EmbedConfiguration;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.logical.shared.ResizeEvent;
 import com.google.gwt.event.logical.shared.ResizeHandler;
 import com.google.gwt.user.client.Window;
@@ -71,12 +73,19 @@ public class EmbedSitebar {
       }
     });
 
-    session.onUserSignInOrSignOut(false, new UserSignInOrSignOutHandler() {
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-        // This is needed because the panel has different sinces depending on
+        // This is needed because the panel has different sizes depending on
         // the session
-        centerAndShow();
+        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+          @Override
+          public void execute() {
+            // We do this in deferred so we have the correct size of screen &
+            // toolbar
+            centerAndShow();
+          }
+        });
       }
     });
   }
