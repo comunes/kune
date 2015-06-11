@@ -252,6 +252,11 @@ public class EmbedPresenter implements ValueChangeHandler<String> {
         if (userInfo != null) {
           session.setUserHash(userInfo.getUserHash());
           session.setCurrentUserInfo(EmbedHelper.parse(userInfo), null);
+        } else {
+          if (session.getUserHash() != null) {
+            // Probably the session expired
+            session.signOut();
+          }
         }
         final String currentHash = getCurrentHistoryHash();
         final boolean isValid = isCurrentHistoryHashValid(currentHash);
