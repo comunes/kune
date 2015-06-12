@@ -1,3 +1,9 @@
+kune (1.0.1+b4) unstable; urgency=medium
+
+  * Several fixes in embed system
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 12 Jun 2015 01:18:23 +0200
+
 kune (1.0.1+b3) unstable; urgency=medium
 
   * Tooltip is now a singleton

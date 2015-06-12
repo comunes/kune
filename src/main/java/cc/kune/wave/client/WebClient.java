@@ -459,7 +459,7 @@ public class WebClient extends Composite implements WaveClientView {
    * Creates the web socket.
    */
   private void createWebSocket() {
-    websocket = new WaveWebSocketClient(useSocketIO(), getWebSocketBaseUrl());
+    websocket = new WaveWebSocketClient(webSocketNotSupported() || kuneSession.isEmbedded(), getWebSocketBaseUrl());
     websocket.connect();
   }
 
@@ -516,8 +516,8 @@ public class WebClient extends Composite implements WaveClientView {
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl() /*-{
-    return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
-        + $wnd.__websocket_address + "/";
+		return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
+				+ $wnd.__websocket_address + "/";
   }-*/;
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#login()
@@ -783,8 +783,8 @@ public class WebClient extends Composite implements WaveClientView {
    *
    * @return true, if successful
    */
-  private native boolean useSocketIO() /*-{
-    return !window.WebSocket
+  private native boolean webSocketNotSupported() /*-{
+		return !window.WebSocket
   }-*/;
 
 
