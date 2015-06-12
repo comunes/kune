@@ -56,7 +56,6 @@ import org.eclipse.jetty.server.ServerConnector;
 import org.eclipse.jetty.server.session.HashSessionManager;
 import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.server.nio.SelectChannelConnector;
 import org.eclipse.jetty.servlets.GzipFilter;
 import org.eclipse.jetty.util.resource.ResourceCollection;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
@@ -525,7 +524,7 @@ public class ServerRpcProvider {
   }
 
   /**
-   * @return a list of {@link SelectChannelConnector} each bound to a host:port
+   * @return a list of {@link Connector} each bound to a host:port
    *         pair form the list addresses.
    */
   private List<Connector> getSelectChannelConnectors(
