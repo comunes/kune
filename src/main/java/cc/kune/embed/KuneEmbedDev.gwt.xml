@@ -53,10 +53,6 @@
   <set-configuration-property name="CssResource.style"
     value="pretty"/>
 
-  <!-- Superdev mode ============================================ -->
-  <set-configuration-property name="devModeRedirectEnabled"
-    value="true"/>
-
   <!-- Faster compilation ====================================== -->
   <!-- http://stackoverflow.com/questions/1011863/how-do-i-speed-up-the-gwt-compiler -->
   <collapse-all-properties/>

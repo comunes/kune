@@ -41,6 +41,8 @@ public class ActionStyles {
 
   public static final String DEF_BTN_GROUP = "btn btn-default, btn-group";
 
+  public static final String DEF_BTN_LEFT = DEF_BTN + ", k-fl";
+
   public static final String MENU_BTN_STYLE_LEFT = "k-fl";
 
   public static final String MENU_BTN_STYLE_NO_BORDER_LEFT = "k-fl, k-noborder, k-no-backimage, k-nobackcolor";

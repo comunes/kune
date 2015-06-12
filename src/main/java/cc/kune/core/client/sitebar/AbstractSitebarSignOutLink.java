@@ -22,8 +22,7 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ActionStyles;
-import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
+import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
@@ -38,7 +37,7 @@ import com.google.web.bindery.event.shared.EventBus;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class AbstractSitebarSignOutLink extends ToolbarItemDescriptor {
+public class AbstractSitebarSignOutLink extends ButtonDescriptor {
 
   /** The Constant SITE_SIGN_OUT. */
   public static final String SITE_SIGN_OUT = "k-ssolp-lb";
@@ -64,7 +63,7 @@ public class AbstractSitebarSignOutLink extends ToolbarItemDescriptor {
     setId(SITE_SIGN_OUT);
     withText(I18n.t("Sign out"));
     setVisible(session.isLogged());
-    setStyles(ActionStyles.SITEBAR_STYLE_FL);
+    // setStyles(ActionStyles.SITEBAR_STYLE_FL);
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {

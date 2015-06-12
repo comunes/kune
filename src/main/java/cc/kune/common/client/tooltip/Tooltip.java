@@ -266,7 +266,8 @@ public class Tooltip extends PopupPanel {
       Tooltip.getTip().hide();
     }
     setText(text);
-    if (forWidget.isAttached() && forWidget.isVisible() && (TextUtils.notEmpty(textLabel.getText()))) {
+    if (forWidget.isAttached() && forWidget.isVisible()
+        && (TextUtils.notEmpty(text) && !"undefined".equals(text))) {
       Tooltip.super.show();
       current = forWidget;
       final int clientWidth = Window.getClientWidth();

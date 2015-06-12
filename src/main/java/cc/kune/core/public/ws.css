@@ -566,7 +566,7 @@ div.gwt-TabLayoutPanelTabInner img {
 
 .k-sn-mainpanel {
   font-size: 16px;
- /* font-weight: bold; */
+  /* font-weight: bold; */
 }
 
 .k-sn-maintitle {
@@ -667,7 +667,7 @@ button.k-btn-go-up {
 
 .k-sn-adminsflow, .k-sn-collabsflow, .k-sn-pendingsflow {
   margin-left: 10px;
-  clear:both;
+  clear: both;
 }
 
 .k-userconfirm-label {
@@ -688,7 +688,7 @@ button.k-btn-go-up {
 }
 
 .k-sn-novisible-label, .k-sn-orphan-label {
- /* color: #FFF; */
+  /* color: #FFF; */
   font-size: 16px;
   font-weight: bold;
 }
@@ -1498,13 +1498,28 @@ div.oc-menu>div>ul.dropdown-menu {
   z-index: 10000;
 }
 
-.k-to-lower > input  {
+.k-to-lower>input {
   text-transform: lowercase;
 }
 
 .com-watopi-chosen-client-resources-ChozenCss-chzn-container {
   font-size: 14px !important;
 }
+
 .k-white-nowrap {
   white-space: nowrap;
+}
+
+.edgy-right-element {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 4px !important;
+  border-bottom-right-radius: 4px !important;
+}
+
+.edgy-left-element {
+  border-top-left-radius: 4px !important;
+  border-bottom-left-radius: 4px !important;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }

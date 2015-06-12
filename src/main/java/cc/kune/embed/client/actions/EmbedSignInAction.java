@@ -39,14 +39,14 @@ import com.google.inject.Inject;
 
 /**
  * The Class EmbedSignInAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmbedSignInAction extends AbstractSignInAction {
 
   /**
    * Instantiates a new sitebar sign in action.
-   * 
+   *
    * @param stateManager
    *          the state manager
    * @param i18n
@@ -58,7 +58,7 @@ public class EmbedSignInAction extends AbstractSignInAction {
   public EmbedSignInAction() {
     super();
     final String signInText = EmbedConfiguration.get().getSignInText();
-    putValue(Action.NAME, I18n.t(signInText == null ? signInText : "Participate"));
+    putValue(Action.NAME, I18n.t(signInText == null ? signInText : "Sign in"));
     putValue(Action.TOOLTIP,
         I18n.t("Please sign in [%s] to participate in this document", I18n.getSiteCommonName()));
   }

@@ -22,8 +22,12 @@
  */
 package cc.kune.core.client.sitebar;
 
+import cc.kune.common.client.actions.ActionStyles;
+import cc.kune.common.client.actions.ui.descrip.ToolbarItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.ToolbarSeparatorDescriptor.Type;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
@@ -34,7 +38,10 @@ import com.google.web.bindery.event.shared.EventBus;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class SitebarSignInLink extends AbstractSitebarSignInLink {
+public class SitebarSignInLink extends ToolbarItemDescriptor {
+
+  /** The Constant SITE_SIGN_IN. */
+  public static final String SITE_SIGN_IN = "kune-ssilp-hy";
 
   /**
    * Instantiates a new sitebar sign in link.
@@ -49,16 +56,20 @@ public class SitebarSignInLink extends AbstractSitebarSignInLink {
   @Inject
   public SitebarSignInLink(final AbstractSignInAction action, final EventBus eventBus,
       final Session session) {
-    super(action, eventBus, session);
+    super(action);
+    setId(SITE_SIGN_IN);
+    setVisible(!session.isLogged());
+    setStyles(ActionStyles.SITEBAR_STYLE_FL);
     setParent(SitebarActions.RIGHT_TOOLBAR);
-
-  }
-
-  @Override
-  protected void onUserSignInOrSignOut(final boolean logged) {
-    super.onUserSignInOrSignOut(logged);
     final ToolbarSeparatorDescriptor separator = new ToolbarSeparatorDescriptor(Type.separator,
         SitebarActions.RIGHT_TOOLBAR);
-    separator.setVisible(!logged);
+    session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
+      @Override
+      public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        final boolean logged = event.isLogged();
+        SitebarSignInLink.this.setVisible(!logged);
+        separator.setVisible(!logged);
+      }
+    });
   }
 }

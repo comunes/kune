@@ -22,6 +22,7 @@
  */
 package cc.kune.core.client.sitebar;
 
+import cc.kune.common.client.actions.ActionStyles;
 import cc.kune.core.client.state.Session;
 
 import com.google.inject.Inject;
@@ -52,5 +53,6 @@ public class EmbedSitebarSignOutLink extends AbstractSitebarSignOutLink {
   public EmbedSitebarSignOutLink(final AbstractSignOutAction action, final EventBus eventBus,
       final Session session) {
     super(action, eventBus, session);
+    setStyles(ActionStyles.DEF_BTN_LEFT);
   }
 }

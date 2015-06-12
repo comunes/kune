@@ -23,10 +23,12 @@
 
 package cc.kune.embed.client.panels;
 
+import org.gwtbootstrap3.client.ui.constants.Styles;
+
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
-import cc.kune.common.shared.res.KuneIcon;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent;
 import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.client.sitebar.EmbedSitebarParticipateLink;
 import cc.kune.core.client.sitebar.EmbedSitebarSignInLink;
 import cc.kune.core.client.sitebar.EmbedSitebarSignOutLink;
 import cc.kune.core.client.state.Session;
@@ -43,6 +45,7 @@ import com.google.inject.Singleton;
 
 @Singleton
 public class EmbedSitebar {
+  private final EmbedSitebarParticipateLink participateLink;
   private final PopupPanel popup;
   private final EmbedSitebarSignInLink signInLink;
   private final EmbedSitebarSignOutLink signOutLink;
@@ -50,12 +53,16 @@ public class EmbedSitebar {
 
   @Inject
   public EmbedSitebar(final Session session, final ActionFlowPanel toolbar,
-      final EmbedSitebarSignInLink signInLink, final EmbedSitebarSignOutLink signOutLink) {
+      final EmbedSitebarSignInLink signInLink, final EmbedSitebarSignOutLink signOutLink,
+      final EmbedSitebarParticipateLink participateLink) {
     this.toolbar = toolbar;
+    toolbar.setStyleName(Styles.BTN_GROUP);
     this.signOutLink = signOutLink;
     this.signInLink = signInLink;
+    this.participateLink = participateLink;
     if (EmbedConfiguration.get().getShowSignIn()) {
       toolbar.add(signInLink);
+      toolbar.add(participateLink);
     }
     if (EmbedConfiguration.get().getShowSignOut()) {
       toolbar.add(signOutLink);
@@ -76,35 +83,35 @@ public class EmbedSitebar {
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-        // This is needed because the panel has different sizes depending on
-        // the session
-        Scheduler.get().scheduleDeferred(new ScheduledCommand() {
-          @Override
-          public void execute() {
-            // We do this in deferred so we have the correct size of screen &
-            // toolbar
-            centerAndShow();
-          }
-        });
+        centerAndShow();
       }
     });
   }
 
   private void centerAndShow() {
-    popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+    // This is needed because the panel has different sizes depending on
+    // the session
+    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
       @Override
-      public void setPosition(final int offsetWidth, final int offsetHeight) {
-        final Integer rightMargin = EmbedConfiguration.get().getSitebarRightMargin();
-        final int left = Window.getClientWidth() - toolbar.getOffsetWidth() - rightMargin;
-        final int top = EmbedConfiguration.get().getSitebarTopMargin();
-        popup.setPopupPosition(left, top);
+      public void execute() {
+        // We do this in deferred so we have the correct size of screen &
+        // toolbar
+        popup.setPopupPositionAndShow(new PopupPanel.PositionCallback() {
+          @Override
+          public void setPosition(final int offsetWidth, final int offsetHeight) {
+            final Integer rightMargin = EmbedConfiguration.get().getSitebarRightMargin();
+            final int left = Window.getClientWidth() - toolbar.getOffsetWidth() - rightMargin;
+            final int top = EmbedConfiguration.get().getSitebarTopMargin();
+            popup.setPopupPosition(left, top);
+          }
+        });
       }
     });
+
   }
 
   public void init(final String stateToken) {
     signInLink.setTarget(stateToken);
-    signInLink.withIcon(KuneIcon.KUNE);
-    signOutLink.withIcon(KuneIcon.KUNE);
+    participateLink.setTarget(stateToken);
   }
 }
