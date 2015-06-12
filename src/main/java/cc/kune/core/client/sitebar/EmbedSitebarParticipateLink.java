@@ -20,40 +20,42 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package cc.kune.wave.client.kspecific;
+package cc.kune.core.client.sitebar;
 
-import org.waveprotocol.box.webclient.search.SearchPanelView;
+import cc.kune.common.client.actions.ActionStyles;
+import cc.kune.core.client.state.Session;
+import cc.kune.embed.client.actions.EmbedParticipateAction;
 
-import cc.kune.chat.client.DummyLastConnectedManager;
-import cc.kune.chat.client.LastConnectedManager;
-import cc.kune.core.client.ExtendedGinModule;
-import cc.kune.wave.client.CustomEditToolbar;
-import cc.kune.wave.client.CustomEditToolbarImpl;
-import cc.kune.wave.client.DummySearchPanelView;
-import cc.kune.wave.client.KuneWaveProfileManager;
-import cc.kune.wave.client.WebClient;
+import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
- * The Class WaveGinModule.
+ * The Class EmbedSitebarSignInLink.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class WaveEmbedGinModule extends ExtendedGinModule {
-  /*
-   * (non-Javadoc)
-   * 
-   * @see com.google.gwt.inject.client.AbstractGinModule#configure()
+public class EmbedSitebarParticipateLink extends AbstractSitebarSignInLink {
+
+  /**
+   * Instantiates a new sitebar sign in link.
+   *
+   * @param action
+   *          the action
+   * @param eventBus
+   *          the event bus
+   * @param session
+   *          the session
    */
+  @Inject
+  public EmbedSitebarParticipateLink(final EmbedParticipateAction action, final EventBus eventBus,
+      final Session session) {
+    super(action, eventBus, session);
+    setVisible(true);
+  }
+
   @Override
-  protected void configure() {
-    s(SearchPanelView.class, DummySearchPanelView.class);
-    s(CustomEditToolbar.class, CustomEditToolbarImpl.class);
-    s(HasWaveContainer.class, WaveEmbedContainer.class);
-    s(LastConnectedManager.class, DummyLastConnectedManager.class);
-    s(AurorisColorPicker.class);
-    s(WebClient.class);
-    s(WaveClientManager.class);
-    s(WaveStatusIndicator.class);
-    s(KuneWaveProfileManager.class);
+  protected void onUserSignInOrSignOut(final boolean logged) {
+    setVisible(true);
+    setStyles(ActionStyles.DEF_BTN_LEFT + "," + (logged ? "edgy-left-element" : "edgy-right-element"));
   }
 }

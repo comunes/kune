@@ -6,9 +6,14 @@
     <script type="text/javascript" language="javascript"
             src="wse/wse.nocache.js"></script>
     <!--
-      We will use this string for mention this site in messages like: "Thanks for joining this site"
-      Your can use another string and the message will looks like "Thanks for joining example.org"
-      -->
+            We will use this string for mention this site in messages like: "Thanks for joining this site"
+            Your can use another string and the message will looks like "Thanks for joining example.org"
+            -->
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="bower_components/core-icons/core-icons.html">
+
     <meta name="kune.default.site.commonname" content="this site" />
     <meta name="emite.httpBase" content="/http-bind/" />
     <meta name="emite.host" content="localhost" />
@@ -50,11 +55,16 @@
     <link type="text/css" rel="stylesheet"
           href="others/splash/style/main.css">
     <link type="text/css" rel="stylesheet" href="ws/ws.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
     <!--[if IE 6]>
            <link type="text/css" rel="stylesheet" href="ie6.css">
-       <![endif]-->
+           <![endif]-->
     <style type="text/css">
+
+      body {
+        overflow: auto;
+      }
+
       .k-embed-sitebar a {
         white-space: nowrap;
         color: #808080;
@@ -74,7 +84,41 @@
       }
 
       .k-embed-sitebar i {
-         font-size: 12px;
+        font-size: 12px;
+      }
+
+      .btn_green {
+        color: white;
+        background-color: rgb(153, 187, 0);
+      }
+
+      #edit_group_fab,#reply_group_fab,#editdone_group_fab {
+        display: none;
+      }
+
+      #edit_inbox_fab,#reply_inbox_fab,#editdone_inbox_fab {
+        position: fixed;
+        z-index: 1;
+      }
+
+      #edit_inbox_fab {
+        top: 100px;
+        right: 5px;
+      }
+
+      #reply_inbox_fab {
+        top: 155px;
+        right: 5px;
+      }
+
+      #editdone_inbox_fab {
+        top: 210px;
+        right: 5px;
+      }
+
+      paper-fab[disabled] {
+        color: #808080;
+        background-color:#CCC;
       }
 
     </style>
@@ -82,6 +126,12 @@
   <body>
     <!-- Banner for wave errors -->
     <div class="banner" id="banner"></div>
+    <paper-fab icon="create" id="edit_inbox_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="reply" id="reply_inbox_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="check" id="editdone_inbox_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="create" id="edit_group_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="reply" id="reply_group_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="check" id="editdone_group_fab" style="display: none;" mini class="btn_green"></paper-fab>
     <div id="kune-embed-hook"></div>
     <!-- You can include the previous nocache-js script in your page, and use it with something like: -->
     <script type='text/javascript'>

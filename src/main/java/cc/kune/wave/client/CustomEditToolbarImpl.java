@@ -45,6 +45,8 @@ public class CustomEditToolbarImpl implements CustomEditToolbar {
     void onReply();
   }
 
+  PaperFab dummyfab = new PaperFab();
+
   final ClickHandler editDoneHandler = new ClickHandler() {
     @Override
     public void onClick(final ClickEvent event) {
@@ -145,11 +147,15 @@ public class CustomEditToolbarImpl implements CustomEditToolbar {
   }
 
   private PaperFab wrapBtn(final ClickHandler clickHandler, final String id, final String text) {
-    final PaperFab btn = PaperFab.wrap(id);
-    assert btn != null : "Cannot wrap edit buttons";
-    Tooltip.to(btn, text);
-    btn.addStyleName(ActionStyles.BTN_EDIT);
-    btn.addClickHandler(clickHandler);
-    return btn;
+    try {
+      final PaperFab btn = PaperFab.wrap(id);
+      Tooltip.to(btn, text);
+      btn.addStyleName(ActionStyles.BTN_EDIT);
+      btn.addClickHandler(clickHandler);
+      return btn;
+    } catch (final AssertionError e) {
+      // In embed system, sometimes we don't have edit fab buttons
+      return dummyfab;
+    }
   }
 }
