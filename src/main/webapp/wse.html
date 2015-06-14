@@ -6,6 +6,11 @@
     <!-- Use this if you want to force some language as default
         <meta name="gwt:property" content="locale=es" />
         -->
+    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="bower_components/polymer/polymer.html">
+    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+    <link rel="import" href="bower_components/core-icons/core-icons.html">
+
     <script type="text/javascript" language="javascript"
             src="wse/wse.nocache.js"></script>
     <!--
@@ -76,12 +81,53 @@
       .k-embed-sitebar div {
         text-decoration: none;
       }
+
+      .btn_green {
+        color: white;
+        background-color: rgb(153, 187, 0);
+      }
+
+      #edit_group_fab,#reply_group_fab,#editdone_group_fab {
+        display: none;
+      }
+
+      #edit_inbox_fab,#reply_inbox_fab,#editdone_inbox_fab {
+        position: fixed;
+        z-index: 1;
+      }
+
+      #edit_inbox_fab {
+        top: 100px;
+        right: 5px;
+      }
+
+      #reply_inbox_fab {
+        top: 155px;
+        right: 5px;
+      }
+
+      #editdone_inbox_fab {
+        top: 210px;
+        right: 5px;
+      }
+
+      paper-fab[disabled] {
+        color: #808080;
+        background-color:#CCC;
+      }
+
     </style>
   </head>
 
   <body>
     <!-- Banner for wave errors -->
     <div class="banner" id="banner"></div>
+    <paper-fab icon="create" id="edit_inbox_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="reply" id="reply_inbox_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="check" id="editdone_inbox_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="create" id="edit_group_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="reply" id="reply_group_fab" style="display: none;" mini class="btn_green"></paper-fab>
+    <paper-fab icon="check" id="editdone_group_fab" style="display: none;" mini class="btn_green"></paper-fab>
     <!-- RECOMMENDED if your web app will not function without JavaScript enabled -->
     <noscript>
       <div

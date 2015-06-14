@@ -1,5 +1,12 @@
 kune (1.0.1+b4) unstable; urgency=medium
 
+  * Set cookies to domains and sub.domains 
+  * Improvements in embed system
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 14 Jun 2015 14:23:30 +0200
+
+kune (1.0.1+b4) unstable; urgency=medium
+
   * Several fixes in embed system
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 12 Jun 2015 01:18:23 +0200

@@ -50,6 +50,11 @@ public class TextUtils {
   /** The Constant IN_DEVELOPMENT_P. */
   public static final String IN_DEVELOPMENT_P = " (in development)";
 
+  // http://www.mkyong.com/regular-expressions/how-to-validate-ip-address-with-regular-expression/
+  public static final String IPADDRESS_PATTERN = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+      + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
+      + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+
   public static final String LIST_NAME_REGEXP = "^[a-zA-Z0-9_\\-]+$";
 
   /** The Constant NUM_REGEXP. */
@@ -66,7 +71,7 @@ public class TextUtils {
       + "Aa" // ring
       + "Cc" // cedilla
       + "Nn" // n tilde (spanish)
-      ;
+  ;
 
   /** The Constant SHORTNAME_REGEXP. */
   public static final String SHORTNAME_REGEXP = "^[a-z0-9]+$";
