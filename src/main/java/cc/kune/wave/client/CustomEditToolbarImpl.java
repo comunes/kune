@@ -25,6 +25,7 @@ package cc.kune.wave.client;
 
 import br.com.rpa.client._paperelements.PaperFab;
 import cc.kune.common.client.actions.ActionStyles;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.polymer.client.PolymerId;
@@ -155,6 +156,7 @@ public class CustomEditToolbarImpl implements CustomEditToolbar {
       return btn;
     } catch (final AssertionError e) {
       // In embed system, sometimes we don't have edit fab buttons
+      Log.info("Some button mising in html with id: " + id);
       return dummyfab;
     }
   }

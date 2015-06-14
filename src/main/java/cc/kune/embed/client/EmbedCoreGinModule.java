@@ -30,9 +30,12 @@ import cc.kune.common.client.msgs.UserMessagesPanel;
 import cc.kune.common.client.msgs.UserMessagesPresenter;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.notify.SimpleUserNotifierPopup;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
+import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
+import cc.kune.common.client.shortcuts.GlobalShortcuts;
+import cc.kune.common.client.shortcuts.GlobalShortcutsInstance;
 import cc.kune.common.client.ui.MaskWidget;
 import cc.kune.common.client.ui.MaskWidgetView;
-import cc.kune.common.client.ui.PaperMask;
 import cc.kune.common.shared.i18n.HasRTL;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
@@ -86,7 +89,7 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
 
   /*
    * (non-Javadoc)
-   *
+   * 
    * @see com.google.gwt.inject.client.AbstractGinModule#configure()
    */
   @Override
@@ -105,6 +108,10 @@ public class EmbedCoreGinModule extends ExtendedGinModule {
     bind(I18nTranslationService.class).to(I18nTranslationServiceMocked.class).in(Singleton.class);
     s(I18n.class);
     requestStaticInjection(I18n.class);
+
+    bind(GlobalShortcutRegister.class).to(GlobalShortcutRegisterDefault.class).in(Singleton.class);
+    bind(GlobalShortcuts.class).in(Singleton.class);
+    requestStaticInjection(GlobalShortcutsInstance.class);
 
     s(UserFieldFactory.class);
     s(GroupFieldFactory.class);
