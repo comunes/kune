@@ -1,4 +1,4 @@
-kune (1.0.1+b4) unstable; urgency=medium
+kune (1.0.1+b5) unstable; urgency=medium
 
   * Set cookies to domains and sub.domains 
   * Improvements in embed system
