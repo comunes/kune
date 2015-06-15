@@ -1,3 +1,9 @@
+kune (1.0.1+b6) unstable; urgency=medium
+
+  * OBF in gwt compilation
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 15 Jun 2015 09:27:58 +0200
+
 kune (1.0.1+b5) unstable; urgency=medium
 
   * Set cookies to domains and sub.domains 
