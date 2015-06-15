@@ -1,6 +1,7 @@
 kune (1.0.1+b6) unstable; urgency=medium
 
   * OBF in gwt compilation
+  * Set correct domain in cookies
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 15 Jun 2015 09:27:58 +0200
 

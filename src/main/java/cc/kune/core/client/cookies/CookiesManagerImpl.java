@@ -92,7 +92,7 @@ public class CookiesManagerImpl implements CookiesManager {
   @Override
   public void removeAnonCookie() {
     Cookies.removeCookie(ANON);
-    Cookies.setCookie(ANON, null, new Date(0), null, "/", false);
+    Cookies.setCookie(ANON, null, new Date(0), getDomain(), "/", false);
   }
 
   /*
@@ -109,9 +109,9 @@ public class CookiesManagerImpl implements CookiesManager {
     Cookies.removeCookie(SessionConstants.USERHASH);
     Cookies.removeCookie(SessionConstants.JSESSIONID);
     // Workaround:
-    Cookies.setCookie(SessionConstants.USERHASH, null, new Date(0), null, getDomain(),
+    Cookies.setCookie(SessionConstants.USERHASH, null, new Date(0), getDomain(), "/",
         WindowUtils.isHttps());
-    Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), null, getDomain(),
+    Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), getDomain(), "/",
         WindowUtils.isHttps());
   }
 
@@ -126,7 +126,7 @@ public class CookiesManagerImpl implements CookiesManager {
     final Date expires = new Date(System.currentTimeMillis()
         + (userRegister ? SessionConstants.ANON_SESSION_DURATION_AFTER_REG
             : SessionConstants.ANON_SESSION_DURATION));
-    Cookies.setCookie(ANON, userRegister.toString(), expires, null, getDomain(), false);
+    Cookies.setCookie(ANON, userRegister.toString(), expires, getDomain(), "/", false);
   }
 
   /*
@@ -139,9 +139,9 @@ public class CookiesManagerImpl implements CookiesManager {
   public void setAuthCookie(final String userHash) {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
     final Date expires = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
-    Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, null, getDomain(),
+    Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, getDomain(), "/",
         WindowUtils.isHttps());
-    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, expires, null, getDomain(),
+    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, expires, getDomain(), "/",
         WindowUtils.isHttps());
     Log.info("Received hash: " + userHash, null);
   }
