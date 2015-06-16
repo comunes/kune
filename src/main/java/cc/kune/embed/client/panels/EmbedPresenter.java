@@ -23,6 +23,7 @@
 
 package cc.kune.embed.client.panels;
 
+import org.waveprotocol.box.webclient.client.atmosphere.AtmosphereConnectionImpl;
 import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
 
 import cc.kune.common.client.log.Log;
@@ -48,6 +49,7 @@ import cc.kune.embed.client.conf.EmbedConfiguration;
 import cc.kune.embed.client.events.EmbAppStartEvent;
 import cc.kune.embed.client.events.EmbedOpenEvent;
 import cc.kune.gspace.client.viewers.WaveViewer;
+import cc.kune.wave.client.KuneWaveProfileManager;
 import cc.kune.wave.client.kspecific.WaveClientManager;
 import cc.kune.wave.client.kspecific.WaveClientProvider;
 
@@ -230,7 +232,11 @@ public class EmbedPresenter implements ValueChangeHandler<String> {
 
   private void onAppStarted() {
     // We set the prefix for avatars url with the server url
-    clientDownUtils.setPrefix(EmbedConfiguration.get().getServerUrl());
+    final String serverUrl = EmbedConfiguration.get().getServerUrl();
+    clientDownUtils.setPrefix(serverUrl);
+    final String serverNoSlash = serverUrl.replaceAll("/$", "");
+    KuneWaveProfileManager.urlPrefix = serverNoSlash;
+    AtmosphereConnectionImpl.urlPrefix = serverNoSlash;
 
     final String userHash = session.getUserHash();
     Log.info("Started embed presenter with user hash: " + userHash);

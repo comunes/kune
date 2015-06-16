@@ -48,9 +48,11 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class KuneWaveProfileManager extends AbstractProfileManager<ProfileImpl> implements
-FetchProfilesService.Callback {
+    FetchProfilesService.Callback {
 
   private final static LoggerBundle LOG = new DomLogger("fetchProfiles");
+
+  public static String urlPrefix = "";
 
   static private void deserializeAndUpdateProfile(final KuneWaveProfileManager manager,
       final FetchedProfile fetchedProfile) {
@@ -59,7 +61,8 @@ FetchProfilesService.Callback {
     // Profiles already exist for all profiles that have been requested.
     assert profile != null;
     // Updates profiles - this also notifies listeners.
-    profile.update(fetchedProfile.getName(), fetchedProfile.getName(), fetchedProfile.getImageUrl());
+    profile.update(fetchedProfile.getName(), fetchedProfile.getName(),
+        urlPrefix + fetchedProfile.getImageUrl());
   }
 
   /**
@@ -150,7 +153,8 @@ FetchProfilesService.Callback {
     final String address = profile.getAddress();
     if (isLocal(address)) {
       profile.update(profile.getFirstName(),
-          full + lastConnectedManager.get(getUsername(address), false), profile.getImageUrl());
+          full + lastConnectedManager.get(getUsername(address), false),
+          urlPrefix + profile.getImageUrl());
     }
   }
 
