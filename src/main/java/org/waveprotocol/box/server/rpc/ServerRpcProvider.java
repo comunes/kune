@@ -1,3 +1,4 @@
+// @formatter:off
 /**
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -17,7 +18,7 @@
  * under the License.
  */
 
-// NOTE(vjrj): ServerRpcProvider.java in not modified frow wave's kune branch but 
+// NOTE(vjrj): ServerRpcProvider.java in not modified frow wave's kune branch but
 // if we copied here atmosphere annotations works.
 
 package org.waveprotocol.box.server.rpc;
@@ -533,7 +534,12 @@ public class ServerRpcProvider {
     String[] excludeCiphers = {"SSL_RSA_EXPORT_WITH_RC4_40_MD5", "SSL_RSA_EXPORT_WITH_DES40_CBC_SHA",
                                "SSL_DHE_RSA_EXPORT_WITH_DES40_CBC_SHA", "SSL_RSA_WITH_DES_CBC_SHA",
                                "SSL_DHE_RSA_WITH_DES_CBC_SHA", "TLS_DHE_RSA_WITH_AES_128_CBC_SHA",
-                               "SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA", "TLS_DHE_RSA_WITH_AES_256_CBC_SHA"};
+                               "SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA", "TLS_DHE_RSA_WITH_AES_256_CBC_SHA",
+                               // https://www.eclipse.org/jetty/documentation/current/configuring-ssl.html
+                               // Exclude all old, insecure or anonymous cipher suites:
+                               "TLS_DHE_RSA_WITH_AES_128_CBC_SHA256",
+                               ".*NULL.*", ".*RC4.*", ".*MD5.*", ".*DES.*", ".*DSS.*"
+                               };
     SslContextFactory sslContextFactory = null;
 
     if (sslEnabled) {
@@ -546,6 +552,8 @@ public class ServerRpcProvider {
       sslContextFactory.setKeyStorePassword(sslKeystorePassword);
       sslContextFactory.setRenegotiationAllowed(false);
       sslContextFactory.setExcludeCipherSuites(excludeCiphers);
+      // Since 2014 SSLv3 is considered insecure and should be disabled
+      sslContextFactory.setExcludeProtocols("SSLv3");
 
       // Note: we only actually needed client auth for AuthenticationServlet.
       // Using Need instead of Want prevents web-sockets from working on
