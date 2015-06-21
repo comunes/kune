@@ -1,3 +1,13 @@
+kune (1.0.1+b8) unstable; urgency=medium
+
+  * Minor style modifications in embed system
+  * Allow to set custom styles to the embeb documents
+  * Fix http & https in home remote urls
+  * Disable insecure ciphers and protocols in jetty
+  * More improvements in embed system
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 21 Jun 2015 22:25:13 +0200
+
 kune (1.0.1+b7) unstable; urgency=medium
 
   * More improvements in embed system
