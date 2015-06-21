@@ -57,5 +57,9 @@
   <!-- For now this is useful for create screencasts and selenium tests -->
   <inherits name="com.google.gwt.user.Debug" />
 
+  <!-- This allow to set custom styles to the embeb documents -->
+  <set-configuration-property name="CssResource.style"
+    value="pretty"/>
+
 </module>
 
