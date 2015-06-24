@@ -1,3 +1,9 @@
+kune (1.0.1+b9) unstable; urgency=medium
+
+  * Disable insecure ciphers and protocols in jetty (2nd round)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 24 Jun 2015 19:26:44 +0200
+
 kune (1.0.1+b8) unstable; urgency=medium
 
   * Minor style modifications in embed system
