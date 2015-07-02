@@ -1,7 +1,7 @@
 Source: kune
 Section: java
 Priority: optional
-Build-Depends: devscripts, debhelper (>= 8.0.0), cdbs, sun-java6-jre | openjdk-6-jdk, maven (>= 3.0), libmaven-assembly-plugin-java, rsync, quilt
+Build-Depends: devscripts, debhelper (>= 8.0.0), cdbs, oracle-java7-installer | openjdk-7-jdk, maven (>= 3.0), libmaven-assembly-plugin-java, rsync, quilt
 Homepage: http://kune.ourproject.org
 Maintainer: Vicente J. Ruiz Jurado <vjrj@ourproject.org>
 Standards-Version: 3.9.2
@@ -10,8 +10,8 @@ Standards-Version: 3.9.2
 
 Package: kune
 Pre-Depends: ucf
-Depends: libjmagick6-jni, sun-java6-jre | openjdk-6-jdk, mysql-server (>= 5.1) , adduser, dbconfig-common
-Recommends: openfire (>= 3.7.1), mysql-client, postfix | exim4, telnet | nc
+Depends: libjmagick6-jni, oracle-java7-installer | openjdk-7-jre, mysql-server (>= 5.1) , adduser, dbconfig-common, telnet | netcat-openbsd
+Recommends: openfire (>= 3.7.1), mysql-client, postfix | exim4
 Suggests:
 Architecture: all
 Description: Distributed social network of collaborative web tools
