@@ -47,7 +47,8 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
     /**
      * Adds the user notify handler.
      *
-     * @param handler the handler
+     * @param handler
+     *          the handler
      * @return the handler registration
      */
     HandlerRegistration addUserNotifyHandler(UserNotifyHandler handler);
@@ -76,7 +77,8 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
     /**
      * On user notify.
      *
-     * @param event the event
+     * @param event
+     *          the event
      */
     public void onUserNotify(UserNotifyEvent event);
   }
@@ -87,9 +89,34 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Fire.
    *
-   * @param source the source
-   * @param level the level
-   * @param message the message
+   * @param eventBus
+   *          the source
+   * @param level
+   *          the level
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param closeable
+   *          the closeable
+   * @return the user notify event
+   */
+  public static UserNotifyEvent fire(final EventBus eventBus, final NotifyLevel level,
+      final java.lang.String title, final java.lang.String message, final Boolean closeable) {
+    final UserNotifyEvent event = new UserNotifyEvent(level, title, message, closeable);
+    eventBus.fireEvent(event);
+    return event;
+  }
+
+  /**
+   * Fire.
+   *
+   * @param source
+   *          the source
+   * @param level
+   *          the level
+   * @param message
+   *          the message
    */
   public static void fire(final HasHandlers source, final NotifyLevel level,
       final java.lang.String message) {
@@ -99,10 +126,14 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Fire.
    *
-   * @param source the source
-   * @param level the level
-   * @param message the message
-   * @param closeable the closeable
+   * @param source
+   *          the source
+   * @param level
+   *          the level
+   * @param message
+   *          the message
+   * @param closeable
+   *          the closeable
    */
   public static void fire(final HasHandlers source, final NotifyLevel level,
       final java.lang.String message, final Boolean closeable) {
@@ -112,31 +143,18 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Fire.
    *
-   * @param source the source
-   * @param level the level
-   * @param title the title
-   * @param message the message
+   * @param source
+   *          the source
+   * @param level
+   *          the level
+   * @param title
+   *          the title
+   * @param message
+   *          the message
    */
   public static void fire(final HasHandlers source, final NotifyLevel level,
       final java.lang.String title, final java.lang.String message) {
     source.fireEvent(new UserNotifyEvent(level, title, message));
-  }
-
-  /**
-   * Fire.
-   *
-   * @param eventBus the source
-   * @param level the level
-   * @param title the title
-   * @param message the message
-   * @param closeable the closeable
-   * @return the user notify event
-   */
-  public static UserNotifyEvent fire(final EventBus eventBus, final NotifyLevel level,
-      final java.lang.String title, final java.lang.String message, final Boolean closeable) {
-    final UserNotifyEvent event = new UserNotifyEvent(level, title, message, closeable);
-    eventBus.fireEvent(event);
-    return event;
   }
 
   /**
@@ -172,8 +190,10 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Instantiates a new user notify event.
    *
-   * @param level the level
-   * @param message the message
+   * @param level
+   *          the level
+   * @param message
+   *          the message
    */
   public UserNotifyEvent(final NotifyLevel level, final java.lang.String message) {
     this(level, "", message, false);
@@ -182,20 +202,27 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Instantiates a new user notify event.
    *
-   * @param level the level
-   * @param message the message
-   * @param closeable the closeable
+   * @param level
+   *          the level
+   * @param message
+   *          the message
+   * @param closeable
+   *          the closeable
    */
-  public UserNotifyEvent(final NotifyLevel level, final java.lang.String message, final Boolean closeable) {
+  public UserNotifyEvent(final NotifyLevel level, final java.lang.String message,
+      final Boolean closeable) {
     this(level, "", message, closeable);
   }
 
   /**
    * Instantiates a new user notify event.
    *
-   * @param level the level
-   * @param title the title
-   * @param message the message
+   * @param level
+   *          the level
+   * @param title
+   *          the title
+   * @param message
+   *          the message
    */
   public UserNotifyEvent(final NotifyLevel level, final java.lang.String title,
       final java.lang.String message) {
@@ -205,10 +232,14 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Instantiates a new user notify event.
    *
-   * @param level the level
-   * @param title the title
-   * @param message the message
-   * @param closeable the closeable
+   * @param level
+   *          the level
+   * @param title
+   *          the title
+   * @param message
+   *          the message
+   * @param closeable
+   *          the closeable
    */
   public UserNotifyEvent(final NotifyLevel level, final java.lang.String title,
       final java.lang.String message, final Boolean closeable) {
@@ -221,21 +252,28 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Instantiates a new user notify event.
    *
-   * @param message the message
+   * @param message
+   *          the message
    */
   public UserNotifyEvent(final String message) {
     this(NotifyLevel.info, message);
   }
 
-  /* (non-Javadoc)
-   * @see com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.EventHandler)
+  /*
+   * (non-Javadoc)
+   *
+   * @see
+   * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared.
+   * EventHandler)
    */
   @Override
   protected void dispatch(final UserNotifyHandler handler) {
     handler.onUserNotify(this);
   }
 
-  /* (non-Javadoc)
+  /*
+   * (non-Javadoc)
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -262,12 +300,21 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   }
 
   /**
-   * Gets the closer.
+   * Gets the closer. (Currently we don't have a way to close the notifications)
    *
    * @return the closer
    */
+  @Deprecated
   public UserNotifyCloser getCloser() {
-    return closer;
+    // Uncomment when the notification has a method to close notifications
+    // programmatically
+    // return closer;
+    return new UserNotifyCloser() {
+      @Override
+      public void close() {
+        // Dummy close
+      }
+    };
   }
 
   /**
@@ -309,7 +356,8 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Sets the click handler.
    *
-   * @param clickHandler the new click handler
+   * @param clickHandler
+   *          the new click handler
    */
   public void setClickHandler(final ClickHandler clickHandler) {
     this.clickHandler = clickHandler;
@@ -318,7 +366,8 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Sets the closer.
    *
-   * @param closer the new closer
+   * @param closer
+   *          the new closer
    */
   public void setCloser(final UserNotifyCloser closer) {
     this.closer = closer;
@@ -327,7 +376,8 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
   /**
    * Sets the id.
    *
-   * @param id the new id
+   * @param id
+   *          the new id
    */
   public void setId(final String id) {
     this.id = id;
