@@ -1233,7 +1233,7 @@
               <logLevel>INFO</logLevel>
               <!-- <style>PRETTY</style> -->
               <!-- <style>OBF</style> -->
-              <style>OBF</style>
+              <style>PRETTY</style>
               <noServer>true</noServer>
               <gwtVersion>${gwt.version}</gwtVersion>
               <runTarget>/ws.html?log_level=DEBUG</runTarget>
