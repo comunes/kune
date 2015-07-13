@@ -1,3 +1,9 @@
+kune (1.0.1+b12) unstable; urgency=medium
+
+  * Some minor style changes in home
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 13 Jul 2015 10:35:39 +0200
+
 kune (1.0.1+b11) unstable; urgency=medium
 
   * Fix minor bug in sign-in when register notification is open

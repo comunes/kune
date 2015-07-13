@@ -50,7 +50,7 @@
     <meta name="hablar.width" content="550px" />
     <meta name="hablar.height" content="400px" />
     <meta name="hablar.avatarProvider" content="kune-avatars" />
-    
+
     <script language="javascript" type="text/javascript">
       // -*- engine:js -*-
 
@@ -65,13 +65,13 @@
         }
       }
 
-      // See MetaUtils.java 
+      // See MetaUtils.java
       function getMetaContent(name) {
-        var metas = document.getElementsByTagName('meta'); 
+        var metas = document.getElementsByTagName('meta');
         for (i=0; i < metas.length; i++) {
           // console.log("meta: " + metas[i].getAttribute("name"));
-          if (metas[i].getAttribute("name") == name) { 
-            return metas[i].getAttribute("content"); 
+          if (metas[i].getAttribute("name") == name) {
+            return metas[i].getAttribute("content");
           }
         }
         return "";
@@ -311,7 +311,7 @@
                       <div id="customOwlDots" class="owl-dots"></div>
                     </div>
                   </div>
-                  <div flex id="home_copyleft">                    
+                  <div flex id="home_copyleft">
                     © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
                     <span style="display: none;" id="k_home_copyleft_def">
                       <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
@@ -390,7 +390,7 @@
                         </span>
                         <span id="k_home_buck_es" style="display: none;">
                           <blockquote class="buck_blockquote">
-                            Haced que el mundo funcione para el 100% de la humanidad, en el menor tiempo posible, a través de la cooperación espontánea, y sin ningún daño ecológico o desventaja para nadie.                            
+                            Haced que el mundo funcione para el 100% de la humanidad, en el menor tiempo posible, a través de la cooperación espontánea, y sin ningún daño ecológico o desventaja para nadie.
                             <cite class="buck">
                               <a href="https://es.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
                             </cite>
@@ -434,15 +434,15 @@
                             to collaborate, to share knowledge, skills, solutions, etcetera.</p>
                         </span>
                         <span id="k_home_continuation_es" style="display: none;">
-                          <p>kune es la continuación del esfuerzo que comenzamos en el 2002 con                          
+                          <p>kune es la continuación del esfuerzo que comenzamos en el 2002 con
                           <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                          con un objetivo principal:</p><p>Llevar la filosofía colaborativa del                          
+                          con un objetivo principal:</p><p>Llevar la filosofía colaborativa del
                           <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
                           a otras áreas.</p><p>
                           Compartimos nuestros servicios web y nuestras herramientas para
                           permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
-                          soluciones, etcétera.</p>                          
-                        </span>                        
+                          soluciones, etcétera.</p>
+                        </span>
                       </div>
                     </div>
 
@@ -456,7 +456,7 @@
                         </span>
                       </div>
                     </div>
-                    
+
 
                   </div>
                 </div> <!-- home-center -->
@@ -704,7 +704,7 @@
 
         #k_home_main_v {
         }
-        
+
         #k_home_logoname_motto {
         }
 
@@ -736,12 +736,12 @@
         #k_home_center a {
           text-decoration: none;
         }
-        
+
         #k_home_center {
-          width: {{xsmall ? '100%' : small? '80%' : '60%'}};          
+          width: {{xsmall ? '100%' : small? '80%' : '60%'}};
           margin: 0 auto;
-        }        
-        
+        }
+
         #k_home_center div {
           margin-top: {{xsmall? '5' : small? '10' : '10'}}px;
           margin-bottom: {{xsmall? '5' : small? '10' : '10'}}px;
@@ -777,7 +777,7 @@
         #sec4 > div > span > p {
           padding-top: 20px;
         }
-        
+
         #k_home_tools core-item::shadow #icon {
           margin: 0 6px;
         }
@@ -1147,12 +1147,12 @@
         #inbox_toolbar .toolbar-tools { /* ff */
           height: 40px;
         }
-        
+
         #chat_toolbar::shadow .toolbar-tools,
         #inbox_toolbar::shadow .toolbar-tools {
           height: 40px;
         }
-        
+
         #inbox_result_section, #chat_centerpanel {
           /* height: 100%; */
           /* padding: 10px; */
@@ -1170,7 +1170,7 @@
           cursor: pointer;
           color: grey;
           font-size: 14px;
-          overflow-x: hidden;          
+          overflow-x: hidden;
         }
 
         .k-digest-main:hover {
@@ -1210,15 +1210,15 @@
           width: 41px;
           overflow: hidden;
         }
-        
+
         .k-digest-avatar {
           height: 43px !important;
-          width: 43px !important;          
+          width: 43px !important;
           margin-left: 2px;
           /* border: 1px solid transparent;*/ /* #b3b3b3;*/
         }
 
-        
+
 
         .k-digest-unreadDiv {
           text-align: center;
@@ -1314,7 +1314,7 @@
           /* Bootstrap breaks the 1rem font size of this buttons */
           font-size: 16px;
         }
-        
+
         /* Group space ------------------------------------------------------- */
 
         #core_scroll_header_panel {
@@ -1482,7 +1482,7 @@
           overflow: visible;
           white-space: inherit;
         }
-        
+
         #header_group_name_group {
           margin-top: {{xsmall? 0: small? 0 : 20}}px;
         }
@@ -1631,8 +1631,8 @@
           margin: {{xsmall? '0px 25px 0px 20px' : '0px 75px 0px 70px'}};
           top: {{xsmall? 134 : small? 154: 186}}px;
         }
-        
-        paper-shadow#doc_toolbar_shadow core-toolbar#doc_toolbar div#topBar.toolbar-tools, 
+
+        paper-shadow#doc_toolbar_shadow core-toolbar#doc_toolbar div#topBar.toolbar-tools,
         #doc_toolbar {
           color: gray;
           height: 40px;
@@ -1667,7 +1667,8 @@
         #group_tools_toolbar paper-fab {
           color: grey;
           background-color: transparent;
-          border-radius: 50px !important;
+          border-top-left-radius: 8px !important;
+          border-bottom-left-radius: 8px !important;
           border-top-right-radius: 0px !important;
           border-bottom-right-radius: 0px !important;
           margin-bottom: 5px; /* Distance between tools */ 
@@ -1788,21 +1789,21 @@
 
         #home_bottombar a,
         #home_bottombar a:visited,
-        #home_bottombar a:hover {          
+        #home_bottombar a:hover {
           text-decoration: none;
         }
 
-        #home_copyleft {          
+        #home_copyleft {
           font-size: 12px;
           color: grey;
           text-align: right;
         }
-        
+
         #home_copyleft a {
           text-decoration: underline;
           color: gray;
         }
-        
+
         #group_bottombar a {
           color: rgb(51,51,51);
         }
@@ -1811,7 +1812,7 @@
           /* flattr */
           margin-top: -30px;
         }
- 
+
         #group_bottombar > div > div > img {
           /* license */ 
           opacity: 0.7;
@@ -1934,10 +1935,10 @@
         // Coment this line for develop this initial page without gwt code
         document.body.appendChild(s);
       });
-        
+
       addEventListener('template-bound', function(e) {
         var scope = e.target;
-        
+
         function resizeHome() {
           h = document.getElementById('k_home_scroller').offsetHeight;
           h = h - h*2/100 - 120;
@@ -1950,14 +1951,14 @@
         }
 
         resizeHome();
-        
+
         window.onresize = function() {
           resizeHome();
-        }        
+        }
 
         var backs = ["others/home-back-trees.png",
                      "others/home-back-buck.png",
-                     "others/home-back-decen.png",                     
+                     "others/home-back-decen.png",
                      "others/home-back-four-handed-seat.png",
                      "others/home-back-op-en.png",
                      "others/home-back-gears.png",
@@ -1972,17 +1973,17 @@
 
         // console.log("Locale: " + locale);
         currentLocale = locale;
-      
+
         if (meta != null) {
           // console.log("Meta: " + meta);
           var ids = meta.split(/[\s,]+/);
           for (i=0; i < ids.length; i++) {
-            var id = ids[i];    
+            var id = ids[i];
             var lid = HOME_IDS_PREFIX + id + "_" + currentLocale
             var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
             //console.log("Id: " + ldefid);
             var someElement = document.getElementById(lid);
-            var defElement = document.getElementById(ldefid);    
+            var defElement = document.getElementById(ldefid);
             if (someElement != null) {
               someElement.style.display="inherit";
             } else if (defElement != null) {
@@ -1991,7 +1992,7 @@
             }
           }
         }
-        
+
         // This is donw by gwt, but useful for development without gwt
         // scope.hideSpinner();
 
@@ -2005,7 +2006,7 @@
             nav: false,
             autoplay:true,
             center: true,
-            // autoplaySpeed: true,            
+            // autoplaySpeed: true,
             autoplayTimeout:10000,
             autoplayHoverPause:true,
             // animateOut: 'fadeOut',
@@ -2013,13 +2014,13 @@
             items: 1
           }
         );
-        
+
         owl.on('changed.owl.carousel', function(event) {
           var i = event.item.index-2
           // console.log("Show back: " + i);
           scope.homebackimg = backs[i];
         });
-        
+
       });
     </script>
 

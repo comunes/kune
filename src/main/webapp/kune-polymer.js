@@ -7,11 +7,11 @@ kt.toggle_social_net = function() {
 }
 
 window.onresize = function(event) {
-  setContentMinHeight(); 
+  setContentMinHeight();
 };
 
 function setContentMinHeight() {
-  kt.docContentMinHeight = (document.documentElement.clientHeight - 350);  
+  kt.docContentMinHeight = (document.documentElement.clientHeight - 350);
 }
 
 /* The initial space (0: for home, 2: for group space) useful during tests */
@@ -39,8 +39,10 @@ kt.avatarsizes=50;
 
 kt.homebackimg="others/home-back-trees.png";
 
-//kt.homebackcolor = 'rgb(255, 204, 170)'; 1st...
-kt.homebackcolor = "#e8c6b2";
+//kt.homebackcolors = ["#e8c6b2"];
+kt.homebackcolors = ["#c9baa4", "#b6c9a4", "#e3cd77", "a6c4d1", "#cba7ae"];
+
+kt.homebackcolor = kt.homebackcolors[Math.floor((Math.random() * kt.homebackcolors.length))];
 
 /* kt.group_back_image_url='http://lorempixel.com/1500/1500'; */
 kt.showingSearch=false;
@@ -62,7 +64,7 @@ function toggleVis(id) {
 
 kt.closeMainDrawer = function(e,detail,sender) {
   kt.main_forcenarrow=true;
-  document.getElementById('main_core_drawer_panel').closeDrawer();  
+  document.getElementById('main_core_drawer_panel').closeDrawer();
 }
 
 
@@ -103,9 +105,9 @@ kt.toggleSearch = function(e,detail,sender) {
   if(e && e.target===kt.sitebar_search_input){
     return
   }
-  
+
   kt.showingSearch=!kt.showingSearch;
-  
+
   toggleVis('#sitebar_language_btn');
   toggleVis('#sitebar_mygroups_btn');
   toggleVis('#space_selector_paper_tabs');
@@ -115,11 +117,11 @@ kt.toggleSearch = function(e,detail,sender) {
   toggleVis('#sitebar_search_input');
   toggleVis('#sitebar_left_extensionbar');
   toggleVis('#sitebar_right_extensionbar');
-  toggleVis('#sitebar_flex');  
+  toggleVis('#sitebar_flex');
   toggleVis('#sitebar_more_icon');
   toggleVis('#sitebar_close_icon');
   toggleVis('#sitebar_flex_end');
-  
+
   this.async(function(){
     document.querySelector('#sitebar_search_input').focus()
   })
@@ -132,7 +134,7 @@ addEventListener('core-header-transform', function(e) {
 
   if (miga == null)
     return;
-  
+
   var d = e.detail;
   // d.y: the amount that the header moves up
   // d.height: the height of the header when it is at its full size
@@ -146,7 +148,7 @@ addEventListener('core-header-transform', function(e) {
   miga.css('color', (d.y >= d.height - d.condensedHeight) ? kt.c2 : kt.c6);
 });
 
-/* Default theme (useful for development without GWT) 
+/* Default theme (useful for development without GWT)
 kt.bg1="#deaa87";
 kt.bg2="#d99e76";
 kt.bg3="#ce7f4b";
@@ -168,4 +170,3 @@ kt.c7="#a05a2c";
 
 var d = new Date();
 kt.this_year = d.getFullYear();
-
