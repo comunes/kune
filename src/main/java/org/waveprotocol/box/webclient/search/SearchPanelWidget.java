@@ -35,6 +35,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.CssResource;
 import com.google.gwt.resources.client.ImageResource;
@@ -48,9 +49,12 @@ import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.FocusPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 
+import br.com.rpa.client._paperelements.PaperIconButton;
+import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.client.ui.WrappedFlowPanel;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.res.KuneIcon;
+import cc.kune.core.client.dnd.InboxToContainerHelper;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.gspace.client.armor.GSpaceArmor;
@@ -142,9 +146,16 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   private ClientFileDownloadUtils downUtils;
 
-  public SearchPanelWidget(SearchPanelRenderer renderer, KuneDragController dragController, ClientFileDownloadUtils downUtils, GSpaceArmor armor) {
+  private PaperIconButton shareBtn;
+
+  private DigestView digestToPublish;
+
+  private InboxToContainerHelper inboxToContainerHelper;
+
+  public SearchPanelWidget(SearchPanelRenderer renderer, KuneDragController dragController, ClientFileDownloadUtils downUtils, GSpaceArmor armor, InboxToContainerHelper inboxToContainerHelper) {
     this.dragController = dragController;
     this.downUtils = downUtils;
+    this.inboxToContainerHelper = inboxToContainerHelper;
     initWidget(BINDER.createAndBindUi(this));
     // showMore.setVisible(false);
     showMore.setText(I18n.t("Show more results"));
@@ -152,12 +163,25 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     showMore.addStyleName("btn-lg");
     showMore.addStyleName("btn-block");
     WrappedFlowPanel inboxTitleFlow = armor.wrapDiv(PolymerId.INBOX_TITLE);
+    shareBtn = PaperIconButton.wrap(PolymerId.INBOX_SHARE_ICON.getId());
+    shareBtn.setEnabled(false);
+    shareBtn.addClickHandler(new ClickHandler() {
+      @Override
+      public void onClick(ClickEvent event) {
+        onSharedClicked();
+      }});
+    Tooltip.to(shareBtn,
+        I18n.t("To publish the selected document, move to some group folder (or your public profile), select the document in your Inbox and press this button"));
     inboxTitle = new InlineLabel(I18n.t("Inbox"));
     inboxTitleFlow.add(inboxTitle);
     showMoreElement = showMore.getElement();
     toolbar.setVisible(false);
     search.setVisible(false);
     this.renderer = renderer;
+  }
+
+  protected void onSharedClicked() {
+    inboxToContainerHelper.publishDigest(digestToPublish);
   }
 
   @Override
@@ -220,8 +244,8 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   @Override
   public DigestDomImpl insertBefore(DigestView ref, Digest digest) {
     DigestDomImpl digestUi = digestPool.get();
-    renderer.render(digest, digestUi);
     setWaveUri(digest, digestUi);
+    renderer.render(digest, digestUi);
 
     DigestDomImpl refDomImpl = narrow(ref);
     Element refElement = refDomImpl != null ? refDomImpl.getElement() : showMoreElement;
@@ -234,8 +258,8 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   @Override
   public DigestDomImpl insertAfter(DigestView ref, Digest digest) {
     DigestDomImpl digestUi = digestPool.get();
-    renderer.render(digest, digestUi);
     setWaveUri(digest, digestUi);
+    renderer.render(digest, digestUi);
 
     DigestDomImpl refDomImpl = narrow(ref);
     Element refElement = refDomImpl != null ? refDomImpl.getElement() : showMoreElement;
@@ -310,6 +334,14 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   private static DigestDomImpl narrow(DigestView digestUi) {
     return (DigestDomImpl) digestUi;
+  }
+
+  public void setShareIconEnabled(boolean enabled) {
+    shareBtn.setEnabled(enabled);
+  }
+
+  public void setDigestToPublish(DigestView digestUi) {
+    this.digestToPublish = digestUi;
   }
 
 }

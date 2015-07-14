@@ -23,7 +23,12 @@
 
 package cc.kune.core.client.dnd;
 
-import org.waveprotocol.box.webclient.search.CustomDigestDomImpl;
+import org.waveprotocol.box.webclient.search.DigestDomImpl;
+import org.waveprotocol.box.webclient.search.DigestView;
+
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyUser;
@@ -35,10 +40,6 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.utils.ChangedLogosRegistry;
-
-import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 @Singleton
 public class InboxToContainerHelper {
@@ -60,25 +61,34 @@ public class InboxToContainerHelper {
   public void publish(final Widget widget, final Object target) {
     try {
       final StateToken destToken = (StateToken) target;
-      final CustomDigestDomImpl digest = (CustomDigestDomImpl) widget;
-      final String waveUri = digest.getWaveUri();
-      contentService.publishWave(session.getUserHash(), destToken, waveUri,
-          new AsyncCallbackSimple<StateContentDTO>() {
-        @Override
-        public void onSuccess(final StateContentDTO result) {
-          NotifyUser.hideProgress();
-          NotifyUser.success(I18n.t("Published"));
-          digest.setGroup(result.getGroup());
-          digest.makeNotDraggable();
-          digest.removeTooltip();
-          // This prevents to use previous 1x1 logo
-          recentlyChanged.add(waveUri);
-          // contentCache.remove(destToken);
-          stateManager.setRetrievedStateAndGo(result);
-        }
-      });
+      final DigestDomImpl digest = (DigestDomImpl) widget;
+      publishDigest(destToken, digest);
     } catch (final ClassCastException e) {
       Log.error("Some cast problem in d&d of type:" + widget + " to target: " + target, e);
     }
+  }
+
+  public void publishDigest(final DigestView digestToPublish) {
+    if (session.getCurrentStateToken() == null) {
+      return;
+    }
+    publishDigest(session.getCurrentStateToken(), (DigestDomImpl) digestToPublish);
+  }
+
+  public void publishDigest(final StateToken destToken, final DigestDomImpl digest) {
+    final String waveUri = digest.getWaveUri();
+    contentService.publishWave(session.getUserHash(), destToken, waveUri,
+        new AsyncCallbackSimple<StateContentDTO>() {
+      @Override
+      public void onSuccess(final StateContentDTO result) {
+        digest.setGroup(result.getGroup());
+        NotifyUser.hideProgress();
+        NotifyUser.success(I18n.t("Published"));
+        digest.removeTooltip();
+        digest.makeNotPublicable();
+        recentlyChanged.add(waveUri);
+        stateManager.setRetrievedStateAndGo(result);
+      }
+    });
   }
 }

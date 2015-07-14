@@ -37,6 +37,7 @@ import br.com.rpa.client._paperelements.PaperFab;
 import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.dnd.InboxToContainerHelper;
 import cc.kune.core.client.dnd.KuneDragController;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.spaces.Space;
@@ -51,8 +52,8 @@ public class CustomSearchPanelWidget extends SearchPanelWidget {
   @Inject
   public CustomSearchPanelWidget(final KuneWaveProfileManager profiles,
       final KuneDragController dragController, final ClientFileDownloadUtils downUtils,
-      final GSpaceArmor armor) {
-    super(new SearchPanelRenderer(profiles), dragController, downUtils, armor);
+      final GSpaceArmor armor,InboxToContainerHelper helper) {
+    super(new SearchPanelRenderer(profiles), dragController, downUtils, armor, helper);
     armor.wrapDiv(PolymerId.INBOX_RESULT).add(this);
     final PaperFab newMsg = PaperFab.wrap(PolymerId.INBOX_NEW_MESSAGE.getId());
     Tooltip.to(newMsg, I18n.t("New message"));

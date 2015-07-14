@@ -35,15 +35,14 @@ import org.waveprotocol.wave.model.id.WaveId;
 import org.waveprotocol.wave.model.util.CollectionUtils;
 import org.waveprotocol.wave.model.util.IdentityMap;
 import org.waveprotocol.wave.model.wave.SourcesEvents;
-import org.waveprotocol.wave.util.escapers.GwtWaverefEncoder;
+
+import com.google.gwt.core.client.GWT;
 
 import cc.kune.core.client.events.StateChangedEvent;
 import cc.kune.core.client.events.StateChangedEvent.StateChangedHandler;
 import cc.kune.core.client.state.StateManagerInstance;
 import cc.kune.core.shared.dto.StateAbstractDTO;
 import cc.kune.core.shared.dto.StateContentDTO;
-
-import com.google.gwt.core.client.GWT;
 
 /**
  * Presents a search model into a search view.
@@ -369,7 +368,7 @@ public final class SearchPresenter
   }
 
   private void selectWaveUri(String waveId) {
-    // Log.info("Tryint to select waveId " + waveId);
+    // Log.info("Trying to select waveId " + waveId);
     DigestView digestUi = searchUi.getFirst();
     while(digestUi != null) {
       Digest digest = digestUis.get(digestUi);

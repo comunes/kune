@@ -95,7 +95,6 @@ public final class DigestDomImpl extends Composite implements DigestView, HasDra
   SimplePanel avatarsSummary;
   private List<Profile> currentProfiles;
   private final ClientFileDownloadUtils downUtils;
-  private final KuneDragController dragController;
 
   @UiField
   SimplePanel groupAvatarContainer;
@@ -131,7 +130,6 @@ public final class DigestDomImpl extends Composite implements DigestView, HasDra
   public DigestDomImpl(SearchPanelWidget container, final KuneDragController dragController,
       final ClientFileDownloadUtils downUtils) {
     this.container = container;
-    this.dragController = dragController;
     this.downUtils = downUtils;
 
     initWidget(BINDER.createAndBindUi(this));
@@ -144,19 +142,21 @@ public final class DigestDomImpl extends Composite implements DigestView, HasDra
   }
 
   private void setGroupAvatar(final String url) {
-    groupAvatar.setUrl(url);
     groupAvatarHidden.setUrl(url);
+    groupAvatar.setUrl(url);
   }
 
+  @Deprecated
   private DragableImageParticipant createImageDragable(final String imageUrl, final String address) {
     final DragableImageParticipant participant = new DragableImageParticipant(imageUrl, address);
-    dragController.makeDraggable(participant);
+    // dragController.makeDraggable(participant);
     return participant;
   }
 
+  @Deprecated
   private DragableInitialParticipant createInitialDragable(final String address) {
     final DragableInitialParticipant participant = new DragableInitialParticipant(address);
-    dragController.makeDraggable(participant);
+    // dragController.makeDraggable(participant);
     return participant;
 
   }
@@ -164,7 +164,7 @@ public final class DigestDomImpl extends Composite implements DigestView, HasDra
   @Override
   public void deselect() {
     self.removeClassName("k-digest-selected");
-    makeNotDraggable();
+    // makeNotDraggable();
   }
 
   @Override
@@ -180,25 +180,24 @@ public final class DigestDomImpl extends Composite implements DigestView, HasDra
     return waveUri;
   }
 
-  private void makeDragable() {
+  // private void makeDragable() {
     //Tooltip.to(this, I18n.t("Drag and drop into a group or personal folder to publish"));
+    // dragController.makeDraggable(DigestDomImpl.this, title);
+    // dragController.makeDraggable(DigestDomImpl.this, snippet);
+    // dragController.makeDraggable(DigestDomImpl.this, time);
+  // }
 
-    dragController.makeDraggable(DigestDomImpl.this, title);
-    dragController.makeDraggable(DigestDomImpl.this, snippet);
-    dragController.makeDraggable(DigestDomImpl.this, time);
-  }
-
-  public void makeNotDraggable() {
-    removeTooltip();
-    try {
-      dragController.makeNotDraggable(this);
-    } catch (final RuntimeException e) {
-      // gwt-dd don't have a way to check if some widget is dragable, and as
-      // this Digest are reusable, then sometimes are dragables when is not
-      // necessary
-      Log.debug("We tried to remove a not (yet) dragable widget");
-    }
-  }
+//  public void makeNotDraggable() {
+//    removeTooltip();
+//    try {
+//      // dragController.makeNotDraggable(this);
+//    } catch (final RuntimeException e) {
+//      // gwt-dd don't have a way to check if some widget is dragable, and as
+//      // this Digest are reusable, then sometimes are dragables when is not
+//      // necessary
+//      Log.debug("We tried to remove a not (yet) dragable widget");
+//    }
+//  }
 
   @Override
   public void remove() {
@@ -230,11 +229,11 @@ public final class DigestDomImpl extends Composite implements DigestView, HasDra
     title.setText("");
     snippet.setText("");
     time.setText("");
-    groupAvatar.setUrl(downUtils.getCleanAvatarUrl());
-    groupAvatarHidden.setUrl(downUtils.getCleanAvatarUrl());
+    // Clearing this makes the publish fails...
+    // groupAvatar.setUrl(downUtils.getCleanAvatarUrl());
+    // groupAvatarHidden.setUrl(downUtils.getCleanAvatarUrl());
     msgs.setText("");
     self.removeClassName("k-digest-selected");
-    makeNotDraggable();
     currentProfiles = null;
     avatarsSummary.clear();
     position.setText("");
@@ -242,12 +241,20 @@ public final class DigestDomImpl extends Composite implements DigestView, HasDra
 
   @Override
   public void select() {
+    if (self.getClassName().contains("k-digest-selected")) {
+      // Already selected
+      return;
+    }
     self.addClassName("k-digest-selected");
-    boolean draggable = groupAvatarHidden.getWidth() > 0;
-    if (draggable) {
-      makeDragable();
+    boolean canBeShared = !(groupAvatarHidden.getWidth() > 1);
+    if (canBeShared) {
+      // makeDragable();
+      container.setShareIconEnabled(true);
+      container.setDigestToPublish(this);
     } else {
-      makeNotDraggable();
+      container.setShareIconEnabled(false);
+      container.setDigestToPublish(null);
+      // makeNotDraggable();
     }
   }
 
@@ -324,6 +331,10 @@ public final class DigestDomImpl extends Composite implements DigestView, HasDra
   public void setWaveUri(final String waveUri) {
     this.waveUri = waveUri;
     setGroupAvatar(downUtils.getGroupLogoFromWaveUri(waveUri));
+  }
+
+  public void makeNotPublicable() {
+    container.setShareIconEnabled(false);
   }
 
 }
