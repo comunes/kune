@@ -21,37 +21,37 @@ package cc.kune.wave.client;
 
 import org.waveprotocol.box.webclient.client.Session;
 import org.waveprotocol.box.webclient.search.WaveStore;
-import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.model.conversation.TitleHelper;
 import org.waveprotocol.wave.model.document.WaveContext;
+
+import com.google.gwt.user.client.History;
+import com.google.gwt.user.client.Window;
 
 import cc.kune.common.client.ui.EditableLabel;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.state.TokenMatcher;
 
-import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
-
 /**
  * Sets the browser window title to the wave title.
- * 
+ *
  * @author yurize@apache.org (Yuri Zelikov) customized for kune by @vjrj
  */
 public final class CustomWindowTitleHandler implements WaveStore.Listener {
 
-  public static CustomWindowTitleHandler install(final WaveStore waveStore, final EditableLabel editableLabel) {
+  public static CustomWindowTitleHandler install(final WaveStore waveStore,
+      final EditableLabel editableLabel) {
     return new CustomWindowTitleHandler(waveStore, editableLabel);
   }
   private final String defaultTitle;
 
+  private final EditableLabel editableLabel;
   private final WaveStore waveStore;
-  private EditableLabel editableLabel;
 
   private CustomWindowTitleHandler(final WaveStore waveStore, final EditableLabel editableLabel) {
     this.waveStore = waveStore;
-    this.editableLabel = editableLabel;    
+    this.editableLabel = editableLabel;
     defaultTitle = I18n.t("Inbox") + " - " + Session.get().getAddress();
-    
+
     // Right now we do not show the title
     editableLabel.setVisible(false);
     init();

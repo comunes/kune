@@ -1,0 +1,67 @@
+<?xml version='1.0'?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor
+  license agreements. See the NOTICE file distributed with this work for additional
+  information regarding copyright ownership. The ASF licenses this file to
+  you under the Apache License, Version 2.0 (the "License"); you may not use
+  this file except in compliance with the License. You may obtain a copy of
+  the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required
+  by applicable law or agreed to in writing, software distributed under the
+  License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS
+  OF ANY KIND, either express or implied. See the License for the specific
+  language governing permissions and limitations under the License. -->
+
+<!-- Template for DigestDomImpl Author: hearnden@google.com (David Hearnden)
+  Updated: vjrj@ourproject.org -->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g='urn:import:com.google.gwt.user.client.ui'>
+  <g:HTMLPanel ui:field="mainPanel" addStyleNames='k-digest-main'>
+
+    <div ui:field="main" class='k-digest-inner k-layout-horizontal k-layout-flex'>
+
+      <div ui:field="mainLeft" class='k-digest-mainLeft k-layout-vertical'>
+
+        <div ui:field="avatarsAndUnreadDiv" class='k-digest-avatarsAndUnreadDiv k-layout-vertical'>
+
+          <g:FlowPanel ui:field="avatarsDiv" addStyleNames='k-digest-avatarsDiv k-layout-horizontal k-layout-justified'>
+
+            <g:SimplePanel ui:field="avatarsSummary">
+            </g:SimplePanel> <!-- first avatar -->
+
+            <g:SimplePanel ui:field="groupAvatarContainer" addStyleNames='k-digest-group-avatar'>
+              <g:Image ui:field="groupAvatar" height="41px" width="41px" addStyleNames='k-digest-group-avatar-img' />
+            </g:SimplePanel>
+
+            <g:Image ui:field="groupAvatarHidden" visible="false" addStyleNames='k-digest-group-avatar-hidden' />
+
+          </g:FlowPanel> <!-- avatars -->
+
+          <g:FlowPanel ui:field="unreadDiv" addStyleNames='k-digest-unreadDiv'>
+            <g:InlineLabel ui:field='msgs'/>
+          </g:FlowPanel> <!-- msgs -->
+
+        </div>
+
+      </div><!-- mainLeft -->
+
+      <div ui:field="mainRight" class='k-digest-mainRight k-layout-vertical k-layout-flex'>
+
+        <div ui:field="titleDiv" class='k-digest-titleDiv'>
+          <g:InlineLabel ui:field="title" addStyleNames='k-digest-title'></g:InlineLabel>
+        </div> <!-- titleDiv -->
+
+        <div ui:field="snippetDiv" class='k-digest-snippetDiv'>
+          <g:InlineLabel ui:field="snippet" addStyleNames='k-digest-snippet'></g:InlineLabel>
+        </div> <!-- snippetDiv -->
+
+        <div ui:field="timeDiv" class='k-digest-timeDiv'>
+          <g:InlineLabel ui:field="time" addStyleNames='k-digest-time'></g:InlineLabel>
+          <g:InlineLabel ui:field="position"></g:InlineLabel>
+        </div> <!-- timeDiv -->
+
+      </div> <!-- mainRight -->
+
+    </div><!-- Main div -->
+
+  </g:HTMLPanel>
+</ui:UiBinder>

@@ -25,7 +25,6 @@ import java.util.Set;
 import org.waveprotocol.box.webclient.client.RemoteViewServiceMultiplexer;
 import org.waveprotocol.box.webclient.client.StageTwoProvider;
 import org.waveprotocol.box.webclient.search.WaveStore;
-import org.waveprotocol.box.webclient.widget.frame.FramedPanel;
 import org.waveprotocol.wave.client.StageOne;
 import org.waveprotocol.wave.client.StageThree;
 import org.waveprotocol.wave.client.StageTwo;
@@ -54,7 +53,6 @@ import org.waveprotocol.wave.client.wavepanel.impl.toolbar.ToolbarSwitcher;
 import org.waveprotocol.wave.client.wavepanel.view.BlipView;
 import org.waveprotocol.wave.client.wavepanel.view.dom.ModelAsViewProvider;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.BlipQueueRenderer;
-import org.waveprotocol.wave.client.wavepanel.view.dom.full.ViewFactories;
 import org.waveprotocol.wave.client.wavepanel.view.dom.full.ViewFactory;
 import org.waveprotocol.wave.client.widget.popup.PopupChromeFactory;
 import org.waveprotocol.wave.client.widget.popup.PopupFactory;
@@ -64,14 +62,14 @@ import org.waveprotocol.wave.model.id.IdGenerator;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
 
-import cc.kune.common.client.log.Log;
-import cc.kune.common.client.ui.EditableLabel;
-import cc.kune.wave.client.kspecific.AurorisColorPicker;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.inject.Provider;
 import com.google.web.bindery.event.shared.EventBus;
+
+import cc.kune.common.client.log.Log;
+import cc.kune.common.client.ui.EditableLabel;
+import cc.kune.wave.client.kspecific.AurorisColorPicker;
 
 /**
  * Stages for loading the undercurrent Wave Panel
@@ -104,26 +102,26 @@ public class CustomStagesProvider extends Stages {
   private boolean closed;
   private final Provider<AurorisColorPicker> colorPicker;
   private final CustomEditToolbar customEditToolbar;
+  private final EditableLabel editableTitle;
   private final EventBus eventBus;
   private final IdGenerator idGenerator;
   private final boolean isNewWave;
   private final String localDomain;
   private StageOne one;
-  private final Set<ParticipantId> participants;
 
+  private final Set<ParticipantId> participants;
   private final ProfileManager profiles;
   private final LogicalPanel rootPanel;
   private StageThree three;
   private StageTwo two;
+
+  private final ViewFactory viewFactory;
+
   private WaveContext wave;
-
   private final Element wavePanelElement;
-
   private final WaveRef waveRef;
   private final WaveStore waveStore;
   private final CustomSavedStateIndicator waveUnsavedIndicator;
-  private EditableLabel editableTitle;
-  private ViewFactory viewFactory;
 
   /**
    * @param wavePanelElement the DOM element to become the wave panel.
@@ -142,7 +140,7 @@ public class CustomStagesProvider extends Stages {
   public CustomStagesProvider(final Element wavePanelElement, final CustomSavedStateIndicator waveUnsavedIndicator,
       final LogicalPanel rootPanel, final EditableLabel editableTitle, final WaveRef waveRef, final RemoteViewServiceMultiplexer channel,
       final IdGenerator idGenerator, final ProfileManager profiles, final WaveStore store, final boolean isNewWave,
-      final String localDomain, final Set<ParticipantId> participants, final EventBus eventBus, final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar, ViewFactory viewFactory) {
+      final String localDomain, final Set<ParticipantId> participants, final EventBus eventBus, final Provider<AurorisColorPicker> colorPicker, final CustomEditToolbar customEditToolbar, final ViewFactory viewFactory) {
     this.waveUnsavedIndicator = waveUnsavedIndicator;
     this.wavePanelElement = wavePanelElement;
     this.editableTitle = editableTitle;

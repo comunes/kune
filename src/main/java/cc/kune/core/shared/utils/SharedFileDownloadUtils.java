@@ -154,6 +154,10 @@ public abstract class SharedFileDownloadUtils {
     return getPrefix() + "/#" + HistoryUtils.hashbang(hash);
   }
 
+  public String getCleanAvatarUrl() {
+    return getPrefix() + FileConstants.TRANSPARENT_PIXEL;
+  }
+
   /**
    * Gets the user avatar.
    *

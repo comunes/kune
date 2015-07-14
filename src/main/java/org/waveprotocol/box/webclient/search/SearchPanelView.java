@@ -84,5 +84,4 @@ public interface SearchPanelView {
    */
   void setShowMoreVisible(boolean visible);
 
-  void reRender(DigestView digestView, Digest digest);
 }

@@ -416,14 +416,10 @@ public final class SearchPresenter
     if (digestToRemove == null) {
       return;
     }
-
-    searchUi.reRender(digestToRemove, digest);
-    setSelected(digestToRemove);
-
-    // DigestView insertRef = searchUi.getNext(digestToRemove);
-//    digestToRemove.remove();
-//    DigestView newDigestUi = insertDigest(insertRef, digest);
-    // setSelected(newDigestUi);
+    DigestView insertRef = searchUi.getNext(digestToRemove);
+    digestToRemove.remove();
+    DigestView newDigestUi = insertDigest(insertRef, digest);
+    setSelected(newDigestUi);
   }
 
   @Override

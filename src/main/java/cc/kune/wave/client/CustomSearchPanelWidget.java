@@ -28,23 +28,22 @@ import org.waveprotocol.box.webclient.search.SearchPanelWidget;
 import org.waveprotocol.wave.client.events.ClientEvents;
 import org.waveprotocol.wave.client.events.WaveCreationEvent;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+
 import br.com.rpa.client._paperelements.PaperFab;
 import cc.kune.common.client.events.EventBusInstance;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.dnd.KuneDragController;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sitebar.spaces.Space;
 import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.polymer.client.PolymerId;
 import cc.kune.polymer.client.PolymerUtils;
-
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
 
 @Singleton
 public class CustomSearchPanelWidget extends SearchPanelWidget {

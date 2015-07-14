@@ -28,12 +28,14 @@ package cc.kune.polymer.client;
  *
  * @see <a
  *      href="https://www.polymer-project.org/docs/polymer/layout-attrs.html">Polymer
- *      layouts</a>
+ *      layouts</a> and
+ *      <a href="https://github.com/Polymer/polymer/blob/0.5.x/layout.html">this</a>.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public enum Layout {
   /* @formatter:off */
+
   AROUND_JUSTIFIED("around-justified"),
   AUTO_VERTICAL("auto-vertical"),
   BLOCK("block"),

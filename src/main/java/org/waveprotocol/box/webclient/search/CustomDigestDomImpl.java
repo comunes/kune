@@ -102,7 +102,6 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   FlowPanel avatarsDiv;
   @UiField
   SimplePanel avatarsSummary;
-  private final SearchPanelWidget container;
   private List<Profile> currentProfiles;
   private final ClientFileDownloadUtils downUtils;
   private final KuneDragController dragController;
@@ -133,9 +132,8 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   FlowPanel unreadDiv;
   private String waveUri;
 
-  public CustomDigestDomImpl(final SearchPanelWidget container, final KuneDragController dragController,
+  public CustomDigestDomImpl(final KuneDragController dragController,
       final ClientFileDownloadUtils downUtils) {
-    this.container = container;
     this.dragController = dragController;
     this.downUtils = downUtils;
 
@@ -236,9 +234,8 @@ public final class CustomDigestDomImpl extends Composite implements DigestView, 
   @Override
   public void remove() {
     // TODO
-    // self.removeFromParent();
+    self.removeFromParent();
     setVisible(false);
-    container.onDigestRemoved(this);
   }
 
   public void removeTooltip() {

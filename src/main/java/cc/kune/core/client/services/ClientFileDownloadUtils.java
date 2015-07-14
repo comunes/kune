@@ -30,6 +30,7 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.utils.ChangedLogosRegistry;
 import cc.kune.core.shared.utils.SharedFileDownloadUtils;
 
+import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.inject.Inject;
 

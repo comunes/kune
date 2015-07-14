@@ -91,8 +91,4 @@ public class DummySearchPanelView implements SearchPanelView {
   public void setTitleText(final String arg0) {
   }
 
-  @Override
-  public void reRender(DigestView digestView, Digest digest) {
-  }
-
 }
