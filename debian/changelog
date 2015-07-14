@@ -1,5 +1,6 @@
 kune (1.0.1+b12) unstable; urgency=medium
 
+  * Improved search panel, and publishing
   * Some minor style changes in home
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 13 Jul 2015 10:35:39 +0200
