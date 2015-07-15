@@ -1,5 +1,6 @@
 kune (1.0.1+b13) unstable; urgency=medium
 
+  * Fix modal exception in FF
   * Fix position issue with lang selectors in FF
   * Move content only for collaborators
 

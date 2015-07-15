@@ -25,12 +25,6 @@ package cc.kune.common.client.ui.dialogs;
 
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.Modal;
-import org.gwtbootstrap3.client.ui.constants.IconType;
-
-import cc.kune.common.client.log.Log;
-import cc.kune.common.client.tooltip.Tooltip;
-import cc.kune.common.shared.res.KuneIcon;
-import cc.kune.common.shared.utils.TextUtils;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
@@ -43,12 +37,17 @@ import com.google.gwt.i18n.client.HasDirection.Direction;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.AttachDetachException;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HasDirectionalText;
 import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
+
+import cc.kune.common.client.log.Log;
+import cc.kune.common.client.tooltip.Tooltip;
+import cc.kune.common.shared.utils.TextUtils;
 
 public class BSBasicDialog extends Composite implements BasicDialogView, HasCloseHandlers<BSBasicDialog> {
 
@@ -142,13 +141,13 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getFirstBtn()
    */
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.ui.dialogs.BasicDialogView#getInnerPanel()
    */
 
@@ -159,7 +158,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setCloseBtnTooltip(java
    * .lang.String)
@@ -172,7 +171,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setCloseBtnVisible(boolean
    * )
@@ -209,7 +208,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   @Override
   public void setCloseBtnVisible(final boolean visible) {
-    modalHeader.setClosable(visible);   
+    modalHeader.setClosable(visible);
   }
 
   public void setDialogHeight(final String height) {
@@ -249,7 +248,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnText(java.
    * lang.String)
@@ -273,7 +272,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnTitle(java
    * .lang.String)
@@ -292,7 +291,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.ui.dialogs.BasicDialogView#setSecondBtnVisible(boolean
    * )
@@ -364,7 +363,7 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
   public void setTitleIcon(final ImageResource img) {
     modalHeader.setIconResource(img);
   }
-  
+
   /**
    * Sets the title icon css
    *
@@ -398,10 +397,14 @@ public class BSBasicDialog extends Composite implements BasicDialogView, HasClos
   }
 
   public void show() {
-    if (!modal.isAttached()) {
-      RootPanel.get().add(this);
+    try {
+      if (!this.isAttached()) {
+        RootPanel.get().add(this);
+      }
+      modal.show();
+    } catch (AttachDetachException e) {
+      // This happens mainly in FF
+      Log.debug("Attach modal fails");
     }
-    modal.show();
   }
-
 }
