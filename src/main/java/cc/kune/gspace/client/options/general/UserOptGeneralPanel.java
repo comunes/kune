@@ -123,9 +123,9 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     longName = UserFieldFactory.createUserLongName(LONG_NAME_FIELD);
     add(longName);
     langSelector.setLangTitle(i18n.t("Your language"));
-    langSelector.setLangSeparator(":");
+    langSelector.setLangSeparator(" ");
     langSelector.setTitleWidth("100px");
-    add(langSelector);
+
 
     email = UserFieldFactory.createUserEmail(EMAIL_FIELD);
     add(email);
@@ -180,11 +180,13 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
     resendEmailVerifAdapter.setWidth(DefaultFormUtils.BIG_FIELD_SIZE);
     // resendEmailVerifAdapter.setFieldLabel(i18n.t("Maybe you want receive again our verification email"));
     add(resendEmailVerifAdapter);
+
+    add(langSelector);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.general.UserOptGeneralView#getEmail()
    */
   @Override
@@ -194,7 +196,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.general.UserOptGeneralView#getEmailNotif()
    */
@@ -215,7 +217,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.general.UserOptGeneralView#getLanguage()
    */
   @Override
@@ -225,7 +227,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.general.UserOptGeneralView#getLongName()
    */
   @Override
@@ -235,7 +237,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.general.UserOptGeneralView#getResendEmailVerif
    * ()
@@ -247,7 +249,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.general.UserOptGeneralView#setEmail(java.
    * lang.String)
@@ -259,7 +261,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.general.UserOptGeneralView#setEmailNotifChecked
    * (cc.kune.core.shared.dto.EmailNotificationFrequency)
@@ -286,7 +288,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.general.UserOptGeneralView#setEmailVerified
    * (boolean)
@@ -300,7 +302,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.general.UserOptGeneralView#setLanguage(cc
    * .kune.core.shared.dto.I18nLanguageSimpleDTO)
@@ -312,7 +314,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.options.general.UserOptGeneralView#setLongName(java
    * .lang.String)
@@ -324,7 +326,7 @@ public class UserOptGeneralPanel extends EntityOptGeneralPanel implements UserOp
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.options.general.UserOptGeneralView#
    * setResendEmailVerifEnabled(boolean)
    */
