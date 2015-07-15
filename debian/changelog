@@ -1,3 +1,9 @@
+kune (1.0.1+b13) unstable; urgency=medium
+
+  * Move content only for collaborators
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 15 Jul 2015 16:59:06 +0200
+
 kune (1.0.1+b12) unstable; urgency=medium
 
   * Improved search panel, and publishing

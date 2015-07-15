@@ -22,31 +22,32 @@
  */
 package cc.kune.gspace.client.actions;
 
-import cc.kune.common.client.actions.AbstractExtendedAction;
+import com.google.inject.Inject;
+
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.actions.RolAction;
+import cc.kune.core.shared.dto.AccessRolDTO;
 
-import com.google.inject.Inject;
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class MoveContentSimpleAction.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class MoveContentSimpleAction extends AbstractExtendedAction {
+public class MoveContentSimpleAction extends RolAction {
 
   /**
    * Instantiates a new move content simple action.
    */
   @Inject
   public MoveContentSimpleAction() {
+    super(AccessRolDTO.Editor, true);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune.common
    * .client.actions.ActionEvent)
