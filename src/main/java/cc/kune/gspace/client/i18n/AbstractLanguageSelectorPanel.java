@@ -32,6 +32,7 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
 
 import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.watopi.chosen.client.ChosenOptions;
 import com.watopi.chosen.client.event.ChosenChangeEvent;
@@ -43,7 +44,7 @@ import com.watopi.chosen.client.gwt.ChosenListBox;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public abstract class AbstractLanguageSelectorPanel extends FlowPanel {
+public abstract class AbstractLanguageSelectorPanel extends HorizontalPanel {
 
   /** The Constant LANG_FIELD. */
   public static final String LANG_FIELD = "k-langsp-lf";
@@ -94,6 +95,7 @@ public abstract class AbstractLanguageSelectorPanel extends FlowPanel {
     titlePanel.add(fieldSep);
     super.add(titlePanel);
     super.add(langChoose);
+    super.addStyleName("k-clean");
   }
 
   /**
