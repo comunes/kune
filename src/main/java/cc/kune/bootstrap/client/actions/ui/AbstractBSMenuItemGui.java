@@ -22,17 +22,19 @@
  */
 package cc.kune.bootstrap.client.actions.ui;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.ui.Widget;
+
 import cc.kune.bootstrap.client.ui.ComplexAnchorListItem;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.KeyStroke;
 import cc.kune.common.client.actions.ui.AbstractGuiItem;
 import cc.kune.common.client.actions.ui.ParentWidget;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.resources.CommonResources;
 import cc.kune.common.shared.res.KuneIcon;
-
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * The Class AbstractBSMenuItemGui.
@@ -59,6 +61,15 @@ public abstract class AbstractBSMenuItemGui extends AbstractBSChildGuiItem {
     configureItemFromProperties();
     configureClickListener();
     return this;
+  }
+
+
+  protected void closeParentMenu(final ClickEvent event) {
+    try {
+      getParentMenu(descriptor).hide();
+    } catch (final ClassCastException e) {
+      Log.error("Failed to close parent widget" + descriptor.getParent());
+    }
   }
 
   protected abstract ComplexAnchorListItem createMenuItem();

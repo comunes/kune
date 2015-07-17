@@ -1,3 +1,11 @@
+kune (1.0.1+b14) unstable; urgency=medium
+
+  * Don't store hash in logs
+  * Proper icons in error dialog for success events
+  * Close menus on radio/check menu items
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 17 Jul 2015 02:37:05 +0200
+
 kune (1.0.1+b13) unstable; urgency=medium
 
   * Fix some visibility issue in user preferences and FF

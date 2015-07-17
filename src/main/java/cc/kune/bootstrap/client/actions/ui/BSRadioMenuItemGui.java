@@ -61,6 +61,7 @@ public class BSRadioMenuItemGui extends AbstractBSMenuItemGui {
     item.addClickHandler(new ClickHandler() {
       @Override
       public void onClick(final ClickEvent event) {
+        closeParentMenu(event);
         final AbstractAction action = descriptor.getAction();
         if (action != null) {
           if (descriptor instanceof MenuRadioItemDescriptor) {

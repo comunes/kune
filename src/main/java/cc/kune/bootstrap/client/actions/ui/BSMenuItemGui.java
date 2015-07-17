@@ -38,19 +38,12 @@ public class BSMenuItemGui extends AbstractBSMenuItemGui {
   @Override
   protected void configureClickListener() {
     item.addClickHandler(new ClickHandler() {
-
       @Override
       public void onClick(final ClickEvent event) {
-        // It's this necessary?
-        try {
-          getParentMenu(descriptor).hide();
-        } catch (final ClassCastException e) {
-          Log.error("Failed to close parent widget" + descriptor.getParent());
-        }
+        closeParentMenu(event);
         clickHandlerChildDefault.onClick(event);
       }
     });
-
   }
 
   @Override
