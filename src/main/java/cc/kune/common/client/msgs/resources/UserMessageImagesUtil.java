@@ -46,6 +46,8 @@ public class UserMessageImagesUtil {
     case important:
       return UserMessageImages.INST.important();
     case info:
+    case success:
+    case avatar:
       return UserMessageImages.INST.info();
     case veryImportant:
       return UserMessageImages.INST.warning();
