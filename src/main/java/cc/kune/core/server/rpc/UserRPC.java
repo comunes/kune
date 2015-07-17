@@ -341,7 +341,7 @@ public class UserRPC implements RPC, UserService {
   private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
     if (user != null) {
       userSessionManager.login(user.getId(), waveToken);
-      userSignInLogManager.log(user, null, null, waveToken);
+      userSignInLogManager.log(user, null, null, null);
       return loadUserInfo(user);
     } else {
       throw new UserAuthException();

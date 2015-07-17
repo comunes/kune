@@ -46,7 +46,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserSignInLog records the user signins for stats purposes.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
@@ -93,7 +93,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Instantiates a new user sign in log.
-   * 
+   *
    * @param user
    *          the user
    * @param ipAddress
@@ -109,12 +109,13 @@ public class UserSignInLog implements HasId {
     final long now = System.currentTimeMillis();
     this.signInDate = now;
     this.userAgent = userAgent;
-    this.hash = hash;
+    // We don't need to store this !?
+    this.hash = null;
   }
 
   /**
    * Gets the hash.
-   * 
+   *
    * @return the hash
    */
   public String getHash() {
@@ -123,7 +124,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the id.
-   * 
+   *
    * @return the id
    */
   @Override
@@ -133,7 +134,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the ip address.
-   * 
+   *
    * @return the ip address
    */
   public String getIpAddress() {
@@ -142,7 +143,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the sign in date.
-   * 
+   *
    * @return the sign in date
    */
   public Long getSignInDate() {
@@ -151,7 +152,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the user.
-   * 
+   *
    * @return the user
    */
   public User getUser() {
@@ -160,7 +161,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Gets the user agent.
-   * 
+   *
    * @return the user agent
    */
   public String getUserAgent() {
@@ -169,7 +170,7 @@ public class UserSignInLog implements HasId {
 
   /**
    * Sets the id.
-   * 
+   *
    * @param id
    *          the new id
    */
