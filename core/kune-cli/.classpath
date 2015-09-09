@@ -9,7 +9,7 @@
   <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
   <classpathentry kind="var" path="M2_REPO/org/naturalcli/naturalcli/1.2.3/naturalcli-1.2.3.jar"/>
   <classpathentry kind="var" path="M2_REPO/com/googlecode/gwtrpccommlayer/0.0.1/gwtrpccommlayer-0.0.1.jar"/>
-  <classpathentry kind="var" path="M2_REPO/cc/kune/kune-services/0.3.0-SNAPSHOT/kune-services-0.3.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/cc/kune/kune-services/1.0.1-SNAPSHOT/kune-services-1.0.1-SNAPSHOT.jar"/>
   <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1-sources.jar"/>
   <classpathentry kind="var" path="M2_REPO/junit/junit/4.9/junit-4.9.jar"/>
   <classpathentry kind="var" path="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" sourcepath="M2_REPO/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1-sources.jar"/>
