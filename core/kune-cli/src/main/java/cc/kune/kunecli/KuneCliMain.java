@@ -32,28 +32,25 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.naturalcli.Command;
 import org.naturalcli.ExecutionException;
-import org.naturalcli.ICommandExecutor;
 import org.naturalcli.InvalidSyntaxException;
 import org.naturalcli.NaturalCLI;
-import org.naturalcli.ParseResult;
 import org.naturalcli.commands.ExecuteFileCommand;
 import org.naturalcli.commands.HTMLHelpCommand;
 import org.naturalcli.commands.HelpCommand;
-import org.naturalcli.commands.SleepCommand;
 
-import cc.kune.core.client.rpcservices.I18nServiceAsync;
-import cc.kune.core.client.rpcservices.SiteServiceAsync;
-import cc.kune.core.client.rpcservices.UserServiceAsync;
-import cc.kune.core.shared.dto.I18nLanguageDTO;
-import cc.kune.core.shared.dto.InitDataDTO;
-
-import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.googlecode.gwtrpccommlayer.client.GwtRpcService;
 import com.googlecode.gwtrpccommlayer.client.Module;
 
-// TODO: Auto-generated Javadoc
+import cc.kune.core.client.rpcservices.I18nServiceAsync;
+import cc.kune.core.client.rpcservices.SiteServiceAsync;
+import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.kunecli.cmds.AuthCommand;
+import cc.kune.kunecli.cmds.GetI18nLangCommand;
+import cc.kune.kunecli.cmds.GetInitDataCommand;
+import cc.kune.kunecli.cmds.HelloWorldCommand;
+
 /**
  * The Class KuneCliMain.
  *
@@ -61,49 +58,60 @@ import com.googlecode.gwtrpccommlayer.client.Module;
  */
 public class KuneCliMain {
 
-  /** The i18n service. */
-  private static I18nServiceAsync i18nService;
-
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(KuneCliMain.class);
 
   /** The Constant SERVICE_PREFFIX. */
   private static final String SERVICE_PREFFIX = "http://127.0.0.1:8888/ws/";
 
-  /** The site service. */
-  private static SiteServiceAsync siteService;
-
-  /** The user service. */
-  private static UserServiceAsync userService;
+  private static Injector injector;
 
   /**
    * Inits the services.
    *
-   * @throws MalformedURLException the malformed url exception
+   * @throws MalformedURLException
+   *           the malformed url exception
    */
   private static void initServices() throws MalformedURLException {
     // http://code.google.com/p/gwtrpccommlayer/wiki/GettingStarted
     // http://googlewebtoolkit.blogspot.com.es/2010/07/gwtrpccommlayer-extending-gwt-rpc-to-do.html
-    final Injector injector = Guice.createInjector(new Module());
+    final Injector partentInjector = Guice.createInjector(new Module() {
+    });
 
-    final GwtRpcService service = injector.getInstance(GwtRpcService.class);
-
-    // TODO javadoc of this services
-    userService = service.create(new URL(SERVICE_PREFFIX + "UserService"), UserServiceAsync.class);
-    siteService = service.create(new URL(SERVICE_PREFFIX + "SiteService"), SiteServiceAsync.class);
-    i18nService = service.create(new URL(SERVICE_PREFFIX + "I18nService"), I18nServiceAsync.class);
+    final GwtRpcService service = partentInjector.getInstance(GwtRpcService.class);
+    injector = partentInjector.createChildInjector(new Module() {
+      protected void configure() {
+        try {
+          UserServiceAsync userService = service.create(new URL(SERVICE_PREFFIX + "UserService"),
+              UserServiceAsync.class);
+          SiteServiceAsync siteService = service.create(new URL(SERVICE_PREFFIX + "SiteService"),
+              SiteServiceAsync.class);
+          I18nServiceAsync i18nService = service.create(new URL(SERVICE_PREFFIX + "I18nService"),
+              I18nServiceAsync.class);
+          bind(UserServiceAsync.class).toInstance(userService);
+          bind(SiteServiceAsync.class).toInstance(siteService);
+          bind(I18nServiceAsync.class).toInstance(i18nService);
+        } catch (MalformedURLException e) {
+          LOG.error("Malformed URL", e);
+        }
+      };
+    });
   }
 
   /**
    * The main method.
    *
-   * @param args the arguments
-   * @throws InvalidSyntaxException the invalid syntax exception
-   * @throws ExecutionException the execution exception
-   * @throws MalformedURLException the malformed url exception
+   * @param args
+   *          the arguments
+   * @throws InvalidSyntaxException
+   *           the invalid syntax exception
+   * @throws ExecutionException
+   *           the execution exception
+   * @throws MalformedURLException
+   *           the malformed url exception
    */
-  public static void main(final String[] args) throws InvalidSyntaxException, ExecutionException,
-      MalformedURLException {
+  public static void main(final String[] args)
+      throws InvalidSyntaxException, ExecutionException, MalformedURLException {
 
     initServices();
 
@@ -113,81 +121,6 @@ public class KuneCliMain {
     // http://sourceforge.net/projects/javacurses/
     // http://massapi.com/class/jcurses/widgets/Button.java.html
 
-    final Command showDateCommand = new Command("hello world [<name:string>]",
-        "Says hello to the world and, maybe, especially to someone.", new ICommandExecutor() {
-          @Override
-          public void execute(final ParseResult pr) {
-            System.out.print("Hello world!");
-            if (pr.getParameterCount() == 0) {
-              System.out.println();
-            } else {
-              final String p0 = pr.getParameterValue(0).toString();
-              System.out.println(" And hello especially to " + p0);
-            }
-          }
-        });
-
-    final Command auth = new Command("auth <user:string> <pass:string>", "auth to kune",
-        new ICommandExecutor() {
-
-          @Override
-          public void execute(final ParseResult pr) throws ExecutionException {
-            final String user = pr.getParameterValue(0).toString();
-            final String pass = pr.getParameterValue(1).toString();
-            userService.checkUserAndHash("admin", "easyeasy", new AsyncCallback<Void>() {
-              // userService.login(user, pass, "FIXME", new
-              // AsyncCallback<UserInfoDTO>() {
-
-              @Override
-              public void onFailure(final Throwable caught) {
-                System.out.println("Auth Failure: " + caught.getMessage());
-              }
-
-              @Override
-              // public void onSuccess(final UserInfoDTO result) {
-              public void onSuccess(final Void result) {
-                // TODO Auto-generated method stub
-                System.out.println("Auth Success");
-              }
-            });
-          }
-        });
-
-    final Command init = new Command("siteGetInitData", "gets the initial data", new ICommandExecutor() {
-      @Override
-      public void execute(final ParseResult parseResult) throws ExecutionException {
-        siteService.getInitData("", new AsyncCallback<InitDataDTO>() {
-          @Override
-          public void onFailure(final Throwable caught) {
-            System.out.println("Init Failure: " + caught.getMessage());
-          }
-
-          @Override
-          public void onSuccess(final InitDataDTO result) {
-            System.out.println("Init Success");
-          }
-        });
-      }
-    });
-
-    final Command i18nInitLang = new Command("i18nGetInitLang", "gets the initial language",
-        new ICommandExecutor() {
-          @Override
-          public void execute(final ParseResult parseResult) throws ExecutionException {
-            i18nService.getInitialLanguage(null, new AsyncCallback<I18nLanguageDTO>() {
-              @Override
-              public void onFailure(final Throwable caught) {
-                System.out.println("Init Failure: " + caught.getMessage());
-              }
-
-              @Override
-              public void onSuccess(final I18nLanguageDTO result) {
-                System.out.println("Init Success");
-              }
-            });
-          }
-        });
-
     // Create an empty command set
     final Set<Command> cs = new HashSet<Command>();
 
@@ -195,17 +128,19 @@ public class KuneCliMain {
     final NaturalCLI nc = new NaturalCLI(cs);
 
     // Add the commands that can be understood
-    cs.add(showDateCommand);
     cs.add(new HelpCommand(cs)); // help
     cs.add(new HTMLHelpCommand(cs)); // htmlhelp
-    cs.add(new SleepCommand()); // sleep <seconds:number>
+    cs.add(new HelloWorldCommand());
+    // cs.add(new SleepCommand()); // sleep <seconds:number>
 
     // A script can be useful for kune
     cs.add(new ExecuteFileCommand(nc)); // execute file <filename:string>
 
-    cs.add(init);
-    cs.add(auth);
-    cs.add(i18nInitLang);
+    // kune specific commands
+    cs.add(injector.getInstance(GetInitDataCommand.class));
+    cs.add(injector.getInstance(GetI18nLangCommand.class));
+    cs.add(injector.getInstance(AuthCommand.class));
+
     // Execute the command line
     nc.execute(args, 0);
   }
