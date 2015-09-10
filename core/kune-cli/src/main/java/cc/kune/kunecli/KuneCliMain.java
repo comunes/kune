@@ -63,16 +63,16 @@ public class KuneCliMain {
 
   /** The i18n service. */
   private static I18nServiceAsync i18nService;
-  
+
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(KuneCliMain.class);
-  
+
   /** The Constant SERVICE_PREFFIX. */
   private static final String SERVICE_PREFFIX = "http://127.0.0.1:8888/ws/";
-  
+
   /** The site service. */
   private static SiteServiceAsync siteService;
-  
+
   /** The user service. */
   private static UserServiceAsync userService;
 
@@ -118,10 +118,10 @@ public class KuneCliMain {
           @Override
           public void execute(final ParseResult pr) {
             System.out.print("Hello world!");
-            final String p0 = pr.getParameterValue(0).toString();
-            if (p0 == null) {
+            if (pr.getParameterCount() == 0) {
               System.out.println();
             } else {
+              final String p0 = pr.getParameterValue(0).toString();
               System.out.println(" And hello especially to " + p0);
             }
           }
