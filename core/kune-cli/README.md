@@ -17,3 +17,10 @@ or
 ```bash
 mvn exec:java -Dexec.args="hello world John"
 ```
+also you can package and use the jar:
+
+```bash
+mvn package
+mvn assembly:single
+java -jar target/kune-cli-0.0.1-SNAPSHOT-jar-with-dependencies.jar help
+```

@@ -9,6 +9,7 @@
   </parent>
   <artifactId>kune-cli</artifactId>
   <description>Kune command line interface</description>
+  <packaging>jar</packaging>
   <repositories>
     <repository>
       <id>comunes-snapshots</id>
@@ -86,6 +87,12 @@
   <build>
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <version>2.2</version>
+        <!-- nothing here -->
+      </plugin>
+      <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>exec-maven-plugin</artifactId>
         <version>1.2</version>
@@ -101,6 +108,28 @@
           <mainClass>cc.kune.kunecli.KuneCliMain</mainClass>
         </configuration>
       </plugin>
-    </plugins>
+      <plugin>
+        <artifactId>maven-assembly-plugin</artifactId>
+        <version>2.4</version>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>single</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+          </descriptorRefs>
+          <archive>
+            <manifest>
+              <mainClass>cc.kune.kunecli.KuneCliMain</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+ </plugins>
   </build>
 </project>
