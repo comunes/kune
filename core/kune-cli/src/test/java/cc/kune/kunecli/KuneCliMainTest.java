@@ -22,7 +22,7 @@
  */
 
 /**
- * 
+ *
  */
 package cc.kune.kunecli;
 
@@ -43,9 +43,12 @@ public class KuneCliMainTest {
   /**
    * Test basic auth.
    *
-   * @throws InvalidSyntaxException the invalid syntax exception
-   * @throws ExecutionException the execution exception
-   * @throws MalformedURLException the malformed url exception
+   * @throws InvalidSyntaxException
+   *           the invalid syntax exception
+   * @throws ExecutionException
+   *           the execution exception
+   * @throws MalformedURLException
+   *           the malformed url exception
    */
   @Test
   public void testBasicAuth() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
@@ -57,9 +60,12 @@ public class KuneCliMainTest {
   /**
    * Test basic hello.
    *
-   * @throws InvalidSyntaxException the invalid syntax exception
-   * @throws ExecutionException the execution exception
-   * @throws MalformedURLException the malformed url exception
+   * @throws InvalidSyntaxException
+   *           the invalid syntax exception
+   * @throws ExecutionException
+   *           the execution exception
+   * @throws MalformedURLException
+   *           the malformed url exception
    */
   @Test
   public void testBasicHello() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
@@ -71,9 +77,12 @@ public class KuneCliMainTest {
   /**
    * Test basic init.
    *
-   * @throws InvalidSyntaxException the invalid syntax exception
-   * @throws ExecutionException the execution exception
-   * @throws MalformedURLException the malformed url exception
+   * @throws InvalidSyntaxException
+   *           the invalid syntax exception
+   * @throws ExecutionException
+   *           the execution exception
+   * @throws MalformedURLException
+   *           the malformed url exception
    */
   @Test
   public void testBasicInit() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
@@ -85,15 +94,18 @@ public class KuneCliMainTest {
   /**
    * Test basic init lang.
    *
-   * @throws InvalidSyntaxException the invalid syntax exception
-   * @throws ExecutionException the execution exception
-   * @throws MalformedURLException the malformed url exception
+   * @throws InvalidSyntaxException
+   *           the invalid syntax exception
+   * @throws ExecutionException
+   *           the execution exception
+   * @throws MalformedURLException
+   *           the malformed url exception
    */
   @Test
-  public void testBasicInitLang() throws InvalidSyntaxException, ExecutionException,
-      MalformedURLException {
+  public void testBasicInitLang()
+      throws InvalidSyntaxException, ExecutionException, MalformedURLException {
     final KuneCliMain cli = new KuneCliMain();
-    final String[] args = new String[] { "i18nGetInitLang" };
+    final String[] args = new String[] { "siteGetI18nLang" };
     KuneCliMain.main(args);
   }
 

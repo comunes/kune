@@ -40,7 +40,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class KunePropertiesDefault.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -58,7 +58,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /**
    * Instantiates a new kune properties default.
-   * 
+   *
    * @param fileName
    *          the file name
    */
@@ -82,7 +82,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /**
    * Check null.
-   * 
+   *
    * @param key
    *          the key
    * @param value
@@ -98,7 +98,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.properties.KuneProperties#get(java.lang.String)
    */
   @Override
@@ -110,7 +110,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.properties.KuneProperties#get(java.lang.String,
    * java.lang.String)
    */
@@ -122,7 +122,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.properties.KuneProperties#getBoolean(java.lang.String)
    */
@@ -135,7 +135,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.properties.KuneProperties#getInteger(java.lang.String)
    */
@@ -148,7 +148,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.properties.KuneProperties#getList(java.lang.String)
    */
@@ -162,7 +162,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.properties.KuneProperties#getLong(java.lang.String)
    */
@@ -175,7 +175,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.properties.KunePropertiesDefaultMBean#getProperty(java
    * .lang.String)
@@ -187,7 +187,7 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.properties.KuneProperties#has(java.lang.String)
    */
   @Override
@@ -211,18 +211,19 @@ public class KunePropertiesDefault implements KuneProperties, KunePropertiesDefa
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.properties.KunePropertiesDefaultMBean#reload()
    */
   @Override
   public void reload() {
     /* Don't catch any exception */
+    LOG.info("Reloading properties");
     this.loadConfiguration();
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.properties.KunePropertiesDefaultMBean#setProperty(java
    * .lang.String, java.lang.String)

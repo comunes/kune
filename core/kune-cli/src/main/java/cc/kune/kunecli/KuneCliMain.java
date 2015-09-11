@@ -50,6 +50,7 @@ import cc.kune.kunecli.cmds.AuthCommand;
 import cc.kune.kunecli.cmds.GetI18nLangCommand;
 import cc.kune.kunecli.cmds.GetInitDataCommand;
 import cc.kune.kunecli.cmds.HelloWorldCommand;
+import cc.kune.kunecli.cmds.ReloadPropertiesCommand;
 
 /**
  * The Class KuneCliMain.
@@ -58,13 +59,13 @@ import cc.kune.kunecli.cmds.HelloWorldCommand;
  */
 public class KuneCliMain {
 
+  private static Injector injector;
+
   /** The Constant LOG. */
   public static final Log LOG = LogFactory.getLog(KuneCliMain.class);
 
   /** The Constant SERVICE_PREFFIX. */
   private static final String SERVICE_PREFFIX = "http://127.0.0.1:8888/ws/";
-
-  private static Injector injector;
 
   /**
    * Inits the services.
@@ -76,26 +77,32 @@ public class KuneCliMain {
     // http://code.google.com/p/gwtrpccommlayer/wiki/GettingStarted
     // http://googlewebtoolkit.blogspot.com.es/2010/07/gwtrpccommlayer-extending-gwt-rpc-to-do.html
     final Injector partentInjector = Guice.createInjector(new Module() {
+      @Override
+      protected void configure() {
+        super.configure();
+      }
     });
 
     final GwtRpcService service = partentInjector.getInstance(GwtRpcService.class);
     injector = partentInjector.createChildInjector(new Module() {
+      @Override
       protected void configure() {
         try {
-          UserServiceAsync userService = service.create(new URL(SERVICE_PREFFIX + "UserService"),
+          final UserServiceAsync userService = service.create(new URL(SERVICE_PREFFIX + "UserService"),
               UserServiceAsync.class);
-          SiteServiceAsync siteService = service.create(new URL(SERVICE_PREFFIX + "SiteService"),
+          final SiteServiceAsync siteService = service.create(new URL(SERVICE_PREFFIX + "SiteService"),
               SiteServiceAsync.class);
-          I18nServiceAsync i18nService = service.create(new URL(SERVICE_PREFFIX + "I18nService"),
+          final I18nServiceAsync i18nService = service.create(new URL(SERVICE_PREFFIX + "I18nService"),
               I18nServiceAsync.class);
           bind(UserServiceAsync.class).toInstance(userService);
           bind(SiteServiceAsync.class).toInstance(siteService);
           bind(I18nServiceAsync.class).toInstance(i18nService);
-        } catch (MalformedURLException e) {
+        } catch (final MalformedURLException e) {
           LOG.error("Malformed URL", e);
         }
       };
     });
+
   }
 
   /**
@@ -140,7 +147,7 @@ public class KuneCliMain {
     cs.add(injector.getInstance(GetInitDataCommand.class));
     cs.add(injector.getInstance(GetI18nLangCommand.class));
     cs.add(injector.getInstance(AuthCommand.class));
-
+    cs.add(injector.getInstance(ReloadPropertiesCommand.class));
     // Execute the command line
     nc.execute(args, 0);
   }

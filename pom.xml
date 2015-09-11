@@ -1123,6 +1123,8 @@
                 <include>**/shared/domain/utils/*</include>
                 <include>**/shared/dto/*</include>
                 <include>**/client/errors/*</include>
+                <include>**/**MBean**</include>
+                <include>**/**WaveClientSimpleAuthenticator**</include>
               </includes>
             </configuration>
           </execution>
