@@ -21,17 +21,30 @@ if [[ -z $JAVA_HOME ]]; then
 fi
 
 TOOLS="$JAVA_HOME/lib/tools.jar"
-JAR="./target/kune-cli-1.0.1-SNAPSHOT-jar-with-dependencies.jar"
+
+JAR=""
+DEV_JAR="./target/kune-cli-1.0.1-SNAPSHOT-jar-with-dependencies.jar"
+PROD_JAR="/usr/share/kune/lib/kune-cli-complete.jar"
+
+if [[ -e $DEV_JAR ]]
+then
+    JAR=$DEV_JAR
+else
+    if [[ -e $PROD_JAR ]]
+    then
+        JAR=$PROD_JAR
+    fi
+fi
 
 if [[ ! -e $TOOLS ]]
 then
-  echo "Dependency tools.jar not found with JAVA_HOME=$JAVA_HOME: We search in: $TOOLS"
+    echo "Dependency tools.jar not found with JAVA_HOME=$JAVA_HOME: We search in: $TOOLS"
   exit 1
 fi
 
 if [[ ! -e $JAR ]]
 then
-  echo "We didn't found $JAR (the kune-cli jar)."
+  echo "We didn't found the kune-cli jar."
   exit 1
 fi
 

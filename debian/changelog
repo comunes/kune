@@ -1,3 +1,15 @@
+kune (1.0.1+b15) unstable; urgency=medium
+
+  * Improved kune-cli, Kune Command Line Interface (commands, jmx operations)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 12 Sep 2015 17:40:51 +0200
+
+kune-cli (1.0.1+b15) unstable; urgency=medium
+
+  * First debian packaging of kune-cli (Kune Command Line Interface)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 12 Sep 2015 17:40:51 +0200
+
 kune (1.0.1+b14) unstable; urgency=medium
 
   * Don't store hash in logs
