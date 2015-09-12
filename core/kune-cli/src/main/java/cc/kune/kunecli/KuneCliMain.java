@@ -55,6 +55,7 @@ import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.kunecli.cmds.AuthCommand;
 import cc.kune.kunecli.cmds.HelloWorldCommand;
+import cc.kune.kunecli.cmds.InviteCommand;
 import cc.kune.kunecli.cmds.ReloadPropertiesCommand;
 
 /**
@@ -168,6 +169,7 @@ public class KuneCliMain {
     // kune specific commands
     cs.add(injector.getInstance(AuthCommand.class));
     cs.add(injector.getInstance(ReloadPropertiesCommand.class));
+    cs.add(injector.getInstance(InviteCommand.class));
 
     // As the return type of these commands are not java.io.Serializable (and
     // instead GWT's IsSerializable) the return part of this cmds fails
