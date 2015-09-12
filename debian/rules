@@ -29,7 +29,7 @@ LOGDIR := $(DEST)/var/log/kune
 VARDIR := $(DEST)/var/lib/kune
 THUMBDIR := $(DEST)/var/lib/kune/thumbnail_patterns
 TARGETJAR := $(TARGET)/kune-$(KUNE_VERSION)-complete.jar
-CLITARGETJAR := $(CLITARGET)/kune-$(KUNE_VERSION)-jar-with-dependencies.jar
+CLITARGETJAR := $(CLITARGET)/kune-cli-$(KUNE_VERSION)-jar-with-dependencies.jar
 
 NO_GWT=true
 
