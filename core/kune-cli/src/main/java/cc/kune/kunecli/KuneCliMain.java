@@ -70,8 +70,8 @@ public class KuneCliMain {
   public static final Log LOG = LogFactory.getLog(KuneCliMain.class);
 
   /** The Constant SERVICE_PREFFIX. */
-  public static final String SERVER_PREFFIX = "http://127.0.0.1:8888";
-  public static final String SERVICE_PREFFIX = SERVER_PREFFIX + "/ws/";
+  public static String SERVER_PREFFIX = "http://127.0.0.1:8888";
+  public static String SERVICE_PREFFIX = setServicePrefix();
 
   /**
    * Inits the services.
@@ -136,6 +136,14 @@ public class KuneCliMain {
   public static void main(final String[] args)
       throws InvalidSyntaxException, ExecutionException, MalformedURLException {
 
+    final String serverPrefix = System.getenv("KUNE_SERVER_URL");
+    if (serverPrefix != null) {
+      SERVER_PREFFIX = serverPrefix;
+      SERVICE_PREFFIX = setServicePrefix();
+      LOG.debug("Using server URL: " + SERVER_PREFFIX);
+      LOG.debug("Using service URL: " + SERVICE_PREFFIX);
+    }
+
     initServices();
 
     // TODO: integrate jline or similar?
@@ -153,7 +161,6 @@ public class KuneCliMain {
     cs.add(new HelpCommand(cs)); // help
     cs.add(new HTMLHelpCommand(cs)); // htmlhelp
     cs.add(new HelloWorldCommand());
-    // cs.add(new SleepCommand()); // sleep <seconds:number>
 
     // A script can be useful for kune
     cs.add(new ExecuteFileCommand(nc)); // execute file <filename:string>
@@ -169,5 +176,9 @@ public class KuneCliMain {
 
     // Execute the command line
     nc.execute(args, 0);
+  }
+
+  private static String setServicePrefix() {
+    return SERVER_PREFFIX + "/ws/";
   }
 }
