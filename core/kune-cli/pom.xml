@@ -35,6 +35,11 @@
   </repositories>
   <dependencies>
     <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>2.7.0</version>
+    </dependency>
+    <dependency>
       <groupId>org.naturalcli</groupId>
       <artifactId>naturalcli</artifactId>
       <version>1.2.3</version>
@@ -62,11 +67,6 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.google.gwt</groupId>
-      <artifactId>gwt-user</artifactId>
-      <version>${gwt.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.apache.httpcomponents</groupId>
       <artifactId>httpclient</artifactId>
       <version>4.0.1</version>
@@ -87,8 +87,25 @@
       <artifactId>tools</artifactId>
       <version>1.4.2</version>
       <scope>system</scope>
-      <systemPath>${java.home}/../lib/tools.jar</systemPath>
+      <systemPath>${toolsjar}</systemPath>
     </dependency>
+    <dependency>
+      <groupId>com.mashape.unirest</groupId>
+      <artifactId>unirest-java</artifactId>
+      <version>1.4.5</version>
+    </dependency>
+    <!-- Begin unirest deps -->
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+      <version>4.4.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.4.1</version>
+    </dependency>
+    <!-- End unirest deps -->
   </dependencies>
   <build>
     <plugins>
@@ -120,31 +137,11 @@
             <artifactId>tools</artifactId>
             <version>1.4.2</version>
             <scope>system</scope>
-            <systemPath>${java.home}/../lib/tools.jar</systemPath>
+            <systemPath>${toolsjar}</systemPath>
           </dependency>
         </dependencies>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-install-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>jdk_tools</id>
-            <phase>prepare-package</phase>
-            <goals>
-              <goal>install-file</goal>
-            </goals>
-            <configuration>
-              <groupId>com.sun</groupId>
-              <artifactId>tools</artifactId>
-              <version>1.4.2</version>
-              <packaging>jar</packaging>
-              <file>${toolsjar}</file>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
+       <plugin>
         <artifactId>maven-assembly-plugin</artifactId>
         <version>2.4</version>
         <executions>

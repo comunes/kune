@@ -12,7 +12,7 @@
     <wiab.version>0.3.51</wiab.version>
     <gwt.version>2.7.0</gwt.version>
     <guice.version>3.0</guice.version>
-    <gin.version>2.1.0</gin.version>
+    <gin.version>2.1.2</gin.version>
     <gwt-gadgets.version>1.2.1-rc1</gwt-gadgets.version>
   </properties>
   <repositories>

@@ -23,6 +23,8 @@
 
 package cc.kune.kunecli.cmds;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.naturalcli.Command;
 import org.naturalcli.ExecutionException;
 import org.naturalcli.ICommandExecutor;
@@ -33,42 +35,38 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import cc.kune.core.client.rpcservices.UserServiceAsync;
-
 @Singleton
 public class AuthCommand extends Command {
-
   public static class AuthICommand implements ICommandExecutor {
 
     @Inject
-    UserServiceAsync service;
-    //@Inject
-    //WaveClientSimpleAuthenticator waveAuthenticator;
+    AuthHelper helper;
+    /*
+     * @Inject WaveClientSimpleAuthenticator waveAuthenticator;
+     */
 
     @Override
-    public void execute(ParseResult result) throws ExecutionException {
-        final String user = result.getParameterValue(0).toString();
-        final String pass = result.getParameterValue(1).toString();
+    public void execute(final ParseResult result) throws ExecutionException {
+      final String user = result.getParameterValue(0).toString();
+      final String pass = result.getParameterValue(1).toString();
+      helper.loginAndContinue(user, pass, new AsyncCallback<String>() {
+        @Override
+        public void onFailure(final Throwable caught) {
+          LOG.error("Auth error", caught);
+        }
 
-        service.checkUserAndHash(user, pass, new AsyncCallback<Void>() {
-          // userService.login(user, pass, "FIXME", new
-          // AsyncCallback<UserInfoDTO>() {
-
-          @Override
-          public void onFailure(final Throwable caught) {
-            System.out.println("Auth Failure: " + caught.getMessage());
-          }
-
-          @Override
-          public void onSuccess(final Void result) {
-            System.out.println("Auth Success");
-          }
-        });
-      }
+        @Override
+        public void onSuccess(final String result) {
+          System.out.println("Auth cookie: " + result);
+        }
+      });
+    }
   }
 
+  public static final Log LOG = LogFactory.getLog(AuthCommand.class);
+
   @Inject
-  public AuthCommand(AuthICommand cmd) throws InvalidSyntaxException {
+  public AuthCommand(final AuthICommand cmd) throws InvalidSyntaxException {
     super("auth <user:string> <pass:string>", "auth to kune", cmd);
   }
 }

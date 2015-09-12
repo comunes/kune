@@ -40,6 +40,9 @@ import org.naturalcli.commands.HelpCommand;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.googlecode.gwtrpccommlayer.client.GwtRpcService;
 import com.googlecode.gwtrpccommlayer.client.Module;
 
@@ -47,8 +50,6 @@ import cc.kune.core.client.rpcservices.I18nServiceAsync;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.kunecli.cmds.AuthCommand;
-import cc.kune.kunecli.cmds.GetI18nLangCommand;
-import cc.kune.kunecli.cmds.GetInitDataCommand;
 import cc.kune.kunecli.cmds.HelloWorldCommand;
 import cc.kune.kunecli.cmds.ReloadPropertiesCommand;
 
@@ -65,7 +66,8 @@ public class KuneCliMain {
   public static final Log LOG = LogFactory.getLog(KuneCliMain.class);
 
   /** The Constant SERVICE_PREFFIX. */
-  private static final String SERVICE_PREFFIX = "http://127.0.0.1:8888/ws/";
+  public static final String SERVER_PREFFIX = "http://127.0.0.1:8888";
+  public static final String SERVICE_PREFFIX = SERVER_PREFFIX + "/ws/";
 
   /**
    * Inits the services.
@@ -80,6 +82,7 @@ public class KuneCliMain {
       @Override
       protected void configure() {
         super.configure();
+        bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
       }
     });
 
@@ -144,10 +147,14 @@ public class KuneCliMain {
     cs.add(new ExecuteFileCommand(nc)); // execute file <filename:string>
 
     // kune specific commands
-    cs.add(injector.getInstance(GetInitDataCommand.class));
-    cs.add(injector.getInstance(GetI18nLangCommand.class));
     cs.add(injector.getInstance(AuthCommand.class));
     cs.add(injector.getInstance(ReloadPropertiesCommand.class));
+
+    // As the return type of these commands are not java.io.Serializable (and
+    // instead GWT's IsSerializable) the return part of this cmds fails
+    // cs.add(injector.getInstance(GetInitDataCommand.class));
+    // cs.add(injector.getInstance(GetI18nLangCommand.class));
+
     // Execute the command line
     nc.execute(args, 0);
   }
