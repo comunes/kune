@@ -21,7 +21,7 @@ if [[ -z $JAVA_HOME ]]; then
 fi
 
 TOOLS="$JAVA_HOME/lib/tools.jar"
-JAR="./target/kune-cli-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
+JAR="./target/kune-cli-1.0.1-SNAPSHOT-jar-with-dependencies.jar"
 
 if [[ ! -e $TOOLS ]]
 then

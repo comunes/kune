@@ -4,7 +4,7 @@
   <parent>
     <artifactId>kune-core</artifactId>
     <groupId>cc.kune</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>kune-cli</artifactId>

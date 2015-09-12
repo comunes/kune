@@ -25,7 +25,7 @@ also you can package and use the jar:
 
 ```bash
 mvn package
-java -cp /usr/lib/jvm/java-7-oracle/lib/tools.jar:./target/kune-cli-0.0.1-SNAPSHOT-jar-with-dependencies.jar cc.kune.kunecli.KuneCliMain help
+java -cp /usr/lib/jvm/java-7-oracle/lib/tools.jar:./target/kune-cli-1.0.1-SNAPSHOT-jar-with-dependencies.jar cc.kune.kunecli.KuneCliMain help
 ```
 Update the tools.jar location pointing to your JDC_HOME directory.
 
