@@ -1,0 +1,43 @@
+#!/bin/bash
+
+#export KUNE_SERVER_URL="http://127.0.0.1:80"
+
+NUM_PARAMS=$#
+PARAMS=$*
+
+if [[ -z $JAVA_HOME ]]; then
+    JAVA_HOMES="
+    /usr/lib/jvm/java-7-oracle \
+    /usr/lib/jvm/java-7-openjdk-amd64 \
+    /usr/lib/jvm/java-7-sun \
+    /usr/lib/jvm/java-7-openjdk \
+    /usr/lib/jvm/default-java"
+    for t in $JAVA_HOMES ; do
+      if [ -d $t ] ; then
+        JAVA_HOME=$t
+        break;
+      fi
+    done
+fi
+
+TOOLS="$JAVA_HOME/lib/tools.jar"
+JAR="./target/kune-cli-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
+
+if [[ ! -e $TOOLS ]]
+then
+  echo "Dependency tools.jar not found with JAVA_HOME=$JAVA_HOME: We search in: $TOOLS"
+  exit 1
+fi
+
+if [[ ! -e $JAR ]]
+then
+  echo "We didn't found $JAR (the kune-cli jar)."
+  exit 1
+fi
+
+if [[ $NUM_PARAMS == 0 ]]
+then
+  PARAMS="help"
+fi;
+
+java -cp $JAVA_HOME/lib/tools.jar:$JAR cc.kune.kunecli.KuneCliMain $PARAMS

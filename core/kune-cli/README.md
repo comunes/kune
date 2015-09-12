@@ -29,6 +29,12 @@ java -cp /usr/lib/jvm/java-7-oracle/lib/tools.jar:./target/kune-cli-0.0.1-SNAPSH
 ```
 Update the tools.jar location pointing to your JDC_HOME directory.
 
+or directly using the bash script:
+
+```bash
+bin/kune-cli help
+```
+
 ## Environment Parameters
 
 By default the kune-cli tries to connecto to a running instance of kune in http://127.0.0.1:8888, but you can provide via environmental variable, other url, like:
