@@ -46,8 +46,12 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.googlecode.gwtrpccommlayer.client.GwtRpcService;
 import com.googlecode.gwtrpccommlayer.client.Module;
 
+import cc.kune.core.client.rpcservices.ContentServiceAsync;
+import cc.kune.core.client.rpcservices.GroupServiceAsync;
 import cc.kune.core.client.rpcservices.I18nServiceAsync;
+import cc.kune.core.client.rpcservices.InvitationServiceAsync;
 import cc.kune.core.client.rpcservices.SiteServiceAsync;
+import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.kunecli.cmds.AuthCommand;
 import cc.kune.kunecli.cmds.HelloWorldCommand;
@@ -91,15 +95,24 @@ public class KuneCliMain {
       @Override
       protected void configure() {
         try {
-          final UserServiceAsync userService = service.create(new URL(SERVICE_PREFFIX + "UserService"),
-              UserServiceAsync.class);
-          final SiteServiceAsync siteService = service.create(new URL(SERVICE_PREFFIX + "SiteService"),
-              SiteServiceAsync.class);
-          final I18nServiceAsync i18nService = service.create(new URL(SERVICE_PREFFIX + "I18nService"),
-              I18nServiceAsync.class);
-          bind(UserServiceAsync.class).toInstance(userService);
-          bind(SiteServiceAsync.class).toInstance(siteService);
-          bind(I18nServiceAsync.class).toInstance(i18nService);
+          bind(UserServiceAsync.class).toInstance(
+              service.create(new URL(SERVICE_PREFFIX + "UserService"), UserServiceAsync.class));
+          bind(GroupServiceAsync.class).toInstance(
+              service.create(new URL(SERVICE_PREFFIX + "GroupService"), GroupServiceAsync.class));
+          bind(SocialNetServiceAsync.class).toInstance(service.create(
+              new URL(SERVICE_PREFFIX + "SocialNetService"), SocialNetServiceAsync.class));
+          bind(SiteServiceAsync.class).toInstance(
+              service.create(new URL(SERVICE_PREFFIX + "SiteService"), SiteServiceAsync.class));
+          bind(I18nServiceAsync.class).toInstance(
+              service.create(new URL(SERVICE_PREFFIX + "I18nService"), I18nServiceAsync.class));
+          bind(ContentServiceAsync.class).toInstance(
+              service.create(new URL(SERVICE_PREFFIX + "ContentService"), ContentServiceAsync.class));
+          bind(InvitationServiceAsync.class).toInstance(service.create(
+              new URL(SERVICE_PREFFIX + "InvitationService"), InvitationServiceAsync.class));
+          // TODO: Add its dependencies:
+          // bind(UpDownServiceAsync.class).toInstance(
+          // service.create(new URL(SERVICE_PREFFIX + "UpDownService"),
+          // UpDownServiceAsync.class));
         } catch (final MalformedURLException e) {
           LOG.error("Malformed URL", e);
         }
@@ -125,9 +138,8 @@ public class KuneCliMain {
 
     initServices();
 
-    // TODO: integrate jline or similar
+    // TODO: integrate jline or similar?
     // http://jline.sourceforge.net/index.html
-
     // http://sourceforge.net/projects/javacurses/
     // http://massapi.com/class/jcurses/widgets/Button.java.html
 
