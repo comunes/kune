@@ -74,39 +74,4 @@ public class KuneCliMainTest {
     KuneCliMain.main(args);
   }
 
-  /**
-   * Test basic init.
-   *
-   * @throws InvalidSyntaxException
-   *           the invalid syntax exception
-   * @throws ExecutionException
-   *           the execution exception
-   * @throws MalformedURLException
-   *           the malformed url exception
-   */
-  @Test
-  public void testBasicInit() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
-    final KuneCliMain cli = new KuneCliMain();
-    final String[] args = new String[] { "siteGetInitData" };
-    KuneCliMain.main(args);
-  }
-
-  /**
-   * Test basic init lang.
-   *
-   * @throws InvalidSyntaxException
-   *           the invalid syntax exception
-   * @throws ExecutionException
-   *           the execution exception
-   * @throws MalformedURLException
-   *           the malformed url exception
-   */
-  @Test
-  public void testBasicInitLang()
-      throws InvalidSyntaxException, ExecutionException, MalformedURLException {
-    final KuneCliMain cli = new KuneCliMain();
-    final String[] args = new String[] { "siteGetI18nLang" };
-    KuneCliMain.main(args);
-  }
-
 }
