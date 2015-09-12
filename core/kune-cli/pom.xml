@@ -43,7 +43,6 @@
       <groupId>org.naturalcli</groupId>
       <artifactId>naturalcli</artifactId>
       <version>1.2.3</version>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.googlecode</groupId>
