@@ -91,6 +91,10 @@ public class UserSignInLog implements HasId {
   @Column
   private final String userAgent;
 
+  public UserSignInLog() {
+    this(null, null, null, null);
+  }
+
   /**
    * Instantiates a new user sign in log.
    *

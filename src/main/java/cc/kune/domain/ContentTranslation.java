@@ -37,7 +37,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentTranslation.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -58,9 +58,12 @@ public class ContentTranslation implements HasId {
   @ManyToOne(fetch = FetchType.LAZY)
   private I18nLanguage language;
 
+  public ContentTranslation() {
+  }
+
   /**
    * Gets the content id.
-   * 
+   *
    * @return the content id
    */
   public Long getContentId() {
@@ -69,7 +72,7 @@ public class ContentTranslation implements HasId {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -79,7 +82,7 @@ public class ContentTranslation implements HasId {
 
   /**
    * Gets the language.
-   * 
+   *
    * @return the language
    */
   public I18nLanguage getLanguage() {
@@ -88,7 +91,7 @@ public class ContentTranslation implements HasId {
 
   /**
    * Sets the content id.
-   * 
+   *
    * @param contentId
    *          the new content id
    */
@@ -98,7 +101,7 @@ public class ContentTranslation implements HasId {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -108,7 +111,7 @@ public class ContentTranslation implements HasId {
 
   /**
    * Sets the language.
-   * 
+   *
    * @param language
    *          the new language
    */

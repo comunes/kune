@@ -37,7 +37,7 @@ import cc.kune.domain.utils.HasId;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContainerTranslation.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -58,9 +58,12 @@ public class ContainerTranslation implements HasId {
   /** The name. */
   private String name;
 
+  public ContainerTranslation() {
+  }
+
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -70,7 +73,7 @@ public class ContainerTranslation implements HasId {
 
   /**
    * Gets the language.
-   * 
+   *
    * @return the language
    */
   public I18nLanguage getLanguage() {
@@ -79,7 +82,7 @@ public class ContainerTranslation implements HasId {
 
   /**
    * Gets the name.
-   * 
+   *
    * @return the name
    */
   public String getName() {
@@ -88,7 +91,7 @@ public class ContainerTranslation implements HasId {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -98,7 +101,7 @@ public class ContainerTranslation implements HasId {
 
   /**
    * Sets the language.
-   * 
+   *
    * @param language
    *          the new language
    */
@@ -108,7 +111,7 @@ public class ContainerTranslation implements HasId {
 
   /**
    * Sets the name.
-   * 
+   *
    * @param name
    *          the new name
    */
