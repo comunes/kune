@@ -12,7 +12,7 @@ Package: kune
 Pre-Depends: ucf
 Depends: libjmagick6-jni, oracle-java7-installer | openjdk-7-jre, mysql-server (>= 5.1) , adduser, dbconfig-common, telnet | netcat-openbsd
 Recommends: openfire (>= 3.7.1), mysql-client, postfix | exim4
-Suggests:
+Suggests: kune-cli
 Architecture: all
 Description: Distributed social network of collaborative web tools
  Kune (which means together in esperanto) creates
