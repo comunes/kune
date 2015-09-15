@@ -1,5 +1,4 @@
 # kune-cli: a Kune Command Line Interface (CLI)
-(Under development)
 
 ## Usage
 
@@ -53,6 +52,8 @@ sep 15, 2015 10:08:28 PM cc.kune.kunecli.JMXUtils doOperation
 INFORMACIÓN: Doing operation 'count' over mbean: 'cc.kune.mbeans:type=UserManagerDefault' with id: '11695'.
 Users registered: 6480
 ```
+
+There are more commands under development.
 
 ## Environment Parameters
 
