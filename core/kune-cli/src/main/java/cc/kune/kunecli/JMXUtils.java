@@ -49,7 +49,7 @@ public class JMXUtils {
   private static final String CONNECTOR_ADDRESS = "com.sun.management.jmxremote.localConnectorAddress";
   public static final Log LOG = LogFactory.getLog(JMXUtils.class);
 
-  public static void doOperation(final String objectName, final String operation) {
+  public static Object doOperation(final String objectName, final String operation) {
 
     final List<VirtualMachineDescriptor> vms = VirtualMachine.list();
 
@@ -71,17 +71,20 @@ public class JMXUtils {
             if (currentOp.getName().equals(operation)) {
               LOG.info("Doing operation '" + operation + "' over mbean: '" + objectName + "' with id: '"
                   + id + "'.");
-              mbsc.invoke(mbeanName, currentOp.getName(), new Object[] {}, new String[] {});
-              break;
+              final Object invoke = mbsc.invoke(mbeanName, currentOp.getName(), new Object[] {},
+                  new String[] {});
+              return invoke;
             }
           }
         } catch (final InstanceNotFoundException e) {
           // Ok, operation not found in this VM or domain
         }
       }
+      throw new RuntimeException("JMX operation not found");
     } catch (final Exception e) {
       LOG.error("Error in jmx connection", e);
     }
+    throw new RuntimeException("JMX operation failed");
   }
 
   private static JMXServiceURL getURLForPid(final String pid)

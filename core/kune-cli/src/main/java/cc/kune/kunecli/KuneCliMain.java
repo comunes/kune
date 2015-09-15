@@ -25,7 +25,7 @@ package cc.kune.kunecli;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -54,9 +54,12 @@ import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.kunecli.cmds.AuthCommand;
-import cc.kune.kunecli.cmds.HelloWorldCommand;
+import cc.kune.kunecli.cmds.GroupsCount;
+import cc.kune.kunecli.cmds.GroupsReindex;
 import cc.kune.kunecli.cmds.InviteCommand;
 import cc.kune.kunecli.cmds.ReloadPropertiesCommand;
+import cc.kune.kunecli.cmds.UsersCount;
+import cc.kune.kunecli.cmds.UsersReindex;
 
 /**
  * The Class KuneCliMain.
@@ -153,7 +156,7 @@ public class KuneCliMain {
     // http://massapi.com/class/jcurses/widgets/Button.java.html
 
     // Create an empty command set
-    final Set<Command> cs = new HashSet<Command>();
+    final Set<Command> cs = new LinkedHashSet<Command>();
 
     // Create the interpreter
     final NaturalCLI nc = new NaturalCLI(cs);
@@ -161,15 +164,20 @@ public class KuneCliMain {
     // Add the commands that can be understood
     cs.add(new HelpCommand(cs)); // help
     cs.add(new HTMLHelpCommand(cs)); // htmlhelp
-    cs.add(new HelloWorldCommand());
-
     // A script can be useful for kune
     cs.add(new ExecuteFileCommand(nc)); // execute file <filename:string>
+    // cs.add(new HelloWorldCommand());
 
     // kune specific commands
     cs.add(injector.getInstance(AuthCommand.class));
-    cs.add(injector.getInstance(ReloadPropertiesCommand.class));
     cs.add(injector.getInstance(InviteCommand.class));
+    // Not working right now:
+    // cs.add(injector.getInstance(SiteReindex.class));
+    cs.add(injector.getInstance(GroupsCount.class));
+    cs.add(injector.getInstance(GroupsReindex.class));
+    cs.add(injector.getInstance(UsersCount.class));
+    cs.add(injector.getInstance(UsersReindex.class));
+    cs.add(injector.getInstance(ReloadPropertiesCommand.class));
 
     // As the return type of these commands are not java.io.Serializable (and
     // instead GWT's IsSerializable) the return part of this cmds fails
