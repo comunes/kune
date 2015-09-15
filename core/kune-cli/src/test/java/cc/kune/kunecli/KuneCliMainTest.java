@@ -32,7 +32,6 @@ import org.junit.Test;
 import org.naturalcli.ExecutionException;
 import org.naturalcli.InvalidSyntaxException;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class KuneCliMainTest.
  *
@@ -68,9 +67,9 @@ public class KuneCliMainTest {
    *           the malformed url exception
    */
   @Test
-  public void testBasicHello() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
+  public void testBasicHelp() throws InvalidSyntaxException, ExecutionException, MalformedURLException {
     final KuneCliMain cli = new KuneCliMain();
-    final String[] args = new String[] { "hello", "world", "admin" };
+    final String[] args = new String[] { "help" };
     KuneCliMain.main(args);
   }
 
