@@ -46,6 +46,6 @@ public class GroupsCount extends Command {
   }
 
   public GroupsCount() throws InvalidSyntaxException {
-    super("groups count", "Reindex all groups in Lucene", new GroupsCountICommand());
+    super("groups count", "Count all registered groups", new GroupsCountICommand());
   }
 }

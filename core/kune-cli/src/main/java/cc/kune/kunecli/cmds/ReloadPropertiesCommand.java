@@ -29,6 +29,7 @@ import org.naturalcli.ICommandExecutor;
 import org.naturalcli.InvalidSyntaxException;
 import org.naturalcli.ParseResult;
 
+import cc.kune.core.server.manager.impl.SiteManagerDefaultMBean;
 import cc.kune.core.server.properties.KunePropertiesDefaultMBean;
 import cc.kune.kunecli.JMXUtils;
 
@@ -39,10 +40,12 @@ public class ReloadPropertiesCommand extends Command {
     @Override
     public void execute(final ParseResult result) throws ExecutionException {
       JMXUtils.doOperation(KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME, "reload");
+      JMXUtils.doOperation(SiteManagerDefaultMBean.MBEAN_OBJECT_NAME, "reloadInitData");
     }
   }
 
   public ReloadPropertiesCommand() throws InvalidSyntaxException {
-    super("reload properties", "Reload the kune.properties", new ReloadPropertiesICommand());
+    super("reload properties", "Reload the kune.properties without restarting kune",
+        new ReloadPropertiesICommand());
   }
 }

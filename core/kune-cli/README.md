@@ -29,19 +29,19 @@ invite <youruser:string> <yourpass:string> <someemail@example.com:string> ...
         invite some emails to use this kune site
 
 groups count
-        Reindex all groups in Lucene
+        Count all registered groups
 
 groups reindex
         Reindex all groups in Lucene
 
 users count
-        Reindex all groups in Lucene
+        Count all registered users
 
 users reindex
         Reindex all users in Lucene
 
 reload properties
-        Reload the kune.properties
+        Reload the kune.properties without restarting kune
 
 ```
 

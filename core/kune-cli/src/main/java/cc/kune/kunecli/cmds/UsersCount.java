@@ -46,6 +46,6 @@ public class UsersCount extends Command {
   }
 
   public UsersCount() throws InvalidSyntaxException {
-    super("users count", "Reindex all groups in Lucene", new UsersCountICommand());
+    super("users count", "Count all registered users", new UsersCountICommand());
   }
 }
