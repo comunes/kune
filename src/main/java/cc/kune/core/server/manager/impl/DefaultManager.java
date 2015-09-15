@@ -22,8 +22,6 @@
  */
 package cc.kune.core.server.manager.impl;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
 
 import org.apache.commons.logging.Log;
@@ -34,6 +32,7 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.util.Version;
+import org.hibernate.search.MassIndexer;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
@@ -45,7 +44,7 @@ import com.google.inject.Provider;
 // TODO: Auto-generated Javadoc
 /**
  * The Class DefaultManager.
- * 
+ *
  * @param <T>
  *          the generic type
  * @param <K>
@@ -69,7 +68,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Instantiates a new default manager.
-   * 
+   *
    * @param provider
    *          the provider
    * @param entityClass
@@ -82,8 +81,21 @@ public abstract class DefaultManager<T, K> {
   }
 
   /**
+   * Size deprecated.
+   *
+   * @return the int
+   */
+  @Deprecated
+  public Long size() {
+    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager());
+    final Long entities = (Long) fullTextEm.createQuery(
+        "SELECT COUNT(*) FROM " + entityClass.getSimpleName() + " AS e").getSingleResult();
+    return entities;
+  }
+
+  /**
    * use carefully!!!.
-   * 
+   *
    * @param <X>
    *          the generic type
    * @param entityClass
@@ -98,7 +110,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Find.
-   * 
+   *
    * @param primaryKey
    *          the primary key
    * @return the t
@@ -116,7 +128,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Gets the entity manager.
-   * 
+   *
    * @return the entity manager
    */
   private EntityManager getEntityManager() {
@@ -125,7 +137,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Gets the query.
-   * 
+   *
    * @param qlString
    *          the ql string
    * @return the query
@@ -136,7 +148,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Merge.
-   * 
+   *
    * @param <E>
    *          the element type
    * @param entity
@@ -152,7 +164,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Merge.
-   * 
+   *
    * @param entity
    *          the entity
    * @return the t
@@ -163,7 +175,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Persist.
-   * 
+   *
    * @param <E>
    *          the element type
    * @param entity
@@ -179,7 +191,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Persist.
-   * 
+   *
    * @param entity
    *          the entity
    * @return the t
@@ -192,42 +204,36 @@ public abstract class DefaultManager<T, K> {
    * Re index.
    */
   public void reIndex() {
+    reIndex(entityClass);
+  }
+
+  private void reIndex(Class<T> entityClass) {
     // http://docs.jboss.org/hibernate/search/4.1/reference/en-US/html_single/#search-batchindex
-    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager().getEntityManagerFactory().createEntityManager());
+
+    EntityManager em = getEntityManager();
+    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);
+
     try {
-      fullTextEm.createIndexer().startAndWait();
+      MassIndexer indexer;
+      if (entityClass == null) {
+        // reIndex all
+        indexer = fullTextEm.createIndexer();
+      } else {
+        indexer = fullTextEm.createIndexer(entityClass);
+      }
+      indexer.startAndWait();
     } catch (final InterruptedException e) {
       throw new ServerManagerException("Error reindexing", e);
     }
+  }
 
-    // final Session fullTextSession = (org.hibernate.Session)
-    // fullTextEm.getDelegate();
-    // fullTextSession.setFlushMode(FlushMode.AUTO);
-    // fullTextSession.setCacheMode(CacheMode.IGNORE);
-    // // final Transaction transaction = fullTextSession.beginTransaction();
-    // // Scrollable results will avoid loading too many objects in memory
-    // final ScrollableResults results =
-    // fullTextSession.createCriteria(entityClass).setFetchSize(
-    // BATCH_SIZE).scroll(ScrollMode.FORWARD_ONLY);
-    // int index = 0;
-    // while (results.next()) {
-    // index++;
-    //
-    // fullTextEm.index(results.get(0)); // index each element
-    // if (index % BATCH_SIZE == 0) {
-    // // fullTextSession.flushToIndexes(); //apply changes to indexes
-    // fullTextSession.flush(); // apply changes to indexes
-    // fullTextSession.clear(); // free memory since the queue is processed
-    // }
-    // }
-    // http://stackoverflow.com/questions/10248598/clearing-locks-between-junit-tests-in-hibernate-search-4-1
-    // transaction.commit();
-    fullTextEm.close();
+  public void reIndexAllEntities() {
+    reIndex(null);
   }
 
   /**
    * Removes the.
-   * 
+   *
    * @param entity
    *          the entity
    */
@@ -237,7 +243,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   * 
+   *
    * @param query
    *          the query
    * @return the search result
@@ -248,7 +254,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   * 
+   *
    * @param query
    *          the query
    * @param firstResult
@@ -259,7 +265,8 @@ public abstract class DefaultManager<T, K> {
    */
   @SuppressWarnings("unchecked")
   public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
-    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager().getEntityManagerFactory().createEntityManager());
+    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(
+        getEntityManager().getEntityManagerFactory().createEntityManager());
     final FullTextQuery emQuery = fullTextEm.createFullTextQuery(query, entityClass);
     if (firstResult != null && maxResults != null) {
       emQuery.setFirstResult(firstResult);
@@ -272,7 +279,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   * 
+   *
    * @param query
    *          the query
    * @param fields
@@ -289,8 +296,8 @@ public abstract class DefaultManager<T, K> {
       final BooleanClause.Occur[] flags, final Integer firstResult, final Integer maxResults) {
     Query queryQ;
     try {
-      queryQ = MultiFieldQueryParser.parse(LUCENE_VERSION, query, fields, flags, new StandardAnalyzer(
-          LUCENE_VERSION));
+      queryQ = MultiFieldQueryParser.parse(LUCENE_VERSION, query, fields, flags,
+          new StandardAnalyzer(LUCENE_VERSION));
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search", e);
     }
@@ -299,7 +306,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   * 
+   *
    * @param queries
    *          the queries
    * @param fields
@@ -316,8 +323,8 @@ public abstract class DefaultManager<T, K> {
       final BooleanClause.Occur[] flags, final Integer firstResult, final Integer maxResults) {
     Query query;
     try {
-      query = MultiFieldQueryParser.parse(LUCENE_VERSION, queries, fields, flags, new StandardAnalyzer(
-          LUCENE_VERSION));
+      query = MultiFieldQueryParser.parse(LUCENE_VERSION, queries, fields, flags,
+          new StandardAnalyzer(LUCENE_VERSION));
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search", e);
     }
@@ -326,7 +333,7 @@ public abstract class DefaultManager<T, K> {
 
   /**
    * Search.
-   * 
+   *
    * @param queries
    *          the queries
    * @param fields
@@ -337,30 +344,16 @@ public abstract class DefaultManager<T, K> {
    *          the max results
    * @return the search result
    */
-  public SearchResult<T> search(final String[] queries, final String[] fields,
-      final Integer firstResult, final Integer maxResults) {
+  public SearchResult<T> search(final String[] queries, final String[] fields, final Integer firstResult,
+      final Integer maxResults) {
     Query query;
     try {
-      query = MultiFieldQueryParser.parse(LUCENE_VERSION, queries, fields, new StandardAnalyzer(
-          LUCENE_VERSION));
+      query = MultiFieldQueryParser.parse(LUCENE_VERSION, queries, fields,
+          new StandardAnalyzer(LUCENE_VERSION));
     } catch (final ParseException e) {
       throw new ServerManagerException("Error parsing search", e);
     }
     return search(query, firstResult, maxResults);
-  }
-
-  /**
-   * Size deprecated.
-   * 
-   * @return the int
-   */
-  @SuppressWarnings("unchecked")
-  @Deprecated
-  public int sizeDeprecated() {
-    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager());
-    final List<T> entities = fullTextEm.createQuery(
-        "SELECT e FROM " + entityClass.getSimpleName() + " AS e").getResultList();
-    return entities.size();
   }
 
 }
