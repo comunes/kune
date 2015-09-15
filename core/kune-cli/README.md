@@ -1,18 +1,72 @@
 # kune-cli: a Kune Command Line Interface (CLI)
 (Under development)
 
+## Usage
+
+Install the package kune-cli for debian (and derivatives) additionally to the kune package ([more details](http://kune.cc/#!kune.docs.6810.898)):
+
+```bash
+sudo apt-get install kune-cli
+```
+and type:
+
+```bash
+$ kune-cli
+
+help
+        Shows the commands help on plain text.
+
+htmlhelp
+        Shows the commands help on HTML format.
+
+execute file <filename:string>
+        Execute the commands on file.
+
+auth <user:string> <pass:string>
+        auth to kune
+
+invite <youruser:string> <yourpass:string> <someemail@example.com:string> ...
+        invite some emails to use this kune site
+
+groups count
+        Reindex all groups in Lucene
+
+groups reindex
+        Reindex all groups in Lucene
+
+users count
+        Reindex all groups in Lucene
+
+users reindex
+        Reindex all users in Lucene
+
+reload properties
+        Reload the kune.properties
+
+```
+
+## Environment Parameters
+
+By default the kune-cli tries to connect to a running instance of kune in http://127.0.0.1:8888, but you can provide via environmental variable, other url like:
+
+```bash
+export KUNE_SERVER_URL="http://127.0.0.1:80"
+```
+
 ## Development tips
+
 Import the folder kune/core/kune-cli as an Eclipse project, and solve dependency problems in Eclipse with
 `mvn eclipse:eclipse`.
 
-Run a Kune server (via a debian package or using our docker image or a kune dev instance launched from Eclipse) and afterwards run the `KuneCliMain` or its tests `KuneCliMainTest`.
+Run a Kune server (via a debian package or using our docker image or a kune development instance launched from Eclipse) and afterwards run the `KuneCliMain` or its tests `KuneCliMainTest`.
 
-## Usage
-
-During developmen, you can running kune-cli from a terminal, with arguments like:
+During development, you can running kune-cli from a terminal, with arguments like:
 
 ```bash
 mvn exec:java -Dexec.args="help"
+
+
+$
 ```
 
 or other similar commands:
@@ -35,10 +89,5 @@ or directly using the bash script:
 bin/kune-cli help
 ```
 
-## Environment Parameters
-
-By default the kune-cli tries to connecto to a running instance of kune in http://127.0.0.1:8888, but you can provide via environmental variable, other url, like:
-
-```bash
-export KUNE_SERVER_URL="http://127.0.0.1:80"
-```
+<!--  LocalWords:  htmlhelp
+ -->
