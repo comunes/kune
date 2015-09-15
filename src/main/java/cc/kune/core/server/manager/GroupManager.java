@@ -38,7 +38,7 @@ import cc.kune.domain.User;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface GroupManager.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -46,7 +46,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Change def license.
-   * 
+   *
    * @param user
    *          the user
    * @param group
@@ -58,7 +58,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Change ws theme.
-   * 
+   *
    * @param user
    *          the user
    * @param group
@@ -72,7 +72,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Check if long name are in use.
-   * 
+   *
    * @param shortName
    *          the short name
    */
@@ -80,7 +80,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Check if short name are in use.
-   * 
+   *
    * @param longName
    *          the long name
    */
@@ -88,7 +88,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Clear group back image.
-   * 
+   *
    * @param group
    *          the group
    */
@@ -97,14 +97,14 @@ public interface GroupManager extends Manager<Group, Long> {
   /**
    * Count # of registered groups (only used to see in the database is
    * initialized).
-   * 
+   *
    * @return the int
    */
   Long count();
 
   /**
    * Creates the group.
-   * 
+   *
    * @param group
    *          the group
    * @param user
@@ -122,7 +122,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Creates the user group.
-   * 
+   *
    * @param user
    *          the user
    * @return the group
@@ -135,7 +135,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Creates the user group.
-   * 
+   *
    * @param user
    *          the user
    * @param wantPersonalHomepage
@@ -151,7 +151,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Find admin in groups.
-   * 
+   *
    * @param groupId
    *          the group id
    * @return the sets the
@@ -160,7 +160,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Find by short name.
-   * 
+   *
    * @param groupName
    *          the group name
    * @return the group
@@ -169,7 +169,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Find collab in groups.
-   * 
+   *
    * @param groupId
    *          the group id
    * @return the sets the
@@ -178,7 +178,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Find enabled tools.
-   * 
+   *
    * @param id
    *          the id
    * @return the list
@@ -187,7 +187,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * IMPORTANT: returns null if userId is null.
-   * 
+   *
    * @param userId
    *          the user id
    * @return the group of user with id
@@ -196,14 +196,14 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Gets the site default group.
-   * 
+   *
    * @return the site default group
    */
   Group getSiteDefaultGroup();
 
   /**
    * Inits the trash.
-   * 
+   *
    * @param group
    *          the group
    */
@@ -211,7 +211,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Search.
-   * 
+   *
    * @param search
    *          the search
    * @return the search result
@@ -220,7 +220,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Search.
-   * 
+   *
    * @param search
    *          the search
    * @param firstResult
@@ -233,7 +233,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Sets the default content.
-   * 
+   *
    * @param groupShortName
    *          the group short name
    * @param content
@@ -243,7 +243,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Sets the group background image.
-   * 
+   *
    * @param group
    *          the group
    * @param backgroundFileName
@@ -255,7 +255,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Sets the tool enabled.
-   * 
+   *
    * @param userLogged
    *          the user logged
    * @param groupShortName
@@ -272,7 +272,7 @@ public interface GroupManager extends Manager<Group, Long> {
 
   /**
    * Update.
-   * 
+   *
    * @param groupId
    *          the id of the Group to update
    * @param groupDTO
@@ -281,5 +281,10 @@ public interface GroupManager extends Manager<Group, Long> {
    * @return returns the Group just persisted
    */
   Group update(Long groupId, GroupDTO groupDTO);
+
+  /**
+   * Reindex all JPA entities (TODO: move this to other global manager)
+   */
+  void reIndexAllEntities();
 
 }

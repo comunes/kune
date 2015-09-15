@@ -32,6 +32,10 @@ import javax.persistence.PersistenceException;
 import org.apache.lucene.queryParser.QueryParser;
 import org.hibernate.exception.ConstraintViolationException;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
+
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
@@ -70,10 +74,6 @@ import cc.kune.domain.finders.LicenseFinder;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.trash.server.TrashServerTool;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupManagerDefault.
@@ -82,8 +82,8 @@ import com.google.inject.Singleton;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
-public class GroupManagerDefault extends DefaultManager<Group, Long> implements GroupManager,
-GroupManagerDefaultMBean {
+public class GroupManagerDefault extends DefaultManager<Group, Long>
+    implements GroupManager, GroupManagerDefaultMBean {
 
   /** The file manager. */
   private final FileManager fileManager;
@@ -229,6 +229,12 @@ GroupManagerDefaultMBean {
     }
   }
 
+  @Override
+  public void reIndex() {
+    // NOTE: here we do not use KuneTransactional because hibernate-search use plain JPA transaction and we get into a deadlock
+    super.reIndex();
+  }
+
   /*
    * (non-Javadoc)
    *
@@ -255,6 +261,10 @@ GroupManagerDefaultMBean {
   @KuneTransactional
   public Long count() {
     return finder.count();
+    // NOTE The problem with super.size, is that uses JPA normal transactions
+    // (no KuneTransactional) and
+    // can block if it's under a KuneTransactional method. Normal JPA
+    // transactions don't use the Guice Units of work
     // return super.size();
   }
 
@@ -297,8 +307,8 @@ GroupManagerDefaultMBean {
    * .User)
    */
   @Override
-  public Group createUserGroup(final User user) throws GroupShortNameInUseException,
-  EmailAddressInUseException {
+  public Group createUserGroup(final User user)
+      throws GroupShortNameInUseException, EmailAddressInUseException {
     return createUserGroup(user, true);
   }
 
@@ -334,9 +344,8 @@ GroupManagerDefaultMBean {
     final String title = i18n.t("[%s] Bio", user.getName());
     final String body = i18n.t("This is [%s]'s bio, currently empty", user.getName());
     try {
-      initGroup(user, userGroup,
-          wantPersonalHomepage ? serverToolRegistry.getToolsRegisEnabledForUsers()
-              : ServerToolRegistry.emptyToolList, title, body);
+      initGroup(user, userGroup, wantPersonalHomepage ? serverToolRegistry.getToolsRegisEnabledForUsers()
+          : ServerToolRegistry.emptyToolList, title, body);
       super.persist(user, User.class);
     } catch (final PersistenceException e) {
       if (e.getCause() instanceof ConstraintViolationException) {
@@ -526,8 +535,8 @@ GroupManagerDefaultMBean {
       final Integer maxResults) {
     // Wildcard is not allowed in the first character of the query
     final String escapedQuery = QueryParser.escape(search) + SearcherConstants.WILDCARD;
-    return super.search(new String[] { escapedQuery, escapedQuery, escapedQuery }, new String[] {
-        "longName", "shortName", "publicDesc" }, firstResult, maxResults);
+    return super.search(new String[] { escapedQuery, escapedQuery, escapedQuery },
+        new String[] { "longName", "shortName", "publicDesc" }, firstResult, maxResults);
   }
 
   /**

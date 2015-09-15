@@ -56,4 +56,7 @@ public interface SiteManagerDefaultMBean {
    */
   void setStoreUntranslatedStrings(boolean storeUntranslatedString);
 
+  void reIndexAllEntities();
+
+
 }

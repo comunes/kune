@@ -33,6 +33,7 @@ import org.apache.commons.logging.LogFactory;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.InitData;
 import cc.kune.core.server.UserSessionManager;
+import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.LicenseManager;
@@ -100,6 +101,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
+  private GroupManager groupManager;
+
   /**
    * Instantiates a new site rpc.
    *
@@ -131,7 +134,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
       final UserInfoService userInfoService, final LicenseManager licenseManager,
       final KuneMapper mapper, final KuneProperties kuneProperties, final ChatProperties chatProperties,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-      final ServerToolRegistry serverToolRegistry, final MBeanRegistry mbeanRegistry) {
+      final ServerToolRegistry serverToolRegistry, final MBeanRegistry mbeanRegistry, GroupManager groupManager) {
     this.userSessionManager = userSessionManager;
     this.userInfoService = userInfoService;
     this.licenseManager = licenseManager;
@@ -141,6 +144,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     this.languageManager = languageManager;
     this.countryManager = countryManager;
     this.serverToolRegistry = serverToolRegistry;
+    this.groupManager = groupManager;
     // By default we don't collect which part of the client is untranslated
     storeUntranslatedStrings = false;
     mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
@@ -159,7 +163,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.rpcservices.SiteService#getInitData(java.lang.String)
    */
@@ -204,7 +208,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.rpc.SiteRPCMBean#getStoreUntranslatedString()
    */
   @Override
@@ -308,13 +312,18 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.rpc.SiteRPCMBean#setStoreUntranslatedString(boolean)
    */
   @Override
   public void setStoreUntranslatedStrings(final boolean storeUntranslatedStrings) {
     this.storeUntranslatedStrings = storeUntranslatedStrings;
+  }
+
+  @Override
+  public void reIndexAllEntities() {
+    groupManager.reIndexAllEntities();
   }
 
 }

@@ -24,10 +24,9 @@ package cc.kune.core.server.manager.impl;
 
 import cc.kune.core.server.mbean.MBeanConstants;
 
-// TODO: Auto-generated Javadoc
 /**
  * MBean interface for JMX management of {@link GroupManagerDefault}.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface GroupManagerDefaultMBean {
@@ -39,5 +38,12 @@ public interface GroupManagerDefaultMBean {
    * Reloads configuration object, reading again property files.
    */
   void reIndex();
+
+  /**
+   * Count of registered groups.
+   *
+   * @return the long
+   */
+  Long count();
 
 }
