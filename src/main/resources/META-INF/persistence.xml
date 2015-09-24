@@ -61,6 +61,8 @@
         value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
       <property name="hibernate.c3p0.acquire_increment" value="1"/>
       <property name="hibernate.c3p0.min_size" value="10"/>
+      <!-- Set my.cnf max_connections (default 100 or 151) to the same o higher value -->
+      <!-- https://dev.mysql.com/doc/refman/5.5/en/too-many-connections.html -->
       <property name="hibernate.c3p0.max_size" value="280"/>
       <property name="hibernate.c3p0.timeout" value="100"/>
       <property name="hibernate.c3p0.max_statements" value="0"/>
@@ -190,9 +192,11 @@
       <property name="hibernate.connection.provider_class"
         value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
       <property name="hibernate.c3p0.acquire_increment" value="1"/>
-      <!-- We set to 2 to debug connection leaks -->
       <property name="hibernate.c3p0.min_size" value="1"/>
-      <property name="hibernate.c3p0.max_size" value="2"/>
+      <!-- Set my.cnf max_connections (default 100 or 151) to the same o higher value -->
+      <!-- https://dev.mysql.com/doc/refman/5.5/en/too-many-connections.html -->
+      <!-- We set to 2 to debug connection leaks -->
+      <property name="hibernate.c3p0.max_size" value="300"/>
       <property name="hibernate.c3p0.timeout" value="100"/>
       <property name="hibernate.c3p0.max_statements" value="0"/>
       <property name="hibernate.c3p0.idle_test_period" value="300"/>
@@ -201,8 +205,8 @@
       <!-- http://stackoverflow.com/questions/3511422/java-c3p0-how-can-i-configure-autoreconnect-true -->
       <property name="hibernate.c3p0.testConnectionOnCheckout"
         value="true"/>
-      <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
-        value="true"/>
+      <property name="hibernate.c3p0.checkoutTimeout"
+        value="20000"/>
       <property name="hibernate.c3p0.unreturnedConnectionTimeout"
         value="60"/>
       <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
