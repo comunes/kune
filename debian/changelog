@@ -1,3 +1,9 @@
+kune (1.0.1+b16) unstable; urgency=medium
+
+  * Added new kune-cli commands
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 16 Sep 2015 04:40:14 +0200
+
 kune (1.0.1+b15) unstable; urgency=medium
 
   * Improved kune-cli, Kune Command Line Interface (commands, jmx operations)

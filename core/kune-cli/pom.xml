@@ -105,6 +105,27 @@
       <version>4.4.1</version>
     </dependency>
     <!-- End unirest deps -->
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>box</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>model</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>util</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava-gwt</artifactId>
+      <!-- Needs some migration http://code.google.com/p/guava-libraries/wiki/MapMakerMigration -->
+      <version>15.0</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

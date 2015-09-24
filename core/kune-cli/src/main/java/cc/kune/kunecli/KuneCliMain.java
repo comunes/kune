@@ -60,6 +60,7 @@ import cc.kune.kunecli.cmds.InviteCommand;
 import cc.kune.kunecli.cmds.ReloadPropertiesCommand;
 import cc.kune.kunecli.cmds.UsersCount;
 import cc.kune.kunecli.cmds.UsersReindex;
+import cc.kune.kunecli.cmds.WaveToDirCommand;
 
 /**
  * The Class KuneCliMain.
@@ -91,6 +92,7 @@ public class KuneCliMain {
       protected void configure() {
         super.configure();
         bind(EventBus.class).to(SimpleEventBus.class).in(Singleton.class);
+
       }
     });
 
@@ -178,6 +180,7 @@ public class KuneCliMain {
     cs.add(injector.getInstance(UsersCount.class));
     cs.add(injector.getInstance(UsersReindex.class));
     cs.add(injector.getInstance(ReloadPropertiesCommand.class));
+    cs.add(injector.getInstance(WaveToDirCommand.class));
 
     // As the return type of these commands are not java.io.Serializable (and
     // instead GWT's IsSerializable) the return part of this cmds fails

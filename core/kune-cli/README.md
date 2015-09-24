@@ -48,8 +48,7 @@ for instance:
 
 ```bash
 $ bin/kune-cli users count
-sep 15, 2015 10:08:28 PM cc.kune.kunecli.JMXUtils doOperation
-INFORMACIÓN: Doing operation 'count' over mbean: 'cc.kune.mbeans:type=UserManagerDefault' with id: '11695'.
+(...)
 Users registered: 6480
 ```
 
