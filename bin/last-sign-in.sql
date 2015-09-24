@@ -1,0 +1,1 @@
+select shortname,FROM_UNIXTIME(signInDate * 0.001) FROM user_signin_log l, kusers u WHERE l.user_id=u.id ORDER BY signInDate DESC;

@@ -1,0 +1,1 @@
+select count(*) c, u.shortname, u.name FROM user_signin_log l, kusers u WHERE l.user_id=u.id GROUP BY u.id ORDER BY c DESC;
