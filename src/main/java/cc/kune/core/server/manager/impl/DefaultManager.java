@@ -32,16 +32,16 @@ import org.apache.lucene.queryParser.ParseException;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.Query;
 import org.apache.lucene.util.Version;
+import org.hibernate.CacheMode;
 import org.hibernate.search.MassIndexer;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
 
-import cc.kune.core.server.manager.SearchResult;
-
 import com.google.inject.Provider;
 
-// TODO: Auto-generated Javadoc
+import cc.kune.core.server.manager.SearchResult;
+
 /**
  * The Class DefaultManager.
  *
@@ -210,7 +210,7 @@ public abstract class DefaultManager<T, K> {
   private void reIndex(Class<T> entityClass) {
     // http://docs.jboss.org/hibernate/search/4.1/reference/en-US/html_single/#search-batchindex
 
-    EntityManager em = getEntityManager();
+    EntityManager em = getEntityManager().getEntityManagerFactory().createEntityManager();
     final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);
 
     try {
@@ -221,6 +221,8 @@ public abstract class DefaultManager<T, K> {
       } else {
         indexer = fullTextEm.createIndexer(entityClass);
       }
+      indexer.batchSizeToLoadObjects(25).cacheMode(CacheMode.IGNORE).threadsToLoadObjects(
+          5).threadsForSubsequentFetching(20).progressMonitor(new DefaultMassIndexerProgressMonitor(log));
       indexer.startAndWait();
     } catch (final InterruptedException e) {
       throw new ServerManagerException("Error reindexing", e);

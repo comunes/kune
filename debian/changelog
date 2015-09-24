@@ -1,5 +1,6 @@
 kune (1.0.1+b16) unstable; urgency=medium
 
+  * Tunned massreindexing and kune-cli command
   * Added new kune-cli commands
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 16 Sep 2015 04:40:14 +0200

@@ -69,7 +69,7 @@ public class JMXUtils {
           beanInfo = mbsc.getMBeanInfo(mbeanName);
           for (final MBeanOperationInfo currentOp : beanInfo.getOperations()) {
             if (currentOp.getName().equals(operation)) {
-              LOG.info("Doing operation '" + operation + "' over mbean: '" + objectName + "' with id: '"
+              LOG.debug("Doing operation '" + operation + "' over mbean: '" + objectName + "' with id: '"
                   + id + "'.");
               final Object invoke = mbsc.invoke(mbeanName, currentOp.getName(), new Object[] {},
                   new String[] {});

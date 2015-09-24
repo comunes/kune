@@ -58,6 +58,7 @@ import cc.kune.kunecli.cmds.GroupsCount;
 import cc.kune.kunecli.cmds.GroupsReindex;
 import cc.kune.kunecli.cmds.InviteCommand;
 import cc.kune.kunecli.cmds.ReloadPropertiesCommand;
+import cc.kune.kunecli.cmds.SiteReindex;
 import cc.kune.kunecli.cmds.UsersCount;
 import cc.kune.kunecli.cmds.UsersReindex;
 import cc.kune.kunecli.cmds.WaveToDirCommand;
@@ -173,8 +174,7 @@ public class KuneCliMain {
     // kune specific commands
     cs.add(injector.getInstance(AuthCommand.class));
     cs.add(injector.getInstance(InviteCommand.class));
-    // Not working right now:
-    // cs.add(injector.getInstance(SiteReindex.class));
+    cs.add(injector.getInstance(SiteReindex.class));
     cs.add(injector.getInstance(GroupsCount.class));
     cs.add(injector.getInstance(GroupsReindex.class));
     cs.add(injector.getInstance(UsersCount.class));
