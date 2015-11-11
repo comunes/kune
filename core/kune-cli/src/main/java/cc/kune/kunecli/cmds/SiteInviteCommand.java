@@ -40,7 +40,7 @@ import com.google.inject.Singleton;
 import cc.kune.core.client.rpcservices.InvitationServiceAsync;
 
 @Singleton
-public class InviteCommand extends Command {
+public class SiteInviteCommand extends Command {
   public static class InviteICommand implements ICommandExecutor {
 
     @Inject
@@ -85,11 +85,11 @@ public class InviteCommand extends Command {
     }
   }
 
-  public static final Log LOG = LogFactory.getLog(InviteCommand.class);
+  public static final Log LOG = LogFactory.getLog(SiteInviteCommand.class);
 
   @Inject
-  public InviteCommand(final InviteICommand cmd) throws InvalidSyntaxException {
-    super("invite <youruser:string> <yourpass:string> <someemail@example.com:string> ...",
+  public SiteInviteCommand(final InviteICommand cmd) throws InvalidSyntaxException {
+    super("site invite <youruser:string> <yourpass:string> <someemail@example.com:string> ...",
         "invite some emails to use this kune site", cmd);
   }
 }

@@ -29,23 +29,20 @@ import org.naturalcli.ICommandExecutor;
 import org.naturalcli.InvalidSyntaxException;
 import org.naturalcli.ParseResult;
 
-import cc.kune.core.server.manager.impl.SiteManagerDefaultMBean;
-import cc.kune.core.server.properties.KunePropertiesDefaultMBean;
+import cc.kune.core.server.manager.impl.UserManagerDefaultMBean;
 import cc.kune.kunecli.JMXUtils;
 
-public class ReloadPropertiesCommand extends Command {
+public class UsersReindexCommand extends Command {
 
-  public static class ReloadPropertiesICommand implements ICommandExecutor {
+  public static class UsersReindexICommand implements ICommandExecutor {
 
     @Override
     public void execute(final ParseResult result) throws ExecutionException {
-      JMXUtils.doOperation(KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME, "reload");
-      JMXUtils.doOperation(SiteManagerDefaultMBean.MBEAN_OBJECT_NAME, "reloadInitData");
+      JMXUtils.doOperation(UserManagerDefaultMBean.MBEAN_OBJECT_NAME, "reIndex");
     }
   }
 
-  public ReloadPropertiesCommand() throws InvalidSyntaxException {
-    super("reload properties", "Reload the kune.properties without restarting kune",
-        new ReloadPropertiesICommand());
+  public UsersReindexCommand() throws InvalidSyntaxException {
+    super("users reindex", "Reindex all users in Lucene (experimental)", new UsersReindexICommand());
   }
 }

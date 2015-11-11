@@ -32,7 +32,7 @@ import org.naturalcli.ParseResult;
 import cc.kune.core.server.manager.impl.GroupManagerDefaultMBean;
 import cc.kune.kunecli.JMXUtils;
 
-public class GroupsReindex extends Command {
+public class GroupsReindexCommand extends Command {
 
   public static class GroupsReindexICommand implements ICommandExecutor {
 
@@ -42,7 +42,7 @@ public class GroupsReindex extends Command {
     }
   }
 
-  public GroupsReindex() throws InvalidSyntaxException {
-    super("groups reindex", "Reindex all groups in Lucene", new GroupsReindexICommand());
+  public GroupsReindexCommand() throws InvalidSyntaxException {
+    super("groups reindex", "Reindex all groups in Lucene (experimental)", new GroupsReindexICommand());
   }
 }

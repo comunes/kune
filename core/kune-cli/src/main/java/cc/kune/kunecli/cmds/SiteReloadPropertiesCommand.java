@@ -30,19 +30,22 @@ import org.naturalcli.InvalidSyntaxException;
 import org.naturalcli.ParseResult;
 
 import cc.kune.core.server.manager.impl.SiteManagerDefaultMBean;
+import cc.kune.core.server.properties.KunePropertiesDefaultMBean;
 import cc.kune.kunecli.JMXUtils;
 
-public class SiteReindex extends Command {
+public class SiteReloadPropertiesCommand extends Command {
 
-  public static class SiteReindexICommand implements ICommandExecutor {
+  public static class ReloadPropertiesICommand implements ICommandExecutor {
 
     @Override
     public void execute(final ParseResult result) throws ExecutionException {
-      JMXUtils.doOperation(SiteManagerDefaultMBean.MBEAN_OBJECT_NAME, "reIndexAllEntities");
+      JMXUtils.doOperation(KunePropertiesDefaultMBean.MBEAN_OBJECT_NAME, "reload");
+      JMXUtils.doOperation(SiteManagerDefaultMBean.MBEAN_OBJECT_NAME, "reloadInitData");
     }
   }
 
-  public SiteReindex() throws InvalidSyntaxException {
-    super("site reindex", "Reindex all entities in Lucene (can be slow)", new SiteReindexICommand());
+  public SiteReloadPropertiesCommand() throws InvalidSyntaxException {
+    super("site reload properties", "Reload the kune.properties without restarting kune",
+        new ReloadPropertiesICommand());
   }
 }

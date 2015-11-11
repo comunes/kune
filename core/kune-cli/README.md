@@ -24,23 +24,44 @@ execute file <filename:string>
 auth <user:string> <pass:string>
         auth to kune
 
-invite <youruser:string> <yourpass:string> <someemail@example.com:string> ...
+site invite <youruser:string> <yourpass:string> <someemail@example.com:string> ...
         invite some emails to use this kune site
+
+site i18n stats [<kune.properties:string>]
+        Gets a table with the status of translations. (if kune.properties is not defined we use /etc/kune/kune.properties for get the db parameters)
+
+site reindex
+        Reindex all entities in Lucene (experimental, can be slow)
+
+site reload properties
+        Reload the kune.properties without restarting kune
 
 groups count
         Count all registered groups
 
 groups reindex
-        Reindex all groups in Lucene
+        Reindex all groups in Lucene (experimental)
 
 users count
         Count all registered users
 
-users reindex
-        Reindex all users in Lucene
+users daily sign-ins stats [<kune.properties:string>]
+        Gets stats of daily users sign-ins (if kune.properties is not defined we use /etc/kune/kune.properties for get the db parameters)
 
-reload properties
-        Reload the kune.properties without restarting kune
+users last stats [<kune.properties:string>]
+        Gets stats of last users sign-ins (if kune.properties is not defined we use /etc/kune/kune.properties for get the db parameters)
+
+users lang stats [<kune.properties:string>]
+        Gets stats of users languages (if kune.properties is not defined we use /etc/kune/kune.properties for get the db parameters)
+
+users sign-in stats [<kune.properties:string>]
+        Gets stats of users sign-ins (if kune.properties is not defined we use /etc/kune/kune.properties for get the db parameters)
+
+users reindex
+        Reindex all users in Lucene (experimental)
+
+waveletToDir <waveletName:string>
+        Converts a wavelet like 'example.com/w+cbghmi0fsmxjIS/example.com/user+test1@example.com' to his filesystem directory name.
 
 ```
 

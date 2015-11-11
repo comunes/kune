@@ -1,1 +1,3 @@
-egrep -ri "$*" src/main/java/cc | egrep -v "\.properties|svn-base"
+#!/bin/bash
+DIR=`dirname $0`
+egrep -ri "$*" $DIR/../src/main/java/cc | egrep -v "\.properties|svn-base"

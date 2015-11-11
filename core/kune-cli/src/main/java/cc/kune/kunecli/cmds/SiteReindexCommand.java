@@ -28,34 +28,22 @@ import org.naturalcli.ExecutionException;
 import org.naturalcli.ICommandExecutor;
 import org.naturalcli.InvalidSyntaxException;
 import org.naturalcli.ParseResult;
-import org.waveprotocol.box.server.persistence.file.FileUtils;
-import org.waveprotocol.wave.model.id.WaveletName;
-import org.waveprotocol.wave.model.waveref.InvalidWaveRefException;
-import org.waveprotocol.wave.model.waveref.WaveRef;
-import org.waveprotocol.wave.util.escapers.jvm.JavaWaverefEncoder;
 
-public class WaveToDirCommand extends Command {
+import cc.kune.core.server.manager.impl.SiteManagerDefaultMBean;
+import cc.kune.kunecli.JMXUtils;
 
-  public static class WaveToDirICommand implements ICommandExecutor {
+public class SiteReindexCommand extends Command {
+
+  public static class SiteReindexICommand implements ICommandExecutor {
 
     @Override
     public void execute(final ParseResult result) throws ExecutionException {
-      final String path = result.getParameterValue(0).toString();
-      try {
-        final WaveRef waveRef = JavaWaverefEncoder.decodeWaveRefFromPath(path);
-        final WaveletName waveName = WaveletName.of(waveRef.getWaveId(), waveRef.getWaveletId());
-        System.out.println(
-            "Wavelet of " + path + " to path " + FileUtils.waveletNameToPathSegment(waveName));
-      } catch (final InvalidWaveRefException e) {
-        e.printStackTrace();
-      }
-
+      JMXUtils.doOperation(SiteManagerDefaultMBean.MBEAN_OBJECT_NAME, "reIndexAllEntities");
     }
   }
 
-  public WaveToDirCommand() throws InvalidSyntaxException {
-    super("waveletToDir <waveletName:string>",
-        "Converts a wavelet like 'example.com/w+cbghmi0fsmxjIS/example.com/user+test1@example.com' to his filesystem directory name.",
-        new WaveToDirICommand());
+  public SiteReindexCommand() throws InvalidSyntaxException {
+    super("site reindex", "Reindex all entities in Lucene (experimental, can be slow)",
+        new SiteReindexICommand());
   }
 }

@@ -55,12 +55,17 @@ import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.kunecli.cmds.AuthCommand;
 import cc.kune.kunecli.cmds.GroupsCount;
-import cc.kune.kunecli.cmds.GroupsReindex;
-import cc.kune.kunecli.cmds.InviteCommand;
-import cc.kune.kunecli.cmds.ReloadPropertiesCommand;
-import cc.kune.kunecli.cmds.SiteReindex;
+import cc.kune.kunecli.cmds.GroupsReindexCommand;
+import cc.kune.kunecli.cmds.SiteI18nStatsCommand;
+import cc.kune.kunecli.cmds.SiteInviteCommand;
+import cc.kune.kunecli.cmds.SiteReindexCommand;
+import cc.kune.kunecli.cmds.SiteReloadPropertiesCommand;
 import cc.kune.kunecli.cmds.UsersCount;
-import cc.kune.kunecli.cmds.UsersReindex;
+import cc.kune.kunecli.cmds.UsersDailySignInsCommand;
+import cc.kune.kunecli.cmds.UsersLangStatsCommand;
+import cc.kune.kunecli.cmds.UsersLastSignInsCommand;
+import cc.kune.kunecli.cmds.UsersReindexCommand;
+import cc.kune.kunecli.cmds.UsersSignInsStatsCommand;
 import cc.kune.kunecli.cmds.WaveToDirCommand;
 
 /**
@@ -173,15 +178,19 @@ public class KuneCliMain {
 
     // kune specific commands
     cs.add(injector.getInstance(AuthCommand.class));
-    cs.add(injector.getInstance(InviteCommand.class));
-    cs.add(injector.getInstance(SiteReindex.class));
+    cs.add(injector.getInstance(SiteInviteCommand.class));
+    cs.add(injector.getInstance(SiteI18nStatsCommand.class));
+    cs.add(injector.getInstance(SiteReindexCommand.class));
+    cs.add(injector.getInstance(SiteReloadPropertiesCommand.class));
     cs.add(injector.getInstance(GroupsCount.class));
-    cs.add(injector.getInstance(GroupsReindex.class));
+    cs.add(injector.getInstance(GroupsReindexCommand.class));
     cs.add(injector.getInstance(UsersCount.class));
-    cs.add(injector.getInstance(UsersReindex.class));
-    cs.add(injector.getInstance(ReloadPropertiesCommand.class));
+    cs.add(injector.getInstance(UsersDailySignInsCommand.class));
+    cs.add(injector.getInstance(UsersLastSignInsCommand.class));
+    cs.add(injector.getInstance(UsersLangStatsCommand.class));
+    cs.add(injector.getInstance(UsersSignInsStatsCommand.class));
+    cs.add(injector.getInstance(UsersReindexCommand.class));
     cs.add(injector.getInstance(WaveToDirCommand.class));
-
     // As the return type of these commands are not java.io.Serializable (and
     // instead GWT's IsSerializable) the return part of this cmds fails
     // cs.add(injector.getInstance(GetInitDataCommand.class));

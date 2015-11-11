@@ -23,26 +23,13 @@
 
 package cc.kune.kunecli.cmds;
 
-import org.naturalcli.Command;
-import org.naturalcli.ExecutionException;
-import org.naturalcli.ICommandExecutor;
 import org.naturalcli.InvalidSyntaxException;
-import org.naturalcli.ParseResult;
 
-import cc.kune.core.server.manager.impl.UserManagerDefaultMBean;
-import cc.kune.kunecli.JMXUtils;
+public class UsersLastSignInsCommand extends AbstractSqlCommand {
 
-public class UsersReindex extends Command {
-
-  public static class UsersReindexICommand implements ICommandExecutor {
-
-    @Override
-    public void execute(final ParseResult result) throws ExecutionException {
-      JMXUtils.doOperation(UserManagerDefaultMBean.MBEAN_OBJECT_NAME, "reIndex");
-    }
-  }
-
-  public UsersReindex() throws InvalidSyntaxException {
-    super("users reindex", "Reindex all users in Lucene", new UsersReindexICommand());
+  public UsersLastSignInsCommand() throws InvalidSyntaxException {
+    super("users last stats", "Gets stats of last users sign-ins",
+        "select shortname, FROM_UNIXTIME(signInDate * 0.001) "
+            + "FROM user_signin_log l, kusers u WHERE l.user_id=u.id ORDER BY signInDate DESC;");
   }
 }
