@@ -1,4 +1,4 @@
-kune (1.0.1+b17) unstable; urgency=medium
+kune-cli (1.0.1+b17) unstable; urgency=medium
 
   * Added new kune-cli commands (mainly about stats)
 
@@ -90,7 +90,7 @@ kune (1.0.1+b6) unstable; urgency=medium
 
 kune (1.0.1+b5) unstable; urgency=medium
 
-  * Set cookies to domains and sub.domains 
+  * Set cookies to domains and sub.domains
   * Improvements in embed system
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 14 Jun 2015 14:23:30 +0200
@@ -140,7 +140,7 @@ kune (0.3.0+b51) unstable; urgency=medium
   * List names should be alphanumeric + hiphensor underscores
   * Fix translator width
   * Fix some i18n typo
-  * Fixes for caret/cursor issues in chrome+linux 
+  * Fixes for caret/cursor issues in chrome+linux
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 10 Mar 2015 20:43:38 +0100
 
@@ -187,7 +187,7 @@ kune (0.3.0+b46) unstable; urgency=medium
   * Avatar and backgrounds are shown in preferences. Fix for #549
   * Logo and background uploading rewrited with image drag/drop
   * Some works trying to prevent logos recently changed caching
-  * Improved jetty server gracefully shutdown 
+  * Improved jetty server gracefully shutdown
   * Improved kune superdev lauchers in eclipse
   * Updated gwt (2.7.0) and gwtp.
   * Updated gwt (2.6.1), merge latest wave code (atmosphere instead of websocket-io)
@@ -226,7 +226,7 @@ kune (0.3.0+b42) unstable; urgency=low
 kune (0.3.0+b41) unstable; urgency=low
 
   * Wave updated.
-  * Jetty updated to 9.1.1. 
+  * Jetty updated to 9.1.1.
   * Intials avatars.
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 26 Mar 2014 11:44:24 +0100
@@ -254,11 +254,11 @@ kune (0.3.0+b38) unstable; urgency=low
 
   [ Vicente J. Ruiz Jurado ]
   * Merge of share dialog (wip of #550)
-  * More work in #561 to embed waves (jsni export improved, clientdownutils 
+  * More work in #561 to embed waves (jsni export improved, clientdownutils
     singleton, removed server logs)
 
   [Antonio Tenorio Fornés]
-  * Invite kune users to groups/list. Partial work for enhancement #467 
+  * Invite kune users to groups/list. Partial work for enhancement #467
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 16 Dec 2013 15:47:59 +0100
 
@@ -453,11 +453,11 @@ kune (0.3.0+b12) unstable; urgency=low
 
   * Server translations updated
   * Fix for #455
-  * Fix for #401: Home=>Latest publications shouldn't show contents from Closed 
+  * Fix for #401: Home=>Latest publications shouldn't show contents from Closed
     groups
   * Fix for #479: Cancel previous search request
   * Fix for #243: Don't show closed groups to others
-  * Fix for #456: Development environment depends on java 6. Updated to 7. 
+  * Fix for #456: Development environment depends on java 6. Updated to 7.
     Dozer updated.
   * Ask for confirmation when history changes or window closes.
   * Fix for #211: Loosing editions while switching from group space to user space
@@ -496,7 +496,7 @@ kune (0.3.0+b8) unstable; urgency=low
 
 kune (0.3.0+b7) unstable; urgency=low
 
-  * kune googleable, closes #286 (thanks to Samer Hassan Collado for the 
+  * kune googleable, closes #286 (thanks to Samer Hassan Collado for the
     investigation)
   * New email template (thanks to Aitor Méndez)
   * Translations updated
@@ -573,7 +573,7 @@ kune (0.2.0+b33) unstable; urgency=low
 kune (0.2.0+b32) unstable; urgency=low
 
   * Translations updated
-  * Chat icons updated 
+  * Chat icons updated
   * Some fixes in database initialization
   * Add new icons based in iconic. Fix for #379
   * Wave code updated
@@ -629,7 +629,7 @@ kune (0.2.0+b27) unstable; urgency=low
 
 kune (0.2.0+b26) unstable; urgency=low
 
-  * Allow to update the db schema by hibernate by a configuration 
+  * Allow to update the db schema by hibernate by a configuration
     property (fix #350)
   * Autoincrease in signInLogs
   * logs to WARN instead of ERROR
@@ -766,7 +766,7 @@ kune (0.2.0+b9) unstable; urgency=low
 
 kune (0.2.0+b8) unstable; urgency=low
 
-  * Updated wave code with some fix (long paste, avatar flickering, etc). 
+  * Updated wave code with some fix (long paste, avatar flickering, etc).
   * Saving status while editing
   * Avatars update fix (better resolution, you can change it many times,etc)
 
@@ -812,7 +812,7 @@ kune (0.2.0+b2) unstable; urgency=low
 
 kune (0.2.0+b1) unstable; urgency=low
 
-  * Kune version via scripts. User and group short-name forced to lowercase. 
+  * Kune version via scripts. User and group short-name forced to lowercase.
     Openfire optional in debian start-up
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 16 Apr 2012 20:10:07 +0200

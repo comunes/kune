@@ -24,7 +24,7 @@ TOOLS="$JAVA_HOME/lib/tools.jar"
 
 JAR=""
 DEV_JAR="./target/kune-cli-1.0.1-SNAPSHOT-jar-with-dependencies.jar"
-PROD_JAR="/usr/share/kune/lib/kune-cli-complete.jar"
+PROD_JAR="/usr/share/kune-cli/lib/kune-cli-complete.jar"
 
 if [[ -e $DEV_JAR ]]
 then
