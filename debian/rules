@@ -16,7 +16,6 @@ include /usr/share/cdbs/1/rules/patchsys-quilt.mk
 KUNE_VERSION:=1.0.1-SNAPSHOT
 
 DEST := $(CURDIR)/debian/kune
-DESTCLI := $(CURDIR)/debian/kune-cli
 TARGET := $(CURDIR)/target
 CLI := $(CURDIR)/core/kune-cli
 CLITARGET := $(CLI)/target
@@ -25,7 +24,7 @@ WEBAPP := $(CURDIR)/src/main/webapp
 TARGETC := $(TARGET)/kune-$(KUNE_VERSION)
 
 KUNE := $(DEST)/usr/share/kune
-KUNECLI := $(DESTCLI)/usr/share/kune-cli
+KUNECLI := $(DEST)/usr/share/kune-cli
 ETCDIR := $(DEST)/etc/kune
 LOGDIR := $(DEST)/var/log/kune
 VARDIR := $(DEST)/var/lib/kune
@@ -125,5 +124,3 @@ install/kune::
 #	sh -e debian/orig-tar.sh
 
 install/kune-cli::
-	cp $(CLI)/bin/kune-cli $(KUNECLI)/bin/
-	cp $(CLITARGETJAR) $(KUNECLI)/lib/kune-cli-complete.jar

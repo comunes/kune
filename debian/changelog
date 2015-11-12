@@ -1,4 +1,4 @@
-kune-cli (1.0.1+b17) unstable; urgency=medium
+kune (1.0.1+b17) unstable; urgency=medium
 
   * Added new kune-cli commands (mainly about stats)
 
