@@ -42,6 +42,14 @@ public class PolymerUtils {
     }
   };
 
+  private static Timer hideSNTimer = new Timer() {
+    @Override
+    public void run() {
+      PolymerUtils.hideSN();
+      PolymerUtils.setSNWidth("80%");
+    }
+  };
+
   private static PaperFab inboxShowHide;
 
   public static void addFlexHorLayout(final Widget... widgets) {
@@ -69,27 +77,35 @@ public class PolymerUtils {
   }
 
   public native static String getMainSelected() /*-{
-		return $wnd.kt.main_selected;
+    return $wnd.kt.main_selected;
   }-*/;
 
   public native static String getSNSelected() /*-{
-		return $wnd.kt.group_header_selected;
+    return $wnd.kt.group_header_selected;
   }-*/;
 
   public static void hideInboxCancel() {
     hideInboxTimer.cancel();
   }
 
+  public static void hideSNWithDelay() {
+    hideSNTimer.schedule(2000);
+  }
+
   public static void hideInboxWithDelay() {
     hideInboxTimer.schedule(PolymerUtils.isMainDrawerNarrow() ? 0 : 4000);
   }
 
+  public native static void showSN() /*-{
+    $wnd.kt.group_header_selected = "drawer";
+  }-*/;
+
   public native static void hideSN() /*-{
-		$wnd.kt.group_header_selected = "main";
+    $wnd.kt.group_header_selected = "main";
   }-*/;
 
   public native static void hideSpinner() /*-{
-		$wnd.kt.hideSpinner();
+    $wnd.kt.hideSpinner();
   }-*/;
 
   public static boolean isGroupHeaderMainSelected() {
@@ -97,7 +113,7 @@ public class PolymerUtils {
   }
 
   public native static boolean isMainDrawerNarrow() /*-{
-		return $wnd.kt.main_narrow;
+    return $wnd.kt.main_narrow;
   }-*/;
 
   public static boolean isMainSelected() {
@@ -105,7 +121,7 @@ public class PolymerUtils {
   }
 
   public native static boolean isXSmall() /*-{
-		return $wnd.kt.xsmall;
+    return $wnd.kt.xsmall;
   }-*/;
 
   public static void removeLayout(final Element element, final Layout... layouts) {
@@ -124,15 +140,15 @@ public class PolymerUtils {
   }
 
   public native static void setBackImage(final String url) /*-{
-		$wnd.kt.group_back_image_url = url;
+    $wnd.kt.group_back_image_url = url;
   }-*/;
 
   public native static void setBeatAnimation(final String id, boolean beat) /*-{
-		$wnd.kt.beat(id, beat);
+    $wnd.kt.beat(id, beat);
   }-*/;
 
   public native static void setBlinkAnimation(final String id, boolean blink) /*-{
-		$wnd.kt.blink(id, blink);
+    $wnd.kt.blink(id, blink);
   }-*/;
 
   /**
@@ -150,7 +166,7 @@ public class PolymerUtils {
   }
 
   private native static void setMainSelected(String selected) /*-{
-		$wnd.kt.main_selected = selected;
+    $wnd.kt.main_selected = selected;
   }-*/;
 
   public static void setNarrowSwipeEnabled(final boolean enabled) {
@@ -162,8 +178,8 @@ public class PolymerUtils {
   }
 
   private native static void setNarrowSwipeEnabledImpl(final boolean enabled) /*-{
-		$wnd.kt.main_disableEdgeSwipe = !enabled;
-		$wnd.kt.main_disableSwipe = !enabled;
+    $wnd.kt.main_disableEdgeSwipe = !enabled;
+    $wnd.kt.main_disableSwipe = !enabled;
   }-*/;
 
   public static void setNarrowVisible(final boolean visible) {
@@ -171,30 +187,35 @@ public class PolymerUtils {
   }
 
   private native static void setNarrowVisibleImpl(final boolean visible) /*-{
-		$wnd.kt.main_forcenarrow = !visible;
+    $wnd.kt.main_forcenarrow = !visible;
   }-*/;
 
   public native static void setSitebarUserIconImage(final String url) /*-{
-		$wnd.kt.user_icon_back_image_url = url;
+    $wnd.kt.user_icon_back_image_url = url;
   }-*/;
 
+  public native static void setSNWidth(final String width) /*-{
+    $wnd.kt.group_header_drawer_width = width;
+  }-*/;
+
+
   private native static void setTheme(JsArrayString c, JsArrayString bg) /*-{
-		$wnd.kt.c1 = c[0];
-		$wnd.kt.bg1 = bg[0];
-		$wnd.kt.c2 = c[1];
-		$wnd.kt.bg2 = bg[1];
-		$wnd.kt.c3 = c[2];
-		$wnd.kt.bg3 = bg[2];
-		$wnd.kt.c4 = c[3];
-		$wnd.kt.bg4 = bg[3];
-		$wnd.kt.c5 = c[4];
-		$wnd.kt.bg5 = bg[4];
-		$wnd.kt.c6 = c[5];
-		$wnd.kt.bg6 = bg[5];
-		$wnd.kt.c7 = c[6];
-		$wnd.kt.bg7 = bg[6];
-		$wnd.kt.c8 = c[7];
-		$wnd.kt.bg8 = bg[7];
+    $wnd.kt.c1 = c[0];
+    $wnd.kt.bg1 = bg[0];
+    $wnd.kt.c2 = c[1];
+    $wnd.kt.bg2 = bg[1];
+    $wnd.kt.c3 = c[2];
+    $wnd.kt.bg3 = bg[2];
+    $wnd.kt.c4 = c[3];
+    $wnd.kt.bg4 = bg[3];
+    $wnd.kt.c5 = c[4];
+    $wnd.kt.bg5 = bg[4];
+    $wnd.kt.c6 = c[5];
+    $wnd.kt.bg6 = bg[5];
+    $wnd.kt.c7 = c[6];
+    $wnd.kt.bg7 = bg[6];
+    $wnd.kt.c8 = c[7];
+    $wnd.kt.bg8 = bg[7];
   }-*/;
 
   public static void setTheme(final String c[], final String bg[]) {
@@ -202,11 +223,11 @@ public class PolymerUtils {
   }
 
   public native static void showSpinner() /*-{
-		$wnd.kt.showSpinner();
+    $wnd.kt.showSpinner();
   }-*/;
 
   public native static void toggleSearch() /*-{
-		$wnd.kt.toggleSearch();
+    $wnd.kt.toggleSearch();
   }-*/;
 
   /**

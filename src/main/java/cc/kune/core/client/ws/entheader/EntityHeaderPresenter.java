@@ -31,6 +31,7 @@ import cc.kune.core.client.state.StateManager;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent;
 import cc.kune.gspace.client.events.CurrentEntityChangedEvent.CurrentEntityChangedHandler;
+import cc.kune.polymer.client.PolymerUtils;
 
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
@@ -141,6 +142,11 @@ public class EntityHeaderPresenter extends
       @Override
       public void onGroupChanged(final GroupChangedEvent event) {
         setGroupLogo(session.getCurrentState().getGroup());
+        if (!PolymerUtils.isXSmall()) {
+          PolymerUtils.setSNWidth("30%");
+          PolymerUtils.showSN();
+          PolymerUtils.hideSNWithDelay();
+        }
       }
     });
     eventBus.addHandler(CurrentEntityChangedEvent.getType(), new CurrentEntityChangedHandler() {
@@ -155,7 +161,7 @@ public class EntityHeaderPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeader#addAction(cc.kune.common.
    * client.actions.ui.descrip.GuiActionDescrip)
@@ -172,7 +178,7 @@ public class EntityHeaderPresenter extends
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.Presenter#revealInParent()
    */
   @Override

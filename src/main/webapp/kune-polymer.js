@@ -32,6 +32,8 @@ kt.headerl=192;
 kt.toolbarFabMargins=70;
 kt.toolbarFabMinMargins=60;
 
+kt.group_header_drawer_width="80%";
+
 /* Avatar sizes */
 kt.avatarsizel=100;
 kt.avatarsizem=80;

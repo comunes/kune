@@ -483,7 +483,7 @@
               <paper-fab icon="check" id="editdone_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <core-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">
                 <core-toolbar id="header_core_toolbar" class="tall" flex>
-                  <core-drawer-panel transition drawerwidth="80%" selected="{{group_header_selected}}" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
+                  <core-drawer-panel transition drawerwidth="{{group_header_drawer_width}}" selected="{{group_header_selected}}" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
                     <section id="group_core_drawer" drawer>
                       <div horizontal layout>
                         <div id="header_social_net" fit></div>
@@ -493,6 +493,8 @@
                     </section>
                     <section id="group_core_main" main>
                       <div id="header_groupname_div" class="top indent" layout horizontal>
+                        <div id="header-left-margin">
+                        </div>
                         <div self-center>
                           <paper-shadow animated id="header_group_paper_shadow" class="top">
                             <!-- https://stackoverflow.com/questions/5775469/whats-the-valid-way-to-include-an-image-with-no-src -->
@@ -1355,7 +1357,7 @@
         }
 
         /* background for toolbar when it is condensed  (not working because of previous opacity) */
-        core-scroll-header-panel #condensedHeaderBg { /* ff */ 
+        core-scroll-header-panel #condensedHeaderBg { /* ff */
           background-color: {{bg2}};
         }
 
@@ -1444,10 +1446,12 @@
           user-select: text;
         }
 
+        #header-left-margin {
+          margin-left: {{xsmall? 10: small? 52: 52}}px;
+        }
+
         #header_group_paper_shadow {
-          position: relative;
-          left: {{xsmall? 10: small? 52: 52}}px;
-          top: {{xsmall? 7: small? 10: 20 }}px;
+          margin-top: {{xsmall? 7: small? 10: 20 }}px;
           border-radius: 2px;
         }
 
@@ -1476,8 +1480,11 @@
         }
 
         #header_group_name, #header_short_group_name {
-          position: relative;
-          left: {{xsmall? 20: small? 60: 60}}px;
+          margin-left: 20px;
+        }
+
+        #header_group_name {
+	  line-height: 1em;
         }
 
         #header_group_name div {
@@ -1531,7 +1538,8 @@
         }
 
         #group_header_bottom {
-          margin-top: {{xsmall ? 44 : small? 33 : 33}}px;
+	  position: relative;
+          bottom: 15px;
           width: 100%;
         }
 
@@ -1681,7 +1689,7 @@
           border-bottom-left-radius: 8px !important;
           border-top-right-radius: 0px !important;
           border-bottom-right-radius: 0px !important;
-          margin-bottom: 5px; /* Distance between tools */ 
+          margin-bottom: 5px; /* Distance between tools */
         }
 
         #group_tools_toolbar paper-fab::shadow paper-shadow {
@@ -1824,7 +1832,7 @@
         }
 
         #group_bottombar > div > div > img {
-          /* license */ 
+          /* license */
           opacity: 0.7;
           padding-left: {{xsmall ? '10px' : '60px' }};
         }
@@ -1942,7 +1950,7 @@
         var s = document.createElement('script');
         s.type = "text/javascript";
         s.src = "ws/ws.nocache.js";
-        // Coment this line for develop this initial page without gwt code
+        // Comment this line for develop this initial page without gwt code
         document.body.appendChild(s);
       });
 
