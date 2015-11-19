@@ -88,8 +88,8 @@ public class PolymerUtils {
     hideInboxTimer.cancel();
   }
 
-  public static void hideSNWithDelay() {
-    hideSNTimer.schedule(2000);
+  public static void hideSNWithDelay(int delay) {
+    hideSNTimer.schedule(delay);
   }
 
   public static void hideInboxWithDelay() {

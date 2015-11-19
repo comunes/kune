@@ -141,11 +141,13 @@ public class EntityHeaderPresenter extends
     stateManager.onGroupChanged(true, new GroupChangedHandler() {
       @Override
       public void onGroupChanged(final GroupChangedEvent event) {
+
         setGroupLogo(session.getCurrentState().getGroup());
         if (!PolymerUtils.isXSmall()) {
+
           PolymerUtils.setSNWidth("30%");
           PolymerUtils.showSN();
-          PolymerUtils.hideSNWithDelay();
+          PolymerUtils.hideSNWithDelay(event.getPreviousGroup() == null? 6000: 3000);
         }
       }
     });
