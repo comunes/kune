@@ -16,7 +16,7 @@
    height="1488.189"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="wiki.svg">
   <sodipodi:namedview
      id="base"
@@ -26,18 +26,18 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6809434"
-     inkscape:cx="243.10117"
-     inkscape:cy="1308.5714"
+     inkscape:cx="168.14326"
+     inkscape:cy="1260.9791"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer7"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
-     inkscape:window-width="1078"
-     inkscape:window-height="919"
-     inkscape:window-x="0"
-     inkscape:window-y="972"
-     inkscape:window-maximized="0" />
+     inkscape:window-width="1871"
+     inkscape:window-height="1056"
+     inkscape:window-x="49"
+     inkscape:window-y="864"
+     inkscape:window-maximized="1" />
   <!-- Start kune i18n part -->
   <script
      id="kunelangtable">
@@ -354,16 +354,6 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccccccccccc" />
     <path
-       style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 174.299,911.00853 c -36.78501,6.53254 -42.5348,26.83565 -42.5348,26.83565 l -2.47152,7.12806"
-       id="path14206"
-       inkscape:connector-curvature="0" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path5858-1"
-       d="m 145.35895,790.85769 c -36.78501,-6.53253 -42.5348,-26.83565 -42.5348,-26.83565 l -2.47152,-7.1281"
-       style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <path
        style="fill:#e6e6e6;display:inline"
        d="m 146.3261,606.21291 c 0,0 -18.75938,0 -29.70235,-0.0359 0,12.53593 -6.25313,50.0359 -6.25313,50.0359 20.32266,0 33.61056,0 43.77189,0 4.68984,-18.74999 4.68984,-21.87498 6.22811,-34.36247 -6.22811,-4.7 -14.04452,-15.63749 -14.04452,-15.63749 z m 3.12656,43.74997 c -17.0516,0 -21.74834,0.15 -32.07894,0.15 2.37659,-11.08741 3.93987,-25.1499 4.68984,-37.64989 3.28289,0 8.31863,0 14.88285,0 0,0 0,14.06249 -1.54452,18.63436 7.79764,0.88857 17.17733,0.11563 17.17733,0.11563 -0.002,4.27031 -3.12656,18.74998 -3.12656,18.74998 z m -7.14144,-23.96219 c 1.53826,-6.12813 0.88831,-10.27529 0.88831,-13.53778 1.56329,3.12499 8.46986,9.875 10.97737,12.37812 -4.72424,1.68437 -9.43947,1.15966 -11.86568,1.15966 z"
        id="path7366"
@@ -487,14 +477,14 @@
          y="449.63907"
          x="179.91093"
          sodipodi:role="line"
-         id="tspan14214-5">...darnos tu <tspan
+         id="tspan14214-5">...danos tu <tspan
    id="tspan14216-8"
    style="font-weight:bold">feedback </tspan></tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="464.63907"
          x="179.91093"
          sodipodi:role="line"
-         id="tspan14218-8">y participar para </tspan><tspan
+         id="tspan14218-8">y participa para </tspan><tspan
          id="tspan14220-6"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="479.63907"
@@ -505,28 +495,6 @@
          x="179.91093"
          sodipodi:role="line"
          id="tspan14222-1">herramienta...</tspan></text>
-    <text
-       transform="translate(0,435.82679)"
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="152.24879"
-       y="350.59613"
-       id="text6446-0"
-       sodipodi:linespacing="125%"><tspan
-         id="tspan14200-6"
-         sodipodi:role="line"
-         x="152.24879"
-         y="350.59613"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">...aquí puedes crear </tspan><tspan
-         id="tspan14251-9"
-         sodipodi:role="line"
-         x="152.24879"
-         y="365.59613"
-         style="font-size:12px;font-style:normal;font-weight:bold;fill:#aa4400"><tspan
-   id="tspan19321"
-   style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">nuevas </tspan>páginas wiki<tspan
-   id="tspan8937-8"
-   style="font-weight:normal">...</tspan></tspan></text>
     <text
        transform="translate(0,435.82679)"
        xml:space="preserve"
@@ -642,26 +610,6 @@
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">this tool</tspan></text>
     <text
        sodipodi:linespacing="125%"
-       id="text21596"
-       y="350.59613"
-       x="152.24879"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       xml:space="preserve"
-       transform="translate(0,435.82679)"><tspan
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="350.59613"
-         x="152.24879"
-         sodipodi:role="line"
-         id="tspan21600">From here you can </tspan><tspan
-         id="tspan16070"
-         style="font-size:12px;font-style:normal;font-weight:bold;fill:#aa4400"
-         y="365.59613"
-         x="152.24879"
-         sodipodi:role="line"><tspan
-   id="tspan16072"
-   style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">create new </tspan>wiki pages</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
        id="text21606"
        y="172.54723"
        x="195.88776"
@@ -759,17 +707,6 @@
      ns1:sequence="3"
      ns1:refid="rect10516" />
   <ns1:frame
-     ns1:refid="rect10518"
-     ns1:sequence="4"
-     ns1:transition-duration-ms="1000"
-     ns1:hide="true"
-     ns1:clip="true"
-     ns1:title="new"
-     ns1:transition-zoom-percent="0"
-     ns1:timeout-ms="5000"
-     ns1:timeout-enable="false"
-     ns1:transition-profile="linear" />
-  <ns1:frame
      ns1:transition-profile="linear"
      ns1:timeout-enable="false"
      ns1:timeout-ms="5000"
@@ -778,6 +715,6 @@
      ns1:clip="true"
      ns1:hide="true"
      ns1:transition-duration-ms="1000"
-     ns1:sequence="5"
+     ns1:sequence="4"
      ns1:refid="rect10520" />
 </svg>

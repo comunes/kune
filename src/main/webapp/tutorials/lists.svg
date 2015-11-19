@@ -16,7 +16,7 @@
    height="1488.189"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="lists.svg">
   <sodipodi:namedview
      id="base"
@@ -26,17 +26,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6856453"
-     inkscape:cx="243.10117"
-     inkscape:cy="1308.5714"
+     inkscape:cx="168.35235"
+     inkscape:cy="1237.382"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer7"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
-     inkscape:window-width="1080"
-     inkscape:window-height="1868"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-width="1871"
+     inkscape:window-height="1056"
+     inkscape:window-x="49"
+     inkscape:window-y="864"
      inkscape:window-maximized="1">
     <inkscape:grid
        type="xygrid"
@@ -396,16 +396,6 @@
          points="0,32 0,28 24,28 24,32 24,32 "
          id="polygon11" />
     </g>
-    <path
-       style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 220.52029,1427.9618 c -36.78501,6.5325 -42.5348,26.8356 -42.5348,26.8356 l -2.47152,7.1281"
-       id="path14206"
-       inkscape:connector-curvature="0" />
-    <path
-       inkscape:connector-curvature="0"
-       id="path5858-1"
-       d="m 191.58024,1307.8109 c -36.78501,-6.5325 -42.5348,-26.8356 -42.5348,-26.8356 l -2.47152,-7.1281"
-       style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
     <g
        style="display:inline"
        id="g6999"
@@ -942,14 +932,14 @@
          y="1402.8667"
          x="228.32114"
          sodipodi:role="line"
-         id="tspan14214">...darnos tu <tspan
+         id="tspan14214">...danos tu <tspan
    id="tspan14216"
    style="font-weight:bold">feedback </tspan></tspan><tspan
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="1417.8667"
          x="228.32114"
          sodipodi:role="line"
-         id="tspan14218">y participar para </tspan><tspan
+         id="tspan14218">y participa para </tspan><tspan
          id="tspan14220"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
          y="1432.8667"
@@ -960,34 +950,6 @@
          x="228.32114"
          sodipodi:role="line"
          id="tspan14222">herramienta...</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="200.659"
-       y="1303.8237"
-       id="text6446"
-       sodipodi:linespacing="125%"><tspan
-         id="tspan14200"
-         sodipodi:role="line"
-         x="200.659"
-         y="1303.8237"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">...aquí puedes crear </tspan><tspan
-         id="tspan14247"
-         sodipodi:role="line"
-         x="200.659"
-         y="1318.8237"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">nuevas <tspan
-   style="font-weight:bold"
-   id="tspan18194">listas</tspan> y </tspan><tspan
-         id="tspan14251"
-         sodipodi:role="line"
-         x="200.659"
-         y="1333.8237"
-         style="font-size:12px;font-style:normal;font-weight:bold;fill:#aa4400"><tspan
-           id="tspan8937"
-           style="font-weight:normal"><tspan
-   style="font-weight:bold"
-   id="tspan15042">posts</tspan>...</tspan></tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text15572"
@@ -1296,32 +1258,6 @@
          y="1432.8667"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">to improve this tool...</tspan></text>
     <text
-       sodipodi:linespacing="125%"
-       id="text11743"
-       y="1303.8237"
-       x="200.659"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       xml:space="preserve"><tspan
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="1303.8237"
-         x="200.659"
-         sodipodi:role="line"
-         id="tspan11745">...here you can create</tspan><tspan
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="1318.8237"
-         x="200.659"
-         sodipodi:role="line"
-         id="tspan11751">your new <tspan
-   style="font-weight:bold"
-   id="tspan18192">lists</tspan> and</tspan><tspan
-         id="tspan11814"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="1333.8237"
-         x="200.659"
-         sodipodi:role="line"><tspan
-   id="tspan11816"
-   style="font-weight:bold">posts</tspan>...</tspan></text>
-    <text
        transform="scale(0.99912117,1.0008796)"
        sodipodi:linespacing="125%"
        id="text11787"
@@ -1623,22 +1559,11 @@
      ns1:timeout-enable="false"
      ns1:timeout-ms="5000"
      ns1:transition-zoom-percent="0"
-     ns1:title="new"
-     ns1:clip="true"
-     ns1:hide="true"
-     ns1:transition-duration-ms="1000"
-     ns1:sequence="11"
-     ns1:refid="rect6444" />
-  <ns1:frame
-     ns1:transition-profile="linear"
-     ns1:timeout-enable="false"
-     ns1:timeout-ms="5000"
-     ns1:transition-zoom-percent="0"
      ns1:title="feedback"
      ns1:clip="true"
      ns1:hide="true"
      ns1:transition-duration-ms="1000"
-     ns1:sequence="12"
+     ns1:sequence="11"
      ns1:refid="rect14204" />
   <ns1:frame
      ns1:refid="rect7335"

@@ -16,7 +16,7 @@
    height="1488.189"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="chats.svg">
   <sodipodi:namedview
      id="base"
@@ -26,17 +26,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6856453"
-     inkscape:cx="243.10117"
-     inkscape:cy="1308.5714"
+     inkscape:cx="168.35235"
+     inkscape:cy="1261.1118"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer7"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
-     inkscape:window-width="1080"
-     inkscape:window-height="1868"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-width="1871"
+     inkscape:window-height="1056"
+     inkscape:window-x="49"
+     inkscape:window-y="864"
      inkscape:window-maximized="1" />
   <!-- Start kune i18n part -->
   <script
@@ -342,16 +342,6 @@
          inkscape:connector-curvature="0"
          style="fill:#231f20" />
     </g>
-    <path
-       inkscape:connector-curvature="0"
-       id="path14206"
-       d="m 142.01938,1216.8086 c -36.78501,6.5325 -42.534803,26.8356 -42.534803,26.8356 l -2.47152,7.1281"
-       style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <path
-       style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 113.07933,1096.6577 c -36.785013,-6.5325 -42.534803,-26.8356 -42.534803,-26.8356 l -2.47152,-7.1281"
-       id="path5858-1"
-       inkscape:connector-curvature="0" />
     <g
        transform="translate(83.705853,190.80435)"
        id="Layer_1" />
@@ -507,14 +497,14 @@
          sodipodi:role="line"
          x="149.82024"
          y="1191.7134"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">...darnos tu <tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400">...danos tu <tspan
    style="font-weight:bold"
    id="tspan14216">feedback </tspan></tspan><tspan
          id="tspan14218"
          sodipodi:role="line"
          x="149.82024"
          y="1206.7134"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">y participar para </tspan><tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">y participa para </tspan><tspan
          sodipodi:role="line"
          x="149.82024"
          y="1221.7134"
@@ -525,25 +515,6 @@
          x="149.82024"
          y="1236.7134"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">herramienta...</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text6446"
-       y="1092.6705"
-       x="122.1581"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       xml:space="preserve"><tspan
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="1092.6705"
-         x="122.1581"
-         sodipodi:role="line"
-         id="tspan14200">...aquí puedes crear </tspan><tspan
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="1107.6705"
-         x="122.1581"
-         sodipodi:role="line"
-         id="tspan14251">nuevas<tspan
-   id="tspan13694"
-   style="font-weight:bold"> salas de chat</tspan>...</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text13611"
@@ -831,25 +802,6 @@
          sodipodi:role="line"
          id="tspan19987">or event notes</tspan></text>
     <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="122.1581"
-       y="1092.6705"
-       id="text19921"
-       sodipodi:linespacing="125%"><tspan
-         id="tspan19923"
-         sodipodi:role="line"
-         x="122.1581"
-         y="1092.6705"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">From here you can </tspan><tspan
-         id="tspan19925"
-         sodipodi:role="line"
-         x="122.1581"
-         y="1107.6705"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">create new <tspan
-   style="font-weight:bold"
-   id="tspan13786">chat-rooms</tspan></tspan></text>
-    <text
        sodipodi:linespacing="125%"
        id="text19907"
        y="1176.7134"
@@ -962,19 +914,8 @@
      ns1:sequence="2"
      ns1:refid="rect8725" />
   <ns1:frame
-     ns1:refid="rect6444"
-     ns1:sequence="6"
-     ns1:transition-duration-ms="1000"
-     ns1:hide="true"
-     ns1:clip="true"
-     ns1:title="new"
-     ns1:transition-zoom-percent="0"
-     ns1:timeout-ms="5000"
-     ns1:timeout-enable="false"
-     ns1:transition-profile="linear" />
-  <ns1:frame
      ns1:refid="rect14204"
-     ns1:sequence="7"
+     ns1:sequence="6"
      ns1:transition-duration-ms="1000"
      ns1:hide="true"
      ns1:clip="true"

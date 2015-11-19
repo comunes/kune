@@ -16,7 +16,7 @@
    height="1488.189"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.2 r9819"
+   inkscape:version="0.48.4 r9939"
    sodipodi:docname="barters.svg">
   <sodipodi:namedview
      id="base"
@@ -26,17 +26,17 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.6856453"
-     inkscape:cx="243.10117"
-     inkscape:cy="1308.5714"
+     inkscape:cx="168.35235"
+     inkscape:cy="1263.4481"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer7"
      showgrid="false"
      showborder="true"
      inkscape:showpageshadow="false"
-     inkscape:window-width="1080"
-     inkscape:window-height="1868"
-     inkscape:window-x="0"
-     inkscape:window-y="24"
+     inkscape:window-width="1871"
+     inkscape:window-height="1056"
+     inkscape:window-x="49"
+     inkscape:window-y="864"
      inkscape:window-maximized="1" />
   <!-- Start kune i18n part -->
   <script
@@ -426,16 +426,6 @@
            points="20,12 32,12 27.414,7.414 31.961,2.871 29.133,0.043 24.586,4.586 20,0 " />
       </g>
     </g>
-    <path
-       inkscape:connector-curvature="0"
-       id="path14206"
-       d="m 174.035,1350.3952 c -36.78501,6.5325 -42.5348,26.8356 -42.5348,26.8356 l -2.47152,7.1281"
-       style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    <path
-       style="color:#000000;fill:none;stroke:#000000;stroke-width:0.92025012px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;marker-end:url(#Arrow1Mend);visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
-       d="m 145.09495,1230.2444 c -36.78501,-6.5326 -42.5348,-26.8357 -42.5348,-26.8357 l -2.47152,-7.1281"
-       id="path5858-1"
-       inkscape:connector-curvature="0" />
     <text
        transform="matrix(0.98912851,0.14705367,-0.14705367,0.98912851,0,0)"
        sodipodi:linespacing="125%"
@@ -1124,11 +1114,11 @@
          sodipodi:cy="3.6610169"
          sodipodi:rx="5.1525426"
          sodipodi:ry="5.1525426"
-         d="m -13.152542,3.6610169 a 5.1525426,5.1525426 0 1 1 -10.305085,0 5.1525426,5.1525426 0 1 1 10.305085,0 z"
+         d="m -13.152542,3.6610169 c 0,2.8456707 -2.306872,5.1525426 -5.152542,5.1525426 -2.845671,0 -5.152543,-2.3068719 -5.152543,-5.1525426 0,-2.84567065 2.306872,-5.1525426 5.152543,-5.1525426 2.84567,0 5.152542,2.30687195 5.152542,5.1525426 z"
          transform="matrix(0.97867296,0,0,0.97867295,24.91469,3.3744077)" />
       <path
          transform="matrix(0.97867296,0,0,0.97867295,24.91469,21.374408)"
-         d="m -13.152542,3.6610169 a 5.1525426,5.1525426 0 1 1 -10.305085,0 5.1525426,5.1525426 0 1 1 10.305085,0 z"
+         d="m -13.152542,3.6610169 c 0,2.8456707 -2.306872,5.1525426 -5.152542,5.1525426 -2.845671,0 -5.152543,-2.3068719 -5.152543,-5.1525426 0,-2.84567065 2.306872,-5.1525426 5.152543,-5.1525426 2.84567,0 5.152542,2.30687195 5.152542,5.1525426 z"
          sodipodi:ry="5.1525426"
          sodipodi:rx="5.1525426"
          sodipodi:cy="3.6610169"
@@ -1144,7 +1134,7 @@
          sodipodi:cy="3.6610169"
          sodipodi:rx="5.1525426"
          sodipodi:ry="5.1525426"
-         d="m -13.152542,3.6610169 a 5.1525426,5.1525426 0 1 1 -10.305085,0 5.1525426,5.1525426 0 1 1 10.305085,0 z"
+         d="m -13.152542,3.6610169 c 0,2.8456707 -2.306872,5.1525426 -5.152542,5.1525426 -2.845671,0 -5.152543,-2.3068719 -5.152543,-5.1525426 0,-2.84567065 2.306872,-5.1525426 5.152543,-5.1525426 2.84567,0 5.152542,2.30687195 5.152542,5.1525426 z"
          transform="matrix(0.97867296,0,0,0.97867295,42.914691,12.417062)" />
       <path
          style="fill:none;stroke:#231f20;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
@@ -1742,14 +1732,14 @@
          sodipodi:role="line"
          x="181.83585"
          y="1325.3"
-         style="font-size:12px;font-weight:normal;fill:#aa4400">...darnos tu <tspan
+         style="font-size:12px;font-weight:normal;fill:#aa4400">...danos tu <tspan
    style="font-weight:bold"
    id="tspan14216">feedback </tspan></tspan><tspan
          id="tspan14218"
          sodipodi:role="line"
          x="181.83585"
          y="1340.3"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">y participar para </tspan><tspan
+         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">y participa para </tspan><tspan
          sodipodi:role="line"
          x="181.83585"
          y="1355.3"
@@ -1760,32 +1750,6 @@
          x="181.83585"
          y="1370.3"
          style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">herramienta...</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text6446"
-       y="1226.2572"
-       x="154.17371"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       xml:space="preserve"><tspan
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="1226.2572"
-         x="154.17371"
-         sodipodi:role="line"
-         id="tspan14200">...aquí puedes crear </tspan><tspan
-         style="font-size:12px;font-style:normal;font-weight:bold;fill:#aa4400"
-         y="1241.2572"
-         x="154.17371"
-         sodipodi:role="line"
-         id="tspan14251"><tspan
-   style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-   id="tspan14819">nuevos </tspan>trocos<tspan
-   id="tspan14824"
-   style="font-weight:normal"> y </tspan></tspan><tspan
-         id="tspan14822"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         y="1256.2572"
-         x="154.17371"
-         sodipodi:role="line">compartirlos</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
@@ -2251,30 +2215,6 @@
     <text
        xml:space="preserve"
        style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
-       x="154.17371"
-       y="1226.2572"
-       id="text15190"
-       sodipodi:linespacing="125%"><tspan
-         id="tspan15192"
-         sodipodi:role="line"
-         x="154.17371"
-         y="1226.2572"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400">From here you can</tspan><tspan
-         sodipodi:role="line"
-         x="154.17371"
-         y="1241.2572"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan3770">create new <tspan
-   style="font-weight:bold"
-   id="tspan3781">trocos</tspan></tspan><tspan
-         sodipodi:role="line"
-         x="154.17371"
-         y="1256.2572"
-         style="font-size:12px;font-style:normal;font-weight:normal;fill:#aa4400"
-         id="tspan15200">and share them</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:12px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-indent:0;text-align:start;text-decoration:none;line-height:125%;letter-spacing:normal;word-spacing:normal;text-transform:none;direction:ltr;block-progression:tb;writing-mode:lr-tb;text-anchor:start;baseline-shift:baseline;color:#000000;fill:#aa4400;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:24;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
        x="111.73485"
        y="855.74518"
        id="text15278"
@@ -2535,19 +2475,8 @@
      ns1:sequence="2"
      ns1:refid="rect8725" />
   <ns1:frame
-     ns1:refid="rect6444"
-     ns1:sequence="11"
-     ns1:transition-duration-ms="1000"
-     ns1:hide="true"
-     ns1:clip="true"
-     ns1:title="new"
-     ns1:transition-zoom-percent="0"
-     ns1:timeout-ms="5000"
-     ns1:timeout-enable="false"
-     ns1:transition-profile="linear" />
-  <ns1:frame
      ns1:refid="rect14204"
-     ns1:sequence="12"
+     ns1:sequence="11"
      ns1:transition-duration-ms="1000"
      ns1:hide="true"
      ns1:clip="true"
