@@ -163,9 +163,9 @@
 
     <extension>
       <name>massmob</name>
-      <installerUrl>http://mass-mob.appspot.com/massmob/massmob-extension.xml
+      <installerUrl>http://mass-nob.appspot.com/massmob/massmob-extension.xml
       </installerUrl>
-      <gadgetUrl>http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml
+      <gadgetUrl>http://mass-nob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml
       </gadgetUrl>
       <iconUrl>http://mass-mob.appspot.com/logo.png
       </iconUrl>

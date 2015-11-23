@@ -58,7 +58,7 @@ import com.google.inject.Inject;
 public class EventsServerTool extends AbstractWaveBasedServerTool implements ServerToolWithWaveGadget {
 
   /** The Constant MEETING_GADGET. */
-  private static final String MEETING_GADGET = "http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml";
+  private static final String MEETING_GADGET = "http://mass-nob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml";
 
   /** The events cache. */
   private final EventsCache eventsCache;
