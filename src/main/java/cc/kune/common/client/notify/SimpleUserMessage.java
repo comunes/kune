@@ -22,11 +22,10 @@
  */
 package cc.kune.common.client.notify;
 
-import org.cobogw.gwt.user.client.ui.RoundedPanel;
-
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.PopupPanel;
 
@@ -37,19 +36,19 @@ import com.google.gwt.user.client.ui.PopupPanel;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class SimpleUserMessage extends Composite {
-  
+
   /** The Constant SHOWTIME. */
   private static final int SHOWTIME = 3500;
-  
+
   /** The rp. */
-  private final RoundedPanel rp;
-  
+  private final FlowPanel rp;
+
   /** The msg. */
   private final Label msg;
-  
+
   /** The popup palette. */
   private PopupPanel popupPalette;
-  
+
   /** The timer. */
   private final Timer timer;
 
@@ -59,8 +58,7 @@ public class SimpleUserMessage extends Composite {
   public SimpleUserMessage() {
     msg = new Label();
     msg.addStyleName("oc-user-msg");
-    rp = new RoundedPanel(msg, RoundedPanel.ALL, 2);
-    rp.setBorderColor("#FFCC00");
+    rp = new FlowPanel();
     timer = new Timer() {
       @Override
       public void run() {

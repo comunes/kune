@@ -4,7 +4,7 @@
   <inherits name='com.google.gwt.user.User' />
   <!-- Other module inherits -->
   <!-- Specify the app entry point class. -->
-  <!-- <entry-point class='cc.kune.msgs.client.KuneMessagesSampleEntryPoint' 
+  <!-- <entry-point class='cc.kune.msgs.client.KuneMessagesSampleEntryPoint'
     /> -->
   <!-- Specify the paths for translatable code -->
   <source path="shared"
@@ -13,14 +13,11 @@
     excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
   <public path="public" />
   <resource path=".../../../../resources/icons" />
-  <inherits name='org.cobogw.gwt.user.User' />
   <inherits name='com.google.gwt.inject.Inject' />
   <inherits name='com.google.gwt.query.Query' />
   <inherits name="cc.kune.bootstrap.KuneBootstrap" />
-  <inherits name="cc.kune.polymer.KunePolymer" />  
-    
-  <stylesheet src="kune-common.css" />
+  <inherits name="cc.kune.polymer.KunePolymer" />
 
-  <inherits name="org.vectomatic.libgwtfile" />
+  <stylesheet src="kune-common.css" />
 
 </module>

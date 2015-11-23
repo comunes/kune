@@ -222,13 +222,16 @@
 .oc-user-msg {
   background-color: #FFCC00;
   padding: 3px;
-	z-index: 1000;
+  z-index: 1000;
+  border-radius: 2px 2px 2px 2px;
+  -moz-border-radius: 2px 2px 2px 2px;
+  -webkit-border-radius: 2px 2px 2px 2px;
 }
 
 .oc-user-msg-popup {
   padding: 0px;
   border: 0px;
-	z-index: 1000;
+  z-index: 1000;
 }
 
 .oc-floatleft {
@@ -495,15 +498,15 @@
   border: 0px !important;
 }
 
-button.k-noborder-btn:hover {    
+button.k-noborder-btn:hover {
   background-color: transparent;
   border:none;
   box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
-.k-noborder-btn a.btn {  
+.k-noborder-btn a.btn {
   background-color: transparent;
-  border:none;  
+  border:none;
 }
 
 .k-space-nowrap {
@@ -706,7 +709,7 @@ div.k-iconlabel {
   padding: 3px
 }
 
-.k-editableLabel-high { 
+.k-editableLabel-high {
   background-color: #FFFBC1;
   color: black !important;
 }

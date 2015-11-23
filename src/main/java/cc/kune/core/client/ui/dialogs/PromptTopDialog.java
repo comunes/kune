@@ -22,7 +22,6 @@
  */
 package cc.kune.core.client.ui.dialogs;
 
-import br.com.rpa.client._paperelements.PaperInput;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.shared.utils.TextUtils;
 

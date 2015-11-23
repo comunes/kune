@@ -22,19 +22,19 @@
  */
 package cc.kune.core.client.ui;
 
-import org.cobogw.gwt.user.client.CSS;
-
-import cc.kune.common.shared.i18n.I18nTranslationService;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.inject.Inject;
 
+import cc.kune.common.shared.i18n.I18nTranslationService;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentPosition.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentPosition {
@@ -47,10 +47,10 @@ public class ContentPosition {
 
   /** The Constant RIGHT. */
   public static final String RIGHT = "right";
-  
+
   /** The i18n. */
   private static I18nTranslationService i18n;
-  
+
   /** The position objs. */
   private static Object[][] positionObjs;
 
@@ -60,7 +60,7 @@ public class ContentPosition {
 
   /**
    * Gets the positions.
-   * 
+   *
    * @return the positions
    */
   public synchronized static Object[][] getPositions() {
@@ -78,7 +78,7 @@ public class ContentPosition {
 
   /**
    * Sets the center position.
-   * 
+   *
    * @param elementCode
    *          the element code
    * @return the string
@@ -89,7 +89,7 @@ public class ContentPosition {
 
   /**
    * Sets the position.
-   * 
+   *
    * @param element
    *          the element
    * @param wraptext
@@ -101,18 +101,18 @@ public class ContentPosition {
   public static Element setPosition(final Element element, final boolean wraptext, final String position) {
     if (!wraptext || position.equals(ContentPosition.CENTER)) {
       final com.google.gwt.user.client.Element divEl = DOM.createDiv();
-      CSS.setProperty(divEl, CSS.A.TEXT_ALIGN, position);
+      divEl.getStyle().setTextAlign(Style.TextAlign.valueOf(position));
       divEl.setInnerHTML(element.getString());
       return divEl;
     } else {
-      CSS.setProperty(element, CSS.A.FLOAT, position);
+      element.getStyle().setFloat(Style.Float.valueOf(position));
       return element;
     }
   }
 
   /**
    * Sets the position.
-   * 
+   *
    * @param elementCode
    *          the element code
    * @param wraptext
@@ -130,7 +130,7 @@ public class ContentPosition {
 
   /**
    * Instantiates a new content position.
-   * 
+   *
    * @param i18n
    *          the i18n
    */

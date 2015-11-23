@@ -12,7 +12,7 @@
   <inherits name="com.google.gwt.user.User"/>
   <inherits name="com.google.gwt.xml.XML"/>
   <inherits name="cc.kune.common.KuneCommon"/>
-  <inherits name="cc.kune.gspace.GSpace"/>  
+  <inherits name="cc.kune.gspace.GSpace"/>
   <inherits name="cc.kune.gxtbinds.KuneGxtBindings"/>
   <!-- Because of XML actions -->
   <inherits name='com.calclab.emite.core.EmiteCore'/>
@@ -20,6 +20,7 @@
   <!-- <inherits name="com.jhickman.web.gwt.gxtuibinder.GxtUiBinder" /> -->
   <inherits name='com.gwtplatform.mvp.Mvp'/>
   <inherits name='com.allen_sauer.gwt.dnd.gwt-dnd'/>
+  <inherits name="org.vectomatic.libgwtfile" />
   <!-- Styles =================================================== -->
   <!-- <inherits name="com.google.gwt.user.theme.standard.Standard" /> -->
 </module>
