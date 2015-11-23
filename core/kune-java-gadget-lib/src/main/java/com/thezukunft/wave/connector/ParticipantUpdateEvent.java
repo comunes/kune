@@ -26,8 +26,8 @@
 package com.thezukunft.wave.connector;
 
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * Event fired when participants on the wave change.

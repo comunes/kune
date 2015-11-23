@@ -27,12 +27,12 @@ import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.core.client.Scheduler.ScheduledCommand;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
 import com.thezukunft.wave.connector.ModeChangeEvent;
 import com.thezukunft.wave.connector.ModeChangeEventHandler;
 import com.thezukunft.wave.connector.StateUpdateEvent;
@@ -43,7 +43,7 @@ import com.thezukunft.wave.connector.Wave;
 /**
  * The Class KuneGadgetSampleMainPanel is a simple panel with a button that
  * update its text when you click in the button.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class KuneGadgetSampleMainPanel extends Composite {
@@ -60,7 +60,7 @@ public class KuneGadgetSampleMainPanel extends Composite {
   /**
    * Instantiates a new kune gadget sample main panel. We use gin to inject the
    * dependencies.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param wave
@@ -129,7 +129,7 @@ public class KuneGadgetSampleMainPanel extends Composite {
 
   /**
    * Calculate the button text.
-   * 
+   *
    * @param lockStatus
    *          the lock status
    * @return the btn text

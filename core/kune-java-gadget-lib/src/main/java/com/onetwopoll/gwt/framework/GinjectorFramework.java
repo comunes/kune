@@ -1,9 +1,9 @@
 /*
  *
- * Copyright (C) 2007-2015 Licensed to the Comunes Association (CA) under 
+ * Copyright (C) 2007-2015 Licensed to the Comunes Association (CA) under
  * one or more contributor license agreements (see COPYRIGHT for details).
- * The CA licenses this file to you under the GNU Affero General Public 
- * License version 3, (the "License"); you may not use this file except in 
+ * The CA licenses this file to you under the GNU Affero General Public
+ * License version 3, (the "License"); you may not use this file except in
  * compliance with the License. This file is part of kune.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,17 +22,17 @@
  */
 package com.onetwopoll.gwt.framework;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.inject.client.GinModules;
 import com.google.gwt.inject.client.Ginjector;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * This injector provides injection functions for the classes required in the
  * root of the project such as the EventBus or the MainPresenter.
- * 
+ *
  * The Gin Module used to resolve the types is given in the @GinModules
  * annotation
- * 
+ *
  */
 @GinModules(GinModuleFramework.class)
 public interface GinjectorFramework extends Ginjector {

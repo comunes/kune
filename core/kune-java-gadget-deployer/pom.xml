@@ -5,7 +5,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   <parent>
     <artifactId>kune-core</artifactId>
     <groupId>cc.kune</groupId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>kune-java-gadget-sample-deployer</artifactId>
@@ -38,12 +38,12 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     <dependency>
       <groupId>cc.kune</groupId>
       <artifactId>kune-java-gadget-lib</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>cc.kune</groupId>
       <artifactId>kune-java-gadget-sample</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

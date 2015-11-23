@@ -27,8 +27,8 @@ package com.thezukunft.wave.connectorimpl;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.gadgets.client.GadgetFeature;
+import com.google.web.bindery.event.shared.EventBus;
 import com.thezukunft.wave.connector.ModeChangeEvent;
 import com.thezukunft.wave.connector.Participant;
 import com.thezukunft.wave.connector.ParticipantUpdateEvent;
@@ -50,7 +50,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.onetwopoll.wave.connector.Wave#getHost()
    */
   public native Participant getHost() /*-{
@@ -59,7 +59,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.onetwopoll.wave.connector.Wave#getMode()
    */
   public native int getMode() /*-{
@@ -68,7 +68,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.onetwopoll.wave.connector.Wave#getParticipantById(java.lang.String)
    */
@@ -78,7 +78,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.onetwopoll.wave.connector.Wave#getParticipants()
    */
   public native JsArray<Participant> getParticipants() /*-{
@@ -87,7 +87,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.onetwopoll.wave.connector.Wave#getState()
    */
   public native StateImpl getState() /*-{
@@ -96,7 +96,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.onetwopoll.wave.connector.Wave#getTime()
    */
   public long getTime() {
@@ -105,7 +105,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.onetwopoll.wave.connector.Wave#getViewer()
    */
   public native Participant getViewer() /*-{
@@ -114,7 +114,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.onetwopoll.wave.connector.Wave#isInWaveContainer()
    */
   public native boolean isInWaveContainer() /*-{
@@ -123,7 +123,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.onetwopoll.wave.connector.Wave#isPlayback()
    */
   public native boolean isPlayback() /*-{
@@ -132,7 +132,7 @@ public class WaveFeatureImpl implements GadgetFeature, Wave {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.onetwopoll.wave.connector.Wave#log(java.lang.String)
    */
   public native void log(String log) /*-{

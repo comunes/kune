@@ -25,9 +25,9 @@
 package com.thezukunft.wave.connectorimpl;
 
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.event.shared.EventBus;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
 import com.thezukunft.wave.connector.Participant;
 import com.thezukunft.wave.connector.State;
 import com.thezukunft.wave.connector.Wave;
@@ -35,9 +35,9 @@ import com.thezukunft.wave.connector.Wave;
 /**
  * We need this wrapper class, because we want to be able to use Wave with gin,
  * which is impossible using JSO
- * 
+ *
  * @author Jonas Huckestein
- * 
+ *
  */
 @Singleton
 public class WaveGINWrapper implements Wave {

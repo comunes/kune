@@ -24,8 +24,8 @@
  **/
 package com.thezukunft.wave.connector;
 
-import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * Event fired when wave state changes.

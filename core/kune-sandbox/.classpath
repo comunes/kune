@@ -1,13 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
-	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
-	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
-	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
+	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/test-classes" path="src/test/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" output="target/classes" path="src/main/java">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="src/main/resources">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar" sourcepath="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="var" path="M2_REPO/com/google/gwt/gwt-user/2.7.0/gwt-user-2.7.0.jar" sourcepath="M2_REPO/com/google/gwt/gwt-user/2.7.0/gwt-user-2.7.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/com/google/inject/guice/3.0/guice-3.0-no_aop.jar"/>
 	<classpathentry kind="var" path="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0.jar" sourcepath="M2_REPO/aopalliance/aopalliance/1.0/aopalliance-1.0-sources.jar"/>
@@ -19,6 +41,11 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/kune"/>
 	<classpathentry kind="var" path="M2_REPO/org/gwtbootstrap3/gwtbootstrap3/0.8.1/gwtbootstrap3-0.8.1.jar" sourcepath="M2_REPO/org/gwtbootstrap3/gwtbootstrap3/0.8.1/gwtbootstrap3-0.8.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/gwtbootstrap3/gwtbootstrap3-extras/0.8.1/gwtbootstrap3-extras-0.8.1.jar" sourcepath="M2_REPO/org/gwtbootstrap3/gwtbootstrap3-extras/0.8.1/gwtbootstrap3-extras-0.8.1-sources.jar"/>
-  <classpathentry kind="var" path="M2_REPO/br/com/rpa/gwt-polymer/0.0.1-SNAPSHOT/gwt-polymer-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="var" path="M2_REPO/br/com/rpa/gwt-polymer/0.0.1-SNAPSHOT/gwt-polymer-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

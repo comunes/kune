@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>kune-core</artifactId>
     <groupId>cc.kune</groupId>
     <relativePath>..</relativePath>
-    <version>0.3.0-SNAPSHOT</version>
+    <version>1.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>kune-java-gadget-sample</artifactId>
   <name>A gadget sample for kune</name>
@@ -37,7 +37,7 @@
     <dependency>
       <groupId>cc.kune</groupId>
       <artifactId>kune-java-gadget-lib</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>1.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -61,6 +61,12 @@
       <groupId>com.google.gwt.inject</groupId>
       <artifactId>gin</artifactId>
       <version>${gin.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>5.0.3</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
   <build>

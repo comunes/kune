@@ -22,7 +22,7 @@
   var $head = $doc.head || $doc.getElementsByTagName('head')[0];
   // Compute some codeserver urls so as the user does not need bookmarklets
   var hostName = $wnd.location.hostname;
-  var serverUrl = 'http://' + hostName + ':38575';
+  var serverUrl = 'http://' + hostName + ':43477';
   var module = 'kune_sandbox';
   var nocacheUrl = serverUrl + '/recompile-requester/' + module;
 
