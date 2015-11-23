@@ -1,0 +1,7 @@
+/bin
+target
+war
+src/main/gwt-unitCache
+src/META-INF/
+src/main/webapp/kuneGadgetSampleTester/
+src/log4j.properties

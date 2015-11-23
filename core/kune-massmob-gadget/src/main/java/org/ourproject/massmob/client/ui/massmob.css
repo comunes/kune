@@ -1,0 +1,135 @@
+@external mass-rounded,disco-title,editableLabel,toolbar,gwt-MenuItem,unselect,TimePickerLabel,gwt-DisclosurePanel-openm,mass-selectable,gwt-PopupPanel,k-user-msg,gwt-DisclosurePanel-closed,TimePicker,header,fieldlabel,content,oc-button,TimePickerPopup,descrip-summary,TimePickerTextField,fieldboxes,k-user-msg-popup,mapbtn,gwt-Button,gwt-DisclosurePanel,editableLabel-high,gwt-DisclosurePanel-open,editableLabel-high
+
+.gwt-DisclosurePanel {
+  margin: 3px 0;
+}
+.gwt-DisclosurePanel-open {
+
+}
+
+.gwt-DisclosurePanel .content table td {
+  width: 33%;
+}
+
+.gwt-DisclosurePanel-closed {
+
+}
+
+.gwt-DisclosurePanel .content {
+  border: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.gwt-DisclosurePanel .header, .gwt-DisclosurePanel .header a,
+  .gwt-DisclosurePanel .header td {
+  text-decoration: none; /* Remove underline from header */
+  color: black;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.editableLabel {
+  font-weight: bold;
+  padding: 3px
+}
+
+.editableLabel-high {
+  font-weight: bold;
+  background-color: #FFFBC1;
+}
+
+.editableLabel-high span {
+  background-color: #FFFBC1;
+}
+
+.fieldlabel {
+  text-align: right;
+  float: right;
+  margin: 0px 5px;
+}
+
+.fieldboxes {
+  width: 100%;
+}
+
+.mapbtn {
+  margin: 2px 0;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.k-user-msg {
+  background-color: #FFCC00;
+  padding: 3px;
+}
+
+.k-user-msg-popup {
+  padding: 0px;
+  border: 0px;
+}
+
+.header {
+  text-decoration: none;
+}
+
+.TimePickerTextField {
+  background: inherits;
+}
+
+.TimePicker, .TimePickerTextField, .TimePickerLabel, .TimePickerPopup {
+  color: inherits;
+  font-size: small;
+  font-type: arial, sans-serif;
+}
+
+.gwt-Button {
+  background: #F2F2F2;
+  padding: 1px;
+  font-size: small;
+}
+
+.gwt-PopupPanel { /* border: 0px; */
+
+}
+
+.TimePickerPopup {
+  background-color: #f2f2f2;
+  padding: 5px;
+  border: 2px solid #CCC;
+}
+
+.descrip-summary {
+  margin-left: 5px;
+  font-style: italic;
+  color: #808080;
+  overflow: hidden;
+}
+
+.unselect {
+  cursor: default;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+
+.unselect .gwt-MenuItem {
+  cursor: default;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+}
+
+.mass-selectable {
+  -moz-user-select: text;
+  -khtml-user-select: text;
+}
+
+.toolbar .gwt-Button {
+  background: none;
+  padding: 0px;
+  font-size: inherit;
+}
+
+.oc-button {
+  border: 0px;
+}
+

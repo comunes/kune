@@ -1,0 +1,83 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+   xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sm="urn:import:org.ourproject.massmob.client.ui">
+<ui:style type='org.ourproject.massmob.client.ui.AssistanceHeader.RPStyle'>
+    .main {
+      width: 100%;
+    }
+    .all {
+      padding: 0px 10px 5px 10px;
+      font-weight: bold;
+      font-size: 160%;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+      cursor: hand;
+      -moz-user-select: none;
+      -khtml-user-select: none
+    }
+
+    .yes {
+      background-color: #008000;
+    }
+
+    .yes-p {
+      border-radius: 5px 0px 0px 0px;
+      -moz-border-radius: 5px 0px 0px 0px;
+      -webkit-border-radius: 5px 0px 0px 0px;
+    }
+
+    .no {
+      background-color: #d40000;
+      /* padding-top: 6px; */
+    }
+
+    .no-p {
+    }
+
+    .maybe {
+      background-color: #DCB218;
+    }
+
+    .maybe-p {
+       border-radius: 0px 5px 0px 0px;
+       -moz-border-radius: 0px 5px 0px 0px;
+       -webkit-border-radius: 0px 5px 0px 0px;
+    }
+
+    .over {
+      color: maroon;
+    }
+
+    .click {
+      color: red;
+    }
+
+    .out {
+      color: #FFF;
+    }
+
+    .fl {
+      clear: both;
+    }
+
+    .fp {
+      width: 33%;
+      float: left;
+    }
+  </ui:style>
+  <g:FlowPanel width="100%" styleName="{style.main}">
+    <g:FlowPanel ui:field="yes" styleName="{style.fp}" >
+      <g:Label ui:field="yesl" styleName="{style.fl} {style.yes-p} {style.yes} {style.all}"
+        text="yes"/>
+    </g:FlowPanel>
+    <g:FlowPanel ui:field="no" styleName="{style.fp}">
+      <g:Label ui:field="nol" styleName="{style.fl} {style.no-p} {style.no} {style.all}"
+        text="no"/>
+    </g:FlowPanel>
+    <g:FlowPanel ui:field="maybe" styleName="{style.fp}">
+      <g:Label ui:field="maybel" styleName="{style.fl} {style.maybe-p} {style.maybe} {style.all}"
+        text="maybe"/>
+    </g:FlowPanel>
+  </g:FlowPanel>
+</ui:UiBinder>

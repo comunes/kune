@@ -1,0 +1,54 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sm="urn:import:org.ourproject.massmob.client.ui">
+  <ui:with field="img" type="org.ourproject.massmob.client.ui.img.Images"/>
+  <ui:style>
+    .margin {
+      margin: 5px;
+    }
+    .pad {
+      margin: 5px 12px;
+      font-size: 130%;
+    }
+
+    .fl {
+      float: left;
+    }
+
+    .fieldspad {
+      padding: 0px 12px;
+    }
+
+    .opt {
+      float: right;
+      width: 45px;
+    }
+
+    .mp {
+
+    }
+    .edit-title {
+      width: 85%;
+    }
+  </ui:style>
+  <g:FlowPanel ui:field="container" width="100%"
+      addStyleNames="{style.margin}">
+  <sm:CustomRoundedLinePanel width="100%">
+    <g:FlowPanel ui:field="mainPanel" width="100%"
+      styleName="{img.css.bgNoImg}">
+      <g:FlowPanel  ui:field="titlePanel"  width="100%">
+        <!-- <g:Label text="edit ico" styleName="{}"/> -->
+        <sm:EditableLabel text="Appointment title (click to edit)"
+          addStyleNames="{style.pad} {style.fl} {style.edit-title}" ui:field="appTitle"/>
+        <sm:OptionsPanel styleName="{style.opt}"
+          ui:field="options"/>
+      </g:FlowPanel>
+      <g:FlexTable styleName="{style.fieldspad}" ui:field="fields"
+        width="100%"/>
+      <sm:DescriptionField styleName="{style.pad}"
+        ui:field="desc"/>
+      <sm:Assistance styleName="{style.pad}" ui:field="parts"/>
+    </g:FlowPanel>
+  </sm:CustomRoundedLinePanel>
+  </g:FlowPanel>
+</ui:UiBinder>

@@ -1,0 +1,18 @@
+@CHARSET "UTF-8";
+
+@url bgUrl bgResource;
+.bg {
+  background: bgUrl 0 0 no-repeat;
+  background-color: #f4e7ee;
+}
+
+.bg-no-img {
+  background-color: #f4e7ee;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+@sprite div .oc-icon-picture {
+  gwt-image: "picture";
+  width: inherit;
+}

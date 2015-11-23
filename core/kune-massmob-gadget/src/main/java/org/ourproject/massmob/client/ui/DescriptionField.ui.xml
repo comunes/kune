@@ -1,0 +1,62 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sm="urn:import:org.ourproject.massmob.client.ui">
+  <ui:style>
+
+   .disclo, .disclo a , .disclo a div {
+     /* margin: 3px 0; */
+     color: black;
+     outline-color: transparent;
+    }
+
+    .disclo-open {
+
+    }
+
+    .disclo .content table td {
+      width: 33%;
+    }
+
+    .disclo-closed {
+
+    }
+
+    .disclo .content {
+      border: 0px;
+      margin: 0px 5px;
+      padding: 0px;
+    }
+
+    .disclo .header,.disclo .header a, .disclo .header td div {
+      text-decoration: none; /* Remove underline from header */
+    }
+
+    .disclo .header,.disclo .header a, .disclo .header td {
+      text-decoration: none; /* Remove underline from header */
+      color: black;
+      cursor: pointer;
+      cursor: hand;
+    }
+
+    .back {
+      background-color: #FFF;
+      border-radius: 5px;
+      padding: 4px;
+    }
+
+    .textarea {
+      margin: 6px 6px 0px 6px;
+    }
+  </ui:style>
+  <sm:CustomRoundedLinePanel>
+    <g:HTMLPanel styleName="{style.back}">
+      <sm:CustomDisclosure text="Description"
+        stylePrimaryName="{style.disclo}" ui:field="disclo" width="100%">
+        <g:HTMLPanel styleName="{style.textarea}">
+          <g:TextArea width="100%" ui:field="description"
+            visibleLines="4"></g:TextArea>
+        </g:HTMLPanel>
+      </sm:CustomDisclosure>
+    </g:HTMLPanel>
+  </sm:CustomRoundedLinePanel>
+</ui:UiBinder>

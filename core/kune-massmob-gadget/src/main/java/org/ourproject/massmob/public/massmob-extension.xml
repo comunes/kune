@@ -1,0 +1,8 @@
+<extension name="MassMob" description="This gadget helps you to organize meetings and Smart Mobs using Google Wave."
+    thumbnailUrl="http://mass-mob.appspot.com/logo.png">
+    <author name="The MassMob development team"/>
+   <menuHook location="toolbar" text="MassMob gadget"
+      iconUrl="http://mass-mob.appspot.com/logo.png">
+    <insertGadget url="http://mass-mob.appspot.com/massmob/org.ourproject.massmob.client.MassmobGadget.gadget.xml"/>
+  </menuHook>
+</extension>

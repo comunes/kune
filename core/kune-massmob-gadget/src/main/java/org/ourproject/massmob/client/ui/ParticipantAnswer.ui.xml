@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+    .pad {
+      margin-top: 3px;
+    }
+
+    .avatar {
+      float: left;
+      margin-right: 4px;
+    }
+
+    .name {
+      font-weight: bold;
+      color: #4D4D4D;
+      font-size: 100%
+    }
+
+    .status {
+      font-size: 80%;
+      color: gray;
+    }
+  </ui:style>
+  <g:FlowPanel styleName="{style.pad}">
+    <g:Image width="24px" height="24px" ui:field="avatar" styleName="{style.avatar}"/>
+    <g:Label ui:field="name" styleName="{style.name}"/>
+    <g:Label ui:field="status" wordWrap="true" styleName="{style.status}"/>
+  </g:FlowPanel>
+</ui:UiBinder>

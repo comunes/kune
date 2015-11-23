@@ -1,0 +1,17 @@
+package org.ourproject.massmob.client;
+
+import com.google.gwt.gadgets.client.ListPreference;
+
+public class MassmobPreferencesMock implements MassmobPreferences {
+
+    @Override
+    public ListPreference usersWithClosedAsistance() {
+        return null;
+    }
+
+    @Override
+    public ListPreference usersWithClosedDescription() {
+        return null;
+    }
+
+}

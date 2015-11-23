@@ -1,0 +1,17 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:oc="urn:import:cc.kune.common.client.actions.ui" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+    .toolbar {<!--
+      color: brown; -->
+      text-decoration: underline;
+      cursor: pointer;
+      cursor: hand;
+      float: right;
+      margin: 0 6px 5px 0;
+      -moz-user-select: none;
+      -khtml-user-select: none
+    }
+  </ui:style>
+  <oc:ActionFlowPanel ui:field="toolbar" styleName="{style.toolbar}"/>
+</ui:UiBinder>

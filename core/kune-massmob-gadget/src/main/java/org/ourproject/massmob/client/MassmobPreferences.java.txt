@@ -1,0 +1,13 @@
+package org.ourproject.massmob.client;
+
+import com.google.gwt.gadgets.client.ListPreference;
+import com.google.gwt.gadgets.client.UserPreferences;
+
+public interface MassmobPreferences extends UserPreferences {
+
+    @PreferenceAttributes()
+    public ListPreference usersWithClosedAsistance();
+
+    @PreferenceAttributes()
+    public ListPreference usersWithClosedDescription();
+}

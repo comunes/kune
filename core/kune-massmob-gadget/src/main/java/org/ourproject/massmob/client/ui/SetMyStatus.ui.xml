@@ -1,0 +1,30 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+    .pad {
+      padding-left: 3px;
+    }
+
+    .label {
+      color: blue;
+      text-decoration: underline;
+      cursor: pointer;
+      cursor: hand;
+      float: left;
+    }
+
+    .button {
+      padding-left: 3px;
+    }
+
+    .textbox {
+    }
+  </ui:style>
+  <g:HTMLPanel styleName="{style.pad}" width="100%">
+    <g:Label ui:field="label" text="Set my status" styleName="{style.label}" />
+    <g:TextBox ui:field="textbox" visible="false" styleName="{style.textbox}" width="250" />
+    <g:Button ui:field="button" text="Set" visible="false"
+      styleName="{style.button}" />
+  </g:HTMLPanel>
+</ui:UiBinder>

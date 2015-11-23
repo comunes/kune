@@ -1,0 +1,72 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:sm="urn:import:org.ourproject.massmob.client.ui">
+  <ui:style>
+    .back {
+      background-color: #FFF;
+      border-radius: 5px;
+      padding: 4px;
+    }
+
+    .pad {
+      padding: 0 10px;
+
+    }
+
+    .tablepad {
+      padding: 3px 10px;
+      float: left;
+    }
+
+    .listmargin {
+     /* padding: 0 12px; */
+    }
+
+    .listmargin td {
+      width: 33%;
+    }
+
+    .scrollmargin {
+      margin-right: 2px;
+      clear: both;
+    }
+
+    .tablepad td {
+
+    }
+
+    .status {
+      padding: 3px 16px;
+      float: left;
+    }
+
+    .disclo, .disclo a, .disclo a div {
+     color: black;
+     outline-color: transparent;
+    }
+
+  </ui:style>
+  <sm:CustomRoundedLinePanel ui:field="rdline">
+    <g:HTMLPanel styleName="{style.back}">
+      <sm:CustomDisclosure ui:field="disclo"
+        text="Assistance confirmation" width="100%" styleName="{style.disclo}">
+        <g:FlowPanel styleName="{style.pad}" width="100%">
+          <sm:AssistanceHeader width="100%"
+            ui:field="header" styleName="{style.listmargin}"/>
+          <g:ScrollPanel height="90" styleName="{style.scrollmargin}">
+            <g:FlowPanel width="100%"
+              styleName="{style.listmargin}">
+              <g:FlowPanel ui:field="yesp" width="33%"
+                styleName="{style.tablepad}"/>
+              <g:FlowPanel ui:field="nop" width="33%"
+                styleName="{style.tablepad}"/>
+              <g:FlowPanel ui:field="maybep" width="33%"
+                styleName="{style.tablepad}"/>
+            </g:FlowPanel>
+          </g:ScrollPanel>
+          <sm:SetMyStatus styleName="{style.status}"
+            ui:field="setMyStatus"/>
+        </g:FlowPanel>
+      </sm:CustomDisclosure>
+    </g:HTMLPanel>
+  </sm:CustomRoundedLinePanel>
+</ui:UiBinder>

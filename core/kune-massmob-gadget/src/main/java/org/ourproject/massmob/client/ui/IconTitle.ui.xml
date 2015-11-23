@@ -1,0 +1,31 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:style>
+    .label {
+      padding-left: 4px;
+      text-decoration: none;
+    }
+
+    .label a:link {
+      text-decoration: none;
+      color: gray;
+    }
+
+    .icon {
+
+    }
+
+    .pad {
+      padding-left: 5px;
+    }
+  </ui:style>
+  <g:FocusPanel ui:field="self">
+    <g:HorizontalPanel styleName="{style.pad}"
+      ui:field="hp">
+      <g:Image ui:field="icon" styleName="{style.icon}" />
+      <g:Label ui:field="label" styleName="{style.label}"
+        wordWrap="true" />
+    </g:HorizontalPanel>
+  </g:FocusPanel>
+</ui:UiBinder>
