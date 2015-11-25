@@ -26,6 +26,7 @@ package cc.kune.wave.client.kspecific.tutorial;
 import static com.google.gwt.query.client.GQuery.*;
 
 import org.gwtbootstrap3.client.ui.base.button.CustomButton;
+import org.gwtbootstrap3.client.ui.constants.ButtonSize;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 
 import com.google.gwt.core.client.GWT;
@@ -87,6 +88,7 @@ public class InboxTutorial extends Composite {
           "And to have a cronological ordered list of all the contents you are participating in"));
       btn.setText(I18n.t("I got it!"));
       btn.setType(ButtonType.PRIMARY);
+      btn.setSize(ButtonSize.LARGE);
       btn.addClickHandler(new ClickHandler() {
         @Override
         public void onClick(ClickEvent event) {
