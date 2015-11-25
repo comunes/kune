@@ -24,14 +24,15 @@ package cc.kune.wave.client.kspecific;
 
 import org.waveprotocol.wave.client.common.util.WindowUtil;
 
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.wave.client.RosterProfileUpdater;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
-
-import com.google.inject.Inject;
-import com.google.inject.Provider;
+import cc.kune.wave.client.kspecific.tutorial.InboxTutorial;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -56,7 +57,7 @@ public class WaveParts {
   @Inject
   public WaveParts(final Session session, final Provider<WaveClientManager> waveClientManager,
       final Provider<WaveStatusIndicator> waveOnlineStatus,
-      final Provider<PostWaveOpenActions> postOpenActions,
+      final Provider<PostWaveOpenActions> postOpenActions, final Provider<InboxTutorial> inboxTutorial,
       final Provider<InboxCountPresenter> inboxCount, final Provider<RosterProfileUpdater> rosterProfiler) {
     session.onAppStart(true, new AppStartHandler() {
       @Override
@@ -67,6 +68,7 @@ public class WaveParts {
         WindowUtil.instance = new WindowKuneWrapper();
         postOpenActions.get();
         rosterProfiler.get();
+        inboxTutorial.get();
       }
     });
 

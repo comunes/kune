@@ -36,6 +36,7 @@ import cc.kune.wave.client.WebClient;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPanel;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter;
 import cc.kune.wave.client.kspecific.inboxcount.InboxCountPresenter.InboxCountView;
+import cc.kune.wave.client.kspecific.tutorial.InboxTutorial;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -67,5 +68,6 @@ public class WaveGinModule extends ExtendedGinModule {
     eagle(WaveParts.class);
     s(InboxCountView.class, InboxCountPanel.class);
     s(InboxCountPresenter.class);
+    s(InboxTutorial.class);
   }
 }

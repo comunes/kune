@@ -70,6 +70,7 @@ public enum PolymerId implements HTMLId {
   HOME_TOOLBAR("k_home_toolbar"),
   INBOX_NEW_MESSAGE("inbox_new_message"),
   INBOX_RESULT("inbox_result"),
+  INBOX_TUTORIAL("inbox_tutorial"),
   INBOX_SHOW_HIDE("inbox_show_hide"),
   INBOX_SHARE_ICON("inbox_share_icon"),
   INBOX_SITEBAR_ICON_GROUP("sitebar_user_space_icon_group"),

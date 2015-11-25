@@ -1,0 +1,74 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+  xmlns:b="urn:import:org.gwtbootstrap3.client.ui.base.button"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui">
+  <ui:with field='res' type='cc.kune.wave.client.kspecific.tutorial.InboxTutorialResources'></ui:with>
+  <ui:style>
+  .main {
+  }
+
+  .main-icon {
+    float: left;
+    margin-right: 10px;
+  }
+
+  .titles {
+    float: left;
+  }
+
+  .subtitleLabel {
+    font-size: 22px;
+    line-height: 1em;
+    color: #aa4400;
+    clear: both;
+  }
+
+  .titleLabel {
+    font-weight: bold;
+    font-size: 45px;
+    line-height: 1em;
+    color: #aa4400;
+    clear: both;
+  }
+
+  .list {
+    clear: both;
+    font-size: 16px;
+    padding-top: 10px;
+  }
+
+  .item {
+    margin: 20px 0;
+  }
+
+  .item img {
+    width: 45px;
+    height: auto;
+    margin: auto;
+  }
+
+  .item img {
+    margin-right: 10px;
+  }
+
+  .btn {
+    float: right;
+  }
+
+  </ui:style>
+  <g:FlowPanel styleName="{style.main}">
+    <g:Image resource="{res.inboxIcon}" styleName="{style.main-icon}"></g:Image>
+    <g:FlowPanel styleName="{style.titles}">
+      <g:Label ui:field="subtitleLabel" styleName="{style.subtitleLabel}"></g:Label>
+      <g:Label ui:field="titleLabel" styleName="{style.titleLabel}"></g:Label>
+    </g:FlowPanel>
+    <g:FlowPanel ui:field="list" styleName="{style.list}">
+      <g:FlowPanel styleName="{style.item}"><g:Image resource="{res.create}"></g:Image><g:InlineLabel ui:field="createLabel"></g:InlineLabel></g:FlowPanel>
+      <g:FlowPanel styleName="{style.item}"><g:Image resource="{res.addContact}"></g:Image><g:InlineLabel ui:field="addContactLabel"></g:InlineLabel></g:FlowPanel>
+      <g:FlowPanel styleName="{style.item}"><g:Image resource="{res.publish}"></g:Image><g:InlineLabel ui:field="publishLabel"></g:InlineLabel></g:FlowPanel>
+      <g:FlowPanel styleName="{style.item}"><g:Image resource="{res.notifications}"></g:Image><g:InlineLabel ui:field="notificationsLabel"></g:InlineLabel></g:FlowPanel>
+      <g:FlowPanel styleName="{style.item}"><g:Image resource="{res.ordered}"></g:Image><g:InlineLabel ui:field="orderedLabel" ></g:InlineLabel></g:FlowPanel>
+    </g:FlowPanel>
+    <b:CustomButton ui:field="btn" addStyleNames="{style.btn}" ></b:CustomButton>
+  </g:FlowPanel>
+</ui:UiBinder>

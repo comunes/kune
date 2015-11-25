@@ -1,5 +1,6 @@
 kune (1.0.1+b18) unstable; urgency=medium
 
+  * Inbox tutorial
   * Several style fixes in groups header
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Thu, 19 Nov 2015 00:36:33 +0100

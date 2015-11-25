@@ -89,7 +89,7 @@ public class MotdManager {
               dialog.getSecondBtn().addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(final ClickEvent event) {
-                  setCookie(cookieName, inDays(90));
+                  setCookie(cookieName, CookieUtils.inDays(90));
                   dialog.hide();
                 }
               });
@@ -98,7 +98,7 @@ public class MotdManager {
                 laterBtn.addClickHandler(new ClickHandler() {
                   @Override
                   public void onClick(final ClickEvent event) {
-                    setCookie(cookieName, inDays(motd.getShouldRemember()));
+                    setCookie(cookieName, CookieUtils.inDays(motd.getShouldRemember()));
                     dialog.hide();
                   }
                 });
@@ -108,7 +108,7 @@ public class MotdManager {
               dialog.getFirstBtn().addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(final ClickEvent event) {
-                  setCookie(cookieName, inDays(7));
+                  setCookie(cookieName, CookieUtils.inDays(7));
                   KuneWindowUtils.open(motd.getOkBtnUrl());
                   dialog.hide();
                 }
@@ -121,10 +121,6 @@ public class MotdManager {
         timer.schedule(10000);
       }
     });
-  }
-
-  private Date inDays(final int days) {
-    return new Date(System.currentTimeMillis() + SessionConstants.A_DAY * days);
   }
 
   private void setCookie(final String motdCookieName, final Date expires) {

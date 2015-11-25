@@ -31,7 +31,6 @@ import cc.kune.core.shared.SessionConstants;
 
 import com.google.gwt.user.client.Cookies;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class CookiesManagerImpl.
  *
@@ -50,7 +49,7 @@ public class CookiesManagerImpl implements CookiesManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.cookies.CookiesManager#getAnonCookie()
    */
   @Override
@@ -60,7 +59,7 @@ public class CookiesManagerImpl implements CookiesManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.cookies.CookiesManager#getAuthCookie()
    */
   @Override
@@ -68,36 +67,20 @@ public class CookiesManagerImpl implements CookiesManager {
     return Cookies.getCookie(SessionConstants.USERHASH);
   }
 
-  /**
-   * Inspired in: {@link http
-   * ://developers.livechatinc.com/blog/setting-cookies-to
-   * -subdomains-in-javascript/}
-   **/
-  private String getDomain() {
-    final String hostname = WindowUtils.getHostName();
-
-    // noDot, so hostname is "locahost" or similar
-    final boolean noDot = hostname.contains(".");
-
-    // If hostname is a domain.something, set the cookie to .domain.something
-    // allowing subdomains
-    return noDot || hostname.matches(TextUtils.IPADDRESS_PATTERN) ? hostname : "." + hostname;
-  }
-
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.cookies.CookiesManager#removeAnonCookie()
    */
   @Override
   public void removeAnonCookie() {
     Cookies.removeCookie(ANON);
-    Cookies.setCookie(ANON, null, new Date(0), getDomain(), "/", false);
+    Cookies.setCookie(ANON, null, new Date(0), CookieUtils.getDomain(), "/", false);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.cookies.CookiesManager#removeAuthCookie()
    */
   @Override
@@ -109,15 +92,15 @@ public class CookiesManagerImpl implements CookiesManager {
     Cookies.removeCookie(SessionConstants.USERHASH);
     Cookies.removeCookie(SessionConstants.JSESSIONID);
     // Workaround:
-    Cookies.setCookie(SessionConstants.USERHASH, null, new Date(0), getDomain(), "/",
+    Cookies.setCookie(SessionConstants.USERHASH, null, new Date(0), CookieUtils.getDomain(), "/",
         WindowUtils.isHttps());
-    Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), getDomain(), "/",
+    Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), CookieUtils.getDomain(), "/",
         WindowUtils.isHttps());
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.cookies.CookiesManager#setAnonCookie(java.lang.Boolean)
    */
@@ -126,12 +109,12 @@ public class CookiesManagerImpl implements CookiesManager {
     final Date expires = new Date(System.currentTimeMillis()
         + (userRegister ? SessionConstants.ANON_SESSION_DURATION_AFTER_REG
             : SessionConstants.ANON_SESSION_DURATION));
-    Cookies.setCookie(ANON, userRegister.toString(), expires, getDomain(), "/", false);
+    Cookies.setCookie(ANON, userRegister.toString(), expires, CookieUtils.getDomain(), "/", false);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.cookies.CookiesManager#setAuthCookie(java.lang.String)
    */
@@ -139,9 +122,9 @@ public class CookiesManagerImpl implements CookiesManager {
   public void setAuthCookie(final String userHash) {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
     final Date expires = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
-    Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, getDomain(), "/",
+    Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, CookieUtils.getDomain(), "/",
         WindowUtils.isHttps());
-    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, expires, getDomain(), "/",
+    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, expires, CookieUtils.getDomain(), "/",
         WindowUtils.isHttps());
     Log.info("Received hash: " + userHash, null);
   }

@@ -471,6 +471,10 @@
               <paper-fab icon="reply" id="reply_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="check" id="editdone_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <div id="user_space_content">
+                <div id="inbox_tutorial_container">
+                  <div id ="inbox_tutorial">
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -1094,6 +1098,22 @@
         }
 
         /* Inbox ------------------------------------------------------------- */
+
+        #inbox_title {
+          line-height: 1em;
+        }
+
+        #user_space_content,
+        #inbox_tutorial_container {
+          display: flex;
+          justify-content: center;
+          height: 100%;
+        }
+
+        #inbox_tutorial {
+          align-self: center;
+          margin: 0 15px;
+        }
 
         #inbox_show_hide {
           right: -20px;
