@@ -44,6 +44,24 @@ import org.gwtbootstrap3.client.ui.constants.NavbarPosition;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
 import org.gwtbootstrap3.client.ui.html.Text;
 
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.WhiteSpace;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.i18n.client.HasDirection.Direction;
+import com.google.gwt.user.client.DOM;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.AbsolutePanel;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.RootLayoutPanel;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+
 import br.com.rpa.client._paperelements.PaperFab;
 import br.com.rpa.client.api.widgets.paper.PaperButton;
 import cc.kune.bootstrap.client.ui.CheckListItem;
@@ -106,24 +124,6 @@ import cc.kune.core.client.ui.dialogs.PromptTopDialog;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog.Builder;
 import cc.kune.core.client.ui.dialogs.PromptTopDialog.OnEnter;
 
-import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.dom.client.Style.WhiteSpace;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.i18n.client.HasDirection.Direction;
-import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.AbsolutePanel;
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.Widget;
-
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  *
@@ -163,7 +163,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see cc.kune.common.client.actions.ActionListener#actionPerformed(cc.kune
      * .common.client.actions.ActionEvent)
      */
@@ -190,16 +190,16 @@ public class KuneSandboxEntryPoint implements EntryPoint {
       NotifyUser.showProgress("Savingggg");
       NotifyUser.askConfirmation("Some title", "Some message", "Yeah!", "Nein",
           new SimpleResponseCallback() {
-            @Override
-            public void onCancel() {
-              NotifyUser.error("Cancel");
-            }
+        @Override
+        public void onCancel() {
+          NotifyUser.error("Cancel");
+        }
 
-            @Override
-            public void onSuccess() {
-              NotifyUser.info("Success");
-            }
-          });
+        @Override
+        public void onSuccess() {
+          NotifyUser.info("Success");
+        }
+      });
     }
   };
 
@@ -332,6 +332,7 @@ public class KuneSandboxEntryPoint implements EntryPoint {
     absolutePanel.add(tab, 400, 400);
     absolutePanel.add(tab, 400, 400);
     absolutePanel.add(makeFileUpload(), 520, 0);
+    // absolutePanel.add(new InboxTutorial(), 0, 300);
 
     new BlinkAnimation(tab, 350).animate(5);
 
@@ -495,14 +496,15 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     final MenuDescriptor menu = new MenuDescriptor("Menu btn");
     menu.setParent(bottomToolbar);
-    final MenuItemDescriptor menuItemDescriptor = new MenuItemDescriptor(menu, new TestAction(
-        "Menu item"));
+    final MenuItemDescriptor menuItemDescriptor = new MenuItemDescriptor(menu,
+        new TestAction("Menu item"));
     menuItemDescriptor.withIcon(IconType.MAGIC);
 
     final SubMenuDescriptor submenuDesc = new SubMenuDescriptor(menu, "Some submenu");
     submenuDesc.withIcon(KuneIcon.BARTER);
     new MenuItemDescriptor(submenuDesc, new TestAction("Submenu item 1")).withIcon(IconType.FACEBOOK);
-    new MenuItemDescriptor(submenuDesc, new TestAction("Submenu item 2")).withIcon(IconType.FAST_BACKWARD);
+    new MenuItemDescriptor(submenuDesc, new TestAction("Submenu item 2")).withIcon(
+        IconType.FAST_BACKWARD);
 
     // TODO Add more tests here
 
@@ -592,7 +594,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     menuItem1.withIcon(res.locationBlack()).withText("Some menu item 1");
     final MenuItemDescriptor menuItem2 = new MenuItemDescriptor(menuDesc, action1);
-    menuItem2.withIcon(res.info()).withText("Some menu item 2").withShortcut(shortcut2, shortcutRegister);
+    menuItem2.withIcon(res.info()).withText("Some menu item 2").withShortcut(shortcut2,
+        shortcutRegister);
 
     final MenuItemDescriptor menuItem3 = new MenuItemDescriptor(menuDesc2, action1);
     menuItem3.withIcon(res.locationBlack()).withText("Some other menu item 1");
@@ -936,8 +939,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
    * @return the basic thumb
    */
   private BasicThumb testThumbs() {
-    final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5,
-        false, new ClickHandler() {
+    final BasicThumb thumb = new BasicThumb("http://kune.cc/ws/images/unknown.jpg", 60, "fooo", 5, false,
+        new ClickHandler() {
 
           @Override
           public void onClick(final ClickEvent event) {
@@ -964,8 +967,8 @@ public class KuneSandboxEntryPoint implements EntryPoint {
 
     final int clientWidth = Window.getClientWidth();
     final int clientHeight = Window.getClientHeight();
-    absolutePanel.setSize(String.valueOf(clientWidth - 10) + "px", String.valueOf(clientHeight - 10)
-        + "px");
+    absolutePanel.setSize(String.valueOf(clientWidth - 10) + "px",
+        String.valueOf(clientHeight - 10) + "px");
     absolutePanel.add(button, 5, 5);
     absolutePanel.add(button2, clientWidth - 90, 5);
     absolutePanel.add(button3, 5, clientHeight - 50);
