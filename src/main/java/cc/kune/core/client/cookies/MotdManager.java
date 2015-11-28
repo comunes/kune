@@ -27,6 +27,14 @@ import java.util.Date;
 
 import org.gwtbootstrap3.client.ui.base.button.CustomButton;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.HTML;
+import com.google.inject.Singleton;
+
+import cc.kune.common.client.log.Log;
 import cc.kune.common.client.ui.KuneWindowUtils;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog;
 import cc.kune.common.client.ui.dialogs.BasicTopDialog.Builder;
@@ -35,15 +43,7 @@ import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.state.SessionInstance;
-import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.dto.MotdDTO;
-
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.user.client.Cookies;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.Label;
-import com.google.inject.Singleton;
 
 @Singleton
 public class MotdManager {
@@ -79,13 +79,16 @@ public class MotdManager {
 
               final BasicTopDialog dialog = builder.build();
 
-              dialog.setFirstBtnText(I18n.t(motd.getOkBtnText()));
+              dialog.setFirstBtnText(motd.getOkBtnText());
 
               dialog.setCloseBtnVisible(true);
 
-              dialog.getInnerPanel().add(new Label(motd.getMessage()));
+              Log.info("Motd message: " + motd.getMessage());
 
-              dialog.setSecondBtnText(I18n.t(motd.getCloseBtnText()));
+              final HTML message = new HTML(motd.getMessage());
+              dialog.getInnerPanel().add(message);
+
+              dialog.setSecondBtnText(motd.getCloseBtnText());
               dialog.getSecondBtn().addClickHandler(new ClickHandler() {
                 @Override
                 public void onClick(final ClickEvent event) {

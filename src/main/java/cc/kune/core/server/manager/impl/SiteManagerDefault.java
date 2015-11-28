@@ -29,10 +29,15 @@ import java.util.TimeZone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.markdownj.MarkdownProcessor;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.InitData;
 import cc.kune.core.server.UserSessionManager;
+import cc.kune.core.server.i18n.I18nTranslationServiceMultiLang;
 import cc.kune.core.server.manager.GroupManager;
 import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
@@ -52,9 +57,7 @@ import cc.kune.core.shared.dto.InitDataDTO;
 import cc.kune.core.shared.dto.MotdDTO;
 import cc.kune.core.shared.dto.ReservedWordsRegistryDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
+import cc.kune.domain.I18nLanguage;
 
 @Singleton
 public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean {
@@ -70,6 +73,10 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   /** The data. */
   private InitData data;
 
+  private final GroupManager groupManager;
+
+  private final I18nTranslationServiceMultiLang i18n;
+
   /** The kune properties. */
   private final KuneProperties kuneProperties;
 
@@ -84,9 +91,10 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   private MotdDTO motd;
 
+  private HashMap<I18nLanguage, MotdDTO> motdTranslated;
+
   /** The reserved words. */
   private ReservedWordsRegistryDTO reservedWords;
-
   /** The server tool registry. */
   private final ServerToolRegistry serverToolRegistry;
 
@@ -95,13 +103,12 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   /** The store untranslated string. */
   private boolean storeUntranslatedStrings;
+
   /** The user info service. */
   private final UserInfoService userInfoService;
 
   /** The user session manager. */
   private final UserSessionManager userSessionManager;
-
-  private GroupManager groupManager;
 
   /**
    * Instantiates a new site rpc.
@@ -134,7 +141,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
       final UserInfoService userInfoService, final LicenseManager licenseManager,
       final KuneMapper mapper, final KuneProperties kuneProperties, final ChatProperties chatProperties,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
-      final ServerToolRegistry serverToolRegistry, final MBeanRegistry mbeanRegistry, GroupManager groupManager) {
+      final ServerToolRegistry serverToolRegistry, final MBeanRegistry mbeanRegistry,
+      final GroupManager groupManager, final I18nTranslationServiceMultiLang i18n) {
     this.userSessionManager = userSessionManager;
     this.userInfoService = userInfoService;
     this.licenseManager = licenseManager;
@@ -145,6 +153,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     this.countryManager = countryManager;
     this.serverToolRegistry = serverToolRegistry;
     this.groupManager = groupManager;
+    this.i18n = i18n;
     // By default we don't collect which part of the client is untranslated
     storeUntranslatedStrings = false;
     mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
@@ -182,7 +191,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     dataMapped.setgSpaceThemes(siteThemes);
     dataMapped.setReservedWords(reservedWords);
     dataMapped.setStoreUntranslatedStrings(storeUntranslatedStrings);
-    dataMapped.setMotd(motd);
+    dataMapped.setMotd(translate(motd, userInfo.getLanguage()));
     return dataMapped;
   }
 
@@ -240,7 +249,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     data.setSiteUrl(kuneProperties.get(KuneProperties.SITE_URL));
     data.setLicenses(licenseManager.getAll());
     data.setLanguages(languageManager.getAll());
-    data.setFullTranslatedLanguages(languageManager.findByCodes(kuneProperties.getList(KuneProperties.UI_TRANSLATOR_FULL_TRANSLATED_LANGS)));
+    data.setFullTranslatedLanguages(languageManager.findByCodes(
+        kuneProperties.getList(KuneProperties.UI_TRANSLATOR_FULL_TRANSLATED_LANGS)));
     data.setCountries(countryManager.getAll());
     data.setTimezones(TimeZone.getAvailableIDs());
     data.setChatHttpBase(chatProperties.getHttpBase());
@@ -283,6 +293,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
    */
   private void loadProperties(final KuneProperties kuneProperties) {
     data = loadInitData();
+    motdTranslated = new HashMap<I18nLanguage, MotdDTO>();
+
     siteThemes = getSiteThemes(this.kuneProperties.getList(KuneProperties.WS_THEMES));
     reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
 
@@ -298,6 +310,16 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     } else {
       motd = null;
     }
+  }
+
+  private String markdownToHtml(final String motdMessage) {
+    final MarkdownProcessor m = new MarkdownProcessor();
+    return m.markdown(motdMessage);
+  }
+
+  @Override
+  public void reIndexAllEntities() {
+    groupManager.reIndexAllEntities();
   }
 
   @Override
@@ -321,9 +343,24 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     this.storeUntranslatedStrings = storeUntranslatedStrings;
   }
 
-  @Override
-  public void reIndexAllEntities() {
-    groupManager.reIndexAllEntities();
+  private MotdDTO translate(final MotdDTO motd, final I18nLanguage lang) {
+    if (motd == null) {
+      return motd;
+    }
+    MotdDTO translated = motdTranslated.get(lang);
+    if (translated == null) {
+      translated = new MotdDTO();
+      translated.setTitle(i18n.tWithNT(lang, motd.getTitle(), ""));
+      translated.setMessage(markdownToHtml(
+          i18n.tWithNT(lang, motd.getMessage(), "Please, maintain the markdown notation")));
+      translated.setOkBtnText(i18n.tWithNT(lang, motd.getOkBtnText(), ""));
+      translated.setOkBtnUrl(motd.getOkBtnUrl());
+      translated.setCloseBtnText(i18n.tWithNT(lang, motd.getCloseBtnText(), ""));
+      translated.setCookieName(motd.getCookieName());
+      translated.setShouldRemember(motd.getShouldRemember());
+      motdTranslated.put(lang, translated);
+    }
+    return translated;
   }
 
 }

@@ -732,6 +732,11 @@
       <artifactId>gwt-polymer</artifactId>
       <version>0.0.1-SNAPSHOT</version>
     </dependency>
+    <dependency>
+      <groupId>org.markdownj</groupId>
+      <artifactId>markdownj-core</artifactId>
+      <version>0.4</version>
+    </dependency>
   </dependencies>
   <distributionManagement>
     <repository>
