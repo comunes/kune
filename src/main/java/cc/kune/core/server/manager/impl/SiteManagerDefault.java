@@ -185,13 +185,15 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     final UserInfo userInfo = userInfoService.buildInfo(userSessionManager.getUser(), userHash);
     LOG.info("Retrieve init data using userHash: " + userHash);
     LOG.info("Session userHash: " + userSessionManager.getHash());
-    if (userInfo != null) {
-      dataMapped.setUserInfo(mapper.map(userInfo, UserInfoDTO.class));
-    }
     dataMapped.setgSpaceThemes(siteThemes);
     dataMapped.setReservedWords(reservedWords);
     dataMapped.setStoreUntranslatedStrings(storeUntranslatedStrings);
-    dataMapped.setMotd(translate(motd, userInfo.getLanguage()));
+    if (userInfo != null) {
+      dataMapped.setUserInfo(mapper.map(userInfo, UserInfoDTO.class));
+      dataMapped.setMotd(translate(motd, userInfo.getLanguage()));
+    } else {
+      dataMapped.setMotd(translate(motd, languageManager.getDefaultLanguage()));
+    }
     return dataMapped;
   }
 
