@@ -35,16 +35,27 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.Cookies;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.InlineLabel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.cookies.CookieUtils;
+import cc.kune.core.client.sitebar.spaces.Space;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent;
+import cc.kune.core.client.sitebar.spaces.SpaceSelectEvent.SpaceSelectHandler;
+import cc.kune.core.client.state.TokenMatcher;
+import cc.kune.core.client.state.impl.HistoryUtils;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 import cc.kune.polymer.client.PolymerId;
+import cc.kune.wave.client.kspecific.AfterOpenWaveEvent;
+import cc.kune.wave.client.kspecific.AfterOpenWaveEvent.AfterOpenWaveHandler;
+import cc.kune.wave.client.kspecific.WaveClientProvider;
 
 public class InboxTutorial extends Composite {
 
@@ -70,14 +81,36 @@ public class InboxTutorial extends Composite {
   InlineLabel orderedLabel;
   @UiField
   CustomButton btn;
+  private HandlerRegistration selectHandler;
+  private HandlerRegistration openHandler;
 
   @Inject
-  public InboxTutorial(GSpaceArmor armor) {
+  public InboxTutorial(GSpaceArmor armor, EventBus eventBus, final WaveClientProvider waveClient) {
     final String cookie = Cookies.getCookie(COOKIE_NAME);
     if (cookie == null) {
       initWidget(uiBinder.createAndBindUi(this));
       armor.wrapDiv(PolymerId.INBOX_TUTORIAL).add(this);
-      subtitleLabel.setText(I18n.tWithNT("This is your", "Followed by 'inbox', so 'This is your inbox'"));
+      selectHandler = eventBus.addHandler(SpaceSelectEvent.getType(), new SpaceSelectHandler() {
+        @Override
+        public void onSpaceSelect(SpaceSelectEvent event) {
+          if (event.getSpace().equals(Space.userSpace)) {
+            final String encodedToken = HistoryUtils.undoHashbang(History.getToken());
+            if (encodedToken != null && !encodedToken.isEmpty()
+                && TokenMatcher.isInboxToken(encodedToken)) {
+              // Inbox without wave opened
+              setVisible(true);
+              waveClient.get().clear();
+            }
+          }
+        }
+      });
+      openHandler = eventBus.addHandler(AfterOpenWaveEvent.getType(), new AfterOpenWaveHandler() {
+        @Override
+        public void onAfterOpenWave(AfterOpenWaveEvent event) {
+          setVisible(false);
+        }});
+      subtitleLabel.setText(
+          I18n.tWithNT("This is your", "Followed by 'inbox', so 'This is your inbox'"));
       titleLabel.setText(I18n.t("Inbox"));
       createLabel.setText(I18n.t("Here you can create, edit and comment documents"));
       addContactLabel.setText(I18n.t("Share them with your contacts"));
@@ -95,6 +128,8 @@ public class InboxTutorial extends Composite {
           $(InboxTutorial.this).as(Effects).fadeTo(400, 0);
           Cookies.setCookie(COOKIE_NAME, null, CookieUtils.expireInYears(), CookieUtils.getDomain(), "/",
               false);
+          selectHandler.removeHandler();
+          openHandler.removeHandler();
         }
       });
     }

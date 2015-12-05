@@ -59,7 +59,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
   }
 
   private native static Element getShadowElement(String father, String child) /*-{
-		return $doc.querySelector(father).shadowRoot.querySelector(child)
+    return $doc.querySelector(father).shadowRoot.querySelector(child)
   }-*/;
 
   private static boolean isElementChildOfWidget(Element element) {
@@ -314,6 +314,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
       final Element element = getElement(htmlId);
       if (element == null) {
         // Not found, return null as getElementById
+        Log.warn("Cannot find html element with id: " + id);
         return null;
       }
       if (isElementChildOfWidget(element)) {
@@ -321,7 +322,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
       }
       panel = WrappedFlowPanel.wrap(element);
       if (panel == null) {
-        Log.error("Error wrapping id: " + id);
+        Log.error("Error wrapping html element with id: " + id);
       }
       assert panel != null;
       panels.put(id, panel);

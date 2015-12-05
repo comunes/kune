@@ -26,14 +26,13 @@ import java.util.HashMap;
 
 /**
  * The Class SiteTokenListeners.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-@SuppressWarnings("serial")
 public class SiteTokenListeners extends HashMap<String, HistoryTokenCallback> {
 
   /**
-   * 
+   *
    */
   private static final long serialVersionUID = 1L;
 }

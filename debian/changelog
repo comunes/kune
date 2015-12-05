@@ -1,3 +1,11 @@
+kune (1.0.1+b19) unstable; urgency=medium
+
+  * Fix for inbox tutorial present when opening waves
+  * Warn when a html id needed is not found so we don't get ophuscated
+    errors
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Fri, 04 Dec 2015 18:45:19 +0100
+
 kune (1.0.1+b18) unstable; urgency=medium
 
   * Motd now allows markdown
