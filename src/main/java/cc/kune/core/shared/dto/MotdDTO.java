@@ -29,6 +29,7 @@ public class MotdDTO implements IsSerializable {
   private String closeBtnText;
   private String cookieName;
   private String message;
+  private String messageBottom;
   private String okBtnText;
   private String okBtnUrl;
   private int shouldRemember;
@@ -91,6 +92,14 @@ public class MotdDTO implements IsSerializable {
 
   public void setTitle(final String title) {
     this.title = title;
+  }
+
+  public String getMessageBottom() {
+    return messageBottom;
+  }
+
+  public void setMessageBottom(String messageBottom) {
+    this.messageBottom = messageBottom;
   }
 
 }

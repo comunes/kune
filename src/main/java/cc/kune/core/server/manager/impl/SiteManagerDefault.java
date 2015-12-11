@@ -110,6 +110,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   /** The user session manager. */
   private final UserSessionManager userSessionManager;
 
+  private MarkdownProcessor markProcessor;
+
   /**
    * Instantiates a new site rpc.
    *
@@ -157,6 +159,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     // By default we don't collect which part of the client is untranslated
     storeUntranslatedStrings = false;
     mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
+    markProcessor = new MarkdownProcessor();
   }
 
   /**
@@ -304,6 +307,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
       motd = new MotdDTO();
       motd.setTitle(kuneProperties.get(KuneProperties.MOTD_TITLE));
       motd.setMessage(kuneProperties.get(KuneProperties.MOTD_MESSAGE));
+      motd.setMessageBottom(kuneProperties.get(KuneProperties.MOTD_MESSAGE_BOTTOM));
       motd.setOkBtnText(kuneProperties.get(KuneProperties.MOTD_OK_BTN_TEXT));
       motd.setOkBtnUrl(kuneProperties.get(KuneProperties.MOTD_OK_BTN_URL));
       motd.setCloseBtnText(kuneProperties.get(KuneProperties.MOTD_CLOSE_BTN_TEXT));
@@ -315,8 +319,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   }
 
   private String markdownToHtml(final String motdMessage) {
-    final MarkdownProcessor m = new MarkdownProcessor();
-    return m.markdown(motdMessage);
+    String html = markProcessor.markdown(motdMessage);
+    return html.replaceAll(" href=\"http", " target='_blank' href=\"http");
   }
 
   @Override
@@ -355,6 +359,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
       translated.setTitle(i18n.tWithNT(lang, motd.getTitle(), ""));
       translated.setMessage(markdownToHtml(
           i18n.tWithNT(lang, motd.getMessage(), "Please, maintain the markdown notation")));
+      translated.setMessageBottom(markdownToHtml(
+          i18n.tWithNT(lang, motd.getMessageBottom(), "Please, maintain the markdown notation")));
       translated.setOkBtnText(i18n.tWithNT(lang, motd.getOkBtnText(), ""));
       translated.setOkBtnUrl(motd.getOkBtnUrl());
       translated.setCloseBtnText(i18n.tWithNT(lang, motd.getCloseBtnText(), ""));

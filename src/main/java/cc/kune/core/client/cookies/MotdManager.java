@@ -85,7 +85,7 @@ public class MotdManager {
 
               Log.info("Motd message: " + motd.getMessage());
 
-              final HTML message = new HTML(motd.getMessage());
+              final HTML message = new HTML(motd.getMessage() + motd.getMessageBottom());
               dialog.getInnerPanel().add(message);
 
               dialog.setSecondBtnText(motd.getCloseBtnText());

@@ -89,6 +89,8 @@ public interface KuneProperties {
 
   String MOTD_MESSAGE = "kune.motd.message";
 
+  String MOTD_MESSAGE_BOTTOM = "kune.motd.messagebottom";
+
   String MOTD_OK_BTN_TEXT = "kune.motd.okbtntext";
 
   String MOTD_OK_BTN_URL = "kune.motd.okbtnurl";

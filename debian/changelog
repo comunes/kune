@@ -1,3 +1,10 @@
+kune (1.0.1+b20) unstable; urgency=medium
+
+  * Open external links in other window in motd messages
+  * Motd message extended (more than 500 chars)
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 05 Dec 2015 15:03:42 +0100
+
 kune (1.0.1+b19) unstable; urgency=medium
 
   * Fix for inbox tutorial present when opening waves
