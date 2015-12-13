@@ -1,3 +1,9 @@
+kune (1.0.1+b21) unstable; urgency=medium
+
+  * Motd truncated to 500 characters
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sun, 13 Dec 2015 20:11:53 +0100
+
 kune (1.0.1+b20) unstable; urgency=medium
 
   * Open external links in other window in motd messages

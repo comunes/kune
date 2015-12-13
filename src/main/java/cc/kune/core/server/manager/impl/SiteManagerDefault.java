@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TimeZone;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.markdownj.MarkdownProcessor;
@@ -306,8 +307,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     if (kuneProperties.getBoolean(KuneProperties.MOTD_ENABLED)) {
       motd = new MotdDTO();
       motd.setTitle(kuneProperties.get(KuneProperties.MOTD_TITLE));
-      motd.setMessage(kuneProperties.get(KuneProperties.MOTD_MESSAGE));
-      motd.setMessageBottom(kuneProperties.get(KuneProperties.MOTD_MESSAGE_BOTTOM));
+      motd.setMessage(StringUtils.abbreviate(kuneProperties.get(KuneProperties.MOTD_MESSAGE), 500));
+      motd.setMessageBottom(StringUtils.abbreviate(kuneProperties.get(KuneProperties.MOTD_MESSAGE_BOTTOM),500));
       motd.setOkBtnText(kuneProperties.get(KuneProperties.MOTD_OK_BTN_TEXT));
       motd.setOkBtnUrl(kuneProperties.get(KuneProperties.MOTD_OK_BTN_URL));
       motd.setCloseBtnText(kuneProperties.get(KuneProperties.MOTD_CLOSE_BTN_TEXT));
