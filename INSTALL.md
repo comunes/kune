@@ -421,20 +421,21 @@ Set the correct owner:
 ```
 sudo chown openfire:openfire /usr/share/openfire/lib/kune-openfireauth-VERSION.jar
 sudo ln -s /etc/kune/wave-server.properties /usr/share/openfire/lib/wave-server.properties
-(do something equivalent in Windows systems in the openfire folder)
 ```
+(do something equivalent in Windows systems in the openfire folder)
+
 The wave-server.properties file is in src/main/resources in the devel environment.
 
 Next, execute this:
 ```
 $ mysql -p -u kune kune_openfire # or mysql -p -u root
-DELETE FROM \`ofProperty\` WHERE name='provider.auth.className';
-DELETE FROM \`ofProperty\` WHERE name='hybridAuthProvider.primaryProvider.className';
-DELETE FROM \`ofProperty\` WHERE name='hybridAuthProvider.secondaryProvider.className';
-DELETE FROM \`ofProperty\` WHERE name='hybridAuthProvider.tertiaryProvider.className';
-INSERT INTO \`ofProperty\` VALUES ('provider.auth.className','org.jivesoftware.openfire.auth.HybridAuthProvider');
-INSERT INTO \`ofProperty\` VALUES('hybridAuthProvider.primaryProvider.className','cc.kune.core.server.auth.openfire.KuneAuthProvider');
-INSERT INTO \`ofProperty\` VALUES('hybridAuthProvider.secondaryProvider.className','org.jivesoftware.openfire.auth.DefaultAuthProvider');
+DELETE FROM 'ofProperty' WHERE name='provider.auth.className';
+DELETE FROM 'ofProperty' WHERE name='hybridAuthProvider.primaryProvider.className';
+DELETE FROM 'ofProperty' WHERE name='hybridAuthProvider.secondaryProvider.className';
+DELETE FROM 'ofProperty' WHERE name='hybridAuthProvider.tertiaryProvider.className';
+INSERT INTO 'ofProperty' VALUES ('provider.auth.className','org.jivesoftware.openfire.auth.HybridAuthProvider');
+INSERT INTO 'ofProperty' VALUES('hybridAuthProvider.primaryProvider.className','cc.kune.core.server.auth.openfire.KuneAuthProvider');
+INSERT INTO 'ofProperty' VALUES('hybridAuthProvider.secondaryProvider.className','org.jivesoftware.openfire.auth.DefaultAuthProvider');
 ```
 Alternatively you can do this via 'Server > Server Manager > System Properties'.
 
@@ -462,7 +463,7 @@ Or, alternatively (if it is easier for you), add these lines to conf/openfire.xm
 
 (Again check that the user/passwd of the db is the same one here and in kune.properties, the ones configured before):
 
-<pre>
+```
 <jive>
   &#x2026;
   <jdbcProvider>
@@ -488,7 +489,7 @@ Or, alternatively (if it is easier for you), add these lines to conf/openfire.xm
   </admin>
   &#x2026;
 </jive>
-</pre>
+```
 
 Instead of:
 ```

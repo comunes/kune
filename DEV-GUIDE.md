@@ -745,4 +745,4 @@ It is recommended to be subscribed to both mailing lists and especially to the K
 
 ## Twitter/Identica
 
-You can follow @kuneproject in Twitter and Identica.
+You can follow [@kuneproject in Twitter](https://twitter.com/kuneproject) and [Identica](https://identi.ca/kuneproject).

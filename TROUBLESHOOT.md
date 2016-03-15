@@ -198,7 +198,7 @@ Sometimes the tests also fails without any error (use the same workaround).
     drwxr-xr-x  2 root root 4096 jul 26 14:15 .
     drwxr-xr-x 13 kune kune 4096 jul 26 14:19 ..
     kunedemo:/usr/share/kune/custom# rm /var/lib/kune/_wave_indexes/write.lock
-    ```
+```
 
 ## Guice error while running server
 
@@ -212,7 +212,7 @@ When running the server (e.g. "kune server via mvn.launch"), and Guice throws a 
     Caused by: &#x2026;
     Caused by: &#x2026;
     Caused by: &#x2026;
-    ```
+```
 
 There is a chain of "Caused by" exceptions. Check the last ones of the chain to understand what's going on. For instance, it may give a problem of permissions ("permission denied"), which can be easily fixed correcting the pointed file permissions. Another example is a problem with Hibernate and thus the database, as in: <http://www.kune.cc/?locale=en#!kune.lists.1226.8850> (the solution is described there)
 
@@ -295,7 +295,7 @@ or:
 ```
     An internal error occurred during: "Validating kune".
     org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
- ```
+```
 
 These can be solved installing "Eclipse Java EE Developer Tools", as mentioned in:
 <http://stackoverflow.com/questions/6936309/getting-an-error-message-while-building-phonegapsample-in-blackberry-webworks>
