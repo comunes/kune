@@ -465,7 +465,7 @@ Or, alternatively (if it is easier for you), add these lines to conf/openfire.xm
 
 ```
 <jive>
-  &#x2026;
+  ...
   <jdbcProvider>
     <driver>com.mysql.jdbc.Driver</driver>
     <connectionString>jdbc:mysql://localhost/kune_dev?user=kune&amp;password=db4kune&amp;useUnicode=true&amp;characterEncoding=utf-8</connectionString>
@@ -487,7 +487,7 @@ Or, alternatively (if it is easier for you), add these lines to conf/openfire.xm
   <admin>
     <authorizedUsernames>admin</authorizedUsernames>
   </admin>
-  &#x2026;
+  ...
 </jive>
 ```
 
@@ -569,7 +569,7 @@ ProxyRequests Off
 
 You should configure a SMTP server in order to be used by Kune in production sites. See kune.site.smtp.* in kune.properties and check that your email system works propertly. For instance, you can test something such as:
 ```
-echo "Test&#x2026;" | mailx -s "Testing mail in kune instalation" PUT_HERE@YOUR_EMAIL # or something similar
+echo "Test...;" | mailx -s "Testing mail in kune instalation" PUT_HERE@YOUR_EMAIL # or something similar
 ```
 <http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#ProtocolSMTP>
 <http://java.sun.com/developer/onlineTraining/JavaMail/contents.html#JavaMailSending>

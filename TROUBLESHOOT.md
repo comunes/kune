@@ -247,7 +247,7 @@ Error: Problem with Eclipse plugin and UiBinder "Field xxx has no corresponding 
 
 ## Outbound variable M2_REPO
 
-Set M2_REPO to eclipse in Preferences > Java > Build Path > Classpath Variable (normally to /home/youruser*.m2/repository/)
+Set M2_REPO to eclipse in Preferences > Java > Build Path > Classpath Variable (normally to /home/youruser/.m2/repository/)
 
 ## Too many GWT permutations?
 
