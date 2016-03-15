@@ -70,7 +70,7 @@ about how to fix it in your system.
 ```
 [INFO]       Computing all possible rebind results for 'cc.kune.core.client.resources.CoreResources' [INFO]          Rebinding cc.kune.core.client.resources.CoreResources [INFO]             Invoking generator com.google.gwt.resources.rebind.context.StaticClientBundleGenerator [INFO]                [ERROR] Generator 'com.google.gwt.resources.rebind.context.StaticClientBundleGenerator' threw an exception while rebinding 'cc.kune.cor
  [INFO]  at com.google.gwt.dev.util.Util.computeStrongName(Util.java:170) [INFO]  at com.google.gwt.dev.util.Util.computeStrongName(Util.java:145) [INFO]  at com.google.gwt.resources.rebind.context.StaticResourceContext.deploy(StaticResourceContext.java:61)
- ```
+```
 
 <http://code.google.com/p/google-web-toolkit/issues/detail?id=6103>
 
@@ -111,11 +111,11 @@ A check list:
 -   These files should be the same:
 ```
       diff src/main/resources/kune.properties target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/kune.properties
-      ```
+```
     and:
-    ```
+```
       diff src/main/resources/META-INF/persistence.xml target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml
-      ```
+```
     otherwise, run ```mvn compile -Dliquibase.should.run=false```
 
 -   Also check the persistence unit that you are using and find that name in persistence.xml (we are using development, but can be other). The db user/password configured in kune.properties for that name should be the same to that one you used in the GRANT sentence of mysql database creation.
@@ -136,12 +136,12 @@ After executing
 An error such as this one may appear:
 ```
   Migration Failed: Error executing SQL ALTER TABLE groups ADD COLUMN logoLastModifiedTime BIGINT NOT NULL DEFAULT 1347400051999
-  ```
+```
 
 This is due to the auto-generation of columns by the Kune environment. In this specific case, dropping the column would allow the migration to succeed. That is, it can be solved connecting to the kune_dev (or kune_prod) table and executing this SQL sentence:
 ```
   ALTER TABLE groups DROP COLUMN logoLastModifiedTime;
-  ```
+```
 
 ## If during initialization (first start) you get a 'Account already exists'
 
@@ -267,12 +267,12 @@ error: Caused by: org.ourproject.kune.chat.server.managers.ChatException: remote
 
 Check that the openfire server name is the same in the kune.properties file, and you can resolv the names :
 ```
-  $ host yourhostname
-  ```
+$ host yourhostname
+```
 and
 ```
-  $ host rooms.yourhostname
-  ```
+$ host rooms.yourhostname
+```
 
 ## Error: Incorrect string value: '\xEF\xBF\xBD\xEF\xBF\xBD&#x2026;' for column 'native_name' at row 1
 
@@ -288,14 +288,14 @@ While building, problems during validation such as:
     Could not initialize class org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
     Errors running builder 'Validation' on project 'kune'.
     org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
-    ```
+```
 
 or:
 
 ```
     An internal error occurred during: "Validating kune".
     org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
-    ```
+ ```
 
 These can be solved installing "Eclipse Java EE Developer Tools", as mentioned in:
 <http://stackoverflow.com/questions/6936309/getting-an-error-message-while-building-phonegapsample-in-blackberry-webworks>
@@ -315,7 +315,7 @@ or:
 ```
     Plugin execution not covered by lifecycle configuration:
     org.apache.maven.plugins:maven-resources-plugin:2.4.2:resources (execution: default-resources, phase: process-resources)        pom.xml        /kune        line 773        Maven Project Build Lifecycle Mapping Problem
-    ```
+ ```
 
 These can be solved by installing the m2eclipse, as described in:
 <http://code.google.com/p/google-web-toolkit/wiki/WorkingWithMaven#Using_Maven_with_Google_Plugin_for_Eclipse>
@@ -353,7 +353,7 @@ You can debug the server running from eclipse as external tool:
 and after this the debug launch:
 ```
    bin/kune server debug.launch
-   ```
+```
 that connects the debugger to the port 8001 of the running server.
 
 Related: debug with jetty in eclipse:

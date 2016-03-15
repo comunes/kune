@@ -70,8 +70,8 @@
 <li><a href="#sec-7-1">7.1. Usability</a></li>
 <li><a href="#sec-7-2">7.2. Designs patterns</a>
 <ul>
-<li><a href="#sec-7-2-1">7.2.1. MVC: We use a lot the [MVC pattern] in our GWT code.</a></li>
-<li><a href="#sec-7-2-2">7.2.2. IoC: as we described before we use Guice and Suco for IoC. Again, see HelloWorldModule class for a very simple sample of a GWT module using Suco.</a></li>
+<li><a href="#sec-7-2-1">7.2.1. MVC</a></li>
+<li><a href="#sec-7-2-2">7.2.2. IoC</a></li>
 </ul>
 </li>
 </ul>
@@ -365,9 +365,9 @@ If you have memory problems running the hosted mode, increase it in VM arguments
 
 See these files in the "kune" directory:
 
--   [ ] kune/INSTALL
+-   [ ] [INSTALL](https://github.com/comunes/kune/blob/master/INSTALL.md)
 
--   [ ] kune/TROUBLESHOOT
+-   [ ] [TROUBLESHOOT](https://github.com/comunes/kune/blob/master/TROUBLESHOOT.md)
 
 -   [ ] <http://kune.ourproject.org/faq/>
 
@@ -398,7 +398,7 @@ The 2/3 main parts of Kune are developed in Java: the server code, and the works
 
 ## GWT
 
-[<http://code.google.com/webtoolkit/> GWT] is used for the client workspace. See the [<http://code.google.com/intl/en/webtoolkit/gettingstarted.html> Getting Started - Quick Start] or the [<http://code.google.com/intl/es-ES/webtoolkit/makinggwtbetter.html> Making GWT Better].
+[GWT](http://www.gwtproject.org/) is used for the client workspace. See the [Getting Started](http://www.gwtproject.org/gettingstarted.html).
 
 GWT is the key of our Kune workspace UI. As the GWT team says: «GWT's mission is to radically improve the web experience for users by enabling developers to use existing Java tools to build no-compromise AJAX for any modern browser» and we think they achieved it. You have more info and tutorials of GWT in:
 <http://ourproject.org/moin/Contributors#Google_Web_Toolkit_First_Steps>
@@ -418,33 +418,33 @@ kune/pom.xml
 
 ### Guice
 
-[<http://code.google.com/p/google-guice/> Guice] is used in the server code for [<http://en.wikipedia.org/wiki/Inversion_of_Control> IoC]. As they describe «Put simply, Guice alleviates the need for factories and the use of new in your Java code. Think of Guice's @Inject as the new new.».
+[Guice](http://code.google.com/p/google-guice/) is used in the server code for [IoC](http://en.wikipedia.org/wiki/Inversion_of_Control). As they describe «Put simply, Guice alleviates the need for factories and the use of new in your Java code. Think of Guice's @Inject as the new new.».
 
-In the GWT client code we use [<https://code.google.com/p/google-gin/> Gin], also based in Guice.
+In the GWT client code we use [Gin](https://code.google.com/p/google-gin/), also based in Guice.
 
-For details on how to use it, see the [<https://code.google.com/docreader/#p=google-guice&s=google-guice&t=Motivation> Guice User's Guide].
+For details on how to use it, see the [Guice User's Guide](https://code.google.com/docreader/#p=google-guice&s=google-guice&t=Motivation).
 
 ### Apache OpenJPA
 
-For db persistence, we use [<http://openjpa.apache.org/> OpenJPA]. See the [<http://openjpa.apache.org/docs/openjpa-0.9.0-incubating/manual/manual.html> OpenJPA manual] for dev info.
+For db persistence, we use [OpenJPA](http://openjpa.apache.org/).
 
 ### Guice Persist
 
-We use [<https://code.google.com/p/google-guice/wiki/GuicePersist> Guice-Persist] and its dynamic finders. That is, Guice + Persistence + easy db query. See: UserFinder.java for a sample of finders.
+We use [Guice-Persist](https://code.google.com/p/google-guice/wiki/GuicePersist) and its dynamic finders. That is, Guice + Persistence + easy db query. See: UserFinder.java for a sample of finders.
 
 ### Lucene
 
-For content indexing, we use Lucene. We usually use [<http://www.hibernate.org/hib_docs/search/reference/en/html/> Hibernate Search - Apache Lucene Integration] documentation.
+For content indexing, we use Lucene. We usually use [Hibernate Search - Apache Lucene Integration](http://www.hibernate.org/hib_docs/search/reference/en/html/) documentation.
 
 ## Client side (GWT)
 
 ### GIN
 
-[<https://code.google.com/p/google-gin/> Gin] is the IoC library that we use for GWT. For more documentation see [<https://code.google.com/p/google-gin/wiki/GinTutorial> the Gin tutorial]. See also our Guice section above.
+[Gin](https://code.google.com/p/google-gin/) is the IoC library that we use for GWT. For more documentation see the [Gin tutorial](https://code.google.com/p/google-gin/wiki/GinTutorial). See also our Guice section above.
 
 ### Emite
 
-[<https://github.com/EmiteGWT> emite] is our xmpp extensible library and client. See [<http://code.google.com/p/emite/w/list> the wiki] for more documentation about emite. It's a module totally independent of Kune, so you can also use emite in your website or project.
+[emite](https://github.com/EmiteGWT) is our xmpp extensible library and client. See [the wiki](http://code.google.com/p/emite/w/list) for more documentation about emite. It's a module totally independent of Kune, so you can also use emite in your website or project.
 
 We use these forks:
 <https://github.com/comunes/emite/>
@@ -452,11 +452,11 @@ We use these forks:
 
 ### UI Binder
 
-We use [<https://code.google.com/intl/en/webtoolkit/doc/latest/DevGuideUiBinder.html> UI Binder] for GWT Widgets. Also we use [<https://code.google.com/intl/en/webtoolkit/tools/download-gwtdesigner.html> GWT Designer Eclipse plugin] for developing these widgets.
+We use [UI Binder](https://code.google.com/intl/en/webtoolkit/doc/latest/DevGuideUiBinder.html) for GWT Widgets. Also we use [GWT Design Eclipse Plugin](https://code.google.com/intl/en/webtoolkit/tools/download-gwtdesigner.html) for developing these widgets.
 
 ### ext-gwt/gxt
 
-[<http://www.sencha.com/products/extgwt/> gxt] is used for other parts of our GWT UI (like window dialogs, grids, etc). See the [<http://www.sencha.com/examples/> gxt explorer] for sample codes and [<http://www.sencha.com/gxtdocs/#overview> gxt docs].
+[gxt](http://www.sencha.com/products/extgwt/) is used for other parts of our GWT UI (like window dialogs, grids, etc). See the [gxt explorer](http://www.sencha.com/examples/) for sample codes and [gxt docs](http://www.sencha.com/gxtdocs/#overview).
 
 # Coding
 
@@ -492,12 +492,18 @@ Some relevant links to solve doubts:
 
 ## Designs patterns
 
-### MVC: We use a lot the [<http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller> MVC pattern] in our GWT code.
+### MVC
+
+We use a lot the [MVC pattern](http://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) in our GWT code.
 
 See our HelloWorldModule class for a simple sample. We used to auto generate some MVC classes with the script bin/generateBasicUIElements.sh:
+```
  bin/generateBasicUIElements.sh <packageDirDest> <ClassName>
+ ```
 for instance:
+```
  bin/generateBasicUIElements.sh src/main/java/org/ourproject/kune/workspace/client/options/ GroupOptions
+ ```
 this generates four classes:
 
 -   GroupOptions (the external interface),
@@ -508,9 +514,9 @@ this generates four classes:
 
 -   the GroupOptionsPanel (the UI code, with all the GWT UI stuff).
 
-Besides, this class gives you in the standard output a sample code to use Suco in a module to build these objects.
+### IoC
 
-### IoC: as we described before we use Guice and Suco for IoC. Again, see HelloWorldModule class for a very simple sample of a GWT module using Suco.
+A we described before we use Guice for IoC.
 
 # Code preferences
 
@@ -686,11 +692,11 @@ NOTE: When generating a new DEB package => dch -i
 
 Attach the following notices to each source of the program at the begining:
 <pre>
-    Copyright (C) 2007-2015 Licensed to the Comunes Association (CA) under
-    one or more contributor license agreements (see COPYRIGHT for details).
-    The CA licenses this file to you under the GNU Affero General Public
-    License version 3, (the "License"); you may not use this file except in
-    compliance with the License. This file is part of kune.
+Copyright (C) 2007-2016 Licensed to the Comunes Association (CA) under
+one or more contributor license agreements (see COPYRIGHT for details).
+The CA licenses this file to you under the GNU Affero General Public
+License version 3, (the "License"); you may not use this file except in
+compliance with the License. This file is part of kune.
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as
@@ -702,8 +708,8 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
 
-    You should have received a copy of the GNU Affero General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+You should have received a copy of the GNU Affero General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 </pre>
 
 In Java just include the COPYRIGHT-AGPLv3.java header.
@@ -718,15 +724,15 @@ CLAs may be submitted by traditional postal mail or by emailing a scan of the si
 
 # Get in touch
 
-## Our lists in <http://kune.cc/#kune.lists>
+## Mailing lists
 
-## Mailing lists (now we use more the #kune.lists)
+Now we use more the [#kune.lists](http://kune.cc/#kune.lists)
 
 We have the classical mailing lists, mainly two:
 
--   [ ] [<https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-devel> kune-devel] for all development related topics
+-   [ ] [kune-devel] (https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-devel) for all development related topics
 
--   [ ] [<https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-commits> kune-commits] where the repository sends the commit logs and summaries
+-   [ ] [kune-commits](https://lists.ourproject.org/cgi-bin/mailman/listinfo/kune-commits) where the repository sends the commit logs and summaries
 
 However, more and more we are using the Kune.cc lists instead of mailing lists. This minimises email flow, maximises productivity, and encourages the use of our own tool (and thus finding bugs or possible improvements). Thus, you can check out the lists in the #kune group of kune.cc:
 <http://kune.cc/#!kune.lists>

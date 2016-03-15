@@ -65,10 +65,14 @@ NOTE: This INSTALL document contains more info besides the installation instruct
 -   Install java-jdk (>=7), maven2, mysql (> 5.0) and eclipse (well, this depends on what IDE do you use for development). In Debian and derivatives (such as Ubuntu):
 
 For development environment:
+```
  sudo apt-get install subversion maven2 mercurial openjdk-6-jdk mysql-server libjmagick6-jni
+```
 
 For production environment:
+```
  sudo apt-get install openjdk-6-jdk mysql-server libjmagick6-jni
+```
 
 NOTE: If you want the Jabber/XMPP chat service in your installation, you will need OpenFire, as described later on.
 NOTE: If you want to send automatic email notifications, you will need to set up a SMTP server, and test it as described later on.
@@ -77,7 +81,7 @@ NOTE: If you want to send automatic email notifications, you will need to set up
 
 1.  Db creation
 
-    For development, make two databases in your mysql:
+For development, make two databases in your mysql:
 ```
     CREATE DATABASE kune_dev;
     GRANT ALL PRIVILEGES ON kune_dev.* TO kune@localhost IDENTIFIED BY 'db4kune';
@@ -87,26 +91,26 @@ NOTE: If you want to send automatic email notifications, you will need to set up
     GRANT ALL PRIVILEGES ON kune_test.* TO kune@localhost IDENTIFIED BY 'db4kune';
     FLUSH PRIVILEGES;
 ```
-    For production, just create one database (a note on the password later on):
+For production, just create one database (a note on the password later on):
 ```
     CREATE DATABASE kune_prod;
     GRANT ALL PRIVILEGES ON kune_prod.* TO kune@localhost IDENTIFIED BY 'db4kune';
     FLUSH PRIVILEGES;
 ```
-    Now for the Openfire XMPP server:
+Now for the Openfire XMPP server:
 ```
     CREATE DATABASE kune_openfire;
     GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'db4kune';
     FLUSH PRIVILEGES;
 ```
-    For all the databases created:
+For all the databases created:
 ```
     ALTER DATABASE kune_dev CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
     ALTER DATABASE kune_test CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
     ALTER DATABASE kune_prod CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
     ALTER DATABASE kune_openfire CHARACTER SET utf8 DEFAULT CHARACTER SET utf8 COLLATE utf8_bin DEFAULT COLLATE utf8_bin;
 ```
-    WARNING: Although using this password ('db4kune') is useful for a quick and dirty getting started installation (useful for development), you should seriously consider changing it to something different, since you are in high risk! Keeping the default password (which is obviously public) is strongly discouraged, especially for production sites. In the case you change it, you should also change the password acordingly in this other locations:
+WARNING: Although using this password ('db4kune') is useful for a quick and dirty getting started installation (useful for development), you should seriously consider changing it to something different, since you are in high risk! Keeping the default password (which is obviously public) is strongly discouraged, especially for production sites. In the case you change it, you should also change the password acordingly in this other locations:
 
     -   pom.xml
 
@@ -386,7 +390,7 @@ Select "MySQL" drivers. Afterwards, you should configure the mysql connection. F
     Database URL:                   jdbc:mysql://localhost:3306/kune_openfire
     Username:                       kune
     Password:                       db4kune
-    ```
+```
 
 NOTE: Recall the security concerns about the default database password!
 NOTE: This is just the default configuration, which can be modified freely.
