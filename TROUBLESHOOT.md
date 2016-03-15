@@ -32,11 +32,11 @@
 <li><a href="#sec-1-11">1.11. JUnit</a></li>
 <li><a href="#sec-1-12">1.12. If the client get: Error fetching initial data from Kune server</a></li>
 <li><a href="#sec-1-13">1.13. Eclipse &amp; GWT</a></li>
-<li><a href="#sec-1-14">1.14. Outbound variable M2<sub>REPO</sub></a></li>
+<li><a href="#sec-1-14">1.14. Outbound variable M2<sub>REPO</a></li>
 <li><a href="#sec-1-15">1.15. Too many GWT permutations?</a></li>
 <li><a href="#sec-1-16">1.16. Eclipse startup is slow</a></li>
 <li><a href="#sec-1-17">1.17. Error: ChatException: remote-server-not-found(404) trying to create a room.</a></li>
-<li><a href="#sec-1-18">1.18. Error: Incorrect string value: '\xEF\xBF\xBD\xEF\xBF\xBD&#x2026;' for column 'native<sub>name'</sub> at row 1</a></li>
+<li><a href="#sec-1-18">1.18. Error: Incorrect string value: '\xEF\xBF\xBD\xEF\xBF\xBD&#x2026;' for column 'native<sub>name' at row 1</a></li>
 <li><a href="#sec-1-19">1.19. Error during build: Validation</a></li>
 <li><a href="#sec-1-20">1.20. Error during build: Maven</a></li>
 <li><a href="#sec-1-21">1.21. Java compile errors: incompatible types</a></li>
@@ -58,7 +58,7 @@
 
 ## Starting Kune server hangs in "INFO: Starting server"
 
-This probably happens because a directory of 'resource<sub>bases'</sub> in wave-server.properties doesn't exist. Please create or configure this variable correctly, or make sure the missing directory exists.
+This probably happens because a directory of 'resource_bases' in wave-server.properties doesn't exist. Please create or configure this variable correctly, or make sure the missing directory exists.
 
 ## Too many files open
 
@@ -67,9 +67,10 @@ If running all the Kune test you get errors about "Too many files open" see:
 about how to fix it in your system.
 
 ## Error generating CoreResources
-
+```
 [INFO]       Computing all possible rebind results for 'cc.kune.core.client.resources.CoreResources' [INFO]          Rebinding cc.kune.core.client.resources.CoreResources [INFO]             Invoking generator com.google.gwt.resources.rebind.context.StaticClientBundleGenerator [INFO]                [ERROR] Generator 'com.google.gwt.resources.rebind.context.StaticClientBundleGenerator' threw an exception while rebinding 'cc.kune.cor
  [INFO]  at com.google.gwt.dev.util.Util.computeStrongName(Util.java:170) [INFO]  at com.google.gwt.dev.util.Util.computeStrongName(Util.java:145) [INFO]  at com.google.gwt.resources.rebind.context.StaticResourceContext.deploy(StaticResourceContext.java:61)
+ ```
 
 <http://code.google.com/p/google-web-toolkit/issues/detail?id=6103>
 
@@ -88,13 +89,14 @@ See Mysql => Other mysql errors
 ### Mysql: Caused by: java.sql.SQLException: Access denied for user 'kune'@'localhost' (using password: YES)
 
 Check that the password you have use in the database creation it's the same like the kune.properties. If it's wrong maybe you have to remove the mysql user (DROP USER) and repeat the GRANT sentences of the INSTALL, for instance:
-
+```
 DROP USER kune@localhost;
-GRANT ALL PRIVILEGES ON kune<sub>prod</sub>.\* TO kune@localhost IDENTIFIED BY 'db4kune';
-GRANT ALL PRIVILEGES ON kune<sub>openfire</sub>.\* TO kune@localhost IDENTIFIED BY 'db4kune';
+GRANT ALL PRIVILEGES ON kune_prod.* TO kune@localhost IDENTIFIED BY 'db4kune';
+GRANT ALL PRIVILEGES ON kune_openfire.* TO kune@localhost IDENTIFIED BY 'db4kune';
 FLUSH PRIVILEGES;
+```
 
-Also, be sure you do a "mvn compile" if you are running kune from the source and you change the kune.properties file to not use the old one.
+Also, be sure you do a ```mvn compile``` if you are running kune from the source and you change the kune.properties file to not use the old one.
 
 If you have this problem with openfire it's not enough to change the password in openfire.xml because probably it's already stored in the ofProperty openfire table and you need to change the password there.
 
@@ -107,59 +109,72 @@ WARNING: Multiple Servlet injectors detected. This is a warning indicating that 
 A check list:
 
 -   These files should be the same:
+```
       diff src/main/resources/kune.properties target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/kune.properties
+      ```
     and:
+    ```
       diff src/main/resources/META-INF/persistence.xml target/kune-0.2.0-SNAPSHOT/WEB-INF/classes/META-INF/persistence.xml
-    otherwise, run
-      "mvn compile -Dliquibase.should.run=false"
+      ```
+    otherwise, run ```mvn compile -Dliquibase.should.run=false```
 
 -   Also check the persistence unit that you are using and find that name in persistence.xml (we are using development, but can be other). The db user/password configured in kune.properties for that name should be the same to that one you used in the GRANT sentence of mysql database creation.
 
 To debug mysql logs, you can uncomment:
-\\#general<sub>log</sub><sub>file</sub>        = /var/log/mysql/mysql.log
-\\#general<sub>log</sub>             = 1
-in /etc/mysql/my.cnf
+```
+#general_log_file        = /var/log/mysql/mysql.log
+#general_log             = 1
+```
+in ```/etc/mysql/my.cnf```
 
 ### Liquibase Migration failed
 
 After executing
+```
   bin/liquibase-migrate.sh
+  ```
 An error such as this one may appear:
+```
   Migration Failed: Error executing SQL ALTER TABLE groups ADD COLUMN logoLastModifiedTime BIGINT NOT NULL DEFAULT 1347400051999
+  ```
 
-This is due to the auto-generation of columns by the Kune environment. In this specific case, dropping the column would allow the migration to succeed. That is, it can be solved connecting to the kune<sub>dev</sub> (or kune<sub>prod</sub>) table and executing this SQL sentence:
+This is due to the auto-generation of columns by the Kune environment. In this specific case, dropping the column would allow the migration to succeed. That is, it can be solved connecting to the kune_dev (or kune_prod) table and executing this SQL sentence:
+```
   ALTER TABLE groups DROP COLUMN logoLastModifiedTime;
+  ```
 
 ## If during initialization (first start) you get a 'Account already exists'
 
 If you stopped the first initialization and the server init is half started you will get something like:
-
+```
 Caused by: cc.kune.core.client.errors.UserRegistrationException:
 Account already exists
+```
 
-trying to run kune and creating the DB. So better remove the first account of wave and related /var/lib/kune/<sub>\*</sub>
+trying to run kune and creating the DB. So better remove the first account of wave and related /var/lib/kune/_*
 
 ## Liquibase
 
 ### Checksum errors
+```
+Migration Failed: Validation Failed:1 change sets failed MD5Sum Check     src/main/resources/db/liquibase_changelog.xml :: 18 :: vjrj :: (MD5Sum: bde0aa519108e1e3d1f29bb2483bc9)
+```
 
-Migration Failed: Validation Failed:1 change sets failed MD5Sum Check     src/main/resources/db/liquibase<sub>changelog</sub>.xml :: 18 :: vjrj :: (MD5Sum: bde0aa519108e1e3d1f29bb2483bc9)
-
-Don't try to update the liquibase changelogs you have already use. Better create new ones to delete, update, and so on. If you are developing and want to clear the checksums, you can use the command "clearCheckSums". See bin/liquibase-\* and <http://www.liquibase.org/manual/command_line>
+Don't try to update the liquibase changelogs you have already use. Better create new ones to delete, update, and so on. If you are developing and want to clear the checksums, you can use the command "clearCheckSums". See bin/liquibase-* and <http://www.liquibase.org/manual/command_line>
 
 ## Lucene
 
 ### Kune indexes problems during upgrades
 
 If you get errors like:
-
+```
 org.ourproject.kune.platf.server.ServerException: Error starting persistence service
 (&#x2026;)
 Caused by: org.hibernate.search.SearchException: Unable to open IndexWriter for class org.ourproject.kune.platf.server.domain.User
 (&#x2026;)
 Caused by: org.apache.lucene.index.CorruptIndexException: Unknown format version: -7
-
-The indexes in *var/lib/kune/lucene/kune\*/indexes* are not compatible. For the moment the only workaround we now it's to delete the indexes.
+```
+The indexes in /var/lib/kune/lucene/kune*/indexes* are not compatible. For the moment the only workaround we now it's to delete the indexes.
 
 Sometimes the tests also fails without any error (use the same workaround).
 
@@ -167,7 +182,7 @@ Sometimes the tests also fails without any error (use the same workaround).
 
 1.  Recreation
 
-    Sometimes you have to recreate all the waves index stoping kune removing /var/lib/kune/<sub>wave</sub><sub>indexes</sub> and starting again. This process is long depending on the number of waves, so take a rest util kune starts.
+    Sometimes you have to recreate all the waves index stoping kune removing /var/lib/kune/_wave_indexes and starting again. This process is long depending on the number of waves, so take a rest util kune starts.
 
 2.  Yes, but kune doesn't start after a while
 
@@ -175,19 +190,21 @@ Sometimes the tests also fails without any error (use the same workaround).
 
 3.  Wave index locked
 
-    If with kune stopped you see some write.lock in /var/lib/kune/<sub>wave</sub><sub>indexes</sub> you should delete it before start kune.
+    If with kune stopped you see some write.lock in ```/var/lib/kune/_wave_indexes``` you should delete it before start kune.
 
-
+```
     total 8
     -rw-r&#x2013;r&#x2013;  1 root root    0 jul 26 14:15 write.lock
     drwxr-xr-x  2 root root 4096 jul 26 14:15 .
     drwxr-xr-x 13 kune kune 4096 jul 26 14:19 ..
-    kunedemo:/usr/share/kune/custom# rm /var/lib/kune/<sub>wave</sub><sub>indexes</sub>/write.lock
+    kunedemo:/usr/share/kune/custom# rm /var/lib/kune/_wave_indexes/write.lock
+    ```
 
 ## Guice error while running server
 
 When running the server (e.g. "kune server via mvn.launch"), and Guice throws a sequence of exceptions such as:
 
+```
 -   FAILED rack: com.google.inject.CreationException: Guice creation errors:
 
     1.  Error injecting constructor, javax.persistence.PersistenceException: [PersistenceUnit: development] Unable to build EntityManagerFactory
@@ -195,14 +212,16 @@ When running the server (e.g. "kune server via mvn.launch"), and Guice throws a 
     Caused by: &#x2026;
     Caused by: &#x2026;
     Caused by: &#x2026;
+    ```
 
 There is a chain of "Caused by" exceptions. Check the last ones of the chain to understand what's going on. For instance, it may give a problem of permissions ("permission denied"), which can be easily fixed correcting the pointed file permissions. Another example is a problem with Hibernate and thus the database, as in: <http://www.kune.cc/?locale=en#!kune.lists.1226.8850> (the solution is described there)
 
 ## JUnit
 
 Running all the Kune test from eclipse I get connection pool exceptions like:
+```
    Connections could not be acquired from the underlying database
-
+```
 We have problems testing all test together from eclipse and using real db (not the h2 memory db)
 
 ## If the client get: Error fetching initial data from Kune server
@@ -223,11 +242,12 @@ Error: Running Web application seems that are running an old GWT code
 Fix: Open Run > Run configurations and remove a recreate your launch configuration
 
 Error: Problem with Eclipse plugin and UiBinder "Field xxx has no corresponding field in template file yyy.ui.xml"
+
 <https://code.google.com/p/google-web-toolkit/issues/detail?id=4353>
 
-## Outbound variable M2<sub>REPO</sub>
+## Outbound variable M2_REPO
 
-Set M2<sub>REPO</sub> to eclipse in Preferences > Java > Build Path > Classpath Variable (normally to *home/youruser*.m2/repository/)
+Set M2_REPO to eclipse in Preferences > Java > Build Path > Classpath Variable (normally to /home/youruser*.m2/repository/)
 
 ## Too many GWT permutations?
 
@@ -246,11 +266,15 @@ Check, for instance, the first points of:
 error: Caused by: org.ourproject.kune.chat.server.managers.ChatException: remote-server-not-found(404) trying to create a room.
 
 Check that the openfire server name is the same in the kune.properties file, and you can resolv the names :
+```
   $ host yourhostname
+  ```
 and
+```
   $ host rooms.yourhostname
+  ```
 
-## Error: Incorrect string value: '\xEF\xBF\xBD\xEF\xBF\xBD&#x2026;' for column 'native<sub>name'</sub> at row 1
+## Error: Incorrect string value: '\xEF\xBF\xBD\xEF\xBF\xBD&#x2026;' for column 'native_name' at row 1
 
 Verify that your system supports UTF8 (in debian systems check /etc/locale.gen and locale-gen)
 
@@ -258,16 +282,20 @@ Verify that your system supports UTF8 (in debian systems check /etc/locale.gen a
 
 While building, problems during validation such as:
 
--   Errors occurred during the build.
+```
+    Errors occurred during the build.
     Errors running builder 'Faceted Project Validation Builder' on project 'kune'.
     Could not initialize class org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
     Errors running builder 'Validation' on project 'kune'.
     org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
+    ```
 
 or:
 
--   An internal error occurred during: "Validating kune".
+```
+    An internal error occurred during: "Validating kune".
     org.eclipse.jst.j2ee.project.facet.IJ2EEFacetConstants
+    ```
 
 These can be solved installing "Eclipse Java EE Developer Tools", as mentioned in:
 <http://stackoverflow.com/questions/6936309/getting-an-error-message-while-building-phonegapsample-in-blackberry-webworks>
@@ -276,24 +304,32 @@ These can be solved installing "Eclipse Java EE Developer Tools", as mentioned i
 
 While building, problems related to Maven such as:
 
--   Errors occurred during the build.
+```
+    Errors occurred during the build.
     Errors running builder 'Maven Project Builder' on project 'kune'.
     java.lang.NullPointerException
+```
 
 or:
 
--   Plugin execution not covered by lifecycle configuration:
+```
+    Plugin execution not covered by lifecycle configuration:
     org.apache.maven.plugins:maven-resources-plugin:2.4.2:resources (execution: default-resources, phase: process-resources)        pom.xml        /kune        line 773        Maven Project Build Lifecycle Mapping Problem
+    ```
 
 These can be solved by installing the m2eclipse, as described in:
 <http://code.google.com/p/google-web-toolkit/wiki/WorkingWithMaven#Using_Maven_with_Google_Plugin_for_Eclipse>
 
 ## Java compile errors: incompatible types
 
+(Obsolete)
+
 Sometimes you get errors like this, trying to compile:
+```
 Authorizated.java:[50,47] incompatible types
 found   : cc.kune.core.shared.domain.AccessRol
 required: cc.kune.core.shared.domain.AccessRol
+```
 seems that happens with some openjdk6 versions. Workaround to compile from eclipse or using sun-jdk or another jdk version.
 More info:
 <https://bugs.launchpad.net/ubuntu/+source/openjdk-6/+bug/611284>
@@ -311,9 +347,13 @@ See:
 ### Server debug
 
 You can debug the server running from eclipse as external tool:
-   'bin/kune server via mvn with debug.launch'
+```
+   bin/kune server via mvn with debug.launch
+```
 and after this the debug launch:
-   'bin/kune server debug.launch'
+```
+   bin/kune server debug.launch
+   ```
 that connects the debugger to the port 8001 of the running server.
 
 Related: debug with jetty in eclipse:
@@ -329,4 +369,4 @@ You can debug the client with the eclipse launch configuration 'bin/kune client 
 
 ### Firebug and client log levels
 
-To increase client logging add ?log<sub>level</sub>=DEBUG# to the url and use firebug firefox extension to see the output.
+To increase client logging add ?log_level=DEBUG# to the url and use firebug firefox extension to see the output.

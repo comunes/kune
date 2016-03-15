@@ -124,74 +124,30 @@ KUNE DEVELOPER'S GUIDE
 
 # Summary of development resources
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="left">Code</td>
-<td class="left"><https://github.com/comunes/kune></td>
-</tr>
-
-
-<tr>
-<td class="left">Bugs (send issues here)</td>
-<td class="left"><http://redmine.comunes.org></td>
-</tr>
-
-
-<tr>
-<td class="left">Continuous Integration</td>
-<td class="left"><http://ci.comunes.org></td>
-</tr>
-
-
-<tr>
-<td class="left">Reviews (send your patches here)</td>
-<td class="left"><http://reviews.comunes.org></td>
-</tr>
-
-
-<tr>
-<td class="left">Maven Repository</td>
-<td class="left"><http://archiva.comunes.org></td>
-</tr>
-
-
-<tr>
-<td class="left">Our lists</td>
-<td class="left"><http://kune.cc/#kune.lists></td>
-</tr>
-
-
-<tr>
-<td class="left">Our group in kune</td>
-<td class="left"><http://kune.cc/#kune></td>
-</tr>
-</tbody>
-</table>
+* Code: <https://github.com/comunes/kune>
+* Bugs (send issues here): <http://redmine.comunes.org>
+* Continuous Integration: <http://ci.comunes.org>
+* Reviews (send your patches here): <http://reviews.comunes.org>
+* Maven Repository: <http://archiva.comunes.org>
+* Our lists: <http://kune.cc/#kune.lists>
+* Our group in kune: <http://kune.cc/#kune>
 
 # Development Environment
 
 ## Preliminars
 
-This guide will help you to develop in Kune. It deals with the prerrequisites of Kune and the setup of its environment. You should follow each step carefully. Make sure you deal with the following initial steps and only afterwards proceed to the details of the installation of Kune. As mentioned in the subsection "1.7:Install Kune" of this guide, you will need by then the document INSTALL (found in kune/INSTALL ), where you will find the details of the installation.
+This guide will help you to develop in Kune. It deals with the prerrequisites of Kune and the setup of its environment. You should follow each step carefully. Make sure you deal with the following initial steps and only afterwards proceed to the details of the installation of Kune. As mentioned in the subsection "1.7:Install Kune" of this guide, you will need by then the document [INSTALL](https://github.com/comunes/kune/blob/master/INSTALL.md), where you will find the details of the installation.
 
 ## Initial steps
 
 Install some basic tools (if you don't have them). In Ubuntu, Debian and derivatives:
-
+```
 sudo apt-get install git maven2 mercurial
-
-and Java 6:
-
-sudo apt-get install openjdk-6-jdk
-
+```
+and Java 7:
+```
+sudo apt-get install openjdk-7-jdk
+```
 NOTE: we use Git for our code, Maven for its dependencies, and Wave In a Box (WIAB) uses Mercurial. Besides, you will need a modern browser such as Firefox or Chromium, and some extensions to live happier:
 
 <http://ourproject.org/moin/Contributors#Recommended_Firefox_Extensions>
@@ -200,14 +156,15 @@ The previous link has also other more general information (texts and references)
 
 ## Get the code: How to checkout the Kune code
 
-Our code is in this Gitorious:
-<https://github.com/comunes/kune>
+Our code is in this Github: <https://github.com/comunes/kune>
 
 ### Anonymous GIT Access
 
 This project's GIT repository can be checked out through anonymous access with the following command(s).
 
-git clone <https://github.com/comunes/kune.git>
+```
+git clone https://github.com/comunes/kune.git
+```
 
 The Eclipse IDE has some plugins for GIT and it's hightly recomended to use one, because it would get rid of file/package renaming and other refactorizations.
 
@@ -215,7 +172,7 @@ The Eclipse IDE has some plugins for GIT and it's hightly recomended to use one,
 
 <http://www.eclipse.org/downloads/>
 
-Ensure Eclipse is configured to use Java 1.6.
+Ensure Eclipse is configured to use Java 1.7.
 
 The instructions below will give for granted you use Eclipse. Of course, you can use any other IDEs (in such case, please help us to improve this documentation).
 
@@ -242,22 +199,24 @@ Check:
 Check out if Kune's code includes Eclipse project definition files (i.e. '.project' & '.classpath') in the kune directory.
 (WARNING: if you imported manually the Kune source code into Eclipse, they were then created&#x2026; but still you should run the following command.)
 If these files do not exist, then you need to run (again from the kune directory):
-
-mvn eclipse:eclipse (IMPORTANT: (\*))
+```
+mvn eclipse:eclipse
+```
+IMPORTANT: (\*)
 
 This generates .project and download necessary code jars (this download process is long, so take a rest).
 
 After that, you can import the project in Eclipse (File > Import > Existing Projects into Workspace).
 
-Also you have to set the variable M2<sub>REPO</sub> (Eclipse: Window > Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case *home/youruser*.m2/repository). (WARNING: It might exist already with an incorrect path. In that case, instead of "New" use "Edit").
+Also you have to set the variable M2_REPO (Eclipse: Window > Preferences > Java > Build Path > Classpath Variables > New) to the location of your local maven repo (in our case ```/home/youruser/.m2/repository```). (WARNING: It might exist already with an incorrect path. In that case, instead of "New" use "Edit").
 
-(\*) NOTE: We actually use bin/mvn-eclipse.sh instead of a simple 'mvn eclipse:eclipse' to hack a little bit the .classpath, because "mvn eclipse:eclipse" removes the GWT<sub>CONTAINER</sub> line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a 'mvn eclipse:eclipse'), but we prefer to do it that way from the command line. In order to execute the script, run ./bin/mvn-eclipse.sh   from the kune directory.
+(\*) NOTE: We actually use ```bin/mvn-eclipse.sh``` instead of a simple ```mvn eclipse:eclipse``` to hack a little bit the .classpath, because ```mvn eclipse:eclipse``` removes the GWT_CONTAINER line a the end of the .classpath. You can fix it from eclipse (anytime that we change the dependencies and you have to do a ```mvn eclipse:eclipse```), but we prefer to do it that way from the command line. In order to execute the script, run ./bin/mvn-eclipse.sh   from the kune directory.
 
-NOTE: If after bin/mvn-eclipse.sh the Eclipse project does not properly select the GWT SDK (throwing an error in the Build Path, showing an "unknown" SDK, or similar problem) then include and choose manually the GWT SDK 2.5.1.
+NOTE: If after bin/mvn-eclipse.sh the Eclipse project does not properly select the GWT SDK (throwing an error in the Build Path, showing an "unknown" SDK, or similar problem) then include and choose manually the GWT SDK 2.7.0.
 
 ### Configure Google GWT Plugin
 
-For now we are using GWT 2.5.1 (it usually will not match with the one from the eclipse GWT plugin) so probably you have to download that version of the SDK from:
+For now we are using GWT 2.7.0 (it usually will not match with the one from the eclipse GWT plugin) so probably you have to download that version of the SDK from:
 <http://code.google.com/p/google-web-toolkit/downloads/list>
 unzip (to any place you find appropriate), and add that SDK in Eclipse (Windows > Preferences > Google > Web Toolkit > Add).
 
@@ -265,13 +224,7 @@ WARNING: Do not use any other GWT SDK versions because our code (and dependencie
 
 After that, right click Kune project in the "Package Explorer" > Google > WebApplication > WAR directory: set to src/main/webapp (after checking "This project has a WAR directory") and uncheck the "Launch and deploy from this directory".
 
-Also in Kune project properties > Google > Web Toolkit > Check that you are using the 2.5.1 SDK.
-
-### Configure the Firefox GWT Plugin
-
-For that check this from Firefox:
-<http://gwt.google.com/missing-plugin/MissingPlugin.html>
-some times GWT plugin is not available for newers FF, so you have to search in the GWT dev forums for a nightly extension.
+Also in Kune project properties > Google > Web Toolkit > Check that you are using the 2.7.0 SDK.
 
 ### UTF 8
 
@@ -311,8 +264,6 @@ NOTE: When a URL repository is indicated, it should be added to Eclipse > Help >
 
     -   [ ] AnyEditTools (to remove tabs and so on)
 
-    -   [ ] MercurialEclipse (if you wanna play with the WIAB code)
-
     -   [ ] EGit for Mylyn (connecting EGit and Mylyn)
 
     -   [ ] AutoDeriv (see our .derived file that works like .gitignore)
@@ -324,16 +275,20 @@ Useful info about GWT and Eclipse (interesting if you have problems with number 
 
 ## Install Kune
 
-Only after making sure the previous steps have been finished, you can proceed to the installation of the rest of Kune. For doing so, you need to follow the instructions of the document INSTALL, available in kune/INSTALL. Afterwards you will be able to run Kune for the first time.
+Only after making sure the previous steps have been finished, you can proceed to the installation of the rest of Kune. For doing so, you need to follow the instructions of the document [INSTALL](https://github.com/comunes/kune/blob/master/INSTALL.md). Afterwards you will be able to run Kune for the first time.
 
 WARNING: The above paragraph means that the installation instructions are NOT in this document. Please, check out the referenced INSTALL document for the installation instructions, and come back here when those are finished.
 
 ## GWT's Hosted Mode and SuperDev Mode
 
 Before running hosted mode for the first time compile once with:
- mvn compile -Dliquibase.should.run=false && mvn gwt:compile -P development
+```
+mvn compile -Dliquibase.should.run=false && mvn gwt:compile -P development
+```
 and deploy with:
- bin/deploy<sub>gwt</sub>.sh
+```
+bin/deploy_gwt.sh
+```
 
 NOTE: Run both from the "kune" directory.
 
@@ -364,7 +319,7 @@ NOTE: If you have errors or problems during compilation or launching, check out 
 
 If you want to use the superdev mode you can:
 
-1.  Run the previous gwt:compile command, run the server (2) and later the superdev launch (3), also you can use \`mvn gwt:run-codeserver -P development\`
+1.  Run the previous gwt:compile command, run the server (2) and later the superdev launch (3), also you can use ```mvn gwt:run-codeserver -P development```
 
 2.  Open the code server <http://localhost:9876/>
 
@@ -396,7 +351,7 @@ with Project:
 with Main class:
 "com.google.gwt.dev.DevMode"
 with these program arguments (or similar ones): (OUTDATED)
-"-noserver -out gwt-out *ws*?locale=en&log<sub>level</sub>=INFO -port 8080"
+"-noserver -out gwt-out *ws*?locale=en&log_level=INFO -port 8080"
 and in the "Classpath User Entries": (OUTDATED)
   gwt-dev-[linux|mac|windows].jar (Add External Jar and choose it from your gwt installation directory)
   java - /kune/src/main
@@ -621,8 +576,6 @@ We use Jenkins as our continuous integration tool. After each commit, it automat
 
 See HelloWorld\*.java classes for a small sample of how to develop and extend the GWT workspace UI.
 
-Outdated => Check also kune/HOWTO<sub>ADD</sub><sub>A</sub><sub>NEW</sub><sub>TOOL</sub> for instructions of how to add a new tool in Kune.
-
 ## Apache Wave (old Google Wave)
 
 Wave Client Development Environment Set Up (if you want to work only in the Apache Wave part):
@@ -661,7 +614,7 @@ Kune has a small sandbox where some UI elements can be tested quickly without a 
 
 -   You should be able to run (without running any server before) src/main/java/cc/kune/sandbox/KuneSandbox.gwt.xml from mouse right click => Run As => Web Application. An URL will be provided, which can be open in a browser (Firefox/Chrome/Chromium) with the GWT plugin.
 
--   If it doesn't work, you may Run As => Run Configurations => select Kune<sub>sandbox</sub>.html => Classpath tab => Click on any User entry => Advanced button => Add Folder => Add, from the project kune, src/main/java, src/main/resources, src/main/webapp => Run
+-   If it doesn't work, you may Run As => Run Configurations => select Kune_sandbox.html => Classpath tab => Click on any User entry => Advanced button => Add Folder => Add, from the project kune, src/main/java, src/main/resources, src/main/webapp => Run
 
 NOTE: you may need to run "mvn eclipse:eclipse" from the kune-sandbox folder.
 
@@ -676,19 +629,22 @@ If you want to make modifications in the Kune CSS, the following will help:
 # Kune maven repo
 
 To upload packages you need to configure in .m2/settings.xml something like:
-
+```
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
   <servers>
      <server>
         <id>kune.ourproject.org</id>
-        <username>YOUR<sub>USER</sub><sub>IN</sub><sub>OURPROJECT</sub><sub>ORG</sub></username>
+        <username>YOUR_USER_IN_OURPROJECT_ORG</username>
      </server>
   </servers>
 </settings>
+```
 
 also you have to
-  ssh-copy-id YOUR<sub>USER</sub><sub>IN</sub><sub>OURPROJECT</sub><sub>ORG</sub>@ourproject.org
+```
+ssh-copy-id YOUR_USER_IN_OURPROJECT_ORG@ourproject.org
+```
 and access via ssh with that key without problems.
 
 We usually upload new packages to this repo via bin/repopubli.sh
@@ -710,15 +666,19 @@ When doing a GIT commit, you should always provide an appropriate description of
 After relevant commits, you should also update the Changelog (in "debian/changelog" ) using "dch". You should include there all the comments of the commit. This changelog will be included in the DEB package and tranks a summary of changes between debian package versions.
 
 Also update the ./Changelog using: <http://git.savannah.gnu.org/gitweb/?p=gnulib.git;a=blob_plain;f=build-aux/gitlog-to-changelog>
+```
 perl $PATH-TO-GIT-CHANGELOG/git-to-changelog.pl > ChangeLog
+```
 
 NOTE: If you don't have "dch", install it in Debian/Ubuntu/related: 'apt-get install devscripts'
 
 NOTE: To facilitate this task, add in your local .bashrc (email and full name are samples):
- #dh<sub>make</sub>
+```
+ #dh_make
  DEBEMAIL="alice@domain.dom"
  DEBFULLNAME="Alice White"
  export DEBEMAIL DEBFULLNAME
+```
 
 NOTE: When generating a new DEB package => dch -i
 
