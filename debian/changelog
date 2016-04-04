@@ -1,3 +1,9 @@
+kune (1.0.1+b22) unstable; urgency=medium
+
+  * Close wave index at jetty stop
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 04 Apr 2016 16:55:27 +0200
+
 kune (1.0.1+b21) unstable; urgency=medium
 
   * Motd truncated to 500 characters
