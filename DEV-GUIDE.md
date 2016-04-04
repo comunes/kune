@@ -315,6 +315,20 @@ NOTE: If you want to run Server in debug mode, you should run "kune server via m
 
 NOTE: If you have errors or problems during compilation or launching, check out the TROUBLESHOOT file for help. If you are still unable to solve it, contact the Kune developers (<http://kune.ourproject.org/contact/> ) and we'll try to help you.
 
+### Testing stop of wave server
+
+Kune uses [Jetty secure termination](https://wiki.eclipse.org/Jetty/Howto/Secure_Termination) for stop itself from our `debian/kune.init` script. Also you can test while developing how stops kune with something like:
+```
+telnet 127.0.0.1 8079
+Trying 127.0.0.1...
+Connected to 127.0.0.1.
+Escape character is '^]'.
+devsecret
+stop
+Stopped
+quit
+```
+
 ### GWT Superdev mode
 
 If you want to use the superdev mode you can:

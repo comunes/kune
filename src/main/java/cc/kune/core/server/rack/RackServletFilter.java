@@ -37,8 +37,22 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.persistence.file.FileUtils;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
+import org.waveprotocol.box.server.waveserver.LucenePerUserWaveViewHandlerImpl;
+
+import com.google.gwt.logging.server.RemoteLoggingServiceImpl;
+import com.google.inject.Binder;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.Module;
+import com.google.inject.grapher.GrapherModule;
+import com.google.inject.grapher.InjectorGrapher;
+import com.google.inject.grapher.graphviz.GraphvizModule;
+import com.google.inject.grapher.graphviz.GraphvizRenderer;
+import com.google.inject.name.Names;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.error.ServerException;
@@ -48,16 +62,6 @@ import cc.kune.core.server.rack.dock.RequestMatcher;
 import cc.kune.core.server.rack.utils.RackHelper;
 import cc.kune.core.server.scheduler.CustomJobFactory;
 import cc.kune.core.server.searcheable.SearchEngineServletFilter;
-
-import com.google.gwt.logging.server.RemoteLoggingServiceImpl;
-import com.google.inject.Binder;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-import com.google.inject.grapher.GrapherModule;
-import com.google.inject.grapher.InjectorGrapher;
-import com.google.inject.grapher.graphviz.GraphvizModule;
-import com.google.inject.grapher.graphviz.GraphvizRenderer;
 
 public class RackServletFilter implements Filter {
   public static class DockChain implements FilterChain {
@@ -213,6 +217,19 @@ public class RackServletFilter implements Filter {
       kuneChildInjector.getInstance(RemoteLoggingServiceImpl.class).setSymbolMapsDirectory(dir);
     }
 
+    // We need to close wave Lucene indexer properly
+    String searchType = injector.getInstance(
+        Key.get(String.class, Names.named(CoreSettings.SEARCH_TYPE)));
+    if ("lucene".equals(searchType)) {
+      Runtime.getRuntime().addShutdownHook(new Thread() {
+        @Override
+        public void run() {
+          LOG.debug("Closing wave indexer");
+          injector.getInstance(LucenePerUserWaveViewHandlerImpl.class).close();
+        }
+      });
+    }
+
     initialized = true;
 
     // Uncomment to generate the graph
@@ -246,7 +263,7 @@ public class RackServletFilter implements Filter {
 
   private void stopContainerListeners(final List<Class<? extends ContainerListener>> listenerClasses,
       final Injector injector) {
-    LOG.debug("STOPPING CONTAINER LISTENERS...");
+    LOG.info("STOPPING CONTAINER LISTENERS...");
     for (final Class<? extends ContainerListener> listenerClass : listenerClasses) {
       final ContainerListener listener = injector.getInstance(listenerClass);
       listener.stop();
