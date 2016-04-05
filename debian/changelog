@@ -1,5 +1,8 @@
 kune (1.0.1+b22) unstable; urgency=medium
 
+  * Load js of content viewer with dependency callback
+  * Fix some lint js errors
+  * Small style fix for some icons
   * Tooltips.hide fix when uninitialized
   * Close wave index at jetty stop
 
