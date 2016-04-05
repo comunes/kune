@@ -32,6 +32,7 @@ import com.calclab.hablar.signals.client.SignalPreferences;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedHandler;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
@@ -70,11 +71,13 @@ public class KuneUnattendedPresenter {
           active = true;
           SndClickEvent.fire(eventBus);
           PolymerUtils.setBlinkAnimation(PolymerId.CHAT_SITEBAR_ICON.getId(), true);
+          RootPanel.get(PolymerId.CHAT_SITEBAR_ICON.getId()).addStyleName("btn_font_green");
           Log.info("BLINK true");
         } else if (unattendedChatsCount == 0 && active == true) {
           PolymerUtils.setBlinkAnimation(PolymerId.CHAT_SITEBAR_ICON.getId(), false);
           active = false;
           Log.info("BLINK false");
+          RootPanel.get(PolymerId.CHAT_SITEBAR_ICON.getId()).removeStyleName("btn_font_green");
         }
       }
     });

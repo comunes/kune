@@ -596,7 +596,7 @@
         <div id="sitebar_search_group">
           <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
         </div>
-        <paper-icon-button icon="more-vert" id="sitebar_more_icon"></paper-icon-button>
+        <paper-icon-button icon="menu" id="sitebar_more_icon"></paper-icon-button>
         <div id="sitebar_flex_end" class="sitebar_search_hide" flex></div>
         <paper-icon-button icon="close" on-click="{{ toggleSearch }}" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
       </core-toolbar>
@@ -1320,6 +1320,10 @@
           background-color: rgb(153, 187, 0);
         }
 
+        .btn_font_green {
+          color: rgb(95, 255, 39);
+        }
+
         .black {
           color: black;
         }
@@ -1541,6 +1545,10 @@
         }
 
         #header_group_icon_settings {
+          border: 2px solid #e0e0e0;
+	  margin: 5px;
+	  padding: 3px;
+	  border-radius: 50%;
         }
 
         #header_social_net {
@@ -2031,7 +2039,7 @@
           }
         }
 
-        // This is donw by gwt, but useful for development without gwt
+        // This is done by gwt, but useful for development without gwt
         // scope.hideSpinner();
 
         // http://www.owlcarousel.owlgraphic.com/index.html
