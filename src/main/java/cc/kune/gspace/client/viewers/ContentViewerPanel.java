@@ -22,6 +22,16 @@
  */
 package cc.kune.gspace.client.viewers;
 
+import com.google.gwt.core.client.Callback;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.ScriptInjector;
+import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.web.bindery.event.shared.EventBus;
+
 import cc.kune.common.client.actions.BeforeActionListener;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
@@ -41,15 +51,6 @@ import cc.kune.wave.client.CustomSavedStateIndicator;
 import cc.kune.wave.client.kspecific.AurorisColorPicker;
 import cc.kune.wave.client.kspecific.WaveClientProvider;
 import cc.kune.wave.client.kspecific.WaveClientUtils;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.ScriptInjector;
-import com.google.gwt.uibinder.client.UiBinder;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * The Class ContentViewerPanel.
@@ -129,7 +130,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -139,7 +140,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * attach()
@@ -153,7 +154,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * blinkTitle()
@@ -165,7 +166,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * clear()
@@ -184,7 +185,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * detach()
@@ -196,7 +197,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * getEditTitle()
@@ -233,14 +234,21 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
   public void injectSplash() {
     ScriptInjector.fromUrl("others/splash/js/wave-rpc.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
     ScriptInjector.fromUrl("others/splash/js/gadget.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
-    ScriptInjector.fromUrl("others/splash/js/rpc.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
-    ScriptInjector.fromUrl("others/splash/js/common_client.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
-    ScriptInjector.fromUrl("others/splash/js/permalink_client.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
+    ScriptInjector.fromUrl("others/splash/js/rpc.js").setWindow(ScriptInjector.TOP_WINDOW).setCallback(new Callback<Void,Exception> () {
+      @Override
+      public void onFailure(Exception reason) {
+        Log.error("Failed to load rpc.js");
+      }
+      @Override
+      public void onSuccess(Void result) {
+        ScriptInjector.fromUrl("others/splash/js/common_client.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
+        ScriptInjector.fromUrl("others/splash/js/permalink_client.js").setWindow(ScriptInjector.TOP_WINDOW).inject();
+      }}).inject();
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setContent(cc.kune.core.shared.dto.StateContentDTO)
@@ -263,7 +271,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setSubheaderActions
@@ -276,7 +284,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setEditableContent(cc.kune.core.shared.dto.StateContentDTO)
@@ -291,7 +299,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setEditableTitle(java.lang.String)
@@ -316,7 +324,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * setFooterActions
@@ -356,7 +364,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * signIn()
@@ -369,7 +377,7 @@ public class ContentViewerPanel extends WaveViewerPanel implements ContentViewer
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.viewers.ContentViewerPresenter.ContentViewerView#
    * signOut()
