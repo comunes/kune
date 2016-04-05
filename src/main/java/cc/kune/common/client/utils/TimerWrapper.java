@@ -31,7 +31,7 @@ import com.google.gwt.user.client.Timer;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class TimerWrapper {
-  
+
   /**
    * The Interface Executer.
    *
@@ -46,7 +46,7 @@ public class TimerWrapper {
 
   /** The is scheduled. */
   private boolean isScheduled;
-  
+
   /** The timer. */
   private Timer timer;
 
@@ -62,7 +62,8 @@ public class TimerWrapper {
    */
   public void cancel() {
     isScheduled = false;
-    timer.cancel();
+    if (timer != null)
+      timer.cancel();
   }
 
   /**

@@ -1,5 +1,6 @@
 kune (1.0.1+b22) unstable; urgency=medium
 
+  * Tooltips.hide fix when uninitialized
   * Close wave index at jetty stop
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 04 Apr 2016 16:55:27 +0200
