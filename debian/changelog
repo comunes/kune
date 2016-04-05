@@ -1,5 +1,7 @@
 kune (1.0.1+b22) unstable; urgency=medium
 
+  * Added mongo migration cmd to kune-cli to test how to improve migration
+    with many waves
   * Load js of content viewer with dependency callback
   * Fix some lint js errors
   * Small style fix for some icons

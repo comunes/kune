@@ -121,6 +121,26 @@
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>crypto</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>crypto-src</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>proto</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>wave-in-a-box-server-0.4.0</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
+    <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>
       <!-- Needs some migration http://code.google.com/p/guava-libraries/wiki/MapMakerMigration -->

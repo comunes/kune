@@ -54,6 +54,7 @@ import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.rpcservices.SocialNetServiceAsync;
 import cc.kune.core.client.rpcservices.UserServiceAsync;
 import cc.kune.kunecli.cmds.AuthCommand;
+import cc.kune.kunecli.cmds.DeltaMigrationToMongoCommand;
 import cc.kune.kunecli.cmds.GroupsCount;
 import cc.kune.kunecli.cmds.GroupsReindexCommand;
 import cc.kune.kunecli.cmds.SiteI18nStatsCommand;
@@ -191,6 +192,7 @@ public class KuneCliMain {
     cs.add(injector.getInstance(UsersSignInsStatsCommand.class));
     cs.add(injector.getInstance(UsersReindexCommand.class));
     cs.add(injector.getInstance(WaveToDirCommand.class));
+    cs.add(injector.getInstance(DeltaMigrationToMongoCommand.class));
     // As the return type of these commands are not java.io.Serializable (and
     // instead GWT's IsSerializable) the return part of this cmds fails
     // cs.add(injector.getInstance(GetInitDataCommand.class));
