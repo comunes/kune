@@ -50,7 +50,13 @@ public class CustomDeltaMigrator {
 
   private static final Log LOG = Log.get(CustomDeltaMigrator.class);
 
+  private Progressbar bar;
+  int countMigrated = 0;
+  int countMigratedBecausePartial = 0;
+
+  int countSkipped = 0;
   protected DeltaStore sourceStore = null;
+
   protected DeltaStore targetStore = null;
 
   public CustomDeltaMigrator(final DeltaStore sourceStore, final DeltaStore targetStore) {
@@ -58,7 +64,22 @@ public class CustomDeltaMigrator {
     this.targetStore = targetStore;
   }
 
+  private String getStats() {
+    return "migrated/skipped/partial: " + countMigrated + "/" + countSkipped + "/"
+        + countMigratedBecausePartial;
+  }
+
+  private void printStats() {
+    LOG.info("Total " + getStats());
+  }
+
   public void run() {
+    Runtime.getRuntime().addShutdownHook(new Thread() {
+      @Override
+      public void run() {
+        printStats();
+      }
+    });
 
     LOG.info("Starting Wave migration from " + sourceStore.getClass().getSimpleName() + " to "
         + targetStore.getClass().getSimpleName());
@@ -66,80 +87,127 @@ public class CustomDeltaMigrator {
     final long startTime = System.currentTimeMillis();
 
     try {
+      // We need the total number of waves to make a progress bar
+      int waveCount = 0;
+      final ExceptionalIterator<WaveId, PersistenceException> countIterator = sourceStore.getWaveIdIterator();
+      while (countIterator.hasNext()) {
+        waveCount++;
+        countIterator.next();
+      }
 
       final ExceptionalIterator<WaveId, PersistenceException> srcItr = sourceStore.getWaveIdIterator();
-      final File stopFile = new File("/tmp/wave-mongo-migration-stop");
+      final File stopFile = new File(
+          System.getProperty("java.io.tmpdir") + "/wave-mongo-migration-stop");
 
+      bar = new Progressbar(waveCount, "Migrating " + waveCount + " Waves");
+
+      int currentWave = 0;
       // Waves
       while (srcItr.hasNext()) {
+        currentWave++;
+
         if (stopFile.exists()) {
           LOG.info("Stopping Wave migration as requested. Partial migration.");
           break;
         }
-        final WaveId waveId = srcItr.next();
 
+        bar.setVal(currentWave);
+
+        final WaveId waveId = srcItr.next();
         final ImmutableSet<WaveletId> sourceLookup = sourceStore.lookup(waveId);
         final ImmutableSet<WaveletId> targetLookup = targetStore.lookup(waveId);
         final ImmutableSet<WaveletId> waveletIds = sourceLookup;
 
+        boolean wavesAreNotTheSame = false;
+
         if (!targetLookup.isEmpty()) {
           if (targetLookup.size() != sourceLookup.size()) {
-            for (final WaveletId targetWaveletId : targetLookup) {
-              LOG.info(
-                  "Deleting and appending Wave in target because it's found and has not the same size: "
-                      + waveId.toString());
-              targetStore.delete(WaveletName.of(waveId, targetWaveletId));
-            }
+            wavesAreNotTheSame = true;
           } else {
-            LOG.info("Skipping Wave because it's found in target store : " + waveId.toString());
-            continue;
+            // Comparing source and target deltas
+            for (final WaveletId waveletId : waveletIds) {
+              setStatus("comparing");
+              bar.setVal(currentWave);
+
+              final DeltasAccess sourceDeltas = sourceStore.open(WaveletName.of(waveId, waveletId));
+              final DeltasAccess targetDeltas = targetStore.open(WaveletName.of(waveId, waveletId));
+              final HashedVersion deltaResultingVersion = sourceDeltas.getEndVersion();
+              final HashedVersion deltaResultingTargetVersion = targetDeltas.getEndVersion();
+
+              if (!deltaResultingVersion.equals(deltaResultingTargetVersion)) {
+                wavesAreNotTheSame = true;
+                break;
+              }
+            }
+
+            if (wavesAreNotTheSame) {
+              for (final WaveletId targetWaveletId : targetLookup) {
+                // LOG.info(
+                // "Deleting and appending Wave in target because it's found and
+                // has not the same size: "
+                // + waveId.toString());
+                targetStore.delete(WaveletName.of(waveId, targetWaveletId));
+              }
+              // Continue migrating that wave
+            } else {
+              setStatus("skipping already migrated");
+              bar.setVal(currentWave);
+              countSkipped++;
+              continue;
+            }
           }
         }
 
-        LOG.info(
-            "--- Migrating Wave  " + waveId.toString() + " with " + waveletIds.size() + " wavelets");
-        final long waveStartTime = System.currentTimeMillis();
+        if (wavesAreNotTheSame) {
+          setStatus("migrating partial wave");
+          countMigratedBecausePartial++;
+        } else {
+          setStatus("migrating");
+          countMigrated++;
+        }
+        setStatus(wavesAreNotTheSame ? "migrating partial wave" : "migrating");
 
-        final int waveletsTotal = waveletIds.size();
-        int waveletsCount = 0;
-
+        // LOG.info("--- Migrating Wave " + waveId.toString() + " with " +
+        // waveletIds.size() + " wavelets");
+        // final long waveStartTime = System.currentTimeMillis();
+        //
         // Wavelets
         for (final WaveletId waveletId : waveletIds) {
+          bar.setVal(currentWave);
 
-          waveletsCount++;
-
-          LOG.info(
-              "Migrating wavelet " + waveletsCount + "/" + waveletsTotal + " : " + waveletId.toString());
+          // LOG.info(
+          // "Migrating wavelet " + waveletsCount + "/" + waveletsTotal + " : "
+          // + waveletId.toString());
 
           final DeltasAccess sourceDeltas = sourceStore.open(WaveletName.of(waveId, waveletId));
           final DeltasAccess targetDeltas = targetStore.open(WaveletName.of(waveId, waveletId));
 
           // Get all deltas from last version to initial version (0): reverse
           // order
-          int deltasCount = 0;
+          // int deltasCount = 0;
 
           final ArrayList<WaveletDeltaRecord> deltas = new ArrayList<WaveletDeltaRecord>();
           HashedVersion deltaResultingVersion = sourceDeltas.getEndVersion();
 
           // Deltas
           while (deltaResultingVersion != null && deltaResultingVersion.getVersion() != 0) {
-            deltasCount++;
+            // deltasCount++;
             final WaveletDeltaRecord deltaRecord = sourceDeltas.getDeltaByEndVersion(
                 deltaResultingVersion.getVersion());
             deltas.add(deltaRecord);
             // get the previous delta, this is the appliedAt
             deltaResultingVersion = deltaRecord.getAppliedAtVersion();
           }
-          LOG.info("Appending " + deltasCount + " deltas to target");
+          // LOG.info("Appending " + deltasCount + " deltas to target");
           targetDeltas.append(deltas);
         }
-        final long waveEndTime = System.currentTimeMillis();
-        LOG.info("Wave migrated in " + (waveEndTime - waveStartTime) + "ms");
+
       } // While Waves
 
+      bar.finish();
       final long endTime = System.currentTimeMillis();
-
       LOG.info("Migration completed. Total time = " + (endTime - startTime) + "ms");
+      printStats();
 
     } catch (final PersistenceException e) {
 
@@ -150,7 +218,10 @@ public class CustomDeltaMigrator {
       throw new RuntimeException(e);
 
     }
+  }
 
+  private void setStatus(final String status) {
+    bar.setStatus(status, getStats());
   }
 
 }
