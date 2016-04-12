@@ -12,11 +12,6 @@
   <description>Just a GWT EntryPoint to test kune UI widgets</description>
   <repositories>
     <repository>
-      <id>kune</id>
-      <name>kune maven repository</name>
-      <url>http://kune.ourproject.org/mavenrepo/</url>
-    </repository>
-    <repository>
       <id>cobogw</id>
       <name>Cobogw repository at googlecode</name>
       <url>http://cobogw.googlecode.com/svn/maven2</url>
