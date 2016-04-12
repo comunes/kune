@@ -28,13 +28,13 @@ public class Progressbar {
   }
 
   private void printBar(final boolean finished) {
-    final double numbar = Math.floor(20 * (double) current / max);
+    final double numbar = Math.floor(50 * (double) current / max);
     String strbar = "";
     int ii = 0;
     for (ii = 0; ii < numbar; ii++) {
       strbar += "=";
     }
-    for (ii = (int) numbar; ii < 20; ii++) {
+    for (ii = (int) numbar; ii < 50; ii++) {
       strbar += " ";
     }
     final long elapsed = (System.currentTimeMillis() - this.start);
