@@ -35,6 +35,7 @@ import org.waveprotocol.wave.model.version.HashedVersion;
 import org.waveprotocol.wave.util.logging.Log;
 
 import com.google.common.collect.ImmutableSet;
+import com.sun.xml.internal.rngom.parse.compact.EOFException;
 
 /**
  *
@@ -51,9 +52,9 @@ public class CustomDeltaMigrator {
   private static final Log LOG = Log.get(CustomDeltaMigrator.class);
 
   private Progressbar bar;
+  int countError = 0;
   int countMigrated = 0;
   int countMigratedBecausePartial = 0;
-
   int countSkipped = 0;
   protected DeltaStore sourceStore = null;
 
@@ -65,12 +66,18 @@ public class CustomDeltaMigrator {
   }
 
   private String getStats() {
-    return "migrated/skipped/partial: " + countMigrated + "/" + countSkipped + "/"
-        + countMigratedBecausePartial;
+    return "migrated/skipped/partial/error: " + countMigrated + "/" + countSkipped + "/"
+        + countMigratedBecausePartial + "/" + countError;
   }
 
   private void printStats() {
     LOG.info("Total " + getStats());
+  }
+
+  private void processCorruptedWave(final WaveId waveId, final Exception e) {
+    countError++;
+    LOG.info("Waveid with errors: " + waveId.toString());
+    // throw new RuntimeException(e);
   }
 
   public void run() {
@@ -172,34 +179,45 @@ public class CustomDeltaMigrator {
         // final long waveStartTime = System.currentTimeMillis();
         //
         // Wavelets
-        for (final WaveletId waveletId : waveletIds) {
-          bar.setVal(currentWave);
 
-          // LOG.info(
-          // "Migrating wavelet " + waveletsCount + "/" + waveletsTotal + " : "
-          // + waveletId.toString());
+        try {
+          for (final WaveletId waveletId : waveletIds) {
+            bar.setVal(currentWave);
 
-          final DeltasAccess sourceDeltas = sourceStore.open(WaveletName.of(waveId, waveletId));
-          final DeltasAccess targetDeltas = targetStore.open(WaveletName.of(waveId, waveletId));
+            // LOG.info(
+            // "Migrating wavelet " + waveletsCount + "/" + waveletsTotal + " :
+            // "
+            // + waveletId.toString());
 
-          // Get all deltas from last version to initial version (0): reverse
-          // order
-          // int deltasCount = 0;
+            final DeltasAccess sourceDeltas = sourceStore.open(WaveletName.of(waveId, waveletId));
+            final DeltasAccess targetDeltas = targetStore.open(WaveletName.of(waveId, waveletId));
 
-          final ArrayList<WaveletDeltaRecord> deltas = new ArrayList<WaveletDeltaRecord>();
-          HashedVersion deltaResultingVersion = sourceDeltas.getEndVersion();
+            // Get all deltas from last version to initial version (0): reverse
+            // order
+            // int deltasCount = 0;
 
-          // Deltas
-          while (deltaResultingVersion != null && deltaResultingVersion.getVersion() != 0) {
-            // deltasCount++;
-            final WaveletDeltaRecord deltaRecord = sourceDeltas.getDeltaByEndVersion(
-                deltaResultingVersion.getVersion());
-            deltas.add(deltaRecord);
-            // get the previous delta, this is the appliedAt
-            deltaResultingVersion = deltaRecord.getAppliedAtVersion();
+            final ArrayList<WaveletDeltaRecord> deltas = new ArrayList<WaveletDeltaRecord>();
+            HashedVersion deltaResultingVersion = sourceDeltas.getEndVersion();
+
+            // Deltas
+            while (deltaResultingVersion != null && deltaResultingVersion.getVersion() != 0) {
+              // deltasCount++;
+              final WaveletDeltaRecord deltaRecord = sourceDeltas.getDeltaByEndVersion(
+                  deltaResultingVersion.getVersion());
+              deltas.add(deltaRecord);
+              // get the previous delta, this is the appliedAt
+              deltaResultingVersion = deltaRecord.getAppliedAtVersion();
+            }
+            // LOG.info("Appending " + deltasCount + " deltas to target");
+            targetDeltas.append(deltas);
           }
-          // LOG.info("Appending " + deltasCount + " deltas to target");
-          targetDeltas.append(deltas);
+
+        } catch (final EOFException e) {
+          processCorruptedWave(waveId, e);
+        } catch (final PersistenceException e) {
+          processCorruptedWave(waveId, e);
+        } catch (final IOException e) {
+          processCorruptedWave(waveId, e);
         }
 
       } // While Waves
@@ -208,15 +226,9 @@ public class CustomDeltaMigrator {
       final long endTime = System.currentTimeMillis();
       LOG.info("Migration completed. Total time = " + (endTime - startTime) + "ms");
       printStats();
-
     } catch (final PersistenceException e) {
-
+      LOG.warning("Error iterating over waves");
       throw new RuntimeException(e);
-
-    } catch (final IOException e) {
-
-      throw new RuntimeException(e);
-
     }
   }
 
