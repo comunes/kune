@@ -336,6 +336,39 @@
           top: 330px;
         }
 
+        #doc_toolbar_shadow {
+          margin: 0px 25px 0px 20px;
+          top: 134px;
+        }
+
+        #doc_share_btn {
+          top: 10px;
+        }
+
+        #group_tools_toolbar {
+          right: 0px;
+          top: 270px;
+          z-index:  1;
+        }
+
+        #doc_content_shadow {
+          padding: 30px 40px 10px 10px;
+        }
+
+        #doc_content_section {
+          padding: 10px 10px 10px 10px;
+          padding-top: 190px;
+        }
+
+        #header_bottom {
+          padding: 0;
+        }
+
+        #group_bottombar > div > div > img {
+          /* license */
+          padding-left: 10px;
+        }
+
       } /* end xsmall */
 
       /* small: Portrait tablets and small desktops */
@@ -451,6 +484,39 @@
 
         #editdone_docgroup_fab {
           top: 420px;
+        }
+
+        #doc_toolbar_shadow {
+          margin: 0px 75px 0px 70px;
+          top: 154px;
+        }
+
+        #doc_share_btn {
+          top: 0px;
+        }
+
+        #group_tools_toolbar {
+          right: 0px;
+          top: 280px;
+          z-index: auto;
+        }
+
+        #doc_content_shadow {
+          padding: 20px 60px 60px;
+        }
+
+        #doc_content_section {
+          padding: 60px;
+          padding-top: 220px;
+        }
+
+        #header_bottom {
+          padding: 0 80px 0 5px;
+        }
+
+        #group_bottombar > div > div > img {
+          /* license */
+          padding-left: 60px;
         }
 
       } /* end small */
@@ -634,6 +700,38 @@
 
         #editdone_docgroup_fab {
           top: 450px;
+        }
+
+        #doc_toolbar_shadow {
+          margin: 0px 75px 0px 70px;
+          top: 186px;
+        }
+
+        #doc_share_btn {
+          top: 0px;
+        }
+
+        #group_tools_toolbar {
+          right: 0px;
+          top: 310px;
+          z-index: auto;
+        }
+        #doc_content_shadow {
+          padding: 20px 60px 60px;
+        }
+
+        #doc_content_section {
+          padding: 60px;
+          padding-top: 252px;
+        }
+
+        #header_bottom {
+          padding: 0 80px 0 5px;
+        }
+
+        #group_bottombar > div > div > img {
+          /* license */
+          padding-left: 60px;
         }
 
       } /* end mediumup, no xsmall, no small */
@@ -1551,8 +1649,6 @@
         bottom: 0px;
         height: 40px;
         position: absolute;
-        margin: {{xsmall? '0px 25px 0px 20px' : '0px 75px 0px 70px'}};
-        top: {{xsmall? 134 : small? 154: 186}}px;
       }
 
       paper-material#doc_toolbar_shadow paper-toolbar#doc_toolbar div#topBar.toolbar-tools,
@@ -1562,9 +1658,9 @@
         background-color: white;
       }
 
-      #doc_toolbar /deep/ .toolbar-tools {
+      /* #doc_toolbar /deep/ .toolbar-tools {
         height: 40px;
-      }
+      } */
 
       paper-toolbar.medium-tall {
         line-height: 20px;
@@ -1573,14 +1669,10 @@
       #doc_share_btn {
         right: 10px;
         position: relative;
-        top: {{xsmall ? 10 : 0}}px;
       }
 
       #group_tools_toolbar {
-        right: {{xsmall ? 0 : 0}}px;
-        top: {{xsmall ? 270 : small? 280: 310}}px;
         position: absolute;
-        z-index:  {{xsmall ? 1 : auto}};
       }
 
       #group_tools_toolbar .k-drop-allowed {
@@ -1672,27 +1764,23 @@
 
       #doc_content_shadow {
         font-size: 16px;
-        padding: {{xsmall ? '30px 40px 10px 10px' : '20px 60px 60px' }};
         background-color: #FFFFFF;
-        min-height: {{docContentMinHeight + (xsmall? 100: 0)}}px;
+        min-height: {{docContentMinHeight + (xsmall? 100: 0)}}px; /* FIXME */
         margin-bottom: 80px;
       }
 
       #doc_content_section {
-        padding: {{xsmall ? '10px 10px 10px 10px' : '60px' }};
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         bottom: 0;
-        padding-top: {{xsmall? headers + 50: small? headerm + 60: headerl + 60}}px;
         overflow-y: scroll; /* This makes the scrollbar always visible, so the tools-bar is always in the same position */
       }
 
       #header_bottom {
         position: absolute;
         bottom: 10px;
-        padding: {{xsmall? '0': '0 80px 0 5px'}};
       }
 
       #home_bottombar,
@@ -1739,7 +1827,6 @@
       #group_bottombar > div > div > img {
         /* license */
         opacity: 0.7;
-        padding-left: {{xsmall ? '10px' : '60px' }};
       }
 
       /* Chat -------------------------------------------------------------- */
@@ -2247,9 +2334,9 @@
         }
 
         /* Tutorials */
-        html /deep/ paper-dialog   iframe {
+      /*   html /deep/ paper-dialog   iframe {
           border: none;
-        }
+        } */
 
         .sitebar_inbox_badge_container {
           top: -23px;
@@ -2886,9 +2973,10 @@
           background-color: white;
         }
 
+        /*
         #doc_toolbar /deep/ .toolbar-tools {
           height: 40px;
-        }
+        } */
 
         paper-toolbar.medium-tall {
           line-height: 20px;
