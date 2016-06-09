@@ -172,4 +172,21 @@ var d = new Date();
 kt.this_year = d.getFullYear();
 
 /* The initial space (0: for home, 2: for group space) useful during tests */
-// FIXME kt.spaceselected = 2;
+// kt.spaceselected = 2;
+
+kt.main_drawer_width = function (xsmall, small) {
+  var value = (xsmall ? 270 : small ? 300 : 400) + 'px';
+  console.log('Draw size: ' + value);
+  return value;
+};
+
+kt.logo_size = function (xsmall, small) {
+  return small ? '-big' : xsmall ? '-med' : '-big';
+};
+
+// https://stackoverflow.com/questions/30664216/polymer-1-0-is-there-any-way-to-use-layout-as-an-attribute-instead-of-as-a-cs
+kt.addClassIf = function (classToAdd, shouldAdd) {
+  if (shouldAdd) {
+    return classToAdd;
+  }
+};

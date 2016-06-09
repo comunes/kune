@@ -68,7 +68,8 @@ public class PolymerUtils {
 
   public static void addLayout(final Element element, final Layout... layouts) {
     for (final Layout layout : layouts) {
-      element.setAttribute(layout.getAttribute(), "");
+      element.addClassName(layout.getAttribute());
+      // element.setAttribute(layout.getAttribute(), "");
     }
   }
 
@@ -126,7 +127,8 @@ public class PolymerUtils {
 
   public static void removeLayout(final Element element, final Layout... layouts) {
     for (final Layout layout : layouts) {
-      element.removeAttribute(layout.getAttribute());
+      element.removeClassName(layout.getAttribute());
+      // element.removeAttribute(layout.getAttribute());
     }
   }
 

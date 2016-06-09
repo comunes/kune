@@ -52,52 +52,52 @@
     <meta name="hablar.avatarProvider" content="kune-avatars" />
 
     <script language="javascript" type="text/javascript">
-            // -*- engine:js -*-
+                  // -*- engine:js -*-
 
-            function getQueryVariable(variable) {
-              var query = window.location.search.substring(1);
-              var vars = query.split('&');
-              for (var i = 0; i < vars.length; i++) {
-                var pair = vars[i].split('=');
-                if (decodeURIComponent(pair[0]) == variable) {
-                  return decodeURIComponent(pair[1]);
-                }
-              }
-            }
+                  function getQueryVariable(variable) {
+                    var query = window.location.search.substring(1);
+                    var vars = query.split('&');
+                    for (var i = 0; i < vars.length; i++) {
+                      var pair = vars[i].split('=');
+                      if (decodeURIComponent(pair[0]) == variable) {
+                        return decodeURIComponent(pair[1]);
+                      }
+                    }
+                  }
 
-            // See MetaUtils.java
-            function getMetaContent(name) {
-              var metas = document.getElementsByTagName('meta');
-              for (i=0; i < metas.length; i++) {
-                // console.log("meta: " + metas[i].getAttribute("name"));
-                if (metas[i].getAttribute("name") == name) {
-                  return metas[i].getAttribute("content");
-                }
-              }
-              return "";
-            }
+                  // See MetaUtils.java
+                  function getMetaContent(name) {
+                    var metas = document.getElementsByTagName('meta');
+                    for (i=0; i < metas.length; i++) {
+                      // console.log("meta: " + metas[i].getAttribute("name"));
+                      if (metas[i].getAttribute("name") == name) {
+                        return metas[i].getAttribute("content");
+                      }
+                    }
+                    return "";
+                  }
 
-            // Font depending on locale
-            locale = getQueryVariable('locale');
-            fontPrefix = '<link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300,600';
-            fontSuffix = '" rel="stylesheet" type="text/css">';
+                  // Font depending on locale
+                  locale = getQueryVariable('locale');
+                  fontPrefix = '<link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300,600';
+                  fontSuffix = '" rel="stylesheet" type="text/css">';
 
-            switch (locale) {
-              case 'gl':
-                subset = '&subset=latin,greek-ext,greek';
-                break;
-              case 'ru':
-                subset = '&subset=cyrillic,cyrillic-ext,latin';
-                break;
-              case 'vi_VN':
-                subset = '&subset=vietnamese';
-              default:
-                subset = '';
-            }
-            font = fontPrefix + subset + fontSuffix;
-            document.write(font);
+                  switch (locale) {
+                    case 'gl':
+                      subset = '&subset=latin,greek-ext,greek';
+                      break;
+                    case 'ru':
+                      subset = '&subset=cyrillic,cyrillic-ext,latin';
+                      break;
+                    case 'vi_VN':
+                      subset = '&subset=vietnamese';
+                    default:
+                      subset = '';
+                  }
+                  font = fontPrefix + subset + fontSuffix;
+                  document.write(font);
 
-        </script>
+            </script>
 
     <!-- -*- engine:html -*- -->
 
@@ -181,8 +181,191 @@
         opacity: 0.7;
       }
 
-      #home_space {
-        font-size: {{xsmall? '12' : small? '16' : '16'}}px;
+      /* xsmall: Landscape phones and portrait tablets */
+      @media (max-width: 767px) {
+        #home_space {
+          font-size: 12px;
+        }
+
+        #k_home_mask {
+          background-size: inherits;
+          height: 220px;
+          padding-top: 80px;
+        }
+
+        #k_home_logo {
+          padding-right: 5px;
+        }
+
+        #k_home_toolbar {
+          margin: 10px 0;
+        }
+
+        #k_home_center,.buck_blockquote {
+          font-size: 16px;
+        }
+
+        #k_home_center {
+          width: 100%;
+        }
+
+        #k_home_center div {
+          margin-top: 5px;
+          margin-bottom: 5px;
+        }
+
+        .k_home_motto {
+          font-size: 22px;
+          margin-top: 0px;
+        }
+
+        #k_home_1st_description > div {
+          font-size: 16px;
+        }
+
+        #k_home_tools {
+          font-size: 18px;
+          width: 80%;
+          margin: 0 auto;
+        }
+
+        #sitebar_right_extensionbar {
+          margin-top: -20px;
+        }
+
+        #sitebar_toolbar li {
+          margin: -5px 8px 0 8px;
+        }
+
+        #header_core_toolbar.tall,
+        #core_drawer_group_header {
+          height: 140px;
+        }
+
+      } /* end xsmall */
+
+      /* small: Portrait tablets and small desktops */
+      @media (min-width: 768px) and (max-width: 991px) {
+        #k_home_mask {
+          background-size: inherits;
+          height: 270px;
+          padding-top: 110px;
+        }
+
+        #k_home_center,.buck_blockquote {
+          font-size: 20px;
+        }
+
+        #k_home_center {
+          width: 80%;
+        }
+
+        #k_home_1st_description > div {
+          font-size: 20px;
+        }
+
+        #k_home_tools {
+          font-size: 26px;
+        }
+
+        #header_core_toolbar.tall,
+        #core_drawer_group_header {
+          height: 160px;
+        }
+
+      } /* end small */
+
+      /* medium: Landscape tablets and medium desktops */
+      @media (min-width: 992px) and (max-width: 1199px) {
+
+      }
+
+      /* large: Large desktops and laptops */
+      @media (min-width: 1200px) {
+
+      }
+
+
+      /* Portrait phones and smaller */
+      @media (max-width: 480px) {
+
+      }
+
+      /* xsmallup: Extra small devices  */
+      @media(min-width: 480px){}
+
+      /* smallup: Small devices (tablets, 768px and up) */
+      @media(min-width:768px){
+        #home_space {
+          font-size: 16px;
+        }
+
+        #k_home_logo {
+          padding-right: 20px;
+        }
+
+        #k_home_toolbar {
+          margin: 0 20px;
+        }
+
+        #k_home_center div {
+          margin-top: 10px;
+          margin-bottom: 10px;
+        }
+
+        .k_home_motto {
+          font-size: 45px;
+          margin-top: 10px;
+        }
+
+        #k_home_tools {
+          width: auto;
+          margin: 0;
+        }
+
+        #sitebar_right_extensionbar {
+          margin-top: 0px;
+        }
+
+        #sitebar_toolbar li {
+          margin: -24px 8px 0 8px;
+        }
+
+      } /* end smallup: no xsmall */
+
+      /* mediumup: Medium devices (desktops, 992px and up) */
+      @media(min-width:992px) {
+        #k_home_mask {
+          background-size: 100%;
+          height: 270px;
+          padding-top: 110px;
+        }
+
+        #k_home_center,.buck_blockquote {
+          font-size: 24px;
+        }
+
+        #k_home_center {
+          width: 60%;
+        }
+
+        #k_home_1st_description > div {
+          font-size: 24px;
+        }
+
+        #k_home_tools {
+          font-size: 32px;
+        }
+
+        #header_core_toolbar.tall,
+        #core_drawer_group_header {
+          height: 192px;
+      }
+
+      } /* end mediumup, no xsmall, no small */
+
+      /* largeup: Large devices (large desktops, 1200px and up) */
+      @media(min-width:1200px) {
       }
 
       #home_space_core_header::shadow #mainContainer {
@@ -198,10 +381,7 @@
         background-image: url({{homebackimg}});
         background-repeat: no-repeat;
         background-position: 0% 20%;
-        background-size: {{xsmall? "inherit": small? "inherit": "100%"}};
         padding: 30px;
-        height: {{xsmall? 220: 270}}px;
-        padding-top: {{xsmall? 80: 110}}px;
       }
 
       #k_home_main_container {
@@ -216,7 +396,6 @@
 
       #k_home_logo {
         vertical-align: top;
-        padding-right: {{xsmall ? '5px' : '20px'}};
       }
 
       #k_home_logoname {
@@ -227,16 +406,8 @@
         padding: 0px;
       }
 
-      #k_home_toolbar {
-        margin: {{xsmall? '10px 0': '0 20px'}};
-      }
-
       #k_home_center_container {
         width: 100%;
-      }
-
-      #k_home_center,.buck_blockquote {
-        font-size: {{xsmall ? 16 : small? 20: 24}}px;
       }
 
       #k_home_center a {
@@ -244,35 +415,24 @@
       }
 
       #k_home_center {
-        width: {{xsmall ? '100%' : small? '80%' : '60%'}};
         margin: 0 auto;
       }
 
-      #k_home_center div {
-        margin-top: {{xsmall? '5' : small? '10' : '10'}}px;
-        margin-bottom: {{xsmall? '5' : small? '10' : '10'}}px;
-      }
 
       .k_home_motto {
-        font-size: {{xsmall? '22' : small? '45' : '45'}}px;
         color: #a56941;
         float: left;
         line-height: 1.3em;
-        margin-top: {{xsmall? '0' : '10'}}px;
       }
 
       #k_home_1st_description > div {
         margin-top: 10px;
         text-align: justify;
         text-justify: inter-word;
-        font-size: {{xsmall ? 16 : small? 20 : 24}}px;
       }
 
       #k_home_tools {
-        font-size: {{xsmall? '18' : small? '26' : '32'}}px;
         color: #69312f;
-        width: {{xsmall? "80%": "auto"}};
-        margin: {{xsmall? "0 auto": "0"}};
       }
 
       #k_home_center a {
@@ -510,7 +670,6 @@
 
       #sitebar_toolbar li {
         list-style-type: none;
-        margin: {{xsmall? "-5px 8px 0 8px" : "-24px 8px 0 8px"}};
       }
 
       #sitebar_toolbar li a:hover {
@@ -669,8 +828,6 @@
       }
 
       #inbox_result_section, #chat_centerpanel {
-        /* height: 100%; */
-        /* padding: 10px; */
         background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
       }
 
@@ -898,7 +1055,6 @@
         right: 0px;
         bottom: 0px;
         left: 0px;
-        height: {{xsmall? headers: small? headerm: headerl}}px;
         border-right: 13px solid #F2F2F2;
       }
 
@@ -1465,463 +1621,8 @@
     </style>
 
     <template id="kunetemplate" is="dom-bind">
-      <iron-media-query query="(max-width: {{screensm - 1}}px)" queryMatches="{{xsmall}}"></iron-media-query>
-      <iron-media-query query="(min-width: {{screensm}}px) and (max-width: {{screenmd - 1}}px)" queryMatches="{{small}}"></iron-media-query>
-      <iron-media-query query="(min-width: {{screenmd}}px) and (max-width: {{screenlg - 1}}px)" queryMatches="{{medium}}"></iron-media-query>
-      <iron-media-query query="(min-width: {{screenlg}}px)" queryMatches="{{large}}"></iron-media-query>
-
-      <!-- Extra small devices  -->
-      <iron-media-query query="min-width: {{screenxs}}px" queryMatches="{{xsmallup}}"></iron-media-query>
-      <!-- Small devices (tablets, 768px and up) -->
-      <iron-media-query query="min-width: {{screensm}}px" queryMatches="{{smallup}}"></iron-media-query>
-      <!-- Medium devices (desktops, 992px and up) -->
-      <iron-media-query query="min-width: {{screenmd}}px" queryMatches="{{mediumup}}"></iron-media-query>
-      <!-- Large devices (large desktops, 1200px and up) -->
-      <iron-media-query query="min-width: {{screenlg}}px" queryMatches="{{largeup}}"></iron-media-query>
-
-      <div id="paper_progress_container" class="horizontal center-justified layout">
-        <paper-progress indeterminate id="paper_progress"></paper-progress>
-      </div>
-      <div id="paper_toast_container" class="horizontal end-justified layout">
-        <paper-toast duration="5000" id="toast"></paper-toast>
-      </div>
-      <div id="k_home_spin_container" class="layout fit">
-        <paper-spinner-lite alt="Loading" class="k-spinner" id="k_home_spin" active="{{spin_active}}"></paper-spinner>
-      </div>
-
-      <!-- https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel -->
-      <paper-drawer-panel transition drawerWidth="{{xsmall? 270: small? 300: 400}}px" responsivewidth="900px" selected="{{main_selected}}" narrow="{{main_narrow}}" id="main_core_drawer_panel" forcenarrow="{{main_forcenarrow}}" disableSwipe="{{main_disableSwipe}}" disableEdgeSwipe="{{main_disableEdgeSwipe}}"  touch-action="pan-y">
-        <section id="main_left_section" drawer>
-          <div id="inbox_container" fit>
-            <paper-header-panel mode="waterfall" id="inbox_core_header">
-              <paper-toolbar id="inbox_toolbar">
-                <paper-fab icon="create" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
-                <div id="inbox_title"></div>
-                <div flex></div>
-                <div class="layout horizontal end-justified">
-                  <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
-                  <paper-icon-button icon="launch" id="inbox_share_icon"></paper-icon-button>
-                  <paper-icon-button icon="arrow-back" on-click="closeMainDrawer" id="inbox_close_icon"></paper-icon-button>
-                </div>
-              </paper-toolbar>
-              <section id="inbox_result_section">
-                <div class="vertical layout fit">
-                  <div id="inbox_result" flex>
-                  </div>
-                  <div id="chat_centerpanel" flex>
-                    <paper-header-panel mode="seamed" flex>
-                      <paper-toolbar id="chat_toolbar">
-                        <div>Chat</div>
-                      </paper-toolbar>
-                    </paper-header-panel>
-                  </div>
-                </div>
-              </section>
-            </paper-header-panel>
-          </div>
-          <paper-fab icon="view-column" mini id="inbox_show_hide" class="btn_gray" core-drawer-toggle></paper-fab>
-        </section>
-        <section id="main_right_section" main>
-          <iron-pages id="iron-main-pages" selected="{{spaceselected}}" class="full_absolute_no_sitebar" notap>
-
-            <!-- Home Space -------------------------------------------------------- -->
-
-            <div id="home_space">
-              <paper-header-panel id="home_space_core_header" mode="seamed" fit>
-                <paper-toolbar id="k_home_mask">
-                  <div id="k_home_main_container" class="horizontal center-justified layout flex">
-                    <div id="k_home_main_v" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
-                      <div id="k_home_logo_container" class="horizontal layout">
-                        <div>
-                          <span id="k_home_logo">
-                            <iron-image fade preload src="./others/kune-logo-alone{{small? '-big': xsmall ? '-med': '-big'}}.png" alt="kune-logo-alone"></iron-image>
-                          </span>
-                        </div>
-                        <div class="vertical layout">
-                          <div>
-                            <span id="k_home_logoname">
-                              <iron-image fade preload src='./others/kune-logo-name-alone{{small ? "-big": xsmall? "-med": "-big"}.png' alt="kune-longo-name"></iron-image>
-                            </span>
-                          </div>
-                          <div>
-                            <span id="k_home_motto_def" style="display: none;" class="k_home_motto">do it together<br>& share it</span>
-                            <span id="k_home_motto_es" style="display: none;" class="k_home_motto">colabora y comparte<br>en grupo</span>
-                          </div>
-                        </div> <!-- end of logoname -->
-                      </div> <!-- end of logo -->
-                      <div id="k_home_main_buttons" class="horizontal end-justified layout">
-                        <div id="k_home_toolbar" class="vertical layout">
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </paper-toolbar>
-
-                <div class="horizontal layout center" flex id="home_bottombar">
-                  <div flex class="hidden-xs">
-                    <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
-                      <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
-                    </a>
-                    <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
-                      <paper-icon-button src="others/bc_logo_24.png"
-                                         title="donate with bitcoin"></paper-icon-button>
-                    </a>
-                    <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
-                      <img
-                          src="//api.flattr.com/button/flattr-badge-large.png"
-                          alt="Flattr this" title="Flattr this" border="0">
-                    </a>
-                  </div>
-                  <div flex class="owl-theme hidden-xs">
-                    <div class="owl-controls">
-                      <div id="customOwlDots" class="owl-dots"></div>
-                    </div>
-                  </div>
-                  <div flex id="home_copyleft">
-                    © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
-                    <span style="display: none;" id="k_home_copyleft_def">
-                      <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
-                    </span>
-                    <span style="display: none;" id="k_home_copyleft_es">
-                      <a href="http://kune.ourproject.org" target="_blank">kune</a> es un proyecto de <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
-                    </span>
-                  </div>
-                </div>
-
-                <div id="k_home_scroller" fit unresolved>
-                  <div id="k_home_center" class="owl-carousel" >
-
-                    <div class="horizontal center-justified layout" id="sec0">
-                      <div self-center>
-                        <span style="display: none;" id="k_home_slide-1_def">
-                          kune it's a social network where you can communicate,
-                          collaborate and share between equals, using different web tools:
-                        </span>
-                        <span style="display: none;" id="k_home_slide-1_es">
-                          kune es una red social donde puedes comunicarte colaborar y
-                          compartir entre iguales, usando diferentes herramientas web:
-                        </span>
-                        <div id="k_home_tools" class="wrap justified vertical?='{{!xsmall}}' horizontal?='{{xsmall}}' layout">
-                          <div class='wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout'>
-                            <paper-item icon="kune:docs" class="horizontal center layout">
-                              <span id="k_home_tool_docs_def" class="hidden-xs" style="display: none;">documents</span>
-                              <span id="k_home_tool_docs_es" class="hidden-xs" style="display: none;">documentos</span>
-                            </paper-item>
-                            <paper-item icon="kune:events" class="horizontal center layout">
-                              <span id="k_home_tool_events_def" class="hidden-xs" style="display: none;">calendars</span>
-                              <span id="k_home_tool_events_es" class="hidden-xs" style="display: none;">calendarios</span>
-                            </paper-item>
-                            <paper-item icon="kune:chat-tool" class="horizontal center layout">
-                              <span id="k_home_tool_chats_def" class="hidden-xs"  style="display: none;">chats</span>
-                              <span id="k_home_tool_chats_es" class="hidden-xs" style="display: none;">chats</span>
-                            </paper-item>
-                            <paper-item icon="kune:lists" class="horizontal center layout">
-                              <span id="k_home_tool_lists_def" class="hidden-xs" style="display: none;">forums</span>
-                              <span id="k_home_tool_lists_es" class="hidden-xs" style="display: none;">foros</span>
-                            </paper-item>
-                          </div>
-                          <div class='wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout'>
-                            <paper-item icon="kune:wiki" class="horizontal center layout">
-                              <span id="k_home_tool_wiki_def" class="hidden-xs" style="display: none;">wiki</span>
-                              <span id="k_home_tool_wiki_es" class="hidden-xs" style="display: none;">wiki</span>
-                            </paper-item>
-                            <paper-item icon="kune:message" class="horizontal center layout">
-                              <span id="k_home_tool_messages_def" class="hidden-xs" style="display: none;">messages</span>
-                              <span id="k_home_tool_messages_es" class="hidden-xs" style="display: none;">mensajes</span>
-                            </paper-item>
-                            <paper-item icon="kune:tasks" class="horizontal center layout">
-                              <span id="k_home_tool_tasks_def" class="hidden-xs" style="display: none;">tasks</span>
-                              <span id="k_home_tool_tasks_es" class="hidden-xs" style="display: none;">tareas</span>
-                            </paper-item>
-                            <paper-item icon="kune:barter" class="horizontal center layout">
-                              <span id="k_home_tool_barters_def" class="hidden-xs" style="display: none;">barters</span>
-                              <span id="k_home_tool_barters_es" class="hidden-xs" style="display: none;">trueques</span>
-                            </paper-item>
-                          </div> <!-- end kune icons 2 columns -->
-                        </div>
-                      </div>
-                    </div>
-
-                    <div class="horizontal center-justified layout" id="sec1">
-                      <div self-center>
-                        <div class="horizontal center-justified layout" flex>
-                        </div>
-                        <span id="k_home_buck_def" style="display: none;">
-                          <blockquote class="buck_blockquote">
-                            Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
-                            <cite class="buck">
-                              <a href="https://en.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
-                            </cite>
-                          </blockquote>
-                        </span>
-                        <span id="k_home_buck_es" style="display: none;">
-                          <blockquote class="buck_blockquote">
-                            Haced que el mundo funcione para el 100% de la humanidad, en el menor tiempo posible, a través de la cooperación espontánea, y sin ningún daño ecológico o desventaja para nadie.
-                            <cite class="buck">
-                              <a href="https://es.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
-                            </cite>
-                          </blockquote>
-                        </span>
-                      </div>
-                    </div>
 
 
-                    <div class="horizontal center-justified layout" id="sec2">
-                      <div class="flex self-center">
-                        <span id="k_home_decen_def" style="display: none;">
-                          <p>Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.</p><p>kune.cc is just one more node in this decentralized social network.</p>
-                        </span>
-                        <span id="k_home_decen_es" style="display: none;">
-                          <p>Kune es decentralizado, a diferencia de otras redes sociales como Google+ o Facebook. Así que como en un servicio de email, puedes elegir entre diferentes proveedores de kune y evitar la centralización de datos personales.</p><p>kune.cc es solo un nodo más en esa red social descentralizada.</p>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="horizontal center-justified layout" id="sec3">
-                      <div class="flex self-center">
-                        <span id="k_home_meaning_def" style="display: none;">
-                          Kune means "together" in esperanto.
-                        </span>
-                        <span id="k_home_meaning_es" style="display: none;">
-                          Kune significa "juntos" en esperanto.
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="horizontal center-justified layout" id="sec4">
-                      <div class="flex self-center">
-                        <span id="k_home_continuation_def" style="display: none;">
-                          <p>kune is the continuation of the effort that we started in 2002 with
-                            <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                            with a main goal:</p><p>To bring the collaborative philosophy of
-                              <a href="https://en.wikipedia.org/wiki/Free_software" target="_blank">Free Software</a>
-                              to other areas.</p><p>
-                                We share our web services and tools to allow people to work together,
-                                to collaborate, to share knowledge, skills, solutions, etcetera.</p>
-                        </span>
-                        <span id="k_home_continuation_es" style="display: none;">
-                          <p>kune es la continuación del esfuerzo que comenzamos en el 2002 con
-                            <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                            con un objetivo principal:</p><p>Llevar la filosofía colaborativa del
-                              <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
-                              a otras áreas.</p><p>
-                                Compartimos nuestros servicios web y nuestras herramientas para
-                                permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
-                                soluciones, etcétera.</p>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="horizontal center-justified layout" id="sec5">
-                      <div class="flex self-center">
-                        <span id="k_home_super_def" style="display: none;">
-                          Welcome to the era where collaboration supersede to the corporation.
-                        </span>
-                        <span id="k_home_super_es" style="display: none;">
-                          Bienvenido/a a la era en la que la cooperación substituye a la corporación.
-                        </span>
-                      </div>
-                    </div>
-
-
-                  </div>
-                </div> <!-- home-center -->
-
-              </paper-header-panel>
-            </div><!-- home_space -->
-
-            <!-- User Space -------------------------------------------------------- -->
-
-            <div id="user_space" class="fit" unresolved>
-              <paper-fab icon="create" id="edit_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
-              <paper-fab icon="reply" id="reply_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
-              <paper-fab icon="check" id="editdone_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
-              <div id="user_space_content">
-                <div id="inbox_tutorial_container">
-                  <div id ="inbox_tutorial">
-                  </div>
-                  <p>large: {{large}}</p>
-                  <p>small: {{small}}</p>
-                  <p>xsmall: <span>{{xsmall}}</span></p>
-                  <template is="dom-if" if="{{!large}}">
-                    The viewport is less than 600px wide, so the items' titles will
-                    not float.
-                  </template>
-                  <template is="dom-if" if="{{large}}">
-                    The viewport is at least 600px, so the items' titles will float
-                    to the left.
-                  </template>
-
-
-
-                </div>
-              </div>
-            </div>
-
-            <!-- Group Space ------------------------------------------------------- -->
-
-            <div id="group_space" class="vertical layout" unresolved>
-              <div class="horizontal layout center start-justified" id="group_bottombar" flex></div>
-              <paper-fab icon="create" id="edit_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
-              <paper-fab icon="reply" id="reply_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
-              <paper-fab icon="check" id="editdone_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
-              <paper-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">
-                <paper-toolbar id="header_core_toolbar" class="tall" flex>
-                  <paper-drawer-panel transition drawerwidth="{{group_header_drawer_width}}" selected="{{group_header_selected}}" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
-                    <section id="group_core_drawer" drawer>
-                      <div class="horizontal layout">
-                        <div id="header_social_net" class="fit"></div>
-                        <div flex></div>
-                        <paper-icon-button class="top black" icon="close" on-click="toggle_social_net" id="header_group_icon_settings"></paper-icon-button>
-                      </div>
-                    </section>
-                    <section id="group_core_main" main>
-                      <div id="header_groupname_div" class="top indent" class="layout horizontal">
-                        <div id="header-left-margin">
-                        </div>
-                        <div class="flex self-center">
-                          <paper-material animated id="header_group_paper_shadow" class="top">
-                            <!-- https://stackoverflow.com/questions/5775469/whats-the-valid-way-to-include-an-image-with-no-src -->
-                            <img class="top" id="header_group_logo" alt="group logo"
-                                 src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="></img>
-                          </paper-material>
-                        </div>
-                        <div id="header_group_name_group" class="vertical flex layout self-center">
-                          <div id="header_group_name" class="top"></div>
-                          <div id="header_short_group_name" class="top"><a href="#"></a></div>
-                        </div>
-
-                        <div class="horizontal layout end-justified">
-                          <div id="social_net_group" class="vertical layout">
-                            <div id="k_group_entity_toolbar" class="vertical layout end-justified">
-                            </div>
-                            <div class="horizontal layout end-justified">
-                              <paper-icon-button icon="group-work" id="group_followers" on-click="toggle_social_net">
-                              </paper-icon-button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="group_header_bottom" class='vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout'>
-                        <ol class="breadcrumb"><div id="miga"></div></ol>
-                        <div flex></div>
-                        <div id="header_bottom_extensionbar" class="btn-group indent"></div>
-                      </div>
-                    </section>
-                  </paper-drawer-panel>
-                  <paper-material id="doc_toolbar_shadow">
-                    <paper-toolbar  id="doc_toolbar" class="medium-tall" flex>
-                      <div id="doc_toolbar_extension" class="btn-group" class="horizontal layout" flex>
-                      </div>
-                    </paper-toolbar>
-                  </paper-material>
-                </paper-toolbar>
-                <section id="doc_content_section" content flex>
-                  <div class="horizontal layout end-justified" flex>
-                    <div id="group_tools_toolbar" class="vertical layout">
-                      <paper-fab mini icon="kune:docs" class="active" id="k_tool_item_docs"></paper-fab>
-                      <paper-fab mini icon="kune:lists" id="k_tool_item_lists"></paper-fab>
-                      <paper-fab mini icon="kune:blogs" id="k_tool_item_blogs"></paper-fab>
-                      <paper-fab mini icon="kune:wiki" id="k_tool_item_wiki"></paper-fab>
-                      <paper-fab mini icon="kune:events" id="k_tool_item_events"></paper-fab>
-                      <paper-fab mini icon="kune:tasks" id="k_tool_item_tasks"></paper-fab>
-                      <paper-fab mini icon="kune:chat-tool" id="k_tool_item_chats"></paper-fab>
-                      <paper-fab mini icon="kune:barter" id="k_tool_item_barters"></paper-fab>
-                      <paper-fab mini icon="kune:trash" id="k_tool_item_trash"></paper-fab>
-                    </div> <!-- end group_tools_toolbar -->
-                  </div>
-                  <paper-material animated id="doc_content_shadow">
-                    <div id="doc_vert" class="layout vertical">
-                      <div class="horizontal layout">
-                        <div id="doc_header_left_extensionbar" class="btn-group" class="layout horizontal"></div>
-                        <div id="doc_header_flex" flex></div>
-                        <div id="doc_header_right_extensionbar" class="layout horizontal"></div>
-                      </div>
-                      <div id="doc_content" >
-                      </div>
-                    </div>
-                  </paper-material>
-                </section>
-              </paper-scroll-header-panel>
-            </div>
-          </iron-pages>
-        </section>
-      </paper-drawer-panel>
-
-      <paper-toolbar id="sitebar_toolbar">
-        <!-- FIXME: scrollable seems interesting but does not works with our paper-tab -->
-        <paper-tabs selected="{{spaceselected}}" id="space_selector_paper_tabs" class="horizontal center layout">
-          <paper-tab>
-            <!-- You can put here a "src" atribute with a link to your site logo (remove the icon attribute) -->
-            <paper-icon-button icon="kune:kune" id="home_space_icon"></paper-icon-button>
-          </paper-tab>
-          <paper-tab>
-            <paper-icon-button icon="mail" id="user_space_icon"></paper-icon-button>
-          </paper-tab>
-          <paper-tab>
-            <paper-icon-button icon="group-work" id="group_space_icon"></paper-icon-button>
-          </paper-tab>
-        </paper-tabs>
-        <div id="sitebar_user_space_icon_group" class="sitebar_inbox_badge_container"></div>
-        <div id="sitebar_left_extensionbar"></div>
-        <div id="sitebar_flex" flex></div>
-        <div id="sitebar_chat_icon_group" class="hidden-xs hidden-sm">
-          <paper-icon-button icon="kune:chat" id="sitebar_chat_icon"></paper-icon-button>
-        </div>
-        <paper-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn"></paper-icon-button>
-        <paper-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></paper-icon-button>
-        <div id="sitebar_right_extensionbar"></div>
-        <paper-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></paper-icon-button>
-        <paper-icon-button icon="search" on-click="toggleSearch" id="sitebar_search_icon"></paper-icon-button>
-        <div id="sitebar_search_group">
-          <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
-        </div>
-        <paper-icon-button icon="menu" id="sitebar_more_icon"></paper-icon-button>
-        <div id="sitebar_flex_end" class="sitebar_search_hide" flex></div>
-        <paper-icon-button icon="close" on-click="toggleSearch" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
-      </paper-toolbar>
-
-      <neon-animation id="opacity-infinite" duration="1000" iterations="Infinity" direction="alternate">
-        <neon-animation-keyframe>
-          <neon-animation-prop name="opacity" value="1">
-          </neon-animation-prop>
-        </neon-animation-keyframe>
-        <neon-animation-keyframe>
-          <neon-animation-prop name="opacity" value="0.3">
-          </neon-animation-prop>
-        </neon-animation-keyframe>
-      </neon-animation>
-
-      <neon-animation-group id="opacity-scale" type="seq">
-        <neon-animation duration="300">
-          <neon-animation-keyframe>
-            <neon-animation-prop name="opacity" value="1">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-          <neon-animation-keyframe>
-            <neon-animation-prop name="opacity" value="0.3">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-          <neon-animation-keyframe>
-            <neon-animation-prop name="opacity" value="1">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-        </neon-animation>
-        <neon-animation duration="300">
-          <neon-animation-keyframe>
-            <neon-animation-prop name="transform" value="scale(1)">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-          <neon-animation-keyframe>
-            <neon-animation-prop name="transform" value="scale(1.2)">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-          <neon-animation-keyframe>
-            <neon-animation-prop name="transform" value="scale(1)">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-        </neon-animation>
-      </neon-animation-group>
       <style>
 
         /* -*- engine:css -*- */
@@ -3242,112 +2943,557 @@
         }
 
       </style>
+
+      <iron-media-query query="(max-width: 767px)" query-matches="{{xsmall}}"></iron-media-query>
+      <iron-media-query query="(min-width: 768px) and (max-width: 991px)" query-matches="{{small}}"></iron-media-query>
+      <iron-media-query query="(min-width: 992px) and (max-width: 1199px)" query-matches="{{medium}}"></iron-media-query>
+      <iron-media-query query="(min-width: 1200px)" query-matches="{{large}}"></iron-media-query>
+
+      <!-- Extra small devices  -->
+      <iron-media-query query="min-width: 480px" query-matches="{{xsmallup}}"></iron-media-query>
+      <!-- Small devices (tablets, 768px and up) -->
+      <iron-media-query query="min-width: 768px" query-matches="{{smallup}}"></iron-media-query>
+      <!-- Medium devices (desktops, 992px and up) -->
+      <iron-media-query query="min-width: 992px" query-matches="{{mediumup}}"></iron-media-query>
+      <!-- Large devices (large desktops, 1200px and up) -->
+      <iron-media-query query="min-width: 1200px" query-matches="{{largeup}}"></iron-media-query>
+
+      <div id="paper_progress_container" class="horizontal center-justified layout">
+        <paper-progress indeterminate id="paper_progress"></paper-progress>
+      </div>
+      <div id="paper_toast_container" class="horizontal end-justified layout">
+        <paper-toast duration="5000" id="toast"></paper-toast>
+      </div>
+      <div id="k_home_spin_container" class="layout fit">
+        <paper-spinner-lite alt="Loading" class="k-spinner" id="k_home_spin" active="{{spin_active}}"></paper-spinner>
+      </div>
+
+      <!-- https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel -->
+      <paper-drawer-panel drawerWidth="[[main_drawer_width(xsmall, small)]]" responsiveWidth="900px" selected="{{main_selected}}" narrow="{{main_narrow}}" id="main_core_drawer_panel" forceNarrow="{{main_forcenarrow}}" disableSwipe="{{main_disableSwipe}}" disableEdgeSwipe="{{main_disableEdgeSwipe}}" touch-action="pan-y">
+        <section id="main_left_section" drawer>
+          <div id="inbox_container" fit>
+            <paper-header-panel mode="waterfall" id="inbox_core_header">
+              <paper-toolbar id="inbox_toolbar">
+                <paper-fab icon="create" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
+                <div id="inbox_title"></div>
+                <div class="flex"></div>
+                <div class="layout horizontal end-justified">
+                  <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
+                  <paper-icon-button icon="launch" id="inbox_share_icon"></paper-icon-button>
+                  <paper-icon-button icon="arrow-back" on-click="closeMainDrawer" id="inbox_close_icon"></paper-icon-button>
+                </div>
+              </paper-toolbar>
+              <section id="inbox_result_section">
+                <div class="vertical layout fit">
+                  <div id="inbox_result" class="flex">
+                  </div>
+                  <div id="chat_centerpanel" class="flex">
+                    <paper-header-panel mode="seamed" class="flex">
+                      <paper-toolbar id="chat_toolbar">
+                        <div>Chat</div>
+                      </paper-toolbar>
+                    </paper-header-panel>
+                  </div>
+                </div>
+              </section>
+            </paper-header-panel>
+          </div>
+          <paper-fab icon="view-column" mini id="inbox_show_hide" class="btn_gray" core-drawer-toggle></paper-fab>
+        </section>
+        <section id="main_right_section" main>
+          <iron-pages id="iron-main-pages" selected="{{spaceselected}}" class="full_absolute_no_sitebar" notap>
+
+            <!-- Home Space -------------------------------------------------------- -->
+
+            <div id="home_space">
+              <paper-header-panel id="home_space_core_header" mode="seamed" fit>
+                <paper-toolbar id="k_home_mask">
+                  <div id="k_home_main_container" class="horizontal center-justified layout flex">
+                    <!-- FIXME -->
+                    <div id="k_home_main_v"
+                         class="layout [[addClassIf('horizontal', !xsmall)]] [[addClassIf('vertical', xsmall)]]">
+                      <div id="k_home_logo_container" class="horizontal layout">
+                        <div>
+                          <span id="k_home_logo">
+                            <iron-image fade preload src$="./others/kune-logo-alone[[logo_size(xsmall, small)]].png" alt="kune-logo-alone"></iron-image>
+                          </span>
+                        </div>
+                        <div class="vertical layout">
+                          <div>
+                            <span id="k_home_logoname">
+                              <iron-image fade preload src$='./others/kune-logo-name-alone[[logo_size(xsmall, small)]].png' alt="kune-longo-name"></iron-image>
+                            </span>
+                          </div>
+                          <div>
+                            <span id="k_home_motto_def" style="display: none;" class="k_home_motto">do it together<br>& share it</span>
+                            <span id="k_home_motto_es" style="display: none;" class="k_home_motto">colabora y comparte<br>en grupo</span>
+                          </div>
+                        </div> <!-- end of logoname -->
+                      </div> <!-- end of logo -->
+                      <div id="k_home_main_buttons" class="horizontal end-justified layout">
+                        <div id="k_home_toolbar" class="vertical layout">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </paper-toolbar>
+
+                <div class="horizontal layout center flex" id="home_bottombar">
+                  <div class="flex hidden-xs">
+                    <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
+                      <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
+                    </a>
+                    <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
+                      <paper-icon-button src="others/bc_logo_24.png"
+                                         title="donate with bitcoin"></paper-icon-button>
+                    </a>
+                    <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
+                      <img
+                          src="//api.flattr.com/button/flattr-badge-large.png"
+                          alt="Flattr this" title="Flattr this" border="0">
+                    </a>
+                  </div>
+                  <div class="flex owl-theme hidden-xs">
+                    <div class="owl-controls">
+                      <div id="customOwlDots" class="owl-dots"></div>
+                    </div>
+                  </div>
+                  <div class="flex" id="home_copyleft">
+                    © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
+                    <span style="display: none;" id="k_home_copyleft_def">
+                      <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                    </span>
+                    <span style="display: none;" id="k_home_copyleft_es">
+                      <a href="http://kune.ourproject.org" target="_blank">kune</a> es un proyecto de <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                    </span>
+                  </div>
+                </div>
+
+                <div id="k_home_scroller" fit unresolved>
+                  <div id="k_home_center" class="owl-carousel" >
+
+                    <div class="horizontal center-justified layout" id="sec0">
+                      <div self-center>
+                        <span style="display: none;" id="k_home_slide-1_def">
+                          kune it's a social network where you can communicate,
+                          collaborate and share between equals, using different web tools:
+                        </span>
+                        <span style="display: none;" id="k_home_slide-1_es">
+                          kune es una red social donde puedes comunicarte colaborar y
+                          compartir entre iguales, usando diferentes herramientas web:
+                        </span>
+                        <div id="k_home_tools" class="wrap justified [[addClassIf('horizontal', xsmall)]] [[addClassIf('vertical', !xsmall)]] layout">
+                          <div class="wrap justified layout [[addClassIf('horizontal', !xsmall)]] [[addClassIf('vertical', xsmall)]]">
+                            <span id="k_home_tool_docs_def" class="hidden-xs" style="display: none;">documents</span>
+                            <span id="k_home_tool_docs_es" class="hidden-xs" style="display: none;">documentos</span>
+                            </paper-item>
+                            <paper-item icon="kune:events" class="horizontal center layout">
+                              <span id="k_home_tool_events_def" class="hidden-xs" style="display: none;">calendars</span>
+                              <span id="k_home_tool_events_es" class="hidden-xs" style="display: none;">calendarios</span>
+                            </paper-item>
+                            <paper-item icon="kune:chat-tool" class="horizontal center layout">
+                              <span id="k_home_tool_chats_def" class="hidden-xs"  style="display: none;">chats</span>
+                              <span id="k_home_tool_chats_es" class="hidden-xs" style="display: none;">chats</span>
+                            </paper-item>
+                            <paper-item icon="kune:lists" class="horizontal center layout">
+                              <span id="k_home_tool_lists_def" class="hidden-xs" style="display: none;">forums</span>
+                              <span id="k_home_tool_lists_es" class="hidden-xs" style="display: none;">foros</span>
+                            </paper-item>
+                          </div>
+                          <div class="wrap justified layout [[addClassIf('horizontal', !xsmall)]] [[addClassIf('vertical', xsmall)]]">
+                            <paper-item icon="kune:wiki" class="horizontal center layout">
+                              <span id="k_home_tool_wiki_def" class="hidden-xs" style="display: none;">wiki</span>
+                              <span id="k_home_tool_wiki_es" class="hidden-xs" style="display: none;">wiki</span>
+                            </paper-item>
+                            <paper-item icon="kune:message" class="horizontal center layout">
+                              <span id="k_home_tool_messages_def" class="hidden-xs" style="display: none;">messages</span>
+                              <span id="k_home_tool_messages_es" class="hidden-xs" style="display: none;">mensajes</span>
+                            </paper-item>
+                            <paper-item icon="kune:tasks" class="horizontal center layout">
+                              <span id="k_home_tool_tasks_def" class="hidden-xs" style="display: none;">tasks</span>
+                              <span id="k_home_tool_tasks_es" class="hidden-xs" style="display: none;">tareas</span>
+                            </paper-item>
+                            <paper-item icon="kune:barter" class="horizontal center layout">
+                              <span id="k_home_tool_barters_def" class="hidden-xs" style="display: none;">barters</span>
+                              <span id="k_home_tool_barters_es" class="hidden-xs" style="display: none;">trueques</span>
+                            </paper-item>
+                          </div> <!-- end kune icons 2 columns -->
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="horizontal center-justified layout" id="sec1">
+                      <div self-center>
+                        <div class="horizontal center-justified layout flex">
+                        </div>
+                        <span id="k_home_buck_def" style="display: none;">
+                          <blockquote class="buck_blockquote">
+                            Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
+                            <cite class="buck">
+                              <a href="https://en.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
+                            </cite>
+                          </blockquote>
+                        </span>
+                        <span id="k_home_buck_es" style="display: none;">
+                          <blockquote class="buck_blockquote">
+                            Haced que el mundo funcione para el 100% de la humanidad, en el menor tiempo posible, a través de la cooperación espontánea, y sin ningún daño ecológico o desventaja para nadie.
+                            <cite class="buck">
+                              <a href="https://es.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
+                            </cite>
+                          </blockquote>
+                        </span>
+                      </div>
+                    </div>
+
+
+                    <div class="horizontal center-justified layout" id="sec2">
+                      <div class="flex self-center">
+                        <span id="k_home_decen_def" style="display: none;">
+                          <p>Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.</p><p>kune.cc is just one more node in this decentralized social network.</p>
+                        </span>
+                        <span id="k_home_decen_es" style="display: none;">
+                          <p>Kune es decentralizado, a diferencia de otras redes sociales como Google+ o Facebook. Así que como en un servicio de email, puedes elegir entre diferentes proveedores de kune y evitar la centralización de datos personales.</p><p>kune.cc es solo un nodo más en esa red social descentralizada.</p>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="horizontal center-justified layout" id="sec3">
+                      <div class="flex self-center">
+                        <span id="k_home_meaning_def" style="display: none;">
+                          Kune means "together" in esperanto.
+                        </span>
+                        <span id="k_home_meaning_es" style="display: none;">
+                          Kune significa "juntos" en esperanto.
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="horizontal center-justified layout" id="sec4">
+                      <div class="flex self-center">
+                        <span id="k_home_continuation_def" style="display: none;">
+                          <p>kune is the continuation of the effort that we started in 2002 with
+                            <a href="http://ourproject.org" target="_blank">ourproject.org</a>
+                            with a main goal:</p><p>To bring the collaborative philosophy of
+                              <a href="https://en.wikipedia.org/wiki/Free_software" target="_blank">Free Software</a>
+                              to other areas.</p><p>
+                                We share our web services and tools to allow people to work together,
+                                to collaborate, to share knowledge, skills, solutions, etcetera.</p>
+                        </span>
+                        <span id="k_home_continuation_es" style="display: none;">
+                          <p>kune es la continuación del esfuerzo que comenzamos en el 2002 con
+                            <a href="http://ourproject.org" target="_blank">ourproject.org</a>
+                            con un objetivo principal:</p><p>Llevar la filosofía colaborativa del
+                              <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
+                              a otras áreas.</p><p>
+                                Compartimos nuestros servicios web y nuestras herramientas para
+                                permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
+                                soluciones, etcétera.</p>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div class="horizontal center-justified layout" id="sec5">
+                      <div class="flex self-center">
+                        <span id="k_home_super_def" style="display: none;">
+                          Welcome to the era where collaboration supersede to the corporation.
+                        </span>
+                        <span id="k_home_super_es" style="display: none;">
+                          Bienvenido/a a la era en la que la cooperación substituye a la corporación.
+                        </span>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </div> <!-- home-center -->
+
+              </paper-header-panel>
+            </div><!-- home_space -->
+
+            <!-- User Space -------------------------------------------------------- -->
+
+            <div id="user_space" class="fit" unresolved>
+              <paper-fab icon="create" id="edit_inbox_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
+              <paper-fab icon="reply" id="reply_inbox_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
+              <paper-fab icon="check" id="editdone_inbox_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
+              <div id="user_space_content">
+                <div id="inbox_tutorial_container">
+                  <div id ="inbox_tutorial">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Group Space ------------------------------------------------------- -->
+
+            <div id="group_space" class="vertical layout" unresolved>
+              <div class="horizontal layout center start-justified flex" id="group_bottombar"></div>
+              <paper-fab icon="create" id="edit_docgroup_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
+              <paper-fab icon="reply" id="reply_docgroup_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
+              <paper-fab icon="check" id="editdone_docgroup_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
+              <paper-scroll-header-panel condenses keepCondensedHeader headerHeight$="{{xsmall? headers: small? headerm: headerl}}" condensedHeaderHeight="60" scrollAwayTopbar id="core_scroll_header_panel">
+                <paper-toolbar id="header_core_toolbar" class="tall flex">
+                  <paper-drawer-panel drawerWidth="{{group_header_drawer_width}}" selected="{{group_header_selected}}" narrow rightDrawer forceNarrow id="core_drawer_group_header" touch-action="pan-y">
+                    <section id="group_core_drawer" drawer>
+                      <div class="horizontal layout">
+                        <div id="header_social_net" class="fit"></div>
+                        <div class="flex"></div>
+                        <paper-icon-button class="top black" icon="close" on-click="toggle_social_net" id="header_group_icon_settings"></paper-icon-button>
+                      </div>
+                    </section>
+                    <section id="group_core_main" main>
+                      <div id="header_groupname_div" class="top indent" class="layout horizontal">
+                        <div id="header-left-margin">
+                        </div>
+                        <div class="flex self-center">
+                          <paper-material animated id="header_group_paper_shadow" class="top">
+                            <!-- https://stackoverflow.com/questions/5775469/whats-the-valid-way-to-include-an-image-with-no-src -->
+                            <img class="top" id="header_group_logo" alt="group logo"
+                                 src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="></img>
+                          </paper-material>
+                        </div>
+                        <div id="header_group_name_group" class="vertical flex layout self-center">
+                          <div id="header_group_name" class="top"></div>
+                          <div id="header_short_group_name" class="top"><a href="#"></a></div>
+                        </div>
+
+                        <div class="horizontal layout end-justified">
+                          <div id="social_net_group" class="vertical layout">
+                            <div id="k_group_entity_toolbar" class="vertical layout end-justified">
+                            </div>
+                            <div class="horizontal layout end-justified">
+                              <paper-icon-button icon="group-work" id="group_followers" on-click="toggle_social_net">
+                              </paper-icon-button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="group_header_bottom"
+                           class="layout [[addClassIf('horizontal', !xsmall)]] [[addClassIf('vertical', xsmall)]]">
+                        <ol class="breadcrumb"><div id="miga"></div></ol>
+                        <div class="flex"></div>
+                        <div id="header_bottom_extensionbar" class="btn-group indent"></div>
+                      </div>
+                    </section>
+                  </paper-drawer-panel>
+                  <paper-material id="doc_toolbar_shadow">
+                    <paper-toolbar  id="doc_toolbar" class="medium-tall flex">
+                      <div id="doc_toolbar_extension" class="btn-group horizontal layout flex">
+                      </div>
+                    </paper-toolbar>
+                  </paper-material>
+                </paper-toolbar>
+                <section id="doc_content_section" content class="flex">
+                  <div class="horizontal layout end-justified flex">
+                    <div id="group_tools_toolbar" class="vertical layout">
+                      <paper-fab mini icon="kune:docs" class="active" id="k_tool_item_docs"></paper-fab>
+                      <paper-fab mini icon="kune:lists" id="k_tool_item_lists"></paper-fab>
+                      <paper-fab mini icon="kune:blogs" id="k_tool_item_blogs"></paper-fab>
+                      <paper-fab mini icon="kune:wiki" id="k_tool_item_wiki"></paper-fab>
+                      <paper-fab mini icon="kune:events" id="k_tool_item_events"></paper-fab>
+                      <paper-fab mini icon="kune:tasks" id="k_tool_item_tasks"></paper-fab>
+                      <paper-fab mini icon="kune:chat-tool" id="k_tool_item_chats"></paper-fab>
+                      <paper-fab mini icon="kune:barter" id="k_tool_item_barters"></paper-fab>
+                      <paper-fab mini icon="kune:trash" id="k_tool_item_trash"></paper-fab>
+                    </div> <!-- end group_tools_toolbar -->
+                  </div>
+                  <paper-material animated id="doc_content_shadow">
+                    <div id="doc_vert" class="layout vertical">
+                      <div class="horizontal layout">
+                        <div id="doc_header_left_extensionbar" class="btn-group" class="layout horizontal"></div>
+                        <div id="doc_header_flex" class="flex"></div>
+                        <div id="doc_header_right_extensionbar" class="layout horizontal"></div>
+                      </div>
+                      <div id="doc_content" >
+                      </div>
+                    </div>
+                  </paper-material>
+                </section>
+              </paper-scroll-header-panel>
+            </div>
+          </iron-pages>
+        </section>
+      </paper-drawer-panel>
+
+      <paper-toolbar id="sitebar_toolbar">
+        <!-- FIXME: scrollable seems interesting but does not works with our paper-tab -->
+        <paper-tabs selected="{{spaceselected}}" id="space_selector_paper_tabs" class="horizontal center layout">
+          <paper-tab>
+            <!-- You can put here a "src" atribute with a link to your site logo (remove the icon attribute) -->
+            <paper-icon-button icon="kune:kune" id="home_space_icon"></paper-icon-button>
+          </paper-tab>
+          <paper-tab>
+            <paper-icon-button icon="mail" id="user_space_icon"></paper-icon-button>
+          </paper-tab>
+          <paper-tab>
+            <paper-icon-button icon="group-work" id="group_space_icon"></paper-icon-button>
+          </paper-tab>
+        </paper-tabs>
+        <div id="sitebar_user_space_icon_group" class="sitebar_inbox_badge_container"></div>
+        <div id="sitebar_left_extensionbar"></div>
+        <div id="sitebar_flex" class="flex"></div>
+        <div id="sitebar_chat_icon_group" class="hidden-xs hidden-sm">
+          <paper-icon-button icon="kune:chat" id="sitebar_chat_icon"></paper-icon-button>
+        </div>
+        <paper-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn"></paper-icon-button>
+        <paper-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></paper-icon-button>
+        <div id="sitebar_right_extensionbar"></div>
+        <paper-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></paper-icon-button>
+        <paper-icon-button icon="search" on-click="toggleSearch" id="sitebar_search_icon"></paper-icon-button>
+        <div id="sitebar_search_group">
+          <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
+        </div>
+        <paper-icon-button icon="menu" id="sitebar_more_icon"></paper-icon-button>
+        <div id="sitebar_flex_end" class="sitebar_search_hide flex"></div>
+        <paper-icon-button icon="close" on-click="toggleSearch" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
+      </paper-toolbar>
+
+      <neon-animation id="opacity-infinite" duration="1000" iterations="Infinity" direction="alternate">
+        <neon-animation-keyframe>
+          <neon-animation-prop name="opacity" value="1">
+          </neon-animation-prop>
+        </neon-animation-keyframe>
+        <neon-animation-keyframe>
+          <neon-animation-prop name="opacity" value="0.3">
+          </neon-animation-prop>
+        </neon-animation-keyframe>
+      </neon-animation>
+
+      <neon-animation-group id="opacity-scale" type="seq">
+        <neon-animation duration="300">
+          <neon-animation-keyframe>
+            <neon-animation-prop name="opacity" value="1">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+          <neon-animation-keyframe>
+            <neon-animation-prop name="opacity" value="0.3">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+          <neon-animation-keyframe>
+            <neon-animation-prop name="opacity" value="1">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+        </neon-animation>
+        <neon-animation duration="300">
+          <neon-animation-keyframe>
+            <neon-animation-prop name="transform" value="scale(1)">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+          <neon-animation-keyframe>
+            <neon-animation-prop name="transform" value="scale(1.2)">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+          <neon-animation-keyframe>
+            <neon-animation-prop name="transform" value="scale(1)">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+        </neon-animation>
+      </neon-animation-group>
     </template>
 
-    <script type="text/javascript" src="app.js"></script>
+
 
     <script>
-            console.log("pre webcomponent event");
-            window.addEventListener('WebComponentsReady', function(e) {
-              // Not yet ready
-              // document.body.setAttribute('unresolved', '');
-              var s = document.createElement('script');
-              s.type = "text/javascript";
-              s.src = "ws/ws.nocache.js";
-              // Comment this line for develop this initial page without gwt code
-              // document.body.appendChild(s);
-              console.log("Webcomponent event loads GWT code");
-            });
+      window.addEventListener('WebComponentsReady', function(e) {
+        // Not yet ready
+        // document.body.setAttribute('unresolved', '');
+        var s = document.createElement('script');
+        s.type = "text/javascript";
+        s.src = "ws/ws.nocache.js";
+        // Comment this line for develop this initial page without gwt code
+        // document.body.appendChild(s);
+        console.log("Webcomponent event loads GWT code");
+      });
 
-            addEventListener('dom-change', function(e) {
-              console.log("dom-change event");
-              var scope = e.target;
+      addEventListener('dom-change', function(e) {
+        console.log("dom-change event");
+        var scope = e.target;
 
-              function resizeHome() {
-                h = document.getElementById('k_home_scroller').offsetHeight;
-                h = h - h*2/100 - 120;
-                document.getElementById('sec0').style.height=h + "px";
-                document.getElementById('sec1').style.height=h + "px";
-                document.getElementById('sec2').style.height=h + "px";
-                document.getElementById('sec3').style.height=h + "px";
-                document.getElementById('sec4').style.height=h + "px";
-                document.getElementById('sec5').style.height=h + "px";
-              }
+        function resizeHome() {
+          h = document.getElementById('k_home_scroller').offsetHeight;
+          h = h - h*2/100 - 120;
+          document.getElementById('sec0').style.height=h + "px";
+          document.getElementById('sec1').style.height=h + "px";
+          document.getElementById('sec2').style.height=h + "px";
+          document.getElementById('sec3').style.height=h + "px";
+          document.getElementById('sec4').style.height=h + "px";
+          document.getElementById('sec5').style.height=h + "px";
+        }
 
-              resizeHome();
+        resizeHome();
 
-              window.onresize = function() {
-                resizeHome();
-              }
+        window.onresize = function() {
+          resizeHome();
+        }
 
-              var backs = ["others/home-back-trees.png",
-                           "others/home-back-buck.png",
-                           "others/home-back-decen.png",
-                           "others/home-back-four-handed-seat.png",
-                           "others/home-back-op-en.png",
-                           "others/home-back-planets.png",
-                           "others/home-back-trees.png" // again
-              ];
+        var backs = ["others/home-back-trees.png",
+                     "others/home-back-buck.png",
+                     "others/home-back-decen.png",
+                     "others/home-back-four-handed-seat.png",
+                     "others/home-back-op-en.png",
+                     "others/home-back-planets.png",
+                     "others/home-back-trees.png" // again
+        ];
 
-              // Show proper language messages
-              meta = getMetaContent("kune.home.ids");
+        // Show proper language messages
+        meta = getMetaContent("kune.home.ids");
 
-              HOME_IDS_DEF_SUFFIX = "_def";
-              HOME_IDS_PREFIX = "k_home_";
+        HOME_IDS_DEF_SUFFIX = "_def";
+        HOME_IDS_PREFIX = "k_home_";
 
-              // console.log("Locale: " + locale);
-              currentLocale = locale;
+        // console.log("Locale: " + locale);
+        currentLocale = locale;
 
-              if (meta != null) {
-                // console.log("Meta: " + meta);
-                var ids = meta.split(/[\s,]+/);
-                for (i=0; i < ids.length; i++) {
-                  var id = ids[i];
-                  var lid = HOME_IDS_PREFIX + id + "_" + currentLocale
-                  var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
-                  //console.log("Id: " + ldefid);
-                  var someElement = document.getElementById(lid);
-                  var defElement = document.getElementById(ldefid);
-                  if (someElement != null) {
-                    someElement.style.display="inherit";
-                  } else if (defElement != null) {
-                    // console.log("Setting def element " + defElement);
-                    defElement.style.display="inherit";
-                  }
-                }
-              }
+        if (meta != null) {
+          // console.log("Meta: " + meta);
+          var ids = meta.split(/[\s,]+/);
+          for (i=0; i < ids.length; i++) {
+            var id = ids[i];
+            var lid = HOME_IDS_PREFIX + id + "_" + currentLocale
+            var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
+            //console.log("Id: " + ldefid);
+            var someElement = document.getElementById(lid);
+            var defElement = document.getElementById(ldefid);
+            if (someElement != null) {
+              someElement.style.display="inherit";
+            } else if (defElement != null) {
+              // console.log("Setting def element " + defElement);
+              defElement.style.display="inherit";
+            }
+          }
+        }
 
-              // This is done by gwt, but useful for development without gwt
-              scope.hideSpinner();
+        // This is done by gwt, but useful for development without gwt
+        scope.hideSpinner();
 
-              // http://www.owlcarousel.owlgraphic.com/index.html
-              var owl = $(".owl-carousel");
+        // http://www.owlcarousel.owlgraphic.com/index.html
+        var owl = $(".owl-carousel");
 
-              owl.owlCarousel(
-                {
-                  loop: true,
-                  margin: 50,
-                  nav: false,
-                  autoplay:true,
-                  center: true,
-                  // autoplaySpeed: true,
-                  autoplayTimeout:10000,
-                  autoplayHoverPause:true,
-                  // animateOut: 'fadeOut',
-                  dotsContainer: '#customOwlDots',
-                  items: 1
-                }
-              );
+        owl.owlCarousel(
+          {
+            loop: true,
+            margin: 50,
+            nav: false,
+            autoplay:true,
+            center: true,
+            // autoplaySpeed: true,
+            autoplayTimeout:10000,
+            autoplayHoverPause:true,
+            // animateOut: 'fadeOut',
+            dotsContainer: '#customOwlDots',
+            items: 1
+          }
+        );
 
-              owl.on('changed.owl.carousel', function(event) {
-                var i = event.item.index-2
-                // console.log("Show back: " + i);
-                scope.homebackimg = backs[i];
-              });
+        owl.on('changed.owl.carousel', function(event) {
+          var i = event.item.index-2
+          // console.log("Show back: " + i);
+          scope.homebackimg = backs[i];
+        });
 
-            });
-        </script>
-
+      });
+    </script>
+    <script type="text/javascript" src="app.js"></script>
     <script type="text/javascript" src="kune-polymer.js"></script>
 
 
