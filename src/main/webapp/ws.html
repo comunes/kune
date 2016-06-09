@@ -11,22 +11,22 @@
     <title>Kune</title>
 
     <!-- Use this if you want to force some language as default
-          <meta name="gwt:property" content="locale=es" /> -->
+    <meta name="gwt:property" content="locale=es" /> -->
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!--
-          We will use this string for mention this site in messages like: "Thanks for joining this site"
-          Your can use another string and the message will looks like "Thanks for joining example.org"
-          -->
+    We will use this string for mention this site in messages like: "Thanks for joining this site"
+    Your can use another string and the message will looks like "Thanks for joining example.org"
+    -->
     <meta name="kune.default.site.commonname" content="this site" />
     <!--  we use this array of id to show or hide the ids of this html depending on the locale
-          Sample: k_home_summary_es will be visible if locale=es of k_home_summary_def for
-          the default language
-          You can add more ids here and below to show/hide then.
-          -->
+    Sample: k_home_summary_es will be visible if locale=es of k_home_summary_def for
+    the default language
+    You can add more ids here and below to show/hide then.
+    -->
     <meta name="kune.home.ids" content="motto, tool_docs, tool_events, tool_chats, tool_lists, tool_wiki, tool_messages, tool_tasks, tool_barters, slide-1, buck, decen, meaning, super, continuation, copyleft" />
     <meta name="emite.httpBase" content="/http-bind/" />
     <meta name="emite.host" content="localhost" />
@@ -52,126 +52,71 @@
     <meta name="hablar.avatarProvider" content="kune-avatars" />
 
     <script language="javascript" type="text/javascript">
-      // -*- engine:js -*-
+            // -*- engine:js -*-
 
-      function getQueryVariable(variable) {
-        var query = window.location.search.substring(1);
-        var vars = query.split('&');
-        for (var i = 0; i < vars.length; i++) {
-          var pair = vars[i].split('=');
-          if (decodeURIComponent(pair[0]) == variable) {
-            return decodeURIComponent(pair[1]);
-          }
-        }
-      }
+            function getQueryVariable(variable) {
+              var query = window.location.search.substring(1);
+              var vars = query.split('&');
+              for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split('=');
+                if (decodeURIComponent(pair[0]) == variable) {
+                  return decodeURIComponent(pair[1]);
+                }
+              }
+            }
 
-      // See MetaUtils.java
-      function getMetaContent(name) {
-        var metas = document.getElementsByTagName('meta');
-        for (i=0; i < metas.length; i++) {
-          // console.log("meta: " + metas[i].getAttribute("name"));
-          if (metas[i].getAttribute("name") == name) {
-            return metas[i].getAttribute("content");
-          }
-        }
-        return "";
-      }
+            // See MetaUtils.java
+            function getMetaContent(name) {
+              var metas = document.getElementsByTagName('meta');
+              for (i=0; i < metas.length; i++) {
+                // console.log("meta: " + metas[i].getAttribute("name"));
+                if (metas[i].getAttribute("name") == name) {
+                  return metas[i].getAttribute("content");
+                }
+              }
+              return "";
+            }
 
-      // Font depending on locale
-      locale = getQueryVariable('locale');
-      fontPrefix = '<link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300,600';
-      fontSuffix = '" rel="stylesheet" type="text/css">';
+            // Font depending on locale
+            locale = getQueryVariable('locale');
+            fontPrefix = '<link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300,600';
+            fontSuffix = '" rel="stylesheet" type="text/css">';
 
-      switch (locale) {
-        case 'gl':
-          subset = '&subset=latin,greek-ext,greek';
-          break;
-        case 'ru':
-          subset = '&subset=cyrillic,cyrillic-ext,latin';
-          break;
-        case 'vi_VN':
-          subset = '&subset=vietnamese';
-        default:
-          subset = '';
-      }
-      font = fontPrefix + subset + fontSuffix;
-      document.write(font);
+            switch (locale) {
+              case 'gl':
+                subset = '&subset=latin,greek-ext,greek';
+                break;
+              case 'ru':
+                subset = '&subset=cyrillic,cyrillic-ext,latin';
+                break;
+              case 'vi_VN':
+                subset = '&subset=vietnamese';
+              default:
+                subset = '';
+            }
+            font = fontPrefix + subset + fontSuffix;
+            document.write(font);
 
-    </script>
+        </script>
 
     <!-- -*- engine:html -*- -->
 
-    <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
-
-    <link rel="import" href="bower_components/polymer/polymer.html">
-
-    <!-- Core elements -->
-    <link rel="import" href="bower_components/core-icons/core-icons.html">
-    <link rel="import"
-          href="bower_components/core-toolbar/core-toolbar.html">
-    <link rel="import"
-          href="bower_components/core-icon-button/core-icon-button.html">
-    <link rel="import"
-          href="bower_components/core-header-panel/core-header-panel.html">
-    <link rel="import" href="bower_components/core-icon/core-icon.html">
-    <link rel="import"
-          href="bower_components/core-scroll-header-panel/core-scroll-header-panel.html">
-    <link rel="import"
-          href="bower_components/core-drawer-panel/core-drawer-panel.html">
-    <link rel="import" href="bower_components/core-pages/core-pages.html">
-    <link rel="import"
-          href="bower_components/core-media-query/core-media-query.html">
-    <link rel="import"
-          href="bower_components/core-image/core-image.html">
-    <link rel="import"
-          href="bower_components/core-item/core-item.html">
-    <link rel="import" href="bower_components/core-splitter/core-splitter.html">
-    <link rel="import" href="bower_components/core-animation/core-animation.html">
-    <link rel="import" href="bower_components/core-animation/core-animation-group.html">
-
-    <!-- Other elements -->
-    <link rel="import"
-          href="bower_components/lorem-element/lorem-element.html">
-
-    <!-- Paper elements -->
-    <link rel="import"
-          href="bower_components/paper-button/paper-button.html">
-    <link rel="import"
-          href="bower_components/paper-icon-button/paper-icon-button.html">
-    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
-    <link rel="import" href="bower_components/paper-tabs/paper-tabs.html">
-    <link rel="import"
-          href="bower_components/paper-button/paper-button.html">
-    <link rel="import"
-          href="bower_components/paper-shadow/paper-shadow.html">
-    <link rel="import"
-          href="bower_components/paper-progress/paper-progress.html">
-    <link rel="import" href="bower_components/paper-toast/paper-toast.html">
-    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
-    <link rel="import" href="bower_components/paper-dialog/paper-action-dialog.html">
-    <link rel="import" href="bower_components/paper-spinner/paper-spinner.html">
-
-    <!-- Icon elements -->
-    <link rel="import" href="bower_components/core-icons/av-icons.html">
-    <link rel="import" href="bower_components/core-icons/social-icons.html">
-    <link rel="import" href="bower_components/core-icons/social-icons.html">
-    <link rel="import" href="bower_components/font-kune-polymer-icons/kune-icons.html">
-
-    <!-- Use the complete iconset for demo and development purposes only. Generate a custom component containing only icons you need using font-awesome-polymer-icons-generator
-          https://github.com/philya/font-awesome-polymer-icons-generator
-          -->
-    <link rel="import"
-          href="bower_components/font-awesome-polymer-icons/fa-icons.html">
+    <!-- will be replaced with elements/elements.vulcanized.html -->
+    <link id="bundle" rel="import" href="elements.html" async>
+    <!-- endreplace--
 
     <!-- - for debugging
-          <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
-          <link type="text/css" rel="stylesheet" href="ws/addons/bootstrap/jquery.smartmenus.bootstrap.js">
-          -->
+    <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
+    <link type="text/css" rel="stylesheet" href="ws/addons/bootstrap/jquery.smartmenus.bootstrap.js">
+    -->
 
     <link rel="shortcut icon" href="ws/favicon.ico" />
 
-    <link type="text/css" rel="stylesheet" href="ws/css/bootstrap.min.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- FIXME <link type="text/css" rel="stylesheet" href="ws/css/bootstrap.min.css"> -->
     <link type="text/css" rel="stylesheet" href="ws/addons/bootstrap/jquery.smartmenus.bootstrap.css">
+
     <link type="text/css" rel="stylesheet" href="ws/css/theme.css">
     <link type="text/css" rel="stylesheet" href="css/no-collapse.css">
     <link type="text/css" rel="stylesheet" href="ws/gxt/css/gxt-all.css">
@@ -193,88 +138,1409 @@
     <link rel="stylesheet" href="css/owl.theme.default.css">
     <link type="text/css" rel="stylesheet" href="ws/ws.css">
 
-    <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <!-- FIXME <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script> -->
     <script src="others/js/owl.carousel.min.js"></script>
   </head>
-<body fit>
-  <template id="kunetemplate" is="auto-binding">
-    <core-media-query query="(max-width: {{screensm - 1}}px)" queryMatches="{{xsmall}}"></core-media-query>
-      <core-media-query query="(min-width: {{screensm}}px) and (max-width: {{screenmd - 1}}px)" queryMatches="{{small}}"></core-media-query>
-      <core-media-query query="(min-width: {{screenmd}}px) and (max-width: {{screenlg - 1}}px)" queryMatches="{{medium}}"></core-media-query>
-      <core-media-query query="(min-width: {{screenlg}}px)" queryMatches="{{large}}"></core-media-query>
+  <body fit>
+    <style is="custom-style">
+
+      /* -*- engine:css -*- */
+      /* Home Space -------------------------------------------------------- */
+      body {
+        font-family: 'Open Sans', sans-serif;
+        /* position: absolute, etc, with fit polymer attribute in body */
+      }
+
+      .gwt_noscript_warning {
+        width: 22em;
+        position: absolute;
+        left: 50%;
+        margin-left: -11em;
+        color: red;
+        background-color: white;
+        border: 1px solid red;
+        padding: 4px;
+        font-family: sans-serif;
+      }
+
+      .inherit {
+        color: inherit;
+        background-color: inherit;
+      }
+
+      .opa8 {
+        opacity: 0.8;
+      }
+
+      .opa6 {
+        opacity: 0.6;
+      }
+
+      .opa7 {
+        opacity: 0.7;
+      }
+
+      #home_space {
+        font-size: {{xsmall? '12' : small? '16' : '16'}}px;
+      }
+
+      #home_space_core_header::shadow #mainContainer {
+        overflow: hidden;
+      }
+
+      #home_space_core_header #mainContainer { /* ff */
+        overflow: hidden;
+      }
+
+      #k_home_mask {
+        background-color: {{homebackcolor}};
+        background-image: url({{homebackimg}});
+        background-repeat: no-repeat;
+        background-position: 0% 20%;
+        background-size: {{xsmall? "inherit": small? "inherit": "100%"}};
+        padding: 30px;
+        height: {{xsmall? 220: 270}}px;
+        padding-top: {{xsmall? 80: 110}}px;
+      }
+
+      #k_home_main_container {
+        color: #FFFFFF;
+      }
+
+      #k_home_main_v {
+      }
+
+      #k_home_logoname_motto {
+      }
+
+      #k_home_logo {
+        vertical-align: top;
+        padding-right: {{xsmall ? '5px' : '20px'}};
+      }
+
+      #k_home_logoname {
+        vertical-align: top;
+      }
+
+      #k_home_logoname {
+        padding: 0px;
+      }
+
+      #k_home_toolbar {
+        margin: {{xsmall? '10px 0': '0 20px'}};
+      }
+
+      #k_home_center_container {
+        width: 100%;
+      }
+
+      #k_home_center,.buck_blockquote {
+        font-size: {{xsmall ? 16 : small? 20: 24}}px;
+      }
+
+      #k_home_center a {
+        text-decoration: none;
+      }
+
+      #k_home_center {
+        width: {{xsmall ? '100%' : small? '80%' : '60%'}};
+        margin: 0 auto;
+      }
+
+      #k_home_center div {
+        margin-top: {{xsmall? '5' : small? '10' : '10'}}px;
+        margin-bottom: {{xsmall? '5' : small? '10' : '10'}}px;
+      }
+
+      .k_home_motto {
+        font-size: {{xsmall? '22' : small? '45' : '45'}}px;
+        color: #a56941;
+        float: left;
+        line-height: 1.3em;
+        margin-top: {{xsmall? '0' : '10'}}px;
+      }
+
+      #k_home_1st_description > div {
+        margin-top: 10px;
+        text-align: justify;
+        text-justify: inter-word;
+        font-size: {{xsmall ? 16 : small? 20 : 24}}px;
+      }
+
+      #k_home_tools {
+        font-size: {{xsmall? '18' : small? '26' : '32'}}px;
+        color: #69312f;
+        width: {{xsmall? "80%": "auto"}};
+        margin: {{xsmall? "0 auto": "0"}};
+      }
+
+      #k_home_center a {
+        color: #69312f;
+      }
+
+      #sec2 > div > span > p,
+      #sec4 > div > span > p {
+        padding-top: 20px;
+      }
+
+      #k_home_tools paper-item::shadow #icon {
+        margin: 0 6px;
+      }
+
+      #k_home_scroller {
+        padding: 0 20px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        text-align: justify;
+        bottom: 40px;
+        cursor: ew-resize;
+      }
+
+      #k_home_spin_container {
+        background-color: {{homebackcolor}};
+        z-index: 1000;
+        opacity: 0.7;
+      }
+
+      #k_home_spin {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        margin: auto;
+        top: 0; left: 0; bottom: 0; right: 0;
+      }
+
+      paper-spinner-lite.k-spinner {
+        --paper-spinner-color: #a56941;
+        --paper-spinner-stroke-width: 6px;
+      }
+
+      .buck_blockquote {
+        margin: 1.5em 0 1.5em;
+        padding: 0 1em 0 2.5em;
+        position: relative;
+      }
+
+      .buck_blockquote:before {
+        color: #ccc;
+        content: "\201C";
+        font-size: 5em;
+        position: absolute;
+        left: 5px;
+        top: 0.3em;
+        line-height: 0.1em;
+      }
+
+      .buck_blockquote:after {
+        color: #ccc;
+        content: "\201D";
+        font-size: 5em;
+        position: absolute;
+        right: 3px;
+        bottom: 0em;
+        line-height: 0.1em;
+      }
+
+      .buck {
+        display: block;
+        margin-top: 5px;
+        font-style: italic;
+      }
+
+      .buck a {
+        text-decoration: none;
+      }
+
+      blockquote cite:before {
+        content: "\2014 \2009";
+      }
+
+      .k_home_kune_flattr {
+        margin-bottom: 4px;
+        opacity: 0.8;
+      }
+
+      /* Main panels ------------------------------------------------------- */
+
+      :host {
+        font-size: inherit;
+      }
+
+      core_selector {
+        font-size: 16px;
+      }
+
+      #main_core_drawer_panel {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        font-size: 16px;
+      }
+
+      #main_left_section {
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        margin-top: 40px;
+        background-color: white;
+      }
+
+      #main_right_section {
+        margin-top: 40px;
+        height: 100%;
+        box-sizing: border-box;
+        background-color: #FFF;
+      }
+
+      /* Sitebar ----------------------------------------------------------- */
+
+      #sitebar_toolbar {
+        right: 0px;
+        left: 0px;
+        height: 40px;
+        color: #FFFFFF;
+        fill: #FFFFFF;
+        top: 0px;
+        position: absolute;
+        background-color: {{homebackcolor}};
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+      }
+
+      #sitebar_toolbar .navbar-collapse {
+        padding: 0px;
+      }
+
+      #sitebar_right_extensionbar {
+        margin-top: {{xsmall? -20: 0}}px;
+      }
+
+      #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a,
+      #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a:hover,
+      #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a {
+        background-color: transparent;
+        color:rgb(105, 49, 47);
+      }
+
+      #sitebar_toolbar paper-icon-button {
+        font-size: 16px;
+      }
+
+      #sitebar_toolbar paper-icon-button,
+      #sitebar_toolbar paper-icon-button {
+        margin-left: 3px !important;
+        margin-right: 3px !important;
+      }
+
+      #sitebar_toolbar a:hover,
+      #sitebar_toolbar  paper-icon-button:hover,
+      #sitebar_toolbar paper-icon-button:hover {
+        color: #808080 !important;
+        box-shadow: none !important;
+      }
+
+      #space_selector_paper_tabs {
+        color: #FFFFFF;
+        left: 0px;
+        top: 0px;
+        position: absolute;
+        opacity: 1;
+        height: 40px;
+        background-color: {{homebackcolor}};
+      }
+
+      #home_space, #group_space, #user_space {
+        margin-top: 40px;
+      }
+
+      #user_space {
+        margin: 40px 0 0 10px;
+      }
+
+      #user_space_content {
+        overflow-y: scroll;
+      }
+
+      .full_absolute_no_sitebar,
+      #group_space {
+        position: absolute;
+        top: 0px;
+        bottom: 0px;
+        left: 0px;
+        right: 0px;
+        width: 100%;
+      }
+
+      paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar { /* ff */
+        background-color: rgb(105, 49, 47);
+        height: 4px;
+      }
+      paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
+        background-color: rgb(105, 49, 47);
+        height: 4px;
+      }
+
+      paper-button.custom > iron-icon {
+        margin-right: 4px;
+      }
+
+      paper-tab paper-ripple#ink { /* ff */
+        color: #FFF;
+        opacity: 0.3;
+      }
+
+      paper-tab::shadow #ink {
+        color: #FFF;
+        opacity: 0.3;
+      }
+
+      #sitebar_chat_icon {
+        margin-top: -10px;
+      }
+
+      #sitebar_language_btn,#sitebar_mygroups_btn,#sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
+        margin-top: -20px;
+      }
+
+      #sitebar_toolbar div.k-tb-sep {
+        display: none;
+      }
+
+      #sitebar_toolbar li {
+        list-style-type: none;
+        margin: {{xsmall? "-5px 8px 0 8px" : "-24px 8px 0 8px"}};
+      }
+
+      #sitebar_toolbar li a:hover {
+        text-decoration: none;
+      }
+
+      #sitebar_toolbar li a{
+        color: white;
+        font-size: 16px;
+      }
+
+      #paper_progress,#toast {
+        z-index:1;
+      }
+
+      #toast {
+        left: 20px;
+        right: auto;
+        bottom: 10px;
+        background-color: #d3bc5f;
+        color: white;
+      }
+
+      paper-progress {
+        --paper-progress-active-color: rgb(165, 105, 65);
+      }
+
+      #paper_progress_container {
+      }
+
+      /* Tutorials */
+      html /deep/ paper-dialog   iframe {
+        border: none;
+      }
+
+      .sitebar_inbox_badge_container {
+        top: -23px;
+        position: relative;
+        left: 95px;
+        float: left;
+      }
+
+      .sitebar_chats_badge {
+        position: relative;
+        top: -23px;
+        left: -20px;
+      }
+
+      .sitebar_inbox_badge {
+      }
+
+      .sitebar_search_hide {
+        visibility: hidden;
+        display: none;
+      }
+
+      .sitebar_search_on {
+        left: 0;
+        background: inherit;
+        z-index: 1001;
+      }
+
+      #sitebar_search_input {
+        background-color: inherit;
+        border: none;
+        font-size: 20px;
+        outline: none;
+        padding: 0;
+        color: inherit;
+      }
+
+      #sitebar_search_group {
+        margin-top: -20px;
+      }
+
+      #sitebar_chat_icon_group {
+        margin: 0px;
+      }
+
+      /* Inbox ------------------------------------------------------------- */
+
+      #inbox_title {
+        line-height: 1em;
+      }
+
+      #user_space_content,
+      #inbox_tutorial_container {
+        display: flex;
+        justify-content: center;
+        height: 100%;
+      }
+
+      #inbox_tutorial {
+        align-self: center;
+        margin: 0 15px;
+      }
+
+      #inbox_show_hide {
+        right: -20px;
+        position: absolute;
+        opacity: 0.8;
+        top: 0px;
+        border-bottom-right-radius: 50%; border-top-right-radius: 50%;
+        border-bottom-left-radius: 5px; border-top-left-radius: 5px;
+      }
+
+      #inbox_new_message {
+        right: -2px;
+        position: absolute;
+        top: 46px;
+        opacity: 0.9;
+        z-index: 1;
+        color: white;
+        background-color: rgb(153, 187, 0);
+      }
+
+      #inbox_chat_container,  #inbox_container, #inbox_core_header, #chat_core_header {
+        width: 100%;
+      }
+
+      #inbox_core_header, #chat_core_header, #inbox_container {
+        height: 100%;
+      }
+
+      #inbox_core_header {
+        left: 0px;
+        top: 0px;
+        position: absolute;
+        height: 100%;
+      }
+      #inbox_close_icon {
+        display: {{main_forcenarrow? 'none': 'inline-block'}};
+      }
+
+      #inboxchat_splitter {
+        z-index: 2;
+      }
+
+      #inbox_share_icon {
+      }
+
+      #inbox_toolbar,#chat_toolbar {
+        color: gray;
+        height: 40px;
+        background-color: rgb(230, 230, 230);
+      }
+
+      #chat_toolbar .toolbar-tools,
+      #inbox_toolbar .toolbar-tools { /* ff */
+        height: 40px;
+      }
+
+      #chat_toolbar::shadow .toolbar-tools,
+      #inbox_toolbar::shadow .toolbar-tools {
+        height: 40px;
+      }
+
+      #inbox_result_section, #chat_centerpanel {
+        /* height: 100%; */
+        /* padding: 10px; */
+        background: linear-gradient(rgb(214, 227, 231), rgb(173, 216, 230));
+      }
+
+      #inbox_search_icon {
+        display: none;
+      }
+
+      .k-digest-main {
+        min-width: 100px;
+        padding: 4px 10px 4px 4px; /* 4px padding, but a bit extra on the RHS. */
+        border-bottom: 1px solid #eee;
+        cursor: pointer;
+        color: grey;
+        font-size: 14px;
+        overflow-x: hidden;
+      }
+
+      .k-digest-main:hover {
+        background-color: #eee;
+      }
+
+      .k-digest-main.k-digest-selected {
+        background-color: #789e35;
+        color: white;
+      }
+
+      .k-digest-inner {
+        line-height: 16px;
+        /* height: 43px;  /* Exactly 2 lines of text. */ */
+        overflow: hidden;
+      }
+
+      .k-digest-mainLeft {
+      }
+
+      .k-digest-avatarsAndUnreadDiv {
+      }
+
+      .k-digest-avatarsDiv {
+      }
+
+      .k-digest-avatarsDiv {
+        margin-right: 0.7em;
+        height: 43px;
+        width: 86px;
+        background-color: transparent;
+        /* border: 1px solid #cad0d9; */
+      }
+
+      .k-digest-group-avatar {
+        height: 41px;
+        width: 41px;
+        overflow: hidden;
+      }
+
+      .k-digest-avatar {
+        height: 43px !important;
+        width: 43px !important;
+        margin-left: 2px;
+        /* border: 1px solid transparent;*/ /* #b3b3b3;*/
+      }
+
+
+
+      .k-digest-unreadDiv {
+        text-align: center;
+        margin-top: 2px;
+      }
+
+      .k-digest-unread-count {
+        color: white;
+        background-color: #99bb00;
+        /* Make a bubble. Leading is 16px, so 8px border radius is a bubble. */
+        padding: 0 0.5em;
+        border-radius: 8px;
+        -moz-border-radius: 8px;
+        -webkit-border-radius: 8px;
+      }
+
+      .k-digest-mainRight {
+      }
+
+      .k-digest-titleDiv {
+      }
+
+      .k-digest-title {
+        font-weight: bold;
+        color: grey;
+        max-height: 43px;
+      }
+
+      .k-digest-snippetDiv {
+      }
+
+      .k-digest-snippet {
+        max-height: 43px;
+      }
+
+      .k-digest-timeDiv {
+      }
+
+      .k-digest-time {
+        color: #808080;
+      }
+
+      .k-digest-unread {
+        font-weight: bold;
+        color: black;
+      }
+
+      .k-digest-time {
+        font-style: italic;
+      }
+
+      .k-digest-unread.k-digest-time {
+        font-weight: normal;
+        color: #808080;
+      }
+
+      .k-digest-selected .k-digest-title,
+      .k-digest-selected .k-digest-time,
+      .k-digest-selected .k-digest-unread {
+        color: white;
+      }
+
+      .k-inbox-showmore {
+        margin-bottom: 50px;
+      }
+
+      /* Other ------------------------------------------------------------- */
+
+      .btn_gray {
+        color: white;
+        z-index: 1;
+        background-color: gray;
+      }
+
+      .btn_green {
+        color: white;
+        background-color: rgb(153, 187, 0);
+      }
+
+      .btn_font_green {
+        color: rgb(95, 255, 39);
+      }
+
+      .black {
+        color: black;
+      }
+
+      .red {
+        color: red;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      /* html /deep/ */ paper-icon-button {
+        /* Bootstrap breaks the 1rem font size of this buttons */
+        /* font-size: 16px;  */
+        /*--iron-icon-height: 24px;
+           --iron-icon-width: 24px;*/
+      }
+
+      /* Group space ------------------------------------------------------- */
+
+      #core_scroll_header_panel {
+        width: 100%;
+        left: 0px;
+        top: 0px;
+        right: 0px;
+        bottom: 40px;
+        position: absolute;
+      }
+
+      /* background for toolbar when it is at its full size */
+
+      paper-scroll-header-panel #headerContainer { /* ff */
+        background-color: {{bg6}};
+        color: {{c6}};
+      }
+
+      paper-scroll-header-panel::shadow #headerContainer {
+        background-color: {{bg6}};
+        color: {{c6}};
+      }
+
+      paper-scroll-header-panel #headerBg { /* ff */
+        background-image: url({{group_back_image_url}});
+        background-attachment: fixed;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        opacity : 0.15 !important;
+      }
+
+      paper-scroll-header-panel::shadow #headerBg {
+        background-image: url({{group_back_image_url}});
+        background-attachment: fixed;
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        opacity : 0.15 !important;
+      }
+
+      /* background for toolbar when it is condensed  (not working because of previous opacity) */
+      paper-scroll-header-panel #condensedHeaderBg { /* ff */
+        background-color: {{bg2}};
+      }
+
+      paper-scroll-header-panel::shadow #condensedHeaderBg {
+        background-color: {{bg2}};
+      }
+
+      paper-scroll-header-panel #mainContainer { /* ff */
+        background-color: {{bg8}};
+      }
+
+      paper-scroll-header-panel::shadow #mainContainer {
+        background-color: {{bg8}};
+      }
+
+      #core_drawer_group_header {
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        height: {{xsmall? headers: small? headerm: headerl}}px;
+        border-right: 13px solid #F2F2F2;
+      }
+
+      #group_core_drawer {
+        box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+        background-color: #FFFFFF; /* {{bg5}}; */
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      #group_core_main {
+        box-sizing: border-box;
+        background-color: transparent;
+        -moz-user-select: none;
+        -khtml-user-select: none;
+        -webkit-user-select: none;
+        user-select: none;
+      }
+
+      #group_core_main paper-icon-button iron-icon {
+        padding-left: 4px;
+        height: 16px;
+        width: 16px;
+      }
+
+      #group_core_main paper-icon-button {
+        border-top-left-radius: 30px;
+        border-bottom-left-radius: 30px;
+        border: 1px solid #C0C0C0;
+        border-right: 0px;
+        margin-right: -5px;
+        height: 50px;
+        line-height: 2em;
+      }
+
+      #group_core_main paper-icon-button::shadow iron-icon {
+        padding-left: 4px;
+        height: 16px;
+        width: 16px;
+      }
+
+      #group_core_main paper-icon-button {
+        font-size: 14px;
+      }
+
+      #header_core_toolbar.tall {
+        height: {{xsmall? headers: small? headerm: headerl}}px;
+      }
+
+      #header_core_toolbar {
+        color: {{c6}};
+        fill: {{bg6}};
+        background-color: transparent;
+      }
+
+      #header_groupname_div {
+        width: 100%;
+        margin: 0px;
+        moz-user-select: text;
+        -khtml-user-select: text;
+        -webkit-user-select: text;
+        user-select: text;
+      }
+
+      #header-left-margin {
+        margin-left: {{xsmall? 10: small? 52: 52}}px;
+      }
+
+      #header_group_paper_shadow {
+        margin-top: {{xsmall? 7: small? 10: 20 }}px;
+        border-radius: 2px;
+      }
+
+      #header_group_paper_shadow,
+      #header_group_paper_shadow img:first-child {
+        width: {{xsmall ? avatarsizes : small? avatarsizem : avatarsizel}}px;
+        height: {{xsmall ? avatarsizes : small? avatarsizem : avatarsizel}}px;
+      }
+
+      .k-avatar-medium-decorator {
+        position: relative;
+        top: -6px;
+        left: {{xsmall ? avatarsizes-6: small? avatarsizem-6 : avatarsizel-6}}px;
+      }
+
+      .k-avatar-small-decorator {
+        position: relative;
+        top: 22px;
+        left: -7px;
+      }
+
+      #header_group_logo {
+        margin-right: 30px;
+        width: {{xsmall? avatarsizes: small? avatarsizem: avatarsizel }}px;
+        height: {{xsmall? avatarsizes: small? avatarsizem: avatarsizel}}px;
+      }
+
+      #header_group_name, #header_short_group_name {
+        margin-left: 20px;
+      }
+
+      #header_group_name {
+        line-height: 1em;
+      }
+
+      #header_group_name div {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 95%;
+      }
+
+      #header_group_name:hover div {
+        text-overflow: inherit;
+        overflow: visible;
+        white-space: inherit;
+      }
+
+      #header_group_name_group {
+        margin-top: {{xsmall? 0: small? 0 : 20}}px;
+      }
+
+      #header_group_name {
+        top: {{xsmall? 7: 10}}px;
+        font-size: {{xsmall ? 22 : small? 40 : 50}}px;
+      }
+
+      #header_short_group_name {
+        font-size: {{xsmall ? 12 : small? 14 : 16}}px;
+      }
+
+      #header_short_group_name a {
+        color: {{c3}};
+      }
+
+      #header_group_icon_add, #header_group_icon_settings {
+      }
+
+      #header_group_icon_settings {
+        border: 2px solid #e0e0e0;
+        margin: 5px;
+        padding: 3px;
+        border-radius: 50%;
+      }
+
+      #header_social_net {
+        overflow: auto;
+        padding-bottom: 20px;
+        background-color: white;
+      }
+
+      #social_net_group {
+        padding: {{xsmall? '0 5px 0 0': '0 5px 0 5px'}};
+      }
+
+      #k_group_entity_toolbar > div > div > button {
+        min-height: 39px;
+        color: {{c6}};
+      }
+
+      #group_header_bottom {
+        position: absolute;
+        bottom: 15px;
+        width: 100%;
+      }
+
+      /* Doc icon */
+      #document_name > div {
+        font-size: {{xsmall ? 14 : small? 22 : 28}}px;
+      }
+
+      .k-content-title-icon {
+        margin-top: {{xsmall? 9: small? 10: 14}}px;
+      }
+
+      #document_name > div > input,
+      #document_name > div > span {
+        font-size: {{xsmall ? 24 : small? 26 : 32}}px;
+        line-height: 1.3em;
+      }
+
+      #document_name {
+        margin-left: {{xsmall ? 10 : 2}}px;
+        line-height: 1em;
+        margin-bottom: 30px;
+        margin-top: 30px;
+      }
+
+      #doc_header_right_extensionbar {
+        position: absolute;
+        right: {{xsmall ? 40 : small? 60 : 60}}px;
+      }
+
+      #miga a, #miga li:before {
+        font-size: {{xsmall ? 16 : small? 20 : 22}}px;
+      }
+
+      #miga {
+        margin-left: {{xsmall ? 5 : 40}}px;
+        margin-top: {{xsmall ? -30 : 0}}px;
+        moz-user-select: text;
+        -khtml-user-select: text;
+        -webkit-user-select: text;
+        user-select: text;
+      }
+
+      .breadcrumb > div > div > div > button > i ,
+      .breadcrumb a {
+        color: {{c6}};
+      }
+
+      .breadcrumb > div > div > div > li + li:before {
+        color: {{c3}};
+      }
+
+      .breadcrumb > .active {
+        color: #777;
+      }
+
+      #edit_inbox_fab,#reply_inbox_fab,#editdone_inbox_fab {
+        position: fixed;
+        z-index: 1;
+      }
+
+      #edit_inbox_fab {
+        top: 100px;
+        right: 0px;
+      }
+
+      #reply_inbox_fab {
+        top: {{100 + (xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
+        right: 0px;
+      }
+
+      #editdone_inbox_fab {
+        top: {{100 + 2*(xsmall? toolbarFabMinMargins: toolbarFabMargins)}}px;
+        right: 0px;
+      }
+
+      #edit_docgroup_fab, #reply_docgroup_fab, #editdone_docgroup_fab {
+        position: absolute;
+        -webkit-transform: translateZ(0);
+        z-index: 1;
+        left: {{xsmall ? -7 : 31}}px;
+      }
+
+      #edit_docgroup_fab {
+        top: {{xsmall ? 210 : small? 280 : 310}}px;
+      }
+
+      #reply_docgroup_fab {
+        top: {{xsmall? 210 + toolbarFabMinMargins: (small? 280 : 310) + toolbarFabMargins}}px;
+      }
+
+      #editdone_docgroup_fab {
+        top: {{xsmall? 210 + 2*toolbarFabMinMargins: (small? 280 : 310) + 2*toolbarFabMargins}}px;
+      }
+
+      paper-fab[disabled] {
+        color: #808080;
+        background-color:#CCC;
+      }
+
+      #doc_toolbar_shadow {
+        right: 0px;
+        left: -10px;
+        bottom: 0px;
+        height: 40px;
+        position: absolute;
+        margin: {{xsmall? '0px 25px 0px 20px' : '0px 75px 0px 70px'}};
+        top: {{xsmall? 134 : small? 154: 186}}px;
+      }
+
+      paper-material#doc_toolbar_shadow paper-toolbar#doc_toolbar div#topBar.toolbar-tools,
+      #doc_toolbar {
+        color: gray;
+        height: 40px;
+        background-color: white;
+      }
+
+      #doc_toolbar /deep/ .toolbar-tools {
+        height: 40px;
+      }
+
+      paper-toolbar.medium-tall {
+        line-height: 20px;
+      }
+
+      #doc_share_btn {
+        right: 10px;
+        position: relative;
+        top: {{xsmall ? 10 : 0}}px;
+      }
+
+      #group_tools_toolbar {
+        right: {{xsmall ? 0 : 0}}px;
+        top: {{xsmall ? 270 : small? 280: 310}}px;
+        position: absolute;
+        z-index:  {{xsmall ? 1 : auto}};
+      }
+
+      #group_tools_toolbar .k-drop-allowed {
+        border-right: none !important;
+      }
+
+      #group_tools_toolbar paper-fab {
+        color: grey;
+        background-color: transparent;
+        border-top-left-radius: 8px !important;
+        border-bottom-left-radius: 8px !important;
+        border-top-right-radius: 0px !important;
+        border-bottom-right-radius: 0px !important;
+        margin-bottom: 5px; /* Distance between tools */
+      }
+
+      #group_tools_toolbar paper-fab::shadow paper-material {
+        visibility: visible;
+      }
+
+      #group_tools_toolbar paper-fab:hover::shadow paper-material {
+        visibility: hidden;
+      }
+
+      #group_tools_toolbar paper-fab.active::shadow paper-material {
+        visibility: visible;
+      }
+
+      #group_tools_toolbar paper-fab paper-material { /* ff */
+        visibility: visible;
+      }
+
+      #group_tools_toolbar paper-fab:hover paper-material { /* ff */
+        visibility: hidden;
+      }
+
+      #group_tools_toolbar paper-fab.active paper-material { /* ff */
+        visibility: visible;
+      }
+
+      #group_tools_toolbar .active:hover,
+      #group_tools_toolbar .active {
+        color: {{c3}};
+        background-color: {{bg3}};
+      }
+
+      #group_tools_toolbar paper-fab {
+        background-color: #eee;
+        color: {{bg3}};
+      }
+
+      #group_tools_toolbar paper-fab::shadow #icon {
+        left: 4px;
+      }
+
+      div#group_tools_toolbar paper-fab iron-icon#icon {  /* ff */
+        witdh: 20px;
+        height:20px;
+        left: 4px;
+      }
+
+      #group_tools_toolbar paper-fab[mini]::shadow #icon {
+        witdh: 20px;
+        height:20px;
+        left: 4px;
+      }
+
+      #group_tools_toolbar paper-fab:hover {
+        color: rgb(231, 231, 231);
+        background-color: {{bg4}};
+      }
+
+      #group_tools_toobar paper-item {
+        /* Initially
+           display: none; */
+      }
+
+      #group_tools_toolbar paper-item #label { /* ff */
+        display: none;
+      }
+
+      #group_tools_toolbar paper-item2::shadow #label {
+        display: none;
+      }
+
+      #doc_share_btn {
+        color: grey;
+      }
+
+      #doc_content_shadow {
+        font-size: 16px;
+        padding: {{xsmall ? '30px 40px 10px 10px' : '20px 60px 60px' }};
+        background-color: #FFFFFF;
+        min-height: {{docContentMinHeight + (xsmall? 100: 0)}}px;
+        margin-bottom: 80px;
+      }
+
+      #doc_content_section {
+        padding: {{xsmall ? '10px 10px 10px 10px' : '60px' }};
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding-top: {{xsmall? headers + 50: small? headerm + 60: headerl + 60}}px;
+        overflow-y: scroll; /* This makes the scrollbar always visible, so the tools-bar is always in the same position */
+      }
+
+      #header_bottom {
+        position: absolute;
+        bottom: 10px;
+        padding: {{xsmall? '0': '0 80px 0 5px'}};
+      }
+
+      #home_bottombar,
+      #group_bottombar {
+        right: 0px;
+        left: 0px;
+        height: 40px;
+        bottom: 0px;
+        position: absolute;
+        border-top-color: rgb(231, 231, 231);
+        border-top-style: solid;
+        border-top-width: 1px;
+        color: rgb(51,51,51);
+        background-color: rgb(248, 248, 248);
+        padding: 0 15px;
+      }
+
+      #home_bottombar a,
+      #home_bottombar a:visited,
+      #home_bottombar a:hover {
+        text-decoration: none;
+      }
+
+      #home_copyleft {
+        font-size: 12px;
+        color: grey;
+        text-align: right;
+      }
+
+      #home_copyleft a {
+        text-decoration: underline;
+        color: gray;
+      }
+
+      #group_bottombar a {
+        color: rgb(51,51,51);
+      }
+
+      #home_bottombar > div > a > img {
+        /* flattr */
+        margin-top: -30px;
+      }
+
+      #group_bottombar > div > div > img {
+        /* license */
+        opacity: 0.7;
+        padding-left: {{xsmall ? '10px' : '60px' }};
+      }
+
+      /* Chat -------------------------------------------------------------- */
+
+      #sitebar_user_btn iron-icon { /* ff */
+        background-image: url({{user_icon_back_image_url}});
+        border-radius: 50%;
+        background-size: 24px;
+        margin-right: 3px;
+      }
+
+      #sitebar_user_btn::shadow iron-icon {
+        background-image: url({{user_icon_back_image_url}});
+        border-radius: 50%;
+        background-size: 24px;
+        margin-right: 3px;
+      }
+
+      /* Size to container. */
+      .self {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: white;
+        z-index: 0;
+      }
+
+      .searchPanelWidget {
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+        background-color: white;
+        z-index: 0;
+        bottom: 0;
+      }
+
+      #chat_centerpanel > div {
+        position: absolute;
+        top: 50%;
+        bottom: 50px;
+        left: 0;
+        right: 0;
+        margin-top: 40px;
+      }
+
+      #gwt-debug-RosterWidget-roster > div:nth-child(2),
+      #gwt-debug-RosterWidget-actions {
+        height: 26px !important;
+      }
+
+      #gwt-debug-RosterWidget-scroll {
+        top: 8px !important;
+      }
+
+      .hablar-HablarWidget {
+        position: fixed;
+        width: 98%;
+        height: 100%;
+      }
+
+      .iron-icon-status-away iron-icon path:nth-child(2) { /* ff */
+        fill: #FFFFFF;
+      }
+
+      .iron-icon-status-away::shadow iron-icon path:nth-child(2) {
+        fill: #FFFFFF;
+      }
+
+      .iron-icon-status-away iron-icon path:first-child { /* ff */
+        fill: rgb(144, 144, 144);
+      }
+
+      .iron-icon-status-away::shadow iron-icon path:first-child {
+        fill: rgb(144, 144, 144);
+      }
+
+      .iron-icon-status-online iron-icon { /* ff */
+        fill: rgb(95, 255, 39);
+      }
+
+      .iron-icon-status-online::shadow iron-icon {
+        fill: rgb(95, 255, 39);
+      }
+
+      .iron-icon-status-busy iron-icon { /* ff */
+        fill: rgb(255, 85, 85);
+      }
+
+      .iron-icon-status-busy::shadow iron-icon {
+        fill: rgb(255, 85, 85);
+      }
+
+      .iron-icon-status-offline iron-icon { /* ff */
+        fill: rgb(128, 128, 128);
+      }
+
+      .iron-icon-status-offline::shadow iron-icon {
+        fill: rgb(128, 128, 128);
+      }
+
+    </style>
+
+    <template id="kunetemplate" is="dom-bind">
+      <iron-media-query query="(max-width: {{screensm - 1}}px)" queryMatches="{{xsmall}}"></iron-media-query>
+      <iron-media-query query="(min-width: {{screensm}}px) and (max-width: {{screenmd - 1}}px)" queryMatches="{{small}}"></iron-media-query>
+      <iron-media-query query="(min-width: {{screenmd}}px) and (max-width: {{screenlg - 1}}px)" queryMatches="{{medium}}"></iron-media-query>
+      <iron-media-query query="(min-width: {{screenlg}}px)" queryMatches="{{large}}"></iron-media-query>
 
       <!-- Extra small devices  -->
-      <core-media-query query="min-width: {{screenxs}}px" queryMatches="{{xsmallup}}"></core-media-query>
+      <iron-media-query query="min-width: {{screenxs}}px" queryMatches="{{xsmallup}}"></iron-media-query>
       <!-- Small devices (tablets, 768px and up) -->
-      <core-media-query query="min-width: {{screensm}}px" queryMatches="{{smallup}}"></core-media-query>
+      <iron-media-query query="min-width: {{screensm}}px" queryMatches="{{smallup}}"></iron-media-query>
       <!-- Medium devices (desktops, 992px and up) -->
-      <core-media-query query="min-width: {{screenmd}}px" queryMatches="{{mediumup}}"></core-media-query>
+      <iron-media-query query="min-width: {{screenmd}}px" queryMatches="{{mediumup}}"></iron-media-query>
       <!-- Large devices (large desktops, 1200px and up) -->
-      <core-media-query query="min-width: {{screenlg}}px" queryMatches="{{largeup}}"></core-media-query>
+      <iron-media-query query="min-width: {{screenlg}}px" queryMatches="{{largeup}}"></iron-media-query>
 
-      <div id="paper_progress_container" horizontal center-justified layout>
+      <div id="paper_progress_container" class="horizontal center-justified layout">
         <paper-progress indeterminate id="paper_progress"></paper-progress>
       </div>
-      <div id="paper_toast_container" horizontal end-justified layout>
+      <div id="paper_toast_container" class="horizontal end-justified layout">
         <paper-toast duration="5000" id="toast"></paper-toast>
       </div>
-
-      <div id="k_home_spin_container" fit>
-        <paper-spinner id="k_home_spin" active="{{spin_active}}"></paper-spinner>
+      <div id="k_home_spin_container" class="layout fit">
+        <paper-spinner-lite alt="Loading" class="k-spinner" id="k_home_spin" active="{{spin_active}}"></paper-spinner>
       </div>
 
       <!-- https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel -->
-      <core-drawer-panel transition drawerWidth="{{xsmall? 270: small? 300: 400}}px" responsivewidth="900px" selected="{{main_selected}}" narrow="{{main_narrow}}" id="main_core_drawer_panel" forcenarrow="{{main_forcenarrow}}" disableSwipe="{{main_disableSwipe}}" disableEdgeSwipe="{{main_disableEdgeSwipe}}"  touch-action="pan-y">
+      <paper-drawer-panel transition drawerWidth="{{xsmall? 270: small? 300: 400}}px" responsivewidth="900px" selected="{{main_selected}}" narrow="{{main_narrow}}" id="main_core_drawer_panel" forcenarrow="{{main_forcenarrow}}" disableSwipe="{{main_disableSwipe}}" disableEdgeSwipe="{{main_disableEdgeSwipe}}"  touch-action="pan-y">
         <section id="main_left_section" drawer>
           <div id="inbox_container" fit>
-            <core-header-panel mode="waterfall" id="inbox_core_header">
-              <core-toolbar id="inbox_toolbar">
+            <paper-header-panel mode="waterfall" id="inbox_core_header">
+              <paper-toolbar id="inbox_toolbar">
                 <paper-fab icon="create" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
                 <div id="inbox_title"></div>
                 <div flex></div>
-                <div layout horizontal end-justified>
+                <div class="layout horizontal end-justified">
                   <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
                   <paper-icon-button icon="launch" id="inbox_share_icon"></paper-icon-button>
-                  <paper-icon-button icon="arrow-back" on-click="{{closeMainDrawer}}" id="inbox_close_icon"></paper-icon-button>
+                  <paper-icon-button icon="arrow-back" on-click="closeMainDrawer" id="inbox_close_icon"></paper-icon-button>
                 </div>
-              </core-toolbar>
+              </paper-toolbar>
               <section id="inbox_result_section">
-                <div vertical layout fit>
+                <div class="vertical layout fit">
                   <div id="inbox_result" flex>
                   </div>
                   <div id="chat_centerpanel" flex>
-                    <core-header-panel mode="seamed" flex>
-                      <core-toolbar id="chat_toolbar">
+                    <paper-header-panel mode="seamed" flex>
+                      <paper-toolbar id="chat_toolbar">
                         <div>Chat</div>
-                      </core-toolbar>
-                    </core-header-panel>
+                      </paper-toolbar>
+                    </paper-header-panel>
                   </div>
                 </div>
               </section>
-            </core-header-panel>
+            </paper-header-panel>
           </div>
           <paper-fab icon="view-column" mini id="inbox_show_hide" class="btn_gray" core-drawer-toggle></paper-fab>
         </section>
         <section id="main_right_section" main>
-          <core-pages selected="{{spaceselected}}" class="full_absolute_no_sitebar" notap>
+          <iron-pages id="iron-main-pages" selected="{{spaceselected}}" class="full_absolute_no_sitebar" notap>
 
             <!-- Home Space -------------------------------------------------------- -->
 
             <div id="home_space">
-              <core-header-panel id="home_space_core_header" mode="seamed" fit>
-                <core-toolbar id="k_home_mask">
-                  <div id="k_home_main_container" horizontal center-justified layout flex>
+              <paper-header-panel id="home_space_core_header" mode="seamed" fit>
+                <paper-toolbar id="k_home_mask">
+                  <div id="k_home_main_container" class="horizontal center-justified layout flex">
                     <div id="k_home_main_v" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
-                      <div id="k_home_logo_container" horizontal layout>
+                      <div id="k_home_logo_container" class="horizontal layout">
                         <div>
                           <span id="k_home_logo">
-                            <core-image fade preload src="./others/kune-logo-alone{{small? '-big': xsmall ? '-med': '-big'}}.png" alt="kune-logo-alone"></core-image>
+                            <iron-image fade preload src="./others/kune-logo-alone{{small? '-big': xsmall ? '-med': '-big'}}.png" alt="kune-logo-alone"></iron-image>
                           </span>
                         </div>
-                        <div vertical layout>
+                        <div class="vertical layout">
                           <div>
                             <span id="k_home_logoname">
-                              <core-image fade preload src="./others/kune-logo-name-alone{{small ? '-big': xsmall? '-med': '-big'}}.png" alt="kune-longo-name"></core-image>
+                              <iron-image fade preload src='./others/kune-logo-name-alone{{small ? "-big": xsmall? "-med": "-big"}.png' alt="kune-longo-name"></iron-image>
                             </span>
                           </div>
                           <div>
@@ -283,15 +1549,15 @@
                           </div>
                         </div> <!-- end of logoname -->
                       </div> <!-- end of logo -->
-                      <div id="k_home_main_buttons" horizontal end-justified layout>
-                        <div id="k_home_toolbar" vertical layout>
+                      <div id="k_home_main_buttons" class="horizontal end-justified layout">
+                        <div id="k_home_toolbar" class="vertical layout">
                         </div>
                       </div>
                     </div>
                   </div>
-                </core-toolbar>
+                </paper-toolbar>
 
-                <div horizontal layout center id="home_bottombar" flex>
+                <div class="horizontal layout center" flex id="home_bottombar">
                   <div flex class="hidden-xs">
                     <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
                       <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
@@ -302,8 +1568,8 @@
                     </a>
                     <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
                       <img
-                         src="//api.flattr.com/button/flattr-badge-large.png"
-                         alt="Flattr this" title="Flattr this" border="0">
+                          src="//api.flattr.com/button/flattr-badge-large.png"
+                          alt="Flattr this" title="Flattr this" border="0">
                     </a>
                   </div>
                   <div flex class="owl-theme hidden-xs">
@@ -325,7 +1591,7 @@
                 <div id="k_home_scroller" fit unresolved>
                   <div id="k_home_center" class="owl-carousel" >
 
-                    <div horizontal center-justified layout id="sec0">
+                    <div class="horizontal center-justified layout" id="sec0">
                       <div self-center>
                         <span style="display: none;" id="k_home_slide-1_def">
                           kune it's a social network where you can communicate,
@@ -335,50 +1601,50 @@
                           kune es una red social donde puedes comunicarte colaborar y
                           compartir entre iguales, usando diferentes herramientas web:
                         </span>
-                        <div id="k_home_tools" wrap justified vertical?="{{!xsmall}}" horizontal?="{{xsmall}}" layout>
-                          <div wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
-                          <core-item icon="kune:docs" horizontal center layout>
-                            <span id="k_home_tool_docs_def" class="hidden-xs" style="display: none;">documents</span>
-                            <span id="k_home_tool_docs_es" class="hidden-xs" style="display: none;">documentos</span>
-                          </core-item>
-                          <core-item icon="kune:events" horizontal center layout>
-                            <span id="k_home_tool_events_def" class="hidden-xs" style="display: none;">calendars</span>
-                            <span id="k_home_tool_events_es" class="hidden-xs" style="display: none;">calendarios</span>
-                          </core-item>
-                          <core-item icon="kune:chat-tool" horizontal center layout>
-                            <span id="k_home_tool_chats_def" class="hidden-xs"  style="display: none;">chats</span>
-                            <span id="k_home_tool_chats_es" class="hidden-xs" style="display: none;">chats</span>
-                          </core-item>
-                          <core-item icon="kune:lists" horizontal center layout>
-                            <span id="k_home_tool_lists_def" class="hidden-xs" style="display: none;">forums</span>
-                            <span id="k_home_tool_lists_es" class="hidden-xs" style="display: none;">foros</span>
-                          </core-item>
+                        <div id="k_home_tools" class="wrap justified vertical?='{{!xsmall}}' horizontal?='{{xsmall}}' layout">
+                          <div class='wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout'>
+                            <paper-item icon="kune:docs" class="horizontal center layout">
+                              <span id="k_home_tool_docs_def" class="hidden-xs" style="display: none;">documents</span>
+                              <span id="k_home_tool_docs_es" class="hidden-xs" style="display: none;">documentos</span>
+                            </paper-item>
+                            <paper-item icon="kune:events" class="horizontal center layout">
+                              <span id="k_home_tool_events_def" class="hidden-xs" style="display: none;">calendars</span>
+                              <span id="k_home_tool_events_es" class="hidden-xs" style="display: none;">calendarios</span>
+                            </paper-item>
+                            <paper-item icon="kune:chat-tool" class="horizontal center layout">
+                              <span id="k_home_tool_chats_def" class="hidden-xs"  style="display: none;">chats</span>
+                              <span id="k_home_tool_chats_es" class="hidden-xs" style="display: none;">chats</span>
+                            </paper-item>
+                            <paper-item icon="kune:lists" class="horizontal center layout">
+                              <span id="k_home_tool_lists_def" class="hidden-xs" style="display: none;">forums</span>
+                              <span id="k_home_tool_lists_es" class="hidden-xs" style="display: none;">foros</span>
+                            </paper-item>
+                          </div>
+                          <div class='wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout'>
+                            <paper-item icon="kune:wiki" class="horizontal center layout">
+                              <span id="k_home_tool_wiki_def" class="hidden-xs" style="display: none;">wiki</span>
+                              <span id="k_home_tool_wiki_es" class="hidden-xs" style="display: none;">wiki</span>
+                            </paper-item>
+                            <paper-item icon="kune:message" class="horizontal center layout">
+                              <span id="k_home_tool_messages_def" class="hidden-xs" style="display: none;">messages</span>
+                              <span id="k_home_tool_messages_es" class="hidden-xs" style="display: none;">mensajes</span>
+                            </paper-item>
+                            <paper-item icon="kune:tasks" class="horizontal center layout">
+                              <span id="k_home_tool_tasks_def" class="hidden-xs" style="display: none;">tasks</span>
+                              <span id="k_home_tool_tasks_es" class="hidden-xs" style="display: none;">tareas</span>
+                            </paper-item>
+                            <paper-item icon="kune:barter" class="horizontal center layout">
+                              <span id="k_home_tool_barters_def" class="hidden-xs" style="display: none;">barters</span>
+                              <span id="k_home_tool_barters_es" class="hidden-xs" style="display: none;">trueques</span>
+                            </paper-item>
+                          </div> <!-- end kune icons 2 columns -->
                         </div>
-                        <div wrap justified vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
-                          <core-item icon="kune:wiki" horizontal center layout>
-                            <span id="k_home_tool_wiki_def" class="hidden-xs" style="display: none;">wiki</span>
-                            <span id="k_home_tool_wiki_es" class="hidden-xs" style="display: none;">wiki</span>
-                          </core-item>
-                          <core-item icon="kune:message" horizontal center layout>
-                            <span id="k_home_tool_messages_def" class="hidden-xs" style="display: none;">messages</span>
-                            <span id="k_home_tool_messages_es" class="hidden-xs" style="display: none;">mensajes</span>
-                          </core-item>
-                          <core-item icon="kune:tasks" horizontal center layout>
-                            <span id="k_home_tool_tasks_def" class="hidden-xs" style="display: none;">tasks</span>
-                            <span id="k_home_tool_tasks_es" class="hidden-xs" style="display: none;">tareas</span>
-                          </core-item>
-                          <core-item icon="kune:barter" horizontal center layout>
-                            <span id="k_home_tool_barters_def" class="hidden-xs" style="display: none;">barters</span>
-                            <span id="k_home_tool_barters_es" class="hidden-xs" style="display: none;">trueques</span>
-                          </core-item>
-                        </div> <!-- end kune icons 2 columns -->
-                        </div>
-                        </div>
+                      </div>
                     </div>
 
-                    <div horizontal center-justified layout id="sec1">
+                    <div class="horizontal center-justified layout" id="sec1">
                       <div self-center>
-                        <div horizontal center-justified layout flex>
+                        <div class="horizontal center-justified layout" flex>
                         </div>
                         <span id="k_home_buck_def" style="display: none;">
                           <blockquote class="buck_blockquote">
@@ -400,8 +1666,8 @@
                     </div>
 
 
-                    <div horizontal center-justified layout id="sec2">
-                      <div self-center>
+                    <div class="horizontal center-justified layout" id="sec2">
+                      <div class="flex self-center">
                         <span id="k_home_decen_def" style="display: none;">
                           <p>Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.</p><p>kune.cc is just one more node in this decentralized social network.</p>
                         </span>
@@ -411,8 +1677,8 @@
                       </div>
                     </div>
 
-                    <div horizontal center-justified layout id="sec3">
-                      <div self-center>
+                    <div class="horizontal center-justified layout" id="sec3">
+                      <div class="flex self-center">
                         <span id="k_home_meaning_def" style="display: none;">
                           Kune means "together" in esperanto.
                         </span>
@@ -422,32 +1688,32 @@
                       </div>
                     </div>
 
-                    <div horizontal center-justified layout id="sec4">
-                      <div self-center>
+                    <div class="horizontal center-justified layout" id="sec4">
+                      <div class="flex self-center">
                         <span id="k_home_continuation_def" style="display: none;">
-                            <p>kune is the continuation of the effort that we started in 2002 with
+                          <p>kune is the continuation of the effort that we started in 2002 with
                             <a href="http://ourproject.org" target="_blank">ourproject.org</a>
                             with a main goal:</p><p>To bring the collaborative philosophy of
-                            <a href="https://en.wikipedia.org/wiki/Free_software" target="_blank">Free Software</a>
-                            to other areas.</p><p>
-                            We share our web services and tools to allow people to work together,
-                            to collaborate, to share knowledge, skills, solutions, etcetera.</p>
+                              <a href="https://en.wikipedia.org/wiki/Free_software" target="_blank">Free Software</a>
+                              to other areas.</p><p>
+                                We share our web services and tools to allow people to work together,
+                                to collaborate, to share knowledge, skills, solutions, etcetera.</p>
                         </span>
                         <span id="k_home_continuation_es" style="display: none;">
                           <p>kune es la continuación del esfuerzo que comenzamos en el 2002 con
-                          <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                          con un objetivo principal:</p><p>Llevar la filosofía colaborativa del
-                          <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
-                          a otras áreas.</p><p>
-                          Compartimos nuestros servicios web y nuestras herramientas para
-                          permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
-                          soluciones, etcétera.</p>
+                            <a href="http://ourproject.org" target="_blank">ourproject.org</a>
+                            con un objetivo principal:</p><p>Llevar la filosofía colaborativa del
+                              <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
+                              a otras áreas.</p><p>
+                                Compartimos nuestros servicios web y nuestras herramientas para
+                                permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
+                                soluciones, etcétera.</p>
                         </span>
                       </div>
                     </div>
 
-                    <div horizontal center-justified layout id="sec5">
-                      <div self-center>
+                    <div class="horizontal center-justified layout" id="sec5">
+                      <div class="flex self-center">
                         <span id="k_home_super_def" style="display: none;">
                           Welcome to the era where collaboration supersede to the corporation.
                         </span>
@@ -461,12 +1727,12 @@
                   </div>
                 </div> <!-- home-center -->
 
-              </core-header-panel>
+              </paper-header-panel>
             </div><!-- home_space -->
 
             <!-- User Space -------------------------------------------------------- -->
 
-            <div id="user_space" fit unresolved>
+            <div id="user_space" class="fit" unresolved>
               <paper-fab icon="create" id="edit_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="reply" id="reply_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="check" id="editdone_inbox_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
@@ -474,71 +1740,85 @@
                 <div id="inbox_tutorial_container">
                   <div id ="inbox_tutorial">
                   </div>
+                  <p>large: {{large}}</p>
+                  <p>small: {{small}}</p>
+                  <p>xsmall: <span>{{xsmall}}</span></p>
+                  <template is="dom-if" if="{{!large}}">
+                    The viewport is less than 600px wide, so the items' titles will
+                    not float.
+                  </template>
+                  <template is="dom-if" if="{{large}}">
+                    The viewport is at least 600px, so the items' titles will float
+                    to the left.
+                  </template>
+
+
+
                 </div>
               </div>
             </div>
 
             <!-- Group Space ------------------------------------------------------- -->
 
-            <div id="group_space" vertical layout unresolved>
-              <div horizontal layout center start-justified id="group_bottombar" flex></div>
+            <div id="group_space" class="vertical layout" unresolved>
+              <div class="horizontal layout center start-justified" id="group_bottombar" flex></div>
               <paper-fab icon="create" id="edit_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="reply" id="reply_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="check" id="editdone_docgroup_fab" mini?="{{xsmall}}" class="btn_green"></paper-fab>
-              <core-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">
-                <core-toolbar id="header_core_toolbar" class="tall" flex>
-                  <core-drawer-panel transition drawerwidth="{{group_header_drawer_width}}" selected="{{group_header_selected}}" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
+              <paper-scroll-header-panel condenses keepcondensedheader headerheight="{{xsmall? headers: small? headerm: headerl}}" condensedheaderheight="60" scrollawaytopbar id="core_scroll_header_panel">
+                <paper-toolbar id="header_core_toolbar" class="tall" flex>
+                  <paper-drawer-panel transition drawerwidth="{{group_header_drawer_width}}" selected="{{group_header_selected}}" narrow rightdrawer forcenarrow id="core_drawer_group_header" touch-action="pan-y">
                     <section id="group_core_drawer" drawer>
-                      <div horizontal layout>
-                        <div id="header_social_net" fit></div>
+                      <div class="horizontal layout">
+                        <div id="header_social_net" class="fit"></div>
                         <div flex></div>
-                        <paper-icon-button class="top black" icon="close" on-click="{{toggle_social_net}}" id="header_group_icon_settings"></paper-icon-button>
+                        <paper-icon-button class="top black" icon="close" on-click="toggle_social_net" id="header_group_icon_settings"></paper-icon-button>
                       </div>
                     </section>
                     <section id="group_core_main" main>
-                      <div id="header_groupname_div" class="top indent" layout horizontal>
+                      <div id="header_groupname_div" class="top indent" class="layout horizontal">
                         <div id="header-left-margin">
                         </div>
-                        <div self-center>
-                          <paper-shadow animated id="header_group_paper_shadow" class="top">
+                        <div class="flex self-center">
+                          <paper-material animated id="header_group_paper_shadow" class="top">
                             <!-- https://stackoverflow.com/questions/5775469/whats-the-valid-way-to-include-an-image-with-no-src -->
                             <img class="top" id="header_group_logo" alt="group logo"
                                  src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="></img>
-                          </paper-shadow>
+                          </paper-material>
                         </div>
-                        <div flex vertical id="header_group_name_group" layout self-center>
+                        <div id="header_group_name_group" class="vertical flex layout self-center">
                           <div id="header_group_name" class="top"></div>
                           <div id="header_short_group_name" class="top"><a href="#"></a></div>
                         </div>
 
-                        <div horizontal layout end-justified>
-                          <div id="social_net_group" vertical  layout>
-                            <div id="k_group_entity_toolbar" vertical layout end-justified>
+                        <div class="horizontal layout end-justified">
+                          <div id="social_net_group" class="vertical layout">
+                            <div id="k_group_entity_toolbar" class="vertical layout end-justified">
                             </div>
-                            <div horizontal layout end-justified>
-                              <core-icon-button icon="group-work" id="group_followers" on-click="{{toggle_social_net}}">
-                              </core-icon-button>
+                            <div class="horizontal layout end-justified">
+                              <paper-icon-button icon="group-work" id="group_followers" on-click="toggle_social_net">
+                              </paper-icon-button>
                             </div>
                           </div>
                         </div>
                       </div>
-                      <div id="group_header_bottom" vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout>
+                      <div id="group_header_bottom" class='vertical?="{{xsmall}}" horizontal?="{{!xsmall}}" layout'>
                         <ol class="breadcrumb"><div id="miga"></div></ol>
                         <div flex></div>
                         <div id="header_bottom_extensionbar" class="btn-group indent"></div>
                       </div>
                     </section>
-                  </core-drawer-panel>
-                  <paper-shadow id="doc_toolbar_shadow">
-                    <core-toolbar  id="doc_toolbar" class="medium-tall" flex>
-                      <div id="doc_toolbar_extension" class="btn-group" horizontal layout flex>
+                  </paper-drawer-panel>
+                  <paper-material id="doc_toolbar_shadow">
+                    <paper-toolbar  id="doc_toolbar" class="medium-tall" flex>
+                      <div id="doc_toolbar_extension" class="btn-group" class="horizontal layout" flex>
                       </div>
-                    </core-toolbar>
-                  </paper-shadow>
-                </core-toolbar>
+                    </paper-toolbar>
+                  </paper-material>
+                </paper-toolbar>
                 <section id="doc_content_section" content flex>
-                  <div horizontal layout end-justified flex>
-                    <div id="group_tools_toolbar" vertical layout>
+                  <div class="horizontal layout end-justified" flex>
+                    <div id="group_tools_toolbar" class="vertical layout">
                       <paper-fab mini icon="kune:docs" class="active" id="k_tool_item_docs"></paper-fab>
                       <paper-fab mini icon="kune:lists" id="k_tool_item_lists"></paper-fab>
                       <paper-fab mini icon="kune:blogs" id="k_tool_item_blogs"></paper-fab>
@@ -550,28 +1830,27 @@
                       <paper-fab mini icon="kune:trash" id="k_tool_item_trash"></paper-fab>
                     </div> <!-- end group_tools_toolbar -->
                   </div>
-                  <paper-shadow animated id="doc_content_shadow">
-                    <div id="doc_vert" layout vertical>
-                      <div horizontal layout>
-                        <div id="doc_header_left_extensionbar" class="btn-group" layout horizontal></div>
+                  <paper-material animated id="doc_content_shadow">
+                    <div id="doc_vert" class="layout vertical">
+                      <div class="horizontal layout">
+                        <div id="doc_header_left_extensionbar" class="btn-group" class="layout horizontal"></div>
                         <div id="doc_header_flex" flex></div>
-                        <div id="doc_header_right_extensionbar" layout horizontal></div>
+                        <div id="doc_header_right_extensionbar" class="layout horizontal"></div>
                       </div>
                       <div id="doc_content" >
                       </div>
                     </div>
-                  </paper-shadow>
+                  </paper-material>
                 </section>
-              </core-scroll-header-panel>
+              </paper-scroll-header-panel>
             </div>
-
-          </core-pages>
+          </iron-pages>
         </section>
-      </core-drawer-panel>
+      </paper-drawer-panel>
 
-      <core-toolbar id="sitebar_toolbar">
+      <paper-toolbar id="sitebar_toolbar">
         <!-- FIXME: scrollable seems interesting but does not works with our paper-tab -->
-        <paper-tabs selected="{{spaceselected}}" id="space_selector_paper_tabs" horizontal center layout>
+        <paper-tabs selected="{{spaceselected}}" id="space_selector_paper_tabs" class="horizontal center layout">
           <paper-tab>
             <!-- You can put here a "src" atribute with a link to your site logo (remove the icon attribute) -->
             <paper-icon-button icon="kune:kune" id="home_space_icon"></paper-icon-button>
@@ -579,8 +1858,9 @@
           <paper-tab>
             <paper-icon-button icon="mail" id="user_space_icon"></paper-icon-button>
           </paper-tab>
-          <paper-tab><paper-icon-button icon="group-work" id="group_space_icon"></paper-icon-button></paper-tab>
-
+          <paper-tab>
+            <paper-icon-button icon="group-work" id="group_space_icon"></paper-icon-button>
+          </paper-tab>
         </paper-tabs>
         <div id="sitebar_user_space_icon_group" class="sitebar_inbox_badge_container"></div>
         <div id="sitebar_left_extensionbar"></div>
@@ -588,61 +1868,60 @@
         <div id="sitebar_chat_icon_group" class="hidden-xs hidden-sm">
           <paper-icon-button icon="kune:chat" id="sitebar_chat_icon"></paper-icon-button>
         </div>
-        <core-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn"></core-icon-button>
-        <core-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></core-icon-button>
+        <paper-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn"></paper-icon-button>
+        <paper-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></paper-icon-button>
         <div id="sitebar_right_extensionbar"></div>
-        <core-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></core-icon-button>
-        <paper-icon-button icon="search" on-click="{{ toggleSearch }}" id="sitebar_search_icon"></paper-icon-button>
+        <paper-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></paper-icon-button>
+        <paper-icon-button icon="search" on-click="toggleSearch" id="sitebar_search_icon"></paper-icon-button>
         <div id="sitebar_search_group">
           <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
         </div>
         <paper-icon-button icon="menu" id="sitebar_more_icon"></paper-icon-button>
         <div id="sitebar_flex_end" class="sitebar_search_hide" flex></div>
-        <paper-icon-button icon="close" on-click="{{ toggleSearch }}" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
-      </core-toolbar>
+        <paper-icon-button icon="close" on-click="toggleSearch" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
+      </paper-toolbar>
 
-      <core-animation id="opacity-infinite" duration="1000" iterations="Infinity" direction="alternate">
-        <core-animation-keyframe>
-          <core-animation-prop name="opacity" value="1">
-          </core-animation-prop>
-        </core-animation-keyframe>
-        <core-animation-keyframe>
-          <core-animation-prop name="opacity" value="0.3">
-          </core-animation-prop>
-        </core-animation-keyframe>
-      </core-animation>
+      <neon-animation id="opacity-infinite" duration="1000" iterations="Infinity" direction="alternate">
+        <neon-animation-keyframe>
+          <neon-animation-prop name="opacity" value="1">
+          </neon-animation-prop>
+        </neon-animation-keyframe>
+        <neon-animation-keyframe>
+          <neon-animation-prop name="opacity" value="0.3">
+          </neon-animation-prop>
+        </neon-animation-keyframe>
+      </neon-animation>
 
-      <core-animation-group id="opacity-scale" type="seq">
-        <core-animation duration="300">
-          <core-animation-keyframe>
-            <core-animation-prop name="opacity" value="1">
-            </core-animation-prop>
-          </core-animation-keyframe>
-          <core-animation-keyframe>
-            <core-animation-prop name="opacity" value="0.3">
-            </core-animation-prop>
-          </core-animation-keyframe>
-          <core-animation-keyframe>
-            <core-animation-prop name="opacity" value="1">
-            </core-animation-prop>
-          </core-animation-keyframe>
-        </core-animation>
-        <core-animation duration="300">
-          <core-animation-keyframe>
-            <core-animation-prop name="transform" value="scale(1)">
-            </core-animation-prop>
-          </core-animation-keyframe>
-          <core-animation-keyframe>
-            <core-animation-prop name="transform" value="scale(1.2)">
-            </core-animation-prop>
-          </core-animation-keyframe>
-          <core-animation-keyframe>
-            <core-animation-prop name="transform" value="scale(1)">
-            </core-animation-prop>
-          </core-animation-keyframe>
-        </core-animation>
-      </core-animation-group>
-
+      <neon-animation-group id="opacity-scale" type="seq">
+        <neon-animation duration="300">
+          <neon-animation-keyframe>
+            <neon-animation-prop name="opacity" value="1">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+          <neon-animation-keyframe>
+            <neon-animation-prop name="opacity" value="0.3">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+          <neon-animation-keyframe>
+            <neon-animation-prop name="opacity" value="1">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+        </neon-animation>
+        <neon-animation duration="300">
+          <neon-animation-keyframe>
+            <neon-animation-prop name="transform" value="scale(1)">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+          <neon-animation-keyframe>
+            <neon-animation-prop name="transform" value="scale(1.2)">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+          <neon-animation-keyframe>
+            <neon-animation-prop name="transform" value="scale(1)">
+            </neon-animation-prop>
+          </neon-animation-keyframe>
+        </neon-animation>
+      </neon-animation-group>
       <style>
 
         /* -*- engine:css -*- */
@@ -784,7 +2063,7 @@
           padding-top: 20px;
         }
 
-        #k_home_tools core-item::shadow #icon {
+        #k_home_tools paper-item::shadow #icon {
           margin: 0 6px;
         }
 
@@ -811,12 +2090,9 @@
           top: 0; left: 0; bottom: 0; right: 0;
         }
 
-        .circle { /* ff */
-          border-color: #a56941 !important;
-        }
-
-        #k_home_spin::shadow .circle {
-          border-color: #a56941;
+        paper-spinner-lite.k-spinner {
+          --paper-spinner-color: #a56941;
+          --paper-spinner-stroke-width: 6px;
         }
 
         .buck_blockquote {
@@ -927,19 +2203,19 @@
           color:rgb(105, 49, 47);
         }
 
-        #sitebar_toolbar core-icon-button {
+        #sitebar_toolbar paper-icon-button {
           font-size: 16px;
         }
 
         #sitebar_toolbar paper-icon-button,
-        #sitebar_toolbar core-icon-button {
+        #sitebar_toolbar paper-icon-button {
           margin-left: 3px !important;
           margin-right: 3px !important;
         }
 
         #sitebar_toolbar a:hover,
         #sitebar_toolbar  paper-icon-button:hover,
-        #sitebar_toolbar core-icon-button:hover {
+        #sitebar_toolbar paper-icon-button:hover {
           color: #808080 !important;
           box-shadow: none !important;
         }
@@ -985,7 +2261,7 @@
           height: 4px;
         }
 
-        paper-button.custom > core-icon {
+        paper-button.custom > iron-icon {
           margin-right: 4px;
         }
 
@@ -1037,15 +2313,11 @@
           color: white;
         }
 
+        paper-progress {
+          --paper-progress-active-color: rgb(165, 105, 65);
+        }
+
         #paper_progress_container {
-        }
-
-        div#paper_progress_container paper-progress#paper_progress div#progressContainer div#activeProgress  { /* ff */
-          background-color: rgb(165, 105, 65);
-        }
-
-        #paper_progress::shadow #activeProgress {
-          background-color: rgb(165, 105, 65);
         }
 
         /* Tutorials */
@@ -1336,9 +2608,11 @@
           display: none;
         }
 
-        html /deep/ core-icon-button {
+        /* html /deep/ */ paper-icon-button {
           /* Bootstrap breaks the 1rem font size of this buttons */
-          font-size: 16px;
+          /* font-size: 16px;  */
+          /*--iron-icon-height: 24px;
+             --iron-icon-width: 24px;*/
         }
 
         /* Group space ------------------------------------------------------- */
@@ -1354,17 +2628,17 @@
 
         /* background for toolbar when it is at its full size */
 
-        core-scroll-header-panel #headerContainer { /* ff */
+        paper-scroll-header-panel #headerContainer { /* ff */
           background-color: {{bg6}};
           color: {{c6}};
         }
 
-        core-scroll-header-panel::shadow #headerContainer {
+        paper-scroll-header-panel::shadow #headerContainer {
           background-color: {{bg6}};
           color: {{c6}};
         }
 
-        core-scroll-header-panel #headerBg { /* ff */
+        paper-scroll-header-panel #headerBg { /* ff */
           background-image: url({{group_back_image_url}});
           background-attachment: fixed;
           background-position: 50% 50%;
@@ -1372,7 +2646,7 @@
           opacity : 0.15 !important;
         }
 
-        core-scroll-header-panel::shadow #headerBg {
+        paper-scroll-header-panel::shadow #headerBg {
           background-image: url({{group_back_image_url}});
           background-attachment: fixed;
           background-position: 50% 50%;
@@ -1381,19 +2655,19 @@
         }
 
         /* background for toolbar when it is condensed  (not working because of previous opacity) */
-        core-scroll-header-panel #condensedHeaderBg { /* ff */
+        paper-scroll-header-panel #condensedHeaderBg { /* ff */
           background-color: {{bg2}};
         }
 
-        core-scroll-header-panel::shadow #condensedHeaderBg {
+        paper-scroll-header-panel::shadow #condensedHeaderBg {
           background-color: {{bg2}};
         }
 
-        core-scroll-header-panel #mainContainer { /* ff */
+        paper-scroll-header-panel #mainContainer { /* ff */
           background-color: {{bg8}};
         }
 
-        core-scroll-header-panel::shadow #mainContainer {
+        paper-scroll-header-panel::shadow #mainContainer {
           background-color: {{bg8}};
         }
 
@@ -1425,13 +2699,13 @@
           user-select: none;
         }
 
-        #group_core_main core-icon-button core-icon {
+        #group_core_main paper-icon-button iron-icon {
           padding-left: 4px;
           height: 16px;
           width: 16px;
         }
 
-        #group_core_main core-icon-button {
+        #group_core_main paper-icon-button {
           border-top-left-radius: 30px;
           border-bottom-left-radius: 30px;
           border: 1px solid #C0C0C0;
@@ -1441,13 +2715,13 @@
           line-height: 2em;
         }
 
-        #group_core_main core-icon-button::shadow core-icon {
+        #group_core_main paper-icon-button::shadow iron-icon {
           padding-left: 4px;
           height: 16px;
           width: 16px;
         }
 
-        #group_core_main core-icon-button {
+        #group_core_main paper-icon-button {
           font-size: 14px;
         }
 
@@ -1508,7 +2782,7 @@
         }
 
         #header_group_name {
-	  line-height: 1em;
+          line-height: 1em;
         }
 
         #header_group_name div {
@@ -1546,9 +2820,9 @@
 
         #header_group_icon_settings {
           border: 2px solid #e0e0e0;
-	  margin: 5px;
-	  padding: 3px;
-	  border-radius: 50%;
+          margin: 5px;
+          padding: 3px;
+          border-radius: 50%;
         }
 
         #header_social_net {
@@ -1567,7 +2841,7 @@
         }
 
         #group_header_bottom {
-	  position: absolute;
+          position: absolute;
           bottom: 15px;
           width: 100%;
         }
@@ -1679,7 +2953,7 @@
           top: {{xsmall? 134 : small? 154: 186}}px;
         }
 
-        paper-shadow#doc_toolbar_shadow core-toolbar#doc_toolbar div#topBar.toolbar-tools,
+        paper-material#doc_toolbar_shadow paper-toolbar#doc_toolbar div#topBar.toolbar-tools,
         #doc_toolbar {
           color: gray;
           height: 40px;
@@ -1690,7 +2964,7 @@
           height: 40px;
         }
 
-        core-toolbar.medium-tall {
+        paper-toolbar.medium-tall {
           line-height: 20px;
         }
 
@@ -1721,27 +2995,27 @@
           margin-bottom: 5px; /* Distance between tools */
         }
 
-        #group_tools_toolbar paper-fab::shadow paper-shadow {
+        #group_tools_toolbar paper-fab::shadow paper-material {
           visibility: visible;
         }
 
-        #group_tools_toolbar paper-fab:hover::shadow paper-shadow {
+        #group_tools_toolbar paper-fab:hover::shadow paper-material {
           visibility: hidden;
         }
 
-        #group_tools_toolbar paper-fab.active::shadow paper-shadow {
+        #group_tools_toolbar paper-fab.active::shadow paper-material {
           visibility: visible;
         }
 
-        #group_tools_toolbar paper-fab paper-shadow { /* ff */
+        #group_tools_toolbar paper-fab paper-material { /* ff */
           visibility: visible;
         }
 
-        #group_tools_toolbar paper-fab:hover paper-shadow { /* ff */
+        #group_tools_toolbar paper-fab:hover paper-material { /* ff */
           visibility: hidden;
         }
 
-        #group_tools_toolbar paper-fab.active paper-shadow { /* ff */
+        #group_tools_toolbar paper-fab.active paper-material { /* ff */
           visibility: visible;
         }
 
@@ -1760,7 +3034,7 @@
           left: 4px;
         }
 
-        div#group_tools_toolbar paper-fab core-icon#icon {  /* ff */
+        div#group_tools_toolbar paper-fab iron-icon#icon {  /* ff */
           witdh: 20px;
           height:20px;
           left: 4px;
@@ -1777,16 +3051,16 @@
           background-color: {{bg4}};
         }
 
-        #group_tools_toobar core-item {
+        #group_tools_toobar paper-item {
           /* Initially
              display: none; */
         }
 
-        #group_tools_toolbar core-item #label { /* ff */
+        #group_tools_toolbar paper-item #label { /* ff */
           display: none;
         }
 
-        #group_tools_toolbar core-item::shadow #label {
+        #group_tools_toolbar paper-item2::shadow #label {
           display: none;
         }
 
@@ -1868,14 +3142,14 @@
 
         /* Chat -------------------------------------------------------------- */
 
-        #sitebar_user_btn core-icon { /* ff */
+        #sitebar_user_btn iron-icon { /* ff */
           background-image: url({{user_icon_back_image_url}});
           border-radius: 50%;
           background-size: 24px;
           margin-right: 3px;
         }
 
-        #sitebar_user_btn::shadow core-icon {
+        #sitebar_user_btn::shadow iron-icon {
           background-image: url({{user_icon_back_image_url}});
           border-radius: 50%;
           background-size: 24px;
@@ -1927,149 +3201,156 @@
           height: 100%;
         }
 
-        .core-icon-status-away core-icon path:nth-child(2) { /* ff */
+        .iron-icon-status-away iron-icon path:nth-child(2) { /* ff */
           fill: #FFFFFF;
         }
 
-        .core-icon-status-away::shadow core-icon path:nth-child(2) {
+        .iron-icon-status-away::shadow iron-icon path:nth-child(2) {
           fill: #FFFFFF;
         }
 
-        .core-icon-status-away core-icon path:first-child { /* ff */
+        .iron-icon-status-away iron-icon path:first-child { /* ff */
           fill: rgb(144, 144, 144);
         }
 
-        .core-icon-status-away::shadow core-icon path:first-child {
+        .iron-icon-status-away::shadow iron-icon path:first-child {
           fill: rgb(144, 144, 144);
         }
 
-        .core-icon-status-online core-icon { /* ff */
+        .iron-icon-status-online iron-icon { /* ff */
           fill: rgb(95, 255, 39);
         }
 
-        .core-icon-status-online::shadow core-icon {
+        .iron-icon-status-online::shadow iron-icon {
           fill: rgb(95, 255, 39);
         }
 
-        .core-icon-status-busy core-icon { /* ff */
+        .iron-icon-status-busy iron-icon { /* ff */
           fill: rgb(255, 85, 85);
         }
 
-        .core-icon-status-busy::shadow core-icon {
+        .iron-icon-status-busy::shadow iron-icon {
           fill: rgb(255, 85, 85);
         }
 
-        .core-icon-status-offline core-icon { /* ff */
+        .iron-icon-status-offline iron-icon { /* ff */
           fill: rgb(128, 128, 128);
         }
 
-        .core-icon-status-offline::shadow core-icon {
+        .iron-icon-status-offline::shadow iron-icon {
           fill: rgb(128, 128, 128);
         }
 
       </style>
     </template>
 
-    <script src="kune-polymer.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 
     <script>
-      window.addEventListener('polymer-ready', function(e) {
-        // Not yet ready
-        // document.body.setAttribute('unresolved', '');
-        var s = document.createElement('script');
-        s.type = "text/javascript";
-        s.src = "ws/ws.nocache.js";
-        // Comment this line for develop this initial page without gwt code
-        document.body.appendChild(s);
-      });
+            console.log("pre webcomponent event");
+            window.addEventListener('WebComponentsReady', function(e) {
+              // Not yet ready
+              // document.body.setAttribute('unresolved', '');
+              var s = document.createElement('script');
+              s.type = "text/javascript";
+              s.src = "ws/ws.nocache.js";
+              // Comment this line for develop this initial page without gwt code
+              // document.body.appendChild(s);
+              console.log("Webcomponent event loads GWT code");
+            });
 
-      addEventListener('template-bound', function(e) {
-        var scope = e.target;
+            addEventListener('dom-change', function(e) {
+              console.log("dom-change event");
+              var scope = e.target;
 
-        function resizeHome() {
-          h = document.getElementById('k_home_scroller').offsetHeight;
-          h = h - h*2/100 - 120;
-          document.getElementById('sec0').style.height=h + "px";
-          document.getElementById('sec1').style.height=h + "px";
-          document.getElementById('sec2').style.height=h + "px";
-          document.getElementById('sec3').style.height=h + "px";
-          document.getElementById('sec4').style.height=h + "px";
-          document.getElementById('sec5').style.height=h + "px";
-        }
+              function resizeHome() {
+                h = document.getElementById('k_home_scroller').offsetHeight;
+                h = h - h*2/100 - 120;
+                document.getElementById('sec0').style.height=h + "px";
+                document.getElementById('sec1').style.height=h + "px";
+                document.getElementById('sec2').style.height=h + "px";
+                document.getElementById('sec3').style.height=h + "px";
+                document.getElementById('sec4').style.height=h + "px";
+                document.getElementById('sec5').style.height=h + "px";
+              }
 
-        resizeHome();
+              resizeHome();
 
-        window.onresize = function() {
-          resizeHome();
-        }
+              window.onresize = function() {
+                resizeHome();
+              }
 
-        var backs = ["others/home-back-trees.png",
-                     "others/home-back-buck.png",
-                     "others/home-back-decen.png",
-                     "others/home-back-four-handed-seat.png",
-                     "others/home-back-op-en.png",
-                     "others/home-back-planets.png",
-                     "others/home-back-trees.png" // again
-        ];
+              var backs = ["others/home-back-trees.png",
+                           "others/home-back-buck.png",
+                           "others/home-back-decen.png",
+                           "others/home-back-four-handed-seat.png",
+                           "others/home-back-op-en.png",
+                           "others/home-back-planets.png",
+                           "others/home-back-trees.png" // again
+              ];
 
-        // Show proper language messages
-        meta = getMetaContent("kune.home.ids");
+              // Show proper language messages
+              meta = getMetaContent("kune.home.ids");
 
-        HOME_IDS_DEF_SUFFIX = "_def";
-        HOME_IDS_PREFIX = "k_home_";
+              HOME_IDS_DEF_SUFFIX = "_def";
+              HOME_IDS_PREFIX = "k_home_";
 
-        // console.log("Locale: " + locale);
-        currentLocale = locale;
+              // console.log("Locale: " + locale);
+              currentLocale = locale;
 
-        if (meta != null) {
-          // console.log("Meta: " + meta);
-          var ids = meta.split(/[\s,]+/);
-          for (i=0; i < ids.length; i++) {
-            var id = ids[i];
-            var lid = HOME_IDS_PREFIX + id + "_" + currentLocale
-            var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
-            //console.log("Id: " + ldefid);
-            var someElement = document.getElementById(lid);
-            var defElement = document.getElementById(ldefid);
-            if (someElement != null) {
-              someElement.style.display="inherit";
-            } else if (defElement != null) {
-              // console.log("Setting def element " + defElement);
-              defElement.style.display="inherit";
-            }
-          }
-        }
+              if (meta != null) {
+                // console.log("Meta: " + meta);
+                var ids = meta.split(/[\s,]+/);
+                for (i=0; i < ids.length; i++) {
+                  var id = ids[i];
+                  var lid = HOME_IDS_PREFIX + id + "_" + currentLocale
+                  var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
+                  //console.log("Id: " + ldefid);
+                  var someElement = document.getElementById(lid);
+                  var defElement = document.getElementById(ldefid);
+                  if (someElement != null) {
+                    someElement.style.display="inherit";
+                  } else if (defElement != null) {
+                    // console.log("Setting def element " + defElement);
+                    defElement.style.display="inherit";
+                  }
+                }
+              }
 
-        // This is done by gwt, but useful for development without gwt
-        // scope.hideSpinner();
+              // This is done by gwt, but useful for development without gwt
+              scope.hideSpinner();
 
-        // http://www.owlcarousel.owlgraphic.com/index.html
-        var owl = $(".owl-carousel");
+              // http://www.owlcarousel.owlgraphic.com/index.html
+              var owl = $(".owl-carousel");
 
-        owl.owlCarousel(
-          {
-            loop: true,
-            margin: 50,
-            nav: false,
-            autoplay:true,
-            center: true,
-            // autoplaySpeed: true,
-            autoplayTimeout:10000,
-            autoplayHoverPause:true,
-            // animateOut: 'fadeOut',
-            dotsContainer: '#customOwlDots',
-            items: 1
-          }
-        );
+              owl.owlCarousel(
+                {
+                  loop: true,
+                  margin: 50,
+                  nav: false,
+                  autoplay:true,
+                  center: true,
+                  // autoplaySpeed: true,
+                  autoplayTimeout:10000,
+                  autoplayHoverPause:true,
+                  // animateOut: 'fadeOut',
+                  dotsContainer: '#customOwlDots',
+                  items: 1
+                }
+              );
 
-        owl.on('changed.owl.carousel', function(event) {
-          var i = event.item.index-2
-          // console.log("Show back: " + i);
-          scope.homebackimg = backs[i];
-        });
+              owl.on('changed.owl.carousel', function(event) {
+                var i = event.item.index-2
+                // console.log("Show back: " + i);
+                scope.homebackimg = backs[i];
+              });
 
-      });
-    </script>
+            });
+        </script>
+
+    <script type="text/javascript" src="kune-polymer.js"></script>
+
+
 
     <noscript>
       <div class="gwt_noscript_warning">
@@ -2081,11 +3362,11 @@
     <iframe src="" id="__download" style="position: absolute; width: 0; height: 0; border: 0;"></iframe>
     <!-- // This is only used for selenium tests (comment/remove in production) -->
     <!--
-         <div id="kcursor"
-         style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
-         <img src="others/cursor-orange.png">
-         </div>
-         <script src="others/js/fake-selenium-pointer.js"></script> -->
+    <div id="kcursor"
+    style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
+    <img src="others/cursor-orange.png">
+    </div>
+    <script src="others/js/fake-selenium-pointer.js"></script> -->
     <!-- // End : This is only used for selenium tests (comment/remove in production) -->
 
     <!-- Banner for wave errors -->

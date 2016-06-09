@@ -1,5 +1,6 @@
 /* globals $ */
-var kt = document.querySelector('#kunetemplate');
+/* FIXME var kt = document.querySelector('#kunetemplate'); */
+kt = document.querySelector('#kunetemplate');
 
 kt.spin_active = true;
 
@@ -14,9 +15,6 @@ window.onresize = function (event) {
 function setContentMinHeight () {
   kt.docContentMinHeight = (document.documentElement.clientHeight - 350);
 }
-
-/* The initial space (0: for home, 2: for group space) useful during tests */
-kt.spaceselected = 0;
 
 /* Screen sizes (inspired in bootstrap) */
 kt.screenlg = 1200;
@@ -130,7 +128,7 @@ kt.toggleSearch = function (e, detail, sender) {
 };
 
 /* Color of group header */
-addEventListener('core-header-transform', function (e) {
+addEventListener('paper-header-transform', function (e) {
   var miga = $('.breadcrumb > div > div > div > button > i').add('#miga a');
   var toolbar = $('#core_scroll_header_panel');
 
@@ -152,23 +150,26 @@ addEventListener('core-header-transform', function (e) {
 });
 
 /* Default theme (useful for development without GWT)
-kt.bg1 = '#deaa87';
-kt.bg2 = '#d99e76';
-kt.bg3 = '#ce7f4b';
-kt.bg4 = '#d99e76';
-kt.bg5 = '#f6e7dd';
-kt.bg6 = '#d99e76';
-kt.bg7 = '#FFF';
-kt.bg8 = '#f8eee7';
+ kt.bg1 = '#deaa87';
+ kt.bg2 = '#d99e76';
+ kt.bg3 = '#ce7f4b';
+ kt.bg4 = '#d99e76';
+ kt.bg5 = '#f6e7dd';
+ kt.bg6 = '#d99e76';
+ kt.bg7 = '#FFF';
+ kt.bg8 = '#f8eee7';
 
-kt.c1 = '#FFF';
-kt.c2 = '#FFF';
-kt.c3 = '#FFF';
-kt.c4 = '#FFF';
-kt.c5 = '#552200';
-kt.c6 = '#FFF';
-kt.c7 = '#a05a2c';
-kt.c8 = '#a05a2c"; */
+ kt.c1 = '#FFF';
+ kt.c2 = '#FFF';
+ kt.c3 = '#FFF';
+ kt.c4 = '#FFF';
+ kt.c5 = '#552200';
+ kt.c6 = '#FFF';
+ kt.c7 = '#a05a2c';
+ kt.c8 = '#a05a2c"; */
 
 var d = new Date();
 kt.this_year = d.getFullYear();
+
+/* The initial space (0: for home, 2: for group space) useful during tests */
+// FIXME kt.spaceselected = 2;
