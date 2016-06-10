@@ -190,3 +190,7 @@ kt.addClassIf = function (classToAdd, shouldAdd) {
     return classToAdd;
   }
 };
+
+kt.inbox_close_visibility = function () {
+  return kt.main_forcenarrow ? 'none': 'inline-block';
+};
