@@ -22,8 +22,14 @@
  */
 package cc.kune.polymer.client.actions.ui;
 
-import br.com.rpa.client._coreelements.CoreIconButton;
-import br.com.rpa.client._coreelements.HasIcon;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.FocusWidget;
+import com.google.gwt.user.client.ui.Widget;
+
+import br.com.rpa.client._ironelements.HasIcon;
 import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -33,13 +39,6 @@ import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
 
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.FocusWidget;
-import com.google.gwt.user.client.ui.Widget;
-
 /**
  * The Class AbstractPoButtonGui.
  *
@@ -48,7 +47,7 @@ import com.google.gwt.user.client.ui.Widget;
 public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem implements HasIcon {
 
   /** The button. */
-  private CoreIconButton button;
+  private PaperIconButton button;
   /** The enable tongle. */
   protected boolean enableTongle;
 
@@ -99,7 +98,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#addStyle(java.lang
    * .String)
@@ -115,7 +114,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractChildGuiItem#create(cc.kune.common
    * .client.actions.ui.descrip.GuiActionDescrip)
@@ -129,7 +128,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
     final String id = descriptor.getId();
 
     if (hasIcon && hasText) {
-      button = new CoreIconButton();
+      button = new PaperIconButton();
       icon = button;
       iconWidget = button;
       // TODO
@@ -203,7 +202,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#setEnabled(boolean)
    */
   @Override
@@ -217,7 +216,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(cc.kune.common
    * .shared.res.KuneIcon)
@@ -238,7 +237,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconBackground(java
    * .lang.String)
@@ -252,7 +251,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconResource(com.google
    * .gwt.resources.client.ImageResource)
@@ -273,7 +272,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconStyle(java.lang
    * .String)
@@ -287,7 +286,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIconUrl(java.lang.String
    * )
@@ -321,7 +320,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setText(java.lang.String)
    */
@@ -335,7 +334,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setToolTipText(java.lang
    * .String)
@@ -351,7 +350,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.UIObject#setVisible(boolean)
    */
   @Override
@@ -365,7 +364,7 @@ public abstract class AbstractPoButtonGui extends AbstractPoChildGuiItem impleme
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.common.client.actions.ui.AbstractGuiItem#shouldBeAdded()
    */
   @Override

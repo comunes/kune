@@ -22,18 +22,20 @@
  */
 package cc.kune.chat.client;
 
-import cc.kune.common.client.log.Log;
-import cc.kune.core.client.events.SndClickEvent;
-import cc.kune.polymer.client.PolymerId;
-import cc.kune.polymer.client.PolymerUtils;
-
 import com.calclab.hablar.core.client.mvp.HablarEventBus;
 import com.calclab.hablar.signals.client.SignalPreferences;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedEvent;
 import com.calclab.hablar.signals.client.unattended.UnattendedChatsChangedHandler;
 import com.calclab.hablar.signals.client.unattended.UnattendedPagesManager;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.web.bindery.event.shared.EventBus;
+
+import cc.kune.common.client.log.Log;
+import cc.kune.common.client.ui.BlinkAnimation;
+import cc.kune.core.client.events.SndClickEvent;
+import cc.kune.polymer.client.PolymerId;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -57,12 +59,14 @@ public class KuneUnattendedPresenter {
    *          the preferences
    * @param unattendedManager
    *          the unattended manager
+   * @param chatIcon
    * @param action
    *          the action
    */
   public KuneUnattendedPresenter(final EventBus eventBus, final HablarEventBus hablarEventBus,
-      final SignalPreferences preferences, final UnattendedPagesManager unattendedManager) {
+      final SignalPreferences preferences, final UnattendedPagesManager unattendedManager, IsWidget chatIcon) {
     active = false;
+    final BlinkAnimation chatIconAnimation = new BlinkAnimation((UIObject) chatIcon, 500);
     hablarEventBus.addHandler(UnattendedChatsChangedEvent.TYPE, new UnattendedChatsChangedHandler() {
       @Override
       public void handleUnattendedChatChange(final UnattendedChatsChangedEvent event) {
@@ -70,11 +74,11 @@ public class KuneUnattendedPresenter {
         if (unattendedChatsCount > 0 && active == false) {
           active = true;
           SndClickEvent.fire(eventBus);
-          PolymerUtils.setBlinkAnimation(PolymerId.CHAT_SITEBAR_ICON.getId(), true);
+          chatIconAnimation.animate();
           RootPanel.get(PolymerId.CHAT_SITEBAR_ICON.getId()).addStyleName("btn_font_green");
           Log.info("BLINK true");
         } else if (unattendedChatsCount == 0 && active == true) {
-          PolymerUtils.setBlinkAnimation(PolymerId.CHAT_SITEBAR_ICON.getId(), false);
+          chatIconAnimation.animate();
           active = false;
           Log.info("BLINK false");
           RootPanel.get(PolymerId.CHAT_SITEBAR_ICON.getId()).removeStyleName("btn_font_green");

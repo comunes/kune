@@ -22,7 +22,12 @@
  */
 package cc.kune.core.client.sitebar;
 
-import br.com.rpa.client._coreelements.CoreIconButton;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
+
+import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuShowAction;
@@ -45,11 +50,6 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.polymer.client.PolymerId;
-
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
-import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -120,7 +120,7 @@ public class MyGroupsMenu extends WidgetMenuDescriptor {
       final GlobalShortcutRegister global, final MenuShowAction menuShowAction, final EventBus eventBus,
       final UserServiceAsync userService, final SitebarNewGroupLink sitebarNewGroupLink) {
     super(menuShowAction);
-    final CoreIconButton btn = CoreIconButton.wrap(MENU_ID);
+    final PaperIconButton btn = PaperIconButton.wrap(MENU_ID);
     setWidget(btn);
     this.session = session;
     this.gotoGroupProvider = gotoGroupProvider;

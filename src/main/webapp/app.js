@@ -10,12 +10,30 @@ var onImportLoaded = function () {
   /* FIXME initRouting();
   installMaterializeCallbacks();
   checkBrowser();
+   */
+
+  var devMode = true;
+  if (!devMode) {
+    var script = document.createElement('script');
+    script.async = false;
+    script.src = 'kune-polymer.js';
+   //  document.head.appendChild(script);
+
+    var s = document.createElement('script');
+    s.type = 'text/javascript';
+    s.src = 'ws/ws.nocache.js';
+    // Comment this line for develop this initial page without gwt code
+   // document.head.appendChild(s);
+    console.log('Webcomponent event loads GWT code');
+  }
+
+  var loadContainer = document.getElementById('splash');
+  loadContainer.addEventListener('transitionend', e => {
+    loadContainer.parentNode.removeChild(loadContainer); // IE 10 doesn't support el.remove()
+  });
+
   // remove the loading class so that app is now visible
-   document.body.classList.remove('loading'); */
-  var script = document.createElement('script');
-  script.async = false;
-  script.src = 'kune-polymer.js';
-//  document.head.appendChild(script);
+  document.body.classList.remove('loading');
 };
 
 // this method will only be called if webcomponents are supported natively by the browser
@@ -78,6 +96,7 @@ if (!webComponentsSupported) {
   var script = document.createElement('script');
   script.async = true;
   script.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+  script.onload = finishLazyLoadingImports;
   document.head.appendChild(script);
 } else {
   console.log('Your browser supports web components natively, no polyfill needed.');

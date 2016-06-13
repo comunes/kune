@@ -1,6 +1,5 @@
-/* globals $ */
-/* FIXME var kt = document.querySelector('#kunetemplate'); */
-kt = document.querySelector('#kunetemplate');
+/* globals $ kt: true*/
+var kt = document.querySelector('#kunetemplate');
 
 kt.spin_active = true;
 
@@ -40,17 +39,12 @@ kt.avatarsizes = 50;
 
 kt.homebackimg = 'others/home-back-trees.png';
 
-// kt.homebackcolors = ['#e8c6b2'];
-kt.homebackcolors = ['#c9baa4', '#b6c9a4', '#e3cd77', 'a6c4d1', '#cba7ae'];
-
-kt.homebackcolor = kt.homebackcolors[Math.floor((Math.random() * kt.homebackcolors.length))];
-
 /* kt.group_back_image_url = 'http://lorempixel.com/1500/1500'; */
 kt.showingSearch = false;
 
 kt.main_forcenarrow = true;
-kt.main_disableEdgeSwipe = true;
-kt.main_disableSwipe = true;
+kt.main_disableEdgeSwipe = false;
+kt.main_disableSwipe = false;
 
 setContentMinHeight();
 
@@ -66,26 +60,6 @@ function toggleVis (id) {
 kt.closeMainDrawer = function (e, detail, sender) {
   kt.main_forcenarrow = true;
   document.getElementById('main_core_drawer_panel').closeDrawer();
-};
-
-kt.beat = function (id, play) {
-  var animation = document.getElementById('opacity-scale');
-  if (play) {
-    animation.target = document.getElementById(id);
-    animation.play();
-  } else {
-    animation.cancel();
-  }
-};
-
-kt.blink = function (id, play) {
-  var animation = document.getElementById('opacity-infinite');
-  if (play) {
-    animation.target = document.getElementById(id);
-    animation.play();
-  } else {
-    animation.cancel();
-  }
 };
 
 kt.showSpinner = function (e, detail, sender) {
@@ -191,6 +165,18 @@ kt.addClassIf = function (classToAdd, shouldAdd) {
   }
 };
 
-kt.inbox_close_visibility = function () {
-  return kt.main_forcenarrow ? 'none': 'inline-block';
+kt.verticalIfNot = function (condition) {
+  return !condition ? 'vertical' : 'horizontal';
 };
+
+kt.verticalIf = function (condition) {
+  return condition ? 'vertical' : 'horizontal';
+};
+
+kt.inbox_close_visibility = function () {
+  return kt.main_forcenarrow ? 'none' : 'inline-block';
+};
+
+// kt.homebackcolors = ['#e8c6b2'];
+kt.homebackcolors = ['#c9baa4', '#b6c9a4', '#e3cd77', 'a6c4d1', '#cba7ae'];
+kt.homebackcolor = kt.homebackcolors[Math.floor((Math.random() * kt.homebackcolors.length))];

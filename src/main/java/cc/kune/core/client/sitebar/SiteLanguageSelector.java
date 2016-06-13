@@ -24,7 +24,12 @@ package cc.kune.core.client.sitebar;
 
 import org.gwtbootstrap3.client.ui.constants.Styles;
 
-import br.com.rpa.client._coreelements.CoreIconButton;
+import com.google.gwt.i18n.client.LocaleInfo;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
+
+import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
@@ -39,11 +44,6 @@ import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
 import cc.kune.core.client.i18n.I18nUrlUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.polymer.client.PolymerId;
-
-import com.google.gwt.i18n.client.LocaleInfo;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.web.bindery.event.shared.EventBus;
 
 /**
  * The Class SiteLanguateSelector.
@@ -72,7 +72,7 @@ public class SiteLanguageSelector extends WidgetMenuDescriptor {
   @Inject
   public SiteLanguageSelector(final Session session, final EventBus eventBus) {
     super();
-    final CoreIconButton btn = CoreIconButton.wrap(MENU_ID);
+    final PaperIconButton btn = PaperIconButton.wrap(MENU_ID);
     setWidget(btn);
     setParent(SitebarActions.RIGHT_TOOLBAR);
     Tooltip.to(btn, I18n.t("Choose your language"));

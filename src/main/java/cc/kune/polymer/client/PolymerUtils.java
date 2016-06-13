@@ -50,7 +50,7 @@ public class PolymerUtils {
     }
   };
 
-  private static PaperFab inboxShowHide;
+  /* private static PaperFab inboxShowHide; */
 
   public static void addFlexHorLayout(final Widget... widgets) {
     addFlexLayout(HORIZONTAL, widgets);
@@ -145,14 +145,6 @@ public class PolymerUtils {
     $wnd.kt.group_back_image_url = url;
   }-*/;
 
-  public native static void setBeatAnimation(final String id, boolean beat) /*-{
-    $wnd.kt.beat(id, beat);
-  }-*/;
-
-  public native static void setBlinkAnimation(final String id, boolean blink) /*-{
-    $wnd.kt.blink(id, blink);
-  }-*/;
-
   /**
    * Shows/select the "inbox" drawer.
    */
@@ -173,10 +165,10 @@ public class PolymerUtils {
 
   public static void setNarrowSwipeEnabled(final boolean enabled) {
     setNarrowSwipeEnabledImpl(enabled);
-    if (inboxShowHide == null) {
+    /* if (inboxShowHide == null) {
       inboxShowHide = PaperFab.wrap(PolymerId.INBOX_SHOW_HIDE.getId());
     }
-    inboxShowHide.setEnabled(enabled);
+    inboxShowHide.setEnabled(enabled); */
   }
 
   private native static void setNarrowSwipeEnabledImpl(final boolean enabled) /*-{

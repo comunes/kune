@@ -22,10 +22,6 @@
  */
 package cc.kune.chat.client;
 
-import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.services.ClientFileDownloadUtils;
-
 import com.calclab.emite.core.client.xmpp.session.XmppSession;
 import com.calclab.emite.xep.storage.client.PrivateStorageManager;
 import com.calclab.hablar.core.client.Hablar;
@@ -41,7 +37,12 @@ import com.calclab.hablar.signals.client.unattended.UnattendedPresenter;
 import com.calclab.hablar.user.client.UserContainer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.EventBus;
+
+import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
+import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -53,6 +54,7 @@ public class KuneHablarSignals {
 
   /** The signal messages. */
   public static SignalMessages signalMessages;
+  private IsWidget chatIcon;
 
   /**
    * Gets the {@link SignalMessages} object containing the internationalised
@@ -93,10 +95,12 @@ public class KuneHablarSignals {
    *          the i18n
    * @param downUtils
    *          the down utils
+   * @param chatIcon
    */
   public KuneHablarSignals(final EventBus kuneEventBus, final XmppSession session, final Hablar hablar,
       final ChatClientAction action, final PrivateStorageManager privateStorageManager,
-      final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils) {
+      final I18nTranslationService i18n, final ClientFileDownloadUtils downUtils, IsWidget chatIcon) {
+    this.chatIcon = chatIcon;
     final HablarEventBus hablarEventBus = hablar.getEventBus();
     final PrivateStorageManager storageManager = privateStorageManager;
 
@@ -117,7 +121,7 @@ public class KuneHablarSignals {
         BrowserFocusHandler.getInstance());
     new KuneBrowserFocusManager(kuneEventBus, hablarEventBus, manager, BrowserFocusHandler.getInstance());
     new UnattendedPresenter(hablarEventBus, preferences, manager, titleDisplay);
-    new KuneUnattendedPresenter(kuneEventBus, hablarEventBus, preferences, manager);
+    new KuneUnattendedPresenter(kuneEventBus, hablarEventBus, preferences, manager, chatIcon);
     final NotificationManager notificationManager = new NotificationManager(hablarEventBus, preferences);
 
     // notificationManager.addNotifier((BrowserPopupHablarNotifier)

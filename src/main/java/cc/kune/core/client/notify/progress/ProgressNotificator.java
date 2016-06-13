@@ -54,7 +54,7 @@ public class ProgressNotificator {
       @Override
       public void run() {
         progress.setVisible(false);
-        toast.dismiss();
+        toast.hide();
       }
     };
     eventBus.addHandler(ProgressHideEvent.getType(), new ProgressHideEvent.ProgressHideHandler() {

@@ -514,7 +514,7 @@ public class ChatClientDefault implements ChatClient {
     hablarRoster.addLowPriorityActions();
 
     new KuneHablarSignals(kuneEventBus, xmppSession.get(), hablar, action, privateStorageManager.get(),
-        i18n, downUtils);
+        i18n, downUtils, chatIcon);
     new HablarSoundSignals(hablar);
 
     // if (htmlConfig.hasLogger) {
@@ -692,7 +692,7 @@ public class ChatClientDefault implements ChatClient {
    */
   @Override
   public void show() {
-    PolymerUtils.setBeatAnimation(PolymerId.CHAT_PANEL.getId(), true);
+    // PolymerUtils.setBeatAnimation(PolymerId.CHAT_PANEL.getId(), true);
     showDialog(true);
   }
 

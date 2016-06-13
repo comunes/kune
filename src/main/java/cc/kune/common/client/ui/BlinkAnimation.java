@@ -23,6 +23,7 @@
 package cc.kune.common.client.ui;
 
 import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.UIObject;
 
 // TODO: Auto-generated Javadoc
@@ -39,7 +40,7 @@ import com.google.gwt.user.client.ui.UIObject;
  */
 /**
  * @author vjrj
- * 
+ *
  */
 public class BlinkAnimation {
 

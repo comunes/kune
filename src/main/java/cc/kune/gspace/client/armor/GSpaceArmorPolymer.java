@@ -28,15 +28,6 @@ import static cc.kune.polymer.client.PolymerId.*;
 
 import java.util.HashMap;
 
-import br.com.rpa.client._coreelements.CoreIconButton;
-import cc.kune.common.client.actions.ui.ActionFlowPanel;
-import cc.kune.common.client.actions.ui.IsActionExtensible;
-import cc.kune.common.client.errors.UIException;
-import cc.kune.common.client.log.Log;
-import cc.kune.common.client.ui.HTMLId;
-import cc.kune.common.client.ui.WrappedFlowPanel;
-import cc.kune.polymer.client.PolymerUtils;
-
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -50,6 +41,15 @@ import com.google.gwt.user.client.ui.InsertPanel.ForIsWidget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
+
+import br.com.rpa.client._paperelements.PaperIconButton;
+import cc.kune.common.client.actions.ui.ActionFlowPanel;
+import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.client.errors.UIException;
+import cc.kune.common.client.log.Log;
+import cc.kune.common.client.ui.HTMLId;
+import cc.kune.common.client.ui.WrappedFlowPanel;
+import cc.kune.polymer.client.PolymerUtils;
 
 @Singleton
 public class GSpaceArmorPolymer implements GSpaceArmor {
@@ -212,7 +212,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public ButtonBase getFollowersButton() {
-    return CoreIconButton.wrap(GROUP_FOLLOWERS.getId());
+    return PaperIconButton.wrap(GROUP_FOLLOWERS.getId());
   }
 
   @Override

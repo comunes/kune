@@ -22,8 +22,14 @@
  */
 package cc.kune.polymer.client.actions.ui;
 
-import br.com.rpa.client._coreelements.CoreIcon;
-import br.com.rpa.client._coreelements.HasIcon;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.ui.Widget;
+
+import br.com.rpa.client._ironelements.HasIcon;
+import br.com.rpa.client._ironelements.IronIcon;
 import br.com.rpa.client._paperelements.PaperButton;
 import br.com.rpa.client._paperelements.PaperCustomButton;
 import br.com.rpa.client._paperelements.PaperIconButton;
@@ -34,12 +40,6 @@ import cc.kune.common.client.actions.ui.descrip.ButtonDescriptor;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
 import cc.kune.common.client.tooltip.Tooltip;
 import cc.kune.common.shared.res.KuneIcon;
-
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.ui.Widget;
 
 /**
  * The Class AbstractPoButtonGui.
@@ -129,9 +129,9 @@ public abstract class AbstractPoPaperButtonGui extends AbstractPoChildGuiItem im
     final String id = descriptor.getId();
 
     if (hasIcon && hasText) {
-      icon = new CoreIcon();
+      icon = new IronIcon();
       iconWidget = (Widget) icon;
-      button = new PaperCustomButton<Widget>((CoreIcon) icon);
+      button = new PaperCustomButton<Widget>((IronIcon) icon);
       button.setToggle(enableTongle);
       descriptor.putValue(ICON, icon);
       endConfigureBtn(descriptor, id);

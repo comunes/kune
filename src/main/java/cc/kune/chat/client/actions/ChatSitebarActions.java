@@ -26,7 +26,20 @@ import org.waveprotocol.wave.client.events.ClientEvents;
 import org.waveprotocol.wave.client.events.NetworkStatusEvent;
 import org.waveprotocol.wave.client.events.NetworkStatusEventHandler;
 
-import br.com.rpa.client._coreelements.CoreIconButton;
+import com.calclab.emite.core.client.events.StateChangedEvent;
+import com.calclab.emite.core.client.events.StateChangedHandler;
+import com.calclab.emite.core.client.xmpp.session.XmppSession;
+import com.calclab.emite.core.client.xmpp.stanzas.Presence;
+import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
+import com.calclab.emite.im.client.presence.PresenceManager;
+import com.calclab.emite.im.client.presence.events.OwnPresenceChangedEvent;
+import com.calclab.emite.im.client.presence.events.OwnPresenceChangedHandler;
+import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.user.client.Timer;
+import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
+
+import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.AbstractAction;
@@ -41,20 +54,6 @@ import cc.kune.core.client.events.WindowFocusEvent;
 import cc.kune.core.client.sitebar.SiteUserOptions;
 import cc.kune.core.client.sitebar.SiteUserOptionsPresenter;
 import cc.kune.core.shared.SessionConstants;
-import cc.kune.polymer.client.PolymerUtils;
-
-import com.calclab.emite.core.client.events.StateChangedEvent;
-import com.calclab.emite.core.client.events.StateChangedHandler;
-import com.calclab.emite.core.client.xmpp.session.XmppSession;
-import com.calclab.emite.core.client.xmpp.stanzas.Presence;
-import com.calclab.emite.core.client.xmpp.stanzas.Presence.Show;
-import com.calclab.emite.im.client.presence.PresenceManager;
-import com.calclab.emite.im.client.presence.events.OwnPresenceChangedEvent;
-import com.calclab.emite.im.client.presence.events.OwnPresenceChangedHandler;
-import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.Timer;
-import com.google.inject.Inject;
-import com.google.web.bindery.event.shared.EventBus;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -194,7 +193,7 @@ public class ChatSitebarActions {
   /** The chat client. */
   private final ChatClient chatClient;
 
-  private final CoreIconButton chatIcon;
+  private final PaperIconButton chatIcon;
 
   /** The event bus. */
   private final EventBus eventBus;
@@ -247,7 +246,7 @@ public class ChatSitebarActions {
   public ChatSitebarActions(final SessionConstants session, final ChatClient chatClient,
       final SiteUserOptions userOptions, final I18nTranslationService i18n, final ChatResources res,
       final XmppSession xmppSession, final PresenceManager presenceManager, final EventBus eventBus) {
-    chatIcon = (CoreIconButton) SiteUserOptionsPresenter.LOGGED_USER_MENU.getWidget();
+    chatIcon = (PaperIconButton) SiteUserOptionsPresenter.LOGGED_USER_MENU.getWidget();
     this.chatClient = chatClient;
     this.userOptions = userOptions;
     this.i18n = i18n;

@@ -50,7 +50,6 @@
     <meta name="hablar.width" content="550px" />
     <meta name="hablar.height" content="400px" />
     <meta name="hablar.avatarProvider" content="kune-avatars" />
-
     <script language="javascript" type="text/javascript">
                   // -*- engine:js -*-
 
@@ -77,7 +76,7 @@
                     return "";
                   }
 
-                  // Font depending on locale
+      // Font depending on locale
                   locale = getQueryVariable('locale');
                   fontPrefix = '<link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300,600';
                   fontSuffix = '" rel="stylesheet" type="text/css">';
@@ -103,7 +102,7 @@
 
     <!-- will be replaced with elements/elements.vulcanized.html -->
     <link id="bundle" rel="import" href="elements.html" async>
-    <!-- endreplace--
+    <!-- endreplace -->
 
     <!-- - for debugging
     <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
@@ -113,8 +112,8 @@
     <link rel="shortcut icon" href="ws/favicon.ico" />
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <!-- FIXME <link type="text/css" rel="stylesheet" href="ws/css/bootstrap.min.css"> -->
+
+    <link type="text/css" rel="stylesheet" href="ws/css/bootstrap.min.css">
     <link type="text/css" rel="stylesheet" href="ws/addons/bootstrap/jquery.smartmenus.bootstrap.css">
 
     <link type="text/css" rel="stylesheet" href="ws/css/theme.css">
@@ -138,20 +137,91 @@
     <link rel="stylesheet" href="css/owl.theme.default.css">
     <link type="text/css" rel="stylesheet" href="ws/ws.css">
 
+    <!-- FIXME
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    <!-- FIXME <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script> -->
+    -->
+    <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script>
     <script src="others/js/owl.carousel.min.js"></script>
   </head>
-  <body class="fit">
+  <body class="fullbleed loading">
+
+    <!-- Loading screens happen outside of HTML Imports + Polymer so 1st
+    paint is fast and does not depend on network resources. Mobile gets
+    a loading splash screen. Desktop the layout/shell of the app. -->
+    <div id="splash">
+      <div class="appshell_drawer">
+        <div class="appshell_drawer_top"></div>
+        <div class="appshell_drawer_bottom"></div>
+      </div>
+      <div class="appshell_main">
+        <div class="appshell_header"></div>
+        <div class="appshell_content"></div>
+      </div>
+    </div>
 
     <template id="kunetemplate" is="dom-bind">
       <style is="custom-style" >
+        /* -*- engine:css -*- */
 
+        paper-spinner-lite.k-spinner {
+          --paper-spinner-color: #a56941;
+          --paper-spinner-stroke-width: 6px;
+        }
+
+        paper-progress {
+          --paper-progress-active-color: rgb(165, 105, 65);
+        }
+
+        paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar { /* ff */
+          height: 5px;
+        }
+
+        paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
+          height: 5px;
+        }
+
+        paper-tabs {
+          --paper-tabs-selection-bar-color: rgb(105, 49, 47);
+        }
+
+      </style>
+
+      <style>
         /* -*- engine:css -*- */
         /* Home Space -------------------------------------------------------- */
         body {
           font-family: 'Open Sans', sans-serif;
           /* position: absolute, etc, with fit polymer attribute in body */
+        }
+
+        #splash {
+          display: flex;
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          transition: opacity 400ms cubic-bezier(0,0,0.2,1);
+          opacity: 0;
+          will-change: opacity;
+          z-index: 1;
+        }
+
+        #splash::before {
+          position: absolute;
+          content: '';
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          z-index: 4;
+          /* background: url(data:image/png;base64); */
+          background-size: 150px;
+          background-color: rgb(105, 49, 47);
+        }
+
+        body.loading #splash {
+          opacity: 1;
         }
 
         .gwt_noscript_warning {
@@ -755,7 +825,6 @@
           background-image: url({{homebackimg}});
           background-repeat: no-repeat;
           background-position: 0% 20%;
-          padding: 30px;
         }
 
         #k_home_main_container {
@@ -817,6 +886,10 @@
           padding-top: 20px;
         }
 
+        #sec0, #sec1, #sec2, #sec3, #sec4, #sec5, #sec6 {
+          width: 100%;
+        }
+
         #k_home_tools paper-icon-item::shadow #icon {
           margin: 0 6px;
         }
@@ -842,11 +915,6 @@
           position: absolute;
           margin: auto;
           top: 0; left: 0; bottom: 0; right: 0;
-        }
-
-        paper-spinner-lite.k-spinner {
-          --paper-spinner-color: #a56941;
-          --paper-spinner-stroke-width: 6px;
         }
 
         .buck_blockquote {
@@ -906,21 +974,28 @@
 
         #main_core_drawer_panel {
           position: absolute;
-          top: 0px;
+          top: 40px;
           right: 0px;
           bottom: 0px;
           left: 0px;
           font-size: 16px;
         }
 
+        #main_core_drawer_panel #drawer {
+	  z-index: 2;
+        }
+
         #main_left_section {
           box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
-          margin-top: 40px;
+          /* margin-top: 40px; */
           background-color: white;
+          position: relative;
+	  top: 0px;
+          z-index: 2;
         }
 
         #main_right_section {
-          margin-top: 40px;
+          /* margin-top: 40px; */
           height: 100%;
           box-sizing: border-box;
           background-color: #FFF;
@@ -981,11 +1056,11 @@
         }
 
         #home_space, #group_space, #user_space {
-          margin-top: 40px;
+          /* margin-top: 40px; */
         }
 
         #user_space {
-          margin: 40px 0 0 10px;
+          margin: 0px 0 0 10px;
         }
 
         #user_space_content {
@@ -1000,15 +1075,6 @@
           left: 0px;
           right: 0px;
           width: 100%;
-        }
-
-        paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar { /* ff */
-          background-color: rgb(105, 49, 47);
-          height: 4px;
-        }
-        paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
-          background-color: rgb(105, 49, 47);
-          height: 4px;
         }
 
         paper-button.custom > iron-icon {
@@ -1062,9 +1128,7 @@
           color: white;
         }
 
-        paper-progress {
-          --paper-progress-active-color: rgb(165, 105, 65);
-        }
+
 
         #paper_progress_container {
         }
@@ -1134,15 +1198,6 @@
         #inbox_tutorial {
           align-self: center;
           margin: 0 15px;
-        }
-
-        #inbox_show_hide {
-          right: -20px;
-          position: absolute;
-          opacity: 0.8;
-          top: 0px;
-          border-bottom-right-radius: 50%; border-top-right-radius: 50%;
-          border-bottom-left-radius: 5px; border-top-left-radius: 5px;
         }
 
         #inbox_new_message {
@@ -1958,7 +2013,7 @@
       <!-- https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel -->
       <paper-drawer-panel drawer-width="[[main_drawer_width(xsmall, small)]]" responsive-width="900px" selected="{{main_selected}}" narrow="{{main_narrow}}" id="main_core_drawer_panel" force-narrow="{{main_forcenarrow}}" disable-swipe="{{main_disableSwipe}}" disable-edge-swipe="{{main_disableEdgeSwipe}}" touch-action="pan-y">
         <section id="main_left_section" drawer>
-          <div id="inbox_container" fit>
+          <div id="inbox_container" class="fit">
             <paper-header-panel mode="waterfall" id="inbox_core_header">
               <paper-toolbar id="inbox_toolbar">
                 <paper-fab icon="create" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
@@ -1985,7 +2040,6 @@
               </section>
             </paper-header-panel>
           </div>
-          <paper-fab icon="view-column" mini id="inbox_show_hide" class="btn_gray" core-drawer-toggle></paper-fab>
         </section>
         <section id="main_right_section" main>
           <iron-pages id="iron-main-pages" selected="{{spaceselected}}" class="full_absolute_no_sitebar" notap>
@@ -1997,18 +2051,17 @@
                 <paper-toolbar id="k_home_mask">
                   <div id="k_home_main_container" class="horizontal center-justified layout flex">
                     <!-- FIXME -->
-                    <div id="k_home_main_v"
-                         class="layout [[addClassIf('horizontal', !xsmall)]] [[addClassIf('vertical', xsmall)]]">
+                    <div id="k_home_main_v" class$="layout {{verticalIf(xsmall)}}">
                       <div id="k_home_logo_container" class="horizontal layout">
                         <div>
                           <span id="k_home_logo">
-                            <iron-image fade preload src$="./others/kune-logo-alone[[logo_size(xsmall, small)]].png" alt="kune-logo-alone"></iron-image>
+                            <iron-image fade preload src$="./others/kune-logo-alone[[logo_size(xsmall, small)}}.png" alt="kune-logo-alone"></iron-image>
                           </span>
                         </div>
                         <div class="vertical layout">
                           <div>
                             <span id="k_home_logoname">
-                              <iron-image fade preload src$='./others/kune-logo-name-alone[[logo_size(xsmall, small)]].png' alt="kune-longo-name"></iron-image>
+                              <iron-image fade preload src$='./others/kune-logo-name-alone[[logo_size(xsmall, small)}}.png' alt="kune-longo-name"></iron-image>
                             </span>
                           </div>
                           <div>
@@ -2056,7 +2109,7 @@
                   </div>
                 </div>
 
-                <div id="k_home_scroller" fit unresolved>
+                <div id="k_home_scroller" class="fit" unresolved>
                   <div id="k_home_center" class="owl-carousel" >
 
                     <div class="horizontal center-justified layout" id="sec0">
@@ -2069,8 +2122,8 @@
                           kune es una red social donde puedes comunicarte colaborar y
                           compartir entre iguales, usando diferentes herramientas web:
                         </span>
-                        <div id="k_home_tools" class="wrap justified [[addClassIf('horizontal', xsmall)]] [[addClassIf('vertical', !xsmall)]] layout">
-                          <div class="wrap justified layout [[addClassIf('horizontal', !xsmall)]] [[addClassIf('vertical', xsmall)]]">
+                        <div id="k_home_tools" class$="wrap justified {{verticalIfNot(xsmall)}} layout">
+                          <div class$="wrap justified layout {{verticalIf(xsmall)}}">
                             <paper-icon-item class="horizontal center layout">
                               <iron-icon  icon="kune:docs" item-icon></iron-icon>
                               <span id="k_home_tool_docs_def" class="hidden-xs" style="display: none;">documents</span>
@@ -2092,7 +2145,7 @@
                               <span id="k_home_tool_lists_es" class="hidden-xs" style="display: none;">foros</span>
                             </paper-icon-item>
                           </div>
-                          <div class="wrap justified layout [[addClassIf('horizontal', !xsmall)]] [[addClassIf('vertical', xsmall)]]">
+                          <div class$="wrap justified layout {{verticalIf(xsmall)}}">
                             <paper-icon-item class="horizontal center layout">
                                <iron-icon icon="kune:wiki" item-icon></iron-icon>
                               <span id="k_home_tool_wiki_def" class="hidden-xs" style="display: none;">wiki</span>
@@ -2264,8 +2317,7 @@
                           </div>
                         </div>
                       </div>
-                      <div id="group_header_bottom"
-                           class="layout [[addClassIf('horizontal', !xsmall)]] [[addClassIf('vertical', xsmall)]]">
+                      <div id="group_header_bottom" class$="layout {{verticalIf(xsmall)}}">
                         <ol class="breadcrumb"><div id="miga"></div></ol>
                         <div class="flex"></div>
                         <div id="header_bottom_extensionbar" class="btn-group indent"></div>
@@ -2344,83 +2396,16 @@
         <paper-icon-button icon="close" on-click="toggleSearch" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
       </paper-toolbar>
 
-      <neon-animation id="opacity-infinite" duration="1000" iterations="Infinity" direction="alternate">
-        <neon-animation-keyframe>
-          <neon-animation-prop name="opacity" value="1">
-          </neon-animation-prop>
-        </neon-animation-keyframe>
-        <neon-animation-keyframe>
-          <neon-animation-prop name="opacity" value="0.3">
-          </neon-animation-prop>
-        </neon-animation-keyframe>
-      </neon-animation>
-
-      <neon-animation-group id="opacity-scale" type="seq">
-        <neon-animation duration="300">
-          <neon-animation-keyframe>
-            <neon-animation-prop name="opacity" value="1">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-          <neon-animation-keyframe>
-            <neon-animation-prop name="opacity" value="0.3">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-          <neon-animation-keyframe>
-            <neon-animation-prop name="opacity" value="1">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-        </neon-animation>
-        <neon-animation duration="300">
-          <neon-animation-keyframe>
-            <neon-animation-prop name="transform" value="scale(1)">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-          <neon-animation-keyframe>
-            <neon-animation-prop name="transform" value="scale(1.2)">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-          <neon-animation-keyframe>
-            <neon-animation-prop name="transform" value="scale(1)">
-            </neon-animation-prop>
-          </neon-animation-keyframe>
-        </neon-animation>
-      </neon-animation-group>
     </template>
 
 
 
     <script>
-      window.addEventListener('WebComponentsReady', function(e) {
-        // Not yet ready
-        // document.body.setAttribute('unresolved', '');
-        var s = document.createElement('script');
-        s.type = "text/javascript";
-        s.src = "ws/ws.nocache.js";
-        // Comment this line for develop this initial page without gwt code
-        //document.body.appendChild(s);
-        console.log("Webcomponent event loads GWT code");
-      });
+      var devMode = true;
 
       addEventListener('dom-change', function(e) {
         console.log("dom-change event");
         var scope = e.target;
-
-        function resizeHome() {
-          h = document.getElementById('k_home_scroller').offsetHeight;
-          h = h - h*2/100 - 120;
-          document.getElementById('sec0').style.height=h + "px";
-          document.getElementById('sec1').style.height=h + "px";
-          document.getElementById('sec2').style.height=h + "px";
-          document.getElementById('sec3').style.height=h + "px";
-          document.getElementById('sec4').style.height=h + "px";
-          document.getElementById('sec5').style.height=h + "px";
-        }
-
-        resizeHome();
-
-        window.onresize = function() {
-          resizeHome();
-        }
 
         var backs = ["others/home-back-trees.png",
                      "others/home-back-buck.png",
@@ -2460,7 +2445,9 @@
         }
 
         // This is done by gwt, but useful for development without gwt
-        scope.hideSpinner();
+        if (devMode) {
+          scope.hideSpinner();
+        }
 
         // http://www.owlcarousel.owlgraphic.com/index.html
         var owl = $(".owl-carousel");
@@ -2472,6 +2459,7 @@
             nav: false,
             autoplay:true,
             center: true,
+            // autoWidth:true,
             // autoplaySpeed: true,
             autoplayTimeout:10000,
             autoplayHoverPause:true,
@@ -2487,12 +2475,30 @@
           scope.homebackimg = backs[i];
         });
 
+        function resizeHome () {
+          var h = document.getElementById('k_home_scroller').offsetHeight;
+          console.log("Resizing owl with home height: " + h);
+          h = h - h * 2 / 100 - 120;
+          document.getElementById('sec0').style.height = h + 'px';
+          document.getElementById('sec1').style.height = h + 'px';
+          document.getElementById('sec2').style.height = h + 'px';
+          document.getElementById('sec3').style.height = h + 'px';
+          document.getElementById('sec4').style.height = h + 'px';
+          document.getElementById('sec5').style.height = h + 'px';
+        }
+
+        window.onresize = function () {
+          resizeHome();
+        };
+
+        resizeHome();
+
       });
+
     </script>
     <script type="text/javascript" src="app.js"></script>
+
     <script type="text/javascript" src="kune-polymer.js"></script>
-
-
 
     <noscript>
       <div class="gwt_noscript_warning">

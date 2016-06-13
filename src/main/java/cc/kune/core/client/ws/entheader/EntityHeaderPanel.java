@@ -24,7 +24,18 @@ package cc.kune.core.client.ws.entheader;
 
 import org.gwtbootstrap3.client.ui.html.Text;
 
-import br.com.rpa.client._coreelements.CoreIconButton;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.user.client.ui.Anchor;
+import com.google.gwt.user.client.ui.Image;
+import com.google.gwt.user.client.ui.Widget;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import com.google.web.bindery.event.shared.EventBus;
+import com.gwtplatform.mvp.client.ViewImpl;
+
+import br.com.rpa.client._paperelements.PaperIconButton;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
@@ -41,17 +52,6 @@ import cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView;
 import cc.kune.core.shared.dto.GroupDTO;
 import cc.kune.gspace.client.armor.GSpaceArmor;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Display;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Widget;
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
-import com.google.web.bindery.event.shared.EventBus;
-import com.gwtplatform.mvp.client.ViewImpl;
-
 /**
  * The Class EntityHeaderPanel.
  *
@@ -63,7 +63,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   private final MediumAvatarDecorator decorator;
   /** The download provider. */
   private final Provider<ClientFileDownloadUtils> downloadProvider;
-  private final CoreIconButton followersBtn;
+  private final PaperIconButton followersBtn;
 
   private final Text groupLongName;
   /** The images. */
@@ -111,7 +111,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     shorNamePanel.add(shortNameAnchor);
     decorator.setWidget(logo);
     logoShadow.appendChild(((Widget) decorator).getElement());
-    followersBtn = (CoreIconButton) armor.getFollowersButton();
+    followersBtn = (PaperIconButton) armor.getFollowersButton();
     eventBus.addHandler(GroupMembersUpdatedEvent.getType(),
         new GroupMembersUpdatedEvent.GroupMembersUpdatedHandler() {
       @Override
@@ -134,7 +134,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #addAction(cc.kune.common.client.actions.ui.descrip.GuiActionDescrip)
@@ -151,7 +151,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -161,7 +161,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setLogoImage(cc.kune.core.shared.dto.GroupDTO, boolean)
@@ -175,7 +175,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setLogoImageVisible(boolean)
@@ -188,7 +188,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setLogoText(java.lang.String)
@@ -202,7 +202,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setOnlineStatusGroup(java.lang.String)
@@ -214,7 +214,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.ws.entheader.EntityHeaderPresenter.EntityHeaderView
    * #setOnlineStatusVisible(boolean)

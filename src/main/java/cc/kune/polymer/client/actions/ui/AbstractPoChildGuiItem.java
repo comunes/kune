@@ -24,11 +24,11 @@ package cc.kune.polymer.client.actions.ui;
 
 import org.gwtbootstrap3.client.ui.constants.IconType;
 
-import br.com.rpa.client._coreelements.HasIcon;
+import com.google.gwt.user.client.ui.UIObject;
+
+import br.com.rpa.client._ironelements.HasIcon;
 import cc.kune.common.client.actions.ui.AbstractChildGuiItem;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescrip;
-
-import com.google.gwt.user.client.ui.UIObject;
 
 public abstract class AbstractPoChildGuiItem extends AbstractChildGuiItem {
 
@@ -44,7 +44,7 @@ public abstract class AbstractPoChildGuiItem extends AbstractChildGuiItem {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.common.client.actions.ui.AbstractGuiItem#setIcon(java.lang.Object)
    */
