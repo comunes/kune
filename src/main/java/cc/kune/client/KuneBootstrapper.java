@@ -22,6 +22,12 @@
  */
 package cc.kune.client;
 
+import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.core.client.Scheduler.ScheduledCommand;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.gwtplatform.mvp.client.Bootstrapper;
+
 import cc.kune.barters.client.BartersParts;
 import cc.kune.blogs.client.BlogsParts;
 import cc.kune.bootstrap.client.BSGuiProvider;
@@ -45,21 +51,12 @@ import cc.kune.gspace.client.GSpaceParts;
 import cc.kune.gspace.client.tool.ContentViewerSelector;
 import cc.kune.hspace.client.HSpaceParts;
 import cc.kune.lists.client.ListsParts;
-import cc.kune.polymer.client.PolymerId;
 import cc.kune.polymer.client.PolymerUtils;
 import cc.kune.tasks.client.TasksParts;
 import cc.kune.trash.client.TrashParts;
 import cc.kune.wiki.client.WikiParts;
 
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.gwtplatform.mvp.client.Bootstrapper;
-
 public class KuneBootstrapper implements Bootstrapper {
-
-  protected static PolymerId[] unresolvedIdList = new PolymerId[] { PolymerId.HOME_SCROLLER,
-      PolymerId.GROUP_SPACE, PolymerId.USER_SPACE, PolymerId.SITEBAR_RIGHT_EXTENSIONBAR,
-      PolymerId.HOME_TOOLBAR };
 
   private final ContentViewerSelector contentViewerSelector;
 
@@ -70,6 +67,11 @@ public class KuneBootstrapper implements Bootstrapper {
   private final Provider<MotdManager> motdManager;
 
   private final SessionChecker sessionChecker;
+
+  private native void notifyHostpage() /*-{
+    if ($wnd.onGwtReady())
+      $wnd.onGwtReady();
+  }-*/;
 
   @Inject
   public KuneBootstrapper(final SessionChecker sessionChecker,
@@ -116,14 +118,16 @@ public class KuneBootstrapper implements Bootstrapper {
     SessionInstance.get().onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
-        // Polymer preventing FOUC
-        // https://www.polymer-project.org/docs/polymer/styling.html#fouc-prevention
-        for (final PolymerId id : unresolvedIdList) {
-          PolymerUtils.resolved(id);
-        }
-        // PolymerUtils.resolved(RootPanel.getBodyElement());
         PolymerUtils.hideSpinner();
         motdManager.get();
+      }
+    });
+
+    Scheduler.get().scheduleDeferred(new ScheduledCommand() {
+
+      @Override
+      public void execute() {
+        notifyHostpage();
       }
     });
   }

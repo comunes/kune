@@ -24,11 +24,9 @@
 package cc.kune.polymer.client;
 
 import static cc.kune.polymer.client.Layout.*;
-import br.com.rpa.client._paperelements.PaperFab;
 
 import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -132,15 +130,6 @@ public class PolymerUtils {
     }
   }
 
-  public static void resolved(final Element element) {
-    element.setAttribute("resolved", "");
-    element.removeAttribute("unresolved");
-  }
-
-  public static void resolved(final PolymerId id) {
-    resolved(DOM.getElementById(id.getId()));
-  }
-
   public native static void setBackImage(final String url) /*-{
     $wnd.kt.group_back_image_url = url;
   }-*/;
@@ -234,15 +223,6 @@ public class PolymerUtils {
       jsArrayString.push(s);
     }
     return jsArrayString;
-  }
-
-  public static void unresolved(final Element element) {
-    element.setAttribute("unresolved", "");
-    element.removeAttribute("resolved");
-  }
-
-  public static void unresolved(final PolymerId id) {
-    unresolved(DOM.getElementById(id.getId()));
   }
 
 }

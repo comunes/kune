@@ -13,8 +13,8 @@
     <!-- Use this if you want to force some language as default
     <meta name="gwt:property" content="locale=es" /> -->
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <!--
@@ -50,59 +50,58 @@
     <meta name="hablar.width" content="550px" />
     <meta name="hablar.height" content="400px" />
     <meta name="hablar.avatarProvider" content="kune-avatars" />
+
     <script language="javascript" type="text/javascript">
-                  // -*- engine:js -*-
+      // -*- engine:js -*-
 
       function getQueryVariable(variable) {
-                    var query = window.location.search.substring(1);
-                    var vars = query.split('&');
-                    for (var i = 0; i < vars.length; i++) {
-                      var pair = vars[i].split('=');
-                      if (decodeURIComponent(pair[0]) == variable) {
-                        return decodeURIComponent(pair[1]);
-                      }
-                    }
-                  }
+        var query = window.location.search.substring(1);
+        var vars = query.split('&');
+        for (var i = 0; i < vars.length; i++) {
+          var pair = vars[i].split('=');
+          if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+          }
+        }
+      }
 
-                  // See MetaUtils.java
-                  function getMetaContent(name) {
-                    var metas = document.getElementsByTagName('meta');
-                    for (i=0; i < metas.length; i++) {
-                      // console.log("meta: " + metas[i].getAttribute("name"));
-                      if (metas[i].getAttribute("name") == name) {
-                        return metas[i].getAttribute("content");
-                      }
-                    }
-                    return "";
-                  }
+      // See MetaUtils.java
+      function getMetaContent(name) {
+        var metas = document.getElementsByTagName('meta');
+        for (i=0; i < metas.length; i++) {
+          // console.log("meta: " + metas[i].getAttribute("name"));
+          if (metas[i].getAttribute("name") == name) {
+            return metas[i].getAttribute("content");
+          }
+        }
+        return "";
+      }
 
       // Font depending on locale
-                  locale = getQueryVariable('locale');
-                  fontPrefix = '<link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300,600';
-                  fontSuffix = '" rel="stylesheet" type="text/css">';
+      locale = getQueryVariable('locale');
+      fontPrefix = '<link href="//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300,600';
+      fontSuffix = '" rel="stylesheet" type="text/css">';
 
-                  switch (locale) {
-                    case 'gl':
-                      subset = '&subset=latin,greek-ext,greek';
-                      break;
-                    case 'ru':
-                      subset = '&subset=cyrillic,cyrillic-ext,latin';
-                      break;
-                    case 'vi_VN':
-                      subset = '&subset=vietnamese';
-                    default:
-                      subset = '';
-                  }
-                  font = fontPrefix + subset + fontSuffix;
-                  document.write(font);
-
-            </script>
+      switch (locale) {
+        case 'gl':
+          subset = '&subset=latin,greek-ext,greek';
+          break;
+        case 'ru':
+          subset = '&subset=cyrillic,cyrillic-ext,latin';
+          break;
+        case 'vi_VN':
+          subset = '&subset=vietnamese';
+        default:
+          subset = '';
+      }
+      font = fontPrefix + subset + fontSuffix;
+      document.write(font);
+    </script>
 
     <!-- -*- engine:html -*- -->
 
-    <!-- will be replaced with elements/elements.vulcanized.html -->
-    <link id="bundle" rel="import" href="elements.html" async>
-    <!-- endreplace -->
+    <!-- vulcanize elements.html > elements-build.html -->
+    <link id="bundle" rel="import" href="elements-build.html" async>
 
     <!-- - for debugging
     <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
@@ -133,15 +132,14 @@
           href="others/splash/style/stuff.css">
     <link type="text/css" rel="stylesheet"
           href="others/splash/style/main.css">
-    <link rel="stylesheet" href="css/owl.carousel.css">
-    <link rel="stylesheet" href="css/owl.theme.default.css">
+    <link rel="stylesheet" href="css/flickity.css" media="screen">
     <link type="text/css" rel="stylesheet" href="ws/ws.css">
 
     <!-- FIXME
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     -->
     <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script>
-    <script src="others/js/owl.carousel.min.js"></script>
+    <script src="others/js/flickity.pkgd.min.js"></script>
   </head>
   <body class="fullbleed loading">
 
@@ -164,7 +162,7 @@
         /* -*- engine:css -*- */
 
         paper-spinner-lite.k-spinner {
-          --paper-spinner-color: #a56941;
+          --paper-spinner-color: rgb(105, 49, 47);
           --paper-spinner-stroke-width: 6px;
         }
 
@@ -173,11 +171,11 @@
         }
 
         paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar { /* ff */
-          height: 5px;
+          height: 4px;
         }
 
         paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
-          height: 5px;
+          height: 4px;
         }
 
         paper-tabs {
@@ -204,7 +202,7 @@
           transition: opacity 400ms cubic-bezier(0,0,0.2,1);
           opacity: 0;
           will-change: opacity;
-          z-index: 1;
+          z-index: 100;
         }
 
         #splash::before {
@@ -214,10 +212,14 @@
           left: 0;
           right: 0;
           bottom: 0;
-          z-index: 4;
-          /* background: url(data:image/png;base64); */
-          background-size: 150px;
-          background-color: rgb(105, 49, 47);
+          z-index: 100;
+          /* echo "data:image/png;base64,$(base64 -w 0 logo-alone-white-150.png)" | xsel */
+          background: url(data:image/png;base64,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);
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-position: center;
+          background-size: 120px;
+          background-color: #e0e0e0;
         }
 
         body.loading #splash {
@@ -273,12 +275,13 @@
             margin: 10px 0;
           }
 
-          #k_home_center,.buck_blockquote {
+          #k_home_center, .buck_blockquote {
             font-size: 16px;
           }
 
-          #k_home_center {
+          #k_home_center .carousel-cell {
             width: 100%;
+            padding: 0 10px;
           }
 
           #k_home_center div {
@@ -295,8 +298,11 @@
             font-size: 16px;
           }
 
-          #k_home_tools {
+          #k_home_tools span {
             font-size: 18px;
+          }
+
+          #k_home_tools {
             width: 80%;
             margin: 0 auto;
           }
@@ -441,6 +447,10 @@
             padding-left: 10px;
           }
 
+          .flickity-page-dots {
+            bottom: 50px;
+          }
+
         } /* end xsmall */
 
         /* small: Portrait tablets and small desktops */
@@ -451,20 +461,25 @@
             padding-top: 110px;
           }
 
-          #k_home_center,.buck_blockquote {
+          #k_home_center, .buck_blockquote {
             font-size: 20px;
           }
 
-          #k_home_center {
-            width: 80%;
+          #k_home_center .carousel-cell {
+            width: 100%;
+            padding: 0 10%;
           }
 
           #k_home_1st_description > div {
             font-size: 20px;
           }
 
-          #k_home_tools {
+          #k_home_tools span {
             font-size: 26px;
+          }
+
+          #k_home_tools div#contentIcon {
+            width: 32px;
           }
 
           #header_core_toolbar.tall,
@@ -646,7 +661,7 @@
           }
 
           #sitebar_toolbar li {
-            margin: -24px 8px 0 8px;
+            margin: -24px 8px 0px 8px;
           }
 
           #header-left-margin {
@@ -655,6 +670,11 @@
 
           #social_net_group {
             padding: 0 5px 0 5px;
+          }
+
+          .flickity-page-dots {
+            bottom: 10px;
+            z-index: 2;
           }
 
         } /* end smallup: no xsmall */
@@ -667,19 +687,24 @@
             padding-top: 110px;
           }
 
-          #k_home_center,.buck_blockquote {
+          #k_home_center, .buck_blockquote {
             font-size: 24px;
           }
 
-          #k_home_center {
-            width: 60%;
+          #k_home_center .carousel-cell {
+            width: 100%;
+            padding: 0 20%;
           }
 
           #k_home_1st_description > div {
             font-size: 24px;
           }
 
-          #k_home_tools {
+          #k_home_tools div#contentIcon {
+            width: 32px;
+          }
+
+          #k_home_tools span {
             font-size: 32px;
           }
 
@@ -812,6 +837,17 @@
         @media(min-width:1200px) {
         }
 
+        .carousel {
+          height: 100%;
+        }
+
+        .carousel-cell {
+          height: 100%
+        }
+
+        #home_space {
+        }
+
         #home_space_core_header::shadow #mainContainer {
           overflow: hidden;
         }
@@ -887,7 +923,7 @@
         }
 
         #sec0, #sec1, #sec2, #sec3, #sec4, #sec5, #sec6 {
-          width: 100%;
+          /* width: 100%; */
         }
 
         #k_home_tools paper-icon-item::shadow #icon {
@@ -903,15 +939,15 @@
           cursor: ew-resize;
         }
 
-        #k_home_spin_container {
+        #k_home_spinner_container {
           background-color: {{homebackcolor}};
-          z-index: 1000;
+          z-index: 1001;
           opacity: 0.7;
         }
 
-        #k_home_spin {
-          width: 100px;
-          height: 100px;
+        #k_home_spinner {
+          width: {{spin_size}};
+          height: {{spin_size}};
           position: absolute;
           margin: auto;
           top: 0; left: 0; bottom: 0; right: 0;
@@ -1127,8 +1163,6 @@
           background-color: #d3bc5f;
           color: white;
         }
-
-
 
         #paper_progress_container {
         }
@@ -1571,10 +1605,11 @@
         }
 
         #header_group_name div {
-          white-space: nowrap;
+          /* FIXME, does not work
+             white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: 95%;
+          max-width: 95%; */
         }
 
         #header_group_name:hover div {
@@ -1841,9 +1876,9 @@
         #group_bottombar {
           right: 0px;
           left: 0px;
-          height: 40px;
-          bottom: 0px;
+          bottom: 40px;
           position: absolute;
+          height: 40px;
           border-top-color: rgb(231, 231, 231);
           border-top-style: solid;
           border-top-width: 1px;
@@ -2006,8 +2041,8 @@
       <div id="paper_toast_container" class="horizontal end-justified layout">
         <paper-toast duration="5000" id="toast"></paper-toast>
       </div>
-      <div id="k_home_spin_container" class="layout fit">
-        <paper-spinner-lite alt="Loading" class="k-spinner" id="k_home_spin" active="{{spin_active}}"></paper-spinner>
+      <div id="k_home_spinner_container" class="layout fit">
+        <paper-spinner-lite alt="Loading" class="k-spinner" id="k_home_spinner" active="{{spin_active}}"></paper-spinner>
       </div>
 
       <!-- https://www.polymer-project.org/docs/elements/core-elements.html#core-drawer-panel -->
@@ -2047,7 +2082,7 @@
             <!-- Home Space -------------------------------------------------------- -->
 
             <div id="home_space">
-              <paper-header-panel id="home_space_core_header" mode="seamed" class="layout fit">
+              <paper-header-panel id="home_space_core_header" mode="seamed" class="fit">
                 <paper-toolbar id="k_home_mask">
                   <div id="k_home_main_container" class="horizontal center-justified layout flex">
                     <!-- FIXME -->
@@ -2078,42 +2113,11 @@
                   </div>
                 </paper-toolbar>
 
-                <div class="horizontal layout center flex" id="home_bottombar">
-                  <div class="flex hidden-xs">
-                    <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
-                      <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
-                    </a>
-                    <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
-                      <paper-icon-button src="others/bc_logo_24.png"
-                                         title="donate with bitcoin"></paper-icon-button>
-                    </a>
-                    <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
-                      <img
-                          src="//api.flattr.com/button/flattr-badge-large.png"
-                          alt="Flattr this" title="Flattr this" border="0">
-                    </a>
-                  </div>
-                  <div class="flex owl-theme hidden-xs">
-                    <div class="owl-controls">
-                      <div id="customOwlDots" class="owl-dots"></div>
-                    </div>
-                  </div>
-                  <div class="flex" id="home_copyleft">
-                    © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
-                    <span style="display: none;" id="k_home_copyleft_def">
-                      <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
-                    </span>
-                    <span style="display: none;" id="k_home_copyleft_es">
-                      <a href="http://kune.ourproject.org" target="_blank">kune</a> es un proyecto de <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
-                    </span>
-                  </div>
-                </div>
+                <div id="k_home_scroller" class="fit">
+                  <div id="k_home_center" class="carousel js-flickity fit">
 
-                <div id="k_home_scroller" class="fit" unresolved>
-                  <div id="k_home_center" class="owl-carousel" >
-
-                    <div class="horizontal center-justified layout" id="sec0">
-                      <div self-center>
+                    <div class="carousel-cell " id="sec0">
+                      <div class="flex self-center">
                         <span style="display: none;" id="k_home_slide-1_def">
                           kune it's a social network where you can communicate,
                           collaborate and share between equals, using different web tools:
@@ -2125,7 +2129,7 @@
                         <div id="k_home_tools" class$="wrap justified {{verticalIfNot(xsmall)}} layout">
                           <div class$="wrap justified layout {{verticalIf(xsmall)}}">
                             <paper-icon-item class="horizontal center layout">
-                              <iron-icon  icon="kune:docs" item-icon></iron-icon>
+                              <iron-icon icon="kune:docs" item-icon></iron-icon>
                               <span id="k_home_tool_docs_def" class="hidden-xs" style="display: none;">documents</span>
                               <span id="k_home_tool_docs_es" class="hidden-xs" style="display: none;">documentos</span>
                             </paper-icon-item>
@@ -2171,13 +2175,10 @@
                       </div>
                     </div>
 
-                    <div class="horizontal center-justified layout" id="sec1">
-                      <div self-center>
-                        <div class="horizontal center-justified layout flex">
-                        </div>
+                    <div class="carousel-cell " id="sec1">
+                      <div class="flex self-center">
                         <span id="k_home_buck_def" style="display: none;">
-                          <blockquote class="buck_blockquote">
-                            Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
+                          <blockquote class="buck_blockquote">Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
                             <cite class="buck">
                               <a href="https://en.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
                             </cite>
@@ -2194,8 +2195,7 @@
                       </div>
                     </div>
 
-
-                    <div class="horizontal center-justified layout" id="sec2">
+                    <div class="carousel-cell " id="sec2">
                       <div class="flex self-center">
                         <span id="k_home_decen_def" style="display: none;">
                           <p>Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.</p><p>kune.cc is just one more node in this decentralized social network.</p>
@@ -2206,8 +2206,8 @@
                       </div>
                     </div>
 
-                    <div class="horizontal center-justified layout" id="sec3">
-                      <div class="flex self-center">
+                    <div class="carousel-cell " id="sec3">
+                      <div class="self-center">
                         <span id="k_home_meaning_def" style="display: none;">
                           Kune means "together" in esperanto.
                         </span>
@@ -2217,7 +2217,7 @@
                       </div>
                     </div>
 
-                    <div class="horizontal center-justified layout" id="sec4">
+                    <div class="carousel-cell " id="sec4">
                       <div class="flex self-center">
                         <span id="k_home_continuation_def" style="display: none;">
                           <p>kune is the continuation of the effort that we started in 2002 with
@@ -2233,16 +2233,17 @@
                             <a href="http://ourproject.org" target="_blank">ourproject.org</a>
                             con un objetivo principal:</p><p>Llevar la filosofía colaborativa del
                               <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
-                              a otras áreas.</p><p>
-                                Compartimos nuestros servicios web y nuestras herramientas para
-                                permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
-                                soluciones, etcétera.</p>
+                              a otras áreas.
+                            </p>
+                            <p>Compartimos nuestros servicios web y nuestras herramientas para
+                              permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
+                              soluciones, etcétera.</p>
                         </span>
                       </div>
                     </div>
 
-                    <div class="horizontal center-justified layout" id="sec5">
-                      <div class="flex self-center">
+                    <div class="carousel-cell " id="sec5">
+                      <div class="self-center">
                         <span id="k_home_super_def" style="display: none;">
                           Welcome to the era where collaboration supersede to the corporation.
                         </span>
@@ -2252,16 +2253,44 @@
                       </div>
                     </div>
 
-
                   </div>
                 </div> <!-- home-center -->
+
+                <div class="horizontal layout center flex" id="home_bottombar">
+                  <div class="flex hidden-xs">
+                    <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
+                      <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
+                    </a>
+                    <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
+                      <paper-icon-button src="others/bc_logo_24.png"
+                                         title="donate with bitcoin"></paper-icon-button>
+                    </a>
+                    <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
+                      <img
+                          src="//api.flattr.com/button/flattr-badge-large.png"
+                          alt="Flattr this" title="Flattr this" border="0">
+                    </a>
+                  </div>
+                  <div class="flex hidden-xs">
+
+                  </div>
+                  <div class="flex" id="home_copyleft">
+                    © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
+                    <span style="display: none;" id="k_home_copyleft_def">
+                      <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                    </span>
+                    <span style="display: none;" id="k_home_copyleft_es">
+                      <a href="http://kune.ourproject.org" target="_blank">kune</a> es un proyecto de <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                    </span>
+                  </div>
+                </div>
 
               </paper-header-panel>
             </div><!-- home_space -->
 
             <!-- User Space -------------------------------------------------------- -->
 
-            <div id="user_space" class="fit" unresolved>
+            <div id="user_space" class="fit">
               <paper-fab icon="create" id="edit_inbox_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="reply" id="reply_inbox_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="check" id="editdone_inbox_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
@@ -2275,12 +2304,12 @@
 
             <!-- Group Space ------------------------------------------------------- -->
 
-            <div id="group_space" class="vertical layout" unresolved>
+            <div id="group_space" class="vertical layout">
               <div class="horizontal layout center start-justified flex" id="group_bottombar"></div>
               <paper-fab icon="create" id="edit_docgroup_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="reply" id="reply_docgroup_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
               <paper-fab icon="check" id="editdone_docgroup_fab" mini$="{{xsmall}}" class="btn_green"></paper-fab>
-              <paper-scroll-header-panel condenses keep-condensedHeader header-height$="{{xsmall? headers: small? headerm: headerl}}" condensed-header-height="60" scroll-away-topbar id="core_scroll_header_panel">
+              <paper-scroll-header-panel condenses keep-condensed-header header-height="{{group_scroll_header_height(xsmall,small)}}" condensed-header-height="60" scroll-away-topbar id="core_scroll_header_panel">
                 <paper-toolbar id="header_core_toolbar" class="tall flex">
                   <paper-drawer-panel drawer-width="{{group_header_drawer_width}}" selected="{{group_header_selected}}" narrow right-drawer force-narrow id="core_drawer_group_header" touch-action="pan-y">
                     <section id="group_core_drawer" drawer>
@@ -2291,22 +2320,20 @@
                       </div>
                     </section>
                     <section id="group_core_main" main>
-                      <div id="header_groupname_div" class="top indent" class="layout horizontal">
-                        <div id="header-left-margin">
-                        </div>
-                        <div class="flex self-center">
+                      <div id="header_groupname_div" class="top indent layout horizontal">
+                        <div id="header-left-margin" class="self-center">
                           <paper-material animated id="header_group_paper_shadow" class="top">
                             <!-- https://stackoverflow.com/questions/5775469/whats-the-valid-way-to-include-an-image-with-no-src -->
                             <img class="top" id="header_group_logo" alt="group logo"
                                  src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs="></img>
                           </paper-material>
                         </div>
-                        <div id="header_group_name_group" class="vertical flex layout self-center">
+                        <div id="header_group_name_group" class="flex vertical layout self-center">
                           <div id="header_group_name" class="top"></div>
                           <div id="header_short_group_name" class="top"><a href="#"></a></div>
                         </div>
 
-                        <div class="horizontal layout end-justified">
+                        <div class="flex self-stretch">
                           <div id="social_net_group" class="vertical layout">
                             <div id="k_group_entity_toolbar" class="vertical layout end-justified">
                             </div>
@@ -2397,106 +2424,6 @@
       </paper-toolbar>
 
     </template>
-
-
-
-    <script>
-      var devMode = true;
-
-      addEventListener('dom-change', function(e) {
-        console.log("dom-change event");
-        var scope = e.target;
-
-        var backs = ["others/home-back-trees.png",
-                     "others/home-back-buck.png",
-                     "others/home-back-decen.png",
-                     "others/home-back-four-handed-seat.png",
-                     "others/home-back-op-en.png",
-                     "others/home-back-planets.png",
-                     "others/home-back-trees.png" // again
-        ];
-
-        // Show proper language messages
-        meta = getMetaContent("kune.home.ids");
-
-        HOME_IDS_DEF_SUFFIX = "_def";
-        HOME_IDS_PREFIX = "k_home_";
-
-        // console.log("Locale: " + locale);
-        currentLocale = locale;
-
-        if (meta != null) {
-          // console.log("Meta: " + meta);
-          var ids = meta.split(/[\s,]+/);
-          for (i=0; i < ids.length; i++) {
-            var id = ids[i];
-            var lid = HOME_IDS_PREFIX + id + "_" + currentLocale
-            var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
-            //console.log("Id: " + ldefid);
-            var someElement = document.getElementById(lid);
-            var defElement = document.getElementById(ldefid);
-            if (someElement != null) {
-              someElement.style.display="inherit";
-            } else if (defElement != null) {
-              // console.log("Setting def element " + defElement);
-              defElement.style.display="inherit";
-            }
-          }
-        }
-
-        // This is done by gwt, but useful for development without gwt
-        if (devMode) {
-          scope.hideSpinner();
-        }
-
-        // http://www.owlcarousel.owlgraphic.com/index.html
-        var owl = $(".owl-carousel");
-
-        owl.owlCarousel(
-          {
-            loop: true,
-            margin: 50,
-            nav: false,
-            autoplay:true,
-            center: true,
-            // autoWidth:true,
-            // autoplaySpeed: true,
-            autoplayTimeout:10000,
-            autoplayHoverPause:true,
-            // animateOut: 'fadeOut',
-            dotsContainer: '#customOwlDots',
-            items: 1
-          }
-        );
-
-        owl.on('changed.owl.carousel', function(event) {
-          var i = event.item.index-2
-          // console.log("Show back: " + i);
-          scope.homebackimg = backs[i];
-        });
-
-        function resizeHome () {
-          var h = document.getElementById('k_home_scroller').offsetHeight;
-          console.log("Resizing owl with home height: " + h);
-          h = h - h * 2 / 100 - 120;
-          document.getElementById('sec0').style.height = h + 'px';
-          document.getElementById('sec1').style.height = h + 'px';
-          document.getElementById('sec2').style.height = h + 'px';
-          document.getElementById('sec3').style.height = h + 'px';
-          document.getElementById('sec4').style.height = h + 'px';
-          document.getElementById('sec5').style.height = h + 'px';
-        }
-
-        window.onresize = function () {
-          resizeHome();
-        };
-
-        resizeHome();
-
-      });
-
-    </script>
-    <script type="text/javascript" src="app.js"></script>
 
     <script type="text/javascript" src="kune-polymer.js"></script>
 

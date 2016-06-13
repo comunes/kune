@@ -179,7 +179,7 @@ public class ChatSitebarActions {
   /** The Constant NO_STATUS. */
   private static final String NO_STATUS = null;
 
-  private static final String STYLE_PREFIX = "core-icon-status-";
+  private static final String STYLE_PREFIX = "iron-icon-status-";
 
   /** The away item. */
   private MenuRadioItemDescriptor awayItem;
