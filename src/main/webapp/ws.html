@@ -446,11 +446,6 @@
             /* license */
             padding-left: 10px;
           }
-
-          .flickity-page-dots {
-            bottom: 50px;
-          }
-
         } /* end xsmall */
 
         /* small: Portrait tablets and small desktops */
@@ -672,11 +667,6 @@
             padding: 0 5px 0 5px;
           }
 
-          .flickity-page-dots {
-            bottom: 10px;
-            z-index: 2;
-          }
-
         } /* end smallup: no xsmall */
 
         /* mediumup: Medium devices (desktops, 992px and up) */
@@ -861,6 +851,10 @@
           background-image: url({{homebackimg}});
           background-repeat: no-repeat;
           background-position: 0% 20%;
+        }
+
+        .flickity-page-dots {
+          bottom: 50px;
         }
 
         #k_home_main_container {
@@ -2413,7 +2407,7 @@
         <paper-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn"></paper-icon-button>
         <paper-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></paper-icon-button>
         <div id="sitebar_right_extensionbar"></div>
-        <paper-icon-button id="sitebar_user_btn" class="core_icon-status-offline"><span class="hidden-xs hidden-sm"></span></paper-icon-button>
+        <paper-icon-button id="sitebar_user_btn" class="iron-icon-status-offline"><span class="hidden-xs hidden-sm"></span></paper-icon-button>
         <paper-icon-button icon="search" on-click="toggleSearch" id="sitebar_search_icon"></paper-icon-button>
         <div id="sitebar_search_group">
           <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">

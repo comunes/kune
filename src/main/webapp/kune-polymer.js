@@ -1,7 +1,7 @@
 /* globals $ getMetaContent locale Flickity */
 // Following https://github.com/ebidel/polymer-gmail
 var start = new Date().getTime();
-var devMode = false;
+var devMode = true;
 
 var kt = document.querySelector('#kunetemplate');
 
@@ -297,66 +297,58 @@ window.addEventListener('dom-change', function (e) {
     }
   }
 
-  // This is done by gwt, but useful for development without gwt
-  if (devMode) {
-    kt.hideSpinner();
-  }
-
-  // http://www.owlcarousel.owlgraphic.com/index.html
- /*
-  var owl = $('.owl-carousel');
-
-  owl.owlCarousel(
-    {
-      loop: true,
-      margin: 50,
-      nav: false,
-      // FIXME autoplay: true,
-      // center: true,
-      // autoWidth:true,
-      // autoplaySpeed: true,
-      autoplayTimeout: 10000,
-      autoplayHoverPause: true,
-      // animateOut: 'fadeOut',
-      dotsContainer: '#customOwlDots',
-      items: 1
-    }
-  );
-
-  owl.on('changed.owl.carousel', function (event) {
-    var i = event.item.index - 2;
-    // console.log('Show back: ' + i);
-    kt.homebackimg = backs[i];
-  }); */
-
   var caroElem = document.querySelector('#k_home_center');
   var flkty = new Flickity(caroElem, {
     pageDots: true,
     // setGallerySize: false,
     autoPlay: 10000,
+    imagesLoaded: true,
     wrapAround: true
   });
 
+  function resizeSlider () {
+    var artHeight = $('#k_home_center').outerHeight();
+    console.log('Resizing carousel with home height: ' + artHeight);
+    $('.flickity-viewport').css({
+      'height' : artHeight
+    });
+    $('.flickity-viewport').animate({ // quick and dirty
+      'opacity': 1
+    });
+    flkty.reposition();
+    flkty.resize();
+  }
+
   flkty.on('cellSelect', function () {
     // console.log('Carousel cell select ' + flkty.selectedIndex);
+    resizeSlider();
     kt.homebackimg = backs[flkty.selectedIndex];
   });
 
   function resizeHome () {
-    var h = document.getElementById('k_home_scroller').offsetHeight;
-    console.log('Resizing  carousel with home height: ' + h);
+   /* var h = document.getElementById('k_home_scroller').offsetHeight;
+    console.log('Resizing carousel with home height: ' + h);
     h = h - h * 2 / 100 - 120;
     document.getElementById('sec0').style.height = h + 'px';
     document.getElementById('sec1').style.height = h + 'px';
     document.getElementById('sec2').style.height = h + 'px';
     document.getElementById('sec3').style.height = h + 'px';
     document.getElementById('sec4').style.height = h + 'px';
-    document.getElementById('sec5').style.height = h + 'px';
+    document.getElementById('sec5').style.height = h + 'px'; */
   }
 
   window.onresize = function () {
     resizeHome();
   };
 
+  flkty.select(0);
   resizeHome();
+  resizeSlider();
+  flkty.select(0);
+
+  // This is done by gwt, but useful for development without gwt
+  if (devMode) {
+    kt.hideSpinner();
+  }
+
 });
