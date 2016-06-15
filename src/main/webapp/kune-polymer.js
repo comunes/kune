@@ -1,7 +1,8 @@
-/* globals $ getMetaContent locale Flickity */
+/* globals $ getMetaContent locale Flickity lorem */
 // Following https://github.com/ebidel/polymer-gmail
 var start = new Date().getTime();
-var devMode = true;
+var devMode = false;
+var devSpace = 2;
 
 var kt = document.querySelector('#kunetemplate');
 
@@ -44,7 +45,6 @@ kt.avatarsizes = 50;
 
 kt.homebackimg = 'others/home-back-trees.png';
 
-/* kt.group_back_image_url = 'http://lorempixel.com/1500/1500'; */
 kt.showingSearch = false;
 
 kt.main_forcenarrow = true;
@@ -167,6 +167,10 @@ kt.logo_size = function (xsmall, small) {
   return small ? '-big' : xsmall ? '-med' : '-big';
 };
 
+kt.docContentMinHeightCalc = function (xsmall) {
+  return kt.docContentMinHeight + (xsmall ? 100 : 0) + 'px';
+};
+
 // https://stackoverflow.com/questions/30664216/polymer-1-0-is-there-any-way-to-use-layout-as-an-attribute-instead-of-as-a-cs
 kt.addClassIf = function (classToAdd, shouldAdd) {
   if (shouldAdd) {
@@ -213,9 +217,11 @@ function finishLazyLoadingImports () {
   var onImportLoaded = function () {
     console.log('All imports have been loaded, took ' + (new Date().getTime() - start) + 'ms');
     var loadContainer = document.getElementById('splash');
-    loadContainer.addEventListener('transitionend', e => {
+    loadContainer.addEventListener('transitionend', function (e) {
       loadContainer.parentNode.removeChild(loadContainer); // IE 10 doesn't support el.remove()
     });
+
+    domChangeListen();
 
     if (!devMode) {
       var script = document.createElement('script');
@@ -229,37 +235,83 @@ function finishLazyLoadingImports () {
       loadTestData();
       onGwtReady();
     }
-
-    if (devMode) {
-      /* The initial space (0: for home, 2: for group space) useful during tests */
-      kt.spaceselected = 0;
-    }
   };
 
   // crbug.com/504944 - readyState never goes to complete until Chrome 46.
   // crbug.com/505279 - Resource Timing API is not available until Chrome 46.
-  var link = document.querySelector('#bundle');
+  var link = document.querySelector('#kunebundle');
   if (link.import && link.import.readyState === 'complete') {
+    console.log('Import load event not necessary');
     onImportLoaded();
   } else {
+    console.log('Adding import load event');
     link.addEventListener('load', onImportLoaded);
   }
 }
 
 function loadTestData () {
-  // TODO
+
+  /* The initial space (0: for home, 2: for group space) useful during tests */
+  kt.spaceselected = devSpace;
+
+  kt.group_back_image_url = 'http://lorempixel.com/1500/1500';
+  kt.user_icon_back_image_url = 'http://lorempixel.com/50/50';
+  $('#header_group_logo').attr('src', 'http://lorempixel.com/100/100');
+
+  // https://github.com/shyiko/lorem
+  var script = document.createElement('script');
+  script.src = 'https://rawgit.com/shyiko/lorem/master/src/library/lorem.js';
+  script.onload = function () {
+    $('#doc_content').append(lorem.ipsum('p40_5x40'));
+    $('#header_group_name').append(lorem.ipsum('s_4x10'));
+    $('#header_short_group_name').append(lorem.ipsum('s_4x10'));
+  };
+  document.head.appendChild(script);
 }
 
 function onGwtReady () {
+  console.log('On GWT ready');
   kt.homebackcolor = kt.homebackcolors[Math.floor((Math.random() * kt.homebackcolors.length))];
   document.body.classList.remove('loading');
   kt.spin_size = '100px';
+  homeAdjunts();
 }
 
-window.addEventListener('dom-change', function (e) {
-  console.log('dom-change event');
-  // var scope = e.target;
+function domChangeListen () {
+  window.addEventListener('dom-change', function (e) {
+    console.log('dom-change event');
 
+    // Show proper language messages
+    var meta = getMetaContent('kune.home.ids');
+
+    var HOME_IDS_DEF_SUFFIX = '_def';
+    var HOME_IDS_PREFIX = 'k_home_';
+
+    // console.log('Locale: ' + locale);
+    var currentLocale = locale;
+
+    if (meta != null) {
+      // console.log('Meta: ' + meta);
+      var ids = meta.split(/[\s,]+/);
+      for (var i = 0; i < ids.length; i++) {
+        var id = ids[i];
+        var lid = HOME_IDS_PREFIX + id + '_' + currentLocale;
+        var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
+        // console.log('Id: ' + ldefid);
+        var someElement = document.getElementById(lid);
+        var defElement = document.getElementById(ldefid);
+        if (someElement != null) {
+          someElement.style.display = 'inherit';
+        } else if (defElement != null) {
+          // console.log('Setting def element ' + defElement);
+          defElement.style.display = 'inherit';
+        }
+      }
+    }
+  });
+}
+
+function homeAdjunts () {
   var backs = ['others/home-back-trees.png',
                'others/home-back-buck.png',
                'others/home-back-decen.png',
@@ -268,34 +320,6 @@ window.addEventListener('dom-change', function (e) {
                'others/home-back-planets.png',
                'others/home-back-trees.png' // again
               ];
-
-  // Show proper language messages
-  var meta = getMetaContent('kune.home.ids');
-
-  var HOME_IDS_DEF_SUFFIX = '_def';
-  var HOME_IDS_PREFIX = 'k_home_';
-
-  // console.log('Locale: ' + locale);
-  var currentLocale = locale;
-
-  if (meta != null) {
-    // console.log('Meta: ' + meta);
-    var ids = meta.split(/[\s,]+/);
-    for (var i = 0; i < ids.length; i++) {
-      var id = ids[i];
-      var lid = HOME_IDS_PREFIX + id + '_' + currentLocale;
-      var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
-      // console.log('Id: ' + ldefid);
-      var someElement = document.getElementById(lid);
-      var defElement = document.getElementById(ldefid);
-      if (someElement != null) {
-        someElement.style.display = 'inherit';
-      } else if (defElement != null) {
-        // console.log('Setting def element ' + defElement);
-        defElement.style.display = 'inherit';
-      }
-    }
-  }
 
   var caroElem = document.querySelector('#k_home_center');
   var flkty = new Flickity(caroElem, {
@@ -307,48 +331,33 @@ window.addEventListener('dom-change', function (e) {
   });
 
   function resizeSlider () {
-    var artHeight = $('#k_home_center').outerHeight();
+    var artHeight = $('#k_home_center').outerHeight() - 40;
+    // var artHeight = $('#k_home_scroller').outerHeight() - 40;
     console.log('Resizing carousel with home height: ' + artHeight);
     $('.flickity-viewport').css({
-      'height' : artHeight
+      'height': artHeight
     });
     $('.flickity-viewport').animate({ // quick and dirty
       'opacity': 1
     });
-    flkty.reposition();
+    // flkty.reposition();
     flkty.resize();
+    clearInterval(interval);
   }
 
   flkty.on('cellSelect', function () {
-    // console.log('Carousel cell select ' + flkty.selectedIndex);
-    resizeSlider();
     kt.homebackimg = backs[flkty.selectedIndex];
+    resizeSlider();
   });
 
-  function resizeHome () {
-   /* var h = document.getElementById('k_home_scroller').offsetHeight;
-    console.log('Resizing carousel with home height: ' + h);
-    h = h - h * 2 / 100 - 120;
-    document.getElementById('sec0').style.height = h + 'px';
-    document.getElementById('sec1').style.height = h + 'px';
-    document.getElementById('sec2').style.height = h + 'px';
-    document.getElementById('sec3').style.height = h + 'px';
-    document.getElementById('sec4').style.height = h + 'px';
-    document.getElementById('sec5').style.height = h + 'px'; */
-  }
-
   window.onresize = function () {
-    resizeHome();
+    resizeSlider();
   };
 
-  flkty.select(0);
-  resizeHome();
-  resizeSlider();
-  flkty.select(0);
+  var interval = setInterval(resizeSlider, 300);
 
   // This is done by gwt, but useful for development without gwt
   if (devMode) {
     kt.hideSpinner();
   }
-
-});
+}

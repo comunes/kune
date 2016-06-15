@@ -39,7 +39,7 @@ import com.google.gwt.user.client.Timer;
 import com.google.inject.Inject;
 import com.google.web.bindery.event.shared.EventBus;
 
-import br.com.rpa.client._paperelements.PaperIconButton;
+import br.com.rpa.client._paperelements.PaperButton;
 import cc.kune.chat.client.ChatClient;
 import cc.kune.chat.client.resources.ChatResources;
 import cc.kune.common.client.actions.AbstractAction;
@@ -193,7 +193,7 @@ public class ChatSitebarActions {
   /** The chat client. */
   private final ChatClient chatClient;
 
-  private final PaperIconButton chatIcon;
+  private final PaperButton chatIcon;
 
   /** The event bus. */
   private final EventBus eventBus;
@@ -246,7 +246,7 @@ public class ChatSitebarActions {
   public ChatSitebarActions(final SessionConstants session, final ChatClient chatClient,
       final SiteUserOptions userOptions, final I18nTranslationService i18n, final ChatResources res,
       final XmppSession xmppSession, final PresenceManager presenceManager, final EventBus eventBus) {
-    chatIcon = (PaperIconButton) SiteUserOptionsPresenter.LOGGED_USER_MENU.getWidget();
+    chatIcon = (PaperButton) SiteUserOptionsPresenter.LOGGED_USER_MENU.getWidget();
     this.chatClient = chatClient;
     this.userOptions = userOptions;
     this.i18n = i18n;

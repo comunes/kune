@@ -101,7 +101,7 @@
     <!-- -*- engine:html -*- -->
 
     <!-- vulcanize elements.html > elements-build.html -->
-    <link id="bundle" rel="import" href="elements-build.html" async>
+    <link id="kunebundle" rel="import" href="elements-build.html" async>
 
     <!-- - for debugging
     <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
@@ -180,6 +180,10 @@
 
         paper-tabs {
           --paper-tabs-selection-bar-color: rgb(105, 49, 47);
+        }
+
+        #sec0, #sec1, #sec2, #sec3, #sec4, #sec5, #sec6 {
+           @apply(--layout-self-center);
         }
 
       </style>
@@ -854,7 +858,7 @@
         }
 
         .flickity-page-dots {
-          bottom: 50px;
+          bottom: 60px;
         }
 
         #k_home_main_container {
@@ -916,10 +920,6 @@
           padding-top: 20px;
         }
 
-        #sec0, #sec1, #sec2, #sec3, #sec4, #sec5, #sec6 {
-          /* width: 100%; */
-        }
-
         #k_home_tools paper-icon-item::shadow #icon {
           margin: 0 6px;
         }
@@ -930,7 +930,7 @@
           overflow-x: hidden;
           text-align: justify;
           bottom: 40px;
-          cursor: ew-resize;
+          /* cursor: ew-resize; */
         }
 
         #k_home_spinner_container {
@@ -1162,9 +1162,9 @@
         }
 
         /* Tutorials */
-        /* FIXME  html /deep/ paper-dialog   iframe {
+        paper-dialog iframe {
            border: none;
-           } */
+        }
 
         .sitebar_inbox_badge_container {
           top: -23px;
@@ -1445,6 +1445,17 @@
 
         /* Group space ------------------------------------------------------- */
 
+        #core_scroll_header_panel:before {
+          border-left: 4px solid white;
+          cursor: move;
+	  position: absolute;
+	  top: 0;
+	  bottom: 0;
+	  left: 4;
+	  content: '';
+          z-index: 1;
+        }
+
         #core_scroll_header_panel {
           width: 100%;
           left: 0px;
@@ -1453,6 +1464,7 @@
           bottom: 40px;
           position: absolute;
         }
+
 
         /* background for toolbar when it is at its full size */
 
@@ -1528,8 +1540,8 @@
 
         #group_core_main paper-icon-button iron-icon {
           padding-left: 4px;
-          height: 16px;
-          width: 16px;
+        /*  height: 16px;
+          width: 16px; */
         }
 
         #group_core_main paper-icon-button {
@@ -1544,8 +1556,8 @@
 
         #group_core_main paper-icon-button::shadow iron-icon {
           padding-left: 4px;
-          height: 16px;
-          width: 16px;
+          /* height: 16px;
+          width: 16px; */
         }
 
         #group_core_main paper-icon-button {
@@ -1599,11 +1611,11 @@
         }
 
         #header_group_name div {
-          /* FIXME, does not work
-             white-space: nowrap;
+          /* FIXME, does not work */
+          white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          max-width: 95%; */
+          /* max-width: 95%; */
         }
 
         #header_group_name:hover div {
@@ -1848,7 +1860,7 @@
         #doc_content_shadow {
           font-size: 16px;
           background-color: #FFFFFF;
-          min-height: {{docContentMinHeight + (xsmall? 100: 0)}}px; /* FIXME */
+          min-height: {{docContentMinHeightCalc(xsmall)}};
           margin-bottom: 80px;
         }
 
@@ -1921,6 +1933,7 @@
           margin-right: 3px;
         }
 
+        #sitebar_user_btn iron-icon,
         #sitebar_user_btn::shadow iron-icon {
           background-image: url({{user_icon_back_image_url}});
           border-radius: 50%;
@@ -1977,17 +1990,17 @@
           fill: #FFFFFF;
         }
 
-        .iron-icon-status-away::shadow iron-icon path:nth-child(2) {
+        /* .iron-icon-status-away::shadow iron-icon path:nth-child(2) {
           fill: #FFFFFF;
-        }
+        } */
 
         .iron-icon-status-away iron-icon path:first-child { /* ff */
           fill: rgb(144, 144, 144);
         }
 
-        .iron-icon-status-away::shadow iron-icon path:first-child {
+        /* .iron-icon-status-away::shadow iron-icon path:first-child {
           fill: rgb(144, 144, 144);
-        }
+        } */
 
         .iron-icon-status-online iron-icon { /* ff */
           fill: rgb(95, 255, 39);
@@ -2079,7 +2092,6 @@
               <paper-header-panel id="home_space_core_header" mode="seamed" class="fit">
                 <paper-toolbar id="k_home_mask">
                   <div id="k_home_main_container" class="horizontal center-justified layout flex">
-                    <!-- FIXME -->
                     <div id="k_home_main_v" class$="layout {{verticalIf(xsmall)}}">
                       <div id="k_home_logo_container" class="horizontal layout">
                         <div>
@@ -2327,7 +2339,7 @@
                           <div id="header_short_group_name" class="top"><a href="#"></a></div>
                         </div>
 
-                        <div class="flex self-stretch">
+                        <div class="self-stretch">
                           <div id="social_net_group" class="vertical layout">
                             <div id="k_group_entity_toolbar" class="vertical layout end-justified">
                             </div>
@@ -2407,7 +2419,7 @@
         <paper-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn"></paper-icon-button>
         <paper-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></paper-icon-button>
         <div id="sitebar_right_extensionbar"></div>
-        <paper-icon-button id="sitebar_user_btn" class="iron-icon-status-offline"><span class="hidden-xs hidden-sm"></span></paper-icon-button>
+        <paper-button id="sitebar_user_btn" icon="kune:chat-status" class="iron-icon-status-busy"><span class="hidden-xs hidden-sm"></span></paper-button>
         <paper-icon-button icon="search" on-click="toggleSearch" id="sitebar_search_icon"></paper-icon-button>
         <div id="sitebar_search_group">
           <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">

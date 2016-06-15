@@ -29,7 +29,7 @@ import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import br.com.rpa.client._paperelements.PaperIconButton;
+import br.com.rpa.client._paperelements.PaperButton;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.Action;
 import cc.kune.common.client.actions.ActionEvent;
@@ -65,7 +65,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
 
   /** The Constant LOGGED_USER_MENU. */
   public static final WidgetMenuDescriptor LOGGED_USER_MENU = new WidgetMenuDescriptor(
-      PaperIconButton.wrap(PolymerId.SITEBAR_USER_BTN.getId()));
+      PaperButton.wrap(PolymerId.SITEBAR_USER_BTN.getId()));
 
   /** The Constant LOGGED_USER_MENU_ID. */
   public static final String LOGGED_USER_MENU_ID = "kune-sump-lum";
@@ -93,7 +93,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
   /** The state manager. */
   private final StateManager stateManager;
 
-  private final PaperIconButton userBtn;
+  private final PaperButton userBtn;
 
   /**
    * Instantiates a new site user options presenter.
@@ -125,7 +125,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     this.siteOptions = siteOptions;
     this.shortCutRegister = shortCutRegister;
     this.downUtils = downUtils;
-    userBtn = (PaperIconButton) LOGGED_USER_MENU.getWidget();
+    userBtn = (PaperButton) LOGGED_USER_MENU.getWidget();
     createActions();
     separator.setVisible(false);
     session.onUserSignIn(true, new UserSignInHandler() {

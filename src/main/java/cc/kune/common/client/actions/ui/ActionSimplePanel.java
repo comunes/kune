@@ -32,7 +32,9 @@ import com.google.inject.Inject;
  * The Class ActionSimplePanel.
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
+ * @deprecated use {@link #ActionFlowPanel} instead.
  */
+@Deprecated
 public class ActionSimplePanel extends AbstractComposedGuiItem implements ActionExtensibleView {
 
   /** The bar. */

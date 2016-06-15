@@ -22,16 +22,16 @@
  */
 package cc.kune.core.client.sitebar;
 
-import cc.kune.common.client.actions.ui.ActionSimplePanel;
-import cc.kune.common.client.actions.ui.IsActionExtensible;
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
-import cc.kune.gspace.client.armor.GSpaceArmor;
-
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.gwtplatform.mvp.client.ViewImpl;
+
+import cc.kune.common.client.actions.ui.ActionFlowPanel;
+import cc.kune.common.client.actions.ui.IsActionExtensible;
+import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView;
+import cc.kune.gspace.client.armor.GSpaceArmor;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -48,10 +48,10 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
   private final Provider<ErrorsDialog> errorPanel;
 
   /** The toolbar left. */
-  private final ActionSimplePanel toolbarLeft;
+  private final ActionFlowPanel toolbarLeft;
 
   /** The toolbar right. */
-  private final ActionSimplePanel toolbarRight;
+  private final ActionFlowPanel toolbarRight;
 
   /**
    * Instantiates a new sitebar actions panel.
@@ -72,8 +72,8 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
    *          the site logo
    */
   @Inject
-  public SitebarActionsPanel(final GSpaceArmor armor, final ActionSimplePanel toolbarRight,
-      final ActionSimplePanel toolbarLeft, final I18nTranslationService i18n,
+  public SitebarActionsPanel(final GSpaceArmor armor, final ActionFlowPanel toolbarRight,
+      final ActionFlowPanel toolbarLeft, final I18nTranslationService i18n,
       final Provider<AboutKuneDialog> aboutPanel, final Provider<ErrorsDialog> errorPanel) {
     this.toolbarRight = toolbarRight;
     this.toolbarLeft = toolbarLeft;
@@ -89,7 +89,7 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.View#asWidget()
    */
   @Override
@@ -99,7 +99,7 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#
    * getLeftBar()
@@ -111,7 +111,7 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#
    * getRightBar()
@@ -123,7 +123,7 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#
    * showAboutDialog()
@@ -135,7 +135,7 @@ public class SitebarActionsPanel extends ViewImpl implements SitebarActionsView 
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.sitebar.SitebarActionsPresenter.SitebarActionsView#
    * showErrorDialog()
