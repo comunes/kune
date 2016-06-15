@@ -1,7 +1,7 @@
 /* globals $ getMetaContent locale Flickity lorem */
 // Following https://github.com/ebidel/polymer-gmail
 var start = new Date().getTime();
-var devMode = false;
+var devMode = false
 var devSpace = 2;
 
 var kt = document.querySelector('#kunetemplate');
@@ -11,10 +11,6 @@ kt.spin_size = '230px';
 
 kt.toggle_social_net = function () {
   document.querySelector('#core_drawer_group_header').togglePanel();
-};
-
-window.onresize = function (event) {
-  setContentMinHeight();
 };
 
 function setContentMinHeight () {
@@ -50,8 +46,6 @@ kt.showingSearch = false;
 kt.main_forcenarrow = true;
 kt.main_disableEdgeSwipe = false;
 kt.main_disableSwipe = false;
-
-setContentMinHeight();
 
 /* just used for testing */
 kt.red = 'red';
@@ -192,67 +186,9 @@ kt.inbox_close_visibility = function () {
 
 kt.homebackcolors = ['#c9baa4', '#b6c9a4', '#e3cd77', '#a6c4d1', '#cba7ae'];
 
-// Conditionally load webcomponents polyfill (if needed).
-var webComponentsSupported = (
-  'registerElement' in document &&
-    'import' in document.createElement('link') &&
-    'content' in document.createElement('template'));
-
-if (!webComponentsSupported) {
-  console.log('Your browser does not support web components natively. Loading polyfill.');
-  var script = document.createElement('script');
-  script.async = true;
-  script.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
-  script.onload = finishLazyLoadingImports;
-  document.head.appendChild(script);
-} else {
-  console.log('Your browser supports web components natively, no polyfill needed.');
-  finishLazyLoadingImports();
-}
-
-function finishLazyLoadingImports () {
-  // Use native Shadow DOM if it's available in the browser.
-  // window.Polymer = window.Polymer || {dom: 'shadow'};
-
-  var onImportLoaded = function () {
-    console.log('All imports have been loaded, took ' + (new Date().getTime() - start) + 'ms');
-    var loadContainer = document.getElementById('splash');
-    loadContainer.addEventListener('transitionend', function (e) {
-      loadContainer.parentNode.removeChild(loadContainer); // IE 10 doesn't support el.remove()
-    });
-
-    domChangeListen();
-
-    if (!devMode) {
-      var script = document.createElement('script');
-      script.type = 'text/javascript';
-      script.src = 'ws/ws.nocache.js';
-      // Comment this line for develop this initial page without gwt code
-      document.head.appendChild(script);
-
-      console.log('Webcomponent event loads GWT code');
-    } else {
-      loadTestData();
-      onGwtReady();
-    }
-  };
-
-  // crbug.com/504944 - readyState never goes to complete until Chrome 46.
-  // crbug.com/505279 - Resource Timing API is not available until Chrome 46.
-  var link = document.querySelector('#kunebundle');
-  if (link.import && link.import.readyState === 'complete') {
-    console.log('Import load event not necessary');
-    onImportLoaded();
-  } else {
-    console.log('Adding import load event');
-    link.addEventListener('load', onImportLoaded);
-  }
-}
-
-function loadTestData () {
-
+var loadTestData = function () {
   /* The initial space (0: for home, 2: for group space) useful during tests */
-  kt.spaceselected = devSpace;
+  // kt.spaceselected = devSpace;
 
   kt.group_back_image_url = 'http://lorempixel.com/1500/1500';
   kt.user_icon_back_image_url = 'http://lorempixel.com/50/50';
@@ -267,51 +203,9 @@ function loadTestData () {
     $('#header_short_group_name').append(lorem.ipsum('s_4x10'));
   };
   document.head.appendChild(script);
-}
+};
 
-function onGwtReady () {
-  console.log('On GWT ready');
-  kt.homebackcolor = kt.homebackcolors[Math.floor((Math.random() * kt.homebackcolors.length))];
-  document.body.classList.remove('loading');
-  kt.spin_size = '100px';
-  homeAdjunts();
-}
-
-function domChangeListen () {
-  window.addEventListener('dom-change', function (e) {
-    console.log('dom-change event');
-
-    // Show proper language messages
-    var meta = getMetaContent('kune.home.ids');
-
-    var HOME_IDS_DEF_SUFFIX = '_def';
-    var HOME_IDS_PREFIX = 'k_home_';
-
-    // console.log('Locale: ' + locale);
-    var currentLocale = locale;
-
-    if (meta != null) {
-      // console.log('Meta: ' + meta);
-      var ids = meta.split(/[\s,]+/);
-      for (var i = 0; i < ids.length; i++) {
-        var id = ids[i];
-        var lid = HOME_IDS_PREFIX + id + '_' + currentLocale;
-        var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
-        // console.log('Id: ' + ldefid);
-        var someElement = document.getElementById(lid);
-        var defElement = document.getElementById(ldefid);
-        if (someElement != null) {
-          someElement.style.display = 'inherit';
-        } else if (defElement != null) {
-          // console.log('Setting def element ' + defElement);
-          defElement.style.display = 'inherit';
-        }
-      }
-    }
-  });
-}
-
-function homeAdjunts () {
+var homeResize = function () {
   var backs = ['others/home-back-trees.png',
                'others/home-back-buck.png',
                'others/home-back-decen.png',
@@ -322,6 +216,7 @@ function homeAdjunts () {
               ];
 
   var caroElem = document.querySelector('#k_home_center');
+
   var flkty = new Flickity(caroElem, {
     pageDots: true,
     // setGallerySize: false,
@@ -347,12 +242,15 @@ function homeAdjunts () {
 
   flkty.on('cellSelect', function () {
     kt.homebackimg = backs[flkty.selectedIndex];
-    resizeSlider();
+    // resizeSlider();
   });
 
   window.onresize = function () {
     resizeSlider();
+    setContentMinHeight();
   };
+
+  setContentMinHeight();
 
   var interval = setInterval(resizeSlider, 300);
 
@@ -360,4 +258,125 @@ function homeAdjunts () {
   if (devMode) {
     kt.hideSpinner();
   }
+};
+
+var onImportLoadedFired = false;
+
+var finishLazyLoadingImports = function () {
+  // Use native Shadow DOM if it's available in the browser.
+  window.Polymer = window.Polymer || {dom: 'shadow'};
+  console.log('Lazy loading imports');
+
+  var onImportLoaded = function () {
+    console.log('All imports have been loaded, took ' + (new Date().getTime() - start) + 'ms');
+    if (onImportLoadedFired) {
+      console.log('On import already fired');
+      return;
+    }
+    onImportLoadedFired = true;
+    var loadContainer = document.getElementById('splash');
+    loadContainer.addEventListener('transitionend', function (e) {
+      loadContainer.parentNode.removeChild(loadContainer); // IE 10 doesn't support el.remove()
+    });
+
+    if (!devMode) {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'ws/ws.nocache.js';
+      // Comment this line for develop this initial page without gwt code
+      document.head.appendChild(script);
+      console.log('Webcomponent event loads GWT code');
+    } else {
+      loadTestData();
+      onGwtReady();
+    }
+  };
+
+  // crbug.com/504944 - readyState never goes to complete until Chrome 46.
+  // crbug.com/505279 - Resource Timing API is not available until Chrome 46.
+  var link = document.querySelector('#kunebundle');
+  if (link.import && link.import.readyState === 'complete') {
+    console.log('Import load event not necessary');
+    onImportLoaded();
+  } else {
+    console.log('Adding import load event');
+    link.addEventListener('load', onImportLoaded);
+  }
+};
+
+// Conditionally load webcomponents polyfill (if needed).
+var webComponentsSupported = (
+  'registerElement' in document &&
+    'import' in document.createElement('link') &&
+    'content' in document.createElement('template'));
+
+if (!webComponentsSupported) {
+  console.log('Your browser does not support web components natively. Loading polyfill.');
+  var script = document.createElement('script');
+  script.async = true;
+  script.src = '/bower_components/webcomponentsjs/webcomponents-lite.min.js';
+  script.onload = finishLazyLoadingImports;
+  document.head.appendChild(script);
+} else {
+  console.log('Your browser supports web components natively, no polyfill needed.');
+  finishLazyLoadingImports();
 }
+
+function onGwtReady () {
+  console.log('On GWT ready');
+  kt.homebackcolor = kt.homebackcolors[Math.floor((Math.random() * kt.homebackcolors.length))];
+  document.body.classList.remove('loading');
+  kt.spin_size = '100px';
+}
+
+var domChangeListenFired = false;
+
+kt.addEventListener('dom-change', function (e) {
+  console.log('dom-change event');
+  if (domChangeListenFired) {
+    console.log('dom-change already fired');
+    return;
+  }
+  domChangeListenFired = true;
+
+  // Show proper language messages
+  var meta = getMetaContent('kune.home.ids');
+
+  var HOME_IDS_DEF_SUFFIX = '_def';
+  var HOME_IDS_PREFIX = 'k_home_';
+
+  // console.log('Locale: ' + locale);
+  var currentLocale = locale;
+
+  if (meta != null) {
+    // console.log('Meta: ' + meta);
+    var ids = meta.split(/[\s,]+/);
+    for (var i = 0; i < ids.length; i++) {
+      var id = ids[i];
+      var lid = HOME_IDS_PREFIX + id + '_' + currentLocale;
+      var ldefid = HOME_IDS_PREFIX + id + HOME_IDS_DEF_SUFFIX;
+      // console.log('Id: ' + ldefid);
+      var someElement = document.getElementById(lid);
+      var defElement = document.getElementById(ldefid);
+      if (someElement != null) {
+        someElement.style.display = 'inherit';
+      } else if (defElement != null) {
+        // console.log('Setting def element ' + defElement);
+        defElement.style.display = 'inherit';
+      }
+    }
+  }
+  homeResize();
+});
+
+var sw = document.querySelector('platinum-sw-register');
+sw.addEventListener('service-worker-installed', e => {
+  var toast = document.querySelector('#toast');
+  toast.show();
+});
+
+sw.addEventListener('service-worker-updated', e => {
+  var toast = document.querySelector('#toast');
+  toast.text = 'A new version is available. Tap to refresh';
+  toast.show();
+});

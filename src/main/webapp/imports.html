@@ -42,3 +42,10 @@ https://github.com/philya/font-awesome-polymer-icons-generator
 <!-- FIXME <link rel="import" href="bower_components/lorem-element/lorem-element.html"> -->
 
 <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning"></style>
+
+<!-- Import that platinum-sw-cache comes before platinum-sw-register so it will
+     be upgraded first. -->
+<link rel="import" href="bower_components/platinum-sw/platinum-sw-cache.html">
+<link rel="import" href="bower_components/platinum-sw/platinum-sw-fetch.html">
+<link rel="import" href="bower_components/platinum-sw/platinum-sw-register.html">
+

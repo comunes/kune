@@ -101,7 +101,7 @@
     <!-- -*- engine:html -*- -->
 
     <!-- vulcanize elements.html > elements-build.html -->
-    <link id="kunebundle" rel="import" href="elements-build.html" async>
+    <link id="kunebundle" rel="import" href="elements.html" async>
 
     <!-- - for debugging
     <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
@@ -135,10 +135,10 @@
     <link rel="stylesheet" href="css/flickity.css" media="screen">
     <link type="text/css" rel="stylesheet" href="ws/ws.css">
 
-    <!-- FIXME
+
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-    -->
-    <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script>
+
+    <!-- <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script> -->
     <script src="others/js/flickity.pkgd.min.js"></script>
   </head>
   <body class="fullbleed loading">
@@ -312,11 +312,11 @@
           }
 
           #sitebar_right_extensionbar {
-            margin-top: -20px;
+            /* margin-top: -20px; */
           }
 
           #sitebar_toolbar li {
-            margin: -5px 8px 0 8px;
+            margin: 0 6px;
           }
 
           #header_core_toolbar.tall,
@@ -660,7 +660,7 @@
           }
 
           #sitebar_toolbar li {
-            margin: -24px 8px 0px 8px;
+            margin: 0 6px;
           }
 
           #header-left-margin {
@@ -1047,6 +1047,10 @@
           -webkit-user-select: none;
         }
 
+        #sitebar_toolbar #topBar {
+          height: 40px;
+        }
+
         #sitebar_toolbar .navbar-collapse {
           padding: 0px;
         }
@@ -1055,13 +1059,14 @@
         #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a:hover,
         #sitebar_right_extensionbar .navbar-default .navbar-nav>.open>a {
           background-color: transparent;
-          color:rgb(105, 49, 47);
+          color: rgb(105, 49, 47);
         }
 
         #sitebar_toolbar paper-icon-button {
           font-size: 16px;
         }
 
+        #sitebar_toolbar paper-button,
         #sitebar_toolbar paper-icon-button,
         #sitebar_toolbar paper-icon-button {
           margin-left: 3px !important;
@@ -1069,7 +1074,7 @@
         }
 
         #sitebar_toolbar a:hover,
-        #sitebar_toolbar  paper-icon-button:hover,
+        #sitebar_toolbar paper-icon-button:hover,
         #sitebar_toolbar paper-icon-button:hover {
           color: #808080 !important;
           box-shadow: none !important;
@@ -1122,11 +1127,16 @@
         }
 
         #sitebar_chat_icon {
-          margin-top: -10px;
+          /* margin-top: -10px; */
         }
 
         #sitebar_language_btn,#sitebar_mygroups_btn,#sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
-          margin-top: -20px;
+          /* margin-top: -20px; */
+        }
+
+        #sitebar_toolbar paper-icon-button,
+        #sitebar_toolbar paper-button {
+          font-size: 16px
         }
 
         #sitebar_toolbar div.k-tb-sep {
@@ -1203,7 +1213,7 @@
         }
 
         #sitebar_search_group {
-          margin-top: -20px;
+          /* margin-top: -20px; */
         }
 
         #sitebar_chat_icon_group {
@@ -1517,7 +1527,7 @@
           right: 0px;
           bottom: 0px;
           left: 0px;
-          border-right: 13px solid #F2F2F2;
+          border-right: 4px solid #F2F2F2;
         }
 
         #group_core_drawer {
@@ -2430,6 +2440,10 @@
       </paper-toolbar>
 
     </template>
+
+    <platinum-sw-register skip-waiting clients-claim auto-register>
+      <platinum-sw-cache default-cache-strategy="networkFirst"></platinum-sw-cache>
+    </platinum-sw-register>
 
     <script type="text/javascript" src="kune-polymer.js"></script>
 

@@ -30,6 +30,7 @@
     "paper-ripple": "PolymerElements/paper-ripple#^1.0.5",
     "font-awesome-polymer-icons": "https://github.com/vashchenkov/font-awesome-polymer-icons.git#^1.4.5",
     "font-kune-polymer-icons": "^0.1.0",
-    "paper-material": "^1.0.6"
+		"paper-material": "^1.0.6",
+		"platinum-sw": "PolymerElements/platinum-sw#^1.0.1"
   }
 }
