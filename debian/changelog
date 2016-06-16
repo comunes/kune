@@ -1,5 +1,6 @@
 kune (1.0.1+b23) unstable; urgency=medium
 
+  * Update to polymer 1.0 and many improvements in the UI
   * Fix some minor style issue in group social net
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Wed, 08 Jun 2016 10:57:10 +0200

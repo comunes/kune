@@ -260,7 +260,7 @@
 
           #k_home_center .carousel-cell {
             width: 100%;
-            padding: 0 10px;
+            padding: 0 20px;
           }
 
           #k_home_center div {
@@ -1188,7 +1188,7 @@
           height: 4px;
         }
 
-        .circle-clipper { /* spinner */
+        .circle-clipper {
           border-color: rgb(165, 105, 65) !important;
         }
 
@@ -1569,13 +1569,13 @@
           user-select: none;
         }
 
-        #group_core_main paper-icon-button iron-icon {
+        #group_core_main paper-button iron-icon {
           padding-left: 4px;
           /*  height: 16px;
              width: 16px; */
         }
 
-        #group_core_main paper-icon-button {
+        #group_core_main paper-button {
           border-top-left-radius: 30px;
           border-bottom-left-radius: 30px;
           border: 1px solid #C0C0C0;
@@ -1583,15 +1583,16 @@
           margin-right: -5px;
           height: 50px;
           line-height: 2em;
+          text-transform: capitalize;
         }
 
-        #group_core_main paper-icon-button::shadow iron-icon {
+        #group_core_main paper-button::shadow iron-icon {
           padding-left: 4px;
           /* height: 16px;
              width: 16px; */
         }
 
-        #group_core_main paper-icon-button {
+        #group_core_main paper-button {
           font-size: 14px;
         }
 
@@ -1641,12 +1642,15 @@
           line-height: 1em;
         }
 
+        #header_group_name_group  {
+          /* https://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome */
+	  min-width: 0;
+        }
+
         #header_group_name div {
-          /* FIXME, does not work */
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          /* max-width: 95%; */
         }
 
         #header_group_name:hover div {
@@ -2377,7 +2381,8 @@
                             <div id="k_group_entity_toolbar" class="vertical layout end-justified">
                             </div>
                             <div class="horizontal layout end-justified">
-                              <paper-button icon="group-work" id="group_followers" on-click="toggle_social_net">
+                              <paper-button id="group_followers" on-click="toggle_social_net">
+                                <iron-icon icon="group-work"></iron-icon>
                               </paper-button>
                             </div>
                           </div>

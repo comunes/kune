@@ -1,8 +1,8 @@
 /* globals $ getMetaContent locale Flickity lorem location */
 // Following https://github.com/ebidel/polymer-gmail
 var start = new Date().getTime();
-var devMode = true;
-var devSpace = 0;
+var devMode = false;
+var devSpace = 2;
 
 var kt = document.querySelector('#kunetemplate');
 
@@ -259,7 +259,7 @@ var homeResize = function () {
 
   setContentMinHeight();
 
-  var interval = setInterval(resizeSlider, 5000);
+  var interval = setInterval(resizeSlider, 3000);
 
   // This is done by gwt, but useful for development without gwt
   if (devMode) {
