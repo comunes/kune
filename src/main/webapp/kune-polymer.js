@@ -2,12 +2,14 @@
 // Following https://github.com/ebidel/polymer-gmail
 var start = new Date().getTime();
 var devMode = true;
-var devSpace = 2;
+var devSpace = 0;
 
 var kt = document.querySelector('#kunetemplate');
 
 kt.spin_active = true;
 kt.spin_size = '230px';
+
+kt.swcachedisabled = devMode;
 
 kt.toggle_social_net = function () {
   document.querySelector('#core_drawer_group_header').togglePanel();
@@ -233,6 +235,8 @@ var homeResize = function () {
     var artHeight = $('#k_home_center').outerHeight() - 40;
     // var artHeight = $('#k_home_scroller').outerHeight() - 40;
     console.log('Resizing carousel with home height: ' + artHeight);
+    clearInterval(interval);
+    // return;
     $('.flickity-viewport').css({
       'height': artHeight
     });
@@ -241,12 +245,11 @@ var homeResize = function () {
     });
     // flkty.reposition();
     flkty.resize();
-    clearInterval(interval);
   }
 
   flkty.on('cellSelect', function () {
     kt.homebackimg = backs[flkty.selectedIndex];
-    // resizeSlider();
+    resizeSlider();
   });
 
   window.onresize = function () {
@@ -256,7 +259,7 @@ var homeResize = function () {
 
   setContentMinHeight();
 
-  var interval = setInterval(resizeSlider, 300);
+  var interval = setInterval(resizeSlider, 5000);
 
   // This is done by gwt, but useful for development without gwt
   if (devMode) {

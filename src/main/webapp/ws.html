@@ -236,11 +236,14 @@
           #home_space {
             font-size: 12px;
           }
+          #k_home_main_container,
+          #k_home_mask {
+            height: 220px;
+          }
 
           #k_home_mask {
             background-size: inherit;
-            height: 220px;
-            padding-top: 80px;
+            padding-top: 40px;
           }
 
           #k_home_logo {
@@ -426,10 +429,14 @@
 
         /* small: Portrait tablets and small desktops */
         @media (min-width: 768px) and (max-width: 991px) {
+          #k_home_main_container,
+          #k_home_mask {
+            height: 270px;
+          }
+
           #k_home_mask {
             background-size: inherit;
-            height: 270px;
-            padding-top: 110px;
+            padding-top: 40px;
           }
 
           #k_home_center, .buck_blockquote {
@@ -647,10 +654,15 @@
 
         /* mediumup: Medium devices (desktops, 992px and up) */
         @media(min-width:992px) {
+
+          #k_home_main_container,
+          #k_home_mask {
+            height: 270px;
+          }
+
           #k_home_mask {
             background-size: 100%;
-            height: 270px;
-            padding-top: 110px;
+            padding-top: 40px;
           }
 
           #k_home_center, .buck_blockquote {
@@ -808,7 +820,7 @@
         }
 
         .carousel-cell {
-          height: 100%
+          /* height: 100% */
         }
 
         #home_space {
@@ -864,7 +876,7 @@
         }
 
         #k_home_center {
-          margin: 0 auto;
+          margin-bottom: 40px;
         }
 
         .k_home_motto {
@@ -896,12 +908,11 @@
           margin: 0 6px;
         }
 
-        #k_home_scroller {
-          padding: 0 20px;
-          overflow-y: auto;
-          overflow-x: hidden;
+        #k_home_center {
+          /* padding: 0 20px;
+             overflow-y: auto;
+             overflow-x: hidden; */
           text-align: justify;
-          bottom: 40px;
           /* cursor: ew-resize; */
         }
 
@@ -1169,7 +1180,7 @@
         }
 
         paper-progress#paper_progress div#progressContainer #primaryProgress  {
-           background-color: rgb(165, 105, 65);
+          background-color: rgb(165, 105, 65);
         }
 
         paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar {
@@ -1183,7 +1194,7 @@
 
         /* Tutorials */
         paper-dialog iframe {
-           border: none;
+          border: none;
         }
 
         .sitebar_inbox_badge_container {
@@ -1560,8 +1571,8 @@
 
         #group_core_main paper-icon-button iron-icon {
           padding-left: 4px;
-        /*  height: 16px;
-          width: 16px; */
+          /*  height: 16px;
+             width: 16px; */
         }
 
         #group_core_main paper-icon-button {
@@ -1577,7 +1588,7 @@
         #group_core_main paper-icon-button::shadow iron-icon {
           padding-left: 4px;
           /* height: 16px;
-          width: 16px; */
+             width: 16px; */
         }
 
         #group_core_main paper-icon-button {
@@ -2011,16 +2022,16 @@
         }
 
         /* .iron-icon-status-away::shadow iron-icon path:nth-child(2) {
-          fill: #FFFFFF;
-        } */
+           fill: #FFFFFF;
+           } */
 
         .iron-icon-status-away iron-icon path:first-child { /* ff */
           fill: rgb(144, 144, 144);
         }
 
         /* .iron-icon-status-away::shadow iron-icon path:first-child {
-          fill: rgb(144, 144, 144);
-        } */
+           fill: rgb(144, 144, 144);
+           } */
 
         .iron-icon-status-online iron-icon { /* ff */
           fill: rgb(95, 255, 39);
@@ -2114,8 +2125,8 @@
             <!-- Home Space -------------------------------------------------------- -->
 
             <div id="home_space">
-              <paper-header-panel id="home_space_core_header" mode="seamed" class="fit">
-                <paper-toolbar id="k_home_mask">
+              <div id="home_space_core_header" class="fit vertical layout">
+                <div id="k_home_mask">
                   <div id="k_home_main_container" class="horizontal center-justified layout flex">
                     <div id="k_home_main_v" class$="layout {{verticalIf(xsmall)}}">
                       <div id="k_home_logo_container" class="horizontal layout">
@@ -2142,181 +2153,178 @@
                       </div>
                     </div>
                   </div>
-                </paper-toolbar>
+                </div>
 
-                <div id="k_home_scroller" class="fit">
-                  <div id="k_home_center" class="carousel js-flickity fit">
-
-                    <div class="carousel-cell " id="sec0">
-                      <div class="flex self-center">
-                        <span style="display: none;" id="k_home_slide-1_def">
-                          kune it's a social network where you can communicate,
-                          collaborate and share between equals, using different web tools:
-                        </span>
-                        <span style="display: none;" id="k_home_slide-1_es">
-                          kune es una red social donde puedes comunicarte colaborar y
-                          compartir entre iguales, usando diferentes herramientas web:
-                        </span>
-                        <div id="k_home_tools" class$="wrap justified {{verticalIfNot(xsmall)}} layout">
-                          <div class$="wrap justified layout {{verticalIf(xsmall)}}">
-                            <paper-icon-item class="horizontal center layout">
-                              <iron-icon icon="kune:docs" item-icon></iron-icon>
-                              <span id="k_home_tool_docs_def" class="hidden-xs" style="display: none;">documents</span>
-                              <span id="k_home_tool_docs_es" class="hidden-xs" style="display: none;">documentos</span>
-                            </paper-icon-item>
-                            <paper-icon-item class="horizontal center layout">
-                              <iron-icon icon="kune:events" item-icon></iron-icon>
-                              <span id="k_home_tool_events_def" class="hidden-xs" style="display: none;">calendars</span>
-                              <span id="k_home_tool_events_es" class="hidden-xs" style="display: none;">calendarios</span>
-                            </paper-icon-item>
-                            <paper-icon-item class="horizontal center layout">
-                               <iron-icon icon="kune:chat-tool" item-icon></iron-icon>
-                              <span id="k_home_tool_chats_def" class="hidden-xs"  style="display: none;">chats</span>
-                              <span id="k_home_tool_chats_es" class="hidden-xs" style="display: none;">chats</span>
-                            </paper-icon-item>
-                            <paper-icon-item class="horizontal center layout">
-                               <iron-icon icon="kune:lists" item-icon></iron-icon>
-                              <span id="k_home_tool_lists_def" class="hidden-xs" style="display: none;">forums</span>
-                              <span id="k_home_tool_lists_es" class="hidden-xs" style="display: none;">foros</span>
-                            </paper-icon-item>
-                          </div>
-                          <div class$="wrap justified layout {{verticalIf(xsmall)}}">
-                            <paper-icon-item class="horizontal center layout">
-                               <iron-icon icon="kune:wiki" item-icon></iron-icon>
-                              <span id="k_home_tool_wiki_def" class="hidden-xs" style="display: none;">wiki</span>
-                              <span id="k_home_tool_wiki_es" class="hidden-xs" style="display: none;">wiki</span>
-                            </paper-icon-item>
-                            <paper-icon-item class="horizontal center layout">
-                               <iron-icon icon="kune:message" item-icon></iron-icon>
-                              <span id="k_home_tool_messages_def" class="hidden-xs" style="display: none;">messages</span>
-                              <span id="k_home_tool_messages_es" class="hidden-xs" style="display: none;">mensajes</span>
-                            </paper-icon-item>
-                            <paper-icon-item class="horizontal center layout">
-                               <iron-icon icon="kune:tasks" item-icon></iron-icon>
-                              <span id="k_home_tool_tasks_def" class="hidden-xs" style="display: none;">tasks</span>
-                              <span id="k_home_tool_tasks_es" class="hidden-xs" style="display: none;">tareas</span>
-                            </paper-icon-item>
-                            <paper-icon-item class="horizontal center layout">
-                               <iron-icon icon="kune:barter" item-icon></iron-icon>
-                              <span id="k_home_tool_barters_def" class="hidden-xs" style="display: none;">barters</span>
-                              <span id="k_home_tool_barters_es" class="hidden-xs" style="display: none;">trueques</span>
-                            </paper-icon-item>
-                          </div> <!-- end kune icons 2 columns -->
+                <div id="k_home_center" class="carousel js-flickity flex">
+                  <div class="carousel-cell" id="sec0">
+                    <div class="flex self-center">
+                      <span style="display: none;" id="k_home_slide-1_def">
+                        kune it's a social network where you can communicate,
+                        collaborate and share between equals, using different web tools:
+                      </span>
+                      <span style="display: none;" id="k_home_slide-1_es">
+                        kune es una red social donde puedes comunicarte colaborar y
+                        compartir entre iguales, usando diferentes herramientas web:
+                      </span>
+                      <div id="k_home_tools" class$="wrap justified {{verticalIfNot(xsmall)}} layout">
+                        <div class$="wrap justified layout {{verticalIf(xsmall)}}">
+                          <paper-icon-item class="horizontal center layout">
+                            <iron-icon icon="kune:docs" item-icon></iron-icon>
+                            <span id="k_home_tool_docs_def" class="hidden-xs" style="display: none;">documents</span>
+                            <span id="k_home_tool_docs_es" class="hidden-xs" style="display: none;">documentos</span>
+                          </paper-icon-item>
+                          <paper-icon-item class="horizontal center layout">
+                            <iron-icon icon="kune:events" item-icon></iron-icon>
+                            <span id="k_home_tool_events_def" class="hidden-xs" style="display: none;">calendars</span>
+                            <span id="k_home_tool_events_es" class="hidden-xs" style="display: none;">calendarios</span>
+                          </paper-icon-item>
+                          <paper-icon-item class="horizontal center layout">
+                            <iron-icon icon="kune:chat-tool" item-icon></iron-icon>
+                            <span id="k_home_tool_chats_def" class="hidden-xs"  style="display: none;">chats</span>
+                            <span id="k_home_tool_chats_es" class="hidden-xs" style="display: none;">chats</span>
+                          </paper-icon-item>
+                          <paper-icon-item class="horizontal center layout">
+                            <iron-icon icon="kune:lists" item-icon></iron-icon>
+                            <span id="k_home_tool_lists_def" class="hidden-xs" style="display: none;">forums</span>
+                            <span id="k_home_tool_lists_es" class="hidden-xs" style="display: none;">foros</span>
+                          </paper-icon-item>
                         </div>
+                        <div class$="wrap justified layout {{verticalIf(xsmall)}}">
+                          <paper-icon-item class="horizontal center layout">
+                            <iron-icon icon="kune:wiki" item-icon></iron-icon>
+                            <span id="k_home_tool_wiki_def" class="hidden-xs" style="display: none;">wiki</span>
+                            <span id="k_home_tool_wiki_es" class="hidden-xs" style="display: none;">wiki</span>
+                          </paper-icon-item>
+                          <paper-icon-item class="horizontal center layout">
+                            <iron-icon icon="kune:message" item-icon></iron-icon>
+                            <span id="k_home_tool_messages_def" class="hidden-xs" style="display: none;">messages</span>
+                            <span id="k_home_tool_messages_es" class="hidden-xs" style="display: none;">mensajes</span>
+                          </paper-icon-item>
+                          <paper-icon-item class="horizontal center layout">
+                            <iron-icon icon="kune:tasks" item-icon></iron-icon>
+                            <span id="k_home_tool_tasks_def" class="hidden-xs" style="display: none;">tasks</span>
+                            <span id="k_home_tool_tasks_es" class="hidden-xs" style="display: none;">tareas</span>
+                          </paper-icon-item>
+                          <paper-icon-item class="horizontal center layout">
+                            <iron-icon icon="kune:barter" item-icon></iron-icon>
+                            <span id="k_home_tool_barters_def" class="hidden-xs" style="display: none;">barters</span>
+                            <span id="k_home_tool_barters_es" class="hidden-xs" style="display: none;">trueques</span>
+                          </paper-icon-item>
+                        </div> <!-- end kune icons 2 columns -->
                       </div>
                     </div>
-
-                    <div class="carousel-cell " id="sec1">
-                      <div class="flex self-center">
-                        <span id="k_home_buck_def" style="display: none;">
-                          <blockquote class="buck_blockquote">Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
-                            <cite class="buck">
-                              <a href="https://en.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
-                            </cite>
-                          </blockquote>
-                        </span>
-                        <span id="k_home_buck_es" style="display: none;">
-                          <blockquote class="buck_blockquote">
-                            Haced que el mundo funcione para el 100% de la humanidad, en el menor tiempo posible, a través de la cooperación espontánea, y sin ningún daño ecológico o desventaja para nadie.
-                            <cite class="buck">
-                              <a href="https://es.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
-                            </cite>
-                          </blockquote>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="carousel-cell " id="sec2">
-                      <div class="flex self-center">
-                        <span id="k_home_decen_def" style="display: none;">
-                          <p>Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.</p><p>kune.cc is just one more node in this decentralized social network.</p>
-                        </span>
-                        <span id="k_home_decen_es" style="display: none;">
-                          <p>Kune es decentralizado, a diferencia de otras redes sociales como Google+ o Facebook. Así que como en un servicio de email, puedes elegir entre diferentes proveedores de kune y evitar la centralización de datos personales.</p><p>kune.cc es solo un nodo más en esa red social descentralizada.</p>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="carousel-cell " id="sec3">
-                      <div class="self-center">
-                        <span id="k_home_meaning_def" style="display: none;">
-                          Kune means "together" in esperanto.
-                        </span>
-                        <span id="k_home_meaning_es" style="display: none;">
-                          Kune significa "juntos" en esperanto.
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="carousel-cell " id="sec4">
-                      <div class="flex self-center">
-                        <span id="k_home_continuation_def" style="display: none;">
-                          <p>kune is the continuation of the effort that we started in 2002 with
-                            <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                            with a main goal:</p><p>To bring the collaborative philosophy of
-                              <a href="https://en.wikipedia.org/wiki/Free_software" target="_blank">Free Software</a>
-                              to other areas.</p><p>
-                                We share our web services and tools to allow people to work together,
-                                to collaborate, to share knowledge, skills, solutions, etcetera.</p>
-                        </span>
-                        <span id="k_home_continuation_es" style="display: none;">
-                          <p>kune es la continuación del esfuerzo que comenzamos en el 2002 con
-                            <a href="http://ourproject.org" target="_blank">ourproject.org</a>
-                            con un objetivo principal:</p><p>Llevar la filosofía colaborativa del
-                              <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
-                              a otras áreas.
-                            </p>
-                            <p>Compartimos nuestros servicios web y nuestras herramientas para
-                              permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
-                              soluciones, etcétera.</p>
-                        </span>
-                      </div>
-                    </div>
-
-                    <div class="carousel-cell " id="sec5">
-                      <div class="self-center">
-                        <span id="k_home_super_def" style="display: none;">
-                          Welcome to the era where collaboration supersede to the corporation.
-                        </span>
-                        <span id="k_home_super_es" style="display: none;">
-                          Bienvenido/a a la era en la que la cooperación substituye a la corporación.
-                        </span>
-                      </div>
-                    </div>
-
                   </div>
-                </div> <!-- home-center -->
 
-                <div class="horizontal layout center flex" id="home_bottombar">
+                  <div class="carousel-cell " id="sec1">
+                    <div class="flex self-center">
+                      <span id="k_home_buck_def" style="display: none;">
+                        <blockquote class="buck_blockquote">Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
+                          <cite class="buck">
+                            <a href="https://en.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
+                          </cite>
+                        </blockquote>
+                      </span>
+                      <span id="k_home_buck_es" style="display: none;">
+                        <blockquote class="buck_blockquote">
+                          Haced que el mundo funcione para el 100% de la humanidad, en el menor tiempo posible, a través de la cooperación espontánea, y sin ningún daño ecológico o desventaja para nadie.
+                          <cite class="buck">
+                            <a href="https://es.wikipedia.org/wiki/World_Game" target="_blank">Buckminster Fuller</a>
+                          </cite>
+                        </blockquote>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="carousel-cell " id="sec2">
+                    <div class="flex self-center">
+                      <span id="k_home_decen_def" style="display: none;">
+                        <p>Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.</p><p>kune.cc is just one more node in this decentralized social network.</p>
+                      </span>
+                      <span id="k_home_decen_es" style="display: none;">
+                        <p>Kune es decentralizado, a diferencia de otras redes sociales como Google+ o Facebook. Así que como en un servicio de email, puedes elegir entre diferentes proveedores de kune y evitar la centralización de datos personales.</p><p>kune.cc es solo un nodo más en esa red social descentralizada.</p>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="carousel-cell " id="sec3">
+                    <div class="self-center">
+                      <span id="k_home_meaning_def" style="display: none;">
+                        Kune means "together" in esperanto.
+                      </span>
+                      <span id="k_home_meaning_es" style="display: none;">
+                        Kune significa "juntos" en esperanto.
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="carousel-cell " id="sec4">
+                    <div class="flex self-center">
+                      <span id="k_home_continuation_def" style="display: none;">
+                        <p>kune is the continuation of the effort that we started in 2002 with
+                          <a href="http://ourproject.org" target="_blank">ourproject.org</a>
+                          with a main goal:</p><p>To bring the collaborative philosophy of
+                            <a href="https://en.wikipedia.org/wiki/Free_software" target="_blank">Free Software</a>
+                            to other areas.</p><p>
+                              We share our web services and tools to allow people to work together,
+                              to collaborate, to share knowledge, skills, solutions, etcetera.</p>
+                      </span>
+                      <span id="k_home_continuation_es" style="display: none;">
+                        <p>kune es la continuación del esfuerzo que comenzamos en el 2002 con
+                          <a href="http://ourproject.org" target="_blank">ourproject.org</a>
+                          con un objetivo principal:</p><p>Llevar la filosofía colaborativa del
+                            <a href="https://es.wikipedia.org/wiki/Software_libre" target="_blank">Software Libre</a>
+                            a otras áreas.
+                          </p>
+                          <p>Compartimos nuestros servicios web y nuestras herramientas para
+                            permitir que la gente trabaje junta, colabore, comparta conocimiento, habilidades,
+                            soluciones, etcétera.</p>
+                      </span>
+                    </div>
+                  </div>
+
+                  <div class="carousel-cell " id="sec5">
+                    <div class="self-center">
+                      <span id="k_home_super_def" style="display: none;">
+                        Welcome to the era where collaboration supersede to the corporation.
+                      </span>
+                      <span id="k_home_super_es" style="display: none;">
+                        Bienvenido/a a la era en la que la cooperación substituye a la corporación.
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="horizontal layout center" id="home_bottombar">
                   <div class="flex hidden-xs">
-                    <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
-                      <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
+                  <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
+                  <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
                     </a>
-                    <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
-                      <paper-icon-button src="others/bc_logo_24.png"
+                  <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
+                  <paper-icon-button src="others/bc_logo_24.png"
                                          title="donate with bitcoin"></paper-icon-button>
                     </a>
-                    <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
-                      <img
-                          src="//api.flattr.com/button/flattr-badge-large.png"
-                          alt="Flattr this" title="Flattr this" border="0">
+                  <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
+                  <img
+                              src="//api.flattr.com/button/flattr-badge-large.png"
+                              alt="Flattr this" title="Flattr this" border="0">
                     </a>
                   </div>
                   <div class="flex hidden-xs">
 
                   </div>
                   <div class="flex" id="home_copyleft">
-                    © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
-                    <span style="display: none;" id="k_home_copyleft_def">
-                      <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                  © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
+                  <span style="display: none;" id="k_home_copyleft_def">
+                  <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
                     </span>
-                    <span style="display: none;" id="k_home_copyleft_es">
-                      <a href="http://kune.ourproject.org" target="_blank">kune</a> es un proyecto de <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                  <span style="display: none;" id="k_home_copyleft_es">
+                  <a href="http://kune.ourproject.org" target="_blank">kune</a> es un proyecto de <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
                     </span>
                   </div>
                 </div>
 
-              </paper-header-panel>
+              </div> <!-- home_space_core_header -->
             </div><!-- home_space -->
 
             <!-- User Space -------------------------------------------------------- -->
@@ -2457,7 +2465,7 @@
     </template>
 
     <platinum-sw-register skip-waiting clients-claim auto-register>
-      <platinum-sw-cache default-cache-strategy="networkFirst"></platinum-sw-cache>
+      <platinum-sw-cache disabled="{{swcachedisabled}}" default-cache-strategy="networkFirst"></platinum-sw-cache>
       <platinum-sw-import-script href="custom-fetch-handler.js"></platinum-sw-import-script>
       <platinum-sw-fetch handler="NoCacheFetchHandler" path="(.*)nocache(.*)"></platinum-sw-fetch>
     </platinum-sw-register>
