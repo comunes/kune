@@ -135,6 +135,7 @@ public class MyGroupsMenu extends WidgetMenuDescriptor {
     // setPosition(0);
     // setStyles(ActionStyles.SITEBAR_STYLE + "," + Responsiveness.HIDDEN_XS);
     btn.setText(I18n.t("Your groups"));
+    btn.setIcon("social:group");
     Tooltip.to(btn, I18n.t("See your groups or create a new one"));
     // withIcon(res.arrowdownsitebarSmall());
     withShortcut("Alt+M", global);

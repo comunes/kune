@@ -85,6 +85,7 @@ public class SiteLanguageSelector extends WidgetMenuDescriptor {
       public void onAppStart(final AppStartEvent event) {
         final String currentLocale = LocaleInfo.getCurrentLocale().getLocaleName();
         btn.setText(LocaleInfo.getLocaleNativeDisplayName(currentLocale));
+        btn.setIcon("translate");
         // for (final String locale : LocaleInfo.getAvailableLocaleNames()) {
         new MenuSeparatorDescriptor(SiteLanguageSelector.this);
         new MenuTitleItemDescriptor(SiteLanguageSelector.this, I18n.t("Choose another language"));
