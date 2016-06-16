@@ -225,7 +225,7 @@ public class SiteUserOptionsPresenter implements SiteUserOptions {
     final InlineLabel username = new InlineLabel(shortname);
     username.addStyleName(Responsiveness.HIDDEN_XS.getCssName());
     //userBtn.setIcon("kune:chat-status");
-    //userBtn.setHTML(username.getElement().getString());
+    userBtn.setInnerHTML(username.getElement().getString());
   }
 
 }
