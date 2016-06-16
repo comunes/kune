@@ -1,7 +1,7 @@
-/* globals $ getMetaContent locale Flickity lorem */
+/* globals $ getMetaContent locale Flickity lorem location */
 // Following https://github.com/ebidel/polymer-gmail
 var start = new Date().getTime();
-var devMode = false
+var devMode = true;
 var devSpace = 2;
 
 var kt = document.querySelector('#kunetemplate');
@@ -11,6 +11,10 @@ kt.spin_size = '230px';
 
 kt.toggle_social_net = function () {
   document.querySelector('#core_drawer_group_header').togglePanel();
+};
+
+kt.refreshApp = function () {
+  location.reload();
 };
 
 function setContentMinHeight () {
@@ -188,7 +192,7 @@ kt.homebackcolors = ['#c9baa4', '#b6c9a4', '#e3cd77', '#a6c4d1', '#cba7ae'];
 
 var loadTestData = function () {
   /* The initial space (0: for home, 2: for group space) useful during tests */
-  // kt.spaceselected = devSpace;
+  kt.spaceselected = devSpace;
 
   kt.group_back_image_url = 'http://lorempixel.com/1500/1500';
   kt.user_icon_back_image_url = 'http://lorempixel.com/50/50';
@@ -325,7 +329,7 @@ if (!webComponentsSupported) {
 function onGwtReady () {
   console.log('On GWT ready');
   kt.homebackcolor = kt.homebackcolors[Math.floor((Math.random() * kt.homebackcolors.length))];
-  document.body.classList.remove('loading');
+  document.body.classList.remove('sploading');
   kt.spin_size = '100px';
 }
 
@@ -370,13 +374,13 @@ kt.addEventListener('dom-change', function (e) {
 });
 
 var sw = document.querySelector('platinum-sw-register');
-sw.addEventListener('service-worker-installed', e => {
-  var toast = document.querySelector('#toast');
+sw.addEventListener('service-worker-installed', function () {
+  var toast = document.querySelector('#swtoast');
   toast.show();
 });
 
-sw.addEventListener('service-worker-updated', e => {
-  var toast = document.querySelector('#toast');
+sw.addEventListener('service-worker-updated', function () {
+  var toast = document.querySelector('#swtoast');
   toast.text = 'A new version is available. Tap to refresh';
   toast.show();
 });

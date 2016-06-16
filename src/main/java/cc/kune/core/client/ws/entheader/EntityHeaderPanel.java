@@ -35,7 +35,7 @@ import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 import com.gwtplatform.mvp.client.ViewImpl;
 
-import br.com.rpa.client._paperelements.PaperIconButton;
+import br.com.rpa.client._paperelements.PaperButton;
 import cc.kune.common.client.actions.ui.GuiProvider;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.actions.ui.descrip.GuiActionDescCollection;
@@ -44,7 +44,6 @@ import cc.kune.common.client.ui.WrappedFlowPanel;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.avatar.MediumAvatarDecorator;
-import cc.kune.core.client.resources.CoreResources;
 import cc.kune.core.client.services.ClientFileDownloadUtils;
 import cc.kune.core.client.sn.GroupMembersUpdatedEvent;
 import cc.kune.core.client.sn.UserFollowersUpdatedEvent;
@@ -63,11 +62,11 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
   private final MediumAvatarDecorator decorator;
   /** The download provider. */
   private final Provider<ClientFileDownloadUtils> downloadProvider;
-  private final PaperIconButton followersBtn;
+  private final PaperButton followersBtn;
 
   private final Text groupLongName;
   /** The images. */
-  private final CoreResources images;
+
   private final Image logo;
   private final Element logoShadow;
   private final Anchor shortNameAnchor;
@@ -92,11 +91,10 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
    */
   @Inject
   public EntityHeaderPanel(final EventBus eventBus,
-      final Provider<ClientFileDownloadUtils> downloadProvider, final CoreResources images,
+      final Provider<ClientFileDownloadUtils> downloadProvider,
       final GuiProvider bindings, final GSpaceArmor armor, final I18nTranslationService i18n,
       final MediumAvatarDecorator decorator) {
     this.downloadProvider = downloadProvider;
-    this.images = images;
     this.decorator = decorator;
     toolbar = armor.getHeaderActionsTopToolbar();
 
@@ -111,7 +109,7 @@ public class EntityHeaderPanel extends ViewImpl implements EntityHeaderView {
     shorNamePanel.add(shortNameAnchor);
     decorator.setWidget(logo);
     logoShadow.appendChild(((Widget) decorator).getElement());
-    followersBtn = (PaperIconButton) armor.getFollowersButton();
+    followersBtn = (PaperButton) armor.getFollowersButton();
     eventBus.addHandler(GroupMembersUpdatedEvent.getType(),
         new GroupMembersUpdatedEvent.GroupMembersUpdatedHandler() {
       @Override

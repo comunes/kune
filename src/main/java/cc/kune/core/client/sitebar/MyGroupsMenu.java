@@ -27,7 +27,7 @@ import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 
-import br.com.rpa.client._paperelements.PaperIconButton;
+import br.com.rpa.client._paperelements.PaperButton;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuSeparatorDescriptor;
 import cc.kune.common.client.actions.ui.descrip.MenuShowAction;
@@ -120,7 +120,7 @@ public class MyGroupsMenu extends WidgetMenuDescriptor {
       final GlobalShortcutRegister global, final MenuShowAction menuShowAction, final EventBus eventBus,
       final UserServiceAsync userService, final SitebarNewGroupLink sitebarNewGroupLink) {
     super(menuShowAction);
-    final PaperIconButton btn = PaperIconButton.wrap(MENU_ID);
+    final PaperButton btn = PaperButton.wrap(MENU_ID);
     setWidget(btn);
     this.session = session;
     this.gotoGroupProvider = gotoGroupProvider;

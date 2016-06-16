@@ -163,8 +163,8 @@ public class ChatSitebarActions {
      */
     public void updateStatusIcon(final Presence currentPresence) {
       if (thisPresence.getShow().equals(currentPresence.getShow())
-          && ((currentPresence.getStatus() == null) || currentPresence.getStatus().equals(
-              thisPresence.getStatus()))) {
+          && ((currentPresence.getStatus() == null)
+              || currentPresence.getStatus().equals(thisPresence.getStatus()))) {
         setChatIcon(currentPresence.getShow());
       }
     }
@@ -360,6 +360,7 @@ public class ChatSitebarActions {
             }
           }.schedule(2000);
           break;
+        default:
         case DISCONNECTED:
         case RECONNECTING:
           break;
@@ -397,6 +398,7 @@ public class ChatSitebarActions {
       chatIcon.setIcon("kune:chat-status");
       chatIcon.setStyleName(STYLE_PREFIX + "online");
       break;
+    default:
     case away:
       chatIcon.setIcon("kune:chat-status-away");
       chatIcon.setStyleName(STYLE_PREFIX + "away");
@@ -424,6 +426,7 @@ public class ChatSitebarActions {
       onlineItem.setChecked(true);
       updateSitebarIconPresence(presence, onlineItem);
       break;
+    default:
     case away:
       awayItem.setChecked(true);
       updateSitebarIconPresence(presence, awayItem);
@@ -439,7 +442,9 @@ public class ChatSitebarActions {
    * @param itemDescriptor
    *          the item descriptor
    */
-  private void updateSitebarIconPresence(final Presence presence, final MenuItemDescriptor itemDescriptor) {
-    ((ChatSitebarActions.ChangeOnlineStatusAction) itemDescriptor.getAction()).updateStatusIcon(presence);
+  private void updateSitebarIconPresence(final Presence presence,
+      final MenuItemDescriptor itemDescriptor) {
+    ((ChatSitebarActions.ChangeOnlineStatusAction) itemDescriptor.getAction()).updateStatusIcon(
+        presence);
   }
 }

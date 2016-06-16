@@ -132,12 +132,12 @@ public abstract class AbstractPoPaperButtonGui extends AbstractPoChildGuiItem im
       icon = new IronIcon();
       iconWidget = (Widget) icon;
       button = new PaperCustomButton<Widget>((IronIcon) icon);
-      button.setToggle(enableTongle);
+      button.setToggles(enableTongle);
       descriptor.putValue(ICON, icon);
       endConfigureBtn(descriptor, id);
     } else if (hasText) {
       button = new PaperButton();
-      button.setToggle(enableTongle);
+      button.setToggles(enableTongle);
       endConfigureBtn(descriptor, id);
     } else if (hasIcon) {
       icon = new PaperIconButton();

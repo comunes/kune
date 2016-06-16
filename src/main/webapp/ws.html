@@ -100,8 +100,8 @@
 
     <!-- -*- engine:html -*- -->
 
-    <!-- vulcanize elements.html > elements-build.html -->
-    <link id="kunebundle" rel="import" href="elements.html" async>
+    <!-- vulcanize -o elements-build.html elements.html --strip-comments --inline-scripts --inline-css -->
+    <link id="kunebundle" rel="import" href="elements/elements-build.html" async>
 
     <!-- - for debugging
     <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
@@ -141,7 +141,7 @@
     <!-- <script type="text/javascript" src="ws/js/jquery-1.11.0.min.js"></script> -->
     <script src="others/js/flickity.pkgd.min.js"></script>
   </head>
-  <body class="fullbleed loading">
+  <body class="fullbleed sploading">
 
     <!-- Loading screens happen outside of HTML Imports + Polymer so 1st
     paint is fast and does not depend on network resources. Mobile gets
@@ -158,38 +158,10 @@
     </div>
 
     <template id="kunetemplate" is="dom-bind">
-      <style is="custom-style" >
-        /* -*- engine:css -*- */
-
-        paper-spinner-lite.k-spinner {
-          --paper-spinner-color: rgb(105, 49, 47);
-          --paper-spinner-stroke-width: 6px;
-        }
-
-        paper-progress {
-          --paper-progress-active-color: rgb(165, 105, 65);
-        }
-
-        paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar { /* ff */
-          height: 4px;
-        }
-
-        paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
-          height: 4px;
-        }
-
-        paper-tabs {
-          --paper-tabs-selection-bar-color: rgb(105, 49, 47);
-        }
-
-        #sec0, #sec1, #sec2, #sec3, #sec4, #sec5, #sec6 {
-           @apply(--layout-self-center);
-        }
-
-      </style>
 
       <style>
         /* -*- engine:css -*- */
+
         /* Home Space -------------------------------------------------------- */
         body {
           font-family: 'Open Sans', sans-serif;
@@ -226,7 +198,7 @@
           background-color: #e0e0e0;
         }
 
-        body.loading #splash {
+        body.sploading #splash {
           opacity: 1;
         }
 
@@ -1074,6 +1046,7 @@
         }
 
         #sitebar_toolbar a:hover,
+        #sitebar_toolbar paper-button:hover,
         #sitebar_toolbar paper-icon-button:hover,
         #sitebar_toolbar paper-icon-button:hover {
           color: #808080 !important;
@@ -1130,8 +1103,16 @@
           /* margin-top: -10px; */
         }
 
-        #sitebar_language_btn,#sitebar_mygroups_btn,#sitebar_user_btn, #sitebar_search_icon, #sitebar_more_icon, #sitebar_close_icon {
-          /* margin-top: -20px; */
+        #sitebar_mygroups_btn,
+        #sitebar_user_btn,
+        #sitebar_search_icon,
+        #sitebar_more_icon,
+        #sitebar_close_icon {
+          text-transform: none;
+        }
+
+        #sitebar_language_btn {
+          text-transform: capitalize;
         }
 
         #sitebar_toolbar paper-icon-button,
@@ -1163,12 +1144,41 @@
         #toast {
           left: 20px;
           right: auto;
-          bottom: 10px;
+          /* bottom: 10px; */
           background-color: #d3bc5f;
           color: white;
         }
 
+        #swtoast .action {
+          color: rgb(105, 49, 47);
+          text-transform: uppercase;
+          cursor: pointer;
+          font-weight: 400;
+          margin-left: 16px;
+        }
+
         #paper_progress_container {
+        }
+
+        div#paper_progress_container paper-progress#paper_progress div#progressContainer div#activeProgress  { /* ff */
+          background-color: rgb(165, 105, 65);
+        }
+
+        #paper_progress::shadow #activeProgress {
+          background-color: rgb(165, 105, 65);
+        }
+
+        paper-progress#paper_progress div#progressContainer #primaryProgress  {
+           background-color: rgb(165, 105, 65);
+        }
+
+        paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar {
+          background-color: rgb(105, 49, 47);
+          height: 4px;
+        }
+
+        .circle-clipper { /* spinner */
+          border-color: rgb(165, 105, 65) !important;
         }
 
         /* Tutorials */
@@ -2058,6 +2068,11 @@
       <div id="paper_toast_container" class="horizontal end-justified layout">
         <paper-toast duration="5000" id="toast"></paper-toast>
       </div>
+      <paper-toast id="swtoast" class="toast layout horizontal justified" duration="70000"
+                   text="Ready to work offline. Tap to refresh.">
+        <span on-tap="refreshApp" class="action">Refresh</span>
+      </paper-toast>
+
       <div id="k_home_spinner_container" class="layout fit">
         <paper-spinner-lite alt="Loading" class="k-spinner" id="k_home_spinner" active="{{spin_active}}"></paper-spinner>
       </div>
@@ -2354,8 +2369,8 @@
                             <div id="k_group_entity_toolbar" class="vertical layout end-justified">
                             </div>
                             <div class="horizontal layout end-justified">
-                              <paper-icon-button icon="group-work" id="group_followers" on-click="toggle_social_net">
-                              </paper-icon-button>
+                              <paper-button icon="group-work" id="group_followers" on-click="toggle_social_net">
+                              </paper-button>
                             </div>
                           </div>
                         </div>
@@ -2426,10 +2441,10 @@
         <div id="sitebar_chat_icon_group" class="hidden-xs hidden-sm">
           <paper-icon-button icon="kune:chat" id="sitebar_chat_icon"></paper-icon-button>
         </div>
-        <paper-icon-button class="hidden-xs hidden-sm" icon="translate" id="sitebar_language_btn"></paper-icon-button>
-        <paper-icon-button class="hidden-xs hidden-sm" icon="social:group" id="sitebar_mygroups_btn"></paper-icon-button>
+        <paper-button class="hidden-xs hidden-sm" id="sitebar_language_btn"><iron-icon icon="translate"></iron-icon></paper-button>
+        <paper-button class="hidden-xs hidden-sm" id="sitebar_mygroups_btn"><iron-icon icon="social:group"></iron-icon></paper-button>
         <div id="sitebar_right_extensionbar"></div>
-        <paper-button id="sitebar_user_btn" icon="kune:chat-status" class="iron-icon-status-busy"><span class="hidden-xs hidden-sm"></span></paper-button>
+        <paper-button id="sitebar_user_btn" class="iron-icon-status-away"><iron-icon icon="kune:chat-status"></iron-icon><span class="hidden-xs hidden-sm"></span></paper-button>
         <paper-icon-button icon="search" on-click="toggleSearch" id="sitebar_search_icon"></paper-icon-button>
         <div id="sitebar_search_group">
           <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">
@@ -2443,6 +2458,8 @@
 
     <platinum-sw-register skip-waiting clients-claim auto-register>
       <platinum-sw-cache default-cache-strategy="networkFirst"></platinum-sw-cache>
+      <platinum-sw-import-script href="custom-fetch-handler.js"></platinum-sw-import-script>
+      <platinum-sw-fetch handler="NoCacheFetchHandler" path="(.*)nocache(.*)"></platinum-sw-fetch>
     </platinum-sw-register>
 
     <script type="text/javascript" src="kune-polymer.js"></script>

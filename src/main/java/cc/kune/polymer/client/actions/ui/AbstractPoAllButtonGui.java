@@ -118,7 +118,7 @@ public abstract class AbstractPoAllButtonGui extends AbstractPoChildGuiItem impl
 
     icon = new IronIcon();
     button = new PaperCustomButton<Widget>(icon);
-    button.setToggle(enableTongle);
+    button.setToggles(enableTongle);
 
     final String value = (String) descriptor.getValue(Action.STYLES);
     if (value != null) {

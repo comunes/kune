@@ -42,7 +42,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
-import br.com.rpa.client._paperelements.PaperIconButton;
+import br.com.rpa.client._paperelements.PaperButton;
 import cc.kune.common.client.actions.ui.ActionFlowPanel;
 import cc.kune.common.client.actions.ui.IsActionExtensible;
 import cc.kune.common.client.errors.UIException;
@@ -212,7 +212,7 @@ public class GSpaceArmorPolymer implements GSpaceArmor {
 
   @Override
   public ButtonBase getFollowersButton() {
-    return PaperIconButton.wrap(GROUP_FOLLOWERS.getId());
+    return PaperButton.wrap(GROUP_FOLLOWERS.getId());
   }
 
   @Override

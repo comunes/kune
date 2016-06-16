@@ -1,4 +1,12 @@
-<html><head><meta charset="UTF-8"></head><body><div hidden="" by-vulcanize=""><!--
+<html><head><!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+--><!--
 @license
 Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
 This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
@@ -6,7 +14,18 @@ The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
 The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
 Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>(function () {
+--><meta charset="UTF-8">
+
+
+
+
+
+
+
+
+
+
+</head><body><div hidden="" by-vulcanize=""><script>(function () {
 function resolve() {
 document.body.removeAttribute('unresolved');
 }
@@ -2840,15 +2859,7 @@ this._tryReady();
 },
 _marshalBehavior: function (b) {
 }
-});</script><!--
-@license
-Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
+});</script>
 
 
 
@@ -7659,23 +7670,7 @@ this._children = Polymer.TreeApi.arrayCopyChildNodes(this.root);
 this._insertChildren();
 this.fire('dom-change');
 }
-});</script><!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-@license
-Copyright (c) 2014 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
+});</script>
 
 
 
@@ -7705,54 +7700,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-`iron-meta` is a generic element you can use for sharing information across the DOM tree.
-It uses [monostate pattern](http://c2.com/cgi/wiki?MonostatePattern) such that any
-instance of iron-meta has access to the shared
-information. You can use `iron-meta` to share whatever you want (or create an extension
-[like x-meta] for enhancements).
 
-The `iron-meta` instances containing your actual data can be loaded in an import,
-or constructed in any way you see fit. The only requirement is that you create them
-before you try to access them.
-
-Examples:
-
-If I create an instance like this:
-
-    <iron-meta key="info" value="foo/bar"></iron-meta>
-
-Note that value="foo/bar" is the metadata I've defined. I could define more
-attributes or use child nodes to define additional metadata.
-
-Now I can access that element (and it's metadata) from any iron-meta instance
-via the byKey method, e.g.
-
-    meta.byKey('info').getAttribute('value');
-
-Pure imperative form would be like:
-
-    document.createElement('iron-meta').byKey('info').getAttribute('value');
-
-Or, in a Polymer element, you can include a meta in your template:
-
-    <iron-meta id="meta"></iron-meta>
-    ...
-    this.$.meta.byKey('info').getAttribute('value');
-
-@group Iron Elements
-@demo demo/index.html
-@hero hero.svg
-@element iron-meta
--->
 
 <script>
 
@@ -8034,49 +7982,7 @@ Or, in a Polymer element, you can include a meta in your template:
 
   })();
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-The `<iron-flex-layout>` component provides simple ways to use
-[CSS flexible box layout](https://developer.mozilla.org/en-US/docs/Web/Guide/CSS/Flexible_boxes),
-also known as flexbox. This component provides two different ways to use flexbox:
 
-1. [Layout classes](https://github.com/PolymerElements/iron-flex-layout/tree/master/iron-flex-layout-classes.html).
-The layout class stylesheet provides a simple set of class-based flexbox rules, that
-let you specify layout properties directly in markup. You must include this file
-in every element that needs to use them.
-
-  Sample use:
-
-      <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
-      <style is="custom-style" include="iron-flex iron-flex-alignment"></style>
-
-      <div class="layout horizontal layout-start">
-        <div>cross axis start alignment</div>
-      </div>
-
-2. [Custom CSS mixins](https://github.com/PolymerElements/iron-flex-layout/blob/master/iron-flex-layout.html).
-The mixin stylesheet includes custom CSS mixins that can be applied inside a CSS rule using the `@apply` function.
-
-Please note that the old [/deep/ layout classes](https://github.com/PolymerElements/iron-flex-layout/tree/master/classes)
-are deprecated, and should not be used. To continue using layout properties
-directly in markup, please switch to using the new `dom-module`-based
-[layout classes](https://github.com/PolymerElements/iron-flex-layout/tree/master/iron-flex-layout-classes.html).
-Please note that the new version does not use `/deep/`, and therefore requires you
-to import the `dom-modules` in every element that needs to use them.
-
-A complete [guide](https://elements.polymer-project.org/guides/flex-layout) to `<iron-flex-layout>` is available.
-
-@group Iron Elements
-@pseudoElement iron-flex-layout
-@demo demo/index.html
--->
 
 <style>
   /* IE 10 support for HTML5 hidden attr */
@@ -8429,84 +8335,9 @@ A complete [guide](https://elements.polymer-project.org/guides/flex-layout) to `
   }
 
 </style>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
 
-The `iron-icon` element displays an icon. By default an icon renders as a 24px square.
 
-Example using src:
-
-    <iron-icon src="star.png"></iron-icon>
-
-Example setting size to 32px x 32px:
-
-    <iron-icon class="big" src="big_star.png"></iron-icon>
-
-    <style is="custom-style">
-      .big {
-        --iron-icon-height: 32px;
-        --iron-icon-width: 32px;
-      }
-    </style>
-
-The iron elements include several sets of icons.
-To use the default set of icons, import `iron-icons.html` and use the `icon` attribute to specify an icon:
-
-    <link rel="import" href="/components/iron-icons/iron-icons.html">
-
-    <iron-icon icon="menu"></iron-icon>
-
-To use a different built-in set of icons, import the specific `iron-icons/<iconset>-icons.html`, and
-specify the icon as `<iconset>:<icon>`. For example, to use a communication icon, you would
-use:
-
-    <link rel="import" href="/components/iron-icons/communication-icons.html">
-
-    <iron-icon icon="communication:email"></iron-icon>
-
-You can also create custom icon sets of bitmap or SVG icons.
-
-Example of using an icon named `cherry` from a custom iconset with the ID `fruit`:
-
-    <iron-icon icon="fruit:cherry"></iron-icon>
-
-See [iron-iconset](iron-iconset) and [iron-iconset-svg](iron-iconset-svg) for more information about
-how to create a custom iconset.
-
-See the [iron-icons demo](iron-icons?view=demo:demo/index.html) to see the icons available
-in the various iconsets.
-
-To load a subset of icons from one of the default `iron-icons` sets, you can
-use the [poly-icon](https://poly-icon.appspot.com/) tool. It allows you
-to select individual icons, and creates an iconset from them that you can
-use directly in your elements.
-
-### Styling
-
-The following custom properties are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--iron-icon-width` | Width of the icon | `24px`
-`--iron-icon-height` | Height of the icon | `24px`
-`--iron-icon-fill-color` | Fill color of the svg icon | `currentcolor`
-`--iron-icon-stroke-color` | Stroke color of the svg icon | none
-
-@group Iron Elements
-@element iron-icon
-@demo demo/index.html
-@hero hero.svg
-@homepage polymer.github.io
--->
-
-<dom-module id="iron-icon" assetpath="bower_components/iron-icon/">
+<dom-module id="iron-icon" assetpath="../bower_components/iron-icon/">
 
   <style>
     :host {
@@ -8630,15 +8461,7 @@ Custom property | Description | Default
   </script>
 
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
   /**
    * The `iron-iconset-svg` element allows users to define their own icon sets
    * that contain svg icons. The svg icon elements should be children of the
@@ -9122,15 +8945,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <g id="zoom-out"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14zM7 9h5v1H7z"></path></g>
 </defs></svg>
 </iron-iconset-svg>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
   /**
    * `IronResizableBehavior` is a behavior that can be used in Polymer elements to
    * coordinate the flow of resize events between "resizers" (elements that control the
@@ -9313,15 +9128,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   };
 </script>
 
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
 
   /**
    * @param {!Function} selectCallback
@@ -9801,48 +9608,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   };
 
-</script><!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-`iron-pages` is used to select one of its children to show. One use is to cycle through a list of
-children "pages".
+</script>
 
-Example:
 
-    <iron-pages selected="0">
-      <div>One</div>
-      <div>Two</div>
-      <div>Three</div>
-    </iron-pages>
-
-    <script>
-      document.addEventListener('click', function(e) {
-        var pages = document.querySelector('iron-pages');
-        pages.selectNext();
-      });
-    </script>
-
-@group Iron Elements
-@hero hero.svg
-@demo demo/index.html
--->
-
-<dom-module id="iron-pages" assetpath="bower_components/iron-pages/">
+<dom-module id="iron-pages" assetpath="../bower_components/iron-pages/">
 
   <template>
     <style>
@@ -9892,20 +9661,7 @@ Example:
 
   </script>
 </dom-module>
-<!--
-`iron-media-query` can be used to data bind to a CSS media query.
-The `query` property is a bare CSS media query.
-The `query-matches` property is a boolean representing whether the page matches that media query.
 
-Example:
-
-    <iron-media-query query="(min-width: 600px)" query-matches="{{queryMatches}}"></iron-media-query>
-
-@group Iron Elements
-@demo demo/index.html
-@hero hero.svg
-@element iron-media-query
--->
 
 <script>
 
@@ -10002,73 +9758,9 @@ Example:
   });
 
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-`iron-image` is an element for displaying an image that provides useful sizing and
-preloading options not found on the standard `<img>` tag.
 
-The `sizing` option allows the image to be either cropped (`cover`) or
-letterboxed (`contain`) to fill a fixed user-size placed on the element.
 
-The `preload` option prevents the browser from rendering the image until the
-image is fully loaded.  In the interim, either the element's CSS `background-color`
-can be be used as the placeholder, or the `placeholder` property can be
-set to a URL (preferably a data-URI, for instant rendering) for an
-placeholder image.
-
-The `fade` option (only valid when `preload` is set) will cause the placeholder
-image/color to be faded out once the image is rendered.
-
-Examples:
-
-  Basically identical to `<img src="...">` tag:
-
-    <iron-image src="http://lorempixel.com/400/400"></iron-image>
-
-  Will letterbox the image to fit:
-
-    <iron-image style="width:400px; height:400px;" sizing="contain"
-      src="http://lorempixel.com/600/400"></iron-image>
-
-  Will crop the image to fit:
-
-    <iron-image style="width:400px; height:400px;" sizing="cover"
-      src="http://lorempixel.com/600/400"></iron-image>
-
-  Will show light-gray background until the image loads:
-
-    <iron-image style="width:400px; height:400px; background-color: lightgray;"
-      sizing="cover" preload src="http://lorempixel.com/600/400"></iron-image>
-
-  Will show a base-64 encoded placeholder image until the image loads:
-
-    <iron-image style="width:400px; height:400px;" placeholder="data:image/gif;base64,..."
-      sizing="cover" preload src="http://lorempixel.com/600/400"></iron-image>
-
-  Will fade the light-gray background out once the image is loaded:
-
-    <iron-image style="width:400px; height:400px; background-color: lightgray;"
-      sizing="cover" preload fade src="http://lorempixel.com/600/400"></iron-image>
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--iron-image-placeholder` | Mixin applied to #placeholder | `{}`
-`--iron-image-width` | Sets the width of the wrapped image | `auto`
-`--iron-image-height` | Sets the height of the wrapped image | `auto`
-
-@group Iron Elements
-@element iron-image
-@demo demo/index.html
--->
-
-<dom-module id="iron-image" assetpath="bower_components/iron-image/">
+<dom-module id="iron-image" assetpath="../bower_components/iron-image/">
   <template>
     <style>
       :host {
@@ -10394,16 +10086,8 @@ Custom property | Description | Default
     });
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!-- Most common used flex styles-->
-<dom-module id="iron-flex" assetpath="bower_components/iron-flex-layout/">
+
+<dom-module id="iron-flex" assetpath="../bower_components/iron-flex-layout/">
   <template>
     <style>
       .layout.horizontal,
@@ -10474,8 +10158,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 </dom-module>
 
-<!-- Basic flexbox reverse styles -->
-<dom-module id="iron-flex-reverse" assetpath="bower_components/iron-flex-layout/">
+
+<dom-module id="iron-flex-reverse" assetpath="../bower_components/iron-flex-layout/">
   <template>
     <style>
       .layout.horizontal-reverse,
@@ -10506,8 +10190,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 </dom-module>
 
-<!-- Flexbox alignment -->
-<dom-module id="iron-flex-alignment" assetpath="bower_components/iron-flex-layout/">
+
+<dom-module id="iron-flex-alignment" assetpath="../bower_components/iron-flex-layout/">
   <template>
     <style>
       /**
@@ -10646,7 +10330,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 </dom-module>
 
-<dom-module id="iron-flex-factors" assetpath="bower_components/iron-flex-layout/">
+<dom-module id="iron-flex-factors" assetpath="../bower_components/iron-flex-layout/">
   <template>
     <style>
       .flex,
@@ -10727,8 +10411,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   </template>
 </dom-module>
 
-<!-- Non-flexbox positioning helper styles -->
-<dom-module id="iron-positioning" assetpath="bower_components/iron-flex-layout/">
+
+<dom-module id="iron-positioning" assetpath="../bower_components/iron-flex-layout/">
   <template>
     <style>
       .block {
@@ -10800,15 +10484,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
   </template>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
   (function() {
     'use strict';
 
@@ -11258,15 +10934,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     };
   })();
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
 
   /**
    * @demo demo/index.html
@@ -11577,88 +11245,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer.IronButtonStateImpl
   ];
 
-</script><!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<!--
-Material design: [Surface reaction](https://www.google.com/design/spec/animation/responsive-interaction.html#responsive-interaction-surface-reaction)
+</script>
 
-`paper-ripple` provides a visual effect that other paper elements can
-use to simulate a rippling effect emanating from the point of contact.  The
-effect can be visualized as a concentric circle with motion.
 
-Example:
+<dom-module id="paper-ripple" assetpath="../bower_components/paper-ripple/">
 
-    <div style="position:relative">
-      <paper-ripple></paper-ripple>
-    </div>
-
-Note, it's important that the parent container of the ripple be relative position, otherwise
-the ripple will emanate outside of the desired container.
-
-`paper-ripple` listens to "mousedown" and "mouseup" events so it would display ripple
-effect when touches on it.  You can also defeat the default behavior and
-manually route the down and up actions to the ripple element.  Note that it is
-important if you call `downAction()` you will have to make sure to call
-`upAction()` so that `paper-ripple` would end the animation loop.
-
-Example:
-
-    <paper-ripple id="ripple" style="pointer-events: none;"></paper-ripple>
-    ...
-    downAction: function(e) {
-      this.$.ripple.downAction({x: e.x, y: e.y});
-    },
-    upAction: function(e) {
-      this.$.ripple.upAction();
-    }
-
-Styling ripple effect:
-
-  Use CSS color property to style the ripple:
-
-    paper-ripple {
-      color: #4285f4;
-    }
-
-  Note that CSS color property is inherited so it is not required to set it on
-  the `paper-ripple` element directly.
-
-By default, the ripple is centered on the point of contact.  Apply the `recenters`
-attribute to have the ripple grow toward the center of its container.
-
-    <paper-ripple recenters></paper-ripple>
-
-You can also  center the ripple inside its container from the start.
-
-    <paper-ripple center></paper-ripple>
-
-Apply `circle` class to make the rippling effect within a circle.
-
-    <paper-ripple class="circle"></paper-ripple>
-
-@group Paper Elements
-@element paper-ripple
-@hero hero.svg
-@demo demo/index.html
--->
-
-<dom-module id="paper-ripple" assetpath="bower_components/paper-ripple/">
-
-  <!--
-  Fired when the animation finishes. This is useful if you want to wait until the ripple
-  animation finishes to perform some action.
-
-  @event transitionend
-  @param {Object} detail
-  @param {Object} detail.node The animated node
-  -->
+  
 
   <template>
     <style>
@@ -12447,15 +12039,7 @@ Apply `circle` class to make the rippling effect within a circle.
 
   };
 
-</script><!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
+</script>
 <script>
 
   /** @polymerBehavior Polymer.PaperButtonBehavior */
@@ -12544,24 +12128,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer.PaperButtonBehaviorImpl
   ];
 
-</script><!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><style is="custom-style">
+</script>
+<style is="custom-style">
 
   :root {
 
@@ -12620,15 +12188,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
 </style>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><dom-module id="paper-material-shared-styles" assetpath="bower_components/paper-material/">
+<dom-module id="paper-material-shared-styles" assetpath="../bower_components/paper-material/">
   <template>
     <style>
       :host {
@@ -12658,31 +12218,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
   </template>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Cards](https://www.google.com/design/spec/components/cards.html)
 
-`paper-material` is a container that renders two shadows on top of each other to
-create the effect of a lifted piece of paper.
 
-Example:
-
-    <paper-material elevation="1">
-      ... content ...
-    </paper-material>
-
-@group Paper Elements
-@demo demo/index.html
--->
-
-<dom-module id="paper-material" assetpath="bower_components/paper-material/">
+<dom-module id="paper-material" assetpath="../bower_components/paper-material/">
   <template>
     <style include="paper-material-shared-styles"></style>
     <style>
@@ -12730,83 +12268,9 @@ Example:
     }
   });
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Buttons](https://www.google.com/design/spec/components/buttons.html)
 
-`paper-button` is a button. When the user touches the button, a ripple effect emanates
-from the point of contact. It may be flat or raised. A raised button is styled with a
-shadow.
 
-Example:
-
-    <paper-button>Flat button</paper-button>
-    <paper-button raised>Raised button</paper-button>
-    <paper-button noink>No ripple effect</paper-button>
-    <paper-button toggles>Toggle-able button</paper-button>
-
-A button that has `toggles` true will remain `active` after being clicked (and
-will have an `active` attribute set). For more information, see the `Polymer.IronButtonState`
-behavior.
-
-You may use custom DOM in the button body to create a variety of buttons. For example, to
-create a button with an icon and some text:
-
-    <paper-button>
-      <iron-icon icon="favorite"></iron-icon>
-      custom button content
-    </paper-button>
-
-To use `paper-button` as a link, wrap it in an anchor tag. Since `paper-button` will already
-receive focus, you may want to prevent the anchor tag from receiving focus as well by setting
-its tabindex to -1.
-
-    <a href="https://www.polymer-project.org/" tabindex="-1">
-      <paper-button raised>Polymer Project</paper-button>
-    </a>
-
-### Styling
-
-Style the button with CSS as you would a normal DOM element.
-
-    paper-button.fancy {
-      background: green;
-      color: yellow;
-    }
-
-    paper-button.fancy:hover {
-      background: lime;
-    }
-
-    paper-button[disabled],
-    paper-button[toggles][active] {
-      background: red;
-    }
-
-By default, the ripple is the same color as the foreground at 25% opacity. You may
-customize the color using the `--paper-button-ink-color` custom property.
-
-The following custom properties and mixins are also available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-button-ink-color` | Background color of the ripple | `Based on the button's color`
-`--paper-button` | Mixin applied to the button | `{}`
-`--paper-button-disabled` | Mixin applied to the disabled button. Note that you can also use the `paper-button[disabled]` selector | `{}`
-`--paper-button-flat-keyboard-focus` | Mixin applied to a flat button after it's been focused using the keyboard | `{}`
-`--paper-button-raised-keyboard-focus` | Mixin applied to a raised button after it's been focused using the keyboard | `{}`
-
-@demo demo/index.html
--->
-
-<dom-module id="paper-button" assetpath="bower_components/paper-button/">
+<dom-module id="paper-button" assetpath="../bower_components/paper-button/">
   <template strip-whitespace="">
     <style include="paper-material">
       :host {
@@ -12901,15 +12365,7 @@ Custom property | Description | Default
     });
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
 
   /**
    * `Polymer.PaperInkyFocusBehavior` implements a ripple when the element has keyboard focus.
@@ -12950,15 +12406,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   ];
 
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><style is="custom-style">
+<style is="custom-style">
 
   :root {
 
@@ -13279,15 +12727,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
 </style>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!-- Taken from https://www.google.com/design/spec/style/color.html#color-ui-color-application -->
+
 
 <style is="custom-style">
 
@@ -13346,70 +12786,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
 </style>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Icon toggles](https://www.google.com/design/spec/components/buttons.html#buttons-toggle-buttons)
 
-`paper-icon-button` is a button with an image placed at the center. When the user touches
-the button, a ripple effect emanates from the center of the button.
 
-`paper-icon-button` includes a default icon set.  Use `icon` to specify which icon
-from the icon set to use.
-
-    <paper-icon-button icon="menu"></paper-icon-button>
-
-See [`iron-iconset`](iron-iconset) for more information about
-how to use a custom icon set.
-
-Example:
-
-    <link href="path/to/iron-icons/iron-icons.html" rel="import">
-
-    <paper-icon-button icon="favorite"></paper-icon-button>
-    <paper-icon-button src="star.png"></paper-icon-button>
-
-To use `paper-icon-button` as a link, wrap it in an anchor tag. Since `paper-icon-button`
-will already receive focus, you may want to prevent the anchor tag from receiving focus
-as well by setting its tabindex to -1.
-
-    <a href="https://www.polymer-project.org" tabindex="-1">
-      <paper-icon-button icon="polymer"></paper-icon-button>
-    </a>
-
-### Styling
-
-Style the button with CSS as you would a normal DOM element. If you are using the icons
-provided by `iron-icons`, they will inherit the foreground color of the button.
-
-    /* make a red "favorite" button */
-    <paper-icon-button icon="favorite" style="color: red;"></paper-icon-button>
-
-By default, the ripple is the same color as the foreground at 25% opacity. You may
-customize the color using the `--paper-icon-button-ink-color` custom property.
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-icon-button-disabled-text` | The color of the disabled button | `--disabled-text-color`
-`--paper-icon-button-ink-color` | Selected/focus ripple color | `--primary-text-color`
-`--paper-icon-button` | Mixin for a button | `{}`
-`--paper-icon-button-disabled` | Mixin for a disabled button | `{}`
-`--paper-icon-button-hover` | Mixin for button on hover | `{}`
-
-@group Paper Elements
-@element paper-icon-button
-@demo demo/index.html
--->
-
-<dom-module id="paper-icon-button" assetpath="bower_components/paper-icon-button/">
+<dom-module id="paper-icon-button" assetpath="../bower_components/paper-icon-button/">
   <template strip-whitespace="">
     <style>
       :host {
@@ -13512,53 +12891,9 @@ Custom property | Description | Default
     });
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Floating Action Button](https://www.google.com/design/spec/components/buttons-floating-action-button.html)
-
-`paper-fab` is a floating action button. It contains an image placed in the center and
-comes in two sizes: regular size and a smaller size by applying the attribute `mini`. When
-the user touches the button, a ripple effect emanates from the center of the button.
-
-You may import `iron-icons` to use with this element, or provide a URL to a custom icon.
-See `iron-iconset` for more information about how to use a custom icon set.
-
-Example:
-
-    <link href="path/to/iron-icons/iron-icons.html" rel="import">
-
-    <paper-fab icon="add"></paper-fab>
-    <paper-fab mini icon="favorite"></paper-fab>
-    <paper-fab src="star.png"></paper-fab>
 
 
-### Styling
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-fab-background` | The background color of the button | `--accent-color`
-`--paper-fab-keyboard-focus-background` | The background color of the button when focused | `--paper-pink-900`
-`--paper-fab-disabled-background` | The background color of the button when it's disabled | `--paper-grey-300`
-`--paper-fab-disabled-text` | The text color of the button when it's disabled | `--paper-grey-500`
-`--paper-fab` | Mixin applied to the button | `{}`
-`--paper-fab-mini` | Mixin applied to a mini button | `{}`
-`--paper-fab-disabled` | Mixin applied to a disabled button | `{}`
-`--paper-fab-iron-icon` | Mixin applied to the iron-icon within the button | `{}`
-
-@group Paper Elements
-@demo demo/index.html
--->
-
-<dom-module id="paper-fab" assetpath="bower_components/paper-fab/">
+<dom-module id="paper-fab" assetpath="../bower_components/paper-fab/">
   <template strip-whitespace="">
     <style include="paper-material-shared-styles">
       :host {
@@ -13686,15 +13021,7 @@ Custom property | Description | Default
     });
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
   /** @polymerBehavior Polymer.IronMultiSelectableBehavior */
   Polymer.IronMultiSelectableBehaviorImpl = {
     properties: {
@@ -13835,15 +13162,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   ];
 
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
 
   /**
    * `Polymer.IronMenuBehavior` implements accessible menu behavior.
@@ -14230,66 +13549,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer.IronMenubarBehaviorImpl
   ];
 
-</script><!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><iron-iconset-svg name="paper-tabs" size="24">
+</script>
+<iron-iconset-svg name="paper-tabs" size="24">
 <svg><defs>
 <g id="chevron-left"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></g>
 <g id="chevron-right"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path></g>
 </defs></svg>
 </iron-iconset-svg>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-`paper-tab` is styled to look like a tab.  It should be used in conjunction with
-`paper-tabs`.
 
-Example:
 
-    <paper-tabs selected="0">
-      <paper-tab>TAB 1</paper-tab>
-      <paper-tab>TAB 2</paper-tab>
-      <paper-tab>TAB 3</paper-tab>
-    </paper-tabs>
-
-### Styling
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-tab-ink` | Ink color | `--paper-yellow-a100`
-`--paper-tab` | Mixin applied to the tab | `{}`
-`--paper-tab-content` | Mixin applied to the tab content | `{}`
-`--paper-tab-content-unselected` | Mixin applied to the tab content when the tab is not selected | `{}`
-
-This element applies the mixin `--paper-font-common-base` but does not import `paper-styles/typography.html`.
-In order to apply the `Roboto` font to this element, make sure you've imported `paper-styles/typography.html`.
-
--->
-
-<dom-module id="paper-tab" assetpath="bower_components/paper-tabs/">
+<dom-module id="paper-tab" assetpath="../bower_components/paper-tabs/">
   <template>
     <style>
       :host {
@@ -14421,90 +13690,9 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
     });
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Tabs](https://www.google.com/design/spec/components/tabs.html)
-
-`paper-tabs` makes it easy to explore and switch between different views or functional aspects of
-an app, or to browse categorized data sets.
-
-Use `selected` property to get or set the selected tab.
-
-Example:
-
-    <paper-tabs selected="0">
-      <paper-tab>TAB 1</paper-tab>
-      <paper-tab>TAB 2</paper-tab>
-      <paper-tab>TAB 3</paper-tab>
-    </paper-tabs>
-
-See <a href="?active=paper-tab">paper-tab</a> for more information about
-`paper-tab`.
-
-A common usage for `paper-tabs` is to use it along with `iron-pages` to switch
-between different views.
-
-    <paper-tabs selected="{{selected}}">
-      <paper-tab>Tab 1</paper-tab>
-      <paper-tab>Tab 2</paper-tab>
-      <paper-tab>Tab 3</paper-tab>
-    </paper-tabs>
-
-    <iron-pages selected="{{selected}}">
-      <div>Page 1</div>
-      <div>Page 2</div>
-      <div>Page 3</div>
-    </iron-pages>
 
 
-To use links in tabs, add `link` attribute to `paper-tab` and put an `<a>`
-element in `paper-tab` with a `tabindex` of -1.
-
-Example:
-
-<pre><code>
-&lt;style is="custom-style">
-  .link {
-    &#64;apply(--layout-horizontal);
-    &#64;apply(--layout-center-center);
-  }
-&lt;/style>
-
-&lt;paper-tabs selected="0">
-  &lt;paper-tab link>
-    &lt;a href="#link1" class="link" tabindex="-1">TAB ONE&lt;/a>
-  &lt;/paper-tab>
-  &lt;paper-tab link>
-    &lt;a href="#link2" class="link" tabindex="-1">TAB TWO&lt;/a>
-  &lt;/paper-tab>
-  &lt;paper-tab link>
-    &lt;a href="#link3" class="link" tabindex="-1">TAB THREE&lt;/a>
-  &lt;/paper-tab>
-&lt;/paper-tabs>
-</code></pre>
-
-### Styling
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-tabs-selection-bar-color` | Color for the selection bar | `--paper-yellow-a100`
-`--paper-tabs-selection-bar` | Mixin applied to the selection bar | `{}`
-`--paper-tabs` | Mixin applied to the tabs | `{}`
-
-@hero hero.svg
-@demo demo/index.html
--->
-
-<dom-module id="paper-tabs" assetpath="bower_components/paper-tabs/">
+<dom-module id="paper-tabs" assetpath="../bower_components/paper-tabs/">
   <template>
     <style>
       :host {
@@ -14848,6 +14036,7 @@ Custom property | Description | Default
       _onIronDeselect: function(event) {
         this.debounce('tab-changed', function() {
           this._tabChanged(null, this._previousTab);
+          this._previousTab = null;
         // See polymer/polymer#1305
         }, 1);
       },
@@ -14970,6 +14159,9 @@ Custom property | Description | Default
 
       _tabChanged: function(tab, old) {
         if (!tab) {
+          // Remove the bar without animation.
+          this.$.selectionBar.classList.remove('expand');
+          this.$.selectionBar.classList.remove('contract');
           this._positionBar(0, 0);
           return;
         }
@@ -14985,7 +14177,9 @@ Custom property | Description | Default
         };
 
         if (this.noSlide || old == null) {
-          // position bar directly without animation
+          // Position the bar without animation.
+          this.$.selectionBar.classList.remove('expand');
+          this.$.selectionBar.classList.remove('contract');
           this._positionBar(this._pos.width, this._pos.left);
           return;
         }
@@ -15040,7 +14234,7 @@ Custom property | Description | Default
         this._width = width;
         this._left = left;
         this.transform(
-            'translate3d(' + left + '%, 0, 0) scaleX(' + (width / 100) + ')',
+            'translateX(' + left + '%) scaleX(' + (width / 100) + ')',
             this.$.selectionBar);
       },
 
@@ -15059,15 +14253,7 @@ Custom property | Description | Default
     });
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
 
  /**
  * `iron-range-behavior` provides the behavior for something with a minimum to maximum range.
@@ -15176,82 +14362,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 };
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Progress & activity](https://www.google.com/design/spec/components/progress-activity.html)
 
-The progress bars are for situations where the percentage completed can be
-determined. They give users a quick sense of how much longer an operation
-will take.
 
-Example:
-
-    <paper-progress value="10"></paper-progress>
-
-There is also a secondary progress which is useful for displaying intermediate
-progress, such as the buffer level during a streaming playback progress bar.
-
-Example:
-
-    <paper-progress value="10" secondary-progress="30"></paper-progress>
-
-### Styling progress bar:
-
-To change the active progress bar color:
-
-    paper-progress {
-       --paper-progress-active-color: #e91e63;
-    }
-
-To change the secondary progress bar color:
-
-    paper-progress {
-      --paper-progress-secondary-color: #f8bbd0;
-    }
-
-To change the progress bar background color:
-
-    paper-progress {
-      --paper-progress-container-color: #64ffda;
-    }
-
-Add the class `transiting` to a paper-progress to animate the progress bar when
-the value changed. You can also customize the transition:
-
-    paper-progress {
-      --paper-progress-transition-duration: 0.08s;
-      --paper-progress-transition-timing-function: ease;
-      --paper-progress-transition-transition-delay: 0s;
-    }
-
-The following mixins are available for styling:
-
-Custom property                               | Description                                 | Default
-----------------------------------------------|---------------------------------------------|--------------
-`--paper-progress-container-color`            | Mixin applied to container                  | `--google-grey-300`
-`--paper-progress-transition-duration`        | Duration of the transition                  | `0.008s`
-`--paper-progress-transition-timing-function` | The timing function for the transition      | `ease`
-`--paper-progress-transition-delay`           | delay for the transition                    | `0s`
-`--paper-progress-active-color`               | The color of the active bar                 | `--google-green-500`
-`--paper-progress-secondary-color`            | The color of the secondary bar              | `--google-green-100`
-`--paper-progress-disabled-active-color`      | The color of the active bar if disabled     | `--google-grey-500`
-`--paper-progress-disabled-secondary-color`   | The color of the secondary bar if disabled  | `--google-grey-300`
-`--paper-progress-height`                     | The height of the progress bar              | `4px`
-
-@group Paper Elements
-@element paper-progress
-@hero hero.svg
-@demo demo/index.html
--->
-
-<dom-module id="paper-progress" assetpath="bower_components/paper-progress/">
+<dom-module id="paper-progress" assetpath="../bower_components/paper-progress/">
   <template>
     <style>
       :host {
@@ -15510,49 +14623,9 @@ Custom property                               | Description                     
     }
   });
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-`iron-a11y-announcer` is a singleton element that is intended to add a11y
-to features that require on-demand announcement from screen readers. In
-order to make use of the announcer, it is best to request its availability
-in the announcing element.
 
-Example:
 
-    Polymer({
-
-      is: 'x-chatty',
-
-      attached: function() {
-        // This will create the singleton element if it has not
-        // been created yet:
-        Polymer.IronA11yAnnouncer.requestAvailability();
-      }
-    });
-
-After the `iron-a11y-announcer` has been made available, elements can
-make announces by firing bubbling `iron-announce` events.
-
-Example:
-
-    this.fire('iron-announce', {
-      text: 'This is an announcement!'
-    }, { bubbles: true });
-
-Note: announcements are only audible if you have a screen reader enabled.
-
-@group Iron Elements
-@demo demo/index.html
--->
-
-<dom-module id="iron-a11y-announcer" assetpath="bower_components/iron-a11y-announcer/">
+<dom-module id="iron-a11y-announcer" assetpath="../bower_components/iron-a11y-announcer/">
   <style>
     :host {
       display: inline-block;
@@ -15631,15 +14704,7 @@ Note: announcements are only audible if you have a screen reader enabled.
 
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
 /**
 `Polymer.IronFitBehavior` fits an element in another element using `max-height` and `max-width`, and
 optionally centers it in the window or another element.
@@ -16220,31 +15285,9 @@ Use `noOverlap` to position the element around another element without overlappi
 
   };
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-`iron-overlay-backdrop` is a backdrop used by `Polymer.IronOverlayBehavior`. It should be a
-singleton.
 
-### Styling
 
-The following custom properties and mixins are available for styling.
-
-Custom property | Description | Default
--------------------------------------------|------------------------|---------
-`--iron-overlay-backdrop-background-color` | Backdrop background color                                     | #000
-`--iron-overlay-backdrop-opacity`          | Backdrop opacity                                              | 0.6
-`--iron-overlay-backdrop`                  | Mixin applied to `iron-overlay-backdrop`.                      | {}
-`--iron-overlay-backdrop-opened`           | Mixin applied to `iron-overlay-backdrop` when it is displayed | {}
--->
-
-<dom-module id="iron-overlay-backdrop" assetpath="bower_components/iron-overlay-behavior/">
+<dom-module id="iron-overlay-backdrop" assetpath="../bower_components/iron-overlay-behavior/">
 
   <template>
     <style>
@@ -16767,15 +15810,7 @@ Custom property | Description | Default
   };
 
   Polymer.IronOverlayManager = new Polymer.IronOverlayManagerClass();
-</script><!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
+</script>
 <script>
 (function() {
 'use strict';
@@ -17380,75 +16415,10 @@ context. You should place this element as a child of `<body>` whenever possible.
    */
 
 })();
-</script><!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Snackbards & toasts](https://www.google.com/design/spec/components/snackbars-toasts.html)
-
-`paper-toast` provides a subtle notification toast. Only one `paper-toast` will
-be visible on screen.
-
-Use `opened` to show the toast:
-
-Example:
-
-    <paper-toast text="Hello world!" opened></paper-toast>
-
-Also `open()` or `show()` can be used to show the toast:
-
-Example:
-
-    <paper-button on-click="openToast">Open Toast</paper-button>
-    <paper-toast id="toast" text="Hello world!"></paper-toast>
-
-    ...
-
-    openToast: function() {
-      this.$.toast.open();
-    }
-
-Set `duration` to 0, a negative number or Infinity to persist the toast on screen:
-
-Example:
-
-    <paper-toast text="Terms and conditions" opened duration="0">
-      <a href="#">Show more</a>
-    </paper-toast>
+</script>
 
 
-### Styling
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-toast-background-color` | The paper-toast background-color | `#323232`
-`--paper-toast-color` | The paper-toast color | `#f1f1f1`
-
-This element applies the mixin `--paper-font-common-base` but does not import `paper-styles/typography.html`.
-In order to apply the `Roboto` font to this element, make sure you've imported `paper-styles/typography.html`.
-
-@group Paper Elements
-@element paper-toast
-@demo demo/index.html
-@hero hero.svg
--->
-
-<dom-module id="paper-toast" assetpath="bower_components/paper-toast/">
+<dom-module id="paper-toast" assetpath="../bower_components/paper-toast/">
   <template>
     <style>
       :host {
@@ -17706,15 +16676,7 @@ In order to apply the `Roboto` font to this element, make sure you've imported `
     })();
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
 
   /**
    * `Polymer.NeonAnimatableBehavior` is implemented by elements containing animations for use with
@@ -17954,24 +16916,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer.NeonAnimatableBehavior,
     Polymer.NeonAnimationRunnerBehaviorImpl
   ];
-</script><!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+</script>
+<script>
 
 /**
 Use `Polymer.PaperDialogBehavior` and `paper-dialog-shared-styles.html` to implement a Material Design
@@ -18104,25 +17050,9 @@ It will also ensure that focus remains in the dialog.
   Polymer.PaperDialogBehavior = [Polymer.IronOverlayBehavior, Polymer.PaperDialogBehaviorImpl];
 
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><style is="custom-style">
+<style is="custom-style">
 
   :root {
 
@@ -18278,29 +17208,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   }
 
 </style>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-### Styling
 
-The following custom properties and mixins are available for styling.
 
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-dialog-background-color` | Dialog background color                     | `--primary-background-color`
-`--paper-dialog-color`            | Dialog foreground color                     | `--primary-text-color`
-`--paper-dialog`                  | Mixin applied to the dialog                 | `{}`
-`--paper-dialog-title`            | Mixin applied to the title (`<h2>`) element | `{}`
-`--paper-dialog-button-color`     | Button area foreground color                | `--default-primary-color`
--->
-
-<dom-module id="paper-dialog-shared-styles" assetpath="bower_components/paper-dialog-behavior/">
+<dom-module id="paper-dialog-shared-styles" assetpath="../bower_components/paper-dialog-behavior/">
   <template>
     <style>
       :host {
@@ -18353,70 +17263,9 @@ Custom property | Description | Default
     </style>
   </template>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Dialogs](https://www.google.com/design/spec/components/dialogs.html)
 
-`<paper-dialog>` is a dialog with Material Design styling and optional animations when it is
-opened or closed. It provides styles for a header, content area, and an action area for buttons.
-You can use the `<paper-dialog-scrollable>` element (in its own repository) if you need a scrolling
-content area. See `Polymer.PaperDialogBehavior` for specifics.
 
-For example, the following code implements a dialog with a header, scrolling content area and
-buttons.
-
-    <paper-dialog>
-      <h2>Header</h2>
-      <paper-dialog-scrollable>
-        Lorem ipsum...
-      </paper-dialog-scrollable>
-      <div class="buttons">
-        <paper-button dialog-dismiss>Cancel</paper-button>
-        <paper-button dialog-confirm>Accept</paper-button>
-      </div>
-    </paper-dialog>
-
-### Styling
-
-See the docs for `Polymer.PaperDialogBehavior` for the custom properties available for styling
-this element.
-
-### Animations
-
-Set the `entry-animation` and/or `exit-animation` attributes to add an animation when the dialog
-is opened or closed. See the documentation in
-[PolymerElements/neon-animation](https://github.com/PolymerElements/neon-animation) for more info.
-
-For example:
-
-    <link rel="import" href="components/neon-animation/animations/scale-up-animation.html">
-    <link rel="import" href="components/neon-animation/animations/fade-out-animation.html">
-
-    <paper-dialog entry-animation="scale-up-animation"
-                  exit-animation="fade-out-animation">
-      <h2>Header</h2>
-      <div>Dialog body</div>
-    </paper-dialog>
-
-### Accessibility
-
-See the docs for `Polymer.PaperDialogBehavior` for accessibility features implemented by this
-element.
-
-@group Paper Elements
-@element paper-dialog
-@hero hero.svg
-@demo demo/index.html
--->
-
-<dom-module id="paper-dialog" assetpath="bower_components/paper-dialog/">
+<dom-module id="paper-dialog" assetpath="../bower_components/paper-dialog/">
   <template>
     <style include="paper-dialog-shared-styles"></style>
     <content></content>
@@ -18469,15 +17318,7 @@ element.
 })();
 
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
 
   /** @polymerBehavior */
   Polymer.PaperSpinnerBehavior = {
@@ -18552,15 +17393,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   };
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><dom-module id="paper-spinner-styles" assetpath="bower_components/paper-spinner/">
+<dom-module id="paper-spinner-styles" assetpath="../bower_components/paper-spinner/">
   <template>
     <style>
       /*
@@ -18891,48 +17724,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
   </template>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Progress & activity](https://www.google.com/design/spec/components/progress-activity.html)
 
-Element providing a single color material design circular spinner.
 
-    <paper-spinner-lite active></paper-spinner-lite>
-
-The default spinner is blue. It can be customized to be a different color.
-
-### Accessibility
-
-Alt attribute should be set to provide adequate context for accessibility. If not provided,
-it defaults to 'loading'.
-Empty alt can be provided to mark the element as decorative if alternative content is provided
-in another form (e.g. a text block following the spinner).
-
-    <paper-spinner-lite alt="Loading contacts list" active></paper-spinner-lite>
-
-### Styling
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-spinner-color` | Color of the spinner | `--google-blue-500`
-`--paper-spinner-stroke-width` | The width of the spinner stroke | 3px
-
-@group Paper Elements
-@element paper-spinner-lite
-@hero hero.svg
-@demo demo/index.html
--->
-
-<dom-module id="paper-spinner-lite" assetpath="bower_components/paper-spinner/">
+<dom-module id="paper-spinner-lite" assetpath="../bower_components/paper-spinner/">
   <template strip-whitespace="">
     <style include="paper-spinner-styles"></style>
 
@@ -18954,96 +17748,9 @@ Custom property | Description | Default
     });
   </script>
 </dom-module>
-<!--
-Material design: [Toolbars](https://www.google.com/design/spec/components/toolbars.html)
 
-`paper-toolbar` is a horizontal bar containing items that can be used for
-label, navigation, search and actions.  The items placed inside the
-`paper-toolbar` are projected into a `class="horizontal center layout"` container inside of
-`paper-toolbar`'s Shadow DOM.  You can use flex attributes to control the items'
-sizing.
 
-Example:
-
-```html
-<paper-toolbar>
-  <paper-icon-button icon="menu" on-tap="menuAction"></paper-icon-button>
-  <div class="title">Title</div>
-  <paper-icon-button icon="more-vert" on-tap="moreAction"></paper-icon-button>
-</paper-toolbar>
-```
-
-`paper-toolbar` has a standard height, but can made be taller by setting `tall`
-class on the `paper-toolbar`. This will make the toolbar 3x the normal height.
-
-```html
-<paper-toolbar class="tall">
-  <paper-icon-button icon="menu"></paper-icon-button>
-</paper-toolbar>
-```
-
-Apply `medium-tall` class to make the toolbar medium tall.  This will make the
-toolbar 2x the normal height.
-
-```html
-<paper-toolbar class="medium-tall">
-  <paper-icon-button icon="menu"></paper-icon-button>
-</paper-toolbar>
-```
-
-When `tall`, items can pin to either the top (default), middle or bottom.  Use
-`middle` class for middle content and `bottom` class for bottom content.
-
-```html
-<paper-toolbar class="tall">
-  <paper-icon-button icon="menu"></paper-icon-button>
-  <div class="middle title">Middle Title</div>
-  <div class="bottom title">Bottom Title</div>
-</paper-toolbar>
-```
-
-For `medium-tall` toolbar, the middle and bottom contents overlap and are
-pinned to the bottom.  But `middleJustify` and `bottomJustify` attributes are
-still honored separately.
-
-To make an element completely fit at the bottom of the toolbar, use `fit` along
-with `bottom`.
-
-```html
-<paper-toolbar class="tall">
-  <div id="progressBar" class="bottom fit"></div>
-</paper-toolbar>
-```
-
-When inside a `paper-header-panel` element, the class `.animate` is toggled to animate
-the height change in the toolbar.
-
-### Styling
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-toolbar-title`      | Mixin applied to the title of the toolbar | `{}`
-`--paper-toolbar-background` | Toolbar background color     | `--primary-color`
-`--paper-toolbar-color`      | Toolbar foreground color     | `--dark-theme-text-color`
-`--paper-toolbar-height`     | Custom height for toolbar    | `64px`
-`--paper-toolbar-sm-height`  | Custom height for small screen toolbar | `56px`
-`--paper-toolbar`            | Mixin applied to the toolbar | `{}`
-`--paper-toolbar-content`    | Mixin applied to the content section of the toolbar | `{}`
-`--paper-toolbar-medium`     | Mixin applied to medium height toolbar | `{}`
-`--paper-toolbar-tall`       | Mixin applied to tall height toolbar | `{}`
-`--paper-toolbar-transition` | Transition applied to the `.animate` class | `height 0.18s ease-in`
-
-### Accessibility
-
-`<paper-toolbar>` has `role="toolbar"` by default. Any elements with the class `title` will
-be used as the label of the toolbar via `aria-labelledby`.
-
-@demo demo/index.html
--->
-
-<dom-module id="paper-toolbar" assetpath="bower_components/paper-toolbar/">
+<dom-module id="paper-toolbar" assetpath="../bower_components/paper-toolbar/">
   <template>
     <style>
       :host {
@@ -19320,139 +18027,9 @@ be used as the label of the toolbar via `aria-labelledby`.
     });
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-`paper-header-panel` contains a header section and a content panel section.
-
-__Important:__ The `paper-header-panel` will not display if its parent does not have a height.
-
-Using layout classes, you can make the `paper-header-panel` fill the screen
-
-    <body class="fullbleed layout vertical">
-      <paper-header-panel class="flex">
-        <paper-toolbar>
-          <div>Hello World!</div>
-        </paper-toolbar>
-      </paper-header-panel>
-    </body>
-
-Special support is provided for scrolling modes when one uses a paper-toolbar or equivalent for the
-header section.
-
-Example:
-
-    <paper-header-panel>
-      <paper-toolbar>Header</paper-toolbar>
-      <div>Content goes here...</div>
-    </paper-header-panel>
-
-If you want to use other than `paper-toolbar` for the header, add `paper-header` class to that
-element.
-
-Example:
-
-    <paper-header-panel>
-      <div class="paper-header">Header</div>
-      <div>Content goes here...</div>
-    </paper-header-panel>
-
-To have the content fit to the main area, use the `fit` class.
-
-    <paper-header-panel>
-      <div class="paper-header">standard</div>
-      <div class="fit">content fits 100% below the header</div>
-    </paper-header-panel>
-
-### Modes
-
-Controls header and scrolling behavior. Options are `standard`, `seamed`, `waterfall`, `waterfall-tall`, `scroll` and
-`cover`. Default is `standard`.
-
-Mode | Description
-----------------|-------------
-`standard` | The header is a step above the panel. The header will consume the panel at the point of entry, preventing it from passing through to the opposite side.
-`seamed` | The header is presented as seamed with the panel.
-`waterfall` | Similar to standard mode, but header is initially presented as seamed with panel, but then separates to form the step.
-`waterfall-tall` | The header is initially taller (`tall` class is added to the header). As the user scrolls, the header separates (forming an edge) while condensing (`tall` class is removed from the header).
-`scroll` | The header keeps its seam with the panel, and is pushed off screen.
-`cover` | The panel covers the whole `paper-header-panel` including the header. This allows user to style the panel in such a way that the panel is partially covering the header.
-
-Example:
-
-    <paper-header-panel mode="waterfall">
-      <div class="paper-header">standard</div>
-      <div class="content fit">content fits 100% below the header</div>
-    </paper-header-panel>
 
 
-### Styling
-
-To change the shadow that shows up underneath the header:
-
-    paper-header-panel {
-      --paper-header-panel-shadow: {
-          height: 6px;
-          bottom: -6px;
-          box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
-      };
-    }
-
-To change the panel container in different modes:
-
-    paper-header-panel {
-      --paper-header-panel-standard-container: {
-        border: 1px solid gray;
-      };
-
-      --paper-header-panel-seamed-container: {
-        border: 1px solid gray;
-      };
-
-      --paper-header-panel-waterfall-container: {
-        border: 1px solid gray;
-      };
-
-      --paper-header-panel-waterfall-tall-container: {
-        border: 1px solid gray;
-      };
-
-      --paper-header-panel-scroll-container: {
-        border: 1px solid gray;
-      };
-
-      --paper-header-panel-cover-container: {
-        border: 1px solid gray;
-      };
-    }
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-header-panel` | Mixin applied to the element | `{}`
-`--paper-header-panel-body` | Mixin applied to the element's body (i.e. everything below the toolbar) | `{}`
-`--paper-header-panel-scroll-container` | Mixin applied to the container when in scroll mode | `{}`
-`--paper-header-panel-cover-container` | Mixin applied to the container when in cover mode | `{}`
-`--paper-header-panel-standard-container` | Mixin applied to the container when in standard mode | `{}`
-`--paper-header-panel-seamed-container` | Mixin applied to the container when in seamed mode | `{}`
-`--paper-header-panel-waterfall-container` | Mixin applied to the container when in waterfall mode | `{}`
-`--paper-header-panel-waterfall-tall-container` | Mixin applied to the container when in tall waterfall mode | `{}`
-`--paper-header-panel-shadow` | Mixin applied to the waterfall shadow | `{}`
-
-@group Paper Elements
-@element paper-header-panel
-@demo demo/index.html
-@hero hero.svg
--->
-
-<dom-module id="paper-header-panel" assetpath="bower_components/paper-header-panel/">
+<dom-module id="paper-header-panel" assetpath="../bower_components/paper-header-panel/">
   <template>
     <style>
       :host {
@@ -19815,86 +18392,9 @@ Custom property | Description | Default
     })();
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-Material design: [Scrolling techniques](https://www.google.com/design/spec/patterns/scrolling-techniques.html)
 
-`paper-scroll-header-panel` contains a header section and a content section.  The
-header is initially on the top part of the view but it scrolls away with the
-rest of the scrollable content.  Upon scrolling slightly up at any point, the
-header scrolls back into view.  This saves screen space and allows users to
-access important controls by easily moving them back to the view.
 
-__Important:__ The `paper-scroll-header-panel` will not display if its parent does not have a height.
-
-Using [layout classes](https://www.polymer-project.org/1.0/docs/migration.html#layout-attributes) or custom properties, you can easily make the `paper-scroll-header-panel` fill the screen
-
-```html
-<body class="fullbleed layout vertical">
-  <paper-scroll-header-panel class="flex">
-    <paper-toolbar>
-      <div>Hello World!</div>
-    </paper-toolbar>
-  </paper-scroll-header-panel>
-</body>
-```
-
-or, if you would prefer to do it in CSS, just give `html`, `body`, and `paper-scroll-header-panel` a height of 100%:
-
-```css
-html, body {
-  height: 100%;
-  margin: 0;
-}
-paper-scroll-header-panel {
-  height: 100%;
-}
-```
-
-`paper-scroll-header-panel` works well with `paper-toolbar` but can use any element
-that represents a header by adding a `paper-header` class to it.
-
-```html
-<paper-scroll-header-panel>
-  <div class="paper-header">Header</div>
-  <div>Content goes here...</div>
-</paper-scroll-header-panel>
-```
-
-### Styling
-=======
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
---paper-scroll-header-panel-full-header | To change background for toolbar when it is at its full size | {}
---paper-scroll-header-panel-condensed-header | To change the background for toolbar when it is condensed | {}
---paper-scroll-header-container | To override or add container styles | {}
-
-@group Paper Element
-@element paper-scroll-header-panel
-@demo demo/transform-header-1.html Transform header 1
-@demo demo/transform-header-2.html Transform header 2
-@demo demo/transform-header-3.html Transform header 3
-@demo demo/transform-header-4.html Transform header 4
-@demo demo/transform-header-5.html Transform header 5
-@demo demo/transform-header-6.html Transform header 6
-@demo demo/keep-header.html Keep header
-@demo demo/hide-header.html Hide header
-@demo demo/toggle-fixed-header.html Toggle fixed header
-@demo demo/drawer-panel.html Combine with paper-drawer-panel
-@hero hero.svg
--->
-
-<dom-module id="paper-scroll-header-panel" assetpath="bower_components/paper-scroll-header-panel/">
+<dom-module id="paper-scroll-header-panel" assetpath="../bower_components/paper-scroll-header-panel/">
 
   <style>
     :host {
@@ -20389,15 +18889,7 @@ Custom property | Description | Default
 })();
 
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><script>
+<script>
   /**
   `iron-selector` is an element which can be used to manage a list of elements
   that can be selected.  Tapping on the item will make the item selected.  The `selected` indicates
@@ -20470,123 +18962,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   });
 
 </script>
-<!--
-Material design: [Navigation drawer](https://www.google.com/design/spec/patterns/navigation-drawer.html)
 
-`paper-drawer-panel` contains a drawer panel and a main panel.  The drawer
-and the main panel are side-by-side with drawer on the left.  When the browser
-window size is smaller than the `responsiveWidth`, `paper-drawer-panel`
-changes to narrow layout.  In narrow layout, the drawer will be stacked on top
-of the main panel.  The drawer will slide in/out to hide/reveal the main
-panel.
 
-Use the attribute `drawer` to indicate that the element is the drawer panel and
-`main` to indicate that the element is the main panel.
-
-Example:
-
-    <paper-drawer-panel>
-      <div drawer> Drawer panel... </div>
-      <div main> Main panel... </div>
-    </paper-drawer-panel>
-
-The drawer and the main panels are not scrollable.  You can set CSS overflow
-property on the elements to make them scrollable or use `paper-header-panel`.
-
-Example:
-
-    <paper-drawer-panel>
-      <paper-header-panel drawer>
-        <paper-toolbar></paper-toolbar>
-        <div> Drawer content... </div>
-      </paper-header-panel>
-      <paper-header-panel main>
-        <paper-toolbar></paper-toolbar>
-        <div> Main content... </div>
-      </paper-header-panel>
-    </paper-drawer-panel>
-
-An element that should toggle the drawer will automatically do so if it's
-given the `paper-drawer-toggle` attribute.  Also this element will automatically
-be hidden in wide layout.
-
-Example:
-
-    <paper-drawer-panel>
-      <paper-header-panel drawer>
-        <paper-toolbar>
-          <div>Application</div>
-        </paper-toolbar>
-        <div> Drawer content... </div>
-      </paper-header-panel>
-      <paper-header-panel main>
-        <paper-toolbar>
-          <paper-icon-button icon="menu" paper-drawer-toggle></paper-icon-button>
-          <div>Title</div>
-        </paper-toolbar>
-        <div> Main content... </div>
-      </paper-header-panel>
-    </paper-drawer-panel>
-
-To position the drawer to the right, add `right-drawer` attribute.
-
-    <paper-drawer-panel right-drawer>
-      <div drawer> Drawer panel... </div>
-      <div main> Main panel... </div>
-    </paper-drawer-panel>
-
-### Styling
-
-To change the main container:
-
-    paper-drawer-panel {
-      --paper-drawer-panel-main-container: {
-        background-color: gray;
-      };
-    }
-
-To change the drawer container when it's in the left side:
-
-    paper-drawer-panel {
-      --paper-drawer-panel-left-drawer-container: {
-        background-color: white;
-      };
-    }
-
-To change the drawer container when it's in the right side:
-
-    paper-drawer-panel {
-      --paper-drawer-panel-right-drawer-container: {
-        background-color: white;
-      };
-    }
-
-To customize the scrim:
-
-    paper-drawer-panel {
-      --paper-drawer-panel-scrim: {
-        background-color: red;
-      };
-    }
-
-The following custom properties and mixins are available for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--paper-drawer-panel-scrim-opacity` | Scrim opacity | 1
-`--paper-drawer-panel-drawer-container` | Mixin applied to drawer container | {}
-`--paper-drawer-panel-left-drawer-container` | Mixin applied to container when it's in the left side | {}
-`--paper-drawer-panel-main-container` | Mixin applied to main container | {}
-`--paper-drawer-panel-right-drawer-container` | Mixin applied to container when it's in the right side | {}
-`--paper-drawer-panel-scrim` | Mixin applied to scrim | {}
-
-@group Paper elements
-@element paper-drawer-panel
-@demo demo/index.html
-@hero hero.svg
--->
-
-<dom-module id="paper-drawer-panel" assetpath="bower_components/paper-drawer-panel/">
+<dom-module id="paper-drawer-panel" assetpath="../bower_components/paper-drawer-panel/">
   <template>
     <style>
       :host {
@@ -21290,19 +19668,7 @@ Custom property | Description | Default
     }());
   </script>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-`PaperItemBehavior` is a convenience behavior shared by <paper-item> and
-<paper-icon-item> that manages the shared control states and attributes of
-the items.
--->
+
 
 <script>
   /** @polymerBehavior Polymer.PaperItemBehavior */
@@ -21320,15 +19686,7 @@ the items.
     Polymer.PaperItemBehaviorImpl
   ];
 </script>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><dom-module id="paper-item-shared-styles" assetpath="bower_components/paper-item/">
+<dom-module id="paper-item-shared-styles" assetpath="../bower_components/paper-item/">
   <template>
     <style>
       :host, .paper-item {
@@ -21383,47 +19741,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
   </template>
 </dom-module>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
---><!--
-`<paper-icon-item>` is a convenience element to make an item with icon. It is an interactive list
-item with a fixed-width icon area, according to Material Design. This is useful if the icons are of
-varying widths, but you want the item bodies to line up. Use this like a `<paper-item>`. The child
-node with the attribute `item-icon` is placed in the icon area.
 
-    <paper-icon-item>
-      <iron-icon icon="favorite" item-icon></iron-icon>
-      Favorite
-    </paper-icon-item>
-    <paper-icon-item>
-      <div class="avatar" item-icon></div>
-      Avatar
-    </paper-icon-item>
 
-### Styling
-
-The following custom properties and mixins are available for styling:
-
-Custom property               | Description                                    | Default
-------------------------------|------------------------------------------------|----------
-`--paper-item-icon-width`     | Width of the icon area                         | `56px`
-`--paper-item-icon`           | Mixin applied to the icon area                 | `{}`
-`--paper-icon-item`           | Mixin applied to the item                      | `{}`
-`--paper-item-selected-weight`| The font weight of a selected item             | `bold`
-`--paper-item-selected`       | Mixin applied to selected paper-items                | `{}`
-`--paper-item-disabled-color` | The color for disabled paper-items             | `--disabled-text-color`
-`--paper-item-disabled`       | Mixin applied to disabled paper-items        | `{}`
-`--paper-item-focused`        | Mixin applied to focused paper-items         | `{}`
-`--paper-item-focused-before` | Mixin applied to :before focused paper-items | `{}`
--->
-
-<dom-module id="paper-icon-item" assetpath="bower_components/paper-item/">
+<dom-module id="paper-icon-item" assetpath="../bower_components/paper-item/">
   <template>
     <style include="paper-item-shared-styles"></style>
     <style>
@@ -21606,17 +19926,711 @@ Custom property               | Description                                    |
     </g>
   </svg>
 </iron-iconset-svg>
-<!--  Iron elements -->
-<!-- Paper elements -->
-<!-- FIXME <link rel="import" href="bower_components/paper-dialog/paper-action-dialog.html"> -->
-<!-- Icon elements -->
-<!-- Use the complete iconset for demo and development purposes only. Generate a custom component containing only icons you need using font-awesome-polymer-icons-generator
-https://github.com/philya/font-awesome-polymer-icons-generator
--->
-<!-- <link rel="import" href="bower_components/fontawesome-iconset/fa-all.html"> -->
+<script>
+  /**
+   * The `<platinum-sw-cache>` element makes it easy to precache specific resources, perform runtime
+   * caching, and serve your cached resources when a network is unavailable.
+   * Under the hood, the [sw-toolbox](https://github.com/googlechrome/sw-toolbox) library is used
+   * for all the caching and request handling logic.
+   * `<platinum-sw-cache>` needs to be a child element of `<platinum-sw-register>`.
+   * A simple, yet useful configuration is
+   *
+   *     <platinum-sw-register auto-register>
+   *       <platinum-sw-cache></platinum-sw-cache>
+   *     </platinum-sw-register>
+   *
+   * This is enough to have all of the resources your site uses cached at runtime, both local and
+   * cross-origin.
+   * (It uses the default `defaultCacheStrategy` of "networkFirst".)
+   * When there's a network available, visits to your site will go against the network copy of the
+   * resources, but if someone visits your site when they're offline, all the cached resources will
+   * be used.
+   *
+   * @demo demo/index.html An offline-capable eReader demo.
+   */
+  Polymer({
+    is: 'platinum-sw-cache',
 
-<!-- Other elements -->
-<!-- FIXME <link rel="import" href="bower_components/lorem-element/lorem-element.html"> -->
+    properties: {
+      /**
+       * Used to configure `<platinum-sw-precache>` behavior via a JSON file instead of via
+       * attributes. This can come in handy when the configuration (e.g. which files to precache)
+       * depends on the results of a build script.
+       *
+       * If configuration for the same properties are provided in both the JSON file and via the
+       * element's attributes, then in general the JSON file's values take precedence. The one
+       * exception is the `precache` property. Any values in the element's `precache` attribute will
+       * be concatenated with the values in the JSON file's `precache` property and the set of files
+       * that are precached will be the union of the two.
+       *
+       * There's one additional option, `precacheFingerprint`, that can be set in the JSON. If using
+       * a build script that might output a large number of files to precache, its recommended
+       * that your build script generate a unique "fingerprint" of the files. Any changes to the
+       * `precacheFingerprint` value will result in the underlying service worker kicking off the
+       * process of caching the files listed in `precache`.
+       * While there are a few different strategies for generating an appropriate
+       * `precacheFingerprint` value, a process that makes sense is to use a stable hash of the
+       * serialized `precache` array. That way, any changes to the list of files in `precache`
+       * will result in a new `precacheFingerprint` value.
+       * If your build script is Node.js based, one way to generate this hash is:
+       *
+       *     var md5 = require('crypto').createHash('md5');
+       *     md5.update(JSON.stringify(precache));
+       *     var precacheFingerprint = md5.digest('hex');
+       *
+       * Alternatively, you could use something like the
+       * [SHA-1 signature](http://stackoverflow.com/questions/1161869/how-to-get-sha-of-the-latest-commit-from-remote-git-repository)
+       * of your latest `git` commit for the `precacheFingerprint` value.
+       *
+       * An example file may look like:
+       *
+       *     {
+       *       "cacheId": "my-cache-id",
+       *       "defaultCacheStrategy": "fastest",
+       *       "disabled": false,
+       *       "precache": ["file1.html", "file2.css"],
+       *       "precacheFingerprint": "FINGERPRINT_OF_FILES_IN_PRECACHE"
+       *     }
+       */
+      cacheConfigFile: String,
 
+      /**
+       * An id used to construct the name for the
+       * [Cache](https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#cache)
+       * in which all the resources will be stored.
+       *
+       * If nothing is provided, the default value set in
+       * [`toolbox.options.cacheName`](https://github.com/GoogleChrome/sw-toolbox/blob/8763dcc9fbc9352d58f184050e2131c42f7b6d68/lib/options.js#L28)
+       * will be used.
+       *
+       * The `cacheId` is combined with the service worker's scope to construct the cache name, so
+       * two `<platinum-sw-cache>` elements that are associated with different scopes will use
+       * different caches.
+       */
+      cacheId: String,
+
+      /**
+       * The caching strategy used for all requests, both for local and cross-origin resources.
+       *
+       * For a list of strategies, see the [`sw-toolbox` documentation](https://github.com/GoogleChrome/sw-toolbox#built-in-handlers).
+       * Specify a strategy as a string, without the "toolbox" prefix. E.g., for
+       * `toolbox.networkFirst`, set `defaultCacheStrategy` to "networkFirst".
+       *
+       * Note that the "cacheFirst" and "cacheOnly" strategies are not recommended, and may be
+       * explicitly prevented in a future release. More information can be found at
+       * https://github.com/PolymerElements/platinum-sw#cacheonly--cachefirst-defaultcachestrategy-considered-harmful
+       *
+       * @see {@link https://github.com/GoogleChrome/sw-toolbox#built-in-handlers}
+       */
+      defaultCacheStrategy: {
+        type: String,
+        value: 'networkFirst'
+      },
+
+      /**
+       * If set to true, this element will not set up service worker caching. This is useful to
+       * conditionally enable or disable caching depending on the build environment.
+       */
+      disabled: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * Used to provide a list of URLs that are always precached as soon as the service worker is
+       * installed. Corresponds to  [`sw-toolbox`'s `precache()` method](https://github.com/GoogleChrome/sw-toolbox#toolboxprecachearrayofurls).
+       *
+       * This is useful for URLs that that wouldn't necessarily be picked up by runtime caching,
+       * i.e. a list of resources that are needed by one of the subpages of your site, or a list of
+       * resources that are only loaded via user interaction.
+       *
+       * `precache` can be used in conjunction with `cacheConfigFile`, and the two arrays will be
+       * concatenated.
+       *
+       * @see {@link https://github.com/GoogleChrome/sw-toolbox#toolboxprecachearrayofurls}
+       */
+      precache: {
+        type: Array,
+        value: function() { return []; }
+      }
+    },
+
+    _getParameters: function(baseURI) {
+      return new Promise(function(resolve) {
+        var params = {
+          importscriptLate: new URL('bootstrap/sw-toolbox-setup.js', baseURI).href,
+          defaultCacheStrategy: this.defaultCacheStrategy,
+          precache: this.precache
+        };
+
+        if (this.cacheConfigFile) {
+          params.cacheConfigFile = this.cacheConfigFile;
+          window.fetch(this.cacheConfigFile).then(function(response) {
+            if (!response.ok) {
+              throw Error('unable to load ' + this.cacheConfigFile);
+            }
+            return response.json();
+          }.bind(this)).then(function(config) {
+            this.disabled = config.disabled;
+            if (this.disabled) {
+              // Use an empty set of parameters to effectively disable caching.
+              params = {};
+            } else {
+              // If there's a hash of the list of files to precache provided in the config file,
+              // then copy that over to the params that will be used to construct the service worker
+              // URL. This works around the issue where a potentially large number of precache
+              // files could result in a longer URL than a browser will allow.
+              // The actual list of files to precache (in config.precache) will be dealt by the
+              // service worker during the install phase, so we can ignore it here.
+              // See https://github.com/PolymerElements/platinum-sw/issues/53
+              if (config.precacheFingerprint) {
+                params.precacheFingerprint = config.precacheFingerprint;
+              } else {
+                params.precache = params.precache.concat(config.precache);
+              }
+              params.cacheId = config.cacheId || params.cacheId;
+              params.defaultCacheStrategy = config.defaultCacheStrategy ||
+                params.defaultCacheStrategy;
+            }
+          }.bind(this)).catch(function(error) {
+            console.info('Skipping precaching: ' + error.message);
+          }).then(function() {
+            resolve(params);
+          });
+        } else {
+          resolve(params);
+        }
+      }.bind(this));
+    }
+  });
+</script>
+<script>
+  /**
+   * The `<platinum-sw-fetch>` element creates custom [`fetch` event](https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#fetch-event-section)
+   * handlers for given URL patterns. Possible use cases include:
+   *
+   * - Using a special caching strategy for specific URLs.
+   * - Returning static "fallback" responses instead of network errors when a remote API
+   * is unavailable.
+   *
+   * In short, any scenario in which you'd like a service worker to intercept network
+   * requests and provide custom response handling.
+   *
+   * If you'd like a single caching policy applied to all same-origin requests, then an alternative
+   * to using `<platinum-sw-fetch>` is to use `<platinum-sw-cache>` with the `defaultCacheStategy`
+   * property set.
+   *
+   * Under the hood, the [sw-toolbox](https://github.com/googlechrome/sw-toolbox) library is used
+   * for all the request handling logic.
+   *
+   * `<platinum-sw-fetch>` needs to be a child element of `<platinum-sw-register>`.
+   *
+   * An example configuration is:
+   *
+   *     <platinum-sw-register auto-register>
+   *       <platinum-sw-import-script href="custom-fetch-handler.js"></platinum-sw-import-script>
+   *       <platinum-sw-fetch handler="customFetchHandler"
+   *                          path="/(.*)/customFetch"></platinum-sw-fetch>
+   *     </platinum-sw-register>
+   *
+   * This implies that there's a `custom-fetch-handler.js` file in the same directory as the current
+   * page, which defines a `sw-toolbox` compliant
+   * [request handler](https://github.com/googlechrome/sw-toolbox#request-handlers) named
+   * `customFetchHandler`. This definition is imported using `<platinum-sw-import-script>`. The
+   * `<platinum-sw-fetch>` element takes care of mapping which request paths are handled by
+   * `customFetchHandler`.
+   *
+   * Anything not matching the `path` pattern is ignored by `<platinum-sw-fetch>`,
+   * and it's possible to have multiple `<platinum-sw-fetch>` elements that each define different
+   * paths and different handlers. The path matching is performed top-down, starting with the first
+   * `<platinum-sw-fetch>` element.
+   *
+   * The `path` will, by default, only match same-origin requests. If you'd like to define a custom
+   * handler for requests on a specific cross-origin domain, you must use the `origin` parameter
+   * in conjunction with `path` to match the domains you'd like to handle.
+   */
+  Polymer({
+    is: 'platinum-sw-fetch',
+
+    properties: {
+      /**
+       * The name of the request handler to use. This should be a `sw-toolbox`-style
+       * [request handler](https://github.com/googlechrome/sw-toolbox#request-handlers).
+       *
+       * `handler` is a `String`, not a `function`, so you're providing the name of a function, not
+       * the function itself. It can be a function defined in the
+       * [`toolbox` scope](https://github.com/googlechrome/sw-toolbox#built-in-handlers)
+       * (e.g. 'networkFirst', 'fastest', 'networkOnly', etc.) or a function defined in the
+       * [`ServiceWorkerGlobalScope`](https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#service-worker-global-scope),
+       * like a function that is defined in a file that's imported via `platinum-sw-import-script`.
+       **
+       * @see {@link https://github.com/GoogleChrome/sw-toolbox#built-in-handlers}
+       */
+      handler: String,
+
+      /**
+       * By default, `path` will only match URLs under the current host (i.e. same-origin requests).
+       * If you'd like to apply `handler` to cross-origin requests, then use `origin` to specify
+       * which hosts will match. Setting `origin` is optional.
+       *
+       * `origin` is a `String`, but it is used internally to construct a
+       * [`RegExp` object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions),
+       * which is used for the matching.
+       *
+       * Note that the `origin` value will be matched against the full domain name and the protocol.
+       * If you want to match  'http' and 'https', then use 'https?://' at the start of your string.
+       *
+       * Some examples:
+       * - `origin="https?://.+\.google\.com"` → a RegExp that matches `http` or `https` requests
+       *   made to any domain that ends in `.google.com`.
+       * - `origin="https://www\.example\.com" → a RegExp that will only match `https` requests to
+       *   one domain, `www.example.com`.
+       *
+       * @see {@link https://github.com/googlechrome/sw-toolbox#toolboxrouterheadurlpattern-handler-options}
+       */
+      origin: String,
+
+      /**
+       * URLs with paths matching `path` will have `handler` applied to them.
+       *
+       * By default, `path` will only match same-origin URLs. If you'd like it to match
+       * cross-origin URLs, use `path` in conjunction with `origin`.
+       *
+       * As explained in the
+       * [`sw-toolbox` docs](https://github.com/googlechrome/sw-toolbox#toolboxrouterheadurlpattern-handler-options),
+       * the URL path matching is done using the [`path-to-regexp`](https://github.com/pillarjs/path-to-regexp)
+       * module, which is the same logic used in [Express-style routing](http://expressjs.com/guide/routing.html).
+       *
+       * In practice, you need to always use '/' as the first character of your `path`, and then
+       * can use '(.*)' as a wildcard.
+       *
+       * Some examples:
+       * - `path="/(.*)/customFetch"` → matches any path that ends with '/customFetch'.
+       * - `path="/customFetch(.*)"` → matches any path that starts with '/customFetch', optionally
+       *   followed by other characters.
+       *
+       * @see {@link https://github.com/pillarjs/path-to-regexp}
+       */
+      path: String
+    },
+
+    _getParameters: function(baseURI) {
+      return new Promise(function(resolve) {
+        var params = {
+          importscriptLate: new URL('bootstrap/sw-toolbox-setup.js', baseURI).href
+        };
+        if (this.path && this.handler) {
+          params.route = [this.path, this.handler, this.origin];
+        } else {
+          console.warn('The following platinum-sw-fetch element will not have any effect. ' +
+            'Both the "path" and "handler" attributes must be set.', this);
+        }
+        resolve(params);
+      }.bind(this));
+    }
+  });
+</script>
+<script>
+  /**
+   * The `<platinum-sw-register>` element handles
+   * [service worker](http://www.html5rocks.com/en/tutorials/service-worker/introduction/)
+   * registration, reflects the overall service worker state, and coordinates the configuration
+   * provided by other Service Worker Elements.
+   * `<platinum-sw-register>` is used as a parent element for child elements in the
+   * `<platinum-sw-*>` group.
+   *
+   *     <platinum-sw-register skip-waiting
+   *                           clients-claim
+   *                           auto-register
+   *                           state="{{state}}"
+   *                           on-service-worker-error="handleSWError"
+   *                           on-service-worker-updated="handleSWUpdated"
+   *                           on-service-worker-installed="handleSWInstalled">
+   *       ...one or more <platinum-sw-*> children which share the service worker registration...
+   *     </platinum-sw-register>
+   *
+   * Please see https://github.com/PolymerElements/platinum-sw#top-level-sw-importjs for a
+   * *crucial* prerequisite file you must create before `<platinum-sw-register>` can be used!
+   *
+   * @demo demo/index.html An offline-capable eReader demo.
+   */
+  Polymer({
+    is: 'platinum-sw-register',
+
+    // Used as an "emergency" switch if we make breaking changes in the way <platinum-sw-register>
+    // talks to service-worker.js. Otherwise, it shouldn't need to change, and isn't meant to be
+    // kept in sync with the element's release number.
+    _version: '1.0',
+
+    /**
+     * Fired when the initial service worker installation completes successfully.
+     * The service worker will normally only be installed once, the first time a page with a
+     * `<platinum-sw-register>` element is visited in a given browser. If the same page is visited
+     * again, the existing service worker will be reused, and there won't be another
+     * `service-worker-installed` fired.
+     *
+     * @event service-worker-installed
+     * @param {String} A message indicating that the installation succeeded.
+     */
+
+    /**
+     * Fired when the service worker update flow completes successfully.
+     * If you make changes to your `<platinum-sw-register>` configuration (i.e. by adding in new
+     * `<platinum-sw-*>` child elements, or changing their attributes), users who had the old
+     * service worker installed will get the update installed when they see the modified elements.
+     *
+     * @event service-worker-updated
+     * @param {String} A message indicating that the update succeeded.
+     */
+
+    /**
+     * Fired when an error prevents the service worker installation from completing.
+     *
+     * @event service-worker-error
+     * @param {String} A message indicating what went wrong.
+     */
+
+    properties: {
+      /**
+       * Whether this element should automatically register the corresponding service worker as
+       * soon as its added to a page.
+       *
+       * If set to `false`, then the service worker won't be automatically registered, and you
+       * must call this element's `register()` method if you want service worker functionality.
+       * This is useful if, for example, the service worker needs to be configured using
+       * information that isn't immediately available at the time the page loads.
+       *
+       * If set to `true`, the service worker will be automatically registered without having to
+       * call any methods.
+       */
+      autoRegister: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * The URI used as a base when constructing relative paths to service worker helper libraries
+       * that need to be loaded.
+       *
+       * This can normally be kept set to the default, which will use the directory containing this
+       * element as the base. However, if you [Vulcanize](https://github.com/polymer/vulcanize) your
+       * elements, then the default base might not be appropriate anymore. This will allow you to
+       * override it.
+       *
+       * See https://github.com/PolymerElements/platinum-sw#relative-paths--vulcanization for more
+       * information.
+       */
+      baseUri: {
+        type: String,
+        // Grab the URI of this file to use as a base when resolving relative paths.
+        // See https://github.com/webcomponents/webcomponentsjs/blob/88240ba9ef4cebb1579e07f7888c7b58ec017a39/src/HTMLImports/base.js#L31
+        // for background on document._currentScript. We want to support document.currentScript
+        // as well, on the off chance that the polyfills aren't loaded.
+        // Fallback to './' as a default, though current browsers that don't support
+        // document.currentScript also don't support service workers.
+        value: document._currentScript ? document._currentScript.baseURI :
+          (document.currentScript ? document.currentScript.baseURI : './')
+      },
+
+      /**
+       * Whether the activated service worker should [take immediate control](https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#clients-claim-method)
+       * of any pages under its scope.
+       *
+       * If this is `false`, the service worker won't have any effect until the next time the page
+       * is visited/reloaded.
+       * If this is `true`, it will take control and start handling events for the current page
+       * (and any pages under the same scope open in other tabs/windows) as soon it's active.
+       * @see {@link https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#clients-claim-method}
+       */
+      clientsClaim: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * The service worker script that is [registered](https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#navigator-service-worker-register).
+       * The script *should* be located at the top level of your site, to ensure that it is able
+       * to control all the pages on your site.
+       *
+       * It's *strongly* recommended that you create a top-level file named `sw-import.js`
+       * containing only:
+       *
+       * `importScripts('bower_components/platinum-sw/service-worker.js');`
+       *
+       * (adjust to match the path where your `platinum-sw` element directory can be found).
+       *
+       * This will ensure that your service worker script contains everything needed to play
+       * nicely with the Service Worker Elements group.
+       *
+       * @see {@link https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#navigator-service-worker-register}
+       */
+      href: {
+        type: String,
+        value: 'sw-import.js'
+      },
+
+      /**
+       * Whether the page should be automatically reloaded (via `window.location.reload()`) when
+       * the service worker is successfully installed.
+       *
+       * While it's perfectly valid to continue using a page with a freshly installed service
+       * worker, it's a common pattern to want to reload it immediately following the install.
+       * This ensures that, for example, if you're using a `<platinum-sw-cache>` with an on the
+       * fly caching strategy, it will get a chance to intercept all the requests needed to render
+       * your page and store them in the cache.
+       *
+       * If you don't immediately reload your page, then any resources that were loaded before the
+       * service worker was installed (e.g. this `platinum-sw-register.html` file) won't be present
+       * in the cache until the next time the page is loaded.
+       *
+       * Note that this reload will only happen when a service worker is installed for the first
+       * time. If the service worker is subsequently updated, it won't trigger another reload.
+       */
+      reloadOnInstall: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * By default, the service worker will use a scope that applies to all pages at the same
+       * directory level or lower. This is almost certainly what you want, as illustrated by the
+       * following hypothetical serving setup:
+       *
+       * ```
+       * /root/
+       *   service-worker.js
+       *   index.html
+       *   subdir1/
+       *     index.html
+       *   subdir2/
+       *     index.html
+       * ```
+       *
+       * So by default, registering `/root/service-worker.js` will cause the service worker's scope
+       * to cover `/root/index.html`, `/root/subdir1/index.html`, and /root/subdir2/index.html`.
+       *
+       * If, for some reason, you need to register `/root/service-worker.js` from within
+       * `/root/subdir1/index.html`, *and* you want that registration to only cover
+       * `/root/subdir1/**`, you can override this `scope` property and set it to `'./'`.
+       *
+       * There is more context about default scopes and how scope overrides work in
+       * [this Stack Overflow](http://stackoverflow.com/a/33881341/385997) response.
+       *
+       * @see {@link https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#navigator-service-worker-register}
+       */
+      scope: {
+        type: String,
+        value: null
+      },
+
+      /**
+       * Whether an updated service worker should [bypass the `waiting` state](https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#service-worker-global-scope-skipwaiting)
+       * and immediately become `active`.
+       *
+       * Normally, during an update, the new service worker stays in the
+       * `waiting` state until the current page and any other tabs/windows that are using the old
+       * service worker are unloaded.
+       *
+       * If this is `false`, an updated service worker won't be activated until all instances of
+       * the old server worker have been unloaded.
+       *
+       * If this is `true`, an updated service worker will become `active` immediately.
+       * @see {@link https://slightlyoff.github.io/ServiceWorker/spec/service_worker/#service-worker-global-scope-skipwaiting}
+       */
+      skipWaiting: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
+       * The current state of the service worker registered by this element.
+       *
+       * One of:
+       * - 'installed'
+       * - 'updated'
+       * - 'error'
+       * - 'unsupported'
+       */
+      state: {
+        notify: true,
+        readOnly: true,
+        type: String
+      }
+    },
+
+    /**
+     * Registers the service worker based on the configuration options in this element and any
+     * child elements.
+     *
+     * If you set the `autoRegister` property to `true`, then this method is called automatically
+     * at page load.
+     * It can be useful to set `autoRegister` to `false` and then explicitly call this method if
+     * there are options that are only configured after the page is loaded.
+     */
+    register: function() {
+      if ('serviceWorker' in navigator) {
+        this._constructServiceWorkerUrl().then(function(serviceWorkerUrl) {
+          this._registerServiceWorker(serviceWorkerUrl);
+        }.bind(this));
+      } else {
+        this._setState('unsupported');
+        this.fire('service-worker-error', 'Service workers are not available in the current browser.');
+      }
+    },
+
+    _constructServiceWorkerUrl: function() {
+      var paramsPromises = [];
+      var children = Polymer.dom(this).children;
+      var baseUri = new URL(this.baseUri, window.location.href);
+
+      for (var i = 0; i < children.length; i++) {
+        if (typeof children[i]._getParameters === 'function') {
+          paramsPromises.push(children[i]._getParameters(baseUri));
+        }
+      }
+
+      return Promise.all(paramsPromises).then(function(paramsResolutions) {
+        var params = {
+          baseURI: baseUri,
+          version: this._version
+        };
+
+        paramsResolutions.forEach(function(childParams) {
+          Object.keys(childParams).forEach(function(key) {
+            if (Array.isArray(params[key])) {
+              params[key] = params[key].concat(childParams[key]);
+            } else {
+              params[key] = [].concat(childParams[key]);
+            }
+          });
+        });
+
+        return params;
+      }.bind(this)).then(function(params) {
+        if (params.importscriptLate) {
+          if (params.importscript) {
+            params.importscript = params.importscript.concat(params.importscriptLate);
+          } else {
+            params.importscript = params.importscriptLate;
+          }
+        }
+
+        if (params.importscript) {
+          params.importscript = this._unique(params.importscript);
+        }
+
+        // We've already concatenated importscriptLate, so don't include it in the serialized URL.
+        delete params.importscriptLate;
+
+        params.clientsClaim = this.clientsClaim;
+        params.skipWaiting = this.skipWaiting;
+
+        var serviceWorkerUrl = new URL(this.href, window.location);
+        // It's very important to ensure that the serialization is stable.
+        // Serializing the same settings should always produce the same URL.
+        // Serializing different settings should always produce a different URL.
+        // This ensures that the service worker upgrade flow is triggered when settings change.
+        serviceWorkerUrl.search = this._serializeUrlParams(params);
+
+        return serviceWorkerUrl;
+      }.bind(this));
+    },
+
+    _unique: function(arr) {
+      return arr.filter(function(item, index) {
+        return arr.indexOf(item) === index;
+      });
+    },
+
+    _serializeUrlParams: function(params) {
+      return Object.keys(params).sort().map(function(key) {
+        // encodeURIComponent(['a', 'b']) => 'a%2Cb',
+        // so this will still work when the values are Arrays.
+        // TODO: It won't work if the values in the Arrays have ',' characters in them.
+        return encodeURIComponent(key) + "=" + encodeURIComponent(params[key]);
+      }).join('&');
+    },
+
+    _registerServiceWorker: function(serviceWorkerUrl) {
+      var options = this.scope ? {scope: this.scope} : null;
+      navigator.serviceWorker.register(serviceWorkerUrl, options).then(function(registration) {
+        if (registration.active) {
+          this._setState('installed');
+        }
+
+        registration.onupdatefound = function() {
+          var installingWorker = registration.installing;
+          installingWorker.onstatechange = function() {
+            switch (installingWorker.state) {
+              case 'installed':
+                if (navigator.serviceWorker.controller) {
+                  this._setState('updated');
+                  this.fire('service-worker-updated',
+                    'A new service worker was installed, replacing the old service worker.');
+                } else {
+                  if (this.reloadOnInstall) {
+                    window.location.reload();
+                  } else {
+                    this._setState('installed');
+                    this.fire('service-worker-installed', 'A new service worker was installed.');
+                  }
+                }
+              break;
+
+              case 'redundant':
+                this._setState('error');
+                this.fire('service-worker-error', 'The installing service worker became redundant.');
+              break;
+            }
+          }.bind(this);
+        }.bind(this);
+      }.bind(this)).catch(function(error) {
+        this._setState('error');
+        this.fire('service-worker-error', error.toString());
+        if (error.name === 'NetworkError') {
+          var location = serviceWorkerUrl.origin + serviceWorkerUrl.pathname;
+          console.error('A valid service worker script was not found at ' + location + '\n' +
+            'To learn how to fix this, please see\n' +
+            'https://github.com/PolymerElements/platinum-sw#top-level-sw-importjs');
+        }
+      }.bind(this));
+    },
+
+    attached: function() {
+      if (this.autoRegister) {
+        this.async(this.register);
+      }
+    }
+  });
+</script>
 <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning"></style>
+<style is="custom-style">
+ <!--  @import url("/css/citric-flames.css"); -->
+</style>
+
+<style is="custom-style">
+  /* -*- engine:css -*- */
+
+  paper-spinner-lite.k-spinner {
+    --paper-spinner-color: rgb(105, 49, 47) !important;
+    --paper-spinner-stroke-width: 6px !important;
+  }
+
+  paper-progress {
+    --paper-progress-active-color: rgb(165, 105, 65);
+  }
+
+  paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar { /* ff */
+    height: 4px;
+  }
+
+  paper-tabs#space_selector_paper_tabs::shadow #selectionBar {
+    height: 4px;
+  }
+
+  paper-tabs {
+    --paper-tabs-selection-bar-color: rgb(105, 49, 47);
+  }
+
+</style>
 </div></body></html>

@@ -29,7 +29,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 
-import br.com.rpa.client._paperelements.PaperIconButton;
+import br.com.rpa.client._paperelements.PaperButton;
 import cc.kune.common.client.actions.AbstractExtendedAction;
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
@@ -72,7 +72,7 @@ public class SiteLanguageSelector extends WidgetMenuDescriptor {
   @Inject
   public SiteLanguageSelector(final Session session, final EventBus eventBus) {
     super();
-    final PaperIconButton btn = PaperIconButton.wrap(MENU_ID);
+    final PaperButton btn = PaperButton.wrap(MENU_ID);
     setWidget(btn);
     setParent(SitebarActions.RIGHT_TOOLBAR);
     Tooltip.to(btn, I18n.t("Choose your language"));
