@@ -2,7 +2,7 @@
 // Following https://github.com/ebidel/polymer-gmail
 var start = new Date().getTime();
 var devMode = false;
-var devSpace = 2;
+var devSpace = 0;
 
 var kt = document.querySelector('#kunetemplate');
 
