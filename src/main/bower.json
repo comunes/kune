@@ -1,0 +1,19 @@
+{
+  "name": "kune",
+  "private": true,
+  "dependencies": {
+    "iron-elements": "PolymerElements/iron-elements#^1.0.10",
+    "neon-elements": "PolymerElements/neon-elements#^1.0.0",
+    "page": "visionmedia/page.js#~1.6.4",
+    "paper-elements": "PolymerElements/paper-elements#^1.0.7",
+		"platinum-sw": "https://github.com/PolymerElements/platinum-sw.git#^1.3.0",
+    "polymer": "Polymer/polymer#^1.5.0",
+    "bootstrap": "~3.3.2",
+    "font-awesome-polymer-icons": "https://github.com/vashchenkov/font-awesome-polymer-icons.git#^1.4.5",
+    "font-kune-polymer-icons": "^0.1.0"
+  },
+  "devDependencies": {
+    "web-component-tester": "^4.0.0"
+  },
+  "ignore": []
+}
