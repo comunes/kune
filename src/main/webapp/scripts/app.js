@@ -14,7 +14,7 @@ function onGwtReady () {
   'use strict';
 
   var start = new Date().getTime();
-  var devMode = true;
+  var devMode = false;
   var devSpace = 0;
 
   kt.spin_active = true;
