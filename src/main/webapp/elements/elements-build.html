@@ -24,7 +24,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 
 
-
 </head><body><div hidden="" by-vulcanize=""><script>(function () {
 function resolve() {
 document.body.removeAttribute('unresolved');
@@ -12796,7 +12795,6 @@ this.fire('dom-change');
         position: relative;
         padding: 8px;
         outline: none;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;
@@ -12807,6 +12805,10 @@ this.fire('dom-change');
 
         width: 40px;
         height: 40px;
+
+        /* NOTE: Both values are needed, since some phones require the value to be `transparent`. */
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        -webkit-tap-highlight-color: transparent;
 
         /* Because of polymer/2558, this style has lower specificity than * */
         box-sizing: border-box !important;
@@ -17754,6 +17756,9 @@ It will also ensure that focus remains in the dialog.
   <template>
     <style>
       :host {
+        --calculated-paper-toolbar-height: var(--paper-toolbar-height, 64px);
+        --calculated-paper-toolbar-sm-height: var(--paper-toolbar-sm-height, 56px);
+
         /* technical */
         display: block;
         position: relative;
@@ -17761,7 +17766,7 @@ It will also ensure that focus remains in the dialog.
         -moz-box-sizing: border-box;
 
         /* size */
-        height: var(--paper-toolbar-height, 64px);
+        height: var(--calculated-paper-toolbar-height);
 
         background: var(--paper-toolbar-background, --primary-color);
         color: var(--paper-toolbar-color, --dark-theme-text-color);
@@ -17775,18 +17780,18 @@ It will also ensure that focus remains in the dialog.
       }
 
       :host(.medium-tall) {
-        height: calc(var(--paper-toolbar-height, 64px) * 2);
+        height: calc(var(--calculated-paper-toolbar-height) * 2);
         @apply(--paper-toolbar-medium);
       }
 
       :host(.tall) {
-        height: calc(var(--paper-toolbar-height, 64px) * 3);
+        height: calc(var(--calculated-paper-toolbar-height) * 3);
         @apply(--paper-toolbar-tall);
       }
 
       .toolbar-tools {
         position: relative;
-        height: var(--paper-toolbar-height, 64px);
+        height: var(--calculated-paper-toolbar-height);
         padding: 0 16px;
         pointer-events: none;
         @apply(--layout-horizontal);
@@ -17800,19 +17805,19 @@ It will also ensure that focus remains in the dialog.
 
       @media (max-width: 600px) {
         :host {
-          height: var(--paper-toolbar-sm-height, 56px);
+          height: var(--calculated-paper-toolbar-sm-height);
         }
 
         :host(.medium-tall) {
-          height: calc(var(--paper-toolbar-sm-height, 56px) * 2);
+          height: calc(var(--calculated-paper-toolbar-sm-height) * 2);
         }
 
         :host(.tall) {
-          height: calc(var(--paper-toolbar-sm-height, 56px) * 3);
+          height: calc(var(--calculated-paper-toolbar-sm-height) * 3);
         }
 
         .toolbar-tools {
-          height: var(--paper-toolbar-sm-height, 56px);
+          height: var(--calculated-paper-toolbar-sm-height);
         }
       }
 
@@ -20604,12 +20609,22 @@ It will also ensure that focus remains in the dialog.
   });
 </script>
 <style is="custom-style" include="iron-flex iron-flex-alignment iron-positioning"></style>
-<style is="custom-style">
- <!--  @import url("/css/citric-flames.css"); -->
-</style>
 
 <style is="custom-style">
-  /* -*- engine:css -*- */
+
+  /*
+   Polymer includes a shim for CSS Custom Properties that we can use for application theming.
+   Below, you'll find the default palette for the Polymer Starter Kit layout. Feel free to play
+   with changing the colors used or generate your own palette of colours at MaterialPalette.com.
+
+   See https://www.polymer-project.org/1.0/docs/devguide/styling.html#xscope-styling-details
+   for further information on custom CSS properties.
+   */
+
+  /* Application theme */
+
+  :root {
+  }
 
   paper-spinner-lite.k-spinner {
     --paper-spinner-color: rgb(105, 49, 47) !important;
@@ -20632,5 +20647,13 @@ It will also ensure that focus remains in the dialog.
     --paper-tabs-selection-bar-color: rgb(105, 49, 47);
   }
 
+
 </style>
+
+<dom-module id="shared-styles" assetpath="../styles/">
+  <template>
+    <style>
+    </style>
+  </template>
+</dom-module>
 </div></body></html>

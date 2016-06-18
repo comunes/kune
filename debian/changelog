@@ -1,3 +1,9 @@
+kune (1.0.1+b24) unstable; urgency=medium
+
+  * Better integration of polymer and some fixes with service work
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 18 Jun 2016 20:46:10 +0200
+
 kune (1.0.1+b23) unstable; urgency=medium
 
   * Update to polymer 1.0 and many improvements in the UI

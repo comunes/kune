@@ -15,8 +15,29 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
+    <!-- Chrome for Android theme color -->
+    <meta name="theme-color" content="#a56941">
+
+    <!-- Web Application Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Tile color for Win8 -->
+    <meta name="msapplication-TileColor" content="#a56941">
+
+    <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="kune">
+    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="kune">
+    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+
+    <!-- Tile icon for Win8 (144x144) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+
     <!--
     We will use this string for mention this site in messages like: "Thanks for joining this site"
     Your can use another string and the message will looks like "Thanks for joining example.org"
@@ -53,6 +74,11 @@
 
     <script language="javascript" type="text/javascript">
       // -*- engine:js -*-
+
+      function doNativeFetch(request, values, options) {
+        console.log('doNativeFetch request', request, values, options);
+        return fetch(request);
+      };
 
       function getQueryVariable(variable) {
         var query = window.location.search.substring(1);
@@ -98,10 +124,12 @@
       document.write(font);
     </script>
 
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild-->
+
     <!-- -*- engine:html -*- -->
 
-    <!-- vulcanize -o elements-build.html elements.html --strip-comments --inline-scripts --inline-css -->
-    <link id="kunebundle" rel="import" href="elements/elements-build.html" async>
 
     <!-- - for debugging
     <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
@@ -135,6 +163,19 @@
     <link rel="stylesheet" href="css/flickity.css" media="screen">
     <link type="text/css" rel="stylesheet" href="ws/ws.css">
 
+    <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <!-- endbuild -->
+
+    <!-- Because this project uses vulcanize this should be your only html import
+    in this file. All other imports should go in elements.html -->
+    <link id="kunebundle" rel="import" href="elements/elements-build.html">
+
+    <!-- vulcanize -o elements-build.html elements.html --strip-comments --inline-scripts --inline-css -->
+    <!-- <link id="kunebundle" rel="import" href="elements/elements-build.html" async> -->
+
+    <!-- For shared styles, shared-styles.html import in elements.html -->
+    <style is="custom-style" include="shared-styles"></style>
 
     <!-- FIXME -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
@@ -143,6 +184,9 @@
     <script src="others/js/flickity.pkgd.min.js"></script>
   </head>
   <body class="fullbleed sploading">
+    <!-- build:remove -->
+    <span id="browser-sync-binding"></span>
+    <!-- endbuild -->
 
     <!-- Loading screens happen outside of HTML Imports + Polymer so 1st
     paint is fast and does not depend on network resources. Mobile gets
@@ -256,7 +300,7 @@
           }
 
           #k_home_center, .buck_blockquote {
-            font-size: 16px;
+            font-size: 13px;
           }
 
           #k_home_center .carousel-cell {
@@ -900,8 +944,13 @@
           color: #69312f;
         }
 
-        #sec2 > div > span > p,
-        #sec4 > div > span > p {
+        #sec0 > div > span,
+        #sec1 > div > span,
+        #sec2 > div > span,
+        #sec3 > div > span,
+        #sec4 > div > span,
+        #sec5 > div > span
+        {
           padding-top: 20px;
         }
 
@@ -910,11 +959,7 @@
         }
 
         #k_home_center {
-          /* padding: 0 20px;
-             overflow-y: auto;
-             overflow-x: hidden; */
           text-align: justify;
-          /* cursor: ew-resize; */
         }
 
         #k_home_spinner_container {
@@ -932,7 +977,7 @@
         }
 
         .buck_blockquote {
-          margin: 1.5em 0 1.5em;
+          margin: 0 0 1.5em;
           padding: 0 1em 0 2.5em;
           position: relative;
         }
@@ -1162,35 +1207,15 @@
         }
 
         #swtoast .action {
-          color: rgb(105, 49, 47);
-          text-transform: uppercase;
+          color: #d3bc5f;
+          font-weight: bold;
+          TEXT-transform: uppercase;
           cursor: pointer;
           font-weight: 400;
           margin-left: 16px;
         }
 
         #paper_progress_container {
-        }
-
-        div#paper_progress_container paper-progress#paper_progress div#progressContainer div#activeProgress  { /* ff */
-          background-color: rgb(165, 105, 65);
-        }
-
-        #paper_progress::shadow #activeProgress {
-          background-color: rgb(165, 105, 65);
-        }
-
-        paper-progress#paper_progress div#progressContainer #primaryProgress  {
-          background-color: rgb(165, 105, 65);
-        }
-
-        paper-tabs#space_selector_paper_tabs div#tabsContainer div#tabsContent div#selectionBar {
-          background-color: rgb(105, 49, 47);
-          height: 4px;
-        }
-
-        .circle-clipper {
-          border-color: rgb(165, 105, 65) !important;
         }
 
         /* Tutorials */
@@ -1584,7 +1609,7 @@
           margin-right: -5px;
           height: 50px;
           line-height: 2em;
-          /* text-transform: capitalize; */
+          text-transform: none;
         }
 
         #group_core_main paper-button::shadow iron-icon {
@@ -2308,29 +2333,29 @@
 
                 <div class="horizontal layout center" id="home_bottombar">
                   <div class="flex hidden-xs">
-                  <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
-                  <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
+                    <a href="https://twitter.com/kuneproject" target="_blank" class="inherit opa6">
+                      <paper-icon-button icon="kune:twitter" title="twitter"></paper-icon-button>
                     </a>
-                  <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
-                  <paper-icon-button src="others/bc_logo_24.png"
+                    <a href="https://blockchain.info/address/1J6A2TZERJXS8evzSpmg5cxS4DaCQAkF8P" target="_blank" class="inherit opa6">
+                      <paper-icon-button src="others/bc_logo_24.png"
                                          title="donate with bitcoin"></paper-icon-button>
                     </a>
-                  <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
-                  <img
-                              src="//api.flattr.com/button/flattr-badge-large.png"
-                              alt="Flattr this" title="Flattr this" border="0">
+                    <a class="k_home_kune_flattr" href="http://flattr.com/thing/105224/Kune-collaborative-platform" target="_blank">
+                      <img
+                          src="//api.flattr.com/button/flattr-badge-large.png"
+                          alt="Flattr this" title="Flattr this" border="0">
                     </a>
                   </div>
                   <div class="flex hidden-xs">
 
                   </div>
                   <div class="flex" id="home_copyleft">
-                  © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
-                  <span style="display: none;" id="k_home_copyleft_def">
-                  <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                    © 2007-{{this_year}} <a href="https://github.com/comunes/kune" target="_blank">Copyleft</a><br>
+                    <span style="display: none;" id="k_home_copyleft_def">
+                      <a href="http://kune.ourproject.org" target="_blank">kune</a> is a project of <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
                     </span>
-                  <span style="display: none;" id="k_home_copyleft_es">
-                  <a href="http://kune.ourproject.org" target="_blank">kune</a> es un proyecto de <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
+                    <span style="display: none;" id="k_home_copyleft_es">
+                      <a href="http://kune.ourproject.org" target="_blank">kune</a> es un proyecto de <a rel="home" title="Comunes" href="http://comunes.org/" target="_blank">Comunes</a>
                     </span>
                   </div>
                 </div>
@@ -2443,7 +2468,7 @@
 
       <paper-toolbar id="sitebar_toolbar">
         <!-- FIXME: scrollable seems interesting but does not works with our paper-tab -->
-        <paper-tabs selected="{{spaceselected}}" id="space_selector_paper_tabs" class="horizontal center layout">
+        <paper-tabs on-iron-deselect="resizeSlider" selected="{{spaceselected}}" id="space_selector_paper_tabs" class="horizontal center layout">
           <paper-tab>
             <!-- You can put here a "src" atribute with a link to your site logo (remove the icon attribute) -->
             <paper-icon-button icon="kune:kune" id="home_space_icon"></paper-icon-button>
@@ -2474,15 +2499,28 @@
         <paper-icon-button icon="close" on-click="toggleSearch" class="sitebar_search_hide" id="sitebar_close_icon"></paper-icon-button>
       </paper-toolbar>
 
+      <!-- In Polymer Started Kit this is located inside template -->
+      <platinum-sw-register auto-register
+                            clients-claim
+                            skip-waiting
+                            base-uri="bower_components/platinum-sw/bootstrap"
+                            on-service-worker-installed="onSWInstalled"
+                            on-service-worker-error="onSWError"
+                            on-service-worker-updated="onSWUpdated">
+        <!-- <platinum-sw-import-script href="/custom-fetch-handler.js"></platinum-sw-import-script> -->
+        <platinum-sw-fetch handler="NoCacheFetchHandler" path="(.*)nocache(.*)" ></platinum-sw-fetch>
+        <platinum-sw-cache disabled="false"
+                           default-cache-strategy="fastest">
+          <!-- default-cache-strategy="networkFirst"> -->
+          <!-- cache-config-file="cache-config.json"> -->
+        </platinum-sw-cache>
+      </platinum-sw-register>
+
     </template>
 
-    <platinum-sw-register skip-waiting clients-claim auto-register>
-      <platinum-sw-cache disabled="{{swcachedisabled}}" default-cache-strategy="networkFirst"></platinum-sw-cache>
-      <platinum-sw-import-script href="custom-fetch-handler.js"></platinum-sw-import-script>
-      <platinum-sw-fetch handler="NoCacheFetchHandler" path="(.*)nocache(.*)"></platinum-sw-fetch>
-    </platinum-sw-register>
-
-    <script type="text/javascript" src="kune-polymer.js"></script>
+    <!-- build:js scripts/app.js -->
+    <script src="scripts/app.js"></script>
+    <!-- endbuild-->
 
     <noscript>
       <div class="gwt_noscript_warning">
