@@ -299,10 +299,6 @@
             margin: 10px 0;
           }
 
-          #k_home_center, .buck_blockquote {
-            font-size: 13px;
-          }
-
           #k_home_center .carousel-cell {
             width: 100%;
             padding: 0 20px;
@@ -638,13 +634,13 @@
 
         /* large: Large desktops and laptops */
         @media (min-width: 1200px) {
-
         }
-
 
         /* Portrait phones and smaller */
         @media (max-width: 480px) {
-
+          #k_home_center, .buck_blockquote {
+            font-size: 13px;
+          }
         }
 
         /* xsmallup: Extra small devices  */
@@ -865,7 +861,7 @@
         }
 
         .carousel-cell {
-          /* height: 100% */
+          height: 100% !important;
         }
 
         #home_space {
@@ -2192,7 +2188,7 @@
                 </div>
 
                 <div id="k_home_center" class="carousel js-flickity flex">
-                  <div class="carousel-cell" id="sec0">
+                  <div class="carousel-cell vertical layout" id="sec0">
                     <div class="flex self-center">
                       <span style="display: none;" id="k_home_slide-1_def">
                         kune it's a social network where you can communicate,
@@ -2251,7 +2247,7 @@
                     </div>
                   </div>
 
-                  <div class="carousel-cell " id="sec1">
+                  <div class="carousel-cell vertical layout " id="sec1">
                     <div class="flex self-center">
                       <span id="k_home_buck_def" style="display: none;">
                         <blockquote class="buck_blockquote">Make the world work for 100% of humanity, in the shortest possible time, through spontaneous cooperation without ecological damage or disadvantage to anyone.
@@ -2271,7 +2267,7 @@
                     </div>
                   </div>
 
-                  <div class="carousel-cell " id="sec2">
+                  <div class="carousel-cell vertical layout " id="sec2">
                     <div class="flex self-center">
                       <span id="k_home_decen_def" style="display: none;">
                         <p>Kune is descentralized unlike other centralized social networks like Google+ or Facebook. So like an email service, you can choose between different kune providers and avoid user data centralization.</p><p>kune.cc is just one more node in this decentralized social network.</p>
@@ -2282,7 +2278,7 @@
                     </div>
                   </div>
 
-                  <div class="carousel-cell " id="sec3">
+                  <div class="carousel-cell vertical layout " id="sec3">
                     <div class="self-center">
                       <span id="k_home_meaning_def" style="display: none;">
                         Kune means "together" in esperanto.
@@ -2293,7 +2289,7 @@
                     </div>
                   </div>
 
-                  <div class="carousel-cell " id="sec4">
+                  <div class="carousel-cell vertical layout " id="sec4">
                     <div class="flex self-center">
                       <span id="k_home_continuation_def" style="display: none;">
                         <p>kune is the continuation of the effort that we started in 2002 with
@@ -2318,7 +2314,7 @@
                     </div>
                   </div>
 
-                  <div class="carousel-cell " id="sec5">
+                  <div class="carousel-cell vertical layout " id="sec5">
                     <div class="self-center">
                       <span id="k_home_super_def" style="display: none;">
                         Welcome to the era where collaboration supersede to the corporation.
@@ -2489,7 +2485,7 @@
         <paper-button class="hidden-xs hidden-sm" id="sitebar_language_btn"><iron-icon icon="translate"></iron-icon>English</paper-button>
         <paper-button class="hidden-xs hidden-sm" id="sitebar_mygroups_btn"><iron-icon icon="social:group"></iron-icon>Your groups</paper-button>
         <div id="sitebar_right_extensionbar"></div>
-        <paper-button id="sitebar_user_btn" class="iron-icon-status-away"><iron-icon icon="kune:chat-status"></iron-icon><span class="hidden-xs hidden-sm"></span></paper-button>
+        <paper-button id="sitebar_user_btn"><iron-icon></iron-icon><span class="hidden-xs hidden-sm"></span></paper-button>
         <paper-icon-button icon="search" on-click="toggleSearch" id="sitebar_search_icon"></paper-icon-button>
         <div id="sitebar_search_group">
           <input type="search" id="sitebar_search_input" class="sitebar_search_hide" autocomplete="off">

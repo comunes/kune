@@ -231,8 +231,9 @@ gulp.task('serve', ['styles'], function() {
     // Note: this uses an unsigned certificate which on first access
     //       will present a certificate warning in the browser.
     // https: true,
+		startPath: 'ws.html',
     server: {
-      baseDir: ['.tmp', 'webapp'],
+      baseDir: ['.tmp', '../../target/kune-1.0.1-SNAPSHOT/', 'webapp'],
 			index: "ws.html",
       middleware: [historyApiFallback()]
     }

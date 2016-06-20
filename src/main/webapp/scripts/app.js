@@ -1,4 +1,4 @@
-/* globals $ getMetaContent locale Flickity lorem location Polymer */
+/* globals $ getMetaContent locale Flickity lorem location */
 // Following https://github.com/ebidel/polymer-gmail
 
 var kt = document.querySelector('#kunetemplate');
