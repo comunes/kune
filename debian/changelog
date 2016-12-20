@@ -1,3 +1,10 @@
+kune (1.0.1+b25) unstable; urgency=medium
+
+  * Fix caret issues thanks to @pablojan
+    https://github.com/apache/incubator-wave/pull/18
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 20 Dec 2016 11:26:12 +0100
+
 kune (1.0.1+b24) unstable; urgency=medium
 
   * Better integration of polymer and some fixes with service work
