@@ -116,6 +116,8 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
 
   @UiField
   SearchWidget search;
+
+  CustomSearchWidget customSearch;
   @UiField
   ToplevelToolbarWidget toolbar;
   @UiField
@@ -156,6 +158,7 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
     this.dragController = dragController;
     this.downUtils = downUtils;
     this.inboxToContainerHelper = inboxToContainerHelper;
+    this.customSearch = new CustomSearchWidget(armor);
     initWidget(BINDER.createAndBindUi(this));
     // showMore.setVisible(false);
     showMore.setText(I18n.t("Show more results"));
@@ -213,8 +216,8 @@ public class SearchPanelWidget extends Composite implements SearchPanelView {
   }
 
   @Override
-  public SearchWidget getSearch() {
-    return search;
+  public SearchView getSearch() {
+    return customSearch;
   }
 
   public ToplevelToolbarWidget getToolbar() {

@@ -102,7 +102,7 @@ public final class SearchPresenter
   };
 
   /** Current search query. */
-  private String queryText = DEFAULT_SEARCH;
+  private String queryText = ""; /* always search in inbox, before: DEFAULT_SEARCH; */
   /** Number of results to query for. */
   private int querySize = DEFAULT_PAGE_SIZE;
   /** Current selected digest. */
@@ -307,7 +307,8 @@ public final class SearchPresenter
 
   @Override
   public void onQueryEntered() {
-    queryText = searchUi.getSearch().getQuery();
+    // For now we always search in Inbox
+    queryText = DEFAULT_SEARCH + " " + searchUi.getSearch().getQuery();
     querySize = DEFAULT_PAGE_SIZE;
     searchUi.setTitleText(messages.searching());
     doSearch();

@@ -1246,6 +1246,7 @@
           z-index: 1001;
         }
 
+        #sitebar_search_input_inbox,
         #sitebar_search_input {
           background-color: inherit;
           border: none;
@@ -1253,6 +1254,12 @@
           outline: none;
           padding: 0;
           color: inherit;
+        }
+
+        #sitebar_search_input_inbox {
+	  margin-top: 5px;
+          background-color: white;
+          padding: 0 3px;
         }
 
         #sitebar_search_group {
@@ -1337,7 +1344,7 @@
         }
 
         #inbox_search_icon {
-          display: none;
+          /* display: none; */
         }
 
         .k-digest-main {
@@ -2128,17 +2135,21 @@
               <paper-toolbar id="inbox_toolbar">
                 <paper-fab icon="create" mini fill id="inbox_new_message" class="btn_green">New message</paper-fab>
                 <div id="inbox_title"></div>
-                <div class="flex"></div>
+                <div id="inbox_flex" class="flex"></div>
                 <div class="layout horizontal end-justified">
-                  <paper-icon-button icon="search" id="inbox_search_icon"></paper-icon-button>
+                  <paper-icon-button icon="search" on-click="toggleSearchInbox" id="inbox_search_icon"></paper-icon-button>
+                  <div id="sitebar_search_group_inbox">
+                    <input type="search" id="sitebar_search_input_inbox" class="sitebar_search_hide" autocomplete="off">
+                  </div>
+                  <div id="sitebar_flex_end_inbox" class="sitebar_search_hide flex"></div>
+                  <paper-icon-button icon="close" on-click="toggleSearchInbox" class="sitebar_search_hide" id="sitebar_close_icon_inbox"></paper-icon-button>
                   <paper-icon-button icon="launch" id="inbox_share_icon"></paper-icon-button>
                   <paper-icon-button icon="arrow-back" on-click="closeMainDrawer" id="inbox_close_icon"></paper-icon-button>
                 </div>
               </paper-toolbar>
               <section id="inbox_result_section">
                 <div class="vertical layout fit">
-                  <div id="inbox_result" class="flex">
-                  </div>
+                  <div id="inbox_result" class="flex"></div>
                   <div id="chat_centerpanel" class="flex">
                     <paper-header-panel mode="seamed" class="flex">
                       <paper-toolbar id="chat_toolbar">

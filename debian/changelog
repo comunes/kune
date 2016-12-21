@@ -1,3 +1,9 @@
+kune (1.0.1+b26) unstable; urgency=medium
+
+  * Added searchbox in inbox
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Tue, 20 Dec 2016 18:58:16 +0100
+
 kune (1.0.1+b25) unstable; urgency=medium
 
   * Fix caret issues thanks to @pablojan

@@ -88,6 +88,10 @@ public enum PolymerId implements HTMLId {
   SITEBAR_SEARCH_GROUP("sitebar_search_group"),
   SITEBAR_SEARCH_ICON("sitebar_search_icon"),
   SITEBAR_SEARCH_INPUT("sitebar_search_input"),
+  // not used:
+  // SITEBAR_SEARCH_ICON_INBOX("sitebar_search_icon_inbox"),
+  SITEBAR_SEARCH_GROUP_INBOX("sitebar_search_group_inbox"),
+  SITEBAR_SEARCH_INPUT_INBOX("sitebar_search_input_inbox"),
   SITEBAR_USER_BTN("sitebar_user_btn"),
   SPACE_SELECTOR("space_selector_paper_tabs"),
   TOAST("toast"),

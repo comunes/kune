@@ -59,6 +59,7 @@ function onGwtReady () {
   kt.homebackimg = 'others/home-back-trees.png';
 
   kt.showingSearch = false;
+  kt.showingSearchInbox = false;
 
   kt.main_forcenarrow = true;
   kt.main_disableEdgeSwipe = false;
@@ -67,10 +68,13 @@ function onGwtReady () {
   /* just used for testing */
   kt.red = 'red';
 
-  function toggleVis (id) {
-    var el = document.querySelector(id);
-    if (el != null) el.classList.toggle('sitebar_search_hide');
-    if (el != null) el.classList.toggle('sitebar_search_on');
+  function toggleVis () {
+    for (var i = 0; i < arguments.length; i++) {
+      var id = arguments[i];
+      var el = document.querySelector(id);
+      if (el != null) el.classList.toggle('sitebar_search_hide');
+      if (el != null) el.classList.toggle('sitebar_search_on');
+    }
   }
 
   kt.closeMainDrawer = function (e, detail, sender) {
@@ -92,28 +96,29 @@ function onGwtReady () {
     if (e) {
       e.stopPropagation();
     }
-    if (e && e.target === kt.sitebar_search_input) {
-      return;
-    }
 
     kt.showingSearch = !kt.showingSearch;
 
-    toggleVis('#sitebar_language_btn');
-    toggleVis('#sitebar_mygroups_btn');
-    toggleVis('#space_selector_paper_tabs');
-    toggleVis('#sitebar_user_space_icon_group');
-    toggleVis('#sitebar_chat_icon_group');
     // Problems with chat status toggleVis('#sitebar_user_btn');
-    toggleVis('#sitebar_search_input');
-    toggleVis('#sitebar_left_extensionbar');
-    toggleVis('#sitebar_right_extensionbar');
-    toggleVis('#sitebar_flex');
-    toggleVis('#sitebar_more_icon');
-    toggleVis('#sitebar_close_icon');
-    toggleVis('#sitebar_flex_end');
+    toggleVis('#sitebar_language_btn', '#sitebar_mygroups_btn', '#space_selector_paper_tabs', '#sitebar_user_space_icon_group', '#sitebar_chat_icon_group', '#sitebar_search_input', '#sitebar_left_extensionbar', '#sitebar_right_extensionbar', '#sitebar_flex', '#sitebar_more_icon', '#sitebar_close_icon', '#sitebar_flex_end');
 
     this.async(function () {
       document.querySelector('#sitebar_search_input').focus();
+    });
+  };
+
+  kt.toggleSearchInbox = function (e, detail, sender) {
+    if (e) {
+      e.stopPropagation();
+    }
+
+    kt.showingSearchInbox = !kt.showingSearchInbox;
+
+    // Problems with chat status toggleVis('#sitebar_user_btn');
+    toggleVis('#inbox_close_icon', '#inbox_share_icon', '#sitebar_search_input_inbox', '#sitebar_close_icon_inbox', '#sitebar_flex_end_inbox', 'inbox_flex', 'inbox_title');
+
+    this.async(function () {
+      document.querySelector('#sitebar_search_input_inbox').focus();
     });
   };
 
