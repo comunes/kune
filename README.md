@@ -3,7 +3,7 @@ Kune
 
 [![Build Status](http://ci.comunes.org/buildStatus/icon?job=kune)](http://ci.comunes.org/job/kune/)
 
-Kune is a free/open source federated collaborative social network, focused on collaboration rather than just in communication. That is, it focuses on online real-time collaborative editing (based on Apache Wave), decentralized social networking and web publishing, while focusing on workgroups rather than just in individuals. It aims to allow the creation of online spaces of collaborative work, where organizations and individuals can build projects online, coordinate common agendas, set up virtual meetings, publish in the web, and join organizations with similar interests. Kune is 100% free/libre software (AGPLv3), built with free/libre tools.
+Kune is a free and open source federated collaborative social network, focused on collaboration rather than just on communication. That is, it provides online real-time collaborative editing (based on Apache Wave), decentralized social networking and web publishing, while focusing on workgroups rather than individuals. It aims to allow the creation of online spaces for collaborative work, where organizations and individuals can build projects online, coordinate common agendas, set up virtual meetings, publish on the web, and join organizations with similar interests. Kune is 100% free/libre software (AGPLv3), built with free/libre tools.
 
 ## Try it
 
@@ -29,4 +29,4 @@ See the [COPYRIGHT](https://github.com/comunes/kune/blob/master/COPYRIGHT) and [
 
 ## Bugs and feedback
 
-See the [BUGS](https://github.com/comunes/kune/blob/master/BUGS) file for information about current problems. Also you can use kune.cc for reporting feedback.
+See the [BUGS](https://github.com/comunes/kune/blob/master/BUGS) file for information about current problems. You can also use kune.cc for reporting feedback.
