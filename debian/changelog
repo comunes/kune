@@ -1,3 +1,10 @@
+kune (1.0.1+b27) unstable; urgency=medium
+
+  * Workaround WAVE-446. PR by pablojan.
+    https://github.com/apache/incubator-wave/pull/24
+
+ -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 26 Aug 2017 10:25:50 +0200
+
 kune (1.0.1+b26) unstable; urgency=medium
 
   * Added searchbox in inbox
