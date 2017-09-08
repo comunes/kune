@@ -22,35 +22,41 @@
  */
 package cc.kune.core.server.xmpp;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jivesoftware.smack.AbstractXMPPConnection;
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.ChatManager;
-import org.jivesoftware.smack.ConnectionConfiguration;
-import org.jivesoftware.smack.MessageListener;
-import org.jivesoftware.smack.Roster;
-import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
 import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.chat2.Chat;
+import org.jivesoftware.smack.chat2.ChatManager;
 import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smack.packet.Message.Type;
+import org.jivesoftware.smack.roster.Roster;
+import org.jivesoftware.smack.roster.RosterEntry;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
+import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
+import org.jivesoftware.smackx.muc.MultiUserChat;
+import org.jivesoftware.smackx.muc.MultiUserChatException.NotAMucServiceException;
+import org.jivesoftware.smackx.muc.MultiUserChatManager;
 import org.jivesoftware.smackx.xdata.Form;
 import org.jivesoftware.smackx.xdata.FormField;
-import org.jivesoftware.smackx.muc.MultiUserChat;
-
-import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.server.properties.ChatProperties;
+import org.jivesoftware.smackx.xdata.FormField.Type;
+import org.jxmpp.jid.EntityBareJid;
+import org.jxmpp.jid.impl.JidCreate;
+import org.jxmpp.jid.parts.Resourcepart;
+import org.jxmpp.stringprep.XmppStringprepException;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
+import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.server.properties.ChatProperties;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -86,15 +92,17 @@ public class XmppManagerDefault implements XmppManager {
    *          the muc
    * @throws XMPPException
    *           the xMPP exception
- * @throws NotConnectedException
- * @throws NoResponseException
+   * @throws NotConnectedException
+   * @throws NoResponseException
+   * @throws InterruptedException
    */
-  private void configure(final MultiUserChat muc) throws XMPPException, NoResponseException, NotConnectedException {
+  private void configure(final MultiUserChat muc)
+      throws XMPPException, NoResponseException, NotConnectedException, InterruptedException {
     final Form form = muc.getConfigurationForm();
     final Form answer = form.createAnswerForm();
 
     for (FormField field : form.getFields()) {
-      final String type = field.getType();
+      Type type = field.getType();
       if (isVisible(type) && isNotEmpty(field) && isNotList(type)) {
         final List<String> values = new ArrayList<String>();
         for (String value : field.getValues()) {
@@ -118,9 +126,11 @@ public class XmppManagerDefault implements XmppManager {
   public Room createRoom(final ChatConnection conn, final String roomName, final String alias,
       final String subject) throws NoResponseException, SmackException {
     final XmppConnection xConn = (XmppConnection) conn;
-    final MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
+    AbstractXMPPConnection aConn = xConn.getConn();
+    MultiUserChatManager manager = MultiUserChatManager.getInstanceFor(aConn);
+    final MultiUserChat muc = manager.getMultiUserChat(getRoomName(roomName));
     try {
-      muc.create(alias);
+      muc.create(Resourcepart.from(alias));
       configure(muc);
       final XmppRoom room = new XmppRoom(muc, alias);
       muc.addMessageListener(room);
@@ -128,7 +138,7 @@ public class XmppManagerDefault implements XmppManager {
         muc.changeSubject(subject);
       }
       return room;
-    } catch (final XMPPException e) {
+    } catch (XmppStringprepException | XMPPException | InterruptedException e) {
       throw new ChatException(e);
     }
   }
@@ -141,13 +151,16 @@ public class XmppManagerDefault implements XmppManager {
    * .ChatConnection, java.lang.String)
    */
   @Override
-  public void destroyRoom(final ChatConnection conn, final String roomName) throws NoResponseException, NotConnectedException {
+  public void destroyRoom(final ChatConnection conn, final String roomName)
+      throws NoResponseException, NotConnectedException {
     final XmppConnection xConn = (XmppConnection) conn;
-    final MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
+    AbstractXMPPConnection aConn = xConn.getConn();
+    MultiUserChatManager manager = MultiUserChatManager.getInstanceFor(aConn);
+    final MultiUserChat muc = manager.getMultiUserChat(getRoomName(roomName));
     try {
-
-      muc.destroy("Room removed by kune server", "");
-    } catch (final XMPPException e) {
+      muc.destroy("Room removed by kune server", null);
+    } catch (final XMPPException | InterruptedException e) {
+      e.printStackTrace();
       throw new ChatException(e);
     }
   }
@@ -162,11 +175,7 @@ public class XmppManagerDefault implements XmppManager {
   @Override
   public void disconnect(final ChatConnection connection) {
     final XmppConnection xConn = (XmppConnection) connection;
-    try {
-        xConn.getConn().disconnect();
-    } catch (NotConnectedException e) {
-        LOG.info("We are not connected, so we cannot discconect", e);
-    }
+    xConn.getConn().disconnect();
   }
 
   /*
@@ -179,7 +188,9 @@ public class XmppManagerDefault implements XmppManager {
   @Override
   public boolean existRoom(final ChatConnection conn, final String roomName) {
     final XmppConnection xConn = (XmppConnection) conn;
-    final MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
+    AbstractXMPPConnection aConn = xConn.getConn();
+    MultiUserChatManager manager = MultiUserChatManager.getInstanceFor(aConn);
+    final MultiUserChat muc = manager.getMultiUserChat(getRoomName(roomName));
     return muc.getOccupants() != null;
   }
 
@@ -189,9 +200,14 @@ public class XmppManagerDefault implements XmppManager {
    * @param room
    *          the room
    * @return the room name
+   *
    */
-  private String getRoomName(final String room) {
-    return room + "@" + chatProperties.getRoomHost();
+  private EntityBareJid getRoomName(final String room) {
+    try {
+      return JidCreate.entityBareFrom(room + "@" + chatProperties.getRoomHost());
+    } catch (XmppStringprepException e) {
+      throw new ChatException(e);
+    }
   }
 
   /*
@@ -202,9 +218,9 @@ public class XmppManagerDefault implements XmppManager {
    * .ChatConnection)
    */
   @Override
-  public Collection<RosterEntry> getRoster(final ChatConnection conn) {
+  public Set<RosterEntry> getRoster(final ChatConnection conn) {
     final XmppConnection xConn = (XmppConnection) conn;
-    final Roster roster = xConn.getConn().getRoster();
+    final Roster roster = Roster.getInstanceFor(xConn.getConn());
     return roster.getEntries();
   }
 
@@ -235,9 +251,9 @@ public class XmppManagerDefault implements XmppManager {
    *          the type
    * @return true, if is not list
    */
-  private boolean isNotList(final String type) {
-    return !FormField.TYPE_JID_MULTI.equals(type) && !FormField.TYPE_LIST_MULTI.equals(type)
-        && !FormField.TYPE_LIST_SINGLE.equals(type) && !isVisible(type);
+  private boolean isNotList(final Type type) {
+    return !FormField.Type.jid_multi.equals(type) && !FormField.Type.list_multi.equals(type)
+        && !FormField.Type.list_single.equals(type) && !isVisible(type);
   }
 
   /**
@@ -247,8 +263,8 @@ public class XmppManagerDefault implements XmppManager {
    *          the type
    * @return true, if is visible
    */
-  private boolean isVisible(final String type) {
-    return !FormField.TYPE_HIDDEN.equals(type);
+  private boolean isVisible(final Type type) {
+    return !FormField.Type.hidden.equals(type);
   }
 
   /*
@@ -259,16 +275,20 @@ public class XmppManagerDefault implements XmppManager {
    * ChatConnection, java.lang.String, java.lang.String)
    */
   @Override
-  public Room joinRoom(final ChatConnection connection, final String roomName, final String alias) throws NoResponseException, NotConnectedException {
+  public Room joinRoom(final ChatConnection connection, final String roomName, final String alias)
+      throws NoResponseException, NotConnectedException {
     final XmppConnection xConn = (XmppConnection) connection;
-    final MultiUserChat muc = new MultiUserChat(xConn.getConn(), getRoomName(roomName));
+    AbstractXMPPConnection aConn = xConn.getConn();
+    MultiUserChatManager manager = MultiUserChatManager.getInstanceFor(aConn);
+    final MultiUserChat muc = manager.getMultiUserChat(getRoomName(roomName));
     try {
-      muc.join(alias);
+      muc.join(Resourcepart.from(alias));
       // configure(muc);
       final XmppRoom room = new XmppRoom(muc, alias);
       muc.addMessageListener(room);
       return room;
-    } catch (final XMPPException e) {
+    } catch (final XMPPException | NotAMucServiceException | XmppStringprepException
+        | InterruptedException e) {
       throw new ChatException(e);
     }
   }
@@ -281,13 +301,19 @@ public class XmppManagerDefault implements XmppManager {
    */
   @Override
   public ChatConnection login(final String userName, final String password, final String resource) {
-    final ConnectionConfiguration config = new ConnectionConfiguration(getServerName(), 5222);
-    final AbstractXMPPConnection conn = new XMPPTCPConnection(config);
-    try {
+   try {
+    XMPPTCPConnectionConfiguration config;
+      config = XMPPTCPConnectionConfiguration.builder()
+          // .setUsernameAndPassword(userName, password)
+          .setXmppDomain(getServerName())
+          .setHost(getServerName())
+          .setPort(5222)
+          .build();
+      AbstractXMPPConnection conn = new XMPPTCPConnection(config);
       conn.connect();
-      conn.login(userName, password, resource);
+      conn.login(userName, password, Resourcepart.from(resource));
       return new XmppConnection(userName, conn);
-    } catch (final Exception e) {
+    } catch (InterruptedException | SmackException | XMPPException | IOException e) {
       throw new ChatException(e);
     }
   }
@@ -305,10 +331,10 @@ public class XmppManagerDefault implements XmppManager {
     final MultiUserChat muc = xAccess.getMuc();
     final Message message = muc.createMessage();
     message.setBody(body);
-    message.setFrom(muc.getNickname());
     try {
+      message.setFrom(JidCreate.from(muc.getNickname()));
       muc.sendMessage(body);
-    } catch (final Exception e) {
+    } catch (NotConnectedException | InterruptedException | XmppStringprepException e) {
       throw new ChatException(e);
     }
   }
@@ -324,23 +350,18 @@ public class XmppManagerDefault implements XmppManager {
     final ChatConnection connection = login(chatProperties.getAdminJID(),
         chatProperties.getAdminPasswd(), "kuneserveradmin" + System.currentTimeMillis());
     final AbstractXMPPConnection xmppConn = ((XmppConnection) connection).getConn();
-    final String userJid = userName + "@" + chatProperties.getDomain();
-    final Chat newChat = ChatManager.getInstanceFor(xmppConn).createChat(userJid, new MessageListener() {
-      @Override
-      public void processMessage(final Chat arg0, final Message arg1) {
-        LOG.info("Sent message: " + arg1.getBody());
-      }
-    });
     try {
+    EntityBareJid userJid = JidCreate.entityBareFrom(userName + "@" + chatProperties.getDomain());
+    Chat chat = ChatManager.getInstanceFor(xmppConn).chatWith(userJid);
       final Message message = new Message();
-      message.setFrom(chatProperties.getDomain());
+      message.setFrom(JidCreate.from(chatProperties.getDomain()));
       message.setTo(userJid);
-      message.setType(Type.normal);
+      message.setType(org.jivesoftware.smack.packet.Message.Type.normal);
       message.setBody(text);
       message.setSubject("");
-      newChat.sendMessage(message);
+      chat.send(message);
       xmppConn.disconnect();
-    } catch (final Exception e) {
+    } catch (final InterruptedException | NotConnectedException | XmppStringprepException e) {
       LOG.error("Error Delivering xmpp message to " + userName + ": ", e);
     }
   }

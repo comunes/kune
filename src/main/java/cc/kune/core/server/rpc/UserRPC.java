@@ -25,10 +25,13 @@ package cc.kune.core.server.rpc;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
-import org.jivesoftware.util.Base64;
+import org.jivesoftware.smack.util.stringencoder.Base64;
 import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.SessionManager;
 import org.waveprotocol.wave.model.wave.ParticipantId;
+
+import com.google.common.base.Preconditions;
+import com.google.inject.Inject;
 
 import cc.kune.core.client.errors.AccessViolationException;
 import cc.kune.core.client.errors.DefaultException;
@@ -65,9 +68,6 @@ import cc.kune.domain.Group;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.kspecific.ParticipantUtils;
-
-import com.google.common.base.Preconditions;
-import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -290,7 +290,7 @@ public class UserRPC implements RPC, UserService {
       throw new AccessViolationException();
     }
     if (userGroup.hasLogo()) {
-      return Base64.encodeBytes(userGroup.getLogo());
+      return Base64.encodeToString(userGroup.getLogo());
     } else {
       throw new DefaultException("Unexpected programatic exception (user has no logo)");
     }

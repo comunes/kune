@@ -37,7 +37,6 @@ import javax.servlet.ServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.persistence.file.FileUtils;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.waveserver.LucenePerUserWaveViewHandlerImpl;
@@ -46,13 +45,12 @@ import com.google.gwt.logging.server.RemoteLoggingServiceImpl;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.grapher.GrapherModule;
 import com.google.inject.grapher.InjectorGrapher;
 import com.google.inject.grapher.graphviz.GraphvizModule;
 import com.google.inject.grapher.graphviz.GraphvizRenderer;
-import com.google.inject.name.Names;
+import com.typesafe.config.Config;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.error.ServerException;
@@ -162,6 +160,16 @@ public class RackServletFilter implements Filter {
   @SuppressWarnings("unused")
   private void graph(final String filename, final Injector kuneInjector) {
     try {
+      // for Grice > 3
+      // PrintWriter out = new PrintWriter(new File(filename), "UTF-8");
+      //
+      // final Injector injector = Guice.createInjector(new GraphvizModule());
+      // final GraphvizGrapher grapher =
+      // injector.getInstance(GraphvizGrapher.class);
+      // grapher.setOut(out);
+      // grapher.setRankdir("TB");
+      // grapher.graph(kuneInjector);
+
       final PrintWriter out = new PrintWriter(new File(filename), "UTF-8");
 
       final Injector injector = Guice.createInjector(new GrapherModule(), new GraphvizModule());
@@ -218,8 +226,8 @@ public class RackServletFilter implements Filter {
     }
 
     // We need to close wave Lucene indexer properly
-    String searchType = injector.getInstance(
-        Key.get(String.class, Names.named(CoreSettings.SEARCH_TYPE)));
+    Config config = injector.getInstance(Config.class);
+    String searchType = config.getString("core.search_type");
     if ("lucene".equals(searchType)) {
       Runtime.getRuntime().addShutdownHook(new Thread() {
         @Override

@@ -28,21 +28,20 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.waveprotocol.box.server.CoreSettings;
+
+import com.calclab.emite.xtesting.ServicesTester;
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.typesafe.config.Config;
 
 import cc.kune.core.client.actions.xml.XMLKuneClientActions;
 import cc.kune.core.server.manager.file.FileDownloadManagerUtils;
 import cc.kune.core.shared.actions.xml.XMLActionsConstants;
 
-import com.calclab.emite.xtesting.ServicesTester;
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class XMLActionReader.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -56,12 +55,16 @@ public class XMLActionReader {
 
   /**
    * Instantiates a new xML action reader.
-   * 
+   *
    * @param resourceBases
    *          the resource bases
    */
   @Inject
-  public XMLActionReader(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
+  public XMLActionReader(Config config) {
+    this(config.getStringList("core.resource_bases"));
+  }
+
+  public XMLActionReader(List<String> resourceBases) {
     try {
       final InputStream iStream = FileDownloadManagerUtils.getInputStreamInResourceBases(resourceBases,
           XMLActionsConstants.ACTIONS_XML_LOCATION_PATH_ABS);
@@ -74,7 +77,7 @@ public class XMLActionReader {
 
   /**
    * Gets the actions.
-   * 
+   *
    * @return the actions
    */
   public XMLKuneClientActions getActions() {

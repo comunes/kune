@@ -27,9 +27,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.authentication.SessionManager;
 import org.waveprotocol.box.server.rpc.WaveClientServlet;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.typesafe.config.Config;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.manager.GroupManager;
@@ -40,14 +43,10 @@ import cc.kune.domain.ParticipationData;
 import cc.kune.domain.User;
 import cc.kune.domain.finders.UserSignInLogFinder;
 
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserInfoServiceDefault.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -74,7 +73,7 @@ public class UserInfoServiceDefault implements UserInfoService {
 
   /**
    * Instantiates a new user info service default.
-   * 
+   *
    * @param socialNetwork
    *          the social network
    * @param groupManager
@@ -86,18 +85,19 @@ public class UserInfoServiceDefault implements UserInfoService {
   public UserInfoServiceDefault(final SocialNetworkManager socialNetwork,
       final SessionManager waveSessionManager, final WaveClientServlet waveClientServlet,
       final GroupManager groupManager, final UserSignInLogFinder userSignInLogFinder,
-      @Named(CoreSettings.HTTP_WEBSOCKET_PUBLIC_ADDRESS) final String websocketAddress) {
+      Config config) {
     this.socialNetworkManager = socialNetwork;
     this.waveSessionManager = waveSessionManager;
     this.waveClientServlet = waveClientServlet;
     this.groupManager = groupManager;
     this.userSignInLogFinder = userSignInLogFinder;
+    String websocketAddress = config.getString("core.http_websocket_public_address");
     this.websocketAddress = websocketAddress;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.users.UserInfoService#buildInfo(cc.kune.domain.User,
    * java.lang.String)

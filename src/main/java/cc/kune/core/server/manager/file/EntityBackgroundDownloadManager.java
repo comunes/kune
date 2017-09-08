@@ -36,7 +36,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.waveprotocol.box.server.CoreSettings;
+
+import com.google.inject.Inject;
+import com.typesafe.config.Config;
 
 import cc.kune.core.client.errors.ContentNotFoundException;
 import cc.kune.core.client.services.ImageSize;
@@ -45,9 +47,6 @@ import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Group;
-
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -95,8 +94,8 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
   private final String whiteFile;
 
   @Inject
-  public EntityBackgroundDownloadManager(
-      @Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
+  public EntityBackgroundDownloadManager(Config config) {
+    List<String> resourceBases = config.getStringList("core.resource_bases");
     whiteFile = FileDownloadManagerUtils.searchFileInResourceBases(resourceBases,
         FileConstants.WHITE_PIXEL).getPath();
   }
@@ -155,7 +154,7 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
    * javax.servlet.http.HttpServletResponse)
@@ -188,7 +187,7 @@ public class EntityBackgroundDownloadManager extends HttpServlet {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see javax.servlet.http.HttpServlet#getLastModified(javax.servlet.http.
    * HttpServletRequest)
    */

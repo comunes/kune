@@ -36,7 +36,7 @@ import org.jivesoftware.smackx.muc.MultiUserChat;
 // TODO: Auto-generated Javadoc
 /**
  * The Class RoomConfigurationDumper.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -47,7 +47,7 @@ class RoomConfigurationDumper {
 
   /**
    * Log.
-   * 
+   *
    * @param options
    *          the options
    * @return the string
@@ -62,7 +62,7 @@ class RoomConfigurationDumper {
 
   /**
    * Log.
-   * 
+   *
    * @param string
    *          the string
    */
@@ -72,7 +72,7 @@ class RoomConfigurationDumper {
 
   /**
    * Show configuration.
-   * 
+   *
    * @param form
    *          the form
    */
@@ -90,15 +90,16 @@ class RoomConfigurationDumper {
 
   /**
    * Configure2.
-   * 
+   *
    * @param muc
    *          the muc
    * @throws XMPPException
    *           the xMPP exception
- * @throws NotConnectedException 
- * @throws NoResponseException 
+ * @throws NotConnectedException
+ * @throws NoResponseException
+   * @throws InterruptedException
    */
-  void configure2(final MultiUserChat muc) throws XMPPException, NoResponseException, NotConnectedException {
+  void configure2(final MultiUserChat muc) throws XMPPException, NoResponseException, NotConnectedException, InterruptedException {
     final Form form = muc.getConfigurationForm().createAnswerForm();
     form.setAnswer("muc#roomconfig_passwordprotectedroom", false);
     // form.setAnswer("muc#roomconfig_roomname",

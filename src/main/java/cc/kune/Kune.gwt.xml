@@ -3,43 +3,43 @@
   "http://google-web-toolkit.googlecode.com/svn/tags/2.0.1/distro-source/core/src/gwt-module.dtd"> -->
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.1.1//EN" "../../gwt-module.dtd">
 <module>
-  <inherits name="com.google.gwt.user.User" />
-  <inherits name="com.google.gwt.i18n.I18N" />
-  <inherits name='com.google.gwt.logging.Logging' />
-  <inherits name="cc.kune.core.KuneCore" />
-  <inherits name="cc.kune.wave.KuneWave" />
-  <inherits name="cc.kune.barters.KuneBarters" />
-  <inherits name="cc.kune.blogs.KuneBlogs" />
-  <inherits name="cc.kune.chat.KuneChat" />
-  <inherits name="cc.kune.docs.KuneDocs" />
-  <inherits name="cc.kune.wiki.KuneWiki" />
-  <inherits name="cc.kune.events.KuneEvents" />
-  <inherits name="cc.kune.tasks.KuneTasks" />
-  <inherits name="cc.kune.lists.KuneLists" />
-  <inherits name="cc.kune.trash.KuneTrash" />
-  <inherits name="cc.kune.pspace.PSpace" />
-  <inherits name="cc.kune.hspace.HSpace" />
+  <inherits name="com.google.gwt.user.User"/>
+  <inherits name="com.google.gwt.i18n.I18N"/>
+  <inherits name='com.google.gwt.logging.Logging'/>
+  <inherits name="cc.kune.core.KuneCore"/>
+  <inherits name="cc.kune.wave.KuneWave"/>
+  <inherits name="cc.kune.barters.KuneBarters"/>
+  <inherits name="cc.kune.blogs.KuneBlogs"/>
+  <inherits name="cc.kune.chat.KuneChat"/>
+  <inherits name="cc.kune.docs.KuneDocs"/>
+  <inherits name="cc.kune.wiki.KuneWiki"/>
+  <inherits name="cc.kune.events.KuneEvents"/>
+  <inherits name="cc.kune.tasks.KuneTasks"/>
+  <inherits name="cc.kune.lists.KuneLists"/>
+  <inherits name="cc.kune.trash.KuneTrash"/>
+  <inherits name="cc.kune.pspace.PSpace"/>
+  <inherits name="cc.kune.hspace.HSpace"/>
   <inherits name="org.adamtacy.GWTEffects"></inherits>
   <source path='client'
-    excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java" />
+    excludes="**/*Test.java,**/*Tests.java,**/*MockProvider.java"/>
 
   <!-- Logging Configuration -->
-  <set-property name="gwt.logging.enabled" value="TRUE" />
-  <set-property name="gwt.logging.logLevel" value="INFO" />
-  <set-property name="gwt.logging.consoleHandler" value="ENABLED" />
+  <set-property name="gwt.logging.enabled" value="TRUE"/>
+  <set-property name="gwt.logging.logLevel" value="INFO"/>
+  <set-property name="gwt.logging.consoleHandler" value="ENABLED"/>
   <!-- Logs by calling method GWT.log. These messages can only be seen in
     Development mode — look for them in the DevMode window -->
   <set-property name="gwt.logging.developmentModeHandler"
-    value="ENABLED" />
-  <set-property name="gwt.logging.hasWidgetsHandler" value="DISABLED" />
-  <set-property name="gwt.logging.systemHandler" value="ENABLED" />
-  <add-linker name="xsiframe" />
+    value="ENABLED"/>
+  <set-property name="gwt.logging.hasWidgetsHandler" value="DISABLED"/>
+  <set-property name="gwt.logging.systemHandler" value="ENABLED"/>
+  <add-linker name="xsiframe"/>
 
   <!-- gwt-platform ============================================= -->
 
   <!-- This is experimental, not used yet, but we are trying to simplify
     the two entry points (embed/not embed) -->
-  <define-property name="embed" values="true, false" />
+  <define-property name="embed" values="true, false"/>
   <property-provider name="embed"><![CDATA[
   {
     return document.getElementById('k-home-prewrap') == null;
@@ -47,44 +47,50 @@
   ]]>
   </property-provider>
 
-  <inherits name='com.gwtplatform.dispatch.Dispatch' />
-  <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint' />
+  <inherits name='com.gwtplatform.dispatch.Dispatch'/>
+  <inherits name='com.gwtplatform.mvp.MvpWithEntryPoint'/>
 
   <set-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.core.client.CoreGinModule" />
+    value="cc.kune.core.client.CoreGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.barters.client.BartersGinModule" />
+    value="cc.kune.barters.client.BartersGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.blogs.client.BlogsGinModule" />
+    value="cc.kune.blogs.client.BlogsGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.chat.client.ChatGinModule" />
+    value="cc.kune.chat.client.ChatGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.docs.client.DocsGinModule" />
+    value="cc.kune.docs.client.DocsGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.events.client.EventsGinModule" />
+    value="cc.kune.events.client.EventsGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.gspace.client.GSpaceGinModule" />
+    value="cc.kune.gspace.client.GSpaceGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.hspace.client.HSpaceGinModule" />
+    value="cc.kune.hspace.client.HSpaceGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.lists.client.ListsGinModule" />
+    value="cc.kune.lists.client.ListsGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.pspace.client.PSpaceGinModule" />
+    value="cc.kune.pspace.client.PSpaceGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.tasks.client.TasksGinModule" />
+    value="cc.kune.tasks.client.TasksGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.trash.client.TrashGinModule" />
+    value="cc.kune.trash.client.TrashGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.wave.client.kspecific.WaveGinModule" />
+    value="cc.kune.wave.client.kspecific.WaveGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="cc.kune.wiki.client.WikiGinModule" />
+    value="cc.kune.wiki.client.WikiGinModule"/>
   <extend-configuration-property name="gin.ginjector.modules"
-    value="com.calclab.hablar.client.HablarModule" />
+    value="com.calclab.hablar.client.HablarModule"/>
 
   <set-configuration-property name="gwtp.prebootstrapper"
-    value="cc.kune.client.KunePreBootstrapper" />
+    value="cc.kune.client.KunePreBootstrapper"/>
 
   <set-configuration-property name="gwtp.bootstrapper"
-    value="cc.kune.client.KuneBootstrapper" />
+    value="cc.kune.client.KuneBootstrapper"/>
+
+  <!-- http://www.gwtproject.org/articles/gss_migration.html -->
+  <set-configuration-property name="CssResource.enableGss"
+    value="true"/>
+  <set-configuration-property name="CssResource.conversionMode" value="lenient"
+    />
 
 </module>

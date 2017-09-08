@@ -22,12 +22,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.waveprotocol.box.server.CoreSettings;
-
-import cc.kune.common.shared.utils.Url;
-import cc.kune.common.shared.utils.UrlParam;
-import cc.kune.core.shared.FileConstants;
-
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -36,7 +30,6 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 import com.google.wave.api.Blip;
 import com.google.wave.api.BlipThread;
 import com.google.wave.api.Element;
@@ -45,31 +38,36 @@ import com.google.wave.api.Wavelet;
 import com.google.wave.splash.rpc.ClientAction;
 import com.google.wave.splash.text.ContentRenderer;
 import com.google.wave.splash.text.Markup;
+import com.typesafe.config.Config;
+
+import cc.kune.common.shared.utils.Url;
+import cc.kune.common.shared.utils.UrlParam;
+import cc.kune.core.shared.FileConstants;
 
 // TODO: Auto-generated Javadoc
 /**
  * Does the actual conversion of a wavelet/blipdata tree into html, using the
  * conversation-thread model, optionally falling back to the blip-hierarchy
  * model, if so configured.
- * 
+ *
  * @author dhanji@gmail.com (Dhanji R. Prasanna)
  */
 @Singleton
 class ThreadedWaveRenderer implements WaveRenderer {
-  
+
   /**
    * The Class PageTracker.
    *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   private class PageTracker {
-    
+
     /** The counter. */
     private int counter;
     // Whether or not we're trying to deliver the first page.
     /** The first page. */
     private final boolean firstPage;
-    
+
     /** The markers. */
     private final List<Integer> markers = Lists.newArrayList();
 
@@ -171,13 +169,13 @@ class ThreadedWaveRenderer implements WaveRenderer {
 
     return size;
   }
-  
+
   /** The chars per page. */
   private final int charsPerPage;
   // Ugly, but we do this to avoid polluting all the rendering methods. =(
   /** The current page. */
   private final ThreadLocal<PageTracker> currentPage = new ThreadLocal<PageTracker>();
-  
+
   /** The domain. */
   private final String domain;
 
@@ -186,7 +184,7 @@ class ThreadedWaveRenderer implements WaveRenderer {
 
   /** The renderer. */
   private final ContentRenderer renderer;
-  
+
   /** The templates. */
   private final Templates templates;
 
@@ -198,10 +196,9 @@ class ThreadedWaveRenderer implements WaveRenderer {
    * @param domain the domain
    */
   @Inject
-  public ThreadedWaveRenderer(final Templates templates, final ContentRenderer renderer,
-      @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
+  public ThreadedWaveRenderer(final Templates templates, final ContentRenderer renderer, Config config) {
+    this.domain = config.getString("core.wave_server_domain");
     this.templates = templates;
-    this.domain = domain;
     // vjrj: manual setted
     this.isReadOnly = true;
     this.charsPerPage = 100000;
@@ -327,7 +324,7 @@ class ThreadedWaveRenderer implements WaveRenderer {
 
   /**
    * Renders the header of a wavelet, including participants.
-   * 
+   *
    * @param profiles
    *          A list of profiles for each participant in the wave, in correct
    *          order.
@@ -486,7 +483,7 @@ class ThreadedWaveRenderer implements WaveRenderer {
   /**
    * Renders the content of a blip as html. If a title is specified, renders
    * that specially as the root blip.
-   * 
+   *
    * @param blipData
    *          The blip whose content you want to render
    * @param title

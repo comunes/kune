@@ -23,18 +23,17 @@
 
 package cc.kune.wave.server;
 
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.robots.operations.FetchProfilesService.ProfilesFetcher;
 import org.waveprotocol.box.server.robots.operations.GravatarProfilesFetcher;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
+import com.typesafe.config.Config;
 
 /**
  * Profile Fetcher Module.
- * 
+ *
  * @author vjrj@apache.org (Vicente J. Ruiz Jurado)
  */
 public class CustomProfileFetcherModule extends AbstractModule {
@@ -42,8 +41,8 @@ public class CustomProfileFetcherModule extends AbstractModule {
   private final String profileFetcherType;
 
   @Inject
-  public CustomProfileFetcherModule(@Named(CoreSettings.PROFILE_FETCHER_TYPE) final String profilerType) {
-    this.profileFetcherType = profilerType;
+  public CustomProfileFetcherModule(Config config) {
+    this.profileFetcherType = config.getString("core.profile_fetcher_type");
   }
 
   @Override

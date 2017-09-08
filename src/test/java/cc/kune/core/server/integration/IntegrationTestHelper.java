@@ -22,18 +22,22 @@
  */
 package cc.kune.core.server.integration;
 
-import static com.google.inject.matcher.Matchers.annotatedWith;
-import static com.google.inject.matcher.Matchers.any;
+import static com.google.inject.matcher.Matchers.*;
+
+import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.mockito.Mockito;
-import org.waveprotocol.box.server.CoreSettings;
+import org.waveprotocol.box.server.CoreSettingsNames;
 import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.StatModule;
 import org.waveprotocol.box.server.executor.ExecutorsModule;
+import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
 import org.waveprotocol.box.server.robots.ProfileFetcherModule;
 import org.waveprotocol.box.server.robots.RobotApiModule;
@@ -41,6 +45,18 @@ import org.waveprotocol.box.server.waveserver.WaveServerException;
 import org.waveprotocol.box.server.waveserver.WaveServerImpl;
 import org.waveprotocol.box.server.waveserver.WaveServerModule;
 import org.waveprotocol.wave.federation.noop.NoOpFederationModule;
+
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Key;
+import com.google.inject.Module;
+import com.google.inject.Scopes;
+import com.google.inject.name.Names;
+import com.google.inject.servlet.RequestScoped;
+import com.google.inject.servlet.SessionScoped;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 
 import cc.kune.barters.server.BarterServerModule;
 import cc.kune.chat.server.ChatServerModule;
@@ -60,17 +76,9 @@ import cc.kune.events.server.utils.EventsServerConversionUtil;
 import cc.kune.lists.server.ListsServerModule;
 import cc.kune.tasks.server.TaskServerModule;
 import cc.kune.trash.server.TrashServerModule;
-import cc.kune.wave.server.CustomSettingsBinder;
 import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
+import cc.kune.wave.server.search.CustomSearchModule;
 import cc.kune.wiki.server.WikiServerModule;
-
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
-import com.google.inject.Scopes;
-import com.google.inject.servlet.RequestScoped;
-import com.google.inject.servlet.SessionScoped;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -87,60 +95,61 @@ public class IntegrationTestHelper {
    * @return the injector
    */
   public static Injector createInjector() {
-    Injector injector;
-    try {
-      System.setProperty("java.security.auth.login.config", "src/main/resources/jaas.config");
-      injector = Guice.createInjector(CustomSettingsBinder.bindSettings(
-          TestConstants.WAVE_TEST_PROPFILE, CoreSettings.class));
-      Module profilingModule = injector.getInstance(StatModule.class);
-      ExecutorsModule executorsModule = injector.getInstance(ExecutorsModule.class);
-      injector = injector.createChildInjector(profilingModule, executorsModule);
+    Injector parentInjector;
 
-      final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
-      final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
-      final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule(
-          "kune-tests.properties", TestConstants.PERSISTENCE_UNIT);
-      final Module searchModule = injector.getInstance(SearchModule.class);
-      final Module profilesModule = injector.getInstance(ProfileFetcherModule.class);
-      final WaveServerModule waveServerModule = injector.getInstance(WaveServerModule.class);
-      final Injector childInjector = injector.createChildInjector(
-          wavePersistModule,
-          searchModule,
-          profilesModule,
-          kuneDataSource,
-          new DataSourceOpenfirePersistModule(kuneDataSource.getKuneProperties()),
-          new AbstractModule() {
-            @Override
-            protected void configure() {
-              bindScope(SessionScoped.class, Scopes.SINGLETON);
-              bindScope(RequestScoped.class, Scopes.SINGLETON);
-              bind(UsersOnline.class).to(DummyUserSessionManager.class).asEagerSingleton();
-              bind(UserSessionManager.class).to(DummyUserSessionManager.class).asEagerSingleton();
-              // Used by I18nRPC to detect user lang
-              bind(HttpServletRequest.class).toInstance(Mockito.mock(HttpServletRequest.class));
-              bindInterceptor(annotatedWith(KuneTransactional.class), any(),
-                  kuneDataSource.getTransactionInterceptor());
-              bindInterceptor(any(), annotatedWith(KuneTransactional.class),
-                  kuneDataSource.getTransactionInterceptor());
-              install(kuneDataSource);
-              requestStaticInjection(KuneWaveServerUtils.class);
-              requestStaticInjection(EventsServerConversionUtil.class);
-              requestStaticInjection(GroupServerUtils.class);
-            }
-          }, new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
-          new DocumentServerModule(), new ChatServerModule(), new ServerModule(waveServerModule),
-          federationModule, new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
-          new EventsServerModule(), new TrashServerModule());
-      try {
-        childInjector.getInstance(WaveServerImpl.class).initialize();
-      } catch (final WaveServerException e) {
-        e.printStackTrace();
+    System.setProperty("java.security.auth.login.config", "src/main/resources/jaas.config");
+    Module coreSettings = new AbstractModule() {
+      @Override
+      protected void configure() {
+        Config config = ConfigFactory.load().withFallback(
+            ConfigFactory.parseFile(new File(TestConstants.WAVE_TEST_PROPFILE)));
+        bind(Config.class).toInstance(config);
+        bind(Key.get(String.class, Names.named(CoreSettingsNames.WAVE_SERVER_DOMAIN))).toInstance(
+            config.getString("core.wave_server_domain"));
       }
-      return childInjector;
-    } catch (final ConfigurationException e) {
+    };
+    parentInjector = Guice.createInjector(coreSettings);
+    Module profilingModule = parentInjector.getInstance(StatModule.class);
+    ExecutorsModule executorsModule = parentInjector.getInstance(ExecutorsModule.class);
+    Injector injector = parentInjector.createChildInjector(profilingModule, executorsModule);
+
+    final PersistenceModule wavePersistModule = injector.getInstance(PersistenceModule.class);
+    final NoOpFederationModule federationModule = injector.getInstance(NoOpFederationModule.class);
+    final DataSourceKunePersistModule kuneDataSource = new DataSourceKunePersistModule(
+        "kune-tests.properties", TestConstants.PERSISTENCE_UNIT);
+    final Module searchModule = injector.getInstance(SearchModule.class);
+    final Module profilesModule = injector.getInstance(ProfileFetcherModule.class);
+    final WaveServerModule waveServerModule = injector.getInstance(WaveServerModule.class);
+    final Injector childInjector = injector.createChildInjector(wavePersistModule, searchModule,
+        profilesModule, kuneDataSource,
+        new DataSourceOpenfirePersistModule(kuneDataSource.getKuneProperties()), new AbstractModule() {
+          @Override
+          protected void configure() {
+            bindScope(SessionScoped.class, Scopes.SINGLETON);
+            bindScope(RequestScoped.class, Scopes.SINGLETON);
+            bind(UsersOnline.class).to(DummyUserSessionManager.class).asEagerSingleton();
+            bind(UserSessionManager.class).to(DummyUserSessionManager.class).asEagerSingleton();
+            // Used by I18nRPC to detect user lang
+            bind(HttpServletRequest.class).toInstance(Mockito.mock(HttpServletRequest.class));
+            bindInterceptor(annotatedWith(KuneTransactional.class), any(),
+                kuneDataSource.getTransactionInterceptor());
+            bindInterceptor(any(), annotatedWith(KuneTransactional.class),
+                kuneDataSource.getTransactionInterceptor());
+            install(kuneDataSource);
+            requestStaticInjection(KuneWaveServerUtils.class);
+            requestStaticInjection(EventsServerConversionUtil.class);
+            requestStaticInjection(GroupServerUtils.class);
+          }
+        }, new ListsServerModule(), new RobotApiModule(), new PlatformServerModule(),
+        new DocumentServerModule(), new ChatServerModule(), new ServerModule(waveServerModule),
+        federationModule, new WikiServerModule(), new TaskServerModule(), new BarterServerModule(),
+        new EventsServerModule(), new TrashServerModule());
+    try {
+      childInjector.getInstance(WaveServerImpl.class).initialize();
+    } catch (final WaveServerException e) {
       e.printStackTrace();
     }
-    return null;
+    return childInjector;
   }
 
   /**

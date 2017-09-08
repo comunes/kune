@@ -36,7 +36,6 @@ import javax.persistence.NoResultException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.QueryParser;
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.PasswordDigest;
 import org.waveprotocol.box.server.persistence.AccountStore;
@@ -49,6 +48,11 @@ import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
+
+import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
+import com.typesafe.config.Config;
 
 import cc.kune.common.shared.utils.SimpleArgCallback;
 import cc.kune.common.shared.utils.TextUtils;
@@ -93,11 +97,6 @@ import cc.kune.domain.UserBuddiesData;
 import cc.kune.domain.finders.UserFinder;
 import cc.kune.wave.server.kspecific.KuneWaveService;
 import cc.kune.wave.server.kspecific.ParticipantUtils;
-
-import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -209,7 +208,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       final ParticipantUtils participantUtils, final KuneBasicProperties properties,
       final GroupManager groupManager, final NotificationService notifyService,
       final XmppRosterProvider xmppRoster, final XmppRosterPresenceProvider xmppRosterPresence,
-      final SocialNetworkCache snCache, @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain,
+      final SocialNetworkCache snCache, Config config,
       final MBeanRegistry mBeanRegistry) {
     super(provider, User.class);
     mBeanRegistry.registerAsMBean(this, UserManagerDefaultMBean.MBEAN_OBJECT_NAME);
@@ -228,7 +227,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
     this.xmppRoster = xmppRoster;
     this.xmppRosterPresence = xmppRosterPresence;
     this.snCache = snCache;
-    this.domain = domain;
+    this.domain = config.getString("core.wave_server_domain");
   }
 
   @Override

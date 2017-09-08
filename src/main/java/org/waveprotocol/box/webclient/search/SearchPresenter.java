@@ -111,11 +111,9 @@ public final class SearchPresenter
   /** The dispatcher of profiles events. */
   SourcesEvents<ProfileListener> profiles;
   private boolean isRenderingInProgress = false;
-  private final SearchPresenterResources.Css css;
 
-  SearchPresenter(SearchPresenterResources.Css css, TimerService scheduler, Search search, SearchPanelView searchUi,
+  SearchPresenter(TimerService scheduler, Search search, SearchPanelView searchUi,
       WaveActionHandler actionHandler, SourcesEvents<ProfileListener> profiles) {
-    this.css = css;
     this.search = search;
     this.searchUi = searchUi;
     this.scheduler = scheduler;
@@ -134,8 +132,7 @@ public final class SearchPresenter
   public static SearchPresenter create(
       Search model, SearchPanelView view, WaveActionHandler actionHandler,
       SourcesEvents<ProfileListener> profileEventsDispatcher) {
-    SearchPresenterResources.Css css = SearchPresenterResources.Loader.res.css();
-    SearchPresenter presenter = new SearchPresenter(css,
+    SearchPresenter presenter = new SearchPresenter(
         SchedulerInstance.getHighPriorityTimer(), model, view, actionHandler,
         profileEventsDispatcher);
     presenter.init();

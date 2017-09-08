@@ -35,7 +35,6 @@ import javax.annotation.Nonnull;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.robots.OperationContextImpl;
 import org.waveprotocol.box.server.robots.OperationServiceRegistry;
 import org.waveprotocol.box.server.robots.util.ConversationUtil;
@@ -49,11 +48,6 @@ import org.waveprotocol.wave.model.id.WaveletId;
 import org.waveprotocol.wave.model.version.HashedVersion;
 import org.waveprotocol.wave.model.wave.ParticipantId;
 import org.waveprotocol.wave.model.waveref.WaveRef;
-
-import cc.kune.common.shared.utils.SimpleArgCallback;
-import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.client.errors.AccessViolationException;
-import cc.kune.core.client.errors.DefaultException;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
@@ -86,6 +80,12 @@ import com.google.wave.api.impl.DocumentModifyQuery;
 import com.google.wave.api.impl.WaveletData;
 import com.google.wave.splash.rpc.ClientAction;
 import com.google.wave.splash.web.template.WaveRenderer;
+import com.typesafe.config.Config;
+
+import cc.kune.common.shared.utils.SimpleArgCallback;
+import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.core.client.errors.AccessViolationException;
+import cc.kune.core.client.errors.DefaultException;
 
 public class KuneWaveServiceDefault implements KuneWaveService {
   public static final Log LOG = LogFactory.getLog(KuneWaveServiceDefault.class);
@@ -160,14 +160,14 @@ public class KuneWaveServiceDefault implements KuneWaveService {
       @Named("DataApiRegistry") final OperationServiceRegistry operationRegistry,
       final WaveletProvider waveletProvider, final ConversationUtil conversationUtil,
       final ParticipantUtils participantUtils, final WaveRenderer waveRenderer,
-      @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain) {
+      Config config) {
     this.converterManager = converterManager;
     this.waveletProvider = waveletProvider;
     this.conversationUtil = conversationUtil;
     this.operationRegistry = operationRegistry;
     this.participantUtils = participantUtils;
     this.waveRenderer = waveRenderer;
-    this.domain = domain;
+    this.domain = config.getString("core.wave_server_domain");
   }
 
   @Override

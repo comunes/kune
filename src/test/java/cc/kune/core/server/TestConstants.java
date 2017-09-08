@@ -25,7 +25,7 @@ package cc.kune.core.server;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TestConstants.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class TestConstants {
@@ -40,7 +40,7 @@ public final class TestConstants {
   public static final String PERSISTENCE_UNIT = "test";
 
   /** The Constant WAVE_TEST_PROPFILE. */
-  public static final String WAVE_TEST_PROPFILE = "wave-server-testing.properties";
+  public static final String WAVE_TEST_PROPFILE = "wave-server-testing.conf";
 
   /**
    * Instantiates a new test constants.

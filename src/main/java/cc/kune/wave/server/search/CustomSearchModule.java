@@ -17,7 +17,7 @@
 
 package cc.kune.wave.server.search;
 
-import org.waveprotocol.box.server.CoreSettings;
+import com.typesafe.config.Config;
 import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewBus;
 import org.waveprotocol.box.server.waveserver.PerUserWaveViewHandler;
@@ -25,28 +25,29 @@ import org.waveprotocol.box.server.waveserver.PerUserWaveViewProvider;
 import org.waveprotocol.box.server.waveserver.SearchProvider;
 import org.waveprotocol.box.server.waveserver.SimpleSearchProviderImpl;
 import org.waveprotocol.box.server.waveserver.WaveIndexer;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 public class CustomSearchModule extends SearchModule {
+
+  public static final Log LOG = LogFactory.getLog(CustomSearchModule.class);
 
   private final String searchType;
 
   @Inject
-  public CustomSearchModule(@Named(CoreSettings.SEARCH_TYPE) final String searchType,
-      @Named(CoreSettings.INDEX_DIRECTORY) final String indexDirectory) {
-    super(searchType, indexDirectory);
-    this.searchType = searchType;
+  public CustomSearchModule(Config config) {
+    super(config);
+    this.searchType = config.getString("core.search_type");
   }
 
   @Override
   public void configure() {
     try {
-      // TODO: patch Wave to don't throw RuntimeException
+      // TODO: patch Wave to don't throw RuntimeException?
       super.configure();
-    } catch (final RuntimeException e) {
       if ("db".equals(searchType)) {
         bind(SearchProvider.class).to(SimpleSearchProviderImpl.class).in(Singleton.class);
         bind(PerUserWaveViewProvider.class).to(CustomPerUserWaveViewHandler.class).in(Singleton.class);
@@ -55,6 +56,8 @@ public class CustomSearchModule extends SearchModule {
         bind(PerUserWaveViewHandler.class).to(CustomPerUserWaveViewHandler.class).in(Singleton.class);
         bind(WaveIndexer.class).to(CustomWaveIndexerImpl.class);
       }
+    } catch (final RuntimeException e) {
+      LOG.error("Error in CustomSearchModule", e);
     }
   }
 }

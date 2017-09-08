@@ -22,19 +22,19 @@ x * Copyright (C) 2007-2015 Licensed to the Comunes Association (CA) under
  */
 package cc.kune.gspace.client.licensewizard.pages;
 
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.common.shared.utils.SimpleCallback;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.LicenseDTO;
-
+import com.arcbees.chosen.client.ChosenOptions;
+import com.arcbees.chosen.client.event.ChosenChangeEvent;
+import com.arcbees.chosen.client.event.ChosenChangeEvent.ChosenChangeHandler;
+import com.arcbees.chosen.client.gwt.ChosenListBox;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
-import com.watopi.chosen.client.ChosenOptions;
-import com.watopi.chosen.client.event.ChosenChangeEvent;
-import com.watopi.chosen.client.event.ChosenChangeEvent.ChosenChangeHandler;
-import com.watopi.chosen.client.gwt.ChosenListBox;
+
+import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.common.shared.utils.SimpleCallback;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.LicenseDTO;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -95,7 +95,7 @@ public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdF
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.user.client.ui.IsWidget#asWidget()
    */
   @Override
@@ -105,7 +105,7 @@ public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdF
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView#
    * getSelectedLicense()
    */
@@ -116,7 +116,7 @@ public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdF
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView#onChange
    * (cc.kune.common.shared.utils.SimpleCallback)
@@ -128,7 +128,7 @@ public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdF
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.ui.DefaultForm#reset()
    */
   @Override
@@ -138,7 +138,7 @@ public class LicenseWizardFrdForm extends FlowPanel implements LicenseWizardFrdF
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.gspace.client.licensewizard.pages.LicenseWizardFrdFormView#setFlags
    * (boolean, boolean, boolean)

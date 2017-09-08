@@ -52,7 +52,7 @@ import cc.kune.domain.utils.DataFieldBridge;
 @IdClass(WaveRefKey.class)
 @Indexed
 @Table(name = "waves")
-public class WaveEntity implements Serializable, Comparator<WaveEntity> {
+public class WaveEntity implements Serializable, Comparator<WaveEntity>, Comparable<WaveEntity> {
 
   private static final long serialVersionUID = 8890747607044939769L;
 
@@ -106,6 +106,10 @@ public class WaveEntity implements Serializable, Comparator<WaveEntity> {
     participants.size();
     participants.add(participant);
     participant.add(this);
+  }
+
+  public int compareTo(WaveEntity entity) {
+    return compare(this, entity);
   }
 
   @Override

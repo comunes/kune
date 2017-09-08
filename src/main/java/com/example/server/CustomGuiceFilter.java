@@ -29,7 +29,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.rpc.AuthenticationServlet;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.rpc.SignOutServlet;
@@ -38,21 +37,21 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 import com.google.inject.servlet.GuiceFilter;
 import com.google.inject.servlet.ServletModule;
+import com.typesafe.config.Config;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class CustomGuiceFilter.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class CustomGuiceFilter extends GuiceFilter {
 
   /**
    * The Class HelloWorldInjected.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class HelloWorldInjected {
@@ -62,7 +61,7 @@ public class CustomGuiceFilter extends GuiceFilter {
 
     /**
      * A Constructor with some sample WIAB instances and params injected.
-     * 
+     *
      * @param auth
      *          the auth
      * @param signOut
@@ -72,13 +71,13 @@ public class CustomGuiceFilter extends GuiceFilter {
      */
     @Inject
     public HelloWorldInjected(final AuthenticationServlet auth, final SignOutServlet signOut,
-        @Named(CoreSettings.HTTP_FRONTEND_ADDRESSES) final List<String> httpAddresses) {
-      this.httpAddresses = httpAddresses;
+        Config config) {
+      this.httpAddresses = config.getStringList("core.http_frontend_addresses");
     }
 
     /**
      * Gets the http addresses.
-     * 
+     *
      * @return the http addresses
      */
     public List<String> getHttpAddresses() {
@@ -88,14 +87,14 @@ public class CustomGuiceFilter extends GuiceFilter {
 
   /**
    * An additional sample Guice Module.
-   * 
+   *
    * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
    */
   public static class HelloWorldModule extends AbstractModule {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.google.inject.AbstractModule#configure()
      */
     @Override
@@ -106,7 +105,7 @@ public class CustomGuiceFilter extends GuiceFilter {
 
   /**
    * A sample servlet that uses {@link HelloWorldModule} and.
-   * 
+   *
    * {@link HelloWorldInjected}
    */
   @Singleton
@@ -114,7 +113,7 @@ public class CustomGuiceFilter extends GuiceFilter {
   public static class HelloWorldServlet extends HttpServlet {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
     /** The hw. */
@@ -122,7 +121,7 @@ public class CustomGuiceFilter extends GuiceFilter {
 
     /**
      * Instantiates a new hello world servlet.
-     * 
+     *
      * @param hw
      *          the hw
      */
@@ -133,7 +132,7 @@ public class CustomGuiceFilter extends GuiceFilter {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest
      * , javax.servlet.http.HttpServletResponse)
@@ -150,7 +149,7 @@ public class CustomGuiceFilter extends GuiceFilter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.inject.servlet.GuiceFilter#init(javax.servlet.FilterConfig)
    */
   @Override

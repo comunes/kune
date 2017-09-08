@@ -29,16 +29,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.persistence.file.FileAccountStore;
-
-import cc.kune.core.server.manager.file.FileDownloadManagerUtils;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
+import com.typesafe.config.Config;
+
+import cc.kune.core.server.manager.file.FileDownloadManagerUtils;
 
 @SuppressWarnings("serial")
 @Singleton
@@ -50,7 +49,8 @@ public class CustomGadgetProviderServlet extends HttpServlet {
   private LoadingCache<String, String> jsonCache;
 
   @Inject
-  public CustomGadgetProviderServlet(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
+  public CustomGadgetProviderServlet(Config config) {
+    List<String> resourceBases = config.getStringList("core.resource_bases");
     jsonCache = CacheBuilder.newBuilder().expireAfterWrite(5, TimeUnit.MINUTES).build(
         new CacheLoader<String, String>() {
           @Override

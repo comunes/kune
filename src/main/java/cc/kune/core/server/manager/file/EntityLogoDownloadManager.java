@@ -36,7 +36,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.waveprotocol.box.server.CoreSettings;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
+import com.typesafe.config.Config;
 
 import cc.kune.core.server.access.FinderService;
 import cc.kune.core.server.manager.GroupManager;
@@ -45,9 +47,6 @@ import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
 import cc.kune.initials.InitialsAvatarsServerUtils;
-
-import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -100,9 +99,9 @@ public class EntityLogoDownloadManager extends HttpServlet {
    *           Signals that an I/O exception has occurred.
    */
   @Inject
-  public EntityLogoDownloadManager(@Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases,
-      final GroupManager groupManager, @Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain,
-      final FinderService contentFinder) throws IOException {
+  public EntityLogoDownloadManager(Config config, final GroupManager groupManager, final FinderService contentFinder) throws IOException {
+    List<String> resourceBases = config.getStringList("core.resource_bases");
+    String domain = config.getString("core.wave_server_domain");
     this.groupManager = groupManager;
     this.domain = domain;
     this.contentFinder = contentFinder;
@@ -128,7 +127,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest,
    * javax.servlet.http.HttpServletResponse)
@@ -209,7 +208,7 @@ public class EntityLogoDownloadManager extends HttpServlet {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see javax.servlet.http.HttpServlet#getLastModified(javax.servlet.http.
    * HttpServletRequest)
    */

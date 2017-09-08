@@ -22,19 +22,18 @@
  */
 package cc.kune.core.server.xmpp;
 
-import org.jivesoftware.smack.PacketListener;
+import org.jivesoftware.smack.MessageListener;
 import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smackx.muc.MultiUserChat;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class XmppRoom.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public class XmppRoom implements Room, PacketListener {
+public class XmppRoom implements Room, MessageListener {
 
   /** The alias. */
   private final String alias;
@@ -47,7 +46,7 @@ public class XmppRoom implements Room, PacketListener {
 
   /**
    * Instantiates a new xmpp room.
-   * 
+   *
    * @param muc
    *          the muc
    * @param alias
@@ -60,7 +59,7 @@ public class XmppRoom implements Room, PacketListener {
 
   /**
    * Gets the alias.
-   * 
+   *
    * @return the alias
    */
   public String getAlias() {
@@ -69,7 +68,7 @@ public class XmppRoom implements Room, PacketListener {
 
   /**
    * Gets the muc.
-   * 
+   *
    * @return the muc
    */
   public MultiUserChat getMuc() {
@@ -78,31 +77,17 @@ public class XmppRoom implements Room, PacketListener {
 
   /**
    * Process message.
-   * 
+   *
    * @param message
    *          the message
    */
-  private void processMessage(final Message message) {
-    listener.onMessage(message.getFrom(), message.getTo(), message.getBody());
+  public void processMessage(final Message message) {
+    listener.onMessage(message.getFrom().toString(), message.getTo().toString(), message.getBody());
   }
 
   /*
    * (non-Javadoc)
-   * 
-   * @see
-   * org.jivesoftware.smack.PacketListener#processPacket(org.jivesoftware.smack
-   * .packet.Packet)
-   */
-  @Override
-  public void processPacket(final Packet packet) {
-    if (packet instanceof Message) {
-      processMessage((Message) packet);
-    }
-  }
-
-  /*
-   * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.xmpp.Room#setListener(cc.kune.core.server.xmpp.RoomListener
    * )

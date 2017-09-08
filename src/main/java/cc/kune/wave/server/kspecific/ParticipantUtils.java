@@ -30,18 +30,17 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.wave.model.wave.InvalidParticipantAddress;
 import org.waveprotocol.wave.model.wave.ParticipantId;
+
+import com.google.inject.Inject;
+import com.google.inject.Singleton;
+import com.google.wave.api.Participants;
+import com.typesafe.config.Config;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.domain.User;
-
-import com.google.inject.Inject;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
-import com.google.wave.api.Participants;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -72,9 +71,8 @@ public class ParticipantUtils {
    *           the invalid participant address
    */
   @Inject
-  public ParticipantUtils(@Named(CoreSettings.WAVE_SERVER_DOMAIN) final String domain,
-      final KuneBasicProperties databaseProperties) throws InvalidParticipantAddress {
-    this.domain = domain;
+  public ParticipantUtils(Config config, final KuneBasicProperties databaseProperties) throws InvalidParticipantAddress {
+    this.domain = config.getString("core.wave_server_domain");
     superAdmin = ofImpl(databaseProperties.getAdminShortName());
   }
 

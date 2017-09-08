@@ -24,20 +24,20 @@ package cc.kune.gspace.client.i18n;
 
 import java.util.List;
 
+import com.arcbees.chosen.client.ChosenOptions;
+import com.arcbees.chosen.client.event.ChosenChangeEvent;
+import com.arcbees.chosen.client.event.ChosenChangeEvent.ChosenChangeHandler;
+import com.arcbees.chosen.client.gwt.ChosenListBox;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.InlineLabel;
+
 import cc.kune.common.client.errors.UIException;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.SimpleCallback;
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.shared.dto.I18nLanguageSimpleDTO;
-
-import com.google.gwt.user.client.ui.FlowPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.InlineLabel;
-import com.watopi.chosen.client.ChosenOptions;
-import com.watopi.chosen.client.event.ChosenChangeEvent;
-import com.watopi.chosen.client.event.ChosenChangeEvent.ChosenChangeHandler;
-import com.watopi.chosen.client.gwt.ChosenListBox;
 
 /**
  * The Class AbstractLanguageSelectorPanel.

@@ -22,17 +22,17 @@
  */
 package cc.kune.core.server.xmpp;
 
-import java.util.Collection;
+import java.util.Set;
 
-import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
+import org.jivesoftware.smack.roster.RosterEntry;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface XmppManager.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -40,7 +40,7 @@ public interface XmppManager {
 
   /**
    * Creates the room.
-   * 
+   *
    * @param connection
    *          the connection
    * @param roomName
@@ -50,26 +50,26 @@ public interface XmppManager {
    * @param subject
    *          the subject
    * @return the room
- * @throws SmackException 
- * @throws NoResponseException 
+ * @throws SmackException
+ * @throws NoResponseException
    */
   Room createRoom(ChatConnection connection, String roomName, String ownerAlias, String subject) throws NoResponseException, SmackException;
 
   /**
    * Destroy room.
-   * 
+   *
    * @param conn
    *          the conn
    * @param roomName
    *          the room name
- * @throws NotConnectedException 
- * @throws NoResponseException 
+ * @throws NotConnectedException
+ * @throws NoResponseException
    */
   void destroyRoom(ChatConnection conn, String roomName) throws NoResponseException, NotConnectedException;
 
   /**
    * Disconnect.
-   * 
+   *
    * @param connection
    *          the connection
    */
@@ -77,7 +77,7 @@ public interface XmppManager {
 
   /**
    * Exist room.
-   * 
+   *
    * @param conn
    *          the conn
    * @param roomName
@@ -88,16 +88,16 @@ public interface XmppManager {
 
   /**
    * Gets the roster.
-   * 
+   *
    * @param connection
    *          the connection
    * @return the roster
    */
-  Collection<RosterEntry> getRoster(ChatConnection connection);
+  Set<RosterEntry> getRoster(ChatConnection connection);
 
   /**
    * Join room.
-   * 
+   *
    * @param connection
    *          the connection
    * @param roomName
@@ -105,14 +105,14 @@ public interface XmppManager {
    * @param alias
    *          the alias
    * @return the room
- * @throws NotConnectedException 
- * @throws NoResponseException 
+ * @throws NotConnectedException
+ * @throws NoResponseException
    */
   Room joinRoom(ChatConnection connection, String roomName, String alias) throws NoResponseException, NotConnectedException;
 
   /**
    * Login.
-   * 
+   *
    * @param userName
    *          the user name
    * @param password
@@ -125,7 +125,7 @@ public interface XmppManager {
 
   /**
    * Send message.
-   * 
+   *
    * @param room
    *          the room
    * @param message
@@ -135,7 +135,7 @@ public interface XmppManager {
 
   /**
    * Send message.
-   * 
+   *
    * @param userName
    *          the user name
    * @param message

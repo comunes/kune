@@ -30,9 +30,6 @@ import org.mvel2.templates.CompiledTemplate;
 import org.mvel2.templates.TemplateCompiler;
 import org.mvel2.templates.TemplateRuntime;
 import org.mvel2.templates.util.TemplateTools;
-import org.waveprotocol.box.server.CoreSettings;
-
-import cc.kune.common.client.log.Log;
 
 import com.google.common.base.Preconditions;
 import com.google.common.cache.CacheBuilder;
@@ -41,13 +38,15 @@ import com.google.common.cache.LoadingCache;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 import com.google.wave.splash.text.Markup;
+import com.typesafe.config.Config;
+
+import cc.kune.common.client.log.Log;
 
 // TODO: Auto-generated Javadoc
 /**
  * Handles all our html templates, loading, parsing and processing them.
- * 
+ *
  * @author dhanji@gmail.com (Dhanji R. Prasanna)
  */
 @Singleton
@@ -90,7 +89,7 @@ public class Templates {
   private final boolean productionMode = true;
   /**
    * file name of template -> compiled template lazy cache.
-   * 
+   *
    * FIXME: For new versions of guava
    * http://code.google.com/p/guava-libraries/wiki/MapMakerMigration
    */
@@ -105,15 +104,15 @@ public class Templates {
 
   /**
    * Instantiates a new templates.
-   * 
+   *
    * @param markup
    *          the markup
    * @param resourceBases
    *          the resource bases
    */
   @Inject
-  public Templates(final Markup markup,
-      @Named(CoreSettings.RESOURCE_BASES) final List<String> resourceBases) {
+  public Templates(final Markup markup, Config config) {
+    List<String> resourceBases = config.getStringList("core.resource_bases");
     this.markup = markup;
     for (final String path : resourceBases) {
       final String prefix = path + (path.endsWith(File.separator) ? "" : File.separator);
@@ -129,7 +128,7 @@ public class Templates {
 
   /**
    * Load template.
-   * 
+   *
    * @param template
    *          the template
    * @return the compiled template
@@ -154,7 +153,7 @@ public class Templates {
 
   /**
    * Opens a packaged resource from the file system.
-   * 
+   *
    * @param file
    *          The name of the file/resource to open.
    * @return An {@linkplain InputStream} to the named file, if found
@@ -175,7 +174,7 @@ public class Templates {
 
   /**
    * Loads templates if necessary.
-   * 
+   *
    * @param template
    *          Name of the template file. example: "blip.html.fragment"
    * @param context
