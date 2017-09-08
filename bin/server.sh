@@ -33,8 +33,8 @@ fi
 
 # See src/main/resources/kune.properties in svn
 KUNE_CONFIG=$KUNE_HOME/kune.properties 
-# See src/main/resources/wave-server.properties in svn
-WAVE_CONFIG=$KUNE_HOME/wave-server.properties
+# See src/main/resources/wave-server.conf in svn
+WAVE_CONFIG=$KUNE_HOME/wave-server.conf
 # See src/main/resources/jaas.config in svn
 JAAS_CONFIG=$KUNE_HOME/jaas.config
 # See src/main/resources/log4j.properties in svn
