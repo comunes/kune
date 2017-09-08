@@ -14,17 +14,19 @@
   </ciManagement>
   <properties>
     <!-- Available versions: http://repo1.maven.org/maven2/com/google/gwt/gwt-dev/ -->
-    <gwt.version>2.7.0</gwt.version>
-    <gwtmaven.version>2.7.0</gwtmaven.version>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <gwt.version>2.8.0</gwt.version>
+    <gwtmaven.version>2.8.0</gwtmaven.version>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.6.1</slf4j.version>
     <openjpa.version>2.0.1</openjpa.version>
-    <hibernate.version>4.1.2.Final</hibernate.version>
-    <wiab.version>0.3.68</wiab.version>
-    <jetty.version>9.1.1.v20140108</jetty.version>
-    <gwtp.version>1.3.1</gwtp.version>
+    <hibernate.version>4.3.11.Final</hibernate.version>
+    <wiab.version>0.4.2-SNAPSHOT</wiab.version>
+    <jetty.version>9.2.14.v20151106</jetty.version>
+    <!-- warning, wave uses guice 4.1.0 -->
+    <guice.version>3.0</guice.version>
+    <gwtp.version>1.6</gwtp.version>
     <skipTests>true</skipTests>
   </properties>
   <repositories>
@@ -88,6 +90,7 @@
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
       <version>${gwt.version}</version>
+      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
@@ -101,12 +104,11 @@
       <version>5.0.3</version>
       <scope>provided</scope>
     </dependency>
-    <!--http://mojo.codehaus.org/gwt-maven-plugin/user-guide/project.html
-      Note : Don't define gwt-dev as project dependency : this JAR only contains
-      gwt SDK tools and has many common libraries packaged that may conflict with
-      the ones defined for your project, resulting in uncomprehensible NoSuchMethodErrors.
-      The gwt-maven-plugin will automagically resolve the required dependency and
-      add it to classpath when lauching GWT tools. -->
+    <!-- https://gwt-maven-plugin.github.io/gwt-maven-plugin/faq.html gwt-dev
+      JAR includes many libraries, including some Apache commons-*. You may use
+      such libs in your project with other recent version. Don't define gwt-dev
+      as a dependency, the plugin will resolve it when necessary for you based
+      on your gwt-user version. -->
     <!-- <dependency> -->
     <!-- <groupId>com.google.gwt</groupId> -->
     <!-- <artifactId>gwt-dev</artifactId> -->
@@ -117,30 +119,29 @@
     <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
-      <!-- <version>2.1-SNAPSHOT-r1160</version> -->
-      <version>3.0</version>
+      <version>${guice.version}</version>
     </dependency>
     <!-- <dependency> <groupId>com.googlecode.gwt.inject</groupId> <artifactId>gin</artifactId>
       <version>gin-1.1-SNAPSHOT</version> </dependency> -->
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-servlet</artifactId>
-      <version>3.0</version>
+      <version>${guice.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-persist</artifactId>
-      <version>3.0</version>
+      <version>${guice.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-assistedinject</artifactId>
-      <version>3.0</version>
+      <version>${guice.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.inject.extensions</groupId>
       <artifactId>guice-grapher</artifactId>
-      <version>3.0</version>
+      <version>${guice.version}</version>
     </dependency>
     <dependency>
       <groupId>com.extjs</groupId>
@@ -241,7 +242,18 @@
     <dependency>
       <groupId>org.igniterealtime.smack</groupId>
       <artifactId>smack-java7</artifactId>
-      <version>4.1.0-alpha1</version>
+      <version>4.2.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.igniterealtime.smack</groupId>
+      <artifactId>smack-tcp</artifactId>
+      <version>4.2.1</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.igniterealtime.smack/smack-extensions -->
+    <dependency>
+      <groupId>org.igniterealtime.smack</groupId>
+      <artifactId>smack-extensions</artifactId>
+      <version>4.2.1</version>
     </dependency>
     <!-- mysql -->
     <dependency>
@@ -268,7 +280,7 @@
     <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-entitymanager</artifactId>
-      <version>4.1.2.Final</version>
+      <version>${hibernate.version}</version>
     </dependency>
     <dependency>
       <groupId>org.hibernate</groupId>
@@ -332,7 +344,12 @@
     <dependency>
       <groupId>commons-collections</groupId>
       <artifactId>commons-collections</artifactId>
-      <version>3.2</version>
+      <version>3.2.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-configuration</groupId>
+      <artifactId>commons-configuration</artifactId>
+      <version>1.6</version>
     </dependency>
     <!-- File upload -->
     <dependency>
@@ -343,7 +360,7 @@
     <dependency>
       <groupId>commons-io</groupId>
       <artifactId>commons-io</artifactId>
-      <version>1.3.1</version>
+      <version>2.4</version>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>
@@ -357,9 +374,14 @@
       </exclusions>
     </dependency>
     <dependency>
+      <groupId>commons-httpclient</groupId>
+      <artifactId>commons-httpclient</artifactId>
+      <version>3.1</version>
+    </dependency>
+    <dependency>
       <groupId>commons-fileupload</groupId>
       <artifactId>commons-fileupload</artifactId>
-      <version>1.2</version>
+      <version>1.3.2</version>
     </dependency>
     <!-- db upgrades -->
     <dependency>
@@ -432,24 +454,25 @@
     <!-- wave -->
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>proto-msg</artifactId>
+      <!-- <artifactId>proto-msg</artifactId> -->
+      <artifactId>proto</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>client-common</artifactId>
+      <artifactId>clientcommon</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>client-common-src</artifactId>
+      <artifactId>clientcommon-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>
       <!-- Needs some migration http://code.google.com/p/guava-libraries/wiki/MapMakerMigration -->
-      <version>15.0</version>
+      <version>20.0</version>
     </dependency>
     <dependency>
       <groupId>com.google.gxp</groupId>
@@ -468,12 +491,12 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>wave-in-a-box-server-0.4.0</artifactId>
+      <artifactId>server</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>gwt-util-src</artifactId>
+      <artifactId>gwtutil-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -488,12 +511,12 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>wave-api-0.4.0</artifactId>
+      <artifactId>api</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>wave-api-0.4.0-src</artifactId>
+      <artifactId>api-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -538,12 +561,12 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>client-scheduler</artifactId>
+      <artifactId>clientscheduler</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>client-scheduler-src</artifactId>
+      <artifactId>clientscheduler-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
@@ -556,7 +579,13 @@
       <artifactId>communication-src</artifactId>
       <version>${wiab.version}</version>
     </dependency>
+    <dependency>
+      <groupId>org.waveprotocol</groupId>
+      <artifactId>pst</artifactId>
+      <version>${wiab.version}</version>
+    </dependency>
     <!-- end wave -->
+    <!-- other wave dependencies -->
     <dependency>
       <groupId>commons-cli</groupId>
       <artifactId>commons-cli</artifactId>
@@ -566,7 +595,7 @@
     <dependency>
       <groupId>commons-codec</groupId>
       <artifactId>commons-codec</artifactId>
-      <version>1.4</version>
+      <version>1.10</version>
       <type>jar</type>
     </dependency>
     <!-- splash -->
@@ -580,6 +609,13 @@
       <artifactId>mvel2</artifactId>
       <version>2.0.16</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.typesafe/config -->
+    <dependency>
+      <groupId>com.typesafe</groupId>
+      <artifactId>config</artifactId>
+      <version>1.2.1</version>
+    </dependency>
+    <!-- end: other wave dependencies -->
     <!-- gwtupload -->
     <dependency>
       <groupId>com.googlecode.gwtupload</groupId>
@@ -623,15 +659,16 @@
     <dependency>
       <groupId>com.googlecode.gwtquery</groupId>
       <artifactId>gwtquery</artifactId>
-      <version>1.4.2</version>
+      <version>1.5-SNAPSHOT</version>
+      <!-- https://oss.sonatype.org/content/repositories/snapshots/com/googlecode/gwtquery/gwtquery/ -->
       <!-- If you are using old versions of gwt, uncomment the appropriate
         line <classifier>2.1.0</classifier> -->
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.watopi</groupId>
+      <groupId>com.arcbees</groupId>
       <artifactId>gwtchosen</artifactId>
-      <version>1.1.0</version>
+      <version>3.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -639,12 +676,6 @@
       <artifactId>gwtrpccommlayer</artifactId>
       <version>0.0.1</version>
     </dependency>
-    <!-- jetty -->
-    <!-- <dependency> -->
-    <!-- <groupId>org.eclipse.jetty</groupId> -->
-    <!-- <artifactId>jetty-continuation</artifactId> -->
-    <!-- <version>${jetty.version}</version> -->
-    <!-- </dependency> -->
     <dependency>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-release-plugin</artifactId>
@@ -816,7 +847,7 @@
             <!-- </systemProperty> -->
             <systemProperty>
               <key>wave.server.config</key>
-              <value>src/main/resources/wave-server.properties</value>
+              <value>src/main/resources/wave-server.conf</value>
             </systemProperty>
             <systemProperty>
               <key>log4j.configuration</key>
@@ -853,11 +884,11 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>2.5.1</version>
+        <version>3.6.2</version>
         <configuration>
           <compilerId>eclipse</compilerId>
-          <source>1.7</source>
-          <target>1.7</target>
+          <source>1.8</source>
+          <target>1.8</target>
           <!-- Uncomment and run mvn with -X -e if we have same compile problems
             <compilerArgument>-verbose</compilerArgument> <fork>true</fork> <verbose>true</verbose> -->
           <optimize>true</optimize>
@@ -867,29 +898,10 @@
             <!-- Use eclipse compiler -->
             <groupId>org.codehaus.plexus</groupId>
             <artifactId>plexus-compiler-eclipse</artifactId>
-            <version>1.9.1</version>
+            <version>2.8.2</version>
             <scope>runtime</scope>
           </dependency>
         </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-toolchains-plugin</artifactId>
-        <version>1.1</version>
-        <executions>
-          <execution>
-            <goals>
-              <goal>toolchain</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <toolchains>
-            <jdk>
-              <version>1.7</version>
-            </jdk>
-          </toolchains>
-        </configuration>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
