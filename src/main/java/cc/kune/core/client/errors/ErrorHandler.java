@@ -68,7 +68,8 @@ public class ErrorHandler {
    * Go home.
    */
   private void goHome() {
-    GoHomeEvent.fire(EventBusInstance.get());
+    // Disabled for now:
+    // GoHomeEvent.fire(EventBusInstance.get());
   }
 
   /**
