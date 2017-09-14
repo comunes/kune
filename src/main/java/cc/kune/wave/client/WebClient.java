@@ -516,8 +516,8 @@ public class WebClient extends Composite implements WaveClientView {
    */
   // XXX check formatting wrt GPE
   private native String getWebSocketBaseUrl() /*-{
-		return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
-				+ $wnd.__websocket_address + "/";
+    return ((window.location.protocol == "https:") ? "wss" : "ws") + "://"
+        + $wnd.__websocket_address + "/";
   }-*/;
   /* (non-Javadoc)
    * @see cc.kune.wave.client.kspecific.WaveClientView#login()
@@ -610,7 +610,7 @@ public class WebClient extends Composite implements WaveClientView {
             // PolymerUtils.hideInboxCancel();;
             // Not a group content
             SpaceSelectEvent.fire(eventBus, Space.userSpace);
-            if (currentOpenedWaveUri.equals(waveUri)) {
+            if (currentOpenedWaveUri != null && currentOpenedWaveUri.equals(waveUri)) {
               // Trying to open twice, skip for the first time...
               cc.kune.common.client.log.Log.info("Trying to open the same wave twice");
               currentOpenedWaveUri = null;
@@ -784,7 +784,7 @@ public class WebClient extends Composite implements WaveClientView {
    * @return true, if successful
    */
   private native boolean webSocketNotSupported() /*-{
-		return !window.WebSocket
+    return !window.WebSocket
   }-*/;
 
 
