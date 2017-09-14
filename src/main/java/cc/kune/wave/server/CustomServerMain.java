@@ -25,7 +25,6 @@ import java.io.File;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.SystemConfiguration;
-import org.apache.wave.box.server.rpc.InitialsAvatarsServlet;
 import org.waveprotocol.box.common.comms.WaveClientRpc.ProtocolWaveClientRpc;
 import org.waveprotocol.box.server.CoreSettingsNames;
 import org.waveprotocol.box.server.ServerModule;
@@ -89,6 +88,7 @@ import com.google.inject.name.Names;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
+import cc.kune.initials.InitialsAvatarsServlet;
 import cc.kune.wave.server.search.CustomSearchModule;
 
 /**
