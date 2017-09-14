@@ -22,8 +22,11 @@
  */
 package cc.kune.core.server.users;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
@@ -84,15 +87,20 @@ public class UserInfoServiceDefault implements UserInfoService {
   @Inject
   public UserInfoServiceDefault(final SocialNetworkManager socialNetwork,
       final SessionManager waveSessionManager, final WaveClientServlet waveClientServlet,
-      final GroupManager groupManager, final UserSignInLogFinder userSignInLogFinder,
-      Config config) {
+      final GroupManager groupManager, final UserSignInLogFinder userSignInLogFinder, Config config) {
     this.socialNetworkManager = socialNetwork;
     this.waveSessionManager = waveSessionManager;
     this.waveClientServlet = waveClientServlet;
     this.groupManager = groupManager;
     this.userSignInLogFinder = userSignInLogFinder;
+
     String websocketAddress = config.getString("core.http_websocket_public_address");
-    this.websocketAddress = websocketAddress;
+    List<String> httpAddresses = config.getStringList("core.http_frontend_addresses");
+    String websocketPresentedAddress = config.getString("core.http_websocket_presented_address");
+
+    this.websocketAddress = StringUtils.isEmpty(websocketPresentedAddress)
+        ? StringUtils.isEmpty(websocketAddress) ? httpAddresses.get(0) : websocketAddress
+        : websocketPresentedAddress;
   }
 
   /*
@@ -116,7 +124,8 @@ public class UserInfoServiceDefault implements UserInfoService {
 
       final Group userGroup = user.getUserGroup();
 
-      userInfo.setGroupsIsParticipating(socialNetworkManager.findParticipationAggregated(user, userGroup));
+      userInfo.setGroupsIsParticipating(
+          socialNetworkManager.findParticipationAggregated(user, userGroup));
       final ParticipationData participation = socialNetworkManager.findParticipation(user, userGroup);
       userInfo.setGroupsIsAdmin(participation.getGroupsIsAdmin());
       userInfo.setGroupsIsCollab(participation.getGroupsIsCollab());
