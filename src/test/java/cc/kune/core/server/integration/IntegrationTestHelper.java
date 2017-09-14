@@ -28,16 +28,12 @@ import java.io.File;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.mockito.Mockito;
 import org.waveprotocol.box.server.CoreSettingsNames;
 import org.waveprotocol.box.server.SearchModule;
 import org.waveprotocol.box.server.ServerModule;
 import org.waveprotocol.box.server.StatModule;
 import org.waveprotocol.box.server.executor.ExecutorsModule;
-import org.waveprotocol.box.server.persistence.PersistenceException;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
 import org.waveprotocol.box.server.robots.ProfileFetcherModule;
 import org.waveprotocol.box.server.robots.RobotApiModule;
@@ -77,7 +73,6 @@ import cc.kune.lists.server.ListsServerModule;
 import cc.kune.tasks.server.TaskServerModule;
 import cc.kune.trash.server.TrashServerModule;
 import cc.kune.wave.server.kspecific.KuneWaveServerUtils;
-import cc.kune.wave.server.search.CustomSearchModule;
 import cc.kune.wiki.server.WikiServerModule;
 
 // TODO: Auto-generated Javadoc
@@ -101,11 +96,16 @@ public class IntegrationTestHelper {
     Module coreSettings = new AbstractModule() {
       @Override
       protected void configure() {
-        Config config = ConfigFactory.load().withFallback(
-            ConfigFactory.parseFile(new File(TestConstants.WAVE_TEST_PROPFILE)));
-        bind(Config.class).toInstance(config);
-        bind(Key.get(String.class, Names.named(CoreSettingsNames.WAVE_SERVER_DOMAIN))).toInstance(
-            config.getString("core.wave_server_domain"));
+        File testConf = new File("src/main/resources/" + TestConstants.WAVE_TEST_PROPFILE);
+        if (testConf.exists() && !testConf.isDirectory()) {
+          Config config = ConfigFactory.load().withFallback(ConfigFactory.parseFile(testConf));
+          bind(Config.class).toInstance(config);
+          String waveDomain = config.getString("core.wave_server_domain");
+          bind(Key.get(String.class, Names.named(CoreSettingsNames.WAVE_SERVER_DOMAIN))).toInstance(
+              waveDomain);
+        } else {
+          System.err.print("Test configuration not found");
+        }
       }
     };
     parentInjector = Guice.createInjector(coreSettings);
