@@ -459,7 +459,7 @@ public class WebClient extends Composite implements WaveClientView {
    * Creates the web socket.
    */
   private void createWebSocket() {
-    websocket = new WaveWebSocketClient(webSocketNotSupported() || kuneSession.isEmbedded(), getWebSocketBaseUrl());
+    websocket = new WaveWebSocketClient(webSocketNotSupported(), getWebSocketBaseUrl());
     websocket.connect();
   }
 
