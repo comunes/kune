@@ -366,7 +366,7 @@ public class XmppManagerDefault implements XmppManager {
   @Override
   public void sendMessage(final String userName, final String text, SecurityMode securityMode) {
     final ChatConnection connection = login(chatProperties.getAdminJID(),
-        chatProperties.getAdminPasswd(), "kuneserveradmin" + System.currentTimeMillis());
+        chatProperties.getAdminPasswd(), "kuneserveradmin" + System.currentTimeMillis(), false, securityMode);
     final AbstractXMPPConnection xmppConn = ((XmppConnection) connection).getConn();
     try {
       EntityBareJid userJid = JidCreate.entityBareFrom(userName + "@" + chatProperties.getDomain());
