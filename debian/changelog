@@ -1,5 +1,6 @@
-kune (1.0.1+b27) unstable; urgency=medium
+kune (1.0.2+b1) unstable; urgency=medium
 
+  * Updated gwt to 1.8 and java 8
   * Workaround WAVE-446. PR by pablojan.
     https://github.com/apache/incubator-wave/pull/24
 
@@ -40,6 +41,7 @@ kune (1.0.1+b22) unstable; urgency=medium
   * Small style fix for some icons
   * Tooltips.hide fix when uninitialized
   * Close wave index at jetty stop
+
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Mon, 04 Apr 2016 16:55:27 +0200
 
