@@ -48,7 +48,7 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class TagUserContentManagerDefault.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -66,7 +66,7 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /**
    * Instantiates a new tag user content manager default.
-   * 
+   *
    * @param provider
    *          the provider
    * @param tagManager
@@ -85,7 +85,7 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /**
    * Find.
-   * 
+   *
    * @param user
    *          the user
    * @param content
@@ -98,29 +98,29 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /**
    * Gets the max count.
-   * 
+   *
    * @param group
    *          the group
    * @return the max count
    */
   private int getMaxCount(final Group group) {
-    return finder.getMaxGrouped(group).intValue();
+    return finder.getMaxGrouped(group, 0, 1).intValue();
   }
 
   /**
    * Gets the min count.
-   * 
+   *
    * @param group
    *          the group
    * @return the min count
    */
   private int getMinCount(final Group group) {
-    return finder.getMinGrouped(group).intValue();
+    return finder.getMinGrouped(group, 0, 1).intValue();
   }
 
   /**
    * Gets the summary by group.
-   * 
+   *
    * @param group
    *          the group
    * @return the summary by group
@@ -131,7 +131,7 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.TagUserContentManager#getTagCloudResultByGroup
    * (cc.kune.domain.Group)
@@ -147,7 +147,7 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.TagUserContentManager#getTagsAsString(cc.kune
    * .domain.User, cc.kune.domain.Content)
@@ -167,7 +167,7 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.TagUserContentManager#remove(cc.kune.domain
    * .User, cc.kune.domain.Content)
@@ -181,7 +181,7 @@ public class TagUserContentManagerDefault extends DefaultManager<TagUserContent,
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.manager.TagUserContentManager#setTags(cc.kune.domain
    * .User, cc.kune.domain.Content, java.lang.String)

@@ -25,6 +25,11 @@ package cc.kune.domain.finders;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.inject.name.Named;
+import com.google.inject.persist.finder.Finder;
+import com.google.inject.persist.finder.FirstResult;
+import com.google.inject.persist.finder.MaxResults;
+
 import cc.kune.core.shared.domain.TagCount;
 import cc.kune.domain.Content;
 import cc.kune.domain.Group;
@@ -32,20 +37,17 @@ import cc.kune.domain.Tag;
 import cc.kune.domain.TagUserContent;
 import cc.kune.domain.User;
 
-import com.google.inject.name.Named;
-import com.google.inject.persist.finder.Finder;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Interface TagUserContentFinder.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface TagUserContentFinder {
 
   /**
    * Find.
-   * 
+   *
    * @param user
    *          the user
    * @param content
@@ -58,7 +60,7 @@ public interface TagUserContentFinder {
 
   /**
    * Find tags.
-   * 
+   *
    * @param user
    *          the user
    * @param content
@@ -70,27 +72,27 @@ public interface TagUserContentFinder {
 
   /**
    * Gets the max grouped.
-   * 
+   *
    * @param group
    *          the group
    * @return the max grouped
    */
-  @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) ASC LIMIT 0,1")
-  public Long getMaxGrouped(@Named("group") final Group group);
+  @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) ASC")
+  public Long getMaxGrouped(@Named("group") final Group group, @FirstResult final int first, @MaxResults final int limit);
 
   /**
    * Gets the min grouped.
-   * 
+   *
    * @param group
    *          the group
    * @return the min grouped
    */
-  @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) DESC LIMIT 0,1")
-  public Long getMinGrouped(@Named("group") final Group group);
+  @Finder(query = "SELECT Count(tuc.content.id) FROM TagUserContent tuc JOIN tuc.tag t WHERE tuc.content.container.owner = :group GROUP BY t.name ORDER BY count(*) DESC")
+  public Long getMinGrouped(@Named("group") final Group group, @FirstResult final int first, @MaxResults final int limit);
 
   /**
    * Gets the tags groups.
-   * 
+   *
    * @param group
    *          the group
    * @return the tags groups
