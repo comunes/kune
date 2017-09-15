@@ -22,126 +22,138 @@
  */
 package cc.kune.core.server.auth.openfire;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.net.URL;
-import java.util.Properties;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jivesoftware.openfire.auth.AuthProvider;
-import org.jivesoftware.openfire.auth.ConnectionException;
-import org.jivesoftware.openfire.auth.InternalUnauthenticatedException;
 import org.jivesoftware.openfire.auth.UnauthorizedException;
 import org.jivesoftware.openfire.user.UserNotFoundException;
-import org.waveprotocol.box.server.CoreSettings;
+
+import com.googlecode.gwtrpccommlayer.client.GwtRpcService;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 
 import cc.kune.core.client.rpcservices.UserService;
 
-import com.googlecode.gwtrpccommlayer.client.GwtRpcService;
-
 public class KuneAuthProvider implements AuthProvider {
 
-    public static final Log LOG = LogFactory.getLog(KuneAuthProvider.class);
-    private static final String USER_NOT_LOGGED = "User \'%s\' authentication failed";
+  public static final Log LOG = LogFactory.getLog(KuneAuthProvider.class);
+  private static final String USER_NOT_LOGGED = "User \'%s\' authentication failed";
 
-    public static void main(final String[] args) throws UnauthorizedException {
-	if (args.length == 4) {
-	    final String publicUrl = args[0];
-	    final String ssl = args[1];
-	    final String user = args[2];
-	    final String pass = args[3];
-	    final KuneAuthProvider auth = new KuneAuthProvider(publicUrl, ssl);
-	    auth.authenticate(user, pass);
-	} else {
-	    LOG.error("Params: <public address:port> <useSsl> <user> <pass>");
-	}
+  public static void main(final String[] args) throws UnauthorizedException {
+    if (args.length == 4) {
+      final String publicUrl = args[0];
+      final Boolean ssl = Boolean.parseBoolean(args[1]);
+      final String user = args[2];
+      final String pass = args[3];
+      final KuneAuthProvider auth = new KuneAuthProvider(publicUrl, ssl);
+      auth.authenticate(user, pass);
+    } else {
+      LOG.error("Params: <public address:port> <useSsl> <user> <pass>");
+    }
+  }
+
+  private UserService userService;
+
+  public KuneAuthProvider() {
+    final InputStream is = this.getClass().getClassLoader().getResourceAsStream("wave-server.conf");
+    final Reader reader = new InputStreamReader(is);
+    final Config config = ConfigFactory.load().withFallback(ConfigFactory.parseReader(reader));
+
+    // LOG.error("Error openning property files");
+    // FIXME! these can be multiple address
+    final List<String> httpAddresses = config.getStringList("core.http_frontend_addresses");
+    if (httpAddresses.size() == 0) {
+      LOG.error("Error reading public address");
+    } else {
+      final String publicAddress = httpAddresses.get(0);
+      final Boolean ssl = config.getBoolean("security.enable_ssl");
+      createService(publicAddress, ssl);
     }
 
-    private UserService userService;
+  }
 
-    public KuneAuthProvider() {
-	final Properties prop = new Properties();
-	try {
-	    final InputStream is = this.getClass().getClassLoader()
-		    .getResourceAsStream("wave-server.properties");
-	    prop.load(is);
-	} catch (final IOException e) {
-	    LOG.error("Error openning property files", e);
-	}
-	// FIXME! these can be multiple address
-	final String publicAddress = prop
-		.getProperty(CoreSettings.HTTP_FRONTEND_PUBLIC_ADDRESS);
-	final String ssl = prop.getProperty(CoreSettings.ENABLE_SSL);
-	createService(publicAddress, ssl);
+  public KuneAuthProvider(final String publicAddress, final Boolean ssl) {
+    createService(publicAddress, ssl);
+  }
+
+  @Override
+  public void authenticate(final String username, final String passwdOrToken)
+      throws UnauthorizedException {
+    try {
+      userService.checkUserAndHash(username, passwdOrToken);
+      LOG.info(String.format("User \'%s\' logged", username));
+    } catch (final Exception e) {
+      final String msg = String.format(USER_NOT_LOGGED, username);
+      LOG.warn(msg, e);
+      throw new UnauthorizedException(msg);
     }
+    LOG.info(String.format("User \'%s\' logged", username));
+  }
 
-    public KuneAuthProvider(final String publicAddress, final String ssl) {
-	createService(publicAddress, ssl);
+  private void createService(final String publicAddress, final Boolean isSSL) {
+
+    // http://googlewebtoolkit.blogspot.com.es/2010/07/gwtrpccommlayer-extending-gwt-rpc-to-do.html
+    try {
+      final URL url = new URL((isSSL ? "https" : "http") + "://" + publicAddress + "/ws/UserService");
+      LOG.info("Service access URL: " + url);
+      final GwtRpcService service = GwtRpcService.FACTORY.newInstance();
+
+      userService = service.create(url, UserService.class);
+      LOG.info("UserService created");
+    } catch (final Exception e) {
+      LOG.error("Error starting auth provider", e);
     }
+  }
 
-    @Override
-    public void authenticate(final String username, final String passwdOrToken)
-	    throws UnauthorizedException {
-	try {
-	    userService.checkUserAndHash(username, passwdOrToken);
-	    LOG.info(String.format("User \'%s\' logged", username));
-	} catch (final Exception e) {
-	    final String msg = String.format(USER_NOT_LOGGED, username);
-	    LOG.warn(msg, e);
-	    throw new UnauthorizedException(msg);
-	}
-	LOG.info(String.format("User \'%s\' logged", username));
-    }
+  @Override
+  public int getIterations(final String arg0)
+      throws UnsupportedOperationException, UserNotFoundException {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public void authenticate(final String username, final String token,
-	    final String digest) throws UnauthorizedException,
-	    ConnectionException, InternalUnauthenticatedException {
-	throw new UnsupportedOperationException();
-    }
+  @Override
+  public String getPassword(final String arg0)
+      throws UserNotFoundException, UnsupportedOperationException {
+    throw new UnsupportedOperationException();
+  }
 
-    private void createService(final String publicAddress, final String ssl) {
-	final boolean isSSL = Boolean.parseBoolean(ssl);
-	// http://googlewebtoolkit.blogspot.com.es/2010/07/gwtrpccommlayer-extending-gwt-rpc-to-do.html
-	try {
-	    final URL url = new URL((isSSL ? "https" : "http") + "://"
-		    + publicAddress + "/ws/UserService");
-	    LOG.info("Service access URL: " + url);
-	    final GwtRpcService service = GwtRpcService.FACTORY.newInstance();
+  @Override
+  public String getSalt(final String arg0) throws UnsupportedOperationException, UserNotFoundException {
+    throw new UnsupportedOperationException();
+  }
 
-	    userService = service.create(url, UserService.class);
-	    LOG.info("UserService created");
-	} catch (final Exception e) {
-	    LOG.error("Error starting auth provider", e);
-	}
-    }
+  @Override
+  public String getServerKey(final String arg0)
+      throws UnsupportedOperationException, UserNotFoundException {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public String getPassword(final String arg0) throws UserNotFoundException,
-	    UnsupportedOperationException {
-	throw new UnsupportedOperationException();
-    }
+  @Override
+  public String getStoredKey(final String arg0)
+      throws UnsupportedOperationException, UserNotFoundException {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public boolean isDigestSupported() {
-	return false;
-    }
+  @Override
+  public boolean isScramSupported() {
+    return false;
+  }
 
-    @Override
-    public boolean isPlainSupported() {
-	return true;
-    }
+  @Override
+  public void setPassword(final String arg0, final String arg1)
+      throws UserNotFoundException, UnsupportedOperationException {
+    throw new UnsupportedOperationException();
+  }
 
-    @Override
-    public void setPassword(final String arg0, final String arg1)
-	    throws UserNotFoundException, UnsupportedOperationException {
-	throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public boolean supportsPasswordRetrieval() {
-	return false;
-    }
+  @Override
+  public boolean supportsPasswordRetrieval() {
+    throw new UnsupportedOperationException();
+  }
 
 }

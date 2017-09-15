@@ -1,4 +1,10 @@
 Build the jar with:
   mvn assembly:assembly -DdescriptorId=jar-with-dependencies
 put in /usr/share/openfire/lib/
-also put there a link to the wave-server.properties configuration so it can read the server public IP/port.
+also put there a link to the wave-server.conf configuration so it can read the server public IP/port.
+
+Removing the "provided" tag in openfire dependency and generanting again the jar, we can test something like:
+```
+java -jar target/kune-openfireauth-1.0.2-SNAPSHOT-jar-with-dependencies.jar 127.0.0.1:8888 1 admin easyeasy
+```
+with a kune test server running in that port.

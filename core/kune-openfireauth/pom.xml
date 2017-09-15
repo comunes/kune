@@ -4,7 +4,7 @@
   <parent>
     <artifactId>kune-core</artifactId>
     <groupId>cc.kune</groupId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>kune-openfireauth</artifactId>
@@ -14,7 +14,10 @@
     <dependency>
       <groupId>org.igniterealtime</groupId>
       <artifactId>openfire</artifactId>
-      <version>3.10.0</version>
+      <version>4.1.5</version>
+      <!-- 4.1.5 uses java 1.8 -->
+      <!-- provided, so it's no included and our lib can be included in /usr/share/openfire/lib where openfire.jar is -->
+      <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>
@@ -30,7 +33,7 @@
     <dependency>
       <groupId>cc.kune</groupId>
       <artifactId>kune-services</artifactId>
-      <version>0.3.0-SNAPSHOT</version>    
+      <version>1.0.2-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
@@ -71,12 +74,17 @@
     <dependency>
       <groupId>com.google.inject</groupId>
       <artifactId>guice</artifactId>
-      <version>3.0</version>
+      <version>${guice.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
       <version>${gwt.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe</groupId>
+      <artifactId>config</artifactId>
+      <version>1.2.1</version>
     </dependency>
   </dependencies>
   <build>
