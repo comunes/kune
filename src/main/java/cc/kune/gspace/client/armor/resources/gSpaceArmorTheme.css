@@ -1,5 +1,3 @@
-@CHARSET "UTF-8";
-
 @eval bc1 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(0);
 @eval bc2 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(1);
 @eval bc3 cc.kune.gspace.client.themes.CurrentEntityTheme.getBackColor(2);
