@@ -200,7 +200,7 @@
     <dependency>
       <groupId>com.allen-sauer.gwt.dnd</groupId>
       <artifactId>gwt-dnd</artifactId>
-      <version>3.3.3</version>
+      <version>3.3.4</version>
       <scope>provided</scope>
     </dependency>
     <!-- utilities -->
@@ -869,7 +869,7 @@
     <dependency>
       <groupId>com.arcbees</groupId>
       <artifactId>gwtchosen</artifactId>
-      <version>3.0</version>
+      <version>3.0.1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -1454,7 +1454,7 @@
               <localWorkers>2</localWorkers>
               <!-- <localWorkers>1</localWorkers> Using all workers can temporarily
                 hang the mouse and isn't much faster -->
-              <extraJvmArgs>-Xmx3072m</extraJvmArgs>
+              <extraJvmArgs>-Xmx4096m</extraJvmArgs>
               <gwtSdkFirstInClasspath>true</gwtSdkFirstInClasspath>
             </configuration>
             <executions>
