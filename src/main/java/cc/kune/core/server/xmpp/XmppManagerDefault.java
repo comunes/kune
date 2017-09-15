@@ -30,6 +30,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jivesoftware.smack.AbstractXMPPConnection;
+import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
@@ -39,6 +40,8 @@ import org.jivesoftware.smack.chat2.ChatManager;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.roster.Roster;
 import org.jivesoftware.smack.roster.RosterEntry;
+import org.jivesoftware.smack.sasl.SASLMechanism;
+import org.jivesoftware.smack.sasl.javax.SASLDigestMD5Mechanism;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smackx.muc.MultiUserChat;
@@ -301,16 +304,24 @@ public class XmppManagerDefault implements XmppManager {
    */
   @Override
   public ChatConnection login(final String userName, final String password, final String resource) {
-   try {
-    XMPPTCPConnectionConfiguration config;
+    try {
+
+      XMPPTCPConnectionConfiguration config;
       config = XMPPTCPConnectionConfiguration.builder()
-          // .setUsernameAndPassword(userName, password)
-          .setXmppDomain(getServerName())
-          .setHost(getServerName())
-          .setPort(5222)
-          .build();
+      // .setUsernameAndPassword(userName, password)
+      .setXmppDomain(getServerName()).setHost(getServerName()).setPort(5222)
+      // .setDebuggerEnabled(true)
+      .build();
+
       AbstractXMPPConnection conn = new XMPPTCPConnection(config);
       conn.connect();
+
+      // It seems it's not necessary:
+      // SASLMechanism mechanism = new SASLDigestMD5Mechanism();
+      // SASLAuthentication.registerSASLMechanism(mechanism);
+      // SASLAuthentication.blacklistSASLMechanism("SCRAM-SHA-1");
+      // SASLAuthentication.unBlacklistSASLMechanism("DIGEST-MD5");
+
       conn.login(userName, password, Resourcepart.from(resource));
       return new XmppConnection(userName, conn);
     } catch (InterruptedException | SmackException | XMPPException | IOException e) {
@@ -351,8 +362,8 @@ public class XmppManagerDefault implements XmppManager {
         chatProperties.getAdminPasswd(), "kuneserveradmin" + System.currentTimeMillis());
     final AbstractXMPPConnection xmppConn = ((XmppConnection) connection).getConn();
     try {
-    EntityBareJid userJid = JidCreate.entityBareFrom(userName + "@" + chatProperties.getDomain());
-    Chat chat = ChatManager.getInstanceFor(xmppConn).chatWith(userJid);
+      EntityBareJid userJid = JidCreate.entityBareFrom(userName + "@" + chatProperties.getDomain());
+      Chat chat = ChatManager.getInstanceFor(xmppConn).chatWith(userJid);
       final Message message = new Message();
       message.setFrom(JidCreate.from(chatProperties.getDomain()));
       message.setTo(userJid);
