@@ -50,10 +50,11 @@ public interface XmppManager {
    * @param subject
    *          the subject
    * @return the room
- * @throws SmackException
- * @throws NoResponseException
+   * @throws SmackException
+   * @throws NoResponseException
    */
-  Room createRoom(ChatConnection connection, String roomName, String ownerAlias, String subject) throws NoResponseException, SmackException;
+  Room createRoom(ChatConnection connection, String roomName, String ownerAlias, String subject)
+      throws NoResponseException, SmackException;
 
   /**
    * Destroy room.
@@ -62,10 +63,11 @@ public interface XmppManager {
    *          the conn
    * @param roomName
    *          the room name
- * @throws NotConnectedException
- * @throws NoResponseException
+   * @throws NotConnectedException
+   * @throws NoResponseException
    */
-  void destroyRoom(ChatConnection conn, String roomName) throws NoResponseException, NotConnectedException;
+  void destroyRoom(ChatConnection conn, String roomName)
+      throws NoResponseException, NotConnectedException;
 
   /**
    * Disconnect.
@@ -105,10 +107,11 @@ public interface XmppManager {
    * @param alias
    *          the alias
    * @return the room
- * @throws NotConnectedException
- * @throws NoResponseException
+   * @throws NotConnectedException
+   * @throws NoResponseException
    */
-  Room joinRoom(ChatConnection connection, String roomName, String alias) throws NoResponseException, NotConnectedException;
+  Room joinRoom(ChatConnection connection, String roomName, String alias)
+      throws NoResponseException, NotConnectedException;
 
   /**
    * Login.
@@ -122,6 +125,21 @@ public interface XmppManager {
    * @return the chat connection
    */
   ChatConnection login(String userName, String password, String resource);
+
+  /**
+   * Login.
+   *
+   * @param userName
+   *          the user name
+   * @param password
+   *          the password
+   * @param resource
+   *          the resource
+   * @param debug
+   *          if the connection should be debugged
+   * @return the chat connection
+   */
+  ChatConnection login(String userName, String password, String resource, boolean debug);
 
   /**
    * Send message.

@@ -30,7 +30,6 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jivesoftware.smack.AbstractXMPPConnection;
-import org.jivesoftware.smack.SASLAuthentication;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
@@ -40,8 +39,6 @@ import org.jivesoftware.smack.chat2.ChatManager;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.roster.Roster;
 import org.jivesoftware.smack.roster.RosterEntry;
-import org.jivesoftware.smack.sasl.SASLMechanism;
-import org.jivesoftware.smack.sasl.javax.SASLDigestMD5Mechanism;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.jivesoftware.smack.tcp.XMPPTCPConnectionConfiguration;
 import org.jivesoftware.smackx.muc.MultiUserChat;
@@ -91,13 +88,11 @@ public class XmppManagerDefault implements XmppManager {
   /**
    * Configure.
    *
-   * @param muc
-   *          the muc
-   * @throws XMPPException
-   *           the xMPP exception
-   * @throws NotConnectedException
-   * @throws NoResponseException
-   * @throws InterruptedException
+   * @param muc          the muc
+   * @throws XMPPException           the xMPP exception
+   * @throws NoResponseException the no response exception
+   * @throws NotConnectedException the not connected exception
+   * @throws InterruptedException the interrupted exception
    */
   private void configure(final MultiUserChat muc)
       throws XMPPException, NoResponseException, NotConnectedException, InterruptedException {
@@ -296,21 +291,24 @@ public class XmppManagerDefault implements XmppManager {
     }
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see cc.kune.core.server.xmpp.XmppManager#login(java.lang.String,
-   * java.lang.String, java.lang.String)
+
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.xmpp.XmppManager#login(java.lang.String, java.lang.String, java.lang.String)
    */
   @Override
   public ChatConnection login(final String userName, final String password, final String resource) {
-    try {
+    return login(userName, password, resource, false);
+  }
 
+
+  @Override
+  public ChatConnection login(final String userName, final String password, final String resource, boolean debug) {
+    try {
       XMPPTCPConnectionConfiguration config;
       config = XMPPTCPConnectionConfiguration.builder()
       // .setUsernameAndPassword(userName, password)
       .setXmppDomain(getServerName()).setHost(getServerName()).setPort(5222)
-      // .setDebuggerEnabled(true)
+      .setDebuggerEnabled(debug)
       .build();
 
       AbstractXMPPConnection conn = new XMPPTCPConnection(config);
@@ -350,11 +348,8 @@ public class XmppManagerDefault implements XmppManager {
     }
   }
 
-  /*
-   * (non-Javadoc)
-   *
-   * @see cc.kune.core.server.xmpp.XmppManager#sendMessage(java.lang.String,
-   * java.lang.String)
+  /* (non-Javadoc)
+   * @see cc.kune.core.server.xmpp.XmppManager#sendMessage(java.lang.String, java.lang.String)
    */
   @Override
   public void sendMessage(final String userName, final String text) {
