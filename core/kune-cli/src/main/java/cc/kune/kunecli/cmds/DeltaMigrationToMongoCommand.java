@@ -19,28 +19,27 @@
 
 package cc.kune.kunecli.cmds;
 
-import java.lang.reflect.Field;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.configuration.SystemConfiguration;
 import org.naturalcli.Command;
 import org.naturalcli.ExecutionException;
 import org.naturalcli.ICommandExecutor;
 import org.naturalcli.InvalidSyntaxException;
 import org.naturalcli.ParseResult;
-import org.waveprotocol.box.server.CoreSettings;
 import org.waveprotocol.box.server.persistence.PersistenceModule;
 import org.waveprotocol.box.server.waveserver.DeltaStore;
 import org.waveprotocol.wave.util.logging.Log;
-import org.waveprotocol.wave.util.settings.Setting;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
-import com.google.inject.Key;
 import com.google.inject.Module;
-import com.google.inject.name.Names;
+import com.typesafe.config.Config;
+import com.typesafe.config.ConfigFactory;
 
 /**
  * A cmd line utility to perform data migration from a store type to another
@@ -80,94 +79,29 @@ public class DeltaMigrationToMongoCommand extends Command {
   private static final Log LOG = Log.get(DeltaMigrationToMongoCommand.class);
 
   private static Module bindCmdLineSettings(final String cmdLineProperties) {
-
     // Get settings from cmd line, e.g.
     // Key = delta_store_type
     // Value = mongodb
-    final Map<String, String> propertyMap = new HashMap<String, String>();
+    final Map<String, String> propertyMap = new HashMap<>();
 
     for (final String arg : cmdLineProperties.split(",")) {
       final String[] argTokens = arg.split("=");
       propertyMap.put(argTokens[0], argTokens[1]);
     }
 
-    // Validate settings against CoreSettings
-    final Map<Setting, Field> coreSettings = getCoreSettings();
-
-    // Set a suitable map to match cmd line settings
-    final Map<String, Setting> propertyToSettingMap = new HashMap<String, Setting>();
-    for (final Setting s : coreSettings.keySet()) {
-      propertyToSettingMap.put(s.name(), s);
-    }
-
-    for (final String propertyKey : propertyMap.keySet()) {
-      if (!propertyToSettingMap.containsKey(propertyKey)) {
-        usageError("Wrong setting '" + propertyKey + "'");
-      }
-    }
-
     return new AbstractModule() {
 
       @Override
       protected void configure() {
-
-        // We must iterate the settings when binding.
-        // Note: do not collapse these loops as that will damage
-        // early error detection. The runtime is still O(n) in setting count.
-        for (final Map.Entry<Setting, Field> entry : coreSettings.entrySet()) {
-
-          final Setting setting = entry.getKey();
-          final Class<?> type = entry.getValue().getType();
-          final String value = propertyMap.containsKey(setting.name()) ? propertyMap.get(setting.name())
-              : setting.defaultValue();
-          if (int.class.equals(type)) {
-            // Integer defaultValue = null;
-            // if (!setting.defaultValue().isEmpty()) {
-            // defaultValue = Integer.parseInt(setting.defaultValue());
-            // }
-            bindConstant().annotatedWith(Names.named(setting.name())).to(Integer.parseInt(value));
-          } else if (boolean.class.equals(type)) {
-            // Boolean defaultValue = null;
-            // if (!setting.defaultValue().isEmpty()) {
-            // defaultValue = Boolean.parseBoolean(setting.defaultValue());
-            // }
-            bindConstant().annotatedWith(Names.named(setting.name())).to(Boolean.parseBoolean(value));
-          } else if (String.class.equals(type)) {
-            bindConstant().annotatedWith(Names.named(setting.name())).to(value);
-          } else {
-            /** Not supported **/
-            /*
-             * String[] value = config.getStringArray(setting.name()); if
-             * (value.length == 0 && !setting.defaultValue().isEmpty()) { value
-             * = setting.defaultValue().split(","); } bind(new
-             * TypeLiteral<List<String>>()
-             * {}).annotatedWith(Names.named(setting.name()))
-             * .toInstance(ImmutableList.copyOf(value));
-             */
-          }
-        }
+        final SystemConfiguration sysConf = new SystemConfiguration();
+        final String waveConfig = sysConf.getString("wave.server.config");
+        final Config config = ConfigFactory.load().withFallback(
+            ConfigFactory.parseFile(new File("custom-" + waveConfig)).withFallback(
+                ConfigFactory.parseFile(new File("reference.conf"))));
+        bind(Config.class).toInstance(ConfigFactory.parseMap(propertyMap).withFallback(config));
       }
 
     };
-
-  }
-
-  private static Map<Setting, Field> getCoreSettings() {
-
-    // Get all method fields
-    final Field[] coreSettingFields = CoreSettings.class.getDeclaredFields();
-
-    // Filter only annotated fields
-    final Map<Setting, Field> settings = new HashMap<Setting, Field>();
-
-    for (final Field f : coreSettingFields) {
-      if (f.isAnnotationPresent(Setting.class)) {
-        final Setting setting = f.getAnnotation(Setting.class);
-        settings.put(setting, f);
-      }
-    }
-
-    return settings;
 
   }
 
@@ -177,13 +111,11 @@ public class DeltaMigrationToMongoCommand extends Command {
 
   private static void runDeltasMigration(final Injector sourceInjector, final Injector targetInjector) {
 
-    // We can migrate data from-to any store type,
-    // but it is not allowed migrate from-to the same type
-    final String sourceDeltaStoreType = sourceInjector.getInstance(
-        Key.get(String.class, Names.named(CoreSettings.DELTA_STORE_TYPE)));
+    final String sourceDeltaStoreType = sourceInjector.getInstance(Config.class).getString(
+        "core.delta_store_type");
 
-    final String targetDeltaStoreType = targetInjector.getInstance(
-        Key.get(String.class, Names.named(CoreSettings.DELTA_STORE_TYPE)));
+    final String targetDeltaStoreType = targetInjector.getInstance(Config.class).getString(
+        "core.delta_store_type");
 
     if (sourceDeltaStoreType.equalsIgnoreCase(targetDeltaStoreType)) {
       usageError("Source and Target Delta store types must be different");

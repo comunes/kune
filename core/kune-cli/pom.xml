@@ -4,7 +4,7 @@
   <parent>
     <artifactId>kune-core</artifactId>
     <groupId>cc.kune</groupId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <relativePath>..</relativePath>
   </parent>
   <artifactId>kune-cli</artifactId>
@@ -37,7 +37,7 @@
     <dependency>
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-user</artifactId>
-      <version>2.7.0</version>
+      <version>${gwt.version}</version>
     </dependency>
     <dependency>
       <groupId>org.naturalcli</groupId>
@@ -52,7 +52,7 @@
     <dependency>
       <groupId>cc.kune</groupId>
       <artifactId>kune-services</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>${kune.services}</version>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>
@@ -64,16 +64,6 @@
       <artifactId>junit</artifactId>
       <version>4.9</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.0.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpcore</artifactId>
-      <version>4.0.1</version>
     </dependency>
     <dependency>
       <groupId>com.google.inject</groupId>
@@ -127,24 +117,28 @@
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>crypto-src</artifactId>
-      <version>${wiab.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.waveprotocol</groupId>
       <artifactId>proto</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>org.waveprotocol</groupId>
-      <artifactId>wave-in-a-box-server-0.4.0</artifactId>
+      <artifactId>server</artifactId>
       <version>${wiab.version}</version>
     </dependency>
     <dependency>
       <groupId>com.google.guava</groupId>
       <artifactId>guava-gwt</artifactId>
-      <!-- Needs some migration http://code.google.com/p/guava-libraries/wiki/MapMakerMigration -->
-      <version>15.0</version>
+      <version>${guava.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.typesafe</groupId>
+      <artifactId>config</artifactId>
+      <version>${typesafe.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-configuration</groupId>
+      <artifactId>commons-configuration</artifactId>
+      <version>1.6</version>
     </dependency>
     <dependency>
       <groupId>mysql</groupId>
