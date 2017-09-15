@@ -177,7 +177,7 @@ public class XmppManagerDefaultTest {
   @Test
   public void testGetRoster() {
     final ChatConnection handler = manager.login("admin", "easyeasy", "test", true,
-        SecurityMode.ifpossible);
+        SecurityMode.disabled);
     assertNotNull(manager.getRoster(handler));
   }
 
@@ -186,7 +186,7 @@ public class XmppManagerDefaultTest {
    */
   @Test
   public void testSendMessage() {
-    manager.sendMessage("admin", "test message", SecurityMode.ifpossible);
+    manager.sendMessage("admin", "test message", SecurityMode.disabled);
   }
 
   /**
@@ -194,6 +194,6 @@ public class XmppManagerDefaultTest {
    */
   @Test(expected = ChatException.class)
   public void testUserDontExist() {
-    manager.login("user", "password", "test", true, SecurityMode.ifpossible);
+    manager.login("user", "password", "test", true, SecurityMode.disabled);
   }
 }
