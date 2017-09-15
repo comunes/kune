@@ -95,11 +95,6 @@ import cc.kune.wave.server.search.CustomSearchModule;
  * Wave Server entrypoint.
  */
 public class CustomServerMain {
-  /**
-  * This is the name of the system property used to find the server config file.
-  */
-  private static final String WAVE_CONF_FILE_KEY = "wave.server.config";
-
   private static final Log LOG = Log.get(CustomServerMain.class);
 
   public static void main(String... args) {
@@ -110,7 +105,7 @@ public class CustomServerMain {
         protected void configure() {
 
           final SystemConfiguration sysConf = new SystemConfiguration();
-          String waveConfig = sysConf.getString(WAVE_CONF_FILE_KEY);
+          String waveConfig = sysConf.getString("wave.server.config");
           // server is launched with -Dwave.server.config=whatever
           // default config can be overrided with a custom-whatever file
           LOG.info("Using wave Config: " + waveConfig);
