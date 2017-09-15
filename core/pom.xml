@@ -13,8 +13,11 @@
     <gwt.version>2.8.0</gwt.version>
     <guice.version>3.0</guice.version>
     <gin.version>2.1.2</gin.version>
+    <kune.services>1.0.2-SNAPSHOT</kune.services>
     <gwt-gadgets.version>1.2.1-rc1</gwt-gadgets.version>
     <gwtp.version>1.6</gwtp.version>
+    <guava.version>20.0</guava.version>
+    <typesafe.version>1.2.1</typesafe.version>
   </properties>
   <repositories>
     <repository>
