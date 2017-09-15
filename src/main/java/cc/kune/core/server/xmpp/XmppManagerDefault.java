@@ -30,6 +30,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.jivesoftware.smack.AbstractXMPPConnection;
+import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
@@ -54,6 +55,7 @@ import org.jxmpp.stringprep.XmppStringprepException;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.typesafe.config.Config;
 
 import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.server.properties.ChatProperties;
@@ -74,6 +76,8 @@ public class XmppManagerDefault implements XmppManager {
   /** The chat properties. */
   private final ChatProperties chatProperties;
 
+  private SecurityMode defaultSecurity;
+
   /**
    * Instantiates a new xmpp manager default.
    *
@@ -81,8 +85,10 @@ public class XmppManagerDefault implements XmppManager {
    *          the chat properties
    */
   @Inject
-  public XmppManagerDefault(final ChatProperties chatProperties) {
+  public XmppManagerDefault(final ChatProperties chatProperties, Config config) {
     this.chatProperties = chatProperties;
+    final Boolean ssl = config.getBoolean("security.enable_ssl");
+    defaultSecurity = ssl ? SecurityMode.required: SecurityMode.ifpossible;
   }
 
   /**
@@ -297,18 +303,19 @@ public class XmppManagerDefault implements XmppManager {
    */
   @Override
   public ChatConnection login(final String userName, final String password, final String resource) {
-    return login(userName, password, resource, false);
+    return login(userName, password, resource, false, defaultSecurity);
   }
 
 
   @Override
-  public ChatConnection login(final String userName, final String password, final String resource, boolean debug) {
+  public ChatConnection login(final String userName, final String password, final String resource, boolean debug, SecurityMode securityMode) {
     try {
       XMPPTCPConnectionConfiguration config;
       config = XMPPTCPConnectionConfiguration.builder()
       // .setUsernameAndPassword(userName, password)
       .setXmppDomain(getServerName()).setHost(getServerName()).setPort(5222)
       .setDebuggerEnabled(debug)
+      .setSecurityMode(securityMode)
       .build();
 
       AbstractXMPPConnection conn = new XMPPTCPConnection(config);
@@ -348,11 +355,16 @@ public class XmppManagerDefault implements XmppManager {
     }
   }
 
+  @Override
+  public void sendMessage(final String userName, final String text) {
+    sendMessage(userName, text, defaultSecurity);
+  }
+
   /* (non-Javadoc)
    * @see cc.kune.core.server.xmpp.XmppManager#sendMessage(java.lang.String, java.lang.String)
    */
   @Override
-  public void sendMessage(final String userName, final String text) {
+  public void sendMessage(final String userName, final String text, SecurityMode securityMode) {
     final ChatConnection connection = login(chatProperties.getAdminJID(),
         chatProperties.getAdminPasswd(), "kuneserveradmin" + System.currentTimeMillis());
     final AbstractXMPPConnection xmppConn = ((XmppConnection) connection).getConn();

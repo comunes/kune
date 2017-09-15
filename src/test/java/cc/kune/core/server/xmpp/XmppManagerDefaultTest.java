@@ -26,6 +26,7 @@ import static org.junit.Assert.*;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.junit.Before;
@@ -49,9 +50,8 @@ public class XmppManagerDefaultTest {
    * The listener interface for receiving output events. The class that is
    * interested in processing a output event implements this interface, and the
    * object created with that class is registered with a component using the
-   * component's <code>addOutputListener<code> method. When
-   * the output event occurs, that object's appropriate
-   * method is invoked.
+   * component's <code>addOutputListener<code> method. When the output event
+   * occurs, that object's appropriate method is invoked.
    *
    * @see OutputEvent
    */
@@ -115,14 +115,17 @@ public class XmppManagerDefaultTest {
 
   /**
    * Test broadcast.
- * @throws SmackException
- * @throws NoResponseException
+   *
+   * @throws SmackException
+   * @throws NoResponseException
    */
   @Ignore
   public void testBroadcast() throws NoResponseException, SmackException {
     final String roomName = "roomName";
-    final ChatConnection conn1 = manager.login("testUser1", "easy1", "test", true);
-    final ChatConnection conn2 = manager.login("testUser2", "easy2", "test", true);
+    final ChatConnection conn1 = manager.login("testUser1", "easy1", "test", true,
+        SecurityMode.disabled);
+    final ChatConnection conn2 = manager.login("testUser2", "easy2", "test", true,
+        SecurityMode.disabled);
     final Room room1 = manager.createRoom(conn1, roomName, "user1Alias", "subject");
     final OutputListener listener1 = new OutputListener("1");
     room1.setListener(listener1);
@@ -148,18 +151,21 @@ public class XmppManagerDefaultTest {
    */
   @Test
   public void testConnection() {
-    final ChatConnection handler1 = manager.login("admin", "easyeasy", "test", true);
+    final ChatConnection handler1 = manager.login("admin", "easyeasy", "test", true,
+        SecurityMode.disabled);
     assertNotNull(handler1);
   }
 
   /**
    * Test create room.
- * @throws SmackException
- * @throws NoResponseException
+   *
+   * @throws SmackException
+   * @throws NoResponseException
    */
   @Test
   public void testCreateRoom() throws NoResponseException, SmackException {
-    final ChatConnection handler1 = manager.login("admin", "easyeasy", "test", true);
+    final ChatConnection handler1 = manager.login("admin", "easyeasy", "test", true,
+        SecurityMode.disabled);
     if (!manager.existRoom(handler1, "test-room")) {
       manager.createRoom(handler1, "test-room", "alias", "Always the same room");
     }
@@ -170,7 +176,8 @@ public class XmppManagerDefaultTest {
    */
   @Test
   public void testGetRoster() {
-    final ChatConnection handler = manager.login("admin", "easyeasy", "test", true);
+    final ChatConnection handler = manager.login("admin", "easyeasy", "test", true,
+        SecurityMode.ifpossible);
     assertNotNull(manager.getRoster(handler));
   }
 
@@ -179,7 +186,7 @@ public class XmppManagerDefaultTest {
    */
   @Test
   public void testSendMessage() {
-    manager.sendMessage("admin", "test message");
+    manager.sendMessage("admin", "test message", SecurityMode.ifpossible);
   }
 
   /**
@@ -187,6 +194,6 @@ public class XmppManagerDefaultTest {
    */
   @Test(expected = ChatException.class)
   public void testUserDontExist() {
-    manager.login("user", "password", "test", true);
+    manager.login("user", "password", "test", true, SecurityMode.ifpossible);
   }
 }

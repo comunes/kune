@@ -24,6 +24,7 @@ package cc.kune.core.server.xmpp;
 
 import java.util.Set;
 
+import org.jivesoftware.smack.ConnectionConfiguration.SecurityMode;
 import org.jivesoftware.smack.SmackException;
 import org.jivesoftware.smack.SmackException.NoResponseException;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
@@ -139,7 +140,7 @@ public interface XmppManager {
    *          if the connection should be debugged
    * @return the chat connection
    */
-  ChatConnection login(String userName, String password, String resource, boolean debug);
+  ChatConnection login(String userName, String password, String resource, boolean debug, SecurityMode securityMode);
 
   /**
    * Send message.
@@ -160,5 +161,7 @@ public interface XmppManager {
    *          the message
    */
   void sendMessage(String userName, String message);
+
+  void sendMessage(String userName, String text, SecurityMode securityMode);
 
 }
