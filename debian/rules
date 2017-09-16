@@ -68,7 +68,7 @@ install/kune::
 # FIXME make this via http://www.debian.org/doc/manuals/maint-guide/dother.en.html#conffiles
 	cp $(CURDIR)/bin/server.sh $(KUNE)/bin/
 	cp $(TARGETJAR) $(KUNE)/lib/kune-complete.jar
-cp $(RESOURCES)/wave-server-production.conf $(ETCDIR)/wave-server.conf
+        cp $(RESOURCES)/wave-server-production.conf $(ETCDIR)/wave-server.conf
 	cp $(RESOURCES)/server.federation.config.example $(ETCDIR)
 	cp $(RESOURCES)/logging.properties.sample $(ETCDIR)
 	cp $(RESOURCES)/jaas.config $(ETCDIR)
