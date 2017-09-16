@@ -1,2 +1,2 @@
 core/kune-cli/bin/kune-cli usr/share/kune-cli/bin/
-core/kune-cli/target/kune-cli-1.0.1-SNAPSHOT-jar-with-dependencies.jar usr/share/kune-cli/lib/
+core/kune-cli/target/kune-cli-1.0.2-SNAPSHOT-jar-with-dependencies.jar usr/share/kune-cli/lib/
