@@ -24,12 +24,9 @@ package cc.kune.core.client.registry;
 
 import cc.kune.common.shared.utils.TextUtils;
 
-import com.google.gxp.com.google.common.base.Nullable;
-
-// TODO: Auto-generated Javadoc
 /**
  * The Class IdGenerator.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class IdGenerator {
@@ -39,14 +36,14 @@ public class IdGenerator {
 
   /**
    * Generates a id concatenating two strings.
-   * 
+   *
    * @param one
    *          String
    * @param two
    *          String
    * @return the string
    */
-  public static String generate(@Nullable final String one, @Nullable final String two) {
+  public static String generate(final String one, final String two) {
     if (TextUtils.empty(one)) {
       return TextUtils.empty(two) ? "" : two;
     } else {
