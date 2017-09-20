@@ -23,42 +23,28 @@
 
 package cc.kune.core.client.cookies;
 
-import java.util.Date;
+import static org.junit.Assert.*;
 
-import cc.kune.common.client.utils.WindowUtils;
-import cc.kune.common.shared.utils.TextUtils;
-import cc.kune.core.shared.SessionConstants;
+import org.junit.Test;
 
-public class CookieUtils {
+public class CookieUtilsTest {
 
-  private static String domain;
-
-  protected static void setDomain(String domain) {
-    CookieUtils.domain = domain;
+  @Test
+  public void testLocalhost() {
+    CookieUtils.setDomain("localhost");
+    assertEquals("localhost", CookieUtils.getDomain());
   }
 
-  /**
-   * Inspired in: {@link http
-   * ://developers.livechatinc.com/blog/setting-cookies-to
-   * -subdomains-in-javascript/}
-   **/
-  public static String getDomain() {
-    final String hostname = TextUtils.notEmpty(domain)? domain : WindowUtils.getHostName();
-
-    // noDot, so hostname is "localhost" or similar
-    final boolean noDot = !hostname.contains(".");
-
-    // If hostname is a domain.something, set the cookie to .domain.something
-    // allowing subdomains
-    return noDot || hostname.matches(TextUtils.IPADDRESS_PATTERN) ? hostname : "." + hostname;
+  @Test
+  public void testIP() {
+    CookieUtils.setDomain("127.0.0.1");
+    assertEquals("127.0.0.1", CookieUtils.getDomain());
   }
 
-  public static Date inDays(final int days) {
-    return new Date(System.currentTimeMillis() + SessionConstants.A_DAY * days);
-  }
-
-  public static Date expireInYears() {
-    return inDays(365 * 10);
+  @Test
+  public void testDomain() {
+    CookieUtils.setDomain("example.com");
+    assertEquals(".example.com", CookieUtils.getDomain());
   }
 
 }
