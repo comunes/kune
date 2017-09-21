@@ -68,7 +68,7 @@ public class GSpaceThemeManager {
   private GSpaceTheme previousTheme;
 
   /** The res. */
-  private final GSpaceArmorResources res;
+  private final Provider<GSpaceArmorResources> res;
 
   /** The session. */
   private final Session session;
@@ -77,7 +77,7 @@ public class GSpaceThemeManager {
   protected HashMap<String, GSpaceTheme> themes;
 
   /** The ws back manager. */
-  private final GSpaceBackgroundManager wsBackManager;
+  private final Provider<GSpaceBackgroundManager> wsBackManager;
 
   /**
    * Instantiates a new g space theme manager.
@@ -98,8 +98,8 @@ public class GSpaceThemeManager {
   @Inject
   public GSpaceThemeManager(final Session session,
       final Provider<GroupServiceAsync> groupServiceProvider, final StateManager stateManager,
-      final GSpaceBackgroundManager wsBackManager, final EventBus eventBus,
-      final GSpaceArmorResources res) {
+      final Provider<GSpaceBackgroundManager> wsBackManager, final EventBus eventBus,
+      final Provider<GSpaceArmorResources> res) {
     this.session = session;
     this.groupServiceProvider = groupServiceProvider;
     this.wsBackManager = wsBackManager;
@@ -191,9 +191,9 @@ public class GSpaceThemeManager {
     setTheme(themes.get(state.getGroup().getWorkspaceTheme()));
     final GroupDTO group = state.getGroup();
     if (group.hasBackground()) {
-      wsBackManager.setBackgroundImage();
+      wsBackManager.get().setBackgroundImage();
     } else {
-      wsBackManager.clearBackgroundImage();
+      wsBackManager.get().clearBackgroundImage();
     }
   }
 
@@ -206,7 +206,7 @@ public class GSpaceThemeManager {
   private void setTheme(final GSpaceTheme newTheme) {
     if (previousTheme == null || !previousTheme.equals(newTheme)) {
       GSpaceThemeChangeEvent.fire(eventBus, previousTheme, newTheme);
-      changeCss(res, newTheme.getName());
+      changeCss(res.get(), newTheme.getName());
     }
     previousTheme = newTheme;
   }
