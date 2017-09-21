@@ -592,6 +592,8 @@ NOTE: For automatic running of tests online, see the next section on Continuous 
 We use Jenkins as our continuous integration tool. After each commit, it automatically runs the full collection of JUnit tests. The Jenkins instance is located in:
   <http://ci.comunes.org>
 
+You can get notifications of our builds via our @ComunesBuildsBot, please provide us your Chat ID via @get_id_bot.
+
 # Code samples
 
 See HelloWorld\*.java classes for a small sample of how to develop and extend the GWT workspace UI.
