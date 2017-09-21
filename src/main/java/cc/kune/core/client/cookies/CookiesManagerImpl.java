@@ -26,7 +26,6 @@ import java.util.Date;
 
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.utils.WindowUtils;
-import cc.kune.common.shared.utils.TextUtils;
 import cc.kune.core.shared.SessionConstants;
 
 import com.google.gwt.user.client.Cookies;
@@ -75,7 +74,7 @@ public class CookiesManagerImpl implements CookiesManager {
   @Override
   public void removeAnonCookie() {
     Cookies.removeCookie(ANON);
-    Cookies.setCookie(ANON, null, new Date(0), CookieUtils.getDomain(), "/", false);
+    Cookies.setCookie(ANON, null, new Date(0), CookieUtils.getDotDomain(), "/", false);
   }
 
   /*
@@ -89,15 +88,18 @@ public class CookiesManagerImpl implements CookiesManager {
     // issue:
     // http://groups.google.com/group/Google-Web-Toolkit/browse_thread/thread/ded86778ee56690/515dc513c7d085eb?lnk=st&q=remove+cookie#515dc513c7d085eb
     // http://code.google.com/p/google-web-toolkit/issues/detail?id=1735&q=removeCookie
-    Cookies.removeCookie(SessionConstants.USERHASH);
-    Cookies.removeCookie(SessionConstants.JSESSIONID);
+
     // Workaround:
     final Date exp = new Date(0);
     boolean ssl = WindowUtils.isHttps();
-    Cookies.setCookie(SessionConstants.USERHASH, null, exp, CookieUtils.getDomain(), "/", ssl);
     Cookies.setCookie(SessionConstants.USERHASH, null, exp, CookieUtils.getDotDomain(), "/", ssl);
-    Cookies.setCookie(SessionConstants.JSESSIONID, null, exp, CookieUtils.getDomain(), "/", ssl);
     Cookies.setCookie(SessionConstants.JSESSIONID, null, exp, CookieUtils.getDotDomain(), "/", ssl);
+
+    // jetty sets the cookie for example.com not .example.com like www.example.com
+    Cookies.setCookie(SessionConstants.JSESSIONID, null, exp, CookieUtils.getDomain(), "/", ssl);
+
+    Cookies.removeCookie(SessionConstants.USERHASH);
+    Cookies.removeCookie(SessionConstants.JSESSIONID);
   }
 
   /*
@@ -110,7 +112,7 @@ public class CookiesManagerImpl implements CookiesManager {
   public void setAnonCookie(final Boolean userRegister) {
     final Date exp = new Date(System.currentTimeMillis() + (userRegister
         ? SessionConstants.ANON_SESSION_DURATION_AFTER_REG : SessionConstants.ANON_SESSION_DURATION));
-    Cookies.setCookie(ANON, userRegister.toString(), exp, CookieUtils.getDomain(), "/", false);
+    Cookies.setCookie(ANON, userRegister.toString(), exp, CookieUtils.getDotDomain(), "/", false);
   }
 
   /*
@@ -126,8 +128,13 @@ public class CookiesManagerImpl implements CookiesManager {
     boolean ssl = WindowUtils.isHttps();
     // We use Jetty token and a custom kune token. We want to set the cookie for .example.com
     // subdomains also (wave use only domain example.com for auth)
-    Cookies.setCookie(SessionConstants.USERHASH, userHash, exp, CookieUtils.getDomain(), "/", ssl);
+
+    // we remove the cookies first
+    removeAuthCookie();
+
     Cookies.setCookie(SessionConstants.USERHASH, userHash, exp, CookieUtils.getDotDomain(), "/", ssl);
+
+    // jetty sets the cookie for example.com not .example.com like www.example.com
     Cookies.setCookie(SessionConstants.JSESSIONID, userHash, exp, CookieUtils.getDomain(), "/", ssl);
     Cookies.setCookie(SessionConstants.JSESSIONID, userHash, exp, CookieUtils.getDotDomain(), "/", ssl);
     Log.info("Received hash: " + userHash, null);
