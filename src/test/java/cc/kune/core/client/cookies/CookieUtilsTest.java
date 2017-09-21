@@ -50,4 +50,10 @@ public class CookieUtilsTest {
     assertEquals(".example.com", CookieUtils.getDotDomain());
   }
 
+  @Test
+  public void testSubDomain() {
+    CookieUtils.setDomain("some.example.com");
+    assertEquals("some.example.com", CookieUtils.getDomain());
+    assertEquals(".some.example.com", CookieUtils.getDotDomain());
+  }
 }
