@@ -49,14 +49,14 @@ import com.google.inject.Singleton;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InvitationClientManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
 public class InvitationClientManager {
 
   /** The chat engine. */
-  private final ChatClient chatEngine;
+  private final Provider<ChatClient> chatEngine;
 
   /** The i18n. */
   private final I18nTranslationService i18n;
@@ -75,7 +75,7 @@ public class InvitationClientManager {
 
   /**
    * Instantiates a new invitation client manager.
-   * 
+   *
    * @param invitationService
    *          the invitation service
    * @param chatEngine
@@ -91,7 +91,7 @@ public class InvitationClientManager {
    */
   @Inject
   public InvitationClientManager(final Provider<InvitationServiceAsync> invitationService,
-      final ChatClient chatEngine, final Provider<SocialNetServiceAsync> snService,
+      final Provider<ChatClient> chatEngine, final Provider<SocialNetServiceAsync> snService,
       final Session session, final I18nTranslationService i18n, final StateManager stateManager) {
     this.invitationService = invitationService;
     this.chatEngine = chatEngine;
@@ -103,7 +103,7 @@ public class InvitationClientManager {
 
   /**
    * Process.
-   * 
+   *
    * @param hash
    *          the hash
    */
@@ -164,7 +164,7 @@ public class InvitationClientManager {
                   public void onSuccess(final Void result) {
                   }
                 });
-            if (!chatEngine.isBuddy(whoInvitesShortName)) {
+            if (!chatEngine.get().isBuddy(whoInvitesShortName)) {
               NotifyUser.askConfirmation(I18n.t("Do you want to add '[%s]' as a buddie?",
                   whoInvitesShortName), I18n.t(
                   "'[%s]' invited you to this site. Do you want to add him/her as a buddie?",
@@ -175,7 +175,7 @@ public class InvitationClientManager {
 
                 @Override
                 public void onSuccess() {
-                  chatEngine.addNewBuddy(whoInvitesShortName);
+                  chatEngine.get().addNewBuddy(whoInvitesShortName);
                   snService.get().addAsBuddie(session.getUserHash(), whoInvitesShortName,
                       new AsyncCallbackSimple<Void>() {
                         @Override
