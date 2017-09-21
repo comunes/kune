@@ -92,10 +92,12 @@ public class CookiesManagerImpl implements CookiesManager {
     Cookies.removeCookie(SessionConstants.USERHASH);
     Cookies.removeCookie(SessionConstants.JSESSIONID);
     // Workaround:
-    Cookies.setCookie(SessionConstants.USERHASH, null, new Date(0), CookieUtils.getDomain(), "/",
-        WindowUtils.isHttps());
-    Cookies.setCookie(SessionConstants.JSESSIONID, null, new Date(0), CookieUtils.getDomain(), "/",
-        WindowUtils.isHttps());
+    final Date exp = new Date(0);
+    boolean ssl = WindowUtils.isHttps();
+    Cookies.setCookie(SessionConstants.USERHASH, null, exp, CookieUtils.getDomain(), "/", ssl);
+    Cookies.setCookie(SessionConstants.USERHASH, null, exp, CookieUtils.getDotDomain(), "/", ssl);
+    Cookies.setCookie(SessionConstants.JSESSIONID, null, exp, CookieUtils.getDomain(), "/", ssl);
+    Cookies.setCookie(SessionConstants.JSESSIONID, null, exp, CookieUtils.getDotDomain(), "/", ssl);
   }
 
   /*
@@ -106,10 +108,9 @@ public class CookiesManagerImpl implements CookiesManager {
    */
   @Override
   public void setAnonCookie(final Boolean userRegister) {
-    final Date expires = new Date(System.currentTimeMillis()
-        + (userRegister ? SessionConstants.ANON_SESSION_DURATION_AFTER_REG
-            : SessionConstants.ANON_SESSION_DURATION));
-    Cookies.setCookie(ANON, userRegister.toString(), expires, CookieUtils.getDomain(), "/", false);
+    final Date exp = new Date(System.currentTimeMillis() + (userRegister
+        ? SessionConstants.ANON_SESSION_DURATION_AFTER_REG : SessionConstants.ANON_SESSION_DURATION));
+    Cookies.setCookie(ANON, userRegister.toString(), exp, CookieUtils.getDomain(), "/", false);
   }
 
   /*
@@ -121,11 +122,14 @@ public class CookiesManagerImpl implements CookiesManager {
   @Override
   public void setAuthCookie(final String userHash) {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
-    final Date expires = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
-    Cookies.setCookie(SessionConstants.USERHASH, userHash, expires, CookieUtils.getDomain(), "/",
-        WindowUtils.isHttps());
-    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, expires, CookieUtils.getDomain(), "/",
-        WindowUtils.isHttps());
+    final Date exp = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
+    boolean ssl = WindowUtils.isHttps();
+    // We use Jetty token and a custom kune token. We want to set the cookie for .example.com
+    // subdomains also (wave use only domain example.com for auth)
+    Cookies.setCookie(SessionConstants.USERHASH, userHash, exp, CookieUtils.getDomain(), "/", ssl);
+    Cookies.setCookie(SessionConstants.USERHASH, userHash, exp, CookieUtils.getDotDomain(), "/", ssl);
+    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, exp, CookieUtils.getDomain(), "/", ssl);
+    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, exp, CookieUtils.getDotDomain(), "/", ssl);
     Log.info("Received hash: " + userHash, null);
   }
 }

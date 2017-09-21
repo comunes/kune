@@ -33,18 +33,21 @@ public class CookieUtilsTest {
   public void testLocalhost() {
     CookieUtils.setDomain("localhost");
     assertEquals("localhost", CookieUtils.getDomain());
+    assertEquals("localhost", CookieUtils.getDotDomain());
   }
 
   @Test
   public void testIP() {
     CookieUtils.setDomain("127.0.0.1");
     assertEquals("127.0.0.1", CookieUtils.getDomain());
+    assertEquals("127.0.0.1", CookieUtils.getDotDomain());
   }
 
   @Test
   public void testDomain() {
     CookieUtils.setDomain("example.com");
-    assertEquals(".example.com", CookieUtils.getDomain());
+    assertEquals("example.com", CookieUtils.getDomain());
+    assertEquals(".example.com", CookieUtils.getDotDomain());
   }
 
 }

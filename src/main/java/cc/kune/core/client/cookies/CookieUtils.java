@@ -32,9 +32,19 @@ import cc.kune.core.shared.SessionConstants;
 public class CookieUtils {
 
   private static String domain;
+  private static String dotDomain;
 
-  protected static void setDomain(String domain) {
-    CookieUtils.domain = domain;
+  protected static void setDomain(String setDomain) {
+    /* used for tests */
+    domain = setDomain;
+    dotDomain = null;
+  }
+
+  public static String getDomain() {
+    if (TextUtils.empty(domain)) {
+      domain = WindowUtils.getHostName();
+    }
+    return domain;
   }
 
   /**
@@ -42,15 +52,18 @@ public class CookieUtils {
    * ://developers.livechatinc.com/blog/setting-cookies-to
    * -subdomains-in-javascript/}
    **/
-  public static String getDomain() {
-    final String hostname = TextUtils.notEmpty(domain)? domain : WindowUtils.getHostName();
+  public static String getDotDomain() {
+    if (TextUtils.empty(dotDomain)) {
+      String hostname = getDomain();
 
-    // noDot, so hostname is "localhost" or similar
-    final boolean noDot = !hostname.contains(".");
+      // noDot, so hostname is "localhost" or similar
+      final boolean noDot = !hostname.contains(".");
 
-    // If hostname is a domain.something, set the cookie to .domain.something
-    // allowing subdomains
-    return noDot || hostname.matches(TextUtils.IPADDRESS_PATTERN) ? hostname : "." + hostname;
+      // If hostname is a domain.something, set the cookie to .domain.something
+      // allowing subdomains
+      dotDomain = noDot || hostname.matches(TextUtils.IPADDRESS_PATTERN) ? hostname : "." + hostname;
+    }
+    return dotDomain;
   }
 
   public static Date inDays(final int days) {
