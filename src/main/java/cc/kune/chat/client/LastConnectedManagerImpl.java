@@ -27,13 +27,6 @@ import java.util.Date;
 
 import org.waveprotocol.wave.client.common.util.DateUtils;
 
-import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.events.UserSignInOrSignOutEvent;
-import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
-import cc.kune.core.client.rpcservices.UserServiceAsync;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
-
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
@@ -42,10 +35,18 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class LastConnectedManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -59,7 +60,7 @@ public class LastConnectedManagerImpl implements LastConnectedManager {
 
   /**
    * Instantiates a new last connected manager.
-   * 
+   *
    * @param session
    *          the session
    * @param roster
@@ -80,18 +81,23 @@ public class LastConnectedManagerImpl implements LastConnectedManager {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
         if (event.isLogged()) {
-          userService.get().getBuddiesPresence(session.getUserHash(),
-              new AsyncCallback<UserBuddiesPresenceDataDTO>() {
-                @Override
-                public void onFailure(final Throwable caught) {
-                  clear();
-                }
+          userService.get().onlyCheckSession(session.getUserHash(), new AsyncCallbackSimple<Void>() {
+            @Override
+            public void onSuccess(Void result) {
+              userService.get().getBuddiesPresence(session.getUserHash(),
+                  new AsyncCallback<UserBuddiesPresenceDataDTO>() {
+                    @Override
+                    public void onFailure(final Throwable caught) {
+                      clear();
+                    }
 
-                @Override
-                public void onSuccess(final UserBuddiesPresenceDataDTO result) {
-                  data = result;
-                }
-              });
+                    @Override
+                    public void onSuccess(final UserBuddiesPresenceDataDTO result) {
+                      data = result;
+                    }
+                  });
+            }
+          });
         } else {
           clear();
         }
@@ -108,7 +114,7 @@ public class LastConnectedManagerImpl implements LastConnectedManager {
 
   /**
    * Gets the last connected info.
-   * 
+   *
    * @param username
    *          the username to get the last connected info
    * @param standalone
@@ -132,7 +138,7 @@ public class LastConnectedManagerImpl implements LastConnectedManager {
 
   /**
    * Checks if is recent.
-   * 
+   *
    * @param time
    *          the time
    * @return true if a duration is less than 1 min.
@@ -143,7 +149,7 @@ public class LastConnectedManagerImpl implements LastConnectedManager {
 
   /**
    * Update.
-   * 
+   *
    * @param username
    *          the username
    * @param lastConnected
