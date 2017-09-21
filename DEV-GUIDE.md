@@ -593,6 +593,7 @@ We use Jenkins as our continuous integration tool. After each commit, it automat
   <http://ci.comunes.org>
 
 You can get notifications of our builds via our @ComunesBuildsBot, please provide us your Chat ID via @get_id_bot.
+More info: <https://github.com/jenkinsci/build-notifications-plugin>
 
 # Code samples
 
