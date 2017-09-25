@@ -126,6 +126,12 @@ public class CookiesManagerImpl implements CookiesManager {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
     final Date exp = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
     boolean ssl = WindowUtils.isHttps();
+
+    // Warning: this sets cookies to .subdomain.domain.cc so www.subdomain.domain.cc
+    // should also work.
+    // But if you sets a cookie in domain.cc (like kune.cc and beta.kune.cc) we can get auth
+    // issues in beta.kune.cc test site
+
     // We use Jetty token and a custom kune token. We want to set the cookie for .example.com
     // subdomains also (wave use only domain example.com for auth)
 
