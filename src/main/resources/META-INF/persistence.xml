@@ -49,7 +49,7 @@
       <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
       <property name="hibernate.connection.provider_class"
-        value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>
+        value="com.zaxxer.hikari.hibernate.CustomHikariConnectionProvider"/>
       <!-- In the future with hiberante 4: value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/> -->
       <property name="hibernate.hikari.minimumIdle" value="5"/>
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
@@ -118,7 +118,7 @@
         value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
       <property name="hibernate.connection.provider_class"
-        value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>
+        value="com.zaxxer.hikari.hibernate.CustomHikariConnectionProvider"/>
       <property name="hibernate.hikari.minimumIdle" value="5"/>
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
@@ -208,7 +208,7 @@
       <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
       <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.connection.provider_class"
-        value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>
+        value="com.zaxxer.hikari.hibernate.CustomHikariConnectionProvider"/>
       <property name="hibernate.hikari.minimumIdle" value="5"/>
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
@@ -298,7 +298,7 @@
         value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
       <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       <property name="hibernate.connection.provider_class"
-        value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>
+        value="com.zaxxer.hikari.hibernate.CustomHikariConnectionProvider"/>
       <property name="hibernate.hikari.minimumIdle" value="5"/>
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>

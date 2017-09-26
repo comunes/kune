@@ -39,11 +39,11 @@ import com.zaxxer.hikari.HikariDataSource;
  *
  * @author Brett Wooldridge, Luca Burgazzoli
  */
-public class HikariConnectionProvider implements ConnectionProvider, Configurable, Stoppable
+public class CustomHikariConnectionProvider implements ConnectionProvider, Configurable, Stoppable
 {
    private static final long serialVersionUID = -9131625057941275711L;
 
-   private static final Logger LOGGER = LoggerFactory.getLogger(HikariConnectionProvider.class);
+   private static final Logger LOGGER = LoggerFactory.getLogger(CustomHikariConnectionProvider.class);
 
    /**
     * HikariCP configuration.
@@ -62,7 +62,7 @@ public class HikariConnectionProvider implements ConnectionProvider, Configurabl
    /**
     * c-tor
     */
-   public HikariConnectionProvider()
+   public CustomHikariConnectionProvider()
    {
       this.hcfg = null;
       this.hds = null;
@@ -125,7 +125,7 @@ public class HikariConnectionProvider implements ConnectionProvider, Configurabl
    @SuppressWarnings("rawtypes")
    public boolean isUnwrappableAs(Class unwrapType)
    {
-      return ConnectionProvider.class.equals(unwrapType) || HikariConnectionProvider.class.isAssignableFrom(unwrapType);
+      return ConnectionProvider.class.equals(unwrapType) || CustomHikariConnectionProvider.class.isAssignableFrom(unwrapType);
    }
 
    @Override
@@ -133,7 +133,7 @@ public class HikariConnectionProvider implements ConnectionProvider, Configurabl
    public <T> T unwrap(Class<T> unwrapType)
    {
        if ( ConnectionProvider.class.equals( unwrapType ) ||
-               HikariConnectionProvider.class.isAssignableFrom( unwrapType ) ) {
+               CustomHikariConnectionProvider.class.isAssignableFrom( unwrapType ) ) {
            return (T) this;
        }
        else if ( DataSource.class.isAssignableFrom( unwrapType ) ) {
