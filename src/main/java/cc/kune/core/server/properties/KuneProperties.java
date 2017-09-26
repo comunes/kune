@@ -129,35 +129,11 @@ public interface KuneProperties {
   /** The site common name. */
   String SITE_COMMON_NAME = "kune.default.site.commonname";
 
-  /** The SIT e_ d b_ c3 p0_ acquir e_ increment. */
-  String SITE_DB_C3P0_ACQUIRE_INCREMENT = "kune.db.c3p0.acquire_increment";
-
-  /** The SIT e_ d b_ c3 p0_ autocommitonclose. */
-  String SITE_DB_C3P0_AUTOCOMMITONCLOSE = "kune.db.c3p0.autoCommitOnClose";
-
-  /** The SIT e_ d b_ c3 p0_ ma x_ size. */
-  String SITE_DB_C3P0_MAX_SIZE = "kune.db.c3p0.max_size";
-
-  /** The SIT e_ d b_ c3 p0_ ma x_ statements. */
-  String SITE_DB_C3P0_MAX_STATEMENTS = "kune.db.c3p0.max_statements";
-
-  /** The SIT e_ d b_ c3 p0_ mi n_ size. */
-  String SITE_DB_C3P0_MIN_SIZE = "kune.db.c3p0.min_size";
-
-  /** The SIT e_ d b_ c3 p0_ tes t_ period. */
-  String SITE_DB_C3P0_TEST_PERIOD = "kune.db.c3p0.idle_test_period";
-
-  /** The SIT e_ d b_ c3 p0_ timeout. */
-  String SITE_DB_C3P0_TIMEOUT = "kune.db.c3p0.timeout";
-
   /** The site db password. */
   String SITE_DB_PASSWORD = "kune.db.password";
 
   /** The site db persistence name. */
   String SITE_DB_PERSISTENCE_NAME = "kune.db.persistence.name";
-
-  /** The site db schema. */
-  String SITE_DB_SCHEMA = "kune.db.schema";
 
   /** The site db url. */
   String SITE_DB_URL = "kune.db.url";

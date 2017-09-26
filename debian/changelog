@@ -3,6 +3,7 @@ kune (1.0.2+b1) unstable; urgency=medium
   * Updated gwt to 1.8 and java 8
   * Workaround WAVE-446. PR by pablojan.
     https://github.com/apache/incubator-wave/pull/24
+  * Migrated to hikari connection pool
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 26 Aug 2017 10:25:50 +0200
 

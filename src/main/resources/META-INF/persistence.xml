@@ -44,33 +44,49 @@
       <property name="use_sql_comments" value="true"/>
       <property name="hibernate.dialect"
         value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.url"
-        value="jdbc:mysql://localhost/kune_prod?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.username" value="kune"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.password" value="db4kune"/>
       <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production
         (NO!, use liquibase, for instance) -->
       <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
-      <!-- https://www.hibernate.org/214.html -->
       <property name="hibernate.connection.provider_class"
-        value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
-      <property name="hibernate.c3p0.acquire_increment" value="1"/>
-      <property name="hibernate.c3p0.min_size" value="10"/>
-      <!-- Set my.cnf max_connections (default 100 or 151) to the same o higher value -->
-      <!-- https://dev.mysql.com/doc/refman/5.5/en/too-many-connections.html -->
-      <property name="hibernate.c3p0.max_size" value="280"/>
-      <property name="hibernate.c3p0.timeout" value="100"/>
-      <property name="hibernate.c3p0.max_statements" value="0"/>
-      <property name="hibernate.c3p0.idle_test_period" value="300"/>
-      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
-      <property name="hibernate.c3p0.preferredTestQuery" value="SELECT 1"/>
-      <property name="hibernate.c3p0.unreturnedConnectionTimeout"
-        value="60"/>
+        value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>
+      <!-- In the future with hiberante 4: value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/> -->
+      <property name="hibernate.hikari.minimumIdle" value="5"/>
+      <property name="hibernate.hikari.maximumPoolSize" value="10"/>
+      <property name="hibernate.hikari.idleTimeout" value="30000"/>
+      <property name="hibernate.hikari.dataSourceClassName"
+        value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
+      <!-- Configured and overrided by kune.properties -->
+      <property name="hibernate.hikari.dataSource.url"
+        value="jdbc:mysql://localhost/kune_prod?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+      <property name="hibernate.hikari.dataSource.user" value="kune"/>
+      <property name="hibernate.hikari.dataSource.password"
+        value="db4kune"/>
+      <!-- mysql recommended configuration https://github.com/brettwooldridge/HikariCP/wiki/MySQL-Configuration -->
+      <property name="hibernate.hikari.dataSource.cachePrepStmts"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.prepStmtCacheSize"
+        value="250"/>
+      <property name="hibernate.hikari.dataSource.prepStmtCacheSqlLimit"
+        value="2048"/>
+      <property name="hibernate.hikari.dataSource.useServerPrepStmts"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.useLocalSessionState"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.useLocalTransactionState"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.rewriteBatchedStatements"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.cacheResultSetMetadata"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.cacheServerConfiguration"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.elideSetAutoCommits"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.maintainTimeStats"
+        value="false"/>
+      <property name="hibernate.hikari.dataSource.encoding"
+        value="UTF-8"/>
       <property name="hibernate.search.default.directory_provider"
         value="filesystem"/>
       <property name="hibernate.search.default.indexBase"
@@ -100,34 +116,45 @@
       <property name="use_sql_comments" value="true"/>
       <property name="hibernate.dialect"
         value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.url"
-        value="jdbc:mysql://localhost/kune_openfire?createDatabaseIfNotExist=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.username" value="kune"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.password" value="db4kune"/>
       <property name="hibernate.hbm2ddl.auto" value="validate"/>
-      <!-- https://www.hibernate.org/214.html -->
       <property name="hibernate.connection.provider_class"
-        value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
-      <property name="hibernate.c3p0.acquire_increment" value="1"/>
-      <property name="hibernate.c3p0.min_size" value="10"/>
-      <property name="hibernate.c3p0.max_size" value="100"/>
-      <property name="hibernate.c3p0.timeout" value="100"/>
-      <property name="hibernate.c3p0.max_statements" value="0"/>
-      <property name="hibernate.c3p0.idle_test_period" value="300"/>
-      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
-      <property name="hibernate.c3p0.preferredTestQuery" value="SELECT 1"/>
-      <!-- http://stackoverflow.com/questions/3511422/java-c3p0-how-can-i-configure-autoreconnect-true -->
-      <property name="hibernate.c3p0.testConnectionOnCheckout"
+        value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>
+      <property name="hibernate.hikari.minimumIdle" value="5"/>
+      <property name="hibernate.hikari.maximumPoolSize" value="10"/>
+      <property name="hibernate.hikari.idleTimeout" value="30000"/>
+      <property name="hibernate.hikari.dataSourceClassName"
+        value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
+      <!-- Configured and overrided by kune.properties -->
+      <property name="hibernate.hikari.dataSource.url"
+        value="jdbc:mysql://localhost/kune_openfire?createDatabaseIfNotExist=false&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true"/>
+      <property name="hibernate.hikari.dataSource.user" value="kune"/>
+      <property name="hibernate.hikari.dataSource.password"
+        value="db4kune"/>
+      <!-- mysql recommended configuration https://github.com/brettwooldridge/HikariCP/wiki/MySQL-Configuration -->
+      <property name="hibernate.hikari.dataSource.cachePrepStmts"
         value="true"/>
-      <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
+      <property name="hibernate.hikari.dataSource.prepStmtCacheSize"
+        value="250"/>
+      <property name="hibernate.hikari.dataSource.prepStmtCacheSqlLimit"
+        value="2048"/>
+      <property name="hibernate.hikari.dataSource.useServerPrepStmts"
         value="true"/>
-      <property name="hibernate.c3p0.unreturnedConnectionTimeout"
-        value="60"/>
+      <property name="hibernate.hikari.dataSource.useLocalSessionState"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.useLocalTransactionState"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.rewriteBatchedStatements"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.cacheResultSetMetadata"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.cacheServerConfiguration"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.elideSetAutoCommits"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.maintainTimeStats"
+        value="false"/>
+      <property name="hibernate.hikari.dataSource.encoding"
+        value="UTF-8"/>
       <property name="hibernate.cache.use_second_level_cache"
         value="true"/>
       <property name="hibernate.cache.region.factory_class"
@@ -176,41 +203,48 @@
       <property name="use_sql_comments" value="true"/>
       <property name="hibernate.dialect"
         value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.url"
-        value="jdbc:mysql://localhost/kune_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.username" value="kune"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.password" value="db4kune"/>
       <!-- http://stackoverflow.com/questions/221379/hibernate-hbm2ddl-auto-update-in-production
         (NO!, use liquibase, for instance) -->
       <!-- http://stackoverflow.com/questions/438146/hibernate-question-hbm2ddl-auto-possible-values-and-what-they-do -->
       <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <!-- https://www.hibernate.org/214.html -->
       <property name="hibernate.connection.provider_class"
-        value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
-      <property name="hibernate.c3p0.acquire_increment" value="1"/>
-      <property name="hibernate.c3p0.min_size" value="1"/>
-      <!-- Set my.cnf max_connections (default 100 or 151) to the same o higher value -->
-      <!-- https://dev.mysql.com/doc/refman/5.5/en/too-many-connections.html -->
-      <!-- We set to 2 to debug connection leaks -->
-      <property name="hibernate.c3p0.max_size" value="300"/>
-      <property name="hibernate.c3p0.timeout" value="100"/>
-      <property name="hibernate.c3p0.max_statements" value="0"/>
-      <property name="hibernate.c3p0.idle_test_period" value="300"/>
-      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
-      <property name="hibernate.c3p0.preferredTestQuery" value="SELECT 1"/>
-      <!-- http://stackoverflow.com/questions/3511422/java-c3p0-how-can-i-configure-autoreconnect-true -->
-      <property name="hibernate.c3p0.testConnectionOnCheckout"
+        value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>
+      <property name="hibernate.hikari.minimumIdle" value="5"/>
+      <property name="hibernate.hikari.maximumPoolSize" value="10"/>
+      <property name="hibernate.hikari.idleTimeout" value="30000"/>
+      <property name="hibernate.hikari.dataSourceClassName"
+        value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
+      <!-- Configured and overrided by kune.properties -->
+      <property name="hibernate.hikari.dataSource.url"
+        value="jdbc:mysql://localhost/kune_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8&amp;autoReconnect=true"/>
+      <property name="hibernate.hikari.dataSource.user" value="kune"/>
+      <property name="hibernate.hikari.dataSource.password"
+        value="db4kune"/>
+      <!-- mysql recommended configuration https://github.com/brettwooldridge/HikariCP/wiki/MySQL-Configuration -->
+      <property name="hibernate.hikari.dataSource.cachePrepStmts"
         value="true"/>
-      <property name="hibernate.c3p0.checkoutTimeout"
-        value="20000"/>
-      <property name="hibernate.c3p0.unreturnedConnectionTimeout"
-        value="60"/>
-      <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
+      <property name="hibernate.hikari.dataSource.prepStmtCacheSize"
+        value="250"/>
+      <property name="hibernate.hikari.dataSource.prepStmtCacheSqlLimit"
+        value="2048"/>
+      <property name="hibernate.hikari.dataSource.useServerPrepStmts"
         value="true"/>
+      <property name="hibernate.hikari.dataSource.useLocalSessionState"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.useLocalTransactionState"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.rewriteBatchedStatements"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.cacheResultSetMetadata"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.cacheServerConfiguration"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.elideSetAutoCommits"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.maintainTimeStats"
+        value="false"/>
+      <property name="hibernate.hikari.dataSource.encoding"
+        value="UTF-8"/>
       <property name="hibernate.search.default.directory_provider"
         value="filesystem"/>
       <property name="hibernate.search.default.indexBase"
@@ -262,32 +296,45 @@
       <property name="use_sql_comments" value="false"/>
       <property name="hibernate.dialect"
         value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
-      <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.url"
-        value="jdbc:mysql://localhost/kune_test?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.username" value="kune"/>
-      <!-- Configured and overrided by kune.properties -->
-      <property name="hibernate.connection.password" value="db4kune"/>
       <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
       <property name="hibernate.connection.provider_class"
-        value="org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider"/>
-      <property name="hibernate.c3p0.acquire_increment" value="1"/>
-      <property name="hibernate.c3p0.min_size" value="10"/>
-      <property name="hibernate.c3p0.max_size" value="100"/>
-      <property name="hibernate.c3p0.timeout" value="1800"/>
-      <property name="hibernate.c3p0.max_statements" value="0"/>
-      <property name="hibernate.c3p0.idle_test_period" value="300"/>
-      <property name="hibernate.c3p0.autoCommitOnClose" value="false"/>
-      <property name="hibernate.c3p0.unreturnedConnectionTimeout"
-        value="60"/>
-      <property name="hibernate.c3p0.debugUnreturnedConnectionStackTraces"
+        value="com.zaxxer.hikari.hibernate.HikariConnectionProvider"/>
+      <property name="hibernate.hikari.minimumIdle" value="5"/>
+      <property name="hibernate.hikari.maximumPoolSize" value="10"/>
+      <property name="hibernate.hikari.idleTimeout" value="30000"/>
+      <property name="hibernate.hikari.dataSourceClassName"
+        value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
+      <!-- Configured and overrided by kune.properties -->
+      <property name="hibernate.hikari.dataSource.url"
+        value="jdbc:mysql://localhost/kune_test?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+      <property name="hibernate.hikari.dataSource.user" value="kune"/>
+      <property name="hibernate.hikari.dataSource.password"
+        value="db4kune"/>
+      <!-- mysql recommended configuration https://github.com/brettwooldridge/HikariCP/wiki/MySQL-Configuration -->
+      <property name="hibernate.hikari.dataSource.cachePrepStmts"
         value="true"/>
-      <property name="hibernate.c3p0.preferredTestQuery" value="SELECT 1"/>
-      <!-- http://stackoverflow.com/questions/3511422/java-c3p0-how-can-i-configure-autoreconnect-true -->
-      <property name="hibernate.c3p0.testConnectionOnCheckout"
+      <property name="hibernate.hikari.dataSource.prepStmtCacheSize"
+        value="250"/>
+      <property name="hibernate.hikari.dataSource.prepStmtCacheSqlLimit"
+        value="2048"/>
+      <property name="hibernate.hikari.dataSource.useServerPrepStmts"
         value="true"/>
+      <property name="hibernate.hikari.dataSource.useLocalSessionState"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.useLocalTransactionState"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.rewriteBatchedStatements"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.cacheResultSetMetadata"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.cacheServerConfiguration"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.elideSetAutoCommits"
+        value="true"/>
+      <property name="hibernate.hikari.dataSource.maintainTimeStats"
+        value="false"/>
+      <property name="hibernate.hikari.dataSource.encoding"
+        value="UTF-8"/>
       <property name="hibernate.search.default.directory_provider"
         value="filesystem"/>
       <property name="hibernate.search.default.indexBase"

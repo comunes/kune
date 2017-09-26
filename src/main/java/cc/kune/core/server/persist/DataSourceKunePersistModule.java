@@ -34,6 +34,12 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.PropertyConfigurator;
 import org.hibernate.Session;
 
+import com.google.inject.Key;
+import com.google.inject.PrivateModule;
+import com.google.inject.Provider;
+import com.google.inject.persist.jpa.JpaPersistModule;
+import com.google.inject.persist.jpa.KuneJpaLocalTxnInterceptor;
+
 import cc.kune.core.server.properties.KuneProperties;
 import cc.kune.core.server.properties.KunePropertiesDefault;
 import cc.kune.domain.finders.ContainerFinder;
@@ -53,16 +59,10 @@ import cc.kune.domain.finders.UserFinder;
 import cc.kune.domain.finders.UserSignInLogFinder;
 import cc.kune.domain.finders.WaveEntityFinder;
 
-import com.google.inject.Key;
-import com.google.inject.PrivateModule;
-import com.google.inject.Provider;
-import com.google.inject.persist.jpa.JpaPersistModule;
-import com.google.inject.persist.jpa.KuneJpaLocalTxnInterceptor;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class DataSourceKunePersistModule.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class DataSourceKunePersistModule extends PrivateModule {
@@ -99,7 +99,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Instantiates this module only during tests.
-   * 
+   *
    * @param settedProperties
    *          the setted properties
    * @param settedJpaUnit
@@ -112,7 +112,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.inject.PrivateModule#configure()
    */
   @Override
@@ -138,35 +138,26 @@ public class DataSourceKunePersistModule extends PrivateModule {
       final String dbUrl = kuneProperties.get(KuneProperties.SITE_DB_URL);
       final String dbUser = kuneProperties.get(KuneProperties.SITE_DB_USER);
       final String dbPass = kuneProperties.get(KuneProperties.SITE_DB_PASSWORD);
-      dbProperties.setProperty("hibernate.connection.url", dbUrl);
-      dbProperties.setProperty("hibernate.connection.username", dbUser);
-      dbProperties.setProperty("hibernate.connection.password", dbPass);
+      dbProperties.setProperty("hibernate.hikari.dataSource.url", dbUrl);
+      dbProperties.setProperty("hibernate.hikari.dataSource.user", dbUser);
+      dbProperties.setProperty("hibernate.hikari.dataSource.password", dbPass);
 
-      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_SCHEMA, "hibernate.hbm2ddl.auto");
-      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_ACQUIRE_INCREMENT,
-          "hibernate.c3p0.acquire_increment");
-      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_AUTOCOMMITONCLOSE,
-          "hibernate.c3p0.autoCommitOnClose");
-      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_MAX_SIZE, "hibernate.c3p0.max_size");
-      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_MAX_STATEMENTS,
-          "hibernate.c3p0.max_statements");
-      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_MIN_SIZE, "hibernate.c3p0.min_size");
-      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_TEST_PERIOD,
-          "hibernate.c3p0.idle_test_period");
-      setPropertyIfExists(dbProperties, KuneProperties.SITE_DB_C3P0_TIMEOUT, "hibernate.c3p0.timeout");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.cachePrepStmts");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.prepStmtCacheSize");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.prepStmtCacheSqlLimit");
+
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.useServerPrepStmts");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.useLocalSessionState");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.useLocalTransactionState");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.rewriteBatchedStatements");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.cacheResultSetMetadata");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.cacheServerConfiguration");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.elideSetAutoCommits");
+      setPropertyIfExists(dbProperties, "hibernate.hikari.dataSource.maintainTimeStats");
 
       jpm.properties(dbProperties);
       LOG.info(String.format("Using user '%s' and connection '%s'", dbUser, dbUrl));
       // LOG.debug(String.format("dbpass '%s'", dbPass));
-
-      // <property name="hibernate.connection.provider_class"
-      // value="org.hibernate.connection.C3P0ConnectionProvider"/>
-      // <property name="hibernate.c3p0.min_size" value="5"/>
-      // <property name="hibernate.c3p0.max_size" value="50"/>
-      // <property name="hibernate.c3p0.timeout" value="100"/>
-      // <property name="hibernate.c3p0.max_statements" value="0"/>
-      // <property name="hibernate.c3p0.idle_test_period" value="3000"/>
-      // <property name="c3p0.preferredTestQuery" value="SELECT 1"/>
 
     }
 
@@ -248,7 +239,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Gets the kune properties.
-   * 
+   *
    * @return the kune properties
    */
   public KuneProperties getKuneProperties() {
@@ -257,7 +248,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Gets the transaction interceptor.
-   * 
+   *
    * @return the transaction interceptor
    */
   public KuneJpaLocalTxnInterceptor getTransactionInterceptor() {
@@ -266,7 +257,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Inits the.
-   * 
+   *
    * @param settedProperties
    *          the setted properties
    */
@@ -279,7 +270,7 @@ public class DataSourceKunePersistModule extends PrivateModule {
 
   /**
    * Sets the property if exists.
-   * 
+   *
    * @param dbProperties
    *          the db properties
    * @param kuneProperty
@@ -287,10 +278,9 @@ public class DataSourceKunePersistModule extends PrivateModule {
    * @param persistenceProperty
    *          the persistence property
    */
-  private void setPropertyIfExists(final Properties dbProperties, final String kuneProperty,
-      final String persistenceProperty) {
-    if (kuneProperties.has(kuneProperty)) {
-      final String value = kuneProperties.get(kuneProperty);
+  private void setPropertyIfExists(final Properties dbProperties, final String persistenceProperty) {
+    if (kuneProperties.has(persistenceProperty)) {
+      final String value = kuneProperties.get(persistenceProperty);
       LOG.info(String.format("Setting property '%s' to '%s'", persistenceProperty, value));
       dbProperties.setProperty(persistenceProperty, value);
     }
