@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.bradrydzewski:gwt-cal:0.9.3-dndCreation">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/bradrydzewski/gwt-cal/0.9.3-dndCreation/gwt-cal-0.9.3-dndCreation.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/bradrydzewski/gwt-cal/0.9.3-dndCreation/gwt-cal-0.9.3-dndCreation-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/bradrydzewski/gwt-cal/0.9.3-dndCreation/gwt-cal-0.9.3-dndCreation-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

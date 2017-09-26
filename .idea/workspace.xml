@@ -1,0 +1,1382 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6ee7a471-355a-4af5-a3a1-87cf3c54f3b8" name="Default" comment="">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/KuneGxtBindings.gwt.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/GxtGinModule.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/AbstractGxtButtonGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/AbstractGxtMenuGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/AbstractGxtMenuItemGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtButtonGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtDefTooltip.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtGuiProvider.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtMenuCheckItemGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtMenuGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtMenuItemGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtMenuSeparatorGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtMenuTitleItemGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtPushButtonGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtSubMenuGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtToolbarGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/client/actions/gxtui/GxtToolbarSeparatorGui.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/css/gxt-op-common.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/box/corners-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/box/corners.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/box/l-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/box/l.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/box/r-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/box/r.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/box/tb-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/box/tb.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/group-cs.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/group-lr.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/group-tb.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/s-arrow-b-noline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/s-arrow-b.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/s-arrow-bo.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/s-arrow-noline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/s-arrow-o.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/button/s-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/editor/tb-source.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/editor/tb-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/checkbox.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/clear-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/date-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/error-tip-corners.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/exclamation.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/radio.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/search-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/spinner.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/text-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/trigger-single.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/trigger-tpl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/form/trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/arrow-left-white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/arrow-right-white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/col-move-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/col-move-top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/columns.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/dirty.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/done.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/drop-no.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/drop-yes.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/footer-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid-blue-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid-blue-split.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid-hrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid-loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid-split.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid-vista-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid3-hd-btn-contrast.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid3-hd-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid3-hrow-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid3-hrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid3-special-col-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/grid3-special-col-sel-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/group-by.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/group-collapse.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/group-expand-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/group-expand.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/hd-pop.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/hmenu-asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/hmenu-desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/hmenu-lock.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/hmenu-lock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/hmenu-unlock.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/hmenu-unlock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/invalid_line.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/mso-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/nowait.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/page-first-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/page-first.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/page-last-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/page-last.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/page-next-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/page-next.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/page-prev-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/page-prev.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/pick-button.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/refresh.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/row-check-sel.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/row-check-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/row-check.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/row-expand-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/row-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/row-sel.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/sort-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/sort_asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/sort_desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/grid/wait.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/icons/bottom2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/icons/doubleleft2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/icons/doubleright2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/icons/down2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/icons/left2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/icons/right2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/icons/top2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/icons/up2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/layout/mini-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/layout/mini-top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/menu/checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/menu/group-checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/menu/item-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/menu/menu-parent.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/menu/menu.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/menu/unchecked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/light-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tool-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tool-collapse.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tool-expand.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tool-gear.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tool-maximize.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tool-minimize.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tool-pin.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tool-sprite-tpl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tool-sprites.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/tools-sprites-trans.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/white-corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/white-left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/panel/white-top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/progress/progress-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/qtip/close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/qtip/tip-anchor-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/qtip/tip-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/shared/glass-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/shared/hd-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/shared/left-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/shared/right-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/e-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/e-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/ne-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/ne-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/nw-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/nw-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/s-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/s-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/se-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/se-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/square.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/sw-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/sizer/sw-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/slider/slider-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/slider/slider-thumb-single.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/slider/slider-thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/slider/slider-v-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/slider/slider-v-thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/scroll-left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/scroll-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/tab-btm-inactive-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/tab-btm-inactive-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/tab-btm-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/tab-btm-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/tab-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/tab-strip-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/tab-strip-btm-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tabs/tabs-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/btn-arrow-light.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/btn-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/btn-over-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/gray-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/more.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/s-arrow-bo.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/tb-btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/tb-xl-btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/toolbar/tb-xl-sep.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/arrows.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/drop-add.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/drop-between.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/drop-no.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/drop-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/drop-under.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/drop-yes.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-end-minus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-end-minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-end-plus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-end-plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-end.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-line.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-minus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-plus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow-plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/elbow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/folder-open.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/folder.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/leaf.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/tree-collapsed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/tree/tree-expanded.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/window/icon-error.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/window/icon-info.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/window/icon-question.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/window/icon-warning.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/window/left-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/window/left-right.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/window/right-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt-custom/images/window/top-bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/chart/open-flash-chart.swf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/css/gxt-all.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/css/gxt-gray.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/css/desktop.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/desktop.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/desktop3.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/gears.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/gears.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/grid.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/hatch.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/hd-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/hd-tb-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/icon_padlock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/icons-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/launcher-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/launcher-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/logout.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/logout.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/member.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/member.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/powered.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/powered.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/item-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/scroll-left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/scroll-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/start-menu-left-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/start-menu-left-right.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/start-menu-right-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/start-menu-right.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/start-menu-top-bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/startbutton-icon.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/startbutton.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/taskbar-split-h.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/taskbar-start-panel-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/taskbutton.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/taskbar/black/taskbuttons-panel-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/winbar-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/winbar-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/images/windows-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/desktop/wallpapers/desktop.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/flash/swfobject.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/box/corners-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/box/corners.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/box/l-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/box/l.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/box/r-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/box/r.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/box/tb-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/box/tb.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/btn-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/group-cs.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/group-lr.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/group-tb.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/s-arrow-b-noline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/s-arrow-b.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/s-arrow-bo.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/s-arrow-noline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/s-arrow-o.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/button/s-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/dd/drop-add.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/dd/drop-no.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/dd/drop-yes.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-bold.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-font-color.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-font-decrease.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-font-highlight.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-font-increase.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-italic.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-justify-center.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-justify-left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-justify-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-link.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-ol.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-source.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-ul.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/editor/tb-underline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/checkbox.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/clear-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/date-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/error-tip-corners.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/exclamation.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/radio.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/search-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/spinner.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/text-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/trigger-tpl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/form/trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/gradient-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/arrow-left-white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/arrow-right-white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/col-move-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/col-move-top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/columns.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/dirty.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/done.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/drop-no.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/drop-yes.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/footer-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid-blue-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid-blue-split.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid-hrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid-loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid-split.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid-vista-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid3-hd-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid3-hrow-group.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid3-hrow-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid3-hrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid3-special-col-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/grid3-special-col-sel-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/group-by.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/group-expand-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/hd-pop.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/hmenu-asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/hmenu-desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/hmenu-lock.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/hmenu-lock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/hmenu-unlock.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/hmenu-unlock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/invalid_line.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/mso-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/nowait.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/page-first-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/page-first.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/page-last-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/page-last.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/page-next-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/page-next.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/page-prev-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/page-prev.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/pick-button.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/refresh.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/refresh.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/row-check-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/row-expand-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/row-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/row-sel.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/sort-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/sort_asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/sort_desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/grid/wait.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/collapse.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/expand.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/gradient-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/mini-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/mini-left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/mini-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/mini-top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/ns-collapse.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/ns-expand.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/panel-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/panel-title-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/panel-title-light-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/stick.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/stuck.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/tab-close-on.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/layout/tab-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/menu/checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/menu/group-checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/menu/item-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/menu/menu-parent.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/menu/menu.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/menu/unchecked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/light-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/tool-sprite-tpl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/tool-sprites.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/tools-sprites-trans.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/top-bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/white-corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/white-left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/panel/white-top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/progress/progress-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/qtip/bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/qtip/close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/qtip/tip-anchor-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/qtip/tip-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shadow-c.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shadow-lr.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shadow.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/blue-loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/calendar.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/clear.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/glass-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/hd-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/large-loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/left-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/loading-balls.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/right-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/shared/warning.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/e-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/e-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/ne-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/ne-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/nw-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/nw-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/s-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/s-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/se-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/se-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/square.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/sw-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/sizer/sw-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/slider/slider-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/slider/slider-thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/slider/slider-v-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/slider/slider-v-thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/scroll-left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/scroll-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/scroller-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/tab-btm-inactive-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/tab-btm-inactive-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/tab-btm-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/tab-btm-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/tab-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/tab-strip-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/tab-strip-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/tab-strip-btm-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tabs/tabs-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/btn-arrow-light.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/btn-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/btn-over-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/gray-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/more.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/tb-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/tb-btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/tb-xl-btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/toolbar/tb-xl-sep.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/arrows.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/drop-add.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/drop-between.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/drop-no.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/drop-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/drop-under.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/drop-yes.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-end-minus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-end-minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-end-plus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-end-plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-end.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-line.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-minus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-plus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow-plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/elbow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/folder-open.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/folder.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/leaf.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/tree/s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/window/icon-error.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/window/icon-info.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/window/icon-question.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/window/icon-warning.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/window/left-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/window/left-right.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/window/right-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/default/window/top-bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/button/btn-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/button/btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/button/btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/button/group-cs.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/button/group-lr.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/button/group-tb.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/form/spinner.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/gradient-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/col-move-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/col-move-top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/grid-split.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/grid3-hd-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/grid3-hrow-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/grid3-hrow-over2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/grid3-hrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/grid3-hrow2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/grid3-special-col-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/grid3-special-col-bg2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/grid3-special-col-sel-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/group-collapse.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/group-expand-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/group-expand.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/page-first.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/page-last.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/page-next.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/page-prev.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/refresh.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/row-expand-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/sort_asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/grid/sort_desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/light-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/tool-sprite-tpl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/tool-sprites.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/tools-sprites-trans.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/top-bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/white-corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/white-left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/panel/white-top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/qtip/bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/qtip/close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/qtip/tip-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/scroll-left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/scroll-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/scroller-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/tab-btm-inactive-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/tab-btm-inactive-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/tab-btm-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/tab-btm-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/tab-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/tab-strip-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/tab-strip-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/tab-strip-btm-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/tabs/tabs-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/toolbar/bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/toolbar/btn-arrow-light.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/toolbar/btn-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/toolbar/btn-over-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/toolbar/gray-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/toolbar/tb-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/toolbar/tb-btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/window/icon-error.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/window/icon-info.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/window/icon-question.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/window/icon-warning.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/window/left-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/window/left-corners.pspimage" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/window/left-right.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/window/right-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gray/window/top-bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/dd/insert-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/grid/row-editor-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/grid/row-editor-btns.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/bottom2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/columns.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/done.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/doubleleft2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/doubleright2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/down2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/folder-closed.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/folder-closed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/folder.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/folder.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/grid-loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/hmenu-asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/hmenu-desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/left2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/nowait.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/page-first-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/page-first.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/page-last-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/page-last.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/page-next-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/page-next.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/page-prev-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/page-prev.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/paging.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/right2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/tabs.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/top2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/up2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/icons/wait.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/info/corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/info/top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/menu/disabledcheck.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/shared/clear.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/shared/large-loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/shared/select-18-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/shared/select-19-bg-gray.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/shared/select-19-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/shared/select-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/shared/select-light.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/table/row-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/table/vs-column-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/table/vsort-asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/table/vsort-desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/tree/checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/tree/joint-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/tree/joint-open.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/tree/notchecked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/tree/tree-table-special-col-sel.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/tree/tree-table-special-col.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/tree/vnode.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/images/gxt/tree/vnode_transparent.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/css/xtheme-access.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/box/corners-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/box/corners.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/box/l-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/box/l.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/box/r-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/box/r.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/box/tb-blue.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/box/tb.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/group-cs.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/group-lr.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/group-tb.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/s-arrow-b-noline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/s-arrow-b.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/s-arrow-bo.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/s-arrow-noline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/s-arrow-o.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/button/s-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/editor/tb-source.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/editor/tb-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/checkbox.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/clear-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/date-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/error-tip-corners.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/exclamation.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/radio.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/search-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/spinner.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/text-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/trigger-single.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/trigger-tpl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/form/trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/arrow-left-white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/arrow-right-white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/col-move-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/col-move-top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/columns.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/dirty.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/done.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/drop-no.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/drop-yes.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/footer-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid-blue-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid-blue-split.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid-hrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid-loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid-split.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid-vista-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid3-hd-btn-contrast.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid3-hd-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid3-hrow-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid3-hrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid3-special-col-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/grid3-special-col-sel-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/group-by.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/group-collapse.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/group-expand-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/group-expand.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/hd-pop.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/hmenu-asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/hmenu-desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/hmenu-lock.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/hmenu-lock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/hmenu-unlock.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/hmenu-unlock.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/invalid_line.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/mso-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/nowait.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/page-first-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/page-first.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/page-last-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/page-last.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/page-next-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/page-next.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/page-prev-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/page-prev.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/pick-button.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/refresh.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/row-check-sel.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/row-check-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/row-check.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/row-expand-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/row-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/row-sel.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/sort-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/sort_asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/sort_desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/grid/wait.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/icons/bottom2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/icons/doubleleft2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/icons/doubleright2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/icons/down2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/icons/left2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/icons/right2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/icons/top2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/icons/up2.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/layout/mini-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/layout/mini-top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/menu/checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/menu/group-checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/menu/item-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/menu/menu-parent.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/menu/menu.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/menu/unchecked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/light-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tool-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tool-collapse.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tool-expand.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tool-gear.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tool-maximize.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tool-minimize.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tool-pin.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tool-sprite-tpl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tool-sprites.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/tools-sprites-trans.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/white-corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/white-left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/panel/white-top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/progress/progress-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/qtip/close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/qtip/tip-anchor-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/qtip/tip-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/shared/glass-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/shared/hd-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/shared/left-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/shared/right-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/e-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/e-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/ne-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/ne-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/nw-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/nw-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/s-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/s-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/se-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/se-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/square.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/sw-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/sizer/sw-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/slider/slider-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/slider/slider-thumb-single.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/slider/slider-thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/slider/slider-v-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/slider/slider-v-thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/scroll-left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/scroll-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/tab-btm-inactive-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/tab-btm-inactive-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/tab-btm-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/tab-btm-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/tab-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/tab-strip-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/tab-strip-btm-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tabs/tabs-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/btn-arrow-light.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/btn-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/btn-over-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/gray-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/more.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/s-arrow-bo.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/tb-btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/tb-xl-btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/toolbar/tb-xl-sep.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/arrows.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/drop-add.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/drop-between.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/drop-no.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/drop-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/drop-under.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/drop-yes.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-end-minus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-end-minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-end-plus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-end-plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-end.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-line.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-minus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-minus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-plus-nl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow-plus.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/elbow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/folder-open.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/folder.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/leaf.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/loading.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/tree-collapsed.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/tree/tree-expanded.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/window/icon-error.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/window/icon-info.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/window/icon-question.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/window/icon-warning.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/window/left-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/window/left-right.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/window/right-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/access/images/window/top-bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/css/xtheme-slate.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/btn-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/group-cs.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/group-lr.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/group-tb.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/s-arrow-b-noline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/s-arrow-b.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/s-arrow-bo.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/s-arrow-noline.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/s-arrow-o.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/button/s-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/editor/tb-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/form/checkbox.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/form/clear-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/form/date-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/form/error-tip-corners.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/form/radio.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/form/search-trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/form/spinner.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/form/trigger-tpl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/form/trigger.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/gradient-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/arrow-left-white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/arrow-right-white.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/col-move-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/col-move-top.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/footer-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid-blue-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid-blue-split.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid-hrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid-split.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid-vista-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid3-hd-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid3-hrow-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid3-hrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid3-special-col-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/grid3-special-col-sel-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/group-expand-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/mso-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/page-first-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/page-first.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/page-last-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/page-last.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/page-next-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/page-next.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/page-prev-disabled.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/page-prev.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/refresh.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/row-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/row-sel.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/sort_asc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/grid/sort_desc.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/menu/checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/menu/group-checked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/menu/item-over - Copy.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/menu/item-over.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/menu/menu-parent.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/menu/menu.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/menu/unchecked.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/light-hd.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/tool-sprite-tpl.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/tool-sprites.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/tools-sprites-trans.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/top-bottom.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/white-corners-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/white-left-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/panel/white-top-bottom.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/progress/progress-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/qtip/bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/qtip/close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/qtip/tip-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/s.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/shared/glass-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/shared/hd-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/shared/left-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/shared/right-btn.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/e-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/e-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/ne-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/ne-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/nw-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/nw-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/s-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/s-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/se-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/se-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/square.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/sw-handle-dark.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/sizer/sw-handle.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/slider/slider-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/slider/slider-thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/slider/slider-v-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/slider/slider-v-thumb.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/scroll-left.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/scroll-right.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/scroller-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/tab-btm-inactive-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/tab-btm-inactive-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/tab-btm-left-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/tab-btm-right-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/tab-close.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/tab-strip-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/tab-strip-bg.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/tab-strip-btm-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tabs/tabs-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/toolbar/bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/toolbar/btn-arrow-light.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/toolbar/btn-arrow.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/toolbar/btn-over-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/toolbar/gray-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/toolbar/sep.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/toolbar/tb-bg.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/toolbar/tb-btn-sprite.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/tree/arrows.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/window/icon-error.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/window/icon-info.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/window/icon-question.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/window/icon-warning.gif" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/window/left-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/window/left-right.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/window/right-corners.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gxtbinds/public/gxt/themes/slate/images/slate/window/top-bottom.png" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/core/KuneCore.gwt.xml" afterPath="$PROJECT_DIR$/src/main/java/cc/kune/core/KuneCore.gwt.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gspace/client/i18n/I18nTranslatorPanel.java" afterPath="$PROJECT_DIR$/src/main/java/cc/kune/gspace/client/i18n/I18nTranslatorPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gspace/client/licensewizard/pages/LicenseWizardFirstForm.java" afterPath="$PROJECT_DIR$/src/main/java/cc/kune/gspace/client/licensewizard/pages/LicenseWizardFirstForm.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/cc/kune/gspace/client/options/general/UserOptGeneralPanel.java" afterPath="$PROJECT_DIR$/src/main/java/cc/kune/gspace/client/options/general/UserOptGeneralPanel.java" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GradleLocalSettings">
+    <option name="externalProjectsViewState">
+      <projects_view />
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/core/kune-sandbox/war/bower_components/web-animations-js/node_modules" />
+    <handled-path value="$PROJECT_DIR$/src/main/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="1699" />
+    <option name="y" value="867" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+      <manualOrder />
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="Scratches" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="kune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="kune" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="kune" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <module />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <envs />
+      <patterns />
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file id="idea.log" enabled="true" />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false">
+    <option name="remove_strategy" value="false" />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6ee7a471-355a-4af5-a3a1-87cf3c54f3b8" name="Default" comment="" />
+      <created>1504799456631</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1504799456631</updated>
+      <workItem from="1504801933170" duration="1015000" />
+      <workItem from="1504803005056" duration="427000" />
+      <workItem from="1504804544579" duration="296000" />
+      <workItem from="1504805671366" duration="711000" />
+      <workItem from="1504853055668" duration="338000" />
+      <workItem from="1504863936954" duration="99000" />
+      <workItem from="1504864420170" duration="581000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="5662000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1699" y="867" width="1080" height="1920" extended-state="6" />
+    <layout>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976928" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32976928" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29069766" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/cc/kune/Kune.gwt.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cc/kune/core/server/AbstractExtendedModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="972">
+          <caret line="54" column="22" lean-forward="false" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cc/kune/Kune.gwt.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cc/kune/core/server/AbstractExtendedModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="972">
+          <caret line="54" column="22" lean-forward="false" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/COPYRIGHT">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cc/kune/Kune.gwt.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CREDITS">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.classpath">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cc/kune/core/server/AbstractExtendedModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="54" column="22" lean-forward="false" selection-start-line="54" selection-start-column="22" selection-end-line="54" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/cc/kune/wave/server/CustomServerMain.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="792">
+          <caret line="115" column="18" lean-forward="false" selection-start-line="115" selection-start-column="18" selection-end-line="115" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>kune</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: ant:ant:1.6.5</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

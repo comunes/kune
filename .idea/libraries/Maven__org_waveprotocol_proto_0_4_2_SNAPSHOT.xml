@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.waveprotocol:proto:0.4.2-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/waveprotocol/proto/0.4.2-SNAPSHOT/proto-0.4.2-20170901.063609-2.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/waveprotocol/proto/0.4.2-SNAPSHOT/proto-0.4.2-20170901.063609-2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/waveprotocol/proto/0.4.2-SNAPSHOT/proto-0.4.2-20170901.063609-2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.calclab:emite:0.9-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/calclab/emite/0.9-SNAPSHOT/emite-0.9-20130704.112116-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/calclab/emite/0.9-SNAPSHOT/emite-0.9-20130704.112116-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/calclab/emite/0.9-SNAPSHOT/emite-0.9-20130704.112116-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

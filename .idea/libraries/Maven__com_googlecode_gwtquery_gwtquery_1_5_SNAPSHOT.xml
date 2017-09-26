@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.googlecode.gwtquery:gwtquery:1.5-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/gwtquery/gwtquery/1.5-SNAPSHOT/gwtquery-1.5-20170424.205428-8.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/gwtquery/gwtquery/1.5-SNAPSHOT/gwtquery-1.5-20170424.205428-8-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/googlecode/gwtquery/gwtquery/1.5-SNAPSHOT/gwtquery-1.5-20170424.205428-8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

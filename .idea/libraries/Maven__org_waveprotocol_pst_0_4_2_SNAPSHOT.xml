@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.waveprotocol:pst:0.4.2-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/waveprotocol/pst/0.4.2-SNAPSHOT/pst-0.4.2-20170904.104234-3.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/waveprotocol/pst/0.4.2-SNAPSHOT/pst-0.4.2-20170904.104234-3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/waveprotocol/pst/0.4.2-SNAPSHOT/pst-0.4.2-20170904.104234-3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

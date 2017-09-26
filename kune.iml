@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module classpath="eclipse" classpath-dir="$MODULE_DIR$" org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/main/webapp" relative="/" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
+          <root url="file://$MODULE_DIR$/.apt_generated" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+    <facet type="jpa" name="JPA">
+      <configuration>
+        <setting name="validation-enabled" value="true" />
+        <setting name="provider-name" value="" />
+        <datasource-mapping>
+          <factory-entry name="development" value="8800c485-c274-4810-81ed-af9fa15cfebc" />
+          <factory-entry name="openfire" value="354e0fd4-66e1-4817-8196-20b048966b55" />
+          <factory-entry name="production" value="c8b93cd4-1e5a-47c7-b518-6391bab84b5f" />
+          <factory-entry name="test" value="68110834-1f71-4f8c-aea2-e6dde7d46a7a" />
+          <factory-entry name="test_db" value="1137c418-e1e4-4333-a3d4-50a75217f07c" />
+        </datasource-mapping>
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
+      </configuration>
+    </facet>
+    <facet type="gwt" name="GWT">
+      <configuration>
+        <setting name="gwtSdkUrl" value="file://$USER_HOME$/bin/gwt/gwt-2.8.0" />
+      </configuration>
+    </facet>
+  </component>
+</module>

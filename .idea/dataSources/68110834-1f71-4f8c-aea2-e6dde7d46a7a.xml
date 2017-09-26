@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="test/Hibernate">
+  <database-model serializer="dbm" rdbms="H2" format-version="4.4">
+    <root id="1"/>
+    <database id="2" parent="1" name="TESTDB">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </database>
+    <schema id="3" parent="2" name="INFORMATION_SCHEMA"/>
+    <schema id="4" parent="2" name="PUBLIC"/>
+  </database-model>
+</dataSource>

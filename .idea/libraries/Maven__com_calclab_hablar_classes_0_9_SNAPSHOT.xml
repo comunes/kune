@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.calclab:hablar:classes:0.9-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/calclab/hablar/0.9-SNAPSHOT/hablar-0.9-20150226.095420-7-classes.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/calclab/hablar/0.9-SNAPSHOT/hablar-0.9-20150226.095420-7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/calclab/hablar/0.9-SNAPSHOT/hablar-0.9-20150226.095420-7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.mks.api:mksapi-jar:4.10.9049">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mks/api/mksapi-jar/4.10.9049/mksapi-jar-4.10.9049.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mks/api/mksapi-jar/4.10.9049/mksapi-jar-4.10.9049-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mks/api/mksapi-jar/4.10.9049/mksapi-jar-4.10.9049-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

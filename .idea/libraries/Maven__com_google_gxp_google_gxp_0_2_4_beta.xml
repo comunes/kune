@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.google.gxp:google-gxp:0.2.4-beta">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/gxp/google-gxp/0.2.4-beta/google-gxp-0.2.4-beta.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/gxp/google-gxp/0.2.4-beta/google-gxp-0.2.4-beta-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/google/gxp/google-gxp/0.2.4-beta/google-gxp-0.2.4-beta-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

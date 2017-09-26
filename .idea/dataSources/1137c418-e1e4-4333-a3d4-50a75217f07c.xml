@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="test_db/Hibernate">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="kune_test">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="kune"/>
+    <schema id="5" parent="1" name="kune_dev"/>
+    <schema id="6" parent="1" name="kune_openfire"/>
+    <schema id="7" parent="1" name="kune_prod"/>
+    <schema id="8" parent="1" name="test"/>
+  </database-model>
+</dataSource>

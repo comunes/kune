@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.adamtacy:gwt-fx:r464">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/adamtacy/gwt-fx/r464/gwt-fx-r464.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/adamtacy/gwt-fx/r464/gwt-fx-r464-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/adamtacy/gwt-fx/r464/gwt-fx-r464-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

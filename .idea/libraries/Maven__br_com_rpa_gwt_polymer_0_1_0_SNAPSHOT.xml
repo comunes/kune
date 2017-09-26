@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: br.com.rpa:gwt-polymer:0.1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/br/com/rpa/gwt-polymer/0.1.0-SNAPSHOT/gwt-polymer-0.1.0-20160616.152915-8.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/br/com/rpa/gwt-polymer/0.1.0-SNAPSHOT/gwt-polymer-0.1.0-20160616.152915-8-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/br/com/rpa/gwt-polymer/0.1.0-SNAPSHOT/gwt-polymer-0.1.0-20160616.152915-8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

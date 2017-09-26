@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.netbeans.lib:cvsclient:20060125">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/netbeans/lib/cvsclient/20060125/cvsclient-20060125-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

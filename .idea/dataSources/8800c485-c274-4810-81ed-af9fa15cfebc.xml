@@ -1,0 +1,1973 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="development/Hibernate">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="kune_dev">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <schema id="4" parent="1" name="kune"/>
+    <schema id="5" parent="1" name="kune_openfire"/>
+    <schema id="6" parent="1" name="kune_prod"/>
+    <schema id="7" parent="1" name="kune_test"/>
+    <schema id="8" parent="1" name="test"/>
+    <table id="9" parent="2" name="DATABASECHANGELOG"/>
+    <table id="10" parent="2" name="DATABASECHANGELOGLOCK"/>
+    <table id="11" parent="2" name="access_lists"/>
+    <table id="12" parent="2" name="container_translation"/>
+    <table id="13" parent="2" name="containers"/>
+    <table id="14" parent="2" name="containers_container_translation"/>
+    <table id="15" parent="2" name="content_translations"/>
+    <table id="16" parent="2" name="contents"/>
+    <table id="17" parent="2" name="contents_content_translations"/>
+    <table id="18" parent="2" name="contents_kusers"/>
+    <table id="19" parent="2" name="customproperties"/>
+    <table id="20" parent="2" name="ext_media_descriptors"/>
+    <table id="21" parent="2" name="globalize_countries"/>
+    <table id="22" parent="2" name="globalize_languages"/>
+    <table id="23" parent="2" name="globalize_translations"/>
+    <table id="24" parent="2" name="group_list"/>
+    <table id="25" parent="2" name="group_list_groups"/>
+    <table id="26" parent="2" name="groups"/>
+    <table id="27" parent="2" name="groups_tool_configurations"/>
+    <table id="28" parent="2" name="invitation"/>
+    <table id="29" parent="2" name="kusers"/>
+    <table id="30" parent="2" name="licenses"/>
+    <table id="31" parent="2" name="participants"/>
+    <table id="32" parent="2" name="participants_waves"/>
+    <table id="33" parent="2" name="rates"/>
+    <table id="34" parent="2" name="revisions"/>
+    <table id="35" parent="2" name="social_networks"/>
+    <table id="36" parent="2" name="tag_user_content"/>
+    <table id="37" parent="2" name="tags"/>
+    <table id="38" parent="2" name="tool_configurations"/>
+    <table id="39" parent="2" name="user_signin_log"/>
+    <table id="40" parent="2" name="waves"/>
+    <column id="41" parent="9" name="ID">
+      <Position>1</Position>
+      <DataType>varchar(63)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="42" parent="9" name="AUTHOR">
+      <Position>2</Position>
+      <DataType>varchar(63)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="43" parent="9" name="FILENAME">
+      <Position>3</Position>
+      <DataType>varchar(200)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="44" parent="9" name="DATEEXECUTED">
+      <Position>4</Position>
+      <DataType>datetime|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="45" parent="9" name="MD5SUM">
+      <Position>5</Position>
+      <DataType>varchar(32)|0</DataType>
+    </column>
+    <column id="46" parent="9" name="DESCRIPTION">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="47" parent="9" name="COMMENTS">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="48" parent="9" name="TAG">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="49" parent="9" name="LIQUIBASE">
+      <Position>9</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <key id="50" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID
+AUTHOR
+FILENAME</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="51" parent="10" name="ID">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="52" parent="10" name="LOCKED">
+      <Position>2</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="53" parent="10" name="LOCKGRANTED">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="54" parent="10" name="LOCKEDBY">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="55" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>ID</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="56" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="57" parent="11" name="admins_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="58" parent="11" name="editors_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="59" parent="11" name="viewers_id">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="60" parent="11" name="FK8BFAE0FA45D900E6">
+      <ColNames>editors_id</ColNames>
+    </index>
+    <index id="61" parent="11" name="FK8BFAE0FA522D370B">
+      <ColNames>viewers_id</ColNames>
+    </index>
+    <index id="62" parent="11" name="FK8BFAE0FAA3EB21C8">
+      <ColNames>admins_id</ColNames>
+    </index>
+    <key id="63" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="64" parent="11" name="FK8BFAE0FAA3EB21C8">
+      <ColNames>admins_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>group_list</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="65" parent="11" name="FK8BFAE0FA45D900E6">
+      <ColNames>editors_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>group_list</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="66" parent="11" name="FK8BFAE0FA522D370B">
+      <ColNames>viewers_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>group_list</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="67" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="68" parent="12" name="name">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="69" parent="12" name="language_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="70" parent="12" name="FK312BE3F39F03C503">
+      <ColNames>language_id</ColNames>
+    </index>
+    <key id="71" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="72" parent="12" name="FK312BE3F39F03C503">
+      <ColNames>language_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>globalize_languages</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="73" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="74" parent="13" name="createdOn">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="75" parent="13" name="deletedOn">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="76" parent="13" name="name">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="77" parent="13" name="toolName">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="78" parent="13" name="typeId">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="79" parent="13" name="accessLists_id">
+      <Position>7</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="80" parent="13" name="language_id">
+      <Position>8</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="81" parent="13" name="owner_id">
+      <Position>9</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="82" parent="13" name="parent_id">
+      <Position>10</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="83" parent="13" name="createdOn">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="84" parent="13" name="createdOn_2">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="85" parent="13" name="deletedOn">
+      <ColNames>deletedOn</ColNames>
+    </index>
+    <index id="86" parent="13" name="deletedOn_2">
+      <ColNames>deletedOn</ColNames>
+    </index>
+    <index id="87" parent="13" name="FK8A844125DDFDF26">
+      <ColNames>parent_id</ColNames>
+    </index>
+    <index id="88" parent="13" name="FK8A844129F03C503">
+      <ColNames>language_id</ColNames>
+    </index>
+    <index id="89" parent="13" name="FK8A844129F76A8FB">
+      <ColNames>owner_id</ColNames>
+    </index>
+    <index id="90" parent="13" name="FK8A84412F8E388F">
+      <ColNames>accessLists_id</ColNames>
+    </index>
+    <key id="91" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="92" parent="13" name="FK8A84412F8E388F">
+      <ColNames>accessLists_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>access_lists</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="93" parent="13" name="FK8A844129F03C503">
+      <ColNames>language_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>globalize_languages</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="94" parent="13" name="FK8A844129F76A8FB">
+      <ColNames>owner_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>groups</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="95" parent="13" name="FK8A844125DDFDF26">
+      <ColNames>parent_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>containers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="96" parent="14" name="containers_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="97" parent="14" name="containerTranslations_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="98" parent="14" name="containerTranslations_id">
+      <ColNames>containerTranslations_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="99" parent="14" name="FK1BA62F861FB22672">
+      <ColNames>containerTranslations_id</ColNames>
+    </index>
+    <index id="100" parent="14" name="FK1BA62F8657C40ABE">
+      <ColNames>containers_id</ColNames>
+    </index>
+    <index id="101" parent="14" name="UK_3i44o028ka20yme9dpjmu8841">
+      <ColNames>containerTranslations_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="102" parent="14" name="UK_3i44o028ka20yme9dpjmu8841">
+      <ColNames>containerTranslations_id</ColNames>
+      <UnderlyingIndexName>UK_3i44o028ka20yme9dpjmu8841</UnderlyingIndexName>
+    </key>
+    <key id="103" parent="14" name="containerTranslations_id">
+      <ColNames>containerTranslations_id</ColNames>
+      <UnderlyingIndexName>containerTranslations_id</UnderlyingIndexName>
+    </key>
+    <foreign-key id="104" parent="14" name="FK1BA62F8657C40ABE">
+      <ColNames>containers_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>containers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="105" parent="14" name="FK1BA62F861FB22672">
+      <ColNames>containerTranslations_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>container_translation</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="106" parent="15" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="107" parent="15" name="contentId">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="108" parent="15" name="language_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="109" parent="15" name="FKF10565E89F03C503">
+      <ColNames>language_id</ColNames>
+    </index>
+    <key id="110" parent="15" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="111" parent="15" name="FKF10565E89F03C503">
+      <ColNames>language_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>globalize_languages</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="112" parent="16" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="113" parent="16" name="createdOn">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="114" parent="16" name="deletedOn">
+      <Position>3</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="115" parent="16" name="filename">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="116" parent="16" name="mimesubtype">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="117" parent="16" name="mimetype">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="118" parent="16" name="modifiedOn">
+      <Position>7</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="119" parent="16" name="publishedOn">
+      <Position>8</Position>
+      <DataType>datetime|0</DataType>
+    </column>
+    <column id="120" parent="16" name="status">
+      <Position>9</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="121" parent="16" name="typeId">
+      <Position>10</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="122" parent="16" name="version">
+      <Position>11</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="123" parent="16" name="waveId">
+      <Position>12</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="124" parent="16" name="accessLists_id">
+      <Position>13</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="125" parent="16" name="container_id">
+      <Position>14</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="126" parent="16" name="language_id">
+      <Position>15</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="127" parent="16" name="lastRevision_id">
+      <Position>16</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="128" parent="16" name="license_id">
+      <Position>17</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="129" parent="16" name="createdOn">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="130" parent="16" name="createdOn_2">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="131" parent="16" name="deletedOn">
+      <ColNames>deletedOn</ColNames>
+    </index>
+    <index id="132" parent="16" name="deletedOn_2">
+      <ColNames>deletedOn</ColNames>
+    </index>
+    <index id="133" parent="16" name="FKDE2F5B1A1FE0D12F">
+      <ColNames>license_id</ColNames>
+    </index>
+    <index id="134" parent="16" name="FKDE2F5B1A622077EF">
+      <ColNames>container_id</ColNames>
+    </index>
+    <index id="135" parent="16" name="FKDE2F5B1A9F03C503">
+      <ColNames>language_id</ColNames>
+    </index>
+    <index id="136" parent="16" name="FKDE2F5B1AF8E388F">
+      <ColNames>accessLists_id</ColNames>
+    </index>
+    <index id="137" parent="16" name="FKDE2F5B1AFC54C30F">
+      <ColNames>lastRevision_id</ColNames>
+    </index>
+    <index id="138" parent="16" name="modifiedOn">
+      <ColNames>modifiedOn</ColNames>
+    </index>
+    <index id="139" parent="16" name="modifiedOn_2">
+      <ColNames>modifiedOn</ColNames>
+    </index>
+    <index id="140" parent="16" name="publishedOn">
+      <ColNames>publishedOn</ColNames>
+    </index>
+    <index id="141" parent="16" name="publishedOn_2">
+      <ColNames>publishedOn</ColNames>
+    </index>
+    <index id="142" parent="16" name="status">
+      <ColNames>status</ColNames>
+    </index>
+    <index id="143" parent="16" name="status_2">
+      <ColNames>status</ColNames>
+    </index>
+    <index id="144" parent="16" name="version">
+      <ColNames>version</ColNames>
+    </index>
+    <index id="145" parent="16" name="version_2">
+      <ColNames>version</ColNames>
+    </index>
+    <index id="146" parent="16" name="waveId">
+      <ColNames>waveId</ColNames>
+    </index>
+    <index id="147" parent="16" name="waveId_2">
+      <ColNames>waveId</ColNames>
+    </index>
+    <key id="148" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="149" parent="16" name="FKDE2F5B1AF8E388F">
+      <ColNames>accessLists_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>access_lists</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="150" parent="16" name="FKDE2F5B1A622077EF">
+      <ColNames>container_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>containers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="151" parent="16" name="FKDE2F5B1A9F03C503">
+      <ColNames>language_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>globalize_languages</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="152" parent="16" name="FKDE2F5B1AFC54C30F">
+      <ColNames>lastRevision_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>revisions</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="153" parent="16" name="FKDE2F5B1A1FE0D12F">
+      <ColNames>license_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>licenses</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="154" parent="17" name="contents_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="155" parent="17" name="translations_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="156" parent="17" name="FKF5E4F9ED879058DB">
+      <ColNames>translations_id</ColNames>
+    </index>
+    <index id="157" parent="17" name="FKF5E4F9ED8B538FEE">
+      <ColNames>contents_id</ColNames>
+    </index>
+    <index id="158" parent="17" name="translations_id">
+      <ColNames>translations_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="159" parent="17" name="UK_oppdogtv8cgkbs1c9aqpima1a">
+      <ColNames>translations_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="160" parent="17" name="UK_oppdogtv8cgkbs1c9aqpima1a">
+      <ColNames>translations_id</ColNames>
+      <UnderlyingIndexName>UK_oppdogtv8cgkbs1c9aqpima1a</UnderlyingIndexName>
+    </key>
+    <key id="161" parent="17" name="translations_id">
+      <ColNames>translations_id</ColNames>
+      <UnderlyingIndexName>translations_id</UnderlyingIndexName>
+    </key>
+    <foreign-key id="162" parent="17" name="FKF5E4F9ED8B538FEE">
+      <ColNames>contents_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>contents</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="163" parent="17" name="FKF5E4F9ED879058DB">
+      <ColNames>translations_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>content_translations</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="164" parent="18" name="contents_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="165" parent="18" name="authors_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="166" parent="18" name="FK956FE9428B538FEE">
+      <ColNames>contents_id</ColNames>
+    </index>
+    <index id="167" parent="18" name="FK956FE94298059548">
+      <ColNames>authors_id</ColNames>
+    </index>
+    <foreign-key id="168" parent="18" name="FK956FE9428B538FEE">
+      <ColNames>contents_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>contents</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="169" parent="18" name="FK956FE94298059548">
+      <ColNames>authors_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>kusers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="170" parent="19" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="171" parent="19" name="data">
+      <Position>2</Position>
+      <DataType>longblob|0</DataType>
+    </column>
+    <key id="172" parent="19" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="173" parent="20" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="174" parent="20" name="detectRegex">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="175" parent="20" name="embedTemplate">
+      <Position>3</Position>
+      <DataType>longtext|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="176" parent="20" name="height">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="177" parent="20" name="idRegex">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="178" parent="20" name="name">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="179" parent="20" name="siteurl">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="180" parent="20" name="width">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="181" parent="20" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="182" parent="21" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="183" parent="21" name="code">
+      <Position>2</Position>
+      <DataType>varchar(2)|0</DataType>
+    </column>
+    <column id="184" parent="21" name="currency_code">
+      <Position>3</Position>
+      <DataType>varchar(3)|0</DataType>
+    </column>
+    <column id="185" parent="21" name="currency_decimal_sep">
+      <Position>4</Position>
+      <DataType>varchar(2)|0</DataType>
+    </column>
+    <column id="186" parent="21" name="currency_format">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="187" parent="21" name="date_format">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="188" parent="21" name="decimal_sep">
+      <Position>7</Position>
+      <DataType>varchar(2)|0</DataType>
+    </column>
+    <column id="189" parent="21" name="english_name">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="190" parent="21" name="number_grouping_scheme">
+      <Position>9</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="191" parent="21" name="thousands_sep">
+      <Position>10</Position>
+      <DataType>varchar(2)|0</DataType>
+    </column>
+    <index id="192" parent="21" name="code">
+      <ColNames>code</ColNames>
+    </index>
+    <index id="193" parent="21" name="code_2">
+      <ColNames>code</ColNames>
+    </index>
+    <index id="194" parent="21" name="english_name">
+      <ColNames>english_name</ColNames>
+    </index>
+    <index id="195" parent="21" name="english_name_2">
+      <ColNames>english_name</ColNames>
+    </index>
+    <index id="196" parent="21" name="id">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="197" parent="21" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="198" parent="21" name="id">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id</UnderlyingIndexName>
+    </key>
+    <column id="199" parent="22" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="200" parent="22" name="code">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="201" parent="22" name="date_format">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="202" parent="22" name="date_format_short">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="203" parent="22" name="direction">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="204" parent="22" name="english_name">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="205" parent="22" name="english_name_locale">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="206" parent="22" name="english_name_modifier">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="207" parent="22" name="iso_639_1">
+      <Position>9</Position>
+      <DataType>varchar(2)|0</DataType>
+    </column>
+    <column id="208" parent="22" name="iso_639_2">
+      <Position>10</Position>
+      <DataType>varchar(3)|0</DataType>
+    </column>
+    <column id="209" parent="22" name="iso_639_3">
+      <Position>11</Position>
+      <DataType>varchar(3)|0</DataType>
+    </column>
+    <column id="210" parent="22" name="macro_language">
+      <Position>12</Position>
+      <DataType>bit(1)|0</DataType>
+    </column>
+    <column id="211" parent="22" name="native_name">
+      <Position>13</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="212" parent="22" name="native_name_locale">
+      <Position>14</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="213" parent="22" name="native_name_modifier">
+      <Position>15</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="214" parent="22" name="pluralization">
+      <Position>16</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="215" parent="22" name="rfc_3066">
+      <Position>17</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="216" parent="22" name="scope">
+      <Position>18</Position>
+      <DataType>varchar(1)|0</DataType>
+    </column>
+    <index id="217" parent="22" name="code">
+      <ColNames>code</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="218" parent="22" name="code_2">
+      <ColNames>code</ColNames>
+    </index>
+    <index id="219" parent="22" name="english_name">
+      <ColNames>english_name</ColNames>
+    </index>
+    <index id="220" parent="22" name="english_name_2">
+      <ColNames>english_name</ColNames>
+    </index>
+    <index id="221" parent="22" name="id">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="222" parent="22" name="iso_639_2">
+      <ColNames>iso_639_2</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="223" parent="22" name="iso_639_3">
+      <ColNames>iso_639_3</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="224" parent="22" name="rfc_3066">
+      <ColNames>rfc_3066</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="225" parent="22" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="226" parent="22" name="id">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id</UnderlyingIndexName>
+    </key>
+    <key id="227" parent="22" name="code">
+      <ColNames>code</ColNames>
+      <UnderlyingIndexName>code</UnderlyingIndexName>
+    </key>
+    <key id="228" parent="22" name="iso_639_2">
+      <ColNames>iso_639_2</ColNames>
+      <UnderlyingIndexName>iso_639_2</UnderlyingIndexName>
+    </key>
+    <key id="229" parent="22" name="iso_639_3">
+      <ColNames>iso_639_3</ColNames>
+      <UnderlyingIndexName>iso_639_3</UnderlyingIndexName>
+    </key>
+    <key id="230" parent="22" name="rfc_3066">
+      <ColNames>rfc_3066</ColNames>
+      <UnderlyingIndexName>rfc_3066</UnderlyingIndexName>
+    </key>
+    <column id="231" parent="23" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="232" parent="23" name="facet">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="233" parent="23" name="item_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="234" parent="23" name="noteForTranslators">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="235" parent="23" name="pluralization_index">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <column id="236" parent="23" name="table_name">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="237" parent="23" name="text">
+      <Position>7</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="238" parent="23" name="tr_key">
+      <Position>8</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="239" parent="23" name="gtype">
+      <Position>9</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="240" parent="23" name="language_id">
+      <Position>10</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="241" parent="23" name="parent_id">
+      <Position>11</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="242" parent="23" name="FKCB245A905E56098">
+      <ColNames>parent_id</ColNames>
+    </index>
+    <index id="243" parent="23" name="FKCB245A909F03C503">
+      <ColNames>language_id</ColNames>
+    </index>
+    <index id="244" parent="23" name="gtype">
+      <ColNames>gtype</ColNames>
+    </index>
+    <index id="245" parent="23" name="gtype_2">
+      <ColNames>gtype</ColNames>
+    </index>
+    <index id="246" parent="23" name="id">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="247" parent="23" name="tr_key">
+      <ColNames>tr_key</ColNames>
+    </index>
+    <index id="248" parent="23" name="tr_key_2">
+      <ColNames>tr_key</ColNames>
+    </index>
+    <key id="249" parent="23" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="250" parent="23" name="id">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>id</UnderlyingIndexName>
+    </key>
+    <foreign-key id="251" parent="23" name="FKCB245A909F03C503">
+      <ColNames>language_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>globalize_languages</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="252" parent="23" name="FKCB245A905E56098">
+      <ColNames>parent_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>globalize_translations</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="253" parent="24" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="254" parent="24" name="mode">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <key id="255" parent="24" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="256" parent="25" name="group_list_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="257" parent="25" name="list_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="258" parent="25" name="FK531B66D5472D9F30">
+      <ColNames>list_id</ColNames>
+    </index>
+    <index id="259" parent="25" name="FK531B66D5B075E82E">
+      <ColNames>group_list_id</ColNames>
+    </index>
+    <key id="260" parent="25" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>group_list_id
+list_id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="261" parent="25" name="FK531B66D5B075E82E">
+      <ColNames>group_list_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>group_list</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="262" parent="25" name="FK531B66D5472D9F30">
+      <ColNames>list_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>groups</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="263" parent="26" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="264" parent="26" name="admissionType">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="265" parent="26" name="backgroundImage">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="266" parent="26" name="backgroundMime">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="267" parent="26" name="createdOn">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="268" parent="26" name="groupType">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="269" parent="26" name="logo">
+      <Position>7</Position>
+      <DataType>longblob|0</DataType>
+    </column>
+    <column id="270" parent="26" name="mimesubtype">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="271" parent="26" name="mimetype">
+      <Position>9</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="272" parent="26" name="longName">
+      <Position>10</Position>
+      <DataType>varchar(60)|0</DataType>
+    </column>
+    <column id="273" parent="26" name="shortName">
+      <Position>11</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="274" parent="26" name="workspaceTheme">
+      <Position>12</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="275" parent="26" name="defaultContent_id">
+      <Position>13</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="276" parent="26" name="defaultLicense_id">
+      <Position>14</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="277" parent="26" name="socialNetwork_id">
+      <Position>15</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="278" parent="26" name="logoLastModifiedTime">
+      <Position>16</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;1347400051999&apos;</DefaultExpression>
+    </column>
+    <index id="279" parent="26" name="admissionType">
+      <ColNames>admissionType</ColNames>
+    </index>
+    <index id="280" parent="26" name="createdOn">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="281" parent="26" name="createdOn_2">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="282" parent="26" name="FKB63DD9D43EC9394F">
+      <ColNames>socialNetwork_id</ColNames>
+    </index>
+    <index id="283" parent="26" name="FKB63DD9D44E0DFF30">
+      <ColNames>defaultContent_id</ColNames>
+    </index>
+    <index id="284" parent="26" name="FKB63DD9D4BBB28A30">
+      <ColNames>defaultLicense_id</ColNames>
+    </index>
+    <index id="285" parent="26" name="groupType">
+      <ColNames>groupType</ColNames>
+    </index>
+    <index id="286" parent="26" name="groupType_2">
+      <ColNames>groupType</ColNames>
+    </index>
+    <index id="287" parent="26" name="longName">
+      <ColNames>longName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="288" parent="26" name="shortName">
+      <ColNames>shortName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="289" parent="26" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="290" parent="26" name="longName">
+      <ColNames>longName</ColNames>
+      <UnderlyingIndexName>longName</UnderlyingIndexName>
+    </key>
+    <key id="291" parent="26" name="shortName">
+      <ColNames>shortName</ColNames>
+      <UnderlyingIndexName>shortName</UnderlyingIndexName>
+    </key>
+    <foreign-key id="292" parent="26" name="FKB63DD9D44E0DFF30">
+      <ColNames>defaultContent_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>contents</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="293" parent="26" name="FKB63DD9D4BBB28A30">
+      <ColNames>defaultLicense_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>licenses</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="294" parent="26" name="FKB63DD9D43EC9394F">
+      <ColNames>socialNetwork_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>social_networks</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="295" parent="27" name="groups_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="296" parent="27" name="toolsConfig_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="297" parent="27" name="mapkey">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;&apos;</DefaultExpression>
+    </column>
+    <index id="298" parent="27" name="FK1CDF00D94B11FAD0">
+      <ColNames>toolsConfig_id</ColNames>
+    </index>
+    <index id="299" parent="27" name="FK1CDF00D9E3FE623A">
+      <ColNames>groups_id</ColNames>
+    </index>
+    <index id="300" parent="27" name="toolsConfig_id">
+      <ColNames>toolsConfig_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="301" parent="27" name="UK_6aw5wm57enmrye2xkftyimgeq">
+      <ColNames>toolsConfig_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="302" parent="27" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>groups_id
+mapkey</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="303" parent="27" name="UK_6aw5wm57enmrye2xkftyimgeq">
+      <ColNames>toolsConfig_id</ColNames>
+      <UnderlyingIndexName>UK_6aw5wm57enmrye2xkftyimgeq</UnderlyingIndexName>
+    </key>
+    <key id="304" parent="27" name="toolsConfig_id">
+      <ColNames>toolsConfig_id</ColNames>
+      <UnderlyingIndexName>toolsConfig_id</UnderlyingIndexName>
+    </key>
+    <foreign-key id="305" parent="27" name="FK1CDF00D9E3FE623A">
+      <ColNames>groups_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>groups</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="306" parent="27" name="FK1CDF00D94B11FAD0">
+      <ColNames>toolsConfig_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>tool_configurations</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="307" parent="28" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="308" parent="28" name="date">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="309" parent="28" name="hash">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="310" parent="28" name="invitedToToken">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="311" parent="28" name="notifType">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="312" parent="28" name="invitTo">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="313" parent="28" name="type">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="314" parent="28" name="fromUser_id">
+      <Position>8</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="315" parent="28" name="used">
+      <Position>9</Position>
+      <DataType>bit(1)|0</DataType>
+    </column>
+    <index id="316" parent="28" name="FK473F7799890F3BFB">
+      <ColNames>fromUser_id</ColNames>
+    </index>
+    <index id="317" parent="28" name="hash">
+      <ColNames>hash</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="318" parent="28" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="319" parent="28" name="hash">
+      <ColNames>hash</ColNames>
+      <UnderlyingIndexName>hash</UnderlyingIndexName>
+    </key>
+    <foreign-key id="320" parent="28" name="FK473F7799890F3BFB">
+      <ColNames>fromUser_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>kusers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="321" parent="29" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="322" parent="29" name="createdOn">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="323" parent="29" name="diggest">
+      <Position>3</Position>
+      <DataType>longblob|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="324" parent="29" name="email">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="325" parent="29" name="emailCheckDate">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="326" parent="29" name="emailConfirmHash">
+      <Position>6</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="327" parent="29" name="emailNotifFreq">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="328" parent="29" name="emailVerified">
+      <Position>8</Position>
+      <DataType>bit(1)|0</DataType>
+    </column>
+    <column id="329" parent="29" name="lastLogin">
+      <Position>9</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="330" parent="29" name="name">
+      <Position>10</Position>
+      <DataType>varchar(60)|0</DataType>
+    </column>
+    <column id="331" parent="29" name="sNetVisibility">
+      <Position>11</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="332" parent="29" name="salt">
+      <Position>12</Position>
+      <DataType>longblob|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="333" parent="29" name="shortName">
+      <Position>13</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="334" parent="29" name="timezone">
+      <Position>14</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="335" parent="29" name="country_id">
+      <Position>15</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="336" parent="29" name="language_id">
+      <Position>16</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="337" parent="29" name="userGroup_id">
+      <Position>17</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="338" parent="29" name="createdOn">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="339" parent="29" name="createdOn_2">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="340" parent="29" name="email">
+      <ColNames>email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="341" parent="29" name="emailConfirmHash">
+      <ColNames>emailConfirmHash</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="342" parent="29" name="FKBD3D187D28E3727A">
+      <ColNames>userGroup_id</ColNames>
+    </index>
+    <index id="343" parent="29" name="FKBD3D187D61C72291">
+      <ColNames>country_id</ColNames>
+    </index>
+    <index id="344" parent="29" name="FKBD3D187D9F03C503">
+      <ColNames>language_id</ColNames>
+    </index>
+    <index id="345" parent="29" name="name">
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="346" parent="29" name="shortName">
+      <ColNames>shortName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="347" parent="29" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="348" parent="29" name="email">
+      <ColNames>email</ColNames>
+      <UnderlyingIndexName>email</UnderlyingIndexName>
+    </key>
+    <key id="349" parent="29" name="emailConfirmHash">
+      <ColNames>emailConfirmHash</ColNames>
+      <UnderlyingIndexName>emailConfirmHash</UnderlyingIndexName>
+    </key>
+    <key id="350" parent="29" name="name">
+      <ColNames>name</ColNames>
+      <UnderlyingIndexName>name</UnderlyingIndexName>
+    </key>
+    <key id="351" parent="29" name="shortName">
+      <ColNames>shortName</ColNames>
+      <UnderlyingIndexName>shortName</UnderlyingIndexName>
+    </key>
+    <foreign-key id="352" parent="29" name="FKBD3D187D61C72291">
+      <ColNames>country_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>globalize_countries</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="353" parent="29" name="FKBD3D187D9F03C503">
+      <ColNames>language_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>globalize_languages</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="354" parent="29" name="FKBD3D187D28E3727A">
+      <ColNames>userGroup_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>groups</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="355" parent="30" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="356" parent="30" name="description">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="357" parent="30" name="imageUrl">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="358" parent="30" name="isCC">
+      <Position>4</Position>
+      <DataType>bit(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="359" parent="30" name="isCopyleft">
+      <Position>5</Position>
+      <DataType>bit(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="360" parent="30" name="isDeprecated">
+      <Position>6</Position>
+      <DataType>bit(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="361" parent="30" name="longName">
+      <Position>7</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="362" parent="30" name="rdf">
+      <Position>8</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="363" parent="30" name="shortName">
+      <Position>9</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="364" parent="30" name="url">
+      <Position>10</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="365" parent="30" name="index1">
+      <ColNames>shortName</ColNames>
+    </index>
+    <index id="366" parent="30" name="isCC">
+      <ColNames>isCC</ColNames>
+    </index>
+    <index id="367" parent="30" name="isCC_2">
+      <ColNames>isCC</ColNames>
+    </index>
+    <index id="368" parent="30" name="longName">
+      <ColNames>longName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="369" parent="30" name="shortName">
+      <ColNames>shortName</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="370" parent="30" name="shortName_2">
+      <ColNames>shortName</ColNames>
+    </index>
+    <key id="371" parent="30" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="372" parent="30" name="longName">
+      <ColNames>longName</ColNames>
+      <UnderlyingIndexName>longName</UnderlyingIndexName>
+    </key>
+    <key id="373" parent="30" name="shortName">
+      <ColNames>shortName</ColNames>
+      <UnderlyingIndexName>shortName</UnderlyingIndexName>
+    </key>
+    <column id="374" parent="31" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="375" parent="31" name="address">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="376" parent="31" name="address">
+      <ColNames>address</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="377" parent="31" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="378" parent="31" name="address">
+      <ColNames>address</ColNames>
+      <UnderlyingIndexName>address</UnderlyingIndexName>
+    </key>
+    <column id="379" parent="32" name="participants_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="380" parent="32" name="waves_domain">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="381" parent="32" name="waves_waveId">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="382" parent="32" name="waves_waveletId">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="383" parent="32" name="FKAAA6EF3BDDE119E1">
+      <ColNames>waves_domain
+waves_waveId
+waves_waveletId</ColNames>
+    </index>
+    <index id="384" parent="32" name="FKAAA6EF3BEBD95FE5">
+      <ColNames>participants_id</ColNames>
+    </index>
+    <key id="385" parent="32" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>participants_id
+waves_domain
+waves_waveId
+waves_waveletId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="386" parent="32" name="FKAAA6EF3BEBD95FE5">
+      <ColNames>participants_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>participants</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="387" parent="32" name="FKAAA6EF3BDDE119E1">
+      <ColNames>waves_domain
+waves_waveId
+waves_waveletId</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>waves</RefTableName>
+      <RefColNames>domain
+waveId
+waveletId</RefColNames>
+    </foreign-key>
+    <column id="388" parent="33" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="389" parent="33" name="createdOn">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="390" parent="33" name="value">
+      <Position>3</Position>
+      <DataType>double|0</DataType>
+    </column>
+    <column id="391" parent="33" name="content_id">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="392" parent="33" name="rater_id">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="393" parent="33" name="content_id">
+      <ColNames>content_id
+rater_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="394" parent="33" name="FK6744F93AAD99BE">
+      <ColNames>rater_id</ColNames>
+    </index>
+    <index id="395" parent="33" name="FK6744F93B23C462F">
+      <ColNames>content_id</ColNames>
+    </index>
+    <index id="396" parent="33" name="UK_p13p2d07w4ftce1yt7phucp4l">
+      <ColNames>content_id
+rater_id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="397" parent="33" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="398" parent="33" name="UK_p13p2d07w4ftce1yt7phucp4l">
+      <ColNames>content_id
+rater_id</ColNames>
+      <UnderlyingIndexName>UK_p13p2d07w4ftce1yt7phucp4l</UnderlyingIndexName>
+    </key>
+    <key id="399" parent="33" name="content_id">
+      <ColNames>content_id
+rater_id</ColNames>
+      <UnderlyingIndexName>content_id</UnderlyingIndexName>
+    </key>
+    <foreign-key id="400" parent="33" name="FK6744F93B23C462F">
+      <ColNames>content_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>contents</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="401" parent="33" name="FK6744F93AAD99BE">
+      <ColNames>rater_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>kusers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="402" parent="34" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="403" parent="34" name="body">
+      <Position>2</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="404" parent="34" name="createdOn">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="405" parent="34" name="title">
+      <Position>4</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="406" parent="34" name="version">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="407" parent="34" name="content_id">
+      <Position>6</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="408" parent="34" name="editor_id">
+      <Position>7</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="409" parent="34" name="previous_id">
+      <Position>8</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="410" parent="34" name="createdOn">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="411" parent="34" name="createdOn_2">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="412" parent="34" name="FK1E2243F882CA86C9">
+      <ColNames>previous_id</ColNames>
+    </index>
+    <index id="413" parent="34" name="FK1E2243F8831BB603">
+      <ColNames>editor_id</ColNames>
+    </index>
+    <index id="414" parent="34" name="FK1E2243F8B23C462F">
+      <ColNames>content_id</ColNames>
+    </index>
+    <index id="415" parent="34" name="version">
+      <ColNames>version</ColNames>
+    </index>
+    <index id="416" parent="34" name="version_2">
+      <ColNames>version</ColNames>
+    </index>
+    <key id="417" parent="34" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="418" parent="34" name="FK1E2243F8B23C462F">
+      <ColNames>content_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>contents</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="419" parent="34" name="FK1E2243F8831BB603">
+      <ColNames>editor_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>kusers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="420" parent="34" name="FK1E2243F882CA86C9">
+      <ColNames>previous_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>revisions</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="421" parent="35" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="422" parent="35" name="visibility">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="423" parent="35" name="accessLists_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="424" parent="35" name="pendingCollaborators_id">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="425" parent="35" name="FK7E96109764FC5696">
+      <ColNames>pendingCollaborators_id</ColNames>
+    </index>
+    <index id="426" parent="35" name="FK7E961097F8E388F">
+      <ColNames>accessLists_id</ColNames>
+    </index>
+    <key id="427" parent="35" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="428" parent="35" name="FK7E961097F8E388F">
+      <ColNames>accessLists_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>access_lists</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="429" parent="35" name="FK7E96109764FC5696">
+      <ColNames>pendingCollaborators_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>group_list</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="430" parent="36" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="431" parent="36" name="createdOn">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="432" parent="36" name="content_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="433" parent="36" name="tag_id">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="434" parent="36" name="user_id">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="435" parent="36" name="createdOn">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="436" parent="36" name="createdOn_2">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="437" parent="36" name="FK38BE208A4F22390F">
+      <ColNames>tag_id</ColNames>
+    </index>
+    <index id="438" parent="36" name="FK38BE208AB23C462F">
+      <ColNames>content_id</ColNames>
+    </index>
+    <index id="439" parent="36" name="FK38BE208AE8AF66E5">
+      <ColNames>user_id</ColNames>
+    </index>
+    <key id="440" parent="36" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="441" parent="36" name="FK38BE208AB23C462F">
+      <ColNames>content_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>contents</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="442" parent="36" name="FK38BE208A4F22390F">
+      <ColNames>tag_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>tags</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="443" parent="36" name="FK38BE208AE8AF66E5">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>kusers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="444" parent="37" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="445" parent="37" name="createdOn">
+      <Position>2</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="446" parent="37" name="name">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <index id="447" parent="37" name="createdOn">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="448" parent="37" name="createdOn_2">
+      <ColNames>createdOn</ColNames>
+    </index>
+    <index id="449" parent="37" name="name">
+      <ColNames>name</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="450" parent="37" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="451" parent="37" name="name">
+      <ColNames>name</ColNames>
+      <UnderlyingIndexName>name</UnderlyingIndexName>
+    </key>
+    <column id="452" parent="38" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="453" parent="38" name="enabled">
+      <Position>2</Position>
+      <DataType>bit(1)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="454" parent="38" name="root_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="455" parent="38" name="FKDB4DCBC434BBDBEE">
+      <ColNames>root_id</ColNames>
+    </index>
+    <key id="456" parent="38" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="457" parent="38" name="FKDB4DCBC434BBDBEE">
+      <ColNames>root_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>containers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="458" parent="39" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="459" parent="39" name="hash">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="460" parent="39" name="ipAddress">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="461" parent="39" name="signInDate">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="462" parent="39" name="userAgent">
+      <Position>5</Position>
+      <DataType>varchar(255)|0</DataType>
+    </column>
+    <column id="463" parent="39" name="user_id">
+      <Position>6</Position>
+      <DataType>bigint(20)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="464" parent="39" name="FK1C924E1BE8AF66E5">
+      <ColNames>user_id</ColNames>
+    </index>
+    <index id="465" parent="39" name="ipAddress">
+      <ColNames>ipAddress</ColNames>
+    </index>
+    <index id="466" parent="39" name="ipAddress_2">
+      <ColNames>ipAddress</ColNames>
+    </index>
+    <index id="467" parent="39" name="signInDate">
+      <ColNames>signInDate</ColNames>
+    </index>
+    <index id="468" parent="39" name="signInDate_2">
+      <ColNames>signInDate</ColNames>
+    </index>
+    <index id="469" parent="39" name="userAgent">
+      <ColNames>userAgent</ColNames>
+    </index>
+    <index id="470" parent="39" name="userAgent_2">
+      <ColNames>userAgent</ColNames>
+    </index>
+    <key id="471" parent="39" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="472" parent="39" name="FK1C924E1BE8AF66E5">
+      <ColNames>user_id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>kusers</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="473" parent="40" name="domain">
+      <Position>1</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="474" parent="40" name="waveId">
+      <Position>2</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="475" parent="40" name="waveletId">
+      <Position>3</Position>
+      <DataType>varchar(255)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="476" parent="40" name="creationTime">
+      <Position>4</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="477" parent="40" name="lastModifiedTime">
+      <Position>5</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <column id="478" parent="40" name="rendered">
+      <Position>6</Position>
+      <DataType>longtext|0</DataType>
+    </column>
+    <column id="479" parent="40" name="id">
+      <Position>7</Position>
+      <DataType>bigint(20)|0</DataType>
+    </column>
+    <index id="480" parent="40" name="FK6BACC9AB9A696E6">
+      <ColNames>id</ColNames>
+    </index>
+    <index id="481" parent="40" name="id">
+      <ColNames>domain
+waveId
+waveletId</ColNames>
+    </index>
+    <key id="482" parent="40" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>domain
+waveId
+waveletId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="483" parent="40" name="FK6BACC9AB9A696E6">
+      <ColNames>id</ColNames>
+      <RefSchemaName>kune_dev</RefSchemaName>
+      <RefTableName>participants</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+  </database-model>
+</dataSource>

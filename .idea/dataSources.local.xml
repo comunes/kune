@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="production/Hibernate" uuid="c8b93cd4-1e5a-47c7-b518-6391bab84b5f">
+      <database-info product="MySQL" version="5.7.19-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>kune</user-name>
+      <introspection-schemas>*:kune_prod</introspection-schemas>
+    </data-source>
+    <data-source name="development/Hibernate" uuid="8800c485-c274-4810-81ed-af9fa15cfebc">
+      <database-info product="MySQL" version="5.7.19-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <user-name>kune</user-name>
+      <introspection-schemas>*:kune_dev</introspection-schemas>
+    </data-source>
+    <data-source name="test/Hibernate" uuid="68110834-1f71-4f8c-aea2-e6dde7d46a7a">
+      <database-info product="H2" version="1.4.192 (2016-05-26)" jdbc-version="4.0" driver-name="H2 JDBC Driver" driver-version="1.4.192 (2016-05-26)">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
+      <auth-required>false</auth-required>
+      <introspection-schemas>TESTDB:</introspection-schemas>
+    </data-source>
+    <data-source name="test_db/Hibernate" uuid="1137c418-e1e4-4333-a3d4-50a75217f07c">
+      <database-info product="MySQL" version="5.7.19-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>kune</user-name>
+      <introspection-schemas>*:kune_test</introspection-schemas>
+    </data-source>
+    <data-source name="openfire/Hibernate" uuid="354e0fd4-66e1-4817-8196-20b048966b55">
+      <database-info product="MySQL" version="5.7.19-0ubuntu0.16.04.1" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>kune</user-name>
+      <introspection-schemas>*:kune_openfire</introspection-schemas>
+    </data-source>
+  </component>
+</project>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.waveprotocol:communication-src:0.4.2-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/waveprotocol/communication-src/0.4.2-SNAPSHOT/communication-src-0.4.2-20170831.172759-1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/waveprotocol/communication-src/0.4.2-SNAPSHOT/communication-src-0.4.2-20170831.172759-1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/waveprotocol/communication-src/0.4.2-SNAPSHOT/communication-src-0.4.2-20170831.172759-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
