@@ -54,6 +54,7 @@
       <property name="hibernate.hikari.minimumIdle" value="5"/>
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
+      <property name="hibernate.hikari.registerMbeans" value="true"/>
       <property name="hibernate.hikari.dataSourceClassName"
         value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
       <!-- Configured and overrided by kune.properties -->
@@ -122,6 +123,7 @@
       <property name="hibernate.hikari.minimumIdle" value="5"/>
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
+      <property name="hibernate.hikari.registerMbeans" value="true"/>
       <property name="hibernate.hikari.dataSourceClassName"
         value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
       <!-- Configured and overrided by kune.properties -->
@@ -212,6 +214,7 @@
       <property name="hibernate.hikari.minimumIdle" value="5"/>
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
+      <property name="hibernate.hikari.registerMbeans" value="true"/>
       <property name="hibernate.hikari.dataSourceClassName"
         value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
       <!-- Configured and overrided by kune.properties -->
@@ -302,6 +305,7 @@
       <property name="hibernate.hikari.minimumIdle" value="5"/>
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
+      <property name="hibernate.hikari.registerMbeans" value="true"/>
       <property name="hibernate.hikari.dataSourceClassName"
         value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
       <!-- Configured and overrided by kune.properties -->

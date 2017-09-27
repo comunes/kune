@@ -5,6 +5,7 @@ kune (1.0.2+b1) unstable; urgency=medium
     https://github.com/apache/incubator-wave/pull/24
   * Migrated to hikari connection pool
   * Minor css issue in toolbar
+  * Added dropwizard metrics
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 26 Aug 2017 10:25:50 +0200
 

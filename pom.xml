@@ -28,6 +28,7 @@
     <!-- warning, wave uses guice 4.1.0 -->
     <guice.version>3.0</guice.version>
     <gwtp.version>1.6</gwtp.version>
+    <metrics.version>3.2.1</metrics.version>
     <skipTests>true</skipTests>
   </properties>
   <repositories>
@@ -759,11 +760,8 @@
       <artifactId>slf4j-api</artifactId>
       <version>${slf4j.version}</version>
     </dependency>
-    <!--  <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-simple</artifactId>
-      <version>${slf4j.version}</version>
-    </dependency> -->
+    <!-- <dependency> <groupId>org.slf4j</groupId> <artifactId>slf4j-simple</artifactId>
+      <version>${slf4j.version}</version> </dependency> -->
     <dependency>
       <groupId>javax.inject</groupId>
       <artifactId>javax.inject</artifactId>
@@ -938,6 +936,42 @@
       <groupId>org.markdownj</groupId>
       <artifactId>markdownj-core</artifactId>
       <version>0.4</version>
+    </dependency>
+    <!-- metrics -->
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-core</artifactId>
+      <version>${metrics.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-healthchecks</artifactId>
+      <version>${metrics.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-jetty9</artifactId>
+      <version>${metrics.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-jvm</artifactId>
+      <version>${metrics.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-ehcache</artifactId>
+      <version>${metrics.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-servlets</artifactId>
+      <version>${metrics.version}</version>
+    </dependency>
+          <dependency>
+      <groupId>io.dropwizard.metrics</groupId>
+      <artifactId>metrics-servlet</artifactId>
+      <version>${metrics.version}</version>
     </dependency>
   </dependencies>
   <distributionManagement>

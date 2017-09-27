@@ -25,12 +25,14 @@ package cc.kune.core.server.rack;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.management.ManagementFactory;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -41,6 +43,16 @@ import org.waveprotocol.box.server.persistence.file.FileUtils;
 import org.waveprotocol.box.server.rpc.ServerRpcProvider;
 import org.waveprotocol.box.server.waveserver.LucenePerUserWaveViewHandlerImpl;
 
+import com.codahale.metrics.MetricRegistry;
+import com.codahale.metrics.health.HealthCheckRegistry;
+import com.codahale.metrics.jvm.BufferPoolMetricSet;
+import com.codahale.metrics.jvm.ClassLoadingGaugeSet;
+import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
+import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
+import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
+import com.codahale.metrics.servlet.InstrumentedFilter;
+import com.codahale.metrics.servlets.HealthCheckServlet;
+import com.codahale.metrics.servlets.MetricsServlet;
 import com.google.gwt.logging.server.RemoteLoggingServiceImpl;
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -51,6 +63,7 @@ import com.google.inject.grapher.InjectorGrapher;
 import com.google.inject.grapher.graphviz.GraphvizModule;
 import com.google.inject.grapher.graphviz.GraphvizRenderer;
 import com.typesafe.config.Config;
+import com.zaxxer.hikari.HikariDataSource;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.error.ServerException;
@@ -191,14 +204,15 @@ public class RackServletFilter implements Filter {
     final RackBuilder builder = new RackBuilder();
     module.configure(builder);
     rack = builder.getRack();
-    injector = (Injector) filterConfig.getServletContext().getAttribute(INJECTOR_PARENT_ATTRIBUTE);
+    ServletContext servletContext = filterConfig.getServletContext();
+    injector = (Injector) servletContext.getAttribute(INJECTOR_PARENT_ATTRIBUTE);
 
     final Module otherGuiceModule = new Module() {
       @Override
       public void configure(final Binder binder) {
         // Here, other objects that are not register in Rack
         binder.bind(SearchEngineServletFilter.class).toInstance(
-            (SearchEngineServletFilter) filterConfig.getServletContext().getAttribute(
+            (SearchEngineServletFilter) servletContext.getAttribute(
                 SearchEngineServletFilter.SEARCH_ENGINE_FILTER_ATTRIBUTE));
       }
     };
@@ -237,6 +251,35 @@ public class RackServletFilter implements Filter {
         }
       });
     }
+
+    Boolean doMetrics = config.getBoolean("kune.metrics");
+    Boolean doHealthChecks = config.getBoolean("kune.healthchecks");
+    HikariDataSource hikariDataSource = injector.getInstance(HikariDataSource.class);
+
+    MetricRegistry metricRegistry = injector.getInstance(MetricRegistry.class);
+    HealthCheckRegistry heathRegistry = injector.getInstance(HealthCheckRegistry.class);
+    servletContext.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY, heathRegistry);
+    servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY, metricRegistry);
+
+    if (doHealthChecks) {
+      hikariDataSource.setHealthCheckRegistry(heathRegistry);
+    }
+
+    if (doMetrics) {
+      hikariDataSource.setMetricRegistry(metricRegistry);
+
+      servletContext.setAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE, metricRegistry);
+      metricRegistry.register("jvm.buffers",
+          new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
+      metricRegistry.register("jvm.cl", new ClassLoadingGaugeSet());
+      metricRegistry.register("jvm.gc", new GarbageCollectorMetricSet());
+      metricRegistry.register("jvm.memory", new MemoryUsageGaugeSet());
+      metricRegistry.register("jvm.threads", new ThreadStatesGaugeSet());
+    }
+
+    // InstrumentedHandler(metricRegistry);
+    // Cache cache = injector.getInstance(Cache.class);
+    // InstrumentedEhcache.instrument(metricRegistry, cache);
 
     initialized = true;
 
