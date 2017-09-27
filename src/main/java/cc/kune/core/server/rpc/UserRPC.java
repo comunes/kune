@@ -25,6 +25,8 @@ package cc.kune.core.server.rpc;
 import javax.persistence.NoResultException;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jivesoftware.smack.util.stringencoder.Base64;
 import org.waveprotocol.box.server.account.AccountData;
 import org.waveprotocol.box.server.authentication.SessionManager;
@@ -107,6 +109,8 @@ public class UserRPC implements RPC, UserService {
 
   /** The wave session manager. */
   private final SessionManager waveSessionManager;
+
+  public static final Log LOG = LogFactory.getLog(UserRPC.class);
 
   /**
    * Instantiates a new user rpc.
@@ -339,11 +343,14 @@ public class UserRPC implements RPC, UserService {
    *           the default exception
    */
   private UserInfoDTO loginUser(final User user, final String waveToken) throws DefaultException {
-    if (user != null) {
+    if (user != null && waveToken != null) {
       userSessionManager.login(user.getId(), waveToken);
       userSignInLogManager.log(user, null, null, null);
       return loadUserInfo(user);
     } else {
+      if (waveToken == null) {
+        LOG.error("Wrong wave token");
+      }
       throw new UserAuthException();
     }
   }
@@ -449,8 +456,8 @@ public class UserRPC implements RPC, UserService {
   @Authenticated
   @KuneTransactional
   public StateAbstractDTO updateUser(final String userHash, final UserDTO user,
-      final I18nLanguageSimpleDTO lang) throws DefaultException, EmailAddressInUseException,
-      GroupLongNameInUseException {
+      final I18nLanguageSimpleDTO lang)
+          throws DefaultException, EmailAddressInUseException, GroupLongNameInUseException {
     final Long id = userSessionManager.getUser().getId();
     if (!id.equals(user.getId())) {
       throw new AccessViolationException();

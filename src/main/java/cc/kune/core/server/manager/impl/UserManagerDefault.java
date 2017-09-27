@@ -636,6 +636,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       try {
         user = userFinder.findByEmail(nickOrEmail);
       } catch (final NoResultException e2) {
+        LOG.info("Cannot find user: " + nickOrEmail);
         return null;
       }
     }
@@ -660,8 +661,10 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         }, 5000);
       }
       user.setLastLogin(System.currentTimeMillis());
+      LOG.info("Authenticatd user: " + nickOrEmail);
       return user;
     } else {
+      LOG.info("Wrong password for user: " + nickOrEmail);
       return null;
     }
   }

@@ -143,6 +143,6 @@ public class CookiesManagerImpl implements CookiesManager {
     // jetty sets the cookie for example.com not .example.com like www.example.com
     Cookies.setCookie(SessionConstants.JSESSIONID, userHash, exp, CookieUtils.getDomain(), "/", ssl);
     Cookies.setCookie(SessionConstants.JSESSIONID, userHash, exp, CookieUtils.getDotDomain(), "/", ssl);
-    Log.info("Received hash: " + userHash, null);
+    Log.info("Received hash: " + userHash);
   }
 }
