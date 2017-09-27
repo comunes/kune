@@ -27,6 +27,13 @@ import java.util.Date;
 
 import org.waveprotocol.wave.client.common.util.DateUtils;
 
+import cc.kune.common.shared.i18n.I18n;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent;
+import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
+import cc.kune.core.client.rpcservices.UserServiceAsync;
+import cc.kune.core.client.state.Session;
+import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
+
 import com.calclab.emite.im.client.roster.XmppRoster;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedEvent;
 import com.calclab.emite.im.client.roster.events.RosterItemChangedHandler;
@@ -34,14 +41,6 @@ import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
-
-import cc.kune.common.shared.i18n.I18n;
-import cc.kune.core.client.events.UserSignInOrSignOutEvent;
-import cc.kune.core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler;
-import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
-import cc.kune.core.client.rpcservices.UserServiceAsync;
-import cc.kune.core.client.state.Session;
-import cc.kune.core.shared.dto.UserBuddiesPresenceDataDTO;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -69,21 +68,19 @@ public class LastConnectedManagerImpl implements LastConnectedManager {
    *          the user service
    */
   @Inject
-  public LastConnectedManagerImpl(final Session session, final XmppRoster roster,
+  public LastConnectedManagerImpl(final Session session, final Provider<XmppRoster> roster,
       final Provider<UserServiceAsync> userService) {
-    roster.addRosterItemChangedHandler(new RosterItemChangedHandler() {
-      @Override
-      public void onRosterItemChanged(final RosterItemChangedEvent event) {
-        update(event.getRosterItem().getJID().getShortName(), new Date().getTime());
-      }
-    });
+
     session.onUserSignInOrSignOut(true, new UserSignInOrSignOutHandler() {
       @Override
       public void onUserSignInOrSignOut(final UserSignInOrSignOutEvent event) {
+        roster.get().addRosterItemChangedHandler(new RosterItemChangedHandler() {
+          @Override
+          public void onRosterItemChanged(final RosterItemChangedEvent event) {
+            update(event.getRosterItem().getJID().getShortName(), new Date().getTime());
+          }
+        });
         if (event.isLogged()) {
-          userService.get().onlyCheckSession(session.getUserHash(), new AsyncCallbackSimple<Void>() {
-            @Override
-            public void onSuccess(Void result) {
               userService.get().getBuddiesPresence(session.getUserHash(),
                   new AsyncCallback<UserBuddiesPresenceDataDTO>() {
                     @Override
@@ -96,8 +93,6 @@ public class LastConnectedManagerImpl implements LastConnectedManager {
                       data = result;
                     }
                   });
-            }
-          });
         } else {
           clear();
         }
