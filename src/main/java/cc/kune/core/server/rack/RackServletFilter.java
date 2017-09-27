@@ -45,7 +45,9 @@ import org.waveprotocol.box.server.waveserver.LucenePerUserWaveViewHandlerImpl;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
+import com.codahale.metrics.health.jvm.ThreadDeadlockHealthCheck;
 import com.codahale.metrics.jvm.BufferPoolMetricSet;
+import com.codahale.metrics.jvm.CachedThreadStatesGaugeSet;
 import com.codahale.metrics.jvm.ClassLoadingGaugeSet;
 import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
 import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
@@ -63,7 +65,7 @@ import com.google.inject.grapher.InjectorGrapher;
 import com.google.inject.grapher.graphviz.GraphvizModule;
 import com.google.inject.grapher.graphviz.GraphvizRenderer;
 import com.typesafe.config.Config;
-import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.hibernate.CustomHikariConnectionProvider;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.error.ServerException;
@@ -254,20 +256,20 @@ public class RackServletFilter implements Filter {
 
     Boolean doMetrics = config.getBoolean("kune.metrics");
     Boolean doHealthChecks = config.getBoolean("kune.healthchecks");
-    HikariDataSource hikariDataSource = injector.getInstance(HikariDataSource.class);
 
     MetricRegistry metricRegistry = injector.getInstance(MetricRegistry.class);
     HealthCheckRegistry heathRegistry = injector.getInstance(HealthCheckRegistry.class);
+
     servletContext.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY, heathRegistry);
     servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY, metricRegistry);
 
     if (doHealthChecks) {
-      hikariDataSource.setHealthCheckRegistry(heathRegistry);
+      CustomHikariConnectionProvider.DATA_SOURCE.setHealthCheckRegistry(heathRegistry);
+      heathRegistry.register("jvm.deadlocks", new ThreadDeadlockHealthCheck());
     }
 
     if (doMetrics) {
-      hikariDataSource.setMetricRegistry(metricRegistry);
-
+      CustomHikariConnectionProvider.DATA_SOURCE.setMetricRegistry(metricRegistry);
       servletContext.setAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE, metricRegistry);
       metricRegistry.register("jvm.buffers",
           new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));

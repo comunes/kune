@@ -45,6 +45,8 @@ public class CustomHikariConnectionProvider implements ConnectionProvider, Confi
 
    private static final Logger LOGGER = LoggerFactory.getLogger(CustomHikariConnectionProvider.class);
 
+   public static HikariDataSource DATA_SOURCE ;
+
    /**
     * HikariCP configuration.
     */
@@ -85,6 +87,7 @@ public class CustomHikariConnectionProvider implements ConnectionProvider, Confi
 
          this.hcfg = HikariConfigurationUtil.loadConfiguration(props);
          this.hds = new HikariDataSource(this.hcfg);
+         DATA_SOURCE = hds;
 
       }
       catch (Exception e) {
