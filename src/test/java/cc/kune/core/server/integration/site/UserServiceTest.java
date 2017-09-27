@@ -288,7 +288,7 @@ public class UserServiceTest extends IntegrationTest {
   @Test
   public void testSiteEmailLogin() throws Exception {
     assertNull(session.getUser().getId());
-    userService.login(properties.getAdminEmail(), properties.getAdminPassword(), token);
+    userService.login(properties.getAdminEmail(), properties.getAdminPassword(), "token");
     assertNotNull(session.getUser().getId());
   }
 
@@ -301,7 +301,7 @@ public class UserServiceTest extends IntegrationTest {
   @Test
   public void testSiteNameLogin() throws Exception {
     assertNull(session.getUser().getId());
-    userService.login(properties.getAdminShortName(), properties.getAdminPassword(), token);
+    userService.login(properties.getAdminShortName(), properties.getAdminPassword(), "token");
     assertNotNull(session.getUser().getId());
   }
 
