@@ -266,6 +266,7 @@ public class RackServletFilter implements Filter {
     if (doHealthChecks) {
       CustomHikariConnectionProvider.DATA_SOURCE.setHealthCheckRegistry(heathRegistry);
       heathRegistry.register("jvm.deadlocks", new ThreadDeadlockHealthCheck());
+      CustomHikariConnectionProvider.DATA_SOURCE.addHealthCheckProperty("expected99thPercentileMs", "10");
     }
 
     if (doMetrics) {
