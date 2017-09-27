@@ -958,11 +958,14 @@
       <artifactId>metrics-jvm</artifactId>
       <version>${metrics.version}</version>
     </dependency>
+    <!--
+    Newer ehcache version than current hibernate-ehcache
     <dependency>
       <groupId>io.dropwizard.metrics</groupId>
       <artifactId>metrics-ehcache</artifactId>
       <version>${metrics.version}</version>
     </dependency>
+    -->
     <dependency>
       <groupId>io.dropwizard.metrics</groupId>
       <artifactId>metrics-servlets</artifactId>
