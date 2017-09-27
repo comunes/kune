@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mappings PUBLIC "-//DOZER//DTD MAPPINGS//EN"
-   "http://dozer.sourceforge.net/dtd/dozerbeanmapping.dtd">
+   "/dozerbeanmapping.dtd">
+<!-- previously: "http://dozer.sourceforge.net/dtd/dozerbeanmapping.dtd"> -->
 <mappings>
   <configuration>
     <stop-on-errors>true</stop-on-errors>
