@@ -255,7 +255,7 @@ implements SignIn {
             extCallback.onSuccess(null);
           }
         };
-        userService.login(shortName, passwd, waveClientAuthenticator.getCookieTokenValue(), callback);
+        userService.login(shortName, passwd, cookiesManager.getJettyCookie(), callback);
       }
     });
   }

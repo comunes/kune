@@ -56,6 +56,11 @@ public class CookiesManagerImpl implements CookiesManager {
     return Cookies.getCookie(ANON);
   }
 
+  @Override
+  public String getJettyCookie() {
+    return Cookies.getCookie(SessionConstants.JSESSIONID);
+  }
+
   /*
    * (non-Javadoc)
    *
@@ -93,13 +98,7 @@ public class CookiesManagerImpl implements CookiesManager {
     final Date exp = new Date(0);
     boolean ssl = WindowUtils.isHttps();
     Cookies.setCookie(SessionConstants.USERHASH, null, exp, CookieUtils.getDotDomain(), "/", ssl);
-    Cookies.setCookie(SessionConstants.JSESSIONID, null, exp, CookieUtils.getDotDomain(), "/", ssl);
-
-    // jetty sets the cookie for example.com not .example.com like www.example.com
-    Cookies.setCookie(SessionConstants.JSESSIONID, null, exp, CookieUtils.getDomain(), "/", ssl);
-
-    Cookies.removeCookie(SessionConstants.USERHASH);
-    Cookies.removeCookie(SessionConstants.JSESSIONID);
+    Cookies.setCookie(SessionConstants.USERHASH, null, exp, CookieUtils.getDomain(), "/", ssl);
   }
 
   /*
@@ -127,6 +126,8 @@ public class CookiesManagerImpl implements CookiesManager {
     final Date exp = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
     boolean ssl = WindowUtils.isHttps();
 
+    Log.info("Received userhash: " + userHash);
+
     // Warning: this sets cookies to .subdomain.domain.cc so www.subdomain.domain.cc
     // should also work.
     // But if you sets a cookie in domain.cc (like kune.cc and beta.kune.cc) we can get auth
@@ -139,10 +140,6 @@ public class CookiesManagerImpl implements CookiesManager {
     removeAuthCookie();
 
     Cookies.setCookie(SessionConstants.USERHASH, userHash, exp, CookieUtils.getDotDomain(), "/", ssl);
-
-    // jetty sets the cookie for example.com not .example.com like www.example.com
-    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, exp, CookieUtils.getDomain(), "/", ssl);
-    Cookies.setCookie(SessionConstants.JSESSIONID, userHash, exp, CookieUtils.getDotDomain(), "/", ssl);
-    Log.info("Received hash: " + userHash);
+    Cookies.setCookie(SessionConstants.USERHASH, userHash, exp, CookieUtils.getDomain(), "/", ssl);
   }
 }
