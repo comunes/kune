@@ -661,7 +661,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
         }, 5000);
       }
       user.setLastLogin(System.currentTimeMillis());
-      LOG.info("Authenticatd user: " + nickOrEmail);
+      LOG.info("Authenticated user: " + nickOrEmail);
       return user;
     } else {
       LOG.info("Wrong password for user: " + nickOrEmail);
