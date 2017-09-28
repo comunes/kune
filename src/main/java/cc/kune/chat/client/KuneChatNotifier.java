@@ -22,16 +22,17 @@
  */
 package cc.kune.chat.client;
 
-import cc.kune.common.client.notify.NotifyUser;
-import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.core.client.services.ClientFileDownloadUtils;
-
 import com.calclab.hablar.signals.client.notifications.HablarNotifier;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.regexp.shared.MatchResult;
 import com.google.gwt.regexp.shared.RegExp;
 import com.google.web.bindery.event.shared.EventBus;
+
+import cc.kune.common.client.log.Log;
+import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.shared.i18n.I18nTranslationService;
+import cc.kune.core.client.services.ClientFileDownloadUtils;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -73,7 +74,7 @@ public class KuneChatNotifier implements HablarNotifier {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.calclab.hablar.signals.client.notifications.HablarNotifier#getDisplayName
    * ()
@@ -85,7 +86,7 @@ public class KuneChatNotifier implements HablarNotifier {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.calclab.hablar.signals.client.notifications.HablarNotifier#getId()
    */
   @Override
@@ -95,15 +96,17 @@ public class KuneChatNotifier implements HablarNotifier {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.calclab.hablar.signals.client.notifications.HablarNotifier#show(java
    * .lang.String, java.lang.String)
    */
   @Override
   public void show(final String userMessage, final String messageType) {
+    Log.debug("Chat message: " + userMessage);
     // FIXME Dirty hack while emite/hablar lib don't provide user info
     if (regExp.test(userMessage)) {
+      Log.debug("Mesage valid for notification");
       final MatchResult m = regExp.exec(userMessage);
       final String user = m.getGroup(1);
       NotifyUser.avatar(downUtils.getUserAvatar(user),

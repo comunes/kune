@@ -407,6 +407,7 @@ public class ChatClientDefault implements ChatClient {
       chatIcon.addClickHandler(new ClickHandler() {
         @Override
         public void onClick(final ClickEvent event) {
+          Log.debug("Chat icon clicked");
           action.actionPerformed(null);
         }
       });
@@ -439,8 +440,8 @@ public class ChatClientDefault implements ChatClient {
   private void createDialogIfNeeded() {
     if (!emiteInit) {
       // dialog.getItem(0).getFocusSupport().setIgnore(true);
-      initEmite();
       emiteInit = true;
+      initEmite();
     }
   }
 

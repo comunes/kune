@@ -38,6 +38,7 @@ import com.calclab.hablar.user.client.UserContainer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
 
 import cc.kune.chat.client.ChatClientDefault.ChatClientAction;
@@ -50,6 +51,7 @@ import cc.kune.core.client.services.ClientFileDownloadUtils;
  *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
+@Singleton
 public class KuneHablarSignals {
 
   /** The signal messages. */
