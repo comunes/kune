@@ -253,6 +253,8 @@ public class RackServletFilter implements Filter {
       });
     }
 
+    // servletContext.setAttribute("org.eclipse.jetty.servlet.SessionDomain", domain);
+
     Boolean doMetrics = config.getBoolean("kune.metrics");
     Boolean doHealthChecks = config.getBoolean("kune.healthchecks");
 
@@ -262,13 +264,8 @@ public class RackServletFilter implements Filter {
     servletContext.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY, heathRegistry);
     servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY, metricRegistry);
 
-    if (doHealthChecks) {
-      CustomHikariConnectionProvider.DATA_SOURCE.setHealthCheckRegistry(heathRegistry);
-      heathRegistry.register("jvm.deadlocks", new ThreadDeadlockHealthCheck());
-      CustomHikariConnectionProvider.DATA_SOURCE.addHealthCheckProperty("expected99thPercentileMs", "10");
-    }
-
     if (doMetrics) {
+      // https://github.com/brettwooldridge/HikariCP/wiki/Dropwizard-HealthChecks
       CustomHikariConnectionProvider.DATA_SOURCE.setMetricRegistry(metricRegistry);
       servletContext.setAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE, metricRegistry);
       metricRegistry.register("jvm.buffers",
@@ -279,9 +276,10 @@ public class RackServletFilter implements Filter {
       metricRegistry.register("jvm.threads", new ThreadStatesGaugeSet());
     }
 
-    // InstrumentedHandler(metricRegistry);
-    // Cache cache = injector.getInstance(Cache.class);
-    // InstrumentedEhcache.instrument(metricRegistry, cache);
+    if (doHealthChecks) {
+      CustomHikariConnectionProvider.DATA_SOURCE.setHealthCheckRegistry(heathRegistry);
+      heathRegistry.register("jvm.deadlocks", new ThreadDeadlockHealthCheck());
+    }
 
     initialized = true;
 
