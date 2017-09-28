@@ -45,6 +45,7 @@ import cc.kune.polymer.client.PolymerId;
  */
 public class KuneUnattendedPresenter {
 
+  private static final String BTN_FONT_GREEN_STYLE = "btn_font_green";
   /** The active. */
   private boolean active;
 
@@ -75,13 +76,14 @@ public class KuneUnattendedPresenter {
           active = true;
           SndClickEvent.fire(eventBus);
           chatIconAnimation.animate();
-          RootPanel.get(PolymerId.CHAT_SITEBAR_ICON.getId()).addStyleName("btn_font_green");
-          Log.info("BLINK true");
+          chatIcon.asWidget().addStyleName(BTN_FONT_GREEN_STYLE);
+          Log.debug("BLINK true");
         } else if (unattendedChatsCount == 0 && active == true) {
           chatIconAnimation.animate();
           active = false;
-          Log.info("BLINK false");
-          RootPanel.get(PolymerId.CHAT_SITEBAR_ICON.getId()).removeStyleName("btn_font_green");
+          Log.debug("BLINK false");
+          chatIcon.asWidget().removeStyleName(BTN_FONT_GREEN_STYLE);
+
         }
       }
     });
