@@ -11,7 +11,7 @@
     <title>Kune</title>
 
     <!-- Use this if you want to force some language as default
-    <meta name="gwt:property" content="locale=es" /> -->
+         <meta name="gwt:property" content="locale=es" /> -->
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
@@ -39,15 +39,15 @@
     <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
 
     <!--
-    We will use this string for mention this site in messages like: "Thanks for joining this site"
-    Your can use another string and the message will looks like "Thanks for joining example.org"
-    -->
+         We will use this string for mention this site in messages like: "Thanks for joining this site"
+         Your can use another string and the message will looks like "Thanks for joining example.org"
+       -->
     <meta name="kune.default.site.commonname" content="this site" />
     <!--  we use this array of id to show or hide the ids of this html depending on the locale
-    Sample: k_home_summary_es will be visible if locale=es of k_home_summary_def for
-    the default language
-    You can add more ids here and below to show/hide then.
-    -->
+         Sample: k_home_summary_es will be visible if locale=es of k_home_summary_def for
+         the default language
+         You can add more ids here and below to show/hide then.
+       -->
     <meta name="kune.home.ids" content="motto, tool_docs, tool_events, tool_chats, tool_lists, tool_wiki, tool_messages, tool_tasks, tool_barters, slide-1, buck, decen, meaning, super, continuation, copyleft" />
     <meta name="emite.httpBase" content="/http-bind/" />
     <meta name="emite.host" content="localhost" />
@@ -132,9 +132,9 @@
 
 
     <!-- - for debugging
-    <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
-    <link type="text/css" rel="stylesheet" href="ws/addons/bootstrap/jquery.smartmenus.bootstrap.js">
-    -->
+         <link type="text/css" rel="stylesheet" href="ws/jquery.smartmenus.js">
+         <link type="text/css" rel="stylesheet" href="ws/addons/bootstrap/jquery.smartmenus.bootstrap.js">
+       -->
 
     <link rel="shortcut icon" href="ws/favicon.ico" />
 
@@ -168,7 +168,7 @@
     <!-- endbuild -->
 
     <!-- Because this project uses vulcanize this should be your only html import
-    in this file. All other imports should go in elements.html -->
+         in this file. All other imports should go in elements.html -->
     <link id="kunebundle" rel="import" href="elements/elements-build.html">
 
     <!-- vulcanize -o elements-build.html elements.html --strip-comments --inline-scripts --inline-css -->
@@ -189,8 +189,8 @@
     <!-- endbuild -->
 
     <!-- Loading screens happen outside of HTML Imports + Polymer so 1st
-    paint is fast and does not depend on network resources. Mobile gets
-    a loading splash screen. Desktop the layout/shell of the app. -->
+         paint is fast and does not depend on network resources. Mobile gets
+         a loading splash screen. Desktop the layout/shell of the app. -->
     <div id="splash">
       <div class="appshell_drawer">
         <div class="appshell_drawer_top"></div>
@@ -332,7 +332,7 @@
           }
 
           #sitebar_toolbar li {
-            margin: -4px 6px 0 6px;
+            margin: -3px 6px 0 6px;
           }
 
           #header_core_toolbar.tall,
@@ -680,7 +680,7 @@
           }
 
           #sitebar_toolbar li {
-            margin: 0 6px;
+            margin: -3px 6px 0 6px;
           }
 
           #header-left-margin {
@@ -1037,7 +1037,7 @@
         }
 
         #main_core_drawer_panel #drawer {
-	  z-index: 2;
+          z-index: 2;
         }
 
         #main_left_section {
@@ -1045,7 +1045,7 @@
           /* margin-top: 40px; */
           background-color: white;
           position: relative;
-	  top: 0px;
+          top: 0px;
           z-index: 2;
         }
 
@@ -1257,7 +1257,7 @@
         }
 
         #sitebar_search_input_inbox {
-	  margin-top: 5px;
+          margin-top: 5px;
           background-color: white;
           padding: 0 3px;
         }
@@ -1508,11 +1508,11 @@
         #core_scroll_header_panel:before {
           border-left: 4px solid white;
           cursor: move;
-	  position: absolute;
-	  top: 0;
-	  bottom: 0;
-	  left: 4;
-	  content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 4;
+          content: '';
           z-index: 1;
         }
 
@@ -1673,7 +1673,7 @@
 
         #header_group_name_group  {
           /* https://stackoverflow.com/questions/34934586/white-space-nowrap-and-flexbox-did-not-work-in-chrome */
-	  min-width: 0;
+          min-width: 0;
         }
 
         #header_group_name div {
@@ -2539,11 +2539,11 @@
     <iframe src="" id="__download" style="position: absolute; width: 0; height: 0; border: 0;"></iframe>
     <!-- // This is only used for selenium tests (comment/remove in production) -->
     <!--
-    <div id="kcursor"
-    style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
-    <img src="others/cursor-orange.png">
-    </div>
-    <script src="others/js/fake-selenium-pointer.js"></script> -->
+         <div id="kcursor"
+         style="visibility: hidden; position: absolute; z-Index: 100001; height: 0; width: 0">
+         <img src="others/cursor-orange.png">
+         </div>
+         <script src="others/js/fake-selenium-pointer.js"></script> -->
     <!-- // End : This is only used for selenium tests (comment/remove in production) -->
 
     <!-- Banner for wave errors -->
