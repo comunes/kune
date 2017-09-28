@@ -31,6 +31,7 @@ import cc.kune.common.client.msgs.UserMessagesPanel;
 import cc.kune.common.client.msgs.UserMessagesPresenter;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.client.notify.UserNotifierGrowl;
+import cc.kune.common.client.notify.UserNotifierHtml5;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegister;
 import cc.kune.common.client.shortcuts.GlobalShortcutRegisterDefault;
 import cc.kune.common.client.shortcuts.GlobalShortcuts;
@@ -219,6 +220,7 @@ public class CoreGinModule extends ExtendedGinModule {
     eagle(ProgressNotificator.class);
     // eagle(UserNotifierPopup.class);
     eagle(UserNotifierGrowl.class);
+    eagle(UserNotifierHtml5.class);
     requestStaticInjection(NotifyUser.class);
     bindPresenter(SpaceSelectorPresenter.class, SpaceSelectorPresenter.SpaceSelectorView.class,
         SpaceSelectorPanel.class, SpaceSelectorPresenter.SpaceSelectorProxy.class);

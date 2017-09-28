@@ -25,7 +25,13 @@ package cc.kune.core.client.auth;
 
 import java.util.Date;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
+
 import cc.kune.common.client.notify.NotifyUser;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.common.shared.utils.TextUtils;
@@ -36,13 +42,10 @@ import cc.kune.core.client.state.SiteTokens;
 import cc.kune.core.shared.SessionConstants;
 import cc.kune.core.shared.dto.UserSimpleDTO;
 
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.inject.Inject;
-
 // TODO: Auto-generated Javadoc
 /**
  * The Class EmailNotVerifiedReminder.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class EmailNotVerifiedReminder {
@@ -50,7 +53,7 @@ public class EmailNotVerifiedReminder {
   /**
    * This class checks if the user has verified the email if it's not, give some
    * advice.
-   * 
+   *
    * @param session
    *          the session
    * @param eventBus
@@ -68,11 +71,15 @@ public class EmailNotVerifiedReminder {
         if (!currentUser.isEmailVerified()) {
           final long now = new Date().getTime();
           if ((currentUser.getCreatedOn() + SessionConstants._1_HOUR) < now) {
-            final String link = TextUtils.generateHtmlLink("#" + SiteTokens.PREFS,
-                I18n.t("verify your email"), false);
+            ClickHandler clickHandler = new ClickHandler() {
+              @Override
+              public void onClick(ClickEvent event) {
+                WindowUtils.changeHref("#" + SiteTokens.PREFS);
+              }
+            };
             NotifyUser.info(I18n.t(
                 "Your email is not verified, [%s] functionality will work better if you [%s]",
-                i18n.getSiteCommonName(), link), true);
+                i18n.getSiteCommonName(), I18n.t("verify your email")), true, clickHandler);
           }
         }
       }

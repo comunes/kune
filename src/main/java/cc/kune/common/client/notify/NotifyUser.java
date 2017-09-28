@@ -217,6 +217,10 @@ public class NotifyUser {
     eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message, closeable));
   }
 
+  public static void info(final String message, final boolean closeable, ClickHandler clickHandler) {
+    eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.info, message, closeable, clickHandler));
+  }
+
   /**
    * Info.
    *

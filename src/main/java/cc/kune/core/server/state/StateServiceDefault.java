@@ -131,7 +131,7 @@ public class StateServiceDefault implements StateService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.state.StateService#create(cc.kune.domain.User,
    * cc.kune.domain.Container)
    */
@@ -148,14 +148,15 @@ public class StateServiceDefault implements StateService {
     final Group group = container.getOwner();
     setCommon(state, userLogged, group, container);
     if (isCalendar) {
-      ((StateEventContainer) state).setAppointments(EventsServerConversionUtil.getAppointments(container));
+      ((StateEventContainer) state).setAppointments(
+          EventsServerConversionUtil.getAppointments(container));
     }
     return state;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.state.StateService#create(cc.kune.domain.User,
    * cc.kune.domain.Content)
    */
@@ -195,8 +196,8 @@ public class StateServiceDefault implements StateService {
         // contentManager.setModifiedOn(content, wavelet.getLastModifiedTime());
         // contentManager.save(userLogged, content, currentContent);
         state.setTitle(wavelet.getTitle());
-        state.setIsParticipant(userLogged != User.UNKNOWN_USER ? kuneWaveService.isParticipant(wavelet,
-            userLogged.getShortName()) : false);
+        state.setIsParticipant(userLogged != User.UNKNOWN_USER
+            ? kuneWaveService.isParticipant(wavelet, userLogged.getShortName()) : false);
         // Wave participant list
         final Participants waveParticipants = wavelet.getParticipants();
         final List<String> participantList = new ArrayList<String>();
@@ -211,10 +212,8 @@ public class StateServiceDefault implements StateService {
         LOG.error("Error accessing wave " + waveRef, e);
         String waveUrl = null;
         try {
-          waveUrl = TextUtils.generateHtmlLink(
-              "#"
-                  + JavaWaverefEncoder.encodeToUriPathSegment(JavaWaverefEncoder.decodeWaveRefFromPath(waveRef)),
-              waveRef, false);
+          waveUrl = "#" + JavaWaverefEncoder.encodeToUriPathSegment(
+              JavaWaverefEncoder.decodeWaveRefFromPath(waveRef));
         } catch (final InvalidWaveRefException invalidEx) {
         }
         state.setContent(i18n.t("Error accessing this document. "
@@ -248,7 +247,7 @@ public class StateServiceDefault implements StateService {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.state.StateService#createNoHome(cc.kune.domain.User,
    * java.lang.String)
@@ -256,7 +255,7 @@ public class StateServiceDefault implements StateService {
   @Override
   public StateNoContent createNoHome(final User userLogged, final String groupShortName) {
     final Group group = groupManager.findByShortName(groupShortName);
-    assert (group.isPersonal());
+    assert(group.isPersonal());
     final StateNoContent state = new StateNoContent();
     state.setGroup(group);
     state.setEnabledTools(groupManager.findEnabledTools(group.getId()));

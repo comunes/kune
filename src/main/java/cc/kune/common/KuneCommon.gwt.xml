@@ -17,7 +17,7 @@
   <inherits name='com.google.gwt.query.Query' />
   <inherits name="cc.kune.bootstrap.KuneBootstrap" />
   <inherits name="cc.kune.polymer.KunePolymer" />
+  <inherits name="de.codeset.gwt.notification.NotificationApi" />
 
   <stylesheet src="kune-common.css" />
-
 </module>

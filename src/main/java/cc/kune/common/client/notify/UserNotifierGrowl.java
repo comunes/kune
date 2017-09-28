@@ -32,8 +32,6 @@ import org.gwtbootstrap3.extras.growl.client.ui.GrowlOptions;
 import org.gwtbootstrap3.extras.growl.client.ui.GrowlPosition;
 import org.gwtbootstrap3.extras.growl.client.ui.GrowlTemplate;
 
-import cc.kune.common.shared.utils.TextUtils;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.DOM;
@@ -42,6 +40,10 @@ import com.google.gwt.user.client.ui.Image;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.web.bindery.event.shared.EventBus;
+
+import cc.kune.common.shared.utils.TextUtils;
+import de.codeset.gwt.notification.api.client.Notification;
+import de.codeset.gwt.notification.api.client.NotificationPermission;
 
 /**
  * The Class UserNotifierGrowl.
@@ -61,89 +63,88 @@ public class UserNotifierGrowl {
    *          the event bus
    */
   @Inject
-  public UserNotifierGrowl(final EventBus eventBus) {
+  public UserNotifierGrowl(final EventBus eventBus, UserNotifierHtml5 htmlNotif) {
 
     eventBus.addHandler(UserNotifyEvent.getType(), new UserNotifyEvent.UserNotifyHandler() {
 
       @Override
       public void onUserNotify(final UserNotifyEvent event) {
+        if (!Notification.isSupported() || !Notification.getPermission().equals(NotificationPermission.GRANTED)) {
+          final GrowlOptions options = GrowlHelper.getNewOptions();
 
-        final GrowlOptions options = GrowlHelper.getNewOptions();
+          final GrowlPosition position = GrowlHelper.getNewPosition();
+          position.setCenter();
+          position.setTop(false);
+          options.setGrowlPosition(position);
 
-        final GrowlPosition position = GrowlHelper.getNewPosition();
-        position.setCenter();
-        position.setTop(false);
-        options.setGrowlPosition(position);
+          String id = event.getId();
+          boolean hasId = TextUtils.notEmpty(id);
 
-        String id = event.getId();
-        boolean hasId = TextUtils.notEmpty(id);
+          if (hasId && DOM.getElementById(id) != null) {
+            // this notification is already present so, don't do nothing
+            return;
+          }
 
-        if (hasId && DOM.getElementById(id) != null) {
-          // this notification is already present so, don't do nothing
-          return;
+          final GrowlTemplate gt = GrowlHelper.getNewTemplate();
+
+          // As a workaround, we set the id in the <br>
+
+          gt.setTitleDivider(hasId ? "<br id=\"" + id + "\">" : "<br>");
+          options.setTemplateObject(gt);
+
+          final Boolean closeable = event.getCloseable();
+          if (closeable) {
+            options.setDelay(0);
+          }
+          options.setAllowDismiss(closeable);
+          options.setPauseOnMouseOver(true);
+
+          final String message = event.getMessage();
+          String icon = "";
+          final String iconStyleBase = Styles.FONT_AWESOME_BASE + SEPARATOR
+              + IconSize.TIMES2.getCssName() + " growl-icon-margin ";
+
+          final NotifyLevel level = event.getLevel();
+          switch (level) {
+          case error:
+            options.setDangerType();
+            icon = iconStyleBase + IconType.EXCLAMATION_CIRCLE.getCssName();
+            break;
+          case avatar:
+            final ClickHandler clickHandler = event.getClickHandler();
+            final Container container = new Container();
+            container.setFluid(true);
+            final Image avatar = new Image(event.getLevel().getUrl());
+            avatar.setSize(AVATAR_SIZE, AVATAR_SIZE);
+            avatar.addStyleName("k-fl");
+            avatar.addStyleName("growl-icon-margin");
+            container.add(avatar);
+            container.add(new HTML(message));
+            container.addDomHandler(clickHandler, ClickEvent.getType());
+            Growl.growl(container.getElement().getInnerHTML(), options);
+            return;
+          case veryImportant:
+          case important:
+            options.setWarningType();
+            icon = iconStyleBase + IconType.WARNING.getCssName();
+            break;
+          case success:
+            options.setSuccessType();
+            icon = iconStyleBase + IconType.CHECK_CIRCLE.getCssName();
+            break;
+          case info:
+            options.setInfoType();
+            icon = iconStyleBase + IconType.INFO_CIRCLE.getCssName();
+            break;
+          case log:
+            // Do nothing with this level
+            return;
+          default:
+            break;
+          }
+
+          Growl.growl(event.getTitle(), message, icon, options);
         }
-
-        final GrowlTemplate gt = GrowlHelper.getNewTemplate();
-
-        // As a workaround, we set the id in the <br>
-
-        gt.setTitleDivider(hasId? "<br id=\""+ id + "\">": "<br>");
-        options.setTemplateObject(gt);
-
-
-
-        final Boolean closeable = event.getCloseable();
-        if (closeable) {
-          options.setDelay(0);
-        }
-        options.setAllowDismiss(closeable);
-        options.setPauseOnMouseOver(true);
-
-        final String message = event.getMessage();
-        String icon = "";
-        final String iconStyleBase = Styles.FONT_AWESOME_BASE + SEPARATOR + IconSize.TIMES2.getCssName()
-            + " growl-icon-margin ";
-
-        final NotifyLevel level = event.getLevel();
-        switch (level) {
-        case error:
-          options.setDangerType();
-          icon = iconStyleBase + IconType.EXCLAMATION_CIRCLE.getCssName();
-          break;
-        case avatar:
-          final ClickHandler clickHandler = event.getClickHandler();
-          final Container container = new Container();
-          container.setFluid(true);
-          final Image avatar = new Image(event.getLevel().getUrl());
-          avatar.setSize(AVATAR_SIZE, AVATAR_SIZE);
-          avatar.addStyleName("k-fl");
-          avatar.addStyleName("growl-icon-margin");
-          container.add(avatar);
-          container.add(new HTML(message));
-          container.addDomHandler(clickHandler, ClickEvent.getType());
-          Growl.growl(container.getElement().getInnerHTML(), options);
-          return;
-        case veryImportant:
-        case important:
-          options.setWarningType();
-          icon = iconStyleBase + IconType.WARNING.getCssName();
-          break;
-        case success:
-          options.setSuccessType();
-          icon = iconStyleBase + IconType.CHECK_CIRCLE.getCssName();
-          break;
-        case info:
-          options.setInfoType();
-          icon = iconStyleBase + IconType.INFO_CIRCLE.getCssName();
-          break;
-        case log:
-          // Do nothing with this level
-          return;
-        default:
-          break;
-        }
-
-        Growl.growl(event.getTitle(), message, icon, options);
       }
     });
   }

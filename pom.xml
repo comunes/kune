@@ -958,23 +958,24 @@
       <artifactId>metrics-jvm</artifactId>
       <version>${metrics.version}</version>
     </dependency>
-    <!--
-    Newer ehcache version than current hibernate-ehcache
-    <dependency>
-      <groupId>io.dropwizard.metrics</groupId>
-      <artifactId>metrics-ehcache</artifactId>
-      <version>${metrics.version}</version>
-    </dependency>
-    -->
+    <!-- Newer ehcache version than current hibernate-ehcache <dependency>
+      <groupId>io.dropwizard.metrics</groupId> <artifactId>metrics-ehcache</artifactId>
+      <version>${metrics.version}</version> </dependency> -->
     <dependency>
       <groupId>io.dropwizard.metrics</groupId>
       <artifactId>metrics-servlets</artifactId>
       <version>${metrics.version}</version>
     </dependency>
-          <dependency>
+    <dependency>
       <groupId>io.dropwizard.metrics</groupId>
       <artifactId>metrics-servlet</artifactId>
       <version>${metrics.version}</version>
+    </dependency>
+    <!-- Native html5 notifications -->
+    <dependency>
+      <groupId>de.codeset.gwt.notification</groupId>
+      <artifactId>de.codeset.gwt.notification.notification-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
     </dependency>
   </dependencies>
   <distributionManagement>

@@ -102,10 +102,16 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
    * @return the user notify event
    */
   public static UserNotifyEvent fire(final EventBus eventBus, final NotifyLevel level,
-      final java.lang.String title, final java.lang.String message, final Boolean closeable) {
+      final java.lang.String title, final java.lang.String message, final Boolean closeable, ClickHandler clickHandler) {
     final UserNotifyEvent event = new UserNotifyEvent(level, title, message, closeable);
+    event.setClickHandler(clickHandler);
     eventBus.fireEvent(event);
     return event;
+  }
+
+  public static UserNotifyEvent fire(final EventBus eventBus, final NotifyLevel level,
+      final java.lang.String title, final java.lang.String message, final Boolean closeable) {
+    return fire(eventBus, level, title, message, closeable, null);
   }
 
   /**
@@ -214,6 +220,11 @@ public class UserNotifyEvent extends GwtEvent<UserNotifyEvent.UserNotifyHandler>
     this(level, "", message, closeable);
   }
 
+  public UserNotifyEvent(final NotifyLevel level, final java.lang.String message,
+      final Boolean closeable, ClickHandler clickHandler) {
+    this(level, "", message, closeable);
+    this.clickHandler = clickHandler;
+  }
   /**
    * Instantiates a new user notify event.
    *

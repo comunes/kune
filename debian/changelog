@@ -6,6 +6,7 @@ kune (1.0.2+b1) unstable; urgency=medium
   * Migrated to hikari connection pool
   * Minor css issue in toolbar
   * Added dropwizard metrics
+  * Added desktop notifications
 
  -- Vicente J. Ruiz Jurado <vjrj@ourproject.org>  Sat, 26 Aug 2017 10:25:50 +0200
 

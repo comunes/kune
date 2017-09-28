@@ -22,8 +22,14 @@
  */
 package cc.kune.core.client.auth;
 
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
+
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.UserNotifyEvent;
+import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18nTranslationService;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.events.AppStartEvent;
@@ -32,14 +38,12 @@ import cc.kune.core.client.events.UserSignInEvent;
 import cc.kune.core.client.events.UserSignInEvent.UserSignInHandler;
 import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteParameters;
-
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.inject.Inject;
+import cc.kune.core.client.state.SiteTokens;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AnonUsersManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class AnonUsersManager {
@@ -52,7 +56,7 @@ public class AnonUsersManager {
 
   /**
    * Instantiates a new anon users manager.
-   * 
+   *
    * @param session
    *          the session
    * @param cookiesManager
@@ -76,6 +80,12 @@ public class AnonUsersManager {
               // message
               cookiesManager.setAnonCookie(false);
               final String siteCommonName = i18n.getSiteCommonName();
+              ClickHandler clickHandler = new ClickHandler() {
+                @Override
+                public void onClick(ClickEvent event) {
+                  WindowUtils.changeHref("#" + SiteTokens.SIGN_IN);
+                }
+              };
               notifyMsg = UserNotifyEvent.fire(
                   eventBus,
                   NotifyLevel.info,
@@ -84,8 +94,8 @@ public class AnonUsersManager {
                       "You did not sign-in, so you can just see some public contents in [%s], "
                           + "but not edit or collaborate with others. Please [%s] or [%s] in order to get full access to [%s] tools and contents",
                       "This will be something like 'Please register or sign in in other to get full access to this site tools', but instead of %s some links",
-                      siteCommonName, UserFieldFactory.getRegisterLink(),
-                      UserFieldFactory.getSignInLink(), siteCommonName), Boolean.TRUE);
+                      siteCommonName, i18n.t("register"),
+                      i18n.t("sign in"), siteCommonName), Boolean.TRUE, clickHandler);
               notifyMsg.setId(ANON_MESSAGE_CLOSE_ICON);
             } else {
               if (Boolean.valueOf(anonCookie)) {

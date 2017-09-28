@@ -89,11 +89,12 @@ public class ExportCalendarMenuItem extends MenuItemDescriptor {
       final StateToken token = session.getCurrentStateToken().copy().clearDocument();
       final String url = new Url(session.getSiteUrl() + FileConstants.EVENTSSERVLET, new UrlParam(
           FileConstants.TOKEN, token.toString())).toString();
+
       NotifyUser.info(
           i18n.t("Calendar exporting"),
           i18n.t(
               "Open or use this address in your prefered calendar program for instance in your mobile: [%s]",
-              TextUtils.generateHtmlLink(url, url, true)), ID, true);
+              url));
     }
 
   }
