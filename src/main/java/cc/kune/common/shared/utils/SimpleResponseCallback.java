@@ -29,6 +29,17 @@ package cc.kune.common.shared.utils;
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SimpleResponseCallback {
+
+  /** The Constant DO_NOTHING. */
+  public static final SimpleResponseCallback DO_NOTHING = new SimpleResponseCallback() {
+    @Override
+    public void onSuccess() {
+    }
+    @Override
+    public void onCancel() {
+    };
+  };
+
   /**
    * Notifies this callback of an accept response.
    */

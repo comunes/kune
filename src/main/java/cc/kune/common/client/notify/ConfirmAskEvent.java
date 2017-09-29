@@ -279,7 +279,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * com.google.gwt.event.shared.GwtEvent#dispatch(com.google.gwt.event.shared
    * .EventHandler)
@@ -291,7 +291,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#equals(java.lang.Object)
    */
   @Override
@@ -378,7 +378,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.gwt.event.shared.GwtEvent#getAssociatedType()
    */
   @Override
@@ -442,7 +442,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see java.lang.Object#hashCode()
    */
   @Override
@@ -460,7 +460,7 @@ public class ConfirmAskEvent extends GwtEvent<ConfirmAskEvent.ConfirmAskHandler>
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.web.bindery.event.shared.Event#toString()
    */
   @Override

@@ -24,11 +24,13 @@ package cc.kune.events.client.actions;
 
 import org.gwtbootstrap3.client.ui.constants.IconType;
 
+import com.google.inject.Inject;
+
 import cc.kune.common.client.actions.ActionEvent;
 import cc.kune.common.client.actions.ui.descrip.MenuItemDescriptor;
 import cc.kune.common.client.notify.NotifyUser;
 import cc.kune.common.shared.i18n.I18nTranslationService;
-import cc.kune.common.shared.utils.TextUtils;
+import cc.kune.common.shared.utils.SimpleResponseCallback;
 import cc.kune.common.shared.utils.Url;
 import cc.kune.common.shared.utils.UrlParam;
 import cc.kune.core.client.actions.RolAction;
@@ -38,8 +40,6 @@ import cc.kune.core.shared.FileConstants;
 import cc.kune.core.shared.domain.utils.StateToken;
 import cc.kune.core.shared.dto.AccessRolDTO;
 import cc.kune.gspace.client.actions.ContentViewerOptionsMenu;
-
-import com.google.inject.Inject;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -87,14 +87,12 @@ public class ExportCalendarMenuItem extends MenuItemDescriptor {
     @Override
     public void actionPerformed(final ActionEvent event) {
       final StateToken token = session.getCurrentStateToken().copy().clearDocument();
-      final String url = new Url(session.getSiteUrl() + FileConstants.EVENTSSERVLET, new UrlParam(
-          FileConstants.TOKEN, token.toString())).toString();
-
-      NotifyUser.info(
-          i18n.t("Calendar exporting"),
+      final String url = new Url(session.getSiteUrl() + FileConstants.EVENTSSERVLET,
+          new UrlParam(FileConstants.TOKEN, token.toString())).toString();
+      NotifyUser.infoDialog(i18n.t("Calendar exporting"),
           i18n.t(
               "Open or use this address in your prefered calendar program for instance in your mobile: [%s]",
-              url));
+              url), i18n.t("Ok"),SimpleResponseCallback.DO_NOTHING);
     }
 
   }

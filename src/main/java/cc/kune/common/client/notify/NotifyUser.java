@@ -96,6 +96,11 @@ public class NotifyUser {
     eventBus.fireEvent(new ConfirmAskEvent(title, message, acceptBtn, cancelBtn, callback));
   }
 
+  public static void infoDialog(final String title, final String message, final String acceptBtn,
+      final SimpleResponseCallback callback) {
+    eventBus.fireEvent(new ConfirmAskEvent(title, message, acceptBtn, null, callback));
+  }
+
   /**
    * Avatar.
    *
