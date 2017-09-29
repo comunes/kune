@@ -81,19 +81,6 @@ public abstract class DefaultManager<T, K> {
   }
 
   /**
-   * Size deprecated.
-   *
-   * @return the int
-   */
-  @Deprecated
-  public Long size() {
-    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(getEntityManager());
-    final Long entities = (Long) fullTextEm.createQuery(
-        "SELECT COUNT(*) FROM " + entityClass.getSimpleName() + " AS e").getSingleResult();
-    return entities;
-  }
-
-  /**
    * use carefully!!!.
    *
    * @param <X>
@@ -120,30 +107,12 @@ public abstract class DefaultManager<T, K> {
   }
 
   /**
-   * Flush.
-   */
-  public void flush() {
-    getEntityManager().flush();
-  }
-
-  /**
    * Gets the entity manager.
    *
    * @return the entity manager
    */
   private EntityManager getEntityManager() {
     return provider.get();
-  }
-
-  /**
-   * Gets the query.
-   *
-   * @param qlString
-   *          the ql string
-   * @return the query
-   */
-  protected javax.persistence.Query getQuery(final String qlString) {
-    return getEntityManager().createQuery(qlString);
   }
 
   /**
@@ -158,7 +127,9 @@ public abstract class DefaultManager<T, K> {
    * @return the e
    */
   public <E> E merge(final E entity, final Class<E> entityClass) {
-    getEntityManager().merge(entity);
+    EntityManager em = getEntityManager();
+    assertInAnTransaction(em);
+    em.merge(entity);
     return entity;
   }
 
@@ -170,7 +141,9 @@ public abstract class DefaultManager<T, K> {
    * @return the t
    */
   public T merge(final T entity) {
-    return getEntityManager().merge(entity);
+    EntityManager em = getEntityManager();
+    assertInAnTransaction(em);
+    return em.merge(entity);
   }
 
   /**
@@ -185,7 +158,9 @@ public abstract class DefaultManager<T, K> {
    * @return the e
    */
   public <E> E persist(final E entity, final Class<E> entityClass) {
-    getEntityManager().persist(entity);
+    EntityManager em = getEntityManager();
+    assertInAnTransaction(em);
+    em.persist(entity);
     return entity;
   }
 
@@ -210,7 +185,8 @@ public abstract class DefaultManager<T, K> {
   private void reIndex(Class<T> entityClass) {
     // http://docs.jboss.org/hibernate/search/4.1/reference/en-US/html_single/#search-batchindex
 
-    EntityManager em = getEntityManager().getEntityManagerFactory().createEntityManager();
+    EntityManager em = getEntityManager();
+
     final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);
 
     try {
@@ -222,8 +198,10 @@ public abstract class DefaultManager<T, K> {
         indexer = fullTextEm.createIndexer(entityClass);
       }
       indexer.batchSizeToLoadObjects(25).cacheMode(CacheMode.IGNORE).threadsToLoadObjects(
-          5).threadsForSubsequentFetching(20).progressMonitor(new DefaultMassIndexerProgressMonitor(log));
+          5).threadsForSubsequentFetching(20).progressMonitor(
+              new DefaultMassIndexerProgressMonitor(log));
       indexer.startAndWait();
+//em.close();
     } catch (final InterruptedException e) {
       throw new ServerManagerException("Error reindexing", e);
     }
@@ -267,8 +245,16 @@ public abstract class DefaultManager<T, K> {
    */
   @SuppressWarnings("unchecked")
   public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
-    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(
-        getEntityManager().getEntityManagerFactory().createEntityManager());
+    EntityManager em = getEntityManager();
+    final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);
+
+    // In @KuneJpaLocalTxnInterceptor thnks to @KuneTransactional
+    // we start @UnitOfWork managed by @JpaPersistService
+    // so we don't need to do
+    // em.getTransaction().begin();
+
+    assertInAnTransaction(em);
+
     final FullTextQuery emQuery = fullTextEm.createFullTextQuery(query, entityClass);
     if (firstResult != null && maxResults != null) {
       emQuery.setFirstResult(firstResult);
@@ -276,7 +262,20 @@ public abstract class DefaultManager<T, K> {
     }
     final SearchResult<T> searchResult = new SearchResult<T>(emQuery.getResultSize(),
         emQuery.getResultList());
+
+    // or neither ...
+    // em.getTransaction().commit();
+    // em.close();
+    // because is automatically managed by these classes
+
     return searchResult;
+  }
+
+  private void assertInAnTransaction(EntityManager em) {
+    // We should detect we are not in a transaction
+    if (!em.getTransaction().isActive()) {
+      throw new RuntimeException("This search is not under a transaction!");
+    }
   }
 
   /**
