@@ -232,7 +232,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
 
   @Override
   public void reIndex() {
-    // See the NOTE in GroupManagerDefault
+    /** See the NOTE in {@link GroupManagerDefault#reIndex()} **/
     super.reIndex();
   }
 
@@ -664,7 +664,7 @@ public class UserManagerDefault extends DefaultManager<User, Long> implements Us
       LOG.info("Authenticated user: " + nickOrEmail);
       return user;
     } else {
-      LOG.info("Wrong password for user: " + nickOrEmail);
+      LOG.debug("Wrong password for user: " + nickOrEmail);
       return null;
     }
   }

@@ -232,6 +232,7 @@ public class GroupManagerDefault extends DefaultManager<Group, Long>
   @Override
   public void reIndex() {
     // NOTE: here we do not use KuneTransactional because hibernate-search use plain JPA transaction and we get into a deadlock
+    // see #count()
     super.reIndex();
   }
 
