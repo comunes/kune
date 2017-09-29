@@ -513,7 +513,7 @@ Presenter<SpaceSelectorPresenter.SpaceSelectorView, SpaceSelectorPresenter.Space
       currentSpace = Space.userSpace;
       getView().setWindowTitle(i18n.t("Inbox"));
       // Show inbox if xsmall
-      if (PolymerUtils.isXSmall() && PolymerUtils.getMainSelected().equals("main")) {
+      if (PolymerUtils.isXSmall() && PolymerUtils.isMainSelected()) {
         PolymerUtils.setDrawerSelected();
       }
     } else {

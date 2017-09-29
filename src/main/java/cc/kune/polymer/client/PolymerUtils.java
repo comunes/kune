@@ -108,7 +108,7 @@ public class PolymerUtils {
   }-*/;
 
   public static boolean isGroupHeaderMainSelected() {
-    return getSNSelected().equals("main");
+    return "main".equals(getSNSelected());
   }
 
   public native static boolean isMainDrawerNarrow() /*-{
@@ -116,7 +116,7 @@ public class PolymerUtils {
   }-*/;
 
   public static boolean isMainSelected() {
-    return getMainSelected().equals("main");
+    return "main".equals(getMainSelected());
   }
 
   public native static boolean isXSmall() /*-{
