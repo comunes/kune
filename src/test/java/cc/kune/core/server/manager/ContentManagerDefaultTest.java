@@ -37,7 +37,7 @@ import cc.kune.domain.Content;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ContentManagerDefaultTest.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
@@ -53,7 +53,7 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the content.
-   * 
+   *
    * @return the content
    */
   private Content createContent() {
@@ -66,7 +66,7 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the content with mime and check.
-   * 
+   *
    * @param mimetype
    *          the mimetype
    */
@@ -115,6 +115,7 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
   public void testBasicMimeSearchWithQueriesAndFields() {
     createContentWithMimeAndCheck(MIMETYPE + "/png");
     closeTransaction();
+    openTransaction();
     contentManager.reIndex();
     final SearchResult<Content> search = contentManager.search(new String[] { MIMETYPE },
         new String[] { "mimeType.mimetype" }, 0, 10);
@@ -150,6 +151,8 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
   @Test
   public void testBasicSearchWithQueriesAndFields() {
     createContentWithMimeAndCheck(MIMETYPE);
+    closeTransaction();
+    openTransaction();
     final SearchResult<Content> search = contentManager.search(new String[] { BODY },
         new String[] { "lastRevision.body" }, 0, 10);
     closeTransaction();
@@ -164,6 +167,7 @@ public class ContentManagerDefaultTest extends PersistencePreLoadedDataTest {
   public void testBasicTitleSearch() {
     createContent();
     closeTransaction();
+    openTransaction();
     final SearchResult<Content> search = contentManager.search(TITLE);
     contentManager.reIndex();
     assertEquals(1, search.getSize());

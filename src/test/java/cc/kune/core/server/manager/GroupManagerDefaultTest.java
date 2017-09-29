@@ -45,7 +45,7 @@ import cc.kune.domain.SocialNetwork;
 // TODO: Auto-generated Javadoc
 /**
  * The Class GroupManagerDefaultTest.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
@@ -55,7 +55,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Created group shoud have valid social network.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
@@ -73,7 +73,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the group.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
@@ -91,7 +91,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the group and search.
-   * 
+   *
    * @throws Exception
    *           the exception
    * @throws ParseException
@@ -104,6 +104,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
     groupManager.createGroup(group, user, PUBLIC_DESCRIP);
     closeTransaction();
     groupManager.reIndex();
+    openTransaction();
     final SearchResult<Group> result = groupManager.search("ysei");
     assertEquals(1, result.getSize());
     assertEquals("ysei", result.getList().get(0).getShortName());
@@ -112,7 +113,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the group with existing long name.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
@@ -132,7 +133,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the group with existing short name.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
@@ -151,7 +152,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the test group.
-   * 
+   *
    * @param number
    *          the number
    * @throws Exception
@@ -165,7 +166,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the user existing email.
-   * 
+   *
    * @throws I18nNotFoundException
    *           the i18n not found exception
    * @throws GroupShortNameInUseException
@@ -184,7 +185,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the user existing long name.
-   * 
+   *
    * @throws I18nNotFoundException
    *           the i18n not found exception
    * @throws GroupShortNameInUseException
@@ -203,7 +204,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the user existing short name.
-   * 
+   *
    * @throws I18nNotFoundException
    *           the i18n not found exception
    * @throws GroupShortNameInUseException
@@ -222,7 +223,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the user with existing email.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
@@ -235,7 +236,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the user with existing long name.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
@@ -248,7 +249,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the user with existing short name.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
@@ -261,7 +262,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the user with incorrect short name.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
@@ -274,7 +275,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Creates the user with very short name.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
@@ -287,7 +288,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Group search pagination.
-   * 
+   *
    * @throws Exception
    *           the exception
    * @throws ParseException
@@ -299,7 +300,9 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
       createTestGroup(i);
     }
     closeTransaction();
+
     groupManager.reIndex();
+    openTransaction();
     final SearchResult<Group> result = groupManager.search("Yellow", 0, 5);
     assertEquals(9, result.getSize());
     assertEquals(5, result.getList().size());
@@ -311,7 +314,7 @@ public class GroupManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Same group has same hash.
-   * 
+   *
    * @throws Exception
    *           the exception
    */

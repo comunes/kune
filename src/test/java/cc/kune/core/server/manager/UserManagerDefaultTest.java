@@ -44,7 +44,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserManagerDefaultTest.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -86,7 +86,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * Gets the time zone.
-   * 
+   *
    * @return the time zone
    */
   private TimeZone getTimeZone() {
@@ -123,7 +123,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
   /**
    * This was not working:
    * http://opensource.atlassian.com/projects/hibernate/browse/EJB-382
-   * 
+   *
    * @throws I18nNotFoundException
    *           the i18n not found exception
    */
@@ -149,7 +149,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
 
   /**
    * User search.
-   * 
+   *
    * @throws Exception
    *           the exception
    * @throws ParseException
@@ -159,6 +159,7 @@ public class UserManagerDefaultTest extends PersistencePreLoadedDataTest {
   public void userSearch() throws Exception, ParseException {
     closeTransaction();
     userManager.reIndex();
+    openTransaction();
     final SearchResult<User> result = userManager.search(USER_SHORT_NAME);
     assertEquals(1, result.getSize());
     assertEquals(USER_SHORT_NAME, result.getList().get(0).getShortName());
