@@ -79,7 +79,8 @@ public class ContentJSONService {
       final Integer maxResults, final String group, final String mimetype) {
     final SearchResult<Content> results = contentManager.searchMime(search, firstResult, maxResults,
         group, mimetype);
-    return map(results);
+    SearchResultDTO<LinkDTO> resultsMapped = map(results);
+    return resultsMapped;
   }
 
   @REST(params = { SearcherConstants.QUERY_PARAM, SearcherConstants.START_PARAM,
@@ -87,6 +88,8 @@ public class ContentJSONService {
       SearcherConstants.MIMETYPE2_PARAM })
   public SearchResultDTO<LinkDTO> search(final String search, final Integer firstResult,
       final Integer maxResults, final String group, final String mimetype, final String mimetype2) {
-    return map(contentManager.searchMime(search, firstResult, maxResults, group, mimetype, mimetype2));
+    SearchResult<?> results = contentManager.searchMime(search, firstResult, maxResults, group, mimetype, mimetype2);
+    SearchResultDTO<LinkDTO> resultsmapped = map(results);
+    return resultsmapped;
   }
 }

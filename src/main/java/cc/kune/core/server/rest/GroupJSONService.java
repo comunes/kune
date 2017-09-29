@@ -55,7 +55,8 @@ public class GroupJSONService {
   public SearchResultDTO<GroupResultDTO> search(final String search, final Integer firstResult,
       final Integer maxResults) {
     final SearchResult<Group> results = manager.search(search, firstResult, maxResults);
-    return mapper.mapSearchResult(results, GroupResultDTO.class);
+    SearchResultDTO<GroupResultDTO> mappedResults = mapper.mapSearchResult(results, GroupResultDTO.class);
+    return mappedResults;
   }
 
 }
