@@ -106,8 +106,9 @@ also you can package and use the jar:
 
 ```bash
 mvn package
-java -cp /usr/lib/jvm/java-7-oracle/lib/tools.jar:./target/kune-cli-1.0.1-SNAPSHOT-jar-with-dependencies.jar cc.kune.kunecli.KuneCliMain help
+java -cp /usr/lib/jvm/java-8-openjdk-amd64/lib/tools.jar:./target/kune-cli-1.0.2-SNAPSHOT-jar-with-dependencies.jar cc.kune.kunecli.KuneCliMain help
 ```
+
 Update the tools.jar location pointing to your JVM_HOME directory.
 
 Also you can directly use the bash script:
