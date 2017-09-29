@@ -40,14 +40,17 @@ import de.codeset.gwt.notification.api.client.eventing.click.NotificationClickEv
 import de.codeset.gwt.notification.api.client.eventing.click.NotificationClickHandler;
 
 /**
- * The Class UserNotifierHtml5..
+ * The Class UserNotifierHtml5.
  *
  */
 @Singleton
 public class UserNotifierHtml5 {
 
   /**
-   * Instantiates a new user notifier growl.
+   * Instantiates a new user desktop notifier.
+   *
+   * https://developer.mozilla.org/en-US/docs/Web/API/notification
+   * https://www.w3.org/TR/notifications/
    *
    * @param eventBus
    *          the event bus
@@ -119,6 +122,7 @@ public class UserNotifierHtml5 {
                 @Override
                 public void onClick(NotificationClickEvent event) {
                   clickHandler.onClick(null);
+                  event.getNotification().close();
                 }
               });
             }
