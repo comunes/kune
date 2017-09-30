@@ -32,19 +32,15 @@ import cc.kune.core.server.persist.KuneTransactional;
 import com.google.inject.Inject;
 import com.google.inject.persist.UnitOfWork;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class KuneJpaLocalTxnInterceptor.
  *
  * @author Dhanji R. Prasanna (dhanji@gmail.com)
+ *
+ * Duplication of @JpaLocalTxnInterceptor so we can use openfire database
  */
 public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
 
-  /**
-   * The Class Internal.
-   *
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
   @KuneTransactional
   private static class Internal {
   }
@@ -66,20 +62,18 @@ public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
   /*
    * (non-Javadoc)
    *
-   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.
-   * intercept .MethodInvocation)
+   * @see
+   * org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept
+   * .MethodInvocation)
    */
   @Override
   public Object invoke(final MethodInvocation methodInvocation) throws Throwable, DefaultException {
 
-    final Class<?> targetClass = methodInvocation.getThis().getClass();
-
-    String methodStr = targetClass + "#" + methodInvocation.getMethod().getName();
     // Should we start a unit of work?
     if (!emProvider.isWorking()) {
       emProvider.begin();
       didWeStartWork.set(true);
-      LOG.debug("Starting transaction for '" + methodStr + "'");
+      LOG.debug("Starting transaction");
     }
 
     final KuneTransactional transactional = readTransactionMetadata(methodInvocation);
@@ -88,7 +82,7 @@ public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
     // Allow 'joining' of transactions if there is an enclosing
     // @KuneTransactional method.
     if (em.getTransaction().isActive()) {
-      LOG.debug("Invocation of '" + methodStr + "'. Joining a previous transaction");
+      LOG.debug("Joining a previous transaction");
       return methodInvocation.proceed();
     }
 
@@ -101,7 +95,7 @@ public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
 
     } catch (final Exception e) {
       // commit transaction only if rollback didnt occur
-      LOG.debug("Exception in transaction for '" + methodStr + "'", e);
+      LOG.debug("Exception in transaction", e);
       if (rollbackIfNecessary(transactional, e, txn)) {
         txn.commit();
       }
@@ -121,10 +115,10 @@ public class KuneJpaLocalTxnInterceptor implements MethodInterceptor {
     // as it
     // interferes with the advised method's throwing semantics)
     try {
-      LOG.debug("Trying to commit transaction for '" + methodStr + "'");
+      LOG.debug("Trying to commit transaction");
       txn.commit();
     } finally {
-      LOG.debug("Transaction commited for '" + methodStr + "'");
+      LOG.debug("Transaction commited");
       // close the em if necessary
       if (null != didWeStartWork.get()) {
         didWeStartWork.remove();
