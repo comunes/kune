@@ -200,8 +200,7 @@ public abstract class DefaultManager<T, K> {
         indexer = fullTextEm.createIndexer(entityClass);
       }
       indexer.batchSizeToLoadObjects(5).cacheMode(CacheMode.IGNORE).threadsToLoadObjects(
-          2).threadsForSubsequentFetching(2).progressMonitor(
-              new DefaultMassIndexerProgressMonitor(log));
+          2).threadsForSubsequentFetching(2).progressMonitor(new DefaultMassIndexerProgressMonitor(log));
       indexer.startAndWait();
 
     } catch (final InterruptedException e) {
@@ -251,6 +250,10 @@ public abstract class DefaultManager<T, K> {
     // we start @UnitOfWork managed by @JpaPersistService
     // so we don't need to do
     // em.getTransaction().begin();
+
+    // Guice-persist: Injection of EntityManager outside a UnitOfWork can lead
+    // to never closed EntityManagers
+    // https: // github.com/google/guice/issues/739
 
     assertInAnTransaction(em);
 
