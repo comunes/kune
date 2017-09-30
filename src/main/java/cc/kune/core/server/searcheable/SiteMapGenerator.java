@@ -57,10 +57,10 @@ import com.redfin.sitemapgenerator.WebSitemapUrl;
 /**
  * The Class SiteMapServlet generate a sitemap.xml for the kune site
  * http://en.wikipedia.org/wiki/Sitemaps
- * 
+ *
  * Inspired in: http://betweengo.com/category/java/servlet/ and for large sites:
  * http://dynamical.biz/blog/seo-technical/sitemap-strategy-large-sites-17.html
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -107,7 +107,7 @@ public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
   /**
    * Instantiates a new site map generator.
-   * 
+   *
    * @param props
    *          the props
    * @param groupFinder
@@ -138,7 +138,7 @@ public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
   /**
    * Count not closed groups.
-   * 
+   *
    * @return the long
    */
   @KuneTransactional
@@ -148,7 +148,7 @@ public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.searcheable.SiteMapGeneratorMBean#generate()
    */
   @Override
@@ -169,7 +169,7 @@ public class SiteMapGenerator implements SiteMapGeneratorMBean {
       }
 
       // Groups
-      LOG.info("Start groups procesing for sitema generation");
+      LOG.info("Start groups procesing for sitemap generation");
       final Long count = countNotClosedGroups();
       int i = 0;
       while (i < count) {
@@ -216,7 +216,7 @@ public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
   /**
    * Gets the containers.
-   * 
+   *
    * @param group
    *          the group
    * @return the containers
@@ -228,7 +228,7 @@ public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
   /**
    * Gets the contents.
-   * 
+   *
    * @param group
    *          the group
    * @return the contents
@@ -240,7 +240,7 @@ public class SiteMapGenerator implements SiteMapGeneratorMBean {
 
   /**
    * Gets the groups.
-   * 
+   *
    * @param i
    *          the i
    * @return the groups
