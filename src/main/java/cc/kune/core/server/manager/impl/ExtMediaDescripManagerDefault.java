@@ -26,22 +26,25 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import cc.kune.core.server.manager.ExtMediaDescripManager;
-import cc.kune.core.server.persist.DataSourceKune;
-import cc.kune.domain.ExtMediaDescrip;
-import cc.kune.domain.finders.ExtMediaDescripFinder;
+import org.hibernate.search.annotations.Indexed;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
+import cc.kune.core.server.manager.ExtMediaDescripManager;
+import cc.kune.core.server.persist.DataSourceKune;
+import cc.kune.domain.ExtMediaDescrip;
+import cc.kune.domain.finders.ExtMediaDescripFinder;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class ExtMediaDescripManagerDefault.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
+@Indexed
 public class ExtMediaDescripManagerDefault extends DefaultManager<ExtMediaDescrip, Long> implements
     ExtMediaDescripManager {
 
@@ -50,7 +53,7 @@ public class ExtMediaDescripManagerDefault extends DefaultManager<ExtMediaDescri
 
   /**
    * Instantiates a new ext media descrip manager default.
-   * 
+   *
    * @param provider
    *          the provider
    * @param extMediaFinder
@@ -65,7 +68,7 @@ public class ExtMediaDescripManagerDefault extends DefaultManager<ExtMediaDescri
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.manager.ExtMediaDescripManager#getAll()
    */
   @Override

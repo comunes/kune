@@ -113,6 +113,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   private MarkdownProcessor markProcessor;
 
+  private SiteManagers siteManagers;
+
   /**
    * Instantiates a new site rpc.
    *
@@ -140,12 +142,13 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
    *          the mbean registry
    */
   @Inject
-  public SiteManagerDefault(final UserSessionManager userSessionManager, final UserManager userManager,
+  public SiteManagerDefault(final UserSessionManager userSessionManager,
       final UserInfoService userInfoService, final LicenseManager licenseManager,
       final KuneMapper mapper, final KuneProperties kuneProperties, final ChatProperties chatProperties,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final ServerToolRegistry serverToolRegistry, final MBeanRegistry mbeanRegistry,
-      final GroupManager groupManager, final I18nTranslationServiceMultiLang i18n) {
+      final GroupManager groupManager, final I18nTranslationServiceMultiLang i18n, SiteManagers siteManagers
+      ) {
     this.userSessionManager = userSessionManager;
     this.userInfoService = userInfoService;
     this.licenseManager = licenseManager;
@@ -157,6 +160,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     this.serverToolRegistry = serverToolRegistry;
     this.groupManager = groupManager;
     this.i18n = i18n;
+    this.siteManagers = siteManagers;
     // By default we don't collect which part of the client is untranslated
     storeUntranslatedStrings = false;
     mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
@@ -326,7 +330,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   @Override
   public void reIndexAllEntities() {
-    groupManager.reIndexAllEntities();
+    siteManagers.reIndexAllEntities();
   }
 
   @Override

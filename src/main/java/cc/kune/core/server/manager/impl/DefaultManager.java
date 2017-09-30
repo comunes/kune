@@ -41,6 +41,7 @@ import org.hibernate.search.jpa.Search;
 import com.google.inject.Provider;
 
 import cc.kune.core.server.manager.SearchResult;
+import cc.kune.core.server.persist.KuneTransactional;
 
 /**
  * The Class DefaultManager.
@@ -182,6 +183,7 @@ public abstract class DefaultManager<T, K> {
     reIndex(entityClass);
   }
 
+  @KuneTransactional
   private void reIndex(Class<T> entityClass) {
     // http://docs.jboss.org/hibernate/search/4.1/reference/en-US/html_single/#search-batchindex
 
@@ -197,18 +199,14 @@ public abstract class DefaultManager<T, K> {
       } else {
         indexer = fullTextEm.createIndexer(entityClass);
       }
-      indexer.batchSizeToLoadObjects(25).cacheMode(CacheMode.IGNORE).threadsToLoadObjects(
-          5).threadsForSubsequentFetching(20).progressMonitor(
+      indexer.batchSizeToLoadObjects(5).cacheMode(CacheMode.IGNORE).threadsToLoadObjects(
+          2).threadsForSubsequentFetching(2).progressMonitor(
               new DefaultMassIndexerProgressMonitor(log));
       indexer.startAndWait();
-//em.close();
+
     } catch (final InterruptedException e) {
       throw new ServerManagerException("Error reindexing", e);
     }
-  }
-
-  public void reIndexAllEntities() {
-    reIndex(null);
   }
 
   /**
@@ -244,6 +242,7 @@ public abstract class DefaultManager<T, K> {
    * @return the search result
    */
   @SuppressWarnings("unchecked")
+  @KuneTransactional
   public SearchResult<T> search(final Query query, final Integer firstResult, final Integer maxResults) {
     EntityManager em = getEntityManager();
     final FullTextEntityManager fullTextEm = Search.getFullTextEntityManager(em);

@@ -282,9 +282,4 @@ public interface GroupManager extends Manager<Group, Long> {
    */
   Group update(Long groupId, GroupDTO groupDTO);
 
-  /**
-   * Reindex all JPA entities (TODO: move this to other global manager)
-   */
-  void reIndexAllEntities();
-
 }

@@ -30,14 +30,14 @@ import cc.kune.domain.finders.LicenseFinder;
 // TODO: Auto-generated Javadoc
 /**
  * The Interface LicenseManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public interface LicenseManager {
+public interface LicenseManager extends Manager<License, Long> {
 
   /**
    * Find by short name.
-   * 
+   *
    * @param licenseDef
    *          the license def
    * @return the license
@@ -46,35 +46,35 @@ public interface LicenseManager {
 
   /**
    * Gets the all.
-   * 
+   *
    * @return the all
    */
   List<License> getAll();
 
   /**
    * Gets the cc.
-   * 
+   *
    * @return the cc
    */
   List<License> getCC();
 
   /**
    * Gets the def license.
-   * 
+   *
    * @return the def license
    */
   License getDefLicense();
 
   /**
    * Gets the not cc.
-   * 
+   *
    * @return the not cc
    */
   List<License> getNotCC();
 
   /**
    * Persist.
-   * 
+   *
    * @param license
    *          the license
    * @return the license
@@ -83,7 +83,7 @@ public interface LicenseManager {
 
   /**
    * Sets the license finder.
-   * 
+   *
    * @param licenseFinder
    *          the new license finder
    */

@@ -24,18 +24,19 @@
 package cc.kune.core.server.manager;
 
 import cc.kune.domain.User;
+import cc.kune.domain.UserSignInLog;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Interface UserSignInLogManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
-public interface UserSignInLogManager {
+public interface UserSignInLogManager extends Manager<UserSignInLog, Long> {
 
   /**
    * Log a new user session signin.
-   * 
+   *
    * @param user
    *          the user
    * @param ipAddress

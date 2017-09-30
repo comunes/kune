@@ -41,16 +41,18 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Sort;
 import org.hibernate.annotations.SortType;
 import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Indexed;
 
 import cc.kune.domain.utils.HasId;
 
 /**
  * The Class Participants maps the waves of some participant
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
 @Table(name = "participants")
+@Indexed
 public class ParticipantEntity implements HasId {
 
   @Column(nullable = false, unique = true)

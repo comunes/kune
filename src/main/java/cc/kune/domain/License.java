@@ -31,16 +31,18 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.search.annotations.Indexed;
 
 import cc.kune.domain.utils.HasId;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class License.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Entity
+@Indexed
 @Table(name = "licenses")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class License implements HasId {
@@ -98,7 +100,7 @@ public class License implements HasId {
 
   /**
    * Instantiates a new license.
-   * 
+   *
    * @param shortName
    *          the short name
    * @param longName
@@ -134,7 +136,7 @@ public class License implements HasId {
 
   /**
    * Gets the description.
-   * 
+   *
    * @return the description
    */
   public String getDescription() {
@@ -143,7 +145,7 @@ public class License implements HasId {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.domain.utils.HasId#getId()
    */
   @Override
@@ -153,7 +155,7 @@ public class License implements HasId {
 
   /**
    * Gets the image url.
-   * 
+   *
    * @return the image url
    */
   public String getImageUrl() {
@@ -162,7 +164,7 @@ public class License implements HasId {
 
   /**
    * Gets the long name.
-   * 
+   *
    * @return the long name
    */
   public String getLongName() {
@@ -171,7 +173,7 @@ public class License implements HasId {
 
   /**
    * Gets the rdf.
-   * 
+   *
    * @return the rdf
    */
   public String getRdf() {
@@ -180,7 +182,7 @@ public class License implements HasId {
 
   /**
    * Gets the short name.
-   * 
+   *
    * @return the short name
    */
   public String getShortName() {
@@ -189,7 +191,7 @@ public class License implements HasId {
 
   /**
    * Gets the url.
-   * 
+   *
    * @return the url
    */
   public String getUrl() {
@@ -198,7 +200,7 @@ public class License implements HasId {
 
   /**
    * Checks if is cc.
-   * 
+   *
    * @return true, if is cc
    */
   public boolean isCC() {
@@ -207,7 +209,7 @@ public class License implements HasId {
 
   /**
    * Checks if is copyleft.
-   * 
+   *
    * @return true, if is copyleft
    */
   public boolean isCopyleft() {
@@ -216,7 +218,7 @@ public class License implements HasId {
 
   /**
    * Checks if is deprecated.
-   * 
+   *
    * @return true, if is deprecated
    */
   public boolean isDeprecated() {
@@ -225,7 +227,7 @@ public class License implements HasId {
 
   /**
    * Sets the cc.
-   * 
+   *
    * @param isCC
    *          the new cc
    */
@@ -235,7 +237,7 @@ public class License implements HasId {
 
   /**
    * Sets the copyleft.
-   * 
+   *
    * @param isCopyleft
    *          the new copyleft
    */
@@ -245,7 +247,7 @@ public class License implements HasId {
 
   /**
    * Sets the deprecated.
-   * 
+   *
    * @param isDeprecated
    *          the new deprecated
    */
@@ -255,7 +257,7 @@ public class License implements HasId {
 
   /**
    * Sets the description.
-   * 
+   *
    * @param description
    *          the new description
    */
@@ -265,7 +267,7 @@ public class License implements HasId {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.domain.utils.HasId#setId(java.lang.Long)
    */
   @Override
@@ -275,7 +277,7 @@ public class License implements HasId {
 
   /**
    * Sets the image url.
-   * 
+   *
    * @param imageUrl
    *          the new image url
    */
@@ -285,7 +287,7 @@ public class License implements HasId {
 
   /**
    * Sets the long name.
-   * 
+   *
    * @param longName
    *          the new long name
    */
@@ -295,7 +297,7 @@ public class License implements HasId {
 
   /**
    * Sets the rdf.
-   * 
+   *
    * @param rdf
    *          the new rdf
    */
@@ -305,7 +307,7 @@ public class License implements HasId {
 
   /**
    * Sets the short name.
-   * 
+   *
    * @param shortName
    *          the new short name
    */
@@ -315,7 +317,7 @@ public class License implements HasId {
 
   /**
    * Sets the url.
-   * 
+   *
    * @param url
    *          the new url
    */
