@@ -37,11 +37,6 @@ import com.google.inject.persist.UnitOfWork;
  */
 public class OpenfireJpaLocalTxnInterceptor implements MethodInterceptor {
 
-  /**
-   * The Class Internal.
-   * 
-   * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
-   */
   @OpenfireTransactional
   private static class Internal {
   }
@@ -60,7 +55,7 @@ public class OpenfireJpaLocalTxnInterceptor implements MethodInterceptor {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept
    * .MethodInvocation)
