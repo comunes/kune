@@ -52,6 +52,7 @@
         value="com.zaxxer.hikari.hibernate.CustomHikariConnectionProvider"/>
       <!-- In the future with hiberante 4: value="org.hibernate.hikaricp.internal.HikariCPConnectionProvider"/> -->
       <property name="hibernate.hikari.minimumIdle" value="5"/>
+      <!-- https://github.com/brettwooldridge/HikariCP/wiki/About-Pool-Sizing -->
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
       <property name="hibernate.hikari.registerMbeans" value="true"/>
