@@ -52,6 +52,8 @@ public class MetricsManager {
     Boolean doMetrics = config.getBoolean("kune.metrics");
     Boolean doHealthChecks = config.getBoolean("kune.healthchecks");
 
+    // TODO: add https://github.com/BreakTheMonolith/btm-DropwizardHealthChecks
+
     if (doMetrics) {
       // https://github.com/brettwooldridge/HikariCP/wiki/Dropwizard-HealthChecks
       CustomHikariConnectionProvider.DATA_SOURCE.setMetricRegistry(metricRegistry);
