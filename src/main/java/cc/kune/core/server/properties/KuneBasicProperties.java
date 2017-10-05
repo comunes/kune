@@ -85,7 +85,7 @@ public class KuneBasicProperties {
    * 
    * @return the admin user name
    */
-  public String getAdminUserName() {
+  public String getAdminName() {
     return properties.get(KuneProperties.SITE_ADMIN_NAME);
   }
 

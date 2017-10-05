@@ -25,7 +25,6 @@ package cc.kune.core.server.rack;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.management.ManagementFactory;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,12 +44,6 @@ import org.waveprotocol.box.server.waveserver.LucenePerUserWaveViewHandlerImpl;
 
 import com.codahale.metrics.MetricRegistry;
 import com.codahale.metrics.health.HealthCheckRegistry;
-import com.codahale.metrics.health.jvm.ThreadDeadlockHealthCheck;
-import com.codahale.metrics.jvm.BufferPoolMetricSet;
-import com.codahale.metrics.jvm.ClassLoadingGaugeSet;
-import com.codahale.metrics.jvm.GarbageCollectorMetricSet;
-import com.codahale.metrics.jvm.MemoryUsageGaugeSet;
-import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
 import com.codahale.metrics.servlet.InstrumentedFilter;
 import com.codahale.metrics.servlets.HealthCheckServlet;
 import com.codahale.metrics.servlets.MetricsServlet;
@@ -69,6 +62,7 @@ import com.zaxxer.hikari.hibernate.CustomHikariConnectionProvider;
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.error.ServerException;
 import cc.kune.core.server.mbean.MBeanRegister;
+import cc.kune.core.server.metrics.MetricsManager;
 import cc.kune.core.server.rack.dock.Dock;
 import cc.kune.core.server.rack.dock.RequestMatcher;
 import cc.kune.core.server.rack.utils.RackHelper;
@@ -208,6 +202,9 @@ public class RackServletFilter implements Filter {
     ServletContext servletContext = filterConfig.getServletContext();
     injector = (Injector) servletContext.getAttribute(INJECTOR_PARENT_ATTRIBUTE);
 
+    MetricRegistry metricRegistry = new MetricRegistry();
+    HealthCheckRegistry heathRegistry = new HealthCheckRegistry();
+
     final Module otherGuiceModule = new Module() {
       @Override
       public void configure(final Binder binder) {
@@ -215,6 +212,8 @@ public class RackServletFilter implements Filter {
         binder.bind(SearchEngineServletFilter.class).toInstance(
             (SearchEngineServletFilter) servletContext.getAttribute(
                 SearchEngineServletFilter.SEARCH_ENGINE_FILTER_ATTRIBUTE));
+        binder.bind(MetricRegistry.class).toInstance(metricRegistry);;
+        binder.bind(HealthCheckRegistry.class).toInstance(heathRegistry);;
       }
     };
 
@@ -256,29 +255,17 @@ public class RackServletFilter implements Filter {
     // servletContext.setAttribute("org.eclipse.jetty.servlet.SessionDomain", domain);
 
     Boolean doMetrics = config.getBoolean("kune.metrics");
-    Boolean doHealthChecks = config.getBoolean("kune.healthchecks");
-
-    MetricRegistry metricRegistry = injector.getInstance(MetricRegistry.class);
-    HealthCheckRegistry heathRegistry = injector.getInstance(HealthCheckRegistry.class);
-
-    servletContext.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY, heathRegistry);
-    servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY, metricRegistry);
 
     if (doMetrics) {
       // https://github.com/brettwooldridge/HikariCP/wiki/Dropwizard-HealthChecks
-      CustomHikariConnectionProvider.DATA_SOURCE.setMetricRegistry(metricRegistry);
-      servletContext.setAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE, metricRegistry);
-      metricRegistry.register("jvm.buffers",
-          new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
-      metricRegistry.register("jvm.cl", new ClassLoadingGaugeSet());
-      metricRegistry.register("jvm.gc", new GarbageCollectorMetricSet());
-      metricRegistry.register("jvm.memory", new MemoryUsageGaugeSet());
-      metricRegistry.register("jvm.threads", new ThreadStatesGaugeSet());
-    }
 
-    if (doHealthChecks) {
-      CustomHikariConnectionProvider.DATA_SOURCE.setHealthCheckRegistry(heathRegistry);
-      heathRegistry.register("jvm.deadlocks", new ThreadDeadlockHealthCheck());
+      // Previous to instantiate Metrics Manager we set this property,
+      // that is healthy if the 99th percentile of getConnection() calls complete within 10ms
+      CustomHikariConnectionProvider.DATA_SOURCE.addHealthCheckProperty("expected99thPercentileMs", "10");
+      kuneChildInjector.getInstance(MetricsManager.class);
+      servletContext.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY, heathRegistry);
+      servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY, metricRegistry);
+      servletContext.setAttribute(InstrumentedFilter.REGISTRY_ATTRIBUTE, metricRegistry);
     }
 
     initialized = true;

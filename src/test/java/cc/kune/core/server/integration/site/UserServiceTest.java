@@ -158,7 +158,7 @@ public class UserServiceTest extends IntegrationTest {
   @Test(expected = GroupLongNameInUseException.class)
   public void createUserExistingLongNameFails() throws Exception {
     assertNull(session.getUser().getId());
-    final UserDTO user = new UserDTO("test", properties.getAdminUserName(), "123456",
+    final UserDTO user = new UserDTO("test", properties.getAdminName(), "123456",
         "example1234@example.com", lang, country, timezone, null, true, SubscriptionMode.manual, "blue");
     userService.createUser(user, false);
   }
@@ -410,7 +410,7 @@ public class UserServiceTest extends IntegrationTest {
    */
   @Test(expected = GroupLongNameInUseException.class)
   public void updateUserExistingLongNameFails() throws Exception {
-    updateUser("test", properties.getAdminUserName(), "example1234@example.com");
+    updateUser("test", properties.getAdminName(), "example1234@example.com");
   }
 
 }

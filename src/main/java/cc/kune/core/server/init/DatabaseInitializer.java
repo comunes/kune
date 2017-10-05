@@ -141,7 +141,7 @@ public class DatabaseInitializer {
    *           the user must be logged exception
    */
   private void createDefUsersGroup() throws Exception, UserMustBeLoggedException {
-    final String adminName = properties.getAdminUserName();
+    final String adminName = properties.getAdminName();
     final String adminShortName = properties.getAdminShortName();
     final String adminEmail = properties.getAdminEmail();
     final String adminPassword = properties.getAdminPassword();

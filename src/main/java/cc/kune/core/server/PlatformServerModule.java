@@ -101,6 +101,7 @@ import cc.kune.core.server.manager.impl.UserSignInLogManagerDefault;
 import cc.kune.core.server.manager.impl.WaveEntityManagerDefault;
 import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.mapper.KuneMapperDefault;
+import cc.kune.core.server.metrics.MetricsManager;
 import cc.kune.core.server.notifier.NotificationSender;
 import cc.kune.core.server.notifier.NotificationSenderDefault;
 import cc.kune.core.server.notifier.PendingNotificationSender;
@@ -213,11 +214,12 @@ public class PlatformServerModule extends AbstractExtendedModule {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.google.inject.AbstractModule#configure()
    */
   @Override
   protected void configure() {
+    bind(MetricsManager.class);
     // install(PersistService.usingJpa().across(UnitOfWork.TRANSACTION).buildModule());
     bind(KunePersistenceService.class);
 

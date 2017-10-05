@@ -185,7 +185,7 @@ public abstract class DefaultManager<T, K> {
 
   @KuneTransactional
   private void reIndex(Class<T> entityClass) {
-    // http://docs.jboss.org/hibernate/search/4.1/reference/en-US/html_single/#search-batchindex
+    // http://docs.jboss.org/hibernate/search/4.2/reference/en-US/html_single/#search-batchindex-massindexer
 
     EntityManager em = getEntityManager();
 
