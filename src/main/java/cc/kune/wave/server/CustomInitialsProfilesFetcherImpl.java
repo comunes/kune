@@ -77,7 +77,7 @@ public class CustomInitialsProfilesFetcherImpl implements ProfilesFetcher {
         } catch (final javax.persistence.NoResultException e) {
           // User not found in this node (maybe deleted?)
           // FIXME i18n
-          name = "User unknown";
+          name = email; // Before: "User unknown";
         }
       }
     }
