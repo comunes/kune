@@ -160,7 +160,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
     final Date start = new Date();
     final Method method = invocation.getMethod();
     LogThis annotation = method.getAnnotation(LogThis.class);
-    boolean asInfo = annotation.asInfo();
+    boolean asInfo = annotation != null && annotation.asInfo();
     logInvocation(invocation);
     try {
       final Object result = invocation.proceed();
