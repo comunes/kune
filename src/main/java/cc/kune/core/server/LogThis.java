@@ -29,10 +29,11 @@ import com.google.inject.BindingAnnotation;
 
 /**
  * Anotate the classes you want to log via Guice interceptors.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @BindingAnnotation
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogThis {
+  boolean asInfo() default false;
 }

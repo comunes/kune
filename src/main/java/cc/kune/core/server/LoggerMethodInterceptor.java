@@ -22,6 +22,7 @@
  */
 package cc.kune.core.server;
 
+import java.lang.reflect.Method;
 import java.util.Date;
 
 import org.aopalliance.intercept.MethodInterceptor;
@@ -32,7 +33,7 @@ import org.apache.commons.logging.LogFactory;
 // TODO: Auto-generated Javadoc
 /**
  * The Class LoggerMethodInterceptor.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public class LoggerMethodInterceptor implements MethodInterceptor {
@@ -52,7 +53,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Instantiates a new logger method interceptor.
-   * 
+   *
    * @param simplifyNames
    *          the simplify names
    */
@@ -62,7 +63,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Adds the method name.
-   * 
+   *
    * @param invocation
    *          the invocation
    * @param buffer
@@ -75,7 +76,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Adds the method parameters.
-   * 
+   *
    * @param invocation
    *          the invocation
    * @param buffer
@@ -92,7 +93,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Adds the target class name.
-   * 
+   *
    * @param invocation
    *          the invocation
    * @param buffer
@@ -104,7 +105,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Creates the buffer.
-   * 
+   *
    * @param invocation
    *          the invocation
    * @return the string buffer
@@ -117,7 +118,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Gets the simple name.
-   * 
+   *
    * @param type
    *          the type
    * @return the simple name
@@ -135,7 +136,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Gets the value.
-   * 
+   *
    * @param result
    *          the result
    * @return the value
@@ -150,18 +151,20 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /*
    * (non-Javadoc)
-   * 
-   * @see
-   * org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.intercept
-   * .MethodInvocation)
+   *
+   * @see org.aopalliance.intercept.MethodInterceptor#invoke(org.aopalliance.
+   * intercept .MethodInvocation)
    */
   @Override
   public Object invoke(final MethodInvocation invocation) throws Throwable {
     final Date start = new Date();
+    final Method method = invocation.getMethod();
+    LogThis annotation = method.getAnnotation(LogThis.class);
+    boolean asInfo = annotation.asInfo();
     logInvocation(invocation);
     try {
       final Object result = invocation.proceed();
-      logResult(invocation, result, (new Date()).getTime() - start.getTime());
+      logResult(invocation, result, (new Date()).getTime() - start.getTime(), asInfo);
       return result;
     } catch (final Exception e) {
       logException(invocation, e);
@@ -171,17 +174,26 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Log.
-   * 
+   *
    * @param output
    *          the output
+   * @param asInfo
    */
+  protected void log(final String output, boolean asInfo) {
+    if (asInfo) {
+      LOG.info(output);
+    } else {
+      LOG.debug(output);
+    }
+  }
+
   protected void log(final String output) {
-    LOG.debug(output);
+    log(output, false);
   }
 
   /**
    * Log exception.
-   * 
+   *
    * @param invocation
    *          the invocation
    * @param e
@@ -197,7 +209,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Log invocation.
-   * 
+   *
    * @param invocation
    *          the invocation
    */
@@ -210,7 +222,7 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
 
   /**
    * Log result.
-   * 
+   *
    * @param invocation
    *          the invocation
    * @param result
@@ -218,7 +230,8 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
    * @param mill
    *          the mill
    */
-  protected void logResult(final MethodInvocation invocation, final Object result, final long mill) {
+  protected void logResult(final MethodInvocation invocation, final Object result, final long mill,
+      final boolean asInfo) {
     final StringBuffer buffer = createBuffer(invocation);
     addMethodName(invocation, buffer);
     if (invocation.getMethod().getReturnType() != null) {
@@ -228,6 +241,6 @@ public class LoggerMethodInterceptor implements MethodInterceptor {
       buffer.append(mill);
       buffer.append("ms");
     }
-    log(buffer.toString());
+    log(buffer.toString(), asInfo);
   }
 }
