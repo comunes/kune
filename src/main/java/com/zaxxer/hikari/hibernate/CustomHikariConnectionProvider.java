@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+
 /**
  * Connection provider for Hibernate 4.3.
  *
@@ -44,8 +45,6 @@ public class CustomHikariConnectionProvider implements ConnectionProvider, Confi
    private static final long serialVersionUID = -9131625057941275711L;
 
    private static final Logger LOGGER = LoggerFactory.getLogger(CustomHikariConnectionProvider.class);
-
-   public static HikariDataSource DATA_SOURCE ;
 
    /**
     * HikariCP configuration.
@@ -87,14 +86,13 @@ public class CustomHikariConnectionProvider implements ConnectionProvider, Confi
 
          this.hcfg = HikariConfigurationUtil.loadConfiguration(props);
          this.hds = new HikariDataSource(this.hcfg);
-         DATA_SOURCE = hds;
-
+         HikariDataSourceRegister.INSTANCE.add(hds);
       }
       catch (Exception e) {
          throw new HibernateException(e);
       }
 
-      LOGGER.debug("HikariCP Configured");
+      LOGGER.info("HikariCP Configured");
    }
 
    // *************************************************************************

@@ -37,7 +37,8 @@ import com.codahale.metrics.jvm.ThreadStatesGaugeSet;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.typesafe.config.Config;
-import com.zaxxer.hikari.hibernate.CustomHikariConnectionProvider;
+import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.hibernate.HikariDataSourceRegister;
 
 import cc.kune.core.server.xmpp.XmppHealthCheck;
 import cc.kune.wave.server.kspecific.WaveHealthCheck;
@@ -52,11 +53,10 @@ public class MetricsManager {
     Boolean doMetrics = config.getBoolean("kune.metrics");
     Boolean doHealthChecks = config.getBoolean("kune.healthchecks");
 
-    // TODO: add https://github.com/BreakTheMonolith/btm-DropwizardHealthChecks
-
     if (doMetrics) {
-      // https://github.com/brettwooldridge/HikariCP/wiki/Dropwizard-HealthChecks
-      CustomHikariConnectionProvider.DATA_SOURCE.setMetricRegistry(metricRegistry);
+      for (HikariDataSource hds: HikariDataSourceRegister.INSTANCE.set()) {
+        hds.setMetricRegistry(metricRegistry);
+      }
       metricRegistry.register("jvm.buffers",
           new BufferPoolMetricSet(ManagementFactory.getPlatformMBeanServer()));
       metricRegistry.register("jvm.cl", new ClassLoadingGaugeSet());
@@ -67,11 +67,14 @@ public class MetricsManager {
     }
 
     if (doHealthChecks) {
+      // https://github.com/brettwooldridge/HikariCP/wiki/Dropwizard-HealthChecks
       healthRegistry.register("kune.groups", groupsHealthCheck);
       healthRegistry.register("kune.users", usersHealthCheck);
       healthRegistry.register("kune.chat", xmppHealthCheck);
       healthRegistry.register("kune.waves", waveHealthCheck);
-      CustomHikariConnectionProvider.DATA_SOURCE.setHealthCheckRegistry(healthRegistry);
+      for (HikariDataSource hds: HikariDataSourceRegister.INSTANCE.set()) {
+        hds.setHealthCheckRegistry(healthRegistry);
+      }
       healthRegistry.register("jvm.deadlocks", new ThreadDeadlockHealthCheck());
     }
   }

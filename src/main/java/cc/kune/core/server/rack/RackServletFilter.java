@@ -57,7 +57,8 @@ import com.google.inject.grapher.InjectorGrapher;
 import com.google.inject.grapher.graphviz.GraphvizModule;
 import com.google.inject.grapher.graphviz.GraphvizRenderer;
 import com.typesafe.config.Config;
-import com.zaxxer.hikari.hibernate.CustomHikariConnectionProvider;
+import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.hibernate.HikariDataSourceRegister;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.error.ServerException;
@@ -260,8 +261,10 @@ public class RackServletFilter implements Filter {
       // https://github.com/brettwooldridge/HikariCP/wiki/Dropwizard-HealthChecks
 
       // Previous to instantiate Metrics Manager we set this property,
-      // that is healthy if the 99th percentile of getConnection() calls complete within 10ms
-      CustomHikariConnectionProvider.DATA_SOURCE.addHealthCheckProperty("expected99thPercentileMs", "10");
+      // that is healthy if the 99th percentile of getConnection() calls complete within 50ms
+      for (HikariDataSource hds: HikariDataSourceRegister.INSTANCE.set()) {
+        hds.addHealthCheckProperty("expected99thPercentileMs", "50");
+      }
       kuneChildInjector.getInstance(MetricsManager.class);
       servletContext.setAttribute(HealthCheckServlet.HEALTH_CHECK_REGISTRY, heathRegistry);
       servletContext.setAttribute(MetricsServlet.METRICS_REGISTRY, metricRegistry);
