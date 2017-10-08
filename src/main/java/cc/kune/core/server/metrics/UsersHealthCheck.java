@@ -30,6 +30,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import cc.kune.core.server.manager.UserManager;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.server.properties.KuneBasicProperties;
 import cc.kune.domain.User;
 
@@ -42,6 +43,7 @@ public class UsersHealthCheck extends HealthCheck {
   KuneBasicProperties properties;
 
   @Override
+  @KuneTransactional
   protected Result check() throws Exception {
     String adminName = properties.getAdminShortName();
     String password = properties.getAdminPassword();

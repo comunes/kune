@@ -27,16 +27,11 @@ import com.codahale.metrics.health.HealthCheck;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
-import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.properties.KuneBasicProperties;
-import cc.kune.core.server.xmpp.ChatConnection;
-import cc.kune.core.server.xmpp.XmppManager;
 
 @Singleton
 public class XmppHealthCheck extends HealthCheck {
 
-  @Inject
-  UserManager usersManager;
   @Inject
   XmppManager xmppManager;
   @Inject

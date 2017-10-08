@@ -30,6 +30,7 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import cc.kune.core.server.manager.GroupManager;
+import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.domain.Group;
 
 @Singleton
@@ -39,6 +40,7 @@ public class GroupsHealthCheck extends HealthCheck {
   GroupManager groupManager;
 
   @Override
+  @KuneTransactional
   protected Result check() throws Exception {
     Group siteDefaultGroup;
     try {
