@@ -56,6 +56,9 @@
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
       <property name="hibernate.hikari.registerMbeans" value="true"/>
+      <property name="hibernate.hikari.poolName" value="kune" />
+      <!-- try to remove this in the future -->
+      <property name="hibernate.hikari.connectionTestQuery" value="SELECT 1" />
       <property name="hibernate.hikari.dataSourceClassName"
         value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
       <!-- Configured and overrided by kune.properties -->
@@ -125,6 +128,9 @@
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
       <property name="hibernate.hikari.registerMbeans" value="true"/>
+      <property name="hibernate.hikari.poolName" value="openfire" />
+      <!-- try to remove this in the future -->
+      <property name="hibernate.hikari.connectionTestQuery" value="SELECT 1" />
       <property name="hibernate.hikari.dataSourceClassName"
         value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
       <!-- Configured and overrided by kune.properties -->
@@ -216,6 +222,9 @@
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
       <property name="hibernate.hikari.registerMbeans" value="true"/>
+      <property name="hibernate.hikari.poolName" value="kune" />
+      <!-- try to remove this in the future -->
+      <property name="hibernate.hikari.connectionTestQuery" value="SELECT 1" />
       <property name="hibernate.hikari.dataSourceClassName"
         value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
       <!-- Configured and overrided by kune.properties -->
@@ -307,6 +316,9 @@
       <property name="hibernate.hikari.maximumPoolSize" value="10"/>
       <property name="hibernate.hikari.idleTimeout" value="30000"/>
       <property name="hibernate.hikari.registerMbeans" value="true"/>
+      <property name="hibernate.hikari.poolName" value="kune" />
+      <!-- try to remove this in the future -->
+      <property name="hibernate.hikari.connectionTestQuery" value="SELECT 1" />
       <property name="hibernate.hikari.dataSourceClassName"
         value="com.mysql.jdbc.jdbc2.optional.MysqlDataSource"/>
       <!-- Configured and overrided by kune.properties -->
