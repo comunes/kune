@@ -58,5 +58,6 @@ public interface SiteManagerDefaultMBean {
 
   void reIndexAllEntities();
 
+  void reIndexAllWaves();
 
 }

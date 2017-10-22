@@ -31,6 +31,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.markdownj.MarkdownProcessor;
+import org.waveprotocol.box.server.waveserver.WaveIndexer;
+import org.waveprotocol.box.server.waveserver.WaveServerException;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -115,6 +117,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   private SiteManagers siteManagers;
 
+  private WaveIndexer waveIndexer;
+
   /**
    * Instantiates a new site rpc.
    *
@@ -147,7 +151,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
       final KuneMapper mapper, final KuneProperties kuneProperties, final ChatProperties chatProperties,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final ServerToolRegistry serverToolRegistry, final MBeanRegistry mbeanRegistry,
-      final GroupManager groupManager, final I18nTranslationServiceMultiLang i18n, SiteManagers siteManagers
+      final GroupManager groupManager, final I18nTranslationServiceMultiLang i18n, SiteManagers siteManagers,
+      WaveIndexer waveIndexer
       ) {
     this.userSessionManager = userSessionManager;
     this.userInfoService = userInfoService;
@@ -161,6 +166,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     this.groupManager = groupManager;
     this.i18n = i18n;
     this.siteManagers = siteManagers;
+    this.waveIndexer = waveIndexer;
     // By default we don't collect which part of the client is untranslated
     storeUntranslatedStrings = false;
     mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
@@ -374,6 +380,15 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
       motdTranslated.put(lang, translated);
     }
     return translated;
+  }
+
+  @Override
+  public void reIndexAllWaves() {
+    try {
+      waveIndexer.remakeIndex();
+    } catch (WaveServerException e) {
+      LOG.error("Failed to reindex all waves", e);
+    }
   }
 
 }
