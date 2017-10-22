@@ -32,9 +32,9 @@ import org.naturalcli.ParseResult;
 import cc.kune.core.server.manager.impl.SiteManagerDefaultMBean;
 import cc.kune.kunecli.JMXUtils;
 
-public class SiteReindexCommand extends Command {
+public class SiteReindexAllEntitiesCommand extends Command {
 
-  public static class SiteReindexICommand implements ICommandExecutor {
+  public static class SiteReindexAllEntitiesICommand implements ICommandExecutor {
 
     @Override
     public void execute(final ParseResult result) throws ExecutionException {
@@ -42,8 +42,8 @@ public class SiteReindexCommand extends Command {
     }
   }
 
-  public SiteReindexCommand() throws InvalidSyntaxException {
-    super("site reindex", "Reindex all entities in Lucene (experimental, can be slow)",
-        new SiteReindexICommand());
+  public SiteReindexAllEntitiesCommand() throws InvalidSyntaxException {
+    super("site dbentities reindex", "Reindex all db entities in Lucene (experimental, can be slow)",
+        new SiteReindexAllEntitiesICommand());
   }
 }
