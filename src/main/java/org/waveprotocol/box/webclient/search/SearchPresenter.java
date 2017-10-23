@@ -102,7 +102,7 @@ public final class SearchPresenter
   };
 
   /** Current search query. */
-  private String queryText = ""; /* always search in inbox, before: DEFAULT_SEARCH; */
+  private String queryText = DEFAULT_SEARCH;
   /** Number of results to query for. */
   private int querySize = DEFAULT_PAGE_SIZE;
   /** Current selected digest. */
