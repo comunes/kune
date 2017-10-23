@@ -36,6 +36,7 @@ import org.waveprotocol.box.server.waveserver.WaveServerException;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.typesafe.config.Config;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.server.InitData;
@@ -46,7 +47,6 @@ import cc.kune.core.server.manager.I18nCountryManager;
 import cc.kune.core.server.manager.I18nLanguageManager;
 import cc.kune.core.server.manager.LicenseManager;
 import cc.kune.core.server.manager.SiteManager;
-import cc.kune.core.server.manager.UserManager;
 import cc.kune.core.server.mapper.KuneMapper;
 import cc.kune.core.server.mbean.MBeanRegistry;
 import cc.kune.core.server.properties.ChatProperties;
@@ -119,6 +119,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   private WaveIndexer waveIndexer;
 
+  private Config waveConfig;
+
   /**
    * Instantiates a new site rpc.
    *
@@ -152,7 +154,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final ServerToolRegistry serverToolRegistry, final MBeanRegistry mbeanRegistry,
       final GroupManager groupManager, final I18nTranslationServiceMultiLang i18n, SiteManagers siteManagers,
-      WaveIndexer waveIndexer
+      WaveIndexer waveIndexer, Config waveConfig
       ) {
     this.userSessionManager = userSessionManager;
     this.userInfoService = userInfoService;
@@ -167,6 +169,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     this.i18n = i18n;
     this.siteManagers = siteManagers;
     this.waveIndexer = waveIndexer;
+    this.waveConfig = waveConfig;
     // By default we don't collect which part of the client is untranslated
     storeUntranslatedStrings = false;
     mbeanRegistry.registerAsMBean(this, MBEAN_OBJECT_NAME);
@@ -297,7 +300,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     data.setTutorialLanguages(kuneProperties.getList(KuneProperties.KUNE_TUTORIALS_LANGS));
     data.setPublicSpaceVisible(kuneProperties.getBoolean(KuneProperties.PUBLIC_SPACE_VISIBLE));
     data.setShowInDevelFeatures(kuneProperties.getBoolean(KuneProperties.SHOW_DEVEL_FEATURES));
-
+    data.setCookieMaxAge(waveConfig.getInt("network.session_cookie_max_age"));
     return data;
   }
 

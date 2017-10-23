@@ -149,6 +149,16 @@ public class InitDataDTO implements IsSerializable {
   /** The user tools. */
   private List<ToolSimpleDTO> userTools;
 
+  private int cookieMaxAge;
+
+  public int getCookieMaxAge() {
+    return cookieMaxAge;
+  }
+
+  public void setCookieMaxAge(int cookieMaxAge) {
+    this.cookieMaxAge = cookieMaxAge;
+  }
+
   /**
    * Instantiates a new inits the data dto.
    */

@@ -27,7 +27,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InitDataDTO.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -41,254 +41,258 @@ public class InitDataDTOJs extends JavaScriptObject {
 
   /**
    * The avi embed object.
-   * 
+   *
    * @return the string
    */
   public final native String getaviEmbedObject() /*-{
-                                                 return this.aviEmbedObject;
-                                                 }-*/;
+    return this.aviEmbedObject;
+  }-*/;
 
   /**
    * The chat domain.
-   * 
+   *
    * @return the string
    */
   public final native String getchatDomain() /*-{
-                                             return this.chatDomain;
-                                             }-*/;
+    return this.chatDomain;
+  }-*/;
 
   /**
    * The chat http base.
-   * 
+   *
    * @return the string
    */
   public final native String getchatHttpBase() /*-{
-                                               return this.chatHttpBase;
-                                               }-*/;
+    return this.chatHttpBase;
+  }-*/;
 
   /**
    * The chat room host.
-   * 
+   *
    * @return the string
    */
   public final native String getchatRoomHost() /*-{
-                                               return this.chatRoomHost;
-                                               }-*/;
+    return this.chatRoomHost;
+  }-*/;
 
   /**
    * The current c cversion.
-   * 
+   *
    * @return the string
    */
   public final native String getcurrentCCversion() /*-{
-                                                   return this.currentCCversion;
-                                                   }-*/;
+    return this.currentCCversion;
+  }-*/;
 
   /**
    * The default license.
-   * 
+   *
    * @return the license dto
    */
   public final native LicenseDTO getdefaultLicense() /*-{
-                                                     return this.defaultLicense;
-                                                     }-*/;
+    return this.defaultLicense;
+  }-*/;
 
   /**
    * The default ws theme.
-   * 
+   *
    * @return the string
    */
   public final native String getdefaultWsTheme() /*-{
-                                                 return this.defaultWsTheme;
-                                                 }-*/;
+    return this.defaultWsTheme;
+  }-*/;
 
   /**
    * The def tutorial language.
-   * 
+   *
    * @return the string
    */
   public final native String getdefTutorialLanguage() /*-{
-                                                      return this.defTutorialLanguage;
-                                                      }-*/;
+    return this.defTutorialLanguage;
+  }-*/;
 
   /**
    * The feedback enabled.
-   * 
+   *
    * @return true, if successful
    */
   public final native boolean getfeedbackEnabled() /*-{
-                                                   return this.feedbackEnabled;
-                                                   }-*/;
+    return this.feedbackEnabled;
+  }-*/;
 
   /**
    * The flv embed object.
-   * 
+   *
    * @return the string
    */
   public final native String getflvEmbedObject() /*-{
-                                                 return this.flvEmbedObject;
-                                                 }-*/;
+    return this.flvEmbedObject;
+  }-*/;
 
   /**
    * The gallery permitted extensions.
-   * 
+   *
    * @return the string
    */
   public final native String getgalleryPermittedExtensions() /*-{
-                                                             return this.galleryPermittedExtensions;
-                                                             }-*/;
+    return this.galleryPermittedExtensions;
+  }-*/;
 
   /**
    * The img cropsize.
-   * 
+   *
    * @return the int
    */
   public final native int getimgCropsize() /*-{
-                                           return this.imgCropsize;
-                                           }-*/;
+    return this.imgCropsize;
+  }-*/;
 
   /**
    * The img iconsize.
-   * 
+   *
    * @return the int
    */
   public final native int getimgIconsize() /*-{
-                                           return this.imgIconsize;
-                                           }-*/;
+    return this.imgIconsize;
+  }-*/;
+
+  public final native int getCookieMaxAge() /*-{
+    return this.cookieMaxAge;
+  }-*/;
 
   /**
    * The img resizewidth.
-   * 
+   *
    * @return the int
    */
   public final native int getimgResizewidth() /*-{
-                                              return this.imgResizewidth;
-                                              }-*/;
+    return this.imgResizewidth;
+  }-*/;
 
   /**
    * The img thumbsize.
-   * 
+   *
    * @return the int
    */
   public final native int getimgThumbsize() /*-{
-                                            return this.imgThumbsize;
-                                            }-*/;
+    return this.imgThumbsize;
+  }-*/;
 
   /**
    * The max file size in mb.
-   * 
+   *
    * @return the string
    */
   public final native String getmaxFileSizeInMb() /*-{
-                                                  return this.maxFileSizeInMb;
-                                                  }-*/;
+    return this.maxFileSizeInMb;
+  }-*/;
 
   /**
    * The mp3 embed object.
-   * 
+   *
    * @return the string
    */
   public final native String getmp3EmbedObject() /*-{
-                                                 return this.mp3EmbedObject;
-                                                 }-*/;
+    return this.mp3EmbedObject;
+  }-*/;
 
   /**
    * The ogg embed object.
-   * 
+   *
    * @return the string
    */
   public final native String getoggEmbedObject() /*-{
-                                                 return this.oggEmbedObject;
-                                                 }-*/;
+    return this.oggEmbedObject;
+  }-*/;
 
   /**
    * The public space visible.
-   * 
+   *
    * @return true, if successful
    */
   public final native boolean getpublicSpaceVisible() /*-{
-                                                      return this.publicSpaceVisible;
-                                                      }-*/;
+    return this.publicSpaceVisible;
+  }-*/;
 
   /**
    * The site logo url.
-   * 
+   *
    * @return the string
    */
   public final native String getSiteLogoUrl() /*-{
-                                              return this.siteLogoUrl;
-                                              }-*/;
+    return this.siteLogoUrl;
+  }-*/;
 
   /**
    * The site logo url on over.
-   * 
+   *
    * @return the string
    */
   public final native String getsiteLogoUrlOnOver() /*-{
-                                                    return this.siteLogoUrlOnOver;
-                                                    }-*/;
+    return this.siteLogoUrlOnOver;
+  }-*/;
 
   /**
    * The site short name.
-   * 
+   *
    * @return the string
    */
   public final native String getsiteShortName() /*-{
-                                                return this.siteShortName;
-                                                }-*/;
+    return this.siteShortName;
+  }-*/;
 
   /**
    * The site url.
-   * 
+   *
    * @return the string
    */
   public final native String getsiteUrl() /*-{
-                                          return this.siteUrl;
-                                          }-*/;
+    return this.siteUrl;
+  }-*/;
 
   /**
    * The store untranslated strings.
-   * 
+   *
    * @return true, if successful
    */
   public final native boolean getStoreUntranslatedStrings() /*-{
-                                                            return this.storeUntranslatedStrings;
-                                                            }-*/;
+    return this.storeUntranslatedStrings;
+  }-*/;
 
   /**
    * The timezones.
-   * 
+   *
    * @return the string[]
    */
   public final native String[] getTimezones() /*-{
-                                              return this.timezones;
-                                              }-*/;
+    return this.timezones;
+  }-*/;
 
   /**
    * The translator enabled.
-   * 
+   *
    * @return true, if successful
    */
   public final native boolean getTranslatorEnabled() /*-{
-                                                     return this.translatorEnabled;
-                                                     }-*/;
+    return this.translatorEnabled;
+  }-*/;
 
   /**
    * The use client content cache.
-   * 
+   *
    * @return true, if successful
    */
   public final native boolean getUseClientContentCache() /*-{
-                                                         return this.useClientContentCache;
-                                                         }-*/;
+    return this.useClientContentCache;
+  }-*/;
 
   /**
    * The user info.
-   * 
+   *
    * @return the user info dto
    */
   public final native JavaScriptObject getUserInfo() /*-{
-                                                     return this.userInfo;
-                                                     }-*/;
+    return this.userInfo;
+  }-*/;
 
 }

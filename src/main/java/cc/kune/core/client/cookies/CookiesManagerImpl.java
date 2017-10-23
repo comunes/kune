@@ -121,9 +121,10 @@ public class CookiesManagerImpl implements CookiesManager {
    * cc.kune.core.client.cookies.CookiesManager#setAuthCookie(java.lang.String)
    */
   @Override
-  public void setAuthCookie(final String userHash) {
+  public void setAuthCookie(final String userHash, int cookieMaxAge) {
     // http://code.google.com/p/google-web-toolkit-incubator/wiki/LoginSecurityFAQ
-    final Date exp = new Date(System.currentTimeMillis() + SessionConstants.SESSION_DURATION);
+
+    final Date exp = cookieMaxAge <= 0 ? null : new Date(System.currentTimeMillis() + cookieMaxAge * 1000);
     boolean ssl = WindowUtils.isHttps();
 
     Log.info("Received userhash: " + userHash);

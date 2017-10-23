@@ -46,7 +46,7 @@ import com.google.inject.Singleton;
 // @LogThis
 /**
  * The Class UserSessionManager.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 @Singleton
@@ -67,7 +67,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
 
   /**
    * Instantiates a new user session manager.
-   * 
+   *
    * @param userManager
    *          the manager
    * @param userSessionProv
@@ -91,6 +91,9 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
     final HashSessionManager hSessionManager = (HashSessionManager) jettySessionManager;
     hSessionManager.setMaxInactiveInterval(-1);
     hSessionManager.setSavePeriod(5);
+    // See @ServerModule in wave for setMaxAge (cookie max age) and
+    // "network.session_cookie_max_age" configuration parameter
+
     // Delete sessions with problems http://jira.codehaus.org/browse/JETTY-1484
     hSessionManager.setDeleteUnrestorableSessions(true);
     hSessionManager.addEventListener(userSessionMonitor);
@@ -102,7 +105,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.UserSessionManager#getHashFromSession()
    */
   @Override
@@ -132,7 +135,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.UserSessionManager#getUser()
    */
   @Override
@@ -148,12 +151,12 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.notifier.UsersOnline#isOnline(java.lang.String)
    */
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.UserSessionManager#isOnline(java.lang.String)
    */
   @Override
@@ -169,7 +172,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.UserSessionManager#isUserLoggedIn()
    */
   @Override
@@ -184,7 +187,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.server.UserSessionManager#isUserNotLoggedIn(java.lang.String)
    */
@@ -195,7 +198,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.UserSessionManager#login(java.lang.Long,
    * java.lang.String)
    */
@@ -208,7 +211,7 @@ public class UserSessionManagerImpl implements UsersOnline, UserSessionManager {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.server.UserSessionManager#logout()
    */
   @Override

@@ -42,7 +42,7 @@ import com.gwtplatform.mvp.client.proxy.Proxy;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SignInAbstractPresenter.
- * 
+ *
  * @param <V>
  *          the value type
  * @param <Proxy_>
@@ -77,7 +77,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * Instantiates a new sign in abstract presenter.
-   * 
+   *
    * @param eventBus
    *          the event bus
    * @param view
@@ -109,7 +109,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * Gets the goto token on cancel.
-   * 
+   *
    * @return the goto token on cancel
    */
   public String getGotoTokenOnCancel() {
@@ -118,7 +118,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see com.gwtplatform.mvp.client.PresenterWidget#getView()
    */
   @Override
@@ -162,7 +162,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * On sign in.
-   * 
+   *
    * @param userInfoDTO
    *          the user info dto
    * @param gotoHomePage
@@ -172,7 +172,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
    */
   protected void onSignIn(final UserInfoDTO userInfoDTO, final boolean gotoHomePage, final String passwd) {
     final String userHash = userInfoDTO.getUserHash();
-    cookiesManager.setAuthCookie(userHash);
+    cookiesManager.setAuthCookie(userHash, session.getInitData().getCookieMaxAge());
     getView().reset();
     session.setUserHash(userHash);
     session.setCurrentUserInfo(userInfoDTO, passwd);
@@ -208,7 +208,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * Save autocomplete login data.
-   * 
+   *
    * @param nickOrEmail
    *          the nick or email
    * @param password
@@ -226,7 +226,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * Sets the goto token on cancel.
-   * 
+   *
    * @param gotoTokenOnCancel
    *          the new goto token on cancel
    */
@@ -236,7 +236,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
 
   /**
    * Sets the goto token on success.
-   * 
+   *
    * @param gotoTokenOnSuccess
    *          the new goto token on success
    */

@@ -25,7 +25,7 @@ package cc.kune.core.shared;
 // TODO: Auto-generated Javadoc
 /**
  * The Class SessionConstants.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public final class SessionConstants {
@@ -64,10 +64,7 @@ public final class SessionConstants {
    * the user is viewed as a newbie (so, more help is needed)
    */
   public final static long MIN_SIGN_IN_FOR_NEWBIES = 10;
-  // session duration
-  /** The Constant SESSION_DURATION. */
-  public final static long SESSION_DURATION = A_DAY * 30; // four weeks login
-  // public final static long SESSION_DURATION = 10000; // For test
+
   /** The Constant USERHASH. */
   public final static String USERHASH = "k007userHash";
 

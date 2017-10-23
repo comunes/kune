@@ -156,6 +156,16 @@ public class InitData {
   /** The user tools. */
   private List<ToolSimple> userTools;
 
+  private int cookieMaxAge;
+
+  public int getCookieMaxAge() {
+    return cookieMaxAge;
+  }
+
+  public void setCookieMaxAge(int cookieMaxAge) {
+    this.cookieMaxAge = cookieMaxAge;
+  }
+
   /**
    * Gets the avi embed object.
    *

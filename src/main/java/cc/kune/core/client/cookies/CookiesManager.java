@@ -68,7 +68,7 @@ public interface CookiesManager {
    * @param userHash
    *          the new auth cookie
    */
-  void setAuthCookie(String userHash);
+  void setAuthCookie(String userHashh, int cookieMaxAge);
 
   String getJettyCookie();
 
