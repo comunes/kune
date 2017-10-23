@@ -305,7 +305,8 @@ public final class SearchPresenter
   @Override
   public void onQueryEntered() {
     // For now we always search in Inbox
-    queryText = DEFAULT_SEARCH + " " + searchUi.getSearch().getQuery();
+    // queryText = DEFAULT_SEARCH + " " + searchUi.getSearch().getQuery();
+    queryText = searchUi.getSearch().getQuery();
     querySize = DEFAULT_PAGE_SIZE;
     searchUi.setTitleText(messages.searching());
     doSearch();
