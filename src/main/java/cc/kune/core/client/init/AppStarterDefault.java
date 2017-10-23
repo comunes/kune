@@ -24,6 +24,16 @@ package cc.kune.core.client.init;
 
 import org.waveprotocol.wave.client.common.util.UserAgent;
 
+import com.google.gwt.user.client.Timer;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.Window.ClosingEvent;
+import com.google.gwt.user.client.Window.ClosingHandler;
+import com.google.gwt.user.client.Window.Navigator;
+import com.google.gwt.user.client.rpc.AsyncCallback;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
+
 import cc.kune.common.client.log.Log;
 import cc.kune.common.client.notify.NotifyLevel;
 import cc.kune.common.client.notify.NotifyUser;
@@ -40,21 +50,12 @@ import cc.kune.core.client.state.Session;
 import cc.kune.core.client.state.SiteParameters;
 import cc.kune.core.shared.CoreConstants;
 import cc.kune.core.shared.dto.InitDataDTO;
-
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.Window.ClosingEvent;
-import com.google.gwt.user.client.Window.ClosingHandler;
-import com.google.gwt.user.client.Window.Navigator;
-import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.RootPanel;
-import com.google.inject.Inject;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class AppStarterDefault.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -77,7 +78,7 @@ public class AppStarterDefault implements AppStarter {
 
   /**
    * Instantiates a new app starter default.
-   * 
+   *
    * @param session
    *          the session
    * @param siteService
@@ -107,7 +108,7 @@ public class AppStarterDefault implements AppStarter {
 
   /**
    * Check navigator compatibility.
-   * 
+   *
    * @param navSupport
    *          the nav support
    */
@@ -130,13 +131,26 @@ public class AppStarterDefault implements AppStarter {
 
   /**
    * Gets the inits the data.
-   * 
+   *
    * @return the inits the data
    */
   private void getInitData() {
-    siteService.getInitData(session.getUserHash(), new AsyncCallback<InitDataDTO>() {
+    siteService.getInitData(new AsyncCallback<InitDataDTO>() {
       private void continueStart(final InitDataDTO initData) {
         eventBus.fireEvent(new AppStartEvent(initData));
+      }
+
+      @Override
+      public void onFailure(final Throwable error) {
+        onError(error);
+      }
+
+      private void onError(final Throwable error) {
+        eventBus.fireEvent(new ProgressHideEvent());
+        eventBus.fireEvent(
+            new UserNotifyEvent(NotifyLevel.error, "Error fetching initial data from Kune server"));
+        Log.debug(error.getMessage());
+        hideInitialPanels();
       }
 
       private void hideInitialPanels() {
@@ -147,28 +161,27 @@ public class AppStarterDefault implements AppStarter {
       }
 
       @Override
-      public void onFailure(final Throwable error) {
-        eventBus.fireEvent(new ProgressHideEvent());
-        eventBus.fireEvent(new UserNotifyEvent(NotifyLevel.error,
-            "Error fetching initial data from Kune server"));
-        Log.debug(error.getMessage());
-        hideInitialPanels();
-      }
-
-      @Override
       public void onSuccess(final InitDataDTO initData) {
-        session.setInitData(initData);
-        session.setCurrentUserInfo(initData.getUserInfo(), null);
-        hideInitialPanels();
-        checkNavigatorCompatibility(new NavigatorSupport() {
+        siteService.getUserInfo(session.getUserHash(), new AsyncCallback<UserInfoDTO>() {
+
           @Override
-          public void onNotSupported() {
-            NotifyUser.askConfirmation(
-                res.important32(),
-                "Your browser is currently unsupported",
-                "Please, use a free/libre modern navigator like "
-                    + TextUtils.generateHtmlLink(CoreConstants.MOZILLA_FF_LINK, "Mozilla Firefox")
-                    + " instead. Continue anyway?", new SimpleResponseCallback() {
+          public void onFailure(Throwable error) {
+            onError(error);
+          }
+
+          @Override
+          public void onSuccess(UserInfoDTO userInfo) {
+            session.setInitData(initData);
+            session.setCurrentUserInfo(userInfo);
+            hideInitialPanels();
+            checkNavigatorCompatibility(new NavigatorSupport() {
+              @Override
+              public void onNotSupported() {
+                NotifyUser.askConfirmation(res.important32(), "Your browser is currently unsupported",
+                    "Please, use a free/libre modern navigator like "
+                        + TextUtils.generateHtmlLink(CoreConstants.MOZILLA_FF_LINK, "Mozilla Firefox")
+                        + " instead. Continue anyway?",
+                    new SimpleResponseCallback() {
                   @Override
                   public void onCancel() {
                     WindowUtils.changeHref(CoreConstants.MOZILLA_FF_LINK);
@@ -179,11 +192,13 @@ public class AppStarterDefault implements AppStarter {
                     continueStart(initData);
                   }
                 });
-          }
+              }
 
-          @Override
-          public void onSupported() {
-            continueStart(initData);
+              @Override
+              public void onSupported() {
+                continueStart(initData);
+              }
+            });
           }
         });
       }
@@ -192,7 +207,7 @@ public class AppStarterDefault implements AppStarter {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.init.AppStarter#start()
    */
   @Override
@@ -207,4 +222,5 @@ public class AppStarterDefault implements AppStarter {
     };
     prefetchTimer.schedule(20000);
   }
+
 }

@@ -22,17 +22,19 @@
  */
 package cc.kune.core.server.rpc;
 
+import com.google.inject.Inject;
+
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.client.rpcservices.SiteService;
 import cc.kune.core.server.manager.impl.SiteManagerDefault;
 import cc.kune.core.server.persist.KuneTransactional;
 import cc.kune.core.shared.dto.InitDataDTO;
-
-import com.google.inject.Inject;
+import cc.kune.core.shared.dto.MotdDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 /**
  * The Class SiteRPC.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -50,7 +52,18 @@ public class SiteRPC implements RPC, SiteService {
 
   @Override
   @KuneTransactional
-  public InitDataDTO getInitData(final String userHash) throws DefaultException {
-    return manager.getInitData(userHash);
+  public InitDataDTO getInitData() throws DefaultException {
+    return manager.getInitData();
   }
+
+  @Override
+  public UserInfoDTO getUserInfo(String userHash) throws DefaultException {
+    return manager.getUserInfo(userHash);
+  }
+
+  @Override
+  public MotdDTO getMotd(String userHash) throws DefaultException {
+    return manager.getMotd(userHash);
+  }
+
 }

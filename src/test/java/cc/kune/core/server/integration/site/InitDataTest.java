@@ -43,7 +43,7 @@ import com.google.inject.Inject;
 // TODO: Auto-generated Javadoc
 /**
  * The Class InitDataTest.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -67,7 +67,7 @@ public class InitDataTest extends IntegrationTest {
 
   /**
    * Assert valid license dto list.
-   * 
+   *
    * @param licenseList
    *          the license list
    */
@@ -89,13 +89,13 @@ public class InitDataTest extends IntegrationTest {
 
   /**
    * Test get init data.
-   * 
+   *
    * @throws Exception
    *           the exception
    */
   @Test
   public void testGetInitData() throws Exception {
-    final InitDataDTO initData = service.getInitData(null);
+    final InitDataDTO initData = service.getInitData();
     assertNotNull(initData);
     assertValidLicenseDTOList(initData.getLicenses());
     assertTrue(initData.getLanguages().size() > 0);

@@ -32,6 +32,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Cookies;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 import cc.kune.common.client.log.Log;
@@ -42,83 +43,91 @@ import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.common.shared.i18n.I18n;
 import cc.kune.core.client.events.AppStartEvent;
 import cc.kune.core.client.events.AppStartEvent.AppStartHandler;
+import cc.kune.core.client.rpcservices.AsyncCallbackSimple;
+import cc.kune.core.client.rpcservices.SiteServiceAsync;
 import cc.kune.core.client.state.SessionInstance;
 import cc.kune.core.shared.dto.MotdDTO;
 
 @Singleton
 public class MotdManager {
 
-  public MotdManager() {
+  @Inject
+  public MotdManager(final SiteServiceAsync siteService) {
     SessionInstance.get().onAppStart(true, new AppStartHandler() {
-
       @Override
       public void onAppStart(final AppStartEvent event) {
         final Timer timer = new Timer() {
 
           @Override
           public void run() {
-            final MotdDTO motd = event.getInitData().getMotd();
-            if (motd == null) {
-              return;
-            }
+            siteService.getMotd(SessionInstance.get().getUserHash(), new AsyncCallbackSimple<MotdDTO>() {
 
-            final String cookieName = motd.getCookieName();
-
-            final String motdCookie = Cookies.getCookie(cookieName);
-
-            if (motdCookie == null) {
-
-              final Builder builder = new BasicTopDialog.Builder("k-motd", true, false,
-                  I18n.getDirection());
-
-              // motdDialog.addStyleName("k-motd-dialog");
-
-              if (motd.getTitle() != null) {
-                builder.title(motd.getTitle());
-              }
-
-              final BasicTopDialog dialog = builder.build();
-
-              dialog.setFirstBtnText(motd.getOkBtnText());
-
-              dialog.setCloseBtnVisible(true);
-
-              Log.info("Motd message: " + motd.getMessage());
-
-              final HTML message = new HTML(motd.getMessage() + motd.getMessageBottom());
-              dialog.getInnerPanel().add(message);
-
-              dialog.setSecondBtnText(motd.getCloseBtnText());
-              dialog.getSecondBtn().addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(final ClickEvent event) {
-                  setCookie(cookieName, CookieUtils.inDays(90));
-                  dialog.hide();
+              @Override
+              public void onSuccess(MotdDTO motd) {
+                if (motd == null) {
+                  Log.debug("No motd message");
+                  return;
                 }
-              });
-              if (motd.getShouldRemember() > 0) {
-                final CustomButton laterBtn = new CustomButton((I18n.t("Maybe later")));
-                laterBtn.addClickHandler(new ClickHandler() {
-                  @Override
-                  public void onClick(final ClickEvent event) {
-                    setCookie(cookieName, CookieUtils.inDays(motd.getShouldRemember()));
-                    dialog.hide();
+
+                final String cookieName = motd.getCookieName();
+
+                final String motdCookie = Cookies.getCookie(cookieName);
+
+                if (motdCookie == null) {
+
+                  final Builder builder = new BasicTopDialog.Builder("k-motd", true, false,
+                      I18n.getDirection());
+
+                  // motdDialog.addStyleName("k-motd-dialog");
+
+                  if (motd.getTitle() != null) {
+                    builder.title(motd.getTitle());
                   }
-                });
-                dialog.getBtnPanel().add(laterBtn);
-              }
 
-              dialog.getFirstBtn().addClickHandler(new ClickHandler() {
-                @Override
-                public void onClick(final ClickEvent event) {
-                  setCookie(cookieName, CookieUtils.inDays(7));
-                  KuneWindowUtils.open(motd.getOkBtnUrl());
-                  dialog.hide();
+                  final BasicTopDialog dialog = builder.build();
+
+                  dialog.setFirstBtnText(motd.getOkBtnText());
+
+                  dialog.setCloseBtnVisible(true);
+
+                  Log.debug("motd message: " + motd.getMessage());
+
+                  final HTML message = new HTML(motd.getMessage() + motd.getMessageBottom());
+                  dialog.getInnerPanel().add(message);
+
+                  dialog.setSecondBtnText(motd.getCloseBtnText());
+                  dialog.getSecondBtn().addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(final ClickEvent event) {
+                      setCookie(cookieName, CookieUtils.inDays(90));
+                      dialog.hide();
+                    }
+                  });
+                  if (motd.getShouldRemember() > 0) {
+                    final CustomButton laterBtn = new CustomButton((I18n.t("Maybe later")));
+                    laterBtn.addClickHandler(new ClickHandler() {
+                      @Override
+                      public void onClick(final ClickEvent event) {
+                        setCookie(cookieName, CookieUtils.inDays(motd.getShouldRemember()));
+                        dialog.hide();
+                      }
+                    });
+                    dialog.getBtnPanel().add(laterBtn);
+                  }
+
+                  dialog.getFirstBtn().addClickHandler(new ClickHandler() {
+                    @Override
+                    public void onClick(final ClickEvent event) {
+                      setCookie(cookieName, CookieUtils.inDays(7));
+                      KuneWindowUtils.open(motd.getOkBtnUrl());
+                      dialog.hide();
+                    }
+                  });
+
+                  dialog.show();
                 }
-              });
-
-              dialog.show();
-            }
+              }
+            });
           }
         };
         timer.schedule(10000);

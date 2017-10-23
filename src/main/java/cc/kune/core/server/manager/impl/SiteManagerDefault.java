@@ -76,8 +76,6 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   /** The data. */
   private InitData data;
 
-  private final GroupManager groupManager;
-
   private final I18nTranslationServiceMultiLang i18n;
 
   /** The kune properties. */
@@ -121,6 +119,10 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
 
   private Config waveConfig;
 
+  private InitDataDTO dataMapped;
+
+  private MotdDTO defaultMotd;
+
   /**
    * Instantiates a new site rpc.
    *
@@ -153,9 +155,8 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
       final KuneMapper mapper, final KuneProperties kuneProperties, final ChatProperties chatProperties,
       final I18nLanguageManager languageManager, final I18nCountryManager countryManager,
       final ServerToolRegistry serverToolRegistry, final MBeanRegistry mbeanRegistry,
-      final GroupManager groupManager, final I18nTranslationServiceMultiLang i18n, SiteManagers siteManagers,
-      WaveIndexer waveIndexer, Config waveConfig
-      ) {
+      final I18nTranslationServiceMultiLang i18n, SiteManagers siteManagers, WaveIndexer waveIndexer,
+      Config waveConfig) {
     this.userSessionManager = userSessionManager;
     this.userInfoService = userInfoService;
     this.licenseManager = licenseManager;
@@ -165,7 +166,6 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     this.languageManager = languageManager;
     this.countryManager = countryManager;
     this.serverToolRegistry = serverToolRegistry;
-    this.groupManager = groupManager;
     this.i18n = i18n;
     this.siteManagers = siteManagers;
     this.waveIndexer = waveIndexer;
@@ -194,24 +194,24 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
    * cc.kune.core.client.rpcservices.SiteService#getInitData(java.lang.String)
    */
   @Override
-  public InitDataDTO getInitData(final String userHash) throws DefaultException {
+  public InitDataDTO getInitData() throws DefaultException {
     if (data == null) {
       loadProperties(kuneProperties);
     }
-    final InitDataDTO dataMapped = mapper.map(data, InitDataDTO.class);
-    final UserInfo userInfo = userInfoService.buildInfo(userSessionManager.getUser(), userHash);
-    LOG.info("Retrieve init data using userHash: " + userHash);
-    LOG.info("Session userHash: " + userSessionManager.getHash());
-    dataMapped.setgSpaceThemes(siteThemes);
-    dataMapped.setReservedWords(reservedWords);
-    dataMapped.setStoreUntranslatedStrings(storeUntranslatedStrings);
-    if (userInfo != null) {
-      dataMapped.setUserInfo(mapper.map(userInfo, UserInfoDTO.class));
-      dataMapped.setMotd(translate(motd, userInfo.getLanguage()));
-    } else {
-      dataMapped.setMotd(translate(motd, languageManager.getDefaultLanguage()));
-    }
+    LOG.info("Retrieving init data");
+
     return dataMapped;
+  }
+
+  @Override
+  public UserInfoDTO getUserInfo(final String userHash) throws DefaultException {
+    final UserInfo userInfo = userInfoService.buildInfo(userSessionManager.getUser(), userHash);
+    LOG.info("Session userHash: " + userSessionManager.getHash());
+    UserInfoDTO map = null;
+    if (userInfo != null) {
+      map = mapper.map(userInfo, UserInfoDTO.class);
+    }
+    return map;
   }
 
   @Override
@@ -317,16 +317,23 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     siteThemes = getSiteThemes(this.kuneProperties.getList(KuneProperties.WS_THEMES));
     reservedWords = new ReservedWordsRegistryDTO(ReservedWordsRegistry.fromList(kuneProperties));
 
+    dataMapped = mapper.map(data, InitDataDTO.class);
+    dataMapped.setgSpaceThemes(siteThemes);
+    dataMapped.setReservedWords(reservedWords);
+    dataMapped.setStoreUntranslatedStrings(storeUntranslatedStrings);
+
     if (kuneProperties.getBoolean(KuneProperties.MOTD_ENABLED)) {
       motd = new MotdDTO();
       motd.setTitle(kuneProperties.get(KuneProperties.MOTD_TITLE));
       motd.setMessage(StringUtils.abbreviate(kuneProperties.get(KuneProperties.MOTD_MESSAGE), 500));
-      motd.setMessageBottom(StringUtils.abbreviate(kuneProperties.get(KuneProperties.MOTD_MESSAGE_BOTTOM),500));
+      motd.setMessageBottom(
+          StringUtils.abbreviate(kuneProperties.get(KuneProperties.MOTD_MESSAGE_BOTTOM), 500));
       motd.setOkBtnText(kuneProperties.get(KuneProperties.MOTD_OK_BTN_TEXT));
       motd.setOkBtnUrl(kuneProperties.get(KuneProperties.MOTD_OK_BTN_URL));
       motd.setCloseBtnText(kuneProperties.get(KuneProperties.MOTD_CLOSE_BTN_TEXT));
       motd.setCookieName(kuneProperties.get(KuneProperties.MOTD_COOKIE_NAME));
       motd.setShouldRemember(kuneProperties.getInteger(KuneProperties.MOTD_SHOULD_REMEMBER));
+      defaultMotd = translate(motd, languageManager.getDefaultLanguage());
     } else {
       motd = null;
     }
@@ -350,6 +357,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   @Override
   public void setShowInDevelFeatures(final boolean showInDevelFeatures) {
     data.setShowInDevelFeatures(showInDevelFeatures);
+    dataMapped.setShowInDevelFeatures(showInDevelFeatures);
   }
 
   /*
@@ -361,6 +369,7 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
   @Override
   public void setStoreUntranslatedStrings(final boolean storeUntranslatedStrings) {
     this.storeUntranslatedStrings = storeUntranslatedStrings;
+    dataMapped.setStoreUntranslatedStrings(storeUntranslatedStrings);
   }
 
   private MotdDTO translate(final MotdDTO motd, final I18nLanguage lang) {
@@ -392,6 +401,14 @@ public class SiteManagerDefault implements SiteManager, SiteManagerDefaultMBean 
     } catch (WaveServerException e) {
       LOG.error("Failed to reindex all waves", e);
     }
+  }
+
+  public MotdDTO getMotd(String userHash) {
+    final UserInfo userInfo = userInfoService.buildInfo(userSessionManager.getUser(), userHash);
+    if (userInfo != null)
+      return translate(motd, userInfo.getLanguage());
+    else
+      return defaultMotd;
   }
 
 }

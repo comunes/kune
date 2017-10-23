@@ -25,9 +25,12 @@ package cc.kune.core.server.manager;
 
 import cc.kune.core.client.errors.DefaultException;
 import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
 
 public interface SiteManager {
 
-  InitDataDTO getInitData(String userHash) throws DefaultException;
+  InitDataDTO getInitData() throws DefaultException;
+
+  UserInfoDTO getUserInfo(String userHash) throws DefaultException;
 
 }

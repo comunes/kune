@@ -45,8 +45,8 @@ public class SiteCORSService {
   @REST(params = {})
   public InitDataDTO getInitData() {
     final String hash = sessionManager.getHash();
-    final InitDataDTO initData = manager.getInitData(hash);
-    final UserInfoDTO userInfo = initData.getUserInfo();
+    final InitDataDTO initData = manager.getInitData();
+    final UserInfoDTO userInfo = manager.getUserInfo(hash);
     if (userInfo != null) {
       userInfo.setUserHash(hash);
     }

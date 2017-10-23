@@ -396,7 +396,7 @@ public interface Session {
    * @param passwd
    *          the passwd
    */
-  void setCurrentUserInfo(UserInfoDTO currentUserInfo, String passwd);
+  void setCurrentUserInfo(UserInfoDTO currentUserInfo);
 
   void setEmbedded(boolean isEmbedded);
 

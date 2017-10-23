@@ -175,7 +175,7 @@ public abstract class SignInAbstractPresenter<V extends View, Proxy_ extends Pro
     cookiesManager.setAuthCookie(userHash, session.getInitData().getCookieMaxAge());
     getView().reset();
     session.setUserHash(userHash);
-    session.setCurrentUserInfo(userInfoDTO, passwd);
+    session.setCurrentUserInfo(userInfoDTO);
     final I18nLanguageDTO language = userInfoDTO.getLanguage();
     session.setCurrentLanguage(language);
     i18n.changeToLanguageIfNecessary(language.getCode(), language.getEnglishName(),

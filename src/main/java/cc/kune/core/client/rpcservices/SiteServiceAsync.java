@@ -22,27 +22,32 @@
  */
 package cc.kune.core.client.rpcservices;
 
-import cc.kune.core.shared.dto.InitDataDTO;
-
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
-// TODO: Auto-generated Javadoc
+import cc.kune.core.shared.dto.InitDataDTO;
+import cc.kune.core.shared.dto.MotdDTO;
+import cc.kune.core.shared.dto.UserInfoDTO;
+
+
 /**
  * The Interface SiteServiceAsync.
- * 
+ *
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
 public interface SiteServiceAsync {
 
   /**
    * Gets the inits the data.
-   * 
+   *
    * @param userHash
    *          the user hash
    * @param callback
    *          the callback
    * @return the inits the data
    */
-  void getInitData(String userHash, AsyncCallback<InitDataDTO> callback);
+  void getInitData(AsyncCallback<InitDataDTO> callback);
 
+  void getUserInfo(String userHash, AsyncCallback<UserInfoDTO> callback);
+
+  void getMotd(String userHash, AsyncCallback<MotdDTO> callback);
 }

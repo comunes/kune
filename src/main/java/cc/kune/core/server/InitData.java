@@ -150,9 +150,6 @@ public class InitData {
   /** The use client content cache. */
   private boolean useClientContentCache;
 
-  /** The user info. */
-  private UserInfo userInfo;
-
   /** The user tools. */
   private List<ToolSimple> userTools;
 
@@ -446,15 +443,6 @@ public class InitData {
 
   public boolean getUseClientContentCache() {
     return useClientContentCache;
-  }
-
-  /**
-   * Gets the user info.
-   *
-   * @return the user info
-   */
-  public UserInfo getUserInfo() {
-    return userInfo;
   }
 
   /**
@@ -841,15 +829,6 @@ public class InitData {
     this.useClientContentCache = useClientContentCache;
   }
 
-  /**
-   * Sets the user info.
-   *
-   * @param currentUserInfo
-   *          the new user info
-   */
-  public void setUserInfo(final UserInfo currentUserInfo) {
-    this.userInfo = currentUserInfo;
-  }
 
   /**
    * Sets the user tools.

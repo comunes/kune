@@ -25,6 +25,11 @@ package cc.kune.core.client.state.impl;
 import java.util.Collection;
 import java.util.List;
 
+import com.google.gwt.core.client.GWT;
+import com.google.inject.Inject;
+import com.google.web.bindery.event.shared.EventBus;
+import com.google.web.bindery.event.shared.HandlerRegistration;
+
 import cc.kune.common.client.utils.WindowUtils;
 import cc.kune.core.client.cookies.CookiesManager;
 import cc.kune.core.client.events.AppStartEvent;
@@ -50,11 +55,6 @@ import cc.kune.core.shared.dto.StateContentDTO;
 import cc.kune.core.shared.dto.ToolSimpleDTO;
 import cc.kune.core.shared.dto.UserInfoDTO;
 import cc.kune.core.shared.dto.UserSimpleDTO;
-
-import com.google.gwt.core.client.GWT;
-import com.google.inject.Inject;
-import com.google.web.bindery.event.shared.EventBus;
-import com.google.web.bindery.event.shared.HandlerRegistration;
 
 /**
  * The Class SessionDefault.
@@ -103,7 +103,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getContentState()
    */
   @Override
@@ -126,7 +126,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getCurrentCCversion()
    */
   @Override
@@ -136,7 +136,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getCurrentGroupShortName()
    */
   @Override
@@ -146,7 +146,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getCurrentLanguage()
    */
   @Override
@@ -156,7 +156,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getCurrentState()
    */
   @Override
@@ -166,7 +166,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getCurrentStateToken()
    */
   @Override
@@ -176,7 +176,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getCurrentUser()
    */
   @Override
@@ -186,7 +186,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getCurrentUserInfo()
    */
   @Override
@@ -196,7 +196,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getDefLicense()
    */
   @Override
@@ -206,7 +206,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getFullTranslatedLanguages()
    */
   @Override
@@ -216,7 +216,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getGalleryPermittedExtensions()
    */
   @Override
@@ -226,7 +226,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getGroupTools()
    */
   @Override
@@ -236,7 +236,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getImgCropsize()
    */
   @Override
@@ -246,7 +246,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getImgIconsize()
    */
   @Override
@@ -256,7 +256,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getImgResizewidth()
    */
   @Override
@@ -266,7 +266,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getImgThumbsize()
    */
   @Override
@@ -276,7 +276,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getInitData()
    */
   @Override
@@ -286,7 +286,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getLanguages()
    */
   @Override
@@ -296,7 +296,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getLanguagesArray()
    */
   @Override
@@ -309,7 +309,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getLicenses()
    */
   @Override
@@ -319,7 +319,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getShowDeletedContent()
    */
   @Override
@@ -329,7 +329,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getSiteUrl()
    */
   @Override
@@ -340,7 +340,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getTimezones()
    */
   @Override
@@ -353,7 +353,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getUserHash()
    */
   @Override
@@ -363,7 +363,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#getUserTools()
    */
   @Override
@@ -373,7 +373,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.Session#inSameToken(cc.kune.core.shared.domain
    * .utils.StateToken)
@@ -385,7 +385,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#isCurrentStateAContent()
    */
   @Override
@@ -395,7 +395,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#isCurrentStateAGroup()
    */
   @Override
@@ -405,7 +405,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#isCurrentStateAPerson()
    */
   @Override
@@ -431,7 +431,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#isInCurrentUserSpace()
    */
   @Override
@@ -449,7 +449,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#isLogged()
    */
   @Override
@@ -459,18 +459,18 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#isNewbie()
    */
   @Override
   public boolean isNewbie() {
-    return currentUserInfo != null ? currentUserInfo.getSignInCount() <= SessionConstants.MIN_SIGN_IN_FOR_NEWBIES
-        : true;
+    return currentUserInfo != null
+        ? currentUserInfo.getSignInCount() <= SessionConstants.MIN_SIGN_IN_FOR_NEWBIES : true;
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#isNotLogged()
    */
   @Override
@@ -524,7 +524,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#onAppStart(boolean,
    * cc.kune.core.client.events.AppStartEvent.AppStartHandler)
    */
@@ -539,7 +539,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#onUserSignIn(boolean,
    * cc.kune.core.client.events.UserSignInEvent.UserSignInHandler)
    */
@@ -554,7 +554,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#onUserSignInOrSignOut(boolean,
    * cc.kune
    * .core.client.events.UserSignInOrSignOutEvent.UserSignInOrSignOutHandler)
@@ -572,7 +572,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#onUserSignOut(boolean,
    * cc.kune.core.client.events.UserSignOutEvent.UserSignOutHandler)
    */
@@ -587,10 +587,9 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
-   * @see
-   * cc.kune.core.client.state.Session#refreshCurrentUserInfo(cc.kune.core.shared
-   * .dto.UserInfoDTO)
+   *
+   * @see cc.kune.core.client.state.Session#refreshCurrentUserInfo(cc.kune.core.
+   * shared .dto.UserInfoDTO)
    */
   @Override
   public void refreshCurrentUserInfo(final UserInfoDTO currentUserInfo) {
@@ -599,7 +598,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.Session#setCurrentLanguage(cc.kune.core.shared
    * .dto.I18nLanguageDTO)
@@ -611,7 +610,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.Session#setCurrentState(cc.kune.core.shared.dto
    * .StateAbstractDTO)
@@ -623,13 +622,13 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see
    * cc.kune.core.client.state.Session#setCurrentUserInfo(cc.kune.core.shared
    * .dto.UserInfoDTO, java.lang.String)
    */
   @Override
-  public void setCurrentUserInfo(final UserInfoDTO currentUserInfo, final String password) {
+  public void setCurrentUserInfo(final UserInfoDTO currentUserInfo) {
     this.currentUserInfo = currentUserInfo;
     if (currentUserInfo != null) {
       // First of all, prepare wave panel
@@ -649,7 +648,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#setInitData(cc.kune.core.shared.dto.
    * InitDataDTO)
    */
@@ -660,7 +659,7 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#setUserHash(java.lang.String)
    */
   @Override
@@ -670,19 +669,19 @@ public class SessionDefault implements Session {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#signOut()
    */
   @Override
   public void signOut() {
     cookieManager.removeAuthCookie();
     setUserHash(null);
-    setCurrentUserInfo(null, null);
+    setCurrentUserInfo(null);
   }
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see cc.kune.core.client.state.Session#userIsJoiningGroups()
    */
   @Override

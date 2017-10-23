@@ -105,7 +105,6 @@ public class InitDataDTO implements IsSerializable {
   /** The max file size in mb. */
   private String maxFileSizeInMb;
 
-  private MotdDTO motd;
 
   /** The mp3 embed object. */
   private String mp3EmbedObject;
@@ -142,9 +141,6 @@ public class InitDataDTO implements IsSerializable {
 
   /** The use client content cache. */
   private boolean useClientContentCache;
-
-  /** The user info. */
-  private UserInfoDTO userInfo;
 
   /** The user tools. */
   private List<ToolSimpleDTO> userTools;
@@ -358,10 +354,6 @@ public class InitDataDTO implements IsSerializable {
     return maxFileSizeInMb;
   }
 
-  public MotdDTO getMotd() {
-    return motd;
-  }
-
   /**
    * Gets the mp3 embed object.
    *
@@ -448,30 +440,12 @@ public class InitDataDTO implements IsSerializable {
   }
 
   /**
-   * Gets the user info.
-   *
-   * @return the user info
-   */
-  public UserInfoDTO getUserInfo() {
-    return userInfo;
-  }
-
-  /**
    * Gets the user tools.
    *
    * @return the user tools
    */
   public List<ToolSimpleDTO> getUserTools() {
     return userTools;
-  }
-
-  /**
-   * Checks for user.
-   *
-   * @return true, if successful
-   */
-  public boolean hasUser() {
-    return getUserInfo() != null;
   }
 
   /**
@@ -725,10 +699,6 @@ public class InitDataDTO implements IsSerializable {
     this.maxFileSizeInMb = maxFileSizeInMb;
   }
 
-  public void setMotd(final MotdDTO motd) {
-    this.motd = motd;
-  }
-
   /**
    * Sets the mp3 embed object.
    *
@@ -851,16 +821,6 @@ public class InitDataDTO implements IsSerializable {
   }
 
   /**
-   * Sets the user info.
-   *
-   * @param currentUser
-   *          the new user info
-   */
-  public void setUserInfo(final UserInfoDTO currentUser) {
-    this.userInfo = currentUser;
-  }
-
-  /**
    * Sets the user tools.
    *
    * @param userTools
@@ -873,5 +833,7 @@ public class InitDataDTO implements IsSerializable {
   public boolean useClientContentCache() {
     return getUseClientContentCache();
   }
+
+
 
 }

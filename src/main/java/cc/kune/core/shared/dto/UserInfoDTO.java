@@ -30,7 +30,7 @@ import com.google.gwt.user.client.rpc.IsSerializable;
 // TODO: Auto-generated Javadoc
 /**
  * The Class UserInfoDTO.
- * 
+ *
  * @author danigb@gmail.com
  * @author vjrj@ourproject.org (Vicente J. Ruiz Jurado)
  */
@@ -80,7 +80,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the chat name.
-   * 
+   *
    * @return the chat name
    */
   public String getChatName() {
@@ -89,7 +89,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the client flags.
-   * 
+   *
    * @return the client flags
    */
   public String getClientFlags() {
@@ -98,7 +98,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the country.
-   * 
+   *
    * @return the country
    */
   public I18nCountryDTO getCountry() {
@@ -107,7 +107,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the enabled tools.
-   * 
+   *
    * @return the enabled tools
    */
   public List<String> getEnabledTools() {
@@ -116,7 +116,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the groups is admin.
-   * 
+   *
    * @return the groups is admin
    */
   public Set<GroupDTO> getGroupsIsAdmin() {
@@ -125,7 +125,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the groups is collab.
-   * 
+   *
    * @return the groups is collab
    */
   public Set<GroupDTO> getGroupsIsCollab() {
@@ -134,7 +134,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the groups is participating.
-   * 
+   *
    * @return the groups is participating
    */
   public List<GroupDTO> getGroupsIsParticipating() {
@@ -143,7 +143,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the home page.
-   * 
+   *
    * @return the home page
    */
   public String getHomePage() {
@@ -152,7 +152,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the language.
-   * 
+   *
    * @return the language
    */
   public I18nLanguageDTO getLanguage() {
@@ -161,7 +161,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the name.
-   * 
+   *
    * @return the name
    */
   public String getName() {
@@ -170,7 +170,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the session json.
-   * 
+   *
    * @return the session json
    */
   public String getSessionJSON() {
@@ -179,7 +179,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the short name.
-   * 
+   *
    * @return the short name
    */
   public String getShortName() {
@@ -188,7 +188,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the show deleted content.
-   * 
+   *
    * @return the show deleted content
    */
   public boolean getShowDeletedContent() {
@@ -197,7 +197,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the sign in count.
-   * 
+   *
    * @return the sign in count
    */
   public Long getSignInCount() {
@@ -206,7 +206,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the user.
-   * 
+   *
    * @return the user
    */
   public UserSimpleDTO getUser() {
@@ -215,7 +215,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the user group.
-   * 
+   *
    * @return the user group
    */
   public GroupDTO getUserGroup() {
@@ -224,7 +224,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the user hash.
-   * 
+   *
    * @return the user hash
    */
   public String getUserHash() {
@@ -233,7 +233,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Gets the websocket address.
-   * 
+   *
    * @return the websocket address
    */
   public String getWebsocketAddress() {
@@ -242,7 +242,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the chat name.
-   * 
+   *
    * @param chatName
    *          the new chat name
    */
@@ -252,7 +252,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the client flags.
-   * 
+   *
    * @param clientFlags
    *          the new client flags
    */
@@ -262,7 +262,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the enabled tools.
-   * 
+   *
    * @param enabledTools
    *          the new enabled tools
    */
@@ -272,7 +272,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the groups is admin.
-   * 
+   *
    * @param groupsIsAdmin
    *          the new groups is admin
    */
@@ -282,7 +282,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the groups is collab.
-   * 
+   *
    * @param groupsIsCollab
    *          the new groups is collab
    */
@@ -292,7 +292,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the groups is participating.
-   * 
+   *
    * @param groupsIsParticipating
    *          the new groups is participating
    */
@@ -302,7 +302,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the home page.
-   * 
+   *
    * @param homePage
    *          the new home page
    */
@@ -312,7 +312,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the session json.
-   * 
+   *
    * @param sessionJSON
    *          the new session json
    */
@@ -322,7 +322,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the show deleted content.
-   * 
+   *
    * @param showDeletedContent
    *          the new show deleted content
    */
@@ -332,7 +332,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the sign in count.
-   * 
+   *
    * @param signInCount
    *          the new sign in count
    */
@@ -342,7 +342,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the user.
-   * 
+   *
    * @param user
    *          the new user
    */
@@ -352,7 +352,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the user group.
-   * 
+   *
    * @param userGroup
    *          the new user group
    */
@@ -362,7 +362,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the user hash.
-   * 
+   *
    * @param userHash
    *          the new user hash
    */
@@ -372,7 +372,7 @@ public class UserInfoDTO implements IsSerializable {
 
   /**
    * Sets the websocket address.
-   * 
+   *
    * @param websocketAddress
    *          the new websocket address
    */
