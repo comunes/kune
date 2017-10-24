@@ -289,7 +289,8 @@ public class CustomServerMain {
   }
 
   private static void reindex(Injector injector) throws WaveletStateException, WaveServerException {
-    WaveIndexer waveIndexer = injector.getInstance(WaveIndexer.class);
-    waveIndexer.remakeIndex();
+    // Moved to @SiteManagerDefaultMBean
+    // WaveIndexer waveIndexer = injector.getInstance(WaveIndexer.class);
+    // waveIndexer.remakeIndex();
   }
 }
