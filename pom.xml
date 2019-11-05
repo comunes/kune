@@ -24,7 +24,7 @@
     <hibernate.version>4.2.14.Final</hibernate.version>
     <!-- <hibernate.version>4.3.11.Final</hibernate.version> -->
     <wiab.version>0.4.2-SNAPSHOT</wiab.version>
-    <jetty.version>9.2.14.v20151106</jetty.version>
+    <jetty.version>9.4.22.v20191022</jetty.version>
     <!-- warning, wave uses guice 4.1.0 -->
     <guice.version>3.0</guice.version>
     <gwtp.version>1.6</gwtp.version>
